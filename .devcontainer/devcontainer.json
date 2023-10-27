@@ -14,7 +14,7 @@
   "customizations": {
     "codespaces": {
       "openFiles": [
-        "examples/src/main/java/com/plexsdk/examples/Main.java",
+        "examples/src/main/java/47/one0/examples/Main.java",
         "README.md"
       ]
     }
