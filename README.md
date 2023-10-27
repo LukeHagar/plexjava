@@ -32,7 +32,7 @@ If you use Maven, place the following within the <dependencies> tag in your pom.
 
 ```XML
 <dependency>
-  <groupId>com.plexsdk</groupId>
+  <groupId>47.one0</groupId>
   <artifactId>plex-sdk</artifactId>
   <version>0.0.1</version>
 </dependency>
@@ -41,7 +41,7 @@ If you use Maven, place the following within the <dependencies> tag in your pom.
 If you use Gradle, paste the next line inside the dependencies block of your build.gradle file:
 
 ```Gradle
-implementation group: "com.plexsdk", name: "PlexSDK", version: "0.0.1"
+implementation group: "47.one0", name: "PlexSDK", version: "0.0.1"
 ```
 
 ## Authentication
@@ -60,28 +60,28 @@ PlexSDK sdk = new PlexSDK("YOUR_API_KEY", "YOUR_API_KEY_HEADER");
 
 ## API Endpoint Services
 
-All URIs are relative to {protocol}://{ip}:{port}.
+All URIs are relative to http://10.10.10.47:32400.
 
 Click the service name for a full list of the service methods.
 
 | Service |
 | :------ |
-|[ServerService](src/main/java/com/plexsdk/services/README.md#serverservice)|
-|[MediaService](src/main/java/com/plexsdk/services/README.md#mediaservice)|
-|[ActivitiesService](src/main/java/com/plexsdk/services/README.md#activitiesservice)|
-|[ButlerService](src/main/java/com/plexsdk/services/README.md#butlerservice)|
-|[HubsService](src/main/java/com/plexsdk/services/README.md#hubsservice)|
-|[SearchService](src/main/java/com/plexsdk/services/README.md#searchservice)|
-|[LibraryService](src/main/java/com/plexsdk/services/README.md#libraryservice)|
-|[LogService](src/main/java/com/plexsdk/services/README.md#logservice)|
-|[PlaylistsService](src/main/java/com/plexsdk/services/README.md#playlistsservice)|
-|[SecurityService](src/main/java/com/plexsdk/services/README.md#securityservice)|
-|[SessionsService](src/main/java/com/plexsdk/services/README.md#sessionsservice)|
-|[UpdaterService](src/main/java/com/plexsdk/services/README.md#updaterservice)|
-|[VideoService](src/main/java/com/plexsdk/services/README.md#videoservice)|
+|[ServerService](src/main/java/47/one0/services/README.md#serverservice)|
+|[MediaService](src/main/java/47/one0/services/README.md#mediaservice)|
+|[ActivitiesService](src/main/java/47/one0/services/README.md#activitiesservice)|
+|[ButlerService](src/main/java/47/one0/services/README.md#butlerservice)|
+|[HubsService](src/main/java/47/one0/services/README.md#hubsservice)|
+|[SearchService](src/main/java/47/one0/services/README.md#searchservice)|
+|[LibraryService](src/main/java/47/one0/services/README.md#libraryservice)|
+|[LogService](src/main/java/47/one0/services/README.md#logservice)|
+|[PlaylistsService](src/main/java/47/one0/services/README.md#playlistsservice)|
+|[SecurityService](src/main/java/47/one0/services/README.md#securityservice)|
+|[SessionsService](src/main/java/47/one0/services/README.md#sessionsservice)|
+|[UpdaterService](src/main/java/47/one0/services/README.md#updaterservice)|
+|[VideoService](src/main/java/47/one0/services/README.md#videoservice)|
 
 ## API Models
-[A list documenting all API models for this SDK](src/main/java/com/plexsdk//models/README.md#plexsdk-models).
+[A list documenting all API models for this SDK](src/main/java/47/one0//models/README.md#plexsdk-models).
 
 ## Testing
 
@@ -96,16 +96,16 @@ mvn clean test
 Your SDK may require some configuration changes.
 
 
-This API is configured to use a security token for authorization. You should edit `examples/src/main/java/com/plexsdk/examples/Main.java` and paste your own tokens in place of `PLEXSDK_API_KEY` & `PLEXSDK_API_KEY_HEADER`.
+This API is configured to use a security token for authorization. You should edit `examples/src/main/java/47/one0/examples/Main.java` and paste your own tokens in place of `PLEXSDK_API_KEY` & `PLEXSDK_API_KEY_HEADER`.
 
 
 ## Sample Usage
 
 ```Java
-package com.plexsdk.examples;
+package 47.one0.examples;
 
-import com.plexsdk.exceptions.ApiException;
-import com.plexsdk.PlexSDK;
+import 47.one0.exceptions.ApiException;
+import 47.one0.PlexSDK;
 
 public class Main {
 
@@ -122,9 +122,9 @@ public class Main {
 
 ```
 
-Inside this directory is `examples/src/main/java/com/plexsdk/examples/Main.java`. It's a simple, "hello, world" level program to demonstate this SDK. Run `install.sh` to prepare the SDK for use. 
+Inside this directory is `examples/src/main/java/47/one0/examples/Main.java`. It's a simple, "hello, world" level program to demonstate this SDK. Run `install.sh` to prepare the SDK for use. 
 
-To see what other functions this SDK is capable of, look inside `src/main/java/com/plexsdk/http/*Client.java`.
+To see what other functions this SDK is capable of, look inside `src/main/java/47/one0/http/*Client.java`.
 
 ## License
 
