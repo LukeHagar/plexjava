@@ -18,7 +18,7 @@ public class LogService extends BaseService implements LogClient {
 public LogService(OkHttpClient httpClient, String serverUrl)  { super(httpClient, serverUrl); }
   /**
    * @summary Logging a single line message. 
-   * @param {Number} level - An integer log level to write to the PMS log with.  
+   * @param {Integer} level - An integer log level to write to the PMS log with.  
 0: Error  
 1: Warning  
 2: Info 
@@ -28,7 +28,7 @@ public LogService(OkHttpClient httpClient, String serverUrl)  { super(httpClient
    * @param {String} message - The text of the message to write to the log.
    * @param {String} source - a string indicating the source of the message.
    */
-  public ResponseWithHeaders<String> logLine(Float level, String message, String source) throws ApiException
+  public ResponseWithHeaders<String> logLine(Integer level, String message, String source) throws ApiException
 {
 String url = HttpUrl.builder(this.serverUrl)
 .addPathParameter("log")

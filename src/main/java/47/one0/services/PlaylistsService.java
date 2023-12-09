@@ -20,11 +20,11 @@ public PlaylistsService(OkHttpClient httpClient, String serverUrl)  { super(http
    * @summary Create a Playlist 
    * @param {String} title - name of the playlist
    * @param {String} type - type of playlist to create
-   * @param {Number} smart - whether the playlist is smart or not
+   * @param {Integer} smart - whether the playlist is smart or not
    * @param {String} [uri] - the content URI for the playlist
    * @param {Number} [playQueueID] - the play queue to copy to a playlist
    */
-  public ResponseWithHeaders<String> createPlaylist(String title, String type, Float smart, String uri, Float playQueueID) throws ApiException
+  public ResponseWithHeaders<String> createPlaylist(String title, String type, Integer smart, String uri, Float playQueueID) throws ApiException
 {
 String url = HttpUrl.builder(this.serverUrl)
 .addPathParameter("playlists")
@@ -53,9 +53,9 @@ Response response = this.execute(request);
   /**
    * @summary Get All Playlists 
    * @param {String} [playlistType] - limit to a type of playlist.
-   * @param {Number} [smart] - type of playlists to return (default is all).
+   * @param {Integer} [smart] - type of playlists to return (default is all).
    */
-  public ResponseWithHeaders<String> getPlaylists(String playlistType, Float smart) throws ApiException
+  public ResponseWithHeaders<String> getPlaylists(String playlistType, Integer smart) throws ApiException
 {
 String url = HttpUrl.builder(this.serverUrl)
 .addPathParameter("playlists")
@@ -233,11 +233,11 @@ The GUID of each playlist is based on the filename.
 If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it. 
 The GUID of each playlist is based on the filename.
 
-   * @param {Number} force - force overwriting of duplicate playlists. By default, a playlist file uploaded with the same path will overwrite the existing playlist. 
+   * @param {Integer} force - force overwriting of duplicate playlists. By default, a playlist file uploaded with the same path will overwrite the existing playlist. 
 The `force` argument is used to disable overwriting. If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.
 
    */
-  public ResponseWithHeaders<String> uploadPlaylist(String path, Float force) throws ApiException
+  public ResponseWithHeaders<String> uploadPlaylist(String path, Integer force) throws ApiException
 {
 String url = HttpUrl.builder(this.serverUrl)
 .addPathParameter("playlists")

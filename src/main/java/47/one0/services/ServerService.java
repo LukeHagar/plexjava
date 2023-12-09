@@ -118,11 +118,11 @@ Response response = this.execute(request);
    * @param {Number} height - The height for the resized photo
    * @param {Integer} opacity - The opacity for the resized photo
    * @param {Number} blur - The width for the resized photo
-   * @param {Number} minSize - images are always scaled proportionally. A value of '1' in minSize will make the smaller native dimension the dimension resized against.
-   * @param {Number} upscale - allow images to be resized beyond native dimensions.
+   * @param {Integer} minSize - images are always scaled proportionally. A value of '1' in minSize will make the smaller native dimension the dimension resized against.
+   * @param {Integer} upscale - allow images to be resized beyond native dimensions.
    * @param {String} url - path to image within Plex
    */
-  public ResponseWithHeaders<String> getResizedPhoto(Float width, Float height, Integer opacity, Float blur, Float minSize, Float upscale, String url) throws ApiException
+  public ResponseWithHeaders<String> getResizedPhoto(Float width, Float height, Integer opacity, Float blur, Integer minSize, Integer upscale, String url) throws ApiException
 {
 String url = HttpUrl.builder(this.serverUrl)
 .addPathParameter("photo")

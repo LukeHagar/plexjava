@@ -81,11 +81,11 @@ Response response = this.execute(request);
   /**
    * @summary Get Library Details 
    * @param {Number} sectionId - the Id of the library to query
-   * @param {Number} [includeDetails] - Whether or not to include details for a section (types, filters, and sorts). 
+   * @param {Integer} [includeDetails] - Whether or not to include details for a section (types, filters, and sorts). 
 Only exists for backwards compatibility, media providers other than the server libraries have it on always.
 
    */
-  public ResponseWithHeaders<String> getLibrary(Float sectionId, Float includeDetails) throws ApiException
+  public ResponseWithHeaders<String> getLibrary(Float sectionId, Integer includeDetails) throws ApiException
 {
 String url = HttpUrl.builder(this.serverUrl)
 .addPathParameter("library")

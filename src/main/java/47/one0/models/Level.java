@@ -10,5 +10,5 @@ public enum Level {
     V3(3),
     V4(4);
 
-  public final Float label;
+  public final Integer label;
 }
