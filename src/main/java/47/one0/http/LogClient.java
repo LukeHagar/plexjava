@@ -6,7 +6,7 @@ import 47.one0.exceptions.ApiException;
 
 public interface LogClient {
 
-   ResponseWithHeaders<String> logLine(Float level, String message, String source) throws ApiException;
+   ResponseWithHeaders<String> logLine(Integer level, String message, String source) throws ApiException;
    ResponseWithHeaders<String> logMultiLine() throws ApiException;
    ResponseWithHeaders<String> enablePaperTrail() throws ApiException;
 

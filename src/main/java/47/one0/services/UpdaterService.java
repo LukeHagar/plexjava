@@ -39,9 +39,9 @@ Response response = this.execute(request);
 }
   /**
    * @summary Checking for updates 
-   * @param {Download} [download] - Indicate that you want to start download any updates found.
+   * @param {Integer} [download] - Indicate that you want to start download any updates found.
    */
-  public ResponseWithHeaders<String> checkForUpdates(String download) throws ApiException
+  public ResponseWithHeaders<String> checkForUpdates(Integer download) throws ApiException
 {
 String url = HttpUrl.builder(this.serverUrl)
 .addPathParameter("updater")
@@ -66,10 +66,10 @@ Response response = this.execute(request);
 }
   /**
    * @summary Apply Updates 
-   * @param {Tonight} [tonight] - Indicate that you want the update to run during the next Butler execution. Omitting this or setting it to false indicates that the update should install
-   * @param {Skip} [skip] - Indicate that the latest version should be marked as skipped. The <Release> entry for this version will have the `state` set to `skipped`.
+   * @param {Integer} [tonight] - Indicate that you want the update to run during the next Butler execution. Omitting this or setting it to false indicates that the update should install
+   * @param {Integer} [skip] - Indicate that the latest version should be marked as skipped. The <Release> entry for this version will have the `state` set to `skipped`.
    */
-  public ResponseWithHeaders<String> applyUpdates(String tonight, String skip) throws ApiException
+  public ResponseWithHeaders<String> applyUpdates(Integer tonight, Integer skip) throws ApiException
 {
 String url = HttpUrl.builder(this.serverUrl)
 .addPathParameter("updater")

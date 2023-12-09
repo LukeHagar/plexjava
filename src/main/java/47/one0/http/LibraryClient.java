@@ -9,7 +9,7 @@ public interface LibraryClient {
    ResponseWithHeaders<String> getFileHash(String url, Float type) throws ApiException;
    ResponseWithHeaders<47.one0.models.GetRecentlyAddedResponse> getRecentlyAdded() throws ApiException;
    ResponseWithHeaders<String> getLibraries() throws ApiException;
-   ResponseWithHeaders<String> getLibrary(Float sectionId, Float includeDetails) throws ApiException;
+   ResponseWithHeaders<String> getLibrary(Float sectionId, Integer includeDetails) throws ApiException;
    ResponseWithHeaders<String> deleteLibrary(Float sectionId) throws ApiException;
    ResponseWithHeaders<String> getLibraryItems(Float sectionId, Float type, String filter) throws ApiException;
    ResponseWithHeaders<String> refreshLibrary(Float sectionId) throws ApiException;

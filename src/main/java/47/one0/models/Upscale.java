@@ -7,5 +7,5 @@ import lombok.RequiredArgsConstructor;
 public enum Upscale {
     V1(1);
 
-  public final Float label;
+  public final Integer label;
 }

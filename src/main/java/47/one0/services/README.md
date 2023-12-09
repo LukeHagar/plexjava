@@ -418,7 +418,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.serverService.getResizedPhoto(853213706, 2, 9, 3, 3, 3, "urlSampleValue");
+        Object response = client.serverService.getResizedPhoto(258203268, 4, 3, 2, 9, 4, "urlSampleValue");
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -493,7 +493,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.mediaService.markPlayed(5);
+        Object response = client.mediaService.markPlayed(6);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -530,7 +530,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.mediaService.markUnplayed(8);
+        Object response = client.mediaService.markUnplayed(4);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -569,7 +569,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.mediaService.updatePlayProgress("keySampleValue", 1, "stateSampleValue");
+        Object response = client.mediaService.updatePlayProgress("keySampleValue", 9, "stateSampleValue");
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -868,7 +868,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.hubsService.getGlobalHubs(4, 4);
+        Object response = client.hubsService.getGlobalHubs(6, 8);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -907,7 +907,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.hubsService.getLibraryHubs(9, 1, 8);
+        Object response = client.hubsService.getLibraryHubs(8, 3, 5);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -948,7 +948,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.searchService.performSearch("querySampleValue", 3, 9);
+        Object response = client.searchService.performSearch("querySampleValue", 2, 4);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -987,7 +987,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.searchService.performVoiceSearch("querySampleValue", 7, 9);
+        Object response = client.searchService.performVoiceSearch("querySampleValue", 1, 5);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -1064,7 +1064,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.libraryService.getFileHash("urlSampleValue", 6);
+        Object response = client.libraryService.getFileHash("urlSampleValue", 8);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -1174,7 +1174,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.libraryService.getLibrary(6, 7);
+        Object response = client.libraryService.getLibrary(8, 2);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -1211,7 +1211,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.libraryService.deleteLibrary(8);
+        Object response = client.libraryService.deleteLibrary(2);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -1250,7 +1250,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.libraryService.getLibraryItems(9, 1, "filterSampleValue");
+        Object response = client.libraryService.getLibraryItems(7, 5, "filterSampleValue");
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -1287,7 +1287,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.libraryService.refreshLibrary(2);
+        Object response = client.libraryService.refreshLibrary(1);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -1326,7 +1326,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.libraryService.getLatestLibraryItems(5, 3, "filterSampleValue");
+        Object response = client.libraryService.getLatestLibraryItems(6, 6, "filterSampleValue");
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -1365,7 +1365,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.libraryService.getCommonLibraryItems(1, 8, "filterSampleValue");
+        Object response = client.libraryService.getCommonLibraryItems(1, 3, "filterSampleValue");
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -1402,7 +1402,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.libraryService.getMetadata(5);
+        Object response = client.libraryService.getMetadata(4);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -1439,7 +1439,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.libraryService.getMetadataChildren(3);
+        Object response = client.libraryService.getMetadataChildren(8);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -1552,7 +1552,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.logService.logLine(9, "messageSampleValue", "sourceSampleValue");
+        Object response = client.logService.logLine(7, "messageSampleValue", "sourceSampleValue");
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -1631,7 +1631,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.playlistsService.createPlaylist("titleSampleValue", "typeSampleValue", 2, "uriSampleValue", 1);
+        Object response = client.playlistsService.createPlaylist("titleSampleValue", "typeSampleValue", 1, "uriSampleValue", 2);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -1669,7 +1669,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.playlistsService.getPlaylists("playlistTypeSampleValue", 9);
+        Object response = client.playlistsService.getPlaylists("playlistTypeSampleValue", 4);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -1706,7 +1706,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.playlistsService.getPlaylist(4);
+        Object response = client.playlistsService.getPlaylist(8);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -1743,7 +1743,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.playlistsService.deletePlaylist(1);
+        Object response = client.playlistsService.deletePlaylist(3);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -1780,7 +1780,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.playlistsService.updatePlaylist(7);
+        Object response = client.playlistsService.updatePlaylist(6);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -1818,7 +1818,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.playlistsService.getPlaylistContents(3, 1);
+        Object response = client.playlistsService.getPlaylistContents(2, 7);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -1855,7 +1855,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.playlistsService.clearPlaylistContents(8);
+        Object response = client.playlistsService.clearPlaylistContents(2);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -1894,7 +1894,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.playlistsService.addPlaylistContents(6, "uriSampleValue", 4);
+        Object response = client.playlistsService.addPlaylistContents(1, "uriSampleValue", 3);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -1932,7 +1932,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.playlistsService.uploadPlaylist("pathSampleValue", 5);
+        Object response = client.playlistsService.uploadPlaylist("pathSampleValue", 2);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -2231,7 +2231,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.updaterService.checkForUpdates(null);
+        Object response = client.updaterService.checkForUpdates(5);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -2269,7 +2269,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.updaterService.applyUpdates(null, null);
+        Object response = client.updaterService.applyUpdates(5, 3);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -2323,7 +2323,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.videoService.startUniversalTranscode(4, "pathSampleValue", 3, 7, "protocolSampleValue", 6, 9, 5, 3, "subtitesSampleValue", 5, "locationSampleValue", 4, "sessionSampleValue", 5, 6);
+        Object response = client.videoService.startUniversalTranscode(9, "pathSampleValue", 6, 5, "protocolSampleValue", 2, 6, 1, 5, "subtitesSampleValue", 6, "locationSampleValue", 5, "sessionSampleValue", 6, 3);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();
@@ -2369,7 +2369,7 @@ public class Main {
   public static void main(String[] args) {
     PlexSDK client = new PlexSDK(System.getenv("PLEXSDK_API_KEY"), System.getenv("PLEXSDK_API_KEY_HEADER"));
     try {
-        Object response = client.videoService.getTimeline(5, "keySampleValue", "stateSampleValue", 8, 4, 2, "contextSampleValue", 2, 3, 9);
+        Object response = client.videoService.getTimeline(4, "keySampleValue", "stateSampleValue", 9, 4, 8, "contextSampleValue", 3, 7, 8);
         System.out.println(response);
     } catch(ApiException e) {
         e.printStackTrace();

@@ -19,9 +19,9 @@ public HubsService(OkHttpClient httpClient, String serverUrl)  { super(httpClien
   /**
    * @summary Get Global Hubs 
    * @param {Number} [count] - The number of items to return with each hub.
-   * @param {Number} [onlyTransient] - Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added).
+   * @param {Integer} [onlyTransient] - Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added).
    */
-  public ResponseWithHeaders<String> getGlobalHubs(Float count, Float onlyTransient) throws ApiException
+  public ResponseWithHeaders<String> getGlobalHubs(Float count, Integer onlyTransient) throws ApiException
 {
 String url = HttpUrl.builder(this.serverUrl)
 .addPathParameter("hubs")
@@ -44,9 +44,9 @@ Response response = this.execute(request);
    * @summary Get library specific hubs 
    * @param {Number} sectionId - the Id of the library to query
    * @param {Number} [count] - The number of items to return with each hub.
-   * @param {Number} [onlyTransient] - Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added).
+   * @param {Integer} [onlyTransient] - Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added).
    */
-  public ResponseWithHeaders<String> getLibraryHubs(Float sectionId, Float count, Float onlyTransient) throws ApiException
+  public ResponseWithHeaders<String> getLibraryHubs(Float sectionId, Float count, Integer onlyTransient) throws ApiException
 {
 String url = HttpUrl.builder(this.serverUrl)
 .addPathParameter("hubs")

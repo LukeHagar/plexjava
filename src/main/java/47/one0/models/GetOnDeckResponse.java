@@ -144,7 +144,6 @@ public class GetOnDeckResponse extends 47.one0.models.BaseModel {
                                                       .collect(java.util.stream.Collectors.toSet());
                                             }
                                         
-                                            @com.fasterxml.jackson.annotation.JsonProperty("default_") private java.lang.Boolean _default;
                                             @com.fasterxml.jackson.annotation.JsonProperty("bitDepth") private java.lang.Double bitDepth;
                                             @com.fasterxml.jackson.annotation.JsonProperty("bitrate") private java.lang.Double bitrate;
                                             @com.fasterxml.jackson.annotation.JsonProperty("chromaLocation") private java.lang.String chromaLocation;
@@ -153,6 +152,7 @@ public class GetOnDeckResponse extends 47.one0.models.BaseModel {
                                             @com.fasterxml.jackson.annotation.JsonProperty("codedHeight") private java.lang.Double codedHeight;
                                             @com.fasterxml.jackson.annotation.JsonProperty("codedWidth") private java.lang.Double codedWidth;
                                             @com.fasterxml.jackson.annotation.JsonProperty("colorRange") private java.lang.String colorRange;
+                                            @com.fasterxml.jackson.annotation.JsonProperty("default_") private java.lang.Boolean default_;
                                             @com.fasterxml.jackson.annotation.JsonProperty("displayTitle") private java.lang.String displayTitle;
                                             @com.fasterxml.jackson.annotation.JsonProperty("extendedDisplayTitle") private java.lang.String extendedDisplayTitle;
                                             @com.fasterxml.jackson.annotation.JsonProperty("frameRate") private java.lang.Double frameRate;
@@ -216,7 +216,6 @@ public class GetOnDeckResponse extends 47.one0.models.BaseModel {
                                             }
                                           }
                                         
-                                          @com.fasterxml.jackson.annotation.JsonProperty("default_") private final java.lang.Boolean _default;
                                           @com.fasterxml.jackson.annotation.JsonProperty("bitDepth") private final java.lang.Double bitDepth;
                                           @com.fasterxml.jackson.annotation.JsonProperty("bitrate") private final java.lang.Double bitrate;
                                           @com.fasterxml.jackson.annotation.JsonProperty("chromaLocation") private final java.lang.String chromaLocation;
@@ -225,6 +224,7 @@ public class GetOnDeckResponse extends 47.one0.models.BaseModel {
                                           @com.fasterxml.jackson.annotation.JsonProperty("codedHeight") private final java.lang.Double codedHeight;
                                           @com.fasterxml.jackson.annotation.JsonProperty("codedWidth") private final java.lang.Double codedWidth;
                                           @com.fasterxml.jackson.annotation.JsonProperty("colorRange") private final java.lang.String colorRange;
+                                          @com.fasterxml.jackson.annotation.JsonProperty("default_") private final java.lang.Boolean default_;
                                           @com.fasterxml.jackson.annotation.JsonProperty("displayTitle") private final java.lang.String displayTitle;
                                           @com.fasterxml.jackson.annotation.JsonProperty("extendedDisplayTitle") private final java.lang.String extendedDisplayTitle;
                                           @com.fasterxml.jackson.annotation.JsonProperty("frameRate") private final java.lang.Double frameRate;
@@ -243,7 +243,6 @@ public class GetOnDeckResponse extends 47.one0.models.BaseModel {
                                           Stream(Builder builder) {
                                             super(builder);
                                         
-                                            this._default = builder.get_default();
                                             this.bitDepth = builder.getBitDepth();
                                             this.bitrate = builder.getBitrate();
                                             this.chromaLocation = builder.getChromaLocation();
@@ -252,6 +251,7 @@ public class GetOnDeckResponse extends 47.one0.models.BaseModel {
                                             this.codedHeight = builder.getCodedHeight();
                                             this.codedWidth = builder.getCodedWidth();
                                             this.colorRange = builder.getColorRange();
+                                            this.default_ = builder.getDefault_();
                                             this.displayTitle = builder.getDisplayTitle();
                                             this.extendedDisplayTitle = builder.getExtendedDisplayTitle();
                                             this.frameRate = builder.getFrameRate();

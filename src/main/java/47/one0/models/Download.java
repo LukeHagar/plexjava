@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum Download {
-    V1("1");
+    V1(1);
 
-  public final String label;
+  public final Integer label;
 }
