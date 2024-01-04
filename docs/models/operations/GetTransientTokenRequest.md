@@ -1,0 +1,9 @@
+# GetTransientTokenRequest
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `type`                                                                                             | [org.openapis.openapi.models.operations.QueryParamType](../../models/operations/QueryParamType.md) | :heavy_check_mark:                                                                                 | `delegation` - This is the only supported `type` parameter.                                        |
+| `scope`                                                                                            | [org.openapis.openapi.models.operations.Scope](../../models/operations/Scope.md)                   | :heavy_check_mark:                                                                                 | `all` - This is the only supported `scope` parameter.                                              |
