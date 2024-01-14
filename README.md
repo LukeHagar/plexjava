@@ -130,3 +130,37 @@ To see what other functions this SDK is capable of, look inside `src/main/java/4
 
 License: MIT. See license in LICENSE.
 
+
+<!-- No SDK Installation -->
+<!-- No SDK Example Usage -->
+<!-- No SDK Available Operations -->
+<!-- Start Server Selection [server] -->
+## Server Selection
+
+## Server Selection
+
+### Select Server by Index
+
+You can override the default server globally using the `setServerIndex` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
+
+| # | Server | Variables |
+| - | ------ | --------- |
+| 0 | `{protocol}://{ip}:{port}` | `0` (default is `http`), `1` (default is `10.10.10.47`), `2` (default is `32400`) |
+
+
+
+#### Variables
+
+Some of the server options above contain variables. If you want to set the values of those variables, the following options are provided for doing so:
+ * `setZero ServerProtocol`
+ * `setOne String`
+ * `setTwo String`
+
+### Override Server URL Per-Client
+
+The default server can also be overridden globally using the `setServerURL` option when initializing the SDK client instance. For example:
+<!-- End Server Selection [server] -->
+
+<!-- Placeholder for Future Speakeasy SDK Sections -->
+
+
