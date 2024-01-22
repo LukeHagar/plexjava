@@ -1,0 +1,12 @@
+# CreatePlaylistRequest
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `title`                                                                          | *String*                                                                         | :heavy_check_mark:                                                               | name of the playlist                                                             |
+| `type`                                                                           | [org.openapis.openapi.models.operations.Type](../../models/operations/Type.md)   | :heavy_check_mark:                                                               | type of playlist to create                                                       |
+| `smart`                                                                          | [org.openapis.openapi.models.operations.Smart](../../models/operations/Smart.md) | :heavy_check_mark:                                                               | whether the playlist is smart or not                                             |
+| `uri`                                                                            | *String*                                                                         | :heavy_check_mark:                                                               | the content URI for the playlist                                                 |
+| `playQueueID`                                                                    | *Double*                                                                         | :heavy_minus_sign:                                                               | the play queue to copy to a playlist                                             |
