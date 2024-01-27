@@ -1,0 +1,12 @@
+# GetMetadataDirector
+
+
+## Fields
+
+| Field                                                               | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `id`                                                                | *Integer*                                                           | :heavy_minus_sign:                                                  | N/A                                                                 | 130                                                                 |
+| `filter`                                                            | *String*                                                            | :heavy_minus_sign:                                                  | N/A                                                                 | director=130                                                        |
+| `tag`                                                               | *String*                                                            | :heavy_minus_sign:                                                  | N/A                                                                 | Joss Whedon                                                         |
+| `tagKey`                                                            | *String*                                                            | :heavy_minus_sign:                                                  | N/A                                                                 | 5d776828880197001ec90e8f                                            |
+| `thumb`                                                             | *String*                                                            | :heavy_minus_sign:                                                  | N/A                                                                 | https://metadata-static.plex.tv/people/5d776828880197001ec90e8f.jpg |
