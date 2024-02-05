@@ -130,3 +130,71 @@ To see what other functions this SDK is capable of, look inside `src/main/java/4
 
 License: MIT. See license in LICENSE.
 
+
+<!-- No SDK Installation -->
+<!-- No SDK Example Usage -->
+<!-- No SDK Available Operations -->
+<!-- Start Server Selection [server] -->
+## Server Selection
+
+## Server Selection
+
+### Select Server by Index
+
+You can override the default server globally using the `setServerIndex` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
+
+| # | Server | Variables |
+| - | ------ | --------- |
+| 0 | `{protocol}://{ip}:{port}` | `0` (default is `http`), `1` (default is `10.10.10.47`), `2` (default is `32400`) |
+
+
+
+#### Variables
+
+Some of the server options above contain variables. If you want to set the values of those variables, the following options are provided for doing so:
+ * `setZero ServerProtocol`
+ * `setOne String`
+ * `setTwo String`
+
+### Override Server URL Per-Client
+
+The default server can also be overridden globally using the `setServerURL` option when initializing the SDK client instance. For example:
+
+
+### Override Server URL Per-Operation
+
+The server URL can also be overridden on a per-operation basis, provided a server list was specified for the operation. For example:
+```java
+package hello.world;
+
+import org.openapis.openapi.PlexAPI;
+import org.openapis.openapi.models.operations.GetPinRequest;
+import org.openapis.openapi.models.operations.GetPinResponse;
+import org.openapis.openapi.models.shared.Security;
+
+public class Application {
+    public static void main(String[] args) {
+        try {
+            PlexAPI sdk = PlexAPI.builder()
+                .setSecurity(new Security(
+                "string"){{
+                    accessToken = "<YOUR_API_KEY_HERE>";
+                }})
+                .build();
+
+            org.openapis.openapi.models.operations.GetPinResponse res = sdk.plex.getPin(serverUrl="https://plex.tv/api/v2", "string", false);
+
+            if (res.twoHundredApplicationJsonObject != null) {
+                // handle response
+            }
+        } catch (Exception e) {
+            // handle exception
+        }
+    }
+}
+```
+<!-- End Server Selection [server] -->
+
+<!-- Placeholder for Future Speakeasy SDK Sections -->
+
+
