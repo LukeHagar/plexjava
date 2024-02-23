@@ -7,14 +7,16 @@ generation:
   useClassNamesForArrayFields: true
   fixes:
     nameResolutionDec2023: false
+    parameterOrderingFeb2024: false
+    requestResponseComponentNamesFeb2024: false
 java:
   version: 0.0.1
-  artifactID: openapi
+  artifactID: plexapi
   companyEmail: info@mycompany.com
   companyName: My Company
   companyURL: www.mycompany.com
   githubURL: github.com/owner/repo
-  groupID: org.openapis
+  groupID: lukehagar.plexapi
   imports:
     option: openapi
     paths:
@@ -27,4 +29,5 @@ java:
   maxMethodParams: 4
   ossrhURL: https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/
   outputModelSuffix: output
-  projectName: openapi
+  projectName: plexapi
+  templateVersion: v1
