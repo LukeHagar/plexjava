@@ -12,10 +12,10 @@ generation:
 java:
   version: 0.0.1
   artifactID: plexapi
-  companyEmail: info@mycompany.com
-  companyName: My Company
-  companyURL: www.mycompany.com
-  githubURL: github.com/owner/repo
+  companyEmail: lukeslakemail@gmail.com
+  companyName: Personal
+  companyURL: lukehagar.com
+  githubURL: github.com/LukeHagar/plexjava
   groupID: lukehagar.plexapi
   imports:
     option: openapi
