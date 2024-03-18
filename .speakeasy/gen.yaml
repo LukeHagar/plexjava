@@ -6,15 +6,19 @@ generation:
     optionalPropertyRendering: withExample
   useClassNamesForArrayFields: true
   fixes:
-    nameResolutionDec2023: false
-    parameterOrderingFeb2024: false
-    requestResponseComponentNamesFeb2024: false
+    nameResolutionDec2023: true
+    parameterOrderingFeb2024: true
+    requestResponseComponentNamesFeb2024: true
+  auth:
+    oAuth2ClientCredentialsEnabled: true
 java:
   version: 0.0.1
+  additionalDependencies: []
   artifactID: plexapi
   companyEmail: lukeslakemail@gmail.com
   companyName: Personal
   companyURL: lukehagar.com
+  flattenGlobalSecurity: true
   githubURL: github.com/LukeHagar/plexjava
   groupID: lukehagar.plexapi
   imports:
@@ -30,4 +34,4 @@ java:
   ossrhURL: https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/
   outputModelSuffix: output
   projectName: plexapi
-  templateVersion: v1
+  templateVersion: v2
