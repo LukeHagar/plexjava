@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class Sort {
 
@@ -43,6 +44,7 @@ public class Sort {
     @JsonProperty("title")
     private Optional<? extends String> title;
 
+    @JsonCreator
     public Sort(
             @JsonProperty("default") Optional<? extends String> default_,
             @JsonProperty("defaultDirection") Optional<? extends String> defaultDirection,
@@ -63,29 +65,45 @@ public class Sort {
         this.key = key;
         this.title = title;
     }
-
-    public Optional<? extends String> default_() {
-        return default_;
+    
+    public Sort() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> defaultDirection() {
-        return defaultDirection;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> default_() {
+        return (Optional<String>) default_;
     }
 
-    public Optional<? extends String> descKey() {
-        return descKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> defaultDirection() {
+        return (Optional<String>) defaultDirection;
     }
 
-    public Optional<? extends String> firstCharacterKey() {
-        return firstCharacterKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> descKey() {
+        return (Optional<String>) descKey;
     }
 
-    public Optional<? extends String> key() {
-        return key;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> firstCharacterKey() {
+        return (Optional<String>) firstCharacterKey;
     }
 
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
     }
 
     public final static Builder builder() {

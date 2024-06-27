@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -13,7 +15,6 @@ import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class AddPlaylistContentsRequest {
 
@@ -35,6 +36,7 @@ public class AddPlaylistContentsRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=playQueueID")
     private Optional<? extends Double> playQueueID;
 
+    @JsonCreator
     public AddPlaylistContentsRequest(
             double playlistID,
             String uri,
@@ -46,10 +48,17 @@ public class AddPlaylistContentsRequest {
         this.uri = uri;
         this.playQueueID = playQueueID;
     }
+    
+    public AddPlaylistContentsRequest(
+            double playlistID,
+            String uri) {
+        this(playlistID, uri, Optional.empty());
+    }
 
     /**
      * the ID of the playlist
      */
+    @JsonIgnore
     public double playlistID() {
         return playlistID;
     }
@@ -57,6 +66,7 @@ public class AddPlaylistContentsRequest {
     /**
      * the content URI for the playlist
      */
+    @JsonIgnore
     public String uri() {
         return uri;
     }
@@ -64,8 +74,10 @@ public class AddPlaylistContentsRequest {
     /**
      * the play queue to add to a playlist
      */
-    public Optional<? extends Double> playQueueID() {
-        return playQueueID;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> playQueueID() {
+        return (Optional<Double>) playQueueID;
     }
 
     public final static Builder builder() {

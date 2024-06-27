@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetLibraryItemsMediaContainer {
 
@@ -37,7 +38,7 @@ public class GetLibraryItemsMediaContainer {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionID")
-    private Optional<? extends Integer> librarySectionID;
+    private Optional<? extends LibrarySectionID> librarySectionID;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionTitle")
@@ -83,12 +84,13 @@ public class GetLibraryItemsMediaContainer {
     @JsonProperty("Metadata")
     private Optional<? extends java.util.List<GetLibraryItemsMetadata>> metadata;
 
+    @JsonCreator
     public GetLibraryItemsMediaContainer(
             @JsonProperty("size") Optional<? extends Integer> size,
             @JsonProperty("allowSync") Optional<? extends Boolean> allowSync,
             @JsonProperty("art") Optional<? extends String> art,
             @JsonProperty("identifier") Optional<? extends String> identifier,
-            @JsonProperty("librarySectionID") Optional<? extends Integer> librarySectionID,
+            @JsonProperty("librarySectionID") Optional<? extends LibrarySectionID> librarySectionID,
             @JsonProperty("librarySectionTitle") Optional<? extends String> librarySectionTitle,
             @JsonProperty("librarySectionUUID") Optional<? extends String> librarySectionUUID,
             @JsonProperty("mediaTagPrefix") Optional<? extends String> mediaTagPrefix,
@@ -133,69 +135,105 @@ public class GetLibraryItemsMediaContainer {
         this.mixedParents = mixedParents;
         this.metadata = metadata;
     }
-
-    public Optional<? extends Integer> size() {
-        return size;
+    
+    public GetLibraryItemsMediaContainer() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends Boolean> allowSync() {
-        return allowSync;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> size() {
+        return (Optional<Integer>) size;
     }
 
-    public Optional<? extends String> art() {
-        return art;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> allowSync() {
+        return (Optional<Boolean>) allowSync;
     }
 
-    public Optional<? extends String> identifier() {
-        return identifier;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> art() {
+        return (Optional<String>) art;
     }
 
-    public Optional<? extends Integer> librarySectionID() {
-        return librarySectionID;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> identifier() {
+        return (Optional<String>) identifier;
     }
 
-    public Optional<? extends String> librarySectionTitle() {
-        return librarySectionTitle;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<LibrarySectionID> librarySectionID() {
+        return (Optional<LibrarySectionID>) librarySectionID;
     }
 
-    public Optional<? extends String> librarySectionUUID() {
-        return librarySectionUUID;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> librarySectionTitle() {
+        return (Optional<String>) librarySectionTitle;
     }
 
-    public Optional<? extends String> mediaTagPrefix() {
-        return mediaTagPrefix;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> librarySectionUUID() {
+        return (Optional<String>) librarySectionUUID;
     }
 
-    public Optional<? extends Integer> mediaTagVersion() {
-        return mediaTagVersion;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> mediaTagPrefix() {
+        return (Optional<String>) mediaTagPrefix;
     }
 
-    public Optional<? extends String> thumb() {
-        return thumb;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> mediaTagVersion() {
+        return (Optional<Integer>) mediaTagVersion;
     }
 
-    public Optional<? extends String> title1() {
-        return title1;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> thumb() {
+        return (Optional<String>) thumb;
     }
 
-    public Optional<? extends String> title2() {
-        return title2;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title1() {
+        return (Optional<String>) title1;
     }
 
-    public Optional<? extends String> viewGroup() {
-        return viewGroup;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title2() {
+        return (Optional<String>) title2;
     }
 
-    public Optional<? extends Integer> viewMode() {
-        return viewMode;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> viewGroup() {
+        return (Optional<String>) viewGroup;
     }
 
-    public Optional<? extends Boolean> mixedParents() {
-        return mixedParents;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> viewMode() {
+        return (Optional<Integer>) viewMode;
     }
 
-    public Optional<? extends java.util.List<GetLibraryItemsMetadata>> metadata() {
-        return metadata;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> mixedParents() {
+        return (Optional<Boolean>) mixedParents;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetLibraryItemsMetadata>> metadata() {
+        return (Optional<java.util.List<GetLibraryItemsMetadata>>) metadata;
     }
 
     public final static Builder builder() {
@@ -250,13 +288,13 @@ public class GetLibraryItemsMediaContainer {
         return this;
     }
 
-    public GetLibraryItemsMediaContainer withLibrarySectionID(int librarySectionID) {
+    public GetLibraryItemsMediaContainer withLibrarySectionID(LibrarySectionID librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
         this.librarySectionID = Optional.ofNullable(librarySectionID);
         return this;
     }
 
-    public GetLibraryItemsMediaContainer withLibrarySectionID(Optional<? extends Integer> librarySectionID) {
+    public GetLibraryItemsMediaContainer withLibrarySectionID(Optional<? extends LibrarySectionID> librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
         this.librarySectionID = librarySectionID;
         return this;
@@ -474,7 +512,7 @@ public class GetLibraryItemsMediaContainer {
  
         private Optional<? extends String> identifier = Optional.empty();
  
-        private Optional<? extends Integer> librarySectionID = Optional.empty();
+        private Optional<? extends LibrarySectionID> librarySectionID = Optional.empty();
  
         private Optional<? extends String> librarySectionTitle = Optional.empty();
  
@@ -550,13 +588,13 @@ public class GetLibraryItemsMediaContainer {
             return this;
         }
 
-        public Builder librarySectionID(int librarySectionID) {
+        public Builder librarySectionID(LibrarySectionID librarySectionID) {
             Utils.checkNotNull(librarySectionID, "librarySectionID");
             this.librarySectionID = Optional.ofNullable(librarySectionID);
             return this;
         }
 
-        public Builder librarySectionID(Optional<? extends Integer> librarySectionID) {
+        public Builder librarySectionID(Optional<? extends LibrarySectionID> librarySectionID) {
             Utils.checkNotNull(librarySectionID, "librarySectionID");
             this.librarySectionID = librarySectionID;
             return this;

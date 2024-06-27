@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 /**
  * GetOnDeckResponseBody - The on Deck content
  */
@@ -26,14 +27,21 @@ public class GetOnDeckResponseBody {
     @JsonProperty("MediaContainer")
     private Optional<? extends GetOnDeckMediaContainer> mediaContainer;
 
+    @JsonCreator
     public GetOnDeckResponseBody(
             @JsonProperty("MediaContainer") Optional<? extends GetOnDeckMediaContainer> mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
         this.mediaContainer = mediaContainer;
     }
+    
+    public GetOnDeckResponseBody() {
+        this(Optional.empty());
+    }
 
-    public Optional<? extends GetOnDeckMediaContainer> mediaContainer() {
-        return mediaContainer;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetOnDeckMediaContainer> mediaContainer() {
+        return (Optional<GetOnDeckMediaContainer>) mediaContainer;
     }
 
     public final static Builder builder() {

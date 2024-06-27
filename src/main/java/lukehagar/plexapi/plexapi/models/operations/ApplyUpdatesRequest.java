@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -13,7 +15,6 @@ import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class ApplyUpdatesRequest {
 
@@ -29,6 +30,7 @@ public class ApplyUpdatesRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=skip")
     private Optional<? extends Skip> skip;
 
+    @JsonCreator
     public ApplyUpdatesRequest(
             Optional<? extends Tonight> tonight,
             Optional<? extends Skip> skip) {
@@ -37,19 +39,27 @@ public class ApplyUpdatesRequest {
         this.tonight = tonight;
         this.skip = skip;
     }
+    
+    public ApplyUpdatesRequest() {
+        this(Optional.empty(), Optional.empty());
+    }
 
     /**
      * Indicate that you want the update to run during the next Butler execution. Omitting this or setting it to false indicates that the update should install
      */
-    public Optional<? extends Tonight> tonight() {
-        return tonight;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Tonight> tonight() {
+        return (Optional<Tonight>) tonight;
     }
 
     /**
      * Indicate that the latest version should be marked as skipped. The &lt;Release&gt; entry for this version will have the `state` set to `skipped`.
      */
-    public Optional<? extends Skip> skip() {
-        return skip;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Skip> skip() {
+        return (Optional<Skip>) skip;
     }
 
     public final static Builder builder() {

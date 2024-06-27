@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,21 +18,27 @@ import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
 
-
 public class Guids {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("id")
     private Optional<? extends String> id;
 
+    @JsonCreator
     public Guids(
             @JsonProperty("id") Optional<? extends String> id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
     }
+    
+    public Guids() {
+        this(Optional.empty());
+    }
 
-    public Optional<? extends String> id() {
-        return id;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> id() {
+        return (Optional<String>) id;
     }
 
     public final static Builder builder() {

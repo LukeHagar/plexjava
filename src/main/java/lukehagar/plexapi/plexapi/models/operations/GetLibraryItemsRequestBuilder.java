@@ -19,15 +19,16 @@ import org.openapitools.jackson.nullable.JsonNullable;
 
 public class GetLibraryItemsRequestBuilder {
 
-    private Long sectionId;
+    private java.lang.Object sectionId;
     private Tag tag;
+    private Optional<? extends Long> includeGuids = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetLibraryItems sdk;
 
     public GetLibraryItemsRequestBuilder(SDKMethodInterfaces.MethodCallGetLibraryItems sdk) {
         this.sdk = sdk;
     }
 
-    public GetLibraryItemsRequestBuilder sectionId(long sectionId) {
+    public GetLibraryItemsRequestBuilder sectionId(java.lang.Object sectionId) {
         Utils.checkNotNull(sectionId, "sectionId");
         this.sectionId = sectionId;
         return this;
@@ -38,11 +39,24 @@ public class GetLibraryItemsRequestBuilder {
         this.tag = tag;
         return this;
     }
+                
+    public GetLibraryItemsRequestBuilder includeGuids(long includeGuids) {
+        Utils.checkNotNull(includeGuids, "includeGuids");
+        this.includeGuids = Optional.of(includeGuids);
+        return this;
+    }
+
+    public GetLibraryItemsRequestBuilder includeGuids(Optional<? extends Long> includeGuids) {
+        Utils.checkNotNull(includeGuids, "includeGuids");
+        this.includeGuids = includeGuids;
+        return this;
+    }
 
     public GetLibraryItemsResponse call() throws Exception {
 
         return sdk.getLibraryItems(
             sectionId,
-            tag);
+            tag,
+            includeGuids);
     }
 }

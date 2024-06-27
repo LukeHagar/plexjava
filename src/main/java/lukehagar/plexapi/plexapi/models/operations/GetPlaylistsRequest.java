@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -13,7 +15,6 @@ import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetPlaylistsRequest {
 
@@ -29,6 +30,7 @@ public class GetPlaylistsRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=smart")
     private Optional<? extends QueryParamSmart> smart;
 
+    @JsonCreator
     public GetPlaylistsRequest(
             Optional<? extends PlaylistType> playlistType,
             Optional<? extends QueryParamSmart> smart) {
@@ -37,19 +39,27 @@ public class GetPlaylistsRequest {
         this.playlistType = playlistType;
         this.smart = smart;
     }
+    
+    public GetPlaylistsRequest() {
+        this(Optional.empty(), Optional.empty());
+    }
 
     /**
      * limit to a type of playlist.
      */
-    public Optional<? extends PlaylistType> playlistType() {
-        return playlistType;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<PlaylistType> playlistType() {
+        return (Optional<PlaylistType>) playlistType;
     }
 
     /**
      * type of playlists to return (default is all).
      */
-    public Optional<? extends QueryParamSmart> smart() {
-        return smart;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<QueryParamSmart> smart() {
+        return (Optional<QueryParamSmart>) smart;
     }
 
     public final static Builder builder() {

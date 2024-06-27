@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -14,7 +16,6 @@ import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.LazySingletonValue;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetLibraryRequest {
 
@@ -32,6 +33,7 @@ public class GetLibraryRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeDetails")
     private Optional<? extends IncludeDetails> includeDetails;
 
+    @JsonCreator
     public GetLibraryRequest(
             double sectionId,
             Optional<? extends IncludeDetails> includeDetails) {
@@ -40,10 +42,16 @@ public class GetLibraryRequest {
         this.sectionId = sectionId;
         this.includeDetails = includeDetails;
     }
+    
+    public GetLibraryRequest(
+            double sectionId) {
+        this(sectionId, Optional.empty());
+    }
 
     /**
      * the Id of the library to query
      */
+    @JsonIgnore
     public double sectionId() {
         return sectionId;
     }
@@ -53,8 +61,10 @@ public class GetLibraryRequest {
      * Only exists for backwards compatibility, media providers other than the server libraries have it on always.
      * 
      */
-    public Optional<? extends IncludeDetails> includeDetails() {
-        return includeDetails;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<IncludeDetails> includeDetails() {
+        return (Optional<IncludeDetails>) includeDetails;
     }
 
     public final static Builder builder() {

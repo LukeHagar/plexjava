@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -13,7 +15,6 @@ import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class StartUniversalTranscodeRequest {
 
@@ -113,6 +114,7 @@ public class StartUniversalTranscodeRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=autoAdjustQuality")
     private Optional<? extends Double> autoAdjustQuality;
 
+    @JsonCreator
     public StartUniversalTranscodeRequest(
             double hasMDE,
             String path,
@@ -163,10 +165,20 @@ public class StartUniversalTranscodeRequest {
         this.addDebugOverlay = addDebugOverlay;
         this.autoAdjustQuality = autoAdjustQuality;
     }
+    
+    public StartUniversalTranscodeRequest(
+            double hasMDE,
+            String path,
+            double mediaIndex,
+            double partIndex,
+            String protocol) {
+        this(hasMDE, path, mediaIndex, partIndex, protocol, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    }
 
     /**
      * Whether the media item has MDE
      */
+    @JsonIgnore
     public double hasMDE() {
         return hasMDE;
     }
@@ -174,6 +186,7 @@ public class StartUniversalTranscodeRequest {
     /**
      * The path to the media item to transcode
      */
+    @JsonIgnore
     public String path() {
         return path;
     }
@@ -181,6 +194,7 @@ public class StartUniversalTranscodeRequest {
     /**
      * The index of the media item to transcode
      */
+    @JsonIgnore
     public double mediaIndex() {
         return mediaIndex;
     }
@@ -188,6 +202,7 @@ public class StartUniversalTranscodeRequest {
     /**
      * The index of the part to transcode
      */
+    @JsonIgnore
     public double partIndex() {
         return partIndex;
     }
@@ -195,6 +210,7 @@ public class StartUniversalTranscodeRequest {
     /**
      * The protocol to use for the transcode session
      */
+    @JsonIgnore
     public String protocol() {
         return protocol;
     }
@@ -202,78 +218,100 @@ public class StartUniversalTranscodeRequest {
     /**
      * Whether to use fast seek or not
      */
-    public Optional<? extends Double> fastSeek() {
-        return fastSeek;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> fastSeek() {
+        return (Optional<Double>) fastSeek;
     }
 
     /**
      * Whether to use direct play or not
      */
-    public Optional<? extends Double> directPlay() {
-        return directPlay;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> directPlay() {
+        return (Optional<Double>) directPlay;
     }
 
     /**
      * Whether to use direct stream or not
      */
-    public Optional<? extends Double> directStream() {
-        return directStream;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> directStream() {
+        return (Optional<Double>) directStream;
     }
 
     /**
      * The size of the subtitles
      */
-    public Optional<? extends Double> subtitleSize() {
-        return subtitleSize;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> subtitleSize() {
+        return (Optional<Double>) subtitleSize;
     }
 
     /**
      * The subtitles
      */
-    public Optional<? extends String> subtites() {
-        return subtites;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> subtites() {
+        return (Optional<String>) subtites;
     }
 
     /**
      * The audio boost
      */
-    public Optional<? extends Double> audioBoost() {
-        return audioBoost;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> audioBoost() {
+        return (Optional<Double>) audioBoost;
     }
 
     /**
      * The location of the transcode session
      */
-    public Optional<? extends String> location() {
-        return location;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> location() {
+        return (Optional<String>) location;
     }
 
     /**
      * The size of the media buffer
      */
-    public Optional<? extends Double> mediaBufferSize() {
-        return mediaBufferSize;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> mediaBufferSize() {
+        return (Optional<Double>) mediaBufferSize;
     }
 
     /**
      * The session ID
      */
-    public Optional<? extends String> session() {
-        return session;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> session() {
+        return (Optional<String>) session;
     }
 
     /**
      * Whether to add a debug overlay or not
      */
-    public Optional<? extends Double> addDebugOverlay() {
-        return addDebugOverlay;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> addDebugOverlay() {
+        return (Optional<Double>) addDebugOverlay;
     }
 
     /**
      * Whether to auto adjust quality or not
      */
-    public Optional<? extends Double> autoAdjustQuality() {
-        return autoAdjustQuality;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> autoAdjustQuality() {
+        return (Optional<Double>) autoAdjustQuality;
     }
 
     public final static Builder builder() {

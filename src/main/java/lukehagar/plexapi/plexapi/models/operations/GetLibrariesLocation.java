@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,7 +18,6 @@ import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
 
-
 public class GetLibrariesLocation {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -27,6 +28,7 @@ public class GetLibrariesLocation {
     @JsonProperty("path")
     private Optional<? extends String> path;
 
+    @JsonCreator
     public GetLibrariesLocation(
             @JsonProperty("id") Optional<? extends Integer> id,
             @JsonProperty("path") Optional<? extends String> path) {
@@ -35,13 +37,21 @@ public class GetLibrariesLocation {
         this.id = id;
         this.path = path;
     }
-
-    public Optional<? extends Integer> id() {
-        return id;
+    
+    public GetLibrariesLocation() {
+        this(Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> path() {
-        return path;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> id() {
+        return (Optional<Integer>) id;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> path() {
+        return (Optional<String>) path;
     }
 
     public final static Builder builder() {

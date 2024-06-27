@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetOnDeckPart {
 
@@ -55,6 +56,7 @@ public class GetOnDeckPart {
     @JsonProperty("Stream")
     private Optional<? extends java.util.List<GetOnDeckStream>> stream;
 
+    @JsonCreator
     public GetOnDeckPart(
             @JsonProperty("id") Optional<? extends Double> id,
             @JsonProperty("key") Optional<? extends String> key,
@@ -84,41 +86,63 @@ public class GetOnDeckPart {
         this.videoProfile = videoProfile;
         this.stream = stream;
     }
-
-    public Optional<? extends Double> id() {
-        return id;
+    
+    public GetOnDeckPart() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> key() {
-        return key;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> id() {
+        return (Optional<Double>) id;
     }
 
-    public Optional<? extends Double> duration() {
-        return duration;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
     }
 
-    public Optional<? extends String> file() {
-        return file;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> duration() {
+        return (Optional<Double>) duration;
     }
 
-    public Optional<? extends Double> size() {
-        return size;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> file() {
+        return (Optional<String>) file;
     }
 
-    public Optional<? extends String> audioProfile() {
-        return audioProfile;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> size() {
+        return (Optional<Double>) size;
     }
 
-    public Optional<? extends String> container() {
-        return container;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> audioProfile() {
+        return (Optional<String>) audioProfile;
     }
 
-    public Optional<? extends String> videoProfile() {
-        return videoProfile;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> container() {
+        return (Optional<String>) container;
     }
 
-    public Optional<? extends java.util.List<GetOnDeckStream>> stream() {
-        return stream;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> videoProfile() {
+        return (Optional<String>) videoProfile;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetOnDeckStream>> stream() {
+        return (Optional<java.util.List<GetOnDeckStream>>) stream;
     }
 
     public final static Builder builder() {

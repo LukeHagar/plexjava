@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,7 +20,6 @@ import java.math.BigInteger;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetSearchResultsMetadata {
 
@@ -158,6 +159,7 @@ public class GetSearchResultsMetadata {
     @JsonProperty("Role")
     private Optional<? extends java.util.List<GetSearchResultsRole>> role;
 
+    @JsonCreator
     public GetSearchResultsMetadata(
             @JsonProperty("allowSync") Optional<? extends Boolean> allowSync,
             @JsonProperty("librarySectionID") Optional<? extends Double> librarySectionID,
@@ -262,141 +264,213 @@ public class GetSearchResultsMetadata {
         this.country = country;
         this.role = role;
     }
-
-    public Optional<? extends Boolean> allowSync() {
-        return allowSync;
+    
+    public GetSearchResultsMetadata() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends Double> librarySectionID() {
-        return librarySectionID;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> allowSync() {
+        return (Optional<Boolean>) allowSync;
     }
 
-    public Optional<? extends String> librarySectionTitle() {
-        return librarySectionTitle;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> librarySectionID() {
+        return (Optional<Double>) librarySectionID;
     }
 
-    public Optional<? extends String> librarySectionUUID() {
-        return librarySectionUUID;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> librarySectionTitle() {
+        return (Optional<String>) librarySectionTitle;
     }
 
-    public Optional<? extends Boolean> personal() {
-        return personal;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> librarySectionUUID() {
+        return (Optional<String>) librarySectionUUID;
     }
 
-    public Optional<? extends String> sourceTitle() {
-        return sourceTitle;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> personal() {
+        return (Optional<Boolean>) personal;
     }
 
-    public Optional<? extends Double> ratingKey() {
-        return ratingKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> sourceTitle() {
+        return (Optional<String>) sourceTitle;
     }
 
-    public Optional<? extends String> key() {
-        return key;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> ratingKey() {
+        return (Optional<Double>) ratingKey;
     }
 
-    public Optional<? extends String> guid() {
-        return guid;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
     }
 
-    public Optional<? extends String> studio() {
-        return studio;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> guid() {
+        return (Optional<String>) guid;
     }
 
-    public Optional<? extends String> type() {
-        return type;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> studio() {
+        return (Optional<String>) studio;
     }
 
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> type() {
+        return (Optional<String>) type;
     }
 
-    public Optional<? extends String> contentRating() {
-        return contentRating;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
     }
 
-    public Optional<? extends String> summary() {
-        return summary;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> contentRating() {
+        return (Optional<String>) contentRating;
     }
 
-    public Optional<? extends Double> rating() {
-        return rating;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> summary() {
+        return (Optional<String>) summary;
     }
 
-    public Optional<? extends Double> audienceRating() {
-        return audienceRating;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> rating() {
+        return (Optional<Double>) rating;
     }
 
-    public Optional<? extends Double> year() {
-        return year;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> audienceRating() {
+        return (Optional<Double>) audienceRating;
     }
 
-    public Optional<? extends String> tagline() {
-        return tagline;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> year() {
+        return (Optional<Double>) year;
     }
 
-    public Optional<? extends String> thumb() {
-        return thumb;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> tagline() {
+        return (Optional<String>) tagline;
     }
 
-    public Optional<? extends String> art() {
-        return art;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> thumb() {
+        return (Optional<String>) thumb;
     }
 
-    public Optional<? extends Double> duration() {
-        return duration;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> art() {
+        return (Optional<String>) art;
     }
 
-    public Optional<? extends OffsetDateTime> originallyAvailableAt() {
-        return originallyAvailableAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> duration() {
+        return (Optional<Double>) duration;
     }
 
-    public Optional<? extends Double> addedAt() {
-        return addedAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<OffsetDateTime> originallyAvailableAt() {
+        return (Optional<OffsetDateTime>) originallyAvailableAt;
     }
 
-    public Optional<? extends Double> updatedAt() {
-        return updatedAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> addedAt() {
+        return (Optional<Double>) addedAt;
     }
 
-    public Optional<? extends String> audienceRatingImage() {
-        return audienceRatingImage;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> updatedAt() {
+        return (Optional<Double>) updatedAt;
     }
 
-    public Optional<? extends String> chapterSource() {
-        return chapterSource;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> audienceRatingImage() {
+        return (Optional<String>) audienceRatingImage;
     }
 
-    public Optional<? extends String> primaryExtraKey() {
-        return primaryExtraKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> chapterSource() {
+        return (Optional<String>) chapterSource;
     }
 
-    public Optional<? extends String> ratingImage() {
-        return ratingImage;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> primaryExtraKey() {
+        return (Optional<String>) primaryExtraKey;
     }
 
-    public Optional<? extends java.util.List<GetSearchResultsMedia>> media() {
-        return media;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> ratingImage() {
+        return (Optional<String>) ratingImage;
     }
 
-    public Optional<? extends java.util.List<GetSearchResultsGenre>> genre() {
-        return genre;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetSearchResultsMedia>> media() {
+        return (Optional<java.util.List<GetSearchResultsMedia>>) media;
     }
 
-    public Optional<? extends java.util.List<GetSearchResultsDirector>> director() {
-        return director;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetSearchResultsGenre>> genre() {
+        return (Optional<java.util.List<GetSearchResultsGenre>>) genre;
     }
 
-    public Optional<? extends java.util.List<GetSearchResultsWriter>> writer() {
-        return writer;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetSearchResultsDirector>> director() {
+        return (Optional<java.util.List<GetSearchResultsDirector>>) director;
     }
 
-    public Optional<? extends java.util.List<GetSearchResultsCountry>> country() {
-        return country;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetSearchResultsWriter>> writer() {
+        return (Optional<java.util.List<GetSearchResultsWriter>>) writer;
     }
 
-    public Optional<? extends java.util.List<GetSearchResultsRole>> role() {
-        return role;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetSearchResultsCountry>> country() {
+        return (Optional<java.util.List<GetSearchResultsCountry>>) country;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetSearchResultsRole>> role() {
+        return (Optional<java.util.List<GetSearchResultsRole>>) role;
     }
 
     public final static Builder builder() {

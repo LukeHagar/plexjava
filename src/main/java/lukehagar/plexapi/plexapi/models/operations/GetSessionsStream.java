@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetSessionsStream {
 
@@ -99,6 +100,7 @@ public class GetSessionsStream {
     @JsonProperty("location")
     private Optional<? extends String> location;
 
+    @JsonCreator
     public GetSessionsStream(
             @JsonProperty("albumGain") Optional<? extends String> albumGain,
             @JsonProperty("albumPeak") Optional<? extends String> albumPeak,
@@ -161,85 +163,129 @@ public class GetSessionsStream {
         this.streamType = streamType;
         this.location = location;
     }
-
-    public Optional<? extends String> albumGain() {
-        return albumGain;
+    
+    public GetSessionsStream() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> albumPeak() {
-        return albumPeak;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> albumGain() {
+        return (Optional<String>) albumGain;
     }
 
-    public Optional<? extends String> albumRange() {
-        return albumRange;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> albumPeak() {
+        return (Optional<String>) albumPeak;
     }
 
-    public Optional<? extends String> audioChannelLayout() {
-        return audioChannelLayout;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> albumRange() {
+        return (Optional<String>) albumRange;
     }
 
-    public Optional<? extends Integer> bitDepth() {
-        return bitDepth;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> audioChannelLayout() {
+        return (Optional<String>) audioChannelLayout;
     }
 
-    public Optional<? extends Integer> bitrate() {
-        return bitrate;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> bitDepth() {
+        return (Optional<Integer>) bitDepth;
     }
 
-    public Optional<? extends Integer> channels() {
-        return channels;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> bitrate() {
+        return (Optional<Integer>) bitrate;
     }
 
-    public Optional<? extends String> codec() {
-        return codec;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> channels() {
+        return (Optional<Integer>) channels;
     }
 
-    public Optional<? extends String> displayTitle() {
-        return displayTitle;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> codec() {
+        return (Optional<String>) codec;
     }
 
-    public Optional<? extends String> extendedDisplayTitle() {
-        return extendedDisplayTitle;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> displayTitle() {
+        return (Optional<String>) displayTitle;
     }
 
-    public Optional<? extends String> gain() {
-        return gain;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> extendedDisplayTitle() {
+        return (Optional<String>) extendedDisplayTitle;
     }
 
-    public Optional<? extends String> id() {
-        return id;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> gain() {
+        return (Optional<String>) gain;
     }
 
-    public Optional<? extends Integer> index() {
-        return index;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> id() {
+        return (Optional<String>) id;
     }
 
-    public Optional<? extends String> loudness() {
-        return loudness;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> index() {
+        return (Optional<Integer>) index;
     }
 
-    public Optional<? extends String> lra() {
-        return lra;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> loudness() {
+        return (Optional<String>) loudness;
     }
 
-    public Optional<? extends String> peak() {
-        return peak;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> lra() {
+        return (Optional<String>) lra;
     }
 
-    public Optional<? extends Integer> samplingRate() {
-        return samplingRate;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> peak() {
+        return (Optional<String>) peak;
     }
 
-    public Optional<? extends Boolean> selected() {
-        return selected;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> samplingRate() {
+        return (Optional<Integer>) samplingRate;
     }
 
-    public Optional<? extends Integer> streamType() {
-        return streamType;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> selected() {
+        return (Optional<Boolean>) selected;
     }
 
-    public Optional<? extends String> location() {
-        return location;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> streamType() {
+        return (Optional<Integer>) streamType;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> location() {
+        return (Optional<String>) location;
     }
 
     public final static Builder builder() {

@@ -4,15 +4,17 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetTokenRequest {
 
@@ -29,20 +31,27 @@ public class GetTokenRequest {
      * 
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Client-Identifier")
-    private String xPlexClientIdentifier;
+    private Optional<? extends String> xPlexClientIdentifier;
 
+    @JsonCreator
     public GetTokenRequest(
             String pinID,
-            String xPlexClientIdentifier) {
+            Optional<? extends String> xPlexClientIdentifier) {
         Utils.checkNotNull(pinID, "pinID");
         Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
         this.pinID = pinID;
         this.xPlexClientIdentifier = xPlexClientIdentifier;
     }
+    
+    public GetTokenRequest(
+            String pinID) {
+        this(pinID, Optional.empty());
+    }
 
     /**
      * The PinID to retrieve an access token for
      */
+    @JsonIgnore
     public String pinID() {
         return pinID;
     }
@@ -53,8 +62,10 @@ public class GetTokenRequest {
      * (UUID, serial number, or other number unique per device)
      * 
      */
-    public String xPlexClientIdentifier() {
-        return xPlexClientIdentifier;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> xPlexClientIdentifier() {
+        return (Optional<String>) xPlexClientIdentifier;
     }
 
     public final static Builder builder() {
@@ -77,6 +88,18 @@ public class GetTokenRequest {
      * 
      */
     public GetTokenRequest withXPlexClientIdentifier(String xPlexClientIdentifier) {
+        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
+        this.xPlexClientIdentifier = Optional.ofNullable(xPlexClientIdentifier);
+        return this;
+    }
+
+    /**
+     * The unique identifier for the client application
+     * This is used to track the client application and its usage
+     * (UUID, serial number, or other number unique per device)
+     * 
+     */
+    public GetTokenRequest withXPlexClientIdentifier(Optional<? extends String> xPlexClientIdentifier) {
         Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
         this.xPlexClientIdentifier = xPlexClientIdentifier;
         return this;
@@ -114,7 +137,7 @@ public class GetTokenRequest {
  
         private String pinID;
  
-        private String xPlexClientIdentifier;  
+        private Optional<? extends String> xPlexClientIdentifier = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -136,6 +159,18 @@ public class GetTokenRequest {
          * 
          */
         public Builder xPlexClientIdentifier(String xPlexClientIdentifier) {
+            Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
+            this.xPlexClientIdentifier = Optional.ofNullable(xPlexClientIdentifier);
+            return this;
+        }
+
+        /**
+         * The unique identifier for the client application
+         * This is used to track the client application and its usage
+         * (UUID, serial number, or other number unique per device)
+         * 
+         */
+        public Builder xPlexClientIdentifier(Optional<? extends String> xPlexClientIdentifier) {
             Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
             this.xPlexClientIdentifier = xPlexClientIdentifier;
             return this;

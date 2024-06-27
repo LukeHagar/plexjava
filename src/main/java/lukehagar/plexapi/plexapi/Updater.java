@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
@@ -16,7 +17,11 @@ import lukehagar.plexapi.plexapi.models.errors.SDKError;
 import lukehagar.plexapi.plexapi.models.operations.SDKMethodInterfaces.*;
 import lukehagar.plexapi.plexapi.utils.HTTPClient;
 import lukehagar.plexapi.plexapi.utils.HTTPRequest;
+import lukehagar.plexapi.plexapi.utils.Hook.AfterErrorContextImpl;
+import lukehagar.plexapi.plexapi.utils.Hook.AfterSuccessContextImpl;
+import lukehagar.plexapi.plexapi.utils.Hook.BeforeRequestContextImpl;
 import lukehagar.plexapi.plexapi.utils.JSON;
+import lukehagar.plexapi.plexapi.utils.Retries.NonRetryableException;
 import lukehagar.plexapi.plexapi.utils.Utils;
 import org.apache.http.NameValuePair;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -37,6 +42,12 @@ public class Updater implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
+
+    /**
+     * Querying status of updates
+     * Querying status of updates
+     * @return The call builder
+     */
     public lukehagar.plexapi.plexapi.models.operations.GetUpdateStatusRequestBuilder getUpdateStatus() {
         return new lukehagar.plexapi.plexapi.models.operations.GetUpdateStatusRequestBuilder(this);
     }
@@ -44,72 +55,117 @@ public class Updater implements
     /**
      * Querying status of updates
      * Querying status of updates
-     * @return The response from the API call.
-     * @throws Exception if the API call fails.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
      */
     public lukehagar.plexapi.plexapi.models.operations.GetUpdateStatusResponse getUpdateStatusDirect() throws Exception {
-
-        String baseUrl = lukehagar.plexapi.plexapi.utils.Utils.templateUrl(
+        String _baseUrl = Utils.templateUrl(
                 this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
-
-        String url = lukehagar.plexapi.plexapi.utils.Utils.generateURL(
-                baseUrl,
+        String _url = Utils.generateURL(
+                _baseUrl,
                 "/updater/status");
+        
+        HTTPRequest _req = new HTTPRequest(_url, "GET");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                this.sdkConfiguration.userAgent);
 
-        HTTPRequest req = new HTTPRequest();
-        req.setMethod("GET");
-        req.setURL(url);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
 
-        req.addHeader("Accept", "application/json");
-        req.addHeader("user-agent", this.sdkConfiguration.userAgent);
-
-        HTTPClient client = lukehagar.plexapi.plexapi.utils.Utils.configureSecurityClient(
-                this.sdkConfiguration.defaultClient, this.sdkConfiguration.securitySource.getSecurity());
-
-        HttpResponse<InputStream> httpRes = client.send(req);
-
-        String contentType = httpRes
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl("getUpdateStatus", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl("getUpdateStatus", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl("getUpdateStatus", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(new AfterErrorContextImpl("getUpdateStatus", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        lukehagar.plexapi.plexapi.models.operations.GetUpdateStatusResponse.Builder resBuilder = 
+        lukehagar.plexapi.plexapi.models.operations.GetUpdateStatusResponse.Builder _resBuilder = 
             lukehagar.plexapi.plexapi.models.operations.GetUpdateStatusResponse
                 .builder()
-                .contentType(contentType)
-                .statusCode(httpRes.statusCode())
-                .rawResponse(httpRes);
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
 
-        lukehagar.plexapi.plexapi.models.operations.GetUpdateStatusResponse res = resBuilder.build();
-
-        res.withRawResponse(httpRes);
-
-        if (httpRes.statusCode() == 200) {
-            if (lukehagar.plexapi.plexapi.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                lukehagar.plexapi.plexapi.models.operations.GetUpdateStatusResponseBody out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
+        lukehagar.plexapi.plexapi.models.operations.GetUpdateStatusResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                lukehagar.plexapi.plexapi.models.operations.GetUpdateStatusResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<lukehagar.plexapi.plexapi.models.operations.GetUpdateStatusResponseBody>() {});
-                res.withTwoHundredApplicationJsonObject(java.util.Optional.ofNullable(out));
+                _res.withObject(java.util.Optional.ofNullable(_out));
+                return _res;
             } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
-            }
-        } else if (httpRes.statusCode() == 400) {
-        } else if (httpRes.statusCode() == 401) {
-            if (lukehagar.plexapi.plexapi.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                lukehagar.plexapi.plexapi.models.operations.GetUpdateStatusUpdaterResponseBody out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
-                    new TypeReference<lukehagar.plexapi.plexapi.models.operations.GetUpdateStatusUpdaterResponseBody>() {});
-                res.withFourHundredAndOneApplicationJsonObject(java.util.Optional.ofNullable(out));
-            } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
             }
         }
-
-        return res;
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                lukehagar.plexapi.plexapi.models.errors.GetUpdateStatusResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<lukehagar.plexapi.plexapi.models.errors.GetUpdateStatusResponseBody>() {});
+                    _out.withRawResponse(java.util.Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+            }
+        }
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.toByteArrayAndClose(_httpRes.body()));
     }
 
 
+
+    /**
+     * Checking for updates
+     * Checking for updates
+     * @return The call builder
+     */
     public lukehagar.plexapi.plexapi.models.operations.CheckForUpdatesRequestBuilder checkForUpdates() {
         return new lukehagar.plexapi.plexapi.models.operations.CheckForUpdatesRequestBuilder(this);
     }
@@ -117,9 +173,18 @@ public class Updater implements
     /**
      * Checking for updates
      * Checking for updates
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public lukehagar.plexapi.plexapi.models.operations.CheckForUpdatesResponse checkForUpdatesDirect() throws Exception {
+        return checkForUpdates(Optional.empty());
+    }
+    /**
+     * Checking for updates
+     * Checking for updates
      * @param download Indicate that you want to start download any updates found.
-     * @return The response from the API call.
-     * @throws Exception if the API call fails.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
      */
     public lukehagar.plexapi.plexapi.models.operations.CheckForUpdatesResponse checkForUpdates(
             Optional<? extends lukehagar.plexapi.plexapi.models.operations.Download> download) throws Exception {
@@ -129,66 +194,108 @@ public class Updater implements
                 .download(download)
                 .build();
         
-
-        String baseUrl = lukehagar.plexapi.plexapi.utils.Utils.templateUrl(
+        String _baseUrl = Utils.templateUrl(
                 this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
-
-        String url = lukehagar.plexapi.plexapi.utils.Utils.generateURL(
-                baseUrl,
+        String _url = Utils.generateURL(
+                _baseUrl,
                 "/updater/check");
+        
+        HTTPRequest _req = new HTTPRequest(_url, "PUT");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                this.sdkConfiguration.userAgent);
 
-        HTTPRequest req = new HTTPRequest();
-        req.setMethod("PUT");
-        req.setURL(url);
+        _req.addQueryParams(Utils.getQueryParams(
+                lukehagar.plexapi.plexapi.models.operations.CheckForUpdatesRequest.class,
+                request, 
+                this.sdkConfiguration.globals));
 
-        req.addHeader("Accept", "application/json");
-        req.addHeader("user-agent", this.sdkConfiguration.userAgent);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
 
-        java.util.List<NameValuePair> queryParams = lukehagar.plexapi.plexapi.utils.Utils.getQueryParams(
-                lukehagar.plexapi.plexapi.models.operations.CheckForUpdatesRequest.class, request, null);
-        if (queryParams != null) {
-            for (NameValuePair queryParam : queryParams) {
-                req.addQueryParam(queryParam);
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl("checkForUpdates", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl("checkForUpdates", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl("checkForUpdates", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                         _httpRes);
             }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(new AfterErrorContextImpl("checkForUpdates", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-
-        HTTPClient client = lukehagar.plexapi.plexapi.utils.Utils.configureSecurityClient(
-                this.sdkConfiguration.defaultClient, this.sdkConfiguration.securitySource.getSecurity());
-
-        HttpResponse<InputStream> httpRes = client.send(req);
-
-        String contentType = httpRes
+        String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        lukehagar.plexapi.plexapi.models.operations.CheckForUpdatesResponse.Builder resBuilder = 
+        lukehagar.plexapi.plexapi.models.operations.CheckForUpdatesResponse.Builder _resBuilder = 
             lukehagar.plexapi.plexapi.models.operations.CheckForUpdatesResponse
                 .builder()
-                .contentType(contentType)
-                .statusCode(httpRes.statusCode())
-                .rawResponse(httpRes);
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
 
-        lukehagar.plexapi.plexapi.models.operations.CheckForUpdatesResponse res = resBuilder.build();
-
-        res.withRawResponse(httpRes);
-
-        if (httpRes.statusCode() == 200 || httpRes.statusCode() == 400) {
-        } else if (httpRes.statusCode() == 401) {
-            if (lukehagar.plexapi.plexapi.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                lukehagar.plexapi.plexapi.models.operations.CheckForUpdatesResponseBody out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
-                    new TypeReference<lukehagar.plexapi.plexapi.models.operations.CheckForUpdatesResponseBody>() {});
-                res.withObject(java.util.Optional.ofNullable(out));
+        lukehagar.plexapi.plexapi.models.operations.CheckForUpdatesResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            // no content 
+            return _res;
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                lukehagar.plexapi.plexapi.models.errors.CheckForUpdatesResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<lukehagar.plexapi.plexapi.models.errors.CheckForUpdatesResponseBody>() {});
+                    _out.withRawResponse(java.util.Optional.ofNullable(_httpRes));
+                
+                throw _out;
             } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
             }
         }
-
-        return res;
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.toByteArrayAndClose(_httpRes.body()));
     }
 
 
+
+    /**
+     * Apply Updates
+     * Note that these two parameters are effectively mutually exclusive. The `tonight` parameter takes precedence and `skip` will be ignored if `tonight` is also passed
+     * 
+     * @return The call builder
+     */
     public lukehagar.plexapi.plexapi.models.operations.ApplyUpdatesRequestBuilder applyUpdates() {
         return new lukehagar.plexapi.plexapi.models.operations.ApplyUpdatesRequestBuilder(this);
     }
@@ -197,10 +304,20 @@ public class Updater implements
      * Apply Updates
      * Note that these two parameters are effectively mutually exclusive. The `tonight` parameter takes precedence and `skip` will be ignored if `tonight` is also passed
      * 
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public lukehagar.plexapi.plexapi.models.operations.ApplyUpdatesResponse applyUpdatesDirect() throws Exception {
+        return applyUpdates(Optional.empty(), Optional.empty());
+    }
+    /**
+     * Apply Updates
+     * Note that these two parameters are effectively mutually exclusive. The `tonight` parameter takes precedence and `skip` will be ignored if `tonight` is also passed
+     * 
      * @param tonight Indicate that you want the update to run during the next Butler execution. Omitting this or setting it to false indicates that the update should install
      * @param skip Indicate that the latest version should be marked as skipped. The <Release> entry for this version will have the `state` set to `skipped`.
-     * @return The response from the API call.
-     * @throws Exception if the API call fails.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
      */
     public lukehagar.plexapi.plexapi.models.operations.ApplyUpdatesResponse applyUpdates(
             Optional<? extends lukehagar.plexapi.plexapi.models.operations.Tonight> tonight,
@@ -212,63 +329,98 @@ public class Updater implements
                 .skip(skip)
                 .build();
         
-
-        String baseUrl = lukehagar.plexapi.plexapi.utils.Utils.templateUrl(
+        String _baseUrl = Utils.templateUrl(
                 this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
-
-        String url = lukehagar.plexapi.plexapi.utils.Utils.generateURL(
-                baseUrl,
+        String _url = Utils.generateURL(
+                _baseUrl,
                 "/updater/apply");
+        
+        HTTPRequest _req = new HTTPRequest(_url, "PUT");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                this.sdkConfiguration.userAgent);
 
-        HTTPRequest req = new HTTPRequest();
-        req.setMethod("PUT");
-        req.setURL(url);
+        _req.addQueryParams(Utils.getQueryParams(
+                lukehagar.plexapi.plexapi.models.operations.ApplyUpdatesRequest.class,
+                request, 
+                this.sdkConfiguration.globals));
 
-        req.addHeader("Accept", "application/json");
-        req.addHeader("user-agent", this.sdkConfiguration.userAgent);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
 
-        java.util.List<NameValuePair> queryParams = lukehagar.plexapi.plexapi.utils.Utils.getQueryParams(
-                lukehagar.plexapi.plexapi.models.operations.ApplyUpdatesRequest.class, request, null);
-        if (queryParams != null) {
-            for (NameValuePair queryParam : queryParams) {
-                req.addQueryParam(queryParam);
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl("applyUpdates", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "500", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl("applyUpdates", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl("applyUpdates", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                         _httpRes);
             }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(new AfterErrorContextImpl("applyUpdates", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-
-        HTTPClient client = lukehagar.plexapi.plexapi.utils.Utils.configureSecurityClient(
-                this.sdkConfiguration.defaultClient, this.sdkConfiguration.securitySource.getSecurity());
-
-        HttpResponse<InputStream> httpRes = client.send(req);
-
-        String contentType = httpRes
+        String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        lukehagar.plexapi.plexapi.models.operations.ApplyUpdatesResponse.Builder resBuilder = 
+        lukehagar.plexapi.plexapi.models.operations.ApplyUpdatesResponse.Builder _resBuilder = 
             lukehagar.plexapi.plexapi.models.operations.ApplyUpdatesResponse
                 .builder()
-                .contentType(contentType)
-                .statusCode(httpRes.statusCode())
-                .rawResponse(httpRes);
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
 
-        lukehagar.plexapi.plexapi.models.operations.ApplyUpdatesResponse res = resBuilder.build();
-
-        res.withRawResponse(httpRes);
-
-        if (httpRes.statusCode() == 200 || httpRes.statusCode() == 400 || httpRes.statusCode() == 500) {
-        } else if (httpRes.statusCode() == 401) {
-            if (lukehagar.plexapi.plexapi.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                lukehagar.plexapi.plexapi.models.operations.ApplyUpdatesResponseBody out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
-                    new TypeReference<lukehagar.plexapi.plexapi.models.operations.ApplyUpdatesResponseBody>() {});
-                res.withObject(java.util.Optional.ofNullable(out));
+        lukehagar.plexapi.plexapi.models.operations.ApplyUpdatesResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            // no content 
+            return _res;
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "500", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                lukehagar.plexapi.plexapi.models.errors.ApplyUpdatesResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<lukehagar.plexapi.plexapi.models.errors.ApplyUpdatesResponseBody>() {});
+                    _out.withRawResponse(java.util.Optional.ofNullable(_httpRes));
+                
+                throw _out;
             } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
             }
         }
-
-        return res;
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.toByteArrayAndClose(_httpRes.body()));
     }
 
 }

@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
@@ -16,7 +17,11 @@ import lukehagar.plexapi.plexapi.models.errors.SDKError;
 import lukehagar.plexapi.plexapi.models.operations.SDKMethodInterfaces.*;
 import lukehagar.plexapi.plexapi.utils.HTTPClient;
 import lukehagar.plexapi.plexapi.utils.HTTPRequest;
+import lukehagar.plexapi.plexapi.utils.Hook.AfterErrorContextImpl;
+import lukehagar.plexapi.plexapi.utils.Hook.AfterSuccessContextImpl;
+import lukehagar.plexapi.plexapi.utils.Hook.BeforeRequestContextImpl;
 import lukehagar.plexapi.plexapi.utils.JSON;
+import lukehagar.plexapi.plexapi.utils.Retries.NonRetryableException;
 import lukehagar.plexapi.plexapi.utils.Utils;
 import org.apache.http.NameValuePair;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -35,6 +40,12 @@ public class Hubs implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
+
+    /**
+     * Get Global Hubs
+     * Get Global Hubs filtered by the parameters provided.
+     * @return The call builder
+     */
     public lukehagar.plexapi.plexapi.models.operations.GetGlobalHubsRequestBuilder getGlobalHubs() {
         return new lukehagar.plexapi.plexapi.models.operations.GetGlobalHubsRequestBuilder(this);
     }
@@ -42,10 +53,19 @@ public class Hubs implements
     /**
      * Get Global Hubs
      * Get Global Hubs filtered by the parameters provided.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public lukehagar.plexapi.plexapi.models.operations.GetGlobalHubsResponse getGlobalHubsDirect() throws Exception {
+        return getGlobalHubs(Optional.empty(), Optional.empty());
+    }
+    /**
+     * Get Global Hubs
+     * Get Global Hubs filtered by the parameters provided.
      * @param count The number of items to return with each hub.
      * @param onlyTransient Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added).
-     * @return The response from the API call.
-     * @throws Exception if the API call fails.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
      */
     public lukehagar.plexapi.plexapi.models.operations.GetGlobalHubsResponse getGlobalHubs(
             Optional<? extends Double> count,
@@ -57,76 +77,119 @@ public class Hubs implements
                 .onlyTransient(onlyTransient)
                 .build();
         
-
-        String baseUrl = lukehagar.plexapi.plexapi.utils.Utils.templateUrl(
+        String _baseUrl = Utils.templateUrl(
                 this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
-
-        String url = lukehagar.plexapi.plexapi.utils.Utils.generateURL(
-                baseUrl,
+        String _url = Utils.generateURL(
+                _baseUrl,
                 "/hubs");
+        
+        HTTPRequest _req = new HTTPRequest(_url, "GET");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                this.sdkConfiguration.userAgent);
 
-        HTTPRequest req = new HTTPRequest();
-        req.setMethod("GET");
-        req.setURL(url);
+        _req.addQueryParams(Utils.getQueryParams(
+                lukehagar.plexapi.plexapi.models.operations.GetGlobalHubsRequest.class,
+                request, 
+                this.sdkConfiguration.globals));
 
-        req.addHeader("Accept", "application/json");
-        req.addHeader("user-agent", this.sdkConfiguration.userAgent);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
 
-        java.util.List<NameValuePair> queryParams = lukehagar.plexapi.plexapi.utils.Utils.getQueryParams(
-                lukehagar.plexapi.plexapi.models.operations.GetGlobalHubsRequest.class, request, null);
-        if (queryParams != null) {
-            for (NameValuePair queryParam : queryParams) {
-                req.addQueryParam(queryParam);
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl("getGlobalHubs", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl("getGlobalHubs", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl("getGlobalHubs", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                         _httpRes);
             }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(new AfterErrorContextImpl("getGlobalHubs", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-
-        HTTPClient client = lukehagar.plexapi.plexapi.utils.Utils.configureSecurityClient(
-                this.sdkConfiguration.defaultClient, this.sdkConfiguration.securitySource.getSecurity());
-
-        HttpResponse<InputStream> httpRes = client.send(req);
-
-        String contentType = httpRes
+        String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        lukehagar.plexapi.plexapi.models.operations.GetGlobalHubsResponse.Builder resBuilder = 
+        lukehagar.plexapi.plexapi.models.operations.GetGlobalHubsResponse.Builder _resBuilder = 
             lukehagar.plexapi.plexapi.models.operations.GetGlobalHubsResponse
                 .builder()
-                .contentType(contentType)
-                .statusCode(httpRes.statusCode())
-                .rawResponse(httpRes);
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
 
-        lukehagar.plexapi.plexapi.models.operations.GetGlobalHubsResponse res = resBuilder.build();
-
-        res.withRawResponse(httpRes);
-
-        if (httpRes.statusCode() == 200) {
-            if (lukehagar.plexapi.plexapi.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                lukehagar.plexapi.plexapi.models.operations.GetGlobalHubsResponseBody out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
+        lukehagar.plexapi.plexapi.models.operations.GetGlobalHubsResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                lukehagar.plexapi.plexapi.models.operations.GetGlobalHubsResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<lukehagar.plexapi.plexapi.models.operations.GetGlobalHubsResponseBody>() {});
-                res.withTwoHundredApplicationJsonObject(java.util.Optional.ofNullable(out));
+                _res.withObject(java.util.Optional.ofNullable(_out));
+                return _res;
             } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
-            }
-        } else if (httpRes.statusCode() == 400) {
-        } else if (httpRes.statusCode() == 401) {
-            if (lukehagar.plexapi.plexapi.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                lukehagar.plexapi.plexapi.models.operations.GetGlobalHubsHubsResponseBody out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
-                    new TypeReference<lukehagar.plexapi.plexapi.models.operations.GetGlobalHubsHubsResponseBody>() {});
-                res.withFourHundredAndOneApplicationJsonObject(java.util.Optional.ofNullable(out));
-            } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
             }
         }
-
-        return res;
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                lukehagar.plexapi.plexapi.models.errors.GetGlobalHubsResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<lukehagar.plexapi.plexapi.models.errors.GetGlobalHubsResponseBody>() {});
+                    _out.withRawResponse(java.util.Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+            }
+        }
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.toByteArrayAndClose(_httpRes.body()));
     }
 
 
+
+    /**
+     * Get library specific hubs
+     * This endpoint will return a list of library specific hubs
+     * 
+     * @return The call builder
+     */
     public lukehagar.plexapi.plexapi.models.operations.GetLibraryHubsRequestBuilder getLibraryHubs() {
         return new lukehagar.plexapi.plexapi.models.operations.GetLibraryHubsRequestBuilder(this);
     }
@@ -136,10 +199,22 @@ public class Hubs implements
      * This endpoint will return a list of library specific hubs
      * 
      * @param sectionId the Id of the library to query
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public lukehagar.plexapi.plexapi.models.operations.GetLibraryHubsResponse getLibraryHubs(
+            double sectionId) throws Exception {
+        return getLibraryHubs(sectionId, Optional.empty(), Optional.empty());
+    }
+    /**
+     * Get library specific hubs
+     * This endpoint will return a list of library specific hubs
+     * 
+     * @param sectionId the Id of the library to query
      * @param count The number of items to return with each hub.
      * @param onlyTransient Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added).
-     * @return The response from the API call.
-     * @throws Exception if the API call fails.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
      */
     public lukehagar.plexapi.plexapi.models.operations.GetLibraryHubsResponse getLibraryHubs(
             double sectionId,
@@ -153,75 +228,111 @@ public class Hubs implements
                 .onlyTransient(onlyTransient)
                 .build();
         
-
-        String baseUrl = lukehagar.plexapi.plexapi.utils.Utils.templateUrl(
+        String _baseUrl = Utils.templateUrl(
                 this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
-
-        String url = lukehagar.plexapi.plexapi.utils.Utils.generateURL(
+        String _url = Utils.generateURL(
                 lukehagar.plexapi.plexapi.models.operations.GetLibraryHubsRequest.class,
-                baseUrl,
+                _baseUrl,
                 "/hubs/sections/{sectionId}",
-                request, null);
+                request, this.sdkConfiguration.globals);
+        
+        HTTPRequest _req = new HTTPRequest(_url, "GET");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                this.sdkConfiguration.userAgent);
 
-        HTTPRequest req = new HTTPRequest();
-        req.setMethod("GET");
-        req.setURL(url);
+        _req.addQueryParams(Utils.getQueryParams(
+                lukehagar.plexapi.plexapi.models.operations.GetLibraryHubsRequest.class,
+                request, 
+                this.sdkConfiguration.globals));
 
-        req.addHeader("Accept", "application/json");
-        req.addHeader("user-agent", this.sdkConfiguration.userAgent);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
 
-        java.util.List<NameValuePair> queryParams = lukehagar.plexapi.plexapi.utils.Utils.getQueryParams(
-                lukehagar.plexapi.plexapi.models.operations.GetLibraryHubsRequest.class, request, null);
-        if (queryParams != null) {
-            for (NameValuePair queryParam : queryParams) {
-                req.addQueryParam(queryParam);
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl("getLibraryHubs", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl("getLibraryHubs", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl("getLibraryHubs", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                         _httpRes);
             }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(new AfterErrorContextImpl("getLibraryHubs", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-
-        HTTPClient client = lukehagar.plexapi.plexapi.utils.Utils.configureSecurityClient(
-                this.sdkConfiguration.defaultClient, this.sdkConfiguration.securitySource.getSecurity());
-
-        HttpResponse<InputStream> httpRes = client.send(req);
-
-        String contentType = httpRes
+        String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        lukehagar.plexapi.plexapi.models.operations.GetLibraryHubsResponse.Builder resBuilder = 
+        lukehagar.plexapi.plexapi.models.operations.GetLibraryHubsResponse.Builder _resBuilder = 
             lukehagar.plexapi.plexapi.models.operations.GetLibraryHubsResponse
                 .builder()
-                .contentType(contentType)
-                .statusCode(httpRes.statusCode())
-                .rawResponse(httpRes);
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
 
-        lukehagar.plexapi.plexapi.models.operations.GetLibraryHubsResponse res = resBuilder.build();
-
-        res.withRawResponse(httpRes);
-
-        if (httpRes.statusCode() == 200) {
-            if (lukehagar.plexapi.plexapi.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                lukehagar.plexapi.plexapi.models.operations.GetLibraryHubsResponseBody out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
+        lukehagar.plexapi.plexapi.models.operations.GetLibraryHubsResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                lukehagar.plexapi.plexapi.models.operations.GetLibraryHubsResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<lukehagar.plexapi.plexapi.models.operations.GetLibraryHubsResponseBody>() {});
-                res.withTwoHundredApplicationJsonObject(java.util.Optional.ofNullable(out));
+                _res.withObject(java.util.Optional.ofNullable(_out));
+                return _res;
             } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
-            }
-        } else if (httpRes.statusCode() == 400) {
-        } else if (httpRes.statusCode() == 401) {
-            if (lukehagar.plexapi.plexapi.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                lukehagar.plexapi.plexapi.models.operations.GetLibraryHubsHubsResponseBody out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
-                    new TypeReference<lukehagar.plexapi.plexapi.models.operations.GetLibraryHubsHubsResponseBody>() {});
-                res.withFourHundredAndOneApplicationJsonObject(java.util.Optional.ofNullable(out));
-            } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
             }
         }
-
-        return res;
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                lukehagar.plexapi.plexapi.models.errors.GetLibraryHubsResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<lukehagar.plexapi.plexapi.models.errors.GetLibraryHubsResponseBody>() {});
+                    _out.withRawResponse(java.util.Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+            }
+        }
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.toByteArrayAndClose(_httpRes.body()));
     }
 
 }

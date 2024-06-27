@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetMetadataDirector {
 
@@ -39,6 +40,7 @@ public class GetMetadataDirector {
     @JsonProperty("thumb")
     private Optional<? extends String> thumb;
 
+    @JsonCreator
     public GetMetadataDirector(
             @JsonProperty("id") Optional<? extends Integer> id,
             @JsonProperty("filter") Optional<? extends String> filter,
@@ -56,25 +58,39 @@ public class GetMetadataDirector {
         this.tagKey = tagKey;
         this.thumb = thumb;
     }
-
-    public Optional<? extends Integer> id() {
-        return id;
+    
+    public GetMetadataDirector() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> filter() {
-        return filter;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> id() {
+        return (Optional<Integer>) id;
     }
 
-    public Optional<? extends String> tag() {
-        return tag;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> filter() {
+        return (Optional<String>) filter;
     }
 
-    public Optional<? extends String> tagKey() {
-        return tagKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> tag() {
+        return (Optional<String>) tag;
     }
 
-    public Optional<? extends String> thumb() {
-        return thumb;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> tagKey() {
+        return (Optional<String>) tagKey;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> thumb() {
+        return (Optional<String>) thumb;
     }
 
     public final static Builder builder() {

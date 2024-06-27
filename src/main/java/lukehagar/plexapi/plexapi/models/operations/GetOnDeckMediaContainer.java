@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetOnDeckMediaContainer {
 
@@ -47,6 +48,7 @@ public class GetOnDeckMediaContainer {
     @JsonProperty("Metadata")
     private Optional<? extends java.util.List<GetOnDeckMetadata>> metadata;
 
+    @JsonCreator
     public GetOnDeckMediaContainer(
             @JsonProperty("size") Optional<? extends Double> size,
             @JsonProperty("allowSync") Optional<? extends Boolean> allowSync,
@@ -70,33 +72,51 @@ public class GetOnDeckMediaContainer {
         this.mixedParents = mixedParents;
         this.metadata = metadata;
     }
-
-    public Optional<? extends Double> size() {
-        return size;
+    
+    public GetOnDeckMediaContainer() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends Boolean> allowSync() {
-        return allowSync;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> size() {
+        return (Optional<Double>) size;
     }
 
-    public Optional<? extends String> identifier() {
-        return identifier;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> allowSync() {
+        return (Optional<Boolean>) allowSync;
     }
 
-    public Optional<? extends String> mediaTagPrefix() {
-        return mediaTagPrefix;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> identifier() {
+        return (Optional<String>) identifier;
     }
 
-    public Optional<? extends Double> mediaTagVersion() {
-        return mediaTagVersion;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> mediaTagPrefix() {
+        return (Optional<String>) mediaTagPrefix;
     }
 
-    public Optional<? extends Boolean> mixedParents() {
-        return mixedParents;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> mediaTagVersion() {
+        return (Optional<Double>) mediaTagVersion;
     }
 
-    public Optional<? extends java.util.List<GetOnDeckMetadata>> metadata() {
-        return metadata;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> mixedParents() {
+        return (Optional<Boolean>) mixedParents;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetOnDeckMetadata>> metadata() {
+        return (Optional<java.util.List<GetOnDeckMetadata>>) metadata;
     }
 
     public final static Builder builder() {

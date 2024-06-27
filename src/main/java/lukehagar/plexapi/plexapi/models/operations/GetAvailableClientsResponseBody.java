@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 /**
  * GetAvailableClientsResponseBody - Available Clients
  */
@@ -26,14 +27,21 @@ public class GetAvailableClientsResponseBody {
     @JsonProperty("MediaContainer")
     private Optional<? extends GetAvailableClientsMediaContainer> mediaContainer;
 
+    @JsonCreator
     public GetAvailableClientsResponseBody(
             @JsonProperty("MediaContainer") Optional<? extends GetAvailableClientsMediaContainer> mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
         this.mediaContainer = mediaContainer;
     }
+    
+    public GetAvailableClientsResponseBody() {
+        this(Optional.empty());
+    }
 
-    public Optional<? extends GetAvailableClientsMediaContainer> mediaContainer() {
-        return mediaContainer;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetAvailableClientsMediaContainer> mediaContainer() {
+        return (Optional<GetAvailableClientsMediaContainer>) mediaContainer;
     }
 
     public final static Builder builder() {

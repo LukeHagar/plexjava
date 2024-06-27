@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class Provider {
 
@@ -31,6 +32,7 @@ public class Provider {
     @JsonProperty("type")
     private Optional<? extends String> type;
 
+    @JsonCreator
     public Provider(
             @JsonProperty("key") Optional<? extends String> key,
             @JsonProperty("title") Optional<? extends String> title,
@@ -42,17 +44,27 @@ public class Provider {
         this.title = title;
         this.type = type;
     }
-
-    public Optional<? extends String> key() {
-        return key;
+    
+    public Provider() {
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
     }
 
-    public Optional<? extends String> type() {
-        return type;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> type() {
+        return (Optional<String>) type;
     }
 
     public final static Builder builder() {

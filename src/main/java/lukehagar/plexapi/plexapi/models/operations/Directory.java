@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class Directory {
 
@@ -31,6 +32,7 @@ public class Directory {
     @JsonProperty("title")
     private Optional<? extends String> title;
 
+    @JsonCreator
     public Directory(
             @JsonProperty("count") Optional<? extends Double> count,
             @JsonProperty("key") Optional<? extends String> key,
@@ -42,17 +44,27 @@ public class Directory {
         this.key = key;
         this.title = title;
     }
-
-    public Optional<? extends Double> count() {
-        return count;
+    
+    public Directory() {
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> key() {
-        return key;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> count() {
+        return (Optional<Double>) count;
     }
 
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
     }
 
     public final static Builder builder() {

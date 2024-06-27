@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -13,7 +15,6 @@ import java.math.BigInteger;
 import java.net.http.HttpResponse;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetTokenResponse implements lukehagar.plexapi.plexapi.utils.Response {
 
@@ -33,10 +34,11 @@ public class GetTokenResponse implements lukehagar.plexapi.plexapi.utils.Respons
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * X-Plex-Client-Identifier is missing
+     * Access Token
      */
     private Optional<? extends GetTokenResponseBody> object;
 
+    @JsonCreator
     public GetTokenResponse(
             String contentType,
             int statusCode,
@@ -51,10 +53,18 @@ public class GetTokenResponse implements lukehagar.plexapi.plexapi.utils.Respons
         this.rawResponse = rawResponse;
         this.object = object;
     }
+    
+    public GetTokenResponse(
+            String contentType,
+            int statusCode,
+            HttpResponse<InputStream> rawResponse) {
+        this(contentType, statusCode, rawResponse, Optional.empty());
+    }
 
     /**
      * HTTP response content type for this operation
      */
+    @JsonIgnore
     public String contentType() {
         return contentType;
     }
@@ -62,6 +72,7 @@ public class GetTokenResponse implements lukehagar.plexapi.plexapi.utils.Respons
     /**
      * HTTP response status code for this operation
      */
+    @JsonIgnore
     public int statusCode() {
         return statusCode;
     }
@@ -69,15 +80,18 @@ public class GetTokenResponse implements lukehagar.plexapi.plexapi.utils.Respons
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
+    @JsonIgnore
     public HttpResponse<InputStream> rawResponse() {
         return rawResponse;
     }
 
     /**
-     * X-Plex-Client-Identifier is missing
+     * Access Token
      */
-    public Optional<? extends GetTokenResponseBody> object() {
-        return object;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetTokenResponseBody> object() {
+        return (Optional<GetTokenResponseBody>) object;
     }
 
     public final static Builder builder() {
@@ -112,7 +126,7 @@ public class GetTokenResponse implements lukehagar.plexapi.plexapi.utils.Respons
     }
 
     /**
-     * X-Plex-Client-Identifier is missing
+     * Access Token
      */
     public GetTokenResponse withObject(GetTokenResponseBody object) {
         Utils.checkNotNull(object, "object");
@@ -121,7 +135,7 @@ public class GetTokenResponse implements lukehagar.plexapi.plexapi.utils.Respons
     }
 
     /**
-     * X-Plex-Client-Identifier is missing
+     * Access Token
      */
     public GetTokenResponse withObject(Optional<? extends GetTokenResponseBody> object) {
         Utils.checkNotNull(object, "object");
@@ -205,7 +219,7 @@ public class GetTokenResponse implements lukehagar.plexapi.plexapi.utils.Respons
         }
 
         /**
-         * X-Plex-Client-Identifier is missing
+         * Access Token
          */
         public Builder object(GetTokenResponseBody object) {
             Utils.checkNotNull(object, "object");
@@ -214,7 +228,7 @@ public class GetTokenResponse implements lukehagar.plexapi.plexapi.utils.Respons
         }
 
         /**
-         * X-Plex-Client-Identifier is missing
+         * Access Token
          */
         public Builder object(Optional<? extends GetTokenResponseBody> object) {
             Utils.checkNotNull(object, "object");

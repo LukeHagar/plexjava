@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class ButlerTask {
 
@@ -43,6 +44,7 @@ public class ButlerTask {
     @JsonProperty("description")
     private Optional<? extends String> description;
 
+    @JsonCreator
     public ButlerTask(
             @JsonProperty("name") Optional<? extends String> name,
             @JsonProperty("interval") Optional<? extends Double> interval,
@@ -63,29 +65,45 @@ public class ButlerTask {
         this.title = title;
         this.description = description;
     }
-
-    public Optional<? extends String> name() {
-        return name;
+    
+    public ButlerTask() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends Double> interval() {
-        return interval;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> name() {
+        return (Optional<String>) name;
     }
 
-    public Optional<? extends Boolean> scheduleRandomized() {
-        return scheduleRandomized;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> interval() {
+        return (Optional<Double>) interval;
     }
 
-    public Optional<? extends Boolean> enabled() {
-        return enabled;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> scheduleRandomized() {
+        return (Optional<Boolean>) scheduleRandomized;
     }
 
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> enabled() {
+        return (Optional<Boolean>) enabled;
     }
 
-    public Optional<? extends String> description() {
-        return description;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> description() {
+        return (Optional<String>) description;
     }
 
     public final static Builder builder() {

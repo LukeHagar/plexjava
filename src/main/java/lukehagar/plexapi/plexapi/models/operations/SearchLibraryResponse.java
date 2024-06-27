@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -13,7 +15,6 @@ import java.math.BigInteger;
 import java.net.http.HttpResponse;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class SearchLibraryResponse implements lukehagar.plexapi.plexapi.utils.Response {
 
@@ -37,6 +38,7 @@ public class SearchLibraryResponse implements lukehagar.plexapi.plexapi.utils.Re
      */
     private Optional<? extends SearchLibraryResponseBody> object;
 
+    @JsonCreator
     public SearchLibraryResponse(
             String contentType,
             int statusCode,
@@ -51,10 +53,18 @@ public class SearchLibraryResponse implements lukehagar.plexapi.plexapi.utils.Re
         this.rawResponse = rawResponse;
         this.object = object;
     }
+    
+    public SearchLibraryResponse(
+            String contentType,
+            int statusCode,
+            HttpResponse<InputStream> rawResponse) {
+        this(contentType, statusCode, rawResponse, Optional.empty());
+    }
 
     /**
      * HTTP response content type for this operation
      */
+    @JsonIgnore
     public String contentType() {
         return contentType;
     }
@@ -62,6 +72,7 @@ public class SearchLibraryResponse implements lukehagar.plexapi.plexapi.utils.Re
     /**
      * HTTP response status code for this operation
      */
+    @JsonIgnore
     public int statusCode() {
         return statusCode;
     }
@@ -69,6 +80,7 @@ public class SearchLibraryResponse implements lukehagar.plexapi.plexapi.utils.Re
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
+    @JsonIgnore
     public HttpResponse<InputStream> rawResponse() {
         return rawResponse;
     }
@@ -76,8 +88,10 @@ public class SearchLibraryResponse implements lukehagar.plexapi.plexapi.utils.Re
     /**
      * The contents of the library by section and type
      */
-    public Optional<? extends SearchLibraryResponseBody> object() {
-        return object;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<SearchLibraryResponseBody> object() {
+        return (Optional<SearchLibraryResponseBody>) object;
     }
 
     public final static Builder builder() {

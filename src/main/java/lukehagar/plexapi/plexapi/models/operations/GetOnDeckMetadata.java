@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,7 +20,6 @@ import java.math.BigInteger;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetOnDeckMetadata {
 
@@ -166,6 +167,7 @@ public class GetOnDeckMetadata {
     @JsonProperty("Guid")
     private Optional<? extends java.util.List<GetOnDeckGuids>> guids;
 
+    @JsonCreator
     public GetOnDeckMetadata(
             @JsonProperty("allowSync") Optional<? extends Boolean> allowSync,
             @JsonProperty("librarySectionID") Optional<? extends Double> librarySectionID,
@@ -276,149 +278,225 @@ public class GetOnDeckMetadata {
         this.media = media;
         this.guids = guids;
     }
-
-    public Optional<? extends Boolean> allowSync() {
-        return allowSync;
+    
+    public GetOnDeckMetadata() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends Double> librarySectionID() {
-        return librarySectionID;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> allowSync() {
+        return (Optional<Boolean>) allowSync;
     }
 
-    public Optional<? extends String> librarySectionTitle() {
-        return librarySectionTitle;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> librarySectionID() {
+        return (Optional<Double>) librarySectionID;
     }
 
-    public Optional<? extends String> librarySectionUUID() {
-        return librarySectionUUID;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> librarySectionTitle() {
+        return (Optional<String>) librarySectionTitle;
     }
 
-    public Optional<? extends Double> ratingKey() {
-        return ratingKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> librarySectionUUID() {
+        return (Optional<String>) librarySectionUUID;
     }
 
-    public Optional<? extends String> key() {
-        return key;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> ratingKey() {
+        return (Optional<Double>) ratingKey;
     }
 
-    public Optional<? extends Double> parentRatingKey() {
-        return parentRatingKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
     }
 
-    public Optional<? extends Double> grandparentRatingKey() {
-        return grandparentRatingKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> parentRatingKey() {
+        return (Optional<Double>) parentRatingKey;
     }
 
-    public Optional<? extends String> guid() {
-        return guid;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> grandparentRatingKey() {
+        return (Optional<Double>) grandparentRatingKey;
     }
 
-    public Optional<? extends String> parentGuid() {
-        return parentGuid;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> guid() {
+        return (Optional<String>) guid;
     }
 
-    public Optional<? extends String> grandparentGuid() {
-        return grandparentGuid;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> parentGuid() {
+        return (Optional<String>) parentGuid;
     }
 
-    public Optional<? extends String> type() {
-        return type;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> grandparentGuid() {
+        return (Optional<String>) grandparentGuid;
     }
 
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> type() {
+        return (Optional<String>) type;
     }
 
-    public Optional<? extends String> grandparentKey() {
-        return grandparentKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
     }
 
-    public Optional<? extends String> parentKey() {
-        return parentKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> grandparentKey() {
+        return (Optional<String>) grandparentKey;
     }
 
-    public Optional<? extends String> librarySectionKey() {
-        return librarySectionKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> parentKey() {
+        return (Optional<String>) parentKey;
     }
 
-    public Optional<? extends String> grandparentTitle() {
-        return grandparentTitle;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> librarySectionKey() {
+        return (Optional<String>) librarySectionKey;
     }
 
-    public Optional<? extends String> parentTitle() {
-        return parentTitle;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> grandparentTitle() {
+        return (Optional<String>) grandparentTitle;
     }
 
-    public Optional<? extends String> contentRating() {
-        return contentRating;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> parentTitle() {
+        return (Optional<String>) parentTitle;
     }
 
-    public Optional<? extends String> summary() {
-        return summary;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> contentRating() {
+        return (Optional<String>) contentRating;
     }
 
-    public Optional<? extends Double> index() {
-        return index;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> summary() {
+        return (Optional<String>) summary;
     }
 
-    public Optional<? extends Double> parentIndex() {
-        return parentIndex;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> index() {
+        return (Optional<Double>) index;
     }
 
-    public Optional<? extends Double> lastViewedAt() {
-        return lastViewedAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> parentIndex() {
+        return (Optional<Double>) parentIndex;
     }
 
-    public Optional<? extends Double> year() {
-        return year;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> lastViewedAt() {
+        return (Optional<Double>) lastViewedAt;
     }
 
-    public Optional<? extends String> thumb() {
-        return thumb;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> year() {
+        return (Optional<Double>) year;
     }
 
-    public Optional<? extends String> art() {
-        return art;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> thumb() {
+        return (Optional<String>) thumb;
     }
 
-    public Optional<? extends String> parentThumb() {
-        return parentThumb;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> art() {
+        return (Optional<String>) art;
     }
 
-    public Optional<? extends String> grandparentThumb() {
-        return grandparentThumb;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> parentThumb() {
+        return (Optional<String>) parentThumb;
     }
 
-    public Optional<? extends String> grandparentArt() {
-        return grandparentArt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> grandparentThumb() {
+        return (Optional<String>) grandparentThumb;
     }
 
-    public Optional<? extends String> grandparentTheme() {
-        return grandparentTheme;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> grandparentArt() {
+        return (Optional<String>) grandparentArt;
     }
 
-    public Optional<? extends Double> duration() {
-        return duration;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> grandparentTheme() {
+        return (Optional<String>) grandparentTheme;
     }
 
-    public Optional<? extends OffsetDateTime> originallyAvailableAt() {
-        return originallyAvailableAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> duration() {
+        return (Optional<Double>) duration;
     }
 
-    public Optional<? extends Double> addedAt() {
-        return addedAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<OffsetDateTime> originallyAvailableAt() {
+        return (Optional<OffsetDateTime>) originallyAvailableAt;
     }
 
-    public Optional<? extends Double> updatedAt() {
-        return updatedAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> addedAt() {
+        return (Optional<Double>) addedAt;
     }
 
-    public Optional<? extends java.util.List<GetOnDeckMedia>> media() {
-        return media;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> updatedAt() {
+        return (Optional<Double>) updatedAt;
     }
 
-    public Optional<? extends java.util.List<GetOnDeckGuids>> guids() {
-        return guids;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetOnDeckMedia>> media() {
+        return (Optional<java.util.List<GetOnDeckMedia>>) media;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetOnDeckGuids>> guids() {
+        return (Optional<java.util.List<GetOnDeckGuids>>) guids;
     }
 
     public final static Builder builder() {

@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class MediaContainer {
 
@@ -223,6 +224,7 @@ public class MediaContainer {
     @JsonProperty("Directory")
     private Optional<? extends java.util.List<Directory>> directory;
 
+    @JsonCreator
     public MediaContainer(
             @JsonProperty("size") Optional<? extends Double> size,
             @JsonProperty("allowCameraUpload") Optional<? extends Boolean> allowCameraUpload,
@@ -378,209 +380,315 @@ public class MediaContainer {
         this.voiceSearch = voiceSearch;
         this.directory = directory;
     }
-
-    public Optional<? extends Double> size() {
-        return size;
+    
+    public MediaContainer() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends Boolean> allowCameraUpload() {
-        return allowCameraUpload;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> size() {
+        return (Optional<Double>) size;
     }
 
-    public Optional<? extends Boolean> allowChannelAccess() {
-        return allowChannelAccess;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> allowCameraUpload() {
+        return (Optional<Boolean>) allowCameraUpload;
     }
 
-    public Optional<? extends Boolean> allowMediaDeletion() {
-        return allowMediaDeletion;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> allowChannelAccess() {
+        return (Optional<Boolean>) allowChannelAccess;
     }
 
-    public Optional<? extends Boolean> allowSharing() {
-        return allowSharing;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> allowMediaDeletion() {
+        return (Optional<Boolean>) allowMediaDeletion;
     }
 
-    public Optional<? extends Boolean> allowSync() {
-        return allowSync;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> allowSharing() {
+        return (Optional<Boolean>) allowSharing;
     }
 
-    public Optional<? extends Boolean> allowTuners() {
-        return allowTuners;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> allowSync() {
+        return (Optional<Boolean>) allowSync;
     }
 
-    public Optional<? extends Boolean> backgroundProcessing() {
-        return backgroundProcessing;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> allowTuners() {
+        return (Optional<Boolean>) allowTuners;
     }
 
-    public Optional<? extends Boolean> certificate() {
-        return certificate;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> backgroundProcessing() {
+        return (Optional<Boolean>) backgroundProcessing;
     }
 
-    public Optional<? extends Boolean> companionProxy() {
-        return companionProxy;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> certificate() {
+        return (Optional<Boolean>) certificate;
     }
 
-    public Optional<? extends String> countryCode() {
-        return countryCode;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> companionProxy() {
+        return (Optional<Boolean>) companionProxy;
     }
 
-    public Optional<? extends String> diagnostics() {
-        return diagnostics;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> countryCode() {
+        return (Optional<String>) countryCode;
     }
 
-    public Optional<? extends Boolean> eventStream() {
-        return eventStream;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> diagnostics() {
+        return (Optional<String>) diagnostics;
     }
 
-    public Optional<? extends String> friendlyName() {
-        return friendlyName;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> eventStream() {
+        return (Optional<Boolean>) eventStream;
     }
 
-    public Optional<? extends Boolean> hubSearch() {
-        return hubSearch;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> friendlyName() {
+        return (Optional<String>) friendlyName;
     }
 
-    public Optional<? extends Boolean> itemClusters() {
-        return itemClusters;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> hubSearch() {
+        return (Optional<Boolean>) hubSearch;
     }
 
-    public Optional<? extends Double> livetv() {
-        return livetv;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> itemClusters() {
+        return (Optional<Boolean>) itemClusters;
     }
 
-    public Optional<? extends String> machineIdentifier() {
-        return machineIdentifier;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> livetv() {
+        return (Optional<Double>) livetv;
     }
 
-    public Optional<? extends Boolean> mediaProviders() {
-        return mediaProviders;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> machineIdentifier() {
+        return (Optional<String>) machineIdentifier;
     }
 
-    public Optional<? extends Boolean> multiuser() {
-        return multiuser;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> mediaProviders() {
+        return (Optional<Boolean>) mediaProviders;
     }
 
-    public Optional<? extends Double> musicAnalysis() {
-        return musicAnalysis;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> multiuser() {
+        return (Optional<Boolean>) multiuser;
     }
 
-    public Optional<? extends Boolean> myPlex() {
-        return myPlex;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> musicAnalysis() {
+        return (Optional<Double>) musicAnalysis;
     }
 
-    public Optional<? extends String> myPlexMappingState() {
-        return myPlexMappingState;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> myPlex() {
+        return (Optional<Boolean>) myPlex;
     }
 
-    public Optional<? extends String> myPlexSigninState() {
-        return myPlexSigninState;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> myPlexMappingState() {
+        return (Optional<String>) myPlexMappingState;
     }
 
-    public Optional<? extends Boolean> myPlexSubscription() {
-        return myPlexSubscription;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> myPlexSigninState() {
+        return (Optional<String>) myPlexSigninState;
     }
 
-    public Optional<? extends String> myPlexUsername() {
-        return myPlexUsername;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> myPlexSubscription() {
+        return (Optional<Boolean>) myPlexSubscription;
     }
 
-    public Optional<? extends Double> offlineTranscode() {
-        return offlineTranscode;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> myPlexUsername() {
+        return (Optional<String>) myPlexUsername;
     }
 
-    public Optional<? extends String> ownerFeatures() {
-        return ownerFeatures;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> offlineTranscode() {
+        return (Optional<Double>) offlineTranscode;
     }
 
-    public Optional<? extends Boolean> photoAutoTag() {
-        return photoAutoTag;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> ownerFeatures() {
+        return (Optional<String>) ownerFeatures;
     }
 
-    public Optional<? extends String> platform() {
-        return platform;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> photoAutoTag() {
+        return (Optional<Boolean>) photoAutoTag;
     }
 
-    public Optional<? extends String> platformVersion() {
-        return platformVersion;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> platform() {
+        return (Optional<String>) platform;
     }
 
-    public Optional<? extends Boolean> pluginHost() {
-        return pluginHost;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> platformVersion() {
+        return (Optional<String>) platformVersion;
     }
 
-    public Optional<? extends Boolean> pushNotifications() {
-        return pushNotifications;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> pluginHost() {
+        return (Optional<Boolean>) pluginHost;
     }
 
-    public Optional<? extends Boolean> readOnlyLibraries() {
-        return readOnlyLibraries;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> pushNotifications() {
+        return (Optional<Boolean>) pushNotifications;
     }
 
-    public Optional<? extends Double> streamingBrainABRVersion() {
-        return streamingBrainABRVersion;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> readOnlyLibraries() {
+        return (Optional<Boolean>) readOnlyLibraries;
     }
 
-    public Optional<? extends Double> streamingBrainVersion() {
-        return streamingBrainVersion;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> streamingBrainABRVersion() {
+        return (Optional<Double>) streamingBrainABRVersion;
     }
 
-    public Optional<? extends Boolean> sync() {
-        return sync;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> streamingBrainVersion() {
+        return (Optional<Double>) streamingBrainVersion;
     }
 
-    public Optional<? extends Double> transcoderActiveVideoSessions() {
-        return transcoderActiveVideoSessions;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> sync() {
+        return (Optional<Boolean>) sync;
     }
 
-    public Optional<? extends Boolean> transcoderAudio() {
-        return transcoderAudio;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> transcoderActiveVideoSessions() {
+        return (Optional<Double>) transcoderActiveVideoSessions;
     }
 
-    public Optional<? extends Boolean> transcoderLyrics() {
-        return transcoderLyrics;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> transcoderAudio() {
+        return (Optional<Boolean>) transcoderAudio;
     }
 
-    public Optional<? extends Boolean> transcoderPhoto() {
-        return transcoderPhoto;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> transcoderLyrics() {
+        return (Optional<Boolean>) transcoderLyrics;
     }
 
-    public Optional<? extends Boolean> transcoderSubtitles() {
-        return transcoderSubtitles;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> transcoderPhoto() {
+        return (Optional<Boolean>) transcoderPhoto;
     }
 
-    public Optional<? extends Boolean> transcoderVideo() {
-        return transcoderVideo;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> transcoderSubtitles() {
+        return (Optional<Boolean>) transcoderSubtitles;
     }
 
-    public Optional<? extends String> transcoderVideoBitrates() {
-        return transcoderVideoBitrates;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> transcoderVideo() {
+        return (Optional<Boolean>) transcoderVideo;
     }
 
-    public Optional<? extends String> transcoderVideoQualities() {
-        return transcoderVideoQualities;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> transcoderVideoBitrates() {
+        return (Optional<String>) transcoderVideoBitrates;
     }
 
-    public Optional<? extends String> transcoderVideoResolutions() {
-        return transcoderVideoResolutions;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> transcoderVideoQualities() {
+        return (Optional<String>) transcoderVideoQualities;
     }
 
-    public Optional<? extends Double> updatedAt() {
-        return updatedAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> transcoderVideoResolutions() {
+        return (Optional<String>) transcoderVideoResolutions;
     }
 
-    public Optional<? extends Boolean> updater() {
-        return updater;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> updatedAt() {
+        return (Optional<Double>) updatedAt;
     }
 
-    public Optional<? extends String> version() {
-        return version;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> updater() {
+        return (Optional<Boolean>) updater;
     }
 
-    public Optional<? extends Boolean> voiceSearch() {
-        return voiceSearch;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> version() {
+        return (Optional<String>) version;
     }
 
-    public Optional<? extends java.util.List<Directory>> directory() {
-        return directory;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> voiceSearch() {
+        return (Optional<Boolean>) voiceSearch;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<Directory>> directory() {
+        return (Optional<java.util.List<Directory>>) directory;
     }
 
     public final static Builder builder() {

@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -13,7 +15,6 @@ import java.math.BigInteger;
 import java.net.http.HttpResponse;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetPinResponse implements lukehagar.plexapi.plexapi.utils.Response {
 
@@ -35,34 +36,35 @@ public class GetPinResponse implements lukehagar.plexapi.plexapi.utils.Response 
     /**
      * The Pin
      */
-    private Optional<? extends GetPinResponseBody> twoHundredApplicationJsonObject;
+    private Optional<? extends GetPinResponseBody> object;
 
-    /**
-     * X-Plex-Client-Identifier is missing
-     */
-    private Optional<? extends GetPinPlexResponseBody> fourHundredApplicationJsonObject;
-
+    @JsonCreator
     public GetPinResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends GetPinResponseBody> twoHundredApplicationJsonObject,
-            Optional<? extends GetPinPlexResponseBody> fourHundredApplicationJsonObject) {
+            Optional<? extends GetPinResponseBody> object) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(twoHundredApplicationJsonObject, "twoHundredApplicationJsonObject");
-        Utils.checkNotNull(fourHundredApplicationJsonObject, "fourHundredApplicationJsonObject");
+        Utils.checkNotNull(object, "object");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.twoHundredApplicationJsonObject = twoHundredApplicationJsonObject;
-        this.fourHundredApplicationJsonObject = fourHundredApplicationJsonObject;
+        this.object = object;
+    }
+    
+    public GetPinResponse(
+            String contentType,
+            int statusCode,
+            HttpResponse<InputStream> rawResponse) {
+        this(contentType, statusCode, rawResponse, Optional.empty());
     }
 
     /**
      * HTTP response content type for this operation
      */
+    @JsonIgnore
     public String contentType() {
         return contentType;
     }
@@ -70,6 +72,7 @@ public class GetPinResponse implements lukehagar.plexapi.plexapi.utils.Response 
     /**
      * HTTP response status code for this operation
      */
+    @JsonIgnore
     public int statusCode() {
         return statusCode;
     }
@@ -77,6 +80,7 @@ public class GetPinResponse implements lukehagar.plexapi.plexapi.utils.Response 
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
+    @JsonIgnore
     public HttpResponse<InputStream> rawResponse() {
         return rawResponse;
     }
@@ -84,15 +88,10 @@ public class GetPinResponse implements lukehagar.plexapi.plexapi.utils.Response 
     /**
      * The Pin
      */
-    public Optional<? extends GetPinResponseBody> twoHundredApplicationJsonObject() {
-        return twoHundredApplicationJsonObject;
-    }
-
-    /**
-     * X-Plex-Client-Identifier is missing
-     */
-    public Optional<? extends GetPinPlexResponseBody> fourHundredApplicationJsonObject() {
-        return fourHundredApplicationJsonObject;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetPinResponseBody> object() {
+        return (Optional<GetPinResponseBody>) object;
     }
 
     public final static Builder builder() {
@@ -129,36 +128,18 @@ public class GetPinResponse implements lukehagar.plexapi.plexapi.utils.Response 
     /**
      * The Pin
      */
-    public GetPinResponse withTwoHundredApplicationJsonObject(GetPinResponseBody twoHundredApplicationJsonObject) {
-        Utils.checkNotNull(twoHundredApplicationJsonObject, "twoHundredApplicationJsonObject");
-        this.twoHundredApplicationJsonObject = Optional.ofNullable(twoHundredApplicationJsonObject);
+    public GetPinResponse withObject(GetPinResponseBody object) {
+        Utils.checkNotNull(object, "object");
+        this.object = Optional.ofNullable(object);
         return this;
     }
 
     /**
      * The Pin
      */
-    public GetPinResponse withTwoHundredApplicationJsonObject(Optional<? extends GetPinResponseBody> twoHundredApplicationJsonObject) {
-        Utils.checkNotNull(twoHundredApplicationJsonObject, "twoHundredApplicationJsonObject");
-        this.twoHundredApplicationJsonObject = twoHundredApplicationJsonObject;
-        return this;
-    }
-
-    /**
-     * X-Plex-Client-Identifier is missing
-     */
-    public GetPinResponse withFourHundredApplicationJsonObject(GetPinPlexResponseBody fourHundredApplicationJsonObject) {
-        Utils.checkNotNull(fourHundredApplicationJsonObject, "fourHundredApplicationJsonObject");
-        this.fourHundredApplicationJsonObject = Optional.ofNullable(fourHundredApplicationJsonObject);
-        return this;
-    }
-
-    /**
-     * X-Plex-Client-Identifier is missing
-     */
-    public GetPinResponse withFourHundredApplicationJsonObject(Optional<? extends GetPinPlexResponseBody> fourHundredApplicationJsonObject) {
-        Utils.checkNotNull(fourHundredApplicationJsonObject, "fourHundredApplicationJsonObject");
-        this.fourHundredApplicationJsonObject = fourHundredApplicationJsonObject;
+    public GetPinResponse withObject(Optional<? extends GetPinResponseBody> object) {
+        Utils.checkNotNull(object, "object");
+        this.object = object;
         return this;
     }
     
@@ -175,8 +156,7 @@ public class GetPinResponse implements lukehagar.plexapi.plexapi.utils.Response 
             java.util.Objects.deepEquals(this.contentType, other.contentType) &&
             java.util.Objects.deepEquals(this.statusCode, other.statusCode) &&
             java.util.Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            java.util.Objects.deepEquals(this.twoHundredApplicationJsonObject, other.twoHundredApplicationJsonObject) &&
-            java.util.Objects.deepEquals(this.fourHundredApplicationJsonObject, other.fourHundredApplicationJsonObject);
+            java.util.Objects.deepEquals(this.object, other.object);
     }
     
     @Override
@@ -185,8 +165,7 @@ public class GetPinResponse implements lukehagar.plexapi.plexapi.utils.Response 
             contentType,
             statusCode,
             rawResponse,
-            twoHundredApplicationJsonObject,
-            fourHundredApplicationJsonObject);
+            object);
     }
     
     @Override
@@ -195,8 +174,7 @@ public class GetPinResponse implements lukehagar.plexapi.plexapi.utils.Response 
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "twoHundredApplicationJsonObject", twoHundredApplicationJsonObject,
-                "fourHundredApplicationJsonObject", fourHundredApplicationJsonObject);
+                "object", object);
     }
     
     public final static class Builder {
@@ -207,9 +185,7 @@ public class GetPinResponse implements lukehagar.plexapi.plexapi.utils.Response 
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends GetPinResponseBody> twoHundredApplicationJsonObject = Optional.empty();
- 
-        private Optional<? extends GetPinPlexResponseBody> fourHundredApplicationJsonObject = Optional.empty();  
+        private Optional<? extends GetPinResponseBody> object = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -245,36 +221,18 @@ public class GetPinResponse implements lukehagar.plexapi.plexapi.utils.Response 
         /**
          * The Pin
          */
-        public Builder twoHundredApplicationJsonObject(GetPinResponseBody twoHundredApplicationJsonObject) {
-            Utils.checkNotNull(twoHundredApplicationJsonObject, "twoHundredApplicationJsonObject");
-            this.twoHundredApplicationJsonObject = Optional.ofNullable(twoHundredApplicationJsonObject);
+        public Builder object(GetPinResponseBody object) {
+            Utils.checkNotNull(object, "object");
+            this.object = Optional.ofNullable(object);
             return this;
         }
 
         /**
          * The Pin
          */
-        public Builder twoHundredApplicationJsonObject(Optional<? extends GetPinResponseBody> twoHundredApplicationJsonObject) {
-            Utils.checkNotNull(twoHundredApplicationJsonObject, "twoHundredApplicationJsonObject");
-            this.twoHundredApplicationJsonObject = twoHundredApplicationJsonObject;
-            return this;
-        }
-
-        /**
-         * X-Plex-Client-Identifier is missing
-         */
-        public Builder fourHundredApplicationJsonObject(GetPinPlexResponseBody fourHundredApplicationJsonObject) {
-            Utils.checkNotNull(fourHundredApplicationJsonObject, "fourHundredApplicationJsonObject");
-            this.fourHundredApplicationJsonObject = Optional.ofNullable(fourHundredApplicationJsonObject);
-            return this;
-        }
-
-        /**
-         * X-Plex-Client-Identifier is missing
-         */
-        public Builder fourHundredApplicationJsonObject(Optional<? extends GetPinPlexResponseBody> fourHundredApplicationJsonObject) {
-            Utils.checkNotNull(fourHundredApplicationJsonObject, "fourHundredApplicationJsonObject");
-            this.fourHundredApplicationJsonObject = fourHundredApplicationJsonObject;
+        public Builder object(Optional<? extends GetPinResponseBody> object) {
+            Utils.checkNotNull(object, "object");
+            this.object = object;
             return this;
         }
         
@@ -283,8 +241,7 @@ public class GetPinResponse implements lukehagar.plexapi.plexapi.utils.Response 
                 contentType,
                 statusCode,
                 rawResponse,
-                twoHundredApplicationJsonObject,
-                fourHundredApplicationJsonObject);
+                object);
         }
     }
 }

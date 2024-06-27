@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class Stream {
 
@@ -147,6 +148,7 @@ public class Stream {
     @JsonProperty("samplingRate")
     private Optional<? extends Integer> samplingRate;
 
+    @JsonCreator
     public Stream(
             @JsonProperty("id") Optional<? extends Integer> id,
             @JsonProperty("streamType") Optional<? extends Integer> streamType,
@@ -245,133 +247,201 @@ public class Stream {
         this.languageCode = languageCode;
         this.samplingRate = samplingRate;
     }
-
-    public Optional<? extends Integer> id() {
-        return id;
+    
+    public Stream() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends Integer> streamType() {
-        return streamType;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> id() {
+        return (Optional<Integer>) id;
     }
 
-    public Optional<? extends Boolean> default_() {
-        return default_;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> streamType() {
+        return (Optional<Integer>) streamType;
     }
 
-    public Optional<? extends String> codec() {
-        return codec;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> default_() {
+        return (Optional<Boolean>) default_;
     }
 
-    public Optional<? extends Integer> index() {
-        return index;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> codec() {
+        return (Optional<String>) codec;
     }
 
-    public Optional<? extends Integer> bitrate() {
-        return bitrate;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> index() {
+        return (Optional<Integer>) index;
     }
 
-    public Optional<? extends Integer> bitDepth() {
-        return bitDepth;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> bitrate() {
+        return (Optional<Integer>) bitrate;
     }
 
-    public Optional<? extends String> chromaLocation() {
-        return chromaLocation;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> bitDepth() {
+        return (Optional<Integer>) bitDepth;
     }
 
-    public Optional<? extends String> chromaSubsampling() {
-        return chromaSubsampling;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> chromaLocation() {
+        return (Optional<String>) chromaLocation;
     }
 
-    public Optional<? extends Integer> codedHeight() {
-        return codedHeight;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> chromaSubsampling() {
+        return (Optional<String>) chromaSubsampling;
     }
 
-    public Optional<? extends Integer> codedWidth() {
-        return codedWidth;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> codedHeight() {
+        return (Optional<Integer>) codedHeight;
     }
 
-    public Optional<? extends String> colorPrimaries() {
-        return colorPrimaries;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> codedWidth() {
+        return (Optional<Integer>) codedWidth;
     }
 
-    public Optional<? extends String> colorRange() {
-        return colorRange;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> colorPrimaries() {
+        return (Optional<String>) colorPrimaries;
     }
 
-    public Optional<? extends String> colorSpace() {
-        return colorSpace;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> colorRange() {
+        return (Optional<String>) colorRange;
     }
 
-    public Optional<? extends String> colorTrc() {
-        return colorTrc;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> colorSpace() {
+        return (Optional<String>) colorSpace;
     }
 
-    public Optional<? extends Integer> frameRate() {
-        return frameRate;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> colorTrc() {
+        return (Optional<String>) colorTrc;
     }
 
-    public Optional<? extends Boolean> hasScalingMatrix() {
-        return hasScalingMatrix;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> frameRate() {
+        return (Optional<Integer>) frameRate;
     }
 
-    public Optional<? extends Integer> height() {
-        return height;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> hasScalingMatrix() {
+        return (Optional<Boolean>) hasScalingMatrix;
     }
 
-    public Optional<? extends Integer> level() {
-        return level;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> height() {
+        return (Optional<Integer>) height;
     }
 
-    public Optional<? extends String> profile() {
-        return profile;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> level() {
+        return (Optional<Integer>) level;
     }
 
-    public Optional<? extends Integer> refFrames() {
-        return refFrames;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> profile() {
+        return (Optional<String>) profile;
     }
 
-    public Optional<? extends String> scanType() {
-        return scanType;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> refFrames() {
+        return (Optional<Integer>) refFrames;
     }
 
-    public Optional<? extends String> streamIdentifier() {
-        return streamIdentifier;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> scanType() {
+        return (Optional<String>) scanType;
     }
 
-    public Optional<? extends Integer> width() {
-        return width;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> streamIdentifier() {
+        return (Optional<String>) streamIdentifier;
     }
 
-    public Optional<? extends String> displayTitle() {
-        return displayTitle;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> width() {
+        return (Optional<Integer>) width;
     }
 
-    public Optional<? extends String> extendedDisplayTitle() {
-        return extendedDisplayTitle;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> displayTitle() {
+        return (Optional<String>) displayTitle;
     }
 
-    public Optional<? extends Boolean> selected() {
-        return selected;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> extendedDisplayTitle() {
+        return (Optional<String>) extendedDisplayTitle;
     }
 
-    public Optional<? extends Integer> channels() {
-        return channels;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> selected() {
+        return (Optional<Boolean>) selected;
     }
 
-    public Optional<? extends String> language() {
-        return language;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> channels() {
+        return (Optional<Integer>) channels;
     }
 
-    public Optional<? extends String> languageTag() {
-        return languageTag;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> language() {
+        return (Optional<String>) language;
     }
 
-    public Optional<? extends String> languageCode() {
-        return languageCode;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> languageTag() {
+        return (Optional<String>) languageTag;
     }
 
-    public Optional<? extends Integer> samplingRate() {
-        return samplingRate;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> languageCode() {
+        return (Optional<String>) languageCode;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> samplingRate() {
+        return (Optional<Integer>) samplingRate;
     }
 
     public final static Builder builder() {

@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -13,7 +15,6 @@ import java.math.BigInteger;
 import java.net.http.HttpResponse;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetMetadataResponse implements lukehagar.plexapi.plexapi.utils.Response {
 
@@ -35,34 +36,35 @@ public class GetMetadataResponse implements lukehagar.plexapi.plexapi.utils.Resp
     /**
      * The metadata of the library item.
      */
-    private Optional<? extends GetMetadataResponseBody> twoHundredApplicationJsonObject;
+    private Optional<? extends GetMetadataResponseBody> object;
 
-    /**
-     * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-     */
-    private Optional<? extends GetMetadataLibraryResponseBody> fourHundredAndOneApplicationJsonObject;
-
+    @JsonCreator
     public GetMetadataResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends GetMetadataResponseBody> twoHundredApplicationJsonObject,
-            Optional<? extends GetMetadataLibraryResponseBody> fourHundredAndOneApplicationJsonObject) {
+            Optional<? extends GetMetadataResponseBody> object) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(twoHundredApplicationJsonObject, "twoHundredApplicationJsonObject");
-        Utils.checkNotNull(fourHundredAndOneApplicationJsonObject, "fourHundredAndOneApplicationJsonObject");
+        Utils.checkNotNull(object, "object");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.twoHundredApplicationJsonObject = twoHundredApplicationJsonObject;
-        this.fourHundredAndOneApplicationJsonObject = fourHundredAndOneApplicationJsonObject;
+        this.object = object;
+    }
+    
+    public GetMetadataResponse(
+            String contentType,
+            int statusCode,
+            HttpResponse<InputStream> rawResponse) {
+        this(contentType, statusCode, rawResponse, Optional.empty());
     }
 
     /**
      * HTTP response content type for this operation
      */
+    @JsonIgnore
     public String contentType() {
         return contentType;
     }
@@ -70,6 +72,7 @@ public class GetMetadataResponse implements lukehagar.plexapi.plexapi.utils.Resp
     /**
      * HTTP response status code for this operation
      */
+    @JsonIgnore
     public int statusCode() {
         return statusCode;
     }
@@ -77,6 +80,7 @@ public class GetMetadataResponse implements lukehagar.plexapi.plexapi.utils.Resp
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
+    @JsonIgnore
     public HttpResponse<InputStream> rawResponse() {
         return rawResponse;
     }
@@ -84,15 +88,10 @@ public class GetMetadataResponse implements lukehagar.plexapi.plexapi.utils.Resp
     /**
      * The metadata of the library item.
      */
-    public Optional<? extends GetMetadataResponseBody> twoHundredApplicationJsonObject() {
-        return twoHundredApplicationJsonObject;
-    }
-
-    /**
-     * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-     */
-    public Optional<? extends GetMetadataLibraryResponseBody> fourHundredAndOneApplicationJsonObject() {
-        return fourHundredAndOneApplicationJsonObject;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetMetadataResponseBody> object() {
+        return (Optional<GetMetadataResponseBody>) object;
     }
 
     public final static Builder builder() {
@@ -129,36 +128,18 @@ public class GetMetadataResponse implements lukehagar.plexapi.plexapi.utils.Resp
     /**
      * The metadata of the library item.
      */
-    public GetMetadataResponse withTwoHundredApplicationJsonObject(GetMetadataResponseBody twoHundredApplicationJsonObject) {
-        Utils.checkNotNull(twoHundredApplicationJsonObject, "twoHundredApplicationJsonObject");
-        this.twoHundredApplicationJsonObject = Optional.ofNullable(twoHundredApplicationJsonObject);
+    public GetMetadataResponse withObject(GetMetadataResponseBody object) {
+        Utils.checkNotNull(object, "object");
+        this.object = Optional.ofNullable(object);
         return this;
     }
 
     /**
      * The metadata of the library item.
      */
-    public GetMetadataResponse withTwoHundredApplicationJsonObject(Optional<? extends GetMetadataResponseBody> twoHundredApplicationJsonObject) {
-        Utils.checkNotNull(twoHundredApplicationJsonObject, "twoHundredApplicationJsonObject");
-        this.twoHundredApplicationJsonObject = twoHundredApplicationJsonObject;
-        return this;
-    }
-
-    /**
-     * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-     */
-    public GetMetadataResponse withFourHundredAndOneApplicationJsonObject(GetMetadataLibraryResponseBody fourHundredAndOneApplicationJsonObject) {
-        Utils.checkNotNull(fourHundredAndOneApplicationJsonObject, "fourHundredAndOneApplicationJsonObject");
-        this.fourHundredAndOneApplicationJsonObject = Optional.ofNullable(fourHundredAndOneApplicationJsonObject);
-        return this;
-    }
-
-    /**
-     * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-     */
-    public GetMetadataResponse withFourHundredAndOneApplicationJsonObject(Optional<? extends GetMetadataLibraryResponseBody> fourHundredAndOneApplicationJsonObject) {
-        Utils.checkNotNull(fourHundredAndOneApplicationJsonObject, "fourHundredAndOneApplicationJsonObject");
-        this.fourHundredAndOneApplicationJsonObject = fourHundredAndOneApplicationJsonObject;
+    public GetMetadataResponse withObject(Optional<? extends GetMetadataResponseBody> object) {
+        Utils.checkNotNull(object, "object");
+        this.object = object;
         return this;
     }
     
@@ -175,8 +156,7 @@ public class GetMetadataResponse implements lukehagar.plexapi.plexapi.utils.Resp
             java.util.Objects.deepEquals(this.contentType, other.contentType) &&
             java.util.Objects.deepEquals(this.statusCode, other.statusCode) &&
             java.util.Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            java.util.Objects.deepEquals(this.twoHundredApplicationJsonObject, other.twoHundredApplicationJsonObject) &&
-            java.util.Objects.deepEquals(this.fourHundredAndOneApplicationJsonObject, other.fourHundredAndOneApplicationJsonObject);
+            java.util.Objects.deepEquals(this.object, other.object);
     }
     
     @Override
@@ -185,8 +165,7 @@ public class GetMetadataResponse implements lukehagar.plexapi.plexapi.utils.Resp
             contentType,
             statusCode,
             rawResponse,
-            twoHundredApplicationJsonObject,
-            fourHundredAndOneApplicationJsonObject);
+            object);
     }
     
     @Override
@@ -195,8 +174,7 @@ public class GetMetadataResponse implements lukehagar.plexapi.plexapi.utils.Resp
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "twoHundredApplicationJsonObject", twoHundredApplicationJsonObject,
-                "fourHundredAndOneApplicationJsonObject", fourHundredAndOneApplicationJsonObject);
+                "object", object);
     }
     
     public final static class Builder {
@@ -207,9 +185,7 @@ public class GetMetadataResponse implements lukehagar.plexapi.plexapi.utils.Resp
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends GetMetadataResponseBody> twoHundredApplicationJsonObject = Optional.empty();
- 
-        private Optional<? extends GetMetadataLibraryResponseBody> fourHundredAndOneApplicationJsonObject = Optional.empty();  
+        private Optional<? extends GetMetadataResponseBody> object = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -245,36 +221,18 @@ public class GetMetadataResponse implements lukehagar.plexapi.plexapi.utils.Resp
         /**
          * The metadata of the library item.
          */
-        public Builder twoHundredApplicationJsonObject(GetMetadataResponseBody twoHundredApplicationJsonObject) {
-            Utils.checkNotNull(twoHundredApplicationJsonObject, "twoHundredApplicationJsonObject");
-            this.twoHundredApplicationJsonObject = Optional.ofNullable(twoHundredApplicationJsonObject);
+        public Builder object(GetMetadataResponseBody object) {
+            Utils.checkNotNull(object, "object");
+            this.object = Optional.ofNullable(object);
             return this;
         }
 
         /**
          * The metadata of the library item.
          */
-        public Builder twoHundredApplicationJsonObject(Optional<? extends GetMetadataResponseBody> twoHundredApplicationJsonObject) {
-            Utils.checkNotNull(twoHundredApplicationJsonObject, "twoHundredApplicationJsonObject");
-            this.twoHundredApplicationJsonObject = twoHundredApplicationJsonObject;
-            return this;
-        }
-
-        /**
-         * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-         */
-        public Builder fourHundredAndOneApplicationJsonObject(GetMetadataLibraryResponseBody fourHundredAndOneApplicationJsonObject) {
-            Utils.checkNotNull(fourHundredAndOneApplicationJsonObject, "fourHundredAndOneApplicationJsonObject");
-            this.fourHundredAndOneApplicationJsonObject = Optional.ofNullable(fourHundredAndOneApplicationJsonObject);
-            return this;
-        }
-
-        /**
-         * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-         */
-        public Builder fourHundredAndOneApplicationJsonObject(Optional<? extends GetMetadataLibraryResponseBody> fourHundredAndOneApplicationJsonObject) {
-            Utils.checkNotNull(fourHundredAndOneApplicationJsonObject, "fourHundredAndOneApplicationJsonObject");
-            this.fourHundredAndOneApplicationJsonObject = fourHundredAndOneApplicationJsonObject;
+        public Builder object(Optional<? extends GetMetadataResponseBody> object) {
+            Utils.checkNotNull(object, "object");
+            this.object = object;
             return this;
         }
         
@@ -283,8 +241,7 @@ public class GetMetadataResponse implements lukehagar.plexapi.plexapi.utils.Resp
                 contentType,
                 statusCode,
                 rawResponse,
-                twoHundredApplicationJsonObject,
-                fourHundredAndOneApplicationJsonObject);
+                object);
         }
     }
 }

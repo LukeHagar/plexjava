@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class Field {
 
@@ -35,6 +36,7 @@ public class Field {
     @JsonProperty("subType")
     private Optional<? extends String> subType;
 
+    @JsonCreator
     public Field(
             @JsonProperty("key") Optional<? extends String> key,
             @JsonProperty("title") Optional<? extends String> title,
@@ -49,21 +51,33 @@ public class Field {
         this.type = type;
         this.subType = subType;
     }
-
-    public Optional<? extends String> key() {
-        return key;
+    
+    public Field() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
     }
 
-    public Optional<? extends String> type() {
-        return type;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
     }
 
-    public Optional<? extends String> subType() {
-        return subType;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> type() {
+        return (Optional<String>) type;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> subType() {
+        return (Optional<String>) subType;
     }
 
     public final static Builder builder() {

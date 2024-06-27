@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -14,7 +16,6 @@ import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.LazySingletonValue;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class PerformVoiceSearchRequest {
 
@@ -36,6 +37,7 @@ public class PerformVoiceSearchRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")
     private Optional<? extends Double> limit;
 
+    @JsonCreator
     public PerformVoiceSearchRequest(
             String query,
             Optional<? extends Double> sectionId,
@@ -47,10 +49,16 @@ public class PerformVoiceSearchRequest {
         this.sectionId = sectionId;
         this.limit = limit;
     }
+    
+    public PerformVoiceSearchRequest(
+            String query) {
+        this(query, Optional.empty(), Optional.empty());
+    }
 
     /**
      * The query term
      */
+    @JsonIgnore
     public String query() {
         return query;
     }
@@ -58,15 +66,19 @@ public class PerformVoiceSearchRequest {
     /**
      * This gives context to the search, and can result in re-ordering of search result hubs
      */
-    public Optional<? extends Double> sectionId() {
-        return sectionId;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> sectionId() {
+        return (Optional<Double>) sectionId;
     }
 
     /**
      * The number of items to return per hub
      */
-    public Optional<? extends Double> limit() {
-        return limit;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> limit() {
+        return (Optional<Double>) limit;
     }
 
     public final static Builder builder() {

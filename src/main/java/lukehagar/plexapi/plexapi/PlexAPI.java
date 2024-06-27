@@ -9,11 +9,16 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.http.HttpRequest;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.models.operations.SDKMethodInterfaces.*;
 import lukehagar.plexapi.plexapi.utils.HTTPClient;
+import lukehagar.plexapi.plexapi.utils.Hook.AfterErrorContextImpl;
+import lukehagar.plexapi.plexapi.utils.Hook.AfterSuccessContextImpl;
+import lukehagar.plexapi.plexapi.utils.Hook.BeforeRequestContextImpl;
+import lukehagar.plexapi.plexapi.utils.Retries.NonRetryableException;
 import lukehagar.plexapi.plexapi.utils.RetryConfig;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyHTTPClient;
 import lukehagar.plexapi.plexapi.utils.Utils;
@@ -24,6 +29,8 @@ import org.openapitools.jackson.nullable.JsonNullable;
  * An Open API Spec for interacting with Plex.tv and Plex Servers
  */
 public class PlexAPI {
+
+
     /**
      * SERVERS contains the list of server urls available to the SDK.
      */
@@ -71,6 +78,12 @@ public class PlexAPI {
     private final Butler butler;
 
     /**
+     * API Calls that perform operations directly against https://Plex.tv
+     * 
+     */
+    private final Plex plex;
+
+    /**
      * Hubs are a structured two-dimensional container for media, generally represented by multiple horizontal rows.
      * 
      */
@@ -93,12 +106,6 @@ public class PlexAPI {
      * 
      */
     private final Log log;
-
-    /**
-     * API Calls that perform operations directly against https://Plex.tv
-     * 
-     */
-    private final Plex plex;
 
     /**
      * Playlists are ordered collections of media. They can be dumb (just a list of media) or smart (based on a media query, such as "all albums from 2017"). 
@@ -133,6 +140,12 @@ public class PlexAPI {
      * 
      */
     private final Updater updater;
+
+    /**
+     * API Calls that perform operations with Plex Media Server Watchlists
+     * 
+     */
+    private final Watchlist watchlist;
 
     /**
      * Operations against the Plex Media Server System.
@@ -181,6 +194,14 @@ public class PlexAPI {
     }
 
     /**
+     * API Calls that perform operations directly against https://Plex.tv
+     * 
+     */
+    public Plex plex() {
+        return plex;
+    }
+
+    /**
      * Hubs are a structured two-dimensional container for media, generally represented by multiple horizontal rows.
      * 
      */
@@ -210,14 +231,6 @@ public class PlexAPI {
      */
     public Log log() {
         return log;
-    }
-
-    /**
-     * API Calls that perform operations directly against https://Plex.tv
-     * 
-     */
-    public Plex plex() {
-        return plex;
     }
 
     /**
@@ -262,6 +275,14 @@ public class PlexAPI {
      */
     public Updater updater() {
         return updater;
+    }
+
+    /**
+     * API Calls that perform operations with Plex Media Server Watchlists
+     * 
+     */
+    public Watchlist watchlist() {
+        return watchlist;
     }
 
     private final SDKConfiguration sdkConfiguration;
@@ -354,9 +375,6 @@ public class PlexAPI {
             this.sdkConfiguration.retryConfig = Optional.of(retryConfig);
             return this;
         }
-        /**
-         * ServerProtocol - The protocol to use when connecting to your plex server.
-         */
         public enum ServerProtocol {
             HTTP("http"),
             HTTPS("https");
@@ -425,6 +443,27 @@ public class PlexAPI {
         }
         
         /**
+         * Allows setting the xPlexClientIdentifier parameter for all supported operations.
+         *
+         * @param xPlexClientIdentifier The value to set.
+         * @return The builder instance.
+         */
+        public Builder xPlexClientIdentifier(String xPlexClientIdentifier) {
+            if (!this.sdkConfiguration.globals.get("parameters").containsKey("header")) {
+                this.sdkConfiguration.globals.get("parameters").put("header", new java.util.HashMap<>());
+            }
+
+            this.sdkConfiguration.globals.get("parameters").get("header").put("xPlexClientIdentifier", xPlexClientIdentifier);
+
+            return this;
+        }
+        
+        // Visible for testing, will be accessed via reflection
+        void _hooks(lukehagar.plexapi.plexapi.utils.Hooks hooks) {
+            sdkConfiguration.setHooks(hooks);    
+        }
+        
+        /**
          * Builds a new instance of the SDK.
          * @return The SDK instance.
          */
@@ -432,9 +471,9 @@ public class PlexAPI {
             if (sdkConfiguration.defaultClient == null) {
                 sdkConfiguration.defaultClient = new SpeakeasyHTTPClient();
             }
-	    if (sdkConfiguration.securitySource == null) {
-	    	sdkConfiguration.securitySource = SecuritySource.of(null);
-	    }
+	        if (sdkConfiguration.securitySource == null) {
+	    	    sdkConfiguration.securitySource = SecuritySource.of(null);
+	        }
             if (sdkConfiguration.serverUrl == null || sdkConfiguration.serverUrl.isBlank()) {
                 sdkConfiguration.serverUrl = SERVERS[0];
                 sdkConfiguration.serverIdx = 0;
@@ -445,7 +484,7 @@ public class PlexAPI {
             return new PlexAPI(sdkConfiguration);
         }
     }
-
+    
     /**
      * Get a new instance of the SDK builder to configure a new instance of the SDK.
      * @return The SDK builder instance.
@@ -461,74 +500,16 @@ public class PlexAPI {
         this.video = new Video(sdkConfiguration);
         this.activities = new Activities(sdkConfiguration);
         this.butler = new Butler(sdkConfiguration);
+        this.plex = new Plex(sdkConfiguration);
         this.hubs = new Hubs(sdkConfiguration);
         this.search = new Search(sdkConfiguration);
         this.library = new Library(sdkConfiguration);
         this.log = new Log(sdkConfiguration);
-        this.plex = new Plex(sdkConfiguration);
         this.playlists = new Playlists(sdkConfiguration);
         this.authentication = new Authentication(sdkConfiguration);
         this.statistics = new Statistics(sdkConfiguration);
         this.sessions = new Sessions(sdkConfiguration);
         this.updater = new Updater(sdkConfiguration);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
+        this.watchlist = new Watchlist(sdkConfiguration);
+        this.sdkConfiguration.initialize();
+    }}

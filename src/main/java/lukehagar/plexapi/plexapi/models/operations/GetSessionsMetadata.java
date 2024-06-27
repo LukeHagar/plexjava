@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetSessionsMetadata {
 
@@ -157,7 +158,7 @@ public class GetSessionsMetadata {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("User")
-    private Optional<? extends User> user;
+    private Optional<? extends GetSessionsUser> user;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Player")
@@ -167,6 +168,7 @@ public class GetSessionsMetadata {
     @JsonProperty("Session")
     private Optional<? extends Session> session;
 
+    @JsonCreator
     public GetSessionsMetadata(
             @JsonProperty("addedAt") Optional<? extends Integer> addedAt,
             @JsonProperty("art") Optional<? extends String> art,
@@ -202,7 +204,7 @@ public class GetSessionsMetadata {
             @JsonProperty("updatedAt") Optional<? extends Integer> updatedAt,
             @JsonProperty("viewOffset") Optional<? extends Integer> viewOffset,
             @JsonProperty("Media") Optional<? extends java.util.List<GetSessionsMedia>> media,
-            @JsonProperty("User") Optional<? extends User> user,
+            @JsonProperty("User") Optional<? extends GetSessionsUser> user,
             @JsonProperty("Player") Optional<? extends Player> player,
             @JsonProperty("Session") Optional<? extends Session> session) {
         Utils.checkNotNull(addedAt, "addedAt");
@@ -280,153 +282,231 @@ public class GetSessionsMetadata {
         this.player = player;
         this.session = session;
     }
-
-    public Optional<? extends Integer> addedAt() {
-        return addedAt;
+    
+    public GetSessionsMetadata() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> art() {
-        return art;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> addedAt() {
+        return (Optional<Integer>) addedAt;
     }
 
-    public Optional<? extends Integer> duration() {
-        return duration;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> art() {
+        return (Optional<String>) art;
     }
 
-    public Optional<? extends String> grandparentArt() {
-        return grandparentArt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> duration() {
+        return (Optional<Integer>) duration;
     }
 
-    public Optional<? extends String> grandparentGuid() {
-        return grandparentGuid;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> grandparentArt() {
+        return (Optional<String>) grandparentArt;
     }
 
-    public Optional<? extends String> grandparentKey() {
-        return grandparentKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> grandparentGuid() {
+        return (Optional<String>) grandparentGuid;
     }
 
-    public Optional<? extends String> grandparentRatingKey() {
-        return grandparentRatingKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> grandparentKey() {
+        return (Optional<String>) grandparentKey;
     }
 
-    public Optional<? extends String> grandparentThumb() {
-        return grandparentThumb;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> grandparentRatingKey() {
+        return (Optional<String>) grandparentRatingKey;
     }
 
-    public Optional<? extends String> grandparentTitle() {
-        return grandparentTitle;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> grandparentThumb() {
+        return (Optional<String>) grandparentThumb;
     }
 
-    public Optional<? extends String> guid() {
-        return guid;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> grandparentTitle() {
+        return (Optional<String>) grandparentTitle;
     }
 
-    public Optional<? extends Integer> index() {
-        return index;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> guid() {
+        return (Optional<String>) guid;
     }
 
-    public Optional<? extends String> key() {
-        return key;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> index() {
+        return (Optional<Integer>) index;
     }
 
-    public Optional<? extends String> librarySectionID() {
-        return librarySectionID;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
     }
 
-    public Optional<? extends String> librarySectionKey() {
-        return librarySectionKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> librarySectionID() {
+        return (Optional<String>) librarySectionID;
     }
 
-    public Optional<? extends String> librarySectionTitle() {
-        return librarySectionTitle;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> librarySectionKey() {
+        return (Optional<String>) librarySectionKey;
     }
 
-    public Optional<? extends String> musicAnalysisVersion() {
-        return musicAnalysisVersion;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> librarySectionTitle() {
+        return (Optional<String>) librarySectionTitle;
     }
 
-    public Optional<? extends String> parentGuid() {
-        return parentGuid;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> musicAnalysisVersion() {
+        return (Optional<String>) musicAnalysisVersion;
     }
 
-    public Optional<? extends Integer> parentIndex() {
-        return parentIndex;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> parentGuid() {
+        return (Optional<String>) parentGuid;
     }
 
-    public Optional<? extends String> parentKey() {
-        return parentKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> parentIndex() {
+        return (Optional<Integer>) parentIndex;
     }
 
-    public Optional<? extends String> parentRatingKey() {
-        return parentRatingKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> parentKey() {
+        return (Optional<String>) parentKey;
     }
 
-    public Optional<? extends String> parentStudio() {
-        return parentStudio;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> parentRatingKey() {
+        return (Optional<String>) parentRatingKey;
     }
 
-    public Optional<? extends String> parentThumb() {
-        return parentThumb;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> parentStudio() {
+        return (Optional<String>) parentStudio;
     }
 
-    public Optional<? extends String> parentTitle() {
-        return parentTitle;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> parentThumb() {
+        return (Optional<String>) parentThumb;
     }
 
-    public Optional<? extends Integer> parentYear() {
-        return parentYear;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> parentTitle() {
+        return (Optional<String>) parentTitle;
     }
 
-    public Optional<? extends Integer> ratingCount() {
-        return ratingCount;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> parentYear() {
+        return (Optional<Integer>) parentYear;
     }
 
-    public Optional<? extends String> ratingKey() {
-        return ratingKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> ratingCount() {
+        return (Optional<Integer>) ratingCount;
     }
 
-    public Optional<? extends String> sessionKey() {
-        return sessionKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> ratingKey() {
+        return (Optional<String>) ratingKey;
     }
 
-    public Optional<? extends String> thumb() {
-        return thumb;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> sessionKey() {
+        return (Optional<String>) sessionKey;
     }
 
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> thumb() {
+        return (Optional<String>) thumb;
     }
 
-    public Optional<? extends String> titleSort() {
-        return titleSort;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
     }
 
-    public Optional<? extends String> type() {
-        return type;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> titleSort() {
+        return (Optional<String>) titleSort;
     }
 
-    public Optional<? extends Integer> updatedAt() {
-        return updatedAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> type() {
+        return (Optional<String>) type;
     }
 
-    public Optional<? extends Integer> viewOffset() {
-        return viewOffset;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> updatedAt() {
+        return (Optional<Integer>) updatedAt;
     }
 
-    public Optional<? extends java.util.List<GetSessionsMedia>> media() {
-        return media;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> viewOffset() {
+        return (Optional<Integer>) viewOffset;
     }
 
-    public Optional<? extends User> user() {
-        return user;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetSessionsMedia>> media() {
+        return (Optional<java.util.List<GetSessionsMedia>>) media;
     }
 
-    public Optional<? extends Player> player() {
-        return player;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetSessionsUser> user() {
+        return (Optional<GetSessionsUser>) user;
     }
 
-    public Optional<? extends Session> session() {
-        return session;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Player> player() {
+        return (Optional<Player>) player;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Session> session() {
+        return (Optional<Session>) session;
     }
 
     public final static Builder builder() {
@@ -841,13 +921,13 @@ public class GetSessionsMetadata {
         return this;
     }
 
-    public GetSessionsMetadata withUser(User user) {
+    public GetSessionsMetadata withUser(GetSessionsUser user) {
         Utils.checkNotNull(user, "user");
         this.user = Optional.ofNullable(user);
         return this;
     }
 
-    public GetSessionsMetadata withUser(Optional<? extends User> user) {
+    public GetSessionsMetadata withUser(Optional<? extends GetSessionsUser> user) {
         Utils.checkNotNull(user, "user");
         this.user = user;
         return this;
@@ -1080,7 +1160,7 @@ public class GetSessionsMetadata {
  
         private Optional<? extends java.util.List<GetSessionsMedia>> media = Optional.empty();
  
-        private Optional<? extends User> user = Optional.empty();
+        private Optional<? extends GetSessionsUser> user = Optional.empty();
  
         private Optional<? extends Player> player = Optional.empty();
  
@@ -1498,13 +1578,13 @@ public class GetSessionsMetadata {
             return this;
         }
 
-        public Builder user(User user) {
+        public Builder user(GetSessionsUser user) {
             Utils.checkNotNull(user, "user");
             this.user = Optional.ofNullable(user);
             return this;
         }
 
-        public Builder user(Optional<? extends User> user) {
+        public Builder user(Optional<? extends GetSessionsUser> user) {
             Utils.checkNotNull(user, "user");
             this.user = user;
             return this;

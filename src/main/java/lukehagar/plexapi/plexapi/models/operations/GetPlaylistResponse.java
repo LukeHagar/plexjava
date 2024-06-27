@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -13,7 +15,6 @@ import java.math.BigInteger;
 import java.net.http.HttpResponse;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetPlaylistResponse implements lukehagar.plexapi.plexapi.utils.Response {
 
@@ -35,34 +36,35 @@ public class GetPlaylistResponse implements lukehagar.plexapi.plexapi.utils.Resp
     /**
      * The playlist
      */
-    private Optional<? extends GetPlaylistResponseBody> twoHundredApplicationJsonObject;
+    private Optional<? extends GetPlaylistResponseBody> object;
 
-    /**
-     * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-     */
-    private Optional<? extends GetPlaylistPlaylistsResponseBody> fourHundredAndOneApplicationJsonObject;
-
+    @JsonCreator
     public GetPlaylistResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends GetPlaylistResponseBody> twoHundredApplicationJsonObject,
-            Optional<? extends GetPlaylistPlaylistsResponseBody> fourHundredAndOneApplicationJsonObject) {
+            Optional<? extends GetPlaylistResponseBody> object) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(twoHundredApplicationJsonObject, "twoHundredApplicationJsonObject");
-        Utils.checkNotNull(fourHundredAndOneApplicationJsonObject, "fourHundredAndOneApplicationJsonObject");
+        Utils.checkNotNull(object, "object");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.twoHundredApplicationJsonObject = twoHundredApplicationJsonObject;
-        this.fourHundredAndOneApplicationJsonObject = fourHundredAndOneApplicationJsonObject;
+        this.object = object;
+    }
+    
+    public GetPlaylistResponse(
+            String contentType,
+            int statusCode,
+            HttpResponse<InputStream> rawResponse) {
+        this(contentType, statusCode, rawResponse, Optional.empty());
     }
 
     /**
      * HTTP response content type for this operation
      */
+    @JsonIgnore
     public String contentType() {
         return contentType;
     }
@@ -70,6 +72,7 @@ public class GetPlaylistResponse implements lukehagar.plexapi.plexapi.utils.Resp
     /**
      * HTTP response status code for this operation
      */
+    @JsonIgnore
     public int statusCode() {
         return statusCode;
     }
@@ -77,6 +80,7 @@ public class GetPlaylistResponse implements lukehagar.plexapi.plexapi.utils.Resp
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
+    @JsonIgnore
     public HttpResponse<InputStream> rawResponse() {
         return rawResponse;
     }
@@ -84,15 +88,10 @@ public class GetPlaylistResponse implements lukehagar.plexapi.plexapi.utils.Resp
     /**
      * The playlist
      */
-    public Optional<? extends GetPlaylistResponseBody> twoHundredApplicationJsonObject() {
-        return twoHundredApplicationJsonObject;
-    }
-
-    /**
-     * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-     */
-    public Optional<? extends GetPlaylistPlaylistsResponseBody> fourHundredAndOneApplicationJsonObject() {
-        return fourHundredAndOneApplicationJsonObject;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetPlaylistResponseBody> object() {
+        return (Optional<GetPlaylistResponseBody>) object;
     }
 
     public final static Builder builder() {
@@ -129,36 +128,18 @@ public class GetPlaylistResponse implements lukehagar.plexapi.plexapi.utils.Resp
     /**
      * The playlist
      */
-    public GetPlaylistResponse withTwoHundredApplicationJsonObject(GetPlaylistResponseBody twoHundredApplicationJsonObject) {
-        Utils.checkNotNull(twoHundredApplicationJsonObject, "twoHundredApplicationJsonObject");
-        this.twoHundredApplicationJsonObject = Optional.ofNullable(twoHundredApplicationJsonObject);
+    public GetPlaylistResponse withObject(GetPlaylistResponseBody object) {
+        Utils.checkNotNull(object, "object");
+        this.object = Optional.ofNullable(object);
         return this;
     }
 
     /**
      * The playlist
      */
-    public GetPlaylistResponse withTwoHundredApplicationJsonObject(Optional<? extends GetPlaylistResponseBody> twoHundredApplicationJsonObject) {
-        Utils.checkNotNull(twoHundredApplicationJsonObject, "twoHundredApplicationJsonObject");
-        this.twoHundredApplicationJsonObject = twoHundredApplicationJsonObject;
-        return this;
-    }
-
-    /**
-     * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-     */
-    public GetPlaylistResponse withFourHundredAndOneApplicationJsonObject(GetPlaylistPlaylistsResponseBody fourHundredAndOneApplicationJsonObject) {
-        Utils.checkNotNull(fourHundredAndOneApplicationJsonObject, "fourHundredAndOneApplicationJsonObject");
-        this.fourHundredAndOneApplicationJsonObject = Optional.ofNullable(fourHundredAndOneApplicationJsonObject);
-        return this;
-    }
-
-    /**
-     * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-     */
-    public GetPlaylistResponse withFourHundredAndOneApplicationJsonObject(Optional<? extends GetPlaylistPlaylistsResponseBody> fourHundredAndOneApplicationJsonObject) {
-        Utils.checkNotNull(fourHundredAndOneApplicationJsonObject, "fourHundredAndOneApplicationJsonObject");
-        this.fourHundredAndOneApplicationJsonObject = fourHundredAndOneApplicationJsonObject;
+    public GetPlaylistResponse withObject(Optional<? extends GetPlaylistResponseBody> object) {
+        Utils.checkNotNull(object, "object");
+        this.object = object;
         return this;
     }
     
@@ -175,8 +156,7 @@ public class GetPlaylistResponse implements lukehagar.plexapi.plexapi.utils.Resp
             java.util.Objects.deepEquals(this.contentType, other.contentType) &&
             java.util.Objects.deepEquals(this.statusCode, other.statusCode) &&
             java.util.Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            java.util.Objects.deepEquals(this.twoHundredApplicationJsonObject, other.twoHundredApplicationJsonObject) &&
-            java.util.Objects.deepEquals(this.fourHundredAndOneApplicationJsonObject, other.fourHundredAndOneApplicationJsonObject);
+            java.util.Objects.deepEquals(this.object, other.object);
     }
     
     @Override
@@ -185,8 +165,7 @@ public class GetPlaylistResponse implements lukehagar.plexapi.plexapi.utils.Resp
             contentType,
             statusCode,
             rawResponse,
-            twoHundredApplicationJsonObject,
-            fourHundredAndOneApplicationJsonObject);
+            object);
     }
     
     @Override
@@ -195,8 +174,7 @@ public class GetPlaylistResponse implements lukehagar.plexapi.plexapi.utils.Resp
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "twoHundredApplicationJsonObject", twoHundredApplicationJsonObject,
-                "fourHundredAndOneApplicationJsonObject", fourHundredAndOneApplicationJsonObject);
+                "object", object);
     }
     
     public final static class Builder {
@@ -207,9 +185,7 @@ public class GetPlaylistResponse implements lukehagar.plexapi.plexapi.utils.Resp
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends GetPlaylistResponseBody> twoHundredApplicationJsonObject = Optional.empty();
- 
-        private Optional<? extends GetPlaylistPlaylistsResponseBody> fourHundredAndOneApplicationJsonObject = Optional.empty();  
+        private Optional<? extends GetPlaylistResponseBody> object = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -245,36 +221,18 @@ public class GetPlaylistResponse implements lukehagar.plexapi.plexapi.utils.Resp
         /**
          * The playlist
          */
-        public Builder twoHundredApplicationJsonObject(GetPlaylistResponseBody twoHundredApplicationJsonObject) {
-            Utils.checkNotNull(twoHundredApplicationJsonObject, "twoHundredApplicationJsonObject");
-            this.twoHundredApplicationJsonObject = Optional.ofNullable(twoHundredApplicationJsonObject);
+        public Builder object(GetPlaylistResponseBody object) {
+            Utils.checkNotNull(object, "object");
+            this.object = Optional.ofNullable(object);
             return this;
         }
 
         /**
          * The playlist
          */
-        public Builder twoHundredApplicationJsonObject(Optional<? extends GetPlaylistResponseBody> twoHundredApplicationJsonObject) {
-            Utils.checkNotNull(twoHundredApplicationJsonObject, "twoHundredApplicationJsonObject");
-            this.twoHundredApplicationJsonObject = twoHundredApplicationJsonObject;
-            return this;
-        }
-
-        /**
-         * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-         */
-        public Builder fourHundredAndOneApplicationJsonObject(GetPlaylistPlaylistsResponseBody fourHundredAndOneApplicationJsonObject) {
-            Utils.checkNotNull(fourHundredAndOneApplicationJsonObject, "fourHundredAndOneApplicationJsonObject");
-            this.fourHundredAndOneApplicationJsonObject = Optional.ofNullable(fourHundredAndOneApplicationJsonObject);
-            return this;
-        }
-
-        /**
-         * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-         */
-        public Builder fourHundredAndOneApplicationJsonObject(Optional<? extends GetPlaylistPlaylistsResponseBody> fourHundredAndOneApplicationJsonObject) {
-            Utils.checkNotNull(fourHundredAndOneApplicationJsonObject, "fourHundredAndOneApplicationJsonObject");
-            this.fourHundredAndOneApplicationJsonObject = fourHundredAndOneApplicationJsonObject;
+        public Builder object(Optional<? extends GetPlaylistResponseBody> object) {
+            Utils.checkNotNull(object, "object");
+            this.object = object;
             return this;
         }
         
@@ -283,8 +241,7 @@ public class GetPlaylistResponse implements lukehagar.plexapi.plexapi.utils.Resp
                 contentType,
                 statusCode,
                 rawResponse,
-                twoHundredApplicationJsonObject,
-                fourHundredAndOneApplicationJsonObject);
+                object);
         }
     }
 }

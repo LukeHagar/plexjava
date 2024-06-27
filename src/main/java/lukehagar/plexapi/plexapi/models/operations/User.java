@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,82 +18,42 @@ import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
 
-
 public class User {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("id")
-    private Optional<? extends String> id;
+    private Optional<? extends Integer> id;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("thumb")
-    private Optional<? extends String> thumb;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("title")
-    private Optional<? extends String> title;
-
+    @JsonCreator
     public User(
-            @JsonProperty("id") Optional<? extends String> id,
-            @JsonProperty("thumb") Optional<? extends String> thumb,
-            @JsonProperty("title") Optional<? extends String> title) {
+            @JsonProperty("id") Optional<? extends Integer> id) {
         Utils.checkNotNull(id, "id");
-        Utils.checkNotNull(thumb, "thumb");
-        Utils.checkNotNull(title, "title");
         this.id = id;
-        this.thumb = thumb;
-        this.title = title;
+    }
+    
+    public User() {
+        this(Optional.empty());
     }
 
-    public Optional<? extends String> id() {
-        return id;
-    }
-
-    public Optional<? extends String> thumb() {
-        return thumb;
-    }
-
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> id() {
+        return (Optional<Integer>) id;
     }
 
     public final static Builder builder() {
         return new Builder();
     }
 
-    public User withId(String id) {
+    public User withId(int id) {
         Utils.checkNotNull(id, "id");
         this.id = Optional.ofNullable(id);
         return this;
     }
 
-    public User withId(Optional<? extends String> id) {
+    public User withId(Optional<? extends Integer> id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
-        return this;
-    }
-
-    public User withThumb(String thumb) {
-        Utils.checkNotNull(thumb, "thumb");
-        this.thumb = Optional.ofNullable(thumb);
-        return this;
-    }
-
-    public User withThumb(Optional<? extends String> thumb) {
-        Utils.checkNotNull(thumb, "thumb");
-        this.thumb = thumb;
-        return this;
-    }
-
-    public User withTitle(String title) {
-        Utils.checkNotNull(title, "title");
-        this.title = Optional.ofNullable(title);
-        return this;
-    }
-
-    public User withTitle(Optional<? extends String> title) {
-        Utils.checkNotNull(title, "title");
-        this.title = title;
         return this;
     }
     
@@ -105,80 +67,44 @@ public class User {
         }
         User other = (User) o;
         return 
-            java.util.Objects.deepEquals(this.id, other.id) &&
-            java.util.Objects.deepEquals(this.thumb, other.thumb) &&
-            java.util.Objects.deepEquals(this.title, other.title);
+            java.util.Objects.deepEquals(this.id, other.id);
     }
     
     @Override
     public int hashCode() {
         return java.util.Objects.hash(
-            id,
-            thumb,
-            title);
+            id);
     }
     
     @Override
     public String toString() {
         return Utils.toString(User.class,
-                "id", id,
-                "thumb", thumb,
-                "title", title);
+                "id", id);
     }
     
     public final static class Builder {
  
-        private Optional<? extends String> id = Optional.empty();
- 
-        private Optional<? extends String> thumb = Optional.empty();
- 
-        private Optional<? extends String> title = Optional.empty();  
+        private Optional<? extends Integer> id = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
         }
 
-        public Builder id(String id) {
+        public Builder id(int id) {
             Utils.checkNotNull(id, "id");
             this.id = Optional.ofNullable(id);
             return this;
         }
 
-        public Builder id(Optional<? extends String> id) {
+        public Builder id(Optional<? extends Integer> id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
-            return this;
-        }
-
-        public Builder thumb(String thumb) {
-            Utils.checkNotNull(thumb, "thumb");
-            this.thumb = Optional.ofNullable(thumb);
-            return this;
-        }
-
-        public Builder thumb(Optional<? extends String> thumb) {
-            Utils.checkNotNull(thumb, "thumb");
-            this.thumb = thumb;
-            return this;
-        }
-
-        public Builder title(String title) {
-            Utils.checkNotNull(title, "title");
-            this.title = Optional.ofNullable(title);
-            return this;
-        }
-
-        public Builder title(Optional<? extends String> title) {
-            Utils.checkNotNull(title, "title");
-            this.title = title;
             return this;
         }
         
         public User build() {
             return new User(
-                id,
-                thumb,
-                title);
+                id);
         }
     }
 }

@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetStatisticsDevice {
 
@@ -39,6 +40,7 @@ public class GetStatisticsDevice {
     @JsonProperty("createdAt")
     private Optional<? extends Integer> createdAt;
 
+    @JsonCreator
     public GetStatisticsDevice(
             @JsonProperty("id") Optional<? extends Integer> id,
             @JsonProperty("name") Optional<? extends String> name,
@@ -56,25 +58,39 @@ public class GetStatisticsDevice {
         this.clientIdentifier = clientIdentifier;
         this.createdAt = createdAt;
     }
-
-    public Optional<? extends Integer> id() {
-        return id;
+    
+    public GetStatisticsDevice() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> name() {
-        return name;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> id() {
+        return (Optional<Integer>) id;
     }
 
-    public Optional<? extends String> platform() {
-        return platform;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> name() {
+        return (Optional<String>) name;
     }
 
-    public Optional<? extends String> clientIdentifier() {
-        return clientIdentifier;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> platform() {
+        return (Optional<String>) platform;
     }
 
-    public Optional<? extends Integer> createdAt() {
-        return createdAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> clientIdentifier() {
+        return (Optional<String>) clientIdentifier;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> createdAt() {
+        return (Optional<Integer>) createdAt;
     }
 
     public final static Builder builder() {

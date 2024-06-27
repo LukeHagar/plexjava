@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetLibraryType {
 
@@ -37,7 +38,7 @@ public class GetLibraryType {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Filter")
-    private Optional<? extends java.util.List<Filter>> filter;
+    private Optional<? extends java.util.List<GetLibraryFilter>> filter;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Sort")
@@ -47,12 +48,13 @@ public class GetLibraryType {
     @JsonProperty("Field")
     private Optional<? extends java.util.List<Field>> field;
 
+    @JsonCreator
     public GetLibraryType(
             @JsonProperty("key") Optional<? extends String> key,
             @JsonProperty("type") Optional<? extends String> type,
             @JsonProperty("title") Optional<? extends String> title,
             @JsonProperty("active") Optional<? extends Boolean> active,
-            @JsonProperty("Filter") Optional<? extends java.util.List<Filter>> filter,
+            @JsonProperty("Filter") Optional<? extends java.util.List<GetLibraryFilter>> filter,
             @JsonProperty("Sort") Optional<? extends java.util.List<Sort>> sort,
             @JsonProperty("Field") Optional<? extends java.util.List<Field>> field) {
         Utils.checkNotNull(key, "key");
@@ -70,33 +72,51 @@ public class GetLibraryType {
         this.sort = sort;
         this.field = field;
     }
-
-    public Optional<? extends String> key() {
-        return key;
+    
+    public GetLibraryType() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> type() {
-        return type;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
     }
 
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> type() {
+        return (Optional<String>) type;
     }
 
-    public Optional<? extends Boolean> active() {
-        return active;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
     }
 
-    public Optional<? extends java.util.List<Filter>> filter() {
-        return filter;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> active() {
+        return (Optional<Boolean>) active;
     }
 
-    public Optional<? extends java.util.List<Sort>> sort() {
-        return sort;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetLibraryFilter>> filter() {
+        return (Optional<java.util.List<GetLibraryFilter>>) filter;
     }
 
-    public Optional<? extends java.util.List<Field>> field() {
-        return field;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<Sort>> sort() {
+        return (Optional<java.util.List<Sort>>) sort;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<Field>> field() {
+        return (Optional<java.util.List<Field>>) field;
     }
 
     public final static Builder builder() {
@@ -151,13 +171,13 @@ public class GetLibraryType {
         return this;
     }
 
-    public GetLibraryType withFilter(java.util.List<Filter> filter) {
+    public GetLibraryType withFilter(java.util.List<GetLibraryFilter> filter) {
         Utils.checkNotNull(filter, "filter");
         this.filter = Optional.ofNullable(filter);
         return this;
     }
 
-    public GetLibraryType withFilter(Optional<? extends java.util.List<Filter>> filter) {
+    public GetLibraryType withFilter(Optional<? extends java.util.List<GetLibraryFilter>> filter) {
         Utils.checkNotNull(filter, "filter");
         this.filter = filter;
         return this;
@@ -240,7 +260,7 @@ public class GetLibraryType {
  
         private Optional<? extends Boolean> active = Optional.empty();
  
-        private Optional<? extends java.util.List<Filter>> filter = Optional.empty();
+        private Optional<? extends java.util.List<GetLibraryFilter>> filter = Optional.empty();
  
         private Optional<? extends java.util.List<Sort>> sort = Optional.empty();
  
@@ -298,13 +318,13 @@ public class GetLibraryType {
             return this;
         }
 
-        public Builder filter(java.util.List<Filter> filter) {
+        public Builder filter(java.util.List<GetLibraryFilter> filter) {
             Utils.checkNotNull(filter, "filter");
             this.filter = Optional.ofNullable(filter);
             return this;
         }
 
-        public Builder filter(Optional<? extends java.util.List<Filter>> filter) {
+        public Builder filter(Optional<? extends java.util.List<GetLibraryFilter>> filter) {
             Utils.checkNotNull(filter, "filter");
             this.filter = filter;
             return this;

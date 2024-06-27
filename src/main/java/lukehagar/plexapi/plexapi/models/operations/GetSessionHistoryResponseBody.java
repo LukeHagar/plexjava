@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 /**
  * GetSessionHistoryResponseBody - List of Plex Sessions
  */
@@ -26,14 +27,21 @@ public class GetSessionHistoryResponseBody {
     @JsonProperty("MediaContainer")
     private Optional<? extends GetSessionHistoryMediaContainer> mediaContainer;
 
+    @JsonCreator
     public GetSessionHistoryResponseBody(
             @JsonProperty("MediaContainer") Optional<? extends GetSessionHistoryMediaContainer> mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
         this.mediaContainer = mediaContainer;
     }
+    
+    public GetSessionHistoryResponseBody() {
+        this(Optional.empty());
+    }
 
-    public Optional<? extends GetSessionHistoryMediaContainer> mediaContainer() {
-        return mediaContainer;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetSessionHistoryMediaContainer> mediaContainer() {
+        return (Optional<GetSessionHistoryMediaContainer>) mediaContainer;
     }
 
     public final static Builder builder() {

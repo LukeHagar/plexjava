@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetUpdateStatusMediaContainer {
 
@@ -43,6 +44,7 @@ public class GetUpdateStatusMediaContainer {
     @JsonProperty("Release")
     private Optional<? extends java.util.List<Release>> release;
 
+    @JsonCreator
     public GetUpdateStatusMediaContainer(
             @JsonProperty("size") Optional<? extends Integer> size,
             @JsonProperty("canInstall") Optional<? extends Boolean> canInstall,
@@ -63,29 +65,45 @@ public class GetUpdateStatusMediaContainer {
         this.status = status;
         this.release = release;
     }
-
-    public Optional<? extends Integer> size() {
-        return size;
+    
+    public GetUpdateStatusMediaContainer() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends Boolean> canInstall() {
-        return canInstall;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> size() {
+        return (Optional<Integer>) size;
     }
 
-    public Optional<? extends Integer> checkedAt() {
-        return checkedAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> canInstall() {
+        return (Optional<Boolean>) canInstall;
     }
 
-    public Optional<? extends String> downloadURL() {
-        return downloadURL;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> checkedAt() {
+        return (Optional<Integer>) checkedAt;
     }
 
-    public Optional<? extends Integer> status() {
-        return status;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> downloadURL() {
+        return (Optional<String>) downloadURL;
     }
 
-    public Optional<? extends java.util.List<Release>> release() {
-        return release;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> status() {
+        return (Optional<Integer>) status;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<Release>> release() {
+        return (Optional<java.util.List<Release>>) release;
     }
 
     public final static Builder builder() {

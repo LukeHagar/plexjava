@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -13,7 +15,6 @@ import java.math.BigInteger;
 import java.net.http.HttpResponse;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetSessionHistoryResponse implements lukehagar.plexapi.plexapi.utils.Response {
 
@@ -35,34 +36,35 @@ public class GetSessionHistoryResponse implements lukehagar.plexapi.plexapi.util
     /**
      * List of Plex Sessions
      */
-    private Optional<? extends GetSessionHistoryResponseBody> twoHundredApplicationJsonObject;
+    private Optional<? extends GetSessionHistoryResponseBody> object;
 
-    /**
-     * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-     */
-    private Optional<? extends GetSessionHistorySessionsResponseBody> fourHundredAndOneApplicationJsonObject;
-
+    @JsonCreator
     public GetSessionHistoryResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends GetSessionHistoryResponseBody> twoHundredApplicationJsonObject,
-            Optional<? extends GetSessionHistorySessionsResponseBody> fourHundredAndOneApplicationJsonObject) {
+            Optional<? extends GetSessionHistoryResponseBody> object) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(twoHundredApplicationJsonObject, "twoHundredApplicationJsonObject");
-        Utils.checkNotNull(fourHundredAndOneApplicationJsonObject, "fourHundredAndOneApplicationJsonObject");
+        Utils.checkNotNull(object, "object");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.twoHundredApplicationJsonObject = twoHundredApplicationJsonObject;
-        this.fourHundredAndOneApplicationJsonObject = fourHundredAndOneApplicationJsonObject;
+        this.object = object;
+    }
+    
+    public GetSessionHistoryResponse(
+            String contentType,
+            int statusCode,
+            HttpResponse<InputStream> rawResponse) {
+        this(contentType, statusCode, rawResponse, Optional.empty());
     }
 
     /**
      * HTTP response content type for this operation
      */
+    @JsonIgnore
     public String contentType() {
         return contentType;
     }
@@ -70,6 +72,7 @@ public class GetSessionHistoryResponse implements lukehagar.plexapi.plexapi.util
     /**
      * HTTP response status code for this operation
      */
+    @JsonIgnore
     public int statusCode() {
         return statusCode;
     }
@@ -77,6 +80,7 @@ public class GetSessionHistoryResponse implements lukehagar.plexapi.plexapi.util
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
+    @JsonIgnore
     public HttpResponse<InputStream> rawResponse() {
         return rawResponse;
     }
@@ -84,15 +88,10 @@ public class GetSessionHistoryResponse implements lukehagar.plexapi.plexapi.util
     /**
      * List of Plex Sessions
      */
-    public Optional<? extends GetSessionHistoryResponseBody> twoHundredApplicationJsonObject() {
-        return twoHundredApplicationJsonObject;
-    }
-
-    /**
-     * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-     */
-    public Optional<? extends GetSessionHistorySessionsResponseBody> fourHundredAndOneApplicationJsonObject() {
-        return fourHundredAndOneApplicationJsonObject;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetSessionHistoryResponseBody> object() {
+        return (Optional<GetSessionHistoryResponseBody>) object;
     }
 
     public final static Builder builder() {
@@ -129,36 +128,18 @@ public class GetSessionHistoryResponse implements lukehagar.plexapi.plexapi.util
     /**
      * List of Plex Sessions
      */
-    public GetSessionHistoryResponse withTwoHundredApplicationJsonObject(GetSessionHistoryResponseBody twoHundredApplicationJsonObject) {
-        Utils.checkNotNull(twoHundredApplicationJsonObject, "twoHundredApplicationJsonObject");
-        this.twoHundredApplicationJsonObject = Optional.ofNullable(twoHundredApplicationJsonObject);
+    public GetSessionHistoryResponse withObject(GetSessionHistoryResponseBody object) {
+        Utils.checkNotNull(object, "object");
+        this.object = Optional.ofNullable(object);
         return this;
     }
 
     /**
      * List of Plex Sessions
      */
-    public GetSessionHistoryResponse withTwoHundredApplicationJsonObject(Optional<? extends GetSessionHistoryResponseBody> twoHundredApplicationJsonObject) {
-        Utils.checkNotNull(twoHundredApplicationJsonObject, "twoHundredApplicationJsonObject");
-        this.twoHundredApplicationJsonObject = twoHundredApplicationJsonObject;
-        return this;
-    }
-
-    /**
-     * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-     */
-    public GetSessionHistoryResponse withFourHundredAndOneApplicationJsonObject(GetSessionHistorySessionsResponseBody fourHundredAndOneApplicationJsonObject) {
-        Utils.checkNotNull(fourHundredAndOneApplicationJsonObject, "fourHundredAndOneApplicationJsonObject");
-        this.fourHundredAndOneApplicationJsonObject = Optional.ofNullable(fourHundredAndOneApplicationJsonObject);
-        return this;
-    }
-
-    /**
-     * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-     */
-    public GetSessionHistoryResponse withFourHundredAndOneApplicationJsonObject(Optional<? extends GetSessionHistorySessionsResponseBody> fourHundredAndOneApplicationJsonObject) {
-        Utils.checkNotNull(fourHundredAndOneApplicationJsonObject, "fourHundredAndOneApplicationJsonObject");
-        this.fourHundredAndOneApplicationJsonObject = fourHundredAndOneApplicationJsonObject;
+    public GetSessionHistoryResponse withObject(Optional<? extends GetSessionHistoryResponseBody> object) {
+        Utils.checkNotNull(object, "object");
+        this.object = object;
         return this;
     }
     
@@ -175,8 +156,7 @@ public class GetSessionHistoryResponse implements lukehagar.plexapi.plexapi.util
             java.util.Objects.deepEquals(this.contentType, other.contentType) &&
             java.util.Objects.deepEquals(this.statusCode, other.statusCode) &&
             java.util.Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            java.util.Objects.deepEquals(this.twoHundredApplicationJsonObject, other.twoHundredApplicationJsonObject) &&
-            java.util.Objects.deepEquals(this.fourHundredAndOneApplicationJsonObject, other.fourHundredAndOneApplicationJsonObject);
+            java.util.Objects.deepEquals(this.object, other.object);
     }
     
     @Override
@@ -185,8 +165,7 @@ public class GetSessionHistoryResponse implements lukehagar.plexapi.plexapi.util
             contentType,
             statusCode,
             rawResponse,
-            twoHundredApplicationJsonObject,
-            fourHundredAndOneApplicationJsonObject);
+            object);
     }
     
     @Override
@@ -195,8 +174,7 @@ public class GetSessionHistoryResponse implements lukehagar.plexapi.plexapi.util
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "twoHundredApplicationJsonObject", twoHundredApplicationJsonObject,
-                "fourHundredAndOneApplicationJsonObject", fourHundredAndOneApplicationJsonObject);
+                "object", object);
     }
     
     public final static class Builder {
@@ -207,9 +185,7 @@ public class GetSessionHistoryResponse implements lukehagar.plexapi.plexapi.util
  
         private HttpResponse<InputStream> rawResponse;
  
-        private Optional<? extends GetSessionHistoryResponseBody> twoHundredApplicationJsonObject = Optional.empty();
- 
-        private Optional<? extends GetSessionHistorySessionsResponseBody> fourHundredAndOneApplicationJsonObject = Optional.empty();  
+        private Optional<? extends GetSessionHistoryResponseBody> object = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -245,36 +221,18 @@ public class GetSessionHistoryResponse implements lukehagar.plexapi.plexapi.util
         /**
          * List of Plex Sessions
          */
-        public Builder twoHundredApplicationJsonObject(GetSessionHistoryResponseBody twoHundredApplicationJsonObject) {
-            Utils.checkNotNull(twoHundredApplicationJsonObject, "twoHundredApplicationJsonObject");
-            this.twoHundredApplicationJsonObject = Optional.ofNullable(twoHundredApplicationJsonObject);
+        public Builder object(GetSessionHistoryResponseBody object) {
+            Utils.checkNotNull(object, "object");
+            this.object = Optional.ofNullable(object);
             return this;
         }
 
         /**
          * List of Plex Sessions
          */
-        public Builder twoHundredApplicationJsonObject(Optional<? extends GetSessionHistoryResponseBody> twoHundredApplicationJsonObject) {
-            Utils.checkNotNull(twoHundredApplicationJsonObject, "twoHundredApplicationJsonObject");
-            this.twoHundredApplicationJsonObject = twoHundredApplicationJsonObject;
-            return this;
-        }
-
-        /**
-         * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-         */
-        public Builder fourHundredAndOneApplicationJsonObject(GetSessionHistorySessionsResponseBody fourHundredAndOneApplicationJsonObject) {
-            Utils.checkNotNull(fourHundredAndOneApplicationJsonObject, "fourHundredAndOneApplicationJsonObject");
-            this.fourHundredAndOneApplicationJsonObject = Optional.ofNullable(fourHundredAndOneApplicationJsonObject);
-            return this;
-        }
-
-        /**
-         * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-         */
-        public Builder fourHundredAndOneApplicationJsonObject(Optional<? extends GetSessionHistorySessionsResponseBody> fourHundredAndOneApplicationJsonObject) {
-            Utils.checkNotNull(fourHundredAndOneApplicationJsonObject, "fourHundredAndOneApplicationJsonObject");
-            this.fourHundredAndOneApplicationJsonObject = fourHundredAndOneApplicationJsonObject;
+        public Builder object(Optional<? extends GetSessionHistoryResponseBody> object) {
+            Utils.checkNotNull(object, "object");
+            this.object = object;
             return this;
         }
         
@@ -283,8 +241,7 @@ public class GetSessionHistoryResponse implements lukehagar.plexapi.plexapi.util
                 contentType,
                 statusCode,
                 rawResponse,
-                twoHundredApplicationJsonObject,
-                fourHundredAndOneApplicationJsonObject);
+                object);
         }
     }
 }

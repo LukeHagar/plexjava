@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetPlaylistContentsMediaContainer {
 
@@ -55,6 +56,7 @@ public class GetPlaylistContentsMediaContainer {
     @JsonProperty("Metadata")
     private Optional<? extends java.util.List<GetPlaylistContentsMetadata>> metadata;
 
+    @JsonCreator
     public GetPlaylistContentsMediaContainer(
             @JsonProperty("size") Optional<? extends Integer> size,
             @JsonProperty("composite") Optional<? extends String> composite,
@@ -84,41 +86,63 @@ public class GetPlaylistContentsMediaContainer {
         this.title = title;
         this.metadata = metadata;
     }
-
-    public Optional<? extends Integer> size() {
-        return size;
+    
+    public GetPlaylistContentsMediaContainer() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> composite() {
-        return composite;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> size() {
+        return (Optional<Integer>) size;
     }
 
-    public Optional<? extends Integer> duration() {
-        return duration;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> composite() {
+        return (Optional<String>) composite;
     }
 
-    public Optional<? extends Integer> leafCount() {
-        return leafCount;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> duration() {
+        return (Optional<Integer>) duration;
     }
 
-    public Optional<? extends String> playlistType() {
-        return playlistType;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> leafCount() {
+        return (Optional<Integer>) leafCount;
     }
 
-    public Optional<? extends String> ratingKey() {
-        return ratingKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> playlistType() {
+        return (Optional<String>) playlistType;
     }
 
-    public Optional<? extends Boolean> smart() {
-        return smart;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> ratingKey() {
+        return (Optional<String>) ratingKey;
     }
 
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> smart() {
+        return (Optional<Boolean>) smart;
     }
 
-    public Optional<? extends java.util.List<GetPlaylistContentsMetadata>> metadata() {
-        return metadata;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetPlaylistContentsMetadata>> metadata() {
+        return (Optional<java.util.List<GetPlaylistContentsMetadata>>) metadata;
     }
 
     public final static Builder builder() {

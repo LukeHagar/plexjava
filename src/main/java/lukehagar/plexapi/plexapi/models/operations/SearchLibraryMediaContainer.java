@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class SearchLibraryMediaContainer {
 
@@ -71,6 +72,7 @@ public class SearchLibraryMediaContainer {
     @JsonProperty("Metadata")
     private Optional<? extends java.util.List<SearchLibraryMetadata>> metadata;
 
+    @JsonCreator
     public SearchLibraryMediaContainer(
             @JsonProperty("size") Optional<? extends Integer> size,
             @JsonProperty("allowSync") Optional<? extends Boolean> allowSync,
@@ -112,57 +114,87 @@ public class SearchLibraryMediaContainer {
         this.viewMode = viewMode;
         this.metadata = metadata;
     }
-
-    public Optional<? extends Integer> size() {
-        return size;
+    
+    public SearchLibraryMediaContainer() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends Boolean> allowSync() {
-        return allowSync;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> size() {
+        return (Optional<Integer>) size;
     }
 
-    public Optional<? extends String> art() {
-        return art;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> allowSync() {
+        return (Optional<Boolean>) allowSync;
     }
 
-    public Optional<? extends String> identifier() {
-        return identifier;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> art() {
+        return (Optional<String>) art;
     }
 
-    public Optional<? extends String> mediaTagPrefix() {
-        return mediaTagPrefix;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> identifier() {
+        return (Optional<String>) identifier;
     }
 
-    public Optional<? extends Integer> mediaTagVersion() {
-        return mediaTagVersion;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> mediaTagPrefix() {
+        return (Optional<String>) mediaTagPrefix;
     }
 
-    public Optional<? extends Boolean> nocache() {
-        return nocache;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> mediaTagVersion() {
+        return (Optional<Integer>) mediaTagVersion;
     }
 
-    public Optional<? extends String> thumb() {
-        return thumb;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> nocache() {
+        return (Optional<Boolean>) nocache;
     }
 
-    public Optional<? extends String> title1() {
-        return title1;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> thumb() {
+        return (Optional<String>) thumb;
     }
 
-    public Optional<? extends String> title2() {
-        return title2;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title1() {
+        return (Optional<String>) title1;
     }
 
-    public Optional<? extends String> viewGroup() {
-        return viewGroup;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title2() {
+        return (Optional<String>) title2;
     }
 
-    public Optional<? extends Integer> viewMode() {
-        return viewMode;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> viewGroup() {
+        return (Optional<String>) viewGroup;
     }
 
-    public Optional<? extends java.util.List<SearchLibraryMetadata>> metadata() {
-        return metadata;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> viewMode() {
+        return (Optional<Integer>) viewMode;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<SearchLibraryMetadata>> metadata() {
+        return (Optional<java.util.List<SearchLibraryMetadata>>) metadata;
     }
 
     public final static Builder builder() {

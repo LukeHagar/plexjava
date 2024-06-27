@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetLibraryHubsHub {
 
@@ -67,6 +68,7 @@ public class GetLibraryHubsHub {
     @JsonProperty("random")
     private Optional<? extends Boolean> random;
 
+    @JsonCreator
     public GetLibraryHubsHub(
             @JsonProperty("key") Optional<? extends String> key,
             @JsonProperty("title") Optional<? extends String> title,
@@ -105,53 +107,81 @@ public class GetLibraryHubsHub {
         this.promoted = promoted;
         this.random = random;
     }
-
-    public Optional<? extends String> key() {
-        return key;
+    
+    public GetLibraryHubsHub() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
     }
 
-    public Optional<? extends String> type() {
-        return type;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
     }
 
-    public Optional<? extends String> hubIdentifier() {
-        return hubIdentifier;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> type() {
+        return (Optional<String>) type;
     }
 
-    public Optional<? extends String> context() {
-        return context;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> hubIdentifier() {
+        return (Optional<String>) hubIdentifier;
     }
 
-    public Optional<? extends Integer> size() {
-        return size;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> context() {
+        return (Optional<String>) context;
     }
 
-    public Optional<? extends Boolean> more() {
-        return more;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> size() {
+        return (Optional<Integer>) size;
     }
 
-    public Optional<? extends String> style() {
-        return style;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> more() {
+        return (Optional<Boolean>) more;
     }
 
-    public Optional<? extends String> hubKey() {
-        return hubKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> style() {
+        return (Optional<String>) style;
     }
 
-    public Optional<? extends java.util.List<GetLibraryHubsMetadata>> metadata() {
-        return metadata;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> hubKey() {
+        return (Optional<String>) hubKey;
     }
 
-    public Optional<? extends Boolean> promoted() {
-        return promoted;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetLibraryHubsMetadata>> metadata() {
+        return (Optional<java.util.List<GetLibraryHubsMetadata>>) metadata;
     }
 
-    public Optional<? extends Boolean> random() {
-        return random;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> promoted() {
+        return (Optional<Boolean>) promoted;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> random() {
+        return (Optional<Boolean>) random;
     }
 
     public final static Builder builder() {

@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
@@ -16,7 +17,11 @@ import lukehagar.plexapi.plexapi.models.errors.SDKError;
 import lukehagar.plexapi.plexapi.models.operations.SDKMethodInterfaces.*;
 import lukehagar.plexapi.plexapi.utils.HTTPClient;
 import lukehagar.plexapi.plexapi.utils.HTTPRequest;
+import lukehagar.plexapi.plexapi.utils.Hook.AfterErrorContextImpl;
+import lukehagar.plexapi.plexapi.utils.Hook.AfterSuccessContextImpl;
+import lukehagar.plexapi.plexapi.utils.Hook.BeforeRequestContextImpl;
 import lukehagar.plexapi.plexapi.utils.JSON;
+import lukehagar.plexapi.plexapi.utils.Retries.NonRetryableException;
 import lukehagar.plexapi.plexapi.utils.Utils;
 import org.openapitools.jackson.nullable.JsonNullable;
 
@@ -40,6 +45,12 @@ public class Activities implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
+
+    /**
+     * Get Server Activities
+     * Get Server Activities
+     * @return The call builder
+     */
     public lukehagar.plexapi.plexapi.models.operations.GetServerActivitiesRequestBuilder getServerActivities() {
         return new lukehagar.plexapi.plexapi.models.operations.GetServerActivitiesRequestBuilder(this);
     }
@@ -47,72 +58,117 @@ public class Activities implements
     /**
      * Get Server Activities
      * Get Server Activities
-     * @return The response from the API call.
-     * @throws Exception if the API call fails.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
      */
     public lukehagar.plexapi.plexapi.models.operations.GetServerActivitiesResponse getServerActivitiesDirect() throws Exception {
-
-        String baseUrl = lukehagar.plexapi.plexapi.utils.Utils.templateUrl(
+        String _baseUrl = Utils.templateUrl(
                 this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
-
-        String url = lukehagar.plexapi.plexapi.utils.Utils.generateURL(
-                baseUrl,
+        String _url = Utils.generateURL(
+                _baseUrl,
                 "/activities");
+        
+        HTTPRequest _req = new HTTPRequest(_url, "GET");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                this.sdkConfiguration.userAgent);
 
-        HTTPRequest req = new HTTPRequest();
-        req.setMethod("GET");
-        req.setURL(url);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
 
-        req.addHeader("Accept", "application/json");
-        req.addHeader("user-agent", this.sdkConfiguration.userAgent);
-
-        HTTPClient client = lukehagar.plexapi.plexapi.utils.Utils.configureSecurityClient(
-                this.sdkConfiguration.defaultClient, this.sdkConfiguration.securitySource.getSecurity());
-
-        HttpResponse<InputStream> httpRes = client.send(req);
-
-        String contentType = httpRes
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl("getServerActivities", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl("getServerActivities", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl("getServerActivities", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(new AfterErrorContextImpl("getServerActivities", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        lukehagar.plexapi.plexapi.models.operations.GetServerActivitiesResponse.Builder resBuilder = 
+        lukehagar.plexapi.plexapi.models.operations.GetServerActivitiesResponse.Builder _resBuilder = 
             lukehagar.plexapi.plexapi.models.operations.GetServerActivitiesResponse
                 .builder()
-                .contentType(contentType)
-                .statusCode(httpRes.statusCode())
-                .rawResponse(httpRes);
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
 
-        lukehagar.plexapi.plexapi.models.operations.GetServerActivitiesResponse res = resBuilder.build();
-
-        res.withRawResponse(httpRes);
-
-        if (httpRes.statusCode() == 200) {
-            if (lukehagar.plexapi.plexapi.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                lukehagar.plexapi.plexapi.models.operations.GetServerActivitiesResponseBody out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
+        lukehagar.plexapi.plexapi.models.operations.GetServerActivitiesResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                lukehagar.plexapi.plexapi.models.operations.GetServerActivitiesResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<lukehagar.plexapi.plexapi.models.operations.GetServerActivitiesResponseBody>() {});
-                res.withTwoHundredApplicationJsonObject(java.util.Optional.ofNullable(out));
+                _res.withObject(java.util.Optional.ofNullable(_out));
+                return _res;
             } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
-            }
-        } else if (httpRes.statusCode() == 400) {
-        } else if (httpRes.statusCode() == 401) {
-            if (lukehagar.plexapi.plexapi.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                lukehagar.plexapi.plexapi.models.operations.GetServerActivitiesActivitiesResponseBody out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
-                    new TypeReference<lukehagar.plexapi.plexapi.models.operations.GetServerActivitiesActivitiesResponseBody>() {});
-                res.withFourHundredAndOneApplicationJsonObject(java.util.Optional.ofNullable(out));
-            } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
             }
         }
-
-        return res;
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                lukehagar.plexapi.plexapi.models.errors.GetServerActivitiesResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<lukehagar.plexapi.plexapi.models.errors.GetServerActivitiesResponseBody>() {});
+                    _out.withRawResponse(java.util.Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+            }
+        }
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.toByteArrayAndClose(_httpRes.body()));
     }
 
 
+
+    /**
+     * Cancel Server Activities
+     * Cancel Server Activities
+     * @return The call builder
+     */
     public lukehagar.plexapi.plexapi.models.operations.CancelServerActivitiesRequestBuilder cancelServerActivities() {
         return new lukehagar.plexapi.plexapi.models.operations.CancelServerActivitiesRequestBuilder(this);
     }
@@ -121,8 +177,8 @@ public class Activities implements
      * Cancel Server Activities
      * Cancel Server Activities
      * @param activityUUID The UUID of the activity to cancel.
-     * @return The response from the API call.
-     * @throws Exception if the API call fails.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
      */
     public lukehagar.plexapi.plexapi.models.operations.CancelServerActivitiesResponse cancelServerActivities(
             String activityUUID) throws Exception {
@@ -132,57 +188,95 @@ public class Activities implements
                 .activityUUID(activityUUID)
                 .build();
         
-
-        String baseUrl = lukehagar.plexapi.plexapi.utils.Utils.templateUrl(
+        String _baseUrl = Utils.templateUrl(
                 this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
-
-        String url = lukehagar.plexapi.plexapi.utils.Utils.generateURL(
+        String _url = Utils.generateURL(
                 lukehagar.plexapi.plexapi.models.operations.CancelServerActivitiesRequest.class,
-                baseUrl,
+                _baseUrl,
                 "/activities/{activityUUID}",
-                request, null);
+                request, this.sdkConfiguration.globals);
+        
+        HTTPRequest _req = new HTTPRequest(_url, "DELETE");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                this.sdkConfiguration.userAgent);
 
-        HTTPRequest req = new HTTPRequest();
-        req.setMethod("DELETE");
-        req.setURL(url);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
 
-        req.addHeader("Accept", "application/json");
-        req.addHeader("user-agent", this.sdkConfiguration.userAgent);
-
-        HTTPClient client = lukehagar.plexapi.plexapi.utils.Utils.configureSecurityClient(
-                this.sdkConfiguration.defaultClient, this.sdkConfiguration.securitySource.getSecurity());
-
-        HttpResponse<InputStream> httpRes = client.send(req);
-
-        String contentType = httpRes
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl("cancelServerActivities", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl("cancelServerActivities", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl("cancelServerActivities", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(new AfterErrorContextImpl("cancelServerActivities", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        lukehagar.plexapi.plexapi.models.operations.CancelServerActivitiesResponse.Builder resBuilder = 
+        lukehagar.plexapi.plexapi.models.operations.CancelServerActivitiesResponse.Builder _resBuilder = 
             lukehagar.plexapi.plexapi.models.operations.CancelServerActivitiesResponse
                 .builder()
-                .contentType(contentType)
-                .statusCode(httpRes.statusCode())
-                .rawResponse(httpRes);
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
 
-        lukehagar.plexapi.plexapi.models.operations.CancelServerActivitiesResponse res = resBuilder.build();
-
-        res.withRawResponse(httpRes);
-
-        if (httpRes.statusCode() == 200 || httpRes.statusCode() == 400) {
-        } else if (httpRes.statusCode() == 401) {
-            if (lukehagar.plexapi.plexapi.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                lukehagar.plexapi.plexapi.models.operations.CancelServerActivitiesResponseBody out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
-                    new TypeReference<lukehagar.plexapi.plexapi.models.operations.CancelServerActivitiesResponseBody>() {});
-                res.withObject(java.util.Optional.ofNullable(out));
+        lukehagar.plexapi.plexapi.models.operations.CancelServerActivitiesResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            // no content 
+            return _res;
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                lukehagar.plexapi.plexapi.models.errors.CancelServerActivitiesResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<lukehagar.plexapi.plexapi.models.errors.CancelServerActivitiesResponseBody>() {});
+                    _out.withRawResponse(java.util.Optional.ofNullable(_httpRes));
+                
+                throw _out;
             } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
             }
         }
-
-        return res;
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.toByteArrayAndClose(_httpRes.body()));
     }
 
 }

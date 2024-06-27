@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class Account {
 
@@ -51,6 +52,7 @@ public class Account {
     @JsonProperty("thumb")
     private Optional<? extends String> thumb;
 
+    @JsonCreator
     public Account(
             @JsonProperty("id") Optional<? extends Integer> id,
             @JsonProperty("key") Optional<? extends String> key,
@@ -77,37 +79,57 @@ public class Account {
         this.subtitleMode = subtitleMode;
         this.thumb = thumb;
     }
-
-    public Optional<? extends Integer> id() {
-        return id;
+    
+    public Account() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> key() {
-        return key;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> id() {
+        return (Optional<Integer>) id;
     }
 
-    public Optional<? extends String> name() {
-        return name;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
     }
 
-    public Optional<? extends String> defaultAudioLanguage() {
-        return defaultAudioLanguage;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> name() {
+        return (Optional<String>) name;
     }
 
-    public Optional<? extends Boolean> autoSelectAudio() {
-        return autoSelectAudio;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> defaultAudioLanguage() {
+        return (Optional<String>) defaultAudioLanguage;
     }
 
-    public Optional<? extends String> defaultSubtitleLanguage() {
-        return defaultSubtitleLanguage;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> autoSelectAudio() {
+        return (Optional<Boolean>) autoSelectAudio;
     }
 
-    public Optional<? extends Integer> subtitleMode() {
-        return subtitleMode;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> defaultSubtitleLanguage() {
+        return (Optional<String>) defaultSubtitleLanguage;
     }
 
-    public Optional<? extends String> thumb() {
-        return thumb;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> subtitleMode() {
+        return (Optional<Integer>) subtitleMode;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> thumb() {
+        return (Optional<String>) thumb;
     }
 
     public final static Builder builder() {

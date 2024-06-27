@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetServerIdentityMediaContainer {
 
@@ -35,6 +36,7 @@ public class GetServerIdentityMediaContainer {
     @JsonProperty("version")
     private Optional<? extends String> version;
 
+    @JsonCreator
     public GetServerIdentityMediaContainer(
             @JsonProperty("size") Optional<? extends Double> size,
             @JsonProperty("claimed") Optional<? extends Boolean> claimed,
@@ -49,21 +51,33 @@ public class GetServerIdentityMediaContainer {
         this.machineIdentifier = machineIdentifier;
         this.version = version;
     }
-
-    public Optional<? extends Double> size() {
-        return size;
+    
+    public GetServerIdentityMediaContainer() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends Boolean> claimed() {
-        return claimed;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> size() {
+        return (Optional<Double>) size;
     }
 
-    public Optional<? extends String> machineIdentifier() {
-        return machineIdentifier;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> claimed() {
+        return (Optional<Boolean>) claimed;
     }
 
-    public Optional<? extends String> version() {
-        return version;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> machineIdentifier() {
+        return (Optional<String>) machineIdentifier;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> version() {
+        return (Optional<String>) version;
     }
 
     public final static Builder builder() {

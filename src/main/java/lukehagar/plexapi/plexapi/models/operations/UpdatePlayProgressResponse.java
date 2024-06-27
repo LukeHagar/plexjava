@@ -4,16 +4,16 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.http.HttpResponse;
-import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class UpdatePlayProgressResponse implements lukehagar.plexapi.plexapi.utils.Response {
 
@@ -32,29 +32,23 @@ public class UpdatePlayProgressResponse implements lukehagar.plexapi.plexapi.uti
      */
     private HttpResponse<InputStream> rawResponse;
 
-    /**
-     * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-     */
-    private Optional<? extends UpdatePlayProgressResponseBody> object;
-
+    @JsonCreator
     public UpdatePlayProgressResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse,
-            Optional<? extends UpdatePlayProgressResponseBody> object) {
+            HttpResponse<InputStream> rawResponse) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(object, "object");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.object = object;
     }
 
     /**
      * HTTP response content type for this operation
      */
+    @JsonIgnore
     public String contentType() {
         return contentType;
     }
@@ -62,6 +56,7 @@ public class UpdatePlayProgressResponse implements lukehagar.plexapi.plexapi.uti
     /**
      * HTTP response status code for this operation
      */
+    @JsonIgnore
     public int statusCode() {
         return statusCode;
     }
@@ -69,15 +64,9 @@ public class UpdatePlayProgressResponse implements lukehagar.plexapi.plexapi.uti
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
+    @JsonIgnore
     public HttpResponse<InputStream> rawResponse() {
         return rawResponse;
-    }
-
-    /**
-     * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-     */
-    public Optional<? extends UpdatePlayProgressResponseBody> object() {
-        return object;
     }
 
     public final static Builder builder() {
@@ -110,24 +99,6 @@ public class UpdatePlayProgressResponse implements lukehagar.plexapi.plexapi.uti
         this.rawResponse = rawResponse;
         return this;
     }
-
-    /**
-     * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-     */
-    public UpdatePlayProgressResponse withObject(UpdatePlayProgressResponseBody object) {
-        Utils.checkNotNull(object, "object");
-        this.object = Optional.ofNullable(object);
-        return this;
-    }
-
-    /**
-     * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-     */
-    public UpdatePlayProgressResponse withObject(Optional<? extends UpdatePlayProgressResponseBody> object) {
-        Utils.checkNotNull(object, "object");
-        this.object = object;
-        return this;
-    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -141,8 +112,7 @@ public class UpdatePlayProgressResponse implements lukehagar.plexapi.plexapi.uti
         return 
             java.util.Objects.deepEquals(this.contentType, other.contentType) &&
             java.util.Objects.deepEquals(this.statusCode, other.statusCode) &&
-            java.util.Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            java.util.Objects.deepEquals(this.object, other.object);
+            java.util.Objects.deepEquals(this.rawResponse, other.rawResponse);
     }
     
     @Override
@@ -150,8 +120,7 @@ public class UpdatePlayProgressResponse implements lukehagar.plexapi.plexapi.uti
         return java.util.Objects.hash(
             contentType,
             statusCode,
-            rawResponse,
-            object);
+            rawResponse);
     }
     
     @Override
@@ -159,8 +128,7 @@ public class UpdatePlayProgressResponse implements lukehagar.plexapi.plexapi.uti
         return Utils.toString(UpdatePlayProgressResponse.class,
                 "contentType", contentType,
                 "statusCode", statusCode,
-                "rawResponse", rawResponse,
-                "object", object);
+                "rawResponse", rawResponse);
     }
     
     public final static class Builder {
@@ -169,9 +137,7 @@ public class UpdatePlayProgressResponse implements lukehagar.plexapi.plexapi.uti
  
         private Integer statusCode;
  
-        private HttpResponse<InputStream> rawResponse;
- 
-        private Optional<? extends UpdatePlayProgressResponseBody> object = Optional.empty();  
+        private HttpResponse<InputStream> rawResponse;  
         
         private Builder() {
           // force use of static builder() method
@@ -203,31 +169,12 @@ public class UpdatePlayProgressResponse implements lukehagar.plexapi.plexapi.uti
             this.rawResponse = rawResponse;
             return this;
         }
-
-        /**
-         * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-         */
-        public Builder object(UpdatePlayProgressResponseBody object) {
-            Utils.checkNotNull(object, "object");
-            this.object = Optional.ofNullable(object);
-            return this;
-        }
-
-        /**
-         * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-         */
-        public Builder object(Optional<? extends UpdatePlayProgressResponseBody> object) {
-            Utils.checkNotNull(object, "object");
-            this.object = object;
-            return this;
-        }
         
         public UpdatePlayProgressResponse build() {
             return new UpdatePlayProgressResponse(
                 contentType,
                 statusCode,
-                rawResponse,
-                object);
+                rawResponse);
         }
     }
 }

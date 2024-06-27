@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 /**
  * GetTranscodeSessionsResponseBody - The Transcode Sessions
  */
@@ -26,14 +27,21 @@ public class GetTranscodeSessionsResponseBody {
     @JsonProperty("MediaContainer")
     private Optional<? extends GetTranscodeSessionsMediaContainer> mediaContainer;
 
+    @JsonCreator
     public GetTranscodeSessionsResponseBody(
             @JsonProperty("MediaContainer") Optional<? extends GetTranscodeSessionsMediaContainer> mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
         this.mediaContainer = mediaContainer;
     }
+    
+    public GetTranscodeSessionsResponseBody() {
+        this(Optional.empty());
+    }
 
-    public Optional<? extends GetTranscodeSessionsMediaContainer> mediaContainer() {
-        return mediaContainer;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetTranscodeSessionsMediaContainer> mediaContainer() {
+        return (Optional<GetTranscodeSessionsMediaContainer>) mediaContainer;
     }
 
     public final static Builder builder() {

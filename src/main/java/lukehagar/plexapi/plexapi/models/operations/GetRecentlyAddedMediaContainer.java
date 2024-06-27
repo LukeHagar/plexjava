@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetRecentlyAddedMediaContainer {
 
@@ -45,8 +46,9 @@ public class GetRecentlyAddedMediaContainer {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Metadata")
-    private Optional<? extends java.util.List<Metadata>> metadata;
+    private Optional<? extends java.util.List<GetRecentlyAddedMetadata>> metadata;
 
+    @JsonCreator
     public GetRecentlyAddedMediaContainer(
             @JsonProperty("size") Optional<? extends Double> size,
             @JsonProperty("allowSync") Optional<? extends Boolean> allowSync,
@@ -54,7 +56,7 @@ public class GetRecentlyAddedMediaContainer {
             @JsonProperty("mediaTagPrefix") Optional<? extends String> mediaTagPrefix,
             @JsonProperty("mediaTagVersion") Optional<? extends Double> mediaTagVersion,
             @JsonProperty("mixedParents") Optional<? extends Boolean> mixedParents,
-            @JsonProperty("Metadata") Optional<? extends java.util.List<Metadata>> metadata) {
+            @JsonProperty("Metadata") Optional<? extends java.util.List<GetRecentlyAddedMetadata>> metadata) {
         Utils.checkNotNull(size, "size");
         Utils.checkNotNull(allowSync, "allowSync");
         Utils.checkNotNull(identifier, "identifier");
@@ -70,33 +72,51 @@ public class GetRecentlyAddedMediaContainer {
         this.mixedParents = mixedParents;
         this.metadata = metadata;
     }
-
-    public Optional<? extends Double> size() {
-        return size;
+    
+    public GetRecentlyAddedMediaContainer() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends Boolean> allowSync() {
-        return allowSync;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> size() {
+        return (Optional<Double>) size;
     }
 
-    public Optional<? extends String> identifier() {
-        return identifier;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> allowSync() {
+        return (Optional<Boolean>) allowSync;
     }
 
-    public Optional<? extends String> mediaTagPrefix() {
-        return mediaTagPrefix;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> identifier() {
+        return (Optional<String>) identifier;
     }
 
-    public Optional<? extends Double> mediaTagVersion() {
-        return mediaTagVersion;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> mediaTagPrefix() {
+        return (Optional<String>) mediaTagPrefix;
     }
 
-    public Optional<? extends Boolean> mixedParents() {
-        return mixedParents;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> mediaTagVersion() {
+        return (Optional<Double>) mediaTagVersion;
     }
 
-    public Optional<? extends java.util.List<Metadata>> metadata() {
-        return metadata;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> mixedParents() {
+        return (Optional<Boolean>) mixedParents;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetRecentlyAddedMetadata>> metadata() {
+        return (Optional<java.util.List<GetRecentlyAddedMetadata>>) metadata;
     }
 
     public final static Builder builder() {
@@ -175,13 +195,13 @@ public class GetRecentlyAddedMediaContainer {
         return this;
     }
 
-    public GetRecentlyAddedMediaContainer withMetadata(java.util.List<Metadata> metadata) {
+    public GetRecentlyAddedMediaContainer withMetadata(java.util.List<GetRecentlyAddedMetadata> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = Optional.ofNullable(metadata);
         return this;
     }
 
-    public GetRecentlyAddedMediaContainer withMetadata(Optional<? extends java.util.List<Metadata>> metadata) {
+    public GetRecentlyAddedMediaContainer withMetadata(Optional<? extends java.util.List<GetRecentlyAddedMetadata>> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
         return this;
@@ -244,7 +264,7 @@ public class GetRecentlyAddedMediaContainer {
  
         private Optional<? extends Boolean> mixedParents = Optional.empty();
  
-        private Optional<? extends java.util.List<Metadata>> metadata = Optional.empty();  
+        private Optional<? extends java.util.List<GetRecentlyAddedMetadata>> metadata = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -322,13 +342,13 @@ public class GetRecentlyAddedMediaContainer {
             return this;
         }
 
-        public Builder metadata(java.util.List<Metadata> metadata) {
+        public Builder metadata(java.util.List<GetRecentlyAddedMetadata> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = Optional.ofNullable(metadata);
             return this;
         }
 
-        public Builder metadata(Optional<? extends java.util.List<Metadata>> metadata) {
+        public Builder metadata(Optional<? extends java.util.List<GetRecentlyAddedMetadata>> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = metadata;
             return this;

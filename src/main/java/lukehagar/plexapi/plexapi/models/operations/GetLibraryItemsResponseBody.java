@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 /**
  * GetLibraryItemsResponseBody - The contents of the library by section and tag
  */
@@ -26,14 +27,21 @@ public class GetLibraryItemsResponseBody {
     @JsonProperty("MediaContainer")
     private Optional<? extends GetLibraryItemsMediaContainer> mediaContainer;
 
+    @JsonCreator
     public GetLibraryItemsResponseBody(
             @JsonProperty("MediaContainer") Optional<? extends GetLibraryItemsMediaContainer> mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
         this.mediaContainer = mediaContainer;
     }
+    
+    public GetLibraryItemsResponseBody() {
+        this(Optional.empty());
+    }
 
-    public Optional<? extends GetLibraryItemsMediaContainer> mediaContainer() {
-        return mediaContainer;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetLibraryItemsMediaContainer> mediaContainer() {
+        return (Optional<GetLibraryItemsMediaContainer>) mediaContainer;
     }
 
     public final static Builder builder() {

@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 /**
  * GetLibraryHubsResponseBody - The hubs specific to the library
  */
@@ -26,14 +27,21 @@ public class GetLibraryHubsResponseBody {
     @JsonProperty("MediaContainer")
     private Optional<? extends GetLibraryHubsMediaContainer> mediaContainer;
 
+    @JsonCreator
     public GetLibraryHubsResponseBody(
             @JsonProperty("MediaContainer") Optional<? extends GetLibraryHubsMediaContainer> mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
         this.mediaContainer = mediaContainer;
     }
+    
+    public GetLibraryHubsResponseBody() {
+        this(Optional.empty());
+    }
 
-    public Optional<? extends GetLibraryHubsMediaContainer> mediaContainer() {
-        return mediaContainer;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetLibraryHubsMediaContainer> mediaContainer() {
+        return (Optional<GetLibraryHubsMediaContainer>) mediaContainer;
     }
 
     public final static Builder builder() {

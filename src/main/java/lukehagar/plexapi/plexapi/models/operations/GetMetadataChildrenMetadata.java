@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetMetadataChildrenMetadata {
 
@@ -127,6 +128,7 @@ public class GetMetadataChildrenMetadata {
     @JsonProperty("lastRatedAt")
     private Optional<? extends Integer> lastRatedAt;
 
+    @JsonCreator
     public GetMetadataChildrenMetadata(
             @JsonProperty("ratingKey") Optional<? extends String> ratingKey,
             @JsonProperty("key") Optional<? extends String> key,
@@ -210,113 +212,171 @@ public class GetMetadataChildrenMetadata {
         this.skipCount = skipCount;
         this.lastRatedAt = lastRatedAt;
     }
-
-    public Optional<? extends String> ratingKey() {
-        return ratingKey;
+    
+    public GetMetadataChildrenMetadata() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> key() {
-        return key;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> ratingKey() {
+        return (Optional<String>) ratingKey;
     }
 
-    public Optional<? extends String> parentRatingKey() {
-        return parentRatingKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
     }
 
-    public Optional<? extends String> guid() {
-        return guid;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> parentRatingKey() {
+        return (Optional<String>) parentRatingKey;
     }
 
-    public Optional<? extends String> parentGuid() {
-        return parentGuid;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> guid() {
+        return (Optional<String>) guid;
     }
 
-    public Optional<? extends String> parentStudio() {
-        return parentStudio;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> parentGuid() {
+        return (Optional<String>) parentGuid;
     }
 
-    public Optional<? extends String> type() {
-        return type;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> parentStudio() {
+        return (Optional<String>) parentStudio;
     }
 
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> type() {
+        return (Optional<String>) type;
     }
 
-    public Optional<? extends String> parentKey() {
-        return parentKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
     }
 
-    public Optional<? extends String> parentTitle() {
-        return parentTitle;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> parentKey() {
+        return (Optional<String>) parentKey;
     }
 
-    public Optional<? extends String> summary() {
-        return summary;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> parentTitle() {
+        return (Optional<String>) parentTitle;
     }
 
-    public Optional<? extends Integer> index() {
-        return index;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> summary() {
+        return (Optional<String>) summary;
     }
 
-    public Optional<? extends Integer> parentIndex() {
-        return parentIndex;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> index() {
+        return (Optional<Integer>) index;
     }
 
-    public Optional<? extends Integer> viewCount() {
-        return viewCount;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> parentIndex() {
+        return (Optional<Integer>) parentIndex;
     }
 
-    public Optional<? extends Integer> lastViewedAt() {
-        return lastViewedAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> viewCount() {
+        return (Optional<Integer>) viewCount;
     }
 
-    public Optional<? extends Integer> parentYear() {
-        return parentYear;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> lastViewedAt() {
+        return (Optional<Integer>) lastViewedAt;
     }
 
-    public Optional<? extends String> thumb() {
-        return thumb;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> parentYear() {
+        return (Optional<Integer>) parentYear;
     }
 
-    public Optional<? extends String> art() {
-        return art;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> thumb() {
+        return (Optional<String>) thumb;
     }
 
-    public Optional<? extends String> parentThumb() {
-        return parentThumb;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> art() {
+        return (Optional<String>) art;
     }
 
-    public Optional<? extends String> parentTheme() {
-        return parentTheme;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> parentThumb() {
+        return (Optional<String>) parentThumb;
     }
 
-    public Optional<? extends Integer> leafCount() {
-        return leafCount;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> parentTheme() {
+        return (Optional<String>) parentTheme;
     }
 
-    public Optional<? extends Integer> viewedLeafCount() {
-        return viewedLeafCount;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> leafCount() {
+        return (Optional<Integer>) leafCount;
     }
 
-    public Optional<? extends Integer> addedAt() {
-        return addedAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> viewedLeafCount() {
+        return (Optional<Integer>) viewedLeafCount;
     }
 
-    public Optional<? extends Integer> updatedAt() {
-        return updatedAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> addedAt() {
+        return (Optional<Integer>) addedAt;
     }
 
-    public Optional<? extends Integer> userRating() {
-        return userRating;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> updatedAt() {
+        return (Optional<Integer>) updatedAt;
     }
 
-    public Optional<? extends Integer> skipCount() {
-        return skipCount;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> userRating() {
+        return (Optional<Integer>) userRating;
     }
 
-    public Optional<? extends Integer> lastRatedAt() {
-        return lastRatedAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> skipCount() {
+        return (Optional<Integer>) skipCount;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> lastRatedAt() {
+        return (Optional<Integer>) lastRatedAt;
     }
 
     public final static Builder builder() {

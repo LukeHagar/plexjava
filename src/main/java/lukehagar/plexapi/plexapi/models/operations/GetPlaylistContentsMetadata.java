@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,7 +18,6 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetPlaylistContentsMetadata {
 
@@ -148,6 +149,7 @@ public class GetPlaylistContentsMetadata {
     @JsonProperty("Role")
     private Optional<? extends java.util.List<GetPlaylistContentsRole>> role;
 
+    @JsonCreator
     public GetPlaylistContentsMetadata(
             @JsonProperty("ratingKey") Optional<? extends String> ratingKey,
             @JsonProperty("key") Optional<? extends String> key,
@@ -246,133 +248,201 @@ public class GetPlaylistContentsMetadata {
         this.writer = writer;
         this.role = role;
     }
-
-    public Optional<? extends String> ratingKey() {
-        return ratingKey;
+    
+    public GetPlaylistContentsMetadata() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> key() {
-        return key;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> ratingKey() {
+        return (Optional<String>) ratingKey;
     }
 
-    public Optional<? extends String> guid() {
-        return guid;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
     }
 
-    public Optional<? extends String> studio() {
-        return studio;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> guid() {
+        return (Optional<String>) guid;
     }
 
-    public Optional<? extends String> type() {
-        return type;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> studio() {
+        return (Optional<String>) studio;
     }
 
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> type() {
+        return (Optional<String>) type;
     }
 
-    public Optional<? extends String> titleSort() {
-        return titleSort;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
     }
 
-    public Optional<? extends String> librarySectionTitle() {
-        return librarySectionTitle;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> titleSort() {
+        return (Optional<String>) titleSort;
     }
 
-    public Optional<? extends Integer> librarySectionID() {
-        return librarySectionID;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> librarySectionTitle() {
+        return (Optional<String>) librarySectionTitle;
     }
 
-    public Optional<? extends String> librarySectionKey() {
-        return librarySectionKey;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> librarySectionID() {
+        return (Optional<Integer>) librarySectionID;
     }
 
-    public Optional<? extends String> contentRating() {
-        return contentRating;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> librarySectionKey() {
+        return (Optional<String>) librarySectionKey;
     }
 
-    public Optional<? extends String> summary() {
-        return summary;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> contentRating() {
+        return (Optional<String>) contentRating;
     }
 
-    public Optional<? extends Double> rating() {
-        return rating;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> summary() {
+        return (Optional<String>) summary;
     }
 
-    public Optional<? extends Double> audienceRating() {
-        return audienceRating;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> rating() {
+        return (Optional<Double>) rating;
     }
 
-    public Optional<? extends Integer> year() {
-        return year;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> audienceRating() {
+        return (Optional<Double>) audienceRating;
     }
 
-    public Optional<? extends String> tagline() {
-        return tagline;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> year() {
+        return (Optional<Integer>) year;
     }
 
-    public Optional<? extends String> thumb() {
-        return thumb;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> tagline() {
+        return (Optional<String>) tagline;
     }
 
-    public Optional<? extends String> art() {
-        return art;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> thumb() {
+        return (Optional<String>) thumb;
     }
 
-    public Optional<? extends Integer> duration() {
-        return duration;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> art() {
+        return (Optional<String>) art;
     }
 
-    public Optional<? extends LocalDate> originallyAvailableAt() {
-        return originallyAvailableAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> duration() {
+        return (Optional<Integer>) duration;
     }
 
-    public Optional<? extends Integer> addedAt() {
-        return addedAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<LocalDate> originallyAvailableAt() {
+        return (Optional<LocalDate>) originallyAvailableAt;
     }
 
-    public Optional<? extends Integer> updatedAt() {
-        return updatedAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> addedAt() {
+        return (Optional<Integer>) addedAt;
     }
 
-    public Optional<? extends String> audienceRatingImage() {
-        return audienceRatingImage;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> updatedAt() {
+        return (Optional<Integer>) updatedAt;
     }
 
-    public Optional<? extends String> hasPremiumExtras() {
-        return hasPremiumExtras;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> audienceRatingImage() {
+        return (Optional<String>) audienceRatingImage;
     }
 
-    public Optional<? extends String> hasPremiumPrimaryExtra() {
-        return hasPremiumPrimaryExtra;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> hasPremiumExtras() {
+        return (Optional<String>) hasPremiumExtras;
     }
 
-    public Optional<? extends String> ratingImage() {
-        return ratingImage;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> hasPremiumPrimaryExtra() {
+        return (Optional<String>) hasPremiumPrimaryExtra;
     }
 
-    public Optional<? extends java.util.List<GetPlaylistContentsMedia>> media() {
-        return media;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> ratingImage() {
+        return (Optional<String>) ratingImage;
     }
 
-    public Optional<? extends java.util.List<GetPlaylistContentsGenre>> genre() {
-        return genre;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetPlaylistContentsMedia>> media() {
+        return (Optional<java.util.List<GetPlaylistContentsMedia>>) media;
     }
 
-    public Optional<? extends java.util.List<GetPlaylistContentsCountry>> country() {
-        return country;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetPlaylistContentsGenre>> genre() {
+        return (Optional<java.util.List<GetPlaylistContentsGenre>>) genre;
     }
 
-    public Optional<? extends java.util.List<GetPlaylistContentsDirector>> director() {
-        return director;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetPlaylistContentsCountry>> country() {
+        return (Optional<java.util.List<GetPlaylistContentsCountry>>) country;
     }
 
-    public Optional<? extends java.util.List<GetPlaylistContentsWriter>> writer() {
-        return writer;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetPlaylistContentsDirector>> director() {
+        return (Optional<java.util.List<GetPlaylistContentsDirector>>) director;
     }
 
-    public Optional<? extends java.util.List<GetPlaylistContentsRole>> role() {
-        return role;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetPlaylistContentsWriter>> writer() {
+        return (Optional<java.util.List<GetPlaylistContentsWriter>>) writer;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetPlaylistContentsRole>> role() {
+        return (Optional<java.util.List<GetPlaylistContentsRole>>) role;
     }
 
     public final static Builder builder() {

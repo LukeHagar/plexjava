@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -13,7 +15,6 @@ import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class UpdatePlaylistRequest {
 
@@ -35,6 +36,7 @@ public class UpdatePlaylistRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=summary")
     private Optional<? extends String> summary;
 
+    @JsonCreator
     public UpdatePlaylistRequest(
             double playlistID,
             Optional<? extends String> title,
@@ -46,10 +48,16 @@ public class UpdatePlaylistRequest {
         this.title = title;
         this.summary = summary;
     }
+    
+    public UpdatePlaylistRequest(
+            double playlistID) {
+        this(playlistID, Optional.empty(), Optional.empty());
+    }
 
     /**
      * the ID of the playlist
      */
+    @JsonIgnore
     public double playlistID() {
         return playlistID;
     }
@@ -57,15 +65,19 @@ public class UpdatePlaylistRequest {
     /**
      * name of the playlist
      */
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
     }
 
     /**
      * summary description of the playlist
      */
-    public Optional<? extends String> summary() {
-        return summary;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> summary() {
+        return (Optional<String>) summary;
     }
 
     public final static Builder builder() {

@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetLibraryDirectory {
 
@@ -39,6 +40,7 @@ public class GetLibraryDirectory {
     @JsonProperty("search")
     private Optional<? extends Boolean> search;
 
+    @JsonCreator
     public GetLibraryDirectory(
             @JsonProperty("key") Optional<? extends String> key,
             @JsonProperty("title") Optional<? extends String> title,
@@ -56,25 +58,39 @@ public class GetLibraryDirectory {
         this.prompt = prompt;
         this.search = search;
     }
-
-    public Optional<? extends String> key() {
-        return key;
+    
+    public GetLibraryDirectory() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
     }
 
-    public Optional<? extends Boolean> secondary() {
-        return secondary;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
     }
 
-    public Optional<? extends String> prompt() {
-        return prompt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> secondary() {
+        return (Optional<Boolean>) secondary;
     }
 
-    public Optional<? extends Boolean> search() {
-        return search;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> prompt() {
+        return (Optional<String>) prompt;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> search() {
+        return (Optional<Boolean>) search;
     }
 
     public final static Builder builder() {

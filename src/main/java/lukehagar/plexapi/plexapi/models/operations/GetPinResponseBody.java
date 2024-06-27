@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,7 +20,7 @@ import java.math.BigInteger;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
+import org.openapitools.jackson.nullable.JsonNullable;
 /**
  * GetPinResponseBody - The Pin
  */
@@ -80,8 +82,9 @@ public class GetPinResponseBody {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("newRegistration")
-    private Optional<? extends String> newRegistration;
+    private JsonNullable<? extends Boolean> newRegistration;
 
+    @JsonCreator
     public GetPinResponseBody(
             @JsonProperty("id") Optional<? extends Double> id,
             @JsonProperty("code") Optional<? extends String> code,
@@ -94,7 +97,7 @@ public class GetPinResponseBody {
             @JsonProperty("createdAt") Optional<? extends OffsetDateTime> createdAt,
             @JsonProperty("expiresAt") Optional<? extends OffsetDateTime> expiresAt,
             @JsonProperty("authToken") Optional<? extends String> authToken,
-            @JsonProperty("newRegistration") Optional<? extends String> newRegistration) {
+            @JsonProperty("newRegistration") JsonNullable<? extends Boolean> newRegistration) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(code, "code");
         Utils.checkNotNull(product, "product");
@@ -120,24 +123,36 @@ public class GetPinResponseBody {
         this.authToken = authToken;
         this.newRegistration = newRegistration;
     }
+    
+    public GetPinResponseBody() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined());
+    }
 
     /**
      * PinID for use with authentication
      */
-    public Optional<? extends Double> id() {
-        return id;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> id() {
+        return (Optional<Double>) id;
     }
 
-    public Optional<? extends String> code() {
-        return code;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> code() {
+        return (Optional<String>) code;
     }
 
-    public Optional<? extends String> product() {
-        return product;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> product() {
+        return (Optional<String>) product;
     }
 
-    public Optional<? extends Boolean> trusted() {
-        return trusted;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> trusted() {
+        return (Optional<Boolean>) trusted;
     }
 
     /**
@@ -146,36 +161,52 @@ public class GetPinResponseBody {
      * Which then prompts the user for the 4 Digit Link Pin
      * 
      */
-    public Optional<? extends String> qr() {
-        return qr;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> qr() {
+        return (Optional<String>) qr;
     }
 
-    public Optional<? extends String> clientIdentifier() {
-        return clientIdentifier;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> clientIdentifier() {
+        return (Optional<String>) clientIdentifier;
     }
 
-    public Optional<? extends Location> location() {
-        return location;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Location> location() {
+        return (Optional<Location>) location;
     }
 
-    public Optional<? extends Double> expiresIn() {
-        return expiresIn;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> expiresIn() {
+        return (Optional<Double>) expiresIn;
     }
 
-    public Optional<? extends OffsetDateTime> createdAt() {
-        return createdAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<OffsetDateTime> createdAt() {
+        return (Optional<OffsetDateTime>) createdAt;
     }
 
-    public Optional<? extends OffsetDateTime> expiresAt() {
-        return expiresAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<OffsetDateTime> expiresAt() {
+        return (Optional<OffsetDateTime>) expiresAt;
     }
 
-    public Optional<? extends String> authToken() {
-        return authToken;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> authToken() {
+        return (Optional<String>) authToken;
     }
 
-    public Optional<? extends String> newRegistration() {
-        return newRegistration;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public JsonNullable<Boolean> newRegistration() {
+        return (JsonNullable<Boolean>) newRegistration;
     }
 
     public final static Builder builder() {
@@ -332,13 +363,13 @@ public class GetPinResponseBody {
         return this;
     }
 
-    public GetPinResponseBody withNewRegistration(String newRegistration) {
+    public GetPinResponseBody withNewRegistration(boolean newRegistration) {
         Utils.checkNotNull(newRegistration, "newRegistration");
-        this.newRegistration = Optional.ofNullable(newRegistration);
+        this.newRegistration = JsonNullable.of(newRegistration);
         return this;
     }
 
-    public GetPinResponseBody withNewRegistration(Optional<? extends String> newRegistration) {
+    public GetPinResponseBody withNewRegistration(JsonNullable<? extends Boolean> newRegistration) {
         Utils.checkNotNull(newRegistration, "newRegistration");
         this.newRegistration = newRegistration;
         return this;
@@ -426,7 +457,7 @@ public class GetPinResponseBody {
  
         private Optional<? extends String> authToken = Optional.empty();
  
-        private Optional<? extends String> newRegistration = Optional.empty();  
+        private JsonNullable<? extends Boolean> newRegistration = JsonNullable.undefined();  
         
         private Builder() {
           // force use of static builder() method
@@ -582,13 +613,13 @@ public class GetPinResponseBody {
             return this;
         }
 
-        public Builder newRegistration(String newRegistration) {
+        public Builder newRegistration(boolean newRegistration) {
             Utils.checkNotNull(newRegistration, "newRegistration");
-            this.newRegistration = Optional.ofNullable(newRegistration);
+            this.newRegistration = JsonNullable.of(newRegistration);
             return this;
         }
 
-        public Builder newRegistration(Optional<? extends String> newRegistration) {
+        public Builder newRegistration(JsonNullable<? extends Boolean> newRegistration) {
             Utils.checkNotNull(newRegistration, "newRegistration");
             this.newRegistration = newRegistration;
             return this;

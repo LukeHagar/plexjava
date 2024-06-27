@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetMetadataCountry {
 
@@ -31,6 +32,7 @@ public class GetMetadataCountry {
     @JsonProperty("tag")
     private Optional<? extends String> tag;
 
+    @JsonCreator
     public GetMetadataCountry(
             @JsonProperty("id") Optional<? extends Integer> id,
             @JsonProperty("filter") Optional<? extends String> filter,
@@ -42,17 +44,27 @@ public class GetMetadataCountry {
         this.filter = filter;
         this.tag = tag;
     }
-
-    public Optional<? extends Integer> id() {
-        return id;
+    
+    public GetMetadataCountry() {
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> filter() {
-        return filter;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> id() {
+        return (Optional<Integer>) id;
     }
 
-    public Optional<? extends String> tag() {
-        return tag;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> filter() {
+        return (Optional<String>) filter;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> tag() {
+        return (Optional<String>) tag;
     }
 
     public final static Builder builder() {

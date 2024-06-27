@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -14,7 +16,6 @@ import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.LazySingletonValue;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetPinRequest {
 
@@ -34,15 +35,31 @@ public class GetPinRequest {
      * 
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Client-Identifier")
-    private String xPlexClientIdentifier;
+    private Optional<? extends String> xPlexClientIdentifier;
 
+    /**
+     * Product name of the application shown in the list of devices
+     * 
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Product")
+    private String xPlexProduct;
+
+    @JsonCreator
     public GetPinRequest(
             Optional<? extends Boolean> strong,
-            String xPlexClientIdentifier) {
+            Optional<? extends String> xPlexClientIdentifier,
+            String xPlexProduct) {
         Utils.checkNotNull(strong, "strong");
         Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
+        Utils.checkNotNull(xPlexProduct, "xPlexProduct");
         this.strong = strong;
         this.xPlexClientIdentifier = xPlexClientIdentifier;
+        this.xPlexProduct = xPlexProduct;
+    }
+    
+    public GetPinRequest(
+            String xPlexProduct) {
+        this(Optional.empty(), Optional.empty(), xPlexProduct);
     }
 
     /**
@@ -51,8 +68,10 @@ public class GetPinRequest {
      * Non-Strong codes are used for `Plex.tv/link`
      * 
      */
-    public Optional<? extends Boolean> strong() {
-        return strong;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> strong() {
+        return (Optional<Boolean>) strong;
     }
 
     /**
@@ -61,8 +80,19 @@ public class GetPinRequest {
      * (UUID, serial number, or other number unique per device)
      * 
      */
-    public String xPlexClientIdentifier() {
-        return xPlexClientIdentifier;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> xPlexClientIdentifier() {
+        return (Optional<String>) xPlexClientIdentifier;
+    }
+
+    /**
+     * Product name of the application shown in the list of devices
+     * 
+     */
+    @JsonIgnore
+    public String xPlexProduct() {
+        return xPlexProduct;
     }
 
     public final static Builder builder() {
@@ -101,7 +131,29 @@ public class GetPinRequest {
      */
     public GetPinRequest withXPlexClientIdentifier(String xPlexClientIdentifier) {
         Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
+        this.xPlexClientIdentifier = Optional.ofNullable(xPlexClientIdentifier);
+        return this;
+    }
+
+    /**
+     * The unique identifier for the client application
+     * This is used to track the client application and its usage
+     * (UUID, serial number, or other number unique per device)
+     * 
+     */
+    public GetPinRequest withXPlexClientIdentifier(Optional<? extends String> xPlexClientIdentifier) {
+        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
         this.xPlexClientIdentifier = xPlexClientIdentifier;
+        return this;
+    }
+
+    /**
+     * Product name of the application shown in the list of devices
+     * 
+     */
+    public GetPinRequest withXPlexProduct(String xPlexProduct) {
+        Utils.checkNotNull(xPlexProduct, "xPlexProduct");
+        this.xPlexProduct = xPlexProduct;
         return this;
     }
     
@@ -116,28 +168,33 @@ public class GetPinRequest {
         GetPinRequest other = (GetPinRequest) o;
         return 
             java.util.Objects.deepEquals(this.strong, other.strong) &&
-            java.util.Objects.deepEquals(this.xPlexClientIdentifier, other.xPlexClientIdentifier);
+            java.util.Objects.deepEquals(this.xPlexClientIdentifier, other.xPlexClientIdentifier) &&
+            java.util.Objects.deepEquals(this.xPlexProduct, other.xPlexProduct);
     }
     
     @Override
     public int hashCode() {
         return java.util.Objects.hash(
             strong,
-            xPlexClientIdentifier);
+            xPlexClientIdentifier,
+            xPlexProduct);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetPinRequest.class,
                 "strong", strong,
-                "xPlexClientIdentifier", xPlexClientIdentifier);
+                "xPlexClientIdentifier", xPlexClientIdentifier,
+                "xPlexProduct", xPlexProduct);
     }
     
     public final static class Builder {
  
         private Optional<? extends Boolean> strong;
  
-        private String xPlexClientIdentifier;  
+        private Optional<? extends String> xPlexClientIdentifier = Optional.empty();
+ 
+        private String xPlexProduct;  
         
         private Builder() {
           // force use of static builder() method
@@ -175,7 +232,29 @@ public class GetPinRequest {
          */
         public Builder xPlexClientIdentifier(String xPlexClientIdentifier) {
             Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
+            this.xPlexClientIdentifier = Optional.ofNullable(xPlexClientIdentifier);
+            return this;
+        }
+
+        /**
+         * The unique identifier for the client application
+         * This is used to track the client application and its usage
+         * (UUID, serial number, or other number unique per device)
+         * 
+         */
+        public Builder xPlexClientIdentifier(Optional<? extends String> xPlexClientIdentifier) {
+            Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
             this.xPlexClientIdentifier = xPlexClientIdentifier;
+            return this;
+        }
+
+        /**
+         * Product name of the application shown in the list of devices
+         * 
+         */
+        public Builder xPlexProduct(String xPlexProduct) {
+            Utils.checkNotNull(xPlexProduct, "xPlexProduct");
+            this.xPlexProduct = xPlexProduct;
             return this;
         }
         
@@ -185,7 +264,8 @@ public class GetPinRequest {
             }
             return new GetPinRequest(
                 strong,
-                xPlexClientIdentifier);
+                xPlexClientIdentifier,
+                xPlexProduct);
         }
 
         private static final LazySingletonValue<Optional<? extends Boolean>> _SINGLETON_VALUE_Strong =

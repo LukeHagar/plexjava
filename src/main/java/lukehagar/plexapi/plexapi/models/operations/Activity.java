@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class Activity {
 
@@ -51,6 +52,7 @@ public class Activity {
     @JsonProperty("Context")
     private Optional<? extends Context> context;
 
+    @JsonCreator
     public Activity(
             @JsonProperty("uuid") Optional<? extends String> uuid,
             @JsonProperty("type") Optional<? extends String> type,
@@ -77,37 +79,57 @@ public class Activity {
         this.progress = progress;
         this.context = context;
     }
-
-    public Optional<? extends String> uuid() {
-        return uuid;
+    
+    public Activity() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> type() {
-        return type;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> uuid() {
+        return (Optional<String>) uuid;
     }
 
-    public Optional<? extends Boolean> cancellable() {
-        return cancellable;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> type() {
+        return (Optional<String>) type;
     }
 
-    public Optional<? extends Double> userID() {
-        return userID;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> cancellable() {
+        return (Optional<Boolean>) cancellable;
     }
 
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> userID() {
+        return (Optional<Double>) userID;
     }
 
-    public Optional<? extends String> subtitle() {
-        return subtitle;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
     }
 
-    public Optional<? extends Double> progress() {
-        return progress;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> subtitle() {
+        return (Optional<String>) subtitle;
     }
 
-    public Optional<? extends Context> context() {
-        return context;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> progress() {
+        return (Optional<Double>) progress;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Context> context() {
+        return (Optional<Context>) context;
     }
 
     public final static Builder builder() {

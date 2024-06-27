@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetGlobalHubsMediaContainer {
 
@@ -35,6 +36,7 @@ public class GetGlobalHubsMediaContainer {
     @JsonProperty("Hub")
     private Optional<? extends java.util.List<Hub>> hub;
 
+    @JsonCreator
     public GetGlobalHubsMediaContainer(
             @JsonProperty("size") Optional<? extends Integer> size,
             @JsonProperty("allowSync") Optional<? extends Boolean> allowSync,
@@ -49,21 +51,33 @@ public class GetGlobalHubsMediaContainer {
         this.identifier = identifier;
         this.hub = hub;
     }
-
-    public Optional<? extends Integer> size() {
-        return size;
+    
+    public GetGlobalHubsMediaContainer() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends Boolean> allowSync() {
-        return allowSync;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> size() {
+        return (Optional<Integer>) size;
     }
 
-    public Optional<? extends String> identifier() {
-        return identifier;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> allowSync() {
+        return (Optional<Boolean>) allowSync;
     }
 
-    public Optional<? extends java.util.List<Hub>> hub() {
-        return hub;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> identifier() {
+        return (Optional<String>) identifier;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<Hub>> hub() {
+        return (Optional<java.util.List<Hub>>) hub;
     }
 
     public final static Builder builder() {

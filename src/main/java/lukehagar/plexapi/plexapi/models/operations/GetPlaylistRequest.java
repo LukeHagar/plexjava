@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -12,7 +14,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetPlaylistRequest {
 
@@ -22,6 +23,7 @@ public class GetPlaylistRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=playlistID")
     private double playlistID;
 
+    @JsonCreator
     public GetPlaylistRequest(
             double playlistID) {
         Utils.checkNotNull(playlistID, "playlistID");
@@ -31,6 +33,7 @@ public class GetPlaylistRequest {
     /**
      * the ID of the playlist
      */
+    @JsonIgnore
     public double playlistID() {
         return playlistID;
     }

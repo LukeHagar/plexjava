@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -13,7 +15,6 @@ import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetStatisticsRequest {
 
@@ -25,10 +26,15 @@ public class GetStatisticsRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=Timespan")
     private Optional<? extends Long> timespan;
 
+    @JsonCreator
     public GetStatisticsRequest(
             Optional<? extends Long> timespan) {
         Utils.checkNotNull(timespan, "timespan");
         this.timespan = timespan;
+    }
+    
+    public GetStatisticsRequest() {
+        this(Optional.empty());
     }
 
     /**
@@ -36,8 +42,10 @@ public class GetStatisticsRequest {
      * the exact meaning of this parameter is not known
      * 
      */
-    public Optional<? extends Long> timespan() {
-        return timespan;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Long> timespan() {
+        return (Optional<Long>) timespan;
     }
 
     public final static Builder builder() {

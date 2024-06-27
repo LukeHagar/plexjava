@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetMetadataChildrenDirectory {
 
@@ -39,6 +40,7 @@ public class GetMetadataChildrenDirectory {
     @JsonProperty("title")
     private Optional<? extends String> title;
 
+    @JsonCreator
     public GetMetadataChildrenDirectory(
             @JsonProperty("leafCount") Optional<? extends Integer> leafCount,
             @JsonProperty("thumb") Optional<? extends String> thumb,
@@ -56,25 +58,39 @@ public class GetMetadataChildrenDirectory {
         this.key = key;
         this.title = title;
     }
-
-    public Optional<? extends Integer> leafCount() {
-        return leafCount;
+    
+    public GetMetadataChildrenDirectory() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> thumb() {
-        return thumb;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> leafCount() {
+        return (Optional<Integer>) leafCount;
     }
 
-    public Optional<? extends Integer> viewedLeafCount() {
-        return viewedLeafCount;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> thumb() {
+        return (Optional<String>) thumb;
     }
 
-    public Optional<? extends String> key() {
-        return key;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> viewedLeafCount() {
+        return (Optional<Integer>) viewedLeafCount;
     }
 
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
     }
 
     public final static Builder builder() {

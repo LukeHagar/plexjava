@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetPlaylistContentsMedia {
 
@@ -87,6 +88,7 @@ public class GetPlaylistContentsMedia {
     @JsonProperty("Part")
     private Optional<? extends java.util.List<GetPlaylistContentsPart>> part;
 
+    @JsonCreator
     public GetPlaylistContentsMedia(
             @JsonProperty("id") Optional<? extends Integer> id,
             @JsonProperty("duration") Optional<? extends Integer> duration,
@@ -140,73 +142,111 @@ public class GetPlaylistContentsMedia {
         this.videoProfile = videoProfile;
         this.part = part;
     }
-
-    public Optional<? extends Integer> id() {
-        return id;
+    
+    public GetPlaylistContentsMedia() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends Integer> duration() {
-        return duration;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> id() {
+        return (Optional<Integer>) id;
     }
 
-    public Optional<? extends Integer> bitrate() {
-        return bitrate;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> duration() {
+        return (Optional<Integer>) duration;
     }
 
-    public Optional<? extends Integer> width() {
-        return width;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> bitrate() {
+        return (Optional<Integer>) bitrate;
     }
 
-    public Optional<? extends Integer> height() {
-        return height;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> width() {
+        return (Optional<Integer>) width;
     }
 
-    public Optional<? extends Double> aspectRatio() {
-        return aspectRatio;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> height() {
+        return (Optional<Integer>) height;
     }
 
-    public Optional<? extends Integer> audioChannels() {
-        return audioChannels;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> aspectRatio() {
+        return (Optional<Double>) aspectRatio;
     }
 
-    public Optional<? extends String> audioCodec() {
-        return audioCodec;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> audioChannels() {
+        return (Optional<Integer>) audioChannels;
     }
 
-    public Optional<? extends String> videoCodec() {
-        return videoCodec;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> audioCodec() {
+        return (Optional<String>) audioCodec;
     }
 
-    public Optional<? extends String> videoResolution() {
-        return videoResolution;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> videoCodec() {
+        return (Optional<String>) videoCodec;
     }
 
-    public Optional<? extends String> container() {
-        return container;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> videoResolution() {
+        return (Optional<String>) videoResolution;
     }
 
-    public Optional<? extends String> videoFrameRate() {
-        return videoFrameRate;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> container() {
+        return (Optional<String>) container;
     }
 
-    public Optional<? extends Integer> optimizedForStreaming() {
-        return optimizedForStreaming;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> videoFrameRate() {
+        return (Optional<String>) videoFrameRate;
     }
 
-    public Optional<? extends String> audioProfile() {
-        return audioProfile;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> optimizedForStreaming() {
+        return (Optional<Integer>) optimizedForStreaming;
     }
 
-    public Optional<? extends Boolean> has64bitOffsets() {
-        return has64bitOffsets;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> audioProfile() {
+        return (Optional<String>) audioProfile;
     }
 
-    public Optional<? extends String> videoProfile() {
-        return videoProfile;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> has64bitOffsets() {
+        return (Optional<Boolean>) has64bitOffsets;
     }
 
-    public Optional<? extends java.util.List<GetPlaylistContentsPart>> part() {
-        return part;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> videoProfile() {
+        return (Optional<String>) videoProfile;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetPlaylistContentsPart>> part() {
+        return (Optional<java.util.List<GetPlaylistContentsPart>>) part;
     }
 
     public final static Builder builder() {

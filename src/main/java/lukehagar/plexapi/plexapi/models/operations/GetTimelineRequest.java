@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -12,7 +14,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetTimelineRequest {
 
@@ -76,6 +77,7 @@ public class GetTimelineRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=row")
     private double row;
 
+    @JsonCreator
     public GetTimelineRequest(
             double ratingKey,
             String key,
@@ -112,6 +114,7 @@ public class GetTimelineRequest {
     /**
      * The rating key of the media item
      */
+    @JsonIgnore
     public double ratingKey() {
         return ratingKey;
     }
@@ -119,6 +122,7 @@ public class GetTimelineRequest {
     /**
      * The key of the media item to get the timeline for
      */
+    @JsonIgnore
     public String key() {
         return key;
     }
@@ -126,6 +130,7 @@ public class GetTimelineRequest {
     /**
      * The state of the media item
      */
+    @JsonIgnore
     public State state() {
         return state;
     }
@@ -133,6 +138,7 @@ public class GetTimelineRequest {
     /**
      * Whether the media item has MDE
      */
+    @JsonIgnore
     public double hasMDE() {
         return hasMDE;
     }
@@ -140,6 +146,7 @@ public class GetTimelineRequest {
     /**
      * The time of the media item
      */
+    @JsonIgnore
     public double time() {
         return time;
     }
@@ -147,6 +154,7 @@ public class GetTimelineRequest {
     /**
      * The duration of the media item
      */
+    @JsonIgnore
     public double duration() {
         return duration;
     }
@@ -154,6 +162,7 @@ public class GetTimelineRequest {
     /**
      * The context of the media item
      */
+    @JsonIgnore
     public String context() {
         return context;
     }
@@ -161,6 +170,7 @@ public class GetTimelineRequest {
     /**
      * The play queue item ID of the media item
      */
+    @JsonIgnore
     public double playQueueItemID() {
         return playQueueItemID;
     }
@@ -168,6 +178,7 @@ public class GetTimelineRequest {
     /**
      * The playback time of the media item
      */
+    @JsonIgnore
     public double playBackTime() {
         return playBackTime;
     }
@@ -175,6 +186,7 @@ public class GetTimelineRequest {
     /**
      * The row of the media item
      */
+    @JsonIgnore
     public double row() {
         return row;
     }

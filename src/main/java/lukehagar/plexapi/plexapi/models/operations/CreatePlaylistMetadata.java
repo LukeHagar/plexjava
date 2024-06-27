@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class CreatePlaylistMetadata {
 
@@ -83,6 +84,7 @@ public class CreatePlaylistMetadata {
     @JsonProperty("duration")
     private Optional<? extends Integer> duration;
 
+    @JsonCreator
     public CreatePlaylistMetadata(
             @JsonProperty("ratingKey") Optional<? extends String> ratingKey,
             @JsonProperty("key") Optional<? extends String> key,
@@ -133,69 +135,105 @@ public class CreatePlaylistMetadata {
         this.composite = composite;
         this.duration = duration;
     }
-
-    public Optional<? extends String> ratingKey() {
-        return ratingKey;
+    
+    public CreatePlaylistMetadata() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> key() {
-        return key;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> ratingKey() {
+        return (Optional<String>) ratingKey;
     }
 
-    public Optional<? extends String> guid() {
-        return guid;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
     }
 
-    public Optional<? extends String> type() {
-        return type;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> guid() {
+        return (Optional<String>) guid;
     }
 
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> type() {
+        return (Optional<String>) type;
     }
 
-    public Optional<? extends String> summary() {
-        return summary;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
     }
 
-    public Optional<? extends Boolean> smart() {
-        return smart;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> summary() {
+        return (Optional<String>) summary;
     }
 
-    public Optional<? extends String> playlistType() {
-        return playlistType;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> smart() {
+        return (Optional<Boolean>) smart;
     }
 
-    public Optional<? extends String> icon() {
-        return icon;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> playlistType() {
+        return (Optional<String>) playlistType;
     }
 
-    public Optional<? extends Integer> viewCount() {
-        return viewCount;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> icon() {
+        return (Optional<String>) icon;
     }
 
-    public Optional<? extends Integer> lastViewedAt() {
-        return lastViewedAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> viewCount() {
+        return (Optional<Integer>) viewCount;
     }
 
-    public Optional<? extends Integer> leafCount() {
-        return leafCount;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> lastViewedAt() {
+        return (Optional<Integer>) lastViewedAt;
     }
 
-    public Optional<? extends Integer> addedAt() {
-        return addedAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> leafCount() {
+        return (Optional<Integer>) leafCount;
     }
 
-    public Optional<? extends Integer> updatedAt() {
-        return updatedAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> addedAt() {
+        return (Optional<Integer>) addedAt;
     }
 
-    public Optional<? extends String> composite() {
-        return composite;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> updatedAt() {
+        return (Optional<Integer>) updatedAt;
     }
 
-    public Optional<? extends Integer> duration() {
-        return duration;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> composite() {
+        return (Optional<String>) composite;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> duration() {
+        return (Optional<Integer>) duration;
     }
 
     public final static Builder builder() {

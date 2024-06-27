@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -12,7 +14,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class UploadPlaylistRequest {
 
@@ -38,6 +39,7 @@ public class UploadPlaylistRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=force")
     private Force force;
 
+    @JsonCreator
     public UploadPlaylistRequest(
             String path,
             Force force) {
@@ -56,6 +58,7 @@ public class UploadPlaylistRequest {
      * The GUID of each playlist is based on the filename.
      * 
      */
+    @JsonIgnore
     public String path() {
         return path;
     }
@@ -67,6 +70,7 @@ public class UploadPlaylistRequest {
      * If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.
      * 
      */
+    @JsonIgnore
     public Force force() {
         return force;
     }

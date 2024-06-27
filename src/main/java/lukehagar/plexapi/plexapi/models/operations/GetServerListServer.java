@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetServerListServer {
 
@@ -43,6 +44,7 @@ public class GetServerListServer {
     @JsonProperty("version")
     private Optional<? extends String> version;
 
+    @JsonCreator
     public GetServerListServer(
             @JsonProperty("name") Optional<? extends String> name,
             @JsonProperty("host") Optional<? extends String> host,
@@ -63,29 +65,45 @@ public class GetServerListServer {
         this.machineIdentifier = machineIdentifier;
         this.version = version;
     }
-
-    public Optional<? extends String> name() {
-        return name;
+    
+    public GetServerListServer() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> host() {
-        return host;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> name() {
+        return (Optional<String>) name;
     }
 
-    public Optional<? extends String> address() {
-        return address;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> host() {
+        return (Optional<String>) host;
     }
 
-    public Optional<? extends Double> port() {
-        return port;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> address() {
+        return (Optional<String>) address;
     }
 
-    public Optional<? extends String> machineIdentifier() {
-        return machineIdentifier;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> port() {
+        return (Optional<Double>) port;
     }
 
-    public Optional<? extends String> version() {
-        return version;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> machineIdentifier() {
+        return (Optional<String>) machineIdentifier;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> version() {
+        return (Optional<String>) version;
     }
 
     public final static Builder builder() {

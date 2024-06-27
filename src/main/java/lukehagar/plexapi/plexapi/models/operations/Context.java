@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,21 +18,27 @@ import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
 
-
 public class Context {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionID")
     private Optional<? extends String> librarySectionID;
 
+    @JsonCreator
     public Context(
             @JsonProperty("librarySectionID") Optional<? extends String> librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
         this.librarySectionID = librarySectionID;
     }
+    
+    public Context() {
+        this(Optional.empty());
+    }
 
-    public Optional<? extends String> librarySectionID() {
-        return librarySectionID;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> librarySectionID() {
+        return (Optional<String>) librarySectionID;
     }
 
     public final static Builder builder() {

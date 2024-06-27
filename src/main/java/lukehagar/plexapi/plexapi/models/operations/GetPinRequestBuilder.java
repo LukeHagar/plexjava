@@ -23,7 +23,8 @@ public class GetPinRequestBuilder {
                             "strong",
                             "false",
                             new TypeReference<Optional<? extends Boolean>>() {});
-    private String xPlexClientIdentifier;
+    private Optional<? extends String> xPlexClientIdentifier = Optional.empty();
+    private String xPlexProduct;
     private java.util.Optional<String> serverURL = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetPin sdk;
 
@@ -42,10 +43,22 @@ public class GetPinRequestBuilder {
         this.strong = strong;
         return this;
     }
-
+                
     public GetPinRequestBuilder xPlexClientIdentifier(String xPlexClientIdentifier) {
         Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
+        this.xPlexClientIdentifier = Optional.of(xPlexClientIdentifier);
+        return this;
+    }
+
+    public GetPinRequestBuilder xPlexClientIdentifier(Optional<? extends String> xPlexClientIdentifier) {
+        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
         this.xPlexClientIdentifier = xPlexClientIdentifier;
+        return this;
+    }
+
+    public GetPinRequestBuilder xPlexProduct(String xPlexProduct) {
+        Utils.checkNotNull(xPlexProduct, "xPlexProduct");
+        this.xPlexProduct = xPlexProduct;
         return this;
     }
                 
@@ -69,6 +82,7 @@ public class GetPinRequestBuilder {
         return sdk.getPin(
             strong,
             xPlexClientIdentifier,
+            xPlexProduct,
             serverURL);
     }
 

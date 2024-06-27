@@ -4,16 +4,16 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.http.HttpResponse;
-import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetFileHashResponse implements lukehagar.plexapi.plexapi.utils.Response {
 
@@ -32,29 +32,23 @@ public class GetFileHashResponse implements lukehagar.plexapi.plexapi.utils.Resp
      */
     private HttpResponse<InputStream> rawResponse;
 
-    /**
-     * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-     */
-    private Optional<? extends GetFileHashResponseBody> object;
-
+    @JsonCreator
     public GetFileHashResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse,
-            Optional<? extends GetFileHashResponseBody> object) {
+            HttpResponse<InputStream> rawResponse) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(object, "object");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.object = object;
     }
 
     /**
      * HTTP response content type for this operation
      */
+    @JsonIgnore
     public String contentType() {
         return contentType;
     }
@@ -62,6 +56,7 @@ public class GetFileHashResponse implements lukehagar.plexapi.plexapi.utils.Resp
     /**
      * HTTP response status code for this operation
      */
+    @JsonIgnore
     public int statusCode() {
         return statusCode;
     }
@@ -69,15 +64,9 @@ public class GetFileHashResponse implements lukehagar.plexapi.plexapi.utils.Resp
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
+    @JsonIgnore
     public HttpResponse<InputStream> rawResponse() {
         return rawResponse;
-    }
-
-    /**
-     * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-     */
-    public Optional<? extends GetFileHashResponseBody> object() {
-        return object;
     }
 
     public final static Builder builder() {
@@ -110,24 +99,6 @@ public class GetFileHashResponse implements lukehagar.plexapi.plexapi.utils.Resp
         this.rawResponse = rawResponse;
         return this;
     }
-
-    /**
-     * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-     */
-    public GetFileHashResponse withObject(GetFileHashResponseBody object) {
-        Utils.checkNotNull(object, "object");
-        this.object = Optional.ofNullable(object);
-        return this;
-    }
-
-    /**
-     * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-     */
-    public GetFileHashResponse withObject(Optional<? extends GetFileHashResponseBody> object) {
-        Utils.checkNotNull(object, "object");
-        this.object = object;
-        return this;
-    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -141,8 +112,7 @@ public class GetFileHashResponse implements lukehagar.plexapi.plexapi.utils.Resp
         return 
             java.util.Objects.deepEquals(this.contentType, other.contentType) &&
             java.util.Objects.deepEquals(this.statusCode, other.statusCode) &&
-            java.util.Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            java.util.Objects.deepEquals(this.object, other.object);
+            java.util.Objects.deepEquals(this.rawResponse, other.rawResponse);
     }
     
     @Override
@@ -150,8 +120,7 @@ public class GetFileHashResponse implements lukehagar.plexapi.plexapi.utils.Resp
         return java.util.Objects.hash(
             contentType,
             statusCode,
-            rawResponse,
-            object);
+            rawResponse);
     }
     
     @Override
@@ -159,8 +128,7 @@ public class GetFileHashResponse implements lukehagar.plexapi.plexapi.utils.Resp
         return Utils.toString(GetFileHashResponse.class,
                 "contentType", contentType,
                 "statusCode", statusCode,
-                "rawResponse", rawResponse,
-                "object", object);
+                "rawResponse", rawResponse);
     }
     
     public final static class Builder {
@@ -169,9 +137,7 @@ public class GetFileHashResponse implements lukehagar.plexapi.plexapi.utils.Resp
  
         private Integer statusCode;
  
-        private HttpResponse<InputStream> rawResponse;
- 
-        private Optional<? extends GetFileHashResponseBody> object = Optional.empty();  
+        private HttpResponse<InputStream> rawResponse;  
         
         private Builder() {
           // force use of static builder() method
@@ -203,31 +169,12 @@ public class GetFileHashResponse implements lukehagar.plexapi.plexapi.utils.Resp
             this.rawResponse = rawResponse;
             return this;
         }
-
-        /**
-         * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-         */
-        public Builder object(GetFileHashResponseBody object) {
-            Utils.checkNotNull(object, "object");
-            this.object = Optional.ofNullable(object);
-            return this;
-        }
-
-        /**
-         * Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
-         */
-        public Builder object(Optional<? extends GetFileHashResponseBody> object) {
-            Utils.checkNotNull(object, "object");
-            this.object = object;
-            return this;
-        }
         
         public GetFileHashResponse build() {
             return new GetFileHashResponse(
                 contentType,
                 statusCode,
-                rawResponse,
-                object);
+                rawResponse);
         }
     }
 }

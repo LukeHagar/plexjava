@@ -11,7 +11,7 @@
 | `country`                     | *Optional<? extends String>*  | :heavy_minus_sign:            | N/A                           | United States                 |
 | `city`                        | *Optional<? extends String>*  | :heavy_minus_sign:            | N/A                           | Austin                        |
 | `timeZone`                    | *Optional<? extends String>*  | :heavy_minus_sign:            | N/A                           | America/Chicago               |
-| `postalCode`                  | *Optional<? extends Double>*  | :heavy_minus_sign:            | N/A                           | 78732                         |
+| `postalCode`                  | *Optional<? extends String>*  | :heavy_minus_sign:            | N/A                           | 78732                         |
 | `inPrivacyRestrictedCountry`  | *Optional<? extends Boolean>* | :heavy_minus_sign:            | N/A                           |                               |
 | `subdivisions`                | *Optional<? extends String>*  | :heavy_minus_sign:            | N/A                           | Texas                         |
 | `coordinates`                 | *Optional<? extends String>*  | :heavy_minus_sign:            | N/A                           | 30.3768 -97.8935              |

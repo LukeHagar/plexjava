@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,7 +18,6 @@ import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
 
-
 public class CreatePlaylistMediaContainer {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -27,6 +28,7 @@ public class CreatePlaylistMediaContainer {
     @JsonProperty("Metadata")
     private Optional<? extends java.util.List<CreatePlaylistMetadata>> metadata;
 
+    @JsonCreator
     public CreatePlaylistMediaContainer(
             @JsonProperty("size") Optional<? extends Integer> size,
             @JsonProperty("Metadata") Optional<? extends java.util.List<CreatePlaylistMetadata>> metadata) {
@@ -35,13 +37,21 @@ public class CreatePlaylistMediaContainer {
         this.size = size;
         this.metadata = metadata;
     }
-
-    public Optional<? extends Integer> size() {
-        return size;
+    
+    public CreatePlaylistMediaContainer() {
+        this(Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends java.util.List<CreatePlaylistMetadata>> metadata() {
-        return metadata;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> size() {
+        return (Optional<Integer>) size;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<CreatePlaylistMetadata>> metadata() {
+        return (Optional<java.util.List<CreatePlaylistMetadata>>) metadata;
     }
 
     public final static Builder builder() {

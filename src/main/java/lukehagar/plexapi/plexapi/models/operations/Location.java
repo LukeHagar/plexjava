@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class Location {
 
@@ -45,7 +46,7 @@ public class Location {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("postal_code")
-    private Optional<? extends Double> postalCode;
+    private Optional<? extends String> postalCode;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("in_privacy_restricted_country")
@@ -59,6 +60,7 @@ public class Location {
     @JsonProperty("coordinates")
     private Optional<? extends String> coordinates;
 
+    @JsonCreator
     public Location(
             @JsonProperty("code") Optional<? extends String> code,
             @JsonProperty("european_union_member") Optional<? extends Boolean> europeanUnionMember,
@@ -66,7 +68,7 @@ public class Location {
             @JsonProperty("country") Optional<? extends String> country,
             @JsonProperty("city") Optional<? extends String> city,
             @JsonProperty("time_zone") Optional<? extends String> timeZone,
-            @JsonProperty("postal_code") Optional<? extends Double> postalCode,
+            @JsonProperty("postal_code") Optional<? extends String> postalCode,
             @JsonProperty("in_privacy_restricted_country") Optional<? extends Boolean> inPrivacyRestrictedCountry,
             @JsonProperty("subdivisions") Optional<? extends String> subdivisions,
             @JsonProperty("coordinates") Optional<? extends String> coordinates) {
@@ -91,45 +93,69 @@ public class Location {
         this.subdivisions = subdivisions;
         this.coordinates = coordinates;
     }
-
-    public Optional<? extends String> code() {
-        return code;
+    
+    public Location() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends Boolean> europeanUnionMember() {
-        return europeanUnionMember;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> code() {
+        return (Optional<String>) code;
     }
 
-    public Optional<? extends String> continentCode() {
-        return continentCode;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> europeanUnionMember() {
+        return (Optional<Boolean>) europeanUnionMember;
     }
 
-    public Optional<? extends String> country() {
-        return country;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> continentCode() {
+        return (Optional<String>) continentCode;
     }
 
-    public Optional<? extends String> city() {
-        return city;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> country() {
+        return (Optional<String>) country;
     }
 
-    public Optional<? extends String> timeZone() {
-        return timeZone;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> city() {
+        return (Optional<String>) city;
     }
 
-    public Optional<? extends Double> postalCode() {
-        return postalCode;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> timeZone() {
+        return (Optional<String>) timeZone;
     }
 
-    public Optional<? extends Boolean> inPrivacyRestrictedCountry() {
-        return inPrivacyRestrictedCountry;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> postalCode() {
+        return (Optional<String>) postalCode;
     }
 
-    public Optional<? extends String> subdivisions() {
-        return subdivisions;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> inPrivacyRestrictedCountry() {
+        return (Optional<Boolean>) inPrivacyRestrictedCountry;
     }
 
-    public Optional<? extends String> coordinates() {
-        return coordinates;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> subdivisions() {
+        return (Optional<String>) subdivisions;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> coordinates() {
+        return (Optional<String>) coordinates;
     }
 
     public final static Builder builder() {
@@ -208,13 +234,13 @@ public class Location {
         return this;
     }
 
-    public Location withPostalCode(double postalCode) {
+    public Location withPostalCode(String postalCode) {
         Utils.checkNotNull(postalCode, "postalCode");
         this.postalCode = Optional.ofNullable(postalCode);
         return this;
     }
 
-    public Location withPostalCode(Optional<? extends Double> postalCode) {
+    public Location withPostalCode(Optional<? extends String> postalCode) {
         Utils.checkNotNull(postalCode, "postalCode");
         this.postalCode = postalCode;
         return this;
@@ -322,7 +348,7 @@ public class Location {
  
         private Optional<? extends String> timeZone = Optional.empty();
  
-        private Optional<? extends Double> postalCode = Optional.empty();
+        private Optional<? extends String> postalCode = Optional.empty();
  
         private Optional<? extends Boolean> inPrivacyRestrictedCountry = Optional.empty();
  
@@ -406,13 +432,13 @@ public class Location {
             return this;
         }
 
-        public Builder postalCode(double postalCode) {
+        public Builder postalCode(String postalCode) {
             Utils.checkNotNull(postalCode, "postalCode");
             this.postalCode = Optional.ofNullable(postalCode);
             return this;
         }
 
-        public Builder postalCode(Optional<? extends Double> postalCode) {
+        public Builder postalCode(Optional<? extends String> postalCode) {
             Utils.checkNotNull(postalCode, "postalCode");
             this.postalCode = postalCode;
             return this;

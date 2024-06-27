@@ -4,141 +4,31 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
+/**
+ * Filter - Filters content by field and direction/equality
+ * (Unknown if viewedAt is the only supported column)
+ * 
+ */
 
 public class Filter {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("filter")
-    private Optional<? extends String> filter;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("filterType")
-    private Optional<? extends String> filterType;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("key")
-    private Optional<? extends String> key;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("title")
-    private Optional<? extends String> title;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("type")
-    private Optional<? extends String> type;
-
-    public Filter(
-            @JsonProperty("filter") Optional<? extends String> filter,
-            @JsonProperty("filterType") Optional<? extends String> filterType,
-            @JsonProperty("key") Optional<? extends String> key,
-            @JsonProperty("title") Optional<? extends String> title,
-            @JsonProperty("type") Optional<? extends String> type) {
-        Utils.checkNotNull(filter, "filter");
-        Utils.checkNotNull(filterType, "filterType");
-        Utils.checkNotNull(key, "key");
-        Utils.checkNotNull(title, "title");
-        Utils.checkNotNull(type, "type");
-        this.filter = filter;
-        this.filterType = filterType;
-        this.key = key;
-        this.title = title;
-        this.type = type;
-    }
-
-    public Optional<? extends String> filter() {
-        return filter;
-    }
-
-    public Optional<? extends String> filterType() {
-        return filterType;
-    }
-
-    public Optional<? extends String> key() {
-        return key;
-    }
-
-    public Optional<? extends String> title() {
-        return title;
-    }
-
-    public Optional<? extends String> type() {
-        return type;
+    @JsonCreator
+    public Filter() {
+        
+        
     }
 
     public final static Builder builder() {
         return new Builder();
-    }
-
-    public Filter withFilter(String filter) {
-        Utils.checkNotNull(filter, "filter");
-        this.filter = Optional.ofNullable(filter);
-        return this;
-    }
-
-    public Filter withFilter(Optional<? extends String> filter) {
-        Utils.checkNotNull(filter, "filter");
-        this.filter = filter;
-        return this;
-    }
-
-    public Filter withFilterType(String filterType) {
-        Utils.checkNotNull(filterType, "filterType");
-        this.filterType = Optional.ofNullable(filterType);
-        return this;
-    }
-
-    public Filter withFilterType(Optional<? extends String> filterType) {
-        Utils.checkNotNull(filterType, "filterType");
-        this.filterType = filterType;
-        return this;
-    }
-
-    public Filter withKey(String key) {
-        Utils.checkNotNull(key, "key");
-        this.key = Optional.ofNullable(key);
-        return this;
-    }
-
-    public Filter withKey(Optional<? extends String> key) {
-        Utils.checkNotNull(key, "key");
-        this.key = key;
-        return this;
-    }
-
-    public Filter withTitle(String title) {
-        Utils.checkNotNull(title, "title");
-        this.title = Optional.ofNullable(title);
-        return this;
-    }
-
-    public Filter withTitle(Optional<? extends String> title) {
-        Utils.checkNotNull(title, "title");
-        this.title = title;
-        return this;
-    }
-
-    public Filter withType(String type) {
-        Utils.checkNotNull(type, "type");
-        this.type = Optional.ofNullable(type);
-        return this;
-    }
-
-    public Filter withType(Optional<? extends String> type) {
-        Utils.checkNotNull(type, "type");
-        this.type = type;
-        return this;
     }
     
     @Override
@@ -149,118 +39,29 @@ public class Filter {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Filter other = (Filter) o;
-        return 
-            java.util.Objects.deepEquals(this.filter, other.filter) &&
-            java.util.Objects.deepEquals(this.filterType, other.filterType) &&
-            java.util.Objects.deepEquals(this.key, other.key) &&
-            java.util.Objects.deepEquals(this.title, other.title) &&
-            java.util.Objects.deepEquals(this.type, other.type);
+        return true;
     }
     
     @Override
     public int hashCode() {
         return java.util.Objects.hash(
-            filter,
-            filterType,
-            key,
-            title,
-            type);
+            );
     }
     
     @Override
     public String toString() {
-        return Utils.toString(Filter.class,
-                "filter", filter,
-                "filterType", filterType,
-                "key", key,
-                "title", title,
-                "type", type);
+        return Utils.toString(Filter.class);
     }
     
-    public final static class Builder {
- 
-        private Optional<? extends String> filter = Optional.empty();
- 
-        private Optional<? extends String> filterType = Optional.empty();
- 
-        private Optional<? extends String> key = Optional.empty();
- 
-        private Optional<? extends String> title = Optional.empty();
- 
-        private Optional<? extends String> type = Optional.empty();  
+    public final static class Builder {  
         
         private Builder() {
           // force use of static builder() method
         }
-
-        public Builder filter(String filter) {
-            Utils.checkNotNull(filter, "filter");
-            this.filter = Optional.ofNullable(filter);
-            return this;
-        }
-
-        public Builder filter(Optional<? extends String> filter) {
-            Utils.checkNotNull(filter, "filter");
-            this.filter = filter;
-            return this;
-        }
-
-        public Builder filterType(String filterType) {
-            Utils.checkNotNull(filterType, "filterType");
-            this.filterType = Optional.ofNullable(filterType);
-            return this;
-        }
-
-        public Builder filterType(Optional<? extends String> filterType) {
-            Utils.checkNotNull(filterType, "filterType");
-            this.filterType = filterType;
-            return this;
-        }
-
-        public Builder key(String key) {
-            Utils.checkNotNull(key, "key");
-            this.key = Optional.ofNullable(key);
-            return this;
-        }
-
-        public Builder key(Optional<? extends String> key) {
-            Utils.checkNotNull(key, "key");
-            this.key = key;
-            return this;
-        }
-
-        public Builder title(String title) {
-            Utils.checkNotNull(title, "title");
-            this.title = Optional.ofNullable(title);
-            return this;
-        }
-
-        public Builder title(Optional<? extends String> title) {
-            Utils.checkNotNull(title, "title");
-            this.title = title;
-            return this;
-        }
-
-        public Builder type(String type) {
-            Utils.checkNotNull(type, "type");
-            this.type = Optional.ofNullable(type);
-            return this;
-        }
-
-        public Builder type(Optional<? extends String> type) {
-            Utils.checkNotNull(type, "type");
-            this.type = type;
-            return this;
-        }
         
         public Filter build() {
             return new Filter(
-                filter,
-                filterType,
-                key,
-                title,
-                type);
+                );
         }
     }
 }

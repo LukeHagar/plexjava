@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class TranscodeSession {
 
@@ -115,6 +116,7 @@ public class TranscodeSession {
     @JsonProperty("minOffsetAvailable")
     private Optional<? extends Double> minOffsetAvailable;
 
+    @JsonCreator
     public TranscodeSession(
             @JsonProperty("key") Optional<? extends String> key,
             @JsonProperty("throttled") Optional<? extends Boolean> throttled,
@@ -189,101 +191,153 @@ public class TranscodeSession {
         this.maxOffsetAvailable = maxOffsetAvailable;
         this.minOffsetAvailable = minOffsetAvailable;
     }
-
-    public Optional<? extends String> key() {
-        return key;
+    
+    public TranscodeSession() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends Boolean> throttled() {
-        return throttled;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
     }
 
-    public Optional<? extends Boolean> complete() {
-        return complete;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> throttled() {
+        return (Optional<Boolean>) throttled;
     }
 
-    public Optional<? extends Double> progress() {
-        return progress;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> complete() {
+        return (Optional<Boolean>) complete;
     }
 
-    public Optional<? extends Integer> size() {
-        return size;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> progress() {
+        return (Optional<Double>) progress;
     }
 
-    public Optional<? extends Double> speed() {
-        return speed;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> size() {
+        return (Optional<Integer>) size;
     }
 
-    public Optional<? extends Boolean> error() {
-        return error;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> speed() {
+        return (Optional<Double>) speed;
     }
 
-    public Optional<? extends Integer> duration() {
-        return duration;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> error() {
+        return (Optional<Boolean>) error;
     }
 
-    public Optional<? extends Integer> remaining() {
-        return remaining;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> duration() {
+        return (Optional<Integer>) duration;
     }
 
-    public Optional<? extends String> context() {
-        return context;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> remaining() {
+        return (Optional<Integer>) remaining;
     }
 
-    public Optional<? extends String> sourceVideoCodec() {
-        return sourceVideoCodec;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> context() {
+        return (Optional<String>) context;
     }
 
-    public Optional<? extends String> sourceAudioCodec() {
-        return sourceAudioCodec;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> sourceVideoCodec() {
+        return (Optional<String>) sourceVideoCodec;
     }
 
-    public Optional<? extends String> videoDecision() {
-        return videoDecision;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> sourceAudioCodec() {
+        return (Optional<String>) sourceAudioCodec;
     }
 
-    public Optional<? extends String> audioDecision() {
-        return audioDecision;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> videoDecision() {
+        return (Optional<String>) videoDecision;
     }
 
-    public Optional<? extends String> subtitleDecision() {
-        return subtitleDecision;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> audioDecision() {
+        return (Optional<String>) audioDecision;
     }
 
-    public Optional<? extends String> protocol() {
-        return protocol;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> subtitleDecision() {
+        return (Optional<String>) subtitleDecision;
     }
 
-    public Optional<? extends String> container() {
-        return container;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> protocol() {
+        return (Optional<String>) protocol;
     }
 
-    public Optional<? extends String> videoCodec() {
-        return videoCodec;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> container() {
+        return (Optional<String>) container;
     }
 
-    public Optional<? extends String> audioCodec() {
-        return audioCodec;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> videoCodec() {
+        return (Optional<String>) videoCodec;
     }
 
-    public Optional<? extends Integer> audioChannels() {
-        return audioChannels;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> audioCodec() {
+        return (Optional<String>) audioCodec;
     }
 
-    public Optional<? extends Boolean> transcodeHwRequested() {
-        return transcodeHwRequested;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> audioChannels() {
+        return (Optional<Integer>) audioChannels;
     }
 
-    public Optional<? extends Double> timeStamp() {
-        return timeStamp;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> transcodeHwRequested() {
+        return (Optional<Boolean>) transcodeHwRequested;
     }
 
-    public Optional<? extends Double> maxOffsetAvailable() {
-        return maxOffsetAvailable;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> timeStamp() {
+        return (Optional<Double>) timeStamp;
     }
 
-    public Optional<? extends Double> minOffsetAvailable() {
-        return minOffsetAvailable;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> maxOffsetAvailable() {
+        return (Optional<Double>) maxOffsetAvailable;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> minOffsetAvailable() {
+        return (Optional<Double>) minOffsetAvailable;
     }
 
     public final static Builder builder() {

@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
@@ -16,7 +17,11 @@ import lukehagar.plexapi.plexapi.models.errors.SDKError;
 import lukehagar.plexapi.plexapi.models.operations.SDKMethodInterfaces.*;
 import lukehagar.plexapi.plexapi.utils.HTTPClient;
 import lukehagar.plexapi.plexapi.utils.HTTPRequest;
+import lukehagar.plexapi.plexapi.utils.Hook.AfterErrorContextImpl;
+import lukehagar.plexapi.plexapi.utils.Hook.AfterSuccessContextImpl;
+import lukehagar.plexapi.plexapi.utils.Hook.BeforeRequestContextImpl;
 import lukehagar.plexapi.plexapi.utils.JSON;
+import lukehagar.plexapi.plexapi.utils.Retries.NonRetryableException;
 import lukehagar.plexapi.plexapi.utils.Utils;
 import org.apache.http.NameValuePair;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -26,7 +31,9 @@ import org.openapitools.jackson.nullable.JsonNullable;
  * 
  */
 public class Statistics implements
-            MethodCallGetStatistics {
+            MethodCallGetStatistics,
+            MethodCallGetResourcesStatistics,
+            MethodCallGetBandwidthStatistics {
 
     private final SDKConfiguration sdkConfiguration;
 
@@ -34,6 +41,12 @@ public class Statistics implements
         this.sdkConfiguration = sdkConfiguration;
     }
 
+
+    /**
+     * Get Media Statistics
+     * This will return the media statistics for the server
+     * @return The call builder
+     */
     public lukehagar.plexapi.plexapi.models.operations.GetStatisticsRequestBuilder getStatistics() {
         return new lukehagar.plexapi.plexapi.models.operations.GetStatisticsRequestBuilder(this);
     }
@@ -41,11 +54,20 @@ public class Statistics implements
     /**
      * Get Media Statistics
      * This will return the media statistics for the server
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public lukehagar.plexapi.plexapi.models.operations.GetStatisticsResponse getStatisticsDirect() throws Exception {
+        return getStatistics(Optional.empty());
+    }
+    /**
+     * Get Media Statistics
+     * This will return the media statistics for the server
      * @param timespan The timespan to retrieve statistics for
     the exact meaning of this parameter is not known
 
-     * @return The response from the API call.
-     * @throws Exception if the API call fails.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
      */
     public lukehagar.plexapi.plexapi.models.operations.GetStatisticsResponse getStatistics(
             Optional<? extends Long> timespan) throws Exception {
@@ -55,73 +77,393 @@ public class Statistics implements
                 .timespan(timespan)
                 .build();
         
-
-        String baseUrl = lukehagar.plexapi.plexapi.utils.Utils.templateUrl(
+        String _baseUrl = Utils.templateUrl(
                 this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
-
-        String url = lukehagar.plexapi.plexapi.utils.Utils.generateURL(
-                baseUrl,
+        String _url = Utils.generateURL(
+                _baseUrl,
                 "/statistics/media");
+        
+        HTTPRequest _req = new HTTPRequest(_url, "GET");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                this.sdkConfiguration.userAgent);
 
-        HTTPRequest req = new HTTPRequest();
-        req.setMethod("GET");
-        req.setURL(url);
+        _req.addQueryParams(Utils.getQueryParams(
+                lukehagar.plexapi.plexapi.models.operations.GetStatisticsRequest.class,
+                request, 
+                this.sdkConfiguration.globals));
 
-        req.addHeader("Accept", "application/json");
-        req.addHeader("user-agent", this.sdkConfiguration.userAgent);
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
 
-        java.util.List<NameValuePair> queryParams = lukehagar.plexapi.plexapi.utils.Utils.getQueryParams(
-                lukehagar.plexapi.plexapi.models.operations.GetStatisticsRequest.class, request, null);
-        if (queryParams != null) {
-            for (NameValuePair queryParam : queryParams) {
-                req.addQueryParam(queryParam);
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl("getStatistics", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl("getStatistics", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl("getStatistics", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                         _httpRes);
             }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(new AfterErrorContextImpl("getStatistics", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-
-        HTTPClient client = lukehagar.plexapi.plexapi.utils.Utils.configureSecurityClient(
-                this.sdkConfiguration.defaultClient, this.sdkConfiguration.securitySource.getSecurity());
-
-        HttpResponse<InputStream> httpRes = client.send(req);
-
-        String contentType = httpRes
+        String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        lukehagar.plexapi.plexapi.models.operations.GetStatisticsResponse.Builder resBuilder = 
+        lukehagar.plexapi.plexapi.models.operations.GetStatisticsResponse.Builder _resBuilder = 
             lukehagar.plexapi.plexapi.models.operations.GetStatisticsResponse
                 .builder()
-                .contentType(contentType)
-                .statusCode(httpRes.statusCode())
-                .rawResponse(httpRes);
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
 
-        lukehagar.plexapi.plexapi.models.operations.GetStatisticsResponse res = resBuilder.build();
-
-        res.withRawResponse(httpRes);
-
-        if (httpRes.statusCode() == 200) {
-            if (lukehagar.plexapi.plexapi.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                lukehagar.plexapi.plexapi.models.operations.GetStatisticsResponseBody out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
+        lukehagar.plexapi.plexapi.models.operations.GetStatisticsResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                lukehagar.plexapi.plexapi.models.operations.GetStatisticsResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<lukehagar.plexapi.plexapi.models.operations.GetStatisticsResponseBody>() {});
-                res.withTwoHundredApplicationJsonObject(java.util.Optional.ofNullable(out));
+                _res.withObject(java.util.Optional.ofNullable(_out));
+                return _res;
             } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
-            }
-        } else if (httpRes.statusCode() == 400) {
-        } else if (httpRes.statusCode() == 401) {
-            if (lukehagar.plexapi.plexapi.utils.Utils.matchContentType(contentType, "application/json")) {
-                ObjectMapper mapper = JSON.getMapper();
-                lukehagar.plexapi.plexapi.models.operations.GetStatisticsStatisticsResponseBody out = mapper.readValue(
-                    Utils.toUtf8AndClose(httpRes.body()),
-                    new TypeReference<lukehagar.plexapi.plexapi.models.operations.GetStatisticsStatisticsResponseBody>() {});
-                res.withFourHundredAndOneApplicationJsonObject(java.util.Optional.ofNullable(out));
-            } else {
-                throw new SDKError(httpRes, httpRes.statusCode(), "Unknown content-type received: " + contentType, Utils.toByteArrayAndClose(httpRes.body()));
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
             }
         }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                lukehagar.plexapi.plexapi.models.errors.GetStatisticsResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<lukehagar.plexapi.plexapi.models.errors.GetStatisticsResponseBody>() {});
+                    _out.withRawResponse(java.util.Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+            }
+        }
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.toByteArrayAndClose(_httpRes.body()));
+    }
 
-        return res;
+
+
+    /**
+     * Get Resources Statistics
+     * This will return the resources for the server
+     * @return The call builder
+     */
+    public lukehagar.plexapi.plexapi.models.operations.GetResourcesStatisticsRequestBuilder getResourcesStatistics() {
+        return new lukehagar.plexapi.plexapi.models.operations.GetResourcesStatisticsRequestBuilder(this);
+    }
+
+    /**
+     * Get Resources Statistics
+     * This will return the resources for the server
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public lukehagar.plexapi.plexapi.models.operations.GetResourcesStatisticsResponse getResourcesStatisticsDirect() throws Exception {
+        return getResourcesStatistics(Optional.empty());
+    }
+    /**
+     * Get Resources Statistics
+     * This will return the resources for the server
+     * @param timespan The timespan to retrieve statistics for
+    the exact meaning of this parameter is not known
+
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public lukehagar.plexapi.plexapi.models.operations.GetResourcesStatisticsResponse getResourcesStatistics(
+            Optional<? extends Long> timespan) throws Exception {
+        lukehagar.plexapi.plexapi.models.operations.GetResourcesStatisticsRequest request =
+            lukehagar.plexapi.plexapi.models.operations.GetResourcesStatisticsRequest
+                .builder()
+                .timespan(timespan)
+                .build();
+        
+        String _baseUrl = Utils.templateUrl(
+                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+        String _url = Utils.generateURL(
+                _baseUrl,
+                "/statistics/resources");
+        
+        HTTPRequest _req = new HTTPRequest(_url, "GET");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                this.sdkConfiguration.userAgent);
+
+        _req.addQueryParams(Utils.getQueryParams(
+                lukehagar.plexapi.plexapi.models.operations.GetResourcesStatisticsRequest.class,
+                request, 
+                this.sdkConfiguration.globals));
+
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
+
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl("getResourcesStatistics", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl("getResourcesStatistics", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl("getResourcesStatistics", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(new AfterErrorContextImpl("getResourcesStatistics", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
+            .headers()
+            .firstValue("Content-Type")
+            .orElse("application/octet-stream");
+        lukehagar.plexapi.plexapi.models.operations.GetResourcesStatisticsResponse.Builder _resBuilder = 
+            lukehagar.plexapi.plexapi.models.operations.GetResourcesStatisticsResponse
+                .builder()
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
+
+        lukehagar.plexapi.plexapi.models.operations.GetResourcesStatisticsResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                lukehagar.plexapi.plexapi.models.operations.GetResourcesStatisticsResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<lukehagar.plexapi.plexapi.models.operations.GetResourcesStatisticsResponseBody>() {});
+                _res.withObject(java.util.Optional.ofNullable(_out));
+                return _res;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                lukehagar.plexapi.plexapi.models.errors.GetResourcesStatisticsResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<lukehagar.plexapi.plexapi.models.errors.GetResourcesStatisticsResponseBody>() {});
+                    _out.withRawResponse(java.util.Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+            }
+        }
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.toByteArrayAndClose(_httpRes.body()));
+    }
+
+
+
+    /**
+     * Get Bandwidth Statistics
+     * This will return the bandwidth statistics for the server
+     * @return The call builder
+     */
+    public lukehagar.plexapi.plexapi.models.operations.GetBandwidthStatisticsRequestBuilder getBandwidthStatistics() {
+        return new lukehagar.plexapi.plexapi.models.operations.GetBandwidthStatisticsRequestBuilder(this);
+    }
+
+    /**
+     * Get Bandwidth Statistics
+     * This will return the bandwidth statistics for the server
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public lukehagar.plexapi.plexapi.models.operations.GetBandwidthStatisticsResponse getBandwidthStatisticsDirect() throws Exception {
+        return getBandwidthStatistics(Optional.empty());
+    }
+    /**
+     * Get Bandwidth Statistics
+     * This will return the bandwidth statistics for the server
+     * @param timespan The timespan to retrieve statistics for
+    the exact meaning of this parameter is not known
+
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public lukehagar.plexapi.plexapi.models.operations.GetBandwidthStatisticsResponse getBandwidthStatistics(
+            Optional<? extends Long> timespan) throws Exception {
+        lukehagar.plexapi.plexapi.models.operations.GetBandwidthStatisticsRequest request =
+            lukehagar.plexapi.plexapi.models.operations.GetBandwidthStatisticsRequest
+                .builder()
+                .timespan(timespan)
+                .build();
+        
+        String _baseUrl = Utils.templateUrl(
+                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+        String _url = Utils.generateURL(
+                _baseUrl,
+                "/statistics/bandwidth");
+        
+        HTTPRequest _req = new HTTPRequest(_url, "GET");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                this.sdkConfiguration.userAgent);
+
+        _req.addQueryParams(Utils.getQueryParams(
+                lukehagar.plexapi.plexapi.models.operations.GetBandwidthStatisticsRequest.class,
+                request, 
+                this.sdkConfiguration.globals));
+
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
+
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl("getBandwidthStatistics", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl("getBandwidthStatistics", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl("getBandwidthStatistics", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(new AfterErrorContextImpl("getBandwidthStatistics", Optional.of(java.util.List.of()), sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
+            .headers()
+            .firstValue("Content-Type")
+            .orElse("application/octet-stream");
+        lukehagar.plexapi.plexapi.models.operations.GetBandwidthStatisticsResponse.Builder _resBuilder = 
+            lukehagar.plexapi.plexapi.models.operations.GetBandwidthStatisticsResponse
+                .builder()
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
+
+        lukehagar.plexapi.plexapi.models.operations.GetBandwidthStatisticsResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                lukehagar.plexapi.plexapi.models.operations.GetBandwidthStatisticsResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<lukehagar.plexapi.plexapi.models.operations.GetBandwidthStatisticsResponseBody>() {});
+                _res.withObject(java.util.Optional.ofNullable(_out));
+                return _res;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                lukehagar.plexapi.plexapi.models.errors.GetBandwidthStatisticsResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<lukehagar.plexapi.plexapi.models.errors.GetBandwidthStatisticsResponseBody>() {});
+                    _out.withRawResponse(java.util.Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.toByteArrayAndClose(_httpRes.body()));
+            }
+        }
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.toByteArrayAndClose(_httpRes.body()));
     }
 
 }

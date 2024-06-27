@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetSearchResultsMediaContainer {
 
@@ -43,6 +44,7 @@ public class GetSearchResultsMediaContainer {
     @JsonProperty("Provider")
     private Optional<? extends java.util.List<Provider>> provider;
 
+    @JsonCreator
     public GetSearchResultsMediaContainer(
             @JsonProperty("size") Optional<? extends Double> size,
             @JsonProperty("identifier") Optional<? extends String> identifier,
@@ -63,29 +65,45 @@ public class GetSearchResultsMediaContainer {
         this.metadata = metadata;
         this.provider = provider;
     }
-
-    public Optional<? extends Double> size() {
-        return size;
+    
+    public GetSearchResultsMediaContainer() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> identifier() {
-        return identifier;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> size() {
+        return (Optional<Double>) size;
     }
 
-    public Optional<? extends String> mediaTagPrefix() {
-        return mediaTagPrefix;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> identifier() {
+        return (Optional<String>) identifier;
     }
 
-    public Optional<? extends Double> mediaTagVersion() {
-        return mediaTagVersion;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> mediaTagPrefix() {
+        return (Optional<String>) mediaTagPrefix;
     }
 
-    public Optional<? extends java.util.List<GetSearchResultsMetadata>> metadata() {
-        return metadata;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> mediaTagVersion() {
+        return (Optional<Double>) mediaTagVersion;
     }
 
-    public Optional<? extends java.util.List<Provider>> provider() {
-        return provider;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetSearchResultsMetadata>> metadata() {
+        return (Optional<java.util.List<GetSearchResultsMetadata>>) metadata;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<Provider>> provider() {
+        return (Optional<java.util.List<Provider>>) provider;
     }
 
     public final static Builder builder() {

@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetSessionsPart {
 
@@ -59,6 +60,7 @@ public class GetSessionsPart {
     @JsonProperty("Stream")
     private Optional<? extends java.util.List<GetSessionsStream>> stream;
 
+    @JsonCreator
     public GetSessionsPart(
             @JsonProperty("container") Optional<? extends String> container,
             @JsonProperty("duration") Optional<? extends Integer> duration,
@@ -91,45 +93,69 @@ public class GetSessionsPart {
         this.selected = selected;
         this.stream = stream;
     }
-
-    public Optional<? extends String> container() {
-        return container;
+    
+    public GetSessionsPart() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends Integer> duration() {
-        return duration;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> container() {
+        return (Optional<String>) container;
     }
 
-    public Optional<? extends String> file() {
-        return file;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> duration() {
+        return (Optional<Integer>) duration;
     }
 
-    public Optional<? extends String> hasThumbnail() {
-        return hasThumbnail;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> file() {
+        return (Optional<String>) file;
     }
 
-    public Optional<? extends String> id() {
-        return id;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> hasThumbnail() {
+        return (Optional<String>) hasThumbnail;
     }
 
-    public Optional<? extends String> key() {
-        return key;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> id() {
+        return (Optional<String>) id;
     }
 
-    public Optional<? extends Integer> size() {
-        return size;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
     }
 
-    public Optional<? extends String> decision() {
-        return decision;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> size() {
+        return (Optional<Integer>) size;
     }
 
-    public Optional<? extends Boolean> selected() {
-        return selected;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> decision() {
+        return (Optional<String>) decision;
     }
 
-    public Optional<? extends java.util.List<GetSessionsStream>> stream() {
-        return stream;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> selected() {
+        return (Optional<Boolean>) selected;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetSessionsStream>> stream() {
+        return (Optional<java.util.List<GetSessionsStream>>) stream;
     }
 
     public final static Builder builder() {

@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetSessionsMedia {
 
@@ -51,6 +52,7 @@ public class GetSessionsMedia {
     @JsonProperty("Part")
     private Optional<? extends java.util.List<GetSessionsPart>> part;
 
+    @JsonCreator
     public GetSessionsMedia(
             @JsonProperty("audioChannels") Optional<? extends Integer> audioChannels,
             @JsonProperty("audioCodec") Optional<? extends String> audioCodec,
@@ -77,37 +79,57 @@ public class GetSessionsMedia {
         this.selected = selected;
         this.part = part;
     }
-
-    public Optional<? extends Integer> audioChannels() {
-        return audioChannels;
+    
+    public GetSessionsMedia() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> audioCodec() {
-        return audioCodec;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> audioChannels() {
+        return (Optional<Integer>) audioChannels;
     }
 
-    public Optional<? extends Integer> bitrate() {
-        return bitrate;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> audioCodec() {
+        return (Optional<String>) audioCodec;
     }
 
-    public Optional<? extends String> container() {
-        return container;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> bitrate() {
+        return (Optional<Integer>) bitrate;
     }
 
-    public Optional<? extends Integer> duration() {
-        return duration;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> container() {
+        return (Optional<String>) container;
     }
 
-    public Optional<? extends String> id() {
-        return id;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> duration() {
+        return (Optional<Integer>) duration;
     }
 
-    public Optional<? extends Boolean> selected() {
-        return selected;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> id() {
+        return (Optional<String>) id;
     }
 
-    public Optional<? extends java.util.List<GetSessionsPart>> part() {
-        return part;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> selected() {
+        return (Optional<Boolean>) selected;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetSessionsPart>> part() {
+        return (Optional<java.util.List<GetSessionsPart>>) part;
     }
 
     public final static Builder builder() {

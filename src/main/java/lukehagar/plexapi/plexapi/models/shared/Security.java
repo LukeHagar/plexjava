@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.shared;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
@@ -14,18 +16,19 @@ import java.math.BigInteger;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
 
-
 public class Security {
 
     @SpeakeasyMetadata("security:scheme=true,type=apiKey,subtype=header,name=X-Plex-Token")
     private String accessToken;
 
+    @JsonCreator
     public Security(
             String accessToken) {
         Utils.checkNotNull(accessToken, "accessToken");
         this.accessToken = accessToken;
     }
 
+    @JsonIgnore
     public String accessToken() {
         return accessToken;
     }

@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -13,7 +15,6 @@ import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class CreatePlaylistRequest {
 
@@ -47,6 +48,7 @@ public class CreatePlaylistRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=playQueueID")
     private Optional<? extends Double> playQueueID;
 
+    @JsonCreator
     public CreatePlaylistRequest(
             String title,
             QueryParamType type,
@@ -64,10 +66,19 @@ public class CreatePlaylistRequest {
         this.uri = uri;
         this.playQueueID = playQueueID;
     }
+    
+    public CreatePlaylistRequest(
+            String title,
+            QueryParamType type,
+            Smart smart,
+            String uri) {
+        this(title, type, smart, uri, Optional.empty());
+    }
 
     /**
      * name of the playlist
      */
+    @JsonIgnore
     public String title() {
         return title;
     }
@@ -75,6 +86,7 @@ public class CreatePlaylistRequest {
     /**
      * type of playlist to create
      */
+    @JsonIgnore
     public QueryParamType type() {
         return type;
     }
@@ -82,6 +94,7 @@ public class CreatePlaylistRequest {
     /**
      * whether the playlist is smart or not
      */
+    @JsonIgnore
     public Smart smart() {
         return smart;
     }
@@ -89,6 +102,7 @@ public class CreatePlaylistRequest {
     /**
      * the content URI for the playlist
      */
+    @JsonIgnore
     public String uri() {
         return uri;
     }
@@ -96,8 +110,10 @@ public class CreatePlaylistRequest {
     /**
      * the play queue to copy to a playlist
      */
-    public Optional<? extends Double> playQueueID() {
-        return playQueueID;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> playQueueID() {
+        return (Optional<Double>) playQueueID;
     }
 
     public final static Builder builder() {

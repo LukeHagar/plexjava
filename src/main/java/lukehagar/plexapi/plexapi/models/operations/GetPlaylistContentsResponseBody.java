@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 /**
  * GetPlaylistContentsResponseBody - The playlist contents
  */
@@ -26,14 +27,21 @@ public class GetPlaylistContentsResponseBody {
     @JsonProperty("MediaContainer")
     private Optional<? extends GetPlaylistContentsMediaContainer> mediaContainer;
 
+    @JsonCreator
     public GetPlaylistContentsResponseBody(
             @JsonProperty("MediaContainer") Optional<? extends GetPlaylistContentsMediaContainer> mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
         this.mediaContainer = mediaContainer;
     }
+    
+    public GetPlaylistContentsResponseBody() {
+        this(Optional.empty());
+    }
 
-    public Optional<? extends GetPlaylistContentsMediaContainer> mediaContainer() {
-        return mediaContainer;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetPlaylistContentsMediaContainer> mediaContainer() {
+        return (Optional<GetPlaylistContentsMediaContainer>) mediaContainer;
     }
 
     public final static Builder builder() {

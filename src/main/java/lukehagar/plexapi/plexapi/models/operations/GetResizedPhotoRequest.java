@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -13,7 +15,6 @@ import java.math.BigInteger;
 import lukehagar.plexapi.plexapi.utils.LazySingletonValue;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetResizedPhotoRequest {
 
@@ -59,6 +60,7 @@ public class GetResizedPhotoRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=url")
     private String url;
 
+    @JsonCreator
     public GetResizedPhotoRequest(
             double width,
             double height,
@@ -86,6 +88,7 @@ public class GetResizedPhotoRequest {
     /**
      * The width for the resized photo
      */
+    @JsonIgnore
     public double width() {
         return width;
     }
@@ -93,6 +96,7 @@ public class GetResizedPhotoRequest {
     /**
      * The height for the resized photo
      */
+    @JsonIgnore
     public double height() {
         return height;
     }
@@ -100,6 +104,7 @@ public class GetResizedPhotoRequest {
     /**
      * The opacity for the resized photo
      */
+    @JsonIgnore
     public long opacity() {
         return opacity;
     }
@@ -107,6 +112,7 @@ public class GetResizedPhotoRequest {
     /**
      * The width for the resized photo
      */
+    @JsonIgnore
     public double blur() {
         return blur;
     }
@@ -114,6 +120,7 @@ public class GetResizedPhotoRequest {
     /**
      * images are always scaled proportionally. A value of '1' in minSize will make the smaller native dimension the dimension resized against.
      */
+    @JsonIgnore
     public MinSize minSize() {
         return minSize;
     }
@@ -121,6 +128,7 @@ public class GetResizedPhotoRequest {
     /**
      * allow images to be resized beyond native dimensions.
      */
+    @JsonIgnore
     public Upscale upscale() {
         return upscale;
     }
@@ -128,6 +136,7 @@ public class GetResizedPhotoRequest {
     /**
      * path to image within Plex
      */
+    @JsonIgnore
     public String url() {
         return url;
     }

@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class Release {
 
@@ -43,6 +44,7 @@ public class Release {
     @JsonProperty("state")
     private Optional<? extends String> state;
 
+    @JsonCreator
     public Release(
             @JsonProperty("key") Optional<? extends String> key,
             @JsonProperty("version") Optional<? extends String> version,
@@ -63,29 +65,45 @@ public class Release {
         this.downloadURL = downloadURL;
         this.state = state;
     }
-
-    public Optional<? extends String> key() {
-        return key;
+    
+    public Release() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> version() {
-        return version;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
     }
 
-    public Optional<? extends String> added() {
-        return added;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> version() {
+        return (Optional<String>) version;
     }
 
-    public Optional<? extends String> fixed() {
-        return fixed;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> added() {
+        return (Optional<String>) added;
     }
 
-    public Optional<? extends String> downloadURL() {
-        return downloadURL;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> fixed() {
+        return (Optional<String>) fixed;
     }
 
-    public Optional<? extends String> state() {
-        return state;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> downloadURL() {
+        return (Optional<String>) downloadURL;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> state() {
+        return (Optional<String>) state;
     }
 
     public final static Builder builder() {

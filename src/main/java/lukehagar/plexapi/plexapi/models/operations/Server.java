@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class Server {
 
@@ -63,6 +64,7 @@ public class Server {
     @JsonProperty("protocolCapabilities")
     private Optional<? extends String> protocolCapabilities;
 
+    @JsonCreator
     public Server(
             @JsonProperty("name") Optional<? extends String> name,
             @JsonProperty("host") Optional<? extends String> host,
@@ -98,49 +100,75 @@ public class Server {
         this.protocolVersion = protocolVersion;
         this.protocolCapabilities = protocolCapabilities;
     }
-
-    public Optional<? extends String> name() {
-        return name;
+    
+    public Server() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> host() {
-        return host;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> name() {
+        return (Optional<String>) name;
     }
 
-    public Optional<? extends String> address() {
-        return address;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> host() {
+        return (Optional<String>) host;
     }
 
-    public Optional<? extends Double> port() {
-        return port;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> address() {
+        return (Optional<String>) address;
     }
 
-    public Optional<? extends String> machineIdentifier() {
-        return machineIdentifier;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> port() {
+        return (Optional<Double>) port;
     }
 
-    public Optional<? extends String> version() {
-        return version;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> machineIdentifier() {
+        return (Optional<String>) machineIdentifier;
     }
 
-    public Optional<? extends String> protocol() {
-        return protocol;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> version() {
+        return (Optional<String>) version;
     }
 
-    public Optional<? extends String> product() {
-        return product;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> protocol() {
+        return (Optional<String>) protocol;
     }
 
-    public Optional<? extends String> deviceClass() {
-        return deviceClass;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> product() {
+        return (Optional<String>) product;
     }
 
-    public Optional<? extends Double> protocolVersion() {
-        return protocolVersion;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> deviceClass() {
+        return (Optional<String>) deviceClass;
     }
 
-    public Optional<? extends String> protocolCapabilities() {
-        return protocolCapabilities;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> protocolVersion() {
+        return (Optional<Double>) protocolVersion;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> protocolCapabilities() {
+        return (Optional<String>) protocolCapabilities;
     }
 
     public final static Builder builder() {

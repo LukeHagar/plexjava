@@ -20,7 +20,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
 public class GetTokenRequestBuilder {
 
     private String pinID;
-    private String xPlexClientIdentifier;
+    private Optional<? extends String> xPlexClientIdentifier = Optional.empty();
     private java.util.Optional<String> serverURL = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetToken sdk;
 
@@ -33,8 +33,14 @@ public class GetTokenRequestBuilder {
         this.pinID = pinID;
         return this;
     }
-
+                
     public GetTokenRequestBuilder xPlexClientIdentifier(String xPlexClientIdentifier) {
+        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
+        this.xPlexClientIdentifier = Optional.of(xPlexClientIdentifier);
+        return this;
+    }
+
+    public GetTokenRequestBuilder xPlexClientIdentifier(Optional<? extends String> xPlexClientIdentifier) {
         Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
         this.xPlexClientIdentifier = xPlexClientIdentifier;
         return this;

@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetStatisticsMediaContainer {
 
@@ -35,6 +36,7 @@ public class GetStatisticsMediaContainer {
     @JsonProperty("StatisticsMedia")
     private Optional<? extends java.util.List<StatisticsMedia>> statisticsMedia;
 
+    @JsonCreator
     public GetStatisticsMediaContainer(
             @JsonProperty("size") Optional<? extends Integer> size,
             @JsonProperty("Device") Optional<? extends java.util.List<GetStatisticsDevice>> device,
@@ -49,21 +51,33 @@ public class GetStatisticsMediaContainer {
         this.account = account;
         this.statisticsMedia = statisticsMedia;
     }
-
-    public Optional<? extends Integer> size() {
-        return size;
+    
+    public GetStatisticsMediaContainer() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends java.util.List<GetStatisticsDevice>> device() {
-        return device;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> size() {
+        return (Optional<Integer>) size;
     }
 
-    public Optional<? extends java.util.List<Account>> account() {
-        return account;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetStatisticsDevice>> device() {
+        return (Optional<java.util.List<GetStatisticsDevice>>) device;
     }
 
-    public Optional<? extends java.util.List<StatisticsMedia>> statisticsMedia() {
-        return statisticsMedia;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<Account>> account() {
+        return (Optional<java.util.List<Account>>) account;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<StatisticsMedia>> statisticsMedia() {
+        return (Optional<java.util.List<StatisticsMedia>>) statisticsMedia;
     }
 
     public final static Builder builder() {

@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -12,7 +14,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetPlaylistContentsRequest {
 
@@ -28,6 +29,7 @@ public class GetPlaylistContentsRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")
     private double type;
 
+    @JsonCreator
     public GetPlaylistContentsRequest(
             double playlistID,
             double type) {
@@ -40,6 +42,7 @@ public class GetPlaylistContentsRequest {
     /**
      * the ID of the playlist
      */
+    @JsonIgnore
     public double playlistID() {
         return playlistID;
     }
@@ -47,6 +50,7 @@ public class GetPlaylistContentsRequest {
     /**
      * the metadata type of the item to return
      */
+    @JsonIgnore
     public double type() {
         return type;
     }

@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -13,7 +15,6 @@ import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetGlobalHubsRequest {
 
@@ -29,6 +30,7 @@ public class GetGlobalHubsRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=onlyTransient")
     private Optional<? extends OnlyTransient> onlyTransient;
 
+    @JsonCreator
     public GetGlobalHubsRequest(
             Optional<? extends Double> count,
             Optional<? extends OnlyTransient> onlyTransient) {
@@ -37,19 +39,27 @@ public class GetGlobalHubsRequest {
         this.count = count;
         this.onlyTransient = onlyTransient;
     }
+    
+    public GetGlobalHubsRequest() {
+        this(Optional.empty(), Optional.empty());
+    }
 
     /**
      * The number of items to return with each hub.
      */
-    public Optional<? extends Double> count() {
-        return count;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> count() {
+        return (Optional<Double>) count;
     }
 
     /**
      * Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added).
      */
-    public Optional<? extends OnlyTransient> onlyTransient() {
-        return onlyTransient;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<OnlyTransient> onlyTransient() {
+        return (Optional<OnlyTransient>) onlyTransient;
     }
 
     public final static Builder builder() {

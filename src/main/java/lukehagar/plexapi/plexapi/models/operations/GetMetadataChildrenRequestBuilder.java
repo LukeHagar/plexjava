@@ -20,6 +20,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
 public class GetMetadataChildrenRequestBuilder {
 
     private Double ratingKey;
+    private Optional<? extends String> includeElements = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetMetadataChildren sdk;
 
     public GetMetadataChildrenRequestBuilder(SDKMethodInterfaces.MethodCallGetMetadataChildren sdk) {
@@ -31,10 +32,23 @@ public class GetMetadataChildrenRequestBuilder {
         this.ratingKey = ratingKey;
         return this;
     }
+                
+    public GetMetadataChildrenRequestBuilder includeElements(String includeElements) {
+        Utils.checkNotNull(includeElements, "includeElements");
+        this.includeElements = Optional.of(includeElements);
+        return this;
+    }
+
+    public GetMetadataChildrenRequestBuilder includeElements(Optional<? extends String> includeElements) {
+        Utils.checkNotNull(includeElements, "includeElements");
+        this.includeElements = includeElements;
+        return this;
+    }
 
     public GetMetadataChildrenResponse call() throws Exception {
 
         return sdk.getMetadataChildren(
-            ratingKey);
+            ratingKey,
+            includeElements);
     }
 }

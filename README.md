@@ -140,9 +140,10 @@ License: MIT. See license in LICENSE.
 
 Handling errors in this SDK should largely match your expectations.  All operations return a response object or raise an error.  If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Exception type.
 
-| Error Object           | Status Code            | Content Type           |
-| ---------------------- | ---------------------- | ---------------------- |
-| models/errors/SDKError | 4xx-5xx                | */*                    |
+| Error Object                                    | Status Code                                     | Content Type                                    |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| models/errors/GetServerCapabilitiesResponseBody | 401                                             | application/json                                |
+| models/errors/SDKError                          | 4xx-5xx                                         | */*                                             |
 
 ### Example
 
@@ -150,36 +151,45 @@ Handling errors in this SDK should largely match your expectations.  All operati
 package hello.world;
 
 import java.math.BigDecimal;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Optional;
-import lukehagar.plexapi.plexapi.Plex-API;
+import lukehagar.plexapi.plexapi.PlexAPI;
 import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.operations.GetServerCapabilitiesResponse;
 import lukehagar.plexapi.plexapi.models.shared.*;
 import lukehagar.plexapi.plexapi.models.shared.Security;
+import lukehagar.plexapi.plexapi.utils.EventStream;
+import org.openapitools.jackson.nullable.JsonNullable;
 import static java.util.Map.entry;
 
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
+                .xPlexClientIdentifier("Postman")
                 .build();
 
             GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
                 .call();
 
-            if (res.twoHundredApplicationJsonObject().isPresent()) {
+            if (res.object().isPresent()) {
                 // handle response
             }
+        } catch (lukehagar.plexapi.plexapi.models.errors.GetServerCapabilitiesResponseBody e) {
+            // handle exception
+            throw e;
         } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
             // handle exception
+            throw e;
         } catch (Exception e) {
             // handle exception
+            throw e;
         }
+
     }
 }
 ```
@@ -202,37 +212,46 @@ You can override the default server globally by passing a server index to the `s
 package hello.world;
 
 import java.math.BigDecimal;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Optional;
-import lukehagar.plexapi.plexapi.Plex-API;
+import lukehagar.plexapi.plexapi.PlexAPI;
 import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.operations.GetServerCapabilitiesResponse;
 import lukehagar.plexapi.plexapi.models.shared.*;
 import lukehagar.plexapi.plexapi.models.shared.Security;
+import lukehagar.plexapi.plexapi.utils.EventStream;
+import org.openapitools.jackson.nullable.JsonNullable;
 import static java.util.Map.entry;
 
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .serverIndex(0)
                 .accessToken("<YOUR_API_KEY_HERE>")
+                .xPlexClientIdentifier("Postman")
                 .build();
 
             GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
                 .call();
 
-            if (res.twoHundredApplicationJsonObject().isPresent()) {
+            if (res.object().isPresent()) {
                 // handle response
             }
+        } catch (lukehagar.plexapi.plexapi.models.errors.GetServerCapabilitiesResponseBody e) {
+            // handle exception
+            throw e;
         } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
             // handle exception
+            throw e;
         } catch (Exception e) {
             // handle exception
+            throw e;
         }
+
     }
 }
 ```
@@ -251,37 +270,46 @@ The default server can also be overridden globally by passing a URL to the `serv
 package hello.world;
 
 import java.math.BigDecimal;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Optional;
-import lukehagar.plexapi.plexapi.Plex-API;
+import lukehagar.plexapi.plexapi.PlexAPI;
 import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.operations.GetServerCapabilitiesResponse;
 import lukehagar.plexapi.plexapi.models.shared.*;
 import lukehagar.plexapi.plexapi.models.shared.Security;
+import lukehagar.plexapi.plexapi.utils.EventStream;
+import org.openapitools.jackson.nullable.JsonNullable;
 import static java.util.Map.entry;
 
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .serverURL("{protocol}://{ip}:{port}")
                 .accessToken("<YOUR_API_KEY_HERE>")
+                .xPlexClientIdentifier("Postman")
                 .build();
 
             GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
                 .call();
 
-            if (res.twoHundredApplicationJsonObject().isPresent()) {
+            if (res.object().isPresent()) {
                 // handle response
             }
+        } catch (lukehagar.plexapi.plexapi.models.errors.GetServerCapabilitiesResponseBody e) {
+            // handle exception
+            throw e;
         } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
             // handle exception
+            throw e;
         } catch (Exception e) {
             // handle exception
+            throw e;
         }
+
     }
 }
 ```
@@ -293,38 +321,47 @@ The server URL can also be overridden on a per-operation basis, provided a serve
 package hello.world;
 
 import java.math.BigDecimal;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Optional;
-import lukehagar.plexapi.plexapi.Plex-API;
+import lukehagar.plexapi.plexapi.PlexAPI;
 import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.operations.GetPinRequest;
-import lukehagar.plexapi.plexapi.models.operations.GetPinResponse;
 import lukehagar.plexapi.plexapi.models.shared.*;
+import lukehagar.plexapi.plexapi.utils.EventStream;
+import org.openapitools.jackson.nullable.JsonNullable;
 import static java.util.Map.entry;
 
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         try {
             PlexAPI sdk = PlexAPI.builder()
+                .xPlexClientIdentifier("Postman")
                 .build();
 
             GetPinResponse res = sdk.plex().getPin()
                 .serverURL("https://plex.tv/api/v2")
                 .strong(false)
-                .xPlexClientIdentifier("<value>")
+                .xPlexClientIdentifier("Postman")
+                .xPlexProduct("Postman")
                 .call();
 
-            if (res.twoHundredApplicationJsonObject().isPresent()) {
+            if (res.object().isPresent()) {
                 // handle response
             }
+        } catch (lukehagar.plexapi.plexapi.models.errors.GetPinResponseBody e) {
+            // handle exception
+            throw e;
         } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
             // handle exception
+            throw e;
         } catch (Exception e) {
             // handle exception
+            throw e;
         }
+
     }
 }
 ```
@@ -346,40 +383,120 @@ To authenticate with the API the `accessToken` parameter must be set when initia
 package hello.world;
 
 import java.math.BigDecimal;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Optional;
-import lukehagar.plexapi.plexapi.Plex-API;
+import lukehagar.plexapi.plexapi.PlexAPI;
 import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.operations.GetServerCapabilitiesResponse;
 import lukehagar.plexapi.plexapi.models.shared.*;
 import lukehagar.plexapi.plexapi.models.shared.Security;
+import lukehagar.plexapi.plexapi.utils.EventStream;
+import org.openapitools.jackson.nullable.JsonNullable;
 import static java.util.Map.entry;
 
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
+                .xPlexClientIdentifier("Postman")
                 .build();
 
             GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
                 .call();
 
-            if (res.twoHundredApplicationJsonObject().isPresent()) {
+            if (res.object().isPresent()) {
                 // handle response
             }
+        } catch (lukehagar.plexapi.plexapi.models.errors.GetServerCapabilitiesResponseBody e) {
+            // handle exception
+            throw e;
         } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
             // handle exception
+            throw e;
         } catch (Exception e) {
             // handle exception
+            throw e;
         }
+
     }
 }
 ```
 <!-- End Authentication [security] -->
+
+<!-- Start Global Parameters [global-parameters] -->
+## Global Parameters
+
+A parameter is configured globally. This parameter may be set on the SDK client instance itself during initialization. When configured as an option during SDK initialization, This global value will be used as the default on the operations that use it. When such operations are called, there is a place in each to override the global value, if needed.
+
+For example, you can set `X-Plex-Client-Identifier` to `"Postman"` at SDK initialization and then you do not have to pass the same value on calls to operations like `getPin`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
+
+
+### Available Globals
+
+The following global parameter is available.
+
+| Name | Type | Required | Description |
+| ---- | ---- |:--------:| ----------- |
+| xPlexClientIdentifier | String |  | The unique identifier for the client application
+This is used to track the client application and its usage
+(UUID, serial number, or other number unique per device)
+ |
+
+
+### Example
+
+```java
+package hello.world;
+
+import java.math.BigDecimal;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.Optional;
+import lukehagar.plexapi.plexapi.PlexAPI;
+import lukehagar.plexapi.plexapi.models.operations.*;
+import lukehagar.plexapi.plexapi.models.shared.*;
+import lukehagar.plexapi.plexapi.utils.EventStream;
+import org.openapitools.jackson.nullable.JsonNullable;
+import static java.util.Map.entry;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+        try {
+            PlexAPI sdk = PlexAPI.builder()
+                .xPlexClientIdentifier("Postman")
+                .build();
+
+            GetPinResponse res = sdk.plex().getPin()
+                .strong(false)
+                .xPlexClientIdentifier("Postman")
+                .xPlexProduct("Postman")
+                .call();
+
+            if (res.object().isPresent()) {
+                // handle response
+            }
+        } catch (lukehagar.plexapi.plexapi.models.errors.GetPinResponseBody e) {
+            // handle exception
+            throw e;
+        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+            // handle exception
+            throw e;
+        } catch (Exception e) {
+            // handle exception
+            throw e;
+        }
+
+    }
+}
+```
+<!-- End Global Parameters [global-parameters] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

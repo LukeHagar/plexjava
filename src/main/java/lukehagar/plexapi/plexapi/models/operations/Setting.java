@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class Setting {
 
@@ -59,6 +60,7 @@ public class Setting {
     @JsonProperty("enumValues")
     private Optional<? extends String> enumValues;
 
+    @JsonCreator
     public Setting(
             @JsonProperty("id") Optional<? extends String> id,
             @JsonProperty("label") Optional<? extends String> label,
@@ -91,45 +93,69 @@ public class Setting {
         this.group = group;
         this.enumValues = enumValues;
     }
-
-    public Optional<? extends String> id() {
-        return id;
+    
+    public Setting() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> label() {
-        return label;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> id() {
+        return (Optional<String>) id;
     }
 
-    public Optional<? extends String> summary() {
-        return summary;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> label() {
+        return (Optional<String>) label;
     }
 
-    public Optional<? extends String> type() {
-        return type;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> summary() {
+        return (Optional<String>) summary;
     }
 
-    public Optional<? extends Boolean> default_() {
-        return default_;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> type() {
+        return (Optional<String>) type;
     }
 
-    public Optional<? extends Boolean> value() {
-        return value;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> default_() {
+        return (Optional<Boolean>) default_;
     }
 
-    public Optional<? extends Boolean> hidden() {
-        return hidden;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> value() {
+        return (Optional<Boolean>) value;
     }
 
-    public Optional<? extends Boolean> advanced() {
-        return advanced;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> hidden() {
+        return (Optional<Boolean>) hidden;
     }
 
-    public Optional<? extends String> group() {
-        return group;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> advanced() {
+        return (Optional<Boolean>) advanced;
     }
 
-    public Optional<? extends String> enumValues() {
-        return enumValues;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> group() {
+        return (Optional<String>) group;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> enumValues() {
+        return (Optional<String>) enumValues;
     }
 
     public final static Builder builder() {

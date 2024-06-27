@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,7 +18,6 @@ import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
 
-
 public class GetTranscodeSessionsMediaContainer {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -27,6 +28,7 @@ public class GetTranscodeSessionsMediaContainer {
     @JsonProperty("TranscodeSession")
     private Optional<? extends java.util.List<TranscodeSession>> transcodeSession;
 
+    @JsonCreator
     public GetTranscodeSessionsMediaContainer(
             @JsonProperty("size") Optional<? extends Integer> size,
             @JsonProperty("TranscodeSession") Optional<? extends java.util.List<TranscodeSession>> transcodeSession) {
@@ -35,13 +37,21 @@ public class GetTranscodeSessionsMediaContainer {
         this.size = size;
         this.transcodeSession = transcodeSession;
     }
-
-    public Optional<? extends Integer> size() {
-        return size;
+    
+    public GetTranscodeSessionsMediaContainer() {
+        this(Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends java.util.List<TranscodeSession>> transcodeSession() {
-        return transcodeSession;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> size() {
+        return (Optional<Integer>) size;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<TranscodeSession>> transcodeSession() {
+        return (Optional<java.util.List<TranscodeSession>>) transcodeSession;
     }
 
     public final static Builder builder() {

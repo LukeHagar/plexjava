@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -14,7 +16,6 @@ import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
 
-
 public class CheckForUpdatesRequest {
 
     /**
@@ -23,17 +24,24 @@ public class CheckForUpdatesRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=download")
     private Optional<? extends Download> download;
 
+    @JsonCreator
     public CheckForUpdatesRequest(
             Optional<? extends Download> download) {
         Utils.checkNotNull(download, "download");
         this.download = download;
     }
+    
+    public CheckForUpdatesRequest() {
+        this(Optional.empty());
+    }
 
     /**
      * Indicate that you want to start download any updates found.
      */
-    public Optional<? extends Download> download() {
-        return download;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Download> download() {
+        return (Optional<Download>) download;
     }
 
     public final static Builder builder() {

@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,21 +18,27 @@ import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
 
-
 public class GetPlaylistContentsWriter {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tag")
     private Optional<? extends String> tag;
 
+    @JsonCreator
     public GetPlaylistContentsWriter(
             @JsonProperty("tag") Optional<? extends String> tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = tag;
     }
+    
+    public GetPlaylistContentsWriter() {
+        this(Optional.empty());
+    }
 
-    public Optional<? extends String> tag() {
-        return tag;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> tag() {
+        return (Optional<String>) tag;
     }
 
     public final static Builder builder() {

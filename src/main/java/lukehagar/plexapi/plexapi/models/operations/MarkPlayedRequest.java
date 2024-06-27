@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -12,7 +14,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class MarkPlayedRequest {
 
@@ -22,6 +23,7 @@ public class MarkPlayedRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=key")
     private double key;
 
+    @JsonCreator
     public MarkPlayedRequest(
             double key) {
         Utils.checkNotNull(key, "key");
@@ -31,6 +33,7 @@ public class MarkPlayedRequest {
     /**
      * The media key to mark as played
      */
+    @JsonIgnore
     public double key() {
         return key;
     }

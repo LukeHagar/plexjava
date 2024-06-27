@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -12,7 +14,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class LogLineRequest {
 
@@ -40,6 +41,7 @@ public class LogLineRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=source")
     private String source;
 
+    @JsonCreator
     public LogLineRequest(
             Level level,
             String message,
@@ -61,6 +63,7 @@ public class LogLineRequest {
      * 4: Verbose
      * 
      */
+    @JsonIgnore
     public Level level() {
         return level;
     }
@@ -68,6 +71,7 @@ public class LogLineRequest {
     /**
      * The text of the message to write to the log.
      */
+    @JsonIgnore
     public String message() {
         return message;
     }
@@ -75,6 +79,7 @@ public class LogLineRequest {
     /**
      * a string indicating the source of the message.
      */
+    @JsonIgnore
     public String source() {
         return source;
     }

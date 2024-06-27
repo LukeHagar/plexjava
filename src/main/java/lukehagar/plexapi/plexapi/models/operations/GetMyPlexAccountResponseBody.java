@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 /**
  * GetMyPlexAccountResponseBody - MyPlex Account
  */
@@ -26,14 +27,21 @@ public class GetMyPlexAccountResponseBody {
     @JsonProperty("MyPlex")
     private Optional<? extends MyPlex> myPlex;
 
+    @JsonCreator
     public GetMyPlexAccountResponseBody(
             @JsonProperty("MyPlex") Optional<? extends MyPlex> myPlex) {
         Utils.checkNotNull(myPlex, "myPlex");
         this.myPlex = myPlex;
     }
+    
+    public GetMyPlexAccountResponseBody() {
+        this(Optional.empty());
+    }
 
-    public Optional<? extends MyPlex> myPlex() {
-        return myPlex;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<MyPlex> myPlex() {
+        return (Optional<MyPlex>) myPlex;
     }
 
     public final static Builder builder() {

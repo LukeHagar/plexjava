@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class Player {
 
@@ -79,6 +80,7 @@ public class Player {
     @JsonProperty("userID")
     private Optional<? extends Integer> userID;
 
+    @JsonCreator
     public Player(
             @JsonProperty("address") Optional<? extends String> address,
             @JsonProperty("machineIdentifier") Optional<? extends String> machineIdentifier,
@@ -126,65 +128,99 @@ public class Player {
         this.secure = secure;
         this.userID = userID;
     }
-
-    public Optional<? extends String> address() {
-        return address;
+    
+    public Player() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> machineIdentifier() {
-        return machineIdentifier;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> address() {
+        return (Optional<String>) address;
     }
 
-    public Optional<? extends String> model() {
-        return model;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> machineIdentifier() {
+        return (Optional<String>) machineIdentifier;
     }
 
-    public Optional<? extends String> platform() {
-        return platform;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> model() {
+        return (Optional<String>) model;
     }
 
-    public Optional<? extends String> platformVersion() {
-        return platformVersion;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> platform() {
+        return (Optional<String>) platform;
     }
 
-    public Optional<? extends String> product() {
-        return product;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> platformVersion() {
+        return (Optional<String>) platformVersion;
     }
 
-    public Optional<? extends String> profile() {
-        return profile;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> product() {
+        return (Optional<String>) product;
     }
 
-    public Optional<? extends String> remotePublicAddress() {
-        return remotePublicAddress;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> profile() {
+        return (Optional<String>) profile;
     }
 
-    public Optional<? extends String> state() {
-        return state;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> remotePublicAddress() {
+        return (Optional<String>) remotePublicAddress;
     }
 
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> state() {
+        return (Optional<String>) state;
     }
 
-    public Optional<? extends String> version() {
-        return version;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
     }
 
-    public Optional<? extends Boolean> local() {
-        return local;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> version() {
+        return (Optional<String>) version;
     }
 
-    public Optional<? extends Boolean> relayed() {
-        return relayed;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> local() {
+        return (Optional<Boolean>) local;
     }
 
-    public Optional<? extends Boolean> secure() {
-        return secure;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> relayed() {
+        return (Optional<Boolean>) relayed;
     }
 
-    public Optional<? extends Integer> userID() {
-        return userID;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> secure() {
+        return (Optional<Boolean>) secure;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> userID() {
+        return (Optional<Integer>) userID;
     }
 
     public final static Builder builder() {

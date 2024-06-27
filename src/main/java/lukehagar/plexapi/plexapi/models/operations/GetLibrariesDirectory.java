@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetLibrariesDirectory {
 
@@ -103,6 +104,7 @@ public class GetLibrariesDirectory {
     @JsonProperty("Location")
     private Optional<? extends java.util.List<GetLibrariesLocation>> location;
 
+    @JsonCreator
     public GetLibrariesDirectory(
             @JsonProperty("allowSync") Optional<? extends Boolean> allowSync,
             @JsonProperty("art") Optional<? extends String> art,
@@ -168,89 +170,135 @@ public class GetLibrariesDirectory {
         this.hidden = hidden;
         this.location = location;
     }
-
-    public Optional<? extends Boolean> allowSync() {
-        return allowSync;
+    
+    public GetLibrariesDirectory() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> art() {
-        return art;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> allowSync() {
+        return (Optional<Boolean>) allowSync;
     }
 
-    public Optional<? extends String> composite() {
-        return composite;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> art() {
+        return (Optional<String>) art;
     }
 
-    public Optional<? extends Boolean> filters() {
-        return filters;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> composite() {
+        return (Optional<String>) composite;
     }
 
-    public Optional<? extends Boolean> refreshing() {
-        return refreshing;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> filters() {
+        return (Optional<Boolean>) filters;
     }
 
-    public Optional<? extends String> thumb() {
-        return thumb;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> refreshing() {
+        return (Optional<Boolean>) refreshing;
     }
 
-    public Optional<? extends String> key() {
-        return key;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> thumb() {
+        return (Optional<String>) thumb;
     }
 
-    public Optional<? extends String> type() {
-        return type;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
     }
 
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> type() {
+        return (Optional<String>) type;
     }
 
-    public Optional<? extends String> agent() {
-        return agent;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
     }
 
-    public Optional<? extends String> scanner() {
-        return scanner;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> agent() {
+        return (Optional<String>) agent;
     }
 
-    public Optional<? extends String> language() {
-        return language;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> scanner() {
+        return (Optional<String>) scanner;
     }
 
-    public Optional<? extends String> uuid() {
-        return uuid;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> language() {
+        return (Optional<String>) language;
     }
 
-    public Optional<? extends Integer> updatedAt() {
-        return updatedAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> uuid() {
+        return (Optional<String>) uuid;
     }
 
-    public Optional<? extends Integer> createdAt() {
-        return createdAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> updatedAt() {
+        return (Optional<Integer>) updatedAt;
     }
 
-    public Optional<? extends Integer> scannedAt() {
-        return scannedAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> createdAt() {
+        return (Optional<Integer>) createdAt;
     }
 
-    public Optional<? extends Boolean> content() {
-        return content;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> scannedAt() {
+        return (Optional<Integer>) scannedAt;
     }
 
-    public Optional<? extends Boolean> directory() {
-        return directory;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> content() {
+        return (Optional<Boolean>) content;
     }
 
-    public Optional<? extends Integer> contentChangedAt() {
-        return contentChangedAt;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> directory() {
+        return (Optional<Boolean>) directory;
     }
 
-    public Optional<? extends Integer> hidden() {
-        return hidden;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> contentChangedAt() {
+        return (Optional<Integer>) contentChangedAt;
     }
 
-    public Optional<? extends java.util.List<GetLibrariesLocation>> location() {
-        return location;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> hidden() {
+        return (Optional<Integer>) hidden;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<GetLibrariesLocation>> location() {
+        return (Optional<java.util.List<GetLibrariesLocation>>) location;
     }
 
     public final static Builder builder() {

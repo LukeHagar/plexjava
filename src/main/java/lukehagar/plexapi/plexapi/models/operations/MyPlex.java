@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class MyPlex {
 
@@ -67,6 +68,7 @@ public class MyPlex {
     @JsonProperty("subscriptionState")
     private Optional<? extends String> subscriptionState;
 
+    @JsonCreator
     public MyPlex(
             @JsonProperty("authToken") Optional<? extends String> authToken,
             @JsonProperty("username") Optional<? extends String> username,
@@ -105,53 +107,81 @@ public class MyPlex {
         this.subscriptionActive = subscriptionActive;
         this.subscriptionState = subscriptionState;
     }
-
-    public Optional<? extends String> authToken() {
-        return authToken;
+    
+    public MyPlex() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> username() {
-        return username;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> authToken() {
+        return (Optional<String>) authToken;
     }
 
-    public Optional<? extends String> mappingState() {
-        return mappingState;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> username() {
+        return (Optional<String>) username;
     }
 
-    public Optional<? extends String> mappingError() {
-        return mappingError;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> mappingState() {
+        return (Optional<String>) mappingState;
     }
 
-    public Optional<? extends String> signInState() {
-        return signInState;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> mappingError() {
+        return (Optional<String>) mappingError;
     }
 
-    public Optional<? extends String> publicAddress() {
-        return publicAddress;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> signInState() {
+        return (Optional<String>) signInState;
     }
 
-    public Optional<? extends Double> publicPort() {
-        return publicPort;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> publicAddress() {
+        return (Optional<String>) publicAddress;
     }
 
-    public Optional<? extends String> privateAddress() {
-        return privateAddress;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> publicPort() {
+        return (Optional<Double>) publicPort;
     }
 
-    public Optional<? extends Double> privatePort() {
-        return privatePort;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> privateAddress() {
+        return (Optional<String>) privateAddress;
     }
 
-    public Optional<? extends String> subscriptionFeatures() {
-        return subscriptionFeatures;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> privatePort() {
+        return (Optional<Double>) privatePort;
     }
 
-    public Optional<? extends Boolean> subscriptionActive() {
-        return subscriptionActive;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> subscriptionFeatures() {
+        return (Optional<String>) subscriptionFeatures;
     }
 
-    public Optional<? extends String> subscriptionState() {
-        return subscriptionState;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Boolean> subscriptionActive() {
+        return (Optional<Boolean>) subscriptionActive;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> subscriptionState() {
+        return (Optional<String>) subscriptionState;
     }
 
     public final static Builder builder() {

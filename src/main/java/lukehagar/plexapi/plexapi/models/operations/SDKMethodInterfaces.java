@@ -125,6 +125,28 @@ public class SDKMethodInterfaces {
     }
 
 
+    public interface MethodCallGetHomeData {
+        lukehagar.plexapi.plexapi.models.operations.GetHomeDataResponse getHomeDataDirect() throws Exception;
+    }
+
+
+    public interface MethodCallGetPin {
+        lukehagar.plexapi.plexapi.models.operations.GetPinResponse getPin(
+            Optional<? extends Boolean> strong,
+            Optional<? extends String> xPlexClientIdentifier,
+            String xPlexProduct,
+            java.util.Optional<String> serverURL) throws Exception;
+    }
+
+
+    public interface MethodCallGetToken {
+        lukehagar.plexapi.plexapi.models.operations.GetTokenResponse getToken(
+            String pinID,
+            Optional<? extends String> xPlexClientIdentifier,
+            java.util.Optional<String> serverURL) throws Exception;
+    }
+
+
     public interface MethodCallGetGlobalHubs {
         lukehagar.plexapi.plexapi.models.operations.GetGlobalHubsResponse getGlobalHubs(
             Optional<? extends Double> count,
@@ -194,8 +216,9 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallGetLibraryItems {
         lukehagar.plexapi.plexapi.models.operations.GetLibraryItemsResponse getLibraryItems(
-            long sectionId,
-            lukehagar.plexapi.plexapi.models.operations.Tag tag) throws Exception;
+            java.lang.Object sectionId,
+            lukehagar.plexapi.plexapi.models.operations.Tag tag,
+            Optional<? extends Long> includeGuids) throws Exception;
     }
 
 
@@ -220,7 +243,15 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallGetMetadataChildren {
         lukehagar.plexapi.plexapi.models.operations.GetMetadataChildrenResponse getMetadataChildren(
-            double ratingKey) throws Exception;
+            double ratingKey,
+            Optional<? extends String> includeElements) throws Exception;
+    }
+
+
+    public interface MethodCallGetTopWatchedContent {
+        lukehagar.plexapi.plexapi.models.operations.GetTopWatchedContentResponse getTopWatchedContent(
+            long type,
+            Optional<? extends Long> includeGuids) throws Exception;
     }
 
 
@@ -245,22 +276,6 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallEnablePaperTrail {
         lukehagar.plexapi.plexapi.models.operations.EnablePaperTrailResponse enablePaperTrailDirect() throws Exception;
-    }
-
-
-    public interface MethodCallGetPin {
-        lukehagar.plexapi.plexapi.models.operations.GetPinResponse getPin(
-            Optional<? extends Boolean> strong,
-            String xPlexClientIdentifier,
-            java.util.Optional<String> serverURL) throws Exception;
-    }
-
-
-    public interface MethodCallGetToken {
-        lukehagar.plexapi.plexapi.models.operations.GetTokenResponse getToken(
-            String pinID,
-            String xPlexClientIdentifier,
-            java.util.Optional<String> serverURL) throws Exception;
     }
 
 
@@ -344,13 +359,29 @@ public class SDKMethodInterfaces {
     }
 
 
+    public interface MethodCallGetResourcesStatistics {
+        lukehagar.plexapi.plexapi.models.operations.GetResourcesStatisticsResponse getResourcesStatistics(
+            Optional<? extends Long> timespan) throws Exception;
+    }
+
+
+    public interface MethodCallGetBandwidthStatistics {
+        lukehagar.plexapi.plexapi.models.operations.GetBandwidthStatisticsResponse getBandwidthStatistics(
+            Optional<? extends Long> timespan) throws Exception;
+    }
+
+
     public interface MethodCallGetSessions {
         lukehagar.plexapi.plexapi.models.operations.GetSessionsResponse getSessionsDirect() throws Exception;
     }
 
 
     public interface MethodCallGetSessionHistory {
-        lukehagar.plexapi.plexapi.models.operations.GetSessionHistoryResponse getSessionHistoryDirect() throws Exception;
+        lukehagar.plexapi.plexapi.models.operations.GetSessionHistoryResponse getSessionHistory(
+            Optional<? extends String> sort,
+            Optional<? extends Long> accountId,
+            Optional<? extends lukehagar.plexapi.plexapi.models.operations.Filter> filter,
+            Optional<? extends Long> librarySectionID) throws Exception;
     }
 
 
@@ -380,6 +411,13 @@ public class SDKMethodInterfaces {
         lukehagar.plexapi.plexapi.models.operations.ApplyUpdatesResponse applyUpdates(
             Optional<? extends lukehagar.plexapi.plexapi.models.operations.Tonight> tonight,
             Optional<? extends lukehagar.plexapi.plexapi.models.operations.Skip> skip) throws Exception;
+    }
+
+
+    public interface MethodCallGetWatchlist {
+        lukehagar.plexapi.plexapi.models.operations.GetWatchlistResponse getWatchlist(
+            lukehagar.plexapi.plexapi.models.operations.GetWatchlistRequest request,
+            java.util.Optional<String> serverURL) throws Exception;
     }
 
 }

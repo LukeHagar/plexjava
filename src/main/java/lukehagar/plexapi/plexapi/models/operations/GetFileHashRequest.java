@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -13,7 +15,6 @@ import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetFileHashRequest {
 
@@ -29,6 +30,7 @@ public class GetFileHashRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")
     private Optional<? extends Double> type;
 
+    @JsonCreator
     public GetFileHashRequest(
             String url,
             Optional<? extends Double> type) {
@@ -37,10 +39,16 @@ public class GetFileHashRequest {
         this.url = url;
         this.type = type;
     }
+    
+    public GetFileHashRequest(
+            String url) {
+        this(url, Optional.empty());
+    }
 
     /**
      * This is the path to the local file, must be prefixed by `file://`
      */
+    @JsonIgnore
     public String url() {
         return url;
     }
@@ -48,8 +56,10 @@ public class GetFileHashRequest {
     /**
      * Item type
      */
-    public Optional<? extends Double> type() {
-        return type;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> type() {
+        return (Optional<Double>) type;
     }
 
     public final static Builder builder() {

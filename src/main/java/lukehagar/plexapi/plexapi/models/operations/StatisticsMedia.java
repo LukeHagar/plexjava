@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class StatisticsMedia {
 
@@ -47,6 +48,7 @@ public class StatisticsMedia {
     @JsonProperty("duration")
     private Optional<? extends Integer> duration;
 
+    @JsonCreator
     public StatisticsMedia(
             @JsonProperty("accountID") Optional<? extends Integer> accountID,
             @JsonProperty("deviceID") Optional<? extends Integer> deviceID,
@@ -70,33 +72,51 @@ public class StatisticsMedia {
         this.count = count;
         this.duration = duration;
     }
-
-    public Optional<? extends Integer> accountID() {
-        return accountID;
+    
+    public StatisticsMedia() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends Integer> deviceID() {
-        return deviceID;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> accountID() {
+        return (Optional<Integer>) accountID;
     }
 
-    public Optional<? extends Integer> timespan() {
-        return timespan;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> deviceID() {
+        return (Optional<Integer>) deviceID;
     }
 
-    public Optional<? extends Integer> at() {
-        return at;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> timespan() {
+        return (Optional<Integer>) timespan;
     }
 
-    public Optional<? extends Integer> metadataType() {
-        return metadataType;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> at() {
+        return (Optional<Integer>) at;
     }
 
-    public Optional<? extends Integer> count() {
-        return count;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> metadataType() {
+        return (Optional<Integer>) metadataType;
     }
 
-    public Optional<? extends Integer> duration() {
-        return duration;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> count() {
+        return (Optional<Integer>) count;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> duration() {
+        return (Optional<Integer>) duration;
     }
 
     public final static Builder builder() {

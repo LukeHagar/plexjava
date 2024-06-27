@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 /**
  * GetButlerTasksResponseBody - All butler tasks
  */
@@ -26,14 +27,21 @@ public class GetButlerTasksResponseBody {
     @JsonProperty("ButlerTasks")
     private Optional<? extends ButlerTasks> butlerTasks;
 
+    @JsonCreator
     public GetButlerTasksResponseBody(
             @JsonProperty("ButlerTasks") Optional<? extends ButlerTasks> butlerTasks) {
         Utils.checkNotNull(butlerTasks, "butlerTasks");
         this.butlerTasks = butlerTasks;
     }
+    
+    public GetButlerTasksResponseBody() {
+        this(Optional.empty());
+    }
 
-    public Optional<? extends ButlerTasks> butlerTasks() {
-        return butlerTasks;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<ButlerTasks> butlerTasks() {
+        return (Optional<ButlerTasks>) butlerTasks;
     }
 
     public final static Builder builder() {

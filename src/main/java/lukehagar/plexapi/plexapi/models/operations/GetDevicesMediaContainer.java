@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetDevicesMediaContainer {
 
@@ -31,6 +32,7 @@ public class GetDevicesMediaContainer {
     @JsonProperty("Device")
     private Optional<? extends java.util.List<Device>> device;
 
+    @JsonCreator
     public GetDevicesMediaContainer(
             @JsonProperty("size") Optional<? extends Double> size,
             @JsonProperty("identifier") Optional<? extends String> identifier,
@@ -42,17 +44,27 @@ public class GetDevicesMediaContainer {
         this.identifier = identifier;
         this.device = device;
     }
-
-    public Optional<? extends Double> size() {
-        return size;
+    
+    public GetDevicesMediaContainer() {
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> identifier() {
-        return identifier;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> size() {
+        return (Optional<Double>) size;
     }
 
-    public Optional<? extends java.util.List<Device>> device() {
-        return device;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> identifier() {
+        return (Optional<String>) identifier;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<Device>> device() {
+        return (Optional<java.util.List<Device>>) device;
     }
 
     public final static Builder builder() {

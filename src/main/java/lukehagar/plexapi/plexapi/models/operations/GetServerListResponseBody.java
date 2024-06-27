@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 /**
  * GetServerListResponseBody - List of Servers
  */
@@ -26,14 +27,21 @@ public class GetServerListResponseBody {
     @JsonProperty("MediaContainer")
     private Optional<? extends GetServerListMediaContainer> mediaContainer;
 
+    @JsonCreator
     public GetServerListResponseBody(
             @JsonProperty("MediaContainer") Optional<? extends GetServerListMediaContainer> mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
         this.mediaContainer = mediaContainer;
     }
+    
+    public GetServerListResponseBody() {
+        this(Optional.empty());
+    }
 
-    public Optional<? extends GetServerListMediaContainer> mediaContainer() {
-        return mediaContainer;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetServerListMediaContainer> mediaContainer() {
+        return (Optional<GetServerListMediaContainer>) mediaContainer;
     }
 
     public final static Builder builder() {

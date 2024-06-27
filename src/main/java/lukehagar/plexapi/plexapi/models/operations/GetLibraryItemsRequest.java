@@ -4,15 +4,17 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class GetLibraryItemsRequest {
 
@@ -20,7 +22,7 @@ public class GetLibraryItemsRequest {
      * the Id of the library to query
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=sectionId")
-    private long sectionId;
+    private java.lang.Object sectionId;
 
     /**
      * A key representing a specific tag within the section.
@@ -28,27 +30,56 @@ public class GetLibraryItemsRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=tag")
     private Tag tag;
 
+    /**
+     * Adds the Guids object to the response
+     * 
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeGuids")
+    private Optional<? extends Long> includeGuids;
+
+    @JsonCreator
     public GetLibraryItemsRequest(
-            long sectionId,
-            Tag tag) {
+            java.lang.Object sectionId,
+            Tag tag,
+            Optional<? extends Long> includeGuids) {
         Utils.checkNotNull(sectionId, "sectionId");
         Utils.checkNotNull(tag, "tag");
+        Utils.checkNotNull(includeGuids, "includeGuids");
         this.sectionId = sectionId;
         this.tag = tag;
+        this.includeGuids = includeGuids;
+    }
+    
+    public GetLibraryItemsRequest(
+            java.lang.Object sectionId,
+            Tag tag) {
+        this(sectionId, tag, Optional.empty());
     }
 
     /**
      * the Id of the library to query
      */
-    public long sectionId() {
+    @JsonIgnore
+    public java.lang.Object sectionId() {
         return sectionId;
     }
 
     /**
      * A key representing a specific tag within the section.
      */
+    @JsonIgnore
     public Tag tag() {
         return tag;
+    }
+
+    /**
+     * Adds the Guids object to the response
+     * 
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Long> includeGuids() {
+        return (Optional<Long>) includeGuids;
     }
 
     public final static Builder builder() {
@@ -58,7 +89,7 @@ public class GetLibraryItemsRequest {
     /**
      * the Id of the library to query
      */
-    public GetLibraryItemsRequest withSectionId(long sectionId) {
+    public GetLibraryItemsRequest withSectionId(java.lang.Object sectionId) {
         Utils.checkNotNull(sectionId, "sectionId");
         this.sectionId = sectionId;
         return this;
@@ -70,6 +101,26 @@ public class GetLibraryItemsRequest {
     public GetLibraryItemsRequest withTag(Tag tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = tag;
+        return this;
+    }
+
+    /**
+     * Adds the Guids object to the response
+     * 
+     */
+    public GetLibraryItemsRequest withIncludeGuids(long includeGuids) {
+        Utils.checkNotNull(includeGuids, "includeGuids");
+        this.includeGuids = Optional.ofNullable(includeGuids);
+        return this;
+    }
+
+    /**
+     * Adds the Guids object to the response
+     * 
+     */
+    public GetLibraryItemsRequest withIncludeGuids(Optional<? extends Long> includeGuids) {
+        Utils.checkNotNull(includeGuids, "includeGuids");
+        this.includeGuids = includeGuids;
         return this;
     }
     
@@ -84,28 +135,33 @@ public class GetLibraryItemsRequest {
         GetLibraryItemsRequest other = (GetLibraryItemsRequest) o;
         return 
             java.util.Objects.deepEquals(this.sectionId, other.sectionId) &&
-            java.util.Objects.deepEquals(this.tag, other.tag);
+            java.util.Objects.deepEquals(this.tag, other.tag) &&
+            java.util.Objects.deepEquals(this.includeGuids, other.includeGuids);
     }
     
     @Override
     public int hashCode() {
         return java.util.Objects.hash(
             sectionId,
-            tag);
+            tag,
+            includeGuids);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetLibraryItemsRequest.class,
                 "sectionId", sectionId,
-                "tag", tag);
+                "tag", tag,
+                "includeGuids", includeGuids);
     }
     
     public final static class Builder {
  
-        private Long sectionId;
+        private java.lang.Object sectionId;
  
-        private Tag tag;  
+        private Tag tag;
+ 
+        private Optional<? extends Long> includeGuids = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -114,7 +170,7 @@ public class GetLibraryItemsRequest {
         /**
          * the Id of the library to query
          */
-        public Builder sectionId(long sectionId) {
+        public Builder sectionId(java.lang.Object sectionId) {
             Utils.checkNotNull(sectionId, "sectionId");
             this.sectionId = sectionId;
             return this;
@@ -128,11 +184,32 @@ public class GetLibraryItemsRequest {
             this.tag = tag;
             return this;
         }
+
+        /**
+         * Adds the Guids object to the response
+         * 
+         */
+        public Builder includeGuids(long includeGuids) {
+            Utils.checkNotNull(includeGuids, "includeGuids");
+            this.includeGuids = Optional.ofNullable(includeGuids);
+            return this;
+        }
+
+        /**
+         * Adds the Guids object to the response
+         * 
+         */
+        public Builder includeGuids(Optional<? extends Long> includeGuids) {
+            Utils.checkNotNull(includeGuids, "includeGuids");
+            this.includeGuids = includeGuids;
+            return this;
+        }
         
         public GetLibraryItemsRequest build() {
             return new GetLibraryItemsRequest(
                 sectionId,
-                tag);
+                tag,
+                includeGuids);
         }
     }
 }

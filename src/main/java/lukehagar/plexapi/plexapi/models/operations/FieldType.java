@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,7 +18,6 @@ import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
 
-
 public class FieldType {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -27,6 +28,7 @@ public class FieldType {
     @JsonProperty("Operator")
     private Optional<? extends java.util.List<Operator>> operator;
 
+    @JsonCreator
     public FieldType(
             @JsonProperty("type") Optional<? extends String> type,
             @JsonProperty("Operator") Optional<? extends java.util.List<Operator>> operator) {
@@ -35,13 +37,21 @@ public class FieldType {
         this.type = type;
         this.operator = operator;
     }
-
-    public Optional<? extends String> type() {
-        return type;
+    
+    public FieldType() {
+        this(Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends java.util.List<Operator>> operator() {
-        return operator;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> type() {
+        return (Optional<String>) type;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<Operator>> operator() {
+        return (Optional<java.util.List<Operator>>) operator;
     }
 
     public final static Builder builder() {

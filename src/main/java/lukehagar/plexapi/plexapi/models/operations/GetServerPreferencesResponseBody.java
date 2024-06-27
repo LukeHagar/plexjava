@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 /**
  * GetServerPreferencesResponseBody - Server Preferences
  */
@@ -26,14 +27,21 @@ public class GetServerPreferencesResponseBody {
     @JsonProperty("MediaContainer")
     private Optional<? extends GetServerPreferencesMediaContainer> mediaContainer;
 
+    @JsonCreator
     public GetServerPreferencesResponseBody(
             @JsonProperty("MediaContainer") Optional<? extends GetServerPreferencesMediaContainer> mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
         this.mediaContainer = mediaContainer;
     }
+    
+    public GetServerPreferencesResponseBody() {
+        this(Optional.empty());
+    }
 
-    public Optional<? extends GetServerPreferencesMediaContainer> mediaContainer() {
-        return mediaContainer;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetServerPreferencesMediaContainer> mediaContainer() {
+        return (Optional<GetServerPreferencesMediaContainer>) mediaContainer;
     }
 
     public final static Builder builder() {

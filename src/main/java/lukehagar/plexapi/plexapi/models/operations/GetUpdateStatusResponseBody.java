@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 /**
  * GetUpdateStatusResponseBody - The Server Updates
  */
@@ -26,14 +27,21 @@ public class GetUpdateStatusResponseBody {
     @JsonProperty("MediaContainer")
     private Optional<? extends GetUpdateStatusMediaContainer> mediaContainer;
 
+    @JsonCreator
     public GetUpdateStatusResponseBody(
             @JsonProperty("MediaContainer") Optional<? extends GetUpdateStatusMediaContainer> mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
         this.mediaContainer = mediaContainer;
     }
+    
+    public GetUpdateStatusResponseBody() {
+        this(Optional.empty());
+    }
 
-    public Optional<? extends GetUpdateStatusMediaContainer> mediaContainer() {
-        return mediaContainer;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetUpdateStatusMediaContainer> mediaContainer() {
+        return (Optional<GetUpdateStatusMediaContainer>) mediaContainer;
     }
 
     public final static Builder builder() {

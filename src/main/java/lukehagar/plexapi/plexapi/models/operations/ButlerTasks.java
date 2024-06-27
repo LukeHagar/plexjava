@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,21 +18,27 @@ import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
 
-
 public class ButlerTasks {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ButlerTask")
     private Optional<? extends java.util.List<ButlerTask>> butlerTask;
 
+    @JsonCreator
     public ButlerTasks(
             @JsonProperty("ButlerTask") Optional<? extends java.util.List<ButlerTask>> butlerTask) {
         Utils.checkNotNull(butlerTask, "butlerTask");
         this.butlerTask = butlerTask;
     }
+    
+    public ButlerTasks() {
+        this(Optional.empty());
+    }
 
-    public Optional<? extends java.util.List<ButlerTask>> butlerTask() {
-        return butlerTask;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<ButlerTask>> butlerTask() {
+        return (Optional<java.util.List<ButlerTask>>) butlerTask;
     }
 
     public final static Builder builder() {

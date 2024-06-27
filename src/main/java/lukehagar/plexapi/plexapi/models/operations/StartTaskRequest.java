@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.lang.Deprecated;
@@ -12,7 +14,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import lukehagar.plexapi.plexapi.utils.SpeakeasyMetadata;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class StartTaskRequest {
 
@@ -22,6 +23,7 @@ public class StartTaskRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=taskName")
     private TaskName taskName;
 
+    @JsonCreator
     public StartTaskRequest(
             TaskName taskName) {
         Utils.checkNotNull(taskName, "taskName");
@@ -31,6 +33,7 @@ public class StartTaskRequest {
     /**
      * the name of the task to be started.
      */
+    @JsonIgnore
     public TaskName taskName() {
         return taskName;
     }

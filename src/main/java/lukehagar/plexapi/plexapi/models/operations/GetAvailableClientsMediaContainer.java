@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,7 +18,6 @@ import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
 
-
 public class GetAvailableClientsMediaContainer {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -27,6 +28,7 @@ public class GetAvailableClientsMediaContainer {
     @JsonProperty("Server")
     private Optional<? extends java.util.List<Server>> server;
 
+    @JsonCreator
     public GetAvailableClientsMediaContainer(
             @JsonProperty("size") Optional<? extends Double> size,
             @JsonProperty("Server") Optional<? extends java.util.List<Server>> server) {
@@ -35,13 +37,21 @@ public class GetAvailableClientsMediaContainer {
         this.size = size;
         this.server = server;
     }
-
-    public Optional<? extends Double> size() {
-        return size;
+    
+    public GetAvailableClientsMediaContainer() {
+        this(Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends java.util.List<Server>> server() {
-        return server;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Double> size() {
+        return (Optional<Double>) size;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<java.util.List<Server>> server() {
+        return (Optional<java.util.List<Server>>) server;
     }
 
     public final static Builder builder() {

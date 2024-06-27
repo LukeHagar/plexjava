@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
-
 
 public class Session {
 
@@ -31,6 +32,7 @@ public class Session {
     @JsonProperty("location")
     private Optional<? extends String> location;
 
+    @JsonCreator
     public Session(
             @JsonProperty("id") Optional<? extends String> id,
             @JsonProperty("bandwidth") Optional<? extends Integer> bandwidth,
@@ -42,17 +44,27 @@ public class Session {
         this.bandwidth = bandwidth;
         this.location = location;
     }
-
-    public Optional<? extends String> id() {
-        return id;
+    
+    public Session() {
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends Integer> bandwidth() {
-        return bandwidth;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> id() {
+        return (Optional<String>) id;
     }
 
-    public Optional<? extends String> location() {
-        return location;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Integer> bandwidth() {
+        return (Optional<Integer>) bandwidth;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> location() {
+        return (Optional<String>) location;
     }
 
     public final static Builder builder() {

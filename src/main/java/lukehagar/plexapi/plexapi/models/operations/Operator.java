@@ -4,7 +4,9 @@
 
 package lukehagar.plexapi.plexapi.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,7 +18,6 @@ import java.math.BigInteger;
 import java.util.Optional;
 import lukehagar.plexapi.plexapi.utils.Utils;
 
-
 public class Operator {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -27,6 +28,7 @@ public class Operator {
     @JsonProperty("title")
     private Optional<? extends String> title;
 
+    @JsonCreator
     public Operator(
             @JsonProperty("key") Optional<? extends String> key,
             @JsonProperty("title") Optional<? extends String> title) {
@@ -35,13 +37,21 @@ public class Operator {
         this.key = key;
         this.title = title;
     }
-
-    public Optional<? extends String> key() {
-        return key;
+    
+    public Operator() {
+        this(Optional.empty(), Optional.empty());
     }
 
-    public Optional<? extends String> title() {
-        return title;
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> key() {
+        return (Optional<String>) key;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<String> title() {
+        return (Optional<String>) title;
     }
 
     public final static Builder builder() {
