@@ -1,17 +1,17 @@
-speakeasyVersion: 1.321.0
+speakeasyVersion: 1.323.0
 sources:
     my-source:
         sourceNamespace: my-source
-        sourceRevisionDigest: sha256:7bed80d5d81c0501209a4de7a65ad0bd438a89f9e8f6eba59701704e3fb11ead
-        sourceBlobDigest: sha256:ab8481086bfdae5fd1aa42a674434b35061177c23040cf48c9247708594ce134
+        sourceRevisionDigest: sha256:b4ee5010d8a55049aa655b056e12618e038d75f8a8381ec498e97a413cb9f0f9
+        sourceBlobDigest: sha256:cb332c62f2f70662406a011c9561382d0721b12faf89259fcc8bd7c41ddd4faa
         tags:
             - latest
 targets:
     plexjava:
         source: my-source
         sourceNamespace: my-source
-        sourceRevisionDigest: sha256:7bed80d5d81c0501209a4de7a65ad0bd438a89f9e8f6eba59701704e3fb11ead
-        sourceBlobDigest: sha256:ab8481086bfdae5fd1aa42a674434b35061177c23040cf48c9247708594ce134
+        sourceRevisionDigest: sha256:b4ee5010d8a55049aa655b056e12618e038d75f8a8381ec498e97a413cb9f0f9
+        sourceBlobDigest: sha256:cb332c62f2f70662406a011c9561382d0721b12faf89259fcc8bd7c41ddd4faa
         outLocation: /home/luke/github/plexjava
 workflow:
     workflowVersion: 1.0.0

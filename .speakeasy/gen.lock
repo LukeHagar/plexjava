@@ -1,17 +1,17 @@
 lockVersion: 2.0.0
-id: ff6658aa-ae09-4bec-b500-5ba8bcd3a069
+id: d74213ba-4eeb-4de9-a309-6b70cf5c4bd4
 management:
   docChecksum: e73920abd3a55e8d249592f2e3090574
   docVersion: 0.0.3
-  speakeasyVersion: 1.321.0
-  generationVersion: 2.354.2
+  speakeasyVersion: 1.323.0
+  generationVersion: 2.356.0
   releaseVersion: 0.1.1
   configChecksum: 32d07b03c4a1b8364852e49423957f33
 features:
   java:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.26.0
+    core: 3.26.1
     flattening: 2.81.1
     globalSecurity: 2.82.5
     globalSecurityCallbacks: 0.1.0
@@ -1052,4 +1052,21 @@ generatedFiles:
   - docs/models/errors/GetWatchlistErrors.md
   - docs/models/errors/GetWatchlistResponseBody.md
   - docs/models/shared/Security.md
+  - docs/sdks/plexapi/README.md
+  - docs/sdks/server/README.md
+  - docs/sdks/media/README.md
+  - docs/sdks/video/README.md
+  - docs/sdks/activities/README.md
+  - docs/sdks/butler/README.md
+  - docs/sdks/plex/README.md
+  - docs/sdks/hubs/README.md
+  - docs/sdks/search/README.md
+  - docs/sdks/library/README.md
+  - docs/sdks/log/README.md
+  - docs/sdks/playlists/README.md
+  - docs/sdks/authentication/README.md
+  - docs/sdks/statistics/README.md
+  - docs/sdks/sessions/README.md
+  - docs/sdks/updater/README.md
+  - docs/sdks/watchlist/README.md
   - USAGE.md
