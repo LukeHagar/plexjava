@@ -1,0 +1,34 @@
+speakeasyVersion: 1.323.0
+sources:
+    my-source:
+        sourceNamespace: my-source
+        sourceRevisionDigest: sha256:e126ecf895f7782d460cef7bfb0c3dacdcf586574063ac3ed1065a5d7ac07eef
+        sourceBlobDigest: sha256:dcd07a4fc95f11a14baa2d3a47d72ce6b7a405451b84d13daf439ede60668b9e
+        tags:
+            - latest
+targets:
+    plexjava:
+        source: my-source
+        sourceNamespace: my-source
+        sourceRevisionDigest: sha256:e126ecf895f7782d460cef7bfb0c3dacdcf586574063ac3ed1065a5d7ac07eef
+        sourceBlobDigest: sha256:dcd07a4fc95f11a14baa2d3a47d72ce6b7a405451b84d13daf439ede60668b9e
+        codeSamplesNamespace: code-samples-java-plexjava
+        codeSamplesRevisionDigest: sha256:0fb8877545d0754f73fb65a79ee7014d1a11f9fb044b0f2b9d14bd6eea02f4f9
+        outLocation: /home/luke/github/plexjava
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        my-source:
+            inputs:
+                - location: https://raw.githubusercontent.com/LukeHagar/plex-api-spec/main/plex-media-server-spec-dereferenced.yaml
+            registry:
+                location: registry.speakeasyapi.dev/lukehagar/lukehagar/my-source
+    targets:
+        plexjava:
+            target: java
+            source: my-source
+            codeSamples:
+                output: codeSamples.yaml
+                registry:
+                    location: registry.speakeasyapi.dev/lukehagar/lukehagar/code-samples-java-plexjava

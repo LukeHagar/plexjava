@@ -1,0 +1,10 @@
+# GetLibraryItemsRequest
+
+
+## Fields
+
+| Field                                                                             | Type                                                                              | Required                                                                          | Description                                                                       | Example                                                                           |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `sectionId`                                                                       | *java.lang.Object*                                                                | :heavy_check_mark:                                                                | the Id of the library to query                                                    |                                                                                   |
+| `tag`                                                                             | [lukehagar.plexapi.plexapi.models.operations.Tag](../../models/operations/Tag.md) | :heavy_check_mark:                                                                | A key representing a specific tag within the section.                             |                                                                                   |
+| `includeGuids`                                                                    | *Optional<? extends Long>*                                                        | :heavy_minus_sign:                                                                | Adds the Guids object to the response<br/>                                        | 1                                                                                 |

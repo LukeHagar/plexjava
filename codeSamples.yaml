@@ -1,0 +1,3330 @@
+overlay: 1.0.0
+info:
+  title: CodeSamples overlay for java target
+  version: 0.0.0
+actions:
+  - target: $["paths"]["/"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getServerCapabilities
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetServerCapabilitiesResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/butler/{taskName}"]["delete"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: stopTask
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        StopTaskResponse res = sdk.butler().stopTask()
+                            .taskName(PathParamTaskName.BACKUP_DATABASE)
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.StopTaskResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/playlists/{playlistID}/items"]["delete"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: clearPlaylistContents
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        ClearPlaylistContentsResponse res = sdk.playlists().clearPlaylistContents()
+                            .playlistID(1893.18d)
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.ClearPlaylistContentsResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/photo/:/transcode"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getResizedPhoto
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetResizedPhotoRequest req = GetResizedPhotoRequest.builder()
+                            .width(110d)
+                            .height(165d)
+                            .opacity(643869L)
+                            .blur(4000d)
+                            .minSize(MinSize.ZERO)
+                            .upscale(Upscale.ZERO)
+                            .url("/library/metadata/49564/thumb/1654258204")
+                            .build();
+
+                        GetResizedPhotoResponse res = sdk.server().getResizedPhoto()
+                            .request(req)
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetResizedPhotoResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/hubs/search/voice"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: performVoiceSearch
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        PerformVoiceSearchResponse res = sdk.search().performVoiceSearch()
+                            .query("dead+poop")
+                            .sectionId(4094.8d)
+                            .limit(5d)
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.PerformVoiceSearchResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/log"]["post"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: logMultiLine
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        String req = "level=4&message=Test%20message%201&source=postman
+            level=3&message=Test%20message%202&source=postman
+            level=1&message=Test%20message%203&source=postman";
+
+                        LogMultiLineResponse res = sdk.log().logMultiLine()
+                            .request(req)
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.LogMultiLineResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/playlists/{playlistID}/items"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getPlaylistContents
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetPlaylistContentsResponse res = sdk.playlists().getPlaylistContents()
+                            .playlistID(5004.46d)
+                            .type(9403.59d)
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetPlaylistContentsResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/status/sessions/history/all"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getSessionHistory
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetSessionHistoryResponse res = sdk.sessions().getSessionHistory()
+                            .sort("<value>")
+                            .accountId(1L)
+                            .filter(Filter.builder()
+                                .build())
+                            .librarySectionID(12L)
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetSessionHistoryResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/library/sections"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getLibraries
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetLibrariesResponse res = sdk.library().getLibraries()
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetLibrariesResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/library/sections/{sectionId}"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getLibrary
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetLibraryResponse res = sdk.library().getLibrary()
+                            .sectionId(1000d)
+                            .includeDetails(IncludeDetails.ZERO)
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetLibraryResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/playlists/{playlistID}"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getPlaylist
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetPlaylistResponse res = sdk.playlists().getPlaylist()
+                            .playlistID(4109.48d)
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetPlaylistResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/security/resources"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getSourceConnectionInformation
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetSourceConnectionInformationResponse res = sdk.authentication().getSourceConnectionInformation()
+                            .source("server://client-identifier")
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetSourceConnectionInformationResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/playlists/{playlistID}/items"]["put"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: addPlaylistContents
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        AddPlaylistContentsResponse res = sdk.playlists().addPlaylistContents()
+                            .playlistID(8502.01d)
+                            .uri("server://12345/com.plexapp.plugins.library/library/metadata/1")
+                            .playQueueID(123d)
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.AddPlaylistContentsResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/security/token"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getTransientToken
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetTransientTokenResponse res = sdk.authentication().getTransientToken()
+                            .type(GetTransientTokenQueryParamType.DELEGATION)
+                            .scope(Scope.ALL)
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetTransientTokenResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/transcode/sessions/{sessionKey}"]["delete"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: stopTranscodeSession
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        StopTranscodeSessionResponse res = sdk.sessions().stopTranscodeSession()
+                            .sessionKey("zz7llzqlx8w9vnrsbnwhbmep")
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.StopTranscodeSessionResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/updater/apply"]["put"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: applyUpdates
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        ApplyUpdatesResponse res = sdk.updater().applyUpdates()
+                            .tonight(Tonight.ONE)
+                            .skip(Skip.ONE)
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.ApplyUpdatesResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/playlists/{playlistID}"]["put"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: updatePlaylist
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        UpdatePlaylistResponse res = sdk.playlists().updatePlaylist()
+                            .playlistID(3915d)
+                            .title("<value>")
+                            .summary("<value>")
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.UpdatePlaylistResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/statistics/bandwidth"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getBandwidthStatistics
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetBandwidthStatisticsResponse res = sdk.statistics().getBandwidthStatistics()
+                            .timespan(4L)
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetBandwidthStatisticsResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/transcode/sessions"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getTranscodeSessions
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetTranscodeSessionsResponse res = sdk.sessions().getTranscodeSessions()
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetTranscodeSessionsResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/:/scrobble"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: markPlayed
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        MarkPlayedResponse res = sdk.media().markPlayed()
+                            .key(59398d)
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.MarkPlayedResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/search"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getSearchResults
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetSearchResultsResponse res = sdk.search().getSearchResults()
+                            .query("110")
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetSearchResultsResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/library/recentlyAdded"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getRecentlyAdded
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetRecentlyAddedResponse res = sdk.library().getRecentlyAdded()
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetRecentlyAddedResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/library/metadata/{ratingKey}/children"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getMetadataChildren
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetMetadataChildrenResponse res = sdk.library().getMetadataChildren()
+                            .ratingKey(1539.14d)
+                            .includeElements("<value>")
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetMetadataChildrenResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/log"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: logLine
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        LogLineResponse res = sdk.log().logLine()
+                            .level(Level.THREE)
+                            .message("Test log message")
+                            .source("Postman")
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.LogLineResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/updater/check"]["put"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: checkForUpdates
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        CheckForUpdatesResponse res = sdk.updater().checkForUpdates()
+                            .download(Download.ONE)
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.CheckForUpdatesResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/library/sections/watchlist/{filter}"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getWatchlist
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetWatchlistRequest req = GetWatchlistRequest.builder()
+                            .filter(PathParamFilter.RELEASED)
+                            .xPlexToken("<value>")
+                            .build();
+
+                        GetWatchlistResponse res = sdk.watchlist().getWatchlist()
+                            .request(req)
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetWatchlistResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/myplex/account"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getMyPlexAccount
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetMyPlexAccountResponse res = sdk.server().getMyPlexAccount()
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetMyPlexAccountResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/butler"]["delete"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: stopAllTasks
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        StopAllTasksResponse res = sdk.butler().stopAllTasks()
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.StopAllTasksResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/video/:/transcode/universal/start.mpd"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: startUniversalTranscode
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        StartUniversalTranscodeRequest req = StartUniversalTranscodeRequest.builder()
+                            .hasMDE(1d)
+                            .path("/library/metadata/23409")
+                            .mediaIndex(0d)
+                            .partIndex(0d)
+                            .protocol("hls")
+                            .fastSeek(0d)
+                            .directPlay(0d)
+                            .directStream(0d)
+                            .subtitleSize(100d)
+                            .subtites("burn")
+                            .audioBoost(100d)
+                            .location("lan")
+                            .mediaBufferSize(102400d)
+                            .session("zvcage8b7rkioqcm8f4uns4c")
+                            .addDebugOverlay(0d)
+                            .autoAdjustQuality(0d)
+                            .build();
+
+                        StartUniversalTranscodeResponse res = sdk.video().startUniversalTranscode()
+                            .request(req)
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.StartUniversalTranscodeResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/log/networked"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: enablePaperTrail
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        EnablePaperTrailResponse res = sdk.log().enablePaperTrail()
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.EnablePaperTrailResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/playlists"]["post"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: createPlaylist
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        CreatePlaylistRequest req = CreatePlaylistRequest.builder()
+                            .title("<value>")
+                            .type(QueryParamType.PHOTO)
+                            .smart(Smart.ONE)
+                            .uri("<value>")
+                            .build();
+
+                        CreatePlaylistResponse res = sdk.playlists().createPlaylist()
+                            .request(req)
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.CreatePlaylistResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/pins"]["post"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getPin
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetPinResponse res = sdk.plex().getPin()
+                            .strong(false)
+                            .xPlexClientIdentifier("Postman")
+                            .xPlexProduct("Postman")
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetPinResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/library/hashes"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getFileHash
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetFileHashResponse res = sdk.library().getFileHash()
+                            .url("file://C:\Image.png&type=13")
+                            .type(4462.17d)
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetFileHashResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/library/sections/{sectionId}/{tag}"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getLibraryItems
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetLibraryItemsResponse res = sdk.library().getLibraryItems()
+                            .sectionId("<value>")
+                            .tag(Tag.GENRE)
+                            .includeGuids(1L)
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetLibraryItemsResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/playlists/upload"]["post"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: uploadPlaylist
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        UploadPlaylistResponse res = sdk.playlists().uploadPlaylist()
+                            .path("/home/barkley/playlist.m3u")
+                            .force(Force.ZERO)
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.UploadPlaylistResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/updater/status"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getUpdateStatus
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetUpdateStatusResponse res = sdk.updater().getUpdateStatus()
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetUpdateStatusResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/clients"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getAvailableClients
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetAvailableClientsResponse res = sdk.server().getAvailableClients()
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetAvailableClientsResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/library/onDeck"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getOnDeck
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetOnDeckResponse res = sdk.library().getOnDeck()
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetOnDeckResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/identity"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getServerIdentity
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetServerIdentityResponse res = sdk.server().getServerIdentity()
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetServerIdentityResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/activities/{activityUUID}"]["delete"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: cancelServerActivities
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        CancelServerActivitiesResponse res = sdk.activities().cancelServerActivities()
+                            .activityUUID("25b71ed5-0f9d-461c-baa7-d404e9e10d3e")
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.CancelServerActivitiesResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/butler/{taskName}"]["post"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: startTask
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        StartTaskResponse res = sdk.butler().startTask()
+                            .taskName(TaskName.CLEAN_OLD_BUNDLES)
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.StartTaskResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/library/sections/{sectionId}/refresh"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: refreshLibrary
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        RefreshLibraryResponse res = sdk.library().refreshLibrary()
+                            .sectionId(934.16d)
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.RefreshLibraryResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/library/sections/{sectionId}/search"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: searchLibrary
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        SearchLibraryResponse res = sdk.library().searchLibrary()
+                            .sectionId(933505L)
+                            .type(Type.FOUR)
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SearchLibraryResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/library/metadata/{ratingKey}"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getMetadata
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetMetadataResponse res = sdk.library().getMetadata()
+                            .ratingKey(8382.31d)
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetMetadataResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/:/prefs"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getServerPreferences
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetServerPreferencesResponse res = sdk.server().getServerPreferences()
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetServerPreferencesResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/devices"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getDevices
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetDevicesResponse res = sdk.server().getDevices()
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetDevicesResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/home"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getHomeData
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetHomeDataResponse res = sdk.plex().getHomeData()
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetHomeDataResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/pins/{pinID}"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getToken
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetTokenResponse res = sdk.plex().getToken()
+                            .pinID("<value>")
+                            .xPlexClientIdentifier("Postman")
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetTokenResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/hubs/search"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: performSearch
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        PerformSearchResponse res = sdk.search().performSearch()
+                            .query("dylan")
+                            .sectionId(1516.53d)
+                            .limit(5d)
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.PerformSearchResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/butler"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getButlerTasks
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetButlerTasksResponse res = sdk.butler().getButlerTasks()
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetButlerTasksResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/library/sections/{sectionId}"]["delete"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: deleteLibrary
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        DeleteLibraryResponse res = sdk.library().deleteLibrary()
+                            .sectionId(1000d)
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.DeleteLibraryResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/library/all/top"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getTopWatchedContent
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetTopWatchedContentResponse res = sdk.library().getTopWatchedContent()
+                            .type(505531L)
+                            .includeGuids(1L)
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/playlists"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getPlaylists
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetPlaylistsResponse res = sdk.playlists().getPlaylists()
+                            .playlistType(PlaylistType.AUDIO)
+                            .smart(QueryParamSmart.ZERO)
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetPlaylistsResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/status/sessions"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getSessions
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetSessionsResponse res = sdk.sessions().getSessions()
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetSessionsResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/:/progress"]["post"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: updatePlayProgress
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        UpdatePlayProgressResponse res = sdk.media().updatePlayProgress()
+                            .key("<value>")
+                            .time(90000d)
+                            .state("played")
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.UpdatePlayProgressResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/:/timeline"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getTimeline
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetTimelineRequest req = GetTimelineRequest.builder()
+                            .ratingKey(23409d)
+                            .key("/library/metadata/23409")
+                            .state(State.PLAYING)
+                            .hasMDE(1d)
+                            .time(2000d)
+                            .duration(10000d)
+                            .context("home:hub.continueWatching")
+                            .playQueueItemID(1d)
+                            .playBackTime(2000d)
+                            .row(1d)
+                            .build();
+
+                        GetTimelineResponse res = sdk.video().getTimeline()
+                            .request(req)
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetTimelineResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/hubs/sections/{sectionId}"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getLibraryHubs
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetLibraryHubsResponse res = sdk.hubs().getLibraryHubs()
+                            .sectionId(6728.76d)
+                            .count(9010.22d)
+                            .onlyTransient(QueryParamOnlyTransient.ZERO)
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetLibraryHubsResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/playlists/{playlistID}"]["delete"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: deletePlaylist
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        DeletePlaylistResponse res = sdk.playlists().deletePlaylist()
+                            .playlistID(216.22d)
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.DeletePlaylistResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/servers"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getServerList
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetServerListResponse res = sdk.server().getServerList()
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetServerListResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/:/unscrobble"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: markUnplayed
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        MarkUnplayedResponse res = sdk.media().markUnplayed()
+                            .key(59398d)
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.MarkUnplayedResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/activities"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getServerActivities
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetServerActivitiesResponse res = sdk.activities().getServerActivities()
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetServerActivitiesResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/statistics/media"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getStatistics
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetStatisticsResponse res = sdk.statistics().getStatistics()
+                            .timespan(4L)
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetStatisticsResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/butler"]["post"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: startAllTasks
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        StartAllTasksResponse res = sdk.butler().startAllTasks()
+                            .call();
+
+                        // handle response
+                    } catch (lukehagar.plexapi.plexapi.models.errors.StartAllTasksResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/hubs"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getGlobalHubs
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetGlobalHubsResponse res = sdk.hubs().getGlobalHubs()
+                            .count(1262.49d)
+                            .onlyTransient(OnlyTransient.ONE)
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetGlobalHubsResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
+  - target: $["paths"]["/statistics/resources"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: getResourcesStatistics
+          source: |-
+            package hello.world;
+
+            import java.math.BigDecimal;
+            import java.math.BigDecimal;
+            import java.math.BigInteger;
+            import java.time.LocalDate;
+            import java.time.OffsetDateTime;
+            import java.util.Optional;
+            import lukehagar.plexapi.plexapi.PlexAPI;
+            import lukehagar.plexapi.plexapi.models.operations.*;
+            import lukehagar.plexapi.plexapi.models.shared.*;
+            import lukehagar.plexapi.plexapi.models.shared.Security;
+            import lukehagar.plexapi.plexapi.utils.EventStream;
+            import org.openapitools.jackson.nullable.JsonNullable;
+            import static java.util.Map.entry;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+                    try {
+                        PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .xPlexClientIdentifier("Postman")
+                            .build();
+
+                        GetResourcesStatisticsResponse res = sdk.statistics().getResourcesStatistics()
+                            .timespan(4L)
+                            .call();
+
+                        if (res.object().isPresent()) {
+                            // handle response
+                        }
+                    } catch (lukehagar.plexapi.plexapi.models.errors.GetResourcesStatisticsResponseBody e) {
+                        // handle exception
+                        throw e;
+                    } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+                        // handle exception
+                        throw e;
+                    } catch (Exception e) {
+                        // handle exception
+                        throw e;
+                    }
+
+                }
+            }
