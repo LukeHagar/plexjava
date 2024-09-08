@@ -3,8 +3,8 @@
 
 ## Fields
 
-| Field                        | Type                         | Required                     | Description                  |
-| ---------------------------- | ---------------------------- | ---------------------------- | ---------------------------- |
-| `count`                      | *Optional<? extends Double>* | :heavy_minus_sign:           | N/A                          |
-| `key`                        | *Optional<? extends String>* | :heavy_minus_sign:           | N/A                          |
-| `title`                      | *Optional<? extends String>* | :heavy_minus_sign:           | N/A                          |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `count`            | *Optional<Double>* | :heavy_minus_sign: | N/A                |
+| `key`              | *Optional<String>* | :heavy_minus_sign: | N/A                |
+| `title`            | *Optional<String>* | :heavy_minus_sign: | N/A                |

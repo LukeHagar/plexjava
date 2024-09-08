@@ -10,13 +10,13 @@ API Calls interacting with Plex Media Server Libraries
 
 * [getFileHash](#getfilehash) - Get Hash Value
 * [getRecentlyAdded](#getrecentlyadded) - Get Recently Added
-* [getLibraries](#getlibraries) - Get All Libraries
-* [getLibrary](#getlibrary) - Get Library Details
+* [getAllLibraries](#getalllibraries) - Get All Libraries
+* [getLibraryDetails](#getlibrarydetails) - Get Library Details
 * [deleteLibrary](#deletelibrary) - Delete Library Section
 * [getLibraryItems](#getlibraryitems) - Get Library Items
-* [refreshLibrary](#refreshlibrary) - Refresh Library
-* [searchLibrary](#searchlibrary) - Search Library
-* [getMetadata](#getmetadata) - Get Items Metadata
+* [getRefreshLibraryMetadata](#getrefreshlibrarymetadata) - Refresh Metadata Of The Library
+* [getSearchLibrary](#getsearchlibrary) - Search Library
+* [getMetaDataByRatingKey](#getmetadatabyratingkey) - Get Metadata by RatingKey
 * [getMetadataChildren](#getmetadatachildren) - Get Items Children
 * [getTopWatchedContent](#gettopwatchedcontent) - Get Top Watched Content
 * [getOnDeck](#getondeck) - Get On Deck
@@ -30,19 +30,10 @@ This resource returns hash values for local files
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetFileHashResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -50,7 +41,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetFileHashResponse res = sdk.library().getFileHash()
@@ -59,10 +50,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetFileHashResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetFileHashResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -79,18 +70,19 @@ public class Application {
 | Parameter                                                         | Type                                                              | Required                                                          | Description                                                       | Example                                                           |
 | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
 | `url`                                                             | *String*                                                          | :heavy_check_mark:                                                | This is the path to the local file, must be prefixed by `file://` | file://C:\Image.png&type=13                                       |
-| `type`                                                            | *Optional<? extends Double>*                                      | :heavy_minus_sign:                                                | Item type                                                         |                                                                   |
-
+| `type`                                                            | *Optional<Double>*                                                | :heavy_minus_sign:                                                | Item type                                                         |                                                                   |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetFileHashResponse](../../models/operations/GetFileHashResponse.md)**
+**[GetFileHashResponse](../../models/operations/GetFileHashResponse.md)**
+
 ### Errors
 
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | models/errors/GetFileHashResponseBody | 401                                   | application/json                      |
 | models/errors/SDKError                | 4xx-5xx                               | \*\/*                                 |
+
 
 ## getRecentlyAdded
 
@@ -102,19 +94,10 @@ This endpoint will return the recently added content.
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetRecentlyAddedResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -122,19 +105,21 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetRecentlyAddedResponse res = sdk.library().getRecentlyAdded()
+                .xPlexContainerStart(0)
+                .xPlexContainerSize(50)
                 .call();
 
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetRecentlyAddedResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetRecentlyAddedResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -146,10 +131,17 @@ public class Application {
 }
 ```
 
+### Parameters
+
+| Parameter                                                                                                                                                                                 | Type                                                                                                                                                                                      | Required                                                                                                                                                                                  | Description                                                                                                                                                                               | Example                                                                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xPlexContainerStart`                                                                                                                                                                     | *Optional<Integer>*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                        | The index of the first item to return. If not specified, the first item will be returned.<br/>If the number of items exceeds the limit, the response will be paginated.<br/>By default this is 0<br/> | 0                                                                                                                                                                                         |
+| `xPlexContainerSize`                                                                                                                                                                      | *Optional<Integer>*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                        | The number of items to return. If not specified, all items will be returned.<br/>If the number of items exceeds the limit, the response will be paginated.<br/>By default this is 50<br/> | 50                                                                                                                                                                                        |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetRecentlyAddedResponse](../../models/operations/GetRecentlyAddedResponse.md)**
+**[GetRecentlyAddedResponse](../../models/operations/GetRecentlyAddedResponse.md)**
+
 ### Errors
 
 | Error Object                               | Status Code                                | Content Type                               |
@@ -157,7 +149,8 @@ public class Application {
 | models/errors/GetRecentlyAddedResponseBody | 401                                        | application/json                           |
 | models/errors/SDKError                     | 4xx-5xx                                    | \*\/*                                      |
 
-## getLibraries
+
+## getAllLibraries
 
 A library section (commonly referred to as just a library) is a collection of media. 
 Libraries are typed, and depending on their type provide either a flat or a hierarchical view of the media. 
@@ -172,19 +165,10 @@ This allows a client to provide a rich interface around the media (e.g. allow so
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetAllLibrariesResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -192,19 +176,19 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
-            GetLibrariesResponse res = sdk.library().getLibraries()
+            GetAllLibrariesResponse res = sdk.library().getAllLibraries()
                 .call();
 
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetLibrariesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetAllLibrariesResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -216,18 +200,19 @@ public class Application {
 }
 ```
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetLibrariesResponse](../../models/operations/GetLibrariesResponse.md)**
+**[GetAllLibrariesResponse](../../models/operations/GetAllLibrariesResponse.md)**
+
 ### Errors
 
-| Error Object                           | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models/errors/GetLibrariesResponseBody | 401                                    | application/json                       |
-| models/errors/SDKError                 | 4xx-5xx                                | \*\/*                                  |
+| Error Object                              | Status Code                               | Content Type                              |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| models/errors/GetAllLibrariesResponseBody | 401                                       | application/json                          |
+| models/errors/SDKError                    | 4xx-5xx                                   | \*\/*                                     |
 
-## getLibrary
+
+## getLibraryDetails
 
 ## Library Details Endpoint
 
@@ -275,19 +260,11 @@ Each type in the library comes with a set of filters and sorts, aiding in buildi
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetLibraryDetailsResponse;
+import dev.plexapi.sdk.models.operations.IncludeDetails;
+import java.lang.Exception;
 
 public class Application {
 
@@ -295,21 +272,21 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
-            GetLibraryResponse res = sdk.library().getLibrary()
-                .sectionId(1000d)
+            GetLibraryDetailsResponse res = sdk.library().getLibraryDetails()
+                .sectionKey(9518)
                 .includeDetails(IncludeDetails.ZERO)
                 .call();
 
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetLibraryResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetLibraryDetailsResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -325,42 +302,34 @@ public class Application {
 
 | Parameter                                                                                                                                                                                  | Type                                                                                                                                                                                       | Required                                                                                                                                                                                   | Description                                                                                                                                                                                | Example                                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `sectionId`                                                                                                                                                                                | *double*                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                         | the Id of the library to query                                                                                                                                                             | 1000                                                                                                                                                                                       |
-| `includeDetails`                                                                                                                                                                           | [Optional<? extends lukehagar.plexapi.plexapi.models.operations.IncludeDetails>](../../models/operations/IncludeDetails.md)                                                                | :heavy_minus_sign:                                                                                                                                                                         | Whether or not to include details for a section (types, filters, and sorts). <br/>Only exists for backwards compatibility, media providers other than the server libraries have it on always.<br/> |                                                                                                                                                                                            |
-
+| `sectionKey`                                                                                                                                                                               | *int*                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                         | The unique key of the Plex library. <br/>Note: This is unique in the context of the Plex server.<br/>                                                                                      | 9518                                                                                                                                                                                       |
+| `includeDetails`                                                                                                                                                                           | [Optional<IncludeDetails>](../../models/operations/IncludeDetails.md)                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                         | Whether or not to include details for a section (types, filters, and sorts). <br/>Only exists for backwards compatibility, media providers other than the server libraries have it on always.<br/> |                                                                                                                                                                                            |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetLibraryResponse](../../models/operations/GetLibraryResponse.md)**
+**[GetLibraryDetailsResponse](../../models/operations/GetLibraryDetailsResponse.md)**
+
 ### Errors
 
-| Error Object                         | Status Code                          | Content Type                         |
-| ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| models/errors/GetLibraryResponseBody | 401                                  | application/json                     |
-| models/errors/SDKError               | 4xx-5xx                              | \*\/*                                |
+| Error Object                                | Status Code                                 | Content Type                                |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| models/errors/GetLibraryDetailsResponseBody | 401                                         | application/json                            |
+| models/errors/SDKError                      | 4xx-5xx                                     | \*\/*                                       |
+
 
 ## deleteLibrary
 
-Delate a library using a specific section
+Delete a library using a specific section id
 
 ### Example Usage
 
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.DeleteLibraryResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -368,18 +337,18 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             DeleteLibraryResponse res = sdk.library().deleteLibrary()
-                .sectionId(1000d)
+                .sectionKey(9518)
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.DeleteLibraryResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.DeleteLibraryResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -393,20 +362,21 @@ public class Application {
 
 ### Parameters
 
-| Parameter                      | Type                           | Required                       | Description                    | Example                        |
-| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
-| `sectionId`                    | *double*                       | :heavy_check_mark:             | the Id of the library to query | 1000                           |
-
+| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `sectionKey`                                                                                  | *int*                                                                                         | :heavy_check_mark:                                                                            | The unique key of the Plex library. <br/>Note: This is unique in the context of the Plex server.<br/> | 9518                                                                                          |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.DeleteLibraryResponse](../../models/operations/DeleteLibraryResponse.md)**
+**[DeleteLibraryResponse](../../models/operations/DeleteLibraryResponse.md)**
+
 ### Errors
 
 | Error Object                            | Status Code                             | Content Type                            |
 | --------------------------------------- | --------------------------------------- | --------------------------------------- |
 | models/errors/DeleteLibraryResponseBody | 401                                     | application/json                        |
 | models/errors/SDKError                  | 4xx-5xx                                 | \*\/*                                   |
+
 
 ## getLibraryItems
 
@@ -437,19 +407,15 @@ Fetches details from a specific section of the library identified by a section k
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetLibraryItemsRequest;
+import dev.plexapi.sdk.models.operations.GetLibraryItemsResponse;
+import dev.plexapi.sdk.models.operations.IncludeGuids;
+import dev.plexapi.sdk.models.operations.IncludeMeta;
+import dev.plexapi.sdk.models.operations.Tag;
+import dev.plexapi.sdk.models.operations.Type;
+import java.lang.Exception;
 
 public class Application {
 
@@ -457,22 +423,30 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .build();
+
+            GetLibraryItemsRequest req = GetLibraryItemsRequest.builder()
+                .sectionKey(9518)
+                .tag(Tag.EDITION)
+                .type(Type.TWO)
+                .includeGuids(IncludeGuids.ONE)
+                .includeMeta(IncludeMeta.ONE)
+                .xPlexContainerStart(0)
+                .xPlexContainerSize(50)
                 .build();
 
             GetLibraryItemsResponse res = sdk.library().getLibraryItems()
-                .sectionId("<value>")
-                .tag(Tag.GENRE)
-                .includeGuids(1L)
+                .request(req)
                 .call();
 
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetLibraryItemsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetLibraryItemsResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -486,16 +460,14 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       | Example                                                                           |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `sectionId`                                                                       | *java.lang.Object*                                                                | :heavy_check_mark:                                                                | the Id of the library to query                                                    |                                                                                   |
-| `tag`                                                                             | [lukehagar.plexapi.plexapi.models.operations.Tag](../../models/operations/Tag.md) | :heavy_check_mark:                                                                | A key representing a specific tag within the section.                             |                                                                                   |
-| `includeGuids`                                                                    | *Optional<? extends Long>*                                                        | :heavy_minus_sign:                                                                | Adds the Guids object to the response<br/>                                        | 1                                                                                 |
-
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `request`                                                                   | [GetLibraryItemsRequest](../../models/operations/GetLibraryItemsRequest.md) | :heavy_check_mark:                                                          | The request object to use for the request.                                  |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetLibraryItemsResponse](../../models/operations/GetLibraryItemsResponse.md)**
+**[GetLibraryItemsResponse](../../models/operations/GetLibraryItemsResponse.md)**
+
 ### Errors
 
 | Error Object                              | Status Code                               | Content Type                              |
@@ -503,9 +475,10 @@ public class Application {
 | models/errors/GetLibraryItemsResponseBody | 401                                       | application/json                          |
 | models/errors/SDKError                    | 4xx-5xx                                   | \*\/*                                     |
 
-## refreshLibrary
 
-This endpoint Refreshes the library.
+## getRefreshLibraryMetadata
+
+This endpoint Refreshes all the Metadata of the library.
 
 
 ### Example Usage
@@ -513,19 +486,11 @@ This endpoint Refreshes the library.
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.Force;
+import dev.plexapi.sdk.models.operations.GetRefreshLibraryMetadataResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -533,18 +498,19 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
-            RefreshLibraryResponse res = sdk.library().refreshLibrary()
-                .sectionId(934.16d)
+            GetRefreshLibraryMetadataResponse res = sdk.library().getRefreshLibraryMetadata()
+                .sectionKey(9518)
+                .force(Force.ONE)
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.RefreshLibraryResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetRefreshLibraryMetadataResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -558,22 +524,24 @@ public class Application {
 
 ### Parameters
 
-| Parameter                        | Type                             | Required                         | Description                      |
-| -------------------------------- | -------------------------------- | -------------------------------- | -------------------------------- |
-| `sectionId`                      | *double*                         | :heavy_check_mark:               | the Id of the library to refresh |
-
+| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `sectionKey`                                                                                  | *int*                                                                                         | :heavy_check_mark:                                                                            | The unique key of the Plex library. <br/>Note: This is unique in the context of the Plex server.<br/> | 9518                                                                                          |
+| `force`                                                                                       | [Optional<Force>](../../models/operations/Force.md)                                           | :heavy_minus_sign:                                                                            | Force the refresh even if the library is already being refreshed.                             | 0                                                                                             |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.RefreshLibraryResponse](../../models/operations/RefreshLibraryResponse.md)**
+**[GetRefreshLibraryMetadataResponse](../../models/operations/GetRefreshLibraryMetadataResponse.md)**
+
 ### Errors
 
-| Error Object                             | Status Code                              | Content Type                             |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| models/errors/RefreshLibraryResponseBody | 401                                      | application/json                         |
-| models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
+| Error Object                                        | Status Code                                         | Content Type                                        |
+| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| models/errors/GetRefreshLibraryMetadataResponseBody | 401                                                 | application/json                                    |
+| models/errors/SDKError                              | 4xx-5xx                                             | \*\/*                                               |
 
-## searchLibrary
+
+## getSearchLibrary
 
 Search for content within a specific section of the library.
 
@@ -600,19 +568,11 @@ Each type in the library comes with a set of filters and sorts, aiding in buildi
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetSearchLibraryResponse;
+import dev.plexapi.sdk.models.operations.QueryParamType;
+import java.lang.Exception;
 
 public class Application {
 
@@ -620,21 +580,21 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
-            SearchLibraryResponse res = sdk.library().searchLibrary()
-                .sectionId(933505L)
-                .type(Type.FOUR)
+            GetSearchLibraryResponse res = sdk.library().getSearchLibrary()
+                .sectionKey(9518)
+                .type(QueryParamType.TWO)
                 .call();
 
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.SearchLibraryResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetSearchLibraryResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -648,23 +608,24 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
-| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `sectionId`                                                                         | *long*                                                                              | :heavy_check_mark:                                                                  | the Id of the library to query                                                      |
-| `type`                                                                              | [lukehagar.plexapi.plexapi.models.operations.Type](../../models/operations/Type.md) | :heavy_check_mark:                                                                  | Plex content type to search for                                                     |
-
+| Parameter                                                                                                                                                                       | Type                                                                                                                                                                            | Required                                                                                                                                                                        | Description                                                                                                                                                                     | Example                                                                                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sectionKey`                                                                                                                                                                    | *int*                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                              | The unique key of the Plex library. <br/>Note: This is unique in the context of the Plex server.<br/>                                                                           | 9518                                                                                                                                                                            |
+| `type`                                                                                                                                                                          | [QueryParamType](../../models/operations/QueryParamType.md)                                                                                                                     | :heavy_check_mark:                                                                                                                                                              | The type of media to retrieve.<br/>1 = movie<br/>2 = show<br/>3 = season<br/>4 = episode<br/>E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries<br/> | 2                                                                                                                                                                               |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.SearchLibraryResponse](../../models/operations/SearchLibraryResponse.md)**
+**[GetSearchLibraryResponse](../../models/operations/GetSearchLibraryResponse.md)**
+
 ### Errors
 
-| Error Object                            | Status Code                             | Content Type                            |
-| --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| models/errors/SearchLibraryResponseBody | 401                                     | application/json                        |
-| models/errors/SDKError                  | 4xx-5xx                                 | \*\/*                                   |
+| Error Object                               | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| models/errors/GetSearchLibraryResponseBody | 401                                        | application/json                           |
+| models/errors/SDKError                     | 4xx-5xx                                    | \*\/*                                      |
 
-## getMetadata
+
+## getMetaDataByRatingKey
 
 This endpoint will return the metadata of a library item specified with the ratingKey.
 
@@ -674,19 +635,10 @@ This endpoint will return the metadata of a library item specified with the rati
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetMetaDataByRatingKeyResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -694,20 +646,20 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
-            GetMetadataResponse res = sdk.library().getMetadata()
-                .ratingKey(8382.31d)
+            GetMetaDataByRatingKeyResponse res = sdk.library().getMetaDataByRatingKey()
+                .ratingKey(9518L)
                 .call();
 
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetMetadataResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetMetaDataByRatingKeyResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -721,20 +673,21 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                             | Type                                                  | Required                                              | Description                                           |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| `ratingKey`                                           | *double*                                              | :heavy_check_mark:                                    | the id of the library item to return the children of. |
-
+| Parameter                                             | Type                                                  | Required                                              | Description                                           | Example                                               |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ratingKey`                                           | *long*                                                | :heavy_check_mark:                                    | the id of the library item to return the children of. | 9518                                                  |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetMetadataResponse](../../models/operations/GetMetadataResponse.md)**
+**[GetMetaDataByRatingKeyResponse](../../models/operations/GetMetaDataByRatingKeyResponse.md)**
+
 ### Errors
 
-| Error Object                          | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| models/errors/GetMetadataResponseBody | 401                                   | application/json                      |
-| models/errors/SDKError                | 4xx-5xx                               | \*\/*                                 |
+| Error Object                                     | Status Code                                      | Content Type                                     |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| models/errors/GetMetaDataByRatingKeyResponseBody | 401                                              | application/json                                 |
+| models/errors/SDKError                           | 4xx-5xx                                          | \*\/*                                            |
+
 
 ## getMetadataChildren
 
@@ -746,19 +699,10 @@ This endpoint will return the children of of a library item specified with the r
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetMetadataChildrenResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -766,7 +710,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetMetadataChildrenResponse res = sdk.library().getMetadataChildren()
@@ -777,10 +721,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetMetadataChildrenResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetMetadataChildrenResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -797,18 +741,19 @@ public class Application {
 | Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
 | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
 | `ratingKey`                                                             | *double*                                                                | :heavy_check_mark:                                                      | the id of the library item to return the children of.                   |
-| `includeElements`                                                       | *Optional<? extends String>*                                            | :heavy_minus_sign:                                                      | Adds additional elements to the response. Supported types are (Stream)<br/> |
-
+| `includeElements`                                                       | *Optional<String>*                                                      | :heavy_minus_sign:                                                      | Adds additional elements to the response. Supported types are (Stream)<br/> |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetMetadataChildrenResponse](../../models/operations/GetMetadataChildrenResponse.md)**
+**[GetMetadataChildrenResponse](../../models/operations/GetMetadataChildrenResponse.md)**
+
 ### Errors
 
 | Error Object                                  | Status Code                                   | Content Type                                  |
 | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
 | models/errors/GetMetadataChildrenResponseBody | 401                                           | application/json                              |
 | models/errors/SDKError                        | 4xx-5xx                                       | \*\/*                                         |
+
 
 ## getTopWatchedContent
 
@@ -820,19 +765,11 @@ This endpoint will return the top watched content from libraries of a certain ty
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetTopWatchedContentQueryParamType;
+import dev.plexapi.sdk.models.operations.GetTopWatchedContentResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -840,18 +777,21 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetTopWatchedContentResponse res = sdk.library().getTopWatchedContent()
-                .type(505531L)
+                .type(GetTopWatchedContentQueryParamType.TWO)
                 .includeGuids(1L)
                 .call();
 
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (dev.plexapi.sdk.models.errors.GetTopWatchedContentResponseBody e) {
+            // handle exception
+            throw e;
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -865,20 +805,22 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                           | Type                                                | Required                                            | Description                                         | Example                                             |
-| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
-| `type`                                              | *long*                                              | :heavy_check_mark:                                  | the library type (1 - movies, 2 - shows, 3 - music) |                                                     |
-| `includeGuids`                                      | *Optional<? extends Long>*                          | :heavy_minus_sign:                                  | Adds the Guids object to the response<br/>          | 1                                                   |
-
+| Parameter                                                                                                                                                                       | Type                                                                                                                                                                            | Required                                                                                                                                                                        | Description                                                                                                                                                                     | Example                                                                                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                          | [GetTopWatchedContentQueryParamType](../../models/operations/GetTopWatchedContentQueryParamType.md)                                                                             | :heavy_check_mark:                                                                                                                                                              | The type of media to retrieve.<br/>1 = movie<br/>2 = show<br/>3 = season<br/>4 = episode<br/>E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries<br/> | 2                                                                                                                                                                               |
+| `includeGuids`                                                                                                                                                                  | *Optional<Long>*                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                              | Adds the Guids object to the response<br/>                                                                                                                                      | 1                                                                                                                                                                               |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetTopWatchedContentResponse](../../models/operations/GetTopWatchedContentResponse.md)**
+**[GetTopWatchedContentResponse](../../models/operations/GetTopWatchedContentResponse.md)**
+
 ### Errors
 
-| Error Object           | Status Code            | Content Type           |
-| ---------------------- | ---------------------- | ---------------------- |
-| models/errors/SDKError | 4xx-5xx                | \*\/*                  |
+| Error Object                                   | Status Code                                    | Content Type                                   |
+| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
+| models/errors/GetTopWatchedContentResponseBody | 401                                            | application/json                               |
+| models/errors/SDKError                         | 4xx-5xx                                        | \*\/*                                          |
+
 
 ## getOnDeck
 
@@ -890,19 +832,10 @@ This endpoint will return the on deck content.
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetOnDeckResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -910,7 +843,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetOnDeckResponse res = sdk.library().getOnDeck()
@@ -919,10 +852,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetOnDeckResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetOnDeckResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -934,10 +867,10 @@ public class Application {
 }
 ```
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetOnDeckResponse](../../models/operations/GetOnDeckResponse.md)**
+**[GetOnDeckResponse](../../models/operations/GetOnDeckResponse.md)**
+
 ### Errors
 
 | Error Object                        | Status Code                         | Content Type                        |

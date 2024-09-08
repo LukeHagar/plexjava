@@ -15,6 +15,7 @@ Operations against the Plex Media Server System.
 * [getServerIdentity](#getserveridentity) - Get Server Identity
 * [getMyPlexAccount](#getmyplexaccount) - Get MyPlex Account
 * [getResizedPhoto](#getresizedphoto) - Get a Resized Photo
+* [getMediaProviders](#getmediaproviders) - Get Media Providers
 * [getServerList](#getserverlist) - Get Server List
 
 ## getServerCapabilities
@@ -26,19 +27,10 @@ Get Server Capabilities
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetServerCapabilitiesResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -46,7 +38,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
@@ -55,10 +47,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetServerCapabilitiesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -70,16 +62,17 @@ public class Application {
 }
 ```
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetServerCapabilitiesResponse](../../models/operations/GetServerCapabilitiesResponse.md)**
+**[GetServerCapabilitiesResponse](../../models/operations/GetServerCapabilitiesResponse.md)**
+
 ### Errors
 
 | Error Object                                    | Status Code                                     | Content Type                                    |
 | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
 | models/errors/GetServerCapabilitiesResponseBody | 401                                             | application/json                                |
 | models/errors/SDKError                          | 4xx-5xx                                         | \*\/*                                           |
+
 
 ## getServerPreferences
 
@@ -90,19 +83,10 @@ Get Server Preferences
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetServerPreferencesResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -110,7 +94,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetServerPreferencesResponse res = sdk.server().getServerPreferences()
@@ -119,10 +103,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetServerPreferencesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetServerPreferencesResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -134,16 +118,17 @@ public class Application {
 }
 ```
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetServerPreferencesResponse](../../models/operations/GetServerPreferencesResponse.md)**
+**[GetServerPreferencesResponse](../../models/operations/GetServerPreferencesResponse.md)**
+
 ### Errors
 
 | Error Object                                   | Status Code                                    | Content Type                                   |
 | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
 | models/errors/GetServerPreferencesResponseBody | 401                                            | application/json                               |
 | models/errors/SDKError                         | 4xx-5xx                                        | \*\/*                                          |
+
 
 ## getAvailableClients
 
@@ -154,19 +139,10 @@ Get Available Clients
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetAvailableClientsResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -174,7 +150,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetAvailableClientsResponse res = sdk.server().getAvailableClients()
@@ -183,10 +159,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetAvailableClientsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetAvailableClientsResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -198,16 +174,17 @@ public class Application {
 }
 ```
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetAvailableClientsResponse](../../models/operations/GetAvailableClientsResponse.md)**
+**[GetAvailableClientsResponse](../../models/operations/GetAvailableClientsResponse.md)**
+
 ### Errors
 
 | Error Object                                  | Status Code                                   | Content Type                                  |
 | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
 | models/errors/GetAvailableClientsResponseBody | 401                                           | application/json                              |
 | models/errors/SDKError                        | 4xx-5xx                                       | \*\/*                                         |
+
 
 ## getDevices
 
@@ -218,19 +195,10 @@ Get Devices
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetDevicesResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -238,7 +206,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetDevicesResponse res = sdk.server().getDevices()
@@ -247,10 +215,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetDevicesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetDevicesResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -262,10 +230,10 @@ public class Application {
 }
 ```
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetDevicesResponse](../../models/operations/GetDevicesResponse.md)**
+**[GetDevicesResponse](../../models/operations/GetDevicesResponse.md)**
+
 ### Errors
 
 | Error Object                         | Status Code                          | Content Type                         |
@@ -273,36 +241,27 @@ public class Application {
 | models/errors/GetDevicesResponseBody | 401                                  | application/json                     |
 | models/errors/SDKError               | 4xx-5xx                              | \*\/*                                |
 
+
 ## getServerIdentity
 
-Get Server Identity
+This request is useful to determine if the server is online or offline
 
 ### Example Usage
 
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetServerIdentityResponse;
+import java.lang.Exception;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
         try {
             PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetServerIdentityResponse res = sdk.server().getServerIdentity()
@@ -311,10 +270,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetServerIdentityResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetServerIdentityResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -326,16 +285,17 @@ public class Application {
 }
 ```
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetServerIdentityResponse](../../models/operations/GetServerIdentityResponse.md)**
+**[GetServerIdentityResponse](../../models/operations/GetServerIdentityResponse.md)**
+
 ### Errors
 
 | Error Object                                | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| models/errors/GetServerIdentityResponseBody | 401                                         | application/json                            |
+| models/errors/GetServerIdentityResponseBody | 408                                         | application/json                            |
 | models/errors/SDKError                      | 4xx-5xx                                     | \*\/*                                       |
+
 
 ## getMyPlexAccount
 
@@ -346,19 +306,10 @@ Returns MyPlex Account Information
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetMyPlexAccountResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -366,7 +317,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetMyPlexAccountResponse res = sdk.server().getMyPlexAccount()
@@ -375,10 +326,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetMyPlexAccountResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetMyPlexAccountResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -390,16 +341,17 @@ public class Application {
 }
 ```
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetMyPlexAccountResponse](../../models/operations/GetMyPlexAccountResponse.md)**
+**[GetMyPlexAccountResponse](../../models/operations/GetMyPlexAccountResponse.md)**
+
 ### Errors
 
 | Error Object                               | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | models/errors/GetMyPlexAccountResponseBody | 401                                        | application/json                           |
 | models/errors/SDKError                     | 4xx-5xx                                    | \*\/*                                      |
+
 
 ## getResizedPhoto
 
@@ -411,19 +363,13 @@ Plex's Photo transcoder is used throughout the service to serve images at specif
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetResizedPhotoRequest;
+import dev.plexapi.sdk.models.operations.GetResizedPhotoResponse;
+import dev.plexapi.sdk.models.operations.MinSize;
+import dev.plexapi.sdk.models.operations.Upscale;
+import java.lang.Exception;
 
 public class Application {
 
@@ -431,7 +377,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetResizedPhotoRequest req = GetResizedPhotoRequest.builder()
@@ -449,10 +395,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetResizedPhotoResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetResizedPhotoResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -466,14 +412,14 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                               | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
-| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                               | [lukehagar.plexapi.plexapi.models.operations.GetResizedPhotoRequest](../../models/operations/GetResizedPhotoRequest.md) | :heavy_check_mark:                                                                                                      | The request object to use for the request.                                                                              |
-
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `request`                                                                   | [GetResizedPhotoRequest](../../models/operations/GetResizedPhotoRequest.md) | :heavy_check_mark:                                                          | The request object to use for the request.                                  |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetResizedPhotoResponse](../../models/operations/GetResizedPhotoResponse.md)**
+**[GetResizedPhotoResponse](../../models/operations/GetResizedPhotoResponse.md)**
+
 ### Errors
 
 | Error Object                              | Status Code                               | Content Type                              |
@@ -481,28 +427,20 @@ public class Application {
 | models/errors/GetResizedPhotoResponseBody | 401                                       | application/json                          |
 | models/errors/SDKError                    | 4xx-5xx                                   | \*\/*                                     |
 
-## getServerList
 
-Get Server List
+## getMediaProviders
+
+Retrieves media providers and their features from the Plex server.
 
 ### Example Usage
 
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetMediaProvidersResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -510,19 +448,20 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
-            GetServerListResponse res = sdk.server().getServerList()
+            GetMediaProvidersResponse res = sdk.server().getMediaProviders()
+                .xPlexToken("CV5xoxjTpFKUzBTShsaf")
                 .call();
 
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetServerListResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetMediaProvidersResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -534,10 +473,72 @@ public class Application {
 }
 ```
 
+### Parameters
+
+| Parameter                 | Type                      | Required                  | Description               | Example                   |
+| ------------------------- | ------------------------- | ------------------------- | ------------------------- | ------------------------- |
+| `xPlexToken`              | *String*                  | :heavy_check_mark:        | Plex Authentication Token | CV5xoxjTpFKUzBTShsaf      |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetServerListResponse](../../models/operations/GetServerListResponse.md)**
+**[GetMediaProvidersResponse](../../models/operations/GetMediaProvidersResponse.md)**
+
+### Errors
+
+| Error Object                                | Status Code                                 | Content Type                                |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| models/errors/GetMediaProvidersResponseBody | 401                                         | application/json                            |
+| models/errors/SDKError                      | 4xx-5xx                                     | \*\/*                                       |
+
+
+## getServerList
+
+Get Server List
+
+### Example Usage
+
+```java
+package hello.world;
+
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetServerListResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+        try {
+            PlexAPI sdk = PlexAPI.builder()
+                .accessToken("<YOUR_API_KEY_HERE>")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .build();
+
+            GetServerListResponse res = sdk.server().getServerList()
+                .call();
+
+            if (res.object().isPresent()) {
+                // handle response
+            }
+        } catch (dev.plexapi.sdk.models.errors.GetServerListResponseBody e) {
+            // handle exception
+            throw e;
+        } catch (SDKError e) {
+            // handle exception
+            throw e;
+        } catch (Exception e) {
+            // handle exception
+            throw e;
+        }
+
+    }
+}
+```
+
+### Response
+
+**[GetServerListResponse](../../models/operations/GetServerListResponse.md)**
+
 ### Errors
 
 | Error Object                            | Status Code                             | Content Type                            |

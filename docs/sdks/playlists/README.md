@@ -33,19 +33,13 @@ Create a new playlist. By default the playlist is blank. To create a playlist al
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.CreatePlaylistQueryParamType;
+import dev.plexapi.sdk.models.operations.CreatePlaylistRequest;
+import dev.plexapi.sdk.models.operations.CreatePlaylistResponse;
+import dev.plexapi.sdk.models.operations.Smart;
+import java.lang.Exception;
 
 public class Application {
 
@@ -53,12 +47,12 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             CreatePlaylistRequest req = CreatePlaylistRequest.builder()
                 .title("<value>")
-                .type(QueryParamType.PHOTO)
+                .type(CreatePlaylistQueryParamType.PHOTO)
                 .smart(Smart.ONE)
                 .uri("<value>")
                 .build();
@@ -70,10 +64,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.CreatePlaylistResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.CreatePlaylistResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -87,20 +81,21 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                             | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           |
-| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                             | [lukehagar.plexapi.plexapi.models.operations.CreatePlaylistRequest](../../models/operations/CreatePlaylistRequest.md) | :heavy_check_mark:                                                                                                    | The request object to use for the request.                                                                            |
-
+| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `request`                                                                 | [CreatePlaylistRequest](../../models/operations/CreatePlaylistRequest.md) | :heavy_check_mark:                                                        | The request object to use for the request.                                |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.CreatePlaylistResponse](../../models/operations/CreatePlaylistResponse.md)**
+**[CreatePlaylistResponse](../../models/operations/CreatePlaylistResponse.md)**
+
 ### Errors
 
 | Error Object                             | Status Code                              | Content Type                             |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | models/errors/CreatePlaylistResponseBody | 401                                      | application/json                         |
 | models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
+
 
 ## getPlaylists
 
@@ -111,19 +106,12 @@ Get All Playlists given the specified filters.
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetPlaylistsResponse;
+import dev.plexapi.sdk.models.operations.PlaylistType;
+import dev.plexapi.sdk.models.operations.QueryParamSmart;
+import java.lang.Exception;
 
 public class Application {
 
@@ -131,7 +119,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetPlaylistsResponse res = sdk.playlists().getPlaylists()
@@ -142,10 +130,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetPlaylistsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetPlaylistsResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -159,21 +147,22 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                     | Type                                                                                                                          | Required                                                                                                                      | Description                                                                                                                   |
-| ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `playlistType`                                                                                                                | [Optional<? extends lukehagar.plexapi.plexapi.models.operations.PlaylistType>](../../models/operations/PlaylistType.md)       | :heavy_minus_sign:                                                                                                            | limit to a type of playlist.                                                                                                  |
-| `smart`                                                                                                                       | [Optional<? extends lukehagar.plexapi.plexapi.models.operations.QueryParamSmart>](../../models/operations/QueryParamSmart.md) | :heavy_minus_sign:                                                                                                            | type of playlists to return (default is all).                                                                                 |
-
+| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `playlistType`                                                          | [Optional<PlaylistType>](../../models/operations/PlaylistType.md)       | :heavy_minus_sign:                                                      | limit to a type of playlist.                                            |
+| `smart`                                                                 | [Optional<QueryParamSmart>](../../models/operations/QueryParamSmart.md) | :heavy_minus_sign:                                                      | type of playlists to return (default is all).                           |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetPlaylistsResponse](../../models/operations/GetPlaylistsResponse.md)**
+**[GetPlaylistsResponse](../../models/operations/GetPlaylistsResponse.md)**
+
 ### Errors
 
 | Error Object                           | Status Code                            | Content Type                           |
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
 | models/errors/GetPlaylistsResponseBody | 401                                    | application/json                       |
 | models/errors/SDKError                 | 4xx-5xx                                | \*\/*                                  |
+
 
 ## getPlaylist
 
@@ -186,19 +175,10 @@ Smart playlist details contain the `content` attribute. This is the content URI 
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetPlaylistResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -206,7 +186,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetPlaylistResponse res = sdk.playlists().getPlaylist()
@@ -216,10 +196,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetPlaylistResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetPlaylistResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -237,16 +217,17 @@ public class Application {
 | ---------------------- | ---------------------- | ---------------------- | ---------------------- |
 | `playlistID`           | *double*               | :heavy_check_mark:     | the ID of the playlist |
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetPlaylistResponse](../../models/operations/GetPlaylistResponse.md)**
+**[GetPlaylistResponse](../../models/operations/GetPlaylistResponse.md)**
+
 ### Errors
 
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | models/errors/GetPlaylistResponseBody | 401                                   | application/json                      |
 | models/errors/SDKError                | 4xx-5xx                               | \*\/*                                 |
+
 
 ## deletePlaylist
 
@@ -258,19 +239,10 @@ This endpoint will delete a playlist
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.DeletePlaylistResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -278,7 +250,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             DeletePlaylistResponse res = sdk.playlists().deletePlaylist()
@@ -286,10 +258,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.DeletePlaylistResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.DeletePlaylistResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -307,16 +279,17 @@ public class Application {
 | ---------------------- | ---------------------- | ---------------------- | ---------------------- |
 | `playlistID`           | *double*               | :heavy_check_mark:     | the ID of the playlist |
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.DeletePlaylistResponse](../../models/operations/DeletePlaylistResponse.md)**
+**[DeletePlaylistResponse](../../models/operations/DeletePlaylistResponse.md)**
+
 ### Errors
 
 | Error Object                             | Status Code                              | Content Type                             |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | models/errors/DeletePlaylistResponseBody | 401                                      | application/json                         |
 | models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
+
 
 ## updatePlaylist
 
@@ -328,19 +301,10 @@ From PMS version 1.9.1 clients can also edit playlist metadata using this endpoi
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.UpdatePlaylistResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -348,7 +312,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             UpdatePlaylistResponse res = sdk.playlists().updatePlaylist()
@@ -358,10 +322,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.UpdatePlaylistResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.UpdatePlaylistResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -378,19 +342,20 @@ public class Application {
 | Parameter                           | Type                                | Required                            | Description                         |
 | ----------------------------------- | ----------------------------------- | ----------------------------------- | ----------------------------------- |
 | `playlistID`                        | *double*                            | :heavy_check_mark:                  | the ID of the playlist              |
-| `title`                             | *Optional<? extends String>*        | :heavy_minus_sign:                  | name of the playlist                |
-| `summary`                           | *Optional<? extends String>*        | :heavy_minus_sign:                  | summary description of the playlist |
-
+| `title`                             | *Optional<String>*                  | :heavy_minus_sign:                  | name of the playlist                |
+| `summary`                           | *Optional<String>*                  | :heavy_minus_sign:                  | summary description of the playlist |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.UpdatePlaylistResponse](../../models/operations/UpdatePlaylistResponse.md)**
+**[UpdatePlaylistResponse](../../models/operations/UpdatePlaylistResponse.md)**
+
 ### Errors
 
 | Error Object                             | Status Code                              | Content Type                             |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | models/errors/UpdatePlaylistResponseBody | 401                                      | application/json                         |
 | models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
+
 
 ## getPlaylistContents
 
@@ -405,19 +370,11 @@ Note that for dumb playlists, items have a `playlistItemID` attribute which is u
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetPlaylistContentsQueryParamType;
+import dev.plexapi.sdk.models.operations.GetPlaylistContentsResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -425,21 +382,21 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetPlaylistContentsResponse res = sdk.playlists().getPlaylistContents()
                 .playlistID(5004.46d)
-                .type(9403.59d)
+                .type(GetPlaylistContentsQueryParamType.TWO)
                 .call();
 
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetPlaylistContentsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetPlaylistContentsResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -453,21 +410,22 @@ public class Application {
 
 ### Parameters
 
-| Parameter                               | Type                                    | Required                                | Description                             |
-| --------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| `playlistID`                            | *double*                                | :heavy_check_mark:                      | the ID of the playlist                  |
-| `type`                                  | *double*                                | :heavy_check_mark:                      | the metadata type of the item to return |
-
+| Parameter                                                                                                                                                                       | Type                                                                                                                                                                            | Required                                                                                                                                                                        | Description                                                                                                                                                                     | Example                                                                                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `playlistID`                                                                                                                                                                    | *double*                                                                                                                                                                        | :heavy_check_mark:                                                                                                                                                              | the ID of the playlist                                                                                                                                                          |                                                                                                                                                                                 |
+| `type`                                                                                                                                                                          | [GetPlaylistContentsQueryParamType](../../models/operations/GetPlaylistContentsQueryParamType.md)                                                                               | :heavy_check_mark:                                                                                                                                                              | The type of media to retrieve.<br/>1 = movie<br/>2 = show<br/>3 = season<br/>4 = episode<br/>E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries<br/> | 2                                                                                                                                                                               |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetPlaylistContentsResponse](../../models/operations/GetPlaylistContentsResponse.md)**
+**[GetPlaylistContentsResponse](../../models/operations/GetPlaylistContentsResponse.md)**
+
 ### Errors
 
 | Error Object                                  | Status Code                                   | Content Type                                  |
 | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
 | models/errors/GetPlaylistContentsResponseBody | 401                                           | application/json                              |
 | models/errors/SDKError                        | 4xx-5xx                                       | \*\/*                                         |
+
 
 ## clearPlaylistContents
 
@@ -479,19 +437,10 @@ Clears a playlist, only works with dumb playlists. Returns the playlist.
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.ClearPlaylistContentsResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -499,7 +448,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             ClearPlaylistContentsResponse res = sdk.playlists().clearPlaylistContents()
@@ -507,10 +456,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.ClearPlaylistContentsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.ClearPlaylistContentsResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -528,16 +477,17 @@ public class Application {
 | ---------------------- | ---------------------- | ---------------------- | ---------------------- |
 | `playlistID`           | *double*               | :heavy_check_mark:     | the ID of the playlist |
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.ClearPlaylistContentsResponse](../../models/operations/ClearPlaylistContentsResponse.md)**
+**[ClearPlaylistContentsResponse](../../models/operations/ClearPlaylistContentsResponse.md)**
+
 ### Errors
 
 | Error Object                                    | Status Code                                     | Content Type                                    |
 | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
 | models/errors/ClearPlaylistContentsResponseBody | 401                                             | application/json                                |
 | models/errors/SDKError                          | 4xx-5xx                                         | \*\/*                                           |
+
 
 ## addPlaylistContents
 
@@ -550,19 +500,10 @@ With a smart playlist, passing a new `uri` parameter replaces the rules for the 
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.AddPlaylistContentsResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -570,7 +511,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             AddPlaylistContentsResponse res = sdk.playlists().addPlaylistContents()
@@ -582,10 +523,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.AddPlaylistContentsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.AddPlaylistContentsResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -603,18 +544,19 @@ public class Application {
 | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
 | `playlistID`                                                  | *double*                                                      | :heavy_check_mark:                                            | the ID of the playlist                                        |                                                               |
 | `uri`                                                         | *String*                                                      | :heavy_check_mark:                                            | the content URI for the playlist                              | server://12345/com.plexapp.plugins.library/library/metadata/1 |
-| `playQueueID`                                                 | *Optional<? extends Double>*                                  | :heavy_minus_sign:                                            | the play queue to add to a playlist                           | 123                                                           |
-
+| `playQueueID`                                                 | *Optional<Double>*                                            | :heavy_minus_sign:                                            | the play queue to add to a playlist                           | 123                                                           |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.AddPlaylistContentsResponse](../../models/operations/AddPlaylistContentsResponse.md)**
+**[AddPlaylistContentsResponse](../../models/operations/AddPlaylistContentsResponse.md)**
+
 ### Errors
 
 | Error Object                                  | Status Code                                   | Content Type                                  |
 | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
 | models/errors/AddPlaylistContentsResponseBody | 401                                           | application/json                              |
 | models/errors/SDKError                        | 4xx-5xx                                       | \*\/*                                         |
+
 
 ## uploadPlaylist
 
@@ -626,19 +568,11 @@ Imports m3u playlists by passing a path on the server to scan for m3u-formatted 
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.QueryParamForce;
+import dev.plexapi.sdk.models.operations.UploadPlaylistResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -646,19 +580,19 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             UploadPlaylistResponse res = sdk.playlists().uploadPlaylist()
                 .path("/home/barkley/playlist.m3u")
-                .force(Force.ZERO)
+                .force(QueryParamForce.ZERO)
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.UploadPlaylistResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.UploadPlaylistResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -675,12 +609,12 @@ public class Application {
 | Parameter                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `path`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | *String*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server. <br/>If the `path` argument is a directory, that path will be scanned for playlist files to be processed. <br/>Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it. <br/>The GUID of each playlist is based on the filename. <br/>If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it. <br/>The GUID of each playlist is based on the filename.<br/> | /home/barkley/playlist.m3u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `force`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | [lukehagar.plexapi.plexapi.models.operations.Force](../../models/operations/Force.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Force overwriting of duplicate playlists.  <br/>By default, a playlist file uploaded with the same path will overwrite the existing playlist. <br/>The `force` argument is used to disable overwriting.  <br/>If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.<br/>                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-
+| `force`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | [QueryParamForce](../../models/operations/QueryParamForce.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Force overwriting of duplicate playlists.  <br/>By default, a playlist file uploaded with the same path will overwrite the existing playlist. <br/>The `force` argument is used to disable overwriting.  <br/>If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.<br/>                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.UploadPlaylistResponse](../../models/operations/UploadPlaylistResponse.md)**
+**[UploadPlaylistResponse](../../models/operations/UploadPlaylistResponse.md)**
+
 ### Errors
 
 | Error Object                             | Status Code                              | Content Type                             |

@@ -26,19 +26,10 @@ Get Server Activities
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetServerActivitiesResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -46,7 +37,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetServerActivitiesResponse res = sdk.activities().getServerActivities()
@@ -55,10 +46,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetServerActivitiesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetServerActivitiesResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -70,16 +61,17 @@ public class Application {
 }
 ```
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetServerActivitiesResponse](../../models/operations/GetServerActivitiesResponse.md)**
+**[GetServerActivitiesResponse](../../models/operations/GetServerActivitiesResponse.md)**
+
 ### Errors
 
 | Error Object                                  | Status Code                                   | Content Type                                  |
 | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
 | models/errors/GetServerActivitiesResponseBody | 401                                           | application/json                              |
 | models/errors/SDKError                        | 4xx-5xx                                       | \*\/*                                         |
+
 
 ## cancelServerActivities
 
@@ -90,19 +82,10 @@ Cancel Server Activities
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.CancelServerActivitiesResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -110,7 +93,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             CancelServerActivitiesResponse res = sdk.activities().cancelServerActivities()
@@ -118,10 +101,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.CancelServerActivitiesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.CancelServerActivitiesResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -139,10 +122,10 @@ public class Application {
 | ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
 | `activityUUID`                       | *String*                             | :heavy_check_mark:                   | The UUID of the activity to cancel.  | 25b71ed5-0f9d-461c-baa7-d404e9e10d3e |
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.CancelServerActivitiesResponse](../../models/operations/CancelServerActivitiesResponse.md)**
+**[CancelServerActivitiesResponse](../../models/operations/CancelServerActivitiesResponse.md)**
+
 ### Errors
 
 | Error Object                                     | Status Code                                      | Content Type                                     |

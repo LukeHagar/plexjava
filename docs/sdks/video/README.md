@@ -20,19 +20,12 @@ Get the timeline for a media item
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetTimelineRequest;
+import dev.plexapi.sdk.models.operations.GetTimelineResponse;
+import dev.plexapi.sdk.models.operations.State;
+import java.lang.Exception;
 
 public class Application {
 
@@ -40,7 +33,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetTimelineRequest req = GetTimelineRequest.builder()
@@ -61,10 +54,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetTimelineResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetTimelineResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -78,20 +71,21 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                       | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
-| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                       | [lukehagar.plexapi.plexapi.models.operations.GetTimelineRequest](../../models/operations/GetTimelineRequest.md) | :heavy_check_mark:                                                                                              | The request object to use for the request.                                                                      |
-
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `request`                                                           | [GetTimelineRequest](../../models/operations/GetTimelineRequest.md) | :heavy_check_mark:                                                  | The request object to use for the request.                          |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetTimelineResponse](../../models/operations/GetTimelineResponse.md)**
+**[GetTimelineResponse](../../models/operations/GetTimelineResponse.md)**
+
 ### Errors
 
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | models/errors/GetTimelineResponseBody | 401                                   | application/json                      |
 | models/errors/SDKError                | 4xx-5xx                               | \*\/*                                 |
+
 
 ## startUniversalTranscode
 
@@ -102,19 +96,11 @@ Begin a Universal Transcode Session
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.StartUniversalTranscodeRequest;
+import dev.plexapi.sdk.models.operations.StartUniversalTranscodeResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -122,7 +108,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             StartUniversalTranscodeRequest req = StartUniversalTranscodeRequest.builder()
@@ -149,10 +135,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.StartUniversalTranscodeResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.StartUniversalTranscodeResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -166,14 +152,14 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                               | Type                                                                                                                                    | Required                                                                                                                                | Description                                                                                                                             |
-| --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                                               | [lukehagar.plexapi.plexapi.models.operations.StartUniversalTranscodeRequest](../../models/operations/StartUniversalTranscodeRequest.md) | :heavy_check_mark:                                                                                                                      | The request object to use for the request.                                                                                              |
-
+| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `request`                                                                                   | [StartUniversalTranscodeRequest](../../models/operations/StartUniversalTranscodeRequest.md) | :heavy_check_mark:                                                                          | The request object to use for the request.                                                  |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.StartUniversalTranscodeResponse](../../models/operations/StartUniversalTranscodeResponse.md)**
+**[StartUniversalTranscodeResponse](../../models/operations/StartUniversalTranscodeResponse.md)**
+
 ### Errors
 
 | Error Object                                      | Status Code                                       | Content Type                                      |

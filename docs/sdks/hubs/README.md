@@ -20,19 +20,11 @@ Get Global Hubs filtered by the parameters provided.
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetGlobalHubsResponse;
+import dev.plexapi.sdk.models.operations.OnlyTransient;
+import java.lang.Exception;
 
 public class Application {
 
@@ -40,7 +32,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetGlobalHubsResponse res = sdk.hubs().getGlobalHubs()
@@ -51,10 +43,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetGlobalHubsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetGlobalHubsResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -70,19 +62,20 @@ public class Application {
 
 | Parameter                                                                                                                                             | Type                                                                                                                                                  | Required                                                                                                                                              | Description                                                                                                                                           |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `count`                                                                                                                                               | *Optional<? extends Double>*                                                                                                                          | :heavy_minus_sign:                                                                                                                                    | The number of items to return with each hub.                                                                                                          |
-| `onlyTransient`                                                                                                                                       | [Optional<? extends lukehagar.plexapi.plexapi.models.operations.OnlyTransient>](../../models/operations/OnlyTransient.md)                             | :heavy_minus_sign:                                                                                                                                    | Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added). |
-
+| `count`                                                                                                                                               | *Optional<Double>*                                                                                                                                    | :heavy_minus_sign:                                                                                                                                    | The number of items to return with each hub.                                                                                                          |
+| `onlyTransient`                                                                                                                                       | [Optional<OnlyTransient>](../../models/operations/OnlyTransient.md)                                                                                   | :heavy_minus_sign:                                                                                                                                    | Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added). |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetGlobalHubsResponse](../../models/operations/GetGlobalHubsResponse.md)**
+**[GetGlobalHubsResponse](../../models/operations/GetGlobalHubsResponse.md)**
+
 ### Errors
 
 | Error Object                            | Status Code                             | Content Type                            |
 | --------------------------------------- | --------------------------------------- | --------------------------------------- |
 | models/errors/GetGlobalHubsResponseBody | 401                                     | application/json                        |
 | models/errors/SDKError                  | 4xx-5xx                                 | \*\/*                                   |
+
 
 ## getLibraryHubs
 
@@ -94,19 +87,11 @@ This endpoint will return a list of library specific hubs
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetLibraryHubsResponse;
+import dev.plexapi.sdk.models.operations.QueryParamOnlyTransient;
+import java.lang.Exception;
 
 public class Application {
 
@@ -114,7 +99,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetLibraryHubsResponse res = sdk.hubs().getLibraryHubs()
@@ -126,10 +111,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetLibraryHubsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetLibraryHubsResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -146,13 +131,13 @@ public class Application {
 | Parameter                                                                                                                                             | Type                                                                                                                                                  | Required                                                                                                                                              | Description                                                                                                                                           |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `sectionId`                                                                                                                                           | *double*                                                                                                                                              | :heavy_check_mark:                                                                                                                                    | the Id of the library to query                                                                                                                        |
-| `count`                                                                                                                                               | *Optional<? extends Double>*                                                                                                                          | :heavy_minus_sign:                                                                                                                                    | The number of items to return with each hub.                                                                                                          |
-| `onlyTransient`                                                                                                                                       | [Optional<? extends lukehagar.plexapi.plexapi.models.operations.QueryParamOnlyTransient>](../../models/operations/QueryParamOnlyTransient.md)         | :heavy_minus_sign:                                                                                                                                    | Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added). |
-
+| `count`                                                                                                                                               | *Optional<Double>*                                                                                                                                    | :heavy_minus_sign:                                                                                                                                    | The number of items to return with each hub.                                                                                                          |
+| `onlyTransient`                                                                                                                                       | [Optional<QueryParamOnlyTransient>](../../models/operations/QueryParamOnlyTransient.md)                                                               | :heavy_minus_sign:                                                                                                                                    | Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added). |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetLibraryHubsResponse](../../models/operations/GetLibraryHubsResponse.md)**
+**[GetLibraryHubsResponse](../../models/operations/GetLibraryHubsResponse.md)**
+
 ### Errors
 
 | Error Object                             | Status Code                              | Content Type                             |

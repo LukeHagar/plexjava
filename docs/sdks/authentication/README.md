@@ -10,6 +10,8 @@ API Calls regarding authentication for Plex Media Server
 
 * [getTransientToken](#gettransienttoken) - Get a Transient Token.
 * [getSourceConnectionInformation](#getsourceconnectioninformation) - Get Source Connection Information
+* [getUserDetails](#getuserdetails) - Get User Data By Token
+* [postUsersSignInData](#postuserssignindata) - Get User SignIn Data
 
 ## getTransientToken
 
@@ -21,19 +23,12 @@ This endpoint provides the caller with a temporary token with the same access le
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetTransientTokenQueryParamType;
+import dev.plexapi.sdk.models.operations.GetTransientTokenResponse;
+import dev.plexapi.sdk.models.operations.Scope;
+import java.lang.Exception;
 
 public class Application {
 
@@ -41,7 +36,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetTransientTokenResponse res = sdk.authentication().getTransientToken()
@@ -50,10 +45,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetTransientTokenResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetTransientTokenResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -67,21 +62,22 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               |
-| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                    | [lukehagar.plexapi.plexapi.models.operations.GetTransientTokenQueryParamType](../../models/operations/GetTransientTokenQueryParamType.md) | :heavy_check_mark:                                                                                                                        | `delegation` - This is the only supported `type` parameter.                                                                               |
-| `scope`                                                                                                                                   | [lukehagar.plexapi.plexapi.models.operations.Scope](../../models/operations/Scope.md)                                                     | :heavy_check_mark:                                                                                                                        | `all` - This is the only supported `scope` parameter.                                                                                     |
-
+| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `type`                                                                                        | [GetTransientTokenQueryParamType](../../models/operations/GetTransientTokenQueryParamType.md) | :heavy_check_mark:                                                                            | `delegation` - This is the only supported `type` parameter.                                   |
+| `scope`                                                                                       | [Scope](../../models/operations/Scope.md)                                                     | :heavy_check_mark:                                                                            | `all` - This is the only supported `scope` parameter.                                         |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetTransientTokenResponse](../../models/operations/GetTransientTokenResponse.md)**
+**[GetTransientTokenResponse](../../models/operations/GetTransientTokenResponse.md)**
+
 ### Errors
 
 | Error Object                                | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
 | models/errors/GetTransientTokenResponseBody | 401                                         | application/json                            |
 | models/errors/SDKError                      | 4xx-5xx                                     | \*\/*                                       |
+
 
 ## getSourceConnectionInformation
 
@@ -94,19 +90,10 @@ Note: requires Plex Media Server >= 1.15.4.
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetSourceConnectionInformationResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -114,7 +101,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetSourceConnectionInformationResponse res = sdk.authentication().getSourceConnectionInformation()
@@ -122,10 +109,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetSourceConnectionInformationResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetSourceConnectionInformationResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -143,13 +130,146 @@ public class Application {
 | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
 | `source`                                       | *String*                                       | :heavy_check_mark:                             | The source identifier with an included prefix. | server://client-identifier                     |
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetSourceConnectionInformationResponse](../../models/operations/GetSourceConnectionInformationResponse.md)**
+**[GetSourceConnectionInformationResponse](../../models/operations/GetSourceConnectionInformationResponse.md)**
+
 ### Errors
 
 | Error Object                                             | Status Code                                              | Content Type                                             |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | models/errors/GetSourceConnectionInformationResponseBody | 401                                                      | application/json                                         |
 | models/errors/SDKError                                   | 4xx-5xx                                                  | \*\/*                                                    |
+
+
+## getUserDetails
+
+Get the User data from the provided X-Plex-Token
+
+### Example Usage
+
+```java
+package hello.world;
+
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetUserDetailsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+        try {
+            PlexAPI sdk = PlexAPI.builder()
+                .accessToken("<YOUR_API_KEY_HERE>")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .build();
+
+            GetUserDetailsResponse res = sdk.authentication().getUserDetails()
+                .xPlexToken("CV5xoxjTpFKUzBTShsaf")
+                .call();
+
+            if (res.userPlexAccount().isPresent()) {
+                // handle response
+            }
+        } catch (dev.plexapi.sdk.models.errors.GetUserDetailsResponseBody e) {
+            // handle exception
+            throw e;
+        } catch (SDKError e) {
+            // handle exception
+            throw e;
+        } catch (Exception e) {
+            // handle exception
+            throw e;
+        }
+
+    }
+}
+```
+
+### Parameters
+
+| Parameter                      | Type                           | Required                       | Description                    | Example                        |
+| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
+| `xPlexToken`                   | *String*                       | :heavy_check_mark:             | Plex Authentication Token      | CV5xoxjTpFKUzBTShsaf           |
+| `serverURL`                    | *String*                       | :heavy_minus_sign:             | An optional server URL to use. | http://localhost:8080          |
+
+### Response
+
+**[GetUserDetailsResponse](../../models/operations/GetUserDetailsResponse.md)**
+
+### Errors
+
+| Error Object                             | Status Code                              | Content Type                             |
+| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| models/errors/GetUserDetailsResponseBody | 401                                      | application/json                         |
+| models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
+
+
+## postUsersSignInData
+
+Sign in user with username and password and return user data with Plex authentication token
+
+### Example Usage
+
+```java
+package hello.world;
+
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.PostUsersSignInDataRequestBody;
+import dev.plexapi.sdk.models.operations.PostUsersSignInDataResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+        try {
+            PlexAPI sdk = PlexAPI.builder()
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .build();
+
+            PostUsersSignInDataResponse res = sdk.authentication().postUsersSignInData()
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .requestBody(PostUsersSignInDataRequestBody.builder()
+                    .login("username@email.com")
+                    .password("password123")
+                    .build())
+                .call();
+
+            if (res.userPlexAccount().isPresent()) {
+                // handle response
+            }
+        } catch (dev.plexapi.sdk.models.errors.PostUsersSignInDataResponseBody e) {
+            // handle exception
+            throw e;
+        } catch (SDKError e) {
+            // handle exception
+            throw e;
+        } catch (Exception e) {
+            // handle exception
+            throw e;
+        }
+
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                             | Type                                                                                                                                                                  | Required                                                                                                                                                              | Description                                                                                                                                                           | Example                                                                                                                                                               |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xPlexClientIdentifier`                                                                                                                                               | *Optional<String>*                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                    | The unique identifier for the client application<br/>This is used to track the client application and its usage<br/>(UUID, serial number, or other number unique per device)<br/> | gcgzw5rz2xovp84b4vha3a40                                                                                                                                              |
+| `requestBody`                                                                                                                                                         | [Optional<PostUsersSignInDataRequestBody>](../../models/operations/PostUsersSignInDataRequestBody.md)                                                                 | :heavy_minus_sign:                                                                                                                                                    | Login credentials                                                                                                                                                     |                                                                                                                                                                       |
+| `serverURL`                                                                                                                                                           | *String*                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                    | An optional server URL to use.                                                                                                                                        | http://localhost:8080                                                                                                                                                 |
+
+### Response
+
+**[PostUsersSignInDataResponse](../../models/operations/PostUsersSignInDataResponse.md)**
+
+### Errors
+
+| Error Object                                  | Status Code                                   | Content Type                                  |
+| --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
+| models/errors/PostUsersSignInDataResponseBody | 401                                           | application/json                              |
+| models/errors/SDKError                        | 4xx-5xx                                       | \*\/*                                         |

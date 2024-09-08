@@ -12,17 +12,17 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: true
 java:
-  version: 0.1.1
+  version: 0.2.1
   additionalDependencies: []
   additionalPlugins: []
   artifactID: plexapi
   clientServerStatusCodesAsErrors: true
   companyEmail: lukeslakemail@gmail.com
-  companyName: Personal
-  companyURL: lukehagar.com
+  companyName: plexapi
+  companyURL: plexapi.dev
   flattenGlobalSecurity: true
   githubURL: github.com/LukeHagar/plexjava
-  groupID: lukehagar.plexapi
+  groupID: dev.plexapi
   imports:
     option: openapi
     paths:
@@ -39,5 +39,6 @@ java:
   maxMethodParams: 4
   ossrhURL: https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/
   outputModelSuffix: output
+  packageName: dev.plexapi.sdk
   projectName: plexapi
   templateVersion: v2

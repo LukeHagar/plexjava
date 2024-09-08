@@ -1,19 +1,21 @@
 lockVersion: 2.0.0
 id: 1732900d-e173-47c1-a90d-d45182eb35d9
 management:
-  docChecksum: e73920abd3a55e8d249592f2e3090574
+  docChecksum: eae2a027b2467f033ac397a5d9f0add5
   docVersion: 0.0.3
-  speakeasyVersion: 1.323.0
-  generationVersion: 2.356.0
-  releaseVersion: 0.1.1
-  configChecksum: 32d07b03c4a1b8364852e49423957f33
+  speakeasyVersion: 1.392.1
+  generationVersion: 2.411.9
+  releaseVersion: 0.2.1
+  configChecksum: dd7feeff69752107879de19912c4170f
 features:
   java:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.26.1
+    core: 3.29.5
+    deprecations: 2.81.1
+    downloadStreams: 0.1.1
     flattening: 2.81.1
-    globalSecurity: 2.82.5
+    globalSecurity: 2.82.7
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.1
@@ -22,1051 +24,2028 @@ features:
     nameOverrides: 2.81.3
     nullables: 0.1.0
     sdkHooks: 0.1.0
-    typeOverrides: 2.81.1
-    unions: 0.0.4
+    unions: 0.0.5
 generatedFiles:
-  - src/main/java/lukehagar/plexapi/plexapi/SecuritySource.java
-  - src/main/java/lukehagar/plexapi/plexapi/SDKConfiguration.java
-  - src/main/java/lukehagar/plexapi/plexapi/Server.java
-  - src/main/java/lukehagar/plexapi/plexapi/Media.java
-  - src/main/java/lukehagar/plexapi/plexapi/Video.java
-  - src/main/java/lukehagar/plexapi/plexapi/Activities.java
-  - src/main/java/lukehagar/plexapi/plexapi/Butler.java
-  - src/main/java/lukehagar/plexapi/plexapi/Plex.java
-  - src/main/java/lukehagar/plexapi/plexapi/Hubs.java
-  - src/main/java/lukehagar/plexapi/plexapi/Search.java
-  - src/main/java/lukehagar/plexapi/plexapi/Library.java
-  - src/main/java/lukehagar/plexapi/plexapi/Log.java
-  - src/main/java/lukehagar/plexapi/plexapi/Playlists.java
-  - src/main/java/lukehagar/plexapi/plexapi/Authentication.java
-  - src/main/java/lukehagar/plexapi/plexapi/Statistics.java
-  - src/main/java/lukehagar/plexapi/plexapi/Sessions.java
-  - src/main/java/lukehagar/plexapi/plexapi/Updater.java
-  - src/main/java/lukehagar/plexapi/plexapi/Watchlist.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetServerCapabilitiesRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetServerPreferencesRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetAvailableClientsRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetDevicesRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetServerIdentityRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMyPlexAccountRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetResizedPhotoRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetServerListRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/MarkPlayedRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/MarkUnplayedRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/UpdatePlayProgressRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTimelineRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/StartUniversalTranscodeRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetServerActivitiesRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/CancelServerActivitiesRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetButlerTasksRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/StartAllTasksRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/StopAllTasksRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/StartTaskRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/StopTaskRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetHomeDataRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPinRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTokenRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetGlobalHubsRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryHubsRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/PerformSearchRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/PerformVoiceSearchRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSearchResultsRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetFileHashRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetRecentlyAddedRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibrariesRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/DeleteLibraryRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryItemsRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/RefreshLibraryRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/SearchLibraryRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMetadataRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMetadataChildrenRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTopWatchedContentRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetOnDeckRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/LogLineRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/LogMultiLineRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/EnablePaperTrailRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/CreatePlaylistRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistsRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/DeletePlaylistRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/UpdatePlaylistRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistContentsRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/ClearPlaylistContentsRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/AddPlaylistContentsRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/UploadPlaylistRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTransientTokenRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSourceConnectionInformationRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetStatisticsRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetResourcesStatisticsRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetBandwidthStatisticsRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSessionsRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSessionHistoryRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTranscodeSessionsRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/StopTranscodeSessionRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetUpdateStatusRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/CheckForUpdatesRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/ApplyUpdatesRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetWatchlistRequestBuilder.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/SDKMethodInterfaces.java
-  - src/main/java/lukehagar/plexapi/plexapi/PlexAPI.java
   - .gitattributes
+  - CONTRIBUTING.md
+  - USAGE.md
   - build.gradle
+  - docs/models/errors/AddPlaylistContentsErrors.md
+  - docs/models/errors/AddPlaylistContentsResponseBody.md
+  - docs/models/errors/ApplyUpdatesErrors.md
+  - docs/models/errors/ApplyUpdatesResponseBody.md
+  - docs/models/errors/CancelServerActivitiesErrors.md
+  - docs/models/errors/CancelServerActivitiesResponseBody.md
+  - docs/models/errors/CheckForUpdatesErrors.md
+  - docs/models/errors/CheckForUpdatesResponseBody.md
+  - docs/models/errors/ClearPlaylistContentsErrors.md
+  - docs/models/errors/ClearPlaylistContentsResponseBody.md
+  - docs/models/errors/CreatePlaylistErrors.md
+  - docs/models/errors/CreatePlaylistResponseBody.md
+  - docs/models/errors/DeleteLibraryErrors.md
+  - docs/models/errors/DeleteLibraryResponseBody.md
+  - docs/models/errors/DeletePlaylistErrors.md
+  - docs/models/errors/DeletePlaylistResponseBody.md
+  - docs/models/errors/EnablePaperTrailErrors.md
+  - docs/models/errors/EnablePaperTrailResponseBody.md
+  - docs/models/errors/Errors.md
+  - docs/models/errors/GetAllLibrariesErrors.md
+  - docs/models/errors/GetAllLibrariesResponseBody.md
+  - docs/models/errors/GetAvailableClientsErrors.md
+  - docs/models/errors/GetAvailableClientsResponseBody.md
+  - docs/models/errors/GetBandwidthStatisticsErrors.md
+  - docs/models/errors/GetBandwidthStatisticsResponseBody.md
+  - docs/models/errors/GetBannerImageErrors.md
+  - docs/models/errors/GetBannerImageResponseBody.md
+  - docs/models/errors/GetButlerTasksErrors.md
+  - docs/models/errors/GetButlerTasksResponseBody.md
+  - docs/models/errors/GetCompanionsDataErrors.md
+  - docs/models/errors/GetCompanionsDataResponseBody.md
+  - docs/models/errors/GetDevicesErrors.md
+  - docs/models/errors/GetDevicesResponseBody.md
+  - docs/models/errors/GetFileHashErrors.md
+  - docs/models/errors/GetFileHashResponseBody.md
+  - docs/models/errors/GetGeoDataErrors.md
+  - docs/models/errors/GetGeoDataResponseBody.md
+  - docs/models/errors/GetGlobalHubsErrors.md
+  - docs/models/errors/GetGlobalHubsResponseBody.md
+  - docs/models/errors/GetHomeDataErrors.md
+  - docs/models/errors/GetHomeDataResponseBody.md
+  - docs/models/errors/GetLibraryDetailsErrors.md
+  - docs/models/errors/GetLibraryDetailsResponseBody.md
+  - docs/models/errors/GetLibraryHubsErrors.md
+  - docs/models/errors/GetLibraryHubsResponseBody.md
+  - docs/models/errors/GetLibraryItemsErrors.md
+  - docs/models/errors/GetLibraryItemsResponseBody.md
+  - docs/models/errors/GetMediaProvidersErrors.md
+  - docs/models/errors/GetMediaProvidersResponseBody.md
+  - docs/models/errors/GetMetaDataByRatingKeyErrors.md
+  - docs/models/errors/GetMetaDataByRatingKeyResponseBody.md
+  - docs/models/errors/GetMetadataChildrenErrors.md
+  - docs/models/errors/GetMetadataChildrenResponseBody.md
+  - docs/models/errors/GetMyPlexAccountErrors.md
+  - docs/models/errors/GetMyPlexAccountResponseBody.md
+  - docs/models/errors/GetOnDeckErrors.md
+  - docs/models/errors/GetOnDeckResponseBody.md
+  - docs/models/errors/GetPinErrors.md
+  - docs/models/errors/GetPinResponseBody.md
+  - docs/models/errors/GetPlaylistContentsErrors.md
+  - docs/models/errors/GetPlaylistContentsResponseBody.md
+  - docs/models/errors/GetPlaylistErrors.md
+  - docs/models/errors/GetPlaylistResponseBody.md
+  - docs/models/errors/GetPlaylistsErrors.md
+  - docs/models/errors/GetPlaylistsResponseBody.md
+  - docs/models/errors/GetRecentlyAddedErrors.md
+  - docs/models/errors/GetRecentlyAddedResponseBody.md
+  - docs/models/errors/GetRefreshLibraryMetadataErrors.md
+  - docs/models/errors/GetRefreshLibraryMetadataResponseBody.md
+  - docs/models/errors/GetResizedPhotoErrors.md
+  - docs/models/errors/GetResizedPhotoResponseBody.md
+  - docs/models/errors/GetResourcesStatisticsErrors.md
+  - docs/models/errors/GetResourcesStatisticsResponseBody.md
+  - docs/models/errors/GetSearchLibraryErrors.md
+  - docs/models/errors/GetSearchLibraryResponseBody.md
+  - docs/models/errors/GetSearchResultsErrors.md
+  - docs/models/errors/GetSearchResultsResponseBody.md
+  - docs/models/errors/GetServerActivitiesErrors.md
+  - docs/models/errors/GetServerActivitiesResponseBody.md
+  - docs/models/errors/GetServerCapabilitiesResponseBody.md
+  - docs/models/errors/GetServerIdentityResponseBody.md
+  - docs/models/errors/GetServerListErrors.md
+  - docs/models/errors/GetServerListResponseBody.md
+  - docs/models/errors/GetServerPreferencesErrors.md
+  - docs/models/errors/GetServerPreferencesResponseBody.md
+  - docs/models/errors/GetServerResourcesErrors.md
+  - docs/models/errors/GetServerResourcesResponseBody.md
+  - docs/models/errors/GetSessionHistoryErrors.md
+  - docs/models/errors/GetSessionHistoryResponseBody.md
+  - docs/models/errors/GetSessionsErrors.md
+  - docs/models/errors/GetSessionsResponseBody.md
+  - docs/models/errors/GetSourceConnectionInformationErrors.md
+  - docs/models/errors/GetSourceConnectionInformationResponseBody.md
+  - docs/models/errors/GetStatisticsErrors.md
+  - docs/models/errors/GetStatisticsResponseBody.md
+  - docs/models/errors/GetThumbImageErrors.md
+  - docs/models/errors/GetThumbImageResponseBody.md
+  - docs/models/errors/GetTimelineErrors.md
+  - docs/models/errors/GetTimelineResponseBody.md
+  - docs/models/errors/GetTokenByPinIdErrors.md
+  - docs/models/errors/GetTokenByPinIdPlexErrors.md
+  - docs/models/errors/GetTokenByPinIdPlexResponseBody.md
+  - docs/models/errors/GetTokenByPinIdResponseBody.md
+  - docs/models/errors/GetTopWatchedContentErrors.md
+  - docs/models/errors/GetTopWatchedContentResponseBody.md
+  - docs/models/errors/GetTranscodeSessionsErrors.md
+  - docs/models/errors/GetTranscodeSessionsResponseBody.md
+  - docs/models/errors/GetTransientTokenErrors.md
+  - docs/models/errors/GetTransientTokenResponseBody.md
+  - docs/models/errors/GetUpdateStatusErrors.md
+  - docs/models/errors/GetUpdateStatusResponseBody.md
+  - docs/models/errors/GetUserDetailsErrors.md
+  - docs/models/errors/GetUserDetailsResponseBody.md
+  - docs/models/errors/GetUserFriendsErrors.md
+  - docs/models/errors/GetUserFriendsResponseBody.md
+  - docs/models/errors/GetWatchListErrors.md
+  - docs/models/errors/GetWatchListResponseBody.md
+  - docs/models/errors/LogLineErrors.md
+  - docs/models/errors/LogLineResponseBody.md
+  - docs/models/errors/LogMultiLineErrors.md
+  - docs/models/errors/LogMultiLineResponseBody.md
+  - docs/models/errors/MarkPlayedErrors.md
+  - docs/models/errors/MarkPlayedResponseBody.md
+  - docs/models/errors/MarkUnplayedErrors.md
+  - docs/models/errors/MarkUnplayedResponseBody.md
+  - docs/models/errors/PerformSearchErrors.md
+  - docs/models/errors/PerformSearchResponseBody.md
+  - docs/models/errors/PerformVoiceSearchErrors.md
+  - docs/models/errors/PerformVoiceSearchResponseBody.md
+  - docs/models/errors/PostUsersSignInDataErrors.md
+  - docs/models/errors/PostUsersSignInDataResponseBody.md
+  - docs/models/errors/StartAllTasksErrors.md
+  - docs/models/errors/StartAllTasksResponseBody.md
+  - docs/models/errors/StartTaskErrors.md
+  - docs/models/errors/StartTaskResponseBody.md
+  - docs/models/errors/StartUniversalTranscodeErrors.md
+  - docs/models/errors/StartUniversalTranscodeResponseBody.md
+  - docs/models/errors/StopAllTasksErrors.md
+  - docs/models/errors/StopAllTasksResponseBody.md
+  - docs/models/errors/StopTaskErrors.md
+  - docs/models/errors/StopTaskResponseBody.md
+  - docs/models/errors/StopTranscodeSessionErrors.md
+  - docs/models/errors/StopTranscodeSessionResponseBody.md
+  - docs/models/errors/UpdatePlayProgressErrors.md
+  - docs/models/errors/UpdatePlayProgressResponseBody.md
+  - docs/models/errors/UpdatePlaylistErrors.md
+  - docs/models/errors/UpdatePlaylistResponseBody.md
+  - docs/models/errors/UploadPlaylistErrors.md
+  - docs/models/errors/UploadPlaylistResponseBody.md
+  - docs/models/operations/Account.md
+  - docs/models/operations/Activity.md
+  - docs/models/operations/AddPlaylistContentsMediaContainer.md
+  - docs/models/operations/AddPlaylistContentsMetadata.md
+  - docs/models/operations/AddPlaylistContentsRequest.md
+  - docs/models/operations/AddPlaylistContentsResponse.md
+  - docs/models/operations/AddPlaylistContentsResponseBody.md
+  - docs/models/operations/ApplyUpdatesRequest.md
+  - docs/models/operations/ApplyUpdatesResponse.md
+  - docs/models/operations/AutoSelectSubtitle.md
+  - docs/models/operations/Billing.md
+  - docs/models/operations/ButlerTask.md
+  - docs/models/operations/ButlerTasks.md
+  - docs/models/operations/CancelServerActivitiesRequest.md
+  - docs/models/operations/CancelServerActivitiesResponse.md
+  - docs/models/operations/CheckForUpdatesRequest.md
+  - docs/models/operations/CheckForUpdatesResponse.md
+  - docs/models/operations/ClearPlaylistContentsRequest.md
+  - docs/models/operations/ClearPlaylistContentsResponse.md
+  - docs/models/operations/Connections.md
+  - docs/models/operations/Context.md
+  - docs/models/operations/Country.md
+  - docs/models/operations/CreatePlaylistMediaContainer.md
+  - docs/models/operations/CreatePlaylistMetadata.md
+  - docs/models/operations/CreatePlaylistQueryParamType.md
+  - docs/models/operations/CreatePlaylistRequest.md
+  - docs/models/operations/CreatePlaylistResponse.md
+  - docs/models/operations/CreatePlaylistResponseBody.md
+  - docs/models/operations/DefaultSubtitleAccessibility.md
+  - docs/models/operations/DefaultSubtitleForced.md
+  - docs/models/operations/DeleteLibraryRequest.md
+  - docs/models/operations/DeleteLibraryResponse.md
+  - docs/models/operations/DeletePlaylistRequest.md
+  - docs/models/operations/DeletePlaylistResponse.md
+  - docs/models/operations/Device.md
+  - docs/models/operations/Director.md
+  - docs/models/operations/Directory.md
+  - docs/models/operations/Download.md
+  - docs/models/operations/EnablePaperTrailResponse.md
+  - docs/models/operations/Feature.md
+  - docs/models/operations/Features.md
+  - docs/models/operations/Field.md
+  - docs/models/operations/FieldType.md
+  - docs/models/operations/Filter.md
+  - docs/models/operations/Force.md
+  - docs/models/operations/Friend.md
+  - docs/models/operations/Genre.md
+  - docs/models/operations/GeoData.md
+  - docs/models/operations/GetAllLibrariesDirectory.md
+  - docs/models/operations/GetAllLibrariesMediaContainer.md
+  - docs/models/operations/GetAllLibrariesResponse.md
+  - docs/models/operations/GetAllLibrariesResponseBody.md
+  - docs/models/operations/GetAvailableClientsMediaContainer.md
+  - docs/models/operations/GetAvailableClientsResponse.md
+  - docs/models/operations/GetAvailableClientsResponseBody.md
+  - docs/models/operations/GetBandwidthStatisticsAccount.md
+  - docs/models/operations/GetBandwidthStatisticsDevice.md
+  - docs/models/operations/GetBandwidthStatisticsMediaContainer.md
+  - docs/models/operations/GetBandwidthStatisticsRequest.md
+  - docs/models/operations/GetBandwidthStatisticsResponse.md
+  - docs/models/operations/GetBandwidthStatisticsResponseBody.md
+  - docs/models/operations/GetBannerImageRequest.md
+  - docs/models/operations/GetBannerImageResponse.md
+  - docs/models/operations/GetButlerTasksResponse.md
+  - docs/models/operations/GetButlerTasksResponseBody.md
+  - docs/models/operations/GetCompanionsDataResponse.md
+  - docs/models/operations/GetDevicesMediaContainer.md
+  - docs/models/operations/GetDevicesResponse.md
+  - docs/models/operations/GetDevicesResponseBody.md
+  - docs/models/operations/GetFileHashRequest.md
+  - docs/models/operations/GetFileHashResponse.md
+  - docs/models/operations/GetGeoDataGeoData.md
+  - docs/models/operations/GetGeoDataResponse.md
+  - docs/models/operations/GetGlobalHubsMediaContainer.md
+  - docs/models/operations/GetGlobalHubsMetadata.md
+  - docs/models/operations/GetGlobalHubsRequest.md
+  - docs/models/operations/GetGlobalHubsResponse.md
+  - docs/models/operations/GetGlobalHubsResponseBody.md
+  - docs/models/operations/GetHomeDataResponse.md
+  - docs/models/operations/GetHomeDataResponseBody.md
+  - docs/models/operations/GetLibraryDetailsDirectory.md
+  - docs/models/operations/GetLibraryDetailsFilter.md
+  - docs/models/operations/GetLibraryDetailsMediaContainer.md
+  - docs/models/operations/GetLibraryDetailsRequest.md
+  - docs/models/operations/GetLibraryDetailsResponse.md
+  - docs/models/operations/GetLibraryDetailsResponseBody.md
+  - docs/models/operations/GetLibraryDetailsType.md
+  - docs/models/operations/GetLibraryHubsCountry.md
+  - docs/models/operations/GetLibraryHubsDirector.md
+  - docs/models/operations/GetLibraryHubsGenre.md
+  - docs/models/operations/GetLibraryHubsHub.md
+  - docs/models/operations/GetLibraryHubsMedia.md
+  - docs/models/operations/GetLibraryHubsMediaContainer.md
+  - docs/models/operations/GetLibraryHubsMetadata.md
+  - docs/models/operations/GetLibraryHubsPart.md
+  - docs/models/operations/GetLibraryHubsRequest.md
+  - docs/models/operations/GetLibraryHubsResponse.md
+  - docs/models/operations/GetLibraryHubsResponseBody.md
+  - docs/models/operations/GetLibraryHubsRole.md
+  - docs/models/operations/GetLibraryHubsWriter.md
+  - docs/models/operations/GetLibraryItemsCountry.md
+  - docs/models/operations/GetLibraryItemsDirector.md
+  - docs/models/operations/GetLibraryItemsGenre.md
+  - docs/models/operations/GetLibraryItemsMedia.md
+  - docs/models/operations/GetLibraryItemsMediaContainer.md
+  - docs/models/operations/GetLibraryItemsMetadata.md
+  - docs/models/operations/GetLibraryItemsPart.md
+  - docs/models/operations/GetLibraryItemsRequest.md
+  - docs/models/operations/GetLibraryItemsResponse.md
+  - docs/models/operations/GetLibraryItemsResponseBody.md
+  - docs/models/operations/GetLibraryItemsRole.md
+  - docs/models/operations/GetLibraryItemsWriter.md
+  - docs/models/operations/GetMediaProvidersDirectory.md
+  - docs/models/operations/GetMediaProvidersMediaContainer.md
+  - docs/models/operations/GetMediaProvidersRequest.md
+  - docs/models/operations/GetMediaProvidersResponse.md
+  - docs/models/operations/GetMediaProvidersResponseBody.md
+  - docs/models/operations/GetMetaDataByRatingKeyCountry.md
+  - docs/models/operations/GetMetaDataByRatingKeyDirector.md
+  - docs/models/operations/GetMetaDataByRatingKeyGenre.md
+  - docs/models/operations/GetMetaDataByRatingKeyMedia.md
+  - docs/models/operations/GetMetaDataByRatingKeyMediaContainer.md
+  - docs/models/operations/GetMetaDataByRatingKeyMetadata.md
+  - docs/models/operations/GetMetaDataByRatingKeyPart.md
+  - docs/models/operations/GetMetaDataByRatingKeyRequest.md
+  - docs/models/operations/GetMetaDataByRatingKeyResponse.md
+  - docs/models/operations/GetMetaDataByRatingKeyResponseBody.md
+  - docs/models/operations/GetMetaDataByRatingKeyRole.md
+  - docs/models/operations/GetMetaDataByRatingKeyWriter.md
+  - docs/models/operations/GetMetadataChildrenDirectory.md
+  - docs/models/operations/GetMetadataChildrenMediaContainer.md
+  - docs/models/operations/GetMetadataChildrenMetadata.md
+  - docs/models/operations/GetMetadataChildrenRequest.md
+  - docs/models/operations/GetMetadataChildrenResponse.md
+  - docs/models/operations/GetMetadataChildrenResponseBody.md
+  - docs/models/operations/GetMyPlexAccountResponse.md
+  - docs/models/operations/GetMyPlexAccountResponseBody.md
+  - docs/models/operations/GetOnDeckGuids.md
+  - docs/models/operations/GetOnDeckMedia.md
+  - docs/models/operations/GetOnDeckMediaContainer.md
+  - docs/models/operations/GetOnDeckMetadata.md
+  - docs/models/operations/GetOnDeckPart.md
+  - docs/models/operations/GetOnDeckResponse.md
+  - docs/models/operations/GetOnDeckResponseBody.md
+  - docs/models/operations/GetOnDeckStream.md
+  - docs/models/operations/GetPinAuthPinContainer.md
+  - docs/models/operations/GetPinRequest.md
+  - docs/models/operations/GetPinResponse.md
+  - docs/models/operations/GetPlaylistContentsCountry.md
+  - docs/models/operations/GetPlaylistContentsDirector.md
+  - docs/models/operations/GetPlaylistContentsGenre.md
+  - docs/models/operations/GetPlaylistContentsMedia.md
+  - docs/models/operations/GetPlaylistContentsMediaContainer.md
+  - docs/models/operations/GetPlaylistContentsMetadata.md
+  - docs/models/operations/GetPlaylistContentsPart.md
+  - docs/models/operations/GetPlaylistContentsQueryParamType.md
+  - docs/models/operations/GetPlaylistContentsRequest.md
+  - docs/models/operations/GetPlaylistContentsResponse.md
+  - docs/models/operations/GetPlaylistContentsResponseBody.md
+  - docs/models/operations/GetPlaylistContentsRole.md
+  - docs/models/operations/GetPlaylistContentsWriter.md
+  - docs/models/operations/GetPlaylistMediaContainer.md
+  - docs/models/operations/GetPlaylistMetadata.md
+  - docs/models/operations/GetPlaylistRequest.md
+  - docs/models/operations/GetPlaylistResponse.md
+  - docs/models/operations/GetPlaylistResponseBody.md
+  - docs/models/operations/GetPlaylistsMediaContainer.md
+  - docs/models/operations/GetPlaylistsMetadata.md
+  - docs/models/operations/GetPlaylistsRequest.md
+  - docs/models/operations/GetPlaylistsResponse.md
+  - docs/models/operations/GetPlaylistsResponseBody.md
+  - docs/models/operations/GetRecentlyAddedMediaContainer.md
+  - docs/models/operations/GetRecentlyAddedMetadata.md
+  - docs/models/operations/GetRecentlyAddedRequest.md
+  - docs/models/operations/GetRecentlyAddedResponse.md
+  - docs/models/operations/GetRecentlyAddedResponseBody.md
+  - docs/models/operations/GetRefreshLibraryMetadataRequest.md
+  - docs/models/operations/GetRefreshLibraryMetadataResponse.md
+  - docs/models/operations/GetResizedPhotoRequest.md
+  - docs/models/operations/GetResizedPhotoResponse.md
+  - docs/models/operations/GetResourcesStatisticsMediaContainer.md
+  - docs/models/operations/GetResourcesStatisticsRequest.md
+  - docs/models/operations/GetResourcesStatisticsResponse.md
+  - docs/models/operations/GetResourcesStatisticsResponseBody.md
+  - docs/models/operations/GetSearchLibraryMediaContainer.md
+  - docs/models/operations/GetSearchLibraryMetadata.md
+  - docs/models/operations/GetSearchLibraryRequest.md
+  - docs/models/operations/GetSearchLibraryResponse.md
+  - docs/models/operations/GetSearchLibraryResponseBody.md
+  - docs/models/operations/GetSearchResultsCountry.md
+  - docs/models/operations/GetSearchResultsDirector.md
+  - docs/models/operations/GetSearchResultsGenre.md
+  - docs/models/operations/GetSearchResultsMedia.md
+  - docs/models/operations/GetSearchResultsMediaContainer.md
+  - docs/models/operations/GetSearchResultsMetadata.md
+  - docs/models/operations/GetSearchResultsPart.md
+  - docs/models/operations/GetSearchResultsRequest.md
+  - docs/models/operations/GetSearchResultsResponse.md
+  - docs/models/operations/GetSearchResultsResponseBody.md
+  - docs/models/operations/GetSearchResultsRole.md
+  - docs/models/operations/GetSearchResultsWriter.md
+  - docs/models/operations/GetServerActivitiesMediaContainer.md
+  - docs/models/operations/GetServerActivitiesResponse.md
+  - docs/models/operations/GetServerActivitiesResponseBody.md
+  - docs/models/operations/GetServerCapabilitiesResponse.md
+  - docs/models/operations/GetServerCapabilitiesResponseBody.md
+  - docs/models/operations/GetServerIdentityMediaContainer.md
+  - docs/models/operations/GetServerIdentityResponse.md
+  - docs/models/operations/GetServerIdentityResponseBody.md
+  - docs/models/operations/GetServerListMediaContainer.md
+  - docs/models/operations/GetServerListResponse.md
+  - docs/models/operations/GetServerListResponseBody.md
+  - docs/models/operations/GetServerListServer.md
+  - docs/models/operations/GetServerPreferencesMediaContainer.md
+  - docs/models/operations/GetServerPreferencesResponse.md
+  - docs/models/operations/GetServerPreferencesResponseBody.md
+  - docs/models/operations/GetServerResourcesRequest.md
+  - docs/models/operations/GetServerResourcesResponse.md
+  - docs/models/operations/GetSessionHistoryMediaContainer.md
+  - docs/models/operations/GetSessionHistoryMetadata.md
+  - docs/models/operations/GetSessionHistoryRequest.md
+  - docs/models/operations/GetSessionHistoryResponse.md
+  - docs/models/operations/GetSessionHistoryResponseBody.md
+  - docs/models/operations/GetSessionsMedia.md
+  - docs/models/operations/GetSessionsMediaContainer.md
+  - docs/models/operations/GetSessionsMetadata.md
+  - docs/models/operations/GetSessionsPart.md
+  - docs/models/operations/GetSessionsResponse.md
+  - docs/models/operations/GetSessionsResponseBody.md
+  - docs/models/operations/GetSessionsStream.md
+  - docs/models/operations/GetSessionsUser.md
+  - docs/models/operations/GetSourceConnectionInformationRequest.md
+  - docs/models/operations/GetSourceConnectionInformationResponse.md
+  - docs/models/operations/GetStatisticsDevice.md
+  - docs/models/operations/GetStatisticsMediaContainer.md
+  - docs/models/operations/GetStatisticsRequest.md
+  - docs/models/operations/GetStatisticsResponse.md
+  - docs/models/operations/GetStatisticsResponseBody.md
+  - docs/models/operations/GetThumbImageRequest.md
+  - docs/models/operations/GetThumbImageResponse.md
+  - docs/models/operations/GetTimelineRequest.md
+  - docs/models/operations/GetTimelineResponse.md
+  - docs/models/operations/GetTokenByPinIdAuthPinContainer.md
+  - docs/models/operations/GetTokenByPinIdGeoData.md
+  - docs/models/operations/GetTokenByPinIdRequest.md
+  - docs/models/operations/GetTokenByPinIdResponse.md
+  - docs/models/operations/GetTopWatchedContentCountry.md
+  - docs/models/operations/GetTopWatchedContentGenre.md
+  - docs/models/operations/GetTopWatchedContentGuids.md
+  - docs/models/operations/GetTopWatchedContentMediaContainer.md
+  - docs/models/operations/GetTopWatchedContentMetadata.md
+  - docs/models/operations/GetTopWatchedContentQueryParamType.md
+  - docs/models/operations/GetTopWatchedContentRequest.md
+  - docs/models/operations/GetTopWatchedContentResponse.md
+  - docs/models/operations/GetTopWatchedContentResponseBody.md
+  - docs/models/operations/GetTopWatchedContentRole.md
+  - docs/models/operations/GetTranscodeSessionsMediaContainer.md
+  - docs/models/operations/GetTranscodeSessionsResponse.md
+  - docs/models/operations/GetTranscodeSessionsResponseBody.md
+  - docs/models/operations/GetTransientTokenQueryParamType.md
+  - docs/models/operations/GetTransientTokenRequest.md
+  - docs/models/operations/GetTransientTokenResponse.md
+  - docs/models/operations/GetUpdateStatusMediaContainer.md
+  - docs/models/operations/GetUpdateStatusResponse.md
+  - docs/models/operations/GetUpdateStatusResponseBody.md
+  - docs/models/operations/GetUserDetailsAuthenticationResponseStatus.md
+  - docs/models/operations/GetUserDetailsAuthenticationStatus.md
+  - docs/models/operations/GetUserDetailsFeatures.md
+  - docs/models/operations/GetUserDetailsRequest.md
+  - docs/models/operations/GetUserDetailsResponse.md
+  - docs/models/operations/GetUserDetailsStatus.md
+  - docs/models/operations/GetUserDetailsSubscription.md
+  - docs/models/operations/GetUserDetailsUserPlexAccount.md
+  - docs/models/operations/GetUserFriendsResponse.md
+  - docs/models/operations/GetWatchListRequest.md
+  - docs/models/operations/GetWatchListResponse.md
+  - docs/models/operations/GetWatchListResponseBody.md
+  - docs/models/operations/Guids.md
+  - docs/models/operations/Hub.md
+  - docs/models/operations/Image.md
+  - docs/models/operations/IncludeCollections.md
+  - docs/models/operations/IncludeDetails.md
+  - docs/models/operations/IncludeExternalMedia.md
+  - docs/models/operations/IncludeGuids.md
+  - docs/models/operations/IncludeHttps.md
+  - docs/models/operations/IncludeIPv6.md
+  - docs/models/operations/IncludeMeta.md
+  - docs/models/operations/IncludeRelay.md
+  - docs/models/operations/InternalPaymentMethod.md
+  - docs/models/operations/Level.md
+  - docs/models/operations/LibrarySectionID.md
+  - docs/models/operations/Libtype.md
+  - docs/models/operations/Location.md
+  - docs/models/operations/LogLineRequest.md
+  - docs/models/operations/LogLineResponse.md
+  - docs/models/operations/LogMultiLineResponse.md
+  - docs/models/operations/MailingListStatus.md
+  - docs/models/operations/MarkPlayedRequest.md
+  - docs/models/operations/MarkPlayedResponse.md
+  - docs/models/operations/MarkUnplayedRequest.md
+  - docs/models/operations/MarkUnplayedResponse.md
+  - docs/models/operations/Media.md
+  - docs/models/operations/MediaContainer.md
+  - docs/models/operations/MediaProvider.md
+  - docs/models/operations/MediaReviewsVisibility.md
+  - docs/models/operations/Metadata.md
+  - docs/models/operations/MinSize.md
+  - docs/models/operations/MyPlex.md
+  - docs/models/operations/OnlyTransient.md
+  - docs/models/operations/Operator.md
+  - docs/models/operations/Part.md
+  - docs/models/operations/PastSubscription.md
+  - docs/models/operations/PathParamTaskName.md
+  - docs/models/operations/PerformSearchRequest.md
+  - docs/models/operations/PerformSearchResponse.md
+  - docs/models/operations/PerformVoiceSearchRequest.md
+  - docs/models/operations/PerformVoiceSearchResponse.md
+  - docs/models/operations/Pivot.md
+  - docs/models/operations/Player.md
+  - docs/models/operations/PlaylistType.md
+  - docs/models/operations/PlexDevice.md
+  - docs/models/operations/PostUsersSignInDataAuthenticationFeatures.md
+  - docs/models/operations/PostUsersSignInDataAuthenticationResponseStatus.md
+  - docs/models/operations/PostUsersSignInDataAuthenticationStatus.md
+  - docs/models/operations/PostUsersSignInDataAuthenticationSubscription.md
+  - docs/models/operations/PostUsersSignInDataAutoSelectSubtitle.md
+  - docs/models/operations/PostUsersSignInDataDefaultSubtitleAccessibility.md
+  - docs/models/operations/PostUsersSignInDataDefaultSubtitleForced.md
+  - docs/models/operations/PostUsersSignInDataFeatures.md
+  - docs/models/operations/PostUsersSignInDataMailingListStatus.md
+  - docs/models/operations/PostUsersSignInDataMediaReviewsVisibility.md
+  - docs/models/operations/PostUsersSignInDataRequest.md
+  - docs/models/operations/PostUsersSignInDataRequestBody.md
+  - docs/models/operations/PostUsersSignInDataResponse.md
+  - docs/models/operations/PostUsersSignInDataServices.md
+  - docs/models/operations/PostUsersSignInDataState.md
+  - docs/models/operations/PostUsersSignInDataStatus.md
+  - docs/models/operations/PostUsersSignInDataSubscription.md
+  - docs/models/operations/PostUsersSignInDataUserPlexAccount.md
+  - docs/models/operations/PostUsersSignInDataUserProfile.md
+  - docs/models/operations/PostUsersSignInDataWatchedIndicator.md
+  - docs/models/operations/Producer.md
+  - docs/models/operations/Provider.md
+  - docs/models/operations/QueryParamFilter.md
+  - docs/models/operations/QueryParamForce.md
+  - docs/models/operations/QueryParamOnlyTransient.md
+  - docs/models/operations/QueryParamSmart.md
+  - docs/models/operations/QueryParamType.md
+  - docs/models/operations/Ratings.md
+  - docs/models/operations/Release.md
+  - docs/models/operations/ResponseBody.md
+  - docs/models/operations/Role.md
+  - docs/models/operations/Scope.md
+  - docs/models/operations/Server.md
+  - docs/models/operations/Services.md
+  - docs/models/operations/Session.md
+  - docs/models/operations/Setting.md
+  - docs/models/operations/SharedServers.md
+  - docs/models/operations/SharedSources.md
+  - docs/models/operations/Skip.md
+  - docs/models/operations/Smart.md
+  - docs/models/operations/Sort.md
+  - docs/models/operations/StartAllTasksResponse.md
+  - docs/models/operations/StartTaskRequest.md
+  - docs/models/operations/StartTaskResponse.md
+  - docs/models/operations/StartUniversalTranscodeRequest.md
+  - docs/models/operations/StartUniversalTranscodeResponse.md
+  - docs/models/operations/State.md
+  - docs/models/operations/StatisticsBandwidth.md
+  - docs/models/operations/StatisticsMedia.md
+  - docs/models/operations/StatisticsResources.md
+  - docs/models/operations/Status.md
+  - docs/models/operations/StopAllTasksResponse.md
+  - docs/models/operations/StopTaskRequest.md
+  - docs/models/operations/StopTaskResponse.md
+  - docs/models/operations/StopTranscodeSessionRequest.md
+  - docs/models/operations/StopTranscodeSessionResponse.md
+  - docs/models/operations/Stream.md
+  - docs/models/operations/Subscription.md
+  - docs/models/operations/Tag.md
+  - docs/models/operations/TaskName.md
+  - docs/models/operations/Tonight.md
+  - docs/models/operations/TranscodeSession.md
+  - docs/models/operations/Trials.md
+  - docs/models/operations/Type.md
+  - docs/models/operations/UpdatePlayProgressRequest.md
+  - docs/models/operations/UpdatePlayProgressResponse.md
+  - docs/models/operations/UpdatePlaylistRequest.md
+  - docs/models/operations/UpdatePlaylistResponse.md
+  - docs/models/operations/UploadPlaylistRequest.md
+  - docs/models/operations/UploadPlaylistResponse.md
+  - docs/models/operations/Upscale.md
+  - docs/models/operations/User.md
+  - docs/models/operations/UserProfile.md
+  - docs/models/operations/WatchedIndicator.md
+  - docs/models/operations/Writer.md
+  - docs/models/shared/Security.md
+  - docs/sdks/activities/README.md
+  - docs/sdks/authentication/README.md
+  - docs/sdks/butler/README.md
+  - docs/sdks/hubs/README.md
+  - docs/sdks/library/README.md
+  - docs/sdks/log/README.md
+  - docs/sdks/media/README.md
+  - docs/sdks/playlists/README.md
+  - docs/sdks/plex/README.md
+  - docs/sdks/plexapi/README.md
+  - docs/sdks/search/README.md
+  - docs/sdks/server/README.md
+  - docs/sdks/sessions/README.md
+  - docs/sdks/statistics/README.md
+  - docs/sdks/updater/README.md
+  - docs/sdks/video/README.md
+  - docs/sdks/watchlist/README.md
   - gradle/wrapper/gradle-wrapper.jar
   - gradle/wrapper/gradle-wrapper.properties
   - gradlew
   - gradlew.bat
   - settings.gradle
-  - src/main/java/lukehagar/plexapi/plexapi/utils/BackoffStrategy.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/BigDecimalString.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/BigIntegerString.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/Deserializers.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/EventStream.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/EventStreamLineReader.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/EventStreamMessage.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/EventStreamReader.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/FormMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/HTTPClient.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/HTTPRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/HeaderMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/Helpers.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/Hook.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/Hooks.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/JSON.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/LazySingletonValue.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/Metadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/MultipartFormMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/OneOfDeserializer.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/Options.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/PathParamsMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/QueryParameters.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/QueryParamsMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/RequestBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/RequestMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/Response.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/Retries.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/RetryConfig.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/Security.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/SecurityMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/SerializedBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/SpeakeasyHTTPClient.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/SpeakeasyMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/TypedObject.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/Types.java
-  - src/main/java/lukehagar/plexapi/plexapi/utils/Utils.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/AuthException.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/SDKError.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Directory.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/MediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetServerCapabilitiesResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetServerCapabilitiesResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Setting.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetServerPreferencesMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetServerPreferencesResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetServerPreferencesResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Server.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetAvailableClientsMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetAvailableClientsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetAvailableClientsResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Device.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetDevicesMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetDevicesResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetDevicesResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetServerIdentityMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetServerIdentityResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetServerIdentityResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/MyPlex.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMyPlexAccountResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMyPlexAccountResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/MinSize.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Upscale.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetResizedPhotoRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetResizedPhotoResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetServerListServer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetServerListMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetServerListResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetServerListResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/MarkPlayedRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/MarkPlayedResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/MarkUnplayedRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/MarkUnplayedResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/UpdatePlayProgressRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/UpdatePlayProgressResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/State.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTimelineRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTimelineResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/StartUniversalTranscodeRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/StartUniversalTranscodeResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Context.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Activity.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetServerActivitiesMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetServerActivitiesResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetServerActivitiesResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/CancelServerActivitiesRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/CancelServerActivitiesResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/ButlerTask.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/ButlerTasks.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetButlerTasksResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetButlerTasksResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/StartAllTasksResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/StopAllTasksResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/TaskName.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/StartTaskRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/StartTaskResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/PathParamTaskName.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/StopTaskRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/StopTaskResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetHomeDataResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetHomeDataResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPinRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Location.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPinResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPinResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTokenRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTokenLocation.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTokenResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTokenResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/OnlyTransient.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetGlobalHubsRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetGlobalHubsMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Hub.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetGlobalHubsMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetGlobalHubsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetGlobalHubsResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/QueryParamOnlyTransient.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryHubsRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryHubsPart.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryHubsMedia.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryHubsGenre.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryHubsCountry.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryHubsDirector.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryHubsRole.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryHubsWriter.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryHubsMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryHubsHub.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryHubsMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryHubsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryHubsResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/PerformSearchRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/PerformSearchResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/PerformVoiceSearchRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/PerformVoiceSearchResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSearchResultsRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSearchResultsPart.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSearchResultsMedia.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSearchResultsGenre.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSearchResultsDirector.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSearchResultsWriter.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSearchResultsCountry.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSearchResultsRole.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSearchResultsMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Provider.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSearchResultsMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSearchResultsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSearchResultsResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetFileHashRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetFileHashResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Part.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Media.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Genre.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Director.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Writer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Country.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Role.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetRecentlyAddedMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetRecentlyAddedMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetRecentlyAddedResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetRecentlyAddedResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibrariesLocation.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibrariesDirectory.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibrariesMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibrariesResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibrariesResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/IncludeDetails.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryDirectory.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryFilter.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Sort.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Field.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryType.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Operator.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/FieldType.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/DeleteLibraryRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/DeleteLibraryResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Tag.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryItemsRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/LibrarySectionID.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryItemsPart.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryItemsMedia.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryItemsGenre.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryItemsCountry.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryItemsDirector.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryItemsWriter.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryItemsRole.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryItemsMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryItemsMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryItemsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetLibraryItemsResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/RefreshLibraryRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/RefreshLibraryResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Type.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/SearchLibraryRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/SearchLibraryMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/SearchLibraryMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/SearchLibraryResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/SearchLibraryResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMetadataRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Stream.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMetadataPart.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMetadataMedia.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMetadataGenre.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMetadataCountry.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Guids.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Ratings.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMetadataDirector.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMetadataWriter.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMetadataRole.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Producer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMetadataMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMetadataMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMetadataResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMetadataResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMetadataChildrenRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMetadataChildrenDirectory.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMetadataChildrenMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMetadataChildrenMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMetadataChildrenResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetMetadataChildrenResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTopWatchedContentRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTopWatchedContentGenre.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTopWatchedContentCountry.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTopWatchedContentGuids.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTopWatchedContentRole.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/User.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTopWatchedContentMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTopWatchedContentMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTopWatchedContentResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTopWatchedContentResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetOnDeckStream.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetOnDeckPart.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetOnDeckMedia.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetOnDeckGuids.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetOnDeckMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetOnDeckMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetOnDeckResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetOnDeckResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Level.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/LogLineRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/LogLineResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/LogMultiLineResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/EnablePaperTrailResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/QueryParamType.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Smart.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/CreatePlaylistRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/CreatePlaylistMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/CreatePlaylistMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/CreatePlaylistResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/CreatePlaylistResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/PlaylistType.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/QueryParamSmart.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistsRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistsMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistsMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistsResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/DeletePlaylistRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/DeletePlaylistResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/UpdatePlaylistRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/UpdatePlaylistResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistContentsRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistContentsPart.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistContentsMedia.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistContentsGenre.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistContentsCountry.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistContentsDirector.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistContentsWriter.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistContentsRole.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistContentsMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistContentsMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistContentsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetPlaylistContentsResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/ClearPlaylistContentsRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/ClearPlaylistContentsResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/AddPlaylistContentsRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/AddPlaylistContentsMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/AddPlaylistContentsMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/AddPlaylistContentsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/AddPlaylistContentsResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Force.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/UploadPlaylistRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/UploadPlaylistResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTransientTokenQueryParamType.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Scope.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTransientTokenRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTransientTokenResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSourceConnectionInformationRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSourceConnectionInformationResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetStatisticsRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetStatisticsDevice.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Account.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/StatisticsMedia.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetStatisticsMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetStatisticsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetStatisticsResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetResourcesStatisticsRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/StatisticsResources.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetResourcesStatisticsMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetResourcesStatisticsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetResourcesStatisticsResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetBandwidthStatisticsRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetBandwidthStatisticsDevice.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetBandwidthStatisticsAccount.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/StatisticsBandwidth.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetBandwidthStatisticsMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetBandwidthStatisticsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetBandwidthStatisticsResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSessionsStream.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSessionsPart.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSessionsMedia.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSessionsUser.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Player.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Session.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSessionsMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSessionsMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSessionsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSessionsResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Filter.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSessionHistoryRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSessionHistoryMetadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSessionHistoryMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSessionHistoryResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetSessionHistoryResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/TranscodeSession.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTranscodeSessionsMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTranscodeSessionsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetTranscodeSessionsResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/StopTranscodeSessionRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/StopTranscodeSessionResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Release.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetUpdateStatusMediaContainer.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetUpdateStatusResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetUpdateStatusResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Download.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/CheckForUpdatesRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/CheckForUpdatesResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Tonight.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Skip.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/ApplyUpdatesRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/ApplyUpdatesResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/PathParamFilter.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Libtype.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/IncludeCollections.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/IncludeExternalMedia.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetWatchlistRequest.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Image.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/Metadata.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetWatchlistResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/operations/GetWatchlistResponse.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/Errors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetServerCapabilitiesResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetServerPreferencesErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetServerPreferencesResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetAvailableClientsErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetAvailableClientsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetDevicesErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetDevicesResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetServerIdentityErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetServerIdentityResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetMyPlexAccountErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetMyPlexAccountResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetResizedPhotoErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetResizedPhotoResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetServerListErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetServerListResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/MarkPlayedErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/MarkPlayedResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/MarkUnplayedErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/MarkUnplayedResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/UpdatePlayProgressErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/UpdatePlayProgressResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetTimelineErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetTimelineResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/StartUniversalTranscodeErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/StartUniversalTranscodeResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetServerActivitiesErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetServerActivitiesResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/CancelServerActivitiesErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/CancelServerActivitiesResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetButlerTasksErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetButlerTasksResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/StartAllTasksErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/StartAllTasksResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/StopAllTasksErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/StopAllTasksResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/StartTaskErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/StartTaskResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/StopTaskErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/StopTaskResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetHomeDataErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetHomeDataResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetPinErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetPinResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetTokenErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetTokenResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetGlobalHubsErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetGlobalHubsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetLibraryHubsErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetLibraryHubsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/PerformSearchErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/PerformSearchResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/PerformVoiceSearchErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/PerformVoiceSearchResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetSearchResultsErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetSearchResultsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetFileHashErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetFileHashResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetRecentlyAddedErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetRecentlyAddedResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetLibrariesErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetLibrariesResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetLibraryErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetLibraryResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/DeleteLibraryErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/DeleteLibraryResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetLibraryItemsErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetLibraryItemsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/RefreshLibraryErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/RefreshLibraryResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/SearchLibraryErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/SearchLibraryResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetMetadataErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetMetadataResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetMetadataChildrenErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetMetadataChildrenResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetOnDeckErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetOnDeckResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/LogLineErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/LogLineResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/LogMultiLineErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/LogMultiLineResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/EnablePaperTrailErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/EnablePaperTrailResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/CreatePlaylistErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/CreatePlaylistResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetPlaylistsErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetPlaylistsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetPlaylistErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetPlaylistResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/DeletePlaylistErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/DeletePlaylistResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/UpdatePlaylistErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/UpdatePlaylistResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetPlaylistContentsErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetPlaylistContentsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/ClearPlaylistContentsErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/ClearPlaylistContentsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/AddPlaylistContentsErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/AddPlaylistContentsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/UploadPlaylistErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/UploadPlaylistResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetTransientTokenErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetTransientTokenResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetSourceConnectionInformationErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetSourceConnectionInformationResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetStatisticsErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetStatisticsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetResourcesStatisticsErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetResourcesStatisticsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetBandwidthStatisticsErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetBandwidthStatisticsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetSessionsErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetSessionsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetSessionHistoryErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetSessionHistoryResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetTranscodeSessionsErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetTranscodeSessionsResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/StopTranscodeSessionErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/StopTranscodeSessionResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetUpdateStatusErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetUpdateStatusResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/CheckForUpdatesErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/CheckForUpdatesResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/ApplyUpdatesErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/ApplyUpdatesResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetWatchlistErrors.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/errors/GetWatchlistResponseBody.java
-  - src/main/java/lukehagar/plexapi/plexapi/models/shared/Security.java
-  - docs/models/operations/Directory.md
-  - docs/models/operations/MediaContainer.md
-  - docs/models/operations/GetServerCapabilitiesResponseBody.md
-  - docs/models/operations/GetServerCapabilitiesResponse.md
-  - docs/models/operations/Setting.md
-  - docs/models/operations/GetServerPreferencesMediaContainer.md
-  - docs/models/operations/GetServerPreferencesResponseBody.md
-  - docs/models/operations/GetServerPreferencesResponse.md
-  - docs/models/operations/Server.md
-  - docs/models/operations/GetAvailableClientsMediaContainer.md
-  - docs/models/operations/GetAvailableClientsResponseBody.md
-  - docs/models/operations/GetAvailableClientsResponse.md
-  - docs/models/operations/Device.md
-  - docs/models/operations/GetDevicesMediaContainer.md
-  - docs/models/operations/GetDevicesResponseBody.md
-  - docs/models/operations/GetDevicesResponse.md
-  - docs/models/operations/GetServerIdentityMediaContainer.md
-  - docs/models/operations/GetServerIdentityResponseBody.md
-  - docs/models/operations/GetServerIdentityResponse.md
-  - docs/models/operations/MyPlex.md
-  - docs/models/operations/GetMyPlexAccountResponseBody.md
-  - docs/models/operations/GetMyPlexAccountResponse.md
-  - docs/models/operations/MinSize.md
-  - docs/models/operations/Upscale.md
-  - docs/models/operations/GetResizedPhotoRequest.md
-  - docs/models/operations/GetResizedPhotoResponse.md
-  - docs/models/operations/GetServerListServer.md
-  - docs/models/operations/GetServerListMediaContainer.md
-  - docs/models/operations/GetServerListResponseBody.md
-  - docs/models/operations/GetServerListResponse.md
-  - docs/models/operations/MarkPlayedRequest.md
-  - docs/models/operations/MarkPlayedResponse.md
-  - docs/models/operations/MarkUnplayedRequest.md
-  - docs/models/operations/MarkUnplayedResponse.md
-  - docs/models/operations/UpdatePlayProgressRequest.md
-  - docs/models/operations/UpdatePlayProgressResponse.md
-  - docs/models/operations/State.md
-  - docs/models/operations/GetTimelineRequest.md
-  - docs/models/operations/GetTimelineResponse.md
-  - docs/models/operations/StartUniversalTranscodeRequest.md
-  - docs/models/operations/StartUniversalTranscodeResponse.md
-  - docs/models/operations/Context.md
-  - docs/models/operations/Activity.md
-  - docs/models/operations/GetServerActivitiesMediaContainer.md
-  - docs/models/operations/GetServerActivitiesResponseBody.md
-  - docs/models/operations/GetServerActivitiesResponse.md
-  - docs/models/operations/CancelServerActivitiesRequest.md
-  - docs/models/operations/CancelServerActivitiesResponse.md
-  - docs/models/operations/ButlerTask.md
-  - docs/models/operations/ButlerTasks.md
-  - docs/models/operations/GetButlerTasksResponseBody.md
-  - docs/models/operations/GetButlerTasksResponse.md
-  - docs/models/operations/StartAllTasksResponse.md
-  - docs/models/operations/StopAllTasksResponse.md
-  - docs/models/operations/TaskName.md
-  - docs/models/operations/StartTaskRequest.md
-  - docs/models/operations/StartTaskResponse.md
-  - docs/models/operations/PathParamTaskName.md
-  - docs/models/operations/StopTaskRequest.md
-  - docs/models/operations/StopTaskResponse.md
-  - docs/models/operations/GetHomeDataResponseBody.md
-  - docs/models/operations/GetHomeDataResponse.md
-  - docs/models/operations/GetPinRequest.md
-  - docs/models/operations/Location.md
-  - docs/models/operations/GetPinResponseBody.md
-  - docs/models/operations/GetPinResponse.md
-  - docs/models/operations/GetTokenRequest.md
-  - docs/models/operations/GetTokenLocation.md
-  - docs/models/operations/GetTokenResponseBody.md
-  - docs/models/operations/GetTokenResponse.md
-  - docs/models/operations/OnlyTransient.md
-  - docs/models/operations/GetGlobalHubsRequest.md
-  - docs/models/operations/GetGlobalHubsMetadata.md
-  - docs/models/operations/Hub.md
-  - docs/models/operations/GetGlobalHubsMediaContainer.md
-  - docs/models/operations/GetGlobalHubsResponseBody.md
-  - docs/models/operations/GetGlobalHubsResponse.md
-  - docs/models/operations/QueryParamOnlyTransient.md
-  - docs/models/operations/GetLibraryHubsRequest.md
-  - docs/models/operations/GetLibraryHubsPart.md
-  - docs/models/operations/GetLibraryHubsMedia.md
-  - docs/models/operations/GetLibraryHubsGenre.md
-  - docs/models/operations/GetLibraryHubsCountry.md
-  - docs/models/operations/GetLibraryHubsDirector.md
-  - docs/models/operations/GetLibraryHubsRole.md
-  - docs/models/operations/GetLibraryHubsWriter.md
-  - docs/models/operations/GetLibraryHubsMetadata.md
-  - docs/models/operations/GetLibraryHubsHub.md
-  - docs/models/operations/GetLibraryHubsMediaContainer.md
-  - docs/models/operations/GetLibraryHubsResponseBody.md
-  - docs/models/operations/GetLibraryHubsResponse.md
-  - docs/models/operations/PerformSearchRequest.md
-  - docs/models/operations/PerformSearchResponse.md
-  - docs/models/operations/PerformVoiceSearchRequest.md
-  - docs/models/operations/PerformVoiceSearchResponse.md
-  - docs/models/operations/GetSearchResultsRequest.md
-  - docs/models/operations/GetSearchResultsPart.md
-  - docs/models/operations/GetSearchResultsMedia.md
-  - docs/models/operations/GetSearchResultsGenre.md
-  - docs/models/operations/GetSearchResultsDirector.md
-  - docs/models/operations/GetSearchResultsWriter.md
-  - docs/models/operations/GetSearchResultsCountry.md
-  - docs/models/operations/GetSearchResultsRole.md
-  - docs/models/operations/GetSearchResultsMetadata.md
-  - docs/models/operations/Provider.md
-  - docs/models/operations/GetSearchResultsMediaContainer.md
-  - docs/models/operations/GetSearchResultsResponseBody.md
-  - docs/models/operations/GetSearchResultsResponse.md
-  - docs/models/operations/GetFileHashRequest.md
-  - docs/models/operations/GetFileHashResponse.md
-  - docs/models/operations/Part.md
-  - docs/models/operations/Media.md
-  - docs/models/operations/Genre.md
-  - docs/models/operations/Director.md
-  - docs/models/operations/Writer.md
-  - docs/models/operations/Country.md
-  - docs/models/operations/Role.md
-  - docs/models/operations/GetRecentlyAddedMetadata.md
-  - docs/models/operations/GetRecentlyAddedMediaContainer.md
-  - docs/models/operations/GetRecentlyAddedResponseBody.md
-  - docs/models/operations/GetRecentlyAddedResponse.md
-  - docs/models/operations/GetLibrariesLocation.md
-  - docs/models/operations/GetLibrariesDirectory.md
-  - docs/models/operations/GetLibrariesMediaContainer.md
-  - docs/models/operations/GetLibrariesResponseBody.md
-  - docs/models/operations/GetLibrariesResponse.md
-  - docs/models/operations/IncludeDetails.md
-  - docs/models/operations/GetLibraryRequest.md
-  - docs/models/operations/GetLibraryDirectory.md
-  - docs/models/operations/GetLibraryFilter.md
-  - docs/models/operations/Sort.md
-  - docs/models/operations/Field.md
-  - docs/models/operations/GetLibraryType.md
-  - docs/models/operations/Operator.md
-  - docs/models/operations/FieldType.md
-  - docs/models/operations/GetLibraryMediaContainer.md
-  - docs/models/operations/GetLibraryResponseBody.md
-  - docs/models/operations/GetLibraryResponse.md
-  - docs/models/operations/DeleteLibraryRequest.md
-  - docs/models/operations/DeleteLibraryResponse.md
-  - docs/models/operations/Tag.md
-  - docs/models/operations/GetLibraryItemsRequest.md
-  - docs/models/operations/LibrarySectionID.md
-  - docs/models/operations/GetLibraryItemsPart.md
-  - docs/models/operations/GetLibraryItemsMedia.md
-  - docs/models/operations/GetLibraryItemsGenre.md
-  - docs/models/operations/GetLibraryItemsCountry.md
-  - docs/models/operations/GetLibraryItemsDirector.md
-  - docs/models/operations/GetLibraryItemsWriter.md
-  - docs/models/operations/GetLibraryItemsRole.md
-  - docs/models/operations/GetLibraryItemsMetadata.md
-  - docs/models/operations/GetLibraryItemsMediaContainer.md
-  - docs/models/operations/GetLibraryItemsResponseBody.md
-  - docs/models/operations/GetLibraryItemsResponse.md
-  - docs/models/operations/RefreshLibraryRequest.md
-  - docs/models/operations/RefreshLibraryResponse.md
-  - docs/models/operations/Type.md
-  - docs/models/operations/SearchLibraryRequest.md
-  - docs/models/operations/SearchLibraryMetadata.md
-  - docs/models/operations/SearchLibraryMediaContainer.md
-  - docs/models/operations/SearchLibraryResponseBody.md
-  - docs/models/operations/SearchLibraryResponse.md
-  - docs/models/operations/GetMetadataRequest.md
-  - docs/models/operations/Stream.md
-  - docs/models/operations/GetMetadataPart.md
-  - docs/models/operations/GetMetadataMedia.md
-  - docs/models/operations/GetMetadataGenre.md
-  - docs/models/operations/GetMetadataCountry.md
-  - docs/models/operations/Guids.md
-  - docs/models/operations/Ratings.md
-  - docs/models/operations/GetMetadataDirector.md
-  - docs/models/operations/GetMetadataWriter.md
-  - docs/models/operations/GetMetadataRole.md
-  - docs/models/operations/Producer.md
-  - docs/models/operations/GetMetadataMetadata.md
-  - docs/models/operations/GetMetadataMediaContainer.md
-  - docs/models/operations/GetMetadataResponseBody.md
-  - docs/models/operations/GetMetadataResponse.md
-  - docs/models/operations/GetMetadataChildrenRequest.md
-  - docs/models/operations/GetMetadataChildrenDirectory.md
-  - docs/models/operations/GetMetadataChildrenMetadata.md
-  - docs/models/operations/GetMetadataChildrenMediaContainer.md
-  - docs/models/operations/GetMetadataChildrenResponseBody.md
-  - docs/models/operations/GetMetadataChildrenResponse.md
-  - docs/models/operations/GetTopWatchedContentRequest.md
-  - docs/models/operations/GetTopWatchedContentGenre.md
-  - docs/models/operations/GetTopWatchedContentCountry.md
-  - docs/models/operations/GetTopWatchedContentGuids.md
-  - docs/models/operations/GetTopWatchedContentRole.md
-  - docs/models/operations/User.md
-  - docs/models/operations/GetTopWatchedContentMetadata.md
-  - docs/models/operations/GetTopWatchedContentMediaContainer.md
-  - docs/models/operations/GetTopWatchedContentResponseBody.md
-  - docs/models/operations/GetTopWatchedContentResponse.md
-  - docs/models/operations/GetOnDeckStream.md
-  - docs/models/operations/GetOnDeckPart.md
-  - docs/models/operations/GetOnDeckMedia.md
-  - docs/models/operations/GetOnDeckGuids.md
-  - docs/models/operations/GetOnDeckMetadata.md
-  - docs/models/operations/GetOnDeckMediaContainer.md
-  - docs/models/operations/GetOnDeckResponseBody.md
-  - docs/models/operations/GetOnDeckResponse.md
-  - docs/models/operations/Level.md
-  - docs/models/operations/LogLineRequest.md
-  - docs/models/operations/LogLineResponse.md
-  - docs/models/operations/LogMultiLineResponse.md
-  - docs/models/operations/EnablePaperTrailResponse.md
-  - docs/models/operations/QueryParamType.md
-  - docs/models/operations/Smart.md
-  - docs/models/operations/CreatePlaylistRequest.md
-  - docs/models/operations/CreatePlaylistMetadata.md
-  - docs/models/operations/CreatePlaylistMediaContainer.md
-  - docs/models/operations/CreatePlaylistResponseBody.md
-  - docs/models/operations/CreatePlaylistResponse.md
-  - docs/models/operations/PlaylistType.md
-  - docs/models/operations/QueryParamSmart.md
-  - docs/models/operations/GetPlaylistsRequest.md
-  - docs/models/operations/GetPlaylistsMetadata.md
-  - docs/models/operations/GetPlaylistsMediaContainer.md
-  - docs/models/operations/GetPlaylistsResponseBody.md
-  - docs/models/operations/GetPlaylistsResponse.md
-  - docs/models/operations/GetPlaylistRequest.md
-  - docs/models/operations/GetPlaylistMetadata.md
-  - docs/models/operations/GetPlaylistMediaContainer.md
-  - docs/models/operations/GetPlaylistResponseBody.md
-  - docs/models/operations/GetPlaylistResponse.md
-  - docs/models/operations/DeletePlaylistRequest.md
-  - docs/models/operations/DeletePlaylistResponse.md
-  - docs/models/operations/UpdatePlaylistRequest.md
-  - docs/models/operations/UpdatePlaylistResponse.md
-  - docs/models/operations/GetPlaylistContentsRequest.md
-  - docs/models/operations/GetPlaylistContentsPart.md
-  - docs/models/operations/GetPlaylistContentsMedia.md
-  - docs/models/operations/GetPlaylistContentsGenre.md
-  - docs/models/operations/GetPlaylistContentsCountry.md
-  - docs/models/operations/GetPlaylistContentsDirector.md
-  - docs/models/operations/GetPlaylistContentsWriter.md
-  - docs/models/operations/GetPlaylistContentsRole.md
-  - docs/models/operations/GetPlaylistContentsMetadata.md
-  - docs/models/operations/GetPlaylistContentsMediaContainer.md
-  - docs/models/operations/GetPlaylistContentsResponseBody.md
-  - docs/models/operations/GetPlaylistContentsResponse.md
-  - docs/models/operations/ClearPlaylistContentsRequest.md
-  - docs/models/operations/ClearPlaylistContentsResponse.md
-  - docs/models/operations/AddPlaylistContentsRequest.md
-  - docs/models/operations/AddPlaylistContentsMetadata.md
-  - docs/models/operations/AddPlaylistContentsMediaContainer.md
-  - docs/models/operations/AddPlaylistContentsResponseBody.md
-  - docs/models/operations/AddPlaylistContentsResponse.md
-  - docs/models/operations/Force.md
-  - docs/models/operations/UploadPlaylistRequest.md
-  - docs/models/operations/UploadPlaylistResponse.md
-  - docs/models/operations/GetTransientTokenQueryParamType.md
-  - docs/models/operations/Scope.md
-  - docs/models/operations/GetTransientTokenRequest.md
-  - docs/models/operations/GetTransientTokenResponse.md
-  - docs/models/operations/GetSourceConnectionInformationRequest.md
-  - docs/models/operations/GetSourceConnectionInformationResponse.md
-  - docs/models/operations/GetStatisticsRequest.md
-  - docs/models/operations/GetStatisticsDevice.md
-  - docs/models/operations/Account.md
-  - docs/models/operations/StatisticsMedia.md
-  - docs/models/operations/GetStatisticsMediaContainer.md
-  - docs/models/operations/GetStatisticsResponseBody.md
-  - docs/models/operations/GetStatisticsResponse.md
-  - docs/models/operations/GetResourcesStatisticsRequest.md
-  - docs/models/operations/StatisticsResources.md
-  - docs/models/operations/GetResourcesStatisticsMediaContainer.md
-  - docs/models/operations/GetResourcesStatisticsResponseBody.md
-  - docs/models/operations/GetResourcesStatisticsResponse.md
-  - docs/models/operations/GetBandwidthStatisticsRequest.md
-  - docs/models/operations/GetBandwidthStatisticsDevice.md
-  - docs/models/operations/GetBandwidthStatisticsAccount.md
-  - docs/models/operations/StatisticsBandwidth.md
-  - docs/models/operations/GetBandwidthStatisticsMediaContainer.md
-  - docs/models/operations/GetBandwidthStatisticsResponseBody.md
-  - docs/models/operations/GetBandwidthStatisticsResponse.md
-  - docs/models/operations/GetSessionsStream.md
-  - docs/models/operations/GetSessionsPart.md
-  - docs/models/operations/GetSessionsMedia.md
-  - docs/models/operations/GetSessionsUser.md
-  - docs/models/operations/Player.md
-  - docs/models/operations/Session.md
-  - docs/models/operations/GetSessionsMetadata.md
-  - docs/models/operations/GetSessionsMediaContainer.md
-  - docs/models/operations/GetSessionsResponseBody.md
-  - docs/models/operations/GetSessionsResponse.md
-  - docs/models/operations/Filter.md
-  - docs/models/operations/GetSessionHistoryRequest.md
-  - docs/models/operations/GetSessionHistoryMetadata.md
-  - docs/models/operations/GetSessionHistoryMediaContainer.md
-  - docs/models/operations/GetSessionHistoryResponseBody.md
-  - docs/models/operations/GetSessionHistoryResponse.md
-  - docs/models/operations/TranscodeSession.md
-  - docs/models/operations/GetTranscodeSessionsMediaContainer.md
-  - docs/models/operations/GetTranscodeSessionsResponseBody.md
-  - docs/models/operations/GetTranscodeSessionsResponse.md
-  - docs/models/operations/StopTranscodeSessionRequest.md
-  - docs/models/operations/StopTranscodeSessionResponse.md
-  - docs/models/operations/Release.md
-  - docs/models/operations/GetUpdateStatusMediaContainer.md
-  - docs/models/operations/GetUpdateStatusResponseBody.md
-  - docs/models/operations/GetUpdateStatusResponse.md
-  - docs/models/operations/Download.md
-  - docs/models/operations/CheckForUpdatesRequest.md
-  - docs/models/operations/CheckForUpdatesResponse.md
-  - docs/models/operations/Tonight.md
-  - docs/models/operations/Skip.md
-  - docs/models/operations/ApplyUpdatesRequest.md
-  - docs/models/operations/ApplyUpdatesResponse.md
-  - docs/models/operations/PathParamFilter.md
-  - docs/models/operations/Libtype.md
-  - docs/models/operations/IncludeCollections.md
-  - docs/models/operations/IncludeExternalMedia.md
-  - docs/models/operations/GetWatchlistRequest.md
-  - docs/models/operations/Image.md
-  - docs/models/operations/Metadata.md
-  - docs/models/operations/GetWatchlistResponseBody.md
-  - docs/models/operations/GetWatchlistResponse.md
-  - docs/models/errors/Errors.md
-  - docs/models/errors/GetServerCapabilitiesResponseBody.md
-  - docs/models/errors/GetServerPreferencesErrors.md
-  - docs/models/errors/GetServerPreferencesResponseBody.md
-  - docs/models/errors/GetAvailableClientsErrors.md
-  - docs/models/errors/GetAvailableClientsResponseBody.md
-  - docs/models/errors/GetDevicesErrors.md
-  - docs/models/errors/GetDevicesResponseBody.md
-  - docs/models/errors/GetServerIdentityErrors.md
-  - docs/models/errors/GetServerIdentityResponseBody.md
-  - docs/models/errors/GetMyPlexAccountErrors.md
-  - docs/models/errors/GetMyPlexAccountResponseBody.md
-  - docs/models/errors/GetResizedPhotoErrors.md
-  - docs/models/errors/GetResizedPhotoResponseBody.md
-  - docs/models/errors/GetServerListErrors.md
-  - docs/models/errors/GetServerListResponseBody.md
-  - docs/models/errors/MarkPlayedErrors.md
-  - docs/models/errors/MarkPlayedResponseBody.md
-  - docs/models/errors/MarkUnplayedErrors.md
-  - docs/models/errors/MarkUnplayedResponseBody.md
-  - docs/models/errors/UpdatePlayProgressErrors.md
-  - docs/models/errors/UpdatePlayProgressResponseBody.md
-  - docs/models/errors/GetTimelineErrors.md
-  - docs/models/errors/GetTimelineResponseBody.md
-  - docs/models/errors/StartUniversalTranscodeErrors.md
-  - docs/models/errors/StartUniversalTranscodeResponseBody.md
-  - docs/models/errors/GetServerActivitiesErrors.md
-  - docs/models/errors/GetServerActivitiesResponseBody.md
-  - docs/models/errors/CancelServerActivitiesErrors.md
-  - docs/models/errors/CancelServerActivitiesResponseBody.md
-  - docs/models/errors/GetButlerTasksErrors.md
-  - docs/models/errors/GetButlerTasksResponseBody.md
-  - docs/models/errors/StartAllTasksErrors.md
-  - docs/models/errors/StartAllTasksResponseBody.md
-  - docs/models/errors/StopAllTasksErrors.md
-  - docs/models/errors/StopAllTasksResponseBody.md
-  - docs/models/errors/StartTaskErrors.md
-  - docs/models/errors/StartTaskResponseBody.md
-  - docs/models/errors/StopTaskErrors.md
-  - docs/models/errors/StopTaskResponseBody.md
-  - docs/models/errors/GetHomeDataErrors.md
-  - docs/models/errors/GetHomeDataResponseBody.md
-  - docs/models/errors/GetPinErrors.md
-  - docs/models/errors/GetPinResponseBody.md
-  - docs/models/errors/GetTokenErrors.md
-  - docs/models/errors/GetTokenResponseBody.md
-  - docs/models/errors/GetGlobalHubsErrors.md
-  - docs/models/errors/GetGlobalHubsResponseBody.md
-  - docs/models/errors/GetLibraryHubsErrors.md
-  - docs/models/errors/GetLibraryHubsResponseBody.md
-  - docs/models/errors/PerformSearchErrors.md
-  - docs/models/errors/PerformSearchResponseBody.md
-  - docs/models/errors/PerformVoiceSearchErrors.md
-  - docs/models/errors/PerformVoiceSearchResponseBody.md
-  - docs/models/errors/GetSearchResultsErrors.md
-  - docs/models/errors/GetSearchResultsResponseBody.md
-  - docs/models/errors/GetFileHashErrors.md
-  - docs/models/errors/GetFileHashResponseBody.md
-  - docs/models/errors/GetRecentlyAddedErrors.md
-  - docs/models/errors/GetRecentlyAddedResponseBody.md
-  - docs/models/errors/GetLibrariesErrors.md
-  - docs/models/errors/GetLibrariesResponseBody.md
-  - docs/models/errors/GetLibraryErrors.md
-  - docs/models/errors/GetLibraryResponseBody.md
-  - docs/models/errors/DeleteLibraryErrors.md
-  - docs/models/errors/DeleteLibraryResponseBody.md
-  - docs/models/errors/GetLibraryItemsErrors.md
-  - docs/models/errors/GetLibraryItemsResponseBody.md
-  - docs/models/errors/RefreshLibraryErrors.md
-  - docs/models/errors/RefreshLibraryResponseBody.md
-  - docs/models/errors/SearchLibraryErrors.md
-  - docs/models/errors/SearchLibraryResponseBody.md
-  - docs/models/errors/GetMetadataErrors.md
-  - docs/models/errors/GetMetadataResponseBody.md
-  - docs/models/errors/GetMetadataChildrenErrors.md
-  - docs/models/errors/GetMetadataChildrenResponseBody.md
-  - docs/models/errors/GetOnDeckErrors.md
-  - docs/models/errors/GetOnDeckResponseBody.md
-  - docs/models/errors/LogLineErrors.md
-  - docs/models/errors/LogLineResponseBody.md
-  - docs/models/errors/LogMultiLineErrors.md
-  - docs/models/errors/LogMultiLineResponseBody.md
-  - docs/models/errors/EnablePaperTrailErrors.md
-  - docs/models/errors/EnablePaperTrailResponseBody.md
-  - docs/models/errors/CreatePlaylistErrors.md
-  - docs/models/errors/CreatePlaylistResponseBody.md
-  - docs/models/errors/GetPlaylistsErrors.md
-  - docs/models/errors/GetPlaylistsResponseBody.md
-  - docs/models/errors/GetPlaylistErrors.md
-  - docs/models/errors/GetPlaylistResponseBody.md
-  - docs/models/errors/DeletePlaylistErrors.md
-  - docs/models/errors/DeletePlaylistResponseBody.md
-  - docs/models/errors/UpdatePlaylistErrors.md
-  - docs/models/errors/UpdatePlaylistResponseBody.md
-  - docs/models/errors/GetPlaylistContentsErrors.md
-  - docs/models/errors/GetPlaylistContentsResponseBody.md
-  - docs/models/errors/ClearPlaylistContentsErrors.md
-  - docs/models/errors/ClearPlaylistContentsResponseBody.md
-  - docs/models/errors/AddPlaylistContentsErrors.md
-  - docs/models/errors/AddPlaylistContentsResponseBody.md
-  - docs/models/errors/UploadPlaylistErrors.md
-  - docs/models/errors/UploadPlaylistResponseBody.md
-  - docs/models/errors/GetTransientTokenErrors.md
-  - docs/models/errors/GetTransientTokenResponseBody.md
-  - docs/models/errors/GetSourceConnectionInformationErrors.md
-  - docs/models/errors/GetSourceConnectionInformationResponseBody.md
-  - docs/models/errors/GetStatisticsErrors.md
-  - docs/models/errors/GetStatisticsResponseBody.md
-  - docs/models/errors/GetResourcesStatisticsErrors.md
-  - docs/models/errors/GetResourcesStatisticsResponseBody.md
-  - docs/models/errors/GetBandwidthStatisticsErrors.md
-  - docs/models/errors/GetBandwidthStatisticsResponseBody.md
-  - docs/models/errors/GetSessionsErrors.md
-  - docs/models/errors/GetSessionsResponseBody.md
-  - docs/models/errors/GetSessionHistoryErrors.md
-  - docs/models/errors/GetSessionHistoryResponseBody.md
-  - docs/models/errors/GetTranscodeSessionsErrors.md
-  - docs/models/errors/GetTranscodeSessionsResponseBody.md
-  - docs/models/errors/StopTranscodeSessionErrors.md
-  - docs/models/errors/StopTranscodeSessionResponseBody.md
-  - docs/models/errors/GetUpdateStatusErrors.md
-  - docs/models/errors/GetUpdateStatusResponseBody.md
-  - docs/models/errors/CheckForUpdatesErrors.md
-  - docs/models/errors/CheckForUpdatesResponseBody.md
-  - docs/models/errors/ApplyUpdatesErrors.md
-  - docs/models/errors/ApplyUpdatesResponseBody.md
-  - docs/models/errors/GetWatchlistErrors.md
-  - docs/models/errors/GetWatchlistResponseBody.md
-  - docs/models/shared/Security.md
-  - docs/sdks/plexapi/README.md
-  - docs/sdks/server/README.md
-  - docs/sdks/media/README.md
-  - docs/sdks/video/README.md
-  - docs/sdks/activities/README.md
-  - docs/sdks/butler/README.md
-  - docs/sdks/plex/README.md
-  - docs/sdks/hubs/README.md
-  - docs/sdks/search/README.md
-  - docs/sdks/library/README.md
-  - docs/sdks/log/README.md
-  - docs/sdks/playlists/README.md
-  - docs/sdks/authentication/README.md
-  - docs/sdks/statistics/README.md
-  - docs/sdks/sessions/README.md
-  - docs/sdks/updater/README.md
-  - docs/sdks/watchlist/README.md
-  - USAGE.md
+  - src/main/java/dev/plexapi/sdk/Activities.java
+  - src/main/java/dev/plexapi/sdk/Authentication.java
+  - src/main/java/dev/plexapi/sdk/Butler.java
+  - src/main/java/dev/plexapi/sdk/Hubs.java
+  - src/main/java/dev/plexapi/sdk/Library.java
+  - src/main/java/dev/plexapi/sdk/Log.java
+  - src/main/java/dev/plexapi/sdk/Media.java
+  - src/main/java/dev/plexapi/sdk/Playlists.java
+  - src/main/java/dev/plexapi/sdk/Plex.java
+  - src/main/java/dev/plexapi/sdk/PlexAPI.java
+  - src/main/java/dev/plexapi/sdk/SDKConfiguration.java
+  - src/main/java/dev/plexapi/sdk/Search.java
+  - src/main/java/dev/plexapi/sdk/SecuritySource.java
+  - src/main/java/dev/plexapi/sdk/Server.java
+  - src/main/java/dev/plexapi/sdk/Sessions.java
+  - src/main/java/dev/plexapi/sdk/Statistics.java
+  - src/main/java/dev/plexapi/sdk/Updater.java
+  - src/main/java/dev/plexapi/sdk/Video.java
+  - src/main/java/dev/plexapi/sdk/Watchlist.java
+  - src/main/java/dev/plexapi/sdk/models/errors/AddPlaylistContentsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/AddPlaylistContentsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/ApplyUpdatesErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/ApplyUpdatesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/AuthException.java
+  - src/main/java/dev/plexapi/sdk/models/errors/CancelServerActivitiesErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/CancelServerActivitiesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/CheckForUpdatesErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/CheckForUpdatesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/ClearPlaylistContentsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/ClearPlaylistContentsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/CreatePlaylistErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/CreatePlaylistResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/DeleteLibraryErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/DeleteLibraryResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/DeletePlaylistErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/DeletePlaylistResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/EnablePaperTrailErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/EnablePaperTrailResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/Errors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetAllLibrariesErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetAllLibrariesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetAvailableClientsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetAvailableClientsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetBandwidthStatisticsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetBandwidthStatisticsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetBannerImageErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetBannerImageResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetButlerTasksErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetButlerTasksResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetCompanionsDataErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetCompanionsDataResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetDevicesErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetDevicesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetFileHashErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetFileHashResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetGeoDataErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetGeoDataResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetGlobalHubsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetGlobalHubsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetHomeDataErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetHomeDataResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryDetailsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryDetailsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryHubsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryHubsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryItemsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryItemsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetMediaProvidersErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetMediaProvidersResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetMetaDataByRatingKeyErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetMetaDataByRatingKeyResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetMetadataChildrenErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetMetadataChildrenResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetMyPlexAccountErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetMyPlexAccountResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetOnDeckErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetOnDeckResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetPinErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetPinResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistContentsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistContentsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetRecentlyAddedErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetRecentlyAddedResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetRefreshLibraryMetadataErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetRefreshLibraryMetadataResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetResizedPhotoErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetResizedPhotoResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetResourcesStatisticsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetResourcesStatisticsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSearchLibraryErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSearchLibraryResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSearchResultsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSearchResultsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerActivitiesErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerActivitiesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerCapabilitiesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerIdentityResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerListErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerListResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerPreferencesErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerPreferencesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerResourcesErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerResourcesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSessionHistoryErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSessionHistoryResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSessionsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSessionsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSourceConnectionInformationErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSourceConnectionInformationResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetStatisticsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetStatisticsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetThumbImageErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetThumbImageResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTimelineErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTimelineResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTokenByPinIdErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTokenByPinIdPlexErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTokenByPinIdPlexResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTokenByPinIdResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTopWatchedContentErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTopWatchedContentResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTranscodeSessionsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTranscodeSessionsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTransientTokenErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTransientTokenResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetUpdateStatusErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetUpdateStatusResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetUserDetailsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetUserDetailsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetUserFriendsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetUserFriendsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetWatchListErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetWatchListResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/LogLineErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/LogLineResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/LogMultiLineErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/LogMultiLineResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/MarkPlayedErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/MarkPlayedResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/MarkUnplayedErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/MarkUnplayedResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/PerformSearchErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/PerformSearchResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/PerformVoiceSearchErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/PerformVoiceSearchResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/PostUsersSignInDataErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/PostUsersSignInDataResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/SDKError.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StartAllTasksErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StartAllTasksResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StartTaskErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StartTaskResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StartUniversalTranscodeErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StartUniversalTranscodeResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StopAllTasksErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StopAllTasksResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StopTaskErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StopTaskResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StopTranscodeSessionErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StopTranscodeSessionResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/UpdatePlayProgressErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/UpdatePlayProgressResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/UpdatePlaylistErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/UpdatePlaylistResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/UploadPlaylistErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/UploadPlaylistResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Account.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Activity.java
+  - src/main/java/dev/plexapi/sdk/models/operations/AddPlaylistContentsMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/AddPlaylistContentsMetadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/AddPlaylistContentsRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/AddPlaylistContentsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/AddPlaylistContentsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/AddPlaylistContentsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/ApplyUpdatesRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/ApplyUpdatesRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/ApplyUpdatesResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/AutoSelectSubtitle.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Billing.java
+  - src/main/java/dev/plexapi/sdk/models/operations/ButlerTask.java
+  - src/main/java/dev/plexapi/sdk/models/operations/ButlerTasks.java
+  - src/main/java/dev/plexapi/sdk/models/operations/CancelServerActivitiesRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/CancelServerActivitiesRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/CancelServerActivitiesResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/CheckForUpdatesRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/CheckForUpdatesRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/CheckForUpdatesResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/ClearPlaylistContentsRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/ClearPlaylistContentsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/ClearPlaylistContentsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Connections.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Context.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Country.java
+  - src/main/java/dev/plexapi/sdk/models/operations/CreatePlaylistMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/CreatePlaylistMetadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/CreatePlaylistQueryParamType.java
+  - src/main/java/dev/plexapi/sdk/models/operations/CreatePlaylistRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/CreatePlaylistRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/CreatePlaylistResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/CreatePlaylistResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/DefaultSubtitleAccessibility.java
+  - src/main/java/dev/plexapi/sdk/models/operations/DefaultSubtitleForced.java
+  - src/main/java/dev/plexapi/sdk/models/operations/DeleteLibraryRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/DeleteLibraryRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/DeleteLibraryResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/DeletePlaylistRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/DeletePlaylistRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/DeletePlaylistResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Device.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Director.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Directory.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Download.java
+  - src/main/java/dev/plexapi/sdk/models/operations/EnablePaperTrailRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/EnablePaperTrailResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Feature.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Features.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Field.java
+  - src/main/java/dev/plexapi/sdk/models/operations/FieldType.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Filter.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Force.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Friend.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Genre.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GeoData.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetAllLibrariesDirectory.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetAllLibrariesMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetAllLibrariesRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetAllLibrariesResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetAllLibrariesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetAvailableClientsMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetAvailableClientsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetAvailableClientsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetAvailableClientsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetBandwidthStatisticsAccount.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetBandwidthStatisticsDevice.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetBandwidthStatisticsMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetBandwidthStatisticsRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetBandwidthStatisticsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetBandwidthStatisticsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetBandwidthStatisticsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetBannerImageRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetBannerImageRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetBannerImageResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetButlerTasksRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetButlerTasksResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetButlerTasksResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetCompanionsDataRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetCompanionsDataResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetDevicesMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetDevicesRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetDevicesResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetDevicesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetFileHashRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetFileHashRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetFileHashResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetGeoDataGeoData.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetGeoDataRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetGeoDataResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetGlobalHubsMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetGlobalHubsMetadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetGlobalHubsRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetGlobalHubsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetGlobalHubsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetGlobalHubsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetHomeDataRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetHomeDataResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetHomeDataResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryDetailsDirectory.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryDetailsFilter.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryDetailsMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryDetailsRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryDetailsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryDetailsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryDetailsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryDetailsType.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryHubsCountry.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryHubsDirector.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryHubsGenre.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryHubsHub.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryHubsMedia.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryHubsMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryHubsMetadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryHubsPart.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryHubsRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryHubsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryHubsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryHubsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryHubsRole.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryHubsWriter.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsCountry.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsDirector.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsGenre.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsMedia.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsMetadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsPart.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsRole.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsWriter.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMediaProvidersDirectory.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMediaProvidersMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMediaProvidersRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMediaProvidersRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMediaProvidersResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMediaProvidersResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetaDataByRatingKeyCountry.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetaDataByRatingKeyDirector.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetaDataByRatingKeyGenre.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetaDataByRatingKeyMedia.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetaDataByRatingKeyMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetaDataByRatingKeyMetadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetaDataByRatingKeyPart.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetaDataByRatingKeyRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetaDataByRatingKeyRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetaDataByRatingKeyResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetaDataByRatingKeyResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetaDataByRatingKeyRole.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetaDataByRatingKeyWriter.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetadataChildrenDirectory.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetadataChildrenMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetadataChildrenMetadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetadataChildrenRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetadataChildrenRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetadataChildrenResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetadataChildrenResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMyPlexAccountRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMyPlexAccountResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMyPlexAccountResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetOnDeckGuids.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetOnDeckMedia.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetOnDeckMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetOnDeckMetadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetOnDeckPart.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetOnDeckRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetOnDeckResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetOnDeckResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetOnDeckStream.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPinAuthPinContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPinRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPinRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPinResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistContentsCountry.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistContentsDirector.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistContentsGenre.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistContentsMedia.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistContentsMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistContentsMetadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistContentsPart.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistContentsQueryParamType.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistContentsRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistContentsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistContentsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistContentsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistContentsRole.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistContentsWriter.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistMetadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistsMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistsMetadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistsRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedMetadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRefreshLibraryMetadataRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRefreshLibraryMetadataRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRefreshLibraryMetadataResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetResizedPhotoRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetResizedPhotoRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetResizedPhotoResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetResourcesStatisticsMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetResourcesStatisticsRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetResourcesStatisticsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetResourcesStatisticsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetResourcesStatisticsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSearchLibraryMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSearchLibraryMetadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSearchLibraryRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSearchLibraryRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSearchLibraryResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSearchLibraryResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSearchResultsCountry.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSearchResultsDirector.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSearchResultsGenre.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSearchResultsMedia.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSearchResultsMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSearchResultsMetadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSearchResultsPart.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSearchResultsRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSearchResultsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSearchResultsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSearchResultsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSearchResultsRole.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSearchResultsWriter.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerActivitiesMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerActivitiesRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerActivitiesResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerActivitiesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerCapabilitiesRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerCapabilitiesResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerCapabilitiesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerIdentityMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerIdentityRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerIdentityResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerIdentityResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerListMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerListRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerListResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerListResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerListServer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerPreferencesMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerPreferencesRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerPreferencesResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerPreferencesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerResourcesRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerResourcesRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetServerResourcesResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSessionHistoryMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSessionHistoryMetadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSessionHistoryRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSessionHistoryRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSessionHistoryResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSessionHistoryResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSessionsMedia.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSessionsMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSessionsMetadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSessionsPart.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSessionsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSessionsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSessionsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSessionsStream.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSessionsUser.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSourceConnectionInformationRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSourceConnectionInformationRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSourceConnectionInformationResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetStatisticsDevice.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetStatisticsMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetStatisticsRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetStatisticsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetStatisticsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetStatisticsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetThumbImageRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetThumbImageRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetThumbImageResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTimelineRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTimelineRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTimelineResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTokenByPinIdAuthPinContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTokenByPinIdGeoData.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTokenByPinIdRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTokenByPinIdRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTokenByPinIdResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTopWatchedContentCountry.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTopWatchedContentGenre.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTopWatchedContentGuids.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTopWatchedContentMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTopWatchedContentMetadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTopWatchedContentQueryParamType.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTopWatchedContentRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTopWatchedContentRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTopWatchedContentResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTopWatchedContentResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTopWatchedContentRole.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTranscodeSessionsMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTranscodeSessionsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTranscodeSessionsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTranscodeSessionsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTransientTokenQueryParamType.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTransientTokenRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTransientTokenRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTransientTokenResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUpdateStatusMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUpdateStatusRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUpdateStatusResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUpdateStatusResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUserDetailsAuthenticationResponseStatus.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUserDetailsAuthenticationStatus.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUserDetailsFeatures.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUserDetailsRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUserDetailsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUserDetailsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUserDetailsStatus.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUserDetailsSubscription.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUserDetailsUserPlexAccount.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUserFriendsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUserFriendsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetWatchListRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetWatchListRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetWatchListResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetWatchListResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Guids.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Hub.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Image.java
+  - src/main/java/dev/plexapi/sdk/models/operations/IncludeCollections.java
+  - src/main/java/dev/plexapi/sdk/models/operations/IncludeDetails.java
+  - src/main/java/dev/plexapi/sdk/models/operations/IncludeExternalMedia.java
+  - src/main/java/dev/plexapi/sdk/models/operations/IncludeGuids.java
+  - src/main/java/dev/plexapi/sdk/models/operations/IncludeHttps.java
+  - src/main/java/dev/plexapi/sdk/models/operations/IncludeIPv6.java
+  - src/main/java/dev/plexapi/sdk/models/operations/IncludeMeta.java
+  - src/main/java/dev/plexapi/sdk/models/operations/IncludeRelay.java
+  - src/main/java/dev/plexapi/sdk/models/operations/InternalPaymentMethod.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Level.java
+  - src/main/java/dev/plexapi/sdk/models/operations/LibrarySectionID.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Libtype.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Location.java
+  - src/main/java/dev/plexapi/sdk/models/operations/LogLineRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/LogLineRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/LogLineResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/LogMultiLineRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/LogMultiLineResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/MailingListStatus.java
+  - src/main/java/dev/plexapi/sdk/models/operations/MarkPlayedRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/MarkPlayedRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/MarkPlayedResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/MarkUnplayedRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/MarkUnplayedRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/MarkUnplayedResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Media.java
+  - src/main/java/dev/plexapi/sdk/models/operations/MediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/MediaProvider.java
+  - src/main/java/dev/plexapi/sdk/models/operations/MediaReviewsVisibility.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Metadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/MinSize.java
+  - src/main/java/dev/plexapi/sdk/models/operations/MyPlex.java
+  - src/main/java/dev/plexapi/sdk/models/operations/OnlyTransient.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Operator.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Part.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PastSubscription.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PathParamTaskName.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PerformSearchRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PerformSearchRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PerformSearchResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PerformVoiceSearchRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PerformVoiceSearchRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PerformVoiceSearchResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Pivot.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Player.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PlaylistType.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PlexDevice.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataAuthenticationFeatures.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataAuthenticationResponseStatus.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataAuthenticationStatus.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataAuthenticationSubscription.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataAutoSelectSubtitle.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataDefaultSubtitleAccessibility.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataDefaultSubtitleForced.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataFeatures.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataMailingListStatus.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataMediaReviewsVisibility.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataRequestBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataServices.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataState.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataStatus.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataSubscription.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataUserPlexAccount.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataUserProfile.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataWatchedIndicator.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Producer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Provider.java
+  - src/main/java/dev/plexapi/sdk/models/operations/QueryParamFilter.java
+  - src/main/java/dev/plexapi/sdk/models/operations/QueryParamForce.java
+  - src/main/java/dev/plexapi/sdk/models/operations/QueryParamOnlyTransient.java
+  - src/main/java/dev/plexapi/sdk/models/operations/QueryParamSmart.java
+  - src/main/java/dev/plexapi/sdk/models/operations/QueryParamType.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Ratings.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Release.java
+  - src/main/java/dev/plexapi/sdk/models/operations/ResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Role.java
+  - src/main/java/dev/plexapi/sdk/models/operations/SDKMethodInterfaces.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Scope.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Server.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Services.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Session.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Setting.java
+  - src/main/java/dev/plexapi/sdk/models/operations/SharedServers.java
+  - src/main/java/dev/plexapi/sdk/models/operations/SharedSources.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Skip.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Smart.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Sort.java
+  - src/main/java/dev/plexapi/sdk/models/operations/StartAllTasksRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/StartAllTasksResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/StartTaskRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/StartTaskRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/StartTaskResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/StartUniversalTranscodeRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/StartUniversalTranscodeRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/StartUniversalTranscodeResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/State.java
+  - src/main/java/dev/plexapi/sdk/models/operations/StatisticsBandwidth.java
+  - src/main/java/dev/plexapi/sdk/models/operations/StatisticsMedia.java
+  - src/main/java/dev/plexapi/sdk/models/operations/StatisticsResources.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Status.java
+  - src/main/java/dev/plexapi/sdk/models/operations/StopAllTasksRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/StopAllTasksResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/StopTaskRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/StopTaskRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/StopTaskResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/StopTranscodeSessionRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/StopTranscodeSessionRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/StopTranscodeSessionResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Stream.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Subscription.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Tag.java
+  - src/main/java/dev/plexapi/sdk/models/operations/TaskName.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Tonight.java
+  - src/main/java/dev/plexapi/sdk/models/operations/TranscodeSession.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Trials.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Type.java
+  - src/main/java/dev/plexapi/sdk/models/operations/UpdatePlayProgressRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/UpdatePlayProgressRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/UpdatePlayProgressResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/UpdatePlaylistRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/UpdatePlaylistRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/UpdatePlaylistResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/UploadPlaylistRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/UploadPlaylistRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/UploadPlaylistResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Upscale.java
+  - src/main/java/dev/plexapi/sdk/models/operations/User.java
+  - src/main/java/dev/plexapi/sdk/models/operations/UserProfile.java
+  - src/main/java/dev/plexapi/sdk/models/operations/WatchedIndicator.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Writer.java
+  - src/main/java/dev/plexapi/sdk/models/shared/Security.java
+  - src/main/java/dev/plexapi/sdk/utils/BackoffStrategy.java
+  - src/main/java/dev/plexapi/sdk/utils/BigDecimalString.java
+  - src/main/java/dev/plexapi/sdk/utils/BigIntegerString.java
+  - src/main/java/dev/plexapi/sdk/utils/Deserializers.java
+  - src/main/java/dev/plexapi/sdk/utils/EventStream.java
+  - src/main/java/dev/plexapi/sdk/utils/EventStreamLineReader.java
+  - src/main/java/dev/plexapi/sdk/utils/EventStreamMessage.java
+  - src/main/java/dev/plexapi/sdk/utils/EventStreamReader.java
+  - src/main/java/dev/plexapi/sdk/utils/FormMetadata.java
+  - src/main/java/dev/plexapi/sdk/utils/HTTPClient.java
+  - src/main/java/dev/plexapi/sdk/utils/HTTPRequest.java
+  - src/main/java/dev/plexapi/sdk/utils/HeaderMetadata.java
+  - src/main/java/dev/plexapi/sdk/utils/Helpers.java
+  - src/main/java/dev/plexapi/sdk/utils/Hook.java
+  - src/main/java/dev/plexapi/sdk/utils/Hooks.java
+  - src/main/java/dev/plexapi/sdk/utils/JSON.java
+  - src/main/java/dev/plexapi/sdk/utils/LazySingletonValue.java
+  - src/main/java/dev/plexapi/sdk/utils/Metadata.java
+  - src/main/java/dev/plexapi/sdk/utils/MultipartFormMetadata.java
+  - src/main/java/dev/plexapi/sdk/utils/OneOfDeserializer.java
+  - src/main/java/dev/plexapi/sdk/utils/Options.java
+  - src/main/java/dev/plexapi/sdk/utils/PathParamsMetadata.java
+  - src/main/java/dev/plexapi/sdk/utils/QueryParameters.java
+  - src/main/java/dev/plexapi/sdk/utils/QueryParamsMetadata.java
+  - src/main/java/dev/plexapi/sdk/utils/RequestBody.java
+  - src/main/java/dev/plexapi/sdk/utils/RequestMetadata.java
+  - src/main/java/dev/plexapi/sdk/utils/Response.java
+  - src/main/java/dev/plexapi/sdk/utils/Retries.java
+  - src/main/java/dev/plexapi/sdk/utils/RetryConfig.java
+  - src/main/java/dev/plexapi/sdk/utils/Security.java
+  - src/main/java/dev/plexapi/sdk/utils/SecurityMetadata.java
+  - src/main/java/dev/plexapi/sdk/utils/SerializedBody.java
+  - src/main/java/dev/plexapi/sdk/utils/SpeakeasyHTTPClient.java
+  - src/main/java/dev/plexapi/sdk/utils/SpeakeasyMetadata.java
+  - src/main/java/dev/plexapi/sdk/utils/TypedObject.java
+  - src/main/java/dev/plexapi/sdk/utils/Types.java
+  - src/main/java/dev/plexapi/sdk/utils/Utils.java
+examples:
+  getServerCapabilities:
+    speakeasy-default-get-server-capabilities:
+      responses:
+        "401":
+          application/json: {"errors": []}
+        "200": {}
+  getServerPreferences:
+    speakeasy-default-get-server-preferences:
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 161, "Setting": []}}
+        "401":
+          application/json: {"errors": []}
+  getAvailableClients:
+    speakeasy-default-get-available-clients:
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 1, "Server": []}}
+        "401":
+          application/json: {"errors": []}
+  getDevices:
+    speakeasy-default-get-devices:
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 151, "identifier": "com.plexapp.system.devices", "Device": []}}
+        "401":
+          application/json: {"errors": []}
+  get-server-identity:
+    speakeasy-default-get-server-identity:
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 0, "machineIdentifier": "96f2fe7a78c9dc1f16a16bedbe90f98149be16b4", "version": "1.31.3.6868-28fc46b27"}}
+        "408":
+          application/json: {"code": 408, "message": "The server timed out waiting for the request."}
+  getMyPlexAccount:
+    speakeasy-default-get-my-plex-account:
+      responses:
+        "200":
+          application/json: {"MyPlex": {"authToken": "Z5v-PrNASDFpsaCi3CPK7", "username": "example.email@mail.com", "mappingState": "mapped", "signInState": "ok", "publicAddress": "140.20.68.140", "publicPort": 32400, "privateAddress": "10.10.10.47", "privatePort": 32400, "subscriptionFeatures": "federated-auth,hardware_transcoding,home,hwtranscode,item_clusters,kevin-bacon,livetv,loudness,lyrics,music-analysis,music_videos,pass,photo_autotags,photos-v5,photosV6-edit,photosV6-tv-albums,premium_music_metadata,radio,server-manager,session_bandwidth_restrictions,session_kick,shared-radio,sync,trailers,tuner-sharing,type-first,unsupportedtuners,webhooks", "subscriptionState": "Active"}}
+        "401":
+          application/json: {"errors": []}
+  getResizedPhoto:
+    speakeasy-default-get-resized-photo:
+      parameters:
+        query:
+          width: 110
+          height: 165
+          opacity: 100
+          blur: 20
+          minSize: 1
+          upscale: 0
+          url: "/library/metadata/49564/thumb/1654258204"
+      responses:
+        "401":
+          application/json: {"errors": []}
+  get-media-providers:
+    speakeasy-default-get-media-providers:
+      parameters:
+        query:
+          X-Plex-Token: "CV5xoxjTpFKUzBTShsaf"
+      responses:
+        "401":
+          application/json: {"errors": []}
+        "200": {}
+  getServerList:
+    speakeasy-default-get-server-list:
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 1, "Server": []}}
+        "401":
+          application/json: {"errors": []}
+  markPlayed:
+    speakeasy-default-mark-played:
+      parameters:
+        query:
+          key: 59398
+      responses:
+        "401":
+          application/json: {"errors": []}
+  markUnplayed:
+    speakeasy-default-mark-unplayed:
+      parameters:
+        query:
+          key: 59398
+      responses:
+        "401":
+          application/json: {"errors": []}
+  updatePlayProgress:
+    "":
+      parameters:
+        query:
+          key: "<key>"
+          time: 90000
+          state: "played"
+      responses:
+        "401":
+          application/json: {"errors": []}
+  get-banner-image:
+    speakeasy-default-get-banner-image:
+      parameters:
+        path:
+          ratingKey: 9518
+        query:
+          width: 396
+          height: 396
+          minSize: 1
+          upscale: 1
+          X-Plex-Token: "CV5xoxjTpFKUzBTShsaf"
+      responses:
+        "401":
+          application/json: {"errors": []}
+        "200": {}
+  get-thumb-image:
+    speakeasy-default-get-thumb-image:
+      parameters:
+        path:
+          ratingKey: 9518
+        query:
+          width: 396
+          height: 396
+          minSize: 1
+          upscale: 1
+          X-Plex-Token: "CV5xoxjTpFKUzBTShsaf"
+      responses:
+        "401":
+          application/json: {"errors": []}
+        "200": {}
+  getTimeline:
+    "":
+      parameters:
+        query:
+          ratingKey: 23409
+          key: "/library/metadata/23409"
+          state: "playing"
+          hasMDE: 1
+          time: 2000
+          duration: 10000
+          context: "home:hub.continueWatching"
+          playQueueItemID: 1
+          playBackTime: 2000
+          row: 1
+      responses:
+        "401":
+          application/json: {"errors": []}
+  startUniversalTranscode:
+    "":
+      parameters:
+        query:
+          hasMDE: 1
+          path: "/library/metadata/23409"
+          mediaIndex: 0
+          partIndex: 0
+          protocol: "hls"
+          fastSeek: 0
+          directPlay: 0
+          directStream: 0
+          subtitleSize: 100
+          subtites: "burn"
+          audioBoost: 100
+          location: "lan"
+          mediaBufferSize: 102400
+          session: "zvcage8b7rkioqcm8f4uns4c"
+          addDebugOverlay: 0
+          autoAdjustQuality: 0
+      responses:
+        "401":
+          application/json: {"errors": []}
+  getServerActivities:
+    speakeasy-default-get-server-activities:
+      responses:
+        "401":
+          application/json: {"errors": []}
+        "200": {}
+  cancelServerActivities:
+    "":
+      parameters:
+        path:
+          activityUUID: "25b71ed5-0f9d-461c-baa7-d404e9e10d3e"
+      responses:
+        "401":
+          application/json: {"errors": []}
+  getButlerTasks:
+    speakeasy-default-get-butler-tasks:
+      responses:
+        "200":
+          application/json: {"ButlerTasks": {"ButlerTask": []}}
+        "401":
+          application/json: {"errors": []}
+  startAllTasks:
+    speakeasy-default-start-all-tasks:
+      responses:
+        "401":
+          application/json: {"errors": []}
+  stopAllTasks:
+    speakeasy-default-stop-all-tasks:
+      responses:
+        "401":
+          application/json: {"errors": []}
+  startTask:
+    speakeasy-default-start-task:
+      parameters:
+        path:
+          taskName: "CleanOldBundles"
+      responses:
+        "401":
+          application/json: {"errors": []}
+  stopTask:
+    speakeasy-default-stop-task:
+      parameters:
+        path:
+          taskName: "BackupDatabase"
+      responses:
+        "401":
+          application/json: {"errors": []}
+  getCompanionsData:
+    speakeasy-default-get-companions-data:
+      responses:
+        "200":
+          application/json: []
+        "401":
+          application/json: {"errors": []}
+  getUserFriends:
+    speakeasy-default-get-user-friends:
+      responses:
+        "200":
+          application/json: [{"email": "username@email.com", "friendlyName": "exampleUser", "home": true, "id": 0, "restricted": false, "sharedServers": [], "sharedSources": [], "status": "accepted", "thumb": "https://plex.tv/users/7d1916e0d8f6e76b/avatar?c=1694481578", "title": "username123", "username": "username123", "uuid": "7d1916e0d8f6e76b"}]
+        "401":
+          application/json: {"errors": []}
+  getGeoData:
+    speakeasy-default-get-geo-data:
+      responses:
+        "200":
+          application/json: {"code": "VI", "continent_code": "NA", "country": "United States Virgin Islands", "city": "Amsterdam", "european_union_member": true, "time_zone": "America/St_Thomas", "postal_code": 802, "in_privacy_restricted_country": true, "in_privacy_restricted_region": true, "subdivisions": "Saint Thomas", "coordinates": "18.3381, -64.8941"}
+        "401":
+          application/json: {"errors": []}
+  getHomeData:
+    speakeasy-default-get-home-data:
+      responses:
+        "200":
+          application/json: {"id": 1841489, "name": "Blindkitty38's home", "guestUserID": 58815432, "guestUserUUID": "f3df4e01bfca0787"}
+        "401":
+          application/json: {"errors": []}
+  get-server-resources:
+    speakeasy-default-get-server-resources:
+      parameters:
+        query:
+          X-Plex-Token: "CV5xoxjTpFKUzBTShsaf"
+          includeHttps: 1
+          includeRelay: 1
+          includeIPv6: 1
+      responses:
+        "401":
+          application/json: {"errors": []}
+        "200": {}
+  getPin:
+    "":
+      parameters:
+        query:
+          X-Plex-Product: "Plex Web"
+      responses:
+        "200":
+          application/json: {"id": 308667304, "code": "7RQZ", "product": "0", "trusted": false, "qr": "https://plex.tv/api/v2/pins/qr/7RQZ", "clientIdentifier": "string", "location": {"code": "VI", "continent_code": "NA", "country": "United States Virgin Islands", "city": "Amsterdam", "european_union_member": true, "time_zone": "America/St_Thomas", "postal_code": 802, "in_privacy_restricted_country": true, "in_privacy_restricted_region": true, "subdivisions": "Saint Thomas", "coordinates": "18.3381, -64.8941"}, "expiresIn": 876, "createdAt": "2024-07-16T17:03:05Z", "expiresAt": "2024-07-16T17:18:05Z", "authToken": null, "newRegistration": null}
+        "400":
+          application/json: {"errors": []}
+  getTokenByPinId:
+    "":
+      parameters:
+        path:
+          pinID: 408895
+        query: {}
+      responses:
+        "200":
+          application/json: {"id": 308667304, "code": "7RQZ", "product": "0", "trusted": false, "qr": "https://plex.tv/api/v2/pins/qr/7RQZ", "clientIdentifier": "string", "location": {"code": "VI", "continent_code": "NA", "country": "United States Virgin Islands", "city": "Amsterdam", "european_union_member": true, "time_zone": "America/St_Thomas", "postal_code": 802, "in_privacy_restricted_country": true, "in_privacy_restricted_region": true, "subdivisions": "Saint Thomas", "coordinates": "18.3381, -64.8941"}, "expiresIn": 876, "createdAt": "2024-07-16T17:03:05Z", "expiresAt": "2024-07-16T17:18:05Z", "authToken": null, "newRegistration": null}
+        "400":
+          application/json: {"errors": []}
+        "404":
+          application/json: {"errors": [{"code": 1020, "message": "Code not found or expired"}]}
+  getGlobalHubs:
+    speakeasy-default-get-global-hubs:
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 8, "allowSync": true, "identifier": "com.plexapp.plugins.library", "Hub": []}}
+        "401":
+          application/json: {"errors": []}
+  getLibraryHubs:
+    speakeasy-default-get-library-hubs:
+      parameters:
+        path:
+          sectionId: "6728.76"
+        query: {}
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 7, "allowSync": true, "identifier": "com.plexapp.plugins.library", "librarySectionID": 1, "librarySectionTitle": "Movies", "librarySectionUUID": "322a231a-b7f7-49f5-920f-14c61199cd30", "Hub": []}}
+        "401":
+          application/json: {"errors": []}
+  performSearch:
+    speakeasy-default-perform-search:
+      parameters:
+        query:
+          query: "dylan"
+          limit: 5
+      responses:
+        "401":
+          application/json: {"errors": []}
+  performVoiceSearch:
+    speakeasy-default-perform-voice-search:
+      parameters:
+        query:
+          query: "dead+poop"
+          limit: 5
+      responses:
+        "401":
+          application/json: {"errors": []}
+  getSearchResults:
+    speakeasy-default-get-search-results:
+      parameters:
+        query:
+          query: "110"
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 26, "identifier": "com.plexapp.plugins.library", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1680021154, "Metadata": [], "Provider": []}}
+        "401":
+          application/json: {"errors": []}
+  getFileHash:
+    speakeasy-default-get-file-hash:
+      parameters:
+        query:
+          url: "file://C:\\Image.png&type=13"
+      responses:
+        "401":
+          application/json: {"errors": []}
+  getRecentlyAdded:
+    speakeasy-default-get-recently-added:
+      parameters:
+        query:
+          X-Plex-Container-Start: 0
+          X-Plex-Container-Size: 50
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 50, "identifier": "com.plexapp.plugins.library", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1680021154, "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+  get-all-libraries:
+    speakeasy-default-get-all-libraries:
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 5, "allowSync": false, "title1": "Plex Library", "Directory": []}}
+        "401":
+          application/json: {"errors": []}
+  get-library-details:
+    speakeasy-default-get-library-details:
+      parameters:
+        path:
+          sectionKey: 9518
+        query: {}
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 29, "allowSync": false, "art": "/:/resources/movie-fanart.jpg", "content": "secondary", "identifier": "com.plexapp.plugins.library", "librarySectionID": 1, "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1701731894, "thumb": "/:/resources/movie.png", "title1": "Movies", "viewGroup": "secondary", "viewMode": 65592, "Directory": [], "Type": [], "FieldType": []}}
+        "401":
+          application/json: {"errors": []}
+  deleteLibrary:
+    speakeasy-default-delete-library:
+      parameters:
+        path:
+          sectionKey: 9518
+      responses:
+        "401":
+          application/json: {"errors": []}
+  get-library-items:
+    "":
+      parameters:
+        path:
+          sectionKey: 9518
+          tag: "edition"
+        query:
+          includeGuids: 1
+          includeMeta: 1
+          type: 2
+          X-Plex-Container-Start: 0
+          X-Plex-Container-Size: 50
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 70, "allowSync": true, "art": "/:/resources/movie-fanart.jpg", "identifier": "com.plexapp.plugins.library", "librarySectionTitle": "Movies", "librarySectionUUID": "322a231a-b7f7-49f5-920f-14c61199cd30", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1701731894, "thumb": "/:/resources/movie.png", "title1": "Movies", "title2": "Recently Released", "viewGroup": "movie", "viewMode": 65592, "mixedParents": true, "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+  get-refresh-library-metadata:
+    speakeasy-default-get-refresh-library-metadata:
+      parameters:
+        path:
+          sectionKey: 9518
+        query:
+          force: 0
+      responses:
+        "401":
+          application/json: {"errors": []}
+  get-search-library:
+    speakeasy-default-get-search-library:
+      parameters:
+        path:
+          sectionKey: 9518
+        query:
+          type: 2
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 2, "allowSync": false, "art": "/:/resources/show-fanart.jpg", "identifier": "com.plexapp.plugins.library", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1698860922, "nocache": true, "thumb": "/:/resources/show.png", "title1": "TV Shows", "title2": "Search for ''", "viewGroup": "season", "viewMode": 65593, "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+  get-meta-data-by-rating-key:
+    speakeasy-default-get-meta-data-by-rating-key:
+      parameters:
+        path:
+          ratingKey: 9518
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 1, "allowSync": true, "identifier": "com.plexapp.plugins.library", "librarySectionID": 1, "librarySectionTitle": "Movies", "librarySectionUUID": "cfc899d7-3000-46f6-8489-b9592714ada5", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1698860922, "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+  getMetadataChildren:
+    include-stream:
+      parameters:
+        path:
+          ratingKey: "1539.14"
+        query:
+          includeElements: "Stream"
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 3, "allowSync": true, "art": "/library/metadata/30072/art/1705739923", "identifier": "com.plexapp.plugins.library", "key": "30072", "librarySectionID": 2, "librarySectionTitle": "TV Shows", "librarySectionUUID": "4bb2521c-8ba9-459b-aaee-8ab8bc35eabd", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1701731894, "nocache": true, "parentIndex": 1, "parentTitle": "Reacher", "parentYear": 2022, "summary": "When retired Military Police Officer Jack Reacher is arrested for a murder he did not commit, he finds himself in the middle of a deadly conspiracy full of dirty cops, shady businessmen, and scheming politicians. With nothing but his wits, he must figure out what is happening in Margrave, Georgia.", "theme": "/library/metadata/30072/theme/1705739923", "thumb": "/library/metadata/30072/thumb/1705739923", "title1": "TV Shows", "title2": "Reacher", "viewGroup": "season", "viewMode": 65593, "Directory": [{"leafCount": 16, "thumb": "/library/metadata/30072/thumb/1705739923", "viewedLeafCount": 16, "key": "/library/metadata/30072/allLeaves", "title": "All episodes"}], "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+    include-stream-otheritem:
+      parameters:
+        path:
+          ratingKey: "8449.64"
+        query:
+          includeElements: "Stream,OtherItem"
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 3, "allowSync": true, "art": "/library/metadata/30072/art/1705739923", "identifier": "com.plexapp.plugins.library", "key": "30072", "librarySectionID": 2, "librarySectionTitle": "TV Shows", "librarySectionUUID": "4bb2521c-8ba9-459b-aaee-8ab8bc35eabd", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1701731894, "nocache": true, "parentIndex": 1, "parentTitle": "Reacher", "parentYear": 2022, "summary": "When retired Military Police Officer Jack Reacher is arrested for a murder he did not commit, he finds himself in the middle of a deadly conspiracy full of dirty cops, shady businessmen, and scheming politicians. With nothing but his wits, he must figure out what is happening in Margrave, Georgia.", "theme": "/library/metadata/30072/theme/1705739923", "thumb": "/library/metadata/30072/thumb/1705739923", "title1": "TV Shows", "title2": "Reacher", "viewGroup": "season", "viewMode": 65593, "Directory": [{"leafCount": 16, "thumb": "/library/metadata/30072/thumb/1705739923", "viewedLeafCount": 16, "key": "/library/metadata/30072/allLeaves", "title": "All episodes"}], "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+    include-stream-otheritem-anotheritem:
+      parameters:
+        path:
+          ratingKey: "5800.4"
+        query:
+          includeElements: "Stream,OtherItem,AnotherItem"
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 3, "allowSync": true, "art": "/library/metadata/30072/art/1705739923", "identifier": "com.plexapp.plugins.library", "key": "30072", "librarySectionID": 2, "librarySectionTitle": "TV Shows", "librarySectionUUID": "4bb2521c-8ba9-459b-aaee-8ab8bc35eabd", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1701731894, "nocache": true, "parentIndex": 1, "parentTitle": "Reacher", "parentYear": 2022, "summary": "When retired Military Police Officer Jack Reacher is arrested for a murder he did not commit, he finds himself in the middle of a deadly conspiracy full of dirty cops, shady businessmen, and scheming politicians. With nothing but his wits, he must figure out what is happening in Margrave, Georgia.", "theme": "/library/metadata/30072/theme/1705739923", "thumb": "/library/metadata/30072/thumb/1705739923", "title1": "TV Shows", "title2": "Reacher", "viewGroup": "season", "viewMode": 65593, "Directory": [{"leafCount": 16, "thumb": "/library/metadata/30072/thumb/1705739923", "viewedLeafCount": 16, "key": "/library/metadata/30072/allLeaves", "title": "All episodes"}], "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+  getTopWatchedContent:
+    "":
+      parameters:
+        query:
+          type: 2
+          includeGuids: 1
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 1, "allowSync": true, "identifier": "com.plexapp.plugins.library", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1698860922, "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+  getOnDeck:
+    speakeasy-default-get-on-deck:
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 16, "identifier": "com.plexapp.plugins.library", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1680021154, "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+  get-watch-list:
+    speakeasy-default-get-watch-list:
+      parameters:
+        path:
+          filter: "available"
+        query:
+          X-Plex-Container-Start: 0
+          X-Plex-Container-Size: 50
+          X-Plex-Token: "CV5xoxjTpFKUzBTShsaf"
+      responses:
+        "401":
+          application/json: {"errors": []}
+        "200": {}
+  logLine:
+    speakeasy-default-log-line:
+      parameters:
+        query:
+          level: 3
+          message: "Test log message"
+          source: "Postman"
+      responses:
+        "401":
+          application/json: {"errors": []}
+  logMultiLine:
+    speakeasy-default-log-multi-line:
+      requestBody:
+        text/plain: "level=4&message=Test%20message%201&source=postman\nlevel=3&message=Test%20message%202&source=postman\nlevel=1&message=Test%20message%203&source=postman"
+      responses:
+        "401":
+          application/json: {"errors": []}
+  enablePaperTrail:
+    speakeasy-default-enable-paper-trail:
+      responses:
+        "401":
+          application/json: {"errors": []}
+  createPlaylist:
+    speakeasy-default-create-playlist:
+      parameters:
+        query:
+          title: "<value>"
+          type: "photo"
+          smart: 1
+          uri: "https://inborn-brochure.biz"
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 7, "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+  getPlaylists:
+    speakeasy-default-get-playlists:
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 4, "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+  getPlaylist:
+    speakeasy-default-get-playlist:
+      parameters:
+        path:
+          playlistID: "4109.48"
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 1, "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+  deletePlaylist:
+    speakeasy-default-delete-playlist:
+      parameters:
+        path:
+          playlistID: "216.22"
+      responses:
+        "401":
+          application/json: {"errors": []}
+  updatePlaylist:
+    speakeasy-default-update-playlist:
+      parameters:
+        path:
+          playlistID: "3915"
+        query: {}
+      responses:
+        "401":
+          application/json: {"errors": []}
+  getPlaylistContents:
+    speakeasy-default-get-playlist-contents:
+      parameters:
+        path:
+          playlistID: "5004.46"
+        query:
+          type: 2
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 2, "composite": "/playlists/95/composite/1705717521", "duration": 282, "leafCount": 2, "playlistType": "video", "ratingKey": "95", "smart": true, "title": "Smart Movie Playlist", "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+  clearPlaylistContents:
+    speakeasy-default-clear-playlist-contents:
+      parameters:
+        path:
+          playlistID: "1893.18"
+      responses:
+        "401":
+          application/json: {"errors": []}
+  addPlaylistContents:
+    speakeasy-default-add-playlist-contents:
+      parameters:
+        path:
+          playlistID: "8502.01"
+        query:
+          uri: "server://12345/com.plexapp.plugins.library/library/metadata/1"
+          playQueueID: 123
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 1, "leafCountAdded": 1, "leafCountRequested": 1, "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+  uploadPlaylist:
+    speakeasy-default-upload-playlist:
+      parameters:
+        query:
+          path: "/home/barkley/playlist.m3u"
+          force: 0
+      responses:
+        "401":
+          application/json: {"errors": []}
+  getTransientToken:
+    speakeasy-default-get-transient-token:
+      parameters:
+        query:
+          type: "delegation"
+          scope: "all"
+      responses:
+        "401":
+          application/json: {"errors": []}
+  getSourceConnectionInformation:
+    speakeasy-default-get-source-connection-information:
+      parameters:
+        query:
+          source: "server://client-identifier"
+      responses:
+        "401":
+          application/json: {"errors": []}
+  getUserDetails:
+    speakeasy-default-get-user-details:
+      parameters:
+        query:
+          X-Plex-Token: "CV5xoxjTpFKUzBTShsaf"
+      responses:
+        "200":
+          application/json: {"adsConsent": true, "adsConsentReminderAt": "2019-08-24T14:15:22Z", "adsConsentSetAt": "2019-08-24T14:15:22Z", "anonymous": false, "authToken": "CxoUzBTSV5hsxjTpFKaf", "backupCodesCreated": false, "confirmed": false, "country": "US", "email": "username@email.com", "emailOnlyAuth": false, "experimentalFeatures": false, "friendlyName": "friendlyUsername", "entitlements": [], "guest": false, "hasPassword": true, "home": false, "homeAdmin": false, "homeSize": 1, "id": 13692262, "joinedAt": 1721154902, "locale": null, "mailingListActive": false, "mailingListStatus": "unsubscribed", "maxHomeSize": 15, "pin": "string", "profile": {"autoSelectAudio": true, "defaultAudioLanguage": "ja", "defaultSubtitleLanguage": "en", "autoSelectSubtitle": "1", "defaultSubtitleAccessibility": "1", "defaultSubtitleForced": "0", "watchedIndicator": "1", "mediaReviewsVisibility": 0}, "protected": false, "rememberExpiresAt": 1722364046, "restricted": false, "roles": ["string"], "scrobbleTypes": "", "services": [{"identifier": "metadata-dev", "endpoint": "https://epg.provider.plex.tv", "token": "DjoMtqFAGRL1uVtCyF1dKIorTbShJeqv", "secret": "string", "status": "online"}], "subscription": {"features": ["Android - Dolby Vision"], "active": true, "subscribedAt": "2021-04-12T18:21:12Z", "status": "Inactive", "paymentService": "string", "plan": "string"}, "subscriptionDescription": "string", "subscriptions": [{"features": ["Android - Dolby Vision"], "active": true, "subscribedAt": "2021-04-12T18:21:12Z", "status": "Inactive", "paymentService": "string", "plan": "string"}], "thumb": "https://plex.tv/users/a4f43c1ebfde43a5/avatar?c=8372075101", "title": "UsernameTitle", "twoFactorEnabled": false, "username": "Username", "uuid": "dae343c1f45beb4f"}
+        "401":
+          application/json: {"errors": []}
+  post-users-sign-in-data:
+    speakeasy-default-post-users-sign-in-data:
+      requestBody:
+        application/x-www-form-urlencoded: {"login": "username@email.com", "password": "password123"}
+      responses:
+        "201":
+          application/json: {"adsConsent": true, "adsConsentReminderAt": "2019-08-24T14:15:22Z", "adsConsentSetAt": "2019-08-24T14:15:22Z", "anonymous": false, "authToken": "CxoUzBTSV5hsxjTpFKaf", "backupCodesCreated": false, "confirmed": false, "country": "US", "email": "username@email.com", "emailOnlyAuth": false, "experimentalFeatures": false, "friendlyName": "friendlyUsername", "entitlements": [], "guest": false, "hasPassword": true, "home": false, "homeAdmin": false, "homeSize": 1, "id": 13692262, "joinedAt": 1721154902, "locale": null, "mailingListActive": false, "mailingListStatus": "unsubscribed", "maxHomeSize": 15, "pin": "string", "profile": {"autoSelectAudio": true, "defaultAudioLanguage": "ja", "defaultSubtitleLanguage": "en", "autoSelectSubtitle": "1", "defaultSubtitleAccessibility": "1", "defaultSubtitleForced": "0", "watchedIndicator": "1", "mediaReviewsVisibility": 0}, "protected": false, "rememberExpiresAt": 1722364046, "restricted": false, "roles": ["string"], "scrobbleTypes": "", "services": [{"identifier": "metadata-dev", "endpoint": "https://epg.provider.plex.tv", "token": "DjoMtqFAGRL1uVtCyF1dKIorTbShJeqv", "secret": "string", "status": "online"}], "subscription": {"features": ["Android - Dolby Vision"], "active": true, "subscribedAt": "2021-04-12T18:21:12Z", "status": "Inactive", "paymentService": "string", "plan": "string"}, "subscriptionDescription": "string", "subscriptions": [{"features": ["Android - Dolby Vision"], "active": true, "subscribedAt": "2021-04-12T18:21:12Z", "status": "Inactive", "paymentService": "string", "plan": "string"}], "thumb": "https://plex.tv/users/a4f43c1ebfde43a5/avatar?c=8372075101", "title": "UsernameTitle", "twoFactorEnabled": false, "username": "Username", "uuid": "dae343c1f45beb4f", "pastSubscriptions": [{"id": "string", "mode": "string", "renewsAt": "string", "endsAt": "1556281940", "canceled": "0", "gracePeriod": "0", "onHold": "0", "canReactivate": "0", "canUpgrade": "0", "canDowngrade": "0", "canConvert": "0", "type": "plexpass", "transfer": "string", "state": "ended", "billing": {"paymentMethodId": 569045}}], "trials": [{}]}
+        "401":
+          application/json: {"errors": []}
+  getStatistics:
+    "":
+      parameters:
+        query:
+          Timespan: 4
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 5497, "Device": [], "Account": [], "StatisticsMedia": []}}
+        "401":
+          application/json: {"errors": []}
+  getResourcesStatistics:
+    "":
+      parameters:
+        query:
+          Timespan: 4
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 5497, "StatisticsResources": []}}
+        "401":
+          application/json: {"errors": []}
+  getBandwidthStatistics:
+    "":
+      parameters:
+        query:
+          Timespan: 4
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 5497, "Device": [], "Account": [], "StatisticsBandwidth": []}}
+        "401":
+          application/json: {"errors": []}
+  getSessions:
+    speakeasy-default-get-sessions:
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 1, "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+  getSessionHistory:
+    viewed-at-descending:
+      parameters:
+        query:
+          sort: "viewedAt:desc"
+          accountId: 1
+          librarySectionID: 12
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 10855, "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+    viewed-at-ascending:
+      parameters:
+        query:
+          sort: "viewedAt:asc"
+          accountId: 1
+          librarySectionID: 12
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 10855, "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+    rating-descending:
+      parameters:
+        query:
+          sort: "rating:desc"
+          accountId: 1
+          librarySectionID: 12
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 10855, "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+    rating-ascending:
+      parameters:
+        query:
+          sort: "rating:asc"
+          accountId: 1
+          librarySectionID: 12
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 10855, "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+    "":
+      parameters:
+        query:
+          accountId: 1
+          librarySectionID: 12
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 10855, "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+    ViewedAt:
+      parameters:
+        query:
+          accountId: 1
+          filter: viewedAt>=1704862818
+          librarySectionID: 12
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 10855, "Metadata": []}}
+        "401":
+          application/json: {"errors": []}
+  getTranscodeSessions:
+    speakeasy-default-get-transcode-sessions:
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 1, "TranscodeSession": [{"key": "vv3i2q2lax92qlzul1hbd4bx", "throttled": false, "complete": false, "progress": 1.7999999523162842, "size": -22, "speed": 25.100000381469727, "error": false, "duration": 1445695, "remaining": 53, "context": "streaming", "sourceVideoCodec": "h264", "sourceAudioCodec": "aac", "videoDecision": "transcode", "audioDecision": "transcode", "subtitleDecision": "burn", "protocol": "http", "container": "mkv", "videoCodec": "h264", "audioCodec": "opus", "audioChannels": 1, "transcodeHwRequested": true, "timeStamp": 1705895805.4919229, "maxOffsetAvailable": 29.53, "minOffsetAvailable": 3.003000020980835}]}}
+        "401":
+          application/json: {"errors": []}
+  stopTranscodeSession:
+    speakeasy-default-stop-transcode-session:
+      parameters:
+        path:
+          sessionKey: "zz7llzqlx8w9vnrsbnwhbmep"
+      responses:
+        "401":
+          application/json: {"errors": []}
+  getUpdateStatus:
+    speakeasy-default-get-update-status:
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 1, "canInstall": false, "checkedAt": 1705801232, "downloadURL": "https://plex.tv/downloads/latest/5?channel=8&build=linux-x86_64&distro=redhat&X-Plex-Token=xxxxxxxxxxxxxxxxxxxx", "status": 0, "Release": [{"key": "https://plex.tv/updater/releases/5136", "version": "1.40.0.7775-456fbaf97", "added": "(PLEASE NOTE) This version makes changes to the database which will make it compatible only with server versions 1.31.2 or higher (released March 14). You will not be able to use your database on Plex Media Server versions lower than this after this update. Please also be patient when updating to this version if you have a very large database and allow the upgrade process to finish.\n(Collections) Items added to a collection from the item context menu will now lock the collection field on the items (#12793)\n(Music) Store track genres and add filtering options (#14653)\n(Music) Support ID3v2.4 null-separated tags for genres and release type (#14653)\n(View History) No longer create a view history entry for items marked as played (#10888)\n(Web) Updated to 4.118.0", "fixed": "(Agents) Changing a 'Other Videos' type library to the modern movie agent would fail (#14483)\n(Agents) It is possible that agents are not initialised during startup on rare occasions (#14654)\n(Agents) Remove the legacy OpenSubtitles agent which is no longer supported upstream (#14667)\n(Collection) Server could become unresponsive when collection membership changes (#14612)\n(DVR) Previously watched recordings could be deleted without being watched again (#13779)\n(Libraries) When performing fix match on items from certain music libraries the language would default to Arabic (#14501)\n(Library) The Content Rating not equal to None filter does not work (#14620)\n(Search) Album search results could contain all the album's tracks too (#14486)\n(Subtitles) In some circumstances, sidecar subtitles can show up for media when they're no longer available (#14674)\n(Transcoder) HW encoding would fail on devices with no rate control (#14222)\n(Transcoder) Software transcoding on Ubuntu could cause unexpected behavior (#14605)", "downloadURL": "https://plex.tv/downloads/latest/5?channel=8&build=linux-x86_64&distro=redhat&X-Plex-Token=xxxxxxxxxxxxxxxxxxxx", "state": "notify"}]}}
+        "401":
+          application/json: {"errors": []}
+  checkForUpdates:
+    "":
+      parameters:
+        query:
+          download: 1
+      responses:
+        "401":
+          application/json: {"errors": []}
+  applyUpdates:
+    "":
+      parameters:
+        query:
+          tonight: 1
+          skip: 1
+      responses:
+        "401":
+          application/json: {"errors": []}

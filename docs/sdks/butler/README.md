@@ -23,19 +23,10 @@ Returns a list of butler tasks
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetButlerTasksResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -43,7 +34,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetButlerTasksResponse res = sdk.butler().getButlerTasks()
@@ -52,10 +43,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetButlerTasksResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetButlerTasksResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -67,16 +58,17 @@ public class Application {
 }
 ```
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetButlerTasksResponse](../../models/operations/GetButlerTasksResponse.md)**
+**[GetButlerTasksResponse](../../models/operations/GetButlerTasksResponse.md)**
+
 ### Errors
 
 | Error Object                             | Status Code                              | Content Type                             |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | models/errors/GetButlerTasksResponseBody | 401                                      | application/json                         |
 | models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
+
 
 ## startAllTasks
 
@@ -92,19 +84,10 @@ This endpoint will attempt to start all Butler tasks that are enabled in the set
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.StartAllTasksResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -112,17 +95,17 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             StartAllTasksResponse res = sdk.butler().startAllTasks()
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.StartAllTasksResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.StartAllTasksResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -134,16 +117,17 @@ public class Application {
 }
 ```
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.StartAllTasksResponse](../../models/operations/StartAllTasksResponse.md)**
+**[StartAllTasksResponse](../../models/operations/StartAllTasksResponse.md)**
+
 ### Errors
 
 | Error Object                            | Status Code                             | Content Type                            |
 | --------------------------------------- | --------------------------------------- | --------------------------------------- |
 | models/errors/StartAllTasksResponseBody | 401                                     | application/json                        |
 | models/errors/SDKError                  | 4xx-5xx                                 | \*\/*                                   |
+
 
 ## stopAllTasks
 
@@ -155,19 +139,10 @@ This endpoint will stop all currently running tasks and remove any scheduled tas
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.StopAllTasksResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -175,17 +150,17 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             StopAllTasksResponse res = sdk.butler().stopAllTasks()
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.StopAllTasksResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.StopAllTasksResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -197,16 +172,17 @@ public class Application {
 }
 ```
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.StopAllTasksResponse](../../models/operations/StopAllTasksResponse.md)**
+**[StopAllTasksResponse](../../models/operations/StopAllTasksResponse.md)**
+
 ### Errors
 
 | Error Object                           | Status Code                            | Content Type                           |
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
 | models/errors/StopAllTasksResponseBody | 401                                    | application/json                       |
 | models/errors/SDKError                 | 4xx-5xx                                | \*\/*                                  |
+
 
 ## startTask
 
@@ -222,19 +198,11 @@ This endpoint will attempt to start a single Butler task that is enabled in the 
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.StartTaskResponse;
+import dev.plexapi.sdk.models.operations.TaskName;
+import java.lang.Exception;
 
 public class Application {
 
@@ -242,7 +210,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             StartTaskResponse res = sdk.butler().startTask()
@@ -250,10 +218,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.StartTaskResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.StartTaskResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -267,20 +235,21 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
-| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `taskName`                                                                                  | [lukehagar.plexapi.plexapi.models.operations.TaskName](../../models/operations/TaskName.md) | :heavy_check_mark:                                                                          | the name of the task to be started.                                                         |
-
+| Parameter                                       | Type                                            | Required                                        | Description                                     |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| `taskName`                                      | [TaskName](../../models/operations/TaskName.md) | :heavy_check_mark:                              | the name of the task to be started.             |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.StartTaskResponse](../../models/operations/StartTaskResponse.md)**
+**[StartTaskResponse](../../models/operations/StartTaskResponse.md)**
+
 ### Errors
 
 | Error Object                        | Status Code                         | Content Type                        |
 | ----------------------------------- | ----------------------------------- | ----------------------------------- |
 | models/errors/StartTaskResponseBody | 401                                 | application/json                    |
 | models/errors/SDKError              | 4xx-5xx                             | \*\/*                               |
+
 
 ## stopTask
 
@@ -292,19 +261,11 @@ This endpoint will stop a currently running task by name, or remove it from the 
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.PathParamTaskName;
+import dev.plexapi.sdk.models.operations.StopTaskResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -312,7 +273,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             StopTaskResponse res = sdk.butler().stopTask()
@@ -320,10 +281,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.StopTaskResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.StopTaskResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -337,14 +298,14 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
-| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `taskName`                                                                                                    | [lukehagar.plexapi.plexapi.models.operations.PathParamTaskName](../../models/operations/PathParamTaskName.md) | :heavy_check_mark:                                                                                            | The name of the task to be started.                                                                           |
-
+| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `taskName`                                                        | [PathParamTaskName](../../models/operations/PathParamTaskName.md) | :heavy_check_mark:                                                | The name of the task to be started.                               |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.StopTaskResponse](../../models/operations/StopTaskResponse.md)**
+**[StopTaskResponse](../../models/operations/StopTaskResponse.md)**
+
 ### Errors
 
 | Error Object                       | Status Code                        | Content Type                       |

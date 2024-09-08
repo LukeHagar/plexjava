@@ -8,9 +8,12 @@
 // Additions to the plugins block can be made by setting the `additionalPlugins` property (an array 
 // of string where each string value is an additional line in the block) in gen.yaml.
 ////////////////////////////////////////////////////////////////////////////////////////////
+
 plugins {
     // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
+    id 'maven-publish'
+    id 'signing'
 }
 
 compileJava.options.encoding = "UTF-8"
@@ -29,15 +32,99 @@ java {
     withJavadocJar()
 }
 
+model {
+    tasks.generatePomFileForMavenPublication {
+        destination = file("$buildDir/pom.xml")
+    }
+}
+
+jar {
+    dependsOn(":generatePomFileForMavenPublication")
+
+    into("META-INF/maven/dev.plexapi/plexapi") {
+        from("$buildDir/pom.xml")
+    }
+}
+
+javadoc {
+    options.encoding = "UTF-8"
+
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+    options.addStringOption('Xdoclint:none', '-quiet')
+}
+
 tasks.withType(Javadoc) {
   failOnError false
   options.addStringOption('Xdoclint:none', '-quiet')
 }
 
+group = "dev.plexapi"
+version = "0.2.1"
+
+sourcesJar {
+    archiveBaseName = "plexapi"
+}
+
+javadocJar {
+    archiveBaseName = "plexapi"
+}
+
+
+publishing {
+
+    publications {
+        maven(MavenPublication) {
+            groupId = 'dev.plexapi'
+            artifactId = 'plexapi'
+            version = '0.2.1'
+
+            from components.java
+
+            pom {
+                name = 'plexapi Java SDK'
+                description = 'SDK enabling Java developers to easily integrate with the plexapi API.'
+                url = 'https://github.com/LukeHagar/plexjava'
+                scm {
+                    url = 'github.com/LukeHagar/plexjava'
+                    connection = 'scm:git:ssh://git@github.com/LukeHagar/plexjava.git'
+                }
+                licenses {
+                    license {
+                        name = 'The MIT License (MIT)'
+                        url = 'https://mit-license.org/'
+                    }
+                }
+                developers {
+                    developer {
+                        name = 'plexapi'
+                        organization = 'plexapi'
+                        email = 'lukeslakemail@gmail.com'
+                    }
+                }
+                organization {
+                    name = 'plexapi'
+                    url = 'plexapi.dev'
+                }
+            }
+        }
+    }
+}
+
+if (!project.hasProperty('skip.signing')) {
+    signing {
+        def signingKey = findProperty("signingKey")
+        def signingPassphrase = findProperty("signingPassphrase")
+        useInMemoryPgpKeys(signingKey, signingPassphrase)
+        sign publishing.publications.maven
+    }
+}
+
 dependencies {
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.0'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.0'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.17.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.17.2'
     implementation 'org.openapitools:jackson-databind-nullable:0.2.6'
     implementation 'org.apache.httpcomponents:httpclient:4.5.14'
     implementation 'org.apache.httpcomponents:httpmime:4.5.14'

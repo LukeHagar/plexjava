@@ -3,13 +3,17 @@ speakeasyVersion: latest
 sources:
     my-source:
         inputs:
-            - location: https://raw.githubusercontent.com/LukeHagar/plex-api-spec/main/plex-media-server-spec-dereferenced.yaml
-        registry:
-            location: registry.speakeasyapi.dev/lukehagar/lukehagar/my-source
+            - location: registry.speakeasyapi.dev/lukehagar/lukehagar/plex-api:main
 targets:
     plexjava:
         target: java
         source: my-source
+        publish:
+            java:
+                ossrhUsername: J4dlHj0l
+                ossrhPassword: $ossrh_password
+                gpgSecretKey: $java_gpg_secret_key
+                gpgPassPhrase: $java_gpg_passphrase
         codeSamples:
             output: codeSamples.yaml
             registry:

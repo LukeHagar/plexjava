@@ -22,19 +22,10 @@ Querying status of updates
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetUpdateStatusResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -42,7 +33,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetUpdateStatusResponse res = sdk.updater().getUpdateStatus()
@@ -51,10 +42,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetUpdateStatusResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetUpdateStatusResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -66,16 +57,17 @@ public class Application {
 }
 ```
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetUpdateStatusResponse](../../models/operations/GetUpdateStatusResponse.md)**
+**[GetUpdateStatusResponse](../../models/operations/GetUpdateStatusResponse.md)**
+
 ### Errors
 
 | Error Object                              | Status Code                               | Content Type                              |
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
 | models/errors/GetUpdateStatusResponseBody | 401                                       | application/json                          |
 | models/errors/SDKError                    | 4xx-5xx                                   | \*\/*                                     |
+
 
 ## checkForUpdates
 
@@ -86,19 +78,11 @@ Checking for updates
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.CheckForUpdatesResponse;
+import dev.plexapi.sdk.models.operations.Download;
+import java.lang.Exception;
 
 public class Application {
 
@@ -106,7 +90,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             CheckForUpdatesResponse res = sdk.updater().checkForUpdates()
@@ -114,10 +98,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.CheckForUpdatesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.CheckForUpdatesResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -131,20 +115,21 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                       | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     | Example                                                                                                         |
-| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `download`                                                                                                      | [Optional<? extends lukehagar.plexapi.plexapi.models.operations.Download>](../../models/operations/Download.md) | :heavy_minus_sign:                                                                                              | Indicate that you want to start download any updates found.                                                     | 1                                                                                                               |
-
+| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 | Example                                                     |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `download`                                                  | [Optional<Download>](../../models/operations/Download.md)   | :heavy_minus_sign:                                          | Indicate that you want to start download any updates found. | 1                                                           |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.CheckForUpdatesResponse](../../models/operations/CheckForUpdatesResponse.md)**
+**[CheckForUpdatesResponse](../../models/operations/CheckForUpdatesResponse.md)**
+
 ### Errors
 
 | Error Object                              | Status Code                               | Content Type                              |
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
 | models/errors/CheckForUpdatesResponseBody | 401                                       | application/json                          |
 | models/errors/SDKError                    | 4xx-5xx                                   | \*\/*                                     |
+
 
 ## applyUpdates
 
@@ -156,19 +141,12 @@ Note that these two parameters are effectively mutually exclusive. The `tonight`
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.ApplyUpdatesResponse;
+import dev.plexapi.sdk.models.operations.Skip;
+import dev.plexapi.sdk.models.operations.Tonight;
+import java.lang.Exception;
 
 public class Application {
 
@@ -176,7 +154,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             ApplyUpdatesResponse res = sdk.updater().applyUpdates()
@@ -185,10 +163,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.ApplyUpdatesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.ApplyUpdatesResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -204,13 +182,13 @@ public class Application {
 
 | Parameter                                                                                                                                                | Type                                                                                                                                                     | Required                                                                                                                                                 | Description                                                                                                                                              | Example                                                                                                                                                  |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tonight`                                                                                                                                                | [Optional<? extends lukehagar.plexapi.plexapi.models.operations.Tonight>](../../models/operations/Tonight.md)                                            | :heavy_minus_sign:                                                                                                                                       | Indicate that you want the update to run during the next Butler execution. Omitting this or setting it to false indicates that the update should install | 1                                                                                                                                                        |
-| `skip`                                                                                                                                                   | [Optional<? extends lukehagar.plexapi.plexapi.models.operations.Skip>](../../models/operations/Skip.md)                                                  | :heavy_minus_sign:                                                                                                                                       | Indicate that the latest version should be marked as skipped. The <Release> entry for this version will have the `state` set to `skipped`.               | 1                                                                                                                                                        |
-
+| `tonight`                                                                                                                                                | [Optional<Tonight>](../../models/operations/Tonight.md)                                                                                                  | :heavy_minus_sign:                                                                                                                                       | Indicate that you want the update to run during the next Butler execution. Omitting this or setting it to false indicates that the update should install | 1                                                                                                                                                        |
+| `skip`                                                                                                                                                   | [Optional<Skip>](../../models/operations/Skip.md)                                                                                                        | :heavy_minus_sign:                                                                                                                                       | Indicate that the latest version should be marked as skipped. The [Release] entry for this version will have the `state` set to `skipped`.               | 1                                                                                                                                                        |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.ApplyUpdatesResponse](../../models/operations/ApplyUpdatesResponse.md)**
+**[ApplyUpdatesResponse](../../models/operations/ApplyUpdatesResponse.md)**
+
 ### Errors
 
 | Error Object                           | Status Code                            | Content Type                           |

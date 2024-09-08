@@ -1,0 +1,10 @@
+# Feature
+
+
+## Fields
+
+| Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `key`                                                                                     | *Optional<String>*                                                                        | :heavy_minus_sign:                                                                        | N/A                                                                                       |
+| `type`                                                                                    | *Optional<String>*                                                                        | :heavy_minus_sign:                                                                        | N/A                                                                                       |
+| `directory`                                                                               | List<[GetMediaProvidersDirectory](../../models/operations/GetMediaProvidersDirectory.md)> | :heavy_minus_sign:                                                                        | N/A                                                                                       |

@@ -22,19 +22,11 @@ This endpoint will write a single-line log message, including a level and source
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.Level;
+import dev.plexapi.sdk.models.operations.LogLineResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -42,7 +34,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             LogLineResponse res = sdk.log().logLine()
@@ -52,10 +44,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.LogLineResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.LogLineResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -71,20 +63,21 @@ public class Application {
 
 | Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   | Example                                                                                                       |
 | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `level`                                                                                                       | [lukehagar.plexapi.plexapi.models.operations.Level](../../models/operations/Level.md)                         | :heavy_check_mark:                                                                                            | An integer log level to write to the PMS log with.  <br/>0: Error  <br/>1: Warning  <br/>2: Info  <br/>3: Debug  <br/>4: Verbose<br/> |                                                                                                               |
+| `level`                                                                                                       | [Level](../../models/operations/Level.md)                                                                     | :heavy_check_mark:                                                                                            | An integer log level to write to the PMS log with.  <br/>0: Error  <br/>1: Warning  <br/>2: Info  <br/>3: Debug  <br/>4: Verbose<br/> |                                                                                                               |
 | `message`                                                                                                     | *String*                                                                                                      | :heavy_check_mark:                                                                                            | The text of the message to write to the log.                                                                  | Test log message                                                                                              |
 | `source`                                                                                                      | *String*                                                                                                      | :heavy_check_mark:                                                                                            | a string indicating the source of the message.                                                                | Postman                                                                                                       |
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.LogLineResponse](../../models/operations/LogLineResponse.md)**
+**[LogLineResponse](../../models/operations/LogLineResponse.md)**
+
 ### Errors
 
 | Error Object                      | Status Code                       | Content Type                      |
 | --------------------------------- | --------------------------------- | --------------------------------- |
 | models/errors/LogLineResponseBody | 401                               | application/json                  |
 | models/errors/SDKError            | 4xx-5xx                           | \*\/*                             |
+
 
 ## logMultiLine
 
@@ -116,19 +109,11 @@ Ensure each parameter is properly URL-encoded to avoid interpretation issues.
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.LogMultiLineResponse;
+import java.lang.Exception;
+import java.lang.String;
 
 public class Application {
 
@@ -136,11 +121,10 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
-            String req = "level=4&message=Test%20message%201&source=postman
-level=3&message=Test%20message%202&source=postman
+            String req = "level=4&message=Test%20message%201&source=postman\nlevel=3&message=Test%20message%202&source=postman
 level=1&message=Test%20message%203&source=postman";
 
             LogMultiLineResponse res = sdk.log().logMultiLine()
@@ -148,10 +132,10 @@ level=1&message=Test%20message%203&source=postman";
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.LogMultiLineResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.LogMultiLineResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -169,16 +153,17 @@ level=1&message=Test%20message%203&source=postman";
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | `request`                                  | [String](../../models//.md)                | :heavy_check_mark:                         | The request object to use for the request. |
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.LogMultiLineResponse](../../models/operations/LogMultiLineResponse.md)**
+**[LogMultiLineResponse](../../models/operations/LogMultiLineResponse.md)**
+
 ### Errors
 
 | Error Object                           | Status Code                            | Content Type                           |
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
 | models/errors/LogMultiLineResponseBody | 401                                    | application/json                       |
 | models/errors/SDKError                 | 4xx-5xx                                | \*\/*                                  |
+
 
 ## enablePaperTrail
 
@@ -190,19 +175,10 @@ This endpoint will enable all Plex Media Serverlogs to be sent to the Papertrail
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.EnablePaperTrailResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -210,17 +186,17 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             EnablePaperTrailResponse res = sdk.log().enablePaperTrail()
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.EnablePaperTrailResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.EnablePaperTrailResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -232,10 +208,10 @@ public class Application {
 }
 ```
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.EnablePaperTrailResponse](../../models/operations/EnablePaperTrailResponse.md)**
+**[EnablePaperTrailResponse](../../models/operations/EnablePaperTrailResponse.md)**
+
 ### Errors
 
 | Error Object                               | Status Code                                | Content Type                               |

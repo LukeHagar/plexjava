@@ -33,19 +33,10 @@ This request is intended to be very fast, and called as the user types.
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.PerformSearchResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -53,20 +44,20 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             PerformSearchResponse res = sdk.search().performSearch()
-                .query("dylan")
-                .sectionId(1516.53d)
+                .query("arnold")
+                .sectionId(9372.7d)
                 .limit(5d)
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.PerformSearchResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.PerformSearchResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -83,19 +74,20 @@ public class Application {
 | Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           | Example                                                                               |
 | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | `query`                                                                               | *String*                                                                              | :heavy_check_mark:                                                                    | The query term                                                                        | arnold                                                                                |
-| `sectionId`                                                                           | *Optional<? extends Double>*                                                          | :heavy_minus_sign:                                                                    | This gives context to the search, and can result in re-ordering of search result hubs |                                                                                       |
-| `limit`                                                                               | *Optional<? extends Double>*                                                          | :heavy_minus_sign:                                                                    | The number of items to return per hub                                                 | 5                                                                                     |
-
+| `sectionId`                                                                           | *Optional<Double>*                                                                    | :heavy_minus_sign:                                                                    | This gives context to the search, and can result in re-ordering of search result hubs |                                                                                       |
+| `limit`                                                                               | *Optional<Double>*                                                                    | :heavy_minus_sign:                                                                    | The number of items to return per hub                                                 | 5                                                                                     |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.PerformSearchResponse](../../models/operations/PerformSearchResponse.md)**
+**[PerformSearchResponse](../../models/operations/PerformSearchResponse.md)**
+
 ### Errors
 
 | Error Object                            | Status Code                             | Content Type                            |
 | --------------------------------------- | --------------------------------------- | --------------------------------------- |
 | models/errors/PerformSearchResponseBody | 401                                     | application/json                        |
 | models/errors/SDKError                  | 4xx-5xx                                 | \*\/*                                   |
+
 
 ## performVoiceSearch
 
@@ -110,19 +102,10 @@ Results, as well as their containing per-type hubs, contain a `distance` attribu
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.PerformVoiceSearchResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -130,7 +113,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             PerformVoiceSearchResponse res = sdk.search().performVoiceSearch()
@@ -140,10 +123,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (lukehagar.plexapi.plexapi.models.errors.PerformVoiceSearchResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.PerformVoiceSearchResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -160,19 +143,20 @@ public class Application {
 | Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           | Example                                                                               |
 | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | `query`                                                                               | *String*                                                                              | :heavy_check_mark:                                                                    | The query term                                                                        | dead+poop                                                                             |
-| `sectionId`                                                                           | *Optional<? extends Double>*                                                          | :heavy_minus_sign:                                                                    | This gives context to the search, and can result in re-ordering of search result hubs |                                                                                       |
-| `limit`                                                                               | *Optional<? extends Double>*                                                          | :heavy_minus_sign:                                                                    | The number of items to return per hub                                                 | 5                                                                                     |
-
+| `sectionId`                                                                           | *Optional<Double>*                                                                    | :heavy_minus_sign:                                                                    | This gives context to the search, and can result in re-ordering of search result hubs |                                                                                       |
+| `limit`                                                                               | *Optional<Double>*                                                                    | :heavy_minus_sign:                                                                    | The number of items to return per hub                                                 | 5                                                                                     |
 
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.PerformVoiceSearchResponse](../../models/operations/PerformVoiceSearchResponse.md)**
+**[PerformVoiceSearchResponse](../../models/operations/PerformVoiceSearchResponse.md)**
+
 ### Errors
 
 | Error Object                                 | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
 | models/errors/PerformVoiceSearchResponseBody | 401                                          | application/json                             |
 | models/errors/SDKError                       | 4xx-5xx                                      | \*\/*                                        |
+
 
 ## getSearchResults
 
@@ -183,19 +167,10 @@ This will search the database for the string provided.
 ```java
 package hello.world;
 
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.Optional;
-import lukehagar.plexapi.plexapi.PlexAPI;
-import lukehagar.plexapi.plexapi.models.operations.*;
-import lukehagar.plexapi.plexapi.models.shared.*;
-import lukehagar.plexapi.plexapi.models.shared.Security;
-import lukehagar.plexapi.plexapi.utils.EventStream;
-import org.openapitools.jackson.nullable.JsonNullable;
-import static java.util.Map.entry;
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetSearchResultsResponse;
+import java.lang.Exception;
 
 public class Application {
 
@@ -203,7 +178,7 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("Postman")
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
             GetSearchResultsResponse res = sdk.search().getSearchResults()
@@ -213,10 +188,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (lukehagar.plexapi.plexapi.models.errors.GetSearchResultsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetSearchResultsResponseBody e) {
             // handle exception
             throw e;
-        } catch (lukehagar.plexapi.plexapi.models.errors.SDKError e) {
+        } catch (SDKError e) {
             // handle exception
             throw e;
         } catch (Exception e) {
@@ -234,10 +209,10 @@ public class Application {
 | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
 | `query`                        | *String*                       | :heavy_check_mark:             | The search query string to use | 110                            |
 
-
 ### Response
 
-**[lukehagar.plexapi.plexapi.models.operations.GetSearchResultsResponse](../../models/operations/GetSearchResultsResponse.md)**
+**[GetSearchResultsResponse](../../models/operations/GetSearchResultsResponse.md)**
+
 ### Errors
 
 | Error Object                               | Status Code                                | Content Type                               |
