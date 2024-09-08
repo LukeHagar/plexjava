@@ -61,7 +61,7 @@ tasks.withType(Javadoc) {
 }
 
 group = "dev.plexapi"
-version = "0.2.1"
+version = "0.2.2"
 
 sourcesJar {
     archiveBaseName = "plexapi"
@@ -73,12 +73,22 @@ javadocJar {
 
 
 publishing {
+    repositories {
+        maven {
+            name = "OSSRH"
+            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+          }
+        }
+    }
 
     publications {
         maven(MavenPublication) {
             groupId = 'dev.plexapi'
             artifactId = 'plexapi'
-            version = '0.2.1'
+            version = '0.2.2'
 
             from components.java
 

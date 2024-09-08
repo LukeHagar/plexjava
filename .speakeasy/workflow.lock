@@ -13,7 +13,7 @@ targets:
         sourceRevisionDigest: sha256:893baf00932f1b8e49b2e60af272be6a9a62934af6eb3a2f96dd9f2302ef69c5
         sourceBlobDigest: sha256:f689cdc9c740f4e5120422720722d2d256d56ceb62bc13370713ec1661a433df
         codeSamplesNamespace: code-samples-java-plexjava
-        codeSamplesRevisionDigest: sha256:27e9ddcf184b3b85da657c183692c4d490f1e6887e82efdcacdb3251b5595f16
+        codeSamplesRevisionDigest: sha256:433262f0bd16ad4072c5c38628e30fd0ee2dcfbdb3547262f0f4d328a6960ede
         outLocation: /home/luke/github/plexjava
 workflow:
     workflowVersion: 1.0.0
@@ -26,6 +26,12 @@ workflow:
         plexjava:
             target: java
             source: my-source
+            publish:
+                java:
+                    ossrhUsername: J4dlHj0l
+                    ossrhPassword: $ossrh_password
+                    gpgSecretKey: $java_gpg_secret_key
+                    gpgPassPhrase: $java_gpg_passphrase
             codeSamples:
                 output: codeSamples.yaml
                 registry:
