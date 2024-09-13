@@ -32,23 +32,29 @@ public class PostUsersSignInDataRequestBody {
     @SpeakeasyMetadata("form:name=rememberMe")
     private Optional<Boolean> rememberMe;
 
+    @SpeakeasyMetadata("form:name=verificationCode")
+    private Optional<String> verificationCode;
+
     @JsonCreator
     public PostUsersSignInDataRequestBody(
             String login,
             String password,
-            Optional<Boolean> rememberMe) {
+            Optional<Boolean> rememberMe,
+            Optional<String> verificationCode) {
         Utils.checkNotNull(login, "login");
         Utils.checkNotNull(password, "password");
         Utils.checkNotNull(rememberMe, "rememberMe");
+        Utils.checkNotNull(verificationCode, "verificationCode");
         this.login = login;
         this.password = password;
         this.rememberMe = rememberMe;
+        this.verificationCode = verificationCode;
     }
     
     public PostUsersSignInDataRequestBody(
             String login,
             String password) {
-        this(login, password, Optional.empty());
+        this(login, password, Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -64,6 +70,11 @@ public class PostUsersSignInDataRequestBody {
     @JsonIgnore
     public Optional<Boolean> rememberMe() {
         return rememberMe;
+    }
+
+    @JsonIgnore
+    public Optional<String> verificationCode() {
+        return verificationCode;
     }
 
     public final static Builder builder() {
@@ -93,6 +104,18 @@ public class PostUsersSignInDataRequestBody {
         this.rememberMe = rememberMe;
         return this;
     }
+
+    public PostUsersSignInDataRequestBody withVerificationCode(String verificationCode) {
+        Utils.checkNotNull(verificationCode, "verificationCode");
+        this.verificationCode = Optional.ofNullable(verificationCode);
+        return this;
+    }
+
+    public PostUsersSignInDataRequestBody withVerificationCode(Optional<String> verificationCode) {
+        Utils.checkNotNull(verificationCode, "verificationCode");
+        this.verificationCode = verificationCode;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -106,7 +129,8 @@ public class PostUsersSignInDataRequestBody {
         return 
             Objects.deepEquals(this.login, other.login) &&
             Objects.deepEquals(this.password, other.password) &&
-            Objects.deepEquals(this.rememberMe, other.rememberMe);
+            Objects.deepEquals(this.rememberMe, other.rememberMe) &&
+            Objects.deepEquals(this.verificationCode, other.verificationCode);
     }
     
     @Override
@@ -114,7 +138,8 @@ public class PostUsersSignInDataRequestBody {
         return Objects.hash(
             login,
             password,
-            rememberMe);
+            rememberMe,
+            verificationCode);
     }
     
     @Override
@@ -122,7 +147,8 @@ public class PostUsersSignInDataRequestBody {
         return Utils.toString(PostUsersSignInDataRequestBody.class,
                 "login", login,
                 "password", password,
-                "rememberMe", rememberMe);
+                "rememberMe", rememberMe,
+                "verificationCode", verificationCode);
     }
     
     public final static class Builder {
@@ -131,7 +157,9 @@ public class PostUsersSignInDataRequestBody {
  
         private String password;
  
-        private Optional<Boolean> rememberMe;  
+        private Optional<Boolean> rememberMe;
+ 
+        private Optional<String> verificationCode = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -160,6 +188,18 @@ public class PostUsersSignInDataRequestBody {
             this.rememberMe = rememberMe;
             return this;
         }
+
+        public Builder verificationCode(String verificationCode) {
+            Utils.checkNotNull(verificationCode, "verificationCode");
+            this.verificationCode = Optional.ofNullable(verificationCode);
+            return this;
+        }
+
+        public Builder verificationCode(Optional<String> verificationCode) {
+            Utils.checkNotNull(verificationCode, "verificationCode");
+            this.verificationCode = verificationCode;
+            return this;
+        }
         
         public PostUsersSignInDataRequestBody build() {
             if (rememberMe == null) {
@@ -167,7 +207,8 @@ public class PostUsersSignInDataRequestBody {
             }            return new PostUsersSignInDataRequestBody(
                 login,
                 password,
-                rememberMe);
+                rememberMe,
+                verificationCode);
         }
 
         private static final LazySingletonValue<Optional<Boolean>> _SINGLETON_VALUE_RememberMe =

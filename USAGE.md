@@ -22,7 +22,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {

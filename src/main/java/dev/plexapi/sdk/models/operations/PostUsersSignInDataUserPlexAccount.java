@@ -16,6 +16,7 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Deprecated;
 import java.lang.Integer;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -158,10 +159,10 @@ public class PostUsersSignInDataUserPlexAccount {
     private int id;
 
     /**
-     * Unix epoch datetime the account joined Plex
+     * Unix epoch datetime
      */
     @JsonProperty("joinedAt")
-    private int joinedAt;
+    private long joinedAt;
 
     /**
      * The account locale
@@ -209,10 +210,10 @@ public class PostUsersSignInDataUserPlexAccount {
     private Optional<Boolean> protected_;
 
     /**
-     * Unix epoch datetime the authtoken expires
+     * Unix epoch datetime
      */
     @JsonProperty("rememberExpiresAt")
-    private int rememberExpiresAt;
+    private long rememberExpiresAt;
 
     /**
      * If the account is a Plex Home managed user
@@ -311,7 +312,7 @@ public class PostUsersSignInDataUserPlexAccount {
             @JsonProperty("homeAdmin") Optional<Boolean> homeAdmin,
             @JsonProperty("homeSize") int homeSize,
             @JsonProperty("id") int id,
-            @JsonProperty("joinedAt") int joinedAt,
+            @JsonProperty("joinedAt") long joinedAt,
             @JsonProperty("locale") Optional<String> locale,
             @JsonProperty("mailingListActive") Optional<Boolean> mailingListActive,
             @JsonProperty("mailingListStatus") PostUsersSignInDataMailingListStatus mailingListStatus,
@@ -319,7 +320,7 @@ public class PostUsersSignInDataUserPlexAccount {
             @JsonProperty("pin") Optional<String> pin,
             @JsonProperty("profile") PostUsersSignInDataUserProfile profile,
             @JsonProperty("protected") Optional<Boolean> protected_,
-            @JsonProperty("rememberExpiresAt") int rememberExpiresAt,
+            @JsonProperty("rememberExpiresAt") long rememberExpiresAt,
             @JsonProperty("restricted") Optional<Boolean> restricted,
             @JsonProperty("roles") Optional<? extends List<String>> roles,
             @JsonProperty("scrobbleTypes") String scrobbleTypes,
@@ -428,11 +429,11 @@ public class PostUsersSignInDataUserPlexAccount {
             List<String> entitlements,
             int homeSize,
             int id,
-            int joinedAt,
+            long joinedAt,
             PostUsersSignInDataMailingListStatus mailingListStatus,
             int maxHomeSize,
             PostUsersSignInDataUserProfile profile,
-            int rememberExpiresAt,
+            long rememberExpiresAt,
             String scrobbleTypes,
             List<PostUsersSignInDataServices> services,
             PostUsersSignInDataSubscription subscription,
@@ -599,10 +600,10 @@ public class PostUsersSignInDataUserPlexAccount {
     }
 
     /**
-     * Unix epoch datetime the account joined Plex
+     * Unix epoch datetime
      */
     @JsonIgnore
-    public int joinedAt() {
+    public long joinedAt() {
         return joinedAt;
     }
 
@@ -662,10 +663,10 @@ public class PostUsersSignInDataUserPlexAccount {
     }
 
     /**
-     * Unix epoch datetime the authtoken expires
+     * Unix epoch datetime
      */
     @JsonIgnore
-    public int rememberExpiresAt() {
+    public long rememberExpiresAt() {
         return rememberExpiresAt;
     }
 
@@ -1054,9 +1055,9 @@ public class PostUsersSignInDataUserPlexAccount {
     }
 
     /**
-     * Unix epoch datetime the account joined Plex
+     * Unix epoch datetime
      */
-    public PostUsersSignInDataUserPlexAccount withJoinedAt(int joinedAt) {
+    public PostUsersSignInDataUserPlexAccount withJoinedAt(long joinedAt) {
         Utils.checkNotNull(joinedAt, "joinedAt");
         this.joinedAt = joinedAt;
         return this;
@@ -1163,9 +1164,9 @@ public class PostUsersSignInDataUserPlexAccount {
     }
 
     /**
-     * Unix epoch datetime the authtoken expires
+     * Unix epoch datetime
      */
-    public PostUsersSignInDataUserPlexAccount withRememberExpiresAt(int rememberExpiresAt) {
+    public PostUsersSignInDataUserPlexAccount withRememberExpiresAt(long rememberExpiresAt) {
         Utils.checkNotNull(rememberExpiresAt, "rememberExpiresAt");
         this.rememberExpiresAt = rememberExpiresAt;
         return this;
@@ -1509,7 +1510,7 @@ public class PostUsersSignInDataUserPlexAccount {
  
         private Integer id;
  
-        private Integer joinedAt;
+        private Long joinedAt;
  
         private Optional<String> locale = Optional.empty();
  
@@ -1526,7 +1527,7 @@ public class PostUsersSignInDataUserPlexAccount {
  
         private Optional<Boolean> protected_;
  
-        private Integer rememberExpiresAt;
+        private Long rememberExpiresAt;
  
         private Optional<Boolean> restricted;
  
@@ -1840,9 +1841,9 @@ public class PostUsersSignInDataUserPlexAccount {
         }
 
         /**
-         * Unix epoch datetime the account joined Plex
+         * Unix epoch datetime
          */
-        public Builder joinedAt(int joinedAt) {
+        public Builder joinedAt(long joinedAt) {
             Utils.checkNotNull(joinedAt, "joinedAt");
             this.joinedAt = joinedAt;
             return this;
@@ -1949,9 +1950,9 @@ public class PostUsersSignInDataUserPlexAccount {
         }
 
         /**
-         * Unix epoch datetime the authtoken expires
+         * Unix epoch datetime
          */
-        public Builder rememberExpiresAt(int rememberExpiresAt) {
+        public Builder rememberExpiresAt(long rememberExpiresAt) {
             Utils.checkNotNull(rememberExpiresAt, "rememberExpiresAt");
             this.rememberExpiresAt = rememberExpiresAt;
             return this;

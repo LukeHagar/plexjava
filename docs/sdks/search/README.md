@@ -54,7 +54,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.PerformSearchResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.PerformSearchBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.PerformSearchUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -85,7 +88,8 @@ public class Application {
 
 | Error Object                            | Status Code                             | Content Type                            |
 | --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| models/errors/PerformSearchResponseBody | 401                                     | application/json                        |
+| models/errors/PerformSearchBadRequest   | 400                                     | application/json                        |
+| models/errors/PerformSearchUnauthorized | 401                                     | application/json                        |
 | models/errors/SDKError                  | 4xx-5xx                                 | \*\/*                                   |
 
 
@@ -123,7 +127,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.PerformVoiceSearchResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.PerformVoiceSearchBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.PerformVoiceSearchUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -154,7 +161,8 @@ public class Application {
 
 | Error Object                                 | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/PerformVoiceSearchResponseBody | 401                                          | application/json                             |
+| models/errors/PerformVoiceSearchBadRequest   | 400                                          | application/json                             |
+| models/errors/PerformVoiceSearchUnauthorized | 401                                          | application/json                             |
 | models/errors/SDKError                       | 4xx-5xx                                      | \*\/*                                        |
 
 
@@ -188,7 +196,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetSearchResultsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetSearchResultsBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetSearchResultsUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -217,5 +228,6 @@ public class Application {
 
 | Error Object                               | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| models/errors/GetSearchResultsResponseBody | 401                                        | application/json                           |
+| models/errors/GetSearchResultsBadRequest   | 400                                        | application/json                           |
+| models/errors/GetSearchResultsUnauthorized | 401                                        | application/json                           |
 | models/errors/SDKError                     | 4xx-5xx                                    | \*\/*                                      |

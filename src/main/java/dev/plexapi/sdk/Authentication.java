@@ -5,22 +5,25 @@
 package dev.plexapi.sdk;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import dev.plexapi.sdk.models.errors.GetSourceConnectionInformationResponseBody;
-import dev.plexapi.sdk.models.errors.GetTransientTokenResponseBody;
-import dev.plexapi.sdk.models.errors.GetUserDetailsResponseBody;
-import dev.plexapi.sdk.models.errors.PostUsersSignInDataResponseBody;
+import dev.plexapi.sdk.models.errors.GetSourceConnectionInformationBadRequest;
+import dev.plexapi.sdk.models.errors.GetSourceConnectionInformationUnauthorized;
+import dev.plexapi.sdk.models.errors.GetTokenDetailsBadRequest;
+import dev.plexapi.sdk.models.errors.GetTokenDetailsUnauthorized;
+import dev.plexapi.sdk.models.errors.GetTransientTokenBadRequest;
+import dev.plexapi.sdk.models.errors.GetTransientTokenUnauthorized;
+import dev.plexapi.sdk.models.errors.PostUsersSignInDataBadRequest;
+import dev.plexapi.sdk.models.errors.PostUsersSignInDataUnauthorized;
 import dev.plexapi.sdk.models.errors.SDKError;
 import dev.plexapi.sdk.models.operations.GetSourceConnectionInformationRequest;
 import dev.plexapi.sdk.models.operations.GetSourceConnectionInformationRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetSourceConnectionInformationResponse;
+import dev.plexapi.sdk.models.operations.GetTokenDetailsRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetTokenDetailsResponse;
+import dev.plexapi.sdk.models.operations.GetTokenDetailsUserPlexAccount;
 import dev.plexapi.sdk.models.operations.GetTransientTokenQueryParamType;
 import dev.plexapi.sdk.models.operations.GetTransientTokenRequest;
 import dev.plexapi.sdk.models.operations.GetTransientTokenRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetTransientTokenResponse;
-import dev.plexapi.sdk.models.operations.GetUserDetailsRequest;
-import dev.plexapi.sdk.models.operations.GetUserDetailsRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetUserDetailsResponse;
-import dev.plexapi.sdk.models.operations.GetUserDetailsUserPlexAccount;
 import dev.plexapi.sdk.models.operations.PostUsersSignInDataRequest;
 import dev.plexapi.sdk.models.operations.PostUsersSignInDataRequestBody;
 import dev.plexapi.sdk.models.operations.PostUsersSignInDataRequestBuilder;
@@ -53,21 +56,21 @@ import java.util.Optional;
 public class Authentication implements
             MethodCallGetTransientToken,
             MethodCallGetSourceConnectionInformation,
-            MethodCallGetUserDetails,
+            MethodCallGetTokenDetails,
             MethodCallPostUsersSignInData {
     
     /**
-     * GET_USER_DETAILS_SERVERS contains the list of server urls available to the SDK.
+     * GET_TOKEN_DETAILS_SERVERS contains the list of server urls available to the SDK.
      */
-    public static final String[] GET_USER_DETAILS_SERVERS = {
-        "https://plex.tv/api/v2",
+    public static final String[] GET_TOKEN_DETAILS_SERVERS = {
+        "https://plex.tv/api/v2/",
     };
     
     /**
      * POST_USERS_SIGN_IN_DATA_SERVERS contains the list of server urls available to the SDK.
      */
     public static final String[] POST_USERS_SIGN_IN_DATA_SERVERS = {
-        "https://plex.tv/api/v2",
+        "https://plex.tv/api/v2/",
     };
 
     private final SDKConfiguration sdkConfiguration;
@@ -78,7 +81,7 @@ public class Authentication implements
 
 
     /**
-     * Get a Transient Token.
+     * Get a Transient Token
      * This endpoint provides the caller with a temporary token with the same access level as the caller's token. These tokens are valid for up to 48 hours and are destroyed if the server instance is restarted.
      * 
      * @return The call builder
@@ -88,7 +91,7 @@ public class Authentication implements
     }
 
     /**
-     * Get a Transient Token.
+     * Get a Transient Token
      * This endpoint provides the caller with a temporary token with the same access level as the caller's token. These tokens are valid for up to 48 hours and are destroyed if the server instance is restarted.
      * 
      * @param type `delegation` - This is the only supported `type` parameter.
@@ -182,19 +185,11 @@ public class Authentication implements
             // no content 
             return _res;
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "5XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetTransientTokenResponseBody _out = Utils.mapper().readValue(
+                GetTransientTokenBadRequest _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetTransientTokenResponseBody>() {});
+                    new TypeReference<GetTransientTokenBadRequest>() {});
                     _out.withRawResponse(Optional.ofNullable(_httpRes));
                 
                 throw _out;
@@ -205,6 +200,30 @@ public class Authentication implements
                     "Unexpected content-type received: " + _contentType, 
                     Utils.extractByteArrayFromBody(_httpRes));
             }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetTransientTokenUnauthorized _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetTransientTokenUnauthorized>() {});
+                    _out.withRawResponse(Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
         }
         throw new SDKError(
             _httpRes, 
@@ -319,19 +338,11 @@ public class Authentication implements
             // no content 
             return _res;
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "5XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetSourceConnectionInformationResponseBody _out = Utils.mapper().readValue(
+                GetSourceConnectionInformationBadRequest _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetSourceConnectionInformationResponseBody>() {});
+                    new TypeReference<GetSourceConnectionInformationBadRequest>() {});
                     _out.withRawResponse(Optional.ofNullable(_httpRes));
                 
                 throw _out;
@@ -343,6 +354,30 @@ public class Authentication implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetSourceConnectionInformationUnauthorized _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetSourceConnectionInformationUnauthorized>() {});
+                    _out.withRawResponse(Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
         throw new SDKError(
             _httpRes, 
             _httpRes.statusCode(), 
@@ -353,44 +388,34 @@ public class Authentication implements
 
 
     /**
-     * Get User Data By Token
+     * Get Token Details
      * Get the User data from the provided X-Plex-Token
      * @return The call builder
      */
-    public GetUserDetailsRequestBuilder getUserDetails() {
-        return new GetUserDetailsRequestBuilder(this);
+    public GetTokenDetailsRequestBuilder getTokenDetails() {
+        return new GetTokenDetailsRequestBuilder(this);
     }
 
     /**
-     * Get User Data By Token
+     * Get Token Details
      * Get the User data from the provided X-Plex-Token
-     * @param xPlexToken Plex Authentication Token
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetUserDetailsResponse getUserDetails(
-            String xPlexToken) throws Exception {
-        return getUserDetails(xPlexToken, Optional.empty());
+    public GetTokenDetailsResponse getTokenDetailsDirect() throws Exception {
+        return getTokenDetails(Optional.empty());
     }
     
     /**
-     * Get User Data By Token
+     * Get Token Details
      * Get the User data from the provided X-Plex-Token
-     * @param xPlexToken Plex Authentication Token
      * @param serverURL Overrides the server URL.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetUserDetailsResponse getUserDetails(
-            String xPlexToken,
+    public GetTokenDetailsResponse getTokenDetails(
             Optional<String> serverURL) throws Exception {
-        GetUserDetailsRequest request =
-            GetUserDetailsRequest
-                .builder()
-                .xPlexToken(xPlexToken)
-                .build();
-        
-        String _baseUrl = Utils.templateUrl(GET_USER_DETAILS_SERVERS[0], new HashMap<String, String>());
+        String _baseUrl = Utils.templateUrl(GET_TOKEN_DETAILS_SERVERS[0], new HashMap<String, String>());
         if (serverURL.isPresent() && !serverURL.get().isBlank()) {
             _baseUrl = serverURL.get();
         }
@@ -403,11 +428,6 @@ public class Authentication implements
             .addHeader("user-agent", 
                 this.sdkConfiguration.userAgent);
 
-        _req.addQueryParams(Utils.getQueryParams(
-                GetUserDetailsRequest.class,
-                request, 
-                this.sdkConfiguration.globals));
-
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
 
@@ -416,7 +436,7 @@ public class Authentication implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
-                      "getUserDetails", 
+                      "getTokenDetails", 
                       Optional.of(List.of()), 
                       sdkConfiguration.securitySource()),
                   _req.build());
@@ -427,7 +447,7 @@ public class Authentication implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
-                            "getUserDetails",
+                            "getTokenDetails",
                             Optional.of(List.of()),
                             sdkConfiguration.securitySource()),
                         Optional.of(_httpRes),
@@ -436,7 +456,7 @@ public class Authentication implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
-                            "getUserDetails",
+                            "getTokenDetails",
                             Optional.of(List.of()), 
                             sdkConfiguration.securitySource()),
                          _httpRes);
@@ -445,7 +465,7 @@ public class Authentication implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
-                            "getUserDetails",
+                            "getTokenDetails",
                             Optional.of(List.of()),
                             sdkConfiguration.securitySource()), 
                         Optional.empty(),
@@ -455,20 +475,20 @@ public class Authentication implements
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        GetUserDetailsResponse.Builder _resBuilder = 
-            GetUserDetailsResponse
+        GetTokenDetailsResponse.Builder _resBuilder = 
+            GetTokenDetailsResponse
                 .builder()
                 .contentType(_contentType)
                 .statusCode(_httpRes.statusCode())
                 .rawResponse(_httpRes);
 
-        GetUserDetailsResponse _res = _resBuilder.build();
+        GetTokenDetailsResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetUserDetailsUserPlexAccount _out = Utils.mapper().readValue(
+                GetTokenDetailsUserPlexAccount _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetUserDetailsUserPlexAccount>() {});
+                    new TypeReference<GetTokenDetailsUserPlexAccount>() {});
                 _res.withUserPlexAccount(Optional.ofNullable(_out));
                 return _res;
             } else {
@@ -479,19 +499,11 @@ public class Authentication implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "5XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetUserDetailsResponseBody _out = Utils.mapper().readValue(
+                GetTokenDetailsBadRequest _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetUserDetailsResponseBody>() {});
+                    new TypeReference<GetTokenDetailsBadRequest>() {});
                     _out.withRawResponse(Optional.ofNullable(_httpRes));
                 
                 throw _out;
@@ -503,6 +515,30 @@ public class Authentication implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetTokenDetailsUnauthorized _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetTokenDetailsUnauthorized>() {});
+                    _out.withRawResponse(Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
         throw new SDKError(
             _httpRes, 
             _httpRes.statusCode(), 
@@ -513,7 +549,7 @@ public class Authentication implements
 
 
     /**
-     * Get User SignIn Data
+     * Get User Sign In Data
      * Sign in user with username and password and return user data with Plex authentication token
      * @return The call builder
      */
@@ -522,7 +558,7 @@ public class Authentication implements
     }
 
     /**
-     * Get User SignIn Data
+     * Get User Sign In Data
      * Sign in user with username and password and return user data with Plex authentication token
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -532,7 +568,7 @@ public class Authentication implements
     }
     
     /**
-     * Get User SignIn Data
+     * Get User Sign In Data
      * Sign in user with username and password and return user data with Plex authentication token
      * @param xPlexClientIdentifier The unique identifier for the client application
     This is used to track the client application and its usage
@@ -650,19 +686,11 @@ public class Authentication implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "5XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                PostUsersSignInDataResponseBody _out = Utils.mapper().readValue(
+                PostUsersSignInDataBadRequest _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<PostUsersSignInDataResponseBody>() {});
+                    new TypeReference<PostUsersSignInDataBadRequest>() {});
                     _out.withRawResponse(Optional.ofNullable(_httpRes));
                 
                 throw _out;
@@ -673,6 +701,30 @@ public class Authentication implements
                     "Unexpected content-type received: " + _contentType, 
                     Utils.extractByteArrayFromBody(_httpRes));
             }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                PostUsersSignInDataUnauthorized _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<PostUsersSignInDataUnauthorized>() {});
+                    _out.withRawResponse(Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
         }
         throw new SDKError(
             _httpRes, 

@@ -49,7 +49,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetWatchListResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetWatchListBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetWatchListUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -79,5 +82,6 @@ public class Application {
 
 | Error Object                           | Status Code                            | Content Type                           |
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models/errors/GetWatchListResponseBody | 401                                    | application/json                       |
+| models/errors/GetWatchListBadRequest   | 400                                    | application/json                       |
+| models/errors/GetWatchListUnauthorized | 401                                    | application/json                       |
 | models/errors/SDKError                 | 4xx-5xx                                | \*\/*                                  |

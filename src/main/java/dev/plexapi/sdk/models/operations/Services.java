@@ -34,7 +34,7 @@ public class Services {
     private Optional<String> secret;
 
     @JsonProperty("status")
-    private GetUserDetailsStatus status;
+    private GetTokenDetailsStatus status;
 
     @JsonCreator
     public Services(
@@ -42,7 +42,7 @@ public class Services {
             @JsonProperty("endpoint") String endpoint,
             @JsonProperty("token") Optional<String> token,
             @JsonProperty("secret") Optional<String> secret,
-            @JsonProperty("status") GetUserDetailsStatus status) {
+            @JsonProperty("status") GetTokenDetailsStatus status) {
         Utils.checkNotNull(identifier, "identifier");
         Utils.checkNotNull(endpoint, "endpoint");
         Utils.checkNotNull(token, "token");
@@ -58,7 +58,7 @@ public class Services {
     public Services(
             String identifier,
             String endpoint,
-            GetUserDetailsStatus status) {
+            GetTokenDetailsStatus status) {
         this(identifier, endpoint, Optional.empty(), Optional.empty(), status);
     }
 
@@ -83,7 +83,7 @@ public class Services {
     }
 
     @JsonIgnore
-    public GetUserDetailsStatus status() {
+    public GetTokenDetailsStatus status() {
         return status;
     }
 
@@ -127,7 +127,7 @@ public class Services {
         return this;
     }
 
-    public Services withStatus(GetUserDetailsStatus status) {
+    public Services withStatus(GetTokenDetailsStatus status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
@@ -180,7 +180,7 @@ public class Services {
  
         private Optional<String> secret = Optional.empty();
  
-        private GetUserDetailsStatus status;  
+        private GetTokenDetailsStatus status;  
         
         private Builder() {
           // force use of static builder() method
@@ -222,7 +222,7 @@ public class Services {
             return this;
         }
 
-        public Builder status(GetUserDetailsStatus status) {
+        public Builder status(GetTokenDetailsStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;

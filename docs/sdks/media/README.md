@@ -42,7 +42,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.MarkPlayedResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.MarkPlayedBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.MarkPlayedUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -71,7 +74,8 @@ public class Application {
 
 | Error Object                         | Status Code                          | Content Type                         |
 | ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| models/errors/MarkPlayedResponseBody | 401                                  | application/json                     |
+| models/errors/MarkPlayedBadRequest   | 400                                  | application/json                     |
+| models/errors/MarkPlayedUnauthorized | 401                                  | application/json                     |
 | models/errors/SDKError               | 4xx-5xx                              | \*\/*                                |
 
 
@@ -103,7 +107,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.MarkUnplayedResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.MarkUnplayedBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.MarkUnplayedUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -132,7 +139,8 @@ public class Application {
 
 | Error Object                           | Status Code                            | Content Type                           |
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models/errors/MarkUnplayedResponseBody | 401                                    | application/json                       |
+| models/errors/MarkUnplayedBadRequest   | 400                                    | application/json                       |
+| models/errors/MarkUnplayedUnauthorized | 401                                    | application/json                       |
 | models/errors/SDKError                 | 4xx-5xx                                | \*\/*                                  |
 
 
@@ -167,7 +175,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.UpdatePlayProgressResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.UpdatePlayProgressBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.UpdatePlayProgressUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -198,7 +209,8 @@ public class Application {
 
 | Error Object                                 | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/UpdatePlayProgressResponseBody | 401                                          | application/json                             |
+| models/errors/UpdatePlayProgressBadRequest   | 400                                          | application/json                             |
+| models/errors/UpdatePlayProgressUnauthorized | 401                                          | application/json                             |
 | models/errors/SDKError                       | 4xx-5xx                                      | \*\/*                                        |
 
 
@@ -242,7 +254,10 @@ public class Application {
             if (res.responseStream().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetBannerImageResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetBannerImageBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetBannerImageUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -271,7 +286,8 @@ public class Application {
 
 | Error Object                             | Status Code                              | Content Type                             |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| models/errors/GetBannerImageResponseBody | 401                                      | application/json                         |
+| models/errors/GetBannerImageBadRequest   | 400                                      | application/json                         |
+| models/errors/GetBannerImageUnauthorized | 401                                      | application/json                         |
 | models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
 
 
@@ -315,7 +331,10 @@ public class Application {
             if (res.responseStream().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetThumbImageResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetThumbImageBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetThumbImageUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -344,5 +363,6 @@ public class Application {
 
 | Error Object                            | Status Code                             | Content Type                            |
 | --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| models/errors/GetThumbImageResponseBody | 401                                     | application/json                        |
+| models/errors/GetThumbImageBadRequest   | 400                                     | application/json                        |
+| models/errors/GetThumbImageUnauthorized | 401                                     | application/json                        |
 | models/errors/SDKError                  | 4xx-5xx                                 | \*\/*                                   |

@@ -46,7 +46,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetServerActivitiesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetServerActivitiesBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetServerActivitiesUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -69,7 +72,8 @@ public class Application {
 
 | Error Object                                  | Status Code                                   | Content Type                                  |
 | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
-| models/errors/GetServerActivitiesResponseBody | 401                                           | application/json                              |
+| models/errors/GetServerActivitiesBadRequest   | 400                                           | application/json                              |
+| models/errors/GetServerActivitiesUnauthorized | 401                                           | application/json                              |
 | models/errors/SDKError                        | 4xx-5xx                                       | \*\/*                                         |
 
 
@@ -101,7 +105,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.CancelServerActivitiesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.CancelServerActivitiesBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.CancelServerActivitiesUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -130,5 +137,6 @@ public class Application {
 
 | Error Object                                     | Status Code                                      | Content Type                                     |
 | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
-| models/errors/CancelServerActivitiesResponseBody | 401                                              | application/json                                 |
+| models/errors/CancelServerActivitiesBadRequest   | 400                                              | application/json                                 |
+| models/errors/CancelServerActivitiesUnauthorized | 401                                              | application/json                                 |
 | models/errors/SDKError                           | 4xx-5xx                                          | \*\/*                                            |

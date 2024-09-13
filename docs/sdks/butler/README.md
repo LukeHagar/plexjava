@@ -43,7 +43,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetButlerTasksResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetButlerTasksBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetButlerTasksUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -66,7 +69,8 @@ public class Application {
 
 | Error Object                             | Status Code                              | Content Type                             |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| models/errors/GetButlerTasksResponseBody | 401                                      | application/json                         |
+| models/errors/GetButlerTasksBadRequest   | 400                                      | application/json                         |
+| models/errors/GetButlerTasksUnauthorized | 401                                      | application/json                         |
 | models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
 
 
@@ -102,7 +106,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.StartAllTasksResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.StartAllTasksBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.StartAllTasksUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -125,7 +132,8 @@ public class Application {
 
 | Error Object                            | Status Code                             | Content Type                            |
 | --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| models/errors/StartAllTasksResponseBody | 401                                     | application/json                        |
+| models/errors/StartAllTasksBadRequest   | 400                                     | application/json                        |
+| models/errors/StartAllTasksUnauthorized | 401                                     | application/json                        |
 | models/errors/SDKError                  | 4xx-5xx                                 | \*\/*                                   |
 
 
@@ -157,7 +165,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.StopAllTasksResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.StopAllTasksBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.StopAllTasksUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -180,7 +191,8 @@ public class Application {
 
 | Error Object                           | Status Code                            | Content Type                           |
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models/errors/StopAllTasksResponseBody | 401                                    | application/json                       |
+| models/errors/StopAllTasksBadRequest   | 400                                    | application/json                       |
+| models/errors/StopAllTasksUnauthorized | 401                                    | application/json                       |
 | models/errors/SDKError                 | 4xx-5xx                                | \*\/*                                  |
 
 
@@ -218,7 +230,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.StartTaskResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.StartTaskBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.StartTaskUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -247,7 +262,8 @@ public class Application {
 
 | Error Object                        | Status Code                         | Content Type                        |
 | ----------------------------------- | ----------------------------------- | ----------------------------------- |
-| models/errors/StartTaskResponseBody | 401                                 | application/json                    |
+| models/errors/StartTaskBadRequest   | 400                                 | application/json                    |
+| models/errors/StartTaskUnauthorized | 401                                 | application/json                    |
 | models/errors/SDKError              | 4xx-5xx                             | \*\/*                               |
 
 
@@ -281,7 +297,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.StopTaskResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.StopTaskBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.StopTaskUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -310,5 +329,6 @@ public class Application {
 
 | Error Object                       | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| models/errors/StopTaskResponseBody | 401                                | application/json                   |
+| models/errors/StopTaskBadRequest   | 400                                | application/json                   |
+| models/errors/StopTaskUnauthorized | 401                                | application/json                   |
 | models/errors/SDKError             | 4xx-5xx                            | \*\/*                              |

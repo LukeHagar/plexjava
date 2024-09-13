@@ -5,13 +5,19 @@
 package dev.plexapi.sdk;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import dev.plexapi.sdk.models.errors.GetCompanionsDataResponseBody;
-import dev.plexapi.sdk.models.errors.GetGeoDataResponseBody;
-import dev.plexapi.sdk.models.errors.GetPinResponseBody;
-import dev.plexapi.sdk.models.errors.GetServerResourcesResponseBody;
-import dev.plexapi.sdk.models.errors.GetTokenByPinIdPlexResponseBody;
+import dev.plexapi.sdk.models.errors.GetCompanionsDataBadRequest;
+import dev.plexapi.sdk.models.errors.GetCompanionsDataUnauthorized;
+import dev.plexapi.sdk.models.errors.GetGeoDataBadRequest;
+import dev.plexapi.sdk.models.errors.GetGeoDataUnauthorized;
+import dev.plexapi.sdk.models.errors.GetHomeDataBadRequest;
+import dev.plexapi.sdk.models.errors.GetHomeDataUnauthorized;
+import dev.plexapi.sdk.models.errors.GetPinBadRequest;
+import dev.plexapi.sdk.models.errors.GetServerResourcesBadRequest;
+import dev.plexapi.sdk.models.errors.GetServerResourcesUnauthorized;
+import dev.plexapi.sdk.models.errors.GetTokenByPinIdBadRequest;
 import dev.plexapi.sdk.models.errors.GetTokenByPinIdResponseBody;
-import dev.plexapi.sdk.models.errors.GetUserFriendsResponseBody;
+import dev.plexapi.sdk.models.errors.GetUserFriendsBadRequest;
+import dev.plexapi.sdk.models.errors.GetUserFriendsUnauthorized;
 import dev.plexapi.sdk.models.errors.SDKError;
 import dev.plexapi.sdk.models.operations.Friend;
 import dev.plexapi.sdk.models.operations.GetCompanionsDataRequestBuilder;
@@ -35,6 +41,9 @@ import dev.plexapi.sdk.models.operations.GetTokenByPinIdRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetTokenByPinIdResponse;
 import dev.plexapi.sdk.models.operations.GetUserFriendsRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetUserFriendsResponse;
+import dev.plexapi.sdk.models.operations.IncludeHttps;
+import dev.plexapi.sdk.models.operations.IncludeIPv6;
+import dev.plexapi.sdk.models.operations.IncludeRelay;
 import dev.plexapi.sdk.models.operations.PlexDevice;
 import dev.plexapi.sdk.models.operations.ResponseBody;
 import dev.plexapi.sdk.models.operations.SDKMethodInterfaces.*;
@@ -71,42 +80,42 @@ public class Plex implements
      * GET_COMPANIONS_DATA_SERVERS contains the list of server urls available to the SDK.
      */
     public static final String[] GET_COMPANIONS_DATA_SERVERS = {
-        "https://plex.tv/api/v2",
+        "https://plex.tv/api/v2/",
     };
     
     /**
      * GET_USER_FRIENDS_SERVERS contains the list of server urls available to the SDK.
      */
     public static final String[] GET_USER_FRIENDS_SERVERS = {
-        "https://plex.tv/api/v2",
+        "https://plex.tv/api/v2/",
     };
     
     /**
      * GET_GEO_DATA_SERVERS contains the list of server urls available to the SDK.
      */
     public static final String[] GET_GEO_DATA_SERVERS = {
-        "https://plex.tv/api/v2",
+        "https://plex.tv/api/v2/",
     };
     
     /**
      * GET_SERVER_RESOURCES_SERVERS contains the list of server urls available to the SDK.
      */
     public static final String[] GET_SERVER_RESOURCES_SERVERS = {
-        "https://plex.tv/api/v2",
+        "https://plex.tv/api/v2/",
     };
     
     /**
      * GET_PIN_SERVERS contains the list of server urls available to the SDK.
      */
     public static final String[] GET_PIN_SERVERS = {
-        "https://plex.tv/api/v2",
+        "https://plex.tv/api/v2/",
     };
     
     /**
      * GET_TOKEN_BY_PIN_ID_SERVERS contains the list of server urls available to the SDK.
      */
     public static final String[] GET_TOKEN_BY_PIN_ID_SERVERS = {
-        "https://plex.tv/api/v2",
+        "https://plex.tv/api/v2/",
     };
 
     private final SDKConfiguration sdkConfiguration;
@@ -228,19 +237,11 @@ public class Plex implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "5XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetCompanionsDataResponseBody _out = Utils.mapper().readValue(
+                GetCompanionsDataBadRequest _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetCompanionsDataResponseBody>() {});
+                    new TypeReference<GetCompanionsDataBadRequest>() {});
                     _out.withRawResponse(Optional.ofNullable(_httpRes));
                 
                 throw _out;
@@ -251,6 +252,30 @@ public class Plex implements
                     "Unexpected content-type received: " + _contentType, 
                     Utils.extractByteArrayFromBody(_httpRes));
             }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetCompanionsDataUnauthorized _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetCompanionsDataUnauthorized>() {});
+                    _out.withRawResponse(Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
         }
         throw new SDKError(
             _httpRes, 
@@ -373,19 +398,11 @@ public class Plex implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "5XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetUserFriendsResponseBody _out = Utils.mapper().readValue(
+                GetUserFriendsBadRequest _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetUserFriendsResponseBody>() {});
+                    new TypeReference<GetUserFriendsBadRequest>() {});
                     _out.withRawResponse(Optional.ofNullable(_httpRes));
                 
                 throw _out;
@@ -396,6 +413,30 @@ public class Plex implements
                     "Unexpected content-type received: " + _contentType, 
                     Utils.extractByteArrayFromBody(_httpRes));
             }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetUserFriendsUnauthorized _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetUserFriendsUnauthorized>() {});
+                    _out.withRawResponse(Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
         }
         throw new SDKError(
             _httpRes, 
@@ -515,19 +556,11 @@ public class Plex implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "5XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetGeoDataResponseBody _out = Utils.mapper().readValue(
+                GetGeoDataBadRequest _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetGeoDataResponseBody>() {});
+                    new TypeReference<GetGeoDataBadRequest>() {});
                     _out.withRawResponse(Optional.ofNullable(_httpRes));
                 
                 throw _out;
@@ -538,6 +571,30 @@ public class Plex implements
                     "Unexpected content-type received: " + _contentType, 
                     Utils.extractByteArrayFromBody(_httpRes));
             }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetGeoDataUnauthorized _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetGeoDataUnauthorized>() {});
+                    _out.withRawResponse(Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
         }
         throw new SDKError(
             _httpRes, 
@@ -646,19 +703,11 @@ public class Plex implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "5XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                dev.plexapi.sdk.models.errors.GetHomeDataResponseBody _out = Utils.mapper().readValue(
+                GetHomeDataBadRequest _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<dev.plexapi.sdk.models.errors.GetHomeDataResponseBody>() {});
+                    new TypeReference<GetHomeDataBadRequest>() {});
                     _out.withRawResponse(Optional.ofNullable(_httpRes));
                 
                 throw _out;
@@ -669,6 +718,30 @@ public class Plex implements
                     "Unexpected content-type received: " + _contentType, 
                     Utils.extractByteArrayFromBody(_httpRes));
             }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetHomeDataUnauthorized _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetHomeDataUnauthorized>() {});
+                    _out.withRawResponse(Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
         }
         throw new SDKError(
             _httpRes, 
@@ -691,26 +764,44 @@ public class Plex implements
     /**
      * Get Server Resources
      * Get Plex server access tokens and server connections
-     * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetServerResourcesResponse getServerResources(
-            GetServerResourcesRequest request) throws Exception {
-        return getServerResources(request, Optional.empty());
+    public GetServerResourcesResponse getServerResourcesDirect() throws Exception {
+        return getServerResources(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
     
     /**
      * Get Server Resources
      * Get Plex server access tokens and server connections
-     * @param request The request object containing all of the parameters for the API call.
+     * @param xPlexClientIdentifier The unique identifier for the client application
+    This is used to track the client application and its usage
+    (UUID, serial number, or other number unique per device)
+
+     * @param includeHttps Include Https entries in the results
+     * @param includeRelay Include Relay addresses in the results 
+    E.g: https://10-0-0-25.bbf8e10c7fa20447cacee74cd9914cde.plex.direct:32400
+
+     * @param includeIPv6 Include IPv6 entries in the results
      * @param serverURL Overrides the server URL.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetServerResourcesResponse getServerResources(
-            GetServerResourcesRequest request,
+            Optional<String> xPlexClientIdentifier,
+            Optional<? extends IncludeHttps> includeHttps,
+            Optional<? extends IncludeRelay> includeRelay,
+            Optional<? extends IncludeIPv6> includeIPv6,
             Optional<String> serverURL) throws Exception {
+        GetServerResourcesRequest request =
+            GetServerResourcesRequest
+                .builder()
+                .xPlexClientIdentifier(xPlexClientIdentifier)
+                .includeHttps(includeHttps)
+                .includeRelay(includeRelay)
+                .includeIPv6(includeIPv6)
+                .build();
+        
         String _baseUrl = Utils.templateUrl(GET_SERVER_RESOURCES_SERVERS[0], new HashMap<String, String>());
         if (serverURL.isPresent() && !serverURL.get().isBlank()) {
             _baseUrl = serverURL.get();
@@ -800,19 +891,11 @@ public class Plex implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "5XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetServerResourcesResponseBody _out = Utils.mapper().readValue(
+                GetServerResourcesBadRequest _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetServerResourcesResponseBody>() {});
+                    new TypeReference<GetServerResourcesBadRequest>() {});
                     _out.withRawResponse(Optional.ofNullable(_httpRes));
                 
                 throw _out;
@@ -823,6 +906,30 @@ public class Plex implements
                     "Unexpected content-type received: " + _contentType, 
                     Utils.extractByteArrayFromBody(_httpRes));
             }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetServerResourcesUnauthorized _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetServerResourcesUnauthorized>() {});
+                    _out.withRawResponse(Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
         }
         throw new SDKError(
             _httpRes, 
@@ -969,9 +1076,9 @@ public class Plex implements
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetPinResponseBody _out = Utils.mapper().readValue(
+                GetPinBadRequest _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetPinResponseBody>() {});
+                    new TypeReference<GetPinBadRequest>() {});
                     _out.withRawResponse(Optional.ofNullable(_httpRes));
                 
                 throw _out;
@@ -1134,9 +1241,9 @@ public class Plex implements
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetTokenByPinIdResponseBody _out = Utils.mapper().readValue(
+                GetTokenByPinIdBadRequest _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetTokenByPinIdResponseBody>() {});
+                    new TypeReference<GetTokenByPinIdBadRequest>() {});
                     _out.withRawResponse(Optional.ofNullable(_httpRes));
                 
                 throw _out;
@@ -1150,9 +1257,9 @@ public class Plex implements
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "404")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetTokenByPinIdPlexResponseBody _out = Utils.mapper().readValue(
+                GetTokenByPinIdResponseBody _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetTokenByPinIdPlexResponseBody>() {});
+                    new TypeReference<GetTokenByPinIdResponseBody>() {});
                     _out.withRawResponse(Optional.ofNullable(_httpRes));
                 
                 throw _out;

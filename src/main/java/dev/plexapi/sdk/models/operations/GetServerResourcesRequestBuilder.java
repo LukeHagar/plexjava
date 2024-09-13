@@ -4,23 +4,79 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.String;
 import java.util.Optional;
 
 public class GetServerResourcesRequestBuilder {
 
-    private GetServerResourcesRequest request;
+    private Optional<String> xPlexClientIdentifier = Optional.empty();
+    private Optional<? extends IncludeHttps> includeHttps = Utils.readDefaultOrConstValue(
+                            "includeHttps",
+                            "0",
+                            new TypeReference<Optional<? extends IncludeHttps>>() {});
+    private Optional<? extends IncludeRelay> includeRelay = Utils.readDefaultOrConstValue(
+                            "includeRelay",
+                            "0",
+                            new TypeReference<Optional<? extends IncludeRelay>>() {});
+    private Optional<? extends IncludeIPv6> includeIPv6 = Utils.readDefaultOrConstValue(
+                            "includeIPv6",
+                            "0",
+                            new TypeReference<Optional<? extends IncludeIPv6>>() {});
     private Optional<String> serverURL = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetServerResources sdk;
 
     public GetServerResourcesRequestBuilder(SDKMethodInterfaces.MethodCallGetServerResources sdk) {
         this.sdk = sdk;
     }
+                
+    public GetServerResourcesRequestBuilder xPlexClientIdentifier(java.lang.String xPlexClientIdentifier) {
+        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
+        this.xPlexClientIdentifier = Optional.of(xPlexClientIdentifier);
+        return this;
+    }
 
-    public GetServerResourcesRequestBuilder request(dev.plexapi.sdk.models.operations.GetServerResourcesRequest request) {
-        Utils.checkNotNull(request, "request");
-        this.request = request;
+    public GetServerResourcesRequestBuilder xPlexClientIdentifier(java.util.Optional<java.lang.String> xPlexClientIdentifier) {
+        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
+        this.xPlexClientIdentifier = xPlexClientIdentifier;
+        return this;
+    }
+                
+    public GetServerResourcesRequestBuilder includeHttps(dev.plexapi.sdk.models.operations.IncludeHttps includeHttps) {
+        Utils.checkNotNull(includeHttps, "includeHttps");
+        this.includeHttps = Optional.of(includeHttps);
+        return this;
+    }
+
+    public GetServerResourcesRequestBuilder includeHttps(java.util.Optional<? extends dev.plexapi.sdk.models.operations.IncludeHttps> includeHttps) {
+        Utils.checkNotNull(includeHttps, "includeHttps");
+        this.includeHttps = includeHttps;
+        return this;
+    }
+                
+    public GetServerResourcesRequestBuilder includeRelay(dev.plexapi.sdk.models.operations.IncludeRelay includeRelay) {
+        Utils.checkNotNull(includeRelay, "includeRelay");
+        this.includeRelay = Optional.of(includeRelay);
+        return this;
+    }
+
+    public GetServerResourcesRequestBuilder includeRelay(java.util.Optional<? extends dev.plexapi.sdk.models.operations.IncludeRelay> includeRelay) {
+        Utils.checkNotNull(includeRelay, "includeRelay");
+        this.includeRelay = includeRelay;
+        return this;
+    }
+                
+    public GetServerResourcesRequestBuilder includeIPv6(dev.plexapi.sdk.models.operations.IncludeIPv6 includeIPv6) {
+        Utils.checkNotNull(includeIPv6, "includeIPv6");
+        this.includeIPv6 = Optional.of(includeIPv6);
+        return this;
+    }
+
+    public GetServerResourcesRequestBuilder includeIPv6(java.util.Optional<? extends dev.plexapi.sdk.models.operations.IncludeIPv6> includeIPv6) {
+        Utils.checkNotNull(includeIPv6, "includeIPv6");
+        this.includeIPv6 = includeIPv6;
         return this;
     }
                 
@@ -37,9 +93,38 @@ public class GetServerResourcesRequestBuilder {
     }
 
     public GetServerResourcesResponse call() throws Exception {
-
+        if (includeHttps == null) {
+            includeHttps = _SINGLETON_VALUE_IncludeHttps.value();
+        }
+        if (includeRelay == null) {
+            includeRelay = _SINGLETON_VALUE_IncludeRelay.value();
+        }
+        if (includeIPv6 == null) {
+            includeIPv6 = _SINGLETON_VALUE_IncludeIPv6.value();
+        }
         return sdk.getServerResources(
-            request,
+            xPlexClientIdentifier,
+            includeHttps,
+            includeRelay,
+            includeIPv6,
             serverURL);
     }
+
+    private static final LazySingletonValue<Optional<? extends IncludeHttps>> _SINGLETON_VALUE_IncludeHttps =
+            new LazySingletonValue<>(
+                    "includeHttps",
+                    "0",
+                    new TypeReference<Optional<? extends IncludeHttps>>() {});
+
+    private static final LazySingletonValue<Optional<? extends IncludeRelay>> _SINGLETON_VALUE_IncludeRelay =
+            new LazySingletonValue<>(
+                    "includeRelay",
+                    "0",
+                    new TypeReference<Optional<? extends IncludeRelay>>() {});
+
+    private static final LazySingletonValue<Optional<? extends IncludeIPv6>> _SINGLETON_VALUE_IncludeIPv6 =
+            new LazySingletonValue<>(
+                    "includeIPv6",
+                    "0",
+                    new TypeReference<Optional<? extends IncludeIPv6>>() {});
 }

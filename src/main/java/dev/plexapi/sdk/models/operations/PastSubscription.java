@@ -14,7 +14,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Integer;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -33,11 +33,11 @@ public class PastSubscription {
 
     @JsonInclude(Include.ALWAYS)
     @JsonProperty("renewsAt")
-    private Optional<Integer> renewsAt;
+    private Optional<Long> renewsAt;
 
     @JsonInclude(Include.ALWAYS)
     @JsonProperty("endsAt")
-    private Optional<Integer> endsAt;
+    private Optional<Long> endsAt;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("canceled")
@@ -84,8 +84,8 @@ public class PastSubscription {
     public PastSubscription(
             @JsonProperty("id") Optional<String> id,
             @JsonProperty("mode") Optional<String> mode,
-            @JsonProperty("renewsAt") Optional<Integer> renewsAt,
-            @JsonProperty("endsAt") Optional<Integer> endsAt,
+            @JsonProperty("renewsAt") Optional<Long> renewsAt,
+            @JsonProperty("endsAt") Optional<Long> endsAt,
             @JsonProperty("canceled") Optional<Boolean> canceled,
             @JsonProperty("gracePeriod") Optional<Boolean> gracePeriod,
             @JsonProperty("onHold") Optional<Boolean> onHold,
@@ -147,12 +147,12 @@ public class PastSubscription {
     }
 
     @JsonIgnore
-    public Optional<Integer> renewsAt() {
+    public Optional<Long> renewsAt() {
         return renewsAt;
     }
 
     @JsonIgnore
-    public Optional<Integer> endsAt() {
+    public Optional<Long> endsAt() {
         return endsAt;
     }
 
@@ -239,25 +239,25 @@ public class PastSubscription {
         return this;
     }
 
-    public PastSubscription withRenewsAt(int renewsAt) {
+    public PastSubscription withRenewsAt(long renewsAt) {
         Utils.checkNotNull(renewsAt, "renewsAt");
         this.renewsAt = Optional.ofNullable(renewsAt);
         return this;
     }
 
-    public PastSubscription withRenewsAt(Optional<Integer> renewsAt) {
+    public PastSubscription withRenewsAt(Optional<Long> renewsAt) {
         Utils.checkNotNull(renewsAt, "renewsAt");
         this.renewsAt = renewsAt;
         return this;
     }
 
-    public PastSubscription withEndsAt(int endsAt) {
+    public PastSubscription withEndsAt(long endsAt) {
         Utils.checkNotNull(endsAt, "endsAt");
         this.endsAt = Optional.ofNullable(endsAt);
         return this;
     }
 
-    public PastSubscription withEndsAt(Optional<Integer> endsAt) {
+    public PastSubscription withEndsAt(Optional<Long> endsAt) {
         Utils.checkNotNull(endsAt, "endsAt");
         this.endsAt = endsAt;
         return this;
@@ -450,9 +450,9 @@ public class PastSubscription {
  
         private Optional<String> mode = Optional.empty();
  
-        private Optional<Integer> renewsAt = Optional.empty();
+        private Optional<Long> renewsAt = Optional.empty();
  
-        private Optional<Integer> endsAt = Optional.empty();
+        private Optional<Long> endsAt = Optional.empty();
  
         private Optional<Boolean> canceled;
  
@@ -504,25 +504,25 @@ public class PastSubscription {
             return this;
         }
 
-        public Builder renewsAt(int renewsAt) {
+        public Builder renewsAt(long renewsAt) {
             Utils.checkNotNull(renewsAt, "renewsAt");
             this.renewsAt = Optional.ofNullable(renewsAt);
             return this;
         }
 
-        public Builder renewsAt(Optional<Integer> renewsAt) {
+        public Builder renewsAt(Optional<Long> renewsAt) {
             Utils.checkNotNull(renewsAt, "renewsAt");
             this.renewsAt = renewsAt;
             return this;
         }
 
-        public Builder endsAt(int endsAt) {
+        public Builder endsAt(long endsAt) {
             Utils.checkNotNull(endsAt, "endsAt");
             this.endsAt = Optional.ofNullable(endsAt);
             return this;
         }
 
-        public Builder endsAt(Optional<Integer> endsAt) {
+        public Builder endsAt(Optional<Long> endsAt) {
             Utils.checkNotNull(endsAt, "endsAt");
             this.endsAt = endsAt;
             return this;

@@ -168,7 +168,10 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallGetServerResources {
         dev.plexapi.sdk.models.operations.GetServerResourcesResponse getServerResources(
-            GetServerResourcesRequest request,
+            Optional<String> xPlexClientIdentifier,
+            Optional<? extends IncludeHttps> includeHttps,
+            Optional<? extends IncludeRelay> includeRelay,
+            Optional<? extends IncludeIPv6> includeIPv6,
             Optional<String> serverURL) throws Exception;
     }
 
@@ -404,9 +407,8 @@ public class SDKMethodInterfaces {
     }
 
 
-    public interface MethodCallGetUserDetails {
-        dev.plexapi.sdk.models.operations.GetUserDetailsResponse getUserDetails(
-            String xPlexToken,
+    public interface MethodCallGetTokenDetails {
+        dev.plexapi.sdk.models.operations.GetTokenDetailsResponse getTokenDetails(
             Optional<String> serverURL) throws Exception;
     }
 

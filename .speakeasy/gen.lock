@@ -1,20 +1,22 @@
 lockVersion: 2.0.0
 id: 1732900d-e173-47c1-a90d-d45182eb35d9
 management:
-  docChecksum: eae2a027b2467f033ac397a5d9f0add5
+  docChecksum: a6fee1797b2da7ccbaf7743772a40b56
   docVersion: 0.0.3
-  speakeasyVersion: 1.392.1
-  generationVersion: 2.411.9
-  releaseVersion: 0.2.2
-  configChecksum: ae73d5d4de760abea0e7ac40dd4cd90e
+  speakeasyVersion: 1.396.6
+  generationVersion: 2.415.6
+  releaseVersion: 0.3.0
+  configChecksum: 3d05baf8e1c438b2f143cf945c6735bd
+  repoURL: https://github.com/LukeHagar/plexjava.git
   published: true
 features:
   java:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.29.5
+    core: 3.29.7
     deprecations: 2.81.1
     downloadStreams: 0.1.1
+    errors: 0.1.3
     flattening: 2.81.1
     globalSecurity: 2.82.7
     globalSecurityCallbacks: 0.1.0
@@ -31,155 +33,297 @@ generatedFiles:
   - CONTRIBUTING.md
   - USAGE.md
   - build.gradle
+  - docs/models/errors/AddPlaylistContentsBadRequest.md
   - docs/models/errors/AddPlaylistContentsErrors.md
-  - docs/models/errors/AddPlaylistContentsResponseBody.md
+  - docs/models/errors/AddPlaylistContentsPlaylistsErrors.md
+  - docs/models/errors/AddPlaylistContentsUnauthorized.md
+  - docs/models/errors/ApplyUpdatesBadRequest.md
   - docs/models/errors/ApplyUpdatesErrors.md
-  - docs/models/errors/ApplyUpdatesResponseBody.md
+  - docs/models/errors/ApplyUpdatesUnauthorized.md
+  - docs/models/errors/ApplyUpdatesUpdaterErrors.md
+  - docs/models/errors/CancelServerActivitiesActivitiesErrors.md
+  - docs/models/errors/CancelServerActivitiesBadRequest.md
   - docs/models/errors/CancelServerActivitiesErrors.md
-  - docs/models/errors/CancelServerActivitiesResponseBody.md
+  - docs/models/errors/CancelServerActivitiesUnauthorized.md
+  - docs/models/errors/CheckForUpdatesBadRequest.md
   - docs/models/errors/CheckForUpdatesErrors.md
-  - docs/models/errors/CheckForUpdatesResponseBody.md
+  - docs/models/errors/CheckForUpdatesUnauthorized.md
+  - docs/models/errors/CheckForUpdatesUpdaterErrors.md
+  - docs/models/errors/ClearPlaylistContentsBadRequest.md
   - docs/models/errors/ClearPlaylistContentsErrors.md
-  - docs/models/errors/ClearPlaylistContentsResponseBody.md
+  - docs/models/errors/ClearPlaylistContentsPlaylistsErrors.md
+  - docs/models/errors/ClearPlaylistContentsUnauthorized.md
+  - docs/models/errors/CreatePlaylistBadRequest.md
   - docs/models/errors/CreatePlaylistErrors.md
-  - docs/models/errors/CreatePlaylistResponseBody.md
+  - docs/models/errors/CreatePlaylistPlaylistsErrors.md
+  - docs/models/errors/CreatePlaylistUnauthorized.md
+  - docs/models/errors/DeleteLibraryBadRequest.md
   - docs/models/errors/DeleteLibraryErrors.md
-  - docs/models/errors/DeleteLibraryResponseBody.md
+  - docs/models/errors/DeleteLibraryLibraryErrors.md
+  - docs/models/errors/DeleteLibraryUnauthorized.md
+  - docs/models/errors/DeletePlaylistBadRequest.md
   - docs/models/errors/DeletePlaylistErrors.md
-  - docs/models/errors/DeletePlaylistResponseBody.md
+  - docs/models/errors/DeletePlaylistPlaylistsErrors.md
+  - docs/models/errors/DeletePlaylistUnauthorized.md
+  - docs/models/errors/EnablePaperTrailBadRequest.md
   - docs/models/errors/EnablePaperTrailErrors.md
-  - docs/models/errors/EnablePaperTrailResponseBody.md
+  - docs/models/errors/EnablePaperTrailLogErrors.md
+  - docs/models/errors/EnablePaperTrailUnauthorized.md
   - docs/models/errors/Errors.md
+  - docs/models/errors/GetAllLibrariesBadRequest.md
   - docs/models/errors/GetAllLibrariesErrors.md
-  - docs/models/errors/GetAllLibrariesResponseBody.md
+  - docs/models/errors/GetAllLibrariesLibraryErrors.md
+  - docs/models/errors/GetAllLibrariesUnauthorized.md
+  - docs/models/errors/GetAvailableClientsBadRequest.md
   - docs/models/errors/GetAvailableClientsErrors.md
-  - docs/models/errors/GetAvailableClientsResponseBody.md
+  - docs/models/errors/GetAvailableClientsServerErrors.md
+  - docs/models/errors/GetAvailableClientsUnauthorized.md
+  - docs/models/errors/GetBandwidthStatisticsBadRequest.md
   - docs/models/errors/GetBandwidthStatisticsErrors.md
-  - docs/models/errors/GetBandwidthStatisticsResponseBody.md
+  - docs/models/errors/GetBandwidthStatisticsStatisticsErrors.md
+  - docs/models/errors/GetBandwidthStatisticsUnauthorized.md
+  - docs/models/errors/GetBannerImageBadRequest.md
   - docs/models/errors/GetBannerImageErrors.md
-  - docs/models/errors/GetBannerImageResponseBody.md
+  - docs/models/errors/GetBannerImageMediaErrors.md
+  - docs/models/errors/GetBannerImageUnauthorized.md
+  - docs/models/errors/GetButlerTasksBadRequest.md
+  - docs/models/errors/GetButlerTasksButlerErrors.md
   - docs/models/errors/GetButlerTasksErrors.md
-  - docs/models/errors/GetButlerTasksResponseBody.md
+  - docs/models/errors/GetButlerTasksUnauthorized.md
+  - docs/models/errors/GetCompanionsDataBadRequest.md
   - docs/models/errors/GetCompanionsDataErrors.md
-  - docs/models/errors/GetCompanionsDataResponseBody.md
+  - docs/models/errors/GetCompanionsDataPlexErrors.md
+  - docs/models/errors/GetCompanionsDataUnauthorized.md
+  - docs/models/errors/GetDevicesBadRequest.md
   - docs/models/errors/GetDevicesErrors.md
-  - docs/models/errors/GetDevicesResponseBody.md
+  - docs/models/errors/GetDevicesServerErrors.md
+  - docs/models/errors/GetDevicesUnauthorized.md
+  - docs/models/errors/GetFileHashBadRequest.md
   - docs/models/errors/GetFileHashErrors.md
-  - docs/models/errors/GetFileHashResponseBody.md
+  - docs/models/errors/GetFileHashLibraryErrors.md
+  - docs/models/errors/GetFileHashUnauthorized.md
+  - docs/models/errors/GetGeoDataBadRequest.md
   - docs/models/errors/GetGeoDataErrors.md
-  - docs/models/errors/GetGeoDataResponseBody.md
+  - docs/models/errors/GetGeoDataPlexErrors.md
+  - docs/models/errors/GetGeoDataUnauthorized.md
+  - docs/models/errors/GetGlobalHubsBadRequest.md
   - docs/models/errors/GetGlobalHubsErrors.md
-  - docs/models/errors/GetGlobalHubsResponseBody.md
+  - docs/models/errors/GetGlobalHubsHubsErrors.md
+  - docs/models/errors/GetGlobalHubsUnauthorized.md
+  - docs/models/errors/GetHomeDataBadRequest.md
   - docs/models/errors/GetHomeDataErrors.md
-  - docs/models/errors/GetHomeDataResponseBody.md
+  - docs/models/errors/GetHomeDataPlexErrors.md
+  - docs/models/errors/GetHomeDataUnauthorized.md
+  - docs/models/errors/GetLibraryDetailsBadRequest.md
   - docs/models/errors/GetLibraryDetailsErrors.md
-  - docs/models/errors/GetLibraryDetailsResponseBody.md
+  - docs/models/errors/GetLibraryDetailsLibraryErrors.md
+  - docs/models/errors/GetLibraryDetailsUnauthorized.md
+  - docs/models/errors/GetLibraryHubsBadRequest.md
   - docs/models/errors/GetLibraryHubsErrors.md
-  - docs/models/errors/GetLibraryHubsResponseBody.md
+  - docs/models/errors/GetLibraryHubsHubsErrors.md
+  - docs/models/errors/GetLibraryHubsUnauthorized.md
+  - docs/models/errors/GetLibraryItemsBadRequest.md
   - docs/models/errors/GetLibraryItemsErrors.md
-  - docs/models/errors/GetLibraryItemsResponseBody.md
+  - docs/models/errors/GetLibraryItemsLibraryErrors.md
+  - docs/models/errors/GetLibraryItemsUnauthorized.md
+  - docs/models/errors/GetMediaProvidersBadRequest.md
   - docs/models/errors/GetMediaProvidersErrors.md
-  - docs/models/errors/GetMediaProvidersResponseBody.md
+  - docs/models/errors/GetMediaProvidersServerErrors.md
+  - docs/models/errors/GetMediaProvidersUnauthorized.md
+  - docs/models/errors/GetMetaDataByRatingKeyBadRequest.md
   - docs/models/errors/GetMetaDataByRatingKeyErrors.md
-  - docs/models/errors/GetMetaDataByRatingKeyResponseBody.md
+  - docs/models/errors/GetMetaDataByRatingKeyLibraryErrors.md
+  - docs/models/errors/GetMetaDataByRatingKeyUnauthorized.md
+  - docs/models/errors/GetMetadataChildrenBadRequest.md
   - docs/models/errors/GetMetadataChildrenErrors.md
-  - docs/models/errors/GetMetadataChildrenResponseBody.md
+  - docs/models/errors/GetMetadataChildrenLibraryErrors.md
+  - docs/models/errors/GetMetadataChildrenUnauthorized.md
+  - docs/models/errors/GetMyPlexAccountBadRequest.md
   - docs/models/errors/GetMyPlexAccountErrors.md
-  - docs/models/errors/GetMyPlexAccountResponseBody.md
+  - docs/models/errors/GetMyPlexAccountServerErrors.md
+  - docs/models/errors/GetMyPlexAccountUnauthorized.md
+  - docs/models/errors/GetOnDeckBadRequest.md
   - docs/models/errors/GetOnDeckErrors.md
-  - docs/models/errors/GetOnDeckResponseBody.md
+  - docs/models/errors/GetOnDeckLibraryErrors.md
+  - docs/models/errors/GetOnDeckUnauthorized.md
+  - docs/models/errors/GetPinBadRequest.md
   - docs/models/errors/GetPinErrors.md
-  - docs/models/errors/GetPinResponseBody.md
+  - docs/models/errors/GetPlaylistBadRequest.md
+  - docs/models/errors/GetPlaylistContentsBadRequest.md
   - docs/models/errors/GetPlaylistContentsErrors.md
-  - docs/models/errors/GetPlaylistContentsResponseBody.md
+  - docs/models/errors/GetPlaylistContentsPlaylistsErrors.md
+  - docs/models/errors/GetPlaylistContentsUnauthorized.md
   - docs/models/errors/GetPlaylistErrors.md
-  - docs/models/errors/GetPlaylistResponseBody.md
+  - docs/models/errors/GetPlaylistPlaylistsErrors.md
+  - docs/models/errors/GetPlaylistUnauthorized.md
+  - docs/models/errors/GetPlaylistsBadRequest.md
   - docs/models/errors/GetPlaylistsErrors.md
-  - docs/models/errors/GetPlaylistsResponseBody.md
+  - docs/models/errors/GetPlaylistsPlaylistsErrors.md
+  - docs/models/errors/GetPlaylistsUnauthorized.md
+  - docs/models/errors/GetRecentlyAddedBadRequest.md
   - docs/models/errors/GetRecentlyAddedErrors.md
-  - docs/models/errors/GetRecentlyAddedResponseBody.md
+  - docs/models/errors/GetRecentlyAddedLibraryErrors.md
+  - docs/models/errors/GetRecentlyAddedUnauthorized.md
+  - docs/models/errors/GetRefreshLibraryMetadataBadRequest.md
   - docs/models/errors/GetRefreshLibraryMetadataErrors.md
-  - docs/models/errors/GetRefreshLibraryMetadataResponseBody.md
+  - docs/models/errors/GetRefreshLibraryMetadataLibraryErrors.md
+  - docs/models/errors/GetRefreshLibraryMetadataUnauthorized.md
+  - docs/models/errors/GetResizedPhotoBadRequest.md
   - docs/models/errors/GetResizedPhotoErrors.md
-  - docs/models/errors/GetResizedPhotoResponseBody.md
+  - docs/models/errors/GetResizedPhotoServerErrors.md
+  - docs/models/errors/GetResizedPhotoUnauthorized.md
+  - docs/models/errors/GetResourcesStatisticsBadRequest.md
   - docs/models/errors/GetResourcesStatisticsErrors.md
-  - docs/models/errors/GetResourcesStatisticsResponseBody.md
+  - docs/models/errors/GetResourcesStatisticsStatisticsErrors.md
+  - docs/models/errors/GetResourcesStatisticsUnauthorized.md
+  - docs/models/errors/GetSearchLibraryBadRequest.md
   - docs/models/errors/GetSearchLibraryErrors.md
-  - docs/models/errors/GetSearchLibraryResponseBody.md
+  - docs/models/errors/GetSearchLibraryLibraryErrors.md
+  - docs/models/errors/GetSearchLibraryUnauthorized.md
+  - docs/models/errors/GetSearchResultsBadRequest.md
   - docs/models/errors/GetSearchResultsErrors.md
-  - docs/models/errors/GetSearchResultsResponseBody.md
+  - docs/models/errors/GetSearchResultsSearchErrors.md
+  - docs/models/errors/GetSearchResultsUnauthorized.md
+  - docs/models/errors/GetServerActivitiesActivitiesErrors.md
+  - docs/models/errors/GetServerActivitiesBadRequest.md
   - docs/models/errors/GetServerActivitiesErrors.md
-  - docs/models/errors/GetServerActivitiesResponseBody.md
-  - docs/models/errors/GetServerCapabilitiesResponseBody.md
-  - docs/models/errors/GetServerIdentityResponseBody.md
+  - docs/models/errors/GetServerActivitiesUnauthorized.md
+  - docs/models/errors/GetServerCapabilitiesBadRequest.md
+  - docs/models/errors/GetServerCapabilitiesErrors.md
+  - docs/models/errors/GetServerCapabilitiesUnauthorized.md
+  - docs/models/errors/GetServerIdentityRequestTimeout.md
+  - docs/models/errors/GetServerListBadRequest.md
   - docs/models/errors/GetServerListErrors.md
-  - docs/models/errors/GetServerListResponseBody.md
+  - docs/models/errors/GetServerListServerErrors.md
+  - docs/models/errors/GetServerListUnauthorized.md
+  - docs/models/errors/GetServerPreferencesBadRequest.md
   - docs/models/errors/GetServerPreferencesErrors.md
-  - docs/models/errors/GetServerPreferencesResponseBody.md
+  - docs/models/errors/GetServerPreferencesServerErrors.md
+  - docs/models/errors/GetServerPreferencesUnauthorized.md
+  - docs/models/errors/GetServerResourcesBadRequest.md
   - docs/models/errors/GetServerResourcesErrors.md
-  - docs/models/errors/GetServerResourcesResponseBody.md
+  - docs/models/errors/GetServerResourcesPlexErrors.md
+  - docs/models/errors/GetServerResourcesUnauthorized.md
+  - docs/models/errors/GetSessionHistoryBadRequest.md
   - docs/models/errors/GetSessionHistoryErrors.md
-  - docs/models/errors/GetSessionHistoryResponseBody.md
+  - docs/models/errors/GetSessionHistorySessionsErrors.md
+  - docs/models/errors/GetSessionHistoryUnauthorized.md
+  - docs/models/errors/GetSessionsBadRequest.md
   - docs/models/errors/GetSessionsErrors.md
-  - docs/models/errors/GetSessionsResponseBody.md
+  - docs/models/errors/GetSessionsSessionsErrors.md
+  - docs/models/errors/GetSessionsUnauthorized.md
+  - docs/models/errors/GetSourceConnectionInformationAuthenticationErrors.md
+  - docs/models/errors/GetSourceConnectionInformationBadRequest.md
   - docs/models/errors/GetSourceConnectionInformationErrors.md
-  - docs/models/errors/GetSourceConnectionInformationResponseBody.md
+  - docs/models/errors/GetSourceConnectionInformationUnauthorized.md
+  - docs/models/errors/GetStatisticsBadRequest.md
   - docs/models/errors/GetStatisticsErrors.md
-  - docs/models/errors/GetStatisticsResponseBody.md
+  - docs/models/errors/GetStatisticsStatisticsErrors.md
+  - docs/models/errors/GetStatisticsUnauthorized.md
+  - docs/models/errors/GetThumbImageBadRequest.md
   - docs/models/errors/GetThumbImageErrors.md
-  - docs/models/errors/GetThumbImageResponseBody.md
+  - docs/models/errors/GetThumbImageMediaErrors.md
+  - docs/models/errors/GetThumbImageUnauthorized.md
+  - docs/models/errors/GetTimelineBadRequest.md
   - docs/models/errors/GetTimelineErrors.md
-  - docs/models/errors/GetTimelineResponseBody.md
+  - docs/models/errors/GetTimelineUnauthorized.md
+  - docs/models/errors/GetTimelineVideoErrors.md
+  - docs/models/errors/GetTokenByPinIdBadRequest.md
   - docs/models/errors/GetTokenByPinIdErrors.md
   - docs/models/errors/GetTokenByPinIdPlexErrors.md
-  - docs/models/errors/GetTokenByPinIdPlexResponseBody.md
   - docs/models/errors/GetTokenByPinIdResponseBody.md
+  - docs/models/errors/GetTokenDetailsAuthenticationErrors.md
+  - docs/models/errors/GetTokenDetailsBadRequest.md
+  - docs/models/errors/GetTokenDetailsErrors.md
+  - docs/models/errors/GetTokenDetailsUnauthorized.md
+  - docs/models/errors/GetTopWatchedContentBadRequest.md
   - docs/models/errors/GetTopWatchedContentErrors.md
-  - docs/models/errors/GetTopWatchedContentResponseBody.md
+  - docs/models/errors/GetTopWatchedContentLibraryErrors.md
+  - docs/models/errors/GetTopWatchedContentUnauthorized.md
+  - docs/models/errors/GetTranscodeSessionsBadRequest.md
   - docs/models/errors/GetTranscodeSessionsErrors.md
-  - docs/models/errors/GetTranscodeSessionsResponseBody.md
+  - docs/models/errors/GetTranscodeSessionsSessionsErrors.md
+  - docs/models/errors/GetTranscodeSessionsUnauthorized.md
+  - docs/models/errors/GetTransientTokenAuthenticationErrors.md
+  - docs/models/errors/GetTransientTokenBadRequest.md
   - docs/models/errors/GetTransientTokenErrors.md
-  - docs/models/errors/GetTransientTokenResponseBody.md
+  - docs/models/errors/GetTransientTokenUnauthorized.md
+  - docs/models/errors/GetUpdateStatusBadRequest.md
   - docs/models/errors/GetUpdateStatusErrors.md
-  - docs/models/errors/GetUpdateStatusResponseBody.md
-  - docs/models/errors/GetUserDetailsErrors.md
-  - docs/models/errors/GetUserDetailsResponseBody.md
+  - docs/models/errors/GetUpdateStatusUnauthorized.md
+  - docs/models/errors/GetUpdateStatusUpdaterErrors.md
+  - docs/models/errors/GetUserFriendsBadRequest.md
   - docs/models/errors/GetUserFriendsErrors.md
-  - docs/models/errors/GetUserFriendsResponseBody.md
+  - docs/models/errors/GetUserFriendsPlexErrors.md
+  - docs/models/errors/GetUserFriendsUnauthorized.md
+  - docs/models/errors/GetWatchListBadRequest.md
   - docs/models/errors/GetWatchListErrors.md
-  - docs/models/errors/GetWatchListResponseBody.md
+  - docs/models/errors/GetWatchListUnauthorized.md
+  - docs/models/errors/GetWatchListWatchlistErrors.md
+  - docs/models/errors/LogLineBadRequest.md
   - docs/models/errors/LogLineErrors.md
-  - docs/models/errors/LogLineResponseBody.md
+  - docs/models/errors/LogLineLogErrors.md
+  - docs/models/errors/LogLineUnauthorized.md
+  - docs/models/errors/LogMultiLineBadRequest.md
   - docs/models/errors/LogMultiLineErrors.md
-  - docs/models/errors/LogMultiLineResponseBody.md
+  - docs/models/errors/LogMultiLineLogErrors.md
+  - docs/models/errors/LogMultiLineUnauthorized.md
+  - docs/models/errors/MarkPlayedBadRequest.md
   - docs/models/errors/MarkPlayedErrors.md
-  - docs/models/errors/MarkPlayedResponseBody.md
+  - docs/models/errors/MarkPlayedMediaErrors.md
+  - docs/models/errors/MarkPlayedUnauthorized.md
+  - docs/models/errors/MarkUnplayedBadRequest.md
   - docs/models/errors/MarkUnplayedErrors.md
-  - docs/models/errors/MarkUnplayedResponseBody.md
+  - docs/models/errors/MarkUnplayedMediaErrors.md
+  - docs/models/errors/MarkUnplayedUnauthorized.md
+  - docs/models/errors/PerformSearchBadRequest.md
   - docs/models/errors/PerformSearchErrors.md
-  - docs/models/errors/PerformSearchResponseBody.md
+  - docs/models/errors/PerformSearchSearchErrors.md
+  - docs/models/errors/PerformSearchUnauthorized.md
+  - docs/models/errors/PerformVoiceSearchBadRequest.md
   - docs/models/errors/PerformVoiceSearchErrors.md
-  - docs/models/errors/PerformVoiceSearchResponseBody.md
+  - docs/models/errors/PerformVoiceSearchSearchErrors.md
+  - docs/models/errors/PerformVoiceSearchUnauthorized.md
+  - docs/models/errors/PostUsersSignInDataAuthenticationErrors.md
+  - docs/models/errors/PostUsersSignInDataBadRequest.md
   - docs/models/errors/PostUsersSignInDataErrors.md
-  - docs/models/errors/PostUsersSignInDataResponseBody.md
+  - docs/models/errors/PostUsersSignInDataUnauthorized.md
+  - docs/models/errors/StartAllTasksBadRequest.md
+  - docs/models/errors/StartAllTasksButlerErrors.md
   - docs/models/errors/StartAllTasksErrors.md
-  - docs/models/errors/StartAllTasksResponseBody.md
+  - docs/models/errors/StartAllTasksUnauthorized.md
+  - docs/models/errors/StartTaskBadRequest.md
+  - docs/models/errors/StartTaskButlerErrors.md
   - docs/models/errors/StartTaskErrors.md
-  - docs/models/errors/StartTaskResponseBody.md
+  - docs/models/errors/StartTaskUnauthorized.md
+  - docs/models/errors/StartUniversalTranscodeBadRequest.md
   - docs/models/errors/StartUniversalTranscodeErrors.md
-  - docs/models/errors/StartUniversalTranscodeResponseBody.md
+  - docs/models/errors/StartUniversalTranscodeUnauthorized.md
+  - docs/models/errors/StartUniversalTranscodeVideoErrors.md
+  - docs/models/errors/StopAllTasksBadRequest.md
+  - docs/models/errors/StopAllTasksButlerErrors.md
   - docs/models/errors/StopAllTasksErrors.md
-  - docs/models/errors/StopAllTasksResponseBody.md
+  - docs/models/errors/StopAllTasksUnauthorized.md
+  - docs/models/errors/StopTaskBadRequest.md
+  - docs/models/errors/StopTaskButlerErrors.md
   - docs/models/errors/StopTaskErrors.md
-  - docs/models/errors/StopTaskResponseBody.md
+  - docs/models/errors/StopTaskUnauthorized.md
+  - docs/models/errors/StopTranscodeSessionBadRequest.md
   - docs/models/errors/StopTranscodeSessionErrors.md
-  - docs/models/errors/StopTranscodeSessionResponseBody.md
+  - docs/models/errors/StopTranscodeSessionSessionsErrors.md
+  - docs/models/errors/StopTranscodeSessionUnauthorized.md
+  - docs/models/errors/UpdatePlayProgressBadRequest.md
   - docs/models/errors/UpdatePlayProgressErrors.md
-  - docs/models/errors/UpdatePlayProgressResponseBody.md
+  - docs/models/errors/UpdatePlayProgressMediaErrors.md
+  - docs/models/errors/UpdatePlayProgressUnauthorized.md
+  - docs/models/errors/UpdatePlaylistBadRequest.md
   - docs/models/errors/UpdatePlaylistErrors.md
-  - docs/models/errors/UpdatePlaylistResponseBody.md
+  - docs/models/errors/UpdatePlaylistPlaylistsErrors.md
+  - docs/models/errors/UpdatePlaylistUnauthorized.md
+  - docs/models/errors/UploadPlaylistBadRequest.md
   - docs/models/errors/UploadPlaylistErrors.md
-  - docs/models/errors/UploadPlaylistResponseBody.md
+  - docs/models/errors/UploadPlaylistPlaylistsErrors.md
+  - docs/models/errors/UploadPlaylistUnauthorized.md
   - docs/models/operations/Account.md
   - docs/models/operations/Activity.md
   - docs/models/operations/AddPlaylistContentsMediaContainer.md
@@ -426,6 +570,13 @@ generatedFiles:
   - docs/models/operations/GetTokenByPinIdGeoData.md
   - docs/models/operations/GetTokenByPinIdRequest.md
   - docs/models/operations/GetTokenByPinIdResponse.md
+  - docs/models/operations/GetTokenDetailsAuthenticationResponseStatus.md
+  - docs/models/operations/GetTokenDetailsAuthenticationStatus.md
+  - docs/models/operations/GetTokenDetailsFeatures.md
+  - docs/models/operations/GetTokenDetailsResponse.md
+  - docs/models/operations/GetTokenDetailsStatus.md
+  - docs/models/operations/GetTokenDetailsSubscription.md
+  - docs/models/operations/GetTokenDetailsUserPlexAccount.md
   - docs/models/operations/GetTopWatchedContentCountry.md
   - docs/models/operations/GetTopWatchedContentGenre.md
   - docs/models/operations/GetTopWatchedContentGuids.md
@@ -445,14 +596,6 @@ generatedFiles:
   - docs/models/operations/GetUpdateStatusMediaContainer.md
   - docs/models/operations/GetUpdateStatusResponse.md
   - docs/models/operations/GetUpdateStatusResponseBody.md
-  - docs/models/operations/GetUserDetailsAuthenticationResponseStatus.md
-  - docs/models/operations/GetUserDetailsAuthenticationStatus.md
-  - docs/models/operations/GetUserDetailsFeatures.md
-  - docs/models/operations/GetUserDetailsRequest.md
-  - docs/models/operations/GetUserDetailsResponse.md
-  - docs/models/operations/GetUserDetailsStatus.md
-  - docs/models/operations/GetUserDetailsSubscription.md
-  - docs/models/operations/GetUserDetailsUserPlexAccount.md
   - docs/models/operations/GetUserFriendsResponse.md
   - docs/models/operations/GetWatchListRequest.md
   - docs/models/operations/GetWatchListResponse.md
@@ -618,157 +761,299 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/Updater.java
   - src/main/java/dev/plexapi/sdk/Video.java
   - src/main/java/dev/plexapi/sdk/Watchlist.java
+  - src/main/java/dev/plexapi/sdk/models/errors/AddPlaylistContentsBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/AddPlaylistContentsErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/AddPlaylistContentsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/AddPlaylistContentsPlaylistsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/AddPlaylistContentsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/ApplyUpdatesBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/ApplyUpdatesErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/ApplyUpdatesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/ApplyUpdatesUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/ApplyUpdatesUpdaterErrors.java
   - src/main/java/dev/plexapi/sdk/models/errors/AuthException.java
+  - src/main/java/dev/plexapi/sdk/models/errors/CancelServerActivitiesActivitiesErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/CancelServerActivitiesBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/CancelServerActivitiesErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/CancelServerActivitiesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/CancelServerActivitiesUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/CheckForUpdatesBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/CheckForUpdatesErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/CheckForUpdatesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/CheckForUpdatesUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/CheckForUpdatesUpdaterErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/ClearPlaylistContentsBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/ClearPlaylistContentsErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/ClearPlaylistContentsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/ClearPlaylistContentsPlaylistsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/ClearPlaylistContentsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/CreatePlaylistBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/CreatePlaylistErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/CreatePlaylistResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/CreatePlaylistPlaylistsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/CreatePlaylistUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/DeleteLibraryBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/DeleteLibraryErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/DeleteLibraryResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/DeleteLibraryLibraryErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/DeleteLibraryUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/DeletePlaylistBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/DeletePlaylistErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/DeletePlaylistResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/DeletePlaylistPlaylistsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/DeletePlaylistUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/EnablePaperTrailBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/EnablePaperTrailErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/EnablePaperTrailResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/EnablePaperTrailLogErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/EnablePaperTrailUnauthorized.java
   - src/main/java/dev/plexapi/sdk/models/errors/Errors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetAllLibrariesBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetAllLibrariesErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetAllLibrariesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetAllLibrariesLibraryErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetAllLibrariesUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetAvailableClientsBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetAvailableClientsErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetAvailableClientsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetAvailableClientsServerErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetAvailableClientsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetBandwidthStatisticsBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetBandwidthStatisticsErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetBandwidthStatisticsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetBandwidthStatisticsStatisticsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetBandwidthStatisticsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetBannerImageBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetBannerImageErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetBannerImageResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetBannerImageMediaErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetBannerImageUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetButlerTasksBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetButlerTasksButlerErrors.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetButlerTasksErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetButlerTasksResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetButlerTasksUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetCompanionsDataBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetCompanionsDataErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetCompanionsDataResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetCompanionsDataPlexErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetCompanionsDataUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetDevicesBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetDevicesErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetDevicesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetDevicesServerErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetDevicesUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetFileHashBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetFileHashErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetFileHashResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetFileHashLibraryErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetFileHashUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetGeoDataBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetGeoDataErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetGeoDataResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetGeoDataPlexErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetGeoDataUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetGlobalHubsBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetGlobalHubsErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetGlobalHubsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetGlobalHubsHubsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetGlobalHubsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetHomeDataBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetHomeDataErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetHomeDataResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetHomeDataPlexErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetHomeDataUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryDetailsBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryDetailsErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryDetailsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryDetailsLibraryErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryDetailsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryHubsBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryHubsErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryHubsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryHubsHubsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryHubsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryItemsBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryItemsErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryItemsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryItemsLibraryErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetLibraryItemsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetMediaProvidersBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetMediaProvidersErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetMediaProvidersResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetMediaProvidersServerErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetMediaProvidersUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetMetaDataByRatingKeyBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetMetaDataByRatingKeyErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetMetaDataByRatingKeyResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetMetaDataByRatingKeyLibraryErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetMetaDataByRatingKeyUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetMetadataChildrenBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetMetadataChildrenErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetMetadataChildrenResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetMetadataChildrenLibraryErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetMetadataChildrenUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetMyPlexAccountBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetMyPlexAccountErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetMyPlexAccountResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetMyPlexAccountServerErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetMyPlexAccountUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetOnDeckBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetOnDeckErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetOnDeckResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetOnDeckLibraryErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetOnDeckUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetPinBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetPinErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetPinResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistContentsBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistContentsErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistContentsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistContentsPlaylistsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistContentsUnauthorized.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistPlaylistsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistsBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistsErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistsPlaylistsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetRecentlyAddedBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetRecentlyAddedErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetRecentlyAddedResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetRecentlyAddedLibraryErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetRecentlyAddedUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetRefreshLibraryMetadataBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetRefreshLibraryMetadataErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetRefreshLibraryMetadataResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetRefreshLibraryMetadataLibraryErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetRefreshLibraryMetadataUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetResizedPhotoBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetResizedPhotoErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetResizedPhotoResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetResizedPhotoServerErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetResizedPhotoUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetResourcesStatisticsBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetResourcesStatisticsErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetResourcesStatisticsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetResourcesStatisticsStatisticsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetResourcesStatisticsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSearchLibraryBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetSearchLibraryErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetSearchLibraryResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSearchLibraryLibraryErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSearchLibraryUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSearchResultsBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetSearchResultsErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetSearchResultsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSearchResultsSearchErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSearchResultsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerActivitiesActivitiesErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerActivitiesBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetServerActivitiesErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetServerActivitiesResponseBody.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetServerCapabilitiesResponseBody.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetServerIdentityResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerActivitiesUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerCapabilitiesBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerCapabilitiesErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerCapabilitiesUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerIdentityRequestTimeout.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerListBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetServerListErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetServerListResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerListServerErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerListUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerPreferencesBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetServerPreferencesErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetServerPreferencesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerPreferencesServerErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerPreferencesUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerResourcesBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetServerResourcesErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetServerResourcesResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerResourcesPlexErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetServerResourcesUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSessionHistoryBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetSessionHistoryErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetSessionHistoryResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSessionHistorySessionsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSessionHistoryUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSessionsBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetSessionsErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetSessionsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSessionsSessionsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSessionsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSourceConnectionInformationAuthenticationErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSourceConnectionInformationBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetSourceConnectionInformationErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetSourceConnectionInformationResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetSourceConnectionInformationUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetStatisticsBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetStatisticsErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetStatisticsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetStatisticsStatisticsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetStatisticsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetThumbImageBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetThumbImageErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetThumbImageResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetThumbImageMediaErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetThumbImageUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTimelineBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetTimelineErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetTimelineResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTimelineUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTimelineVideoErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTokenByPinIdBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetTokenByPinIdErrors.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetTokenByPinIdPlexErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetTokenByPinIdPlexResponseBody.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetTokenByPinIdResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTokenDetailsAuthenticationErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTokenDetailsBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTokenDetailsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTokenDetailsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTopWatchedContentBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetTopWatchedContentErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetTopWatchedContentResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTopWatchedContentLibraryErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTopWatchedContentUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTranscodeSessionsBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetTranscodeSessionsErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetTranscodeSessionsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTranscodeSessionsSessionsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTranscodeSessionsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTransientTokenAuthenticationErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTransientTokenBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetTransientTokenErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetTransientTokenResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetTransientTokenUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetUpdateStatusBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetUpdateStatusErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetUpdateStatusResponseBody.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetUserDetailsErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetUserDetailsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetUpdateStatusUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetUpdateStatusUpdaterErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetUserFriendsBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetUserFriendsErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetUserFriendsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetUserFriendsPlexErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetUserFriendsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetWatchListBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetWatchListErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetWatchListResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetWatchListUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetWatchListWatchlistErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/LogLineBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/LogLineErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/LogLineResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/LogLineLogErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/LogLineUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/LogMultiLineBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/LogMultiLineErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/LogMultiLineResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/LogMultiLineLogErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/LogMultiLineUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/MarkPlayedBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/MarkPlayedErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/MarkPlayedResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/MarkPlayedMediaErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/MarkPlayedUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/MarkUnplayedBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/MarkUnplayedErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/MarkUnplayedResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/MarkUnplayedMediaErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/MarkUnplayedUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/PerformSearchBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/PerformSearchErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/PerformSearchResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/PerformSearchSearchErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/PerformSearchUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/PerformVoiceSearchBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/PerformVoiceSearchErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/PerformVoiceSearchResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/PerformVoiceSearchSearchErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/PerformVoiceSearchUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/PostUsersSignInDataAuthenticationErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/PostUsersSignInDataBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/PostUsersSignInDataErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/PostUsersSignInDataResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/PostUsersSignInDataUnauthorized.java
   - src/main/java/dev/plexapi/sdk/models/errors/SDKError.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StartAllTasksBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StartAllTasksButlerErrors.java
   - src/main/java/dev/plexapi/sdk/models/errors/StartAllTasksErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/StartAllTasksResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StartAllTasksUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StartTaskBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StartTaskButlerErrors.java
   - src/main/java/dev/plexapi/sdk/models/errors/StartTaskErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/StartTaskResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StartTaskUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StartUniversalTranscodeBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/StartUniversalTranscodeErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/StartUniversalTranscodeResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StartUniversalTranscodeUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StartUniversalTranscodeVideoErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StopAllTasksBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StopAllTasksButlerErrors.java
   - src/main/java/dev/plexapi/sdk/models/errors/StopAllTasksErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/StopAllTasksResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StopAllTasksUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StopTaskBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StopTaskButlerErrors.java
   - src/main/java/dev/plexapi/sdk/models/errors/StopTaskErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/StopTaskResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StopTaskUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StopTranscodeSessionBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/StopTranscodeSessionErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/StopTranscodeSessionResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StopTranscodeSessionSessionsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/StopTranscodeSessionUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/UpdatePlayProgressBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/UpdatePlayProgressErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/UpdatePlayProgressResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/UpdatePlayProgressMediaErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/UpdatePlayProgressUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/UpdatePlaylistBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/UpdatePlaylistErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/UpdatePlaylistResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/UpdatePlaylistPlaylistsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/UpdatePlaylistUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/UploadPlaylistBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/UploadPlaylistErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/UploadPlaylistResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/UploadPlaylistPlaylistsErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/UploadPlaylistUnauthorized.java
   - src/main/java/dev/plexapi/sdk/models/operations/Account.java
   - src/main/java/dev/plexapi/sdk/models/operations/Activity.java
   - src/main/java/dev/plexapi/sdk/models/operations/AddPlaylistContentsMediaContainer.java
@@ -1066,6 +1351,14 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/operations/GetTokenByPinIdRequest.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetTokenByPinIdRequestBuilder.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetTokenByPinIdResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTokenDetailsAuthenticationResponseStatus.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTokenDetailsAuthenticationStatus.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTokenDetailsFeatures.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTokenDetailsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTokenDetailsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTokenDetailsStatus.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTokenDetailsSubscription.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTokenDetailsUserPlexAccount.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetTopWatchedContentCountry.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetTopWatchedContentGenre.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetTopWatchedContentGuids.java
@@ -1089,15 +1382,6 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/operations/GetUpdateStatusRequestBuilder.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetUpdateStatusResponse.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetUpdateStatusResponseBody.java
-  - src/main/java/dev/plexapi/sdk/models/operations/GetUserDetailsAuthenticationResponseStatus.java
-  - src/main/java/dev/plexapi/sdk/models/operations/GetUserDetailsAuthenticationStatus.java
-  - src/main/java/dev/plexapi/sdk/models/operations/GetUserDetailsFeatures.java
-  - src/main/java/dev/plexapi/sdk/models/operations/GetUserDetailsRequest.java
-  - src/main/java/dev/plexapi/sdk/models/operations/GetUserDetailsRequestBuilder.java
-  - src/main/java/dev/plexapi/sdk/models/operations/GetUserDetailsResponse.java
-  - src/main/java/dev/plexapi/sdk/models/operations/GetUserDetailsStatus.java
-  - src/main/java/dev/plexapi/sdk/models/operations/GetUserDetailsSubscription.java
-  - src/main/java/dev/plexapi/sdk/models/operations/GetUserDetailsUserPlexAccount.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetUserFriendsRequestBuilder.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetUserFriendsResponse.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetWatchListRequest.java
@@ -1285,12 +1569,16 @@ examples:
         "401":
           application/json: {"errors": []}
         "200": {}
+        "400":
+          application/json: {"errors": []}
   getServerPreferences:
     speakeasy-default-get-server-preferences:
       responses:
         "200":
           application/json: {"MediaContainer": {"size": 161, "Setting": []}}
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   getAvailableClients:
     speakeasy-default-get-available-clients:
@@ -1299,12 +1587,16 @@ examples:
           application/json: {"MediaContainer": {"size": 1, "Server": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   getDevices:
     speakeasy-default-get-devices:
       responses:
         "200":
           application/json: {"MediaContainer": {"size": 151, "identifier": "com.plexapp.system.devices", "Device": []}}
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   get-server-identity:
     speakeasy-default-get-server-identity:
@@ -1320,6 +1612,8 @@ examples:
           application/json: {"MyPlex": {"authToken": "Z5v-PrNASDFpsaCi3CPK7", "username": "example.email@mail.com", "mappingState": "mapped", "signInState": "ok", "publicAddress": "140.20.68.140", "publicPort": 32400, "privateAddress": "10.10.10.47", "privatePort": 32400, "subscriptionFeatures": "federated-auth,hardware_transcoding,home,hwtranscode,item_clusters,kevin-bacon,livetv,loudness,lyrics,music-analysis,music_videos,pass,photo_autotags,photos-v5,photosV6-edit,photosV6-tv-albums,premium_music_metadata,radio,server-manager,session_bandwidth_restrictions,session_kick,shared-radio,sync,trailers,tuner-sharing,type-first,unsupportedtuners,webhooks", "subscriptionState": "Active"}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   getResizedPhoto:
     speakeasy-default-get-resized-photo:
       parameters:
@@ -1334,6 +1628,8 @@ examples:
       responses:
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   get-media-providers:
     speakeasy-default-get-media-providers:
       parameters:
@@ -1343,12 +1639,16 @@ examples:
         "401":
           application/json: {"errors": []}
         "200": {}
+        "400":
+          application/json: {"errors": []}
   getServerList:
     speakeasy-default-get-server-list:
       responses:
         "200":
           application/json: {"MediaContainer": {"size": 1, "Server": []}}
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   markPlayed:
     speakeasy-default-mark-played:
@@ -1358,6 +1658,8 @@ examples:
       responses:
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   markUnplayed:
     speakeasy-default-mark-unplayed:
       parameters:
@@ -1365,6 +1667,8 @@ examples:
           key: 59398
       responses:
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   updatePlayProgress:
     "":
@@ -1375,6 +1679,8 @@ examples:
           state: "played"
       responses:
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   get-banner-image:
     speakeasy-default-get-banner-image:
@@ -1391,6 +1697,8 @@ examples:
         "401":
           application/json: {"errors": []}
         "200": {}
+        "400":
+          application/json: {"errors": []}
   get-thumb-image:
     speakeasy-default-get-thumb-image:
       parameters:
@@ -1406,6 +1714,8 @@ examples:
         "401":
           application/json: {"errors": []}
         "200": {}
+        "400":
+          application/json: {"errors": []}
   getTimeline:
     "":
       parameters:
@@ -1422,6 +1732,8 @@ examples:
           row: 1
       responses:
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   startUniversalTranscode:
     "":
@@ -1446,12 +1758,16 @@ examples:
       responses:
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   getServerActivities:
     speakeasy-default-get-server-activities:
       responses:
         "401":
           application/json: {"errors": []}
         "200": {}
+        "400":
+          application/json: {"errors": []}
   cancelServerActivities:
     "":
       parameters:
@@ -1460,6 +1776,8 @@ examples:
       responses:
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   getButlerTasks:
     speakeasy-default-get-butler-tasks:
       responses:
@@ -1467,15 +1785,21 @@ examples:
           application/json: {"ButlerTasks": {"ButlerTask": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   startAllTasks:
     speakeasy-default-start-all-tasks:
       responses:
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   stopAllTasks:
     speakeasy-default-stop-all-tasks:
       responses:
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   startTask:
     speakeasy-default-start-task:
@@ -1485,6 +1809,8 @@ examples:
       responses:
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   stopTask:
     speakeasy-default-stop-task:
       parameters:
@@ -1493,12 +1819,16 @@ examples:
       responses:
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   getCompanionsData:
     speakeasy-default-get-companions-data:
       responses:
         "200":
           application/json: []
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   getUserFriends:
     speakeasy-default-get-user-friends:
@@ -1507,6 +1837,8 @@ examples:
           application/json: [{"email": "username@email.com", "friendlyName": "exampleUser", "home": true, "id": 0, "restricted": false, "sharedServers": [], "sharedSources": [], "status": "accepted", "thumb": "https://plex.tv/users/7d1916e0d8f6e76b/avatar?c=1694481578", "title": "username123", "username": "username123", "uuid": "7d1916e0d8f6e76b"}]
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   getGeoData:
     speakeasy-default-get-geo-data:
       responses:
@@ -1514,12 +1846,16 @@ examples:
           application/json: {"code": "VI", "continent_code": "NA", "country": "United States Virgin Islands", "city": "Amsterdam", "european_union_member": true, "time_zone": "America/St_Thomas", "postal_code": 802, "in_privacy_restricted_country": true, "in_privacy_restricted_region": true, "subdivisions": "Saint Thomas", "coordinates": "18.3381, -64.8941"}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   getHomeData:
     speakeasy-default-get-home-data:
       responses:
         "200":
           application/json: {"id": 1841489, "name": "Blindkitty38's home", "guestUserID": 58815432, "guestUserUUID": "f3df4e01bfca0787"}
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   get-server-resources:
     speakeasy-default-get-server-resources:
@@ -1532,7 +1868,10 @@ examples:
       responses:
         "401":
           application/json: {"errors": []}
-        "200": {}
+        "200":
+          application/json: []
+        "400":
+          application/json: {"errors": []}
   getPin:
     "":
       parameters:
@@ -1563,6 +1902,8 @@ examples:
           application/json: {"MediaContainer": {"size": 8, "allowSync": true, "identifier": "com.plexapp.plugins.library", "Hub": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   getLibraryHubs:
     speakeasy-default-get-library-hubs:
       parameters:
@@ -1574,6 +1915,8 @@ examples:
           application/json: {"MediaContainer": {"size": 7, "allowSync": true, "identifier": "com.plexapp.plugins.library", "librarySectionID": 1, "librarySectionTitle": "Movies", "librarySectionUUID": "322a231a-b7f7-49f5-920f-14c61199cd30", "Hub": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   performSearch:
     speakeasy-default-perform-search:
       parameters:
@@ -1583,6 +1926,8 @@ examples:
       responses:
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   performVoiceSearch:
     speakeasy-default-perform-voice-search:
       parameters:
@@ -1591,6 +1936,8 @@ examples:
           limit: 5
       responses:
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   getSearchResults:
     speakeasy-default-get-search-results:
@@ -1602,6 +1949,8 @@ examples:
           application/json: {"MediaContainer": {"size": 26, "identifier": "com.plexapp.plugins.library", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1680021154, "Metadata": [], "Provider": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   getFileHash:
     speakeasy-default-get-file-hash:
       parameters:
@@ -1609,6 +1958,8 @@ examples:
           url: "file://C:\\Image.png&type=13"
       responses:
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   getRecentlyAdded:
     speakeasy-default-get-recently-added:
@@ -1621,12 +1972,16 @@ examples:
           application/json: {"MediaContainer": {"size": 50, "identifier": "com.plexapp.plugins.library", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1680021154, "Metadata": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   get-all-libraries:
     speakeasy-default-get-all-libraries:
       responses:
         "200":
           application/json: {"MediaContainer": {"size": 5, "allowSync": false, "title1": "Plex Library", "Directory": []}}
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   get-library-details:
     speakeasy-default-get-library-details:
@@ -1639,6 +1994,8 @@ examples:
           application/json: {"MediaContainer": {"size": 29, "allowSync": false, "art": "/:/resources/movie-fanart.jpg", "content": "secondary", "identifier": "com.plexapp.plugins.library", "librarySectionID": 1, "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1701731894, "thumb": "/:/resources/movie.png", "title1": "Movies", "viewGroup": "secondary", "viewMode": 65592, "Directory": [], "Type": [], "FieldType": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   deleteLibrary:
     speakeasy-default-delete-library:
       parameters:
@@ -1646,6 +2003,8 @@ examples:
           sectionKey: 9518
       responses:
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   get-library-items:
     "":
@@ -1664,6 +2023,8 @@ examples:
           application/json: {"MediaContainer": {"size": 70, "allowSync": true, "art": "/:/resources/movie-fanart.jpg", "identifier": "com.plexapp.plugins.library", "librarySectionTitle": "Movies", "librarySectionUUID": "322a231a-b7f7-49f5-920f-14c61199cd30", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1701731894, "thumb": "/:/resources/movie.png", "title1": "Movies", "title2": "Recently Released", "viewGroup": "movie", "viewMode": 65592, "mixedParents": true, "Metadata": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   get-refresh-library-metadata:
     speakeasy-default-get-refresh-library-metadata:
       parameters:
@@ -1673,6 +2034,8 @@ examples:
           force: 0
       responses:
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   get-search-library:
     speakeasy-default-get-search-library:
@@ -1686,6 +2049,8 @@ examples:
           application/json: {"MediaContainer": {"size": 2, "allowSync": false, "art": "/:/resources/show-fanart.jpg", "identifier": "com.plexapp.plugins.library", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1698860922, "nocache": true, "thumb": "/:/resources/show.png", "title1": "TV Shows", "title2": "Search for ''", "viewGroup": "season", "viewMode": 65593, "Metadata": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   get-meta-data-by-rating-key:
     speakeasy-default-get-meta-data-by-rating-key:
       parameters:
@@ -1695,6 +2060,8 @@ examples:
         "200":
           application/json: {"MediaContainer": {"size": 1, "allowSync": true, "identifier": "com.plexapp.plugins.library", "librarySectionID": 1, "librarySectionTitle": "Movies", "librarySectionUUID": "cfc899d7-3000-46f6-8489-b9592714ada5", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1698860922, "Metadata": []}}
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   getMetadataChildren:
     include-stream:
@@ -1708,6 +2075,8 @@ examples:
           application/json: {"MediaContainer": {"size": 3, "allowSync": true, "art": "/library/metadata/30072/art/1705739923", "identifier": "com.plexapp.plugins.library", "key": "30072", "librarySectionID": 2, "librarySectionTitle": "TV Shows", "librarySectionUUID": "4bb2521c-8ba9-459b-aaee-8ab8bc35eabd", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1701731894, "nocache": true, "parentIndex": 1, "parentTitle": "Reacher", "parentYear": 2022, "summary": "When retired Military Police Officer Jack Reacher is arrested for a murder he did not commit, he finds himself in the middle of a deadly conspiracy full of dirty cops, shady businessmen, and scheming politicians. With nothing but his wits, he must figure out what is happening in Margrave, Georgia.", "theme": "/library/metadata/30072/theme/1705739923", "thumb": "/library/metadata/30072/thumb/1705739923", "title1": "TV Shows", "title2": "Reacher", "viewGroup": "season", "viewMode": 65593, "Directory": [{"leafCount": 16, "thumb": "/library/metadata/30072/thumb/1705739923", "viewedLeafCount": 16, "key": "/library/metadata/30072/allLeaves", "title": "All episodes"}], "Metadata": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
     include-stream-otheritem:
       parameters:
         path:
@@ -1718,6 +2087,8 @@ examples:
         "200":
           application/json: {"MediaContainer": {"size": 3, "allowSync": true, "art": "/library/metadata/30072/art/1705739923", "identifier": "com.plexapp.plugins.library", "key": "30072", "librarySectionID": 2, "librarySectionTitle": "TV Shows", "librarySectionUUID": "4bb2521c-8ba9-459b-aaee-8ab8bc35eabd", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1701731894, "nocache": true, "parentIndex": 1, "parentTitle": "Reacher", "parentYear": 2022, "summary": "When retired Military Police Officer Jack Reacher is arrested for a murder he did not commit, he finds himself in the middle of a deadly conspiracy full of dirty cops, shady businessmen, and scheming politicians. With nothing but his wits, he must figure out what is happening in Margrave, Georgia.", "theme": "/library/metadata/30072/theme/1705739923", "thumb": "/library/metadata/30072/thumb/1705739923", "title1": "TV Shows", "title2": "Reacher", "viewGroup": "season", "viewMode": 65593, "Directory": [{"leafCount": 16, "thumb": "/library/metadata/30072/thumb/1705739923", "viewedLeafCount": 16, "key": "/library/metadata/30072/allLeaves", "title": "All episodes"}], "Metadata": []}}
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
     include-stream-otheritem-anotheritem:
       parameters:
@@ -1730,6 +2101,8 @@ examples:
           application/json: {"MediaContainer": {"size": 3, "allowSync": true, "art": "/library/metadata/30072/art/1705739923", "identifier": "com.plexapp.plugins.library", "key": "30072", "librarySectionID": 2, "librarySectionTitle": "TV Shows", "librarySectionUUID": "4bb2521c-8ba9-459b-aaee-8ab8bc35eabd", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1701731894, "nocache": true, "parentIndex": 1, "parentTitle": "Reacher", "parentYear": 2022, "summary": "When retired Military Police Officer Jack Reacher is arrested for a murder he did not commit, he finds himself in the middle of a deadly conspiracy full of dirty cops, shady businessmen, and scheming politicians. With nothing but his wits, he must figure out what is happening in Margrave, Georgia.", "theme": "/library/metadata/30072/theme/1705739923", "thumb": "/library/metadata/30072/thumb/1705739923", "title1": "TV Shows", "title2": "Reacher", "viewGroup": "season", "viewMode": 65593, "Directory": [{"leafCount": 16, "thumb": "/library/metadata/30072/thumb/1705739923", "viewedLeafCount": 16, "key": "/library/metadata/30072/allLeaves", "title": "All episodes"}], "Metadata": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   getTopWatchedContent:
     "":
       parameters:
@@ -1741,12 +2114,16 @@ examples:
           application/json: {"MediaContainer": {"size": 1, "allowSync": true, "identifier": "com.plexapp.plugins.library", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1698860922, "Metadata": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   getOnDeck:
     speakeasy-default-get-on-deck:
       responses:
         "200":
           application/json: {"MediaContainer": {"size": 16, "identifier": "com.plexapp.plugins.library", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1680021154, "Metadata": []}}
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   get-watch-list:
     speakeasy-default-get-watch-list:
@@ -1761,6 +2138,8 @@ examples:
         "401":
           application/json: {"errors": []}
         "200": {}
+        "400":
+          application/json: {"errors": []}
   logLine:
     speakeasy-default-log-line:
       parameters:
@@ -1771,6 +2150,8 @@ examples:
       responses:
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   logMultiLine:
     speakeasy-default-log-multi-line:
       requestBody:
@@ -1778,10 +2159,14 @@ examples:
       responses:
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   enablePaperTrail:
     speakeasy-default-enable-paper-trail:
       responses:
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   createPlaylist:
     speakeasy-default-create-playlist:
@@ -1796,12 +2181,16 @@ examples:
           application/json: {"MediaContainer": {"size": 7, "Metadata": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   getPlaylists:
     speakeasy-default-get-playlists:
       responses:
         "200":
           application/json: {"MediaContainer": {"size": 4, "Metadata": []}}
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   getPlaylist:
     speakeasy-default-get-playlist:
@@ -1813,6 +2202,8 @@ examples:
           application/json: {"MediaContainer": {"size": 1, "Metadata": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   deletePlaylist:
     speakeasy-default-delete-playlist:
       parameters:
@@ -1820,6 +2211,8 @@ examples:
           playlistID: "216.22"
       responses:
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   updatePlaylist:
     speakeasy-default-update-playlist:
@@ -1829,6 +2222,8 @@ examples:
         query: {}
       responses:
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   getPlaylistContents:
     speakeasy-default-get-playlist-contents:
@@ -1842,6 +2237,8 @@ examples:
           application/json: {"MediaContainer": {"size": 2, "composite": "/playlists/95/composite/1705717521", "duration": 282, "leafCount": 2, "playlistType": "video", "ratingKey": "95", "smart": true, "title": "Smart Movie Playlist", "Metadata": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   clearPlaylistContents:
     speakeasy-default-clear-playlist-contents:
       parameters:
@@ -1849,6 +2246,8 @@ examples:
           playlistID: "1893.18"
       responses:
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   addPlaylistContents:
     speakeasy-default-add-playlist-contents:
@@ -1863,6 +2262,8 @@ examples:
           application/json: {"MediaContainer": {"size": 1, "leafCountAdded": 1, "leafCountRequested": 1, "Metadata": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   uploadPlaylist:
     speakeasy-default-upload-playlist:
       parameters:
@@ -1871,6 +2272,8 @@ examples:
           force: 0
       responses:
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   getTransientToken:
     speakeasy-default-get-transient-token:
@@ -1881,6 +2284,8 @@ examples:
       responses:
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   getSourceConnectionInformation:
     speakeasy-default-get-source-connection-information:
       parameters:
@@ -1888,6 +2293,8 @@ examples:
           source: "server://client-identifier"
       responses:
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   getUserDetails:
     speakeasy-default-get-user-details:
@@ -1902,11 +2309,13 @@ examples:
   post-users-sign-in-data:
     speakeasy-default-post-users-sign-in-data:
       requestBody:
-        application/x-www-form-urlencoded: {"login": "username@email.com", "password": "password123"}
+        application/x-www-form-urlencoded: {"login": "username@email.com", "password": "password123", "verificationCode": "123456"}
       responses:
         "201":
           application/json: {"adsConsent": true, "adsConsentReminderAt": "2019-08-24T14:15:22Z", "adsConsentSetAt": "2019-08-24T14:15:22Z", "anonymous": false, "authToken": "CxoUzBTSV5hsxjTpFKaf", "backupCodesCreated": false, "confirmed": false, "country": "US", "email": "username@email.com", "emailOnlyAuth": false, "experimentalFeatures": false, "friendlyName": "friendlyUsername", "entitlements": [], "guest": false, "hasPassword": true, "home": false, "homeAdmin": false, "homeSize": 1, "id": 13692262, "joinedAt": 1721154902, "locale": null, "mailingListActive": false, "mailingListStatus": "unsubscribed", "maxHomeSize": 15, "pin": "string", "profile": {"autoSelectAudio": true, "defaultAudioLanguage": "ja", "defaultSubtitleLanguage": "en", "autoSelectSubtitle": "1", "defaultSubtitleAccessibility": "1", "defaultSubtitleForced": "0", "watchedIndicator": "1", "mediaReviewsVisibility": 0}, "protected": false, "rememberExpiresAt": 1722364046, "restricted": false, "roles": ["string"], "scrobbleTypes": "", "services": [{"identifier": "metadata-dev", "endpoint": "https://epg.provider.plex.tv", "token": "DjoMtqFAGRL1uVtCyF1dKIorTbShJeqv", "secret": "string", "status": "online"}], "subscription": {"features": ["Android - Dolby Vision"], "active": true, "subscribedAt": "2021-04-12T18:21:12Z", "status": "Inactive", "paymentService": "string", "plan": "string"}, "subscriptionDescription": "string", "subscriptions": [{"features": ["Android - Dolby Vision"], "active": true, "subscribedAt": "2021-04-12T18:21:12Z", "status": "Inactive", "paymentService": "string", "plan": "string"}], "thumb": "https://plex.tv/users/a4f43c1ebfde43a5/avatar?c=8372075101", "title": "UsernameTitle", "twoFactorEnabled": false, "username": "Username", "uuid": "dae343c1f45beb4f", "pastSubscriptions": [{"id": "string", "mode": "string", "renewsAt": "string", "endsAt": "1556281940", "canceled": "0", "gracePeriod": "0", "onHold": "0", "canReactivate": "0", "canUpgrade": "0", "canDowngrade": "0", "canConvert": "0", "type": "plexpass", "transfer": "string", "state": "ended", "billing": {"paymentMethodId": 569045}}], "trials": [{}]}
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   getStatistics:
     "":
@@ -1918,6 +2327,8 @@ examples:
           application/json: {"MediaContainer": {"size": 5497, "Device": [], "Account": [], "StatisticsMedia": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   getResourcesStatistics:
     "":
       parameters:
@@ -1927,6 +2338,8 @@ examples:
         "200":
           application/json: {"MediaContainer": {"size": 5497, "StatisticsResources": []}}
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   getBandwidthStatistics:
     "":
@@ -1938,12 +2351,16 @@ examples:
           application/json: {"MediaContainer": {"size": 5497, "Device": [], "Account": [], "StatisticsBandwidth": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   getSessions:
     speakeasy-default-get-sessions:
       responses:
         "200":
           application/json: {"MediaContainer": {"size": 1, "Metadata": []}}
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   getSessionHistory:
     viewed-at-descending:
@@ -1957,6 +2374,8 @@ examples:
           application/json: {"MediaContainer": {"size": 10855, "Metadata": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
     viewed-at-ascending:
       parameters:
         query:
@@ -1967,6 +2386,8 @@ examples:
         "200":
           application/json: {"MediaContainer": {"size": 10855, "Metadata": []}}
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
     rating-descending:
       parameters:
@@ -1979,6 +2400,8 @@ examples:
           application/json: {"MediaContainer": {"size": 10855, "Metadata": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
     rating-ascending:
       parameters:
         query:
@@ -1990,6 +2413,8 @@ examples:
           application/json: {"MediaContainer": {"size": 10855, "Metadata": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
     "":
       parameters:
         query:
@@ -1999,6 +2424,8 @@ examples:
         "200":
           application/json: {"MediaContainer": {"size": 10855, "Metadata": []}}
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
     ViewedAt:
       parameters:
@@ -2011,12 +2438,16 @@ examples:
           application/json: {"MediaContainer": {"size": 10855, "Metadata": []}}
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   getTranscodeSessions:
     speakeasy-default-get-transcode-sessions:
       responses:
         "200":
           application/json: {"MediaContainer": {"size": 1, "TranscodeSession": [{"key": "vv3i2q2lax92qlzul1hbd4bx", "throttled": false, "complete": false, "progress": 1.7999999523162842, "size": -22, "speed": 25.100000381469727, "error": false, "duration": 1445695, "remaining": 53, "context": "streaming", "sourceVideoCodec": "h264", "sourceAudioCodec": "aac", "videoDecision": "transcode", "audioDecision": "transcode", "subtitleDecision": "burn", "protocol": "http", "container": "mkv", "videoCodec": "h264", "audioCodec": "opus", "audioChannels": 1, "transcodeHwRequested": true, "timeStamp": 1705895805.4919229, "maxOffsetAvailable": 29.53, "minOffsetAvailable": 3.003000020980835}]}}
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   stopTranscodeSession:
     speakeasy-default-stop-transcode-session:
@@ -2026,12 +2457,16 @@ examples:
       responses:
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   getUpdateStatus:
     speakeasy-default-get-update-status:
       responses:
         "200":
           application/json: {"MediaContainer": {"size": 1, "canInstall": false, "checkedAt": 1705801232, "downloadURL": "https://plex.tv/downloads/latest/5?channel=8&build=linux-x86_64&distro=redhat&X-Plex-Token=xxxxxxxxxxxxxxxxxxxx", "status": 0, "Release": [{"key": "https://plex.tv/updater/releases/5136", "version": "1.40.0.7775-456fbaf97", "added": "(PLEASE NOTE) This version makes changes to the database which will make it compatible only with server versions 1.31.2 or higher (released March 14). You will not be able to use your database on Plex Media Server versions lower than this after this update. Please also be patient when updating to this version if you have a very large database and allow the upgrade process to finish.\n(Collections) Items added to a collection from the item context menu will now lock the collection field on the items (#12793)\n(Music) Store track genres and add filtering options (#14653)\n(Music) Support ID3v2.4 null-separated tags for genres and release type (#14653)\n(View History) No longer create a view history entry for items marked as played (#10888)\n(Web) Updated to 4.118.0", "fixed": "(Agents) Changing a 'Other Videos' type library to the modern movie agent would fail (#14483)\n(Agents) It is possible that agents are not initialised during startup on rare occasions (#14654)\n(Agents) Remove the legacy OpenSubtitles agent which is no longer supported upstream (#14667)\n(Collection) Server could become unresponsive when collection membership changes (#14612)\n(DVR) Previously watched recordings could be deleted without being watched again (#13779)\n(Libraries) When performing fix match on items from certain music libraries the language would default to Arabic (#14501)\n(Library) The Content Rating not equal to None filter does not work (#14620)\n(Search) Album search results could contain all the album's tracks too (#14486)\n(Subtitles) In some circumstances, sidecar subtitles can show up for media when they're no longer available (#14674)\n(Transcoder) HW encoding would fail on devices with no rate control (#14222)\n(Transcoder) Software transcoding on Ubuntu could cause unexpected behavior (#14605)", "downloadURL": "https://plex.tv/downloads/latest/5?channel=8&build=linux-x86_64&distro=redhat&X-Plex-Token=xxxxxxxxxxxxxxxxxxxx", "state": "notify"}]}}
         "401":
+          application/json: {"errors": []}
+        "400":
           application/json: {"errors": []}
   checkForUpdates:
     "":
@@ -2041,6 +2476,8 @@ examples:
       responses:
         "401":
           application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
   applyUpdates:
     "":
       parameters:
@@ -2048,5 +2485,16 @@ examples:
           tonight: 1
           skip: 1
       responses:
+        "401":
+          application/json: {"errors": []}
+        "400":
+          application/json: {"errors": []}
+  getTokenDetails:
+    speakeasy-default-get-token-details:
+      responses:
+        "200":
+          application/json: {"adsConsent": true, "adsConsentReminderAt": "2019-08-24T14:15:22Z", "adsConsentSetAt": "2019-08-24T14:15:22Z", "anonymous": false, "authToken": "CxoUzBTSV5hsxjTpFKaf", "backupCodesCreated": false, "confirmed": false, "country": "US", "email": "username@email.com", "emailOnlyAuth": false, "experimentalFeatures": false, "friendlyName": "friendlyUsername", "entitlements": [], "guest": false, "hasPassword": true, "home": false, "homeAdmin": false, "homeSize": 1, "id": 13692262, "joinedAt": 1721154902, "locale": null, "mailingListActive": false, "mailingListStatus": "unsubscribed", "maxHomeSize": 15, "pin": "string", "profile": {"autoSelectAudio": true, "defaultAudioLanguage": "ja", "defaultSubtitleLanguage": "en", "autoSelectSubtitle": "1", "defaultSubtitleAccessibility": "1", "defaultSubtitleForced": "0", "watchedIndicator": "1", "mediaReviewsVisibility": 0}, "protected": false, "rememberExpiresAt": 1722364046, "restricted": false, "roles": ["string"], "scrobbleTypes": "", "services": [{"identifier": "metadata-dev", "endpoint": "https://epg.provider.plex.tv", "token": "DjoMtqFAGRL1uVtCyF1dKIorTbShJeqv", "secret": "string", "status": "online"}], "subscription": {"features": ["Android - Dolby Vision"], "active": true, "subscribedAt": "2021-04-12T18:21:12Z", "status": "Inactive", "paymentService": "string", "plan": "string"}, "subscriptionDescription": "string", "subscriptions": [{"features": ["Android - Dolby Vision"], "active": true, "subscribedAt": "2021-04-12T18:21:12Z", "status": "Inactive", "paymentService": "string", "plan": "string"}], "thumb": "https://plex.tv/users/a4f43c1ebfde43a5/avatar?c=8372075101", "title": "UsernameTitle", "twoFactorEnabled": false, "username": "Username", "uuid": "dae343c1f45beb4f"}
+        "400":
+          application/json: {"errors": []}
         "401":
           application/json: {"errors": []}

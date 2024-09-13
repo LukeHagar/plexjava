@@ -42,7 +42,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetUpdateStatusResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetUpdateStatusBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetUpdateStatusUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -65,7 +68,8 @@ public class Application {
 
 | Error Object                              | Status Code                               | Content Type                              |
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| models/errors/GetUpdateStatusResponseBody | 401                                       | application/json                          |
+| models/errors/GetUpdateStatusBadRequest   | 400                                       | application/json                          |
+| models/errors/GetUpdateStatusUnauthorized | 401                                       | application/json                          |
 | models/errors/SDKError                    | 4xx-5xx                                   | \*\/*                                     |
 
 
@@ -98,7 +102,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.CheckForUpdatesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.CheckForUpdatesBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.CheckForUpdatesUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -127,7 +134,8 @@ public class Application {
 
 | Error Object                              | Status Code                               | Content Type                              |
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| models/errors/CheckForUpdatesResponseBody | 401                                       | application/json                          |
+| models/errors/CheckForUpdatesBadRequest   | 400                                       | application/json                          |
+| models/errors/CheckForUpdatesUnauthorized | 401                                       | application/json                          |
 | models/errors/SDKError                    | 4xx-5xx                                   | \*\/*                                     |
 
 
@@ -163,7 +171,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.ApplyUpdatesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.ApplyUpdatesBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.ApplyUpdatesUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -193,5 +204,6 @@ public class Application {
 
 | Error Object                           | Status Code                            | Content Type                           |
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models/errors/ApplyUpdatesResponseBody | 401                                    | application/json                       |
+| models/errors/ApplyUpdatesBadRequest   | 400                                    | application/json                       |
+| models/errors/ApplyUpdatesUnauthorized | 401                                    | application/json                       |
 | models/errors/SDKError                 | 4xx-5xx                                | \*\/*                                  |

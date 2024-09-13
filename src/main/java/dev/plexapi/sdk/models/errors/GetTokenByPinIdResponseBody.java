@@ -19,13 +19,13 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * GetTokenByPinIdResponseBody - Bad Request response when the X-Plex-Client-Identifier is missing
+ * GetTokenByPinIdResponseBody - Not Found or Expired
  */
 public class GetTokenByPinIdResponseBody extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("errors")
-    private Optional<? extends List<GetTokenByPinIdErrors>> errors;
+    private Optional<? extends List<GetTokenByPinIdPlexErrors>> errors;
 
     /**
      * Raw HTTP response; suitable for custom response parsing
@@ -36,7 +36,7 @@ public class GetTokenByPinIdResponseBody extends RuntimeException {
 
     @JsonCreator
     public GetTokenByPinIdResponseBody(
-            @JsonProperty("errors") Optional<? extends List<GetTokenByPinIdErrors>> errors,
+            @JsonProperty("errors") Optional<? extends List<GetTokenByPinIdPlexErrors>> errors,
             @JsonProperty("RawResponse") Optional<? extends HttpResponse<InputStream>> rawResponse) {
         Utils.checkNotNull(errors, "errors");
         Utils.checkNotNull(rawResponse, "rawResponse");
@@ -49,8 +49,8 @@ public class GetTokenByPinIdResponseBody extends RuntimeException {
     }
 
     @SuppressWarnings("unchecked")
-    public Optional<List<GetTokenByPinIdErrors>> errors(){
-        return (Optional<List<GetTokenByPinIdErrors>>) errors;
+    public Optional<List<GetTokenByPinIdPlexErrors>> errors(){
+        return (Optional<List<GetTokenByPinIdPlexErrors>>) errors;
     }
 
     /**
@@ -65,13 +65,13 @@ public class GetTokenByPinIdResponseBody extends RuntimeException {
         return new Builder();
     }
 
-    public GetTokenByPinIdResponseBody withErrors(List<GetTokenByPinIdErrors> errors) {
+    public GetTokenByPinIdResponseBody withErrors(List<GetTokenByPinIdPlexErrors> errors) {
         Utils.checkNotNull(errors, "errors");
         this.errors = Optional.ofNullable(errors);
         return this;
     }
     
-    public GetTokenByPinIdResponseBody withErrors(Optional<? extends List<GetTokenByPinIdErrors>> errors) {
+    public GetTokenByPinIdResponseBody withErrors(Optional<? extends List<GetTokenByPinIdPlexErrors>> errors) {
         Utils.checkNotNull(errors, "errors");
         this.errors = errors;
         return this;
@@ -125,7 +125,7 @@ public class GetTokenByPinIdResponseBody extends RuntimeException {
 
     public final static class Builder {
 
-        private Optional<? extends List<GetTokenByPinIdErrors>> errors = Optional.empty();
+        private Optional<? extends List<GetTokenByPinIdPlexErrors>> errors = Optional.empty();
 
         private Optional<? extends HttpResponse<InputStream>> rawResponse;
 
@@ -133,13 +133,13 @@ public class GetTokenByPinIdResponseBody extends RuntimeException {
           // force use of static builder() method
         }
 
-        public Builder errors(List<GetTokenByPinIdErrors> errors) {
+        public Builder errors(List<GetTokenByPinIdPlexErrors> errors) {
             Utils.checkNotNull(errors, "errors");
             this.errors = Optional.ofNullable(errors);
             return this;
         }
         
-        public Builder errors(Optional<? extends List<GetTokenByPinIdErrors>> errors) {
+        public Builder errors(Optional<? extends List<GetTokenByPinIdPlexErrors>> errors) {
             Utils.checkNotNull(errors, "errors");
             this.errors = errors;
             return this;

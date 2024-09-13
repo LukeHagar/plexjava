@@ -47,7 +47,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -70,7 +73,8 @@ public class Application {
 
 | Error Object                                    | Status Code                                     | Content Type                                    |
 | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
-| models/errors/GetServerCapabilitiesResponseBody | 401                                             | application/json                                |
+| models/errors/GetServerCapabilitiesBadRequest   | 400                                             | application/json                                |
+| models/errors/GetServerCapabilitiesUnauthorized | 401                                             | application/json                                |
 | models/errors/SDKError                          | 4xx-5xx                                         | \*\/*                                           |
 
 
@@ -103,7 +107,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetServerPreferencesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetServerPreferencesBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetServerPreferencesUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -126,7 +133,8 @@ public class Application {
 
 | Error Object                                   | Status Code                                    | Content Type                                   |
 | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
-| models/errors/GetServerPreferencesResponseBody | 401                                            | application/json                               |
+| models/errors/GetServerPreferencesBadRequest   | 400                                            | application/json                               |
+| models/errors/GetServerPreferencesUnauthorized | 401                                            | application/json                               |
 | models/errors/SDKError                         | 4xx-5xx                                        | \*\/*                                          |
 
 
@@ -159,7 +167,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetAvailableClientsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetAvailableClientsBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetAvailableClientsUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -182,7 +193,8 @@ public class Application {
 
 | Error Object                                  | Status Code                                   | Content Type                                  |
 | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
-| models/errors/GetAvailableClientsResponseBody | 401                                           | application/json                              |
+| models/errors/GetAvailableClientsBadRequest   | 400                                           | application/json                              |
+| models/errors/GetAvailableClientsUnauthorized | 401                                           | application/json                              |
 | models/errors/SDKError                        | 4xx-5xx                                       | \*\/*                                         |
 
 
@@ -215,7 +227,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetDevicesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetDevicesBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetDevicesUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -238,7 +253,8 @@ public class Application {
 
 | Error Object                         | Status Code                          | Content Type                         |
 | ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| models/errors/GetDevicesResponseBody | 401                                  | application/json                     |
+| models/errors/GetDevicesBadRequest   | 400                                  | application/json                     |
+| models/errors/GetDevicesUnauthorized | 401                                  | application/json                     |
 | models/errors/SDKError               | 4xx-5xx                              | \*\/*                                |
 
 
@@ -270,7 +286,7 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetServerIdentityResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetServerIdentityRequestTimeout e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -291,10 +307,10 @@ public class Application {
 
 ### Errors
 
-| Error Object                                | Status Code                                 | Content Type                                |
-| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| models/errors/GetServerIdentityResponseBody | 408                                         | application/json                            |
-| models/errors/SDKError                      | 4xx-5xx                                     | \*\/*                                       |
+| Error Object                                  | Status Code                                   | Content Type                                  |
+| --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
+| models/errors/GetServerIdentityRequestTimeout | 408                                           | application/json                              |
+| models/errors/SDKError                        | 4xx-5xx                                       | \*\/*                                         |
 
 
 ## getMyPlexAccount
@@ -326,7 +342,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetMyPlexAccountResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetMyPlexAccountBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetMyPlexAccountUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -349,7 +368,8 @@ public class Application {
 
 | Error Object                               | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| models/errors/GetMyPlexAccountResponseBody | 401                                        | application/json                           |
+| models/errors/GetMyPlexAccountBadRequest   | 400                                        | application/json                           |
+| models/errors/GetMyPlexAccountUnauthorized | 401                                        | application/json                           |
 | models/errors/SDKError                     | 4xx-5xx                                    | \*\/*                                      |
 
 
@@ -383,7 +403,7 @@ public class Application {
             GetResizedPhotoRequest req = GetResizedPhotoRequest.builder()
                 .width(110d)
                 .height(165d)
-                .opacity(643869L)
+                .opacity(100L)
                 .blur(4000d)
                 .minSize(MinSize.ZERO)
                 .upscale(Upscale.ZERO)
@@ -395,7 +415,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.GetResizedPhotoResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetResizedPhotoBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetResizedPhotoUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -424,7 +447,8 @@ public class Application {
 
 | Error Object                              | Status Code                               | Content Type                              |
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| models/errors/GetResizedPhotoResponseBody | 401                                       | application/json                          |
+| models/errors/GetResizedPhotoBadRequest   | 400                                       | application/json                          |
+| models/errors/GetResizedPhotoUnauthorized | 401                                       | application/json                          |
 | models/errors/SDKError                    | 4xx-5xx                                   | \*\/*                                     |
 
 
@@ -458,7 +482,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetMediaProvidersResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetMediaProvidersBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetMediaProvidersUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -487,7 +514,8 @@ public class Application {
 
 | Error Object                                | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| models/errors/GetMediaProvidersResponseBody | 401                                         | application/json                            |
+| models/errors/GetMediaProvidersBadRequest   | 400                                         | application/json                            |
+| models/errors/GetMediaProvidersUnauthorized | 401                                         | application/json                            |
 | models/errors/SDKError                      | 4xx-5xx                                     | \*\/*                                       |
 
 
@@ -520,7 +548,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetServerListResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetServerListBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetServerListUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -543,5 +574,6 @@ public class Application {
 
 | Error Object                            | Status Code                             | Content Type                            |
 | --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| models/errors/GetServerListResponseBody | 401                                     | application/json                        |
+| models/errors/GetServerListBadRequest   | 400                                     | application/json                        |
+| models/errors/GetServerListUnauthorized | 401                                     | application/json                        |
 | models/errors/SDKError                  | 4xx-5xx                                 | \*\/*                                   |

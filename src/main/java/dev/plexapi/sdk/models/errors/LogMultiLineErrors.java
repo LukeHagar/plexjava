@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Double;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -22,7 +22,7 @@ public class LogMultiLineErrors {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("code")
-    private Optional<Double> code;
+    private Optional<Long> code;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("message")
@@ -30,13 +30,13 @@ public class LogMultiLineErrors {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("status")
-    private Optional<Double> status;
+    private Optional<Long> status;
 
     @JsonCreator
     public LogMultiLineErrors(
-            @JsonProperty("code") Optional<Double> code,
+            @JsonProperty("code") Optional<Long> code,
             @JsonProperty("message") Optional<String> message,
-            @JsonProperty("status") Optional<Double> status) {
+            @JsonProperty("status") Optional<Long> status) {
         Utils.checkNotNull(code, "code");
         Utils.checkNotNull(message, "message");
         Utils.checkNotNull(status, "status");
@@ -50,7 +50,7 @@ public class LogMultiLineErrors {
     }
 
     @JsonIgnore
-    public Optional<Double> code() {
+    public Optional<Long> code() {
         return code;
     }
 
@@ -60,7 +60,7 @@ public class LogMultiLineErrors {
     }
 
     @JsonIgnore
-    public Optional<Double> status() {
+    public Optional<Long> status() {
         return status;
     }
 
@@ -68,13 +68,13 @@ public class LogMultiLineErrors {
         return new Builder();
     }
 
-    public LogMultiLineErrors withCode(double code) {
+    public LogMultiLineErrors withCode(long code) {
         Utils.checkNotNull(code, "code");
         this.code = Optional.ofNullable(code);
         return this;
     }
 
-    public LogMultiLineErrors withCode(Optional<Double> code) {
+    public LogMultiLineErrors withCode(Optional<Long> code) {
         Utils.checkNotNull(code, "code");
         this.code = code;
         return this;
@@ -92,13 +92,13 @@ public class LogMultiLineErrors {
         return this;
     }
 
-    public LogMultiLineErrors withStatus(double status) {
+    public LogMultiLineErrors withStatus(long status) {
         Utils.checkNotNull(status, "status");
         this.status = Optional.ofNullable(status);
         return this;
     }
 
-    public LogMultiLineErrors withStatus(Optional<Double> status) {
+    public LogMultiLineErrors withStatus(Optional<Long> status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
@@ -137,23 +137,23 @@ public class LogMultiLineErrors {
     
     public final static class Builder {
  
-        private Optional<Double> code = Optional.empty();
+        private Optional<Long> code = Optional.empty();
  
         private Optional<String> message = Optional.empty();
  
-        private Optional<Double> status = Optional.empty();  
+        private Optional<Long> status = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
         }
 
-        public Builder code(double code) {
+        public Builder code(long code) {
             Utils.checkNotNull(code, "code");
             this.code = Optional.ofNullable(code);
             return this;
         }
 
-        public Builder code(Optional<Double> code) {
+        public Builder code(Optional<Long> code) {
             Utils.checkNotNull(code, "code");
             this.code = code;
             return this;
@@ -171,13 +171,13 @@ public class LogMultiLineErrors {
             return this;
         }
 
-        public Builder status(double status) {
+        public Builder status(long status) {
             Utils.checkNotNull(status, "status");
             this.status = Optional.ofNullable(status);
             return this;
         }
 
-        public Builder status(Optional<Double> status) {
+        public Builder status(Optional<Long> status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;

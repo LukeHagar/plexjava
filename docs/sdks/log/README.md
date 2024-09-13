@@ -44,7 +44,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.LogLineResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.LogLineBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.LogLineUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -75,7 +78,8 @@ public class Application {
 
 | Error Object                      | Status Code                       | Content Type                      |
 | --------------------------------- | --------------------------------- | --------------------------------- |
-| models/errors/LogLineResponseBody | 401                               | application/json                  |
+| models/errors/LogLineBadRequest   | 400                               | application/json                  |
+| models/errors/LogLineUnauthorized | 401                               | application/json                  |
 | models/errors/SDKError            | 4xx-5xx                           | \*\/*                             |
 
 
@@ -125,14 +129,17 @@ public class Application {
                 .build();
 
             String req = "level=4&message=Test%20message%201&source=postman\nlevel=3&message=Test%20message%202&source=postman
-level=1&message=Test%20message%203&source=postman";
+            level=1&message=Test%20message%203&source=postman";
 
             LogMultiLineResponse res = sdk.log().logMultiLine()
                 .request(req)
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.LogMultiLineResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.LogMultiLineBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.LogMultiLineUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -161,7 +168,8 @@ level=1&message=Test%20message%203&source=postman";
 
 | Error Object                           | Status Code                            | Content Type                           |
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models/errors/LogMultiLineResponseBody | 401                                    | application/json                       |
+| models/errors/LogMultiLineBadRequest   | 400                                    | application/json                       |
+| models/errors/LogMultiLineUnauthorized | 401                                    | application/json                       |
 | models/errors/SDKError                 | 4xx-5xx                                | \*\/*                                  |
 
 
@@ -193,7 +201,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.EnablePaperTrailResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.EnablePaperTrailBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.EnablePaperTrailUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -216,5 +227,6 @@ public class Application {
 
 | Error Object                               | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| models/errors/EnablePaperTrailResponseBody | 401                                        | application/json                           |
+| models/errors/EnablePaperTrailBadRequest   | 400                                        | application/json                           |
+| models/errors/EnablePaperTrailUnauthorized | 401                                        | application/json                           |
 | models/errors/SDKError                     | 4xx-5xx                                    | \*\/*                                      |

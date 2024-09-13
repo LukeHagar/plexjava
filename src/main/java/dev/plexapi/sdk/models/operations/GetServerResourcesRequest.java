@@ -30,12 +30,6 @@ public class GetServerResourcesRequest {
     private Optional<String> xPlexClientIdentifier;
 
     /**
-     * Plex Authentication Token
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Token")
-    private String xPlexToken;
-
-    /**
      * Include Https entries in the results
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeHttps")
@@ -58,25 +52,21 @@ public class GetServerResourcesRequest {
     @JsonCreator
     public GetServerResourcesRequest(
             Optional<String> xPlexClientIdentifier,
-            String xPlexToken,
             Optional<? extends IncludeHttps> includeHttps,
             Optional<? extends IncludeRelay> includeRelay,
             Optional<? extends IncludeIPv6> includeIPv6) {
         Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-        Utils.checkNotNull(xPlexToken, "xPlexToken");
         Utils.checkNotNull(includeHttps, "includeHttps");
         Utils.checkNotNull(includeRelay, "includeRelay");
         Utils.checkNotNull(includeIPv6, "includeIPv6");
         this.xPlexClientIdentifier = xPlexClientIdentifier;
-        this.xPlexToken = xPlexToken;
         this.includeHttps = includeHttps;
         this.includeRelay = includeRelay;
         this.includeIPv6 = includeIPv6;
     }
     
-    public GetServerResourcesRequest(
-            String xPlexToken) {
-        this(Optional.empty(), xPlexToken, Optional.empty(), Optional.empty(), Optional.empty());
+    public GetServerResourcesRequest() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -88,14 +78,6 @@ public class GetServerResourcesRequest {
     @JsonIgnore
     public Optional<String> xPlexClientIdentifier() {
         return xPlexClientIdentifier;
-    }
-
-    /**
-     * Plex Authentication Token
-     */
-    @JsonIgnore
-    public String xPlexToken() {
-        return xPlexToken;
     }
 
     /**
@@ -152,15 +134,6 @@ public class GetServerResourcesRequest {
     public GetServerResourcesRequest withXPlexClientIdentifier(Optional<String> xPlexClientIdentifier) {
         Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
         this.xPlexClientIdentifier = xPlexClientIdentifier;
-        return this;
-    }
-
-    /**
-     * Plex Authentication Token
-     */
-    public GetServerResourcesRequest withXPlexToken(String xPlexToken) {
-        Utils.checkNotNull(xPlexToken, "xPlexToken");
-        this.xPlexToken = xPlexToken;
         return this;
     }
 
@@ -233,7 +206,6 @@ public class GetServerResourcesRequest {
         GetServerResourcesRequest other = (GetServerResourcesRequest) o;
         return 
             Objects.deepEquals(this.xPlexClientIdentifier, other.xPlexClientIdentifier) &&
-            Objects.deepEquals(this.xPlexToken, other.xPlexToken) &&
             Objects.deepEquals(this.includeHttps, other.includeHttps) &&
             Objects.deepEquals(this.includeRelay, other.includeRelay) &&
             Objects.deepEquals(this.includeIPv6, other.includeIPv6);
@@ -243,7 +215,6 @@ public class GetServerResourcesRequest {
     public int hashCode() {
         return Objects.hash(
             xPlexClientIdentifier,
-            xPlexToken,
             includeHttps,
             includeRelay,
             includeIPv6);
@@ -253,7 +224,6 @@ public class GetServerResourcesRequest {
     public String toString() {
         return Utils.toString(GetServerResourcesRequest.class,
                 "xPlexClientIdentifier", xPlexClientIdentifier,
-                "xPlexToken", xPlexToken,
                 "includeHttps", includeHttps,
                 "includeRelay", includeRelay,
                 "includeIPv6", includeIPv6);
@@ -262,8 +232,6 @@ public class GetServerResourcesRequest {
     public final static class Builder {
  
         private Optional<String> xPlexClientIdentifier = Optional.empty();
- 
-        private String xPlexToken;
  
         private Optional<? extends IncludeHttps> includeHttps;
  
@@ -296,15 +264,6 @@ public class GetServerResourcesRequest {
         public Builder xPlexClientIdentifier(Optional<String> xPlexClientIdentifier) {
             Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
             this.xPlexClientIdentifier = xPlexClientIdentifier;
-            return this;
-        }
-
-        /**
-         * Plex Authentication Token
-         */
-        public Builder xPlexToken(String xPlexToken) {
-            Utils.checkNotNull(xPlexToken, "xPlexToken");
-            this.xPlexToken = xPlexToken;
             return this;
         }
 
@@ -377,7 +336,6 @@ public class GetServerResourcesRequest {
                 includeIPv6 = _SINGLETON_VALUE_IncludeIPv6.value();
             }            return new GetServerResourcesRequest(
                 xPlexClientIdentifier,
-                xPlexToken,
                 includeHttps,
                 includeRelay,
                 includeIPv6);

@@ -8,10 +8,10 @@ API Calls regarding authentication for Plex Media Server
 
 ### Available Operations
 
-* [getTransientToken](#gettransienttoken) - Get a Transient Token.
+* [getTransientToken](#gettransienttoken) - Get a Transient Token
 * [getSourceConnectionInformation](#getsourceconnectioninformation) - Get Source Connection Information
-* [getUserDetails](#getuserdetails) - Get User Data By Token
-* [postUsersSignInData](#postuserssignindata) - Get User SignIn Data
+* [getTokenDetails](#gettokendetails) - Get Token Details
+* [postUsersSignInData](#postuserssignindata) - Get User Sign In Data
 
 ## getTransientToken
 
@@ -45,7 +45,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.GetTransientTokenResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetTransientTokenBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetTransientTokenUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -75,7 +78,8 @@ public class Application {
 
 | Error Object                                | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| models/errors/GetTransientTokenResponseBody | 401                                         | application/json                            |
+| models/errors/GetTransientTokenBadRequest   | 400                                         | application/json                            |
+| models/errors/GetTransientTokenUnauthorized | 401                                         | application/json                            |
 | models/errors/SDKError                      | 4xx-5xx                                     | \*\/*                                       |
 
 
@@ -109,7 +113,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.GetSourceConnectionInformationResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetSourceConnectionInformationBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetSourceConnectionInformationUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -138,11 +145,12 @@ public class Application {
 
 | Error Object                                             | Status Code                                              | Content Type                                             |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| models/errors/GetSourceConnectionInformationResponseBody | 401                                                      | application/json                                         |
+| models/errors/GetSourceConnectionInformationBadRequest   | 400                                                      | application/json                                         |
+| models/errors/GetSourceConnectionInformationUnauthorized | 401                                                      | application/json                                         |
 | models/errors/SDKError                                   | 4xx-5xx                                                  | \*\/*                                                    |
 
 
-## getUserDetails
+## getTokenDetails
 
 Get the User data from the provided X-Plex-Token
 
@@ -153,7 +161,7 @@ package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.SDKError;
-import dev.plexapi.sdk.models.operations.GetUserDetailsResponse;
+import dev.plexapi.sdk.models.operations.GetTokenDetailsResponse;
 import java.lang.Exception;
 
 public class Application {
@@ -165,14 +173,16 @@ public class Application {
                 .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
-            GetUserDetailsResponse res = sdk.authentication().getUserDetails()
-                .xPlexToken("CV5xoxjTpFKUzBTShsaf")
+            GetTokenDetailsResponse res = sdk.authentication().getTokenDetails()
                 .call();
 
             if (res.userPlexAccount().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetUserDetailsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetTokenDetailsBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetTokenDetailsUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -189,21 +199,21 @@ public class Application {
 
 ### Parameters
 
-| Parameter                      | Type                           | Required                       | Description                    | Example                        |
-| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
-| `xPlexToken`                   | *String*                       | :heavy_check_mark:             | Plex Authentication Token      | CV5xoxjTpFKUzBTShsaf           |
-| `serverURL`                    | *String*                       | :heavy_minus_sign:             | An optional server URL to use. | http://localhost:8080          |
+| Parameter                      | Type                           | Required                       | Description                    |
+| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
+| `serverURL`                    | *String*                       | :heavy_minus_sign:             | An optional server URL to use. |
 
 ### Response
 
-**[GetUserDetailsResponse](../../models/operations/GetUserDetailsResponse.md)**
+**[GetTokenDetailsResponse](../../models/operations/GetTokenDetailsResponse.md)**
 
 ### Errors
 
-| Error Object                             | Status Code                              | Content Type                             |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| models/errors/GetUserDetailsResponseBody | 401                                      | application/json                         |
-| models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
+| Error Object                              | Status Code                               | Content Type                              |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| models/errors/GetTokenDetailsBadRequest   | 400                                       | application/json                          |
+| models/errors/GetTokenDetailsUnauthorized | 401                                       | application/json                          |
+| models/errors/SDKError                    | 4xx-5xx                                   | \*\/*                                     |
 
 
 ## postUsersSignInData
@@ -234,13 +244,17 @@ public class Application {
                 .requestBody(PostUsersSignInDataRequestBody.builder()
                     .login("username@email.com")
                     .password("password123")
+                    .verificationCode("123456")
                     .build())
                 .call();
 
             if (res.userPlexAccount().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.PostUsersSignInDataResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.PostUsersSignInDataBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.PostUsersSignInDataUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -271,5 +285,6 @@ public class Application {
 
 | Error Object                                  | Status Code                                   | Content Type                                  |
 | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
-| models/errors/PostUsersSignInDataResponseBody | 401                                           | application/json                              |
+| models/errors/PostUsersSignInDataBadRequest   | 400                                           | application/json                              |
+| models/errors/PostUsersSignInDataUnauthorized | 401                                           | application/json                              |
 | models/errors/SDKError                        | 4xx-5xx                                       | \*\/*                                         |

@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Integer;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -80,21 +81,21 @@ public class GetAllLibrariesDirectory {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("updatedAt")
-    private Optional<Integer> updatedAt;
+    private Optional<Long> updatedAt;
 
     /**
      * Unix epoch datetime
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("createdAt")
-    private Optional<Integer> createdAt;
+    private Optional<Long> createdAt;
 
     /**
      * Unix epoch datetime
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("scannedAt")
-    private Optional<Integer> scannedAt;
+    private Optional<Long> scannedAt;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("content")
@@ -131,9 +132,9 @@ public class GetAllLibrariesDirectory {
             @JsonProperty("scanner") Optional<String> scanner,
             @JsonProperty("language") Optional<String> language,
             @JsonProperty("uuid") Optional<String> uuid,
-            @JsonProperty("updatedAt") Optional<Integer> updatedAt,
-            @JsonProperty("createdAt") Optional<Integer> createdAt,
-            @JsonProperty("scannedAt") Optional<Integer> scannedAt,
+            @JsonProperty("updatedAt") Optional<Long> updatedAt,
+            @JsonProperty("createdAt") Optional<Long> createdAt,
+            @JsonProperty("scannedAt") Optional<Long> scannedAt,
             @JsonProperty("content") Optional<Boolean> content,
             @JsonProperty("directory") Optional<Boolean> directory,
             @JsonProperty("contentChangedAt") Optional<Integer> contentChangedAt,
@@ -256,7 +257,7 @@ public class GetAllLibrariesDirectory {
      * Unix epoch datetime
      */
     @JsonIgnore
-    public Optional<Integer> updatedAt() {
+    public Optional<Long> updatedAt() {
         return updatedAt;
     }
 
@@ -264,7 +265,7 @@ public class GetAllLibrariesDirectory {
      * Unix epoch datetime
      */
     @JsonIgnore
-    public Optional<Integer> createdAt() {
+    public Optional<Long> createdAt() {
         return createdAt;
     }
 
@@ -272,7 +273,7 @@ public class GetAllLibrariesDirectory {
      * Unix epoch datetime
      */
     @JsonIgnore
-    public Optional<Integer> scannedAt() {
+    public Optional<Long> scannedAt() {
         return scannedAt;
     }
 
@@ -465,7 +466,7 @@ public class GetAllLibrariesDirectory {
     /**
      * Unix epoch datetime
      */
-    public GetAllLibrariesDirectory withUpdatedAt(int updatedAt) {
+    public GetAllLibrariesDirectory withUpdatedAt(long updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
         this.updatedAt = Optional.ofNullable(updatedAt);
         return this;
@@ -474,7 +475,7 @@ public class GetAllLibrariesDirectory {
     /**
      * Unix epoch datetime
      */
-    public GetAllLibrariesDirectory withUpdatedAt(Optional<Integer> updatedAt) {
+    public GetAllLibrariesDirectory withUpdatedAt(Optional<Long> updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
         this.updatedAt = updatedAt;
         return this;
@@ -483,7 +484,7 @@ public class GetAllLibrariesDirectory {
     /**
      * Unix epoch datetime
      */
-    public GetAllLibrariesDirectory withCreatedAt(int createdAt) {
+    public GetAllLibrariesDirectory withCreatedAt(long createdAt) {
         Utils.checkNotNull(createdAt, "createdAt");
         this.createdAt = Optional.ofNullable(createdAt);
         return this;
@@ -492,7 +493,7 @@ public class GetAllLibrariesDirectory {
     /**
      * Unix epoch datetime
      */
-    public GetAllLibrariesDirectory withCreatedAt(Optional<Integer> createdAt) {
+    public GetAllLibrariesDirectory withCreatedAt(Optional<Long> createdAt) {
         Utils.checkNotNull(createdAt, "createdAt");
         this.createdAt = createdAt;
         return this;
@@ -501,7 +502,7 @@ public class GetAllLibrariesDirectory {
     /**
      * Unix epoch datetime
      */
-    public GetAllLibrariesDirectory withScannedAt(int scannedAt) {
+    public GetAllLibrariesDirectory withScannedAt(long scannedAt) {
         Utils.checkNotNull(scannedAt, "scannedAt");
         this.scannedAt = Optional.ofNullable(scannedAt);
         return this;
@@ -510,7 +511,7 @@ public class GetAllLibrariesDirectory {
     /**
      * Unix epoch datetime
      */
-    public GetAllLibrariesDirectory withScannedAt(Optional<Integer> scannedAt) {
+    public GetAllLibrariesDirectory withScannedAt(Optional<Long> scannedAt) {
         Utils.checkNotNull(scannedAt, "scannedAt");
         this.scannedAt = scannedAt;
         return this;
@@ -689,11 +690,11 @@ public class GetAllLibrariesDirectory {
  
         private Optional<String> uuid = Optional.empty();
  
-        private Optional<Integer> updatedAt = Optional.empty();
+        private Optional<Long> updatedAt = Optional.empty();
  
-        private Optional<Integer> createdAt = Optional.empty();
+        private Optional<Long> createdAt = Optional.empty();
  
-        private Optional<Integer> scannedAt = Optional.empty();
+        private Optional<Long> scannedAt = Optional.empty();
  
         private Optional<Boolean> content = Optional.empty();
  
@@ -868,7 +869,7 @@ public class GetAllLibrariesDirectory {
         /**
          * Unix epoch datetime
          */
-        public Builder updatedAt(int updatedAt) {
+        public Builder updatedAt(long updatedAt) {
             Utils.checkNotNull(updatedAt, "updatedAt");
             this.updatedAt = Optional.ofNullable(updatedAt);
             return this;
@@ -877,7 +878,7 @@ public class GetAllLibrariesDirectory {
         /**
          * Unix epoch datetime
          */
-        public Builder updatedAt(Optional<Integer> updatedAt) {
+        public Builder updatedAt(Optional<Long> updatedAt) {
             Utils.checkNotNull(updatedAt, "updatedAt");
             this.updatedAt = updatedAt;
             return this;
@@ -886,7 +887,7 @@ public class GetAllLibrariesDirectory {
         /**
          * Unix epoch datetime
          */
-        public Builder createdAt(int createdAt) {
+        public Builder createdAt(long createdAt) {
             Utils.checkNotNull(createdAt, "createdAt");
             this.createdAt = Optional.ofNullable(createdAt);
             return this;
@@ -895,7 +896,7 @@ public class GetAllLibrariesDirectory {
         /**
          * Unix epoch datetime
          */
-        public Builder createdAt(Optional<Integer> createdAt) {
+        public Builder createdAt(Optional<Long> createdAt) {
             Utils.checkNotNull(createdAt, "createdAt");
             this.createdAt = createdAt;
             return this;
@@ -904,7 +905,7 @@ public class GetAllLibrariesDirectory {
         /**
          * Unix epoch datetime
          */
-        public Builder scannedAt(int scannedAt) {
+        public Builder scannedAt(long scannedAt) {
             Utils.checkNotNull(scannedAt, "scannedAt");
             this.scannedAt = Optional.ofNullable(scannedAt);
             return this;
@@ -913,7 +914,7 @@ public class GetAllLibrariesDirectory {
         /**
          * Unix epoch datetime
          */
-        public Builder scannedAt(Optional<Integer> scannedAt) {
+        public Builder scannedAt(Optional<Long> scannedAt) {
             Utils.checkNotNull(scannedAt, "scannedAt");
             this.scannedAt = scannedAt;
             return this;

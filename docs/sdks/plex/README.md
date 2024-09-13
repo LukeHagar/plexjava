@@ -45,7 +45,10 @@ public class Application {
             if (res.responseBodies().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetCompanionsDataResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetCompanionsDataBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetCompanionsDataUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -74,7 +77,8 @@ public class Application {
 
 | Error Object                                | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| models/errors/GetCompanionsDataResponseBody | 401                                         | application/json                            |
+| models/errors/GetCompanionsDataBadRequest   | 400                                         | application/json                            |
+| models/errors/GetCompanionsDataUnauthorized | 401                                         | application/json                            |
 | models/errors/SDKError                      | 4xx-5xx                                     | \*\/*                                       |
 
 
@@ -107,7 +111,10 @@ public class Application {
             if (res.friends().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetUserFriendsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetUserFriendsBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetUserFriendsUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -136,7 +143,8 @@ public class Application {
 
 | Error Object                             | Status Code                              | Content Type                             |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| models/errors/GetUserFriendsResponseBody | 401                                      | application/json                         |
+| models/errors/GetUserFriendsBadRequest   | 400                                      | application/json                         |
+| models/errors/GetUserFriendsUnauthorized | 401                                      | application/json                         |
 | models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
 
 
@@ -168,7 +176,10 @@ public class Application {
             if (res.geoData().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetGeoDataResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetGeoDataBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetGeoDataUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -197,7 +208,8 @@ public class Application {
 
 | Error Object                         | Status Code                          | Content Type                         |
 | ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| models/errors/GetGeoDataResponseBody | 401                                  | application/json                     |
+| models/errors/GetGeoDataBadRequest   | 400                                  | application/json                     |
+| models/errors/GetGeoDataUnauthorized | 401                                  | application/json                     |
 | models/errors/SDKError               | 4xx-5xx                              | \*\/*                                |
 
 
@@ -230,7 +242,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetHomeDataResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetHomeDataBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetHomeDataUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -253,7 +268,8 @@ public class Application {
 
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| models/errors/GetHomeDataResponseBody | 401                                   | application/json                      |
+| models/errors/GetHomeDataBadRequest   | 400                                   | application/json                      |
+| models/errors/GetHomeDataUnauthorized | 401                                   | application/json                      |
 | models/errors/SDKError                | 4xx-5xx                               | \*\/*                                 |
 
 
@@ -268,7 +284,6 @@ package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.SDKError;
-import dev.plexapi.sdk.models.operations.GetServerResourcesRequest;
 import dev.plexapi.sdk.models.operations.GetServerResourcesResponse;
 import dev.plexapi.sdk.models.operations.IncludeHttps;
 import dev.plexapi.sdk.models.operations.IncludeIPv6;
@@ -284,21 +299,20 @@ public class Application {
                 .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
-            GetServerResourcesRequest req = GetServerResourcesRequest.builder()
-                .xPlexToken("CV5xoxjTpFKUzBTShsaf")
+            GetServerResourcesResponse res = sdk.plex().getServerResources()
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .includeHttps(IncludeHttps.ONE)
                 .includeRelay(IncludeRelay.ONE)
                 .includeIPv6(IncludeIPv6.ONE)
-                .build();
-
-            GetServerResourcesResponse res = sdk.plex().getServerResources()
-                .request(req)
                 .call();
 
             if (res.plexDevices().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetServerResourcesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetServerResourcesBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetServerResourcesUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -315,10 +329,13 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `request`                                                                         | [GetServerResourcesRequest](../../models/operations/GetServerResourcesRequest.md) | :heavy_check_mark:                                                                | The request object to use for the request.                                        |
-| `serverURL`                                                                       | *String*                                                                          | :heavy_minus_sign:                                                                | An optional server URL to use.                                                    |
+| Parameter                                                                                                                                                             | Type                                                                                                                                                                  | Required                                                                                                                                                              | Description                                                                                                                                                           | Example                                                                                                                                                               |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `xPlexClientIdentifier`                                                                                                                                               | *Optional<String>*                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                    | The unique identifier for the client application<br/>This is used to track the client application and its usage<br/>(UUID, serial number, or other number unique per device)<br/> | gcgzw5rz2xovp84b4vha3a40                                                                                                                                              |
+| `includeHttps`                                                                                                                                                        | [Optional<IncludeHttps>](../../models/operations/IncludeHttps.md)                                                                                                     | :heavy_minus_sign:                                                                                                                                                    | Include Https entries in the results                                                                                                                                  | 1                                                                                                                                                                     |
+| `includeRelay`                                                                                                                                                        | [Optional<IncludeRelay>](../../models/operations/IncludeRelay.md)                                                                                                     | :heavy_minus_sign:                                                                                                                                                    | Include Relay addresses in the results <br/>E.g: https://10-0-0-25.bbf8e10c7fa20447cacee74cd9914cde.plex.direct:32400<br/>                                            | 1                                                                                                                                                                     |
+| `includeIPv6`                                                                                                                                                         | [Optional<IncludeIPv6>](../../models/operations/IncludeIPv6.md)                                                                                                       | :heavy_minus_sign:                                                                                                                                                    | Include IPv6 entries in the results                                                                                                                                   | 1                                                                                                                                                                     |
+| `serverURL`                                                                                                                                                           | *String*                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                    | An optional server URL to use.                                                                                                                                        | http://localhost:8080                                                                                                                                                 |
 
 ### Response
 
@@ -328,7 +345,8 @@ public class Application {
 
 | Error Object                                 | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/GetServerResourcesResponseBody | 401                                          | application/json                             |
+| models/errors/GetServerResourcesBadRequest   | 400                                          | application/json                             |
+| models/errors/GetServerResourcesUnauthorized | 401                                          | application/json                             |
 | models/errors/SDKError                       | 4xx-5xx                                      | \*\/*                                        |
 
 
@@ -363,7 +381,7 @@ public class Application {
             if (res.authPinContainer().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetPinResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetPinBadRequest e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -393,10 +411,10 @@ public class Application {
 
 ### Errors
 
-| Error Object                     | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models/errors/GetPinResponseBody | 400                              | application/json                 |
-| models/errors/SDKError           | 4xx-5xx                          | \*\/*                            |
+| Error Object                   | Status Code                    | Content Type                   |
+| ------------------------------ | ------------------------------ | ------------------------------ |
+| models/errors/GetPinBadRequest | 400                            | application/json               |
+| models/errors/SDKError         | 4xx-5xx                        | \*\/*                          |
 
 
 ## getTokenByPinId
@@ -429,10 +447,10 @@ public class Application {
             if (res.authPinContainer().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetTokenByPinIdResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetTokenByPinIdBadRequest e) {
             // handle exception
             throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetTokenByPinIdPlexResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetTokenByPinIdResponseBody e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -461,8 +479,8 @@ public class Application {
 
 ### Errors
 
-| Error Object                                  | Status Code                                   | Content Type                                  |
-| --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
-| models/errors/GetTokenByPinIdResponseBody     | 400                                           | application/json                              |
-| models/errors/GetTokenByPinIdPlexResponseBody | 404                                           | application/json                              |
-| models/errors/SDKError                        | 4xx-5xx                                       | \*\/*                                         |
+| Error Object                              | Status Code                               | Content Type                              |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| models/errors/GetTokenByPinIdBadRequest   | 400                                       | application/json                          |
+| models/errors/GetTokenByPinIdResponseBody | 404                                       | application/json                          |
+| models/errors/SDKError                    | 4xx-5xx                                   | \*\/*                                     |

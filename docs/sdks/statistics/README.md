@@ -42,7 +42,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetStatisticsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetStatisticsBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetStatisticsUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -71,7 +74,8 @@ public class Application {
 
 | Error Object                            | Status Code                             | Content Type                            |
 | --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| models/errors/GetStatisticsResponseBody | 401                                     | application/json                        |
+| models/errors/GetStatisticsBadRequest   | 400                                     | application/json                        |
+| models/errors/GetStatisticsUnauthorized | 401                                     | application/json                        |
 | models/errors/SDKError                  | 4xx-5xx                                 | \*\/*                                   |
 
 
@@ -105,7 +109,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetResourcesStatisticsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetResourcesStatisticsBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetResourcesStatisticsUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -134,7 +141,8 @@ public class Application {
 
 | Error Object                                     | Status Code                                      | Content Type                                     |
 | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
-| models/errors/GetResourcesStatisticsResponseBody | 401                                              | application/json                                 |
+| models/errors/GetResourcesStatisticsBadRequest   | 400                                              | application/json                                 |
+| models/errors/GetResourcesStatisticsUnauthorized | 401                                              | application/json                                 |
 | models/errors/SDKError                           | 4xx-5xx                                          | \*\/*                                            |
 
 
@@ -168,7 +176,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetBandwidthStatisticsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetBandwidthStatisticsBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetBandwidthStatisticsUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -197,5 +208,6 @@ public class Application {
 
 | Error Object                                     | Status Code                                      | Content Type                                     |
 | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
-| models/errors/GetBandwidthStatisticsResponseBody | 401                                              | application/json                                 |
+| models/errors/GetBandwidthStatisticsBadRequest   | 400                                              | application/json                                 |
+| models/errors/GetBandwidthStatisticsUnauthorized | 401                                              | application/json                                 |
 | models/errors/SDKError                           | 4xx-5xx                                          | \*\/*                                            |

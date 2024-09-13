@@ -54,7 +54,7 @@ public class Application {
                 .title("<value>")
                 .type(CreatePlaylistQueryParamType.PHOTO)
                 .smart(Smart.ONE)
-                .uri("<value>")
+                .uri("https://inborn-brochure.biz")
                 .build();
 
             CreatePlaylistResponse res = sdk.playlists().createPlaylist()
@@ -64,7 +64,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.CreatePlaylistResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.CreatePlaylistBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.CreatePlaylistUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -93,7 +96,8 @@ public class Application {
 
 | Error Object                             | Status Code                              | Content Type                             |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| models/errors/CreatePlaylistResponseBody | 401                                      | application/json                         |
+| models/errors/CreatePlaylistBadRequest   | 400                                      | application/json                         |
+| models/errors/CreatePlaylistUnauthorized | 401                                      | application/json                         |
 | models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
 
 
@@ -130,7 +134,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetPlaylistsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetPlaylistsBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetPlaylistsUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -160,7 +167,8 @@ public class Application {
 
 | Error Object                           | Status Code                            | Content Type                           |
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models/errors/GetPlaylistsResponseBody | 401                                    | application/json                       |
+| models/errors/GetPlaylistsBadRequest   | 400                                    | application/json                       |
+| models/errors/GetPlaylistsUnauthorized | 401                                    | application/json                       |
 | models/errors/SDKError                 | 4xx-5xx                                | \*\/*                                  |
 
 
@@ -196,7 +204,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetPlaylistResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetPlaylistBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetPlaylistUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -225,7 +236,8 @@ public class Application {
 
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| models/errors/GetPlaylistResponseBody | 401                                   | application/json                      |
+| models/errors/GetPlaylistBadRequest   | 400                                   | application/json                      |
+| models/errors/GetPlaylistUnauthorized | 401                                   | application/json                      |
 | models/errors/SDKError                | 4xx-5xx                               | \*\/*                                 |
 
 
@@ -258,7 +270,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.DeletePlaylistResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.DeletePlaylistBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.DeletePlaylistUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -287,7 +302,8 @@ public class Application {
 
 | Error Object                             | Status Code                              | Content Type                             |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| models/errors/DeletePlaylistResponseBody | 401                                      | application/json                         |
+| models/errors/DeletePlaylistBadRequest   | 400                                      | application/json                         |
+| models/errors/DeletePlaylistUnauthorized | 401                                      | application/json                         |
 | models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
 
 
@@ -322,7 +338,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.UpdatePlaylistResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.UpdatePlaylistBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.UpdatePlaylistUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -353,7 +372,8 @@ public class Application {
 
 | Error Object                             | Status Code                              | Content Type                             |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| models/errors/UpdatePlaylistResponseBody | 401                                      | application/json                         |
+| models/errors/UpdatePlaylistBadRequest   | 400                                      | application/json                         |
+| models/errors/UpdatePlaylistUnauthorized | 401                                      | application/json                         |
 | models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
 
 
@@ -393,7 +413,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetPlaylistContentsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetPlaylistContentsBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetPlaylistContentsUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -423,7 +446,8 @@ public class Application {
 
 | Error Object                                  | Status Code                                   | Content Type                                  |
 | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
-| models/errors/GetPlaylistContentsResponseBody | 401                                           | application/json                              |
+| models/errors/GetPlaylistContentsBadRequest   | 400                                           | application/json                              |
+| models/errors/GetPlaylistContentsUnauthorized | 401                                           | application/json                              |
 | models/errors/SDKError                        | 4xx-5xx                                       | \*\/*                                         |
 
 
@@ -456,7 +480,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.ClearPlaylistContentsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.ClearPlaylistContentsBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.ClearPlaylistContentsUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -485,7 +512,8 @@ public class Application {
 
 | Error Object                                    | Status Code                                     | Content Type                                    |
 | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
-| models/errors/ClearPlaylistContentsResponseBody | 401                                             | application/json                                |
+| models/errors/ClearPlaylistContentsBadRequest   | 400                                             | application/json                                |
+| models/errors/ClearPlaylistContentsUnauthorized | 401                                             | application/json                                |
 | models/errors/SDKError                          | 4xx-5xx                                         | \*\/*                                           |
 
 
@@ -523,7 +551,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.AddPlaylistContentsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.AddPlaylistContentsBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.AddPlaylistContentsUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -554,7 +585,8 @@ public class Application {
 
 | Error Object                                  | Status Code                                   | Content Type                                  |
 | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
-| models/errors/AddPlaylistContentsResponseBody | 401                                           | application/json                              |
+| models/errors/AddPlaylistContentsBadRequest   | 400                                           | application/json                              |
+| models/errors/AddPlaylistContentsUnauthorized | 401                                           | application/json                              |
 | models/errors/SDKError                        | 4xx-5xx                                       | \*\/*                                         |
 
 
@@ -589,7 +621,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.UploadPlaylistResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.UploadPlaylistBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.UploadPlaylistUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -619,5 +654,6 @@ public class Application {
 
 | Error Object                             | Status Code                              | Content Type                             |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| models/errors/UploadPlaylistResponseBody | 401                                      | application/json                         |
+| models/errors/UploadPlaylistBadRequest   | 400                                      | application/json                         |
+| models/errors/UploadPlaylistUnauthorized | 401                                      | application/json                         |
 | models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |

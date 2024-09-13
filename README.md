@@ -37,7 +37,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'dev.plexapi:plexapi:0.2.2'
+implementation 'dev.plexapi:plexapi:0.3.0'
 ```
 
 Maven:
@@ -45,7 +45,7 @@ Maven:
 <dependency>
     <groupId>dev.plexapi</groupId>
     <artifactId>plexapi</artifactId>
-    <version>0.2.2</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 
@@ -92,7 +92,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -111,35 +114,20 @@ public class Application {
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
 
-### [server()](docs/sdks/server/README.md)
-
-* [getServerCapabilities](docs/sdks/server/README.md#getservercapabilities) - Get Server Capabilities
-* [getServerPreferences](docs/sdks/server/README.md#getserverpreferences) - Get Server Preferences
-* [getAvailableClients](docs/sdks/server/README.md#getavailableclients) - Get Available Clients
-* [getDevices](docs/sdks/server/README.md#getdevices) - Get Devices
-* [getServerIdentity](docs/sdks/server/README.md#getserveridentity) - Get Server Identity
-* [getMyPlexAccount](docs/sdks/server/README.md#getmyplexaccount) - Get MyPlex Account
-* [getResizedPhoto](docs/sdks/server/README.md#getresizedphoto) - Get a Resized Photo
-* [getMediaProviders](docs/sdks/server/README.md#getmediaproviders) - Get Media Providers
-* [getServerList](docs/sdks/server/README.md#getserverlist) - Get Server List
-
-### [media()](docs/sdks/media/README.md)
-
-* [markPlayed](docs/sdks/media/README.md#markplayed) - Mark Media Played
-* [markUnplayed](docs/sdks/media/README.md#markunplayed) - Mark Media Unplayed
-* [updatePlayProgress](docs/sdks/media/README.md#updateplayprogress) - Update Media Play Progress
-* [getBannerImage](docs/sdks/media/README.md#getbannerimage) - Get Banner Image
-* [getThumbImage](docs/sdks/media/README.md#getthumbimage) - Get Thumb Image
-
-### [video()](docs/sdks/video/README.md)
-
-* [getTimeline](docs/sdks/video/README.md#gettimeline) - Get the timeline for a media item
-* [startUniversalTranscode](docs/sdks/video/README.md#startuniversaltranscode) - Start Universal Transcode
+<details open>
+<summary>Available methods</summary>
 
 ### [activities()](docs/sdks/activities/README.md)
 
 * [getServerActivities](docs/sdks/activities/README.md#getserveractivities) - Get Server Activities
 * [cancelServerActivities](docs/sdks/activities/README.md#cancelserveractivities) - Cancel Server Activities
+
+### [authentication()](docs/sdks/authentication/README.md)
+
+* [getTransientToken](docs/sdks/authentication/README.md#gettransienttoken) - Get a Transient Token
+* [getSourceConnectionInformation](docs/sdks/authentication/README.md#getsourceconnectioninformation) - Get Source Connection Information
+* [getTokenDetails](docs/sdks/authentication/README.md#gettokendetails) - Get Token Details
+* [postUsersSignInData](docs/sdks/authentication/README.md#postuserssignindata) - Get User Sign In Data
 
 ### [butler()](docs/sdks/butler/README.md)
 
@@ -149,26 +137,10 @@ public class Application {
 * [startTask](docs/sdks/butler/README.md#starttask) - Start a single Butler task
 * [stopTask](docs/sdks/butler/README.md#stoptask) - Stop a single Butler task
 
-### [plex()](docs/sdks/plex/README.md)
-
-* [getCompanionsData](docs/sdks/plex/README.md#getcompanionsdata) - Get Companions Data
-* [getUserFriends](docs/sdks/plex/README.md#getuserfriends) - Get list of friends of the user logged in
-* [getGeoData](docs/sdks/plex/README.md#getgeodata) - Get Geo Data
-* [getHomeData](docs/sdks/plex/README.md#gethomedata) - Get Plex Home Data
-* [getServerResources](docs/sdks/plex/README.md#getserverresources) - Get Server Resources
-* [getPin](docs/sdks/plex/README.md#getpin) - Get a Pin
-* [getTokenByPinId](docs/sdks/plex/README.md#gettokenbypinid) - Get Access Token by PinId
-
 ### [hubs()](docs/sdks/hubs/README.md)
 
 * [getGlobalHubs](docs/sdks/hubs/README.md#getglobalhubs) - Get Global Hubs
 * [getLibraryHubs](docs/sdks/hubs/README.md#getlibraryhubs) - Get library specific hubs
-
-### [search()](docs/sdks/search/README.md)
-
-* [performSearch](docs/sdks/search/README.md#performsearch) - Perform a search
-* [performVoiceSearch](docs/sdks/search/README.md#performvoicesearch) - Perform a voice search
-* [getSearchResults](docs/sdks/search/README.md#getsearchresults) - Get Search Results
 
 ### [library()](docs/sdks/library/README.md)
 
@@ -185,15 +157,19 @@ public class Application {
 * [getTopWatchedContent](docs/sdks/library/README.md#gettopwatchedcontent) - Get Top Watched Content
 * [getOnDeck](docs/sdks/library/README.md#getondeck) - Get On Deck
 
-### [watchlist()](docs/sdks/watchlist/README.md)
-
-* [getWatchList](docs/sdks/watchlist/README.md#getwatchlist) - Get User Watchlist
-
 ### [log()](docs/sdks/log/README.md)
 
 * [logLine](docs/sdks/log/README.md#logline) - Logging a single line message.
 * [logMultiLine](docs/sdks/log/README.md#logmultiline) - Logging a multi-line message
 * [enablePaperTrail](docs/sdks/log/README.md#enablepapertrail) - Enabling Papertrail
+
+### [media()](docs/sdks/media/README.md)
+
+* [markPlayed](docs/sdks/media/README.md#markplayed) - Mark Media Played
+* [markUnplayed](docs/sdks/media/README.md#markunplayed) - Mark Media Unplayed
+* [updatePlayProgress](docs/sdks/media/README.md#updateplayprogress) - Update Media Play Progress
+* [getBannerImage](docs/sdks/media/README.md#getbannerimage) - Get Banner Image
+* [getThumbImage](docs/sdks/media/README.md#getthumbimage) - Get Thumb Image
 
 ### [playlists()](docs/sdks/playlists/README.md)
 
@@ -207,18 +183,34 @@ public class Application {
 * [addPlaylistContents](docs/sdks/playlists/README.md#addplaylistcontents) - Adding to a Playlist
 * [uploadPlaylist](docs/sdks/playlists/README.md#uploadplaylist) - Upload Playlist
 
-### [authentication()](docs/sdks/authentication/README.md)
+### [plex()](docs/sdks/plex/README.md)
 
-* [getTransientToken](docs/sdks/authentication/README.md#gettransienttoken) - Get a Transient Token.
-* [getSourceConnectionInformation](docs/sdks/authentication/README.md#getsourceconnectioninformation) - Get Source Connection Information
-* [getUserDetails](docs/sdks/authentication/README.md#getuserdetails) - Get User Data By Token
-* [postUsersSignInData](docs/sdks/authentication/README.md#postuserssignindata) - Get User SignIn Data
+* [getCompanionsData](docs/sdks/plex/README.md#getcompanionsdata) - Get Companions Data
+* [getUserFriends](docs/sdks/plex/README.md#getuserfriends) - Get list of friends of the user logged in
+* [getGeoData](docs/sdks/plex/README.md#getgeodata) - Get Geo Data
+* [getHomeData](docs/sdks/plex/README.md#gethomedata) - Get Plex Home Data
+* [getServerResources](docs/sdks/plex/README.md#getserverresources) - Get Server Resources
+* [getPin](docs/sdks/plex/README.md#getpin) - Get a Pin
+* [getTokenByPinId](docs/sdks/plex/README.md#gettokenbypinid) - Get Access Token by PinId
 
-### [statistics()](docs/sdks/statistics/README.md)
 
-* [getStatistics](docs/sdks/statistics/README.md#getstatistics) - Get Media Statistics
-* [getResourcesStatistics](docs/sdks/statistics/README.md#getresourcesstatistics) - Get Resources Statistics
-* [getBandwidthStatistics](docs/sdks/statistics/README.md#getbandwidthstatistics) - Get Bandwidth Statistics
+### [search()](docs/sdks/search/README.md)
+
+* [performSearch](docs/sdks/search/README.md#performsearch) - Perform a search
+* [performVoiceSearch](docs/sdks/search/README.md#performvoicesearch) - Perform a voice search
+* [getSearchResults](docs/sdks/search/README.md#getsearchresults) - Get Search Results
+
+### [server()](docs/sdks/server/README.md)
+
+* [getServerCapabilities](docs/sdks/server/README.md#getservercapabilities) - Get Server Capabilities
+* [getServerPreferences](docs/sdks/server/README.md#getserverpreferences) - Get Server Preferences
+* [getAvailableClients](docs/sdks/server/README.md#getavailableclients) - Get Available Clients
+* [getDevices](docs/sdks/server/README.md#getdevices) - Get Devices
+* [getServerIdentity](docs/sdks/server/README.md#getserveridentity) - Get Server Identity
+* [getMyPlexAccount](docs/sdks/server/README.md#getmyplexaccount) - Get MyPlex Account
+* [getResizedPhoto](docs/sdks/server/README.md#getresizedphoto) - Get a Resized Photo
+* [getMediaProviders](docs/sdks/server/README.md#getmediaproviders) - Get Media Providers
+* [getServerList](docs/sdks/server/README.md#getserverlist) - Get Server List
 
 ### [sessions()](docs/sdks/sessions/README.md)
 
@@ -227,11 +219,28 @@ public class Application {
 * [getTranscodeSessions](docs/sdks/sessions/README.md#gettranscodesessions) - Get Transcode Sessions
 * [stopTranscodeSession](docs/sdks/sessions/README.md#stoptranscodesession) - Stop a Transcode Session
 
+### [statistics()](docs/sdks/statistics/README.md)
+
+* [getStatistics](docs/sdks/statistics/README.md#getstatistics) - Get Media Statistics
+* [getResourcesStatistics](docs/sdks/statistics/README.md#getresourcesstatistics) - Get Resources Statistics
+* [getBandwidthStatistics](docs/sdks/statistics/README.md#getbandwidthstatistics) - Get Bandwidth Statistics
+
 ### [updater()](docs/sdks/updater/README.md)
 
 * [getUpdateStatus](docs/sdks/updater/README.md#getupdatestatus) - Querying status of updates
 * [checkForUpdates](docs/sdks/updater/README.md#checkforupdates) - Checking for updates
 * [applyUpdates](docs/sdks/updater/README.md#applyupdates) - Apply Updates
+
+### [video()](docs/sdks/video/README.md)
+
+* [getTimeline](docs/sdks/video/README.md#gettimeline) - Get the timeline for a media item
+* [startUniversalTranscode](docs/sdks/video/README.md#startuniversaltranscode) - Start Universal Transcode
+
+### [watchlist()](docs/sdks/watchlist/README.md)
+
+* [getWatchList](docs/sdks/watchlist/README.md#getwatchlist) - Get User Watchlist
+
+</details>
 <!-- End Available Resources and Operations [operations] -->
 
 <!-- Start Global Parameters [global-parameters] -->
@@ -261,7 +270,6 @@ package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.SDKError;
-import dev.plexapi.sdk.models.operations.GetServerResourcesRequest;
 import dev.plexapi.sdk.models.operations.GetServerResourcesResponse;
 import dev.plexapi.sdk.models.operations.IncludeHttps;
 import dev.plexapi.sdk.models.operations.IncludeIPv6;
@@ -277,21 +285,20 @@ public class Application {
                 .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .build();
 
-            GetServerResourcesRequest req = GetServerResourcesRequest.builder()
-                .xPlexToken("CV5xoxjTpFKUzBTShsaf")
+            GetServerResourcesResponse res = sdk.plex().getServerResources()
+                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                 .includeHttps(IncludeHttps.ONE)
                 .includeRelay(IncludeRelay.ONE)
                 .includeIPv6(IncludeIPv6.ONE)
-                .build();
-
-            GetServerResourcesResponse res = sdk.plex().getServerResources()
-                .request(req)
                 .call();
 
             if (res.plexDevices().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetServerResourcesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetServerResourcesBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetServerResourcesUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -314,7 +321,8 @@ Handling errors in this SDK should largely match your expectations.  All operati
 
 | Error Object                                    | Status Code                                     | Content Type                                    |
 | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
-| models/errors/GetServerCapabilitiesResponseBody | 401                                             | application/json                                |
+| models/errors/GetServerCapabilitiesBadRequest   | 400                                             | application/json                                |
+| models/errors/GetServerCapabilitiesUnauthorized | 401                                             | application/json                                |
 | models/errors/SDKError                          | 4xx-5xx                                         | \*\/*                                           |
 
 ### Example
@@ -342,7 +350,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -395,7 +406,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -444,7 +458,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -480,13 +497,16 @@ public class Application {
                 .build();
 
             GetCompanionsDataResponse res = sdk.plex().getCompanionsData()
-                .serverURL("https://plex.tv/api/v2")
+                .serverURL("https://plex.tv/api/v2/")
                 .call();
 
             if (res.responseBodies().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetCompanionsDataResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetCompanionsDataBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetCompanionsDataUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -537,7 +557,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {

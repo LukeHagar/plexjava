@@ -52,7 +52,7 @@ public class Subscription {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("status")
-    private Optional<? extends GetUserDetailsAuthenticationStatus> status;
+    private Optional<? extends GetTokenDetailsAuthenticationStatus> status;
 
     /**
      * Payment service used for your Plex Pass subscription
@@ -73,7 +73,7 @@ public class Subscription {
             @JsonProperty("features") Optional<? extends List<Features>> features,
             @JsonProperty("active") Optional<Boolean> active,
             @JsonProperty("subscribedAt") JsonNullable<String> subscribedAt,
-            @JsonProperty("status") Optional<? extends GetUserDetailsAuthenticationStatus> status,
+            @JsonProperty("status") Optional<? extends GetTokenDetailsAuthenticationStatus> status,
             @JsonProperty("paymentService") JsonNullable<String> paymentService,
             @JsonProperty("plan") JsonNullable<String> plan) {
         Utils.checkNotNull(features, "features");
@@ -124,8 +124,8 @@ public class Subscription {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<GetUserDetailsAuthenticationStatus> status() {
-        return (Optional<GetUserDetailsAuthenticationStatus>) status;
+    public Optional<GetTokenDetailsAuthenticationStatus> status() {
+        return (Optional<GetTokenDetailsAuthenticationStatus>) status;
     }
 
     /**
@@ -205,7 +205,7 @@ public class Subscription {
     /**
      * String representation of subscriptionActive
      */
-    public Subscription withStatus(GetUserDetailsAuthenticationStatus status) {
+    public Subscription withStatus(GetTokenDetailsAuthenticationStatus status) {
         Utils.checkNotNull(status, "status");
         this.status = Optional.ofNullable(status);
         return this;
@@ -214,7 +214,7 @@ public class Subscription {
     /**
      * String representation of subscriptionActive
      */
-    public Subscription withStatus(Optional<? extends GetUserDetailsAuthenticationStatus> status) {
+    public Subscription withStatus(Optional<? extends GetTokenDetailsAuthenticationStatus> status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
@@ -304,7 +304,7 @@ public class Subscription {
  
         private JsonNullable<String> subscribedAt = JsonNullable.undefined();
  
-        private Optional<? extends GetUserDetailsAuthenticationStatus> status = Optional.empty();
+        private Optional<? extends GetTokenDetailsAuthenticationStatus> status = Optional.empty();
  
         private JsonNullable<String> paymentService = JsonNullable.undefined();
  
@@ -371,7 +371,7 @@ public class Subscription {
         /**
          * String representation of subscriptionActive
          */
-        public Builder status(GetUserDetailsAuthenticationStatus status) {
+        public Builder status(GetTokenDetailsAuthenticationStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = Optional.ofNullable(status);
             return this;
@@ -380,7 +380,7 @@ public class Subscription {
         /**
          * String representation of subscriptionActive
          */
-        public Builder status(Optional<? extends GetUserDetailsAuthenticationStatus> status) {
+        public Builder status(Optional<? extends GetTokenDetailsAuthenticationStatus> status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;

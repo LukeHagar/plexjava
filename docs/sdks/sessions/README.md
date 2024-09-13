@@ -42,7 +42,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetSessionsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetSessionsBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetSessionsUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -65,7 +68,8 @@ public class Application {
 
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| models/errors/GetSessionsResponseBody | 401                                   | application/json                      |
+| models/errors/GetSessionsBadRequest   | 400                                   | application/json                      |
+| models/errors/GetSessionsUnauthorized | 401                                   | application/json                      |
 | models/errors/SDKError                | 4xx-5xx                               | \*\/*                                 |
 
 
@@ -104,7 +108,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetSessionHistoryResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetSessionHistoryBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetSessionHistoryUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -136,7 +143,8 @@ public class Application {
 
 | Error Object                                | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| models/errors/GetSessionHistoryResponseBody | 401                                         | application/json                            |
+| models/errors/GetSessionHistoryBadRequest   | 400                                         | application/json                            |
+| models/errors/GetSessionHistoryUnauthorized | 401                                         | application/json                            |
 | models/errors/SDKError                      | 4xx-5xx                                     | \*\/*                                       |
 
 
@@ -169,7 +177,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetTranscodeSessionsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetTranscodeSessionsBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetTranscodeSessionsUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -192,7 +203,8 @@ public class Application {
 
 | Error Object                                   | Status Code                                    | Content Type                                   |
 | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
-| models/errors/GetTranscodeSessionsResponseBody | 401                                            | application/json                               |
+| models/errors/GetTranscodeSessionsBadRequest   | 400                                            | application/json                               |
+| models/errors/GetTranscodeSessionsUnauthorized | 401                                            | application/json                               |
 | models/errors/SDKError                         | 4xx-5xx                                        | \*\/*                                          |
 
 
@@ -224,7 +236,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.StopTranscodeSessionResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.StopTranscodeSessionBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.StopTranscodeSessionUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -253,5 +268,6 @@ public class Application {
 
 | Error Object                                   | Status Code                                    | Content Type                                   |
 | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
-| models/errors/StopTranscodeSessionResponseBody | 401                                            | application/json                               |
+| models/errors/StopTranscodeSessionBadRequest   | 400                                            | application/json                               |
+| models/errors/StopTranscodeSessionUnauthorized | 401                                            | application/json                               |
 | models/errors/SDKError                         | 4xx-5xx                                        | \*\/*                                          |

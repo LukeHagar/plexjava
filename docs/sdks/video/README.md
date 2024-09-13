@@ -54,7 +54,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.GetTimelineResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetTimelineBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetTimelineUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -83,7 +86,8 @@ public class Application {
 
 | Error Object                          | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| models/errors/GetTimelineResponseBody | 401                                   | application/json                      |
+| models/errors/GetTimelineBadRequest   | 400                                   | application/json                      |
+| models/errors/GetTimelineUnauthorized | 401                                   | application/json                      |
 | models/errors/SDKError                | 4xx-5xx                               | \*\/*                                 |
 
 
@@ -135,7 +139,10 @@ public class Application {
                 .call();
 
             // handle response
-        } catch (dev.plexapi.sdk.models.errors.StartUniversalTranscodeResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.StartUniversalTranscodeBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.StartUniversalTranscodeUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -164,5 +171,6 @@ public class Application {
 
 | Error Object                                      | Status Code                                       | Content Type                                      |
 | ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
-| models/errors/StartUniversalTranscodeResponseBody | 401                                               | application/json                                  |
+| models/errors/StartUniversalTranscodeBadRequest   | 400                                               | application/json                                  |
+| models/errors/StartUniversalTranscodeUnauthorized | 401                                               | application/json                                  |
 | models/errors/SDKError                            | 4xx-5xx                                           | \*\/*                                             |

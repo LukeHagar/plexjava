@@ -43,7 +43,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetGlobalHubsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetGlobalHubsBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetGlobalHubsUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -73,7 +76,8 @@ public class Application {
 
 | Error Object                            | Status Code                             | Content Type                            |
 | --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| models/errors/GetGlobalHubsResponseBody | 401                                     | application/json                        |
+| models/errors/GetGlobalHubsBadRequest   | 400                                     | application/json                        |
+| models/errors/GetGlobalHubsUnauthorized | 401                                     | application/json                        |
 | models/errors/SDKError                  | 4xx-5xx                                 | \*\/*                                   |
 
 
@@ -111,7 +115,10 @@ public class Application {
             if (res.object().isPresent()) {
                 // handle response
             }
-        } catch (dev.plexapi.sdk.models.errors.GetLibraryHubsResponseBody e) {
+        } catch (dev.plexapi.sdk.models.errors.GetLibraryHubsBadRequest e) {
+            // handle exception
+            throw e;
+        } catch (dev.plexapi.sdk.models.errors.GetLibraryHubsUnauthorized e) {
             // handle exception
             throw e;
         } catch (SDKError e) {
@@ -142,5 +149,6 @@ public class Application {
 
 | Error Object                             | Status Code                              | Content Type                             |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| models/errors/GetLibraryHubsResponseBody | 401                                      | application/json                         |
+| models/errors/GetLibraryHubsBadRequest   | 400                                      | application/json                         |
+| models/errors/GetLibraryHubsUnauthorized | 401                                      | application/json                         |
 | models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |

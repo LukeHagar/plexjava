@@ -363,6 +363,9 @@ public class PlexAPI {
             this.sdkConfiguration.retryConfig = Optional.of(retryConfig);
             return this;
         }
+        /**
+         * ServerProtocol - The protocol to use for the server connection
+         */
         public enum ServerProtocol {
             HTTP("http"),
             HTTPS("https");
