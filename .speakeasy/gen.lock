@@ -3,10 +3,10 @@ id: 1732900d-e173-47c1-a90d-d45182eb35d9
 management:
   docChecksum: a6fee1797b2da7ccbaf7743772a40b56
   docVersion: 0.0.3
-  speakeasyVersion: 1.397.2
+  speakeasyVersion: 1.397.3
   generationVersion: 2.415.8
-  releaseVersion: 0.3.3
-  configChecksum: a6378b080b9448e1abe66db14fe24490
+  releaseVersion: 0.3.4
+  configChecksum: 808dfb517ba6293da80d18294b933502
   repoURL: https://github.com/LukeHagar/plexjava.git
   published: true
 features:
