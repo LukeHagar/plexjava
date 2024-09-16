@@ -37,7 +37,6 @@ java:
     shortName: MIT
     url: https://mit-license.org/
   maxMethodParams: 4
-  ossrhURL: https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/
   outputModelSuffix: output
   packageName: dev.plexapi.sdk
   projectName: plexapi
