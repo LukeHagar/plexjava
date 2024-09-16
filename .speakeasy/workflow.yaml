@@ -10,7 +10,7 @@ targets:
         source: plexapi
         publish:
             java:
-                ossrhUsername: J4dlHj0l
+                ossrhUsername: $ossrh_username
                 ossrhPassword: $ossrh_password
                 gpgSecretKey: $java_gpg_secret_key
                 gpgPassPhrase: $java_gpg_passphrase
