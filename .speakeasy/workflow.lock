@@ -20,7 +20,7 @@ targets:
         sourceRevisionDigest: sha256:533fe97486e3fe2d84e890b7bbcdba4543d415e45181386154e011861f6da36f
         sourceBlobDigest: sha256:f7e2709f52370dff16c1851a7a4e44a89f2e978e9cae335bffc10625950b3bd9
         codeSamplesNamespace: code-samples-java-plexjava
-        codeSamplesRevisionDigest: sha256:86ffa66afb3a60633728dab34bbbcd4952491c29ef5a043b38c527762400c7e0
+        codeSamplesRevisionDigest: sha256:03bbcd874f602bc3c4399006b5786cf79cc602609d21aeb38a332f69e03fde9e
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
