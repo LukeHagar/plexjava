@@ -5,8 +5,8 @@ management:
   docVersion: 0.0.3
   speakeasyVersion: 1.397.2
   generationVersion: 2.415.8
-  releaseVersion: 0.3.1
-  configChecksum: 365985ca4474ceebb12c82aa370666a5
+  releaseVersion: 0.3.2
+  configChecksum: 948a0b278135b05b4e94954d9146736e
   repoURL: https://github.com/LukeHagar/plexjava.git
   published: true
 features:

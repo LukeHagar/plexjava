@@ -14,6 +14,7 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'signing'
+    id 'cl.franciscosolis.sonatype-central-upload' version '1.0.3'
 }
 
 compileJava.options.encoding = "UTF-8"
@@ -40,6 +41,7 @@ model {
 
 jar {
     dependsOn(":generatePomFileForMavenPublication")
+    archiveBaseName = "plexapi"
 
     into("META-INF/maven/dev.plexapi/plexapi") {
         from("$buildDir/pom.xml")
@@ -61,7 +63,7 @@ tasks.withType(Javadoc) {
 }
 
 group = "dev.plexapi"
-version = "0.3.1"
+version = "0.3.2"
 
 sourcesJar {
     archiveBaseName = "plexapi"
@@ -70,25 +72,36 @@ sourcesJar {
 javadocJar {
     archiveBaseName = "plexapi"
 }
+sonatypeCentralUpload {
+    // This is your Sonatype generated username
+    username = System.getenv("SONATYPE_USERNAME")
+    // This is your sonatype generated password
+    password = System.getenv("SONATYPE_PASSWORD")
+
+    // This is a list of files to upload. Ideally you would point to your jar file, source and javadoc jar (required by central)
+    archives = files(
+      "$buildDir/libs/plexapi-${version}.jar",
+      "$buildDir/libs/plexapi-${version}-sources.jar",
+      "$buildDir/libs/plexapi-${version}-javadoc.jar"
+    )
+
+    // This is the pom file to upload. This is required by central
+    pom = file("$buildDir/pom.xml")
+
+    // This is your PGP private key. This is required to sign your files
+    signingKey = System.getenv("SONATYPE_SIGNING_KEY")
+    // This is your PGP private key passphrase to decrypt your private key
+    signingKeyPassphrase = System.getenv("SIGNING_KEY_PASSPHRASE")
+}
 
 
 publishing {
-    repositories {
-        maven {
-            name = "OSSRH"
-            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
-            credentials {
-                username = System.getenv("MAVEN_USERNAME")
-                password = System.getenv("MAVEN_PASSWORD")
-          }
-        }
-    }
 
     publications {
         maven(MavenPublication) {
             groupId = 'dev.plexapi'
             artifactId = 'plexapi'
-            version = '0.3.1'
+            version = '0.3.2'
 
             from components.java
 
