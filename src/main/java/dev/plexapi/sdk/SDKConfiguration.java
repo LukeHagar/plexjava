@@ -36,9 +36,9 @@ class SDKConfiguration {
     } };
     public String language = "java";
     public String openapiDocVersion = "0.0.3";
-    public String sdkVersion = "0.3.0";
-    public String genVersion = "2.415.6";
-    public String userAgent = "speakeasy-sdk/java 0.3.0 2.415.6 0.0.3 dev.plexapi.sdk";
+    public String sdkVersion = "0.3.1";
+    public String genVersion = "2.415.8";
+    public String userAgent = "speakeasy-sdk/java 0.3.1 2.415.8 0.0.3 dev.plexapi.sdk";
 
     private Hooks _hooks = createHooks();
 
