@@ -31,7 +31,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetServerCapabilitiesResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetServerCapabilitiesBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetServerCapabilitiesUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -72,7 +75,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetServerPreferencesResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetServerPreferencesBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetServerPreferencesUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -114,7 +120,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.UpdatePlayProgressResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.UpdatePlayProgressBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.UpdatePlayProgressUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -154,7 +163,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.MarkPlayedResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.MarkPlayedBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.MarkPlayedUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -209,7 +221,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.GetTimelineResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetTimelineBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetTimelineUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -249,7 +264,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.MarkUnplayedResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.MarkUnplayedBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.MarkUnplayedUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -290,7 +308,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetServerActivitiesResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetServerActivitiesBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetServerActivitiesUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -330,7 +351,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.CancelServerActivitiesResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.CancelServerActivitiesBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.CancelServerActivitiesUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -369,7 +393,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.StopAllTasksResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.StopAllTasksBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.StopAllTasksUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -410,7 +437,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetButlerTasksResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetButlerTasksBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetButlerTasksUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -449,7 +479,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.StartAllTasksResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.StartAllTasksBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.StartAllTasksUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -490,7 +523,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.StopTaskResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.StopTaskBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.StopTaskUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -531,7 +567,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.StartTaskResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.StartTaskBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.StartTaskUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -572,7 +611,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetAvailableClientsResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetAvailableClientsBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetAvailableClientsUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -613,7 +655,10 @@ actions:
                         if (res.responseBodies().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetCompanionsDataResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetCompanionsDataBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetCompanionsDataUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -654,7 +699,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetDevicesResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetDevicesBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetDevicesUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -695,7 +743,10 @@ actions:
                         if (res.friends().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetUserFriendsResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetUserFriendsBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetUserFriendsUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -735,7 +786,10 @@ actions:
                         if (res.geoData().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetGeoDataResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetGeoDataBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetGeoDataUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -776,7 +830,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetHomeDataResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetHomeDataBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetHomeDataUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -820,7 +877,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetGlobalHubsResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetGlobalHubsBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetGlobalHubsUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -862,7 +922,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.PerformSearchResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.PerformSearchBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.PerformSearchUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -904,7 +967,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.PerformVoiceSearchResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.PerformVoiceSearchBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.PerformVoiceSearchUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -949,7 +1015,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetLibraryHubsResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetLibraryHubsBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetLibraryHubsUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -989,7 +1058,7 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetServerIdentityResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetServerIdentityRequestTimeout e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1033,7 +1102,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetTopWatchedContentResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetTopWatchedContentBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetTopWatchedContentUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1074,7 +1146,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.GetFileHashResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetFileHashBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetFileHashUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1116,7 +1191,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetMetaDataByRatingKeyResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetMetaDataByRatingKeyBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetMetaDataByRatingKeyUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1168,7 +1246,10 @@ actions:
                         if (res.responseStream().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetBannerImageResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetBannerImageBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetBannerImageUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1211,7 +1292,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetMetadataChildrenResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetMetadataChildrenBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetMetadataChildrenUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1263,7 +1347,10 @@ actions:
                         if (res.responseStream().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetThumbImageResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetThumbImageBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetThumbImageUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1304,7 +1391,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetOnDeckResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetOnDeckBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetOnDeckUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1347,7 +1437,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetRecentlyAddedResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetRecentlyAddedBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetRecentlyAddedUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1388,7 +1481,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetAllLibrariesResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetAllLibrariesBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetAllLibrariesUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1439,7 +1535,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetWatchListResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetWatchListBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetWatchListUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1479,7 +1578,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.DeleteLibraryResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.DeleteLibraryBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.DeleteLibraryUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1523,7 +1625,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetLibraryDetailsResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetLibraryDetailsBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetLibraryDetailsUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1565,7 +1670,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.GetRefreshLibraryMetadataResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetRefreshLibraryMetadataBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetRefreshLibraryMetadataUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1609,7 +1717,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetSearchLibraryResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetSearchLibraryBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetSearchLibraryUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1666,7 +1777,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetLibraryItemsResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetLibraryItemsBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetLibraryItemsUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1709,7 +1823,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.LogLineResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.LogLineBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.LogLineUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1746,14 +1863,17 @@ actions:
                             .build();
 
                         String req = "level=4&message=Test%20message%201&source=postman\nlevel=3&message=Test%20message%202&source=postman
-            level=1&message=Test%20message%203&source=postman";
+                        level=1&message=Test%20message%203&source=postman";
 
                         LogMultiLineResponse res = sdk.log().logMultiLine()
                             .request(req)
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.LogMultiLineResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.LogMultiLineBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.LogMultiLineUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1792,7 +1912,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.EnablePaperTrailResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.EnablePaperTrailBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.EnablePaperTrailUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1834,7 +1957,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetMediaProvidersResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetMediaProvidersBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetMediaProvidersUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1875,7 +2001,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetMyPlexAccountResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetMyPlexAccountBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetMyPlexAccountUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1916,7 +2045,7 @@ actions:
                         GetResizedPhotoRequest req = GetResizedPhotoRequest.builder()
                             .width(110d)
                             .height(165d)
-                            .opacity(643869L)
+                            .opacity(100L)
                             .blur(4000d)
                             .minSize(MinSize.ZERO)
                             .upscale(Upscale.ZERO)
@@ -1928,7 +2057,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.GetResizedPhotoResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetResizedPhotoBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetResizedPhotoUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -1971,7 +2103,7 @@ actions:
                         if (res.authPinContainer().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetPinResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetPinBadRequest e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2013,10 +2145,10 @@ actions:
                         if (res.authPinContainer().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetTokenByPinIdResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetTokenByPinIdBadRequest e) {
                         // handle exception
                         throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetTokenByPinIdPlexResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetTokenByPinIdResponseBody e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2061,7 +2193,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetPlaylistsResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetPlaylistsBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetPlaylistsUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2103,7 +2238,7 @@ actions:
                             .title("<value>")
                             .type(CreatePlaylistQueryParamType.PHOTO)
                             .smart(Smart.ONE)
-                            .uri("<value>")
+                            .uri("https://inborn-brochure.biz")
                             .build();
 
                         CreatePlaylistResponse res = sdk.playlists().createPlaylist()
@@ -2113,7 +2248,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.CreatePlaylistResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.CreatePlaylistBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.CreatePlaylistUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2155,7 +2293,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.UploadPlaylistResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.UploadPlaylistBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.UploadPlaylistUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2195,7 +2336,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.DeletePlaylistResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.DeletePlaylistBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.DeletePlaylistUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2237,7 +2381,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetPlaylistResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetPlaylistBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetPlaylistUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2279,7 +2426,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.UpdatePlaylistResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.UpdatePlaylistBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.UpdatePlaylistUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2319,7 +2469,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.ClearPlaylistContentsResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.ClearPlaylistContentsBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.ClearPlaylistContentsUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2363,7 +2516,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetPlaylistContentsResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetPlaylistContentsBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetPlaylistContentsUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2407,7 +2563,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.AddPlaylistContentsResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.AddPlaylistContentsBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.AddPlaylistContentsUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2430,7 +2589,6 @@ actions:
 
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.SDKError;
-            import dev.plexapi.plexapi.models.operations.GetServerResourcesRequest;
             import dev.plexapi.plexapi.models.operations.GetServerResourcesResponse;
             import dev.plexapi.plexapi.models.operations.IncludeHttps;
             import dev.plexapi.plexapi.models.operations.IncludeIPv6;
@@ -2446,21 +2604,20 @@ actions:
                             .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                             .build();
 
-                        GetServerResourcesRequest req = GetServerResourcesRequest.builder()
-                            .xPlexToken("CV5xoxjTpFKUzBTShsaf")
+                        GetServerResourcesResponse res = sdk.plex().getServerResources()
+                            .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                             .includeHttps(IncludeHttps.ONE)
                             .includeRelay(IncludeRelay.ONE)
                             .includeIPv6(IncludeIPv6.ONE)
-                            .build();
-
-                        GetServerResourcesResponse res = sdk.plex().getServerResources()
-                            .request(req)
                             .call();
 
                         if (res.plexDevices().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetServerResourcesResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetServerResourcesBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetServerResourcesUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2502,7 +2659,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetSearchResultsResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetSearchResultsBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetSearchResultsUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2542,7 +2702,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.GetSourceConnectionInformationResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetSourceConnectionInformationBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetSourceConnectionInformationUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2585,7 +2748,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.GetTransientTokenResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetTransientTokenBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetTransientTokenUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2626,7 +2792,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetServerListResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetServerListBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetServerListUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2668,7 +2837,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetBandwidthStatisticsResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetBandwidthStatisticsBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetBandwidthStatisticsUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2710,7 +2882,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetStatisticsResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetStatisticsBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetStatisticsUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2752,7 +2927,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetResourcesStatisticsResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetResourcesStatisticsBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetResourcesStatisticsUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2793,7 +2971,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetSessionsResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetSessionsBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetSessionsUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2840,7 +3021,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetSessionHistoryResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetSessionHistoryBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetSessionHistoryUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2881,7 +3065,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetTranscodeSessionsResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetTranscodeSessionsBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetTranscodeSessionsUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2921,7 +3108,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.StopTranscodeSessionResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.StopTranscodeSessionBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.StopTranscodeSessionUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -2964,7 +3154,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.ApplyUpdatesResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.ApplyUpdatesBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.ApplyUpdatesUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -3005,7 +3198,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.CheckForUpdatesResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.CheckForUpdatesBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.CheckForUpdatesUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -3046,7 +3242,10 @@ actions:
                         if (res.object().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetUpdateStatusResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetUpdateStatusBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetUpdateStatusUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -3063,13 +3262,13 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getUserDetails
+          label: getTokenDetails
           source: |-
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.SDKError;
-            import dev.plexapi.plexapi.models.operations.GetUserDetailsResponse;
+            import dev.plexapi.plexapi.models.operations.GetTokenDetailsResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -3081,14 +3280,16 @@ actions:
                             .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
                             .build();
 
-                        GetUserDetailsResponse res = sdk.authentication().getUserDetails()
-                            .xPlexToken("CV5xoxjTpFKUzBTShsaf")
+                        GetTokenDetailsResponse res = sdk.authentication().getTokenDetails()
                             .call();
 
                         if (res.userPlexAccount().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.GetUserDetailsResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.GetTokenDetailsBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.GetTokenDetailsUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -3128,13 +3329,17 @@ actions:
                             .requestBody(PostUsersSignInDataRequestBody.builder()
                                 .login("username@email.com")
                                 .password("password123")
+                                .verificationCode("123456")
                                 .build())
                             .call();
 
                         if (res.userPlexAccount().isPresent()) {
                             // handle response
                         }
-                    } catch (dev.plexapi.plexapi.models.errors.PostUsersSignInDataResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.PostUsersSignInDataBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.PostUsersSignInDataUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
@@ -3194,7 +3399,10 @@ actions:
                             .call();
 
                         // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.StartUniversalTranscodeResponseBody e) {
+                    } catch (dev.plexapi.plexapi.models.errors.StartUniversalTranscodeBadRequest e) {
+                        // handle exception
+                        throw e;
+                    } catch (dev.plexapi.plexapi.models.errors.StartUniversalTranscodeUnauthorized e) {
                         // handle exception
                         throw e;
                     } catch (SDKError e) {
