@@ -570,7 +570,7 @@ public class Authentication implements
     /**
      * Get User Sign In Data
      * Sign in user with username and password and return user data with Plex authentication token
-     * @param xPlexClientIdentifier The unique identifier for the client application
+     * @param clientID The unique identifier for the client application
     This is used to track the client application and its usage
     (UUID, serial number, or other number unique per device)
 
@@ -580,13 +580,13 @@ public class Authentication implements
      * @throws Exception if the API call fails
      */
     public PostUsersSignInDataResponse postUsersSignInData(
-            Optional<String> xPlexClientIdentifier,
+            Optional<String> clientID,
             Optional<? extends PostUsersSignInDataRequestBody> requestBody,
             Optional<String> serverURL) throws Exception {
         PostUsersSignInDataRequest request =
             PostUsersSignInDataRequest
                 .builder()
-                .xPlexClientIdentifier(xPlexClientIdentifier)
+                .clientID(clientID)
                 .requestBody(requestBody)
                 .build();
         

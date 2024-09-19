@@ -4,61 +4,23 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Boolean;
 import java.lang.String;
 import java.util.Optional;
 
 public class GetPinRequestBuilder {
 
-    private Optional<Boolean> strong = Utils.readDefaultOrConstValue(
-                            "strong",
-                            "false",
-                            new TypeReference<Optional<Boolean>>() {});
-    private Optional<String> xPlexClientIdentifier = Optional.empty();
-    private Optional<String> xPlexProduct = Optional.empty();
+    private GetPinRequest request;
     private Optional<String> serverURL = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetPin sdk;
 
     public GetPinRequestBuilder(SDKMethodInterfaces.MethodCallGetPin sdk) {
         this.sdk = sdk;
     }
-                
-    public GetPinRequestBuilder strong(boolean strong) {
-        Utils.checkNotNull(strong, "strong");
-        this.strong = Optional.of(strong);
-        return this;
-    }
 
-    public GetPinRequestBuilder strong(java.util.Optional<java.lang.Boolean> strong) {
-        Utils.checkNotNull(strong, "strong");
-        this.strong = strong;
-        return this;
-    }
-                
-    public GetPinRequestBuilder xPlexClientIdentifier(java.lang.String xPlexClientIdentifier) {
-        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-        this.xPlexClientIdentifier = Optional.of(xPlexClientIdentifier);
-        return this;
-    }
-
-    public GetPinRequestBuilder xPlexClientIdentifier(java.util.Optional<java.lang.String> xPlexClientIdentifier) {
-        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-        this.xPlexClientIdentifier = xPlexClientIdentifier;
-        return this;
-    }
-                
-    public GetPinRequestBuilder xPlexProduct(java.lang.String xPlexProduct) {
-        Utils.checkNotNull(xPlexProduct, "xPlexProduct");
-        this.xPlexProduct = Optional.of(xPlexProduct);
-        return this;
-    }
-
-    public GetPinRequestBuilder xPlexProduct(java.util.Optional<java.lang.String> xPlexProduct) {
-        Utils.checkNotNull(xPlexProduct, "xPlexProduct");
-        this.xPlexProduct = xPlexProduct;
+    public GetPinRequestBuilder request(dev.plexapi.sdk.models.operations.GetPinRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
     }
                 
@@ -75,19 +37,9 @@ public class GetPinRequestBuilder {
     }
 
     public GetPinResponse call() throws Exception {
-        if (strong == null) {
-            strong = _SINGLETON_VALUE_Strong.value();
-        }
+
         return sdk.getPin(
-            strong,
-            xPlexClientIdentifier,
-            xPlexProduct,
+            request,
             serverURL);
     }
-
-    private static final LazySingletonValue<Optional<Boolean>> _SINGLETON_VALUE_Strong =
-            new LazySingletonValue<>(
-                    "strong",
-                    "false",
-                    new TypeReference<Optional<Boolean>>() {});
 }

@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public class GetTokenByPinIdRequestBuilder {
 
-    private Optional<String> xPlexClientIdentifier = Optional.empty();
+    private Optional<String> clientID = Optional.empty();
     private Long pinID;
     private Optional<String> serverURL = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetTokenByPinId sdk;
@@ -20,15 +20,15 @@ public class GetTokenByPinIdRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public GetTokenByPinIdRequestBuilder xPlexClientIdentifier(java.lang.String xPlexClientIdentifier) {
-        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-        this.xPlexClientIdentifier = Optional.of(xPlexClientIdentifier);
+    public GetTokenByPinIdRequestBuilder clientID(java.lang.String clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = Optional.of(clientID);
         return this;
     }
 
-    public GetTokenByPinIdRequestBuilder xPlexClientIdentifier(java.util.Optional<java.lang.String> xPlexClientIdentifier) {
-        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-        this.xPlexClientIdentifier = xPlexClientIdentifier;
+    public GetTokenByPinIdRequestBuilder clientID(java.util.Optional<java.lang.String> clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = clientID;
         return this;
     }
 
@@ -53,7 +53,7 @@ public class GetTokenByPinIdRequestBuilder {
     public GetTokenByPinIdResponse call() throws Exception {
 
         return sdk.getTokenByPinId(
-            xPlexClientIdentifier,
+            clientID,
             pinID,
             serverURL);
     }

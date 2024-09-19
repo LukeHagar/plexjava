@@ -25,7 +25,7 @@ public class GetTokenByPinIdRequest {
      * 
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Client-Identifier")
-    private Optional<String> xPlexClientIdentifier;
+    private Optional<String> clientID;
 
     /**
      * The PinID to retrieve an access token for
@@ -35,11 +35,11 @@ public class GetTokenByPinIdRequest {
 
     @JsonCreator
     public GetTokenByPinIdRequest(
-            Optional<String> xPlexClientIdentifier,
+            Optional<String> clientID,
             long pinID) {
-        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
+        Utils.checkNotNull(clientID, "clientID");
         Utils.checkNotNull(pinID, "pinID");
-        this.xPlexClientIdentifier = xPlexClientIdentifier;
+        this.clientID = clientID;
         this.pinID = pinID;
     }
     
@@ -55,8 +55,8 @@ public class GetTokenByPinIdRequest {
      * 
      */
     @JsonIgnore
-    public Optional<String> xPlexClientIdentifier() {
-        return xPlexClientIdentifier;
+    public Optional<String> clientID() {
+        return clientID;
     }
 
     /**
@@ -77,9 +77,9 @@ public class GetTokenByPinIdRequest {
      * (UUID, serial number, or other number unique per device)
      * 
      */
-    public GetTokenByPinIdRequest withXPlexClientIdentifier(String xPlexClientIdentifier) {
-        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-        this.xPlexClientIdentifier = Optional.ofNullable(xPlexClientIdentifier);
+    public GetTokenByPinIdRequest withClientID(String clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = Optional.ofNullable(clientID);
         return this;
     }
 
@@ -89,9 +89,9 @@ public class GetTokenByPinIdRequest {
      * (UUID, serial number, or other number unique per device)
      * 
      */
-    public GetTokenByPinIdRequest withXPlexClientIdentifier(Optional<String> xPlexClientIdentifier) {
-        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-        this.xPlexClientIdentifier = xPlexClientIdentifier;
+    public GetTokenByPinIdRequest withClientID(Optional<String> clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = clientID;
         return this;
     }
 
@@ -114,27 +114,27 @@ public class GetTokenByPinIdRequest {
         }
         GetTokenByPinIdRequest other = (GetTokenByPinIdRequest) o;
         return 
-            Objects.deepEquals(this.xPlexClientIdentifier, other.xPlexClientIdentifier) &&
+            Objects.deepEquals(this.clientID, other.clientID) &&
             Objects.deepEquals(this.pinID, other.pinID);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
-            xPlexClientIdentifier,
+            clientID,
             pinID);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetTokenByPinIdRequest.class,
-                "xPlexClientIdentifier", xPlexClientIdentifier,
+                "clientID", clientID,
                 "pinID", pinID);
     }
     
     public final static class Builder {
  
-        private Optional<String> xPlexClientIdentifier = Optional.empty();
+        private Optional<String> clientID = Optional.empty();
  
         private Long pinID;  
         
@@ -148,9 +148,9 @@ public class GetTokenByPinIdRequest {
          * (UUID, serial number, or other number unique per device)
          * 
          */
-        public Builder xPlexClientIdentifier(String xPlexClientIdentifier) {
-            Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-            this.xPlexClientIdentifier = Optional.ofNullable(xPlexClientIdentifier);
+        public Builder clientID(String clientID) {
+            Utils.checkNotNull(clientID, "clientID");
+            this.clientID = Optional.ofNullable(clientID);
             return this;
         }
 
@@ -160,9 +160,9 @@ public class GetTokenByPinIdRequest {
          * (UUID, serial number, or other number unique per device)
          * 
          */
-        public Builder xPlexClientIdentifier(Optional<String> xPlexClientIdentifier) {
-            Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-            this.xPlexClientIdentifier = xPlexClientIdentifier;
+        public Builder clientID(Optional<String> clientID) {
+            Utils.checkNotNull(clientID, "clientID");
+            this.clientID = clientID;
             return this;
         }
 
@@ -177,7 +177,7 @@ public class GetTokenByPinIdRequest {
         
         public GetTokenByPinIdRequest build() {
             return new GetTokenByPinIdRequest(
-                xPlexClientIdentifier,
+                clientID,
                 pinID);
         }
     }

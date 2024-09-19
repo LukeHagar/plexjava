@@ -47,7 +47,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             CreatePlaylistRequest req = CreatePlaylistRequest.builder()
@@ -123,7 +127,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetPlaylistsResponse res = sdk.playlists().getPlaylists()
@@ -194,7 +202,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetPlaylistResponse res = sdk.playlists().getPlaylist()
@@ -262,7 +274,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             DeletePlaylistResponse res = sdk.playlists().deletePlaylist()
@@ -328,7 +344,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             UpdatePlaylistResponse res = sdk.playlists().updatePlaylist()
@@ -402,7 +422,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetPlaylistContentsResponse res = sdk.playlists().getPlaylistContents()
@@ -472,7 +496,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             ClearPlaylistContentsResponse res = sdk.playlists().clearPlaylistContents()
@@ -539,7 +567,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             AddPlaylistContentsResponse res = sdk.playlists().addPlaylistContents()
@@ -612,7 +644,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             UploadPlaylistResponse res = sdk.playlists().uploadPlaylist()

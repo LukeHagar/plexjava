@@ -63,7 +63,7 @@ tasks.withType(Javadoc) {
 }
 
 group = "dev.plexapi"
-version = "0.3.5"
+version = "0.3.6"
 
 sourcesJar {
     archiveBaseName = "plexapi"
@@ -101,7 +101,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'dev.plexapi'
             artifactId = 'plexapi'
-            version = '0.3.5'
+            version = '0.3.6'
 
             from components.java
 

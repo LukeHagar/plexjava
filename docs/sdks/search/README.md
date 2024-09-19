@@ -44,7 +44,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             PerformSearchResponse res = sdk.search().performSearch()
@@ -117,7 +121,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             PerformVoiceSearchResponse res = sdk.search().performVoiceSearch()
@@ -186,7 +194,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetSearchResultsResponse res = sdk.search().getSearchResults()

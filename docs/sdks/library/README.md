@@ -41,7 +41,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetFileHashResponse res = sdk.library().getFileHash()
@@ -109,7 +113,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetRecentlyAddedResponse res = sdk.library().getRecentlyAdded()
@@ -184,7 +192,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetAllLibrariesResponse res = sdk.library().getAllLibraries()
@@ -284,7 +296,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetLibraryDetailsResponse res = sdk.library().getLibraryDetails()
@@ -353,7 +369,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             DeleteLibraryResponse res = sdk.library().deleteLibrary()
@@ -443,7 +463,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetLibraryItemsRequest req = GetLibraryItemsRequest.builder()
@@ -522,7 +546,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetRefreshLibraryMetadataResponse res = sdk.library().getRefreshLibraryMetadata()
@@ -608,7 +636,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetSearchLibraryResponse res = sdk.library().getSearchLibrary()
@@ -678,7 +710,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetMetaDataByRatingKeyResponse res = sdk.library().getMetaDataByRatingKey()
@@ -746,7 +782,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetMetadataChildrenResponse res = sdk.library().getMetadataChildren()
@@ -817,7 +857,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetTopWatchedContentResponse res = sdk.library().getTopWatchedContent()
@@ -887,7 +931,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetOnDeckResponse res = sdk.library().getOnDeck()

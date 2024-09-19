@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class PostUsersSignInDataRequestBuilder {
 
-    private Optional<String> xPlexClientIdentifier = Optional.empty();
+    private Optional<String> clientID = Optional.empty();
     private Optional<? extends PostUsersSignInDataRequestBody> requestBody = Optional.empty();
     private Optional<String> serverURL = Optional.empty();
     private final SDKMethodInterfaces.MethodCallPostUsersSignInData sdk;
@@ -19,15 +19,15 @@ public class PostUsersSignInDataRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public PostUsersSignInDataRequestBuilder xPlexClientIdentifier(java.lang.String xPlexClientIdentifier) {
-        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-        this.xPlexClientIdentifier = Optional.of(xPlexClientIdentifier);
+    public PostUsersSignInDataRequestBuilder clientID(java.lang.String clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = Optional.of(clientID);
         return this;
     }
 
-    public PostUsersSignInDataRequestBuilder xPlexClientIdentifier(java.util.Optional<java.lang.String> xPlexClientIdentifier) {
-        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-        this.xPlexClientIdentifier = xPlexClientIdentifier;
+    public PostUsersSignInDataRequestBuilder clientID(java.util.Optional<java.lang.String> clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = clientID;
         return this;
     }
                 
@@ -58,7 +58,7 @@ public class PostUsersSignInDataRequestBuilder {
     public PostUsersSignInDataResponse call() throws Exception {
 
         return sdk.postUsersSignInData(
-            xPlexClientIdentifier,
+            clientID,
             requestBody,
             serverURL);
     }

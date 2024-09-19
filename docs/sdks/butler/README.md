@@ -34,7 +34,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetButlerTasksResponse res = sdk.butler().getButlerTasks()
@@ -99,7 +103,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             StartAllTasksResponse res = sdk.butler().startAllTasks()
@@ -158,7 +166,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             StopAllTasksResponse res = sdk.butler().stopAllTasks()
@@ -222,7 +234,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             StartTaskResponse res = sdk.butler().startTask()
@@ -289,7 +305,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             StopTaskResponse res = sdk.butler().stopTask()

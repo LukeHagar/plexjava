@@ -36,7 +36,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetCompanionsDataResponse res = sdk.plex().getCompanionsData()
@@ -102,7 +106,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetUserFriendsResponse res = sdk.plex().getUserFriends()
@@ -167,7 +175,11 @@ public class Application {
     public static void main(String[] args) throws Exception {
         try {
             PlexAPI sdk = PlexAPI.builder()
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetGeoDataResponse res = sdk.plex().getGeoData()
@@ -233,7 +245,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetHomeDataResponse res = sdk.plex().getHomeData()
@@ -296,11 +312,15 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetServerResourcesResponse res = sdk.plex().getServerResources()
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .includeHttps(IncludeHttps.ONE)
                 .includeRelay(IncludeRelay.ONE)
                 .includeIPv6(IncludeIPv6.ONE)
@@ -331,7 +351,7 @@ public class Application {
 
 | Parameter                                                                                                                                                             | Type                                                                                                                                                                  | Required                                                                                                                                                              | Description                                                                                                                                                           | Example                                                                                                                                                               |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xPlexClientIdentifier`                                                                                                                                               | *Optional<String>*                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                    | The unique identifier for the client application<br/>This is used to track the client application and its usage<br/>(UUID, serial number, or other number unique per device)<br/> | gcgzw5rz2xovp84b4vha3a40                                                                                                                                              |
+| `clientID`                                                                                                                                                            | *Optional<String>*                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                    | The unique identifier for the client application<br/>This is used to track the client application and its usage<br/>(UUID, serial number, or other number unique per device)<br/> | gcgzw5rz2xovp84b4vha3a40                                                                                                                                              |
 | `includeHttps`                                                                                                                                                        | [Optional<IncludeHttps>](../../models/operations/IncludeHttps.md)                                                                                                     | :heavy_minus_sign:                                                                                                                                                    | Include Https entries in the results                                                                                                                                  | 1                                                                                                                                                                     |
 | `includeRelay`                                                                                                                                                        | [Optional<IncludeRelay>](../../models/operations/IncludeRelay.md)                                                                                                     | :heavy_minus_sign:                                                                                                                                                    | Include Relay addresses in the results <br/>E.g: https://10-0-0-25.bbf8e10c7fa20447cacee74cd9914cde.plex.direct:32400<br/>                                            | 1                                                                                                                                                                     |
 | `includeIPv6`                                                                                                                                                         | [Optional<IncludeIPv6>](../../models/operations/IncludeIPv6.md)                                                                                                       | :heavy_minus_sign:                                                                                                                                                    | Include IPv6 entries in the results                                                                                                                                   | 1                                                                                                                                                                     |
@@ -352,7 +372,7 @@ public class Application {
 
 ## getPin
 
-Retrieve a Pin from Plex.tv for authentication flows
+Retrieve a Pin ID from Plex.tv to use for authentication flows
 
 ### Example Usage
 
@@ -361,6 +381,7 @@ package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.operations.GetPinRequest;
 import dev.plexapi.sdk.models.operations.GetPinResponse;
 import java.lang.Exception;
 
@@ -369,13 +390,18 @@ public class Application {
     public static void main(String[] args) throws Exception {
         try {
             PlexAPI sdk = PlexAPI.builder()
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
+                .build();
+
+            GetPinRequest req = GetPinRequest.builder()
                 .build();
 
             GetPinResponse res = sdk.plex().getPin()
-                .strong(false)
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
-                .xPlexProduct("Plex Web")
+                .request(req)
                 .call();
 
             if (res.authPinContainer().isPresent()) {
@@ -398,12 +424,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                                                             | Type                                                                                                                                                                  | Required                                                                                                                                                              | Description                                                                                                                                                           | Example                                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `strong`                                                                                                                                                              | *Optional<Boolean>*                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                    | Determines the kind of code returned by the API call<br/>Strong codes are used for Pin authentication flows<br/>Non-Strong codes are used for `Plex.tv/link`<br/>     |                                                                                                                                                                       |
-| `xPlexClientIdentifier`                                                                                                                                               | *Optional<String>*                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                    | The unique identifier for the client application<br/>This is used to track the client application and its usage<br/>(UUID, serial number, or other number unique per device)<br/> | gcgzw5rz2xovp84b4vha3a40                                                                                                                                              |
-| `xPlexProduct`                                                                                                                                                        | *Optional<String>*                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                    | N/A                                                                                                                                                                   | Plex Web                                                                                                                                                              |
-| `serverURL`                                                                                                                                                           | *String*                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                    | An optional server URL to use.                                                                                                                                        | http://localhost:8080                                                                                                                                                 |
+| Parameter                                                 | Type                                                      | Required                                                  | Description                                               |
+| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
+| `request`                                                 | [GetPinRequest](../../models/operations/GetPinRequest.md) | :heavy_check_mark:                                        | The request object to use for the request.                |
+| `serverURL`                                               | *String*                                                  | :heavy_minus_sign:                                        | An optional server URL to use.                            |
 
 ### Response
 
@@ -436,11 +460,15 @@ public class Application {
     public static void main(String[] args) throws Exception {
         try {
             PlexAPI sdk = PlexAPI.builder()
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetTokenByPinIdResponse res = sdk.plex().getTokenByPinId()
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .pinID(408895L)
                 .call();
 
@@ -469,7 +497,7 @@ public class Application {
 
 | Parameter                                                                                                                                                             | Type                                                                                                                                                                  | Required                                                                                                                                                              | Description                                                                                                                                                           | Example                                                                                                                                                               |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xPlexClientIdentifier`                                                                                                                                               | *Optional<String>*                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                    | The unique identifier for the client application<br/>This is used to track the client application and its usage<br/>(UUID, serial number, or other number unique per device)<br/> | gcgzw5rz2xovp84b4vha3a40                                                                                                                                              |
+| `clientID`                                                                                                                                                            | *Optional<String>*                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                    | The unique identifier for the client application<br/>This is used to track the client application and its usage<br/>(UUID, serial number, or other number unique per device)<br/> | gcgzw5rz2xovp84b4vha3a40                                                                                                                                              |
 | `pinID`                                                                                                                                                               | *long*                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                    | The PinID to retrieve an access token for                                                                                                                             |                                                                                                                                                                       |
 | `serverURL`                                                                                                                                                           | *String*                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                    | An optional server URL to use.                                                                                                                                        | http://localhost:8080                                                                                                                                                 |
 

@@ -27,7 +27,7 @@ public class GetServerResourcesRequest {
      * 
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Client-Identifier")
-    private Optional<String> xPlexClientIdentifier;
+    private Optional<String> clientID;
 
     /**
      * Include Https entries in the results
@@ -51,15 +51,15 @@ public class GetServerResourcesRequest {
 
     @JsonCreator
     public GetServerResourcesRequest(
-            Optional<String> xPlexClientIdentifier,
+            Optional<String> clientID,
             Optional<? extends IncludeHttps> includeHttps,
             Optional<? extends IncludeRelay> includeRelay,
             Optional<? extends IncludeIPv6> includeIPv6) {
-        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
+        Utils.checkNotNull(clientID, "clientID");
         Utils.checkNotNull(includeHttps, "includeHttps");
         Utils.checkNotNull(includeRelay, "includeRelay");
         Utils.checkNotNull(includeIPv6, "includeIPv6");
-        this.xPlexClientIdentifier = xPlexClientIdentifier;
+        this.clientID = clientID;
         this.includeHttps = includeHttps;
         this.includeRelay = includeRelay;
         this.includeIPv6 = includeIPv6;
@@ -76,8 +76,8 @@ public class GetServerResourcesRequest {
      * 
      */
     @JsonIgnore
-    public Optional<String> xPlexClientIdentifier() {
-        return xPlexClientIdentifier;
+    public Optional<String> clientID() {
+        return clientID;
     }
 
     /**
@@ -119,9 +119,9 @@ public class GetServerResourcesRequest {
      * (UUID, serial number, or other number unique per device)
      * 
      */
-    public GetServerResourcesRequest withXPlexClientIdentifier(String xPlexClientIdentifier) {
-        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-        this.xPlexClientIdentifier = Optional.ofNullable(xPlexClientIdentifier);
+    public GetServerResourcesRequest withClientID(String clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = Optional.ofNullable(clientID);
         return this;
     }
 
@@ -131,9 +131,9 @@ public class GetServerResourcesRequest {
      * (UUID, serial number, or other number unique per device)
      * 
      */
-    public GetServerResourcesRequest withXPlexClientIdentifier(Optional<String> xPlexClientIdentifier) {
-        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-        this.xPlexClientIdentifier = xPlexClientIdentifier;
+    public GetServerResourcesRequest withClientID(Optional<String> clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = clientID;
         return this;
     }
 
@@ -205,7 +205,7 @@ public class GetServerResourcesRequest {
         }
         GetServerResourcesRequest other = (GetServerResourcesRequest) o;
         return 
-            Objects.deepEquals(this.xPlexClientIdentifier, other.xPlexClientIdentifier) &&
+            Objects.deepEquals(this.clientID, other.clientID) &&
             Objects.deepEquals(this.includeHttps, other.includeHttps) &&
             Objects.deepEquals(this.includeRelay, other.includeRelay) &&
             Objects.deepEquals(this.includeIPv6, other.includeIPv6);
@@ -214,7 +214,7 @@ public class GetServerResourcesRequest {
     @Override
     public int hashCode() {
         return Objects.hash(
-            xPlexClientIdentifier,
+            clientID,
             includeHttps,
             includeRelay,
             includeIPv6);
@@ -223,7 +223,7 @@ public class GetServerResourcesRequest {
     @Override
     public String toString() {
         return Utils.toString(GetServerResourcesRequest.class,
-                "xPlexClientIdentifier", xPlexClientIdentifier,
+                "clientID", clientID,
                 "includeHttps", includeHttps,
                 "includeRelay", includeRelay,
                 "includeIPv6", includeIPv6);
@@ -231,7 +231,7 @@ public class GetServerResourcesRequest {
     
     public final static class Builder {
  
-        private Optional<String> xPlexClientIdentifier = Optional.empty();
+        private Optional<String> clientID = Optional.empty();
  
         private Optional<? extends IncludeHttps> includeHttps;
  
@@ -249,9 +249,9 @@ public class GetServerResourcesRequest {
          * (UUID, serial number, or other number unique per device)
          * 
          */
-        public Builder xPlexClientIdentifier(String xPlexClientIdentifier) {
-            Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-            this.xPlexClientIdentifier = Optional.ofNullable(xPlexClientIdentifier);
+        public Builder clientID(String clientID) {
+            Utils.checkNotNull(clientID, "clientID");
+            this.clientID = Optional.ofNullable(clientID);
             return this;
         }
 
@@ -261,9 +261,9 @@ public class GetServerResourcesRequest {
          * (UUID, serial number, or other number unique per device)
          * 
          */
-        public Builder xPlexClientIdentifier(Optional<String> xPlexClientIdentifier) {
-            Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-            this.xPlexClientIdentifier = xPlexClientIdentifier;
+        public Builder clientID(Optional<String> clientID) {
+            Utils.checkNotNull(clientID, "clientID");
+            this.clientID = clientID;
             return this;
         }
 
@@ -335,7 +335,7 @@ public class GetServerResourcesRequest {
             if (includeIPv6 == null) {
                 includeIPv6 = _SINGLETON_VALUE_IncludeIPv6.value();
             }            return new GetServerResourcesRequest(
-                xPlexClientIdentifier,
+                clientID,
                 includeHttps,
                 includeRelay,
                 includeIPv6);

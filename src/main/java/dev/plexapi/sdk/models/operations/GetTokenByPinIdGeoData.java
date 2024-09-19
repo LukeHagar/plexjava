@@ -14,7 +14,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -67,7 +66,7 @@ public class GetTokenByPinIdGeoData {
      * The postal code of the location.
      */
     @JsonProperty("postal_code")
-    private long postalCode;
+    private String postalCode;
 
     /**
      * Indicates if the country has privacy restrictions.
@@ -103,7 +102,7 @@ public class GetTokenByPinIdGeoData {
             @JsonProperty("city") String city,
             @JsonProperty("european_union_member") Optional<Boolean> europeanUnionMember,
             @JsonProperty("time_zone") String timeZone,
-            @JsonProperty("postal_code") long postalCode,
+            @JsonProperty("postal_code") String postalCode,
             @JsonProperty("in_privacy_restricted_country") Optional<Boolean> inPrivacyRestrictedCountry,
             @JsonProperty("in_privacy_restricted_region") Optional<Boolean> inPrivacyRestrictedRegion,
             @JsonProperty("subdivisions") String subdivisions,
@@ -138,7 +137,7 @@ public class GetTokenByPinIdGeoData {
             String country,
             String city,
             String timeZone,
-            long postalCode,
+            String postalCode,
             String subdivisions,
             String coordinates) {
         this(code, continentCode, country, city, Optional.empty(), timeZone, postalCode, Optional.empty(), Optional.empty(), subdivisions, coordinates);
@@ -196,7 +195,7 @@ public class GetTokenByPinIdGeoData {
      * The postal code of the location.
      */
     @JsonIgnore
-    public long postalCode() {
+    public String postalCode() {
         return postalCode;
     }
 
@@ -302,7 +301,7 @@ public class GetTokenByPinIdGeoData {
     /**
      * The postal code of the location.
      */
-    public GetTokenByPinIdGeoData withPostalCode(long postalCode) {
+    public GetTokenByPinIdGeoData withPostalCode(String postalCode) {
         Utils.checkNotNull(postalCode, "postalCode");
         this.postalCode = postalCode;
         return this;
@@ -431,7 +430,7 @@ public class GetTokenByPinIdGeoData {
  
         private String timeZone;
  
-        private Long postalCode;
+        private String postalCode;
  
         private Optional<Boolean> inPrivacyRestrictedCountry;
  
@@ -511,7 +510,7 @@ public class GetTokenByPinIdGeoData {
         /**
          * The postal code of the location.
          */
-        public Builder postalCode(long postalCode) {
+        public Builder postalCode(String postalCode) {
             Utils.checkNotNull(postalCode, "postalCode");
             this.postalCode = postalCode;
             return this;

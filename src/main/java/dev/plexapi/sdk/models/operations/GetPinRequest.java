@@ -36,26 +36,44 @@ public class GetPinRequest {
      * 
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Client-Identifier")
-    private Optional<String> xPlexClientIdentifier;
+    private Optional<String> clientID;
 
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Product")
-    private Optional<String> xPlexProduct;
+    private Optional<String> clientName;
+
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Device")
+    private Optional<String> deviceName;
+
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Version")
+    private Optional<String> clientVersion;
+
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Platform")
+    private Optional<String> clientPlatform;
 
     @JsonCreator
     public GetPinRequest(
             Optional<Boolean> strong,
-            Optional<String> xPlexClientIdentifier,
-            Optional<String> xPlexProduct) {
+            Optional<String> clientID,
+            Optional<String> clientName,
+            Optional<String> deviceName,
+            Optional<String> clientVersion,
+            Optional<String> clientPlatform) {
         Utils.checkNotNull(strong, "strong");
-        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-        Utils.checkNotNull(xPlexProduct, "xPlexProduct");
+        Utils.checkNotNull(clientID, "clientID");
+        Utils.checkNotNull(clientName, "clientName");
+        Utils.checkNotNull(deviceName, "deviceName");
+        Utils.checkNotNull(clientVersion, "clientVersion");
+        Utils.checkNotNull(clientPlatform, "clientPlatform");
         this.strong = strong;
-        this.xPlexClientIdentifier = xPlexClientIdentifier;
-        this.xPlexProduct = xPlexProduct;
+        this.clientID = clientID;
+        this.clientName = clientName;
+        this.deviceName = deviceName;
+        this.clientVersion = clientVersion;
+        this.clientPlatform = clientPlatform;
     }
     
     public GetPinRequest() {
-        this(Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -76,13 +94,28 @@ public class GetPinRequest {
      * 
      */
     @JsonIgnore
-    public Optional<String> xPlexClientIdentifier() {
-        return xPlexClientIdentifier;
+    public Optional<String> clientID() {
+        return clientID;
     }
 
     @JsonIgnore
-    public Optional<String> xPlexProduct() {
-        return xPlexProduct;
+    public Optional<String> clientName() {
+        return clientName;
+    }
+
+    @JsonIgnore
+    public Optional<String> deviceName() {
+        return deviceName;
+    }
+
+    @JsonIgnore
+    public Optional<String> clientVersion() {
+        return clientVersion;
+    }
+
+    @JsonIgnore
+    public Optional<String> clientPlatform() {
+        return clientPlatform;
     }
 
     public final static Builder builder() {
@@ -119,9 +152,9 @@ public class GetPinRequest {
      * (UUID, serial number, or other number unique per device)
      * 
      */
-    public GetPinRequest withXPlexClientIdentifier(String xPlexClientIdentifier) {
-        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-        this.xPlexClientIdentifier = Optional.ofNullable(xPlexClientIdentifier);
+    public GetPinRequest withClientID(String clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = Optional.ofNullable(clientID);
         return this;
     }
 
@@ -131,21 +164,57 @@ public class GetPinRequest {
      * (UUID, serial number, or other number unique per device)
      * 
      */
-    public GetPinRequest withXPlexClientIdentifier(Optional<String> xPlexClientIdentifier) {
-        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-        this.xPlexClientIdentifier = xPlexClientIdentifier;
+    public GetPinRequest withClientID(Optional<String> clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = clientID;
         return this;
     }
 
-    public GetPinRequest withXPlexProduct(String xPlexProduct) {
-        Utils.checkNotNull(xPlexProduct, "xPlexProduct");
-        this.xPlexProduct = Optional.ofNullable(xPlexProduct);
+    public GetPinRequest withClientName(String clientName) {
+        Utils.checkNotNull(clientName, "clientName");
+        this.clientName = Optional.ofNullable(clientName);
         return this;
     }
 
-    public GetPinRequest withXPlexProduct(Optional<String> xPlexProduct) {
-        Utils.checkNotNull(xPlexProduct, "xPlexProduct");
-        this.xPlexProduct = xPlexProduct;
+    public GetPinRequest withClientName(Optional<String> clientName) {
+        Utils.checkNotNull(clientName, "clientName");
+        this.clientName = clientName;
+        return this;
+    }
+
+    public GetPinRequest withDeviceName(String deviceName) {
+        Utils.checkNotNull(deviceName, "deviceName");
+        this.deviceName = Optional.ofNullable(deviceName);
+        return this;
+    }
+
+    public GetPinRequest withDeviceName(Optional<String> deviceName) {
+        Utils.checkNotNull(deviceName, "deviceName");
+        this.deviceName = deviceName;
+        return this;
+    }
+
+    public GetPinRequest withClientVersion(String clientVersion) {
+        Utils.checkNotNull(clientVersion, "clientVersion");
+        this.clientVersion = Optional.ofNullable(clientVersion);
+        return this;
+    }
+
+    public GetPinRequest withClientVersion(Optional<String> clientVersion) {
+        Utils.checkNotNull(clientVersion, "clientVersion");
+        this.clientVersion = clientVersion;
+        return this;
+    }
+
+    public GetPinRequest withClientPlatform(String clientPlatform) {
+        Utils.checkNotNull(clientPlatform, "clientPlatform");
+        this.clientPlatform = Optional.ofNullable(clientPlatform);
+        return this;
+    }
+
+    public GetPinRequest withClientPlatform(Optional<String> clientPlatform) {
+        Utils.checkNotNull(clientPlatform, "clientPlatform");
+        this.clientPlatform = clientPlatform;
         return this;
     }
     
@@ -160,33 +229,48 @@ public class GetPinRequest {
         GetPinRequest other = (GetPinRequest) o;
         return 
             Objects.deepEquals(this.strong, other.strong) &&
-            Objects.deepEquals(this.xPlexClientIdentifier, other.xPlexClientIdentifier) &&
-            Objects.deepEquals(this.xPlexProduct, other.xPlexProduct);
+            Objects.deepEquals(this.clientID, other.clientID) &&
+            Objects.deepEquals(this.clientName, other.clientName) &&
+            Objects.deepEquals(this.deviceName, other.deviceName) &&
+            Objects.deepEquals(this.clientVersion, other.clientVersion) &&
+            Objects.deepEquals(this.clientPlatform, other.clientPlatform);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
             strong,
-            xPlexClientIdentifier,
-            xPlexProduct);
+            clientID,
+            clientName,
+            deviceName,
+            clientVersion,
+            clientPlatform);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetPinRequest.class,
                 "strong", strong,
-                "xPlexClientIdentifier", xPlexClientIdentifier,
-                "xPlexProduct", xPlexProduct);
+                "clientID", clientID,
+                "clientName", clientName,
+                "deviceName", deviceName,
+                "clientVersion", clientVersion,
+                "clientPlatform", clientPlatform);
     }
     
     public final static class Builder {
  
         private Optional<Boolean> strong;
  
-        private Optional<String> xPlexClientIdentifier = Optional.empty();
+        private Optional<String> clientID = Optional.empty();
  
-        private Optional<String> xPlexProduct = Optional.empty();  
+        private Optional<String> clientName = Optional.empty();
+ 
+        private Optional<String> deviceName = Optional.empty();
+ 
+        private Optional<String> clientVersion = Optional.empty();
+ 
+        private Optional<String> clientPlatform = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -222,9 +306,9 @@ public class GetPinRequest {
          * (UUID, serial number, or other number unique per device)
          * 
          */
-        public Builder xPlexClientIdentifier(String xPlexClientIdentifier) {
-            Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-            this.xPlexClientIdentifier = Optional.ofNullable(xPlexClientIdentifier);
+        public Builder clientID(String clientID) {
+            Utils.checkNotNull(clientID, "clientID");
+            this.clientID = Optional.ofNullable(clientID);
             return this;
         }
 
@@ -234,21 +318,57 @@ public class GetPinRequest {
          * (UUID, serial number, or other number unique per device)
          * 
          */
-        public Builder xPlexClientIdentifier(Optional<String> xPlexClientIdentifier) {
-            Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-            this.xPlexClientIdentifier = xPlexClientIdentifier;
+        public Builder clientID(Optional<String> clientID) {
+            Utils.checkNotNull(clientID, "clientID");
+            this.clientID = clientID;
             return this;
         }
 
-        public Builder xPlexProduct(String xPlexProduct) {
-            Utils.checkNotNull(xPlexProduct, "xPlexProduct");
-            this.xPlexProduct = Optional.ofNullable(xPlexProduct);
+        public Builder clientName(String clientName) {
+            Utils.checkNotNull(clientName, "clientName");
+            this.clientName = Optional.ofNullable(clientName);
             return this;
         }
 
-        public Builder xPlexProduct(Optional<String> xPlexProduct) {
-            Utils.checkNotNull(xPlexProduct, "xPlexProduct");
-            this.xPlexProduct = xPlexProduct;
+        public Builder clientName(Optional<String> clientName) {
+            Utils.checkNotNull(clientName, "clientName");
+            this.clientName = clientName;
+            return this;
+        }
+
+        public Builder deviceName(String deviceName) {
+            Utils.checkNotNull(deviceName, "deviceName");
+            this.deviceName = Optional.ofNullable(deviceName);
+            return this;
+        }
+
+        public Builder deviceName(Optional<String> deviceName) {
+            Utils.checkNotNull(deviceName, "deviceName");
+            this.deviceName = deviceName;
+            return this;
+        }
+
+        public Builder clientVersion(String clientVersion) {
+            Utils.checkNotNull(clientVersion, "clientVersion");
+            this.clientVersion = Optional.ofNullable(clientVersion);
+            return this;
+        }
+
+        public Builder clientVersion(Optional<String> clientVersion) {
+            Utils.checkNotNull(clientVersion, "clientVersion");
+            this.clientVersion = clientVersion;
+            return this;
+        }
+
+        public Builder clientPlatform(String clientPlatform) {
+            Utils.checkNotNull(clientPlatform, "clientPlatform");
+            this.clientPlatform = Optional.ofNullable(clientPlatform);
+            return this;
+        }
+
+        public Builder clientPlatform(Optional<String> clientPlatform) {
+            Utils.checkNotNull(clientPlatform, "clientPlatform");
+            this.clientPlatform = clientPlatform;
             return this;
         }
         
@@ -257,8 +377,11 @@ public class GetPinRequest {
                 strong = _SINGLETON_VALUE_Strong.value();
             }            return new GetPinRequest(
                 strong,
-                xPlexClientIdentifier,
-                xPlexProduct);
+                clientID,
+                clientName,
+                deviceName,
+                clientVersion,
+                clientPlatform);
         }
 
         private static final LazySingletonValue<Optional<Boolean>> _SINGLETON_VALUE_Strong =

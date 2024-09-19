@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public class GetServerResourcesRequestBuilder {
 
-    private Optional<String> xPlexClientIdentifier = Optional.empty();
+    private Optional<String> clientID = Optional.empty();
     private Optional<? extends IncludeHttps> includeHttps = Utils.readDefaultOrConstValue(
                             "includeHttps",
                             "0",
@@ -32,15 +32,15 @@ public class GetServerResourcesRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public GetServerResourcesRequestBuilder xPlexClientIdentifier(java.lang.String xPlexClientIdentifier) {
-        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-        this.xPlexClientIdentifier = Optional.of(xPlexClientIdentifier);
+    public GetServerResourcesRequestBuilder clientID(java.lang.String clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = Optional.of(clientID);
         return this;
     }
 
-    public GetServerResourcesRequestBuilder xPlexClientIdentifier(java.util.Optional<java.lang.String> xPlexClientIdentifier) {
-        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-        this.xPlexClientIdentifier = xPlexClientIdentifier;
+    public GetServerResourcesRequestBuilder clientID(java.util.Optional<java.lang.String> clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = clientID;
         return this;
     }
                 
@@ -103,7 +103,7 @@ public class GetServerResourcesRequestBuilder {
             includeIPv6 = _SINGLETON_VALUE_IncludeIPv6.value();
         }
         return sdk.getServerResources(
-            xPlexClientIdentifier,
+            clientID,
             includeHttps,
             includeRelay,
             includeIPv6,

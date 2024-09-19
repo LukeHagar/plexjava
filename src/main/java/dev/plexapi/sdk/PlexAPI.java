@@ -433,17 +433,81 @@ public class PlexAPI {
         }
         
         /**
-         * Allows setting the xPlexClientIdentifier parameter for all supported operations.
+         * Allows setting the clientID parameter for all supported operations.
          *
-         * @param xPlexClientIdentifier The value to set.
+         * @param clientID The value to set.
          * @return The builder instance.
          */
-        public Builder xPlexClientIdentifier(String xPlexClientIdentifier) {
+        public Builder clientID(String clientID) {
             if (!this.sdkConfiguration.globals.get("parameters").containsKey("queryParam")) {
                 this.sdkConfiguration.globals.get("parameters").put("queryParam", new java.util.HashMap<>());
             }
 
-            this.sdkConfiguration.globals.get("parameters").get("queryParam").put("xPlexClientIdentifier", xPlexClientIdentifier);
+            this.sdkConfiguration.globals.get("parameters").get("queryParam").put("clientID", clientID);
+
+            return this;
+        }
+        
+        /**
+         * Allows setting the clientName parameter for all supported operations.
+         *
+         * @param clientName The value to set.
+         * @return The builder instance.
+         */
+        public Builder clientName(String clientName) {
+            if (!this.sdkConfiguration.globals.get("parameters").containsKey("queryParam")) {
+                this.sdkConfiguration.globals.get("parameters").put("queryParam", new java.util.HashMap<>());
+            }
+
+            this.sdkConfiguration.globals.get("parameters").get("queryParam").put("clientName", clientName);
+
+            return this;
+        }
+        
+        /**
+         * Allows setting the clientVersion parameter for all supported operations.
+         *
+         * @param clientVersion The value to set.
+         * @return The builder instance.
+         */
+        public Builder clientVersion(String clientVersion) {
+            if (!this.sdkConfiguration.globals.get("parameters").containsKey("queryParam")) {
+                this.sdkConfiguration.globals.get("parameters").put("queryParam", new java.util.HashMap<>());
+            }
+
+            this.sdkConfiguration.globals.get("parameters").get("queryParam").put("clientVersion", clientVersion);
+
+            return this;
+        }
+        
+        /**
+         * Allows setting the clientPlatform parameter for all supported operations.
+         *
+         * @param clientPlatform The value to set.
+         * @return The builder instance.
+         */
+        public Builder clientPlatform(String clientPlatform) {
+            if (!this.sdkConfiguration.globals.get("parameters").containsKey("queryParam")) {
+                this.sdkConfiguration.globals.get("parameters").put("queryParam", new java.util.HashMap<>());
+            }
+
+            this.sdkConfiguration.globals.get("parameters").get("queryParam").put("clientPlatform", clientPlatform);
+
+            return this;
+        }
+        
+        /**
+         * Allows setting the deviceName parameter for all supported operations.
+         *
+         * @param deviceName The value to set.
+         * @return The builder instance.
+         */
+        public Builder deviceName(String deviceName) {
+            if (!this.sdkConfiguration.globals.get("parameters").containsKey("queryParam")) {
+                this.sdkConfiguration.globals.get("parameters").put("queryParam", new java.util.HashMap<>());
+            }
+
+            this.sdkConfiguration.globals.get("parameters").get("queryParam").put("deviceName", deviceName);
 
             return this;
         }

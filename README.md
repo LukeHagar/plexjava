@@ -37,7 +37,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'dev.plexapi:plexapi:0.3.5'
+implementation 'dev.plexapi:plexapi:0.3.6'
 ```
 
 Maven:
@@ -45,7 +45,7 @@ Maven:
 <dependency>
     <groupId>dev.plexapi</groupId>
     <artifactId>plexapi</artifactId>
-    <version>0.3.5</version>
+    <version>0.3.6</version>
 </dependency>
 ```
 
@@ -83,7 +83,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
@@ -246,21 +250,25 @@ public class Application {
 <!-- Start Global Parameters [global-parameters] -->
 ## Global Parameters
 
-A parameter is configured globally. This parameter may be set on the SDK client instance itself during initialization. When configured as an option during SDK initialization, This global value will be used as the default on the operations that use it. When such operations are called, there is a place in each to override the global value, if needed.
+Certain parameters are configured globally. These parameters may be set on the SDK client instance itself during initialization. When configured as an option during SDK initialization, These global values will be used as defaults on the operations that use them. When such operations are called, there is a place in each to override the global value, if needed.
 
-For example, you can set `X-Plex-Client-Identifier` to `"gcgzw5rz2xovp84b4vha3a40"` at SDK initialization and then you do not have to pass the same value on calls to operations like `getServerResources`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
+For example, you can set `ClientID` to `"gcgzw5rz2xovp84b4vha3a40"` at SDK initialization and then you do not have to pass the same value on calls to operations like `getServerResources`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
 
 
 ### Available Globals
 
-The following global parameter is available.
+The following global parameters are available.
 
 | Name | Type | Required | Description |
 | ---- | ---- |:--------:| ----------- |
-| xPlexClientIdentifier | java.lang.String |  | The unique identifier for the client application
+| clientID | java.lang.String |  | The unique identifier for the client application
 This is used to track the client application and its usage
 (UUID, serial number, or other number unique per device)
  |
+| clientName | java.lang.String |  | The clientName parameter. |
+| clientVersion | java.lang.String |  | The clientVersion parameter. |
+| clientPlatform | java.lang.String |  | The clientPlatform parameter. |
+| deviceName | java.lang.String |  | The deviceName parameter. |
 
 
 ### Example
@@ -282,11 +290,15 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetServerResourcesResponse res = sdk.plex().getServerResources()
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .includeHttps(IncludeHttps.ONE)
                 .includeRelay(IncludeRelay.ONE)
                 .includeIPv6(IncludeIPv6.ONE)
@@ -341,7 +353,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
@@ -397,7 +413,11 @@ public class Application {
             PlexAPI sdk = PlexAPI.builder()
                 .serverIndex(0)
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
@@ -449,7 +469,11 @@ public class Application {
             PlexAPI sdk = PlexAPI.builder()
                 .serverURL("{protocol}://{ip}:{port}")
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
@@ -493,7 +517,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetCompanionsDataResponse res = sdk.plex().getCompanionsData()
@@ -548,7 +576,11 @@ public class Application {
         try {
             PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .xPlexClientIdentifier("gcgzw5rz2xovp84b4vha3a40")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
                 .build();
 
             GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()

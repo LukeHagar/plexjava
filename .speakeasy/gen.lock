@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 1732900d-e173-47c1-a90d-d45182eb35d9
 management:
-  docChecksum: a6fee1797b2da7ccbaf7743772a40b56
+  docChecksum: 5bf578a672589649d8ed83c3927c50a6
   docVersion: 0.0.3
-  speakeasyVersion: 1.397.3
-  generationVersion: 2.415.8
-  releaseVersion: 0.3.5
-  configChecksum: 4c3849409a619a08ad17d85569b6ab77
+  speakeasyVersion: 1.399.2
+  generationVersion: 2.416.6
+  releaseVersion: 0.3.6
+  configChecksum: 106e80c4c09cf1eee551ea41f14701cc
   repoURL: https://github.com/LukeHagar/plexjava.git
   published: true
 features:
@@ -1843,7 +1843,7 @@ examples:
     speakeasy-default-get-geo-data:
       responses:
         "200":
-          application/json: {"code": "VI", "continent_code": "NA", "country": "United States Virgin Islands", "city": "Amsterdam", "european_union_member": true, "time_zone": "America/St_Thomas", "postal_code": 802, "in_privacy_restricted_country": true, "in_privacy_restricted_region": true, "subdivisions": "Saint Thomas", "coordinates": "18.3381, -64.8941"}
+          application/json: {"code": "VI", "continent_code": "NA", "country": "United States Virgin Islands", "city": "Amsterdam", "european_union_member": true, "time_zone": "America/St_Thomas", "postal_code": "802", "in_privacy_restricted_country": true, "in_privacy_restricted_region": true, "subdivisions": "Saint Thomas", "coordinates": "18.3381, -64.8941"}
         "401":
           application/json: {"errors": []}
         "400":
@@ -1876,12 +1876,17 @@ examples:
     "":
       parameters:
         query:
-          X-Plex-Product: "Plex Web"
+          X-Plex-Product: Plex Web
+          X-Plex-Device: Linux
+          X-Plex-Version: 4.133.0
+          X-Plex-Platform: Chrome
       responses:
         "200":
           application/json: {"id": 308667304, "code": "7RQZ", "product": "0", "trusted": false, "qr": "https://plex.tv/api/v2/pins/qr/7RQZ", "clientIdentifier": "string", "location": {"code": "VI", "continent_code": "NA", "country": "United States Virgin Islands", "city": "Amsterdam", "european_union_member": true, "time_zone": "America/St_Thomas", "postal_code": 802, "in_privacy_restricted_country": true, "in_privacy_restricted_region": true, "subdivisions": "Saint Thomas", "coordinates": "18.3381, -64.8941"}, "expiresIn": 876, "createdAt": "2024-07-16T17:03:05Z", "expiresAt": "2024-07-16T17:18:05Z", "authToken": null, "newRegistration": null}
         "400":
           application/json: {"errors": []}
+        "201":
+          application/json: {"id": 308667304, "code": "7RQZ", "product": "0", "trusted": false, "qr": "https://plex.tv/api/v2/pins/qr/7RQZ", "clientIdentifier": "string", "location": {"code": "VI", "continent_code": "NA", "country": "United States Virgin Islands", "city": "Amsterdam", "european_union_member": true, "time_zone": "America/St_Thomas", "postal_code": "802", "in_privacy_restricted_country": true, "in_privacy_restricted_region": true, "subdivisions": "Saint Thomas", "coordinates": "18.3381, -64.8941"}, "expiresIn": 876, "createdAt": "2024-07-16T17:03:05Z", "expiresAt": "2024-07-16T17:18:05Z", "authToken": null, "newRegistration": null}
   getTokenByPinId:
     "":
       parameters:

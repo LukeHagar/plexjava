@@ -54,7 +54,6 @@ import dev.plexapi.sdk.utils.Hook.AfterSuccessContextImpl;
 import dev.plexapi.sdk.utils.Hook.BeforeRequestContextImpl;
 import dev.plexapi.sdk.utils.Utils;
 import java.io.InputStream;
-import java.lang.Boolean;
 import java.lang.Exception;
 import java.lang.String;
 import java.net.http.HttpRequest;
@@ -774,7 +773,7 @@ public class Plex implements
     /**
      * Get Server Resources
      * Get Plex server access tokens and server connections
-     * @param xPlexClientIdentifier The unique identifier for the client application
+     * @param clientID The unique identifier for the client application
     This is used to track the client application and its usage
     (UUID, serial number, or other number unique per device)
 
@@ -788,7 +787,7 @@ public class Plex implements
      * @throws Exception if the API call fails
      */
     public GetServerResourcesResponse getServerResources(
-            Optional<String> xPlexClientIdentifier,
+            Optional<String> clientID,
             Optional<? extends IncludeHttps> includeHttps,
             Optional<? extends IncludeRelay> includeRelay,
             Optional<? extends IncludeIPv6> includeIPv6,
@@ -796,7 +795,7 @@ public class Plex implements
         GetServerResourcesRequest request =
             GetServerResourcesRequest
                 .builder()
-                .xPlexClientIdentifier(xPlexClientIdentifier)
+                .clientID(clientID)
                 .includeHttps(includeHttps)
                 .includeRelay(includeRelay)
                 .includeIPv6(includeIPv6)
@@ -942,7 +941,7 @@ public class Plex implements
 
     /**
      * Get a Pin
-     * Retrieve a Pin from Plex.tv for authentication flows
+     * Retrieve a Pin ID from Plex.tv to use for authentication flows
      * @return The call builder
      */
     public GetPinRequestBuilder getPin() {
@@ -951,43 +950,27 @@ public class Plex implements
 
     /**
      * Get a Pin
-     * Retrieve a Pin from Plex.tv for authentication flows
+     * Retrieve a Pin ID from Plex.tv to use for authentication flows
+     * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetPinResponse getPinDirect() throws Exception {
-        return getPin(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    public GetPinResponse getPin(
+            GetPinRequest request) throws Exception {
+        return getPin(request, Optional.empty());
     }
     
     /**
      * Get a Pin
-     * Retrieve a Pin from Plex.tv for authentication flows
-     * @param strong Determines the kind of code returned by the API call
-    Strong codes are used for Pin authentication flows
-    Non-Strong codes are used for `Plex.tv/link`
-
-     * @param xPlexClientIdentifier The unique identifier for the client application
-    This is used to track the client application and its usage
-    (UUID, serial number, or other number unique per device)
-
-     * @param xPlexProduct
+     * Retrieve a Pin ID from Plex.tv to use for authentication flows
+     * @param request The request object containing all of the parameters for the API call.
      * @param serverURL Overrides the server URL.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetPinResponse getPin(
-            Optional<Boolean> strong,
-            Optional<String> xPlexClientIdentifier,
-            Optional<String> xPlexProduct,
+            GetPinRequest request,
             Optional<String> serverURL) throws Exception {
-        GetPinRequest request =
-            GetPinRequest
-                .builder()
-                .strong(strong)
-                .xPlexClientIdentifier(xPlexClientIdentifier)
-                .xPlexProduct(xPlexProduct)
-                .build();
-        
         String _baseUrl = Utils.templateUrl(GET_PIN_SERVERS[0], new HashMap<String, String>());
         if (serverURL.isPresent() && !serverURL.get().isBlank()) {
             _baseUrl = serverURL.get();
@@ -1059,7 +1042,7 @@ public class Plex implements
 
         GetPinResponse _res = _resBuilder.build();
         
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "201")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
                 GetPinAuthPinContainer _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
@@ -1131,7 +1114,7 @@ public class Plex implements
     /**
      * Get Access Token by PinId
      * Retrieve an Access Token from Plex.tv after the Pin has been authenticated
-     * @param xPlexClientIdentifier The unique identifier for the client application
+     * @param clientID The unique identifier for the client application
     This is used to track the client application and its usage
     (UUID, serial number, or other number unique per device)
 
@@ -1141,13 +1124,13 @@ public class Plex implements
      * @throws Exception if the API call fails
      */
     public GetTokenByPinIdResponse getTokenByPinId(
-            Optional<String> xPlexClientIdentifier,
+            Optional<String> clientID,
             long pinID,
             Optional<String> serverURL) throws Exception {
         GetTokenByPinIdRequest request =
             GetTokenByPinIdRequest
                 .builder()
-                .xPlexClientIdentifier(xPlexClientIdentifier)
+                .clientID(clientID)
                 .pinID(pinID)
                 .build();
         

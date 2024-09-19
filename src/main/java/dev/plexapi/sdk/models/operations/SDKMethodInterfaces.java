@@ -4,7 +4,6 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import java.lang.Boolean;
 import java.lang.Double;
 import java.lang.Integer;
 import java.lang.Long;
@@ -168,7 +167,7 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallGetServerResources {
         dev.plexapi.sdk.models.operations.GetServerResourcesResponse getServerResources(
-            Optional<String> xPlexClientIdentifier,
+            Optional<String> clientID,
             Optional<? extends IncludeHttps> includeHttps,
             Optional<? extends IncludeRelay> includeRelay,
             Optional<? extends IncludeIPv6> includeIPv6,
@@ -178,16 +177,14 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallGetPin {
         dev.plexapi.sdk.models.operations.GetPinResponse getPin(
-            Optional<Boolean> strong,
-            Optional<String> xPlexClientIdentifier,
-            Optional<String> xPlexProduct,
+            GetPinRequest request,
             Optional<String> serverURL) throws Exception;
     }
 
 
     public interface MethodCallGetTokenByPinId {
         dev.plexapi.sdk.models.operations.GetTokenByPinIdResponse getTokenByPinId(
-            Optional<String> xPlexClientIdentifier,
+            Optional<String> clientID,
             long pinID,
             Optional<String> serverURL) throws Exception;
     }
@@ -415,7 +412,7 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallPostUsersSignInData {
         dev.plexapi.sdk.models.operations.PostUsersSignInDataResponse postUsersSignInData(
-            Optional<String> xPlexClientIdentifier,
+            Optional<String> clientID,
             Optional<? extends PostUsersSignInDataRequestBody> requestBody,
             Optional<String> serverURL) throws Exception;
     }

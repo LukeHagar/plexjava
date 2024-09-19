@@ -25,7 +25,7 @@ public class PostUsersSignInDataRequest {
      * 
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Client-Identifier")
-    private Optional<String> xPlexClientIdentifier;
+    private Optional<String> clientID;
 
     /**
      * Login credentials
@@ -35,11 +35,11 @@ public class PostUsersSignInDataRequest {
 
     @JsonCreator
     public PostUsersSignInDataRequest(
-            Optional<String> xPlexClientIdentifier,
+            Optional<String> clientID,
             Optional<? extends PostUsersSignInDataRequestBody> requestBody) {
-        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
+        Utils.checkNotNull(clientID, "clientID");
         Utils.checkNotNull(requestBody, "requestBody");
-        this.xPlexClientIdentifier = xPlexClientIdentifier;
+        this.clientID = clientID;
         this.requestBody = requestBody;
     }
     
@@ -54,8 +54,8 @@ public class PostUsersSignInDataRequest {
      * 
      */
     @JsonIgnore
-    public Optional<String> xPlexClientIdentifier() {
-        return xPlexClientIdentifier;
+    public Optional<String> clientID() {
+        return clientID;
     }
 
     /**
@@ -77,9 +77,9 @@ public class PostUsersSignInDataRequest {
      * (UUID, serial number, or other number unique per device)
      * 
      */
-    public PostUsersSignInDataRequest withXPlexClientIdentifier(String xPlexClientIdentifier) {
-        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-        this.xPlexClientIdentifier = Optional.ofNullable(xPlexClientIdentifier);
+    public PostUsersSignInDataRequest withClientID(String clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = Optional.ofNullable(clientID);
         return this;
     }
 
@@ -89,9 +89,9 @@ public class PostUsersSignInDataRequest {
      * (UUID, serial number, or other number unique per device)
      * 
      */
-    public PostUsersSignInDataRequest withXPlexClientIdentifier(Optional<String> xPlexClientIdentifier) {
-        Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-        this.xPlexClientIdentifier = xPlexClientIdentifier;
+    public PostUsersSignInDataRequest withClientID(Optional<String> clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = clientID;
         return this;
     }
 
@@ -123,27 +123,27 @@ public class PostUsersSignInDataRequest {
         }
         PostUsersSignInDataRequest other = (PostUsersSignInDataRequest) o;
         return 
-            Objects.deepEquals(this.xPlexClientIdentifier, other.xPlexClientIdentifier) &&
+            Objects.deepEquals(this.clientID, other.clientID) &&
             Objects.deepEquals(this.requestBody, other.requestBody);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
-            xPlexClientIdentifier,
+            clientID,
             requestBody);
     }
     
     @Override
     public String toString() {
         return Utils.toString(PostUsersSignInDataRequest.class,
-                "xPlexClientIdentifier", xPlexClientIdentifier,
+                "clientID", clientID,
                 "requestBody", requestBody);
     }
     
     public final static class Builder {
  
-        private Optional<String> xPlexClientIdentifier = Optional.empty();
+        private Optional<String> clientID = Optional.empty();
  
         private Optional<? extends PostUsersSignInDataRequestBody> requestBody = Optional.empty();  
         
@@ -157,9 +157,9 @@ public class PostUsersSignInDataRequest {
          * (UUID, serial number, or other number unique per device)
          * 
          */
-        public Builder xPlexClientIdentifier(String xPlexClientIdentifier) {
-            Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-            this.xPlexClientIdentifier = Optional.ofNullable(xPlexClientIdentifier);
+        public Builder clientID(String clientID) {
+            Utils.checkNotNull(clientID, "clientID");
+            this.clientID = Optional.ofNullable(clientID);
             return this;
         }
 
@@ -169,9 +169,9 @@ public class PostUsersSignInDataRequest {
          * (UUID, serial number, or other number unique per device)
          * 
          */
-        public Builder xPlexClientIdentifier(Optional<String> xPlexClientIdentifier) {
-            Utils.checkNotNull(xPlexClientIdentifier, "xPlexClientIdentifier");
-            this.xPlexClientIdentifier = xPlexClientIdentifier;
+        public Builder clientID(Optional<String> clientID) {
+            Utils.checkNotNull(clientID, "clientID");
+            this.clientID = clientID;
             return this;
         }
 
@@ -195,7 +195,7 @@ public class PostUsersSignInDataRequest {
         
         public PostUsersSignInDataRequest build() {
             return new PostUsersSignInDataRequest(
-                xPlexClientIdentifier,
+                clientID,
                 requestBody);
         }
     }

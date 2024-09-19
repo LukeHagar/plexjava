@@ -73,7 +73,7 @@ public class GetPinAuthPinContainer {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("authToken")
-    private JsonNullable<? extends Object> authToken;
+    private JsonNullable<String> authToken;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("newRegistration")
@@ -91,7 +91,7 @@ public class GetPinAuthPinContainer {
             @JsonProperty("expiresIn") Optional<Long> expiresIn,
             @JsonProperty("createdAt") OffsetDateTime createdAt,
             @JsonProperty("expiresAt") OffsetDateTime expiresAt,
-            @JsonProperty("authToken") JsonNullable<? extends Object> authToken,
+            @JsonProperty("authToken") JsonNullable<String> authToken,
             @JsonProperty("newRegistration") JsonNullable<? extends Object> newRegistration) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(code, "code");
@@ -190,10 +190,9 @@ public class GetPinAuthPinContainer {
         return expiresAt;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public JsonNullable<Object> authToken() {
-        return (JsonNullable<Object>) authToken;
+    public JsonNullable<String> authToken() {
+        return authToken;
     }
 
     @SuppressWarnings("unchecked")
@@ -290,13 +289,13 @@ public class GetPinAuthPinContainer {
         return this;
     }
 
-    public GetPinAuthPinContainer withAuthToken(Object authToken) {
+    public GetPinAuthPinContainer withAuthToken(String authToken) {
         Utils.checkNotNull(authToken, "authToken");
         this.authToken = JsonNullable.of(authToken);
         return this;
     }
 
-    public GetPinAuthPinContainer withAuthToken(JsonNullable<? extends Object> authToken) {
+    public GetPinAuthPinContainer withAuthToken(JsonNullable<String> authToken) {
         Utils.checkNotNull(authToken, "authToken");
         this.authToken = authToken;
         return this;
@@ -394,7 +393,7 @@ public class GetPinAuthPinContainer {
  
         private OffsetDateTime expiresAt;
  
-        private JsonNullable<? extends Object> authToken = JsonNullable.undefined();
+        private JsonNullable<String> authToken = JsonNullable.undefined();
  
         private JsonNullable<? extends Object> newRegistration = JsonNullable.undefined();  
         
@@ -486,13 +485,13 @@ public class GetPinAuthPinContainer {
             return this;
         }
 
-        public Builder authToken(Object authToken) {
+        public Builder authToken(String authToken) {
             Utils.checkNotNull(authToken, "authToken");
             this.authToken = JsonNullable.of(authToken);
             return this;
         }
 
-        public Builder authToken(JsonNullable<? extends Object> authToken) {
+        public Builder authToken(JsonNullable<String> authToken) {
             Utils.checkNotNull(authToken, "authToken");
             this.authToken = authToken;
             return this;
