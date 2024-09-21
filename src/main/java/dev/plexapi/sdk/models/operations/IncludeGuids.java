@@ -11,17 +11,17 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * 
  */
 public enum IncludeGuids {
-    ZERO(0L),
-    ONE(1L);
+    Disable(0),
+    Enable(1);
 
     @JsonValue
-    private final long value;
+    private final int value;
 
-    private IncludeGuids(long value) {
+    private IncludeGuids(int value) {
         this.value = value;
     }
     
-    public long value() {
+    public int value() {
         return value;
     }
 }

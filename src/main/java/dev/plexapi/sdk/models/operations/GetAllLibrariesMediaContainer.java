@@ -7,18 +7,14 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 
 public class GetAllLibrariesMediaContainer {
@@ -32,16 +28,15 @@ public class GetAllLibrariesMediaContainer {
     @JsonProperty("title1")
     private String title1;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Directory")
-    private Optional<? extends List<GetAllLibrariesDirectory>> directory;
+    private List<GetAllLibrariesDirectory> directory;
 
     @JsonCreator
     public GetAllLibrariesMediaContainer(
             @JsonProperty("size") int size,
             @JsonProperty("allowSync") boolean allowSync,
             @JsonProperty("title1") String title1,
-            @JsonProperty("Directory") Optional<? extends List<GetAllLibrariesDirectory>> directory) {
+            @JsonProperty("Directory") List<GetAllLibrariesDirectory> directory) {
         Utils.checkNotNull(size, "size");
         Utils.checkNotNull(allowSync, "allowSync");
         Utils.checkNotNull(title1, "title1");
@@ -50,13 +45,6 @@ public class GetAllLibrariesMediaContainer {
         this.allowSync = allowSync;
         this.title1 = title1;
         this.directory = directory;
-    }
-    
-    public GetAllLibrariesMediaContainer(
-            int size,
-            boolean allowSync,
-            String title1) {
-        this(size, allowSync, title1, Optional.empty());
     }
 
     @JsonIgnore
@@ -74,10 +62,9 @@ public class GetAllLibrariesMediaContainer {
         return title1;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<GetAllLibrariesDirectory>> directory() {
-        return (Optional<List<GetAllLibrariesDirectory>>) directory;
+    public List<GetAllLibrariesDirectory> directory() {
+        return directory;
     }
 
     public final static Builder builder() {
@@ -103,12 +90,6 @@ public class GetAllLibrariesMediaContainer {
     }
 
     public GetAllLibrariesMediaContainer withDirectory(List<GetAllLibrariesDirectory> directory) {
-        Utils.checkNotNull(directory, "directory");
-        this.directory = Optional.ofNullable(directory);
-        return this;
-    }
-
-    public GetAllLibrariesMediaContainer withDirectory(Optional<? extends List<GetAllLibrariesDirectory>> directory) {
         Utils.checkNotNull(directory, "directory");
         this.directory = directory;
         return this;
@@ -156,7 +137,7 @@ public class GetAllLibrariesMediaContainer {
  
         private String title1;
  
-        private Optional<? extends List<GetAllLibrariesDirectory>> directory = Optional.empty();  
+        private List<GetAllLibrariesDirectory> directory;  
         
         private Builder() {
           // force use of static builder() method
@@ -181,12 +162,6 @@ public class GetAllLibrariesMediaContainer {
         }
 
         public Builder directory(List<GetAllLibrariesDirectory> directory) {
-            Utils.checkNotNull(directory, "directory");
-            this.directory = Optional.ofNullable(directory);
-            return this;
-        }
-
-        public Builder directory(Optional<? extends List<GetAllLibrariesDirectory>> directory) {
             Utils.checkNotNull(directory, "directory");
             this.directory = directory;
             return this;

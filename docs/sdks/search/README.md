@@ -34,44 +34,31 @@ This request is intended to be very fast, and called as the user types.
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.PerformSearchBadRequest;
+import dev.plexapi.sdk.models.errors.PerformSearchUnauthorized;
 import dev.plexapi.sdk.models.operations.PerformSearchResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws PerformSearchBadRequest, PerformSearchUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            PerformSearchResponse res = sdk.search().performSearch()
-                .query("arnold")
-                .sectionId(9372.7d)
+        PerformSearchResponse res = sdk.search().performSearch()
+                .query("dylan")
+                .sectionId(5838.67d)
                 .limit(5d)
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.PerformSearchBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.PerformSearchUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```
@@ -111,44 +98,31 @@ Results, as well as their containing per-type hubs, contain a `distance` attribu
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.PerformVoiceSearchBadRequest;
+import dev.plexapi.sdk.models.errors.PerformVoiceSearchUnauthorized;
 import dev.plexapi.sdk.models.operations.PerformVoiceSearchResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws PerformVoiceSearchBadRequest, PerformVoiceSearchUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            PerformVoiceSearchResponse res = sdk.search().performVoiceSearch()
+        PerformVoiceSearchResponse res = sdk.search().performVoiceSearch()
                 .query("dead+poop")
-                .sectionId(4094.8d)
+                .sectionId(4094.80d)
                 .limit(5d)
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.PerformVoiceSearchBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.PerformVoiceSearchUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```
@@ -184,44 +158,31 @@ This will search the database for the string provided.
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetSearchResultsBadRequest;
+import dev.plexapi.sdk.models.errors.GetSearchResultsUnauthorized;
 import dev.plexapi.sdk.models.operations.GetSearchResultsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetSearchResultsBadRequest, GetSearchResultsUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetSearchResultsResponse res = sdk.search().getSearchResults()
+        GetSearchResultsResponse res = sdk.search().getSearchResults()
                 .query("110")
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetSearchResultsBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetSearchResultsUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```

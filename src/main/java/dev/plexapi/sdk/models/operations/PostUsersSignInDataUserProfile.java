@@ -44,23 +44,14 @@ public class PostUsersSignInDataUserProfile {
     @JsonProperty("defaultSubtitleLanguage")
     private Optional<String> defaultSubtitleLanguage;
 
-    /**
-     * The auto-select subtitle mode (0 = Manually selected, 1 = Shown with foreign audio, 2 = Always enabled)
-     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("autoSelectSubtitle")
     private Optional<? extends PostUsersSignInDataAutoSelectSubtitle> autoSelectSubtitle;
 
-    /**
-     * The subtitles for the deaf or hard-of-hearing (SDH) searches mode (0 = Prefer non-SDH subtitles, 1 = Prefer SDH subtitles, 2 = Only show SDH subtitles, 3 = Only shown non-SDH subtitles)
-     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("defaultSubtitleAccessibility")
     private Optional<? extends PostUsersSignInDataDefaultSubtitleAccessibility> defaultSubtitleAccessibility;
 
-    /**
-     * The forced subtitles searches mode (0 = Prefer non-forced subtitles, 1 = Prefer forced subtitles, 2 = Only show forced subtitles, 3 = Only show non-forced subtitles)
-     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("defaultSubtitleForced")
     private Optional<? extends PostUsersSignInDataDefaultSubtitleForced> defaultSubtitleForced;
@@ -129,27 +120,18 @@ public class PostUsersSignInDataUserProfile {
         return defaultSubtitleLanguage;
     }
 
-    /**
-     * The auto-select subtitle mode (0 = Manually selected, 1 = Shown with foreign audio, 2 = Always enabled)
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<PostUsersSignInDataAutoSelectSubtitle> autoSelectSubtitle() {
         return (Optional<PostUsersSignInDataAutoSelectSubtitle>) autoSelectSubtitle;
     }
 
-    /**
-     * The subtitles for the deaf or hard-of-hearing (SDH) searches mode (0 = Prefer non-SDH subtitles, 1 = Prefer SDH subtitles, 2 = Only show SDH subtitles, 3 = Only shown non-SDH subtitles)
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<PostUsersSignInDataDefaultSubtitleAccessibility> defaultSubtitleAccessibility() {
         return (Optional<PostUsersSignInDataDefaultSubtitleAccessibility>) defaultSubtitleAccessibility;
     }
 
-    /**
-     * The forced subtitles searches mode (0 = Prefer non-forced subtitles, 1 = Prefer forced subtitles, 2 = Only show forced subtitles, 3 = Only show non-forced subtitles)
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<PostUsersSignInDataDefaultSubtitleForced> defaultSubtitleForced() {
@@ -226,54 +208,36 @@ public class PostUsersSignInDataUserProfile {
         return this;
     }
 
-    /**
-     * The auto-select subtitle mode (0 = Manually selected, 1 = Shown with foreign audio, 2 = Always enabled)
-     */
     public PostUsersSignInDataUserProfile withAutoSelectSubtitle(PostUsersSignInDataAutoSelectSubtitle autoSelectSubtitle) {
         Utils.checkNotNull(autoSelectSubtitle, "autoSelectSubtitle");
         this.autoSelectSubtitle = Optional.ofNullable(autoSelectSubtitle);
         return this;
     }
 
-    /**
-     * The auto-select subtitle mode (0 = Manually selected, 1 = Shown with foreign audio, 2 = Always enabled)
-     */
     public PostUsersSignInDataUserProfile withAutoSelectSubtitle(Optional<? extends PostUsersSignInDataAutoSelectSubtitle> autoSelectSubtitle) {
         Utils.checkNotNull(autoSelectSubtitle, "autoSelectSubtitle");
         this.autoSelectSubtitle = autoSelectSubtitle;
         return this;
     }
 
-    /**
-     * The subtitles for the deaf or hard-of-hearing (SDH) searches mode (0 = Prefer non-SDH subtitles, 1 = Prefer SDH subtitles, 2 = Only show SDH subtitles, 3 = Only shown non-SDH subtitles)
-     */
     public PostUsersSignInDataUserProfile withDefaultSubtitleAccessibility(PostUsersSignInDataDefaultSubtitleAccessibility defaultSubtitleAccessibility) {
         Utils.checkNotNull(defaultSubtitleAccessibility, "defaultSubtitleAccessibility");
         this.defaultSubtitleAccessibility = Optional.ofNullable(defaultSubtitleAccessibility);
         return this;
     }
 
-    /**
-     * The subtitles for the deaf or hard-of-hearing (SDH) searches mode (0 = Prefer non-SDH subtitles, 1 = Prefer SDH subtitles, 2 = Only show SDH subtitles, 3 = Only shown non-SDH subtitles)
-     */
     public PostUsersSignInDataUserProfile withDefaultSubtitleAccessibility(Optional<? extends PostUsersSignInDataDefaultSubtitleAccessibility> defaultSubtitleAccessibility) {
         Utils.checkNotNull(defaultSubtitleAccessibility, "defaultSubtitleAccessibility");
         this.defaultSubtitleAccessibility = defaultSubtitleAccessibility;
         return this;
     }
 
-    /**
-     * The forced subtitles searches mode (0 = Prefer non-forced subtitles, 1 = Prefer forced subtitles, 2 = Only show forced subtitles, 3 = Only show non-forced subtitles)
-     */
     public PostUsersSignInDataUserProfile withDefaultSubtitleForced(PostUsersSignInDataDefaultSubtitleForced defaultSubtitleForced) {
         Utils.checkNotNull(defaultSubtitleForced, "defaultSubtitleForced");
         this.defaultSubtitleForced = Optional.ofNullable(defaultSubtitleForced);
         return this;
     }
 
-    /**
-     * The forced subtitles searches mode (0 = Prefer non-forced subtitles, 1 = Prefer forced subtitles, 2 = Only show forced subtitles, 3 = Only show non-forced subtitles)
-     */
     public PostUsersSignInDataUserProfile withDefaultSubtitleForced(Optional<? extends PostUsersSignInDataDefaultSubtitleForced> defaultSubtitleForced) {
         Utils.checkNotNull(defaultSubtitleForced, "defaultSubtitleForced");
         this.defaultSubtitleForced = defaultSubtitleForced;
@@ -358,15 +322,15 @@ public class PostUsersSignInDataUserProfile {
  
         private Optional<String> defaultSubtitleLanguage = Optional.empty();
  
-        private Optional<? extends PostUsersSignInDataAutoSelectSubtitle> autoSelectSubtitle = Optional.empty();
+        private Optional<? extends PostUsersSignInDataAutoSelectSubtitle> autoSelectSubtitle;
  
-        private Optional<? extends PostUsersSignInDataDefaultSubtitleAccessibility> defaultSubtitleAccessibility = Optional.empty();
+        private Optional<? extends PostUsersSignInDataDefaultSubtitleAccessibility> defaultSubtitleAccessibility;
  
-        private Optional<? extends PostUsersSignInDataDefaultSubtitleForced> defaultSubtitleForced = Optional.empty();
+        private Optional<? extends PostUsersSignInDataDefaultSubtitleForced> defaultSubtitleForced;
  
-        private Optional<? extends PostUsersSignInDataWatchedIndicator> watchedIndicator = Optional.empty();
+        private Optional<? extends PostUsersSignInDataWatchedIndicator> watchedIndicator;
  
-        private Optional<? extends PostUsersSignInDataMediaReviewsVisibility> mediaReviewsVisibility = Optional.empty();  
+        private Optional<? extends PostUsersSignInDataMediaReviewsVisibility> mediaReviewsVisibility;  
         
         private Builder() {
           // force use of static builder() method
@@ -426,54 +390,36 @@ public class PostUsersSignInDataUserProfile {
             return this;
         }
 
-        /**
-         * The auto-select subtitle mode (0 = Manually selected, 1 = Shown with foreign audio, 2 = Always enabled)
-         */
         public Builder autoSelectSubtitle(PostUsersSignInDataAutoSelectSubtitle autoSelectSubtitle) {
             Utils.checkNotNull(autoSelectSubtitle, "autoSelectSubtitle");
             this.autoSelectSubtitle = Optional.ofNullable(autoSelectSubtitle);
             return this;
         }
 
-        /**
-         * The auto-select subtitle mode (0 = Manually selected, 1 = Shown with foreign audio, 2 = Always enabled)
-         */
         public Builder autoSelectSubtitle(Optional<? extends PostUsersSignInDataAutoSelectSubtitle> autoSelectSubtitle) {
             Utils.checkNotNull(autoSelectSubtitle, "autoSelectSubtitle");
             this.autoSelectSubtitle = autoSelectSubtitle;
             return this;
         }
 
-        /**
-         * The subtitles for the deaf or hard-of-hearing (SDH) searches mode (0 = Prefer non-SDH subtitles, 1 = Prefer SDH subtitles, 2 = Only show SDH subtitles, 3 = Only shown non-SDH subtitles)
-         */
         public Builder defaultSubtitleAccessibility(PostUsersSignInDataDefaultSubtitleAccessibility defaultSubtitleAccessibility) {
             Utils.checkNotNull(defaultSubtitleAccessibility, "defaultSubtitleAccessibility");
             this.defaultSubtitleAccessibility = Optional.ofNullable(defaultSubtitleAccessibility);
             return this;
         }
 
-        /**
-         * The subtitles for the deaf or hard-of-hearing (SDH) searches mode (0 = Prefer non-SDH subtitles, 1 = Prefer SDH subtitles, 2 = Only show SDH subtitles, 3 = Only shown non-SDH subtitles)
-         */
         public Builder defaultSubtitleAccessibility(Optional<? extends PostUsersSignInDataDefaultSubtitleAccessibility> defaultSubtitleAccessibility) {
             Utils.checkNotNull(defaultSubtitleAccessibility, "defaultSubtitleAccessibility");
             this.defaultSubtitleAccessibility = defaultSubtitleAccessibility;
             return this;
         }
 
-        /**
-         * The forced subtitles searches mode (0 = Prefer non-forced subtitles, 1 = Prefer forced subtitles, 2 = Only show forced subtitles, 3 = Only show non-forced subtitles)
-         */
         public Builder defaultSubtitleForced(PostUsersSignInDataDefaultSubtitleForced defaultSubtitleForced) {
             Utils.checkNotNull(defaultSubtitleForced, "defaultSubtitleForced");
             this.defaultSubtitleForced = Optional.ofNullable(defaultSubtitleForced);
             return this;
         }
 
-        /**
-         * The forced subtitles searches mode (0 = Prefer non-forced subtitles, 1 = Prefer forced subtitles, 2 = Only show forced subtitles, 3 = Only show non-forced subtitles)
-         */
         public Builder defaultSubtitleForced(Optional<? extends PostUsersSignInDataDefaultSubtitleForced> defaultSubtitleForced) {
             Utils.checkNotNull(defaultSubtitleForced, "defaultSubtitleForced");
             this.defaultSubtitleForced = defaultSubtitleForced;
@@ -507,6 +453,21 @@ public class PostUsersSignInDataUserProfile {
         public PostUsersSignInDataUserProfile build() {
             if (autoSelectAudio == null) {
                 autoSelectAudio = _SINGLETON_VALUE_AutoSelectAudio.value();
+            }
+            if (autoSelectSubtitle == null) {
+                autoSelectSubtitle = _SINGLETON_VALUE_AutoSelectSubtitle.value();
+            }
+            if (defaultSubtitleAccessibility == null) {
+                defaultSubtitleAccessibility = _SINGLETON_VALUE_DefaultSubtitleAccessibility.value();
+            }
+            if (defaultSubtitleForced == null) {
+                defaultSubtitleForced = _SINGLETON_VALUE_DefaultSubtitleForced.value();
+            }
+            if (watchedIndicator == null) {
+                watchedIndicator = _SINGLETON_VALUE_WatchedIndicator.value();
+            }
+            if (mediaReviewsVisibility == null) {
+                mediaReviewsVisibility = _SINGLETON_VALUE_MediaReviewsVisibility.value();
             }            return new PostUsersSignInDataUserProfile(
                 autoSelectAudio,
                 defaultAudioLanguage,
@@ -523,6 +484,36 @@ public class PostUsersSignInDataUserProfile {
                         "autoSelectAudio",
                         "true",
                         new TypeReference<Optional<Boolean>>() {});
+
+        private static final LazySingletonValue<Optional<? extends PostUsersSignInDataAutoSelectSubtitle>> _SINGLETON_VALUE_AutoSelectSubtitle =
+                new LazySingletonValue<>(
+                        "autoSelectSubtitle",
+                        "0",
+                        new TypeReference<Optional<? extends PostUsersSignInDataAutoSelectSubtitle>>() {});
+
+        private static final LazySingletonValue<Optional<? extends PostUsersSignInDataDefaultSubtitleAccessibility>> _SINGLETON_VALUE_DefaultSubtitleAccessibility =
+                new LazySingletonValue<>(
+                        "defaultSubtitleAccessibility",
+                        "0",
+                        new TypeReference<Optional<? extends PostUsersSignInDataDefaultSubtitleAccessibility>>() {});
+
+        private static final LazySingletonValue<Optional<? extends PostUsersSignInDataDefaultSubtitleForced>> _SINGLETON_VALUE_DefaultSubtitleForced =
+                new LazySingletonValue<>(
+                        "defaultSubtitleForced",
+                        "0",
+                        new TypeReference<Optional<? extends PostUsersSignInDataDefaultSubtitleForced>>() {});
+
+        private static final LazySingletonValue<Optional<? extends PostUsersSignInDataWatchedIndicator>> _SINGLETON_VALUE_WatchedIndicator =
+                new LazySingletonValue<>(
+                        "watchedIndicator",
+                        "0",
+                        new TypeReference<Optional<? extends PostUsersSignInDataWatchedIndicator>>() {});
+
+        private static final LazySingletonValue<Optional<? extends PostUsersSignInDataMediaReviewsVisibility>> _SINGLETON_VALUE_MediaReviewsVisibility =
+                new LazySingletonValue<>(
+                        "mediaReviewsVisibility",
+                        "0",
+                        new TypeReference<Optional<? extends PostUsersSignInDataMediaReviewsVisibility>>() {});
     }
 }
 

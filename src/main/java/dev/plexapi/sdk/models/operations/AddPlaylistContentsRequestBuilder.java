@@ -26,7 +26,7 @@ public class AddPlaylistContentsRequestBuilder {
         return this;
     }
 
-    public AddPlaylistContentsRequestBuilder uri(java.lang.String uri) {
+    public AddPlaylistContentsRequestBuilder uri(String uri) {
         Utils.checkNotNull(uri, "uri");
         this.uri = uri;
         return this;
@@ -38,7 +38,7 @@ public class AddPlaylistContentsRequestBuilder {
         return this;
     }
 
-    public AddPlaylistContentsRequestBuilder playQueueID(java.util.Optional<java.lang.Double> playQueueID) {
+    public AddPlaylistContentsRequestBuilder playQueueID(Optional<Double> playQueueID) {
         Utils.checkNotNull(playQueueID, "playQueueID");
         this.playQueueID = playQueueID;
         return this;

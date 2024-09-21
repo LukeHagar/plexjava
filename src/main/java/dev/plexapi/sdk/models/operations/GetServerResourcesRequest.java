@@ -21,15 +21,6 @@ import java.util.Optional;
 public class GetServerResourcesRequest {
 
     /**
-     * The unique identifier for the client application
-     * This is used to track the client application and its usage
-     * (UUID, serial number, or other number unique per device)
-     * 
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Client-Identifier")
-    private Optional<String> clientID;
-
-    /**
      * Include Https entries in the results
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeHttps")
@@ -51,33 +42,19 @@ public class GetServerResourcesRequest {
 
     @JsonCreator
     public GetServerResourcesRequest(
-            Optional<String> clientID,
             Optional<? extends IncludeHttps> includeHttps,
             Optional<? extends IncludeRelay> includeRelay,
             Optional<? extends IncludeIPv6> includeIPv6) {
-        Utils.checkNotNull(clientID, "clientID");
         Utils.checkNotNull(includeHttps, "includeHttps");
         Utils.checkNotNull(includeRelay, "includeRelay");
         Utils.checkNotNull(includeIPv6, "includeIPv6");
-        this.clientID = clientID;
         this.includeHttps = includeHttps;
         this.includeRelay = includeRelay;
         this.includeIPv6 = includeIPv6;
     }
     
     public GetServerResourcesRequest() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
-    }
-
-    /**
-     * The unique identifier for the client application
-     * This is used to track the client application and its usage
-     * (UUID, serial number, or other number unique per device)
-     * 
-     */
-    @JsonIgnore
-    public Optional<String> clientID() {
-        return clientID;
+        this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -111,30 +88,6 @@ public class GetServerResourcesRequest {
 
     public final static Builder builder() {
         return new Builder();
-    }
-
-    /**
-     * The unique identifier for the client application
-     * This is used to track the client application and its usage
-     * (UUID, serial number, or other number unique per device)
-     * 
-     */
-    public GetServerResourcesRequest withClientID(String clientID) {
-        Utils.checkNotNull(clientID, "clientID");
-        this.clientID = Optional.ofNullable(clientID);
-        return this;
-    }
-
-    /**
-     * The unique identifier for the client application
-     * This is used to track the client application and its usage
-     * (UUID, serial number, or other number unique per device)
-     * 
-     */
-    public GetServerResourcesRequest withClientID(Optional<String> clientID) {
-        Utils.checkNotNull(clientID, "clientID");
-        this.clientID = clientID;
-        return this;
     }
 
     /**
@@ -205,7 +158,6 @@ public class GetServerResourcesRequest {
         }
         GetServerResourcesRequest other = (GetServerResourcesRequest) o;
         return 
-            Objects.deepEquals(this.clientID, other.clientID) &&
             Objects.deepEquals(this.includeHttps, other.includeHttps) &&
             Objects.deepEquals(this.includeRelay, other.includeRelay) &&
             Objects.deepEquals(this.includeIPv6, other.includeIPv6);
@@ -214,7 +166,6 @@ public class GetServerResourcesRequest {
     @Override
     public int hashCode() {
         return Objects.hash(
-            clientID,
             includeHttps,
             includeRelay,
             includeIPv6);
@@ -223,15 +174,12 @@ public class GetServerResourcesRequest {
     @Override
     public String toString() {
         return Utils.toString(GetServerResourcesRequest.class,
-                "clientID", clientID,
                 "includeHttps", includeHttps,
                 "includeRelay", includeRelay,
                 "includeIPv6", includeIPv6);
     }
     
     public final static class Builder {
- 
-        private Optional<String> clientID = Optional.empty();
  
         private Optional<? extends IncludeHttps> includeHttps;
  
@@ -241,30 +189,6 @@ public class GetServerResourcesRequest {
         
         private Builder() {
           // force use of static builder() method
-        }
-
-        /**
-         * The unique identifier for the client application
-         * This is used to track the client application and its usage
-         * (UUID, serial number, or other number unique per device)
-         * 
-         */
-        public Builder clientID(String clientID) {
-            Utils.checkNotNull(clientID, "clientID");
-            this.clientID = Optional.ofNullable(clientID);
-            return this;
-        }
-
-        /**
-         * The unique identifier for the client application
-         * This is used to track the client application and its usage
-         * (UUID, serial number, or other number unique per device)
-         * 
-         */
-        public Builder clientID(Optional<String> clientID) {
-            Utils.checkNotNull(clientID, "clientID");
-            this.clientID = clientID;
-            return this;
         }
 
         /**
@@ -335,7 +259,6 @@ public class GetServerResourcesRequest {
             if (includeIPv6 == null) {
                 includeIPv6 = _SINGLETON_VALUE_IncludeIPv6.value();
             }            return new GetServerResourcesRequest(
-                clientID,
                 includeHttps,
                 includeRelay,
                 includeIPv6);

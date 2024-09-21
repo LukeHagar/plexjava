@@ -24,42 +24,29 @@ This will mark the provided media key as Played.
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.MarkPlayedBadRequest;
+import dev.plexapi.sdk.models.errors.MarkPlayedUnauthorized;
 import dev.plexapi.sdk.models.operations.MarkPlayedResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws MarkPlayedBadRequest, MarkPlayedUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            MarkPlayedResponse res = sdk.media().markPlayed()
+        MarkPlayedResponse res = sdk.media().markPlayed()
                 .key(59398d)
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.MarkPlayedBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.MarkPlayedUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```
@@ -93,42 +80,29 @@ This will mark the provided media key as Unplayed.
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.MarkUnplayedBadRequest;
+import dev.plexapi.sdk.models.errors.MarkUnplayedUnauthorized;
 import dev.plexapi.sdk.models.operations.MarkUnplayedResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws MarkUnplayedBadRequest, MarkUnplayedUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            MarkUnplayedResponse res = sdk.media().markUnplayed()
+        MarkUnplayedResponse res = sdk.media().markUnplayed()
                 .key(59398d)
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.MarkUnplayedBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.MarkUnplayedUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```
@@ -163,44 +137,31 @@ This API command can be used to update the play progress of a media item.
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.UpdatePlayProgressBadRequest;
+import dev.plexapi.sdk.models.errors.UpdatePlayProgressUnauthorized;
 import dev.plexapi.sdk.models.operations.UpdatePlayProgressResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws UpdatePlayProgressBadRequest, UpdatePlayProgressUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            UpdatePlayProgressResponse res = sdk.media().updatePlayProgress()
+        UpdatePlayProgressResponse res = sdk.media().updatePlayProgress()
                 .key("<key>")
                 .time(90000d)
                 .state("played")
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.UpdatePlayProgressBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.UpdatePlayProgressUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```
@@ -236,25 +197,26 @@ Gets the banner image of the media item
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetBannerImageBadRequest;
+import dev.plexapi.sdk.models.errors.GetBannerImageUnauthorized;
 import dev.plexapi.sdk.models.operations.GetBannerImageRequest;
 import dev.plexapi.sdk.models.operations.GetBannerImageResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetBannerImageBadRequest, GetBannerImageUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetBannerImageRequest req = GetBannerImageRequest.builder()
+        GetBannerImageRequest req = GetBannerImageRequest.builder()
                 .ratingKey(9518L)
                 .width(396L)
                 .height(396L)
@@ -263,27 +225,13 @@ public class Application {
                 .xPlexToken("CV5xoxjTpFKUzBTShsaf")
                 .build();
 
-            GetBannerImageResponse res = sdk.media().getBannerImage()
+        GetBannerImageResponse res = sdk.media().getBannerImage()
                 .request(req)
                 .call();
 
-            if (res.responseStream().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetBannerImageBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetBannerImageUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.responseStream().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -317,25 +265,26 @@ Gets the thumbnail image of the media item
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetThumbImageBadRequest;
+import dev.plexapi.sdk.models.errors.GetThumbImageUnauthorized;
 import dev.plexapi.sdk.models.operations.GetThumbImageRequest;
 import dev.plexapi.sdk.models.operations.GetThumbImageResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetThumbImageBadRequest, GetThumbImageUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetThumbImageRequest req = GetThumbImageRequest.builder()
+        GetThumbImageRequest req = GetThumbImageRequest.builder()
                 .ratingKey(9518L)
                 .width(396L)
                 .height(396L)
@@ -344,27 +293,13 @@ public class Application {
                 .xPlexToken("CV5xoxjTpFKUzBTShsaf")
                 .build();
 
-            GetThumbImageResponse res = sdk.media().getThumbImage()
+        GetThumbImageResponse res = sdk.media().getThumbImage()
                 .request(req)
                 .call();
 
-            if (res.responseStream().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetThumbImageBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetThumbImageUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.responseStream().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```

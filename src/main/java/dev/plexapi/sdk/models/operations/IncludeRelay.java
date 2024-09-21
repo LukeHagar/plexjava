@@ -12,8 +12,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * 
  */
 public enum IncludeRelay {
-    ZERO(0),
-    ONE(1);
+    Disable(0),
+    Enable(1);
 
     @JsonValue
     private final int value;

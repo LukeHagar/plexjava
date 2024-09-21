@@ -18,19 +18,19 @@ public class LogLineRequestBuilder {
         this.sdk = sdk;
     }
 
-    public LogLineRequestBuilder level(dev.plexapi.sdk.models.operations.Level level) {
+    public LogLineRequestBuilder level(Level level) {
         Utils.checkNotNull(level, "level");
         this.level = level;
         return this;
     }
 
-    public LogLineRequestBuilder message(java.lang.String message) {
+    public LogLineRequestBuilder message(String message) {
         Utils.checkNotNull(message, "message");
         this.message = message;
         return this;
     }
 
-    public LogLineRequestBuilder source(java.lang.String source) {
+    public LogLineRequestBuilder source(String source) {
         Utils.checkNotNull(source, "source");
         this.source = source;
         return this;

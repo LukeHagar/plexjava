@@ -24,19 +24,19 @@ public class GetGlobalHubsRequestBuilder {
         return this;
     }
 
-    public GetGlobalHubsRequestBuilder count(java.util.Optional<java.lang.Double> count) {
+    public GetGlobalHubsRequestBuilder count(Optional<Double> count) {
         Utils.checkNotNull(count, "count");
         this.count = count;
         return this;
     }
                 
-    public GetGlobalHubsRequestBuilder onlyTransient(dev.plexapi.sdk.models.operations.OnlyTransient onlyTransient) {
+    public GetGlobalHubsRequestBuilder onlyTransient(OnlyTransient onlyTransient) {
         Utils.checkNotNull(onlyTransient, "onlyTransient");
         this.onlyTransient = Optional.of(onlyTransient);
         return this;
     }
 
-    public GetGlobalHubsRequestBuilder onlyTransient(java.util.Optional<? extends dev.plexapi.sdk.models.operations.OnlyTransient> onlyTransient) {
+    public GetGlobalHubsRequestBuilder onlyTransient(Optional<? extends OnlyTransient> onlyTransient) {
         Utils.checkNotNull(onlyTransient, "onlyTransient");
         this.onlyTransient = onlyTransient;
         return this;

@@ -22,44 +22,31 @@ This will return the media statistics for the server
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetStatisticsBadRequest;
+import dev.plexapi.sdk.models.errors.GetStatisticsUnauthorized;
 import dev.plexapi.sdk.models.operations.GetStatisticsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetStatisticsBadRequest, GetStatisticsUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetStatisticsResponse res = sdk.statistics().getStatistics()
+        GetStatisticsResponse res = sdk.statistics().getStatistics()
                 .timespan(4L)
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetStatisticsBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetStatisticsUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -93,44 +80,31 @@ This will return the resources for the server
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetResourcesStatisticsBadRequest;
+import dev.plexapi.sdk.models.errors.GetResourcesStatisticsUnauthorized;
 import dev.plexapi.sdk.models.operations.GetResourcesStatisticsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetResourcesStatisticsBadRequest, GetResourcesStatisticsUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetResourcesStatisticsResponse res = sdk.statistics().getResourcesStatistics()
+        GetResourcesStatisticsResponse res = sdk.statistics().getResourcesStatistics()
                 .timespan(4L)
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetResourcesStatisticsBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetResourcesStatisticsUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -164,44 +138,31 @@ This will return the bandwidth statistics for the server
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetBandwidthStatisticsBadRequest;
+import dev.plexapi.sdk.models.errors.GetBandwidthStatisticsUnauthorized;
 import dev.plexapi.sdk.models.operations.GetBandwidthStatisticsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetBandwidthStatisticsBadRequest, GetBandwidthStatisticsUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetBandwidthStatisticsResponse res = sdk.statistics().getBandwidthStatistics()
+        GetBandwidthStatisticsResponse res = sdk.statistics().getBandwidthStatistics()
                 .timespan(4L)
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetBandwidthStatisticsBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetBandwidthStatisticsUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```

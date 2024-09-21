@@ -15,7 +15,7 @@ public class GetLibraryItemsRequestBuilder {
         this.sdk = sdk;
     }
 
-    public GetLibraryItemsRequestBuilder request(dev.plexapi.sdk.models.operations.GetLibraryItemsRequest request) {
+    public GetLibraryItemsRequestBuilder request(GetLibraryItemsRequest request) {
         Utils.checkNotNull(request, "request");
         this.request = request;
         return this;

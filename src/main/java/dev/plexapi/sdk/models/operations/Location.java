@@ -7,48 +7,39 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
-import java.util.Optional;
 
 
 public class Location {
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("id")
-    private Optional<Integer> id;
+    private int id;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("path")
-    private Optional<String> path;
+    private String path;
 
     @JsonCreator
     public Location(
-            @JsonProperty("id") Optional<Integer> id,
-            @JsonProperty("path") Optional<String> path) {
+            @JsonProperty("id") int id,
+            @JsonProperty("path") String path) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(path, "path");
         this.id = id;
         this.path = path;
     }
-    
-    public Location() {
-        this(Optional.empty(), Optional.empty());
-    }
 
     @JsonIgnore
-    public Optional<Integer> id() {
+    public int id() {
         return id;
     }
 
     @JsonIgnore
-    public Optional<String> path() {
+    public String path() {
         return path;
     }
 
@@ -58,23 +49,11 @@ public class Location {
 
     public Location withId(int id) {
         Utils.checkNotNull(id, "id");
-        this.id = Optional.ofNullable(id);
-        return this;
-    }
-
-    public Location withId(Optional<Integer> id) {
-        Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
     }
 
     public Location withPath(String path) {
-        Utils.checkNotNull(path, "path");
-        this.path = Optional.ofNullable(path);
-        return this;
-    }
-
-    public Location withPath(Optional<String> path) {
         Utils.checkNotNull(path, "path");
         this.path = path;
         return this;
@@ -110,9 +89,9 @@ public class Location {
     
     public final static class Builder {
  
-        private Optional<Integer> id = Optional.empty();
+        private Integer id;
  
-        private Optional<String> path = Optional.empty();  
+        private String path;  
         
         private Builder() {
           // force use of static builder() method
@@ -120,23 +99,11 @@ public class Location {
 
         public Builder id(int id) {
             Utils.checkNotNull(id, "id");
-            this.id = Optional.ofNullable(id);
-            return this;
-        }
-
-        public Builder id(Optional<Integer> id) {
-            Utils.checkNotNull(id, "id");
             this.id = id;
             return this;
         }
 
         public Builder path(String path) {
-            Utils.checkNotNull(path, "path");
-            this.path = Optional.ofNullable(path);
-            return this;
-        }
-
-        public Builder path(Optional<String> path) {
             Utils.checkNotNull(path, "path");
             this.path = path;
             return this;

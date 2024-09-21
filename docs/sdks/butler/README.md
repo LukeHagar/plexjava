@@ -24,43 +24,30 @@ Returns a list of butler tasks
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetButlerTasksBadRequest;
+import dev.plexapi.sdk.models.errors.GetButlerTasksUnauthorized;
 import dev.plexapi.sdk.models.operations.GetButlerTasksResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetButlerTasksBadRequest, GetButlerTasksUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetButlerTasksResponse res = sdk.butler().getButlerTasks()
+        GetButlerTasksResponse res = sdk.butler().getButlerTasks()
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetButlerTasksBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetButlerTasksUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -93,41 +80,28 @@ This endpoint will attempt to start all Butler tasks that are enabled in the set
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.StartAllTasksBadRequest;
+import dev.plexapi.sdk.models.errors.StartAllTasksUnauthorized;
 import dev.plexapi.sdk.models.operations.StartAllTasksResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws StartAllTasksBadRequest, StartAllTasksUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            StartAllTasksResponse res = sdk.butler().startAllTasks()
+        StartAllTasksResponse res = sdk.butler().startAllTasks()
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.StartAllTasksBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.StartAllTasksUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```
@@ -156,41 +130,28 @@ This endpoint will stop all currently running tasks and remove any scheduled tas
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.StopAllTasksBadRequest;
+import dev.plexapi.sdk.models.errors.StopAllTasksUnauthorized;
 import dev.plexapi.sdk.models.operations.StopAllTasksResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws StopAllTasksBadRequest, StopAllTasksUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            StopAllTasksResponse res = sdk.butler().stopAllTasks()
+        StopAllTasksResponse res = sdk.butler().stopAllTasks()
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.StopAllTasksBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.StopAllTasksUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```
@@ -223,43 +184,30 @@ This endpoint will attempt to start a single Butler task that is enabled in the 
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.StartTaskBadRequest;
+import dev.plexapi.sdk.models.errors.StartTaskUnauthorized;
 import dev.plexapi.sdk.models.operations.StartTaskResponse;
 import dev.plexapi.sdk.models.operations.TaskName;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws StartTaskBadRequest, StartTaskUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            StartTaskResponse res = sdk.butler().startTask()
+        StartTaskResponse res = sdk.butler().startTask()
                 .taskName(TaskName.CLEAN_OLD_BUNDLES)
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.StartTaskBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.StartTaskUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```
@@ -294,43 +242,30 @@ This endpoint will stop a currently running task by name, or remove it from the 
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.StopTaskBadRequest;
+import dev.plexapi.sdk.models.errors.StopTaskUnauthorized;
 import dev.plexapi.sdk.models.operations.PathParamTaskName;
 import dev.plexapi.sdk.models.operations.StopTaskResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws StopTaskBadRequest, StopTaskUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            StopTaskResponse res = sdk.butler().stopTask()
+        StopTaskResponse res = sdk.butler().stopTask()
                 .taskName(PathParamTaskName.BACKUP_DATABASE)
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.StopTaskBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.StopTaskUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```

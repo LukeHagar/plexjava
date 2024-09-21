@@ -34,7 +34,8 @@ Create a new playlist. By default the playlist is blank. To create a playlist al
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.CreatePlaylistBadRequest;
+import dev.plexapi.sdk.models.errors.CreatePlaylistUnauthorized;
 import dev.plexapi.sdk.models.operations.CreatePlaylistQueryParamType;
 import dev.plexapi.sdk.models.operations.CreatePlaylistRequest;
 import dev.plexapi.sdk.models.operations.CreatePlaylistResponse;
@@ -43,45 +44,31 @@ import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws CreatePlaylistBadRequest, CreatePlaylistUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            CreatePlaylistRequest req = CreatePlaylistRequest.builder()
+        CreatePlaylistRequest req = CreatePlaylistRequest.builder()
                 .title("<value>")
                 .type(CreatePlaylistQueryParamType.PHOTO)
                 .smart(Smart.ONE)
-                .uri("https://inborn-brochure.biz")
+                .uri("https://hoarse-testing.info/")
                 .build();
 
-            CreatePlaylistResponse res = sdk.playlists().createPlaylist()
+        CreatePlaylistResponse res = sdk.playlists().createPlaylist()
                 .request(req)
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.CreatePlaylistBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.CreatePlaylistUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -115,7 +102,8 @@ Get All Playlists given the specified filters.
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetPlaylistsBadRequest;
+import dev.plexapi.sdk.models.errors.GetPlaylistsUnauthorized;
 import dev.plexapi.sdk.models.operations.GetPlaylistsResponse;
 import dev.plexapi.sdk.models.operations.PlaylistType;
 import dev.plexapi.sdk.models.operations.QueryParamSmart;
@@ -123,39 +111,25 @@ import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetPlaylistsBadRequest, GetPlaylistsUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetPlaylistsResponse res = sdk.playlists().getPlaylists()
+        GetPlaylistsResponse res = sdk.playlists().getPlaylists()
                 .playlistType(PlaylistType.AUDIO)
                 .smart(QueryParamSmart.ZERO)
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetPlaylistsBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetPlaylistsUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -192,44 +166,31 @@ Smart playlist details contain the `content` attribute. This is the content URI 
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetPlaylistBadRequest;
+import dev.plexapi.sdk.models.errors.GetPlaylistUnauthorized;
 import dev.plexapi.sdk.models.operations.GetPlaylistResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetPlaylistBadRequest, GetPlaylistUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetPlaylistResponse res = sdk.playlists().getPlaylist()
+        GetPlaylistResponse res = sdk.playlists().getPlaylist()
                 .playlistID(4109.48d)
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetPlaylistBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetPlaylistUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -264,42 +225,29 @@ This endpoint will delete a playlist
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.DeletePlaylistBadRequest;
+import dev.plexapi.sdk.models.errors.DeletePlaylistUnauthorized;
 import dev.plexapi.sdk.models.operations.DeletePlaylistResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws DeletePlaylistBadRequest, DeletePlaylistUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            DeletePlaylistResponse res = sdk.playlists().deletePlaylist()
+        DeletePlaylistResponse res = sdk.playlists().deletePlaylist()
                 .playlistID(216.22d)
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.DeletePlaylistBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.DeletePlaylistUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```
@@ -334,44 +282,31 @@ From PMS version 1.9.1 clients can also edit playlist metadata using this endpoi
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.UpdatePlaylistBadRequest;
+import dev.plexapi.sdk.models.errors.UpdatePlaylistUnauthorized;
 import dev.plexapi.sdk.models.operations.UpdatePlaylistResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws UpdatePlaylistBadRequest, UpdatePlaylistUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            UpdatePlaylistResponse res = sdk.playlists().updatePlaylist()
-                .playlistID(3915d)
+        UpdatePlaylistResponse res = sdk.playlists().updatePlaylist()
+                .playlistID(3915.00d)
                 .title("<value>")
                 .summary("<value>")
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.UpdatePlaylistBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.UpdatePlaylistUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```
@@ -411,46 +346,33 @@ Note that for dumb playlists, items have a `playlistItemID` attribute which is u
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetPlaylistContentsBadRequest;
+import dev.plexapi.sdk.models.errors.GetPlaylistContentsUnauthorized;
 import dev.plexapi.sdk.models.operations.GetPlaylistContentsQueryParamType;
 import dev.plexapi.sdk.models.operations.GetPlaylistContentsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetPlaylistContentsBadRequest, GetPlaylistContentsUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetPlaylistContentsResponse res = sdk.playlists().getPlaylistContents()
+        GetPlaylistContentsResponse res = sdk.playlists().getPlaylistContents()
                 .playlistID(5004.46d)
-                .type(GetPlaylistContentsQueryParamType.TWO)
+                .type(GetPlaylistContentsQueryParamType.Show)
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetPlaylistContentsBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetPlaylistContentsUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -486,42 +408,29 @@ Clears a playlist, only works with dumb playlists. Returns the playlist.
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.ClearPlaylistContentsBadRequest;
+import dev.plexapi.sdk.models.errors.ClearPlaylistContentsUnauthorized;
 import dev.plexapi.sdk.models.operations.ClearPlaylistContentsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws ClearPlaylistContentsBadRequest, ClearPlaylistContentsUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            ClearPlaylistContentsResponse res = sdk.playlists().clearPlaylistContents()
+        ClearPlaylistContentsResponse res = sdk.playlists().clearPlaylistContents()
                 .playlistID(1893.18d)
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.ClearPlaylistContentsBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.ClearPlaylistContentsUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```
@@ -557,46 +466,33 @@ With a smart playlist, passing a new `uri` parameter replaces the rules for the 
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.AddPlaylistContentsBadRequest;
+import dev.plexapi.sdk.models.errors.AddPlaylistContentsUnauthorized;
 import dev.plexapi.sdk.models.operations.AddPlaylistContentsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws AddPlaylistContentsBadRequest, AddPlaylistContentsUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            AddPlaylistContentsResponse res = sdk.playlists().addPlaylistContents()
-                .playlistID(8502.01d)
+        AddPlaylistContentsResponse res = sdk.playlists().addPlaylistContents()
+                .playlistID(8502.00d)
                 .uri("server://12345/com.plexapp.plugins.library/library/metadata/1")
                 .playQueueID(123d)
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.AddPlaylistContentsBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.AddPlaylistContentsUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -633,44 +529,32 @@ Imports m3u playlists by passing a path on the server to scan for m3u-formatted 
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.UploadPlaylistBadRequest;
+import dev.plexapi.sdk.models.errors.UploadPlaylistUnauthorized;
 import dev.plexapi.sdk.models.operations.QueryParamForce;
 import dev.plexapi.sdk.models.operations.UploadPlaylistResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws UploadPlaylistBadRequest, UploadPlaylistUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            UploadPlaylistResponse res = sdk.playlists().uploadPlaylist()
+        UploadPlaylistResponse res = sdk.playlists().uploadPlaylist()
                 .path("/home/barkley/playlist.m3u")
                 .force(QueryParamForce.ZERO)
+                .sectionID(1L)
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.UploadPlaylistBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.UploadPlaylistUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```
@@ -681,6 +565,7 @@ public class Application {
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `path`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | *String*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server. <br/>If the `path` argument is a directory, that path will be scanned for playlist files to be processed. <br/>Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it. <br/>The GUID of each playlist is based on the filename. <br/>If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it. <br/>The GUID of each playlist is based on the filename.<br/> | /home/barkley/playlist.m3u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `force`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | [QueryParamForce](../../models/operations/QueryParamForce.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Force overwriting of duplicate playlists.  <br/>By default, a playlist file uploaded with the same path will overwrite the existing playlist. <br/>The `force` argument is used to disable overwriting.  <br/>If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.<br/>                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `sectionID`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | *long*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Possibly the section ID to upload the playlist to, we are not certain.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 
 ### Response
 

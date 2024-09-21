@@ -23,7 +23,7 @@ public class GetSearchLibraryRequestBuilder {
         return this;
     }
 
-    public GetSearchLibraryRequestBuilder type(dev.plexapi.sdk.models.operations.QueryParamType type) {
+    public GetSearchLibraryRequestBuilder type(QueryParamType type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;

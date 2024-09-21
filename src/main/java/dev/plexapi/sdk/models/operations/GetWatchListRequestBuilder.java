@@ -18,19 +18,19 @@ public class GetWatchListRequestBuilder {
         this.sdk = sdk;
     }
 
-    public GetWatchListRequestBuilder request(dev.plexapi.sdk.models.operations.GetWatchListRequest request) {
+    public GetWatchListRequestBuilder request(GetWatchListRequest request) {
         Utils.checkNotNull(request, "request");
         this.request = request;
         return this;
     }
                 
-    public GetWatchListRequestBuilder serverURL(java.lang.String serverURL) {
+    public GetWatchListRequestBuilder serverURL(String serverURL) {
         Utils.checkNotNull(serverURL, "serverURL");
         this.serverURL = Optional.of(serverURL);
         return this;
     }
 
-    public GetWatchListRequestBuilder serverURL(java.util.Optional<java.lang.String> serverURL) {
+    public GetWatchListRequestBuilder serverURL(Optional<String> serverURL) {
         Utils.checkNotNull(serverURL, "serverURL");
         this.serverURL = serverURL;
         return this;

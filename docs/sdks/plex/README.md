@@ -26,43 +26,30 @@ Get Companions Data
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetCompanionsDataBadRequest;
+import dev.plexapi.sdk.models.errors.GetCompanionsDataUnauthorized;
 import dev.plexapi.sdk.models.operations.GetCompanionsDataResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetCompanionsDataBadRequest, GetCompanionsDataUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetCompanionsDataResponse res = sdk.plex().getCompanionsData()
+        GetCompanionsDataResponse res = sdk.plex().getCompanionsData()
                 .call();
 
-            if (res.responseBodies().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetCompanionsDataBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetCompanionsDataUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.responseBodies().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -96,43 +83,30 @@ Get friends of provided auth token.
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetUserFriendsBadRequest;
+import dev.plexapi.sdk.models.errors.GetUserFriendsUnauthorized;
 import dev.plexapi.sdk.models.operations.GetUserFriendsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetUserFriendsBadRequest, GetUserFriendsUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetUserFriendsResponse res = sdk.plex().getUserFriends()
+        GetUserFriendsResponse res = sdk.plex().getUserFriends()
                 .call();
 
-            if (res.friends().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetUserFriendsBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetUserFriendsUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.friends().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -166,42 +140,29 @@ Returns the geolocation and locale data of the caller
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetGeoDataBadRequest;
+import dev.plexapi.sdk.models.errors.GetGeoDataUnauthorized;
 import dev.plexapi.sdk.models.operations.GetGeoDataResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetGeoDataBadRequest, GetGeoDataUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetGeoDataResponse res = sdk.plex().getGeoData()
+        GetGeoDataResponse res = sdk.plex().getGeoData()
                 .call();
 
-            if (res.geoData().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetGeoDataBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetGeoDataUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.geoData().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -235,43 +196,30 @@ Retrieves the home data for the authenticated user, including details like home 
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetHomeDataBadRequest;
+import dev.plexapi.sdk.models.errors.GetHomeDataUnauthorized;
 import dev.plexapi.sdk.models.operations.GetHomeDataResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetHomeDataBadRequest, GetHomeDataUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetHomeDataResponse res = sdk.plex().getHomeData()
+        GetHomeDataResponse res = sdk.plex().getHomeData()
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetHomeDataBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetHomeDataUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -299,7 +247,8 @@ Get Plex server access tokens and server connections
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetServerResourcesBadRequest;
+import dev.plexapi.sdk.models.errors.GetServerResourcesUnauthorized;
 import dev.plexapi.sdk.models.operations.GetServerResourcesResponse;
 import dev.plexapi.sdk.models.operations.IncludeHttps;
 import dev.plexapi.sdk.models.operations.IncludeIPv6;
@@ -308,54 +257,38 @@ import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetServerResourcesBadRequest, GetServerResourcesUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetServerResourcesResponse res = sdk.plex().getServerResources()
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .includeHttps(IncludeHttps.ONE)
-                .includeRelay(IncludeRelay.ONE)
-                .includeIPv6(IncludeIPv6.ONE)
+        GetServerResourcesResponse res = sdk.plex().getServerResources()
+                .includeHttps(IncludeHttps.Enable)
+                .includeRelay(IncludeRelay.Enable)
+                .includeIPv6(IncludeIPv6.Enable)
                 .call();
 
-            if (res.plexDevices().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetServerResourcesBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetServerResourcesUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.plexDevices().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
 
 ### Parameters
 
-| Parameter                                                                                                                                                             | Type                                                                                                                                                                  | Required                                                                                                                                                              | Description                                                                                                                                                           | Example                                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `clientID`                                                                                                                                                            | *Optional<String>*                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                    | The unique identifier for the client application<br/>This is used to track the client application and its usage<br/>(UUID, serial number, or other number unique per device)<br/> | gcgzw5rz2xovp84b4vha3a40                                                                                                                                              |
-| `includeHttps`                                                                                                                                                        | [Optional<IncludeHttps>](../../models/operations/IncludeHttps.md)                                                                                                     | :heavy_minus_sign:                                                                                                                                                    | Include Https entries in the results                                                                                                                                  | 1                                                                                                                                                                     |
-| `includeRelay`                                                                                                                                                        | [Optional<IncludeRelay>](../../models/operations/IncludeRelay.md)                                                                                                     | :heavy_minus_sign:                                                                                                                                                    | Include Relay addresses in the results <br/>E.g: https://10-0-0-25.bbf8e10c7fa20447cacee74cd9914cde.plex.direct:32400<br/>                                            | 1                                                                                                                                                                     |
-| `includeIPv6`                                                                                                                                                         | [Optional<IncludeIPv6>](../../models/operations/IncludeIPv6.md)                                                                                                       | :heavy_minus_sign:                                                                                                                                                    | Include IPv6 entries in the results                                                                                                                                   | 1                                                                                                                                                                     |
-| `serverURL`                                                                                                                                                           | *String*                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                    | An optional server URL to use.                                                                                                                                        | http://localhost:8080                                                                                                                                                 |
+| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        | Example                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `includeHttps`                                                                                                     | [Optional<IncludeHttps>](../../models/operations/IncludeHttps.md)                                                  | :heavy_minus_sign:                                                                                                 | Include Https entries in the results                                                                               | 1                                                                                                                  |
+| `includeRelay`                                                                                                     | [Optional<IncludeRelay>](../../models/operations/IncludeRelay.md)                                                  | :heavy_minus_sign:                                                                                                 | Include Relay addresses in the results <br/>E.g: https://10-0-0-25.bbf8e10c7fa20447cacee74cd9914cde.plex.direct:32400<br/> | 1                                                                                                                  |
+| `includeIPv6`                                                                                                      | [Optional<IncludeIPv6>](../../models/operations/IncludeIPv6.md)                                                    | :heavy_minus_sign:                                                                                                 | Include IPv6 entries in the results                                                                                | 1                                                                                                                  |
+| `serverURL`                                                                                                        | *String*                                                                                                           | :heavy_minus_sign:                                                                                                 | An optional server URL to use.                                                                                     | http://localhost:8080                                                                                              |
 
 ### Response
 
@@ -380,44 +313,33 @@ Retrieve a Pin ID from Plex.tv to use for authentication flows
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetPinBadRequest;
 import dev.plexapi.sdk.models.operations.GetPinRequest;
 import dev.plexapi.sdk.models.operations.GetPinResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetPinBadRequest, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
+            .build();
+
+        GetPinRequest req = GetPinRequest.builder()
                 .build();
 
-            GetPinRequest req = GetPinRequest.builder()
-                .build();
-
-            GetPinResponse res = sdk.plex().getPin()
+        GetPinResponse res = sdk.plex().getPin()
                 .request(req)
                 .call();
 
-            if (res.authPinContainer().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetPinBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.authPinContainer().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -451,55 +373,40 @@ Retrieve an Access Token from Plex.tv after the Pin has been authenticated
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetTokenByPinIdBadRequest;
+import dev.plexapi.sdk.models.errors.GetTokenByPinIdResponseBody;
 import dev.plexapi.sdk.models.operations.GetTokenByPinIdResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetTokenByPinIdBadRequest, GetTokenByPinIdResponseBody, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetTokenByPinIdResponse res = sdk.plex().getTokenByPinId()
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
+        GetTokenByPinIdResponse res = sdk.plex().getTokenByPinId()
                 .pinID(408895L)
                 .call();
 
-            if (res.authPinContainer().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetTokenByPinIdBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetTokenByPinIdResponseBody e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.authPinContainer().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
 
 ### Parameters
 
-| Parameter                                                                                                                                                             | Type                                                                                                                                                                  | Required                                                                                                                                                              | Description                                                                                                                                                           | Example                                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `clientID`                                                                                                                                                            | *Optional<String>*                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                    | The unique identifier for the client application<br/>This is used to track the client application and its usage<br/>(UUID, serial number, or other number unique per device)<br/> | gcgzw5rz2xovp84b4vha3a40                                                                                                                                              |
-| `pinID`                                                                                                                                                               | *long*                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                    | The PinID to retrieve an access token for                                                                                                                             |                                                                                                                                                                       |
-| `serverURL`                                                                                                                                                           | *String*                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                    | An optional server URL to use.                                                                                                                                        | http://localhost:8080                                                                                                                                                 |
+| Parameter                                 | Type                                      | Required                                  | Description                               |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| `pinID`                                   | *long*                                    | :heavy_check_mark:                        | The PinID to retrieve an access token for |
+| `serverURL`                               | *String*                                  | :heavy_minus_sign:                        | An optional server URL to use.            |
 
 ### Response
 

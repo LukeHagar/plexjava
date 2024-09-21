@@ -11,25 +11,12 @@ import java.util.Optional;
 
 public class GetTokenByPinIdRequestBuilder {
 
-    private Optional<String> clientID = Optional.empty();
     private Long pinID;
     private Optional<String> serverURL = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetTokenByPinId sdk;
 
     public GetTokenByPinIdRequestBuilder(SDKMethodInterfaces.MethodCallGetTokenByPinId sdk) {
         this.sdk = sdk;
-    }
-                
-    public GetTokenByPinIdRequestBuilder clientID(java.lang.String clientID) {
-        Utils.checkNotNull(clientID, "clientID");
-        this.clientID = Optional.of(clientID);
-        return this;
-    }
-
-    public GetTokenByPinIdRequestBuilder clientID(java.util.Optional<java.lang.String> clientID) {
-        Utils.checkNotNull(clientID, "clientID");
-        this.clientID = clientID;
-        return this;
     }
 
     public GetTokenByPinIdRequestBuilder pinID(long pinID) {
@@ -38,13 +25,13 @@ public class GetTokenByPinIdRequestBuilder {
         return this;
     }
                 
-    public GetTokenByPinIdRequestBuilder serverURL(java.lang.String serverURL) {
+    public GetTokenByPinIdRequestBuilder serverURL(String serverURL) {
         Utils.checkNotNull(serverURL, "serverURL");
         this.serverURL = Optional.of(serverURL);
         return this;
     }
 
-    public GetTokenByPinIdRequestBuilder serverURL(java.util.Optional<java.lang.String> serverURL) {
+    public GetTokenByPinIdRequestBuilder serverURL(Optional<String> serverURL) {
         Utils.checkNotNull(serverURL, "serverURL");
         this.serverURL = serverURL;
         return this;
@@ -53,7 +40,6 @@ public class GetTokenByPinIdRequestBuilder {
     public GetTokenByPinIdResponse call() throws Exception {
 
         return sdk.getTokenByPinId(
-            clientID,
             pinID,
             serverURL);
     }

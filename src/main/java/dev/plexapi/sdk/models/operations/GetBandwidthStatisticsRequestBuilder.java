@@ -23,7 +23,7 @@ public class GetBandwidthStatisticsRequestBuilder {
         return this;
     }
 
-    public GetBandwidthStatisticsRequestBuilder timespan(java.util.Optional<java.lang.Long> timespan) {
+    public GetBandwidthStatisticsRequestBuilder timespan(Optional<Long> timespan) {
         Utils.checkNotNull(timespan, "timespan");
         this.timespan = timespan;
         return this;

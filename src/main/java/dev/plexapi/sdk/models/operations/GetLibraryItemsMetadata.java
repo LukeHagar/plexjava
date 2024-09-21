@@ -24,29 +24,24 @@ import java.util.Optional;
 
 public class GetLibraryItemsMetadata {
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ratingKey")
-    private Optional<String> ratingKey;
+    private String ratingKey;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
-    private Optional<String> key;
+    private String key;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("guid")
-    private Optional<String> guid;
+    private String guid;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("studio")
     private Optional<String> studio;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
-    private Optional<String> type;
+    private String type;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
-    private Optional<String> title;
+    private String title;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contentRating")
@@ -64,9 +59,8 @@ public class GetLibraryItemsMetadata {
     @JsonProperty("audienceRating")
     private Optional<Double> audienceRating;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("year")
-    private Optional<Integer> year;
+    private int year;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tagline")
@@ -80,9 +74,8 @@ public class GetLibraryItemsMetadata {
     @JsonProperty("art")
     private Optional<String> art;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
-    private Optional<Integer> duration;
+    private int duration;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("originallyAvailableAt")
@@ -140,9 +133,8 @@ public class GetLibraryItemsMetadata {
     @JsonProperty("grandparentTheme")
     private Optional<String> grandparentTheme;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Media")
-    private Optional<? extends List<GetLibraryItemsMedia>> media;
+    private List<GetLibraryItemsMedia> media;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Genre")
@@ -163,6 +155,14 @@ public class GetLibraryItemsMetadata {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Role")
     private Optional<? extends List<GetLibraryItemsRole>> role;
+
+    /**
+     * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
+     * 
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Guid")
+    private Optional<? extends List<MediaGuid>> mediaGuid;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("titleSort")
@@ -254,21 +254,21 @@ public class GetLibraryItemsMetadata {
 
     @JsonCreator
     public GetLibraryItemsMetadata(
-            @JsonProperty("ratingKey") Optional<String> ratingKey,
-            @JsonProperty("key") Optional<String> key,
-            @JsonProperty("guid") Optional<String> guid,
+            @JsonProperty("ratingKey") String ratingKey,
+            @JsonProperty("key") String key,
+            @JsonProperty("guid") String guid,
             @JsonProperty("studio") Optional<String> studio,
-            @JsonProperty("type") Optional<String> type,
-            @JsonProperty("title") Optional<String> title,
+            @JsonProperty("type") String type,
+            @JsonProperty("title") String title,
             @JsonProperty("contentRating") Optional<String> contentRating,
             @JsonProperty("summary") Optional<String> summary,
             @JsonProperty("rating") Optional<Double> rating,
             @JsonProperty("audienceRating") Optional<Double> audienceRating,
-            @JsonProperty("year") Optional<Integer> year,
+            @JsonProperty("year") int year,
             @JsonProperty("tagline") Optional<String> tagline,
             @JsonProperty("thumb") Optional<String> thumb,
             @JsonProperty("art") Optional<String> art,
-            @JsonProperty("duration") Optional<Integer> duration,
+            @JsonProperty("duration") int duration,
             @JsonProperty("originallyAvailableAt") Optional<LocalDate> originallyAvailableAt,
             @JsonProperty("addedAt") Optional<Integer> addedAt,
             @JsonProperty("updatedAt") Optional<Integer> updatedAt,
@@ -283,12 +283,13 @@ public class GetLibraryItemsMetadata {
             @JsonProperty("grandparentThumb") Optional<String> grandparentThumb,
             @JsonProperty("grandparentArt") Optional<String> grandparentArt,
             @JsonProperty("grandparentTheme") Optional<String> grandparentTheme,
-            @JsonProperty("Media") Optional<? extends List<GetLibraryItemsMedia>> media,
+            @JsonProperty("Media") List<GetLibraryItemsMedia> media,
             @JsonProperty("Genre") Optional<? extends List<GetLibraryItemsGenre>> genre,
             @JsonProperty("Country") Optional<? extends List<GetLibraryItemsCountry>> country,
             @JsonProperty("Director") Optional<? extends List<GetLibraryItemsDirector>> director,
             @JsonProperty("Writer") Optional<? extends List<GetLibraryItemsWriter>> writer,
             @JsonProperty("Role") Optional<? extends List<GetLibraryItemsRole>> role,
+            @JsonProperty("Guid") Optional<? extends List<MediaGuid>> mediaGuid,
             @JsonProperty("titleSort") Optional<String> titleSort,
             @JsonProperty("viewCount") Optional<Integer> viewCount,
             @JsonProperty("lastViewedAt") Optional<Integer> lastViewedAt,
@@ -346,6 +347,7 @@ public class GetLibraryItemsMetadata {
         Utils.checkNotNull(director, "director");
         Utils.checkNotNull(writer, "writer");
         Utils.checkNotNull(role, "role");
+        Utils.checkNotNull(mediaGuid, "mediaGuid");
         Utils.checkNotNull(titleSort, "titleSort");
         Utils.checkNotNull(viewCount, "viewCount");
         Utils.checkNotNull(lastViewedAt, "lastViewedAt");
@@ -403,6 +405,7 @@ public class GetLibraryItemsMetadata {
         this.director = director;
         this.writer = writer;
         this.role = role;
+        this.mediaGuid = mediaGuid;
         this.titleSort = titleSort;
         this.viewCount = viewCount;
         this.lastViewedAt = lastViewedAt;
@@ -427,22 +430,30 @@ public class GetLibraryItemsMetadata {
         this.parentTheme = parentTheme;
     }
     
-    public GetLibraryItemsMetadata() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    public GetLibraryItemsMetadata(
+            String ratingKey,
+            String key,
+            String guid,
+            String type,
+            String title,
+            int year,
+            int duration,
+            List<GetLibraryItemsMedia> media) {
+        this(ratingKey, key, guid, Optional.empty(), type, title, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), year, Optional.empty(), Optional.empty(), Optional.empty(), duration, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), media, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
-    public Optional<String> ratingKey() {
+    public String ratingKey() {
         return ratingKey;
     }
 
     @JsonIgnore
-    public Optional<String> key() {
+    public String key() {
         return key;
     }
 
     @JsonIgnore
-    public Optional<String> guid() {
+    public String guid() {
         return guid;
     }
 
@@ -452,12 +463,12 @@ public class GetLibraryItemsMetadata {
     }
 
     @JsonIgnore
-    public Optional<String> type() {
+    public String type() {
         return type;
     }
 
     @JsonIgnore
-    public Optional<String> title() {
+    public String title() {
         return title;
     }
 
@@ -482,7 +493,7 @@ public class GetLibraryItemsMetadata {
     }
 
     @JsonIgnore
-    public Optional<Integer> year() {
+    public int year() {
         return year;
     }
 
@@ -502,7 +513,7 @@ public class GetLibraryItemsMetadata {
     }
 
     @JsonIgnore
-    public Optional<Integer> duration() {
+    public int duration() {
         return duration;
     }
 
@@ -576,10 +587,9 @@ public class GetLibraryItemsMetadata {
         return grandparentTheme;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<GetLibraryItemsMedia>> media() {
-        return (Optional<List<GetLibraryItemsMedia>>) media;
+    public List<GetLibraryItemsMedia> media() {
+        return media;
     }
 
     @SuppressWarnings("unchecked")
@@ -610,6 +620,16 @@ public class GetLibraryItemsMetadata {
     @JsonIgnore
     public Optional<List<GetLibraryItemsRole>> role() {
         return (Optional<List<GetLibraryItemsRole>>) role;
+    }
+
+    /**
+     * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
+     * 
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<MediaGuid>> mediaGuid() {
+        return (Optional<List<MediaGuid>>) mediaGuid;
     }
 
     @JsonIgnore
@@ -728,35 +748,17 @@ public class GetLibraryItemsMetadata {
 
     public GetLibraryItemsMetadata withRatingKey(String ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
-        this.ratingKey = Optional.ofNullable(ratingKey);
-        return this;
-    }
-
-    public GetLibraryItemsMetadata withRatingKey(Optional<String> ratingKey) {
-        Utils.checkNotNull(ratingKey, "ratingKey");
         this.ratingKey = ratingKey;
         return this;
     }
 
     public GetLibraryItemsMetadata withKey(String key) {
         Utils.checkNotNull(key, "key");
-        this.key = Optional.ofNullable(key);
-        return this;
-    }
-
-    public GetLibraryItemsMetadata withKey(Optional<String> key) {
-        Utils.checkNotNull(key, "key");
         this.key = key;
         return this;
     }
 
     public GetLibraryItemsMetadata withGuid(String guid) {
-        Utils.checkNotNull(guid, "guid");
-        this.guid = Optional.ofNullable(guid);
-        return this;
-    }
-
-    public GetLibraryItemsMetadata withGuid(Optional<String> guid) {
         Utils.checkNotNull(guid, "guid");
         this.guid = guid;
         return this;
@@ -776,23 +778,11 @@ public class GetLibraryItemsMetadata {
 
     public GetLibraryItemsMetadata withType(String type) {
         Utils.checkNotNull(type, "type");
-        this.type = Optional.ofNullable(type);
-        return this;
-    }
-
-    public GetLibraryItemsMetadata withType(Optional<String> type) {
-        Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
     }
 
     public GetLibraryItemsMetadata withTitle(String title) {
-        Utils.checkNotNull(title, "title");
-        this.title = Optional.ofNullable(title);
-        return this;
-    }
-
-    public GetLibraryItemsMetadata withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
         return this;
@@ -848,12 +838,6 @@ public class GetLibraryItemsMetadata {
 
     public GetLibraryItemsMetadata withYear(int year) {
         Utils.checkNotNull(year, "year");
-        this.year = Optional.ofNullable(year);
-        return this;
-    }
-
-    public GetLibraryItemsMetadata withYear(Optional<Integer> year) {
-        Utils.checkNotNull(year, "year");
         this.year = year;
         return this;
     }
@@ -895,12 +879,6 @@ public class GetLibraryItemsMetadata {
     }
 
     public GetLibraryItemsMetadata withDuration(int duration) {
-        Utils.checkNotNull(duration, "duration");
-        this.duration = Optional.ofNullable(duration);
-        return this;
-    }
-
-    public GetLibraryItemsMetadata withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = duration;
         return this;
@@ -1076,12 +1054,6 @@ public class GetLibraryItemsMetadata {
 
     public GetLibraryItemsMetadata withMedia(List<GetLibraryItemsMedia> media) {
         Utils.checkNotNull(media, "media");
-        this.media = Optional.ofNullable(media);
-        return this;
-    }
-
-    public GetLibraryItemsMetadata withMedia(Optional<? extends List<GetLibraryItemsMedia>> media) {
-        Utils.checkNotNull(media, "media");
         this.media = media;
         return this;
     }
@@ -1143,6 +1115,26 @@ public class GetLibraryItemsMetadata {
     public GetLibraryItemsMetadata withRole(Optional<? extends List<GetLibraryItemsRole>> role) {
         Utils.checkNotNull(role, "role");
         this.role = role;
+        return this;
+    }
+
+    /**
+     * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
+     * 
+     */
+    public GetLibraryItemsMetadata withMediaGuid(List<MediaGuid> mediaGuid) {
+        Utils.checkNotNull(mediaGuid, "mediaGuid");
+        this.mediaGuid = Optional.ofNullable(mediaGuid);
+        return this;
+    }
+
+    /**
+     * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
+     * 
+     */
+    public GetLibraryItemsMetadata withMediaGuid(Optional<? extends List<MediaGuid>> mediaGuid) {
+        Utils.checkNotNull(mediaGuid, "mediaGuid");
+        this.mediaGuid = mediaGuid;
         return this;
     }
 
@@ -1455,6 +1447,7 @@ public class GetLibraryItemsMetadata {
             Objects.deepEquals(this.director, other.director) &&
             Objects.deepEquals(this.writer, other.writer) &&
             Objects.deepEquals(this.role, other.role) &&
+            Objects.deepEquals(this.mediaGuid, other.mediaGuid) &&
             Objects.deepEquals(this.titleSort, other.titleSort) &&
             Objects.deepEquals(this.viewCount, other.viewCount) &&
             Objects.deepEquals(this.lastViewedAt, other.lastViewedAt) &&
@@ -1517,6 +1510,7 @@ public class GetLibraryItemsMetadata {
             director,
             writer,
             role,
+            mediaGuid,
             titleSort,
             viewCount,
             lastViewedAt,
@@ -1579,6 +1573,7 @@ public class GetLibraryItemsMetadata {
                 "director", director,
                 "writer", writer,
                 "role", role,
+                "mediaGuid", mediaGuid,
                 "titleSort", titleSort,
                 "viewCount", viewCount,
                 "lastViewedAt", lastViewedAt,
@@ -1605,17 +1600,17 @@ public class GetLibraryItemsMetadata {
     
     public final static class Builder {
  
-        private Optional<String> ratingKey = Optional.empty();
+        private String ratingKey;
  
-        private Optional<String> key = Optional.empty();
+        private String key;
  
-        private Optional<String> guid = Optional.empty();
+        private String guid;
  
         private Optional<String> studio = Optional.empty();
  
-        private Optional<String> type = Optional.empty();
+        private String type;
  
-        private Optional<String> title = Optional.empty();
+        private String title;
  
         private Optional<String> contentRating = Optional.empty();
  
@@ -1625,7 +1620,7 @@ public class GetLibraryItemsMetadata {
  
         private Optional<Double> audienceRating = Optional.empty();
  
-        private Optional<Integer> year = Optional.empty();
+        private Integer year;
  
         private Optional<String> tagline = Optional.empty();
  
@@ -1633,7 +1628,7 @@ public class GetLibraryItemsMetadata {
  
         private Optional<String> art = Optional.empty();
  
-        private Optional<Integer> duration = Optional.empty();
+        private Integer duration;
  
         private Optional<LocalDate> originallyAvailableAt = Optional.empty();
  
@@ -1663,7 +1658,7 @@ public class GetLibraryItemsMetadata {
  
         private Optional<String> grandparentTheme = Optional.empty();
  
-        private Optional<? extends List<GetLibraryItemsMedia>> media = Optional.empty();
+        private List<GetLibraryItemsMedia> media;
  
         private Optional<? extends List<GetLibraryItemsGenre>> genre = Optional.empty();
  
@@ -1674,6 +1669,8 @@ public class GetLibraryItemsMetadata {
         private Optional<? extends List<GetLibraryItemsWriter>> writer = Optional.empty();
  
         private Optional<? extends List<GetLibraryItemsRole>> role = Optional.empty();
+ 
+        private Optional<? extends List<MediaGuid>> mediaGuid = Optional.empty();
  
         private Optional<String> titleSort = Optional.empty();
  
@@ -1725,35 +1722,17 @@ public class GetLibraryItemsMetadata {
 
         public Builder ratingKey(String ratingKey) {
             Utils.checkNotNull(ratingKey, "ratingKey");
-            this.ratingKey = Optional.ofNullable(ratingKey);
-            return this;
-        }
-
-        public Builder ratingKey(Optional<String> ratingKey) {
-            Utils.checkNotNull(ratingKey, "ratingKey");
             this.ratingKey = ratingKey;
             return this;
         }
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
-            this.key = Optional.ofNullable(key);
-            return this;
-        }
-
-        public Builder key(Optional<String> key) {
-            Utils.checkNotNull(key, "key");
             this.key = key;
             return this;
         }
 
         public Builder guid(String guid) {
-            Utils.checkNotNull(guid, "guid");
-            this.guid = Optional.ofNullable(guid);
-            return this;
-        }
-
-        public Builder guid(Optional<String> guid) {
             Utils.checkNotNull(guid, "guid");
             this.guid = guid;
             return this;
@@ -1773,23 +1752,11 @@ public class GetLibraryItemsMetadata {
 
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
-            this.type = Optional.ofNullable(type);
-            return this;
-        }
-
-        public Builder type(Optional<String> type) {
-            Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
         }
 
         public Builder title(String title) {
-            Utils.checkNotNull(title, "title");
-            this.title = Optional.ofNullable(title);
-            return this;
-        }
-
-        public Builder title(Optional<String> title) {
             Utils.checkNotNull(title, "title");
             this.title = title;
             return this;
@@ -1845,12 +1812,6 @@ public class GetLibraryItemsMetadata {
 
         public Builder year(int year) {
             Utils.checkNotNull(year, "year");
-            this.year = Optional.ofNullable(year);
-            return this;
-        }
-
-        public Builder year(Optional<Integer> year) {
-            Utils.checkNotNull(year, "year");
             this.year = year;
             return this;
         }
@@ -1892,12 +1853,6 @@ public class GetLibraryItemsMetadata {
         }
 
         public Builder duration(int duration) {
-            Utils.checkNotNull(duration, "duration");
-            this.duration = Optional.ofNullable(duration);
-            return this;
-        }
-
-        public Builder duration(Optional<Integer> duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = duration;
             return this;
@@ -2073,12 +2028,6 @@ public class GetLibraryItemsMetadata {
 
         public Builder media(List<GetLibraryItemsMedia> media) {
             Utils.checkNotNull(media, "media");
-            this.media = Optional.ofNullable(media);
-            return this;
-        }
-
-        public Builder media(Optional<? extends List<GetLibraryItemsMedia>> media) {
-            Utils.checkNotNull(media, "media");
             this.media = media;
             return this;
         }
@@ -2140,6 +2089,26 @@ public class GetLibraryItemsMetadata {
         public Builder role(Optional<? extends List<GetLibraryItemsRole>> role) {
             Utils.checkNotNull(role, "role");
             this.role = role;
+            return this;
+        }
+
+        /**
+         * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
+         * 
+         */
+        public Builder mediaGuid(List<MediaGuid> mediaGuid) {
+            Utils.checkNotNull(mediaGuid, "mediaGuid");
+            this.mediaGuid = Optional.ofNullable(mediaGuid);
+            return this;
+        }
+
+        /**
+         * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
+         * 
+         */
+        public Builder mediaGuid(Optional<? extends List<MediaGuid>> mediaGuid) {
+            Utils.checkNotNull(mediaGuid, "mediaGuid");
+            this.mediaGuid = mediaGuid;
             return this;
         }
 
@@ -2444,6 +2413,7 @@ public class GetLibraryItemsMetadata {
                 director,
                 writer,
                 role,
+                mediaGuid,
                 titleSort,
                 viewCount,
                 lastViewedAt,

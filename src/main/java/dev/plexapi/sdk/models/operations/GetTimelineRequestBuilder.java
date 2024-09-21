@@ -15,7 +15,7 @@ public class GetTimelineRequestBuilder {
         this.sdk = sdk;
     }
 
-    public GetTimelineRequestBuilder request(dev.plexapi.sdk.models.operations.GetTimelineRequest request) {
+    public GetTimelineRequestBuilder request(GetTimelineRequest request) {
         Utils.checkNotNull(request, "request");
         this.request = request;
         return this;

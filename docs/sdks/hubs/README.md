@@ -21,46 +21,33 @@ Get Global Hubs filtered by the parameters provided.
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetGlobalHubsBadRequest;
+import dev.plexapi.sdk.models.errors.GetGlobalHubsUnauthorized;
 import dev.plexapi.sdk.models.operations.GetGlobalHubsResponse;
 import dev.plexapi.sdk.models.operations.OnlyTransient;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetGlobalHubsBadRequest, GetGlobalHubsUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetGlobalHubsResponse res = sdk.hubs().getGlobalHubs()
+        GetGlobalHubsResponse res = sdk.hubs().getGlobalHubs()
                 .count(1262.49d)
                 .onlyTransient(OnlyTransient.ONE)
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetGlobalHubsBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetGlobalHubsUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -96,47 +83,34 @@ This endpoint will return a list of library specific hubs
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetLibraryHubsBadRequest;
+import dev.plexapi.sdk.models.errors.GetLibraryHubsUnauthorized;
 import dev.plexapi.sdk.models.operations.GetLibraryHubsResponse;
 import dev.plexapi.sdk.models.operations.QueryParamOnlyTransient;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetLibraryHubsBadRequest, GetLibraryHubsUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetLibraryHubsResponse res = sdk.hubs().getLibraryHubs()
+        GetLibraryHubsResponse res = sdk.hubs().getLibraryHubs()
                 .sectionId(6728.76d)
-                .count(9010.22d)
-                .onlyTransient(QueryParamOnlyTransient.ZERO)
+                .count(639.24d)
+                .onlyTransient(QueryParamOnlyTransient.ONE)
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetLibraryHubsBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetLibraryHubsUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```

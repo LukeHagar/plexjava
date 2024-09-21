@@ -15,7 +15,7 @@ public class CreatePlaylistRequestBuilder {
         this.sdk = sdk;
     }
 
-    public CreatePlaylistRequestBuilder request(dev.plexapi.sdk.models.operations.CreatePlaylistRequest request) {
+    public CreatePlaylistRequestBuilder request(CreatePlaylistRequest request) {
         Utils.checkNotNull(request, "request");
         this.request = request;
         return this;

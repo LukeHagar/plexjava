@@ -159,7 +159,7 @@ public class PostUsersSignInDataUserPlexAccount {
     private int id;
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
     @JsonProperty("joinedAt")
     private long joinedAt;
@@ -210,7 +210,7 @@ public class PostUsersSignInDataUserPlexAccount {
     private Optional<Boolean> protected_;
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
     @JsonProperty("rememberExpiresAt")
     private long rememberExpiresAt;
@@ -600,7 +600,7 @@ public class PostUsersSignInDataUserPlexAccount {
     }
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
     @JsonIgnore
     public long joinedAt() {
@@ -663,7 +663,7 @@ public class PostUsersSignInDataUserPlexAccount {
     }
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
     @JsonIgnore
     public long rememberExpiresAt() {
@@ -1055,7 +1055,7 @@ public class PostUsersSignInDataUserPlexAccount {
     }
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
     public PostUsersSignInDataUserPlexAccount withJoinedAt(long joinedAt) {
         Utils.checkNotNull(joinedAt, "joinedAt");
@@ -1164,7 +1164,7 @@ public class PostUsersSignInDataUserPlexAccount {
     }
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
     public PostUsersSignInDataUserPlexAccount withRememberExpiresAt(long rememberExpiresAt) {
         Utils.checkNotNull(rememberExpiresAt, "rememberExpiresAt");
@@ -1841,7 +1841,7 @@ public class PostUsersSignInDataUserPlexAccount {
         }
 
         /**
-         * Unix epoch datetime
+         * Unix epoch datetime in seconds
          */
         public Builder joinedAt(long joinedAt) {
             Utils.checkNotNull(joinedAt, "joinedAt");
@@ -1950,7 +1950,7 @@ public class PostUsersSignInDataUserPlexAccount {
         }
 
         /**
-         * Unix epoch datetime
+         * Unix epoch datetime in seconds
          */
         public Builder rememberExpiresAt(long rememberExpiresAt) {
             Utils.checkNotNull(rememberExpiresAt, "rememberExpiresAt");

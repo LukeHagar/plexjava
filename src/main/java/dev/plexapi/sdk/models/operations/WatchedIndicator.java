@@ -5,20 +5,22 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.String;
 
+/**
+ * WatchedIndicator - Whether or not media watched indicators are enabled (little orange dot on media)
+ */
 public enum WatchedIndicator {
-    ZERO("0"),
-    ONE("1");
+    Disable(0),
+    Enable(1);
 
     @JsonValue
-    private final String value;
+    private final int value;
 
-    private WatchedIndicator(String value) {
+    private WatchedIndicator(int value) {
         this.value = value;
     }
     
-    public String value() {
+    public int value() {
         return value;
     }
 }

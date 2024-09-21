@@ -16,7 +16,7 @@ public class CancelServerActivitiesRequestBuilder {
         this.sdk = sdk;
     }
 
-    public CancelServerActivitiesRequestBuilder activityUUID(java.lang.String activityUUID) {
+    public CancelServerActivitiesRequestBuilder activityUUID(String activityUUID) {
         Utils.checkNotNull(activityUUID, "activityUUID");
         this.activityUUID = activityUUID;
         return this;

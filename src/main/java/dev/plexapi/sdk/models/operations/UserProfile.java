@@ -44,23 +44,14 @@ public class UserProfile {
     @JsonProperty("defaultSubtitleLanguage")
     private Optional<String> defaultSubtitleLanguage;
 
-    /**
-     * The auto-select subtitle mode (0 = Manually selected, 1 = Shown with foreign audio, 2 = Always enabled)
-     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("autoSelectSubtitle")
     private Optional<? extends AutoSelectSubtitle> autoSelectSubtitle;
 
-    /**
-     * The subtitles for the deaf or hard-of-hearing (SDH) searches mode (0 = Prefer non-SDH subtitles, 1 = Prefer SDH subtitles, 2 = Only show SDH subtitles, 3 = Only shown non-SDH subtitles)
-     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("defaultSubtitleAccessibility")
     private Optional<? extends DefaultSubtitleAccessibility> defaultSubtitleAccessibility;
 
-    /**
-     * The forced subtitles searches mode (0 = Prefer non-forced subtitles, 1 = Prefer forced subtitles, 2 = Only show forced subtitles, 3 = Only show non-forced subtitles)
-     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("defaultSubtitleForced")
     private Optional<? extends DefaultSubtitleForced> defaultSubtitleForced;
@@ -129,27 +120,18 @@ public class UserProfile {
         return defaultSubtitleLanguage;
     }
 
-    /**
-     * The auto-select subtitle mode (0 = Manually selected, 1 = Shown with foreign audio, 2 = Always enabled)
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<AutoSelectSubtitle> autoSelectSubtitle() {
         return (Optional<AutoSelectSubtitle>) autoSelectSubtitle;
     }
 
-    /**
-     * The subtitles for the deaf or hard-of-hearing (SDH) searches mode (0 = Prefer non-SDH subtitles, 1 = Prefer SDH subtitles, 2 = Only show SDH subtitles, 3 = Only shown non-SDH subtitles)
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<DefaultSubtitleAccessibility> defaultSubtitleAccessibility() {
         return (Optional<DefaultSubtitleAccessibility>) defaultSubtitleAccessibility;
     }
 
-    /**
-     * The forced subtitles searches mode (0 = Prefer non-forced subtitles, 1 = Prefer forced subtitles, 2 = Only show forced subtitles, 3 = Only show non-forced subtitles)
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<DefaultSubtitleForced> defaultSubtitleForced() {
@@ -226,54 +208,36 @@ public class UserProfile {
         return this;
     }
 
-    /**
-     * The auto-select subtitle mode (0 = Manually selected, 1 = Shown with foreign audio, 2 = Always enabled)
-     */
     public UserProfile withAutoSelectSubtitle(AutoSelectSubtitle autoSelectSubtitle) {
         Utils.checkNotNull(autoSelectSubtitle, "autoSelectSubtitle");
         this.autoSelectSubtitle = Optional.ofNullable(autoSelectSubtitle);
         return this;
     }
 
-    /**
-     * The auto-select subtitle mode (0 = Manually selected, 1 = Shown with foreign audio, 2 = Always enabled)
-     */
     public UserProfile withAutoSelectSubtitle(Optional<? extends AutoSelectSubtitle> autoSelectSubtitle) {
         Utils.checkNotNull(autoSelectSubtitle, "autoSelectSubtitle");
         this.autoSelectSubtitle = autoSelectSubtitle;
         return this;
     }
 
-    /**
-     * The subtitles for the deaf or hard-of-hearing (SDH) searches mode (0 = Prefer non-SDH subtitles, 1 = Prefer SDH subtitles, 2 = Only show SDH subtitles, 3 = Only shown non-SDH subtitles)
-     */
     public UserProfile withDefaultSubtitleAccessibility(DefaultSubtitleAccessibility defaultSubtitleAccessibility) {
         Utils.checkNotNull(defaultSubtitleAccessibility, "defaultSubtitleAccessibility");
         this.defaultSubtitleAccessibility = Optional.ofNullable(defaultSubtitleAccessibility);
         return this;
     }
 
-    /**
-     * The subtitles for the deaf or hard-of-hearing (SDH) searches mode (0 = Prefer non-SDH subtitles, 1 = Prefer SDH subtitles, 2 = Only show SDH subtitles, 3 = Only shown non-SDH subtitles)
-     */
     public UserProfile withDefaultSubtitleAccessibility(Optional<? extends DefaultSubtitleAccessibility> defaultSubtitleAccessibility) {
         Utils.checkNotNull(defaultSubtitleAccessibility, "defaultSubtitleAccessibility");
         this.defaultSubtitleAccessibility = defaultSubtitleAccessibility;
         return this;
     }
 
-    /**
-     * The forced subtitles searches mode (0 = Prefer non-forced subtitles, 1 = Prefer forced subtitles, 2 = Only show forced subtitles, 3 = Only show non-forced subtitles)
-     */
     public UserProfile withDefaultSubtitleForced(DefaultSubtitleForced defaultSubtitleForced) {
         Utils.checkNotNull(defaultSubtitleForced, "defaultSubtitleForced");
         this.defaultSubtitleForced = Optional.ofNullable(defaultSubtitleForced);
         return this;
     }
 
-    /**
-     * The forced subtitles searches mode (0 = Prefer non-forced subtitles, 1 = Prefer forced subtitles, 2 = Only show forced subtitles, 3 = Only show non-forced subtitles)
-     */
     public UserProfile withDefaultSubtitleForced(Optional<? extends DefaultSubtitleForced> defaultSubtitleForced) {
         Utils.checkNotNull(defaultSubtitleForced, "defaultSubtitleForced");
         this.defaultSubtitleForced = defaultSubtitleForced;
@@ -358,15 +322,15 @@ public class UserProfile {
  
         private Optional<String> defaultSubtitleLanguage = Optional.empty();
  
-        private Optional<? extends AutoSelectSubtitle> autoSelectSubtitle = Optional.empty();
+        private Optional<? extends AutoSelectSubtitle> autoSelectSubtitle;
  
-        private Optional<? extends DefaultSubtitleAccessibility> defaultSubtitleAccessibility = Optional.empty();
+        private Optional<? extends DefaultSubtitleAccessibility> defaultSubtitleAccessibility;
  
-        private Optional<? extends DefaultSubtitleForced> defaultSubtitleForced = Optional.empty();
+        private Optional<? extends DefaultSubtitleForced> defaultSubtitleForced;
  
-        private Optional<? extends WatchedIndicator> watchedIndicator = Optional.empty();
+        private Optional<? extends WatchedIndicator> watchedIndicator;
  
-        private Optional<? extends MediaReviewsVisibility> mediaReviewsVisibility = Optional.empty();  
+        private Optional<? extends MediaReviewsVisibility> mediaReviewsVisibility;  
         
         private Builder() {
           // force use of static builder() method
@@ -426,54 +390,36 @@ public class UserProfile {
             return this;
         }
 
-        /**
-         * The auto-select subtitle mode (0 = Manually selected, 1 = Shown with foreign audio, 2 = Always enabled)
-         */
         public Builder autoSelectSubtitle(AutoSelectSubtitle autoSelectSubtitle) {
             Utils.checkNotNull(autoSelectSubtitle, "autoSelectSubtitle");
             this.autoSelectSubtitle = Optional.ofNullable(autoSelectSubtitle);
             return this;
         }
 
-        /**
-         * The auto-select subtitle mode (0 = Manually selected, 1 = Shown with foreign audio, 2 = Always enabled)
-         */
         public Builder autoSelectSubtitle(Optional<? extends AutoSelectSubtitle> autoSelectSubtitle) {
             Utils.checkNotNull(autoSelectSubtitle, "autoSelectSubtitle");
             this.autoSelectSubtitle = autoSelectSubtitle;
             return this;
         }
 
-        /**
-         * The subtitles for the deaf or hard-of-hearing (SDH) searches mode (0 = Prefer non-SDH subtitles, 1 = Prefer SDH subtitles, 2 = Only show SDH subtitles, 3 = Only shown non-SDH subtitles)
-         */
         public Builder defaultSubtitleAccessibility(DefaultSubtitleAccessibility defaultSubtitleAccessibility) {
             Utils.checkNotNull(defaultSubtitleAccessibility, "defaultSubtitleAccessibility");
             this.defaultSubtitleAccessibility = Optional.ofNullable(defaultSubtitleAccessibility);
             return this;
         }
 
-        /**
-         * The subtitles for the deaf or hard-of-hearing (SDH) searches mode (0 = Prefer non-SDH subtitles, 1 = Prefer SDH subtitles, 2 = Only show SDH subtitles, 3 = Only shown non-SDH subtitles)
-         */
         public Builder defaultSubtitleAccessibility(Optional<? extends DefaultSubtitleAccessibility> defaultSubtitleAccessibility) {
             Utils.checkNotNull(defaultSubtitleAccessibility, "defaultSubtitleAccessibility");
             this.defaultSubtitleAccessibility = defaultSubtitleAccessibility;
             return this;
         }
 
-        /**
-         * The forced subtitles searches mode (0 = Prefer non-forced subtitles, 1 = Prefer forced subtitles, 2 = Only show forced subtitles, 3 = Only show non-forced subtitles)
-         */
         public Builder defaultSubtitleForced(DefaultSubtitleForced defaultSubtitleForced) {
             Utils.checkNotNull(defaultSubtitleForced, "defaultSubtitleForced");
             this.defaultSubtitleForced = Optional.ofNullable(defaultSubtitleForced);
             return this;
         }
 
-        /**
-         * The forced subtitles searches mode (0 = Prefer non-forced subtitles, 1 = Prefer forced subtitles, 2 = Only show forced subtitles, 3 = Only show non-forced subtitles)
-         */
         public Builder defaultSubtitleForced(Optional<? extends DefaultSubtitleForced> defaultSubtitleForced) {
             Utils.checkNotNull(defaultSubtitleForced, "defaultSubtitleForced");
             this.defaultSubtitleForced = defaultSubtitleForced;
@@ -507,6 +453,21 @@ public class UserProfile {
         public UserProfile build() {
             if (autoSelectAudio == null) {
                 autoSelectAudio = _SINGLETON_VALUE_AutoSelectAudio.value();
+            }
+            if (autoSelectSubtitle == null) {
+                autoSelectSubtitle = _SINGLETON_VALUE_AutoSelectSubtitle.value();
+            }
+            if (defaultSubtitleAccessibility == null) {
+                defaultSubtitleAccessibility = _SINGLETON_VALUE_DefaultSubtitleAccessibility.value();
+            }
+            if (defaultSubtitleForced == null) {
+                defaultSubtitleForced = _SINGLETON_VALUE_DefaultSubtitleForced.value();
+            }
+            if (watchedIndicator == null) {
+                watchedIndicator = _SINGLETON_VALUE_WatchedIndicator.value();
+            }
+            if (mediaReviewsVisibility == null) {
+                mediaReviewsVisibility = _SINGLETON_VALUE_MediaReviewsVisibility.value();
             }            return new UserProfile(
                 autoSelectAudio,
                 defaultAudioLanguage,
@@ -523,6 +484,36 @@ public class UserProfile {
                         "autoSelectAudio",
                         "true",
                         new TypeReference<Optional<Boolean>>() {});
+
+        private static final LazySingletonValue<Optional<? extends AutoSelectSubtitle>> _SINGLETON_VALUE_AutoSelectSubtitle =
+                new LazySingletonValue<>(
+                        "autoSelectSubtitle",
+                        "0",
+                        new TypeReference<Optional<? extends AutoSelectSubtitle>>() {});
+
+        private static final LazySingletonValue<Optional<? extends DefaultSubtitleAccessibility>> _SINGLETON_VALUE_DefaultSubtitleAccessibility =
+                new LazySingletonValue<>(
+                        "defaultSubtitleAccessibility",
+                        "0",
+                        new TypeReference<Optional<? extends DefaultSubtitleAccessibility>>() {});
+
+        private static final LazySingletonValue<Optional<? extends DefaultSubtitleForced>> _SINGLETON_VALUE_DefaultSubtitleForced =
+                new LazySingletonValue<>(
+                        "defaultSubtitleForced",
+                        "0",
+                        new TypeReference<Optional<? extends DefaultSubtitleForced>>() {});
+
+        private static final LazySingletonValue<Optional<? extends WatchedIndicator>> _SINGLETON_VALUE_WatchedIndicator =
+                new LazySingletonValue<>(
+                        "watchedIndicator",
+                        "0",
+                        new TypeReference<Optional<? extends WatchedIndicator>>() {});
+
+        private static final LazySingletonValue<Optional<? extends MediaReviewsVisibility>> _SINGLETON_VALUE_MediaReviewsVisibility =
+                new LazySingletonValue<>(
+                        "mediaReviewsVisibility",
+                        "0",
+                        new TypeReference<Optional<? extends MediaReviewsVisibility>>() {});
     }
 }
 

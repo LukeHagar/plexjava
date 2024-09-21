@@ -19,7 +19,7 @@ public class UpdatePlayProgressRequestBuilder {
         this.sdk = sdk;
     }
 
-    public UpdatePlayProgressRequestBuilder key(java.lang.String key) {
+    public UpdatePlayProgressRequestBuilder key(String key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
         return this;
@@ -31,7 +31,7 @@ public class UpdatePlayProgressRequestBuilder {
         return this;
     }
 
-    public UpdatePlayProgressRequestBuilder state(java.lang.String state) {
+    public UpdatePlayProgressRequestBuilder state(String state) {
         Utils.checkNotNull(state, "state");
         this.state = state;
         return this;

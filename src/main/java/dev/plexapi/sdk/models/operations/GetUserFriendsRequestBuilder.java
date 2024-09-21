@@ -17,13 +17,13 @@ public class GetUserFriendsRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public GetUserFriendsRequestBuilder serverURL(java.lang.String serverURL) {
+    public GetUserFriendsRequestBuilder serverURL(String serverURL) {
         Utils.checkNotNull(serverURL, "serverURL");
         this.serverURL = Optional.of(serverURL);
         return this;
     }
 
-    public GetUserFriendsRequestBuilder serverURL(java.util.Optional<java.lang.String> serverURL) {
+    public GetUserFriendsRequestBuilder serverURL(Optional<String> serverURL) {
         Utils.checkNotNull(serverURL, "serverURL");
         this.serverURL = serverURL;
         return this;

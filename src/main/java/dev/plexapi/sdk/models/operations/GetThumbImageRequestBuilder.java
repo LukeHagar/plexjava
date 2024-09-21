@@ -15,7 +15,7 @@ public class GetThumbImageRequestBuilder {
         this.sdk = sdk;
     }
 
-    public GetThumbImageRequestBuilder request(dev.plexapi.sdk.models.operations.GetThumbImageRequest request) {
+    public GetThumbImageRequestBuilder request(GetThumbImageRequest request) {
         Utils.checkNotNull(request, "request");
         this.request = request;
         return this;

@@ -17,25 +17,25 @@ public class ApplyUpdatesRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public ApplyUpdatesRequestBuilder tonight(dev.plexapi.sdk.models.operations.Tonight tonight) {
+    public ApplyUpdatesRequestBuilder tonight(Tonight tonight) {
         Utils.checkNotNull(tonight, "tonight");
         this.tonight = Optional.of(tonight);
         return this;
     }
 
-    public ApplyUpdatesRequestBuilder tonight(java.util.Optional<? extends dev.plexapi.sdk.models.operations.Tonight> tonight) {
+    public ApplyUpdatesRequestBuilder tonight(Optional<? extends Tonight> tonight) {
         Utils.checkNotNull(tonight, "tonight");
         this.tonight = tonight;
         return this;
     }
                 
-    public ApplyUpdatesRequestBuilder skip(dev.plexapi.sdk.models.operations.Skip skip) {
+    public ApplyUpdatesRequestBuilder skip(Skip skip) {
         Utils.checkNotNull(skip, "skip");
         this.skip = Optional.of(skip);
         return this;
     }
 
-    public ApplyUpdatesRequestBuilder skip(java.util.Optional<? extends dev.plexapi.sdk.models.operations.Skip> skip) {
+    public ApplyUpdatesRequestBuilder skip(Optional<? extends Skip> skip) {
         Utils.checkNotNull(skip, "skip");
         this.skip = skip;
         return this;

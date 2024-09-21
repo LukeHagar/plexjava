@@ -24,7 +24,6 @@ import dev.plexapi.sdk.models.operations.GetTransientTokenQueryParamType;
 import dev.plexapi.sdk.models.operations.GetTransientTokenRequest;
 import dev.plexapi.sdk.models.operations.GetTransientTokenRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetTransientTokenResponse;
-import dev.plexapi.sdk.models.operations.PostUsersSignInDataRequest;
 import dev.plexapi.sdk.models.operations.PostUsersSignInDataRequestBody;
 import dev.plexapi.sdk.models.operations.PostUsersSignInDataRequestBuilder;
 import dev.plexapi.sdk.models.operations.PostUsersSignInDataResponse;
@@ -118,7 +117,7 @@ public class Authentication implements
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         _req.addQueryParams(Utils.getQueryParams(
                 GetTransientTokenRequest.class,
@@ -271,7 +270,7 @@ public class Authentication implements
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         _req.addQueryParams(Utils.getQueryParams(
                 GetSourceConnectionInformationRequest.class,
@@ -426,7 +425,7 @@ public class Authentication implements
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
@@ -564,32 +563,20 @@ public class Authentication implements
      * @throws Exception if the API call fails
      */
     public PostUsersSignInDataResponse postUsersSignInDataDirect() throws Exception {
-        return postUsersSignInData(Optional.empty(), Optional.empty(), Optional.empty());
+        return postUsersSignInData(Optional.empty(), Optional.empty());
     }
     
     /**
      * Get User Sign In Data
      * Sign in user with username and password and return user data with Plex authentication token
-     * @param clientID The unique identifier for the client application
-    This is used to track the client application and its usage
-    (UUID, serial number, or other number unique per device)
-
-     * @param requestBody Login credentials
+     * @param request The request object containing all of the parameters for the API call.
      * @param serverURL Overrides the server URL.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public PostUsersSignInDataResponse postUsersSignInData(
-            Optional<String> clientID,
-            Optional<? extends PostUsersSignInDataRequestBody> requestBody,
+            Optional<? extends PostUsersSignInDataRequestBody> request,
             Optional<String> serverURL) throws Exception {
-        PostUsersSignInDataRequest request =
-            PostUsersSignInDataRequest
-                .builder()
-                .clientID(clientID)
-                .requestBody(requestBody)
-                .build();
-        
         String _baseUrl = Utils.templateUrl(POST_USERS_SIGN_IN_DATA_SERVERS[0], new HashMap<String, String>());
         if (serverURL.isPresent() && !serverURL.get().isBlank()) {
             _baseUrl = serverURL.get();
@@ -602,21 +589,16 @@ public class Authentication implements
         Object _convertedRequest = Utils.convertToShape(
                 request, 
                 JsonShape.DEFAULT,
-                new TypeReference<Object>() {});
+                new TypeReference<Optional<? extends PostUsersSignInDataRequestBody>>() {});
         SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
                 _convertedRequest, 
-                "requestBody",
+                "request",
                 "form",
                 false);
         _req.setBody(Optional.ofNullable(_serializedRequestBody));
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
-
-        _req.addQueryParams(Utils.getQueryParams(
-                PostUsersSignInDataRequest.class,
-                request, 
-                this.sdkConfiguration.globals));
+                SDKConfiguration.USER_AGENT);
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 

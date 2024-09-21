@@ -10,8 +10,7 @@ import java.util.Optional;
 
 public class PostUsersSignInDataRequestBuilder {
 
-    private Optional<String> clientID = Optional.empty();
-    private Optional<? extends PostUsersSignInDataRequestBody> requestBody = Optional.empty();
+    private Optional<? extends PostUsersSignInDataRequestBody> request = Optional.empty();
     private Optional<String> serverURL = Optional.empty();
     private final SDKMethodInterfaces.MethodCallPostUsersSignInData sdk;
 
@@ -19,37 +18,25 @@ public class PostUsersSignInDataRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public PostUsersSignInDataRequestBuilder clientID(java.lang.String clientID) {
-        Utils.checkNotNull(clientID, "clientID");
-        this.clientID = Optional.of(clientID);
+    public PostUsersSignInDataRequestBuilder request(PostUsersSignInDataRequestBody request) {
+        Utils.checkNotNull(request, "request");
+        this.request = Optional.of(request);
         return this;
     }
 
-    public PostUsersSignInDataRequestBuilder clientID(java.util.Optional<java.lang.String> clientID) {
-        Utils.checkNotNull(clientID, "clientID");
-        this.clientID = clientID;
+    public PostUsersSignInDataRequestBuilder request(Optional<? extends PostUsersSignInDataRequestBody> request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
     }
                 
-    public PostUsersSignInDataRequestBuilder requestBody(dev.plexapi.sdk.models.operations.PostUsersSignInDataRequestBody requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = Optional.of(requestBody);
-        return this;
-    }
-
-    public PostUsersSignInDataRequestBuilder requestBody(java.util.Optional<? extends dev.plexapi.sdk.models.operations.PostUsersSignInDataRequestBody> requestBody) {
-        Utils.checkNotNull(requestBody, "requestBody");
-        this.requestBody = requestBody;
-        return this;
-    }
-                
-    public PostUsersSignInDataRequestBuilder serverURL(java.lang.String serverURL) {
+    public PostUsersSignInDataRequestBuilder serverURL(String serverURL) {
         Utils.checkNotNull(serverURL, "serverURL");
         this.serverURL = Optional.of(serverURL);
         return this;
     }
 
-    public PostUsersSignInDataRequestBuilder serverURL(java.util.Optional<java.lang.String> serverURL) {
+    public PostUsersSignInDataRequestBuilder serverURL(Optional<String> serverURL) {
         Utils.checkNotNull(serverURL, "serverURL");
         this.serverURL = serverURL;
         return this;
@@ -58,8 +45,7 @@ public class PostUsersSignInDataRequestBuilder {
     public PostUsersSignInDataResponse call() throws Exception {
 
         return sdk.postUsersSignInData(
-            clientID,
-            requestBody,
+            request,
             serverURL);
     }
 }

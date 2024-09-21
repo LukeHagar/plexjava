@@ -23,43 +23,30 @@ This will retrieve the "Now Playing" Information of the PMS.
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetSessionsBadRequest;
+import dev.plexapi.sdk.models.errors.GetSessionsUnauthorized;
 import dev.plexapi.sdk.models.operations.GetSessionsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetSessionsBadRequest, GetSessionsUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetSessionsResponse res = sdk.sessions().getSessions()
+        GetSessionsResponse res = sdk.sessions().getSessions()
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetSessionsBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetSessionsUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -87,25 +74,26 @@ This will Retrieve a listing of all history views.
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetSessionHistoryBadRequest;
+import dev.plexapi.sdk.models.errors.GetSessionHistoryUnauthorized;
 import dev.plexapi.sdk.models.operations.GetSessionHistoryResponse;
 import dev.plexapi.sdk.models.operations.QueryParamFilter;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetSessionHistoryBadRequest, GetSessionHistoryUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetSessionHistoryResponse res = sdk.sessions().getSessionHistory()
+        GetSessionHistoryResponse res = sdk.sessions().getSessionHistory()
                 .sort("<value>")
                 .accountId(1L)
                 .filter(QueryParamFilter.builder()
@@ -113,23 +101,9 @@ public class Application {
                 .librarySectionID(12L)
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetSessionHistoryBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetSessionHistoryUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -166,43 +140,30 @@ Get Transcode Sessions
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetTranscodeSessionsBadRequest;
+import dev.plexapi.sdk.models.errors.GetTranscodeSessionsUnauthorized;
 import dev.plexapi.sdk.models.operations.GetTranscodeSessionsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetTranscodeSessionsBadRequest, GetTranscodeSessionsUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetTranscodeSessionsResponse res = sdk.sessions().getTranscodeSessions()
+        GetTranscodeSessionsResponse res = sdk.sessions().getTranscodeSessions()
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetTranscodeSessionsBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetTranscodeSessionsUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -230,42 +191,29 @@ Stop a Transcode Session
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.StopTranscodeSessionBadRequest;
+import dev.plexapi.sdk.models.errors.StopTranscodeSessionUnauthorized;
 import dev.plexapi.sdk.models.operations.StopTranscodeSessionResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws StopTranscodeSessionBadRequest, StopTranscodeSessionUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            StopTranscodeSessionResponse res = sdk.sessions().stopTranscodeSession()
+        StopTranscodeSessionResponse res = sdk.sessions().stopTranscodeSession()
                 .sessionKey("zz7llzqlx8w9vnrsbnwhbmep")
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.StopTranscodeSessionBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.StopTranscodeSessionUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```

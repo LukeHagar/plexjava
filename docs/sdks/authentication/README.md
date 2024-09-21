@@ -24,7 +24,8 @@ This endpoint provides the caller with a temporary token with the same access le
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetTransientTokenBadRequest;
+import dev.plexapi.sdk.models.errors.GetTransientTokenUnauthorized;
 import dev.plexapi.sdk.models.operations.GetTransientTokenQueryParamType;
 import dev.plexapi.sdk.models.operations.GetTransientTokenResponse;
 import dev.plexapi.sdk.models.operations.Scope;
@@ -32,37 +33,23 @@ import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetTransientTokenBadRequest, GetTransientTokenUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetTransientTokenResponse res = sdk.authentication().getTransientToken()
+        GetTransientTokenResponse res = sdk.authentication().getTransientToken()
                 .type(GetTransientTokenQueryParamType.DELEGATION)
                 .scope(Scope.ALL)
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.GetTransientTokenBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetTransientTokenUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```
@@ -99,42 +86,29 @@ Note: requires Plex Media Server >= 1.15.4.
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetSourceConnectionInformationBadRequest;
+import dev.plexapi.sdk.models.errors.GetSourceConnectionInformationUnauthorized;
 import dev.plexapi.sdk.models.operations.GetSourceConnectionInformationResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetSourceConnectionInformationBadRequest, GetSourceConnectionInformationUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetSourceConnectionInformationResponse res = sdk.authentication().getSourceConnectionInformation()
-                .source("server://client-identifier")
+        GetSourceConnectionInformationResponse res = sdk.authentication().getSourceConnectionInformation()
+                .source("provider://provider-identifier")
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.GetSourceConnectionInformationBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetSourceConnectionInformationUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```
@@ -168,43 +142,30 @@ Get the User data from the provided X-Plex-Token
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetTokenDetailsBadRequest;
+import dev.plexapi.sdk.models.errors.GetTokenDetailsUnauthorized;
 import dev.plexapi.sdk.models.operations.GetTokenDetailsResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetTokenDetailsBadRequest, GetTokenDetailsUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetTokenDetailsResponse res = sdk.authentication().getTokenDetails()
+        GetTokenDetailsResponse res = sdk.authentication().getTokenDetails()
                 .call();
 
-            if (res.userPlexAccount().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetTokenDetailsBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetTokenDetailsUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.userPlexAccount().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -238,60 +199,47 @@ Sign in user with username and password and return user data with Plex authentic
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.PostUsersSignInDataBadRequest;
+import dev.plexapi.sdk.models.errors.PostUsersSignInDataUnauthorized;
 import dev.plexapi.sdk.models.operations.PostUsersSignInDataRequestBody;
 import dev.plexapi.sdk.models.operations.PostUsersSignInDataResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws PostUsersSignInDataBadRequest, PostUsersSignInDataUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
+            .build();
+
+        PostUsersSignInDataRequestBody req = PostUsersSignInDataRequestBody.builder()
+                .login("username@email.com")
+                .password("password123")
+                .verificationCode("123456")
                 .build();
 
-            PostUsersSignInDataResponse res = sdk.authentication().postUsersSignInData()
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .requestBody(PostUsersSignInDataRequestBody.builder()
-                    .login("username@email.com")
-                    .password("password123")
-                    .verificationCode("123456")
-                    .build())
+        PostUsersSignInDataResponse res = sdk.authentication().postUsersSignInData()
+                .request(req)
                 .call();
 
-            if (res.userPlexAccount().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.PostUsersSignInDataBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.PostUsersSignInDataUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.userPlexAccount().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
 
 ### Parameters
 
-| Parameter                                                                                                                                                             | Type                                                                                                                                                                  | Required                                                                                                                                                              | Description                                                                                                                                                           | Example                                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `clientID`                                                                                                                                                            | *Optional<String>*                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                    | The unique identifier for the client application<br/>This is used to track the client application and its usage<br/>(UUID, serial number, or other number unique per device)<br/> | gcgzw5rz2xovp84b4vha3a40                                                                                                                                              |
-| `requestBody`                                                                                                                                                         | [Optional<PostUsersSignInDataRequestBody>](../../models/operations/PostUsersSignInDataRequestBody.md)                                                                 | :heavy_minus_sign:                                                                                                                                                    | Login credentials                                                                                                                                                     |                                                                                                                                                                       |
-| `serverURL`                                                                                                                                                           | *String*                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                    | An optional server URL to use.                                                                                                                                        | http://localhost:8080                                                                                                                                                 |
+| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `request`                                                                                   | [PostUsersSignInDataRequestBody](../../models/operations/PostUsersSignInDataRequestBody.md) | :heavy_check_mark:                                                                          | The request object to use for the request.                                                  |
+| `serverURL`                                                                                 | *String*                                                                                    | :heavy_minus_sign:                                                                          | An optional server URL to use.                                                              |
 
 ### Response
 

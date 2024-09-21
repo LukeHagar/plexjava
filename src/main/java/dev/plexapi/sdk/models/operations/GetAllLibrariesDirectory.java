@@ -7,8 +7,6 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
@@ -16,130 +14,107 @@ import java.lang.Integer;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 
 public class GetAllLibrariesDirectory {
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("allowSync")
-    private Optional<Boolean> allowSync;
+    private boolean allowSync;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("art")
-    private Optional<String> art;
+    private String art;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("composite")
-    private Optional<String> composite;
+    private String composite;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("filters")
-    private Optional<Boolean> filters;
+    private boolean filters;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("refreshing")
-    private Optional<Boolean> refreshing;
+    private boolean refreshing;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
-    private Optional<String> thumb;
+    private String thumb;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
-    private Optional<String> key;
+    private String key;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
-    private Optional<String> type;
+    private String type;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
-    private Optional<String> title;
+    private String title;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("agent")
-    private Optional<String> agent;
+    private String agent;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("scanner")
-    private Optional<String> scanner;
+    private String scanner;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("language")
-    private Optional<String> language;
+    private String language;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("uuid")
-    private Optional<String> uuid;
+    private String uuid;
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("updatedAt")
-    private Optional<Long> updatedAt;
+    private long updatedAt;
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("createdAt")
-    private Optional<Long> createdAt;
+    private long createdAt;
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("scannedAt")
-    private Optional<Long> scannedAt;
+    private long scannedAt;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("content")
-    private Optional<Boolean> content;
+    private boolean content;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("directory")
-    private Optional<Boolean> directory;
+    private boolean directory;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contentChangedAt")
-    private Optional<Integer> contentChangedAt;
+    private int contentChangedAt;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hidden")
-    private Optional<Integer> hidden;
+    private int hidden;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Location")
-    private Optional<? extends List<Location>> location;
+    private List<Location> location;
 
     @JsonCreator
     public GetAllLibrariesDirectory(
-            @JsonProperty("allowSync") Optional<Boolean> allowSync,
-            @JsonProperty("art") Optional<String> art,
-            @JsonProperty("composite") Optional<String> composite,
-            @JsonProperty("filters") Optional<Boolean> filters,
-            @JsonProperty("refreshing") Optional<Boolean> refreshing,
-            @JsonProperty("thumb") Optional<String> thumb,
-            @JsonProperty("key") Optional<String> key,
-            @JsonProperty("type") Optional<String> type,
-            @JsonProperty("title") Optional<String> title,
-            @JsonProperty("agent") Optional<String> agent,
-            @JsonProperty("scanner") Optional<String> scanner,
-            @JsonProperty("language") Optional<String> language,
-            @JsonProperty("uuid") Optional<String> uuid,
-            @JsonProperty("updatedAt") Optional<Long> updatedAt,
-            @JsonProperty("createdAt") Optional<Long> createdAt,
-            @JsonProperty("scannedAt") Optional<Long> scannedAt,
-            @JsonProperty("content") Optional<Boolean> content,
-            @JsonProperty("directory") Optional<Boolean> directory,
-            @JsonProperty("contentChangedAt") Optional<Integer> contentChangedAt,
-            @JsonProperty("hidden") Optional<Integer> hidden,
-            @JsonProperty("Location") Optional<? extends List<Location>> location) {
+            @JsonProperty("allowSync") boolean allowSync,
+            @JsonProperty("art") String art,
+            @JsonProperty("composite") String composite,
+            @JsonProperty("filters") boolean filters,
+            @JsonProperty("refreshing") boolean refreshing,
+            @JsonProperty("thumb") String thumb,
+            @JsonProperty("key") String key,
+            @JsonProperty("type") String type,
+            @JsonProperty("title") String title,
+            @JsonProperty("agent") String agent,
+            @JsonProperty("scanner") String scanner,
+            @JsonProperty("language") String language,
+            @JsonProperty("uuid") String uuid,
+            @JsonProperty("updatedAt") long updatedAt,
+            @JsonProperty("createdAt") long createdAt,
+            @JsonProperty("scannedAt") long scannedAt,
+            @JsonProperty("content") boolean content,
+            @JsonProperty("directory") boolean directory,
+            @JsonProperty("contentChangedAt") int contentChangedAt,
+            @JsonProperty("hidden") int hidden,
+            @JsonProperty("Location") List<Location> location) {
         Utils.checkNotNull(allowSync, "allowSync");
         Utils.checkNotNull(art, "art");
         Utils.checkNotNull(composite, "composite");
@@ -183,124 +158,119 @@ public class GetAllLibrariesDirectory {
         this.hidden = hidden;
         this.location = location;
     }
-    
-    public GetAllLibrariesDirectory() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
-    }
 
     @JsonIgnore
-    public Optional<Boolean> allowSync() {
+    public boolean allowSync() {
         return allowSync;
     }
 
     @JsonIgnore
-    public Optional<String> art() {
+    public String art() {
         return art;
     }
 
     @JsonIgnore
-    public Optional<String> composite() {
+    public String composite() {
         return composite;
     }
 
     @JsonIgnore
-    public Optional<Boolean> filters() {
+    public boolean filters() {
         return filters;
     }
 
     @JsonIgnore
-    public Optional<Boolean> refreshing() {
+    public boolean refreshing() {
         return refreshing;
     }
 
     @JsonIgnore
-    public Optional<String> thumb() {
+    public String thumb() {
         return thumb;
     }
 
     @JsonIgnore
-    public Optional<String> key() {
+    public String key() {
         return key;
     }
 
     @JsonIgnore
-    public Optional<String> type() {
+    public String type() {
         return type;
     }
 
     @JsonIgnore
-    public Optional<String> title() {
+    public String title() {
         return title;
     }
 
     @JsonIgnore
-    public Optional<String> agent() {
+    public String agent() {
         return agent;
     }
 
     @JsonIgnore
-    public Optional<String> scanner() {
+    public String scanner() {
         return scanner;
     }
 
     @JsonIgnore
-    public Optional<String> language() {
+    public String language() {
         return language;
     }
 
     @JsonIgnore
-    public Optional<String> uuid() {
+    public String uuid() {
         return uuid;
     }
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
     @JsonIgnore
-    public Optional<Long> updatedAt() {
+    public long updatedAt() {
         return updatedAt;
     }
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
     @JsonIgnore
-    public Optional<Long> createdAt() {
+    public long createdAt() {
         return createdAt;
     }
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
     @JsonIgnore
-    public Optional<Long> scannedAt() {
+    public long scannedAt() {
         return scannedAt;
     }
 
     @JsonIgnore
-    public Optional<Boolean> content() {
+    public boolean content() {
         return content;
     }
 
     @JsonIgnore
-    public Optional<Boolean> directory() {
+    public boolean directory() {
         return directory;
     }
 
     @JsonIgnore
-    public Optional<Integer> contentChangedAt() {
+    public int contentChangedAt() {
         return contentChangedAt;
     }
 
     @JsonIgnore
-    public Optional<Integer> hidden() {
+    public int hidden() {
         return hidden;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Location>> location() {
-        return (Optional<List<Location>>) location;
+    public List<Location> location() {
+        return location;
     }
 
     public final static Builder builder() {
@@ -309,23 +279,11 @@ public class GetAllLibrariesDirectory {
 
     public GetAllLibrariesDirectory withAllowSync(boolean allowSync) {
         Utils.checkNotNull(allowSync, "allowSync");
-        this.allowSync = Optional.ofNullable(allowSync);
-        return this;
-    }
-
-    public GetAllLibrariesDirectory withAllowSync(Optional<Boolean> allowSync) {
-        Utils.checkNotNull(allowSync, "allowSync");
         this.allowSync = allowSync;
         return this;
     }
 
     public GetAllLibrariesDirectory withArt(String art) {
-        Utils.checkNotNull(art, "art");
-        this.art = Optional.ofNullable(art);
-        return this;
-    }
-
-    public GetAllLibrariesDirectory withArt(Optional<String> art) {
         Utils.checkNotNull(art, "art");
         this.art = art;
         return this;
@@ -333,23 +291,11 @@ public class GetAllLibrariesDirectory {
 
     public GetAllLibrariesDirectory withComposite(String composite) {
         Utils.checkNotNull(composite, "composite");
-        this.composite = Optional.ofNullable(composite);
-        return this;
-    }
-
-    public GetAllLibrariesDirectory withComposite(Optional<String> composite) {
-        Utils.checkNotNull(composite, "composite");
         this.composite = composite;
         return this;
     }
 
     public GetAllLibrariesDirectory withFilters(boolean filters) {
-        Utils.checkNotNull(filters, "filters");
-        this.filters = Optional.ofNullable(filters);
-        return this;
-    }
-
-    public GetAllLibrariesDirectory withFilters(Optional<Boolean> filters) {
         Utils.checkNotNull(filters, "filters");
         this.filters = filters;
         return this;
@@ -357,23 +303,11 @@ public class GetAllLibrariesDirectory {
 
     public GetAllLibrariesDirectory withRefreshing(boolean refreshing) {
         Utils.checkNotNull(refreshing, "refreshing");
-        this.refreshing = Optional.ofNullable(refreshing);
-        return this;
-    }
-
-    public GetAllLibrariesDirectory withRefreshing(Optional<Boolean> refreshing) {
-        Utils.checkNotNull(refreshing, "refreshing");
         this.refreshing = refreshing;
         return this;
     }
 
     public GetAllLibrariesDirectory withThumb(String thumb) {
-        Utils.checkNotNull(thumb, "thumb");
-        this.thumb = Optional.ofNullable(thumb);
-        return this;
-    }
-
-    public GetAllLibrariesDirectory withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
         this.thumb = thumb;
         return this;
@@ -381,23 +315,11 @@ public class GetAllLibrariesDirectory {
 
     public GetAllLibrariesDirectory withKey(String key) {
         Utils.checkNotNull(key, "key");
-        this.key = Optional.ofNullable(key);
-        return this;
-    }
-
-    public GetAllLibrariesDirectory withKey(Optional<String> key) {
-        Utils.checkNotNull(key, "key");
         this.key = key;
         return this;
     }
 
     public GetAllLibrariesDirectory withType(String type) {
-        Utils.checkNotNull(type, "type");
-        this.type = Optional.ofNullable(type);
-        return this;
-    }
-
-    public GetAllLibrariesDirectory withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -405,23 +327,11 @@ public class GetAllLibrariesDirectory {
 
     public GetAllLibrariesDirectory withTitle(String title) {
         Utils.checkNotNull(title, "title");
-        this.title = Optional.ofNullable(title);
-        return this;
-    }
-
-    public GetAllLibrariesDirectory withTitle(Optional<String> title) {
-        Utils.checkNotNull(title, "title");
         this.title = title;
         return this;
     }
 
     public GetAllLibrariesDirectory withAgent(String agent) {
-        Utils.checkNotNull(agent, "agent");
-        this.agent = Optional.ofNullable(agent);
-        return this;
-    }
-
-    public GetAllLibrariesDirectory withAgent(Optional<String> agent) {
         Utils.checkNotNull(agent, "agent");
         this.agent = agent;
         return this;
@@ -429,23 +339,11 @@ public class GetAllLibrariesDirectory {
 
     public GetAllLibrariesDirectory withScanner(String scanner) {
         Utils.checkNotNull(scanner, "scanner");
-        this.scanner = Optional.ofNullable(scanner);
-        return this;
-    }
-
-    public GetAllLibrariesDirectory withScanner(Optional<String> scanner) {
-        Utils.checkNotNull(scanner, "scanner");
         this.scanner = scanner;
         return this;
     }
 
     public GetAllLibrariesDirectory withLanguage(String language) {
-        Utils.checkNotNull(language, "language");
-        this.language = Optional.ofNullable(language);
-        return this;
-    }
-
-    public GetAllLibrariesDirectory withLanguage(Optional<String> language) {
         Utils.checkNotNull(language, "language");
         this.language = language;
         return this;
@@ -453,65 +351,32 @@ public class GetAllLibrariesDirectory {
 
     public GetAllLibrariesDirectory withUuid(String uuid) {
         Utils.checkNotNull(uuid, "uuid");
-        this.uuid = Optional.ofNullable(uuid);
-        return this;
-    }
-
-    public GetAllLibrariesDirectory withUuid(Optional<String> uuid) {
-        Utils.checkNotNull(uuid, "uuid");
         this.uuid = uuid;
         return this;
     }
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
     public GetAllLibrariesDirectory withUpdatedAt(long updatedAt) {
-        Utils.checkNotNull(updatedAt, "updatedAt");
-        this.updatedAt = Optional.ofNullable(updatedAt);
-        return this;
-    }
-
-    /**
-     * Unix epoch datetime
-     */
-    public GetAllLibrariesDirectory withUpdatedAt(Optional<Long> updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
         this.updatedAt = updatedAt;
         return this;
     }
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
     public GetAllLibrariesDirectory withCreatedAt(long createdAt) {
-        Utils.checkNotNull(createdAt, "createdAt");
-        this.createdAt = Optional.ofNullable(createdAt);
-        return this;
-    }
-
-    /**
-     * Unix epoch datetime
-     */
-    public GetAllLibrariesDirectory withCreatedAt(Optional<Long> createdAt) {
         Utils.checkNotNull(createdAt, "createdAt");
         this.createdAt = createdAt;
         return this;
     }
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
     public GetAllLibrariesDirectory withScannedAt(long scannedAt) {
-        Utils.checkNotNull(scannedAt, "scannedAt");
-        this.scannedAt = Optional.ofNullable(scannedAt);
-        return this;
-    }
-
-    /**
-     * Unix epoch datetime
-     */
-    public GetAllLibrariesDirectory withScannedAt(Optional<Long> scannedAt) {
         Utils.checkNotNull(scannedAt, "scannedAt");
         this.scannedAt = scannedAt;
         return this;
@@ -519,23 +384,11 @@ public class GetAllLibrariesDirectory {
 
     public GetAllLibrariesDirectory withContent(boolean content) {
         Utils.checkNotNull(content, "content");
-        this.content = Optional.ofNullable(content);
-        return this;
-    }
-
-    public GetAllLibrariesDirectory withContent(Optional<Boolean> content) {
-        Utils.checkNotNull(content, "content");
         this.content = content;
         return this;
     }
 
     public GetAllLibrariesDirectory withDirectory(boolean directory) {
-        Utils.checkNotNull(directory, "directory");
-        this.directory = Optional.ofNullable(directory);
-        return this;
-    }
-
-    public GetAllLibrariesDirectory withDirectory(Optional<Boolean> directory) {
         Utils.checkNotNull(directory, "directory");
         this.directory = directory;
         return this;
@@ -543,35 +396,17 @@ public class GetAllLibrariesDirectory {
 
     public GetAllLibrariesDirectory withContentChangedAt(int contentChangedAt) {
         Utils.checkNotNull(contentChangedAt, "contentChangedAt");
-        this.contentChangedAt = Optional.ofNullable(contentChangedAt);
-        return this;
-    }
-
-    public GetAllLibrariesDirectory withContentChangedAt(Optional<Integer> contentChangedAt) {
-        Utils.checkNotNull(contentChangedAt, "contentChangedAt");
         this.contentChangedAt = contentChangedAt;
         return this;
     }
 
     public GetAllLibrariesDirectory withHidden(int hidden) {
         Utils.checkNotNull(hidden, "hidden");
-        this.hidden = Optional.ofNullable(hidden);
-        return this;
-    }
-
-    public GetAllLibrariesDirectory withHidden(Optional<Integer> hidden) {
-        Utils.checkNotNull(hidden, "hidden");
         this.hidden = hidden;
         return this;
     }
 
     public GetAllLibrariesDirectory withLocation(List<Location> location) {
-        Utils.checkNotNull(location, "location");
-        this.location = Optional.ofNullable(location);
-        return this;
-    }
-
-    public GetAllLibrariesDirectory withLocation(Optional<? extends List<Location>> location) {
         Utils.checkNotNull(location, "location");
         this.location = location;
         return this;
@@ -664,47 +499,47 @@ public class GetAllLibrariesDirectory {
     
     public final static class Builder {
  
-        private Optional<Boolean> allowSync = Optional.empty();
+        private Boolean allowSync;
  
-        private Optional<String> art = Optional.empty();
+        private String art;
  
-        private Optional<String> composite = Optional.empty();
+        private String composite;
  
-        private Optional<Boolean> filters = Optional.empty();
+        private Boolean filters;
  
-        private Optional<Boolean> refreshing = Optional.empty();
+        private Boolean refreshing;
  
-        private Optional<String> thumb = Optional.empty();
+        private String thumb;
  
-        private Optional<String> key = Optional.empty();
+        private String key;
  
-        private Optional<String> type = Optional.empty();
+        private String type;
  
-        private Optional<String> title = Optional.empty();
+        private String title;
  
-        private Optional<String> agent = Optional.empty();
+        private String agent;
  
-        private Optional<String> scanner = Optional.empty();
+        private String scanner;
  
-        private Optional<String> language = Optional.empty();
+        private String language;
  
-        private Optional<String> uuid = Optional.empty();
+        private String uuid;
  
-        private Optional<Long> updatedAt = Optional.empty();
+        private Long updatedAt;
  
-        private Optional<Long> createdAt = Optional.empty();
+        private Long createdAt;
  
-        private Optional<Long> scannedAt = Optional.empty();
+        private Long scannedAt;
  
-        private Optional<Boolean> content = Optional.empty();
+        private Boolean content;
  
-        private Optional<Boolean> directory = Optional.empty();
+        private Boolean directory;
  
-        private Optional<Integer> contentChangedAt = Optional.empty();
+        private Integer contentChangedAt;
  
-        private Optional<Integer> hidden = Optional.empty();
+        private Integer hidden;
  
-        private Optional<? extends List<Location>> location = Optional.empty();  
+        private List<Location> location;  
         
         private Builder() {
           // force use of static builder() method
@@ -712,23 +547,11 @@ public class GetAllLibrariesDirectory {
 
         public Builder allowSync(boolean allowSync) {
             Utils.checkNotNull(allowSync, "allowSync");
-            this.allowSync = Optional.ofNullable(allowSync);
-            return this;
-        }
-
-        public Builder allowSync(Optional<Boolean> allowSync) {
-            Utils.checkNotNull(allowSync, "allowSync");
             this.allowSync = allowSync;
             return this;
         }
 
         public Builder art(String art) {
-            Utils.checkNotNull(art, "art");
-            this.art = Optional.ofNullable(art);
-            return this;
-        }
-
-        public Builder art(Optional<String> art) {
             Utils.checkNotNull(art, "art");
             this.art = art;
             return this;
@@ -736,23 +559,11 @@ public class GetAllLibrariesDirectory {
 
         public Builder composite(String composite) {
             Utils.checkNotNull(composite, "composite");
-            this.composite = Optional.ofNullable(composite);
-            return this;
-        }
-
-        public Builder composite(Optional<String> composite) {
-            Utils.checkNotNull(composite, "composite");
             this.composite = composite;
             return this;
         }
 
         public Builder filters(boolean filters) {
-            Utils.checkNotNull(filters, "filters");
-            this.filters = Optional.ofNullable(filters);
-            return this;
-        }
-
-        public Builder filters(Optional<Boolean> filters) {
             Utils.checkNotNull(filters, "filters");
             this.filters = filters;
             return this;
@@ -760,23 +571,11 @@ public class GetAllLibrariesDirectory {
 
         public Builder refreshing(boolean refreshing) {
             Utils.checkNotNull(refreshing, "refreshing");
-            this.refreshing = Optional.ofNullable(refreshing);
-            return this;
-        }
-
-        public Builder refreshing(Optional<Boolean> refreshing) {
-            Utils.checkNotNull(refreshing, "refreshing");
             this.refreshing = refreshing;
             return this;
         }
 
         public Builder thumb(String thumb) {
-            Utils.checkNotNull(thumb, "thumb");
-            this.thumb = Optional.ofNullable(thumb);
-            return this;
-        }
-
-        public Builder thumb(Optional<String> thumb) {
             Utils.checkNotNull(thumb, "thumb");
             this.thumb = thumb;
             return this;
@@ -784,23 +583,11 @@ public class GetAllLibrariesDirectory {
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
-            this.key = Optional.ofNullable(key);
-            return this;
-        }
-
-        public Builder key(Optional<String> key) {
-            Utils.checkNotNull(key, "key");
             this.key = key;
             return this;
         }
 
         public Builder type(String type) {
-            Utils.checkNotNull(type, "type");
-            this.type = Optional.ofNullable(type);
-            return this;
-        }
-
-        public Builder type(Optional<String> type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
@@ -808,23 +595,11 @@ public class GetAllLibrariesDirectory {
 
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
-            this.title = Optional.ofNullable(title);
-            return this;
-        }
-
-        public Builder title(Optional<String> title) {
-            Utils.checkNotNull(title, "title");
             this.title = title;
             return this;
         }
 
         public Builder agent(String agent) {
-            Utils.checkNotNull(agent, "agent");
-            this.agent = Optional.ofNullable(agent);
-            return this;
-        }
-
-        public Builder agent(Optional<String> agent) {
             Utils.checkNotNull(agent, "agent");
             this.agent = agent;
             return this;
@@ -832,23 +607,11 @@ public class GetAllLibrariesDirectory {
 
         public Builder scanner(String scanner) {
             Utils.checkNotNull(scanner, "scanner");
-            this.scanner = Optional.ofNullable(scanner);
-            return this;
-        }
-
-        public Builder scanner(Optional<String> scanner) {
-            Utils.checkNotNull(scanner, "scanner");
             this.scanner = scanner;
             return this;
         }
 
         public Builder language(String language) {
-            Utils.checkNotNull(language, "language");
-            this.language = Optional.ofNullable(language);
-            return this;
-        }
-
-        public Builder language(Optional<String> language) {
             Utils.checkNotNull(language, "language");
             this.language = language;
             return this;
@@ -856,65 +619,32 @@ public class GetAllLibrariesDirectory {
 
         public Builder uuid(String uuid) {
             Utils.checkNotNull(uuid, "uuid");
-            this.uuid = Optional.ofNullable(uuid);
-            return this;
-        }
-
-        public Builder uuid(Optional<String> uuid) {
-            Utils.checkNotNull(uuid, "uuid");
             this.uuid = uuid;
             return this;
         }
 
         /**
-         * Unix epoch datetime
+         * Unix epoch datetime in seconds
          */
         public Builder updatedAt(long updatedAt) {
-            Utils.checkNotNull(updatedAt, "updatedAt");
-            this.updatedAt = Optional.ofNullable(updatedAt);
-            return this;
-        }
-
-        /**
-         * Unix epoch datetime
-         */
-        public Builder updatedAt(Optional<Long> updatedAt) {
             Utils.checkNotNull(updatedAt, "updatedAt");
             this.updatedAt = updatedAt;
             return this;
         }
 
         /**
-         * Unix epoch datetime
+         * Unix epoch datetime in seconds
          */
         public Builder createdAt(long createdAt) {
-            Utils.checkNotNull(createdAt, "createdAt");
-            this.createdAt = Optional.ofNullable(createdAt);
-            return this;
-        }
-
-        /**
-         * Unix epoch datetime
-         */
-        public Builder createdAt(Optional<Long> createdAt) {
             Utils.checkNotNull(createdAt, "createdAt");
             this.createdAt = createdAt;
             return this;
         }
 
         /**
-         * Unix epoch datetime
+         * Unix epoch datetime in seconds
          */
         public Builder scannedAt(long scannedAt) {
-            Utils.checkNotNull(scannedAt, "scannedAt");
-            this.scannedAt = Optional.ofNullable(scannedAt);
-            return this;
-        }
-
-        /**
-         * Unix epoch datetime
-         */
-        public Builder scannedAt(Optional<Long> scannedAt) {
             Utils.checkNotNull(scannedAt, "scannedAt");
             this.scannedAt = scannedAt;
             return this;
@@ -922,23 +652,11 @@ public class GetAllLibrariesDirectory {
 
         public Builder content(boolean content) {
             Utils.checkNotNull(content, "content");
-            this.content = Optional.ofNullable(content);
-            return this;
-        }
-
-        public Builder content(Optional<Boolean> content) {
-            Utils.checkNotNull(content, "content");
             this.content = content;
             return this;
         }
 
         public Builder directory(boolean directory) {
-            Utils.checkNotNull(directory, "directory");
-            this.directory = Optional.ofNullable(directory);
-            return this;
-        }
-
-        public Builder directory(Optional<Boolean> directory) {
             Utils.checkNotNull(directory, "directory");
             this.directory = directory;
             return this;
@@ -946,35 +664,17 @@ public class GetAllLibrariesDirectory {
 
         public Builder contentChangedAt(int contentChangedAt) {
             Utils.checkNotNull(contentChangedAt, "contentChangedAt");
-            this.contentChangedAt = Optional.ofNullable(contentChangedAt);
-            return this;
-        }
-
-        public Builder contentChangedAt(Optional<Integer> contentChangedAt) {
-            Utils.checkNotNull(contentChangedAt, "contentChangedAt");
             this.contentChangedAt = contentChangedAt;
             return this;
         }
 
         public Builder hidden(int hidden) {
             Utils.checkNotNull(hidden, "hidden");
-            this.hidden = Optional.ofNullable(hidden);
-            return this;
-        }
-
-        public Builder hidden(Optional<Integer> hidden) {
-            Utils.checkNotNull(hidden, "hidden");
             this.hidden = hidden;
             return this;
         }
 
         public Builder location(List<Location> location) {
-            Utils.checkNotNull(location, "location");
-            this.location = Optional.ofNullable(location);
-            return this;
-        }
-
-        public Builder location(Optional<? extends List<Location>> location) {
             Utils.checkNotNull(location, "location");
             this.location = location;
             return this;

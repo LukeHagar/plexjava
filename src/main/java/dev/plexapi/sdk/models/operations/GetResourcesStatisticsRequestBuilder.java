@@ -23,7 +23,7 @@ public class GetResourcesStatisticsRequestBuilder {
         return this;
     }
 
-    public GetResourcesStatisticsRequestBuilder timespan(java.util.Optional<java.lang.Long> timespan) {
+    public GetResourcesStatisticsRequestBuilder timespan(Optional<Long> timespan) {
         Utils.checkNotNull(timespan, "timespan");
         this.timespan = timespan;
         return this;

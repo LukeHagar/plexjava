@@ -13,19 +13,9 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
-import java.util.Optional;
 
 
 public class GetTokenByPinIdRequest {
-
-    /**
-     * The unique identifier for the client application
-     * This is used to track the client application and its usage
-     * (UUID, serial number, or other number unique per device)
-     * 
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Client-Identifier")
-    private Optional<String> clientID;
 
     /**
      * The PinID to retrieve an access token for
@@ -35,28 +25,9 @@ public class GetTokenByPinIdRequest {
 
     @JsonCreator
     public GetTokenByPinIdRequest(
-            Optional<String> clientID,
             long pinID) {
-        Utils.checkNotNull(clientID, "clientID");
         Utils.checkNotNull(pinID, "pinID");
-        this.clientID = clientID;
         this.pinID = pinID;
-    }
-    
-    public GetTokenByPinIdRequest(
-            long pinID) {
-        this(Optional.empty(), pinID);
-    }
-
-    /**
-     * The unique identifier for the client application
-     * This is used to track the client application and its usage
-     * (UUID, serial number, or other number unique per device)
-     * 
-     */
-    @JsonIgnore
-    public Optional<String> clientID() {
-        return clientID;
     }
 
     /**
@@ -69,30 +40,6 @@ public class GetTokenByPinIdRequest {
 
     public final static Builder builder() {
         return new Builder();
-    }
-
-    /**
-     * The unique identifier for the client application
-     * This is used to track the client application and its usage
-     * (UUID, serial number, or other number unique per device)
-     * 
-     */
-    public GetTokenByPinIdRequest withClientID(String clientID) {
-        Utils.checkNotNull(clientID, "clientID");
-        this.clientID = Optional.ofNullable(clientID);
-        return this;
-    }
-
-    /**
-     * The unique identifier for the client application
-     * This is used to track the client application and its usage
-     * (UUID, serial number, or other number unique per device)
-     * 
-     */
-    public GetTokenByPinIdRequest withClientID(Optional<String> clientID) {
-        Utils.checkNotNull(clientID, "clientID");
-        this.clientID = clientID;
-        return this;
     }
 
     /**
@@ -114,56 +61,27 @@ public class GetTokenByPinIdRequest {
         }
         GetTokenByPinIdRequest other = (GetTokenByPinIdRequest) o;
         return 
-            Objects.deepEquals(this.clientID, other.clientID) &&
             Objects.deepEquals(this.pinID, other.pinID);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
-            clientID,
             pinID);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetTokenByPinIdRequest.class,
-                "clientID", clientID,
                 "pinID", pinID);
     }
     
     public final static class Builder {
  
-        private Optional<String> clientID = Optional.empty();
- 
         private Long pinID;  
         
         private Builder() {
           // force use of static builder() method
-        }
-
-        /**
-         * The unique identifier for the client application
-         * This is used to track the client application and its usage
-         * (UUID, serial number, or other number unique per device)
-         * 
-         */
-        public Builder clientID(String clientID) {
-            Utils.checkNotNull(clientID, "clientID");
-            this.clientID = Optional.ofNullable(clientID);
-            return this;
-        }
-
-        /**
-         * The unique identifier for the client application
-         * This is used to track the client application and its usage
-         * (UUID, serial number, or other number unique per device)
-         * 
-         */
-        public Builder clientID(Optional<String> clientID) {
-            Utils.checkNotNull(clientID, "clientID");
-            this.clientID = clientID;
-            return this;
         }
 
         /**
@@ -177,7 +95,6 @@ public class GetTokenByPinIdRequest {
         
         public GetTokenByPinIdRequest build() {
             return new GetTokenByPinIdRequest(
-                clientID,
                 pinID);
         }
     }

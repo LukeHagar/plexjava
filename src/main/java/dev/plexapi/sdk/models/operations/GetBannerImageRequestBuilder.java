@@ -15,7 +15,7 @@ public class GetBannerImageRequestBuilder {
         this.sdk = sdk;
     }
 
-    public GetBannerImageRequestBuilder request(dev.plexapi.sdk.models.operations.GetBannerImageRequest request) {
+    public GetBannerImageRequestBuilder request(GetBannerImageRequest request) {
         Utils.checkNotNull(request, "request");
         this.request = request;
         return this;

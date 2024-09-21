@@ -16,7 +16,7 @@ public class GetMediaProvidersRequestBuilder {
         this.sdk = sdk;
     }
 
-    public GetMediaProvidersRequestBuilder xPlexToken(java.lang.String xPlexToken) {
+    public GetMediaProvidersRequestBuilder xPlexToken(String xPlexToken) {
         Utils.checkNotNull(xPlexToken, "xPlexToken");
         this.xPlexToken = xPlexToken;
         return this;

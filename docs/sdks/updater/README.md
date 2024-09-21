@@ -23,43 +23,30 @@ Querying status of updates
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetUpdateStatusBadRequest;
+import dev.plexapi.sdk.models.errors.GetUpdateStatusUnauthorized;
 import dev.plexapi.sdk.models.operations.GetUpdateStatusResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetUpdateStatusBadRequest, GetUpdateStatusUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetUpdateStatusResponse res = sdk.updater().getUpdateStatus()
+        GetUpdateStatusResponse res = sdk.updater().getUpdateStatus()
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetUpdateStatusBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetUpdateStatusUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -87,43 +74,30 @@ Checking for updates
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.CheckForUpdatesBadRequest;
+import dev.plexapi.sdk.models.errors.CheckForUpdatesUnauthorized;
 import dev.plexapi.sdk.models.operations.CheckForUpdatesResponse;
 import dev.plexapi.sdk.models.operations.Download;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws CheckForUpdatesBadRequest, CheckForUpdatesUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            CheckForUpdatesResponse res = sdk.updater().checkForUpdates()
+        CheckForUpdatesResponse res = sdk.updater().checkForUpdates()
                 .download(Download.ONE)
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.CheckForUpdatesBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.CheckForUpdatesUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```
@@ -158,7 +132,8 @@ Note that these two parameters are effectively mutually exclusive. The `tonight`
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.ApplyUpdatesBadRequest;
+import dev.plexapi.sdk.models.errors.ApplyUpdatesUnauthorized;
 import dev.plexapi.sdk.models.operations.ApplyUpdatesResponse;
 import dev.plexapi.sdk.models.operations.Skip;
 import dev.plexapi.sdk.models.operations.Tonight;
@@ -166,37 +141,23 @@ import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws ApplyUpdatesBadRequest, ApplyUpdatesUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            ApplyUpdatesResponse res = sdk.updater().applyUpdates()
+        ApplyUpdatesResponse res = sdk.updater().applyUpdates()
                 .tonight(Tonight.ONE)
                 .skip(Skip.ONE)
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.ApplyUpdatesBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.ApplyUpdatesUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```

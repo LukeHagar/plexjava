@@ -17,13 +17,13 @@ public class GetGeoDataRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public GetGeoDataRequestBuilder serverURL(java.lang.String serverURL) {
+    public GetGeoDataRequestBuilder serverURL(String serverURL) {
         Utils.checkNotNull(serverURL, "serverURL");
         this.serverURL = Optional.of(serverURL);
         return this;
     }
 
-    public GetGeoDataRequestBuilder serverURL(java.util.Optional<java.lang.String> serverURL) {
+    public GetGeoDataRequestBuilder serverURL(Optional<String> serverURL) {
         Utils.checkNotNull(serverURL, "serverURL");
         this.serverURL = serverURL;
         return this;

@@ -16,13 +16,13 @@ public class CheckForUpdatesRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public CheckForUpdatesRequestBuilder download(dev.plexapi.sdk.models.operations.Download download) {
+    public CheckForUpdatesRequestBuilder download(Download download) {
         Utils.checkNotNull(download, "download");
         this.download = Optional.of(download);
         return this;
     }
 
-    public CheckForUpdatesRequestBuilder download(java.util.Optional<? extends dev.plexapi.sdk.models.operations.Download> download) {
+    public CheckForUpdatesRequestBuilder download(Optional<? extends Download> download) {
         Utils.checkNotNull(download, "download");
         this.download = download;
         return this;

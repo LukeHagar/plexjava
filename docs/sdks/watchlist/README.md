@@ -20,7 +20,8 @@ Get User Watchlist
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetWatchListBadRequest;
+import dev.plexapi.sdk.models.errors.GetWatchListUnauthorized;
 import dev.plexapi.sdk.models.operations.Filter;
 import dev.plexapi.sdk.models.operations.GetWatchListRequest;
 import dev.plexapi.sdk.models.operations.GetWatchListResponse;
@@ -28,45 +29,31 @@ import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetWatchListBadRequest, GetWatchListUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetWatchListRequest req = GetWatchListRequest.builder()
+        GetWatchListRequest req = GetWatchListRequest.builder()
                 .filter(Filter.AVAILABLE)
                 .xPlexToken("CV5xoxjTpFKUzBTShsaf")
                 .xPlexContainerStart(0)
                 .xPlexContainerSize(50)
                 .build();
 
-            GetWatchListResponse res = sdk.watchlist().getWatchList()
+        GetWatchListResponse res = sdk.watchlist().getWatchList()
                 .request(req)
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetWatchListBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetWatchListUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```

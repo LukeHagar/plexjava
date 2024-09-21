@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public class Security {
 
-    @SpeakeasyMetadata("security:scheme=true,type=apiKey,subtype=query,name=X-Plex-Token")
+    @SpeakeasyMetadata("security:scheme=true,type=apiKey,subtype=header,name=X-Plex-Token")
     private Optional<String> accessToken;
 
     @JsonCreator

@@ -27,43 +27,30 @@ Get Server Activities
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetServerActivitiesBadRequest;
+import dev.plexapi.sdk.models.errors.GetServerActivitiesUnauthorized;
 import dev.plexapi.sdk.models.operations.GetServerActivitiesResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetServerActivitiesBadRequest, GetServerActivitiesUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetServerActivitiesResponse res = sdk.activities().getServerActivities()
+        GetServerActivitiesResponse res = sdk.activities().getServerActivities()
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetServerActivitiesBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetServerActivitiesUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -91,42 +78,29 @@ Cancel Server Activities
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.CancelServerActivitiesBadRequest;
+import dev.plexapi.sdk.models.errors.CancelServerActivitiesUnauthorized;
 import dev.plexapi.sdk.models.operations.CancelServerActivitiesResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws CancelServerActivitiesBadRequest, CancelServerActivitiesUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            CancelServerActivitiesResponse res = sdk.activities().cancelServerActivities()
+        CancelServerActivitiesResponse res = sdk.activities().cancelServerActivities()
                 .activityUUID("25b71ed5-0f9d-461c-baa7-d404e9e10d3e")
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.CancelServerActivitiesBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.CancelServerActivitiesUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```

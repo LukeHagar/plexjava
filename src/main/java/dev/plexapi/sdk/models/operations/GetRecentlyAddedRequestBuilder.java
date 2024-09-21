@@ -32,7 +32,7 @@ public class GetRecentlyAddedRequestBuilder {
         return this;
     }
 
-    public GetRecentlyAddedRequestBuilder xPlexContainerStart(java.util.Optional<java.lang.Integer> xPlexContainerStart) {
+    public GetRecentlyAddedRequestBuilder xPlexContainerStart(Optional<Integer> xPlexContainerStart) {
         Utils.checkNotNull(xPlexContainerStart, "xPlexContainerStart");
         this.xPlexContainerStart = xPlexContainerStart;
         return this;
@@ -44,7 +44,7 @@ public class GetRecentlyAddedRequestBuilder {
         return this;
     }
 
-    public GetRecentlyAddedRequestBuilder xPlexContainerSize(java.util.Optional<java.lang.Integer> xPlexContainerSize) {
+    public GetRecentlyAddedRequestBuilder xPlexContainerSize(Optional<Integer> xPlexContainerSize) {
         Utils.checkNotNull(xPlexContainerSize, "xPlexContainerSize");
         this.xPlexContainerSize = xPlexContainerSize;
         return this;

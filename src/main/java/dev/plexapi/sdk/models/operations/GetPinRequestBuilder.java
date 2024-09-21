@@ -18,19 +18,19 @@ public class GetPinRequestBuilder {
         this.sdk = sdk;
     }
 
-    public GetPinRequestBuilder request(dev.plexapi.sdk.models.operations.GetPinRequest request) {
+    public GetPinRequestBuilder request(GetPinRequest request) {
         Utils.checkNotNull(request, "request");
         this.request = request;
         return this;
     }
                 
-    public GetPinRequestBuilder serverURL(java.lang.String serverURL) {
+    public GetPinRequestBuilder serverURL(String serverURL) {
         Utils.checkNotNull(serverURL, "serverURL");
         this.serverURL = Optional.of(serverURL);
         return this;
     }
 
-    public GetPinRequestBuilder serverURL(java.util.Optional<java.lang.String> serverURL) {
+    public GetPinRequestBuilder serverURL(Optional<String> serverURL) {
         Utils.checkNotNull(serverURL, "serverURL");
         this.serverURL = serverURL;
         return this;

@@ -361,9 +361,9 @@ public class GetLibraryItemsRequest {
  
         private Tag tag;
  
-        private Optional<? extends IncludeGuids> includeGuids = Optional.empty();
+        private Optional<? extends IncludeGuids> includeGuids;
  
-        private Optional<? extends IncludeMeta> includeMeta = Optional.empty();
+        private Optional<? extends IncludeMeta> includeMeta;
  
         private Type type;
  
@@ -499,6 +499,12 @@ public class GetLibraryItemsRequest {
         }
         
         public GetLibraryItemsRequest build() {
+            if (includeGuids == null) {
+                includeGuids = _SINGLETON_VALUE_IncludeGuids.value();
+            }
+            if (includeMeta == null) {
+                includeMeta = _SINGLETON_VALUE_IncludeMeta.value();
+            }
             if (xPlexContainerStart == null) {
                 xPlexContainerStart = _SINGLETON_VALUE_XPlexContainerStart.value();
             }
@@ -513,6 +519,18 @@ public class GetLibraryItemsRequest {
                 xPlexContainerStart,
                 xPlexContainerSize);
         }
+
+        private static final LazySingletonValue<Optional<? extends IncludeGuids>> _SINGLETON_VALUE_IncludeGuids =
+                new LazySingletonValue<>(
+                        "includeGuids",
+                        "0",
+                        new TypeReference<Optional<? extends IncludeGuids>>() {});
+
+        private static final LazySingletonValue<Optional<? extends IncludeMeta>> _SINGLETON_VALUE_IncludeMeta =
+                new LazySingletonValue<>(
+                        "includeMeta",
+                        "0",
+                        new TypeReference<Optional<? extends IncludeMeta>>() {});
 
         private static final LazySingletonValue<Optional<Integer>> _SINGLETON_VALUE_XPlexContainerStart =
                 new LazySingletonValue<>(

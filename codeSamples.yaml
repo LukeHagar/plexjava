@@ -12,43 +12,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetServerCapabilitiesBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetServerCapabilitiesUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetServerCapabilitiesResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetServerCapabilitiesBadRequest, GetServerCapabilitiesUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
+                    GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetServerCapabilitiesBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetServerCapabilitiesUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/:/prefs"]["get"]
@@ -60,43 +47,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetServerPreferencesBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetServerPreferencesUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetServerPreferencesResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetServerPreferencesBadRequest, GetServerPreferencesUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetServerPreferencesResponse res = sdk.server().getServerPreferences()
+                    GetServerPreferencesResponse res = sdk.server().getServerPreferences()
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetServerPreferencesBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetServerPreferencesUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/:/progress"]["post"]
@@ -108,44 +82,31 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.UpdatePlayProgressBadRequest;
+            import dev.plexapi.plexapi.models.errors.UpdatePlayProgressUnauthorized;
             import dev.plexapi.plexapi.models.operations.UpdatePlayProgressResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws UpdatePlayProgressBadRequest, UpdatePlayProgressUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        UpdatePlayProgressResponse res = sdk.media().updatePlayProgress()
+                    UpdatePlayProgressResponse res = sdk.media().updatePlayProgress()
                             .key("<key>")
                             .time(90000d)
                             .state("played")
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.UpdatePlayProgressBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.UpdatePlayProgressUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/:/scrobble"]["get"]
@@ -157,42 +118,29 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.MarkPlayedBadRequest;
+            import dev.plexapi.plexapi.models.errors.MarkPlayedUnauthorized;
             import dev.plexapi.plexapi.models.operations.MarkPlayedResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws MarkPlayedBadRequest, MarkPlayedUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        MarkPlayedResponse res = sdk.media().markPlayed()
+                    MarkPlayedResponse res = sdk.media().markPlayed()
                             .key(59398d)
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.MarkPlayedBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.MarkPlayedUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/:/timeline"]["get"]
@@ -204,7 +152,8 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetTimelineBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetTimelineUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetTimelineRequest;
             import dev.plexapi.plexapi.models.operations.GetTimelineResponse;
             import dev.plexapi.plexapi.models.operations.State;
@@ -212,18 +161,18 @@ actions:
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetTimelineBadRequest, GetTimelineUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetTimelineRequest req = GetTimelineRequest.builder()
+                    GetTimelineRequest req = GetTimelineRequest.builder()
                             .ratingKey(23409d)
                             .key("/library/metadata/23409")
                             .state(State.PLAYING)
@@ -236,25 +185,11 @@ actions:
                             .row(1d)
                             .build();
 
-                        GetTimelineResponse res = sdk.video().getTimeline()
+                    GetTimelineResponse res = sdk.video().getTimeline()
                             .request(req)
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.GetTimelineBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetTimelineUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/:/unscrobble"]["get"]
@@ -266,42 +201,29 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.MarkUnplayedBadRequest;
+            import dev.plexapi.plexapi.models.errors.MarkUnplayedUnauthorized;
             import dev.plexapi.plexapi.models.operations.MarkUnplayedResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws MarkUnplayedBadRequest, MarkUnplayedUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        MarkUnplayedResponse res = sdk.media().markUnplayed()
+                    MarkUnplayedResponse res = sdk.media().markUnplayed()
                             .key(59398d)
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.MarkUnplayedBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.MarkUnplayedUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/activities"]["get"]
@@ -313,43 +235,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetServerActivitiesBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetServerActivitiesUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetServerActivitiesResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetServerActivitiesBadRequest, GetServerActivitiesUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetServerActivitiesResponse res = sdk.activities().getServerActivities()
+                    GetServerActivitiesResponse res = sdk.activities().getServerActivities()
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetServerActivitiesBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetServerActivitiesUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/activities/{activityUUID}"]["delete"]
@@ -361,42 +270,29 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.CancelServerActivitiesBadRequest;
+            import dev.plexapi.plexapi.models.errors.CancelServerActivitiesUnauthorized;
             import dev.plexapi.plexapi.models.operations.CancelServerActivitiesResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws CancelServerActivitiesBadRequest, CancelServerActivitiesUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        CancelServerActivitiesResponse res = sdk.activities().cancelServerActivities()
+                    CancelServerActivitiesResponse res = sdk.activities().cancelServerActivities()
                             .activityUUID("25b71ed5-0f9d-461c-baa7-d404e9e10d3e")
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.CancelServerActivitiesBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.CancelServerActivitiesUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/butler"]["delete"]
@@ -408,41 +304,28 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.StopAllTasksBadRequest;
+            import dev.plexapi.plexapi.models.errors.StopAllTasksUnauthorized;
             import dev.plexapi.plexapi.models.operations.StopAllTasksResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws StopAllTasksBadRequest, StopAllTasksUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        StopAllTasksResponse res = sdk.butler().stopAllTasks()
+                    StopAllTasksResponse res = sdk.butler().stopAllTasks()
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.StopAllTasksBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.StopAllTasksUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/butler"]["get"]
@@ -454,43 +337,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetButlerTasksBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetButlerTasksUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetButlerTasksResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetButlerTasksBadRequest, GetButlerTasksUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetButlerTasksResponse res = sdk.butler().getButlerTasks()
+                    GetButlerTasksResponse res = sdk.butler().getButlerTasks()
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetButlerTasksBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetButlerTasksUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/butler"]["post"]
@@ -502,41 +372,28 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.StartAllTasksBadRequest;
+            import dev.plexapi.plexapi.models.errors.StartAllTasksUnauthorized;
             import dev.plexapi.plexapi.models.operations.StartAllTasksResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws StartAllTasksBadRequest, StartAllTasksUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        StartAllTasksResponse res = sdk.butler().startAllTasks()
+                    StartAllTasksResponse res = sdk.butler().startAllTasks()
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.StartAllTasksBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.StartAllTasksUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/butler/{taskName}"]["delete"]
@@ -548,43 +405,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.StopTaskBadRequest;
+            import dev.plexapi.plexapi.models.errors.StopTaskUnauthorized;
             import dev.plexapi.plexapi.models.operations.PathParamTaskName;
             import dev.plexapi.plexapi.models.operations.StopTaskResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws StopTaskBadRequest, StopTaskUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        StopTaskResponse res = sdk.butler().stopTask()
+                    StopTaskResponse res = sdk.butler().stopTask()
                             .taskName(PathParamTaskName.BACKUP_DATABASE)
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.StopTaskBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.StopTaskUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/butler/{taskName}"]["post"]
@@ -596,43 +440,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.StartTaskBadRequest;
+            import dev.plexapi.plexapi.models.errors.StartTaskUnauthorized;
             import dev.plexapi.plexapi.models.operations.StartTaskResponse;
             import dev.plexapi.plexapi.models.operations.TaskName;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws StartTaskBadRequest, StartTaskUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        StartTaskResponse res = sdk.butler().startTask()
+                    StartTaskResponse res = sdk.butler().startTask()
                             .taskName(TaskName.CLEAN_OLD_BUNDLES)
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.StartTaskBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.StartTaskUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/clients"]["get"]
@@ -644,43 +475,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetAvailableClientsBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetAvailableClientsUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetAvailableClientsResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetAvailableClientsBadRequest, GetAvailableClientsUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetAvailableClientsResponse res = sdk.server().getAvailableClients()
+                    GetAvailableClientsResponse res = sdk.server().getAvailableClients()
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetAvailableClientsBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetAvailableClientsUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/companions"]["get"]
@@ -692,43 +510,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetCompanionsDataBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetCompanionsDataUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetCompanionsDataResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetCompanionsDataBadRequest, GetCompanionsDataUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetCompanionsDataResponse res = sdk.plex().getCompanionsData()
+                    GetCompanionsDataResponse res = sdk.plex().getCompanionsData()
                             .call();
 
-                        if (res.responseBodies().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetCompanionsDataBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetCompanionsDataUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.responseBodies().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/devices"]["get"]
@@ -740,43 +545,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetDevicesBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetDevicesUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetDevicesResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetDevicesBadRequest, GetDevicesUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetDevicesResponse res = sdk.server().getDevices()
+                    GetDevicesResponse res = sdk.server().getDevices()
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetDevicesBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetDevicesUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/friends"]["get"]
@@ -788,43 +580,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetUserFriendsBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetUserFriendsUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetUserFriendsResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetUserFriendsBadRequest, GetUserFriendsUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetUserFriendsResponse res = sdk.plex().getUserFriends()
+                    GetUserFriendsResponse res = sdk.plex().getUserFriends()
                             .call();
 
-                        if (res.friends().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetUserFriendsBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetUserFriendsUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.friends().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/geoip"]["get"]
@@ -836,42 +615,29 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetGeoDataBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetGeoDataUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetGeoDataResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetGeoDataBadRequest, GetGeoDataUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetGeoDataResponse res = sdk.plex().getGeoData()
+                    GetGeoDataResponse res = sdk.plex().getGeoData()
                             .call();
 
-                        if (res.geoData().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetGeoDataBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetGeoDataUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.geoData().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/home"]["get"]
@@ -883,43 +649,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetHomeDataBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetHomeDataUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetHomeDataResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetHomeDataBadRequest, GetHomeDataUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetHomeDataResponse res = sdk.plex().getHomeData()
+                    GetHomeDataResponse res = sdk.plex().getHomeData()
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetHomeDataBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetHomeDataUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/hubs"]["get"]
@@ -931,46 +684,33 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetGlobalHubsBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetGlobalHubsUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetGlobalHubsResponse;
             import dev.plexapi.plexapi.models.operations.OnlyTransient;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetGlobalHubsBadRequest, GetGlobalHubsUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetGlobalHubsResponse res = sdk.hubs().getGlobalHubs()
+                    GetGlobalHubsResponse res = sdk.hubs().getGlobalHubs()
                             .count(1262.49d)
                             .onlyTransient(OnlyTransient.ONE)
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetGlobalHubsBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetGlobalHubsUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/hubs/search"]["get"]
@@ -982,44 +722,31 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.PerformSearchBadRequest;
+            import dev.plexapi.plexapi.models.errors.PerformSearchUnauthorized;
             import dev.plexapi.plexapi.models.operations.PerformSearchResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws PerformSearchBadRequest, PerformSearchUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        PerformSearchResponse res = sdk.search().performSearch()
-                            .query("arnold")
-                            .sectionId(9372.7d)
+                    PerformSearchResponse res = sdk.search().performSearch()
+                            .query("dylan")
+                            .sectionId(5838.67d)
                             .limit(5d)
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.PerformSearchBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.PerformSearchUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/hubs/search/voice"]["get"]
@@ -1031,44 +758,31 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.PerformVoiceSearchBadRequest;
+            import dev.plexapi.plexapi.models.errors.PerformVoiceSearchUnauthorized;
             import dev.plexapi.plexapi.models.operations.PerformVoiceSearchResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws PerformVoiceSearchBadRequest, PerformVoiceSearchUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        PerformVoiceSearchResponse res = sdk.search().performVoiceSearch()
+                    PerformVoiceSearchResponse res = sdk.search().performVoiceSearch()
                             .query("dead+poop")
-                            .sectionId(4094.8d)
+                            .sectionId(4094.80d)
                             .limit(5d)
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.PerformVoiceSearchBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.PerformVoiceSearchUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/hubs/sections/{sectionId}"]["get"]
@@ -1080,47 +794,34 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetLibraryHubsBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetLibraryHubsUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetLibraryHubsResponse;
             import dev.plexapi.plexapi.models.operations.QueryParamOnlyTransient;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetLibraryHubsBadRequest, GetLibraryHubsUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetLibraryHubsResponse res = sdk.hubs().getLibraryHubs()
+                    GetLibraryHubsResponse res = sdk.hubs().getLibraryHubs()
                             .sectionId(6728.76d)
-                            .count(9010.22d)
-                            .onlyTransient(QueryParamOnlyTransient.ZERO)
+                            .count(639.24d)
+                            .onlyTransient(QueryParamOnlyTransient.ONE)
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetLibraryHubsBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetLibraryHubsUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/identity"]["get"]
@@ -1132,39 +833,28 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetServerIdentityRequestTimeout;
             import dev.plexapi.plexapi.models.operations.GetServerIdentityResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetServerIdentityRequestTimeout, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetServerIdentityResponse res = sdk.server().getServerIdentity()
+                    GetServerIdentityResponse res = sdk.server().getServerIdentity()
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetServerIdentityRequestTimeout e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/library/all/top"]["get"]
@@ -1176,46 +866,33 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetTopWatchedContentBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetTopWatchedContentUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetTopWatchedContentQueryParamType;
             import dev.plexapi.plexapi.models.operations.GetTopWatchedContentResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetTopWatchedContentBadRequest, GetTopWatchedContentUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetTopWatchedContentResponse res = sdk.library().getTopWatchedContent()
-                            .type(GetTopWatchedContentQueryParamType.TWO)
+                    GetTopWatchedContentResponse res = sdk.library().getTopWatchedContent()
+                            .type(GetTopWatchedContentQueryParamType.Show)
                             .includeGuids(1L)
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetTopWatchedContentBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetTopWatchedContentUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/library/hashes"]["get"]
@@ -1227,43 +904,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetFileHashBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetFileHashUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetFileHashResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetFileHashBadRequest, GetFileHashUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetFileHashResponse res = sdk.library().getFileHash()
+                    GetFileHashResponse res = sdk.library().getFileHash()
                             .url("file://C:\Image.png&type=13")
                             .type(4462.17d)
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.GetFileHashBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetFileHashUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/library/metadata/{ratingKey}"]["get"]
@@ -1275,44 +939,31 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetMetaDataByRatingKeyBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetMetaDataByRatingKeyUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetMetaDataByRatingKeyResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetMetaDataByRatingKeyBadRequest, GetMetaDataByRatingKeyUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetMetaDataByRatingKeyResponse res = sdk.library().getMetaDataByRatingKey()
+                    GetMetaDataByRatingKeyResponse res = sdk.library().getMetaDataByRatingKey()
                             .ratingKey(9518L)
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetMetaDataByRatingKeyBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetMetaDataByRatingKeyUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/library/metadata/{ratingKey}/banner"]["get"]
@@ -1324,25 +975,26 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetBannerImageBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetBannerImageUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetBannerImageRequest;
             import dev.plexapi.plexapi.models.operations.GetBannerImageResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetBannerImageBadRequest, GetBannerImageUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetBannerImageRequest req = GetBannerImageRequest.builder()
+                    GetBannerImageRequest req = GetBannerImageRequest.builder()
                             .ratingKey(9518L)
                             .width(396L)
                             .height(396L)
@@ -1351,27 +1003,13 @@ actions:
                             .xPlexToken("CV5xoxjTpFKUzBTShsaf")
                             .build();
 
-                        GetBannerImageResponse res = sdk.media().getBannerImage()
+                    GetBannerImageResponse res = sdk.media().getBannerImage()
                             .request(req)
                             .call();
 
-                        if (res.responseStream().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetBannerImageBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetBannerImageUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.responseStream().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/library/metadata/{ratingKey}/children"]["get"]
@@ -1383,45 +1021,32 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetMetadataChildrenBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetMetadataChildrenUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetMetadataChildrenResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetMetadataChildrenBadRequest, GetMetadataChildrenUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetMetadataChildrenResponse res = sdk.library().getMetadataChildren()
-                            .ratingKey(1539.14d)
+                    GetMetadataChildrenResponse res = sdk.library().getMetadataChildren()
+                            .ratingKey(1539.15d)
                             .includeElements("<value>")
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetMetadataChildrenBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetMetadataChildrenUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/library/metadata/{ratingKey}/thumb"]["get"]
@@ -1433,25 +1058,26 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetThumbImageBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetThumbImageUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetThumbImageRequest;
             import dev.plexapi.plexapi.models.operations.GetThumbImageResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetThumbImageBadRequest, GetThumbImageUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetThumbImageRequest req = GetThumbImageRequest.builder()
+                    GetThumbImageRequest req = GetThumbImageRequest.builder()
                             .ratingKey(9518L)
                             .width(396L)
                             .height(396L)
@@ -1460,27 +1086,13 @@ actions:
                             .xPlexToken("CV5xoxjTpFKUzBTShsaf")
                             .build();
 
-                        GetThumbImageResponse res = sdk.media().getThumbImage()
+                    GetThumbImageResponse res = sdk.media().getThumbImage()
                             .request(req)
                             .call();
 
-                        if (res.responseStream().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetThumbImageBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetThumbImageUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.responseStream().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/library/onDeck"]["get"]
@@ -1492,43 +1104,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetOnDeckBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetOnDeckUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetOnDeckResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetOnDeckBadRequest, GetOnDeckUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetOnDeckResponse res = sdk.library().getOnDeck()
+                    GetOnDeckResponse res = sdk.library().getOnDeck()
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetOnDeckBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetOnDeckUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/library/recentlyAdded"]["get"]
@@ -1540,45 +1139,32 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetRecentlyAddedBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetRecentlyAddedUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetRecentlyAddedResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetRecentlyAddedBadRequest, GetRecentlyAddedUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetRecentlyAddedResponse res = sdk.library().getRecentlyAdded()
+                    GetRecentlyAddedResponse res = sdk.library().getRecentlyAdded()
                             .xPlexContainerStart(0)
                             .xPlexContainerSize(50)
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetRecentlyAddedBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetRecentlyAddedUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/library/sections"]["get"]
@@ -1590,43 +1176,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetAllLibrariesBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetAllLibrariesUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetAllLibrariesResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetAllLibrariesBadRequest, GetAllLibrariesUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetAllLibrariesResponse res = sdk.library().getAllLibraries()
+                    GetAllLibrariesResponse res = sdk.library().getAllLibraries()
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetAllLibrariesBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetAllLibrariesUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/library/sections/watchlist/{filter}"]["get"]
@@ -1638,7 +1211,8 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetWatchListBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetWatchListUnauthorized;
             import dev.plexapi.plexapi.models.operations.Filter;
             import dev.plexapi.plexapi.models.operations.GetWatchListRequest;
             import dev.plexapi.plexapi.models.operations.GetWatchListResponse;
@@ -1646,45 +1220,31 @@ actions:
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetWatchListBadRequest, GetWatchListUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetWatchListRequest req = GetWatchListRequest.builder()
+                    GetWatchListRequest req = GetWatchListRequest.builder()
                             .filter(Filter.AVAILABLE)
                             .xPlexToken("CV5xoxjTpFKUzBTShsaf")
                             .xPlexContainerStart(0)
                             .xPlexContainerSize(50)
                             .build();
 
-                        GetWatchListResponse res = sdk.watchlist().getWatchList()
+                    GetWatchListResponse res = sdk.watchlist().getWatchList()
                             .request(req)
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetWatchListBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetWatchListUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/library/sections/{sectionKey}"]["delete"]
@@ -1696,42 +1256,29 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.DeleteLibraryBadRequest;
+            import dev.plexapi.plexapi.models.errors.DeleteLibraryUnauthorized;
             import dev.plexapi.plexapi.models.operations.DeleteLibraryResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws DeleteLibraryBadRequest, DeleteLibraryUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        DeleteLibraryResponse res = sdk.library().deleteLibrary()
+                    DeleteLibraryResponse res = sdk.library().deleteLibrary()
                             .sectionKey(9518)
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.DeleteLibraryBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.DeleteLibraryUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/library/sections/{sectionKey}"]["get"]
@@ -1743,46 +1290,33 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetLibraryDetailsBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetLibraryDetailsUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetLibraryDetailsResponse;
             import dev.plexapi.plexapi.models.operations.IncludeDetails;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetLibraryDetailsBadRequest, GetLibraryDetailsUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetLibraryDetailsResponse res = sdk.library().getLibraryDetails()
+                    GetLibraryDetailsResponse res = sdk.library().getLibraryDetails()
                             .sectionKey(9518)
                             .includeDetails(IncludeDetails.ZERO)
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetLibraryDetailsBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetLibraryDetailsUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/library/sections/{sectionKey}/refresh"]["get"]
@@ -1794,44 +1328,31 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetRefreshLibraryMetadataBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetRefreshLibraryMetadataUnauthorized;
             import dev.plexapi.plexapi.models.operations.Force;
             import dev.plexapi.plexapi.models.operations.GetRefreshLibraryMetadataResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetRefreshLibraryMetadataBadRequest, GetRefreshLibraryMetadataUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetRefreshLibraryMetadataResponse res = sdk.library().getRefreshLibraryMetadata()
+                    GetRefreshLibraryMetadataResponse res = sdk.library().getRefreshLibraryMetadata()
                             .sectionKey(9518)
                             .force(Force.ONE)
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.GetRefreshLibraryMetadataBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetRefreshLibraryMetadataUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/library/sections/{sectionKey}/search"]["get"]
@@ -1843,46 +1364,33 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetSearchLibraryBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetSearchLibraryUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetSearchLibraryResponse;
             import dev.plexapi.plexapi.models.operations.QueryParamType;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetSearchLibraryBadRequest, GetSearchLibraryUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetSearchLibraryResponse res = sdk.library().getSearchLibrary()
+                    GetSearchLibraryResponse res = sdk.library().getSearchLibrary()
                             .sectionKey(9518)
-                            .type(QueryParamType.TWO)
+                            .type(QueryParamType.Show)
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetSearchLibraryBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetSearchLibraryUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/library/sections/{sectionKey}/{tag}"]["get"]
@@ -1894,7 +1402,8 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetLibraryItemsBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetLibraryItemsUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetLibraryItemsRequest;
             import dev.plexapi.plexapi.models.operations.GetLibraryItemsResponse;
             import dev.plexapi.plexapi.models.operations.IncludeGuids;
@@ -1905,48 +1414,34 @@ actions:
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetLibraryItemsBadRequest, GetLibraryItemsUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetLibraryItemsRequest req = GetLibraryItemsRequest.builder()
+                    GetLibraryItemsRequest req = GetLibraryItemsRequest.builder()
                             .sectionKey(9518)
                             .tag(Tag.EDITION)
-                            .type(Type.TWO)
-                            .includeGuids(IncludeGuids.ONE)
-                            .includeMeta(IncludeMeta.ONE)
+                            .type(Type.Show)
+                            .includeGuids(IncludeGuids.Enable)
+                            .includeMeta(IncludeMeta.Enable)
                             .xPlexContainerStart(0)
                             .xPlexContainerSize(50)
                             .build();
 
-                        GetLibraryItemsResponse res = sdk.library().getLibraryItems()
+                    GetLibraryItemsResponse res = sdk.library().getLibraryItems()
                             .request(req)
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetLibraryItemsBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetLibraryItemsUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/log"]["get"]
@@ -1958,45 +1453,32 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.LogLineBadRequest;
+            import dev.plexapi.plexapi.models.errors.LogLineUnauthorized;
             import dev.plexapi.plexapi.models.operations.Level;
             import dev.plexapi.plexapi.models.operations.LogLineResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws LogLineBadRequest, LogLineUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        LogLineResponse res = sdk.log().logLine()
+                    LogLineResponse res = sdk.log().logLine()
                             .level(Level.THREE)
                             .message("Test log message")
                             .source("Postman")
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.LogLineBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.LogLineUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/log"]["post"]
@@ -2008,46 +1490,33 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.LogMultiLineBadRequest;
+            import dev.plexapi.plexapi.models.errors.LogMultiLineUnauthorized;
             import dev.plexapi.plexapi.models.operations.LogMultiLineResponse;
             import java.lang.Exception;
             import java.lang.String;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws LogMultiLineBadRequest, LogMultiLineUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        String req = "level=4&message=Test%20message%201&source=postman\nlevel=3&message=Test%20message%202&source=postman
+                    String req = "level=4&message=Test%20message%201&source=postman\nlevel=3&message=Test%20message%202&source=postman
                         level=1&message=Test%20message%203&source=postman";
 
-                        LogMultiLineResponse res = sdk.log().logMultiLine()
+                    LogMultiLineResponse res = sdk.log().logMultiLine()
                             .request(req)
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.LogMultiLineBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.LogMultiLineUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/log/networked"]["get"]
@@ -2059,41 +1528,28 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.EnablePaperTrailBadRequest;
+            import dev.plexapi.plexapi.models.errors.EnablePaperTrailUnauthorized;
             import dev.plexapi.plexapi.models.operations.EnablePaperTrailResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws EnablePaperTrailBadRequest, EnablePaperTrailUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        EnablePaperTrailResponse res = sdk.log().enablePaperTrail()
+                    EnablePaperTrailResponse res = sdk.log().enablePaperTrail()
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.EnablePaperTrailBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.EnablePaperTrailUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/media/providers"]["get"]
@@ -2105,44 +1561,31 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetMediaProvidersBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetMediaProvidersUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetMediaProvidersResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetMediaProvidersBadRequest, GetMediaProvidersUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetMediaProvidersResponse res = sdk.server().getMediaProviders()
+                    GetMediaProvidersResponse res = sdk.server().getMediaProviders()
                             .xPlexToken("CV5xoxjTpFKUzBTShsaf")
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetMediaProvidersBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetMediaProvidersUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/myplex/account"]["get"]
@@ -2154,43 +1597,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetMyPlexAccountBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetMyPlexAccountUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetMyPlexAccountResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetMyPlexAccountBadRequest, GetMyPlexAccountUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetMyPlexAccountResponse res = sdk.server().getMyPlexAccount()
+                    GetMyPlexAccountResponse res = sdk.server().getMyPlexAccount()
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetMyPlexAccountBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetMyPlexAccountUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/photo/:/transcode"]["get"]
@@ -2202,7 +1632,8 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetResizedPhotoBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetResizedPhotoUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetResizedPhotoRequest;
             import dev.plexapi.plexapi.models.operations.GetResizedPhotoResponse;
             import dev.plexapi.plexapi.models.operations.MinSize;
@@ -2211,46 +1642,32 @@ actions:
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetResizedPhotoBadRequest, GetResizedPhotoUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetResizedPhotoRequest req = GetResizedPhotoRequest.builder()
+                    GetResizedPhotoRequest req = GetResizedPhotoRequest.builder()
                             .width(110d)
                             .height(165d)
                             .opacity(100L)
-                            .blur(4000d)
-                            .minSize(MinSize.ZERO)
-                            .upscale(Upscale.ZERO)
+                            .blur(0d)
+                            .minSize(MinSize.ONE)
+                            .upscale(Upscale.ONE)
                             .url("/library/metadata/49564/thumb/1654258204")
                             .build();
 
-                        GetResizedPhotoResponse res = sdk.server().getResizedPhoto()
+                    GetResizedPhotoResponse res = sdk.server().getResizedPhoto()
                             .request(req)
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.GetResizedPhotoBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetResizedPhotoUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/pins"]["post"]
@@ -2262,44 +1679,33 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetPinBadRequest;
             import dev.plexapi.plexapi.models.operations.GetPinRequest;
             import dev.plexapi.plexapi.models.operations.GetPinResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetPinBadRequest, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
+                        .build();
+
+                    GetPinRequest req = GetPinRequest.builder()
                             .build();
 
-                        GetPinRequest req = GetPinRequest.builder()
-                            .build();
-
-                        GetPinResponse res = sdk.plex().getPin()
+                    GetPinResponse res = sdk.plex().getPin()
                             .request(req)
                             .call();
 
-                        if (res.authPinContainer().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetPinBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.authPinContainer().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/pins/{pinID}"]["get"]
@@ -2311,44 +1717,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetTokenByPinIdBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetTokenByPinIdResponseBody;
             import dev.plexapi.plexapi.models.operations.GetTokenByPinIdResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetTokenByPinIdBadRequest, GetTokenByPinIdResponseBody, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetTokenByPinIdResponse res = sdk.plex().getTokenByPinId()
-                            .clientID("gcgzw5rz2xovp84b4vha3a40")
+                    GetTokenByPinIdResponse res = sdk.plex().getTokenByPinId()
                             .pinID(408895L)
                             .call();
 
-                        if (res.authPinContainer().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetTokenByPinIdBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetTokenByPinIdResponseBody e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.authPinContainer().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/playlists"]["get"]
@@ -2360,7 +1752,8 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetPlaylistsBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetPlaylistsUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetPlaylistsResponse;
             import dev.plexapi.plexapi.models.operations.PlaylistType;
             import dev.plexapi.plexapi.models.operations.QueryParamSmart;
@@ -2368,39 +1761,25 @@ actions:
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetPlaylistsBadRequest, GetPlaylistsUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetPlaylistsResponse res = sdk.playlists().getPlaylists()
+                    GetPlaylistsResponse res = sdk.playlists().getPlaylists()
                             .playlistType(PlaylistType.AUDIO)
                             .smart(QueryParamSmart.ZERO)
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetPlaylistsBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetPlaylistsUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/playlists"]["post"]
@@ -2412,7 +1791,8 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.CreatePlaylistBadRequest;
+            import dev.plexapi.plexapi.models.errors.CreatePlaylistUnauthorized;
             import dev.plexapi.plexapi.models.operations.CreatePlaylistQueryParamType;
             import dev.plexapi.plexapi.models.operations.CreatePlaylistRequest;
             import dev.plexapi.plexapi.models.operations.CreatePlaylistResponse;
@@ -2421,45 +1801,31 @@ actions:
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws CreatePlaylistBadRequest, CreatePlaylistUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        CreatePlaylistRequest req = CreatePlaylistRequest.builder()
+                    CreatePlaylistRequest req = CreatePlaylistRequest.builder()
                             .title("<value>")
                             .type(CreatePlaylistQueryParamType.PHOTO)
                             .smart(Smart.ONE)
-                            .uri("https://inborn-brochure.biz")
+                            .uri("https://hoarse-testing.info/")
                             .build();
 
-                        CreatePlaylistResponse res = sdk.playlists().createPlaylist()
+                    CreatePlaylistResponse res = sdk.playlists().createPlaylist()
                             .request(req)
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.CreatePlaylistBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.CreatePlaylistUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/playlists/upload"]["post"]
@@ -2471,44 +1837,32 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.UploadPlaylistBadRequest;
+            import dev.plexapi.plexapi.models.errors.UploadPlaylistUnauthorized;
             import dev.plexapi.plexapi.models.operations.QueryParamForce;
             import dev.plexapi.plexapi.models.operations.UploadPlaylistResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws UploadPlaylistBadRequest, UploadPlaylistUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        UploadPlaylistResponse res = sdk.playlists().uploadPlaylist()
+                    UploadPlaylistResponse res = sdk.playlists().uploadPlaylist()
                             .path("/home/barkley/playlist.m3u")
                             .force(QueryParamForce.ZERO)
+                            .sectionID(1L)
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.UploadPlaylistBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.UploadPlaylistUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/playlists/{playlistID}"]["delete"]
@@ -2520,42 +1874,29 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.DeletePlaylistBadRequest;
+            import dev.plexapi.plexapi.models.errors.DeletePlaylistUnauthorized;
             import dev.plexapi.plexapi.models.operations.DeletePlaylistResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws DeletePlaylistBadRequest, DeletePlaylistUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        DeletePlaylistResponse res = sdk.playlists().deletePlaylist()
+                    DeletePlaylistResponse res = sdk.playlists().deletePlaylist()
                             .playlistID(216.22d)
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.DeletePlaylistBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.DeletePlaylistUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/playlists/{playlistID}"]["get"]
@@ -2567,44 +1908,31 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetPlaylistBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetPlaylistUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetPlaylistResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetPlaylistBadRequest, GetPlaylistUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetPlaylistResponse res = sdk.playlists().getPlaylist()
+                    GetPlaylistResponse res = sdk.playlists().getPlaylist()
                             .playlistID(4109.48d)
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetPlaylistBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetPlaylistUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/playlists/{playlistID}"]["put"]
@@ -2616,44 +1944,31 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.UpdatePlaylistBadRequest;
+            import dev.plexapi.plexapi.models.errors.UpdatePlaylistUnauthorized;
             import dev.plexapi.plexapi.models.operations.UpdatePlaylistResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws UpdatePlaylistBadRequest, UpdatePlaylistUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        UpdatePlaylistResponse res = sdk.playlists().updatePlaylist()
-                            .playlistID(3915d)
+                    UpdatePlaylistResponse res = sdk.playlists().updatePlaylist()
+                            .playlistID(3915.00d)
                             .title("<value>")
                             .summary("<value>")
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.UpdatePlaylistBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.UpdatePlaylistUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/playlists/{playlistID}/items"]["delete"]
@@ -2665,42 +1980,29 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.ClearPlaylistContentsBadRequest;
+            import dev.plexapi.plexapi.models.errors.ClearPlaylistContentsUnauthorized;
             import dev.plexapi.plexapi.models.operations.ClearPlaylistContentsResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws ClearPlaylistContentsBadRequest, ClearPlaylistContentsUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        ClearPlaylistContentsResponse res = sdk.playlists().clearPlaylistContents()
+                    ClearPlaylistContentsResponse res = sdk.playlists().clearPlaylistContents()
                             .playlistID(1893.18d)
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.ClearPlaylistContentsBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.ClearPlaylistContentsUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/playlists/{playlistID}/items"]["get"]
@@ -2712,46 +2014,33 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetPlaylistContentsBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetPlaylistContentsUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetPlaylistContentsQueryParamType;
             import dev.plexapi.plexapi.models.operations.GetPlaylistContentsResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetPlaylistContentsBadRequest, GetPlaylistContentsUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetPlaylistContentsResponse res = sdk.playlists().getPlaylistContents()
+                    GetPlaylistContentsResponse res = sdk.playlists().getPlaylistContents()
                             .playlistID(5004.46d)
-                            .type(GetPlaylistContentsQueryParamType.TWO)
+                            .type(GetPlaylistContentsQueryParamType.Show)
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetPlaylistContentsBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetPlaylistContentsUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/playlists/{playlistID}/items"]["put"]
@@ -2763,46 +2052,33 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.AddPlaylistContentsBadRequest;
+            import dev.plexapi.plexapi.models.errors.AddPlaylistContentsUnauthorized;
             import dev.plexapi.plexapi.models.operations.AddPlaylistContentsResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws AddPlaylistContentsBadRequest, AddPlaylistContentsUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        AddPlaylistContentsResponse res = sdk.playlists().addPlaylistContents()
-                            .playlistID(8502.01d)
+                    AddPlaylistContentsResponse res = sdk.playlists().addPlaylistContents()
+                            .playlistID(8502.00d)
                             .uri("server://12345/com.plexapp.plugins.library/library/metadata/1")
                             .playQueueID(123d)
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.AddPlaylistContentsBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.AddPlaylistContentsUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/resources"]["get"]
@@ -2814,7 +2090,8 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetServerResourcesBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetServerResourcesUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetServerResourcesResponse;
             import dev.plexapi.plexapi.models.operations.IncludeHttps;
             import dev.plexapi.plexapi.models.operations.IncludeIPv6;
@@ -2823,41 +2100,26 @@ actions:
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetServerResourcesBadRequest, GetServerResourcesUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetServerResourcesResponse res = sdk.plex().getServerResources()
-                            .clientID("gcgzw5rz2xovp84b4vha3a40")
-                            .includeHttps(IncludeHttps.ONE)
-                            .includeRelay(IncludeRelay.ONE)
-                            .includeIPv6(IncludeIPv6.ONE)
+                    GetServerResourcesResponse res = sdk.plex().getServerResources()
+                            .includeHttps(IncludeHttps.Enable)
+                            .includeRelay(IncludeRelay.Enable)
+                            .includeIPv6(IncludeIPv6.Enable)
                             .call();
 
-                        if (res.plexDevices().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetServerResourcesBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetServerResourcesUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.plexDevices().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/search"]["get"]
@@ -2869,44 +2131,31 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetSearchResultsBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetSearchResultsUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetSearchResultsResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetSearchResultsBadRequest, GetSearchResultsUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetSearchResultsResponse res = sdk.search().getSearchResults()
+                    GetSearchResultsResponse res = sdk.search().getSearchResults()
                             .query("110")
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetSearchResultsBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetSearchResultsUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/security/resources"]["get"]
@@ -2918,42 +2167,29 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetSourceConnectionInformationBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetSourceConnectionInformationUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetSourceConnectionInformationResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetSourceConnectionInformationBadRequest, GetSourceConnectionInformationUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetSourceConnectionInformationResponse res = sdk.authentication().getSourceConnectionInformation()
-                            .source("server://client-identifier")
+                    GetSourceConnectionInformationResponse res = sdk.authentication().getSourceConnectionInformation()
+                            .source("provider://provider-identifier")
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.GetSourceConnectionInformationBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetSourceConnectionInformationUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/security/token"]["get"]
@@ -2965,7 +2201,8 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetTransientTokenBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetTransientTokenUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetTransientTokenQueryParamType;
             import dev.plexapi.plexapi.models.operations.GetTransientTokenResponse;
             import dev.plexapi.plexapi.models.operations.Scope;
@@ -2973,37 +2210,23 @@ actions:
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetTransientTokenBadRequest, GetTransientTokenUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetTransientTokenResponse res = sdk.authentication().getTransientToken()
+                    GetTransientTokenResponse res = sdk.authentication().getTransientToken()
                             .type(GetTransientTokenQueryParamType.DELEGATION)
                             .scope(Scope.ALL)
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.GetTransientTokenBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetTransientTokenUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/servers"]["get"]
@@ -3015,43 +2238,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetServerListBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetServerListUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetServerListResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetServerListBadRequest, GetServerListUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetServerListResponse res = sdk.server().getServerList()
+                    GetServerListResponse res = sdk.server().getServerList()
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetServerListBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetServerListUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/statistics/bandwidth"]["get"]
@@ -3063,44 +2273,31 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetBandwidthStatisticsBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetBandwidthStatisticsUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetBandwidthStatisticsResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetBandwidthStatisticsBadRequest, GetBandwidthStatisticsUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetBandwidthStatisticsResponse res = sdk.statistics().getBandwidthStatistics()
+                    GetBandwidthStatisticsResponse res = sdk.statistics().getBandwidthStatistics()
                             .timespan(4L)
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetBandwidthStatisticsBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetBandwidthStatisticsUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/statistics/media"]["get"]
@@ -3112,44 +2309,31 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetStatisticsBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetStatisticsUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetStatisticsResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetStatisticsBadRequest, GetStatisticsUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetStatisticsResponse res = sdk.statistics().getStatistics()
+                    GetStatisticsResponse res = sdk.statistics().getStatistics()
                             .timespan(4L)
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetStatisticsBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetStatisticsUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/statistics/resources"]["get"]
@@ -3161,44 +2345,31 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetResourcesStatisticsBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetResourcesStatisticsUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetResourcesStatisticsResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetResourcesStatisticsBadRequest, GetResourcesStatisticsUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetResourcesStatisticsResponse res = sdk.statistics().getResourcesStatistics()
+                    GetResourcesStatisticsResponse res = sdk.statistics().getResourcesStatistics()
                             .timespan(4L)
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetResourcesStatisticsBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetResourcesStatisticsUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/status/sessions"]["get"]
@@ -3210,43 +2381,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetSessionsBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetSessionsUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetSessionsResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetSessionsBadRequest, GetSessionsUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetSessionsResponse res = sdk.sessions().getSessions()
+                    GetSessionsResponse res = sdk.sessions().getSessions()
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetSessionsBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetSessionsUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/status/sessions/history/all"]["get"]
@@ -3258,25 +2416,26 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetSessionHistoryBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetSessionHistoryUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetSessionHistoryResponse;
             import dev.plexapi.plexapi.models.operations.QueryParamFilter;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetSessionHistoryBadRequest, GetSessionHistoryUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetSessionHistoryResponse res = sdk.sessions().getSessionHistory()
+                    GetSessionHistoryResponse res = sdk.sessions().getSessionHistory()
                             .sort("<value>")
                             .accountId(1L)
                             .filter(QueryParamFilter.builder()
@@ -3284,23 +2443,9 @@ actions:
                             .librarySectionID(12L)
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetSessionHistoryBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetSessionHistoryUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/transcode/sessions"]["get"]
@@ -3312,43 +2457,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetTranscodeSessionsBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetTranscodeSessionsUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetTranscodeSessionsResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetTranscodeSessionsBadRequest, GetTranscodeSessionsUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetTranscodeSessionsResponse res = sdk.sessions().getTranscodeSessions()
+                    GetTranscodeSessionsResponse res = sdk.sessions().getTranscodeSessions()
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetTranscodeSessionsBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetTranscodeSessionsUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/transcode/sessions/{sessionKey}"]["delete"]
@@ -3360,42 +2492,29 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.StopTranscodeSessionBadRequest;
+            import dev.plexapi.plexapi.models.errors.StopTranscodeSessionUnauthorized;
             import dev.plexapi.plexapi.models.operations.StopTranscodeSessionResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws StopTranscodeSessionBadRequest, StopTranscodeSessionUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        StopTranscodeSessionResponse res = sdk.sessions().stopTranscodeSession()
+                    StopTranscodeSessionResponse res = sdk.sessions().stopTranscodeSession()
                             .sessionKey("zz7llzqlx8w9vnrsbnwhbmep")
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.StopTranscodeSessionBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.StopTranscodeSessionUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/updater/apply"]["put"]
@@ -3407,7 +2526,8 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.ApplyUpdatesBadRequest;
+            import dev.plexapi.plexapi.models.errors.ApplyUpdatesUnauthorized;
             import dev.plexapi.plexapi.models.operations.ApplyUpdatesResponse;
             import dev.plexapi.plexapi.models.operations.Skip;
             import dev.plexapi.plexapi.models.operations.Tonight;
@@ -3415,37 +2535,23 @@ actions:
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws ApplyUpdatesBadRequest, ApplyUpdatesUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        ApplyUpdatesResponse res = sdk.updater().applyUpdates()
+                    ApplyUpdatesResponse res = sdk.updater().applyUpdates()
                             .tonight(Tonight.ONE)
                             .skip(Skip.ONE)
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.ApplyUpdatesBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.ApplyUpdatesUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/updater/check"]["put"]
@@ -3457,43 +2563,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.CheckForUpdatesBadRequest;
+            import dev.plexapi.plexapi.models.errors.CheckForUpdatesUnauthorized;
             import dev.plexapi.plexapi.models.operations.CheckForUpdatesResponse;
             import dev.plexapi.plexapi.models.operations.Download;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws CheckForUpdatesBadRequest, CheckForUpdatesUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        CheckForUpdatesResponse res = sdk.updater().checkForUpdates()
+                    CheckForUpdatesResponse res = sdk.updater().checkForUpdates()
                             .download(Download.ONE)
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.CheckForUpdatesBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.CheckForUpdatesUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }
   - target: $["paths"]["/updater/status"]["get"]
@@ -3505,43 +2598,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetUpdateStatusBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetUpdateStatusUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetUpdateStatusResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetUpdateStatusBadRequest, GetUpdateStatusUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetUpdateStatusResponse res = sdk.updater().getUpdateStatus()
+                    GetUpdateStatusResponse res = sdk.updater().getUpdateStatus()
                             .call();
 
-                        if (res.object().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetUpdateStatusBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetUpdateStatusUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.object().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/user"]["get"]
@@ -3553,43 +2633,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.GetTokenDetailsBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetTokenDetailsUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetTokenDetailsResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws GetTokenDetailsBadRequest, GetTokenDetailsUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        GetTokenDetailsResponse res = sdk.authentication().getTokenDetails()
+                    GetTokenDetailsResponse res = sdk.authentication().getTokenDetails()
                             .call();
 
-                        if (res.userPlexAccount().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.GetTokenDetailsBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.GetTokenDetailsUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.userPlexAccount().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/users/signin"]["post"]
@@ -3601,49 +2668,37 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.PostUsersSignInDataBadRequest;
+            import dev.plexapi.plexapi.models.errors.PostUsersSignInDataUnauthorized;
             import dev.plexapi.plexapi.models.operations.PostUsersSignInDataRequestBody;
             import dev.plexapi.plexapi.models.operations.PostUsersSignInDataResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws PostUsersSignInDataBadRequest, PostUsersSignInDataUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
+                        .build();
+
+                    PostUsersSignInDataRequestBody req = PostUsersSignInDataRequestBody.builder()
+                            .login("username@email.com")
+                            .password("password123")
+                            .verificationCode("123456")
                             .build();
 
-                        PostUsersSignInDataResponse res = sdk.authentication().postUsersSignInData()
-                            .clientID("gcgzw5rz2xovp84b4vha3a40")
-                            .requestBody(PostUsersSignInDataRequestBody.builder()
-                                .login("username@email.com")
-                                .password("password123")
-                                .verificationCode("123456")
-                                .build())
+                    PostUsersSignInDataResponse res = sdk.authentication().postUsersSignInData()
+                            .request(req)
                             .call();
 
-                        if (res.userPlexAccount().isPresent()) {
-                            // handle response
-                        }
-                    } catch (dev.plexapi.plexapi.models.errors.PostUsersSignInDataBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.PostUsersSignInDataUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
+                    if (res.userPlexAccount().isPresent()) {
+                        // handle response
                     }
-
                 }
             }
   - target: $["paths"]["/video/:/transcode/universal/start.mpd"]["get"]
@@ -3655,25 +2710,26 @@ actions:
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.SDKError;
+            import dev.plexapi.plexapi.models.errors.StartUniversalTranscodeBadRequest;
+            import dev.plexapi.plexapi.models.errors.StartUniversalTranscodeUnauthorized;
             import dev.plexapi.plexapi.models.operations.StartUniversalTranscodeRequest;
             import dev.plexapi.plexapi.models.operations.StartUniversalTranscodeResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws Exception {
-                    try {
-                        PlexAPI sdk = PlexAPI.builder()
+                public static void main(String[] args) throws StartUniversalTranscodeBadRequest, StartUniversalTranscodeUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                             .clientID("gcgzw5rz2xovp84b4vha3a40")
                             .clientName("Plex Web")
                             .clientVersion("4.133.0")
                             .clientPlatform("Chrome")
                             .deviceName("Linux")
-                            .build();
+                        .build();
 
-                        StartUniversalTranscodeRequest req = StartUniversalTranscodeRequest.builder()
+                    StartUniversalTranscodeRequest req = StartUniversalTranscodeRequest.builder()
                             .hasMDE(1d)
                             .path("/library/metadata/23409")
                             .mediaIndex(0d)
@@ -3692,24 +2748,10 @@ actions:
                             .autoAdjustQuality(0d)
                             .build();
 
-                        StartUniversalTranscodeResponse res = sdk.video().startUniversalTranscode()
+                    StartUniversalTranscodeResponse res = sdk.video().startUniversalTranscode()
                             .request(req)
                             .call();
 
-                        // handle response
-                    } catch (dev.plexapi.plexapi.models.errors.StartUniversalTranscodeBadRequest e) {
-                        // handle exception
-                        throw e;
-                    } catch (dev.plexapi.plexapi.models.errors.StartUniversalTranscodeUnauthorized e) {
-                        // handle exception
-                        throw e;
-                    } catch (SDKError e) {
-                        // handle exception
-                        throw e;
-                    } catch (Exception e) {
-                        // handle exception
-                        throw e;
-                    }
-
+                    // handle response
                 }
             }

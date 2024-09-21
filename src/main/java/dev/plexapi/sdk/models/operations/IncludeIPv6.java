@@ -10,8 +10,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * IncludeIPv6 - Include IPv6 entries in the results
  */
 public enum IncludeIPv6 {
-    ZERO(0),
-    ONE(1);
+    Disable(0),
+    Enable(1);
 
     @JsonValue
     private final int value;

@@ -21,13 +21,13 @@ public class GetSessionHistoryRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public GetSessionHistoryRequestBuilder sort(java.lang.String sort) {
+    public GetSessionHistoryRequestBuilder sort(String sort) {
         Utils.checkNotNull(sort, "sort");
         this.sort = Optional.of(sort);
         return this;
     }
 
-    public GetSessionHistoryRequestBuilder sort(java.util.Optional<java.lang.String> sort) {
+    public GetSessionHistoryRequestBuilder sort(Optional<String> sort) {
         Utils.checkNotNull(sort, "sort");
         this.sort = sort;
         return this;
@@ -39,19 +39,19 @@ public class GetSessionHistoryRequestBuilder {
         return this;
     }
 
-    public GetSessionHistoryRequestBuilder accountId(java.util.Optional<java.lang.Long> accountId) {
+    public GetSessionHistoryRequestBuilder accountId(Optional<Long> accountId) {
         Utils.checkNotNull(accountId, "accountId");
         this.accountId = accountId;
         return this;
     }
                 
-    public GetSessionHistoryRequestBuilder filter(dev.plexapi.sdk.models.operations.QueryParamFilter filter) {
+    public GetSessionHistoryRequestBuilder filter(QueryParamFilter filter) {
         Utils.checkNotNull(filter, "filter");
         this.filter = Optional.of(filter);
         return this;
     }
 
-    public GetSessionHistoryRequestBuilder filter(java.util.Optional<? extends dev.plexapi.sdk.models.operations.QueryParamFilter> filter) {
+    public GetSessionHistoryRequestBuilder filter(Optional<? extends QueryParamFilter> filter) {
         Utils.checkNotNull(filter, "filter");
         this.filter = filter;
         return this;
@@ -63,7 +63,7 @@ public class GetSessionHistoryRequestBuilder {
         return this;
     }
 
-    public GetSessionHistoryRequestBuilder librarySectionID(java.util.Optional<java.lang.Long> librarySectionID) {
+    public GetSessionHistoryRequestBuilder librarySectionID(Optional<Long> librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
         this.librarySectionID = librarySectionID;
         return this;

@@ -17,13 +17,13 @@ public class GetTokenDetailsRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public GetTokenDetailsRequestBuilder serverURL(java.lang.String serverURL) {
+    public GetTokenDetailsRequestBuilder serverURL(String serverURL) {
         Utils.checkNotNull(serverURL, "serverURL");
         this.serverURL = Optional.of(serverURL);
         return this;
     }
 
-    public GetTokenDetailsRequestBuilder serverURL(java.util.Optional<java.lang.String> serverURL) {
+    public GetTokenDetailsRequestBuilder serverURL(Optional<String> serverURL) {
         Utils.checkNotNull(serverURL, "serverURL");
         this.serverURL = serverURL;
         return this;

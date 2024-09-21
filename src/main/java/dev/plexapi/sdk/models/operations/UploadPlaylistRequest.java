@@ -7,8 +7,11 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.SpeakeasyMetadata;
 import dev.plexapi.sdk.utils.Utils;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -38,14 +41,23 @@ public class UploadPlaylistRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=force")
     private QueryParamForce force;
 
+    /**
+     * Possibly the section ID to upload the playlist to, we are not certain.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=sectionID")
+    private long sectionID;
+
     @JsonCreator
     public UploadPlaylistRequest(
             String path,
-            QueryParamForce force) {
+            QueryParamForce force,
+            long sectionID) {
         Utils.checkNotNull(path, "path");
         Utils.checkNotNull(force, "force");
+        Utils.checkNotNull(sectionID, "sectionID");
         this.path = path;
         this.force = force;
+        this.sectionID = sectionID;
     }
 
     /**
@@ -72,6 +84,14 @@ public class UploadPlaylistRequest {
     @JsonIgnore
     public QueryParamForce force() {
         return force;
+    }
+
+    /**
+     * Possibly the section ID to upload the playlist to, we are not certain.
+     */
+    @JsonIgnore
+    public long sectionID() {
+        return sectionID;
     }
 
     public final static Builder builder() {
@@ -105,6 +125,15 @@ public class UploadPlaylistRequest {
         this.force = force;
         return this;
     }
+
+    /**
+     * Possibly the section ID to upload the playlist to, we are not certain.
+     */
+    public UploadPlaylistRequest withSectionID(long sectionID) {
+        Utils.checkNotNull(sectionID, "sectionID");
+        this.sectionID = sectionID;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -117,28 +146,33 @@ public class UploadPlaylistRequest {
         UploadPlaylistRequest other = (UploadPlaylistRequest) o;
         return 
             Objects.deepEquals(this.path, other.path) &&
-            Objects.deepEquals(this.force, other.force);
+            Objects.deepEquals(this.force, other.force) &&
+            Objects.deepEquals(this.sectionID, other.sectionID);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
             path,
-            force);
+            force,
+            sectionID);
     }
     
     @Override
     public String toString() {
         return Utils.toString(UploadPlaylistRequest.class,
                 "path", path,
-                "force", force);
+                "force", force,
+                "sectionID", sectionID);
     }
     
     public final static class Builder {
  
         private String path;
  
-        private QueryParamForce force;  
+        private QueryParamForce force;
+ 
+        private Long sectionID;  
         
         private Builder() {
           // force use of static builder() method
@@ -171,12 +205,30 @@ public class UploadPlaylistRequest {
             this.force = force;
             return this;
         }
+
+        /**
+         * Possibly the section ID to upload the playlist to, we are not certain.
+         */
+        public Builder sectionID(long sectionID) {
+            Utils.checkNotNull(sectionID, "sectionID");
+            this.sectionID = sectionID;
+            return this;
+        }
         
         public UploadPlaylistRequest build() {
-            return new UploadPlaylistRequest(
+            if (sectionID == null) {
+                sectionID = _SINGLETON_VALUE_SectionID.value();
+            }            return new UploadPlaylistRequest(
                 path,
-                force);
+                force,
+                sectionID);
         }
+
+        private static final LazySingletonValue<Long> _SINGLETON_VALUE_SectionID =
+                new LazySingletonValue<>(
+                        "sectionID",
+                        "1",
+                        new TypeReference<Long>() {});
     }
 }
 

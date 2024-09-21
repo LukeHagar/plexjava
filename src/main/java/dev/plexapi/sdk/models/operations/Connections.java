@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Double;
+import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -18,32 +18,53 @@ import java.util.Objects;
 
 public class Connections {
 
+    /**
+     * The protocol used for the connection (http, https, etc)
+     */
     @JsonProperty("protocol")
-    private String protocol;
+    private Protocol protocol;
 
+    /**
+     * The (ip) address or domain name used for the connection
+     */
     @JsonProperty("address")
     private String address;
 
+    /**
+     * The port used for the connection
+     */
     @JsonProperty("port")
-    private double port;
+    private int port;
 
+    /**
+     * The full URI of the connection
+     */
     @JsonProperty("uri")
     private String uri;
 
+    /**
+     * If the connection is local address
+     */
     @JsonProperty("local")
     private boolean local;
 
+    /**
+     * If the connection is relayed through plex.direct
+     */
     @JsonProperty("relay")
     private boolean relay;
 
+    /**
+     * If the connection is using IPv6
+     */
     @JsonProperty("IPv6")
     private boolean iPv6;
 
     @JsonCreator
     public Connections(
-            @JsonProperty("protocol") String protocol,
+            @JsonProperty("protocol") Protocol protocol,
             @JsonProperty("address") String address,
-            @JsonProperty("port") double port,
+            @JsonProperty("port") int port,
             @JsonProperty("uri") String uri,
             @JsonProperty("local") boolean local,
             @JsonProperty("relay") boolean relay,
@@ -64,36 +85,57 @@ public class Connections {
         this.iPv6 = iPv6;
     }
 
+    /**
+     * The protocol used for the connection (http, https, etc)
+     */
     @JsonIgnore
-    public String protocol() {
+    public Protocol protocol() {
         return protocol;
     }
 
+    /**
+     * The (ip) address or domain name used for the connection
+     */
     @JsonIgnore
     public String address() {
         return address;
     }
 
+    /**
+     * The port used for the connection
+     */
     @JsonIgnore
-    public double port() {
+    public int port() {
         return port;
     }
 
+    /**
+     * The full URI of the connection
+     */
     @JsonIgnore
     public String uri() {
         return uri;
     }
 
+    /**
+     * If the connection is local address
+     */
     @JsonIgnore
     public boolean local() {
         return local;
     }
 
+    /**
+     * If the connection is relayed through plex.direct
+     */
     @JsonIgnore
     public boolean relay() {
         return relay;
     }
 
+    /**
+     * If the connection is using IPv6
+     */
     @JsonIgnore
     public boolean iPv6() {
         return iPv6;
@@ -103,42 +145,63 @@ public class Connections {
         return new Builder();
     }
 
-    public Connections withProtocol(String protocol) {
+    /**
+     * The protocol used for the connection (http, https, etc)
+     */
+    public Connections withProtocol(Protocol protocol) {
         Utils.checkNotNull(protocol, "protocol");
         this.protocol = protocol;
         return this;
     }
 
+    /**
+     * The (ip) address or domain name used for the connection
+     */
     public Connections withAddress(String address) {
         Utils.checkNotNull(address, "address");
         this.address = address;
         return this;
     }
 
-    public Connections withPort(double port) {
+    /**
+     * The port used for the connection
+     */
+    public Connections withPort(int port) {
         Utils.checkNotNull(port, "port");
         this.port = port;
         return this;
     }
 
+    /**
+     * The full URI of the connection
+     */
     public Connections withUri(String uri) {
         Utils.checkNotNull(uri, "uri");
         this.uri = uri;
         return this;
     }
 
+    /**
+     * If the connection is local address
+     */
     public Connections withLocal(boolean local) {
         Utils.checkNotNull(local, "local");
         this.local = local;
         return this;
     }
 
+    /**
+     * If the connection is relayed through plex.direct
+     */
     public Connections withRelay(boolean relay) {
         Utils.checkNotNull(relay, "relay");
         this.relay = relay;
         return this;
     }
 
+    /**
+     * If the connection is using IPv6
+     */
     public Connections withIPv6(boolean iPv6) {
         Utils.checkNotNull(iPv6, "iPv6");
         this.iPv6 = iPv6;
@@ -190,11 +253,11 @@ public class Connections {
     
     public final static class Builder {
  
-        private String protocol;
+        private Protocol protocol;
  
         private String address;
  
-        private Double port;
+        private Integer port;
  
         private String uri;
  
@@ -208,42 +271,63 @@ public class Connections {
           // force use of static builder() method
         }
 
-        public Builder protocol(String protocol) {
+        /**
+         * The protocol used for the connection (http, https, etc)
+         */
+        public Builder protocol(Protocol protocol) {
             Utils.checkNotNull(protocol, "protocol");
             this.protocol = protocol;
             return this;
         }
 
+        /**
+         * The (ip) address or domain name used for the connection
+         */
         public Builder address(String address) {
             Utils.checkNotNull(address, "address");
             this.address = address;
             return this;
         }
 
-        public Builder port(double port) {
+        /**
+         * The port used for the connection
+         */
+        public Builder port(int port) {
             Utils.checkNotNull(port, "port");
             this.port = port;
             return this;
         }
 
+        /**
+         * The full URI of the connection
+         */
         public Builder uri(String uri) {
             Utils.checkNotNull(uri, "uri");
             this.uri = uri;
             return this;
         }
 
+        /**
+         * If the connection is local address
+         */
         public Builder local(boolean local) {
             Utils.checkNotNull(local, "local");
             this.local = local;
             return this;
         }
 
+        /**
+         * If the connection is relayed through plex.direct
+         */
         public Builder relay(boolean relay) {
             Utils.checkNotNull(relay, "relay");
             this.relay = relay;
             return this;
         }
 
+        /**
+         * If the connection is using IPv6
+         */
         public Builder iPv6(boolean iPv6) {
             Utils.checkNotNull(iPv6, "iPv6");
             this.iPv6 = iPv6;

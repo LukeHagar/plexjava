@@ -25,7 +25,7 @@ public class PerformSearchRequestBuilder {
         this.sdk = sdk;
     }
 
-    public PerformSearchRequestBuilder query(java.lang.String query) {
+    public PerformSearchRequestBuilder query(String query) {
         Utils.checkNotNull(query, "query");
         this.query = query;
         return this;
@@ -37,7 +37,7 @@ public class PerformSearchRequestBuilder {
         return this;
     }
 
-    public PerformSearchRequestBuilder sectionId(java.util.Optional<java.lang.Double> sectionId) {
+    public PerformSearchRequestBuilder sectionId(Optional<Double> sectionId) {
         Utils.checkNotNull(sectionId, "sectionId");
         this.sectionId = sectionId;
         return this;
@@ -49,7 +49,7 @@ public class PerformSearchRequestBuilder {
         return this;
     }
 
-    public PerformSearchRequestBuilder limit(java.util.Optional<java.lang.Double> limit) {
+    public PerformSearchRequestBuilder limit(Optional<Double> limit) {
         Utils.checkNotNull(limit, "limit");
         this.limit = limit;
         return this;

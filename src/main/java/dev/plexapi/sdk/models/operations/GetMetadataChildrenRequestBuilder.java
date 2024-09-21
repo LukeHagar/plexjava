@@ -25,13 +25,13 @@ public class GetMetadataChildrenRequestBuilder {
         return this;
     }
                 
-    public GetMetadataChildrenRequestBuilder includeElements(java.lang.String includeElements) {
+    public GetMetadataChildrenRequestBuilder includeElements(String includeElements) {
         Utils.checkNotNull(includeElements, "includeElements");
         this.includeElements = Optional.of(includeElements);
         return this;
     }
 
-    public GetMetadataChildrenRequestBuilder includeElements(java.util.Optional<java.lang.String> includeElements) {
+    public GetMetadataChildrenRequestBuilder includeElements(Optional<String> includeElements) {
         Utils.checkNotNull(includeElements, "includeElements");
         this.includeElements = includeElements;
         return this;

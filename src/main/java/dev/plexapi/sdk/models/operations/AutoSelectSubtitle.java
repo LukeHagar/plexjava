@@ -5,23 +5,22 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.String;
 
 /**
  * AutoSelectSubtitle - The auto-select subtitle mode (0 = Manually selected, 1 = Shown with foreign audio, 2 = Always enabled)
  */
 public enum AutoSelectSubtitle {
-    ZERO("0"),
-    ONE("1");
+    Disable(0),
+    Enable(1);
 
     @JsonValue
-    private final String value;
+    private final int value;
 
-    private AutoSelectSubtitle(String value) {
+    private AutoSelectSubtitle(int value) {
         this.value = value;
     }
     
-    public String value() {
+    public int value() {
         return value;
     }
 }

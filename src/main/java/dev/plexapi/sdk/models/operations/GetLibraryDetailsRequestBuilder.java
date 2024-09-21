@@ -29,13 +29,13 @@ public class GetLibraryDetailsRequestBuilder {
         return this;
     }
                 
-    public GetLibraryDetailsRequestBuilder includeDetails(dev.plexapi.sdk.models.operations.IncludeDetails includeDetails) {
+    public GetLibraryDetailsRequestBuilder includeDetails(IncludeDetails includeDetails) {
         Utils.checkNotNull(includeDetails, "includeDetails");
         this.includeDetails = Optional.of(includeDetails);
         return this;
     }
 
-    public GetLibraryDetailsRequestBuilder includeDetails(java.util.Optional<? extends dev.plexapi.sdk.models.operations.IncludeDetails> includeDetails) {
+    public GetLibraryDetailsRequestBuilder includeDetails(Optional<? extends IncludeDetails> includeDetails) {
         Utils.checkNotNull(includeDetails, "includeDetails");
         this.includeDetails = includeDetails;
         return this;

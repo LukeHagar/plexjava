@@ -19,7 +19,7 @@ public class GetFileHashRequestBuilder {
         this.sdk = sdk;
     }
 
-    public GetFileHashRequestBuilder url(java.lang.String url) {
+    public GetFileHashRequestBuilder url(String url) {
         Utils.checkNotNull(url, "url");
         this.url = url;
         return this;
@@ -31,7 +31,7 @@ public class GetFileHashRequestBuilder {
         return this;
     }
 
-    public GetFileHashRequestBuilder type(java.util.Optional<java.lang.Double> type) {
+    public GetFileHashRequestBuilder type(Optional<Double> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;

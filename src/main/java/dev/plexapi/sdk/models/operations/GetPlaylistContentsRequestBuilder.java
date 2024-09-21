@@ -23,7 +23,7 @@ public class GetPlaylistContentsRequestBuilder {
         return this;
     }
 
-    public GetPlaylistContentsRequestBuilder type(dev.plexapi.sdk.models.operations.GetPlaylistContentsQueryParamType type) {
+    public GetPlaylistContentsRequestBuilder type(GetPlaylistContentsQueryParamType type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;

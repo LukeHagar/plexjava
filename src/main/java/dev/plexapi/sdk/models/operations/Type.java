@@ -16,10 +16,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * 
  */
 public enum Type {
-    ONE(1L),
-    TWO(2L),
-    THREE(3L),
-    FOUR(4L);
+    Movie(1L),
+    Show(2L),
+    Season(3L),
+    Episode(4L);
 
     @JsonValue
     private final long value;

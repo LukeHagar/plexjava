@@ -134,7 +134,7 @@ public class Playlists implements
         HTTPRequest _req = new HTTPRequest(_url, "POST");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         _req.addQueryParams(Utils.getQueryParams(
                 CreatePlaylistRequest.class,
@@ -307,7 +307,7 @@ public class Playlists implements
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         _req.addQueryParams(Utils.getQueryParams(
                 GetPlaylistsRequest.class,
@@ -473,7 +473,7 @@ public class Playlists implements
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
@@ -632,7 +632,7 @@ public class Playlists implements
         HTTPRequest _req = new HTTPRequest(_url, "DELETE");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
@@ -799,7 +799,7 @@ public class Playlists implements
         HTTPRequest _req = new HTTPRequest(_url, "PUT");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         _req.addQueryParams(Utils.getQueryParams(
                 UpdatePlaylistRequest.class,
@@ -967,7 +967,7 @@ public class Playlists implements
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         _req.addQueryParams(Utils.getQueryParams(
                 GetPlaylistContentsRequest.class,
@@ -1131,7 +1131,7 @@ public class Playlists implements
         HTTPRequest _req = new HTTPRequest(_url, "DELETE");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
@@ -1303,7 +1303,7 @@ public class Playlists implements
         HTTPRequest _req = new HTTPRequest(_url, "PUT");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         _req.addQueryParams(Utils.getQueryParams(
                 AddPlaylistContentsRequest.class,
@@ -1456,17 +1456,20 @@ public class Playlists implements
     The `force` argument is used to disable overwriting.  
     If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.
 
+     * @param sectionID Possibly the section ID to upload the playlist to, we are not certain.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public UploadPlaylistResponse uploadPlaylist(
             String path,
-            QueryParamForce force) throws Exception {
+            QueryParamForce force,
+            long sectionID) throws Exception {
         UploadPlaylistRequest request =
             UploadPlaylistRequest
                 .builder()
                 .path(path)
                 .force(force)
+                .sectionID(sectionID)
                 .build();
         
         String _baseUrl = Utils.templateUrl(
@@ -1478,7 +1481,7 @@ public class Playlists implements
         HTTPRequest _req = new HTTPRequest(_url, "POST");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         _req.addQueryParams(Utils.getQueryParams(
                 UploadPlaylistRequest.class,

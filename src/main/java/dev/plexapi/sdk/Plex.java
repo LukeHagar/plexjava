@@ -163,7 +163,7 @@ public class Plex implements
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
@@ -324,7 +324,7 @@ public class Plex implements
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
@@ -485,7 +485,7 @@ public class Plex implements
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
@@ -629,7 +629,7 @@ public class Plex implements
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
@@ -767,16 +767,12 @@ public class Plex implements
      * @throws Exception if the API call fails
      */
     public GetServerResourcesResponse getServerResourcesDirect() throws Exception {
-        return getServerResources(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        return getServerResources(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
     
     /**
      * Get Server Resources
      * Get Plex server access tokens and server connections
-     * @param clientID The unique identifier for the client application
-    This is used to track the client application and its usage
-    (UUID, serial number, or other number unique per device)
-
      * @param includeHttps Include Https entries in the results
      * @param includeRelay Include Relay addresses in the results 
     E.g: https://10-0-0-25.bbf8e10c7fa20447cacee74cd9914cde.plex.direct:32400
@@ -787,7 +783,6 @@ public class Plex implements
      * @throws Exception if the API call fails
      */
     public GetServerResourcesResponse getServerResources(
-            Optional<String> clientID,
             Optional<? extends IncludeHttps> includeHttps,
             Optional<? extends IncludeRelay> includeRelay,
             Optional<? extends IncludeIPv6> includeIPv6,
@@ -795,7 +790,6 @@ public class Plex implements
         GetServerResourcesRequest request =
             GetServerResourcesRequest
                 .builder()
-                .clientID(clientID)
                 .includeHttps(includeHttps)
                 .includeRelay(includeRelay)
                 .includeIPv6(includeIPv6)
@@ -812,7 +806,7 @@ public class Plex implements
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         _req.addQueryParams(Utils.getQueryParams(
                 GetServerResourcesRequest.class,
@@ -982,7 +976,7 @@ public class Plex implements
         HTTPRequest _req = new HTTPRequest(_url, "POST");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
+                SDKConfiguration.USER_AGENT);
 
         _req.addQueryParams(Utils.getQueryParams(
                 GetPinRequest.class,
@@ -1108,29 +1102,23 @@ public class Plex implements
      */
     public GetTokenByPinIdResponse getTokenByPinId(
             long pinID) throws Exception {
-        return getTokenByPinId(Optional.empty(), pinID, Optional.empty());
+        return getTokenByPinId(pinID, Optional.empty());
     }
     
     /**
      * Get Access Token by PinId
      * Retrieve an Access Token from Plex.tv after the Pin has been authenticated
-     * @param clientID The unique identifier for the client application
-    This is used to track the client application and its usage
-    (UUID, serial number, or other number unique per device)
-
      * @param pinID The PinID to retrieve an access token for
      * @param serverURL Overrides the server URL.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetTokenByPinIdResponse getTokenByPinId(
-            Optional<String> clientID,
             long pinID,
             Optional<String> serverURL) throws Exception {
         GetTokenByPinIdRequest request =
             GetTokenByPinIdRequest
                 .builder()
-                .clientID(clientID)
                 .pinID(pinID)
                 .build();
         
@@ -1147,12 +1135,7 @@ public class Plex implements
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
-                this.sdkConfiguration.userAgent);
-
-        _req.addQueryParams(Utils.getQueryParams(
-                GetTokenByPinIdRequest.class,
-                request, 
-                this.sdkConfiguration.globals));
+                SDKConfiguration.USER_AGENT);
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 

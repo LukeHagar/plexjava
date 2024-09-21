@@ -37,7 +37,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'dev.plexapi:plexapi:0.3.6'
+implementation 'dev.plexapi:plexapi:0.4.0'
 ```
 
 Maven:
@@ -45,7 +45,7 @@ Maven:
 <dependency>
     <groupId>dev.plexapi</groupId>
     <artifactId>plexapi</artifactId>
-    <version>0.3.6</version>
+    <version>0.4.0</version>
 </dependency>
 ```
 
@@ -73,43 +73,30 @@ gradlew.bat publishToMavenLocal -Pskip.signing
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest;
+import dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized;
 import dev.plexapi.sdk.models.operations.GetServerCapabilitiesResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetServerCapabilitiesBadRequest, GetServerCapabilitiesUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
+        GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -252,7 +239,7 @@ public class Application {
 
 Certain parameters are configured globally. These parameters may be set on the SDK client instance itself during initialization. When configured as an option during SDK initialization, These global values will be used as defaults on the operations that use them. When such operations are called, there is a place in each to override the global value, if needed.
 
-For example, you can set `ClientID` to `"gcgzw5rz2xovp84b4vha3a40"` at SDK initialization and then you do not have to pass the same value on calls to operations like `getServerResources`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
+For example, you can set `ClientID` to `"gcgzw5rz2xovp84b4vha3a40"` at SDK initialization and then you do not have to pass the same value on calls to operations like `getPin`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
 
 
 ### Available Globals
@@ -277,50 +264,33 @@ This is used to track the client application and its usage
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
-import dev.plexapi.sdk.models.operations.GetServerResourcesResponse;
-import dev.plexapi.sdk.models.operations.IncludeHttps;
-import dev.plexapi.sdk.models.operations.IncludeIPv6;
-import dev.plexapi.sdk.models.operations.IncludeRelay;
+import dev.plexapi.sdk.models.errors.GetPinBadRequest;
+import dev.plexapi.sdk.models.operations.GetPinRequest;
+import dev.plexapi.sdk.models.operations.GetPinResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+    public static void main(String[] args) throws GetPinBadRequest, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
+            .build();
+
+        GetPinRequest req = GetPinRequest.builder()
                 .build();
 
-            GetServerResourcesResponse res = sdk.plex().getServerResources()
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .includeHttps(IncludeHttps.ONE)
-                .includeRelay(IncludeRelay.ONE)
-                .includeIPv6(IncludeIPv6.ONE)
+        GetPinResponse res = sdk.plex().getPin()
+                .request(req)
                 .call();
 
-            if (res.plexDevices().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetServerResourcesBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetServerResourcesUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.authPinContainer().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -343,43 +313,30 @@ Handling errors in this SDK should largely match your expectations.  All operati
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest;
+import dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized;
 import dev.plexapi.sdk.models.operations.GetServerCapabilitiesResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetServerCapabilitiesBadRequest, GetServerCapabilitiesUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
+        GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -402,15 +359,16 @@ You can override the default server globally by passing a server index to the `s
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest;
+import dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized;
 import dev.plexapi.sdk.models.operations.GetServerCapabilitiesResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetServerCapabilitiesBadRequest, GetServerCapabilitiesUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .serverIndex(0)
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
@@ -418,28 +376,14 @@ public class Application {
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
+        GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -458,15 +402,16 @@ The default server can also be overridden globally by passing a URL to the `serv
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest;
+import dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized;
 import dev.plexapi.sdk.models.operations.GetServerCapabilitiesResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetServerCapabilitiesBadRequest, GetServerCapabilitiesUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .serverURL("{protocol}://{ip}:{port}")
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
@@ -474,28 +419,14 @@ public class Application {
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
+        GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -507,44 +438,31 @@ The server URL can also be overridden on a per-operation basis, provided a serve
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetCompanionsDataBadRequest;
+import dev.plexapi.sdk.models.errors.GetCompanionsDataUnauthorized;
 import dev.plexapi.sdk.models.operations.GetCompanionsDataResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetCompanionsDataBadRequest, GetCompanionsDataUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetCompanionsDataResponse res = sdk.plex().getCompanionsData()
+        GetCompanionsDataResponse res = sdk.plex().getCompanionsData()
                 .serverURL("https://plex.tv/api/v2/")
                 .call();
 
-            if (res.responseBodies().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetCompanionsDataBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetCompanionsDataUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.responseBodies().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```
@@ -566,43 +484,30 @@ To authenticate with the API the `accessToken` parameter must be set when initia
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest;
+import dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized;
 import dev.plexapi.sdk.models.operations.GetServerCapabilitiesResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetServerCapabilitiesBadRequest, GetServerCapabilitiesUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
+        GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
                 .call();
 
-            if (res.object().isPresent()) {
-                // handle response
-            }
-        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
+        if (res.object().isPresent()) {
+            // handle response
         }
-
     }
 }
 ```

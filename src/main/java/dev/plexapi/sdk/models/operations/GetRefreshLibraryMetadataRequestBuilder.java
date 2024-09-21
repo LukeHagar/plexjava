@@ -24,13 +24,13 @@ public class GetRefreshLibraryMetadataRequestBuilder {
         return this;
     }
                 
-    public GetRefreshLibraryMetadataRequestBuilder force(dev.plexapi.sdk.models.operations.Force force) {
+    public GetRefreshLibraryMetadataRequestBuilder force(Force force) {
         Utils.checkNotNull(force, "force");
         this.force = Optional.of(force);
         return this;
     }
 
-    public GetRefreshLibraryMetadataRequestBuilder force(java.util.Optional<? extends dev.plexapi.sdk.models.operations.Force> force) {
+    public GetRefreshLibraryMetadataRequestBuilder force(Optional<? extends Force> force) {
         Utils.checkNotNull(force, "force");
         this.force = force;
         return this;

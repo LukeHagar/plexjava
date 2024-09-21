@@ -15,7 +15,7 @@ public class StartTaskRequestBuilder {
         this.sdk = sdk;
     }
 
-    public StartTaskRequestBuilder taskName(dev.plexapi.sdk.models.operations.TaskName taskName) {
+    public StartTaskRequestBuilder taskName(TaskName taskName) {
         Utils.checkNotNull(taskName, "taskName");
         this.taskName = taskName;
         return this;

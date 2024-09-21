@@ -5,23 +5,22 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.String;
 
 /**
- * DefaultSubtitleAccessibility - The subtitles for the deaf or hard-of-hearing (SDH) searches mode (0 = Prefer non-SDH subtitles, 1 = Prefer SDH subtitles, 2 = Only show SDH subtitles, 3 = Only shown non-SDH subtitles)
+ * DefaultSubtitleAccessibility - The subtitles for the deaf or hard-of-hearing (SDH) searches mode (0 = Prefer non-SDH subtitles, 1 = Prefer SDH subtitles, 2 = Only show SDH subtitles, 3 = Only show non-SDH subtitles)
  */
 public enum DefaultSubtitleAccessibility {
-    ZERO("0"),
-    ONE("1");
+    Disable(0),
+    Enable(1);
 
     @JsonValue
-    private final String value;
+    private final int value;
 
-    private DefaultSubtitleAccessibility(String value) {
+    private DefaultSubtitleAccessibility(int value) {
         this.value = value;
     }
     
-    public String value() {
+    public int value() {
         return value;
     }
 }

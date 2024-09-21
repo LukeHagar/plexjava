@@ -26,25 +26,25 @@ public class UpdatePlaylistRequestBuilder {
         return this;
     }
                 
-    public UpdatePlaylistRequestBuilder title(java.lang.String title) {
+    public UpdatePlaylistRequestBuilder title(String title) {
         Utils.checkNotNull(title, "title");
         this.title = Optional.of(title);
         return this;
     }
 
-    public UpdatePlaylistRequestBuilder title(java.util.Optional<java.lang.String> title) {
+    public UpdatePlaylistRequestBuilder title(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
         return this;
     }
                 
-    public UpdatePlaylistRequestBuilder summary(java.lang.String summary) {
+    public UpdatePlaylistRequestBuilder summary(String summary) {
         Utils.checkNotNull(summary, "summary");
         this.summary = Optional.of(summary);
         return this;
     }
 
-    public UpdatePlaylistRequestBuilder summary(java.util.Optional<java.lang.String> summary) {
+    public UpdatePlaylistRequestBuilder summary(Optional<String> summary) {
         Utils.checkNotNull(summary, "summary");
         this.summary = summary;
         return this;

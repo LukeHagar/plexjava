@@ -21,7 +21,8 @@ Get the timeline for a media item
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.GetTimelineBadRequest;
+import dev.plexapi.sdk.models.errors.GetTimelineUnauthorized;
 import dev.plexapi.sdk.models.operations.GetTimelineRequest;
 import dev.plexapi.sdk.models.operations.GetTimelineResponse;
 import dev.plexapi.sdk.models.operations.State;
@@ -29,18 +30,18 @@ import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws GetTimelineBadRequest, GetTimelineUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            GetTimelineRequest req = GetTimelineRequest.builder()
+        GetTimelineRequest req = GetTimelineRequest.builder()
                 .ratingKey(23409d)
                 .key("/library/metadata/23409")
                 .state(State.PLAYING)
@@ -53,25 +54,11 @@ public class Application {
                 .row(1d)
                 .build();
 
-            GetTimelineResponse res = sdk.video().getTimeline()
+        GetTimelineResponse res = sdk.video().getTimeline()
                 .request(req)
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.GetTimelineBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.GetTimelineUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```
@@ -105,25 +92,26 @@ Begin a Universal Transcode Session
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.StartUniversalTranscodeBadRequest;
+import dev.plexapi.sdk.models.errors.StartUniversalTranscodeUnauthorized;
 import dev.plexapi.sdk.models.operations.StartUniversalTranscodeRequest;
 import dev.plexapi.sdk.models.operations.StartUniversalTranscodeResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws StartUniversalTranscodeBadRequest, StartUniversalTranscodeUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            StartUniversalTranscodeRequest req = StartUniversalTranscodeRequest.builder()
+        StartUniversalTranscodeRequest req = StartUniversalTranscodeRequest.builder()
                 .hasMDE(1d)
                 .path("/library/metadata/23409")
                 .mediaIndex(0d)
@@ -142,25 +130,11 @@ public class Application {
                 .autoAdjustQuality(0d)
                 .build();
 
-            StartUniversalTranscodeResponse res = sdk.video().startUniversalTranscode()
+        StartUniversalTranscodeResponse res = sdk.video().startUniversalTranscode()
                 .request(req)
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.StartUniversalTranscodeBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.StartUniversalTranscodeUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```

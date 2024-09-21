@@ -15,7 +15,7 @@ public class StopTaskRequestBuilder {
         this.sdk = sdk;
     }
 
-    public StopTaskRequestBuilder taskName(dev.plexapi.sdk.models.operations.PathParamTaskName taskName) {
+    public StopTaskRequestBuilder taskName(PathParamTaskName taskName) {
         Utils.checkNotNull(taskName, "taskName");
         this.taskName = taskName;
         return this;

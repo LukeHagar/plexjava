@@ -18,7 +18,7 @@ public class GetTopWatchedContentRequestBuilder {
         this.sdk = sdk;
     }
 
-    public GetTopWatchedContentRequestBuilder type(dev.plexapi.sdk.models.operations.GetTopWatchedContentQueryParamType type) {
+    public GetTopWatchedContentRequestBuilder type(GetTopWatchedContentQueryParamType type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -30,7 +30,7 @@ public class GetTopWatchedContentRequestBuilder {
         return this;
     }
 
-    public GetTopWatchedContentRequestBuilder includeGuids(java.util.Optional<java.lang.Long> includeGuids) {
+    public GetTopWatchedContentRequestBuilder includeGuids(Optional<Long> includeGuids) {
         Utils.checkNotNull(includeGuids, "includeGuids");
         this.includeGuids = includeGuids;
         return this;

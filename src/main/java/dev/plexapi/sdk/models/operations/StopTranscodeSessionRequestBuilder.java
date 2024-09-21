@@ -16,7 +16,7 @@ public class StopTranscodeSessionRequestBuilder {
         this.sdk = sdk;
     }
 
-    public StopTranscodeSessionRequestBuilder sessionKey(java.lang.String sessionKey) {
+    public StopTranscodeSessionRequestBuilder sessionKey(String sessionKey) {
         Utils.checkNotNull(sessionKey, "sessionKey");
         this.sessionKey = sessionKey;
         return this;

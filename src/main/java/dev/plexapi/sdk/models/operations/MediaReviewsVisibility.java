@@ -6,18 +6,21 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
+/**
+ * MediaReviewsVisibility - Whether or not the account has media reviews visibility enabled
+ */
 public enum MediaReviewsVisibility {
-    ZERO(0L),
-    ONE(1L);
+    Disable(0),
+    Enable(1);
 
     @JsonValue
-    private final long value;
+    private final int value;
 
-    private MediaReviewsVisibility(long value) {
+    private MediaReviewsVisibility(int value) {
         this.value = value;
     }
     
-    public long value() {
+    public int value() {
         return value;
     }
 }

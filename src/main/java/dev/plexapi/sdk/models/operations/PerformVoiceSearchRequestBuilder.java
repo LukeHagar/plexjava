@@ -25,7 +25,7 @@ public class PerformVoiceSearchRequestBuilder {
         this.sdk = sdk;
     }
 
-    public PerformVoiceSearchRequestBuilder query(java.lang.String query) {
+    public PerformVoiceSearchRequestBuilder query(String query) {
         Utils.checkNotNull(query, "query");
         this.query = query;
         return this;
@@ -37,7 +37,7 @@ public class PerformVoiceSearchRequestBuilder {
         return this;
     }
 
-    public PerformVoiceSearchRequestBuilder sectionId(java.util.Optional<java.lang.Double> sectionId) {
+    public PerformVoiceSearchRequestBuilder sectionId(Optional<Double> sectionId) {
         Utils.checkNotNull(sectionId, "sectionId");
         this.sectionId = sectionId;
         return this;
@@ -49,7 +49,7 @@ public class PerformVoiceSearchRequestBuilder {
         return this;
     }
 
-    public PerformVoiceSearchRequestBuilder limit(java.util.Optional<java.lang.Double> limit) {
+    public PerformVoiceSearchRequestBuilder limit(Optional<Double> limit) {
         Utils.checkNotNull(limit, "limit");
         this.limit = limit;
         return this;

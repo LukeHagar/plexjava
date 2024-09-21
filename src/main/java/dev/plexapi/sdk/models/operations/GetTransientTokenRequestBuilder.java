@@ -16,13 +16,13 @@ public class GetTransientTokenRequestBuilder {
         this.sdk = sdk;
     }
 
-    public GetTransientTokenRequestBuilder type(dev.plexapi.sdk.models.operations.GetTransientTokenQueryParamType type) {
+    public GetTransientTokenRequestBuilder type(GetTransientTokenQueryParamType type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
     }
 
-    public GetTransientTokenRequestBuilder scope(dev.plexapi.sdk.models.operations.Scope scope) {
+    public GetTransientTokenRequestBuilder scope(Scope scope) {
         Utils.checkNotNull(scope, "scope");
         this.scope = scope;
         return this;

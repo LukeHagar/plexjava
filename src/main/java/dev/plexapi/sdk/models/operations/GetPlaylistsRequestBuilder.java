@@ -17,25 +17,25 @@ public class GetPlaylistsRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public GetPlaylistsRequestBuilder playlistType(dev.plexapi.sdk.models.operations.PlaylistType playlistType) {
+    public GetPlaylistsRequestBuilder playlistType(PlaylistType playlistType) {
         Utils.checkNotNull(playlistType, "playlistType");
         this.playlistType = Optional.of(playlistType);
         return this;
     }
 
-    public GetPlaylistsRequestBuilder playlistType(java.util.Optional<? extends dev.plexapi.sdk.models.operations.PlaylistType> playlistType) {
+    public GetPlaylistsRequestBuilder playlistType(Optional<? extends PlaylistType> playlistType) {
         Utils.checkNotNull(playlistType, "playlistType");
         this.playlistType = playlistType;
         return this;
     }
                 
-    public GetPlaylistsRequestBuilder smart(dev.plexapi.sdk.models.operations.QueryParamSmart smart) {
+    public GetPlaylistsRequestBuilder smart(QueryParamSmart smart) {
         Utils.checkNotNull(smart, "smart");
         this.smart = Optional.of(smart);
         return this;
     }
 
-    public GetPlaylistsRequestBuilder smart(java.util.Optional<? extends dev.plexapi.sdk.models.operations.QueryParamSmart> smart) {
+    public GetPlaylistsRequestBuilder smart(Optional<? extends QueryParamSmart> smart) {
         Utils.checkNotNull(smart, "smart");
         this.smart = smart;
         return this;

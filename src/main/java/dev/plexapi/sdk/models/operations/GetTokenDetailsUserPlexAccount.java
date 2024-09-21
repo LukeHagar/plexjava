@@ -159,7 +159,7 @@ public class GetTokenDetailsUserPlexAccount {
     private int id;
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
     @JsonProperty("joinedAt")
     private long joinedAt;
@@ -210,7 +210,7 @@ public class GetTokenDetailsUserPlexAccount {
     private Optional<Boolean> protected_;
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
     @JsonProperty("rememberExpiresAt")
     private long rememberExpiresAt;
@@ -586,7 +586,7 @@ public class GetTokenDetailsUserPlexAccount {
     }
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
     @JsonIgnore
     public long joinedAt() {
@@ -649,7 +649,7 @@ public class GetTokenDetailsUserPlexAccount {
     }
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
     @JsonIgnore
     public long rememberExpiresAt() {
@@ -1031,7 +1031,7 @@ public class GetTokenDetailsUserPlexAccount {
     }
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
     public GetTokenDetailsUserPlexAccount withJoinedAt(long joinedAt) {
         Utils.checkNotNull(joinedAt, "joinedAt");
@@ -1140,7 +1140,7 @@ public class GetTokenDetailsUserPlexAccount {
     }
 
     /**
-     * Unix epoch datetime
+     * Unix epoch datetime in seconds
      */
     public GetTokenDetailsUserPlexAccount withRememberExpiresAt(long rememberExpiresAt) {
         Utils.checkNotNull(rememberExpiresAt, "rememberExpiresAt");
@@ -1795,7 +1795,7 @@ public class GetTokenDetailsUserPlexAccount {
         }
 
         /**
-         * Unix epoch datetime
+         * Unix epoch datetime in seconds
          */
         public Builder joinedAt(long joinedAt) {
             Utils.checkNotNull(joinedAt, "joinedAt");
@@ -1904,7 +1904,7 @@ public class GetTokenDetailsUserPlexAccount {
         }
 
         /**
-         * Unix epoch datetime
+         * Unix epoch datetime in seconds
          */
         public Builder rememberExpiresAt(long rememberExpiresAt) {
             Utils.checkNotNull(rememberExpiresAt, "rememberExpiresAt");

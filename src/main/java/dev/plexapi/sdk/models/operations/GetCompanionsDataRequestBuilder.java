@@ -17,13 +17,13 @@ public class GetCompanionsDataRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public GetCompanionsDataRequestBuilder serverURL(java.lang.String serverURL) {
+    public GetCompanionsDataRequestBuilder serverURL(String serverURL) {
         Utils.checkNotNull(serverURL, "serverURL");
         this.serverURL = Optional.of(serverURL);
         return this;
     }
 
-    public GetCompanionsDataRequestBuilder serverURL(java.util.Optional<java.lang.String> serverURL) {
+    public GetCompanionsDataRequestBuilder serverURL(Optional<String> serverURL) {
         Utils.checkNotNull(serverURL, "serverURL");
         this.serverURL = serverURL;
         return this;

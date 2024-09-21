@@ -15,7 +15,7 @@ public class StartUniversalTranscodeRequestBuilder {
         this.sdk = sdk;
     }
 
-    public StartUniversalTranscodeRequestBuilder request(dev.plexapi.sdk.models.operations.StartUniversalTranscodeRequest request) {
+    public StartUniversalTranscodeRequestBuilder request(StartUniversalTranscodeRequest request) {
         Utils.checkNotNull(request, "request");
         this.request = request;
         return this;

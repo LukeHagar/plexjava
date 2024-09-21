@@ -16,7 +16,7 @@ public class LogMultiLineRequestBuilder {
         this.sdk = sdk;
     }
 
-    public LogMultiLineRequestBuilder request(java.lang.String request) {
+    public LogMultiLineRequestBuilder request(String request) {
         Utils.checkNotNull(request, "request");
         this.request = request;
         return this;

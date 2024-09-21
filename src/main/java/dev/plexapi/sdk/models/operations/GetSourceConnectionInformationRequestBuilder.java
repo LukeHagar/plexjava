@@ -16,7 +16,7 @@ public class GetSourceConnectionInformationRequestBuilder {
         this.sdk = sdk;
     }
 
-    public GetSourceConnectionInformationRequestBuilder source(java.lang.String source) {
+    public GetSourceConnectionInformationRequestBuilder source(String source) {
         Utils.checkNotNull(source, "source");
         this.source = source;
         return this;

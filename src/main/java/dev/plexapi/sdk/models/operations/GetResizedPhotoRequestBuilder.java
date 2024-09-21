@@ -15,7 +15,7 @@ public class GetResizedPhotoRequestBuilder {
         this.sdk = sdk;
     }
 
-    public GetResizedPhotoRequestBuilder request(dev.plexapi.sdk.models.operations.GetResizedPhotoRequest request) {
+    public GetResizedPhotoRequestBuilder request(GetResizedPhotoRequest request) {
         Utils.checkNotNull(request, "request");
         this.request = request;
         return this;

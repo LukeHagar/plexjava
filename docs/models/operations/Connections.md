@@ -3,12 +3,12 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `protocol`         | *String*           | :heavy_check_mark: | N/A                |
-| `address`          | *String*           | :heavy_check_mark: | N/A                |
-| `port`             | *double*           | :heavy_check_mark: | N/A                |
-| `uri`              | *String*           | :heavy_check_mark: | N/A                |
-| `local`            | *boolean*          | :heavy_check_mark: | N/A                |
-| `relay`            | *boolean*          | :heavy_check_mark: | N/A                |
-| `iPv6`             | *boolean*          | :heavy_check_mark: | N/A                |
+| Field                                                   | Type                                                    | Required                                                | Description                                             |
+| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| `protocol`                                              | [Protocol](../../models/operations/Protocol.md)         | :heavy_check_mark:                                      | The protocol used for the connection (http, https, etc) |
+| `address`                                               | *String*                                                | :heavy_check_mark:                                      | The (ip) address or domain name used for the connection |
+| `port`                                                  | *int*                                                   | :heavy_check_mark:                                      | The port used for the connection                        |
+| `uri`                                                   | *String*                                                | :heavy_check_mark:                                      | The full URI of the connection                          |
+| `local`                                                 | *boolean*                                               | :heavy_check_mark:                                      | If the connection is local address                      |
+| `relay`                                                 | *boolean*                                               | :heavy_check_mark:                                      | If the connection is relayed through plex.direct        |
+| `iPv6`                                                  | *boolean*                                               | :heavy_check_mark:                                      | If the connection is using IPv6                         |

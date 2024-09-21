@@ -23,45 +23,32 @@ This endpoint will write a single-line log message, including a level and source
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.LogLineBadRequest;
+import dev.plexapi.sdk.models.errors.LogLineUnauthorized;
 import dev.plexapi.sdk.models.operations.Level;
 import dev.plexapi.sdk.models.operations.LogLineResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws LogLineBadRequest, LogLineUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            LogLineResponse res = sdk.log().logLine()
+        LogLineResponse res = sdk.log().logLine()
                 .level(Level.THREE)
                 .message("Test log message")
                 .source("Postman")
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.LogLineBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.LogLineUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```
@@ -118,46 +105,33 @@ Ensure each parameter is properly URL-encoded to avoid interpretation issues.
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.LogMultiLineBadRequest;
+import dev.plexapi.sdk.models.errors.LogMultiLineUnauthorized;
 import dev.plexapi.sdk.models.operations.LogMultiLineResponse;
 import java.lang.Exception;
 import java.lang.String;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws LogMultiLineBadRequest, LogMultiLineUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            String req = "level=4&message=Test%20message%201&source=postman\nlevel=3&message=Test%20message%202&source=postman
+        String req = "level=4&message=Test%20message%201&source=postman\nlevel=3&message=Test%20message%202&source=postman
             level=1&message=Test%20message%203&source=postman";
 
-            LogMultiLineResponse res = sdk.log().logMultiLine()
+        LogMultiLineResponse res = sdk.log().logMultiLine()
                 .request(req)
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.LogMultiLineBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.LogMultiLineUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```
@@ -192,41 +166,28 @@ This endpoint will enable all Plex Media Serverlogs to be sent to the Papertrail
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.SDKError;
+import dev.plexapi.sdk.models.errors.EnablePaperTrailBadRequest;
+import dev.plexapi.sdk.models.errors.EnablePaperTrailUnauthorized;
 import dev.plexapi.sdk.models.operations.EnablePaperTrailResponse;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        try {
-            PlexAPI sdk = PlexAPI.builder()
+    public static void main(String[] args) throws EnablePaperTrailBadRequest, EnablePaperTrailUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
                 .clientPlatform("Chrome")
                 .deviceName("Linux")
-                .build();
+            .build();
 
-            EnablePaperTrailResponse res = sdk.log().enablePaperTrail()
+        EnablePaperTrailResponse res = sdk.log().enablePaperTrail()
                 .call();
 
-            // handle response
-        } catch (dev.plexapi.sdk.models.errors.EnablePaperTrailBadRequest e) {
-            // handle exception
-            throw e;
-        } catch (dev.plexapi.sdk.models.errors.EnablePaperTrailUnauthorized e) {
-            // handle exception
-            throw e;
-        } catch (SDKError e) {
-            // handle exception
-            throw e;
-        } catch (Exception e) {
-            // handle exception
-            throw e;
-        }
-
+        // handle response
     }
 }
 ```

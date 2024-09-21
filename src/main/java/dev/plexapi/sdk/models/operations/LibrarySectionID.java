@@ -13,6 +13,7 @@ import dev.plexapi.sdk.utils.TypedObject;
 import dev.plexapi.sdk.utils.Utils.JsonShape;
 import dev.plexapi.sdk.utils.Utils.TypeReferenceWithShape;
 import dev.plexapi.sdk.utils.Utils;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -83,8 +84,8 @@ public class LibrarySectionID {
 
         public _Deserializer() {
             super(LibrarySectionID.class, false,
-                  TypeReferenceWithShape.of(new TypeReference<java.lang.String>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<java.lang.Long>() {}, JsonShape.DEFAULT));
+                  TypeReferenceWithShape.of(new TypeReference<String>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<Long>() {}, JsonShape.DEFAULT));
         }
     }
     

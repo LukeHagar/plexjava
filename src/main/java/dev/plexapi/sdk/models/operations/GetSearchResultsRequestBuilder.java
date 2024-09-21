@@ -16,7 +16,7 @@ public class GetSearchResultsRequestBuilder {
         this.sdk = sdk;
     }
 
-    public GetSearchResultsRequestBuilder query(java.lang.String query) {
+    public GetSearchResultsRequestBuilder query(String query) {
         Utils.checkNotNull(query, "query");
         this.query = query;
         return this;

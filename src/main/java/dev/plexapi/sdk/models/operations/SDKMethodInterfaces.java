@@ -5,6 +5,7 @@
 package dev.plexapi.sdk.models.operations;
 
 import java.lang.Double;
+import java.lang.Exception;
 import java.lang.Integer;
 import java.lang.Long;
 import java.lang.String;
@@ -14,66 +15,66 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetServerCapabilities {
-        dev.plexapi.sdk.models.operations.GetServerCapabilitiesResponse getServerCapabilitiesDirect() throws Exception;
+        GetServerCapabilitiesResponse getServerCapabilitiesDirect() throws Exception;
     }
 
 
     public interface MethodCallGetServerPreferences {
-        dev.plexapi.sdk.models.operations.GetServerPreferencesResponse getServerPreferencesDirect() throws Exception;
+        GetServerPreferencesResponse getServerPreferencesDirect() throws Exception;
     }
 
 
     public interface MethodCallGetAvailableClients {
-        dev.plexapi.sdk.models.operations.GetAvailableClientsResponse getAvailableClientsDirect() throws Exception;
+        GetAvailableClientsResponse getAvailableClientsDirect() throws Exception;
     }
 
 
     public interface MethodCallGetDevices {
-        dev.plexapi.sdk.models.operations.GetDevicesResponse getDevicesDirect() throws Exception;
+        GetDevicesResponse getDevicesDirect() throws Exception;
     }
 
 
     public interface MethodCallGetServerIdentity {
-        dev.plexapi.sdk.models.operations.GetServerIdentityResponse getServerIdentityDirect() throws Exception;
+        GetServerIdentityResponse getServerIdentityDirect() throws Exception;
     }
 
 
     public interface MethodCallGetMyPlexAccount {
-        dev.plexapi.sdk.models.operations.GetMyPlexAccountResponse getMyPlexAccountDirect() throws Exception;
+        GetMyPlexAccountResponse getMyPlexAccountDirect() throws Exception;
     }
 
 
     public interface MethodCallGetResizedPhoto {
-        dev.plexapi.sdk.models.operations.GetResizedPhotoResponse getResizedPhoto(
+        GetResizedPhotoResponse getResizedPhoto(
             GetResizedPhotoRequest request) throws Exception;
     }
 
 
     public interface MethodCallGetMediaProviders {
-        dev.plexapi.sdk.models.operations.GetMediaProvidersResponse getMediaProviders(
+        GetMediaProvidersResponse getMediaProviders(
             String xPlexToken) throws Exception;
     }
 
 
     public interface MethodCallGetServerList {
-        dev.plexapi.sdk.models.operations.GetServerListResponse getServerListDirect() throws Exception;
+        GetServerListResponse getServerListDirect() throws Exception;
     }
 
 
     public interface MethodCallMarkPlayed {
-        dev.plexapi.sdk.models.operations.MarkPlayedResponse markPlayed(
+        MarkPlayedResponse markPlayed(
             double key) throws Exception;
     }
 
 
     public interface MethodCallMarkUnplayed {
-        dev.plexapi.sdk.models.operations.MarkUnplayedResponse markUnplayed(
+        MarkUnplayedResponse markUnplayed(
             double key) throws Exception;
     }
 
 
     public interface MethodCallUpdatePlayProgress {
-        dev.plexapi.sdk.models.operations.UpdatePlayProgressResponse updatePlayProgress(
+        UpdatePlayProgressResponse updatePlayProgress(
             String key,
             double time,
             String state) throws Exception;
@@ -81,93 +82,92 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetBannerImage {
-        dev.plexapi.sdk.models.operations.GetBannerImageResponse getBannerImage(
+        GetBannerImageResponse getBannerImage(
             GetBannerImageRequest request) throws Exception;
     }
 
 
     public interface MethodCallGetThumbImage {
-        dev.plexapi.sdk.models.operations.GetThumbImageResponse getThumbImage(
+        GetThumbImageResponse getThumbImage(
             GetThumbImageRequest request) throws Exception;
     }
 
 
     public interface MethodCallGetTimeline {
-        dev.plexapi.sdk.models.operations.GetTimelineResponse getTimeline(
+        GetTimelineResponse getTimeline(
             GetTimelineRequest request) throws Exception;
     }
 
 
     public interface MethodCallStartUniversalTranscode {
-        dev.plexapi.sdk.models.operations.StartUniversalTranscodeResponse startUniversalTranscode(
+        StartUniversalTranscodeResponse startUniversalTranscode(
             StartUniversalTranscodeRequest request) throws Exception;
     }
 
 
     public interface MethodCallGetServerActivities {
-        dev.plexapi.sdk.models.operations.GetServerActivitiesResponse getServerActivitiesDirect() throws Exception;
+        GetServerActivitiesResponse getServerActivitiesDirect() throws Exception;
     }
 
 
     public interface MethodCallCancelServerActivities {
-        dev.plexapi.sdk.models.operations.CancelServerActivitiesResponse cancelServerActivities(
+        CancelServerActivitiesResponse cancelServerActivities(
             String activityUUID) throws Exception;
     }
 
 
     public interface MethodCallGetButlerTasks {
-        dev.plexapi.sdk.models.operations.GetButlerTasksResponse getButlerTasksDirect() throws Exception;
+        GetButlerTasksResponse getButlerTasksDirect() throws Exception;
     }
 
 
     public interface MethodCallStartAllTasks {
-        dev.plexapi.sdk.models.operations.StartAllTasksResponse startAllTasksDirect() throws Exception;
+        StartAllTasksResponse startAllTasksDirect() throws Exception;
     }
 
 
     public interface MethodCallStopAllTasks {
-        dev.plexapi.sdk.models.operations.StopAllTasksResponse stopAllTasksDirect() throws Exception;
+        StopAllTasksResponse stopAllTasksDirect() throws Exception;
     }
 
 
     public interface MethodCallStartTask {
-        dev.plexapi.sdk.models.operations.StartTaskResponse startTask(
+        StartTaskResponse startTask(
             TaskName taskName) throws Exception;
     }
 
 
     public interface MethodCallStopTask {
-        dev.plexapi.sdk.models.operations.StopTaskResponse stopTask(
+        StopTaskResponse stopTask(
             PathParamTaskName taskName) throws Exception;
     }
 
 
     public interface MethodCallGetCompanionsData {
-        dev.plexapi.sdk.models.operations.GetCompanionsDataResponse getCompanionsData(
+        GetCompanionsDataResponse getCompanionsData(
             Optional<String> serverURL) throws Exception;
     }
 
 
     public interface MethodCallGetUserFriends {
-        dev.plexapi.sdk.models.operations.GetUserFriendsResponse getUserFriends(
+        GetUserFriendsResponse getUserFriends(
             Optional<String> serverURL) throws Exception;
     }
 
 
     public interface MethodCallGetGeoData {
-        dev.plexapi.sdk.models.operations.GetGeoDataResponse getGeoData(
+        GetGeoDataResponse getGeoData(
             Optional<String> serverURL) throws Exception;
     }
 
 
     public interface MethodCallGetHomeData {
-        dev.plexapi.sdk.models.operations.GetHomeDataResponse getHomeDataDirect() throws Exception;
+        GetHomeDataResponse getHomeDataDirect() throws Exception;
     }
 
 
     public interface MethodCallGetServerResources {
-        dev.plexapi.sdk.models.operations.GetServerResourcesResponse getServerResources(
-            Optional<String> clientID,
+        GetServerResourcesResponse getServerResources(
             Optional<? extends IncludeHttps> includeHttps,
             Optional<? extends IncludeRelay> includeRelay,
             Optional<? extends IncludeIPv6> includeIPv6,
@@ -176,29 +176,28 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetPin {
-        dev.plexapi.sdk.models.operations.GetPinResponse getPin(
+        GetPinResponse getPin(
             GetPinRequest request,
             Optional<String> serverURL) throws Exception;
     }
 
 
     public interface MethodCallGetTokenByPinId {
-        dev.plexapi.sdk.models.operations.GetTokenByPinIdResponse getTokenByPinId(
-            Optional<String> clientID,
+        GetTokenByPinIdResponse getTokenByPinId(
             long pinID,
             Optional<String> serverURL) throws Exception;
     }
 
 
     public interface MethodCallGetGlobalHubs {
-        dev.plexapi.sdk.models.operations.GetGlobalHubsResponse getGlobalHubs(
+        GetGlobalHubsResponse getGlobalHubs(
             Optional<Double> count,
             Optional<? extends OnlyTransient> onlyTransient) throws Exception;
     }
 
 
     public interface MethodCallGetLibraryHubs {
-        dev.plexapi.sdk.models.operations.GetLibraryHubsResponse getLibraryHubs(
+        GetLibraryHubsResponse getLibraryHubs(
             double sectionId,
             Optional<Double> count,
             Optional<? extends QueryParamOnlyTransient> onlyTransient) throws Exception;
@@ -206,7 +205,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallPerformSearch {
-        dev.plexapi.sdk.models.operations.PerformSearchResponse performSearch(
+        PerformSearchResponse performSearch(
             String query,
             Optional<Double> sectionId,
             Optional<Double> limit) throws Exception;
@@ -214,7 +213,7 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallPerformVoiceSearch {
-        dev.plexapi.sdk.models.operations.PerformVoiceSearchResponse performVoiceSearch(
+        PerformVoiceSearchResponse performVoiceSearch(
             String query,
             Optional<Double> sectionId,
             Optional<Double> limit) throws Exception;
@@ -222,97 +221,97 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetSearchResults {
-        dev.plexapi.sdk.models.operations.GetSearchResultsResponse getSearchResults(
+        GetSearchResultsResponse getSearchResults(
             String query) throws Exception;
     }
 
 
     public interface MethodCallGetFileHash {
-        dev.plexapi.sdk.models.operations.GetFileHashResponse getFileHash(
+        GetFileHashResponse getFileHash(
             String url,
             Optional<Double> type) throws Exception;
     }
 
 
     public interface MethodCallGetRecentlyAdded {
-        dev.plexapi.sdk.models.operations.GetRecentlyAddedResponse getRecentlyAdded(
+        GetRecentlyAddedResponse getRecentlyAdded(
             Optional<Integer> xPlexContainerStart,
             Optional<Integer> xPlexContainerSize) throws Exception;
     }
 
 
     public interface MethodCallGetAllLibraries {
-        dev.plexapi.sdk.models.operations.GetAllLibrariesResponse getAllLibrariesDirect() throws Exception;
+        GetAllLibrariesResponse getAllLibrariesDirect() throws Exception;
     }
 
 
     public interface MethodCallGetLibraryDetails {
-        dev.plexapi.sdk.models.operations.GetLibraryDetailsResponse getLibraryDetails(
+        GetLibraryDetailsResponse getLibraryDetails(
             int sectionKey,
             Optional<? extends IncludeDetails> includeDetails) throws Exception;
     }
 
 
     public interface MethodCallDeleteLibrary {
-        dev.plexapi.sdk.models.operations.DeleteLibraryResponse deleteLibrary(
+        DeleteLibraryResponse deleteLibrary(
             int sectionKey) throws Exception;
     }
 
 
     public interface MethodCallGetLibraryItems {
-        dev.plexapi.sdk.models.operations.GetLibraryItemsResponse getLibraryItems(
+        GetLibraryItemsResponse getLibraryItems(
             GetLibraryItemsRequest request) throws Exception;
     }
 
 
     public interface MethodCallGetRefreshLibraryMetadata {
-        dev.plexapi.sdk.models.operations.GetRefreshLibraryMetadataResponse getRefreshLibraryMetadata(
+        GetRefreshLibraryMetadataResponse getRefreshLibraryMetadata(
             int sectionKey,
             Optional<? extends Force> force) throws Exception;
     }
 
 
     public interface MethodCallGetSearchLibrary {
-        dev.plexapi.sdk.models.operations.GetSearchLibraryResponse getSearchLibrary(
+        GetSearchLibraryResponse getSearchLibrary(
             int sectionKey,
             QueryParamType type) throws Exception;
     }
 
 
     public interface MethodCallGetMetaDataByRatingKey {
-        dev.plexapi.sdk.models.operations.GetMetaDataByRatingKeyResponse getMetaDataByRatingKey(
+        GetMetaDataByRatingKeyResponse getMetaDataByRatingKey(
             long ratingKey) throws Exception;
     }
 
 
     public interface MethodCallGetMetadataChildren {
-        dev.plexapi.sdk.models.operations.GetMetadataChildrenResponse getMetadataChildren(
+        GetMetadataChildrenResponse getMetadataChildren(
             double ratingKey,
             Optional<String> includeElements) throws Exception;
     }
 
 
     public interface MethodCallGetTopWatchedContent {
-        dev.plexapi.sdk.models.operations.GetTopWatchedContentResponse getTopWatchedContent(
+        GetTopWatchedContentResponse getTopWatchedContent(
             GetTopWatchedContentQueryParamType type,
             Optional<Long> includeGuids) throws Exception;
     }
 
 
     public interface MethodCallGetOnDeck {
-        dev.plexapi.sdk.models.operations.GetOnDeckResponse getOnDeckDirect() throws Exception;
+        GetOnDeckResponse getOnDeckDirect() throws Exception;
     }
 
 
     public interface MethodCallGetWatchList {
-        dev.plexapi.sdk.models.operations.GetWatchListResponse getWatchList(
+        GetWatchListResponse getWatchList(
             GetWatchListRequest request,
             Optional<String> serverURL) throws Exception;
     }
 
 
     public interface MethodCallLogLine {
-        dev.plexapi.sdk.models.operations.LogLineResponse logLine(
+        LogLineResponse logLine(
             Level level,
             String message,
             String source) throws Exception;
@@ -320,43 +319,43 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallLogMultiLine {
-        dev.plexapi.sdk.models.operations.LogMultiLineResponse logMultiLine(
+        LogMultiLineResponse logMultiLine(
             String request) throws Exception;
     }
 
 
     public interface MethodCallEnablePaperTrail {
-        dev.plexapi.sdk.models.operations.EnablePaperTrailResponse enablePaperTrailDirect() throws Exception;
+        EnablePaperTrailResponse enablePaperTrailDirect() throws Exception;
     }
 
 
     public interface MethodCallCreatePlaylist {
-        dev.plexapi.sdk.models.operations.CreatePlaylistResponse createPlaylist(
+        CreatePlaylistResponse createPlaylist(
             CreatePlaylistRequest request) throws Exception;
     }
 
 
     public interface MethodCallGetPlaylists {
-        dev.plexapi.sdk.models.operations.GetPlaylistsResponse getPlaylists(
+        GetPlaylistsResponse getPlaylists(
             Optional<? extends PlaylistType> playlistType,
             Optional<? extends QueryParamSmart> smart) throws Exception;
     }
 
 
     public interface MethodCallGetPlaylist {
-        dev.plexapi.sdk.models.operations.GetPlaylistResponse getPlaylist(
+        GetPlaylistResponse getPlaylist(
             double playlistID) throws Exception;
     }
 
 
     public interface MethodCallDeletePlaylist {
-        dev.plexapi.sdk.models.operations.DeletePlaylistResponse deletePlaylist(
+        DeletePlaylistResponse deletePlaylist(
             double playlistID) throws Exception;
     }
 
 
     public interface MethodCallUpdatePlaylist {
-        dev.plexapi.sdk.models.operations.UpdatePlaylistResponse updatePlaylist(
+        UpdatePlaylistResponse updatePlaylist(
             double playlistID,
             Optional<String> title,
             Optional<String> summary) throws Exception;
@@ -364,20 +363,20 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetPlaylistContents {
-        dev.plexapi.sdk.models.operations.GetPlaylistContentsResponse getPlaylistContents(
+        GetPlaylistContentsResponse getPlaylistContents(
             double playlistID,
             GetPlaylistContentsQueryParamType type) throws Exception;
     }
 
 
     public interface MethodCallClearPlaylistContents {
-        dev.plexapi.sdk.models.operations.ClearPlaylistContentsResponse clearPlaylistContents(
+        ClearPlaylistContentsResponse clearPlaylistContents(
             double playlistID) throws Exception;
     }
 
 
     public interface MethodCallAddPlaylistContents {
-        dev.plexapi.sdk.models.operations.AddPlaylistContentsResponse addPlaylistContents(
+        AddPlaylistContentsResponse addPlaylistContents(
             double playlistID,
             String uri,
             Optional<Double> playQueueID) throws Exception;
@@ -385,64 +384,64 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallUploadPlaylist {
-        dev.plexapi.sdk.models.operations.UploadPlaylistResponse uploadPlaylist(
+        UploadPlaylistResponse uploadPlaylist(
             String path,
-            QueryParamForce force) throws Exception;
+            QueryParamForce force,
+            long sectionID) throws Exception;
     }
 
 
     public interface MethodCallGetTransientToken {
-        dev.plexapi.sdk.models.operations.GetTransientTokenResponse getTransientToken(
+        GetTransientTokenResponse getTransientToken(
             GetTransientTokenQueryParamType type,
             Scope scope) throws Exception;
     }
 
 
     public interface MethodCallGetSourceConnectionInformation {
-        dev.plexapi.sdk.models.operations.GetSourceConnectionInformationResponse getSourceConnectionInformation(
+        GetSourceConnectionInformationResponse getSourceConnectionInformation(
             String source) throws Exception;
     }
 
 
     public interface MethodCallGetTokenDetails {
-        dev.plexapi.sdk.models.operations.GetTokenDetailsResponse getTokenDetails(
+        GetTokenDetailsResponse getTokenDetails(
             Optional<String> serverURL) throws Exception;
     }
 
 
     public interface MethodCallPostUsersSignInData {
-        dev.plexapi.sdk.models.operations.PostUsersSignInDataResponse postUsersSignInData(
-            Optional<String> clientID,
-            Optional<? extends PostUsersSignInDataRequestBody> requestBody,
+        PostUsersSignInDataResponse postUsersSignInData(
+            Optional<? extends PostUsersSignInDataRequestBody> request,
             Optional<String> serverURL) throws Exception;
     }
 
 
     public interface MethodCallGetStatistics {
-        dev.plexapi.sdk.models.operations.GetStatisticsResponse getStatistics(
+        GetStatisticsResponse getStatistics(
             Optional<Long> timespan) throws Exception;
     }
 
 
     public interface MethodCallGetResourcesStatistics {
-        dev.plexapi.sdk.models.operations.GetResourcesStatisticsResponse getResourcesStatistics(
+        GetResourcesStatisticsResponse getResourcesStatistics(
             Optional<Long> timespan) throws Exception;
     }
 
 
     public interface MethodCallGetBandwidthStatistics {
-        dev.plexapi.sdk.models.operations.GetBandwidthStatisticsResponse getBandwidthStatistics(
+        GetBandwidthStatisticsResponse getBandwidthStatistics(
             Optional<Long> timespan) throws Exception;
     }
 
 
     public interface MethodCallGetSessions {
-        dev.plexapi.sdk.models.operations.GetSessionsResponse getSessionsDirect() throws Exception;
+        GetSessionsResponse getSessionsDirect() throws Exception;
     }
 
 
     public interface MethodCallGetSessionHistory {
-        dev.plexapi.sdk.models.operations.GetSessionHistoryResponse getSessionHistory(
+        GetSessionHistoryResponse getSessionHistory(
             Optional<String> sort,
             Optional<Long> accountId,
             Optional<? extends QueryParamFilter> filter,
@@ -451,29 +450,29 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetTranscodeSessions {
-        dev.plexapi.sdk.models.operations.GetTranscodeSessionsResponse getTranscodeSessionsDirect() throws Exception;
+        GetTranscodeSessionsResponse getTranscodeSessionsDirect() throws Exception;
     }
 
 
     public interface MethodCallStopTranscodeSession {
-        dev.plexapi.sdk.models.operations.StopTranscodeSessionResponse stopTranscodeSession(
+        StopTranscodeSessionResponse stopTranscodeSession(
             String sessionKey) throws Exception;
     }
 
 
     public interface MethodCallGetUpdateStatus {
-        dev.plexapi.sdk.models.operations.GetUpdateStatusResponse getUpdateStatusDirect() throws Exception;
+        GetUpdateStatusResponse getUpdateStatusDirect() throws Exception;
     }
 
 
     public interface MethodCallCheckForUpdates {
-        dev.plexapi.sdk.models.operations.CheckForUpdatesResponse checkForUpdates(
+        CheckForUpdatesResponse checkForUpdates(
             Optional<? extends Download> download) throws Exception;
     }
 
 
     public interface MethodCallApplyUpdates {
-        dev.plexapi.sdk.models.operations.ApplyUpdatesResponse applyUpdates(
+        ApplyUpdatesResponse applyUpdates(
             Optional<? extends Tonight> tonight,
             Optional<? extends Skip> skip) throws Exception;
     }

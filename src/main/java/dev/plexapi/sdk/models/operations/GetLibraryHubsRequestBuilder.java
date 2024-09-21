@@ -31,19 +31,19 @@ public class GetLibraryHubsRequestBuilder {
         return this;
     }
 
-    public GetLibraryHubsRequestBuilder count(java.util.Optional<java.lang.Double> count) {
+    public GetLibraryHubsRequestBuilder count(Optional<Double> count) {
         Utils.checkNotNull(count, "count");
         this.count = count;
         return this;
     }
                 
-    public GetLibraryHubsRequestBuilder onlyTransient(dev.plexapi.sdk.models.operations.QueryParamOnlyTransient onlyTransient) {
+    public GetLibraryHubsRequestBuilder onlyTransient(QueryParamOnlyTransient onlyTransient) {
         Utils.checkNotNull(onlyTransient, "onlyTransient");
         this.onlyTransient = Optional.of(onlyTransient);
         return this;
     }
 
-    public GetLibraryHubsRequestBuilder onlyTransient(java.util.Optional<? extends dev.plexapi.sdk.models.operations.QueryParamOnlyTransient> onlyTransient) {
+    public GetLibraryHubsRequestBuilder onlyTransient(Optional<? extends QueryParamOnlyTransient> onlyTransient) {
         Utils.checkNotNull(onlyTransient, "onlyTransient");
         this.onlyTransient = onlyTransient;
         return this;

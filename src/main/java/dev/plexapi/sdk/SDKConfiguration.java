@@ -34,11 +34,14 @@ class SDKConfiguration {
             put("port", "32400");
         } });
     } };
-    public String language = "java";
-    public String openapiDocVersion = "0.0.3";
-    public String sdkVersion = "0.3.6";
-    public String genVersion = "2.416.6";
-    public String userAgent = "speakeasy-sdk/java 0.3.6 2.416.6 0.0.3 dev.plexapi.sdk";
+    private static final String LANGUAGE = "java";
+    public static final String OPENAPI_DOC_VERSION = "0.0.3";
+    public static final String SDK_VERSION = "0.4.0";
+    public static final String GEN_VERSION = "2.421.3";
+    private static final String BASE_PACKAGE = "dev.plexapi.sdk";
+    public static final String USER_AGENT = 
+            String.format("speakeasy-sdk/%s %s %s %s %s", 
+                LANGUAGE, SDK_VERSION, GEN_VERSION, OPENAPI_DOC_VERSION, BASE_PACKAGE);
 
     private Hooks _hooks = createHooks();
 

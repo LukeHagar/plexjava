@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class GetServerResourcesRequestBuilder {
 
-    private Optional<String> clientID = Optional.empty();
     private Optional<? extends IncludeHttps> includeHttps = Utils.readDefaultOrConstValue(
                             "includeHttps",
                             "0",
@@ -32,61 +31,49 @@ public class GetServerResourcesRequestBuilder {
         this.sdk = sdk;
     }
                 
-    public GetServerResourcesRequestBuilder clientID(java.lang.String clientID) {
-        Utils.checkNotNull(clientID, "clientID");
-        this.clientID = Optional.of(clientID);
-        return this;
-    }
-
-    public GetServerResourcesRequestBuilder clientID(java.util.Optional<java.lang.String> clientID) {
-        Utils.checkNotNull(clientID, "clientID");
-        this.clientID = clientID;
-        return this;
-    }
-                
-    public GetServerResourcesRequestBuilder includeHttps(dev.plexapi.sdk.models.operations.IncludeHttps includeHttps) {
+    public GetServerResourcesRequestBuilder includeHttps(IncludeHttps includeHttps) {
         Utils.checkNotNull(includeHttps, "includeHttps");
         this.includeHttps = Optional.of(includeHttps);
         return this;
     }
 
-    public GetServerResourcesRequestBuilder includeHttps(java.util.Optional<? extends dev.plexapi.sdk.models.operations.IncludeHttps> includeHttps) {
+    public GetServerResourcesRequestBuilder includeHttps(Optional<? extends IncludeHttps> includeHttps) {
         Utils.checkNotNull(includeHttps, "includeHttps");
         this.includeHttps = includeHttps;
         return this;
     }
                 
-    public GetServerResourcesRequestBuilder includeRelay(dev.plexapi.sdk.models.operations.IncludeRelay includeRelay) {
+    public GetServerResourcesRequestBuilder includeRelay(IncludeRelay includeRelay) {
         Utils.checkNotNull(includeRelay, "includeRelay");
         this.includeRelay = Optional.of(includeRelay);
         return this;
     }
 
-    public GetServerResourcesRequestBuilder includeRelay(java.util.Optional<? extends dev.plexapi.sdk.models.operations.IncludeRelay> includeRelay) {
+    public GetServerResourcesRequestBuilder includeRelay(Optional<? extends IncludeRelay> includeRelay) {
         Utils.checkNotNull(includeRelay, "includeRelay");
         this.includeRelay = includeRelay;
         return this;
     }
                 
-    public GetServerResourcesRequestBuilder includeIPv6(dev.plexapi.sdk.models.operations.IncludeIPv6 includeIPv6) {
+    public GetServerResourcesRequestBuilder includeIPv6(IncludeIPv6 includeIPv6) {
         Utils.checkNotNull(includeIPv6, "includeIPv6");
         this.includeIPv6 = Optional.of(includeIPv6);
         return this;
     }
 
-    public GetServerResourcesRequestBuilder includeIPv6(java.util.Optional<? extends dev.plexapi.sdk.models.operations.IncludeIPv6> includeIPv6) {
+    public GetServerResourcesRequestBuilder includeIPv6(Optional<? extends IncludeIPv6> includeIPv6) {
         Utils.checkNotNull(includeIPv6, "includeIPv6");
         this.includeIPv6 = includeIPv6;
         return this;
     }
                 
-    public GetServerResourcesRequestBuilder serverURL(java.lang.String serverURL) {
+    public GetServerResourcesRequestBuilder serverURL(String serverURL) {
         Utils.checkNotNull(serverURL, "serverURL");
         this.serverURL = Optional.of(serverURL);
         return this;
     }
 
-    public GetServerResourcesRequestBuilder serverURL(java.util.Optional<java.lang.String> serverURL) {
+    public GetServerResourcesRequestBuilder serverURL(Optional<String> serverURL) {
         Utils.checkNotNull(serverURL, "serverURL");
         this.serverURL = serverURL;
         return this;
@@ -103,7 +90,6 @@ public class GetServerResourcesRequestBuilder {
             includeIPv6 = _SINGLETON_VALUE_IncludeIPv6.value();
         }
         return sdk.getServerResources(
-            clientID,
             includeHttps,
             includeRelay,
             includeIPv6,
