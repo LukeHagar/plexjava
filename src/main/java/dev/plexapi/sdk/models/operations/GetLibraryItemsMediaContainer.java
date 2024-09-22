@@ -26,8 +26,21 @@ public class GetLibraryItemsMediaContainer {
     @JsonProperty("size")
     private int size;
 
+    @JsonProperty("totalSize")
+    private int totalSize;
+
+    @JsonProperty("offset")
+    private int offset;
+
+    @JsonProperty("content")
+    private String content;
+
     @JsonProperty("allowSync")
     private boolean allowSync;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("nocache")
+    private Optional<Boolean> nocache;
 
     @JsonProperty("art")
     private String art;
@@ -70,9 +83,8 @@ public class GetLibraryItemsMediaContainer {
     @JsonProperty("mixedParents")
     private Optional<Boolean> mixedParents;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Metadata")
-    private Optional<? extends List<GetLibraryItemsMetadata>> metadata;
+    private List<GetLibraryItemsMetadata> metadata;
 
     /**
      * The Meta object is only included in the response if the `includeMeta` parameter is set to `1`.
@@ -85,7 +97,11 @@ public class GetLibraryItemsMediaContainer {
     @JsonCreator
     public GetLibraryItemsMediaContainer(
             @JsonProperty("size") int size,
+            @JsonProperty("totalSize") int totalSize,
+            @JsonProperty("offset") int offset,
+            @JsonProperty("content") String content,
             @JsonProperty("allowSync") boolean allowSync,
+            @JsonProperty("nocache") Optional<Boolean> nocache,
             @JsonProperty("art") String art,
             @JsonProperty("identifier") String identifier,
             @JsonProperty("librarySectionID") LibrarySectionID librarySectionID,
@@ -99,10 +115,14 @@ public class GetLibraryItemsMediaContainer {
             @JsonProperty("viewGroup") String viewGroup,
             @JsonProperty("viewMode") Optional<Integer> viewMode,
             @JsonProperty("mixedParents") Optional<Boolean> mixedParents,
-            @JsonProperty("Metadata") Optional<? extends List<GetLibraryItemsMetadata>> metadata,
+            @JsonProperty("Metadata") List<GetLibraryItemsMetadata> metadata,
             @JsonProperty("Meta") Optional<? extends Meta> meta) {
         Utils.checkNotNull(size, "size");
+        Utils.checkNotNull(totalSize, "totalSize");
+        Utils.checkNotNull(offset, "offset");
+        Utils.checkNotNull(content, "content");
         Utils.checkNotNull(allowSync, "allowSync");
+        Utils.checkNotNull(nocache, "nocache");
         Utils.checkNotNull(art, "art");
         Utils.checkNotNull(identifier, "identifier");
         Utils.checkNotNull(librarySectionID, "librarySectionID");
@@ -119,7 +139,11 @@ public class GetLibraryItemsMediaContainer {
         Utils.checkNotNull(metadata, "metadata");
         Utils.checkNotNull(meta, "meta");
         this.size = size;
+        this.totalSize = totalSize;
+        this.offset = offset;
+        this.content = content;
         this.allowSync = allowSync;
+        this.nocache = nocache;
         this.art = art;
         this.identifier = identifier;
         this.librarySectionID = librarySectionID;
@@ -139,6 +163,9 @@ public class GetLibraryItemsMediaContainer {
     
     public GetLibraryItemsMediaContainer(
             int size,
+            int totalSize,
+            int offset,
+            String content,
             boolean allowSync,
             String art,
             String identifier,
@@ -150,8 +177,9 @@ public class GetLibraryItemsMediaContainer {
             String thumb,
             String title1,
             String title2,
-            String viewGroup) {
-        this(size, allowSync, art, identifier, librarySectionID, librarySectionTitle, librarySectionUUID, mediaTagPrefix, mediaTagVersion, thumb, title1, title2, viewGroup, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+            String viewGroup,
+            List<GetLibraryItemsMetadata> metadata) {
+        this(size, totalSize, offset, content, allowSync, Optional.empty(), art, identifier, librarySectionID, librarySectionTitle, librarySectionUUID, mediaTagPrefix, mediaTagVersion, thumb, title1, title2, viewGroup, Optional.empty(), Optional.empty(), metadata, Optional.empty());
     }
 
     @JsonIgnore
@@ -160,8 +188,28 @@ public class GetLibraryItemsMediaContainer {
     }
 
     @JsonIgnore
+    public int totalSize() {
+        return totalSize;
+    }
+
+    @JsonIgnore
+    public int offset() {
+        return offset;
+    }
+
+    @JsonIgnore
+    public String content() {
+        return content;
+    }
+
+    @JsonIgnore
     public boolean allowSync() {
         return allowSync;
+    }
+
+    @JsonIgnore
+    public Optional<Boolean> nocache() {
+        return nocache;
     }
 
     @JsonIgnore
@@ -229,10 +277,9 @@ public class GetLibraryItemsMediaContainer {
         return mixedParents;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<GetLibraryItemsMetadata>> metadata() {
-        return (Optional<List<GetLibraryItemsMetadata>>) metadata;
+    public List<GetLibraryItemsMetadata> metadata() {
+        return metadata;
     }
 
     /**
@@ -255,9 +302,39 @@ public class GetLibraryItemsMediaContainer {
         return this;
     }
 
+    public GetLibraryItemsMediaContainer withTotalSize(int totalSize) {
+        Utils.checkNotNull(totalSize, "totalSize");
+        this.totalSize = totalSize;
+        return this;
+    }
+
+    public GetLibraryItemsMediaContainer withOffset(int offset) {
+        Utils.checkNotNull(offset, "offset");
+        this.offset = offset;
+        return this;
+    }
+
+    public GetLibraryItemsMediaContainer withContent(String content) {
+        Utils.checkNotNull(content, "content");
+        this.content = content;
+        return this;
+    }
+
     public GetLibraryItemsMediaContainer withAllowSync(boolean allowSync) {
         Utils.checkNotNull(allowSync, "allowSync");
         this.allowSync = allowSync;
+        return this;
+    }
+
+    public GetLibraryItemsMediaContainer withNocache(boolean nocache) {
+        Utils.checkNotNull(nocache, "nocache");
+        this.nocache = Optional.ofNullable(nocache);
+        return this;
+    }
+
+    public GetLibraryItemsMediaContainer withNocache(Optional<Boolean> nocache) {
+        Utils.checkNotNull(nocache, "nocache");
+        this.nocache = nocache;
         return this;
     }
 
@@ -353,12 +430,6 @@ public class GetLibraryItemsMediaContainer {
 
     public GetLibraryItemsMediaContainer withMetadata(List<GetLibraryItemsMetadata> metadata) {
         Utils.checkNotNull(metadata, "metadata");
-        this.metadata = Optional.ofNullable(metadata);
-        return this;
-    }
-
-    public GetLibraryItemsMediaContainer withMetadata(Optional<? extends List<GetLibraryItemsMetadata>> metadata) {
-        Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
         return this;
     }
@@ -394,7 +465,11 @@ public class GetLibraryItemsMediaContainer {
         GetLibraryItemsMediaContainer other = (GetLibraryItemsMediaContainer) o;
         return 
             Objects.deepEquals(this.size, other.size) &&
+            Objects.deepEquals(this.totalSize, other.totalSize) &&
+            Objects.deepEquals(this.offset, other.offset) &&
+            Objects.deepEquals(this.content, other.content) &&
             Objects.deepEquals(this.allowSync, other.allowSync) &&
+            Objects.deepEquals(this.nocache, other.nocache) &&
             Objects.deepEquals(this.art, other.art) &&
             Objects.deepEquals(this.identifier, other.identifier) &&
             Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
@@ -416,7 +491,11 @@ public class GetLibraryItemsMediaContainer {
     public int hashCode() {
         return Objects.hash(
             size,
+            totalSize,
+            offset,
+            content,
             allowSync,
+            nocache,
             art,
             identifier,
             librarySectionID,
@@ -438,7 +517,11 @@ public class GetLibraryItemsMediaContainer {
     public String toString() {
         return Utils.toString(GetLibraryItemsMediaContainer.class,
                 "size", size,
+                "totalSize", totalSize,
+                "offset", offset,
+                "content", content,
                 "allowSync", allowSync,
+                "nocache", nocache,
                 "art", art,
                 "identifier", identifier,
                 "librarySectionID", librarySectionID,
@@ -460,7 +543,15 @@ public class GetLibraryItemsMediaContainer {
  
         private Integer size;
  
+        private Integer totalSize;
+ 
+        private Integer offset;
+ 
+        private String content;
+ 
         private Boolean allowSync;
+ 
+        private Optional<Boolean> nocache = Optional.empty();
  
         private String art;
  
@@ -488,7 +579,7 @@ public class GetLibraryItemsMediaContainer {
  
         private Optional<Boolean> mixedParents = Optional.empty();
  
-        private Optional<? extends List<GetLibraryItemsMetadata>> metadata = Optional.empty();
+        private List<GetLibraryItemsMetadata> metadata;
  
         private Optional<? extends Meta> meta = Optional.empty();  
         
@@ -502,9 +593,39 @@ public class GetLibraryItemsMediaContainer {
             return this;
         }
 
+        public Builder totalSize(int totalSize) {
+            Utils.checkNotNull(totalSize, "totalSize");
+            this.totalSize = totalSize;
+            return this;
+        }
+
+        public Builder offset(int offset) {
+            Utils.checkNotNull(offset, "offset");
+            this.offset = offset;
+            return this;
+        }
+
+        public Builder content(String content) {
+            Utils.checkNotNull(content, "content");
+            this.content = content;
+            return this;
+        }
+
         public Builder allowSync(boolean allowSync) {
             Utils.checkNotNull(allowSync, "allowSync");
             this.allowSync = allowSync;
+            return this;
+        }
+
+        public Builder nocache(boolean nocache) {
+            Utils.checkNotNull(nocache, "nocache");
+            this.nocache = Optional.ofNullable(nocache);
+            return this;
+        }
+
+        public Builder nocache(Optional<Boolean> nocache) {
+            Utils.checkNotNull(nocache, "nocache");
+            this.nocache = nocache;
             return this;
         }
 
@@ -600,12 +721,6 @@ public class GetLibraryItemsMediaContainer {
 
         public Builder metadata(List<GetLibraryItemsMetadata> metadata) {
             Utils.checkNotNull(metadata, "metadata");
-            this.metadata = Optional.ofNullable(metadata);
-            return this;
-        }
-
-        public Builder metadata(Optional<? extends List<GetLibraryItemsMetadata>> metadata) {
-            Utils.checkNotNull(metadata, "metadata");
             this.metadata = metadata;
             return this;
         }
@@ -633,7 +748,11 @@ public class GetLibraryItemsMediaContainer {
         public GetLibraryItemsMediaContainer build() {
             return new GetLibraryItemsMediaContainer(
                 size,
+                totalSize,
+                offset,
+                content,
                 allowSync,
+                nocache,
                 art,
                 identifier,
                 librarySectionID,

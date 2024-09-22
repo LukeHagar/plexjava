@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum GetPlaylistContentsQueryParamType {
     Movie(1L),
-    Show(2L),
+    TvShow(2L),
     Season(3L),
     Episode(4L);
 

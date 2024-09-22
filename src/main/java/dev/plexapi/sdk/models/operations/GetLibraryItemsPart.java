@@ -10,107 +10,155 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 
 
 public class GetLibraryItemsPart {
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("id")
-    private Optional<Integer> id;
+    private int id;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
-    private Optional<String> key;
+    private String key;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
-    private Optional<Integer> duration;
+    private int duration;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("file")
-    private Optional<String> file;
+    private String file;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("size")
-    private Optional<Long> size;
+    private long size;
 
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * The container format of the media file.
+     * 
+     */
     @JsonProperty("container")
-    private Optional<String> container;
+    private String container;
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("audioProfile")
+    private Optional<String> audioProfile;
+
     @JsonProperty("videoProfile")
-    private Optional<String> videoProfile;
+    private String videoProfile;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("indexes")
+    private Optional<String> indexes;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("hasThumbnail")
+    private Optional<? extends HasThumbnail> hasThumbnail;
 
     @JsonCreator
     public GetLibraryItemsPart(
-            @JsonProperty("id") Optional<Integer> id,
-            @JsonProperty("key") Optional<String> key,
-            @JsonProperty("duration") Optional<Integer> duration,
-            @JsonProperty("file") Optional<String> file,
-            @JsonProperty("size") Optional<Long> size,
-            @JsonProperty("container") Optional<String> container,
-            @JsonProperty("videoProfile") Optional<String> videoProfile) {
+            @JsonProperty("id") int id,
+            @JsonProperty("key") String key,
+            @JsonProperty("duration") int duration,
+            @JsonProperty("file") String file,
+            @JsonProperty("size") long size,
+            @JsonProperty("container") String container,
+            @JsonProperty("audioProfile") Optional<String> audioProfile,
+            @JsonProperty("videoProfile") String videoProfile,
+            @JsonProperty("indexes") Optional<String> indexes,
+            @JsonProperty("hasThumbnail") Optional<? extends HasThumbnail> hasThumbnail) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(duration, "duration");
         Utils.checkNotNull(file, "file");
         Utils.checkNotNull(size, "size");
         Utils.checkNotNull(container, "container");
+        Utils.checkNotNull(audioProfile, "audioProfile");
         Utils.checkNotNull(videoProfile, "videoProfile");
+        Utils.checkNotNull(indexes, "indexes");
+        Utils.checkNotNull(hasThumbnail, "hasThumbnail");
         this.id = id;
         this.key = key;
         this.duration = duration;
         this.file = file;
         this.size = size;
         this.container = container;
+        this.audioProfile = audioProfile;
         this.videoProfile = videoProfile;
+        this.indexes = indexes;
+        this.hasThumbnail = hasThumbnail;
     }
     
-    public GetLibraryItemsPart() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    public GetLibraryItemsPart(
+            int id,
+            String key,
+            int duration,
+            String file,
+            long size,
+            String container,
+            String videoProfile) {
+        this(id, key, duration, file, size, container, Optional.empty(), videoProfile, Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
-    public Optional<Integer> id() {
+    public int id() {
         return id;
     }
 
     @JsonIgnore
-    public Optional<String> key() {
+    public String key() {
         return key;
     }
 
     @JsonIgnore
-    public Optional<Integer> duration() {
+    public int duration() {
         return duration;
     }
 
     @JsonIgnore
-    public Optional<String> file() {
+    public String file() {
         return file;
     }
 
     @JsonIgnore
-    public Optional<Long> size() {
+    public long size() {
         return size;
     }
 
+    /**
+     * The container format of the media file.
+     * 
+     */
     @JsonIgnore
-    public Optional<String> container() {
+    public String container() {
         return container;
     }
 
     @JsonIgnore
-    public Optional<String> videoProfile() {
+    public Optional<String> audioProfile() {
+        return audioProfile;
+    }
+
+    @JsonIgnore
+    public String videoProfile() {
         return videoProfile;
+    }
+
+    @JsonIgnore
+    public Optional<String> indexes() {
+        return indexes;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<HasThumbnail> hasThumbnail() {
+        return (Optional<HasThumbnail>) hasThumbnail;
     }
 
     public final static Builder builder() {
@@ -119,23 +167,11 @@ public class GetLibraryItemsPart {
 
     public GetLibraryItemsPart withId(int id) {
         Utils.checkNotNull(id, "id");
-        this.id = Optional.ofNullable(id);
-        return this;
-    }
-
-    public GetLibraryItemsPart withId(Optional<Integer> id) {
-        Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
     }
 
     public GetLibraryItemsPart withKey(String key) {
-        Utils.checkNotNull(key, "key");
-        this.key = Optional.ofNullable(key);
-        return this;
-    }
-
-    public GetLibraryItemsPart withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
         return this;
@@ -143,23 +179,11 @@ public class GetLibraryItemsPart {
 
     public GetLibraryItemsPart withDuration(int duration) {
         Utils.checkNotNull(duration, "duration");
-        this.duration = Optional.ofNullable(duration);
-        return this;
-    }
-
-    public GetLibraryItemsPart withDuration(Optional<Integer> duration) {
-        Utils.checkNotNull(duration, "duration");
         this.duration = duration;
         return this;
     }
 
     public GetLibraryItemsPart withFile(String file) {
-        Utils.checkNotNull(file, "file");
-        this.file = Optional.ofNullable(file);
-        return this;
-    }
-
-    public GetLibraryItemsPart withFile(Optional<String> file) {
         Utils.checkNotNull(file, "file");
         this.file = file;
         return this;
@@ -167,37 +191,59 @@ public class GetLibraryItemsPart {
 
     public GetLibraryItemsPart withSize(long size) {
         Utils.checkNotNull(size, "size");
-        this.size = Optional.ofNullable(size);
-        return this;
-    }
-
-    public GetLibraryItemsPart withSize(Optional<Long> size) {
-        Utils.checkNotNull(size, "size");
         this.size = size;
         return this;
     }
 
+    /**
+     * The container format of the media file.
+     * 
+     */
     public GetLibraryItemsPart withContainer(String container) {
-        Utils.checkNotNull(container, "container");
-        this.container = Optional.ofNullable(container);
-        return this;
-    }
-
-    public GetLibraryItemsPart withContainer(Optional<String> container) {
         Utils.checkNotNull(container, "container");
         this.container = container;
         return this;
     }
 
-    public GetLibraryItemsPart withVideoProfile(String videoProfile) {
-        Utils.checkNotNull(videoProfile, "videoProfile");
-        this.videoProfile = Optional.ofNullable(videoProfile);
+    public GetLibraryItemsPart withAudioProfile(String audioProfile) {
+        Utils.checkNotNull(audioProfile, "audioProfile");
+        this.audioProfile = Optional.ofNullable(audioProfile);
         return this;
     }
 
-    public GetLibraryItemsPart withVideoProfile(Optional<String> videoProfile) {
+    public GetLibraryItemsPart withAudioProfile(Optional<String> audioProfile) {
+        Utils.checkNotNull(audioProfile, "audioProfile");
+        this.audioProfile = audioProfile;
+        return this;
+    }
+
+    public GetLibraryItemsPart withVideoProfile(String videoProfile) {
         Utils.checkNotNull(videoProfile, "videoProfile");
         this.videoProfile = videoProfile;
+        return this;
+    }
+
+    public GetLibraryItemsPart withIndexes(String indexes) {
+        Utils.checkNotNull(indexes, "indexes");
+        this.indexes = Optional.ofNullable(indexes);
+        return this;
+    }
+
+    public GetLibraryItemsPart withIndexes(Optional<String> indexes) {
+        Utils.checkNotNull(indexes, "indexes");
+        this.indexes = indexes;
+        return this;
+    }
+
+    public GetLibraryItemsPart withHasThumbnail(HasThumbnail hasThumbnail) {
+        Utils.checkNotNull(hasThumbnail, "hasThumbnail");
+        this.hasThumbnail = Optional.ofNullable(hasThumbnail);
+        return this;
+    }
+
+    public GetLibraryItemsPart withHasThumbnail(Optional<? extends HasThumbnail> hasThumbnail) {
+        Utils.checkNotNull(hasThumbnail, "hasThumbnail");
+        this.hasThumbnail = hasThumbnail;
         return this;
     }
     
@@ -217,7 +263,10 @@ public class GetLibraryItemsPart {
             Objects.deepEquals(this.file, other.file) &&
             Objects.deepEquals(this.size, other.size) &&
             Objects.deepEquals(this.container, other.container) &&
-            Objects.deepEquals(this.videoProfile, other.videoProfile);
+            Objects.deepEquals(this.audioProfile, other.audioProfile) &&
+            Objects.deepEquals(this.videoProfile, other.videoProfile) &&
+            Objects.deepEquals(this.indexes, other.indexes) &&
+            Objects.deepEquals(this.hasThumbnail, other.hasThumbnail);
     }
     
     @Override
@@ -229,7 +278,10 @@ public class GetLibraryItemsPart {
             file,
             size,
             container,
-            videoProfile);
+            audioProfile,
+            videoProfile,
+            indexes,
+            hasThumbnail);
     }
     
     @Override
@@ -241,24 +293,33 @@ public class GetLibraryItemsPart {
                 "file", file,
                 "size", size,
                 "container", container,
-                "videoProfile", videoProfile);
+                "audioProfile", audioProfile,
+                "videoProfile", videoProfile,
+                "indexes", indexes,
+                "hasThumbnail", hasThumbnail);
     }
     
     public final static class Builder {
  
-        private Optional<Integer> id = Optional.empty();
+        private Integer id;
  
-        private Optional<String> key = Optional.empty();
+        private String key;
  
-        private Optional<Integer> duration = Optional.empty();
+        private Integer duration;
  
-        private Optional<String> file = Optional.empty();
+        private String file;
  
-        private Optional<Long> size = Optional.empty();
+        private Long size;
  
-        private Optional<String> container = Optional.empty();
+        private String container;
  
-        private Optional<String> videoProfile = Optional.empty();  
+        private Optional<String> audioProfile = Optional.empty();
+ 
+        private String videoProfile;
+ 
+        private Optional<String> indexes = Optional.empty();
+ 
+        private Optional<? extends HasThumbnail> hasThumbnail;  
         
         private Builder() {
           // force use of static builder() method
@@ -266,23 +327,11 @@ public class GetLibraryItemsPart {
 
         public Builder id(int id) {
             Utils.checkNotNull(id, "id");
-            this.id = Optional.ofNullable(id);
-            return this;
-        }
-
-        public Builder id(Optional<Integer> id) {
-            Utils.checkNotNull(id, "id");
             this.id = id;
             return this;
         }
 
         public Builder key(String key) {
-            Utils.checkNotNull(key, "key");
-            this.key = Optional.ofNullable(key);
-            return this;
-        }
-
-        public Builder key(Optional<String> key) {
             Utils.checkNotNull(key, "key");
             this.key = key;
             return this;
@@ -290,23 +339,11 @@ public class GetLibraryItemsPart {
 
         public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
-            this.duration = Optional.ofNullable(duration);
-            return this;
-        }
-
-        public Builder duration(Optional<Integer> duration) {
-            Utils.checkNotNull(duration, "duration");
             this.duration = duration;
             return this;
         }
 
         public Builder file(String file) {
-            Utils.checkNotNull(file, "file");
-            this.file = Optional.ofNullable(file);
-            return this;
-        }
-
-        public Builder file(Optional<String> file) {
             Utils.checkNotNull(file, "file");
             this.file = file;
             return this;
@@ -314,50 +351,83 @@ public class GetLibraryItemsPart {
 
         public Builder size(long size) {
             Utils.checkNotNull(size, "size");
-            this.size = Optional.ofNullable(size);
-            return this;
-        }
-
-        public Builder size(Optional<Long> size) {
-            Utils.checkNotNull(size, "size");
             this.size = size;
             return this;
         }
 
+        /**
+         * The container format of the media file.
+         * 
+         */
         public Builder container(String container) {
-            Utils.checkNotNull(container, "container");
-            this.container = Optional.ofNullable(container);
-            return this;
-        }
-
-        public Builder container(Optional<String> container) {
             Utils.checkNotNull(container, "container");
             this.container = container;
             return this;
         }
 
-        public Builder videoProfile(String videoProfile) {
-            Utils.checkNotNull(videoProfile, "videoProfile");
-            this.videoProfile = Optional.ofNullable(videoProfile);
+        public Builder audioProfile(String audioProfile) {
+            Utils.checkNotNull(audioProfile, "audioProfile");
+            this.audioProfile = Optional.ofNullable(audioProfile);
             return this;
         }
 
-        public Builder videoProfile(Optional<String> videoProfile) {
+        public Builder audioProfile(Optional<String> audioProfile) {
+            Utils.checkNotNull(audioProfile, "audioProfile");
+            this.audioProfile = audioProfile;
+            return this;
+        }
+
+        public Builder videoProfile(String videoProfile) {
             Utils.checkNotNull(videoProfile, "videoProfile");
             this.videoProfile = videoProfile;
             return this;
         }
+
+        public Builder indexes(String indexes) {
+            Utils.checkNotNull(indexes, "indexes");
+            this.indexes = Optional.ofNullable(indexes);
+            return this;
+        }
+
+        public Builder indexes(Optional<String> indexes) {
+            Utils.checkNotNull(indexes, "indexes");
+            this.indexes = indexes;
+            return this;
+        }
+
+        public Builder hasThumbnail(HasThumbnail hasThumbnail) {
+            Utils.checkNotNull(hasThumbnail, "hasThumbnail");
+            this.hasThumbnail = Optional.ofNullable(hasThumbnail);
+            return this;
+        }
+
+        public Builder hasThumbnail(Optional<? extends HasThumbnail> hasThumbnail) {
+            Utils.checkNotNull(hasThumbnail, "hasThumbnail");
+            this.hasThumbnail = hasThumbnail;
+            return this;
+        }
         
         public GetLibraryItemsPart build() {
-            return new GetLibraryItemsPart(
+            if (hasThumbnail == null) {
+                hasThumbnail = _SINGLETON_VALUE_HasThumbnail.value();
+            }            return new GetLibraryItemsPart(
                 id,
                 key,
                 duration,
                 file,
                 size,
                 container,
-                videoProfile);
+                audioProfile,
+                videoProfile,
+                indexes,
+                hasThumbnail);
         }
+
+        private static final LazySingletonValue<Optional<? extends HasThumbnail>> _SINGLETON_VALUE_HasThumbnail =
+                new LazySingletonValue<>(
+                        "hasThumbnail",
+                        "\"0\"",
+                        new TypeReference<Optional<? extends HasThumbnail>>() {});
     }
 }
 

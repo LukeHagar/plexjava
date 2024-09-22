@@ -367,7 +367,7 @@ public class Application {
 
         GetPlaylistContentsResponse res = sdk.playlists().getPlaylistContents()
                 .playlistID(5004.46d)
-                .type(GetPlaylistContentsQueryParamType.Show)
+                .type(GetPlaylistContentsQueryParamType.TvShow)
                 .call();
 
         if (res.object().isPresent()) {

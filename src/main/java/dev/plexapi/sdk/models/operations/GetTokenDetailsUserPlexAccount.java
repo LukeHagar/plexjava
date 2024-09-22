@@ -285,6 +285,10 @@ public class GetTokenDetailsUserPlexAccount {
     @JsonProperty("uuid")
     private String uuid;
 
+    @JsonInclude(Include.ALWAYS)
+    @JsonProperty("attributionPartner")
+    private Optional<String> attributionPartner;
+
     @JsonCreator
     public GetTokenDetailsUserPlexAccount(
             @JsonProperty("adsConsent") Optional<Boolean> adsConsent,
@@ -326,7 +330,8 @@ public class GetTokenDetailsUserPlexAccount {
             @JsonProperty("title") String title,
             @JsonProperty("twoFactorEnabled") Optional<Boolean> twoFactorEnabled,
             @JsonProperty("username") String username,
-            @JsonProperty("uuid") String uuid) {
+            @JsonProperty("uuid") String uuid,
+            @JsonProperty("attributionPartner") Optional<String> attributionPartner) {
         Utils.checkNotNull(adsConsent, "adsConsent");
         Utils.checkNotNull(adsConsentReminderAt, "adsConsentReminderAt");
         Utils.checkNotNull(adsConsentSetAt, "adsConsentSetAt");
@@ -367,6 +372,7 @@ public class GetTokenDetailsUserPlexAccount {
         Utils.checkNotNull(twoFactorEnabled, "twoFactorEnabled");
         Utils.checkNotNull(username, "username");
         Utils.checkNotNull(uuid, "uuid");
+        Utils.checkNotNull(attributionPartner, "attributionPartner");
         this.adsConsent = adsConsent;
         this.adsConsentReminderAt = adsConsentReminderAt;
         this.adsConsentSetAt = adsConsentSetAt;
@@ -407,6 +413,7 @@ public class GetTokenDetailsUserPlexAccount {
         this.twoFactorEnabled = twoFactorEnabled;
         this.username = username;
         this.uuid = uuid;
+        this.attributionPartner = attributionPartner;
     }
     
     public GetTokenDetailsUserPlexAccount(
@@ -430,7 +437,7 @@ public class GetTokenDetailsUserPlexAccount {
             String title,
             String username,
             String uuid) {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), authToken, Optional.empty(), Optional.empty(), country, email, Optional.empty(), Optional.empty(), friendlyName, entitlements, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), homeSize, id, joinedAt, Optional.empty(), Optional.empty(), mailingListStatus, maxHomeSize, Optional.empty(), profile, Optional.empty(), rememberExpiresAt, Optional.empty(), Optional.empty(), scrobbleTypes, services, subscription, Optional.empty(), subscriptions, thumb, title, Optional.empty(), username, uuid);
+        this(Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), authToken, Optional.empty(), Optional.empty(), country, email, Optional.empty(), Optional.empty(), friendlyName, entitlements, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), homeSize, id, joinedAt, Optional.empty(), Optional.empty(), mailingListStatus, maxHomeSize, Optional.empty(), profile, Optional.empty(), rememberExpiresAt, Optional.empty(), Optional.empty(), scrobbleTypes, services, subscription, Optional.empty(), subscriptions, thumb, title, Optional.empty(), username, uuid, Optional.empty());
     }
 
     /**
@@ -745,6 +752,11 @@ public class GetTokenDetailsUserPlexAccount {
     @JsonIgnore
     public String uuid() {
         return uuid;
+    }
+
+    @JsonIgnore
+    public Optional<String> attributionPartner() {
+        return attributionPartner;
     }
 
     public final static Builder builder() {
@@ -1285,6 +1297,18 @@ public class GetTokenDetailsUserPlexAccount {
         this.uuid = uuid;
         return this;
     }
+
+    public GetTokenDetailsUserPlexAccount withAttributionPartner(String attributionPartner) {
+        Utils.checkNotNull(attributionPartner, "attributionPartner");
+        this.attributionPartner = Optional.ofNullable(attributionPartner);
+        return this;
+    }
+
+    public GetTokenDetailsUserPlexAccount withAttributionPartner(Optional<String> attributionPartner) {
+        Utils.checkNotNull(attributionPartner, "attributionPartner");
+        this.attributionPartner = attributionPartner;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -1335,7 +1359,8 @@ public class GetTokenDetailsUserPlexAccount {
             Objects.deepEquals(this.title, other.title) &&
             Objects.deepEquals(this.twoFactorEnabled, other.twoFactorEnabled) &&
             Objects.deepEquals(this.username, other.username) &&
-            Objects.deepEquals(this.uuid, other.uuid);
+            Objects.deepEquals(this.uuid, other.uuid) &&
+            Objects.deepEquals(this.attributionPartner, other.attributionPartner);
     }
     
     @Override
@@ -1380,7 +1405,8 @@ public class GetTokenDetailsUserPlexAccount {
             title,
             twoFactorEnabled,
             username,
-            uuid);
+            uuid,
+            attributionPartner);
     }
     
     @Override
@@ -1425,7 +1451,8 @@ public class GetTokenDetailsUserPlexAccount {
                 "title", title,
                 "twoFactorEnabled", twoFactorEnabled,
                 "username", username,
-                "uuid", uuid);
+                "uuid", uuid,
+                "attributionPartner", attributionPartner);
     }
     
     public final static class Builder {
@@ -1509,7 +1536,9 @@ public class GetTokenDetailsUserPlexAccount {
  
         private String username;
  
-        private String uuid;  
+        private String uuid;
+ 
+        private Optional<String> attributionPartner = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -2049,6 +2078,18 @@ public class GetTokenDetailsUserPlexAccount {
             this.uuid = uuid;
             return this;
         }
+
+        public Builder attributionPartner(String attributionPartner) {
+            Utils.checkNotNull(attributionPartner, "attributionPartner");
+            this.attributionPartner = Optional.ofNullable(attributionPartner);
+            return this;
+        }
+
+        public Builder attributionPartner(Optional<String> attributionPartner) {
+            Utils.checkNotNull(attributionPartner, "attributionPartner");
+            this.attributionPartner = attributionPartner;
+            return this;
+        }
         
         public GetTokenDetailsUserPlexAccount build() {
             if (anonymous == null) {
@@ -2129,7 +2170,8 @@ public class GetTokenDetailsUserPlexAccount {
                 title,
                 twoFactorEnabled,
                 username,
-                uuid);
+                uuid,
+                attributionPartner);
         }
 
         private static final LazySingletonValue<JsonNullable<Boolean>> _SINGLETON_VALUE_Anonymous =

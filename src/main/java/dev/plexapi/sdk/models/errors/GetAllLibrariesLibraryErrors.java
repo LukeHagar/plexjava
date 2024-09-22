@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Long;
+import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -22,7 +22,7 @@ public class GetAllLibrariesLibraryErrors {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("code")
-    private Optional<Long> code;
+    private Optional<Integer> code;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("message")
@@ -30,13 +30,13 @@ public class GetAllLibrariesLibraryErrors {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("status")
-    private Optional<Long> status;
+    private Optional<Integer> status;
 
     @JsonCreator
     public GetAllLibrariesLibraryErrors(
-            @JsonProperty("code") Optional<Long> code,
+            @JsonProperty("code") Optional<Integer> code,
             @JsonProperty("message") Optional<String> message,
-            @JsonProperty("status") Optional<Long> status) {
+            @JsonProperty("status") Optional<Integer> status) {
         Utils.checkNotNull(code, "code");
         Utils.checkNotNull(message, "message");
         Utils.checkNotNull(status, "status");
@@ -50,7 +50,7 @@ public class GetAllLibrariesLibraryErrors {
     }
 
     @JsonIgnore
-    public Optional<Long> code() {
+    public Optional<Integer> code() {
         return code;
     }
 
@@ -60,7 +60,7 @@ public class GetAllLibrariesLibraryErrors {
     }
 
     @JsonIgnore
-    public Optional<Long> status() {
+    public Optional<Integer> status() {
         return status;
     }
 
@@ -68,13 +68,13 @@ public class GetAllLibrariesLibraryErrors {
         return new Builder();
     }
 
-    public GetAllLibrariesLibraryErrors withCode(long code) {
+    public GetAllLibrariesLibraryErrors withCode(int code) {
         Utils.checkNotNull(code, "code");
         this.code = Optional.ofNullable(code);
         return this;
     }
 
-    public GetAllLibrariesLibraryErrors withCode(Optional<Long> code) {
+    public GetAllLibrariesLibraryErrors withCode(Optional<Integer> code) {
         Utils.checkNotNull(code, "code");
         this.code = code;
         return this;
@@ -92,13 +92,13 @@ public class GetAllLibrariesLibraryErrors {
         return this;
     }
 
-    public GetAllLibrariesLibraryErrors withStatus(long status) {
+    public GetAllLibrariesLibraryErrors withStatus(int status) {
         Utils.checkNotNull(status, "status");
         this.status = Optional.ofNullable(status);
         return this;
     }
 
-    public GetAllLibrariesLibraryErrors withStatus(Optional<Long> status) {
+    public GetAllLibrariesLibraryErrors withStatus(Optional<Integer> status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
@@ -137,23 +137,23 @@ public class GetAllLibrariesLibraryErrors {
     
     public final static class Builder {
  
-        private Optional<Long> code = Optional.empty();
+        private Optional<Integer> code = Optional.empty();
  
         private Optional<String> message = Optional.empty();
  
-        private Optional<Long> status = Optional.empty();  
+        private Optional<Integer> status = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
         }
 
-        public Builder code(long code) {
+        public Builder code(int code) {
             Utils.checkNotNull(code, "code");
             this.code = Optional.ofNullable(code);
             return this;
         }
 
-        public Builder code(Optional<Long> code) {
+        public Builder code(Optional<Integer> code) {
             Utils.checkNotNull(code, "code");
             this.code = code;
             return this;
@@ -171,13 +171,13 @@ public class GetAllLibrariesLibraryErrors {
             return this;
         }
 
-        public Builder status(long status) {
+        public Builder status(int status) {
             Utils.checkNotNull(status, "status");
             this.status = Optional.ofNullable(status);
             return this;
         }
 
-        public Builder status(Optional<Long> status) {
+        public Builder status(Optional<Integer> status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;

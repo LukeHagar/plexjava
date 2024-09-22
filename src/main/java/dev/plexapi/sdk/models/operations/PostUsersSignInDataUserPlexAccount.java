@@ -285,6 +285,10 @@ public class PostUsersSignInDataUserPlexAccount {
     @JsonProperty("uuid")
     private String uuid;
 
+    @JsonInclude(Include.ALWAYS)
+    @JsonProperty("attributionPartner")
+    private Optional<String> attributionPartner;
+
     @JsonProperty("pastSubscriptions")
     private List<PastSubscription> pastSubscriptions;
 
@@ -333,6 +337,7 @@ public class PostUsersSignInDataUserPlexAccount {
             @JsonProperty("twoFactorEnabled") Optional<Boolean> twoFactorEnabled,
             @JsonProperty("username") String username,
             @JsonProperty("uuid") String uuid,
+            @JsonProperty("attributionPartner") Optional<String> attributionPartner,
             @JsonProperty("pastSubscriptions") List<PastSubscription> pastSubscriptions,
             @JsonProperty("trials") List<Trials> trials) {
         Utils.checkNotNull(adsConsent, "adsConsent");
@@ -375,6 +380,7 @@ public class PostUsersSignInDataUserPlexAccount {
         Utils.checkNotNull(twoFactorEnabled, "twoFactorEnabled");
         Utils.checkNotNull(username, "username");
         Utils.checkNotNull(uuid, "uuid");
+        Utils.checkNotNull(attributionPartner, "attributionPartner");
         Utils.checkNotNull(pastSubscriptions, "pastSubscriptions");
         Utils.checkNotNull(trials, "trials");
         this.adsConsent = adsConsent;
@@ -417,6 +423,7 @@ public class PostUsersSignInDataUserPlexAccount {
         this.twoFactorEnabled = twoFactorEnabled;
         this.username = username;
         this.uuid = uuid;
+        this.attributionPartner = attributionPartner;
         this.pastSubscriptions = pastSubscriptions;
         this.trials = trials;
     }
@@ -444,7 +451,7 @@ public class PostUsersSignInDataUserPlexAccount {
             String uuid,
             List<PastSubscription> pastSubscriptions,
             List<Trials> trials) {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), authToken, Optional.empty(), Optional.empty(), country, email, Optional.empty(), Optional.empty(), friendlyName, entitlements, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), homeSize, id, joinedAt, Optional.empty(), Optional.empty(), mailingListStatus, maxHomeSize, Optional.empty(), profile, Optional.empty(), rememberExpiresAt, Optional.empty(), Optional.empty(), scrobbleTypes, services, subscription, Optional.empty(), subscriptions, thumb, title, Optional.empty(), username, uuid, pastSubscriptions, trials);
+        this(Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), authToken, Optional.empty(), Optional.empty(), country, email, Optional.empty(), Optional.empty(), friendlyName, entitlements, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), homeSize, id, joinedAt, Optional.empty(), Optional.empty(), mailingListStatus, maxHomeSize, Optional.empty(), profile, Optional.empty(), rememberExpiresAt, Optional.empty(), Optional.empty(), scrobbleTypes, services, subscription, Optional.empty(), subscriptions, thumb, title, Optional.empty(), username, uuid, Optional.empty(), pastSubscriptions, trials);
     }
 
     /**
@@ -759,6 +766,11 @@ public class PostUsersSignInDataUserPlexAccount {
     @JsonIgnore
     public String uuid() {
         return uuid;
+    }
+
+    @JsonIgnore
+    public Optional<String> attributionPartner() {
+        return attributionPartner;
     }
 
     @JsonIgnore
@@ -1310,6 +1322,18 @@ public class PostUsersSignInDataUserPlexAccount {
         return this;
     }
 
+    public PostUsersSignInDataUserPlexAccount withAttributionPartner(String attributionPartner) {
+        Utils.checkNotNull(attributionPartner, "attributionPartner");
+        this.attributionPartner = Optional.ofNullable(attributionPartner);
+        return this;
+    }
+
+    public PostUsersSignInDataUserPlexAccount withAttributionPartner(Optional<String> attributionPartner) {
+        Utils.checkNotNull(attributionPartner, "attributionPartner");
+        this.attributionPartner = attributionPartner;
+        return this;
+    }
+
     public PostUsersSignInDataUserPlexAccount withPastSubscriptions(List<PastSubscription> pastSubscriptions) {
         Utils.checkNotNull(pastSubscriptions, "pastSubscriptions");
         this.pastSubscriptions = pastSubscriptions;
@@ -1372,6 +1396,7 @@ public class PostUsersSignInDataUserPlexAccount {
             Objects.deepEquals(this.twoFactorEnabled, other.twoFactorEnabled) &&
             Objects.deepEquals(this.username, other.username) &&
             Objects.deepEquals(this.uuid, other.uuid) &&
+            Objects.deepEquals(this.attributionPartner, other.attributionPartner) &&
             Objects.deepEquals(this.pastSubscriptions, other.pastSubscriptions) &&
             Objects.deepEquals(this.trials, other.trials);
     }
@@ -1419,6 +1444,7 @@ public class PostUsersSignInDataUserPlexAccount {
             twoFactorEnabled,
             username,
             uuid,
+            attributionPartner,
             pastSubscriptions,
             trials);
     }
@@ -1466,6 +1492,7 @@ public class PostUsersSignInDataUserPlexAccount {
                 "twoFactorEnabled", twoFactorEnabled,
                 "username", username,
                 "uuid", uuid,
+                "attributionPartner", attributionPartner,
                 "pastSubscriptions", pastSubscriptions,
                 "trials", trials);
     }
@@ -1552,6 +1579,8 @@ public class PostUsersSignInDataUserPlexAccount {
         private String username;
  
         private String uuid;
+ 
+        private Optional<String> attributionPartner = Optional.empty();
  
         private List<PastSubscription> pastSubscriptions;
  
@@ -2096,6 +2125,18 @@ public class PostUsersSignInDataUserPlexAccount {
             return this;
         }
 
+        public Builder attributionPartner(String attributionPartner) {
+            Utils.checkNotNull(attributionPartner, "attributionPartner");
+            this.attributionPartner = Optional.ofNullable(attributionPartner);
+            return this;
+        }
+
+        public Builder attributionPartner(Optional<String> attributionPartner) {
+            Utils.checkNotNull(attributionPartner, "attributionPartner");
+            this.attributionPartner = attributionPartner;
+            return this;
+        }
+
         public Builder pastSubscriptions(List<PastSubscription> pastSubscriptions) {
             Utils.checkNotNull(pastSubscriptions, "pastSubscriptions");
             this.pastSubscriptions = pastSubscriptions;
@@ -2188,6 +2229,7 @@ public class PostUsersSignInDataUserPlexAccount {
                 twoFactorEnabled,
                 username,
                 uuid,
+                attributionPartner,
                 pastSubscriptions,
                 trials);
         }

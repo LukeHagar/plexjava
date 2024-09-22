@@ -10,9 +10,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
+import java.lang.Boolean;
 import java.lang.Double;
 import java.lang.Integer;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -24,6 +28,11 @@ import java.util.Optional;
 
 public class GetLibraryItemsMetadata {
 
+    /**
+     * The rating key (Media ID) of this media item.
+     * Note: This is always an integer, but is represented as a string in the API.
+     * 
+     */
     @JsonProperty("ratingKey")
     private String ratingKey;
 
@@ -37,19 +46,30 @@ public class GetLibraryItemsMetadata {
     @JsonProperty("studio")
     private Optional<String> studio;
 
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("skipChildren")
+    private Optional<Boolean> skipChildren;
+
+    /**
+     * The type of media content
+     * 
+     */
     @JsonProperty("type")
-    private String type;
+    private GetLibraryItemsType type;
 
     @JsonProperty("title")
     private String title;
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("slug")
+    private Optional<String> slug;
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contentRating")
     private Optional<String> contentRating;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("summary")
-    private Optional<String> summary;
+    private String summary;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("rating")
@@ -59,12 +79,34 @@ public class GetLibraryItemsMetadata {
     @JsonProperty("audienceRating")
     private Optional<Double> audienceRating;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("year")
-    private int year;
+    private Optional<Integer> year;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("seasonCount")
+    private Optional<Integer> seasonCount;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tagline")
     private Optional<String> tagline;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("flattenSeasons")
+    private Optional<? extends FlattenSeasons> flattenSeasons;
+
+    /**
+     * Setting that indicates the episode ordering for the show 
+     * None = Library default, 
+     * tmdbAiring = The Movie Database (Aired), 
+     * aired = TheTVDB (Aired), 
+     * dvd = TheTVDB (DVD), 
+     * absolute = TheTVDB (Absolute)).
+     * 
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("showOrdering")
+    private Optional<? extends ShowOrdering> showOrdering;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
@@ -74,20 +116,30 @@ public class GetLibraryItemsMetadata {
     @JsonProperty("art")
     private Optional<String> art;
 
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("banner")
+    private Optional<String> banner;
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
-    private int duration;
+    private Optional<Integer> duration;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("originallyAvailableAt")
     private Optional<LocalDate> originallyAvailableAt;
 
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * Unix epoch datetime in seconds
+     */
     @JsonProperty("addedAt")
-    private Optional<Integer> addedAt;
+    private long addedAt;
 
+    /**
+     * Unix epoch datetime in seconds
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("updatedAt")
-    private Optional<Integer> updatedAt;
+    private Optional<Long> updatedAt;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audienceRatingImage")
@@ -126,6 +178,10 @@ public class GetLibraryItemsMetadata {
     private Optional<String> grandparentThumb;
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentSlug")
+    private Optional<String> grandparentSlug;
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("grandparentArt")
     private Optional<String> grandparentArt;
 
@@ -133,8 +189,13 @@ public class GetLibraryItemsMetadata {
     @JsonProperty("grandparentTheme")
     private Optional<String> grandparentTheme;
 
+    /**
+     * The Media object is only included when type query is `4` or higher.
+     * 
+     */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Media")
-    private List<GetLibraryItemsMedia> media;
+    private Optional<? extends List<GetLibraryItemsMedia>> media;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Genre")
@@ -153,6 +214,10 @@ public class GetLibraryItemsMetadata {
     private Optional<? extends List<GetLibraryItemsWriter>> writer;
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Collection")
+    private Optional<? extends List<Collection>> collection;
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Role")
     private Optional<? extends List<GetLibraryItemsRole>> role;
 
@@ -163,6 +228,14 @@ public class GetLibraryItemsMetadata {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Guid")
     private Optional<? extends List<MediaGuid>> mediaGuid;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("UltraBlurColors")
+    private Optional<? extends UltraBlurColors> ultraBlurColors;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Image")
+    private Optional<? extends List<GetLibraryItemsImage>> image;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("titleSort")
@@ -216,6 +289,10 @@ public class GetLibraryItemsMetadata {
     @JsonProperty("hasPremiumPrimaryExtra")
     private Optional<String> hasPremiumPrimaryExtra;
 
+    /**
+     * The rating key of the parent item.
+     * 
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentRatingKey")
     private Optional<String> parentRatingKey;
@@ -258,20 +335,26 @@ public class GetLibraryItemsMetadata {
             @JsonProperty("key") String key,
             @JsonProperty("guid") String guid,
             @JsonProperty("studio") Optional<String> studio,
-            @JsonProperty("type") String type,
+            @JsonProperty("skipChildren") Optional<Boolean> skipChildren,
+            @JsonProperty("type") GetLibraryItemsType type,
             @JsonProperty("title") String title,
+            @JsonProperty("slug") Optional<String> slug,
             @JsonProperty("contentRating") Optional<String> contentRating,
-            @JsonProperty("summary") Optional<String> summary,
+            @JsonProperty("summary") String summary,
             @JsonProperty("rating") Optional<Double> rating,
             @JsonProperty("audienceRating") Optional<Double> audienceRating,
-            @JsonProperty("year") int year,
+            @JsonProperty("year") Optional<Integer> year,
+            @JsonProperty("seasonCount") Optional<Integer> seasonCount,
             @JsonProperty("tagline") Optional<String> tagline,
+            @JsonProperty("flattenSeasons") Optional<? extends FlattenSeasons> flattenSeasons,
+            @JsonProperty("showOrdering") Optional<? extends ShowOrdering> showOrdering,
             @JsonProperty("thumb") Optional<String> thumb,
             @JsonProperty("art") Optional<String> art,
-            @JsonProperty("duration") int duration,
+            @JsonProperty("banner") Optional<String> banner,
+            @JsonProperty("duration") Optional<Integer> duration,
             @JsonProperty("originallyAvailableAt") Optional<LocalDate> originallyAvailableAt,
-            @JsonProperty("addedAt") Optional<Integer> addedAt,
-            @JsonProperty("updatedAt") Optional<Integer> updatedAt,
+            @JsonProperty("addedAt") long addedAt,
+            @JsonProperty("updatedAt") Optional<Long> updatedAt,
             @JsonProperty("audienceRatingImage") Optional<String> audienceRatingImage,
             @JsonProperty("chapterSource") Optional<String> chapterSource,
             @JsonProperty("primaryExtraKey") Optional<String> primaryExtraKey,
@@ -281,15 +364,19 @@ public class GetLibraryItemsMetadata {
             @JsonProperty("grandparentKey") Optional<String> grandparentKey,
             @JsonProperty("grandparentTitle") Optional<String> grandparentTitle,
             @JsonProperty("grandparentThumb") Optional<String> grandparentThumb,
+            @JsonProperty("grandparentSlug") Optional<String> grandparentSlug,
             @JsonProperty("grandparentArt") Optional<String> grandparentArt,
             @JsonProperty("grandparentTheme") Optional<String> grandparentTheme,
-            @JsonProperty("Media") List<GetLibraryItemsMedia> media,
+            @JsonProperty("Media") Optional<? extends List<GetLibraryItemsMedia>> media,
             @JsonProperty("Genre") Optional<? extends List<GetLibraryItemsGenre>> genre,
             @JsonProperty("Country") Optional<? extends List<GetLibraryItemsCountry>> country,
             @JsonProperty("Director") Optional<? extends List<GetLibraryItemsDirector>> director,
             @JsonProperty("Writer") Optional<? extends List<GetLibraryItemsWriter>> writer,
+            @JsonProperty("Collection") Optional<? extends List<Collection>> collection,
             @JsonProperty("Role") Optional<? extends List<GetLibraryItemsRole>> role,
             @JsonProperty("Guid") Optional<? extends List<MediaGuid>> mediaGuid,
+            @JsonProperty("UltraBlurColors") Optional<? extends UltraBlurColors> ultraBlurColors,
+            @JsonProperty("Image") Optional<? extends List<GetLibraryItemsImage>> image,
             @JsonProperty("titleSort") Optional<String> titleSort,
             @JsonProperty("viewCount") Optional<Integer> viewCount,
             @JsonProperty("lastViewedAt") Optional<Integer> lastViewedAt,
@@ -316,16 +403,22 @@ public class GetLibraryItemsMetadata {
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(guid, "guid");
         Utils.checkNotNull(studio, "studio");
+        Utils.checkNotNull(skipChildren, "skipChildren");
         Utils.checkNotNull(type, "type");
         Utils.checkNotNull(title, "title");
+        Utils.checkNotNull(slug, "slug");
         Utils.checkNotNull(contentRating, "contentRating");
         Utils.checkNotNull(summary, "summary");
         Utils.checkNotNull(rating, "rating");
         Utils.checkNotNull(audienceRating, "audienceRating");
         Utils.checkNotNull(year, "year");
+        Utils.checkNotNull(seasonCount, "seasonCount");
         Utils.checkNotNull(tagline, "tagline");
+        Utils.checkNotNull(flattenSeasons, "flattenSeasons");
+        Utils.checkNotNull(showOrdering, "showOrdering");
         Utils.checkNotNull(thumb, "thumb");
         Utils.checkNotNull(art, "art");
+        Utils.checkNotNull(banner, "banner");
         Utils.checkNotNull(duration, "duration");
         Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
         Utils.checkNotNull(addedAt, "addedAt");
@@ -339,6 +432,7 @@ public class GetLibraryItemsMetadata {
         Utils.checkNotNull(grandparentKey, "grandparentKey");
         Utils.checkNotNull(grandparentTitle, "grandparentTitle");
         Utils.checkNotNull(grandparentThumb, "grandparentThumb");
+        Utils.checkNotNull(grandparentSlug, "grandparentSlug");
         Utils.checkNotNull(grandparentArt, "grandparentArt");
         Utils.checkNotNull(grandparentTheme, "grandparentTheme");
         Utils.checkNotNull(media, "media");
@@ -346,8 +440,11 @@ public class GetLibraryItemsMetadata {
         Utils.checkNotNull(country, "country");
         Utils.checkNotNull(director, "director");
         Utils.checkNotNull(writer, "writer");
+        Utils.checkNotNull(collection, "collection");
         Utils.checkNotNull(role, "role");
         Utils.checkNotNull(mediaGuid, "mediaGuid");
+        Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
+        Utils.checkNotNull(image, "image");
         Utils.checkNotNull(titleSort, "titleSort");
         Utils.checkNotNull(viewCount, "viewCount");
         Utils.checkNotNull(lastViewedAt, "lastViewedAt");
@@ -374,16 +471,22 @@ public class GetLibraryItemsMetadata {
         this.key = key;
         this.guid = guid;
         this.studio = studio;
+        this.skipChildren = skipChildren;
         this.type = type;
         this.title = title;
+        this.slug = slug;
         this.contentRating = contentRating;
         this.summary = summary;
         this.rating = rating;
         this.audienceRating = audienceRating;
         this.year = year;
+        this.seasonCount = seasonCount;
         this.tagline = tagline;
+        this.flattenSeasons = flattenSeasons;
+        this.showOrdering = showOrdering;
         this.thumb = thumb;
         this.art = art;
+        this.banner = banner;
         this.duration = duration;
         this.originallyAvailableAt = originallyAvailableAt;
         this.addedAt = addedAt;
@@ -397,6 +500,7 @@ public class GetLibraryItemsMetadata {
         this.grandparentKey = grandparentKey;
         this.grandparentTitle = grandparentTitle;
         this.grandparentThumb = grandparentThumb;
+        this.grandparentSlug = grandparentSlug;
         this.grandparentArt = grandparentArt;
         this.grandparentTheme = grandparentTheme;
         this.media = media;
@@ -404,8 +508,11 @@ public class GetLibraryItemsMetadata {
         this.country = country;
         this.director = director;
         this.writer = writer;
+        this.collection = collection;
         this.role = role;
         this.mediaGuid = mediaGuid;
+        this.ultraBlurColors = ultraBlurColors;
+        this.image = image;
         this.titleSort = titleSort;
         this.viewCount = viewCount;
         this.lastViewedAt = lastViewedAt;
@@ -434,14 +541,18 @@ public class GetLibraryItemsMetadata {
             String ratingKey,
             String key,
             String guid,
-            String type,
+            GetLibraryItemsType type,
             String title,
-            int year,
-            int duration,
-            List<GetLibraryItemsMedia> media) {
-        this(ratingKey, key, guid, Optional.empty(), type, title, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), year, Optional.empty(), Optional.empty(), Optional.empty(), duration, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), media, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+            String summary,
+            long addedAt) {
+        this(ratingKey, key, guid, Optional.empty(), Optional.empty(), type, title, Optional.empty(), Optional.empty(), summary, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), addedAt, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
+    /**
+     * The rating key (Media ID) of this media item.
+     * Note: This is always an integer, but is represented as a string in the API.
+     * 
+     */
     @JsonIgnore
     public String ratingKey() {
         return ratingKey;
@@ -463,7 +574,16 @@ public class GetLibraryItemsMetadata {
     }
 
     @JsonIgnore
-    public String type() {
+    public Optional<Boolean> skipChildren() {
+        return skipChildren;
+    }
+
+    /**
+     * The type of media content
+     * 
+     */
+    @JsonIgnore
+    public GetLibraryItemsType type() {
         return type;
     }
 
@@ -473,12 +593,17 @@ public class GetLibraryItemsMetadata {
     }
 
     @JsonIgnore
+    public Optional<String> slug() {
+        return slug;
+    }
+
+    @JsonIgnore
     public Optional<String> contentRating() {
         return contentRating;
     }
 
     @JsonIgnore
-    public Optional<String> summary() {
+    public String summary() {
         return summary;
     }
 
@@ -493,13 +618,39 @@ public class GetLibraryItemsMetadata {
     }
 
     @JsonIgnore
-    public int year() {
+    public Optional<Integer> year() {
         return year;
+    }
+
+    @JsonIgnore
+    public Optional<Integer> seasonCount() {
+        return seasonCount;
     }
 
     @JsonIgnore
     public Optional<String> tagline() {
         return tagline;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<FlattenSeasons> flattenSeasons() {
+        return (Optional<FlattenSeasons>) flattenSeasons;
+    }
+
+    /**
+     * Setting that indicates the episode ordering for the show 
+     * None = Library default, 
+     * tmdbAiring = The Movie Database (Aired), 
+     * aired = TheTVDB (Aired), 
+     * dvd = TheTVDB (DVD), 
+     * absolute = TheTVDB (Absolute)).
+     * 
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<ShowOrdering> showOrdering() {
+        return (Optional<ShowOrdering>) showOrdering;
     }
 
     @JsonIgnore
@@ -513,7 +664,12 @@ public class GetLibraryItemsMetadata {
     }
 
     @JsonIgnore
-    public int duration() {
+    public Optional<String> banner() {
+        return banner;
+    }
+
+    @JsonIgnore
+    public Optional<Integer> duration() {
         return duration;
     }
 
@@ -522,13 +678,19 @@ public class GetLibraryItemsMetadata {
         return originallyAvailableAt;
     }
 
+    /**
+     * Unix epoch datetime in seconds
+     */
     @JsonIgnore
-    public Optional<Integer> addedAt() {
+    public long addedAt() {
         return addedAt;
     }
 
+    /**
+     * Unix epoch datetime in seconds
+     */
     @JsonIgnore
-    public Optional<Integer> updatedAt() {
+    public Optional<Long> updatedAt() {
         return updatedAt;
     }
 
@@ -578,6 +740,11 @@ public class GetLibraryItemsMetadata {
     }
 
     @JsonIgnore
+    public Optional<String> grandparentSlug() {
+        return grandparentSlug;
+    }
+
+    @JsonIgnore
     public Optional<String> grandparentArt() {
         return grandparentArt;
     }
@@ -587,9 +754,14 @@ public class GetLibraryItemsMetadata {
         return grandparentTheme;
     }
 
+    /**
+     * The Media object is only included when type query is `4` or higher.
+     * 
+     */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public List<GetLibraryItemsMedia> media() {
-        return media;
+    public Optional<List<GetLibraryItemsMedia>> media() {
+        return (Optional<List<GetLibraryItemsMedia>>) media;
     }
 
     @SuppressWarnings("unchecked")
@@ -618,6 +790,12 @@ public class GetLibraryItemsMetadata {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
+    public Optional<List<Collection>> collection() {
+        return (Optional<List<Collection>>) collection;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
     public Optional<List<GetLibraryItemsRole>> role() {
         return (Optional<List<GetLibraryItemsRole>>) role;
     }
@@ -630,6 +808,18 @@ public class GetLibraryItemsMetadata {
     @JsonIgnore
     public Optional<List<MediaGuid>> mediaGuid() {
         return (Optional<List<MediaGuid>>) mediaGuid;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<UltraBlurColors> ultraBlurColors() {
+        return (Optional<UltraBlurColors>) ultraBlurColors;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<GetLibraryItemsImage>> image() {
+        return (Optional<List<GetLibraryItemsImage>>) image;
     }
 
     @JsonIgnore
@@ -697,6 +887,10 @@ public class GetLibraryItemsMetadata {
         return hasPremiumPrimaryExtra;
     }
 
+    /**
+     * The rating key of the parent item.
+     * 
+     */
     @JsonIgnore
     public Optional<String> parentRatingKey() {
         return parentRatingKey;
@@ -746,6 +940,11 @@ public class GetLibraryItemsMetadata {
         return new Builder();
     }
 
+    /**
+     * The rating key (Media ID) of this media item.
+     * Note: This is always an integer, but is represented as a string in the API.
+     * 
+     */
     public GetLibraryItemsMetadata withRatingKey(String ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         this.ratingKey = ratingKey;
@@ -776,7 +975,23 @@ public class GetLibraryItemsMetadata {
         return this;
     }
 
-    public GetLibraryItemsMetadata withType(String type) {
+    public GetLibraryItemsMetadata withSkipChildren(boolean skipChildren) {
+        Utils.checkNotNull(skipChildren, "skipChildren");
+        this.skipChildren = Optional.ofNullable(skipChildren);
+        return this;
+    }
+
+    public GetLibraryItemsMetadata withSkipChildren(Optional<Boolean> skipChildren) {
+        Utils.checkNotNull(skipChildren, "skipChildren");
+        this.skipChildren = skipChildren;
+        return this;
+    }
+
+    /**
+     * The type of media content
+     * 
+     */
+    public GetLibraryItemsMetadata withType(GetLibraryItemsType type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -785,6 +1000,18 @@ public class GetLibraryItemsMetadata {
     public GetLibraryItemsMetadata withTitle(String title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
+        return this;
+    }
+
+    public GetLibraryItemsMetadata withSlug(String slug) {
+        Utils.checkNotNull(slug, "slug");
+        this.slug = Optional.ofNullable(slug);
+        return this;
+    }
+
+    public GetLibraryItemsMetadata withSlug(Optional<String> slug) {
+        Utils.checkNotNull(slug, "slug");
+        this.slug = slug;
         return this;
     }
 
@@ -801,12 +1028,6 @@ public class GetLibraryItemsMetadata {
     }
 
     public GetLibraryItemsMetadata withSummary(String summary) {
-        Utils.checkNotNull(summary, "summary");
-        this.summary = Optional.ofNullable(summary);
-        return this;
-    }
-
-    public GetLibraryItemsMetadata withSummary(Optional<String> summary) {
         Utils.checkNotNull(summary, "summary");
         this.summary = summary;
         return this;
@@ -838,7 +1059,25 @@ public class GetLibraryItemsMetadata {
 
     public GetLibraryItemsMetadata withYear(int year) {
         Utils.checkNotNull(year, "year");
+        this.year = Optional.ofNullable(year);
+        return this;
+    }
+
+    public GetLibraryItemsMetadata withYear(Optional<Integer> year) {
+        Utils.checkNotNull(year, "year");
         this.year = year;
+        return this;
+    }
+
+    public GetLibraryItemsMetadata withSeasonCount(int seasonCount) {
+        Utils.checkNotNull(seasonCount, "seasonCount");
+        this.seasonCount = Optional.ofNullable(seasonCount);
+        return this;
+    }
+
+    public GetLibraryItemsMetadata withSeasonCount(Optional<Integer> seasonCount) {
+        Utils.checkNotNull(seasonCount, "seasonCount");
+        this.seasonCount = seasonCount;
         return this;
     }
 
@@ -851,6 +1090,48 @@ public class GetLibraryItemsMetadata {
     public GetLibraryItemsMetadata withTagline(Optional<String> tagline) {
         Utils.checkNotNull(tagline, "tagline");
         this.tagline = tagline;
+        return this;
+    }
+
+    public GetLibraryItemsMetadata withFlattenSeasons(FlattenSeasons flattenSeasons) {
+        Utils.checkNotNull(flattenSeasons, "flattenSeasons");
+        this.flattenSeasons = Optional.ofNullable(flattenSeasons);
+        return this;
+    }
+
+    public GetLibraryItemsMetadata withFlattenSeasons(Optional<? extends FlattenSeasons> flattenSeasons) {
+        Utils.checkNotNull(flattenSeasons, "flattenSeasons");
+        this.flattenSeasons = flattenSeasons;
+        return this;
+    }
+
+    /**
+     * Setting that indicates the episode ordering for the show 
+     * None = Library default, 
+     * tmdbAiring = The Movie Database (Aired), 
+     * aired = TheTVDB (Aired), 
+     * dvd = TheTVDB (DVD), 
+     * absolute = TheTVDB (Absolute)).
+     * 
+     */
+    public GetLibraryItemsMetadata withShowOrdering(ShowOrdering showOrdering) {
+        Utils.checkNotNull(showOrdering, "showOrdering");
+        this.showOrdering = Optional.ofNullable(showOrdering);
+        return this;
+    }
+
+    /**
+     * Setting that indicates the episode ordering for the show 
+     * None = Library default, 
+     * tmdbAiring = The Movie Database (Aired), 
+     * aired = TheTVDB (Aired), 
+     * dvd = TheTVDB (DVD), 
+     * absolute = TheTVDB (Absolute)).
+     * 
+     */
+    public GetLibraryItemsMetadata withShowOrdering(Optional<? extends ShowOrdering> showOrdering) {
+        Utils.checkNotNull(showOrdering, "showOrdering");
+        this.showOrdering = showOrdering;
         return this;
     }
 
@@ -878,7 +1159,25 @@ public class GetLibraryItemsMetadata {
         return this;
     }
 
+    public GetLibraryItemsMetadata withBanner(String banner) {
+        Utils.checkNotNull(banner, "banner");
+        this.banner = Optional.ofNullable(banner);
+        return this;
+    }
+
+    public GetLibraryItemsMetadata withBanner(Optional<String> banner) {
+        Utils.checkNotNull(banner, "banner");
+        this.banner = banner;
+        return this;
+    }
+
     public GetLibraryItemsMetadata withDuration(int duration) {
+        Utils.checkNotNull(duration, "duration");
+        this.duration = Optional.ofNullable(duration);
+        return this;
+    }
+
+    public GetLibraryItemsMetadata withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = duration;
         return this;
@@ -896,25 +1195,28 @@ public class GetLibraryItemsMetadata {
         return this;
     }
 
-    public GetLibraryItemsMetadata withAddedAt(int addedAt) {
-        Utils.checkNotNull(addedAt, "addedAt");
-        this.addedAt = Optional.ofNullable(addedAt);
-        return this;
-    }
-
-    public GetLibraryItemsMetadata withAddedAt(Optional<Integer> addedAt) {
+    /**
+     * Unix epoch datetime in seconds
+     */
+    public GetLibraryItemsMetadata withAddedAt(long addedAt) {
         Utils.checkNotNull(addedAt, "addedAt");
         this.addedAt = addedAt;
         return this;
     }
 
-    public GetLibraryItemsMetadata withUpdatedAt(int updatedAt) {
+    /**
+     * Unix epoch datetime in seconds
+     */
+    public GetLibraryItemsMetadata withUpdatedAt(long updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
         this.updatedAt = Optional.ofNullable(updatedAt);
         return this;
     }
 
-    public GetLibraryItemsMetadata withUpdatedAt(Optional<Integer> updatedAt) {
+    /**
+     * Unix epoch datetime in seconds
+     */
+    public GetLibraryItemsMetadata withUpdatedAt(Optional<Long> updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
         this.updatedAt = updatedAt;
         return this;
@@ -1028,6 +1330,18 @@ public class GetLibraryItemsMetadata {
         return this;
     }
 
+    public GetLibraryItemsMetadata withGrandparentSlug(String grandparentSlug) {
+        Utils.checkNotNull(grandparentSlug, "grandparentSlug");
+        this.grandparentSlug = Optional.ofNullable(grandparentSlug);
+        return this;
+    }
+
+    public GetLibraryItemsMetadata withGrandparentSlug(Optional<String> grandparentSlug) {
+        Utils.checkNotNull(grandparentSlug, "grandparentSlug");
+        this.grandparentSlug = grandparentSlug;
+        return this;
+    }
+
     public GetLibraryItemsMetadata withGrandparentArt(String grandparentArt) {
         Utils.checkNotNull(grandparentArt, "grandparentArt");
         this.grandparentArt = Optional.ofNullable(grandparentArt);
@@ -1052,7 +1366,21 @@ public class GetLibraryItemsMetadata {
         return this;
     }
 
+    /**
+     * The Media object is only included when type query is `4` or higher.
+     * 
+     */
     public GetLibraryItemsMetadata withMedia(List<GetLibraryItemsMedia> media) {
+        Utils.checkNotNull(media, "media");
+        this.media = Optional.ofNullable(media);
+        return this;
+    }
+
+    /**
+     * The Media object is only included when type query is `4` or higher.
+     * 
+     */
+    public GetLibraryItemsMetadata withMedia(Optional<? extends List<GetLibraryItemsMedia>> media) {
         Utils.checkNotNull(media, "media");
         this.media = media;
         return this;
@@ -1106,6 +1434,18 @@ public class GetLibraryItemsMetadata {
         return this;
     }
 
+    public GetLibraryItemsMetadata withCollection(List<Collection> collection) {
+        Utils.checkNotNull(collection, "collection");
+        this.collection = Optional.ofNullable(collection);
+        return this;
+    }
+
+    public GetLibraryItemsMetadata withCollection(Optional<? extends List<Collection>> collection) {
+        Utils.checkNotNull(collection, "collection");
+        this.collection = collection;
+        return this;
+    }
+
     public GetLibraryItemsMetadata withRole(List<GetLibraryItemsRole> role) {
         Utils.checkNotNull(role, "role");
         this.role = Optional.ofNullable(role);
@@ -1135,6 +1475,30 @@ public class GetLibraryItemsMetadata {
     public GetLibraryItemsMetadata withMediaGuid(Optional<? extends List<MediaGuid>> mediaGuid) {
         Utils.checkNotNull(mediaGuid, "mediaGuid");
         this.mediaGuid = mediaGuid;
+        return this;
+    }
+
+    public GetLibraryItemsMetadata withUltraBlurColors(UltraBlurColors ultraBlurColors) {
+        Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
+        this.ultraBlurColors = Optional.ofNullable(ultraBlurColors);
+        return this;
+    }
+
+    public GetLibraryItemsMetadata withUltraBlurColors(Optional<? extends UltraBlurColors> ultraBlurColors) {
+        Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
+        this.ultraBlurColors = ultraBlurColors;
+        return this;
+    }
+
+    public GetLibraryItemsMetadata withImage(List<GetLibraryItemsImage> image) {
+        Utils.checkNotNull(image, "image");
+        this.image = Optional.ofNullable(image);
+        return this;
+    }
+
+    public GetLibraryItemsMetadata withImage(Optional<? extends List<GetLibraryItemsImage>> image) {
+        Utils.checkNotNull(image, "image");
+        this.image = image;
         return this;
     }
 
@@ -1294,12 +1658,20 @@ public class GetLibraryItemsMetadata {
         return this;
     }
 
+    /**
+     * The rating key of the parent item.
+     * 
+     */
     public GetLibraryItemsMetadata withParentRatingKey(String parentRatingKey) {
         Utils.checkNotNull(parentRatingKey, "parentRatingKey");
         this.parentRatingKey = Optional.ofNullable(parentRatingKey);
         return this;
     }
 
+    /**
+     * The rating key of the parent item.
+     * 
+     */
     public GetLibraryItemsMetadata withParentRatingKey(Optional<String> parentRatingKey) {
         Utils.checkNotNull(parentRatingKey, "parentRatingKey");
         this.parentRatingKey = parentRatingKey;
@@ -1416,16 +1788,22 @@ public class GetLibraryItemsMetadata {
             Objects.deepEquals(this.key, other.key) &&
             Objects.deepEquals(this.guid, other.guid) &&
             Objects.deepEquals(this.studio, other.studio) &&
+            Objects.deepEquals(this.skipChildren, other.skipChildren) &&
             Objects.deepEquals(this.type, other.type) &&
             Objects.deepEquals(this.title, other.title) &&
+            Objects.deepEquals(this.slug, other.slug) &&
             Objects.deepEquals(this.contentRating, other.contentRating) &&
             Objects.deepEquals(this.summary, other.summary) &&
             Objects.deepEquals(this.rating, other.rating) &&
             Objects.deepEquals(this.audienceRating, other.audienceRating) &&
             Objects.deepEquals(this.year, other.year) &&
+            Objects.deepEquals(this.seasonCount, other.seasonCount) &&
             Objects.deepEquals(this.tagline, other.tagline) &&
+            Objects.deepEquals(this.flattenSeasons, other.flattenSeasons) &&
+            Objects.deepEquals(this.showOrdering, other.showOrdering) &&
             Objects.deepEquals(this.thumb, other.thumb) &&
             Objects.deepEquals(this.art, other.art) &&
+            Objects.deepEquals(this.banner, other.banner) &&
             Objects.deepEquals(this.duration, other.duration) &&
             Objects.deepEquals(this.originallyAvailableAt, other.originallyAvailableAt) &&
             Objects.deepEquals(this.addedAt, other.addedAt) &&
@@ -1439,6 +1817,7 @@ public class GetLibraryItemsMetadata {
             Objects.deepEquals(this.grandparentKey, other.grandparentKey) &&
             Objects.deepEquals(this.grandparentTitle, other.grandparentTitle) &&
             Objects.deepEquals(this.grandparentThumb, other.grandparentThumb) &&
+            Objects.deepEquals(this.grandparentSlug, other.grandparentSlug) &&
             Objects.deepEquals(this.grandparentArt, other.grandparentArt) &&
             Objects.deepEquals(this.grandparentTheme, other.grandparentTheme) &&
             Objects.deepEquals(this.media, other.media) &&
@@ -1446,8 +1825,11 @@ public class GetLibraryItemsMetadata {
             Objects.deepEquals(this.country, other.country) &&
             Objects.deepEquals(this.director, other.director) &&
             Objects.deepEquals(this.writer, other.writer) &&
+            Objects.deepEquals(this.collection, other.collection) &&
             Objects.deepEquals(this.role, other.role) &&
             Objects.deepEquals(this.mediaGuid, other.mediaGuid) &&
+            Objects.deepEquals(this.ultraBlurColors, other.ultraBlurColors) &&
+            Objects.deepEquals(this.image, other.image) &&
             Objects.deepEquals(this.titleSort, other.titleSort) &&
             Objects.deepEquals(this.viewCount, other.viewCount) &&
             Objects.deepEquals(this.lastViewedAt, other.lastViewedAt) &&
@@ -1479,16 +1861,22 @@ public class GetLibraryItemsMetadata {
             key,
             guid,
             studio,
+            skipChildren,
             type,
             title,
+            slug,
             contentRating,
             summary,
             rating,
             audienceRating,
             year,
+            seasonCount,
             tagline,
+            flattenSeasons,
+            showOrdering,
             thumb,
             art,
+            banner,
             duration,
             originallyAvailableAt,
             addedAt,
@@ -1502,6 +1890,7 @@ public class GetLibraryItemsMetadata {
             grandparentKey,
             grandparentTitle,
             grandparentThumb,
+            grandparentSlug,
             grandparentArt,
             grandparentTheme,
             media,
@@ -1509,8 +1898,11 @@ public class GetLibraryItemsMetadata {
             country,
             director,
             writer,
+            collection,
             role,
             mediaGuid,
+            ultraBlurColors,
+            image,
             titleSort,
             viewCount,
             lastViewedAt,
@@ -1542,16 +1934,22 @@ public class GetLibraryItemsMetadata {
                 "key", key,
                 "guid", guid,
                 "studio", studio,
+                "skipChildren", skipChildren,
                 "type", type,
                 "title", title,
+                "slug", slug,
                 "contentRating", contentRating,
                 "summary", summary,
                 "rating", rating,
                 "audienceRating", audienceRating,
                 "year", year,
+                "seasonCount", seasonCount,
                 "tagline", tagline,
+                "flattenSeasons", flattenSeasons,
+                "showOrdering", showOrdering,
                 "thumb", thumb,
                 "art", art,
+                "banner", banner,
                 "duration", duration,
                 "originallyAvailableAt", originallyAvailableAt,
                 "addedAt", addedAt,
@@ -1565,6 +1963,7 @@ public class GetLibraryItemsMetadata {
                 "grandparentKey", grandparentKey,
                 "grandparentTitle", grandparentTitle,
                 "grandparentThumb", grandparentThumb,
+                "grandparentSlug", grandparentSlug,
                 "grandparentArt", grandparentArt,
                 "grandparentTheme", grandparentTheme,
                 "media", media,
@@ -1572,8 +1971,11 @@ public class GetLibraryItemsMetadata {
                 "country", country,
                 "director", director,
                 "writer", writer,
+                "collection", collection,
                 "role", role,
                 "mediaGuid", mediaGuid,
+                "ultraBlurColors", ultraBlurColors,
+                "image", image,
                 "titleSort", titleSort,
                 "viewCount", viewCount,
                 "lastViewedAt", lastViewedAt,
@@ -1608,33 +2010,45 @@ public class GetLibraryItemsMetadata {
  
         private Optional<String> studio = Optional.empty();
  
-        private String type;
+        private Optional<Boolean> skipChildren = Optional.empty();
+ 
+        private GetLibraryItemsType type;
  
         private String title;
  
+        private Optional<String> slug = Optional.empty();
+ 
         private Optional<String> contentRating = Optional.empty();
  
-        private Optional<String> summary = Optional.empty();
+        private String summary;
  
         private Optional<Double> rating = Optional.empty();
  
         private Optional<Double> audienceRating = Optional.empty();
  
-        private Integer year;
+        private Optional<Integer> year = Optional.empty();
+ 
+        private Optional<Integer> seasonCount = Optional.empty();
  
         private Optional<String> tagline = Optional.empty();
+ 
+        private Optional<? extends FlattenSeasons> flattenSeasons;
+ 
+        private Optional<? extends ShowOrdering> showOrdering = Optional.empty();
  
         private Optional<String> thumb = Optional.empty();
  
         private Optional<String> art = Optional.empty();
  
-        private Integer duration;
+        private Optional<String> banner = Optional.empty();
+ 
+        private Optional<Integer> duration = Optional.empty();
  
         private Optional<LocalDate> originallyAvailableAt = Optional.empty();
  
-        private Optional<Integer> addedAt = Optional.empty();
+        private Long addedAt;
  
-        private Optional<Integer> updatedAt = Optional.empty();
+        private Optional<Long> updatedAt = Optional.empty();
  
         private Optional<String> audienceRatingImage = Optional.empty();
  
@@ -1654,11 +2068,13 @@ public class GetLibraryItemsMetadata {
  
         private Optional<String> grandparentThumb = Optional.empty();
  
+        private Optional<String> grandparentSlug = Optional.empty();
+ 
         private Optional<String> grandparentArt = Optional.empty();
  
         private Optional<String> grandparentTheme = Optional.empty();
  
-        private List<GetLibraryItemsMedia> media;
+        private Optional<? extends List<GetLibraryItemsMedia>> media = Optional.empty();
  
         private Optional<? extends List<GetLibraryItemsGenre>> genre = Optional.empty();
  
@@ -1668,9 +2084,15 @@ public class GetLibraryItemsMetadata {
  
         private Optional<? extends List<GetLibraryItemsWriter>> writer = Optional.empty();
  
+        private Optional<? extends List<Collection>> collection = Optional.empty();
+ 
         private Optional<? extends List<GetLibraryItemsRole>> role = Optional.empty();
  
         private Optional<? extends List<MediaGuid>> mediaGuid = Optional.empty();
+ 
+        private Optional<? extends UltraBlurColors> ultraBlurColors = Optional.empty();
+ 
+        private Optional<? extends List<GetLibraryItemsImage>> image = Optional.empty();
  
         private Optional<String> titleSort = Optional.empty();
  
@@ -1720,6 +2142,11 @@ public class GetLibraryItemsMetadata {
           // force use of static builder() method
         }
 
+        /**
+         * The rating key (Media ID) of this media item.
+         * Note: This is always an integer, but is represented as a string in the API.
+         * 
+         */
         public Builder ratingKey(String ratingKey) {
             Utils.checkNotNull(ratingKey, "ratingKey");
             this.ratingKey = ratingKey;
@@ -1750,7 +2177,23 @@ public class GetLibraryItemsMetadata {
             return this;
         }
 
-        public Builder type(String type) {
+        public Builder skipChildren(boolean skipChildren) {
+            Utils.checkNotNull(skipChildren, "skipChildren");
+            this.skipChildren = Optional.ofNullable(skipChildren);
+            return this;
+        }
+
+        public Builder skipChildren(Optional<Boolean> skipChildren) {
+            Utils.checkNotNull(skipChildren, "skipChildren");
+            this.skipChildren = skipChildren;
+            return this;
+        }
+
+        /**
+         * The type of media content
+         * 
+         */
+        public Builder type(GetLibraryItemsType type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
@@ -1759,6 +2202,18 @@ public class GetLibraryItemsMetadata {
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = title;
+            return this;
+        }
+
+        public Builder slug(String slug) {
+            Utils.checkNotNull(slug, "slug");
+            this.slug = Optional.ofNullable(slug);
+            return this;
+        }
+
+        public Builder slug(Optional<String> slug) {
+            Utils.checkNotNull(slug, "slug");
+            this.slug = slug;
             return this;
         }
 
@@ -1775,12 +2230,6 @@ public class GetLibraryItemsMetadata {
         }
 
         public Builder summary(String summary) {
-            Utils.checkNotNull(summary, "summary");
-            this.summary = Optional.ofNullable(summary);
-            return this;
-        }
-
-        public Builder summary(Optional<String> summary) {
             Utils.checkNotNull(summary, "summary");
             this.summary = summary;
             return this;
@@ -1812,7 +2261,25 @@ public class GetLibraryItemsMetadata {
 
         public Builder year(int year) {
             Utils.checkNotNull(year, "year");
+            this.year = Optional.ofNullable(year);
+            return this;
+        }
+
+        public Builder year(Optional<Integer> year) {
+            Utils.checkNotNull(year, "year");
             this.year = year;
+            return this;
+        }
+
+        public Builder seasonCount(int seasonCount) {
+            Utils.checkNotNull(seasonCount, "seasonCount");
+            this.seasonCount = Optional.ofNullable(seasonCount);
+            return this;
+        }
+
+        public Builder seasonCount(Optional<Integer> seasonCount) {
+            Utils.checkNotNull(seasonCount, "seasonCount");
+            this.seasonCount = seasonCount;
             return this;
         }
 
@@ -1825,6 +2292,48 @@ public class GetLibraryItemsMetadata {
         public Builder tagline(Optional<String> tagline) {
             Utils.checkNotNull(tagline, "tagline");
             this.tagline = tagline;
+            return this;
+        }
+
+        public Builder flattenSeasons(FlattenSeasons flattenSeasons) {
+            Utils.checkNotNull(flattenSeasons, "flattenSeasons");
+            this.flattenSeasons = Optional.ofNullable(flattenSeasons);
+            return this;
+        }
+
+        public Builder flattenSeasons(Optional<? extends FlattenSeasons> flattenSeasons) {
+            Utils.checkNotNull(flattenSeasons, "flattenSeasons");
+            this.flattenSeasons = flattenSeasons;
+            return this;
+        }
+
+        /**
+         * Setting that indicates the episode ordering for the show 
+         * None = Library default, 
+         * tmdbAiring = The Movie Database (Aired), 
+         * aired = TheTVDB (Aired), 
+         * dvd = TheTVDB (DVD), 
+         * absolute = TheTVDB (Absolute)).
+         * 
+         */
+        public Builder showOrdering(ShowOrdering showOrdering) {
+            Utils.checkNotNull(showOrdering, "showOrdering");
+            this.showOrdering = Optional.ofNullable(showOrdering);
+            return this;
+        }
+
+        /**
+         * Setting that indicates the episode ordering for the show 
+         * None = Library default, 
+         * tmdbAiring = The Movie Database (Aired), 
+         * aired = TheTVDB (Aired), 
+         * dvd = TheTVDB (DVD), 
+         * absolute = TheTVDB (Absolute)).
+         * 
+         */
+        public Builder showOrdering(Optional<? extends ShowOrdering> showOrdering) {
+            Utils.checkNotNull(showOrdering, "showOrdering");
+            this.showOrdering = showOrdering;
             return this;
         }
 
@@ -1852,7 +2361,25 @@ public class GetLibraryItemsMetadata {
             return this;
         }
 
+        public Builder banner(String banner) {
+            Utils.checkNotNull(banner, "banner");
+            this.banner = Optional.ofNullable(banner);
+            return this;
+        }
+
+        public Builder banner(Optional<String> banner) {
+            Utils.checkNotNull(banner, "banner");
+            this.banner = banner;
+            return this;
+        }
+
         public Builder duration(int duration) {
+            Utils.checkNotNull(duration, "duration");
+            this.duration = Optional.ofNullable(duration);
+            return this;
+        }
+
+        public Builder duration(Optional<Integer> duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = duration;
             return this;
@@ -1870,25 +2397,28 @@ public class GetLibraryItemsMetadata {
             return this;
         }
 
-        public Builder addedAt(int addedAt) {
-            Utils.checkNotNull(addedAt, "addedAt");
-            this.addedAt = Optional.ofNullable(addedAt);
-            return this;
-        }
-
-        public Builder addedAt(Optional<Integer> addedAt) {
+        /**
+         * Unix epoch datetime in seconds
+         */
+        public Builder addedAt(long addedAt) {
             Utils.checkNotNull(addedAt, "addedAt");
             this.addedAt = addedAt;
             return this;
         }
 
-        public Builder updatedAt(int updatedAt) {
+        /**
+         * Unix epoch datetime in seconds
+         */
+        public Builder updatedAt(long updatedAt) {
             Utils.checkNotNull(updatedAt, "updatedAt");
             this.updatedAt = Optional.ofNullable(updatedAt);
             return this;
         }
 
-        public Builder updatedAt(Optional<Integer> updatedAt) {
+        /**
+         * Unix epoch datetime in seconds
+         */
+        public Builder updatedAt(Optional<Long> updatedAt) {
             Utils.checkNotNull(updatedAt, "updatedAt");
             this.updatedAt = updatedAt;
             return this;
@@ -2002,6 +2532,18 @@ public class GetLibraryItemsMetadata {
             return this;
         }
 
+        public Builder grandparentSlug(String grandparentSlug) {
+            Utils.checkNotNull(grandparentSlug, "grandparentSlug");
+            this.grandparentSlug = Optional.ofNullable(grandparentSlug);
+            return this;
+        }
+
+        public Builder grandparentSlug(Optional<String> grandparentSlug) {
+            Utils.checkNotNull(grandparentSlug, "grandparentSlug");
+            this.grandparentSlug = grandparentSlug;
+            return this;
+        }
+
         public Builder grandparentArt(String grandparentArt) {
             Utils.checkNotNull(grandparentArt, "grandparentArt");
             this.grandparentArt = Optional.ofNullable(grandparentArt);
@@ -2026,7 +2568,21 @@ public class GetLibraryItemsMetadata {
             return this;
         }
 
+        /**
+         * The Media object is only included when type query is `4` or higher.
+         * 
+         */
         public Builder media(List<GetLibraryItemsMedia> media) {
+            Utils.checkNotNull(media, "media");
+            this.media = Optional.ofNullable(media);
+            return this;
+        }
+
+        /**
+         * The Media object is only included when type query is `4` or higher.
+         * 
+         */
+        public Builder media(Optional<? extends List<GetLibraryItemsMedia>> media) {
             Utils.checkNotNull(media, "media");
             this.media = media;
             return this;
@@ -2080,6 +2636,18 @@ public class GetLibraryItemsMetadata {
             return this;
         }
 
+        public Builder collection(List<Collection> collection) {
+            Utils.checkNotNull(collection, "collection");
+            this.collection = Optional.ofNullable(collection);
+            return this;
+        }
+
+        public Builder collection(Optional<? extends List<Collection>> collection) {
+            Utils.checkNotNull(collection, "collection");
+            this.collection = collection;
+            return this;
+        }
+
         public Builder role(List<GetLibraryItemsRole> role) {
             Utils.checkNotNull(role, "role");
             this.role = Optional.ofNullable(role);
@@ -2109,6 +2677,30 @@ public class GetLibraryItemsMetadata {
         public Builder mediaGuid(Optional<? extends List<MediaGuid>> mediaGuid) {
             Utils.checkNotNull(mediaGuid, "mediaGuid");
             this.mediaGuid = mediaGuid;
+            return this;
+        }
+
+        public Builder ultraBlurColors(UltraBlurColors ultraBlurColors) {
+            Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
+            this.ultraBlurColors = Optional.ofNullable(ultraBlurColors);
+            return this;
+        }
+
+        public Builder ultraBlurColors(Optional<? extends UltraBlurColors> ultraBlurColors) {
+            Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
+            this.ultraBlurColors = ultraBlurColors;
+            return this;
+        }
+
+        public Builder image(List<GetLibraryItemsImage> image) {
+            Utils.checkNotNull(image, "image");
+            this.image = Optional.ofNullable(image);
+            return this;
+        }
+
+        public Builder image(Optional<? extends List<GetLibraryItemsImage>> image) {
+            Utils.checkNotNull(image, "image");
+            this.image = image;
             return this;
         }
 
@@ -2268,12 +2860,20 @@ public class GetLibraryItemsMetadata {
             return this;
         }
 
+        /**
+         * The rating key of the parent item.
+         * 
+         */
         public Builder parentRatingKey(String parentRatingKey) {
             Utils.checkNotNull(parentRatingKey, "parentRatingKey");
             this.parentRatingKey = Optional.ofNullable(parentRatingKey);
             return this;
         }
 
+        /**
+         * The rating key of the parent item.
+         * 
+         */
         public Builder parentRatingKey(Optional<String> parentRatingKey) {
             Utils.checkNotNull(parentRatingKey, "parentRatingKey");
             this.parentRatingKey = parentRatingKey;
@@ -2377,21 +2977,29 @@ public class GetLibraryItemsMetadata {
         }
         
         public GetLibraryItemsMetadata build() {
-            return new GetLibraryItemsMetadata(
+            if (flattenSeasons == null) {
+                flattenSeasons = _SINGLETON_VALUE_FlattenSeasons.value();
+            }            return new GetLibraryItemsMetadata(
                 ratingKey,
                 key,
                 guid,
                 studio,
+                skipChildren,
                 type,
                 title,
+                slug,
                 contentRating,
                 summary,
                 rating,
                 audienceRating,
                 year,
+                seasonCount,
                 tagline,
+                flattenSeasons,
+                showOrdering,
                 thumb,
                 art,
+                banner,
                 duration,
                 originallyAvailableAt,
                 addedAt,
@@ -2405,6 +3013,7 @@ public class GetLibraryItemsMetadata {
                 grandparentKey,
                 grandparentTitle,
                 grandparentThumb,
+                grandparentSlug,
                 grandparentArt,
                 grandparentTheme,
                 media,
@@ -2412,8 +3021,11 @@ public class GetLibraryItemsMetadata {
                 country,
                 director,
                 writer,
+                collection,
                 role,
                 mediaGuid,
+                ultraBlurColors,
+                image,
                 titleSort,
                 viewCount,
                 lastViewedAt,
@@ -2437,6 +3049,12 @@ public class GetLibraryItemsMetadata {
                 parentThumb,
                 parentTheme);
         }
+
+        private static final LazySingletonValue<Optional<? extends FlattenSeasons>> _SINGLETON_VALUE_FlattenSeasons =
+                new LazySingletonValue<>(
+                        "flattenSeasons",
+                        "\"0\"",
+                        new TypeReference<Optional<? extends FlattenSeasons>>() {});
     }
 }
 

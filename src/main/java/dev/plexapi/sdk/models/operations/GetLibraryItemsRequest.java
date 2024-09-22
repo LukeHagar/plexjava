@@ -59,7 +59,7 @@ public class GetLibraryItemsRequest {
      * 
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")
-    private Type type;
+    private Optional<? extends Type> type;
 
     /**
      * The index of the first item to return. If not specified, the first item will be returned.
@@ -85,7 +85,7 @@ public class GetLibraryItemsRequest {
             Tag tag,
             Optional<? extends IncludeGuids> includeGuids,
             Optional<? extends IncludeMeta> includeMeta,
-            Type type,
+            Optional<? extends Type> type,
             Optional<Integer> xPlexContainerStart,
             Optional<Integer> xPlexContainerSize) {
         Utils.checkNotNull(sectionKey, "sectionKey");
@@ -106,9 +106,8 @@ public class GetLibraryItemsRequest {
     
     public GetLibraryItemsRequest(
             int sectionKey,
-            Tag tag,
-            Type type) {
-        this(sectionKey, tag, Optional.empty(), Optional.empty(), type, Optional.empty(), Optional.empty());
+            Tag tag) {
+        this(sectionKey, tag, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -158,9 +157,10 @@ public class GetLibraryItemsRequest {
      * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
      * 
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Type type() {
-        return type;
+    public Optional<Type> type() {
+        return (Optional<Type>) type;
     }
 
     /**
@@ -259,6 +259,21 @@ public class GetLibraryItemsRequest {
      * 
      */
     public GetLibraryItemsRequest withType(Type type) {
+        Utils.checkNotNull(type, "type");
+        this.type = Optional.ofNullable(type);
+        return this;
+    }
+
+    /**
+     * The type of media to retrieve.
+     * 1 = movie
+     * 2 = show
+     * 3 = season
+     * 4 = episode
+     * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
+     * 
+     */
+    public GetLibraryItemsRequest withType(Optional<? extends Type> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -365,7 +380,7 @@ public class GetLibraryItemsRequest {
  
         private Optional<? extends IncludeMeta> includeMeta;
  
-        private Type type;
+        private Optional<? extends Type> type = Optional.empty();
  
         private Optional<Integer> xPlexContainerStart;
  
@@ -445,6 +460,21 @@ public class GetLibraryItemsRequest {
          * 
          */
         public Builder type(Type type) {
+            Utils.checkNotNull(type, "type");
+            this.type = Optional.ofNullable(type);
+            return this;
+        }
+
+        /**
+         * The type of media to retrieve.
+         * 1 = movie
+         * 2 = show
+         * 3 = season
+         * 4 = episode
+         * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
+         * 
+         */
+        public Builder type(Optional<? extends Type> type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;

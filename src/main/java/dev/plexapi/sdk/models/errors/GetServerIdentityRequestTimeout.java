@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.io.InputStream;
-import java.lang.Long;
+import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -25,7 +25,7 @@ public class GetServerIdentityRequestTimeout extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("code")
-    private Optional<Long> code;
+    private Optional<Integer> code;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("message")
@@ -40,7 +40,7 @@ public class GetServerIdentityRequestTimeout extends RuntimeException {
 
     @JsonCreator
     public GetServerIdentityRequestTimeout(
-            @JsonProperty("code") Optional<Long> code,
+            @JsonProperty("code") Optional<Integer> code,
             @JsonProperty("message") Optional<String> message,
             @JsonProperty("RawResponse") Optional<? extends HttpResponse<InputStream>> rawResponse) {
         Utils.checkNotNull(code, "code");
@@ -55,7 +55,7 @@ public class GetServerIdentityRequestTimeout extends RuntimeException {
         this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    public Optional<Long> code(){
+    public Optional<Integer> code(){
         return code;
     }
 
@@ -75,13 +75,13 @@ public class GetServerIdentityRequestTimeout extends RuntimeException {
         return new Builder();
     }
 
-    public GetServerIdentityRequestTimeout withCode(long code) {
+    public GetServerIdentityRequestTimeout withCode(int code) {
         Utils.checkNotNull(code, "code");
         this.code = Optional.ofNullable(code);
         return this;
     }
     
-    public GetServerIdentityRequestTimeout withCode(Optional<Long> code) {
+    public GetServerIdentityRequestTimeout withCode(Optional<Integer> code) {
         Utils.checkNotNull(code, "code");
         this.code = code;
         return this;
@@ -150,7 +150,7 @@ public class GetServerIdentityRequestTimeout extends RuntimeException {
 
     public final static class Builder {
 
-        private Optional<Long> code = Optional.empty();
+        private Optional<Integer> code = Optional.empty();
 
         private Optional<String> message = Optional.empty();
 
@@ -160,13 +160,13 @@ public class GetServerIdentityRequestTimeout extends RuntimeException {
           // force use of static builder() method
         }
 
-        public Builder code(long code) {
+        public Builder code(int code) {
             Utils.checkNotNull(code, "code");
             this.code = Optional.ofNullable(code);
             return this;
         }
         
-        public Builder code(Optional<Long> code) {
+        public Builder code(Optional<Integer> code) {
             Utils.checkNotNull(code, "code");
             this.code = code;
             return this;

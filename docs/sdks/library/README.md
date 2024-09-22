@@ -409,9 +409,9 @@ public class Application {
         GetLibraryItemsRequest req = GetLibraryItemsRequest.builder()
                 .sectionKey(9518)
                 .tag(Tag.EDITION)
-                .type(Type.Show)
                 .includeGuids(IncludeGuids.Enable)
                 .includeMeta(IncludeMeta.Enable)
+                .type(Type.TvShow)
                 .xPlexContainerStart(0)
                 .xPlexContainerSize(50)
                 .build();
@@ -555,7 +555,7 @@ public class Application {
 
         GetSearchLibraryResponse res = sdk.library().getSearchLibrary()
                 .sectionKey(9518)
-                .type(QueryParamType.Show)
+                .type(QueryParamType.TvShow)
                 .call();
 
         if (res.object().isPresent()) {
@@ -736,7 +736,7 @@ public class Application {
             .build();
 
         GetTopWatchedContentResponse res = sdk.library().getTopWatchedContent()
-                .type(GetTopWatchedContentQueryParamType.Show)
+                .type(GetTopWatchedContentQueryParamType.TvShow)
                 .includeGuids(1L)
                 .call();
 
