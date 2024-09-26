@@ -10,9 +10,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Double;
+import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -23,103 +26,101 @@ import java.util.Optional;
 
 public class Media {
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("id")
-    private Optional<Double> id;
+    private int id;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
-    private Optional<Double> duration;
+    private int duration;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bitrate")
-    private Optional<Double> bitrate;
+    private int bitrate;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("width")
-    private Optional<Double> width;
+    private int width;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("height")
-    private Optional<Double> height;
+    private int height;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("aspectRatio")
-    private Optional<Double> aspectRatio;
+    private double aspectRatio;
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("audioProfile")
+    private Optional<String> audioProfile;
+
     @JsonProperty("audioChannels")
-    private Optional<Double> audioChannels;
+    private int audioChannels;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioCodec")
-    private Optional<String> audioCodec;
+    private String audioCodec;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoCodec")
-    private Optional<String> videoCodec;
+    private String videoCodec;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoResolution")
-    private Optional<Double> videoResolution;
+    private String videoResolution;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("container")
-    private Optional<String> container;
+    private String container;
+
+    @JsonProperty("videoFrameRate")
+    private String videoFrameRate;
+
+    @JsonProperty("videoProfile")
+    private String videoProfile;
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("videoFrameRate")
-    private Optional<String> videoFrameRate;
+    @JsonProperty("hasVoiceActivity")
+    private Optional<Boolean> hasVoiceActivity;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("optimizedForStreaming")
-    private Optional<Double> optimizedForStreaming;
+    private Optional<? extends OptimizedForStreaming> optimizedForStreaming;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("has64bitOffsets")
     private Optional<Boolean> has64bitOffsets;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("videoProfile")
-    private Optional<String> videoProfile;
-
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Part")
-    private Optional<? extends List<Part>> part;
+    private List<Part> part;
 
     @JsonCreator
     public Media(
-            @JsonProperty("id") Optional<Double> id,
-            @JsonProperty("duration") Optional<Double> duration,
-            @JsonProperty("bitrate") Optional<Double> bitrate,
-            @JsonProperty("width") Optional<Double> width,
-            @JsonProperty("height") Optional<Double> height,
-            @JsonProperty("aspectRatio") Optional<Double> aspectRatio,
-            @JsonProperty("audioChannels") Optional<Double> audioChannels,
-            @JsonProperty("audioCodec") Optional<String> audioCodec,
-            @JsonProperty("videoCodec") Optional<String> videoCodec,
-            @JsonProperty("videoResolution") Optional<Double> videoResolution,
-            @JsonProperty("container") Optional<String> container,
-            @JsonProperty("videoFrameRate") Optional<String> videoFrameRate,
-            @JsonProperty("optimizedForStreaming") Optional<Double> optimizedForStreaming,
+            @JsonProperty("id") int id,
+            @JsonProperty("duration") int duration,
+            @JsonProperty("bitrate") int bitrate,
+            @JsonProperty("width") int width,
+            @JsonProperty("height") int height,
+            @JsonProperty("aspectRatio") double aspectRatio,
+            @JsonProperty("audioProfile") Optional<String> audioProfile,
+            @JsonProperty("audioChannels") int audioChannels,
+            @JsonProperty("audioCodec") String audioCodec,
+            @JsonProperty("videoCodec") String videoCodec,
+            @JsonProperty("videoResolution") String videoResolution,
+            @JsonProperty("container") String container,
+            @JsonProperty("videoFrameRate") String videoFrameRate,
+            @JsonProperty("videoProfile") String videoProfile,
+            @JsonProperty("hasVoiceActivity") Optional<Boolean> hasVoiceActivity,
+            @JsonProperty("optimizedForStreaming") Optional<? extends OptimizedForStreaming> optimizedForStreaming,
             @JsonProperty("has64bitOffsets") Optional<Boolean> has64bitOffsets,
-            @JsonProperty("videoProfile") Optional<String> videoProfile,
-            @JsonProperty("Part") Optional<? extends List<Part>> part) {
+            @JsonProperty("Part") List<Part> part) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(duration, "duration");
         Utils.checkNotNull(bitrate, "bitrate");
         Utils.checkNotNull(width, "width");
         Utils.checkNotNull(height, "height");
         Utils.checkNotNull(aspectRatio, "aspectRatio");
+        Utils.checkNotNull(audioProfile, "audioProfile");
         Utils.checkNotNull(audioChannels, "audioChannels");
         Utils.checkNotNull(audioCodec, "audioCodec");
         Utils.checkNotNull(videoCodec, "videoCodec");
         Utils.checkNotNull(videoResolution, "videoResolution");
         Utils.checkNotNull(container, "container");
         Utils.checkNotNull(videoFrameRate, "videoFrameRate");
+        Utils.checkNotNull(videoProfile, "videoProfile");
+        Utils.checkNotNull(hasVoiceActivity, "hasVoiceActivity");
         Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
         Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
-        Utils.checkNotNull(videoProfile, "videoProfile");
         Utils.checkNotNull(part, "part");
         this.id = id;
         this.duration = duration;
@@ -127,85 +128,117 @@ public class Media {
         this.width = width;
         this.height = height;
         this.aspectRatio = aspectRatio;
+        this.audioProfile = audioProfile;
         this.audioChannels = audioChannels;
         this.audioCodec = audioCodec;
         this.videoCodec = videoCodec;
         this.videoResolution = videoResolution;
         this.container = container;
         this.videoFrameRate = videoFrameRate;
+        this.videoProfile = videoProfile;
+        this.hasVoiceActivity = hasVoiceActivity;
         this.optimizedForStreaming = optimizedForStreaming;
         this.has64bitOffsets = has64bitOffsets;
-        this.videoProfile = videoProfile;
         this.part = part;
     }
     
-    public Media() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    public Media(
+            int id,
+            int duration,
+            int bitrate,
+            int width,
+            int height,
+            double aspectRatio,
+            int audioChannels,
+            String audioCodec,
+            String videoCodec,
+            String videoResolution,
+            String container,
+            String videoFrameRate,
+            String videoProfile,
+            List<Part> part) {
+        this(id, duration, bitrate, width, height, aspectRatio, Optional.empty(), audioChannels, audioCodec, videoCodec, videoResolution, container, videoFrameRate, videoProfile, Optional.empty(), Optional.empty(), Optional.empty(), part);
     }
 
     @JsonIgnore
-    public Optional<Double> id() {
+    public int id() {
         return id;
     }
 
     @JsonIgnore
-    public Optional<Double> duration() {
+    public int duration() {
         return duration;
     }
 
     @JsonIgnore
-    public Optional<Double> bitrate() {
+    public int bitrate() {
         return bitrate;
     }
 
     @JsonIgnore
-    public Optional<Double> width() {
+    public int width() {
         return width;
     }
 
     @JsonIgnore
-    public Optional<Double> height() {
+    public int height() {
         return height;
     }
 
     @JsonIgnore
-    public Optional<Double> aspectRatio() {
+    public double aspectRatio() {
         return aspectRatio;
     }
 
     @JsonIgnore
-    public Optional<Double> audioChannels() {
+    public Optional<String> audioProfile() {
+        return audioProfile;
+    }
+
+    @JsonIgnore
+    public int audioChannels() {
         return audioChannels;
     }
 
     @JsonIgnore
-    public Optional<String> audioCodec() {
+    public String audioCodec() {
         return audioCodec;
     }
 
     @JsonIgnore
-    public Optional<String> videoCodec() {
+    public String videoCodec() {
         return videoCodec;
     }
 
     @JsonIgnore
-    public Optional<Double> videoResolution() {
+    public String videoResolution() {
         return videoResolution;
     }
 
     @JsonIgnore
-    public Optional<String> container() {
+    public String container() {
         return container;
     }
 
     @JsonIgnore
-    public Optional<String> videoFrameRate() {
+    public String videoFrameRate() {
         return videoFrameRate;
     }
 
     @JsonIgnore
-    public Optional<Double> optimizedForStreaming() {
-        return optimizedForStreaming;
+    public String videoProfile() {
+        return videoProfile;
+    }
+
+    @JsonIgnore
+    public Optional<Boolean> hasVoiceActivity() {
+        return hasVoiceActivity;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<OptimizedForStreaming> optimizedForStreaming() {
+        return (Optional<OptimizedForStreaming>) optimizedForStreaming;
     }
 
     @JsonIgnore
@@ -214,75 +247,39 @@ public class Media {
     }
 
     @JsonIgnore
-    public Optional<String> videoProfile() {
-        return videoProfile;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<Part>> part() {
-        return (Optional<List<Part>>) part;
+    public List<Part> part() {
+        return part;
     }
 
     public final static Builder builder() {
         return new Builder();
     }
 
-    public Media withId(double id) {
-        Utils.checkNotNull(id, "id");
-        this.id = Optional.ofNullable(id);
-        return this;
-    }
-
-    public Media withId(Optional<Double> id) {
+    public Media withId(int id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
     }
 
-    public Media withDuration(double duration) {
-        Utils.checkNotNull(duration, "duration");
-        this.duration = Optional.ofNullable(duration);
-        return this;
-    }
-
-    public Media withDuration(Optional<Double> duration) {
+    public Media withDuration(int duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = duration;
         return this;
     }
 
-    public Media withBitrate(double bitrate) {
-        Utils.checkNotNull(bitrate, "bitrate");
-        this.bitrate = Optional.ofNullable(bitrate);
-        return this;
-    }
-
-    public Media withBitrate(Optional<Double> bitrate) {
+    public Media withBitrate(int bitrate) {
         Utils.checkNotNull(bitrate, "bitrate");
         this.bitrate = bitrate;
         return this;
     }
 
-    public Media withWidth(double width) {
-        Utils.checkNotNull(width, "width");
-        this.width = Optional.ofNullable(width);
-        return this;
-    }
-
-    public Media withWidth(Optional<Double> width) {
+    public Media withWidth(int width) {
         Utils.checkNotNull(width, "width");
         this.width = width;
         return this;
     }
 
-    public Media withHeight(double height) {
-        Utils.checkNotNull(height, "height");
-        this.height = Optional.ofNullable(height);
-        return this;
-    }
-
-    public Media withHeight(Optional<Double> height) {
+    public Media withHeight(int height) {
         Utils.checkNotNull(height, "height");
         this.height = height;
         return this;
@@ -290,23 +287,23 @@ public class Media {
 
     public Media withAspectRatio(double aspectRatio) {
         Utils.checkNotNull(aspectRatio, "aspectRatio");
-        this.aspectRatio = Optional.ofNullable(aspectRatio);
-        return this;
-    }
-
-    public Media withAspectRatio(Optional<Double> aspectRatio) {
-        Utils.checkNotNull(aspectRatio, "aspectRatio");
         this.aspectRatio = aspectRatio;
         return this;
     }
 
-    public Media withAudioChannels(double audioChannels) {
-        Utils.checkNotNull(audioChannels, "audioChannels");
-        this.audioChannels = Optional.ofNullable(audioChannels);
+    public Media withAudioProfile(String audioProfile) {
+        Utils.checkNotNull(audioProfile, "audioProfile");
+        this.audioProfile = Optional.ofNullable(audioProfile);
         return this;
     }
 
-    public Media withAudioChannels(Optional<Double> audioChannels) {
+    public Media withAudioProfile(Optional<String> audioProfile) {
+        Utils.checkNotNull(audioProfile, "audioProfile");
+        this.audioProfile = audioProfile;
+        return this;
+    }
+
+    public Media withAudioChannels(int audioChannels) {
         Utils.checkNotNull(audioChannels, "audioChannels");
         this.audioChannels = audioChannels;
         return this;
@@ -314,35 +311,17 @@ public class Media {
 
     public Media withAudioCodec(String audioCodec) {
         Utils.checkNotNull(audioCodec, "audioCodec");
-        this.audioCodec = Optional.ofNullable(audioCodec);
-        return this;
-    }
-
-    public Media withAudioCodec(Optional<String> audioCodec) {
-        Utils.checkNotNull(audioCodec, "audioCodec");
         this.audioCodec = audioCodec;
         return this;
     }
 
     public Media withVideoCodec(String videoCodec) {
         Utils.checkNotNull(videoCodec, "videoCodec");
-        this.videoCodec = Optional.ofNullable(videoCodec);
-        return this;
-    }
-
-    public Media withVideoCodec(Optional<String> videoCodec) {
-        Utils.checkNotNull(videoCodec, "videoCodec");
         this.videoCodec = videoCodec;
         return this;
     }
 
-    public Media withVideoResolution(double videoResolution) {
-        Utils.checkNotNull(videoResolution, "videoResolution");
-        this.videoResolution = Optional.ofNullable(videoResolution);
-        return this;
-    }
-
-    public Media withVideoResolution(Optional<Double> videoResolution) {
+    public Media withVideoResolution(String videoResolution) {
         Utils.checkNotNull(videoResolution, "videoResolution");
         this.videoResolution = videoResolution;
         return this;
@@ -350,35 +329,41 @@ public class Media {
 
     public Media withContainer(String container) {
         Utils.checkNotNull(container, "container");
-        this.container = Optional.ofNullable(container);
-        return this;
-    }
-
-    public Media withContainer(Optional<String> container) {
-        Utils.checkNotNull(container, "container");
         this.container = container;
         return this;
     }
 
     public Media withVideoFrameRate(String videoFrameRate) {
         Utils.checkNotNull(videoFrameRate, "videoFrameRate");
-        this.videoFrameRate = Optional.ofNullable(videoFrameRate);
-        return this;
-    }
-
-    public Media withVideoFrameRate(Optional<String> videoFrameRate) {
-        Utils.checkNotNull(videoFrameRate, "videoFrameRate");
         this.videoFrameRate = videoFrameRate;
         return this;
     }
 
-    public Media withOptimizedForStreaming(double optimizedForStreaming) {
+    public Media withVideoProfile(String videoProfile) {
+        Utils.checkNotNull(videoProfile, "videoProfile");
+        this.videoProfile = videoProfile;
+        return this;
+    }
+
+    public Media withHasVoiceActivity(boolean hasVoiceActivity) {
+        Utils.checkNotNull(hasVoiceActivity, "hasVoiceActivity");
+        this.hasVoiceActivity = Optional.ofNullable(hasVoiceActivity);
+        return this;
+    }
+
+    public Media withHasVoiceActivity(Optional<Boolean> hasVoiceActivity) {
+        Utils.checkNotNull(hasVoiceActivity, "hasVoiceActivity");
+        this.hasVoiceActivity = hasVoiceActivity;
+        return this;
+    }
+
+    public Media withOptimizedForStreaming(OptimizedForStreaming optimizedForStreaming) {
         Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
         this.optimizedForStreaming = Optional.ofNullable(optimizedForStreaming);
         return this;
     }
 
-    public Media withOptimizedForStreaming(Optional<Double> optimizedForStreaming) {
+    public Media withOptimizedForStreaming(Optional<? extends OptimizedForStreaming> optimizedForStreaming) {
         Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
         this.optimizedForStreaming = optimizedForStreaming;
         return this;
@@ -396,25 +381,7 @@ public class Media {
         return this;
     }
 
-    public Media withVideoProfile(String videoProfile) {
-        Utils.checkNotNull(videoProfile, "videoProfile");
-        this.videoProfile = Optional.ofNullable(videoProfile);
-        return this;
-    }
-
-    public Media withVideoProfile(Optional<String> videoProfile) {
-        Utils.checkNotNull(videoProfile, "videoProfile");
-        this.videoProfile = videoProfile;
-        return this;
-    }
-
     public Media withPart(List<Part> part) {
-        Utils.checkNotNull(part, "part");
-        this.part = Optional.ofNullable(part);
-        return this;
-    }
-
-    public Media withPart(Optional<? extends List<Part>> part) {
         Utils.checkNotNull(part, "part");
         this.part = part;
         return this;
@@ -436,15 +403,17 @@ public class Media {
             Objects.deepEquals(this.width, other.width) &&
             Objects.deepEquals(this.height, other.height) &&
             Objects.deepEquals(this.aspectRatio, other.aspectRatio) &&
+            Objects.deepEquals(this.audioProfile, other.audioProfile) &&
             Objects.deepEquals(this.audioChannels, other.audioChannels) &&
             Objects.deepEquals(this.audioCodec, other.audioCodec) &&
             Objects.deepEquals(this.videoCodec, other.videoCodec) &&
             Objects.deepEquals(this.videoResolution, other.videoResolution) &&
             Objects.deepEquals(this.container, other.container) &&
             Objects.deepEquals(this.videoFrameRate, other.videoFrameRate) &&
+            Objects.deepEquals(this.videoProfile, other.videoProfile) &&
+            Objects.deepEquals(this.hasVoiceActivity, other.hasVoiceActivity) &&
             Objects.deepEquals(this.optimizedForStreaming, other.optimizedForStreaming) &&
             Objects.deepEquals(this.has64bitOffsets, other.has64bitOffsets) &&
-            Objects.deepEquals(this.videoProfile, other.videoProfile) &&
             Objects.deepEquals(this.part, other.part);
     }
     
@@ -457,15 +426,17 @@ public class Media {
             width,
             height,
             aspectRatio,
+            audioProfile,
             audioChannels,
             audioCodec,
             videoCodec,
             videoResolution,
             container,
             videoFrameRate,
+            videoProfile,
+            hasVoiceActivity,
             optimizedForStreaming,
             has64bitOffsets,
-            videoProfile,
             part);
     }
     
@@ -478,111 +449,87 @@ public class Media {
                 "width", width,
                 "height", height,
                 "aspectRatio", aspectRatio,
+                "audioProfile", audioProfile,
                 "audioChannels", audioChannels,
                 "audioCodec", audioCodec,
                 "videoCodec", videoCodec,
                 "videoResolution", videoResolution,
                 "container", container,
                 "videoFrameRate", videoFrameRate,
+                "videoProfile", videoProfile,
+                "hasVoiceActivity", hasVoiceActivity,
                 "optimizedForStreaming", optimizedForStreaming,
                 "has64bitOffsets", has64bitOffsets,
-                "videoProfile", videoProfile,
                 "part", part);
     }
     
     public final static class Builder {
  
-        private Optional<Double> id = Optional.empty();
+        private Integer id;
  
-        private Optional<Double> duration = Optional.empty();
+        private Integer duration;
  
-        private Optional<Double> bitrate = Optional.empty();
+        private Integer bitrate;
  
-        private Optional<Double> width = Optional.empty();
+        private Integer width;
  
-        private Optional<Double> height = Optional.empty();
+        private Integer height;
  
-        private Optional<Double> aspectRatio = Optional.empty();
+        private Double aspectRatio;
  
-        private Optional<Double> audioChannels = Optional.empty();
+        private Optional<String> audioProfile = Optional.empty();
  
-        private Optional<String> audioCodec = Optional.empty();
+        private Integer audioChannels;
  
-        private Optional<String> videoCodec = Optional.empty();
+        private String audioCodec;
  
-        private Optional<Double> videoResolution = Optional.empty();
+        private String videoCodec;
  
-        private Optional<String> container = Optional.empty();
+        private String videoResolution;
  
-        private Optional<String> videoFrameRate = Optional.empty();
+        private String container;
  
-        private Optional<Double> optimizedForStreaming = Optional.empty();
+        private String videoFrameRate;
+ 
+        private String videoProfile;
+ 
+        private Optional<Boolean> hasVoiceActivity = Optional.empty();
+ 
+        private Optional<? extends OptimizedForStreaming> optimizedForStreaming;
  
         private Optional<Boolean> has64bitOffsets = Optional.empty();
  
-        private Optional<String> videoProfile = Optional.empty();
- 
-        private Optional<? extends List<Part>> part = Optional.empty();  
+        private List<Part> part;  
         
         private Builder() {
           // force use of static builder() method
         }
 
-        public Builder id(double id) {
-            Utils.checkNotNull(id, "id");
-            this.id = Optional.ofNullable(id);
-            return this;
-        }
-
-        public Builder id(Optional<Double> id) {
+        public Builder id(int id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;
         }
 
-        public Builder duration(double duration) {
-            Utils.checkNotNull(duration, "duration");
-            this.duration = Optional.ofNullable(duration);
-            return this;
-        }
-
-        public Builder duration(Optional<Double> duration) {
+        public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = duration;
             return this;
         }
 
-        public Builder bitrate(double bitrate) {
-            Utils.checkNotNull(bitrate, "bitrate");
-            this.bitrate = Optional.ofNullable(bitrate);
-            return this;
-        }
-
-        public Builder bitrate(Optional<Double> bitrate) {
+        public Builder bitrate(int bitrate) {
             Utils.checkNotNull(bitrate, "bitrate");
             this.bitrate = bitrate;
             return this;
         }
 
-        public Builder width(double width) {
-            Utils.checkNotNull(width, "width");
-            this.width = Optional.ofNullable(width);
-            return this;
-        }
-
-        public Builder width(Optional<Double> width) {
+        public Builder width(int width) {
             Utils.checkNotNull(width, "width");
             this.width = width;
             return this;
         }
 
-        public Builder height(double height) {
-            Utils.checkNotNull(height, "height");
-            this.height = Optional.ofNullable(height);
-            return this;
-        }
-
-        public Builder height(Optional<Double> height) {
+        public Builder height(int height) {
             Utils.checkNotNull(height, "height");
             this.height = height;
             return this;
@@ -590,23 +537,23 @@ public class Media {
 
         public Builder aspectRatio(double aspectRatio) {
             Utils.checkNotNull(aspectRatio, "aspectRatio");
-            this.aspectRatio = Optional.ofNullable(aspectRatio);
-            return this;
-        }
-
-        public Builder aspectRatio(Optional<Double> aspectRatio) {
-            Utils.checkNotNull(aspectRatio, "aspectRatio");
             this.aspectRatio = aspectRatio;
             return this;
         }
 
-        public Builder audioChannels(double audioChannels) {
-            Utils.checkNotNull(audioChannels, "audioChannels");
-            this.audioChannels = Optional.ofNullable(audioChannels);
+        public Builder audioProfile(String audioProfile) {
+            Utils.checkNotNull(audioProfile, "audioProfile");
+            this.audioProfile = Optional.ofNullable(audioProfile);
             return this;
         }
 
-        public Builder audioChannels(Optional<Double> audioChannels) {
+        public Builder audioProfile(Optional<String> audioProfile) {
+            Utils.checkNotNull(audioProfile, "audioProfile");
+            this.audioProfile = audioProfile;
+            return this;
+        }
+
+        public Builder audioChannels(int audioChannels) {
             Utils.checkNotNull(audioChannels, "audioChannels");
             this.audioChannels = audioChannels;
             return this;
@@ -614,35 +561,17 @@ public class Media {
 
         public Builder audioCodec(String audioCodec) {
             Utils.checkNotNull(audioCodec, "audioCodec");
-            this.audioCodec = Optional.ofNullable(audioCodec);
-            return this;
-        }
-
-        public Builder audioCodec(Optional<String> audioCodec) {
-            Utils.checkNotNull(audioCodec, "audioCodec");
             this.audioCodec = audioCodec;
             return this;
         }
 
         public Builder videoCodec(String videoCodec) {
             Utils.checkNotNull(videoCodec, "videoCodec");
-            this.videoCodec = Optional.ofNullable(videoCodec);
-            return this;
-        }
-
-        public Builder videoCodec(Optional<String> videoCodec) {
-            Utils.checkNotNull(videoCodec, "videoCodec");
             this.videoCodec = videoCodec;
             return this;
         }
 
-        public Builder videoResolution(double videoResolution) {
-            Utils.checkNotNull(videoResolution, "videoResolution");
-            this.videoResolution = Optional.ofNullable(videoResolution);
-            return this;
-        }
-
-        public Builder videoResolution(Optional<Double> videoResolution) {
+        public Builder videoResolution(String videoResolution) {
             Utils.checkNotNull(videoResolution, "videoResolution");
             this.videoResolution = videoResolution;
             return this;
@@ -650,35 +579,41 @@ public class Media {
 
         public Builder container(String container) {
             Utils.checkNotNull(container, "container");
-            this.container = Optional.ofNullable(container);
-            return this;
-        }
-
-        public Builder container(Optional<String> container) {
-            Utils.checkNotNull(container, "container");
             this.container = container;
             return this;
         }
 
         public Builder videoFrameRate(String videoFrameRate) {
             Utils.checkNotNull(videoFrameRate, "videoFrameRate");
-            this.videoFrameRate = Optional.ofNullable(videoFrameRate);
-            return this;
-        }
-
-        public Builder videoFrameRate(Optional<String> videoFrameRate) {
-            Utils.checkNotNull(videoFrameRate, "videoFrameRate");
             this.videoFrameRate = videoFrameRate;
             return this;
         }
 
-        public Builder optimizedForStreaming(double optimizedForStreaming) {
+        public Builder videoProfile(String videoProfile) {
+            Utils.checkNotNull(videoProfile, "videoProfile");
+            this.videoProfile = videoProfile;
+            return this;
+        }
+
+        public Builder hasVoiceActivity(boolean hasVoiceActivity) {
+            Utils.checkNotNull(hasVoiceActivity, "hasVoiceActivity");
+            this.hasVoiceActivity = Optional.ofNullable(hasVoiceActivity);
+            return this;
+        }
+
+        public Builder hasVoiceActivity(Optional<Boolean> hasVoiceActivity) {
+            Utils.checkNotNull(hasVoiceActivity, "hasVoiceActivity");
+            this.hasVoiceActivity = hasVoiceActivity;
+            return this;
+        }
+
+        public Builder optimizedForStreaming(OptimizedForStreaming optimizedForStreaming) {
             Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
             this.optimizedForStreaming = Optional.ofNullable(optimizedForStreaming);
             return this;
         }
 
-        public Builder optimizedForStreaming(Optional<Double> optimizedForStreaming) {
+        public Builder optimizedForStreaming(Optional<? extends OptimizedForStreaming> optimizedForStreaming) {
             Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
             this.optimizedForStreaming = optimizedForStreaming;
             return this;
@@ -696,49 +631,41 @@ public class Media {
             return this;
         }
 
-        public Builder videoProfile(String videoProfile) {
-            Utils.checkNotNull(videoProfile, "videoProfile");
-            this.videoProfile = Optional.ofNullable(videoProfile);
-            return this;
-        }
-
-        public Builder videoProfile(Optional<String> videoProfile) {
-            Utils.checkNotNull(videoProfile, "videoProfile");
-            this.videoProfile = videoProfile;
-            return this;
-        }
-
         public Builder part(List<Part> part) {
-            Utils.checkNotNull(part, "part");
-            this.part = Optional.ofNullable(part);
-            return this;
-        }
-
-        public Builder part(Optional<? extends List<Part>> part) {
             Utils.checkNotNull(part, "part");
             this.part = part;
             return this;
         }
         
         public Media build() {
-            return new Media(
+            if (optimizedForStreaming == null) {
+                optimizedForStreaming = _SINGLETON_VALUE_OptimizedForStreaming.value();
+            }            return new Media(
                 id,
                 duration,
                 bitrate,
                 width,
                 height,
                 aspectRatio,
+                audioProfile,
                 audioChannels,
                 audioCodec,
                 videoCodec,
                 videoResolution,
                 container,
                 videoFrameRate,
+                videoProfile,
+                hasVoiceActivity,
                 optimizedForStreaming,
                 has64bitOffsets,
-                videoProfile,
                 part);
         }
+
+        private static final LazySingletonValue<Optional<? extends OptimizedForStreaming>> _SINGLETON_VALUE_OptimizedForStreaming =
+                new LazySingletonValue<>(
+                        "optimizedForStreaming",
+                        "0",
+                        new TypeReference<Optional<? extends OptimizedForStreaming>>() {});
     }
 }
 

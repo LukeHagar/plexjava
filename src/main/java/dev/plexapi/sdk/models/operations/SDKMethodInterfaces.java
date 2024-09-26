@@ -6,7 +6,6 @@ package dev.plexapi.sdk.models.operations;
 
 import java.lang.Double;
 import java.lang.Exception;
-import java.lang.Integer;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
@@ -196,6 +195,12 @@ public class SDKMethodInterfaces {
     }
 
 
+    public interface MethodCallGetRecentlyAdded {
+        GetRecentlyAddedResponse getRecentlyAdded(
+            GetRecentlyAddedRequest request) throws Exception;
+    }
+
+
     public interface MethodCallGetLibraryHubs {
         GetLibraryHubsResponse getLibraryHubs(
             double sectionId,
@@ -233,10 +238,9 @@ public class SDKMethodInterfaces {
     }
 
 
-    public interface MethodCallGetRecentlyAdded {
-        GetRecentlyAddedResponse getRecentlyAdded(
-            Optional<Integer> xPlexContainerStart,
-            Optional<Integer> xPlexContainerSize) throws Exception;
+    public interface MethodCallGetRecentlyAddedLibrary {
+        GetRecentlyAddedLibraryResponse getRecentlyAddedLibrary(
+            GetRecentlyAddedLibraryRequest request) throws Exception;
     }
 
 
@@ -274,7 +278,7 @@ public class SDKMethodInterfaces {
     public interface MethodCallGetSearchLibrary {
         GetSearchLibraryResponse getSearchLibrary(
             int sectionKey,
-            QueryParamType type) throws Exception;
+            GetSearchLibraryQueryParamType type) throws Exception;
     }
 
 
@@ -412,7 +416,7 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallPostUsersSignInData {
         PostUsersSignInDataResponse postUsersSignInData(
-            Optional<? extends PostUsersSignInDataRequestBody> request,
+            PostUsersSignInDataRequest request,
             Optional<String> serverURL) throws Exception;
     }
 

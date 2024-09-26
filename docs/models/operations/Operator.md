@@ -5,5 +5,5 @@
 
 | Field              | Type               | Required           | Description        | Example            |
 | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `key`              | *Optional<String>* | :heavy_minus_sign: | N/A                | =                  |
-| `title`            | *Optional<String>* | :heavy_minus_sign: | N/A                | is                 |
+| `key`              | *String*           | :heavy_check_mark: | N/A                | =                  |
+| `title`            | *String*           | :heavy_check_mark: | N/A                | is                 |

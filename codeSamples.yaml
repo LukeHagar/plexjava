@@ -713,6 +713,52 @@ actions:
                     }
                 }
             }
+  - target: $["paths"]["/hubs/home/recentlyAdded"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: added
+          source: |-
+            package hello.world;
+
+            import dev.plexapi.plexapi.PlexAPI;
+            import dev.plexapi.plexapi.models.operations.GetRecentlyAddedRequest;
+            import dev.plexapi.plexapi.models.operations.GetRecentlyAddedResponse;
+            import dev.plexapi.plexapi.models.operations.IncludeMeta;
+            import dev.plexapi.plexapi.models.operations.Type;
+            import java.lang.Exception;
+
+            public class Application {
+
+                public static void main(String[] args) throws Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                            .clientID("gcgzw5rz2xovp84b4vha3a40")
+                            .clientName("Plex Web")
+                            .clientVersion("4.133.0")
+                            .clientPlatform("Chrome")
+                            .deviceName("Linux")
+                        .build();
+
+                    GetRecentlyAddedRequest req = GetRecentlyAddedRequest.builder()
+                            .contentDirectoryID(470161L)
+                            .type(Type.TvShow)
+                            .sectionID(2L)
+                            .includeMeta(IncludeMeta.Enable)
+                            .xPlexContainerStart(0)
+                            .xPlexContainerSize(50)
+                            .build();
+
+                    GetRecentlyAddedResponse res = sdk.hubs().getRecentlyAdded()
+                            .request(req)
+                            .call();
+
+                    if (res.object().isPresent()) {
+                        // handle response
+                    }
+                }
+            }
   - target: $["paths"]["/hubs/search"]["get"]
     update:
       x-codeSamples:
@@ -742,7 +788,7 @@ actions:
 
                     PerformSearchResponse res = sdk.search().performSearch()
                             .query("dylan")
-                            .sectionId(5838.67d)
+                            .sectionId(9372.69d)
                             .limit(5d)
                             .call();
 
@@ -1134,19 +1180,23 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getRecentlyAdded
+          label: library
           source: |-
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetRecentlyAddedBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetRecentlyAddedUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetRecentlyAddedResponse;
+            import dev.plexapi.plexapi.models.errors.GetRecentlyAddedLibraryBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetRecentlyAddedLibraryUnauthorized;
+            import dev.plexapi.plexapi.models.operations.GetRecentlyAddedLibraryRequest;
+            import dev.plexapi.plexapi.models.operations.GetRecentlyAddedLibraryResponse;
+            import dev.plexapi.plexapi.models.operations.QueryParamIncludeMeta;
+            import dev.plexapi.plexapi.models.operations.QueryParamType;
             import java.lang.Exception;
+            import java.util.List;
 
             public class Application {
 
-                public static void main(String[] args) throws GetRecentlyAddedBadRequest, GetRecentlyAddedUnauthorized, Exception {
+                public static void main(String[] args) throws GetRecentlyAddedLibraryBadRequest, GetRecentlyAddedLibraryUnauthorized, Exception {
 
                     PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
@@ -1157,9 +1207,30 @@ actions:
                             .deviceName("Linux")
                         .build();
 
-                    GetRecentlyAddedResponse res = sdk.library().getRecentlyAdded()
+                    GetRecentlyAddedLibraryRequest req = GetRecentlyAddedLibraryRequest.builder()
+                            .type(QueryParamType.TvShow)
+                            .contentDirectoryID(2L)
+                            .pinnedContentDirectoryID(List.of(
+                                3L,
+                                5L,
+                                7L,
+                                13L,
+                                12L,
+                                1L,
+                                6L,
+                                14L,
+                                2L,
+                                10L,
+                                16L,
+                                17L))
+                            .sectionID(2L)
+                            .includeMeta(QueryParamIncludeMeta.Enable)
                             .xPlexContainerStart(0)
                             .xPlexContainerSize(50)
+                            .build();
+
+                    GetRecentlyAddedLibraryResponse res = sdk.library().getRecentlyAddedLibrary()
+                            .request(req)
                             .call();
 
                     if (res.object().isPresent()) {
@@ -1366,8 +1437,8 @@ actions:
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.GetSearchLibraryBadRequest;
             import dev.plexapi.plexapi.models.errors.GetSearchLibraryUnauthorized;
+            import dev.plexapi.plexapi.models.operations.GetSearchLibraryQueryParamType;
             import dev.plexapi.plexapi.models.operations.GetSearchLibraryResponse;
-            import dev.plexapi.plexapi.models.operations.QueryParamType;
             import java.lang.Exception;
 
             public class Application {
@@ -1385,7 +1456,7 @@ actions:
 
                     GetSearchLibraryResponse res = sdk.library().getSearchLibrary()
                             .sectionKey(9518)
-                            .type(QueryParamType.TvShow)
+                            .type(GetSearchLibraryQueryParamType.TvShow)
                             .call();
 
                     if (res.object().isPresent()) {
@@ -1404,12 +1475,12 @@ actions:
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.GetLibraryItemsBadRequest;
             import dev.plexapi.plexapi.models.errors.GetLibraryItemsUnauthorized;
+            import dev.plexapi.plexapi.models.operations.GetLibraryItemsQueryParamIncludeMeta;
+            import dev.plexapi.plexapi.models.operations.GetLibraryItemsQueryParamType;
             import dev.plexapi.plexapi.models.operations.GetLibraryItemsRequest;
             import dev.plexapi.plexapi.models.operations.GetLibraryItemsResponse;
             import dev.plexapi.plexapi.models.operations.IncludeGuids;
-            import dev.plexapi.plexapi.models.operations.IncludeMeta;
             import dev.plexapi.plexapi.models.operations.Tag;
-            import dev.plexapi.plexapi.models.operations.Type;
             import java.lang.Exception;
 
             public class Application {
@@ -1429,8 +1500,8 @@ actions:
                             .sectionKey(9518)
                             .tag(Tag.EDITION)
                             .includeGuids(IncludeGuids.Enable)
-                            .includeMeta(IncludeMeta.Enable)
-                            .type(Type.TvShow)
+                            .type(GetLibraryItemsQueryParamType.TvShow)
+                            .includeMeta(GetLibraryItemsQueryParamIncludeMeta.Enable)
                             .xPlexContainerStart(0)
                             .xPlexContainerSize(50)
                             .build();
@@ -1657,8 +1728,8 @@ actions:
                             .width(110d)
                             .height(165d)
                             .opacity(100L)
-                            .blur(0d)
-                            .minSize(MinSize.ONE)
+                            .blur(20d)
+                            .minSize(MinSize.ZERO)
                             .upscale(Upscale.ONE)
                             .url("/library/metadata/49564/thumb/1654258204")
                             .build();
@@ -2186,7 +2257,7 @@ actions:
                         .build();
 
                     GetSourceConnectionInformationResponse res = sdk.authentication().getSourceConnectionInformation()
-                            .source("provider://provider-identifier")
+                            .source("server://client-identifier")
                             .call();
 
                     // handle response
@@ -2670,6 +2741,7 @@ actions:
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.PostUsersSignInDataBadRequest;
             import dev.plexapi.plexapi.models.errors.PostUsersSignInDataUnauthorized;
+            import dev.plexapi.plexapi.models.operations.PostUsersSignInDataRequest;
             import dev.plexapi.plexapi.models.operations.PostUsersSignInDataRequestBody;
             import dev.plexapi.plexapi.models.operations.PostUsersSignInDataResponse;
             import java.lang.Exception;
@@ -2686,10 +2758,12 @@ actions:
                             .deviceName("Linux")
                         .build();
 
-                    PostUsersSignInDataRequestBody req = PostUsersSignInDataRequestBody.builder()
-                            .login("username@email.com")
-                            .password("password123")
-                            .verificationCode("123456")
+                    PostUsersSignInDataRequest req = PostUsersSignInDataRequest.builder()
+                            .requestBody(PostUsersSignInDataRequestBody.builder()
+                                .login("username@email.com")
+                                .password("password123")
+                                .verificationCode("123456")
+                                .build())
                             .build();
 
                     PostUsersSignInDataResponse res = sdk.authentication().postUsersSignInData()

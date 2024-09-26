@@ -18,7 +18,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * GetRecentlyAddedResponseBody - The recently added content
+ * GetRecentlyAddedResponseBody - A successful response with recently added content.
  */
 
 public class GetRecentlyAddedResponseBody {

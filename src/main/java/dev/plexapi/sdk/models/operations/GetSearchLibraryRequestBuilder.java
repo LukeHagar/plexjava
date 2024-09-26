@@ -10,7 +10,7 @@ import java.lang.Integer;
 public class GetSearchLibraryRequestBuilder {
 
     private Integer sectionKey;
-    private QueryParamType type;
+    private GetSearchLibraryQueryParamType type;
     private final SDKMethodInterfaces.MethodCallGetSearchLibrary sdk;
 
     public GetSearchLibraryRequestBuilder(SDKMethodInterfaces.MethodCallGetSearchLibrary sdk) {
@@ -23,7 +23,7 @@ public class GetSearchLibraryRequestBuilder {
         return this;
     }
 
-    public GetSearchLibraryRequestBuilder type(QueryParamType type) {
+    public GetSearchLibraryRequestBuilder type(GetSearchLibraryQueryParamType type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;

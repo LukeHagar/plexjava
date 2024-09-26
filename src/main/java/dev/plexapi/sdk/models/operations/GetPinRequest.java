@@ -29,6 +29,15 @@ public class GetPinRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=strong")
     private Optional<Boolean> strong;
 
+    /**
+     * The unique identifier for the client application
+     * This is used to track the client application and its usage
+     * (UUID, serial number, or other number unique per device)
+     * 
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Client-Identifier")
+    private Optional<String> clientID;
+
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Product")
     private Optional<String> clientName;
 
@@ -44,16 +53,19 @@ public class GetPinRequest {
     @JsonCreator
     public GetPinRequest(
             Optional<Boolean> strong,
+            Optional<String> clientID,
             Optional<String> clientName,
             Optional<String> deviceName,
             Optional<String> clientVersion,
             Optional<String> clientPlatform) {
         Utils.checkNotNull(strong, "strong");
+        Utils.checkNotNull(clientID, "clientID");
         Utils.checkNotNull(clientName, "clientName");
         Utils.checkNotNull(deviceName, "deviceName");
         Utils.checkNotNull(clientVersion, "clientVersion");
         Utils.checkNotNull(clientPlatform, "clientPlatform");
         this.strong = strong;
+        this.clientID = clientID;
         this.clientName = clientName;
         this.deviceName = deviceName;
         this.clientVersion = clientVersion;
@@ -61,7 +73,7 @@ public class GetPinRequest {
     }
     
     public GetPinRequest() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -73,6 +85,17 @@ public class GetPinRequest {
     @JsonIgnore
     public Optional<Boolean> strong() {
         return strong;
+    }
+
+    /**
+     * The unique identifier for the client application
+     * This is used to track the client application and its usage
+     * (UUID, serial number, or other number unique per device)
+     * 
+     */
+    @JsonIgnore
+    public Optional<String> clientID() {
+        return clientID;
     }
 
     @JsonIgnore
@@ -120,6 +143,30 @@ public class GetPinRequest {
     public GetPinRequest withStrong(Optional<Boolean> strong) {
         Utils.checkNotNull(strong, "strong");
         this.strong = strong;
+        return this;
+    }
+
+    /**
+     * The unique identifier for the client application
+     * This is used to track the client application and its usage
+     * (UUID, serial number, or other number unique per device)
+     * 
+     */
+    public GetPinRequest withClientID(String clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = Optional.ofNullable(clientID);
+        return this;
+    }
+
+    /**
+     * The unique identifier for the client application
+     * This is used to track the client application and its usage
+     * (UUID, serial number, or other number unique per device)
+     * 
+     */
+    public GetPinRequest withClientID(Optional<String> clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = clientID;
         return this;
     }
 
@@ -182,6 +229,7 @@ public class GetPinRequest {
         GetPinRequest other = (GetPinRequest) o;
         return 
             Objects.deepEquals(this.strong, other.strong) &&
+            Objects.deepEquals(this.clientID, other.clientID) &&
             Objects.deepEquals(this.clientName, other.clientName) &&
             Objects.deepEquals(this.deviceName, other.deviceName) &&
             Objects.deepEquals(this.clientVersion, other.clientVersion) &&
@@ -192,6 +240,7 @@ public class GetPinRequest {
     public int hashCode() {
         return Objects.hash(
             strong,
+            clientID,
             clientName,
             deviceName,
             clientVersion,
@@ -202,6 +251,7 @@ public class GetPinRequest {
     public String toString() {
         return Utils.toString(GetPinRequest.class,
                 "strong", strong,
+                "clientID", clientID,
                 "clientName", clientName,
                 "deviceName", deviceName,
                 "clientVersion", clientVersion,
@@ -211,6 +261,8 @@ public class GetPinRequest {
     public final static class Builder {
  
         private Optional<Boolean> strong;
+ 
+        private Optional<String> clientID = Optional.empty();
  
         private Optional<String> clientName = Optional.empty();
  
@@ -245,6 +297,30 @@ public class GetPinRequest {
         public Builder strong(Optional<Boolean> strong) {
             Utils.checkNotNull(strong, "strong");
             this.strong = strong;
+            return this;
+        }
+
+        /**
+         * The unique identifier for the client application
+         * This is used to track the client application and its usage
+         * (UUID, serial number, or other number unique per device)
+         * 
+         */
+        public Builder clientID(String clientID) {
+            Utils.checkNotNull(clientID, "clientID");
+            this.clientID = Optional.ofNullable(clientID);
+            return this;
+        }
+
+        /**
+         * The unique identifier for the client application
+         * This is used to track the client application and its usage
+         * (UUID, serial number, or other number unique per device)
+         * 
+         */
+        public Builder clientID(Optional<String> clientID) {
+            Utils.checkNotNull(clientID, "clientID");
+            this.clientID = clientID;
             return this;
         }
 
@@ -301,6 +377,7 @@ public class GetPinRequest {
                 strong = _SINGLETON_VALUE_Strong.value();
             }            return new GetPinRequest(
                 strong,
+                clientID,
                 clientName,
                 deviceName,
                 clientVersion,

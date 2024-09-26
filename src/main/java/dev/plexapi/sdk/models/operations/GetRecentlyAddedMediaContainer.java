@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Double;
+import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -23,29 +24,32 @@ import java.util.Optional;
 
 public class GetRecentlyAddedMediaContainer {
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("size")
-    private Optional<Double> size;
+    private double size;
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("allowSync")
-    private Optional<Boolean> allowSync;
+    @JsonProperty("offset")
+    private Optional<Integer> offset;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("totalSize")
+    private Optional<Integer> totalSize;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("identifier")
     private Optional<String> identifier;
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("mediaTagPrefix")
-    private Optional<String> mediaTagPrefix;
+    @JsonProperty("allowSync")
+    private Optional<Boolean> allowSync;
 
+    /**
+     * The Meta object is only included in the response if the `includeMeta` parameter is set to `1`.
+     * 
+     */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("mediaTagVersion")
-    private Optional<Double> mediaTagVersion;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("mixedParents")
-    private Optional<Boolean> mixedParents;
+    @JsonProperty("Meta")
+    private Optional<? extends Meta> meta;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Metadata")
@@ -53,41 +57,47 @@ public class GetRecentlyAddedMediaContainer {
 
     @JsonCreator
     public GetRecentlyAddedMediaContainer(
-            @JsonProperty("size") Optional<Double> size,
-            @JsonProperty("allowSync") Optional<Boolean> allowSync,
+            @JsonProperty("size") double size,
+            @JsonProperty("offset") Optional<Integer> offset,
+            @JsonProperty("totalSize") Optional<Integer> totalSize,
             @JsonProperty("identifier") Optional<String> identifier,
-            @JsonProperty("mediaTagPrefix") Optional<String> mediaTagPrefix,
-            @JsonProperty("mediaTagVersion") Optional<Double> mediaTagVersion,
-            @JsonProperty("mixedParents") Optional<Boolean> mixedParents,
+            @JsonProperty("allowSync") Optional<Boolean> allowSync,
+            @JsonProperty("Meta") Optional<? extends Meta> meta,
             @JsonProperty("Metadata") Optional<? extends List<GetRecentlyAddedMetadata>> metadata) {
         Utils.checkNotNull(size, "size");
-        Utils.checkNotNull(allowSync, "allowSync");
+        Utils.checkNotNull(offset, "offset");
+        Utils.checkNotNull(totalSize, "totalSize");
         Utils.checkNotNull(identifier, "identifier");
-        Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
-        Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
-        Utils.checkNotNull(mixedParents, "mixedParents");
+        Utils.checkNotNull(allowSync, "allowSync");
+        Utils.checkNotNull(meta, "meta");
         Utils.checkNotNull(metadata, "metadata");
         this.size = size;
-        this.allowSync = allowSync;
+        this.offset = offset;
+        this.totalSize = totalSize;
         this.identifier = identifier;
-        this.mediaTagPrefix = mediaTagPrefix;
-        this.mediaTagVersion = mediaTagVersion;
-        this.mixedParents = mixedParents;
+        this.allowSync = allowSync;
+        this.meta = meta;
         this.metadata = metadata;
     }
     
-    public GetRecentlyAddedMediaContainer() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    public GetRecentlyAddedMediaContainer(
+            double size) {
+        this(size, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
-    public Optional<Double> size() {
+    public double size() {
         return size;
     }
 
     @JsonIgnore
-    public Optional<Boolean> allowSync() {
-        return allowSync;
+    public Optional<Integer> offset() {
+        return offset;
+    }
+
+    @JsonIgnore
+    public Optional<Integer> totalSize() {
+        return totalSize;
     }
 
     @JsonIgnore
@@ -96,18 +106,18 @@ public class GetRecentlyAddedMediaContainer {
     }
 
     @JsonIgnore
-    public Optional<String> mediaTagPrefix() {
-        return mediaTagPrefix;
+    public Optional<Boolean> allowSync() {
+        return allowSync;
     }
 
+    /**
+     * The Meta object is only included in the response if the `includeMeta` parameter is set to `1`.
+     * 
+     */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Double> mediaTagVersion() {
-        return mediaTagVersion;
-    }
-
-    @JsonIgnore
-    public Optional<Boolean> mixedParents() {
-        return mixedParents;
+    public Optional<Meta> meta() {
+        return (Optional<Meta>) meta;
     }
 
     @SuppressWarnings("unchecked")
@@ -122,25 +132,31 @@ public class GetRecentlyAddedMediaContainer {
 
     public GetRecentlyAddedMediaContainer withSize(double size) {
         Utils.checkNotNull(size, "size");
-        this.size = Optional.ofNullable(size);
-        return this;
-    }
-
-    public GetRecentlyAddedMediaContainer withSize(Optional<Double> size) {
-        Utils.checkNotNull(size, "size");
         this.size = size;
         return this;
     }
 
-    public GetRecentlyAddedMediaContainer withAllowSync(boolean allowSync) {
-        Utils.checkNotNull(allowSync, "allowSync");
-        this.allowSync = Optional.ofNullable(allowSync);
+    public GetRecentlyAddedMediaContainer withOffset(int offset) {
+        Utils.checkNotNull(offset, "offset");
+        this.offset = Optional.ofNullable(offset);
         return this;
     }
 
-    public GetRecentlyAddedMediaContainer withAllowSync(Optional<Boolean> allowSync) {
-        Utils.checkNotNull(allowSync, "allowSync");
-        this.allowSync = allowSync;
+    public GetRecentlyAddedMediaContainer withOffset(Optional<Integer> offset) {
+        Utils.checkNotNull(offset, "offset");
+        this.offset = offset;
+        return this;
+    }
+
+    public GetRecentlyAddedMediaContainer withTotalSize(int totalSize) {
+        Utils.checkNotNull(totalSize, "totalSize");
+        this.totalSize = Optional.ofNullable(totalSize);
+        return this;
+    }
+
+    public GetRecentlyAddedMediaContainer withTotalSize(Optional<Integer> totalSize) {
+        Utils.checkNotNull(totalSize, "totalSize");
+        this.totalSize = totalSize;
         return this;
     }
 
@@ -156,39 +172,35 @@ public class GetRecentlyAddedMediaContainer {
         return this;
     }
 
-    public GetRecentlyAddedMediaContainer withMediaTagPrefix(String mediaTagPrefix) {
-        Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
-        this.mediaTagPrefix = Optional.ofNullable(mediaTagPrefix);
+    public GetRecentlyAddedMediaContainer withAllowSync(boolean allowSync) {
+        Utils.checkNotNull(allowSync, "allowSync");
+        this.allowSync = Optional.ofNullable(allowSync);
         return this;
     }
 
-    public GetRecentlyAddedMediaContainer withMediaTagPrefix(Optional<String> mediaTagPrefix) {
-        Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
-        this.mediaTagPrefix = mediaTagPrefix;
+    public GetRecentlyAddedMediaContainer withAllowSync(Optional<Boolean> allowSync) {
+        Utils.checkNotNull(allowSync, "allowSync");
+        this.allowSync = allowSync;
         return this;
     }
 
-    public GetRecentlyAddedMediaContainer withMediaTagVersion(double mediaTagVersion) {
-        Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
-        this.mediaTagVersion = Optional.ofNullable(mediaTagVersion);
+    /**
+     * The Meta object is only included in the response if the `includeMeta` parameter is set to `1`.
+     * 
+     */
+    public GetRecentlyAddedMediaContainer withMeta(Meta meta) {
+        Utils.checkNotNull(meta, "meta");
+        this.meta = Optional.ofNullable(meta);
         return this;
     }
 
-    public GetRecentlyAddedMediaContainer withMediaTagVersion(Optional<Double> mediaTagVersion) {
-        Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
-        this.mediaTagVersion = mediaTagVersion;
-        return this;
-    }
-
-    public GetRecentlyAddedMediaContainer withMixedParents(boolean mixedParents) {
-        Utils.checkNotNull(mixedParents, "mixedParents");
-        this.mixedParents = Optional.ofNullable(mixedParents);
-        return this;
-    }
-
-    public GetRecentlyAddedMediaContainer withMixedParents(Optional<Boolean> mixedParents) {
-        Utils.checkNotNull(mixedParents, "mixedParents");
-        this.mixedParents = mixedParents;
+    /**
+     * The Meta object is only included in the response if the `includeMeta` parameter is set to `1`.
+     * 
+     */
+    public GetRecentlyAddedMediaContainer withMeta(Optional<? extends Meta> meta) {
+        Utils.checkNotNull(meta, "meta");
+        this.meta = meta;
         return this;
     }
 
@@ -215,11 +227,11 @@ public class GetRecentlyAddedMediaContainer {
         GetRecentlyAddedMediaContainer other = (GetRecentlyAddedMediaContainer) o;
         return 
             Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.allowSync, other.allowSync) &&
+            Objects.deepEquals(this.offset, other.offset) &&
+            Objects.deepEquals(this.totalSize, other.totalSize) &&
             Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
-            Objects.deepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
-            Objects.deepEquals(this.mixedParents, other.mixedParents) &&
+            Objects.deepEquals(this.allowSync, other.allowSync) &&
+            Objects.deepEquals(this.meta, other.meta) &&
             Objects.deepEquals(this.metadata, other.metadata);
     }
     
@@ -227,11 +239,11 @@ public class GetRecentlyAddedMediaContainer {
     public int hashCode() {
         return Objects.hash(
             size,
-            allowSync,
+            offset,
+            totalSize,
             identifier,
-            mediaTagPrefix,
-            mediaTagVersion,
-            mixedParents,
+            allowSync,
+            meta,
             metadata);
     }
     
@@ -239,27 +251,27 @@ public class GetRecentlyAddedMediaContainer {
     public String toString() {
         return Utils.toString(GetRecentlyAddedMediaContainer.class,
                 "size", size,
-                "allowSync", allowSync,
+                "offset", offset,
+                "totalSize", totalSize,
                 "identifier", identifier,
-                "mediaTagPrefix", mediaTagPrefix,
-                "mediaTagVersion", mediaTagVersion,
-                "mixedParents", mixedParents,
+                "allowSync", allowSync,
+                "meta", meta,
                 "metadata", metadata);
     }
     
     public final static class Builder {
  
-        private Optional<Double> size = Optional.empty();
+        private Double size;
  
-        private Optional<Boolean> allowSync = Optional.empty();
+        private Optional<Integer> offset = Optional.empty();
+ 
+        private Optional<Integer> totalSize = Optional.empty();
  
         private Optional<String> identifier = Optional.empty();
  
-        private Optional<String> mediaTagPrefix = Optional.empty();
+        private Optional<Boolean> allowSync = Optional.empty();
  
-        private Optional<Double> mediaTagVersion = Optional.empty();
- 
-        private Optional<Boolean> mixedParents = Optional.empty();
+        private Optional<? extends Meta> meta = Optional.empty();
  
         private Optional<? extends List<GetRecentlyAddedMetadata>> metadata = Optional.empty();  
         
@@ -269,25 +281,31 @@ public class GetRecentlyAddedMediaContainer {
 
         public Builder size(double size) {
             Utils.checkNotNull(size, "size");
-            this.size = Optional.ofNullable(size);
-            return this;
-        }
-
-        public Builder size(Optional<Double> size) {
-            Utils.checkNotNull(size, "size");
             this.size = size;
             return this;
         }
 
-        public Builder allowSync(boolean allowSync) {
-            Utils.checkNotNull(allowSync, "allowSync");
-            this.allowSync = Optional.ofNullable(allowSync);
+        public Builder offset(int offset) {
+            Utils.checkNotNull(offset, "offset");
+            this.offset = Optional.ofNullable(offset);
             return this;
         }
 
-        public Builder allowSync(Optional<Boolean> allowSync) {
-            Utils.checkNotNull(allowSync, "allowSync");
-            this.allowSync = allowSync;
+        public Builder offset(Optional<Integer> offset) {
+            Utils.checkNotNull(offset, "offset");
+            this.offset = offset;
+            return this;
+        }
+
+        public Builder totalSize(int totalSize) {
+            Utils.checkNotNull(totalSize, "totalSize");
+            this.totalSize = Optional.ofNullable(totalSize);
+            return this;
+        }
+
+        public Builder totalSize(Optional<Integer> totalSize) {
+            Utils.checkNotNull(totalSize, "totalSize");
+            this.totalSize = totalSize;
             return this;
         }
 
@@ -303,39 +321,35 @@ public class GetRecentlyAddedMediaContainer {
             return this;
         }
 
-        public Builder mediaTagPrefix(String mediaTagPrefix) {
-            Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
-            this.mediaTagPrefix = Optional.ofNullable(mediaTagPrefix);
+        public Builder allowSync(boolean allowSync) {
+            Utils.checkNotNull(allowSync, "allowSync");
+            this.allowSync = Optional.ofNullable(allowSync);
             return this;
         }
 
-        public Builder mediaTagPrefix(Optional<String> mediaTagPrefix) {
-            Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
-            this.mediaTagPrefix = mediaTagPrefix;
+        public Builder allowSync(Optional<Boolean> allowSync) {
+            Utils.checkNotNull(allowSync, "allowSync");
+            this.allowSync = allowSync;
             return this;
         }
 
-        public Builder mediaTagVersion(double mediaTagVersion) {
-            Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
-            this.mediaTagVersion = Optional.ofNullable(mediaTagVersion);
+        /**
+         * The Meta object is only included in the response if the `includeMeta` parameter is set to `1`.
+         * 
+         */
+        public Builder meta(Meta meta) {
+            Utils.checkNotNull(meta, "meta");
+            this.meta = Optional.ofNullable(meta);
             return this;
         }
 
-        public Builder mediaTagVersion(Optional<Double> mediaTagVersion) {
-            Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
-            this.mediaTagVersion = mediaTagVersion;
-            return this;
-        }
-
-        public Builder mixedParents(boolean mixedParents) {
-            Utils.checkNotNull(mixedParents, "mixedParents");
-            this.mixedParents = Optional.ofNullable(mixedParents);
-            return this;
-        }
-
-        public Builder mixedParents(Optional<Boolean> mixedParents) {
-            Utils.checkNotNull(mixedParents, "mixedParents");
-            this.mixedParents = mixedParents;
+        /**
+         * The Meta object is only included in the response if the `includeMeta` parameter is set to `1`.
+         * 
+         */
+        public Builder meta(Optional<? extends Meta> meta) {
+            Utils.checkNotNull(meta, "meta");
+            this.meta = meta;
             return this;
         }
 
@@ -354,11 +368,11 @@ public class GetRecentlyAddedMediaContainer {
         public GetRecentlyAddedMediaContainer build() {
             return new GetRecentlyAddedMediaContainer(
                 size,
-                allowSync,
+                offset,
+                totalSize,
                 identifier,
-                mediaTagPrefix,
-                mediaTagVersion,
-                mixedParents,
+                allowSync,
+                meta,
                 metadata);
         }
     }

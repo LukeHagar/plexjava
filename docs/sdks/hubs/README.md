@@ -9,6 +9,7 @@ Hubs are a structured two-dimensional container for media, generally represented
 ### Available Operations
 
 * [getGlobalHubs](#getglobalhubs) - Get Global Hubs
+* [getRecentlyAdded](#getrecentlyadded) - Get Recently Added
 * [getLibraryHubs](#getlibraryhubs) - Get library specific hubs
 
 ## getGlobalHubs
@@ -70,6 +71,73 @@ public class Application {
 | models/errors/GetGlobalHubsBadRequest   | 400                                     | application/json                        |
 | models/errors/GetGlobalHubsUnauthorized | 401                                     | application/json                        |
 | models/errors/SDKError                  | 4xx-5xx                                 | \*\/*                                   |
+
+
+## getRecentlyAdded
+
+This endpoint will return the recently added content.
+
+
+### Example Usage
+
+```java
+package hello.world;
+
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.operations.GetRecentlyAddedRequest;
+import dev.plexapi.sdk.models.operations.GetRecentlyAddedResponse;
+import dev.plexapi.sdk.models.operations.IncludeMeta;
+import dev.plexapi.sdk.models.operations.Type;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
+                .accessToken("<YOUR_API_KEY_HERE>")
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
+                .clientName("Plex Web")
+                .clientVersion("4.133.0")
+                .clientPlatform("Chrome")
+                .deviceName("Linux")
+            .build();
+
+        GetRecentlyAddedRequest req = GetRecentlyAddedRequest.builder()
+                .contentDirectoryID(470161L)
+                .type(Type.TvShow)
+                .sectionID(2L)
+                .includeMeta(IncludeMeta.Enable)
+                .xPlexContainerStart(0)
+                .xPlexContainerSize(50)
+                .build();
+
+        GetRecentlyAddedResponse res = sdk.hubs().getRecentlyAdded()
+                .request(req)
+                .call();
+
+        if (res.object().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `request`                                                                     | [GetRecentlyAddedRequest](../../models/operations/GetRecentlyAddedRequest.md) | :heavy_check_mark:                                                            | The request object to use for the request.                                    |
+
+### Response
+
+**[GetRecentlyAddedResponse](../../models/operations/GetRecentlyAddedResponse.md)**
+
+### Errors
+
+| Error Object           | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/SDKError | 4xx-5xx                | \*\/*                  |
 
 
 ## getLibraryHubs

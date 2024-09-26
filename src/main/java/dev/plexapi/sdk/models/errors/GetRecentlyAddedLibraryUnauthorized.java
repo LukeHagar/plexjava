@@ -19,13 +19,13 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * GetRecentlyAddedUnauthorized - Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
+ * GetRecentlyAddedLibraryUnauthorized - Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
  */
-public class GetRecentlyAddedUnauthorized extends RuntimeException {
+public class GetRecentlyAddedLibraryUnauthorized extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("errors")
-    private Optional<? extends List<GetRecentlyAddedLibraryErrors>> errors;
+    private Optional<? extends List<GetRecentlyAddedLibraryLibraryErrors>> errors;
 
     /**
      * Raw HTTP response; suitable for custom response parsing
@@ -35,8 +35,8 @@ public class GetRecentlyAddedUnauthorized extends RuntimeException {
     private Optional<? extends HttpResponse<InputStream>> rawResponse;
 
     @JsonCreator
-    public GetRecentlyAddedUnauthorized(
-            @JsonProperty("errors") Optional<? extends List<GetRecentlyAddedLibraryErrors>> errors,
+    public GetRecentlyAddedLibraryUnauthorized(
+            @JsonProperty("errors") Optional<? extends List<GetRecentlyAddedLibraryLibraryErrors>> errors,
             @JsonProperty("RawResponse") Optional<? extends HttpResponse<InputStream>> rawResponse) {
         Utils.checkNotNull(errors, "errors");
         Utils.checkNotNull(rawResponse, "rawResponse");
@@ -44,13 +44,13 @@ public class GetRecentlyAddedUnauthorized extends RuntimeException {
         this.rawResponse = rawResponse;
     }
     
-    public GetRecentlyAddedUnauthorized() {
+    public GetRecentlyAddedLibraryUnauthorized() {
         this(Optional.empty(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
-    public Optional<List<GetRecentlyAddedLibraryErrors>> errors(){
-        return (Optional<List<GetRecentlyAddedLibraryErrors>>) errors;
+    public Optional<List<GetRecentlyAddedLibraryLibraryErrors>> errors(){
+        return (Optional<List<GetRecentlyAddedLibraryLibraryErrors>>) errors;
     }
 
     /**
@@ -65,13 +65,13 @@ public class GetRecentlyAddedUnauthorized extends RuntimeException {
         return new Builder();
     }
 
-    public GetRecentlyAddedUnauthorized withErrors(List<GetRecentlyAddedLibraryErrors> errors) {
+    public GetRecentlyAddedLibraryUnauthorized withErrors(List<GetRecentlyAddedLibraryLibraryErrors> errors) {
         Utils.checkNotNull(errors, "errors");
         this.errors = Optional.ofNullable(errors);
         return this;
     }
     
-    public GetRecentlyAddedUnauthorized withErrors(Optional<? extends List<GetRecentlyAddedLibraryErrors>> errors) {
+    public GetRecentlyAddedLibraryUnauthorized withErrors(Optional<? extends List<GetRecentlyAddedLibraryLibraryErrors>> errors) {
         Utils.checkNotNull(errors, "errors");
         this.errors = errors;
         return this;
@@ -80,7 +80,7 @@ public class GetRecentlyAddedUnauthorized extends RuntimeException {
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
-    public GetRecentlyAddedUnauthorized withRawResponse(HttpResponse<InputStream> rawResponse) {
+    public GetRecentlyAddedLibraryUnauthorized withRawResponse(HttpResponse<InputStream> rawResponse) {
         Utils.checkNotNull(rawResponse, "rawResponse");
         this.rawResponse = Optional.ofNullable(rawResponse);
         return this;
@@ -89,7 +89,7 @@ public class GetRecentlyAddedUnauthorized extends RuntimeException {
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
-    public GetRecentlyAddedUnauthorized withRawResponse(Optional<? extends HttpResponse<InputStream>> rawResponse) {
+    public GetRecentlyAddedLibraryUnauthorized withRawResponse(Optional<? extends HttpResponse<InputStream>> rawResponse) {
         Utils.checkNotNull(rawResponse, "rawResponse");
         this.rawResponse = rawResponse;
         return this;
@@ -103,7 +103,7 @@ public class GetRecentlyAddedUnauthorized extends RuntimeException {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        GetRecentlyAddedUnauthorized other = (GetRecentlyAddedUnauthorized) o;
+        GetRecentlyAddedLibraryUnauthorized other = (GetRecentlyAddedLibraryUnauthorized) o;
         return
             Objects.deepEquals(this.errors, other.errors) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse);
@@ -118,14 +118,14 @@ public class GetRecentlyAddedUnauthorized extends RuntimeException {
 
     @Override
     public String toString() {
-        return Utils.toString(GetRecentlyAddedUnauthorized.class,
+        return Utils.toString(GetRecentlyAddedLibraryUnauthorized.class,
                 "errors", errors,
                 "rawResponse", rawResponse);
     }
 
     public final static class Builder {
 
-        private Optional<? extends List<GetRecentlyAddedLibraryErrors>> errors = Optional.empty();
+        private Optional<? extends List<GetRecentlyAddedLibraryLibraryErrors>> errors = Optional.empty();
 
         private Optional<? extends HttpResponse<InputStream>> rawResponse;
 
@@ -133,13 +133,13 @@ public class GetRecentlyAddedUnauthorized extends RuntimeException {
           // force use of static builder() method
         }
 
-        public Builder errors(List<GetRecentlyAddedLibraryErrors> errors) {
+        public Builder errors(List<GetRecentlyAddedLibraryLibraryErrors> errors) {
             Utils.checkNotNull(errors, "errors");
             this.errors = Optional.ofNullable(errors);
             return this;
         }
         
-        public Builder errors(Optional<? extends List<GetRecentlyAddedLibraryErrors>> errors) {
+        public Builder errors(Optional<? extends List<GetRecentlyAddedLibraryLibraryErrors>> errors) {
             Utils.checkNotNull(errors, "errors");
             this.errors = errors;
             return this;
@@ -163,8 +163,8 @@ public class GetRecentlyAddedUnauthorized extends RuntimeException {
             return this;
         }
 
-        public GetRecentlyAddedUnauthorized build() {
-            return new GetRecentlyAddedUnauthorized(
+        public GetRecentlyAddedLibraryUnauthorized build() {
+            return new GetRecentlyAddedLibraryUnauthorized(
                 errors,
                 rawResponse);
         }

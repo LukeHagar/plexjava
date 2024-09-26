@@ -83,8 +83,11 @@ public class GetAllLibrariesDirectory {
     @JsonProperty("directory")
     private boolean directory;
 
+    /**
+     * Unix epoch datetime in seconds
+     */
     @JsonProperty("contentChangedAt")
-    private int contentChangedAt;
+    private long contentChangedAt;
 
     @JsonProperty("hidden")
     private int hidden;
@@ -112,7 +115,7 @@ public class GetAllLibrariesDirectory {
             @JsonProperty("scannedAt") long scannedAt,
             @JsonProperty("content") boolean content,
             @JsonProperty("directory") boolean directory,
-            @JsonProperty("contentChangedAt") int contentChangedAt,
+            @JsonProperty("contentChangedAt") long contentChangedAt,
             @JsonProperty("hidden") int hidden,
             @JsonProperty("Location") List<Location> location) {
         Utils.checkNotNull(allowSync, "allowSync");
@@ -258,8 +261,11 @@ public class GetAllLibrariesDirectory {
         return directory;
     }
 
+    /**
+     * Unix epoch datetime in seconds
+     */
     @JsonIgnore
-    public int contentChangedAt() {
+    public long contentChangedAt() {
         return contentChangedAt;
     }
 
@@ -394,7 +400,10 @@ public class GetAllLibrariesDirectory {
         return this;
     }
 
-    public GetAllLibrariesDirectory withContentChangedAt(int contentChangedAt) {
+    /**
+     * Unix epoch datetime in seconds
+     */
+    public GetAllLibrariesDirectory withContentChangedAt(long contentChangedAt) {
         Utils.checkNotNull(contentChangedAt, "contentChangedAt");
         this.contentChangedAt = contentChangedAt;
         return this;
@@ -535,7 +544,7 @@ public class GetAllLibrariesDirectory {
  
         private Boolean directory;
  
-        private Integer contentChangedAt;
+        private Long contentChangedAt;
  
         private Integer hidden;
  
@@ -662,7 +671,10 @@ public class GetAllLibrariesDirectory {
             return this;
         }
 
-        public Builder contentChangedAt(int contentChangedAt) {
+        /**
+         * Unix epoch datetime in seconds
+         */
+        public Builder contentChangedAt(long contentChangedAt) {
             Utils.checkNotNull(contentChangedAt, "contentChangedAt");
             this.contentChangedAt = contentChangedAt;
             return this;

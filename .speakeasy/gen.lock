@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 1732900d-e173-47c1-a90d-d45182eb35d9
 management:
-  docChecksum: 82a4a9784fb0e66e1c64f130701cdd08
+  docChecksum: 5e039359563b41bbe118fc6701ba22dc
   docVersion: 0.0.3
-  speakeasyVersion: 1.401.2
-  generationVersion: 2.421.3
-  releaseVersion: 0.4.1
-  configChecksum: d362191bb9eeead9c4fa178fdaaeece8
+  speakeasyVersion: 1.402.14
+  generationVersion: 2.422.22
+  releaseVersion: 0.5.0
+  configChecksum: 1e077922ecb4295a2f75526fffe0b239
   repoURL: https://github.com/LukeHagar/plexjava.git
   published: true
 features:
   java:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.30.1
+    core: 3.30.2
     deprecations: 2.81.1
     downloadStreams: 0.1.1
     enums: 2.81.2
@@ -28,7 +28,6 @@ features:
     nameOverrides: 2.81.3
     nullables: 0.1.0
     sdkHooks: 0.1.0
-    unions: 0.0.5
 generatedFiles:
   - .gitattributes
   - CONTRIBUTING.md
@@ -161,10 +160,10 @@ generatedFiles:
   - docs/models/errors/GetPlaylistsErrors.md
   - docs/models/errors/GetPlaylistsPlaylistsErrors.md
   - docs/models/errors/GetPlaylistsUnauthorized.md
-  - docs/models/errors/GetRecentlyAddedBadRequest.md
-  - docs/models/errors/GetRecentlyAddedErrors.md
+  - docs/models/errors/GetRecentlyAddedLibraryBadRequest.md
   - docs/models/errors/GetRecentlyAddedLibraryErrors.md
-  - docs/models/errors/GetRecentlyAddedUnauthorized.md
+  - docs/models/errors/GetRecentlyAddedLibraryLibraryErrors.md
+  - docs/models/errors/GetRecentlyAddedLibraryUnauthorized.md
   - docs/models/errors/GetRefreshLibraryMetadataBadRequest.md
   - docs/models/errors/GetRefreshLibraryMetadataErrors.md
   - docs/models/errors/GetRefreshLibraryMetadataLibraryErrors.md
@@ -411,11 +410,15 @@ generatedFiles:
   - docs/models/operations/GetHomeDataResponse.md
   - docs/models/operations/GetHomeDataResponseBody.md
   - docs/models/operations/GetLibraryDetailsDirectory.md
+  - docs/models/operations/GetLibraryDetailsField.md
+  - docs/models/operations/GetLibraryDetailsFieldType.md
   - docs/models/operations/GetLibraryDetailsFilter.md
   - docs/models/operations/GetLibraryDetailsMediaContainer.md
+  - docs/models/operations/GetLibraryDetailsOperator.md
   - docs/models/operations/GetLibraryDetailsRequest.md
   - docs/models/operations/GetLibraryDetailsResponse.md
   - docs/models/operations/GetLibraryDetailsResponseBody.md
+  - docs/models/operations/GetLibraryDetailsSort.md
   - docs/models/operations/GetLibraryDetailsType.md
   - docs/models/operations/GetLibraryHubsCountry.md
   - docs/models/operations/GetLibraryHubsDirector.md
@@ -430,26 +433,48 @@ generatedFiles:
   - docs/models/operations/GetLibraryHubsResponseBody.md
   - docs/models/operations/GetLibraryHubsRole.md
   - docs/models/operations/GetLibraryHubsWriter.md
+  - docs/models/operations/GetLibraryItemsActiveDirection.md
+  - docs/models/operations/GetLibraryItemsCollection.md
   - docs/models/operations/GetLibraryItemsCountry.md
+  - docs/models/operations/GetLibraryItemsDefaultDirection.md
   - docs/models/operations/GetLibraryItemsDirector.md
   - docs/models/operations/GetLibraryItemsField.md
   - docs/models/operations/GetLibraryItemsFieldType.md
   - docs/models/operations/GetLibraryItemsFilter.md
+  - docs/models/operations/GetLibraryItemsFlattenSeasons.md
   - docs/models/operations/GetLibraryItemsGenre.md
+  - docs/models/operations/GetLibraryItemsHasThumbnail.md
   - docs/models/operations/GetLibraryItemsImage.md
+  - docs/models/operations/GetLibraryItemsLibraryActiveDirection.md
+  - docs/models/operations/GetLibraryItemsLibraryDefaultDirection.md
+  - docs/models/operations/GetLibraryItemsLibraryField.md
+  - docs/models/operations/GetLibraryItemsLibraryFieldType.md
+  - docs/models/operations/GetLibraryItemsLibraryFilter.md
+  - docs/models/operations/GetLibraryItemsLibraryOperator.md
+  - docs/models/operations/GetLibraryItemsLibraryResponse200Type.md
   - docs/models/operations/GetLibraryItemsLibraryResponseType.md
+  - docs/models/operations/GetLibraryItemsLibrarySort.md
   - docs/models/operations/GetLibraryItemsLibraryType.md
   - docs/models/operations/GetLibraryItemsMedia.md
   - docs/models/operations/GetLibraryItemsMediaContainer.md
+  - docs/models/operations/GetLibraryItemsMediaGuid.md
+  - docs/models/operations/GetLibraryItemsMeta.md
+  - docs/models/operations/GetLibraryItemsMetaDataRating.md
   - docs/models/operations/GetLibraryItemsMetadata.md
   - docs/models/operations/GetLibraryItemsOperator.md
+  - docs/models/operations/GetLibraryItemsOptimizedForStreaming.md
   - docs/models/operations/GetLibraryItemsPart.md
+  - docs/models/operations/GetLibraryItemsQueryParamIncludeMeta.md
+  - docs/models/operations/GetLibraryItemsQueryParamType.md
   - docs/models/operations/GetLibraryItemsRequest.md
   - docs/models/operations/GetLibraryItemsResponse.md
   - docs/models/operations/GetLibraryItemsResponseBody.md
   - docs/models/operations/GetLibraryItemsRole.md
+  - docs/models/operations/GetLibraryItemsShowOrdering.md
   - docs/models/operations/GetLibraryItemsSort.md
+  - docs/models/operations/GetLibraryItemsStream.md
   - docs/models/operations/GetLibraryItemsType.md
+  - docs/models/operations/GetLibraryItemsUltraBlurColors.md
   - docs/models/operations/GetLibraryItemsWriter.md
   - docs/models/operations/GetMediaProvidersDirectory.md
   - docs/models/operations/GetMediaProvidersMediaContainer.md
@@ -467,6 +492,7 @@ generatedFiles:
   - docs/models/operations/GetMetaDataByRatingKeyResponse.md
   - docs/models/operations/GetMetaDataByRatingKeyResponseBody.md
   - docs/models/operations/GetMetaDataByRatingKeyRole.md
+  - docs/models/operations/GetMetaDataByRatingKeyStream.md
   - docs/models/operations/GetMetaDataByRatingKeyWriter.md
   - docs/models/operations/GetMetadataChildrenDirectory.md
   - docs/models/operations/GetMetadataChildrenMediaContainer.md
@@ -510,11 +536,36 @@ generatedFiles:
   - docs/models/operations/GetPlaylistsRequest.md
   - docs/models/operations/GetPlaylistsResponse.md
   - docs/models/operations/GetPlaylistsResponseBody.md
+  - docs/models/operations/GetRecentlyAddedActiveDirection.md
+  - docs/models/operations/GetRecentlyAddedDefaultDirection.md
+  - docs/models/operations/GetRecentlyAddedField.md
+  - docs/models/operations/GetRecentlyAddedFieldType.md
+  - docs/models/operations/GetRecentlyAddedFilter.md
+  - docs/models/operations/GetRecentlyAddedHubsResponseType.md
+  - docs/models/operations/GetRecentlyAddedHubsType.md
+  - docs/models/operations/GetRecentlyAddedImage.md
+  - docs/models/operations/GetRecentlyAddedLibraryCountry.md
+  - docs/models/operations/GetRecentlyAddedLibraryDirector.md
+  - docs/models/operations/GetRecentlyAddedLibraryFilter.md
+  - docs/models/operations/GetRecentlyAddedLibraryGenre.md
+  - docs/models/operations/GetRecentlyAddedLibraryMedia.md
+  - docs/models/operations/GetRecentlyAddedLibraryMediaContainer.md
+  - docs/models/operations/GetRecentlyAddedLibraryMetadata.md
+  - docs/models/operations/GetRecentlyAddedLibraryPart.md
+  - docs/models/operations/GetRecentlyAddedLibraryRequest.md
+  - docs/models/operations/GetRecentlyAddedLibraryResponse.md
+  - docs/models/operations/GetRecentlyAddedLibraryResponseBody.md
+  - docs/models/operations/GetRecentlyAddedLibraryRole.md
+  - docs/models/operations/GetRecentlyAddedLibraryType.md
+  - docs/models/operations/GetRecentlyAddedLibraryWriter.md
   - docs/models/operations/GetRecentlyAddedMediaContainer.md
   - docs/models/operations/GetRecentlyAddedMetadata.md
+  - docs/models/operations/GetRecentlyAddedOperator.md
   - docs/models/operations/GetRecentlyAddedRequest.md
   - docs/models/operations/GetRecentlyAddedResponse.md
   - docs/models/operations/GetRecentlyAddedResponseBody.md
+  - docs/models/operations/GetRecentlyAddedSort.md
+  - docs/models/operations/GetRecentlyAddedType.md
   - docs/models/operations/GetRefreshLibraryMetadataRequest.md
   - docs/models/operations/GetRefreshLibraryMetadataResponse.md
   - docs/models/operations/GetResizedPhotoRequest.md
@@ -525,6 +576,7 @@ generatedFiles:
   - docs/models/operations/GetResourcesStatisticsResponseBody.md
   - docs/models/operations/GetSearchLibraryMediaContainer.md
   - docs/models/operations/GetSearchLibraryMetadata.md
+  - docs/models/operations/GetSearchLibraryQueryParamType.md
   - docs/models/operations/GetSearchLibraryRequest.md
   - docs/models/operations/GetSearchLibraryResponse.md
   - docs/models/operations/GetSearchLibraryResponseBody.md
@@ -629,7 +681,6 @@ generatedFiles:
   - docs/models/operations/IncludeRelay.md
   - docs/models/operations/InternalPaymentMethod.md
   - docs/models/operations/Level.md
-  - docs/models/operations/LibrarySectionID.md
   - docs/models/operations/Libtype.md
   - docs/models/operations/Location.md
   - docs/models/operations/LogLineRequest.md
@@ -646,11 +697,13 @@ generatedFiles:
   - docs/models/operations/MediaProvider.md
   - docs/models/operations/MediaReviewsVisibility.md
   - docs/models/operations/Meta.md
+  - docs/models/operations/MetaDataRating.md
   - docs/models/operations/Metadata.md
   - docs/models/operations/MinSize.md
   - docs/models/operations/MyPlex.md
   - docs/models/operations/OnlyTransient.md
   - docs/models/operations/Operator.md
+  - docs/models/operations/OptimizedForStreaming.md
   - docs/models/operations/Part.md
   - docs/models/operations/PastSubscription.md
   - docs/models/operations/PathParamTaskName.md
@@ -672,6 +725,7 @@ generatedFiles:
   - docs/models/operations/PostUsersSignInDataFeatures.md
   - docs/models/operations/PostUsersSignInDataMailingListStatus.md
   - docs/models/operations/PostUsersSignInDataMediaReviewsVisibility.md
+  - docs/models/operations/PostUsersSignInDataRequest.md
   - docs/models/operations/PostUsersSignInDataRequestBody.md
   - docs/models/operations/PostUsersSignInDataResponse.md
   - docs/models/operations/PostUsersSignInDataServices.md
@@ -686,6 +740,7 @@ generatedFiles:
   - docs/models/operations/Provider.md
   - docs/models/operations/QueryParamFilter.md
   - docs/models/operations/QueryParamForce.md
+  - docs/models/operations/QueryParamIncludeMeta.md
   - docs/models/operations/QueryParamOnlyTransient.md
   - docs/models/operations/QueryParamSmart.md
   - docs/models/operations/QueryParamType.md
@@ -909,10 +964,10 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistsErrors.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistsPlaylistsErrors.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetPlaylistsUnauthorized.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetRecentlyAddedBadRequest.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetRecentlyAddedErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetRecentlyAddedLibraryBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetRecentlyAddedLibraryErrors.java
-  - src/main/java/dev/plexapi/sdk/models/errors/GetRecentlyAddedUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetRecentlyAddedLibraryLibraryErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetRecentlyAddedLibraryUnauthorized.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetRefreshLibraryMetadataBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetRefreshLibraryMetadataErrors.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetRefreshLibraryMetadataLibraryErrors.java
@@ -1180,12 +1235,16 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/operations/GetHomeDataResponse.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetHomeDataResponseBody.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryDetailsDirectory.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryDetailsField.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryDetailsFieldType.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryDetailsFilter.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryDetailsMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryDetailsOperator.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryDetailsRequest.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryDetailsRequestBuilder.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryDetailsResponse.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryDetailsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryDetailsSort.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryDetailsType.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryHubsCountry.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryHubsDirector.java
@@ -1201,27 +1260,49 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryHubsResponseBody.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryHubsRole.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryHubsWriter.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsActiveDirection.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsCollection.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsCountry.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsDefaultDirection.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsDirector.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsField.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsFieldType.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsFilter.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsFlattenSeasons.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsGenre.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsHasThumbnail.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsImage.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsLibraryActiveDirection.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsLibraryDefaultDirection.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsLibraryField.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsLibraryFieldType.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsLibraryFilter.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsLibraryOperator.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsLibraryResponse200Type.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsLibraryResponseType.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsLibrarySort.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsLibraryType.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsMedia.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsMediaGuid.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsMeta.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsMetaDataRating.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsMetadata.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsOperator.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsOptimizedForStreaming.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsPart.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsQueryParamIncludeMeta.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsQueryParamType.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsRequest.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsRequestBuilder.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsResponse.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsResponseBody.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsRole.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsShowOrdering.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsSort.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsStream.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsType.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsUltraBlurColors.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetLibraryItemsWriter.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetMediaProvidersDirectory.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetMediaProvidersMediaContainer.java
@@ -1241,6 +1322,7 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/operations/GetMetaDataByRatingKeyResponse.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetMetaDataByRatingKeyResponseBody.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetMetaDataByRatingKeyRole.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetMetaDataByRatingKeyStream.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetMetaDataByRatingKeyWriter.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetMetadataChildrenDirectory.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetMetadataChildrenMediaContainer.java
@@ -1291,12 +1373,38 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistsRequestBuilder.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistsResponse.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetPlaylistsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedActiveDirection.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedDefaultDirection.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedField.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedFieldType.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedFilter.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedHubsResponseType.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedHubsType.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedImage.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedLibraryCountry.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedLibraryDirector.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedLibraryFilter.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedLibraryGenre.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedLibraryMedia.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedLibraryMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedLibraryMetadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedLibraryPart.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedLibraryRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedLibraryRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedLibraryResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedLibraryResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedLibraryRole.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedLibraryType.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedLibraryWriter.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedMediaContainer.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedMetadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedOperator.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedRequest.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedRequestBuilder.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedResponse.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedSort.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetRecentlyAddedType.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetRefreshLibraryMetadataRequest.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetRefreshLibraryMetadataRequestBuilder.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetRefreshLibraryMetadataResponse.java
@@ -1310,6 +1418,7 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/operations/GetResourcesStatisticsResponseBody.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetSearchLibraryMediaContainer.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetSearchLibraryMetadata.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetSearchLibraryQueryParamType.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetSearchLibraryRequest.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetSearchLibraryRequestBuilder.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetSearchLibraryResponse.java
@@ -1436,7 +1545,6 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/operations/IncludeRelay.java
   - src/main/java/dev/plexapi/sdk/models/operations/InternalPaymentMethod.java
   - src/main/java/dev/plexapi/sdk/models/operations/Level.java
-  - src/main/java/dev/plexapi/sdk/models/operations/LibrarySectionID.java
   - src/main/java/dev/plexapi/sdk/models/operations/Libtype.java
   - src/main/java/dev/plexapi/sdk/models/operations/Location.java
   - src/main/java/dev/plexapi/sdk/models/operations/LogLineRequest.java
@@ -1457,11 +1565,13 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/operations/MediaProvider.java
   - src/main/java/dev/plexapi/sdk/models/operations/MediaReviewsVisibility.java
   - src/main/java/dev/plexapi/sdk/models/operations/Meta.java
+  - src/main/java/dev/plexapi/sdk/models/operations/MetaDataRating.java
   - src/main/java/dev/plexapi/sdk/models/operations/Metadata.java
   - src/main/java/dev/plexapi/sdk/models/operations/MinSize.java
   - src/main/java/dev/plexapi/sdk/models/operations/MyPlex.java
   - src/main/java/dev/plexapi/sdk/models/operations/OnlyTransient.java
   - src/main/java/dev/plexapi/sdk/models/operations/Operator.java
+  - src/main/java/dev/plexapi/sdk/models/operations/OptimizedForStreaming.java
   - src/main/java/dev/plexapi/sdk/models/operations/Part.java
   - src/main/java/dev/plexapi/sdk/models/operations/PastSubscription.java
   - src/main/java/dev/plexapi/sdk/models/operations/PathParamTaskName.java
@@ -1485,6 +1595,7 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataFeatures.java
   - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataMailingListStatus.java
   - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataMediaReviewsVisibility.java
+  - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataRequest.java
   - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataRequestBody.java
   - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataRequestBuilder.java
   - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataResponse.java
@@ -1500,6 +1611,7 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/operations/Provider.java
   - src/main/java/dev/plexapi/sdk/models/operations/QueryParamFilter.java
   - src/main/java/dev/plexapi/sdk/models/operations/QueryParamForce.java
+  - src/main/java/dev/plexapi/sdk/models/operations/QueryParamIncludeMeta.java
   - src/main/java/dev/plexapi/sdk/models/operations/QueryParamOnlyTransient.java
   - src/main/java/dev/plexapi/sdk/models/operations/QueryParamSmart.java
   - src/main/java/dev/plexapi/sdk/models/operations/QueryParamType.java
@@ -1920,6 +2032,7 @@ examples:
           X-Plex-Device: "Linux"
           X-Plex-Version: "4.133.0"
           X-Plex-Platform: "Chrome"
+          X-Plex-Client-Identifier: "gcgzw5rz2xovp84b4vha3a40"
       responses:
         "200":
           application/json: {"id": 308667304, "code": "7RQZ", "product": "0", "trusted": false, "qr": "https://plex.tv/api/v2/pins/qr/7RQZ", "clientIdentifier": "string", "location": {"code": "VI", "continent_code": "NA", "country": "United States Virgin Islands", "city": "Amsterdam", "european_union_member": true, "time_zone": "America/St_Thomas", "postal_code": 802, "in_privacy_restricted_country": true, "in_privacy_restricted_region": true, "subdivisions": "Saint Thomas", "coordinates": "18.3381, -64.8941"}, "expiresIn": 876, "createdAt": "2024-07-16T17:03:05Z", "expiresAt": "2024-07-16T17:18:05Z", "authToken": null, "newRegistration": null}
@@ -2083,7 +2196,7 @@ examples:
           X-Plex-Container-Size: 50
       responses:
         "200":
-          application/json: {"MediaContainer": {"size": 70, "totalSize": 170, "offset": 0, "content": "secondary", "allowSync": true, "nocache": true, "art": "/:/resources/movie-fanart.jpg", "identifier": "com.plexapp.plugins.library", "librarySectionID": "<value>", "librarySectionTitle": "Movies", "librarySectionUUID": "322a231a-b7f7-49f5-920f-14c61199cd30", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1701731894, "thumb": "/:/resources/movie.png", "title1": "Movies", "title2": "Recently Released", "viewGroup": "movie", "viewMode": 65592, "mixedParents": true, "Metadata": [{"ratingKey": "58683", "key": "/library/metadata/58683", "guid": "plex://movie/5d7768ba96b655001fdc0408", "studio": "20th Century Studios", "skipChildren": false, "type": "movie", "title": "Avatar: The Way of Water", "slug": "4-for-texas", "contentRating": "PG-13", "summary": "Jake Sully lives with his newfound family formed on the extrasolar moon Pandora. Once a familiar threat returns to finish what was previously started, Jake must work with Neytiri and the army of the Na'vi race to protect their home.", "rating": 7.6, "audienceRating": 9.2, "year": 2022, "seasonCount": 2022, "tagline": "Return to Pandora.", "flattenSeasons": "1", "showOrdering": "dvd", "thumb": "/library/metadata/58683/thumb/1703239236", "art": "/library/metadata/58683/art/1703239236", "banner": "/library/metadata/58683/banner/1703239236", "duration": 11558112, "originallyAvailableAt": "2022-12-14T00:00:00Z", "addedAt": 1556281940, "updatedAt": 1556281940, "audienceRatingImage": "rottentomatoes://image.rating.upright", "chapterSource": "media", "primaryExtraKey": "/library/metadata/58684", "ratingImage": "rottentomatoes://image.rating.ripe", "grandparentRatingKey": "66", "grandparentGuid": "plex://show/5d9c081b170e24001f2a7be4", "grandparentKey": "/library/metadata/66", "grandparentTitle": "Caprica", "grandparentThumb": "/library/metadata/66/thumb/1705716261", "grandparentSlug": "alice-in-borderland-2020", "grandparentArt": "/library/metadata/66/art/1705716261", "grandparentTheme": "/library/metadata/66/theme/1705716261", "Media": [{"id": 119534, "duration": 11558112, "bitrate": 25025, "width": 3840, "height": 2072, "aspectRatio": 1.85, "audioProfile": "dts", "audioChannels": 6, "audioCodec": "eac3", "videoCodec": "hevc", "videoResolution": "4k", "container": "mkv", "videoFrameRate": "24p", "videoProfile": "main 10", "hasVoiceActivity": false, "Part": [{"id": 119542, "key": "/library/parts/119542/1680457526/file.mkv", "duration": 11558112, "file": "/movies/Avatar The Way of Water (2022)/Avatar.The.Way.of.Water.2022.2160p.WEB-DL.DDP5.1.Atmos.DV.HDR10.HEVC-CMRG.mkv", "size": 36158371307, "container": "mkv", "audioProfile": "dts", "videoProfile": "main 10", "indexes": "sd", "hasThumbnail": "1"}, {"id": 119542, "key": "/library/parts/119542/1680457526/file.mkv", "duration": 11558112, "file": "/movies/Avatar The Way of Water (2022)/Avatar.The.Way.of.Water.2022.2160p.WEB-DL.DDP5.1.Atmos.DV.HDR10.HEVC-CMRG.mkv", "size": 36158371307, "container": "mkv", "audioProfile": "dts", "videoProfile": "main 10", "indexes": "sd", "hasThumbnail": "1"}, {"id": 119542, "key": "/library/parts/119542/1680457526/file.mkv", "duration": 11558112, "file": "/movies/Avatar The Way of Water (2022)/Avatar.The.Way.of.Water.2022.2160p.WEB-DL.DDP5.1.Atmos.DV.HDR10.HEVC-CMRG.mkv", "size": 36158371307, "container": "mkv", "audioProfile": "dts", "videoProfile": "main 10", "indexes": "sd", "hasThumbnail": "1"}]}], "Genre": [{"tag": "Adventure"}, {"tag": "Adventure"}, {"tag": "Adventure"}], "Country": [{"tag": "United States of America"}, {"tag": "United States of America"}], "Director": [{"tag": "James Cameron"}, {"tag": "James Cameron"}], "Writer": [{"tag": "James Cameron"}], "Collection": [{"tag": "Working NL Subs"}], "Role": [{"tag": "Sigourney Weaver"}, {"tag": "Sigourney Weaver"}, {"tag": "Sigourney Weaver"}], "Guid": [{"id": "imdb://tt13015952"}], "UltraBlurColors": {"topLeft": "11333b", "topRight": "0a232d", "bottomRight": "73958", "bottomLeft": "1f5066"}, "Image": [{"alt": "Episode 1", "type": "background", "url": "/library/metadata/45521/thumb/1644710589"}, {"alt": "Episode 1", "type": "background", "url": "/library/metadata/45521/thumb/1644710589"}], "titleSort": "Whale", "viewCount": 1, "lastViewedAt": 1682752242, "originalTitle": "映画 ブラッククローバー 魔法帝の剣", "viewOffset": 5222500, "skipCount": 1, "index": 1, "theme": "/library/metadata/1/theme/1705636920", "leafCount": 14, "viewedLeafCount": 0, "childCount": 1, "hasPremiumExtras": "1", "hasPremiumPrimaryExtra": "1", "parentRatingKey": "66", "parentGuid": "plex://show/5d9c081b170e24001f2a7be4", "parentStudio": "UCP", "parentKey": "/library/metadata/66", "parentTitle": "Caprica", "parentIndex": 1, "parentYear": 2010, "parentThumb": "/library/metadata/66/thumb/1705716261", "parentTheme": "/library/metadata/66/theme/1705716261"}, {"ratingKey": "58683", "key": "/library/metadata/58683", "guid": "plex://movie/5d7768ba96b655001fdc0408", "studio": "20th Century Studios", "skipChildren": false, "type": "movie", "title": "Avatar: The Way of Water", "slug": "4-for-texas", "contentRating": "PG-13", "summary": "Jake Sully lives with his newfound family formed on the extrasolar moon Pandora. Once a familiar threat returns to finish what was previously started, Jake must work with Neytiri and the army of the Na'vi race to protect their home.", "rating": 7.6, "audienceRating": 9.2, "year": 2022, "seasonCount": 2022, "tagline": "Return to Pandora.", "flattenSeasons": "1", "showOrdering": "dvd", "thumb": "/library/metadata/58683/thumb/1703239236", "art": "/library/metadata/58683/art/1703239236", "banner": "/library/metadata/58683/banner/1703239236", "duration": 11558112, "originallyAvailableAt": "2022-12-14T00:00:00Z", "addedAt": 1556281940, "updatedAt": 1556281940, "audienceRatingImage": "rottentomatoes://image.rating.upright", "chapterSource": "media", "primaryExtraKey": "/library/metadata/58684", "ratingImage": "rottentomatoes://image.rating.ripe", "grandparentRatingKey": "66", "grandparentGuid": "plex://show/5d9c081b170e24001f2a7be4", "grandparentKey": "/library/metadata/66", "grandparentTitle": "Caprica", "grandparentThumb": "/library/metadata/66/thumb/1705716261", "grandparentSlug": "alice-in-borderland-2020", "grandparentArt": "/library/metadata/66/art/1705716261", "grandparentTheme": "/library/metadata/66/theme/1705716261", "Media": [{"id": 119534, "duration": 11558112, "bitrate": 25025, "width": 3840, "height": 2072, "aspectRatio": 1.85, "audioProfile": "dts", "audioChannels": 6, "audioCodec": "eac3", "videoCodec": "hevc", "videoResolution": "4k", "container": "mkv", "videoFrameRate": "24p", "videoProfile": "main 10", "hasVoiceActivity": false, "Part": [{"id": 119542, "key": "/library/parts/119542/1680457526/file.mkv", "duration": 11558112, "file": "/movies/Avatar The Way of Water (2022)/Avatar.The.Way.of.Water.2022.2160p.WEB-DL.DDP5.1.Atmos.DV.HDR10.HEVC-CMRG.mkv", "size": 36158371307, "container": "mkv", "audioProfile": "dts", "videoProfile": "main 10", "indexes": "sd", "hasThumbnail": "1"}]}], "Genre": [], "Country": [{"tag": "United States of America"}], "Director": [{"tag": "James Cameron"}, {"tag": "James Cameron"}, {"tag": "James Cameron"}], "Writer": [{"tag": "James Cameron"}], "Collection": [{"tag": "Working NL Subs"}, {"tag": "Working NL Subs"}], "Role": [{"tag": "Sigourney Weaver"}, {"tag": "Sigourney Weaver"}, {"tag": "Sigourney Weaver"}], "Guid": [{"id": "imdb://tt13015952"}], "UltraBlurColors": {"topLeft": "11333b", "topRight": "0a232d", "bottomRight": "73958", "bottomLeft": "1f5066"}, "Image": [{"alt": "Episode 1", "type": "background", "url": "/library/metadata/45521/thumb/1644710589"}], "titleSort": "Whale", "viewCount": 1, "lastViewedAt": 1682752242, "originalTitle": "映画 ブラッククローバー 魔法帝の剣", "viewOffset": 5222500, "skipCount": 1, "index": 1, "theme": "/library/metadata/1/theme/1705636920", "leafCount": 14, "viewedLeafCount": 0, "childCount": 1, "hasPremiumExtras": "1", "hasPremiumPrimaryExtra": "1", "parentRatingKey": "66", "parentGuid": "plex://show/5d9c081b170e24001f2a7be4", "parentStudio": "UCP", "parentKey": "/library/metadata/66", "parentTitle": "Caprica", "parentIndex": 1, "parentYear": 2010, "parentThumb": "/library/metadata/66/thumb/1705716261", "parentTheme": "/library/metadata/66/theme/1705716261"}], "Meta": {"Type": [{"key": "/library/sections/2/all?type=2", "type": "show", "title": "TV Shows", "active": false, "Filter": [], "Sort": [], "Field": [{"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}, {"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}]}, {"key": "/library/sections/2/all?type=2", "type": "show", "title": "TV Shows", "active": false, "Filter": [{"filter": "genre", "filterType": "string", "key": "/library/sections/2/genre?type=2", "title": "Genre", "type": "filter"}, {"filter": "genre", "filterType": "string", "key": "/library/sections/2/genre?type=2", "title": "Genre", "type": "filter"}, {"filter": "genre", "filterType": "string", "key": "/library/sections/2/genre?type=2", "title": "Genre", "type": "filter"}], "Sort": [], "Field": [{"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}, {"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}, {"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}]}], "FieldType": [{"type": "tag", "Operator": [{"key": "=", "title": "is"}]}, {"type": "tag", "Operator": [{"key": "=", "title": "is"}, {"key": "=", "title": "is"}]}, {"type": "tag", "Operator": [{"key": "=", "title": "is"}, {"key": "=", "title": "is"}]}]}}}
+          application/json: {"MediaContainer": {"Type": [{"key": "/library/sections/2/all?type=2", "type": "show", "title": "TV Shows", "active": false, "Filter": [{"filter": "genre", "filterType": "string", "key": "/library/sections/2/genre?type=2", "title": "Genre", "type": "filter"}, {"filter": "genre", "filterType": "string", "key": "/library/sections/2/genre?type=2", "title": "Genre", "type": "filter"}], "Sort": [{"default": "asc", "active": false, "activeDirection": "asc", "defaultDirection": "asc", "descKey": "titleSort:desc", "firstCharacterKey": "/library/sections/2/firstCharacter", "key": "titleSort", "title": "Title"}, {"default": "asc", "active": false, "activeDirection": "asc", "defaultDirection": "asc", "descKey": "titleSort:desc", "firstCharacterKey": "/library/sections/2/firstCharacter", "key": "titleSort", "title": "Title"}], "Field": [{"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}]}], "FieldType": [{"type": "tag", "Operator": [{"key": "=", "title": "is"}, {"key": "=", "title": "is"}, {"key": "=", "title": "is"}]}, {"type": "tag", "Operator": [{"key": "=", "title": "is"}, {"key": "=", "title": "is"}]}, {"type": "tag", "Operator": [{"key": "=", "title": "is"}, {"key": "=", "title": "is"}]}], "size": 70, "totalSize": 170, "offset": 0, "content": "secondary", "allowSync": true, "nocache": true, "art": "/:/resources/movie-fanart.jpg", "identifier": "com.plexapp.plugins.library", "librarySectionID": 1, "librarySectionTitle": "Movies", "librarySectionUUID": "322a231a-b7f7-49f5-920f-14c61199cd30", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1701731894, "thumb": "/:/resources/movie.png", "title1": "Movies", "title2": "Recently Released", "viewGroup": "movie", "viewMode": 65592, "mixedParents": true, "Metadata": [{"ratingKey": "58683", "key": "/library/metadata/58683", "guid": "plex://movie/5d7768ba96b655001fdc0408", "studio": "20th Century Studios", "skipChildren": false, "librarySectionID": 1, "librarySectionTitle": "Movies", "librarySectionKey": "/library/sections/1", "type": "movie", "title": "Avatar: The Way of Water", "slug": "4-for-texas", "contentRating": "PG-13", "summary": "Jake Sully lives with his newfound family formed on the extrasolar moon Pandora. Once a familiar threat returns to finish what was previously started, Jake must work with Neytiri and the army of the Na'vi race to protect their home.", "rating": 7.6, "audienceRating": 9.2, "year": 2022, "seasonCount": 2022, "tagline": "Return to Pandora.", "flattenSeasons": "1", "showOrdering": "dvd", "thumb": "/library/metadata/58683/thumb/1703239236", "art": "/library/metadata/58683/art/1703239236", "banner": "/library/metadata/58683/banner/1703239236", "duration": 11558112, "originallyAvailableAt": "2022-12-14T00:00:00Z", "addedAt": 1556281940, "updatedAt": 1556281940, "audienceRatingImage": "rottentomatoes://image.rating.upright", "chapterSource": "media", "primaryExtraKey": "/library/metadata/58684", "ratingImage": "rottentomatoes://image.rating.ripe", "grandparentRatingKey": "66", "grandparentGuid": "plex://show/5d9c081b170e24001f2a7be4", "grandparentKey": "/library/metadata/66", "grandparentTitle": "Caprica", "grandparentThumb": "/library/metadata/66/thumb/1705716261", "parentSlug": "alice-in-borderland-2020", "grandparentSlug": "alice-in-borderland-2020", "grandparentArt": "/library/metadata/66/art/1705716261", "grandparentTheme": "/library/metadata/66/theme/1705716261", "Media": [{"id": 119534, "duration": 11558112, "bitrate": 25025, "width": 3840, "height": 2072, "aspectRatio": 1.85, "audioProfile": "dts", "audioChannels": 6, "audioCodec": "eac3", "videoCodec": "hevc", "videoResolution": "4k", "container": "mkv", "videoFrameRate": "24p", "videoProfile": "main 10", "hasVoiceActivity": false, "optimizedForStreaming": 1, "has64bitOffsets": false, "Part": [{"id": 119542, "key": "/library/parts/119542/1680457526/file.mkv", "duration": 11558112, "file": "/movies/Avatar The Way of Water (2022)/Avatar.The.Way.of.Water.2022.2160p.WEB-DL.DDP5.1.Atmos.DV.HDR10.HEVC-CMRG.mkv", "size": 36158371307, "container": "mkv", "audioProfile": "dts", "has64bitOffsets": false, "optimizedForStreaming": false, "videoProfile": "main 10", "indexes": "sd", "hasThumbnail": "1", "Stream": [{"id": 272796, "streamType": 1, "default": true, "selected": true, "codec": "h264", "index": 0, "bitrate": 6273, "colorPrimaries": "bt709", "colorRange": "tv", "colorSpace": "bt709", "colorTrc": "bt709", "bitDepth": 8, "chromaLocation": "left", "streamIdentifier": "2", "chromaSubsampling": "4:2:0", "codedHeight": 1088, "codedWidth": 1920, "frameRate": 29.97, "hasScalingMatrix": false, "hearingImpaired": false, "closedCaptions": false, "embeddedInVideo": "1", "height": 1080, "level": 40, "profile": "main", "refFrames": 4, "scanType": "progressive", "width": 1920, "displayTitle": "1080p (H.264)", "extendedDisplayTitle": "1080p (H.264)", "channels": 2, "language": "English", "languageTag": "en", "languageCode": "eng", "audioChannelLayout": "stereo", "samplingRate": 48000, "title": "English", "canAutoSync": false}]}, {"id": 119542, "key": "/library/parts/119542/1680457526/file.mkv", "duration": 11558112, "file": "/movies/Avatar The Way of Water (2022)/Avatar.The.Way.of.Water.2022.2160p.WEB-DL.DDP5.1.Atmos.DV.HDR10.HEVC-CMRG.mkv", "size": 36158371307, "container": "mkv", "audioProfile": "dts", "has64bitOffsets": false, "optimizedForStreaming": false, "videoProfile": "main 10", "indexes": "sd", "hasThumbnail": "1", "Stream": [{"id": 272796, "streamType": 1, "default": true, "selected": true, "codec": "h264", "index": 0, "bitrate": 6273, "colorPrimaries": "bt709", "colorRange": "tv", "colorSpace": "bt709", "colorTrc": "bt709", "bitDepth": 8, "chromaLocation": "left", "streamIdentifier": "2", "chromaSubsampling": "4:2:0", "codedHeight": 1088, "codedWidth": 1920, "frameRate": 29.97, "hasScalingMatrix": false, "hearingImpaired": false, "closedCaptions": false, "embeddedInVideo": "1", "height": 1080, "level": 40, "profile": "main", "refFrames": 4, "scanType": "progressive", "width": 1920, "displayTitle": "1080p (H.264)", "extendedDisplayTitle": "1080p (H.264)", "channels": 2, "language": "English", "languageTag": "en", "languageCode": "eng", "audioChannelLayout": "stereo", "samplingRate": 48000, "title": "English", "canAutoSync": false}, {"id": 272796, "streamType": 1, "default": true, "selected": true, "codec": "h264", "index": 0, "bitrate": 6273, "colorPrimaries": "bt709", "colorRange": "tv", "colorSpace": "bt709", "colorTrc": "bt709", "bitDepth": 8, "chromaLocation": "left", "streamIdentifier": "2", "chromaSubsampling": "4:2:0", "codedHeight": 1088, "codedWidth": 1920, "frameRate": 29.97, "hasScalingMatrix": false, "hearingImpaired": false, "closedCaptions": false, "embeddedInVideo": "1", "height": 1080, "level": 40, "profile": "main", "refFrames": 4, "scanType": "progressive", "width": 1920, "displayTitle": "1080p (H.264)", "extendedDisplayTitle": "1080p (H.264)", "channels": 2, "language": "English", "languageTag": "en", "languageCode": "eng", "audioChannelLayout": "stereo", "samplingRate": 48000, "title": "English", "canAutoSync": false}, {"id": 272796, "streamType": 1, "default": true, "selected": true, "codec": "h264", "index": 0, "bitrate": 6273, "colorPrimaries": "bt709", "colorRange": "tv", "colorSpace": "bt709", "colorTrc": "bt709", "bitDepth": 8, "chromaLocation": "left", "streamIdentifier": "2", "chromaSubsampling": "4:2:0", "codedHeight": 1088, "codedWidth": 1920, "frameRate": 29.97, "hasScalingMatrix": false, "hearingImpaired": false, "closedCaptions": false, "embeddedInVideo": "1", "height": 1080, "level": 40, "profile": "main", "refFrames": 4, "scanType": "progressive", "width": 1920, "displayTitle": "1080p (H.264)", "extendedDisplayTitle": "1080p (H.264)", "channels": 2, "language": "English", "languageTag": "en", "languageCode": "eng", "audioChannelLayout": "stereo", "samplingRate": 48000, "title": "English", "canAutoSync": false}]}, {"id": 119542, "key": "/library/parts/119542/1680457526/file.mkv", "duration": 11558112, "file": "/movies/Avatar The Way of Water (2022)/Avatar.The.Way.of.Water.2022.2160p.WEB-DL.DDP5.1.Atmos.DV.HDR10.HEVC-CMRG.mkv", "size": 36158371307, "container": "mkv", "audioProfile": "dts", "has64bitOffsets": false, "optimizedForStreaming": false, "videoProfile": "main 10", "indexes": "sd", "hasThumbnail": "1", "Stream": [{"id": 272796, "streamType": 1, "default": true, "selected": true, "codec": "h264", "index": 0, "bitrate": 6273, "colorPrimaries": "bt709", "colorRange": "tv", "colorSpace": "bt709", "colorTrc": "bt709", "bitDepth": 8, "chromaLocation": "left", "streamIdentifier": "2", "chromaSubsampling": "4:2:0", "codedHeight": 1088, "codedWidth": 1920, "frameRate": 29.97, "hasScalingMatrix": false, "hearingImpaired": false, "closedCaptions": false, "embeddedInVideo": "1", "height": 1080, "level": 40, "profile": "main", "refFrames": 4, "scanType": "progressive", "width": 1920, "displayTitle": "1080p (H.264)", "extendedDisplayTitle": "1080p (H.264)", "channels": 2, "language": "English", "languageTag": "en", "languageCode": "eng", "audioChannelLayout": "stereo", "samplingRate": 48000, "title": "English", "canAutoSync": false}]}]}], "Genre": [{"tag": "Adventure"}, {"tag": "Adventure"}, {"tag": "Adventure"}], "Country": [{"tag": "United States of America"}, {"tag": "United States of America"}], "Director": [{"tag": "James Cameron"}, {"tag": "James Cameron"}], "Writer": [{"tag": "James Cameron"}], "Collection": [{"tag": "Working NL Subs"}], "Role": [{"id": 294129, "filter": "actor=294129", "thumb": "https://metadata-static.plex.tv/2/people/27b85844536c39f3f9ac943aaad46608.jpg", "tag": "Mike Smith", "tagKey": "668e7e7b22bcad9064350c91", "role": "Self"}, {"id": 294129, "filter": "actor=294129", "thumb": "https://metadata-static.plex.tv/2/people/27b85844536c39f3f9ac943aaad46608.jpg", "tag": "Mike Smith", "tagKey": "668e7e7b22bcad9064350c91", "role": "Self"}, {"id": 294129, "filter": "actor=294129", "thumb": "https://metadata-static.plex.tv/2/people/27b85844536c39f3f9ac943aaad46608.jpg", "tag": "Mike Smith", "tagKey": "668e7e7b22bcad9064350c91", "role": "Self"}], "Guid": [{"id": "imdb://tt13015952"}], "UltraBlurColors": {"topLeft": "11333b", "topRight": "0a232d", "bottomRight": "73958", "bottomLeft": "1f5066"}, "Rating": [{"image": "themoviedb://image.rating", "value": 3, "type": "audience"}], "Image": [{"alt": "Episode 1", "type": "background", "url": "/library/metadata/45521/thumb/1644710589"}, {"alt": "Episode 1", "type": "background", "url": "/library/metadata/45521/thumb/1644710589"}], "titleSort": "Whale", "viewCount": 1, "lastViewedAt": 1682752242, "originalTitle": "映画 ブラッククローバー 魔法帝の剣", "viewOffset": 5222500, "skipCount": 1, "index": 1, "theme": "/library/metadata/1/theme/1705636920", "leafCount": 14, "viewedLeafCount": 0, "childCount": 1, "hasPremiumExtras": "1", "hasPremiumPrimaryExtra": "1", "parentRatingKey": "66", "parentGuid": "plex://show/5d9c081b170e24001f2a7be4", "parentStudio": "UCP", "parentKey": "/library/metadata/66", "parentTitle": "Caprica", "parentIndex": 1, "parentYear": 2010, "parentThumb": "/library/metadata/66/thumb/1705716261", "parentTheme": "/library/metadata/66/theme/1705716261"}, {"ratingKey": "58683", "key": "/library/metadata/58683", "guid": "plex://movie/5d7768ba96b655001fdc0408", "studio": "20th Century Studios", "skipChildren": false, "librarySectionID": 1, "librarySectionTitle": "Movies", "librarySectionKey": "/library/sections/1", "type": "movie", "title": "Avatar: The Way of Water", "slug": "4-for-texas", "contentRating": "PG-13", "summary": "Jake Sully lives with his newfound family formed on the extrasolar moon Pandora. Once a familiar threat returns to finish what was previously started, Jake must work with Neytiri and the army of the Na'vi race to protect their home.", "rating": 7.6, "audienceRating": 9.2, "year": 2022, "seasonCount": 2022, "tagline": "Return to Pandora.", "flattenSeasons": "1", "showOrdering": "dvd", "thumb": "/library/metadata/58683/thumb/1703239236", "art": "/library/metadata/58683/art/1703239236", "banner": "/library/metadata/58683/banner/1703239236", "duration": 11558112, "originallyAvailableAt": "2022-12-14T00:00:00Z", "addedAt": 1556281940, "updatedAt": 1556281940, "audienceRatingImage": "rottentomatoes://image.rating.upright", "chapterSource": "media", "primaryExtraKey": "/library/metadata/58684", "ratingImage": "rottentomatoes://image.rating.ripe", "grandparentRatingKey": "66", "grandparentGuid": "plex://show/5d9c081b170e24001f2a7be4", "grandparentKey": "/library/metadata/66", "grandparentTitle": "Caprica", "grandparentThumb": "/library/metadata/66/thumb/1705716261", "parentSlug": "alice-in-borderland-2020", "grandparentSlug": "alice-in-borderland-2020", "grandparentArt": "/library/metadata/66/art/1705716261", "grandparentTheme": "/library/metadata/66/theme/1705716261", "Media": [{"id": 119534, "duration": 11558112, "bitrate": 25025, "width": 3840, "height": 2072, "aspectRatio": 1.85, "audioProfile": "dts", "audioChannels": 6, "audioCodec": "eac3", "videoCodec": "hevc", "videoResolution": "4k", "container": "mkv", "videoFrameRate": "24p", "videoProfile": "main 10", "hasVoiceActivity": false, "optimizedForStreaming": 1, "has64bitOffsets": false, "Part": [{"id": 119542, "key": "/library/parts/119542/1680457526/file.mkv", "duration": 11558112, "file": "/movies/Avatar The Way of Water (2022)/Avatar.The.Way.of.Water.2022.2160p.WEB-DL.DDP5.1.Atmos.DV.HDR10.HEVC-CMRG.mkv", "size": 36158371307, "container": "mkv", "audioProfile": "dts", "has64bitOffsets": false, "optimizedForStreaming": false, "videoProfile": "main 10", "indexes": "sd", "hasThumbnail": "1", "Stream": [{"id": 272796, "streamType": 1, "default": true, "selected": true, "codec": "h264", "index": 0, "bitrate": 6273, "colorPrimaries": "bt709", "colorRange": "tv", "colorSpace": "bt709", "colorTrc": "bt709", "bitDepth": 8, "chromaLocation": "left", "streamIdentifier": "2", "chromaSubsampling": "4:2:0", "codedHeight": 1088, "codedWidth": 1920, "frameRate": 29.97, "hasScalingMatrix": false, "hearingImpaired": false, "closedCaptions": false, "embeddedInVideo": "1", "height": 1080, "level": 40, "profile": "main", "refFrames": 4, "scanType": "progressive", "width": 1920, "displayTitle": "1080p (H.264)", "extendedDisplayTitle": "1080p (H.264)", "channels": 2, "language": "English", "languageTag": "en", "languageCode": "eng", "audioChannelLayout": "stereo", "samplingRate": 48000, "title": "English", "canAutoSync": false}]}]}], "Genre": [], "Country": [{"tag": "United States of America"}], "Director": [{"tag": "James Cameron"}, {"tag": "James Cameron"}, {"tag": "James Cameron"}], "Writer": [{"tag": "James Cameron"}], "Collection": [{"tag": "Working NL Subs"}, {"tag": "Working NL Subs"}], "Role": [{"id": 294129, "filter": "actor=294129", "thumb": "https://metadata-static.plex.tv/2/people/27b85844536c39f3f9ac943aaad46608.jpg", "tag": "Mike Smith", "tagKey": "668e7e7b22bcad9064350c91", "role": "Self"}, {"id": 294129, "filter": "actor=294129", "thumb": "https://metadata-static.plex.tv/2/people/27b85844536c39f3f9ac943aaad46608.jpg", "tag": "Mike Smith", "tagKey": "668e7e7b22bcad9064350c91", "role": "Self"}, {"id": 294129, "filter": "actor=294129", "thumb": "https://metadata-static.plex.tv/2/people/27b85844536c39f3f9ac943aaad46608.jpg", "tag": "Mike Smith", "tagKey": "668e7e7b22bcad9064350c91", "role": "Self"}], "Guid": [{"id": "imdb://tt13015952"}], "UltraBlurColors": {"topLeft": "11333b", "topRight": "0a232d", "bottomRight": "73958", "bottomLeft": "1f5066"}, "Rating": [], "Image": [{"alt": "Episode 1", "type": "background", "url": "/library/metadata/45521/thumb/1644710589"}], "titleSort": "Whale", "viewCount": 1, "lastViewedAt": 1682752242, "originalTitle": "映画 ブラッククローバー 魔法帝の剣", "viewOffset": 5222500, "skipCount": 1, "index": 1, "theme": "/library/metadata/1/theme/1705636920", "leafCount": 14, "viewedLeafCount": 0, "childCount": 1, "hasPremiumExtras": "1", "hasPremiumPrimaryExtra": "1", "parentRatingKey": "66", "parentGuid": "plex://show/5d9c081b170e24001f2a7be4", "parentStudio": "UCP", "parentKey": "/library/metadata/66", "parentTitle": "Caprica", "parentIndex": 1, "parentYear": 2010, "parentThumb": "/library/metadata/66/thumb/1705716261", "parentTheme": "/library/metadata/66/theme/1705716261"}], "Meta": {"Type": [{"key": "/library/sections/2/all?type=2", "type": "show", "title": "TV Shows", "active": false, "Filter": [], "Sort": [], "Field": [{"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}, {"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}]}, {"key": "/library/sections/2/all?type=2", "type": "show", "title": "TV Shows", "active": false, "Filter": [{"filter": "genre", "filterType": "string", "key": "/library/sections/2/genre?type=2", "title": "Genre", "type": "filter"}, {"filter": "genre", "filterType": "string", "key": "/library/sections/2/genre?type=2", "title": "Genre", "type": "filter"}, {"filter": "genre", "filterType": "string", "key": "/library/sections/2/genre?type=2", "title": "Genre", "type": "filter"}], "Sort": [], "Field": [{"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}, {"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}, {"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}]}], "FieldType": [{"type": "tag", "Operator": [{"key": "=", "title": "is"}]}, {"type": "tag", "Operator": [{"key": "=", "title": "is"}, {"key": "=", "title": "is"}]}, {"type": "tag", "Operator": [{"key": "=", "title": "is"}, {"key": "=", "title": "is"}]}]}}}
         "400":
           application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
         "401":
@@ -2381,6 +2494,23 @@ examples:
           application/json: {"errors": []}
         "400":
           application/json: {"errors": []}
+    "":
+      parameters:
+        query:
+          X-Plex-Client-Identifier: "gcgzw5rz2xovp84b4vha3a40"
+          X-Plex-Product: "Plex Web"
+          X-Plex-Device: "Linux"
+          X-Plex-Version: "4.133.0"
+          X-Plex-Platform: "Chrome"
+      requestBody:
+        application/x-www-form-urlencoded: {"login": "username@email.com", "password": "password123", "verificationCode": "123456"}
+      responses:
+        "201":
+          application/json: {"adsConsent": true, "adsConsentReminderAt": "2019-08-24T14:15:22Z", "adsConsentSetAt": "2019-08-24T14:15:22Z", "anonymous": false, "authToken": "CxoUzBTSV5hsxjTpFKaf", "backupCodesCreated": false, "confirmed": false, "country": "US", "email": "username@email.com", "emailOnlyAuth": false, "experimentalFeatures": false, "friendlyName": "friendlyUsername", "entitlements": [], "guest": false, "hasPassword": true, "home": false, "homeAdmin": false, "homeSize": 1, "id": 13692262, "joinedAt": 1721154902, "locale": null, "mailingListActive": false, "mailingListStatus": "unsubscribed", "maxHomeSize": 15, "pin": "string", "profile": {"autoSelectAudio": true, "defaultAudioLanguage": "ja", "defaultSubtitleLanguage": "en", "autoSelectSubtitle": 1, "defaultSubtitleAccessibility": 1, "defaultSubtitleForced": 1, "watchedIndicator": 1, "mediaReviewsVisibility": 1}, "protected": false, "rememberExpiresAt": 1722364046, "restricted": false, "roles": ["string"], "scrobbleTypes": "", "services": [{"identifier": "metadata-dev", "endpoint": "https://epg.provider.plex.tv", "token": "DjoMtqFAGRL1uVtCyF1dKIorTbShJeqv", "secret": "string", "status": "online"}], "subscription": {"features": ["Android - Dolby Vision"], "active": true, "subscribedAt": "2021-04-12T18:21:12Z", "status": "Inactive", "paymentService": "string", "plan": "string"}, "subscriptionDescription": "string", "subscriptions": [{"features": ["Android - Dolby Vision"], "active": true, "subscribedAt": "2021-04-12T18:21:12Z", "status": "Inactive", "paymentService": "string", "plan": "string"}], "thumb": "https://plex.tv/users/a4f43c1ebfde43a5/avatar?c=8372075101", "title": "UsernameTitle", "twoFactorEnabled": false, "username": "Username", "uuid": "dae343c1f45beb4f", "attributionPartner": null, "pastSubscriptions": [{"id": "string", "mode": "string", "renewsAt": "string", "endsAt": "1556281940", "canceled": "0", "gracePeriod": "0", "onHold": "0", "canReactivate": "0", "canUpgrade": "0", "canDowngrade": "0", "canConvert": "0", "type": "plexpass", "transfer": "string", "state": "ended", "billing": {"paymentMethodId": 481656}}], "trials": [{}]}
+        "400":
+          application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}, {"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}, {"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
+        "401":
+          application/json: {"errors": []}
   getStatistics:
     "":
       parameters:
@@ -2562,3 +2692,34 @@ examples:
           application/json: {"errors": []}
         "401":
           application/json: {"errors": []}
+  get-recently-added:
+    speakeasy-default-get-recently-added:
+      parameters:
+        query:
+          contentDirectoryID: 470161
+          sectionID: 2
+          type: 2
+          includeMeta: 1
+          X-Plex-Container-Start: 0
+          X-Plex-Container-Size: 50
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 50, "identifier": "com.plexapp.plugins.library", "Meta": {"Type": [{"key": "/library/sections/2/all?type=2", "type": "show", "title": "TV Shows", "active": false, "Filter": [{"filter": "genre", "filterType": "string", "key": "/library/sections/2/genre?type=2", "title": "Genre", "type": "filter"}, {"filter": "genre", "filterType": "string", "key": "/library/sections/2/genre?type=2", "title": "Genre", "type": "filter"}, {"filter": "genre", "filterType": "string", "key": "/library/sections/2/genre?type=2", "title": "Genre", "type": "filter"}], "Sort": [{"default": "asc", "active": false, "activeDirection": "asc", "defaultDirection": "asc", "descKey": "titleSort:desc", "firstCharacterKey": "/library/sections/2/firstCharacter", "key": "titleSort", "title": "Title"}], "Field": [{"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}, {"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}, {"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}]}, {"key": "/library/sections/2/all?type=2", "type": "show", "title": "TV Shows", "active": false, "Filter": [{"filter": "genre", "filterType": "string", "key": "/library/sections/2/genre?type=2", "title": "Genre", "type": "filter"}, {"filter": "genre", "filterType": "string", "key": "/library/sections/2/genre?type=2", "title": "Genre", "type": "filter"}, {"filter": "genre", "filterType": "string", "key": "/library/sections/2/genre?type=2", "title": "Genre", "type": "filter"}], "Sort": [{"default": "asc", "active": false, "activeDirection": "asc", "defaultDirection": "asc", "descKey": "titleSort:desc", "firstCharacterKey": "/library/sections/2/firstCharacter", "key": "titleSort", "title": "Title"}, {"default": "asc", "active": false, "activeDirection": "asc", "defaultDirection": "asc", "descKey": "titleSort:desc", "firstCharacterKey": "/library/sections/2/firstCharacter", "key": "titleSort", "title": "Title"}, {"default": "asc", "active": false, "activeDirection": "asc", "defaultDirection": "asc", "descKey": "titleSort:desc", "firstCharacterKey": "/library/sections/2/firstCharacter", "key": "titleSort", "title": "Title"}], "Field": [{"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}, {"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}, {"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}]}, {"key": "/library/sections/2/all?type=2", "type": "show", "title": "TV Shows", "active": false, "Filter": [{"filter": "genre", "filterType": "string", "key": "/library/sections/2/genre?type=2", "title": "Genre", "type": "filter"}, {"filter": "genre", "filterType": "string", "key": "/library/sections/2/genre?type=2", "title": "Genre", "type": "filter"}, {"filter": "genre", "filterType": "string", "key": "/library/sections/2/genre?type=2", "title": "Genre", "type": "filter"}], "Sort": [{"default": "asc", "active": false, "activeDirection": "asc", "defaultDirection": "asc", "descKey": "titleSort:desc", "firstCharacterKey": "/library/sections/2/firstCharacter", "key": "titleSort", "title": "Title"}, {"default": "asc", "active": false, "activeDirection": "asc", "defaultDirection": "asc", "descKey": "titleSort:desc", "firstCharacterKey": "/library/sections/2/firstCharacter", "key": "titleSort", "title": "Title"}], "Field": [{"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}, {"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}, {"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}]}], "FieldType": [{"type": "tag", "Operator": [{"key": "=", "title": "is"}]}, {"type": "tag", "Operator": []}, {"type": "tag", "Operator": []}]}, "Metadata": [{"ratingKey": "58683", "key": "/library/metadata/58683", "guid": "plex://movie/5d7768ba96b655001fdc0408", "studio": "20th Century Studios", "skipChildren": false, "librarySectionID": 1, "librarySectionTitle": "Movies", "librarySectionKey": "/library/sections/1", "type": "movie", "title": "Avatar: The Way of Water", "slug": "4-for-texas", "contentRating": "PG-13", "summary": "Jake Sully lives with his newfound family formed on the extrasolar moon Pandora. Once a familiar threat returns to finish what was previously started, Jake must work with Neytiri and the army of the Na'vi race to protect their home.", "rating": 7.6, "audienceRating": 9.2, "year": 2022, "seasonCount": 2022, "tagline": "Return to Pandora.", "flattenSeasons": "1", "showOrdering": "dvd", "thumb": "/library/metadata/58683/thumb/1703239236", "art": "/library/metadata/58683/art/1703239236", "banner": "/library/metadata/58683/banner/1703239236", "duration": 11558112, "originallyAvailableAt": "2022-12-14T00:00:00Z", "addedAt": 1556281940, "updatedAt": 1556281940, "audienceRatingImage": "rottentomatoes://image.rating.upright", "chapterSource": "media", "primaryExtraKey": "/library/metadata/58684", "ratingImage": "rottentomatoes://image.rating.ripe", "grandparentRatingKey": "66", "grandparentGuid": "plex://show/5d9c081b170e24001f2a7be4", "grandparentKey": "/library/metadata/66", "grandparentTitle": "Caprica", "grandparentThumb": "/library/metadata/66/thumb/1705716261", "parentSlug": "alice-in-borderland-2020", "grandparentSlug": "alice-in-borderland-2020", "grandparentArt": "/library/metadata/66/art/1705716261", "grandparentTheme": "/library/metadata/66/theme/1705716261", "Media": [{"id": 119534, "duration": 11558112, "bitrate": 25025, "width": 3840, "height": 2072, "aspectRatio": 1.85, "audioProfile": "dts", "audioChannels": 6, "audioCodec": "eac3", "videoCodec": "hevc", "videoResolution": "4k", "container": "mkv", "videoFrameRate": "24p", "videoProfile": "main 10", "hasVoiceActivity": false, "optimizedForStreaming": 1, "has64bitOffsets": false, "Part": [{"id": 119542, "key": "/library/parts/119542/1680457526/file.mkv", "duration": 11558112, "file": "/movies/Avatar The Way of Water (2022)/Avatar.The.Way.of.Water.2022.2160p.WEB-DL.DDP5.1.Atmos.DV.HDR10.HEVC-CMRG.mkv", "size": 36158371307, "container": "mkv", "audioProfile": "dts", "has64bitOffsets": false, "optimizedForStreaming": false, "videoProfile": "main 10", "indexes": "sd", "hasThumbnail": "1", "Stream": [{"id": 272796, "streamType": 1, "default": true, "selected": true, "codec": "h264", "index": 0, "bitrate": 6273, "colorPrimaries": "bt709", "colorRange": "tv", "colorSpace": "bt709", "colorTrc": "bt709", "bitDepth": 8, "chromaLocation": "left", "streamIdentifier": "2", "chromaSubsampling": "4:2:0", "codedHeight": 1088, "codedWidth": 1920, "frameRate": 29.97, "hasScalingMatrix": false, "hearingImpaired": false, "closedCaptions": false, "embeddedInVideo": "1", "height": 1080, "level": 40, "profile": "main", "refFrames": 4, "scanType": "progressive", "width": 1920, "displayTitle": "1080p (H.264)", "extendedDisplayTitle": "1080p (H.264)", "channels": 2, "language": "English", "languageTag": "en", "languageCode": "eng", "audioChannelLayout": "stereo", "samplingRate": 48000, "title": "English", "canAutoSync": false}]}, {"id": 119542, "key": "/library/parts/119542/1680457526/file.mkv", "duration": 11558112, "file": "/movies/Avatar The Way of Water (2022)/Avatar.The.Way.of.Water.2022.2160p.WEB-DL.DDP5.1.Atmos.DV.HDR10.HEVC-CMRG.mkv", "size": 36158371307, "container": "mkv", "audioProfile": "dts", "has64bitOffsets": false, "optimizedForStreaming": false, "videoProfile": "main 10", "indexes": "sd", "hasThumbnail": "1", "Stream": []}]}], "Genre": [{"tag": "Adventure"}], "Country": [], "Director": [{"tag": "James Cameron"}, {"tag": "James Cameron"}], "Writer": [], "Collection": [], "Role": [{"id": 294129, "filter": "actor=294129", "thumb": "https://metadata-static.plex.tv/2/people/27b85844536c39f3f9ac943aaad46608.jpg", "tag": "Mike Smith", "tagKey": "668e7e7b22bcad9064350c91", "role": "Self"}, {"id": 294129, "filter": "actor=294129", "thumb": "https://metadata-static.plex.tv/2/people/27b85844536c39f3f9ac943aaad46608.jpg", "tag": "Mike Smith", "tagKey": "668e7e7b22bcad9064350c91", "role": "Self"}, {"id": 294129, "filter": "actor=294129", "thumb": "https://metadata-static.plex.tv/2/people/27b85844536c39f3f9ac943aaad46608.jpg", "tag": "Mike Smith", "tagKey": "668e7e7b22bcad9064350c91", "role": "Self"}], "Guid": [{"id": "imdb://tt13015952"}, {"id": "imdb://tt13015952"}, {"id": "imdb://tt13015952"}], "UltraBlurColors": {"topLeft": "11333b", "topRight": "0a232d", "bottomRight": "73958", "bottomLeft": "1f5066"}, "Rating": [], "Image": [{"alt": "Episode 1", "type": "background", "url": "/library/metadata/45521/thumb/1644710589"}, {"alt": "Episode 1", "type": "background", "url": "/library/metadata/45521/thumb/1644710589"}, {"alt": "Episode 1", "type": "background", "url": "/library/metadata/45521/thumb/1644710589"}], "titleSort": "Whale", "viewCount": 1, "lastViewedAt": 1682752242, "originalTitle": "映画 ブラッククローバー 魔法帝の剣", "viewOffset": 5222500, "skipCount": 1, "index": 1, "theme": "/library/metadata/1/theme/1705636920", "leafCount": 14, "viewedLeafCount": 0, "childCount": 1, "hasPremiumExtras": "1", "hasPremiumPrimaryExtra": "1", "parentRatingKey": "66", "parentGuid": "plex://show/5d9c081b170e24001f2a7be4", "parentStudio": "UCP", "parentKey": "/library/metadata/66", "parentTitle": "Caprica", "parentIndex": 1, "parentYear": 2010, "parentThumb": "/library/metadata/66/thumb/1705716261", "parentTheme": "/library/metadata/66/theme/1705716261"}]}}
+  get-recently-added-library:
+    speakeasy-default-get-recently-added-library:
+      parameters:
+        query:
+          contentDirectoryID: 2
+          pinnedContentDirectoryID: [3, 5, 7, 13, 12, 1, 6, 14, 2, 10, 16, 17]
+          sectionID: 2
+          type: 2
+          includeMeta: 1
+          X-Plex-Container-Start: 0
+          X-Plex-Container-Size: 50
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"Type": [{"key": "/library/sections/2/all?type=2", "type": "show", "title": "TV Shows", "active": false, "Filter": [{"filter": "genre", "filterType": "string", "key": "/library/sections/2/genre?type=2", "title": "Genre", "type": "filter"}], "Sort": [{"default": "asc", "active": false, "activeDirection": "asc", "defaultDirection": "asc", "descKey": "titleSort:desc", "firstCharacterKey": "/library/sections/2/firstCharacter", "key": "titleSort", "title": "Title"}, {"default": "asc", "active": false, "activeDirection": "asc", "defaultDirection": "asc", "descKey": "titleSort:desc", "firstCharacterKey": "/library/sections/2/firstCharacter", "key": "titleSort", "title": "Title"}, {"default": "asc", "active": false, "activeDirection": "asc", "defaultDirection": "asc", "descKey": "titleSort:desc", "firstCharacterKey": "/library/sections/2/firstCharacter", "key": "titleSort", "title": "Title"}], "Field": [{"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}, {"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}]}, {"key": "/library/sections/2/all?type=2", "type": "show", "title": "TV Shows", "active": false, "Filter": [{"filter": "genre", "filterType": "string", "key": "/library/sections/2/genre?type=2", "title": "Genre", "type": "filter"}], "Sort": [{"default": "asc", "active": false, "activeDirection": "asc", "defaultDirection": "asc", "descKey": "titleSort:desc", "firstCharacterKey": "/library/sections/2/firstCharacter", "key": "titleSort", "title": "Title"}, {"default": "asc", "active": false, "activeDirection": "asc", "defaultDirection": "asc", "descKey": "titleSort:desc", "firstCharacterKey": "/library/sections/2/firstCharacter", "key": "titleSort", "title": "Title"}, {"default": "asc", "active": false, "activeDirection": "asc", "defaultDirection": "asc", "descKey": "titleSort:desc", "firstCharacterKey": "/library/sections/2/firstCharacter", "key": "titleSort", "title": "Title"}], "Field": [{"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}, {"key": "show.title", "title": "Show Title", "type": "string", "subType": "rating"}]}], "FieldType": [], "size": 50, "identifier": "com.plexapp.plugins.library", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1680021154, "Metadata": [{"librarySectionID": 1, "librarySectionTitle": "Movies", "librarySectionUUID": "322a231a-b7f7-49f5-920f-14c61199cd30", "ratingKey": 59398, "key": "/library/metadata/59398", "guid": "plex://movie/5e161a83bea6ac004126e148", "studio": "Marvel Studios", "type": "movie", "title": "Ant-Man and the Wasp: Quantumania", "contentRating": "PG-13", "summary": "Scott Lang and Hope Van Dyne along with Hank Pym and Janet Van Dyne explore the Quantum Realm where they interact with strange creatures and embark on an adventure that goes beyond the limits of what they thought was possible.", "rating": 4.7, "audienceRating": 8.3, "year": 2023, "tagline": "Witness the beginning of a new dynasty.", "thumb": "/library/metadata/59398/thumb/1681888010", "art": "/library/metadata/59398/art/1681888010", "duration": 7474422, "originallyAvailableAt": "2023-02-15T00:00:00Z", "addedAt": 1681803215, "updatedAt": 1681888010, "audienceRatingImage": "rottentomatoes://image.rating.upright", "chapterSource": "media", "primaryExtraKey": "/library/metadata/59399", "ratingImage": "rottentomatoes://image.rating.rotten", "Media": [{"id": 120345, "duration": 7474422, "bitrate": 3623, "width": 1920, "height": 804, "aspectRatio": 2.35, "audioChannels": 6, "audioCodec": "ac3", "videoCodec": "h264", "videoResolution": 1080, "container": "mp4", "videoFrameRate": "24p", "optimizedForStreaming": 0, "videoProfile": "high", "Part": []}], "Genre": [], "Director": [{"tag": "Peyton Reed"}], "Writer": [], "Country": [], "Role": [{"tag": "Paul Rudd"}, {"tag": "Paul Rudd"}, {"tag": "Paul Rudd"}]}]}}
+        "400":
+          application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
+        "401":
+          application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}, {"code": 1001, "message": "User could not be authenticated", "status": 401}, {"code": 1001, "message": "User could not be authenticated", "status": 401}]}

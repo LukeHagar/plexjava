@@ -37,7 +37,7 @@ public class GetLibraryItemsSort {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("activeDirection")
-    private Optional<? extends ActiveDirection> activeDirection;
+    private Optional<? extends GetLibraryItemsActiveDirection> activeDirection;
 
     /**
      * The direction of the sort. Can be either `asc` or `desc`.
@@ -45,7 +45,7 @@ public class GetLibraryItemsSort {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("defaultDirection")
-    private Optional<? extends DefaultDirection> defaultDirection;
+    private Optional<? extends GetLibraryItemsDefaultDirection> defaultDirection;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("descKey")
@@ -65,8 +65,8 @@ public class GetLibraryItemsSort {
     public GetLibraryItemsSort(
             @JsonProperty("default") Optional<String> default_,
             @JsonProperty("active") Optional<Boolean> active,
-            @JsonProperty("activeDirection") Optional<? extends ActiveDirection> activeDirection,
-            @JsonProperty("defaultDirection") Optional<? extends DefaultDirection> defaultDirection,
+            @JsonProperty("activeDirection") Optional<? extends GetLibraryItemsActiveDirection> activeDirection,
+            @JsonProperty("defaultDirection") Optional<? extends GetLibraryItemsDefaultDirection> defaultDirection,
             @JsonProperty("descKey") Optional<String> descKey,
             @JsonProperty("firstCharacterKey") Optional<String> firstCharacterKey,
             @JsonProperty("key") String key,
@@ -111,8 +111,8 @@ public class GetLibraryItemsSort {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<ActiveDirection> activeDirection() {
-        return (Optional<ActiveDirection>) activeDirection;
+    public Optional<GetLibraryItemsActiveDirection> activeDirection() {
+        return (Optional<GetLibraryItemsActiveDirection>) activeDirection;
     }
 
     /**
@@ -121,8 +121,8 @@ public class GetLibraryItemsSort {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<DefaultDirection> defaultDirection() {
-        return (Optional<DefaultDirection>) defaultDirection;
+    public Optional<GetLibraryItemsDefaultDirection> defaultDirection() {
+        return (Optional<GetLibraryItemsDefaultDirection>) defaultDirection;
     }
 
     @JsonIgnore
@@ -177,7 +177,7 @@ public class GetLibraryItemsSort {
      * The direction of the sort. Can be either `asc` or `desc`.
      * 
      */
-    public GetLibraryItemsSort withActiveDirection(ActiveDirection activeDirection) {
+    public GetLibraryItemsSort withActiveDirection(GetLibraryItemsActiveDirection activeDirection) {
         Utils.checkNotNull(activeDirection, "activeDirection");
         this.activeDirection = Optional.ofNullable(activeDirection);
         return this;
@@ -187,7 +187,7 @@ public class GetLibraryItemsSort {
      * The direction of the sort. Can be either `asc` or `desc`.
      * 
      */
-    public GetLibraryItemsSort withActiveDirection(Optional<? extends ActiveDirection> activeDirection) {
+    public GetLibraryItemsSort withActiveDirection(Optional<? extends GetLibraryItemsActiveDirection> activeDirection) {
         Utils.checkNotNull(activeDirection, "activeDirection");
         this.activeDirection = activeDirection;
         return this;
@@ -197,7 +197,7 @@ public class GetLibraryItemsSort {
      * The direction of the sort. Can be either `asc` or `desc`.
      * 
      */
-    public GetLibraryItemsSort withDefaultDirection(DefaultDirection defaultDirection) {
+    public GetLibraryItemsSort withDefaultDirection(GetLibraryItemsDefaultDirection defaultDirection) {
         Utils.checkNotNull(defaultDirection, "defaultDirection");
         this.defaultDirection = Optional.ofNullable(defaultDirection);
         return this;
@@ -207,7 +207,7 @@ public class GetLibraryItemsSort {
      * The direction of the sort. Can be either `asc` or `desc`.
      * 
      */
-    public GetLibraryItemsSort withDefaultDirection(Optional<? extends DefaultDirection> defaultDirection) {
+    public GetLibraryItemsSort withDefaultDirection(Optional<? extends GetLibraryItemsDefaultDirection> defaultDirection) {
         Utils.checkNotNull(defaultDirection, "defaultDirection");
         this.defaultDirection = defaultDirection;
         return this;
@@ -301,9 +301,9 @@ public class GetLibraryItemsSort {
  
         private Optional<Boolean> active = Optional.empty();
  
-        private Optional<? extends ActiveDirection> activeDirection;
+        private Optional<? extends GetLibraryItemsActiveDirection> activeDirection;
  
-        private Optional<? extends DefaultDirection> defaultDirection;
+        private Optional<? extends GetLibraryItemsDefaultDirection> defaultDirection;
  
         private Optional<String> descKey = Optional.empty();
  
@@ -345,7 +345,7 @@ public class GetLibraryItemsSort {
          * The direction of the sort. Can be either `asc` or `desc`.
          * 
          */
-        public Builder activeDirection(ActiveDirection activeDirection) {
+        public Builder activeDirection(GetLibraryItemsActiveDirection activeDirection) {
             Utils.checkNotNull(activeDirection, "activeDirection");
             this.activeDirection = Optional.ofNullable(activeDirection);
             return this;
@@ -355,7 +355,7 @@ public class GetLibraryItemsSort {
          * The direction of the sort. Can be either `asc` or `desc`.
          * 
          */
-        public Builder activeDirection(Optional<? extends ActiveDirection> activeDirection) {
+        public Builder activeDirection(Optional<? extends GetLibraryItemsActiveDirection> activeDirection) {
             Utils.checkNotNull(activeDirection, "activeDirection");
             this.activeDirection = activeDirection;
             return this;
@@ -365,7 +365,7 @@ public class GetLibraryItemsSort {
          * The direction of the sort. Can be either `asc` or `desc`.
          * 
          */
-        public Builder defaultDirection(DefaultDirection defaultDirection) {
+        public Builder defaultDirection(GetLibraryItemsDefaultDirection defaultDirection) {
             Utils.checkNotNull(defaultDirection, "defaultDirection");
             this.defaultDirection = Optional.ofNullable(defaultDirection);
             return this;
@@ -375,7 +375,7 @@ public class GetLibraryItemsSort {
          * The direction of the sort. Can be either `asc` or `desc`.
          * 
          */
-        public Builder defaultDirection(Optional<? extends DefaultDirection> defaultDirection) {
+        public Builder defaultDirection(Optional<? extends GetLibraryItemsDefaultDirection> defaultDirection) {
             Utils.checkNotNull(defaultDirection, "defaultDirection");
             this.defaultDirection = defaultDirection;
             return this;
@@ -434,17 +434,17 @@ public class GetLibraryItemsSort {
                 title);
         }
 
-        private static final LazySingletonValue<Optional<? extends ActiveDirection>> _SINGLETON_VALUE_ActiveDirection =
+        private static final LazySingletonValue<Optional<? extends GetLibraryItemsActiveDirection>> _SINGLETON_VALUE_ActiveDirection =
                 new LazySingletonValue<>(
                         "activeDirection",
                         "\"asc\"",
-                        new TypeReference<Optional<? extends ActiveDirection>>() {});
+                        new TypeReference<Optional<? extends GetLibraryItemsActiveDirection>>() {});
 
-        private static final LazySingletonValue<Optional<? extends DefaultDirection>> _SINGLETON_VALUE_DefaultDirection =
+        private static final LazySingletonValue<Optional<? extends GetLibraryItemsDefaultDirection>> _SINGLETON_VALUE_DefaultDirection =
                 new LazySingletonValue<>(
                         "defaultDirection",
                         "\"asc\"",
-                        new TypeReference<Optional<? extends DefaultDirection>>() {});
+                        new TypeReference<Optional<? extends GetLibraryItemsDefaultDirection>>() {});
     }
 }
 

@@ -13,11 +13,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
+import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -50,6 +52,14 @@ public class GetLibraryItemsPart {
     @JsonProperty("audioProfile")
     private Optional<String> audioProfile;
 
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("has64bitOffsets")
+    private Optional<Boolean> has64bitOffsets;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("optimizedForStreaming")
+    private Optional<Boolean> optimizedForStreaming;
+
     @JsonProperty("videoProfile")
     private String videoProfile;
 
@@ -59,7 +69,11 @@ public class GetLibraryItemsPart {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hasThumbnail")
-    private Optional<? extends HasThumbnail> hasThumbnail;
+    private Optional<? extends GetLibraryItemsHasThumbnail> hasThumbnail;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Stream")
+    private Optional<? extends List<GetLibraryItemsStream>> stream;
 
     @JsonCreator
     public GetLibraryItemsPart(
@@ -70,9 +84,12 @@ public class GetLibraryItemsPart {
             @JsonProperty("size") long size,
             @JsonProperty("container") String container,
             @JsonProperty("audioProfile") Optional<String> audioProfile,
+            @JsonProperty("has64bitOffsets") Optional<Boolean> has64bitOffsets,
+            @JsonProperty("optimizedForStreaming") Optional<Boolean> optimizedForStreaming,
             @JsonProperty("videoProfile") String videoProfile,
             @JsonProperty("indexes") Optional<String> indexes,
-            @JsonProperty("hasThumbnail") Optional<? extends HasThumbnail> hasThumbnail) {
+            @JsonProperty("hasThumbnail") Optional<? extends GetLibraryItemsHasThumbnail> hasThumbnail,
+            @JsonProperty("Stream") Optional<? extends List<GetLibraryItemsStream>> stream) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(duration, "duration");
@@ -80,9 +97,12 @@ public class GetLibraryItemsPart {
         Utils.checkNotNull(size, "size");
         Utils.checkNotNull(container, "container");
         Utils.checkNotNull(audioProfile, "audioProfile");
+        Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
+        Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
         Utils.checkNotNull(videoProfile, "videoProfile");
         Utils.checkNotNull(indexes, "indexes");
         Utils.checkNotNull(hasThumbnail, "hasThumbnail");
+        Utils.checkNotNull(stream, "stream");
         this.id = id;
         this.key = key;
         this.duration = duration;
@@ -90,9 +110,12 @@ public class GetLibraryItemsPart {
         this.size = size;
         this.container = container;
         this.audioProfile = audioProfile;
+        this.has64bitOffsets = has64bitOffsets;
+        this.optimizedForStreaming = optimizedForStreaming;
         this.videoProfile = videoProfile;
         this.indexes = indexes;
         this.hasThumbnail = hasThumbnail;
+        this.stream = stream;
     }
     
     public GetLibraryItemsPart(
@@ -103,7 +126,7 @@ public class GetLibraryItemsPart {
             long size,
             String container,
             String videoProfile) {
-        this(id, key, duration, file, size, container, Optional.empty(), videoProfile, Optional.empty(), Optional.empty());
+        this(id, key, duration, file, size, container, Optional.empty(), Optional.empty(), Optional.empty(), videoProfile, Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -146,6 +169,16 @@ public class GetLibraryItemsPart {
     }
 
     @JsonIgnore
+    public Optional<Boolean> has64bitOffsets() {
+        return has64bitOffsets;
+    }
+
+    @JsonIgnore
+    public Optional<Boolean> optimizedForStreaming() {
+        return optimizedForStreaming;
+    }
+
+    @JsonIgnore
     public String videoProfile() {
         return videoProfile;
     }
@@ -157,8 +190,14 @@ public class GetLibraryItemsPart {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<HasThumbnail> hasThumbnail() {
-        return (Optional<HasThumbnail>) hasThumbnail;
+    public Optional<GetLibraryItemsHasThumbnail> hasThumbnail() {
+        return (Optional<GetLibraryItemsHasThumbnail>) hasThumbnail;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<GetLibraryItemsStream>> stream() {
+        return (Optional<List<GetLibraryItemsStream>>) stream;
     }
 
     public final static Builder builder() {
@@ -217,6 +256,30 @@ public class GetLibraryItemsPart {
         return this;
     }
 
+    public GetLibraryItemsPart withHas64bitOffsets(boolean has64bitOffsets) {
+        Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
+        this.has64bitOffsets = Optional.ofNullable(has64bitOffsets);
+        return this;
+    }
+
+    public GetLibraryItemsPart withHas64bitOffsets(Optional<Boolean> has64bitOffsets) {
+        Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
+        this.has64bitOffsets = has64bitOffsets;
+        return this;
+    }
+
+    public GetLibraryItemsPart withOptimizedForStreaming(boolean optimizedForStreaming) {
+        Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
+        this.optimizedForStreaming = Optional.ofNullable(optimizedForStreaming);
+        return this;
+    }
+
+    public GetLibraryItemsPart withOptimizedForStreaming(Optional<Boolean> optimizedForStreaming) {
+        Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
+        this.optimizedForStreaming = optimizedForStreaming;
+        return this;
+    }
+
     public GetLibraryItemsPart withVideoProfile(String videoProfile) {
         Utils.checkNotNull(videoProfile, "videoProfile");
         this.videoProfile = videoProfile;
@@ -235,15 +298,27 @@ public class GetLibraryItemsPart {
         return this;
     }
 
-    public GetLibraryItemsPart withHasThumbnail(HasThumbnail hasThumbnail) {
+    public GetLibraryItemsPart withHasThumbnail(GetLibraryItemsHasThumbnail hasThumbnail) {
         Utils.checkNotNull(hasThumbnail, "hasThumbnail");
         this.hasThumbnail = Optional.ofNullable(hasThumbnail);
         return this;
     }
 
-    public GetLibraryItemsPart withHasThumbnail(Optional<? extends HasThumbnail> hasThumbnail) {
+    public GetLibraryItemsPart withHasThumbnail(Optional<? extends GetLibraryItemsHasThumbnail> hasThumbnail) {
         Utils.checkNotNull(hasThumbnail, "hasThumbnail");
         this.hasThumbnail = hasThumbnail;
+        return this;
+    }
+
+    public GetLibraryItemsPart withStream(List<GetLibraryItemsStream> stream) {
+        Utils.checkNotNull(stream, "stream");
+        this.stream = Optional.ofNullable(stream);
+        return this;
+    }
+
+    public GetLibraryItemsPart withStream(Optional<? extends List<GetLibraryItemsStream>> stream) {
+        Utils.checkNotNull(stream, "stream");
+        this.stream = stream;
         return this;
     }
     
@@ -264,9 +339,12 @@ public class GetLibraryItemsPart {
             Objects.deepEquals(this.size, other.size) &&
             Objects.deepEquals(this.container, other.container) &&
             Objects.deepEquals(this.audioProfile, other.audioProfile) &&
+            Objects.deepEquals(this.has64bitOffsets, other.has64bitOffsets) &&
+            Objects.deepEquals(this.optimizedForStreaming, other.optimizedForStreaming) &&
             Objects.deepEquals(this.videoProfile, other.videoProfile) &&
             Objects.deepEquals(this.indexes, other.indexes) &&
-            Objects.deepEquals(this.hasThumbnail, other.hasThumbnail);
+            Objects.deepEquals(this.hasThumbnail, other.hasThumbnail) &&
+            Objects.deepEquals(this.stream, other.stream);
     }
     
     @Override
@@ -279,9 +357,12 @@ public class GetLibraryItemsPart {
             size,
             container,
             audioProfile,
+            has64bitOffsets,
+            optimizedForStreaming,
             videoProfile,
             indexes,
-            hasThumbnail);
+            hasThumbnail,
+            stream);
     }
     
     @Override
@@ -294,9 +375,12 @@ public class GetLibraryItemsPart {
                 "size", size,
                 "container", container,
                 "audioProfile", audioProfile,
+                "has64bitOffsets", has64bitOffsets,
+                "optimizedForStreaming", optimizedForStreaming,
                 "videoProfile", videoProfile,
                 "indexes", indexes,
-                "hasThumbnail", hasThumbnail);
+                "hasThumbnail", hasThumbnail,
+                "stream", stream);
     }
     
     public final static class Builder {
@@ -315,11 +399,17 @@ public class GetLibraryItemsPart {
  
         private Optional<String> audioProfile = Optional.empty();
  
+        private Optional<Boolean> has64bitOffsets = Optional.empty();
+ 
+        private Optional<Boolean> optimizedForStreaming = Optional.empty();
+ 
         private String videoProfile;
  
         private Optional<String> indexes = Optional.empty();
  
-        private Optional<? extends HasThumbnail> hasThumbnail;  
+        private Optional<? extends GetLibraryItemsHasThumbnail> hasThumbnail;
+ 
+        private Optional<? extends List<GetLibraryItemsStream>> stream = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -377,6 +467,30 @@ public class GetLibraryItemsPart {
             return this;
         }
 
+        public Builder has64bitOffsets(boolean has64bitOffsets) {
+            Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
+            this.has64bitOffsets = Optional.ofNullable(has64bitOffsets);
+            return this;
+        }
+
+        public Builder has64bitOffsets(Optional<Boolean> has64bitOffsets) {
+            Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
+            this.has64bitOffsets = has64bitOffsets;
+            return this;
+        }
+
+        public Builder optimizedForStreaming(boolean optimizedForStreaming) {
+            Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
+            this.optimizedForStreaming = Optional.ofNullable(optimizedForStreaming);
+            return this;
+        }
+
+        public Builder optimizedForStreaming(Optional<Boolean> optimizedForStreaming) {
+            Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
+            this.optimizedForStreaming = optimizedForStreaming;
+            return this;
+        }
+
         public Builder videoProfile(String videoProfile) {
             Utils.checkNotNull(videoProfile, "videoProfile");
             this.videoProfile = videoProfile;
@@ -395,15 +509,27 @@ public class GetLibraryItemsPart {
             return this;
         }
 
-        public Builder hasThumbnail(HasThumbnail hasThumbnail) {
+        public Builder hasThumbnail(GetLibraryItemsHasThumbnail hasThumbnail) {
             Utils.checkNotNull(hasThumbnail, "hasThumbnail");
             this.hasThumbnail = Optional.ofNullable(hasThumbnail);
             return this;
         }
 
-        public Builder hasThumbnail(Optional<? extends HasThumbnail> hasThumbnail) {
+        public Builder hasThumbnail(Optional<? extends GetLibraryItemsHasThumbnail> hasThumbnail) {
             Utils.checkNotNull(hasThumbnail, "hasThumbnail");
             this.hasThumbnail = hasThumbnail;
+            return this;
+        }
+
+        public Builder stream(List<GetLibraryItemsStream> stream) {
+            Utils.checkNotNull(stream, "stream");
+            this.stream = Optional.ofNullable(stream);
+            return this;
+        }
+
+        public Builder stream(Optional<? extends List<GetLibraryItemsStream>> stream) {
+            Utils.checkNotNull(stream, "stream");
+            this.stream = stream;
             return this;
         }
         
@@ -418,16 +544,19 @@ public class GetLibraryItemsPart {
                 size,
                 container,
                 audioProfile,
+                has64bitOffsets,
+                optimizedForStreaming,
                 videoProfile,
                 indexes,
-                hasThumbnail);
+                hasThumbnail,
+                stream);
         }
 
-        private static final LazySingletonValue<Optional<? extends HasThumbnail>> _SINGLETON_VALUE_HasThumbnail =
+        private static final LazySingletonValue<Optional<? extends GetLibraryItemsHasThumbnail>> _SINGLETON_VALUE_HasThumbnail =
                 new LazySingletonValue<>(
                         "hasThumbnail",
                         "\"0\"",
-                        new TypeReference<Optional<? extends HasThumbnail>>() {});
+                        new TypeReference<Optional<? extends GetLibraryItemsHasThumbnail>>() {});
     }
 }
 

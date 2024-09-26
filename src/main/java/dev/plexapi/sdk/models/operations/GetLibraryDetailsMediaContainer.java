@@ -81,7 +81,7 @@ public class GetLibraryDetailsMediaContainer {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("FieldType")
-    private Optional<? extends List<FieldType>> fieldType;
+    private Optional<? extends List<GetLibraryDetailsFieldType>> fieldType;
 
     @JsonCreator
     public GetLibraryDetailsMediaContainer(
@@ -99,7 +99,7 @@ public class GetLibraryDetailsMediaContainer {
             @JsonProperty("viewMode") Optional<Integer> viewMode,
             @JsonProperty("Directory") Optional<? extends List<GetLibraryDetailsDirectory>> directory,
             @JsonProperty("Type") Optional<? extends List<GetLibraryDetailsType>> type,
-            @JsonProperty("FieldType") Optional<? extends List<FieldType>> fieldType) {
+            @JsonProperty("FieldType") Optional<? extends List<GetLibraryDetailsFieldType>> fieldType) {
         Utils.checkNotNull(size, "size");
         Utils.checkNotNull(allowSync, "allowSync");
         Utils.checkNotNull(art, "art");
@@ -210,8 +210,8 @@ public class GetLibraryDetailsMediaContainer {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<FieldType>> fieldType() {
-        return (Optional<List<FieldType>>) fieldType;
+    public Optional<List<GetLibraryDetailsFieldType>> fieldType() {
+        return (Optional<List<GetLibraryDetailsFieldType>>) fieldType;
     }
 
     public final static Builder builder() {
@@ -386,13 +386,13 @@ public class GetLibraryDetailsMediaContainer {
         return this;
     }
 
-    public GetLibraryDetailsMediaContainer withFieldType(List<FieldType> fieldType) {
+    public GetLibraryDetailsMediaContainer withFieldType(List<GetLibraryDetailsFieldType> fieldType) {
         Utils.checkNotNull(fieldType, "fieldType");
         this.fieldType = Optional.ofNullable(fieldType);
         return this;
     }
 
-    public GetLibraryDetailsMediaContainer withFieldType(Optional<? extends List<FieldType>> fieldType) {
+    public GetLibraryDetailsMediaContainer withFieldType(Optional<? extends List<GetLibraryDetailsFieldType>> fieldType) {
         Utils.checkNotNull(fieldType, "fieldType");
         this.fieldType = fieldType;
         return this;
@@ -495,7 +495,7 @@ public class GetLibraryDetailsMediaContainer {
  
         private Optional<? extends List<GetLibraryDetailsType>> type = Optional.empty();
  
-        private Optional<? extends List<FieldType>> fieldType = Optional.empty();  
+        private Optional<? extends List<GetLibraryDetailsFieldType>> fieldType = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -669,13 +669,13 @@ public class GetLibraryDetailsMediaContainer {
             return this;
         }
 
-        public Builder fieldType(List<FieldType> fieldType) {
+        public Builder fieldType(List<GetLibraryDetailsFieldType> fieldType) {
             Utils.checkNotNull(fieldType, "fieldType");
             this.fieldType = Optional.ofNullable(fieldType);
             return this;
         }
 
-        public Builder fieldType(Optional<? extends List<FieldType>> fieldType) {
+        public Builder fieldType(Optional<? extends List<GetLibraryDetailsFieldType>> fieldType) {
             Utils.checkNotNull(fieldType, "fieldType");
             this.fieldType = fieldType;
             return this;

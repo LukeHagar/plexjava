@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -19,39 +20,231 @@ import java.util.Optional;
 
 public class Role {
 
+    /**
+     * The ID of the tag or actor.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("id")
+    private Optional<Long> id;
+
+    /**
+     * The filter used to find the actor or tag.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("filter")
+    private Optional<String> filter;
+
+    /**
+     * The thumbnail of the actor
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("thumb")
+    private Optional<String> thumb;
+
+    /**
+     * The name of the tag or actor.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tag")
     private Optional<String> tag;
 
+    /**
+     * Unique identifier for the tag.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("tagKey")
+    private Optional<String> tagKey;
+
+    /**
+     * The role of the actor or tag in the media.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("role")
+    private Optional<String> role;
+
     @JsonCreator
     public Role(
-            @JsonProperty("tag") Optional<String> tag) {
+            @JsonProperty("id") Optional<Long> id,
+            @JsonProperty("filter") Optional<String> filter,
+            @JsonProperty("thumb") Optional<String> thumb,
+            @JsonProperty("tag") Optional<String> tag,
+            @JsonProperty("tagKey") Optional<String> tagKey,
+            @JsonProperty("role") Optional<String> role) {
+        Utils.checkNotNull(id, "id");
+        Utils.checkNotNull(filter, "filter");
+        Utils.checkNotNull(thumb, "thumb");
         Utils.checkNotNull(tag, "tag");
+        Utils.checkNotNull(tagKey, "tagKey");
+        Utils.checkNotNull(role, "role");
+        this.id = id;
+        this.filter = filter;
+        this.thumb = thumb;
         this.tag = tag;
+        this.tagKey = tagKey;
+        this.role = role;
     }
     
     public Role() {
-        this(Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
+    /**
+     * The ID of the tag or actor.
+     */
+    @JsonIgnore
+    public Optional<Long> id() {
+        return id;
+    }
+
+    /**
+     * The filter used to find the actor or tag.
+     */
+    @JsonIgnore
+    public Optional<String> filter() {
+        return filter;
+    }
+
+    /**
+     * The thumbnail of the actor
+     */
+    @JsonIgnore
+    public Optional<String> thumb() {
+        return thumb;
+    }
+
+    /**
+     * The name of the tag or actor.
+     */
     @JsonIgnore
     public Optional<String> tag() {
         return tag;
+    }
+
+    /**
+     * Unique identifier for the tag.
+     */
+    @JsonIgnore
+    public Optional<String> tagKey() {
+        return tagKey;
+    }
+
+    /**
+     * The role of the actor or tag in the media.
+     */
+    @JsonIgnore
+    public Optional<String> role() {
+        return role;
     }
 
     public final static Builder builder() {
         return new Builder();
     }
 
+    /**
+     * The ID of the tag or actor.
+     */
+    public Role withId(long id) {
+        Utils.checkNotNull(id, "id");
+        this.id = Optional.ofNullable(id);
+        return this;
+    }
+
+    /**
+     * The ID of the tag or actor.
+     */
+    public Role withId(Optional<Long> id) {
+        Utils.checkNotNull(id, "id");
+        this.id = id;
+        return this;
+    }
+
+    /**
+     * The filter used to find the actor or tag.
+     */
+    public Role withFilter(String filter) {
+        Utils.checkNotNull(filter, "filter");
+        this.filter = Optional.ofNullable(filter);
+        return this;
+    }
+
+    /**
+     * The filter used to find the actor or tag.
+     */
+    public Role withFilter(Optional<String> filter) {
+        Utils.checkNotNull(filter, "filter");
+        this.filter = filter;
+        return this;
+    }
+
+    /**
+     * The thumbnail of the actor
+     */
+    public Role withThumb(String thumb) {
+        Utils.checkNotNull(thumb, "thumb");
+        this.thumb = Optional.ofNullable(thumb);
+        return this;
+    }
+
+    /**
+     * The thumbnail of the actor
+     */
+    public Role withThumb(Optional<String> thumb) {
+        Utils.checkNotNull(thumb, "thumb");
+        this.thumb = thumb;
+        return this;
+    }
+
+    /**
+     * The name of the tag or actor.
+     */
     public Role withTag(String tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = Optional.ofNullable(tag);
         return this;
     }
 
+    /**
+     * The name of the tag or actor.
+     */
     public Role withTag(Optional<String> tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = tag;
+        return this;
+    }
+
+    /**
+     * Unique identifier for the tag.
+     */
+    public Role withTagKey(String tagKey) {
+        Utils.checkNotNull(tagKey, "tagKey");
+        this.tagKey = Optional.ofNullable(tagKey);
+        return this;
+    }
+
+    /**
+     * Unique identifier for the tag.
+     */
+    public Role withTagKey(Optional<String> tagKey) {
+        Utils.checkNotNull(tagKey, "tagKey");
+        this.tagKey = tagKey;
+        return this;
+    }
+
+    /**
+     * The role of the actor or tag in the media.
+     */
+    public Role withRole(String role) {
+        Utils.checkNotNull(role, "role");
+        this.role = Optional.ofNullable(role);
+        return this;
+    }
+
+    /**
+     * The role of the actor or tag in the media.
+     */
+    public Role withRole(Optional<String> role) {
+        Utils.checkNotNull(role, "role");
+        this.role = role;
         return this;
     }
     
@@ -65,44 +258,170 @@ public class Role {
         }
         Role other = (Role) o;
         return 
-            Objects.deepEquals(this.tag, other.tag);
+            Objects.deepEquals(this.id, other.id) &&
+            Objects.deepEquals(this.filter, other.filter) &&
+            Objects.deepEquals(this.thumb, other.thumb) &&
+            Objects.deepEquals(this.tag, other.tag) &&
+            Objects.deepEquals(this.tagKey, other.tagKey) &&
+            Objects.deepEquals(this.role, other.role);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
-            tag);
+            id,
+            filter,
+            thumb,
+            tag,
+            tagKey,
+            role);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Role.class,
-                "tag", tag);
+                "id", id,
+                "filter", filter,
+                "thumb", thumb,
+                "tag", tag,
+                "tagKey", tagKey,
+                "role", role);
     }
     
     public final static class Builder {
  
-        private Optional<String> tag = Optional.empty();  
+        private Optional<Long> id = Optional.empty();
+ 
+        private Optional<String> filter = Optional.empty();
+ 
+        private Optional<String> thumb = Optional.empty();
+ 
+        private Optional<String> tag = Optional.empty();
+ 
+        private Optional<String> tagKey = Optional.empty();
+ 
+        private Optional<String> role = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
         }
 
+        /**
+         * The ID of the tag or actor.
+         */
+        public Builder id(long id) {
+            Utils.checkNotNull(id, "id");
+            this.id = Optional.ofNullable(id);
+            return this;
+        }
+
+        /**
+         * The ID of the tag or actor.
+         */
+        public Builder id(Optional<Long> id) {
+            Utils.checkNotNull(id, "id");
+            this.id = id;
+            return this;
+        }
+
+        /**
+         * The filter used to find the actor or tag.
+         */
+        public Builder filter(String filter) {
+            Utils.checkNotNull(filter, "filter");
+            this.filter = Optional.ofNullable(filter);
+            return this;
+        }
+
+        /**
+         * The filter used to find the actor or tag.
+         */
+        public Builder filter(Optional<String> filter) {
+            Utils.checkNotNull(filter, "filter");
+            this.filter = filter;
+            return this;
+        }
+
+        /**
+         * The thumbnail of the actor
+         */
+        public Builder thumb(String thumb) {
+            Utils.checkNotNull(thumb, "thumb");
+            this.thumb = Optional.ofNullable(thumb);
+            return this;
+        }
+
+        /**
+         * The thumbnail of the actor
+         */
+        public Builder thumb(Optional<String> thumb) {
+            Utils.checkNotNull(thumb, "thumb");
+            this.thumb = thumb;
+            return this;
+        }
+
+        /**
+         * The name of the tag or actor.
+         */
         public Builder tag(String tag) {
             Utils.checkNotNull(tag, "tag");
             this.tag = Optional.ofNullable(tag);
             return this;
         }
 
+        /**
+         * The name of the tag or actor.
+         */
         public Builder tag(Optional<String> tag) {
             Utils.checkNotNull(tag, "tag");
             this.tag = tag;
             return this;
         }
+
+        /**
+         * Unique identifier for the tag.
+         */
+        public Builder tagKey(String tagKey) {
+            Utils.checkNotNull(tagKey, "tagKey");
+            this.tagKey = Optional.ofNullable(tagKey);
+            return this;
+        }
+
+        /**
+         * Unique identifier for the tag.
+         */
+        public Builder tagKey(Optional<String> tagKey) {
+            Utils.checkNotNull(tagKey, "tagKey");
+            this.tagKey = tagKey;
+            return this;
+        }
+
+        /**
+         * The role of the actor or tag in the media.
+         */
+        public Builder role(String role) {
+            Utils.checkNotNull(role, "role");
+            this.role = Optional.ofNullable(role);
+            return this;
+        }
+
+        /**
+         * The role of the actor or tag in the media.
+         */
+        public Builder role(Optional<String> role) {
+            Utils.checkNotNull(role, "role");
+            this.role = role;
+            return this;
+        }
         
         public Role build() {
             return new Role(
-                tag);
+                id,
+                filter,
+                thumb,
+                tag,
+                tagKey,
+                role);
         }
     }
 }

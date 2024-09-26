@@ -357,8 +357,8 @@ public class Application {
                 .width(110d)
                 .height(165d)
                 .opacity(100L)
-                .blur(0d)
-                .minSize(MinSize.ONE)
+                .blur(20d)
+                .minSize(MinSize.ZERO)
                 .upscale(Upscale.ONE)
                 .url("/library/metadata/49564/thumb/1654258204")
                 .build();

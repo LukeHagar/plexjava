@@ -5,7 +5,7 @@
 
 | Field              | Type               | Required           | Description        | Example            |
 | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `key`              | *Optional<String>* | :heavy_minus_sign: | N/A                | label              |
-| `title`            | *Optional<String>* | :heavy_minus_sign: | N/A                | Label              |
-| `type`             | *Optional<String>* | :heavy_minus_sign: | N/A                | tag                |
-| `subType`          | *Optional<String>* | :heavy_minus_sign: | N/A                | bitrate            |
+| `key`              | *String*           | :heavy_check_mark: | N/A                | show.title         |
+| `title`            | *String*           | :heavy_check_mark: | N/A                | Show Title         |
+| `type`             | *String*           | :heavy_check_mark: | N/A                | string             |
+| `subType`          | *Optional<String>* | :heavy_minus_sign: | N/A                | rating             |

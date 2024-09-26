@@ -65,7 +65,7 @@ public class GetMetaDataByRatingKeyPart {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Stream")
-    private Optional<? extends List<Stream>> stream;
+    private Optional<? extends List<GetMetaDataByRatingKeyStream>> stream;
 
     @JsonCreator
     public GetMetaDataByRatingKeyPart(
@@ -79,7 +79,7 @@ public class GetMetaDataByRatingKeyPart {
             @JsonProperty("has64bitOffsets") Optional<Boolean> has64bitOffsets,
             @JsonProperty("optimizedForStreaming") Optional<Boolean> optimizedForStreaming,
             @JsonProperty("videoProfile") Optional<String> videoProfile,
-            @JsonProperty("Stream") Optional<? extends List<Stream>> stream) {
+            @JsonProperty("Stream") Optional<? extends List<GetMetaDataByRatingKeyStream>> stream) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(duration, "duration");
@@ -160,8 +160,8 @@ public class GetMetaDataByRatingKeyPart {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Stream>> stream() {
-        return (Optional<List<Stream>>) stream;
+    public Optional<List<GetMetaDataByRatingKeyStream>> stream() {
+        return (Optional<List<GetMetaDataByRatingKeyStream>>) stream;
     }
 
     public final static Builder builder() {
@@ -288,13 +288,13 @@ public class GetMetaDataByRatingKeyPart {
         return this;
     }
 
-    public GetMetaDataByRatingKeyPart withStream(List<Stream> stream) {
+    public GetMetaDataByRatingKeyPart withStream(List<GetMetaDataByRatingKeyStream> stream) {
         Utils.checkNotNull(stream, "stream");
         this.stream = Optional.ofNullable(stream);
         return this;
     }
 
-    public GetMetaDataByRatingKeyPart withStream(Optional<? extends List<Stream>> stream) {
+    public GetMetaDataByRatingKeyPart withStream(Optional<? extends List<GetMetaDataByRatingKeyStream>> stream) {
         Utils.checkNotNull(stream, "stream");
         this.stream = stream;
         return this;
@@ -377,7 +377,7 @@ public class GetMetaDataByRatingKeyPart {
  
         private Optional<String> videoProfile = Optional.empty();
  
-        private Optional<? extends List<Stream>> stream = Optional.empty();  
+        private Optional<? extends List<GetMetaDataByRatingKeyStream>> stream = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -503,13 +503,13 @@ public class GetMetaDataByRatingKeyPart {
             return this;
         }
 
-        public Builder stream(List<Stream> stream) {
+        public Builder stream(List<GetMetaDataByRatingKeyStream> stream) {
             Utils.checkNotNull(stream, "stream");
             this.stream = Optional.ofNullable(stream);
             return this;
         }
 
-        public Builder stream(Optional<? extends List<Stream>> stream) {
+        public Builder stream(Optional<? extends List<GetMetaDataByRatingKeyStream>> stream) {
             Utils.checkNotNull(stream, "stream");
             this.stream = stream;
             return this;

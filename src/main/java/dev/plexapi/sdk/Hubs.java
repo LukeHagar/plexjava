@@ -18,6 +18,10 @@ import dev.plexapi.sdk.models.operations.GetLibraryHubsRequest;
 import dev.plexapi.sdk.models.operations.GetLibraryHubsRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetLibraryHubsResponse;
 import dev.plexapi.sdk.models.operations.GetLibraryHubsResponseBody;
+import dev.plexapi.sdk.models.operations.GetRecentlyAddedRequest;
+import dev.plexapi.sdk.models.operations.GetRecentlyAddedRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetRecentlyAddedResponse;
+import dev.plexapi.sdk.models.operations.GetRecentlyAddedResponseBody;
 import dev.plexapi.sdk.models.operations.OnlyTransient;
 import dev.plexapi.sdk.models.operations.QueryParamOnlyTransient;
 import dev.plexapi.sdk.models.operations.SDKMethodInterfaces.*;
@@ -42,6 +46,7 @@ import java.util.Optional;
  */
 public class Hubs implements
             MethodCallGetGlobalHubs,
+            MethodCallGetRecentlyAdded,
             MethodCallGetLibraryHubs {
 
     private final SDKConfiguration sdkConfiguration;
@@ -208,6 +213,130 @@ public class Hubs implements
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.extractByteArrayFromBody(_httpRes));
+    }
+
+
+
+    /**
+     * Get Recently Added
+     * This endpoint will return the recently added content.
+     * 
+     * @return The call builder
+     */
+    public GetRecentlyAddedRequestBuilder getRecentlyAdded() {
+        return new GetRecentlyAddedRequestBuilder(this);
+    }
+
+    /**
+     * Get Recently Added
+     * This endpoint will return the recently added content.
+     * 
+     * @param request The request object containing all of the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetRecentlyAddedResponse getRecentlyAdded(
+            GetRecentlyAddedRequest request) throws Exception {
+        String _baseUrl = Utils.templateUrl(
+                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+        String _url = Utils.generateURL(
+                _baseUrl,
+                "/hubs/home/recentlyAdded");
+        
+        HTTPRequest _req = new HTTPRequest(_url, "GET");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                SDKConfiguration.USER_AGENT);
+
+        _req.addQueryParams(Utils.getQueryParams(
+                GetRecentlyAddedRequest.class,
+                request, 
+                this.sdkConfiguration.globals));
+
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
+
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "get-recently-added", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "get-recently-added",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "get-recently-added",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "get-recently-added",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
+            .headers()
+            .firstValue("Content-Type")
+            .orElse("application/octet-stream");
+        GetRecentlyAddedResponse.Builder _resBuilder = 
+            GetRecentlyAddedResponse
+                .builder()
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
+
+        GetRecentlyAddedResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetRecentlyAddedResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetRecentlyAddedResponseBody>() {});
+                _res.withObject(Optional.ofNullable(_out));
+                return _res;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
             // no content 
             throw new SDKError(
                     _httpRes, 

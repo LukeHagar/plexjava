@@ -18,7 +18,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 
-public class GetRecentlyAddedErrors {
+public class GetRecentlyAddedLibraryLibraryErrors {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("code")
@@ -33,7 +33,7 @@ public class GetRecentlyAddedErrors {
     private Optional<Integer> status;
 
     @JsonCreator
-    public GetRecentlyAddedErrors(
+    public GetRecentlyAddedLibraryLibraryErrors(
             @JsonProperty("code") Optional<Integer> code,
             @JsonProperty("message") Optional<String> message,
             @JsonProperty("status") Optional<Integer> status) {
@@ -45,7 +45,7 @@ public class GetRecentlyAddedErrors {
         this.status = status;
     }
     
-    public GetRecentlyAddedErrors() {
+    public GetRecentlyAddedLibraryLibraryErrors() {
         this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
@@ -68,37 +68,37 @@ public class GetRecentlyAddedErrors {
         return new Builder();
     }
 
-    public GetRecentlyAddedErrors withCode(int code) {
+    public GetRecentlyAddedLibraryLibraryErrors withCode(int code) {
         Utils.checkNotNull(code, "code");
         this.code = Optional.ofNullable(code);
         return this;
     }
 
-    public GetRecentlyAddedErrors withCode(Optional<Integer> code) {
+    public GetRecentlyAddedLibraryLibraryErrors withCode(Optional<Integer> code) {
         Utils.checkNotNull(code, "code");
         this.code = code;
         return this;
     }
 
-    public GetRecentlyAddedErrors withMessage(String message) {
+    public GetRecentlyAddedLibraryLibraryErrors withMessage(String message) {
         Utils.checkNotNull(message, "message");
         this.message = Optional.ofNullable(message);
         return this;
     }
 
-    public GetRecentlyAddedErrors withMessage(Optional<String> message) {
+    public GetRecentlyAddedLibraryLibraryErrors withMessage(Optional<String> message) {
         Utils.checkNotNull(message, "message");
         this.message = message;
         return this;
     }
 
-    public GetRecentlyAddedErrors withStatus(int status) {
+    public GetRecentlyAddedLibraryLibraryErrors withStatus(int status) {
         Utils.checkNotNull(status, "status");
         this.status = Optional.ofNullable(status);
         return this;
     }
 
-    public GetRecentlyAddedErrors withStatus(Optional<Integer> status) {
+    public GetRecentlyAddedLibraryLibraryErrors withStatus(Optional<Integer> status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
@@ -112,7 +112,7 @@ public class GetRecentlyAddedErrors {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        GetRecentlyAddedErrors other = (GetRecentlyAddedErrors) o;
+        GetRecentlyAddedLibraryLibraryErrors other = (GetRecentlyAddedLibraryLibraryErrors) o;
         return 
             Objects.deepEquals(this.code, other.code) &&
             Objects.deepEquals(this.message, other.message) &&
@@ -129,7 +129,7 @@ public class GetRecentlyAddedErrors {
     
     @Override
     public String toString() {
-        return Utils.toString(GetRecentlyAddedErrors.class,
+        return Utils.toString(GetRecentlyAddedLibraryLibraryErrors.class,
                 "code", code,
                 "message", message,
                 "status", status);
@@ -183,8 +183,8 @@ public class GetRecentlyAddedErrors {
             return this;
         }
         
-        public GetRecentlyAddedErrors build() {
-            return new GetRecentlyAddedErrors(
+        public GetRecentlyAddedLibraryLibraryErrors build() {
+            return new GetRecentlyAddedLibraryLibraryErrors(
                 code,
                 message,
                 status);

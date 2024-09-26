@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Integer;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -20,8 +21,20 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * GetLibraryItemsMediaContainer - The Meta object is only included in the response if the `includeMeta` parameter is set to `1`.
+ * 
+ */
 
 public class GetLibraryItemsMediaContainer {
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Type")
+    private Optional<? extends List<GetLibraryItemsType>> type;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("FieldType")
+    private Optional<? extends List<GetLibraryItemsFieldType>> fieldType;
 
     @JsonProperty("size")
     private int size;
@@ -49,7 +62,7 @@ public class GetLibraryItemsMediaContainer {
     private String identifier;
 
     @JsonProperty("librarySectionID")
-    private LibrarySectionID librarySectionID;
+    private long librarySectionID;
 
     @JsonProperty("librarySectionTitle")
     private String librarySectionTitle;
@@ -92,10 +105,12 @@ public class GetLibraryItemsMediaContainer {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Meta")
-    private Optional<? extends Meta> meta;
+    private Optional<? extends GetLibraryItemsMeta> meta;
 
     @JsonCreator
     public GetLibraryItemsMediaContainer(
+            @JsonProperty("Type") Optional<? extends List<GetLibraryItemsType>> type,
+            @JsonProperty("FieldType") Optional<? extends List<GetLibraryItemsFieldType>> fieldType,
             @JsonProperty("size") int size,
             @JsonProperty("totalSize") int totalSize,
             @JsonProperty("offset") int offset,
@@ -104,7 +119,7 @@ public class GetLibraryItemsMediaContainer {
             @JsonProperty("nocache") Optional<Boolean> nocache,
             @JsonProperty("art") String art,
             @JsonProperty("identifier") String identifier,
-            @JsonProperty("librarySectionID") LibrarySectionID librarySectionID,
+            @JsonProperty("librarySectionID") long librarySectionID,
             @JsonProperty("librarySectionTitle") String librarySectionTitle,
             @JsonProperty("librarySectionUUID") String librarySectionUUID,
             @JsonProperty("mediaTagPrefix") String mediaTagPrefix,
@@ -116,7 +131,9 @@ public class GetLibraryItemsMediaContainer {
             @JsonProperty("viewMode") Optional<Integer> viewMode,
             @JsonProperty("mixedParents") Optional<Boolean> mixedParents,
             @JsonProperty("Metadata") List<GetLibraryItemsMetadata> metadata,
-            @JsonProperty("Meta") Optional<? extends Meta> meta) {
+            @JsonProperty("Meta") Optional<? extends GetLibraryItemsMeta> meta) {
+        Utils.checkNotNull(type, "type");
+        Utils.checkNotNull(fieldType, "fieldType");
         Utils.checkNotNull(size, "size");
         Utils.checkNotNull(totalSize, "totalSize");
         Utils.checkNotNull(offset, "offset");
@@ -138,6 +155,8 @@ public class GetLibraryItemsMediaContainer {
         Utils.checkNotNull(mixedParents, "mixedParents");
         Utils.checkNotNull(metadata, "metadata");
         Utils.checkNotNull(meta, "meta");
+        this.type = type;
+        this.fieldType = fieldType;
         this.size = size;
         this.totalSize = totalSize;
         this.offset = offset;
@@ -169,7 +188,7 @@ public class GetLibraryItemsMediaContainer {
             boolean allowSync,
             String art,
             String identifier,
-            LibrarySectionID librarySectionID,
+            long librarySectionID,
             String librarySectionTitle,
             String librarySectionUUID,
             String mediaTagPrefix,
@@ -179,7 +198,19 @@ public class GetLibraryItemsMediaContainer {
             String title2,
             String viewGroup,
             List<GetLibraryItemsMetadata> metadata) {
-        this(size, totalSize, offset, content, allowSync, Optional.empty(), art, identifier, librarySectionID, librarySectionTitle, librarySectionUUID, mediaTagPrefix, mediaTagVersion, thumb, title1, title2, viewGroup, Optional.empty(), Optional.empty(), metadata, Optional.empty());
+        this(Optional.empty(), Optional.empty(), size, totalSize, offset, content, allowSync, Optional.empty(), art, identifier, librarySectionID, librarySectionTitle, librarySectionUUID, mediaTagPrefix, mediaTagVersion, thumb, title1, title2, viewGroup, Optional.empty(), Optional.empty(), metadata, Optional.empty());
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<GetLibraryItemsType>> type() {
+        return (Optional<List<GetLibraryItemsType>>) type;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<GetLibraryItemsFieldType>> fieldType() {
+        return (Optional<List<GetLibraryItemsFieldType>>) fieldType;
     }
 
     @JsonIgnore
@@ -223,7 +254,7 @@ public class GetLibraryItemsMediaContainer {
     }
 
     @JsonIgnore
-    public LibrarySectionID librarySectionID() {
+    public long librarySectionID() {
         return librarySectionID;
     }
 
@@ -288,12 +319,36 @@ public class GetLibraryItemsMediaContainer {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Meta> meta() {
-        return (Optional<Meta>) meta;
+    public Optional<GetLibraryItemsMeta> meta() {
+        return (Optional<GetLibraryItemsMeta>) meta;
     }
 
     public final static Builder builder() {
         return new Builder();
+    }
+
+    public GetLibraryItemsMediaContainer withType(List<GetLibraryItemsType> type) {
+        Utils.checkNotNull(type, "type");
+        this.type = Optional.ofNullable(type);
+        return this;
+    }
+
+    public GetLibraryItemsMediaContainer withType(Optional<? extends List<GetLibraryItemsType>> type) {
+        Utils.checkNotNull(type, "type");
+        this.type = type;
+        return this;
+    }
+
+    public GetLibraryItemsMediaContainer withFieldType(List<GetLibraryItemsFieldType> fieldType) {
+        Utils.checkNotNull(fieldType, "fieldType");
+        this.fieldType = Optional.ofNullable(fieldType);
+        return this;
+    }
+
+    public GetLibraryItemsMediaContainer withFieldType(Optional<? extends List<GetLibraryItemsFieldType>> fieldType) {
+        Utils.checkNotNull(fieldType, "fieldType");
+        this.fieldType = fieldType;
+        return this;
     }
 
     public GetLibraryItemsMediaContainer withSize(int size) {
@@ -350,7 +405,7 @@ public class GetLibraryItemsMediaContainer {
         return this;
     }
 
-    public GetLibraryItemsMediaContainer withLibrarySectionID(LibrarySectionID librarySectionID) {
+    public GetLibraryItemsMediaContainer withLibrarySectionID(long librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
         this.librarySectionID = librarySectionID;
         return this;
@@ -438,7 +493,7 @@ public class GetLibraryItemsMediaContainer {
      * The Meta object is only included in the response if the `includeMeta` parameter is set to `1`.
      * 
      */
-    public GetLibraryItemsMediaContainer withMeta(Meta meta) {
+    public GetLibraryItemsMediaContainer withMeta(GetLibraryItemsMeta meta) {
         Utils.checkNotNull(meta, "meta");
         this.meta = Optional.ofNullable(meta);
         return this;
@@ -448,7 +503,7 @@ public class GetLibraryItemsMediaContainer {
      * The Meta object is only included in the response if the `includeMeta` parameter is set to `1`.
      * 
      */
-    public GetLibraryItemsMediaContainer withMeta(Optional<? extends Meta> meta) {
+    public GetLibraryItemsMediaContainer withMeta(Optional<? extends GetLibraryItemsMeta> meta) {
         Utils.checkNotNull(meta, "meta");
         this.meta = meta;
         return this;
@@ -464,6 +519,8 @@ public class GetLibraryItemsMediaContainer {
         }
         GetLibraryItemsMediaContainer other = (GetLibraryItemsMediaContainer) o;
         return 
+            Objects.deepEquals(this.type, other.type) &&
+            Objects.deepEquals(this.fieldType, other.fieldType) &&
             Objects.deepEquals(this.size, other.size) &&
             Objects.deepEquals(this.totalSize, other.totalSize) &&
             Objects.deepEquals(this.offset, other.offset) &&
@@ -490,6 +547,8 @@ public class GetLibraryItemsMediaContainer {
     @Override
     public int hashCode() {
         return Objects.hash(
+            type,
+            fieldType,
             size,
             totalSize,
             offset,
@@ -516,6 +575,8 @@ public class GetLibraryItemsMediaContainer {
     @Override
     public String toString() {
         return Utils.toString(GetLibraryItemsMediaContainer.class,
+                "type", type,
+                "fieldType", fieldType,
                 "size", size,
                 "totalSize", totalSize,
                 "offset", offset,
@@ -541,6 +602,10 @@ public class GetLibraryItemsMediaContainer {
     
     public final static class Builder {
  
+        private Optional<? extends List<GetLibraryItemsType>> type = Optional.empty();
+ 
+        private Optional<? extends List<GetLibraryItemsFieldType>> fieldType = Optional.empty();
+ 
         private Integer size;
  
         private Integer totalSize;
@@ -557,7 +622,7 @@ public class GetLibraryItemsMediaContainer {
  
         private String identifier;
  
-        private LibrarySectionID librarySectionID;
+        private Long librarySectionID;
  
         private String librarySectionTitle;
  
@@ -581,10 +646,34 @@ public class GetLibraryItemsMediaContainer {
  
         private List<GetLibraryItemsMetadata> metadata;
  
-        private Optional<? extends Meta> meta = Optional.empty();  
+        private Optional<? extends GetLibraryItemsMeta> meta = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
+        }
+
+        public Builder type(List<GetLibraryItemsType> type) {
+            Utils.checkNotNull(type, "type");
+            this.type = Optional.ofNullable(type);
+            return this;
+        }
+
+        public Builder type(Optional<? extends List<GetLibraryItemsType>> type) {
+            Utils.checkNotNull(type, "type");
+            this.type = type;
+            return this;
+        }
+
+        public Builder fieldType(List<GetLibraryItemsFieldType> fieldType) {
+            Utils.checkNotNull(fieldType, "fieldType");
+            this.fieldType = Optional.ofNullable(fieldType);
+            return this;
+        }
+
+        public Builder fieldType(Optional<? extends List<GetLibraryItemsFieldType>> fieldType) {
+            Utils.checkNotNull(fieldType, "fieldType");
+            this.fieldType = fieldType;
+            return this;
         }
 
         public Builder size(int size) {
@@ -641,7 +730,7 @@ public class GetLibraryItemsMediaContainer {
             return this;
         }
 
-        public Builder librarySectionID(LibrarySectionID librarySectionID) {
+        public Builder librarySectionID(long librarySectionID) {
             Utils.checkNotNull(librarySectionID, "librarySectionID");
             this.librarySectionID = librarySectionID;
             return this;
@@ -729,7 +818,7 @@ public class GetLibraryItemsMediaContainer {
          * The Meta object is only included in the response if the `includeMeta` parameter is set to `1`.
          * 
          */
-        public Builder meta(Meta meta) {
+        public Builder meta(GetLibraryItemsMeta meta) {
             Utils.checkNotNull(meta, "meta");
             this.meta = Optional.ofNullable(meta);
             return this;
@@ -739,7 +828,7 @@ public class GetLibraryItemsMediaContainer {
          * The Meta object is only included in the response if the `includeMeta` parameter is set to `1`.
          * 
          */
-        public Builder meta(Optional<? extends Meta> meta) {
+        public Builder meta(Optional<? extends GetLibraryItemsMeta> meta) {
             Utils.checkNotNull(meta, "meta");
             this.meta = meta;
             return this;
@@ -747,6 +836,8 @@ public class GetLibraryItemsMediaContainer {
         
         public GetLibraryItemsMediaContainer build() {
             return new GetLibraryItemsMediaContainer(
+                type,
+                fieldType,
                 size,
                 totalSize,
                 offset,

@@ -4,73 +4,26 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Integer;
-import java.util.Optional;
 
 public class GetRecentlyAddedRequestBuilder {
 
-    private Optional<Integer> xPlexContainerStart = Utils.readDefaultOrConstValue(
-                            "xPlexContainerStart",
-                            "0",
-                            new TypeReference<Optional<Integer>>() {});
-    private Optional<Integer> xPlexContainerSize = Utils.readDefaultOrConstValue(
-                            "xPlexContainerSize",
-                            "50",
-                            new TypeReference<Optional<Integer>>() {});
+    private GetRecentlyAddedRequest request;
     private final SDKMethodInterfaces.MethodCallGetRecentlyAdded sdk;
 
     public GetRecentlyAddedRequestBuilder(SDKMethodInterfaces.MethodCallGetRecentlyAdded sdk) {
         this.sdk = sdk;
     }
-                
-    public GetRecentlyAddedRequestBuilder xPlexContainerStart(int xPlexContainerStart) {
-        Utils.checkNotNull(xPlexContainerStart, "xPlexContainerStart");
-        this.xPlexContainerStart = Optional.of(xPlexContainerStart);
-        return this;
-    }
 
-    public GetRecentlyAddedRequestBuilder xPlexContainerStart(Optional<Integer> xPlexContainerStart) {
-        Utils.checkNotNull(xPlexContainerStart, "xPlexContainerStart");
-        this.xPlexContainerStart = xPlexContainerStart;
-        return this;
-    }
-                
-    public GetRecentlyAddedRequestBuilder xPlexContainerSize(int xPlexContainerSize) {
-        Utils.checkNotNull(xPlexContainerSize, "xPlexContainerSize");
-        this.xPlexContainerSize = Optional.of(xPlexContainerSize);
-        return this;
-    }
-
-    public GetRecentlyAddedRequestBuilder xPlexContainerSize(Optional<Integer> xPlexContainerSize) {
-        Utils.checkNotNull(xPlexContainerSize, "xPlexContainerSize");
-        this.xPlexContainerSize = xPlexContainerSize;
+    public GetRecentlyAddedRequestBuilder request(GetRecentlyAddedRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
     }
 
     public GetRecentlyAddedResponse call() throws Exception {
-        if (xPlexContainerStart == null) {
-            xPlexContainerStart = _SINGLETON_VALUE_XPlexContainerStart.value();
-        }
-        if (xPlexContainerSize == null) {
-            xPlexContainerSize = _SINGLETON_VALUE_XPlexContainerSize.value();
-        }
+
         return sdk.getRecentlyAdded(
-            xPlexContainerStart,
-            xPlexContainerSize);
+            request);
     }
-
-    private static final LazySingletonValue<Optional<Integer>> _SINGLETON_VALUE_XPlexContainerStart =
-            new LazySingletonValue<>(
-                    "xPlexContainerStart",
-                    "0",
-                    new TypeReference<Optional<Integer>>() {});
-
-    private static final LazySingletonValue<Optional<Integer>> _SINGLETON_VALUE_XPlexContainerSize =
-            new LazySingletonValue<>(
-                    "xPlexContainerSize",
-                    "50",
-                    new TypeReference<Optional<Integer>>() {});
 }

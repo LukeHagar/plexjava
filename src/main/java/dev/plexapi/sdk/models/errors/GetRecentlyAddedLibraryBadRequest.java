@@ -19,13 +19,13 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * GetRecentlyAddedBadRequest - Bad Request - A parameter was not specified, or was specified incorrectly.
+ * GetRecentlyAddedLibraryBadRequest - Bad Request - A parameter was not specified, or was specified incorrectly.
  */
-public class GetRecentlyAddedBadRequest extends RuntimeException {
+public class GetRecentlyAddedLibraryBadRequest extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("errors")
-    private Optional<? extends List<GetRecentlyAddedErrors>> errors;
+    private Optional<? extends List<GetRecentlyAddedLibraryErrors>> errors;
 
     /**
      * Raw HTTP response; suitable for custom response parsing
@@ -35,8 +35,8 @@ public class GetRecentlyAddedBadRequest extends RuntimeException {
     private Optional<? extends HttpResponse<InputStream>> rawResponse;
 
     @JsonCreator
-    public GetRecentlyAddedBadRequest(
-            @JsonProperty("errors") Optional<? extends List<GetRecentlyAddedErrors>> errors,
+    public GetRecentlyAddedLibraryBadRequest(
+            @JsonProperty("errors") Optional<? extends List<GetRecentlyAddedLibraryErrors>> errors,
             @JsonProperty("RawResponse") Optional<? extends HttpResponse<InputStream>> rawResponse) {
         Utils.checkNotNull(errors, "errors");
         Utils.checkNotNull(rawResponse, "rawResponse");
@@ -44,13 +44,13 @@ public class GetRecentlyAddedBadRequest extends RuntimeException {
         this.rawResponse = rawResponse;
     }
     
-    public GetRecentlyAddedBadRequest() {
+    public GetRecentlyAddedLibraryBadRequest() {
         this(Optional.empty(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
-    public Optional<List<GetRecentlyAddedErrors>> errors(){
-        return (Optional<List<GetRecentlyAddedErrors>>) errors;
+    public Optional<List<GetRecentlyAddedLibraryErrors>> errors(){
+        return (Optional<List<GetRecentlyAddedLibraryErrors>>) errors;
     }
 
     /**
@@ -65,13 +65,13 @@ public class GetRecentlyAddedBadRequest extends RuntimeException {
         return new Builder();
     }
 
-    public GetRecentlyAddedBadRequest withErrors(List<GetRecentlyAddedErrors> errors) {
+    public GetRecentlyAddedLibraryBadRequest withErrors(List<GetRecentlyAddedLibraryErrors> errors) {
         Utils.checkNotNull(errors, "errors");
         this.errors = Optional.ofNullable(errors);
         return this;
     }
     
-    public GetRecentlyAddedBadRequest withErrors(Optional<? extends List<GetRecentlyAddedErrors>> errors) {
+    public GetRecentlyAddedLibraryBadRequest withErrors(Optional<? extends List<GetRecentlyAddedLibraryErrors>> errors) {
         Utils.checkNotNull(errors, "errors");
         this.errors = errors;
         return this;
@@ -80,7 +80,7 @@ public class GetRecentlyAddedBadRequest extends RuntimeException {
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
-    public GetRecentlyAddedBadRequest withRawResponse(HttpResponse<InputStream> rawResponse) {
+    public GetRecentlyAddedLibraryBadRequest withRawResponse(HttpResponse<InputStream> rawResponse) {
         Utils.checkNotNull(rawResponse, "rawResponse");
         this.rawResponse = Optional.ofNullable(rawResponse);
         return this;
@@ -89,7 +89,7 @@ public class GetRecentlyAddedBadRequest extends RuntimeException {
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
-    public GetRecentlyAddedBadRequest withRawResponse(Optional<? extends HttpResponse<InputStream>> rawResponse) {
+    public GetRecentlyAddedLibraryBadRequest withRawResponse(Optional<? extends HttpResponse<InputStream>> rawResponse) {
         Utils.checkNotNull(rawResponse, "rawResponse");
         this.rawResponse = rawResponse;
         return this;
@@ -103,7 +103,7 @@ public class GetRecentlyAddedBadRequest extends RuntimeException {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        GetRecentlyAddedBadRequest other = (GetRecentlyAddedBadRequest) o;
+        GetRecentlyAddedLibraryBadRequest other = (GetRecentlyAddedLibraryBadRequest) o;
         return
             Objects.deepEquals(this.errors, other.errors) &&
             Objects.deepEquals(this.rawResponse, other.rawResponse);
@@ -118,14 +118,14 @@ public class GetRecentlyAddedBadRequest extends RuntimeException {
 
     @Override
     public String toString() {
-        return Utils.toString(GetRecentlyAddedBadRequest.class,
+        return Utils.toString(GetRecentlyAddedLibraryBadRequest.class,
                 "errors", errors,
                 "rawResponse", rawResponse);
     }
 
     public final static class Builder {
 
-        private Optional<? extends List<GetRecentlyAddedErrors>> errors = Optional.empty();
+        private Optional<? extends List<GetRecentlyAddedLibraryErrors>> errors = Optional.empty();
 
         private Optional<? extends HttpResponse<InputStream>> rawResponse;
 
@@ -133,13 +133,13 @@ public class GetRecentlyAddedBadRequest extends RuntimeException {
           // force use of static builder() method
         }
 
-        public Builder errors(List<GetRecentlyAddedErrors> errors) {
+        public Builder errors(List<GetRecentlyAddedLibraryErrors> errors) {
             Utils.checkNotNull(errors, "errors");
             this.errors = Optional.ofNullable(errors);
             return this;
         }
         
-        public Builder errors(Optional<? extends List<GetRecentlyAddedErrors>> errors) {
+        public Builder errors(Optional<? extends List<GetRecentlyAddedLibraryErrors>> errors) {
             Utils.checkNotNull(errors, "errors");
             this.errors = errors;
             return this;
@@ -163,8 +163,8 @@ public class GetRecentlyAddedBadRequest extends RuntimeException {
             return this;
         }
 
-        public GetRecentlyAddedBadRequest build() {
-            return new GetRecentlyAddedBadRequest(
+        public GetRecentlyAddedLibraryBadRequest build() {
+            return new GetRecentlyAddedLibraryBadRequest(
                 errors,
                 rawResponse);
         }

@@ -10,21 +10,15 @@ import java.util.Optional;
 
 public class PostUsersSignInDataRequestBuilder {
 
-    private Optional<? extends PostUsersSignInDataRequestBody> request = Optional.empty();
+    private PostUsersSignInDataRequest request;
     private Optional<String> serverURL = Optional.empty();
     private final SDKMethodInterfaces.MethodCallPostUsersSignInData sdk;
 
     public PostUsersSignInDataRequestBuilder(SDKMethodInterfaces.MethodCallPostUsersSignInData sdk) {
         this.sdk = sdk;
     }
-                
-    public PostUsersSignInDataRequestBuilder request(PostUsersSignInDataRequestBody request) {
-        Utils.checkNotNull(request, "request");
-        this.request = Optional.of(request);
-        return this;
-    }
 
-    public PostUsersSignInDataRequestBuilder request(Optional<? extends PostUsersSignInDataRequestBody> request) {
+    public PostUsersSignInDataRequestBuilder request(PostUsersSignInDataRequest request) {
         Utils.checkNotNull(request, "request");
         this.request = request;
         return this;

@@ -43,13 +43,6 @@ public class GetLibraryItemsRequest {
     private Optional<? extends IncludeGuids> includeGuids;
 
     /**
-     * Adds the Meta object to the response
-     * 
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeMeta")
-    private Optional<? extends IncludeMeta> includeMeta;
-
-    /**
      * The type of media to retrieve.
      * 1 = movie
      * 2 = show
@@ -59,7 +52,14 @@ public class GetLibraryItemsRequest {
      * 
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")
-    private Optional<? extends Type> type;
+    private Optional<? extends GetLibraryItemsQueryParamType> type;
+
+    /**
+     * Adds the Meta object to the response
+     * 
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeMeta")
+    private Optional<? extends GetLibraryItemsQueryParamIncludeMeta> includeMeta;
 
     /**
      * The index of the first item to return. If not specified, the first item will be returned.
@@ -84,22 +84,22 @@ public class GetLibraryItemsRequest {
             int sectionKey,
             Tag tag,
             Optional<? extends IncludeGuids> includeGuids,
-            Optional<? extends IncludeMeta> includeMeta,
-            Optional<? extends Type> type,
+            Optional<? extends GetLibraryItemsQueryParamType> type,
+            Optional<? extends GetLibraryItemsQueryParamIncludeMeta> includeMeta,
             Optional<Integer> xPlexContainerStart,
             Optional<Integer> xPlexContainerSize) {
         Utils.checkNotNull(sectionKey, "sectionKey");
         Utils.checkNotNull(tag, "tag");
         Utils.checkNotNull(includeGuids, "includeGuids");
-        Utils.checkNotNull(includeMeta, "includeMeta");
         Utils.checkNotNull(type, "type");
+        Utils.checkNotNull(includeMeta, "includeMeta");
         Utils.checkNotNull(xPlexContainerStart, "xPlexContainerStart");
         Utils.checkNotNull(xPlexContainerSize, "xPlexContainerSize");
         this.sectionKey = sectionKey;
         this.tag = tag;
         this.includeGuids = includeGuids;
-        this.includeMeta = includeMeta;
         this.type = type;
+        this.includeMeta = includeMeta;
         this.xPlexContainerStart = xPlexContainerStart;
         this.xPlexContainerSize = xPlexContainerSize;
     }
@@ -139,16 +139,6 @@ public class GetLibraryItemsRequest {
     }
 
     /**
-     * Adds the Meta object to the response
-     * 
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<IncludeMeta> includeMeta() {
-        return (Optional<IncludeMeta>) includeMeta;
-    }
-
-    /**
      * The type of media to retrieve.
      * 1 = movie
      * 2 = show
@@ -159,8 +149,18 @@ public class GetLibraryItemsRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Type> type() {
-        return (Optional<Type>) type;
+    public Optional<GetLibraryItemsQueryParamType> type() {
+        return (Optional<GetLibraryItemsQueryParamType>) type;
+    }
+
+    /**
+     * Adds the Meta object to the response
+     * 
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetLibraryItemsQueryParamIncludeMeta> includeMeta() {
+        return (Optional<GetLibraryItemsQueryParamIncludeMeta>) includeMeta;
     }
 
     /**
@@ -230,26 +230,6 @@ public class GetLibraryItemsRequest {
     }
 
     /**
-     * Adds the Meta object to the response
-     * 
-     */
-    public GetLibraryItemsRequest withIncludeMeta(IncludeMeta includeMeta) {
-        Utils.checkNotNull(includeMeta, "includeMeta");
-        this.includeMeta = Optional.ofNullable(includeMeta);
-        return this;
-    }
-
-    /**
-     * Adds the Meta object to the response
-     * 
-     */
-    public GetLibraryItemsRequest withIncludeMeta(Optional<? extends IncludeMeta> includeMeta) {
-        Utils.checkNotNull(includeMeta, "includeMeta");
-        this.includeMeta = includeMeta;
-        return this;
-    }
-
-    /**
      * The type of media to retrieve.
      * 1 = movie
      * 2 = show
@@ -258,7 +238,7 @@ public class GetLibraryItemsRequest {
      * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
      * 
      */
-    public GetLibraryItemsRequest withType(Type type) {
+    public GetLibraryItemsRequest withType(GetLibraryItemsQueryParamType type) {
         Utils.checkNotNull(type, "type");
         this.type = Optional.ofNullable(type);
         return this;
@@ -273,9 +253,29 @@ public class GetLibraryItemsRequest {
      * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
      * 
      */
-    public GetLibraryItemsRequest withType(Optional<? extends Type> type) {
+    public GetLibraryItemsRequest withType(Optional<? extends GetLibraryItemsQueryParamType> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
+        return this;
+    }
+
+    /**
+     * Adds the Meta object to the response
+     * 
+     */
+    public GetLibraryItemsRequest withIncludeMeta(GetLibraryItemsQueryParamIncludeMeta includeMeta) {
+        Utils.checkNotNull(includeMeta, "includeMeta");
+        this.includeMeta = Optional.ofNullable(includeMeta);
+        return this;
+    }
+
+    /**
+     * Adds the Meta object to the response
+     * 
+     */
+    public GetLibraryItemsRequest withIncludeMeta(Optional<? extends GetLibraryItemsQueryParamIncludeMeta> includeMeta) {
+        Utils.checkNotNull(includeMeta, "includeMeta");
+        this.includeMeta = includeMeta;
         return this;
     }
 
@@ -340,8 +340,8 @@ public class GetLibraryItemsRequest {
             Objects.deepEquals(this.sectionKey, other.sectionKey) &&
             Objects.deepEquals(this.tag, other.tag) &&
             Objects.deepEquals(this.includeGuids, other.includeGuids) &&
-            Objects.deepEquals(this.includeMeta, other.includeMeta) &&
             Objects.deepEquals(this.type, other.type) &&
+            Objects.deepEquals(this.includeMeta, other.includeMeta) &&
             Objects.deepEquals(this.xPlexContainerStart, other.xPlexContainerStart) &&
             Objects.deepEquals(this.xPlexContainerSize, other.xPlexContainerSize);
     }
@@ -352,8 +352,8 @@ public class GetLibraryItemsRequest {
             sectionKey,
             tag,
             includeGuids,
-            includeMeta,
             type,
+            includeMeta,
             xPlexContainerStart,
             xPlexContainerSize);
     }
@@ -364,8 +364,8 @@ public class GetLibraryItemsRequest {
                 "sectionKey", sectionKey,
                 "tag", tag,
                 "includeGuids", includeGuids,
-                "includeMeta", includeMeta,
                 "type", type,
+                "includeMeta", includeMeta,
                 "xPlexContainerStart", xPlexContainerStart,
                 "xPlexContainerSize", xPlexContainerSize);
     }
@@ -378,9 +378,9 @@ public class GetLibraryItemsRequest {
  
         private Optional<? extends IncludeGuids> includeGuids;
  
-        private Optional<? extends IncludeMeta> includeMeta;
+        private Optional<? extends GetLibraryItemsQueryParamType> type = Optional.empty();
  
-        private Optional<? extends Type> type = Optional.empty();
+        private Optional<? extends GetLibraryItemsQueryParamIncludeMeta> includeMeta;
  
         private Optional<Integer> xPlexContainerStart;
  
@@ -431,26 +431,6 @@ public class GetLibraryItemsRequest {
         }
 
         /**
-         * Adds the Meta object to the response
-         * 
-         */
-        public Builder includeMeta(IncludeMeta includeMeta) {
-            Utils.checkNotNull(includeMeta, "includeMeta");
-            this.includeMeta = Optional.ofNullable(includeMeta);
-            return this;
-        }
-
-        /**
-         * Adds the Meta object to the response
-         * 
-         */
-        public Builder includeMeta(Optional<? extends IncludeMeta> includeMeta) {
-            Utils.checkNotNull(includeMeta, "includeMeta");
-            this.includeMeta = includeMeta;
-            return this;
-        }
-
-        /**
          * The type of media to retrieve.
          * 1 = movie
          * 2 = show
@@ -459,7 +439,7 @@ public class GetLibraryItemsRequest {
          * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
          * 
          */
-        public Builder type(Type type) {
+        public Builder type(GetLibraryItemsQueryParamType type) {
             Utils.checkNotNull(type, "type");
             this.type = Optional.ofNullable(type);
             return this;
@@ -474,9 +454,29 @@ public class GetLibraryItemsRequest {
          * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
          * 
          */
-        public Builder type(Optional<? extends Type> type) {
+        public Builder type(Optional<? extends GetLibraryItemsQueryParamType> type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
+            return this;
+        }
+
+        /**
+         * Adds the Meta object to the response
+         * 
+         */
+        public Builder includeMeta(GetLibraryItemsQueryParamIncludeMeta includeMeta) {
+            Utils.checkNotNull(includeMeta, "includeMeta");
+            this.includeMeta = Optional.ofNullable(includeMeta);
+            return this;
+        }
+
+        /**
+         * Adds the Meta object to the response
+         * 
+         */
+        public Builder includeMeta(Optional<? extends GetLibraryItemsQueryParamIncludeMeta> includeMeta) {
+            Utils.checkNotNull(includeMeta, "includeMeta");
+            this.includeMeta = includeMeta;
             return this;
         }
 
@@ -544,8 +544,8 @@ public class GetLibraryItemsRequest {
                 sectionKey,
                 tag,
                 includeGuids,
-                includeMeta,
                 type,
+                includeMeta,
                 xPlexContainerStart,
                 xPlexContainerSize);
         }
@@ -556,11 +556,11 @@ public class GetLibraryItemsRequest {
                         "0",
                         new TypeReference<Optional<? extends IncludeGuids>>() {});
 
-        private static final LazySingletonValue<Optional<? extends IncludeMeta>> _SINGLETON_VALUE_IncludeMeta =
+        private static final LazySingletonValue<Optional<? extends GetLibraryItemsQueryParamIncludeMeta>> _SINGLETON_VALUE_IncludeMeta =
                 new LazySingletonValue<>(
                         "includeMeta",
                         "0",
-                        new TypeReference<Optional<? extends IncludeMeta>>() {});
+                        new TypeReference<Optional<? extends GetLibraryItemsQueryParamIncludeMeta>>() {});
 
         private static final LazySingletonValue<Optional<Integer>> _SINGLETON_VALUE_XPlexContainerStart =
                 new LazySingletonValue<>(

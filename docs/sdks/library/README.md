@@ -9,7 +9,7 @@ API Calls interacting with Plex Media Server Libraries
 ### Available Operations
 
 * [getFileHash](#getfilehash) - Get Hash Value
-* [getRecentlyAdded](#getrecentlyadded) - Get Recently Added
+* [getRecentlyAddedLibrary](#getrecentlyaddedlibrary) - Get Recently Added
 * [getAllLibraries](#getalllibraries) - Get All Libraries
 * [getLibraryDetails](#getlibrarydetails) - Get Library Details
 * [deleteLibrary](#deletelibrary) - Delete Library Section
@@ -79,7 +79,7 @@ public class Application {
 | models/errors/SDKError                | 4xx-5xx                               | \*\/*                                 |
 
 
-## getRecentlyAdded
+## getRecentlyAddedLibrary
 
 This endpoint will return the recently added content.
 
@@ -90,14 +90,18 @@ This endpoint will return the recently added content.
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.GetRecentlyAddedBadRequest;
-import dev.plexapi.sdk.models.errors.GetRecentlyAddedUnauthorized;
-import dev.plexapi.sdk.models.operations.GetRecentlyAddedResponse;
+import dev.plexapi.sdk.models.errors.GetRecentlyAddedLibraryBadRequest;
+import dev.plexapi.sdk.models.errors.GetRecentlyAddedLibraryUnauthorized;
+import dev.plexapi.sdk.models.operations.GetRecentlyAddedLibraryRequest;
+import dev.plexapi.sdk.models.operations.GetRecentlyAddedLibraryResponse;
+import dev.plexapi.sdk.models.operations.QueryParamIncludeMeta;
+import dev.plexapi.sdk.models.operations.QueryParamType;
 import java.lang.Exception;
+import java.util.List;
 
 public class Application {
 
-    public static void main(String[] args) throws GetRecentlyAddedBadRequest, GetRecentlyAddedUnauthorized, Exception {
+    public static void main(String[] args) throws GetRecentlyAddedLibraryBadRequest, GetRecentlyAddedLibraryUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
@@ -108,9 +112,30 @@ public class Application {
                 .deviceName("Linux")
             .build();
 
-        GetRecentlyAddedResponse res = sdk.library().getRecentlyAdded()
+        GetRecentlyAddedLibraryRequest req = GetRecentlyAddedLibraryRequest.builder()
+                .type(QueryParamType.TvShow)
+                .contentDirectoryID(2L)
+                .pinnedContentDirectoryID(List.of(
+                    3L,
+                    5L,
+                    7L,
+                    13L,
+                    12L,
+                    1L,
+                    6L,
+                    14L,
+                    2L,
+                    10L,
+                    16L,
+                    17L))
+                .sectionID(2L)
+                .includeMeta(QueryParamIncludeMeta.Enable)
                 .xPlexContainerStart(0)
                 .xPlexContainerSize(50)
+                .build();
+
+        GetRecentlyAddedLibraryResponse res = sdk.library().getRecentlyAddedLibrary()
+                .request(req)
                 .call();
 
         if (res.object().isPresent()) {
@@ -122,22 +147,21 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                 | Type                                                                                                                                                                                      | Required                                                                                                                                                                                  | Description                                                                                                                                                                               | Example                                                                                                                                                                                   |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `xPlexContainerStart`                                                                                                                                                                     | *Optional<Integer>*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                        | The index of the first item to return. If not specified, the first item will be returned.<br/>If the number of items exceeds the limit, the response will be paginated.<br/>By default this is 0<br/> | 0                                                                                                                                                                                         |
-| `xPlexContainerSize`                                                                                                                                                                      | *Optional<Integer>*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                        | The number of items to return. If not specified, all items will be returned.<br/>If the number of items exceeds the limit, the response will be paginated.<br/>By default this is 50<br/> | 50                                                                                                                                                                                        |
+| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `request`                                                                                   | [GetRecentlyAddedLibraryRequest](../../models/operations/GetRecentlyAddedLibraryRequest.md) | :heavy_check_mark:                                                                          | The request object to use for the request.                                                  |
 
 ### Response
 
-**[GetRecentlyAddedResponse](../../models/operations/GetRecentlyAddedResponse.md)**
+**[GetRecentlyAddedLibraryResponse](../../models/operations/GetRecentlyAddedLibraryResponse.md)**
 
 ### Errors
 
-| Error Object                               | Status Code                                | Content Type                               |
-| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| models/errors/GetRecentlyAddedBadRequest   | 400                                        | application/json                           |
-| models/errors/GetRecentlyAddedUnauthorized | 401                                        | application/json                           |
-| models/errors/SDKError                     | 4xx-5xx                                    | \*\/*                                      |
+| Error Object                                      | Status Code                                       | Content Type                                      |
+| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
+| models/errors/GetRecentlyAddedLibraryBadRequest   | 400                                               | application/json                                  |
+| models/errors/GetRecentlyAddedLibraryUnauthorized | 401                                               | application/json                                  |
+| models/errors/SDKError                            | 4xx-5xx                                           | \*\/*                                             |
 
 
 ## getAllLibraries
@@ -385,12 +409,12 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.GetLibraryItemsBadRequest;
 import dev.plexapi.sdk.models.errors.GetLibraryItemsUnauthorized;
+import dev.plexapi.sdk.models.operations.GetLibraryItemsQueryParamIncludeMeta;
+import dev.plexapi.sdk.models.operations.GetLibraryItemsQueryParamType;
 import dev.plexapi.sdk.models.operations.GetLibraryItemsRequest;
 import dev.plexapi.sdk.models.operations.GetLibraryItemsResponse;
 import dev.plexapi.sdk.models.operations.IncludeGuids;
-import dev.plexapi.sdk.models.operations.IncludeMeta;
 import dev.plexapi.sdk.models.operations.Tag;
-import dev.plexapi.sdk.models.operations.Type;
 import java.lang.Exception;
 
 public class Application {
@@ -410,8 +434,8 @@ public class Application {
                 .sectionKey(9518)
                 .tag(Tag.EDITION)
                 .includeGuids(IncludeGuids.Enable)
-                .includeMeta(IncludeMeta.Enable)
-                .type(Type.TvShow)
+                .type(GetLibraryItemsQueryParamType.TvShow)
+                .includeMeta(GetLibraryItemsQueryParamIncludeMeta.Enable)
                 .xPlexContainerStart(0)
                 .xPlexContainerSize(50)
                 .build();
@@ -536,8 +560,8 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.GetSearchLibraryBadRequest;
 import dev.plexapi.sdk.models.errors.GetSearchLibraryUnauthorized;
+import dev.plexapi.sdk.models.operations.GetSearchLibraryQueryParamType;
 import dev.plexapi.sdk.models.operations.GetSearchLibraryResponse;
-import dev.plexapi.sdk.models.operations.QueryParamType;
 import java.lang.Exception;
 
 public class Application {
@@ -555,7 +579,7 @@ public class Application {
 
         GetSearchLibraryResponse res = sdk.library().getSearchLibrary()
                 .sectionKey(9518)
-                .type(QueryParamType.TvShow)
+                .type(GetSearchLibraryQueryParamType.TvShow)
                 .call();
 
         if (res.object().isPresent()) {
@@ -570,7 +594,7 @@ public class Application {
 | Parameter                                                                                                                                                                       | Type                                                                                                                                                                            | Required                                                                                                                                                                        | Description                                                                                                                                                                     | Example                                                                                                                                                                         |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `sectionKey`                                                                                                                                                                    | *int*                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                              | The unique key of the Plex library. <br/>Note: This is unique in the context of the Plex server.<br/>                                                                           | 9518                                                                                                                                                                            |
-| `type`                                                                                                                                                                          | [QueryParamType](../../models/operations/QueryParamType.md)                                                                                                                     | :heavy_check_mark:                                                                                                                                                              | The type of media to retrieve.<br/>1 = movie<br/>2 = show<br/>3 = season<br/>4 = episode<br/>E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries<br/> | 2                                                                                                                                                                               |
+| `type`                                                                                                                                                                          | [GetSearchLibraryQueryParamType](../../models/operations/GetSearchLibraryQueryParamType.md)                                                                                     | :heavy_check_mark:                                                                                                                                                              | The type of media to retrieve.<br/>1 = movie<br/>2 = show<br/>3 = season<br/>4 = episode<br/>E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries<br/> | 2                                                                                                                                                                               |
 
 ### Response
 

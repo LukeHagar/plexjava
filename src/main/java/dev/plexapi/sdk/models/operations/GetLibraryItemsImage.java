@@ -20,7 +20,7 @@ public class GetLibraryItemsImage {
     private String alt;
 
     @JsonProperty("type")
-    private GetLibraryItemsLibraryResponseType type;
+    private GetLibraryItemsLibraryResponse200Type type;
 
     @JsonProperty("url")
     private String url;
@@ -28,7 +28,7 @@ public class GetLibraryItemsImage {
     @JsonCreator
     public GetLibraryItemsImage(
             @JsonProperty("alt") String alt,
-            @JsonProperty("type") GetLibraryItemsLibraryResponseType type,
+            @JsonProperty("type") GetLibraryItemsLibraryResponse200Type type,
             @JsonProperty("url") String url) {
         Utils.checkNotNull(alt, "alt");
         Utils.checkNotNull(type, "type");
@@ -44,7 +44,7 @@ public class GetLibraryItemsImage {
     }
 
     @JsonIgnore
-    public GetLibraryItemsLibraryResponseType type() {
+    public GetLibraryItemsLibraryResponse200Type type() {
         return type;
     }
 
@@ -63,7 +63,7 @@ public class GetLibraryItemsImage {
         return this;
     }
 
-    public GetLibraryItemsImage withType(GetLibraryItemsLibraryResponseType type) {
+    public GetLibraryItemsImage withType(GetLibraryItemsLibraryResponse200Type type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -110,7 +110,7 @@ public class GetLibraryItemsImage {
  
         private String alt;
  
-        private GetLibraryItemsLibraryResponseType type;
+        private GetLibraryItemsLibraryResponse200Type type;
  
         private String url;  
         
@@ -124,7 +124,7 @@ public class GetLibraryItemsImage {
             return this;
         }
 
-        public Builder type(GetLibraryItemsLibraryResponseType type) {
+        public Builder type(GetLibraryItemsLibraryResponse200Type type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;

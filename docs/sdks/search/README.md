@@ -54,7 +54,7 @@ public class Application {
 
         PerformSearchResponse res = sdk.search().performSearch()
                 .query("dylan")
-                .sectionId(5838.67d)
+                .sectionId(9372.69d)
                 .limit(5d)
                 .call();
 

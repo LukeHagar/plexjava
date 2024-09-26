@@ -21,8 +21,8 @@ import dev.plexapi.sdk.models.errors.GetMetadataChildrenBadRequest;
 import dev.plexapi.sdk.models.errors.GetMetadataChildrenUnauthorized;
 import dev.plexapi.sdk.models.errors.GetOnDeckBadRequest;
 import dev.plexapi.sdk.models.errors.GetOnDeckUnauthorized;
-import dev.plexapi.sdk.models.errors.GetRecentlyAddedBadRequest;
-import dev.plexapi.sdk.models.errors.GetRecentlyAddedUnauthorized;
+import dev.plexapi.sdk.models.errors.GetRecentlyAddedLibraryBadRequest;
+import dev.plexapi.sdk.models.errors.GetRecentlyAddedLibraryUnauthorized;
 import dev.plexapi.sdk.models.errors.GetRefreshLibraryMetadataBadRequest;
 import dev.plexapi.sdk.models.errors.GetRefreshLibraryMetadataUnauthorized;
 import dev.plexapi.sdk.models.errors.GetSearchLibraryBadRequest;
@@ -59,13 +59,14 @@ import dev.plexapi.sdk.models.operations.GetMetadataChildrenResponseBody;
 import dev.plexapi.sdk.models.operations.GetOnDeckRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetOnDeckResponse;
 import dev.plexapi.sdk.models.operations.GetOnDeckResponseBody;
-import dev.plexapi.sdk.models.operations.GetRecentlyAddedRequest;
-import dev.plexapi.sdk.models.operations.GetRecentlyAddedRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetRecentlyAddedResponse;
-import dev.plexapi.sdk.models.operations.GetRecentlyAddedResponseBody;
+import dev.plexapi.sdk.models.operations.GetRecentlyAddedLibraryRequest;
+import dev.plexapi.sdk.models.operations.GetRecentlyAddedLibraryRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetRecentlyAddedLibraryResponse;
+import dev.plexapi.sdk.models.operations.GetRecentlyAddedLibraryResponseBody;
 import dev.plexapi.sdk.models.operations.GetRefreshLibraryMetadataRequest;
 import dev.plexapi.sdk.models.operations.GetRefreshLibraryMetadataRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetRefreshLibraryMetadataResponse;
+import dev.plexapi.sdk.models.operations.GetSearchLibraryQueryParamType;
 import dev.plexapi.sdk.models.operations.GetSearchLibraryRequest;
 import dev.plexapi.sdk.models.operations.GetSearchLibraryRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetSearchLibraryResponse;
@@ -76,7 +77,6 @@ import dev.plexapi.sdk.models.operations.GetTopWatchedContentRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetTopWatchedContentResponse;
 import dev.plexapi.sdk.models.operations.GetTopWatchedContentResponseBody;
 import dev.plexapi.sdk.models.operations.IncludeDetails;
-import dev.plexapi.sdk.models.operations.QueryParamType;
 import dev.plexapi.sdk.models.operations.SDKMethodInterfaces.*;
 import dev.plexapi.sdk.utils.HTTPClient;
 import dev.plexapi.sdk.utils.HTTPRequest;
@@ -87,7 +87,6 @@ import dev.plexapi.sdk.utils.Utils;
 import java.io.InputStream;
 import java.lang.Double;
 import java.lang.Exception;
-import java.lang.Integer;
 import java.lang.Long;
 import java.lang.String;
 import java.net.http.HttpRequest;
@@ -101,7 +100,7 @@ import java.util.Optional;
  */
 public class Library implements
             MethodCallGetFileHash,
-            MethodCallGetRecentlyAdded,
+            MethodCallGetRecentlyAddedLibrary,
             MethodCallGetAllLibraries,
             MethodCallGetLibraryDetails,
             MethodCallDeleteLibrary,
@@ -290,46 +289,20 @@ public class Library implements
      * 
      * @return The call builder
      */
-    public GetRecentlyAddedRequestBuilder getRecentlyAdded() {
-        return new GetRecentlyAddedRequestBuilder(this);
+    public GetRecentlyAddedLibraryRequestBuilder getRecentlyAddedLibrary() {
+        return new GetRecentlyAddedLibraryRequestBuilder(this);
     }
 
     /**
      * Get Recently Added
      * This endpoint will return the recently added content.
      * 
+     * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetRecentlyAddedResponse getRecentlyAddedDirect() throws Exception {
-        return getRecentlyAdded(Optional.empty(), Optional.empty());
-    }
-    
-    /**
-     * Get Recently Added
-     * This endpoint will return the recently added content.
-     * 
-     * @param xPlexContainerStart The index of the first item to return. If not specified, the first item will be returned.
-    If the number of items exceeds the limit, the response will be paginated.
-    By default this is 0
-
-     * @param xPlexContainerSize The number of items to return. If not specified, all items will be returned.
-    If the number of items exceeds the limit, the response will be paginated.
-    By default this is 50
-
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetRecentlyAddedResponse getRecentlyAdded(
-            Optional<Integer> xPlexContainerStart,
-            Optional<Integer> xPlexContainerSize) throws Exception {
-        GetRecentlyAddedRequest request =
-            GetRecentlyAddedRequest
-                .builder()
-                .xPlexContainerStart(xPlexContainerStart)
-                .xPlexContainerSize(xPlexContainerSize)
-                .build();
-        
+    public GetRecentlyAddedLibraryResponse getRecentlyAddedLibrary(
+            GetRecentlyAddedLibraryRequest request) throws Exception {
         String _baseUrl = Utils.templateUrl(
                 this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
@@ -342,7 +315,7 @@ public class Library implements
                 SDKConfiguration.USER_AGENT);
 
         _req.addQueryParams(Utils.getQueryParams(
-                GetRecentlyAddedRequest.class,
+                GetRecentlyAddedLibraryRequest.class,
                 request, 
                 this.sdkConfiguration.globals));
 
@@ -354,7 +327,7 @@ public class Library implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
-                      "getRecentlyAdded", 
+                      "get-recently-added-library", 
                       Optional.of(List.of()), 
                       sdkConfiguration.securitySource()),
                   _req.build());
@@ -365,7 +338,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
-                            "getRecentlyAdded",
+                            "get-recently-added-library",
                             Optional.of(List.of()),
                             sdkConfiguration.securitySource()),
                         Optional.of(_httpRes),
@@ -374,7 +347,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
-                            "getRecentlyAdded",
+                            "get-recently-added-library",
                             Optional.of(List.of()), 
                             sdkConfiguration.securitySource()),
                          _httpRes);
@@ -383,7 +356,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
-                            "getRecentlyAdded",
+                            "get-recently-added-library",
                             Optional.of(List.of()),
                             sdkConfiguration.securitySource()), 
                         Optional.empty(),
@@ -393,20 +366,20 @@ public class Library implements
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        GetRecentlyAddedResponse.Builder _resBuilder = 
-            GetRecentlyAddedResponse
+        GetRecentlyAddedLibraryResponse.Builder _resBuilder = 
+            GetRecentlyAddedLibraryResponse
                 .builder()
                 .contentType(_contentType)
                 .statusCode(_httpRes.statusCode())
                 .rawResponse(_httpRes);
 
-        GetRecentlyAddedResponse _res = _resBuilder.build();
+        GetRecentlyAddedLibraryResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetRecentlyAddedResponseBody _out = Utils.mapper().readValue(
+                GetRecentlyAddedLibraryResponseBody _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetRecentlyAddedResponseBody>() {});
+                    new TypeReference<GetRecentlyAddedLibraryResponseBody>() {});
                 _res.withObject(Optional.ofNullable(_out));
                 return _res;
             } else {
@@ -419,9 +392,9 @@ public class Library implements
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetRecentlyAddedBadRequest _out = Utils.mapper().readValue(
+                GetRecentlyAddedLibraryBadRequest _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetRecentlyAddedBadRequest>() {});
+                    new TypeReference<GetRecentlyAddedLibraryBadRequest>() {});
                     _out.withRawResponse(Optional.ofNullable(_httpRes));
                 
                 throw _out;
@@ -435,9 +408,9 @@ public class Library implements
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetRecentlyAddedUnauthorized _out = Utils.mapper().readValue(
+                GetRecentlyAddedLibraryUnauthorized _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetRecentlyAddedUnauthorized>() {});
+                    new TypeReference<GetRecentlyAddedLibraryUnauthorized>() {});
                     _out.withRawResponse(Optional.ofNullable(_httpRes));
                 
                 throw _out;
@@ -1505,7 +1478,7 @@ public class Library implements
      */
     public GetSearchLibraryResponse getSearchLibrary(
             int sectionKey,
-            QueryParamType type) throws Exception {
+            GetSearchLibraryQueryParamType type) throws Exception {
         GetSearchLibraryRequest request =
             GetSearchLibraryRequest
                 .builder()

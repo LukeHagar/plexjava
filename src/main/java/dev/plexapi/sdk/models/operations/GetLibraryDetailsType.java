@@ -44,11 +44,11 @@ public class GetLibraryDetailsType {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Sort")
-    private Optional<? extends List<Sort>> sort;
+    private Optional<? extends List<GetLibraryDetailsSort>> sort;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Field")
-    private Optional<? extends List<Field>> field;
+    private Optional<? extends List<GetLibraryDetailsField>> field;
 
     @JsonCreator
     public GetLibraryDetailsType(
@@ -57,8 +57,8 @@ public class GetLibraryDetailsType {
             @JsonProperty("title") Optional<String> title,
             @JsonProperty("active") Optional<Boolean> active,
             @JsonProperty("Filter") Optional<? extends List<GetLibraryDetailsFilter>> filter,
-            @JsonProperty("Sort") Optional<? extends List<Sort>> sort,
-            @JsonProperty("Field") Optional<? extends List<Field>> field) {
+            @JsonProperty("Sort") Optional<? extends List<GetLibraryDetailsSort>> sort,
+            @JsonProperty("Field") Optional<? extends List<GetLibraryDetailsField>> field) {
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(type, "type");
         Utils.checkNotNull(title, "title");
@@ -107,14 +107,14 @@ public class GetLibraryDetailsType {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Sort>> sort() {
-        return (Optional<List<Sort>>) sort;
+    public Optional<List<GetLibraryDetailsSort>> sort() {
+        return (Optional<List<GetLibraryDetailsSort>>) sort;
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Field>> field() {
-        return (Optional<List<Field>>) field;
+    public Optional<List<GetLibraryDetailsField>> field() {
+        return (Optional<List<GetLibraryDetailsField>>) field;
     }
 
     public final static Builder builder() {
@@ -181,25 +181,25 @@ public class GetLibraryDetailsType {
         return this;
     }
 
-    public GetLibraryDetailsType withSort(List<Sort> sort) {
+    public GetLibraryDetailsType withSort(List<GetLibraryDetailsSort> sort) {
         Utils.checkNotNull(sort, "sort");
         this.sort = Optional.ofNullable(sort);
         return this;
     }
 
-    public GetLibraryDetailsType withSort(Optional<? extends List<Sort>> sort) {
+    public GetLibraryDetailsType withSort(Optional<? extends List<GetLibraryDetailsSort>> sort) {
         Utils.checkNotNull(sort, "sort");
         this.sort = sort;
         return this;
     }
 
-    public GetLibraryDetailsType withField(List<Field> field) {
+    public GetLibraryDetailsType withField(List<GetLibraryDetailsField> field) {
         Utils.checkNotNull(field, "field");
         this.field = Optional.ofNullable(field);
         return this;
     }
 
-    public GetLibraryDetailsType withField(Optional<? extends List<Field>> field) {
+    public GetLibraryDetailsType withField(Optional<? extends List<GetLibraryDetailsField>> field) {
         Utils.checkNotNull(field, "field");
         this.field = field;
         return this;
@@ -260,9 +260,9 @@ public class GetLibraryDetailsType {
  
         private Optional<? extends List<GetLibraryDetailsFilter>> filter = Optional.empty();
  
-        private Optional<? extends List<Sort>> sort = Optional.empty();
+        private Optional<? extends List<GetLibraryDetailsSort>> sort = Optional.empty();
  
-        private Optional<? extends List<Field>> field = Optional.empty();  
+        private Optional<? extends List<GetLibraryDetailsField>> field = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -328,25 +328,25 @@ public class GetLibraryDetailsType {
             return this;
         }
 
-        public Builder sort(List<Sort> sort) {
+        public Builder sort(List<GetLibraryDetailsSort> sort) {
             Utils.checkNotNull(sort, "sort");
             this.sort = Optional.ofNullable(sort);
             return this;
         }
 
-        public Builder sort(Optional<? extends List<Sort>> sort) {
+        public Builder sort(Optional<? extends List<GetLibraryDetailsSort>> sort) {
             Utils.checkNotNull(sort, "sort");
             this.sort = sort;
             return this;
         }
 
-        public Builder field(List<Field> field) {
+        public Builder field(List<GetLibraryDetailsField> field) {
             Utils.checkNotNull(field, "field");
             this.field = Optional.ofNullable(field);
             return this;
         }
 
-        public Builder field(Optional<? extends List<Field>> field) {
+        public Builder field(Optional<? extends List<GetLibraryDetailsField>> field) {
             Utils.checkNotNull(field, "field");
             this.field = field;
             return this;

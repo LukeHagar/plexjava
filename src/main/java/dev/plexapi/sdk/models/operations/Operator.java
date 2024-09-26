@@ -7,47 +7,38 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
-import java.util.Optional;
 
 
 public class Operator {
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
-    private Optional<String> key;
+    private String key;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
-    private Optional<String> title;
+    private String title;
 
     @JsonCreator
     public Operator(
-            @JsonProperty("key") Optional<String> key,
-            @JsonProperty("title") Optional<String> title) {
+            @JsonProperty("key") String key,
+            @JsonProperty("title") String title) {
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(title, "title");
         this.key = key;
         this.title = title;
     }
-    
-    public Operator() {
-        this(Optional.empty(), Optional.empty());
-    }
 
     @JsonIgnore
-    public Optional<String> key() {
+    public String key() {
         return key;
     }
 
     @JsonIgnore
-    public Optional<String> title() {
+    public String title() {
         return title;
     }
 
@@ -57,23 +48,11 @@ public class Operator {
 
     public Operator withKey(String key) {
         Utils.checkNotNull(key, "key");
-        this.key = Optional.ofNullable(key);
-        return this;
-    }
-
-    public Operator withKey(Optional<String> key) {
-        Utils.checkNotNull(key, "key");
         this.key = key;
         return this;
     }
 
     public Operator withTitle(String title) {
-        Utils.checkNotNull(title, "title");
-        this.title = Optional.ofNullable(title);
-        return this;
-    }
-
-    public Operator withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
         return this;
@@ -109,9 +88,9 @@ public class Operator {
     
     public final static class Builder {
  
-        private Optional<String> key = Optional.empty();
+        private String key;
  
-        private Optional<String> title = Optional.empty();  
+        private String title;  
         
         private Builder() {
           // force use of static builder() method
@@ -119,23 +98,11 @@ public class Operator {
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
-            this.key = Optional.ofNullable(key);
-            return this;
-        }
-
-        public Builder key(Optional<String> key) {
-            Utils.checkNotNull(key, "key");
             this.key = key;
             return this;
         }
 
         public Builder title(String title) {
-            Utils.checkNotNull(title, "title");
-            this.title = Optional.ofNullable(title);
-            return this;
-        }
-
-        public Builder title(Optional<String> title) {
             Utils.checkNotNull(title, "title");
             this.title = title;
             return this;

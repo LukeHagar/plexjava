@@ -10,12 +10,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Double;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -70,6 +73,14 @@ public class GetLibraryItemsMedia {
     @JsonProperty("hasVoiceActivity")
     private Optional<Boolean> hasVoiceActivity;
 
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("optimizedForStreaming")
+    private Optional<? extends GetLibraryItemsOptimizedForStreaming> optimizedForStreaming;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("has64bitOffsets")
+    private Optional<Boolean> has64bitOffsets;
+
     @JsonProperty("Part")
     private List<GetLibraryItemsPart> part;
 
@@ -90,6 +101,8 @@ public class GetLibraryItemsMedia {
             @JsonProperty("videoFrameRate") String videoFrameRate,
             @JsonProperty("videoProfile") String videoProfile,
             @JsonProperty("hasVoiceActivity") Optional<Boolean> hasVoiceActivity,
+            @JsonProperty("optimizedForStreaming") Optional<? extends GetLibraryItemsOptimizedForStreaming> optimizedForStreaming,
+            @JsonProperty("has64bitOffsets") Optional<Boolean> has64bitOffsets,
             @JsonProperty("Part") List<GetLibraryItemsPart> part) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(duration, "duration");
@@ -106,6 +119,8 @@ public class GetLibraryItemsMedia {
         Utils.checkNotNull(videoFrameRate, "videoFrameRate");
         Utils.checkNotNull(videoProfile, "videoProfile");
         Utils.checkNotNull(hasVoiceActivity, "hasVoiceActivity");
+        Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
+        Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
         Utils.checkNotNull(part, "part");
         this.id = id;
         this.duration = duration;
@@ -122,6 +137,8 @@ public class GetLibraryItemsMedia {
         this.videoFrameRate = videoFrameRate;
         this.videoProfile = videoProfile;
         this.hasVoiceActivity = hasVoiceActivity;
+        this.optimizedForStreaming = optimizedForStreaming;
+        this.has64bitOffsets = has64bitOffsets;
         this.part = part;
     }
     
@@ -140,7 +157,7 @@ public class GetLibraryItemsMedia {
             String videoFrameRate,
             String videoProfile,
             List<GetLibraryItemsPart> part) {
-        this(id, duration, bitrate, width, height, aspectRatio, Optional.empty(), audioChannels, audioCodec, videoCodec, videoResolution, container, videoFrameRate, videoProfile, Optional.empty(), part);
+        this(id, duration, bitrate, width, height, aspectRatio, Optional.empty(), audioChannels, audioCodec, videoCodec, videoResolution, container, videoFrameRate, videoProfile, Optional.empty(), Optional.empty(), Optional.empty(), part);
     }
 
     @JsonIgnore
@@ -216,6 +233,17 @@ public class GetLibraryItemsMedia {
     @JsonIgnore
     public Optional<Boolean> hasVoiceActivity() {
         return hasVoiceActivity;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetLibraryItemsOptimizedForStreaming> optimizedForStreaming() {
+        return (Optional<GetLibraryItemsOptimizedForStreaming>) optimizedForStreaming;
+    }
+
+    @JsonIgnore
+    public Optional<Boolean> has64bitOffsets() {
+        return has64bitOffsets;
     }
 
     @JsonIgnore
@@ -329,6 +357,30 @@ public class GetLibraryItemsMedia {
         return this;
     }
 
+    public GetLibraryItemsMedia withOptimizedForStreaming(GetLibraryItemsOptimizedForStreaming optimizedForStreaming) {
+        Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
+        this.optimizedForStreaming = Optional.ofNullable(optimizedForStreaming);
+        return this;
+    }
+
+    public GetLibraryItemsMedia withOptimizedForStreaming(Optional<? extends GetLibraryItemsOptimizedForStreaming> optimizedForStreaming) {
+        Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
+        this.optimizedForStreaming = optimizedForStreaming;
+        return this;
+    }
+
+    public GetLibraryItemsMedia withHas64bitOffsets(boolean has64bitOffsets) {
+        Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
+        this.has64bitOffsets = Optional.ofNullable(has64bitOffsets);
+        return this;
+    }
+
+    public GetLibraryItemsMedia withHas64bitOffsets(Optional<Boolean> has64bitOffsets) {
+        Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
+        this.has64bitOffsets = has64bitOffsets;
+        return this;
+    }
+
     public GetLibraryItemsMedia withPart(List<GetLibraryItemsPart> part) {
         Utils.checkNotNull(part, "part");
         this.part = part;
@@ -360,6 +412,8 @@ public class GetLibraryItemsMedia {
             Objects.deepEquals(this.videoFrameRate, other.videoFrameRate) &&
             Objects.deepEquals(this.videoProfile, other.videoProfile) &&
             Objects.deepEquals(this.hasVoiceActivity, other.hasVoiceActivity) &&
+            Objects.deepEquals(this.optimizedForStreaming, other.optimizedForStreaming) &&
+            Objects.deepEquals(this.has64bitOffsets, other.has64bitOffsets) &&
             Objects.deepEquals(this.part, other.part);
     }
     
@@ -381,6 +435,8 @@ public class GetLibraryItemsMedia {
             videoFrameRate,
             videoProfile,
             hasVoiceActivity,
+            optimizedForStreaming,
+            has64bitOffsets,
             part);
     }
     
@@ -402,6 +458,8 @@ public class GetLibraryItemsMedia {
                 "videoFrameRate", videoFrameRate,
                 "videoProfile", videoProfile,
                 "hasVoiceActivity", hasVoiceActivity,
+                "optimizedForStreaming", optimizedForStreaming,
+                "has64bitOffsets", has64bitOffsets,
                 "part", part);
     }
     
@@ -436,6 +494,10 @@ public class GetLibraryItemsMedia {
         private String videoProfile;
  
         private Optional<Boolean> hasVoiceActivity = Optional.empty();
+ 
+        private Optional<? extends GetLibraryItemsOptimizedForStreaming> optimizedForStreaming;
+ 
+        private Optional<Boolean> has64bitOffsets = Optional.empty();
  
         private List<GetLibraryItemsPart> part;  
         
@@ -545,6 +607,30 @@ public class GetLibraryItemsMedia {
             return this;
         }
 
+        public Builder optimizedForStreaming(GetLibraryItemsOptimizedForStreaming optimizedForStreaming) {
+            Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
+            this.optimizedForStreaming = Optional.ofNullable(optimizedForStreaming);
+            return this;
+        }
+
+        public Builder optimizedForStreaming(Optional<? extends GetLibraryItemsOptimizedForStreaming> optimizedForStreaming) {
+            Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
+            this.optimizedForStreaming = optimizedForStreaming;
+            return this;
+        }
+
+        public Builder has64bitOffsets(boolean has64bitOffsets) {
+            Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
+            this.has64bitOffsets = Optional.ofNullable(has64bitOffsets);
+            return this;
+        }
+
+        public Builder has64bitOffsets(Optional<Boolean> has64bitOffsets) {
+            Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
+            this.has64bitOffsets = has64bitOffsets;
+            return this;
+        }
+
         public Builder part(List<GetLibraryItemsPart> part) {
             Utils.checkNotNull(part, "part");
             this.part = part;
@@ -552,7 +638,9 @@ public class GetLibraryItemsMedia {
         }
         
         public GetLibraryItemsMedia build() {
-            return new GetLibraryItemsMedia(
+            if (optimizedForStreaming == null) {
+                optimizedForStreaming = _SINGLETON_VALUE_OptimizedForStreaming.value();
+            }            return new GetLibraryItemsMedia(
                 id,
                 duration,
                 bitrate,
@@ -568,8 +656,16 @@ public class GetLibraryItemsMedia {
                 videoFrameRate,
                 videoProfile,
                 hasVoiceActivity,
+                optimizedForStreaming,
+                has64bitOffsets,
                 part);
         }
+
+        private static final LazySingletonValue<Optional<? extends GetLibraryItemsOptimizedForStreaming>> _SINGLETON_VALUE_OptimizedForStreaming =
+                new LazySingletonValue<>(
+                        "optimizedForStreaming",
+                        "0",
+                        new TypeReference<Optional<? extends GetLibraryItemsOptimizedForStreaming>>() {});
     }
 }
 

@@ -35,12 +35,12 @@ public class GetSearchLibraryRequest {
      * 
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")
-    private QueryParamType type;
+    private GetSearchLibraryQueryParamType type;
 
     @JsonCreator
     public GetSearchLibraryRequest(
             int sectionKey,
-            QueryParamType type) {
+            GetSearchLibraryQueryParamType type) {
         Utils.checkNotNull(sectionKey, "sectionKey");
         Utils.checkNotNull(type, "type");
         this.sectionKey = sectionKey;
@@ -67,7 +67,7 @@ public class GetSearchLibraryRequest {
      * 
      */
     @JsonIgnore
-    public QueryParamType type() {
+    public GetSearchLibraryQueryParamType type() {
         return type;
     }
 
@@ -95,7 +95,7 @@ public class GetSearchLibraryRequest {
      * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
      * 
      */
-    public GetSearchLibraryRequest withType(QueryParamType type) {
+    public GetSearchLibraryRequest withType(GetSearchLibraryQueryParamType type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -133,7 +133,7 @@ public class GetSearchLibraryRequest {
  
         private Integer sectionKey;
  
-        private QueryParamType type;  
+        private GetSearchLibraryQueryParamType type;  
         
         private Builder() {
           // force use of static builder() method
@@ -159,7 +159,7 @@ public class GetSearchLibraryRequest {
          * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
          * 
          */
-        public Builder type(QueryParamType type) {
+        public Builder type(GetSearchLibraryQueryParamType type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;

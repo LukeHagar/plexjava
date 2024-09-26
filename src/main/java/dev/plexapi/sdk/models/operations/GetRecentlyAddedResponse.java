@@ -37,7 +37,7 @@ public class GetRecentlyAddedResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * The recently added content
+     * A successful response with recently added content.
      */
     private Optional<? extends GetRecentlyAddedResponseBody> object;
 
@@ -89,7 +89,7 @@ public class GetRecentlyAddedResponse implements Response {
     }
 
     /**
-     * The recently added content
+     * A successful response with recently added content.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -129,7 +129,7 @@ public class GetRecentlyAddedResponse implements Response {
     }
 
     /**
-     * The recently added content
+     * A successful response with recently added content.
      */
     public GetRecentlyAddedResponse withObject(GetRecentlyAddedResponseBody object) {
         Utils.checkNotNull(object, "object");
@@ -138,7 +138,7 @@ public class GetRecentlyAddedResponse implements Response {
     }
 
     /**
-     * The recently added content
+     * A successful response with recently added content.
      */
     public GetRecentlyAddedResponse withObject(Optional<? extends GetRecentlyAddedResponseBody> object) {
         Utils.checkNotNull(object, "object");
@@ -222,7 +222,7 @@ public class GetRecentlyAddedResponse implements Response {
         }
 
         /**
-         * The recently added content
+         * A successful response with recently added content.
          */
         public Builder object(GetRecentlyAddedResponseBody object) {
             Utils.checkNotNull(object, "object");
@@ -231,7 +231,7 @@ public class GetRecentlyAddedResponse implements Response {
         }
 
         /**
-         * The recently added content
+         * A successful response with recently added content.
          */
         public Builder object(Optional<? extends GetRecentlyAddedResponseBody> object) {
             Utils.checkNotNull(object, "object");

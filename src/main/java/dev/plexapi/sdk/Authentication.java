@@ -24,7 +24,7 @@ import dev.plexapi.sdk.models.operations.GetTransientTokenQueryParamType;
 import dev.plexapi.sdk.models.operations.GetTransientTokenRequest;
 import dev.plexapi.sdk.models.operations.GetTransientTokenRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetTransientTokenResponse;
-import dev.plexapi.sdk.models.operations.PostUsersSignInDataRequestBody;
+import dev.plexapi.sdk.models.operations.PostUsersSignInDataRequest;
 import dev.plexapi.sdk.models.operations.PostUsersSignInDataRequestBuilder;
 import dev.plexapi.sdk.models.operations.PostUsersSignInDataResponse;
 import dev.plexapi.sdk.models.operations.PostUsersSignInDataUserPlexAccount;
@@ -559,11 +559,13 @@ public class Authentication implements
     /**
      * Get User Sign In Data
      * Sign in user with username and password and return user data with Plex authentication token
+     * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public PostUsersSignInDataResponse postUsersSignInDataDirect() throws Exception {
-        return postUsersSignInData(Optional.empty(), Optional.empty());
+    public PostUsersSignInDataResponse postUsersSignInData(
+            PostUsersSignInDataRequest request) throws Exception {
+        return postUsersSignInData(request, Optional.empty());
     }
     
     /**
@@ -575,7 +577,7 @@ public class Authentication implements
      * @throws Exception if the API call fails
      */
     public PostUsersSignInDataResponse postUsersSignInData(
-            Optional<? extends PostUsersSignInDataRequestBody> request,
+            PostUsersSignInDataRequest request,
             Optional<String> serverURL) throws Exception {
         String _baseUrl = Utils.templateUrl(POST_USERS_SIGN_IN_DATA_SERVERS[0], new HashMap<String, String>());
         if (serverURL.isPresent() && !serverURL.get().isBlank()) {
@@ -589,16 +591,21 @@ public class Authentication implements
         Object _convertedRequest = Utils.convertToShape(
                 request, 
                 JsonShape.DEFAULT,
-                new TypeReference<Optional<? extends PostUsersSignInDataRequestBody>>() {});
+                new TypeReference<PostUsersSignInDataRequest>() {});
         SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
                 _convertedRequest, 
-                "request",
+                "requestBody",
                 "form",
                 false);
         _req.setBody(Optional.ofNullable(_serializedRequestBody));
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
+
+        _req.addQueryParams(Utils.getQueryParams(
+                PostUsersSignInDataRequest.class,
+                request, 
+                this.sdkConfiguration.globals));
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 

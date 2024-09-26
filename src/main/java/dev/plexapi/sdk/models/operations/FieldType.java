@@ -7,51 +7,40 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 
 public class FieldType {
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
-    private Optional<String> type;
+    private String type;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Operator")
-    private Optional<? extends List<Operator>> operator;
+    private List<Operator> operator;
 
     @JsonCreator
     public FieldType(
-            @JsonProperty("type") Optional<String> type,
-            @JsonProperty("Operator") Optional<? extends List<Operator>> operator) {
+            @JsonProperty("type") String type,
+            @JsonProperty("Operator") List<Operator> operator) {
         Utils.checkNotNull(type, "type");
         Utils.checkNotNull(operator, "operator");
         this.type = type;
         this.operator = operator;
     }
-    
-    public FieldType() {
-        this(Optional.empty(), Optional.empty());
-    }
 
     @JsonIgnore
-    public Optional<String> type() {
+    public String type() {
         return type;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Operator>> operator() {
-        return (Optional<List<Operator>>) operator;
+    public List<Operator> operator() {
+        return operator;
     }
 
     public final static Builder builder() {
@@ -60,23 +49,11 @@ public class FieldType {
 
     public FieldType withType(String type) {
         Utils.checkNotNull(type, "type");
-        this.type = Optional.ofNullable(type);
-        return this;
-    }
-
-    public FieldType withType(Optional<String> type) {
-        Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
     }
 
     public FieldType withOperator(List<Operator> operator) {
-        Utils.checkNotNull(operator, "operator");
-        this.operator = Optional.ofNullable(operator);
-        return this;
-    }
-
-    public FieldType withOperator(Optional<? extends List<Operator>> operator) {
         Utils.checkNotNull(operator, "operator");
         this.operator = operator;
         return this;
@@ -112,9 +89,9 @@ public class FieldType {
     
     public final static class Builder {
  
-        private Optional<String> type = Optional.empty();
+        private String type;
  
-        private Optional<? extends List<Operator>> operator = Optional.empty();  
+        private List<Operator> operator;  
         
         private Builder() {
           // force use of static builder() method
@@ -122,23 +99,11 @@ public class FieldType {
 
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
-            this.type = Optional.ofNullable(type);
-            return this;
-        }
-
-        public Builder type(Optional<String> type) {
-            Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
         }
 
         public Builder operator(List<Operator> operator) {
-            Utils.checkNotNull(operator, "operator");
-            this.operator = Optional.ofNullable(operator);
-            return this;
-        }
-
-        public Builder operator(Optional<? extends List<Operator>> operator) {
             Utils.checkNotNull(operator, "operator");
             this.operator = operator;
             return this;

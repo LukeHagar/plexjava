@@ -10,13 +10,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Double;
+import java.lang.Integer;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.time.OffsetDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -24,53 +28,60 @@ import java.util.Optional;
 
 public class GetRecentlyAddedMetadata {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("allowSync")
-    private Optional<Boolean> allowSync;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("librarySectionID")
-    private Optional<Double> librarySectionID;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("librarySectionTitle")
-    private Optional<String> librarySectionTitle;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("librarySectionUUID")
-    private Optional<String> librarySectionUUID;
-
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * The rating key (Media ID) of this media item.
+     * Note: This is always an integer, but is represented as a string in the API.
+     * 
+     */
     @JsonProperty("ratingKey")
-    private Optional<Double> ratingKey;
+    private String ratingKey;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
-    private Optional<String> key;
+    private String key;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("guid")
-    private Optional<String> guid;
+    private String guid;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("studio")
     private Optional<String> studio;
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("type")
-    private Optional<String> type;
+    @JsonProperty("skipChildren")
+    private Optional<Boolean> skipChildren;
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("librarySectionID")
+    private Optional<Long> librarySectionID;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("librarySectionTitle")
+    private Optional<String> librarySectionTitle;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("librarySectionKey")
+    private Optional<String> librarySectionKey;
+
+    /**
+     * The type of media content
+     * 
+     */
+    @JsonProperty("type")
+    private GetRecentlyAddedHubsType type;
+
     @JsonProperty("title")
-    private Optional<String> title;
+    private String title;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("slug")
+    private Optional<String> slug;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contentRating")
     private Optional<String> contentRating;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("summary")
-    private Optional<String> summary;
+    private String summary;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("rating")
@@ -82,11 +93,32 @@ public class GetRecentlyAddedMetadata {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("year")
-    private Optional<Double> year;
+    private Optional<Integer> year;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("seasonCount")
+    private Optional<Integer> seasonCount;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tagline")
     private Optional<String> tagline;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("flattenSeasons")
+    private Optional<? extends FlattenSeasons> flattenSeasons;
+
+    /**
+     * Setting that indicates the episode ordering for the show 
+     * None = Library default, 
+     * tmdbAiring = The Movie Database (Aired), 
+     * aired = TheTVDB (Aired), 
+     * dvd = TheTVDB (DVD), 
+     * absolute = TheTVDB (Absolute)).
+     * 
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("showOrdering")
+    private Optional<? extends ShowOrdering> showOrdering;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
@@ -97,20 +129,29 @@ public class GetRecentlyAddedMetadata {
     private Optional<String> art;
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("banner")
+    private Optional<String> banner;
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
-    private Optional<Double> duration;
+    private Optional<Integer> duration;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("originallyAvailableAt")
-    private Optional<OffsetDateTime> originallyAvailableAt;
+    private Optional<LocalDate> originallyAvailableAt;
 
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * Unix epoch datetime in seconds
+     */
     @JsonProperty("addedAt")
-    private Optional<Double> addedAt;
+    private long addedAt;
 
+    /**
+     * Unix epoch datetime in seconds
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("updatedAt")
-    private Optional<Double> updatedAt;
+    private Optional<Long> updatedAt;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audienceRatingImage")
@@ -129,12 +170,56 @@ public class GetRecentlyAddedMetadata {
     private Optional<String> ratingImage;
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentRatingKey")
+    private Optional<String> grandparentRatingKey;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentGuid")
+    private Optional<String> grandparentGuid;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentKey")
+    private Optional<String> grandparentKey;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentTitle")
+    private Optional<String> grandparentTitle;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentThumb")
+    private Optional<String> grandparentThumb;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentSlug")
+    private Optional<String> parentSlug;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentSlug")
+    private Optional<String> grandparentSlug;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentArt")
+    private Optional<String> grandparentArt;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentTheme")
+    private Optional<String> grandparentTheme;
+
+    /**
+     * The Media object is only included when type query is `4` or higher.
+     * 
+     */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Media")
     private Optional<? extends List<Media>> media;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Genre")
     private Optional<? extends List<Genre>> genre;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Country")
+    private Optional<? extends List<Country>> country;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Director")
@@ -145,65 +230,223 @@ public class GetRecentlyAddedMetadata {
     private Optional<? extends List<Writer>> writer;
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("Country")
-    private Optional<? extends List<Country>> country;
+    @JsonProperty("Collection")
+    private Optional<? extends List<Collection>> collection;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Role")
     private Optional<? extends List<Role>> role;
 
+    /**
+     * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
+     * 
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Guid")
+    private Optional<? extends List<MediaGuid>> mediaGuid;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("UltraBlurColors")
+    private Optional<? extends UltraBlurColors> ultraBlurColors;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Rating")
+    private Optional<? extends List<MetaDataRating>> metaDataRating;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Image")
+    private Optional<? extends List<GetRecentlyAddedImage>> image;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("titleSort")
+    private Optional<String> titleSort;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("viewCount")
+    private Optional<Integer> viewCount;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("lastViewedAt")
+    private Optional<Integer> lastViewedAt;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("originalTitle")
+    private Optional<String> originalTitle;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("viewOffset")
+    private Optional<Integer> viewOffset;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("skipCount")
+    private Optional<Integer> skipCount;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("index")
+    private Optional<Integer> index;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("theme")
+    private Optional<String> theme;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("leafCount")
+    private Optional<Integer> leafCount;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("viewedLeafCount")
+    private Optional<Integer> viewedLeafCount;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("childCount")
+    private Optional<Integer> childCount;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("hasPremiumExtras")
+    private Optional<String> hasPremiumExtras;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("hasPremiumPrimaryExtra")
+    private Optional<String> hasPremiumPrimaryExtra;
+
+    /**
+     * The rating key of the parent item.
+     * 
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentRatingKey")
+    private Optional<String> parentRatingKey;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentGuid")
+    private Optional<String> parentGuid;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentStudio")
+    private Optional<String> parentStudio;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentKey")
+    private Optional<String> parentKey;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentTitle")
+    private Optional<String> parentTitle;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentIndex")
+    private Optional<Integer> parentIndex;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentYear")
+    private Optional<Integer> parentYear;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentThumb")
+    private Optional<String> parentThumb;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentTheme")
+    private Optional<String> parentTheme;
+
     @JsonCreator
     public GetRecentlyAddedMetadata(
-            @JsonProperty("allowSync") Optional<Boolean> allowSync,
-            @JsonProperty("librarySectionID") Optional<Double> librarySectionID,
-            @JsonProperty("librarySectionTitle") Optional<String> librarySectionTitle,
-            @JsonProperty("librarySectionUUID") Optional<String> librarySectionUUID,
-            @JsonProperty("ratingKey") Optional<Double> ratingKey,
-            @JsonProperty("key") Optional<String> key,
-            @JsonProperty("guid") Optional<String> guid,
+            @JsonProperty("ratingKey") String ratingKey,
+            @JsonProperty("key") String key,
+            @JsonProperty("guid") String guid,
             @JsonProperty("studio") Optional<String> studio,
-            @JsonProperty("type") Optional<String> type,
-            @JsonProperty("title") Optional<String> title,
+            @JsonProperty("skipChildren") Optional<Boolean> skipChildren,
+            @JsonProperty("librarySectionID") Optional<Long> librarySectionID,
+            @JsonProperty("librarySectionTitle") Optional<String> librarySectionTitle,
+            @JsonProperty("librarySectionKey") Optional<String> librarySectionKey,
+            @JsonProperty("type") GetRecentlyAddedHubsType type,
+            @JsonProperty("title") String title,
+            @JsonProperty("slug") Optional<String> slug,
             @JsonProperty("contentRating") Optional<String> contentRating,
-            @JsonProperty("summary") Optional<String> summary,
+            @JsonProperty("summary") String summary,
             @JsonProperty("rating") Optional<Double> rating,
             @JsonProperty("audienceRating") Optional<Double> audienceRating,
-            @JsonProperty("year") Optional<Double> year,
+            @JsonProperty("year") Optional<Integer> year,
+            @JsonProperty("seasonCount") Optional<Integer> seasonCount,
             @JsonProperty("tagline") Optional<String> tagline,
+            @JsonProperty("flattenSeasons") Optional<? extends FlattenSeasons> flattenSeasons,
+            @JsonProperty("showOrdering") Optional<? extends ShowOrdering> showOrdering,
             @JsonProperty("thumb") Optional<String> thumb,
             @JsonProperty("art") Optional<String> art,
-            @JsonProperty("duration") Optional<Double> duration,
-            @JsonProperty("originallyAvailableAt") Optional<OffsetDateTime> originallyAvailableAt,
-            @JsonProperty("addedAt") Optional<Double> addedAt,
-            @JsonProperty("updatedAt") Optional<Double> updatedAt,
+            @JsonProperty("banner") Optional<String> banner,
+            @JsonProperty("duration") Optional<Integer> duration,
+            @JsonProperty("originallyAvailableAt") Optional<LocalDate> originallyAvailableAt,
+            @JsonProperty("addedAt") long addedAt,
+            @JsonProperty("updatedAt") Optional<Long> updatedAt,
             @JsonProperty("audienceRatingImage") Optional<String> audienceRatingImage,
             @JsonProperty("chapterSource") Optional<String> chapterSource,
             @JsonProperty("primaryExtraKey") Optional<String> primaryExtraKey,
             @JsonProperty("ratingImage") Optional<String> ratingImage,
+            @JsonProperty("grandparentRatingKey") Optional<String> grandparentRatingKey,
+            @JsonProperty("grandparentGuid") Optional<String> grandparentGuid,
+            @JsonProperty("grandparentKey") Optional<String> grandparentKey,
+            @JsonProperty("grandparentTitle") Optional<String> grandparentTitle,
+            @JsonProperty("grandparentThumb") Optional<String> grandparentThumb,
+            @JsonProperty("parentSlug") Optional<String> parentSlug,
+            @JsonProperty("grandparentSlug") Optional<String> grandparentSlug,
+            @JsonProperty("grandparentArt") Optional<String> grandparentArt,
+            @JsonProperty("grandparentTheme") Optional<String> grandparentTheme,
             @JsonProperty("Media") Optional<? extends List<Media>> media,
             @JsonProperty("Genre") Optional<? extends List<Genre>> genre,
+            @JsonProperty("Country") Optional<? extends List<Country>> country,
             @JsonProperty("Director") Optional<? extends List<Director>> director,
             @JsonProperty("Writer") Optional<? extends List<Writer>> writer,
-            @JsonProperty("Country") Optional<? extends List<Country>> country,
-            @JsonProperty("Role") Optional<? extends List<Role>> role) {
-        Utils.checkNotNull(allowSync, "allowSync");
-        Utils.checkNotNull(librarySectionID, "librarySectionID");
-        Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
-        Utils.checkNotNull(librarySectionUUID, "librarySectionUUID");
+            @JsonProperty("Collection") Optional<? extends List<Collection>> collection,
+            @JsonProperty("Role") Optional<? extends List<Role>> role,
+            @JsonProperty("Guid") Optional<? extends List<MediaGuid>> mediaGuid,
+            @JsonProperty("UltraBlurColors") Optional<? extends UltraBlurColors> ultraBlurColors,
+            @JsonProperty("Rating") Optional<? extends List<MetaDataRating>> metaDataRating,
+            @JsonProperty("Image") Optional<? extends List<GetRecentlyAddedImage>> image,
+            @JsonProperty("titleSort") Optional<String> titleSort,
+            @JsonProperty("viewCount") Optional<Integer> viewCount,
+            @JsonProperty("lastViewedAt") Optional<Integer> lastViewedAt,
+            @JsonProperty("originalTitle") Optional<String> originalTitle,
+            @JsonProperty("viewOffset") Optional<Integer> viewOffset,
+            @JsonProperty("skipCount") Optional<Integer> skipCount,
+            @JsonProperty("index") Optional<Integer> index,
+            @JsonProperty("theme") Optional<String> theme,
+            @JsonProperty("leafCount") Optional<Integer> leafCount,
+            @JsonProperty("viewedLeafCount") Optional<Integer> viewedLeafCount,
+            @JsonProperty("childCount") Optional<Integer> childCount,
+            @JsonProperty("hasPremiumExtras") Optional<String> hasPremiumExtras,
+            @JsonProperty("hasPremiumPrimaryExtra") Optional<String> hasPremiumPrimaryExtra,
+            @JsonProperty("parentRatingKey") Optional<String> parentRatingKey,
+            @JsonProperty("parentGuid") Optional<String> parentGuid,
+            @JsonProperty("parentStudio") Optional<String> parentStudio,
+            @JsonProperty("parentKey") Optional<String> parentKey,
+            @JsonProperty("parentTitle") Optional<String> parentTitle,
+            @JsonProperty("parentIndex") Optional<Integer> parentIndex,
+            @JsonProperty("parentYear") Optional<Integer> parentYear,
+            @JsonProperty("parentThumb") Optional<String> parentThumb,
+            @JsonProperty("parentTheme") Optional<String> parentTheme) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(guid, "guid");
         Utils.checkNotNull(studio, "studio");
+        Utils.checkNotNull(skipChildren, "skipChildren");
+        Utils.checkNotNull(librarySectionID, "librarySectionID");
+        Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+        Utils.checkNotNull(librarySectionKey, "librarySectionKey");
         Utils.checkNotNull(type, "type");
         Utils.checkNotNull(title, "title");
+        Utils.checkNotNull(slug, "slug");
         Utils.checkNotNull(contentRating, "contentRating");
         Utils.checkNotNull(summary, "summary");
         Utils.checkNotNull(rating, "rating");
         Utils.checkNotNull(audienceRating, "audienceRating");
         Utils.checkNotNull(year, "year");
+        Utils.checkNotNull(seasonCount, "seasonCount");
         Utils.checkNotNull(tagline, "tagline");
+        Utils.checkNotNull(flattenSeasons, "flattenSeasons");
+        Utils.checkNotNull(showOrdering, "showOrdering");
         Utils.checkNotNull(thumb, "thumb");
         Utils.checkNotNull(art, "art");
+        Utils.checkNotNull(banner, "banner");
         Utils.checkNotNull(duration, "duration");
         Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
         Utils.checkNotNull(addedAt, "addedAt");
@@ -212,30 +455,71 @@ public class GetRecentlyAddedMetadata {
         Utils.checkNotNull(chapterSource, "chapterSource");
         Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
         Utils.checkNotNull(ratingImage, "ratingImage");
+        Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
+        Utils.checkNotNull(grandparentGuid, "grandparentGuid");
+        Utils.checkNotNull(grandparentKey, "grandparentKey");
+        Utils.checkNotNull(grandparentTitle, "grandparentTitle");
+        Utils.checkNotNull(grandparentThumb, "grandparentThumb");
+        Utils.checkNotNull(parentSlug, "parentSlug");
+        Utils.checkNotNull(grandparentSlug, "grandparentSlug");
+        Utils.checkNotNull(grandparentArt, "grandparentArt");
+        Utils.checkNotNull(grandparentTheme, "grandparentTheme");
         Utils.checkNotNull(media, "media");
         Utils.checkNotNull(genre, "genre");
+        Utils.checkNotNull(country, "country");
         Utils.checkNotNull(director, "director");
         Utils.checkNotNull(writer, "writer");
-        Utils.checkNotNull(country, "country");
+        Utils.checkNotNull(collection, "collection");
         Utils.checkNotNull(role, "role");
-        this.allowSync = allowSync;
-        this.librarySectionID = librarySectionID;
-        this.librarySectionTitle = librarySectionTitle;
-        this.librarySectionUUID = librarySectionUUID;
+        Utils.checkNotNull(mediaGuid, "mediaGuid");
+        Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
+        Utils.checkNotNull(metaDataRating, "metaDataRating");
+        Utils.checkNotNull(image, "image");
+        Utils.checkNotNull(titleSort, "titleSort");
+        Utils.checkNotNull(viewCount, "viewCount");
+        Utils.checkNotNull(lastViewedAt, "lastViewedAt");
+        Utils.checkNotNull(originalTitle, "originalTitle");
+        Utils.checkNotNull(viewOffset, "viewOffset");
+        Utils.checkNotNull(skipCount, "skipCount");
+        Utils.checkNotNull(index, "index");
+        Utils.checkNotNull(theme, "theme");
+        Utils.checkNotNull(leafCount, "leafCount");
+        Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
+        Utils.checkNotNull(childCount, "childCount");
+        Utils.checkNotNull(hasPremiumExtras, "hasPremiumExtras");
+        Utils.checkNotNull(hasPremiumPrimaryExtra, "hasPremiumPrimaryExtra");
+        Utils.checkNotNull(parentRatingKey, "parentRatingKey");
+        Utils.checkNotNull(parentGuid, "parentGuid");
+        Utils.checkNotNull(parentStudio, "parentStudio");
+        Utils.checkNotNull(parentKey, "parentKey");
+        Utils.checkNotNull(parentTitle, "parentTitle");
+        Utils.checkNotNull(parentIndex, "parentIndex");
+        Utils.checkNotNull(parentYear, "parentYear");
+        Utils.checkNotNull(parentThumb, "parentThumb");
+        Utils.checkNotNull(parentTheme, "parentTheme");
         this.ratingKey = ratingKey;
         this.key = key;
         this.guid = guid;
         this.studio = studio;
+        this.skipChildren = skipChildren;
+        this.librarySectionID = librarySectionID;
+        this.librarySectionTitle = librarySectionTitle;
+        this.librarySectionKey = librarySectionKey;
         this.type = type;
         this.title = title;
+        this.slug = slug;
         this.contentRating = contentRating;
         this.summary = summary;
         this.rating = rating;
         this.audienceRating = audienceRating;
         this.year = year;
+        this.seasonCount = seasonCount;
         this.tagline = tagline;
+        this.flattenSeasons = flattenSeasons;
+        this.showOrdering = showOrdering;
         this.thumb = thumb;
         this.art = art;
+        this.banner = banner;
         this.duration = duration;
         this.originallyAvailableAt = originallyAvailableAt;
         this.addedAt = addedAt;
@@ -244,50 +528,78 @@ public class GetRecentlyAddedMetadata {
         this.chapterSource = chapterSource;
         this.primaryExtraKey = primaryExtraKey;
         this.ratingImage = ratingImage;
+        this.grandparentRatingKey = grandparentRatingKey;
+        this.grandparentGuid = grandparentGuid;
+        this.grandparentKey = grandparentKey;
+        this.grandparentTitle = grandparentTitle;
+        this.grandparentThumb = grandparentThumb;
+        this.parentSlug = parentSlug;
+        this.grandparentSlug = grandparentSlug;
+        this.grandparentArt = grandparentArt;
+        this.grandparentTheme = grandparentTheme;
         this.media = media;
         this.genre = genre;
+        this.country = country;
         this.director = director;
         this.writer = writer;
-        this.country = country;
+        this.collection = collection;
         this.role = role;
+        this.mediaGuid = mediaGuid;
+        this.ultraBlurColors = ultraBlurColors;
+        this.metaDataRating = metaDataRating;
+        this.image = image;
+        this.titleSort = titleSort;
+        this.viewCount = viewCount;
+        this.lastViewedAt = lastViewedAt;
+        this.originalTitle = originalTitle;
+        this.viewOffset = viewOffset;
+        this.skipCount = skipCount;
+        this.index = index;
+        this.theme = theme;
+        this.leafCount = leafCount;
+        this.viewedLeafCount = viewedLeafCount;
+        this.childCount = childCount;
+        this.hasPremiumExtras = hasPremiumExtras;
+        this.hasPremiumPrimaryExtra = hasPremiumPrimaryExtra;
+        this.parentRatingKey = parentRatingKey;
+        this.parentGuid = parentGuid;
+        this.parentStudio = parentStudio;
+        this.parentKey = parentKey;
+        this.parentTitle = parentTitle;
+        this.parentIndex = parentIndex;
+        this.parentYear = parentYear;
+        this.parentThumb = parentThumb;
+        this.parentTheme = parentTheme;
     }
     
-    public GetRecentlyAddedMetadata() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    public GetRecentlyAddedMetadata(
+            String ratingKey,
+            String key,
+            String guid,
+            GetRecentlyAddedHubsType type,
+            String title,
+            String summary,
+            long addedAt) {
+        this(ratingKey, key, guid, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), type, title, Optional.empty(), Optional.empty(), summary, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), addedAt, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
+    /**
+     * The rating key (Media ID) of this media item.
+     * Note: This is always an integer, but is represented as a string in the API.
+     * 
+     */
     @JsonIgnore
-    public Optional<Boolean> allowSync() {
-        return allowSync;
-    }
-
-    @JsonIgnore
-    public Optional<Double> librarySectionID() {
-        return librarySectionID;
-    }
-
-    @JsonIgnore
-    public Optional<String> librarySectionTitle() {
-        return librarySectionTitle;
-    }
-
-    @JsonIgnore
-    public Optional<String> librarySectionUUID() {
-        return librarySectionUUID;
-    }
-
-    @JsonIgnore
-    public Optional<Double> ratingKey() {
+    public String ratingKey() {
         return ratingKey;
     }
 
     @JsonIgnore
-    public Optional<String> key() {
+    public String key() {
         return key;
     }
 
     @JsonIgnore
-    public Optional<String> guid() {
+    public String guid() {
         return guid;
     }
 
@@ -297,13 +609,42 @@ public class GetRecentlyAddedMetadata {
     }
 
     @JsonIgnore
-    public Optional<String> type() {
+    public Optional<Boolean> skipChildren() {
+        return skipChildren;
+    }
+
+    @JsonIgnore
+    public Optional<Long> librarySectionID() {
+        return librarySectionID;
+    }
+
+    @JsonIgnore
+    public Optional<String> librarySectionTitle() {
+        return librarySectionTitle;
+    }
+
+    @JsonIgnore
+    public Optional<String> librarySectionKey() {
+        return librarySectionKey;
+    }
+
+    /**
+     * The type of media content
+     * 
+     */
+    @JsonIgnore
+    public GetRecentlyAddedHubsType type() {
         return type;
     }
 
     @JsonIgnore
-    public Optional<String> title() {
+    public String title() {
         return title;
+    }
+
+    @JsonIgnore
+    public Optional<String> slug() {
+        return slug;
     }
 
     @JsonIgnore
@@ -312,7 +653,7 @@ public class GetRecentlyAddedMetadata {
     }
 
     @JsonIgnore
-    public Optional<String> summary() {
+    public String summary() {
         return summary;
     }
 
@@ -327,13 +668,39 @@ public class GetRecentlyAddedMetadata {
     }
 
     @JsonIgnore
-    public Optional<Double> year() {
+    public Optional<Integer> year() {
         return year;
+    }
+
+    @JsonIgnore
+    public Optional<Integer> seasonCount() {
+        return seasonCount;
     }
 
     @JsonIgnore
     public Optional<String> tagline() {
         return tagline;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<FlattenSeasons> flattenSeasons() {
+        return (Optional<FlattenSeasons>) flattenSeasons;
+    }
+
+    /**
+     * Setting that indicates the episode ordering for the show 
+     * None = Library default, 
+     * tmdbAiring = The Movie Database (Aired), 
+     * aired = TheTVDB (Aired), 
+     * dvd = TheTVDB (DVD), 
+     * absolute = TheTVDB (Absolute)).
+     * 
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<ShowOrdering> showOrdering() {
+        return (Optional<ShowOrdering>) showOrdering;
     }
 
     @JsonIgnore
@@ -347,22 +714,33 @@ public class GetRecentlyAddedMetadata {
     }
 
     @JsonIgnore
-    public Optional<Double> duration() {
+    public Optional<String> banner() {
+        return banner;
+    }
+
+    @JsonIgnore
+    public Optional<Integer> duration() {
         return duration;
     }
 
     @JsonIgnore
-    public Optional<OffsetDateTime> originallyAvailableAt() {
+    public Optional<LocalDate> originallyAvailableAt() {
         return originallyAvailableAt;
     }
 
+    /**
+     * Unix epoch datetime in seconds
+     */
     @JsonIgnore
-    public Optional<Double> addedAt() {
+    public long addedAt() {
         return addedAt;
     }
 
+    /**
+     * Unix epoch datetime in seconds
+     */
     @JsonIgnore
-    public Optional<Double> updatedAt() {
+    public Optional<Long> updatedAt() {
         return updatedAt;
     }
 
@@ -386,6 +764,55 @@ public class GetRecentlyAddedMetadata {
         return ratingImage;
     }
 
+    @JsonIgnore
+    public Optional<String> grandparentRatingKey() {
+        return grandparentRatingKey;
+    }
+
+    @JsonIgnore
+    public Optional<String> grandparentGuid() {
+        return grandparentGuid;
+    }
+
+    @JsonIgnore
+    public Optional<String> grandparentKey() {
+        return grandparentKey;
+    }
+
+    @JsonIgnore
+    public Optional<String> grandparentTitle() {
+        return grandparentTitle;
+    }
+
+    @JsonIgnore
+    public Optional<String> grandparentThumb() {
+        return grandparentThumb;
+    }
+
+    @JsonIgnore
+    public Optional<String> parentSlug() {
+        return parentSlug;
+    }
+
+    @JsonIgnore
+    public Optional<String> grandparentSlug() {
+        return grandparentSlug;
+    }
+
+    @JsonIgnore
+    public Optional<String> grandparentArt() {
+        return grandparentArt;
+    }
+
+    @JsonIgnore
+    public Optional<String> grandparentTheme() {
+        return grandparentTheme;
+    }
+
+    /**
+     * The Media object is only included when type query is `4` or higher.
+     * 
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<List<Media>> media() {
@@ -396,6 +823,12 @@ public class GetRecentlyAddedMetadata {
     @JsonIgnore
     public Optional<List<Genre>> genre() {
         return (Optional<List<Genre>>) genre;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<Country>> country() {
+        return (Optional<List<Country>>) country;
     }
 
     @SuppressWarnings("unchecked")
@@ -412,8 +845,8 @@ public class GetRecentlyAddedMetadata {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Country>> country() {
-        return (Optional<List<Country>>) country;
+    public Optional<List<Collection>> collection() {
+        return (Optional<List<Collection>>) collection;
     }
 
     @SuppressWarnings("unchecked")
@@ -422,65 +855,158 @@ public class GetRecentlyAddedMetadata {
         return (Optional<List<Role>>) role;
     }
 
+    /**
+     * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
+     * 
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<MediaGuid>> mediaGuid() {
+        return (Optional<List<MediaGuid>>) mediaGuid;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<UltraBlurColors> ultraBlurColors() {
+        return (Optional<UltraBlurColors>) ultraBlurColors;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<MetaDataRating>> metaDataRating() {
+        return (Optional<List<MetaDataRating>>) metaDataRating;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<GetRecentlyAddedImage>> image() {
+        return (Optional<List<GetRecentlyAddedImage>>) image;
+    }
+
+    @JsonIgnore
+    public Optional<String> titleSort() {
+        return titleSort;
+    }
+
+    @JsonIgnore
+    public Optional<Integer> viewCount() {
+        return viewCount;
+    }
+
+    @JsonIgnore
+    public Optional<Integer> lastViewedAt() {
+        return lastViewedAt;
+    }
+
+    @JsonIgnore
+    public Optional<String> originalTitle() {
+        return originalTitle;
+    }
+
+    @JsonIgnore
+    public Optional<Integer> viewOffset() {
+        return viewOffset;
+    }
+
+    @JsonIgnore
+    public Optional<Integer> skipCount() {
+        return skipCount;
+    }
+
+    @JsonIgnore
+    public Optional<Integer> index() {
+        return index;
+    }
+
+    @JsonIgnore
+    public Optional<String> theme() {
+        return theme;
+    }
+
+    @JsonIgnore
+    public Optional<Integer> leafCount() {
+        return leafCount;
+    }
+
+    @JsonIgnore
+    public Optional<Integer> viewedLeafCount() {
+        return viewedLeafCount;
+    }
+
+    @JsonIgnore
+    public Optional<Integer> childCount() {
+        return childCount;
+    }
+
+    @JsonIgnore
+    public Optional<String> hasPremiumExtras() {
+        return hasPremiumExtras;
+    }
+
+    @JsonIgnore
+    public Optional<String> hasPremiumPrimaryExtra() {
+        return hasPremiumPrimaryExtra;
+    }
+
+    /**
+     * The rating key of the parent item.
+     * 
+     */
+    @JsonIgnore
+    public Optional<String> parentRatingKey() {
+        return parentRatingKey;
+    }
+
+    @JsonIgnore
+    public Optional<String> parentGuid() {
+        return parentGuid;
+    }
+
+    @JsonIgnore
+    public Optional<String> parentStudio() {
+        return parentStudio;
+    }
+
+    @JsonIgnore
+    public Optional<String> parentKey() {
+        return parentKey;
+    }
+
+    @JsonIgnore
+    public Optional<String> parentTitle() {
+        return parentTitle;
+    }
+
+    @JsonIgnore
+    public Optional<Integer> parentIndex() {
+        return parentIndex;
+    }
+
+    @JsonIgnore
+    public Optional<Integer> parentYear() {
+        return parentYear;
+    }
+
+    @JsonIgnore
+    public Optional<String> parentThumb() {
+        return parentThumb;
+    }
+
+    @JsonIgnore
+    public Optional<String> parentTheme() {
+        return parentTheme;
+    }
+
     public final static Builder builder() {
         return new Builder();
     }
 
-    public GetRecentlyAddedMetadata withAllowSync(boolean allowSync) {
-        Utils.checkNotNull(allowSync, "allowSync");
-        this.allowSync = Optional.ofNullable(allowSync);
-        return this;
-    }
-
-    public GetRecentlyAddedMetadata withAllowSync(Optional<Boolean> allowSync) {
-        Utils.checkNotNull(allowSync, "allowSync");
-        this.allowSync = allowSync;
-        return this;
-    }
-
-    public GetRecentlyAddedMetadata withLibrarySectionID(double librarySectionID) {
-        Utils.checkNotNull(librarySectionID, "librarySectionID");
-        this.librarySectionID = Optional.ofNullable(librarySectionID);
-        return this;
-    }
-
-    public GetRecentlyAddedMetadata withLibrarySectionID(Optional<Double> librarySectionID) {
-        Utils.checkNotNull(librarySectionID, "librarySectionID");
-        this.librarySectionID = librarySectionID;
-        return this;
-    }
-
-    public GetRecentlyAddedMetadata withLibrarySectionTitle(String librarySectionTitle) {
-        Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
-        this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
-        return this;
-    }
-
-    public GetRecentlyAddedMetadata withLibrarySectionTitle(Optional<String> librarySectionTitle) {
-        Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
-        this.librarySectionTitle = librarySectionTitle;
-        return this;
-    }
-
-    public GetRecentlyAddedMetadata withLibrarySectionUUID(String librarySectionUUID) {
-        Utils.checkNotNull(librarySectionUUID, "librarySectionUUID");
-        this.librarySectionUUID = Optional.ofNullable(librarySectionUUID);
-        return this;
-    }
-
-    public GetRecentlyAddedMetadata withLibrarySectionUUID(Optional<String> librarySectionUUID) {
-        Utils.checkNotNull(librarySectionUUID, "librarySectionUUID");
-        this.librarySectionUUID = librarySectionUUID;
-        return this;
-    }
-
-    public GetRecentlyAddedMetadata withRatingKey(double ratingKey) {
-        Utils.checkNotNull(ratingKey, "ratingKey");
-        this.ratingKey = Optional.ofNullable(ratingKey);
-        return this;
-    }
-
-    public GetRecentlyAddedMetadata withRatingKey(Optional<Double> ratingKey) {
+    /**
+     * The rating key (Media ID) of this media item.
+     * Note: This is always an integer, but is represented as a string in the API.
+     * 
+     */
+    public GetRecentlyAddedMetadata withRatingKey(String ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         this.ratingKey = ratingKey;
         return this;
@@ -488,23 +1014,11 @@ public class GetRecentlyAddedMetadata {
 
     public GetRecentlyAddedMetadata withKey(String key) {
         Utils.checkNotNull(key, "key");
-        this.key = Optional.ofNullable(key);
-        return this;
-    }
-
-    public GetRecentlyAddedMetadata withKey(Optional<String> key) {
-        Utils.checkNotNull(key, "key");
         this.key = key;
         return this;
     }
 
     public GetRecentlyAddedMetadata withGuid(String guid) {
-        Utils.checkNotNull(guid, "guid");
-        this.guid = Optional.ofNullable(guid);
-        return this;
-    }
-
-    public GetRecentlyAddedMetadata withGuid(Optional<String> guid) {
         Utils.checkNotNull(guid, "guid");
         this.guid = guid;
         return this;
@@ -522,13 +1036,59 @@ public class GetRecentlyAddedMetadata {
         return this;
     }
 
-    public GetRecentlyAddedMetadata withType(String type) {
-        Utils.checkNotNull(type, "type");
-        this.type = Optional.ofNullable(type);
+    public GetRecentlyAddedMetadata withSkipChildren(boolean skipChildren) {
+        Utils.checkNotNull(skipChildren, "skipChildren");
+        this.skipChildren = Optional.ofNullable(skipChildren);
         return this;
     }
 
-    public GetRecentlyAddedMetadata withType(Optional<String> type) {
+    public GetRecentlyAddedMetadata withSkipChildren(Optional<Boolean> skipChildren) {
+        Utils.checkNotNull(skipChildren, "skipChildren");
+        this.skipChildren = skipChildren;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withLibrarySectionID(long librarySectionID) {
+        Utils.checkNotNull(librarySectionID, "librarySectionID");
+        this.librarySectionID = Optional.ofNullable(librarySectionID);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withLibrarySectionID(Optional<Long> librarySectionID) {
+        Utils.checkNotNull(librarySectionID, "librarySectionID");
+        this.librarySectionID = librarySectionID;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withLibrarySectionTitle(String librarySectionTitle) {
+        Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+        this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withLibrarySectionTitle(Optional<String> librarySectionTitle) {
+        Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+        this.librarySectionTitle = librarySectionTitle;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withLibrarySectionKey(String librarySectionKey) {
+        Utils.checkNotNull(librarySectionKey, "librarySectionKey");
+        this.librarySectionKey = Optional.ofNullable(librarySectionKey);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withLibrarySectionKey(Optional<String> librarySectionKey) {
+        Utils.checkNotNull(librarySectionKey, "librarySectionKey");
+        this.librarySectionKey = librarySectionKey;
+        return this;
+    }
+
+    /**
+     * The type of media content
+     * 
+     */
+    public GetRecentlyAddedMetadata withType(GetRecentlyAddedHubsType type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -536,13 +1096,19 @@ public class GetRecentlyAddedMetadata {
 
     public GetRecentlyAddedMetadata withTitle(String title) {
         Utils.checkNotNull(title, "title");
-        this.title = Optional.ofNullable(title);
+        this.title = title;
         return this;
     }
 
-    public GetRecentlyAddedMetadata withTitle(Optional<String> title) {
-        Utils.checkNotNull(title, "title");
-        this.title = title;
+    public GetRecentlyAddedMetadata withSlug(String slug) {
+        Utils.checkNotNull(slug, "slug");
+        this.slug = Optional.ofNullable(slug);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withSlug(Optional<String> slug) {
+        Utils.checkNotNull(slug, "slug");
+        this.slug = slug;
         return this;
     }
 
@@ -559,12 +1125,6 @@ public class GetRecentlyAddedMetadata {
     }
 
     public GetRecentlyAddedMetadata withSummary(String summary) {
-        Utils.checkNotNull(summary, "summary");
-        this.summary = Optional.ofNullable(summary);
-        return this;
-    }
-
-    public GetRecentlyAddedMetadata withSummary(Optional<String> summary) {
         Utils.checkNotNull(summary, "summary");
         this.summary = summary;
         return this;
@@ -594,15 +1154,27 @@ public class GetRecentlyAddedMetadata {
         return this;
     }
 
-    public GetRecentlyAddedMetadata withYear(double year) {
+    public GetRecentlyAddedMetadata withYear(int year) {
         Utils.checkNotNull(year, "year");
         this.year = Optional.ofNullable(year);
         return this;
     }
 
-    public GetRecentlyAddedMetadata withYear(Optional<Double> year) {
+    public GetRecentlyAddedMetadata withYear(Optional<Integer> year) {
         Utils.checkNotNull(year, "year");
         this.year = year;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withSeasonCount(int seasonCount) {
+        Utils.checkNotNull(seasonCount, "seasonCount");
+        this.seasonCount = Optional.ofNullable(seasonCount);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withSeasonCount(Optional<Integer> seasonCount) {
+        Utils.checkNotNull(seasonCount, "seasonCount");
+        this.seasonCount = seasonCount;
         return this;
     }
 
@@ -615,6 +1187,48 @@ public class GetRecentlyAddedMetadata {
     public GetRecentlyAddedMetadata withTagline(Optional<String> tagline) {
         Utils.checkNotNull(tagline, "tagline");
         this.tagline = tagline;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withFlattenSeasons(FlattenSeasons flattenSeasons) {
+        Utils.checkNotNull(flattenSeasons, "flattenSeasons");
+        this.flattenSeasons = Optional.ofNullable(flattenSeasons);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withFlattenSeasons(Optional<? extends FlattenSeasons> flattenSeasons) {
+        Utils.checkNotNull(flattenSeasons, "flattenSeasons");
+        this.flattenSeasons = flattenSeasons;
+        return this;
+    }
+
+    /**
+     * Setting that indicates the episode ordering for the show 
+     * None = Library default, 
+     * tmdbAiring = The Movie Database (Aired), 
+     * aired = TheTVDB (Aired), 
+     * dvd = TheTVDB (DVD), 
+     * absolute = TheTVDB (Absolute)).
+     * 
+     */
+    public GetRecentlyAddedMetadata withShowOrdering(ShowOrdering showOrdering) {
+        Utils.checkNotNull(showOrdering, "showOrdering");
+        this.showOrdering = Optional.ofNullable(showOrdering);
+        return this;
+    }
+
+    /**
+     * Setting that indicates the episode ordering for the show 
+     * None = Library default, 
+     * tmdbAiring = The Movie Database (Aired), 
+     * aired = TheTVDB (Aired), 
+     * dvd = TheTVDB (DVD), 
+     * absolute = TheTVDB (Absolute)).
+     * 
+     */
+    public GetRecentlyAddedMetadata withShowOrdering(Optional<? extends ShowOrdering> showOrdering) {
+        Utils.checkNotNull(showOrdering, "showOrdering");
+        this.showOrdering = showOrdering;
         return this;
     }
 
@@ -642,49 +1256,64 @@ public class GetRecentlyAddedMetadata {
         return this;
     }
 
-    public GetRecentlyAddedMetadata withDuration(double duration) {
+    public GetRecentlyAddedMetadata withBanner(String banner) {
+        Utils.checkNotNull(banner, "banner");
+        this.banner = Optional.ofNullable(banner);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withBanner(Optional<String> banner) {
+        Utils.checkNotNull(banner, "banner");
+        this.banner = banner;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withDuration(int duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = Optional.ofNullable(duration);
         return this;
     }
 
-    public GetRecentlyAddedMetadata withDuration(Optional<Double> duration) {
+    public GetRecentlyAddedMetadata withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = duration;
         return this;
     }
 
-    public GetRecentlyAddedMetadata withOriginallyAvailableAt(OffsetDateTime originallyAvailableAt) {
+    public GetRecentlyAddedMetadata withOriginallyAvailableAt(LocalDate originallyAvailableAt) {
         Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
         this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
         return this;
     }
 
-    public GetRecentlyAddedMetadata withOriginallyAvailableAt(Optional<OffsetDateTime> originallyAvailableAt) {
+    public GetRecentlyAddedMetadata withOriginallyAvailableAt(Optional<LocalDate> originallyAvailableAt) {
         Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
         this.originallyAvailableAt = originallyAvailableAt;
         return this;
     }
 
-    public GetRecentlyAddedMetadata withAddedAt(double addedAt) {
-        Utils.checkNotNull(addedAt, "addedAt");
-        this.addedAt = Optional.ofNullable(addedAt);
-        return this;
-    }
-
-    public GetRecentlyAddedMetadata withAddedAt(Optional<Double> addedAt) {
+    /**
+     * Unix epoch datetime in seconds
+     */
+    public GetRecentlyAddedMetadata withAddedAt(long addedAt) {
         Utils.checkNotNull(addedAt, "addedAt");
         this.addedAt = addedAt;
         return this;
     }
 
-    public GetRecentlyAddedMetadata withUpdatedAt(double updatedAt) {
+    /**
+     * Unix epoch datetime in seconds
+     */
+    public GetRecentlyAddedMetadata withUpdatedAt(long updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
         this.updatedAt = Optional.ofNullable(updatedAt);
         return this;
     }
 
-    public GetRecentlyAddedMetadata withUpdatedAt(Optional<Double> updatedAt) {
+    /**
+     * Unix epoch datetime in seconds
+     */
+    public GetRecentlyAddedMetadata withUpdatedAt(Optional<Long> updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
         this.updatedAt = updatedAt;
         return this;
@@ -738,12 +1367,128 @@ public class GetRecentlyAddedMetadata {
         return this;
     }
 
+    public GetRecentlyAddedMetadata withGrandparentRatingKey(String grandparentRatingKey) {
+        Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
+        this.grandparentRatingKey = Optional.ofNullable(grandparentRatingKey);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withGrandparentRatingKey(Optional<String> grandparentRatingKey) {
+        Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
+        this.grandparentRatingKey = grandparentRatingKey;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withGrandparentGuid(String grandparentGuid) {
+        Utils.checkNotNull(grandparentGuid, "grandparentGuid");
+        this.grandparentGuid = Optional.ofNullable(grandparentGuid);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withGrandparentGuid(Optional<String> grandparentGuid) {
+        Utils.checkNotNull(grandparentGuid, "grandparentGuid");
+        this.grandparentGuid = grandparentGuid;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withGrandparentKey(String grandparentKey) {
+        Utils.checkNotNull(grandparentKey, "grandparentKey");
+        this.grandparentKey = Optional.ofNullable(grandparentKey);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withGrandparentKey(Optional<String> grandparentKey) {
+        Utils.checkNotNull(grandparentKey, "grandparentKey");
+        this.grandparentKey = grandparentKey;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withGrandparentTitle(String grandparentTitle) {
+        Utils.checkNotNull(grandparentTitle, "grandparentTitle");
+        this.grandparentTitle = Optional.ofNullable(grandparentTitle);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withGrandparentTitle(Optional<String> grandparentTitle) {
+        Utils.checkNotNull(grandparentTitle, "grandparentTitle");
+        this.grandparentTitle = grandparentTitle;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withGrandparentThumb(String grandparentThumb) {
+        Utils.checkNotNull(grandparentThumb, "grandparentThumb");
+        this.grandparentThumb = Optional.ofNullable(grandparentThumb);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withGrandparentThumb(Optional<String> grandparentThumb) {
+        Utils.checkNotNull(grandparentThumb, "grandparentThumb");
+        this.grandparentThumb = grandparentThumb;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withParentSlug(String parentSlug) {
+        Utils.checkNotNull(parentSlug, "parentSlug");
+        this.parentSlug = Optional.ofNullable(parentSlug);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withParentSlug(Optional<String> parentSlug) {
+        Utils.checkNotNull(parentSlug, "parentSlug");
+        this.parentSlug = parentSlug;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withGrandparentSlug(String grandparentSlug) {
+        Utils.checkNotNull(grandparentSlug, "grandparentSlug");
+        this.grandparentSlug = Optional.ofNullable(grandparentSlug);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withGrandparentSlug(Optional<String> grandparentSlug) {
+        Utils.checkNotNull(grandparentSlug, "grandparentSlug");
+        this.grandparentSlug = grandparentSlug;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withGrandparentArt(String grandparentArt) {
+        Utils.checkNotNull(grandparentArt, "grandparentArt");
+        this.grandparentArt = Optional.ofNullable(grandparentArt);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withGrandparentArt(Optional<String> grandparentArt) {
+        Utils.checkNotNull(grandparentArt, "grandparentArt");
+        this.grandparentArt = grandparentArt;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withGrandparentTheme(String grandparentTheme) {
+        Utils.checkNotNull(grandparentTheme, "grandparentTheme");
+        this.grandparentTheme = Optional.ofNullable(grandparentTheme);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withGrandparentTheme(Optional<String> grandparentTheme) {
+        Utils.checkNotNull(grandparentTheme, "grandparentTheme");
+        this.grandparentTheme = grandparentTheme;
+        return this;
+    }
+
+    /**
+     * The Media object is only included when type query is `4` or higher.
+     * 
+     */
     public GetRecentlyAddedMetadata withMedia(List<Media> media) {
         Utils.checkNotNull(media, "media");
         this.media = Optional.ofNullable(media);
         return this;
     }
 
+    /**
+     * The Media object is only included when type query is `4` or higher.
+     * 
+     */
     public GetRecentlyAddedMetadata withMedia(Optional<? extends List<Media>> media) {
         Utils.checkNotNull(media, "media");
         this.media = media;
@@ -759,6 +1504,18 @@ public class GetRecentlyAddedMetadata {
     public GetRecentlyAddedMetadata withGenre(Optional<? extends List<Genre>> genre) {
         Utils.checkNotNull(genre, "genre");
         this.genre = genre;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withCountry(List<Country> country) {
+        Utils.checkNotNull(country, "country");
+        this.country = Optional.ofNullable(country);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withCountry(Optional<? extends List<Country>> country) {
+        Utils.checkNotNull(country, "country");
+        this.country = country;
         return this;
     }
 
@@ -786,15 +1543,15 @@ public class GetRecentlyAddedMetadata {
         return this;
     }
 
-    public GetRecentlyAddedMetadata withCountry(List<Country> country) {
-        Utils.checkNotNull(country, "country");
-        this.country = Optional.ofNullable(country);
+    public GetRecentlyAddedMetadata withCollection(List<Collection> collection) {
+        Utils.checkNotNull(collection, "collection");
+        this.collection = Optional.ofNullable(collection);
         return this;
     }
 
-    public GetRecentlyAddedMetadata withCountry(Optional<? extends List<Country>> country) {
-        Utils.checkNotNull(country, "country");
-        this.country = country;
+    public GetRecentlyAddedMetadata withCollection(Optional<? extends List<Collection>> collection) {
+        Utils.checkNotNull(collection, "collection");
+        this.collection = collection;
         return this;
     }
 
@@ -809,6 +1566,334 @@ public class GetRecentlyAddedMetadata {
         this.role = role;
         return this;
     }
+
+    /**
+     * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
+     * 
+     */
+    public GetRecentlyAddedMetadata withMediaGuid(List<MediaGuid> mediaGuid) {
+        Utils.checkNotNull(mediaGuid, "mediaGuid");
+        this.mediaGuid = Optional.ofNullable(mediaGuid);
+        return this;
+    }
+
+    /**
+     * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
+     * 
+     */
+    public GetRecentlyAddedMetadata withMediaGuid(Optional<? extends List<MediaGuid>> mediaGuid) {
+        Utils.checkNotNull(mediaGuid, "mediaGuid");
+        this.mediaGuid = mediaGuid;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withUltraBlurColors(UltraBlurColors ultraBlurColors) {
+        Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
+        this.ultraBlurColors = Optional.ofNullable(ultraBlurColors);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withUltraBlurColors(Optional<? extends UltraBlurColors> ultraBlurColors) {
+        Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
+        this.ultraBlurColors = ultraBlurColors;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withMetaDataRating(List<MetaDataRating> metaDataRating) {
+        Utils.checkNotNull(metaDataRating, "metaDataRating");
+        this.metaDataRating = Optional.ofNullable(metaDataRating);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withMetaDataRating(Optional<? extends List<MetaDataRating>> metaDataRating) {
+        Utils.checkNotNull(metaDataRating, "metaDataRating");
+        this.metaDataRating = metaDataRating;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withImage(List<GetRecentlyAddedImage> image) {
+        Utils.checkNotNull(image, "image");
+        this.image = Optional.ofNullable(image);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withImage(Optional<? extends List<GetRecentlyAddedImage>> image) {
+        Utils.checkNotNull(image, "image");
+        this.image = image;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withTitleSort(String titleSort) {
+        Utils.checkNotNull(titleSort, "titleSort");
+        this.titleSort = Optional.ofNullable(titleSort);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withTitleSort(Optional<String> titleSort) {
+        Utils.checkNotNull(titleSort, "titleSort");
+        this.titleSort = titleSort;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withViewCount(int viewCount) {
+        Utils.checkNotNull(viewCount, "viewCount");
+        this.viewCount = Optional.ofNullable(viewCount);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withViewCount(Optional<Integer> viewCount) {
+        Utils.checkNotNull(viewCount, "viewCount");
+        this.viewCount = viewCount;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withLastViewedAt(int lastViewedAt) {
+        Utils.checkNotNull(lastViewedAt, "lastViewedAt");
+        this.lastViewedAt = Optional.ofNullable(lastViewedAt);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withLastViewedAt(Optional<Integer> lastViewedAt) {
+        Utils.checkNotNull(lastViewedAt, "lastViewedAt");
+        this.lastViewedAt = lastViewedAt;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withOriginalTitle(String originalTitle) {
+        Utils.checkNotNull(originalTitle, "originalTitle");
+        this.originalTitle = Optional.ofNullable(originalTitle);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withOriginalTitle(Optional<String> originalTitle) {
+        Utils.checkNotNull(originalTitle, "originalTitle");
+        this.originalTitle = originalTitle;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withViewOffset(int viewOffset) {
+        Utils.checkNotNull(viewOffset, "viewOffset");
+        this.viewOffset = Optional.ofNullable(viewOffset);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withViewOffset(Optional<Integer> viewOffset) {
+        Utils.checkNotNull(viewOffset, "viewOffset");
+        this.viewOffset = viewOffset;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withSkipCount(int skipCount) {
+        Utils.checkNotNull(skipCount, "skipCount");
+        this.skipCount = Optional.ofNullable(skipCount);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withSkipCount(Optional<Integer> skipCount) {
+        Utils.checkNotNull(skipCount, "skipCount");
+        this.skipCount = skipCount;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withIndex(int index) {
+        Utils.checkNotNull(index, "index");
+        this.index = Optional.ofNullable(index);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withIndex(Optional<Integer> index) {
+        Utils.checkNotNull(index, "index");
+        this.index = index;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withTheme(String theme) {
+        Utils.checkNotNull(theme, "theme");
+        this.theme = Optional.ofNullable(theme);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withTheme(Optional<String> theme) {
+        Utils.checkNotNull(theme, "theme");
+        this.theme = theme;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withLeafCount(int leafCount) {
+        Utils.checkNotNull(leafCount, "leafCount");
+        this.leafCount = Optional.ofNullable(leafCount);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withLeafCount(Optional<Integer> leafCount) {
+        Utils.checkNotNull(leafCount, "leafCount");
+        this.leafCount = leafCount;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withViewedLeafCount(int viewedLeafCount) {
+        Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
+        this.viewedLeafCount = Optional.ofNullable(viewedLeafCount);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withViewedLeafCount(Optional<Integer> viewedLeafCount) {
+        Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
+        this.viewedLeafCount = viewedLeafCount;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withChildCount(int childCount) {
+        Utils.checkNotNull(childCount, "childCount");
+        this.childCount = Optional.ofNullable(childCount);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withChildCount(Optional<Integer> childCount) {
+        Utils.checkNotNull(childCount, "childCount");
+        this.childCount = childCount;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withHasPremiumExtras(String hasPremiumExtras) {
+        Utils.checkNotNull(hasPremiumExtras, "hasPremiumExtras");
+        this.hasPremiumExtras = Optional.ofNullable(hasPremiumExtras);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withHasPremiumExtras(Optional<String> hasPremiumExtras) {
+        Utils.checkNotNull(hasPremiumExtras, "hasPremiumExtras");
+        this.hasPremiumExtras = hasPremiumExtras;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withHasPremiumPrimaryExtra(String hasPremiumPrimaryExtra) {
+        Utils.checkNotNull(hasPremiumPrimaryExtra, "hasPremiumPrimaryExtra");
+        this.hasPremiumPrimaryExtra = Optional.ofNullable(hasPremiumPrimaryExtra);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withHasPremiumPrimaryExtra(Optional<String> hasPremiumPrimaryExtra) {
+        Utils.checkNotNull(hasPremiumPrimaryExtra, "hasPremiumPrimaryExtra");
+        this.hasPremiumPrimaryExtra = hasPremiumPrimaryExtra;
+        return this;
+    }
+
+    /**
+     * The rating key of the parent item.
+     * 
+     */
+    public GetRecentlyAddedMetadata withParentRatingKey(String parentRatingKey) {
+        Utils.checkNotNull(parentRatingKey, "parentRatingKey");
+        this.parentRatingKey = Optional.ofNullable(parentRatingKey);
+        return this;
+    }
+
+    /**
+     * The rating key of the parent item.
+     * 
+     */
+    public GetRecentlyAddedMetadata withParentRatingKey(Optional<String> parentRatingKey) {
+        Utils.checkNotNull(parentRatingKey, "parentRatingKey");
+        this.parentRatingKey = parentRatingKey;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withParentGuid(String parentGuid) {
+        Utils.checkNotNull(parentGuid, "parentGuid");
+        this.parentGuid = Optional.ofNullable(parentGuid);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withParentGuid(Optional<String> parentGuid) {
+        Utils.checkNotNull(parentGuid, "parentGuid");
+        this.parentGuid = parentGuid;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withParentStudio(String parentStudio) {
+        Utils.checkNotNull(parentStudio, "parentStudio");
+        this.parentStudio = Optional.ofNullable(parentStudio);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withParentStudio(Optional<String> parentStudio) {
+        Utils.checkNotNull(parentStudio, "parentStudio");
+        this.parentStudio = parentStudio;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withParentKey(String parentKey) {
+        Utils.checkNotNull(parentKey, "parentKey");
+        this.parentKey = Optional.ofNullable(parentKey);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withParentKey(Optional<String> parentKey) {
+        Utils.checkNotNull(parentKey, "parentKey");
+        this.parentKey = parentKey;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withParentTitle(String parentTitle) {
+        Utils.checkNotNull(parentTitle, "parentTitle");
+        this.parentTitle = Optional.ofNullable(parentTitle);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withParentTitle(Optional<String> parentTitle) {
+        Utils.checkNotNull(parentTitle, "parentTitle");
+        this.parentTitle = parentTitle;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withParentIndex(int parentIndex) {
+        Utils.checkNotNull(parentIndex, "parentIndex");
+        this.parentIndex = Optional.ofNullable(parentIndex);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withParentIndex(Optional<Integer> parentIndex) {
+        Utils.checkNotNull(parentIndex, "parentIndex");
+        this.parentIndex = parentIndex;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withParentYear(int parentYear) {
+        Utils.checkNotNull(parentYear, "parentYear");
+        this.parentYear = Optional.ofNullable(parentYear);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withParentYear(Optional<Integer> parentYear) {
+        Utils.checkNotNull(parentYear, "parentYear");
+        this.parentYear = parentYear;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withParentThumb(String parentThumb) {
+        Utils.checkNotNull(parentThumb, "parentThumb");
+        this.parentThumb = Optional.ofNullable(parentThumb);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withParentThumb(Optional<String> parentThumb) {
+        Utils.checkNotNull(parentThumb, "parentThumb");
+        this.parentThumb = parentThumb;
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withParentTheme(String parentTheme) {
+        Utils.checkNotNull(parentTheme, "parentTheme");
+        this.parentTheme = Optional.ofNullable(parentTheme);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withParentTheme(Optional<String> parentTheme) {
+        Utils.checkNotNull(parentTheme, "parentTheme");
+        this.parentTheme = parentTheme;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -820,24 +1905,29 @@ public class GetRecentlyAddedMetadata {
         }
         GetRecentlyAddedMetadata other = (GetRecentlyAddedMetadata) o;
         return 
-            Objects.deepEquals(this.allowSync, other.allowSync) &&
-            Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
-            Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
-            Objects.deepEquals(this.librarySectionUUID, other.librarySectionUUID) &&
             Objects.deepEquals(this.ratingKey, other.ratingKey) &&
             Objects.deepEquals(this.key, other.key) &&
             Objects.deepEquals(this.guid, other.guid) &&
             Objects.deepEquals(this.studio, other.studio) &&
+            Objects.deepEquals(this.skipChildren, other.skipChildren) &&
+            Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
+            Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
+            Objects.deepEquals(this.librarySectionKey, other.librarySectionKey) &&
             Objects.deepEquals(this.type, other.type) &&
             Objects.deepEquals(this.title, other.title) &&
+            Objects.deepEquals(this.slug, other.slug) &&
             Objects.deepEquals(this.contentRating, other.contentRating) &&
             Objects.deepEquals(this.summary, other.summary) &&
             Objects.deepEquals(this.rating, other.rating) &&
             Objects.deepEquals(this.audienceRating, other.audienceRating) &&
             Objects.deepEquals(this.year, other.year) &&
+            Objects.deepEquals(this.seasonCount, other.seasonCount) &&
             Objects.deepEquals(this.tagline, other.tagline) &&
+            Objects.deepEquals(this.flattenSeasons, other.flattenSeasons) &&
+            Objects.deepEquals(this.showOrdering, other.showOrdering) &&
             Objects.deepEquals(this.thumb, other.thumb) &&
             Objects.deepEquals(this.art, other.art) &&
+            Objects.deepEquals(this.banner, other.banner) &&
             Objects.deepEquals(this.duration, other.duration) &&
             Objects.deepEquals(this.originallyAvailableAt, other.originallyAvailableAt) &&
             Objects.deepEquals(this.addedAt, other.addedAt) &&
@@ -846,35 +1936,76 @@ public class GetRecentlyAddedMetadata {
             Objects.deepEquals(this.chapterSource, other.chapterSource) &&
             Objects.deepEquals(this.primaryExtraKey, other.primaryExtraKey) &&
             Objects.deepEquals(this.ratingImage, other.ratingImage) &&
+            Objects.deepEquals(this.grandparentRatingKey, other.grandparentRatingKey) &&
+            Objects.deepEquals(this.grandparentGuid, other.grandparentGuid) &&
+            Objects.deepEquals(this.grandparentKey, other.grandparentKey) &&
+            Objects.deepEquals(this.grandparentTitle, other.grandparentTitle) &&
+            Objects.deepEquals(this.grandparentThumb, other.grandparentThumb) &&
+            Objects.deepEquals(this.parentSlug, other.parentSlug) &&
+            Objects.deepEquals(this.grandparentSlug, other.grandparentSlug) &&
+            Objects.deepEquals(this.grandparentArt, other.grandparentArt) &&
+            Objects.deepEquals(this.grandparentTheme, other.grandparentTheme) &&
             Objects.deepEquals(this.media, other.media) &&
             Objects.deepEquals(this.genre, other.genre) &&
+            Objects.deepEquals(this.country, other.country) &&
             Objects.deepEquals(this.director, other.director) &&
             Objects.deepEquals(this.writer, other.writer) &&
-            Objects.deepEquals(this.country, other.country) &&
-            Objects.deepEquals(this.role, other.role);
+            Objects.deepEquals(this.collection, other.collection) &&
+            Objects.deepEquals(this.role, other.role) &&
+            Objects.deepEquals(this.mediaGuid, other.mediaGuid) &&
+            Objects.deepEquals(this.ultraBlurColors, other.ultraBlurColors) &&
+            Objects.deepEquals(this.metaDataRating, other.metaDataRating) &&
+            Objects.deepEquals(this.image, other.image) &&
+            Objects.deepEquals(this.titleSort, other.titleSort) &&
+            Objects.deepEquals(this.viewCount, other.viewCount) &&
+            Objects.deepEquals(this.lastViewedAt, other.lastViewedAt) &&
+            Objects.deepEquals(this.originalTitle, other.originalTitle) &&
+            Objects.deepEquals(this.viewOffset, other.viewOffset) &&
+            Objects.deepEquals(this.skipCount, other.skipCount) &&
+            Objects.deepEquals(this.index, other.index) &&
+            Objects.deepEquals(this.theme, other.theme) &&
+            Objects.deepEquals(this.leafCount, other.leafCount) &&
+            Objects.deepEquals(this.viewedLeafCount, other.viewedLeafCount) &&
+            Objects.deepEquals(this.childCount, other.childCount) &&
+            Objects.deepEquals(this.hasPremiumExtras, other.hasPremiumExtras) &&
+            Objects.deepEquals(this.hasPremiumPrimaryExtra, other.hasPremiumPrimaryExtra) &&
+            Objects.deepEquals(this.parentRatingKey, other.parentRatingKey) &&
+            Objects.deepEquals(this.parentGuid, other.parentGuid) &&
+            Objects.deepEquals(this.parentStudio, other.parentStudio) &&
+            Objects.deepEquals(this.parentKey, other.parentKey) &&
+            Objects.deepEquals(this.parentTitle, other.parentTitle) &&
+            Objects.deepEquals(this.parentIndex, other.parentIndex) &&
+            Objects.deepEquals(this.parentYear, other.parentYear) &&
+            Objects.deepEquals(this.parentThumb, other.parentThumb) &&
+            Objects.deepEquals(this.parentTheme, other.parentTheme);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
-            allowSync,
-            librarySectionID,
-            librarySectionTitle,
-            librarySectionUUID,
             ratingKey,
             key,
             guid,
             studio,
+            skipChildren,
+            librarySectionID,
+            librarySectionTitle,
+            librarySectionKey,
             type,
             title,
+            slug,
             contentRating,
             summary,
             rating,
             audienceRating,
             year,
+            seasonCount,
             tagline,
+            flattenSeasons,
+            showOrdering,
             thumb,
             art,
+            banner,
             duration,
             originallyAvailableAt,
             addedAt,
@@ -883,35 +2014,76 @@ public class GetRecentlyAddedMetadata {
             chapterSource,
             primaryExtraKey,
             ratingImage,
+            grandparentRatingKey,
+            grandparentGuid,
+            grandparentKey,
+            grandparentTitle,
+            grandparentThumb,
+            parentSlug,
+            grandparentSlug,
+            grandparentArt,
+            grandparentTheme,
             media,
             genre,
+            country,
             director,
             writer,
-            country,
-            role);
+            collection,
+            role,
+            mediaGuid,
+            ultraBlurColors,
+            metaDataRating,
+            image,
+            titleSort,
+            viewCount,
+            lastViewedAt,
+            originalTitle,
+            viewOffset,
+            skipCount,
+            index,
+            theme,
+            leafCount,
+            viewedLeafCount,
+            childCount,
+            hasPremiumExtras,
+            hasPremiumPrimaryExtra,
+            parentRatingKey,
+            parentGuid,
+            parentStudio,
+            parentKey,
+            parentTitle,
+            parentIndex,
+            parentYear,
+            parentThumb,
+            parentTheme);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetRecentlyAddedMetadata.class,
-                "allowSync", allowSync,
-                "librarySectionID", librarySectionID,
-                "librarySectionTitle", librarySectionTitle,
-                "librarySectionUUID", librarySectionUUID,
                 "ratingKey", ratingKey,
                 "key", key,
                 "guid", guid,
                 "studio", studio,
+                "skipChildren", skipChildren,
+                "librarySectionID", librarySectionID,
+                "librarySectionTitle", librarySectionTitle,
+                "librarySectionKey", librarySectionKey,
                 "type", type,
                 "title", title,
+                "slug", slug,
                 "contentRating", contentRating,
                 "summary", summary,
                 "rating", rating,
                 "audienceRating", audienceRating,
                 "year", year,
+                "seasonCount", seasonCount,
                 "tagline", tagline,
+                "flattenSeasons", flattenSeasons,
+                "showOrdering", showOrdering,
                 "thumb", thumb,
                 "art", art,
+                "banner", banner,
                 "duration", duration,
                 "originallyAvailableAt", originallyAvailableAt,
                 "addedAt", addedAt,
@@ -920,59 +2092,105 @@ public class GetRecentlyAddedMetadata {
                 "chapterSource", chapterSource,
                 "primaryExtraKey", primaryExtraKey,
                 "ratingImage", ratingImage,
+                "grandparentRatingKey", grandparentRatingKey,
+                "grandparentGuid", grandparentGuid,
+                "grandparentKey", grandparentKey,
+                "grandparentTitle", grandparentTitle,
+                "grandparentThumb", grandparentThumb,
+                "parentSlug", parentSlug,
+                "grandparentSlug", grandparentSlug,
+                "grandparentArt", grandparentArt,
+                "grandparentTheme", grandparentTheme,
                 "media", media,
                 "genre", genre,
+                "country", country,
                 "director", director,
                 "writer", writer,
-                "country", country,
-                "role", role);
+                "collection", collection,
+                "role", role,
+                "mediaGuid", mediaGuid,
+                "ultraBlurColors", ultraBlurColors,
+                "metaDataRating", metaDataRating,
+                "image", image,
+                "titleSort", titleSort,
+                "viewCount", viewCount,
+                "lastViewedAt", lastViewedAt,
+                "originalTitle", originalTitle,
+                "viewOffset", viewOffset,
+                "skipCount", skipCount,
+                "index", index,
+                "theme", theme,
+                "leafCount", leafCount,
+                "viewedLeafCount", viewedLeafCount,
+                "childCount", childCount,
+                "hasPremiumExtras", hasPremiumExtras,
+                "hasPremiumPrimaryExtra", hasPremiumPrimaryExtra,
+                "parentRatingKey", parentRatingKey,
+                "parentGuid", parentGuid,
+                "parentStudio", parentStudio,
+                "parentKey", parentKey,
+                "parentTitle", parentTitle,
+                "parentIndex", parentIndex,
+                "parentYear", parentYear,
+                "parentThumb", parentThumb,
+                "parentTheme", parentTheme);
     }
     
     public final static class Builder {
  
-        private Optional<Boolean> allowSync = Optional.empty();
+        private String ratingKey;
  
-        private Optional<Double> librarySectionID = Optional.empty();
+        private String key;
  
-        private Optional<String> librarySectionTitle = Optional.empty();
- 
-        private Optional<String> librarySectionUUID = Optional.empty();
- 
-        private Optional<Double> ratingKey = Optional.empty();
- 
-        private Optional<String> key = Optional.empty();
- 
-        private Optional<String> guid = Optional.empty();
+        private String guid;
  
         private Optional<String> studio = Optional.empty();
  
-        private Optional<String> type = Optional.empty();
+        private Optional<Boolean> skipChildren = Optional.empty();
  
-        private Optional<String> title = Optional.empty();
+        private Optional<Long> librarySectionID = Optional.empty();
+ 
+        private Optional<String> librarySectionTitle = Optional.empty();
+ 
+        private Optional<String> librarySectionKey = Optional.empty();
+ 
+        private GetRecentlyAddedHubsType type;
+ 
+        private String title;
+ 
+        private Optional<String> slug = Optional.empty();
  
         private Optional<String> contentRating = Optional.empty();
  
-        private Optional<String> summary = Optional.empty();
+        private String summary;
  
         private Optional<Double> rating = Optional.empty();
  
         private Optional<Double> audienceRating = Optional.empty();
  
-        private Optional<Double> year = Optional.empty();
+        private Optional<Integer> year = Optional.empty();
+ 
+        private Optional<Integer> seasonCount = Optional.empty();
  
         private Optional<String> tagline = Optional.empty();
+ 
+        private Optional<? extends FlattenSeasons> flattenSeasons;
+ 
+        private Optional<? extends ShowOrdering> showOrdering = Optional.empty();
  
         private Optional<String> thumb = Optional.empty();
  
         private Optional<String> art = Optional.empty();
  
-        private Optional<Double> duration = Optional.empty();
+        private Optional<String> banner = Optional.empty();
  
-        private Optional<OffsetDateTime> originallyAvailableAt = Optional.empty();
+        private Optional<Integer> duration = Optional.empty();
  
-        private Optional<Double> addedAt = Optional.empty();
+        private Optional<LocalDate> originallyAvailableAt = Optional.empty();
  
-        private Optional<Double> updatedAt = Optional.empty();
+        private Long addedAt;
+ 
+        private Optional<Long> updatedAt = Optional.empty();
  
         private Optional<String> audienceRatingImage = Optional.empty();
  
@@ -982,77 +2200,100 @@ public class GetRecentlyAddedMetadata {
  
         private Optional<String> ratingImage = Optional.empty();
  
+        private Optional<String> grandparentRatingKey = Optional.empty();
+ 
+        private Optional<String> grandparentGuid = Optional.empty();
+ 
+        private Optional<String> grandparentKey = Optional.empty();
+ 
+        private Optional<String> grandparentTitle = Optional.empty();
+ 
+        private Optional<String> grandparentThumb = Optional.empty();
+ 
+        private Optional<String> parentSlug = Optional.empty();
+ 
+        private Optional<String> grandparentSlug = Optional.empty();
+ 
+        private Optional<String> grandparentArt = Optional.empty();
+ 
+        private Optional<String> grandparentTheme = Optional.empty();
+ 
         private Optional<? extends List<Media>> media = Optional.empty();
  
         private Optional<? extends List<Genre>> genre = Optional.empty();
+ 
+        private Optional<? extends List<Country>> country = Optional.empty();
  
         private Optional<? extends List<Director>> director = Optional.empty();
  
         private Optional<? extends List<Writer>> writer = Optional.empty();
  
-        private Optional<? extends List<Country>> country = Optional.empty();
+        private Optional<? extends List<Collection>> collection = Optional.empty();
  
-        private Optional<? extends List<Role>> role = Optional.empty();  
+        private Optional<? extends List<Role>> role = Optional.empty();
+ 
+        private Optional<? extends List<MediaGuid>> mediaGuid = Optional.empty();
+ 
+        private Optional<? extends UltraBlurColors> ultraBlurColors = Optional.empty();
+ 
+        private Optional<? extends List<MetaDataRating>> metaDataRating = Optional.empty();
+ 
+        private Optional<? extends List<GetRecentlyAddedImage>> image = Optional.empty();
+ 
+        private Optional<String> titleSort = Optional.empty();
+ 
+        private Optional<Integer> viewCount = Optional.empty();
+ 
+        private Optional<Integer> lastViewedAt = Optional.empty();
+ 
+        private Optional<String> originalTitle = Optional.empty();
+ 
+        private Optional<Integer> viewOffset = Optional.empty();
+ 
+        private Optional<Integer> skipCount = Optional.empty();
+ 
+        private Optional<Integer> index = Optional.empty();
+ 
+        private Optional<String> theme = Optional.empty();
+ 
+        private Optional<Integer> leafCount = Optional.empty();
+ 
+        private Optional<Integer> viewedLeafCount = Optional.empty();
+ 
+        private Optional<Integer> childCount = Optional.empty();
+ 
+        private Optional<String> hasPremiumExtras = Optional.empty();
+ 
+        private Optional<String> hasPremiumPrimaryExtra = Optional.empty();
+ 
+        private Optional<String> parentRatingKey = Optional.empty();
+ 
+        private Optional<String> parentGuid = Optional.empty();
+ 
+        private Optional<String> parentStudio = Optional.empty();
+ 
+        private Optional<String> parentKey = Optional.empty();
+ 
+        private Optional<String> parentTitle = Optional.empty();
+ 
+        private Optional<Integer> parentIndex = Optional.empty();
+ 
+        private Optional<Integer> parentYear = Optional.empty();
+ 
+        private Optional<String> parentThumb = Optional.empty();
+ 
+        private Optional<String> parentTheme = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
         }
 
-        public Builder allowSync(boolean allowSync) {
-            Utils.checkNotNull(allowSync, "allowSync");
-            this.allowSync = Optional.ofNullable(allowSync);
-            return this;
-        }
-
-        public Builder allowSync(Optional<Boolean> allowSync) {
-            Utils.checkNotNull(allowSync, "allowSync");
-            this.allowSync = allowSync;
-            return this;
-        }
-
-        public Builder librarySectionID(double librarySectionID) {
-            Utils.checkNotNull(librarySectionID, "librarySectionID");
-            this.librarySectionID = Optional.ofNullable(librarySectionID);
-            return this;
-        }
-
-        public Builder librarySectionID(Optional<Double> librarySectionID) {
-            Utils.checkNotNull(librarySectionID, "librarySectionID");
-            this.librarySectionID = librarySectionID;
-            return this;
-        }
-
-        public Builder librarySectionTitle(String librarySectionTitle) {
-            Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
-            this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
-            return this;
-        }
-
-        public Builder librarySectionTitle(Optional<String> librarySectionTitle) {
-            Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
-            this.librarySectionTitle = librarySectionTitle;
-            return this;
-        }
-
-        public Builder librarySectionUUID(String librarySectionUUID) {
-            Utils.checkNotNull(librarySectionUUID, "librarySectionUUID");
-            this.librarySectionUUID = Optional.ofNullable(librarySectionUUID);
-            return this;
-        }
-
-        public Builder librarySectionUUID(Optional<String> librarySectionUUID) {
-            Utils.checkNotNull(librarySectionUUID, "librarySectionUUID");
-            this.librarySectionUUID = librarySectionUUID;
-            return this;
-        }
-
-        public Builder ratingKey(double ratingKey) {
-            Utils.checkNotNull(ratingKey, "ratingKey");
-            this.ratingKey = Optional.ofNullable(ratingKey);
-            return this;
-        }
-
-        public Builder ratingKey(Optional<Double> ratingKey) {
+        /**
+         * The rating key (Media ID) of this media item.
+         * Note: This is always an integer, but is represented as a string in the API.
+         * 
+         */
+        public Builder ratingKey(String ratingKey) {
             Utils.checkNotNull(ratingKey, "ratingKey");
             this.ratingKey = ratingKey;
             return this;
@@ -1060,23 +2301,11 @@ public class GetRecentlyAddedMetadata {
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
-            this.key = Optional.ofNullable(key);
-            return this;
-        }
-
-        public Builder key(Optional<String> key) {
-            Utils.checkNotNull(key, "key");
             this.key = key;
             return this;
         }
 
         public Builder guid(String guid) {
-            Utils.checkNotNull(guid, "guid");
-            this.guid = Optional.ofNullable(guid);
-            return this;
-        }
-
-        public Builder guid(Optional<String> guid) {
             Utils.checkNotNull(guid, "guid");
             this.guid = guid;
             return this;
@@ -1094,13 +2323,59 @@ public class GetRecentlyAddedMetadata {
             return this;
         }
 
-        public Builder type(String type) {
-            Utils.checkNotNull(type, "type");
-            this.type = Optional.ofNullable(type);
+        public Builder skipChildren(boolean skipChildren) {
+            Utils.checkNotNull(skipChildren, "skipChildren");
+            this.skipChildren = Optional.ofNullable(skipChildren);
             return this;
         }
 
-        public Builder type(Optional<String> type) {
+        public Builder skipChildren(Optional<Boolean> skipChildren) {
+            Utils.checkNotNull(skipChildren, "skipChildren");
+            this.skipChildren = skipChildren;
+            return this;
+        }
+
+        public Builder librarySectionID(long librarySectionID) {
+            Utils.checkNotNull(librarySectionID, "librarySectionID");
+            this.librarySectionID = Optional.ofNullable(librarySectionID);
+            return this;
+        }
+
+        public Builder librarySectionID(Optional<Long> librarySectionID) {
+            Utils.checkNotNull(librarySectionID, "librarySectionID");
+            this.librarySectionID = librarySectionID;
+            return this;
+        }
+
+        public Builder librarySectionTitle(String librarySectionTitle) {
+            Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+            this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
+            return this;
+        }
+
+        public Builder librarySectionTitle(Optional<String> librarySectionTitle) {
+            Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+            this.librarySectionTitle = librarySectionTitle;
+            return this;
+        }
+
+        public Builder librarySectionKey(String librarySectionKey) {
+            Utils.checkNotNull(librarySectionKey, "librarySectionKey");
+            this.librarySectionKey = Optional.ofNullable(librarySectionKey);
+            return this;
+        }
+
+        public Builder librarySectionKey(Optional<String> librarySectionKey) {
+            Utils.checkNotNull(librarySectionKey, "librarySectionKey");
+            this.librarySectionKey = librarySectionKey;
+            return this;
+        }
+
+        /**
+         * The type of media content
+         * 
+         */
+        public Builder type(GetRecentlyAddedHubsType type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
@@ -1108,13 +2383,19 @@ public class GetRecentlyAddedMetadata {
 
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
-            this.title = Optional.ofNullable(title);
+            this.title = title;
             return this;
         }
 
-        public Builder title(Optional<String> title) {
-            Utils.checkNotNull(title, "title");
-            this.title = title;
+        public Builder slug(String slug) {
+            Utils.checkNotNull(slug, "slug");
+            this.slug = Optional.ofNullable(slug);
+            return this;
+        }
+
+        public Builder slug(Optional<String> slug) {
+            Utils.checkNotNull(slug, "slug");
+            this.slug = slug;
             return this;
         }
 
@@ -1131,12 +2412,6 @@ public class GetRecentlyAddedMetadata {
         }
 
         public Builder summary(String summary) {
-            Utils.checkNotNull(summary, "summary");
-            this.summary = Optional.ofNullable(summary);
-            return this;
-        }
-
-        public Builder summary(Optional<String> summary) {
             Utils.checkNotNull(summary, "summary");
             this.summary = summary;
             return this;
@@ -1166,15 +2441,27 @@ public class GetRecentlyAddedMetadata {
             return this;
         }
 
-        public Builder year(double year) {
+        public Builder year(int year) {
             Utils.checkNotNull(year, "year");
             this.year = Optional.ofNullable(year);
             return this;
         }
 
-        public Builder year(Optional<Double> year) {
+        public Builder year(Optional<Integer> year) {
             Utils.checkNotNull(year, "year");
             this.year = year;
+            return this;
+        }
+
+        public Builder seasonCount(int seasonCount) {
+            Utils.checkNotNull(seasonCount, "seasonCount");
+            this.seasonCount = Optional.ofNullable(seasonCount);
+            return this;
+        }
+
+        public Builder seasonCount(Optional<Integer> seasonCount) {
+            Utils.checkNotNull(seasonCount, "seasonCount");
+            this.seasonCount = seasonCount;
             return this;
         }
 
@@ -1187,6 +2474,48 @@ public class GetRecentlyAddedMetadata {
         public Builder tagline(Optional<String> tagline) {
             Utils.checkNotNull(tagline, "tagline");
             this.tagline = tagline;
+            return this;
+        }
+
+        public Builder flattenSeasons(FlattenSeasons flattenSeasons) {
+            Utils.checkNotNull(flattenSeasons, "flattenSeasons");
+            this.flattenSeasons = Optional.ofNullable(flattenSeasons);
+            return this;
+        }
+
+        public Builder flattenSeasons(Optional<? extends FlattenSeasons> flattenSeasons) {
+            Utils.checkNotNull(flattenSeasons, "flattenSeasons");
+            this.flattenSeasons = flattenSeasons;
+            return this;
+        }
+
+        /**
+         * Setting that indicates the episode ordering for the show 
+         * None = Library default, 
+         * tmdbAiring = The Movie Database (Aired), 
+         * aired = TheTVDB (Aired), 
+         * dvd = TheTVDB (DVD), 
+         * absolute = TheTVDB (Absolute)).
+         * 
+         */
+        public Builder showOrdering(ShowOrdering showOrdering) {
+            Utils.checkNotNull(showOrdering, "showOrdering");
+            this.showOrdering = Optional.ofNullable(showOrdering);
+            return this;
+        }
+
+        /**
+         * Setting that indicates the episode ordering for the show 
+         * None = Library default, 
+         * tmdbAiring = The Movie Database (Aired), 
+         * aired = TheTVDB (Aired), 
+         * dvd = TheTVDB (DVD), 
+         * absolute = TheTVDB (Absolute)).
+         * 
+         */
+        public Builder showOrdering(Optional<? extends ShowOrdering> showOrdering) {
+            Utils.checkNotNull(showOrdering, "showOrdering");
+            this.showOrdering = showOrdering;
             return this;
         }
 
@@ -1214,49 +2543,64 @@ public class GetRecentlyAddedMetadata {
             return this;
         }
 
-        public Builder duration(double duration) {
+        public Builder banner(String banner) {
+            Utils.checkNotNull(banner, "banner");
+            this.banner = Optional.ofNullable(banner);
+            return this;
+        }
+
+        public Builder banner(Optional<String> banner) {
+            Utils.checkNotNull(banner, "banner");
+            this.banner = banner;
+            return this;
+        }
+
+        public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = Optional.ofNullable(duration);
             return this;
         }
 
-        public Builder duration(Optional<Double> duration) {
+        public Builder duration(Optional<Integer> duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = duration;
             return this;
         }
 
-        public Builder originallyAvailableAt(OffsetDateTime originallyAvailableAt) {
+        public Builder originallyAvailableAt(LocalDate originallyAvailableAt) {
             Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
             this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
             return this;
         }
 
-        public Builder originallyAvailableAt(Optional<OffsetDateTime> originallyAvailableAt) {
+        public Builder originallyAvailableAt(Optional<LocalDate> originallyAvailableAt) {
             Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
             this.originallyAvailableAt = originallyAvailableAt;
             return this;
         }
 
-        public Builder addedAt(double addedAt) {
-            Utils.checkNotNull(addedAt, "addedAt");
-            this.addedAt = Optional.ofNullable(addedAt);
-            return this;
-        }
-
-        public Builder addedAt(Optional<Double> addedAt) {
+        /**
+         * Unix epoch datetime in seconds
+         */
+        public Builder addedAt(long addedAt) {
             Utils.checkNotNull(addedAt, "addedAt");
             this.addedAt = addedAt;
             return this;
         }
 
-        public Builder updatedAt(double updatedAt) {
+        /**
+         * Unix epoch datetime in seconds
+         */
+        public Builder updatedAt(long updatedAt) {
             Utils.checkNotNull(updatedAt, "updatedAt");
             this.updatedAt = Optional.ofNullable(updatedAt);
             return this;
         }
 
-        public Builder updatedAt(Optional<Double> updatedAt) {
+        /**
+         * Unix epoch datetime in seconds
+         */
+        public Builder updatedAt(Optional<Long> updatedAt) {
             Utils.checkNotNull(updatedAt, "updatedAt");
             this.updatedAt = updatedAt;
             return this;
@@ -1310,12 +2654,128 @@ public class GetRecentlyAddedMetadata {
             return this;
         }
 
+        public Builder grandparentRatingKey(String grandparentRatingKey) {
+            Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
+            this.grandparentRatingKey = Optional.ofNullable(grandparentRatingKey);
+            return this;
+        }
+
+        public Builder grandparentRatingKey(Optional<String> grandparentRatingKey) {
+            Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
+            this.grandparentRatingKey = grandparentRatingKey;
+            return this;
+        }
+
+        public Builder grandparentGuid(String grandparentGuid) {
+            Utils.checkNotNull(grandparentGuid, "grandparentGuid");
+            this.grandparentGuid = Optional.ofNullable(grandparentGuid);
+            return this;
+        }
+
+        public Builder grandparentGuid(Optional<String> grandparentGuid) {
+            Utils.checkNotNull(grandparentGuid, "grandparentGuid");
+            this.grandparentGuid = grandparentGuid;
+            return this;
+        }
+
+        public Builder grandparentKey(String grandparentKey) {
+            Utils.checkNotNull(grandparentKey, "grandparentKey");
+            this.grandparentKey = Optional.ofNullable(grandparentKey);
+            return this;
+        }
+
+        public Builder grandparentKey(Optional<String> grandparentKey) {
+            Utils.checkNotNull(grandparentKey, "grandparentKey");
+            this.grandparentKey = grandparentKey;
+            return this;
+        }
+
+        public Builder grandparentTitle(String grandparentTitle) {
+            Utils.checkNotNull(grandparentTitle, "grandparentTitle");
+            this.grandparentTitle = Optional.ofNullable(grandparentTitle);
+            return this;
+        }
+
+        public Builder grandparentTitle(Optional<String> grandparentTitle) {
+            Utils.checkNotNull(grandparentTitle, "grandparentTitle");
+            this.grandparentTitle = grandparentTitle;
+            return this;
+        }
+
+        public Builder grandparentThumb(String grandparentThumb) {
+            Utils.checkNotNull(grandparentThumb, "grandparentThumb");
+            this.grandparentThumb = Optional.ofNullable(grandparentThumb);
+            return this;
+        }
+
+        public Builder grandparentThumb(Optional<String> grandparentThumb) {
+            Utils.checkNotNull(grandparentThumb, "grandparentThumb");
+            this.grandparentThumb = grandparentThumb;
+            return this;
+        }
+
+        public Builder parentSlug(String parentSlug) {
+            Utils.checkNotNull(parentSlug, "parentSlug");
+            this.parentSlug = Optional.ofNullable(parentSlug);
+            return this;
+        }
+
+        public Builder parentSlug(Optional<String> parentSlug) {
+            Utils.checkNotNull(parentSlug, "parentSlug");
+            this.parentSlug = parentSlug;
+            return this;
+        }
+
+        public Builder grandparentSlug(String grandparentSlug) {
+            Utils.checkNotNull(grandparentSlug, "grandparentSlug");
+            this.grandparentSlug = Optional.ofNullable(grandparentSlug);
+            return this;
+        }
+
+        public Builder grandparentSlug(Optional<String> grandparentSlug) {
+            Utils.checkNotNull(grandparentSlug, "grandparentSlug");
+            this.grandparentSlug = grandparentSlug;
+            return this;
+        }
+
+        public Builder grandparentArt(String grandparentArt) {
+            Utils.checkNotNull(grandparentArt, "grandparentArt");
+            this.grandparentArt = Optional.ofNullable(grandparentArt);
+            return this;
+        }
+
+        public Builder grandparentArt(Optional<String> grandparentArt) {
+            Utils.checkNotNull(grandparentArt, "grandparentArt");
+            this.grandparentArt = grandparentArt;
+            return this;
+        }
+
+        public Builder grandparentTheme(String grandparentTheme) {
+            Utils.checkNotNull(grandparentTheme, "grandparentTheme");
+            this.grandparentTheme = Optional.ofNullable(grandparentTheme);
+            return this;
+        }
+
+        public Builder grandparentTheme(Optional<String> grandparentTheme) {
+            Utils.checkNotNull(grandparentTheme, "grandparentTheme");
+            this.grandparentTheme = grandparentTheme;
+            return this;
+        }
+
+        /**
+         * The Media object is only included when type query is `4` or higher.
+         * 
+         */
         public Builder media(List<Media> media) {
             Utils.checkNotNull(media, "media");
             this.media = Optional.ofNullable(media);
             return this;
         }
 
+        /**
+         * The Media object is only included when type query is `4` or higher.
+         * 
+         */
         public Builder media(Optional<? extends List<Media>> media) {
             Utils.checkNotNull(media, "media");
             this.media = media;
@@ -1331,6 +2791,18 @@ public class GetRecentlyAddedMetadata {
         public Builder genre(Optional<? extends List<Genre>> genre) {
             Utils.checkNotNull(genre, "genre");
             this.genre = genre;
+            return this;
+        }
+
+        public Builder country(List<Country> country) {
+            Utils.checkNotNull(country, "country");
+            this.country = Optional.ofNullable(country);
+            return this;
+        }
+
+        public Builder country(Optional<? extends List<Country>> country) {
+            Utils.checkNotNull(country, "country");
+            this.country = country;
             return this;
         }
 
@@ -1358,15 +2830,15 @@ public class GetRecentlyAddedMetadata {
             return this;
         }
 
-        public Builder country(List<Country> country) {
-            Utils.checkNotNull(country, "country");
-            this.country = Optional.ofNullable(country);
+        public Builder collection(List<Collection> collection) {
+            Utils.checkNotNull(collection, "collection");
+            this.collection = Optional.ofNullable(collection);
             return this;
         }
 
-        public Builder country(Optional<? extends List<Country>> country) {
-            Utils.checkNotNull(country, "country");
-            this.country = country;
+        public Builder collection(Optional<? extends List<Collection>> collection) {
+            Utils.checkNotNull(collection, "collection");
+            this.collection = collection;
             return this;
         }
 
@@ -1381,27 +2853,362 @@ public class GetRecentlyAddedMetadata {
             this.role = role;
             return this;
         }
+
+        /**
+         * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
+         * 
+         */
+        public Builder mediaGuid(List<MediaGuid> mediaGuid) {
+            Utils.checkNotNull(mediaGuid, "mediaGuid");
+            this.mediaGuid = Optional.ofNullable(mediaGuid);
+            return this;
+        }
+
+        /**
+         * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
+         * 
+         */
+        public Builder mediaGuid(Optional<? extends List<MediaGuid>> mediaGuid) {
+            Utils.checkNotNull(mediaGuid, "mediaGuid");
+            this.mediaGuid = mediaGuid;
+            return this;
+        }
+
+        public Builder ultraBlurColors(UltraBlurColors ultraBlurColors) {
+            Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
+            this.ultraBlurColors = Optional.ofNullable(ultraBlurColors);
+            return this;
+        }
+
+        public Builder ultraBlurColors(Optional<? extends UltraBlurColors> ultraBlurColors) {
+            Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
+            this.ultraBlurColors = ultraBlurColors;
+            return this;
+        }
+
+        public Builder metaDataRating(List<MetaDataRating> metaDataRating) {
+            Utils.checkNotNull(metaDataRating, "metaDataRating");
+            this.metaDataRating = Optional.ofNullable(metaDataRating);
+            return this;
+        }
+
+        public Builder metaDataRating(Optional<? extends List<MetaDataRating>> metaDataRating) {
+            Utils.checkNotNull(metaDataRating, "metaDataRating");
+            this.metaDataRating = metaDataRating;
+            return this;
+        }
+
+        public Builder image(List<GetRecentlyAddedImage> image) {
+            Utils.checkNotNull(image, "image");
+            this.image = Optional.ofNullable(image);
+            return this;
+        }
+
+        public Builder image(Optional<? extends List<GetRecentlyAddedImage>> image) {
+            Utils.checkNotNull(image, "image");
+            this.image = image;
+            return this;
+        }
+
+        public Builder titleSort(String titleSort) {
+            Utils.checkNotNull(titleSort, "titleSort");
+            this.titleSort = Optional.ofNullable(titleSort);
+            return this;
+        }
+
+        public Builder titleSort(Optional<String> titleSort) {
+            Utils.checkNotNull(titleSort, "titleSort");
+            this.titleSort = titleSort;
+            return this;
+        }
+
+        public Builder viewCount(int viewCount) {
+            Utils.checkNotNull(viewCount, "viewCount");
+            this.viewCount = Optional.ofNullable(viewCount);
+            return this;
+        }
+
+        public Builder viewCount(Optional<Integer> viewCount) {
+            Utils.checkNotNull(viewCount, "viewCount");
+            this.viewCount = viewCount;
+            return this;
+        }
+
+        public Builder lastViewedAt(int lastViewedAt) {
+            Utils.checkNotNull(lastViewedAt, "lastViewedAt");
+            this.lastViewedAt = Optional.ofNullable(lastViewedAt);
+            return this;
+        }
+
+        public Builder lastViewedAt(Optional<Integer> lastViewedAt) {
+            Utils.checkNotNull(lastViewedAt, "lastViewedAt");
+            this.lastViewedAt = lastViewedAt;
+            return this;
+        }
+
+        public Builder originalTitle(String originalTitle) {
+            Utils.checkNotNull(originalTitle, "originalTitle");
+            this.originalTitle = Optional.ofNullable(originalTitle);
+            return this;
+        }
+
+        public Builder originalTitle(Optional<String> originalTitle) {
+            Utils.checkNotNull(originalTitle, "originalTitle");
+            this.originalTitle = originalTitle;
+            return this;
+        }
+
+        public Builder viewOffset(int viewOffset) {
+            Utils.checkNotNull(viewOffset, "viewOffset");
+            this.viewOffset = Optional.ofNullable(viewOffset);
+            return this;
+        }
+
+        public Builder viewOffset(Optional<Integer> viewOffset) {
+            Utils.checkNotNull(viewOffset, "viewOffset");
+            this.viewOffset = viewOffset;
+            return this;
+        }
+
+        public Builder skipCount(int skipCount) {
+            Utils.checkNotNull(skipCount, "skipCount");
+            this.skipCount = Optional.ofNullable(skipCount);
+            return this;
+        }
+
+        public Builder skipCount(Optional<Integer> skipCount) {
+            Utils.checkNotNull(skipCount, "skipCount");
+            this.skipCount = skipCount;
+            return this;
+        }
+
+        public Builder index(int index) {
+            Utils.checkNotNull(index, "index");
+            this.index = Optional.ofNullable(index);
+            return this;
+        }
+
+        public Builder index(Optional<Integer> index) {
+            Utils.checkNotNull(index, "index");
+            this.index = index;
+            return this;
+        }
+
+        public Builder theme(String theme) {
+            Utils.checkNotNull(theme, "theme");
+            this.theme = Optional.ofNullable(theme);
+            return this;
+        }
+
+        public Builder theme(Optional<String> theme) {
+            Utils.checkNotNull(theme, "theme");
+            this.theme = theme;
+            return this;
+        }
+
+        public Builder leafCount(int leafCount) {
+            Utils.checkNotNull(leafCount, "leafCount");
+            this.leafCount = Optional.ofNullable(leafCount);
+            return this;
+        }
+
+        public Builder leafCount(Optional<Integer> leafCount) {
+            Utils.checkNotNull(leafCount, "leafCount");
+            this.leafCount = leafCount;
+            return this;
+        }
+
+        public Builder viewedLeafCount(int viewedLeafCount) {
+            Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
+            this.viewedLeafCount = Optional.ofNullable(viewedLeafCount);
+            return this;
+        }
+
+        public Builder viewedLeafCount(Optional<Integer> viewedLeafCount) {
+            Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
+            this.viewedLeafCount = viewedLeafCount;
+            return this;
+        }
+
+        public Builder childCount(int childCount) {
+            Utils.checkNotNull(childCount, "childCount");
+            this.childCount = Optional.ofNullable(childCount);
+            return this;
+        }
+
+        public Builder childCount(Optional<Integer> childCount) {
+            Utils.checkNotNull(childCount, "childCount");
+            this.childCount = childCount;
+            return this;
+        }
+
+        public Builder hasPremiumExtras(String hasPremiumExtras) {
+            Utils.checkNotNull(hasPremiumExtras, "hasPremiumExtras");
+            this.hasPremiumExtras = Optional.ofNullable(hasPremiumExtras);
+            return this;
+        }
+
+        public Builder hasPremiumExtras(Optional<String> hasPremiumExtras) {
+            Utils.checkNotNull(hasPremiumExtras, "hasPremiumExtras");
+            this.hasPremiumExtras = hasPremiumExtras;
+            return this;
+        }
+
+        public Builder hasPremiumPrimaryExtra(String hasPremiumPrimaryExtra) {
+            Utils.checkNotNull(hasPremiumPrimaryExtra, "hasPremiumPrimaryExtra");
+            this.hasPremiumPrimaryExtra = Optional.ofNullable(hasPremiumPrimaryExtra);
+            return this;
+        }
+
+        public Builder hasPremiumPrimaryExtra(Optional<String> hasPremiumPrimaryExtra) {
+            Utils.checkNotNull(hasPremiumPrimaryExtra, "hasPremiumPrimaryExtra");
+            this.hasPremiumPrimaryExtra = hasPremiumPrimaryExtra;
+            return this;
+        }
+
+        /**
+         * The rating key of the parent item.
+         * 
+         */
+        public Builder parentRatingKey(String parentRatingKey) {
+            Utils.checkNotNull(parentRatingKey, "parentRatingKey");
+            this.parentRatingKey = Optional.ofNullable(parentRatingKey);
+            return this;
+        }
+
+        /**
+         * The rating key of the parent item.
+         * 
+         */
+        public Builder parentRatingKey(Optional<String> parentRatingKey) {
+            Utils.checkNotNull(parentRatingKey, "parentRatingKey");
+            this.parentRatingKey = parentRatingKey;
+            return this;
+        }
+
+        public Builder parentGuid(String parentGuid) {
+            Utils.checkNotNull(parentGuid, "parentGuid");
+            this.parentGuid = Optional.ofNullable(parentGuid);
+            return this;
+        }
+
+        public Builder parentGuid(Optional<String> parentGuid) {
+            Utils.checkNotNull(parentGuid, "parentGuid");
+            this.parentGuid = parentGuid;
+            return this;
+        }
+
+        public Builder parentStudio(String parentStudio) {
+            Utils.checkNotNull(parentStudio, "parentStudio");
+            this.parentStudio = Optional.ofNullable(parentStudio);
+            return this;
+        }
+
+        public Builder parentStudio(Optional<String> parentStudio) {
+            Utils.checkNotNull(parentStudio, "parentStudio");
+            this.parentStudio = parentStudio;
+            return this;
+        }
+
+        public Builder parentKey(String parentKey) {
+            Utils.checkNotNull(parentKey, "parentKey");
+            this.parentKey = Optional.ofNullable(parentKey);
+            return this;
+        }
+
+        public Builder parentKey(Optional<String> parentKey) {
+            Utils.checkNotNull(parentKey, "parentKey");
+            this.parentKey = parentKey;
+            return this;
+        }
+
+        public Builder parentTitle(String parentTitle) {
+            Utils.checkNotNull(parentTitle, "parentTitle");
+            this.parentTitle = Optional.ofNullable(parentTitle);
+            return this;
+        }
+
+        public Builder parentTitle(Optional<String> parentTitle) {
+            Utils.checkNotNull(parentTitle, "parentTitle");
+            this.parentTitle = parentTitle;
+            return this;
+        }
+
+        public Builder parentIndex(int parentIndex) {
+            Utils.checkNotNull(parentIndex, "parentIndex");
+            this.parentIndex = Optional.ofNullable(parentIndex);
+            return this;
+        }
+
+        public Builder parentIndex(Optional<Integer> parentIndex) {
+            Utils.checkNotNull(parentIndex, "parentIndex");
+            this.parentIndex = parentIndex;
+            return this;
+        }
+
+        public Builder parentYear(int parentYear) {
+            Utils.checkNotNull(parentYear, "parentYear");
+            this.parentYear = Optional.ofNullable(parentYear);
+            return this;
+        }
+
+        public Builder parentYear(Optional<Integer> parentYear) {
+            Utils.checkNotNull(parentYear, "parentYear");
+            this.parentYear = parentYear;
+            return this;
+        }
+
+        public Builder parentThumb(String parentThumb) {
+            Utils.checkNotNull(parentThumb, "parentThumb");
+            this.parentThumb = Optional.ofNullable(parentThumb);
+            return this;
+        }
+
+        public Builder parentThumb(Optional<String> parentThumb) {
+            Utils.checkNotNull(parentThumb, "parentThumb");
+            this.parentThumb = parentThumb;
+            return this;
+        }
+
+        public Builder parentTheme(String parentTheme) {
+            Utils.checkNotNull(parentTheme, "parentTheme");
+            this.parentTheme = Optional.ofNullable(parentTheme);
+            return this;
+        }
+
+        public Builder parentTheme(Optional<String> parentTheme) {
+            Utils.checkNotNull(parentTheme, "parentTheme");
+            this.parentTheme = parentTheme;
+            return this;
+        }
         
         public GetRecentlyAddedMetadata build() {
-            return new GetRecentlyAddedMetadata(
-                allowSync,
-                librarySectionID,
-                librarySectionTitle,
-                librarySectionUUID,
+            if (flattenSeasons == null) {
+                flattenSeasons = _SINGLETON_VALUE_FlattenSeasons.value();
+            }            return new GetRecentlyAddedMetadata(
                 ratingKey,
                 key,
                 guid,
                 studio,
+                skipChildren,
+                librarySectionID,
+                librarySectionTitle,
+                librarySectionKey,
                 type,
                 title,
+                slug,
                 contentRating,
                 summary,
                 rating,
                 audienceRating,
                 year,
+                seasonCount,
                 tagline,
+                flattenSeasons,
+                showOrdering,
                 thumb,
                 art,
+                banner,
                 duration,
                 originallyAvailableAt,
                 addedAt,
@@ -1410,13 +3217,55 @@ public class GetRecentlyAddedMetadata {
                 chapterSource,
                 primaryExtraKey,
                 ratingImage,
+                grandparentRatingKey,
+                grandparentGuid,
+                grandparentKey,
+                grandparentTitle,
+                grandparentThumb,
+                parentSlug,
+                grandparentSlug,
+                grandparentArt,
+                grandparentTheme,
                 media,
                 genre,
+                country,
                 director,
                 writer,
-                country,
-                role);
+                collection,
+                role,
+                mediaGuid,
+                ultraBlurColors,
+                metaDataRating,
+                image,
+                titleSort,
+                viewCount,
+                lastViewedAt,
+                originalTitle,
+                viewOffset,
+                skipCount,
+                index,
+                theme,
+                leafCount,
+                viewedLeafCount,
+                childCount,
+                hasPremiumExtras,
+                hasPremiumPrimaryExtra,
+                parentRatingKey,
+                parentGuid,
+                parentStudio,
+                parentKey,
+                parentTitle,
+                parentIndex,
+                parentYear,
+                parentThumb,
+                parentTheme);
         }
+
+        private static final LazySingletonValue<Optional<? extends FlattenSeasons>> _SINGLETON_VALUE_FlattenSeasons =
+                new LazySingletonValue<>(
+                        "flattenSeasons",
+                        "\"0\"",
+                        new TypeReference<Optional<? extends FlattenSeasons>>() {});
     }
 }
 

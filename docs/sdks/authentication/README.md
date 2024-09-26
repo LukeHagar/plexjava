@@ -105,7 +105,7 @@ public class Application {
             .build();
 
         GetSourceConnectionInformationResponse res = sdk.authentication().getSourceConnectionInformation()
-                .source("provider://provider-identifier")
+                .source("server://client-identifier")
                 .call();
 
         // handle response
@@ -201,6 +201,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.PostUsersSignInDataBadRequest;
 import dev.plexapi.sdk.models.errors.PostUsersSignInDataUnauthorized;
+import dev.plexapi.sdk.models.operations.PostUsersSignInDataRequest;
 import dev.plexapi.sdk.models.operations.PostUsersSignInDataRequestBody;
 import dev.plexapi.sdk.models.operations.PostUsersSignInDataResponse;
 import java.lang.Exception;
@@ -217,10 +218,12 @@ public class Application {
                 .deviceName("Linux")
             .build();
 
-        PostUsersSignInDataRequestBody req = PostUsersSignInDataRequestBody.builder()
-                .login("username@email.com")
-                .password("password123")
-                .verificationCode("123456")
+        PostUsersSignInDataRequest req = PostUsersSignInDataRequest.builder()
+                .requestBody(PostUsersSignInDataRequestBody.builder()
+                    .login("username@email.com")
+                    .password("password123")
+                    .verificationCode("123456")
+                    .build())
                 .build();
 
         PostUsersSignInDataResponse res = sdk.authentication().postUsersSignInData()
@@ -236,10 +239,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
-| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `request`                                                                                   | [PostUsersSignInDataRequestBody](../../models/operations/PostUsersSignInDataRequestBody.md) | :heavy_check_mark:                                                                          | The request object to use for the request.                                                  |
-| `serverURL`                                                                                 | *String*                                                                                    | :heavy_minus_sign:                                                                          | An optional server URL to use.                                                              |
+| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `request`                                                                           | [PostUsersSignInDataRequest](../../models/operations/PostUsersSignInDataRequest.md) | :heavy_check_mark:                                                                  | The request object to use for the request.                                          |
+| `serverURL`                                                                         | *String*                                                                            | :heavy_minus_sign:                                                                  | An optional server URL to use.                                                      |
 
 ### Response
 

@@ -19,17 +19,14 @@ import java.util.Optional;
 
 public class Field {
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
-    private Optional<String> key;
+    private String key;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
-    private Optional<String> title;
+    private String title;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
-    private Optional<String> type;
+    private String type;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("subType")
@@ -37,9 +34,9 @@ public class Field {
 
     @JsonCreator
     public Field(
-            @JsonProperty("key") Optional<String> key,
-            @JsonProperty("title") Optional<String> title,
-            @JsonProperty("type") Optional<String> type,
+            @JsonProperty("key") String key,
+            @JsonProperty("title") String title,
+            @JsonProperty("type") String type,
             @JsonProperty("subType") Optional<String> subType) {
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(title, "title");
@@ -51,22 +48,25 @@ public class Field {
         this.subType = subType;
     }
     
-    public Field() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    public Field(
+            String key,
+            String title,
+            String type) {
+        this(key, title, type, Optional.empty());
     }
 
     @JsonIgnore
-    public Optional<String> key() {
+    public String key() {
         return key;
     }
 
     @JsonIgnore
-    public Optional<String> title() {
+    public String title() {
         return title;
     }
 
     @JsonIgnore
-    public Optional<String> type() {
+    public String type() {
         return type;
     }
 
@@ -81,35 +81,17 @@ public class Field {
 
     public Field withKey(String key) {
         Utils.checkNotNull(key, "key");
-        this.key = Optional.ofNullable(key);
-        return this;
-    }
-
-    public Field withKey(Optional<String> key) {
-        Utils.checkNotNull(key, "key");
         this.key = key;
         return this;
     }
 
     public Field withTitle(String title) {
         Utils.checkNotNull(title, "title");
-        this.title = Optional.ofNullable(title);
-        return this;
-    }
-
-    public Field withTitle(Optional<String> title) {
-        Utils.checkNotNull(title, "title");
         this.title = title;
         return this;
     }
 
     public Field withType(String type) {
-        Utils.checkNotNull(type, "type");
-        this.type = Optional.ofNullable(type);
-        return this;
-    }
-
-    public Field withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -163,11 +145,11 @@ public class Field {
     
     public final static class Builder {
  
-        private Optional<String> key = Optional.empty();
+        private String key;
  
-        private Optional<String> title = Optional.empty();
+        private String title;
  
-        private Optional<String> type = Optional.empty();
+        private String type;
  
         private Optional<String> subType = Optional.empty();  
         
@@ -177,35 +159,17 @@ public class Field {
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
-            this.key = Optional.ofNullable(key);
-            return this;
-        }
-
-        public Builder key(Optional<String> key) {
-            Utils.checkNotNull(key, "key");
             this.key = key;
             return this;
         }
 
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
-            this.title = Optional.ofNullable(title);
-            return this;
-        }
-
-        public Builder title(Optional<String> title) {
-            Utils.checkNotNull(title, "title");
             this.title = title;
             return this;
         }
 
         public Builder type(String type) {
-            Utils.checkNotNull(type, "type");
-            this.type = Optional.ofNullable(type);
-            return this;
-        }
-
-        public Builder type(Optional<String> type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;

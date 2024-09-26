@@ -37,7 +37,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'dev.plexapi:plexapi:0.4.1'
+implementation 'dev.plexapi:plexapi:0.5.0'
 ```
 
 Maven:
@@ -45,7 +45,7 @@ Maven:
 <dependency>
     <groupId>dev.plexapi</groupId>
     <artifactId>plexapi</artifactId>
-    <version>0.4.1</version>
+    <version>0.5.0</version>
 </dependency>
 ```
 
@@ -131,12 +131,13 @@ public class Application {
 ### [hubs()](docs/sdks/hubs/README.md)
 
 * [getGlobalHubs](docs/sdks/hubs/README.md#getglobalhubs) - Get Global Hubs
+* [getRecentlyAdded](docs/sdks/hubs/README.md#getrecentlyadded) - Get Recently Added
 * [getLibraryHubs](docs/sdks/hubs/README.md#getlibraryhubs) - Get library specific hubs
 
 ### [library()](docs/sdks/library/README.md)
 
 * [getFileHash](docs/sdks/library/README.md#getfilehash) - Get Hash Value
-* [getRecentlyAdded](docs/sdks/library/README.md#getrecentlyadded) - Get Recently Added
+* [getRecentlyAddedLibrary](docs/sdks/library/README.md#getrecentlyaddedlibrary) - Get Recently Added
 * [getAllLibraries](docs/sdks/library/README.md#getalllibraries) - Get All Libraries
 * [getLibraryDetails](docs/sdks/library/README.md#getlibrarydetails) - Get Library Details
 * [deleteLibrary](docs/sdks/library/README.md#deletelibrary) - Delete Library Section
