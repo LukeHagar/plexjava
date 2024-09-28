@@ -179,7 +179,7 @@ public class GetTokenDetailsUserPlexAccount {
     private Optional<Boolean> mailingListActive;
 
     /**
-     * Your current mailing list status
+     * Your current mailing list status (active or unsubscribed)
      */
     @JsonProperty("mailingListStatus")
     private MailingListStatus mailingListStatus;
@@ -617,7 +617,7 @@ public class GetTokenDetailsUserPlexAccount {
     }
 
     /**
-     * Your current mailing list status
+     * Your current mailing list status (active or unsubscribed)
      */
     @JsonIgnore
     public MailingListStatus mailingListStatus() {
@@ -1088,7 +1088,7 @@ public class GetTokenDetailsUserPlexAccount {
     }
 
     /**
-     * Your current mailing list status
+     * Your current mailing list status (active or unsubscribed)
      */
     public GetTokenDetailsUserPlexAccount withMailingListStatus(MailingListStatus mailingListStatus) {
         Utils.checkNotNull(mailingListStatus, "mailingListStatus");
@@ -1869,7 +1869,7 @@ public class GetTokenDetailsUserPlexAccount {
         }
 
         /**
-         * Your current mailing list status
+         * Your current mailing list status (active or unsubscribed)
          */
         public Builder mailingListStatus(MailingListStatus mailingListStatus) {
             Utils.checkNotNull(mailingListStatus, "mailingListStatus");

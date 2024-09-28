@@ -62,14 +62,14 @@ public class Authentication implements
      * GET_TOKEN_DETAILS_SERVERS contains the list of server urls available to the SDK.
      */
     public static final String[] GET_TOKEN_DETAILS_SERVERS = {
-        "https://plex.tv/api/v2/",
+        "https://plex.tv/api/v2",
     };
     
     /**
      * POST_USERS_SIGN_IN_DATA_SERVERS contains the list of server urls available to the SDK.
      */
     public static final String[] POST_USERS_SIGN_IN_DATA_SERVERS = {
-        "https://plex.tv/api/v2/",
+        "https://plex.tv/api/v2",
     };
 
     private final SDKConfiguration sdkConfiguration;

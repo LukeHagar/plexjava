@@ -12,7 +12,7 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: true
 java:
-  version: 0.5.0
+  version: 0.6.0
   additionalDependencies: []
   additionalPlugins: []
   artifactID: plexapi

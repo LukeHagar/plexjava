@@ -1790,6 +1790,7 @@ actions:
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.GetTokenByPinIdBadRequest;
             import dev.plexapi.plexapi.models.errors.GetTokenByPinIdResponseBody;
+            import dev.plexapi.plexapi.models.operations.GetTokenByPinIdRequest;
             import dev.plexapi.plexapi.models.operations.GetTokenByPinIdResponse;
             import java.lang.Exception;
 
@@ -1805,8 +1806,12 @@ actions:
                             .deviceName("Linux")
                         .build();
 
-                    GetTokenByPinIdResponse res = sdk.plex().getTokenByPinId()
+                    GetTokenByPinIdRequest req = GetTokenByPinIdRequest.builder()
                             .pinID(408895L)
+                            .build();
+
+                    GetTokenByPinIdResponse res = sdk.plex().getTokenByPinId()
+                            .request(req)
                             .call();
 
                     if (res.authPinContainer().isPresent()) {

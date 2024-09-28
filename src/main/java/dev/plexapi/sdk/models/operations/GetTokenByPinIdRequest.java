@@ -13,6 +13,7 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
+import java.util.Optional;
 
 
 public class GetTokenByPinIdRequest {
@@ -23,11 +24,52 @@ public class GetTokenByPinIdRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=pinID")
     private long pinID;
 
+    /**
+     * The unique identifier for the client application
+     * This is used to track the client application and its usage
+     * (UUID, serial number, or other number unique per device)
+     * 
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Client-Identifier")
+    private Optional<String> clientID;
+
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Product")
+    private Optional<String> clientName;
+
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Device")
+    private Optional<String> deviceName;
+
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Version")
+    private Optional<String> clientVersion;
+
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Platform")
+    private Optional<String> clientPlatform;
+
     @JsonCreator
     public GetTokenByPinIdRequest(
-            long pinID) {
+            long pinID,
+            Optional<String> clientID,
+            Optional<String> clientName,
+            Optional<String> deviceName,
+            Optional<String> clientVersion,
+            Optional<String> clientPlatform) {
         Utils.checkNotNull(pinID, "pinID");
+        Utils.checkNotNull(clientID, "clientID");
+        Utils.checkNotNull(clientName, "clientName");
+        Utils.checkNotNull(deviceName, "deviceName");
+        Utils.checkNotNull(clientVersion, "clientVersion");
+        Utils.checkNotNull(clientPlatform, "clientPlatform");
         this.pinID = pinID;
+        this.clientID = clientID;
+        this.clientName = clientName;
+        this.deviceName = deviceName;
+        this.clientVersion = clientVersion;
+        this.clientPlatform = clientPlatform;
+    }
+    
+    public GetTokenByPinIdRequest(
+            long pinID) {
+        this(pinID, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -36,6 +78,37 @@ public class GetTokenByPinIdRequest {
     @JsonIgnore
     public long pinID() {
         return pinID;
+    }
+
+    /**
+     * The unique identifier for the client application
+     * This is used to track the client application and its usage
+     * (UUID, serial number, or other number unique per device)
+     * 
+     */
+    @JsonIgnore
+    public Optional<String> clientID() {
+        return clientID;
+    }
+
+    @JsonIgnore
+    public Optional<String> clientName() {
+        return clientName;
+    }
+
+    @JsonIgnore
+    public Optional<String> deviceName() {
+        return deviceName;
+    }
+
+    @JsonIgnore
+    public Optional<String> clientVersion() {
+        return clientVersion;
+    }
+
+    @JsonIgnore
+    public Optional<String> clientPlatform() {
+        return clientPlatform;
     }
 
     public final static Builder builder() {
@@ -50,6 +123,78 @@ public class GetTokenByPinIdRequest {
         this.pinID = pinID;
         return this;
     }
+
+    /**
+     * The unique identifier for the client application
+     * This is used to track the client application and its usage
+     * (UUID, serial number, or other number unique per device)
+     * 
+     */
+    public GetTokenByPinIdRequest withClientID(String clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = Optional.ofNullable(clientID);
+        return this;
+    }
+
+    /**
+     * The unique identifier for the client application
+     * This is used to track the client application and its usage
+     * (UUID, serial number, or other number unique per device)
+     * 
+     */
+    public GetTokenByPinIdRequest withClientID(Optional<String> clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = clientID;
+        return this;
+    }
+
+    public GetTokenByPinIdRequest withClientName(String clientName) {
+        Utils.checkNotNull(clientName, "clientName");
+        this.clientName = Optional.ofNullable(clientName);
+        return this;
+    }
+
+    public GetTokenByPinIdRequest withClientName(Optional<String> clientName) {
+        Utils.checkNotNull(clientName, "clientName");
+        this.clientName = clientName;
+        return this;
+    }
+
+    public GetTokenByPinIdRequest withDeviceName(String deviceName) {
+        Utils.checkNotNull(deviceName, "deviceName");
+        this.deviceName = Optional.ofNullable(deviceName);
+        return this;
+    }
+
+    public GetTokenByPinIdRequest withDeviceName(Optional<String> deviceName) {
+        Utils.checkNotNull(deviceName, "deviceName");
+        this.deviceName = deviceName;
+        return this;
+    }
+
+    public GetTokenByPinIdRequest withClientVersion(String clientVersion) {
+        Utils.checkNotNull(clientVersion, "clientVersion");
+        this.clientVersion = Optional.ofNullable(clientVersion);
+        return this;
+    }
+
+    public GetTokenByPinIdRequest withClientVersion(Optional<String> clientVersion) {
+        Utils.checkNotNull(clientVersion, "clientVersion");
+        this.clientVersion = clientVersion;
+        return this;
+    }
+
+    public GetTokenByPinIdRequest withClientPlatform(String clientPlatform) {
+        Utils.checkNotNull(clientPlatform, "clientPlatform");
+        this.clientPlatform = Optional.ofNullable(clientPlatform);
+        return this;
+    }
+
+    public GetTokenByPinIdRequest withClientPlatform(Optional<String> clientPlatform) {
+        Utils.checkNotNull(clientPlatform, "clientPlatform");
+        this.clientPlatform = clientPlatform;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -61,24 +206,49 @@ public class GetTokenByPinIdRequest {
         }
         GetTokenByPinIdRequest other = (GetTokenByPinIdRequest) o;
         return 
-            Objects.deepEquals(this.pinID, other.pinID);
+            Objects.deepEquals(this.pinID, other.pinID) &&
+            Objects.deepEquals(this.clientID, other.clientID) &&
+            Objects.deepEquals(this.clientName, other.clientName) &&
+            Objects.deepEquals(this.deviceName, other.deviceName) &&
+            Objects.deepEquals(this.clientVersion, other.clientVersion) &&
+            Objects.deepEquals(this.clientPlatform, other.clientPlatform);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
-            pinID);
+            pinID,
+            clientID,
+            clientName,
+            deviceName,
+            clientVersion,
+            clientPlatform);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetTokenByPinIdRequest.class,
-                "pinID", pinID);
+                "pinID", pinID,
+                "clientID", clientID,
+                "clientName", clientName,
+                "deviceName", deviceName,
+                "clientVersion", clientVersion,
+                "clientPlatform", clientPlatform);
     }
     
     public final static class Builder {
  
-        private Long pinID;  
+        private Long pinID;
+ 
+        private Optional<String> clientID = Optional.empty();
+ 
+        private Optional<String> clientName = Optional.empty();
+ 
+        private Optional<String> deviceName = Optional.empty();
+ 
+        private Optional<String> clientVersion = Optional.empty();
+ 
+        private Optional<String> clientPlatform = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -92,10 +262,87 @@ public class GetTokenByPinIdRequest {
             this.pinID = pinID;
             return this;
         }
+
+        /**
+         * The unique identifier for the client application
+         * This is used to track the client application and its usage
+         * (UUID, serial number, or other number unique per device)
+         * 
+         */
+        public Builder clientID(String clientID) {
+            Utils.checkNotNull(clientID, "clientID");
+            this.clientID = Optional.ofNullable(clientID);
+            return this;
+        }
+
+        /**
+         * The unique identifier for the client application
+         * This is used to track the client application and its usage
+         * (UUID, serial number, or other number unique per device)
+         * 
+         */
+        public Builder clientID(Optional<String> clientID) {
+            Utils.checkNotNull(clientID, "clientID");
+            this.clientID = clientID;
+            return this;
+        }
+
+        public Builder clientName(String clientName) {
+            Utils.checkNotNull(clientName, "clientName");
+            this.clientName = Optional.ofNullable(clientName);
+            return this;
+        }
+
+        public Builder clientName(Optional<String> clientName) {
+            Utils.checkNotNull(clientName, "clientName");
+            this.clientName = clientName;
+            return this;
+        }
+
+        public Builder deviceName(String deviceName) {
+            Utils.checkNotNull(deviceName, "deviceName");
+            this.deviceName = Optional.ofNullable(deviceName);
+            return this;
+        }
+
+        public Builder deviceName(Optional<String> deviceName) {
+            Utils.checkNotNull(deviceName, "deviceName");
+            this.deviceName = deviceName;
+            return this;
+        }
+
+        public Builder clientVersion(String clientVersion) {
+            Utils.checkNotNull(clientVersion, "clientVersion");
+            this.clientVersion = Optional.ofNullable(clientVersion);
+            return this;
+        }
+
+        public Builder clientVersion(Optional<String> clientVersion) {
+            Utils.checkNotNull(clientVersion, "clientVersion");
+            this.clientVersion = clientVersion;
+            return this;
+        }
+
+        public Builder clientPlatform(String clientPlatform) {
+            Utils.checkNotNull(clientPlatform, "clientPlatform");
+            this.clientPlatform = Optional.ofNullable(clientPlatform);
+            return this;
+        }
+
+        public Builder clientPlatform(Optional<String> clientPlatform) {
+            Utils.checkNotNull(clientPlatform, "clientPlatform");
+            this.clientPlatform = clientPlatform;
+            return this;
+        }
         
         public GetTokenByPinIdRequest build() {
             return new GetTokenByPinIdRequest(
-                pinID);
+                pinID,
+                clientID,
+                clientName,
+                deviceName,
+                clientVersion,
+                clientPlatform);
         }
     }
 }

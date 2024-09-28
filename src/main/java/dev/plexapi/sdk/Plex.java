@@ -79,42 +79,42 @@ public class Plex implements
      * GET_COMPANIONS_DATA_SERVERS contains the list of server urls available to the SDK.
      */
     public static final String[] GET_COMPANIONS_DATA_SERVERS = {
-        "https://plex.tv/api/v2/",
+        "https://plex.tv/api/v2",
     };
     
     /**
      * GET_USER_FRIENDS_SERVERS contains the list of server urls available to the SDK.
      */
     public static final String[] GET_USER_FRIENDS_SERVERS = {
-        "https://plex.tv/api/v2/",
+        "https://plex.tv/api/v2",
     };
     
     /**
      * GET_GEO_DATA_SERVERS contains the list of server urls available to the SDK.
      */
     public static final String[] GET_GEO_DATA_SERVERS = {
-        "https://plex.tv/api/v2/",
+        "https://plex.tv/api/v2",
     };
     
     /**
      * GET_SERVER_RESOURCES_SERVERS contains the list of server urls available to the SDK.
      */
     public static final String[] GET_SERVER_RESOURCES_SERVERS = {
-        "https://plex.tv/api/v2/",
+        "https://plex.tv/api/v2",
     };
     
     /**
      * GET_PIN_SERVERS contains the list of server urls available to the SDK.
      */
     public static final String[] GET_PIN_SERVERS = {
-        "https://plex.tv/api/v2/",
+        "https://plex.tv/api/v2",
     };
     
     /**
      * GET_TOKEN_BY_PIN_ID_SERVERS contains the list of server urls available to the SDK.
      */
     public static final String[] GET_TOKEN_BY_PIN_ID_SERVERS = {
-        "https://plex.tv/api/v2/",
+        "https://plex.tv/api/v2",
     };
 
     private final SDKConfiguration sdkConfiguration;
@@ -1096,32 +1096,26 @@ public class Plex implements
     /**
      * Get Access Token by PinId
      * Retrieve an Access Token from Plex.tv after the Pin has been authenticated
-     * @param pinID The PinID to retrieve an access token for
+     * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetTokenByPinIdResponse getTokenByPinId(
-            long pinID) throws Exception {
-        return getTokenByPinId(pinID, Optional.empty());
+            GetTokenByPinIdRequest request) throws Exception {
+        return getTokenByPinId(request, Optional.empty());
     }
     
     /**
      * Get Access Token by PinId
      * Retrieve an Access Token from Plex.tv after the Pin has been authenticated
-     * @param pinID The PinID to retrieve an access token for
+     * @param request The request object containing all of the parameters for the API call.
      * @param serverURL Overrides the server URL.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetTokenByPinIdResponse getTokenByPinId(
-            long pinID,
+            GetTokenByPinIdRequest request,
             Optional<String> serverURL) throws Exception {
-        GetTokenByPinIdRequest request =
-            GetTokenByPinIdRequest
-                .builder()
-                .pinID(pinID)
-                .build();
-        
         String _baseUrl = Utils.templateUrl(GET_TOKEN_BY_PIN_ID_SERVERS[0], new HashMap<String, String>());
         if (serverURL.isPresent() && !serverURL.get().isBlank()) {
             _baseUrl = serverURL.get();
@@ -1136,6 +1130,11 @@ public class Plex implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
+
+        _req.addQueryParams(Utils.getQueryParams(
+                GetTokenByPinIdRequest.class,
+                request, 
+                this.sdkConfiguration.globals));
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 

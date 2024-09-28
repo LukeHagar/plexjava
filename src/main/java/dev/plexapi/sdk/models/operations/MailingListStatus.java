@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.String;
 
 /**
- * MailingListStatus - Your current mailing list status
+ * MailingListStatus - Your current mailing list status (active or unsubscribed)
  */
 public enum MailingListStatus {
     ACTIVE("active"),

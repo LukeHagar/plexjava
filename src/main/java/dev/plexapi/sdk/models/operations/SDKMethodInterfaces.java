@@ -183,7 +183,7 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallGetTokenByPinId {
         GetTokenByPinIdResponse getTokenByPinId(
-            long pinID,
+            GetTokenByPinIdRequest request,
             Optional<String> serverURL) throws Exception;
     }
 

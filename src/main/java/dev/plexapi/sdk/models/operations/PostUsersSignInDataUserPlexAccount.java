@@ -179,7 +179,7 @@ public class PostUsersSignInDataUserPlexAccount {
     private Optional<Boolean> mailingListActive;
 
     /**
-     * Your current mailing list status
+     * Your current mailing list status (active or unsubscribed)
      */
     @JsonProperty("mailingListStatus")
     private PostUsersSignInDataMailingListStatus mailingListStatus;
@@ -631,7 +631,7 @@ public class PostUsersSignInDataUserPlexAccount {
     }
 
     /**
-     * Your current mailing list status
+     * Your current mailing list status (active or unsubscribed)
      */
     @JsonIgnore
     public PostUsersSignInDataMailingListStatus mailingListStatus() {
@@ -1112,7 +1112,7 @@ public class PostUsersSignInDataUserPlexAccount {
     }
 
     /**
-     * Your current mailing list status
+     * Your current mailing list status (active or unsubscribed)
      */
     public PostUsersSignInDataUserPlexAccount withMailingListStatus(PostUsersSignInDataMailingListStatus mailingListStatus) {
         Utils.checkNotNull(mailingListStatus, "mailingListStatus");
@@ -1915,7 +1915,7 @@ public class PostUsersSignInDataUserPlexAccount {
         }
 
         /**
-         * Your current mailing list status
+         * Your current mailing list status (active or unsubscribed)
          */
         public Builder mailingListStatus(PostUsersSignInDataMailingListStatus mailingListStatus) {
             Utils.checkNotNull(mailingListStatus, "mailingListStatus");

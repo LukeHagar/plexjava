@@ -5,13 +5,12 @@
 package dev.plexapi.sdk.models.operations;
 
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Long;
 import java.lang.String;
 import java.util.Optional;
 
 public class GetTokenByPinIdRequestBuilder {
 
-    private Long pinID;
+    private GetTokenByPinIdRequest request;
     private Optional<String> serverURL = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetTokenByPinId sdk;
 
@@ -19,9 +18,9 @@ public class GetTokenByPinIdRequestBuilder {
         this.sdk = sdk;
     }
 
-    public GetTokenByPinIdRequestBuilder pinID(long pinID) {
-        Utils.checkNotNull(pinID, "pinID");
-        this.pinID = pinID;
+    public GetTokenByPinIdRequestBuilder request(GetTokenByPinIdRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
     }
                 
@@ -40,7 +39,7 @@ public class GetTokenByPinIdRequestBuilder {
     public GetTokenByPinIdResponse call() throws Exception {
 
         return sdk.getTokenByPinId(
-            pinID,
+            request,
             serverURL);
     }
 }
