@@ -767,7 +767,7 @@ public class Plex implements
      * @throws Exception if the API call fails
      */
     public GetServerResourcesResponse getServerResourcesDirect() throws Exception {
-        return getServerResources(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        return getServerResources(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
     
     /**
@@ -778,6 +778,10 @@ public class Plex implements
     E.g: https://10-0-0-25.bbf8e10c7fa20447cacee74cd9914cde.plex.direct:32400
 
      * @param includeIPv6 Include IPv6 entries in the results
+     * @param clientID The unique identifier for the client application
+    This is used to track the client application and its usage
+    (UUID, serial number, or other number unique per device)
+
      * @param serverURL Overrides the server URL.
      * @return The response from the API call
      * @throws Exception if the API call fails
@@ -786,6 +790,7 @@ public class Plex implements
             Optional<? extends IncludeHttps> includeHttps,
             Optional<? extends IncludeRelay> includeRelay,
             Optional<? extends IncludeIPv6> includeIPv6,
+            Optional<String> clientID,
             Optional<String> serverURL) throws Exception {
         GetServerResourcesRequest request =
             GetServerResourcesRequest
@@ -793,6 +798,7 @@ public class Plex implements
                 .includeHttps(includeHttps)
                 .includeRelay(includeRelay)
                 .includeIPv6(includeIPv6)
+                .clientID(clientID)
                 .build();
         
         String _baseUrl = Utils.templateUrl(GET_SERVER_RESOURCES_SERVERS[0], new HashMap<String, String>());

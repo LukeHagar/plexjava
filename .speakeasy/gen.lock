@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 1732900d-e173-47c1-a90d-d45182eb35d9
 management:
-  docChecksum: 9f62ea35c6168986c8e3557d5df50b99
+  docChecksum: f387ae03f10decba230886eaab322b20
   docVersion: 0.0.3
   speakeasyVersion: 1.404.5
   generationVersion: 2.426.2
-  releaseVersion: 0.6.1
-  configChecksum: e9f20ce216bd3a2498c0708299b08208
+  releaseVersion: 0.6.2
+  configChecksum: 046f14829c0f092a936a69c12a4534a8
   repoURL: https://github.com/LukeHagar/plexjava.git
   published: true
 features:
@@ -2034,6 +2034,7 @@ examples:
           includeHttps: 1
           includeRelay: 1
           includeIPv6: 1
+          X-Plex-Client-Identifier: "gcgzw5rz2xovp84b4vha3a40"
       responses:
         "401":
           application/json: {"errors": []}

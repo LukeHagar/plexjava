@@ -24,6 +24,7 @@ public class GetServerResourcesRequestBuilder {
                             "includeIPv6",
                             "0",
                             new TypeReference<Optional<? extends IncludeIPv6>>() {});
+    private Optional<String> clientID = Optional.empty();
     private Optional<String> serverURL = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetServerResources sdk;
 
@@ -67,6 +68,18 @@ public class GetServerResourcesRequestBuilder {
         return this;
     }
                 
+    public GetServerResourcesRequestBuilder clientID(String clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = Optional.of(clientID);
+        return this;
+    }
+
+    public GetServerResourcesRequestBuilder clientID(Optional<String> clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = clientID;
+        return this;
+    }
+                
     public GetServerResourcesRequestBuilder serverURL(String serverURL) {
         Utils.checkNotNull(serverURL, "serverURL");
         this.serverURL = Optional.of(serverURL);
@@ -93,6 +106,7 @@ public class GetServerResourcesRequestBuilder {
             includeHttps,
             includeRelay,
             includeIPv6,
+            clientID,
             serverURL);
     }
 

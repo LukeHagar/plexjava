@@ -40,21 +40,33 @@ public class GetServerResourcesRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeIPv6")
     private Optional<? extends IncludeIPv6> includeIPv6;
 
+    /**
+     * The unique identifier for the client application
+     * This is used to track the client application and its usage
+     * (UUID, serial number, or other number unique per device)
+     * 
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Client-Identifier")
+    private Optional<String> clientID;
+
     @JsonCreator
     public GetServerResourcesRequest(
             Optional<? extends IncludeHttps> includeHttps,
             Optional<? extends IncludeRelay> includeRelay,
-            Optional<? extends IncludeIPv6> includeIPv6) {
+            Optional<? extends IncludeIPv6> includeIPv6,
+            Optional<String> clientID) {
         Utils.checkNotNull(includeHttps, "includeHttps");
         Utils.checkNotNull(includeRelay, "includeRelay");
         Utils.checkNotNull(includeIPv6, "includeIPv6");
+        Utils.checkNotNull(clientID, "clientID");
         this.includeHttps = includeHttps;
         this.includeRelay = includeRelay;
         this.includeIPv6 = includeIPv6;
+        this.clientID = clientID;
     }
     
     public GetServerResourcesRequest() {
-        this(Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -84,6 +96,17 @@ public class GetServerResourcesRequest {
     @JsonIgnore
     public Optional<IncludeIPv6> includeIPv6() {
         return (Optional<IncludeIPv6>) includeIPv6;
+    }
+
+    /**
+     * The unique identifier for the client application
+     * This is used to track the client application and its usage
+     * (UUID, serial number, or other number unique per device)
+     * 
+     */
+    @JsonIgnore
+    public Optional<String> clientID() {
+        return clientID;
     }
 
     public final static Builder builder() {
@@ -147,6 +170,30 @@ public class GetServerResourcesRequest {
         this.includeIPv6 = includeIPv6;
         return this;
     }
+
+    /**
+     * The unique identifier for the client application
+     * This is used to track the client application and its usage
+     * (UUID, serial number, or other number unique per device)
+     * 
+     */
+    public GetServerResourcesRequest withClientID(String clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = Optional.ofNullable(clientID);
+        return this;
+    }
+
+    /**
+     * The unique identifier for the client application
+     * This is used to track the client application and its usage
+     * (UUID, serial number, or other number unique per device)
+     * 
+     */
+    public GetServerResourcesRequest withClientID(Optional<String> clientID) {
+        Utils.checkNotNull(clientID, "clientID");
+        this.clientID = clientID;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -160,7 +207,8 @@ public class GetServerResourcesRequest {
         return 
             Objects.deepEquals(this.includeHttps, other.includeHttps) &&
             Objects.deepEquals(this.includeRelay, other.includeRelay) &&
-            Objects.deepEquals(this.includeIPv6, other.includeIPv6);
+            Objects.deepEquals(this.includeIPv6, other.includeIPv6) &&
+            Objects.deepEquals(this.clientID, other.clientID);
     }
     
     @Override
@@ -168,7 +216,8 @@ public class GetServerResourcesRequest {
         return Objects.hash(
             includeHttps,
             includeRelay,
-            includeIPv6);
+            includeIPv6,
+            clientID);
     }
     
     @Override
@@ -176,7 +225,8 @@ public class GetServerResourcesRequest {
         return Utils.toString(GetServerResourcesRequest.class,
                 "includeHttps", includeHttps,
                 "includeRelay", includeRelay,
-                "includeIPv6", includeIPv6);
+                "includeIPv6", includeIPv6,
+                "clientID", clientID);
     }
     
     public final static class Builder {
@@ -185,7 +235,9 @@ public class GetServerResourcesRequest {
  
         private Optional<? extends IncludeRelay> includeRelay;
  
-        private Optional<? extends IncludeIPv6> includeIPv6;  
+        private Optional<? extends IncludeIPv6> includeIPv6;
+ 
+        private Optional<String> clientID = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -248,6 +300,30 @@ public class GetServerResourcesRequest {
             this.includeIPv6 = includeIPv6;
             return this;
         }
+
+        /**
+         * The unique identifier for the client application
+         * This is used to track the client application and its usage
+         * (UUID, serial number, or other number unique per device)
+         * 
+         */
+        public Builder clientID(String clientID) {
+            Utils.checkNotNull(clientID, "clientID");
+            this.clientID = Optional.ofNullable(clientID);
+            return this;
+        }
+
+        /**
+         * The unique identifier for the client application
+         * This is used to track the client application and its usage
+         * (UUID, serial number, or other number unique per device)
+         * 
+         */
+        public Builder clientID(Optional<String> clientID) {
+            Utils.checkNotNull(clientID, "clientID");
+            this.clientID = clientID;
+            return this;
+        }
         
         public GetServerResourcesRequest build() {
             if (includeHttps == null) {
@@ -261,7 +337,8 @@ public class GetServerResourcesRequest {
             }            return new GetServerResourcesRequest(
                 includeHttps,
                 includeRelay,
-                includeIPv6);
+                includeIPv6,
+                clientID);
         }
 
         private static final LazySingletonValue<Optional<? extends IncludeHttps>> _SINGLETON_VALUE_IncludeHttps =

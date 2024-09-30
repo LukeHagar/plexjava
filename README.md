@@ -62,7 +62,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'dev.plexapi:plexapi:0.6.1'
+implementation 'dev.plexapi:plexapi:0.6.2'
 ```
 
 Maven:
@@ -70,7 +70,7 @@ Maven:
 <dependency>
     <groupId>dev.plexapi</groupId>
     <artifactId>plexapi</artifactId>
-    <version>0.6.1</version>
+    <version>0.6.2</version>
 </dependency>
 ```
 
@@ -265,7 +265,7 @@ public class Application {
 
 Certain parameters are configured globally. These parameters may be set on the SDK client instance itself during initialization. When configured as an option during SDK initialization, These global values will be used as defaults on the operations that use them. When such operations are called, there is a place in each to override the global value, if needed.
 
-For example, you can set `ClientID` to `"gcgzw5rz2xovp84b4vha3a40"` at SDK initialization and then you do not have to pass the same value on calls to operations like `getPin`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
+For example, you can set `ClientID` to `"gcgzw5rz2xovp84b4vha3a40"` at SDK initialization and then you do not have to pass the same value on calls to operations like `getServerResources`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
 
 
 ### Available Globals
@@ -290,16 +290,20 @@ This is used to track the client application and its usage
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.GetPinBadRequest;
-import dev.plexapi.sdk.models.operations.GetPinRequest;
-import dev.plexapi.sdk.models.operations.GetPinResponse;
+import dev.plexapi.sdk.models.errors.GetServerResourcesBadRequest;
+import dev.plexapi.sdk.models.errors.GetServerResourcesUnauthorized;
+import dev.plexapi.sdk.models.operations.GetServerResourcesResponse;
+import dev.plexapi.sdk.models.operations.IncludeHttps;
+import dev.plexapi.sdk.models.operations.IncludeIPv6;
+import dev.plexapi.sdk.models.operations.IncludeRelay;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws GetPinBadRequest, Exception {
+    public static void main(String[] args) throws GetServerResourcesBadRequest, GetServerResourcesUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
+                .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .clientName("Plex Web")
                 .clientVersion("4.133.0")
@@ -307,14 +311,14 @@ public class Application {
                 .deviceName("Linux")
             .build();
 
-        GetPinRequest req = GetPinRequest.builder()
-                .build();
-
-        GetPinResponse res = sdk.plex().getPin()
-                .request(req)
+        GetServerResourcesResponse res = sdk.plex().getServerResources()
+                .includeHttps(IncludeHttps.Enable)
+                .includeRelay(IncludeRelay.Enable)
+                .includeIPv6(IncludeIPv6.Enable)
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .call();
 
-        if (res.authPinContainer().isPresent()) {
+        if (res.plexDevices().isPresent()) {
             // handle response
         }
     }

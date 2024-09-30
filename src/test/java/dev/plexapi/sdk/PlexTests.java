@@ -190,6 +190,7 @@ public class PlexTests {
                 .includeHttps(IncludeHttps.Enable)
                 .includeRelay(IncludeRelay.Enable)
                 .includeIPv6(IncludeIPv6.Enable)
+                .clientID("gcgzw5rz2xovp84b4vha3a40")
                 .call();
 
         assertEquals(
