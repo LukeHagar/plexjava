@@ -67,12 +67,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                      | Status Code                       | Content Type                      |
+| Error Type                        | Status Code                       | Content Type                      |
 | --------------------------------- | --------------------------------- | --------------------------------- |
 | models/errors/LogLineBadRequest   | 400                               | application/json                  |
 | models/errors/LogLineUnauthorized | 401                               | application/json                  |
-| models/errors/SDKError            | 4xx-5xx                           | \*\/*                             |
-
+| models/errors/SDKError            | 4XX, 5XX                          | \*/\*                             |
 
 ## logMultiLine
 
@@ -148,12 +147,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                           | Status Code                            | Content Type                           |
+| Error Type                             | Status Code                            | Content Type                           |
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
 | models/errors/LogMultiLineBadRequest   | 400                                    | application/json                       |
 | models/errors/LogMultiLineUnauthorized | 401                                    | application/json                       |
-| models/errors/SDKError                 | 4xx-5xx                                | \*\/*                                  |
-
+| models/errors/SDKError                 | 4XX, 5XX                               | \*/\*                                  |
 
 ## enablePaperTrail
 
@@ -198,8 +196,8 @@ public class Application {
 
 ### Errors
 
-| Error Object                               | Status Code                                | Content Type                               |
+| Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | models/errors/EnablePaperTrailBadRequest   | 400                                        | application/json                           |
 | models/errors/EnablePaperTrailUnauthorized | 401                                        | application/json                           |
-| models/errors/SDKError                     | 4xx-5xx                                    | \*\/*                                      |
+| models/errors/SDKError                     | 4XX, 5XX                                   | \*/\*                                      |

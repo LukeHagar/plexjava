@@ -1,23 +1,23 @@
 lockVersion: 2.0.0
 id: 1732900d-e173-47c1-a90d-d45182eb35d9
 management:
-  docChecksum: f387ae03f10decba230886eaab322b20
+  docChecksum: f12b653820ae77ca3b2820bc9459d866
   docVersion: 0.0.3
-  speakeasyVersion: 1.404.5
-  generationVersion: 2.426.2
-  releaseVersion: 0.6.2
-  configChecksum: 046f14829c0f092a936a69c12a4534a8
+  speakeasyVersion: 1.405.6
+  generationVersion: 2.428.1
+  releaseVersion: 0.7.0
+  configChecksum: 778e40a6f6ea35580b5da4c033f0b08f
   repoURL: https://github.com/LukeHagar/plexjava.git
   published: true
 features:
   java:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.30.3
+    core: 3.30.4
     deprecations: 2.81.1
     downloadStreams: 0.1.1
     enums: 2.81.2
-    errors: 0.1.3
+    errors: 0.1.4
     flattening: 2.81.1
     globalSecurity: 2.82.7
     globalSecurityCallbacks: 0.1.0
@@ -28,7 +28,6 @@ features:
     nameOverrides: 2.81.3
     nullables: 0.1.0
     sdkHooks: 0.1.0
-    tests: 0.1.0
 generatedFiles:
   - .gitattributes
   - CONTRIBUTING.md
@@ -1714,22 +1713,6 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/utils/TypedObject.java
   - src/main/java/dev/plexapi/sdk/utils/Types.java
   - src/main/java/dev/plexapi/sdk/utils/Utils.java
-  - src/test/java/dev/plexapi/sdk/ActivitiesTests.java
-  - src/test/java/dev/plexapi/sdk/AuthenticationTests.java
-  - src/test/java/dev/plexapi/sdk/ButlerTests.java
-  - src/test/java/dev/plexapi/sdk/HubsTests.java
-  - src/test/java/dev/plexapi/sdk/LibraryTests.java
-  - src/test/java/dev/plexapi/sdk/LogTests.java
-  - src/test/java/dev/plexapi/sdk/MediaTests.java
-  - src/test/java/dev/plexapi/sdk/PlaylistsTests.java
-  - src/test/java/dev/plexapi/sdk/PlexTests.java
-  - src/test/java/dev/plexapi/sdk/SearchTests.java
-  - src/test/java/dev/plexapi/sdk/ServerTests.java
-  - src/test/java/dev/plexapi/sdk/SessionsTests.java
-  - src/test/java/dev/plexapi/sdk/StatisticsTests.java
-  - src/test/java/dev/plexapi/sdk/UpdaterTests.java
-  - src/test/java/dev/plexapi/sdk/VideoTests.java
-  - src/test/java/dev/plexapi/sdk/WatchlistTests.java
 examples:
   getServerCapabilities:
     speakeasy-default-get-server-capabilities:

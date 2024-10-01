@@ -61,12 +61,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                  | Status Code                                   | Content Type                                  |
+| Error Type                                    | Status Code                                   | Content Type                                  |
 | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
 | models/errors/GetServerActivitiesBadRequest   | 400                                           | application/json                              |
 | models/errors/GetServerActivitiesUnauthorized | 401                                           | application/json                              |
-| models/errors/SDKError                        | 4xx-5xx                                       | \*\/*                                         |
-
+| models/errors/SDKError                        | 4XX, 5XX                                      | \*/\*                                         |
 
 ## cancelServerActivities
 
@@ -117,8 +116,8 @@ public class Application {
 
 ### Errors
 
-| Error Object                                     | Status Code                                      | Content Type                                     |
+| Error Type                                       | Status Code                                      | Content Type                                     |
 | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
 | models/errors/CancelServerActivitiesBadRequest   | 400                                              | application/json                                 |
 | models/errors/CancelServerActivitiesUnauthorized | 401                                              | application/json                                 |
-| models/errors/SDKError                           | 4xx-5xx                                          | \*\/*                                            |
+| models/errors/SDKError                           | 4XX, 5XX                                         | \*/\*                                            |

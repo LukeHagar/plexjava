@@ -63,7 +63,7 @@ tasks.withType(Javadoc) {
 }
 
 group = "dev.plexapi"
-version = "0.6.2"
+version = "0.7.0"
 
 sourcesJar {
     archiveBaseName = "plexapi"
@@ -101,7 +101,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'dev.plexapi'
             artifactId = 'plexapi'
-            version = '0.6.2'
+            version = '0.7.0'
 
             from components.java
 
@@ -152,9 +152,6 @@ dependencies {
     implementation 'org.apache.httpcomponents:httpclient:4.5.14'
     implementation 'org.apache.httpcomponents:httpmime:4.5.14'
     implementation 'commons-io:commons-io:2.15.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
-    testImplementation 'org.mockito:mockito-core:5.12.0'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.2'
 }
 
 

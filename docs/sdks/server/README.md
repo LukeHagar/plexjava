@@ -62,12 +62,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                    | Status Code                                     | Content Type                                    |
+| Error Type                                      | Status Code                                     | Content Type                                    |
 | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
 | models/errors/GetServerCapabilitiesBadRequest   | 400                                             | application/json                                |
 | models/errors/GetServerCapabilitiesUnauthorized | 401                                             | application/json                                |
-| models/errors/SDKError                          | 4xx-5xx                                         | \*\/*                                           |
-
+| models/errors/SDKError                          | 4XX, 5XX                                        | \*/\*                                           |
 
 ## getServerPreferences
 
@@ -113,12 +112,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                   | Status Code                                    | Content Type                                   |
+| Error Type                                     | Status Code                                    | Content Type                                   |
 | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
 | models/errors/GetServerPreferencesBadRequest   | 400                                            | application/json                               |
 | models/errors/GetServerPreferencesUnauthorized | 401                                            | application/json                               |
-| models/errors/SDKError                         | 4xx-5xx                                        | \*\/*                                          |
-
+| models/errors/SDKError                         | 4XX, 5XX                                       | \*/\*                                          |
 
 ## getAvailableClients
 
@@ -164,12 +162,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                  | Status Code                                   | Content Type                                  |
+| Error Type                                    | Status Code                                   | Content Type                                  |
 | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
 | models/errors/GetAvailableClientsBadRequest   | 400                                           | application/json                              |
 | models/errors/GetAvailableClientsUnauthorized | 401                                           | application/json                              |
-| models/errors/SDKError                        | 4xx-5xx                                       | \*\/*                                         |
-
+| models/errors/SDKError                        | 4XX, 5XX                                      | \*/\*                                         |
 
 ## getDevices
 
@@ -215,12 +212,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                         | Status Code                          | Content Type                         |
+| Error Type                           | Status Code                          | Content Type                         |
 | ------------------------------------ | ------------------------------------ | ------------------------------------ |
 | models/errors/GetDevicesBadRequest   | 400                                  | application/json                     |
 | models/errors/GetDevicesUnauthorized | 401                                  | application/json                     |
-| models/errors/SDKError               | 4xx-5xx                              | \*\/*                                |
-
+| models/errors/SDKError               | 4XX, 5XX                             | \*/\*                                |
 
 ## getServerIdentity
 
@@ -264,11 +260,10 @@ public class Application {
 
 ### Errors
 
-| Error Object                                  | Status Code                                   | Content Type                                  |
+| Error Type                                    | Status Code                                   | Content Type                                  |
 | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
 | models/errors/GetServerIdentityRequestTimeout | 408                                           | application/json                              |
-| models/errors/SDKError                        | 4xx-5xx                                       | \*\/*                                         |
-
+| models/errors/SDKError                        | 4XX, 5XX                                      | \*/\*                                         |
 
 ## getMyPlexAccount
 
@@ -314,12 +309,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                               | Status Code                                | Content Type                               |
+| Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | models/errors/GetMyPlexAccountBadRequest   | 400                                        | application/json                           |
 | models/errors/GetMyPlexAccountUnauthorized | 401                                        | application/json                           |
-| models/errors/SDKError                     | 4xx-5xx                                    | \*\/*                                      |
-
+| models/errors/SDKError                     | 4XX, 5XX                                   | \*/\*                                      |
 
 ## getResizedPhoto
 
@@ -384,12 +378,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                              | Status Code                               | Content Type                              |
+| Error Type                                | Status Code                               | Content Type                              |
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
 | models/errors/GetResizedPhotoBadRequest   | 400                                       | application/json                          |
 | models/errors/GetResizedPhotoUnauthorized | 401                                       | application/json                          |
-| models/errors/SDKError                    | 4xx-5xx                                   | \*\/*                                     |
-
+| models/errors/SDKError                    | 4XX, 5XX                                  | \*/\*                                     |
 
 ## getMediaProviders
 
@@ -442,12 +435,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                | Status Code                                 | Content Type                                |
+| Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
 | models/errors/GetMediaProvidersBadRequest   | 400                                         | application/json                            |
 | models/errors/GetMediaProvidersUnauthorized | 401                                         | application/json                            |
-| models/errors/SDKError                      | 4xx-5xx                                     | \*\/*                                       |
-
+| models/errors/SDKError                      | 4XX, 5XX                                    | \*/\*                                       |
 
 ## getServerList
 
@@ -493,8 +485,8 @@ public class Application {
 
 ### Errors
 
-| Error Object                            | Status Code                             | Content Type                            |
+| Error Type                              | Status Code                             | Content Type                            |
 | --------------------------------------- | --------------------------------------- | --------------------------------------- |
 | models/errors/GetServerListBadRequest   | 400                                     | application/json                        |
 | models/errors/GetServerListUnauthorized | 401                                     | application/json                        |
-| models/errors/SDKError                  | 4xx-5xx                                 | \*\/*                                   |
+| models/errors/SDKError                  | 4XX, 5XX                                | \*/\*                                   |

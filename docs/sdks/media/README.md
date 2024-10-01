@@ -63,12 +63,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                         | Status Code                          | Content Type                         |
+| Error Type                           | Status Code                          | Content Type                         |
 | ------------------------------------ | ------------------------------------ | ------------------------------------ |
 | models/errors/MarkPlayedBadRequest   | 400                                  | application/json                     |
 | models/errors/MarkPlayedUnauthorized | 401                                  | application/json                     |
-| models/errors/SDKError               | 4xx-5xx                              | \*\/*                                |
-
+| models/errors/SDKError               | 4XX, 5XX                             | \*/\*                                |
 
 ## markUnplayed
 
@@ -119,12 +118,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                           | Status Code                            | Content Type                           |
+| Error Type                             | Status Code                            | Content Type                           |
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
 | models/errors/MarkUnplayedBadRequest   | 400                                    | application/json                       |
 | models/errors/MarkUnplayedUnauthorized | 401                                    | application/json                       |
-| models/errors/SDKError                 | 4xx-5xx                                | \*\/*                                  |
-
+| models/errors/SDKError                 | 4XX, 5XX                               | \*/\*                                  |
 
 ## updatePlayProgress
 
@@ -180,12 +178,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                 | Status Code                                  | Content Type                                 |
+| Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
 | models/errors/UpdatePlayProgressBadRequest   | 400                                          | application/json                             |
 | models/errors/UpdatePlayProgressUnauthorized | 401                                          | application/json                             |
-| models/errors/SDKError                       | 4xx-5xx                                      | \*\/*                                        |
-
+| models/errors/SDKError                       | 4XX, 5XX                                     | \*/\*                                        |
 
 ## getBannerImage
 
@@ -248,12 +245,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                             | Status Code                              | Content Type                             |
+| Error Type                               | Status Code                              | Content Type                             |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | models/errors/GetBannerImageBadRequest   | 400                                      | application/json                         |
 | models/errors/GetBannerImageUnauthorized | 401                                      | application/json                         |
-| models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
-
+| models/errors/SDKError                   | 4XX, 5XX                                 | \*/\*                                    |
 
 ## getThumbImage
 
@@ -316,8 +312,8 @@ public class Application {
 
 ### Errors
 
-| Error Object                            | Status Code                             | Content Type                            |
+| Error Type                              | Status Code                             | Content Type                            |
 | --------------------------------------- | --------------------------------------- | --------------------------------------- |
 | models/errors/GetThumbImageBadRequest   | 400                                     | application/json                        |
 | models/errors/GetThumbImageUnauthorized | 401                                     | application/json                        |
-| models/errors/SDKError                  | 4xx-5xx                                 | \*\/*                                   |
+| models/errors/SDKError                  | 4XX, 5XX                                | \*/\*                                   |

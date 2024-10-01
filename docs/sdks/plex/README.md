@@ -66,12 +66,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                | Status Code                                 | Content Type                                |
+| Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
 | models/errors/GetCompanionsDataBadRequest   | 400                                         | application/json                            |
 | models/errors/GetCompanionsDataUnauthorized | 401                                         | application/json                            |
-| models/errors/SDKError                      | 4xx-5xx                                     | \*\/*                                       |
-
+| models/errors/SDKError                      | 4XX, 5XX                                    | \*/\*                                       |
 
 ## getUserFriends
 
@@ -123,12 +122,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                             | Status Code                              | Content Type                             |
+| Error Type                               | Status Code                              | Content Type                             |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | models/errors/GetUserFriendsBadRequest   | 400                                      | application/json                         |
 | models/errors/GetUserFriendsUnauthorized | 401                                      | application/json                         |
-| models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
-
+| models/errors/SDKError                   | 4XX, 5XX                                 | \*/\*                                    |
 
 ## getGeoData
 
@@ -179,12 +177,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                         | Status Code                          | Content Type                         |
+| Error Type                           | Status Code                          | Content Type                         |
 | ------------------------------------ | ------------------------------------ | ------------------------------------ |
 | models/errors/GetGeoDataBadRequest   | 400                                  | application/json                     |
 | models/errors/GetGeoDataUnauthorized | 401                                  | application/json                     |
-| models/errors/SDKError               | 4xx-5xx                              | \*\/*                                |
-
+| models/errors/SDKError               | 4XX, 5XX                             | \*/\*                                |
 
 ## getHomeData
 
@@ -230,12 +227,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                          | Status Code                           | Content Type                          |
+| Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | models/errors/GetHomeDataBadRequest   | 400                                   | application/json                      |
 | models/errors/GetHomeDataUnauthorized | 401                                   | application/json                      |
-| models/errors/SDKError                | 4xx-5xx                               | \*\/*                                 |
-
+| models/errors/SDKError                | 4XX, 5XX                              | \*/\*                                 |
 
 ## getServerResources
 
@@ -284,13 +280,13 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                                                                                                             | Type                                                                                                                                                                  | Required                                                                                                                                                              | Description                                                                                                                                                           | Example                                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `includeHttps`                                                                                                                                                        | [Optional<IncludeHttps>](../../models/operations/IncludeHttps.md)                                                                                                     | :heavy_minus_sign:                                                                                                                                                    | Include Https entries in the results                                                                                                                                  | 1                                                                                                                                                                     |
-| `includeRelay`                                                                                                                                                        | [Optional<IncludeRelay>](../../models/operations/IncludeRelay.md)                                                                                                     | :heavy_minus_sign:                                                                                                                                                    | Include Relay addresses in the results <br/>E.g: https://10-0-0-25.bbf8e10c7fa20447cacee74cd9914cde.plex.direct:32400<br/>                                            | 1                                                                                                                                                                     |
-| `includeIPv6`                                                                                                                                                         | [Optional<IncludeIPv6>](../../models/operations/IncludeIPv6.md)                                                                                                       | :heavy_minus_sign:                                                                                                                                                    | Include IPv6 entries in the results                                                                                                                                   | 1                                                                                                                                                                     |
-| `clientID`                                                                                                                                                            | *Optional<String>*                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                    | The unique identifier for the client application<br/>This is used to track the client application and its usage<br/>(UUID, serial number, or other number unique per device)<br/> | gcgzw5rz2xovp84b4vha3a40                                                                                                                                              |
-| `serverURL`                                                                                                                                                           | *String*                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                    | An optional server URL to use.                                                                                                                                        | http://localhost:8080                                                                                                                                                 |
+| Parameter                                                                                                                                                              | Type                                                                                                                                                                   | Required                                                                                                                                                               | Description                                                                                                                                                            | Example                                                                                                                                                                |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `includeHttps`                                                                                                                                                         | [Optional<IncludeHttps>](../../models/operations/IncludeHttps.md)                                                                                                      | :heavy_minus_sign:                                                                                                                                                     | Include Https entries in the results                                                                                                                                   | 1                                                                                                                                                                      |
+| `includeRelay`                                                                                                                                                         | [Optional<IncludeRelay>](../../models/operations/IncludeRelay.md)                                                                                                      | :heavy_minus_sign:                                                                                                                                                     | Include Relay addresses in the results <br/>E.g: https://10-0-0-25.bbf8e10c7fa20447cacee74cd9914cde.plex.direct:32400<br/>                                             | 1                                                                                                                                                                      |
+| `includeIPv6`                                                                                                                                                          | [Optional<IncludeIPv6>](../../models/operations/IncludeIPv6.md)                                                                                                        | :heavy_minus_sign:                                                                                                                                                     | Include IPv6 entries in the results                                                                                                                                    | 1                                                                                                                                                                      |
+| `clientID`                                                                                                                                                             | *Optional<String>*                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                     | The unique identifier for the client application. This is used to track the client application and its usage. (UUID, serial number, or other number unique per device) | gcgzw5rz2xovp84b4vha3a40                                                                                                                                               |
+| `serverURL`                                                                                                                                                            | *String*                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                     | An optional server URL to use.                                                                                                                                         | http://localhost:8080                                                                                                                                                  |
 
 ### Response
 
@@ -298,12 +294,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                 | Status Code                                  | Content Type                                 |
+| Error Type                                   | Status Code                                  | Content Type                                 |
 | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
 | models/errors/GetServerResourcesBadRequest   | 400                                          | application/json                             |
 | models/errors/GetServerResourcesUnauthorized | 401                                          | application/json                             |
-| models/errors/SDKError                       | 4xx-5xx                                      | \*\/*                                        |
-
+| models/errors/SDKError                       | 4XX, 5XX                                     | \*/\*                                        |
 
 ## getPin
 
@@ -359,11 +354,10 @@ public class Application {
 
 ### Errors
 
-| Error Object                   | Status Code                    | Content Type                   |
+| Error Type                     | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
 | models/errors/GetPinBadRequest | 400                            | application/json               |
-| models/errors/SDKError         | 4xx-5xx                        | \*\/*                          |
-
+| models/errors/SDKError         | 4XX, 5XX                       | \*/\*                          |
 
 ## getTokenByPinId
 
@@ -421,8 +415,8 @@ public class Application {
 
 ### Errors
 
-| Error Object                              | Status Code                               | Content Type                              |
+| Error Type                                | Status Code                               | Content Type                              |
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
 | models/errors/GetTokenByPinIdBadRequest   | 400                                       | application/json                          |
 | models/errors/GetTokenByPinIdResponseBody | 404                                       | application/json                          |
-| models/errors/SDKError                    | 4xx-5xx                                   | \*\/*                                     |
+| models/errors/SDKError                    | 4XX, 5XX                                  | \*/\*                                     |

@@ -85,12 +85,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                             | Status Code                              | Content Type                             |
+| Error Type                               | Status Code                              | Content Type                             |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | models/errors/CreatePlaylistBadRequest   | 400                                      | application/json                         |
 | models/errors/CreatePlaylistUnauthorized | 401                                      | application/json                         |
-| models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
-
+| models/errors/SDKError                   | 4XX, 5XX                                 | \*/\*                                    |
 
 ## getPlaylists
 
@@ -147,12 +146,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                           | Status Code                            | Content Type                           |
+| Error Type                             | Status Code                            | Content Type                           |
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
 | models/errors/GetPlaylistsBadRequest   | 400                                    | application/json                       |
 | models/errors/GetPlaylistsUnauthorized | 401                                    | application/json                       |
-| models/errors/SDKError                 | 4xx-5xx                                | \*\/*                                  |
-
+| models/errors/SDKError                 | 4XX, 5XX                               | \*/\*                                  |
 
 ## getPlaylist
 
@@ -207,12 +205,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                          | Status Code                           | Content Type                          |
+| Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | models/errors/GetPlaylistBadRequest   | 400                                   | application/json                      |
 | models/errors/GetPlaylistUnauthorized | 401                                   | application/json                      |
-| models/errors/SDKError                | 4xx-5xx                               | \*\/*                                 |
-
+| models/errors/SDKError                | 4XX, 5XX                              | \*/\*                                 |
 
 ## deletePlaylist
 
@@ -264,12 +261,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                             | Status Code                              | Content Type                             |
+| Error Type                               | Status Code                              | Content Type                             |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | models/errors/DeletePlaylistBadRequest   | 400                                      | application/json                         |
 | models/errors/DeletePlaylistUnauthorized | 401                                      | application/json                         |
-| models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
-
+| models/errors/SDKError                   | 4XX, 5XX                                 | \*/\*                                    |
 
 ## updatePlaylist
 
@@ -325,12 +321,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                             | Status Code                              | Content Type                             |
+| Error Type                               | Status Code                              | Content Type                             |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | models/errors/UpdatePlaylistBadRequest   | 400                                      | application/json                         |
 | models/errors/UpdatePlaylistUnauthorized | 401                                      | application/json                         |
-| models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
-
+| models/errors/SDKError                   | 4XX, 5XX                                 | \*/\*                                    |
 
 ## getPlaylistContents
 
@@ -390,12 +385,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                  | Status Code                                   | Content Type                                  |
+| Error Type                                    | Status Code                                   | Content Type                                  |
 | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
 | models/errors/GetPlaylistContentsBadRequest   | 400                                           | application/json                              |
 | models/errors/GetPlaylistContentsUnauthorized | 401                                           | application/json                              |
-| models/errors/SDKError                        | 4xx-5xx                                       | \*\/*                                         |
-
+| models/errors/SDKError                        | 4XX, 5XX                                      | \*/\*                                         |
 
 ## clearPlaylistContents
 
@@ -447,12 +441,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                    | Status Code                                     | Content Type                                    |
+| Error Type                                      | Status Code                                     | Content Type                                    |
 | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
 | models/errors/ClearPlaylistContentsBadRequest   | 400                                             | application/json                                |
 | models/errors/ClearPlaylistContentsUnauthorized | 401                                             | application/json                                |
-| models/errors/SDKError                          | 4xx-5xx                                         | \*\/*                                           |
-
+| models/errors/SDKError                          | 4XX, 5XX                                        | \*/\*                                           |
 
 ## addPlaylistContents
 
@@ -511,12 +504,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                  | Status Code                                   | Content Type                                  |
+| Error Type                                    | Status Code                                   | Content Type                                  |
 | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
 | models/errors/AddPlaylistContentsBadRequest   | 400                                           | application/json                              |
 | models/errors/AddPlaylistContentsUnauthorized | 401                                           | application/json                              |
-| models/errors/SDKError                        | 4xx-5xx                                       | \*\/*                                         |
-
+| models/errors/SDKError                        | 4XX, 5XX                                      | \*/\*                                         |
 
 ## uploadPlaylist
 
@@ -573,8 +565,8 @@ public class Application {
 
 ### Errors
 
-| Error Object                             | Status Code                              | Content Type                             |
+| Error Type                               | Status Code                              | Content Type                             |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | models/errors/UploadPlaylistBadRequest   | 400                                      | application/json                         |
 | models/errors/UploadPlaylistUnauthorized | 401                                      | application/json                         |
-| models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
+| models/errors/SDKError                   | 4XX, 5XX                                 | \*/\*                                    |

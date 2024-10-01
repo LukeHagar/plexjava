@@ -63,12 +63,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                            | Status Code                             | Content Type                            |
+| Error Type                              | Status Code                             | Content Type                            |
 | --------------------------------------- | --------------------------------------- | --------------------------------------- |
 | models/errors/GetStatisticsBadRequest   | 400                                     | application/json                        |
 | models/errors/GetStatisticsUnauthorized | 401                                     | application/json                        |
-| models/errors/SDKError                  | 4xx-5xx                                 | \*\/*                                   |
-
+| models/errors/SDKError                  | 4XX, 5XX                                | \*/\*                                   |
 
 ## getResourcesStatistics
 
@@ -121,12 +120,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                     | Status Code                                      | Content Type                                     |
+| Error Type                                       | Status Code                                      | Content Type                                     |
 | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
 | models/errors/GetResourcesStatisticsBadRequest   | 400                                              | application/json                                 |
 | models/errors/GetResourcesStatisticsUnauthorized | 401                                              | application/json                                 |
-| models/errors/SDKError                           | 4xx-5xx                                          | \*\/*                                            |
-
+| models/errors/SDKError                           | 4XX, 5XX                                         | \*/\*                                            |
 
 ## getBandwidthStatistics
 
@@ -179,8 +177,8 @@ public class Application {
 
 ### Errors
 
-| Error Object                                     | Status Code                                      | Content Type                                     |
+| Error Type                                       | Status Code                                      | Content Type                                     |
 | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
 | models/errors/GetBandwidthStatisticsBadRequest   | 400                                              | application/json                                 |
 | models/errors/GetBandwidthStatisticsUnauthorized | 401                                              | application/json                                 |
-| models/errors/SDKError                           | 4xx-5xx                                          | \*\/*                                            |
+| models/errors/SDKError                           | 4XX, 5XX                                         | \*/\*                                            |

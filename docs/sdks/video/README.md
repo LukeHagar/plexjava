@@ -75,12 +75,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                          | Status Code                           | Content Type                          |
+| Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | models/errors/GetTimelineBadRequest   | 400                                   | application/json                      |
 | models/errors/GetTimelineUnauthorized | 401                                   | application/json                      |
-| models/errors/SDKError                | 4xx-5xx                               | \*\/*                                 |
-
+| models/errors/SDKError                | 4XX, 5XX                              | \*/\*                                 |
 
 ## startUniversalTranscode
 
@@ -151,8 +150,8 @@ public class Application {
 
 ### Errors
 
-| Error Object                                      | Status Code                                       | Content Type                                      |
+| Error Type                                        | Status Code                                       | Content Type                                      |
 | ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
 | models/errors/StartUniversalTranscodeBadRequest   | 400                                               | application/json                                  |
 | models/errors/StartUniversalTranscodeUnauthorized | 401                                               | application/json                                  |
-| models/errors/SDKError                            | 4xx-5xx                                           | \*\/*                                             |
+| models/errors/SDKError                            | 4XX, 5XX                                          | \*/\*                                             |

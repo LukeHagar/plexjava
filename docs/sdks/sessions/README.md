@@ -57,12 +57,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                          | Status Code                           | Content Type                          |
+| Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | models/errors/GetSessionsBadRequest   | 400                                   | application/json                      |
 | models/errors/GetSessionsUnauthorized | 401                                   | application/json                      |
-| models/errors/SDKError                | 4xx-5xx                               | \*\/*                                 |
-
+| models/errors/SDKError                | 4XX, 5XX                              | \*/\*                                 |
 
 ## getSessionHistory
 
@@ -123,12 +122,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                | Status Code                                 | Content Type                                |
+| Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
 | models/errors/GetSessionHistoryBadRequest   | 400                                         | application/json                            |
 | models/errors/GetSessionHistoryUnauthorized | 401                                         | application/json                            |
-| models/errors/SDKError                      | 4xx-5xx                                     | \*\/*                                       |
-
+| models/errors/SDKError                      | 4XX, 5XX                                    | \*/\*                                       |
 
 ## getTranscodeSessions
 
@@ -174,12 +172,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                   | Status Code                                    | Content Type                                   |
+| Error Type                                     | Status Code                                    | Content Type                                   |
 | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
 | models/errors/GetTranscodeSessionsBadRequest   | 400                                            | application/json                               |
 | models/errors/GetTranscodeSessionsUnauthorized | 401                                            | application/json                               |
-| models/errors/SDKError                         | 4xx-5xx                                        | \*\/*                                          |
-
+| models/errors/SDKError                         | 4XX, 5XX                                       | \*/\*                                          |
 
 ## stopTranscodeSession
 
@@ -230,8 +227,8 @@ public class Application {
 
 ### Errors
 
-| Error Object                                   | Status Code                                    | Content Type                                   |
+| Error Type                                     | Status Code                                    | Content Type                                   |
 | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
 | models/errors/StopTranscodeSessionBadRequest   | 400                                            | application/json                               |
 | models/errors/StopTranscodeSessionUnauthorized | 401                                            | application/json                               |
-| models/errors/SDKError                         | 4xx-5xx                                        | \*\/*                                          |
+| models/errors/SDKError                         | 4XX, 5XX                                       | \*/\*                                          |

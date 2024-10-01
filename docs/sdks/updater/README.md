@@ -57,12 +57,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                              | Status Code                               | Content Type                              |
+| Error Type                                | Status Code                               | Content Type                              |
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
 | models/errors/GetUpdateStatusBadRequest   | 400                                       | application/json                          |
 | models/errors/GetUpdateStatusUnauthorized | 401                                       | application/json                          |
-| models/errors/SDKError                    | 4xx-5xx                                   | \*\/*                                     |
-
+| models/errors/SDKError                    | 4XX, 5XX                                  | \*/\*                                     |
 
 ## checkForUpdates
 
@@ -114,12 +113,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                              | Status Code                               | Content Type                              |
+| Error Type                                | Status Code                               | Content Type                              |
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
 | models/errors/CheckForUpdatesBadRequest   | 400                                       | application/json                          |
 | models/errors/CheckForUpdatesUnauthorized | 401                                       | application/json                          |
-| models/errors/SDKError                    | 4xx-5xx                                   | \*\/*                                     |
-
+| models/errors/SDKError                    | 4XX, 5XX                                  | \*/\*                                     |
 
 ## applyUpdates
 
@@ -175,8 +173,8 @@ public class Application {
 
 ### Errors
 
-| Error Object                           | Status Code                            | Content Type                           |
+| Error Type                             | Status Code                            | Content Type                           |
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
 | models/errors/ApplyUpdatesBadRequest   | 400                                    | application/json                       |
 | models/errors/ApplyUpdatesUnauthorized | 401                                    | application/json                       |
-| models/errors/SDKError                 | 4xx-5xx                                | \*\/*                                  |
+| models/errors/SDKError                 | 4XX, 5XX                               | \*/\*                                  |

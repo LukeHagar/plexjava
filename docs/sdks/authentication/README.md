@@ -67,12 +67,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                | Status Code                                 | Content Type                                |
+| Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
 | models/errors/GetTransientTokenBadRequest   | 400                                         | application/json                            |
 | models/errors/GetTransientTokenUnauthorized | 401                                         | application/json                            |
-| models/errors/SDKError                      | 4xx-5xx                                     | \*\/*                                       |
-
+| models/errors/SDKError                      | 4XX, 5XX                                    | \*/\*                                       |
 
 ## getSourceConnectionInformation
 
@@ -125,12 +124,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                             | Status Code                                              | Content Type                                             |
+| Error Type                                               | Status Code                                              | Content Type                                             |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | models/errors/GetSourceConnectionInformationBadRequest   | 400                                                      | application/json                                         |
 | models/errors/GetSourceConnectionInformationUnauthorized | 401                                                      | application/json                                         |
-| models/errors/SDKError                                   | 4xx-5xx                                                  | \*\/*                                                    |
-
+| models/errors/SDKError                                   | 4XX, 5XX                                                 | \*/\*                                                    |
 
 ## getTokenDetails
 
@@ -182,12 +180,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                              | Status Code                               | Content Type                              |
+| Error Type                                | Status Code                               | Content Type                              |
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
 | models/errors/GetTokenDetailsBadRequest   | 400                                       | application/json                          |
 | models/errors/GetTokenDetailsUnauthorized | 401                                       | application/json                          |
-| models/errors/SDKError                    | 4xx-5xx                                   | \*\/*                                     |
-
+| models/errors/SDKError                    | 4XX, 5XX                                  | \*/\*                                     |
 
 ## postUsersSignInData
 
@@ -250,8 +247,8 @@ public class Application {
 
 ### Errors
 
-| Error Object                                  | Status Code                                   | Content Type                                  |
+| Error Type                                    | Status Code                                   | Content Type                                  |
 | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
 | models/errors/PostUsersSignInDataBadRequest   | 400                                           | application/json                              |
 | models/errors/PostUsersSignInDataUnauthorized | 401                                           | application/json                              |
-| models/errors/SDKError                        | 4xx-5xx                                       | \*\/*                                         |
+| models/errors/SDKError                        | 4XX, 5XX                                      | \*/\*                                         |

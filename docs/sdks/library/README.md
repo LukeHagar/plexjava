@@ -72,12 +72,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                          | Status Code                           | Content Type                          |
+| Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | models/errors/GetFileHashBadRequest   | 400                                   | application/json                      |
 | models/errors/GetFileHashUnauthorized | 401                                   | application/json                      |
-| models/errors/SDKError                | 4xx-5xx                               | \*\/*                                 |
-
+| models/errors/SDKError                | 4XX, 5XX                              | \*/\*                                 |
 
 ## getRecentlyAddedLibrary
 
@@ -157,12 +156,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                      | Status Code                                       | Content Type                                      |
+| Error Type                                        | Status Code                                       | Content Type                                      |
 | ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
 | models/errors/GetRecentlyAddedLibraryBadRequest   | 400                                               | application/json                                  |
 | models/errors/GetRecentlyAddedLibraryUnauthorized | 401                                               | application/json                                  |
-| models/errors/SDKError                            | 4xx-5xx                                           | \*\/*                                             |
-
+| models/errors/SDKError                            | 4XX, 5XX                                          | \*/\*                                             |
 
 ## getAllLibraries
 
@@ -214,12 +212,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                              | Status Code                               | Content Type                              |
+| Error Type                                | Status Code                               | Content Type                              |
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
 | models/errors/GetAllLibrariesBadRequest   | 400                                       | application/json                          |
 | models/errors/GetAllLibrariesUnauthorized | 401                                       | application/json                          |
-| models/errors/SDKError                    | 4xx-5xx                                   | \*\/*                                     |
-
+| models/errors/SDKError                    | 4XX, 5XX                                  | \*/\*                                     |
 
 ## getLibraryDetails
 
@@ -314,12 +311,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                | Status Code                                 | Content Type                                |
+| Error Type                                  | Status Code                                 | Content Type                                |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
 | models/errors/GetLibraryDetailsBadRequest   | 400                                         | application/json                            |
 | models/errors/GetLibraryDetailsUnauthorized | 401                                         | application/json                            |
-| models/errors/SDKError                      | 4xx-5xx                                     | \*\/*                                       |
-
+| models/errors/SDKError                      | 4XX, 5XX                                    | \*/\*                                       |
 
 ## deleteLibrary
 
@@ -370,12 +366,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                            | Status Code                             | Content Type                            |
+| Error Type                              | Status Code                             | Content Type                            |
 | --------------------------------------- | --------------------------------------- | --------------------------------------- |
 | models/errors/DeleteLibraryBadRequest   | 400                                     | application/json                        |
 | models/errors/DeleteLibraryUnauthorized | 401                                     | application/json                        |
-| models/errors/SDKError                  | 4xx-5xx                                 | \*\/*                                   |
-
+| models/errors/SDKError                  | 4XX, 5XX                                | \*/\*                                   |
 
 ## getLibraryItems
 
@@ -463,12 +458,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                              | Status Code                               | Content Type                              |
+| Error Type                                | Status Code                               | Content Type                              |
 | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
 | models/errors/GetLibraryItemsBadRequest   | 400                                       | application/json                          |
 | models/errors/GetLibraryItemsUnauthorized | 401                                       | application/json                          |
-| models/errors/SDKError                    | 4xx-5xx                                   | \*\/*                                     |
-
+| models/errors/SDKError                    | 4XX, 5XX                                  | \*/\*                                     |
 
 ## getRefreshLibraryMetadata
 
@@ -523,12 +517,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                        | Status Code                                         | Content Type                                        |
+| Error Type                                          | Status Code                                         | Content Type                                        |
 | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
 | models/errors/GetRefreshLibraryMetadataBadRequest   | 400                                                 | application/json                                    |
 | models/errors/GetRefreshLibraryMetadataUnauthorized | 401                                                 | application/json                                    |
-| models/errors/SDKError                              | 4xx-5xx                                             | \*\/*                                               |
-
+| models/errors/SDKError                              | 4XX, 5XX                                            | \*/\*                                               |
 
 ## getSearchLibrary
 
@@ -602,12 +595,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                               | Status Code                                | Content Type                               |
+| Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | models/errors/GetSearchLibraryBadRequest   | 400                                        | application/json                           |
 | models/errors/GetSearchLibraryUnauthorized | 401                                        | application/json                           |
-| models/errors/SDKError                     | 4xx-5xx                                    | \*\/*                                      |
-
+| models/errors/SDKError                     | 4XX, 5XX                                   | \*/\*                                      |
 
 ## getMetaDataByRatingKey
 
@@ -661,12 +653,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                     | Status Code                                      | Content Type                                     |
+| Error Type                                       | Status Code                                      | Content Type                                     |
 | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
 | models/errors/GetMetaDataByRatingKeyBadRequest   | 400                                              | application/json                                 |
 | models/errors/GetMetaDataByRatingKeyUnauthorized | 401                                              | application/json                                 |
-| models/errors/SDKError                           | 4xx-5xx                                          | \*\/*                                            |
-
+| models/errors/SDKError                           | 4XX, 5XX                                         | \*/\*                                            |
 
 ## getMetadataChildren
 
@@ -722,12 +713,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                  | Status Code                                   | Content Type                                  |
+| Error Type                                    | Status Code                                   | Content Type                                  |
 | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
 | models/errors/GetMetadataChildrenBadRequest   | 400                                           | application/json                              |
 | models/errors/GetMetadataChildrenUnauthorized | 401                                           | application/json                              |
-| models/errors/SDKError                        | 4xx-5xx                                       | \*\/*                                         |
-
+| models/errors/SDKError                        | 4XX, 5XX                                      | \*/\*                                         |
 
 ## getTopWatchedContent
 
@@ -784,12 +774,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                                   | Status Code                                    | Content Type                                   |
+| Error Type                                     | Status Code                                    | Content Type                                   |
 | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
 | models/errors/GetTopWatchedContentBadRequest   | 400                                            | application/json                               |
 | models/errors/GetTopWatchedContentUnauthorized | 401                                            | application/json                               |
-| models/errors/SDKError                         | 4xx-5xx                                        | \*\/*                                          |
-
+| models/errors/SDKError                         | 4XX, 5XX                                       | \*/\*                                          |
 
 ## getOnDeck
 
@@ -836,8 +825,8 @@ public class Application {
 
 ### Errors
 
-| Error Object                        | Status Code                         | Content Type                        |
+| Error Type                          | Status Code                         | Content Type                        |
 | ----------------------------------- | ----------------------------------- | ----------------------------------- |
 | models/errors/GetOnDeckBadRequest   | 400                                 | application/json                    |
 | models/errors/GetOnDeckUnauthorized | 401                                 | application/json                    |
-| models/errors/SDKError              | 4xx-5xx                             | \*\/*                               |
+| models/errors/SDKError              | 4XX, 5XX                            | \*/\*                               |

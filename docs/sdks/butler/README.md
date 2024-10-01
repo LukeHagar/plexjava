@@ -58,12 +58,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                             | Status Code                              | Content Type                             |
+| Error Type                               | Status Code                              | Content Type                             |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | models/errors/GetButlerTasksBadRequest   | 400                                      | application/json                         |
 | models/errors/GetButlerTasksUnauthorized | 401                                      | application/json                         |
-| models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
-
+| models/errors/SDKError                   | 4XX, 5XX                                 | \*/\*                                    |
 
 ## startAllTasks
 
@@ -112,12 +111,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                            | Status Code                             | Content Type                            |
+| Error Type                              | Status Code                             | Content Type                            |
 | --------------------------------------- | --------------------------------------- | --------------------------------------- |
 | models/errors/StartAllTasksBadRequest   | 400                                     | application/json                        |
 | models/errors/StartAllTasksUnauthorized | 401                                     | application/json                        |
-| models/errors/SDKError                  | 4xx-5xx                                 | \*\/*                                   |
-
+| models/errors/SDKError                  | 4XX, 5XX                                | \*/\*                                   |
 
 ## stopAllTasks
 
@@ -162,12 +160,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                           | Status Code                            | Content Type                           |
+| Error Type                             | Status Code                            | Content Type                           |
 | -------------------------------------- | -------------------------------------- | -------------------------------------- |
 | models/errors/StopAllTasksBadRequest   | 400                                    | application/json                       |
 | models/errors/StopAllTasksUnauthorized | 401                                    | application/json                       |
-| models/errors/SDKError                 | 4xx-5xx                                | \*\/*                                  |
-
+| models/errors/SDKError                 | 4XX, 5XX                               | \*/\*                                  |
 
 ## startTask
 
@@ -224,12 +221,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                        | Status Code                         | Content Type                        |
+| Error Type                          | Status Code                         | Content Type                        |
 | ----------------------------------- | ----------------------------------- | ----------------------------------- |
 | models/errors/StartTaskBadRequest   | 400                                 | application/json                    |
 | models/errors/StartTaskUnauthorized | 401                                 | application/json                    |
-| models/errors/SDKError              | 4xx-5xx                             | \*\/*                               |
-
+| models/errors/SDKError              | 4XX, 5XX                            | \*/\*                               |
 
 ## stopTask
 
@@ -282,8 +278,8 @@ public class Application {
 
 ### Errors
 
-| Error Object                       | Status Code                        | Content Type                       |
+| Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
 | models/errors/StopTaskBadRequest   | 400                                | application/json                   |
 | models/errors/StopTaskUnauthorized | 401                                | application/json                   |
-| models/errors/SDKError             | 4xx-5xx                            | \*\/*                              |
+| models/errors/SDKError             | 4XX, 5XX                           | \*/\*                              |

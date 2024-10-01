@@ -778,10 +778,7 @@ public class Plex implements
     E.g: https://10-0-0-25.bbf8e10c7fa20447cacee74cd9914cde.plex.direct:32400
 
      * @param includeIPv6 Include IPv6 entries in the results
-     * @param clientID The unique identifier for the client application
-    This is used to track the client application and its usage
-    (UUID, serial number, or other number unique per device)
-
+     * @param clientID The unique identifier for the client application. This is used to track the client application and its usage. (UUID, serial number, or other number unique per device)
      * @param serverURL Overrides the server URL.
      * @return The response from the API call
      * @throws Exception if the API call fails

@@ -66,12 +66,11 @@ public class Application {
 
 ### Errors
 
-| Error Object                            | Status Code                             | Content Type                            |
+| Error Type                              | Status Code                             | Content Type                            |
 | --------------------------------------- | --------------------------------------- | --------------------------------------- |
 | models/errors/GetGlobalHubsBadRequest   | 400                                     | application/json                        |
 | models/errors/GetGlobalHubsUnauthorized | 401                                     | application/json                        |
-| models/errors/SDKError                  | 4xx-5xx                                 | \*\/*                                   |
-
+| models/errors/SDKError                  | 4XX, 5XX                                | \*/\*                                   |
 
 ## getRecentlyAdded
 
@@ -135,10 +134,9 @@ public class Application {
 
 ### Errors
 
-| Error Object           | Status Code            | Content Type           |
+| Error Type             | Status Code            | Content Type           |
 | ---------------------- | ---------------------- | ---------------------- |
-| models/errors/SDKError | 4xx-5xx                | \*\/*                  |
-
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
 
 ## getLibraryHubs
 
@@ -197,8 +195,8 @@ public class Application {
 
 ### Errors
 
-| Error Object                             | Status Code                              | Content Type                             |
+| Error Type                               | Status Code                              | Content Type                             |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | models/errors/GetLibraryHubsBadRequest   | 400                                      | application/json                         |
 | models/errors/GetLibraryHubsUnauthorized | 401                                      | application/json                         |
-| models/errors/SDKError                   | 4xx-5xx                                  | \*\/*                                    |
+| models/errors/SDKError                   | 4XX, 5XX                                 | \*/\*                                    |
