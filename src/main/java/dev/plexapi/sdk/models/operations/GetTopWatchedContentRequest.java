@@ -19,6 +19,13 @@ import java.util.Optional;
 public class GetTopWatchedContentRequest {
 
     /**
+     * Adds the Guids object to the response
+     * 
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeGuids")
+    private Optional<Long> includeGuids;
+
+    /**
      * The type of media to retrieve.
      * 1 = movie
      * 2 = show
@@ -30,26 +37,28 @@ public class GetTopWatchedContentRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")
     private GetTopWatchedContentQueryParamType type;
 
-    /**
-     * Adds the Guids object to the response
-     * 
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeGuids")
-    private Optional<Long> includeGuids;
-
     @JsonCreator
     public GetTopWatchedContentRequest(
-            GetTopWatchedContentQueryParamType type,
-            Optional<Long> includeGuids) {
-        Utils.checkNotNull(type, "type");
+            Optional<Long> includeGuids,
+            GetTopWatchedContentQueryParamType type) {
         Utils.checkNotNull(includeGuids, "includeGuids");
-        this.type = type;
+        Utils.checkNotNull(type, "type");
         this.includeGuids = includeGuids;
+        this.type = type;
     }
     
     public GetTopWatchedContentRequest(
             GetTopWatchedContentQueryParamType type) {
-        this(type, Optional.empty());
+        this(Optional.empty(), type);
+    }
+
+    /**
+     * Adds the Guids object to the response
+     * 
+     */
+    @JsonIgnore
+    public Optional<Long> includeGuids() {
+        return includeGuids;
     }
 
     /**
@@ -66,32 +75,8 @@ public class GetTopWatchedContentRequest {
         return type;
     }
 
-    /**
-     * Adds the Guids object to the response
-     * 
-     */
-    @JsonIgnore
-    public Optional<Long> includeGuids() {
-        return includeGuids;
-    }
-
     public final static Builder builder() {
         return new Builder();
-    }
-
-    /**
-     * The type of media to retrieve.
-     * 1 = movie
-     * 2 = show
-     * 3 = season
-     * 4 = episode
-     * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
-     * 
-     */
-    public GetTopWatchedContentRequest withType(GetTopWatchedContentQueryParamType type) {
-        Utils.checkNotNull(type, "type");
-        this.type = type;
-        return this;
     }
 
     /**
@@ -113,6 +98,21 @@ public class GetTopWatchedContentRequest {
         this.includeGuids = includeGuids;
         return this;
     }
+
+    /**
+     * The type of media to retrieve.
+     * 1 = movie
+     * 2 = show
+     * 3 = season
+     * 4 = episode
+     * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
+     * 
+     */
+    public GetTopWatchedContentRequest withType(GetTopWatchedContentQueryParamType type) {
+        Utils.checkNotNull(type, "type");
+        this.type = type;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -124,47 +124,32 @@ public class GetTopWatchedContentRequest {
         }
         GetTopWatchedContentRequest other = (GetTopWatchedContentRequest) o;
         return 
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.includeGuids, other.includeGuids);
+            Objects.deepEquals(this.includeGuids, other.includeGuids) &&
+            Objects.deepEquals(this.type, other.type);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
-            type,
-            includeGuids);
+            includeGuids,
+            type);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetTopWatchedContentRequest.class,
-                "type", type,
-                "includeGuids", includeGuids);
+                "includeGuids", includeGuids,
+                "type", type);
     }
     
     public final static class Builder {
  
-        private GetTopWatchedContentQueryParamType type;
+        private Optional<Long> includeGuids = Optional.empty();
  
-        private Optional<Long> includeGuids = Optional.empty();  
+        private GetTopWatchedContentQueryParamType type;  
         
         private Builder() {
           // force use of static builder() method
-        }
-
-        /**
-         * The type of media to retrieve.
-         * 1 = movie
-         * 2 = show
-         * 3 = season
-         * 4 = episode
-         * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
-         * 
-         */
-        public Builder type(GetTopWatchedContentQueryParamType type) {
-            Utils.checkNotNull(type, "type");
-            this.type = type;
-            return this;
         }
 
         /**
@@ -186,11 +171,26 @@ public class GetTopWatchedContentRequest {
             this.includeGuids = includeGuids;
             return this;
         }
+
+        /**
+         * The type of media to retrieve.
+         * 1 = movie
+         * 2 = show
+         * 3 = season
+         * 4 = episode
+         * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
+         * 
+         */
+        public Builder type(GetTopWatchedContentQueryParamType type) {
+            Utils.checkNotNull(type, "type");
+            this.type = type;
+            return this;
+        }
         
         public GetTopWatchedContentRequest build() {
             return new GetTopWatchedContentRequest(
-                type,
-                includeGuids);
+                includeGuids,
+                type);
         }
     }
 }

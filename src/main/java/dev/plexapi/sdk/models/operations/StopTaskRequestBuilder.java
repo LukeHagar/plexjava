@@ -4,11 +4,15 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import dev.plexapi.sdk.utils.Options;
+import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
+import java.util.Optional;
 
 public class StopTaskRequestBuilder {
 
     private PathParamTaskName taskName;
+    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallStopTask sdk;
 
     public StopTaskRequestBuilder(SDKMethodInterfaces.MethodCallStopTask sdk) {
@@ -20,10 +24,25 @@ public class StopTaskRequestBuilder {
         this.taskName = taskName;
         return this;
     }
+                
+    public StopTaskRequestBuilder retryConfig(RetryConfig retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = Optional.of(retryConfig);
+        return this;
+    }
+
+    public StopTaskRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = retryConfig;
+        return this;
+    }
 
     public StopTaskResponse call() throws Exception {
-
+        Optional<Options> options = Optional.of(Options.builder()
+                                                    .retryConfig(retryConfig)
+                                                    .build());
         return sdk.stopTask(
-            taskName);
+            taskName,
+            options);
     }
 }

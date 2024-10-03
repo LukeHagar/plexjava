@@ -237,6 +237,10 @@ public class GetLibraryItemsMetadata {
     @JsonProperty("Role")
     private Optional<? extends List<GetLibraryItemsRole>> role;
 
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Location")
+    private Optional<? extends List<GetLibraryItemsLocation>> location;
+
     /**
      * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
      * 
@@ -398,6 +402,7 @@ public class GetLibraryItemsMetadata {
             @JsonProperty("Writer") Optional<? extends List<GetLibraryItemsWriter>> writer,
             @JsonProperty("Collection") Optional<? extends List<GetLibraryItemsCollection>> collection,
             @JsonProperty("Role") Optional<? extends List<GetLibraryItemsRole>> role,
+            @JsonProperty("Location") Optional<? extends List<GetLibraryItemsLocation>> location,
             @JsonProperty("Guid") Optional<? extends List<GetLibraryItemsMediaGuid>> mediaGuid,
             @JsonProperty("UltraBlurColors") Optional<? extends GetLibraryItemsUltraBlurColors> ultraBlurColors,
             @JsonProperty("Rating") Optional<? extends List<GetLibraryItemsMetaDataRating>> metaDataRating,
@@ -471,6 +476,7 @@ public class GetLibraryItemsMetadata {
         Utils.checkNotNull(writer, "writer");
         Utils.checkNotNull(collection, "collection");
         Utils.checkNotNull(role, "role");
+        Utils.checkNotNull(location, "location");
         Utils.checkNotNull(mediaGuid, "mediaGuid");
         Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
         Utils.checkNotNull(metaDataRating, "metaDataRating");
@@ -544,6 +550,7 @@ public class GetLibraryItemsMetadata {
         this.writer = writer;
         this.collection = collection;
         this.role = role;
+        this.location = location;
         this.mediaGuid = mediaGuid;
         this.ultraBlurColors = ultraBlurColors;
         this.metaDataRating = metaDataRating;
@@ -580,7 +587,7 @@ public class GetLibraryItemsMetadata {
             String title,
             String summary,
             long addedAt) {
-        this(ratingKey, key, guid, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), type, title, Optional.empty(), Optional.empty(), summary, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), addedAt, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(ratingKey, key, guid, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), type, title, Optional.empty(), Optional.empty(), summary, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), addedAt, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -853,6 +860,12 @@ public class GetLibraryItemsMetadata {
     @JsonIgnore
     public Optional<List<GetLibraryItemsRole>> role() {
         return (Optional<List<GetLibraryItemsRole>>) role;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<GetLibraryItemsLocation>> location() {
+        return (Optional<List<GetLibraryItemsLocation>>) location;
     }
 
     /**
@@ -1567,6 +1580,18 @@ public class GetLibraryItemsMetadata {
         return this;
     }
 
+    public GetLibraryItemsMetadata withLocation(List<GetLibraryItemsLocation> location) {
+        Utils.checkNotNull(location, "location");
+        this.location = Optional.ofNullable(location);
+        return this;
+    }
+
+    public GetLibraryItemsMetadata withLocation(Optional<? extends List<GetLibraryItemsLocation>> location) {
+        Utils.checkNotNull(location, "location");
+        this.location = location;
+        return this;
+    }
+
     /**
      * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
      * 
@@ -1952,6 +1977,7 @@ public class GetLibraryItemsMetadata {
             Objects.deepEquals(this.writer, other.writer) &&
             Objects.deepEquals(this.collection, other.collection) &&
             Objects.deepEquals(this.role, other.role) &&
+            Objects.deepEquals(this.location, other.location) &&
             Objects.deepEquals(this.mediaGuid, other.mediaGuid) &&
             Objects.deepEquals(this.ultraBlurColors, other.ultraBlurColors) &&
             Objects.deepEquals(this.metaDataRating, other.metaDataRating) &&
@@ -2030,6 +2056,7 @@ public class GetLibraryItemsMetadata {
             writer,
             collection,
             role,
+            location,
             mediaGuid,
             ultraBlurColors,
             metaDataRating,
@@ -2108,6 +2135,7 @@ public class GetLibraryItemsMetadata {
                 "writer", writer,
                 "collection", collection,
                 "role", role,
+                "location", location,
                 "mediaGuid", mediaGuid,
                 "ultraBlurColors", ultraBlurColors,
                 "metaDataRating", metaDataRating,
@@ -2231,6 +2259,8 @@ public class GetLibraryItemsMetadata {
         private Optional<? extends List<GetLibraryItemsCollection>> collection = Optional.empty();
  
         private Optional<? extends List<GetLibraryItemsRole>> role = Optional.empty();
+ 
+        private Optional<? extends List<GetLibraryItemsLocation>> location = Optional.empty();
  
         private Optional<? extends List<GetLibraryItemsMediaGuid>> mediaGuid = Optional.empty();
  
@@ -2854,6 +2884,18 @@ public class GetLibraryItemsMetadata {
             return this;
         }
 
+        public Builder location(List<GetLibraryItemsLocation> location) {
+            Utils.checkNotNull(location, "location");
+            this.location = Optional.ofNullable(location);
+            return this;
+        }
+
+        public Builder location(Optional<? extends List<GetLibraryItemsLocation>> location) {
+            Utils.checkNotNull(location, "location");
+            this.location = location;
+            return this;
+        }
+
         /**
          * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
          * 
@@ -3233,6 +3275,7 @@ public class GetLibraryItemsMetadata {
                 writer,
                 collection,
                 role,
+                location,
                 mediaGuid,
                 ultraBlurColors,
                 metaDataRating,

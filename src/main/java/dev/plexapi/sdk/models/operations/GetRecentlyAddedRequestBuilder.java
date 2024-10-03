@@ -4,11 +4,15 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import dev.plexapi.sdk.utils.Options;
+import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
+import java.util.Optional;
 
 public class GetRecentlyAddedRequestBuilder {
 
     private GetRecentlyAddedRequest request;
+    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetRecentlyAdded sdk;
 
     public GetRecentlyAddedRequestBuilder(SDKMethodInterfaces.MethodCallGetRecentlyAdded sdk) {
@@ -20,10 +24,25 @@ public class GetRecentlyAddedRequestBuilder {
         this.request = request;
         return this;
     }
+                
+    public GetRecentlyAddedRequestBuilder retryConfig(RetryConfig retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = Optional.of(retryConfig);
+        return this;
+    }
+
+    public GetRecentlyAddedRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = retryConfig;
+        return this;
+    }
 
     public GetRecentlyAddedResponse call() throws Exception {
-
+        Optional<Options> options = Optional.of(Options.builder()
+                                                    .retryConfig(retryConfig)
+                                                    .build());
         return sdk.getRecentlyAdded(
-            request);
+            request,
+            options);
     }
 }

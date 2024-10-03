@@ -4,6 +4,8 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import dev.plexapi.sdk.utils.Options;
+import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.String;
@@ -13,6 +15,7 @@ public class GetFileHashRequestBuilder {
 
     private String url;
     private Optional<Double> type = Optional.empty();
+    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetFileHash sdk;
 
     public GetFileHashRequestBuilder(SDKMethodInterfaces.MethodCallGetFileHash sdk) {
@@ -36,11 +39,26 @@ public class GetFileHashRequestBuilder {
         this.type = type;
         return this;
     }
+                
+    public GetFileHashRequestBuilder retryConfig(RetryConfig retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = Optional.of(retryConfig);
+        return this;
+    }
+
+    public GetFileHashRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = retryConfig;
+        return this;
+    }
 
     public GetFileHashResponse call() throws Exception {
-
+        Optional<Options> options = Optional.of(Options.builder()
+                                                    .retryConfig(retryConfig)
+                                                    .build());
         return sdk.getFileHash(
             url,
-            type);
+            type,
+            options);
     }
 }

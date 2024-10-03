@@ -7,39 +7,35 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
+import java.util.Optional;
 
 
 public class Location {
 
-    @JsonProperty("id")
-    private int id;
-
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("path")
-    private String path;
+    private Optional<String> path;
 
     @JsonCreator
     public Location(
-            @JsonProperty("id") int id,
-            @JsonProperty("path") String path) {
-        Utils.checkNotNull(id, "id");
+            @JsonProperty("path") Optional<String> path) {
         Utils.checkNotNull(path, "path");
-        this.id = id;
         this.path = path;
     }
-
-    @JsonIgnore
-    public int id() {
-        return id;
+    
+    public Location() {
+        this(Optional.empty());
     }
 
     @JsonIgnore
-    public String path() {
+    public Optional<String> path() {
         return path;
     }
 
@@ -47,13 +43,13 @@ public class Location {
         return new Builder();
     }
 
-    public Location withId(int id) {
-        Utils.checkNotNull(id, "id");
-        this.id = id;
+    public Location withPath(String path) {
+        Utils.checkNotNull(path, "path");
+        this.path = Optional.ofNullable(path);
         return this;
     }
 
-    public Location withPath(String path) {
+    public Location withPath(Optional<String> path) {
         Utils.checkNotNull(path, "path");
         this.path = path;
         return this;
@@ -69,41 +65,36 @@ public class Location {
         }
         Location other = (Location) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
             Objects.deepEquals(this.path, other.path);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
-            id,
             path);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Location.class,
-                "id", id,
                 "path", path);
     }
     
     public final static class Builder {
  
-        private Integer id;
- 
-        private String path;  
+        private Optional<String> path = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
         }
 
-        public Builder id(int id) {
-            Utils.checkNotNull(id, "id");
-            this.id = id;
+        public Builder path(String path) {
+            Utils.checkNotNull(path, "path");
+            this.path = Optional.ofNullable(path);
             return this;
         }
 
-        public Builder path(String path) {
+        public Builder path(Optional<String> path) {
             Utils.checkNotNull(path, "path");
             this.path = path;
             return this;
@@ -111,7 +102,6 @@ public class Location {
         
         public Location build() {
             return new Location(
-                id,
                 path);
         }
     }

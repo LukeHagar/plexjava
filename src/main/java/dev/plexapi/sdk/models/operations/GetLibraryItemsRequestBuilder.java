@@ -4,11 +4,15 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import dev.plexapi.sdk.utils.Options;
+import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
+import java.util.Optional;
 
 public class GetLibraryItemsRequestBuilder {
 
     private GetLibraryItemsRequest request;
+    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetLibraryItems sdk;
 
     public GetLibraryItemsRequestBuilder(SDKMethodInterfaces.MethodCallGetLibraryItems sdk) {
@@ -20,10 +24,25 @@ public class GetLibraryItemsRequestBuilder {
         this.request = request;
         return this;
     }
+                
+    public GetLibraryItemsRequestBuilder retryConfig(RetryConfig retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = Optional.of(retryConfig);
+        return this;
+    }
+
+    public GetLibraryItemsRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = retryConfig;
+        return this;
+    }
 
     public GetLibraryItemsResponse call() throws Exception {
-
+        Optional<Options> options = Optional.of(Options.builder()
+                                                    .retryConfig(retryConfig)
+                                                    .build());
         return sdk.getLibraryItems(
-            request);
+            request,
+            options);
     }
 }

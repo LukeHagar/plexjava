@@ -4,6 +4,8 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import dev.plexapi.sdk.utils.Options;
+import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.String;
@@ -14,6 +16,7 @@ public class AddPlaylistContentsRequestBuilder {
     private Double playlistID;
     private String uri;
     private Optional<Double> playQueueID = Optional.empty();
+    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallAddPlaylistContents sdk;
 
     public AddPlaylistContentsRequestBuilder(SDKMethodInterfaces.MethodCallAddPlaylistContents sdk) {
@@ -43,12 +46,27 @@ public class AddPlaylistContentsRequestBuilder {
         this.playQueueID = playQueueID;
         return this;
     }
+                
+    public AddPlaylistContentsRequestBuilder retryConfig(RetryConfig retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = Optional.of(retryConfig);
+        return this;
+    }
+
+    public AddPlaylistContentsRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = retryConfig;
+        return this;
+    }
 
     public AddPlaylistContentsResponse call() throws Exception {
-
+        Optional<Options> options = Optional.of(Options.builder()
+                                                    .retryConfig(retryConfig)
+                                                    .build());
         return sdk.addPlaylistContents(
             playlistID,
             uri,
-            playQueueID);
+            playQueueID,
+            options);
     }
 }

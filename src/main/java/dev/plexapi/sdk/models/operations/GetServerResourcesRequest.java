@@ -41,9 +41,9 @@ public class GetServerResourcesRequest {
     private Optional<? extends IncludeIPv6> includeIPv6;
 
     /**
-     * The unique identifier for the client application. This is used to track the client application and its usage. (UUID, serial number, or other number unique per device)
+     * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
      */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Client-Identifier")
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Client-Identifier")
     private Optional<String> clientID;
 
     @JsonCreator
@@ -96,7 +96,7 @@ public class GetServerResourcesRequest {
     }
 
     /**
-     * The unique identifier for the client application. This is used to track the client application and its usage. (UUID, serial number, or other number unique per device)
+     * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
      */
     @JsonIgnore
     public Optional<String> clientID() {
@@ -166,7 +166,7 @@ public class GetServerResourcesRequest {
     }
 
     /**
-     * The unique identifier for the client application. This is used to track the client application and its usage. (UUID, serial number, or other number unique per device)
+     * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
      */
     public GetServerResourcesRequest withClientID(String clientID) {
         Utils.checkNotNull(clientID, "clientID");
@@ -175,7 +175,7 @@ public class GetServerResourcesRequest {
     }
 
     /**
-     * The unique identifier for the client application. This is used to track the client application and its usage. (UUID, serial number, or other number unique per device)
+     * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
      */
     public GetServerResourcesRequest withClientID(Optional<String> clientID) {
         Utils.checkNotNull(clientID, "clientID");
@@ -290,7 +290,7 @@ public class GetServerResourcesRequest {
         }
 
         /**
-         * The unique identifier for the client application. This is used to track the client application and its usage. (UUID, serial number, or other number unique per device)
+         * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
          */
         public Builder clientID(String clientID) {
             Utils.checkNotNull(clientID, "clientID");
@@ -299,7 +299,7 @@ public class GetServerResourcesRequest {
         }
 
         /**
-         * The unique identifier for the client application. This is used to track the client application and its usage. (UUID, serial number, or other number unique per device)
+         * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
          */
         public Builder clientID(Optional<String> clientID) {
             Utils.checkNotNull(clientID, "clientID");

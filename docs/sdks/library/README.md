@@ -16,6 +16,7 @@ API Calls interacting with Plex Media Server Libraries
 * [getLibraryItems](#getlibraryitems) - Get Library Items
 * [getRefreshLibraryMetadata](#getrefreshlibrarymetadata) - Refresh Metadata Of The Library
 * [getSearchLibrary](#getsearchlibrary) - Search Library
+* [getSearchAllLibraries](#getsearchalllibraries) - Search All Libraries
 * [getMetaDataByRatingKey](#getmetadatabyratingkey) - Get Metadata by RatingKey
 * [getMetadataChildren](#getmetadatachildren) - Get Items Children
 * [getTopWatchedContent](#gettopwatchedcontent) - Get Top Watched Content
@@ -42,11 +43,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetFileHashResponse res = sdk.library().getFileHash()
@@ -104,11 +105,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetRecentlyAddedLibraryRequest req = GetRecentlyAddedLibraryRequest.builder()
@@ -189,11 +190,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetAllLibrariesResponse res = sdk.library().getAllLibraries()
@@ -279,16 +280,16 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetLibraryDetailsResponse res = sdk.library().getLibraryDetails()
-                .sectionKey(9518)
                 .includeDetails(IncludeDetails.ZERO)
+                .sectionKey(9518)
                 .call();
 
         if (res.object().isPresent()) {
@@ -302,8 +303,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                  | Type                                                                                                                                                                                       | Required                                                                                                                                                                                   | Description                                                                                                                                                                                | Example                                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `sectionKey`                                                                                                                                                                               | *int*                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                         | The unique key of the Plex library. <br/>Note: This is unique in the context of the Plex server.<br/>                                                                                      | 9518                                                                                                                                                                                       |
 | `includeDetails`                                                                                                                                                                           | [Optional<IncludeDetails>](../../models/operations/IncludeDetails.md)                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                         | Whether or not to include details for a section (types, filters, and sorts). <br/>Only exists for backwards compatibility, media providers other than the server libraries have it on always.<br/> |                                                                                                                                                                                            |
+| `sectionKey`                                                                                                                                                                               | *int*                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                         | The unique key of the Plex library. <br/>Note: This is unique in the context of the Plex server.<br/>                                                                                      | 9518                                                                                                                                                                                       |
 
 ### Response
 
@@ -338,11 +339,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         DeleteLibraryResponse res = sdk.library().deleteLibrary()
@@ -418,16 +419,16 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetLibraryItemsRequest req = GetLibraryItemsRequest.builder()
-                .sectionKey(9518)
                 .tag(Tag.EDITION)
+                .sectionKey(9518)
                 .includeGuids(IncludeGuids.Enable)
                 .type(GetLibraryItemsQueryParamType.TvShow)
                 .includeMeta(GetLibraryItemsQueryParamIncludeMeta.Enable)
@@ -487,16 +488,16 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetRefreshLibraryMetadataResponse res = sdk.library().getRefreshLibraryMetadata()
-                .sectionKey(9518)
                 .force(Force.ONE)
+                .sectionKey(9518)
                 .call();
 
         // handle response
@@ -508,8 +509,8 @@ public class Application {
 
 | Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `sectionKey`                                                                                  | *int*                                                                                         | :heavy_check_mark:                                                                            | The unique key of the Plex library. <br/>Note: This is unique in the context of the Plex server.<br/> | 9518                                                                                          |
 | `force`                                                                                       | [Optional<Force>](../../models/operations/Force.md)                                           | :heavy_minus_sign:                                                                            | Force the refresh even if the library is already being refreshed.                             | 0                                                                                             |
+| `sectionKey`                                                                                  | *int*                                                                                         | :heavy_check_mark:                                                                            | The unique key of the Plex library. <br/>Note: This is unique in the context of the Plex server.<br/> | 9518                                                                                          |
 
 ### Response
 
@@ -563,11 +564,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetSearchLibraryResponse res = sdk.library().getSearchLibrary()
@@ -601,6 +602,77 @@ public class Application {
 | models/errors/GetSearchLibraryUnauthorized | 401                                        | application/json                           |
 | models/errors/SDKError                     | 4XX, 5XX                                   | \*/\*                                      |
 
+## getSearchAllLibraries
+
+Search the provided query across all library sections, or a single section, and return matches as hubs, split up by type.
+
+
+### Example Usage
+
+```java
+package hello.world;
+
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.GetSearchAllLibrariesBadRequest;
+import dev.plexapi.sdk.models.errors.GetSearchAllLibrariesUnauthorized;
+import dev.plexapi.sdk.models.operations.GetSearchAllLibrariesRequest;
+import dev.plexapi.sdk.models.operations.GetSearchAllLibrariesResponse;
+import dev.plexapi.sdk.models.operations.QueryParamIncludeCollections;
+import dev.plexapi.sdk.models.operations.QueryParamIncludeExternalMedia;
+import dev.plexapi.sdk.models.operations.SearchTypes;
+import java.lang.Exception;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) throws GetSearchAllLibrariesBadRequest, GetSearchAllLibrariesUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
+                .accessToken("<YOUR_API_KEY_HERE>")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
+            .build();
+
+        GetSearchAllLibrariesRequest req = GetSearchAllLibrariesRequest.builder()
+                .query("<value>")
+                .searchTypes(List.of(
+                    SearchTypes.PEOPLE))
+                .includeCollections(QueryParamIncludeCollections.Enable)
+                .includeExternalMedia(QueryParamIncludeExternalMedia.Enable)
+                .build();
+
+        GetSearchAllLibrariesResponse res = sdk.library().getSearchAllLibraries()
+                .request(req)
+                .call();
+
+        if (res.object().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `request`                                                                               | [GetSearchAllLibrariesRequest](../../models/operations/GetSearchAllLibrariesRequest.md) | :heavy_check_mark:                                                                      | The request object to use for the request.                                              |
+
+### Response
+
+**[GetSearchAllLibrariesResponse](../../models/operations/GetSearchAllLibrariesResponse.md)**
+
+### Errors
+
+| Error Type                                      | Status Code                                     | Content Type                                    |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| models/errors/GetSearchAllLibrariesBadRequest   | 400                                             | application/json                                |
+| models/errors/GetSearchAllLibrariesUnauthorized | 401                                             | application/json                                |
+| models/errors/SDKError                          | 4XX, 5XX                                        | \*/\*                                           |
+
 ## getMetaDataByRatingKey
 
 This endpoint will return the metadata of a library item specified with the ratingKey.
@@ -623,11 +695,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetMetaDataByRatingKeyResponse res = sdk.library().getMetaDataByRatingKey()
@@ -681,11 +753,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetMetadataChildrenResponse res = sdk.library().getMetadataChildren()
@@ -742,16 +814,16 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetTopWatchedContentResponse res = sdk.library().getTopWatchedContent()
-                .type(GetTopWatchedContentQueryParamType.TvShow)
                 .includeGuids(1L)
+                .type(GetTopWatchedContentQueryParamType.TvShow)
                 .call();
 
         if (res.object().isPresent()) {
@@ -765,8 +837,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                       | Type                                                                                                                                                                            | Required                                                                                                                                                                        | Description                                                                                                                                                                     | Example                                                                                                                                                                         |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                                                          | [GetTopWatchedContentQueryParamType](../../models/operations/GetTopWatchedContentQueryParamType.md)                                                                             | :heavy_check_mark:                                                                                                                                                              | The type of media to retrieve.<br/>1 = movie<br/>2 = show<br/>3 = season<br/>4 = episode<br/>E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries<br/> | 2                                                                                                                                                                               |
 | `includeGuids`                                                                                                                                                                  | *Optional<Long>*                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                              | Adds the Guids object to the response<br/>                                                                                                                                      | 1                                                                                                                                                                               |
+| `type`                                                                                                                                                                          | [GetTopWatchedContentQueryParamType](../../models/operations/GetTopWatchedContentQueryParamType.md)                                                                             | :heavy_check_mark:                                                                                                                                                              | The type of media to retrieve.<br/>1 = movie<br/>2 = show<br/>3 = season<br/>4 = episode<br/>E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries<br/> | 2                                                                                                                                                                               |
 
 ### Response
 
@@ -802,11 +874,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetOnDeckResponse res = sdk.library().getOnDeck()

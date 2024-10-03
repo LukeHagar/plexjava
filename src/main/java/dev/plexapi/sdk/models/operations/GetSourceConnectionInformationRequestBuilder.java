@@ -4,12 +4,16 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import dev.plexapi.sdk.utils.Options;
+import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.String;
+import java.util.Optional;
 
 public class GetSourceConnectionInformationRequestBuilder {
 
     private String source;
+    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetSourceConnectionInformation sdk;
 
     public GetSourceConnectionInformationRequestBuilder(SDKMethodInterfaces.MethodCallGetSourceConnectionInformation sdk) {
@@ -21,10 +25,25 @@ public class GetSourceConnectionInformationRequestBuilder {
         this.source = source;
         return this;
     }
+                
+    public GetSourceConnectionInformationRequestBuilder retryConfig(RetryConfig retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = Optional.of(retryConfig);
+        return this;
+    }
+
+    public GetSourceConnectionInformationRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = retryConfig;
+        return this;
+    }
 
     public GetSourceConnectionInformationResponse call() throws Exception {
-
+        Optional<Options> options = Optional.of(Options.builder()
+                                                    .retryConfig(retryConfig)
+                                                    .build());
         return sdk.getSourceConnectionInformation(
-            source);
+            source,
+            options);
     }
 }

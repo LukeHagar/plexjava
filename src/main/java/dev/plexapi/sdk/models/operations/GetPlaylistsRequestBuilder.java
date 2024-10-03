@@ -4,6 +4,8 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import dev.plexapi.sdk.utils.Options;
+import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.util.Optional;
 
@@ -11,6 +13,7 @@ public class GetPlaylistsRequestBuilder {
 
     private Optional<? extends PlaylistType> playlistType = Optional.empty();
     private Optional<? extends QueryParamSmart> smart = Optional.empty();
+    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetPlaylists sdk;
 
     public GetPlaylistsRequestBuilder(SDKMethodInterfaces.MethodCallGetPlaylists sdk) {
@@ -40,11 +43,26 @@ public class GetPlaylistsRequestBuilder {
         this.smart = smart;
         return this;
     }
+                
+    public GetPlaylistsRequestBuilder retryConfig(RetryConfig retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = Optional.of(retryConfig);
+        return this;
+    }
+
+    public GetPlaylistsRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = retryConfig;
+        return this;
+    }
 
     public GetPlaylistsResponse call() throws Exception {
-
+        Optional<Options> options = Optional.of(Options.builder()
+                                                    .retryConfig(retryConfig)
+                                                    .build());
         return sdk.getPlaylists(
             playlistType,
-            smart);
+            smart,
+            options);
     }
 }

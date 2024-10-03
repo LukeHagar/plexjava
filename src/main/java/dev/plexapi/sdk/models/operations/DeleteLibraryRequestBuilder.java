@@ -4,12 +4,16 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import dev.plexapi.sdk.utils.Options;
+import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
+import java.util.Optional;
 
 public class DeleteLibraryRequestBuilder {
 
     private Integer sectionKey;
+    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallDeleteLibrary sdk;
 
     public DeleteLibraryRequestBuilder(SDKMethodInterfaces.MethodCallDeleteLibrary sdk) {
@@ -21,10 +25,25 @@ public class DeleteLibraryRequestBuilder {
         this.sectionKey = sectionKey;
         return this;
     }
+                
+    public DeleteLibraryRequestBuilder retryConfig(RetryConfig retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = Optional.of(retryConfig);
+        return this;
+    }
+
+    public DeleteLibraryRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = retryConfig;
+        return this;
+    }
 
     public DeleteLibraryResponse call() throws Exception {
-
+        Optional<Options> options = Optional.of(Options.builder()
+                                                    .retryConfig(retryConfig)
+                                                    .build());
         return sdk.deleteLibrary(
-            sectionKey);
+            sectionKey,
+            options);
     }
 }

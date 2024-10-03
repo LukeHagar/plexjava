@@ -4,6 +4,8 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import dev.plexapi.sdk.utils.Options;
+import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.util.Optional;
@@ -13,6 +15,7 @@ public class GetLibraryHubsRequestBuilder {
     private Double sectionId;
     private Optional<Double> count = Optional.empty();
     private Optional<? extends QueryParamOnlyTransient> onlyTransient = Optional.empty();
+    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetLibraryHubs sdk;
 
     public GetLibraryHubsRequestBuilder(SDKMethodInterfaces.MethodCallGetLibraryHubs sdk) {
@@ -48,12 +51,27 @@ public class GetLibraryHubsRequestBuilder {
         this.onlyTransient = onlyTransient;
         return this;
     }
+                
+    public GetLibraryHubsRequestBuilder retryConfig(RetryConfig retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = Optional.of(retryConfig);
+        return this;
+    }
+
+    public GetLibraryHubsRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = retryConfig;
+        return this;
+    }
 
     public GetLibraryHubsResponse call() throws Exception {
-
+        Optional<Options> options = Optional.of(Options.builder()
+                                                    .retryConfig(retryConfig)
+                                                    .build());
         return sdk.getLibraryHubs(
             sectionId,
             count,
-            onlyTransient);
+            onlyTransient,
+            options);
     }
 }

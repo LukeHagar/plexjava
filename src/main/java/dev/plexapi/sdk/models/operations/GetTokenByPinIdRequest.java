@@ -25,43 +25,55 @@ public class GetTokenByPinIdRequest {
     private long pinID;
 
     /**
-     * The unique identifier for the client application. This is used to track the client application and its usage. (UUID, serial number, or other number unique per device)
+     * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
      */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Client-Identifier")
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Client-Identifier")
     private Optional<String> clientID;
 
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Product")
+    /**
+     * The name of the client application. (Plex Web, Plex Media Server, etc.)
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Product")
     private Optional<String> clientName;
 
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Device")
-    private Optional<String> deviceName;
+    /**
+     * A relatively friendly name for the client device
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Device")
+    private Optional<String> deviceNickname;
 
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Version")
+    /**
+     * The version of the client application.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Version")
     private Optional<String> clientVersion;
 
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Platform")
-    private Optional<String> clientPlatform;
+    /**
+     * The platform of the client application.
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Platform")
+    private Optional<String> platform;
 
     @JsonCreator
     public GetTokenByPinIdRequest(
             long pinID,
             Optional<String> clientID,
             Optional<String> clientName,
-            Optional<String> deviceName,
+            Optional<String> deviceNickname,
             Optional<String> clientVersion,
-            Optional<String> clientPlatform) {
+            Optional<String> platform) {
         Utils.checkNotNull(pinID, "pinID");
         Utils.checkNotNull(clientID, "clientID");
         Utils.checkNotNull(clientName, "clientName");
-        Utils.checkNotNull(deviceName, "deviceName");
+        Utils.checkNotNull(deviceNickname, "deviceNickname");
         Utils.checkNotNull(clientVersion, "clientVersion");
-        Utils.checkNotNull(clientPlatform, "clientPlatform");
+        Utils.checkNotNull(platform, "platform");
         this.pinID = pinID;
         this.clientID = clientID;
         this.clientName = clientName;
-        this.deviceName = deviceName;
+        this.deviceNickname = deviceNickname;
         this.clientVersion = clientVersion;
-        this.clientPlatform = clientPlatform;
+        this.platform = platform;
     }
     
     public GetTokenByPinIdRequest(
@@ -78,31 +90,43 @@ public class GetTokenByPinIdRequest {
     }
 
     /**
-     * The unique identifier for the client application. This is used to track the client application and its usage. (UUID, serial number, or other number unique per device)
+     * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
      */
     @JsonIgnore
     public Optional<String> clientID() {
         return clientID;
     }
 
+    /**
+     * The name of the client application. (Plex Web, Plex Media Server, etc.)
+     */
     @JsonIgnore
     public Optional<String> clientName() {
         return clientName;
     }
 
+    /**
+     * A relatively friendly name for the client device
+     */
     @JsonIgnore
-    public Optional<String> deviceName() {
-        return deviceName;
+    public Optional<String> deviceNickname() {
+        return deviceNickname;
     }
 
+    /**
+     * The version of the client application.
+     */
     @JsonIgnore
     public Optional<String> clientVersion() {
         return clientVersion;
     }
 
+    /**
+     * The platform of the client application.
+     */
     @JsonIgnore
-    public Optional<String> clientPlatform() {
-        return clientPlatform;
+    public Optional<String> platform() {
+        return platform;
     }
 
     public final static Builder builder() {
@@ -119,7 +143,7 @@ public class GetTokenByPinIdRequest {
     }
 
     /**
-     * The unique identifier for the client application. This is used to track the client application and its usage. (UUID, serial number, or other number unique per device)
+     * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
      */
     public GetTokenByPinIdRequest withClientID(String clientID) {
         Utils.checkNotNull(clientID, "clientID");
@@ -128,7 +152,7 @@ public class GetTokenByPinIdRequest {
     }
 
     /**
-     * The unique identifier for the client application. This is used to track the client application and its usage. (UUID, serial number, or other number unique per device)
+     * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
      */
     public GetTokenByPinIdRequest withClientID(Optional<String> clientID) {
         Utils.checkNotNull(clientID, "clientID");
@@ -136,51 +160,75 @@ public class GetTokenByPinIdRequest {
         return this;
     }
 
+    /**
+     * The name of the client application. (Plex Web, Plex Media Server, etc.)
+     */
     public GetTokenByPinIdRequest withClientName(String clientName) {
         Utils.checkNotNull(clientName, "clientName");
         this.clientName = Optional.ofNullable(clientName);
         return this;
     }
 
+    /**
+     * The name of the client application. (Plex Web, Plex Media Server, etc.)
+     */
     public GetTokenByPinIdRequest withClientName(Optional<String> clientName) {
         Utils.checkNotNull(clientName, "clientName");
         this.clientName = clientName;
         return this;
     }
 
-    public GetTokenByPinIdRequest withDeviceName(String deviceName) {
-        Utils.checkNotNull(deviceName, "deviceName");
-        this.deviceName = Optional.ofNullable(deviceName);
+    /**
+     * A relatively friendly name for the client device
+     */
+    public GetTokenByPinIdRequest withDeviceNickname(String deviceNickname) {
+        Utils.checkNotNull(deviceNickname, "deviceNickname");
+        this.deviceNickname = Optional.ofNullable(deviceNickname);
         return this;
     }
 
-    public GetTokenByPinIdRequest withDeviceName(Optional<String> deviceName) {
-        Utils.checkNotNull(deviceName, "deviceName");
-        this.deviceName = deviceName;
+    /**
+     * A relatively friendly name for the client device
+     */
+    public GetTokenByPinIdRequest withDeviceNickname(Optional<String> deviceNickname) {
+        Utils.checkNotNull(deviceNickname, "deviceNickname");
+        this.deviceNickname = deviceNickname;
         return this;
     }
 
+    /**
+     * The version of the client application.
+     */
     public GetTokenByPinIdRequest withClientVersion(String clientVersion) {
         Utils.checkNotNull(clientVersion, "clientVersion");
         this.clientVersion = Optional.ofNullable(clientVersion);
         return this;
     }
 
+    /**
+     * The version of the client application.
+     */
     public GetTokenByPinIdRequest withClientVersion(Optional<String> clientVersion) {
         Utils.checkNotNull(clientVersion, "clientVersion");
         this.clientVersion = clientVersion;
         return this;
     }
 
-    public GetTokenByPinIdRequest withClientPlatform(String clientPlatform) {
-        Utils.checkNotNull(clientPlatform, "clientPlatform");
-        this.clientPlatform = Optional.ofNullable(clientPlatform);
+    /**
+     * The platform of the client application.
+     */
+    public GetTokenByPinIdRequest withPlatform(String platform) {
+        Utils.checkNotNull(platform, "platform");
+        this.platform = Optional.ofNullable(platform);
         return this;
     }
 
-    public GetTokenByPinIdRequest withClientPlatform(Optional<String> clientPlatform) {
-        Utils.checkNotNull(clientPlatform, "clientPlatform");
-        this.clientPlatform = clientPlatform;
+    /**
+     * The platform of the client application.
+     */
+    public GetTokenByPinIdRequest withPlatform(Optional<String> platform) {
+        Utils.checkNotNull(platform, "platform");
+        this.platform = platform;
         return this;
     }
     
@@ -197,9 +245,9 @@ public class GetTokenByPinIdRequest {
             Objects.deepEquals(this.pinID, other.pinID) &&
             Objects.deepEquals(this.clientID, other.clientID) &&
             Objects.deepEquals(this.clientName, other.clientName) &&
-            Objects.deepEquals(this.deviceName, other.deviceName) &&
+            Objects.deepEquals(this.deviceNickname, other.deviceNickname) &&
             Objects.deepEquals(this.clientVersion, other.clientVersion) &&
-            Objects.deepEquals(this.clientPlatform, other.clientPlatform);
+            Objects.deepEquals(this.platform, other.platform);
     }
     
     @Override
@@ -208,9 +256,9 @@ public class GetTokenByPinIdRequest {
             pinID,
             clientID,
             clientName,
-            deviceName,
+            deviceNickname,
             clientVersion,
-            clientPlatform);
+            platform);
     }
     
     @Override
@@ -219,9 +267,9 @@ public class GetTokenByPinIdRequest {
                 "pinID", pinID,
                 "clientID", clientID,
                 "clientName", clientName,
-                "deviceName", deviceName,
+                "deviceNickname", deviceNickname,
                 "clientVersion", clientVersion,
-                "clientPlatform", clientPlatform);
+                "platform", platform);
     }
     
     public final static class Builder {
@@ -232,11 +280,11 @@ public class GetTokenByPinIdRequest {
  
         private Optional<String> clientName = Optional.empty();
  
-        private Optional<String> deviceName = Optional.empty();
+        private Optional<String> deviceNickname = Optional.empty();
  
         private Optional<String> clientVersion = Optional.empty();
  
-        private Optional<String> clientPlatform = Optional.empty();  
+        private Optional<String> platform = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -252,7 +300,7 @@ public class GetTokenByPinIdRequest {
         }
 
         /**
-         * The unique identifier for the client application. This is used to track the client application and its usage. (UUID, serial number, or other number unique per device)
+         * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
          */
         public Builder clientID(String clientID) {
             Utils.checkNotNull(clientID, "clientID");
@@ -261,7 +309,7 @@ public class GetTokenByPinIdRequest {
         }
 
         /**
-         * The unique identifier for the client application. This is used to track the client application and its usage. (UUID, serial number, or other number unique per device)
+         * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
          */
         public Builder clientID(Optional<String> clientID) {
             Utils.checkNotNull(clientID, "clientID");
@@ -269,51 +317,75 @@ public class GetTokenByPinIdRequest {
             return this;
         }
 
+        /**
+         * The name of the client application. (Plex Web, Plex Media Server, etc.)
+         */
         public Builder clientName(String clientName) {
             Utils.checkNotNull(clientName, "clientName");
             this.clientName = Optional.ofNullable(clientName);
             return this;
         }
 
+        /**
+         * The name of the client application. (Plex Web, Plex Media Server, etc.)
+         */
         public Builder clientName(Optional<String> clientName) {
             Utils.checkNotNull(clientName, "clientName");
             this.clientName = clientName;
             return this;
         }
 
-        public Builder deviceName(String deviceName) {
-            Utils.checkNotNull(deviceName, "deviceName");
-            this.deviceName = Optional.ofNullable(deviceName);
+        /**
+         * A relatively friendly name for the client device
+         */
+        public Builder deviceNickname(String deviceNickname) {
+            Utils.checkNotNull(deviceNickname, "deviceNickname");
+            this.deviceNickname = Optional.ofNullable(deviceNickname);
             return this;
         }
 
-        public Builder deviceName(Optional<String> deviceName) {
-            Utils.checkNotNull(deviceName, "deviceName");
-            this.deviceName = deviceName;
+        /**
+         * A relatively friendly name for the client device
+         */
+        public Builder deviceNickname(Optional<String> deviceNickname) {
+            Utils.checkNotNull(deviceNickname, "deviceNickname");
+            this.deviceNickname = deviceNickname;
             return this;
         }
 
+        /**
+         * The version of the client application.
+         */
         public Builder clientVersion(String clientVersion) {
             Utils.checkNotNull(clientVersion, "clientVersion");
             this.clientVersion = Optional.ofNullable(clientVersion);
             return this;
         }
 
+        /**
+         * The version of the client application.
+         */
         public Builder clientVersion(Optional<String> clientVersion) {
             Utils.checkNotNull(clientVersion, "clientVersion");
             this.clientVersion = clientVersion;
             return this;
         }
 
-        public Builder clientPlatform(String clientPlatform) {
-            Utils.checkNotNull(clientPlatform, "clientPlatform");
-            this.clientPlatform = Optional.ofNullable(clientPlatform);
+        /**
+         * The platform of the client application.
+         */
+        public Builder platform(String platform) {
+            Utils.checkNotNull(platform, "platform");
+            this.platform = Optional.ofNullable(platform);
             return this;
         }
 
-        public Builder clientPlatform(Optional<String> clientPlatform) {
-            Utils.checkNotNull(clientPlatform, "clientPlatform");
-            this.clientPlatform = clientPlatform;
+        /**
+         * The platform of the client application.
+         */
+        public Builder platform(Optional<String> platform) {
+            Utils.checkNotNull(platform, "platform");
+            this.platform = platform;
             return this;
         }
         
@@ -322,9 +394,9 @@ public class GetTokenByPinIdRequest {
                 pinID,
                 clientID,
                 clientName,
-                deviceName,
+                deviceNickname,
                 clientVersion,
-                clientPlatform);
+                platform);
         }
     }
 }

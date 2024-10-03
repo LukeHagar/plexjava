@@ -4,11 +4,15 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import dev.plexapi.sdk.utils.Options;
+import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
+import java.util.Optional;
 
 public class StartUniversalTranscodeRequestBuilder {
 
     private StartUniversalTranscodeRequest request;
+    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallStartUniversalTranscode sdk;
 
     public StartUniversalTranscodeRequestBuilder(SDKMethodInterfaces.MethodCallStartUniversalTranscode sdk) {
@@ -20,10 +24,25 @@ public class StartUniversalTranscodeRequestBuilder {
         this.request = request;
         return this;
     }
+                
+    public StartUniversalTranscodeRequestBuilder retryConfig(RetryConfig retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = Optional.of(retryConfig);
+        return this;
+    }
+
+    public StartUniversalTranscodeRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = retryConfig;
+        return this;
+    }
 
     public StartUniversalTranscodeResponse call() throws Exception {
-
+        Optional<Options> options = Optional.of(Options.builder()
+                                                    .retryConfig(retryConfig)
+                                                    .build());
         return sdk.startUniversalTranscode(
-            request);
+            request,
+            options);
     }
 }

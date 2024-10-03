@@ -28,7 +28,7 @@ public class PostUsersSignInDataAuthenticationSubscription {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("features")
-    private Optional<? extends List<PostUsersSignInDataAuthenticationFeatures>> features;
+    private Optional<? extends List<String>> features;
 
     /**
      * If the account's Plex Pass subscription is active
@@ -67,7 +67,7 @@ public class PostUsersSignInDataAuthenticationSubscription {
 
     @JsonCreator
     public PostUsersSignInDataAuthenticationSubscription(
-            @JsonProperty("features") Optional<? extends List<PostUsersSignInDataAuthenticationFeatures>> features,
+            @JsonProperty("features") Optional<? extends List<String>> features,
             @JsonProperty("active") Optional<Boolean> active,
             @JsonProperty("subscribedAt") JsonNullable<String> subscribedAt,
             @JsonProperty("status") Optional<? extends PostUsersSignInDataAuthenticationResponseStatus> status,
@@ -96,8 +96,8 @@ public class PostUsersSignInDataAuthenticationSubscription {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<PostUsersSignInDataAuthenticationFeatures>> features() {
-        return (Optional<List<PostUsersSignInDataAuthenticationFeatures>>) features;
+    public Optional<List<String>> features() {
+        return (Optional<List<String>>) features;
     }
 
     /**
@@ -148,7 +148,7 @@ public class PostUsersSignInDataAuthenticationSubscription {
     /**
      * List of features allowed on your Plex Pass subscription
      */
-    public PostUsersSignInDataAuthenticationSubscription withFeatures(List<PostUsersSignInDataAuthenticationFeatures> features) {
+    public PostUsersSignInDataAuthenticationSubscription withFeatures(List<String> features) {
         Utils.checkNotNull(features, "features");
         this.features = Optional.ofNullable(features);
         return this;
@@ -157,7 +157,7 @@ public class PostUsersSignInDataAuthenticationSubscription {
     /**
      * List of features allowed on your Plex Pass subscription
      */
-    public PostUsersSignInDataAuthenticationSubscription withFeatures(Optional<? extends List<PostUsersSignInDataAuthenticationFeatures>> features) {
+    public PostUsersSignInDataAuthenticationSubscription withFeatures(Optional<? extends List<String>> features) {
         Utils.checkNotNull(features, "features");
         this.features = features;
         return this;
@@ -295,7 +295,7 @@ public class PostUsersSignInDataAuthenticationSubscription {
     
     public final static class Builder {
  
-        private Optional<? extends List<PostUsersSignInDataAuthenticationFeatures>> features = Optional.empty();
+        private Optional<? extends List<String>> features = Optional.empty();
  
         private Optional<Boolean> active = Optional.empty();
  
@@ -314,7 +314,7 @@ public class PostUsersSignInDataAuthenticationSubscription {
         /**
          * List of features allowed on your Plex Pass subscription
          */
-        public Builder features(List<PostUsersSignInDataAuthenticationFeatures> features) {
+        public Builder features(List<String> features) {
             Utils.checkNotNull(features, "features");
             this.features = Optional.ofNullable(features);
             return this;
@@ -323,7 +323,7 @@ public class PostUsersSignInDataAuthenticationSubscription {
         /**
          * List of features allowed on your Plex Pass subscription
          */
-        public Builder features(Optional<? extends List<PostUsersSignInDataAuthenticationFeatures>> features) {
+        public Builder features(Optional<? extends List<String>> features) {
             Utils.checkNotNull(features, "features");
             this.features = features;
             return this;

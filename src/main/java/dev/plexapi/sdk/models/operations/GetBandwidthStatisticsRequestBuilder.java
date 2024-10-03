@@ -4,6 +4,8 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import dev.plexapi.sdk.utils.Options;
+import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Long;
 import java.util.Optional;
@@ -11,6 +13,7 @@ import java.util.Optional;
 public class GetBandwidthStatisticsRequestBuilder {
 
     private Optional<Long> timespan = Optional.empty();
+    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetBandwidthStatistics sdk;
 
     public GetBandwidthStatisticsRequestBuilder(SDKMethodInterfaces.MethodCallGetBandwidthStatistics sdk) {
@@ -28,10 +31,25 @@ public class GetBandwidthStatisticsRequestBuilder {
         this.timespan = timespan;
         return this;
     }
+                
+    public GetBandwidthStatisticsRequestBuilder retryConfig(RetryConfig retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = Optional.of(retryConfig);
+        return this;
+    }
+
+    public GetBandwidthStatisticsRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = retryConfig;
+        return this;
+    }
 
     public GetBandwidthStatisticsResponse call() throws Exception {
-
+        Optional<Options> options = Optional.of(Options.builder()
+                                                    .retryConfig(retryConfig)
+                                                    .build());
         return sdk.getBandwidthStatistics(
-            timespan);
+            timespan,
+            options);
     }
 }

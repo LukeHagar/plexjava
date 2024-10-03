@@ -45,7 +45,7 @@ The following SDKs are generated from the OpenAPI Specification. They are automa
 * [SDK Installation](#sdk-installation)
 * [SDK Example Usage](#sdk-example-usage)
 * [Available Resources and Operations](#available-resources-and-operations)
-* [Global Parameters](#global-parameters)
+* [Retries](#retries)
 * [Error Handling](#error-handling)
 * [Server Selection](#server-selection)
 * [Authentication](#authentication)
@@ -62,7 +62,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'dev.plexapi:plexapi:0.7.0'
+implementation 'dev.plexapi:plexapi:0.8.0'
 ```
 
 Maven:
@@ -70,7 +70,7 @@ Maven:
 <dependency>
     <groupId>dev.plexapi</groupId>
     <artifactId>plexapi</artifactId>
-    <version>0.7.0</version>
+    <version>0.8.0</version>
 </dependency>
 ```
 
@@ -109,11 +109,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
@@ -169,6 +169,7 @@ public class Application {
 * [getLibraryItems](docs/sdks/library/README.md#getlibraryitems) - Get Library Items
 * [getRefreshLibraryMetadata](docs/sdks/library/README.md#getrefreshlibrarymetadata) - Refresh Metadata Of The Library
 * [getSearchLibrary](docs/sdks/library/README.md#getsearchlibrary) - Search Library
+* [getSearchAllLibraries](docs/sdks/library/README.md#getsearchalllibraries) - Search All Libraries
 * [getMetaDataByRatingKey](docs/sdks/library/README.md#getmetadatabyratingkey) - Get Metadata by RatingKey
 * [getMetadataChildren](docs/sdks/library/README.md#getmetadatachildren) - Get Items Children
 * [getTopWatchedContent](docs/sdks/library/README.md#gettopwatchedcontent) - Get Top Watched Content
@@ -260,68 +261,103 @@ public class Application {
 </details>
 <!-- End Available Resources and Operations [operations] -->
 
-<!-- Start Global Parameters [global-parameters] -->
-## Global Parameters
+<!-- Start Retries [retries] -->
+## Retries
 
-Certain parameters are configured globally. These parameters may be set on the SDK client instance itself during initialization. When configured as an option during SDK initialization, These global values will be used as defaults on the operations that use them. When such operations are called, there is a place in each to override the global value, if needed.
+Some of the endpoints in this SDK support retries. If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API. However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
 
-For example, you can set `ClientID` to `"gcgzw5rz2xovp84b4vha3a40"` at SDK initialization and then you do not have to pass the same value on calls to operations like `getServerResources`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
-
-
-### Available Globals
-
-The following global parameters are available.
-
-| Name | Type | Required | Description |
-| ---- | ---- |:--------:| ----------- |
-| clientID | java.lang.String |  | The unique identifier for the client application. This is used to track the client application and its usage. (UUID, serial number, or other number unique per device) |
-| clientName | java.lang.String |  | The clientName parameter. |
-| clientVersion | java.lang.String |  | The clientVersion parameter. |
-| clientPlatform | java.lang.String |  | The clientPlatform parameter. |
-| deviceName | java.lang.String |  | The deviceName parameter. |
-
-
-### Example
-
+To change the default retry strategy for a single API call, you can provide a `RetryConfig` object through the `retryConfig` builder method:
 ```java
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.GetServerResourcesBadRequest;
-import dev.plexapi.sdk.models.errors.GetServerResourcesUnauthorized;
-import dev.plexapi.sdk.models.operations.GetServerResourcesResponse;
-import dev.plexapi.sdk.models.operations.IncludeHttps;
-import dev.plexapi.sdk.models.operations.IncludeIPv6;
-import dev.plexapi.sdk.models.operations.IncludeRelay;
+import dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest;
+import dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized;
+import dev.plexapi.sdk.models.operations.GetServerCapabilitiesResponse;
+import dev.plexapi.sdk.utils.BackoffStrategy;
+import dev.plexapi.sdk.utils.RetryConfig;
 import java.lang.Exception;
+import java.util.concurrent.TimeUnit;
 
 public class Application {
 
-    public static void main(String[] args) throws GetServerResourcesBadRequest, GetServerResourcesUnauthorized, Exception {
+    public static void main(String[] args) throws GetServerCapabilitiesBadRequest, GetServerCapabilitiesUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
-        GetServerResourcesResponse res = sdk.plex().getServerResources()
-                .includeHttps(IncludeHttps.Enable)
-                .includeRelay(IncludeRelay.Enable)
-                .includeIPv6(IncludeIPv6.Enable)
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
+        GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
+                .retryConfig(RetryConfig.builder()
+                    .backoff(BackoffStrategy.builder()
+                        .initialInterval(1L, TimeUnit.MILLISECONDS)
+                        .maxInterval(50L, TimeUnit.MILLISECONDS)
+                        .maxElapsedTime(1000L, TimeUnit.MILLISECONDS)
+                        .baseFactor(1.1)
+                        .jitterFactor(0.15)
+                        .retryConnectError(false)
+                        .build())
+                    .build())
                 .call();
 
-        if (res.plexDevices().isPresent()) {
+        if (res.object().isPresent()) {
             // handle response
         }
     }
 }
 ```
-<!-- End Global Parameters [global-parameters] -->
+
+If you'd like to override the default retry strategy for all operations that support retries, you can provide a configuration at SDK initialization:
+```java
+package hello.world;
+
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest;
+import dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized;
+import dev.plexapi.sdk.models.operations.GetServerCapabilitiesResponse;
+import dev.plexapi.sdk.utils.BackoffStrategy;
+import dev.plexapi.sdk.utils.RetryConfig;
+import java.lang.Exception;
+import java.util.concurrent.TimeUnit;
+
+public class Application {
+
+    public static void main(String[] args) throws GetServerCapabilitiesBadRequest, GetServerCapabilitiesUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
+                .retryConfig(RetryConfig.builder()
+                    .backoff(BackoffStrategy.builder()
+                        .initialInterval(1L, TimeUnit.MILLISECONDS)
+                        .maxInterval(50L, TimeUnit.MILLISECONDS)
+                        .maxElapsedTime(1000L, TimeUnit.MILLISECONDS)
+                        .baseFactor(1.1)
+                        .jitterFactor(0.15)
+                        .retryConnectError(false)
+                        .build())
+                    .build())
+                .accessToken("<YOUR_API_KEY_HERE>")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
+            .build();
+
+        GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
+                .call();
+
+        if (res.object().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+<!-- End Retries [retries] -->
 
 <!-- Start Error Handling [errors] -->
 ## Error Handling
@@ -353,11 +389,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
@@ -400,11 +436,11 @@ public class Application {
         PlexAPI sdk = PlexAPI.builder()
                 .serverIndex(0)
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
@@ -443,11 +479,11 @@ public class Application {
         PlexAPI sdk = PlexAPI.builder()
                 .serverURL("{protocol}://{ip}:{port}")
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
@@ -478,11 +514,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetCompanionsDataResponse res = sdk.plex().getCompanionsData()
@@ -524,11 +560,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()

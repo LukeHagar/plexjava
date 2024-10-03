@@ -39,7 +39,7 @@ import java.util.Optional;
  * | Swift                 | [GitHub](https://github.com/LukeHagar/plexswift)  | [Releases](https://github.com/LukeHagar/plexswift/releases)                                      | -                                                       |
  * | PHP                   | [GitHub](https://github.com/LukeHagar/plexphp)    | [Releases](https://github.com/LukeHagar/plexphp/releases)                                        | -                                                       |
  * | Java                  | [GitHub](https://github.com/LukeHagar/plexjava)   | [Releases](https://github.com/LukeHagar/plexjava/releases)                                       | -                                                       |
- * | C#                    | [GitHub](https://github.com/LukeHagar/plexcsharp) | [Releases](https://github.com/LukeHagar/plexcsharp/releases)                                     | -     
+ * | C#                    | [GitHub](https://github.com/LukeHagar/plexcsharp) | [Releases](https://github.com/LukeHagar/plexcsharp/releases)                                     | -
  * 
  */
 public class PlexAPI {
@@ -465,11 +465,11 @@ public class PlexAPI {
          * @return The builder instance.
          */
         public Builder clientID(String clientID) {
-            if (!this.sdkConfiguration.globals.get("parameters").containsKey("queryParam")) {
-                this.sdkConfiguration.globals.get("parameters").put("queryParam", new java.util.HashMap<>());
+            if (!this.sdkConfiguration.globals.get("parameters").containsKey("header")) {
+                this.sdkConfiguration.globals.get("parameters").put("header", new java.util.HashMap<>());
             }
 
-            this.sdkConfiguration.globals.get("parameters").get("queryParam").put("clientID", clientID);
+            this.sdkConfiguration.globals.get("parameters").get("header").put("clientID", clientID);
 
             return this;
         }
@@ -481,11 +481,11 @@ public class PlexAPI {
          * @return The builder instance.
          */
         public Builder clientName(String clientName) {
-            if (!this.sdkConfiguration.globals.get("parameters").containsKey("queryParam")) {
-                this.sdkConfiguration.globals.get("parameters").put("queryParam", new java.util.HashMap<>());
+            if (!this.sdkConfiguration.globals.get("parameters").containsKey("header")) {
+                this.sdkConfiguration.globals.get("parameters").put("header", new java.util.HashMap<>());
             }
 
-            this.sdkConfiguration.globals.get("parameters").get("queryParam").put("clientName", clientName);
+            this.sdkConfiguration.globals.get("parameters").get("header").put("clientName", clientName);
 
             return this;
         }
@@ -497,43 +497,43 @@ public class PlexAPI {
          * @return The builder instance.
          */
         public Builder clientVersion(String clientVersion) {
-            if (!this.sdkConfiguration.globals.get("parameters").containsKey("queryParam")) {
-                this.sdkConfiguration.globals.get("parameters").put("queryParam", new java.util.HashMap<>());
+            if (!this.sdkConfiguration.globals.get("parameters").containsKey("header")) {
+                this.sdkConfiguration.globals.get("parameters").put("header", new java.util.HashMap<>());
             }
 
-            this.sdkConfiguration.globals.get("parameters").get("queryParam").put("clientVersion", clientVersion);
+            this.sdkConfiguration.globals.get("parameters").get("header").put("clientVersion", clientVersion);
 
             return this;
         }
         
         /**
-         * Allows setting the clientPlatform parameter for all supported operations.
+         * Allows setting the platform parameter for all supported operations.
          *
-         * @param clientPlatform The value to set.
+         * @param platform The value to set.
          * @return The builder instance.
          */
-        public Builder clientPlatform(String clientPlatform) {
-            if (!this.sdkConfiguration.globals.get("parameters").containsKey("queryParam")) {
-                this.sdkConfiguration.globals.get("parameters").put("queryParam", new java.util.HashMap<>());
+        public Builder platform(String platform) {
+            if (!this.sdkConfiguration.globals.get("parameters").containsKey("header")) {
+                this.sdkConfiguration.globals.get("parameters").put("header", new java.util.HashMap<>());
             }
 
-            this.sdkConfiguration.globals.get("parameters").get("queryParam").put("clientPlatform", clientPlatform);
+            this.sdkConfiguration.globals.get("parameters").get("header").put("platform", platform);
 
             return this;
         }
         
         /**
-         * Allows setting the deviceName parameter for all supported operations.
+         * Allows setting the deviceNickname parameter for all supported operations.
          *
-         * @param deviceName The value to set.
+         * @param deviceNickname The value to set.
          * @return The builder instance.
          */
-        public Builder deviceName(String deviceName) {
-            if (!this.sdkConfiguration.globals.get("parameters").containsKey("queryParam")) {
-                this.sdkConfiguration.globals.get("parameters").put("queryParam", new java.util.HashMap<>());
+        public Builder deviceNickname(String deviceNickname) {
+            if (!this.sdkConfiguration.globals.get("parameters").containsKey("header")) {
+                this.sdkConfiguration.globals.get("parameters").put("header", new java.util.HashMap<>());
             }
 
-            this.sdkConfiguration.globals.get("parameters").get("queryParam").put("deviceName", deviceName);
+            this.sdkConfiguration.globals.get("parameters").get("header").put("deviceNickname", deviceNickname);
 
             return this;
         }

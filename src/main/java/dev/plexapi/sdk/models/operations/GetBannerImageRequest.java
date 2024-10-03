@@ -36,9 +36,9 @@ public class GetBannerImageRequest {
     private long upscale;
 
     /**
-     * Plex Authentication Token
+     * An authentication token, obtained from plex.tv
      */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Token")
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Token")
     private String xPlexToken;
 
     @JsonCreator
@@ -92,7 +92,7 @@ public class GetBannerImageRequest {
     }
 
     /**
-     * Plex Authentication Token
+     * An authentication token, obtained from plex.tv
      */
     @JsonIgnore
     public String xPlexToken() {
@@ -137,7 +137,7 @@ public class GetBannerImageRequest {
     }
 
     /**
-     * Plex Authentication Token
+     * An authentication token, obtained from plex.tv
      */
     public GetBannerImageRequest withXPlexToken(String xPlexToken) {
         Utils.checkNotNull(xPlexToken, "xPlexToken");
@@ -237,7 +237,7 @@ public class GetBannerImageRequest {
         }
 
         /**
-         * Plex Authentication Token
+         * An authentication token, obtained from plex.tv
          */
         public Builder xPlexToken(String xPlexToken) {
             Utils.checkNotNull(xPlexToken, "xPlexToken");

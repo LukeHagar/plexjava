@@ -93,7 +93,7 @@ public class GetAllLibrariesDirectory {
     private int hidden;
 
     @JsonProperty("Location")
-    private List<Location> location;
+    private List<GetAllLibrariesLocation> location;
 
     @JsonCreator
     public GetAllLibrariesDirectory(
@@ -117,7 +117,7 @@ public class GetAllLibrariesDirectory {
             @JsonProperty("directory") boolean directory,
             @JsonProperty("contentChangedAt") long contentChangedAt,
             @JsonProperty("hidden") int hidden,
-            @JsonProperty("Location") List<Location> location) {
+            @JsonProperty("Location") List<GetAllLibrariesLocation> location) {
         Utils.checkNotNull(allowSync, "allowSync");
         Utils.checkNotNull(art, "art");
         Utils.checkNotNull(composite, "composite");
@@ -275,7 +275,7 @@ public class GetAllLibrariesDirectory {
     }
 
     @JsonIgnore
-    public List<Location> location() {
+    public List<GetAllLibrariesLocation> location() {
         return location;
     }
 
@@ -415,7 +415,7 @@ public class GetAllLibrariesDirectory {
         return this;
     }
 
-    public GetAllLibrariesDirectory withLocation(List<Location> location) {
+    public GetAllLibrariesDirectory withLocation(List<GetAllLibrariesLocation> location) {
         Utils.checkNotNull(location, "location");
         this.location = location;
         return this;
@@ -548,7 +548,7 @@ public class GetAllLibrariesDirectory {
  
         private Integer hidden;
  
-        private List<Location> location;  
+        private List<GetAllLibrariesLocation> location;  
         
         private Builder() {
           // force use of static builder() method
@@ -686,7 +686,7 @@ public class GetAllLibrariesDirectory {
             return this;
         }
 
-        public Builder location(List<Location> location) {
+        public Builder location(List<GetAllLibrariesLocation> location) {
             Utils.checkNotNull(location, "location");
             this.location = location;
             return this;

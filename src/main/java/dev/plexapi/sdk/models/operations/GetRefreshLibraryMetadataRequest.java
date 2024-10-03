@@ -20,6 +20,12 @@ import java.util.Optional;
 public class GetRefreshLibraryMetadataRequest {
 
     /**
+     * Force the refresh even if the library is already being refreshed.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=force")
+    private Optional<? extends Force> force;
+
+    /**
      * The unique key of the Plex library. 
      * Note: This is unique in the context of the Plex server.
      * 
@@ -27,25 +33,28 @@ public class GetRefreshLibraryMetadataRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=sectionKey")
     private int sectionKey;
 
-    /**
-     * Force the refresh even if the library is already being refreshed.
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=force")
-    private Optional<? extends Force> force;
-
     @JsonCreator
     public GetRefreshLibraryMetadataRequest(
-            int sectionKey,
-            Optional<? extends Force> force) {
-        Utils.checkNotNull(sectionKey, "sectionKey");
+            Optional<? extends Force> force,
+            int sectionKey) {
         Utils.checkNotNull(force, "force");
-        this.sectionKey = sectionKey;
+        Utils.checkNotNull(sectionKey, "sectionKey");
         this.force = force;
+        this.sectionKey = sectionKey;
     }
     
     public GetRefreshLibraryMetadataRequest(
             int sectionKey) {
-        this(sectionKey, Optional.empty());
+        this(Optional.empty(), sectionKey);
+    }
+
+    /**
+     * Force the refresh even if the library is already being refreshed.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Force> force() {
+        return (Optional<Force>) force;
     }
 
     /**
@@ -58,28 +67,8 @@ public class GetRefreshLibraryMetadataRequest {
         return sectionKey;
     }
 
-    /**
-     * Force the refresh even if the library is already being refreshed.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<Force> force() {
-        return (Optional<Force>) force;
-    }
-
     public final static Builder builder() {
         return new Builder();
-    }
-
-    /**
-     * The unique key of the Plex library. 
-     * Note: This is unique in the context of the Plex server.
-     * 
-     */
-    public GetRefreshLibraryMetadataRequest withSectionKey(int sectionKey) {
-        Utils.checkNotNull(sectionKey, "sectionKey");
-        this.sectionKey = sectionKey;
-        return this;
     }
 
     /**
@@ -99,6 +88,17 @@ public class GetRefreshLibraryMetadataRequest {
         this.force = force;
         return this;
     }
+
+    /**
+     * The unique key of the Plex library. 
+     * Note: This is unique in the context of the Plex server.
+     * 
+     */
+    public GetRefreshLibraryMetadataRequest withSectionKey(int sectionKey) {
+        Utils.checkNotNull(sectionKey, "sectionKey");
+        this.sectionKey = sectionKey;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -110,43 +110,32 @@ public class GetRefreshLibraryMetadataRequest {
         }
         GetRefreshLibraryMetadataRequest other = (GetRefreshLibraryMetadataRequest) o;
         return 
-            Objects.deepEquals(this.sectionKey, other.sectionKey) &&
-            Objects.deepEquals(this.force, other.force);
+            Objects.deepEquals(this.force, other.force) &&
+            Objects.deepEquals(this.sectionKey, other.sectionKey);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
-            sectionKey,
-            force);
+            force,
+            sectionKey);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetRefreshLibraryMetadataRequest.class,
-                "sectionKey", sectionKey,
-                "force", force);
+                "force", force,
+                "sectionKey", sectionKey);
     }
     
     public final static class Builder {
  
-        private Integer sectionKey;
+        private Optional<? extends Force> force = Optional.empty();
  
-        private Optional<? extends Force> force = Optional.empty();  
+        private Integer sectionKey;  
         
         private Builder() {
           // force use of static builder() method
-        }
-
-        /**
-         * The unique key of the Plex library. 
-         * Note: This is unique in the context of the Plex server.
-         * 
-         */
-        public Builder sectionKey(int sectionKey) {
-            Utils.checkNotNull(sectionKey, "sectionKey");
-            this.sectionKey = sectionKey;
-            return this;
         }
 
         /**
@@ -166,11 +155,22 @@ public class GetRefreshLibraryMetadataRequest {
             this.force = force;
             return this;
         }
+
+        /**
+         * The unique key of the Plex library. 
+         * Note: This is unique in the context of the Plex server.
+         * 
+         */
+        public Builder sectionKey(int sectionKey) {
+            Utils.checkNotNull(sectionKey, "sectionKey");
+            this.sectionKey = sectionKey;
+            return this;
+        }
         
         public GetRefreshLibraryMetadataRequest build() {
             return new GetRefreshLibraryMetadataRequest(
-                sectionKey,
-                force);
+                force,
+                sectionKey);
         }
     }
 }

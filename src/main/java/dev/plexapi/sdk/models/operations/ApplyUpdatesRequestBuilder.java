@@ -4,6 +4,8 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import dev.plexapi.sdk.utils.Options;
+import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.util.Optional;
 
@@ -11,6 +13,7 @@ public class ApplyUpdatesRequestBuilder {
 
     private Optional<? extends Tonight> tonight = Optional.empty();
     private Optional<? extends Skip> skip = Optional.empty();
+    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallApplyUpdates sdk;
 
     public ApplyUpdatesRequestBuilder(SDKMethodInterfaces.MethodCallApplyUpdates sdk) {
@@ -40,11 +43,26 @@ public class ApplyUpdatesRequestBuilder {
         this.skip = skip;
         return this;
     }
+                
+    public ApplyUpdatesRequestBuilder retryConfig(RetryConfig retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = Optional.of(retryConfig);
+        return this;
+    }
+
+    public ApplyUpdatesRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = retryConfig;
+        return this;
+    }
 
     public ApplyUpdatesResponse call() throws Exception {
-
+        Optional<Options> options = Optional.of(Options.builder()
+                                                    .retryConfig(retryConfig)
+                                                    .build());
         return sdk.applyUpdates(
             tonight,
-            skip);
+            skip,
+            options);
     }
 }

@@ -4,6 +4,8 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import dev.plexapi.sdk.utils.Options;
+import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.String;
@@ -13,6 +15,7 @@ public class GetMetadataChildrenRequestBuilder {
 
     private Double ratingKey;
     private Optional<String> includeElements = Optional.empty();
+    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetMetadataChildren sdk;
 
     public GetMetadataChildrenRequestBuilder(SDKMethodInterfaces.MethodCallGetMetadataChildren sdk) {
@@ -36,11 +39,26 @@ public class GetMetadataChildrenRequestBuilder {
         this.includeElements = includeElements;
         return this;
     }
+                
+    public GetMetadataChildrenRequestBuilder retryConfig(RetryConfig retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = Optional.of(retryConfig);
+        return this;
+    }
+
+    public GetMetadataChildrenRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = retryConfig;
+        return this;
+    }
 
     public GetMetadataChildrenResponse call() throws Exception {
-
+        Optional<Options> options = Optional.of(Options.builder()
+                                                    .retryConfig(retryConfig)
+                                                    .build());
         return sdk.getMetadataChildren(
             ratingKey,
-            includeElements);
+            includeElements,
+            options);
     }
 }

@@ -22,14 +22,6 @@ import java.util.Optional;
 public class GetLibraryItemsRequest {
 
     /**
-     * The unique key of the Plex library. 
-     * Note: This is unique in the context of the Plex server.
-     * 
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=sectionKey")
-    private int sectionKey;
-
-    /**
      * A key representing a specific tag within the section.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=tag")
@@ -53,6 +45,14 @@ public class GetLibraryItemsRequest {
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")
     private Optional<? extends GetLibraryItemsQueryParamType> type;
+
+    /**
+     * The unique key of the Plex library. 
+     * Note: This is unique in the context of the Plex server.
+     * 
+     */
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=sectionKey")
+    private int sectionKey;
 
     /**
      * Adds the Meta object to the response
@@ -81,43 +81,33 @@ public class GetLibraryItemsRequest {
 
     @JsonCreator
     public GetLibraryItemsRequest(
-            int sectionKey,
             Tag tag,
             Optional<? extends IncludeGuids> includeGuids,
             Optional<? extends GetLibraryItemsQueryParamType> type,
+            int sectionKey,
             Optional<? extends GetLibraryItemsQueryParamIncludeMeta> includeMeta,
             Optional<Integer> xPlexContainerStart,
             Optional<Integer> xPlexContainerSize) {
-        Utils.checkNotNull(sectionKey, "sectionKey");
         Utils.checkNotNull(tag, "tag");
         Utils.checkNotNull(includeGuids, "includeGuids");
         Utils.checkNotNull(type, "type");
+        Utils.checkNotNull(sectionKey, "sectionKey");
         Utils.checkNotNull(includeMeta, "includeMeta");
         Utils.checkNotNull(xPlexContainerStart, "xPlexContainerStart");
         Utils.checkNotNull(xPlexContainerSize, "xPlexContainerSize");
-        this.sectionKey = sectionKey;
         this.tag = tag;
         this.includeGuids = includeGuids;
         this.type = type;
+        this.sectionKey = sectionKey;
         this.includeMeta = includeMeta;
         this.xPlexContainerStart = xPlexContainerStart;
         this.xPlexContainerSize = xPlexContainerSize;
     }
     
     public GetLibraryItemsRequest(
-            int sectionKey,
-            Tag tag) {
-        this(sectionKey, tag, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
-    }
-
-    /**
-     * The unique key of the Plex library. 
-     * Note: This is unique in the context of the Plex server.
-     * 
-     */
-    @JsonIgnore
-    public int sectionKey() {
-        return sectionKey;
+            Tag tag,
+            int sectionKey) {
+        this(tag, Optional.empty(), Optional.empty(), sectionKey, Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -154,6 +144,16 @@ public class GetLibraryItemsRequest {
     }
 
     /**
+     * The unique key of the Plex library. 
+     * Note: This is unique in the context of the Plex server.
+     * 
+     */
+    @JsonIgnore
+    public int sectionKey() {
+        return sectionKey;
+    }
+
+    /**
      * Adds the Meta object to the response
      * 
      */
@@ -187,17 +187,6 @@ public class GetLibraryItemsRequest {
 
     public final static Builder builder() {
         return new Builder();
-    }
-
-    /**
-     * The unique key of the Plex library. 
-     * Note: This is unique in the context of the Plex server.
-     * 
-     */
-    public GetLibraryItemsRequest withSectionKey(int sectionKey) {
-        Utils.checkNotNull(sectionKey, "sectionKey");
-        this.sectionKey = sectionKey;
-        return this;
     }
 
     /**
@@ -256,6 +245,17 @@ public class GetLibraryItemsRequest {
     public GetLibraryItemsRequest withType(Optional<? extends GetLibraryItemsQueryParamType> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
+        return this;
+    }
+
+    /**
+     * The unique key of the Plex library. 
+     * Note: This is unique in the context of the Plex server.
+     * 
+     */
+    public GetLibraryItemsRequest withSectionKey(int sectionKey) {
+        Utils.checkNotNull(sectionKey, "sectionKey");
+        this.sectionKey = sectionKey;
         return this;
     }
 
@@ -337,10 +337,10 @@ public class GetLibraryItemsRequest {
         }
         GetLibraryItemsRequest other = (GetLibraryItemsRequest) o;
         return 
-            Objects.deepEquals(this.sectionKey, other.sectionKey) &&
             Objects.deepEquals(this.tag, other.tag) &&
             Objects.deepEquals(this.includeGuids, other.includeGuids) &&
             Objects.deepEquals(this.type, other.type) &&
+            Objects.deepEquals(this.sectionKey, other.sectionKey) &&
             Objects.deepEquals(this.includeMeta, other.includeMeta) &&
             Objects.deepEquals(this.xPlexContainerStart, other.xPlexContainerStart) &&
             Objects.deepEquals(this.xPlexContainerSize, other.xPlexContainerSize);
@@ -349,10 +349,10 @@ public class GetLibraryItemsRequest {
     @Override
     public int hashCode() {
         return Objects.hash(
-            sectionKey,
             tag,
             includeGuids,
             type,
+            sectionKey,
             includeMeta,
             xPlexContainerStart,
             xPlexContainerSize);
@@ -361,10 +361,10 @@ public class GetLibraryItemsRequest {
     @Override
     public String toString() {
         return Utils.toString(GetLibraryItemsRequest.class,
-                "sectionKey", sectionKey,
                 "tag", tag,
                 "includeGuids", includeGuids,
                 "type", type,
+                "sectionKey", sectionKey,
                 "includeMeta", includeMeta,
                 "xPlexContainerStart", xPlexContainerStart,
                 "xPlexContainerSize", xPlexContainerSize);
@@ -372,13 +372,13 @@ public class GetLibraryItemsRequest {
     
     public final static class Builder {
  
-        private Integer sectionKey;
- 
         private Tag tag;
  
         private Optional<? extends IncludeGuids> includeGuids;
  
         private Optional<? extends GetLibraryItemsQueryParamType> type = Optional.empty();
+ 
+        private Integer sectionKey;
  
         private Optional<? extends GetLibraryItemsQueryParamIncludeMeta> includeMeta;
  
@@ -388,17 +388,6 @@ public class GetLibraryItemsRequest {
         
         private Builder() {
           // force use of static builder() method
-        }
-
-        /**
-         * The unique key of the Plex library. 
-         * Note: This is unique in the context of the Plex server.
-         * 
-         */
-        public Builder sectionKey(int sectionKey) {
-            Utils.checkNotNull(sectionKey, "sectionKey");
-            this.sectionKey = sectionKey;
-            return this;
         }
 
         /**
@@ -457,6 +446,17 @@ public class GetLibraryItemsRequest {
         public Builder type(Optional<? extends GetLibraryItemsQueryParamType> type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
+            return this;
+        }
+
+        /**
+         * The unique key of the Plex library. 
+         * Note: This is unique in the context of the Plex server.
+         * 
+         */
+        public Builder sectionKey(int sectionKey) {
+            Utils.checkNotNull(sectionKey, "sectionKey");
+            this.sectionKey = sectionKey;
             return this;
         }
 
@@ -541,10 +541,10 @@ public class GetLibraryItemsRequest {
             if (xPlexContainerSize == null) {
                 xPlexContainerSize = _SINGLETON_VALUE_XPlexContainerSize.value();
             }            return new GetLibraryItemsRequest(
-                sectionKey,
                 tag,
                 includeGuids,
                 type,
+                sectionKey,
                 includeMeta,
                 xPlexContainerStart,
                 xPlexContainerSize);

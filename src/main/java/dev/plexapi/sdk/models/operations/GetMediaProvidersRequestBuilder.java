@@ -4,12 +4,16 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import dev.plexapi.sdk.utils.Options;
+import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.String;
+import java.util.Optional;
 
 public class GetMediaProvidersRequestBuilder {
 
     private String xPlexToken;
+    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetMediaProviders sdk;
 
     public GetMediaProvidersRequestBuilder(SDKMethodInterfaces.MethodCallGetMediaProviders sdk) {
@@ -21,10 +25,25 @@ public class GetMediaProvidersRequestBuilder {
         this.xPlexToken = xPlexToken;
         return this;
     }
+                
+    public GetMediaProvidersRequestBuilder retryConfig(RetryConfig retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = Optional.of(retryConfig);
+        return this;
+    }
+
+    public GetMediaProvidersRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = retryConfig;
+        return this;
+    }
 
     public GetMediaProvidersResponse call() throws Exception {
-
+        Optional<Options> options = Optional.of(Options.builder()
+                                                    .retryConfig(retryConfig)
+                                                    .build());
         return sdk.getMediaProviders(
-            xPlexToken);
+            xPlexToken,
+            options);
     }
 }

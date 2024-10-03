@@ -6,15 +6,19 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.utils.LazySingletonValue;
+import dev.plexapi.sdk.utils.Options;
+import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.String;
+import java.util.Optional;
 
 public class UploadPlaylistRequestBuilder {
 
     private String path;
     private QueryParamForce force;
     private Long sectionID;
+    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallUploadPlaylist sdk;
 
     public UploadPlaylistRequestBuilder(SDKMethodInterfaces.MethodCallUploadPlaylist sdk) {
@@ -38,15 +42,30 @@ public class UploadPlaylistRequestBuilder {
         this.sectionID = sectionID;
         return this;
     }
+                
+    public UploadPlaylistRequestBuilder retryConfig(RetryConfig retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = Optional.of(retryConfig);
+        return this;
+    }
+
+    public UploadPlaylistRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = retryConfig;
+        return this;
+    }
 
     public UploadPlaylistResponse call() throws Exception {
         if (sectionID == null) {
             sectionID = _SINGLETON_VALUE_SectionID.value();
-        }
+        }        Optional<Options> options = Optional.of(Options.builder()
+                                                    .retryConfig(retryConfig)
+                                                    .build());
         return sdk.uploadPlaylist(
             path,
             force,
-            sectionID);
+            sectionID,
+            options);
     }
 
     private static final LazySingletonValue<Long> _SINGLETON_VALUE_SectionID =

@@ -4,6 +4,8 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import dev.plexapi.sdk.utils.Options;
+import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.String;
 import java.util.Optional;
@@ -12,6 +14,7 @@ public class GetTokenByPinIdRequestBuilder {
 
     private GetTokenByPinIdRequest request;
     private Optional<String> serverURL = Optional.empty();
+    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetTokenByPinId sdk;
 
     public GetTokenByPinIdRequestBuilder(SDKMethodInterfaces.MethodCallGetTokenByPinId sdk) {
@@ -35,11 +38,26 @@ public class GetTokenByPinIdRequestBuilder {
         this.serverURL = serverURL;
         return this;
     }
+                
+    public GetTokenByPinIdRequestBuilder retryConfig(RetryConfig retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = Optional.of(retryConfig);
+        return this;
+    }
+
+    public GetTokenByPinIdRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = retryConfig;
+        return this;
+    }
 
     public GetTokenByPinIdResponse call() throws Exception {
-
+        Optional<Options> options = Optional.of(Options.builder()
+                                                    .retryConfig(retryConfig)
+                                                    .build());
         return sdk.getTokenByPinId(
             request,
-            serverURL);
+            serverURL,
+            options);
     }
 }

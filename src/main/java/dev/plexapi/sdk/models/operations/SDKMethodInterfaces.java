@@ -4,6 +4,7 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import dev.plexapi.sdk.utils.Options;
 import java.lang.Double;
 import java.lang.Exception;
 import java.lang.Long;
@@ -14,61 +15,72 @@ public class SDKMethodInterfaces {
 
 
     public interface MethodCallGetServerCapabilities {
-        GetServerCapabilitiesResponse getServerCapabilitiesDirect() throws Exception;
+        GetServerCapabilitiesResponse getServerCapabilities(
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetServerPreferences {
-        GetServerPreferencesResponse getServerPreferencesDirect() throws Exception;
+        GetServerPreferencesResponse getServerPreferences(
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetAvailableClients {
-        GetAvailableClientsResponse getAvailableClientsDirect() throws Exception;
+        GetAvailableClientsResponse getAvailableClients(
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetDevices {
-        GetDevicesResponse getDevicesDirect() throws Exception;
+        GetDevicesResponse getDevices(
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetServerIdentity {
-        GetServerIdentityResponse getServerIdentityDirect() throws Exception;
+        GetServerIdentityResponse getServerIdentity(
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetMyPlexAccount {
-        GetMyPlexAccountResponse getMyPlexAccountDirect() throws Exception;
+        GetMyPlexAccountResponse getMyPlexAccount(
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetResizedPhoto {
         GetResizedPhotoResponse getResizedPhoto(
-            GetResizedPhotoRequest request) throws Exception;
+            GetResizedPhotoRequest request,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetMediaProviders {
         GetMediaProvidersResponse getMediaProviders(
-            String xPlexToken) throws Exception;
+            String xPlexToken,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetServerList {
-        GetServerListResponse getServerListDirect() throws Exception;
+        GetServerListResponse getServerList(
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallMarkPlayed {
         MarkPlayedResponse markPlayed(
-            double key) throws Exception;
+            double key,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallMarkUnplayed {
         MarkUnplayedResponse markUnplayed(
-            double key) throws Exception;
+            double key,
+            Optional<Options> options) throws Exception;
     }
 
 
@@ -76,92 +88,108 @@ public class SDKMethodInterfaces {
         UpdatePlayProgressResponse updatePlayProgress(
             String key,
             double time,
-            String state) throws Exception;
+            String state,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetBannerImage {
         GetBannerImageResponse getBannerImage(
-            GetBannerImageRequest request) throws Exception;
+            GetBannerImageRequest request,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetThumbImage {
         GetThumbImageResponse getThumbImage(
-            GetThumbImageRequest request) throws Exception;
+            GetThumbImageRequest request,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetTimeline {
         GetTimelineResponse getTimeline(
-            GetTimelineRequest request) throws Exception;
+            GetTimelineRequest request,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallStartUniversalTranscode {
         StartUniversalTranscodeResponse startUniversalTranscode(
-            StartUniversalTranscodeRequest request) throws Exception;
+            StartUniversalTranscodeRequest request,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetServerActivities {
-        GetServerActivitiesResponse getServerActivitiesDirect() throws Exception;
+        GetServerActivitiesResponse getServerActivities(
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallCancelServerActivities {
         CancelServerActivitiesResponse cancelServerActivities(
-            String activityUUID) throws Exception;
+            String activityUUID,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetButlerTasks {
-        GetButlerTasksResponse getButlerTasksDirect() throws Exception;
+        GetButlerTasksResponse getButlerTasks(
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallStartAllTasks {
-        StartAllTasksResponse startAllTasksDirect() throws Exception;
+        StartAllTasksResponse startAllTasks(
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallStopAllTasks {
-        StopAllTasksResponse stopAllTasksDirect() throws Exception;
+        StopAllTasksResponse stopAllTasks(
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallStartTask {
         StartTaskResponse startTask(
-            TaskName taskName) throws Exception;
+            TaskName taskName,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallStopTask {
         StopTaskResponse stopTask(
-            PathParamTaskName taskName) throws Exception;
+            PathParamTaskName taskName,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetCompanionsData {
         GetCompanionsDataResponse getCompanionsData(
-            Optional<String> serverURL) throws Exception;
+            Optional<String> serverURL,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetUserFriends {
         GetUserFriendsResponse getUserFriends(
-            Optional<String> serverURL) throws Exception;
+            Optional<String> serverURL,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetGeoData {
         GetGeoDataResponse getGeoData(
-            Optional<String> serverURL) throws Exception;
+            Optional<String> serverURL,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetHomeData {
-        GetHomeDataResponse getHomeDataDirect() throws Exception;
+        GetHomeDataResponse getHomeData(
+            Optional<Options> options) throws Exception;
     }
 
 
@@ -171,34 +199,39 @@ public class SDKMethodInterfaces {
             Optional<? extends IncludeRelay> includeRelay,
             Optional<? extends IncludeIPv6> includeIPv6,
             Optional<String> clientID,
-            Optional<String> serverURL) throws Exception;
+            Optional<String> serverURL,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetPin {
         GetPinResponse getPin(
             GetPinRequest request,
-            Optional<String> serverURL) throws Exception;
+            Optional<String> serverURL,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetTokenByPinId {
         GetTokenByPinIdResponse getTokenByPinId(
             GetTokenByPinIdRequest request,
-            Optional<String> serverURL) throws Exception;
+            Optional<String> serverURL,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetGlobalHubs {
         GetGlobalHubsResponse getGlobalHubs(
             Optional<Double> count,
-            Optional<? extends OnlyTransient> onlyTransient) throws Exception;
+            Optional<? extends OnlyTransient> onlyTransient,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetRecentlyAdded {
         GetRecentlyAddedResponse getRecentlyAdded(
-            GetRecentlyAddedRequest request) throws Exception;
+            GetRecentlyAddedRequest request,
+            Optional<Options> options) throws Exception;
     }
 
 
@@ -206,7 +239,8 @@ public class SDKMethodInterfaces {
         GetLibraryHubsResponse getLibraryHubs(
             double sectionId,
             Optional<Double> count,
-            Optional<? extends QueryParamOnlyTransient> onlyTransient) throws Exception;
+            Optional<? extends QueryParamOnlyTransient> onlyTransient,
+            Optional<Options> options) throws Exception;
     }
 
 
@@ -214,7 +248,8 @@ public class SDKMethodInterfaces {
         PerformSearchResponse performSearch(
             String query,
             Optional<Double> sectionId,
-            Optional<Double> limit) throws Exception;
+            Optional<Double> limit,
+            Optional<Options> options) throws Exception;
     }
 
 
@@ -222,96 +257,118 @@ public class SDKMethodInterfaces {
         PerformVoiceSearchResponse performVoiceSearch(
             String query,
             Optional<Double> sectionId,
-            Optional<Double> limit) throws Exception;
+            Optional<Double> limit,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetSearchResults {
         GetSearchResultsResponse getSearchResults(
-            String query) throws Exception;
+            String query,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetFileHash {
         GetFileHashResponse getFileHash(
             String url,
-            Optional<Double> type) throws Exception;
+            Optional<Double> type,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetRecentlyAddedLibrary {
         GetRecentlyAddedLibraryResponse getRecentlyAddedLibrary(
-            GetRecentlyAddedLibraryRequest request) throws Exception;
+            GetRecentlyAddedLibraryRequest request,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetAllLibraries {
-        GetAllLibrariesResponse getAllLibrariesDirect() throws Exception;
+        GetAllLibrariesResponse getAllLibraries(
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetLibraryDetails {
         GetLibraryDetailsResponse getLibraryDetails(
+            Optional<? extends IncludeDetails> includeDetails,
             int sectionKey,
-            Optional<? extends IncludeDetails> includeDetails) throws Exception;
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallDeleteLibrary {
         DeleteLibraryResponse deleteLibrary(
-            int sectionKey) throws Exception;
+            int sectionKey,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetLibraryItems {
         GetLibraryItemsResponse getLibraryItems(
-            GetLibraryItemsRequest request) throws Exception;
+            GetLibraryItemsRequest request,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetRefreshLibraryMetadata {
         GetRefreshLibraryMetadataResponse getRefreshLibraryMetadata(
+            Optional<? extends Force> force,
             int sectionKey,
-            Optional<? extends Force> force) throws Exception;
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetSearchLibrary {
         GetSearchLibraryResponse getSearchLibrary(
             int sectionKey,
-            GetSearchLibraryQueryParamType type) throws Exception;
+            GetSearchLibraryQueryParamType type,
+            Optional<Options> options) throws Exception;
+    }
+
+
+    public interface MethodCallGetSearchAllLibraries {
+        GetSearchAllLibrariesResponse getSearchAllLibraries(
+            GetSearchAllLibrariesRequest request,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetMetaDataByRatingKey {
         GetMetaDataByRatingKeyResponse getMetaDataByRatingKey(
-            long ratingKey) throws Exception;
+            long ratingKey,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetMetadataChildren {
         GetMetadataChildrenResponse getMetadataChildren(
             double ratingKey,
-            Optional<String> includeElements) throws Exception;
+            Optional<String> includeElements,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetTopWatchedContent {
         GetTopWatchedContentResponse getTopWatchedContent(
+            Optional<Long> includeGuids,
             GetTopWatchedContentQueryParamType type,
-            Optional<Long> includeGuids) throws Exception;
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetOnDeck {
-        GetOnDeckResponse getOnDeckDirect() throws Exception;
+        GetOnDeckResponse getOnDeck(
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetWatchList {
         GetWatchListResponse getWatchList(
             GetWatchListRequest request,
-            Optional<String> serverURL) throws Exception;
+            Optional<String> serverURL,
+            Optional<Options> options) throws Exception;
     }
 
 
@@ -319,43 +376,50 @@ public class SDKMethodInterfaces {
         LogLineResponse logLine(
             Level level,
             String message,
-            String source) throws Exception;
+            String source,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallLogMultiLine {
         LogMultiLineResponse logMultiLine(
-            String request) throws Exception;
+            String request,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallEnablePaperTrail {
-        EnablePaperTrailResponse enablePaperTrailDirect() throws Exception;
+        EnablePaperTrailResponse enablePaperTrail(
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallCreatePlaylist {
         CreatePlaylistResponse createPlaylist(
-            CreatePlaylistRequest request) throws Exception;
+            CreatePlaylistRequest request,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetPlaylists {
         GetPlaylistsResponse getPlaylists(
             Optional<? extends PlaylistType> playlistType,
-            Optional<? extends QueryParamSmart> smart) throws Exception;
+            Optional<? extends QueryParamSmart> smart,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetPlaylist {
         GetPlaylistResponse getPlaylist(
-            double playlistID) throws Exception;
+            double playlistID,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallDeletePlaylist {
         DeletePlaylistResponse deletePlaylist(
-            double playlistID) throws Exception;
+            double playlistID,
+            Optional<Options> options) throws Exception;
     }
 
 
@@ -363,20 +427,23 @@ public class SDKMethodInterfaces {
         UpdatePlaylistResponse updatePlaylist(
             double playlistID,
             Optional<String> title,
-            Optional<String> summary) throws Exception;
+            Optional<String> summary,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetPlaylistContents {
         GetPlaylistContentsResponse getPlaylistContents(
             double playlistID,
-            GetPlaylistContentsQueryParamType type) throws Exception;
+            GetPlaylistContentsQueryParamType type,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallClearPlaylistContents {
         ClearPlaylistContentsResponse clearPlaylistContents(
-            double playlistID) throws Exception;
+            double playlistID,
+            Optional<Options> options) throws Exception;
     }
 
 
@@ -384,7 +451,8 @@ public class SDKMethodInterfaces {
         AddPlaylistContentsResponse addPlaylistContents(
             double playlistID,
             String uri,
-            Optional<Double> playQueueID) throws Exception;
+            Optional<Double> playQueueID,
+            Optional<Options> options) throws Exception;
     }
 
 
@@ -392,56 +460,65 @@ public class SDKMethodInterfaces {
         UploadPlaylistResponse uploadPlaylist(
             String path,
             QueryParamForce force,
-            long sectionID) throws Exception;
+            long sectionID,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetTransientToken {
         GetTransientTokenResponse getTransientToken(
             GetTransientTokenQueryParamType type,
-            Scope scope) throws Exception;
+            Scope scope,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetSourceConnectionInformation {
         GetSourceConnectionInformationResponse getSourceConnectionInformation(
-            String source) throws Exception;
+            String source,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetTokenDetails {
         GetTokenDetailsResponse getTokenDetails(
-            Optional<String> serverURL) throws Exception;
+            Optional<String> serverURL,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallPostUsersSignInData {
         PostUsersSignInDataResponse postUsersSignInData(
             PostUsersSignInDataRequest request,
-            Optional<String> serverURL) throws Exception;
+            Optional<String> serverURL,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetStatistics {
         GetStatisticsResponse getStatistics(
-            Optional<Long> timespan) throws Exception;
+            Optional<Long> timespan,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetResourcesStatistics {
         GetResourcesStatisticsResponse getResourcesStatistics(
-            Optional<Long> timespan) throws Exception;
+            Optional<Long> timespan,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetBandwidthStatistics {
         GetBandwidthStatisticsResponse getBandwidthStatistics(
-            Optional<Long> timespan) throws Exception;
+            Optional<Long> timespan,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetSessions {
-        GetSessionsResponse getSessionsDirect() throws Exception;
+        GetSessionsResponse getSessions(
+            Optional<Options> options) throws Exception;
     }
 
 
@@ -450,36 +527,42 @@ public class SDKMethodInterfaces {
             Optional<String> sort,
             Optional<Long> accountId,
             Optional<? extends QueryParamFilter> filter,
-            Optional<Long> librarySectionID) throws Exception;
+            Optional<Long> librarySectionID,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetTranscodeSessions {
-        GetTranscodeSessionsResponse getTranscodeSessionsDirect() throws Exception;
+        GetTranscodeSessionsResponse getTranscodeSessions(
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallStopTranscodeSession {
         StopTranscodeSessionResponse stopTranscodeSession(
-            String sessionKey) throws Exception;
+            String sessionKey,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallGetUpdateStatus {
-        GetUpdateStatusResponse getUpdateStatusDirect() throws Exception;
+        GetUpdateStatusResponse getUpdateStatus(
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallCheckForUpdates {
         CheckForUpdatesResponse checkForUpdates(
-            Optional<? extends Download> download) throws Exception;
+            Optional<? extends Download> download,
+            Optional<Options> options) throws Exception;
     }
 
 
     public interface MethodCallApplyUpdates {
         ApplyUpdatesResponse applyUpdates(
             Optional<? extends Tonight> tonight,
-            Optional<? extends Skip> skip) throws Exception;
+            Optional<? extends Skip> skip,
+            Optional<Options> options) throws Exception;
     }
 
 

@@ -4,15 +4,19 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import dev.plexapi.sdk.utils.Options;
+import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.String;
+import java.util.Optional;
 
 public class UpdatePlayProgressRequestBuilder {
 
     private String key;
     private Double time;
     private String state;
+    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallUpdatePlayProgress sdk;
 
     public UpdatePlayProgressRequestBuilder(SDKMethodInterfaces.MethodCallUpdatePlayProgress sdk) {
@@ -36,12 +40,27 @@ public class UpdatePlayProgressRequestBuilder {
         this.state = state;
         return this;
     }
+                
+    public UpdatePlayProgressRequestBuilder retryConfig(RetryConfig retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = Optional.of(retryConfig);
+        return this;
+    }
+
+    public UpdatePlayProgressRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = retryConfig;
+        return this;
+    }
 
     public UpdatePlayProgressResponse call() throws Exception {
-
+        Optional<Options> options = Optional.of(Options.builder()
+                                                    .retryConfig(retryConfig)
+                                                    .build());
         return sdk.updatePlayProgress(
             key,
             time,
-            state);
+            state,
+            options);
     }
 }

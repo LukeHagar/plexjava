@@ -4,12 +4,16 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import dev.plexapi.sdk.utils.Options;
+import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
+import java.util.Optional;
 
 public class GetPlaylistRequestBuilder {
 
     private Double playlistID;
+    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetPlaylist sdk;
 
     public GetPlaylistRequestBuilder(SDKMethodInterfaces.MethodCallGetPlaylist sdk) {
@@ -21,10 +25,25 @@ public class GetPlaylistRequestBuilder {
         this.playlistID = playlistID;
         return this;
     }
+                
+    public GetPlaylistRequestBuilder retryConfig(RetryConfig retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = Optional.of(retryConfig);
+        return this;
+    }
+
+    public GetPlaylistRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = retryConfig;
+        return this;
+    }
 
     public GetPlaylistResponse call() throws Exception {
-
+        Optional<Options> options = Optional.of(Options.builder()
+                                                    .retryConfig(retryConfig)
+                                                    .build());
         return sdk.getPlaylist(
-            playlistID);
+            playlistID,
+            options);
     }
 }

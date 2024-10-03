@@ -28,7 +28,7 @@ public class GetTokenDetailsSubscription {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("features")
-    private Optional<? extends List<GetTokenDetailsFeatures>> features;
+    private Optional<? extends List<String>> features;
 
     /**
      * If the account's Plex Pass subscription is active
@@ -67,7 +67,7 @@ public class GetTokenDetailsSubscription {
 
     @JsonCreator
     public GetTokenDetailsSubscription(
-            @JsonProperty("features") Optional<? extends List<GetTokenDetailsFeatures>> features,
+            @JsonProperty("features") Optional<? extends List<String>> features,
             @JsonProperty("active") Optional<Boolean> active,
             @JsonProperty("subscribedAt") JsonNullable<String> subscribedAt,
             @JsonProperty("status") Optional<? extends GetTokenDetailsAuthenticationResponseStatus> status,
@@ -96,8 +96,8 @@ public class GetTokenDetailsSubscription {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<GetTokenDetailsFeatures>> features() {
-        return (Optional<List<GetTokenDetailsFeatures>>) features;
+    public Optional<List<String>> features() {
+        return (Optional<List<String>>) features;
     }
 
     /**
@@ -148,7 +148,7 @@ public class GetTokenDetailsSubscription {
     /**
      * List of features allowed on your Plex Pass subscription
      */
-    public GetTokenDetailsSubscription withFeatures(List<GetTokenDetailsFeatures> features) {
+    public GetTokenDetailsSubscription withFeatures(List<String> features) {
         Utils.checkNotNull(features, "features");
         this.features = Optional.ofNullable(features);
         return this;
@@ -157,7 +157,7 @@ public class GetTokenDetailsSubscription {
     /**
      * List of features allowed on your Plex Pass subscription
      */
-    public GetTokenDetailsSubscription withFeatures(Optional<? extends List<GetTokenDetailsFeatures>> features) {
+    public GetTokenDetailsSubscription withFeatures(Optional<? extends List<String>> features) {
         Utils.checkNotNull(features, "features");
         this.features = features;
         return this;
@@ -295,7 +295,7 @@ public class GetTokenDetailsSubscription {
     
     public final static class Builder {
  
-        private Optional<? extends List<GetTokenDetailsFeatures>> features = Optional.empty();
+        private Optional<? extends List<String>> features = Optional.empty();
  
         private Optional<Boolean> active = Optional.empty();
  
@@ -314,7 +314,7 @@ public class GetTokenDetailsSubscription {
         /**
          * List of features allowed on your Plex Pass subscription
          */
-        public Builder features(List<GetTokenDetailsFeatures> features) {
+        public Builder features(List<String> features) {
             Utils.checkNotNull(features, "features");
             this.features = Optional.ofNullable(features);
             return this;
@@ -323,7 +323,7 @@ public class GetTokenDetailsSubscription {
         /**
          * List of features allowed on your Plex Pass subscription
          */
-        public Builder features(Optional<? extends List<GetTokenDetailsFeatures>> features) {
+        public Builder features(Optional<? extends List<String>> features) {
             Utils.checkNotNull(features, "features");
             this.features = features;
             return this;

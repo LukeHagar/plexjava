@@ -4,24 +4,21 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import dev.plexapi.sdk.utils.Options;
+import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.util.Optional;
 
 public class GetRefreshLibraryMetadataRequestBuilder {
 
-    private Integer sectionKey;
     private Optional<? extends Force> force = Optional.empty();
+    private Integer sectionKey;
+    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetRefreshLibraryMetadata sdk;
 
     public GetRefreshLibraryMetadataRequestBuilder(SDKMethodInterfaces.MethodCallGetRefreshLibraryMetadata sdk) {
         this.sdk = sdk;
-    }
-
-    public GetRefreshLibraryMetadataRequestBuilder sectionKey(int sectionKey) {
-        Utils.checkNotNull(sectionKey, "sectionKey");
-        this.sectionKey = sectionKey;
-        return this;
     }
                 
     public GetRefreshLibraryMetadataRequestBuilder force(Force force) {
@@ -36,10 +33,31 @@ public class GetRefreshLibraryMetadataRequestBuilder {
         return this;
     }
 
-    public GetRefreshLibraryMetadataResponse call() throws Exception {
+    public GetRefreshLibraryMetadataRequestBuilder sectionKey(int sectionKey) {
+        Utils.checkNotNull(sectionKey, "sectionKey");
+        this.sectionKey = sectionKey;
+        return this;
+    }
+                
+    public GetRefreshLibraryMetadataRequestBuilder retryConfig(RetryConfig retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = Optional.of(retryConfig);
+        return this;
+    }
 
+    public GetRefreshLibraryMetadataRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = retryConfig;
+        return this;
+    }
+
+    public GetRefreshLibraryMetadataResponse call() throws Exception {
+        Optional<Options> options = Optional.of(Options.builder()
+                                                    .retryConfig(retryConfig)
+                                                    .build());
         return sdk.getRefreshLibraryMetadata(
+            force,
             sectionKey,
-            force);
+            options);
     }
 }

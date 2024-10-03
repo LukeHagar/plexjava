@@ -29,45 +29,56 @@ public class GetLibraryItemsMedia {
     @JsonProperty("id")
     private int id;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
-    private int duration;
+    private Optional<Integer> duration;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bitrate")
-    private int bitrate;
+    private Optional<Integer> bitrate;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("width")
-    private int width;
+    private Optional<Integer> width;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("height")
-    private int height;
+    private Optional<Integer> height;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("aspectRatio")
-    private double aspectRatio;
+    private Optional<Double> aspectRatio;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioProfile")
     private Optional<String> audioProfile;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioChannels")
-    private int audioChannels;
+    private Optional<Integer> audioChannels;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioCodec")
-    private String audioCodec;
+    private Optional<String> audioCodec;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoCodec")
-    private String videoCodec;
+    private Optional<String> videoCodec;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoResolution")
-    private String videoResolution;
+    private Optional<String> videoResolution;
 
     @JsonProperty("container")
     private String container;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoFrameRate")
-    private String videoFrameRate;
+    private Optional<String> videoFrameRate;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoProfile")
-    private String videoProfile;
+    private Optional<String> videoProfile;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hasVoiceActivity")
@@ -87,19 +98,19 @@ public class GetLibraryItemsMedia {
     @JsonCreator
     public GetLibraryItemsMedia(
             @JsonProperty("id") int id,
-            @JsonProperty("duration") int duration,
-            @JsonProperty("bitrate") int bitrate,
-            @JsonProperty("width") int width,
-            @JsonProperty("height") int height,
-            @JsonProperty("aspectRatio") double aspectRatio,
+            @JsonProperty("duration") Optional<Integer> duration,
+            @JsonProperty("bitrate") Optional<Integer> bitrate,
+            @JsonProperty("width") Optional<Integer> width,
+            @JsonProperty("height") Optional<Integer> height,
+            @JsonProperty("aspectRatio") Optional<Double> aspectRatio,
             @JsonProperty("audioProfile") Optional<String> audioProfile,
-            @JsonProperty("audioChannels") int audioChannels,
-            @JsonProperty("audioCodec") String audioCodec,
-            @JsonProperty("videoCodec") String videoCodec,
-            @JsonProperty("videoResolution") String videoResolution,
+            @JsonProperty("audioChannels") Optional<Integer> audioChannels,
+            @JsonProperty("audioCodec") Optional<String> audioCodec,
+            @JsonProperty("videoCodec") Optional<String> videoCodec,
+            @JsonProperty("videoResolution") Optional<String> videoResolution,
             @JsonProperty("container") String container,
-            @JsonProperty("videoFrameRate") String videoFrameRate,
-            @JsonProperty("videoProfile") String videoProfile,
+            @JsonProperty("videoFrameRate") Optional<String> videoFrameRate,
+            @JsonProperty("videoProfile") Optional<String> videoProfile,
             @JsonProperty("hasVoiceActivity") Optional<Boolean> hasVoiceActivity,
             @JsonProperty("optimizedForStreaming") Optional<? extends GetLibraryItemsOptimizedForStreaming> optimizedForStreaming,
             @JsonProperty("has64bitOffsets") Optional<Boolean> has64bitOffsets,
@@ -144,20 +155,9 @@ public class GetLibraryItemsMedia {
     
     public GetLibraryItemsMedia(
             int id,
-            int duration,
-            int bitrate,
-            int width,
-            int height,
-            double aspectRatio,
-            int audioChannels,
-            String audioCodec,
-            String videoCodec,
-            String videoResolution,
             String container,
-            String videoFrameRate,
-            String videoProfile,
             List<GetLibraryItemsPart> part) {
-        this(id, duration, bitrate, width, height, aspectRatio, Optional.empty(), audioChannels, audioCodec, videoCodec, videoResolution, container, videoFrameRate, videoProfile, Optional.empty(), Optional.empty(), Optional.empty(), part);
+        this(id, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), container, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), part);
     }
 
     @JsonIgnore
@@ -166,27 +166,27 @@ public class GetLibraryItemsMedia {
     }
 
     @JsonIgnore
-    public int duration() {
+    public Optional<Integer> duration() {
         return duration;
     }
 
     @JsonIgnore
-    public int bitrate() {
+    public Optional<Integer> bitrate() {
         return bitrate;
     }
 
     @JsonIgnore
-    public int width() {
+    public Optional<Integer> width() {
         return width;
     }
 
     @JsonIgnore
-    public int height() {
+    public Optional<Integer> height() {
         return height;
     }
 
     @JsonIgnore
-    public double aspectRatio() {
+    public Optional<Double> aspectRatio() {
         return aspectRatio;
     }
 
@@ -196,22 +196,22 @@ public class GetLibraryItemsMedia {
     }
 
     @JsonIgnore
-    public int audioChannels() {
+    public Optional<Integer> audioChannels() {
         return audioChannels;
     }
 
     @JsonIgnore
-    public String audioCodec() {
+    public Optional<String> audioCodec() {
         return audioCodec;
     }
 
     @JsonIgnore
-    public String videoCodec() {
+    public Optional<String> videoCodec() {
         return videoCodec;
     }
 
     @JsonIgnore
-    public String videoResolution() {
+    public Optional<String> videoResolution() {
         return videoResolution;
     }
 
@@ -221,12 +221,12 @@ public class GetLibraryItemsMedia {
     }
 
     @JsonIgnore
-    public String videoFrameRate() {
+    public Optional<String> videoFrameRate() {
         return videoFrameRate;
     }
 
     @JsonIgnore
-    public String videoProfile() {
+    public Optional<String> videoProfile() {
         return videoProfile;
     }
 
@@ -263,11 +263,23 @@ public class GetLibraryItemsMedia {
 
     public GetLibraryItemsMedia withDuration(int duration) {
         Utils.checkNotNull(duration, "duration");
+        this.duration = Optional.ofNullable(duration);
+        return this;
+    }
+
+    public GetLibraryItemsMedia withDuration(Optional<Integer> duration) {
+        Utils.checkNotNull(duration, "duration");
         this.duration = duration;
         return this;
     }
 
     public GetLibraryItemsMedia withBitrate(int bitrate) {
+        Utils.checkNotNull(bitrate, "bitrate");
+        this.bitrate = Optional.ofNullable(bitrate);
+        return this;
+    }
+
+    public GetLibraryItemsMedia withBitrate(Optional<Integer> bitrate) {
         Utils.checkNotNull(bitrate, "bitrate");
         this.bitrate = bitrate;
         return this;
@@ -275,17 +287,35 @@ public class GetLibraryItemsMedia {
 
     public GetLibraryItemsMedia withWidth(int width) {
         Utils.checkNotNull(width, "width");
+        this.width = Optional.ofNullable(width);
+        return this;
+    }
+
+    public GetLibraryItemsMedia withWidth(Optional<Integer> width) {
+        Utils.checkNotNull(width, "width");
         this.width = width;
         return this;
     }
 
     public GetLibraryItemsMedia withHeight(int height) {
         Utils.checkNotNull(height, "height");
+        this.height = Optional.ofNullable(height);
+        return this;
+    }
+
+    public GetLibraryItemsMedia withHeight(Optional<Integer> height) {
+        Utils.checkNotNull(height, "height");
         this.height = height;
         return this;
     }
 
     public GetLibraryItemsMedia withAspectRatio(double aspectRatio) {
+        Utils.checkNotNull(aspectRatio, "aspectRatio");
+        this.aspectRatio = Optional.ofNullable(aspectRatio);
+        return this;
+    }
+
+    public GetLibraryItemsMedia withAspectRatio(Optional<Double> aspectRatio) {
         Utils.checkNotNull(aspectRatio, "aspectRatio");
         this.aspectRatio = aspectRatio;
         return this;
@@ -305,11 +335,23 @@ public class GetLibraryItemsMedia {
 
     public GetLibraryItemsMedia withAudioChannels(int audioChannels) {
         Utils.checkNotNull(audioChannels, "audioChannels");
+        this.audioChannels = Optional.ofNullable(audioChannels);
+        return this;
+    }
+
+    public GetLibraryItemsMedia withAudioChannels(Optional<Integer> audioChannels) {
+        Utils.checkNotNull(audioChannels, "audioChannels");
         this.audioChannels = audioChannels;
         return this;
     }
 
     public GetLibraryItemsMedia withAudioCodec(String audioCodec) {
+        Utils.checkNotNull(audioCodec, "audioCodec");
+        this.audioCodec = Optional.ofNullable(audioCodec);
+        return this;
+    }
+
+    public GetLibraryItemsMedia withAudioCodec(Optional<String> audioCodec) {
         Utils.checkNotNull(audioCodec, "audioCodec");
         this.audioCodec = audioCodec;
         return this;
@@ -317,11 +359,23 @@ public class GetLibraryItemsMedia {
 
     public GetLibraryItemsMedia withVideoCodec(String videoCodec) {
         Utils.checkNotNull(videoCodec, "videoCodec");
+        this.videoCodec = Optional.ofNullable(videoCodec);
+        return this;
+    }
+
+    public GetLibraryItemsMedia withVideoCodec(Optional<String> videoCodec) {
+        Utils.checkNotNull(videoCodec, "videoCodec");
         this.videoCodec = videoCodec;
         return this;
     }
 
     public GetLibraryItemsMedia withVideoResolution(String videoResolution) {
+        Utils.checkNotNull(videoResolution, "videoResolution");
+        this.videoResolution = Optional.ofNullable(videoResolution);
+        return this;
+    }
+
+    public GetLibraryItemsMedia withVideoResolution(Optional<String> videoResolution) {
         Utils.checkNotNull(videoResolution, "videoResolution");
         this.videoResolution = videoResolution;
         return this;
@@ -335,11 +389,23 @@ public class GetLibraryItemsMedia {
 
     public GetLibraryItemsMedia withVideoFrameRate(String videoFrameRate) {
         Utils.checkNotNull(videoFrameRate, "videoFrameRate");
+        this.videoFrameRate = Optional.ofNullable(videoFrameRate);
+        return this;
+    }
+
+    public GetLibraryItemsMedia withVideoFrameRate(Optional<String> videoFrameRate) {
+        Utils.checkNotNull(videoFrameRate, "videoFrameRate");
         this.videoFrameRate = videoFrameRate;
         return this;
     }
 
     public GetLibraryItemsMedia withVideoProfile(String videoProfile) {
+        Utils.checkNotNull(videoProfile, "videoProfile");
+        this.videoProfile = Optional.ofNullable(videoProfile);
+        return this;
+    }
+
+    public GetLibraryItemsMedia withVideoProfile(Optional<String> videoProfile) {
         Utils.checkNotNull(videoProfile, "videoProfile");
         this.videoProfile = videoProfile;
         return this;
@@ -467,31 +533,31 @@ public class GetLibraryItemsMedia {
  
         private Integer id;
  
-        private Integer duration;
+        private Optional<Integer> duration = Optional.empty();
  
-        private Integer bitrate;
+        private Optional<Integer> bitrate = Optional.empty();
  
-        private Integer width;
+        private Optional<Integer> width = Optional.empty();
  
-        private Integer height;
+        private Optional<Integer> height = Optional.empty();
  
-        private Double aspectRatio;
+        private Optional<Double> aspectRatio = Optional.empty();
  
         private Optional<String> audioProfile = Optional.empty();
  
-        private Integer audioChannels;
+        private Optional<Integer> audioChannels = Optional.empty();
  
-        private String audioCodec;
+        private Optional<String> audioCodec = Optional.empty();
  
-        private String videoCodec;
+        private Optional<String> videoCodec = Optional.empty();
  
-        private String videoResolution;
+        private Optional<String> videoResolution = Optional.empty();
  
         private String container;
  
-        private String videoFrameRate;
+        private Optional<String> videoFrameRate = Optional.empty();
  
-        private String videoProfile;
+        private Optional<String> videoProfile = Optional.empty();
  
         private Optional<Boolean> hasVoiceActivity = Optional.empty();
  
@@ -513,11 +579,23 @@ public class GetLibraryItemsMedia {
 
         public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
+            this.duration = Optional.ofNullable(duration);
+            return this;
+        }
+
+        public Builder duration(Optional<Integer> duration) {
+            Utils.checkNotNull(duration, "duration");
             this.duration = duration;
             return this;
         }
 
         public Builder bitrate(int bitrate) {
+            Utils.checkNotNull(bitrate, "bitrate");
+            this.bitrate = Optional.ofNullable(bitrate);
+            return this;
+        }
+
+        public Builder bitrate(Optional<Integer> bitrate) {
             Utils.checkNotNull(bitrate, "bitrate");
             this.bitrate = bitrate;
             return this;
@@ -525,17 +603,35 @@ public class GetLibraryItemsMedia {
 
         public Builder width(int width) {
             Utils.checkNotNull(width, "width");
+            this.width = Optional.ofNullable(width);
+            return this;
+        }
+
+        public Builder width(Optional<Integer> width) {
+            Utils.checkNotNull(width, "width");
             this.width = width;
             return this;
         }
 
         public Builder height(int height) {
             Utils.checkNotNull(height, "height");
+            this.height = Optional.ofNullable(height);
+            return this;
+        }
+
+        public Builder height(Optional<Integer> height) {
+            Utils.checkNotNull(height, "height");
             this.height = height;
             return this;
         }
 
         public Builder aspectRatio(double aspectRatio) {
+            Utils.checkNotNull(aspectRatio, "aspectRatio");
+            this.aspectRatio = Optional.ofNullable(aspectRatio);
+            return this;
+        }
+
+        public Builder aspectRatio(Optional<Double> aspectRatio) {
             Utils.checkNotNull(aspectRatio, "aspectRatio");
             this.aspectRatio = aspectRatio;
             return this;
@@ -555,11 +651,23 @@ public class GetLibraryItemsMedia {
 
         public Builder audioChannels(int audioChannels) {
             Utils.checkNotNull(audioChannels, "audioChannels");
+            this.audioChannels = Optional.ofNullable(audioChannels);
+            return this;
+        }
+
+        public Builder audioChannels(Optional<Integer> audioChannels) {
+            Utils.checkNotNull(audioChannels, "audioChannels");
             this.audioChannels = audioChannels;
             return this;
         }
 
         public Builder audioCodec(String audioCodec) {
+            Utils.checkNotNull(audioCodec, "audioCodec");
+            this.audioCodec = Optional.ofNullable(audioCodec);
+            return this;
+        }
+
+        public Builder audioCodec(Optional<String> audioCodec) {
             Utils.checkNotNull(audioCodec, "audioCodec");
             this.audioCodec = audioCodec;
             return this;
@@ -567,11 +675,23 @@ public class GetLibraryItemsMedia {
 
         public Builder videoCodec(String videoCodec) {
             Utils.checkNotNull(videoCodec, "videoCodec");
+            this.videoCodec = Optional.ofNullable(videoCodec);
+            return this;
+        }
+
+        public Builder videoCodec(Optional<String> videoCodec) {
+            Utils.checkNotNull(videoCodec, "videoCodec");
             this.videoCodec = videoCodec;
             return this;
         }
 
         public Builder videoResolution(String videoResolution) {
+            Utils.checkNotNull(videoResolution, "videoResolution");
+            this.videoResolution = Optional.ofNullable(videoResolution);
+            return this;
+        }
+
+        public Builder videoResolution(Optional<String> videoResolution) {
             Utils.checkNotNull(videoResolution, "videoResolution");
             this.videoResolution = videoResolution;
             return this;
@@ -585,11 +705,23 @@ public class GetLibraryItemsMedia {
 
         public Builder videoFrameRate(String videoFrameRate) {
             Utils.checkNotNull(videoFrameRate, "videoFrameRate");
+            this.videoFrameRate = Optional.ofNullable(videoFrameRate);
+            return this;
+        }
+
+        public Builder videoFrameRate(Optional<String> videoFrameRate) {
+            Utils.checkNotNull(videoFrameRate, "videoFrameRate");
             this.videoFrameRate = videoFrameRate;
             return this;
         }
 
         public Builder videoProfile(String videoProfile) {
+            Utils.checkNotNull(videoProfile, "videoProfile");
+            this.videoProfile = Optional.ofNullable(videoProfile);
+            return this;
+        }
+
+        public Builder videoProfile(Optional<String> videoProfile) {
             Utils.checkNotNull(videoProfile, "videoProfile");
             this.videoProfile = videoProfile;
             return this;

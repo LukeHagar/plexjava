@@ -237,6 +237,10 @@ public class GetRecentlyAddedMetadata {
     @JsonProperty("Role")
     private Optional<? extends List<Role>> role;
 
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Location")
+    private Optional<? extends List<Location>> location;
+
     /**
      * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
      * 
@@ -398,6 +402,7 @@ public class GetRecentlyAddedMetadata {
             @JsonProperty("Writer") Optional<? extends List<Writer>> writer,
             @JsonProperty("Collection") Optional<? extends List<Collection>> collection,
             @JsonProperty("Role") Optional<? extends List<Role>> role,
+            @JsonProperty("Location") Optional<? extends List<Location>> location,
             @JsonProperty("Guid") Optional<? extends List<MediaGuid>> mediaGuid,
             @JsonProperty("UltraBlurColors") Optional<? extends UltraBlurColors> ultraBlurColors,
             @JsonProperty("Rating") Optional<? extends List<MetaDataRating>> metaDataRating,
@@ -471,6 +476,7 @@ public class GetRecentlyAddedMetadata {
         Utils.checkNotNull(writer, "writer");
         Utils.checkNotNull(collection, "collection");
         Utils.checkNotNull(role, "role");
+        Utils.checkNotNull(location, "location");
         Utils.checkNotNull(mediaGuid, "mediaGuid");
         Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
         Utils.checkNotNull(metaDataRating, "metaDataRating");
@@ -544,6 +550,7 @@ public class GetRecentlyAddedMetadata {
         this.writer = writer;
         this.collection = collection;
         this.role = role;
+        this.location = location;
         this.mediaGuid = mediaGuid;
         this.ultraBlurColors = ultraBlurColors;
         this.metaDataRating = metaDataRating;
@@ -580,7 +587,7 @@ public class GetRecentlyAddedMetadata {
             String title,
             String summary,
             long addedAt) {
-        this(ratingKey, key, guid, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), type, title, Optional.empty(), Optional.empty(), summary, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), addedAt, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(ratingKey, key, guid, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), type, title, Optional.empty(), Optional.empty(), summary, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), addedAt, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -853,6 +860,12 @@ public class GetRecentlyAddedMetadata {
     @JsonIgnore
     public Optional<List<Role>> role() {
         return (Optional<List<Role>>) role;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<Location>> location() {
+        return (Optional<List<Location>>) location;
     }
 
     /**
@@ -1567,6 +1580,18 @@ public class GetRecentlyAddedMetadata {
         return this;
     }
 
+    public GetRecentlyAddedMetadata withLocation(List<Location> location) {
+        Utils.checkNotNull(location, "location");
+        this.location = Optional.ofNullable(location);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withLocation(Optional<? extends List<Location>> location) {
+        Utils.checkNotNull(location, "location");
+        this.location = location;
+        return this;
+    }
+
     /**
      * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
      * 
@@ -1952,6 +1977,7 @@ public class GetRecentlyAddedMetadata {
             Objects.deepEquals(this.writer, other.writer) &&
             Objects.deepEquals(this.collection, other.collection) &&
             Objects.deepEquals(this.role, other.role) &&
+            Objects.deepEquals(this.location, other.location) &&
             Objects.deepEquals(this.mediaGuid, other.mediaGuid) &&
             Objects.deepEquals(this.ultraBlurColors, other.ultraBlurColors) &&
             Objects.deepEquals(this.metaDataRating, other.metaDataRating) &&
@@ -2030,6 +2056,7 @@ public class GetRecentlyAddedMetadata {
             writer,
             collection,
             role,
+            location,
             mediaGuid,
             ultraBlurColors,
             metaDataRating,
@@ -2108,6 +2135,7 @@ public class GetRecentlyAddedMetadata {
                 "writer", writer,
                 "collection", collection,
                 "role", role,
+                "location", location,
                 "mediaGuid", mediaGuid,
                 "ultraBlurColors", ultraBlurColors,
                 "metaDataRating", metaDataRating,
@@ -2231,6 +2259,8 @@ public class GetRecentlyAddedMetadata {
         private Optional<? extends List<Collection>> collection = Optional.empty();
  
         private Optional<? extends List<Role>> role = Optional.empty();
+ 
+        private Optional<? extends List<Location>> location = Optional.empty();
  
         private Optional<? extends List<MediaGuid>> mediaGuid = Optional.empty();
  
@@ -2854,6 +2884,18 @@ public class GetRecentlyAddedMetadata {
             return this;
         }
 
+        public Builder location(List<Location> location) {
+            Utils.checkNotNull(location, "location");
+            this.location = Optional.ofNullable(location);
+            return this;
+        }
+
+        public Builder location(Optional<? extends List<Location>> location) {
+            Utils.checkNotNull(location, "location");
+            this.location = location;
+            return this;
+        }
+
         /**
          * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
          * 
@@ -3233,6 +3275,7 @@ public class GetRecentlyAddedMetadata {
                 writer,
                 collection,
                 role,
+                location,
                 mediaGuid,
                 ultraBlurColors,
                 metaDataRating,

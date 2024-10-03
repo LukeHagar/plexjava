@@ -22,14 +22,6 @@ import java.util.Optional;
 public class GetLibraryDetailsRequest {
 
     /**
-     * The unique key of the Plex library. 
-     * Note: This is unique in the context of the Plex server.
-     * 
-     */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=sectionKey")
-    private int sectionKey;
-
-    /**
      * Whether or not to include details for a section (types, filters, and sorts). 
      * Only exists for backwards compatibility, media providers other than the server libraries have it on always.
      * 
@@ -37,29 +29,27 @@ public class GetLibraryDetailsRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeDetails")
     private Optional<? extends IncludeDetails> includeDetails;
 
-    @JsonCreator
-    public GetLibraryDetailsRequest(
-            int sectionKey,
-            Optional<? extends IncludeDetails> includeDetails) {
-        Utils.checkNotNull(sectionKey, "sectionKey");
-        Utils.checkNotNull(includeDetails, "includeDetails");
-        this.sectionKey = sectionKey;
-        this.includeDetails = includeDetails;
-    }
-    
-    public GetLibraryDetailsRequest(
-            int sectionKey) {
-        this(sectionKey, Optional.empty());
-    }
-
     /**
      * The unique key of the Plex library. 
      * Note: This is unique in the context of the Plex server.
      * 
      */
-    @JsonIgnore
-    public int sectionKey() {
-        return sectionKey;
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=sectionKey")
+    private int sectionKey;
+
+    @JsonCreator
+    public GetLibraryDetailsRequest(
+            Optional<? extends IncludeDetails> includeDetails,
+            int sectionKey) {
+        Utils.checkNotNull(includeDetails, "includeDetails");
+        Utils.checkNotNull(sectionKey, "sectionKey");
+        this.includeDetails = includeDetails;
+        this.sectionKey = sectionKey;
+    }
+    
+    public GetLibraryDetailsRequest(
+            int sectionKey) {
+        this(Optional.empty(), sectionKey);
     }
 
     /**
@@ -73,19 +63,18 @@ public class GetLibraryDetailsRequest {
         return (Optional<IncludeDetails>) includeDetails;
     }
 
-    public final static Builder builder() {
-        return new Builder();
-    }
-
     /**
      * The unique key of the Plex library. 
      * Note: This is unique in the context of the Plex server.
      * 
      */
-    public GetLibraryDetailsRequest withSectionKey(int sectionKey) {
-        Utils.checkNotNull(sectionKey, "sectionKey");
-        this.sectionKey = sectionKey;
-        return this;
+    @JsonIgnore
+    public int sectionKey() {
+        return sectionKey;
+    }
+
+    public final static Builder builder() {
+        return new Builder();
     }
 
     /**
@@ -109,6 +98,17 @@ public class GetLibraryDetailsRequest {
         this.includeDetails = includeDetails;
         return this;
     }
+
+    /**
+     * The unique key of the Plex library. 
+     * Note: This is unique in the context of the Plex server.
+     * 
+     */
+    public GetLibraryDetailsRequest withSectionKey(int sectionKey) {
+        Utils.checkNotNull(sectionKey, "sectionKey");
+        this.sectionKey = sectionKey;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -120,43 +120,32 @@ public class GetLibraryDetailsRequest {
         }
         GetLibraryDetailsRequest other = (GetLibraryDetailsRequest) o;
         return 
-            Objects.deepEquals(this.sectionKey, other.sectionKey) &&
-            Objects.deepEquals(this.includeDetails, other.includeDetails);
+            Objects.deepEquals(this.includeDetails, other.includeDetails) &&
+            Objects.deepEquals(this.sectionKey, other.sectionKey);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
-            sectionKey,
-            includeDetails);
+            includeDetails,
+            sectionKey);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetLibraryDetailsRequest.class,
-                "sectionKey", sectionKey,
-                "includeDetails", includeDetails);
+                "includeDetails", includeDetails,
+                "sectionKey", sectionKey);
     }
     
     public final static class Builder {
  
-        private Integer sectionKey;
+        private Optional<? extends IncludeDetails> includeDetails;
  
-        private Optional<? extends IncludeDetails> includeDetails;  
+        private Integer sectionKey;  
         
         private Builder() {
           // force use of static builder() method
-        }
-
-        /**
-         * The unique key of the Plex library. 
-         * Note: This is unique in the context of the Plex server.
-         * 
-         */
-        public Builder sectionKey(int sectionKey) {
-            Utils.checkNotNull(sectionKey, "sectionKey");
-            this.sectionKey = sectionKey;
-            return this;
         }
 
         /**
@@ -180,13 +169,24 @@ public class GetLibraryDetailsRequest {
             this.includeDetails = includeDetails;
             return this;
         }
+
+        /**
+         * The unique key of the Plex library. 
+         * Note: This is unique in the context of the Plex server.
+         * 
+         */
+        public Builder sectionKey(int sectionKey) {
+            Utils.checkNotNull(sectionKey, "sectionKey");
+            this.sectionKey = sectionKey;
+            return this;
+        }
         
         public GetLibraryDetailsRequest build() {
             if (includeDetails == null) {
                 includeDetails = _SINGLETON_VALUE_IncludeDetails.value();
             }            return new GetLibraryDetailsRequest(
-                sectionKey,
-                includeDetails);
+                includeDetails,
+                sectionKey);
         }
 
         private static final LazySingletonValue<Optional<? extends IncludeDetails>> _SINGLETON_VALUE_IncludeDetails =

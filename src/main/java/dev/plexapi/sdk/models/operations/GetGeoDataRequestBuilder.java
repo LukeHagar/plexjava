@@ -4,6 +4,8 @@
 
 package dev.plexapi.sdk.models.operations;
 
+import dev.plexapi.sdk.utils.Options;
+import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.String;
 import java.util.Optional;
@@ -11,6 +13,7 @@ import java.util.Optional;
 public class GetGeoDataRequestBuilder {
 
     private Optional<String> serverURL = Optional.empty();
+    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetGeoData sdk;
 
     public GetGeoDataRequestBuilder(SDKMethodInterfaces.MethodCallGetGeoData sdk) {
@@ -28,10 +31,25 @@ public class GetGeoDataRequestBuilder {
         this.serverURL = serverURL;
         return this;
     }
+                
+    public GetGeoDataRequestBuilder retryConfig(RetryConfig retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = Optional.of(retryConfig);
+        return this;
+    }
+
+    public GetGeoDataRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
+        Utils.checkNotNull(retryConfig, "retryConfig");
+        this.retryConfig = retryConfig;
+        return this;
+    }
 
     public GetGeoDataResponse call() throws Exception {
-
+        Optional<Options> options = Optional.of(Options.builder()
+                                                    .retryConfig(retryConfig)
+                                                    .build());
         return sdk.getGeoData(
-            serverURL);
+            serverURL,
+            options);
     }
 }

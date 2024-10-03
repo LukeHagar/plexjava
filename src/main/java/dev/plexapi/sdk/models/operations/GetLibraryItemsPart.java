@@ -32,8 +32,9 @@ public class GetLibraryItemsPart {
     @JsonProperty("key")
     private String key;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
-    private int duration;
+    private Optional<Integer> duration;
 
     @JsonProperty("file")
     private String file;
@@ -60,8 +61,9 @@ public class GetLibraryItemsPart {
     @JsonProperty("optimizedForStreaming")
     private Optional<Boolean> optimizedForStreaming;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoProfile")
-    private String videoProfile;
+    private Optional<String> videoProfile;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("indexes")
@@ -79,14 +81,14 @@ public class GetLibraryItemsPart {
     public GetLibraryItemsPart(
             @JsonProperty("id") int id,
             @JsonProperty("key") String key,
-            @JsonProperty("duration") int duration,
+            @JsonProperty("duration") Optional<Integer> duration,
             @JsonProperty("file") String file,
             @JsonProperty("size") long size,
             @JsonProperty("container") String container,
             @JsonProperty("audioProfile") Optional<String> audioProfile,
             @JsonProperty("has64bitOffsets") Optional<Boolean> has64bitOffsets,
             @JsonProperty("optimizedForStreaming") Optional<Boolean> optimizedForStreaming,
-            @JsonProperty("videoProfile") String videoProfile,
+            @JsonProperty("videoProfile") Optional<String> videoProfile,
             @JsonProperty("indexes") Optional<String> indexes,
             @JsonProperty("hasThumbnail") Optional<? extends GetLibraryItemsHasThumbnail> hasThumbnail,
             @JsonProperty("Stream") Optional<? extends List<GetLibraryItemsStream>> stream) {
@@ -121,12 +123,10 @@ public class GetLibraryItemsPart {
     public GetLibraryItemsPart(
             int id,
             String key,
-            int duration,
             String file,
             long size,
-            String container,
-            String videoProfile) {
-        this(id, key, duration, file, size, container, Optional.empty(), Optional.empty(), Optional.empty(), videoProfile, Optional.empty(), Optional.empty(), Optional.empty());
+            String container) {
+        this(id, key, Optional.empty(), file, size, container, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -140,7 +140,7 @@ public class GetLibraryItemsPart {
     }
 
     @JsonIgnore
-    public int duration() {
+    public Optional<Integer> duration() {
         return duration;
     }
 
@@ -179,7 +179,7 @@ public class GetLibraryItemsPart {
     }
 
     @JsonIgnore
-    public String videoProfile() {
+    public Optional<String> videoProfile() {
         return videoProfile;
     }
 
@@ -217,6 +217,12 @@ public class GetLibraryItemsPart {
     }
 
     public GetLibraryItemsPart withDuration(int duration) {
+        Utils.checkNotNull(duration, "duration");
+        this.duration = Optional.ofNullable(duration);
+        return this;
+    }
+
+    public GetLibraryItemsPart withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = duration;
         return this;
@@ -281,6 +287,12 @@ public class GetLibraryItemsPart {
     }
 
     public GetLibraryItemsPart withVideoProfile(String videoProfile) {
+        Utils.checkNotNull(videoProfile, "videoProfile");
+        this.videoProfile = Optional.ofNullable(videoProfile);
+        return this;
+    }
+
+    public GetLibraryItemsPart withVideoProfile(Optional<String> videoProfile) {
         Utils.checkNotNull(videoProfile, "videoProfile");
         this.videoProfile = videoProfile;
         return this;
@@ -389,7 +401,7 @@ public class GetLibraryItemsPart {
  
         private String key;
  
-        private Integer duration;
+        private Optional<Integer> duration = Optional.empty();
  
         private String file;
  
@@ -403,7 +415,7 @@ public class GetLibraryItemsPart {
  
         private Optional<Boolean> optimizedForStreaming = Optional.empty();
  
-        private String videoProfile;
+        private Optional<String> videoProfile = Optional.empty();
  
         private Optional<String> indexes = Optional.empty();
  
@@ -428,6 +440,12 @@ public class GetLibraryItemsPart {
         }
 
         public Builder duration(int duration) {
+            Utils.checkNotNull(duration, "duration");
+            this.duration = Optional.ofNullable(duration);
+            return this;
+        }
+
+        public Builder duration(Optional<Integer> duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = duration;
             return this;
@@ -492,6 +510,12 @@ public class GetLibraryItemsPart {
         }
 
         public Builder videoProfile(String videoProfile) {
+            Utils.checkNotNull(videoProfile, "videoProfile");
+            this.videoProfile = Optional.ofNullable(videoProfile);
+            return this;
+        }
+
+        public Builder videoProfile(Optional<String> videoProfile) {
             Utils.checkNotNull(videoProfile, "videoProfile");
             this.videoProfile = videoProfile;
             return this;

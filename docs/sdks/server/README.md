@@ -39,11 +39,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
@@ -89,11 +89,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetServerPreferencesResponse res = sdk.server().getServerPreferences()
@@ -139,11 +139,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetAvailableClientsResponse res = sdk.server().getAvailableClients()
@@ -189,11 +189,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetDevicesResponse res = sdk.server().getDevices()
@@ -237,11 +237,11 @@ public class Application {
     public static void main(String[] args) throws GetServerIdentityRequestTimeout, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetServerIdentityResponse res = sdk.server().getServerIdentity()
@@ -286,11 +286,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetMyPlexAccountResponse res = sdk.server().getMyPlexAccount()
@@ -340,11 +340,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetResizedPhotoRequest req = GetResizedPhotoRequest.builder()
@@ -405,11 +405,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetMediaProvidersResponse res = sdk.server().getMediaProviders()
@@ -425,9 +425,9 @@ public class Application {
 
 ### Parameters
 
-| Parameter                 | Type                      | Required                  | Description               | Example                   |
-| ------------------------- | ------------------------- | ------------------------- | ------------------------- | ------------------------- |
-| `xPlexToken`              | *String*                  | :heavy_check_mark:        | Plex Authentication Token | CV5xoxjTpFKUzBTShsaf      |
+| Parameter                                      | Type                                           | Required                                       | Description                                    | Example                                        |
+| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
+| `xPlexToken`                                   | *String*                                       | :heavy_check_mark:                             | An authentication token, obtained from plex.tv | CV5xoxjTpFKUzBTShsaf                           |
 
 ### Response
 
@@ -462,11 +462,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("gcgzw5rz2xovp84b4vha3a40")
-                .clientName("Plex Web")
-                .clientVersion("4.133.0")
-                .clientPlatform("Chrome")
-                .deviceName("Linux")
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .clientVersion("2.4.1")
+                .platform("Roku")
+                .deviceNickname("Roku 3")
             .build();
 
         GetServerListResponse res = sdk.server().getServerList()
