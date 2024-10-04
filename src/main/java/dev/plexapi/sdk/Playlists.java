@@ -61,16 +61,11 @@ import dev.plexapi.sdk.models.operations.UpdatePlaylistResponse;
 import dev.plexapi.sdk.models.operations.UploadPlaylistRequest;
 import dev.plexapi.sdk.models.operations.UploadPlaylistRequestBuilder;
 import dev.plexapi.sdk.models.operations.UploadPlaylistResponse;
-import dev.plexapi.sdk.utils.BackoffStrategy;
 import dev.plexapi.sdk.utils.HTTPClient;
 import dev.plexapi.sdk.utils.HTTPRequest;
 import dev.plexapi.sdk.utils.Hook.AfterErrorContextImpl;
 import dev.plexapi.sdk.utils.Hook.AfterSuccessContextImpl;
 import dev.plexapi.sdk.utils.Hook.BeforeRequestContextImpl;
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.Retries.NonRetryableException;
-import dev.plexapi.sdk.utils.Retries;
-import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.io.InputStream;
 import java.lang.Double;
@@ -78,11 +73,8 @@ import java.lang.Exception;
 import java.lang.String;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit; 
+import java.util.Optional; 
 
 /**
  * Playlists are ordered collections of media. They can be dumb (just a list of media) or smart (based on a media query, such as "all albums from 2017"). 
@@ -133,27 +125,6 @@ public class Playlists implements
      */
     public CreatePlaylistResponse createPlaylist(
             CreatePlaylistRequest request) throws Exception {
-        return createPlaylist(request, Optional.empty());
-    }
-    
-    /**
-     * Create a Playlist
-     * Create a new playlist. By default the playlist is blank. To create a playlist along with a first item, pass:
-     * - `uri` - The content URI for what we're playing (e.g. `server://1234/com.plexapp.plugins.library/library/metadata/1`).
-     * - `playQueueID` - To create a playlist from an existing play queue.
-     * 
-     * @param request The request object containing all of the parameters for the API call.
-     * @param options additional options
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public CreatePlaylistResponse createPlaylist(
-            CreatePlaylistRequest request,
-            Optional<Options> options) throws Exception {
-
-        if (options.isPresent()) {
-          options.get().validate(Arrays.asList(Options.Option.RETRY_CONFIG));
-        }
         String _baseUrl = Utils.templateUrl(
                 this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
@@ -174,62 +145,45 @@ public class Playlists implements
                 this.sdkConfiguration.securitySource.getSecurity());
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
-        HTTPRequest _finalReq = _req;
-        RetryConfig _retryConfig;
-        if (options.isPresent() && options.get().retryConfig().isPresent()) {
-            _retryConfig = options.get().retryConfig().get();
-        } else if (this.sdkConfiguration.retryConfig.isPresent()) {
-            _retryConfig = this.sdkConfiguration.retryConfig.get();
-        } else {
-            _retryConfig = RetryConfig.builder()
-                .backoff(BackoffStrategy.builder()
-                            .initialInterval(500, TimeUnit.MILLISECONDS)
-                            .maxInterval(60000, TimeUnit.MILLISECONDS)
-                            .baseFactor((double)(1.5))
-                            .maxElapsedTime(3600000, TimeUnit.MILLISECONDS)
-                            .retryConnectError(true)
-                            .build())
-                .build();
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "createPlaylist", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "createPlaylist",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "createPlaylist",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "createPlaylist",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-        List<String> _statusCodes = new ArrayList<>();
-        _statusCodes.add("5XX");
-        Retries _retries = Retries.builder()
-            .action(() -> {
-                HttpRequest _r = null;
-                try {
-                    _r = sdkConfiguration.hooks()
-                        .beforeRequest(
-                            new BeforeRequestContextImpl(
-                                "createPlaylist", 
-                                Optional.of(List.of()), 
-                                sdkConfiguration.securitySource()),
-                            _finalReq.build());
-                } catch (Exception _e) {
-                    throw new NonRetryableException(_e);
-                }
-                try {
-                    return _client.send(_r);
-                } catch (Exception _e) {
-                    return sdkConfiguration.hooks()
-                        .afterError(
-                            new AfterErrorContextImpl(
-                                "createPlaylist",
-                                 Optional.of(List.of()),
-                                 sdkConfiguration.securitySource()), 
-                            Optional.empty(),
-                            Optional.of(_e));
-                }
-            })
-            .retryConfig(_retryConfig)
-            .statusCodes(_statusCodes)
-            .build();
-        HttpResponse<InputStream> _httpRes = sdkConfiguration.hooks()
-                 .afterSuccess(
-                     new AfterSuccessContextImpl(
-                         "createPlaylist", 
-                         Optional.of(List.of()), 
-                         sdkConfiguration.securitySource()),
-                     _retries.run());
         String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
@@ -323,7 +277,7 @@ public class Playlists implements
      * @throws Exception if the API call fails
      */
     public GetPlaylistsResponse getPlaylistsDirect() throws Exception {
-        return getPlaylists(Optional.empty(), Optional.empty(), Optional.empty());
+        return getPlaylists(Optional.empty(), Optional.empty());
     }
     
     /**
@@ -331,18 +285,12 @@ public class Playlists implements
      * Get All Playlists given the specified filters.
      * @param playlistType limit to a type of playlist.
      * @param smart type of playlists to return (default is all).
-     * @param options additional options
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetPlaylistsResponse getPlaylists(
             Optional<? extends PlaylistType> playlistType,
-            Optional<? extends QueryParamSmart> smart,
-            Optional<Options> options) throws Exception {
-
-        if (options.isPresent()) {
-          options.get().validate(Arrays.asList(Options.Option.RETRY_CONFIG));
-        }
+            Optional<? extends QueryParamSmart> smart) throws Exception {
         GetPlaylistsRequest request =
             GetPlaylistsRequest
                 .builder()
@@ -370,62 +318,45 @@ public class Playlists implements
                 this.sdkConfiguration.securitySource.getSecurity());
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
-        HTTPRequest _finalReq = _req;
-        RetryConfig _retryConfig;
-        if (options.isPresent() && options.get().retryConfig().isPresent()) {
-            _retryConfig = options.get().retryConfig().get();
-        } else if (this.sdkConfiguration.retryConfig.isPresent()) {
-            _retryConfig = this.sdkConfiguration.retryConfig.get();
-        } else {
-            _retryConfig = RetryConfig.builder()
-                .backoff(BackoffStrategy.builder()
-                            .initialInterval(500, TimeUnit.MILLISECONDS)
-                            .maxInterval(60000, TimeUnit.MILLISECONDS)
-                            .baseFactor((double)(1.5))
-                            .maxElapsedTime(3600000, TimeUnit.MILLISECONDS)
-                            .retryConnectError(true)
-                            .build())
-                .build();
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "getPlaylists", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "getPlaylists",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "getPlaylists",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "getPlaylists",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-        List<String> _statusCodes = new ArrayList<>();
-        _statusCodes.add("5XX");
-        Retries _retries = Retries.builder()
-            .action(() -> {
-                HttpRequest _r = null;
-                try {
-                    _r = sdkConfiguration.hooks()
-                        .beforeRequest(
-                            new BeforeRequestContextImpl(
-                                "getPlaylists", 
-                                Optional.of(List.of()), 
-                                sdkConfiguration.securitySource()),
-                            _finalReq.build());
-                } catch (Exception _e) {
-                    throw new NonRetryableException(_e);
-                }
-                try {
-                    return _client.send(_r);
-                } catch (Exception _e) {
-                    return sdkConfiguration.hooks()
-                        .afterError(
-                            new AfterErrorContextImpl(
-                                "getPlaylists",
-                                 Optional.of(List.of()),
-                                 sdkConfiguration.securitySource()), 
-                            Optional.empty(),
-                            Optional.of(_e));
-                }
-            })
-            .retryConfig(_retryConfig)
-            .statusCodes(_statusCodes)
-            .build();
-        HttpResponse<InputStream> _httpRes = sdkConfiguration.hooks()
-                 .afterSuccess(
-                     new AfterSuccessContextImpl(
-                         "getPlaylists", 
-                         Optional.of(List.of()), 
-                         sdkConfiguration.securitySource()),
-                     _retries.run());
         String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
@@ -525,26 +456,6 @@ public class Playlists implements
      */
     public GetPlaylistResponse getPlaylist(
             double playlistID) throws Exception {
-        return getPlaylist(playlistID, Optional.empty());
-    }
-    
-    /**
-     * Retrieve Playlist
-     * Gets detailed metadata for a playlist. A playlist for many purposes (rating, editing metadata, tagging), can be treated like a regular metadata item:
-     * Smart playlist details contain the `content` attribute. This is the content URI for the generator. This can then be parsed by a client to provide smart playlist editing.
-     * 
-     * @param playlistID the ID of the playlist
-     * @param options additional options
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetPlaylistResponse getPlaylist(
-            double playlistID,
-            Optional<Options> options) throws Exception {
-
-        if (options.isPresent()) {
-          options.get().validate(Arrays.asList(Options.Option.RETRY_CONFIG));
-        }
         GetPlaylistRequest request =
             GetPlaylistRequest
                 .builder()
@@ -568,62 +479,45 @@ public class Playlists implements
                 this.sdkConfiguration.securitySource.getSecurity());
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
-        HTTPRequest _finalReq = _req;
-        RetryConfig _retryConfig;
-        if (options.isPresent() && options.get().retryConfig().isPresent()) {
-            _retryConfig = options.get().retryConfig().get();
-        } else if (this.sdkConfiguration.retryConfig.isPresent()) {
-            _retryConfig = this.sdkConfiguration.retryConfig.get();
-        } else {
-            _retryConfig = RetryConfig.builder()
-                .backoff(BackoffStrategy.builder()
-                            .initialInterval(500, TimeUnit.MILLISECONDS)
-                            .maxInterval(60000, TimeUnit.MILLISECONDS)
-                            .baseFactor((double)(1.5))
-                            .maxElapsedTime(3600000, TimeUnit.MILLISECONDS)
-                            .retryConnectError(true)
-                            .build())
-                .build();
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "getPlaylist", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "getPlaylist",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "getPlaylist",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "getPlaylist",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-        List<String> _statusCodes = new ArrayList<>();
-        _statusCodes.add("5XX");
-        Retries _retries = Retries.builder()
-            .action(() -> {
-                HttpRequest _r = null;
-                try {
-                    _r = sdkConfiguration.hooks()
-                        .beforeRequest(
-                            new BeforeRequestContextImpl(
-                                "getPlaylist", 
-                                Optional.of(List.of()), 
-                                sdkConfiguration.securitySource()),
-                            _finalReq.build());
-                } catch (Exception _e) {
-                    throw new NonRetryableException(_e);
-                }
-                try {
-                    return _client.send(_r);
-                } catch (Exception _e) {
-                    return sdkConfiguration.hooks()
-                        .afterError(
-                            new AfterErrorContextImpl(
-                                "getPlaylist",
-                                 Optional.of(List.of()),
-                                 sdkConfiguration.securitySource()), 
-                            Optional.empty(),
-                            Optional.of(_e));
-                }
-            })
-            .retryConfig(_retryConfig)
-            .statusCodes(_statusCodes)
-            .build();
-        HttpResponse<InputStream> _httpRes = sdkConfiguration.hooks()
-                 .afterSuccess(
-                     new AfterSuccessContextImpl(
-                         "getPlaylist", 
-                         Optional.of(List.of()), 
-                         sdkConfiguration.securitySource()),
-                     _retries.run());
         String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
@@ -721,25 +615,6 @@ public class Playlists implements
      */
     public DeletePlaylistResponse deletePlaylist(
             double playlistID) throws Exception {
-        return deletePlaylist(playlistID, Optional.empty());
-    }
-    
-    /**
-     * Deletes a Playlist
-     * This endpoint will delete a playlist
-     * 
-     * @param playlistID the ID of the playlist
-     * @param options additional options
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public DeletePlaylistResponse deletePlaylist(
-            double playlistID,
-            Optional<Options> options) throws Exception {
-
-        if (options.isPresent()) {
-          options.get().validate(Arrays.asList(Options.Option.RETRY_CONFIG));
-        }
         DeletePlaylistRequest request =
             DeletePlaylistRequest
                 .builder()
@@ -763,62 +638,45 @@ public class Playlists implements
                 this.sdkConfiguration.securitySource.getSecurity());
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
-        HTTPRequest _finalReq = _req;
-        RetryConfig _retryConfig;
-        if (options.isPresent() && options.get().retryConfig().isPresent()) {
-            _retryConfig = options.get().retryConfig().get();
-        } else if (this.sdkConfiguration.retryConfig.isPresent()) {
-            _retryConfig = this.sdkConfiguration.retryConfig.get();
-        } else {
-            _retryConfig = RetryConfig.builder()
-                .backoff(BackoffStrategy.builder()
-                            .initialInterval(500, TimeUnit.MILLISECONDS)
-                            .maxInterval(60000, TimeUnit.MILLISECONDS)
-                            .baseFactor((double)(1.5))
-                            .maxElapsedTime(3600000, TimeUnit.MILLISECONDS)
-                            .retryConnectError(true)
-                            .build())
-                .build();
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "deletePlaylist", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "deletePlaylist",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "deletePlaylist",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "deletePlaylist",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-        List<String> _statusCodes = new ArrayList<>();
-        _statusCodes.add("5XX");
-        Retries _retries = Retries.builder()
-            .action(() -> {
-                HttpRequest _r = null;
-                try {
-                    _r = sdkConfiguration.hooks()
-                        .beforeRequest(
-                            new BeforeRequestContextImpl(
-                                "deletePlaylist", 
-                                Optional.of(List.of()), 
-                                sdkConfiguration.securitySource()),
-                            _finalReq.build());
-                } catch (Exception _e) {
-                    throw new NonRetryableException(_e);
-                }
-                try {
-                    return _client.send(_r);
-                } catch (Exception _e) {
-                    return sdkConfiguration.hooks()
-                        .afterError(
-                            new AfterErrorContextImpl(
-                                "deletePlaylist",
-                                 Optional.of(List.of()),
-                                 sdkConfiguration.securitySource()), 
-                            Optional.empty(),
-                            Optional.of(_e));
-                }
-            })
-            .retryConfig(_retryConfig)
-            .statusCodes(_statusCodes)
-            .build();
-        HttpResponse<InputStream> _httpRes = sdkConfiguration.hooks()
-                 .afterSuccess(
-                     new AfterSuccessContextImpl(
-                         "deletePlaylist", 
-                         Optional.of(List.of()), 
-                         sdkConfiguration.securitySource()),
-                     _retries.run());
         String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
@@ -905,7 +763,7 @@ public class Playlists implements
      */
     public UpdatePlaylistResponse updatePlaylist(
             double playlistID) throws Exception {
-        return updatePlaylist(playlistID, Optional.empty(), Optional.empty(), Optional.empty());
+        return updatePlaylist(playlistID, Optional.empty(), Optional.empty());
     }
     
     /**
@@ -915,19 +773,13 @@ public class Playlists implements
      * @param playlistID the ID of the playlist
      * @param title name of the playlist
      * @param summary summary description of the playlist
-     * @param options additional options
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public UpdatePlaylistResponse updatePlaylist(
             double playlistID,
             Optional<String> title,
-            Optional<String> summary,
-            Optional<Options> options) throws Exception {
-
-        if (options.isPresent()) {
-          options.get().validate(Arrays.asList(Options.Option.RETRY_CONFIG));
-        }
+            Optional<String> summary) throws Exception {
         UpdatePlaylistRequest request =
             UpdatePlaylistRequest
                 .builder()
@@ -958,62 +810,45 @@ public class Playlists implements
                 this.sdkConfiguration.securitySource.getSecurity());
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
-        HTTPRequest _finalReq = _req;
-        RetryConfig _retryConfig;
-        if (options.isPresent() && options.get().retryConfig().isPresent()) {
-            _retryConfig = options.get().retryConfig().get();
-        } else if (this.sdkConfiguration.retryConfig.isPresent()) {
-            _retryConfig = this.sdkConfiguration.retryConfig.get();
-        } else {
-            _retryConfig = RetryConfig.builder()
-                .backoff(BackoffStrategy.builder()
-                            .initialInterval(500, TimeUnit.MILLISECONDS)
-                            .maxInterval(60000, TimeUnit.MILLISECONDS)
-                            .baseFactor((double)(1.5))
-                            .maxElapsedTime(3600000, TimeUnit.MILLISECONDS)
-                            .retryConnectError(true)
-                            .build())
-                .build();
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "updatePlaylist", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "updatePlaylist",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "updatePlaylist",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "updatePlaylist",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-        List<String> _statusCodes = new ArrayList<>();
-        _statusCodes.add("5XX");
-        Retries _retries = Retries.builder()
-            .action(() -> {
-                HttpRequest _r = null;
-                try {
-                    _r = sdkConfiguration.hooks()
-                        .beforeRequest(
-                            new BeforeRequestContextImpl(
-                                "updatePlaylist", 
-                                Optional.of(List.of()), 
-                                sdkConfiguration.securitySource()),
-                            _finalReq.build());
-                } catch (Exception _e) {
-                    throw new NonRetryableException(_e);
-                }
-                try {
-                    return _client.send(_r);
-                } catch (Exception _e) {
-                    return sdkConfiguration.hooks()
-                        .afterError(
-                            new AfterErrorContextImpl(
-                                "updatePlaylist",
-                                 Optional.of(List.of()),
-                                 sdkConfiguration.securitySource()), 
-                            Optional.empty(),
-                            Optional.of(_e));
-                }
-            })
-            .retryConfig(_retryConfig)
-            .statusCodes(_statusCodes)
-            .build();
-        HttpResponse<InputStream> _httpRes = sdkConfiguration.hooks()
-                 .afterSuccess(
-                     new AfterSuccessContextImpl(
-                         "updatePlaylist", 
-                         Optional.of(List.of()), 
-                         sdkConfiguration.securitySource()),
-                     _retries.run());
         String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
@@ -1114,36 +949,6 @@ public class Playlists implements
     public GetPlaylistContentsResponse getPlaylistContents(
             double playlistID,
             GetPlaylistContentsQueryParamType type) throws Exception {
-        return getPlaylistContents(playlistID, type, Optional.empty());
-    }
-    
-    /**
-     * Retrieve Playlist Contents
-     * Gets the contents of a playlist. Should be paged by clients via standard mechanisms. 
-     * By default leaves are returned (e.g. episodes, movies). In order to return other types you can use the `type` parameter. 
-     * For example, you could use this to display a list of recently added albums vis a smart playlist. 
-     * Note that for dumb playlists, items have a `playlistItemID` attribute which is used for deleting or moving items.
-     * 
-     * @param playlistID the ID of the playlist
-     * @param type The type of media to retrieve.
-    1 = movie
-    2 = show
-    3 = season
-    4 = episode
-    E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
-
-     * @param options additional options
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetPlaylistContentsResponse getPlaylistContents(
-            double playlistID,
-            GetPlaylistContentsQueryParamType type,
-            Optional<Options> options) throws Exception {
-
-        if (options.isPresent()) {
-          options.get().validate(Arrays.asList(Options.Option.RETRY_CONFIG));
-        }
         GetPlaylistContentsRequest request =
             GetPlaylistContentsRequest
                 .builder()
@@ -1173,62 +978,45 @@ public class Playlists implements
                 this.sdkConfiguration.securitySource.getSecurity());
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
-        HTTPRequest _finalReq = _req;
-        RetryConfig _retryConfig;
-        if (options.isPresent() && options.get().retryConfig().isPresent()) {
-            _retryConfig = options.get().retryConfig().get();
-        } else if (this.sdkConfiguration.retryConfig.isPresent()) {
-            _retryConfig = this.sdkConfiguration.retryConfig.get();
-        } else {
-            _retryConfig = RetryConfig.builder()
-                .backoff(BackoffStrategy.builder()
-                            .initialInterval(500, TimeUnit.MILLISECONDS)
-                            .maxInterval(60000, TimeUnit.MILLISECONDS)
-                            .baseFactor((double)(1.5))
-                            .maxElapsedTime(3600000, TimeUnit.MILLISECONDS)
-                            .retryConnectError(true)
-                            .build())
-                .build();
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "getPlaylistContents", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "getPlaylistContents",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "getPlaylistContents",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "getPlaylistContents",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-        List<String> _statusCodes = new ArrayList<>();
-        _statusCodes.add("5XX");
-        Retries _retries = Retries.builder()
-            .action(() -> {
-                HttpRequest _r = null;
-                try {
-                    _r = sdkConfiguration.hooks()
-                        .beforeRequest(
-                            new BeforeRequestContextImpl(
-                                "getPlaylistContents", 
-                                Optional.of(List.of()), 
-                                sdkConfiguration.securitySource()),
-                            _finalReq.build());
-                } catch (Exception _e) {
-                    throw new NonRetryableException(_e);
-                }
-                try {
-                    return _client.send(_r);
-                } catch (Exception _e) {
-                    return sdkConfiguration.hooks()
-                        .afterError(
-                            new AfterErrorContextImpl(
-                                "getPlaylistContents",
-                                 Optional.of(List.of()),
-                                 sdkConfiguration.securitySource()), 
-                            Optional.empty(),
-                            Optional.of(_e));
-                }
-            })
-            .retryConfig(_retryConfig)
-            .statusCodes(_statusCodes)
-            .build();
-        HttpResponse<InputStream> _httpRes = sdkConfiguration.hooks()
-                 .afterSuccess(
-                     new AfterSuccessContextImpl(
-                         "getPlaylistContents", 
-                         Optional.of(List.of()), 
-                         sdkConfiguration.securitySource()),
-                     _retries.run());
         String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
@@ -1326,25 +1114,6 @@ public class Playlists implements
      */
     public ClearPlaylistContentsResponse clearPlaylistContents(
             double playlistID) throws Exception {
-        return clearPlaylistContents(playlistID, Optional.empty());
-    }
-    
-    /**
-     * Delete Playlist Contents
-     * Clears a playlist, only works with dumb playlists. Returns the playlist.
-     * 
-     * @param playlistID the ID of the playlist
-     * @param options additional options
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public ClearPlaylistContentsResponse clearPlaylistContents(
-            double playlistID,
-            Optional<Options> options) throws Exception {
-
-        if (options.isPresent()) {
-          options.get().validate(Arrays.asList(Options.Option.RETRY_CONFIG));
-        }
         ClearPlaylistContentsRequest request =
             ClearPlaylistContentsRequest
                 .builder()
@@ -1368,62 +1137,45 @@ public class Playlists implements
                 this.sdkConfiguration.securitySource.getSecurity());
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
-        HTTPRequest _finalReq = _req;
-        RetryConfig _retryConfig;
-        if (options.isPresent() && options.get().retryConfig().isPresent()) {
-            _retryConfig = options.get().retryConfig().get();
-        } else if (this.sdkConfiguration.retryConfig.isPresent()) {
-            _retryConfig = this.sdkConfiguration.retryConfig.get();
-        } else {
-            _retryConfig = RetryConfig.builder()
-                .backoff(BackoffStrategy.builder()
-                            .initialInterval(500, TimeUnit.MILLISECONDS)
-                            .maxInterval(60000, TimeUnit.MILLISECONDS)
-                            .baseFactor((double)(1.5))
-                            .maxElapsedTime(3600000, TimeUnit.MILLISECONDS)
-                            .retryConnectError(true)
-                            .build())
-                .build();
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "clearPlaylistContents", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "clearPlaylistContents",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "clearPlaylistContents",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "clearPlaylistContents",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-        List<String> _statusCodes = new ArrayList<>();
-        _statusCodes.add("5XX");
-        Retries _retries = Retries.builder()
-            .action(() -> {
-                HttpRequest _r = null;
-                try {
-                    _r = sdkConfiguration.hooks()
-                        .beforeRequest(
-                            new BeforeRequestContextImpl(
-                                "clearPlaylistContents", 
-                                Optional.of(List.of()), 
-                                sdkConfiguration.securitySource()),
-                            _finalReq.build());
-                } catch (Exception _e) {
-                    throw new NonRetryableException(_e);
-                }
-                try {
-                    return _client.send(_r);
-                } catch (Exception _e) {
-                    return sdkConfiguration.hooks()
-                        .afterError(
-                            new AfterErrorContextImpl(
-                                "clearPlaylistContents",
-                                 Optional.of(List.of()),
-                                 sdkConfiguration.securitySource()), 
-                            Optional.empty(),
-                            Optional.of(_e));
-                }
-            })
-            .retryConfig(_retryConfig)
-            .statusCodes(_statusCodes)
-            .build();
-        HttpResponse<InputStream> _httpRes = sdkConfiguration.hooks()
-                 .afterSuccess(
-                     new AfterSuccessContextImpl(
-                         "clearPlaylistContents", 
-                         Optional.of(List.of()), 
-                         sdkConfiguration.securitySource()),
-                     _retries.run());
         String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
@@ -1514,7 +1266,7 @@ public class Playlists implements
     public AddPlaylistContentsResponse addPlaylistContents(
             double playlistID,
             String uri) throws Exception {
-        return addPlaylistContents(playlistID, uri, Optional.empty(), Optional.empty());
+        return addPlaylistContents(playlistID, uri, Optional.empty());
     }
     
     /**
@@ -1525,19 +1277,13 @@ public class Playlists implements
      * @param playlistID the ID of the playlist
      * @param uri the content URI for the playlist
      * @param playQueueID the play queue to add to a playlist
-     * @param options additional options
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public AddPlaylistContentsResponse addPlaylistContents(
             double playlistID,
             String uri,
-            Optional<Double> playQueueID,
-            Optional<Options> options) throws Exception {
-
-        if (options.isPresent()) {
-          options.get().validate(Arrays.asList(Options.Option.RETRY_CONFIG));
-        }
+            Optional<Double> playQueueID) throws Exception {
         AddPlaylistContentsRequest request =
             AddPlaylistContentsRequest
                 .builder()
@@ -1568,62 +1314,45 @@ public class Playlists implements
                 this.sdkConfiguration.securitySource.getSecurity());
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
-        HTTPRequest _finalReq = _req;
-        RetryConfig _retryConfig;
-        if (options.isPresent() && options.get().retryConfig().isPresent()) {
-            _retryConfig = options.get().retryConfig().get();
-        } else if (this.sdkConfiguration.retryConfig.isPresent()) {
-            _retryConfig = this.sdkConfiguration.retryConfig.get();
-        } else {
-            _retryConfig = RetryConfig.builder()
-                .backoff(BackoffStrategy.builder()
-                            .initialInterval(500, TimeUnit.MILLISECONDS)
-                            .maxInterval(60000, TimeUnit.MILLISECONDS)
-                            .baseFactor((double)(1.5))
-                            .maxElapsedTime(3600000, TimeUnit.MILLISECONDS)
-                            .retryConnectError(true)
-                            .build())
-                .build();
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "addPlaylistContents", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "addPlaylistContents",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "addPlaylistContents",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "addPlaylistContents",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-        List<String> _statusCodes = new ArrayList<>();
-        _statusCodes.add("5XX");
-        Retries _retries = Retries.builder()
-            .action(() -> {
-                HttpRequest _r = null;
-                try {
-                    _r = sdkConfiguration.hooks()
-                        .beforeRequest(
-                            new BeforeRequestContextImpl(
-                                "addPlaylistContents", 
-                                Optional.of(List.of()), 
-                                sdkConfiguration.securitySource()),
-                            _finalReq.build());
-                } catch (Exception _e) {
-                    throw new NonRetryableException(_e);
-                }
-                try {
-                    return _client.send(_r);
-                } catch (Exception _e) {
-                    return sdkConfiguration.hooks()
-                        .afterError(
-                            new AfterErrorContextImpl(
-                                "addPlaylistContents",
-                                 Optional.of(List.of()),
-                                 sdkConfiguration.securitySource()), 
-                            Optional.empty(),
-                            Optional.of(_e));
-                }
-            })
-            .retryConfig(_retryConfig)
-            .statusCodes(_statusCodes)
-            .build();
-        HttpResponse<InputStream> _httpRes = sdkConfiguration.hooks()
-                 .afterSuccess(
-                     new AfterSuccessContextImpl(
-                         "addPlaylistContents", 
-                         Optional.of(List.of()), 
-                         sdkConfiguration.securitySource()),
-                     _retries.run());
         String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
@@ -1735,39 +1464,6 @@ public class Playlists implements
             String path,
             QueryParamForce force,
             long sectionID) throws Exception {
-        return uploadPlaylist(path, force, sectionID, Optional.empty());
-    }
-    
-    /**
-     * Upload Playlist
-     * Imports m3u playlists by passing a path on the server to scan for m3u-formatted playlist files, or a path to a single playlist file.
-     * 
-     * @param path absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server. 
-    If the `path` argument is a directory, that path will be scanned for playlist files to be processed. 
-    Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it. 
-    The GUID of each playlist is based on the filename. 
-    If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it. 
-    The GUID of each playlist is based on the filename.
-
-     * @param force Force overwriting of duplicate playlists.  
-    By default, a playlist file uploaded with the same path will overwrite the existing playlist. 
-    The `force` argument is used to disable overwriting.  
-    If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.
-
-     * @param sectionID Possibly the section ID to upload the playlist to, we are not certain.
-     * @param options additional options
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public UploadPlaylistResponse uploadPlaylist(
-            String path,
-            QueryParamForce force,
-            long sectionID,
-            Optional<Options> options) throws Exception {
-
-        if (options.isPresent()) {
-          options.get().validate(Arrays.asList(Options.Option.RETRY_CONFIG));
-        }
         UploadPlaylistRequest request =
             UploadPlaylistRequest
                 .builder()
@@ -1796,62 +1492,45 @@ public class Playlists implements
                 this.sdkConfiguration.securitySource.getSecurity());
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
-        HTTPRequest _finalReq = _req;
-        RetryConfig _retryConfig;
-        if (options.isPresent() && options.get().retryConfig().isPresent()) {
-            _retryConfig = options.get().retryConfig().get();
-        } else if (this.sdkConfiguration.retryConfig.isPresent()) {
-            _retryConfig = this.sdkConfiguration.retryConfig.get();
-        } else {
-            _retryConfig = RetryConfig.builder()
-                .backoff(BackoffStrategy.builder()
-                            .initialInterval(500, TimeUnit.MILLISECONDS)
-                            .maxInterval(60000, TimeUnit.MILLISECONDS)
-                            .baseFactor((double)(1.5))
-                            .maxElapsedTime(3600000, TimeUnit.MILLISECONDS)
-                            .retryConnectError(true)
-                            .build())
-                .build();
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "uploadPlaylist", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "uploadPlaylist",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "uploadPlaylist",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "uploadPlaylist",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-        List<String> _statusCodes = new ArrayList<>();
-        _statusCodes.add("5XX");
-        Retries _retries = Retries.builder()
-            .action(() -> {
-                HttpRequest _r = null;
-                try {
-                    _r = sdkConfiguration.hooks()
-                        .beforeRequest(
-                            new BeforeRequestContextImpl(
-                                "uploadPlaylist", 
-                                Optional.of(List.of()), 
-                                sdkConfiguration.securitySource()),
-                            _finalReq.build());
-                } catch (Exception _e) {
-                    throw new NonRetryableException(_e);
-                }
-                try {
-                    return _client.send(_r);
-                } catch (Exception _e) {
-                    return sdkConfiguration.hooks()
-                        .afterError(
-                            new AfterErrorContextImpl(
-                                "uploadPlaylist",
-                                 Optional.of(List.of()),
-                                 sdkConfiguration.securitySource()), 
-                            Optional.empty(),
-                            Optional.of(_e));
-                }
-            })
-            .retryConfig(_retryConfig)
-            .statusCodes(_statusCodes)
-            .build();
-        HttpResponse<InputStream> _httpRes = sdkConfiguration.hooks()
-                 .afterSuccess(
-                     new AfterSuccessContextImpl(
-                         "uploadPlaylist", 
-                         Optional.of(List.of()), 
-                         sdkConfiguration.securitySource()),
-                     _retries.run());
         String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")

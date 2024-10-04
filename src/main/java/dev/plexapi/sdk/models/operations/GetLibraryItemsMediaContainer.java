@@ -96,8 +96,9 @@ public class GetLibraryItemsMediaContainer {
     @JsonProperty("mixedParents")
     private Optional<Boolean> mixedParents;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Metadata")
-    private List<GetLibraryItemsMetadata> metadata;
+    private Optional<? extends List<GetLibraryItemsMetadata>> metadata;
 
     /**
      * The Meta object is only included in the response if the `includeMeta` parameter is set to `1`.
@@ -130,7 +131,7 @@ public class GetLibraryItemsMediaContainer {
             @JsonProperty("viewGroup") String viewGroup,
             @JsonProperty("viewMode") Optional<Integer> viewMode,
             @JsonProperty("mixedParents") Optional<Boolean> mixedParents,
-            @JsonProperty("Metadata") List<GetLibraryItemsMetadata> metadata,
+            @JsonProperty("Metadata") Optional<? extends List<GetLibraryItemsMetadata>> metadata,
             @JsonProperty("Meta") Optional<? extends GetLibraryItemsMeta> meta) {
         Utils.checkNotNull(type, "type");
         Utils.checkNotNull(fieldType, "fieldType");
@@ -196,9 +197,8 @@ public class GetLibraryItemsMediaContainer {
             String thumb,
             String title1,
             String title2,
-            String viewGroup,
-            List<GetLibraryItemsMetadata> metadata) {
-        this(Optional.empty(), Optional.empty(), size, totalSize, offset, content, allowSync, Optional.empty(), art, identifier, librarySectionID, librarySectionTitle, librarySectionUUID, mediaTagPrefix, mediaTagVersion, thumb, title1, title2, viewGroup, Optional.empty(), Optional.empty(), metadata, Optional.empty());
+            String viewGroup) {
+        this(Optional.empty(), Optional.empty(), size, totalSize, offset, content, allowSync, Optional.empty(), art, identifier, librarySectionID, librarySectionTitle, librarySectionUUID, mediaTagPrefix, mediaTagVersion, thumb, title1, title2, viewGroup, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -308,9 +308,10 @@ public class GetLibraryItemsMediaContainer {
         return mixedParents;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public List<GetLibraryItemsMetadata> metadata() {
-        return metadata;
+    public Optional<List<GetLibraryItemsMetadata>> metadata() {
+        return (Optional<List<GetLibraryItemsMetadata>>) metadata;
     }
 
     /**
@@ -485,6 +486,12 @@ public class GetLibraryItemsMediaContainer {
 
     public GetLibraryItemsMediaContainer withMetadata(List<GetLibraryItemsMetadata> metadata) {
         Utils.checkNotNull(metadata, "metadata");
+        this.metadata = Optional.ofNullable(metadata);
+        return this;
+    }
+
+    public GetLibraryItemsMediaContainer withMetadata(Optional<? extends List<GetLibraryItemsMetadata>> metadata) {
+        Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
         return this;
     }
@@ -644,7 +651,7 @@ public class GetLibraryItemsMediaContainer {
  
         private Optional<Boolean> mixedParents = Optional.empty();
  
-        private List<GetLibraryItemsMetadata> metadata;
+        private Optional<? extends List<GetLibraryItemsMetadata>> metadata = Optional.empty();
  
         private Optional<? extends GetLibraryItemsMeta> meta = Optional.empty();  
         
@@ -809,6 +816,12 @@ public class GetLibraryItemsMediaContainer {
         }
 
         public Builder metadata(List<GetLibraryItemsMetadata> metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = Optional.ofNullable(metadata);
+            return this;
+        }
+
+        public Builder metadata(Optional<? extends List<GetLibraryItemsMetadata>> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = metadata;
             return this;

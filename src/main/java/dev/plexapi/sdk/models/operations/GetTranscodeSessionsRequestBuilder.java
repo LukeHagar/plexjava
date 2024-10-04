@@ -4,37 +4,17 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
-import dev.plexapi.sdk.utils.Utils;
-import java.util.Optional;
 
 public class GetTranscodeSessionsRequestBuilder {
 
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetTranscodeSessions sdk;
 
     public GetTranscodeSessionsRequestBuilder(SDKMethodInterfaces.MethodCallGetTranscodeSessions sdk) {
         this.sdk = sdk;
     }
-                
-    public GetTranscodeSessionsRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public GetTranscodeSessionsRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public GetTranscodeSessionsResponse call() throws Exception {
-        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
-        return sdk.getTranscodeSessions(
-            options);
+
+        return sdk.getTranscodeSessionsDirect();
     }
 }

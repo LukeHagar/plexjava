@@ -4,37 +4,17 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
-import dev.plexapi.sdk.utils.Utils;
-import java.util.Optional;
 
 public class GetDevicesRequestBuilder {
 
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetDevices sdk;
 
     public GetDevicesRequestBuilder(SDKMethodInterfaces.MethodCallGetDevices sdk) {
         this.sdk = sdk;
     }
-                
-    public GetDevicesRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public GetDevicesRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public GetDevicesResponse call() throws Exception {
-        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
-        return sdk.getDevices(
-            options);
+
+        return sdk.getDevicesDirect();
     }
 }

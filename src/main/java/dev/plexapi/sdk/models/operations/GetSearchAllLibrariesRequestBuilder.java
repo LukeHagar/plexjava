@@ -4,15 +4,11 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
-import java.util.Optional;
 
 public class GetSearchAllLibrariesRequestBuilder {
 
     private GetSearchAllLibrariesRequest request;
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetSearchAllLibraries sdk;
 
     public GetSearchAllLibrariesRequestBuilder(SDKMethodInterfaces.MethodCallGetSearchAllLibraries sdk) {
@@ -24,25 +20,10 @@ public class GetSearchAllLibrariesRequestBuilder {
         this.request = request;
         return this;
     }
-                
-    public GetSearchAllLibrariesRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public GetSearchAllLibrariesRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public GetSearchAllLibrariesResponse call() throws Exception {
-        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
+
         return sdk.getSearchAllLibraries(
-            request,
-            options);
+            request);
     }
 }

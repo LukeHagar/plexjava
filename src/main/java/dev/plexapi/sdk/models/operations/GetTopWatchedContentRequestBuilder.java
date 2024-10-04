@@ -4,8 +4,6 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Long;
 import java.util.Optional;
@@ -14,7 +12,6 @@ public class GetTopWatchedContentRequestBuilder {
 
     private Optional<Long> includeGuids = Optional.empty();
     private GetTopWatchedContentQueryParamType type;
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetTopWatchedContent sdk;
 
     public GetTopWatchedContentRequestBuilder(SDKMethodInterfaces.MethodCallGetTopWatchedContent sdk) {
@@ -38,26 +35,11 @@ public class GetTopWatchedContentRequestBuilder {
         this.type = type;
         return this;
     }
-                
-    public GetTopWatchedContentRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public GetTopWatchedContentRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public GetTopWatchedContentResponse call() throws Exception {
-        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
+
         return sdk.getTopWatchedContent(
             includeGuids,
-            type,
-            options);
+            type);
     }
 }

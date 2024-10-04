@@ -4,8 +4,6 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.String;
 import java.util.Optional;
@@ -13,7 +11,6 @@ import java.util.Optional;
 public class GetTokenDetailsRequestBuilder {
 
     private Optional<String> serverURL = Optional.empty();
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetTokenDetails sdk;
 
     public GetTokenDetailsRequestBuilder(SDKMethodInterfaces.MethodCallGetTokenDetails sdk) {
@@ -31,25 +28,10 @@ public class GetTokenDetailsRequestBuilder {
         this.serverURL = serverURL;
         return this;
     }
-                
-    public GetTokenDetailsRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public GetTokenDetailsRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public GetTokenDetailsResponse call() throws Exception {
-        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
+
         return sdk.getTokenDetails(
-            serverURL,
-            options);
+            serverURL);
     }
 }

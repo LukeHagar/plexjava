@@ -4,15 +4,11 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
-import java.util.Optional;
 
 public class StartTaskRequestBuilder {
 
     private TaskName taskName;
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallStartTask sdk;
 
     public StartTaskRequestBuilder(SDKMethodInterfaces.MethodCallStartTask sdk) {
@@ -24,25 +20,10 @@ public class StartTaskRequestBuilder {
         this.taskName = taskName;
         return this;
     }
-                
-    public StartTaskRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public StartTaskRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public StartTaskResponse call() throws Exception {
-        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
+
         return sdk.startTask(
-            taskName,
-            options);
+            taskName);
     }
 }

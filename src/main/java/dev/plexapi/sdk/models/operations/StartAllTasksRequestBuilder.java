@@ -4,37 +4,17 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
-import dev.plexapi.sdk.utils.Utils;
-import java.util.Optional;
 
 public class StartAllTasksRequestBuilder {
 
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallStartAllTasks sdk;
 
     public StartAllTasksRequestBuilder(SDKMethodInterfaces.MethodCallStartAllTasks sdk) {
         this.sdk = sdk;
     }
-                
-    public StartAllTasksRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public StartAllTasksRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public StartAllTasksResponse call() throws Exception {
-        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
-        return sdk.startAllTasks(
-            options);
+
+        return sdk.startAllTasksDirect();
     }
 }

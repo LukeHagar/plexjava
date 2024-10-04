@@ -4,8 +4,6 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.util.Optional;
@@ -14,7 +12,6 @@ public class GetRefreshLibraryMetadataRequestBuilder {
 
     private Optional<? extends Force> force = Optional.empty();
     private Integer sectionKey;
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetRefreshLibraryMetadata sdk;
 
     public GetRefreshLibraryMetadataRequestBuilder(SDKMethodInterfaces.MethodCallGetRefreshLibraryMetadata sdk) {
@@ -38,26 +35,11 @@ public class GetRefreshLibraryMetadataRequestBuilder {
         this.sectionKey = sectionKey;
         return this;
     }
-                
-    public GetRefreshLibraryMetadataRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public GetRefreshLibraryMetadataRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public GetRefreshLibraryMetadataResponse call() throws Exception {
-        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
+
         return sdk.getRefreshLibraryMetadata(
             force,
-            sectionKey,
-            options);
+            sectionKey);
     }
 }

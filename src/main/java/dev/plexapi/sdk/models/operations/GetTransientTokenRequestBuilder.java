@@ -4,16 +4,12 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
-import java.util.Optional;
 
 public class GetTransientTokenRequestBuilder {
 
     private GetTransientTokenQueryParamType type;
     private Scope scope;
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetTransientToken sdk;
 
     public GetTransientTokenRequestBuilder(SDKMethodInterfaces.MethodCallGetTransientToken sdk) {
@@ -31,26 +27,11 @@ public class GetTransientTokenRequestBuilder {
         this.scope = scope;
         return this;
     }
-                
-    public GetTransientTokenRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public GetTransientTokenRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public GetTransientTokenResponse call() throws Exception {
-        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
+
         return sdk.getTransientToken(
             type,
-            scope,
-            options);
+            scope);
     }
 }

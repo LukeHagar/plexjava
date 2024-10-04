@@ -25,16 +25,11 @@ import dev.plexapi.sdk.models.operations.GetRecentlyAddedResponseBody;
 import dev.plexapi.sdk.models.operations.OnlyTransient;
 import dev.plexapi.sdk.models.operations.QueryParamOnlyTransient;
 import dev.plexapi.sdk.models.operations.SDKMethodInterfaces.*;
-import dev.plexapi.sdk.utils.BackoffStrategy;
 import dev.plexapi.sdk.utils.HTTPClient;
 import dev.plexapi.sdk.utils.HTTPRequest;
 import dev.plexapi.sdk.utils.Hook.AfterErrorContextImpl;
 import dev.plexapi.sdk.utils.Hook.AfterSuccessContextImpl;
 import dev.plexapi.sdk.utils.Hook.BeforeRequestContextImpl;
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.Retries.NonRetryableException;
-import dev.plexapi.sdk.utils.Retries;
-import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.io.InputStream;
 import java.lang.Double;
@@ -42,11 +37,8 @@ import java.lang.Exception;
 import java.lang.String;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit; 
+import java.util.Optional; 
 
 /**
  * Hubs are a structured two-dimensional container for media, generally represented by multiple horizontal rows.
@@ -80,7 +72,7 @@ public class Hubs implements
      * @throws Exception if the API call fails
      */
     public GetGlobalHubsResponse getGlobalHubsDirect() throws Exception {
-        return getGlobalHubs(Optional.empty(), Optional.empty(), Optional.empty());
+        return getGlobalHubs(Optional.empty(), Optional.empty());
     }
     
     /**
@@ -88,18 +80,12 @@ public class Hubs implements
      * Get Global Hubs filtered by the parameters provided.
      * @param count The number of items to return with each hub.
      * @param onlyTransient Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added).
-     * @param options additional options
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetGlobalHubsResponse getGlobalHubs(
             Optional<Double> count,
-            Optional<? extends OnlyTransient> onlyTransient,
-            Optional<Options> options) throws Exception {
-
-        if (options.isPresent()) {
-          options.get().validate(Arrays.asList(Options.Option.RETRY_CONFIG));
-        }
+            Optional<? extends OnlyTransient> onlyTransient) throws Exception {
         GetGlobalHubsRequest request =
             GetGlobalHubsRequest
                 .builder()
@@ -127,62 +113,45 @@ public class Hubs implements
                 this.sdkConfiguration.securitySource.getSecurity());
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
-        HTTPRequest _finalReq = _req;
-        RetryConfig _retryConfig;
-        if (options.isPresent() && options.get().retryConfig().isPresent()) {
-            _retryConfig = options.get().retryConfig().get();
-        } else if (this.sdkConfiguration.retryConfig.isPresent()) {
-            _retryConfig = this.sdkConfiguration.retryConfig.get();
-        } else {
-            _retryConfig = RetryConfig.builder()
-                .backoff(BackoffStrategy.builder()
-                            .initialInterval(500, TimeUnit.MILLISECONDS)
-                            .maxInterval(60000, TimeUnit.MILLISECONDS)
-                            .baseFactor((double)(1.5))
-                            .maxElapsedTime(3600000, TimeUnit.MILLISECONDS)
-                            .retryConnectError(true)
-                            .build())
-                .build();
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "getGlobalHubs", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "getGlobalHubs",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "getGlobalHubs",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "getGlobalHubs",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-        List<String> _statusCodes = new ArrayList<>();
-        _statusCodes.add("5XX");
-        Retries _retries = Retries.builder()
-            .action(() -> {
-                HttpRequest _r = null;
-                try {
-                    _r = sdkConfiguration.hooks()
-                        .beforeRequest(
-                            new BeforeRequestContextImpl(
-                                "getGlobalHubs", 
-                                Optional.of(List.of()), 
-                                sdkConfiguration.securitySource()),
-                            _finalReq.build());
-                } catch (Exception _e) {
-                    throw new NonRetryableException(_e);
-                }
-                try {
-                    return _client.send(_r);
-                } catch (Exception _e) {
-                    return sdkConfiguration.hooks()
-                        .afterError(
-                            new AfterErrorContextImpl(
-                                "getGlobalHubs",
-                                 Optional.of(List.of()),
-                                 sdkConfiguration.securitySource()), 
-                            Optional.empty(),
-                            Optional.of(_e));
-                }
-            })
-            .retryConfig(_retryConfig)
-            .statusCodes(_statusCodes)
-            .build();
-        HttpResponse<InputStream> _httpRes = sdkConfiguration.hooks()
-                 .afterSuccess(
-                     new AfterSuccessContextImpl(
-                         "getGlobalHubs", 
-                         Optional.of(List.of()), 
-                         sdkConfiguration.securitySource()),
-                     _retries.run());
         String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
@@ -280,25 +249,6 @@ public class Hubs implements
      */
     public GetRecentlyAddedResponse getRecentlyAdded(
             GetRecentlyAddedRequest request) throws Exception {
-        return getRecentlyAdded(request, Optional.empty());
-    }
-    
-    /**
-     * Get Recently Added
-     * This endpoint will return the recently added content.
-     * 
-     * @param request The request object containing all of the parameters for the API call.
-     * @param options additional options
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetRecentlyAddedResponse getRecentlyAdded(
-            GetRecentlyAddedRequest request,
-            Optional<Options> options) throws Exception {
-
-        if (options.isPresent()) {
-          options.get().validate(Arrays.asList(Options.Option.RETRY_CONFIG));
-        }
         String _baseUrl = Utils.templateUrl(
                 this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
@@ -319,62 +269,45 @@ public class Hubs implements
                 this.sdkConfiguration.securitySource.getSecurity());
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
-        HTTPRequest _finalReq = _req;
-        RetryConfig _retryConfig;
-        if (options.isPresent() && options.get().retryConfig().isPresent()) {
-            _retryConfig = options.get().retryConfig().get();
-        } else if (this.sdkConfiguration.retryConfig.isPresent()) {
-            _retryConfig = this.sdkConfiguration.retryConfig.get();
-        } else {
-            _retryConfig = RetryConfig.builder()
-                .backoff(BackoffStrategy.builder()
-                            .initialInterval(500, TimeUnit.MILLISECONDS)
-                            .maxInterval(60000, TimeUnit.MILLISECONDS)
-                            .baseFactor((double)(1.5))
-                            .maxElapsedTime(3600000, TimeUnit.MILLISECONDS)
-                            .retryConnectError(true)
-                            .build())
-                .build();
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "get-recently-added", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "get-recently-added",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "get-recently-added",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "get-recently-added",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-        List<String> _statusCodes = new ArrayList<>();
-        _statusCodes.add("5XX");
-        Retries _retries = Retries.builder()
-            .action(() -> {
-                HttpRequest _r = null;
-                try {
-                    _r = sdkConfiguration.hooks()
-                        .beforeRequest(
-                            new BeforeRequestContextImpl(
-                                "get-recently-added", 
-                                Optional.of(List.of()), 
-                                sdkConfiguration.securitySource()),
-                            _finalReq.build());
-                } catch (Exception _e) {
-                    throw new NonRetryableException(_e);
-                }
-                try {
-                    return _client.send(_r);
-                } catch (Exception _e) {
-                    return sdkConfiguration.hooks()
-                        .afterError(
-                            new AfterErrorContextImpl(
-                                "get-recently-added",
-                                 Optional.of(List.of()),
-                                 sdkConfiguration.securitySource()), 
-                            Optional.empty(),
-                            Optional.of(_e));
-                }
-            })
-            .retryConfig(_retryConfig)
-            .statusCodes(_statusCodes)
-            .build();
-        HttpResponse<InputStream> _httpRes = sdkConfiguration.hooks()
-                 .afterSuccess(
-                     new AfterSuccessContextImpl(
-                         "get-recently-added", 
-                         Optional.of(List.of()), 
-                         sdkConfiguration.securitySource()),
-                     _retries.run());
         String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
@@ -440,7 +373,7 @@ public class Hubs implements
      */
     public GetLibraryHubsResponse getLibraryHubs(
             double sectionId) throws Exception {
-        return getLibraryHubs(sectionId, Optional.empty(), Optional.empty(), Optional.empty());
+        return getLibraryHubs(sectionId, Optional.empty(), Optional.empty());
     }
     
     /**
@@ -450,19 +383,13 @@ public class Hubs implements
      * @param sectionId the Id of the library to query
      * @param count The number of items to return with each hub.
      * @param onlyTransient Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added).
-     * @param options additional options
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetLibraryHubsResponse getLibraryHubs(
             double sectionId,
             Optional<Double> count,
-            Optional<? extends QueryParamOnlyTransient> onlyTransient,
-            Optional<Options> options) throws Exception {
-
-        if (options.isPresent()) {
-          options.get().validate(Arrays.asList(Options.Option.RETRY_CONFIG));
-        }
+            Optional<? extends QueryParamOnlyTransient> onlyTransient) throws Exception {
         GetLibraryHubsRequest request =
             GetLibraryHubsRequest
                 .builder()
@@ -493,62 +420,45 @@ public class Hubs implements
                 this.sdkConfiguration.securitySource.getSecurity());
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
-        HTTPRequest _finalReq = _req;
-        RetryConfig _retryConfig;
-        if (options.isPresent() && options.get().retryConfig().isPresent()) {
-            _retryConfig = options.get().retryConfig().get();
-        } else if (this.sdkConfiguration.retryConfig.isPresent()) {
-            _retryConfig = this.sdkConfiguration.retryConfig.get();
-        } else {
-            _retryConfig = RetryConfig.builder()
-                .backoff(BackoffStrategy.builder()
-                            .initialInterval(500, TimeUnit.MILLISECONDS)
-                            .maxInterval(60000, TimeUnit.MILLISECONDS)
-                            .baseFactor((double)(1.5))
-                            .maxElapsedTime(3600000, TimeUnit.MILLISECONDS)
-                            .retryConnectError(true)
-                            .build())
-                .build();
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "getLibraryHubs", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "getLibraryHubs",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "getLibraryHubs",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "getLibraryHubs",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-        List<String> _statusCodes = new ArrayList<>();
-        _statusCodes.add("5XX");
-        Retries _retries = Retries.builder()
-            .action(() -> {
-                HttpRequest _r = null;
-                try {
-                    _r = sdkConfiguration.hooks()
-                        .beforeRequest(
-                            new BeforeRequestContextImpl(
-                                "getLibraryHubs", 
-                                Optional.of(List.of()), 
-                                sdkConfiguration.securitySource()),
-                            _finalReq.build());
-                } catch (Exception _e) {
-                    throw new NonRetryableException(_e);
-                }
-                try {
-                    return _client.send(_r);
-                } catch (Exception _e) {
-                    return sdkConfiguration.hooks()
-                        .afterError(
-                            new AfterErrorContextImpl(
-                                "getLibraryHubs",
-                                 Optional.of(List.of()),
-                                 sdkConfiguration.securitySource()), 
-                            Optional.empty(),
-                            Optional.of(_e));
-                }
-            })
-            .retryConfig(_retryConfig)
-            .statusCodes(_statusCodes)
-            .build();
-        HttpResponse<InputStream> _httpRes = sdkConfiguration.hooks()
-                 .afterSuccess(
-                     new AfterSuccessContextImpl(
-                         "getLibraryHubs", 
-                         Optional.of(List.of()), 
-                         sdkConfiguration.securitySource()),
-                     _retries.run());
         String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")

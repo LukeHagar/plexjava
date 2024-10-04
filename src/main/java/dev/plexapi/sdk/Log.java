@@ -21,16 +21,11 @@ import dev.plexapi.sdk.models.operations.LogLineResponse;
 import dev.plexapi.sdk.models.operations.LogMultiLineRequestBuilder;
 import dev.plexapi.sdk.models.operations.LogMultiLineResponse;
 import dev.plexapi.sdk.models.operations.SDKMethodInterfaces.*;
-import dev.plexapi.sdk.utils.BackoffStrategy;
 import dev.plexapi.sdk.utils.HTTPClient;
 import dev.plexapi.sdk.utils.HTTPRequest;
 import dev.plexapi.sdk.utils.Hook.AfterErrorContextImpl;
 import dev.plexapi.sdk.utils.Hook.AfterSuccessContextImpl;
 import dev.plexapi.sdk.utils.Hook.BeforeRequestContextImpl;
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.Retries.NonRetryableException;
-import dev.plexapi.sdk.utils.Retries;
-import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.SerializedBody;
 import dev.plexapi.sdk.utils.Utils.JsonShape;
 import dev.plexapi.sdk.utils.Utils;
@@ -40,11 +35,8 @@ import java.lang.Object;
 import java.lang.String;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit; 
+import java.util.Optional; 
 
 /**
  * Submit logs to the Log Handler for Plex Media Server
@@ -92,35 +84,6 @@ public class Log implements
             Level level,
             String message,
             String source) throws Exception {
-        return logLine(level, message, source, Optional.empty());
-    }
-    
-    /**
-     * Logging a single line message.
-     * This endpoint will write a single-line log message, including a level and source to the main Plex Media Server log.
-     * 
-     * @param level An integer log level to write to the PMS log with.  
-    0: Error  
-    1: Warning  
-    2: Info  
-    3: Debug  
-    4: Verbose
-
-     * @param message The text of the message to write to the log.
-     * @param source a string indicating the source of the message.
-     * @param options additional options
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public LogLineResponse logLine(
-            Level level,
-            String message,
-            String source,
-            Optional<Options> options) throws Exception {
-
-        if (options.isPresent()) {
-          options.get().validate(Arrays.asList(Options.Option.RETRY_CONFIG));
-        }
         LogLineRequest request =
             LogLineRequest
                 .builder()
@@ -149,62 +112,45 @@ public class Log implements
                 this.sdkConfiguration.securitySource.getSecurity());
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
-        HTTPRequest _finalReq = _req;
-        RetryConfig _retryConfig;
-        if (options.isPresent() && options.get().retryConfig().isPresent()) {
-            _retryConfig = options.get().retryConfig().get();
-        } else if (this.sdkConfiguration.retryConfig.isPresent()) {
-            _retryConfig = this.sdkConfiguration.retryConfig.get();
-        } else {
-            _retryConfig = RetryConfig.builder()
-                .backoff(BackoffStrategy.builder()
-                            .initialInterval(500, TimeUnit.MILLISECONDS)
-                            .maxInterval(60000, TimeUnit.MILLISECONDS)
-                            .baseFactor((double)(1.5))
-                            .maxElapsedTime(3600000, TimeUnit.MILLISECONDS)
-                            .retryConnectError(true)
-                            .build())
-                .build();
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "logLine", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "logLine",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "logLine",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "logLine",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-        List<String> _statusCodes = new ArrayList<>();
-        _statusCodes.add("5XX");
-        Retries _retries = Retries.builder()
-            .action(() -> {
-                HttpRequest _r = null;
-                try {
-                    _r = sdkConfiguration.hooks()
-                        .beforeRequest(
-                            new BeforeRequestContextImpl(
-                                "logLine", 
-                                Optional.of(List.of()), 
-                                sdkConfiguration.securitySource()),
-                            _finalReq.build());
-                } catch (Exception _e) {
-                    throw new NonRetryableException(_e);
-                }
-                try {
-                    return _client.send(_r);
-                } catch (Exception _e) {
-                    return sdkConfiguration.hooks()
-                        .afterError(
-                            new AfterErrorContextImpl(
-                                "logLine",
-                                 Optional.of(List.of()),
-                                 sdkConfiguration.securitySource()), 
-                            Optional.empty(),
-                            Optional.of(_e));
-                }
-            })
-            .retryConfig(_retryConfig)
-            .statusCodes(_statusCodes)
-            .build();
-        HttpResponse<InputStream> _httpRes = sdkConfiguration.hooks()
-                 .afterSuccess(
-                     new AfterSuccessContextImpl(
-                         "logLine", 
-                         Optional.of(List.of()), 
-                         sdkConfiguration.securitySource()),
-                     _retries.run());
         String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
@@ -331,45 +277,6 @@ public class Log implements
      */
     public LogMultiLineResponse logMultiLine(
             String request) throws Exception {
-        return logMultiLine(request, Optional.empty());
-    }
-    
-    /**
-     * Logging a multi-line message
-     * This endpoint allows for the batch addition of log entries to the main Plex Media Server log.  
-     * It accepts a text/plain request body, where each line represents a distinct log entry.  
-     * Each log entry consists of URL-encoded key-value pairs, specifying log attributes such as 'level', 'message', and 'source'.  
-     * 
-     * Log entries are separated by a newline character (`\n`).  
-     * Each entry's parameters should be URL-encoded to ensure accurate parsing and handling of special characters.  
-     * This method is efficient for logging multiple entries in a single API call, reducing the overhead of multiple individual requests.  
-     * 
-     * The 'level' parameter specifies the log entry's severity or importance, with the following integer values:
-     * - `0`: Error - Critical issues that require immediate attention.
-     * - `1`: Warning - Important events that are not critical but may indicate potential issues.
-     * - `2`: Info - General informational messages about system operation.
-     * - `3`: Debug - Detailed information useful for debugging purposes.
-     * - `4`: Verbose - Highly detailed diagnostic information for in-depth analysis.
-     * 
-     * The 'message' parameter contains the log text, and 'source' identifies the log message's origin (e.g., an application name or module).
-     * 
-     * Example of a single log entry format:
-     * `level=4&amp;message=Sample%20log%20entry&amp;source=applicationName`
-     * 
-     * Ensure each parameter is properly URL-encoded to avoid interpretation issues.
-     * 
-     * @param request The request object containing all of the parameters for the API call.
-     * @param options additional options
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public LogMultiLineResponse logMultiLine(
-            String request,
-            Optional<Options> options) throws Exception {
-
-        if (options.isPresent()) {
-          options.get().validate(Arrays.asList(Options.Option.RETRY_CONFIG));
-        }
         String _baseUrl = Utils.templateUrl(
                 this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
@@ -398,62 +305,45 @@ public class Log implements
                 this.sdkConfiguration.securitySource.getSecurity());
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
-        HTTPRequest _finalReq = _req;
-        RetryConfig _retryConfig;
-        if (options.isPresent() && options.get().retryConfig().isPresent()) {
-            _retryConfig = options.get().retryConfig().get();
-        } else if (this.sdkConfiguration.retryConfig.isPresent()) {
-            _retryConfig = this.sdkConfiguration.retryConfig.get();
-        } else {
-            _retryConfig = RetryConfig.builder()
-                .backoff(BackoffStrategy.builder()
-                            .initialInterval(500, TimeUnit.MILLISECONDS)
-                            .maxInterval(60000, TimeUnit.MILLISECONDS)
-                            .baseFactor((double)(1.5))
-                            .maxElapsedTime(3600000, TimeUnit.MILLISECONDS)
-                            .retryConnectError(true)
-                            .build())
-                .build();
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "logMultiLine", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "logMultiLine",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "logMultiLine",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "logMultiLine",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-        List<String> _statusCodes = new ArrayList<>();
-        _statusCodes.add("5XX");
-        Retries _retries = Retries.builder()
-            .action(() -> {
-                HttpRequest _r = null;
-                try {
-                    _r = sdkConfiguration.hooks()
-                        .beforeRequest(
-                            new BeforeRequestContextImpl(
-                                "logMultiLine", 
-                                Optional.of(List.of()), 
-                                sdkConfiguration.securitySource()),
-                            _finalReq.build());
-                } catch (Exception _e) {
-                    throw new NonRetryableException(_e);
-                }
-                try {
-                    return _client.send(_r);
-                } catch (Exception _e) {
-                    return sdkConfiguration.hooks()
-                        .afterError(
-                            new AfterErrorContextImpl(
-                                "logMultiLine",
-                                 Optional.of(List.of()),
-                                 sdkConfiguration.securitySource()), 
-                            Optional.empty(),
-                            Optional.of(_e));
-                }
-            })
-            .retryConfig(_retryConfig)
-            .statusCodes(_statusCodes)
-            .build();
-        HttpResponse<InputStream> _httpRes = sdkConfiguration.hooks()
-                 .afterSuccess(
-                     new AfterSuccessContextImpl(
-                         "logMultiLine", 
-                         Optional.of(List.of()), 
-                         sdkConfiguration.securitySource()),
-                     _retries.run());
         String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")
@@ -538,23 +428,6 @@ public class Log implements
      * @throws Exception if the API call fails
      */
     public EnablePaperTrailResponse enablePaperTrailDirect() throws Exception {
-        return enablePaperTrail(Optional.empty());
-    }
-    
-    /**
-     * Enabling Papertrail
-     * This endpoint will enable all Plex Media Serverlogs to be sent to the Papertrail networked logging site for a period of time.
-     * 
-     * @param options additional options
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public EnablePaperTrailResponse enablePaperTrail(
-            Optional<Options> options) throws Exception {
-
-        if (options.isPresent()) {
-          options.get().validate(Arrays.asList(Options.Option.RETRY_CONFIG));
-        }
         String _baseUrl = Utils.templateUrl(
                 this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
@@ -570,62 +443,45 @@ public class Log implements
                 this.sdkConfiguration.securitySource.getSecurity());
 
         HTTPClient _client = this.sdkConfiguration.defaultClient;
-        HTTPRequest _finalReq = _req;
-        RetryConfig _retryConfig;
-        if (options.isPresent() && options.get().retryConfig().isPresent()) {
-            _retryConfig = options.get().retryConfig().get();
-        } else if (this.sdkConfiguration.retryConfig.isPresent()) {
-            _retryConfig = this.sdkConfiguration.retryConfig.get();
-        } else {
-            _retryConfig = RetryConfig.builder()
-                .backoff(BackoffStrategy.builder()
-                            .initialInterval(500, TimeUnit.MILLISECONDS)
-                            .maxInterval(60000, TimeUnit.MILLISECONDS)
-                            .baseFactor((double)(1.5))
-                            .maxElapsedTime(3600000, TimeUnit.MILLISECONDS)
-                            .retryConnectError(true)
-                            .build())
-                .build();
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "enablePaperTrail", 
+                      Optional.of(List.of()), 
+                      sdkConfiguration.securitySource()),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "403", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "enablePaperTrail",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "enablePaperTrail",
+                            Optional.of(List.of()), 
+                            sdkConfiguration.securitySource()),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "enablePaperTrail",
+                            Optional.of(List.of()),
+                            sdkConfiguration.securitySource()), 
+                        Optional.empty(),
+                        Optional.of(_e));
         }
-        List<String> _statusCodes = new ArrayList<>();
-        _statusCodes.add("5XX");
-        Retries _retries = Retries.builder()
-            .action(() -> {
-                HttpRequest _r = null;
-                try {
-                    _r = sdkConfiguration.hooks()
-                        .beforeRequest(
-                            new BeforeRequestContextImpl(
-                                "enablePaperTrail", 
-                                Optional.of(List.of()), 
-                                sdkConfiguration.securitySource()),
-                            _finalReq.build());
-                } catch (Exception _e) {
-                    throw new NonRetryableException(_e);
-                }
-                try {
-                    return _client.send(_r);
-                } catch (Exception _e) {
-                    return sdkConfiguration.hooks()
-                        .afterError(
-                            new AfterErrorContextImpl(
-                                "enablePaperTrail",
-                                 Optional.of(List.of()),
-                                 sdkConfiguration.securitySource()), 
-                            Optional.empty(),
-                            Optional.of(_e));
-                }
-            })
-            .retryConfig(_retryConfig)
-            .statusCodes(_statusCodes)
-            .build();
-        HttpResponse<InputStream> _httpRes = sdkConfiguration.hooks()
-                 .afterSuccess(
-                     new AfterSuccessContextImpl(
-                         "enablePaperTrail", 
-                         Optional.of(List.of()), 
-                         sdkConfiguration.securitySource()),
-                     _retries.run());
         String _contentType = _httpRes
             .headers()
             .firstValue("Content-Type")

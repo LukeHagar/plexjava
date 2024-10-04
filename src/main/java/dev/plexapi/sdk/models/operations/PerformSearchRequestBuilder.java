@@ -6,8 +6,6 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.utils.LazySingletonValue;
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.String;
@@ -21,7 +19,6 @@ public class PerformSearchRequestBuilder {
                             "limit",
                             "3",
                             new TypeReference<Optional<Double>>() {});
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallPerformSearch sdk;
 
     public PerformSearchRequestBuilder(SDKMethodInterfaces.MethodCallPerformSearch sdk) {
@@ -57,30 +54,15 @@ public class PerformSearchRequestBuilder {
         this.limit = limit;
         return this;
     }
-                
-    public PerformSearchRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public PerformSearchRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public PerformSearchResponse call() throws Exception {
         if (limit == null) {
             limit = _SINGLETON_VALUE_Limit.value();
-        }        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
+        }
         return sdk.performSearch(
             query,
             sectionId,
-            limit,
-            options);
+            limit);
     }
 
     private static final LazySingletonValue<Optional<Double>> _SINGLETON_VALUE_Limit =

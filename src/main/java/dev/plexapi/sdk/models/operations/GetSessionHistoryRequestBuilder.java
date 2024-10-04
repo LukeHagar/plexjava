@@ -4,8 +4,6 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.String;
@@ -17,7 +15,6 @@ public class GetSessionHistoryRequestBuilder {
     private Optional<Long> accountId = Optional.empty();
     private Optional<? extends QueryParamFilter> filter = Optional.empty();
     private Optional<Long> librarySectionID = Optional.empty();
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetSessionHistory sdk;
 
     public GetSessionHistoryRequestBuilder(SDKMethodInterfaces.MethodCallGetSessionHistory sdk) {
@@ -71,28 +68,13 @@ public class GetSessionHistoryRequestBuilder {
         this.librarySectionID = librarySectionID;
         return this;
     }
-                
-    public GetSessionHistoryRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public GetSessionHistoryRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public GetSessionHistoryResponse call() throws Exception {
-        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
+
         return sdk.getSessionHistory(
             sort,
             accountId,
             filter,
-            librarySectionID,
-            options);
+            librarySectionID);
     }
 }

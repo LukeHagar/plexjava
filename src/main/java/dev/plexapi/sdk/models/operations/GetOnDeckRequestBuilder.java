@@ -4,37 +4,17 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
-import dev.plexapi.sdk.utils.Utils;
-import java.util.Optional;
 
 public class GetOnDeckRequestBuilder {
 
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetOnDeck sdk;
 
     public GetOnDeckRequestBuilder(SDKMethodInterfaces.MethodCallGetOnDeck sdk) {
         this.sdk = sdk;
     }
-                
-    public GetOnDeckRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public GetOnDeckRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public GetOnDeckResponse call() throws Exception {
-        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
-        return sdk.getOnDeck(
-            options);
+
+        return sdk.getOnDeckDirect();
     }
 }

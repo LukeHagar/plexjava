@@ -6,8 +6,6 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.utils.LazySingletonValue;
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.String;
 import java.util.Optional;
@@ -28,7 +26,6 @@ public class GetServerResourcesRequestBuilder {
                             new TypeReference<Optional<? extends IncludeIPv6>>() {});
     private Optional<String> clientID = Optional.empty();
     private Optional<String> serverURL = Optional.empty();
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetServerResources sdk;
 
     public GetServerResourcesRequestBuilder(SDKMethodInterfaces.MethodCallGetServerResources sdk) {
@@ -94,18 +91,6 @@ public class GetServerResourcesRequestBuilder {
         this.serverURL = serverURL;
         return this;
     }
-                
-    public GetServerResourcesRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public GetServerResourcesRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public GetServerResourcesResponse call() throws Exception {
         if (includeHttps == null) {
@@ -116,16 +101,13 @@ public class GetServerResourcesRequestBuilder {
         }
         if (includeIPv6 == null) {
             includeIPv6 = _SINGLETON_VALUE_IncludeIPv6.value();
-        }        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
+        }
         return sdk.getServerResources(
             includeHttps,
             includeRelay,
             includeIPv6,
             clientID,
-            serverURL,
-            options);
+            serverURL);
     }
 
     private static final LazySingletonValue<Optional<? extends IncludeHttps>> _SINGLETON_VALUE_IncludeHttps =

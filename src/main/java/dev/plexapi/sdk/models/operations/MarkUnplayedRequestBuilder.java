@@ -4,16 +4,12 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
-import java.util.Optional;
 
 public class MarkUnplayedRequestBuilder {
 
     private Double key;
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallMarkUnplayed sdk;
 
     public MarkUnplayedRequestBuilder(SDKMethodInterfaces.MethodCallMarkUnplayed sdk) {
@@ -25,25 +21,10 @@ public class MarkUnplayedRequestBuilder {
         this.key = key;
         return this;
     }
-                
-    public MarkUnplayedRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public MarkUnplayedRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public MarkUnplayedResponse call() throws Exception {
-        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
+
         return sdk.markUnplayed(
-            key,
-            options);
+            key);
     }
 }

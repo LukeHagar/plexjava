@@ -45,7 +45,6 @@ The following SDKs are generated from the OpenAPI Specification. They are automa
 * [SDK Installation](#sdk-installation)
 * [SDK Example Usage](#sdk-example-usage)
 * [Available Resources and Operations](#available-resources-and-operations)
-* [Retries](#retries)
 * [Error Handling](#error-handling)
 * [Server Selection](#server-selection)
 * [Authentication](#authentication)
@@ -62,7 +61,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'dev.plexapi:plexapi:0.8.0'
+implementation 'dev.plexapi:plexapi:0.9.0'
 ```
 
 Maven:
@@ -70,7 +69,7 @@ Maven:
 <dependency>
     <groupId>dev.plexapi</groupId>
     <artifactId>plexapi</artifactId>
-    <version>0.8.0</version>
+    <version>0.9.0</version>
 </dependency>
 ```
 
@@ -260,104 +259,6 @@ public class Application {
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
-
-<!-- Start Retries [retries] -->
-## Retries
-
-Some of the endpoints in this SDK support retries. If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API. However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
-
-To change the default retry strategy for a single API call, you can provide a `RetryConfig` object through the `retryConfig` builder method:
-```java
-package hello.world;
-
-import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest;
-import dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized;
-import dev.plexapi.sdk.models.operations.GetServerCapabilitiesResponse;
-import dev.plexapi.sdk.utils.BackoffStrategy;
-import dev.plexapi.sdk.utils.RetryConfig;
-import java.lang.Exception;
-import java.util.concurrent.TimeUnit;
-
-public class Application {
-
-    public static void main(String[] args) throws GetServerCapabilitiesBadRequest, GetServerCapabilitiesUnauthorized, Exception {
-
-        PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
-            .build();
-
-        GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
-                .retryConfig(RetryConfig.builder()
-                    .backoff(BackoffStrategy.builder()
-                        .initialInterval(1L, TimeUnit.MILLISECONDS)
-                        .maxInterval(50L, TimeUnit.MILLISECONDS)
-                        .maxElapsedTime(1000L, TimeUnit.MILLISECONDS)
-                        .baseFactor(1.1)
-                        .jitterFactor(0.15)
-                        .retryConnectError(false)
-                        .build())
-                    .build())
-                .call();
-
-        if (res.object().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-If you'd like to override the default retry strategy for all operations that support retries, you can provide a configuration at SDK initialization:
-```java
-package hello.world;
-
-import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest;
-import dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized;
-import dev.plexapi.sdk.models.operations.GetServerCapabilitiesResponse;
-import dev.plexapi.sdk.utils.BackoffStrategy;
-import dev.plexapi.sdk.utils.RetryConfig;
-import java.lang.Exception;
-import java.util.concurrent.TimeUnit;
-
-public class Application {
-
-    public static void main(String[] args) throws GetServerCapabilitiesBadRequest, GetServerCapabilitiesUnauthorized, Exception {
-
-        PlexAPI sdk = PlexAPI.builder()
-                .retryConfig(RetryConfig.builder()
-                    .backoff(BackoffStrategy.builder()
-                        .initialInterval(1L, TimeUnit.MILLISECONDS)
-                        .maxInterval(50L, TimeUnit.MILLISECONDS)
-                        .maxElapsedTime(1000L, TimeUnit.MILLISECONDS)
-                        .baseFactor(1.1)
-                        .jitterFactor(0.15)
-                        .retryConnectError(false)
-                        .build())
-                    .build())
-                .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
-            .build();
-
-        GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
-                .call();
-
-        if (res.object().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-<!-- End Retries [retries] -->
 
 <!-- Start Error Handling [errors] -->
 ## Error Handling

@@ -4,8 +4,6 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Long;
 import java.util.Optional;
@@ -13,7 +11,6 @@ import java.util.Optional;
 public class GetResourcesStatisticsRequestBuilder {
 
     private Optional<Long> timespan = Optional.empty();
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetResourcesStatistics sdk;
 
     public GetResourcesStatisticsRequestBuilder(SDKMethodInterfaces.MethodCallGetResourcesStatistics sdk) {
@@ -31,25 +28,10 @@ public class GetResourcesStatisticsRequestBuilder {
         this.timespan = timespan;
         return this;
     }
-                
-    public GetResourcesStatisticsRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public GetResourcesStatisticsRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public GetResourcesStatisticsResponse call() throws Exception {
-        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
+
         return sdk.getResourcesStatistics(
-            timespan,
-            options);
+            timespan);
     }
 }

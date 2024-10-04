@@ -4,8 +4,6 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.String;
 import java.util.Optional;
@@ -13,7 +11,6 @@ import java.util.Optional;
 public class GetUserFriendsRequestBuilder {
 
     private Optional<String> serverURL = Optional.empty();
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetUserFriends sdk;
 
     public GetUserFriendsRequestBuilder(SDKMethodInterfaces.MethodCallGetUserFriends sdk) {
@@ -31,25 +28,10 @@ public class GetUserFriendsRequestBuilder {
         this.serverURL = serverURL;
         return this;
     }
-                
-    public GetUserFriendsRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public GetUserFriendsRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public GetUserFriendsResponse call() throws Exception {
-        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
+
         return sdk.getUserFriends(
-            serverURL,
-            options);
+            serverURL);
     }
 }

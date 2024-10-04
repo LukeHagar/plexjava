@@ -20,7 +20,6 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -39,19 +38,13 @@ public class GetTokenDetailsUserPlexAccount {
     @JsonProperty("adsConsent")
     private Optional<Boolean> adsConsent;
 
-    /**
-     * Unknown
-     */
     @JsonInclude(Include.ALWAYS)
     @JsonProperty("adsConsentReminderAt")
-    private Optional<OffsetDateTime> adsConsentReminderAt;
+    private Optional<Long> adsConsentReminderAt;
 
-    /**
-     * Unknown
-     */
     @JsonInclude(Include.ALWAYS)
     @JsonProperty("adsConsentSetAt")
-    private Optional<OffsetDateTime> adsConsentSetAt;
+    private Optional<Long> adsConsentSetAt;
 
     /**
      * Unknown
@@ -292,8 +285,8 @@ public class GetTokenDetailsUserPlexAccount {
     @JsonCreator
     public GetTokenDetailsUserPlexAccount(
             @JsonProperty("adsConsent") Optional<Boolean> adsConsent,
-            @JsonProperty("adsConsentReminderAt") Optional<OffsetDateTime> adsConsentReminderAt,
-            @JsonProperty("adsConsentSetAt") Optional<OffsetDateTime> adsConsentSetAt,
+            @JsonProperty("adsConsentReminderAt") Optional<Long> adsConsentReminderAt,
+            @JsonProperty("adsConsentSetAt") Optional<Long> adsConsentSetAt,
             @JsonProperty("anonymous") JsonNullable<Boolean> anonymous,
             @JsonProperty("authToken") String authToken,
             @JsonProperty("backupCodesCreated") Optional<Boolean> backupCodesCreated,
@@ -448,19 +441,13 @@ public class GetTokenDetailsUserPlexAccount {
         return adsConsent;
     }
 
-    /**
-     * Unknown
-     */
     @JsonIgnore
-    public Optional<OffsetDateTime> adsConsentReminderAt() {
+    public Optional<Long> adsConsentReminderAt() {
         return adsConsentReminderAt;
     }
 
-    /**
-     * Unknown
-     */
     @JsonIgnore
-    public Optional<OffsetDateTime> adsConsentSetAt() {
+    public Optional<Long> adsConsentSetAt() {
         return adsConsentSetAt;
     }
 
@@ -781,37 +768,25 @@ public class GetTokenDetailsUserPlexAccount {
         return this;
     }
 
-    /**
-     * Unknown
-     */
-    public GetTokenDetailsUserPlexAccount withAdsConsentReminderAt(OffsetDateTime adsConsentReminderAt) {
+    public GetTokenDetailsUserPlexAccount withAdsConsentReminderAt(long adsConsentReminderAt) {
         Utils.checkNotNull(adsConsentReminderAt, "adsConsentReminderAt");
         this.adsConsentReminderAt = Optional.ofNullable(adsConsentReminderAt);
         return this;
     }
 
-    /**
-     * Unknown
-     */
-    public GetTokenDetailsUserPlexAccount withAdsConsentReminderAt(Optional<OffsetDateTime> adsConsentReminderAt) {
+    public GetTokenDetailsUserPlexAccount withAdsConsentReminderAt(Optional<Long> adsConsentReminderAt) {
         Utils.checkNotNull(adsConsentReminderAt, "adsConsentReminderAt");
         this.adsConsentReminderAt = adsConsentReminderAt;
         return this;
     }
 
-    /**
-     * Unknown
-     */
-    public GetTokenDetailsUserPlexAccount withAdsConsentSetAt(OffsetDateTime adsConsentSetAt) {
+    public GetTokenDetailsUserPlexAccount withAdsConsentSetAt(long adsConsentSetAt) {
         Utils.checkNotNull(adsConsentSetAt, "adsConsentSetAt");
         this.adsConsentSetAt = Optional.ofNullable(adsConsentSetAt);
         return this;
     }
 
-    /**
-     * Unknown
-     */
-    public GetTokenDetailsUserPlexAccount withAdsConsentSetAt(Optional<OffsetDateTime> adsConsentSetAt) {
+    public GetTokenDetailsUserPlexAccount withAdsConsentSetAt(Optional<Long> adsConsentSetAt) {
         Utils.checkNotNull(adsConsentSetAt, "adsConsentSetAt");
         this.adsConsentSetAt = adsConsentSetAt;
         return this;
@@ -1459,9 +1434,9 @@ public class GetTokenDetailsUserPlexAccount {
  
         private Optional<Boolean> adsConsent = Optional.empty();
  
-        private Optional<OffsetDateTime> adsConsentReminderAt = Optional.empty();
+        private Optional<Long> adsConsentReminderAt = Optional.empty();
  
-        private Optional<OffsetDateTime> adsConsentSetAt = Optional.empty();
+        private Optional<Long> adsConsentSetAt = Optional.empty();
  
         private JsonNullable<Boolean> anonymous;
  
@@ -1562,37 +1537,25 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
-        /**
-         * Unknown
-         */
-        public Builder adsConsentReminderAt(OffsetDateTime adsConsentReminderAt) {
+        public Builder adsConsentReminderAt(long adsConsentReminderAt) {
             Utils.checkNotNull(adsConsentReminderAt, "adsConsentReminderAt");
             this.adsConsentReminderAt = Optional.ofNullable(adsConsentReminderAt);
             return this;
         }
 
-        /**
-         * Unknown
-         */
-        public Builder adsConsentReminderAt(Optional<OffsetDateTime> adsConsentReminderAt) {
+        public Builder adsConsentReminderAt(Optional<Long> adsConsentReminderAt) {
             Utils.checkNotNull(adsConsentReminderAt, "adsConsentReminderAt");
             this.adsConsentReminderAt = adsConsentReminderAt;
             return this;
         }
 
-        /**
-         * Unknown
-         */
-        public Builder adsConsentSetAt(OffsetDateTime adsConsentSetAt) {
+        public Builder adsConsentSetAt(long adsConsentSetAt) {
             Utils.checkNotNull(adsConsentSetAt, "adsConsentSetAt");
             this.adsConsentSetAt = Optional.ofNullable(adsConsentSetAt);
             return this;
         }
 
-        /**
-         * Unknown
-         */
-        public Builder adsConsentSetAt(Optional<OffsetDateTime> adsConsentSetAt) {
+        public Builder adsConsentSetAt(Optional<Long> adsConsentSetAt) {
             Utils.checkNotNull(adsConsentSetAt, "adsConsentSetAt");
             this.adsConsentSetAt = adsConsentSetAt;
             return this;

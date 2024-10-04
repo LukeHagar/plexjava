@@ -6,8 +6,6 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.utils.LazySingletonValue;
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.String;
@@ -21,7 +19,6 @@ public class PerformVoiceSearchRequestBuilder {
                             "limit",
                             "3",
                             new TypeReference<Optional<Double>>() {});
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallPerformVoiceSearch sdk;
 
     public PerformVoiceSearchRequestBuilder(SDKMethodInterfaces.MethodCallPerformVoiceSearch sdk) {
@@ -57,30 +54,15 @@ public class PerformVoiceSearchRequestBuilder {
         this.limit = limit;
         return this;
     }
-                
-    public PerformVoiceSearchRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public PerformVoiceSearchRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public PerformVoiceSearchResponse call() throws Exception {
         if (limit == null) {
             limit = _SINGLETON_VALUE_Limit.value();
-        }        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
+        }
         return sdk.performVoiceSearch(
             query,
             sectionId,
-            limit,
-            options);
+            limit);
     }
 
     private static final LazySingletonValue<Optional<Double>> _SINGLETON_VALUE_Limit =

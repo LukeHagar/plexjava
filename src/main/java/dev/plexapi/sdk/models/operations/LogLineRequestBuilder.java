@@ -4,18 +4,14 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.String;
-import java.util.Optional;
 
 public class LogLineRequestBuilder {
 
     private Level level;
     private String message;
     private String source;
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallLogLine sdk;
 
     public LogLineRequestBuilder(SDKMethodInterfaces.MethodCallLogLine sdk) {
@@ -39,27 +35,12 @@ public class LogLineRequestBuilder {
         this.source = source;
         return this;
     }
-                
-    public LogLineRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public LogLineRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public LogLineResponse call() throws Exception {
-        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
+
         return sdk.logLine(
             level,
             message,
-            source,
-            options);
+            source);
     }
 }

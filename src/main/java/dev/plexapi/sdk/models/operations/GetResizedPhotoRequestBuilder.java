@@ -4,15 +4,11 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
-import java.util.Optional;
 
 public class GetResizedPhotoRequestBuilder {
 
     private GetResizedPhotoRequest request;
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetResizedPhoto sdk;
 
     public GetResizedPhotoRequestBuilder(SDKMethodInterfaces.MethodCallGetResizedPhoto sdk) {
@@ -24,25 +20,10 @@ public class GetResizedPhotoRequestBuilder {
         this.request = request;
         return this;
     }
-                
-    public GetResizedPhotoRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public GetResizedPhotoRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public GetResizedPhotoResponse call() throws Exception {
-        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
+
         return sdk.getResizedPhoto(
-            request,
-            options);
+            request);
     }
 }

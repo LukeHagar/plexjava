@@ -4,8 +4,6 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.util.Optional;
@@ -14,7 +12,6 @@ public class GetGlobalHubsRequestBuilder {
 
     private Optional<Double> count = Optional.empty();
     private Optional<? extends OnlyTransient> onlyTransient = Optional.empty();
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallGetGlobalHubs sdk;
 
     public GetGlobalHubsRequestBuilder(SDKMethodInterfaces.MethodCallGetGlobalHubs sdk) {
@@ -44,26 +41,11 @@ public class GetGlobalHubsRequestBuilder {
         this.onlyTransient = onlyTransient;
         return this;
     }
-                
-    public GetGlobalHubsRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public GetGlobalHubsRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public GetGlobalHubsResponse call() throws Exception {
-        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
+
         return sdk.getGlobalHubs(
             count,
-            onlyTransient,
-            options);
+            onlyTransient);
     }
 }

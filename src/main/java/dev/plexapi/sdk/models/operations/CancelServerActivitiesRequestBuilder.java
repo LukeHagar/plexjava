@@ -4,16 +4,12 @@
 
 package dev.plexapi.sdk.models.operations;
 
-import dev.plexapi.sdk.utils.Options;
-import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.String;
-import java.util.Optional;
 
 public class CancelServerActivitiesRequestBuilder {
 
     private String activityUUID;
-    private Optional<RetryConfig> retryConfig = Optional.empty();
     private final SDKMethodInterfaces.MethodCallCancelServerActivities sdk;
 
     public CancelServerActivitiesRequestBuilder(SDKMethodInterfaces.MethodCallCancelServerActivities sdk) {
@@ -25,25 +21,10 @@ public class CancelServerActivitiesRequestBuilder {
         this.activityUUID = activityUUID;
         return this;
     }
-                
-    public CancelServerActivitiesRequestBuilder retryConfig(RetryConfig retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = Optional.of(retryConfig);
-        return this;
-    }
-
-    public CancelServerActivitiesRequestBuilder retryConfig(Optional<RetryConfig> retryConfig) {
-        Utils.checkNotNull(retryConfig, "retryConfig");
-        this.retryConfig = retryConfig;
-        return this;
-    }
 
     public CancelServerActivitiesResponse call() throws Exception {
-        Optional<Options> options = Optional.of(Options.builder()
-                                                    .retryConfig(retryConfig)
-                                                    .build());
+
         return sdk.cancelServerActivities(
-            activityUUID,
-            options);
+            activityUUID);
     }
 }
