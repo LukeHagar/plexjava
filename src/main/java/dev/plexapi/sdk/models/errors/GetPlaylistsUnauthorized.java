@@ -21,6 +21,7 @@ import java.util.Optional;
 /**
  * GetPlaylistsUnauthorized - Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
  */
+@SuppressWarnings("serial")
 public class GetPlaylistsUnauthorized extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)

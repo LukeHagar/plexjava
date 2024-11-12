@@ -21,6 +21,7 @@ import java.util.Optional;
 /**
  * GetButlerTasksUnauthorized - Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
  */
+@SuppressWarnings("serial")
 public class GetButlerTasksUnauthorized extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)

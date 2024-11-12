@@ -21,6 +21,7 @@ import java.util.Optional;
 /**
  * GetServerListBadRequest - Bad Request - A parameter was not specified, or was specified incorrectly.
  */
+@SuppressWarnings("serial")
 public class GetServerListBadRequest extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)

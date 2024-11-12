@@ -21,6 +21,7 @@ import java.util.Optional;
 /**
  * GetGlobalHubsBadRequest - Bad Request - A parameter was not specified, or was specified incorrectly.
  */
+@SuppressWarnings("serial")
 public class GetGlobalHubsBadRequest extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)

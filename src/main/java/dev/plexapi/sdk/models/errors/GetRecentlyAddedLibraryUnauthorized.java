@@ -21,6 +21,7 @@ import java.util.Optional;
 /**
  * GetRecentlyAddedLibraryUnauthorized - Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
  */
+@SuppressWarnings("serial")
 public class GetRecentlyAddedLibraryUnauthorized extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)

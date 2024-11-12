@@ -3,6 +3,6 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        | Example            |
-| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `tag`              | *Optional<String>* | :heavy_minus_sign: | N/A                | Peyton Reed        |
+| Field               | Type                | Required            | Description         | Example             |
+| ------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
+| `tag`               | *Optional\<String>* | :heavy_minus_sign:  | N/A                 | Peyton Reed         |

@@ -21,6 +21,7 @@ import java.util.Optional;
 /**
  * GetLibraryDetailsBadRequest - Bad Request - A parameter was not specified, or was specified incorrectly.
  */
+@SuppressWarnings("serial")
 public class GetLibraryDetailsBadRequest extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)

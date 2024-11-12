@@ -21,6 +21,7 @@ import java.util.Optional;
 /**
  * GetServerIdentityRequestTimeout - Request Timeout
  */
+@SuppressWarnings("serial")
 public class GetServerIdentityRequestTimeout extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)
@@ -43,6 +44,7 @@ public class GetServerIdentityRequestTimeout extends RuntimeException {
             @JsonProperty("code") Optional<Integer> code,
             @JsonProperty("message") Optional<String> message,
             @JsonProperty("RawResponse") Optional<? extends HttpResponse<InputStream>> rawResponse) {
+        super(message.orElse(null));
         Utils.checkNotNull(code, "code");
         Utils.checkNotNull(message, "message");
         Utils.checkNotNull(rawResponse, "rawResponse");

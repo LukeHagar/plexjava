@@ -21,6 +21,7 @@ import java.util.Optional;
 /**
  * GetMetadataChildrenUnauthorized - Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
  */
+@SuppressWarnings("serial")
 public class GetMetadataChildrenUnauthorized extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)

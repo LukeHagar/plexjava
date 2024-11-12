@@ -135,10 +135,10 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
-| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `playlistType`                                                          | [Optional<PlaylistType>](../../models/operations/PlaylistType.md)       | :heavy_minus_sign:                                                      | limit to a type of playlist.                                            |
-| `smart`                                                                 | [Optional<QueryParamSmart>](../../models/operations/QueryParamSmart.md) | :heavy_minus_sign:                                                      | type of playlists to return (default is all).                           |
+| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `playlistType`                                                           | [Optional\<PlaylistType>](../../models/operations/PlaylistType.md)       | :heavy_minus_sign:                                                       | limit to a type of playlist.                                             |
+| `smart`                                                                  | [Optional\<QueryParamSmart>](../../models/operations/QueryParamSmart.md) | :heavy_minus_sign:                                                       | type of playlists to return (default is all).                            |
 
 ### Response
 
@@ -312,8 +312,8 @@ public class Application {
 | Parameter                           | Type                                | Required                            | Description                         |
 | ----------------------------------- | ----------------------------------- | ----------------------------------- | ----------------------------------- |
 | `playlistID`                        | *double*                            | :heavy_check_mark:                  | the ID of the playlist              |
-| `title`                             | *Optional<String>*                  | :heavy_minus_sign:                  | name of the playlist                |
-| `summary`                           | *Optional<String>*                  | :heavy_minus_sign:                  | summary description of the playlist |
+| `title`                             | *Optional\<String>*                 | :heavy_minus_sign:                  | name of the playlist                |
+| `summary`                           | *Optional\<String>*                 | :heavy_minus_sign:                  | summary description of the playlist |
 
 ### Response
 
@@ -496,7 +496,7 @@ public class Application {
 | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
 | `playlistID`                                                  | *double*                                                      | :heavy_check_mark:                                            | the ID of the playlist                                        |                                                               |
 | `uri`                                                         | *String*                                                      | :heavy_check_mark:                                            | the content URI for the playlist                              | server://12345/com.plexapp.plugins.library/library/metadata/1 |
-| `playQueueID`                                                 | *Optional<Double>*                                            | :heavy_minus_sign:                                            | the play queue to add to a playlist                           | 123                                                           |
+| `playQueueID`                                                 | *Optional\<Double>*                                           | :heavy_minus_sign:                                            | the play queue to add to a playlist                           | 123                                                           |
 
 ### Response
 

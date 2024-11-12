@@ -21,6 +21,7 @@ import java.util.Optional;
 /**
  * ApplyUpdatesUnauthorized - Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
  */
+@SuppressWarnings("serial")
 public class ApplyUpdatesUnauthorized extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)

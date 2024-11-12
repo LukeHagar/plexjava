@@ -21,6 +21,7 @@ import java.util.Optional;
 /**
  * GetServerActivitiesUnauthorized - Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
  */
+@SuppressWarnings("serial")
 public class GetServerActivitiesUnauthorized extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)

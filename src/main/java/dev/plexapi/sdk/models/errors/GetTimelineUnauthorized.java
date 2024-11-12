@@ -21,6 +21,7 @@ import java.util.Optional;
 /**
  * GetTimelineUnauthorized - Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
  */
+@SuppressWarnings("serial")
 public class GetTimelineUnauthorized extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)

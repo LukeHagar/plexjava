@@ -21,6 +21,7 @@ import java.util.Optional;
 /**
  * DeletePlaylistBadRequest - Bad Request - A parameter was not specified, or was specified incorrectly.
  */
+@SuppressWarnings("serial")
 public class DeletePlaylistBadRequest extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)

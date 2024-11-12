@@ -11,8 +11,9 @@ generation:
     requestResponseComponentNamesFeb2024: true
   auth:
     oAuth2ClientCredentialsEnabled: true
+    oAuth2PasswordEnabled: false
 java:
-  version: 0.9.0
+  version: 0.10.0
   additionalDependencies: []
   additionalPlugins: []
   artifactID: plexapi
@@ -20,6 +21,7 @@ java:
   companyEmail: lukeslakemail@gmail.com
   companyName: plexapi
   companyURL: plexapi.dev
+  defaultErrorName: SDKError
   flattenGlobalSecurity: true
   githubURL: github.com/LukeHagar/plexjava
   groupID: dev.plexapi

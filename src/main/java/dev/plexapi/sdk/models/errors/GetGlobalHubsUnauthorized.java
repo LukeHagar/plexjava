@@ -21,6 +21,7 @@ import java.util.Optional;
 /**
  * GetGlobalHubsUnauthorized - Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
  */
+@SuppressWarnings("serial")
 public class GetGlobalHubsUnauthorized extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)

@@ -21,6 +21,7 @@ import java.util.Optional;
 /**
  * GetResourcesStatisticsUnauthorized - Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
  */
+@SuppressWarnings("serial")
 public class GetResourcesStatisticsUnauthorized extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)

@@ -21,6 +21,7 @@ import java.util.Optional;
 /**
  * UploadPlaylistBadRequest - Bad Request - A parameter was not specified, or was specified incorrectly.
  */
+@SuppressWarnings("serial")
 public class UploadPlaylistBadRequest extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)

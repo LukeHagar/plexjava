@@ -21,6 +21,7 @@ import java.util.Optional;
 /**
  * StopAllTasksUnauthorized - Unauthorized - Returned if the X-Plex-Token is missing from the header or query.
  */
+@SuppressWarnings("serial")
 public class StopAllTasksUnauthorized extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)

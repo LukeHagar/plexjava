@@ -61,7 +61,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'dev.plexapi:plexapi:0.9.0'
+implementation 'dev.plexapi:plexapi:0.10.0'
 ```
 
 Maven:
@@ -69,7 +69,7 @@ Maven:
 <dependency>
     <groupId>dev.plexapi</groupId>
     <artifactId>plexapi</artifactId>
-    <version>0.9.0</version>
+    <version>0.10.0</version>
 </dependency>
 ```
 
@@ -267,11 +267,11 @@ Handling errors in this SDK should largely match your expectations. All operatio
 
 By default, an API error will throw a `models/errors/SDKError` exception. When custom error responses are specified for an operation, the SDK may also throw their associated exception. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `getServerCapabilities` method throws the following exceptions:
 
-| Error Type                                      | Status Code                                     | Content Type                                    |
-| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
-| models/errors/GetServerCapabilitiesBadRequest   | 400                                             | application/json                                |
-| models/errors/GetServerCapabilitiesUnauthorized | 401                                             | application/json                                |
-| models/errors/SDKError                          | 4XX, 5XX                                        | \*/\*                                           |
+| Error Type                                      | Status Code | Content Type     |
+| ----------------------------------------------- | ----------- | ---------------- |
+| models/errors/GetServerCapabilitiesBadRequest   | 400         | application/json |
+| models/errors/GetServerCapabilitiesUnauthorized | 401         | application/json |
+| models/errors/SDKError                          | 4XX, 5XX    | \*/\*            |
 
 ### Example
 
@@ -311,59 +311,16 @@ public class Application {
 <!-- Start Server Selection [server] -->
 ## Server Selection
 
-### Select Server by Index
+### Server Variables
 
-You can override the default server globally by passing a server index to the `serverIndex` builder method when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
-
-| # | Server | Variables |
-| - | ------ | --------- |
-| 0 | `{protocol}://{ip}:{port}` | `protocol` (default is `https`), `ip` (default is `10.10.10.47`), `port` (default is `32400`) |
-
-#### Example
-
-```java
-package hello.world;
-
-import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest;
-import dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized;
-import dev.plexapi.sdk.models.operations.GetServerCapabilitiesResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws GetServerCapabilitiesBadRequest, GetServerCapabilitiesUnauthorized, Exception {
-
-        PlexAPI sdk = PlexAPI.builder()
-                .serverIndex(0)
-                .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
-            .build();
-
-        GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
-                .call();
-
-        if (res.object().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-#### Variables
-
-Some of the server options above contain variables. If you want to set the values of those variables, the following optional parameters are available when initializing the SDK client instance:
- * `ServerProtocol protocol`
- * `String ip`
- * `String port`
+The default server `{protocol}://{ip}:{port}` contains variables and is set to `https://10.10.10.47:32400` by default. To override default values, the following builder methods are available when initializing the SDK client instance:
+ * `protocol(ServerProtocol protocol)`
+ * `ip(String ip)`
+ * `port(String port)`
 
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally by passing a URL to the `serverURL` builder method when initializing the SDK client instance. For example:
+The default server can also be overridden globally using the `.serverURL(String serverUrl)` builder method when initializing the SDK client instance. For example:
 ```java
 package hello.world;
 
@@ -378,7 +335,7 @@ public class Application {
     public static void main(String[] args) throws GetServerCapabilitiesBadRequest, GetServerCapabilitiesUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .serverURL("{protocol}://{ip}:{port}")
+                .serverURL("https://10.10.10.47:32400")
                 .accessToken("<YOUR_API_KEY_HERE>")
                 .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
                 .clientName("Plex for Roku")
@@ -441,9 +398,9 @@ public class Application {
 
 This SDK supports the following security scheme globally:
 
-| Name          | Type          | Scheme        |
-| ------------- | ------------- | ------------- |
-| `accessToken` | apiKey        | API key       |
+| Name          | Type   | Scheme  |
+| ------------- | ------ | ------- |
+| `accessToken` | apiKey | API key |
 
 To authenticate with the API the `accessToken` parameter must be set when initializing the SDK client instance. For example:
 ```java

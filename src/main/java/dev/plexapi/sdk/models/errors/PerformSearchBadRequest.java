@@ -21,6 +21,7 @@ import java.util.Optional;
 /**
  * PerformSearchBadRequest - Bad Request - A parameter was not specified, or was specified incorrectly.
  */
+@SuppressWarnings("serial")
 public class PerformSearchBadRequest extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)

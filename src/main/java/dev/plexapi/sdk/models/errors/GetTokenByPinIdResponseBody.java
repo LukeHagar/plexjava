@@ -21,6 +21,7 @@ import java.util.Optional;
 /**
  * GetTokenByPinIdResponseBody - Not Found or Expired
  */
+@SuppressWarnings("serial")
 public class GetTokenByPinIdResponseBody extends RuntimeException {
 
     @JsonInclude(Include.NON_ABSENT)

@@ -19,7 +19,8 @@ public enum QueryParamType {
     Movie(1L),
     TvShow(2L),
     Season(3L),
-    Episode(4L);
+    Episode(4L),
+    Audio(8L);
 
     @JsonValue
     private final long value;
