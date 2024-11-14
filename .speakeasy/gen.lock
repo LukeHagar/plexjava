@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 1732900d-e173-47c1-a90d-d45182eb35d9
 management:
-  docChecksum: af45c1ae70f7fc6589adb3f8075cb275
+  docChecksum: 2554ade61ed4d42b8e095168765d7dc0
   docVersion: 0.0.3
-  speakeasyVersion: 1.438.1
-  generationVersion: 2.457.2
-  releaseVersion: 0.10.0
-  configChecksum: 3cf2ae4534ed6b3a44a02445b91f2164
+  speakeasyVersion: 1.439.0
+  generationVersion: 2.457.9
+  releaseVersion: 0.10.1
+  configChecksum: e121da064a554c10c4efe58d148f8926
   repoURL: https://github.com/LukeHagar/plexjava.git
   published: true
 features:
   java:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.31.0
+    core: 3.31.1
     deprecations: 2.81.1
     downloadStreams: 0.1.1
     enums: 2.81.2
@@ -2627,6 +2627,7 @@ examples:
       parameters:
         query:
           Timespan: 4
+          timespan: 4
       responses:
         "200":
           application/json: {"MediaContainer": {"size": 5497, "Device": [], "Account": [], "StatisticsMedia": []}}
@@ -2639,6 +2640,7 @@ examples:
       parameters:
         query:
           Timespan: 4
+          timespan: 4
       responses:
         "200":
           application/json: {"MediaContainer": {"size": 5497, "StatisticsResources": []}}
@@ -2651,6 +2653,7 @@ examples:
       parameters:
         query:
           Timespan: 4
+          timespan: 4
       responses:
         "200":
           application/json: {"MediaContainer": {"size": 5497, "Device": [], "Account": [], "StatisticsBandwidth": []}}

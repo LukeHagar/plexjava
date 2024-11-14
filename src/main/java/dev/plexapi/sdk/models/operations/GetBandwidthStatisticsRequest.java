@@ -23,7 +23,7 @@ public class GetBandwidthStatisticsRequest {
      * the exact meaning of this parameter is not known
      * 
      */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=Timespan")
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=timespan")
     private Optional<Long> timespan;
 
     @JsonCreator
