@@ -6,6 +6,8 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.String;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * GetTokenDetailsAuthenticationResponseStatus - String representation of subscriptionActive
@@ -23,5 +25,14 @@ public enum GetTokenDetailsAuthenticationResponseStatus {
     
     public String value() {
         return value;
+    }
+    
+    public static Optional<GetTokenDetailsAuthenticationResponseStatus> fromValue(String value) {
+        for (GetTokenDetailsAuthenticationResponseStatus o: GetTokenDetailsAuthenticationResponseStatus.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

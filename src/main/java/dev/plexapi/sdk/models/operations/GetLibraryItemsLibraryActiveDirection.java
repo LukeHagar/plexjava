@@ -6,6 +6,8 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.String;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * GetLibraryItemsLibraryActiveDirection - The direction of the sort. Can be either `asc` or `desc`.
@@ -24,5 +26,14 @@ public enum GetLibraryItemsLibraryActiveDirection {
     
     public String value() {
         return value;
+    }
+    
+    public static Optional<GetLibraryItemsLibraryActiveDirection> fromValue(String value) {
+        for (GetLibraryItemsLibraryActiveDirection o: GetLibraryItemsLibraryActiveDirection.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

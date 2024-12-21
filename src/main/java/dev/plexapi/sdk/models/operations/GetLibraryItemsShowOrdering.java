@@ -6,22 +6,24 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.String;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
- * GetLibraryItemsShowOrdering - Setting that indicates the episode ordering for the show 
- * None = Library default, 
- * tmdbAiring = The Movie Database (Aired), 
- * aired = TheTVDB (Aired), 
- * dvd = TheTVDB (DVD), 
- * absolute = TheTVDB (Absolute)).
+ * GetLibraryItemsShowOrdering - Setting that indicates the episode ordering for the show
+ * None = Library default,
+ * tmdbAiring = The Movie Database (Aired),
+ * tvdbAiring = TheTVDB (Aired),
+ * tvdbDvd = TheTVDB (DVD),
+ * tvdbAbsolute = TheTVDB (Absolute)).
  * 
  */
 public enum GetLibraryItemsShowOrdering {
     None("None"),
     TmdbAiring("tmdbAiring"),
-    Aired("aired"),
-    Dvd("dvd"),
-    Absolute("absolute");
+    TvdbAiring("tvdbAiring"),
+    TvdbDvd("tvdbDvd"),
+    TvdbAbsolute("tvdbAbsolute");
 
     @JsonValue
     private final String value;
@@ -32,5 +34,14 @@ public enum GetLibraryItemsShowOrdering {
     
     public String value() {
         return value;
+    }
+    
+    public static Optional<GetLibraryItemsShowOrdering> fromValue(String value) {
+        for (GetLibraryItemsShowOrdering o: GetLibraryItemsShowOrdering.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

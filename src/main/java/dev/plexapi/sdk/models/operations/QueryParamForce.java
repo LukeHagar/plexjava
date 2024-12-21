@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * QueryParamForce - Force overwriting of duplicate playlists.  
@@ -26,5 +28,14 @@ public enum QueryParamForce {
     
     public long value() {
         return value;
+    }
+    
+    public static Optional<QueryParamForce> fromValue(long value) {
+        for (QueryParamForce o: QueryParamForce.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

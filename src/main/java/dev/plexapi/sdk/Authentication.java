@@ -122,11 +122,11 @@ public class Authentication implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetTransientTokenRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -134,7 +134,7 @@ public class Authentication implements
                   new BeforeRequestContextImpl(
                       "getTransientToken", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -145,7 +145,7 @@ public class Authentication implements
                         new AfterErrorContextImpl(
                             "getTransientToken",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -154,7 +154,7 @@ public class Authentication implements
                         new AfterSuccessContextImpl(
                             "getTransientToken",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -163,7 +163,7 @@ public class Authentication implements
                         new AfterErrorContextImpl(
                             "getTransientToken",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -275,11 +275,11 @@ public class Authentication implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetSourceConnectionInformationRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -287,7 +287,7 @@ public class Authentication implements
                   new BeforeRequestContextImpl(
                       "getSourceConnectionInformation", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -298,7 +298,7 @@ public class Authentication implements
                         new AfterErrorContextImpl(
                             "getSourceConnectionInformation",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -307,7 +307,7 @@ public class Authentication implements
                         new AfterSuccessContextImpl(
                             "getSourceConnectionInformation",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -316,7 +316,7 @@ public class Authentication implements
                         new AfterErrorContextImpl(
                             "getSourceConnectionInformation",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -426,10 +426,10 @@ public class Authentication implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -437,7 +437,7 @@ public class Authentication implements
                   new BeforeRequestContextImpl(
                       "getTokenDetails", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -448,7 +448,7 @@ public class Authentication implements
                         new AfterErrorContextImpl(
                             "getTokenDetails",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -457,7 +457,7 @@ public class Authentication implements
                         new AfterSuccessContextImpl(
                             "getTokenDetails",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -466,7 +466,7 @@ public class Authentication implements
                         new AfterErrorContextImpl(
                             "getTokenDetails",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -601,8 +601,8 @@ public class Authentication implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        Optional<SecuritySource> _hookSecuritySource = Optional.empty();
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -610,7 +610,7 @@ public class Authentication implements
                   new BeforeRequestContextImpl(
                       "post-users-sign-in-data", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -621,7 +621,7 @@ public class Authentication implements
                         new AfterErrorContextImpl(
                             "post-users-sign-in-data",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -630,7 +630,7 @@ public class Authentication implements
                         new AfterSuccessContextImpl(
                             "post-users-sign-in-data",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -639,7 +639,7 @@ public class Authentication implements
                         new AfterErrorContextImpl(
                             "post-users-sign-in-data",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }

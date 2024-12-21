@@ -38,11 +38,6 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         GetServerActivitiesResponse res = sdk.activities().getServerActivities()
@@ -88,11 +83,6 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         CancelServerActivitiesResponse res = sdk.activities().cancelServerActivities()

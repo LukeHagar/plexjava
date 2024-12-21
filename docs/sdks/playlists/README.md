@@ -48,18 +48,13 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         CreatePlaylistRequest req = CreatePlaylistRequest.builder()
                 .title("<value>")
                 .type(CreatePlaylistQueryParamType.PHOTO)
                 .smart(Smart.ONE)
-                .uri("https://hoarse-testing.info/")
+                .uri("https://inborn-brochure.biz")
                 .build();
 
         CreatePlaylistResponse res = sdk.playlists().createPlaylist()
@@ -114,11 +109,6 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         GetPlaylistsResponse res = sdk.playlists().getPlaylists()
@@ -175,11 +165,6 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         GetPlaylistResponse res = sdk.playlists().getPlaylist()
@@ -233,11 +218,6 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         DeletePlaylistResponse res = sdk.playlists().deletePlaylist()
@@ -289,15 +269,10 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         UpdatePlaylistResponse res = sdk.playlists().updatePlaylist()
-                .playlistID(3915.00d)
+                .playlistID(3915d)
                 .title("<value>")
                 .summary("<value>")
                 .call();
@@ -353,11 +328,6 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         GetPlaylistContentsResponse res = sdk.playlists().getPlaylistContents()
@@ -413,11 +383,6 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         ClearPlaylistContentsResponse res = sdk.playlists().clearPlaylistContents()
@@ -470,15 +435,10 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         AddPlaylistContentsResponse res = sdk.playlists().addPlaylistContents()
-                .playlistID(8502.00d)
+                .playlistID(8502.01d)
                 .uri("server://12345/com.plexapp.plugins.library/library/metadata/1")
                 .playQueueID(123d)
                 .call();
@@ -533,11 +493,6 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         UploadPlaylistResponse res = sdk.playlists().uploadPlaylist()

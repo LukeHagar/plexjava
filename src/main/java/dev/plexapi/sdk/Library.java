@@ -179,11 +179,11 @@ public class Library implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetFileHashRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -191,7 +191,7 @@ public class Library implements
                   new BeforeRequestContextImpl(
                       "getFileHash", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -202,7 +202,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "getFileHash",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -211,7 +211,7 @@ public class Library implements
                         new AfterSuccessContextImpl(
                             "getFileHash",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -220,7 +220,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "getFileHash",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -324,11 +324,11 @@ public class Library implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetRecentlyAddedLibraryRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -336,7 +336,7 @@ public class Library implements
                   new BeforeRequestContextImpl(
                       "get-recently-added-library", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -347,7 +347,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "get-recently-added-library",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -356,7 +356,7 @@ public class Library implements
                         new AfterSuccessContextImpl(
                             "get-recently-added-library",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -365,7 +365,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "get-recently-added-library",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -484,10 +484,10 @@ public class Library implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -495,7 +495,7 @@ public class Library implements
                   new BeforeRequestContextImpl(
                       "get-all-libraries", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -506,7 +506,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "get-all-libraries",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -515,7 +515,7 @@ public class Library implements
                         new AfterSuccessContextImpl(
                             "get-all-libraries",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -524,7 +524,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "get-all-libraries",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -773,7 +773,7 @@ public class Library implements
                 GetLibraryDetailsRequest.class,
                 _baseUrl,
                 "/library/sections/{sectionKey}",
-                request, this.sdkConfiguration.globals);
+                request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
@@ -783,11 +783,11 @@ public class Library implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetLibraryDetailsRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -795,7 +795,7 @@ public class Library implements
                   new BeforeRequestContextImpl(
                       "get-library-details", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -806,7 +806,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "get-library-details",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -815,7 +815,7 @@ public class Library implements
                         new AfterSuccessContextImpl(
                             "get-library-details",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -824,7 +824,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "get-library-details",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -937,16 +937,16 @@ public class Library implements
                 DeleteLibraryRequest.class,
                 _baseUrl,
                 "/library/sections/{sectionKey}",
-                request, this.sdkConfiguration.globals);
+                request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "DELETE");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -954,7 +954,7 @@ public class Library implements
                   new BeforeRequestContextImpl(
                       "deleteLibrary", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -965,7 +965,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "deleteLibrary",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -974,7 +974,7 @@ public class Library implements
                         new AfterSuccessContextImpl(
                             "deleteLibrary",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -983,7 +983,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "deleteLibrary",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -1075,6 +1075,7 @@ public class Library implements
      * - `resolution`: Items categorized by resolution.
      * - `firstCharacter`: Items categorized by the first letter.
      * - `folder`: Items categorized by folder.
+     * - `albums`: Items categorized by album.
      * 
      * @return The call builder
      */
@@ -1104,6 +1105,7 @@ public class Library implements
      * - `resolution`: Items categorized by resolution.
      * - `firstCharacter`: Items categorized by the first letter.
      * - `folder`: Items categorized by folder.
+     * - `albums`: Items categorized by album.
      * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
@@ -1117,7 +1119,7 @@ public class Library implements
                 GetLibraryItemsRequest.class,
                 _baseUrl,
                 "/library/sections/{sectionKey}/{tag}",
-                request, this.sdkConfiguration.globals);
+                request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
@@ -1127,11 +1129,11 @@ public class Library implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetLibraryItemsRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1139,7 +1141,7 @@ public class Library implements
                   new BeforeRequestContextImpl(
                       "get-library-items", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -1150,7 +1152,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "get-library-items",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -1159,7 +1161,7 @@ public class Library implements
                         new AfterSuccessContextImpl(
                             "get-library-items",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -1168,7 +1170,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "get-library-items",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -1301,7 +1303,7 @@ public class Library implements
                 GetRefreshLibraryMetadataRequest.class,
                 _baseUrl,
                 "/library/sections/{sectionKey}/refresh",
-                request, this.sdkConfiguration.globals);
+                request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
@@ -1311,11 +1313,11 @@ public class Library implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetRefreshLibraryMetadataRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1323,7 +1325,7 @@ public class Library implements
                   new BeforeRequestContextImpl(
                       "get-refresh-library-metadata", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -1334,7 +1336,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "get-refresh-library-metadata",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -1343,7 +1345,7 @@ public class Library implements
                         new AfterSuccessContextImpl(
                             "get-refresh-library-metadata",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -1352,7 +1354,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "get-refresh-library-metadata",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -1499,7 +1501,7 @@ public class Library implements
                 GetSearchLibraryRequest.class,
                 _baseUrl,
                 "/library/sections/{sectionKey}/search",
-                request, this.sdkConfiguration.globals);
+                request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
@@ -1509,11 +1511,11 @@ public class Library implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetSearchLibraryRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1521,7 +1523,7 @@ public class Library implements
                   new BeforeRequestContextImpl(
                       "get-search-library", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -1532,7 +1534,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "get-search-library",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -1541,7 +1543,7 @@ public class Library implements
                         new AfterSuccessContextImpl(
                             "get-search-library",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -1550,7 +1552,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "get-search-library",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -1665,12 +1667,12 @@ public class Library implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetSearchAllLibrariesRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-
+                null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1678,7 +1680,7 @@ public class Library implements
                   new BeforeRequestContextImpl(
                       "get-search-all-libraries", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -1689,7 +1691,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "get-search-all-libraries",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -1698,7 +1700,7 @@ public class Library implements
                         new AfterSuccessContextImpl(
                             "get-search-all-libraries",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -1707,7 +1709,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "get-search-all-libraries",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -1820,16 +1822,16 @@ public class Library implements
                 GetMetaDataByRatingKeyRequest.class,
                 _baseUrl,
                 "/library/metadata/{ratingKey}",
-                request, this.sdkConfiguration.globals);
+                request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1837,7 +1839,7 @@ public class Library implements
                   new BeforeRequestContextImpl(
                       "get-meta-data-by-rating-key", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -1848,7 +1850,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "get-meta-data-by-rating-key",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -1857,7 +1859,7 @@ public class Library implements
                         new AfterSuccessContextImpl(
                             "get-meta-data-by-rating-key",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -1866,7 +1868,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "get-meta-data-by-rating-key",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -1996,7 +1998,7 @@ public class Library implements
                 GetMetadataChildrenRequest.class,
                 _baseUrl,
                 "/library/metadata/{ratingKey}/children",
-                request, this.sdkConfiguration.globals);
+                request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
@@ -2006,11 +2008,11 @@ public class Library implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetMetadataChildrenRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -2018,7 +2020,7 @@ public class Library implements
                   new BeforeRequestContextImpl(
                       "getMetadataChildren", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -2029,7 +2031,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "getMetadataChildren",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -2038,7 +2040,7 @@ public class Library implements
                         new AfterSuccessContextImpl(
                             "getMetadataChildren",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -2047,7 +2049,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "getMetadataChildren",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -2197,11 +2199,11 @@ public class Library implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetTopWatchedContentRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -2209,7 +2211,7 @@ public class Library implements
                   new BeforeRequestContextImpl(
                       "getTopWatchedContent", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -2220,7 +2222,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "getTopWatchedContent",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -2229,7 +2231,7 @@ public class Library implements
                         new AfterSuccessContextImpl(
                             "getTopWatchedContent",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -2238,7 +2240,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "getTopWatchedContent",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -2347,10 +2349,10 @@ public class Library implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -2358,7 +2360,7 @@ public class Library implements
                   new BeforeRequestContextImpl(
                       "getOnDeck", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -2369,7 +2371,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "getOnDeck",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -2378,7 +2380,7 @@ public class Library implements
                         new AfterSuccessContextImpl(
                             "getOnDeck",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -2387,7 +2389,7 @@ public class Library implements
                         new AfterErrorContextImpl(
                             "getOnDeck",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }

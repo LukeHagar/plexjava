@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * IncludeHttps - Include Https entries in the results
@@ -22,5 +24,14 @@ public enum IncludeHttps {
     
     public int value() {
         return value;
+    }
+    
+    public static Optional<IncludeHttps> fromValue(int value) {
+        for (IncludeHttps o: IncludeHttps.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

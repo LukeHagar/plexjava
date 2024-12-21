@@ -45,16 +45,11 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         PerformSearchResponse res = sdk.search().performSearch()
                 .query("dylan")
-                .sectionId(9372.69d)
+                .sectionId(9487.87d)
                 .limit(5d)
                 .call();
 
@@ -108,11 +103,6 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         PerformVoiceSearchResponse res = sdk.search().performVoiceSearch()
@@ -167,11 +157,6 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         GetSearchResultsResponse res = sdk.search().getSearchResults()

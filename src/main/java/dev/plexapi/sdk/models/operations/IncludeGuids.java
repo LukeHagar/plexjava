@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * IncludeGuids - Adds the Guids object to the response
@@ -23,5 +25,14 @@ public enum IncludeGuids {
     
     public int value() {
         return value;
+    }
+    
+    public static Optional<IncludeGuids> fromValue(int value) {
+        for (IncludeGuids o: IncludeGuids.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

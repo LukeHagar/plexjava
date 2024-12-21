@@ -87,10 +87,10 @@ public class Sessions implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -98,7 +98,7 @@ public class Sessions implements
                   new BeforeRequestContextImpl(
                       "getSessions", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -109,7 +109,7 @@ public class Sessions implements
                         new AfterErrorContextImpl(
                             "getSessions",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -118,7 +118,7 @@ public class Sessions implements
                         new AfterSuccessContextImpl(
                             "getSessions",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -127,7 +127,7 @@ public class Sessions implements
                         new AfterErrorContextImpl(
                             "getSessions",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -270,11 +270,11 @@ public class Sessions implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetSessionHistoryRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -282,7 +282,7 @@ public class Sessions implements
                   new BeforeRequestContextImpl(
                       "getSessionHistory", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -293,7 +293,7 @@ public class Sessions implements
                         new AfterErrorContextImpl(
                             "getSessionHistory",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -302,7 +302,7 @@ public class Sessions implements
                         new AfterSuccessContextImpl(
                             "getSessionHistory",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -311,7 +311,7 @@ public class Sessions implements
                         new AfterErrorContextImpl(
                             "getSessionHistory",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -418,10 +418,10 @@ public class Sessions implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -429,7 +429,7 @@ public class Sessions implements
                   new BeforeRequestContextImpl(
                       "getTranscodeSessions", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -440,7 +440,7 @@ public class Sessions implements
                         new AfterErrorContextImpl(
                             "getTranscodeSessions",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -449,7 +449,7 @@ public class Sessions implements
                         new AfterSuccessContextImpl(
                             "getTranscodeSessions",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -458,7 +458,7 @@ public class Sessions implements
                         new AfterErrorContextImpl(
                             "getTranscodeSessions",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -569,16 +569,16 @@ public class Sessions implements
                 StopTranscodeSessionRequest.class,
                 _baseUrl,
                 "/transcode/sessions/{sessionKey}",
-                request, this.sdkConfiguration.globals);
+                request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "DELETE");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -586,7 +586,7 @@ public class Sessions implements
                   new BeforeRequestContextImpl(
                       "stopTranscodeSession", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -597,7 +597,7 @@ public class Sessions implements
                         new AfterErrorContextImpl(
                             "stopTranscodeSession",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -606,7 +606,7 @@ public class Sessions implements
                         new AfterSuccessContextImpl(
                             "stopTranscodeSession",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -615,7 +615,7 @@ public class Sessions implements
                         new AfterErrorContextImpl(
                             "stopTranscodeSession",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }

@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Tonight - Indicate that you want the update to run during the next Butler execution. Omitting this or setting it to false indicates that the update should install
@@ -22,5 +24,14 @@ public enum Tonight {
     
     public long value() {
         return value;
+    }
+    
+    public static Optional<Tonight> fromValue(long value) {
+        for (Tonight o: Tonight.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

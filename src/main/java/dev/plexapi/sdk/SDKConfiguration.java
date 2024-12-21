@@ -9,7 +9,7 @@ import dev.plexapi.sdk.utils.HTTPClient;
 import dev.plexapi.sdk.utils.Hook.SdkInitData;
 import dev.plexapi.sdk.utils.Hooks;
 import dev.plexapi.sdk.utils.RetryConfig;
-import java.lang.Object;
+import dev.plexapi.sdk.utils.Utils;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.ArrayList;
@@ -24,9 +24,16 @@ class SDKConfiguration {
     public Optional<SecuritySource> securitySource() {
         return Optional.ofNullable(securitySource);
     }
+    
     public HTTPClient defaultClient;
+    
     public String serverUrl;
+    
+    public String resolvedServerUrl() {
+        return Utils.templateUrl(serverUrl, getServerVariableDefaults());
+    }
     public int serverIdx = 0;
+    @SuppressWarnings("serial")
     List<Map<String, String>> serverDefaults = new ArrayList<>(){ {
         add(new HashMap<>(){ {
             put("protocol", "https");
@@ -36,8 +43,8 @@ class SDKConfiguration {
     } };
     private static final String LANGUAGE = "java";
     public static final String OPENAPI_DOC_VERSION = "0.0.3";
-    public static final String SDK_VERSION = "0.10.1";
-    public static final String GEN_VERSION = "2.457.9";
+    public static final String SDK_VERSION = "0.11.0";
+    public static final String GEN_VERSION = "2.483.1";
     private static final String BASE_PACKAGE = "dev.plexapi.sdk";
     public static final String USER_AGENT = 
             String.format("speakeasy-sdk/%s %s %s %s %s", 
@@ -64,18 +71,15 @@ class SDKConfiguration {
     public void initialize() {
         SDKHooks.initialize(_hooks);
         // apply the sdk init hook immediately
-        SdkInitData data = _hooks.sdkInit(new SdkInitData(serverUrl, defaultClient));
+        SdkInitData data = _hooks.sdkInit(new SdkInitData(resolvedServerUrl(), defaultClient));
         this.serverUrl = data.baseUrl();
         this.defaultClient = data.client();
     }
 
-    @SuppressWarnings("serial")
-    public Map<String, Map<String, Map<String,Object>>> globals = new HashMap<>(){ {
-        put("parameters", new HashMap<>());
-    } };
     
-    public Map<String, String> getServerVariableDefaults() {
-        return serverDefaults.get(this.serverIdx);
-    }
+    
+     public Map<String, String> getServerVariableDefaults() {
+         return serverDefaults.get(this.serverIdx);
+     }
     public Optional<RetryConfig> retryConfig = Optional.empty();
 }

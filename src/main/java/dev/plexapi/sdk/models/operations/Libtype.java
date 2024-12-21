@@ -6,6 +6,8 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.String;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Libtype - The type of library to filter. Can be "movie" or "show", or all if not present.
@@ -24,5 +26,14 @@ public enum Libtype {
     
     public String value() {
         return value;
+    }
+    
+    public static Optional<Libtype> fromValue(String value) {
+        for (Libtype o: Libtype.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

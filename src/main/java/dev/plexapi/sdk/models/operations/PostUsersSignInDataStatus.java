@@ -6,6 +6,8 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.String;
+import java.util.Objects;
+import java.util.Optional;
 
 public enum PostUsersSignInDataStatus {
     ONLINE("online"),
@@ -20,5 +22,14 @@ public enum PostUsersSignInDataStatus {
     
     public String value() {
         return value;
+    }
+    
+    public static Optional<PostUsersSignInDataStatus> fromValue(String value) {
+        for (PostUsersSignInDataStatus o: PostUsersSignInDataStatus.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

@@ -6,6 +6,8 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.String;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * PostUsersSignInDataMailingListStatus - Your current mailing list status (active or unsubscribed)
@@ -23,5 +25,14 @@ public enum PostUsersSignInDataMailingListStatus {
     
     public String value() {
         return value;
+    }
+    
+    public static Optional<PostUsersSignInDataMailingListStatus> fromValue(String value) {
+        for (PostUsersSignInDataMailingListStatus o: PostUsersSignInDataMailingListStatus.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

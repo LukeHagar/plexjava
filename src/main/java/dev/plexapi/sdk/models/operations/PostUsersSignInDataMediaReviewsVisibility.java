@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * PostUsersSignInDataMediaReviewsVisibility - Whether or not the account has media reviews visibility enabled
@@ -22,5 +24,14 @@ public enum PostUsersSignInDataMediaReviewsVisibility {
     
     public int value() {
         return value;
+    }
+    
+    public static Optional<PostUsersSignInDataMediaReviewsVisibility> fromValue(int value) {
+        for (PostUsersSignInDataMediaReviewsVisibility o: PostUsersSignInDataMediaReviewsVisibility.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

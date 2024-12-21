@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * QueryParamIncludeCollections - Whether to include collections in the search results.
@@ -22,5 +24,14 @@ public enum QueryParamIncludeCollections {
     
     public int value() {
         return value;
+    }
+    
+    public static Optional<QueryParamIncludeCollections> fromValue(int value) {
+        for (QueryParamIncludeCollections o: QueryParamIncludeCollections.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

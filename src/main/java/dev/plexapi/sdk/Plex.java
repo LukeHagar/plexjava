@@ -164,10 +164,10 @@ public class Plex implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -175,7 +175,7 @@ public class Plex implements
                   new BeforeRequestContextImpl(
                       "getCompanionsData", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -186,7 +186,7 @@ public class Plex implements
                         new AfterErrorContextImpl(
                             "getCompanionsData",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -195,7 +195,7 @@ public class Plex implements
                         new AfterSuccessContextImpl(
                             "getCompanionsData",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -204,7 +204,7 @@ public class Plex implements
                         new AfterErrorContextImpl(
                             "getCompanionsData",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -325,10 +325,10 @@ public class Plex implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -336,7 +336,7 @@ public class Plex implements
                   new BeforeRequestContextImpl(
                       "getUserFriends", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -347,7 +347,7 @@ public class Plex implements
                         new AfterErrorContextImpl(
                             "getUserFriends",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -356,7 +356,7 @@ public class Plex implements
                         new AfterSuccessContextImpl(
                             "getUserFriends",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -365,7 +365,7 @@ public class Plex implements
                         new AfterErrorContextImpl(
                             "getUserFriends",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -486,7 +486,7 @@ public class Plex implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-
+        Optional<SecuritySource> _hookSecuritySource = Optional.empty();
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -494,7 +494,7 @@ public class Plex implements
                   new BeforeRequestContextImpl(
                       "getGeoData", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -505,7 +505,7 @@ public class Plex implements
                         new AfterErrorContextImpl(
                             "getGeoData",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -514,7 +514,7 @@ public class Plex implements
                         new AfterSuccessContextImpl(
                             "getGeoData",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -523,7 +523,7 @@ public class Plex implements
                         new AfterErrorContextImpl(
                             "getGeoData",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -630,10 +630,10 @@ public class Plex implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -641,7 +641,7 @@ public class Plex implements
                   new BeforeRequestContextImpl(
                       "getHomeData", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -652,7 +652,7 @@ public class Plex implements
                         new AfterErrorContextImpl(
                             "getHomeData",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -661,7 +661,7 @@ public class Plex implements
                         new AfterSuccessContextImpl(
                             "getHomeData",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -670,7 +670,7 @@ public class Plex implements
                         new AfterErrorContextImpl(
                             "getHomeData",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -763,11 +763,13 @@ public class Plex implements
     /**
      * Get Server Resources
      * Get Plex server access tokens and server connections
+     * @param clientID An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetServerResourcesResponse getServerResourcesDirect() throws Exception {
-        return getServerResources(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    public GetServerResourcesResponse getServerResources(
+            String clientID) throws Exception {
+        return getServerResources(Optional.empty(), Optional.empty(), Optional.empty(), clientID, Optional.empty());
     }
     
     /**
@@ -787,7 +789,7 @@ public class Plex implements
             Optional<? extends IncludeHttps> includeHttps,
             Optional<? extends IncludeRelay> includeRelay,
             Optional<? extends IncludeIPv6> includeIPv6,
-            Optional<String> clientID,
+            String clientID,
             Optional<String> serverURL) throws Exception {
         GetServerResourcesRequest request =
             GetServerResourcesRequest
@@ -814,12 +816,12 @@ public class Plex implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetServerResourcesRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-
+                null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -827,7 +829,7 @@ public class Plex implements
                   new BeforeRequestContextImpl(
                       "get-server-resources", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -838,7 +840,7 @@ public class Plex implements
                         new AfterErrorContextImpl(
                             "get-server-resources",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -847,7 +849,7 @@ public class Plex implements
                         new AfterSuccessContextImpl(
                             "get-server-resources",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -856,7 +858,7 @@ public class Plex implements
                         new AfterErrorContextImpl(
                             "get-server-resources",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -985,9 +987,9 @@ public class Plex implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetPinRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-
+                null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        Optional<SecuritySource> _hookSecuritySource = Optional.empty();
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -995,7 +997,7 @@ public class Plex implements
                   new BeforeRequestContextImpl(
                       "getPin", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -1006,7 +1008,7 @@ public class Plex implements
                         new AfterErrorContextImpl(
                             "getPin",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -1015,7 +1017,7 @@ public class Plex implements
                         new AfterSuccessContextImpl(
                             "getPin",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -1024,7 +1026,7 @@ public class Plex implements
                         new AfterErrorContextImpl(
                             "getPin",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -1129,14 +1131,14 @@ public class Plex implements
                 GetTokenByPinIdRequest.class,
                 _baseUrl,
                 "/pins/{pinID}",
-                request, this.sdkConfiguration.globals);
+                request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        Optional<SecuritySource> _hookSecuritySource = Optional.empty();
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1144,7 +1146,7 @@ public class Plex implements
                   new BeforeRequestContextImpl(
                       "getTokenByPinId", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -1155,7 +1157,7 @@ public class Plex implements
                         new AfterErrorContextImpl(
                             "getTokenByPinId",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -1164,7 +1166,7 @@ public class Plex implements
                         new AfterSuccessContextImpl(
                             "getTokenByPinId",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -1173,7 +1175,7 @@ public class Plex implements
                         new AfterErrorContextImpl(
                             "getTokenByPinId",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }

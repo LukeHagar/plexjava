@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * PostUsersSignInDataDefaultSubtitleForced - The forced subtitles searches mode (0 = Prefer non-forced subtitles, 1 = Prefer forced subtitles, 2 = Only show forced subtitles, 3 = Only show non-forced subtitles)
@@ -22,5 +24,14 @@ public enum PostUsersSignInDataDefaultSubtitleForced {
     
     public int value() {
         return value;
+    }
+    
+    public static Optional<PostUsersSignInDataDefaultSubtitleForced> fromValue(int value) {
+        for (PostUsersSignInDataDefaultSubtitleForced o: PostUsersSignInDataDefaultSubtitleForced.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

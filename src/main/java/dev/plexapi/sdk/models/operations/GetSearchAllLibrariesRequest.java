@@ -32,7 +32,7 @@ public class GetSearchAllLibrariesRequest {
      * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Client-Identifier")
-    private Optional<String> clientID;
+    private String clientID;
 
     /**
      * Limit the number of results returned.
@@ -62,7 +62,7 @@ public class GetSearchAllLibrariesRequest {
     @JsonCreator
     public GetSearchAllLibrariesRequest(
             String query,
-            Optional<String> clientID,
+            String clientID,
             Optional<Long> limit,
             Optional<? extends List<SearchTypes>> searchTypes,
             Optional<? extends QueryParamIncludeCollections> includeCollections,
@@ -82,8 +82,9 @@ public class GetSearchAllLibrariesRequest {
     }
     
     public GetSearchAllLibrariesRequest(
-            String query) {
-        this(query, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+            String query,
+            String clientID) {
+        this(query, clientID, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -98,7 +99,7 @@ public class GetSearchAllLibrariesRequest {
      * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
      */
     @JsonIgnore
-    public Optional<String> clientID() {
+    public String clientID() {
         return clientID;
     }
 
@@ -155,15 +156,6 @@ public class GetSearchAllLibrariesRequest {
      * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
      */
     public GetSearchAllLibrariesRequest withClientID(String clientID) {
-        Utils.checkNotNull(clientID, "clientID");
-        this.clientID = Optional.ofNullable(clientID);
-        return this;
-    }
-
-    /**
-     * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
-     */
-    public GetSearchAllLibrariesRequest withClientID(Optional<String> clientID) {
         Utils.checkNotNull(clientID, "clientID");
         this.clientID = clientID;
         return this;
@@ -287,7 +279,7 @@ public class GetSearchAllLibrariesRequest {
  
         private String query;
  
-        private Optional<String> clientID = Optional.empty();
+        private String clientID;
  
         private Optional<Long> limit = Optional.empty();
  
@@ -314,15 +306,6 @@ public class GetSearchAllLibrariesRequest {
          * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
          */
         public Builder clientID(String clientID) {
-            Utils.checkNotNull(clientID, "clientID");
-            this.clientID = Optional.ofNullable(clientID);
-            return this;
-        }
-
-        /**
-         * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
-         */
-        public Builder clientID(Optional<String> clientID) {
             Utils.checkNotNull(clientID, "clientID");
             this.clientID = clientID;
             return this;

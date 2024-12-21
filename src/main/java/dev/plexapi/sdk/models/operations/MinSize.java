@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * MinSize - images are always scaled proportionally. A value of '1' in minSize will make the smaller native dimension the dimension resized against.
@@ -22,5 +24,14 @@ public enum MinSize {
     
     public long value() {
         return value;
+    }
+    
+    public static Optional<MinSize> fromValue(long value) {
+        for (MinSize o: MinSize.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

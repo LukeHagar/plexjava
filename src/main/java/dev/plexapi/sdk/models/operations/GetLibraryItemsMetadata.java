@@ -108,12 +108,12 @@ public class GetLibraryItemsMetadata {
     private Optional<? extends GetLibraryItemsFlattenSeasons> flattenSeasons;
 
     /**
-     * Setting that indicates the episode ordering for the show 
-     * None = Library default, 
-     * tmdbAiring = The Movie Database (Aired), 
-     * aired = TheTVDB (Aired), 
-     * dvd = TheTVDB (DVD), 
-     * absolute = TheTVDB (Absolute)).
+     * Setting that indicates the episode ordering for the show
+     * None = Library default,
+     * tmdbAiring = The Movie Database (Aired),
+     * tvdbAiring = TheTVDB (Aired),
+     * tvdbDvd = TheTVDB (DVD),
+     * tvdbAbsolute = TheTVDB (Absolute)).
      * 
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -696,12 +696,12 @@ public class GetLibraryItemsMetadata {
     }
 
     /**
-     * Setting that indicates the episode ordering for the show 
-     * None = Library default, 
-     * tmdbAiring = The Movie Database (Aired), 
-     * aired = TheTVDB (Aired), 
-     * dvd = TheTVDB (DVD), 
-     * absolute = TheTVDB (Absolute)).
+     * Setting that indicates the episode ordering for the show
+     * None = Library default,
+     * tmdbAiring = The Movie Database (Aired),
+     * tvdbAiring = TheTVDB (Aired),
+     * tvdbDvd = TheTVDB (DVD),
+     * tvdbAbsolute = TheTVDB (Absolute)).
      * 
      */
     @SuppressWarnings("unchecked")
@@ -1216,12 +1216,12 @@ public class GetLibraryItemsMetadata {
     }
 
     /**
-     * Setting that indicates the episode ordering for the show 
-     * None = Library default, 
-     * tmdbAiring = The Movie Database (Aired), 
-     * aired = TheTVDB (Aired), 
-     * dvd = TheTVDB (DVD), 
-     * absolute = TheTVDB (Absolute)).
+     * Setting that indicates the episode ordering for the show
+     * None = Library default,
+     * tmdbAiring = The Movie Database (Aired),
+     * tvdbAiring = TheTVDB (Aired),
+     * tvdbDvd = TheTVDB (DVD),
+     * tvdbAbsolute = TheTVDB (Absolute)).
      * 
      */
     public GetLibraryItemsMetadata withShowOrdering(GetLibraryItemsShowOrdering showOrdering) {
@@ -1231,12 +1231,12 @@ public class GetLibraryItemsMetadata {
     }
 
     /**
-     * Setting that indicates the episode ordering for the show 
-     * None = Library default, 
-     * tmdbAiring = The Movie Database (Aired), 
-     * aired = TheTVDB (Aired), 
-     * dvd = TheTVDB (DVD), 
-     * absolute = TheTVDB (Absolute)).
+     * Setting that indicates the episode ordering for the show
+     * None = Library default,
+     * tmdbAiring = The Movie Database (Aired),
+     * tvdbAiring = TheTVDB (Aired),
+     * tvdbDvd = TheTVDB (DVD),
+     * tvdbAbsolute = TheTVDB (Absolute)).
      * 
      */
     public GetLibraryItemsMetadata withShowOrdering(Optional<? extends GetLibraryItemsShowOrdering> showOrdering) {
@@ -2520,12 +2520,12 @@ public class GetLibraryItemsMetadata {
         }
 
         /**
-         * Setting that indicates the episode ordering for the show 
-         * None = Library default, 
-         * tmdbAiring = The Movie Database (Aired), 
-         * aired = TheTVDB (Aired), 
-         * dvd = TheTVDB (DVD), 
-         * absolute = TheTVDB (Absolute)).
+         * Setting that indicates the episode ordering for the show
+         * None = Library default,
+         * tmdbAiring = The Movie Database (Aired),
+         * tvdbAiring = TheTVDB (Aired),
+         * tvdbDvd = TheTVDB (DVD),
+         * tvdbAbsolute = TheTVDB (Absolute)).
          * 
          */
         public Builder showOrdering(GetLibraryItemsShowOrdering showOrdering) {
@@ -2535,12 +2535,12 @@ public class GetLibraryItemsMetadata {
         }
 
         /**
-         * Setting that indicates the episode ordering for the show 
-         * None = Library default, 
-         * tmdbAiring = The Movie Database (Aired), 
-         * aired = TheTVDB (Aired), 
-         * dvd = TheTVDB (DVD), 
-         * absolute = TheTVDB (Absolute)).
+         * Setting that indicates the episode ordering for the show
+         * None = Library default,
+         * tmdbAiring = The Movie Database (Aired),
+         * tvdbAiring = TheTVDB (Aired),
+         * tvdbDvd = TheTVDB (DVD),
+         * tvdbAbsolute = TheTVDB (Absolute)).
          * 
          */
         public Builder showOrdering(Optional<? extends GetLibraryItemsShowOrdering> showOrdering) {

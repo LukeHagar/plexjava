@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Download - Indicate that you want to start download any updates found.
@@ -22,5 +24,14 @@ public enum Download {
     
     public long value() {
         return value;
+    }
+    
+    public static Optional<Download> fromValue(long value) {
+        for (Download o: Download.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

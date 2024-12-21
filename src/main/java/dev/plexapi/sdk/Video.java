@@ -78,11 +78,11 @@ public class Video implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetTimelineRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -90,7 +90,7 @@ public class Video implements
                   new BeforeRequestContextImpl(
                       "getTimeline", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -101,7 +101,7 @@ public class Video implements
                         new AfterErrorContextImpl(
                             "getTimeline",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -110,7 +110,7 @@ public class Video implements
                         new AfterSuccessContextImpl(
                             "getTimeline",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -119,7 +119,7 @@ public class Video implements
                         new AfterErrorContextImpl(
                             "getTimeline",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -221,11 +221,11 @@ public class Video implements
         _req.addQueryParams(Utils.getQueryParams(
                 StartUniversalTranscodeRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -233,7 +233,7 @@ public class Video implements
                   new BeforeRequestContextImpl(
                       "startUniversalTranscode", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -244,7 +244,7 @@ public class Video implements
                         new AfterErrorContextImpl(
                             "startUniversalTranscode",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -253,7 +253,7 @@ public class Video implements
                         new AfterSuccessContextImpl(
                             "startUniversalTranscode",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -262,7 +262,7 @@ public class Video implements
                         new AfterErrorContextImpl(
                             "startUniversalTranscode",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }

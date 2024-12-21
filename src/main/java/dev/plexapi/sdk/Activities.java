@@ -78,10 +78,10 @@ public class Activities implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -89,7 +89,7 @@ public class Activities implements
                   new BeforeRequestContextImpl(
                       "getServerActivities", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -100,7 +100,7 @@ public class Activities implements
                         new AfterErrorContextImpl(
                             "getServerActivities",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -109,7 +109,7 @@ public class Activities implements
                         new AfterSuccessContextImpl(
                             "getServerActivities",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -118,7 +118,7 @@ public class Activities implements
                         new AfterErrorContextImpl(
                             "getServerActivities",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -229,16 +229,16 @@ public class Activities implements
                 CancelServerActivitiesRequest.class,
                 _baseUrl,
                 "/activities/{activityUUID}",
-                request, this.sdkConfiguration.globals);
+                request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "DELETE");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -246,7 +246,7 @@ public class Activities implements
                   new BeforeRequestContextImpl(
                       "cancelServerActivities", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -257,7 +257,7 @@ public class Activities implements
                         new AfterErrorContextImpl(
                             "cancelServerActivities",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -266,7 +266,7 @@ public class Activities implements
                         new AfterSuccessContextImpl(
                             "cancelServerActivities",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -275,7 +275,7 @@ public class Activities implements
                         new AfterErrorContextImpl(
                             "cancelServerActivities",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }

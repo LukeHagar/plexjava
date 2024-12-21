@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * IncludeDetails - Whether or not to include details for a section (types, filters, and sorts). 
@@ -24,5 +26,14 @@ public enum IncludeDetails {
     
     public long value() {
         return value;
+    }
+    
+    public static Optional<IncludeDetails> fromValue(long value) {
+        for (IncludeDetails o: IncludeDetails.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

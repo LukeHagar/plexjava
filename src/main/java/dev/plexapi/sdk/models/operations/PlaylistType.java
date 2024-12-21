@@ -6,6 +6,8 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.String;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * PlaylistType - limit to a type of playlist.
@@ -24,5 +26,14 @@ public enum PlaylistType {
     
     public String value() {
         return value;
+    }
+    
+    public static Optional<PlaylistType> fromValue(String value) {
+        for (PlaylistType o: PlaylistType.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

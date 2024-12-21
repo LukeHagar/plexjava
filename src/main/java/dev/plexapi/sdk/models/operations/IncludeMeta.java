@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * IncludeMeta - Adds the Meta object to the response
@@ -23,5 +25,14 @@ public enum IncludeMeta {
     
     public int value() {
         return value;
+    }
+    
+    public static Optional<IncludeMeta> fromValue(int value) {
+        for (IncludeMeta o: IncludeMeta.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

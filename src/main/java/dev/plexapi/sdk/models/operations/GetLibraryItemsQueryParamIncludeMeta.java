@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * GetLibraryItemsQueryParamIncludeMeta - Adds the Meta object to the response
@@ -23,5 +25,14 @@ public enum GetLibraryItemsQueryParamIncludeMeta {
     
     public int value() {
         return value;
+    }
+    
+    public static Optional<GetLibraryItemsQueryParamIncludeMeta> fromValue(int value) {
+        for (GetLibraryItemsQueryParamIncludeMeta o: GetLibraryItemsQueryParamIncludeMeta.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

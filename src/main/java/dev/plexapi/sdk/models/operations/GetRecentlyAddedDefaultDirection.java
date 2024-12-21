@@ -6,6 +6,8 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.String;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * GetRecentlyAddedDefaultDirection - The direction of the sort. Can be either `asc` or `desc`.
@@ -24,5 +26,14 @@ public enum GetRecentlyAddedDefaultDirection {
     
     public String value() {
         return value;
+    }
+    
+    public static Optional<GetRecentlyAddedDefaultDirection> fromValue(String value) {
+        for (GetRecentlyAddedDefaultDirection o: GetRecentlyAddedDefaultDirection.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

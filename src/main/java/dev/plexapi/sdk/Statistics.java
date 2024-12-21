@@ -106,11 +106,11 @@ public class Statistics implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetStatisticsRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -118,7 +118,7 @@ public class Statistics implements
                   new BeforeRequestContextImpl(
                       "getStatistics", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -129,7 +129,7 @@ public class Statistics implements
                         new AfterErrorContextImpl(
                             "getStatistics",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -138,7 +138,7 @@ public class Statistics implements
                         new AfterSuccessContextImpl(
                             "getStatistics",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -147,7 +147,7 @@ public class Statistics implements
                         new AfterErrorContextImpl(
                             "getStatistics",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -278,11 +278,11 @@ public class Statistics implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetResourcesStatisticsRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -290,7 +290,7 @@ public class Statistics implements
                   new BeforeRequestContextImpl(
                       "getResourcesStatistics", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -301,7 +301,7 @@ public class Statistics implements
                         new AfterErrorContextImpl(
                             "getResourcesStatistics",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -310,7 +310,7 @@ public class Statistics implements
                         new AfterSuccessContextImpl(
                             "getResourcesStatistics",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -319,7 +319,7 @@ public class Statistics implements
                         new AfterErrorContextImpl(
                             "getResourcesStatistics",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -450,11 +450,11 @@ public class Statistics implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetBandwidthStatisticsRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -462,7 +462,7 @@ public class Statistics implements
                   new BeforeRequestContextImpl(
                       "getBandwidthStatistics", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -473,7 +473,7 @@ public class Statistics implements
                         new AfterErrorContextImpl(
                             "getBandwidthStatistics",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -482,7 +482,7 @@ public class Statistics implements
                         new AfterSuccessContextImpl(
                             "getBandwidthStatistics",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -491,7 +491,7 @@ public class Statistics implements
                         new AfterErrorContextImpl(
                             "getBandwidthStatistics",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }

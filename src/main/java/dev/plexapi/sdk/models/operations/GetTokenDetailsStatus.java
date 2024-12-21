@@ -6,6 +6,8 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.String;
+import java.util.Objects;
+import java.util.Optional;
 
 public enum GetTokenDetailsStatus {
     ONLINE("online"),
@@ -20,5 +22,14 @@ public enum GetTokenDetailsStatus {
     
     public String value() {
         return value;
+    }
+    
+    public static Optional<GetTokenDetailsStatus> fromValue(String value) {
+        for (GetTokenDetailsStatus o: GetTokenDetailsStatus.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

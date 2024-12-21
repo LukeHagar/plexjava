@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 public enum OptimizedForStreaming {
     Disable(0),
@@ -19,5 +21,14 @@ public enum OptimizedForStreaming {
     
     public int value() {
         return value;
+    }
+    
+    public static Optional<OptimizedForStreaming> fromValue(int value) {
+        for (OptimizedForStreaming o: OptimizedForStreaming.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

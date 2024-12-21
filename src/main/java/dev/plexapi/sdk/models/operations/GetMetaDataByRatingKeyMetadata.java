@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Integer;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -59,6 +60,41 @@ public class GetMetaDataByRatingKeyMetadata {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionKey")
     private Optional<String> librarySectionKey;
+
+    /**
+     * The name of the album artist for the track when audio, and the name of the TV show for the episode when video.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentTitle")
+    private Optional<String> grandparentTitle;
+
+    /**
+     * The name of the album for the track when audio, and the name of the season for the episode when TV show.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentTitle")
+    private Optional<String> parentTitle;
+
+    /**
+     * The orginal untranslated name of the media item when non-english.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("originalTitle")
+    private Optional<String> originalTitle;
+
+    /**
+     * The index starting from 0 of this media item in the MetaData array.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("index")
+    private Optional<Long> index;
+
+    /**
+     * The parent index starting from 0 of this media item in the parent MetaData array.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentIndex")
+    private Optional<Long> parentIndex;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contentRating")
@@ -167,6 +203,11 @@ public class GetMetaDataByRatingKeyMetadata {
             @JsonProperty("librarySectionTitle") Optional<String> librarySectionTitle,
             @JsonProperty("librarySectionID") Optional<Integer> librarySectionID,
             @JsonProperty("librarySectionKey") Optional<String> librarySectionKey,
+            @JsonProperty("grandparentTitle") Optional<String> grandparentTitle,
+            @JsonProperty("parentTitle") Optional<String> parentTitle,
+            @JsonProperty("originalTitle") Optional<String> originalTitle,
+            @JsonProperty("index") Optional<Long> index,
+            @JsonProperty("parentIndex") Optional<Long> parentIndex,
             @JsonProperty("contentRating") Optional<String> contentRating,
             @JsonProperty("summary") Optional<String> summary,
             @JsonProperty("rating") Optional<Double> rating,
@@ -200,6 +241,11 @@ public class GetMetaDataByRatingKeyMetadata {
         Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
         Utils.checkNotNull(librarySectionID, "librarySectionID");
         Utils.checkNotNull(librarySectionKey, "librarySectionKey");
+        Utils.checkNotNull(grandparentTitle, "grandparentTitle");
+        Utils.checkNotNull(parentTitle, "parentTitle");
+        Utils.checkNotNull(originalTitle, "originalTitle");
+        Utils.checkNotNull(index, "index");
+        Utils.checkNotNull(parentIndex, "parentIndex");
         Utils.checkNotNull(contentRating, "contentRating");
         Utils.checkNotNull(summary, "summary");
         Utils.checkNotNull(rating, "rating");
@@ -233,6 +279,11 @@ public class GetMetaDataByRatingKeyMetadata {
         this.librarySectionTitle = librarySectionTitle;
         this.librarySectionID = librarySectionID;
         this.librarySectionKey = librarySectionKey;
+        this.grandparentTitle = grandparentTitle;
+        this.parentTitle = parentTitle;
+        this.originalTitle = originalTitle;
+        this.index = index;
+        this.parentIndex = parentIndex;
         this.contentRating = contentRating;
         this.summary = summary;
         this.rating = rating;
@@ -260,7 +311,7 @@ public class GetMetaDataByRatingKeyMetadata {
     }
     
     public GetMetaDataByRatingKeyMetadata() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -306,6 +357,46 @@ public class GetMetaDataByRatingKeyMetadata {
     @JsonIgnore
     public Optional<String> librarySectionKey() {
         return librarySectionKey;
+    }
+
+    /**
+     * The name of the album artist for the track when audio, and the name of the TV show for the episode when video.
+     */
+    @JsonIgnore
+    public Optional<String> grandparentTitle() {
+        return grandparentTitle;
+    }
+
+    /**
+     * The name of the album for the track when audio, and the name of the season for the episode when TV show.
+     */
+    @JsonIgnore
+    public Optional<String> parentTitle() {
+        return parentTitle;
+    }
+
+    /**
+     * The orginal untranslated name of the media item when non-english.
+     */
+    @JsonIgnore
+    public Optional<String> originalTitle() {
+        return originalTitle;
+    }
+
+    /**
+     * The index starting from 0 of this media item in the MetaData array.
+     */
+    @JsonIgnore
+    public Optional<Long> index() {
+        return index;
+    }
+
+    /**
+     * The parent index starting from 0 of this media item in the parent MetaData array.
+     */
+    @JsonIgnore
+    public Optional<Long> parentIndex() {
+        return parentIndex;
     }
 
     @JsonIgnore
@@ -546,6 +637,96 @@ public class GetMetaDataByRatingKeyMetadata {
     public GetMetaDataByRatingKeyMetadata withLibrarySectionKey(Optional<String> librarySectionKey) {
         Utils.checkNotNull(librarySectionKey, "librarySectionKey");
         this.librarySectionKey = librarySectionKey;
+        return this;
+    }
+
+    /**
+     * The name of the album artist for the track when audio, and the name of the TV show for the episode when video.
+     */
+    public GetMetaDataByRatingKeyMetadata withGrandparentTitle(String grandparentTitle) {
+        Utils.checkNotNull(grandparentTitle, "grandparentTitle");
+        this.grandparentTitle = Optional.ofNullable(grandparentTitle);
+        return this;
+    }
+
+    /**
+     * The name of the album artist for the track when audio, and the name of the TV show for the episode when video.
+     */
+    public GetMetaDataByRatingKeyMetadata withGrandparentTitle(Optional<String> grandparentTitle) {
+        Utils.checkNotNull(grandparentTitle, "grandparentTitle");
+        this.grandparentTitle = grandparentTitle;
+        return this;
+    }
+
+    /**
+     * The name of the album for the track when audio, and the name of the season for the episode when TV show.
+     */
+    public GetMetaDataByRatingKeyMetadata withParentTitle(String parentTitle) {
+        Utils.checkNotNull(parentTitle, "parentTitle");
+        this.parentTitle = Optional.ofNullable(parentTitle);
+        return this;
+    }
+
+    /**
+     * The name of the album for the track when audio, and the name of the season for the episode when TV show.
+     */
+    public GetMetaDataByRatingKeyMetadata withParentTitle(Optional<String> parentTitle) {
+        Utils.checkNotNull(parentTitle, "parentTitle");
+        this.parentTitle = parentTitle;
+        return this;
+    }
+
+    /**
+     * The orginal untranslated name of the media item when non-english.
+     */
+    public GetMetaDataByRatingKeyMetadata withOriginalTitle(String originalTitle) {
+        Utils.checkNotNull(originalTitle, "originalTitle");
+        this.originalTitle = Optional.ofNullable(originalTitle);
+        return this;
+    }
+
+    /**
+     * The orginal untranslated name of the media item when non-english.
+     */
+    public GetMetaDataByRatingKeyMetadata withOriginalTitle(Optional<String> originalTitle) {
+        Utils.checkNotNull(originalTitle, "originalTitle");
+        this.originalTitle = originalTitle;
+        return this;
+    }
+
+    /**
+     * The index starting from 0 of this media item in the MetaData array.
+     */
+    public GetMetaDataByRatingKeyMetadata withIndex(long index) {
+        Utils.checkNotNull(index, "index");
+        this.index = Optional.ofNullable(index);
+        return this;
+    }
+
+    /**
+     * The index starting from 0 of this media item in the MetaData array.
+     */
+    public GetMetaDataByRatingKeyMetadata withIndex(Optional<Long> index) {
+        Utils.checkNotNull(index, "index");
+        this.index = index;
+        return this;
+    }
+
+    /**
+     * The parent index starting from 0 of this media item in the parent MetaData array.
+     */
+    public GetMetaDataByRatingKeyMetadata withParentIndex(long parentIndex) {
+        Utils.checkNotNull(parentIndex, "parentIndex");
+        this.parentIndex = Optional.ofNullable(parentIndex);
+        return this;
+    }
+
+    /**
+     * The parent index starting from 0 of this media item in the parent MetaData array.
+     */
+    public GetMetaDataByRatingKeyMetadata withParentIndex(Optional<Long> parentIndex) {
+        Utils.checkNotNull(parentIndex, "parentIndex");
+        this.parentIndex = parentIndex;
         return this;
     }
 
@@ -856,6 +1037,11 @@ public class GetMetaDataByRatingKeyMetadata {
             Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
             Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
             Objects.deepEquals(this.librarySectionKey, other.librarySectionKey) &&
+            Objects.deepEquals(this.grandparentTitle, other.grandparentTitle) &&
+            Objects.deepEquals(this.parentTitle, other.parentTitle) &&
+            Objects.deepEquals(this.originalTitle, other.originalTitle) &&
+            Objects.deepEquals(this.index, other.index) &&
+            Objects.deepEquals(this.parentIndex, other.parentIndex) &&
             Objects.deepEquals(this.contentRating, other.contentRating) &&
             Objects.deepEquals(this.summary, other.summary) &&
             Objects.deepEquals(this.rating, other.rating) &&
@@ -894,6 +1080,11 @@ public class GetMetaDataByRatingKeyMetadata {
             librarySectionTitle,
             librarySectionID,
             librarySectionKey,
+            grandparentTitle,
+            parentTitle,
+            originalTitle,
+            index,
+            parentIndex,
             contentRating,
             summary,
             rating,
@@ -932,6 +1123,11 @@ public class GetMetaDataByRatingKeyMetadata {
                 "librarySectionTitle", librarySectionTitle,
                 "librarySectionID", librarySectionID,
                 "librarySectionKey", librarySectionKey,
+                "grandparentTitle", grandparentTitle,
+                "parentTitle", parentTitle,
+                "originalTitle", originalTitle,
+                "index", index,
+                "parentIndex", parentIndex,
                 "contentRating", contentRating,
                 "summary", summary,
                 "rating", rating,
@@ -977,6 +1173,16 @@ public class GetMetaDataByRatingKeyMetadata {
         private Optional<Integer> librarySectionID = Optional.empty();
  
         private Optional<String> librarySectionKey = Optional.empty();
+ 
+        private Optional<String> grandparentTitle = Optional.empty();
+ 
+        private Optional<String> parentTitle = Optional.empty();
+ 
+        private Optional<String> originalTitle = Optional.empty();
+ 
+        private Optional<Long> index = Optional.empty();
+ 
+        private Optional<Long> parentIndex = Optional.empty();
  
         private Optional<String> contentRating = Optional.empty();
  
@@ -1135,6 +1341,96 @@ public class GetMetaDataByRatingKeyMetadata {
         public Builder librarySectionKey(Optional<String> librarySectionKey) {
             Utils.checkNotNull(librarySectionKey, "librarySectionKey");
             this.librarySectionKey = librarySectionKey;
+            return this;
+        }
+
+        /**
+         * The name of the album artist for the track when audio, and the name of the TV show for the episode when video.
+         */
+        public Builder grandparentTitle(String grandparentTitle) {
+            Utils.checkNotNull(grandparentTitle, "grandparentTitle");
+            this.grandparentTitle = Optional.ofNullable(grandparentTitle);
+            return this;
+        }
+
+        /**
+         * The name of the album artist for the track when audio, and the name of the TV show for the episode when video.
+         */
+        public Builder grandparentTitle(Optional<String> grandparentTitle) {
+            Utils.checkNotNull(grandparentTitle, "grandparentTitle");
+            this.grandparentTitle = grandparentTitle;
+            return this;
+        }
+
+        /**
+         * The name of the album for the track when audio, and the name of the season for the episode when TV show.
+         */
+        public Builder parentTitle(String parentTitle) {
+            Utils.checkNotNull(parentTitle, "parentTitle");
+            this.parentTitle = Optional.ofNullable(parentTitle);
+            return this;
+        }
+
+        /**
+         * The name of the album for the track when audio, and the name of the season for the episode when TV show.
+         */
+        public Builder parentTitle(Optional<String> parentTitle) {
+            Utils.checkNotNull(parentTitle, "parentTitle");
+            this.parentTitle = parentTitle;
+            return this;
+        }
+
+        /**
+         * The orginal untranslated name of the media item when non-english.
+         */
+        public Builder originalTitle(String originalTitle) {
+            Utils.checkNotNull(originalTitle, "originalTitle");
+            this.originalTitle = Optional.ofNullable(originalTitle);
+            return this;
+        }
+
+        /**
+         * The orginal untranslated name of the media item when non-english.
+         */
+        public Builder originalTitle(Optional<String> originalTitle) {
+            Utils.checkNotNull(originalTitle, "originalTitle");
+            this.originalTitle = originalTitle;
+            return this;
+        }
+
+        /**
+         * The index starting from 0 of this media item in the MetaData array.
+         */
+        public Builder index(long index) {
+            Utils.checkNotNull(index, "index");
+            this.index = Optional.ofNullable(index);
+            return this;
+        }
+
+        /**
+         * The index starting from 0 of this media item in the MetaData array.
+         */
+        public Builder index(Optional<Long> index) {
+            Utils.checkNotNull(index, "index");
+            this.index = index;
+            return this;
+        }
+
+        /**
+         * The parent index starting from 0 of this media item in the parent MetaData array.
+         */
+        public Builder parentIndex(long parentIndex) {
+            Utils.checkNotNull(parentIndex, "parentIndex");
+            this.parentIndex = Optional.ofNullable(parentIndex);
+            return this;
+        }
+
+        /**
+         * The parent index starting from 0 of this media item in the parent MetaData array.
+         */
+        public Builder parentIndex(Optional<Long> parentIndex) {
+            Utils.checkNotNull(parentIndex, "parentIndex");
+            this.parentIndex = parentIndex;
             return this;
         }
 
@@ -1437,6 +1733,11 @@ public class GetMetaDataByRatingKeyMetadata {
                 librarySectionTitle,
                 librarySectionID,
                 librarySectionKey,
+                grandparentTitle,
+                parentTitle,
+                originalTitle,
+                index,
+                parentIndex,
                 contentRating,
                 summary,
                 rating,

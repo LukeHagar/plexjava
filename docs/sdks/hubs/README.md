@@ -34,11 +34,6 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         GetGlobalHubsResponse res = sdk.hubs().getGlobalHubs()
@@ -95,11 +90,6 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         GetRecentlyAddedRequest req = GetRecentlyAddedRequest.builder()
@@ -161,17 +151,12 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         GetLibraryHubsResponse res = sdk.hubs().getLibraryHubs()
                 .sectionId(6728.76d)
-                .count(639.24d)
-                .onlyTransient(QueryParamOnlyTransient.ONE)
+                .count(6728.76d)
+                .onlyTransient(QueryParamOnlyTransient.ZERO)
                 .call();
 
         if (res.object().isPresent()) {

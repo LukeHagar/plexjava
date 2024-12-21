@@ -6,6 +6,8 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.String;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * PostUsersSignInDataAuthenticationStatus - String representation of subscriptionActive
@@ -23,5 +25,14 @@ public enum PostUsersSignInDataAuthenticationStatus {
     
     public String value() {
         return value;
+    }
+    
+    public static Optional<PostUsersSignInDataAuthenticationStatus> fromValue(String value) {
+        for (PostUsersSignInDataAuthenticationStatus o: PostUsersSignInDataAuthenticationStatus.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

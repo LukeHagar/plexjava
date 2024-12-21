@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 public enum GetSearchAllLibrariesOptimizedForStreaming {
     Disable(0),
@@ -19,5 +21,14 @@ public enum GetSearchAllLibrariesOptimizedForStreaming {
     
     public int value() {
         return value;
+    }
+    
+    public static Optional<GetSearchAllLibrariesOptimizedForStreaming> fromValue(int value) {
+        for (GetSearchAllLibrariesOptimizedForStreaming o: GetSearchAllLibrariesOptimizedForStreaming.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

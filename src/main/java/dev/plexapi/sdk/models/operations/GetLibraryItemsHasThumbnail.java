@@ -6,6 +6,8 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.String;
+import java.util.Objects;
+import java.util.Optional;
 
 public enum GetLibraryItemsHasThumbnail {
     False("0"),
@@ -20,5 +22,14 @@ public enum GetLibraryItemsHasThumbnail {
     
     public String value() {
         return value;
+    }
+    
+    public static Optional<GetLibraryItemsHasThumbnail> fromValue(String value) {
+        for (GetLibraryItemsHasThumbnail o: GetLibraryItemsHasThumbnail.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

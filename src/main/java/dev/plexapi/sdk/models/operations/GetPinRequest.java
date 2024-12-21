@@ -33,7 +33,7 @@ public class GetPinRequest {
      * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Client-Identifier")
-    private Optional<String> clientID;
+    private String clientID;
 
     /**
      * The name of the client application. (Plex Web, Plex Media Server, etc.)
@@ -62,7 +62,7 @@ public class GetPinRequest {
     @JsonCreator
     public GetPinRequest(
             Optional<Boolean> strong,
-            Optional<String> clientID,
+            String clientID,
             Optional<String> clientName,
             Optional<String> deviceNickname,
             Optional<String> clientVersion,
@@ -81,8 +81,9 @@ public class GetPinRequest {
         this.platform = platform;
     }
     
-    public GetPinRequest() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    public GetPinRequest(
+            String clientID) {
+        this(Optional.empty(), clientID, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -100,7 +101,7 @@ public class GetPinRequest {
      * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
      */
     @JsonIgnore
-    public Optional<String> clientID() {
+    public String clientID() {
         return clientID;
     }
 
@@ -168,15 +169,6 @@ public class GetPinRequest {
      * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
      */
     public GetPinRequest withClientID(String clientID) {
-        Utils.checkNotNull(clientID, "clientID");
-        this.clientID = Optional.ofNullable(clientID);
-        return this;
-    }
-
-    /**
-     * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
-     */
-    public GetPinRequest withClientID(Optional<String> clientID) {
         Utils.checkNotNull(clientID, "clientID");
         this.clientID = clientID;
         return this;
@@ -298,7 +290,7 @@ public class GetPinRequest {
  
         private Optional<Boolean> strong;
  
-        private Optional<String> clientID = Optional.empty();
+        private String clientID;
  
         private Optional<String> clientName = Optional.empty();
  
@@ -340,15 +332,6 @@ public class GetPinRequest {
          * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
          */
         public Builder clientID(String clientID) {
-            Utils.checkNotNull(clientID, "clientID");
-            this.clientID = Optional.ofNullable(clientID);
-            return this;
-        }
-
-        /**
-         * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
-         */
-        public Builder clientID(Optional<String> clientID) {
             Utils.checkNotNull(clientID, "clientID");
             this.clientID = clientID;
             return this;

@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Upscale - allow images to be resized beyond native dimensions.
@@ -22,5 +24,14 @@ public enum Upscale {
     
     public long value() {
         return value;
+    }
+    
+    public static Optional<Upscale> fromValue(long value) {
+        for (Upscale o: Upscale.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

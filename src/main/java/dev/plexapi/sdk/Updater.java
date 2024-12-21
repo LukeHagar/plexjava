@@ -82,10 +82,10 @@ public class Updater implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -93,7 +93,7 @@ public class Updater implements
                   new BeforeRequestContextImpl(
                       "getUpdateStatus", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -104,7 +104,7 @@ public class Updater implements
                         new AfterErrorContextImpl(
                             "getUpdateStatus",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -113,7 +113,7 @@ public class Updater implements
                         new AfterSuccessContextImpl(
                             "getUpdateStatus",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -122,7 +122,7 @@ public class Updater implements
                         new AfterErrorContextImpl(
                             "getUpdateStatus",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -251,11 +251,11 @@ public class Updater implements
         _req.addQueryParams(Utils.getQueryParams(
                 CheckForUpdatesRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -263,7 +263,7 @@ public class Updater implements
                   new BeforeRequestContextImpl(
                       "checkForUpdates", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -274,7 +274,7 @@ public class Updater implements
                         new AfterErrorContextImpl(
                             "checkForUpdates",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -283,7 +283,7 @@ public class Updater implements
                         new AfterSuccessContextImpl(
                             "checkForUpdates",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -292,7 +292,7 @@ public class Updater implements
                         new AfterErrorContextImpl(
                             "checkForUpdates",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -416,11 +416,11 @@ public class Updater implements
         _req.addQueryParams(Utils.getQueryParams(
                 ApplyUpdatesRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -428,7 +428,7 @@ public class Updater implements
                   new BeforeRequestContextImpl(
                       "applyUpdates", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -439,7 +439,7 @@ public class Updater implements
                         new AfterErrorContextImpl(
                             "applyUpdates",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -448,7 +448,7 @@ public class Updater implements
                         new AfterSuccessContextImpl(
                             "applyUpdates",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -457,7 +457,7 @@ public class Updater implements
                         new AfterErrorContextImpl(
                             "applyUpdates",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }

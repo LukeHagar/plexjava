@@ -92,7 +92,7 @@ public class Watchlist implements
                 GetWatchListRequest.class,
                 _baseUrl,
                 "/library/sections/watchlist/{filter}",
-                request, this.sdkConfiguration.globals);
+                request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
@@ -102,12 +102,12 @@ public class Watchlist implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetWatchListRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-
+                null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -115,7 +115,7 @@ public class Watchlist implements
                   new BeforeRequestContextImpl(
                       "get-watch-list", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -126,7 +126,7 @@ public class Watchlist implements
                         new AfterErrorContextImpl(
                             "get-watch-list",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -135,7 +135,7 @@ public class Watchlist implements
                         new AfterSuccessContextImpl(
                             "get-watch-list",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -144,7 +144,7 @@ public class Watchlist implements
                         new AfterErrorContextImpl(
                             "get-watch-list",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }

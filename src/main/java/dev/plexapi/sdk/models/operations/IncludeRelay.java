@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * IncludeRelay - Include Relay addresses in the results 
@@ -24,5 +26,14 @@ public enum IncludeRelay {
     
     public int value() {
         return value;
+    }
+    
+    public static Optional<IncludeRelay> fromValue(int value) {
+        for (IncludeRelay o: IncludeRelay.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

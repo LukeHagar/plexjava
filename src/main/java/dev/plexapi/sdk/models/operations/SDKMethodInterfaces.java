@@ -170,7 +170,7 @@ public class SDKMethodInterfaces {
             Optional<? extends IncludeHttps> includeHttps,
             Optional<? extends IncludeRelay> includeRelay,
             Optional<? extends IncludeIPv6> includeIPv6,
-            Optional<String> clientID,
+            String clientID,
             Optional<String> serverURL) throws Exception;
     }
 

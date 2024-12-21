@@ -44,14 +44,14 @@ public class GetServerResourcesRequest {
      * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
      */
     @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Client-Identifier")
-    private Optional<String> clientID;
+    private String clientID;
 
     @JsonCreator
     public GetServerResourcesRequest(
             Optional<? extends IncludeHttps> includeHttps,
             Optional<? extends IncludeRelay> includeRelay,
             Optional<? extends IncludeIPv6> includeIPv6,
-            Optional<String> clientID) {
+            String clientID) {
         Utils.checkNotNull(includeHttps, "includeHttps");
         Utils.checkNotNull(includeRelay, "includeRelay");
         Utils.checkNotNull(includeIPv6, "includeIPv6");
@@ -62,8 +62,9 @@ public class GetServerResourcesRequest {
         this.clientID = clientID;
     }
     
-    public GetServerResourcesRequest() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    public GetServerResourcesRequest(
+            String clientID) {
+        this(Optional.empty(), Optional.empty(), Optional.empty(), clientID);
     }
 
     /**
@@ -99,7 +100,7 @@ public class GetServerResourcesRequest {
      * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
      */
     @JsonIgnore
-    public Optional<String> clientID() {
+    public String clientID() {
         return clientID;
     }
 
@@ -170,15 +171,6 @@ public class GetServerResourcesRequest {
      */
     public GetServerResourcesRequest withClientID(String clientID) {
         Utils.checkNotNull(clientID, "clientID");
-        this.clientID = Optional.ofNullable(clientID);
-        return this;
-    }
-
-    /**
-     * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
-     */
-    public GetServerResourcesRequest withClientID(Optional<String> clientID) {
-        Utils.checkNotNull(clientID, "clientID");
         this.clientID = clientID;
         return this;
     }
@@ -225,7 +217,7 @@ public class GetServerResourcesRequest {
  
         private Optional<? extends IncludeIPv6> includeIPv6;
  
-        private Optional<String> clientID = Optional.empty();  
+        private String clientID;  
         
         private Builder() {
           // force use of static builder() method
@@ -293,15 +285,6 @@ public class GetServerResourcesRequest {
          * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
          */
         public Builder clientID(String clientID) {
-            Utils.checkNotNull(clientID, "clientID");
-            this.clientID = Optional.ofNullable(clientID);
-            return this;
-        }
-
-        /**
-         * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
-         */
-        public Builder clientID(Optional<String> clientID) {
             Utils.checkNotNull(clientID, "clientID");
             this.clientID = clientID;
             return this;

@@ -6,6 +6,8 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.String;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Tag - A key representing a specific tag within the section.
@@ -29,7 +31,8 @@ public enum Tag {
     RATING("rating"),
     RESOLUTION("resolution"),
     FIRST_CHARACTER("firstCharacter"),
-    FOLDER("folder");
+    FOLDER("folder"),
+    ALBUMS("albums");
 
     @JsonValue
     private final String value;
@@ -40,5 +43,14 @@ public enum Tag {
     
     public String value() {
         return value;
+    }
+    
+    public static Optional<Tag> fromValue(String value) {
+        for (Tag o: Tag.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * PostUsersSignInDataWatchedIndicator - Whether or not media watched indicators are enabled (little orange dot on media)
@@ -22,5 +24,14 @@ public enum PostUsersSignInDataWatchedIndicator {
     
     public int value() {
         return value;
+    }
+    
+    public static Optional<PostUsersSignInDataWatchedIndicator> fromValue(int value) {
+        for (PostUsersSignInDataWatchedIndicator o: PostUsersSignInDataWatchedIndicator.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

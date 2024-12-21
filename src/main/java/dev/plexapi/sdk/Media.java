@@ -102,11 +102,11 @@ public class Media implements
         _req.addQueryParams(Utils.getQueryParams(
                 MarkPlayedRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -114,7 +114,7 @@ public class Media implements
                   new BeforeRequestContextImpl(
                       "markPlayed", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -125,7 +125,7 @@ public class Media implements
                         new AfterErrorContextImpl(
                             "markPlayed",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -134,7 +134,7 @@ public class Media implements
                         new AfterSuccessContextImpl(
                             "markPlayed",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -143,7 +143,7 @@ public class Media implements
                         new AfterErrorContextImpl(
                             "markPlayed",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -251,11 +251,11 @@ public class Media implements
         _req.addQueryParams(Utils.getQueryParams(
                 MarkUnplayedRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -263,7 +263,7 @@ public class Media implements
                   new BeforeRequestContextImpl(
                       "markUnplayed", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -274,7 +274,7 @@ public class Media implements
                         new AfterErrorContextImpl(
                             "markUnplayed",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -283,7 +283,7 @@ public class Media implements
                         new AfterSuccessContextImpl(
                             "markUnplayed",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -292,7 +292,7 @@ public class Media implements
                         new AfterErrorContextImpl(
                             "markUnplayed",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -408,11 +408,11 @@ public class Media implements
         _req.addQueryParams(Utils.getQueryParams(
                 UpdatePlayProgressRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -420,7 +420,7 @@ public class Media implements
                   new BeforeRequestContextImpl(
                       "updatePlayProgress", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -431,7 +431,7 @@ public class Media implements
                         new AfterErrorContextImpl(
                             "updatePlayProgress",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -440,7 +440,7 @@ public class Media implements
                         new AfterSuccessContextImpl(
                             "updatePlayProgress",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -449,7 +449,7 @@ public class Media implements
                         new AfterErrorContextImpl(
                             "updatePlayProgress",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -543,7 +543,7 @@ public class Media implements
                 GetBannerImageRequest.class,
                 _baseUrl,
                 "/library/metadata/{ratingKey}/banner",
-                request, this.sdkConfiguration.globals);
+                request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "image/jpeg")
@@ -553,12 +553,12 @@ public class Media implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetBannerImageRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-
+                null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -566,7 +566,7 @@ public class Media implements
                   new BeforeRequestContextImpl(
                       "get-banner-image", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -577,7 +577,7 @@ public class Media implements
                         new AfterErrorContextImpl(
                             "get-banner-image",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -586,7 +586,7 @@ public class Media implements
                         new AfterSuccessContextImpl(
                             "get-banner-image",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -595,7 +595,7 @@ public class Media implements
                         new AfterErrorContextImpl(
                             "get-banner-image",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -700,7 +700,7 @@ public class Media implements
                 GetThumbImageRequest.class,
                 _baseUrl,
                 "/library/metadata/{ratingKey}/thumb",
-                request, this.sdkConfiguration.globals);
+                request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "image/jpeg")
@@ -710,12 +710,12 @@ public class Media implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetThumbImageRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
-
+                null));
+        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -723,7 +723,7 @@ public class Media implements
                   new BeforeRequestContextImpl(
                       "get-thumb-image", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -734,7 +734,7 @@ public class Media implements
                         new AfterErrorContextImpl(
                             "get-thumb-image",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -743,7 +743,7 @@ public class Media implements
                         new AfterSuccessContextImpl(
                             "get-thumb-image",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -752,7 +752,7 @@ public class Media implements
                         new AfterErrorContextImpl(
                             "get-thumb-image",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }

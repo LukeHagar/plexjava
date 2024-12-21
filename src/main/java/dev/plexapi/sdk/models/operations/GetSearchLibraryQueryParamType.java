@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * GetSearchLibraryQueryParamType - The type of media to retrieve.
@@ -20,7 +22,9 @@ public enum GetSearchLibraryQueryParamType {
     TvShow(2L),
     Season(3L),
     Episode(4L),
-    Audio(8L);
+    Audio(8L),
+    Album(9L),
+    Track(10L);
 
     @JsonValue
     private final long value;
@@ -31,5 +35,14 @@ public enum GetSearchLibraryQueryParamType {
     
     public long value() {
         return value;
+    }
+    
+    public static Optional<GetSearchLibraryQueryParamType> fromValue(long value) {
+        for (GetSearchLibraryQueryParamType o: GetSearchLibraryQueryParamType.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

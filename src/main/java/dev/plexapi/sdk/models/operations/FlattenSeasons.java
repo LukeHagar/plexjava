@@ -6,6 +6,8 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.String;
+import java.util.Objects;
+import java.util.Optional;
 
 public enum FlattenSeasons {
     False("0"),
@@ -20,5 +22,14 @@ public enum FlattenSeasons {
     
     public String value() {
         return value;
+    }
+    
+    public static Optional<FlattenSeasons> fromValue(String value) {
+        for (FlattenSeasons o: FlattenSeasons.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

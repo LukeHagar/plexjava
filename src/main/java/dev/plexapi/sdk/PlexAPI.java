@@ -5,7 +5,6 @@
 package dev.plexapi.sdk;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import dev.plexapi.sdk.models.operations.SDKMethodInterfaces.*;
 import dev.plexapi.sdk.utils.HTTPClient;
 import dev.plexapi.sdk.utils.RetryConfig;
 import dev.plexapi.sdk.utils.SpeakeasyHTTPClient;
@@ -13,6 +12,7 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.String;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 /**
  * Plex-API: An Open API Spec for interacting with Plex.tv and Plex Media Server
@@ -458,89 +458,16 @@ public class PlexAPI {
             return this;
         }
         
-        /**
-         * Allows setting the clientID parameter for all supported operations.
-         *
-         * @param clientID The value to set.
-         * @return The builder instance.
-         */
-        public Builder clientID(String clientID) {
-            if (!this.sdkConfiguration.globals.get("parameters").containsKey("header")) {
-                this.sdkConfiguration.globals.get("parameters").put("header", new java.util.HashMap<>());
-            }
-
-            this.sdkConfiguration.globals.get("parameters").get("header").put("clientID", clientID);
-
-            return this;
+        // Visible for testing, may be accessed via reflection in tests
+        Builder _hooks(dev.plexapi.sdk.utils.Hooks hooks) {
+            sdkConfiguration.setHooks(hooks);  
+            return this;  
         }
         
-        /**
-         * Allows setting the clientName parameter for all supported operations.
-         *
-         * @param clientName The value to set.
-         * @return The builder instance.
-         */
-        public Builder clientName(String clientName) {
-            if (!this.sdkConfiguration.globals.get("parameters").containsKey("header")) {
-                this.sdkConfiguration.globals.get("parameters").put("header", new java.util.HashMap<>());
-            }
-
-            this.sdkConfiguration.globals.get("parameters").get("header").put("clientName", clientName);
-
-            return this;
-        }
-        
-        /**
-         * Allows setting the clientVersion parameter for all supported operations.
-         *
-         * @param clientVersion The value to set.
-         * @return The builder instance.
-         */
-        public Builder clientVersion(String clientVersion) {
-            if (!this.sdkConfiguration.globals.get("parameters").containsKey("header")) {
-                this.sdkConfiguration.globals.get("parameters").put("header", new java.util.HashMap<>());
-            }
-
-            this.sdkConfiguration.globals.get("parameters").get("header").put("clientVersion", clientVersion);
-
-            return this;
-        }
-        
-        /**
-         * Allows setting the platform parameter for all supported operations.
-         *
-         * @param platform The value to set.
-         * @return The builder instance.
-         */
-        public Builder platform(String platform) {
-            if (!this.sdkConfiguration.globals.get("parameters").containsKey("header")) {
-                this.sdkConfiguration.globals.get("parameters").put("header", new java.util.HashMap<>());
-            }
-
-            this.sdkConfiguration.globals.get("parameters").get("header").put("platform", platform);
-
-            return this;
-        }
-        
-        /**
-         * Allows setting the deviceNickname parameter for all supported operations.
-         *
-         * @param deviceNickname The value to set.
-         * @return The builder instance.
-         */
-        public Builder deviceNickname(String deviceNickname) {
-            if (!this.sdkConfiguration.globals.get("parameters").containsKey("header")) {
-                this.sdkConfiguration.globals.get("parameters").put("header", new java.util.HashMap<>());
-            }
-
-            this.sdkConfiguration.globals.get("parameters").get("header").put("deviceNickname", deviceNickname);
-
-            return this;
-        }
-        
-        // Visible for testing, will be accessed via reflection
-        void _hooks(dev.plexapi.sdk.utils.Hooks hooks) {
-            sdkConfiguration.setHooks(hooks);    
+        // Visible for testing, may be accessed via reflection in tests
+        Builder _hooks(Consumer<? super dev.plexapi.sdk.utils.Hooks> consumer) {
+            consumer.accept(sdkConfiguration.hooks());
+            return this;    
         }
         
         /**

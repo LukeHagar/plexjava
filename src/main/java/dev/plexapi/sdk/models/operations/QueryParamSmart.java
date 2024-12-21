@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * QueryParamSmart - type of playlists to return (default is all).
@@ -22,5 +24,14 @@ public enum QueryParamSmart {
     
     public long value() {
         return value;
+    }
+    
+    public static Optional<QueryParamSmart> fromValue(long value) {
+        for (QueryParamSmart o: QueryParamSmart.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

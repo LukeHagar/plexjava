@@ -139,11 +139,11 @@ public class Playlists implements
         _req.addQueryParams(Utils.getQueryParams(
                 CreatePlaylistRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -151,7 +151,7 @@ public class Playlists implements
                   new BeforeRequestContextImpl(
                       "createPlaylist", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -162,7 +162,7 @@ public class Playlists implements
                         new AfterErrorContextImpl(
                             "createPlaylist",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -171,7 +171,7 @@ public class Playlists implements
                         new AfterSuccessContextImpl(
                             "createPlaylist",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -180,7 +180,7 @@ public class Playlists implements
                         new AfterErrorContextImpl(
                             "createPlaylist",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -312,11 +312,11 @@ public class Playlists implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetPlaylistsRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -324,7 +324,7 @@ public class Playlists implements
                   new BeforeRequestContextImpl(
                       "getPlaylists", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -335,7 +335,7 @@ public class Playlists implements
                         new AfterErrorContextImpl(
                             "getPlaylists",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -344,7 +344,7 @@ public class Playlists implements
                         new AfterSuccessContextImpl(
                             "getPlaylists",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -353,7 +353,7 @@ public class Playlists implements
                         new AfterErrorContextImpl(
                             "getPlaylists",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -468,16 +468,16 @@ public class Playlists implements
                 GetPlaylistRequest.class,
                 _baseUrl,
                 "/playlists/{playlistID}",
-                request, this.sdkConfiguration.globals);
+                request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -485,7 +485,7 @@ public class Playlists implements
                   new BeforeRequestContextImpl(
                       "getPlaylist", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -496,7 +496,7 @@ public class Playlists implements
                         new AfterErrorContextImpl(
                             "getPlaylist",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -505,7 +505,7 @@ public class Playlists implements
                         new AfterSuccessContextImpl(
                             "getPlaylist",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -514,7 +514,7 @@ public class Playlists implements
                         new AfterErrorContextImpl(
                             "getPlaylist",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -627,16 +627,16 @@ public class Playlists implements
                 DeletePlaylistRequest.class,
                 _baseUrl,
                 "/playlists/{playlistID}",
-                request, this.sdkConfiguration.globals);
+                request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "DELETE");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -644,7 +644,7 @@ public class Playlists implements
                   new BeforeRequestContextImpl(
                       "deletePlaylist", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -655,7 +655,7 @@ public class Playlists implements
                         new AfterErrorContextImpl(
                             "deletePlaylist",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -664,7 +664,7 @@ public class Playlists implements
                         new AfterSuccessContextImpl(
                             "deletePlaylist",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -673,7 +673,7 @@ public class Playlists implements
                         new AfterErrorContextImpl(
                             "deletePlaylist",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -794,7 +794,7 @@ public class Playlists implements
                 UpdatePlaylistRequest.class,
                 _baseUrl,
                 "/playlists/{playlistID}",
-                request, this.sdkConfiguration.globals);
+                request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "PUT");
         _req.addHeader("Accept", "application/json")
@@ -804,11 +804,11 @@ public class Playlists implements
         _req.addQueryParams(Utils.getQueryParams(
                 UpdatePlaylistRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -816,7 +816,7 @@ public class Playlists implements
                   new BeforeRequestContextImpl(
                       "updatePlaylist", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -827,7 +827,7 @@ public class Playlists implements
                         new AfterErrorContextImpl(
                             "updatePlaylist",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -836,7 +836,7 @@ public class Playlists implements
                         new AfterSuccessContextImpl(
                             "updatePlaylist",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -845,7 +845,7 @@ public class Playlists implements
                         new AfterErrorContextImpl(
                             "updatePlaylist",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -962,7 +962,7 @@ public class Playlists implements
                 GetPlaylistContentsRequest.class,
                 _baseUrl,
                 "/playlists/{playlistID}/items",
-                request, this.sdkConfiguration.globals);
+                request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
@@ -972,11 +972,11 @@ public class Playlists implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetPlaylistContentsRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -984,7 +984,7 @@ public class Playlists implements
                   new BeforeRequestContextImpl(
                       "getPlaylistContents", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -995,7 +995,7 @@ public class Playlists implements
                         new AfterErrorContextImpl(
                             "getPlaylistContents",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -1004,7 +1004,7 @@ public class Playlists implements
                         new AfterSuccessContextImpl(
                             "getPlaylistContents",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -1013,7 +1013,7 @@ public class Playlists implements
                         new AfterErrorContextImpl(
                             "getPlaylistContents",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -1126,16 +1126,16 @@ public class Playlists implements
                 ClearPlaylistContentsRequest.class,
                 _baseUrl,
                 "/playlists/{playlistID}/items",
-                request, this.sdkConfiguration.globals);
+                request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "DELETE");
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
-
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1143,7 +1143,7 @@ public class Playlists implements
                   new BeforeRequestContextImpl(
                       "clearPlaylistContents", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -1154,7 +1154,7 @@ public class Playlists implements
                         new AfterErrorContextImpl(
                             "clearPlaylistContents",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -1163,7 +1163,7 @@ public class Playlists implements
                         new AfterSuccessContextImpl(
                             "clearPlaylistContents",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -1172,7 +1172,7 @@ public class Playlists implements
                         new AfterErrorContextImpl(
                             "clearPlaylistContents",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -1298,7 +1298,7 @@ public class Playlists implements
                 AddPlaylistContentsRequest.class,
                 _baseUrl,
                 "/playlists/{playlistID}/items",
-                request, this.sdkConfiguration.globals);
+                request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "PUT");
         _req.addHeader("Accept", "application/json")
@@ -1308,11 +1308,11 @@ public class Playlists implements
         _req.addQueryParams(Utils.getQueryParams(
                 AddPlaylistContentsRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1320,7 +1320,7 @@ public class Playlists implements
                   new BeforeRequestContextImpl(
                       "addPlaylistContents", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -1331,7 +1331,7 @@ public class Playlists implements
                         new AfterErrorContextImpl(
                             "addPlaylistContents",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -1340,7 +1340,7 @@ public class Playlists implements
                         new AfterSuccessContextImpl(
                             "addPlaylistContents",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -1349,7 +1349,7 @@ public class Playlists implements
                         new AfterErrorContextImpl(
                             "addPlaylistContents",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -1486,11 +1486,11 @@ public class Playlists implements
         _req.addQueryParams(Utils.getQueryParams(
                 UploadPlaylistRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -1498,7 +1498,7 @@ public class Playlists implements
                   new BeforeRequestContextImpl(
                       "uploadPlaylist", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -1509,7 +1509,7 @@ public class Playlists implements
                         new AfterErrorContextImpl(
                             "uploadPlaylist",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -1518,7 +1518,7 @@ public class Playlists implements
                         new AfterSuccessContextImpl(
                             "uploadPlaylist",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -1527,7 +1527,7 @@ public class Playlists implements
                         new AfterErrorContextImpl(
                             "uploadPlaylist",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }

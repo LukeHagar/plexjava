@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * IncludeIPv6 - Include IPv6 entries in the results
@@ -22,5 +24,14 @@ public enum IncludeIPv6 {
     
     public int value() {
         return value;
+    }
+    
+    public static Optional<IncludeIPv6> fromValue(int value) {
+        for (IncludeIPv6 o: IncludeIPv6.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

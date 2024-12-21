@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Skip - Indicate that the latest version should be marked as skipped. The [Release] entry for this version will have the `state` set to `skipped`.
@@ -22,5 +24,14 @@ public enum Skip {
     
     public long value() {
         return value;
+    }
+    
+    public static Optional<Skip> fromValue(long value) {
+        for (Skip o: Skip.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

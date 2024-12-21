@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Force - Force the refresh even if the library is already being refreshed.
@@ -22,5 +24,14 @@ public enum Force {
     
     public long value() {
         return value;
+    }
+    
+    public static Optional<Force> fromValue(long value) {
+        for (Force o: Force.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

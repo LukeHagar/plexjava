@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Level - An integer log level to write to the PMS log with.  
@@ -31,5 +33,14 @@ public enum Level {
     
     public long value() {
         return value;
+    }
+    
+    public static Optional<Level> fromValue(long value) {
+        for (Level o: Level.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

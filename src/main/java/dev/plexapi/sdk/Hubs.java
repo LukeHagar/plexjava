@@ -107,11 +107,11 @@ public class Hubs implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetGlobalHubsRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -119,7 +119,7 @@ public class Hubs implements
                   new BeforeRequestContextImpl(
                       "getGlobalHubs", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -130,7 +130,7 @@ public class Hubs implements
                         new AfterErrorContextImpl(
                             "getGlobalHubs",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -139,7 +139,7 @@ public class Hubs implements
                         new AfterSuccessContextImpl(
                             "getGlobalHubs",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -148,7 +148,7 @@ public class Hubs implements
                         new AfterErrorContextImpl(
                             "getGlobalHubs",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -263,11 +263,11 @@ public class Hubs implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetRecentlyAddedRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -275,7 +275,7 @@ public class Hubs implements
                   new BeforeRequestContextImpl(
                       "get-recently-added", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -286,7 +286,7 @@ public class Hubs implements
                         new AfterErrorContextImpl(
                             "get-recently-added",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -295,7 +295,7 @@ public class Hubs implements
                         new AfterSuccessContextImpl(
                             "get-recently-added",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -304,7 +304,7 @@ public class Hubs implements
                         new AfterErrorContextImpl(
                             "get-recently-added",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }
@@ -404,7 +404,7 @@ public class Hubs implements
                 GetLibraryHubsRequest.class,
                 _baseUrl,
                 "/hubs/sections/{sectionId}",
-                request, this.sdkConfiguration.globals);
+                request, null);
         
         HTTPRequest _req = new HTTPRequest(_url, "GET");
         _req.addHeader("Accept", "application/json")
@@ -414,11 +414,11 @@ public class Hubs implements
         _req.addQueryParams(Utils.getQueryParams(
                 GetLibraryHubsRequest.class,
                 request, 
-                this.sdkConfiguration.globals));
-
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
                 this.sdkConfiguration.securitySource.getSecurity());
-
         HTTPClient _client = this.sdkConfiguration.defaultClient;
         HttpRequest _r = 
             sdkConfiguration.hooks()
@@ -426,7 +426,7 @@ public class Hubs implements
                   new BeforeRequestContextImpl(
                       "getLibraryHubs", 
                       Optional.of(List.of()), 
-                      sdkConfiguration.securitySource()),
+                      _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
@@ -437,7 +437,7 @@ public class Hubs implements
                         new AfterErrorContextImpl(
                             "getLibraryHubs",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                         Optional.of(_httpRes),
                         Optional.empty());
             } else {
@@ -446,7 +446,7 @@ public class Hubs implements
                         new AfterSuccessContextImpl(
                             "getLibraryHubs",
                             Optional.of(List.of()), 
-                            sdkConfiguration.securitySource()),
+                            _hookSecuritySource),
                          _httpRes);
             }
         } catch (Exception _e) {
@@ -455,7 +455,7 @@ public class Hubs implements
                         new AfterErrorContextImpl(
                             "getLibraryHubs",
                             Optional.of(List.of()),
-                            sdkConfiguration.securitySource()), 
+                            _hookSecuritySource), 
                         Optional.empty(),
                         Optional.of(_e));
         }

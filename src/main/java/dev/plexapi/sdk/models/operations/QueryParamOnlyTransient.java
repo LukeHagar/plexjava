@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * QueryParamOnlyTransient - Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added).
@@ -22,5 +24,14 @@ public enum QueryParamOnlyTransient {
     
     public long value() {
         return value;
+    }
+    
+    public static Optional<QueryParamOnlyTransient> fromValue(long value) {
+        for (QueryParamOnlyTransient o: QueryParamOnlyTransient.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

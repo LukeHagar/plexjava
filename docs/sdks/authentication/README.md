@@ -37,11 +37,6 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         GetTransientTokenResponse res = sdk.authentication().getTransientToken()
@@ -96,15 +91,10 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         GetSourceConnectionInformationResponse res = sdk.authentication().getSourceConnectionInformation()
-                .source("server://client-identifier")
+                .source("provider://provider-identifier")
                 .call();
 
         // handle response
@@ -151,11 +141,6 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         GetTokenDetailsResponse res = sdk.authentication().getTokenDetails()
@@ -208,14 +193,14 @@ public class Application {
     public static void main(String[] args) throws PostUsersSignInDataBadRequest, PostUsersSignInDataUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                .clientName("Plex for Roku")
-                .clientVersion("2.4.1")
-                .platform("Roku")
-                .deviceNickname("Roku 3")
             .build();
 
         PostUsersSignInDataRequest req = PostUsersSignInDataRequest.builder()
+                .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .clientName("Plex for Roku")
+                .deviceNickname("Roku 3")
+                .clientVersion("2.4.1")
+                .platform("Roku")
                 .requestBody(PostUsersSignInDataRequestBody.builder()
                     .login("username@email.com")
                     .password("password123")

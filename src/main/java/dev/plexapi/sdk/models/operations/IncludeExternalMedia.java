@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * IncludeExternalMedia - include external media in the results
@@ -23,5 +25,14 @@ public enum IncludeExternalMedia {
     
     public long value() {
         return value;
+    }
+    
+    public static Optional<IncludeExternalMedia> fromValue(long value) {
+        for (IncludeExternalMedia o: IncludeExternalMedia.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }

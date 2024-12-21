@@ -5,6 +5,8 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * QueryParamType - The type of media to retrieve.
@@ -20,7 +22,9 @@ public enum QueryParamType {
     TvShow(2L),
     Season(3L),
     Episode(4L),
-    Audio(8L);
+    Audio(8L),
+    Album(9L),
+    Track(10L);
 
     @JsonValue
     private final long value;
@@ -31,5 +35,14 @@ public enum QueryParamType {
     
     public long value() {
         return value;
+    }
+    
+    public static Optional<QueryParamType> fromValue(long value) {
+        for (QueryParamType o: QueryParamType.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
+        }
+        return Optional.empty();
     }
 }
