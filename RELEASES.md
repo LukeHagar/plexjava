@@ -189,3 +189,13 @@ Based on:
 - [java v0.11.0] .
 ### Releases
 - [Maven Central v0.11.0] https://central.sonatype.com/artifact/dev.plexapi/plexapi/0.11.0 - .
+
+## 2024-12-22 00:28:49
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.459.2 (2.483.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [java v0.11.1] .
+### Releases
+- [Maven Central v0.11.1] https://central.sonatype.com/artifact/dev.plexapi/plexapi/0.11.1 - .

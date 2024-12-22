@@ -86,6 +86,13 @@ public class GetSessionsMetadata {
     @JsonProperty("musicAnalysisVersion")
     private Optional<String> musicAnalysisVersion;
 
+    /**
+     * The original untranslated name of the media item when non-english, or the track artist if an audio Item has an album artist
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("originalTitle")
+    private Optional<String> originalTitle;
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentGuid")
     private Optional<String> parentGuid;
@@ -188,6 +195,7 @@ public class GetSessionsMetadata {
             @JsonProperty("librarySectionKey") Optional<String> librarySectionKey,
             @JsonProperty("librarySectionTitle") Optional<String> librarySectionTitle,
             @JsonProperty("musicAnalysisVersion") Optional<String> musicAnalysisVersion,
+            @JsonProperty("originalTitle") Optional<String> originalTitle,
             @JsonProperty("parentGuid") Optional<String> parentGuid,
             @JsonProperty("parentIndex") Optional<Integer> parentIndex,
             @JsonProperty("parentKey") Optional<String> parentKey,
@@ -225,6 +233,7 @@ public class GetSessionsMetadata {
         Utils.checkNotNull(librarySectionKey, "librarySectionKey");
         Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
         Utils.checkNotNull(musicAnalysisVersion, "musicAnalysisVersion");
+        Utils.checkNotNull(originalTitle, "originalTitle");
         Utils.checkNotNull(parentGuid, "parentGuid");
         Utils.checkNotNull(parentIndex, "parentIndex");
         Utils.checkNotNull(parentKey, "parentKey");
@@ -262,6 +271,7 @@ public class GetSessionsMetadata {
         this.librarySectionKey = librarySectionKey;
         this.librarySectionTitle = librarySectionTitle;
         this.musicAnalysisVersion = musicAnalysisVersion;
+        this.originalTitle = originalTitle;
         this.parentGuid = parentGuid;
         this.parentIndex = parentIndex;
         this.parentKey = parentKey;
@@ -286,7 +296,7 @@ public class GetSessionsMetadata {
     }
     
     public GetSessionsMetadata() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -367,6 +377,14 @@ public class GetSessionsMetadata {
     @JsonIgnore
     public Optional<String> musicAnalysisVersion() {
         return musicAnalysisVersion;
+    }
+
+    /**
+     * The original untranslated name of the media item when non-english, or the track artist if an audio Item has an album artist
+     */
+    @JsonIgnore
+    public Optional<String> originalTitle() {
+        return originalTitle;
     }
 
     @JsonIgnore
@@ -674,6 +692,24 @@ public class GetSessionsMetadata {
         return this;
     }
 
+    /**
+     * The original untranslated name of the media item when non-english, or the track artist if an audio Item has an album artist
+     */
+    public GetSessionsMetadata withOriginalTitle(String originalTitle) {
+        Utils.checkNotNull(originalTitle, "originalTitle");
+        this.originalTitle = Optional.ofNullable(originalTitle);
+        return this;
+    }
+
+    /**
+     * The original untranslated name of the media item when non-english, or the track artist if an audio Item has an album artist
+     */
+    public GetSessionsMetadata withOriginalTitle(Optional<String> originalTitle) {
+        Utils.checkNotNull(originalTitle, "originalTitle");
+        this.originalTitle = originalTitle;
+        return this;
+    }
+
     public GetSessionsMetadata withParentGuid(String parentGuid) {
         Utils.checkNotNull(parentGuid, "parentGuid");
         this.parentGuid = Optional.ofNullable(parentGuid);
@@ -952,6 +988,7 @@ public class GetSessionsMetadata {
             Objects.deepEquals(this.librarySectionKey, other.librarySectionKey) &&
             Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
             Objects.deepEquals(this.musicAnalysisVersion, other.musicAnalysisVersion) &&
+            Objects.deepEquals(this.originalTitle, other.originalTitle) &&
             Objects.deepEquals(this.parentGuid, other.parentGuid) &&
             Objects.deepEquals(this.parentIndex, other.parentIndex) &&
             Objects.deepEquals(this.parentKey, other.parentKey) &&
@@ -994,6 +1031,7 @@ public class GetSessionsMetadata {
             librarySectionKey,
             librarySectionTitle,
             musicAnalysisVersion,
+            originalTitle,
             parentGuid,
             parentIndex,
             parentKey,
@@ -1036,6 +1074,7 @@ public class GetSessionsMetadata {
                 "librarySectionKey", librarySectionKey,
                 "librarySectionTitle", librarySectionTitle,
                 "musicAnalysisVersion", musicAnalysisVersion,
+                "originalTitle", originalTitle,
                 "parentGuid", parentGuid,
                 "parentIndex", parentIndex,
                 "parentKey", parentKey,
@@ -1092,6 +1131,8 @@ public class GetSessionsMetadata {
         private Optional<String> librarySectionTitle = Optional.empty();
  
         private Optional<String> musicAnalysisVersion = Optional.empty();
+ 
+        private Optional<String> originalTitle = Optional.empty();
  
         private Optional<String> parentGuid = Optional.empty();
  
@@ -1328,6 +1369,24 @@ public class GetSessionsMetadata {
         public Builder musicAnalysisVersion(Optional<String> musicAnalysisVersion) {
             Utils.checkNotNull(musicAnalysisVersion, "musicAnalysisVersion");
             this.musicAnalysisVersion = musicAnalysisVersion;
+            return this;
+        }
+
+        /**
+         * The original untranslated name of the media item when non-english, or the track artist if an audio Item has an album artist
+         */
+        public Builder originalTitle(String originalTitle) {
+            Utils.checkNotNull(originalTitle, "originalTitle");
+            this.originalTitle = Optional.ofNullable(originalTitle);
+            return this;
+        }
+
+        /**
+         * The original untranslated name of the media item when non-english, or the track artist if an audio Item has an album artist
+         */
+        public Builder originalTitle(Optional<String> originalTitle) {
+            Utils.checkNotNull(originalTitle, "originalTitle");
+            this.originalTitle = originalTitle;
             return this;
         }
 
@@ -1601,6 +1660,7 @@ public class GetSessionsMetadata {
                 librarySectionKey,
                 librarySectionTitle,
                 musicAnalysisVersion,
+                originalTitle,
                 parentGuid,
                 parentIndex,
                 parentKey,
