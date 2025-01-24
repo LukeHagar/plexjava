@@ -299,6 +299,7 @@ public class Application {
 
         GetPinRequest req = GetPinRequest.builder()
                 .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                .strong(false)
                 .clientName("Plex for Roku")
                 .deviceNickname("Roku 3")
                 .clientVersion("2.4.1")

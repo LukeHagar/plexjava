@@ -9,9 +9,13 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * GetLibraryItemsFlattenSeasons - Setting that indicates if seasons are set to hidden for the show. (-1 = Library default, 0 = Hide, 1 = Show).
+ */
 public enum GetLibraryItemsFlattenSeasons {
-    False("0"),
-    True("1");
+    LibraryDefault("-1"),
+    Hide("0"),
+    Show("1");
 
     @JsonValue
     private final String value;

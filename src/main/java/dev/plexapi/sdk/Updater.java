@@ -186,7 +186,15 @@ public class Updater implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
             // no content 
             throw new SDKError(
                     _httpRes, 
@@ -345,7 +353,15 @@ public class Updater implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
             // no content 
             throw new SDKError(
                     _httpRes, 
@@ -510,7 +526,15 @@ public class Updater implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX", "500", "5XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "500", "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
             // no content 
             throw new SDKError(
                     _httpRes, 

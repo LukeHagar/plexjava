@@ -54,7 +54,7 @@ public class Application {
                 .title("<value>")
                 .type(CreatePlaylistQueryParamType.PHOTO)
                 .smart(Smart.ONE)
-                .uri("https://inborn-brochure.biz")
+                .uri("https://hoarse-testing.info/")
                 .build();
 
         CreatePlaylistResponse res = sdk.playlists().createPlaylist()

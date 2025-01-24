@@ -63,7 +63,7 @@ tasks.withType(Javadoc) {
 }
 
 group = "dev.plexapi"
-version = "0.11.1"
+version = "0.11.2"
 
 sourcesJar {
     archiveBaseName = "plexapi"
@@ -101,7 +101,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'dev.plexapi'
             artifactId = 'plexapi'
-            version = '0.11.1'
+            version = '0.11.2'
 
             from components.java
 
@@ -144,6 +144,8 @@ if (!project.hasProperty('skip.signing')) {
     }
 }
 
+
+
 dependencies {
     api 'com.fasterxml.jackson.core:jackson-annotations:2.18.2'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
@@ -153,7 +155,5 @@ dependencies {
     implementation 'org.apache.httpcomponents.client5:httpclient5:5.4.1'
     implementation 'commons-io:commons-io:2.18.0'
 }
-
-
 
 apply from: 'build-extras.gradle'

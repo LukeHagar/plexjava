@@ -10,17 +10,16 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * GetSearchAllLibrariesFlattenSeasons - Setting that indicates if seasons are set to hidden for the show. (-1 = Library default, 0 = Hide, 1 = Show).
+ * GetSearchAllLibrariesEnableCreditsMarkerGeneration - Setting that indicates if credits markers detection is enabled. (-1 = Library default, 0 = Disabled).
  */
-public enum GetSearchAllLibrariesFlattenSeasons {
+public enum GetSearchAllLibrariesEnableCreditsMarkerGeneration {
     LibraryDefault("-1"),
-    Hide("0"),
-    Show("1");
+    Disabled("0");
 
     @JsonValue
     private final String value;
 
-    private GetSearchAllLibrariesFlattenSeasons(String value) {
+    private GetSearchAllLibrariesEnableCreditsMarkerGeneration(String value) {
         this.value = value;
     }
     
@@ -28,8 +27,8 @@ public enum GetSearchAllLibrariesFlattenSeasons {
         return value;
     }
     
-    public static Optional<GetSearchAllLibrariesFlattenSeasons> fromValue(String value) {
-        for (GetSearchAllLibrariesFlattenSeasons o: GetSearchAllLibrariesFlattenSeasons.values()) {
+    public static Optional<GetSearchAllLibrariesEnableCreditsMarkerGeneration> fromValue(String value) {
+        for (GetSearchAllLibrariesEnableCreditsMarkerGeneration o: GetSearchAllLibrariesEnableCreditsMarkerGeneration.values()) {
             if (Objects.deepEquals(o.value, value)) {
                 return Optional.of(o);
             }

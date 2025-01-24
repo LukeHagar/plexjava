@@ -10,17 +10,17 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * GetSearchAllLibrariesFlattenSeasons - Setting that indicates if seasons are set to hidden for the show. (-1 = Library default, 0 = Hide, 1 = Show).
+ * GetSearchAllLibrariesEpisodeSort - Setting that indicates how episodes are sorted for the show. (-1 = Library default, 0 = Oldest first, 1 = Newest first).
  */
-public enum GetSearchAllLibrariesFlattenSeasons {
+public enum GetSearchAllLibrariesEpisodeSort {
     LibraryDefault("-1"),
-    Hide("0"),
-    Show("1");
+    OldestFirst("0"),
+    NewestFirst("1");
 
     @JsonValue
     private final String value;
 
-    private GetSearchAllLibrariesFlattenSeasons(String value) {
+    private GetSearchAllLibrariesEpisodeSort(String value) {
         this.value = value;
     }
     
@@ -28,8 +28,8 @@ public enum GetSearchAllLibrariesFlattenSeasons {
         return value;
     }
     
-    public static Optional<GetSearchAllLibrariesFlattenSeasons> fromValue(String value) {
-        for (GetSearchAllLibrariesFlattenSeasons o: GetSearchAllLibrariesFlattenSeasons.values()) {
+    public static Optional<GetSearchAllLibrariesEpisodeSort> fromValue(String value) {
+        for (GetSearchAllLibrariesEpisodeSort o: GetSearchAllLibrariesEpisodeSort.values()) {
             if (Objects.deepEquals(o.value, value)) {
                 return Optional.of(o);
             }

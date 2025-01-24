@@ -10,8 +10,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
-import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Double;
@@ -103,9 +101,26 @@ public class GetLibraryItemsMetadata {
     @JsonProperty("tagline")
     private Optional<String> tagline;
 
+    /**
+     * Setting that indicates if seasons are set to hidden for the show. (-1 = Library default, 0 = Hide, 1 = Show).
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("flattenSeasons")
     private Optional<? extends GetLibraryItemsFlattenSeasons> flattenSeasons;
+
+    /**
+     * Setting that indicates how episodes are sorted for the show. (-1 = Library default, 0 = Oldest first, 1 = Newest first).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("episodeSort")
+    private Optional<? extends GetLibraryItemsEpisodeSort> episodeSort;
+
+    /**
+     * Setting that indicates if credits markers detection is enabled. (-1 = Library default, 0 = Disabled).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("enableCreditsMarkerGeneration")
+    private Optional<? extends GetLibraryItemsEnableCreditsMarkerGeneration> enableCreditsMarkerGeneration;
 
     /**
      * Setting that indicates the episode ordering for the show
@@ -374,6 +389,8 @@ public class GetLibraryItemsMetadata {
             @JsonProperty("seasonCount") Optional<Integer> seasonCount,
             @JsonProperty("tagline") Optional<String> tagline,
             @JsonProperty("flattenSeasons") Optional<? extends GetLibraryItemsFlattenSeasons> flattenSeasons,
+            @JsonProperty("episodeSort") Optional<? extends GetLibraryItemsEpisodeSort> episodeSort,
+            @JsonProperty("enableCreditsMarkerGeneration") Optional<? extends GetLibraryItemsEnableCreditsMarkerGeneration> enableCreditsMarkerGeneration,
             @JsonProperty("showOrdering") Optional<? extends GetLibraryItemsShowOrdering> showOrdering,
             @JsonProperty("thumb") Optional<String> thumb,
             @JsonProperty("art") Optional<String> art,
@@ -448,6 +465,8 @@ public class GetLibraryItemsMetadata {
         Utils.checkNotNull(seasonCount, "seasonCount");
         Utils.checkNotNull(tagline, "tagline");
         Utils.checkNotNull(flattenSeasons, "flattenSeasons");
+        Utils.checkNotNull(episodeSort, "episodeSort");
+        Utils.checkNotNull(enableCreditsMarkerGeneration, "enableCreditsMarkerGeneration");
         Utils.checkNotNull(showOrdering, "showOrdering");
         Utils.checkNotNull(thumb, "thumb");
         Utils.checkNotNull(art, "art");
@@ -522,6 +541,8 @@ public class GetLibraryItemsMetadata {
         this.seasonCount = seasonCount;
         this.tagline = tagline;
         this.flattenSeasons = flattenSeasons;
+        this.episodeSort = episodeSort;
+        this.enableCreditsMarkerGeneration = enableCreditsMarkerGeneration;
         this.showOrdering = showOrdering;
         this.thumb = thumb;
         this.art = art;
@@ -587,7 +608,7 @@ public class GetLibraryItemsMetadata {
             String title,
             String summary,
             long addedAt) {
-        this(ratingKey, key, guid, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), type, title, Optional.empty(), Optional.empty(), summary, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), addedAt, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(ratingKey, key, guid, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), type, title, Optional.empty(), Optional.empty(), summary, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), addedAt, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -689,10 +710,31 @@ public class GetLibraryItemsMetadata {
         return tagline;
     }
 
+    /**
+     * Setting that indicates if seasons are set to hidden for the show. (-1 = Library default, 0 = Hide, 1 = Show).
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<GetLibraryItemsFlattenSeasons> flattenSeasons() {
         return (Optional<GetLibraryItemsFlattenSeasons>) flattenSeasons;
+    }
+
+    /**
+     * Setting that indicates how episodes are sorted for the show. (-1 = Library default, 0 = Oldest first, 1 = Newest first).
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetLibraryItemsEpisodeSort> episodeSort() {
+        return (Optional<GetLibraryItemsEpisodeSort>) episodeSort;
+    }
+
+    /**
+     * Setting that indicates if credits markers detection is enabled. (-1 = Library default, 0 = Disabled).
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetLibraryItemsEnableCreditsMarkerGeneration> enableCreditsMarkerGeneration() {
+        return (Optional<GetLibraryItemsEnableCreditsMarkerGeneration>) enableCreditsMarkerGeneration;
     }
 
     /**
@@ -1203,15 +1245,57 @@ public class GetLibraryItemsMetadata {
         return this;
     }
 
+    /**
+     * Setting that indicates if seasons are set to hidden for the show. (-1 = Library default, 0 = Hide, 1 = Show).
+     */
     public GetLibraryItemsMetadata withFlattenSeasons(GetLibraryItemsFlattenSeasons flattenSeasons) {
         Utils.checkNotNull(flattenSeasons, "flattenSeasons");
         this.flattenSeasons = Optional.ofNullable(flattenSeasons);
         return this;
     }
 
+    /**
+     * Setting that indicates if seasons are set to hidden for the show. (-1 = Library default, 0 = Hide, 1 = Show).
+     */
     public GetLibraryItemsMetadata withFlattenSeasons(Optional<? extends GetLibraryItemsFlattenSeasons> flattenSeasons) {
         Utils.checkNotNull(flattenSeasons, "flattenSeasons");
         this.flattenSeasons = flattenSeasons;
+        return this;
+    }
+
+    /**
+     * Setting that indicates how episodes are sorted for the show. (-1 = Library default, 0 = Oldest first, 1 = Newest first).
+     */
+    public GetLibraryItemsMetadata withEpisodeSort(GetLibraryItemsEpisodeSort episodeSort) {
+        Utils.checkNotNull(episodeSort, "episodeSort");
+        this.episodeSort = Optional.ofNullable(episodeSort);
+        return this;
+    }
+
+    /**
+     * Setting that indicates how episodes are sorted for the show. (-1 = Library default, 0 = Oldest first, 1 = Newest first).
+     */
+    public GetLibraryItemsMetadata withEpisodeSort(Optional<? extends GetLibraryItemsEpisodeSort> episodeSort) {
+        Utils.checkNotNull(episodeSort, "episodeSort");
+        this.episodeSort = episodeSort;
+        return this;
+    }
+
+    /**
+     * Setting that indicates if credits markers detection is enabled. (-1 = Library default, 0 = Disabled).
+     */
+    public GetLibraryItemsMetadata withEnableCreditsMarkerGeneration(GetLibraryItemsEnableCreditsMarkerGeneration enableCreditsMarkerGeneration) {
+        Utils.checkNotNull(enableCreditsMarkerGeneration, "enableCreditsMarkerGeneration");
+        this.enableCreditsMarkerGeneration = Optional.ofNullable(enableCreditsMarkerGeneration);
+        return this;
+    }
+
+    /**
+     * Setting that indicates if credits markers detection is enabled. (-1 = Library default, 0 = Disabled).
+     */
+    public GetLibraryItemsMetadata withEnableCreditsMarkerGeneration(Optional<? extends GetLibraryItemsEnableCreditsMarkerGeneration> enableCreditsMarkerGeneration) {
+        Utils.checkNotNull(enableCreditsMarkerGeneration, "enableCreditsMarkerGeneration");
+        this.enableCreditsMarkerGeneration = enableCreditsMarkerGeneration;
         return this;
     }
 
@@ -1949,6 +2033,8 @@ public class GetLibraryItemsMetadata {
             Objects.deepEquals(this.seasonCount, other.seasonCount) &&
             Objects.deepEquals(this.tagline, other.tagline) &&
             Objects.deepEquals(this.flattenSeasons, other.flattenSeasons) &&
+            Objects.deepEquals(this.episodeSort, other.episodeSort) &&
+            Objects.deepEquals(this.enableCreditsMarkerGeneration, other.enableCreditsMarkerGeneration) &&
             Objects.deepEquals(this.showOrdering, other.showOrdering) &&
             Objects.deepEquals(this.thumb, other.thumb) &&
             Objects.deepEquals(this.art, other.art) &&
@@ -2028,6 +2114,8 @@ public class GetLibraryItemsMetadata {
             seasonCount,
             tagline,
             flattenSeasons,
+            episodeSort,
+            enableCreditsMarkerGeneration,
             showOrdering,
             thumb,
             art,
@@ -2107,6 +2195,8 @@ public class GetLibraryItemsMetadata {
                 "seasonCount", seasonCount,
                 "tagline", tagline,
                 "flattenSeasons", flattenSeasons,
+                "episodeSort", episodeSort,
+                "enableCreditsMarkerGeneration", enableCreditsMarkerGeneration,
                 "showOrdering", showOrdering,
                 "thumb", thumb,
                 "art", art,
@@ -2202,7 +2292,11 @@ public class GetLibraryItemsMetadata {
  
         private Optional<String> tagline = Optional.empty();
  
-        private Optional<? extends GetLibraryItemsFlattenSeasons> flattenSeasons;
+        private Optional<? extends GetLibraryItemsFlattenSeasons> flattenSeasons = Optional.empty();
+ 
+        private Optional<? extends GetLibraryItemsEpisodeSort> episodeSort = Optional.empty();
+ 
+        private Optional<? extends GetLibraryItemsEnableCreditsMarkerGeneration> enableCreditsMarkerGeneration = Optional.empty();
  
         private Optional<? extends GetLibraryItemsShowOrdering> showOrdering = Optional.empty();
  
@@ -2507,15 +2601,57 @@ public class GetLibraryItemsMetadata {
             return this;
         }
 
+        /**
+         * Setting that indicates if seasons are set to hidden for the show. (-1 = Library default, 0 = Hide, 1 = Show).
+         */
         public Builder flattenSeasons(GetLibraryItemsFlattenSeasons flattenSeasons) {
             Utils.checkNotNull(flattenSeasons, "flattenSeasons");
             this.flattenSeasons = Optional.ofNullable(flattenSeasons);
             return this;
         }
 
+        /**
+         * Setting that indicates if seasons are set to hidden for the show. (-1 = Library default, 0 = Hide, 1 = Show).
+         */
         public Builder flattenSeasons(Optional<? extends GetLibraryItemsFlattenSeasons> flattenSeasons) {
             Utils.checkNotNull(flattenSeasons, "flattenSeasons");
             this.flattenSeasons = flattenSeasons;
+            return this;
+        }
+
+        /**
+         * Setting that indicates how episodes are sorted for the show. (-1 = Library default, 0 = Oldest first, 1 = Newest first).
+         */
+        public Builder episodeSort(GetLibraryItemsEpisodeSort episodeSort) {
+            Utils.checkNotNull(episodeSort, "episodeSort");
+            this.episodeSort = Optional.ofNullable(episodeSort);
+            return this;
+        }
+
+        /**
+         * Setting that indicates how episodes are sorted for the show. (-1 = Library default, 0 = Oldest first, 1 = Newest first).
+         */
+        public Builder episodeSort(Optional<? extends GetLibraryItemsEpisodeSort> episodeSort) {
+            Utils.checkNotNull(episodeSort, "episodeSort");
+            this.episodeSort = episodeSort;
+            return this;
+        }
+
+        /**
+         * Setting that indicates if credits markers detection is enabled. (-1 = Library default, 0 = Disabled).
+         */
+        public Builder enableCreditsMarkerGeneration(GetLibraryItemsEnableCreditsMarkerGeneration enableCreditsMarkerGeneration) {
+            Utils.checkNotNull(enableCreditsMarkerGeneration, "enableCreditsMarkerGeneration");
+            this.enableCreditsMarkerGeneration = Optional.ofNullable(enableCreditsMarkerGeneration);
+            return this;
+        }
+
+        /**
+         * Setting that indicates if credits markers detection is enabled. (-1 = Library default, 0 = Disabled).
+         */
+        public Builder enableCreditsMarkerGeneration(Optional<? extends GetLibraryItemsEnableCreditsMarkerGeneration> enableCreditsMarkerGeneration) {
+            Utils.checkNotNull(enableCreditsMarkerGeneration, "enableCreditsMarkerGeneration");
+            this.enableCreditsMarkerGeneration = enableCreditsMarkerGeneration;
             return this;
         }
 
@@ -3225,9 +3361,7 @@ public class GetLibraryItemsMetadata {
         }
         
         public GetLibraryItemsMetadata build() {
-            if (flattenSeasons == null) {
-                flattenSeasons = _SINGLETON_VALUE_FlattenSeasons.value();
-            }            return new GetLibraryItemsMetadata(
+            return new GetLibraryItemsMetadata(
                 ratingKey,
                 key,
                 guid,
@@ -3247,6 +3381,8 @@ public class GetLibraryItemsMetadata {
                 seasonCount,
                 tagline,
                 flattenSeasons,
+                episodeSort,
+                enableCreditsMarkerGeneration,
                 showOrdering,
                 thumb,
                 art,
@@ -3303,12 +3439,6 @@ public class GetLibraryItemsMetadata {
                 parentThumb,
                 parentTheme);
         }
-
-        private static final LazySingletonValue<Optional<? extends GetLibraryItemsFlattenSeasons>> _SINGLETON_VALUE_FlattenSeasons =
-                new LazySingletonValue<>(
-                        "flattenSeasons",
-                        "\"0\"",
-                        new TypeReference<Optional<? extends GetLibraryItemsFlattenSeasons>>() {});
     }
 }
 

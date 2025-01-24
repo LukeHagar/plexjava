@@ -678,7 +678,7 @@ actions:
 
                     PerformSearchResponse res = sdk.search().performSearch()
                             .query("dylan")
-                            .sectionId(9487.87d)
+                            .sectionId(9487.88d)
                             .limit(5d)
                             .call();
 
@@ -709,7 +709,7 @@ actions:
 
                     PerformVoiceSearchResponse res = sdk.search().performVoiceSearch()
                             .query("dead+poop")
-                            .sectionId(4094.80d)
+                            .sectionId(4094.8d)
                             .limit(5d)
                             .call();
 
@@ -936,7 +936,7 @@ actions:
                         .build();
 
                     GetMetadataChildrenResponse res = sdk.library().getMetadataChildren()
-                            .ratingKey(1539.15d)
+                            .ratingKey(1539.14d)
                             .includeElements("Stream")
                             .call();
 
@@ -1578,6 +1578,7 @@ actions:
 
                     GetPinRequest req = GetPinRequest.builder()
                             .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
+                            .strong(false)
                             .clientName("Plex for Roku")
                             .deviceNickname("Roku 3")
                             .clientVersion("2.4.1")
@@ -1823,7 +1824,7 @@ actions:
                         .build();
 
                     UpdatePlaylistResponse res = sdk.playlists().updatePlaylist()
-                            .playlistID(3915.00d)
+                            .playlistID(3915d)
                             .title("<value>")
                             .summary("<value>")
                             .call();
@@ -1916,7 +1917,7 @@ actions:
                         .build();
 
                     AddPlaylistContentsResponse res = sdk.playlists().addPlaylistContents()
-                            .playlistID(8502.00d)
+                            .playlistID(8502.01d)
                             .uri("server://12345/com.plexapp.plugins.library/library/metadata/1")
                             .playQueueID(123d)
                             .call();
@@ -2457,6 +2458,7 @@ actions:
                             .requestBody(PostUsersSignInDataRequestBody.builder()
                                 .login("username@email.com")
                                 .password("password123")
+                                .rememberMe(false)
                                 .verificationCode("123456")
                                 .build())
                             .build();
