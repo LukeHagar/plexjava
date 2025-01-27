@@ -10,20 +10,20 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * ShowOrdering - Setting that indicates the episode ordering for the show
+ * ShowOrdering - Setting that indicates the episode ordering for the show.
  * None = Library default,
  * tmdbAiring = The Movie Database (Aired),
- * tvdbAiring = TheTVDB (Aired),
- * tvdbDvd = TheTVDB (DVD),
- * tvdbAbsolute = TheTVDB (Absolute)).
+ * aired = TheTVDB (Aired),
+ * dvd = TheTVDB (DVD),
+ * absolute = TheTVDB (Absolute)).
  * 
  */
 public enum ShowOrdering {
     None("None"),
     TmdbAiring("tmdbAiring"),
-    TvdbAiring("tvdbAiring"),
-    TvdbDvd("tvdbDvd"),
-    TvdbAbsolute("tvdbAbsolute");
+    TvdbAired("aired"),
+    TvdbDvd("dvd"),
+    TvdbAbsolute("absolute");
 
     @JsonValue
     private final String value;
