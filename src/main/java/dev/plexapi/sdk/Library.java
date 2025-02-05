@@ -9,8 +9,12 @@ import dev.plexapi.sdk.models.errors.DeleteLibraryBadRequest;
 import dev.plexapi.sdk.models.errors.DeleteLibraryUnauthorized;
 import dev.plexapi.sdk.models.errors.GetAllLibrariesBadRequest;
 import dev.plexapi.sdk.models.errors.GetAllLibrariesUnauthorized;
+import dev.plexapi.sdk.models.errors.GetCountriesLibraryBadRequest;
+import dev.plexapi.sdk.models.errors.GetCountriesLibraryUnauthorized;
 import dev.plexapi.sdk.models.errors.GetFileHashBadRequest;
 import dev.plexapi.sdk.models.errors.GetFileHashUnauthorized;
+import dev.plexapi.sdk.models.errors.GetGenresLibraryBadRequest;
+import dev.plexapi.sdk.models.errors.GetGenresLibraryUnauthorized;
 import dev.plexapi.sdk.models.errors.GetLibraryDetailsBadRequest;
 import dev.plexapi.sdk.models.errors.GetLibraryDetailsUnauthorized;
 import dev.plexapi.sdk.models.errors.GetLibraryItemsBadRequest;
@@ -39,9 +43,17 @@ import dev.plexapi.sdk.models.operations.Force;
 import dev.plexapi.sdk.models.operations.GetAllLibrariesRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetAllLibrariesResponse;
 import dev.plexapi.sdk.models.operations.GetAllLibrariesResponseBody;
+import dev.plexapi.sdk.models.operations.GetCountriesLibraryRequest;
+import dev.plexapi.sdk.models.operations.GetCountriesLibraryRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetCountriesLibraryResponse;
+import dev.plexapi.sdk.models.operations.GetCountriesLibraryResponseBody;
 import dev.plexapi.sdk.models.operations.GetFileHashRequest;
 import dev.plexapi.sdk.models.operations.GetFileHashRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetFileHashResponse;
+import dev.plexapi.sdk.models.operations.GetGenresLibraryRequest;
+import dev.plexapi.sdk.models.operations.GetGenresLibraryRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetGenresLibraryResponse;
+import dev.plexapi.sdk.models.operations.GetGenresLibraryResponseBody;
 import dev.plexapi.sdk.models.operations.GetLibraryDetailsRequest;
 import dev.plexapi.sdk.models.operations.GetLibraryDetailsRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetLibraryDetailsResponse;
@@ -113,6 +125,8 @@ public class Library implements
             MethodCallGetLibraryItems,
             MethodCallGetRefreshLibraryMetadata,
             MethodCallGetSearchLibrary,
+            MethodCallGetGenresLibrary,
+            MethodCallGetCountriesLibrary,
             MethodCallGetSearchAllLibraries,
             MethodCallGetMetaDataByRatingKey,
             MethodCallGetMetadataChildren,
@@ -1673,6 +1687,344 @@ public class Library implements
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.extractByteArrayFromBody(_httpRes));
+    }
+
+
+
+    /**
+     * Get Genres of library media
+     * Retrieves a list of all the genres that are found for the media in this library.
+     * 
+     * @return The call builder
+     */
+    public GetGenresLibraryRequestBuilder getGenresLibrary() {
+        return new GetGenresLibraryRequestBuilder(this);
+    }
+
+    /**
+     * Get Genres of library media
+     * Retrieves a list of all the genres that are found for the media in this library.
+     * 
+     * @param sectionKey The unique key of the Plex library. 
+    Note: This is unique in the context of the Plex server.
+
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetGenresLibraryResponse getGenresLibrary(
+            int sectionKey) throws Exception {
+        GetGenresLibraryRequest request =
+            GetGenresLibraryRequest
+                .builder()
+                .sectionKey(sectionKey)
+                .build();
+        
+        String _baseUrl = Utils.templateUrl(
+                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+        String _url = Utils.generateURL(
+                GetGenresLibraryRequest.class,
+                _baseUrl,
+                "/library/sections/{sectionKey}/genre",
+                request, null);
+        
+        HTTPRequest _req = new HTTPRequest(_url, "GET");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                SDKConfiguration.USER_AGENT);
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "get-genres-library", 
+                      Optional.of(List.of()), 
+                      _hookSecuritySource),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "404", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "get-genres-library",
+                            Optional.of(List.of()),
+                            _hookSecuritySource),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "get-genres-library",
+                            Optional.of(List.of()), 
+                            _hookSecuritySource),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "get-genres-library",
+                            Optional.of(List.of()),
+                            _hookSecuritySource), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
+            .headers()
+            .firstValue("Content-Type")
+            .orElse("application/octet-stream");
+        GetGenresLibraryResponse.Builder _resBuilder = 
+            GetGenresLibraryResponse
+                .builder()
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
+
+        GetGenresLibraryResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetGenresLibraryResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetGenresLibraryResponseBody>() {});
+                _res.withObject(Optional.ofNullable(_out));
+                return _res;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetGenresLibraryBadRequest _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetGenresLibraryBadRequest>() {});
+                    _out.withRawResponse(Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetGenresLibraryUnauthorized _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetGenresLibraryUnauthorized>() {});
+                    _out.withRawResponse(Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.extractByteArrayFromBody(_httpRes));
+    }
+
+
+
+    /**
+     * Get Countries of library media
+     * Retrieves a list of all the countries that are found for the media in this library.
+     * 
+     * @return The call builder
+     */
+    public GetCountriesLibraryRequestBuilder getCountriesLibrary() {
+        return new GetCountriesLibraryRequestBuilder(this);
+    }
+
+    /**
+     * Get Countries of library media
+     * Retrieves a list of all the countries that are found for the media in this library.
+     * 
+     * @param sectionKey The unique key of the Plex library. 
+    Note: This is unique in the context of the Plex server.
+
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetCountriesLibraryResponse getCountriesLibrary(
+            int sectionKey) throws Exception {
+        GetCountriesLibraryRequest request =
+            GetCountriesLibraryRequest
+                .builder()
+                .sectionKey(sectionKey)
+                .build();
+        
+        String _baseUrl = Utils.templateUrl(
+                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+        String _url = Utils.generateURL(
+                GetCountriesLibraryRequest.class,
+                _baseUrl,
+                "/library/sections/{sectionKey}/country",
+                request, null);
+        
+        HTTPRequest _req = new HTTPRequest(_url, "GET");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                SDKConfiguration.USER_AGENT);
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "get-countries-library", 
+                      Optional.of(List.of()), 
+                      _hookSecuritySource),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "404", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "get-countries-library",
+                            Optional.of(List.of()),
+                            _hookSecuritySource),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "get-countries-library",
+                            Optional.of(List.of()), 
+                            _hookSecuritySource),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "get-countries-library",
+                            Optional.of(List.of()),
+                            _hookSecuritySource), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
+            .headers()
+            .firstValue("Content-Type")
+            .orElse("application/octet-stream");
+        GetCountriesLibraryResponse.Builder _resBuilder = 
+            GetCountriesLibraryResponse
+                .builder()
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
+
+        GetCountriesLibraryResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetCountriesLibraryResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetCountriesLibraryResponseBody>() {});
+                _res.withObject(Optional.ofNullable(_out));
+                return _res;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetCountriesLibraryBadRequest _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetCountriesLibraryBadRequest>() {});
+                    _out.withRawResponse(Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetCountriesLibraryUnauthorized _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetCountriesLibraryUnauthorized>() {});
+                    _out.withRawResponse(Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
             // no content 
             throw new SDKError(
                     _httpRes, 

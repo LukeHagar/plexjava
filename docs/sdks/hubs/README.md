@@ -80,7 +80,6 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.operations.GetRecentlyAddedRequest;
 import dev.plexapi.sdk.models.operations.GetRecentlyAddedResponse;
-import dev.plexapi.sdk.models.operations.IncludeMeta;
 import dev.plexapi.sdk.models.operations.Type;
 import java.lang.Exception;
 
@@ -96,9 +95,6 @@ public class Application {
                 .contentDirectoryID(470161L)
                 .type(Type.TvShow)
                 .sectionID(2L)
-                .includeMeta(IncludeMeta.Enable)
-                .xPlexContainerStart(0)
-                .xPlexContainerSize(50)
                 .build();
 
         GetRecentlyAddedResponse res = sdk.hubs().getRecentlyAdded()

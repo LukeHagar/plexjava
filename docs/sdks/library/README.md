@@ -16,6 +16,8 @@ API Calls interacting with Plex Media Server Libraries
 * [getLibraryItems](#getlibraryitems) - Get Library Items
 * [getRefreshLibraryMetadata](#getrefreshlibrarymetadata) - Refresh Metadata Of The Library
 * [getSearchLibrary](#getsearchlibrary) - Search Library
+* [getGenresLibrary](#getgenreslibrary) - Get Genres of library media
+* [getCountriesLibrary](#getcountrieslibrary) - Get Countries of library media
 * [getSearchAllLibraries](#getsearchalllibraries) - Search All Libraries
 * [getMetaDataByRatingKey](#getmetadatabyratingkey) - Get Metadata by RatingKey
 * [getMetadataChildren](#getmetadatachildren) - Get Items Children
@@ -89,7 +91,6 @@ import dev.plexapi.sdk.models.errors.GetRecentlyAddedLibraryBadRequest;
 import dev.plexapi.sdk.models.errors.GetRecentlyAddedLibraryUnauthorized;
 import dev.plexapi.sdk.models.operations.GetRecentlyAddedLibraryRequest;
 import dev.plexapi.sdk.models.operations.GetRecentlyAddedLibraryResponse;
-import dev.plexapi.sdk.models.operations.QueryParamIncludeMeta;
 import dev.plexapi.sdk.models.operations.QueryParamType;
 import java.lang.Exception;
 import java.util.List;
@@ -119,9 +120,6 @@ public class Application {
                     16L,
                     17L))
                 .sectionID(2L)
-                .includeMeta(QueryParamIncludeMeta.Enable)
-                .xPlexContainerStart(0)
-                .xPlexContainerSize(50)
                 .build();
 
         GetRecentlyAddedLibraryResponse res = sdk.library().getRecentlyAddedLibrary()
@@ -381,11 +379,9 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.GetLibraryItemsBadRequest;
 import dev.plexapi.sdk.models.errors.GetLibraryItemsUnauthorized;
-import dev.plexapi.sdk.models.operations.GetLibraryItemsQueryParamIncludeMeta;
 import dev.plexapi.sdk.models.operations.GetLibraryItemsQueryParamType;
 import dev.plexapi.sdk.models.operations.GetLibraryItemsRequest;
 import dev.plexapi.sdk.models.operations.GetLibraryItemsResponse;
-import dev.plexapi.sdk.models.operations.IncludeGuids;
 import dev.plexapi.sdk.models.operations.Tag;
 import java.lang.Exception;
 
@@ -400,11 +396,7 @@ public class Application {
         GetLibraryItemsRequest req = GetLibraryItemsRequest.builder()
                 .tag(Tag.EDITION)
                 .sectionKey(9518)
-                .includeGuids(IncludeGuids.Enable)
                 .type(GetLibraryItemsQueryParamType.TvShow)
-                .includeMeta(GetLibraryItemsQueryParamIncludeMeta.Enable)
-                .xPlexContainerStart(0)
-                .xPlexContainerSize(50)
                 .build();
 
         GetLibraryItemsResponse res = sdk.library().getLibraryItems()
@@ -563,6 +555,112 @@ public class Application {
 | models/errors/GetSearchLibraryUnauthorized | 401                                        | application/json                           |
 | models/errors/SDKError                     | 4XX, 5XX                                   | \*/\*                                      |
 
+## getGenresLibrary
+
+Retrieves a list of all the genres that are found for the media in this library.
+
+
+### Example Usage
+
+```java
+package hello.world;
+
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.GetGenresLibraryBadRequest;
+import dev.plexapi.sdk.models.errors.GetGenresLibraryUnauthorized;
+import dev.plexapi.sdk.models.operations.GetGenresLibraryResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws GetGenresLibraryBadRequest, GetGenresLibraryUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
+                .accessToken("<YOUR_API_KEY_HERE>")
+            .build();
+
+        GetGenresLibraryResponse res = sdk.library().getGenresLibrary()
+                .sectionKey(9518)
+                .call();
+
+        if (res.object().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `sectionKey`                                                                                  | *int*                                                                                         | :heavy_check_mark:                                                                            | The unique key of the Plex library. <br/>Note: This is unique in the context of the Plex server.<br/> | 9518                                                                                          |
+
+### Response
+
+**[GetGenresLibraryResponse](../../models/operations/GetGenresLibraryResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| models/errors/GetGenresLibraryBadRequest   | 400                                        | application/json                           |
+| models/errors/GetGenresLibraryUnauthorized | 401                                        | application/json                           |
+| models/errors/SDKError                     | 4XX, 5XX                                   | \*/\*                                      |
+
+## getCountriesLibrary
+
+Retrieves a list of all the countries that are found for the media in this library.
+
+
+### Example Usage
+
+```java
+package hello.world;
+
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.GetCountriesLibraryBadRequest;
+import dev.plexapi.sdk.models.errors.GetCountriesLibraryUnauthorized;
+import dev.plexapi.sdk.models.operations.GetCountriesLibraryResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws GetCountriesLibraryBadRequest, GetCountriesLibraryUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
+                .accessToken("<YOUR_API_KEY_HERE>")
+            .build();
+
+        GetCountriesLibraryResponse res = sdk.library().getCountriesLibrary()
+                .sectionKey(9518)
+                .call();
+
+        if (res.object().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `sectionKey`                                                                                  | *int*                                                                                         | :heavy_check_mark:                                                                            | The unique key of the Plex library. <br/>Note: This is unique in the context of the Plex server.<br/> | 9518                                                                                          |
+
+### Response
+
+**[GetCountriesLibraryResponse](../../models/operations/GetCountriesLibraryResponse.md)**
+
+### Errors
+
+| Error Type                                    | Status Code                                   | Content Type                                  |
+| --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
+| models/errors/GetCountriesLibraryBadRequest   | 400                                           | application/json                              |
+| models/errors/GetCountriesLibraryUnauthorized | 401                                           | application/json                              |
+| models/errors/SDKError                        | 4XX, 5XX                                      | \*/\*                                         |
+
 ## getSearchAllLibraries
 
 Search the provided query across all library sections, or a single section, and return matches as hubs, split up by type.
@@ -578,8 +676,6 @@ import dev.plexapi.sdk.models.errors.GetSearchAllLibrariesBadRequest;
 import dev.plexapi.sdk.models.errors.GetSearchAllLibrariesUnauthorized;
 import dev.plexapi.sdk.models.operations.GetSearchAllLibrariesRequest;
 import dev.plexapi.sdk.models.operations.GetSearchAllLibrariesResponse;
-import dev.plexapi.sdk.models.operations.QueryParamIncludeCollections;
-import dev.plexapi.sdk.models.operations.QueryParamIncludeExternalMedia;
 import dev.plexapi.sdk.models.operations.SearchTypes;
 import java.lang.Exception;
 import java.util.List;
@@ -597,8 +693,6 @@ public class Application {
                 .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
                 .searchTypes(List.of(
                     SearchTypes.PEOPLE))
-                .includeCollections(QueryParamIncludeCollections.Enable)
-                .includeExternalMedia(QueryParamIncludeExternalMedia.Enable)
                 .build();
 
         GetSearchAllLibrariesResponse res = sdk.library().getSearchAllLibraries()

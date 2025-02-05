@@ -38,8 +38,6 @@ public class Application {
         GetWatchListRequest req = GetWatchListRequest.builder()
                 .filter(Filter.AVAILABLE)
                 .xPlexToken("CV5xoxjTpFKUzBTShsaf")
-                .xPlexContainerStart(0)
-                .xPlexContainerSize(50)
                 .build();
 
         GetWatchListResponse res = sdk.watchlist().getWatchList()

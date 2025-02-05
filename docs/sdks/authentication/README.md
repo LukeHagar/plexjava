@@ -204,7 +204,6 @@ public class Application {
                 .requestBody(PostUsersSignInDataRequestBody.builder()
                     .login("username@email.com")
                     .password("password123")
-                    .rememberMe(false)
                     .verificationCode("123456")
                     .build())
                 .build();

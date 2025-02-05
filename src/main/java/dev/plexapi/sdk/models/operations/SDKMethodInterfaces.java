@@ -283,6 +283,18 @@ public class SDKMethodInterfaces {
     }
 
 
+    public interface MethodCallGetGenresLibrary {
+        GetGenresLibraryResponse getGenresLibrary(
+            int sectionKey) throws Exception;
+    }
+
+
+    public interface MethodCallGetCountriesLibrary {
+        GetCountriesLibraryResponse getCountriesLibrary(
+            int sectionKey) throws Exception;
+    }
+
+
     public interface MethodCallGetSearchAllLibraries {
         GetSearchAllLibrariesResponse getSearchAllLibraries(
             GetSearchAllLibrariesRequest request) throws Exception;

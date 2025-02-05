@@ -624,7 +624,6 @@ actions:
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.operations.GetRecentlyAddedRequest;
             import dev.plexapi.plexapi.models.operations.GetRecentlyAddedResponse;
-            import dev.plexapi.plexapi.models.operations.IncludeMeta;
             import dev.plexapi.plexapi.models.operations.Type;
             import java.lang.Exception;
 
@@ -640,9 +639,6 @@ actions:
                             .contentDirectoryID(470161L)
                             .type(Type.TvShow)
                             .sectionID(2L)
-                            .includeMeta(IncludeMeta.Enable)
-                            .xPlexContainerStart(0)
-                            .xPlexContainerSize(50)
                             .build();
 
                     GetRecentlyAddedResponse res = sdk.hubs().getRecentlyAdded()
@@ -1029,7 +1025,6 @@ actions:
             import dev.plexapi.plexapi.models.errors.GetRecentlyAddedLibraryUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetRecentlyAddedLibraryRequest;
             import dev.plexapi.plexapi.models.operations.GetRecentlyAddedLibraryResponse;
-            import dev.plexapi.plexapi.models.operations.QueryParamIncludeMeta;
             import dev.plexapi.plexapi.models.operations.QueryParamType;
             import java.lang.Exception;
             import java.util.List;
@@ -1059,9 +1054,6 @@ actions:
                                 16L,
                                 17L))
                             .sectionID(2L)
-                            .includeMeta(QueryParamIncludeMeta.Enable)
-                            .xPlexContainerStart(0)
-                            .xPlexContainerSize(50)
                             .build();
 
                     GetRecentlyAddedLibraryResponse res = sdk.library().getRecentlyAddedLibrary()
@@ -1086,8 +1078,6 @@ actions:
             import dev.plexapi.plexapi.models.errors.GetSearchAllLibrariesUnauthorized;
             import dev.plexapi.plexapi.models.operations.GetSearchAllLibrariesRequest;
             import dev.plexapi.plexapi.models.operations.GetSearchAllLibrariesResponse;
-            import dev.plexapi.plexapi.models.operations.QueryParamIncludeCollections;
-            import dev.plexapi.plexapi.models.operations.QueryParamIncludeExternalMedia;
             import dev.plexapi.plexapi.models.operations.SearchTypes;
             import java.lang.Exception;
             import java.util.List;
@@ -1105,8 +1095,6 @@ actions:
                             .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
                             .searchTypes(List.of(
                                 SearchTypes.PEOPLE))
-                            .includeCollections(QueryParamIncludeCollections.Enable)
-                            .includeExternalMedia(QueryParamIncludeExternalMedia.Enable)
                             .build();
 
                     GetSearchAllLibrariesResponse res = sdk.library().getSearchAllLibraries()
@@ -1175,8 +1163,6 @@ actions:
                     GetWatchListRequest req = GetWatchListRequest.builder()
                             .filter(Filter.AVAILABLE)
                             .xPlexToken("CV5xoxjTpFKUzBTShsaf")
-                            .xPlexContainerStart(0)
-                            .xPlexContainerSize(50)
                             .build();
 
                     GetWatchListResponse res = sdk.watchlist().getWatchList()
@@ -1242,6 +1228,68 @@ actions:
 
                     GetLibraryDetailsResponse res = sdk.library().getLibraryDetails()
                             .includeDetails(IncludeDetails.ZERO)
+                            .sectionKey(9518)
+                            .call();
+
+                    if (res.object().isPresent()) {
+                        // handle response
+                    }
+                }
+            }
+  - target: $["paths"]["/library/sections/{sectionKey}/country"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: library
+          source: |-
+            package hello.world;
+
+            import dev.plexapi.plexapi.PlexAPI;
+            import dev.plexapi.plexapi.models.errors.GetCountriesLibraryBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetCountriesLibraryUnauthorized;
+            import dev.plexapi.plexapi.models.operations.GetCountriesLibraryResponse;
+            import java.lang.Exception;
+
+            public class Application {
+
+                public static void main(String[] args) throws GetCountriesLibraryBadRequest, GetCountriesLibraryUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                        .build();
+
+                    GetCountriesLibraryResponse res = sdk.library().getCountriesLibrary()
+                            .sectionKey(9518)
+                            .call();
+
+                    if (res.object().isPresent()) {
+                        // handle response
+                    }
+                }
+            }
+  - target: $["paths"]["/library/sections/{sectionKey}/genre"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: library
+          source: |-
+            package hello.world;
+
+            import dev.plexapi.plexapi.PlexAPI;
+            import dev.plexapi.plexapi.models.errors.GetGenresLibraryBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetGenresLibraryUnauthorized;
+            import dev.plexapi.plexapi.models.operations.GetGenresLibraryResponse;
+            import java.lang.Exception;
+
+            public class Application {
+
+                public static void main(String[] args) throws GetGenresLibraryBadRequest, GetGenresLibraryUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                        .build();
+
+                    GetGenresLibraryResponse res = sdk.library().getGenresLibrary()
                             .sectionKey(9518)
                             .call();
 
@@ -1325,11 +1373,9 @@ actions:
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.GetLibraryItemsBadRequest;
             import dev.plexapi.plexapi.models.errors.GetLibraryItemsUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetLibraryItemsQueryParamIncludeMeta;
             import dev.plexapi.plexapi.models.operations.GetLibraryItemsQueryParamType;
             import dev.plexapi.plexapi.models.operations.GetLibraryItemsRequest;
             import dev.plexapi.plexapi.models.operations.GetLibraryItemsResponse;
-            import dev.plexapi.plexapi.models.operations.IncludeGuids;
             import dev.plexapi.plexapi.models.operations.Tag;
             import java.lang.Exception;
 
@@ -1344,11 +1390,7 @@ actions:
                     GetLibraryItemsRequest req = GetLibraryItemsRequest.builder()
                             .tag(Tag.EDITION)
                             .sectionKey(9518)
-                            .includeGuids(IncludeGuids.Enable)
                             .type(GetLibraryItemsQueryParamType.TvShow)
-                            .includeMeta(GetLibraryItemsQueryParamIncludeMeta.Enable)
-                            .xPlexContainerStart(0)
-                            .xPlexContainerSize(50)
                             .build();
 
                     GetLibraryItemsResponse res = sdk.library().getLibraryItems()
@@ -1578,7 +1620,6 @@ actions:
 
                     GetPinRequest req = GetPinRequest.builder()
                             .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
-                            .strong(false)
                             .clientName("Plex for Roku")
                             .deviceNickname("Roku 3")
                             .clientVersion("2.4.1")
@@ -2458,7 +2499,6 @@ actions:
                             .requestBody(PostUsersSignInDataRequestBody.builder()
                                 .login("username@email.com")
                                 .password("password123")
-                                .rememberMe(false)
                                 .verificationCode("123456")
                                 .build())
                             .build();
