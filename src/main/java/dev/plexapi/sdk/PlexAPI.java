@@ -161,6 +161,8 @@ public class PlexAPI {
      */
     private final Updater updater;
 
+    private final Users users;
+
     /**
      * Operations against the Plex Media Server System.
      * 
@@ -297,6 +299,10 @@ public class PlexAPI {
      */
     public Updater updater() {
         return updater;
+    }
+
+    public Users users() {
+        return users;
     }
 
     private final SDKConfiguration sdkConfiguration;
@@ -518,5 +524,6 @@ public class PlexAPI {
         this.statistics = new Statistics(sdkConfiguration);
         this.sessions = new Sessions(sdkConfiguration);
         this.updater = new Updater(sdkConfiguration);
+        this.users = new Users(sdkConfiguration);
         this.sdkConfiguration.initialize();
     }}

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 1732900d-e173-47c1-a90d-d45182eb35d9
 management:
-  docChecksum: 14b35829d4be91a88269761c3ed01426
+  docChecksum: 7dec92ab9151a1b5a35df5faa81811ba
   docVersion: 0.0.3
   speakeasyVersion: 1.484.1
   generationVersion: 2.503.2
-  releaseVersion: 0.11.4
-  configChecksum: 126ca5c605b680e9fad7993275f418f0
+  releaseVersion: 0.11.5
+  configChecksum: e1b162d958a45d93386466a95963ae3c
   repoURL: https://github.com/LukeHagar/plexjava.git
   published: true
 features:
@@ -266,6 +266,10 @@ generatedFiles:
   - docs/models/errors/GetUserFriendsErrors.md
   - docs/models/errors/GetUserFriendsPlexErrors.md
   - docs/models/errors/GetUserFriendsUnauthorized.md
+  - docs/models/errors/GetUsersBadRequest.md
+  - docs/models/errors/GetUsersErrors.md
+  - docs/models/errors/GetUsersUnauthorized.md
+  - docs/models/errors/GetUsersUsersErrors.md
   - docs/models/errors/GetWatchListBadRequest.md
   - docs/models/errors/GetWatchListErrors.md
   - docs/models/errors/GetWatchListUnauthorized.md
@@ -343,6 +347,12 @@ generatedFiles:
   - docs/models/operations/AddPlaylistContentsRequest.md
   - docs/models/operations/AddPlaylistContentsResponse.md
   - docs/models/operations/AddPlaylistContentsResponseBody.md
+  - docs/models/operations/AllLibraries.md
+  - docs/models/operations/AllowCameraUpload.md
+  - docs/models/operations/AllowChannels.md
+  - docs/models/operations/AllowSubtitleAdmin.md
+  - docs/models/operations/AllowSync.md
+  - docs/models/operations/AllowTuners.md
   - docs/models/operations/ApplyUpdatesRequest.md
   - docs/models/operations/ApplyUpdatesResponse.md
   - docs/models/operations/AutoSelectSubtitle.md
@@ -705,6 +715,7 @@ generatedFiles:
   - docs/models/operations/GetTopWatchedContentResponse.md
   - docs/models/operations/GetTopWatchedContentResponseBody.md
   - docs/models/operations/GetTopWatchedContentRole.md
+  - docs/models/operations/GetTopWatchedContentUser.md
   - docs/models/operations/GetTranscodeSessionsMediaContainer.md
   - docs/models/operations/GetTranscodeSessionsResponse.md
   - docs/models/operations/GetTranscodeSessionsResponseBody.md
@@ -715,11 +726,17 @@ generatedFiles:
   - docs/models/operations/GetUpdateStatusResponse.md
   - docs/models/operations/GetUpdateStatusResponseBody.md
   - docs/models/operations/GetUserFriendsResponse.md
+  - docs/models/operations/GetUsersMediaContainer.md
+  - docs/models/operations/GetUsersRequest.md
+  - docs/models/operations/GetUsersResponse.md
+  - docs/models/operations/GetUsersResponseBody.md
+  - docs/models/operations/GetUsersServer.md
   - docs/models/operations/GetWatchListRequest.md
   - docs/models/operations/GetWatchListResponse.md
   - docs/models/operations/GetWatchListResponseBody.md
   - docs/models/operations/Guids.md
   - docs/models/operations/HasThumbnail.md
+  - docs/models/operations/Home.md
   - docs/models/operations/Hub.md
   - docs/models/operations/Image.md
   - docs/models/operations/IncludeCollections.md
@@ -755,9 +772,11 @@ generatedFiles:
   - docs/models/operations/OnlyTransient.md
   - docs/models/operations/Operator.md
   - docs/models/operations/OptimizedForStreaming.md
+  - docs/models/operations/Owned.md
   - docs/models/operations/Part.md
   - docs/models/operations/PastSubscription.md
   - docs/models/operations/PathParamTaskName.md
+  - docs/models/operations/Pending.md
   - docs/models/operations/PerformSearchRequest.md
   - docs/models/operations/PerformSearchResponse.md
   - docs/models/operations/PerformVoiceSearchRequest.md
@@ -785,6 +804,7 @@ generatedFiles:
   - docs/models/operations/PostUsersSignInDataUserProfile.md
   - docs/models/operations/PostUsersSignInDataWatchedIndicator.md
   - docs/models/operations/Producer.md
+  - docs/models/operations/Protected.md
   - docs/models/operations/Protocol.md
   - docs/models/operations/Provider.md
   - docs/models/operations/QueryParamFilter.md
@@ -798,6 +818,7 @@ generatedFiles:
   - docs/models/operations/Ratings.md
   - docs/models/operations/Release.md
   - docs/models/operations/ResponseBody.md
+  - docs/models/operations/Restricted.md
   - docs/models/operations/Role.md
   - docs/models/operations/Scope.md
   - docs/models/operations/SearchResult.md
@@ -863,6 +884,7 @@ generatedFiles:
   - docs/sdks/sessions/README.md
   - docs/sdks/statistics/README.md
   - docs/sdks/updater/README.md
+  - docs/sdks/users/README.md
   - docs/sdks/video/README.md
   - docs/sdks/watchlist/README.md
   - gradle/wrapper/gradle-wrapper.jar
@@ -887,6 +909,7 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/Sessions.java
   - src/main/java/dev/plexapi/sdk/Statistics.java
   - src/main/java/dev/plexapi/sdk/Updater.java
+  - src/main/java/dev/plexapi/sdk/Users.java
   - src/main/java/dev/plexapi/sdk/Video.java
   - src/main/java/dev/plexapi/sdk/Watchlist.java
   - src/main/java/dev/plexapi/sdk/models/errors/AddPlaylistContentsBadRequest.java
@@ -1125,6 +1148,10 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/errors/GetUserFriendsErrors.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetUserFriendsPlexErrors.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetUserFriendsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetUsersBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetUsersErrors.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetUsersUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/GetUsersUsersErrors.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetWatchListBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetWatchListErrors.java
   - src/main/java/dev/plexapi/sdk/models/errors/GetWatchListUnauthorized.java
@@ -1204,6 +1231,12 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/operations/AddPlaylistContentsRequestBuilder.java
   - src/main/java/dev/plexapi/sdk/models/operations/AddPlaylistContentsResponse.java
   - src/main/java/dev/plexapi/sdk/models/operations/AddPlaylistContentsResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/AllLibraries.java
+  - src/main/java/dev/plexapi/sdk/models/operations/AllowCameraUpload.java
+  - src/main/java/dev/plexapi/sdk/models/operations/AllowChannels.java
+  - src/main/java/dev/plexapi/sdk/models/operations/AllowSubtitleAdmin.java
+  - src/main/java/dev/plexapi/sdk/models/operations/AllowSync.java
+  - src/main/java/dev/plexapi/sdk/models/operations/AllowTuners.java
   - src/main/java/dev/plexapi/sdk/models/operations/ApplyUpdatesRequest.java
   - src/main/java/dev/plexapi/sdk/models/operations/ApplyUpdatesRequestBuilder.java
   - src/main/java/dev/plexapi/sdk/models/operations/ApplyUpdatesResponse.java
@@ -1622,6 +1655,7 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/operations/GetTopWatchedContentResponse.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetTopWatchedContentResponseBody.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetTopWatchedContentRole.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetTopWatchedContentUser.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetTranscodeSessionsMediaContainer.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetTranscodeSessionsRequestBuilder.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetTranscodeSessionsResponse.java
@@ -1636,12 +1670,19 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/operations/GetUpdateStatusResponseBody.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetUserFriendsRequestBuilder.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetUserFriendsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUsersMediaContainer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUsersRequest.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUsersRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUsersResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUsersResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/GetUsersServer.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetWatchListRequest.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetWatchListRequestBuilder.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetWatchListResponse.java
   - src/main/java/dev/plexapi/sdk/models/operations/GetWatchListResponseBody.java
   - src/main/java/dev/plexapi/sdk/models/operations/Guids.java
   - src/main/java/dev/plexapi/sdk/models/operations/HasThumbnail.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Home.java
   - src/main/java/dev/plexapi/sdk/models/operations/Hub.java
   - src/main/java/dev/plexapi/sdk/models/operations/Image.java
   - src/main/java/dev/plexapi/sdk/models/operations/IncludeCollections.java
@@ -1681,9 +1722,11 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/operations/OnlyTransient.java
   - src/main/java/dev/plexapi/sdk/models/operations/Operator.java
   - src/main/java/dev/plexapi/sdk/models/operations/OptimizedForStreaming.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Owned.java
   - src/main/java/dev/plexapi/sdk/models/operations/Part.java
   - src/main/java/dev/plexapi/sdk/models/operations/PastSubscription.java
   - src/main/java/dev/plexapi/sdk/models/operations/PathParamTaskName.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Pending.java
   - src/main/java/dev/plexapi/sdk/models/operations/PerformSearchRequest.java
   - src/main/java/dev/plexapi/sdk/models/operations/PerformSearchRequestBuilder.java
   - src/main/java/dev/plexapi/sdk/models/operations/PerformSearchResponse.java
@@ -1714,6 +1757,7 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataUserProfile.java
   - src/main/java/dev/plexapi/sdk/models/operations/PostUsersSignInDataWatchedIndicator.java
   - src/main/java/dev/plexapi/sdk/models/operations/Producer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Protected.java
   - src/main/java/dev/plexapi/sdk/models/operations/Protocol.java
   - src/main/java/dev/plexapi/sdk/models/operations/Provider.java
   - src/main/java/dev/plexapi/sdk/models/operations/QueryParamFilter.java
@@ -1727,6 +1771,7 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/operations/Ratings.java
   - src/main/java/dev/plexapi/sdk/models/operations/Release.java
   - src/main/java/dev/plexapi/sdk/models/operations/ResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/operations/Restricted.java
   - src/main/java/dev/plexapi/sdk/models/operations/Role.java
   - src/main/java/dev/plexapi/sdk/models/operations/SDKMethodInterfaces.java
   - src/main/java/dev/plexapi/sdk/models/operations/Scope.java
@@ -2838,5 +2883,29 @@ examples:
           application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}, {"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
         "401":
           application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}, {"code": 1001, "message": "User could not be authenticated", "status": 401}, {"code": 1001, "message": "User could not be authenticated", "status": 401}]}
+  get-users:
+    "":
+      parameters:
+        header:
+          X-Plex-Client-Identifier: "3381b62b-9ab7-4e37-827b-203e9809eb58"
+          X-Plex-Product: "Plex for Roku"
+          X-Plex-Device: "Roku 3"
+          X-Plex-Device-Name: "Chrome"
+          X-Plex-Device-Screen-Resolution: "1487x1165,2560x1440"
+          X-Plex-Version: "2.4.1"
+          X-Plex-Platform: "Roku"
+          X-Plex-Features: "external-media,indirect-media,hub-style-list"
+          X-Plex-Model: "4200X"
+          X-Plex-Session-Id: "97e136ef-4ddd-4ff3-89a7-a5820c96c2ca"
+          X-Plex-Language: "en"
+          X-Plex-Platform-Version: "4.3 build 1057"
+          X-Plex-Token: "CV5xoxjTpFKUzBTShsaf"
+      responses:
+        "200":
+          application/xml: "0xa9CdebeF9E"
+        "400":
+          application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}, {"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
+        "401":
+          application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}, {"code": 1001, "message": "User could not be authenticated", "status": 401}]}
 examplesVersion: 1.0.0
 generatedTests: {}

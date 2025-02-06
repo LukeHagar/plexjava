@@ -501,4 +501,11 @@ public class SDKMethodInterfaces {
     }
 
 
+    public interface MethodCallGetUsers {
+        GetUsersResponse getUsers(
+            GetUsersRequest request,
+            Optional<String> serverURL) throws Exception;
+    }
+
+
 }

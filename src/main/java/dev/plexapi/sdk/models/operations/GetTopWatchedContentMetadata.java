@@ -151,7 +151,7 @@ public class GetTopWatchedContentMetadata {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("User")
-    private Optional<? extends List<User>> user;
+    private Optional<? extends List<GetTopWatchedContentUser>> user;
 
     @JsonCreator
     public GetTopWatchedContentMetadata(
@@ -186,7 +186,7 @@ public class GetTopWatchedContentMetadata {
             @JsonProperty("Country") Optional<? extends List<GetTopWatchedContentCountry>> country,
             @JsonProperty("Guid") Optional<? extends List<GetTopWatchedContentGuids>> guids,
             @JsonProperty("Role") Optional<? extends List<GetTopWatchedContentRole>> role,
-            @JsonProperty("User") Optional<? extends List<User>> user) {
+            @JsonProperty("User") Optional<? extends List<GetTopWatchedContentUser>> user) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(guid, "guid");
@@ -418,8 +418,8 @@ public class GetTopWatchedContentMetadata {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<User>> user() {
-        return (Optional<List<User>>) user;
+    public Optional<List<GetTopWatchedContentUser>> user() {
+        return (Optional<List<GetTopWatchedContentUser>>) user;
     }
 
     public final static Builder builder() {
@@ -798,13 +798,13 @@ public class GetTopWatchedContentMetadata {
         return this;
     }
 
-    public GetTopWatchedContentMetadata withUser(List<User> user) {
+    public GetTopWatchedContentMetadata withUser(List<GetTopWatchedContentUser> user) {
         Utils.checkNotNull(user, "user");
         this.user = Optional.ofNullable(user);
         return this;
     }
 
-    public GetTopWatchedContentMetadata withUser(Optional<? extends List<User>> user) {
+    public GetTopWatchedContentMetadata withUser(Optional<? extends List<GetTopWatchedContentUser>> user) {
         Utils.checkNotNull(user, "user");
         this.user = user;
         return this;
@@ -992,7 +992,7 @@ public class GetTopWatchedContentMetadata {
  
         private Optional<? extends List<GetTopWatchedContentRole>> role = Optional.empty();
  
-        private Optional<? extends List<User>> user = Optional.empty();  
+        private Optional<? extends List<GetTopWatchedContentUser>> user = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -1370,13 +1370,13 @@ public class GetTopWatchedContentMetadata {
             return this;
         }
 
-        public Builder user(List<User> user) {
+        public Builder user(List<GetTopWatchedContentUser> user) {
             Utils.checkNotNull(user, "user");
             this.user = Optional.ofNullable(user);
             return this;
         }
 
-        public Builder user(Optional<? extends List<User>> user) {
+        public Builder user(Optional<? extends List<GetTopWatchedContentUser>> user) {
             Utils.checkNotNull(user, "user");
             this.user = user;
             return this;
