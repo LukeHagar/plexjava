@@ -285,13 +285,22 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallGetGenresLibrary {
         GetGenresLibraryResponse getGenresLibrary(
-            int sectionKey) throws Exception;
+            int sectionKey,
+            GetGenresLibraryQueryParamType type) throws Exception;
     }
 
 
     public interface MethodCallGetCountriesLibrary {
         GetCountriesLibraryResponse getCountriesLibrary(
-            int sectionKey) throws Exception;
+            int sectionKey,
+            GetCountriesLibraryQueryParamType type) throws Exception;
+    }
+
+
+    public interface MethodCallGetActorsLibrary {
+        GetActorsLibraryResponse getActorsLibrary(
+            int sectionKey,
+            GetActorsLibraryQueryParamType type) throws Exception;
     }
 
 
@@ -301,9 +310,9 @@ public class SDKMethodInterfaces {
     }
 
 
-    public interface MethodCallGetMetaDataByRatingKey {
-        GetMetaDataByRatingKeyResponse getMetaDataByRatingKey(
-            long ratingKey) throws Exception;
+    public interface MethodCallGetMediaMetaData {
+        GetMediaMetaDataResponse getMediaMetaData(
+            GetMediaMetaDataRequest request) throws Exception;
     }
 
 

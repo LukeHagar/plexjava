@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * GetPlaylistContentsQueryParamType - The type of media to retrieve.
+ * GetPlaylistContentsQueryParamType - The type of media to retrieve or filter by.
  * 1 = movie
  * 2 = show
  * 3 = season

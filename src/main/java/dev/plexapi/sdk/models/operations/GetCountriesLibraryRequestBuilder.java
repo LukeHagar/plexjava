@@ -10,6 +10,7 @@ import java.lang.Integer;
 public class GetCountriesLibraryRequestBuilder {
 
     private Integer sectionKey;
+    private GetCountriesLibraryQueryParamType type;
     private final SDKMethodInterfaces.MethodCallGetCountriesLibrary sdk;
 
     public GetCountriesLibraryRequestBuilder(SDKMethodInterfaces.MethodCallGetCountriesLibrary sdk) {
@@ -22,9 +23,16 @@ public class GetCountriesLibraryRequestBuilder {
         return this;
     }
 
+    public GetCountriesLibraryRequestBuilder type(GetCountriesLibraryQueryParamType type) {
+        Utils.checkNotNull(type, "type");
+        this.type = type;
+        return this;
+    }
+
     public GetCountriesLibraryResponse call() throws Exception {
 
         return sdk.getCountriesLibrary(
-            sectionKey);
+            sectionKey,
+            type);
     }
 }

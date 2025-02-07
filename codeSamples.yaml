@@ -841,26 +841,44 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: key
+          label: data
           source: |-
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetMetaDataByRatingKeyBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetMetaDataByRatingKeyUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetMetaDataByRatingKeyResponse;
+            import dev.plexapi.plexapi.models.errors.GetMediaMetaDataBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetMediaMetaDataUnauthorized;
+            import dev.plexapi.plexapi.models.operations.GetMediaMetaDataRequest;
+            import dev.plexapi.plexapi.models.operations.GetMediaMetaDataResponse;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws GetMetaDataByRatingKeyBadRequest, GetMetaDataByRatingKeyUnauthorized, Exception {
+                public static void main(String[] args) throws GetMediaMetaDataBadRequest, GetMediaMetaDataUnauthorized, Exception {
 
                     PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                         .build();
 
-                    GetMetaDataByRatingKeyResponse res = sdk.library().getMetaDataByRatingKey()
+                    GetMediaMetaDataRequest req = GetMediaMetaDataRequest.builder()
                             .ratingKey(9518L)
+                            .includeConcerts(true)
+                            .includeExtras(true)
+                            .includeOnDeck(true)
+                            .includePopularLeaves(true)
+                            .includePreferences(true)
+                            .includeReviews(true)
+                            .includeChapters(true)
+                            .includeStations(true)
+                            .includeExternalMedia(true)
+                            .asyncAugmentMetadata(true)
+                            .asyncCheckFiles(true)
+                            .asyncRefreshAnalysis(true)
+                            .asyncRefreshLocalMediaAgent(true)
+                            .build();
+
+                    GetMediaMetaDataResponse res = sdk.library().getMediaMetaData()
+                            .request(req)
                             .call();
 
                     if (res.object().isPresent()) {
@@ -1236,6 +1254,39 @@ actions:
                     }
                 }
             }
+  - target: $["paths"]["/library/sections/{sectionKey}/actor"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: library
+          source: |-
+            package hello.world;
+
+            import dev.plexapi.plexapi.PlexAPI;
+            import dev.plexapi.plexapi.models.errors.GetActorsLibraryBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetActorsLibraryUnauthorized;
+            import dev.plexapi.plexapi.models.operations.GetActorsLibraryQueryParamType;
+            import dev.plexapi.plexapi.models.operations.GetActorsLibraryResponse;
+            import java.lang.Exception;
+
+            public class Application {
+
+                public static void main(String[] args) throws GetActorsLibraryBadRequest, GetActorsLibraryUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                        .build();
+
+                    GetActorsLibraryResponse res = sdk.library().getActorsLibrary()
+                            .sectionKey(9518)
+                            .type(GetActorsLibraryQueryParamType.TvShow)
+                            .call();
+
+                    if (res.object().isPresent()) {
+                        // handle response
+                    }
+                }
+            }
   - target: $["paths"]["/library/sections/{sectionKey}/country"]["get"]
     update:
       x-codeSamples:
@@ -1247,6 +1298,7 @@ actions:
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.GetCountriesLibraryBadRequest;
             import dev.plexapi.plexapi.models.errors.GetCountriesLibraryUnauthorized;
+            import dev.plexapi.plexapi.models.operations.GetCountriesLibraryQueryParamType;
             import dev.plexapi.plexapi.models.operations.GetCountriesLibraryResponse;
             import java.lang.Exception;
 
@@ -1260,6 +1312,7 @@ actions:
 
                     GetCountriesLibraryResponse res = sdk.library().getCountriesLibrary()
                             .sectionKey(9518)
+                            .type(GetCountriesLibraryQueryParamType.TvShow)
                             .call();
 
                     if (res.object().isPresent()) {
@@ -1278,6 +1331,7 @@ actions:
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.GetGenresLibraryBadRequest;
             import dev.plexapi.plexapi.models.errors.GetGenresLibraryUnauthorized;
+            import dev.plexapi.plexapi.models.operations.GetGenresLibraryQueryParamType;
             import dev.plexapi.plexapi.models.operations.GetGenresLibraryResponse;
             import java.lang.Exception;
 
@@ -1291,6 +1345,7 @@ actions:
 
                     GetGenresLibraryResponse res = sdk.library().getGenresLibrary()
                             .sectionKey(9518)
+                            .type(GetGenresLibraryQueryParamType.TvShow)
                             .call();
 
                     if (res.object().isPresent()) {
@@ -1389,8 +1444,8 @@ actions:
 
                     GetLibraryItemsRequest req = GetLibraryItemsRequest.builder()
                             .tag(Tag.EDITION)
-                            .sectionKey(9518)
                             .type(GetLibraryItemsQueryParamType.TvShow)
+                            .sectionKey(9518)
                             .build();
 
                     GetLibraryItemsResponse res = sdk.library().getLibraryItems()

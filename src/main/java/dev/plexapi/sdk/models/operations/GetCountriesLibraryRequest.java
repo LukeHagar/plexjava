@@ -25,11 +25,26 @@ public class GetCountriesLibraryRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=sectionKey")
     private int sectionKey;
 
+    /**
+     * The type of media to retrieve or filter by.
+     * 1 = movie
+     * 2 = show
+     * 3 = season
+     * 4 = episode
+     * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
+     * 
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")
+    private GetCountriesLibraryQueryParamType type;
+
     @JsonCreator
     public GetCountriesLibraryRequest(
-            int sectionKey) {
+            int sectionKey,
+            GetCountriesLibraryQueryParamType type) {
         Utils.checkNotNull(sectionKey, "sectionKey");
+        Utils.checkNotNull(type, "type");
         this.sectionKey = sectionKey;
+        this.type = type;
     }
 
     /**
@@ -40,6 +55,20 @@ public class GetCountriesLibraryRequest {
     @JsonIgnore
     public int sectionKey() {
         return sectionKey;
+    }
+
+    /**
+     * The type of media to retrieve or filter by.
+     * 1 = movie
+     * 2 = show
+     * 3 = season
+     * 4 = episode
+     * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
+     * 
+     */
+    @JsonIgnore
+    public GetCountriesLibraryQueryParamType type() {
+        return type;
     }
 
     public final static Builder builder() {
@@ -56,6 +85,21 @@ public class GetCountriesLibraryRequest {
         this.sectionKey = sectionKey;
         return this;
     }
+
+    /**
+     * The type of media to retrieve or filter by.
+     * 1 = movie
+     * 2 = show
+     * 3 = season
+     * 4 = episode
+     * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
+     * 
+     */
+    public GetCountriesLibraryRequest withType(GetCountriesLibraryQueryParamType type) {
+        Utils.checkNotNull(type, "type");
+        this.type = type;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -67,24 +111,29 @@ public class GetCountriesLibraryRequest {
         }
         GetCountriesLibraryRequest other = (GetCountriesLibraryRequest) o;
         return 
-            Objects.deepEquals(this.sectionKey, other.sectionKey);
+            Objects.deepEquals(this.sectionKey, other.sectionKey) &&
+            Objects.deepEquals(this.type, other.type);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
-            sectionKey);
+            sectionKey,
+            type);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetCountriesLibraryRequest.class,
-                "sectionKey", sectionKey);
+                "sectionKey", sectionKey,
+                "type", type);
     }
     
     public final static class Builder {
  
-        private Integer sectionKey;  
+        private Integer sectionKey;
+ 
+        private GetCountriesLibraryQueryParamType type;  
         
         private Builder() {
           // force use of static builder() method
@@ -100,10 +149,26 @@ public class GetCountriesLibraryRequest {
             this.sectionKey = sectionKey;
             return this;
         }
+
+        /**
+         * The type of media to retrieve or filter by.
+         * 1 = movie
+         * 2 = show
+         * 3 = season
+         * 4 = episode
+         * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
+         * 
+         */
+        public Builder type(GetCountriesLibraryQueryParamType type) {
+            Utils.checkNotNull(type, "type");
+            this.type = type;
+            return this;
+        }
         
         public GetCountriesLibraryRequest build() {
             return new GetCountriesLibraryRequest(
-                sectionKey);
+                sectionKey,
+                type);
         }
     }
 }

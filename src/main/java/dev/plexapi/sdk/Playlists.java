@@ -976,7 +976,7 @@ public class Playlists implements
      * Note that for dumb playlists, items have a `playlistItemID` attribute which is used for deleting or moving items.
      * 
      * @param playlistID the ID of the playlist
-     * @param type The type of media to retrieve.
+     * @param type The type of media to retrieve or filter by.
     1 = movie
     2 = show
     3 = season

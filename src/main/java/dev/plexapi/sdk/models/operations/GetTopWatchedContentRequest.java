@@ -26,7 +26,7 @@ public class GetTopWatchedContentRequest {
     private Optional<Long> includeGuids;
 
     /**
-     * The type of media to retrieve.
+     * The type of media to retrieve or filter by.
      * 1 = movie
      * 2 = show
      * 3 = season
@@ -62,7 +62,7 @@ public class GetTopWatchedContentRequest {
     }
 
     /**
-     * The type of media to retrieve.
+     * The type of media to retrieve or filter by.
      * 1 = movie
      * 2 = show
      * 3 = season
@@ -100,7 +100,7 @@ public class GetTopWatchedContentRequest {
     }
 
     /**
-     * The type of media to retrieve.
+     * The type of media to retrieve or filter by.
      * 1 = movie
      * 2 = show
      * 3 = season
@@ -173,7 +173,7 @@ public class GetTopWatchedContentRequest {
         }
 
         /**
-         * The type of media to retrieve.
+         * The type of media to retrieve or filter by.
          * 1 = movie
          * 2 = show
          * 3 = season

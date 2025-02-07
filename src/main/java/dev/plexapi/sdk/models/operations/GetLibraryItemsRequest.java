@@ -35,7 +35,7 @@ public class GetLibraryItemsRequest {
     private Optional<? extends IncludeGuids> includeGuids;
 
     /**
-     * The type of media to retrieve.
+     * The type of media to retrieve or filter by.
      * 1 = movie
      * 2 = show
      * 3 = season
@@ -44,7 +44,7 @@ public class GetLibraryItemsRequest {
      * 
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")
-    private Optional<? extends GetLibraryItemsQueryParamType> type;
+    private GetLibraryItemsQueryParamType type;
 
     /**
      * The unique key of the Plex library. 
@@ -83,7 +83,7 @@ public class GetLibraryItemsRequest {
     public GetLibraryItemsRequest(
             Tag tag,
             Optional<? extends IncludeGuids> includeGuids,
-            Optional<? extends GetLibraryItemsQueryParamType> type,
+            GetLibraryItemsQueryParamType type,
             int sectionKey,
             Optional<? extends GetLibraryItemsQueryParamIncludeMeta> includeMeta,
             Optional<Integer> xPlexContainerStart,
@@ -106,8 +106,9 @@ public class GetLibraryItemsRequest {
     
     public GetLibraryItemsRequest(
             Tag tag,
+            GetLibraryItemsQueryParamType type,
             int sectionKey) {
-        this(tag, Optional.empty(), Optional.empty(), sectionKey, Optional.empty(), Optional.empty(), Optional.empty());
+        this(tag, Optional.empty(), type, sectionKey, Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -129,7 +130,7 @@ public class GetLibraryItemsRequest {
     }
 
     /**
-     * The type of media to retrieve.
+     * The type of media to retrieve or filter by.
      * 1 = movie
      * 2 = show
      * 3 = season
@@ -137,10 +138,9 @@ public class GetLibraryItemsRequest {
      * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
      * 
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<GetLibraryItemsQueryParamType> type() {
-        return (Optional<GetLibraryItemsQueryParamType>) type;
+    public GetLibraryItemsQueryParamType type() {
+        return type;
     }
 
     /**
@@ -219,7 +219,7 @@ public class GetLibraryItemsRequest {
     }
 
     /**
-     * The type of media to retrieve.
+     * The type of media to retrieve or filter by.
      * 1 = movie
      * 2 = show
      * 3 = season
@@ -228,21 +228,6 @@ public class GetLibraryItemsRequest {
      * 
      */
     public GetLibraryItemsRequest withType(GetLibraryItemsQueryParamType type) {
-        Utils.checkNotNull(type, "type");
-        this.type = Optional.ofNullable(type);
-        return this;
-    }
-
-    /**
-     * The type of media to retrieve.
-     * 1 = movie
-     * 2 = show
-     * 3 = season
-     * 4 = episode
-     * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
-     * 
-     */
-    public GetLibraryItemsRequest withType(Optional<? extends GetLibraryItemsQueryParamType> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -376,7 +361,7 @@ public class GetLibraryItemsRequest {
  
         private Optional<? extends IncludeGuids> includeGuids;
  
-        private Optional<? extends GetLibraryItemsQueryParamType> type = Optional.empty();
+        private GetLibraryItemsQueryParamType type;
  
         private Integer sectionKey;
  
@@ -420,7 +405,7 @@ public class GetLibraryItemsRequest {
         }
 
         /**
-         * The type of media to retrieve.
+         * The type of media to retrieve or filter by.
          * 1 = movie
          * 2 = show
          * 3 = season
@@ -429,21 +414,6 @@ public class GetLibraryItemsRequest {
          * 
          */
         public Builder type(GetLibraryItemsQueryParamType type) {
-            Utils.checkNotNull(type, "type");
-            this.type = Optional.ofNullable(type);
-            return this;
-        }
-
-        /**
-         * The type of media to retrieve.
-         * 1 = movie
-         * 2 = show
-         * 3 = season
-         * 4 = episode
-         * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
-         * 
-         */
-        public Builder type(Optional<? extends GetLibraryItemsQueryParamType> type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;

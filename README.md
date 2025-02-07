@@ -69,7 +69,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'dev.plexapi:plexapi:0.11.5'
+implementation 'dev.plexapi:plexapi:0.11.6'
 ```
 
 Maven:
@@ -77,7 +77,7 @@ Maven:
 <dependency>
     <groupId>dev.plexapi</groupId>
     <artifactId>plexapi</artifactId>
-    <version>0.11.5</version>
+    <version>0.11.6</version>
 </dependency>
 ```
 
@@ -173,8 +173,9 @@ public class Application {
 * [getSearchLibrary](docs/sdks/library/README.md#getsearchlibrary) - Search Library
 * [getGenresLibrary](docs/sdks/library/README.md#getgenreslibrary) - Get Genres of library media
 * [getCountriesLibrary](docs/sdks/library/README.md#getcountrieslibrary) - Get Countries of library media
+* [getActorsLibrary](docs/sdks/library/README.md#getactorslibrary) - Get Actors of library media
 * [getSearchAllLibraries](docs/sdks/library/README.md#getsearchalllibraries) - Search All Libraries
-* [getMetaDataByRatingKey](docs/sdks/library/README.md#getmetadatabyratingkey) - Get Metadata by RatingKey
+* [getMediaMetaData](docs/sdks/library/README.md#getmediametadata) - Get Media Metadata
 * [getMetadataChildren](docs/sdks/library/README.md#getmetadatachildren) - Get Items Children
 * [getTopWatchedContent](docs/sdks/library/README.md#gettopwatchedcontent) - Get Top Watched Content
 * [getOnDeck](docs/sdks/library/README.md#getondeck) - Get On Deck

@@ -26,7 +26,7 @@ public class GetSearchLibraryRequest {
     private int sectionKey;
 
     /**
-     * The type of media to retrieve.
+     * The type of media to retrieve or filter by.
      * 1 = movie
      * 2 = show
      * 3 = season
@@ -58,7 +58,7 @@ public class GetSearchLibraryRequest {
     }
 
     /**
-     * The type of media to retrieve.
+     * The type of media to retrieve or filter by.
      * 1 = movie
      * 2 = show
      * 3 = season
@@ -87,7 +87,7 @@ public class GetSearchLibraryRequest {
     }
 
     /**
-     * The type of media to retrieve.
+     * The type of media to retrieve or filter by.
      * 1 = movie
      * 2 = show
      * 3 = season
@@ -151,7 +151,7 @@ public class GetSearchLibraryRequest {
         }
 
         /**
-         * The type of media to retrieve.
+         * The type of media to retrieve or filter by.
          * 1 = movie
          * 2 = show
          * 3 = season

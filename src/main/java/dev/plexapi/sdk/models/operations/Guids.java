@@ -7,35 +7,33 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
-import java.util.Optional;
 
 
 public class Guids {
 
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * The GUID value.
+     */
     @JsonProperty("id")
-    private Optional<String> id;
+    private String id;
 
     @JsonCreator
     public Guids(
-            @JsonProperty("id") Optional<String> id) {
+            @JsonProperty("id") String id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
     }
-    
-    public Guids() {
-        this(Optional.empty());
-    }
 
+    /**
+     * The GUID value.
+     */
     @JsonIgnore
-    public Optional<String> id() {
+    public String id() {
         return id;
     }
 
@@ -43,13 +41,10 @@ public class Guids {
         return new Builder();
     }
 
+    /**
+     * The GUID value.
+     */
     public Guids withId(String id) {
-        Utils.checkNotNull(id, "id");
-        this.id = Optional.ofNullable(id);
-        return this;
-    }
-
-    public Guids withId(Optional<String> id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
@@ -82,19 +77,16 @@ public class Guids {
     
     public final static class Builder {
  
-        private Optional<String> id = Optional.empty();  
+        private String id;  
         
         private Builder() {
           // force use of static builder() method
         }
 
+        /**
+         * The GUID value.
+         */
         public Builder id(String id) {
-            Utils.checkNotNull(id, "id");
-            this.id = Optional.ofNullable(id);
-            return this;
-        }
-
-        public Builder id(Optional<String> id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;

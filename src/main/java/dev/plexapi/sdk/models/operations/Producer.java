@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Integer;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -20,69 +20,117 @@ import java.util.Optional;
 
 public class Producer {
 
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * The unique role identifier.
+     */
     @JsonProperty("id")
-    private Optional<Integer> id;
+    private long id;
 
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * The filter string for the role.
+     */
     @JsonProperty("filter")
-    private Optional<String> filter;
+    private String filter;
 
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * The actor's name.
+     */
     @JsonProperty("tag")
-    private Optional<String> tag;
+    private String tag;
 
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * A key associated with the actor tag.
+     */
     @JsonProperty("tagKey")
-    private Optional<String> tagKey;
+    private String tagKey;
 
+    /**
+     * The character name or role.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("role")
+    private Optional<String> role;
+
+    /**
+     * URL for the role thumbnail image.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
     private Optional<String> thumb;
 
     @JsonCreator
     public Producer(
-            @JsonProperty("id") Optional<Integer> id,
-            @JsonProperty("filter") Optional<String> filter,
-            @JsonProperty("tag") Optional<String> tag,
-            @JsonProperty("tagKey") Optional<String> tagKey,
+            @JsonProperty("id") long id,
+            @JsonProperty("filter") String filter,
+            @JsonProperty("tag") String tag,
+            @JsonProperty("tagKey") String tagKey,
+            @JsonProperty("role") Optional<String> role,
             @JsonProperty("thumb") Optional<String> thumb) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(filter, "filter");
         Utils.checkNotNull(tag, "tag");
         Utils.checkNotNull(tagKey, "tagKey");
+        Utils.checkNotNull(role, "role");
         Utils.checkNotNull(thumb, "thumb");
         this.id = id;
         this.filter = filter;
         this.tag = tag;
         this.tagKey = tagKey;
+        this.role = role;
         this.thumb = thumb;
     }
     
-    public Producer() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    public Producer(
+            long id,
+            String filter,
+            String tag,
+            String tagKey) {
+        this(id, filter, tag, tagKey, Optional.empty(), Optional.empty());
     }
 
+    /**
+     * The unique role identifier.
+     */
     @JsonIgnore
-    public Optional<Integer> id() {
+    public long id() {
         return id;
     }
 
+    /**
+     * The filter string for the role.
+     */
     @JsonIgnore
-    public Optional<String> filter() {
+    public String filter() {
         return filter;
     }
 
+    /**
+     * The actor's name.
+     */
     @JsonIgnore
-    public Optional<String> tag() {
+    public String tag() {
         return tag;
     }
 
+    /**
+     * A key associated with the actor tag.
+     */
     @JsonIgnore
-    public Optional<String> tagKey() {
+    public String tagKey() {
         return tagKey;
     }
 
+    /**
+     * The character name or role.
+     */
+    @JsonIgnore
+    public Optional<String> role() {
+        return role;
+    }
+
+    /**
+     * URL for the role thumbnail image.
+     */
     @JsonIgnore
     public Optional<String> thumb() {
         return thumb;
@@ -92,60 +140,72 @@ public class Producer {
         return new Builder();
     }
 
-    public Producer withId(int id) {
-        Utils.checkNotNull(id, "id");
-        this.id = Optional.ofNullable(id);
-        return this;
-    }
-
-    public Producer withId(Optional<Integer> id) {
+    /**
+     * The unique role identifier.
+     */
+    public Producer withId(long id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
     }
 
+    /**
+     * The filter string for the role.
+     */
     public Producer withFilter(String filter) {
-        Utils.checkNotNull(filter, "filter");
-        this.filter = Optional.ofNullable(filter);
-        return this;
-    }
-
-    public Producer withFilter(Optional<String> filter) {
         Utils.checkNotNull(filter, "filter");
         this.filter = filter;
         return this;
     }
 
+    /**
+     * The actor's name.
+     */
     public Producer withTag(String tag) {
-        Utils.checkNotNull(tag, "tag");
-        this.tag = Optional.ofNullable(tag);
-        return this;
-    }
-
-    public Producer withTag(Optional<String> tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = tag;
         return this;
     }
 
+    /**
+     * A key associated with the actor tag.
+     */
     public Producer withTagKey(String tagKey) {
-        Utils.checkNotNull(tagKey, "tagKey");
-        this.tagKey = Optional.ofNullable(tagKey);
-        return this;
-    }
-
-    public Producer withTagKey(Optional<String> tagKey) {
         Utils.checkNotNull(tagKey, "tagKey");
         this.tagKey = tagKey;
         return this;
     }
 
+    /**
+     * The character name or role.
+     */
+    public Producer withRole(String role) {
+        Utils.checkNotNull(role, "role");
+        this.role = Optional.ofNullable(role);
+        return this;
+    }
+
+    /**
+     * The character name or role.
+     */
+    public Producer withRole(Optional<String> role) {
+        Utils.checkNotNull(role, "role");
+        this.role = role;
+        return this;
+    }
+
+    /**
+     * URL for the role thumbnail image.
+     */
     public Producer withThumb(String thumb) {
         Utils.checkNotNull(thumb, "thumb");
         this.thumb = Optional.ofNullable(thumb);
         return this;
     }
 
+    /**
+     * URL for the role thumbnail image.
+     */
     public Producer withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
         this.thumb = thumb;
@@ -166,6 +226,7 @@ public class Producer {
             Objects.deepEquals(this.filter, other.filter) &&
             Objects.deepEquals(this.tag, other.tag) &&
             Objects.deepEquals(this.tagKey, other.tagKey) &&
+            Objects.deepEquals(this.role, other.role) &&
             Objects.deepEquals(this.thumb, other.thumb);
     }
     
@@ -176,6 +237,7 @@ public class Producer {
             filter,
             tag,
             tagKey,
+            role,
             thumb);
     }
     
@@ -186,18 +248,21 @@ public class Producer {
                 "filter", filter,
                 "tag", tag,
                 "tagKey", tagKey,
+                "role", role,
                 "thumb", thumb);
     }
     
     public final static class Builder {
  
-        private Optional<Integer> id = Optional.empty();
+        private Long id;
  
-        private Optional<String> filter = Optional.empty();
+        private String filter;
  
-        private Optional<String> tag = Optional.empty();
+        private String tag;
  
-        private Optional<String> tagKey = Optional.empty();
+        private String tagKey;
+ 
+        private Optional<String> role = Optional.empty();
  
         private Optional<String> thumb = Optional.empty();  
         
@@ -205,60 +270,72 @@ public class Producer {
           // force use of static builder() method
         }
 
-        public Builder id(int id) {
-            Utils.checkNotNull(id, "id");
-            this.id = Optional.ofNullable(id);
-            return this;
-        }
-
-        public Builder id(Optional<Integer> id) {
+        /**
+         * The unique role identifier.
+         */
+        public Builder id(long id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;
         }
 
+        /**
+         * The filter string for the role.
+         */
         public Builder filter(String filter) {
-            Utils.checkNotNull(filter, "filter");
-            this.filter = Optional.ofNullable(filter);
-            return this;
-        }
-
-        public Builder filter(Optional<String> filter) {
             Utils.checkNotNull(filter, "filter");
             this.filter = filter;
             return this;
         }
 
+        /**
+         * The actor's name.
+         */
         public Builder tag(String tag) {
-            Utils.checkNotNull(tag, "tag");
-            this.tag = Optional.ofNullable(tag);
-            return this;
-        }
-
-        public Builder tag(Optional<String> tag) {
             Utils.checkNotNull(tag, "tag");
             this.tag = tag;
             return this;
         }
 
+        /**
+         * A key associated with the actor tag.
+         */
         public Builder tagKey(String tagKey) {
-            Utils.checkNotNull(tagKey, "tagKey");
-            this.tagKey = Optional.ofNullable(tagKey);
-            return this;
-        }
-
-        public Builder tagKey(Optional<String> tagKey) {
             Utils.checkNotNull(tagKey, "tagKey");
             this.tagKey = tagKey;
             return this;
         }
 
+        /**
+         * The character name or role.
+         */
+        public Builder role(String role) {
+            Utils.checkNotNull(role, "role");
+            this.role = Optional.ofNullable(role);
+            return this;
+        }
+
+        /**
+         * The character name or role.
+         */
+        public Builder role(Optional<String> role) {
+            Utils.checkNotNull(role, "role");
+            this.role = role;
+            return this;
+        }
+
+        /**
+         * URL for the role thumbnail image.
+         */
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
             this.thumb = Optional.ofNullable(thumb);
             return this;
         }
 
+        /**
+         * URL for the role thumbnail image.
+         */
         public Builder thumb(Optional<String> thumb) {
             Utils.checkNotNull(thumb, "thumb");
             this.thumb = thumb;
@@ -271,6 +348,7 @@ public class Producer {
                 filter,
                 tag,
                 tagKey,
+                role,
                 thumb);
         }
     }

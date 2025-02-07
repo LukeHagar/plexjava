@@ -7,6 +7,8 @@ package dev.plexapi.sdk;
 import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.models.errors.DeleteLibraryBadRequest;
 import dev.plexapi.sdk.models.errors.DeleteLibraryUnauthorized;
+import dev.plexapi.sdk.models.errors.GetActorsLibraryBadRequest;
+import dev.plexapi.sdk.models.errors.GetActorsLibraryUnauthorized;
 import dev.plexapi.sdk.models.errors.GetAllLibrariesBadRequest;
 import dev.plexapi.sdk.models.errors.GetAllLibrariesUnauthorized;
 import dev.plexapi.sdk.models.errors.GetCountriesLibraryBadRequest;
@@ -19,8 +21,8 @@ import dev.plexapi.sdk.models.errors.GetLibraryDetailsBadRequest;
 import dev.plexapi.sdk.models.errors.GetLibraryDetailsUnauthorized;
 import dev.plexapi.sdk.models.errors.GetLibraryItemsBadRequest;
 import dev.plexapi.sdk.models.errors.GetLibraryItemsUnauthorized;
-import dev.plexapi.sdk.models.errors.GetMetaDataByRatingKeyBadRequest;
-import dev.plexapi.sdk.models.errors.GetMetaDataByRatingKeyUnauthorized;
+import dev.plexapi.sdk.models.errors.GetMediaMetaDataBadRequest;
+import dev.plexapi.sdk.models.errors.GetMediaMetaDataUnauthorized;
 import dev.plexapi.sdk.models.errors.GetMetadataChildrenBadRequest;
 import dev.plexapi.sdk.models.errors.GetMetadataChildrenUnauthorized;
 import dev.plexapi.sdk.models.errors.GetOnDeckBadRequest;
@@ -40,9 +42,15 @@ import dev.plexapi.sdk.models.operations.DeleteLibraryRequest;
 import dev.plexapi.sdk.models.operations.DeleteLibraryRequestBuilder;
 import dev.plexapi.sdk.models.operations.DeleteLibraryResponse;
 import dev.plexapi.sdk.models.operations.Force;
+import dev.plexapi.sdk.models.operations.GetActorsLibraryQueryParamType;
+import dev.plexapi.sdk.models.operations.GetActorsLibraryRequest;
+import dev.plexapi.sdk.models.operations.GetActorsLibraryRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetActorsLibraryResponse;
+import dev.plexapi.sdk.models.operations.GetActorsLibraryResponseBody;
 import dev.plexapi.sdk.models.operations.GetAllLibrariesRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetAllLibrariesResponse;
 import dev.plexapi.sdk.models.operations.GetAllLibrariesResponseBody;
+import dev.plexapi.sdk.models.operations.GetCountriesLibraryQueryParamType;
 import dev.plexapi.sdk.models.operations.GetCountriesLibraryRequest;
 import dev.plexapi.sdk.models.operations.GetCountriesLibraryRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetCountriesLibraryResponse;
@@ -50,6 +58,7 @@ import dev.plexapi.sdk.models.operations.GetCountriesLibraryResponseBody;
 import dev.plexapi.sdk.models.operations.GetFileHashRequest;
 import dev.plexapi.sdk.models.operations.GetFileHashRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetFileHashResponse;
+import dev.plexapi.sdk.models.operations.GetGenresLibraryQueryParamType;
 import dev.plexapi.sdk.models.operations.GetGenresLibraryRequest;
 import dev.plexapi.sdk.models.operations.GetGenresLibraryRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetGenresLibraryResponse;
@@ -62,10 +71,10 @@ import dev.plexapi.sdk.models.operations.GetLibraryItemsRequest;
 import dev.plexapi.sdk.models.operations.GetLibraryItemsRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetLibraryItemsResponse;
 import dev.plexapi.sdk.models.operations.GetLibraryItemsResponseBody;
-import dev.plexapi.sdk.models.operations.GetMetaDataByRatingKeyRequest;
-import dev.plexapi.sdk.models.operations.GetMetaDataByRatingKeyRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetMetaDataByRatingKeyResponse;
-import dev.plexapi.sdk.models.operations.GetMetaDataByRatingKeyResponseBody;
+import dev.plexapi.sdk.models.operations.GetMediaMetaDataRequest;
+import dev.plexapi.sdk.models.operations.GetMediaMetaDataRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetMediaMetaDataResponse;
+import dev.plexapi.sdk.models.operations.GetMediaMetaDataResponseBody;
 import dev.plexapi.sdk.models.operations.GetMetadataChildrenRequest;
 import dev.plexapi.sdk.models.operations.GetMetadataChildrenRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetMetadataChildrenResponse;
@@ -127,8 +136,9 @@ public class Library implements
             MethodCallGetSearchLibrary,
             MethodCallGetGenresLibrary,
             MethodCallGetCountriesLibrary,
+            MethodCallGetActorsLibrary,
             MethodCallGetSearchAllLibraries,
-            MethodCallGetMetaDataByRatingKey,
+            MethodCallGetMediaMetaData,
             MethodCallGetMetadataChildren,
             MethodCallGetTopWatchedContent,
             MethodCallGetOnDeck {
@@ -1545,7 +1555,7 @@ public class Library implements
      * @param sectionKey The unique key of the Plex library. 
     Note: This is unique in the context of the Plex server.
 
-     * @param type The type of media to retrieve.
+     * @param type The type of media to retrieve or filter by.
     1 = movie
     2 = show
     3 = season
@@ -1728,15 +1738,24 @@ public class Library implements
      * @param sectionKey The unique key of the Plex library. 
     Note: This is unique in the context of the Plex server.
 
+     * @param type The type of media to retrieve or filter by.
+    1 = movie
+    2 = show
+    3 = season
+    4 = episode
+    E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
+
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetGenresLibraryResponse getGenresLibrary(
-            int sectionKey) throws Exception {
+            int sectionKey,
+            GetGenresLibraryQueryParamType type) throws Exception {
         GetGenresLibraryRequest request =
             GetGenresLibraryRequest
                 .builder()
                 .sectionKey(sectionKey)
+                .type(type)
                 .build();
         
         String _baseUrl = Utils.templateUrl(
@@ -1751,6 +1770,11 @@ public class Library implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
+
+        _req.addQueryParams(Utils.getQueryParams(
+                GetGenresLibraryRequest.class,
+                request, 
+                null));
         
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
@@ -1897,15 +1921,24 @@ public class Library implements
      * @param sectionKey The unique key of the Plex library. 
     Note: This is unique in the context of the Plex server.
 
+     * @param type The type of media to retrieve or filter by.
+    1 = movie
+    2 = show
+    3 = season
+    4 = episode
+    E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
+
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetCountriesLibraryResponse getCountriesLibrary(
-            int sectionKey) throws Exception {
+            int sectionKey,
+            GetCountriesLibraryQueryParamType type) throws Exception {
         GetCountriesLibraryRequest request =
             GetCountriesLibraryRequest
                 .builder()
                 .sectionKey(sectionKey)
+                .type(type)
                 .build();
         
         String _baseUrl = Utils.templateUrl(
@@ -1920,6 +1953,11 @@ public class Library implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
+
+        _req.addQueryParams(Utils.getQueryParams(
+                GetCountriesLibraryRequest.class,
+                request, 
+                null));
         
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
@@ -2013,6 +2051,189 @@ public class Library implements
                 GetCountriesLibraryUnauthorized _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<GetCountriesLibraryUnauthorized>() {});
+                    _out.withRawResponse(Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.extractByteArrayFromBody(_httpRes));
+    }
+
+
+
+    /**
+     * Get Actors of library media
+     * Retrieves a list of all the actors that are found for the media in this library.
+     * 
+     * @return The call builder
+     */
+    public GetActorsLibraryRequestBuilder getActorsLibrary() {
+        return new GetActorsLibraryRequestBuilder(this);
+    }
+
+    /**
+     * Get Actors of library media
+     * Retrieves a list of all the actors that are found for the media in this library.
+     * 
+     * @param sectionKey The unique key of the Plex library. 
+    Note: This is unique in the context of the Plex server.
+
+     * @param type The type of media to retrieve or filter by.
+    1 = movie
+    2 = show
+    3 = season
+    4 = episode
+    E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
+
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetActorsLibraryResponse getActorsLibrary(
+            int sectionKey,
+            GetActorsLibraryQueryParamType type) throws Exception {
+        GetActorsLibraryRequest request =
+            GetActorsLibraryRequest
+                .builder()
+                .sectionKey(sectionKey)
+                .type(type)
+                .build();
+        
+        String _baseUrl = Utils.templateUrl(
+                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+        String _url = Utils.generateURL(
+                GetActorsLibraryRequest.class,
+                _baseUrl,
+                "/library/sections/{sectionKey}/actor",
+                request, null);
+        
+        HTTPRequest _req = new HTTPRequest(_url, "GET");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                SDKConfiguration.USER_AGENT);
+
+        _req.addQueryParams(Utils.getQueryParams(
+                GetActorsLibraryRequest.class,
+                request, 
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "get-actors-library", 
+                      Optional.of(List.of()), 
+                      _hookSecuritySource),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "404", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "get-actors-library",
+                            Optional.of(List.of()),
+                            _hookSecuritySource),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "get-actors-library",
+                            Optional.of(List.of()), 
+                            _hookSecuritySource),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "get-actors-library",
+                            Optional.of(List.of()),
+                            _hookSecuritySource), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
+            .headers()
+            .firstValue("Content-Type")
+            .orElse("application/octet-stream");
+        GetActorsLibraryResponse.Builder _resBuilder = 
+            GetActorsLibraryResponse
+                .builder()
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
+
+        GetActorsLibraryResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetActorsLibraryResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetActorsLibraryResponseBody>() {});
+                _res.withObject(Optional.ofNullable(_out));
+                return _res;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetActorsLibraryBadRequest _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetActorsLibraryBadRequest>() {});
+                    _out.withRawResponse(Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetActorsLibraryUnauthorized _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetActorsLibraryUnauthorized>() {});
                     _out.withRawResponse(Optional.ofNullable(_httpRes));
                 
                 throw _out;
@@ -2215,35 +2436,29 @@ public class Library implements
 
 
     /**
-     * Get Metadata by RatingKey
-     * This endpoint will return the metadata of a library item specified with the ratingKey.
+     * Get Media Metadata
+     * This endpoint will return all the (meta)data of a library item specified with by the ratingKey.
      * 
      * @return The call builder
      */
-    public GetMetaDataByRatingKeyRequestBuilder getMetaDataByRatingKey() {
-        return new GetMetaDataByRatingKeyRequestBuilder(this);
+    public GetMediaMetaDataRequestBuilder getMediaMetaData() {
+        return new GetMediaMetaDataRequestBuilder(this);
     }
 
     /**
-     * Get Metadata by RatingKey
-     * This endpoint will return the metadata of a library item specified with the ratingKey.
+     * Get Media Metadata
+     * This endpoint will return all the (meta)data of a library item specified with by the ratingKey.
      * 
-     * @param ratingKey the id of the library item to return the children of.
+     * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetMetaDataByRatingKeyResponse getMetaDataByRatingKey(
-            long ratingKey) throws Exception {
-        GetMetaDataByRatingKeyRequest request =
-            GetMetaDataByRatingKeyRequest
-                .builder()
-                .ratingKey(ratingKey)
-                .build();
-        
+    public GetMediaMetaDataResponse getMediaMetaData(
+            GetMediaMetaDataRequest request) throws Exception {
         String _baseUrl = Utils.templateUrl(
                 this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
-                GetMetaDataByRatingKeyRequest.class,
+                GetMediaMetaDataRequest.class,
                 _baseUrl,
                 "/library/metadata/{ratingKey}",
                 request, null);
@@ -2252,6 +2467,11 @@ public class Library implements
         _req.addHeader("Accept", "application/json")
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
+
+        _req.addQueryParams(Utils.getQueryParams(
+                GetMediaMetaDataRequest.class,
+                request, 
+                null));
         
         Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
         Utils.configureSecurity(_req,  
@@ -2261,18 +2481,18 @@ public class Library implements
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
-                      "get-meta-data-by-rating-key", 
+                      "get-media-meta-data", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
                   _req.build());
         HttpResponse<InputStream> _httpRes;
         try {
             _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "404", "4XX", "5XX")) {
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
-                            "get-meta-data-by-rating-key",
+                            "get-media-meta-data",
                             Optional.of(List.of()),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
@@ -2281,7 +2501,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
-                            "get-meta-data-by-rating-key",
+                            "get-media-meta-data",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
                          _httpRes);
@@ -2290,7 +2510,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
-                            "get-meta-data-by-rating-key",
+                            "get-media-meta-data",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
                         Optional.empty(),
@@ -2300,20 +2520,20 @@ public class Library implements
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        GetMetaDataByRatingKeyResponse.Builder _resBuilder = 
-            GetMetaDataByRatingKeyResponse
+        GetMediaMetaDataResponse.Builder _resBuilder = 
+            GetMediaMetaDataResponse
                 .builder()
                 .contentType(_contentType)
                 .statusCode(_httpRes.statusCode())
                 .rawResponse(_httpRes);
 
-        GetMetaDataByRatingKeyResponse _res = _resBuilder.build();
+        GetMediaMetaDataResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetMetaDataByRatingKeyResponseBody _out = Utils.mapper().readValue(
+                GetMediaMetaDataResponseBody _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetMetaDataByRatingKeyResponseBody>() {});
+                    new TypeReference<GetMediaMetaDataResponseBody>() {});
                 _res.withObject(Optional.ofNullable(_out));
                 return _res;
             } else {
@@ -2326,9 +2546,9 @@ public class Library implements
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetMetaDataByRatingKeyBadRequest _out = Utils.mapper().readValue(
+                GetMediaMetaDataBadRequest _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetMetaDataByRatingKeyBadRequest>() {});
+                    new TypeReference<GetMediaMetaDataBadRequest>() {});
                     _out.withRawResponse(Optional.ofNullable(_httpRes));
                 
                 throw _out;
@@ -2342,9 +2562,9 @@ public class Library implements
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetMetaDataByRatingKeyUnauthorized _out = Utils.mapper().readValue(
+                GetMediaMetaDataUnauthorized _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetMetaDataByRatingKeyUnauthorized>() {});
+                    new TypeReference<GetMediaMetaDataUnauthorized>() {});
                     _out.withRawResponse(Optional.ofNullable(_httpRes));
                 
                 throw _out;
@@ -2356,7 +2576,7 @@ public class Library implements
                     Utils.extractByteArrayFromBody(_httpRes));
             }
         }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
             // no content 
             throw new SDKError(
                     _httpRes, 
@@ -2584,7 +2804,7 @@ public class Library implements
      * Get Top Watched Content
      * This endpoint will return the top watched content from libraries of a certain type
      * 
-     * @param type The type of media to retrieve.
+     * @param type The type of media to retrieve or filter by.
     1 = movie
     2 = show
     3 = season
@@ -2605,7 +2825,7 @@ public class Library implements
      * 
      * @param includeGuids Adds the Guids object to the response
 
-     * @param type The type of media to retrieve.
+     * @param type The type of media to retrieve or filter by.
     1 = movie
     2 = show
     3 = season

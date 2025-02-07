@@ -10,6 +10,7 @@ import java.lang.Integer;
 public class GetGenresLibraryRequestBuilder {
 
     private Integer sectionKey;
+    private GetGenresLibraryQueryParamType type;
     private final SDKMethodInterfaces.MethodCallGetGenresLibrary sdk;
 
     public GetGenresLibraryRequestBuilder(SDKMethodInterfaces.MethodCallGetGenresLibrary sdk) {
@@ -22,9 +23,16 @@ public class GetGenresLibraryRequestBuilder {
         return this;
     }
 
+    public GetGenresLibraryRequestBuilder type(GetGenresLibraryQueryParamType type) {
+        Utils.checkNotNull(type, "type");
+        this.type = type;
+        return this;
+    }
+
     public GetGenresLibraryResponse call() throws Exception {
 
         return sdk.getGenresLibrary(
-            sectionKey);
+            sectionKey,
+            type);
     }
 }
