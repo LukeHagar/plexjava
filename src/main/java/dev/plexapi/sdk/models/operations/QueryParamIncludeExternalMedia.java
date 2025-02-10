@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * QueryParamIncludeExternalMedia - Whether to include external media in the search results.
+ * QueryParamIncludeExternalMedia
  */
 public enum QueryParamIncludeExternalMedia {
     Disable(0),

@@ -11,6 +11,8 @@ import dev.plexapi.sdk.models.errors.GetActorsLibraryBadRequest;
 import dev.plexapi.sdk.models.errors.GetActorsLibraryUnauthorized;
 import dev.plexapi.sdk.models.errors.GetAllLibrariesBadRequest;
 import dev.plexapi.sdk.models.errors.GetAllLibrariesUnauthorized;
+import dev.plexapi.sdk.models.errors.GetAllMediaLibraryBadRequest;
+import dev.plexapi.sdk.models.errors.GetAllMediaLibraryUnauthorized;
 import dev.plexapi.sdk.models.errors.GetCountriesLibraryBadRequest;
 import dev.plexapi.sdk.models.errors.GetCountriesLibraryUnauthorized;
 import dev.plexapi.sdk.models.errors.GetFileHashBadRequest;
@@ -50,6 +52,10 @@ import dev.plexapi.sdk.models.operations.GetActorsLibraryResponseBody;
 import dev.plexapi.sdk.models.operations.GetAllLibrariesRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetAllLibrariesResponse;
 import dev.plexapi.sdk.models.operations.GetAllLibrariesResponseBody;
+import dev.plexapi.sdk.models.operations.GetAllMediaLibraryRequest;
+import dev.plexapi.sdk.models.operations.GetAllMediaLibraryRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetAllMediaLibraryResponse;
+import dev.plexapi.sdk.models.operations.GetAllMediaLibraryResponseBody;
 import dev.plexapi.sdk.models.operations.GetCountriesLibraryQueryParamType;
 import dev.plexapi.sdk.models.operations.GetCountriesLibraryRequest;
 import dev.plexapi.sdk.models.operations.GetCountriesLibraryRequestBuilder;
@@ -132,6 +138,7 @@ public class Library implements
             MethodCallGetLibraryDetails,
             MethodCallDeleteLibrary,
             MethodCallGetLibraryItems,
+            MethodCallGetAllMediaLibrary,
             MethodCallGetRefreshLibraryMetadata,
             MethodCallGetSearchLibrary,
             MethodCallGetGenresLibrary,
@@ -1299,6 +1306,172 @@ public class Library implements
             }
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.extractByteArrayFromBody(_httpRes));
+    }
+
+
+
+    /**
+     * Get all media of library
+     * Retrieves a list of all general media data for this library.
+     * 
+     * @return The call builder
+     */
+    public GetAllMediaLibraryRequestBuilder getAllMediaLibrary() {
+        return new GetAllMediaLibraryRequestBuilder(this);
+    }
+
+    /**
+     * Get all media of library
+     * Retrieves a list of all general media data for this library.
+     * 
+     * @param request The request object containing all of the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetAllMediaLibraryResponse getAllMediaLibrary(
+            GetAllMediaLibraryRequest request) throws Exception {
+        String _baseUrl = Utils.templateUrl(
+                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+        String _url = Utils.generateURL(
+                GetAllMediaLibraryRequest.class,
+                _baseUrl,
+                "/library/sections/{sectionKey}/all",
+                request, null);
+        
+        HTTPRequest _req = new HTTPRequest(_url, "GET");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                SDKConfiguration.USER_AGENT);
+
+        _req.addQueryParams(Utils.getQueryParams(
+                GetAllMediaLibraryRequest.class,
+                request, 
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      "get-all-media-library", 
+                      Optional.of(List.of()), 
+                      _hookSecuritySource),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "404", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "get-all-media-library",
+                            Optional.of(List.of()),
+                            _hookSecuritySource),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            "get-all-media-library",
+                            Optional.of(List.of()), 
+                            _hookSecuritySource),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            "get-all-media-library",
+                            Optional.of(List.of()),
+                            _hookSecuritySource), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
+            .headers()
+            .firstValue("Content-Type")
+            .orElse("application/octet-stream");
+        GetAllMediaLibraryResponse.Builder _resBuilder = 
+            GetAllMediaLibraryResponse
+                .builder()
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
+
+        GetAllMediaLibraryResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetAllMediaLibraryResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetAllMediaLibraryResponseBody>() {});
+                _res.withObject(Optional.ofNullable(_out));
+                return _res;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetAllMediaLibraryBadRequest _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetAllMediaLibraryBadRequest>() {});
+                    _out.withRawResponse(Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetAllMediaLibraryUnauthorized _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetAllMediaLibraryUnauthorized>() {});
+                    _out.withRawResponse(Optional.ofNullable(_httpRes));
+                
+                throw _out;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
             // no content 
             throw new SDKError(
                     _httpRes, 

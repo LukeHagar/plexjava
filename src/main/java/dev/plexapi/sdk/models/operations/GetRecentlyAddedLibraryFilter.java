@@ -7,11 +7,15 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
+import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
+import java.util.Optional;
 
 
 public class GetRecentlyAddedLibraryFilter {
@@ -31,23 +35,39 @@ public class GetRecentlyAddedLibraryFilter {
     @JsonProperty("type")
     private String type;
 
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("advanced")
+    private Optional<Boolean> advanced;
+
     @JsonCreator
     public GetRecentlyAddedLibraryFilter(
             @JsonProperty("filter") String filter,
             @JsonProperty("filterType") String filterType,
             @JsonProperty("key") String key,
             @JsonProperty("title") String title,
-            @JsonProperty("type") String type) {
+            @JsonProperty("type") String type,
+            @JsonProperty("advanced") Optional<Boolean> advanced) {
         Utils.checkNotNull(filter, "filter");
         Utils.checkNotNull(filterType, "filterType");
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(title, "title");
         Utils.checkNotNull(type, "type");
+        Utils.checkNotNull(advanced, "advanced");
         this.filter = filter;
         this.filterType = filterType;
         this.key = key;
         this.title = title;
         this.type = type;
+        this.advanced = advanced;
+    }
+    
+    public GetRecentlyAddedLibraryFilter(
+            String filter,
+            String filterType,
+            String key,
+            String title,
+            String type) {
+        this(filter, filterType, key, title, type, Optional.empty());
     }
 
     @JsonIgnore
@@ -73,6 +93,11 @@ public class GetRecentlyAddedLibraryFilter {
     @JsonIgnore
     public String type() {
         return type;
+    }
+
+    @JsonIgnore
+    public Optional<Boolean> advanced() {
+        return advanced;
     }
 
     public final static Builder builder() {
@@ -108,6 +133,18 @@ public class GetRecentlyAddedLibraryFilter {
         this.type = type;
         return this;
     }
+
+    public GetRecentlyAddedLibraryFilter withAdvanced(boolean advanced) {
+        Utils.checkNotNull(advanced, "advanced");
+        this.advanced = Optional.ofNullable(advanced);
+        return this;
+    }
+
+    public GetRecentlyAddedLibraryFilter withAdvanced(Optional<Boolean> advanced) {
+        Utils.checkNotNull(advanced, "advanced");
+        this.advanced = advanced;
+        return this;
+    }
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -123,7 +160,8 @@ public class GetRecentlyAddedLibraryFilter {
             Objects.deepEquals(this.filterType, other.filterType) &&
             Objects.deepEquals(this.key, other.key) &&
             Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.type, other.type);
+            Objects.deepEquals(this.type, other.type) &&
+            Objects.deepEquals(this.advanced, other.advanced);
     }
     
     @Override
@@ -133,7 +171,8 @@ public class GetRecentlyAddedLibraryFilter {
             filterType,
             key,
             title,
-            type);
+            type,
+            advanced);
     }
     
     @Override
@@ -143,7 +182,8 @@ public class GetRecentlyAddedLibraryFilter {
                 "filterType", filterType,
                 "key", key,
                 "title", title,
-                "type", type);
+                "type", type,
+                "advanced", advanced);
     }
     
     public final static class Builder {
@@ -156,7 +196,9 @@ public class GetRecentlyAddedLibraryFilter {
  
         private String title;
  
-        private String type;  
+        private String type;
+ 
+        private Optional<Boolean> advanced = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -191,6 +233,18 @@ public class GetRecentlyAddedLibraryFilter {
             this.type = type;
             return this;
         }
+
+        public Builder advanced(boolean advanced) {
+            Utils.checkNotNull(advanced, "advanced");
+            this.advanced = Optional.ofNullable(advanced);
+            return this;
+        }
+
+        public Builder advanced(Optional<Boolean> advanced) {
+            Utils.checkNotNull(advanced, "advanced");
+            this.advanced = advanced;
+            return this;
+        }
         
         public GetRecentlyAddedLibraryFilter build() {
             return new GetRecentlyAddedLibraryFilter(
@@ -198,7 +252,8 @@ public class GetRecentlyAddedLibraryFilter {
                 filterType,
                 key,
                 title,
-                type);
+                type,
+                advanced);
         }
     }
 }

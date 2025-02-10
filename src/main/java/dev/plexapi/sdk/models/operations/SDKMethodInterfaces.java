@@ -269,6 +269,12 @@ public class SDKMethodInterfaces {
     }
 
 
+    public interface MethodCallGetAllMediaLibrary {
+        GetAllMediaLibraryResponse getAllMediaLibrary(
+            GetAllMediaLibraryRequest request) throws Exception;
+    }
+
+
     public interface MethodCallGetRefreshLibraryMetadata {
         GetRefreshLibraryMetadataResponse getRefreshLibraryMetadata(
             Optional<? extends Force> force,

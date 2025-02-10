@@ -17,7 +17,9 @@ public enum GetLibraryItemsLibraryType {
     Movie("movie"),
     TvShow("show"),
     Season("season"),
-    Episode("episode");
+    Episode("episode"),
+    Artist("artist"),
+    Album("album");
 
     @JsonValue
     private final String value;

@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Double;
+import java.lang.Integer;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -23,8 +23,11 @@ import java.util.Optional;
 
 public class GetMediaMetaDataMediaContainer {
 
+    /**
+     * Number of media items returned in this response.
+     */
     @JsonProperty("size")
-    private double size;
+    private int size;
 
     /**
      * Indicates whether syncing is allowed.
@@ -77,7 +80,7 @@ public class GetMediaMetaDataMediaContainer {
 
     @JsonCreator
     public GetMediaMetaDataMediaContainer(
-            @JsonProperty("size") double size,
+            @JsonProperty("size") int size,
             @JsonProperty("allowSync") boolean allowSync,
             @JsonProperty("identifier") String identifier,
             @JsonProperty("librarySectionID") long librarySectionID,
@@ -107,7 +110,7 @@ public class GetMediaMetaDataMediaContainer {
     }
     
     public GetMediaMetaDataMediaContainer(
-            double size,
+            int size,
             boolean allowSync,
             String identifier,
             long librarySectionID,
@@ -118,8 +121,11 @@ public class GetMediaMetaDataMediaContainer {
         this(size, allowSync, identifier, librarySectionID, librarySectionTitle, Optional.empty(), mediaTagPrefix, mediaTagVersion, metadata);
     }
 
+    /**
+     * Number of media items returned in this response.
+     */
     @JsonIgnore
-    public double size() {
+    public int size() {
         return size;
     }
 
@@ -191,7 +197,10 @@ public class GetMediaMetaDataMediaContainer {
         return new Builder();
     }
 
-    public GetMediaMetaDataMediaContainer withSize(double size) {
+    /**
+     * Number of media items returned in this response.
+     */
+    public GetMediaMetaDataMediaContainer withSize(int size) {
         Utils.checkNotNull(size, "size");
         this.size = size;
         return this;
@@ -329,7 +338,7 @@ public class GetMediaMetaDataMediaContainer {
     
     public final static class Builder {
  
-        private Double size;
+        private Integer size;
  
         private Boolean allowSync;
  
@@ -351,7 +360,10 @@ public class GetMediaMetaDataMediaContainer {
           // force use of static builder() method
         }
 
-        public Builder size(double size) {
+        /**
+         * Number of media items returned in this response.
+         */
+        public Builder size(int size) {
             Utils.checkNotNull(size, "size");
             this.size = size;
             return this;

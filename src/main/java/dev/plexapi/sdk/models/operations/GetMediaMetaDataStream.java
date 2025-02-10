@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Float;
+import java.lang.Integer;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -32,7 +33,7 @@ public class GetMediaMetaDataStream {
      * Stream type (1=video, 2=audio, 3=subtitle).
      */
     @JsonProperty("streamType")
-    private long streamType;
+    private int streamType;
 
     /**
      * Indicates if this stream is default.
@@ -51,13 +52,14 @@ public class GetMediaMetaDataStream {
      * Index of the stream.
      */
     @JsonProperty("index")
-    private long index;
+    private int index;
 
     /**
      * Bitrate of the stream.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bitrate")
-    private long bitrate;
+    private Optional<Integer> bitrate;
 
     /**
      * Language of the stream.
@@ -78,11 +80,18 @@ public class GetMediaMetaDataStream {
     private String languageCode;
 
     /**
+     * Indicates whether header compression is enabled.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("headerCompression")
+    private Optional<Boolean> headerCompression;
+
+    /**
      * Dolby Vision BL compatibility ID.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("DOVIBLCompatID")
-    private Optional<Long> doviblCompatID;
+    private Optional<Integer> doviblCompatID;
 
     /**
      * Indicates if Dolby Vision BL is present.
@@ -103,7 +112,7 @@ public class GetMediaMetaDataStream {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("DOVILevel")
-    private Optional<Long> doviLevel;
+    private Optional<Integer> doviLevel;
 
     /**
      * Indicates if Dolby Vision is present.
@@ -117,7 +126,7 @@ public class GetMediaMetaDataStream {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("DOVIProfile")
-    private Optional<Long> doviProfile;
+    private Optional<Integer> doviProfile;
 
     /**
      * Indicates if Dolby Vision RPU is present.
@@ -138,7 +147,7 @@ public class GetMediaMetaDataStream {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bitDepth")
-    private Optional<Long> bitDepth;
+    private Optional<Integer> bitDepth;
 
     /**
      * Chroma sample location.
@@ -159,14 +168,14 @@ public class GetMediaMetaDataStream {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("codedHeight")
-    private Optional<Long> codedHeight;
+    private Optional<Integer> codedHeight;
 
     /**
      * Coded video width.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("codedWidth")
-    private Optional<Long> codedWidth;
+    private Optional<Integer> codedWidth;
 
     /**
      * Color primaries used.
@@ -208,14 +217,14 @@ public class GetMediaMetaDataStream {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("height")
-    private Optional<Long> height;
+    private Optional<Integer> height;
 
     /**
      * Video level.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("level")
-    private Optional<Long> level;
+    private Optional<Integer> level;
 
     /**
      * Indicates if this is the original stream.
@@ -244,14 +253,14 @@ public class GetMediaMetaDataStream {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("refFrames")
-    private Optional<Long> refFrames;
+    private Optional<Integer> refFrames;
 
     /**
      * Width of the video stream.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("width")
-    private Optional<Long> width;
+    private Optional<Integer> width;
 
     /**
      * Display title for the stream.
@@ -281,7 +290,7 @@ public class GetMediaMetaDataStream {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("channels")
-    private Optional<Long> channels;
+    private Optional<Integer> channels;
 
     /**
      * Audio channel layout.
@@ -295,7 +304,7 @@ public class GetMediaMetaDataStream {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("samplingRate")
-    private Optional<Long> samplingRate;
+    private Optional<Integer> samplingRate;
 
     /**
      * Indicates if the stream can auto-sync.
@@ -328,47 +337,48 @@ public class GetMediaMetaDataStream {
     @JsonCreator
     public GetMediaMetaDataStream(
             @JsonProperty("id") long id,
-            @JsonProperty("streamType") long streamType,
+            @JsonProperty("streamType") int streamType,
             @JsonProperty("default") Optional<Boolean> default_,
             @JsonProperty("codec") String codec,
-            @JsonProperty("index") long index,
-            @JsonProperty("bitrate") long bitrate,
+            @JsonProperty("index") int index,
+            @JsonProperty("bitrate") Optional<Integer> bitrate,
             @JsonProperty("language") String language,
             @JsonProperty("languageTag") String languageTag,
             @JsonProperty("languageCode") String languageCode,
-            @JsonProperty("DOVIBLCompatID") Optional<Long> doviblCompatID,
+            @JsonProperty("headerCompression") Optional<Boolean> headerCompression,
+            @JsonProperty("DOVIBLCompatID") Optional<Integer> doviblCompatID,
             @JsonProperty("DOVIBLPresent") Optional<Boolean> doviblPresent,
             @JsonProperty("DOVIELPresent") Optional<Boolean> dovielPresent,
-            @JsonProperty("DOVILevel") Optional<Long> doviLevel,
+            @JsonProperty("DOVILevel") Optional<Integer> doviLevel,
             @JsonProperty("DOVIPresent") Optional<Boolean> doviPresent,
-            @JsonProperty("DOVIProfile") Optional<Long> doviProfile,
+            @JsonProperty("DOVIProfile") Optional<Integer> doviProfile,
             @JsonProperty("DOVIRPUPresent") Optional<Boolean> dovirpuPresent,
             @JsonProperty("DOVIVersion") Optional<String> doviVersion,
-            @JsonProperty("bitDepth") Optional<Long> bitDepth,
+            @JsonProperty("bitDepth") Optional<Integer> bitDepth,
             @JsonProperty("chromaLocation") Optional<String> chromaLocation,
             @JsonProperty("chromaSubsampling") Optional<String> chromaSubsampling,
-            @JsonProperty("codedHeight") Optional<Long> codedHeight,
-            @JsonProperty("codedWidth") Optional<Long> codedWidth,
+            @JsonProperty("codedHeight") Optional<Integer> codedHeight,
+            @JsonProperty("codedWidth") Optional<Integer> codedWidth,
             @JsonProperty("colorPrimaries") Optional<String> colorPrimaries,
             @JsonProperty("colorRange") Optional<String> colorRange,
             @JsonProperty("colorSpace") Optional<String> colorSpace,
             @JsonProperty("colorTrc") Optional<String> colorTrc,
             @JsonProperty("frameRate") Optional<Float> frameRate,
-            @JsonProperty("height") Optional<Long> height,
-            @JsonProperty("level") Optional<Long> level,
+            @JsonProperty("height") Optional<Integer> height,
+            @JsonProperty("level") Optional<Integer> level,
             @JsonProperty("original") Optional<Boolean> original,
             @JsonProperty("hasScalingMatrix") Optional<Boolean> hasScalingMatrix,
             @JsonProperty("profile") Optional<String> profile,
             @JsonProperty("scanType") Optional<String> scanType,
-            @JsonProperty("refFrames") Optional<Long> refFrames,
-            @JsonProperty("width") Optional<Long> width,
+            @JsonProperty("refFrames") Optional<Integer> refFrames,
+            @JsonProperty("width") Optional<Integer> width,
             @JsonProperty("displayTitle") String displayTitle,
             @JsonProperty("extendedDisplayTitle") String extendedDisplayTitle,
             @JsonProperty("selected") Optional<Boolean> selected,
             @JsonProperty("forced") Optional<Boolean> forced,
-            @JsonProperty("channels") Optional<Long> channels,
+            @JsonProperty("channels") Optional<Integer> channels,
             @JsonProperty("audioChannelLayout") Optional<String> audioChannelLayout,
-            @JsonProperty("samplingRate") Optional<Long> samplingRate,
+            @JsonProperty("samplingRate") Optional<Integer> samplingRate,
             @JsonProperty("canAutoSync") Optional<Boolean> canAutoSync,
             @JsonProperty("hearingImpaired") Optional<Boolean> hearingImpaired,
             @JsonProperty("dub") Optional<Boolean> dub,
@@ -382,6 +392,7 @@ public class GetMediaMetaDataStream {
         Utils.checkNotNull(language, "language");
         Utils.checkNotNull(languageTag, "languageTag");
         Utils.checkNotNull(languageCode, "languageCode");
+        Utils.checkNotNull(headerCompression, "headerCompression");
         Utils.checkNotNull(doviblCompatID, "doviblCompatID");
         Utils.checkNotNull(doviblPresent, "doviblPresent");
         Utils.checkNotNull(dovielPresent, "dovielPresent");
@@ -428,6 +439,7 @@ public class GetMediaMetaDataStream {
         this.language = language;
         this.languageTag = languageTag;
         this.languageCode = languageCode;
+        this.headerCompression = headerCompression;
         this.doviblCompatID = doviblCompatID;
         this.doviblPresent = doviblPresent;
         this.dovielPresent = dovielPresent;
@@ -469,16 +481,15 @@ public class GetMediaMetaDataStream {
     
     public GetMediaMetaDataStream(
             long id,
-            long streamType,
+            int streamType,
             String codec,
-            long index,
-            long bitrate,
+            int index,
             String language,
             String languageTag,
             String languageCode,
             String displayTitle,
             String extendedDisplayTitle) {
-        this(id, streamType, Optional.empty(), codec, index, bitrate, language, languageTag, languageCode, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), displayTitle, extendedDisplayTitle, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(id, streamType, Optional.empty(), codec, index, Optional.empty(), language, languageTag, languageCode, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), displayTitle, extendedDisplayTitle, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -493,7 +504,7 @@ public class GetMediaMetaDataStream {
      * Stream type (1=video, 2=audio, 3=subtitle).
      */
     @JsonIgnore
-    public long streamType() {
+    public int streamType() {
         return streamType;
     }
 
@@ -517,7 +528,7 @@ public class GetMediaMetaDataStream {
      * Index of the stream.
      */
     @JsonIgnore
-    public long index() {
+    public int index() {
         return index;
     }
 
@@ -525,7 +536,7 @@ public class GetMediaMetaDataStream {
      * Bitrate of the stream.
      */
     @JsonIgnore
-    public long bitrate() {
+    public Optional<Integer> bitrate() {
         return bitrate;
     }
 
@@ -554,10 +565,18 @@ public class GetMediaMetaDataStream {
     }
 
     /**
+     * Indicates whether header compression is enabled.
+     */
+    @JsonIgnore
+    public Optional<Boolean> headerCompression() {
+        return headerCompression;
+    }
+
+    /**
      * Dolby Vision BL compatibility ID.
      */
     @JsonIgnore
-    public Optional<Long> doviblCompatID() {
+    public Optional<Integer> doviblCompatID() {
         return doviblCompatID;
     }
 
@@ -581,7 +600,7 @@ public class GetMediaMetaDataStream {
      * Dolby Vision level.
      */
     @JsonIgnore
-    public Optional<Long> doviLevel() {
+    public Optional<Integer> doviLevel() {
         return doviLevel;
     }
 
@@ -597,7 +616,7 @@ public class GetMediaMetaDataStream {
      * Dolby Vision profile.
      */
     @JsonIgnore
-    public Optional<Long> doviProfile() {
+    public Optional<Integer> doviProfile() {
         return doviProfile;
     }
 
@@ -621,7 +640,7 @@ public class GetMediaMetaDataStream {
      * Bit depth of the video stream.
      */
     @JsonIgnore
-    public Optional<Long> bitDepth() {
+    public Optional<Integer> bitDepth() {
         return bitDepth;
     }
 
@@ -645,7 +664,7 @@ public class GetMediaMetaDataStream {
      * Coded video height.
      */
     @JsonIgnore
-    public Optional<Long> codedHeight() {
+    public Optional<Integer> codedHeight() {
         return codedHeight;
     }
 
@@ -653,7 +672,7 @@ public class GetMediaMetaDataStream {
      * Coded video width.
      */
     @JsonIgnore
-    public Optional<Long> codedWidth() {
+    public Optional<Integer> codedWidth() {
         return codedWidth;
     }
 
@@ -701,7 +720,7 @@ public class GetMediaMetaDataStream {
      * Height of the video stream.
      */
     @JsonIgnore
-    public Optional<Long> height() {
+    public Optional<Integer> height() {
         return height;
     }
 
@@ -709,7 +728,7 @@ public class GetMediaMetaDataStream {
      * Video level.
      */
     @JsonIgnore
-    public Optional<Long> level() {
+    public Optional<Integer> level() {
         return level;
     }
 
@@ -743,7 +762,7 @@ public class GetMediaMetaDataStream {
      * Number of reference frames.
      */
     @JsonIgnore
-    public Optional<Long> refFrames() {
+    public Optional<Integer> refFrames() {
         return refFrames;
     }
 
@@ -751,7 +770,7 @@ public class GetMediaMetaDataStream {
      * Width of the video stream.
      */
     @JsonIgnore
-    public Optional<Long> width() {
+    public Optional<Integer> width() {
         return width;
     }
 
@@ -788,7 +807,7 @@ public class GetMediaMetaDataStream {
      * Number of audio channels (for audio streams).
      */
     @JsonIgnore
-    public Optional<Long> channels() {
+    public Optional<Integer> channels() {
         return channels;
     }
 
@@ -804,7 +823,7 @@ public class GetMediaMetaDataStream {
      * Sampling rate for the audio stream.
      */
     @JsonIgnore
-    public Optional<Long> samplingRate() {
+    public Optional<Integer> samplingRate() {
         return samplingRate;
     }
 
@@ -856,7 +875,7 @@ public class GetMediaMetaDataStream {
     /**
      * Stream type (1=video, 2=audio, 3=subtitle).
      */
-    public GetMediaMetaDataStream withStreamType(long streamType) {
+    public GetMediaMetaDataStream withStreamType(int streamType) {
         Utils.checkNotNull(streamType, "streamType");
         this.streamType = streamType;
         return this;
@@ -892,7 +911,7 @@ public class GetMediaMetaDataStream {
     /**
      * Index of the stream.
      */
-    public GetMediaMetaDataStream withIndex(long index) {
+    public GetMediaMetaDataStream withIndex(int index) {
         Utils.checkNotNull(index, "index");
         this.index = index;
         return this;
@@ -901,7 +920,16 @@ public class GetMediaMetaDataStream {
     /**
      * Bitrate of the stream.
      */
-    public GetMediaMetaDataStream withBitrate(long bitrate) {
+    public GetMediaMetaDataStream withBitrate(int bitrate) {
+        Utils.checkNotNull(bitrate, "bitrate");
+        this.bitrate = Optional.ofNullable(bitrate);
+        return this;
+    }
+
+    /**
+     * Bitrate of the stream.
+     */
+    public GetMediaMetaDataStream withBitrate(Optional<Integer> bitrate) {
         Utils.checkNotNull(bitrate, "bitrate");
         this.bitrate = bitrate;
         return this;
@@ -935,9 +963,27 @@ public class GetMediaMetaDataStream {
     }
 
     /**
+     * Indicates whether header compression is enabled.
+     */
+    public GetMediaMetaDataStream withHeaderCompression(boolean headerCompression) {
+        Utils.checkNotNull(headerCompression, "headerCompression");
+        this.headerCompression = Optional.ofNullable(headerCompression);
+        return this;
+    }
+
+    /**
+     * Indicates whether header compression is enabled.
+     */
+    public GetMediaMetaDataStream withHeaderCompression(Optional<Boolean> headerCompression) {
+        Utils.checkNotNull(headerCompression, "headerCompression");
+        this.headerCompression = headerCompression;
+        return this;
+    }
+
+    /**
      * Dolby Vision BL compatibility ID.
      */
-    public GetMediaMetaDataStream withDOVIBLCompatID(long doviblCompatID) {
+    public GetMediaMetaDataStream withDOVIBLCompatID(int doviblCompatID) {
         Utils.checkNotNull(doviblCompatID, "doviblCompatID");
         this.doviblCompatID = Optional.ofNullable(doviblCompatID);
         return this;
@@ -946,7 +992,7 @@ public class GetMediaMetaDataStream {
     /**
      * Dolby Vision BL compatibility ID.
      */
-    public GetMediaMetaDataStream withDOVIBLCompatID(Optional<Long> doviblCompatID) {
+    public GetMediaMetaDataStream withDOVIBLCompatID(Optional<Integer> doviblCompatID) {
         Utils.checkNotNull(doviblCompatID, "doviblCompatID");
         this.doviblCompatID = doviblCompatID;
         return this;
@@ -991,7 +1037,7 @@ public class GetMediaMetaDataStream {
     /**
      * Dolby Vision level.
      */
-    public GetMediaMetaDataStream withDOVILevel(long doviLevel) {
+    public GetMediaMetaDataStream withDOVILevel(int doviLevel) {
         Utils.checkNotNull(doviLevel, "doviLevel");
         this.doviLevel = Optional.ofNullable(doviLevel);
         return this;
@@ -1000,7 +1046,7 @@ public class GetMediaMetaDataStream {
     /**
      * Dolby Vision level.
      */
-    public GetMediaMetaDataStream withDOVILevel(Optional<Long> doviLevel) {
+    public GetMediaMetaDataStream withDOVILevel(Optional<Integer> doviLevel) {
         Utils.checkNotNull(doviLevel, "doviLevel");
         this.doviLevel = doviLevel;
         return this;
@@ -1027,7 +1073,7 @@ public class GetMediaMetaDataStream {
     /**
      * Dolby Vision profile.
      */
-    public GetMediaMetaDataStream withDOVIProfile(long doviProfile) {
+    public GetMediaMetaDataStream withDOVIProfile(int doviProfile) {
         Utils.checkNotNull(doviProfile, "doviProfile");
         this.doviProfile = Optional.ofNullable(doviProfile);
         return this;
@@ -1036,7 +1082,7 @@ public class GetMediaMetaDataStream {
     /**
      * Dolby Vision profile.
      */
-    public GetMediaMetaDataStream withDOVIProfile(Optional<Long> doviProfile) {
+    public GetMediaMetaDataStream withDOVIProfile(Optional<Integer> doviProfile) {
         Utils.checkNotNull(doviProfile, "doviProfile");
         this.doviProfile = doviProfile;
         return this;
@@ -1081,7 +1127,7 @@ public class GetMediaMetaDataStream {
     /**
      * Bit depth of the video stream.
      */
-    public GetMediaMetaDataStream withBitDepth(long bitDepth) {
+    public GetMediaMetaDataStream withBitDepth(int bitDepth) {
         Utils.checkNotNull(bitDepth, "bitDepth");
         this.bitDepth = Optional.ofNullable(bitDepth);
         return this;
@@ -1090,7 +1136,7 @@ public class GetMediaMetaDataStream {
     /**
      * Bit depth of the video stream.
      */
-    public GetMediaMetaDataStream withBitDepth(Optional<Long> bitDepth) {
+    public GetMediaMetaDataStream withBitDepth(Optional<Integer> bitDepth) {
         Utils.checkNotNull(bitDepth, "bitDepth");
         this.bitDepth = bitDepth;
         return this;
@@ -1135,7 +1181,7 @@ public class GetMediaMetaDataStream {
     /**
      * Coded video height.
      */
-    public GetMediaMetaDataStream withCodedHeight(long codedHeight) {
+    public GetMediaMetaDataStream withCodedHeight(int codedHeight) {
         Utils.checkNotNull(codedHeight, "codedHeight");
         this.codedHeight = Optional.ofNullable(codedHeight);
         return this;
@@ -1144,7 +1190,7 @@ public class GetMediaMetaDataStream {
     /**
      * Coded video height.
      */
-    public GetMediaMetaDataStream withCodedHeight(Optional<Long> codedHeight) {
+    public GetMediaMetaDataStream withCodedHeight(Optional<Integer> codedHeight) {
         Utils.checkNotNull(codedHeight, "codedHeight");
         this.codedHeight = codedHeight;
         return this;
@@ -1153,7 +1199,7 @@ public class GetMediaMetaDataStream {
     /**
      * Coded video width.
      */
-    public GetMediaMetaDataStream withCodedWidth(long codedWidth) {
+    public GetMediaMetaDataStream withCodedWidth(int codedWidth) {
         Utils.checkNotNull(codedWidth, "codedWidth");
         this.codedWidth = Optional.ofNullable(codedWidth);
         return this;
@@ -1162,7 +1208,7 @@ public class GetMediaMetaDataStream {
     /**
      * Coded video width.
      */
-    public GetMediaMetaDataStream withCodedWidth(Optional<Long> codedWidth) {
+    public GetMediaMetaDataStream withCodedWidth(Optional<Integer> codedWidth) {
         Utils.checkNotNull(codedWidth, "codedWidth");
         this.codedWidth = codedWidth;
         return this;
@@ -1261,7 +1307,7 @@ public class GetMediaMetaDataStream {
     /**
      * Height of the video stream.
      */
-    public GetMediaMetaDataStream withHeight(long height) {
+    public GetMediaMetaDataStream withHeight(int height) {
         Utils.checkNotNull(height, "height");
         this.height = Optional.ofNullable(height);
         return this;
@@ -1270,7 +1316,7 @@ public class GetMediaMetaDataStream {
     /**
      * Height of the video stream.
      */
-    public GetMediaMetaDataStream withHeight(Optional<Long> height) {
+    public GetMediaMetaDataStream withHeight(Optional<Integer> height) {
         Utils.checkNotNull(height, "height");
         this.height = height;
         return this;
@@ -1279,7 +1325,7 @@ public class GetMediaMetaDataStream {
     /**
      * Video level.
      */
-    public GetMediaMetaDataStream withLevel(long level) {
+    public GetMediaMetaDataStream withLevel(int level) {
         Utils.checkNotNull(level, "level");
         this.level = Optional.ofNullable(level);
         return this;
@@ -1288,7 +1334,7 @@ public class GetMediaMetaDataStream {
     /**
      * Video level.
      */
-    public GetMediaMetaDataStream withLevel(Optional<Long> level) {
+    public GetMediaMetaDataStream withLevel(Optional<Integer> level) {
         Utils.checkNotNull(level, "level");
         this.level = level;
         return this;
@@ -1357,7 +1403,7 @@ public class GetMediaMetaDataStream {
     /**
      * Number of reference frames.
      */
-    public GetMediaMetaDataStream withRefFrames(long refFrames) {
+    public GetMediaMetaDataStream withRefFrames(int refFrames) {
         Utils.checkNotNull(refFrames, "refFrames");
         this.refFrames = Optional.ofNullable(refFrames);
         return this;
@@ -1366,7 +1412,7 @@ public class GetMediaMetaDataStream {
     /**
      * Number of reference frames.
      */
-    public GetMediaMetaDataStream withRefFrames(Optional<Long> refFrames) {
+    public GetMediaMetaDataStream withRefFrames(Optional<Integer> refFrames) {
         Utils.checkNotNull(refFrames, "refFrames");
         this.refFrames = refFrames;
         return this;
@@ -1375,7 +1421,7 @@ public class GetMediaMetaDataStream {
     /**
      * Width of the video stream.
      */
-    public GetMediaMetaDataStream withWidth(long width) {
+    public GetMediaMetaDataStream withWidth(int width) {
         Utils.checkNotNull(width, "width");
         this.width = Optional.ofNullable(width);
         return this;
@@ -1384,7 +1430,7 @@ public class GetMediaMetaDataStream {
     /**
      * Width of the video stream.
      */
-    public GetMediaMetaDataStream withWidth(Optional<Long> width) {
+    public GetMediaMetaDataStream withWidth(Optional<Integer> width) {
         Utils.checkNotNull(width, "width");
         this.width = width;
         return this;
@@ -1441,7 +1487,7 @@ public class GetMediaMetaDataStream {
     /**
      * Number of audio channels (for audio streams).
      */
-    public GetMediaMetaDataStream withChannels(long channels) {
+    public GetMediaMetaDataStream withChannels(int channels) {
         Utils.checkNotNull(channels, "channels");
         this.channels = Optional.ofNullable(channels);
         return this;
@@ -1450,7 +1496,7 @@ public class GetMediaMetaDataStream {
     /**
      * Number of audio channels (for audio streams).
      */
-    public GetMediaMetaDataStream withChannels(Optional<Long> channels) {
+    public GetMediaMetaDataStream withChannels(Optional<Integer> channels) {
         Utils.checkNotNull(channels, "channels");
         this.channels = channels;
         return this;
@@ -1477,7 +1523,7 @@ public class GetMediaMetaDataStream {
     /**
      * Sampling rate for the audio stream.
      */
-    public GetMediaMetaDataStream withSamplingRate(long samplingRate) {
+    public GetMediaMetaDataStream withSamplingRate(int samplingRate) {
         Utils.checkNotNull(samplingRate, "samplingRate");
         this.samplingRate = Optional.ofNullable(samplingRate);
         return this;
@@ -1486,7 +1532,7 @@ public class GetMediaMetaDataStream {
     /**
      * Sampling rate for the audio stream.
      */
-    public GetMediaMetaDataStream withSamplingRate(Optional<Long> samplingRate) {
+    public GetMediaMetaDataStream withSamplingRate(Optional<Integer> samplingRate) {
         Utils.checkNotNull(samplingRate, "samplingRate");
         this.samplingRate = samplingRate;
         return this;
@@ -1583,6 +1629,7 @@ public class GetMediaMetaDataStream {
             Objects.deepEquals(this.language, other.language) &&
             Objects.deepEquals(this.languageTag, other.languageTag) &&
             Objects.deepEquals(this.languageCode, other.languageCode) &&
+            Objects.deepEquals(this.headerCompression, other.headerCompression) &&
             Objects.deepEquals(this.doviblCompatID, other.doviblCompatID) &&
             Objects.deepEquals(this.doviblPresent, other.doviblPresent) &&
             Objects.deepEquals(this.dovielPresent, other.dovielPresent) &&
@@ -1634,6 +1681,7 @@ public class GetMediaMetaDataStream {
             language,
             languageTag,
             languageCode,
+            headerCompression,
             doviblCompatID,
             doviblPresent,
             dovielPresent,
@@ -1685,6 +1733,7 @@ public class GetMediaMetaDataStream {
                 "language", language,
                 "languageTag", languageTag,
                 "languageCode", languageCode,
+                "headerCompression", headerCompression,
                 "doviblCompatID", doviblCompatID,
                 "doviblPresent", doviblPresent,
                 "dovielPresent", dovielPresent,
@@ -1728,15 +1777,15 @@ public class GetMediaMetaDataStream {
  
         private Long id;
  
-        private Long streamType;
+        private Integer streamType;
  
         private Optional<Boolean> default_ = Optional.empty();
  
         private String codec;
  
-        private Long index;
+        private Integer index;
  
-        private Long bitrate;
+        private Optional<Integer> bitrate = Optional.empty();
  
         private String language;
  
@@ -1744,31 +1793,33 @@ public class GetMediaMetaDataStream {
  
         private String languageCode;
  
-        private Optional<Long> doviblCompatID = Optional.empty();
+        private Optional<Boolean> headerCompression = Optional.empty();
+ 
+        private Optional<Integer> doviblCompatID = Optional.empty();
  
         private Optional<Boolean> doviblPresent = Optional.empty();
  
         private Optional<Boolean> dovielPresent = Optional.empty();
  
-        private Optional<Long> doviLevel = Optional.empty();
+        private Optional<Integer> doviLevel = Optional.empty();
  
         private Optional<Boolean> doviPresent = Optional.empty();
  
-        private Optional<Long> doviProfile = Optional.empty();
+        private Optional<Integer> doviProfile = Optional.empty();
  
         private Optional<Boolean> dovirpuPresent = Optional.empty();
  
         private Optional<String> doviVersion = Optional.empty();
  
-        private Optional<Long> bitDepth = Optional.empty();
+        private Optional<Integer> bitDepth = Optional.empty();
  
         private Optional<String> chromaLocation = Optional.empty();
  
         private Optional<String> chromaSubsampling = Optional.empty();
  
-        private Optional<Long> codedHeight = Optional.empty();
+        private Optional<Integer> codedHeight = Optional.empty();
  
-        private Optional<Long> codedWidth = Optional.empty();
+        private Optional<Integer> codedWidth = Optional.empty();
  
         private Optional<String> colorPrimaries = Optional.empty();
  
@@ -1780,9 +1831,9 @@ public class GetMediaMetaDataStream {
  
         private Optional<Float> frameRate = Optional.empty();
  
-        private Optional<Long> height = Optional.empty();
+        private Optional<Integer> height = Optional.empty();
  
-        private Optional<Long> level = Optional.empty();
+        private Optional<Integer> level = Optional.empty();
  
         private Optional<Boolean> original = Optional.empty();
  
@@ -1792,9 +1843,9 @@ public class GetMediaMetaDataStream {
  
         private Optional<String> scanType = Optional.empty();
  
-        private Optional<Long> refFrames = Optional.empty();
+        private Optional<Integer> refFrames = Optional.empty();
  
-        private Optional<Long> width = Optional.empty();
+        private Optional<Integer> width = Optional.empty();
  
         private String displayTitle;
  
@@ -1804,11 +1855,11 @@ public class GetMediaMetaDataStream {
  
         private Optional<Boolean> forced = Optional.empty();
  
-        private Optional<Long> channels = Optional.empty();
+        private Optional<Integer> channels = Optional.empty();
  
         private Optional<String> audioChannelLayout = Optional.empty();
  
-        private Optional<Long> samplingRate = Optional.empty();
+        private Optional<Integer> samplingRate = Optional.empty();
  
         private Optional<Boolean> canAutoSync = Optional.empty();
  
@@ -1834,7 +1885,7 @@ public class GetMediaMetaDataStream {
         /**
          * Stream type (1=video, 2=audio, 3=subtitle).
          */
-        public Builder streamType(long streamType) {
+        public Builder streamType(int streamType) {
             Utils.checkNotNull(streamType, "streamType");
             this.streamType = streamType;
             return this;
@@ -1870,7 +1921,7 @@ public class GetMediaMetaDataStream {
         /**
          * Index of the stream.
          */
-        public Builder index(long index) {
+        public Builder index(int index) {
             Utils.checkNotNull(index, "index");
             this.index = index;
             return this;
@@ -1879,7 +1930,16 @@ public class GetMediaMetaDataStream {
         /**
          * Bitrate of the stream.
          */
-        public Builder bitrate(long bitrate) {
+        public Builder bitrate(int bitrate) {
+            Utils.checkNotNull(bitrate, "bitrate");
+            this.bitrate = Optional.ofNullable(bitrate);
+            return this;
+        }
+
+        /**
+         * Bitrate of the stream.
+         */
+        public Builder bitrate(Optional<Integer> bitrate) {
             Utils.checkNotNull(bitrate, "bitrate");
             this.bitrate = bitrate;
             return this;
@@ -1913,9 +1973,27 @@ public class GetMediaMetaDataStream {
         }
 
         /**
+         * Indicates whether header compression is enabled.
+         */
+        public Builder headerCompression(boolean headerCompression) {
+            Utils.checkNotNull(headerCompression, "headerCompression");
+            this.headerCompression = Optional.ofNullable(headerCompression);
+            return this;
+        }
+
+        /**
+         * Indicates whether header compression is enabled.
+         */
+        public Builder headerCompression(Optional<Boolean> headerCompression) {
+            Utils.checkNotNull(headerCompression, "headerCompression");
+            this.headerCompression = headerCompression;
+            return this;
+        }
+
+        /**
          * Dolby Vision BL compatibility ID.
          */
-        public Builder doviblCompatID(long doviblCompatID) {
+        public Builder doviblCompatID(int doviblCompatID) {
             Utils.checkNotNull(doviblCompatID, "doviblCompatID");
             this.doviblCompatID = Optional.ofNullable(doviblCompatID);
             return this;
@@ -1924,7 +2002,7 @@ public class GetMediaMetaDataStream {
         /**
          * Dolby Vision BL compatibility ID.
          */
-        public Builder doviblCompatID(Optional<Long> doviblCompatID) {
+        public Builder doviblCompatID(Optional<Integer> doviblCompatID) {
             Utils.checkNotNull(doviblCompatID, "doviblCompatID");
             this.doviblCompatID = doviblCompatID;
             return this;
@@ -1969,7 +2047,7 @@ public class GetMediaMetaDataStream {
         /**
          * Dolby Vision level.
          */
-        public Builder doviLevel(long doviLevel) {
+        public Builder doviLevel(int doviLevel) {
             Utils.checkNotNull(doviLevel, "doviLevel");
             this.doviLevel = Optional.ofNullable(doviLevel);
             return this;
@@ -1978,7 +2056,7 @@ public class GetMediaMetaDataStream {
         /**
          * Dolby Vision level.
          */
-        public Builder doviLevel(Optional<Long> doviLevel) {
+        public Builder doviLevel(Optional<Integer> doviLevel) {
             Utils.checkNotNull(doviLevel, "doviLevel");
             this.doviLevel = doviLevel;
             return this;
@@ -2005,7 +2083,7 @@ public class GetMediaMetaDataStream {
         /**
          * Dolby Vision profile.
          */
-        public Builder doviProfile(long doviProfile) {
+        public Builder doviProfile(int doviProfile) {
             Utils.checkNotNull(doviProfile, "doviProfile");
             this.doviProfile = Optional.ofNullable(doviProfile);
             return this;
@@ -2014,7 +2092,7 @@ public class GetMediaMetaDataStream {
         /**
          * Dolby Vision profile.
          */
-        public Builder doviProfile(Optional<Long> doviProfile) {
+        public Builder doviProfile(Optional<Integer> doviProfile) {
             Utils.checkNotNull(doviProfile, "doviProfile");
             this.doviProfile = doviProfile;
             return this;
@@ -2059,7 +2137,7 @@ public class GetMediaMetaDataStream {
         /**
          * Bit depth of the video stream.
          */
-        public Builder bitDepth(long bitDepth) {
+        public Builder bitDepth(int bitDepth) {
             Utils.checkNotNull(bitDepth, "bitDepth");
             this.bitDepth = Optional.ofNullable(bitDepth);
             return this;
@@ -2068,7 +2146,7 @@ public class GetMediaMetaDataStream {
         /**
          * Bit depth of the video stream.
          */
-        public Builder bitDepth(Optional<Long> bitDepth) {
+        public Builder bitDepth(Optional<Integer> bitDepth) {
             Utils.checkNotNull(bitDepth, "bitDepth");
             this.bitDepth = bitDepth;
             return this;
@@ -2113,7 +2191,7 @@ public class GetMediaMetaDataStream {
         /**
          * Coded video height.
          */
-        public Builder codedHeight(long codedHeight) {
+        public Builder codedHeight(int codedHeight) {
             Utils.checkNotNull(codedHeight, "codedHeight");
             this.codedHeight = Optional.ofNullable(codedHeight);
             return this;
@@ -2122,7 +2200,7 @@ public class GetMediaMetaDataStream {
         /**
          * Coded video height.
          */
-        public Builder codedHeight(Optional<Long> codedHeight) {
+        public Builder codedHeight(Optional<Integer> codedHeight) {
             Utils.checkNotNull(codedHeight, "codedHeight");
             this.codedHeight = codedHeight;
             return this;
@@ -2131,7 +2209,7 @@ public class GetMediaMetaDataStream {
         /**
          * Coded video width.
          */
-        public Builder codedWidth(long codedWidth) {
+        public Builder codedWidth(int codedWidth) {
             Utils.checkNotNull(codedWidth, "codedWidth");
             this.codedWidth = Optional.ofNullable(codedWidth);
             return this;
@@ -2140,7 +2218,7 @@ public class GetMediaMetaDataStream {
         /**
          * Coded video width.
          */
-        public Builder codedWidth(Optional<Long> codedWidth) {
+        public Builder codedWidth(Optional<Integer> codedWidth) {
             Utils.checkNotNull(codedWidth, "codedWidth");
             this.codedWidth = codedWidth;
             return this;
@@ -2239,7 +2317,7 @@ public class GetMediaMetaDataStream {
         /**
          * Height of the video stream.
          */
-        public Builder height(long height) {
+        public Builder height(int height) {
             Utils.checkNotNull(height, "height");
             this.height = Optional.ofNullable(height);
             return this;
@@ -2248,7 +2326,7 @@ public class GetMediaMetaDataStream {
         /**
          * Height of the video stream.
          */
-        public Builder height(Optional<Long> height) {
+        public Builder height(Optional<Integer> height) {
             Utils.checkNotNull(height, "height");
             this.height = height;
             return this;
@@ -2257,7 +2335,7 @@ public class GetMediaMetaDataStream {
         /**
          * Video level.
          */
-        public Builder level(long level) {
+        public Builder level(int level) {
             Utils.checkNotNull(level, "level");
             this.level = Optional.ofNullable(level);
             return this;
@@ -2266,7 +2344,7 @@ public class GetMediaMetaDataStream {
         /**
          * Video level.
          */
-        public Builder level(Optional<Long> level) {
+        public Builder level(Optional<Integer> level) {
             Utils.checkNotNull(level, "level");
             this.level = level;
             return this;
@@ -2335,7 +2413,7 @@ public class GetMediaMetaDataStream {
         /**
          * Number of reference frames.
          */
-        public Builder refFrames(long refFrames) {
+        public Builder refFrames(int refFrames) {
             Utils.checkNotNull(refFrames, "refFrames");
             this.refFrames = Optional.ofNullable(refFrames);
             return this;
@@ -2344,7 +2422,7 @@ public class GetMediaMetaDataStream {
         /**
          * Number of reference frames.
          */
-        public Builder refFrames(Optional<Long> refFrames) {
+        public Builder refFrames(Optional<Integer> refFrames) {
             Utils.checkNotNull(refFrames, "refFrames");
             this.refFrames = refFrames;
             return this;
@@ -2353,7 +2431,7 @@ public class GetMediaMetaDataStream {
         /**
          * Width of the video stream.
          */
-        public Builder width(long width) {
+        public Builder width(int width) {
             Utils.checkNotNull(width, "width");
             this.width = Optional.ofNullable(width);
             return this;
@@ -2362,7 +2440,7 @@ public class GetMediaMetaDataStream {
         /**
          * Width of the video stream.
          */
-        public Builder width(Optional<Long> width) {
+        public Builder width(Optional<Integer> width) {
             Utils.checkNotNull(width, "width");
             this.width = width;
             return this;
@@ -2419,7 +2497,7 @@ public class GetMediaMetaDataStream {
         /**
          * Number of audio channels (for audio streams).
          */
-        public Builder channels(long channels) {
+        public Builder channels(int channels) {
             Utils.checkNotNull(channels, "channels");
             this.channels = Optional.ofNullable(channels);
             return this;
@@ -2428,7 +2506,7 @@ public class GetMediaMetaDataStream {
         /**
          * Number of audio channels (for audio streams).
          */
-        public Builder channels(Optional<Long> channels) {
+        public Builder channels(Optional<Integer> channels) {
             Utils.checkNotNull(channels, "channels");
             this.channels = channels;
             return this;
@@ -2455,7 +2533,7 @@ public class GetMediaMetaDataStream {
         /**
          * Sampling rate for the audio stream.
          */
-        public Builder samplingRate(long samplingRate) {
+        public Builder samplingRate(int samplingRate) {
             Utils.checkNotNull(samplingRate, "samplingRate");
             this.samplingRate = Optional.ofNullable(samplingRate);
             return this;
@@ -2464,7 +2542,7 @@ public class GetMediaMetaDataStream {
         /**
          * Sampling rate for the audio stream.
          */
-        public Builder samplingRate(Optional<Long> samplingRate) {
+        public Builder samplingRate(Optional<Integer> samplingRate) {
             Utils.checkNotNull(samplingRate, "samplingRate");
             this.samplingRate = samplingRate;
             return this;
@@ -2553,6 +2631,7 @@ public class GetMediaMetaDataStream {
                 language,
                 languageTag,
                 languageCode,
+                headerCompression,
                 doviblCompatID,
                 doviblPresent,
                 dovielPresent,

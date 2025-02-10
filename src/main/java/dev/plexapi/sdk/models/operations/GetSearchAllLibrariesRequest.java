@@ -51,13 +51,13 @@ public class GetSearchAllLibrariesRequest {
      * Whether to include collections in the search results.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeCollections")
-    private Optional<? extends QueryParamIncludeCollections> includeCollections;
+    private Optional<? extends GetSearchAllLibrariesQueryParamIncludeCollections> includeCollections;
 
     /**
      * Whether to include external media in the search results.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeExternalMedia")
-    private Optional<? extends QueryParamIncludeExternalMedia> includeExternalMedia;
+    private Optional<? extends GetSearchAllLibrariesQueryParamIncludeExternalMedia> includeExternalMedia;
 
     @JsonCreator
     public GetSearchAllLibrariesRequest(
@@ -65,8 +65,8 @@ public class GetSearchAllLibrariesRequest {
             String clientID,
             Optional<Long> limit,
             Optional<? extends List<SearchTypes>> searchTypes,
-            Optional<? extends QueryParamIncludeCollections> includeCollections,
-            Optional<? extends QueryParamIncludeExternalMedia> includeExternalMedia) {
+            Optional<? extends GetSearchAllLibrariesQueryParamIncludeCollections> includeCollections,
+            Optional<? extends GetSearchAllLibrariesQueryParamIncludeExternalMedia> includeExternalMedia) {
         Utils.checkNotNull(query, "query");
         Utils.checkNotNull(clientID, "clientID");
         Utils.checkNotNull(limit, "limit");
@@ -126,8 +126,8 @@ public class GetSearchAllLibrariesRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<QueryParamIncludeCollections> includeCollections() {
-        return (Optional<QueryParamIncludeCollections>) includeCollections;
+    public Optional<GetSearchAllLibrariesQueryParamIncludeCollections> includeCollections() {
+        return (Optional<GetSearchAllLibrariesQueryParamIncludeCollections>) includeCollections;
     }
 
     /**
@@ -135,8 +135,8 @@ public class GetSearchAllLibrariesRequest {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<QueryParamIncludeExternalMedia> includeExternalMedia() {
-        return (Optional<QueryParamIncludeExternalMedia>) includeExternalMedia;
+    public Optional<GetSearchAllLibrariesQueryParamIncludeExternalMedia> includeExternalMedia() {
+        return (Optional<GetSearchAllLibrariesQueryParamIncludeExternalMedia>) includeExternalMedia;
     }
 
     public final static Builder builder() {
@@ -202,7 +202,7 @@ public class GetSearchAllLibrariesRequest {
     /**
      * Whether to include collections in the search results.
      */
-    public GetSearchAllLibrariesRequest withIncludeCollections(QueryParamIncludeCollections includeCollections) {
+    public GetSearchAllLibrariesRequest withIncludeCollections(GetSearchAllLibrariesQueryParamIncludeCollections includeCollections) {
         Utils.checkNotNull(includeCollections, "includeCollections");
         this.includeCollections = Optional.ofNullable(includeCollections);
         return this;
@@ -211,7 +211,7 @@ public class GetSearchAllLibrariesRequest {
     /**
      * Whether to include collections in the search results.
      */
-    public GetSearchAllLibrariesRequest withIncludeCollections(Optional<? extends QueryParamIncludeCollections> includeCollections) {
+    public GetSearchAllLibrariesRequest withIncludeCollections(Optional<? extends GetSearchAllLibrariesQueryParamIncludeCollections> includeCollections) {
         Utils.checkNotNull(includeCollections, "includeCollections");
         this.includeCollections = includeCollections;
         return this;
@@ -220,7 +220,7 @@ public class GetSearchAllLibrariesRequest {
     /**
      * Whether to include external media in the search results.
      */
-    public GetSearchAllLibrariesRequest withIncludeExternalMedia(QueryParamIncludeExternalMedia includeExternalMedia) {
+    public GetSearchAllLibrariesRequest withIncludeExternalMedia(GetSearchAllLibrariesQueryParamIncludeExternalMedia includeExternalMedia) {
         Utils.checkNotNull(includeExternalMedia, "includeExternalMedia");
         this.includeExternalMedia = Optional.ofNullable(includeExternalMedia);
         return this;
@@ -229,7 +229,7 @@ public class GetSearchAllLibrariesRequest {
     /**
      * Whether to include external media in the search results.
      */
-    public GetSearchAllLibrariesRequest withIncludeExternalMedia(Optional<? extends QueryParamIncludeExternalMedia> includeExternalMedia) {
+    public GetSearchAllLibrariesRequest withIncludeExternalMedia(Optional<? extends GetSearchAllLibrariesQueryParamIncludeExternalMedia> includeExternalMedia) {
         Utils.checkNotNull(includeExternalMedia, "includeExternalMedia");
         this.includeExternalMedia = includeExternalMedia;
         return this;
@@ -285,9 +285,9 @@ public class GetSearchAllLibrariesRequest {
  
         private Optional<? extends List<SearchTypes>> searchTypes = Optional.empty();
  
-        private Optional<? extends QueryParamIncludeCollections> includeCollections;
+        private Optional<? extends GetSearchAllLibrariesQueryParamIncludeCollections> includeCollections;
  
-        private Optional<? extends QueryParamIncludeExternalMedia> includeExternalMedia;  
+        private Optional<? extends GetSearchAllLibrariesQueryParamIncludeExternalMedia> includeExternalMedia;  
         
         private Builder() {
           // force use of static builder() method
@@ -352,7 +352,7 @@ public class GetSearchAllLibrariesRequest {
         /**
          * Whether to include collections in the search results.
          */
-        public Builder includeCollections(QueryParamIncludeCollections includeCollections) {
+        public Builder includeCollections(GetSearchAllLibrariesQueryParamIncludeCollections includeCollections) {
             Utils.checkNotNull(includeCollections, "includeCollections");
             this.includeCollections = Optional.ofNullable(includeCollections);
             return this;
@@ -361,7 +361,7 @@ public class GetSearchAllLibrariesRequest {
         /**
          * Whether to include collections in the search results.
          */
-        public Builder includeCollections(Optional<? extends QueryParamIncludeCollections> includeCollections) {
+        public Builder includeCollections(Optional<? extends GetSearchAllLibrariesQueryParamIncludeCollections> includeCollections) {
             Utils.checkNotNull(includeCollections, "includeCollections");
             this.includeCollections = includeCollections;
             return this;
@@ -370,7 +370,7 @@ public class GetSearchAllLibrariesRequest {
         /**
          * Whether to include external media in the search results.
          */
-        public Builder includeExternalMedia(QueryParamIncludeExternalMedia includeExternalMedia) {
+        public Builder includeExternalMedia(GetSearchAllLibrariesQueryParamIncludeExternalMedia includeExternalMedia) {
             Utils.checkNotNull(includeExternalMedia, "includeExternalMedia");
             this.includeExternalMedia = Optional.ofNullable(includeExternalMedia);
             return this;
@@ -379,7 +379,7 @@ public class GetSearchAllLibrariesRequest {
         /**
          * Whether to include external media in the search results.
          */
-        public Builder includeExternalMedia(Optional<? extends QueryParamIncludeExternalMedia> includeExternalMedia) {
+        public Builder includeExternalMedia(Optional<? extends GetSearchAllLibrariesQueryParamIncludeExternalMedia> includeExternalMedia) {
             Utils.checkNotNull(includeExternalMedia, "includeExternalMedia");
             this.includeExternalMedia = includeExternalMedia;
             return this;
@@ -400,17 +400,17 @@ public class GetSearchAllLibrariesRequest {
                 includeExternalMedia);
         }
 
-        private static final LazySingletonValue<Optional<? extends QueryParamIncludeCollections>> _SINGLETON_VALUE_IncludeCollections =
+        private static final LazySingletonValue<Optional<? extends GetSearchAllLibrariesQueryParamIncludeCollections>> _SINGLETON_VALUE_IncludeCollections =
                 new LazySingletonValue<>(
                         "includeCollections",
                         "0",
-                        new TypeReference<Optional<? extends QueryParamIncludeCollections>>() {});
+                        new TypeReference<Optional<? extends GetSearchAllLibrariesQueryParamIncludeCollections>>() {});
 
-        private static final LazySingletonValue<Optional<? extends QueryParamIncludeExternalMedia>> _SINGLETON_VALUE_IncludeExternalMedia =
+        private static final LazySingletonValue<Optional<? extends GetSearchAllLibrariesQueryParamIncludeExternalMedia>> _SINGLETON_VALUE_IncludeExternalMedia =
                 new LazySingletonValue<>(
                         "includeExternalMedia",
                         "0",
-                        new TypeReference<Optional<? extends QueryParamIncludeExternalMedia>>() {});
+                        new TypeReference<Optional<? extends GetSearchAllLibrariesQueryParamIncludeExternalMedia>>() {});
     }
 }
 

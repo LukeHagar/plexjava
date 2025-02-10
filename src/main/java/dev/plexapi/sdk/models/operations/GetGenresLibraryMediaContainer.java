@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Double;
 import java.lang.Integer;
 import java.lang.Long;
 import java.lang.Override;
@@ -25,47 +24,75 @@ import java.util.Optional;
 
 public class GetGenresLibraryMediaContainer {
 
+    /**
+     * Number of media items returned in this response.
+     */
     @JsonProperty("size")
-    private double size;
+    private int size;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("offset")
-    private Optional<Integer> offset;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("totalSize")
-    private Optional<Integer> totalSize;
-
-    @JsonProperty("identifier")
-    private String identifier;
-
+    /**
+     * Indicates whether syncing is allowed.
+     */
     @JsonProperty("allowSync")
     private boolean allowSync;
 
+    /**
+     * URL for the background artwork of the media container.
+     */
     @JsonProperty("art")
     private String art;
 
+    /**
+     * The content type or mode.
+     */
     @JsonProperty("content")
     private String content;
 
+    /**
+     * An plugin identifier for the media container.
+     */
+    @JsonProperty("identifier")
+    private String identifier;
+
+    /**
+     * The prefix used for media tag resource paths.
+     */
     @JsonProperty("mediaTagPrefix")
     private String mediaTagPrefix;
 
+    /**
+     * The version number for media tags.
+     */
     @JsonProperty("mediaTagVersion")
     private long mediaTagVersion;
 
+    /**
+     * Specifies whether caching is disabled.
+     */
     @JsonProperty("nocache")
     private boolean nocache;
 
+    /**
+     * URL for the thumbnail image of the media container.
+     */
     @JsonProperty("thumb")
     private String thumb;
 
+    /**
+     * The primary title of the media container.
+     */
     @JsonProperty("title1")
     private String title1;
 
+    /**
+     * The secondary title of the media container.
+     */
     @JsonProperty("title2")
     private String title2;
 
+    /**
+     * Identifier for the view group layout.
+     */
     @JsonProperty("viewGroup")
     private String viewGroup;
 
@@ -75,13 +102,11 @@ public class GetGenresLibraryMediaContainer {
 
     @JsonCreator
     public GetGenresLibraryMediaContainer(
-            @JsonProperty("size") double size,
-            @JsonProperty("offset") Optional<Integer> offset,
-            @JsonProperty("totalSize") Optional<Integer> totalSize,
-            @JsonProperty("identifier") String identifier,
+            @JsonProperty("size") int size,
             @JsonProperty("allowSync") boolean allowSync,
             @JsonProperty("art") String art,
             @JsonProperty("content") String content,
+            @JsonProperty("identifier") String identifier,
             @JsonProperty("mediaTagPrefix") String mediaTagPrefix,
             @JsonProperty("mediaTagVersion") long mediaTagVersion,
             @JsonProperty("nocache") boolean nocache,
@@ -91,12 +116,10 @@ public class GetGenresLibraryMediaContainer {
             @JsonProperty("viewGroup") String viewGroup,
             @JsonProperty("Directory") Optional<? extends List<GetGenresLibraryDirectory>> directory) {
         Utils.checkNotNull(size, "size");
-        Utils.checkNotNull(offset, "offset");
-        Utils.checkNotNull(totalSize, "totalSize");
-        Utils.checkNotNull(identifier, "identifier");
         Utils.checkNotNull(allowSync, "allowSync");
         Utils.checkNotNull(art, "art");
         Utils.checkNotNull(content, "content");
+        Utils.checkNotNull(identifier, "identifier");
         Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
         Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
         Utils.checkNotNull(nocache, "nocache");
@@ -106,12 +129,10 @@ public class GetGenresLibraryMediaContainer {
         Utils.checkNotNull(viewGroup, "viewGroup");
         Utils.checkNotNull(directory, "directory");
         this.size = size;
-        this.offset = offset;
-        this.totalSize = totalSize;
-        this.identifier = identifier;
         this.allowSync = allowSync;
         this.art = art;
         this.content = content;
+        this.identifier = identifier;
         this.mediaTagPrefix = mediaTagPrefix;
         this.mediaTagVersion = mediaTagVersion;
         this.nocache = nocache;
@@ -123,11 +144,11 @@ public class GetGenresLibraryMediaContainer {
     }
     
     public GetGenresLibraryMediaContainer(
-            double size,
-            String identifier,
+            int size,
             boolean allowSync,
             String art,
             String content,
+            String identifier,
             String mediaTagPrefix,
             long mediaTagVersion,
             boolean nocache,
@@ -135,74 +156,100 @@ public class GetGenresLibraryMediaContainer {
             String title1,
             String title2,
             String viewGroup) {
-        this(size, Optional.empty(), Optional.empty(), identifier, allowSync, art, content, mediaTagPrefix, mediaTagVersion, nocache, thumb, title1, title2, viewGroup, Optional.empty());
+        this(size, allowSync, art, content, identifier, mediaTagPrefix, mediaTagVersion, nocache, thumb, title1, title2, viewGroup, Optional.empty());
     }
 
+    /**
+     * Number of media items returned in this response.
+     */
     @JsonIgnore
-    public double size() {
+    public int size() {
         return size;
     }
 
-    @JsonIgnore
-    public Optional<Integer> offset() {
-        return offset;
-    }
-
-    @JsonIgnore
-    public Optional<Integer> totalSize() {
-        return totalSize;
-    }
-
-    @JsonIgnore
-    public String identifier() {
-        return identifier;
-    }
-
+    /**
+     * Indicates whether syncing is allowed.
+     */
     @JsonIgnore
     public boolean allowSync() {
         return allowSync;
     }
 
+    /**
+     * URL for the background artwork of the media container.
+     */
     @JsonIgnore
     public String art() {
         return art;
     }
 
+    /**
+     * The content type or mode.
+     */
     @JsonIgnore
     public String content() {
         return content;
     }
 
+    /**
+     * An plugin identifier for the media container.
+     */
+    @JsonIgnore
+    public String identifier() {
+        return identifier;
+    }
+
+    /**
+     * The prefix used for media tag resource paths.
+     */
     @JsonIgnore
     public String mediaTagPrefix() {
         return mediaTagPrefix;
     }
 
+    /**
+     * The version number for media tags.
+     */
     @JsonIgnore
     public long mediaTagVersion() {
         return mediaTagVersion;
     }
 
+    /**
+     * Specifies whether caching is disabled.
+     */
     @JsonIgnore
     public boolean nocache() {
         return nocache;
     }
 
+    /**
+     * URL for the thumbnail image of the media container.
+     */
     @JsonIgnore
     public String thumb() {
         return thumb;
     }
 
+    /**
+     * The primary title of the media container.
+     */
     @JsonIgnore
     public String title1() {
         return title1;
     }
 
+    /**
+     * The secondary title of the media container.
+     */
     @JsonIgnore
     public String title2() {
         return title2;
     }
 
+    /**
+     * Identifier for the view group layout.
+     */
     @JsonIgnore
     public String viewGroup() {
         return viewGroup;
@@ -218,96 +265,108 @@ public class GetGenresLibraryMediaContainer {
         return new Builder();
     }
 
-    public GetGenresLibraryMediaContainer withSize(double size) {
+    /**
+     * Number of media items returned in this response.
+     */
+    public GetGenresLibraryMediaContainer withSize(int size) {
         Utils.checkNotNull(size, "size");
         this.size = size;
         return this;
     }
 
-    public GetGenresLibraryMediaContainer withOffset(int offset) {
-        Utils.checkNotNull(offset, "offset");
-        this.offset = Optional.ofNullable(offset);
-        return this;
-    }
-
-    public GetGenresLibraryMediaContainer withOffset(Optional<Integer> offset) {
-        Utils.checkNotNull(offset, "offset");
-        this.offset = offset;
-        return this;
-    }
-
-    public GetGenresLibraryMediaContainer withTotalSize(int totalSize) {
-        Utils.checkNotNull(totalSize, "totalSize");
-        this.totalSize = Optional.ofNullable(totalSize);
-        return this;
-    }
-
-    public GetGenresLibraryMediaContainer withTotalSize(Optional<Integer> totalSize) {
-        Utils.checkNotNull(totalSize, "totalSize");
-        this.totalSize = totalSize;
-        return this;
-    }
-
-    public GetGenresLibraryMediaContainer withIdentifier(String identifier) {
-        Utils.checkNotNull(identifier, "identifier");
-        this.identifier = identifier;
-        return this;
-    }
-
+    /**
+     * Indicates whether syncing is allowed.
+     */
     public GetGenresLibraryMediaContainer withAllowSync(boolean allowSync) {
         Utils.checkNotNull(allowSync, "allowSync");
         this.allowSync = allowSync;
         return this;
     }
 
+    /**
+     * URL for the background artwork of the media container.
+     */
     public GetGenresLibraryMediaContainer withArt(String art) {
         Utils.checkNotNull(art, "art");
         this.art = art;
         return this;
     }
 
+    /**
+     * The content type or mode.
+     */
     public GetGenresLibraryMediaContainer withContent(String content) {
         Utils.checkNotNull(content, "content");
         this.content = content;
         return this;
     }
 
+    /**
+     * An plugin identifier for the media container.
+     */
+    public GetGenresLibraryMediaContainer withIdentifier(String identifier) {
+        Utils.checkNotNull(identifier, "identifier");
+        this.identifier = identifier;
+        return this;
+    }
+
+    /**
+     * The prefix used for media tag resource paths.
+     */
     public GetGenresLibraryMediaContainer withMediaTagPrefix(String mediaTagPrefix) {
         Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
         this.mediaTagPrefix = mediaTagPrefix;
         return this;
     }
 
+    /**
+     * The version number for media tags.
+     */
     public GetGenresLibraryMediaContainer withMediaTagVersion(long mediaTagVersion) {
         Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
         this.mediaTagVersion = mediaTagVersion;
         return this;
     }
 
+    /**
+     * Specifies whether caching is disabled.
+     */
     public GetGenresLibraryMediaContainer withNocache(boolean nocache) {
         Utils.checkNotNull(nocache, "nocache");
         this.nocache = nocache;
         return this;
     }
 
+    /**
+     * URL for the thumbnail image of the media container.
+     */
     public GetGenresLibraryMediaContainer withThumb(String thumb) {
         Utils.checkNotNull(thumb, "thumb");
         this.thumb = thumb;
         return this;
     }
 
+    /**
+     * The primary title of the media container.
+     */
     public GetGenresLibraryMediaContainer withTitle1(String title1) {
         Utils.checkNotNull(title1, "title1");
         this.title1 = title1;
         return this;
     }
 
+    /**
+     * The secondary title of the media container.
+     */
     public GetGenresLibraryMediaContainer withTitle2(String title2) {
         Utils.checkNotNull(title2, "title2");
         this.title2 = title2;
         return this;
     }
 
+    /**
+     * Identifier for the view group layout.
+     */
     public GetGenresLibraryMediaContainer withViewGroup(String viewGroup) {
         Utils.checkNotNull(viewGroup, "viewGroup");
         this.viewGroup = viewGroup;
@@ -337,12 +396,10 @@ public class GetGenresLibraryMediaContainer {
         GetGenresLibraryMediaContainer other = (GetGenresLibraryMediaContainer) o;
         return 
             Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.offset, other.offset) &&
-            Objects.deepEquals(this.totalSize, other.totalSize) &&
-            Objects.deepEquals(this.identifier, other.identifier) &&
             Objects.deepEquals(this.allowSync, other.allowSync) &&
             Objects.deepEquals(this.art, other.art) &&
             Objects.deepEquals(this.content, other.content) &&
+            Objects.deepEquals(this.identifier, other.identifier) &&
             Objects.deepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
             Objects.deepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
             Objects.deepEquals(this.nocache, other.nocache) &&
@@ -357,12 +414,10 @@ public class GetGenresLibraryMediaContainer {
     public int hashCode() {
         return Objects.hash(
             size,
-            offset,
-            totalSize,
-            identifier,
             allowSync,
             art,
             content,
+            identifier,
             mediaTagPrefix,
             mediaTagVersion,
             nocache,
@@ -377,12 +432,10 @@ public class GetGenresLibraryMediaContainer {
     public String toString() {
         return Utils.toString(GetGenresLibraryMediaContainer.class,
                 "size", size,
-                "offset", offset,
-                "totalSize", totalSize,
-                "identifier", identifier,
                 "allowSync", allowSync,
                 "art", art,
                 "content", content,
+                "identifier", identifier,
                 "mediaTagPrefix", mediaTagPrefix,
                 "mediaTagVersion", mediaTagVersion,
                 "nocache", nocache,
@@ -395,19 +448,15 @@ public class GetGenresLibraryMediaContainer {
     
     public final static class Builder {
  
-        private Double size;
- 
-        private Optional<Integer> offset = Optional.empty();
- 
-        private Optional<Integer> totalSize = Optional.empty();
- 
-        private String identifier;
+        private Integer size;
  
         private Boolean allowSync;
  
         private String art;
  
         private String content;
+ 
+        private String identifier;
  
         private String mediaTagPrefix;
  
@@ -429,96 +478,108 @@ public class GetGenresLibraryMediaContainer {
           // force use of static builder() method
         }
 
-        public Builder size(double size) {
+        /**
+         * Number of media items returned in this response.
+         */
+        public Builder size(int size) {
             Utils.checkNotNull(size, "size");
             this.size = size;
             return this;
         }
 
-        public Builder offset(int offset) {
-            Utils.checkNotNull(offset, "offset");
-            this.offset = Optional.ofNullable(offset);
-            return this;
-        }
-
-        public Builder offset(Optional<Integer> offset) {
-            Utils.checkNotNull(offset, "offset");
-            this.offset = offset;
-            return this;
-        }
-
-        public Builder totalSize(int totalSize) {
-            Utils.checkNotNull(totalSize, "totalSize");
-            this.totalSize = Optional.ofNullable(totalSize);
-            return this;
-        }
-
-        public Builder totalSize(Optional<Integer> totalSize) {
-            Utils.checkNotNull(totalSize, "totalSize");
-            this.totalSize = totalSize;
-            return this;
-        }
-
-        public Builder identifier(String identifier) {
-            Utils.checkNotNull(identifier, "identifier");
-            this.identifier = identifier;
-            return this;
-        }
-
+        /**
+         * Indicates whether syncing is allowed.
+         */
         public Builder allowSync(boolean allowSync) {
             Utils.checkNotNull(allowSync, "allowSync");
             this.allowSync = allowSync;
             return this;
         }
 
+        /**
+         * URL for the background artwork of the media container.
+         */
         public Builder art(String art) {
             Utils.checkNotNull(art, "art");
             this.art = art;
             return this;
         }
 
+        /**
+         * The content type or mode.
+         */
         public Builder content(String content) {
             Utils.checkNotNull(content, "content");
             this.content = content;
             return this;
         }
 
+        /**
+         * An plugin identifier for the media container.
+         */
+        public Builder identifier(String identifier) {
+            Utils.checkNotNull(identifier, "identifier");
+            this.identifier = identifier;
+            return this;
+        }
+
+        /**
+         * The prefix used for media tag resource paths.
+         */
         public Builder mediaTagPrefix(String mediaTagPrefix) {
             Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
             this.mediaTagPrefix = mediaTagPrefix;
             return this;
         }
 
+        /**
+         * The version number for media tags.
+         */
         public Builder mediaTagVersion(long mediaTagVersion) {
             Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
             this.mediaTagVersion = mediaTagVersion;
             return this;
         }
 
+        /**
+         * Specifies whether caching is disabled.
+         */
         public Builder nocache(boolean nocache) {
             Utils.checkNotNull(nocache, "nocache");
             this.nocache = nocache;
             return this;
         }
 
+        /**
+         * URL for the thumbnail image of the media container.
+         */
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
             this.thumb = thumb;
             return this;
         }
 
+        /**
+         * The primary title of the media container.
+         */
         public Builder title1(String title1) {
             Utils.checkNotNull(title1, "title1");
             this.title1 = title1;
             return this;
         }
 
+        /**
+         * The secondary title of the media container.
+         */
         public Builder title2(String title2) {
             Utils.checkNotNull(title2, "title2");
             this.title2 = title2;
             return this;
         }
 
+        /**
+         * Identifier for the view group layout.
+         */
         public Builder viewGroup(String viewGroup) {
             Utils.checkNotNull(viewGroup, "viewGroup");
             this.viewGroup = viewGroup;
@@ -540,12 +601,10 @@ public class GetGenresLibraryMediaContainer {
         public GetGenresLibraryMediaContainer build() {
             return new GetGenresLibraryMediaContainer(
                 size,
-                offset,
-                totalSize,
-                identifier,
                 allowSync,
                 art,
                 content,
+                identifier,
                 mediaTagPrefix,
                 mediaTagVersion,
                 nocache,

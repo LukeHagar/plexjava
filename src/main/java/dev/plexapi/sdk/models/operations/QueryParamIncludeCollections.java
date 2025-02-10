@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * QueryParamIncludeCollections - Whether to include collections in the search results.
+ * QueryParamIncludeCollections
  */
 public enum QueryParamIncludeCollections {
     Disable(0),

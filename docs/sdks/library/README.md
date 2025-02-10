@@ -14,6 +14,7 @@ API Calls interacting with Plex Media Server Libraries
 * [getLibraryDetails](#getlibrarydetails) - Get Library Details
 * [deleteLibrary](#deletelibrary) - Delete Library Section
 * [getLibraryItems](#getlibraryitems) - Get Library Items
+* [getAllMediaLibrary](#getallmedialibrary) - Get all media of library
 * [getRefreshLibraryMetadata](#getrefreshlibrarymetadata) - Refresh Metadata Of The Library
 * [getSearchLibrary](#getsearchlibrary) - Search Library
 * [getGenresLibrary](#getgenreslibrary) - Get Genres of library media
@@ -428,6 +429,66 @@ public class Application {
 | models/errors/GetLibraryItemsBadRequest   | 400                                       | application/json                          |
 | models/errors/GetLibraryItemsUnauthorized | 401                                       | application/json                          |
 | models/errors/SDKError                    | 4XX, 5XX                                  | \*/\*                                     |
+
+## getAllMediaLibrary
+
+Retrieves a list of all general media data for this library.
+
+
+### Example Usage
+
+```java
+package hello.world;
+
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.GetAllMediaLibraryBadRequest;
+import dev.plexapi.sdk.models.errors.GetAllMediaLibraryUnauthorized;
+import dev.plexapi.sdk.models.operations.GetAllMediaLibraryQueryParamType;
+import dev.plexapi.sdk.models.operations.GetAllMediaLibraryRequest;
+import dev.plexapi.sdk.models.operations.GetAllMediaLibraryResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws GetAllMediaLibraryBadRequest, GetAllMediaLibraryUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
+                .accessToken("<YOUR_API_KEY_HERE>")
+            .build();
+
+        GetAllMediaLibraryRequest req = GetAllMediaLibraryRequest.builder()
+                .sectionKey(9518)
+                .type(GetAllMediaLibraryQueryParamType.TvShow)
+                .build();
+
+        GetAllMediaLibraryResponse res = sdk.library().getAllMediaLibrary()
+                .request(req)
+                .call();
+
+        if (res.object().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `request`                                                                         | [GetAllMediaLibraryRequest](../../models/operations/GetAllMediaLibraryRequest.md) | :heavy_check_mark:                                                                | The request object to use for the request.                                        |
+
+### Response
+
+**[GetAllMediaLibraryResponse](../../models/operations/GetAllMediaLibraryResponse.md)**
+
+### Errors
+
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| models/errors/GetAllMediaLibraryBadRequest   | 400                                          | application/json                             |
+| models/errors/GetAllMediaLibraryUnauthorized | 401                                          | application/json                             |
+| models/errors/SDKError                       | 4XX, 5XX                                     | \*/\*                                        |
 
 ## getRefreshLibraryMetadata
 

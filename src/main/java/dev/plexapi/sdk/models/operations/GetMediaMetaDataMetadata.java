@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Float;
+import java.lang.Integer;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -145,8 +146,9 @@ public class GetMediaMetaDataMetadata {
     /**
      * The content rating (e.g., TV-MA).
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contentRating")
-    private String contentRating;
+    private Optional<String> contentRating;
 
     /**
      * A summary of the content.
@@ -178,8 +180,9 @@ public class GetMediaMetaDataMetadata {
     /**
      * The audience rating for the content.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audienceRating")
-    private float audienceRating;
+    private Optional<Float> audienceRating;
 
     /**
      * The number of times the item has been viewed.
@@ -206,7 +209,21 @@ public class GetMediaMetaDataMetadata {
      * The release year.
      */
     @JsonProperty("year")
-    private long year;
+    private int year;
+
+    /**
+     * The general rating
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("rating")
+    private Optional<Float> rating;
+
+    /**
+     * The URL or identifier for the rating image (e.g., Rotten Tomatoes rating image).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("ratingImage")
+    private Optional<String> ratingImage;
 
     /**
      * The tagline of the content.
@@ -246,13 +263,14 @@ public class GetMediaMetaDataMetadata {
      * Duration of the content in milliseconds.
      */
     @JsonProperty("duration")
-    private long duration;
+    private int duration;
 
     /**
      * The original release date.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("originallyAvailableAt")
-    private LocalDate originallyAvailableAt;
+    private Optional<LocalDate> originallyAvailableAt;
 
     /**
      * The total number of episodes (or leaves).
@@ -273,25 +291,20 @@ public class GetMediaMetaDataMetadata {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("childCount")
-    private Optional<Long> childCount;
+    private Optional<Integer> childCount;
 
-    /**
-     * Unix timestamp when the item was added.
-     */
     @JsonProperty("addedAt")
     private long addedAt;
 
-    /**
-     * Unix timestamp when the item was last updated.
-     */
     @JsonProperty("updatedAt")
     private long updatedAt;
 
     /**
      * The URL for the audience rating image.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audienceRatingImage")
-    private String audienceRatingImage;
+    private Optional<String> audienceRatingImage;
 
     /**
      * The index number of the parent entity, which could indicate its order or position.
@@ -351,14 +364,16 @@ public class GetMediaMetaDataMetadata {
     /**
      * An array of GUID objects.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Guid")
-    private List<Guids> guids;
+    private Optional<? extends List<GetMediaMetaDataGuids>> guids;
 
     /**
      * An array of rating objects.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Rating")
-    private List<Rating> rating;
+    private Optional<? extends List<Ratings>> ratings;
 
     /**
      * An array of Actor roles.
@@ -422,30 +437,32 @@ public class GetMediaMetaDataMetadata {
             @JsonProperty("librarySectionTitle") String librarySectionTitle,
             @JsonProperty("librarySectionID") long librarySectionID,
             @JsonProperty("librarySectionKey") String librarySectionKey,
-            @JsonProperty("contentRating") String contentRating,
+            @JsonProperty("contentRating") Optional<String> contentRating,
             @JsonProperty("summary") String summary,
             @JsonProperty("index") Optional<Long> index,
             @JsonProperty("grandparentTitle") Optional<String> grandparentTitle,
             @JsonProperty("parentTitle") Optional<String> parentTitle,
-            @JsonProperty("audienceRating") float audienceRating,
+            @JsonProperty("audienceRating") Optional<Float> audienceRating,
             @JsonProperty("viewCount") Optional<Long> viewCount,
             @JsonProperty("skipCount") Optional<Long> skipCount,
             @JsonProperty("lastViewedAt") Optional<Long> lastViewedAt,
-            @JsonProperty("year") long year,
+            @JsonProperty("year") int year,
+            @JsonProperty("rating") Optional<Float> rating,
+            @JsonProperty("ratingImage") Optional<String> ratingImage,
             @JsonProperty("tagline") Optional<String> tagline,
             @JsonProperty("chapterSource") Optional<String> chapterSource,
             @JsonProperty("primaryExtraKey") Optional<String> primaryExtraKey,
             @JsonProperty("thumb") String thumb,
             @JsonProperty("art") String art,
             @JsonProperty("theme") Optional<String> theme,
-            @JsonProperty("duration") long duration,
-            @JsonProperty("originallyAvailableAt") LocalDate originallyAvailableAt,
+            @JsonProperty("duration") int duration,
+            @JsonProperty("originallyAvailableAt") Optional<LocalDate> originallyAvailableAt,
             @JsonProperty("leafCount") Optional<Long> leafCount,
             @JsonProperty("viewedLeafCount") Optional<Long> viewedLeafCount,
-            @JsonProperty("childCount") Optional<Long> childCount,
+            @JsonProperty("childCount") Optional<Integer> childCount,
             @JsonProperty("addedAt") long addedAt,
             @JsonProperty("updatedAt") long updatedAt,
-            @JsonProperty("audienceRatingImage") String audienceRatingImage,
+            @JsonProperty("audienceRatingImage") Optional<String> audienceRatingImage,
             @JsonProperty("parentIndex") Optional<Long> parentIndex,
             @JsonProperty("parentThumb") Optional<String> parentThumb,
             @JsonProperty("grandparentThumb") Optional<String> grandparentThumb,
@@ -455,8 +472,8 @@ public class GetMediaMetaDataMetadata {
             @JsonProperty("UltraBlurColors") GetMediaMetaDataUltraBlurColors ultraBlurColors,
             @JsonProperty("Genre") Optional<? extends List<GetMediaMetaDataGenre>> genre,
             @JsonProperty("Country") Optional<? extends List<GetMediaMetaDataCountry>> country,
-            @JsonProperty("Guid") List<Guids> guids,
-            @JsonProperty("Rating") List<Rating> rating,
+            @JsonProperty("Guid") Optional<? extends List<GetMediaMetaDataGuids>> guids,
+            @JsonProperty("Rating") Optional<? extends List<Ratings>> ratings,
             @JsonProperty("Role") Optional<? extends List<GetMediaMetaDataRole>> role,
             @JsonProperty("Director") Optional<? extends List<GetMediaMetaDataDirector>> director,
             @JsonProperty("Writer") Optional<? extends List<GetMediaMetaDataWriter>> writer,
@@ -491,6 +508,8 @@ public class GetMediaMetaDataMetadata {
         Utils.checkNotNull(skipCount, "skipCount");
         Utils.checkNotNull(lastViewedAt, "lastViewedAt");
         Utils.checkNotNull(year, "year");
+        Utils.checkNotNull(rating, "rating");
+        Utils.checkNotNull(ratingImage, "ratingImage");
         Utils.checkNotNull(tagline, "tagline");
         Utils.checkNotNull(chapterSource, "chapterSource");
         Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
@@ -515,7 +534,7 @@ public class GetMediaMetaDataMetadata {
         Utils.checkNotNull(genre, "genre");
         Utils.checkNotNull(country, "country");
         Utils.checkNotNull(guids, "guids");
-        Utils.checkNotNull(rating, "rating");
+        Utils.checkNotNull(ratings, "ratings");
         Utils.checkNotNull(role, "role");
         Utils.checkNotNull(director, "director");
         Utils.checkNotNull(writer, "writer");
@@ -550,6 +569,8 @@ public class GetMediaMetaDataMetadata {
         this.skipCount = skipCount;
         this.lastViewedAt = lastViewedAt;
         this.year = year;
+        this.rating = rating;
+        this.ratingImage = ratingImage;
         this.tagline = tagline;
         this.chapterSource = chapterSource;
         this.primaryExtraKey = primaryExtraKey;
@@ -574,7 +595,7 @@ public class GetMediaMetaDataMetadata {
         this.genre = genre;
         this.country = country;
         this.guids = guids;
-        this.rating = rating;
+        this.ratings = ratings;
         this.role = role;
         this.director = director;
         this.writer = writer;
@@ -592,22 +613,16 @@ public class GetMediaMetaDataMetadata {
             String librarySectionTitle,
             long librarySectionID,
             String librarySectionKey,
-            String contentRating,
             String summary,
-            float audienceRating,
-            long year,
+            int year,
             String thumb,
             String art,
-            long duration,
-            LocalDate originallyAvailableAt,
+            int duration,
             long addedAt,
             long updatedAt,
-            String audienceRatingImage,
             List<GetMediaMetaDataImage> image,
-            GetMediaMetaDataUltraBlurColors ultraBlurColors,
-            List<Guids> guids,
-            List<Rating> rating) {
-        this(ratingKey, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), key, guid, Optional.empty(), Optional.empty(), type, title, Optional.empty(), librarySectionTitle, librarySectionID, librarySectionKey, contentRating, summary, Optional.empty(), Optional.empty(), Optional.empty(), audienceRating, Optional.empty(), Optional.empty(), Optional.empty(), year, Optional.empty(), Optional.empty(), Optional.empty(), thumb, art, Optional.empty(), duration, originallyAvailableAt, Optional.empty(), Optional.empty(), Optional.empty(), addedAt, updatedAt, audienceRatingImage, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), image, ultraBlurColors, Optional.empty(), Optional.empty(), guids, rating, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+            GetMediaMetaDataUltraBlurColors ultraBlurColors) {
+        this(ratingKey, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), key, guid, Optional.empty(), Optional.empty(), type, title, Optional.empty(), librarySectionTitle, librarySectionID, librarySectionKey, Optional.empty(), summary, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), year, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), thumb, art, Optional.empty(), duration, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), addedAt, updatedAt, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), image, ultraBlurColors, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -758,7 +773,7 @@ public class GetMediaMetaDataMetadata {
      * The content rating (e.g., TV-MA).
      */
     @JsonIgnore
-    public String contentRating() {
+    public Optional<String> contentRating() {
         return contentRating;
     }
 
@@ -798,7 +813,7 @@ public class GetMediaMetaDataMetadata {
      * The audience rating for the content.
      */
     @JsonIgnore
-    public float audienceRating() {
+    public Optional<Float> audienceRating() {
         return audienceRating;
     }
 
@@ -830,8 +845,24 @@ public class GetMediaMetaDataMetadata {
      * The release year.
      */
     @JsonIgnore
-    public long year() {
+    public int year() {
         return year;
+    }
+
+    /**
+     * The general rating
+     */
+    @JsonIgnore
+    public Optional<Float> rating() {
+        return rating;
+    }
+
+    /**
+     * The URL or identifier for the rating image (e.g., Rotten Tomatoes rating image).
+     */
+    @JsonIgnore
+    public Optional<String> ratingImage() {
+        return ratingImage;
     }
 
     /**
@@ -880,7 +911,7 @@ public class GetMediaMetaDataMetadata {
      * Duration of the content in milliseconds.
      */
     @JsonIgnore
-    public long duration() {
+    public int duration() {
         return duration;
     }
 
@@ -888,7 +919,7 @@ public class GetMediaMetaDataMetadata {
      * The original release date.
      */
     @JsonIgnore
-    public LocalDate originallyAvailableAt() {
+    public Optional<LocalDate> originallyAvailableAt() {
         return originallyAvailableAt;
     }
 
@@ -912,21 +943,15 @@ public class GetMediaMetaDataMetadata {
      * The number of child items.
      */
     @JsonIgnore
-    public Optional<Long> childCount() {
+    public Optional<Integer> childCount() {
         return childCount;
     }
 
-    /**
-     * Unix timestamp when the item was added.
-     */
     @JsonIgnore
     public long addedAt() {
         return addedAt;
     }
 
-    /**
-     * Unix timestamp when the item was last updated.
-     */
     @JsonIgnore
     public long updatedAt() {
         return updatedAt;
@@ -936,7 +961,7 @@ public class GetMediaMetaDataMetadata {
      * The URL for the audience rating image.
      */
     @JsonIgnore
-    public String audienceRatingImage() {
+    public Optional<String> audienceRatingImage() {
         return audienceRatingImage;
     }
 
@@ -1012,17 +1037,19 @@ public class GetMediaMetaDataMetadata {
     /**
      * An array of GUID objects.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public List<Guids> guids() {
-        return guids;
+    public Optional<List<GetMediaMetaDataGuids>> guids() {
+        return (Optional<List<GetMediaMetaDataGuids>>) guids;
     }
 
     /**
      * An array of rating objects.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public List<Rating> rating() {
-        return rating;
+    public Optional<List<Ratings>> ratings() {
+        return (Optional<List<Ratings>>) ratings;
     }
 
     /**
@@ -1340,6 +1367,15 @@ public class GetMediaMetaDataMetadata {
      */
     public GetMediaMetaDataMetadata withContentRating(String contentRating) {
         Utils.checkNotNull(contentRating, "contentRating");
+        this.contentRating = Optional.ofNullable(contentRating);
+        return this;
+    }
+
+    /**
+     * The content rating (e.g., TV-MA).
+     */
+    public GetMediaMetaDataMetadata withContentRating(Optional<String> contentRating) {
+        Utils.checkNotNull(contentRating, "contentRating");
         this.contentRating = contentRating;
         return this;
     }
@@ -1412,6 +1448,15 @@ public class GetMediaMetaDataMetadata {
      */
     public GetMediaMetaDataMetadata withAudienceRating(float audienceRating) {
         Utils.checkNotNull(audienceRating, "audienceRating");
+        this.audienceRating = Optional.ofNullable(audienceRating);
+        return this;
+    }
+
+    /**
+     * The audience rating for the content.
+     */
+    public GetMediaMetaDataMetadata withAudienceRating(Optional<Float> audienceRating) {
+        Utils.checkNotNull(audienceRating, "audienceRating");
         this.audienceRating = audienceRating;
         return this;
     }
@@ -1473,9 +1518,45 @@ public class GetMediaMetaDataMetadata {
     /**
      * The release year.
      */
-    public GetMediaMetaDataMetadata withYear(long year) {
+    public GetMediaMetaDataMetadata withYear(int year) {
         Utils.checkNotNull(year, "year");
         this.year = year;
+        return this;
+    }
+
+    /**
+     * The general rating
+     */
+    public GetMediaMetaDataMetadata withRating(float rating) {
+        Utils.checkNotNull(rating, "rating");
+        this.rating = Optional.ofNullable(rating);
+        return this;
+    }
+
+    /**
+     * The general rating
+     */
+    public GetMediaMetaDataMetadata withRating(Optional<Float> rating) {
+        Utils.checkNotNull(rating, "rating");
+        this.rating = rating;
+        return this;
+    }
+
+    /**
+     * The URL or identifier for the rating image (e.g., Rotten Tomatoes rating image).
+     */
+    public GetMediaMetaDataMetadata withRatingImage(String ratingImage) {
+        Utils.checkNotNull(ratingImage, "ratingImage");
+        this.ratingImage = Optional.ofNullable(ratingImage);
+        return this;
+    }
+
+    /**
+     * The URL or identifier for the rating image (e.g., Rotten Tomatoes rating image).
+     */
+    public GetMediaMetaDataMetadata withRatingImage(Optional<String> ratingImage) {
+        Utils.checkNotNull(ratingImage, "ratingImage");
+        this.ratingImage = ratingImage;
         return this;
     }
 
@@ -1560,7 +1641,7 @@ public class GetMediaMetaDataMetadata {
     /**
      * Duration of the content in milliseconds.
      */
-    public GetMediaMetaDataMetadata withDuration(long duration) {
+    public GetMediaMetaDataMetadata withDuration(int duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = duration;
         return this;
@@ -1570,6 +1651,15 @@ public class GetMediaMetaDataMetadata {
      * The original release date.
      */
     public GetMediaMetaDataMetadata withOriginallyAvailableAt(LocalDate originallyAvailableAt) {
+        Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
+        this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
+        return this;
+    }
+
+    /**
+     * The original release date.
+     */
+    public GetMediaMetaDataMetadata withOriginallyAvailableAt(Optional<LocalDate> originallyAvailableAt) {
         Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
         this.originallyAvailableAt = originallyAvailableAt;
         return this;
@@ -1614,7 +1704,7 @@ public class GetMediaMetaDataMetadata {
     /**
      * The number of child items.
      */
-    public GetMediaMetaDataMetadata withChildCount(long childCount) {
+    public GetMediaMetaDataMetadata withChildCount(int childCount) {
         Utils.checkNotNull(childCount, "childCount");
         this.childCount = Optional.ofNullable(childCount);
         return this;
@@ -1623,24 +1713,18 @@ public class GetMediaMetaDataMetadata {
     /**
      * The number of child items.
      */
-    public GetMediaMetaDataMetadata withChildCount(Optional<Long> childCount) {
+    public GetMediaMetaDataMetadata withChildCount(Optional<Integer> childCount) {
         Utils.checkNotNull(childCount, "childCount");
         this.childCount = childCount;
         return this;
     }
 
-    /**
-     * Unix timestamp when the item was added.
-     */
     public GetMediaMetaDataMetadata withAddedAt(long addedAt) {
         Utils.checkNotNull(addedAt, "addedAt");
         this.addedAt = addedAt;
         return this;
     }
 
-    /**
-     * Unix timestamp when the item was last updated.
-     */
     public GetMediaMetaDataMetadata withUpdatedAt(long updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
         this.updatedAt = updatedAt;
@@ -1651,6 +1735,15 @@ public class GetMediaMetaDataMetadata {
      * The URL for the audience rating image.
      */
     public GetMediaMetaDataMetadata withAudienceRatingImage(String audienceRatingImage) {
+        Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
+        this.audienceRatingImage = Optional.ofNullable(audienceRatingImage);
+        return this;
+    }
+
+    /**
+     * The URL for the audience rating image.
+     */
+    public GetMediaMetaDataMetadata withAudienceRatingImage(Optional<String> audienceRatingImage) {
         Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
         this.audienceRatingImage = audienceRatingImage;
         return this;
@@ -1794,7 +1887,16 @@ public class GetMediaMetaDataMetadata {
     /**
      * An array of GUID objects.
      */
-    public GetMediaMetaDataMetadata withGuids(List<Guids> guids) {
+    public GetMediaMetaDataMetadata withGuids(List<GetMediaMetaDataGuids> guids) {
+        Utils.checkNotNull(guids, "guids");
+        this.guids = Optional.ofNullable(guids);
+        return this;
+    }
+
+    /**
+     * An array of GUID objects.
+     */
+    public GetMediaMetaDataMetadata withGuids(Optional<? extends List<GetMediaMetaDataGuids>> guids) {
         Utils.checkNotNull(guids, "guids");
         this.guids = guids;
         return this;
@@ -1803,9 +1905,18 @@ public class GetMediaMetaDataMetadata {
     /**
      * An array of rating objects.
      */
-    public GetMediaMetaDataMetadata withRating(List<Rating> rating) {
-        Utils.checkNotNull(rating, "rating");
-        this.rating = rating;
+    public GetMediaMetaDataMetadata withRatings(List<Ratings> ratings) {
+        Utils.checkNotNull(ratings, "ratings");
+        this.ratings = Optional.ofNullable(ratings);
+        return this;
+    }
+
+    /**
+     * An array of rating objects.
+     */
+    public GetMediaMetaDataMetadata withRatings(Optional<? extends List<Ratings>> ratings) {
+        Utils.checkNotNull(ratings, "ratings");
+        this.ratings = ratings;
         return this;
     }
 
@@ -1955,6 +2066,8 @@ public class GetMediaMetaDataMetadata {
             Objects.deepEquals(this.skipCount, other.skipCount) &&
             Objects.deepEquals(this.lastViewedAt, other.lastViewedAt) &&
             Objects.deepEquals(this.year, other.year) &&
+            Objects.deepEquals(this.rating, other.rating) &&
+            Objects.deepEquals(this.ratingImage, other.ratingImage) &&
             Objects.deepEquals(this.tagline, other.tagline) &&
             Objects.deepEquals(this.chapterSource, other.chapterSource) &&
             Objects.deepEquals(this.primaryExtraKey, other.primaryExtraKey) &&
@@ -1979,7 +2092,7 @@ public class GetMediaMetaDataMetadata {
             Objects.deepEquals(this.genre, other.genre) &&
             Objects.deepEquals(this.country, other.country) &&
             Objects.deepEquals(this.guids, other.guids) &&
-            Objects.deepEquals(this.rating, other.rating) &&
+            Objects.deepEquals(this.ratings, other.ratings) &&
             Objects.deepEquals(this.role, other.role) &&
             Objects.deepEquals(this.director, other.director) &&
             Objects.deepEquals(this.writer, other.writer) &&
@@ -2019,6 +2132,8 @@ public class GetMediaMetaDataMetadata {
             skipCount,
             lastViewedAt,
             year,
+            rating,
+            ratingImage,
             tagline,
             chapterSource,
             primaryExtraKey,
@@ -2043,7 +2158,7 @@ public class GetMediaMetaDataMetadata {
             genre,
             country,
             guids,
-            rating,
+            ratings,
             role,
             director,
             writer,
@@ -2083,6 +2198,8 @@ public class GetMediaMetaDataMetadata {
                 "skipCount", skipCount,
                 "lastViewedAt", lastViewedAt,
                 "year", year,
+                "rating", rating,
+                "ratingImage", ratingImage,
                 "tagline", tagline,
                 "chapterSource", chapterSource,
                 "primaryExtraKey", primaryExtraKey,
@@ -2107,7 +2224,7 @@ public class GetMediaMetaDataMetadata {
                 "genre", genre,
                 "country", country,
                 "guids", guids,
-                "rating", rating,
+                "ratings", ratings,
                 "role", role,
                 "director", director,
                 "writer", writer,
@@ -2154,7 +2271,7 @@ public class GetMediaMetaDataMetadata {
  
         private String librarySectionKey;
  
-        private String contentRating;
+        private Optional<String> contentRating = Optional.empty();
  
         private String summary;
  
@@ -2164,7 +2281,7 @@ public class GetMediaMetaDataMetadata {
  
         private Optional<String> parentTitle = Optional.empty();
  
-        private Float audienceRating;
+        private Optional<Float> audienceRating = Optional.empty();
  
         private Optional<Long> viewCount = Optional.empty();
  
@@ -2172,7 +2289,11 @@ public class GetMediaMetaDataMetadata {
  
         private Optional<Long> lastViewedAt = Optional.empty();
  
-        private Long year;
+        private Integer year;
+ 
+        private Optional<Float> rating = Optional.empty();
+ 
+        private Optional<String> ratingImage = Optional.empty();
  
         private Optional<String> tagline = Optional.empty();
  
@@ -2186,21 +2307,21 @@ public class GetMediaMetaDataMetadata {
  
         private Optional<String> theme = Optional.empty();
  
-        private Long duration;
+        private Integer duration;
  
-        private LocalDate originallyAvailableAt;
+        private Optional<LocalDate> originallyAvailableAt = Optional.empty();
  
         private Optional<Long> leafCount = Optional.empty();
  
         private Optional<Long> viewedLeafCount = Optional.empty();
  
-        private Optional<Long> childCount = Optional.empty();
+        private Optional<Integer> childCount = Optional.empty();
  
         private Long addedAt;
  
         private Long updatedAt;
  
-        private String audienceRatingImage;
+        private Optional<String> audienceRatingImage = Optional.empty();
  
         private Optional<Long> parentIndex = Optional.empty();
  
@@ -2220,9 +2341,9 @@ public class GetMediaMetaDataMetadata {
  
         private Optional<? extends List<GetMediaMetaDataCountry>> country = Optional.empty();
  
-        private List<Guids> guids;
+        private Optional<? extends List<GetMediaMetaDataGuids>> guids = Optional.empty();
  
-        private List<Rating> rating;
+        private Optional<? extends List<Ratings>> ratings = Optional.empty();
  
         private Optional<? extends List<GetMediaMetaDataRole>> role = Optional.empty();
  
@@ -2497,6 +2618,15 @@ public class GetMediaMetaDataMetadata {
          */
         public Builder contentRating(String contentRating) {
             Utils.checkNotNull(contentRating, "contentRating");
+            this.contentRating = Optional.ofNullable(contentRating);
+            return this;
+        }
+
+        /**
+         * The content rating (e.g., TV-MA).
+         */
+        public Builder contentRating(Optional<String> contentRating) {
+            Utils.checkNotNull(contentRating, "contentRating");
             this.contentRating = contentRating;
             return this;
         }
@@ -2569,6 +2699,15 @@ public class GetMediaMetaDataMetadata {
          */
         public Builder audienceRating(float audienceRating) {
             Utils.checkNotNull(audienceRating, "audienceRating");
+            this.audienceRating = Optional.ofNullable(audienceRating);
+            return this;
+        }
+
+        /**
+         * The audience rating for the content.
+         */
+        public Builder audienceRating(Optional<Float> audienceRating) {
+            Utils.checkNotNull(audienceRating, "audienceRating");
             this.audienceRating = audienceRating;
             return this;
         }
@@ -2630,9 +2769,45 @@ public class GetMediaMetaDataMetadata {
         /**
          * The release year.
          */
-        public Builder year(long year) {
+        public Builder year(int year) {
             Utils.checkNotNull(year, "year");
             this.year = year;
+            return this;
+        }
+
+        /**
+         * The general rating
+         */
+        public Builder rating(float rating) {
+            Utils.checkNotNull(rating, "rating");
+            this.rating = Optional.ofNullable(rating);
+            return this;
+        }
+
+        /**
+         * The general rating
+         */
+        public Builder rating(Optional<Float> rating) {
+            Utils.checkNotNull(rating, "rating");
+            this.rating = rating;
+            return this;
+        }
+
+        /**
+         * The URL or identifier for the rating image (e.g., Rotten Tomatoes rating image).
+         */
+        public Builder ratingImage(String ratingImage) {
+            Utils.checkNotNull(ratingImage, "ratingImage");
+            this.ratingImage = Optional.ofNullable(ratingImage);
+            return this;
+        }
+
+        /**
+         * The URL or identifier for the rating image (e.g., Rotten Tomatoes rating image).
+         */
+        public Builder ratingImage(Optional<String> ratingImage) {
+            Utils.checkNotNull(ratingImage, "ratingImage");
+            this.ratingImage = ratingImage;
             return this;
         }
 
@@ -2717,7 +2892,7 @@ public class GetMediaMetaDataMetadata {
         /**
          * Duration of the content in milliseconds.
          */
-        public Builder duration(long duration) {
+        public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = duration;
             return this;
@@ -2727,6 +2902,15 @@ public class GetMediaMetaDataMetadata {
          * The original release date.
          */
         public Builder originallyAvailableAt(LocalDate originallyAvailableAt) {
+            Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
+            this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
+            return this;
+        }
+
+        /**
+         * The original release date.
+         */
+        public Builder originallyAvailableAt(Optional<LocalDate> originallyAvailableAt) {
             Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
             this.originallyAvailableAt = originallyAvailableAt;
             return this;
@@ -2771,7 +2955,7 @@ public class GetMediaMetaDataMetadata {
         /**
          * The number of child items.
          */
-        public Builder childCount(long childCount) {
+        public Builder childCount(int childCount) {
             Utils.checkNotNull(childCount, "childCount");
             this.childCount = Optional.ofNullable(childCount);
             return this;
@@ -2780,24 +2964,18 @@ public class GetMediaMetaDataMetadata {
         /**
          * The number of child items.
          */
-        public Builder childCount(Optional<Long> childCount) {
+        public Builder childCount(Optional<Integer> childCount) {
             Utils.checkNotNull(childCount, "childCount");
             this.childCount = childCount;
             return this;
         }
 
-        /**
-         * Unix timestamp when the item was added.
-         */
         public Builder addedAt(long addedAt) {
             Utils.checkNotNull(addedAt, "addedAt");
             this.addedAt = addedAt;
             return this;
         }
 
-        /**
-         * Unix timestamp when the item was last updated.
-         */
         public Builder updatedAt(long updatedAt) {
             Utils.checkNotNull(updatedAt, "updatedAt");
             this.updatedAt = updatedAt;
@@ -2808,6 +2986,15 @@ public class GetMediaMetaDataMetadata {
          * The URL for the audience rating image.
          */
         public Builder audienceRatingImage(String audienceRatingImage) {
+            Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
+            this.audienceRatingImage = Optional.ofNullable(audienceRatingImage);
+            return this;
+        }
+
+        /**
+         * The URL for the audience rating image.
+         */
+        public Builder audienceRatingImage(Optional<String> audienceRatingImage) {
             Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
             this.audienceRatingImage = audienceRatingImage;
             return this;
@@ -2951,7 +3138,16 @@ public class GetMediaMetaDataMetadata {
         /**
          * An array of GUID objects.
          */
-        public Builder guids(List<Guids> guids) {
+        public Builder guids(List<GetMediaMetaDataGuids> guids) {
+            Utils.checkNotNull(guids, "guids");
+            this.guids = Optional.ofNullable(guids);
+            return this;
+        }
+
+        /**
+         * An array of GUID objects.
+         */
+        public Builder guids(Optional<? extends List<GetMediaMetaDataGuids>> guids) {
             Utils.checkNotNull(guids, "guids");
             this.guids = guids;
             return this;
@@ -2960,9 +3156,18 @@ public class GetMediaMetaDataMetadata {
         /**
          * An array of rating objects.
          */
-        public Builder rating(List<Rating> rating) {
-            Utils.checkNotNull(rating, "rating");
-            this.rating = rating;
+        public Builder ratings(List<Ratings> ratings) {
+            Utils.checkNotNull(ratings, "ratings");
+            this.ratings = Optional.ofNullable(ratings);
+            return this;
+        }
+
+        /**
+         * An array of rating objects.
+         */
+        public Builder ratings(Optional<? extends List<Ratings>> ratings) {
+            Utils.checkNotNull(ratings, "ratings");
+            this.ratings = ratings;
             return this;
         }
 
@@ -3104,6 +3309,8 @@ public class GetMediaMetaDataMetadata {
                 skipCount,
                 lastViewedAt,
                 year,
+                rating,
+                ratingImage,
                 tagline,
                 chapterSource,
                 primaryExtraKey,
@@ -3128,7 +3335,7 @@ public class GetMediaMetaDataMetadata {
                 genre,
                 country,
                 guids,
-                rating,
+                ratings,
                 role,
                 director,
                 writer,

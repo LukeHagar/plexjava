@@ -15,7 +15,7 @@ import java.lang.String;
 import java.util.Objects;
 
 
-public class Rating {
+public class Ratings {
 
     /**
      * The image or reference for the rating.
@@ -36,7 +36,7 @@ public class Rating {
     private String type;
 
     @JsonCreator
-    public Rating(
+    public Ratings(
             @JsonProperty("image") String image,
             @JsonProperty("value") float value,
             @JsonProperty("type") String type) {
@@ -79,7 +79,7 @@ public class Rating {
     /**
      * The image or reference for the rating.
      */
-    public Rating withImage(String image) {
+    public Ratings withImage(String image) {
         Utils.checkNotNull(image, "image");
         this.image = image;
         return this;
@@ -88,7 +88,7 @@ public class Rating {
     /**
      * The rating value.
      */
-    public Rating withValue(float value) {
+    public Ratings withValue(float value) {
         Utils.checkNotNull(value, "value");
         this.value = value;
         return this;
@@ -97,7 +97,7 @@ public class Rating {
     /**
      * The type of rating (e.g., audience, critic).
      */
-    public Rating withType(String type) {
+    public Ratings withType(String type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -111,7 +111,7 @@ public class Rating {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Rating other = (Rating) o;
+        Ratings other = (Ratings) o;
         return 
             Objects.deepEquals(this.image, other.image) &&
             Objects.deepEquals(this.value, other.value) &&
@@ -128,7 +128,7 @@ public class Rating {
     
     @Override
     public String toString() {
-        return Utils.toString(Rating.class,
+        return Utils.toString(Ratings.class,
                 "image", image,
                 "value", value,
                 "type", type);
@@ -173,8 +173,8 @@ public class Rating {
             return this;
         }
         
-        public Rating build() {
-            return new Rating(
+        public Ratings build() {
+            return new Ratings(
                 image,
                 value,
                 type);

@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Double;
+import java.lang.Integer;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -24,8 +24,11 @@ import java.util.Optional;
 
 public class GetActorsLibraryMediaContainer {
 
+    /**
+     * Number of media items returned in this response.
+     */
     @JsonProperty("size")
-    private double size;
+    private int size;
 
     /**
      * Indicates whether syncing is allowed.
@@ -102,7 +105,7 @@ public class GetActorsLibraryMediaContainer {
 
     @JsonCreator
     public GetActorsLibraryMediaContainer(
-            @JsonProperty("size") double size,
+            @JsonProperty("size") int size,
             @JsonProperty("allowSync") boolean allowSync,
             @JsonProperty("art") String art,
             @JsonProperty("identifier") String identifier,
@@ -144,7 +147,7 @@ public class GetActorsLibraryMediaContainer {
     }
     
     public GetActorsLibraryMediaContainer(
-            double size,
+            int size,
             boolean allowSync,
             String art,
             String identifier,
@@ -159,8 +162,11 @@ public class GetActorsLibraryMediaContainer {
         this(size, allowSync, art, identifier, mediaTagPrefix, mediaTagVersion, nocache, thumb, title1, title2, viewGroup, viewMode, Optional.empty());
     }
 
+    /**
+     * Number of media items returned in this response.
+     */
     @JsonIgnore
-    public double size() {
+    public int size() {
         return size;
     }
 
@@ -265,7 +271,10 @@ public class GetActorsLibraryMediaContainer {
         return new Builder();
     }
 
-    public GetActorsLibraryMediaContainer withSize(double size) {
+    /**
+     * Number of media items returned in this response.
+     */
+    public GetActorsLibraryMediaContainer withSize(int size) {
         Utils.checkNotNull(size, "size");
         this.size = size;
         return this;
@@ -451,7 +460,7 @@ public class GetActorsLibraryMediaContainer {
     
     public final static class Builder {
  
-        private Double size;
+        private Integer size;
  
         private Boolean allowSync;
  
@@ -481,7 +490,10 @@ public class GetActorsLibraryMediaContainer {
           // force use of static builder() method
         }
 
-        public Builder size(double size) {
+        /**
+         * Number of media items returned in this response.
+         */
+        public Builder size(int size) {
             Utils.checkNotNull(size, "size");
             this.size = size;
             return this;

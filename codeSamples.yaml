@@ -1287,6 +1287,44 @@ actions:
                     }
                 }
             }
+  - target: $["paths"]["/library/sections/{sectionKey}/all"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: library
+          source: |-
+            package hello.world;
+
+            import dev.plexapi.plexapi.PlexAPI;
+            import dev.plexapi.plexapi.models.errors.GetAllMediaLibraryBadRequest;
+            import dev.plexapi.plexapi.models.errors.GetAllMediaLibraryUnauthorized;
+            import dev.plexapi.plexapi.models.operations.GetAllMediaLibraryQueryParamType;
+            import dev.plexapi.plexapi.models.operations.GetAllMediaLibraryRequest;
+            import dev.plexapi.plexapi.models.operations.GetAllMediaLibraryResponse;
+            import java.lang.Exception;
+
+            public class Application {
+
+                public static void main(String[] args) throws GetAllMediaLibraryBadRequest, GetAllMediaLibraryUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
+                            .accessToken("<YOUR_API_KEY_HERE>")
+                        .build();
+
+                    GetAllMediaLibraryRequest req = GetAllMediaLibraryRequest.builder()
+                            .sectionKey(9518)
+                            .type(GetAllMediaLibraryQueryParamType.TvShow)
+                            .build();
+
+                    GetAllMediaLibraryResponse res = sdk.library().getAllMediaLibrary()
+                            .request(req)
+                            .call();
+
+                    if (res.object().isPresent()) {
+                        // handle response
+                    }
+                }
+            }
   - target: $["paths"]["/library/sections/{sectionKey}/country"]["get"]
     update:
       x-codeSamples:

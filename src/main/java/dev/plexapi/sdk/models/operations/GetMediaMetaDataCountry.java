@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Long;
+import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -21,7 +21,7 @@ public class GetMediaMetaDataCountry {
      * The unique country identifier.
      */
     @JsonProperty("id")
-    private long id;
+    private int id;
 
     /**
      * The filter string for the country.
@@ -37,7 +37,7 @@ public class GetMediaMetaDataCountry {
 
     @JsonCreator
     public GetMediaMetaDataCountry(
-            @JsonProperty("id") long id,
+            @JsonProperty("id") int id,
             @JsonProperty("filter") String filter,
             @JsonProperty("tag") String tag) {
         Utils.checkNotNull(id, "id");
@@ -52,7 +52,7 @@ public class GetMediaMetaDataCountry {
      * The unique country identifier.
      */
     @JsonIgnore
-    public long id() {
+    public int id() {
         return id;
     }
 
@@ -79,7 +79,7 @@ public class GetMediaMetaDataCountry {
     /**
      * The unique country identifier.
      */
-    public GetMediaMetaDataCountry withId(long id) {
+    public GetMediaMetaDataCountry withId(int id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
@@ -136,7 +136,7 @@ public class GetMediaMetaDataCountry {
     
     public final static class Builder {
  
-        private Long id;
+        private Integer id;
  
         private String filter;
  
@@ -149,7 +149,7 @@ public class GetMediaMetaDataCountry {
         /**
          * The unique country identifier.
          */
-        public Builder id(long id) {
+        public Builder id(int id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;

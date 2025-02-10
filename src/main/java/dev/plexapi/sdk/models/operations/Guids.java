@@ -7,33 +7,43 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
+import java.util.Optional;
 
 
 public class Guids {
 
     /**
-     * The GUID value.
+     * The unique identifier for the Guid. Can be imdb://tt0286347, tmdb://1763, tvdb://2337
+     * 
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("id")
-    private String id;
+    private Optional<String> id;
 
     @JsonCreator
     public Guids(
-            @JsonProperty("id") String id) {
+            @JsonProperty("id") Optional<String> id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
     }
+    
+    public Guids() {
+        this(Optional.empty());
+    }
 
     /**
-     * The GUID value.
+     * The unique identifier for the Guid. Can be imdb://tt0286347, tmdb://1763, tvdb://2337
+     * 
      */
     @JsonIgnore
-    public String id() {
+    public Optional<String> id() {
         return id;
     }
 
@@ -42,9 +52,20 @@ public class Guids {
     }
 
     /**
-     * The GUID value.
+     * The unique identifier for the Guid. Can be imdb://tt0286347, tmdb://1763, tvdb://2337
+     * 
      */
     public Guids withId(String id) {
+        Utils.checkNotNull(id, "id");
+        this.id = Optional.ofNullable(id);
+        return this;
+    }
+
+    /**
+     * The unique identifier for the Guid. Can be imdb://tt0286347, tmdb://1763, tvdb://2337
+     * 
+     */
+    public Guids withId(Optional<String> id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
@@ -77,16 +98,27 @@ public class Guids {
     
     public final static class Builder {
  
-        private String id;  
+        private Optional<String> id = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
         }
 
         /**
-         * The GUID value.
+         * The unique identifier for the Guid. Can be imdb://tt0286347, tmdb://1763, tvdb://2337
+         * 
          */
         public Builder id(String id) {
+            Utils.checkNotNull(id, "id");
+            this.id = Optional.ofNullable(id);
+            return this;
+        }
+
+        /**
+         * The unique identifier for the Guid. Can be imdb://tt0286347, tmdb://1763, tvdb://2337
+         * 
+         */
+        public Builder id(Optional<String> id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;

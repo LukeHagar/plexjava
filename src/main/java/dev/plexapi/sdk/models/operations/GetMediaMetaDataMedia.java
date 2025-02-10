@@ -7,15 +7,20 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Float;
+import java.lang.Integer;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 
 public class GetMediaMetaDataMedia {
@@ -29,80 +34,115 @@ public class GetMediaMetaDataMedia {
     /**
      * Duration of the media in milliseconds.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
-    private long duration;
+    private Optional<Integer> duration;
 
     /**
      * Bitrate in bits per second.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bitrate")
-    private long bitrate;
+    private Optional<Integer> bitrate;
 
     /**
      * Video width in pixels.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("width")
-    private long width;
+    private Optional<Integer> width;
 
     /**
      * Video height in pixels.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("height")
-    private long height;
+    private Optional<Integer> height;
 
     /**
      * Aspect ratio of the video.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("aspectRatio")
-    private float aspectRatio;
+    private Optional<Float> aspectRatio;
 
     /**
      * Number of audio channels.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioChannels")
-    private long audioChannels;
+    private Optional<Integer> audioChannels;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("displayOffset")
+    private Optional<Integer> displayOffset;
 
     /**
      * Audio codec used.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioCodec")
-    private String audioCodec;
+    private Optional<String> audioCodec;
 
     /**
      * Video codec used.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoCodec")
-    private String videoCodec;
+    private Optional<String> videoCodec;
 
     /**
      * Video resolution (e.g., 4k).
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoResolution")
-    private String videoResolution;
+    private Optional<String> videoResolution;
 
     /**
      * File container type.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("container")
-    private String container;
+    private Optional<String> container;
 
     /**
-     * Frame rate of the video (e.g., 24p).
+     * Frame rate of the video. Values found include NTSC, PAL, 24p
+     * 
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoFrameRate")
-    private String videoFrameRate;
+    private Optional<String> videoFrameRate;
 
     /**
      * Video profile (e.g., main 10).
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoProfile")
-    private String videoProfile;
+    private Optional<String> videoProfile;
 
     /**
      * Indicates whether voice activity is detected.
      */
     @JsonProperty("hasVoiceActivity")
     private boolean hasVoiceActivity;
+
+    /**
+     * The audio profile used for the media (e.g., DTS, Dolby Digital, etc.).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("audioProfile")
+    private Optional<String> audioProfile;
+
+    /**
+     * Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("optimizedForStreaming")
+    private Optional<? extends GetMediaMetaDataOptimizedForStreaming> optimizedForStreaming;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("has64bitOffsets")
+    private Optional<Boolean> has64bitOffsets;
 
     /**
      * An array of parts for this media item.
@@ -113,19 +153,23 @@ public class GetMediaMetaDataMedia {
     @JsonCreator
     public GetMediaMetaDataMedia(
             @JsonProperty("id") long id,
-            @JsonProperty("duration") long duration,
-            @JsonProperty("bitrate") long bitrate,
-            @JsonProperty("width") long width,
-            @JsonProperty("height") long height,
-            @JsonProperty("aspectRatio") float aspectRatio,
-            @JsonProperty("audioChannels") long audioChannels,
-            @JsonProperty("audioCodec") String audioCodec,
-            @JsonProperty("videoCodec") String videoCodec,
-            @JsonProperty("videoResolution") String videoResolution,
-            @JsonProperty("container") String container,
-            @JsonProperty("videoFrameRate") String videoFrameRate,
-            @JsonProperty("videoProfile") String videoProfile,
+            @JsonProperty("duration") Optional<Integer> duration,
+            @JsonProperty("bitrate") Optional<Integer> bitrate,
+            @JsonProperty("width") Optional<Integer> width,
+            @JsonProperty("height") Optional<Integer> height,
+            @JsonProperty("aspectRatio") Optional<Float> aspectRatio,
+            @JsonProperty("audioChannels") Optional<Integer> audioChannels,
+            @JsonProperty("displayOffset") Optional<Integer> displayOffset,
+            @JsonProperty("audioCodec") Optional<String> audioCodec,
+            @JsonProperty("videoCodec") Optional<String> videoCodec,
+            @JsonProperty("videoResolution") Optional<String> videoResolution,
+            @JsonProperty("container") Optional<String> container,
+            @JsonProperty("videoFrameRate") Optional<String> videoFrameRate,
+            @JsonProperty("videoProfile") Optional<String> videoProfile,
             @JsonProperty("hasVoiceActivity") boolean hasVoiceActivity,
+            @JsonProperty("audioProfile") Optional<String> audioProfile,
+            @JsonProperty("optimizedForStreaming") Optional<? extends GetMediaMetaDataOptimizedForStreaming> optimizedForStreaming,
+            @JsonProperty("has64bitOffsets") Optional<Boolean> has64bitOffsets,
             @JsonProperty("Part") List<GetMediaMetaDataPart> part) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(duration, "duration");
@@ -134,6 +178,7 @@ public class GetMediaMetaDataMedia {
         Utils.checkNotNull(height, "height");
         Utils.checkNotNull(aspectRatio, "aspectRatio");
         Utils.checkNotNull(audioChannels, "audioChannels");
+        Utils.checkNotNull(displayOffset, "displayOffset");
         Utils.checkNotNull(audioCodec, "audioCodec");
         Utils.checkNotNull(videoCodec, "videoCodec");
         Utils.checkNotNull(videoResolution, "videoResolution");
@@ -141,6 +186,9 @@ public class GetMediaMetaDataMedia {
         Utils.checkNotNull(videoFrameRate, "videoFrameRate");
         Utils.checkNotNull(videoProfile, "videoProfile");
         Utils.checkNotNull(hasVoiceActivity, "hasVoiceActivity");
+        Utils.checkNotNull(audioProfile, "audioProfile");
+        Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
+        Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
         Utils.checkNotNull(part, "part");
         this.id = id;
         this.duration = duration;
@@ -149,6 +197,7 @@ public class GetMediaMetaDataMedia {
         this.height = height;
         this.aspectRatio = aspectRatio;
         this.audioChannels = audioChannels;
+        this.displayOffset = displayOffset;
         this.audioCodec = audioCodec;
         this.videoCodec = videoCodec;
         this.videoResolution = videoResolution;
@@ -156,7 +205,17 @@ public class GetMediaMetaDataMedia {
         this.videoFrameRate = videoFrameRate;
         this.videoProfile = videoProfile;
         this.hasVoiceActivity = hasVoiceActivity;
+        this.audioProfile = audioProfile;
+        this.optimizedForStreaming = optimizedForStreaming;
+        this.has64bitOffsets = has64bitOffsets;
         this.part = part;
+    }
+    
+    public GetMediaMetaDataMedia(
+            long id,
+            boolean hasVoiceActivity,
+            List<GetMediaMetaDataPart> part) {
+        this(id, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), hasVoiceActivity, Optional.empty(), Optional.empty(), Optional.empty(), part);
     }
 
     /**
@@ -171,7 +230,7 @@ public class GetMediaMetaDataMedia {
      * Duration of the media in milliseconds.
      */
     @JsonIgnore
-    public long duration() {
+    public Optional<Integer> duration() {
         return duration;
     }
 
@@ -179,7 +238,7 @@ public class GetMediaMetaDataMedia {
      * Bitrate in bits per second.
      */
     @JsonIgnore
-    public long bitrate() {
+    public Optional<Integer> bitrate() {
         return bitrate;
     }
 
@@ -187,7 +246,7 @@ public class GetMediaMetaDataMedia {
      * Video width in pixels.
      */
     @JsonIgnore
-    public long width() {
+    public Optional<Integer> width() {
         return width;
     }
 
@@ -195,7 +254,7 @@ public class GetMediaMetaDataMedia {
      * Video height in pixels.
      */
     @JsonIgnore
-    public long height() {
+    public Optional<Integer> height() {
         return height;
     }
 
@@ -203,7 +262,7 @@ public class GetMediaMetaDataMedia {
      * Aspect ratio of the video.
      */
     @JsonIgnore
-    public float aspectRatio() {
+    public Optional<Float> aspectRatio() {
         return aspectRatio;
     }
 
@@ -211,15 +270,20 @@ public class GetMediaMetaDataMedia {
      * Number of audio channels.
      */
     @JsonIgnore
-    public long audioChannels() {
+    public Optional<Integer> audioChannels() {
         return audioChannels;
+    }
+
+    @JsonIgnore
+    public Optional<Integer> displayOffset() {
+        return displayOffset;
     }
 
     /**
      * Audio codec used.
      */
     @JsonIgnore
-    public String audioCodec() {
+    public Optional<String> audioCodec() {
         return audioCodec;
     }
 
@@ -227,7 +291,7 @@ public class GetMediaMetaDataMedia {
      * Video codec used.
      */
     @JsonIgnore
-    public String videoCodec() {
+    public Optional<String> videoCodec() {
         return videoCodec;
     }
 
@@ -235,7 +299,7 @@ public class GetMediaMetaDataMedia {
      * Video resolution (e.g., 4k).
      */
     @JsonIgnore
-    public String videoResolution() {
+    public Optional<String> videoResolution() {
         return videoResolution;
     }
 
@@ -243,15 +307,16 @@ public class GetMediaMetaDataMedia {
      * File container type.
      */
     @JsonIgnore
-    public String container() {
+    public Optional<String> container() {
         return container;
     }
 
     /**
-     * Frame rate of the video (e.g., 24p).
+     * Frame rate of the video. Values found include NTSC, PAL, 24p
+     * 
      */
     @JsonIgnore
-    public String videoFrameRate() {
+    public Optional<String> videoFrameRate() {
         return videoFrameRate;
     }
 
@@ -259,7 +324,7 @@ public class GetMediaMetaDataMedia {
      * Video profile (e.g., main 10).
      */
     @JsonIgnore
-    public String videoProfile() {
+    public Optional<String> videoProfile() {
         return videoProfile;
     }
 
@@ -269,6 +334,28 @@ public class GetMediaMetaDataMedia {
     @JsonIgnore
     public boolean hasVoiceActivity() {
         return hasVoiceActivity;
+    }
+
+    /**
+     * The audio profile used for the media (e.g., DTS, Dolby Digital, etc.).
+     */
+    @JsonIgnore
+    public Optional<String> audioProfile() {
+        return audioProfile;
+    }
+
+    /**
+     * Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetMediaMetaDataOptimizedForStreaming> optimizedForStreaming() {
+        return (Optional<GetMediaMetaDataOptimizedForStreaming>) optimizedForStreaming;
+    }
+
+    @JsonIgnore
+    public Optional<Boolean> has64bitOffsets() {
+        return has64bitOffsets;
     }
 
     /**
@@ -295,7 +382,16 @@ public class GetMediaMetaDataMedia {
     /**
      * Duration of the media in milliseconds.
      */
-    public GetMediaMetaDataMedia withDuration(long duration) {
+    public GetMediaMetaDataMedia withDuration(int duration) {
+        Utils.checkNotNull(duration, "duration");
+        this.duration = Optional.ofNullable(duration);
+        return this;
+    }
+
+    /**
+     * Duration of the media in milliseconds.
+     */
+    public GetMediaMetaDataMedia withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = duration;
         return this;
@@ -304,7 +400,16 @@ public class GetMediaMetaDataMedia {
     /**
      * Bitrate in bits per second.
      */
-    public GetMediaMetaDataMedia withBitrate(long bitrate) {
+    public GetMediaMetaDataMedia withBitrate(int bitrate) {
+        Utils.checkNotNull(bitrate, "bitrate");
+        this.bitrate = Optional.ofNullable(bitrate);
+        return this;
+    }
+
+    /**
+     * Bitrate in bits per second.
+     */
+    public GetMediaMetaDataMedia withBitrate(Optional<Integer> bitrate) {
         Utils.checkNotNull(bitrate, "bitrate");
         this.bitrate = bitrate;
         return this;
@@ -313,7 +418,16 @@ public class GetMediaMetaDataMedia {
     /**
      * Video width in pixels.
      */
-    public GetMediaMetaDataMedia withWidth(long width) {
+    public GetMediaMetaDataMedia withWidth(int width) {
+        Utils.checkNotNull(width, "width");
+        this.width = Optional.ofNullable(width);
+        return this;
+    }
+
+    /**
+     * Video width in pixels.
+     */
+    public GetMediaMetaDataMedia withWidth(Optional<Integer> width) {
         Utils.checkNotNull(width, "width");
         this.width = width;
         return this;
@@ -322,7 +436,16 @@ public class GetMediaMetaDataMedia {
     /**
      * Video height in pixels.
      */
-    public GetMediaMetaDataMedia withHeight(long height) {
+    public GetMediaMetaDataMedia withHeight(int height) {
+        Utils.checkNotNull(height, "height");
+        this.height = Optional.ofNullable(height);
+        return this;
+    }
+
+    /**
+     * Video height in pixels.
+     */
+    public GetMediaMetaDataMedia withHeight(Optional<Integer> height) {
         Utils.checkNotNull(height, "height");
         this.height = height;
         return this;
@@ -333,6 +456,15 @@ public class GetMediaMetaDataMedia {
      */
     public GetMediaMetaDataMedia withAspectRatio(float aspectRatio) {
         Utils.checkNotNull(aspectRatio, "aspectRatio");
+        this.aspectRatio = Optional.ofNullable(aspectRatio);
+        return this;
+    }
+
+    /**
+     * Aspect ratio of the video.
+     */
+    public GetMediaMetaDataMedia withAspectRatio(Optional<Float> aspectRatio) {
+        Utils.checkNotNull(aspectRatio, "aspectRatio");
         this.aspectRatio = aspectRatio;
         return this;
     }
@@ -340,9 +472,30 @@ public class GetMediaMetaDataMedia {
     /**
      * Number of audio channels.
      */
-    public GetMediaMetaDataMedia withAudioChannels(long audioChannels) {
+    public GetMediaMetaDataMedia withAudioChannels(int audioChannels) {
+        Utils.checkNotNull(audioChannels, "audioChannels");
+        this.audioChannels = Optional.ofNullable(audioChannels);
+        return this;
+    }
+
+    /**
+     * Number of audio channels.
+     */
+    public GetMediaMetaDataMedia withAudioChannels(Optional<Integer> audioChannels) {
         Utils.checkNotNull(audioChannels, "audioChannels");
         this.audioChannels = audioChannels;
+        return this;
+    }
+
+    public GetMediaMetaDataMedia withDisplayOffset(int displayOffset) {
+        Utils.checkNotNull(displayOffset, "displayOffset");
+        this.displayOffset = Optional.ofNullable(displayOffset);
+        return this;
+    }
+
+    public GetMediaMetaDataMedia withDisplayOffset(Optional<Integer> displayOffset) {
+        Utils.checkNotNull(displayOffset, "displayOffset");
+        this.displayOffset = displayOffset;
         return this;
     }
 
@@ -350,6 +503,15 @@ public class GetMediaMetaDataMedia {
      * Audio codec used.
      */
     public GetMediaMetaDataMedia withAudioCodec(String audioCodec) {
+        Utils.checkNotNull(audioCodec, "audioCodec");
+        this.audioCodec = Optional.ofNullable(audioCodec);
+        return this;
+    }
+
+    /**
+     * Audio codec used.
+     */
+    public GetMediaMetaDataMedia withAudioCodec(Optional<String> audioCodec) {
         Utils.checkNotNull(audioCodec, "audioCodec");
         this.audioCodec = audioCodec;
         return this;
@@ -360,6 +522,15 @@ public class GetMediaMetaDataMedia {
      */
     public GetMediaMetaDataMedia withVideoCodec(String videoCodec) {
         Utils.checkNotNull(videoCodec, "videoCodec");
+        this.videoCodec = Optional.ofNullable(videoCodec);
+        return this;
+    }
+
+    /**
+     * Video codec used.
+     */
+    public GetMediaMetaDataMedia withVideoCodec(Optional<String> videoCodec) {
+        Utils.checkNotNull(videoCodec, "videoCodec");
         this.videoCodec = videoCodec;
         return this;
     }
@@ -368,6 +539,15 @@ public class GetMediaMetaDataMedia {
      * Video resolution (e.g., 4k).
      */
     public GetMediaMetaDataMedia withVideoResolution(String videoResolution) {
+        Utils.checkNotNull(videoResolution, "videoResolution");
+        this.videoResolution = Optional.ofNullable(videoResolution);
+        return this;
+    }
+
+    /**
+     * Video resolution (e.g., 4k).
+     */
+    public GetMediaMetaDataMedia withVideoResolution(Optional<String> videoResolution) {
         Utils.checkNotNull(videoResolution, "videoResolution");
         this.videoResolution = videoResolution;
         return this;
@@ -378,14 +558,34 @@ public class GetMediaMetaDataMedia {
      */
     public GetMediaMetaDataMedia withContainer(String container) {
         Utils.checkNotNull(container, "container");
+        this.container = Optional.ofNullable(container);
+        return this;
+    }
+
+    /**
+     * File container type.
+     */
+    public GetMediaMetaDataMedia withContainer(Optional<String> container) {
+        Utils.checkNotNull(container, "container");
         this.container = container;
         return this;
     }
 
     /**
-     * Frame rate of the video (e.g., 24p).
+     * Frame rate of the video. Values found include NTSC, PAL, 24p
+     * 
      */
     public GetMediaMetaDataMedia withVideoFrameRate(String videoFrameRate) {
+        Utils.checkNotNull(videoFrameRate, "videoFrameRate");
+        this.videoFrameRate = Optional.ofNullable(videoFrameRate);
+        return this;
+    }
+
+    /**
+     * Frame rate of the video. Values found include NTSC, PAL, 24p
+     * 
+     */
+    public GetMediaMetaDataMedia withVideoFrameRate(Optional<String> videoFrameRate) {
         Utils.checkNotNull(videoFrameRate, "videoFrameRate");
         this.videoFrameRate = videoFrameRate;
         return this;
@@ -395,6 +595,15 @@ public class GetMediaMetaDataMedia {
      * Video profile (e.g., main 10).
      */
     public GetMediaMetaDataMedia withVideoProfile(String videoProfile) {
+        Utils.checkNotNull(videoProfile, "videoProfile");
+        this.videoProfile = Optional.ofNullable(videoProfile);
+        return this;
+    }
+
+    /**
+     * Video profile (e.g., main 10).
+     */
+    public GetMediaMetaDataMedia withVideoProfile(Optional<String> videoProfile) {
         Utils.checkNotNull(videoProfile, "videoProfile");
         this.videoProfile = videoProfile;
         return this;
@@ -406,6 +615,54 @@ public class GetMediaMetaDataMedia {
     public GetMediaMetaDataMedia withHasVoiceActivity(boolean hasVoiceActivity) {
         Utils.checkNotNull(hasVoiceActivity, "hasVoiceActivity");
         this.hasVoiceActivity = hasVoiceActivity;
+        return this;
+    }
+
+    /**
+     * The audio profile used for the media (e.g., DTS, Dolby Digital, etc.).
+     */
+    public GetMediaMetaDataMedia withAudioProfile(String audioProfile) {
+        Utils.checkNotNull(audioProfile, "audioProfile");
+        this.audioProfile = Optional.ofNullable(audioProfile);
+        return this;
+    }
+
+    /**
+     * The audio profile used for the media (e.g., DTS, Dolby Digital, etc.).
+     */
+    public GetMediaMetaDataMedia withAudioProfile(Optional<String> audioProfile) {
+        Utils.checkNotNull(audioProfile, "audioProfile");
+        this.audioProfile = audioProfile;
+        return this;
+    }
+
+    /**
+     * Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
+     */
+    public GetMediaMetaDataMedia withOptimizedForStreaming(GetMediaMetaDataOptimizedForStreaming optimizedForStreaming) {
+        Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
+        this.optimizedForStreaming = Optional.ofNullable(optimizedForStreaming);
+        return this;
+    }
+
+    /**
+     * Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
+     */
+    public GetMediaMetaDataMedia withOptimizedForStreaming(Optional<? extends GetMediaMetaDataOptimizedForStreaming> optimizedForStreaming) {
+        Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
+        this.optimizedForStreaming = optimizedForStreaming;
+        return this;
+    }
+
+    public GetMediaMetaDataMedia withHas64bitOffsets(boolean has64bitOffsets) {
+        Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
+        this.has64bitOffsets = Optional.ofNullable(has64bitOffsets);
+        return this;
+    }
+
+    public GetMediaMetaDataMedia withHas64bitOffsets(Optional<Boolean> has64bitOffsets) {
+        Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
+        this.has64bitOffsets = has64bitOffsets;
         return this;
     }
 
@@ -435,6 +692,7 @@ public class GetMediaMetaDataMedia {
             Objects.deepEquals(this.height, other.height) &&
             Objects.deepEquals(this.aspectRatio, other.aspectRatio) &&
             Objects.deepEquals(this.audioChannels, other.audioChannels) &&
+            Objects.deepEquals(this.displayOffset, other.displayOffset) &&
             Objects.deepEquals(this.audioCodec, other.audioCodec) &&
             Objects.deepEquals(this.videoCodec, other.videoCodec) &&
             Objects.deepEquals(this.videoResolution, other.videoResolution) &&
@@ -442,6 +700,9 @@ public class GetMediaMetaDataMedia {
             Objects.deepEquals(this.videoFrameRate, other.videoFrameRate) &&
             Objects.deepEquals(this.videoProfile, other.videoProfile) &&
             Objects.deepEquals(this.hasVoiceActivity, other.hasVoiceActivity) &&
+            Objects.deepEquals(this.audioProfile, other.audioProfile) &&
+            Objects.deepEquals(this.optimizedForStreaming, other.optimizedForStreaming) &&
+            Objects.deepEquals(this.has64bitOffsets, other.has64bitOffsets) &&
             Objects.deepEquals(this.part, other.part);
     }
     
@@ -455,6 +716,7 @@ public class GetMediaMetaDataMedia {
             height,
             aspectRatio,
             audioChannels,
+            displayOffset,
             audioCodec,
             videoCodec,
             videoResolution,
@@ -462,6 +724,9 @@ public class GetMediaMetaDataMedia {
             videoFrameRate,
             videoProfile,
             hasVoiceActivity,
+            audioProfile,
+            optimizedForStreaming,
+            has64bitOffsets,
             part);
     }
     
@@ -475,6 +740,7 @@ public class GetMediaMetaDataMedia {
                 "height", height,
                 "aspectRatio", aspectRatio,
                 "audioChannels", audioChannels,
+                "displayOffset", displayOffset,
                 "audioCodec", audioCodec,
                 "videoCodec", videoCodec,
                 "videoResolution", videoResolution,
@@ -482,6 +748,9 @@ public class GetMediaMetaDataMedia {
                 "videoFrameRate", videoFrameRate,
                 "videoProfile", videoProfile,
                 "hasVoiceActivity", hasVoiceActivity,
+                "audioProfile", audioProfile,
+                "optimizedForStreaming", optimizedForStreaming,
+                "has64bitOffsets", has64bitOffsets,
                 "part", part);
     }
     
@@ -489,31 +758,39 @@ public class GetMediaMetaDataMedia {
  
         private Long id;
  
-        private Long duration;
+        private Optional<Integer> duration = Optional.empty();
  
-        private Long bitrate;
+        private Optional<Integer> bitrate = Optional.empty();
  
-        private Long width;
+        private Optional<Integer> width = Optional.empty();
  
-        private Long height;
+        private Optional<Integer> height = Optional.empty();
  
-        private Float aspectRatio;
+        private Optional<Float> aspectRatio = Optional.empty();
  
-        private Long audioChannels;
+        private Optional<Integer> audioChannels = Optional.empty();
  
-        private String audioCodec;
+        private Optional<Integer> displayOffset = Optional.empty();
  
-        private String videoCodec;
+        private Optional<String> audioCodec = Optional.empty();
  
-        private String videoResolution;
+        private Optional<String> videoCodec = Optional.empty();
  
-        private String container;
+        private Optional<String> videoResolution = Optional.empty();
  
-        private String videoFrameRate;
+        private Optional<String> container = Optional.empty();
  
-        private String videoProfile;
+        private Optional<String> videoFrameRate = Optional.empty();
+ 
+        private Optional<String> videoProfile = Optional.empty();
  
         private Boolean hasVoiceActivity;
+ 
+        private Optional<String> audioProfile = Optional.empty();
+ 
+        private Optional<? extends GetMediaMetaDataOptimizedForStreaming> optimizedForStreaming = Optional.empty();
+ 
+        private Optional<Boolean> has64bitOffsets = Optional.empty();
  
         private List<GetMediaMetaDataPart> part;  
         
@@ -533,7 +810,16 @@ public class GetMediaMetaDataMedia {
         /**
          * Duration of the media in milliseconds.
          */
-        public Builder duration(long duration) {
+        public Builder duration(int duration) {
+            Utils.checkNotNull(duration, "duration");
+            this.duration = Optional.ofNullable(duration);
+            return this;
+        }
+
+        /**
+         * Duration of the media in milliseconds.
+         */
+        public Builder duration(Optional<Integer> duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = duration;
             return this;
@@ -542,7 +828,16 @@ public class GetMediaMetaDataMedia {
         /**
          * Bitrate in bits per second.
          */
-        public Builder bitrate(long bitrate) {
+        public Builder bitrate(int bitrate) {
+            Utils.checkNotNull(bitrate, "bitrate");
+            this.bitrate = Optional.ofNullable(bitrate);
+            return this;
+        }
+
+        /**
+         * Bitrate in bits per second.
+         */
+        public Builder bitrate(Optional<Integer> bitrate) {
             Utils.checkNotNull(bitrate, "bitrate");
             this.bitrate = bitrate;
             return this;
@@ -551,7 +846,16 @@ public class GetMediaMetaDataMedia {
         /**
          * Video width in pixels.
          */
-        public Builder width(long width) {
+        public Builder width(int width) {
+            Utils.checkNotNull(width, "width");
+            this.width = Optional.ofNullable(width);
+            return this;
+        }
+
+        /**
+         * Video width in pixels.
+         */
+        public Builder width(Optional<Integer> width) {
             Utils.checkNotNull(width, "width");
             this.width = width;
             return this;
@@ -560,7 +864,16 @@ public class GetMediaMetaDataMedia {
         /**
          * Video height in pixels.
          */
-        public Builder height(long height) {
+        public Builder height(int height) {
+            Utils.checkNotNull(height, "height");
+            this.height = Optional.ofNullable(height);
+            return this;
+        }
+
+        /**
+         * Video height in pixels.
+         */
+        public Builder height(Optional<Integer> height) {
             Utils.checkNotNull(height, "height");
             this.height = height;
             return this;
@@ -571,6 +884,15 @@ public class GetMediaMetaDataMedia {
          */
         public Builder aspectRatio(float aspectRatio) {
             Utils.checkNotNull(aspectRatio, "aspectRatio");
+            this.aspectRatio = Optional.ofNullable(aspectRatio);
+            return this;
+        }
+
+        /**
+         * Aspect ratio of the video.
+         */
+        public Builder aspectRatio(Optional<Float> aspectRatio) {
+            Utils.checkNotNull(aspectRatio, "aspectRatio");
             this.aspectRatio = aspectRatio;
             return this;
         }
@@ -578,9 +900,30 @@ public class GetMediaMetaDataMedia {
         /**
          * Number of audio channels.
          */
-        public Builder audioChannels(long audioChannels) {
+        public Builder audioChannels(int audioChannels) {
+            Utils.checkNotNull(audioChannels, "audioChannels");
+            this.audioChannels = Optional.ofNullable(audioChannels);
+            return this;
+        }
+
+        /**
+         * Number of audio channels.
+         */
+        public Builder audioChannels(Optional<Integer> audioChannels) {
             Utils.checkNotNull(audioChannels, "audioChannels");
             this.audioChannels = audioChannels;
+            return this;
+        }
+
+        public Builder displayOffset(int displayOffset) {
+            Utils.checkNotNull(displayOffset, "displayOffset");
+            this.displayOffset = Optional.ofNullable(displayOffset);
+            return this;
+        }
+
+        public Builder displayOffset(Optional<Integer> displayOffset) {
+            Utils.checkNotNull(displayOffset, "displayOffset");
+            this.displayOffset = displayOffset;
             return this;
         }
 
@@ -588,6 +931,15 @@ public class GetMediaMetaDataMedia {
          * Audio codec used.
          */
         public Builder audioCodec(String audioCodec) {
+            Utils.checkNotNull(audioCodec, "audioCodec");
+            this.audioCodec = Optional.ofNullable(audioCodec);
+            return this;
+        }
+
+        /**
+         * Audio codec used.
+         */
+        public Builder audioCodec(Optional<String> audioCodec) {
             Utils.checkNotNull(audioCodec, "audioCodec");
             this.audioCodec = audioCodec;
             return this;
@@ -598,6 +950,15 @@ public class GetMediaMetaDataMedia {
          */
         public Builder videoCodec(String videoCodec) {
             Utils.checkNotNull(videoCodec, "videoCodec");
+            this.videoCodec = Optional.ofNullable(videoCodec);
+            return this;
+        }
+
+        /**
+         * Video codec used.
+         */
+        public Builder videoCodec(Optional<String> videoCodec) {
+            Utils.checkNotNull(videoCodec, "videoCodec");
             this.videoCodec = videoCodec;
             return this;
         }
@@ -606,6 +967,15 @@ public class GetMediaMetaDataMedia {
          * Video resolution (e.g., 4k).
          */
         public Builder videoResolution(String videoResolution) {
+            Utils.checkNotNull(videoResolution, "videoResolution");
+            this.videoResolution = Optional.ofNullable(videoResolution);
+            return this;
+        }
+
+        /**
+         * Video resolution (e.g., 4k).
+         */
+        public Builder videoResolution(Optional<String> videoResolution) {
             Utils.checkNotNull(videoResolution, "videoResolution");
             this.videoResolution = videoResolution;
             return this;
@@ -616,14 +986,34 @@ public class GetMediaMetaDataMedia {
          */
         public Builder container(String container) {
             Utils.checkNotNull(container, "container");
+            this.container = Optional.ofNullable(container);
+            return this;
+        }
+
+        /**
+         * File container type.
+         */
+        public Builder container(Optional<String> container) {
+            Utils.checkNotNull(container, "container");
             this.container = container;
             return this;
         }
 
         /**
-         * Frame rate of the video (e.g., 24p).
+         * Frame rate of the video. Values found include NTSC, PAL, 24p
+         * 
          */
         public Builder videoFrameRate(String videoFrameRate) {
+            Utils.checkNotNull(videoFrameRate, "videoFrameRate");
+            this.videoFrameRate = Optional.ofNullable(videoFrameRate);
+            return this;
+        }
+
+        /**
+         * Frame rate of the video. Values found include NTSC, PAL, 24p
+         * 
+         */
+        public Builder videoFrameRate(Optional<String> videoFrameRate) {
             Utils.checkNotNull(videoFrameRate, "videoFrameRate");
             this.videoFrameRate = videoFrameRate;
             return this;
@@ -633,6 +1023,15 @@ public class GetMediaMetaDataMedia {
          * Video profile (e.g., main 10).
          */
         public Builder videoProfile(String videoProfile) {
+            Utils.checkNotNull(videoProfile, "videoProfile");
+            this.videoProfile = Optional.ofNullable(videoProfile);
+            return this;
+        }
+
+        /**
+         * Video profile (e.g., main 10).
+         */
+        public Builder videoProfile(Optional<String> videoProfile) {
             Utils.checkNotNull(videoProfile, "videoProfile");
             this.videoProfile = videoProfile;
             return this;
@@ -644,6 +1043,54 @@ public class GetMediaMetaDataMedia {
         public Builder hasVoiceActivity(boolean hasVoiceActivity) {
             Utils.checkNotNull(hasVoiceActivity, "hasVoiceActivity");
             this.hasVoiceActivity = hasVoiceActivity;
+            return this;
+        }
+
+        /**
+         * The audio profile used for the media (e.g., DTS, Dolby Digital, etc.).
+         */
+        public Builder audioProfile(String audioProfile) {
+            Utils.checkNotNull(audioProfile, "audioProfile");
+            this.audioProfile = Optional.ofNullable(audioProfile);
+            return this;
+        }
+
+        /**
+         * The audio profile used for the media (e.g., DTS, Dolby Digital, etc.).
+         */
+        public Builder audioProfile(Optional<String> audioProfile) {
+            Utils.checkNotNull(audioProfile, "audioProfile");
+            this.audioProfile = audioProfile;
+            return this;
+        }
+
+        /**
+         * Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
+         */
+        public Builder optimizedForStreaming(GetMediaMetaDataOptimizedForStreaming optimizedForStreaming) {
+            Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
+            this.optimizedForStreaming = Optional.ofNullable(optimizedForStreaming);
+            return this;
+        }
+
+        /**
+         * Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
+         */
+        public Builder optimizedForStreaming(Optional<? extends GetMediaMetaDataOptimizedForStreaming> optimizedForStreaming) {
+            Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
+            this.optimizedForStreaming = optimizedForStreaming;
+            return this;
+        }
+
+        public Builder has64bitOffsets(boolean has64bitOffsets) {
+            Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
+            this.has64bitOffsets = Optional.ofNullable(has64bitOffsets);
+            return this;
+        }
+
+        public Builder has64bitOffsets(Optional<Boolean> has64bitOffsets) {
+            Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
+            this.has64bitOffsets = has64bitOffsets;
             return this;
         }
 
@@ -665,6 +1112,7 @@ public class GetMediaMetaDataMedia {
                 height,
                 aspectRatio,
                 audioChannels,
+                displayOffset,
                 audioCodec,
                 videoCodec,
                 videoResolution,
@@ -672,6 +1120,9 @@ public class GetMediaMetaDataMedia {
                 videoFrameRate,
                 videoProfile,
                 hasVoiceActivity,
+                audioProfile,
+                optimizedForStreaming,
+                has64bitOffsets,
                 part);
         }
     }

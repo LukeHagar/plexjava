@@ -28,6 +28,10 @@ public class GetRecentlyAddedLibraryType {
     @JsonProperty("type")
     private String type;
 
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("subtype")
+    private Optional<String> subtype;
+
     @JsonProperty("title")
     private String title;
 
@@ -50,6 +54,7 @@ public class GetRecentlyAddedLibraryType {
     public GetRecentlyAddedLibraryType(
             @JsonProperty("key") String key,
             @JsonProperty("type") String type,
+            @JsonProperty("subtype") Optional<String> subtype,
             @JsonProperty("title") String title,
             @JsonProperty("active") boolean active,
             @JsonProperty("Filter") Optional<? extends List<GetRecentlyAddedLibraryFilter>> filter,
@@ -57,6 +62,7 @@ public class GetRecentlyAddedLibraryType {
             @JsonProperty("Field") Optional<? extends List<Field>> field) {
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(type, "type");
+        Utils.checkNotNull(subtype, "subtype");
         Utils.checkNotNull(title, "title");
         Utils.checkNotNull(active, "active");
         Utils.checkNotNull(filter, "filter");
@@ -64,6 +70,7 @@ public class GetRecentlyAddedLibraryType {
         Utils.checkNotNull(field, "field");
         this.key = key;
         this.type = type;
+        this.subtype = subtype;
         this.title = title;
         this.active = active;
         this.filter = filter;
@@ -76,7 +83,7 @@ public class GetRecentlyAddedLibraryType {
             String type,
             String title,
             boolean active) {
-        this(key, type, title, active, Optional.empty(), Optional.empty(), Optional.empty());
+        this(key, type, Optional.empty(), title, active, Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -87,6 +94,11 @@ public class GetRecentlyAddedLibraryType {
     @JsonIgnore
     public String type() {
         return type;
+    }
+
+    @JsonIgnore
+    public Optional<String> subtype() {
+        return subtype;
     }
 
     @JsonIgnore
@@ -130,6 +142,18 @@ public class GetRecentlyAddedLibraryType {
     public GetRecentlyAddedLibraryType withType(String type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
+        return this;
+    }
+
+    public GetRecentlyAddedLibraryType withSubtype(String subtype) {
+        Utils.checkNotNull(subtype, "subtype");
+        this.subtype = Optional.ofNullable(subtype);
+        return this;
+    }
+
+    public GetRecentlyAddedLibraryType withSubtype(Optional<String> subtype) {
+        Utils.checkNotNull(subtype, "subtype");
+        this.subtype = subtype;
         return this;
     }
 
@@ -193,6 +217,7 @@ public class GetRecentlyAddedLibraryType {
         return 
             Objects.deepEquals(this.key, other.key) &&
             Objects.deepEquals(this.type, other.type) &&
+            Objects.deepEquals(this.subtype, other.subtype) &&
             Objects.deepEquals(this.title, other.title) &&
             Objects.deepEquals(this.active, other.active) &&
             Objects.deepEquals(this.filter, other.filter) &&
@@ -205,6 +230,7 @@ public class GetRecentlyAddedLibraryType {
         return Objects.hash(
             key,
             type,
+            subtype,
             title,
             active,
             filter,
@@ -217,6 +243,7 @@ public class GetRecentlyAddedLibraryType {
         return Utils.toString(GetRecentlyAddedLibraryType.class,
                 "key", key,
                 "type", type,
+                "subtype", subtype,
                 "title", title,
                 "active", active,
                 "filter", filter,
@@ -229,6 +256,8 @@ public class GetRecentlyAddedLibraryType {
         private String key;
  
         private String type;
+ 
+        private Optional<String> subtype = Optional.empty();
  
         private String title;
  
@@ -253,6 +282,18 @@ public class GetRecentlyAddedLibraryType {
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
+            return this;
+        }
+
+        public Builder subtype(String subtype) {
+            Utils.checkNotNull(subtype, "subtype");
+            this.subtype = Optional.ofNullable(subtype);
+            return this;
+        }
+
+        public Builder subtype(Optional<String> subtype) {
+            Utils.checkNotNull(subtype, "subtype");
+            this.subtype = subtype;
             return this;
         }
 
@@ -308,6 +349,7 @@ public class GetRecentlyAddedLibraryType {
             return new GetRecentlyAddedLibraryType(
                 key,
                 type,
+                subtype,
                 title,
                 active,
                 filter,

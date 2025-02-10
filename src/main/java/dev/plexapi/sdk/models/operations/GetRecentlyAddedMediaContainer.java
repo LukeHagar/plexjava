@@ -12,8 +12,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Double;
 import java.lang.Integer;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -25,7 +25,7 @@ import java.util.Optional;
 public class GetRecentlyAddedMediaContainer {
 
     @JsonProperty("size")
-    private double size;
+    private long size;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("offset")
@@ -57,7 +57,7 @@ public class GetRecentlyAddedMediaContainer {
 
     @JsonCreator
     public GetRecentlyAddedMediaContainer(
-            @JsonProperty("size") double size,
+            @JsonProperty("size") long size,
             @JsonProperty("offset") Optional<Integer> offset,
             @JsonProperty("totalSize") Optional<Integer> totalSize,
             @JsonProperty("identifier") Optional<String> identifier,
@@ -81,12 +81,12 @@ public class GetRecentlyAddedMediaContainer {
     }
     
     public GetRecentlyAddedMediaContainer(
-            double size) {
+            long size) {
         this(size, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
-    public double size() {
+    public long size() {
         return size;
     }
 
@@ -130,7 +130,7 @@ public class GetRecentlyAddedMediaContainer {
         return new Builder();
     }
 
-    public GetRecentlyAddedMediaContainer withSize(double size) {
+    public GetRecentlyAddedMediaContainer withSize(long size) {
         Utils.checkNotNull(size, "size");
         this.size = size;
         return this;
@@ -261,7 +261,7 @@ public class GetRecentlyAddedMediaContainer {
     
     public final static class Builder {
  
-        private Double size;
+        private Long size;
  
         private Optional<Integer> offset = Optional.empty();
  
@@ -279,7 +279,7 @@ public class GetRecentlyAddedMediaContainer {
           // force use of static builder() method
         }
 
-        public Builder size(double size) {
+        public Builder size(long size) {
             Utils.checkNotNull(size, "size");
             this.size = size;
             return this;
