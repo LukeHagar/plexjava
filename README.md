@@ -69,7 +69,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'dev.plexapi:plexapi:0.12.0'
+implementation 'dev.plexapi:plexapi:0.13.0'
 ```
 
 Maven:
@@ -77,7 +77,7 @@ Maven:
 <dependency>
     <groupId>dev.plexapi</groupId>
     <artifactId>plexapi</artifactId>
-    <version>0.12.0</version>
+    <version>0.13.0</version>
 </dependency>
 ```
 
@@ -320,13 +320,48 @@ public class Application {
 ### Server Variables
 
 The default server `{protocol}://{ip}:{port}` contains variables and is set to `https://10.10.10.47:32400` by default. To override default values, the following builder methods are available when initializing the SDK client instance:
- * `protocol(ServerProtocol protocol)`
- * `ip(String ip)`
- * `port(String port)`
+
+| Variable   | BuilderMethod                       | Supported Values           | Default         | Description                                    |
+| ---------- | ----------------------------------- | -------------------------- | --------------- | ---------------------------------------------- |
+| `protocol` | `protocol(ServerProtocol protocol)` | - `"http"`<br/>- `"https"` | `"https"`       | The protocol to use for the server connection  |
+| `ip`       | `ip(String ip)`                     | java.lang.String           | `"10.10.10.47"` | The IP address or hostname of your Plex Server |
+| `port`     | `port(String port)`                 | java.lang.String           | `"32400"`       | The port of your Plex Server                   |
+
+#### Example
+
+```java
+package hello.world;
+
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest;
+import dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized;
+import dev.plexapi.sdk.models.operations.GetServerCapabilitiesResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws GetServerCapabilitiesBadRequest, GetServerCapabilitiesUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
+                .protocol("https")
+                .ip("e0c3:bcc0:6bac:dccc:c4ec:34b1:ca98:4cb9")
+                .port("40311")
+                .accessToken("<YOUR_API_KEY_HERE>")
+            .build();
+
+        GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
+                .call();
+
+        if (res.object().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
 
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally using the `.serverURL(String serverUrl)` builder method when initializing the SDK client instance. For example:
+The default server can be overridden globally using the `.serverURL(String serverUrl)` builder method when initializing the SDK client instance. For example:
 ```java
 package hello.world;
 

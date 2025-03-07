@@ -63,7 +63,7 @@ tasks.withType(Javadoc) {
 }
 
 group = "dev.plexapi"
-version = "0.12.0"
+version = "0.13.0"
 
 sourcesJar {
     archiveBaseName = "plexapi"
@@ -101,7 +101,7 @@ publishing {
         maven(MavenPublication) {
             groupId = 'dev.plexapi'
             artifactId = 'plexapi'
-            version = '0.12.0'
+            version = '0.13.0'
 
             from components.java
 
@@ -152,7 +152,6 @@ dependencies {
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.18.2'
     api('org.openapitools:jackson-databind-nullable:0.2.6') {exclude group: 'com.fasterxml.jackson.core', module: 'jackson-databind'}
-    implementation 'org.apache.httpcomponents.client5:httpclient5:5.4.1'
     implementation 'commons-io:commons-io:2.18.0'
 }
 

@@ -617,7 +617,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: added
+          label: get-recently-added
           source: |-
             package hello.world;
 
@@ -750,7 +750,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: identity
+          label: get-server-identity
           source: |-
             package hello.world;
 
@@ -841,7 +841,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: data
+          label: get-media-meta-data
           source: |-
             package hello.world;
 
@@ -890,7 +890,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: image
+          label: get-banner-image
           source: |-
             package hello.world;
 
@@ -963,7 +963,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: image
+          label: get-thumb-image
           source: |-
             package hello.world;
 
@@ -1034,7 +1034,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: library
+          label: get-recently-added-library
           source: |-
             package hello.world;
 
@@ -1087,7 +1087,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: libraries
+          label: get-search-all-libraries
           source: |-
             package hello.world;
 
@@ -1128,7 +1128,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: libraries
+          label: get-all-libraries
           source: |-
             package hello.world;
 
@@ -1158,7 +1158,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: list
+          label: get-watch-list
           source: |-
             package hello.world;
 
@@ -1225,7 +1225,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: details
+          label: get-library-details
           source: |-
             package hello.world;
 
@@ -1258,7 +1258,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: library
+          label: get-actors-library
           source: |-
             package hello.world;
 
@@ -1291,7 +1291,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: library
+          label: get-all-media-library
           source: |-
             package hello.world;
 
@@ -1329,7 +1329,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: library
+          label: get-countries-library
           source: |-
             package hello.world;
 
@@ -1362,7 +1362,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: library
+          label: get-genres-library
           source: |-
             package hello.world;
 
@@ -1395,7 +1395,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: metadata
+          label: get-refresh-library-metadata
           source: |-
             package hello.world;
 
@@ -1426,7 +1426,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: library
+          label: get-search-library
           source: |-
             package hello.world;
 
@@ -1459,7 +1459,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: items
+          label: get-library-items
           source: |-
             package hello.world;
 
@@ -1591,7 +1591,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: providers
+          label: get-media-providers
           source: |-
             package hello.world;
 
@@ -2065,7 +2065,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: resources
+          label: get-server-resources
           source: |-
             package hello.world;
 
@@ -2564,7 +2564,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: users
+          label: get-users
           source: |-
             package hello.world;
 
@@ -2611,7 +2611,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: data
+          label: post-users-sign-in-data
           source: |-
             package hello.world;
 
