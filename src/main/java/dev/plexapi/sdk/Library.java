@@ -27,8 +27,6 @@ import dev.plexapi.sdk.models.errors.GetMediaMetaDataBadRequest;
 import dev.plexapi.sdk.models.errors.GetMediaMetaDataUnauthorized;
 import dev.plexapi.sdk.models.errors.GetMetadataChildrenBadRequest;
 import dev.plexapi.sdk.models.errors.GetMetadataChildrenUnauthorized;
-import dev.plexapi.sdk.models.errors.GetOnDeckBadRequest;
-import dev.plexapi.sdk.models.errors.GetOnDeckUnauthorized;
 import dev.plexapi.sdk.models.errors.GetRecentlyAddedLibraryBadRequest;
 import dev.plexapi.sdk.models.errors.GetRecentlyAddedLibraryUnauthorized;
 import dev.plexapi.sdk.models.errors.GetRefreshLibraryMetadataBadRequest;
@@ -85,9 +83,6 @@ import dev.plexapi.sdk.models.operations.GetMetadataChildrenRequest;
 import dev.plexapi.sdk.models.operations.GetMetadataChildrenRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetMetadataChildrenResponse;
 import dev.plexapi.sdk.models.operations.GetMetadataChildrenResponseBody;
-import dev.plexapi.sdk.models.operations.GetOnDeckRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetOnDeckResponse;
-import dev.plexapi.sdk.models.operations.GetOnDeckResponseBody;
 import dev.plexapi.sdk.models.operations.GetRecentlyAddedLibraryRequest;
 import dev.plexapi.sdk.models.operations.GetRecentlyAddedLibraryRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetRecentlyAddedLibraryResponse;
@@ -147,8 +142,7 @@ public class Library implements
             MethodCallGetSearchAllLibraries,
             MethodCallGetMediaMetaData,
             MethodCallGetMetadataChildren,
-            MethodCallGetTopWatchedContent,
-            MethodCallGetOnDeck {
+            MethodCallGetTopWatchedContent {
 
     private final SDKConfiguration sdkConfiguration;
 
@@ -3126,163 +3120,6 @@ public class Library implements
                 GetTopWatchedContentUnauthorized _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
                     new TypeReference<GetTopWatchedContentUnauthorized>() {});
-                    _out.withRawResponse(Optional.ofNullable(_httpRes));
-                
-                throw _out;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new SDKError(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
-    }
-
-
-
-    /**
-     * Get On Deck
-     * This endpoint will return the on deck content.
-     * 
-     * @return The call builder
-     */
-    public GetOnDeckRequestBuilder getOnDeck() {
-        return new GetOnDeckRequestBuilder(this);
-    }
-
-    /**
-     * Get On Deck
-     * This endpoint will return the on deck content.
-     * 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetOnDeckResponse getOnDeckDirect() throws Exception {
-        String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
-        String _url = Utils.generateURL(
-                _baseUrl,
-                "/library/onDeck");
-        
-        HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      "getOnDeck", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            "getOnDeck",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            "getOnDeck",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            "getOnDeck",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        GetOnDeckResponse.Builder _resBuilder = 
-            GetOnDeckResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        GetOnDeckResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetOnDeckResponseBody _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetOnDeckResponseBody>() {});
-                _res.withObject(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetOnDeckBadRequest _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetOnDeckBadRequest>() {});
-                    _out.withRawResponse(Optional.ofNullable(_httpRes));
-                
-                throw _out;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetOnDeckUnauthorized _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetOnDeckUnauthorized>() {});
                     _out.withRawResponse(Optional.ofNullable(_httpRes));
                 
                 throw _out;

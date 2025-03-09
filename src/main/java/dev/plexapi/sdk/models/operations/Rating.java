@@ -8,35 +8,29 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Float;
+import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
+/**
+ * Rating - The type of rating, for example 'audience' or 'critic'.
+ */
 
-public class GetLibraryItemsMetaDataRating {
+public class Rating {
 
-    /**
-     * A URI or path to the rating image.
-     */
     @JsonProperty("image")
     private String image;
 
-    /**
-     * The value of the rating.
-     */
     @JsonProperty("value")
-    private float value;
+    private double value;
 
-    /**
-     * The type of rating (e.g., audience, critic).
-     */
     @JsonProperty("type")
     private String type;
 
     @JsonCreator
-    public GetLibraryItemsMetaDataRating(
+    public Rating(
             @JsonProperty("image") String image,
-            @JsonProperty("value") float value,
+            @JsonProperty("value") double value,
             @JsonProperty("type") String type) {
         Utils.checkNotNull(image, "image");
         Utils.checkNotNull(value, "value");
@@ -46,25 +40,16 @@ public class GetLibraryItemsMetaDataRating {
         this.type = type;
     }
 
-    /**
-     * A URI or path to the rating image.
-     */
     @JsonIgnore
     public String image() {
         return image;
     }
 
-    /**
-     * The value of the rating.
-     */
     @JsonIgnore
-    public float value() {
+    public double value() {
         return value;
     }
 
-    /**
-     * The type of rating (e.g., audience, critic).
-     */
     @JsonIgnore
     public String type() {
         return type;
@@ -74,28 +59,19 @@ public class GetLibraryItemsMetaDataRating {
         return new Builder();
     }
 
-    /**
-     * A URI or path to the rating image.
-     */
-    public GetLibraryItemsMetaDataRating withImage(String image) {
+    public Rating withImage(String image) {
         Utils.checkNotNull(image, "image");
         this.image = image;
         return this;
     }
 
-    /**
-     * The value of the rating.
-     */
-    public GetLibraryItemsMetaDataRating withValue(float value) {
+    public Rating withValue(double value) {
         Utils.checkNotNull(value, "value");
         this.value = value;
         return this;
     }
 
-    /**
-     * The type of rating (e.g., audience, critic).
-     */
-    public GetLibraryItemsMetaDataRating withType(String type) {
+    public Rating withType(String type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -109,7 +85,7 @@ public class GetLibraryItemsMetaDataRating {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        GetLibraryItemsMetaDataRating other = (GetLibraryItemsMetaDataRating) o;
+        Rating other = (Rating) o;
         return 
             Objects.deepEquals(this.image, other.image) &&
             Objects.deepEquals(this.value, other.value) &&
@@ -126,7 +102,7 @@ public class GetLibraryItemsMetaDataRating {
     
     @Override
     public String toString() {
-        return Utils.toString(GetLibraryItemsMetaDataRating.class,
+        return Utils.toString(Rating.class,
                 "image", image,
                 "value", value,
                 "type", type);
@@ -136,7 +112,7 @@ public class GetLibraryItemsMetaDataRating {
  
         private String image;
  
-        private Float value;
+        private Double value;
  
         private String type;  
         
@@ -144,35 +120,26 @@ public class GetLibraryItemsMetaDataRating {
           // force use of static builder() method
         }
 
-        /**
-         * A URI or path to the rating image.
-         */
         public Builder image(String image) {
             Utils.checkNotNull(image, "image");
             this.image = image;
             return this;
         }
 
-        /**
-         * The value of the rating.
-         */
-        public Builder value(float value) {
+        public Builder value(double value) {
             Utils.checkNotNull(value, "value");
             this.value = value;
             return this;
         }
 
-        /**
-         * The type of rating (e.g., audience, critic).
-         */
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
         }
         
-        public GetLibraryItemsMetaDataRating build() {
-            return new GetLibraryItemsMetaDataRating(
+        public Rating build() {
+            return new Rating(
                 image,
                 value,
                 type);

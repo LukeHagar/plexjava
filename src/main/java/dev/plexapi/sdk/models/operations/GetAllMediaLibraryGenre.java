@@ -15,7 +15,8 @@ import java.util.Objects;
 public class GetAllMediaLibraryGenre {
 
     /**
-     * The country of origin of this media item
+     * The genre name of this media-item
+     * 
      */
     @JsonProperty("tag")
     private String tag;
@@ -28,7 +29,8 @@ public class GetAllMediaLibraryGenre {
     }
 
     /**
-     * The country of origin of this media item
+     * The genre name of this media-item
+     * 
      */
     @JsonIgnore
     public String tag() {
@@ -40,7 +42,8 @@ public class GetAllMediaLibraryGenre {
     }
 
     /**
-     * The country of origin of this media item
+     * The genre name of this media-item
+     * 
      */
     public GetAllMediaLibraryGenre withTag(String tag) {
         Utils.checkNotNull(tag, "tag");
@@ -82,7 +85,8 @@ public class GetAllMediaLibraryGenre {
         }
 
         /**
-         * The country of origin of this media item
+         * The genre name of this media-item
+         * 
          */
         public Builder tag(String tag) {
             Utils.checkNotNull(tag, "tag");

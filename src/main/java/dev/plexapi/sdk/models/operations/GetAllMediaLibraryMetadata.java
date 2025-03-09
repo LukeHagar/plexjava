@@ -102,8 +102,9 @@ public class GetAllMediaLibraryMetadata {
     /**
      * The release year of the media item.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("year")
-    private int year;
+    private Optional<Integer> year;
 
     /**
      * A brief tagline for the media item.
@@ -413,7 +414,7 @@ public class GetAllMediaLibraryMetadata {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Guid")
-    private Optional<? extends List<Guids>> guids;
+    private Optional<? extends List<GetAllMediaLibraryGuids>> guids;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Collection")
@@ -433,7 +434,7 @@ public class GetAllMediaLibraryMetadata {
             @JsonProperty("summary") String summary,
             @JsonProperty("rating") float rating,
             @JsonProperty("audienceRating") double audienceRating,
-            @JsonProperty("year") int year,
+            @JsonProperty("year") Optional<Integer> year,
             @JsonProperty("tagline") String tagline,
             @JsonProperty("thumb") String thumb,
             @JsonProperty("art") String art,
@@ -483,7 +484,7 @@ public class GetAllMediaLibraryMetadata {
             @JsonProperty("Director") Optional<? extends List<GetAllMediaLibraryDirector>> director,
             @JsonProperty("Writer") Optional<? extends List<GetAllMediaLibraryWriter>> writer,
             @JsonProperty("Role") Optional<? extends List<GetAllMediaLibraryRole>> role,
-            @JsonProperty("Guid") Optional<? extends List<Guids>> guids,
+            @JsonProperty("Guid") Optional<? extends List<GetAllMediaLibraryGuids>> guids,
             @JsonProperty("Collection") Optional<? extends List<GetAllMediaLibraryCollection>> collection) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         Utils.checkNotNull(key, "key");
@@ -626,7 +627,6 @@ public class GetAllMediaLibraryMetadata {
             String summary,
             float rating,
             double audienceRating,
-            int year,
             String tagline,
             String thumb,
             String art,
@@ -637,7 +637,7 @@ public class GetAllMediaLibraryMetadata {
             int duration,
             LocalDate originallyAvailableAt,
             long addedAt) {
-        this(ratingKey, key, guid, slug, Optional.empty(), type, title, titleSort, Optional.empty(), summary, rating, audienceRating, year, tagline, thumb, art, theme, index, Optional.empty(), Optional.empty(), childCount, seasonCount, duration, originallyAvailableAt, addedAt, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(ratingKey, key, guid, slug, Optional.empty(), type, title, titleSort, Optional.empty(), summary, rating, audienceRating, Optional.empty(), tagline, thumb, art, theme, index, Optional.empty(), Optional.empty(), childCount, seasonCount, duration, originallyAvailableAt, addedAt, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -737,7 +737,7 @@ public class GetAllMediaLibraryMetadata {
      * The release year of the media item.
      */
     @JsonIgnore
-    public int year() {
+    public Optional<Integer> year() {
         return year;
     }
 
@@ -1116,8 +1116,8 @@ public class GetAllMediaLibraryMetadata {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Guids>> guids() {
-        return (Optional<List<Guids>>) guids;
+    public Optional<List<GetAllMediaLibraryGuids>> guids() {
+        return (Optional<List<GetAllMediaLibraryGuids>>) guids;
     }
 
     @SuppressWarnings("unchecked")
@@ -1257,6 +1257,15 @@ public class GetAllMediaLibraryMetadata {
      * The release year of the media item.
      */
     public GetAllMediaLibraryMetadata withYear(int year) {
+        Utils.checkNotNull(year, "year");
+        this.year = Optional.ofNullable(year);
+        return this;
+    }
+
+    /**
+     * The release year of the media item.
+     */
+    public GetAllMediaLibraryMetadata withYear(Optional<Integer> year) {
         Utils.checkNotNull(year, "year");
         this.year = year;
         return this;
@@ -2003,13 +2012,13 @@ public class GetAllMediaLibraryMetadata {
         return this;
     }
 
-    public GetAllMediaLibraryMetadata withGuids(List<Guids> guids) {
+    public GetAllMediaLibraryMetadata withGuids(List<GetAllMediaLibraryGuids> guids) {
         Utils.checkNotNull(guids, "guids");
         this.guids = Optional.ofNullable(guids);
         return this;
     }
 
-    public GetAllMediaLibraryMetadata withGuids(Optional<? extends List<Guids>> guids) {
+    public GetAllMediaLibraryMetadata withGuids(Optional<? extends List<GetAllMediaLibraryGuids>> guids) {
         Utils.checkNotNull(guids, "guids");
         this.guids = guids;
         return this;
@@ -2267,7 +2276,7 @@ public class GetAllMediaLibraryMetadata {
  
         private Double audienceRating;
  
-        private Integer year;
+        private Optional<Integer> year = Optional.empty();
  
         private String tagline;
  
@@ -2367,7 +2376,7 @@ public class GetAllMediaLibraryMetadata {
  
         private Optional<? extends List<GetAllMediaLibraryRole>> role = Optional.empty();
  
-        private Optional<? extends List<Guids>> guids = Optional.empty();
+        private Optional<? extends List<GetAllMediaLibraryGuids>> guids = Optional.empty();
  
         private Optional<? extends List<GetAllMediaLibraryCollection>> collection = Optional.empty();  
         
@@ -2502,6 +2511,15 @@ public class GetAllMediaLibraryMetadata {
          * The release year of the media item.
          */
         public Builder year(int year) {
+            Utils.checkNotNull(year, "year");
+            this.year = Optional.ofNullable(year);
+            return this;
+        }
+
+        /**
+         * The release year of the media item.
+         */
+        public Builder year(Optional<Integer> year) {
             Utils.checkNotNull(year, "year");
             this.year = year;
             return this;
@@ -3248,13 +3266,13 @@ public class GetAllMediaLibraryMetadata {
             return this;
         }
 
-        public Builder guids(List<Guids> guids) {
+        public Builder guids(List<GetAllMediaLibraryGuids> guids) {
             Utils.checkNotNull(guids, "guids");
             this.guids = Optional.ofNullable(guids);
             return this;
         }
 
-        public Builder guids(Optional<? extends List<Guids>> guids) {
+        public Builder guids(Optional<? extends List<GetAllMediaLibraryGuids>> guids) {
             Utils.checkNotNull(guids, "guids");
             this.guids = guids;
             return this;

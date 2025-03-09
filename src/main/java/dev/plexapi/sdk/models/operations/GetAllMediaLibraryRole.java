@@ -15,7 +15,7 @@ import java.util.Objects;
 public class GetAllMediaLibraryRole {
 
     /**
-     * The name of the actor for this role
+     * The display tag for the actor (typically the actor's name).
      */
     @JsonProperty("tag")
     private String tag;
@@ -28,7 +28,7 @@ public class GetAllMediaLibraryRole {
     }
 
     /**
-     * The name of the actor for this role
+     * The display tag for the actor (typically the actor's name).
      */
     @JsonIgnore
     public String tag() {
@@ -40,7 +40,7 @@ public class GetAllMediaLibraryRole {
     }
 
     /**
-     * The name of the actor for this role
+     * The display tag for the actor (typically the actor's name).
      */
     public GetAllMediaLibraryRole withTag(String tag) {
         Utils.checkNotNull(tag, "tag");
@@ -82,7 +82,7 @@ public class GetAllMediaLibraryRole {
         }
 
         /**
-         * The name of the actor for this role
+         * The display tag for the actor (typically the actor's name).
          */
         public Builder tag(String tag) {
             Utils.checkNotNull(tag, "tag");

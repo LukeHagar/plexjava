@@ -336,11 +336,6 @@ public class SDKMethodInterfaces {
     }
 
 
-    public interface MethodCallGetOnDeck {
-        GetOnDeckResponse getOnDeckDirect() throws Exception;
-    }
-
-
     public interface MethodCallGetWatchList {
         GetWatchListResponse getWatchList(
             GetWatchListRequest request,

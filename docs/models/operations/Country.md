@@ -1,8 +1,12 @@
 # Country
 
+The filter query string for country media items.
+
 
 ## Fields
 
-| Field                    | Type                     | Required                 | Description              | Example                  |
-| ------------------------ | ------------------------ | ------------------------ | ------------------------ | ------------------------ |
-| `tag`                    | *Optional\<String>*      | :heavy_minus_sign:       | N/A                      | United States of America |
+| Field                                    | Type                                     | Required                                 | Description                              | Example                                  |
+| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| `id`                                     | *long*                                   | :heavy_check_mark:                       | N/A                                      | 259                                      |
+| `tag`                                    | *String*                                 | :heavy_check_mark:                       | The country of origin of this media item | United States of America                 |
+| `filter`                                 | *Optional\<String>*                      | :heavy_minus_sign:                       | N/A                                      | country=19                               |

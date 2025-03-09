@@ -1000,36 +1000,6 @@ actions:
                     }
                 }
             }
-  - target: $["paths"]["/library/onDeck"]["get"]
-    update:
-      x-codeSamples:
-        - lang: java
-          label: getOnDeck
-          source: |-
-            package hello.world;
-
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetOnDeckBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetOnDeckUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetOnDeckResponse;
-            import java.lang.Exception;
-
-            public class Application {
-
-                public static void main(String[] args) throws GetOnDeckBadRequest, GetOnDeckUnauthorized, Exception {
-
-                    PlexAPI sdk = PlexAPI.builder()
-                            .accessToken("<YOUR_API_KEY_HERE>")
-                        .build();
-
-                    GetOnDeckResponse res = sdk.library().getOnDeck()
-                            .call();
-
-                    if (res.object().isPresent()) {
-                        // handle response
-                    }
-                }
-            }
   - target: $["paths"]["/library/recentlyAdded"]["get"]
     update:
       x-codeSamples:

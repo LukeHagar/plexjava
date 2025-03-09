@@ -121,8 +121,9 @@ public class GetMediaMetaDataMedia {
     /**
      * Indicates whether voice activity is detected.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hasVoiceActivity")
-    private boolean hasVoiceActivity;
+    private Optional<Boolean> hasVoiceActivity;
 
     /**
      * The audio profile used for the media (e.g., DTS, Dolby Digital, etc.).
@@ -145,8 +146,9 @@ public class GetMediaMetaDataMedia {
     /**
      * An array of parts for this media item.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Part")
-    private List<GetMediaMetaDataPart> part;
+    private Optional<? extends List<GetMediaMetaDataPart>> part;
 
     @JsonCreator
     public GetMediaMetaDataMedia(
@@ -164,11 +166,11 @@ public class GetMediaMetaDataMedia {
             @JsonProperty("container") Optional<String> container,
             @JsonProperty("videoFrameRate") Optional<String> videoFrameRate,
             @JsonProperty("videoProfile") Optional<String> videoProfile,
-            @JsonProperty("hasVoiceActivity") boolean hasVoiceActivity,
+            @JsonProperty("hasVoiceActivity") Optional<Boolean> hasVoiceActivity,
             @JsonProperty("audioProfile") Optional<String> audioProfile,
             @JsonProperty("optimizedForStreaming") Optional<? extends GetMediaMetaDataOptimizedForStreaming> optimizedForStreaming,
             @JsonProperty("has64bitOffsets") Optional<Boolean> has64bitOffsets,
-            @JsonProperty("Part") List<GetMediaMetaDataPart> part) {
+            @JsonProperty("Part") Optional<? extends List<GetMediaMetaDataPart>> part) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(duration, "duration");
         Utils.checkNotNull(bitrate, "bitrate");
@@ -210,10 +212,8 @@ public class GetMediaMetaDataMedia {
     }
     
     public GetMediaMetaDataMedia(
-            long id,
-            boolean hasVoiceActivity,
-            List<GetMediaMetaDataPart> part) {
-        this(id, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), hasVoiceActivity, Optional.empty(), Optional.empty(), Optional.empty(), part);
+            long id) {
+        this(id, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -330,7 +330,7 @@ public class GetMediaMetaDataMedia {
      * Indicates whether voice activity is detected.
      */
     @JsonIgnore
-    public boolean hasVoiceActivity() {
+    public Optional<Boolean> hasVoiceActivity() {
         return hasVoiceActivity;
     }
 
@@ -359,9 +359,10 @@ public class GetMediaMetaDataMedia {
     /**
      * An array of parts for this media item.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public List<GetMediaMetaDataPart> part() {
-        return part;
+    public Optional<List<GetMediaMetaDataPart>> part() {
+        return (Optional<List<GetMediaMetaDataPart>>) part;
     }
 
     public final static Builder builder() {
@@ -612,6 +613,15 @@ public class GetMediaMetaDataMedia {
      */
     public GetMediaMetaDataMedia withHasVoiceActivity(boolean hasVoiceActivity) {
         Utils.checkNotNull(hasVoiceActivity, "hasVoiceActivity");
+        this.hasVoiceActivity = Optional.ofNullable(hasVoiceActivity);
+        return this;
+    }
+
+    /**
+     * Indicates whether voice activity is detected.
+     */
+    public GetMediaMetaDataMedia withHasVoiceActivity(Optional<Boolean> hasVoiceActivity) {
+        Utils.checkNotNull(hasVoiceActivity, "hasVoiceActivity");
         this.hasVoiceActivity = hasVoiceActivity;
         return this;
     }
@@ -668,6 +678,15 @@ public class GetMediaMetaDataMedia {
      * An array of parts for this media item.
      */
     public GetMediaMetaDataMedia withPart(List<GetMediaMetaDataPart> part) {
+        Utils.checkNotNull(part, "part");
+        this.part = Optional.ofNullable(part);
+        return this;
+    }
+
+    /**
+     * An array of parts for this media item.
+     */
+    public GetMediaMetaDataMedia withPart(Optional<? extends List<GetMediaMetaDataPart>> part) {
         Utils.checkNotNull(part, "part");
         this.part = part;
         return this;
@@ -782,7 +801,7 @@ public class GetMediaMetaDataMedia {
  
         private Optional<String> videoProfile = Optional.empty();
  
-        private Boolean hasVoiceActivity;
+        private Optional<Boolean> hasVoiceActivity = Optional.empty();
  
         private Optional<String> audioProfile = Optional.empty();
  
@@ -790,7 +809,7 @@ public class GetMediaMetaDataMedia {
  
         private Optional<Boolean> has64bitOffsets = Optional.empty();
  
-        private List<GetMediaMetaDataPart> part;  
+        private Optional<? extends List<GetMediaMetaDataPart>> part = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
@@ -1040,6 +1059,15 @@ public class GetMediaMetaDataMedia {
          */
         public Builder hasVoiceActivity(boolean hasVoiceActivity) {
             Utils.checkNotNull(hasVoiceActivity, "hasVoiceActivity");
+            this.hasVoiceActivity = Optional.ofNullable(hasVoiceActivity);
+            return this;
+        }
+
+        /**
+         * Indicates whether voice activity is detected.
+         */
+        public Builder hasVoiceActivity(Optional<Boolean> hasVoiceActivity) {
+            Utils.checkNotNull(hasVoiceActivity, "hasVoiceActivity");
             this.hasVoiceActivity = hasVoiceActivity;
             return this;
         }
@@ -1096,6 +1124,15 @@ public class GetMediaMetaDataMedia {
          * An array of parts for this media item.
          */
         public Builder part(List<GetMediaMetaDataPart> part) {
+            Utils.checkNotNull(part, "part");
+            this.part = Optional.ofNullable(part);
+            return this;
+        }
+
+        /**
+         * An array of parts for this media item.
+         */
+        public Builder part(Optional<? extends List<GetMediaMetaDataPart>> part) {
             Utils.checkNotNull(part, "part");
             this.part = part;
             return this;

@@ -62,20 +62,23 @@ public class GetMediaMetaDataStream {
     /**
      * Language of the stream.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("language")
-    private String language;
+    private Optional<String> language;
 
     /**
      * Language tag (e.g., en).
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("languageTag")
-    private String languageTag;
+    private Optional<String> languageTag;
 
     /**
      * ISO language code.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("languageCode")
-    private String languageCode;
+    private Optional<String> languageCode;
 
     /**
      * Indicates whether header compression is enabled.
@@ -175,6 +178,10 @@ public class GetMediaMetaDataStream {
     @JsonProperty("codedWidth")
     private Optional<Integer> codedWidth;
 
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("closedCaptions")
+    private Optional<Boolean> closedCaptions;
+
     /**
      * Color primaries used.
      */
@@ -245,6 +252,10 @@ public class GetMediaMetaDataStream {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("scanType")
     private Optional<String> scanType;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("embeddedInVideo")
+    private Optional<String> embeddedInVideo;
 
     /**
      * Number of reference frames.
@@ -340,9 +351,9 @@ public class GetMediaMetaDataStream {
             @JsonProperty("codec") String codec,
             @JsonProperty("index") int index,
             @JsonProperty("bitrate") Optional<Integer> bitrate,
-            @JsonProperty("language") String language,
-            @JsonProperty("languageTag") String languageTag,
-            @JsonProperty("languageCode") String languageCode,
+            @JsonProperty("language") Optional<String> language,
+            @JsonProperty("languageTag") Optional<String> languageTag,
+            @JsonProperty("languageCode") Optional<String> languageCode,
             @JsonProperty("headerCompression") Optional<Boolean> headerCompression,
             @JsonProperty("DOVIBLCompatID") Optional<Integer> doviblCompatID,
             @JsonProperty("DOVIBLPresent") Optional<Boolean> doviblPresent,
@@ -357,6 +368,7 @@ public class GetMediaMetaDataStream {
             @JsonProperty("chromaSubsampling") Optional<String> chromaSubsampling,
             @JsonProperty("codedHeight") Optional<Integer> codedHeight,
             @JsonProperty("codedWidth") Optional<Integer> codedWidth,
+            @JsonProperty("closedCaptions") Optional<Boolean> closedCaptions,
             @JsonProperty("colorPrimaries") Optional<String> colorPrimaries,
             @JsonProperty("colorRange") Optional<String> colorRange,
             @JsonProperty("colorSpace") Optional<String> colorSpace,
@@ -368,6 +380,7 @@ public class GetMediaMetaDataStream {
             @JsonProperty("hasScalingMatrix") Optional<Boolean> hasScalingMatrix,
             @JsonProperty("profile") Optional<String> profile,
             @JsonProperty("scanType") Optional<String> scanType,
+            @JsonProperty("embeddedInVideo") Optional<String> embeddedInVideo,
             @JsonProperty("refFrames") Optional<Integer> refFrames,
             @JsonProperty("width") Optional<Integer> width,
             @JsonProperty("displayTitle") String displayTitle,
@@ -404,6 +417,7 @@ public class GetMediaMetaDataStream {
         Utils.checkNotNull(chromaSubsampling, "chromaSubsampling");
         Utils.checkNotNull(codedHeight, "codedHeight");
         Utils.checkNotNull(codedWidth, "codedWidth");
+        Utils.checkNotNull(closedCaptions, "closedCaptions");
         Utils.checkNotNull(colorPrimaries, "colorPrimaries");
         Utils.checkNotNull(colorRange, "colorRange");
         Utils.checkNotNull(colorSpace, "colorSpace");
@@ -415,6 +429,7 @@ public class GetMediaMetaDataStream {
         Utils.checkNotNull(hasScalingMatrix, "hasScalingMatrix");
         Utils.checkNotNull(profile, "profile");
         Utils.checkNotNull(scanType, "scanType");
+        Utils.checkNotNull(embeddedInVideo, "embeddedInVideo");
         Utils.checkNotNull(refFrames, "refFrames");
         Utils.checkNotNull(width, "width");
         Utils.checkNotNull(displayTitle, "displayTitle");
@@ -451,6 +466,7 @@ public class GetMediaMetaDataStream {
         this.chromaSubsampling = chromaSubsampling;
         this.codedHeight = codedHeight;
         this.codedWidth = codedWidth;
+        this.closedCaptions = closedCaptions;
         this.colorPrimaries = colorPrimaries;
         this.colorRange = colorRange;
         this.colorSpace = colorSpace;
@@ -462,6 +478,7 @@ public class GetMediaMetaDataStream {
         this.hasScalingMatrix = hasScalingMatrix;
         this.profile = profile;
         this.scanType = scanType;
+        this.embeddedInVideo = embeddedInVideo;
         this.refFrames = refFrames;
         this.width = width;
         this.displayTitle = displayTitle;
@@ -482,12 +499,9 @@ public class GetMediaMetaDataStream {
             int streamType,
             String codec,
             int index,
-            String language,
-            String languageTag,
-            String languageCode,
             String displayTitle,
             String extendedDisplayTitle) {
-        this(id, streamType, Optional.empty(), codec, index, Optional.empty(), language, languageTag, languageCode, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), displayTitle, extendedDisplayTitle, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(id, streamType, Optional.empty(), codec, index, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), displayTitle, extendedDisplayTitle, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -542,7 +556,7 @@ public class GetMediaMetaDataStream {
      * Language of the stream.
      */
     @JsonIgnore
-    public String language() {
+    public Optional<String> language() {
         return language;
     }
 
@@ -550,7 +564,7 @@ public class GetMediaMetaDataStream {
      * Language tag (e.g., en).
      */
     @JsonIgnore
-    public String languageTag() {
+    public Optional<String> languageTag() {
         return languageTag;
     }
 
@@ -558,7 +572,7 @@ public class GetMediaMetaDataStream {
      * ISO language code.
      */
     @JsonIgnore
-    public String languageCode() {
+    public Optional<String> languageCode() {
         return languageCode;
     }
 
@@ -674,6 +688,11 @@ public class GetMediaMetaDataStream {
         return codedWidth;
     }
 
+    @JsonIgnore
+    public Optional<Boolean> closedCaptions() {
+        return closedCaptions;
+    }
+
     /**
      * Color primaries used.
      */
@@ -754,6 +773,11 @@ public class GetMediaMetaDataStream {
     @JsonIgnore
     public Optional<String> scanType() {
         return scanType;
+    }
+
+    @JsonIgnore
+    public Optional<String> embeddedInVideo() {
+        return embeddedInVideo;
     }
 
     /**
@@ -938,6 +962,15 @@ public class GetMediaMetaDataStream {
      */
     public GetMediaMetaDataStream withLanguage(String language) {
         Utils.checkNotNull(language, "language");
+        this.language = Optional.ofNullable(language);
+        return this;
+    }
+
+    /**
+     * Language of the stream.
+     */
+    public GetMediaMetaDataStream withLanguage(Optional<String> language) {
+        Utils.checkNotNull(language, "language");
         this.language = language;
         return this;
     }
@@ -947,6 +980,15 @@ public class GetMediaMetaDataStream {
      */
     public GetMediaMetaDataStream withLanguageTag(String languageTag) {
         Utils.checkNotNull(languageTag, "languageTag");
+        this.languageTag = Optional.ofNullable(languageTag);
+        return this;
+    }
+
+    /**
+     * Language tag (e.g., en).
+     */
+    public GetMediaMetaDataStream withLanguageTag(Optional<String> languageTag) {
+        Utils.checkNotNull(languageTag, "languageTag");
         this.languageTag = languageTag;
         return this;
     }
@@ -955,6 +997,15 @@ public class GetMediaMetaDataStream {
      * ISO language code.
      */
     public GetMediaMetaDataStream withLanguageCode(String languageCode) {
+        Utils.checkNotNull(languageCode, "languageCode");
+        this.languageCode = Optional.ofNullable(languageCode);
+        return this;
+    }
+
+    /**
+     * ISO language code.
+     */
+    public GetMediaMetaDataStream withLanguageCode(Optional<String> languageCode) {
         Utils.checkNotNull(languageCode, "languageCode");
         this.languageCode = languageCode;
         return this;
@@ -1212,6 +1263,18 @@ public class GetMediaMetaDataStream {
         return this;
     }
 
+    public GetMediaMetaDataStream withClosedCaptions(boolean closedCaptions) {
+        Utils.checkNotNull(closedCaptions, "closedCaptions");
+        this.closedCaptions = Optional.ofNullable(closedCaptions);
+        return this;
+    }
+
+    public GetMediaMetaDataStream withClosedCaptions(Optional<Boolean> closedCaptions) {
+        Utils.checkNotNull(closedCaptions, "closedCaptions");
+        this.closedCaptions = closedCaptions;
+        return this;
+    }
+
     /**
      * Color primaries used.
      */
@@ -1395,6 +1458,18 @@ public class GetMediaMetaDataStream {
     public GetMediaMetaDataStream withScanType(Optional<String> scanType) {
         Utils.checkNotNull(scanType, "scanType");
         this.scanType = scanType;
+        return this;
+    }
+
+    public GetMediaMetaDataStream withEmbeddedInVideo(String embeddedInVideo) {
+        Utils.checkNotNull(embeddedInVideo, "embeddedInVideo");
+        this.embeddedInVideo = Optional.ofNullable(embeddedInVideo);
+        return this;
+    }
+
+    public GetMediaMetaDataStream withEmbeddedInVideo(Optional<String> embeddedInVideo) {
+        Utils.checkNotNull(embeddedInVideo, "embeddedInVideo");
+        this.embeddedInVideo = embeddedInVideo;
         return this;
     }
 
@@ -1641,6 +1716,7 @@ public class GetMediaMetaDataStream {
             Objects.deepEquals(this.chromaSubsampling, other.chromaSubsampling) &&
             Objects.deepEquals(this.codedHeight, other.codedHeight) &&
             Objects.deepEquals(this.codedWidth, other.codedWidth) &&
+            Objects.deepEquals(this.closedCaptions, other.closedCaptions) &&
             Objects.deepEquals(this.colorPrimaries, other.colorPrimaries) &&
             Objects.deepEquals(this.colorRange, other.colorRange) &&
             Objects.deepEquals(this.colorSpace, other.colorSpace) &&
@@ -1652,6 +1728,7 @@ public class GetMediaMetaDataStream {
             Objects.deepEquals(this.hasScalingMatrix, other.hasScalingMatrix) &&
             Objects.deepEquals(this.profile, other.profile) &&
             Objects.deepEquals(this.scanType, other.scanType) &&
+            Objects.deepEquals(this.embeddedInVideo, other.embeddedInVideo) &&
             Objects.deepEquals(this.refFrames, other.refFrames) &&
             Objects.deepEquals(this.width, other.width) &&
             Objects.deepEquals(this.displayTitle, other.displayTitle) &&
@@ -1693,6 +1770,7 @@ public class GetMediaMetaDataStream {
             chromaSubsampling,
             codedHeight,
             codedWidth,
+            closedCaptions,
             colorPrimaries,
             colorRange,
             colorSpace,
@@ -1704,6 +1782,7 @@ public class GetMediaMetaDataStream {
             hasScalingMatrix,
             profile,
             scanType,
+            embeddedInVideo,
             refFrames,
             width,
             displayTitle,
@@ -1745,6 +1824,7 @@ public class GetMediaMetaDataStream {
                 "chromaSubsampling", chromaSubsampling,
                 "codedHeight", codedHeight,
                 "codedWidth", codedWidth,
+                "closedCaptions", closedCaptions,
                 "colorPrimaries", colorPrimaries,
                 "colorRange", colorRange,
                 "colorSpace", colorSpace,
@@ -1756,6 +1836,7 @@ public class GetMediaMetaDataStream {
                 "hasScalingMatrix", hasScalingMatrix,
                 "profile", profile,
                 "scanType", scanType,
+                "embeddedInVideo", embeddedInVideo,
                 "refFrames", refFrames,
                 "width", width,
                 "displayTitle", displayTitle,
@@ -1785,11 +1866,11 @@ public class GetMediaMetaDataStream {
  
         private Optional<Integer> bitrate = Optional.empty();
  
-        private String language;
+        private Optional<String> language = Optional.empty();
  
-        private String languageTag;
+        private Optional<String> languageTag = Optional.empty();
  
-        private String languageCode;
+        private Optional<String> languageCode = Optional.empty();
  
         private Optional<Boolean> headerCompression = Optional.empty();
  
@@ -1819,6 +1900,8 @@ public class GetMediaMetaDataStream {
  
         private Optional<Integer> codedWidth = Optional.empty();
  
+        private Optional<Boolean> closedCaptions = Optional.empty();
+ 
         private Optional<String> colorPrimaries = Optional.empty();
  
         private Optional<String> colorRange = Optional.empty();
@@ -1840,6 +1923,8 @@ public class GetMediaMetaDataStream {
         private Optional<String> profile = Optional.empty();
  
         private Optional<String> scanType = Optional.empty();
+ 
+        private Optional<String> embeddedInVideo = Optional.empty();
  
         private Optional<Integer> refFrames = Optional.empty();
  
@@ -1948,6 +2033,15 @@ public class GetMediaMetaDataStream {
          */
         public Builder language(String language) {
             Utils.checkNotNull(language, "language");
+            this.language = Optional.ofNullable(language);
+            return this;
+        }
+
+        /**
+         * Language of the stream.
+         */
+        public Builder language(Optional<String> language) {
+            Utils.checkNotNull(language, "language");
             this.language = language;
             return this;
         }
@@ -1957,6 +2051,15 @@ public class GetMediaMetaDataStream {
          */
         public Builder languageTag(String languageTag) {
             Utils.checkNotNull(languageTag, "languageTag");
+            this.languageTag = Optional.ofNullable(languageTag);
+            return this;
+        }
+
+        /**
+         * Language tag (e.g., en).
+         */
+        public Builder languageTag(Optional<String> languageTag) {
+            Utils.checkNotNull(languageTag, "languageTag");
             this.languageTag = languageTag;
             return this;
         }
@@ -1965,6 +2068,15 @@ public class GetMediaMetaDataStream {
          * ISO language code.
          */
         public Builder languageCode(String languageCode) {
+            Utils.checkNotNull(languageCode, "languageCode");
+            this.languageCode = Optional.ofNullable(languageCode);
+            return this;
+        }
+
+        /**
+         * ISO language code.
+         */
+        public Builder languageCode(Optional<String> languageCode) {
             Utils.checkNotNull(languageCode, "languageCode");
             this.languageCode = languageCode;
             return this;
@@ -2222,6 +2334,18 @@ public class GetMediaMetaDataStream {
             return this;
         }
 
+        public Builder closedCaptions(boolean closedCaptions) {
+            Utils.checkNotNull(closedCaptions, "closedCaptions");
+            this.closedCaptions = Optional.ofNullable(closedCaptions);
+            return this;
+        }
+
+        public Builder closedCaptions(Optional<Boolean> closedCaptions) {
+            Utils.checkNotNull(closedCaptions, "closedCaptions");
+            this.closedCaptions = closedCaptions;
+            return this;
+        }
+
         /**
          * Color primaries used.
          */
@@ -2405,6 +2529,18 @@ public class GetMediaMetaDataStream {
         public Builder scanType(Optional<String> scanType) {
             Utils.checkNotNull(scanType, "scanType");
             this.scanType = scanType;
+            return this;
+        }
+
+        public Builder embeddedInVideo(String embeddedInVideo) {
+            Utils.checkNotNull(embeddedInVideo, "embeddedInVideo");
+            this.embeddedInVideo = Optional.ofNullable(embeddedInVideo);
+            return this;
+        }
+
+        public Builder embeddedInVideo(Optional<String> embeddedInVideo) {
+            Utils.checkNotNull(embeddedInVideo, "embeddedInVideo");
+            this.embeddedInVideo = embeddedInVideo;
             return this;
         }
 
@@ -2643,6 +2779,7 @@ public class GetMediaMetaDataStream {
                 chromaSubsampling,
                 codedHeight,
                 codedWidth,
+                closedCaptions,
                 colorPrimaries,
                 colorRange,
                 colorSpace,
@@ -2654,6 +2791,7 @@ public class GetMediaMetaDataStream {
                 hasScalingMatrix,
                 profile,
                 scanType,
+                embeddedInVideo,
                 refFrames,
                 width,
                 displayTitle,

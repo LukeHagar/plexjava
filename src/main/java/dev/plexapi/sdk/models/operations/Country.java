@@ -10,46 +10,95 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
+/**
+ * Country - The filter query string for country media items.
+ */
 
 public class Country {
 
-    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("id")
+    private long id;
+
+    /**
+     * The country of origin of this media item
+     */
     @JsonProperty("tag")
-    private Optional<String> tag;
+    private String tag;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("filter")
+    private Optional<String> filter;
 
     @JsonCreator
     public Country(
-            @JsonProperty("tag") Optional<String> tag) {
+            @JsonProperty("id") long id,
+            @JsonProperty("tag") String tag,
+            @JsonProperty("filter") Optional<String> filter) {
+        Utils.checkNotNull(id, "id");
         Utils.checkNotNull(tag, "tag");
+        Utils.checkNotNull(filter, "filter");
+        this.id = id;
         this.tag = tag;
+        this.filter = filter;
     }
     
-    public Country() {
-        this(Optional.empty());
+    public Country(
+            long id,
+            String tag) {
+        this(id, tag, Optional.empty());
     }
 
     @JsonIgnore
-    public Optional<String> tag() {
+    public long id() {
+        return id;
+    }
+
+    /**
+     * The country of origin of this media item
+     */
+    @JsonIgnore
+    public String tag() {
         return tag;
+    }
+
+    @JsonIgnore
+    public Optional<String> filter() {
+        return filter;
     }
 
     public final static Builder builder() {
         return new Builder();
     }
 
-    public Country withTag(String tag) {
-        Utils.checkNotNull(tag, "tag");
-        this.tag = Optional.ofNullable(tag);
+    public Country withId(long id) {
+        Utils.checkNotNull(id, "id");
+        this.id = id;
         return this;
     }
 
-    public Country withTag(Optional<String> tag) {
+    /**
+     * The country of origin of this media item
+     */
+    public Country withTag(String tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = tag;
+        return this;
+    }
+
+    public Country withFilter(String filter) {
+        Utils.checkNotNull(filter, "filter");
+        this.filter = Optional.ofNullable(filter);
+        return this;
+    }
+
+    public Country withFilter(Optional<String> filter) {
+        Utils.checkNotNull(filter, "filter");
+        this.filter = filter;
         return this;
     }
     
@@ -63,44 +112,71 @@ public class Country {
         }
         Country other = (Country) o;
         return 
-            Objects.deepEquals(this.tag, other.tag);
+            Objects.deepEquals(this.id, other.id) &&
+            Objects.deepEquals(this.tag, other.tag) &&
+            Objects.deepEquals(this.filter, other.filter);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
-            tag);
+            id,
+            tag,
+            filter);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Country.class,
-                "tag", tag);
+                "id", id,
+                "tag", tag,
+                "filter", filter);
     }
     
     public final static class Builder {
  
-        private Optional<String> tag = Optional.empty();  
+        private Long id;
+ 
+        private String tag;
+ 
+        private Optional<String> filter = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
         }
 
-        public Builder tag(String tag) {
-            Utils.checkNotNull(tag, "tag");
-            this.tag = Optional.ofNullable(tag);
+        public Builder id(long id) {
+            Utils.checkNotNull(id, "id");
+            this.id = id;
             return this;
         }
 
-        public Builder tag(Optional<String> tag) {
+        /**
+         * The country of origin of this media item
+         */
+        public Builder tag(String tag) {
             Utils.checkNotNull(tag, "tag");
             this.tag = tag;
+            return this;
+        }
+
+        public Builder filter(String filter) {
+            Utils.checkNotNull(filter, "filter");
+            this.filter = Optional.ofNullable(filter);
+            return this;
+        }
+
+        public Builder filter(Optional<String> filter) {
+            Utils.checkNotNull(filter, "filter");
+            this.filter = filter;
             return this;
         }
         
         public Country build() {
             return new Country(
-                tag);
+                id,
+                tag,
+                filter);
         }
     }
 }

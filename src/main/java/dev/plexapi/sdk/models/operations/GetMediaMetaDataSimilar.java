@@ -12,27 +12,29 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
-/**
- * Genre - The filter query string for similar items.
- */
 
-public class Genre {
+public class GetMediaMetaDataSimilar {
 
+    /**
+     * The unique similar item identifier.
+     */
     @JsonProperty("id")
     private long id;
 
+    /**
+     * The filter string for similar items.
+     */
     @JsonProperty("filter")
     private String filter;
 
     /**
-     * The genre name of this media-item
-     * 
+     * The tag or title of the similar content.
      */
     @JsonProperty("tag")
     private String tag;
 
     @JsonCreator
-    public Genre(
+    public GetMediaMetaDataSimilar(
             @JsonProperty("id") long id,
             @JsonProperty("filter") String filter,
             @JsonProperty("tag") String tag) {
@@ -44,19 +46,24 @@ public class Genre {
         this.tag = tag;
     }
 
+    /**
+     * The unique similar item identifier.
+     */
     @JsonIgnore
     public long id() {
         return id;
     }
 
+    /**
+     * The filter string for similar items.
+     */
     @JsonIgnore
     public String filter() {
         return filter;
     }
 
     /**
-     * The genre name of this media-item
-     * 
+     * The tag or title of the similar content.
      */
     @JsonIgnore
     public String tag() {
@@ -67,23 +74,28 @@ public class Genre {
         return new Builder();
     }
 
-    public Genre withId(long id) {
+    /**
+     * The unique similar item identifier.
+     */
+    public GetMediaMetaDataSimilar withId(long id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
     }
 
-    public Genre withFilter(String filter) {
+    /**
+     * The filter string for similar items.
+     */
+    public GetMediaMetaDataSimilar withFilter(String filter) {
         Utils.checkNotNull(filter, "filter");
         this.filter = filter;
         return this;
     }
 
     /**
-     * The genre name of this media-item
-     * 
+     * The tag or title of the similar content.
      */
-    public Genre withTag(String tag) {
+    public GetMediaMetaDataSimilar withTag(String tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = tag;
         return this;
@@ -97,7 +109,7 @@ public class Genre {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Genre other = (Genre) o;
+        GetMediaMetaDataSimilar other = (GetMediaMetaDataSimilar) o;
         return 
             Objects.deepEquals(this.id, other.id) &&
             Objects.deepEquals(this.filter, other.filter) &&
@@ -114,7 +126,7 @@ public class Genre {
     
     @Override
     public String toString() {
-        return Utils.toString(Genre.class,
+        return Utils.toString(GetMediaMetaDataSimilar.class,
                 "id", id,
                 "filter", filter,
                 "tag", tag);
@@ -132,12 +144,18 @@ public class Genre {
           // force use of static builder() method
         }
 
+        /**
+         * The unique similar item identifier.
+         */
         public Builder id(long id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;
         }
 
+        /**
+         * The filter string for similar items.
+         */
         public Builder filter(String filter) {
             Utils.checkNotNull(filter, "filter");
             this.filter = filter;
@@ -145,8 +163,7 @@ public class Genre {
         }
 
         /**
-         * The genre name of this media-item
-         * 
+         * The tag or title of the similar content.
          */
         public Builder tag(String tag) {
             Utils.checkNotNull(tag, "tag");
@@ -154,8 +171,8 @@ public class Genre {
             return this;
         }
         
-        public Genre build() {
-            return new Genre(
+        public GetMediaMetaDataSimilar build() {
+            return new GetMediaMetaDataSimilar(
                 id,
                 filter,
                 tag);

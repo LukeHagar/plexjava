@@ -6,34 +6,32 @@
 package dev.plexapi.sdk.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
-import java.util.Optional;
 
 public class Director {
 
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * The role of Director
+     */
     @JsonProperty("tag")
-    private Optional<String> tag;
+    private String tag;
 
     @JsonCreator
     public Director(
-            @JsonProperty("tag") Optional<String> tag) {
+            @JsonProperty("tag") String tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = tag;
     }
-    
-    public Director() {
-        this(Optional.empty());
-    }
 
+    /**
+     * The role of Director
+     */
     @JsonIgnore
-    public Optional<String> tag() {
+    public String tag() {
         return tag;
     }
 
@@ -41,13 +39,10 @@ public class Director {
         return new Builder();
     }
 
+    /**
+     * The role of Director
+     */
     public Director withTag(String tag) {
-        Utils.checkNotNull(tag, "tag");
-        this.tag = Optional.ofNullable(tag);
-        return this;
-    }
-
-    public Director withTag(Optional<String> tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = tag;
         return this;
@@ -80,19 +75,16 @@ public class Director {
     
     public final static class Builder {
  
-        private Optional<String> tag = Optional.empty();  
+        private String tag;  
         
         private Builder() {
           // force use of static builder() method
         }
 
+        /**
+         * The role of Director
+         */
         public Builder tag(String tag) {
-            Utils.checkNotNull(tag, "tag");
-            this.tag = Optional.ofNullable(tag);
-            return this;
-        }
-
-        public Builder tag(Optional<String> tag) {
             Utils.checkNotNull(tag, "tag");
             this.tag = tag;
             return this;

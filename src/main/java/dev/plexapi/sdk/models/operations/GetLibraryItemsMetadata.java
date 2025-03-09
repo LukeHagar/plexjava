@@ -104,21 +104,21 @@ public class GetLibraryItemsMetadata {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("flattenSeasons")
-    private Optional<? extends GetLibraryItemsFlattenSeasons> flattenSeasons;
+    private Optional<? extends FlattenSeasons> flattenSeasons;
 
     /**
      * Setting that indicates how episodes are sorted for the show. (-1 = Library default, 0 = Oldest first, 1 = Newest first).
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("episodeSort")
-    private Optional<? extends GetLibraryItemsEpisodeSort> episodeSort;
+    private Optional<? extends EpisodeSort> episodeSort;
 
     /**
      * Setting that indicates if credits markers detection is enabled. (-1 = Library default, 0 = Disabled).
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("enableCreditsMarkerGeneration")
-    private Optional<? extends GetLibraryItemsEnableCreditsMarkerGeneration> enableCreditsMarkerGeneration;
+    private Optional<? extends EnableCreditsMarkerGeneration> enableCreditsMarkerGeneration;
 
     /**
      * Setting that indicates the episode ordering for the show.
@@ -131,7 +131,7 @@ public class GetLibraryItemsMetadata {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("showOrdering")
-    private Optional<? extends GetLibraryItemsShowOrdering> showOrdering;
+    private Optional<? extends ShowOrdering> showOrdering;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
@@ -260,7 +260,7 @@ public class GetLibraryItemsMetadata {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Guid")
-    private Optional<? extends List<GetLibraryItemsMediaGuid>> mediaGuid;
+    private Optional<? extends List<MediaGuid>> mediaGuid;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("UltraBlurColors")
@@ -268,7 +268,7 @@ public class GetLibraryItemsMetadata {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Rating")
-    private Optional<? extends List<GetLibraryItemsMetaDataRating>> metaDataRating;
+    private Optional<? extends List<MetaDataRating>> metaDataRating;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Image")
@@ -386,10 +386,10 @@ public class GetLibraryItemsMetadata {
             @JsonProperty("year") Optional<Integer> year,
             @JsonProperty("seasonCount") Optional<Integer> seasonCount,
             @JsonProperty("tagline") Optional<String> tagline,
-            @JsonProperty("flattenSeasons") Optional<? extends GetLibraryItemsFlattenSeasons> flattenSeasons,
-            @JsonProperty("episodeSort") Optional<? extends GetLibraryItemsEpisodeSort> episodeSort,
-            @JsonProperty("enableCreditsMarkerGeneration") Optional<? extends GetLibraryItemsEnableCreditsMarkerGeneration> enableCreditsMarkerGeneration,
-            @JsonProperty("showOrdering") Optional<? extends GetLibraryItemsShowOrdering> showOrdering,
+            @JsonProperty("flattenSeasons") Optional<? extends FlattenSeasons> flattenSeasons,
+            @JsonProperty("episodeSort") Optional<? extends EpisodeSort> episodeSort,
+            @JsonProperty("enableCreditsMarkerGeneration") Optional<? extends EnableCreditsMarkerGeneration> enableCreditsMarkerGeneration,
+            @JsonProperty("showOrdering") Optional<? extends ShowOrdering> showOrdering,
             @JsonProperty("thumb") Optional<String> thumb,
             @JsonProperty("art") Optional<String> art,
             @JsonProperty("banner") Optional<String> banner,
@@ -418,9 +418,9 @@ public class GetLibraryItemsMetadata {
             @JsonProperty("Collection") Optional<? extends List<GetLibraryItemsCollection>> collection,
             @JsonProperty("Role") Optional<? extends List<GetLibraryItemsRole>> role,
             @JsonProperty("Location") Optional<? extends List<GetLibraryItemsLocation>> location,
-            @JsonProperty("Guid") Optional<? extends List<GetLibraryItemsMediaGuid>> mediaGuid,
+            @JsonProperty("Guid") Optional<? extends List<MediaGuid>> mediaGuid,
             @JsonProperty("UltraBlurColors") Optional<? extends GetLibraryItemsUltraBlurColors> ultraBlurColors,
-            @JsonProperty("Rating") Optional<? extends List<GetLibraryItemsMetaDataRating>> metaDataRating,
+            @JsonProperty("Rating") Optional<? extends List<MetaDataRating>> metaDataRating,
             @JsonProperty("Image") Optional<? extends List<GetLibraryItemsImage>> image,
             @JsonProperty("titleSort") Optional<String> titleSort,
             @JsonProperty("viewCount") Optional<Integer> viewCount,
@@ -713,8 +713,8 @@ public class GetLibraryItemsMetadata {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<GetLibraryItemsFlattenSeasons> flattenSeasons() {
-        return (Optional<GetLibraryItemsFlattenSeasons>) flattenSeasons;
+    public Optional<FlattenSeasons> flattenSeasons() {
+        return (Optional<FlattenSeasons>) flattenSeasons;
     }
 
     /**
@@ -722,8 +722,8 @@ public class GetLibraryItemsMetadata {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<GetLibraryItemsEpisodeSort> episodeSort() {
-        return (Optional<GetLibraryItemsEpisodeSort>) episodeSort;
+    public Optional<EpisodeSort> episodeSort() {
+        return (Optional<EpisodeSort>) episodeSort;
     }
 
     /**
@@ -731,8 +731,8 @@ public class GetLibraryItemsMetadata {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<GetLibraryItemsEnableCreditsMarkerGeneration> enableCreditsMarkerGeneration() {
-        return (Optional<GetLibraryItemsEnableCreditsMarkerGeneration>) enableCreditsMarkerGeneration;
+    public Optional<EnableCreditsMarkerGeneration> enableCreditsMarkerGeneration() {
+        return (Optional<EnableCreditsMarkerGeneration>) enableCreditsMarkerGeneration;
     }
 
     /**
@@ -746,8 +746,8 @@ public class GetLibraryItemsMetadata {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<GetLibraryItemsShowOrdering> showOrdering() {
-        return (Optional<GetLibraryItemsShowOrdering>) showOrdering;
+    public Optional<ShowOrdering> showOrdering() {
+        return (Optional<ShowOrdering>) showOrdering;
     }
 
     @JsonIgnore
@@ -914,8 +914,8 @@ public class GetLibraryItemsMetadata {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<GetLibraryItemsMediaGuid>> mediaGuid() {
-        return (Optional<List<GetLibraryItemsMediaGuid>>) mediaGuid;
+    public Optional<List<MediaGuid>> mediaGuid() {
+        return (Optional<List<MediaGuid>>) mediaGuid;
     }
 
     @SuppressWarnings("unchecked")
@@ -926,8 +926,8 @@ public class GetLibraryItemsMetadata {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<GetLibraryItemsMetaDataRating>> metaDataRating() {
-        return (Optional<List<GetLibraryItemsMetaDataRating>>) metaDataRating;
+    public Optional<List<MetaDataRating>> metaDataRating() {
+        return (Optional<List<MetaDataRating>>) metaDataRating;
     }
 
     @SuppressWarnings("unchecked")
@@ -1246,7 +1246,7 @@ public class GetLibraryItemsMetadata {
     /**
      * Setting that indicates if seasons are set to hidden for the show. (-1 = Library default, 0 = Hide, 1 = Show).
      */
-    public GetLibraryItemsMetadata withFlattenSeasons(GetLibraryItemsFlattenSeasons flattenSeasons) {
+    public GetLibraryItemsMetadata withFlattenSeasons(FlattenSeasons flattenSeasons) {
         Utils.checkNotNull(flattenSeasons, "flattenSeasons");
         this.flattenSeasons = Optional.ofNullable(flattenSeasons);
         return this;
@@ -1255,7 +1255,7 @@ public class GetLibraryItemsMetadata {
     /**
      * Setting that indicates if seasons are set to hidden for the show. (-1 = Library default, 0 = Hide, 1 = Show).
      */
-    public GetLibraryItemsMetadata withFlattenSeasons(Optional<? extends GetLibraryItemsFlattenSeasons> flattenSeasons) {
+    public GetLibraryItemsMetadata withFlattenSeasons(Optional<? extends FlattenSeasons> flattenSeasons) {
         Utils.checkNotNull(flattenSeasons, "flattenSeasons");
         this.flattenSeasons = flattenSeasons;
         return this;
@@ -1264,7 +1264,7 @@ public class GetLibraryItemsMetadata {
     /**
      * Setting that indicates how episodes are sorted for the show. (-1 = Library default, 0 = Oldest first, 1 = Newest first).
      */
-    public GetLibraryItemsMetadata withEpisodeSort(GetLibraryItemsEpisodeSort episodeSort) {
+    public GetLibraryItemsMetadata withEpisodeSort(EpisodeSort episodeSort) {
         Utils.checkNotNull(episodeSort, "episodeSort");
         this.episodeSort = Optional.ofNullable(episodeSort);
         return this;
@@ -1273,7 +1273,7 @@ public class GetLibraryItemsMetadata {
     /**
      * Setting that indicates how episodes are sorted for the show. (-1 = Library default, 0 = Oldest first, 1 = Newest first).
      */
-    public GetLibraryItemsMetadata withEpisodeSort(Optional<? extends GetLibraryItemsEpisodeSort> episodeSort) {
+    public GetLibraryItemsMetadata withEpisodeSort(Optional<? extends EpisodeSort> episodeSort) {
         Utils.checkNotNull(episodeSort, "episodeSort");
         this.episodeSort = episodeSort;
         return this;
@@ -1282,7 +1282,7 @@ public class GetLibraryItemsMetadata {
     /**
      * Setting that indicates if credits markers detection is enabled. (-1 = Library default, 0 = Disabled).
      */
-    public GetLibraryItemsMetadata withEnableCreditsMarkerGeneration(GetLibraryItemsEnableCreditsMarkerGeneration enableCreditsMarkerGeneration) {
+    public GetLibraryItemsMetadata withEnableCreditsMarkerGeneration(EnableCreditsMarkerGeneration enableCreditsMarkerGeneration) {
         Utils.checkNotNull(enableCreditsMarkerGeneration, "enableCreditsMarkerGeneration");
         this.enableCreditsMarkerGeneration = Optional.ofNullable(enableCreditsMarkerGeneration);
         return this;
@@ -1291,7 +1291,7 @@ public class GetLibraryItemsMetadata {
     /**
      * Setting that indicates if credits markers detection is enabled. (-1 = Library default, 0 = Disabled).
      */
-    public GetLibraryItemsMetadata withEnableCreditsMarkerGeneration(Optional<? extends GetLibraryItemsEnableCreditsMarkerGeneration> enableCreditsMarkerGeneration) {
+    public GetLibraryItemsMetadata withEnableCreditsMarkerGeneration(Optional<? extends EnableCreditsMarkerGeneration> enableCreditsMarkerGeneration) {
         Utils.checkNotNull(enableCreditsMarkerGeneration, "enableCreditsMarkerGeneration");
         this.enableCreditsMarkerGeneration = enableCreditsMarkerGeneration;
         return this;
@@ -1306,7 +1306,7 @@ public class GetLibraryItemsMetadata {
      * absolute = TheTVDB (Absolute)).
      * 
      */
-    public GetLibraryItemsMetadata withShowOrdering(GetLibraryItemsShowOrdering showOrdering) {
+    public GetLibraryItemsMetadata withShowOrdering(ShowOrdering showOrdering) {
         Utils.checkNotNull(showOrdering, "showOrdering");
         this.showOrdering = Optional.ofNullable(showOrdering);
         return this;
@@ -1321,7 +1321,7 @@ public class GetLibraryItemsMetadata {
      * absolute = TheTVDB (Absolute)).
      * 
      */
-    public GetLibraryItemsMetadata withShowOrdering(Optional<? extends GetLibraryItemsShowOrdering> showOrdering) {
+    public GetLibraryItemsMetadata withShowOrdering(Optional<? extends ShowOrdering> showOrdering) {
         Utils.checkNotNull(showOrdering, "showOrdering");
         this.showOrdering = showOrdering;
         return this;
@@ -1678,7 +1678,7 @@ public class GetLibraryItemsMetadata {
      * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
      * 
      */
-    public GetLibraryItemsMetadata withMediaGuid(List<GetLibraryItemsMediaGuid> mediaGuid) {
+    public GetLibraryItemsMetadata withMediaGuid(List<MediaGuid> mediaGuid) {
         Utils.checkNotNull(mediaGuid, "mediaGuid");
         this.mediaGuid = Optional.ofNullable(mediaGuid);
         return this;
@@ -1688,7 +1688,7 @@ public class GetLibraryItemsMetadata {
      * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
      * 
      */
-    public GetLibraryItemsMetadata withMediaGuid(Optional<? extends List<GetLibraryItemsMediaGuid>> mediaGuid) {
+    public GetLibraryItemsMetadata withMediaGuid(Optional<? extends List<MediaGuid>> mediaGuid) {
         Utils.checkNotNull(mediaGuid, "mediaGuid");
         this.mediaGuid = mediaGuid;
         return this;
@@ -1706,13 +1706,13 @@ public class GetLibraryItemsMetadata {
         return this;
     }
 
-    public GetLibraryItemsMetadata withMetaDataRating(List<GetLibraryItemsMetaDataRating> metaDataRating) {
+    public GetLibraryItemsMetadata withMetaDataRating(List<MetaDataRating> metaDataRating) {
         Utils.checkNotNull(metaDataRating, "metaDataRating");
         this.metaDataRating = Optional.ofNullable(metaDataRating);
         return this;
     }
 
-    public GetLibraryItemsMetadata withMetaDataRating(Optional<? extends List<GetLibraryItemsMetaDataRating>> metaDataRating) {
+    public GetLibraryItemsMetadata withMetaDataRating(Optional<? extends List<MetaDataRating>> metaDataRating) {
         Utils.checkNotNull(metaDataRating, "metaDataRating");
         this.metaDataRating = metaDataRating;
         return this;
@@ -2290,13 +2290,13 @@ public class GetLibraryItemsMetadata {
  
         private Optional<String> tagline = Optional.empty();
  
-        private Optional<? extends GetLibraryItemsFlattenSeasons> flattenSeasons = Optional.empty();
+        private Optional<? extends FlattenSeasons> flattenSeasons = Optional.empty();
  
-        private Optional<? extends GetLibraryItemsEpisodeSort> episodeSort = Optional.empty();
+        private Optional<? extends EpisodeSort> episodeSort = Optional.empty();
  
-        private Optional<? extends GetLibraryItemsEnableCreditsMarkerGeneration> enableCreditsMarkerGeneration = Optional.empty();
+        private Optional<? extends EnableCreditsMarkerGeneration> enableCreditsMarkerGeneration = Optional.empty();
  
-        private Optional<? extends GetLibraryItemsShowOrdering> showOrdering = Optional.empty();
+        private Optional<? extends ShowOrdering> showOrdering = Optional.empty();
  
         private Optional<String> thumb = Optional.empty();
  
@@ -2354,11 +2354,11 @@ public class GetLibraryItemsMetadata {
  
         private Optional<? extends List<GetLibraryItemsLocation>> location = Optional.empty();
  
-        private Optional<? extends List<GetLibraryItemsMediaGuid>> mediaGuid = Optional.empty();
+        private Optional<? extends List<MediaGuid>> mediaGuid = Optional.empty();
  
         private Optional<? extends GetLibraryItemsUltraBlurColors> ultraBlurColors = Optional.empty();
  
-        private Optional<? extends List<GetLibraryItemsMetaDataRating>> metaDataRating = Optional.empty();
+        private Optional<? extends List<MetaDataRating>> metaDataRating = Optional.empty();
  
         private Optional<? extends List<GetLibraryItemsImage>> image = Optional.empty();
  
@@ -2602,7 +2602,7 @@ public class GetLibraryItemsMetadata {
         /**
          * Setting that indicates if seasons are set to hidden for the show. (-1 = Library default, 0 = Hide, 1 = Show).
          */
-        public Builder flattenSeasons(GetLibraryItemsFlattenSeasons flattenSeasons) {
+        public Builder flattenSeasons(FlattenSeasons flattenSeasons) {
             Utils.checkNotNull(flattenSeasons, "flattenSeasons");
             this.flattenSeasons = Optional.ofNullable(flattenSeasons);
             return this;
@@ -2611,7 +2611,7 @@ public class GetLibraryItemsMetadata {
         /**
          * Setting that indicates if seasons are set to hidden for the show. (-1 = Library default, 0 = Hide, 1 = Show).
          */
-        public Builder flattenSeasons(Optional<? extends GetLibraryItemsFlattenSeasons> flattenSeasons) {
+        public Builder flattenSeasons(Optional<? extends FlattenSeasons> flattenSeasons) {
             Utils.checkNotNull(flattenSeasons, "flattenSeasons");
             this.flattenSeasons = flattenSeasons;
             return this;
@@ -2620,7 +2620,7 @@ public class GetLibraryItemsMetadata {
         /**
          * Setting that indicates how episodes are sorted for the show. (-1 = Library default, 0 = Oldest first, 1 = Newest first).
          */
-        public Builder episodeSort(GetLibraryItemsEpisodeSort episodeSort) {
+        public Builder episodeSort(EpisodeSort episodeSort) {
             Utils.checkNotNull(episodeSort, "episodeSort");
             this.episodeSort = Optional.ofNullable(episodeSort);
             return this;
@@ -2629,7 +2629,7 @@ public class GetLibraryItemsMetadata {
         /**
          * Setting that indicates how episodes are sorted for the show. (-1 = Library default, 0 = Oldest first, 1 = Newest first).
          */
-        public Builder episodeSort(Optional<? extends GetLibraryItemsEpisodeSort> episodeSort) {
+        public Builder episodeSort(Optional<? extends EpisodeSort> episodeSort) {
             Utils.checkNotNull(episodeSort, "episodeSort");
             this.episodeSort = episodeSort;
             return this;
@@ -2638,7 +2638,7 @@ public class GetLibraryItemsMetadata {
         /**
          * Setting that indicates if credits markers detection is enabled. (-1 = Library default, 0 = Disabled).
          */
-        public Builder enableCreditsMarkerGeneration(GetLibraryItemsEnableCreditsMarkerGeneration enableCreditsMarkerGeneration) {
+        public Builder enableCreditsMarkerGeneration(EnableCreditsMarkerGeneration enableCreditsMarkerGeneration) {
             Utils.checkNotNull(enableCreditsMarkerGeneration, "enableCreditsMarkerGeneration");
             this.enableCreditsMarkerGeneration = Optional.ofNullable(enableCreditsMarkerGeneration);
             return this;
@@ -2647,7 +2647,7 @@ public class GetLibraryItemsMetadata {
         /**
          * Setting that indicates if credits markers detection is enabled. (-1 = Library default, 0 = Disabled).
          */
-        public Builder enableCreditsMarkerGeneration(Optional<? extends GetLibraryItemsEnableCreditsMarkerGeneration> enableCreditsMarkerGeneration) {
+        public Builder enableCreditsMarkerGeneration(Optional<? extends EnableCreditsMarkerGeneration> enableCreditsMarkerGeneration) {
             Utils.checkNotNull(enableCreditsMarkerGeneration, "enableCreditsMarkerGeneration");
             this.enableCreditsMarkerGeneration = enableCreditsMarkerGeneration;
             return this;
@@ -2662,7 +2662,7 @@ public class GetLibraryItemsMetadata {
          * absolute = TheTVDB (Absolute)).
          * 
          */
-        public Builder showOrdering(GetLibraryItemsShowOrdering showOrdering) {
+        public Builder showOrdering(ShowOrdering showOrdering) {
             Utils.checkNotNull(showOrdering, "showOrdering");
             this.showOrdering = Optional.ofNullable(showOrdering);
             return this;
@@ -2677,7 +2677,7 @@ public class GetLibraryItemsMetadata {
          * absolute = TheTVDB (Absolute)).
          * 
          */
-        public Builder showOrdering(Optional<? extends GetLibraryItemsShowOrdering> showOrdering) {
+        public Builder showOrdering(Optional<? extends ShowOrdering> showOrdering) {
             Utils.checkNotNull(showOrdering, "showOrdering");
             this.showOrdering = showOrdering;
             return this;
@@ -3034,7 +3034,7 @@ public class GetLibraryItemsMetadata {
          * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
          * 
          */
-        public Builder mediaGuid(List<GetLibraryItemsMediaGuid> mediaGuid) {
+        public Builder mediaGuid(List<MediaGuid> mediaGuid) {
             Utils.checkNotNull(mediaGuid, "mediaGuid");
             this.mediaGuid = Optional.ofNullable(mediaGuid);
             return this;
@@ -3044,7 +3044,7 @@ public class GetLibraryItemsMetadata {
          * The Guid object is only included in the response if the `includeGuids` parameter is set to `1`.
          * 
          */
-        public Builder mediaGuid(Optional<? extends List<GetLibraryItemsMediaGuid>> mediaGuid) {
+        public Builder mediaGuid(Optional<? extends List<MediaGuid>> mediaGuid) {
             Utils.checkNotNull(mediaGuid, "mediaGuid");
             this.mediaGuid = mediaGuid;
             return this;
@@ -3062,13 +3062,13 @@ public class GetLibraryItemsMetadata {
             return this;
         }
 
-        public Builder metaDataRating(List<GetLibraryItemsMetaDataRating> metaDataRating) {
+        public Builder metaDataRating(List<MetaDataRating> metaDataRating) {
             Utils.checkNotNull(metaDataRating, "metaDataRating");
             this.metaDataRating = Optional.ofNullable(metaDataRating);
             return this;
         }
 
-        public Builder metaDataRating(Optional<? extends List<GetLibraryItemsMetaDataRating>> metaDataRating) {
+        public Builder metaDataRating(Optional<? extends List<MetaDataRating>> metaDataRating) {
             Utils.checkNotNull(metaDataRating, "metaDataRating");
             this.metaDataRating = metaDataRating;
             return this;

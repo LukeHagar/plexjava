@@ -11,7 +11,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Double;
+import java.lang.Float;
+import java.lang.Integer;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -20,397 +21,507 @@ import java.util.Optional;
 
 public class Stream {
 
+    /**
+     * Unique stream identifier.
+     */
     @JsonProperty("id")
     private long id;
 
     /**
-     * Type of stream (1 = video, 2 = audio, 3 = subtitle)
+     * Stream type (1=video, 2=audio, 3=subtitle).
      */
     @JsonProperty("streamType")
-    private long streamType;
+    private int streamType;
 
     /**
-     * Indicates if this is the default stream
+     * Indicates if this stream is default.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("default")
     private Optional<Boolean> default_;
 
     /**
-     * Indicates if the stream is selected
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("selected")
-    private Optional<Boolean> selected;
-
-    /**
-     * Codec used by the stream
+     * Codec used by the stream.
      */
     @JsonProperty("codec")
     private String codec;
 
     /**
-     * The index of the stream
+     * Index of the stream.
      */
     @JsonProperty("index")
-    private long index;
+    private int index;
 
     /**
-     * The bitrate of the stream in kbps
+     * Bitrate of the stream.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bitrate")
-    private Optional<Long> bitrate;
+    private Optional<Integer> bitrate;
 
     /**
-     * The color primaries of the video stream
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("colorPrimaries")
-    private Optional<String> colorPrimaries;
-
-    /**
-     * The color range of the video stream
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("colorRange")
-    private Optional<String> colorRange;
-
-    /**
-     * The color space of the video stream
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("colorSpace")
-    private Optional<String> colorSpace;
-
-    /**
-     * The transfer characteristics (TRC) of the video stream
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("colorTrc")
-    private Optional<String> colorTrc;
-
-    /**
-     * The bit depth of the video stream
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("bitDepth")
-    private Optional<Long> bitDepth;
-
-    /**
-     * The chroma location of the video stream
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("chromaLocation")
-    private Optional<String> chromaLocation;
-
-    /**
-     * The identifier of the video stream
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("streamIdentifier")
-    private Optional<String> streamIdentifier;
-
-    /**
-     * The chroma subsampling format
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("chromaSubsampling")
-    private Optional<String> chromaSubsampling;
-
-    /**
-     * The coded height of the video stream
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("codedHeight")
-    private Optional<Long> codedHeight;
-
-    /**
-     * The coded width of the video stream
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("codedWidth")
-    private Optional<Long> codedWidth;
-
-    /**
-     * The frame rate of the video stream
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("frameRate")
-    private Optional<Double> frameRate;
-
-    /**
-     * Indicates if the stream has a scaling matrix
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("hasScalingMatrix")
-    private Optional<Boolean> hasScalingMatrix;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("hearingImpaired")
-    private Optional<Boolean> hearingImpaired;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("closedCaptions")
-    private Optional<Boolean> closedCaptions;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("embeddedInVideo")
-    private Optional<String> embeddedInVideo;
-
-    /**
-     * The height of the video stream
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("height")
-    private Optional<Long> height;
-
-    /**
-     * The level of the video codec
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("level")
-    private Optional<Long> level;
-
-    /**
-     * The profile of the video codec
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("profile")
-    private Optional<String> profile;
-
-    /**
-     * Number of reference frames
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("refFrames")
-    private Optional<Long> refFrames;
-
-    /**
-     * The scan type (progressive or interlaced)
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("scanType")
-    private Optional<String> scanType;
-
-    /**
-     * The width of the video stream
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("width")
-    private Optional<Long> width;
-
-    /**
-     * Display title of the stream
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("displayTitle")
-    private Optional<String> displayTitle;
-
-    /**
-     * Extended display title of the stream
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("extendedDisplayTitle")
-    private Optional<String> extendedDisplayTitle;
-
-    /**
-     * Number of audio channels (for audio streams)
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("channels")
-    private Optional<Long> channels;
-
-    /**
-     * The language of the stream (for audio/subtitle streams)
+     * Language of the stream.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("language")
     private Optional<String> language;
 
     /**
-     * Language tag of the stream
+     * Language tag (e.g., en).
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("languageTag")
     private Optional<String> languageTag;
 
     /**
-     * Language code of the stream
+     * ISO language code.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("languageCode")
     private Optional<String> languageCode;
 
     /**
-     * The audio channel layout
+     * Indicates whether header compression is enabled.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("headerCompression")
+    private Optional<Boolean> headerCompression;
+
+    /**
+     * Dolby Vision BL compatibility ID.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("DOVIBLCompatID")
+    private Optional<Integer> doviblCompatID;
+
+    /**
+     * Indicates if Dolby Vision BL is present.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("DOVIBLPresent")
+    private Optional<Boolean> doviblPresent;
+
+    /**
+     * Indicates if Dolby Vision EL is present.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("DOVIELPresent")
+    private Optional<Boolean> dovielPresent;
+
+    /**
+     * Dolby Vision level.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("DOVILevel")
+    private Optional<Integer> doviLevel;
+
+    /**
+     * Indicates if Dolby Vision is present.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("DOVIPresent")
+    private Optional<Boolean> doviPresent;
+
+    /**
+     * Dolby Vision profile.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("DOVIProfile")
+    private Optional<Integer> doviProfile;
+
+    /**
+     * Indicates if Dolby Vision RPU is present.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("DOVIRPUPresent")
+    private Optional<Boolean> dovirpuPresent;
+
+    /**
+     * Dolby Vision version.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("DOVIVersion")
+    private Optional<String> doviVersion;
+
+    /**
+     * Bit depth of the video stream.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("bitDepth")
+    private Optional<Integer> bitDepth;
+
+    /**
+     * Chroma sample location.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("chromaLocation")
+    private Optional<String> chromaLocation;
+
+    /**
+     * Chroma subsampling format.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("chromaSubsampling")
+    private Optional<String> chromaSubsampling;
+
+    /**
+     * Coded video height.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("codedHeight")
+    private Optional<Integer> codedHeight;
+
+    /**
+     * Coded video width.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("codedWidth")
+    private Optional<Integer> codedWidth;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("closedCaptions")
+    private Optional<Boolean> closedCaptions;
+
+    /**
+     * Color primaries used.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("colorPrimaries")
+    private Optional<String> colorPrimaries;
+
+    /**
+     * Color range (e.g., tv).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("colorRange")
+    private Optional<String> colorRange;
+
+    /**
+     * Color space.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("colorSpace")
+    private Optional<String> colorSpace;
+
+    /**
+     * Color transfer characteristics.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("colorTrc")
+    private Optional<String> colorTrc;
+
+    /**
+     * Frame rate of the stream.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("frameRate")
+    private Optional<Float> frameRate;
+
+    /**
+     * Height of the video stream.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("height")
+    private Optional<Integer> height;
+
+    /**
+     * Video level.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("level")
+    private Optional<Integer> level;
+
+    /**
+     * Indicates if this is the original stream.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("original")
+    private Optional<Boolean> original;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("hasScalingMatrix")
+    private Optional<Boolean> hasScalingMatrix;
+
+    /**
+     * Video profile.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("profile")
+    private Optional<String> profile;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("scanType")
+    private Optional<String> scanType;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("embeddedInVideo")
+    private Optional<String> embeddedInVideo;
+
+    /**
+     * Number of reference frames.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("refFrames")
+    private Optional<Integer> refFrames;
+
+    /**
+     * Width of the video stream.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("width")
+    private Optional<Integer> width;
+
+    /**
+     * Display title for the stream.
+     */
+    @JsonProperty("displayTitle")
+    private String displayTitle;
+
+    /**
+     * Extended display title for the stream.
+     */
+    @JsonProperty("extendedDisplayTitle")
+    private String extendedDisplayTitle;
+
+    /**
+     * Indicates if this stream is selected (applicable for audio streams).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("selected")
+    private Optional<Boolean> selected;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("forced")
+    private Optional<Boolean> forced;
+
+    /**
+     * Number of audio channels (for audio streams).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("channels")
+    private Optional<Integer> channels;
+
+    /**
+     * Audio channel layout.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioChannelLayout")
     private Optional<String> audioChannelLayout;
 
     /**
-     * Sampling rate of the audio stream in Hz
+     * Sampling rate for the audio stream.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("samplingRate")
-    private Optional<Long> samplingRate;
+    private Optional<Integer> samplingRate;
 
     /**
-     * Title of the subtitle track (for subtitle streams)
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("title")
-    private Optional<String> title;
-
-    /**
-     * Indicates if the subtitle stream can auto-sync
+     * Indicates if the stream can auto-sync.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("canAutoSync")
     private Optional<Boolean> canAutoSync;
 
+    /**
+     * Indicates if the stream is for the hearing impaired.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("hearingImpaired")
+    private Optional<Boolean> hearingImpaired;
+
+    /**
+     * Indicates if the stream is a dub.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("dub")
+    private Optional<Boolean> dub;
+
+    /**
+     * Optional title for the stream (e.g., language variant).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("title")
+    private Optional<String> title;
+
     @JsonCreator
     public Stream(
             @JsonProperty("id") long id,
-            @JsonProperty("streamType") long streamType,
+            @JsonProperty("streamType") int streamType,
             @JsonProperty("default") Optional<Boolean> default_,
-            @JsonProperty("selected") Optional<Boolean> selected,
             @JsonProperty("codec") String codec,
-            @JsonProperty("index") long index,
-            @JsonProperty("bitrate") Optional<Long> bitrate,
+            @JsonProperty("index") int index,
+            @JsonProperty("bitrate") Optional<Integer> bitrate,
+            @JsonProperty("language") Optional<String> language,
+            @JsonProperty("languageTag") Optional<String> languageTag,
+            @JsonProperty("languageCode") Optional<String> languageCode,
+            @JsonProperty("headerCompression") Optional<Boolean> headerCompression,
+            @JsonProperty("DOVIBLCompatID") Optional<Integer> doviblCompatID,
+            @JsonProperty("DOVIBLPresent") Optional<Boolean> doviblPresent,
+            @JsonProperty("DOVIELPresent") Optional<Boolean> dovielPresent,
+            @JsonProperty("DOVILevel") Optional<Integer> doviLevel,
+            @JsonProperty("DOVIPresent") Optional<Boolean> doviPresent,
+            @JsonProperty("DOVIProfile") Optional<Integer> doviProfile,
+            @JsonProperty("DOVIRPUPresent") Optional<Boolean> dovirpuPresent,
+            @JsonProperty("DOVIVersion") Optional<String> doviVersion,
+            @JsonProperty("bitDepth") Optional<Integer> bitDepth,
+            @JsonProperty("chromaLocation") Optional<String> chromaLocation,
+            @JsonProperty("chromaSubsampling") Optional<String> chromaSubsampling,
+            @JsonProperty("codedHeight") Optional<Integer> codedHeight,
+            @JsonProperty("codedWidth") Optional<Integer> codedWidth,
+            @JsonProperty("closedCaptions") Optional<Boolean> closedCaptions,
             @JsonProperty("colorPrimaries") Optional<String> colorPrimaries,
             @JsonProperty("colorRange") Optional<String> colorRange,
             @JsonProperty("colorSpace") Optional<String> colorSpace,
             @JsonProperty("colorTrc") Optional<String> colorTrc,
-            @JsonProperty("bitDepth") Optional<Long> bitDepth,
-            @JsonProperty("chromaLocation") Optional<String> chromaLocation,
-            @JsonProperty("streamIdentifier") Optional<String> streamIdentifier,
-            @JsonProperty("chromaSubsampling") Optional<String> chromaSubsampling,
-            @JsonProperty("codedHeight") Optional<Long> codedHeight,
-            @JsonProperty("codedWidth") Optional<Long> codedWidth,
-            @JsonProperty("frameRate") Optional<Double> frameRate,
+            @JsonProperty("frameRate") Optional<Float> frameRate,
+            @JsonProperty("height") Optional<Integer> height,
+            @JsonProperty("level") Optional<Integer> level,
+            @JsonProperty("original") Optional<Boolean> original,
             @JsonProperty("hasScalingMatrix") Optional<Boolean> hasScalingMatrix,
-            @JsonProperty("hearingImpaired") Optional<Boolean> hearingImpaired,
-            @JsonProperty("closedCaptions") Optional<Boolean> closedCaptions,
-            @JsonProperty("embeddedInVideo") Optional<String> embeddedInVideo,
-            @JsonProperty("height") Optional<Long> height,
-            @JsonProperty("level") Optional<Long> level,
             @JsonProperty("profile") Optional<String> profile,
-            @JsonProperty("refFrames") Optional<Long> refFrames,
             @JsonProperty("scanType") Optional<String> scanType,
-            @JsonProperty("width") Optional<Long> width,
-            @JsonProperty("displayTitle") Optional<String> displayTitle,
-            @JsonProperty("extendedDisplayTitle") Optional<String> extendedDisplayTitle,
-            @JsonProperty("channels") Optional<Long> channels,
-            @JsonProperty("language") Optional<String> language,
-            @JsonProperty("languageTag") Optional<String> languageTag,
-            @JsonProperty("languageCode") Optional<String> languageCode,
+            @JsonProperty("embeddedInVideo") Optional<String> embeddedInVideo,
+            @JsonProperty("refFrames") Optional<Integer> refFrames,
+            @JsonProperty("width") Optional<Integer> width,
+            @JsonProperty("displayTitle") String displayTitle,
+            @JsonProperty("extendedDisplayTitle") String extendedDisplayTitle,
+            @JsonProperty("selected") Optional<Boolean> selected,
+            @JsonProperty("forced") Optional<Boolean> forced,
+            @JsonProperty("channels") Optional<Integer> channels,
             @JsonProperty("audioChannelLayout") Optional<String> audioChannelLayout,
-            @JsonProperty("samplingRate") Optional<Long> samplingRate,
-            @JsonProperty("title") Optional<String> title,
-            @JsonProperty("canAutoSync") Optional<Boolean> canAutoSync) {
+            @JsonProperty("samplingRate") Optional<Integer> samplingRate,
+            @JsonProperty("canAutoSync") Optional<Boolean> canAutoSync,
+            @JsonProperty("hearingImpaired") Optional<Boolean> hearingImpaired,
+            @JsonProperty("dub") Optional<Boolean> dub,
+            @JsonProperty("title") Optional<String> title) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(streamType, "streamType");
         Utils.checkNotNull(default_, "default_");
-        Utils.checkNotNull(selected, "selected");
         Utils.checkNotNull(codec, "codec");
         Utils.checkNotNull(index, "index");
         Utils.checkNotNull(bitrate, "bitrate");
+        Utils.checkNotNull(language, "language");
+        Utils.checkNotNull(languageTag, "languageTag");
+        Utils.checkNotNull(languageCode, "languageCode");
+        Utils.checkNotNull(headerCompression, "headerCompression");
+        Utils.checkNotNull(doviblCompatID, "doviblCompatID");
+        Utils.checkNotNull(doviblPresent, "doviblPresent");
+        Utils.checkNotNull(dovielPresent, "dovielPresent");
+        Utils.checkNotNull(doviLevel, "doviLevel");
+        Utils.checkNotNull(doviPresent, "doviPresent");
+        Utils.checkNotNull(doviProfile, "doviProfile");
+        Utils.checkNotNull(dovirpuPresent, "dovirpuPresent");
+        Utils.checkNotNull(doviVersion, "doviVersion");
+        Utils.checkNotNull(bitDepth, "bitDepth");
+        Utils.checkNotNull(chromaLocation, "chromaLocation");
+        Utils.checkNotNull(chromaSubsampling, "chromaSubsampling");
+        Utils.checkNotNull(codedHeight, "codedHeight");
+        Utils.checkNotNull(codedWidth, "codedWidth");
+        Utils.checkNotNull(closedCaptions, "closedCaptions");
         Utils.checkNotNull(colorPrimaries, "colorPrimaries");
         Utils.checkNotNull(colorRange, "colorRange");
         Utils.checkNotNull(colorSpace, "colorSpace");
         Utils.checkNotNull(colorTrc, "colorTrc");
-        Utils.checkNotNull(bitDepth, "bitDepth");
-        Utils.checkNotNull(chromaLocation, "chromaLocation");
-        Utils.checkNotNull(streamIdentifier, "streamIdentifier");
-        Utils.checkNotNull(chromaSubsampling, "chromaSubsampling");
-        Utils.checkNotNull(codedHeight, "codedHeight");
-        Utils.checkNotNull(codedWidth, "codedWidth");
         Utils.checkNotNull(frameRate, "frameRate");
-        Utils.checkNotNull(hasScalingMatrix, "hasScalingMatrix");
-        Utils.checkNotNull(hearingImpaired, "hearingImpaired");
-        Utils.checkNotNull(closedCaptions, "closedCaptions");
-        Utils.checkNotNull(embeddedInVideo, "embeddedInVideo");
         Utils.checkNotNull(height, "height");
         Utils.checkNotNull(level, "level");
+        Utils.checkNotNull(original, "original");
+        Utils.checkNotNull(hasScalingMatrix, "hasScalingMatrix");
         Utils.checkNotNull(profile, "profile");
-        Utils.checkNotNull(refFrames, "refFrames");
         Utils.checkNotNull(scanType, "scanType");
+        Utils.checkNotNull(embeddedInVideo, "embeddedInVideo");
+        Utils.checkNotNull(refFrames, "refFrames");
         Utils.checkNotNull(width, "width");
         Utils.checkNotNull(displayTitle, "displayTitle");
         Utils.checkNotNull(extendedDisplayTitle, "extendedDisplayTitle");
+        Utils.checkNotNull(selected, "selected");
+        Utils.checkNotNull(forced, "forced");
         Utils.checkNotNull(channels, "channels");
-        Utils.checkNotNull(language, "language");
-        Utils.checkNotNull(languageTag, "languageTag");
-        Utils.checkNotNull(languageCode, "languageCode");
         Utils.checkNotNull(audioChannelLayout, "audioChannelLayout");
         Utils.checkNotNull(samplingRate, "samplingRate");
-        Utils.checkNotNull(title, "title");
         Utils.checkNotNull(canAutoSync, "canAutoSync");
+        Utils.checkNotNull(hearingImpaired, "hearingImpaired");
+        Utils.checkNotNull(dub, "dub");
+        Utils.checkNotNull(title, "title");
         this.id = id;
         this.streamType = streamType;
         this.default_ = default_;
-        this.selected = selected;
         this.codec = codec;
         this.index = index;
         this.bitrate = bitrate;
+        this.language = language;
+        this.languageTag = languageTag;
+        this.languageCode = languageCode;
+        this.headerCompression = headerCompression;
+        this.doviblCompatID = doviblCompatID;
+        this.doviblPresent = doviblPresent;
+        this.dovielPresent = dovielPresent;
+        this.doviLevel = doviLevel;
+        this.doviPresent = doviPresent;
+        this.doviProfile = doviProfile;
+        this.dovirpuPresent = dovirpuPresent;
+        this.doviVersion = doviVersion;
+        this.bitDepth = bitDepth;
+        this.chromaLocation = chromaLocation;
+        this.chromaSubsampling = chromaSubsampling;
+        this.codedHeight = codedHeight;
+        this.codedWidth = codedWidth;
+        this.closedCaptions = closedCaptions;
         this.colorPrimaries = colorPrimaries;
         this.colorRange = colorRange;
         this.colorSpace = colorSpace;
         this.colorTrc = colorTrc;
-        this.bitDepth = bitDepth;
-        this.chromaLocation = chromaLocation;
-        this.streamIdentifier = streamIdentifier;
-        this.chromaSubsampling = chromaSubsampling;
-        this.codedHeight = codedHeight;
-        this.codedWidth = codedWidth;
         this.frameRate = frameRate;
-        this.hasScalingMatrix = hasScalingMatrix;
-        this.hearingImpaired = hearingImpaired;
-        this.closedCaptions = closedCaptions;
-        this.embeddedInVideo = embeddedInVideo;
         this.height = height;
         this.level = level;
+        this.original = original;
+        this.hasScalingMatrix = hasScalingMatrix;
         this.profile = profile;
-        this.refFrames = refFrames;
         this.scanType = scanType;
+        this.embeddedInVideo = embeddedInVideo;
+        this.refFrames = refFrames;
         this.width = width;
         this.displayTitle = displayTitle;
         this.extendedDisplayTitle = extendedDisplayTitle;
+        this.selected = selected;
+        this.forced = forced;
         this.channels = channels;
-        this.language = language;
-        this.languageTag = languageTag;
-        this.languageCode = languageCode;
         this.audioChannelLayout = audioChannelLayout;
         this.samplingRate = samplingRate;
-        this.title = title;
         this.canAutoSync = canAutoSync;
+        this.hearingImpaired = hearingImpaired;
+        this.dub = dub;
+        this.title = title;
     }
     
     public Stream(
             long id,
-            long streamType,
+            int streamType,
             String codec,
-            long index) {
-        this(id, streamType, Optional.empty(), Optional.empty(), codec, index, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+            int index,
+            String displayTitle,
+            String extendedDisplayTitle) {
+        this(id, streamType, Optional.empty(), codec, index, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), displayTitle, extendedDisplayTitle, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
+    /**
+     * Unique stream identifier.
+     */
     @JsonIgnore
     public long id() {
         return id;
     }
 
     /**
-     * Type of stream (1 = video, 2 = audio, 3 = subtitle)
+     * Stream type (1=video, 2=audio, 3=subtitle).
      */
     @JsonIgnore
-    public long streamType() {
+    public int streamType() {
         return streamType;
     }
 
     /**
-     * Indicates if this is the default stream
+     * Indicates if this stream is default.
      */
     @JsonIgnore
     public Optional<Boolean> default_() {
@@ -418,15 +529,7 @@ public class Stream {
     }
 
     /**
-     * Indicates if the stream is selected
-     */
-    @JsonIgnore
-    public Optional<Boolean> selected() {
-        return selected;
-    }
-
-    /**
-     * Codec used by the stream
+     * Codec used by the stream.
      */
     @JsonIgnore
     public String codec() {
@@ -434,63 +537,127 @@ public class Stream {
     }
 
     /**
-     * The index of the stream
+     * Index of the stream.
      */
     @JsonIgnore
-    public long index() {
+    public int index() {
         return index;
     }
 
     /**
-     * The bitrate of the stream in kbps
+     * Bitrate of the stream.
      */
     @JsonIgnore
-    public Optional<Long> bitrate() {
+    public Optional<Integer> bitrate() {
         return bitrate;
     }
 
     /**
-     * The color primaries of the video stream
+     * Language of the stream.
      */
     @JsonIgnore
-    public Optional<String> colorPrimaries() {
-        return colorPrimaries;
+    public Optional<String> language() {
+        return language;
     }
 
     /**
-     * The color range of the video stream
+     * Language tag (e.g., en).
      */
     @JsonIgnore
-    public Optional<String> colorRange() {
-        return colorRange;
+    public Optional<String> languageTag() {
+        return languageTag;
     }
 
     /**
-     * The color space of the video stream
+     * ISO language code.
      */
     @JsonIgnore
-    public Optional<String> colorSpace() {
-        return colorSpace;
+    public Optional<String> languageCode() {
+        return languageCode;
     }
 
     /**
-     * The transfer characteristics (TRC) of the video stream
+     * Indicates whether header compression is enabled.
      */
     @JsonIgnore
-    public Optional<String> colorTrc() {
-        return colorTrc;
+    public Optional<Boolean> headerCompression() {
+        return headerCompression;
     }
 
     /**
-     * The bit depth of the video stream
+     * Dolby Vision BL compatibility ID.
      */
     @JsonIgnore
-    public Optional<Long> bitDepth() {
+    public Optional<Integer> doviblCompatID() {
+        return doviblCompatID;
+    }
+
+    /**
+     * Indicates if Dolby Vision BL is present.
+     */
+    @JsonIgnore
+    public Optional<Boolean> doviblPresent() {
+        return doviblPresent;
+    }
+
+    /**
+     * Indicates if Dolby Vision EL is present.
+     */
+    @JsonIgnore
+    public Optional<Boolean> dovielPresent() {
+        return dovielPresent;
+    }
+
+    /**
+     * Dolby Vision level.
+     */
+    @JsonIgnore
+    public Optional<Integer> doviLevel() {
+        return doviLevel;
+    }
+
+    /**
+     * Indicates if Dolby Vision is present.
+     */
+    @JsonIgnore
+    public Optional<Boolean> doviPresent() {
+        return doviPresent;
+    }
+
+    /**
+     * Dolby Vision profile.
+     */
+    @JsonIgnore
+    public Optional<Integer> doviProfile() {
+        return doviProfile;
+    }
+
+    /**
+     * Indicates if Dolby Vision RPU is present.
+     */
+    @JsonIgnore
+    public Optional<Boolean> dovirpuPresent() {
+        return dovirpuPresent;
+    }
+
+    /**
+     * Dolby Vision version.
+     */
+    @JsonIgnore
+    public Optional<String> doviVersion() {
+        return doviVersion;
+    }
+
+    /**
+     * Bit depth of the video stream.
+     */
+    @JsonIgnore
+    public Optional<Integer> bitDepth() {
         return bitDepth;
     }
 
     /**
-     * The chroma location of the video stream
+     * Chroma sample location.
      */
     @JsonIgnore
     public Optional<String> chromaLocation() {
@@ -498,15 +665,7 @@ public class Stream {
     }
 
     /**
-     * The identifier of the video stream
-     */
-    @JsonIgnore
-    public Optional<String> streamIdentifier() {
-        return streamIdentifier;
-    }
-
-    /**
-     * The chroma subsampling format
+     * Chroma subsampling format.
      */
     @JsonIgnore
     public Optional<String> chromaSubsampling() {
@@ -514,45 +673,106 @@ public class Stream {
     }
 
     /**
-     * The coded height of the video stream
+     * Coded video height.
      */
     @JsonIgnore
-    public Optional<Long> codedHeight() {
+    public Optional<Integer> codedHeight() {
         return codedHeight;
     }
 
     /**
-     * The coded width of the video stream
+     * Coded video width.
      */
     @JsonIgnore
-    public Optional<Long> codedWidth() {
+    public Optional<Integer> codedWidth() {
         return codedWidth;
-    }
-
-    /**
-     * The frame rate of the video stream
-     */
-    @JsonIgnore
-    public Optional<Double> frameRate() {
-        return frameRate;
-    }
-
-    /**
-     * Indicates if the stream has a scaling matrix
-     */
-    @JsonIgnore
-    public Optional<Boolean> hasScalingMatrix() {
-        return hasScalingMatrix;
-    }
-
-    @JsonIgnore
-    public Optional<Boolean> hearingImpaired() {
-        return hearingImpaired;
     }
 
     @JsonIgnore
     public Optional<Boolean> closedCaptions() {
         return closedCaptions;
+    }
+
+    /**
+     * Color primaries used.
+     */
+    @JsonIgnore
+    public Optional<String> colorPrimaries() {
+        return colorPrimaries;
+    }
+
+    /**
+     * Color range (e.g., tv).
+     */
+    @JsonIgnore
+    public Optional<String> colorRange() {
+        return colorRange;
+    }
+
+    /**
+     * Color space.
+     */
+    @JsonIgnore
+    public Optional<String> colorSpace() {
+        return colorSpace;
+    }
+
+    /**
+     * Color transfer characteristics.
+     */
+    @JsonIgnore
+    public Optional<String> colorTrc() {
+        return colorTrc;
+    }
+
+    /**
+     * Frame rate of the stream.
+     */
+    @JsonIgnore
+    public Optional<Float> frameRate() {
+        return frameRate;
+    }
+
+    /**
+     * Height of the video stream.
+     */
+    @JsonIgnore
+    public Optional<Integer> height() {
+        return height;
+    }
+
+    /**
+     * Video level.
+     */
+    @JsonIgnore
+    public Optional<Integer> level() {
+        return level;
+    }
+
+    /**
+     * Indicates if this is the original stream.
+     */
+    @JsonIgnore
+    public Optional<Boolean> original() {
+        return original;
+    }
+
+    @JsonIgnore
+    public Optional<Boolean> hasScalingMatrix() {
+        return hasScalingMatrix;
+    }
+
+    /**
+     * Video profile.
+     */
+    @JsonIgnore
+    public Optional<String> profile() {
+        return profile;
+    }
+
+    @JsonIgnore
+    public Optional<String> scanType() {
+        return scanType;
     }
 
     @JsonIgnore
@@ -561,103 +781,60 @@ public class Stream {
     }
 
     /**
-     * The height of the video stream
+     * Number of reference frames.
      */
     @JsonIgnore
-    public Optional<Long> height() {
-        return height;
-    }
-
-    /**
-     * The level of the video codec
-     */
-    @JsonIgnore
-    public Optional<Long> level() {
-        return level;
-    }
-
-    /**
-     * The profile of the video codec
-     */
-    @JsonIgnore
-    public Optional<String> profile() {
-        return profile;
-    }
-
-    /**
-     * Number of reference frames
-     */
-    @JsonIgnore
-    public Optional<Long> refFrames() {
+    public Optional<Integer> refFrames() {
         return refFrames;
     }
 
     /**
-     * The scan type (progressive or interlaced)
+     * Width of the video stream.
      */
     @JsonIgnore
-    public Optional<String> scanType() {
-        return scanType;
-    }
-
-    /**
-     * The width of the video stream
-     */
-    @JsonIgnore
-    public Optional<Long> width() {
+    public Optional<Integer> width() {
         return width;
     }
 
     /**
-     * Display title of the stream
+     * Display title for the stream.
      */
     @JsonIgnore
-    public Optional<String> displayTitle() {
+    public String displayTitle() {
         return displayTitle;
     }
 
     /**
-     * Extended display title of the stream
+     * Extended display title for the stream.
      */
     @JsonIgnore
-    public Optional<String> extendedDisplayTitle() {
+    public String extendedDisplayTitle() {
         return extendedDisplayTitle;
     }
 
     /**
-     * Number of audio channels (for audio streams)
+     * Indicates if this stream is selected (applicable for audio streams).
      */
     @JsonIgnore
-    public Optional<Long> channels() {
+    public Optional<Boolean> selected() {
+        return selected;
+    }
+
+    @JsonIgnore
+    public Optional<Boolean> forced() {
+        return forced;
+    }
+
+    /**
+     * Number of audio channels (for audio streams).
+     */
+    @JsonIgnore
+    public Optional<Integer> channels() {
         return channels;
     }
 
     /**
-     * The language of the stream (for audio/subtitle streams)
-     */
-    @JsonIgnore
-    public Optional<String> language() {
-        return language;
-    }
-
-    /**
-     * Language tag of the stream
-     */
-    @JsonIgnore
-    public Optional<String> languageTag() {
-        return languageTag;
-    }
-
-    /**
-     * Language code of the stream
-     */
-    @JsonIgnore
-    public Optional<String> languageCode() {
-        return languageCode;
-    }
-
-    /**
-     * The audio channel layout
+     * Audio channel layout.
      */
     @JsonIgnore
     public Optional<String> audioChannelLayout() {
@@ -665,33 +842,52 @@ public class Stream {
     }
 
     /**
-     * Sampling rate of the audio stream in Hz
+     * Sampling rate for the audio stream.
      */
     @JsonIgnore
-    public Optional<Long> samplingRate() {
+    public Optional<Integer> samplingRate() {
         return samplingRate;
     }
 
     /**
-     * Title of the subtitle track (for subtitle streams)
-     */
-    @JsonIgnore
-    public Optional<String> title() {
-        return title;
-    }
-
-    /**
-     * Indicates if the subtitle stream can auto-sync
+     * Indicates if the stream can auto-sync.
      */
     @JsonIgnore
     public Optional<Boolean> canAutoSync() {
         return canAutoSync;
     }
 
+    /**
+     * Indicates if the stream is for the hearing impaired.
+     */
+    @JsonIgnore
+    public Optional<Boolean> hearingImpaired() {
+        return hearingImpaired;
+    }
+
+    /**
+     * Indicates if the stream is a dub.
+     */
+    @JsonIgnore
+    public Optional<Boolean> dub() {
+        return dub;
+    }
+
+    /**
+     * Optional title for the stream (e.g., language variant).
+     */
+    @JsonIgnore
+    public Optional<String> title() {
+        return title;
+    }
+
     public final static Builder builder() {
         return new Builder();
     }
 
+    /**
+     * Unique stream identifier.
+     */
     public Stream withId(long id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
@@ -699,16 +895,16 @@ public class Stream {
     }
 
     /**
-     * Type of stream (1 = video, 2 = audio, 3 = subtitle)
+     * Stream type (1=video, 2=audio, 3=subtitle).
      */
-    public Stream withStreamType(long streamType) {
+    public Stream withStreamType(int streamType) {
         Utils.checkNotNull(streamType, "streamType");
         this.streamType = streamType;
         return this;
     }
 
     /**
-     * Indicates if this is the default stream
+     * Indicates if this stream is default.
      */
     public Stream withDefault(boolean default_) {
         Utils.checkNotNull(default_, "default_");
@@ -717,7 +913,7 @@ public class Stream {
     }
 
     /**
-     * Indicates if this is the default stream
+     * Indicates if this stream is default.
      */
     public Stream withDefault(Optional<Boolean> default_) {
         Utils.checkNotNull(default_, "default_");
@@ -726,25 +922,7 @@ public class Stream {
     }
 
     /**
-     * Indicates if the stream is selected
-     */
-    public Stream withSelected(boolean selected) {
-        Utils.checkNotNull(selected, "selected");
-        this.selected = Optional.ofNullable(selected);
-        return this;
-    }
-
-    /**
-     * Indicates if the stream is selected
-     */
-    public Stream withSelected(Optional<Boolean> selected) {
-        Utils.checkNotNull(selected, "selected");
-        this.selected = selected;
-        return this;
-    }
-
-    /**
-     * Codec used by the stream
+     * Codec used by the stream.
      */
     public Stream withCodec(String codec) {
         Utils.checkNotNull(codec, "codec");
@@ -753,124 +931,268 @@ public class Stream {
     }
 
     /**
-     * The index of the stream
+     * Index of the stream.
      */
-    public Stream withIndex(long index) {
+    public Stream withIndex(int index) {
         Utils.checkNotNull(index, "index");
         this.index = index;
         return this;
     }
 
     /**
-     * The bitrate of the stream in kbps
+     * Bitrate of the stream.
      */
-    public Stream withBitrate(long bitrate) {
+    public Stream withBitrate(int bitrate) {
         Utils.checkNotNull(bitrate, "bitrate");
         this.bitrate = Optional.ofNullable(bitrate);
         return this;
     }
 
     /**
-     * The bitrate of the stream in kbps
+     * Bitrate of the stream.
      */
-    public Stream withBitrate(Optional<Long> bitrate) {
+    public Stream withBitrate(Optional<Integer> bitrate) {
         Utils.checkNotNull(bitrate, "bitrate");
         this.bitrate = bitrate;
         return this;
     }
 
     /**
-     * The color primaries of the video stream
+     * Language of the stream.
      */
-    public Stream withColorPrimaries(String colorPrimaries) {
-        Utils.checkNotNull(colorPrimaries, "colorPrimaries");
-        this.colorPrimaries = Optional.ofNullable(colorPrimaries);
+    public Stream withLanguage(String language) {
+        Utils.checkNotNull(language, "language");
+        this.language = Optional.ofNullable(language);
         return this;
     }
 
     /**
-     * The color primaries of the video stream
+     * Language of the stream.
      */
-    public Stream withColorPrimaries(Optional<String> colorPrimaries) {
-        Utils.checkNotNull(colorPrimaries, "colorPrimaries");
-        this.colorPrimaries = colorPrimaries;
+    public Stream withLanguage(Optional<String> language) {
+        Utils.checkNotNull(language, "language");
+        this.language = language;
         return this;
     }
 
     /**
-     * The color range of the video stream
+     * Language tag (e.g., en).
      */
-    public Stream withColorRange(String colorRange) {
-        Utils.checkNotNull(colorRange, "colorRange");
-        this.colorRange = Optional.ofNullable(colorRange);
+    public Stream withLanguageTag(String languageTag) {
+        Utils.checkNotNull(languageTag, "languageTag");
+        this.languageTag = Optional.ofNullable(languageTag);
         return this;
     }
 
     /**
-     * The color range of the video stream
+     * Language tag (e.g., en).
      */
-    public Stream withColorRange(Optional<String> colorRange) {
-        Utils.checkNotNull(colorRange, "colorRange");
-        this.colorRange = colorRange;
+    public Stream withLanguageTag(Optional<String> languageTag) {
+        Utils.checkNotNull(languageTag, "languageTag");
+        this.languageTag = languageTag;
         return this;
     }
 
     /**
-     * The color space of the video stream
+     * ISO language code.
      */
-    public Stream withColorSpace(String colorSpace) {
-        Utils.checkNotNull(colorSpace, "colorSpace");
-        this.colorSpace = Optional.ofNullable(colorSpace);
+    public Stream withLanguageCode(String languageCode) {
+        Utils.checkNotNull(languageCode, "languageCode");
+        this.languageCode = Optional.ofNullable(languageCode);
         return this;
     }
 
     /**
-     * The color space of the video stream
+     * ISO language code.
      */
-    public Stream withColorSpace(Optional<String> colorSpace) {
-        Utils.checkNotNull(colorSpace, "colorSpace");
-        this.colorSpace = colorSpace;
+    public Stream withLanguageCode(Optional<String> languageCode) {
+        Utils.checkNotNull(languageCode, "languageCode");
+        this.languageCode = languageCode;
         return this;
     }
 
     /**
-     * The transfer characteristics (TRC) of the video stream
+     * Indicates whether header compression is enabled.
      */
-    public Stream withColorTrc(String colorTrc) {
-        Utils.checkNotNull(colorTrc, "colorTrc");
-        this.colorTrc = Optional.ofNullable(colorTrc);
+    public Stream withHeaderCompression(boolean headerCompression) {
+        Utils.checkNotNull(headerCompression, "headerCompression");
+        this.headerCompression = Optional.ofNullable(headerCompression);
         return this;
     }
 
     /**
-     * The transfer characteristics (TRC) of the video stream
+     * Indicates whether header compression is enabled.
      */
-    public Stream withColorTrc(Optional<String> colorTrc) {
-        Utils.checkNotNull(colorTrc, "colorTrc");
-        this.colorTrc = colorTrc;
+    public Stream withHeaderCompression(Optional<Boolean> headerCompression) {
+        Utils.checkNotNull(headerCompression, "headerCompression");
+        this.headerCompression = headerCompression;
         return this;
     }
 
     /**
-     * The bit depth of the video stream
+     * Dolby Vision BL compatibility ID.
      */
-    public Stream withBitDepth(long bitDepth) {
+    public Stream withDOVIBLCompatID(int doviblCompatID) {
+        Utils.checkNotNull(doviblCompatID, "doviblCompatID");
+        this.doviblCompatID = Optional.ofNullable(doviblCompatID);
+        return this;
+    }
+
+    /**
+     * Dolby Vision BL compatibility ID.
+     */
+    public Stream withDOVIBLCompatID(Optional<Integer> doviblCompatID) {
+        Utils.checkNotNull(doviblCompatID, "doviblCompatID");
+        this.doviblCompatID = doviblCompatID;
+        return this;
+    }
+
+    /**
+     * Indicates if Dolby Vision BL is present.
+     */
+    public Stream withDOVIBLPresent(boolean doviblPresent) {
+        Utils.checkNotNull(doviblPresent, "doviblPresent");
+        this.doviblPresent = Optional.ofNullable(doviblPresent);
+        return this;
+    }
+
+    /**
+     * Indicates if Dolby Vision BL is present.
+     */
+    public Stream withDOVIBLPresent(Optional<Boolean> doviblPresent) {
+        Utils.checkNotNull(doviblPresent, "doviblPresent");
+        this.doviblPresent = doviblPresent;
+        return this;
+    }
+
+    /**
+     * Indicates if Dolby Vision EL is present.
+     */
+    public Stream withDOVIELPresent(boolean dovielPresent) {
+        Utils.checkNotNull(dovielPresent, "dovielPresent");
+        this.dovielPresent = Optional.ofNullable(dovielPresent);
+        return this;
+    }
+
+    /**
+     * Indicates if Dolby Vision EL is present.
+     */
+    public Stream withDOVIELPresent(Optional<Boolean> dovielPresent) {
+        Utils.checkNotNull(dovielPresent, "dovielPresent");
+        this.dovielPresent = dovielPresent;
+        return this;
+    }
+
+    /**
+     * Dolby Vision level.
+     */
+    public Stream withDOVILevel(int doviLevel) {
+        Utils.checkNotNull(doviLevel, "doviLevel");
+        this.doviLevel = Optional.ofNullable(doviLevel);
+        return this;
+    }
+
+    /**
+     * Dolby Vision level.
+     */
+    public Stream withDOVILevel(Optional<Integer> doviLevel) {
+        Utils.checkNotNull(doviLevel, "doviLevel");
+        this.doviLevel = doviLevel;
+        return this;
+    }
+
+    /**
+     * Indicates if Dolby Vision is present.
+     */
+    public Stream withDOVIPresent(boolean doviPresent) {
+        Utils.checkNotNull(doviPresent, "doviPresent");
+        this.doviPresent = Optional.ofNullable(doviPresent);
+        return this;
+    }
+
+    /**
+     * Indicates if Dolby Vision is present.
+     */
+    public Stream withDOVIPresent(Optional<Boolean> doviPresent) {
+        Utils.checkNotNull(doviPresent, "doviPresent");
+        this.doviPresent = doviPresent;
+        return this;
+    }
+
+    /**
+     * Dolby Vision profile.
+     */
+    public Stream withDOVIProfile(int doviProfile) {
+        Utils.checkNotNull(doviProfile, "doviProfile");
+        this.doviProfile = Optional.ofNullable(doviProfile);
+        return this;
+    }
+
+    /**
+     * Dolby Vision profile.
+     */
+    public Stream withDOVIProfile(Optional<Integer> doviProfile) {
+        Utils.checkNotNull(doviProfile, "doviProfile");
+        this.doviProfile = doviProfile;
+        return this;
+    }
+
+    /**
+     * Indicates if Dolby Vision RPU is present.
+     */
+    public Stream withDOVIRPUPresent(boolean dovirpuPresent) {
+        Utils.checkNotNull(dovirpuPresent, "dovirpuPresent");
+        this.dovirpuPresent = Optional.ofNullable(dovirpuPresent);
+        return this;
+    }
+
+    /**
+     * Indicates if Dolby Vision RPU is present.
+     */
+    public Stream withDOVIRPUPresent(Optional<Boolean> dovirpuPresent) {
+        Utils.checkNotNull(dovirpuPresent, "dovirpuPresent");
+        this.dovirpuPresent = dovirpuPresent;
+        return this;
+    }
+
+    /**
+     * Dolby Vision version.
+     */
+    public Stream withDOVIVersion(String doviVersion) {
+        Utils.checkNotNull(doviVersion, "doviVersion");
+        this.doviVersion = Optional.ofNullable(doviVersion);
+        return this;
+    }
+
+    /**
+     * Dolby Vision version.
+     */
+    public Stream withDOVIVersion(Optional<String> doviVersion) {
+        Utils.checkNotNull(doviVersion, "doviVersion");
+        this.doviVersion = doviVersion;
+        return this;
+    }
+
+    /**
+     * Bit depth of the video stream.
+     */
+    public Stream withBitDepth(int bitDepth) {
         Utils.checkNotNull(bitDepth, "bitDepth");
         this.bitDepth = Optional.ofNullable(bitDepth);
         return this;
     }
 
     /**
-     * The bit depth of the video stream
+     * Bit depth of the video stream.
      */
-    public Stream withBitDepth(Optional<Long> bitDepth) {
+    public Stream withBitDepth(Optional<Integer> bitDepth) {
         Utils.checkNotNull(bitDepth, "bitDepth");
         this.bitDepth = bitDepth;
         return this;
     }
 
     /**
-     * The chroma location of the video stream
+     * Chroma sample location.
      */
     public Stream withChromaLocation(String chromaLocation) {
         Utils.checkNotNull(chromaLocation, "chromaLocation");
@@ -879,7 +1201,7 @@ public class Stream {
     }
 
     /**
-     * The chroma location of the video stream
+     * Chroma sample location.
      */
     public Stream withChromaLocation(Optional<String> chromaLocation) {
         Utils.checkNotNull(chromaLocation, "chromaLocation");
@@ -888,25 +1210,7 @@ public class Stream {
     }
 
     /**
-     * The identifier of the video stream
-     */
-    public Stream withStreamIdentifier(String streamIdentifier) {
-        Utils.checkNotNull(streamIdentifier, "streamIdentifier");
-        this.streamIdentifier = Optional.ofNullable(streamIdentifier);
-        return this;
-    }
-
-    /**
-     * The identifier of the video stream
-     */
-    public Stream withStreamIdentifier(Optional<String> streamIdentifier) {
-        Utils.checkNotNull(streamIdentifier, "streamIdentifier");
-        this.streamIdentifier = streamIdentifier;
-        return this;
-    }
-
-    /**
-     * The chroma subsampling format
+     * Chroma subsampling format.
      */
     public Stream withChromaSubsampling(String chromaSubsampling) {
         Utils.checkNotNull(chromaSubsampling, "chromaSubsampling");
@@ -915,7 +1219,7 @@ public class Stream {
     }
 
     /**
-     * The chroma subsampling format
+     * Chroma subsampling format.
      */
     public Stream withChromaSubsampling(Optional<String> chromaSubsampling) {
         Utils.checkNotNull(chromaSubsampling, "chromaSubsampling");
@@ -924,86 +1228,38 @@ public class Stream {
     }
 
     /**
-     * The coded height of the video stream
+     * Coded video height.
      */
-    public Stream withCodedHeight(long codedHeight) {
+    public Stream withCodedHeight(int codedHeight) {
         Utils.checkNotNull(codedHeight, "codedHeight");
         this.codedHeight = Optional.ofNullable(codedHeight);
         return this;
     }
 
     /**
-     * The coded height of the video stream
+     * Coded video height.
      */
-    public Stream withCodedHeight(Optional<Long> codedHeight) {
+    public Stream withCodedHeight(Optional<Integer> codedHeight) {
         Utils.checkNotNull(codedHeight, "codedHeight");
         this.codedHeight = codedHeight;
         return this;
     }
 
     /**
-     * The coded width of the video stream
+     * Coded video width.
      */
-    public Stream withCodedWidth(long codedWidth) {
+    public Stream withCodedWidth(int codedWidth) {
         Utils.checkNotNull(codedWidth, "codedWidth");
         this.codedWidth = Optional.ofNullable(codedWidth);
         return this;
     }
 
     /**
-     * The coded width of the video stream
+     * Coded video width.
      */
-    public Stream withCodedWidth(Optional<Long> codedWidth) {
+    public Stream withCodedWidth(Optional<Integer> codedWidth) {
         Utils.checkNotNull(codedWidth, "codedWidth");
         this.codedWidth = codedWidth;
-        return this;
-    }
-
-    /**
-     * The frame rate of the video stream
-     */
-    public Stream withFrameRate(double frameRate) {
-        Utils.checkNotNull(frameRate, "frameRate");
-        this.frameRate = Optional.ofNullable(frameRate);
-        return this;
-    }
-
-    /**
-     * The frame rate of the video stream
-     */
-    public Stream withFrameRate(Optional<Double> frameRate) {
-        Utils.checkNotNull(frameRate, "frameRate");
-        this.frameRate = frameRate;
-        return this;
-    }
-
-    /**
-     * Indicates if the stream has a scaling matrix
-     */
-    public Stream withHasScalingMatrix(boolean hasScalingMatrix) {
-        Utils.checkNotNull(hasScalingMatrix, "hasScalingMatrix");
-        this.hasScalingMatrix = Optional.ofNullable(hasScalingMatrix);
-        return this;
-    }
-
-    /**
-     * Indicates if the stream has a scaling matrix
-     */
-    public Stream withHasScalingMatrix(Optional<Boolean> hasScalingMatrix) {
-        Utils.checkNotNull(hasScalingMatrix, "hasScalingMatrix");
-        this.hasScalingMatrix = hasScalingMatrix;
-        return this;
-    }
-
-    public Stream withHearingImpaired(boolean hearingImpaired) {
-        Utils.checkNotNull(hearingImpaired, "hearingImpaired");
-        this.hearingImpaired = Optional.ofNullable(hearingImpaired);
-        return this;
-    }
-
-    public Stream withHearingImpaired(Optional<Boolean> hearingImpaired) {
-        Utils.checkNotNull(hearingImpaired, "hearingImpaired");
-        this.hearingImpaired = hearingImpaired;
         return this;
     }
 
@@ -1016,6 +1272,192 @@ public class Stream {
     public Stream withClosedCaptions(Optional<Boolean> closedCaptions) {
         Utils.checkNotNull(closedCaptions, "closedCaptions");
         this.closedCaptions = closedCaptions;
+        return this;
+    }
+
+    /**
+     * Color primaries used.
+     */
+    public Stream withColorPrimaries(String colorPrimaries) {
+        Utils.checkNotNull(colorPrimaries, "colorPrimaries");
+        this.colorPrimaries = Optional.ofNullable(colorPrimaries);
+        return this;
+    }
+
+    /**
+     * Color primaries used.
+     */
+    public Stream withColorPrimaries(Optional<String> colorPrimaries) {
+        Utils.checkNotNull(colorPrimaries, "colorPrimaries");
+        this.colorPrimaries = colorPrimaries;
+        return this;
+    }
+
+    /**
+     * Color range (e.g., tv).
+     */
+    public Stream withColorRange(String colorRange) {
+        Utils.checkNotNull(colorRange, "colorRange");
+        this.colorRange = Optional.ofNullable(colorRange);
+        return this;
+    }
+
+    /**
+     * Color range (e.g., tv).
+     */
+    public Stream withColorRange(Optional<String> colorRange) {
+        Utils.checkNotNull(colorRange, "colorRange");
+        this.colorRange = colorRange;
+        return this;
+    }
+
+    /**
+     * Color space.
+     */
+    public Stream withColorSpace(String colorSpace) {
+        Utils.checkNotNull(colorSpace, "colorSpace");
+        this.colorSpace = Optional.ofNullable(colorSpace);
+        return this;
+    }
+
+    /**
+     * Color space.
+     */
+    public Stream withColorSpace(Optional<String> colorSpace) {
+        Utils.checkNotNull(colorSpace, "colorSpace");
+        this.colorSpace = colorSpace;
+        return this;
+    }
+
+    /**
+     * Color transfer characteristics.
+     */
+    public Stream withColorTrc(String colorTrc) {
+        Utils.checkNotNull(colorTrc, "colorTrc");
+        this.colorTrc = Optional.ofNullable(colorTrc);
+        return this;
+    }
+
+    /**
+     * Color transfer characteristics.
+     */
+    public Stream withColorTrc(Optional<String> colorTrc) {
+        Utils.checkNotNull(colorTrc, "colorTrc");
+        this.colorTrc = colorTrc;
+        return this;
+    }
+
+    /**
+     * Frame rate of the stream.
+     */
+    public Stream withFrameRate(float frameRate) {
+        Utils.checkNotNull(frameRate, "frameRate");
+        this.frameRate = Optional.ofNullable(frameRate);
+        return this;
+    }
+
+    /**
+     * Frame rate of the stream.
+     */
+    public Stream withFrameRate(Optional<Float> frameRate) {
+        Utils.checkNotNull(frameRate, "frameRate");
+        this.frameRate = frameRate;
+        return this;
+    }
+
+    /**
+     * Height of the video stream.
+     */
+    public Stream withHeight(int height) {
+        Utils.checkNotNull(height, "height");
+        this.height = Optional.ofNullable(height);
+        return this;
+    }
+
+    /**
+     * Height of the video stream.
+     */
+    public Stream withHeight(Optional<Integer> height) {
+        Utils.checkNotNull(height, "height");
+        this.height = height;
+        return this;
+    }
+
+    /**
+     * Video level.
+     */
+    public Stream withLevel(int level) {
+        Utils.checkNotNull(level, "level");
+        this.level = Optional.ofNullable(level);
+        return this;
+    }
+
+    /**
+     * Video level.
+     */
+    public Stream withLevel(Optional<Integer> level) {
+        Utils.checkNotNull(level, "level");
+        this.level = level;
+        return this;
+    }
+
+    /**
+     * Indicates if this is the original stream.
+     */
+    public Stream withOriginal(boolean original) {
+        Utils.checkNotNull(original, "original");
+        this.original = Optional.ofNullable(original);
+        return this;
+    }
+
+    /**
+     * Indicates if this is the original stream.
+     */
+    public Stream withOriginal(Optional<Boolean> original) {
+        Utils.checkNotNull(original, "original");
+        this.original = original;
+        return this;
+    }
+
+    public Stream withHasScalingMatrix(boolean hasScalingMatrix) {
+        Utils.checkNotNull(hasScalingMatrix, "hasScalingMatrix");
+        this.hasScalingMatrix = Optional.ofNullable(hasScalingMatrix);
+        return this;
+    }
+
+    public Stream withHasScalingMatrix(Optional<Boolean> hasScalingMatrix) {
+        Utils.checkNotNull(hasScalingMatrix, "hasScalingMatrix");
+        this.hasScalingMatrix = hasScalingMatrix;
+        return this;
+    }
+
+    /**
+     * Video profile.
+     */
+    public Stream withProfile(String profile) {
+        Utils.checkNotNull(profile, "profile");
+        this.profile = Optional.ofNullable(profile);
+        return this;
+    }
+
+    /**
+     * Video profile.
+     */
+    public Stream withProfile(Optional<String> profile) {
+        Utils.checkNotNull(profile, "profile");
+        this.profile = profile;
+        return this;
+    }
+
+    public Stream withScanType(String scanType) {
+        Utils.checkNotNull(scanType, "scanType");
+        this.scanType = Optional.ofNullable(scanType);
+        return this;
+    }
+
+    public Stream withScanType(Optional<String> scanType) {
+        Utils.checkNotNull(scanType, "scanType");
+        this.scanType = scanType;
         return this;
     }
 
@@ -1032,223 +1474,109 @@ public class Stream {
     }
 
     /**
-     * The height of the video stream
+     * Number of reference frames.
      */
-    public Stream withHeight(long height) {
-        Utils.checkNotNull(height, "height");
-        this.height = Optional.ofNullable(height);
-        return this;
-    }
-
-    /**
-     * The height of the video stream
-     */
-    public Stream withHeight(Optional<Long> height) {
-        Utils.checkNotNull(height, "height");
-        this.height = height;
-        return this;
-    }
-
-    /**
-     * The level of the video codec
-     */
-    public Stream withLevel(long level) {
-        Utils.checkNotNull(level, "level");
-        this.level = Optional.ofNullable(level);
-        return this;
-    }
-
-    /**
-     * The level of the video codec
-     */
-    public Stream withLevel(Optional<Long> level) {
-        Utils.checkNotNull(level, "level");
-        this.level = level;
-        return this;
-    }
-
-    /**
-     * The profile of the video codec
-     */
-    public Stream withProfile(String profile) {
-        Utils.checkNotNull(profile, "profile");
-        this.profile = Optional.ofNullable(profile);
-        return this;
-    }
-
-    /**
-     * The profile of the video codec
-     */
-    public Stream withProfile(Optional<String> profile) {
-        Utils.checkNotNull(profile, "profile");
-        this.profile = profile;
-        return this;
-    }
-
-    /**
-     * Number of reference frames
-     */
-    public Stream withRefFrames(long refFrames) {
+    public Stream withRefFrames(int refFrames) {
         Utils.checkNotNull(refFrames, "refFrames");
         this.refFrames = Optional.ofNullable(refFrames);
         return this;
     }
 
     /**
-     * Number of reference frames
+     * Number of reference frames.
      */
-    public Stream withRefFrames(Optional<Long> refFrames) {
+    public Stream withRefFrames(Optional<Integer> refFrames) {
         Utils.checkNotNull(refFrames, "refFrames");
         this.refFrames = refFrames;
         return this;
     }
 
     /**
-     * The scan type (progressive or interlaced)
+     * Width of the video stream.
      */
-    public Stream withScanType(String scanType) {
-        Utils.checkNotNull(scanType, "scanType");
-        this.scanType = Optional.ofNullable(scanType);
-        return this;
-    }
-
-    /**
-     * The scan type (progressive or interlaced)
-     */
-    public Stream withScanType(Optional<String> scanType) {
-        Utils.checkNotNull(scanType, "scanType");
-        this.scanType = scanType;
-        return this;
-    }
-
-    /**
-     * The width of the video stream
-     */
-    public Stream withWidth(long width) {
+    public Stream withWidth(int width) {
         Utils.checkNotNull(width, "width");
         this.width = Optional.ofNullable(width);
         return this;
     }
 
     /**
-     * The width of the video stream
+     * Width of the video stream.
      */
-    public Stream withWidth(Optional<Long> width) {
+    public Stream withWidth(Optional<Integer> width) {
         Utils.checkNotNull(width, "width");
         this.width = width;
         return this;
     }
 
     /**
-     * Display title of the stream
+     * Display title for the stream.
      */
     public Stream withDisplayTitle(String displayTitle) {
-        Utils.checkNotNull(displayTitle, "displayTitle");
-        this.displayTitle = Optional.ofNullable(displayTitle);
-        return this;
-    }
-
-    /**
-     * Display title of the stream
-     */
-    public Stream withDisplayTitle(Optional<String> displayTitle) {
         Utils.checkNotNull(displayTitle, "displayTitle");
         this.displayTitle = displayTitle;
         return this;
     }
 
     /**
-     * Extended display title of the stream
+     * Extended display title for the stream.
      */
     public Stream withExtendedDisplayTitle(String extendedDisplayTitle) {
-        Utils.checkNotNull(extendedDisplayTitle, "extendedDisplayTitle");
-        this.extendedDisplayTitle = Optional.ofNullable(extendedDisplayTitle);
-        return this;
-    }
-
-    /**
-     * Extended display title of the stream
-     */
-    public Stream withExtendedDisplayTitle(Optional<String> extendedDisplayTitle) {
         Utils.checkNotNull(extendedDisplayTitle, "extendedDisplayTitle");
         this.extendedDisplayTitle = extendedDisplayTitle;
         return this;
     }
 
     /**
-     * Number of audio channels (for audio streams)
+     * Indicates if this stream is selected (applicable for audio streams).
      */
-    public Stream withChannels(long channels) {
+    public Stream withSelected(boolean selected) {
+        Utils.checkNotNull(selected, "selected");
+        this.selected = Optional.ofNullable(selected);
+        return this;
+    }
+
+    /**
+     * Indicates if this stream is selected (applicable for audio streams).
+     */
+    public Stream withSelected(Optional<Boolean> selected) {
+        Utils.checkNotNull(selected, "selected");
+        this.selected = selected;
+        return this;
+    }
+
+    public Stream withForced(boolean forced) {
+        Utils.checkNotNull(forced, "forced");
+        this.forced = Optional.ofNullable(forced);
+        return this;
+    }
+
+    public Stream withForced(Optional<Boolean> forced) {
+        Utils.checkNotNull(forced, "forced");
+        this.forced = forced;
+        return this;
+    }
+
+    /**
+     * Number of audio channels (for audio streams).
+     */
+    public Stream withChannels(int channels) {
         Utils.checkNotNull(channels, "channels");
         this.channels = Optional.ofNullable(channels);
         return this;
     }
 
     /**
-     * Number of audio channels (for audio streams)
+     * Number of audio channels (for audio streams).
      */
-    public Stream withChannels(Optional<Long> channels) {
+    public Stream withChannels(Optional<Integer> channels) {
         Utils.checkNotNull(channels, "channels");
         this.channels = channels;
         return this;
     }
 
     /**
-     * The language of the stream (for audio/subtitle streams)
-     */
-    public Stream withLanguage(String language) {
-        Utils.checkNotNull(language, "language");
-        this.language = Optional.ofNullable(language);
-        return this;
-    }
-
-    /**
-     * The language of the stream (for audio/subtitle streams)
-     */
-    public Stream withLanguage(Optional<String> language) {
-        Utils.checkNotNull(language, "language");
-        this.language = language;
-        return this;
-    }
-
-    /**
-     * Language tag of the stream
-     */
-    public Stream withLanguageTag(String languageTag) {
-        Utils.checkNotNull(languageTag, "languageTag");
-        this.languageTag = Optional.ofNullable(languageTag);
-        return this;
-    }
-
-    /**
-     * Language tag of the stream
-     */
-    public Stream withLanguageTag(Optional<String> languageTag) {
-        Utils.checkNotNull(languageTag, "languageTag");
-        this.languageTag = languageTag;
-        return this;
-    }
-
-    /**
-     * Language code of the stream
-     */
-    public Stream withLanguageCode(String languageCode) {
-        Utils.checkNotNull(languageCode, "languageCode");
-        this.languageCode = Optional.ofNullable(languageCode);
-        return this;
-    }
-
-    /**
-     * Language code of the stream
-     */
-    public Stream withLanguageCode(Optional<String> languageCode) {
-        Utils.checkNotNull(languageCode, "languageCode");
-        this.languageCode = languageCode;
-        return this;
-    }
-
-    /**
-     * The audio channel layout
+     * Audio channel layout.
      */
     public Stream withAudioChannelLayout(String audioChannelLayout) {
         Utils.checkNotNull(audioChannelLayout, "audioChannelLayout");
@@ -1257,7 +1585,7 @@ public class Stream {
     }
 
     /**
-     * The audio channel layout
+     * Audio channel layout.
      */
     public Stream withAudioChannelLayout(Optional<String> audioChannelLayout) {
         Utils.checkNotNull(audioChannelLayout, "audioChannelLayout");
@@ -1266,43 +1594,25 @@ public class Stream {
     }
 
     /**
-     * Sampling rate of the audio stream in Hz
+     * Sampling rate for the audio stream.
      */
-    public Stream withSamplingRate(long samplingRate) {
+    public Stream withSamplingRate(int samplingRate) {
         Utils.checkNotNull(samplingRate, "samplingRate");
         this.samplingRate = Optional.ofNullable(samplingRate);
         return this;
     }
 
     /**
-     * Sampling rate of the audio stream in Hz
+     * Sampling rate for the audio stream.
      */
-    public Stream withSamplingRate(Optional<Long> samplingRate) {
+    public Stream withSamplingRate(Optional<Integer> samplingRate) {
         Utils.checkNotNull(samplingRate, "samplingRate");
         this.samplingRate = samplingRate;
         return this;
     }
 
     /**
-     * Title of the subtitle track (for subtitle streams)
-     */
-    public Stream withTitle(String title) {
-        Utils.checkNotNull(title, "title");
-        this.title = Optional.ofNullable(title);
-        return this;
-    }
-
-    /**
-     * Title of the subtitle track (for subtitle streams)
-     */
-    public Stream withTitle(Optional<String> title) {
-        Utils.checkNotNull(title, "title");
-        this.title = title;
-        return this;
-    }
-
-    /**
-     * Indicates if the subtitle stream can auto-sync
+     * Indicates if the stream can auto-sync.
      */
     public Stream withCanAutoSync(boolean canAutoSync) {
         Utils.checkNotNull(canAutoSync, "canAutoSync");
@@ -1311,11 +1621,65 @@ public class Stream {
     }
 
     /**
-     * Indicates if the subtitle stream can auto-sync
+     * Indicates if the stream can auto-sync.
      */
     public Stream withCanAutoSync(Optional<Boolean> canAutoSync) {
         Utils.checkNotNull(canAutoSync, "canAutoSync");
         this.canAutoSync = canAutoSync;
+        return this;
+    }
+
+    /**
+     * Indicates if the stream is for the hearing impaired.
+     */
+    public Stream withHearingImpaired(boolean hearingImpaired) {
+        Utils.checkNotNull(hearingImpaired, "hearingImpaired");
+        this.hearingImpaired = Optional.ofNullable(hearingImpaired);
+        return this;
+    }
+
+    /**
+     * Indicates if the stream is for the hearing impaired.
+     */
+    public Stream withHearingImpaired(Optional<Boolean> hearingImpaired) {
+        Utils.checkNotNull(hearingImpaired, "hearingImpaired");
+        this.hearingImpaired = hearingImpaired;
+        return this;
+    }
+
+    /**
+     * Indicates if the stream is a dub.
+     */
+    public Stream withDub(boolean dub) {
+        Utils.checkNotNull(dub, "dub");
+        this.dub = Optional.ofNullable(dub);
+        return this;
+    }
+
+    /**
+     * Indicates if the stream is a dub.
+     */
+    public Stream withDub(Optional<Boolean> dub) {
+        Utils.checkNotNull(dub, "dub");
+        this.dub = dub;
+        return this;
+    }
+
+    /**
+     * Optional title for the stream (e.g., language variant).
+     */
+    public Stream withTitle(String title) {
+        Utils.checkNotNull(title, "title");
+        this.title = Optional.ofNullable(title);
+        return this;
+    }
+
+    /**
+     * Optional title for the stream (e.g., language variant).
+     */
+    public Stream withTitle(Optional<String> title) {
+        Utils.checkNotNull(title, "title");
+        this.title = title;
         return this;
     }
     
@@ -1332,41 +1696,52 @@ public class Stream {
             Objects.deepEquals(this.id, other.id) &&
             Objects.deepEquals(this.streamType, other.streamType) &&
             Objects.deepEquals(this.default_, other.default_) &&
-            Objects.deepEquals(this.selected, other.selected) &&
             Objects.deepEquals(this.codec, other.codec) &&
             Objects.deepEquals(this.index, other.index) &&
             Objects.deepEquals(this.bitrate, other.bitrate) &&
+            Objects.deepEquals(this.language, other.language) &&
+            Objects.deepEquals(this.languageTag, other.languageTag) &&
+            Objects.deepEquals(this.languageCode, other.languageCode) &&
+            Objects.deepEquals(this.headerCompression, other.headerCompression) &&
+            Objects.deepEquals(this.doviblCompatID, other.doviblCompatID) &&
+            Objects.deepEquals(this.doviblPresent, other.doviblPresent) &&
+            Objects.deepEquals(this.dovielPresent, other.dovielPresent) &&
+            Objects.deepEquals(this.doviLevel, other.doviLevel) &&
+            Objects.deepEquals(this.doviPresent, other.doviPresent) &&
+            Objects.deepEquals(this.doviProfile, other.doviProfile) &&
+            Objects.deepEquals(this.dovirpuPresent, other.dovirpuPresent) &&
+            Objects.deepEquals(this.doviVersion, other.doviVersion) &&
+            Objects.deepEquals(this.bitDepth, other.bitDepth) &&
+            Objects.deepEquals(this.chromaLocation, other.chromaLocation) &&
+            Objects.deepEquals(this.chromaSubsampling, other.chromaSubsampling) &&
+            Objects.deepEquals(this.codedHeight, other.codedHeight) &&
+            Objects.deepEquals(this.codedWidth, other.codedWidth) &&
+            Objects.deepEquals(this.closedCaptions, other.closedCaptions) &&
             Objects.deepEquals(this.colorPrimaries, other.colorPrimaries) &&
             Objects.deepEquals(this.colorRange, other.colorRange) &&
             Objects.deepEquals(this.colorSpace, other.colorSpace) &&
             Objects.deepEquals(this.colorTrc, other.colorTrc) &&
-            Objects.deepEquals(this.bitDepth, other.bitDepth) &&
-            Objects.deepEquals(this.chromaLocation, other.chromaLocation) &&
-            Objects.deepEquals(this.streamIdentifier, other.streamIdentifier) &&
-            Objects.deepEquals(this.chromaSubsampling, other.chromaSubsampling) &&
-            Objects.deepEquals(this.codedHeight, other.codedHeight) &&
-            Objects.deepEquals(this.codedWidth, other.codedWidth) &&
             Objects.deepEquals(this.frameRate, other.frameRate) &&
-            Objects.deepEquals(this.hasScalingMatrix, other.hasScalingMatrix) &&
-            Objects.deepEquals(this.hearingImpaired, other.hearingImpaired) &&
-            Objects.deepEquals(this.closedCaptions, other.closedCaptions) &&
-            Objects.deepEquals(this.embeddedInVideo, other.embeddedInVideo) &&
             Objects.deepEquals(this.height, other.height) &&
             Objects.deepEquals(this.level, other.level) &&
+            Objects.deepEquals(this.original, other.original) &&
+            Objects.deepEquals(this.hasScalingMatrix, other.hasScalingMatrix) &&
             Objects.deepEquals(this.profile, other.profile) &&
-            Objects.deepEquals(this.refFrames, other.refFrames) &&
             Objects.deepEquals(this.scanType, other.scanType) &&
+            Objects.deepEquals(this.embeddedInVideo, other.embeddedInVideo) &&
+            Objects.deepEquals(this.refFrames, other.refFrames) &&
             Objects.deepEquals(this.width, other.width) &&
             Objects.deepEquals(this.displayTitle, other.displayTitle) &&
             Objects.deepEquals(this.extendedDisplayTitle, other.extendedDisplayTitle) &&
+            Objects.deepEquals(this.selected, other.selected) &&
+            Objects.deepEquals(this.forced, other.forced) &&
             Objects.deepEquals(this.channels, other.channels) &&
-            Objects.deepEquals(this.language, other.language) &&
-            Objects.deepEquals(this.languageTag, other.languageTag) &&
-            Objects.deepEquals(this.languageCode, other.languageCode) &&
             Objects.deepEquals(this.audioChannelLayout, other.audioChannelLayout) &&
             Objects.deepEquals(this.samplingRate, other.samplingRate) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.canAutoSync, other.canAutoSync);
+            Objects.deepEquals(this.canAutoSync, other.canAutoSync) &&
+            Objects.deepEquals(this.hearingImpaired, other.hearingImpaired) &&
+            Objects.deepEquals(this.dub, other.dub) &&
+            Objects.deepEquals(this.title, other.title);
     }
     
     @Override
@@ -1375,41 +1750,52 @@ public class Stream {
             id,
             streamType,
             default_,
-            selected,
             codec,
             index,
             bitrate,
+            language,
+            languageTag,
+            languageCode,
+            headerCompression,
+            doviblCompatID,
+            doviblPresent,
+            dovielPresent,
+            doviLevel,
+            doviPresent,
+            doviProfile,
+            dovirpuPresent,
+            doviVersion,
+            bitDepth,
+            chromaLocation,
+            chromaSubsampling,
+            codedHeight,
+            codedWidth,
+            closedCaptions,
             colorPrimaries,
             colorRange,
             colorSpace,
             colorTrc,
-            bitDepth,
-            chromaLocation,
-            streamIdentifier,
-            chromaSubsampling,
-            codedHeight,
-            codedWidth,
             frameRate,
-            hasScalingMatrix,
-            hearingImpaired,
-            closedCaptions,
-            embeddedInVideo,
             height,
             level,
+            original,
+            hasScalingMatrix,
             profile,
-            refFrames,
             scanType,
+            embeddedInVideo,
+            refFrames,
             width,
             displayTitle,
             extendedDisplayTitle,
+            selected,
+            forced,
             channels,
-            language,
-            languageTag,
-            languageCode,
             audioChannelLayout,
             samplingRate,
-            title,
-            canAutoSync);
+            canAutoSync,
+            hearingImpaired,
+            dub,
+            title);
     }
     
     @Override
@@ -1418,58 +1804,103 @@ public class Stream {
                 "id", id,
                 "streamType", streamType,
                 "default_", default_,
-                "selected", selected,
                 "codec", codec,
                 "index", index,
                 "bitrate", bitrate,
+                "language", language,
+                "languageTag", languageTag,
+                "languageCode", languageCode,
+                "headerCompression", headerCompression,
+                "doviblCompatID", doviblCompatID,
+                "doviblPresent", doviblPresent,
+                "dovielPresent", dovielPresent,
+                "doviLevel", doviLevel,
+                "doviPresent", doviPresent,
+                "doviProfile", doviProfile,
+                "dovirpuPresent", dovirpuPresent,
+                "doviVersion", doviVersion,
+                "bitDepth", bitDepth,
+                "chromaLocation", chromaLocation,
+                "chromaSubsampling", chromaSubsampling,
+                "codedHeight", codedHeight,
+                "codedWidth", codedWidth,
+                "closedCaptions", closedCaptions,
                 "colorPrimaries", colorPrimaries,
                 "colorRange", colorRange,
                 "colorSpace", colorSpace,
                 "colorTrc", colorTrc,
-                "bitDepth", bitDepth,
-                "chromaLocation", chromaLocation,
-                "streamIdentifier", streamIdentifier,
-                "chromaSubsampling", chromaSubsampling,
-                "codedHeight", codedHeight,
-                "codedWidth", codedWidth,
                 "frameRate", frameRate,
-                "hasScalingMatrix", hasScalingMatrix,
-                "hearingImpaired", hearingImpaired,
-                "closedCaptions", closedCaptions,
-                "embeddedInVideo", embeddedInVideo,
                 "height", height,
                 "level", level,
+                "original", original,
+                "hasScalingMatrix", hasScalingMatrix,
                 "profile", profile,
-                "refFrames", refFrames,
                 "scanType", scanType,
+                "embeddedInVideo", embeddedInVideo,
+                "refFrames", refFrames,
                 "width", width,
                 "displayTitle", displayTitle,
                 "extendedDisplayTitle", extendedDisplayTitle,
+                "selected", selected,
+                "forced", forced,
                 "channels", channels,
-                "language", language,
-                "languageTag", languageTag,
-                "languageCode", languageCode,
                 "audioChannelLayout", audioChannelLayout,
                 "samplingRate", samplingRate,
-                "title", title,
-                "canAutoSync", canAutoSync);
+                "canAutoSync", canAutoSync,
+                "hearingImpaired", hearingImpaired,
+                "dub", dub,
+                "title", title);
     }
     
     public final static class Builder {
  
         private Long id;
  
-        private Long streamType;
+        private Integer streamType;
  
         private Optional<Boolean> default_ = Optional.empty();
  
-        private Optional<Boolean> selected = Optional.empty();
- 
         private String codec;
  
-        private Long index;
+        private Integer index;
  
-        private Optional<Long> bitrate = Optional.empty();
+        private Optional<Integer> bitrate = Optional.empty();
+ 
+        private Optional<String> language = Optional.empty();
+ 
+        private Optional<String> languageTag = Optional.empty();
+ 
+        private Optional<String> languageCode = Optional.empty();
+ 
+        private Optional<Boolean> headerCompression = Optional.empty();
+ 
+        private Optional<Integer> doviblCompatID = Optional.empty();
+ 
+        private Optional<Boolean> doviblPresent = Optional.empty();
+ 
+        private Optional<Boolean> dovielPresent = Optional.empty();
+ 
+        private Optional<Integer> doviLevel = Optional.empty();
+ 
+        private Optional<Boolean> doviPresent = Optional.empty();
+ 
+        private Optional<Integer> doviProfile = Optional.empty();
+ 
+        private Optional<Boolean> dovirpuPresent = Optional.empty();
+ 
+        private Optional<String> doviVersion = Optional.empty();
+ 
+        private Optional<Integer> bitDepth = Optional.empty();
+ 
+        private Optional<String> chromaLocation = Optional.empty();
+ 
+        private Optional<String> chromaSubsampling = Optional.empty();
+ 
+        private Optional<Integer> codedHeight = Optional.empty();
+ 
+        private Optional<Integer> codedWidth = Optional.empty();
+ 
+        private Optional<Boolean> closedCaptions = Optional.empty();
  
         private Optional<String> colorPrimaries = Optional.empty();
  
@@ -1479,64 +1910,55 @@ public class Stream {
  
         private Optional<String> colorTrc = Optional.empty();
  
-        private Optional<Long> bitDepth = Optional.empty();
+        private Optional<Float> frameRate = Optional.empty();
  
-        private Optional<String> chromaLocation = Optional.empty();
+        private Optional<Integer> height = Optional.empty();
  
-        private Optional<String> streamIdentifier = Optional.empty();
+        private Optional<Integer> level = Optional.empty();
  
-        private Optional<String> chromaSubsampling = Optional.empty();
- 
-        private Optional<Long> codedHeight = Optional.empty();
- 
-        private Optional<Long> codedWidth = Optional.empty();
- 
-        private Optional<Double> frameRate = Optional.empty();
+        private Optional<Boolean> original = Optional.empty();
  
         private Optional<Boolean> hasScalingMatrix = Optional.empty();
  
-        private Optional<Boolean> hearingImpaired = Optional.empty();
- 
-        private Optional<Boolean> closedCaptions = Optional.empty();
- 
-        private Optional<String> embeddedInVideo = Optional.empty();
- 
-        private Optional<Long> height = Optional.empty();
- 
-        private Optional<Long> level = Optional.empty();
- 
         private Optional<String> profile = Optional.empty();
- 
-        private Optional<Long> refFrames = Optional.empty();
  
         private Optional<String> scanType = Optional.empty();
  
-        private Optional<Long> width = Optional.empty();
+        private Optional<String> embeddedInVideo = Optional.empty();
  
-        private Optional<String> displayTitle = Optional.empty();
+        private Optional<Integer> refFrames = Optional.empty();
  
-        private Optional<String> extendedDisplayTitle = Optional.empty();
+        private Optional<Integer> width = Optional.empty();
  
-        private Optional<Long> channels = Optional.empty();
+        private String displayTitle;
  
-        private Optional<String> language = Optional.empty();
+        private String extendedDisplayTitle;
  
-        private Optional<String> languageTag = Optional.empty();
+        private Optional<Boolean> selected = Optional.empty();
  
-        private Optional<String> languageCode = Optional.empty();
+        private Optional<Boolean> forced = Optional.empty();
+ 
+        private Optional<Integer> channels = Optional.empty();
  
         private Optional<String> audioChannelLayout = Optional.empty();
  
-        private Optional<Long> samplingRate = Optional.empty();
+        private Optional<Integer> samplingRate = Optional.empty();
  
-        private Optional<String> title = Optional.empty();
+        private Optional<Boolean> canAutoSync = Optional.empty();
  
-        private Optional<Boolean> canAutoSync = Optional.empty();  
+        private Optional<Boolean> hearingImpaired = Optional.empty();
+ 
+        private Optional<Boolean> dub = Optional.empty();
+ 
+        private Optional<String> title = Optional.empty();  
         
         private Builder() {
           // force use of static builder() method
         }
 
+        /**
+         * Unique stream identifier.
+         */
         public Builder id(long id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
@@ -1544,16 +1966,16 @@ public class Stream {
         }
 
         /**
-         * Type of stream (1 = video, 2 = audio, 3 = subtitle)
+         * Stream type (1=video, 2=audio, 3=subtitle).
          */
-        public Builder streamType(long streamType) {
+        public Builder streamType(int streamType) {
             Utils.checkNotNull(streamType, "streamType");
             this.streamType = streamType;
             return this;
         }
 
         /**
-         * Indicates if this is the default stream
+         * Indicates if this stream is default.
          */
         public Builder default_(boolean default_) {
             Utils.checkNotNull(default_, "default_");
@@ -1562,7 +1984,7 @@ public class Stream {
         }
 
         /**
-         * Indicates if this is the default stream
+         * Indicates if this stream is default.
          */
         public Builder default_(Optional<Boolean> default_) {
             Utils.checkNotNull(default_, "default_");
@@ -1571,25 +1993,7 @@ public class Stream {
         }
 
         /**
-         * Indicates if the stream is selected
-         */
-        public Builder selected(boolean selected) {
-            Utils.checkNotNull(selected, "selected");
-            this.selected = Optional.ofNullable(selected);
-            return this;
-        }
-
-        /**
-         * Indicates if the stream is selected
-         */
-        public Builder selected(Optional<Boolean> selected) {
-            Utils.checkNotNull(selected, "selected");
-            this.selected = selected;
-            return this;
-        }
-
-        /**
-         * Codec used by the stream
+         * Codec used by the stream.
          */
         public Builder codec(String codec) {
             Utils.checkNotNull(codec, "codec");
@@ -1598,124 +2002,268 @@ public class Stream {
         }
 
         /**
-         * The index of the stream
+         * Index of the stream.
          */
-        public Builder index(long index) {
+        public Builder index(int index) {
             Utils.checkNotNull(index, "index");
             this.index = index;
             return this;
         }
 
         /**
-         * The bitrate of the stream in kbps
+         * Bitrate of the stream.
          */
-        public Builder bitrate(long bitrate) {
+        public Builder bitrate(int bitrate) {
             Utils.checkNotNull(bitrate, "bitrate");
             this.bitrate = Optional.ofNullable(bitrate);
             return this;
         }
 
         /**
-         * The bitrate of the stream in kbps
+         * Bitrate of the stream.
          */
-        public Builder bitrate(Optional<Long> bitrate) {
+        public Builder bitrate(Optional<Integer> bitrate) {
             Utils.checkNotNull(bitrate, "bitrate");
             this.bitrate = bitrate;
             return this;
         }
 
         /**
-         * The color primaries of the video stream
+         * Language of the stream.
          */
-        public Builder colorPrimaries(String colorPrimaries) {
-            Utils.checkNotNull(colorPrimaries, "colorPrimaries");
-            this.colorPrimaries = Optional.ofNullable(colorPrimaries);
+        public Builder language(String language) {
+            Utils.checkNotNull(language, "language");
+            this.language = Optional.ofNullable(language);
             return this;
         }
 
         /**
-         * The color primaries of the video stream
+         * Language of the stream.
          */
-        public Builder colorPrimaries(Optional<String> colorPrimaries) {
-            Utils.checkNotNull(colorPrimaries, "colorPrimaries");
-            this.colorPrimaries = colorPrimaries;
+        public Builder language(Optional<String> language) {
+            Utils.checkNotNull(language, "language");
+            this.language = language;
             return this;
         }
 
         /**
-         * The color range of the video stream
+         * Language tag (e.g., en).
          */
-        public Builder colorRange(String colorRange) {
-            Utils.checkNotNull(colorRange, "colorRange");
-            this.colorRange = Optional.ofNullable(colorRange);
+        public Builder languageTag(String languageTag) {
+            Utils.checkNotNull(languageTag, "languageTag");
+            this.languageTag = Optional.ofNullable(languageTag);
             return this;
         }
 
         /**
-         * The color range of the video stream
+         * Language tag (e.g., en).
          */
-        public Builder colorRange(Optional<String> colorRange) {
-            Utils.checkNotNull(colorRange, "colorRange");
-            this.colorRange = colorRange;
+        public Builder languageTag(Optional<String> languageTag) {
+            Utils.checkNotNull(languageTag, "languageTag");
+            this.languageTag = languageTag;
             return this;
         }
 
         /**
-         * The color space of the video stream
+         * ISO language code.
          */
-        public Builder colorSpace(String colorSpace) {
-            Utils.checkNotNull(colorSpace, "colorSpace");
-            this.colorSpace = Optional.ofNullable(colorSpace);
+        public Builder languageCode(String languageCode) {
+            Utils.checkNotNull(languageCode, "languageCode");
+            this.languageCode = Optional.ofNullable(languageCode);
             return this;
         }
 
         /**
-         * The color space of the video stream
+         * ISO language code.
          */
-        public Builder colorSpace(Optional<String> colorSpace) {
-            Utils.checkNotNull(colorSpace, "colorSpace");
-            this.colorSpace = colorSpace;
+        public Builder languageCode(Optional<String> languageCode) {
+            Utils.checkNotNull(languageCode, "languageCode");
+            this.languageCode = languageCode;
             return this;
         }
 
         /**
-         * The transfer characteristics (TRC) of the video stream
+         * Indicates whether header compression is enabled.
          */
-        public Builder colorTrc(String colorTrc) {
-            Utils.checkNotNull(colorTrc, "colorTrc");
-            this.colorTrc = Optional.ofNullable(colorTrc);
+        public Builder headerCompression(boolean headerCompression) {
+            Utils.checkNotNull(headerCompression, "headerCompression");
+            this.headerCompression = Optional.ofNullable(headerCompression);
             return this;
         }
 
         /**
-         * The transfer characteristics (TRC) of the video stream
+         * Indicates whether header compression is enabled.
          */
-        public Builder colorTrc(Optional<String> colorTrc) {
-            Utils.checkNotNull(colorTrc, "colorTrc");
-            this.colorTrc = colorTrc;
+        public Builder headerCompression(Optional<Boolean> headerCompression) {
+            Utils.checkNotNull(headerCompression, "headerCompression");
+            this.headerCompression = headerCompression;
             return this;
         }
 
         /**
-         * The bit depth of the video stream
+         * Dolby Vision BL compatibility ID.
          */
-        public Builder bitDepth(long bitDepth) {
+        public Builder doviblCompatID(int doviblCompatID) {
+            Utils.checkNotNull(doviblCompatID, "doviblCompatID");
+            this.doviblCompatID = Optional.ofNullable(doviblCompatID);
+            return this;
+        }
+
+        /**
+         * Dolby Vision BL compatibility ID.
+         */
+        public Builder doviblCompatID(Optional<Integer> doviblCompatID) {
+            Utils.checkNotNull(doviblCompatID, "doviblCompatID");
+            this.doviblCompatID = doviblCompatID;
+            return this;
+        }
+
+        /**
+         * Indicates if Dolby Vision BL is present.
+         */
+        public Builder doviblPresent(boolean doviblPresent) {
+            Utils.checkNotNull(doviblPresent, "doviblPresent");
+            this.doviblPresent = Optional.ofNullable(doviblPresent);
+            return this;
+        }
+
+        /**
+         * Indicates if Dolby Vision BL is present.
+         */
+        public Builder doviblPresent(Optional<Boolean> doviblPresent) {
+            Utils.checkNotNull(doviblPresent, "doviblPresent");
+            this.doviblPresent = doviblPresent;
+            return this;
+        }
+
+        /**
+         * Indicates if Dolby Vision EL is present.
+         */
+        public Builder dovielPresent(boolean dovielPresent) {
+            Utils.checkNotNull(dovielPresent, "dovielPresent");
+            this.dovielPresent = Optional.ofNullable(dovielPresent);
+            return this;
+        }
+
+        /**
+         * Indicates if Dolby Vision EL is present.
+         */
+        public Builder dovielPresent(Optional<Boolean> dovielPresent) {
+            Utils.checkNotNull(dovielPresent, "dovielPresent");
+            this.dovielPresent = dovielPresent;
+            return this;
+        }
+
+        /**
+         * Dolby Vision level.
+         */
+        public Builder doviLevel(int doviLevel) {
+            Utils.checkNotNull(doviLevel, "doviLevel");
+            this.doviLevel = Optional.ofNullable(doviLevel);
+            return this;
+        }
+
+        /**
+         * Dolby Vision level.
+         */
+        public Builder doviLevel(Optional<Integer> doviLevel) {
+            Utils.checkNotNull(doviLevel, "doviLevel");
+            this.doviLevel = doviLevel;
+            return this;
+        }
+
+        /**
+         * Indicates if Dolby Vision is present.
+         */
+        public Builder doviPresent(boolean doviPresent) {
+            Utils.checkNotNull(doviPresent, "doviPresent");
+            this.doviPresent = Optional.ofNullable(doviPresent);
+            return this;
+        }
+
+        /**
+         * Indicates if Dolby Vision is present.
+         */
+        public Builder doviPresent(Optional<Boolean> doviPresent) {
+            Utils.checkNotNull(doviPresent, "doviPresent");
+            this.doviPresent = doviPresent;
+            return this;
+        }
+
+        /**
+         * Dolby Vision profile.
+         */
+        public Builder doviProfile(int doviProfile) {
+            Utils.checkNotNull(doviProfile, "doviProfile");
+            this.doviProfile = Optional.ofNullable(doviProfile);
+            return this;
+        }
+
+        /**
+         * Dolby Vision profile.
+         */
+        public Builder doviProfile(Optional<Integer> doviProfile) {
+            Utils.checkNotNull(doviProfile, "doviProfile");
+            this.doviProfile = doviProfile;
+            return this;
+        }
+
+        /**
+         * Indicates if Dolby Vision RPU is present.
+         */
+        public Builder dovirpuPresent(boolean dovirpuPresent) {
+            Utils.checkNotNull(dovirpuPresent, "dovirpuPresent");
+            this.dovirpuPresent = Optional.ofNullable(dovirpuPresent);
+            return this;
+        }
+
+        /**
+         * Indicates if Dolby Vision RPU is present.
+         */
+        public Builder dovirpuPresent(Optional<Boolean> dovirpuPresent) {
+            Utils.checkNotNull(dovirpuPresent, "dovirpuPresent");
+            this.dovirpuPresent = dovirpuPresent;
+            return this;
+        }
+
+        /**
+         * Dolby Vision version.
+         */
+        public Builder doviVersion(String doviVersion) {
+            Utils.checkNotNull(doviVersion, "doviVersion");
+            this.doviVersion = Optional.ofNullable(doviVersion);
+            return this;
+        }
+
+        /**
+         * Dolby Vision version.
+         */
+        public Builder doviVersion(Optional<String> doviVersion) {
+            Utils.checkNotNull(doviVersion, "doviVersion");
+            this.doviVersion = doviVersion;
+            return this;
+        }
+
+        /**
+         * Bit depth of the video stream.
+         */
+        public Builder bitDepth(int bitDepth) {
             Utils.checkNotNull(bitDepth, "bitDepth");
             this.bitDepth = Optional.ofNullable(bitDepth);
             return this;
         }
 
         /**
-         * The bit depth of the video stream
+         * Bit depth of the video stream.
          */
-        public Builder bitDepth(Optional<Long> bitDepth) {
+        public Builder bitDepth(Optional<Integer> bitDepth) {
             Utils.checkNotNull(bitDepth, "bitDepth");
             this.bitDepth = bitDepth;
             return this;
         }
 
         /**
-         * The chroma location of the video stream
+         * Chroma sample location.
          */
         public Builder chromaLocation(String chromaLocation) {
             Utils.checkNotNull(chromaLocation, "chromaLocation");
@@ -1724,7 +2272,7 @@ public class Stream {
         }
 
         /**
-         * The chroma location of the video stream
+         * Chroma sample location.
          */
         public Builder chromaLocation(Optional<String> chromaLocation) {
             Utils.checkNotNull(chromaLocation, "chromaLocation");
@@ -1733,25 +2281,7 @@ public class Stream {
         }
 
         /**
-         * The identifier of the video stream
-         */
-        public Builder streamIdentifier(String streamIdentifier) {
-            Utils.checkNotNull(streamIdentifier, "streamIdentifier");
-            this.streamIdentifier = Optional.ofNullable(streamIdentifier);
-            return this;
-        }
-
-        /**
-         * The identifier of the video stream
-         */
-        public Builder streamIdentifier(Optional<String> streamIdentifier) {
-            Utils.checkNotNull(streamIdentifier, "streamIdentifier");
-            this.streamIdentifier = streamIdentifier;
-            return this;
-        }
-
-        /**
-         * The chroma subsampling format
+         * Chroma subsampling format.
          */
         public Builder chromaSubsampling(String chromaSubsampling) {
             Utils.checkNotNull(chromaSubsampling, "chromaSubsampling");
@@ -1760,7 +2290,7 @@ public class Stream {
         }
 
         /**
-         * The chroma subsampling format
+         * Chroma subsampling format.
          */
         public Builder chromaSubsampling(Optional<String> chromaSubsampling) {
             Utils.checkNotNull(chromaSubsampling, "chromaSubsampling");
@@ -1769,86 +2299,38 @@ public class Stream {
         }
 
         /**
-         * The coded height of the video stream
+         * Coded video height.
          */
-        public Builder codedHeight(long codedHeight) {
+        public Builder codedHeight(int codedHeight) {
             Utils.checkNotNull(codedHeight, "codedHeight");
             this.codedHeight = Optional.ofNullable(codedHeight);
             return this;
         }
 
         /**
-         * The coded height of the video stream
+         * Coded video height.
          */
-        public Builder codedHeight(Optional<Long> codedHeight) {
+        public Builder codedHeight(Optional<Integer> codedHeight) {
             Utils.checkNotNull(codedHeight, "codedHeight");
             this.codedHeight = codedHeight;
             return this;
         }
 
         /**
-         * The coded width of the video stream
+         * Coded video width.
          */
-        public Builder codedWidth(long codedWidth) {
+        public Builder codedWidth(int codedWidth) {
             Utils.checkNotNull(codedWidth, "codedWidth");
             this.codedWidth = Optional.ofNullable(codedWidth);
             return this;
         }
 
         /**
-         * The coded width of the video stream
+         * Coded video width.
          */
-        public Builder codedWidth(Optional<Long> codedWidth) {
+        public Builder codedWidth(Optional<Integer> codedWidth) {
             Utils.checkNotNull(codedWidth, "codedWidth");
             this.codedWidth = codedWidth;
-            return this;
-        }
-
-        /**
-         * The frame rate of the video stream
-         */
-        public Builder frameRate(double frameRate) {
-            Utils.checkNotNull(frameRate, "frameRate");
-            this.frameRate = Optional.ofNullable(frameRate);
-            return this;
-        }
-
-        /**
-         * The frame rate of the video stream
-         */
-        public Builder frameRate(Optional<Double> frameRate) {
-            Utils.checkNotNull(frameRate, "frameRate");
-            this.frameRate = frameRate;
-            return this;
-        }
-
-        /**
-         * Indicates if the stream has a scaling matrix
-         */
-        public Builder hasScalingMatrix(boolean hasScalingMatrix) {
-            Utils.checkNotNull(hasScalingMatrix, "hasScalingMatrix");
-            this.hasScalingMatrix = Optional.ofNullable(hasScalingMatrix);
-            return this;
-        }
-
-        /**
-         * Indicates if the stream has a scaling matrix
-         */
-        public Builder hasScalingMatrix(Optional<Boolean> hasScalingMatrix) {
-            Utils.checkNotNull(hasScalingMatrix, "hasScalingMatrix");
-            this.hasScalingMatrix = hasScalingMatrix;
-            return this;
-        }
-
-        public Builder hearingImpaired(boolean hearingImpaired) {
-            Utils.checkNotNull(hearingImpaired, "hearingImpaired");
-            this.hearingImpaired = Optional.ofNullable(hearingImpaired);
-            return this;
-        }
-
-        public Builder hearingImpaired(Optional<Boolean> hearingImpaired) {
-            Utils.checkNotNull(hearingImpaired, "hearingImpaired");
-            this.hearingImpaired = hearingImpaired;
             return this;
         }
 
@@ -1861,6 +2343,192 @@ public class Stream {
         public Builder closedCaptions(Optional<Boolean> closedCaptions) {
             Utils.checkNotNull(closedCaptions, "closedCaptions");
             this.closedCaptions = closedCaptions;
+            return this;
+        }
+
+        /**
+         * Color primaries used.
+         */
+        public Builder colorPrimaries(String colorPrimaries) {
+            Utils.checkNotNull(colorPrimaries, "colorPrimaries");
+            this.colorPrimaries = Optional.ofNullable(colorPrimaries);
+            return this;
+        }
+
+        /**
+         * Color primaries used.
+         */
+        public Builder colorPrimaries(Optional<String> colorPrimaries) {
+            Utils.checkNotNull(colorPrimaries, "colorPrimaries");
+            this.colorPrimaries = colorPrimaries;
+            return this;
+        }
+
+        /**
+         * Color range (e.g., tv).
+         */
+        public Builder colorRange(String colorRange) {
+            Utils.checkNotNull(colorRange, "colorRange");
+            this.colorRange = Optional.ofNullable(colorRange);
+            return this;
+        }
+
+        /**
+         * Color range (e.g., tv).
+         */
+        public Builder colorRange(Optional<String> colorRange) {
+            Utils.checkNotNull(colorRange, "colorRange");
+            this.colorRange = colorRange;
+            return this;
+        }
+
+        /**
+         * Color space.
+         */
+        public Builder colorSpace(String colorSpace) {
+            Utils.checkNotNull(colorSpace, "colorSpace");
+            this.colorSpace = Optional.ofNullable(colorSpace);
+            return this;
+        }
+
+        /**
+         * Color space.
+         */
+        public Builder colorSpace(Optional<String> colorSpace) {
+            Utils.checkNotNull(colorSpace, "colorSpace");
+            this.colorSpace = colorSpace;
+            return this;
+        }
+
+        /**
+         * Color transfer characteristics.
+         */
+        public Builder colorTrc(String colorTrc) {
+            Utils.checkNotNull(colorTrc, "colorTrc");
+            this.colorTrc = Optional.ofNullable(colorTrc);
+            return this;
+        }
+
+        /**
+         * Color transfer characteristics.
+         */
+        public Builder colorTrc(Optional<String> colorTrc) {
+            Utils.checkNotNull(colorTrc, "colorTrc");
+            this.colorTrc = colorTrc;
+            return this;
+        }
+
+        /**
+         * Frame rate of the stream.
+         */
+        public Builder frameRate(float frameRate) {
+            Utils.checkNotNull(frameRate, "frameRate");
+            this.frameRate = Optional.ofNullable(frameRate);
+            return this;
+        }
+
+        /**
+         * Frame rate of the stream.
+         */
+        public Builder frameRate(Optional<Float> frameRate) {
+            Utils.checkNotNull(frameRate, "frameRate");
+            this.frameRate = frameRate;
+            return this;
+        }
+
+        /**
+         * Height of the video stream.
+         */
+        public Builder height(int height) {
+            Utils.checkNotNull(height, "height");
+            this.height = Optional.ofNullable(height);
+            return this;
+        }
+
+        /**
+         * Height of the video stream.
+         */
+        public Builder height(Optional<Integer> height) {
+            Utils.checkNotNull(height, "height");
+            this.height = height;
+            return this;
+        }
+
+        /**
+         * Video level.
+         */
+        public Builder level(int level) {
+            Utils.checkNotNull(level, "level");
+            this.level = Optional.ofNullable(level);
+            return this;
+        }
+
+        /**
+         * Video level.
+         */
+        public Builder level(Optional<Integer> level) {
+            Utils.checkNotNull(level, "level");
+            this.level = level;
+            return this;
+        }
+
+        /**
+         * Indicates if this is the original stream.
+         */
+        public Builder original(boolean original) {
+            Utils.checkNotNull(original, "original");
+            this.original = Optional.ofNullable(original);
+            return this;
+        }
+
+        /**
+         * Indicates if this is the original stream.
+         */
+        public Builder original(Optional<Boolean> original) {
+            Utils.checkNotNull(original, "original");
+            this.original = original;
+            return this;
+        }
+
+        public Builder hasScalingMatrix(boolean hasScalingMatrix) {
+            Utils.checkNotNull(hasScalingMatrix, "hasScalingMatrix");
+            this.hasScalingMatrix = Optional.ofNullable(hasScalingMatrix);
+            return this;
+        }
+
+        public Builder hasScalingMatrix(Optional<Boolean> hasScalingMatrix) {
+            Utils.checkNotNull(hasScalingMatrix, "hasScalingMatrix");
+            this.hasScalingMatrix = hasScalingMatrix;
+            return this;
+        }
+
+        /**
+         * Video profile.
+         */
+        public Builder profile(String profile) {
+            Utils.checkNotNull(profile, "profile");
+            this.profile = Optional.ofNullable(profile);
+            return this;
+        }
+
+        /**
+         * Video profile.
+         */
+        public Builder profile(Optional<String> profile) {
+            Utils.checkNotNull(profile, "profile");
+            this.profile = profile;
+            return this;
+        }
+
+        public Builder scanType(String scanType) {
+            Utils.checkNotNull(scanType, "scanType");
+            this.scanType = Optional.ofNullable(scanType);
+            return this;
+        }
+
+        public Builder scanType(Optional<String> scanType) {
+            Utils.checkNotNull(scanType, "scanType");
+            this.scanType = scanType;
             return this;
         }
 
@@ -1877,223 +2545,109 @@ public class Stream {
         }
 
         /**
-         * The height of the video stream
+         * Number of reference frames.
          */
-        public Builder height(long height) {
-            Utils.checkNotNull(height, "height");
-            this.height = Optional.ofNullable(height);
-            return this;
-        }
-
-        /**
-         * The height of the video stream
-         */
-        public Builder height(Optional<Long> height) {
-            Utils.checkNotNull(height, "height");
-            this.height = height;
-            return this;
-        }
-
-        /**
-         * The level of the video codec
-         */
-        public Builder level(long level) {
-            Utils.checkNotNull(level, "level");
-            this.level = Optional.ofNullable(level);
-            return this;
-        }
-
-        /**
-         * The level of the video codec
-         */
-        public Builder level(Optional<Long> level) {
-            Utils.checkNotNull(level, "level");
-            this.level = level;
-            return this;
-        }
-
-        /**
-         * The profile of the video codec
-         */
-        public Builder profile(String profile) {
-            Utils.checkNotNull(profile, "profile");
-            this.profile = Optional.ofNullable(profile);
-            return this;
-        }
-
-        /**
-         * The profile of the video codec
-         */
-        public Builder profile(Optional<String> profile) {
-            Utils.checkNotNull(profile, "profile");
-            this.profile = profile;
-            return this;
-        }
-
-        /**
-         * Number of reference frames
-         */
-        public Builder refFrames(long refFrames) {
+        public Builder refFrames(int refFrames) {
             Utils.checkNotNull(refFrames, "refFrames");
             this.refFrames = Optional.ofNullable(refFrames);
             return this;
         }
 
         /**
-         * Number of reference frames
+         * Number of reference frames.
          */
-        public Builder refFrames(Optional<Long> refFrames) {
+        public Builder refFrames(Optional<Integer> refFrames) {
             Utils.checkNotNull(refFrames, "refFrames");
             this.refFrames = refFrames;
             return this;
         }
 
         /**
-         * The scan type (progressive or interlaced)
+         * Width of the video stream.
          */
-        public Builder scanType(String scanType) {
-            Utils.checkNotNull(scanType, "scanType");
-            this.scanType = Optional.ofNullable(scanType);
-            return this;
-        }
-
-        /**
-         * The scan type (progressive or interlaced)
-         */
-        public Builder scanType(Optional<String> scanType) {
-            Utils.checkNotNull(scanType, "scanType");
-            this.scanType = scanType;
-            return this;
-        }
-
-        /**
-         * The width of the video stream
-         */
-        public Builder width(long width) {
+        public Builder width(int width) {
             Utils.checkNotNull(width, "width");
             this.width = Optional.ofNullable(width);
             return this;
         }
 
         /**
-         * The width of the video stream
+         * Width of the video stream.
          */
-        public Builder width(Optional<Long> width) {
+        public Builder width(Optional<Integer> width) {
             Utils.checkNotNull(width, "width");
             this.width = width;
             return this;
         }
 
         /**
-         * Display title of the stream
+         * Display title for the stream.
          */
         public Builder displayTitle(String displayTitle) {
-            Utils.checkNotNull(displayTitle, "displayTitle");
-            this.displayTitle = Optional.ofNullable(displayTitle);
-            return this;
-        }
-
-        /**
-         * Display title of the stream
-         */
-        public Builder displayTitle(Optional<String> displayTitle) {
             Utils.checkNotNull(displayTitle, "displayTitle");
             this.displayTitle = displayTitle;
             return this;
         }
 
         /**
-         * Extended display title of the stream
+         * Extended display title for the stream.
          */
         public Builder extendedDisplayTitle(String extendedDisplayTitle) {
-            Utils.checkNotNull(extendedDisplayTitle, "extendedDisplayTitle");
-            this.extendedDisplayTitle = Optional.ofNullable(extendedDisplayTitle);
-            return this;
-        }
-
-        /**
-         * Extended display title of the stream
-         */
-        public Builder extendedDisplayTitle(Optional<String> extendedDisplayTitle) {
             Utils.checkNotNull(extendedDisplayTitle, "extendedDisplayTitle");
             this.extendedDisplayTitle = extendedDisplayTitle;
             return this;
         }
 
         /**
-         * Number of audio channels (for audio streams)
+         * Indicates if this stream is selected (applicable for audio streams).
          */
-        public Builder channels(long channels) {
+        public Builder selected(boolean selected) {
+            Utils.checkNotNull(selected, "selected");
+            this.selected = Optional.ofNullable(selected);
+            return this;
+        }
+
+        /**
+         * Indicates if this stream is selected (applicable for audio streams).
+         */
+        public Builder selected(Optional<Boolean> selected) {
+            Utils.checkNotNull(selected, "selected");
+            this.selected = selected;
+            return this;
+        }
+
+        public Builder forced(boolean forced) {
+            Utils.checkNotNull(forced, "forced");
+            this.forced = Optional.ofNullable(forced);
+            return this;
+        }
+
+        public Builder forced(Optional<Boolean> forced) {
+            Utils.checkNotNull(forced, "forced");
+            this.forced = forced;
+            return this;
+        }
+
+        /**
+         * Number of audio channels (for audio streams).
+         */
+        public Builder channels(int channels) {
             Utils.checkNotNull(channels, "channels");
             this.channels = Optional.ofNullable(channels);
             return this;
         }
 
         /**
-         * Number of audio channels (for audio streams)
+         * Number of audio channels (for audio streams).
          */
-        public Builder channels(Optional<Long> channels) {
+        public Builder channels(Optional<Integer> channels) {
             Utils.checkNotNull(channels, "channels");
             this.channels = channels;
             return this;
         }
 
         /**
-         * The language of the stream (for audio/subtitle streams)
-         */
-        public Builder language(String language) {
-            Utils.checkNotNull(language, "language");
-            this.language = Optional.ofNullable(language);
-            return this;
-        }
-
-        /**
-         * The language of the stream (for audio/subtitle streams)
-         */
-        public Builder language(Optional<String> language) {
-            Utils.checkNotNull(language, "language");
-            this.language = language;
-            return this;
-        }
-
-        /**
-         * Language tag of the stream
-         */
-        public Builder languageTag(String languageTag) {
-            Utils.checkNotNull(languageTag, "languageTag");
-            this.languageTag = Optional.ofNullable(languageTag);
-            return this;
-        }
-
-        /**
-         * Language tag of the stream
-         */
-        public Builder languageTag(Optional<String> languageTag) {
-            Utils.checkNotNull(languageTag, "languageTag");
-            this.languageTag = languageTag;
-            return this;
-        }
-
-        /**
-         * Language code of the stream
-         */
-        public Builder languageCode(String languageCode) {
-            Utils.checkNotNull(languageCode, "languageCode");
-            this.languageCode = Optional.ofNullable(languageCode);
-            return this;
-        }
-
-        /**
-         * Language code of the stream
-         */
-        public Builder languageCode(Optional<String> languageCode) {
-            Utils.checkNotNull(languageCode, "languageCode");
-            this.languageCode = languageCode;
-            return this;
-        }
-
-        /**
-         * The audio channel layout
+         * Audio channel layout.
          */
         public Builder audioChannelLayout(String audioChannelLayout) {
             Utils.checkNotNull(audioChannelLayout, "audioChannelLayout");
@@ -2102,7 +2656,7 @@ public class Stream {
         }
 
         /**
-         * The audio channel layout
+         * Audio channel layout.
          */
         public Builder audioChannelLayout(Optional<String> audioChannelLayout) {
             Utils.checkNotNull(audioChannelLayout, "audioChannelLayout");
@@ -2111,43 +2665,25 @@ public class Stream {
         }
 
         /**
-         * Sampling rate of the audio stream in Hz
+         * Sampling rate for the audio stream.
          */
-        public Builder samplingRate(long samplingRate) {
+        public Builder samplingRate(int samplingRate) {
             Utils.checkNotNull(samplingRate, "samplingRate");
             this.samplingRate = Optional.ofNullable(samplingRate);
             return this;
         }
 
         /**
-         * Sampling rate of the audio stream in Hz
+         * Sampling rate for the audio stream.
          */
-        public Builder samplingRate(Optional<Long> samplingRate) {
+        public Builder samplingRate(Optional<Integer> samplingRate) {
             Utils.checkNotNull(samplingRate, "samplingRate");
             this.samplingRate = samplingRate;
             return this;
         }
 
         /**
-         * Title of the subtitle track (for subtitle streams)
-         */
-        public Builder title(String title) {
-            Utils.checkNotNull(title, "title");
-            this.title = Optional.ofNullable(title);
-            return this;
-        }
-
-        /**
-         * Title of the subtitle track (for subtitle streams)
-         */
-        public Builder title(Optional<String> title) {
-            Utils.checkNotNull(title, "title");
-            this.title = title;
-            return this;
-        }
-
-        /**
-         * Indicates if the subtitle stream can auto-sync
+         * Indicates if the stream can auto-sync.
          */
         public Builder canAutoSync(boolean canAutoSync) {
             Utils.checkNotNull(canAutoSync, "canAutoSync");
@@ -2156,11 +2692,65 @@ public class Stream {
         }
 
         /**
-         * Indicates if the subtitle stream can auto-sync
+         * Indicates if the stream can auto-sync.
          */
         public Builder canAutoSync(Optional<Boolean> canAutoSync) {
             Utils.checkNotNull(canAutoSync, "canAutoSync");
             this.canAutoSync = canAutoSync;
+            return this;
+        }
+
+        /**
+         * Indicates if the stream is for the hearing impaired.
+         */
+        public Builder hearingImpaired(boolean hearingImpaired) {
+            Utils.checkNotNull(hearingImpaired, "hearingImpaired");
+            this.hearingImpaired = Optional.ofNullable(hearingImpaired);
+            return this;
+        }
+
+        /**
+         * Indicates if the stream is for the hearing impaired.
+         */
+        public Builder hearingImpaired(Optional<Boolean> hearingImpaired) {
+            Utils.checkNotNull(hearingImpaired, "hearingImpaired");
+            this.hearingImpaired = hearingImpaired;
+            return this;
+        }
+
+        /**
+         * Indicates if the stream is a dub.
+         */
+        public Builder dub(boolean dub) {
+            Utils.checkNotNull(dub, "dub");
+            this.dub = Optional.ofNullable(dub);
+            return this;
+        }
+
+        /**
+         * Indicates if the stream is a dub.
+         */
+        public Builder dub(Optional<Boolean> dub) {
+            Utils.checkNotNull(dub, "dub");
+            this.dub = dub;
+            return this;
+        }
+
+        /**
+         * Optional title for the stream (e.g., language variant).
+         */
+        public Builder title(String title) {
+            Utils.checkNotNull(title, "title");
+            this.title = Optional.ofNullable(title);
+            return this;
+        }
+
+        /**
+         * Optional title for the stream (e.g., language variant).
+         */
+        public Builder title(Optional<String> title) {
+            Utils.checkNotNull(title, "title");
+            this.title = title;
             return this;
         }
         
@@ -2169,41 +2759,52 @@ public class Stream {
                 id,
                 streamType,
                 default_,
-                selected,
                 codec,
                 index,
                 bitrate,
+                language,
+                languageTag,
+                languageCode,
+                headerCompression,
+                doviblCompatID,
+                doviblPresent,
+                dovielPresent,
+                doviLevel,
+                doviPresent,
+                doviProfile,
+                dovirpuPresent,
+                doviVersion,
+                bitDepth,
+                chromaLocation,
+                chromaSubsampling,
+                codedHeight,
+                codedWidth,
+                closedCaptions,
                 colorPrimaries,
                 colorRange,
                 colorSpace,
                 colorTrc,
-                bitDepth,
-                chromaLocation,
-                streamIdentifier,
-                chromaSubsampling,
-                codedHeight,
-                codedWidth,
                 frameRate,
-                hasScalingMatrix,
-                hearingImpaired,
-                closedCaptions,
-                embeddedInVideo,
                 height,
                 level,
+                original,
+                hasScalingMatrix,
                 profile,
-                refFrames,
                 scanType,
+                embeddedInVideo,
+                refFrames,
                 width,
                 displayTitle,
                 extendedDisplayTitle,
+                selected,
+                forced,
                 channels,
-                language,
-                languageTag,
-                languageCode,
                 audioChannelLayout,
                 samplingRate,
-                title,
-                canAutoSync);
+                canAutoSync,
+                hearingImpaired,
+                dub,
+                title);
         }
     }
 }

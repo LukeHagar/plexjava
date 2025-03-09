@@ -399,14 +399,14 @@ public class GetMediaMetaDataMetadata {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Producer")
-    private Optional<? extends List<Producer>> producer;
+    private Optional<? extends List<GetMediaMetaDataProducer>> producer;
 
     /**
      * An array of similar content objects.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Similar")
-    private Optional<? extends List<Similar>> similar;
+    private Optional<? extends List<GetMediaMetaDataSimilar>> similar;
 
     /**
      * An array of location objects.
@@ -475,8 +475,8 @@ public class GetMediaMetaDataMetadata {
             @JsonProperty("Role") Optional<? extends List<GetMediaMetaDataRole>> role,
             @JsonProperty("Director") Optional<? extends List<GetMediaMetaDataDirector>> director,
             @JsonProperty("Writer") Optional<? extends List<GetMediaMetaDataWriter>> writer,
-            @JsonProperty("Producer") Optional<? extends List<Producer>> producer,
-            @JsonProperty("Similar") Optional<? extends List<Similar>> similar,
+            @JsonProperty("Producer") Optional<? extends List<GetMediaMetaDataProducer>> producer,
+            @JsonProperty("Similar") Optional<? extends List<GetMediaMetaDataSimilar>> similar,
             @JsonProperty("Location") Optional<? extends List<GetMediaMetaDataLocation>> location) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         Utils.checkNotNull(parentRatingKey, "parentRatingKey");
@@ -1082,8 +1082,8 @@ public class GetMediaMetaDataMetadata {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Producer>> producer() {
-        return (Optional<List<Producer>>) producer;
+    public Optional<List<GetMediaMetaDataProducer>> producer() {
+        return (Optional<List<GetMediaMetaDataProducer>>) producer;
     }
 
     /**
@@ -1091,8 +1091,8 @@ public class GetMediaMetaDataMetadata {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Similar>> similar() {
-        return (Optional<List<Similar>>) similar;
+    public Optional<List<GetMediaMetaDataSimilar>> similar() {
+        return (Optional<List<GetMediaMetaDataSimilar>>) similar;
     }
 
     /**
@@ -1975,7 +1975,7 @@ public class GetMediaMetaDataMetadata {
     /**
      * An array of Writer roles.
      */
-    public GetMediaMetaDataMetadata withProducer(List<Producer> producer) {
+    public GetMediaMetaDataMetadata withProducer(List<GetMediaMetaDataProducer> producer) {
         Utils.checkNotNull(producer, "producer");
         this.producer = Optional.ofNullable(producer);
         return this;
@@ -1984,7 +1984,7 @@ public class GetMediaMetaDataMetadata {
     /**
      * An array of Writer roles.
      */
-    public GetMediaMetaDataMetadata withProducer(Optional<? extends List<Producer>> producer) {
+    public GetMediaMetaDataMetadata withProducer(Optional<? extends List<GetMediaMetaDataProducer>> producer) {
         Utils.checkNotNull(producer, "producer");
         this.producer = producer;
         return this;
@@ -1993,7 +1993,7 @@ public class GetMediaMetaDataMetadata {
     /**
      * An array of similar content objects.
      */
-    public GetMediaMetaDataMetadata withSimilar(List<Similar> similar) {
+    public GetMediaMetaDataMetadata withSimilar(List<GetMediaMetaDataSimilar> similar) {
         Utils.checkNotNull(similar, "similar");
         this.similar = Optional.ofNullable(similar);
         return this;
@@ -2002,7 +2002,7 @@ public class GetMediaMetaDataMetadata {
     /**
      * An array of similar content objects.
      */
-    public GetMediaMetaDataMetadata withSimilar(Optional<? extends List<Similar>> similar) {
+    public GetMediaMetaDataMetadata withSimilar(Optional<? extends List<GetMediaMetaDataSimilar>> similar) {
         Utils.checkNotNull(similar, "similar");
         this.similar = similar;
         return this;
@@ -2349,9 +2349,9 @@ public class GetMediaMetaDataMetadata {
  
         private Optional<? extends List<GetMediaMetaDataWriter>> writer = Optional.empty();
  
-        private Optional<? extends List<Producer>> producer = Optional.empty();
+        private Optional<? extends List<GetMediaMetaDataProducer>> producer = Optional.empty();
  
-        private Optional<? extends List<Similar>> similar = Optional.empty();
+        private Optional<? extends List<GetMediaMetaDataSimilar>> similar = Optional.empty();
  
         private Optional<? extends List<GetMediaMetaDataLocation>> location = Optional.empty();  
         
@@ -3226,7 +3226,7 @@ public class GetMediaMetaDataMetadata {
         /**
          * An array of Writer roles.
          */
-        public Builder producer(List<Producer> producer) {
+        public Builder producer(List<GetMediaMetaDataProducer> producer) {
             Utils.checkNotNull(producer, "producer");
             this.producer = Optional.ofNullable(producer);
             return this;
@@ -3235,7 +3235,7 @@ public class GetMediaMetaDataMetadata {
         /**
          * An array of Writer roles.
          */
-        public Builder producer(Optional<? extends List<Producer>> producer) {
+        public Builder producer(Optional<? extends List<GetMediaMetaDataProducer>> producer) {
             Utils.checkNotNull(producer, "producer");
             this.producer = producer;
             return this;
@@ -3244,7 +3244,7 @@ public class GetMediaMetaDataMetadata {
         /**
          * An array of similar content objects.
          */
-        public Builder similar(List<Similar> similar) {
+        public Builder similar(List<GetMediaMetaDataSimilar> similar) {
             Utils.checkNotNull(similar, "similar");
             this.similar = Optional.ofNullable(similar);
             return this;
@@ -3253,7 +3253,7 @@ public class GetMediaMetaDataMetadata {
         /**
          * An array of similar content objects.
          */
-        public Builder similar(Optional<? extends List<Similar>> similar) {
+        public Builder similar(Optional<? extends List<GetMediaMetaDataSimilar>> similar) {
             Utils.checkNotNull(similar, "similar");
             this.similar = similar;
             return this;

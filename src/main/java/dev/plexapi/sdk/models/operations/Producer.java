@@ -19,38 +19,32 @@ import java.util.Optional;
 public class Producer {
 
     /**
-     * The unique role identifier.
+     * Unique identifier for the producer.
      */
     @JsonProperty("id")
     private long id;
 
     /**
-     * The filter string for the role.
+     * The filter string used to query this producer.
      */
     @JsonProperty("filter")
     private String filter;
 
     /**
-     * The actor's name.
+     * The name of the producer
      */
     @JsonProperty("tag")
     private String tag;
 
     /**
-     * A key associated with the actor tag.
-     */
-    @JsonProperty("tagKey")
-    private String tagKey;
-
-    /**
-     * The character name or role.
+     * A unique key associated with the producer's tag, used for internal identification.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("role")
-    private Optional<String> role;
+    @JsonProperty("tagKey")
+    private Optional<String> tagKey;
 
     /**
-     * URL for the role thumbnail image.
+     * The URL of the thumbnail image for the actor.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
@@ -61,33 +55,29 @@ public class Producer {
             @JsonProperty("id") long id,
             @JsonProperty("filter") String filter,
             @JsonProperty("tag") String tag,
-            @JsonProperty("tagKey") String tagKey,
-            @JsonProperty("role") Optional<String> role,
+            @JsonProperty("tagKey") Optional<String> tagKey,
             @JsonProperty("thumb") Optional<String> thumb) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(filter, "filter");
         Utils.checkNotNull(tag, "tag");
         Utils.checkNotNull(tagKey, "tagKey");
-        Utils.checkNotNull(role, "role");
         Utils.checkNotNull(thumb, "thumb");
         this.id = id;
         this.filter = filter;
         this.tag = tag;
         this.tagKey = tagKey;
-        this.role = role;
         this.thumb = thumb;
     }
     
     public Producer(
             long id,
             String filter,
-            String tag,
-            String tagKey) {
-        this(id, filter, tag, tagKey, Optional.empty(), Optional.empty());
+            String tag) {
+        this(id, filter, tag, Optional.empty(), Optional.empty());
     }
 
     /**
-     * The unique role identifier.
+     * Unique identifier for the producer.
      */
     @JsonIgnore
     public long id() {
@@ -95,7 +85,7 @@ public class Producer {
     }
 
     /**
-     * The filter string for the role.
+     * The filter string used to query this producer.
      */
     @JsonIgnore
     public String filter() {
@@ -103,7 +93,7 @@ public class Producer {
     }
 
     /**
-     * The actor's name.
+     * The name of the producer
      */
     @JsonIgnore
     public String tag() {
@@ -111,23 +101,15 @@ public class Producer {
     }
 
     /**
-     * A key associated with the actor tag.
+     * A unique key associated with the producer's tag, used for internal identification.
      */
     @JsonIgnore
-    public String tagKey() {
+    public Optional<String> tagKey() {
         return tagKey;
     }
 
     /**
-     * The character name or role.
-     */
-    @JsonIgnore
-    public Optional<String> role() {
-        return role;
-    }
-
-    /**
-     * URL for the role thumbnail image.
+     * The URL of the thumbnail image for the actor.
      */
     @JsonIgnore
     public Optional<String> thumb() {
@@ -139,7 +121,7 @@ public class Producer {
     }
 
     /**
-     * The unique role identifier.
+     * Unique identifier for the producer.
      */
     public Producer withId(long id) {
         Utils.checkNotNull(id, "id");
@@ -148,7 +130,7 @@ public class Producer {
     }
 
     /**
-     * The filter string for the role.
+     * The filter string used to query this producer.
      */
     public Producer withFilter(String filter) {
         Utils.checkNotNull(filter, "filter");
@@ -157,7 +139,7 @@ public class Producer {
     }
 
     /**
-     * The actor's name.
+     * The name of the producer
      */
     public Producer withTag(String tag) {
         Utils.checkNotNull(tag, "tag");
@@ -166,34 +148,25 @@ public class Producer {
     }
 
     /**
-     * A key associated with the actor tag.
+     * A unique key associated with the producer's tag, used for internal identification.
      */
     public Producer withTagKey(String tagKey) {
+        Utils.checkNotNull(tagKey, "tagKey");
+        this.tagKey = Optional.ofNullable(tagKey);
+        return this;
+    }
+
+    /**
+     * A unique key associated with the producer's tag, used for internal identification.
+     */
+    public Producer withTagKey(Optional<String> tagKey) {
         Utils.checkNotNull(tagKey, "tagKey");
         this.tagKey = tagKey;
         return this;
     }
 
     /**
-     * The character name or role.
-     */
-    public Producer withRole(String role) {
-        Utils.checkNotNull(role, "role");
-        this.role = Optional.ofNullable(role);
-        return this;
-    }
-
-    /**
-     * The character name or role.
-     */
-    public Producer withRole(Optional<String> role) {
-        Utils.checkNotNull(role, "role");
-        this.role = role;
-        return this;
-    }
-
-    /**
-     * URL for the role thumbnail image.
+     * The URL of the thumbnail image for the actor.
      */
     public Producer withThumb(String thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -202,7 +175,7 @@ public class Producer {
     }
 
     /**
-     * URL for the role thumbnail image.
+     * The URL of the thumbnail image for the actor.
      */
     public Producer withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -224,7 +197,6 @@ public class Producer {
             Objects.deepEquals(this.filter, other.filter) &&
             Objects.deepEquals(this.tag, other.tag) &&
             Objects.deepEquals(this.tagKey, other.tagKey) &&
-            Objects.deepEquals(this.role, other.role) &&
             Objects.deepEquals(this.thumb, other.thumb);
     }
     
@@ -235,7 +207,6 @@ public class Producer {
             filter,
             tag,
             tagKey,
-            role,
             thumb);
     }
     
@@ -246,7 +217,6 @@ public class Producer {
                 "filter", filter,
                 "tag", tag,
                 "tagKey", tagKey,
-                "role", role,
                 "thumb", thumb);
     }
     
@@ -258,9 +228,7 @@ public class Producer {
  
         private String tag;
  
-        private String tagKey;
- 
-        private Optional<String> role = Optional.empty();
+        private Optional<String> tagKey = Optional.empty();
  
         private Optional<String> thumb = Optional.empty();  
         
@@ -269,7 +237,7 @@ public class Producer {
         }
 
         /**
-         * The unique role identifier.
+         * Unique identifier for the producer.
          */
         public Builder id(long id) {
             Utils.checkNotNull(id, "id");
@@ -278,7 +246,7 @@ public class Producer {
         }
 
         /**
-         * The filter string for the role.
+         * The filter string used to query this producer.
          */
         public Builder filter(String filter) {
             Utils.checkNotNull(filter, "filter");
@@ -287,7 +255,7 @@ public class Producer {
         }
 
         /**
-         * The actor's name.
+         * The name of the producer
          */
         public Builder tag(String tag) {
             Utils.checkNotNull(tag, "tag");
@@ -296,34 +264,25 @@ public class Producer {
         }
 
         /**
-         * A key associated with the actor tag.
+         * A unique key associated with the producer's tag, used for internal identification.
          */
         public Builder tagKey(String tagKey) {
+            Utils.checkNotNull(tagKey, "tagKey");
+            this.tagKey = Optional.ofNullable(tagKey);
+            return this;
+        }
+
+        /**
+         * A unique key associated with the producer's tag, used for internal identification.
+         */
+        public Builder tagKey(Optional<String> tagKey) {
             Utils.checkNotNull(tagKey, "tagKey");
             this.tagKey = tagKey;
             return this;
         }
 
         /**
-         * The character name or role.
-         */
-        public Builder role(String role) {
-            Utils.checkNotNull(role, "role");
-            this.role = Optional.ofNullable(role);
-            return this;
-        }
-
-        /**
-         * The character name or role.
-         */
-        public Builder role(Optional<String> role) {
-            Utils.checkNotNull(role, "role");
-            this.role = role;
-            return this;
-        }
-
-        /**
-         * URL for the role thumbnail image.
+         * The URL of the thumbnail image for the actor.
          */
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -332,7 +291,7 @@ public class Producer {
         }
 
         /**
-         * URL for the role thumbnail image.
+         * The URL of the thumbnail image for the actor.
          */
         public Builder thumb(Optional<String> thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -346,7 +305,6 @@ public class Producer {
                 filter,
                 tag,
                 tagKey,
-                role,
                 thumb);
         }
     }

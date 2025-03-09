@@ -18,33 +18,33 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.Objects;
 /**
- * GetAllMediaLibraryOptimizedForStreaming - Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
+ * GetRecentlyAddedOptimizedForStreaming - Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
  */
 
-@JsonDeserialize(using = GetAllMediaLibraryOptimizedForStreaming._Deserializer.class)
-public class GetAllMediaLibraryOptimizedForStreaming {
+@JsonDeserialize(using = GetRecentlyAddedOptimizedForStreaming._Deserializer.class)
+public class GetRecentlyAddedOptimizedForStreaming {
 
     @JsonValue
     private TypedObject value;
     
-    private GetAllMediaLibraryOptimizedForStreaming(TypedObject value) {
+    private GetRecentlyAddedOptimizedForStreaming(TypedObject value) {
         this.value = value;
     }
 
-    public static GetAllMediaLibraryOptimizedForStreaming of(OptimizedForStreaming1 value) {
+    public static GetRecentlyAddedOptimizedForStreaming of(GetRecentlyAddedOptimizedForStreaming1 value) {
         Utils.checkNotNull(value, "value");
-        return new GetAllMediaLibraryOptimizedForStreaming(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<OptimizedForStreaming1>(){}));
+        return new GetRecentlyAddedOptimizedForStreaming(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<GetRecentlyAddedOptimizedForStreaming1>(){}));
     }
 
-    public static GetAllMediaLibraryOptimizedForStreaming of(boolean value) {
+    public static GetRecentlyAddedOptimizedForStreaming of(boolean value) {
         Utils.checkNotNull(value, "value");
-        return new GetAllMediaLibraryOptimizedForStreaming(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<java.lang.Boolean>(){}));
+        return new GetRecentlyAddedOptimizedForStreaming(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<java.lang.Boolean>(){}));
     }
     
     /**
      * Returns an instance of one of these types:
      * <ul>
-     * <li>{@code dev.plexapi.sdk.models.operations.OptimizedForStreaming1}</li>
+     * <li>{@code dev.plexapi.sdk.models.operations.GetRecentlyAddedOptimizedForStreaming1}</li>
      * <li>{@code boolean}</li>
      * </ul>
      * 
@@ -71,7 +71,7 @@ public class GetAllMediaLibraryOptimizedForStreaming {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        GetAllMediaLibraryOptimizedForStreaming other = (GetAllMediaLibraryOptimizedForStreaming) o;
+        GetRecentlyAddedOptimizedForStreaming other = (GetRecentlyAddedOptimizedForStreaming) o;
         return Objects.deepEquals(this.value.value(), other.value.value()); 
     }
     
@@ -81,18 +81,18 @@ public class GetAllMediaLibraryOptimizedForStreaming {
     }
     
     @SuppressWarnings("serial")
-    public static final class _Deserializer extends OneOfDeserializer<GetAllMediaLibraryOptimizedForStreaming> {
+    public static final class _Deserializer extends OneOfDeserializer<GetRecentlyAddedOptimizedForStreaming> {
 
         public _Deserializer() {
-            super(GetAllMediaLibraryOptimizedForStreaming.class, false,
+            super(GetRecentlyAddedOptimizedForStreaming.class, false,
                   TypeReferenceWithShape.of(new TypeReference<Boolean>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<OptimizedForStreaming1>() {}, JsonShape.DEFAULT));
+                  TypeReferenceWithShape.of(new TypeReference<GetRecentlyAddedOptimizedForStreaming1>() {}, JsonShape.DEFAULT));
         }
     }
     
     @Override
     public String toString() {
-        return Utils.toString(GetAllMediaLibraryOptimizedForStreaming.class,
+        return Utils.toString(GetRecentlyAddedOptimizedForStreaming.class,
                 "value", value);
     }
  

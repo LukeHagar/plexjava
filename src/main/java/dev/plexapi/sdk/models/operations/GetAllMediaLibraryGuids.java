@@ -15,23 +15,31 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
-public class GetOnDeckGuids {
+public class GetAllMediaLibraryGuids {
 
+    /**
+     * The unique identifier for the Guid. Can be imdb://tt0286347, tmdb://1763, tvdb://2337
+     * 
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("id")
     private Optional<String> id;
 
     @JsonCreator
-    public GetOnDeckGuids(
+    public GetAllMediaLibraryGuids(
             @JsonProperty("id") Optional<String> id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
     }
     
-    public GetOnDeckGuids() {
+    public GetAllMediaLibraryGuids() {
         this(Optional.empty());
     }
 
+    /**
+     * The unique identifier for the Guid. Can be imdb://tt0286347, tmdb://1763, tvdb://2337
+     * 
+     */
     @JsonIgnore
     public Optional<String> id() {
         return id;
@@ -41,13 +49,21 @@ public class GetOnDeckGuids {
         return new Builder();
     }
 
-    public GetOnDeckGuids withId(String id) {
+    /**
+     * The unique identifier for the Guid. Can be imdb://tt0286347, tmdb://1763, tvdb://2337
+     * 
+     */
+    public GetAllMediaLibraryGuids withId(String id) {
         Utils.checkNotNull(id, "id");
         this.id = Optional.ofNullable(id);
         return this;
     }
 
-    public GetOnDeckGuids withId(Optional<String> id) {
+    /**
+     * The unique identifier for the Guid. Can be imdb://tt0286347, tmdb://1763, tvdb://2337
+     * 
+     */
+    public GetAllMediaLibraryGuids withId(Optional<String> id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
@@ -61,7 +77,7 @@ public class GetOnDeckGuids {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        GetOnDeckGuids other = (GetOnDeckGuids) o;
+        GetAllMediaLibraryGuids other = (GetAllMediaLibraryGuids) o;
         return 
             Objects.deepEquals(this.id, other.id);
     }
@@ -74,7 +90,7 @@ public class GetOnDeckGuids {
     
     @Override
     public String toString() {
-        return Utils.toString(GetOnDeckGuids.class,
+        return Utils.toString(GetAllMediaLibraryGuids.class,
                 "id", id);
     }
     
@@ -86,20 +102,28 @@ public class GetOnDeckGuids {
           // force use of static builder() method
         }
 
+        /**
+         * The unique identifier for the Guid. Can be imdb://tt0286347, tmdb://1763, tvdb://2337
+         * 
+         */
         public Builder id(String id) {
             Utils.checkNotNull(id, "id");
             this.id = Optional.ofNullable(id);
             return this;
         }
 
+        /**
+         * The unique identifier for the Guid. Can be imdb://tt0286347, tmdb://1763, tvdb://2337
+         * 
+         */
         public Builder id(Optional<String> id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;
         }
         
-        public GetOnDeckGuids build() {
-            return new GetOnDeckGuids(
+        public GetAllMediaLibraryGuids build() {
+            return new GetAllMediaLibraryGuids(
                 id);
         }
     }

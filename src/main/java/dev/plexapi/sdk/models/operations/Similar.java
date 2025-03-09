@@ -12,24 +12,18 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
+/**
+ * Similar - The display tag for the similar item, typically the title.
+ */
 
 public class Similar {
 
-    /**
-     * The unique similar item identifier.
-     */
     @JsonProperty("id")
     private long id;
 
-    /**
-     * The filter string for similar items.
-     */
     @JsonProperty("filter")
     private String filter;
 
-    /**
-     * The tag or title of the similar content.
-     */
     @JsonProperty("tag")
     private String tag;
 
@@ -46,25 +40,16 @@ public class Similar {
         this.tag = tag;
     }
 
-    /**
-     * The unique similar item identifier.
-     */
     @JsonIgnore
     public long id() {
         return id;
     }
 
-    /**
-     * The filter string for similar items.
-     */
     @JsonIgnore
     public String filter() {
         return filter;
     }
 
-    /**
-     * The tag or title of the similar content.
-     */
     @JsonIgnore
     public String tag() {
         return tag;
@@ -74,27 +59,18 @@ public class Similar {
         return new Builder();
     }
 
-    /**
-     * The unique similar item identifier.
-     */
     public Similar withId(long id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
     }
 
-    /**
-     * The filter string for similar items.
-     */
     public Similar withFilter(String filter) {
         Utils.checkNotNull(filter, "filter");
         this.filter = filter;
         return this;
     }
 
-    /**
-     * The tag or title of the similar content.
-     */
     public Similar withTag(String tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = tag;
@@ -144,27 +120,18 @@ public class Similar {
           // force use of static builder() method
         }
 
-        /**
-         * The unique similar item identifier.
-         */
         public Builder id(long id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;
         }
 
-        /**
-         * The filter string for similar items.
-         */
         public Builder filter(String filter) {
             Utils.checkNotNull(filter, "filter");
             this.filter = filter;
             return this;
         }
 
-        /**
-         * The tag or title of the similar content.
-         */
         public Builder tag(String tag) {
             Utils.checkNotNull(tag, "tag");
             this.tag = tag;

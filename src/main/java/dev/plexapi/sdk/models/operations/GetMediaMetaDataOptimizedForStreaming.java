@@ -31,9 +31,9 @@ public class GetMediaMetaDataOptimizedForStreaming {
         this.value = value;
     }
 
-    public static GetMediaMetaDataOptimizedForStreaming of(OptimizedForStreaming1 value) {
+    public static GetMediaMetaDataOptimizedForStreaming of(GetMediaMetaDataOptimizedForStreaming1 value) {
         Utils.checkNotNull(value, "value");
-        return new GetMediaMetaDataOptimizedForStreaming(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<OptimizedForStreaming1>(){}));
+        return new GetMediaMetaDataOptimizedForStreaming(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<GetMediaMetaDataOptimizedForStreaming1>(){}));
     }
 
     public static GetMediaMetaDataOptimizedForStreaming of(boolean value) {
@@ -44,7 +44,7 @@ public class GetMediaMetaDataOptimizedForStreaming {
     /**
      * Returns an instance of one of these types:
      * <ul>
-     * <li>{@code dev.plexapi.sdk.models.operations.OptimizedForStreaming1}</li>
+     * <li>{@code dev.plexapi.sdk.models.operations.GetMediaMetaDataOptimizedForStreaming1}</li>
      * <li>{@code boolean}</li>
      * </ul>
      * 
@@ -86,7 +86,7 @@ public class GetMediaMetaDataOptimizedForStreaming {
         public _Deserializer() {
             super(GetMediaMetaDataOptimizedForStreaming.class, false,
                   TypeReferenceWithShape.of(new TypeReference<Boolean>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<OptimizedForStreaming1>() {}, JsonShape.DEFAULT));
+                  TypeReferenceWithShape.of(new TypeReference<GetMediaMetaDataOptimizedForStreaming1>() {}, JsonShape.DEFAULT));
         }
     }
     

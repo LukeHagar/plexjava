@@ -16,53 +16,52 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
-public class Role {
+public class GetMediaMetaDataProducer {
 
     /**
-     * Unique identifier for the actor or role.
+     * The unique role identifier.
      */
     @JsonProperty("id")
     private long id;
 
     /**
-     * The filter string used to query this actor. For example, it may indicate that this is an actor with a given key.
+     * The filter string for the role.
      */
     @JsonProperty("filter")
     private String filter;
 
     /**
-     * The display tag for the actor (typically the actor's name).
+     * The actor's name.
      */
     @JsonProperty("tag")
     private String tag;
 
     /**
-     * A unique key associated with the actor's tag, used for internal identification.
+     * A key associated with the actor tag.
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tagKey")
-    private Optional<String> tagKey;
+    private String tagKey;
 
     /**
-     * The role played by the actor in the media item.
+     * The character name or role.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("role")
     private Optional<String> role;
 
     /**
-     * The URL of the thumbnail image for the actor.
+     * URL for the role thumbnail image.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
     private Optional<String> thumb;
 
     @JsonCreator
-    public Role(
+    public GetMediaMetaDataProducer(
             @JsonProperty("id") long id,
             @JsonProperty("filter") String filter,
             @JsonProperty("tag") String tag,
-            @JsonProperty("tagKey") Optional<String> tagKey,
+            @JsonProperty("tagKey") String tagKey,
             @JsonProperty("role") Optional<String> role,
             @JsonProperty("thumb") Optional<String> thumb) {
         Utils.checkNotNull(id, "id");
@@ -79,15 +78,16 @@ public class Role {
         this.thumb = thumb;
     }
     
-    public Role(
+    public GetMediaMetaDataProducer(
             long id,
             String filter,
-            String tag) {
-        this(id, filter, tag, Optional.empty(), Optional.empty(), Optional.empty());
+            String tag,
+            String tagKey) {
+        this(id, filter, tag, tagKey, Optional.empty(), Optional.empty());
     }
 
     /**
-     * Unique identifier for the actor or role.
+     * The unique role identifier.
      */
     @JsonIgnore
     public long id() {
@@ -95,7 +95,7 @@ public class Role {
     }
 
     /**
-     * The filter string used to query this actor. For example, it may indicate that this is an actor with a given key.
+     * The filter string for the role.
      */
     @JsonIgnore
     public String filter() {
@@ -103,7 +103,7 @@ public class Role {
     }
 
     /**
-     * The display tag for the actor (typically the actor's name).
+     * The actor's name.
      */
     @JsonIgnore
     public String tag() {
@@ -111,15 +111,15 @@ public class Role {
     }
 
     /**
-     * A unique key associated with the actor's tag, used for internal identification.
+     * A key associated with the actor tag.
      */
     @JsonIgnore
-    public Optional<String> tagKey() {
+    public String tagKey() {
         return tagKey;
     }
 
     /**
-     * The role played by the actor in the media item.
+     * The character name or role.
      */
     @JsonIgnore
     public Optional<String> role() {
@@ -127,7 +127,7 @@ public class Role {
     }
 
     /**
-     * The URL of the thumbnail image for the actor.
+     * URL for the role thumbnail image.
      */
     @JsonIgnore
     public Optional<String> thumb() {
@@ -139,81 +139,72 @@ public class Role {
     }
 
     /**
-     * Unique identifier for the actor or role.
+     * The unique role identifier.
      */
-    public Role withId(long id) {
+    public GetMediaMetaDataProducer withId(long id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
     }
 
     /**
-     * The filter string used to query this actor. For example, it may indicate that this is an actor with a given key.
+     * The filter string for the role.
      */
-    public Role withFilter(String filter) {
+    public GetMediaMetaDataProducer withFilter(String filter) {
         Utils.checkNotNull(filter, "filter");
         this.filter = filter;
         return this;
     }
 
     /**
-     * The display tag for the actor (typically the actor's name).
+     * The actor's name.
      */
-    public Role withTag(String tag) {
+    public GetMediaMetaDataProducer withTag(String tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = tag;
         return this;
     }
 
     /**
-     * A unique key associated with the actor's tag, used for internal identification.
+     * A key associated with the actor tag.
      */
-    public Role withTagKey(String tagKey) {
-        Utils.checkNotNull(tagKey, "tagKey");
-        this.tagKey = Optional.ofNullable(tagKey);
-        return this;
-    }
-
-    /**
-     * A unique key associated with the actor's tag, used for internal identification.
-     */
-    public Role withTagKey(Optional<String> tagKey) {
+    public GetMediaMetaDataProducer withTagKey(String tagKey) {
         Utils.checkNotNull(tagKey, "tagKey");
         this.tagKey = tagKey;
         return this;
     }
 
     /**
-     * The role played by the actor in the media item.
+     * The character name or role.
      */
-    public Role withRole(String role) {
+    public GetMediaMetaDataProducer withRole(String role) {
         Utils.checkNotNull(role, "role");
         this.role = Optional.ofNullable(role);
         return this;
     }
 
     /**
-     * The role played by the actor in the media item.
+     * The character name or role.
      */
-    public Role withRole(Optional<String> role) {
+    public GetMediaMetaDataProducer withRole(Optional<String> role) {
         Utils.checkNotNull(role, "role");
         this.role = role;
         return this;
     }
 
     /**
-     * The URL of the thumbnail image for the actor.
+     * URL for the role thumbnail image.
      */
-    public Role withThumb(String thumb) {
+    public GetMediaMetaDataProducer withThumb(String thumb) {
         Utils.checkNotNull(thumb, "thumb");
         this.thumb = Optional.ofNullable(thumb);
         return this;
     }
 
     /**
-     * The URL of the thumbnail image for the actor.
+     * URL for the role thumbnail image.
      */
-    public Role withThumb(Optional<String> thumb) {
+    public GetMediaMetaDataProducer withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
         this.thumb = thumb;
         return this;
@@ -227,7 +218,7 @@ public class Role {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Role other = (Role) o;
+        GetMediaMetaDataProducer other = (GetMediaMetaDataProducer) o;
         return 
             Objects.deepEquals(this.id, other.id) &&
             Objects.deepEquals(this.filter, other.filter) &&
@@ -250,7 +241,7 @@ public class Role {
     
     @Override
     public String toString() {
-        return Utils.toString(Role.class,
+        return Utils.toString(GetMediaMetaDataProducer.class,
                 "id", id,
                 "filter", filter,
                 "tag", tag,
@@ -267,7 +258,7 @@ public class Role {
  
         private String tag;
  
-        private Optional<String> tagKey = Optional.empty();
+        private String tagKey;
  
         private Optional<String> role = Optional.empty();
  
@@ -278,7 +269,7 @@ public class Role {
         }
 
         /**
-         * Unique identifier for the actor or role.
+         * The unique role identifier.
          */
         public Builder id(long id) {
             Utils.checkNotNull(id, "id");
@@ -287,7 +278,7 @@ public class Role {
         }
 
         /**
-         * The filter string used to query this actor. For example, it may indicate that this is an actor with a given key.
+         * The filter string for the role.
          */
         public Builder filter(String filter) {
             Utils.checkNotNull(filter, "filter");
@@ -296,7 +287,7 @@ public class Role {
         }
 
         /**
-         * The display tag for the actor (typically the actor's name).
+         * The actor's name.
          */
         public Builder tag(String tag) {
             Utils.checkNotNull(tag, "tag");
@@ -305,25 +296,16 @@ public class Role {
         }
 
         /**
-         * A unique key associated with the actor's tag, used for internal identification.
+         * A key associated with the actor tag.
          */
         public Builder tagKey(String tagKey) {
-            Utils.checkNotNull(tagKey, "tagKey");
-            this.tagKey = Optional.ofNullable(tagKey);
-            return this;
-        }
-
-        /**
-         * A unique key associated with the actor's tag, used for internal identification.
-         */
-        public Builder tagKey(Optional<String> tagKey) {
             Utils.checkNotNull(tagKey, "tagKey");
             this.tagKey = tagKey;
             return this;
         }
 
         /**
-         * The role played by the actor in the media item.
+         * The character name or role.
          */
         public Builder role(String role) {
             Utils.checkNotNull(role, "role");
@@ -332,7 +314,7 @@ public class Role {
         }
 
         /**
-         * The role played by the actor in the media item.
+         * The character name or role.
          */
         public Builder role(Optional<String> role) {
             Utils.checkNotNull(role, "role");
@@ -341,7 +323,7 @@ public class Role {
         }
 
         /**
-         * The URL of the thumbnail image for the actor.
+         * URL for the role thumbnail image.
          */
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -350,7 +332,7 @@ public class Role {
         }
 
         /**
-         * The URL of the thumbnail image for the actor.
+         * URL for the role thumbnail image.
          */
         public Builder thumb(Optional<String> thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -358,8 +340,8 @@ public class Role {
             return this;
         }
         
-        public Role build() {
-            return new Role(
+        public GetMediaMetaDataProducer build() {
+            return new GetMediaMetaDataProducer(
                 id,
                 filter,
                 tag,

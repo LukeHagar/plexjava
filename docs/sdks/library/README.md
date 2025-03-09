@@ -24,7 +24,6 @@ API Calls interacting with Plex Media Server Libraries
 * [getMediaMetaData](#getmediametadata) - Get Media Metadata
 * [getMetadataChildren](#getmetadatachildren) - Get Items Children
 * [getTopWatchedContent](#gettopwatchedcontent) - Get Top Watched Content
-* [getOnDeck](#getondeck) - Get On Deck
 
 ## getFileHash
 
@@ -1029,49 +1028,3 @@ public class Application {
 | models/errors/GetTopWatchedContentBadRequest   | 400                                            | application/json                               |
 | models/errors/GetTopWatchedContentUnauthorized | 401                                            | application/json                               |
 | models/errors/SDKError                         | 4XX, 5XX                                       | \*/\*                                          |
-
-## getOnDeck
-
-This endpoint will return the on deck content.
-
-
-### Example Usage
-
-```java
-package hello.world;
-
-import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.GetOnDeckBadRequest;
-import dev.plexapi.sdk.models.errors.GetOnDeckUnauthorized;
-import dev.plexapi.sdk.models.operations.GetOnDeckResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws GetOnDeckBadRequest, GetOnDeckUnauthorized, Exception {
-
-        PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
-            .build();
-
-        GetOnDeckResponse res = sdk.library().getOnDeck()
-                .call();
-
-        if (res.object().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-### Response
-
-**[GetOnDeckResponse](../../models/operations/GetOnDeckResponse.md)**
-
-### Errors
-
-| Error Type                          | Status Code                         | Content Type                        |
-| ----------------------------------- | ----------------------------------- | ----------------------------------- |
-| models/errors/GetOnDeckBadRequest   | 400                                 | application/json                    |
-| models/errors/GetOnDeckUnauthorized | 401                                 | application/json                    |
-| models/errors/SDKError              | 4XX, 5XX                            | \*/\*                               |

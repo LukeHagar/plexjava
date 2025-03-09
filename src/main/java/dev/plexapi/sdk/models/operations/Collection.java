@@ -6,34 +6,32 @@
 package dev.plexapi.sdk.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
-import java.util.Optional;
 
 public class Collection {
 
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * The user-made collection this media item belongs to
+     */
     @JsonProperty("tag")
-    private Optional<String> tag;
+    private String tag;
 
     @JsonCreator
     public Collection(
-            @JsonProperty("tag") Optional<String> tag) {
+            @JsonProperty("tag") String tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = tag;
     }
-    
-    public Collection() {
-        this(Optional.empty());
-    }
 
+    /**
+     * The user-made collection this media item belongs to
+     */
     @JsonIgnore
-    public Optional<String> tag() {
+    public String tag() {
         return tag;
     }
 
@@ -41,13 +39,10 @@ public class Collection {
         return new Builder();
     }
 
+    /**
+     * The user-made collection this media item belongs to
+     */
     public Collection withTag(String tag) {
-        Utils.checkNotNull(tag, "tag");
-        this.tag = Optional.ofNullable(tag);
-        return this;
-    }
-
-    public Collection withTag(Optional<String> tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = tag;
         return this;
@@ -80,19 +75,16 @@ public class Collection {
     
     public final static class Builder {
  
-        private Optional<String> tag = Optional.empty();  
+        private String tag;  
         
         private Builder() {
           // force use of static builder() method
         }
 
+        /**
+         * The user-made collection this media item belongs to
+         */
         public Builder tag(String tag) {
-            Utils.checkNotNull(tag, "tag");
-            this.tag = Optional.ofNullable(tag);
-            return this;
-        }
-
-        public Builder tag(Optional<String> tag) {
             Utils.checkNotNull(tag, "tag");
             this.tag = tag;
             return this;

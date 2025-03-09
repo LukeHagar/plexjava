@@ -22,24 +22,35 @@ import java.util.Optional;
 
 public class GetRecentlyAddedMediaContainer {
 
+    /**
+     * Number of media items returned in this response.
+     */
     @JsonProperty("size")
-    private long size;
+    private int size;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("offset")
-    private Optional<Integer> offset;
-
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * Total number of media items in the library.
+     */
     @JsonProperty("totalSize")
-    private Optional<Integer> totalSize;
+    private int totalSize;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("identifier")
-    private Optional<String> identifier;
+    /**
+     * Offset value for pagination.
+     */
+    @JsonProperty("offset")
+    private long offset;
 
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * Indicates whether syncing is allowed.
+     */
     @JsonProperty("allowSync")
-    private Optional<Boolean> allowSync;
+    private boolean allowSync;
+
+    /**
+     * An plugin identifier for the media container.
+     */
+    @JsonProperty("identifier")
+    private String identifier;
 
     /**
      * The Meta object is only included in the response if the `includeMeta` parameter is set to `1`.
@@ -49,63 +60,85 @@ public class GetRecentlyAddedMediaContainer {
     @JsonProperty("Meta")
     private Optional<? extends Meta> meta;
 
+    /**
+     * An array of metadata items.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Metadata")
     private Optional<? extends List<GetRecentlyAddedMetadata>> metadata;
 
     @JsonCreator
     public GetRecentlyAddedMediaContainer(
-            @JsonProperty("size") long size,
-            @JsonProperty("offset") Optional<Integer> offset,
-            @JsonProperty("totalSize") Optional<Integer> totalSize,
-            @JsonProperty("identifier") Optional<String> identifier,
-            @JsonProperty("allowSync") Optional<Boolean> allowSync,
+            @JsonProperty("size") int size,
+            @JsonProperty("totalSize") int totalSize,
+            @JsonProperty("offset") long offset,
+            @JsonProperty("allowSync") boolean allowSync,
+            @JsonProperty("identifier") String identifier,
             @JsonProperty("Meta") Optional<? extends Meta> meta,
             @JsonProperty("Metadata") Optional<? extends List<GetRecentlyAddedMetadata>> metadata) {
         Utils.checkNotNull(size, "size");
-        Utils.checkNotNull(offset, "offset");
         Utils.checkNotNull(totalSize, "totalSize");
-        Utils.checkNotNull(identifier, "identifier");
+        Utils.checkNotNull(offset, "offset");
         Utils.checkNotNull(allowSync, "allowSync");
+        Utils.checkNotNull(identifier, "identifier");
         Utils.checkNotNull(meta, "meta");
         Utils.checkNotNull(metadata, "metadata");
         this.size = size;
-        this.offset = offset;
         this.totalSize = totalSize;
-        this.identifier = identifier;
+        this.offset = offset;
         this.allowSync = allowSync;
+        this.identifier = identifier;
         this.meta = meta;
         this.metadata = metadata;
     }
     
     public GetRecentlyAddedMediaContainer(
-            long size) {
-        this(size, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+            int size,
+            int totalSize,
+            long offset,
+            boolean allowSync,
+            String identifier) {
+        this(size, totalSize, offset, allowSync, identifier, Optional.empty(), Optional.empty());
     }
 
+    /**
+     * Number of media items returned in this response.
+     */
     @JsonIgnore
-    public long size() {
+    public int size() {
         return size;
     }
 
+    /**
+     * Total number of media items in the library.
+     */
     @JsonIgnore
-    public Optional<Integer> offset() {
-        return offset;
-    }
-
-    @JsonIgnore
-    public Optional<Integer> totalSize() {
+    public int totalSize() {
         return totalSize;
     }
 
+    /**
+     * Offset value for pagination.
+     */
     @JsonIgnore
-    public Optional<String> identifier() {
-        return identifier;
+    public long offset() {
+        return offset;
     }
 
+    /**
+     * Indicates whether syncing is allowed.
+     */
     @JsonIgnore
-    public Optional<Boolean> allowSync() {
+    public boolean allowSync() {
         return allowSync;
+    }
+
+    /**
+     * An plugin identifier for the media container.
+     */
+    @JsonIgnore
+    public String identifier() {
+        return identifier;
     }
 
     /**
@@ -118,6 +151,9 @@ public class GetRecentlyAddedMediaContainer {
         return (Optional<Meta>) meta;
     }
 
+    /**
+     * An array of metadata items.
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<List<GetRecentlyAddedMetadata>> metadata() {
@@ -128,57 +164,48 @@ public class GetRecentlyAddedMediaContainer {
         return new Builder();
     }
 
-    public GetRecentlyAddedMediaContainer withSize(long size) {
+    /**
+     * Number of media items returned in this response.
+     */
+    public GetRecentlyAddedMediaContainer withSize(int size) {
         Utils.checkNotNull(size, "size");
         this.size = size;
         return this;
     }
 
-    public GetRecentlyAddedMediaContainer withOffset(int offset) {
-        Utils.checkNotNull(offset, "offset");
-        this.offset = Optional.ofNullable(offset);
-        return this;
-    }
-
-    public GetRecentlyAddedMediaContainer withOffset(Optional<Integer> offset) {
-        Utils.checkNotNull(offset, "offset");
-        this.offset = offset;
-        return this;
-    }
-
+    /**
+     * Total number of media items in the library.
+     */
     public GetRecentlyAddedMediaContainer withTotalSize(int totalSize) {
-        Utils.checkNotNull(totalSize, "totalSize");
-        this.totalSize = Optional.ofNullable(totalSize);
-        return this;
-    }
-
-    public GetRecentlyAddedMediaContainer withTotalSize(Optional<Integer> totalSize) {
         Utils.checkNotNull(totalSize, "totalSize");
         this.totalSize = totalSize;
         return this;
     }
 
-    public GetRecentlyAddedMediaContainer withIdentifier(String identifier) {
-        Utils.checkNotNull(identifier, "identifier");
-        this.identifier = Optional.ofNullable(identifier);
+    /**
+     * Offset value for pagination.
+     */
+    public GetRecentlyAddedMediaContainer withOffset(long offset) {
+        Utils.checkNotNull(offset, "offset");
+        this.offset = offset;
         return this;
     }
 
-    public GetRecentlyAddedMediaContainer withIdentifier(Optional<String> identifier) {
-        Utils.checkNotNull(identifier, "identifier");
-        this.identifier = identifier;
-        return this;
-    }
-
+    /**
+     * Indicates whether syncing is allowed.
+     */
     public GetRecentlyAddedMediaContainer withAllowSync(boolean allowSync) {
         Utils.checkNotNull(allowSync, "allowSync");
-        this.allowSync = Optional.ofNullable(allowSync);
+        this.allowSync = allowSync;
         return this;
     }
 
-    public GetRecentlyAddedMediaContainer withAllowSync(Optional<Boolean> allowSync) {
-        Utils.checkNotNull(allowSync, "allowSync");
-        this.allowSync = allowSync;
+    /**
+     * An plugin identifier for the media container.
+     */
+    public GetRecentlyAddedMediaContainer withIdentifier(String identifier) {
+        Utils.checkNotNull(identifier, "identifier");
+        this.identifier = identifier;
         return this;
     }
 
@@ -202,12 +229,18 @@ public class GetRecentlyAddedMediaContainer {
         return this;
     }
 
+    /**
+     * An array of metadata items.
+     */
     public GetRecentlyAddedMediaContainer withMetadata(List<GetRecentlyAddedMetadata> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = Optional.ofNullable(metadata);
         return this;
     }
 
+    /**
+     * An array of metadata items.
+     */
     public GetRecentlyAddedMediaContainer withMetadata(Optional<? extends List<GetRecentlyAddedMetadata>> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
@@ -225,10 +258,10 @@ public class GetRecentlyAddedMediaContainer {
         GetRecentlyAddedMediaContainer other = (GetRecentlyAddedMediaContainer) o;
         return 
             Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.offset, other.offset) &&
             Objects.deepEquals(this.totalSize, other.totalSize) &&
-            Objects.deepEquals(this.identifier, other.identifier) &&
+            Objects.deepEquals(this.offset, other.offset) &&
             Objects.deepEquals(this.allowSync, other.allowSync) &&
+            Objects.deepEquals(this.identifier, other.identifier) &&
             Objects.deepEquals(this.meta, other.meta) &&
             Objects.deepEquals(this.metadata, other.metadata);
     }
@@ -237,10 +270,10 @@ public class GetRecentlyAddedMediaContainer {
     public int hashCode() {
         return Objects.hash(
             size,
-            offset,
             totalSize,
-            identifier,
+            offset,
             allowSync,
+            identifier,
             meta,
             metadata);
     }
@@ -249,25 +282,25 @@ public class GetRecentlyAddedMediaContainer {
     public String toString() {
         return Utils.toString(GetRecentlyAddedMediaContainer.class,
                 "size", size,
-                "offset", offset,
                 "totalSize", totalSize,
-                "identifier", identifier,
+                "offset", offset,
                 "allowSync", allowSync,
+                "identifier", identifier,
                 "meta", meta,
                 "metadata", metadata);
     }
     
     public final static class Builder {
  
-        private Long size;
+        private Integer size;
  
-        private Optional<Integer> offset = Optional.empty();
+        private Integer totalSize;
  
-        private Optional<Integer> totalSize = Optional.empty();
+        private Long offset;
  
-        private Optional<String> identifier = Optional.empty();
+        private Boolean allowSync;
  
-        private Optional<Boolean> allowSync = Optional.empty();
+        private String identifier;
  
         private Optional<? extends Meta> meta = Optional.empty();
  
@@ -277,57 +310,48 @@ public class GetRecentlyAddedMediaContainer {
           // force use of static builder() method
         }
 
-        public Builder size(long size) {
+        /**
+         * Number of media items returned in this response.
+         */
+        public Builder size(int size) {
             Utils.checkNotNull(size, "size");
             this.size = size;
             return this;
         }
 
-        public Builder offset(int offset) {
-            Utils.checkNotNull(offset, "offset");
-            this.offset = Optional.ofNullable(offset);
-            return this;
-        }
-
-        public Builder offset(Optional<Integer> offset) {
-            Utils.checkNotNull(offset, "offset");
-            this.offset = offset;
-            return this;
-        }
-
+        /**
+         * Total number of media items in the library.
+         */
         public Builder totalSize(int totalSize) {
-            Utils.checkNotNull(totalSize, "totalSize");
-            this.totalSize = Optional.ofNullable(totalSize);
-            return this;
-        }
-
-        public Builder totalSize(Optional<Integer> totalSize) {
             Utils.checkNotNull(totalSize, "totalSize");
             this.totalSize = totalSize;
             return this;
         }
 
-        public Builder identifier(String identifier) {
-            Utils.checkNotNull(identifier, "identifier");
-            this.identifier = Optional.ofNullable(identifier);
+        /**
+         * Offset value for pagination.
+         */
+        public Builder offset(long offset) {
+            Utils.checkNotNull(offset, "offset");
+            this.offset = offset;
             return this;
         }
 
-        public Builder identifier(Optional<String> identifier) {
-            Utils.checkNotNull(identifier, "identifier");
-            this.identifier = identifier;
-            return this;
-        }
-
+        /**
+         * Indicates whether syncing is allowed.
+         */
         public Builder allowSync(boolean allowSync) {
             Utils.checkNotNull(allowSync, "allowSync");
-            this.allowSync = Optional.ofNullable(allowSync);
+            this.allowSync = allowSync;
             return this;
         }
 
-        public Builder allowSync(Optional<Boolean> allowSync) {
-            Utils.checkNotNull(allowSync, "allowSync");
-            this.allowSync = allowSync;
+        /**
+         * An plugin identifier for the media container.
+         */
+        public Builder identifier(String identifier) {
+            Utils.checkNotNull(identifier, "identifier");
+            this.identifier = identifier;
             return this;
         }
 
@@ -351,12 +375,18 @@ public class GetRecentlyAddedMediaContainer {
             return this;
         }
 
+        /**
+         * An array of metadata items.
+         */
         public Builder metadata(List<GetRecentlyAddedMetadata> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = Optional.ofNullable(metadata);
             return this;
         }
 
+        /**
+         * An array of metadata items.
+         */
         public Builder metadata(Optional<? extends List<GetRecentlyAddedMetadata>> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = metadata;
@@ -366,10 +396,10 @@ public class GetRecentlyAddedMediaContainer {
         public GetRecentlyAddedMediaContainer build() {
             return new GetRecentlyAddedMediaContainer(
                 size,
-                offset,
                 totalSize,
-                identifier,
+                offset,
                 allowSync,
+                identifier,
                 meta,
                 metadata);
         }

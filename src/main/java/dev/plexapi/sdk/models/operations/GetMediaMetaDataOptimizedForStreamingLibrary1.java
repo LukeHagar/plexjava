@@ -5,29 +5,25 @@
 
 package dev.plexapi.sdk.models.operations;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
-/**
- * HasThumbnail - Indicates if the part has a thumbnail.
- */
-public enum HasThumbnail {
-    False("0"),
-    True("1");
+public enum GetMediaMetaDataOptimizedForStreamingLibrary1 {
+    ZERO(0),
+    ONE(1);
 
     @JsonValue
-    private final String value;
+    private final int value;
 
-    private HasThumbnail(String value) {
+    private GetMediaMetaDataOptimizedForStreamingLibrary1(int value) {
         this.value = value;
     }
     
-    public String value() {
+    public int value() {
         return value;
     }
     
-    public static Optional<HasThumbnail> fromValue(String value) {
-        for (HasThumbnail o: HasThumbnail.values()) {
+    public static Optional<GetMediaMetaDataOptimizedForStreamingLibrary1> fromValue(int value) {
+        for (GetMediaMetaDataOptimizedForStreamingLibrary1 o: GetMediaMetaDataOptimizedForStreamingLibrary1.values()) {
             if (Objects.deepEquals(o.value, value)) {
                 return Optional.of(o);
             }
