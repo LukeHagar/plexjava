@@ -7,7 +7,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getServerCapabilities
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -37,7 +37,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getServerPreferences
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -67,7 +67,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: updatePlayProgress
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -87,7 +87,7 @@ actions:
 
                     UpdatePlayProgressResponse res = sdk.media().updatePlayProgress()
                             .key("<key>")
-                            .time(90000d)
+                            .time(90000)
                             .state("played")
                             .call();
 
@@ -98,7 +98,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: markPlayed
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -117,7 +117,7 @@ actions:
                         .build();
 
                     MarkPlayedResponse res = sdk.media().markPlayed()
-                            .key(59398d)
+                            .key(59398)
                             .call();
 
                     // handle response
@@ -127,16 +127,14 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getTimeline
+          label: PlexJava
           source: |-
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.GetTimelineBadRequest;
             import dev.plexapi.plexapi.models.errors.GetTimelineUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetTimelineRequest;
-            import dev.plexapi.plexapi.models.operations.GetTimelineResponse;
-            import dev.plexapi.plexapi.models.operations.State;
+            import dev.plexapi.plexapi.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -148,16 +146,16 @@ actions:
                         .build();
 
                     GetTimelineRequest req = GetTimelineRequest.builder()
-                            .ratingKey(23409d)
+                            .ratingKey(23409)
                             .key("/library/metadata/23409")
                             .state(State.PLAYING)
-                            .hasMDE(1d)
-                            .time(2000d)
-                            .duration(10000d)
+                            .hasMDE(1)
+                            .time(2000)
+                            .duration(10000)
                             .context("home:hub.continueWatching")
-                            .playQueueItemID(1d)
-                            .playBackTime(2000d)
-                            .row(1d)
+                            .playQueueItemID(1)
+                            .playBackTime(2000)
+                            .row(1)
                             .build();
 
                     GetTimelineResponse res = sdk.video().getTimeline()
@@ -171,7 +169,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: markUnplayed
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -190,7 +188,7 @@ actions:
                         .build();
 
                     MarkUnplayedResponse res = sdk.media().markUnplayed()
-                            .key(59398d)
+                            .key(59398)
                             .call();
 
                     // handle response
@@ -200,7 +198,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getServerActivities
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -230,7 +228,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: cancelServerActivities
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -259,7 +257,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: stopAllTasks
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -287,7 +285,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getButlerTasks
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -317,7 +315,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: startAllTasks
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -345,7 +343,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: stopTask
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -375,7 +373,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: startTask
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -405,7 +403,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getAvailableClients
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -435,7 +433,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getCompanionsData
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -465,7 +463,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getDevices
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -495,7 +493,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getUserFriends
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -525,7 +523,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getGeoData
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -554,7 +552,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getHomeData
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -584,7 +582,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getGlobalHubs
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -604,7 +602,7 @@ actions:
                         .build();
 
                     GetGlobalHubsResponse res = sdk.hubs().getGlobalHubs()
-                            .count(1262.49d)
+                            .count(1262.49)
                             .onlyTransient(OnlyTransient.ONE)
                             .call();
 
@@ -617,14 +615,12 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: get-recently-added
+          label: PlexJava
           source: |-
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.operations.GetRecentlyAddedRequest;
-            import dev.plexapi.plexapi.models.operations.GetRecentlyAddedResponse;
-            import dev.plexapi.plexapi.models.operations.Type;
+            import dev.plexapi.plexapi.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -654,7 +650,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: performSearch
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -674,8 +670,8 @@ actions:
 
                     PerformSearchResponse res = sdk.search().performSearch()
                             .query("dylan")
-                            .sectionId(9487.88d)
-                            .limit(5d)
+                            .sectionId(9487.88)
+                            .limit(5)
                             .call();
 
                     // handle response
@@ -685,7 +681,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: performVoiceSearch
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -705,8 +701,8 @@ actions:
 
                     PerformVoiceSearchResponse res = sdk.search().performVoiceSearch()
                             .query("dead+poop")
-                            .sectionId(4094.8d)
-                            .limit(5d)
+                            .sectionId(4094.8)
+                            .limit(5)
                             .call();
 
                     // handle response
@@ -716,7 +712,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getLibraryHubs
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -736,8 +732,8 @@ actions:
                         .build();
 
                     GetLibraryHubsResponse res = sdk.hubs().getLibraryHubs()
-                            .sectionId(6728.76d)
-                            .count(6728.76d)
+                            .sectionId(6728.76)
+                            .count(6728.76)
                             .onlyTransient(QueryParamOnlyTransient.ZERO)
                             .call();
 
@@ -750,7 +746,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: get-server-identity
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -778,7 +774,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getTopWatchedContent
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -811,7 +807,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getFileHash
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -831,7 +827,7 @@ actions:
 
                     GetFileHashResponse res = sdk.library().getFileHash()
                             .url("file://C:\Image.png&type=13")
-                            .type(4462.17d)
+                            .type(4462.17)
                             .call();
 
                     // handle response
@@ -841,7 +837,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: get-media-meta-data
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -890,7 +886,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: get-banner-image
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -931,7 +927,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getMetadataChildren
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -950,7 +946,7 @@ actions:
                         .build();
 
                     GetMetadataChildrenResponse res = sdk.library().getMetadataChildren()
-                            .ratingKey(1539.14d)
+                            .ratingKey(1539.14)
                             .includeElements("Stream")
                             .call();
 
@@ -963,7 +959,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: get-thumb-image
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1004,16 +1000,14 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: get-recently-added-library
+          label: PlexJava
           source: |-
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.GetRecentlyAddedLibraryBadRequest;
             import dev.plexapi.plexapi.models.errors.GetRecentlyAddedLibraryUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetRecentlyAddedLibraryRequest;
-            import dev.plexapi.plexapi.models.operations.GetRecentlyAddedLibraryResponse;
-            import dev.plexapi.plexapi.models.operations.QueryParamType;
+            import dev.plexapi.plexapi.models.operations.*;
             import java.lang.Exception;
             import java.util.List;
 
@@ -1057,16 +1051,14 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: get-search-all-libraries
+          label: PlexJava
           source: |-
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.GetSearchAllLibrariesBadRequest;
             import dev.plexapi.plexapi.models.errors.GetSearchAllLibrariesUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetSearchAllLibrariesRequest;
-            import dev.plexapi.plexapi.models.operations.GetSearchAllLibrariesResponse;
-            import dev.plexapi.plexapi.models.operations.SearchTypes;
+            import dev.plexapi.plexapi.models.operations.*;
             import java.lang.Exception;
             import java.util.List;
 
@@ -1098,7 +1090,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: get-all-libraries
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1128,16 +1120,14 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: get-watch-list
+          label: PlexJava
           source: |-
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.GetWatchListBadRequest;
             import dev.plexapi.plexapi.models.errors.GetWatchListUnauthorized;
-            import dev.plexapi.plexapi.models.operations.Filter;
-            import dev.plexapi.plexapi.models.operations.GetWatchListRequest;
-            import dev.plexapi.plexapi.models.operations.GetWatchListResponse;
+            import dev.plexapi.plexapi.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -1166,7 +1156,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: deleteLibrary
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1195,7 +1185,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: get-library-details
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1228,7 +1218,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: get-actors-library
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1261,16 +1251,14 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: get-all-media-library
+          label: PlexJava
           source: |-
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.GetAllMediaLibraryBadRequest;
             import dev.plexapi.plexapi.models.errors.GetAllMediaLibraryUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetAllMediaLibraryQueryParamType;
-            import dev.plexapi.plexapi.models.operations.GetAllMediaLibraryRequest;
-            import dev.plexapi.plexapi.models.operations.GetAllMediaLibraryResponse;
+            import dev.plexapi.plexapi.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -1299,7 +1287,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: get-countries-library
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1332,7 +1320,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: get-genres-library
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1365,7 +1353,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: get-refresh-library-metadata
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1396,7 +1384,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: get-search-library
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1429,17 +1417,14 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: get-library-items
+          label: PlexJava
           source: |-
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.GetLibraryItemsBadRequest;
             import dev.plexapi.plexapi.models.errors.GetLibraryItemsUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetLibraryItemsQueryParamType;
-            import dev.plexapi.plexapi.models.operations.GetLibraryItemsRequest;
-            import dev.plexapi.plexapi.models.operations.GetLibraryItemsResponse;
-            import dev.plexapi.plexapi.models.operations.Tag;
+            import dev.plexapi.plexapi.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -1469,7 +1454,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: logLine
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1501,7 +1486,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: logMultiLine
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1533,7 +1518,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: enablePaperTrail
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1561,7 +1546,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: get-media-providers
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1592,7 +1577,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getMyPlexAccount
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1622,17 +1607,14 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getResizedPhoto
+          label: PlexJava
           source: |-
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.GetResizedPhotoBadRequest;
             import dev.plexapi.plexapi.models.errors.GetResizedPhotoUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetResizedPhotoRequest;
-            import dev.plexapi.plexapi.models.operations.GetResizedPhotoResponse;
-            import dev.plexapi.plexapi.models.operations.MinSize;
-            import dev.plexapi.plexapi.models.operations.Upscale;
+            import dev.plexapi.plexapi.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -1644,10 +1626,10 @@ actions:
                         .build();
 
                     GetResizedPhotoRequest req = GetResizedPhotoRequest.builder()
-                            .width(110d)
-                            .height(165d)
+                            .width(110)
+                            .height(165)
                             .opacity(100L)
-                            .blur(0d)
+                            .blur(0)
                             .minSize(MinSize.ONE)
                             .upscale(Upscale.ONE)
                             .url("/library/metadata/49564/thumb/1654258204")
@@ -1664,7 +1646,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getPin
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1702,7 +1684,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getTokenByPinId
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1742,16 +1724,14 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getPlaylists
+          label: PlexJava
           source: |-
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.GetPlaylistsBadRequest;
             import dev.plexapi.plexapi.models.errors.GetPlaylistsUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetPlaylistsResponse;
-            import dev.plexapi.plexapi.models.operations.PlaylistType;
-            import dev.plexapi.plexapi.models.operations.QueryParamSmart;
+            import dev.plexapi.plexapi.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -1776,17 +1756,14 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: createPlaylist
+          label: PlexJava
           source: |-
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.CreatePlaylistBadRequest;
             import dev.plexapi.plexapi.models.errors.CreatePlaylistUnauthorized;
-            import dev.plexapi.plexapi.models.operations.CreatePlaylistQueryParamType;
-            import dev.plexapi.plexapi.models.operations.CreatePlaylistRequest;
-            import dev.plexapi.plexapi.models.operations.CreatePlaylistResponse;
-            import dev.plexapi.plexapi.models.operations.Smart;
+            import dev.plexapi.plexapi.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -1817,7 +1794,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: uploadPlaylist
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1849,7 +1826,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: deletePlaylist
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1868,7 +1845,7 @@ actions:
                         .build();
 
                     DeletePlaylistResponse res = sdk.playlists().deletePlaylist()
-                            .playlistID(216.22d)
+                            .playlistID(216.22)
                             .call();
 
                     // handle response
@@ -1878,7 +1855,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getPlaylist
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1897,7 +1874,7 @@ actions:
                         .build();
 
                     GetPlaylistResponse res = sdk.playlists().getPlaylist()
-                            .playlistID(4109.48d)
+                            .playlistID(4109.48)
                             .call();
 
                     if (res.object().isPresent()) {
@@ -1909,7 +1886,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: updatePlaylist
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1928,7 +1905,7 @@ actions:
                         .build();
 
                     UpdatePlaylistResponse res = sdk.playlists().updatePlaylist()
-                            .playlistID(3915d)
+                            .playlistID(3915)
                             .title("<value>")
                             .summary("<value>")
                             .call();
@@ -1940,7 +1917,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: clearPlaylistContents
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1959,7 +1936,7 @@ actions:
                         .build();
 
                     ClearPlaylistContentsResponse res = sdk.playlists().clearPlaylistContents()
-                            .playlistID(1893.18d)
+                            .playlistID(1893.18)
                             .call();
 
                     // handle response
@@ -1969,7 +1946,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getPlaylistContents
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -1989,7 +1966,7 @@ actions:
                         .build();
 
                     GetPlaylistContentsResponse res = sdk.playlists().getPlaylistContents()
-                            .playlistID(5004.46d)
+                            .playlistID(5004.46)
                             .type(GetPlaylistContentsQueryParamType.TvShow)
                             .call();
 
@@ -2002,7 +1979,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: addPlaylistContents
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -2021,9 +1998,9 @@ actions:
                         .build();
 
                     AddPlaylistContentsResponse res = sdk.playlists().addPlaylistContents()
-                            .playlistID(8502.01d)
+                            .playlistID(8502.01)
                             .uri("server://12345/com.plexapp.plugins.library/library/metadata/1")
-                            .playQueueID(123d)
+                            .playQueueID(123)
                             .call();
 
                     if (res.object().isPresent()) {
@@ -2035,17 +2012,14 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: get-server-resources
+          label: PlexJava
           source: |-
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.GetServerResourcesBadRequest;
             import dev.plexapi.plexapi.models.errors.GetServerResourcesUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetServerResourcesResponse;
-            import dev.plexapi.plexapi.models.operations.IncludeHttps;
-            import dev.plexapi.plexapi.models.operations.IncludeIPv6;
-            import dev.plexapi.plexapi.models.operations.IncludeRelay;
+            import dev.plexapi.plexapi.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -2072,7 +2046,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getSearchResults
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -2103,7 +2077,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getSourceConnectionInformation
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -2132,16 +2106,14 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getTransientToken
+          label: PlexJava
           source: |-
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.GetTransientTokenBadRequest;
             import dev.plexapi.plexapi.models.errors.GetTransientTokenUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetTransientTokenQueryParamType;
-            import dev.plexapi.plexapi.models.operations.GetTransientTokenResponse;
-            import dev.plexapi.plexapi.models.operations.Scope;
+            import dev.plexapi.plexapi.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -2164,7 +2136,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getServerList
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -2194,7 +2166,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getBandwidthStatistics
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -2225,7 +2197,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getStatistics
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -2256,7 +2228,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getResourcesStatistics
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -2287,7 +2259,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getSessions
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -2317,7 +2289,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getSessionHistory
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -2353,7 +2325,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getTranscodeSessions
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -2383,7 +2355,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: stopTranscodeSession
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -2412,16 +2384,14 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: applyUpdates
+          label: PlexJava
           source: |-
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.ApplyUpdatesBadRequest;
             import dev.plexapi.plexapi.models.errors.ApplyUpdatesUnauthorized;
-            import dev.plexapi.plexapi.models.operations.ApplyUpdatesResponse;
-            import dev.plexapi.plexapi.models.operations.Skip;
-            import dev.plexapi.plexapi.models.operations.Tonight;
+            import dev.plexapi.plexapi.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -2444,7 +2414,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: checkForUpdates
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -2474,7 +2444,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getUpdateStatus
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -2504,7 +2474,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: getTokenDetails
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -2534,7 +2504,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: get-users
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -2581,16 +2551,14 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: post-users-sign-in-data
+          label: PlexJava
           source: |-
             package hello.world;
 
             import dev.plexapi.plexapi.PlexAPI;
             import dev.plexapi.plexapi.models.errors.PostUsersSignInDataBadRequest;
             import dev.plexapi.plexapi.models.errors.PostUsersSignInDataUnauthorized;
-            import dev.plexapi.plexapi.models.operations.PostUsersSignInDataRequest;
-            import dev.plexapi.plexapi.models.operations.PostUsersSignInDataRequestBody;
-            import dev.plexapi.plexapi.models.operations.PostUsersSignInDataResponse;
+            import dev.plexapi.plexapi.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -2626,7 +2594,7 @@ actions:
     update:
       x-codeSamples:
         - lang: java
-          label: startUniversalTranscode
+          label: PlexJava
           source: |-
             package hello.world;
 
@@ -2646,22 +2614,22 @@ actions:
                         .build();
 
                     StartUniversalTranscodeRequest req = StartUniversalTranscodeRequest.builder()
-                            .hasMDE(1d)
+                            .hasMDE(1)
                             .path("/library/metadata/23409")
-                            .mediaIndex(0d)
-                            .partIndex(0d)
+                            .mediaIndex(0)
+                            .partIndex(0)
                             .protocol("hls")
-                            .fastSeek(0d)
-                            .directPlay(0d)
-                            .directStream(0d)
-                            .subtitleSize(100d)
+                            .fastSeek(0)
+                            .directPlay(0)
+                            .directStream(0)
+                            .subtitleSize(100)
                             .subtites("burn")
-                            .audioBoost(100d)
+                            .audioBoost(100)
                             .location("lan")
-                            .mediaBufferSize(102400d)
+                            .mediaBufferSize(102400)
                             .session("zvcage8b7rkioqcm8f4uns4c")
-                            .addDebugOverlay(0d)
-                            .autoAdjustQuality(0d)
+                            .addDebugOverlay(0)
+                            .autoAdjustQuality(0)
                             .build();
 
                     StartUniversalTranscodeResponse res = sdk.video().startUniversalTranscode()

@@ -69,7 +69,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'dev.plexapi:plexapi:0.13.1'
+implementation 'dev.plexapi:plexapi:0.14.0'
 ```
 
 Maven:
@@ -77,7 +77,7 @@ Maven:
 <dependency>
     <groupId>dev.plexapi</groupId>
     <artifactId>plexapi</artifactId>
-    <version>0.13.1</version>
+    <version>0.14.0</version>
 </dependency>
 ```
 
@@ -332,6 +332,7 @@ The default server `{protocol}://{ip}:{port}` contains variables and is set to `
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.SDK.Builder.ServerProtocol;
 import dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest;
 import dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized;
 import dev.plexapi.sdk.models.operations.GetServerCapabilitiesResponse;
@@ -342,7 +343,7 @@ public class Application {
     public static void main(String[] args) throws GetServerCapabilitiesBadRequest, GetServerCapabilitiesUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .protocol("https")
+                .protocol(ServerProtocol.HTTPS)
                 .ip("e0c3:bcc0:6bac:dccc:c4ec:34b1:ca98:4cb9")
                 .port("40311")
                 .accessToken("<YOUR_API_KEY_HERE>")

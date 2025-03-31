@@ -37,7 +37,7 @@ public class Application {
             .build();
 
         GetGlobalHubsResponse res = sdk.hubs().getGlobalHubs()
-                .count(1262.49d)
+                .count(1262.49)
                 .onlyTransient(OnlyTransient.ONE)
                 .call();
 
@@ -78,9 +78,7 @@ This endpoint will return the recently added content.
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.operations.GetRecentlyAddedRequest;
-import dev.plexapi.sdk.models.operations.GetRecentlyAddedResponse;
-import dev.plexapi.sdk.models.operations.Type;
+import dev.plexapi.sdk.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -150,8 +148,8 @@ public class Application {
             .build();
 
         GetLibraryHubsResponse res = sdk.hubs().getLibraryHubs()
-                .sectionId(6728.76d)
-                .count(6728.76d)
+                .sectionId(6728.76)
+                .count(6728.76)
                 .onlyTransient(QueryParamOnlyTransient.ZERO)
                 .call();
 

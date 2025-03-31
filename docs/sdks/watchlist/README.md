@@ -22,9 +22,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.GetWatchListBadRequest;
 import dev.plexapi.sdk.models.errors.GetWatchListUnauthorized;
-import dev.plexapi.sdk.models.operations.Filter;
-import dev.plexapi.sdk.models.operations.GetWatchListRequest;
-import dev.plexapi.sdk.models.operations.GetWatchListResponse;
+import dev.plexapi.sdk.models.operations.*;
 import java.lang.Exception;
 
 public class Application {

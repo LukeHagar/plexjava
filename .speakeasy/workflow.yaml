@@ -15,8 +15,8 @@ targets:
                 gpgSecretKey: $java_gpg_secret_key
                 gpgPassPhrase: $java_gpg_passphrase
         codeSamples:
-            labelOverride: 
-                fixedValue: PlexJava
             output: codeSamples.yaml
             registry:
                 location: registry.speakeasyapi.dev/plexapi/plexapi/code-samples-java-plexjava
+            labelOverride:
+                fixedValue: PlexJava

@@ -23,9 +23,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.GetTimelineBadRequest;
 import dev.plexapi.sdk.models.errors.GetTimelineUnauthorized;
-import dev.plexapi.sdk.models.operations.GetTimelineRequest;
-import dev.plexapi.sdk.models.operations.GetTimelineResponse;
-import dev.plexapi.sdk.models.operations.State;
+import dev.plexapi.sdk.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -37,16 +35,16 @@ public class Application {
             .build();
 
         GetTimelineRequest req = GetTimelineRequest.builder()
-                .ratingKey(23409d)
+                .ratingKey(23409)
                 .key("/library/metadata/23409")
                 .state(State.PLAYING)
-                .hasMDE(1d)
-                .time(2000d)
-                .duration(10000d)
+                .hasMDE(1)
+                .time(2000)
+                .duration(10000)
                 .context("home:hub.continueWatching")
-                .playQueueItemID(1d)
-                .playBackTime(2000d)
-                .row(1d)
+                .playQueueItemID(1)
+                .playBackTime(2000)
+                .row(1)
                 .build();
 
         GetTimelineResponse res = sdk.video().getTimeline()
@@ -101,22 +99,22 @@ public class Application {
             .build();
 
         StartUniversalTranscodeRequest req = StartUniversalTranscodeRequest.builder()
-                .hasMDE(1d)
+                .hasMDE(1)
                 .path("/library/metadata/23409")
-                .mediaIndex(0d)
-                .partIndex(0d)
+                .mediaIndex(0)
+                .partIndex(0)
                 .protocol("hls")
-                .fastSeek(0d)
-                .directPlay(0d)
-                .directStream(0d)
-                .subtitleSize(100d)
+                .fastSeek(0)
+                .directPlay(0)
+                .directStream(0)
+                .subtitleSize(100)
                 .subtites("burn")
-                .audioBoost(100d)
+                .audioBoost(100)
                 .location("lan")
-                .mediaBufferSize(102400d)
+                .mediaBufferSize(102400)
                 .session("zvcage8b7rkioqcm8f4uns4c")
-                .addDebugOverlay(0d)
-                .autoAdjustQuality(0d)
+                .addDebugOverlay(0)
+                .autoAdjustQuality(0)
                 .build();
 
         StartUniversalTranscodeResponse res = sdk.video().startUniversalTranscode()

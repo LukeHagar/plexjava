@@ -225,10 +225,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.GetServerResourcesBadRequest;
 import dev.plexapi.sdk.models.errors.GetServerResourcesUnauthorized;
-import dev.plexapi.sdk.models.operations.GetServerResourcesResponse;
-import dev.plexapi.sdk.models.operations.IncludeHttps;
-import dev.plexapi.sdk.models.operations.IncludeIPv6;
-import dev.plexapi.sdk.models.operations.IncludeRelay;
+import dev.plexapi.sdk.models.operations.*;
 import java.lang.Exception;
 
 public class Application {

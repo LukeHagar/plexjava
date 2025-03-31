@@ -50,7 +50,7 @@ public class Application {
 
         GetFileHashResponse res = sdk.library().getFileHash()
                 .url("file://C:\Image.png&type=13")
-                .type(4462.17d)
+                .type(4462.17)
                 .call();
 
         // handle response
@@ -90,9 +90,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.GetRecentlyAddedLibraryBadRequest;
 import dev.plexapi.sdk.models.errors.GetRecentlyAddedLibraryUnauthorized;
-import dev.plexapi.sdk.models.operations.GetRecentlyAddedLibraryRequest;
-import dev.plexapi.sdk.models.operations.GetRecentlyAddedLibraryResponse;
-import dev.plexapi.sdk.models.operations.QueryParamType;
+import dev.plexapi.sdk.models.operations.*;
 import java.lang.Exception;
 import java.util.List;
 
@@ -380,10 +378,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.GetLibraryItemsBadRequest;
 import dev.plexapi.sdk.models.errors.GetLibraryItemsUnauthorized;
-import dev.plexapi.sdk.models.operations.GetLibraryItemsQueryParamType;
-import dev.plexapi.sdk.models.operations.GetLibraryItemsRequest;
-import dev.plexapi.sdk.models.operations.GetLibraryItemsResponse;
-import dev.plexapi.sdk.models.operations.Tag;
+import dev.plexapi.sdk.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -442,9 +437,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.GetAllMediaLibraryBadRequest;
 import dev.plexapi.sdk.models.errors.GetAllMediaLibraryUnauthorized;
-import dev.plexapi.sdk.models.operations.GetAllMediaLibraryQueryParamType;
-import dev.plexapi.sdk.models.operations.GetAllMediaLibraryRequest;
-import dev.plexapi.sdk.models.operations.GetAllMediaLibraryResponse;
+import dev.plexapi.sdk.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -797,9 +790,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.GetSearchAllLibrariesBadRequest;
 import dev.plexapi.sdk.models.errors.GetSearchAllLibrariesUnauthorized;
-import dev.plexapi.sdk.models.operations.GetSearchAllLibrariesRequest;
-import dev.plexapi.sdk.models.operations.GetSearchAllLibrariesResponse;
-import dev.plexapi.sdk.models.operations.SearchTypes;
+import dev.plexapi.sdk.models.operations.*;
 import java.lang.Exception;
 import java.util.List;
 
@@ -943,7 +934,7 @@ public class Application {
             .build();
 
         GetMetadataChildrenResponse res = sdk.library().getMetadataChildren()
-                .ratingKey(1539.14d)
+                .ratingKey(1539.14)
                 .includeElements("Stream")
                 .call();
 

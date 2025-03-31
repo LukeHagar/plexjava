@@ -39,9 +39,12 @@ model {
     }
 }
 
+version = "${version}"
+group = "${groupId}"
+
 jar {
     dependsOn(":generatePomFileForMavenPublication")
-    archiveBaseName = "plexapi"
+    archiveBaseName = "${artifactId}"
 
     into("META-INF/maven/dev.plexapi/plexapi") {
         from("$buildDir/pom.xml")
@@ -62,15 +65,12 @@ tasks.withType(Javadoc) {
   options.addStringOption('Xdoclint:none', '-quiet')
 }
 
-group = "dev.plexapi"
-version = "0.13.1"
-
 sourcesJar {
-    archiveBaseName = "plexapi"
+    archiveBaseName = "${artifactId}"
 }
 
 javadocJar {
-    archiveBaseName = "plexapi"
+    archiveBaseName = "${artifactId}"
 }
 sonatypeCentralUpload {
     // This is your Sonatype generated username
@@ -80,9 +80,9 @@ sonatypeCentralUpload {
 
     // This is a list of files to upload. Ideally you would point to your jar file, source and javadoc jar (required by central)
     archives = files(
-      "$buildDir/libs/plexapi-${version}.jar",
-      "$buildDir/libs/plexapi-${version}-sources.jar",
-      "$buildDir/libs/plexapi-${version}-javadoc.jar"
+      "$buildDir/libs/${artifactId}-${version}.jar",
+      "$buildDir/libs/${artifactId}-${version}-sources.jar",
+      "$buildDir/libs/${artifactId}-${version}-javadoc.jar"
     )
 
     // This is the pom file to upload. This is required by central
@@ -99,9 +99,11 @@ publishing {
 
     publications {
         maven(MavenPublication) {
-            groupId = 'dev.plexapi'
-            artifactId = 'plexapi'
-            version = '0.13.1'
+            // note that properties can't yet be used below!
+            // https://github.com/gradle/gradle/issues/18619
+            groupId = "dev.plexapi"
+            artifactId = "plexapi"
+            version = "0.14.0"
 
             from components.java
 

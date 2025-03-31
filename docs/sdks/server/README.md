@@ -298,10 +298,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.GetResizedPhotoBadRequest;
 import dev.plexapi.sdk.models.errors.GetResizedPhotoUnauthorized;
-import dev.plexapi.sdk.models.operations.GetResizedPhotoRequest;
-import dev.plexapi.sdk.models.operations.GetResizedPhotoResponse;
-import dev.plexapi.sdk.models.operations.MinSize;
-import dev.plexapi.sdk.models.operations.Upscale;
+import dev.plexapi.sdk.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -313,10 +310,10 @@ public class Application {
             .build();
 
         GetResizedPhotoRequest req = GetResizedPhotoRequest.builder()
-                .width(110d)
-                .height(165d)
+                .width(110)
+                .height(165)
                 .opacity(100L)
-                .blur(0d)
+                .blur(0)
                 .minSize(MinSize.ONE)
                 .upscale(Upscale.ONE)
                 .url("/library/metadata/49564/thumb/1654258204")

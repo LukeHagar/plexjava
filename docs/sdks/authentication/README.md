@@ -26,9 +26,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.GetTransientTokenBadRequest;
 import dev.plexapi.sdk.models.errors.GetTransientTokenUnauthorized;
-import dev.plexapi.sdk.models.operations.GetTransientTokenQueryParamType;
-import dev.plexapi.sdk.models.operations.GetTransientTokenResponse;
-import dev.plexapi.sdk.models.operations.Scope;
+import dev.plexapi.sdk.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -183,9 +181,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.PostUsersSignInDataBadRequest;
 import dev.plexapi.sdk.models.errors.PostUsersSignInDataUnauthorized;
-import dev.plexapi.sdk.models.operations.PostUsersSignInDataRequest;
-import dev.plexapi.sdk.models.operations.PostUsersSignInDataRequestBody;
-import dev.plexapi.sdk.models.operations.PostUsersSignInDataResponse;
+import dev.plexapi.sdk.models.operations.*;
 import java.lang.Exception;
 
 public class Application {

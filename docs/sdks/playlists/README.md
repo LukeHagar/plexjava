@@ -36,10 +36,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.CreatePlaylistBadRequest;
 import dev.plexapi.sdk.models.errors.CreatePlaylistUnauthorized;
-import dev.plexapi.sdk.models.operations.CreatePlaylistQueryParamType;
-import dev.plexapi.sdk.models.operations.CreatePlaylistRequest;
-import dev.plexapi.sdk.models.operations.CreatePlaylistResponse;
-import dev.plexapi.sdk.models.operations.Smart;
+import dev.plexapi.sdk.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -98,9 +95,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.GetPlaylistsBadRequest;
 import dev.plexapi.sdk.models.errors.GetPlaylistsUnauthorized;
-import dev.plexapi.sdk.models.operations.GetPlaylistsResponse;
-import dev.plexapi.sdk.models.operations.PlaylistType;
-import dev.plexapi.sdk.models.operations.QueryParamSmart;
+import dev.plexapi.sdk.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -168,7 +163,7 @@ public class Application {
             .build();
 
         GetPlaylistResponse res = sdk.playlists().getPlaylist()
-                .playlistID(4109.48d)
+                .playlistID(4109.48)
                 .call();
 
         if (res.object().isPresent()) {
@@ -221,7 +216,7 @@ public class Application {
             .build();
 
         DeletePlaylistResponse res = sdk.playlists().deletePlaylist()
-                .playlistID(216.22d)
+                .playlistID(216.22)
                 .call();
 
         // handle response
@@ -272,7 +267,7 @@ public class Application {
             .build();
 
         UpdatePlaylistResponse res = sdk.playlists().updatePlaylist()
-                .playlistID(3915d)
+                .playlistID(3915)
                 .title("<value>")
                 .summary("<value>")
                 .call();
@@ -331,7 +326,7 @@ public class Application {
             .build();
 
         GetPlaylistContentsResponse res = sdk.playlists().getPlaylistContents()
-                .playlistID(5004.46d)
+                .playlistID(5004.46)
                 .type(GetPlaylistContentsQueryParamType.TvShow)
                 .call();
 
@@ -386,7 +381,7 @@ public class Application {
             .build();
 
         ClearPlaylistContentsResponse res = sdk.playlists().clearPlaylistContents()
-                .playlistID(1893.18d)
+                .playlistID(1893.18)
                 .call();
 
         // handle response
@@ -438,9 +433,9 @@ public class Application {
             .build();
 
         AddPlaylistContentsResponse res = sdk.playlists().addPlaylistContents()
-                .playlistID(8502.01d)
+                .playlistID(8502.01)
                 .uri("server://12345/com.plexapp.plugins.library/library/metadata/1")
-                .playQueueID(123d)
+                .playQueueID(123)
                 .call();
 
         if (res.object().isPresent()) {

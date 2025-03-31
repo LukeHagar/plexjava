@@ -122,9 +122,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.ApplyUpdatesBadRequest;
 import dev.plexapi.sdk.models.errors.ApplyUpdatesUnauthorized;
-import dev.plexapi.sdk.models.operations.ApplyUpdatesResponse;
-import dev.plexapi.sdk.models.operations.Skip;
-import dev.plexapi.sdk.models.operations.Tonight;
+import dev.plexapi.sdk.models.operations.*;
 import java.lang.Exception;
 
 public class Application {

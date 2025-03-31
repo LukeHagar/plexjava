@@ -38,7 +38,7 @@ public class Application {
             .build();
 
         MarkPlayedResponse res = sdk.media().markPlayed()
-                .key(59398d)
+                .key(59398)
                 .call();
 
         // handle response
@@ -88,7 +88,7 @@ public class Application {
             .build();
 
         MarkUnplayedResponse res = sdk.media().markUnplayed()
-                .key(59398d)
+                .key(59398)
                 .call();
 
         // handle response
@@ -140,7 +140,7 @@ public class Application {
 
         UpdatePlayProgressResponse res = sdk.media().updatePlayProgress()
                 .key("<key>")
-                .time(90000d)
+                .time(90000)
                 .state("played")
                 .call();
 
