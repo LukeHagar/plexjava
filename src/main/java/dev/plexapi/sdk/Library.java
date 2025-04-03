@@ -74,10 +74,18 @@ import dev.plexapi.sdk.models.operations.GetLibraryItemsRequest;
 import dev.plexapi.sdk.models.operations.GetLibraryItemsRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetLibraryItemsResponse;
 import dev.plexapi.sdk.models.operations.GetLibraryItemsResponseBody;
+import dev.plexapi.sdk.models.operations.GetMediaArtsRequest;
+import dev.plexapi.sdk.models.operations.GetMediaArtsRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetMediaArtsResponse;
+import dev.plexapi.sdk.models.operations.GetMediaArtsResponseBody;
 import dev.plexapi.sdk.models.operations.GetMediaMetaDataRequest;
 import dev.plexapi.sdk.models.operations.GetMediaMetaDataRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetMediaMetaDataResponse;
 import dev.plexapi.sdk.models.operations.GetMediaMetaDataResponseBody;
+import dev.plexapi.sdk.models.operations.GetMediaPostersRequest;
+import dev.plexapi.sdk.models.operations.GetMediaPostersRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetMediaPostersResponse;
+import dev.plexapi.sdk.models.operations.GetMediaPostersResponseBody;
 import dev.plexapi.sdk.models.operations.GetMetadataChildrenRequest;
 import dev.plexapi.sdk.models.operations.GetMetadataChildrenRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetMetadataChildrenResponse;
@@ -104,24 +112,31 @@ import dev.plexapi.sdk.models.operations.GetTopWatchedContentRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetTopWatchedContentResponse;
 import dev.plexapi.sdk.models.operations.GetTopWatchedContentResponseBody;
 import dev.plexapi.sdk.models.operations.IncludeDetails;
+import dev.plexapi.sdk.models.operations.PostMediaArtsRequest;
+import dev.plexapi.sdk.models.operations.PostMediaArtsRequestBuilder;
+import dev.plexapi.sdk.models.operations.PostMediaArtsResponse;
+import dev.plexapi.sdk.models.operations.PostMediaPosterRequest;
+import dev.plexapi.sdk.models.operations.PostMediaPosterRequestBuilder;
+import dev.plexapi.sdk.models.operations.PostMediaPosterResponse;
 import dev.plexapi.sdk.models.operations.SDKMethodInterfaces.*;
 import dev.plexapi.sdk.utils.HTTPClient;
 import dev.plexapi.sdk.utils.HTTPRequest;
 import dev.plexapi.sdk.utils.Hook.AfterErrorContextImpl;
 import dev.plexapi.sdk.utils.Hook.AfterSuccessContextImpl;
 import dev.plexapi.sdk.utils.Hook.BeforeRequestContextImpl;
+import dev.plexapi.sdk.utils.SerializedBody;
+import dev.plexapi.sdk.utils.Utils.JsonShape;
 import dev.plexapi.sdk.utils.Utils;
 import java.io.InputStream;
 import java.lang.Double;
 import java.lang.Exception;
 import java.lang.Long;
+import java.lang.Object;
 import java.lang.String;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
-
- 
 
 /**
  * API Calls interacting with Plex Media Server Libraries
@@ -141,6 +156,10 @@ public class Library implements
             MethodCallGetActorsLibrary,
             MethodCallGetSearchAllLibraries,
             MethodCallGetMediaMetaData,
+            MethodCallGetMediaArts,
+            MethodCallPostMediaArts,
+            MethodCallGetMediaPosters,
+            MethodCallPostMediaPoster,
             MethodCallGetMetadataChildren,
             MethodCallGetTopWatchedContent {
 
@@ -2834,6 +2853,618 @@ public class Library implements
                     "Unexpected content-type received: " + _contentType, 
                     Utils.extractByteArrayFromBody(_httpRes));
             }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.extractByteArrayFromBody(_httpRes));
+    }
+
+
+
+    /**
+     * Get Media Background Artwork
+     * 
+     * <p>Returns the background artwork for a library item.
+     * 
+     * @return The call builder
+     */
+    public GetMediaArtsRequestBuilder getMediaArts() {
+        return new GetMediaArtsRequestBuilder(this);
+    }
+
+    /**
+     * Get Media Background Artwork
+     * 
+     * <p>Returns the background artwork for a library item.
+     * 
+     * @param ratingKey the id of the library item to return the artwork of.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetMediaArtsResponse getMediaArts(
+            long ratingKey) throws Exception {
+        GetMediaArtsRequest request =
+            GetMediaArtsRequest
+                .builder()
+                .ratingKey(ratingKey)
+                .build();
+        
+        String _baseUrl = Utils.templateUrl(
+                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+        String _url = Utils.generateURL(
+                GetMediaArtsRequest.class,
+                _baseUrl,
+                "/library/metadata/{ratingKey}/arts",
+                request, null);
+        
+        HTTPRequest _req = new HTTPRequest(_url, "GET");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                SDKConfiguration.USER_AGENT);
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      _baseUrl,
+                      "get-media-arts", 
+                      Optional.of(List.of()), 
+                      _hookSecuritySource),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            _baseUrl,
+                            "get-media-arts",
+                            Optional.of(List.of()),
+                            _hookSecuritySource),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            _baseUrl,
+                            "get-media-arts",
+                            Optional.of(List.of()), 
+                            _hookSecuritySource),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            _baseUrl,
+                            "get-media-arts",
+                            Optional.of(List.of()),
+                            _hookSecuritySource), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
+            .headers()
+            .firstValue("Content-Type")
+            .orElse("application/octet-stream");
+        GetMediaArtsResponse.Builder _resBuilder = 
+            GetMediaArtsResponse
+                .builder()
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
+
+        GetMediaArtsResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetMediaArtsResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetMediaArtsResponseBody>() {});
+                _res.withObject(Optional.ofNullable(_out));
+                return _res;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.extractByteArrayFromBody(_httpRes));
+    }
+
+
+
+    /**
+     * Upload Media Background Artwork
+     * 
+     * <p>Uploads an image to use as the background artwork for a library item, either from a local file or a remote URL
+     * 
+     * @return The call builder
+     */
+    public PostMediaArtsRequestBuilder postMediaArts() {
+        return new PostMediaArtsRequestBuilder(this);
+    }
+
+    /**
+     * Upload Media Background Artwork
+     * 
+     * <p>Uploads an image to use as the background artwork for a library item, either from a local file or a remote URL
+     * 
+     * @param ratingKey the id of the library item to return the posters of.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public PostMediaArtsResponse postMediaArts(
+            long ratingKey) throws Exception {
+        return postMediaArts(ratingKey, Optional.empty(), Optional.empty());
+    }
+    
+    /**
+     * Upload Media Background Artwork
+     * 
+     * <p>Uploads an image to use as the background artwork for a library item, either from a local file or a remote URL
+     * 
+     * @param ratingKey the id of the library item to return the posters of.
+     * @param url The URL of the image, if uploading a remote image
+     * @param requestBody The contents of the image, if uploading a local file
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public PostMediaArtsResponse postMediaArts(
+            long ratingKey,
+            Optional<String> url,
+            Optional<byte[]> requestBody) throws Exception {
+        PostMediaArtsRequest request =
+            PostMediaArtsRequest
+                .builder()
+                .ratingKey(ratingKey)
+                .url(url)
+                .requestBody(requestBody)
+                .build();
+        
+        String _baseUrl = Utils.templateUrl(
+                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+        String _url = Utils.generateURL(
+                PostMediaArtsRequest.class,
+                _baseUrl,
+                "/library/metadata/{ratingKey}/arts",
+                request, null);
+        
+        HTTPRequest _req = new HTTPRequest(_url, "POST");
+        Object _convertedRequest = Utils.convertToShape(
+                request, 
+                JsonShape.DEFAULT,
+                new TypeReference<Object>() {});
+        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
+                _convertedRequest, 
+                "requestBody",
+                "raw",
+                false);
+        _req.setBody(Optional.ofNullable(_serializedRequestBody));
+        _req.addHeader("Accept", "*/*")
+            .addHeader("user-agent", 
+                SDKConfiguration.USER_AGENT);
+
+        _req.addQueryParams(Utils.getQueryParams(
+                PostMediaArtsRequest.class,
+                request, 
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      _baseUrl,
+                      "post-media-arts", 
+                      Optional.of(List.of()), 
+                      _hookSecuritySource),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            _baseUrl,
+                            "post-media-arts",
+                            Optional.of(List.of()),
+                            _hookSecuritySource),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            _baseUrl,
+                            "post-media-arts",
+                            Optional.of(List.of()), 
+                            _hookSecuritySource),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            _baseUrl,
+                            "post-media-arts",
+                            Optional.of(List.of()),
+                            _hookSecuritySource), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
+            .headers()
+            .firstValue("Content-Type")
+            .orElse("application/octet-stream");
+        PostMediaArtsResponse.Builder _resBuilder = 
+            PostMediaArtsResponse
+                .builder()
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
+
+        PostMediaArtsResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            // no content 
+            return _res;
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.extractByteArrayFromBody(_httpRes));
+    }
+
+
+
+    /**
+     * Get Media Posters
+     * 
+     * <p>Returns the available posters for a library item.
+     * 
+     * @return The call builder
+     */
+    public GetMediaPostersRequestBuilder getMediaPosters() {
+        return new GetMediaPostersRequestBuilder(this);
+    }
+
+    /**
+     * Get Media Posters
+     * 
+     * <p>Returns the available posters for a library item.
+     * 
+     * @param ratingKey the id of the library item to return the posters of.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetMediaPostersResponse getMediaPosters(
+            long ratingKey) throws Exception {
+        GetMediaPostersRequest request =
+            GetMediaPostersRequest
+                .builder()
+                .ratingKey(ratingKey)
+                .build();
+        
+        String _baseUrl = Utils.templateUrl(
+                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+        String _url = Utils.generateURL(
+                GetMediaPostersRequest.class,
+                _baseUrl,
+                "/library/metadata/{ratingKey}/posters",
+                request, null);
+        
+        HTTPRequest _req = new HTTPRequest(_url, "GET");
+        _req.addHeader("Accept", "application/json")
+            .addHeader("user-agent", 
+                SDKConfiguration.USER_AGENT);
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      _baseUrl,
+                      "get-media-posters", 
+                      Optional.of(List.of()), 
+                      _hookSecuritySource),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            _baseUrl,
+                            "get-media-posters",
+                            Optional.of(List.of()),
+                            _hookSecuritySource),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            _baseUrl,
+                            "get-media-posters",
+                            Optional.of(List.of()), 
+                            _hookSecuritySource),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            _baseUrl,
+                            "get-media-posters",
+                            Optional.of(List.of()),
+                            _hookSecuritySource), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
+            .headers()
+            .firstValue("Content-Type")
+            .orElse("application/octet-stream");
+        GetMediaPostersResponse.Builder _resBuilder = 
+            GetMediaPostersResponse
+                .builder()
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
+
+        GetMediaPostersResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            if (Utils.contentTypeMatches(_contentType, "application/json")) {
+                GetMediaPostersResponseBody _out = Utils.mapper().readValue(
+                    Utils.toUtf8AndClose(_httpRes.body()),
+                    new TypeReference<GetMediaPostersResponseBody>() {});
+                _res.withObject(Optional.ofNullable(_out));
+                return _res;
+            } else {
+                throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "Unexpected content-type received: " + _contentType, 
+                    Utils.extractByteArrayFromBody(_httpRes));
+            }
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
+            // no content 
+            throw new SDKError(
+                    _httpRes, 
+                    _httpRes.statusCode(), 
+                    "API error occurred", 
+                    Utils.extractByteArrayFromBody(_httpRes));
+        }
+        throw new SDKError(
+            _httpRes, 
+            _httpRes.statusCode(), 
+            "Unexpected status code received: " + _httpRes.statusCode(), 
+            Utils.extractByteArrayFromBody(_httpRes));
+    }
+
+
+
+    /**
+     * Upload Media Poster
+     * 
+     * <p>Uploads a poster to a library item, either from a local file or a remote URL
+     * 
+     * @return The call builder
+     */
+    public PostMediaPosterRequestBuilder postMediaPoster() {
+        return new PostMediaPosterRequestBuilder(this);
+    }
+
+    /**
+     * Upload Media Poster
+     * 
+     * <p>Uploads a poster to a library item, either from a local file or a remote URL
+     * 
+     * @param ratingKey the id of the library item to return the posters of.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public PostMediaPosterResponse postMediaPoster(
+            long ratingKey) throws Exception {
+        return postMediaPoster(ratingKey, Optional.empty(), Optional.empty());
+    }
+    
+    /**
+     * Upload Media Poster
+     * 
+     * <p>Uploads a poster to a library item, either from a local file or a remote URL
+     * 
+     * @param ratingKey the id of the library item to return the posters of.
+     * @param url The URL of the image, if uploading a remote image
+     * @param requestBody The contents of the image, if uploading a local file
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public PostMediaPosterResponse postMediaPoster(
+            long ratingKey,
+            Optional<String> url,
+            Optional<byte[]> requestBody) throws Exception {
+        PostMediaPosterRequest request =
+            PostMediaPosterRequest
+                .builder()
+                .ratingKey(ratingKey)
+                .url(url)
+                .requestBody(requestBody)
+                .build();
+        
+        String _baseUrl = Utils.templateUrl(
+                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+        String _url = Utils.generateURL(
+                PostMediaPosterRequest.class,
+                _baseUrl,
+                "/library/metadata/{ratingKey}/posters",
+                request, null);
+        
+        HTTPRequest _req = new HTTPRequest(_url, "POST");
+        Object _convertedRequest = Utils.convertToShape(
+                request, 
+                JsonShape.DEFAULT,
+                new TypeReference<Object>() {});
+        SerializedBody _serializedRequestBody = Utils.serializeRequestBody(
+                _convertedRequest, 
+                "requestBody",
+                "raw",
+                false);
+        _req.setBody(Optional.ofNullable(_serializedRequestBody));
+        _req.addHeader("Accept", "*/*")
+            .addHeader("user-agent", 
+                SDKConfiguration.USER_AGENT);
+
+        _req.addQueryParams(Utils.getQueryParams(
+                PostMediaPosterRequest.class,
+                request, 
+                null));
+        
+        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Utils.configureSecurity(_req,  
+                this.sdkConfiguration.securitySource.getSecurity());
+        HTTPClient _client = this.sdkConfiguration.defaultClient;
+        HttpRequest _r = 
+            sdkConfiguration.hooks()
+               .beforeRequest(
+                  new BeforeRequestContextImpl(
+                      _baseUrl,
+                      "post-media-poster", 
+                      Optional.of(List.of()), 
+                      _hookSecuritySource),
+                  _req.build());
+        HttpResponse<InputStream> _httpRes;
+        try {
+            _httpRes = _client.send(_r);
+            if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX", "5XX")) {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            _baseUrl,
+                            "post-media-poster",
+                            Optional.of(List.of()),
+                            _hookSecuritySource),
+                        Optional.of(_httpRes),
+                        Optional.empty());
+            } else {
+                _httpRes = sdkConfiguration.hooks()
+                    .afterSuccess(
+                        new AfterSuccessContextImpl(
+                            _baseUrl,
+                            "post-media-poster",
+                            Optional.of(List.of()), 
+                            _hookSecuritySource),
+                         _httpRes);
+            }
+        } catch (Exception _e) {
+            _httpRes = sdkConfiguration.hooks()
+                    .afterError(
+                        new AfterErrorContextImpl(
+                            _baseUrl,
+                            "post-media-poster",
+                            Optional.of(List.of()),
+                            _hookSecuritySource), 
+                        Optional.empty(),
+                        Optional.of(_e));
+        }
+        String _contentType = _httpRes
+            .headers()
+            .firstValue("Content-Type")
+            .orElse("application/octet-stream");
+        PostMediaPosterResponse.Builder _resBuilder = 
+            PostMediaPosterResponse
+                .builder()
+                .contentType(_contentType)
+                .statusCode(_httpRes.statusCode())
+                .rawResponse(_httpRes);
+
+        PostMediaPosterResponse _res = _resBuilder.build();
+        
+        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
+            // no content 
+            return _res;
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "404", "4XX")) {
             // no content 

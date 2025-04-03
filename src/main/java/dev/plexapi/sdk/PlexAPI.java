@@ -14,8 +14,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-
-
 /**
  * Plex-API: An Open API Spec for interacting with Plex.tv and Plex Media Server
  * 

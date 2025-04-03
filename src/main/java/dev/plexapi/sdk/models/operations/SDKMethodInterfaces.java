@@ -270,6 +270,30 @@ public class SDKMethodInterfaces {
             GetMediaMetaDataRequest request) throws Exception;
     }
 
+    public interface MethodCallGetMediaArts {
+        GetMediaArtsResponse getMediaArts(
+            long ratingKey) throws Exception;
+    }
+
+    public interface MethodCallPostMediaArts {
+        PostMediaArtsResponse postMediaArts(
+            long ratingKey,
+            Optional<String> url,
+            Optional<byte[]> requestBody) throws Exception;
+    }
+
+    public interface MethodCallGetMediaPosters {
+        GetMediaPostersResponse getMediaPosters(
+            long ratingKey) throws Exception;
+    }
+
+    public interface MethodCallPostMediaPoster {
+        PostMediaPosterResponse postMediaPoster(
+            long ratingKey,
+            Optional<String> url,
+            Optional<byte[]> requestBody) throws Exception;
+    }
+
     public interface MethodCallGetMetadataChildren {
         GetMetadataChildrenResponse getMetadataChildren(
             double ratingKey,

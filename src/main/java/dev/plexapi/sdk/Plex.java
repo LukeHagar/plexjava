@@ -61,8 +61,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
- 
-
 /**
  * API Calls that perform operations directly against https://Plex.tv
  */

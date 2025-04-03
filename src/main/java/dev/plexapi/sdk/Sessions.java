@@ -43,8 +43,6 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
- 
-
 /**
  * API Calls that perform search operations with Plex Media Server Sessions
  */

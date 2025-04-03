@@ -30,8 +30,6 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
- 
-
 /**
  * Activities are awesome. They provide a way to monitor and control asynchronous operations on the server. In order to receive real-time updates for activities, a client would normally subscribe via either EventSource or Websocket endpoints.
  * Activities are associated with HTTP replies via a special `X-Plex-Activity` header which contains the UUID of the activity.

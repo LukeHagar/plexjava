@@ -39,8 +39,6 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
- 
-
 /**
  * Hubs are a structured two-dimensional container for media, generally represented by multiple horizontal rows.
  */

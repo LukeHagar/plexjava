@@ -38,8 +38,6 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
- 
-
 /**
  * This describes the API for searching and applying updates to the Plex Media Server.
  * Updates to the status can be observed via the Event API.

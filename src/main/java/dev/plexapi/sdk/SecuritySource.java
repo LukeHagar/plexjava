@@ -5,8 +5,6 @@ package dev.plexapi.sdk;
 
 import dev.plexapi.sdk.utils.HasSecurity;
 
-
-
 public interface SecuritySource {
 
     HasSecurity getSecurity();

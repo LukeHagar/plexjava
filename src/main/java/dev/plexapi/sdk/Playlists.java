@@ -75,8 +75,6 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
- 
-
 /**
  * Playlists are ordered collections of media. They can be dumb (just a list of media) or smart (based on a media query, such as "all albums from 2017"). 
  * They can be organized in (optionally nesting) folders.

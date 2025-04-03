@@ -45,8 +45,6 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
- 
-
 /**
  * API Calls interacting with Plex Media Server Media
  */

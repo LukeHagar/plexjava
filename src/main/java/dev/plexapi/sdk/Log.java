@@ -37,8 +37,6 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
- 
-
 /**
  * Submit logs to the Log Handler for Plex Media Server
  */

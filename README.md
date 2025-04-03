@@ -69,7 +69,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'dev.plexapi:plexapi:0.14.0'
+implementation 'dev.plexapi:plexapi:0.14.1'
 ```
 
 Maven:
@@ -77,7 +77,7 @@ Maven:
 <dependency>
     <groupId>dev.plexapi</groupId>
     <artifactId>plexapi</artifactId>
-    <version>0.14.0</version>
+    <version>0.14.1</version>
 </dependency>
 ```
 
@@ -177,6 +177,10 @@ public class Application {
 * [getActorsLibrary](docs/sdks/library/README.md#getactorslibrary) - Get Actors of library media
 * [getSearchAllLibraries](docs/sdks/library/README.md#getsearchalllibraries) - Search All Libraries
 * [getMediaMetaData](docs/sdks/library/README.md#getmediametadata) - Get Media Metadata
+* [getMediaArts](docs/sdks/library/README.md#getmediaarts) - Get Media Background Artwork
+* [postMediaArts](docs/sdks/library/README.md#postmediaarts) - Upload Media Background Artwork
+* [getMediaPosters](docs/sdks/library/README.md#getmediaposters) - Get Media Posters
+* [postMediaPoster](docs/sdks/library/README.md#postmediaposter) - Upload Media Poster
 * [getMetadataChildren](docs/sdks/library/README.md#getmetadatachildren) - Get Items Children
 * [getTopWatchedContent](docs/sdks/library/README.md#gettopwatchedcontent) - Get Top Watched Content
 

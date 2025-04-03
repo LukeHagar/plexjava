@@ -45,8 +45,6 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
- 
-
 /**
  * Butler is the task manager of the Plex Media Server Ecosystem.
  */

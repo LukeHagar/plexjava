@@ -65,8 +65,6 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
- 
-
 /**
  * Operations against the Plex Media Server System.
  */

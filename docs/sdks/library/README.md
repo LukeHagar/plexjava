@@ -22,6 +22,10 @@ API Calls interacting with Plex Media Server Libraries
 * [getActorsLibrary](#getactorslibrary) - Get Actors of library media
 * [getSearchAllLibraries](#getsearchalllibraries) - Search All Libraries
 * [getMediaMetaData](#getmediametadata) - Get Media Metadata
+* [getMediaArts](#getmediaarts) - Get Media Background Artwork
+* [postMediaArts](#postmediaarts) - Upload Media Background Artwork
+* [getMediaPosters](#getmediaposters) - Get Media Posters
+* [postMediaPoster](#postmediaposter) - Upload Media Poster
 * [getMetadataChildren](#getmetadatachildren) - Get Items Children
 * [getTopWatchedContent](#gettopwatchedcontent) - Get Top Watched Content
 
@@ -908,6 +912,204 @@ public class Application {
 | models/errors/GetMediaMetaDataBadRequest   | 400                                        | application/json                           |
 | models/errors/GetMediaMetaDataUnauthorized | 401                                        | application/json                           |
 | models/errors/SDKError                     | 4XX, 5XX                                   | \*/\*                                      |
+
+## getMediaArts
+
+Returns the background artwork for a library item.
+
+### Example Usage
+
+```java
+package hello.world;
+
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.operations.GetMediaArtsResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
+                .accessToken("<YOUR_API_KEY_HERE>")
+            .build();
+
+        GetMediaArtsResponse res = sdk.library().getMediaArts()
+                .ratingKey(16099L)
+                .call();
+
+        if (res.object().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                            | Type                                                 | Required                                             | Description                                          | Example                                              |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| `ratingKey`                                          | *long*                                               | :heavy_check_mark:                                   | the id of the library item to return the artwork of. | 16099                                                |
+
+### Response
+
+**[GetMediaArtsResponse](../../models/operations/GetMediaArtsResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## postMediaArts
+
+Uploads an image to use as the background artwork for a library item, either from a local file or a remote URL
+
+### Example Usage
+
+```java
+package hello.world;
+
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.operations.PostMediaArtsResponse;
+import java.lang.Exception;
+import java.nio.charset.StandardCharsets;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
+                .accessToken("<YOUR_API_KEY_HERE>")
+            .build();
+
+        PostMediaArtsResponse res = sdk.library().postMediaArts()
+                .ratingKey(2268L)
+                .url("https://api.mediux.pro/assets/fcfdc487-dd07-4993-a0c1-0a3015362e5b")
+                .requestBody("0xee51EFC6De".getBytes(StandardCharsets.UTF_8))
+                .call();
+
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                          | Type                                                               | Required                                                           | Description                                                        | Example                                                            |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `ratingKey`                                                        | *long*                                                             | :heavy_check_mark:                                                 | the id of the library item to return the posters of.               | 2268                                                               |
+| `url`                                                              | *Optional\<String>*                                                | :heavy_minus_sign:                                                 | The URL of the image, if uploading a remote image                  | https://api.mediux.pro/assets/fcfdc487-dd07-4993-a0c1-0a3015362e5b |
+| `requestBody`                                                      | *Optional\<byte[]>*                                                | :heavy_minus_sign:                                                 | The contents of the image, if uploading a local file               |                                                                    |
+
+### Response
+
+**[PostMediaArtsResponse](../../models/operations/PostMediaArtsResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## getMediaPosters
+
+Returns the available posters for a library item.
+
+### Example Usage
+
+```java
+package hello.world;
+
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.operations.GetMediaPostersResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
+                .accessToken("<YOUR_API_KEY_HERE>")
+            .build();
+
+        GetMediaPostersResponse res = sdk.library().getMediaPosters()
+                .ratingKey(16099L)
+                .call();
+
+        if (res.object().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                            | Type                                                 | Required                                             | Description                                          | Example                                              |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| `ratingKey`                                          | *long*                                               | :heavy_check_mark:                                   | the id of the library item to return the posters of. | 16099                                                |
+
+### Response
+
+**[GetMediaPostersResponse](../../models/operations/GetMediaPostersResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## postMediaPoster
+
+Uploads a poster to a library item, either from a local file or a remote URL
+
+### Example Usage
+
+```java
+package hello.world;
+
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.operations.PostMediaPosterResponse;
+import java.lang.Exception;
+import java.nio.charset.StandardCharsets;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
+                .accessToken("<YOUR_API_KEY_HERE>")
+            .build();
+
+        PostMediaPosterResponse res = sdk.library().postMediaPoster()
+                .ratingKey(2268L)
+                .url("https://api.mediux.pro/assets/fcfdc487-dd07-4993-a0c1-0a3015362e5b")
+                .requestBody("0x7C3d45ad4B".getBytes(StandardCharsets.UTF_8))
+                .call();
+
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                          | Type                                                               | Required                                                           | Description                                                        | Example                                                            |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `ratingKey`                                                        | *long*                                                             | :heavy_check_mark:                                                 | the id of the library item to return the posters of.               | 2268                                                               |
+| `url`                                                              | *Optional\<String>*                                                | :heavy_minus_sign:                                                 | The URL of the image, if uploading a remote image                  | https://api.mediux.pro/assets/fcfdc487-dd07-4993-a0c1-0a3015362e5b |
+| `requestBody`                                                      | *Optional\<byte[]>*                                                | :heavy_minus_sign:                                                 | The contents of the image, if uploading a local file               |                                                                    |
+
+### Response
+
+**[PostMediaPosterResponse](../../models/operations/PostMediaPosterResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
 
 ## getMetadataChildren
 
