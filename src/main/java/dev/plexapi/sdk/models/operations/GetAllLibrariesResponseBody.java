@@ -5,11 +5,15 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * GetAllLibrariesResponseBody
@@ -18,19 +22,25 @@ import java.util.Objects;
  */
 public class GetAllLibrariesResponseBody {
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("MediaContainer")
-    private GetAllLibrariesMediaContainer mediaContainer;
+    private Optional<? extends GetAllLibrariesMediaContainer> mediaContainer;
 
     @JsonCreator
     public GetAllLibrariesResponseBody(
-            @JsonProperty("MediaContainer") GetAllLibrariesMediaContainer mediaContainer) {
+            @JsonProperty("MediaContainer") Optional<? extends GetAllLibrariesMediaContainer> mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
         this.mediaContainer = mediaContainer;
     }
+    
+    public GetAllLibrariesResponseBody() {
+        this(Optional.empty());
+    }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public GetAllLibrariesMediaContainer mediaContainer() {
-        return mediaContainer;
+    public Optional<GetAllLibrariesMediaContainer> mediaContainer() {
+        return (Optional<GetAllLibrariesMediaContainer>) mediaContainer;
     }
 
     public final static Builder builder() {
@@ -38,6 +48,12 @@ public class GetAllLibrariesResponseBody {
     }    
 
     public GetAllLibrariesResponseBody withMediaContainer(GetAllLibrariesMediaContainer mediaContainer) {
+        Utils.checkNotNull(mediaContainer, "mediaContainer");
+        this.mediaContainer = Optional.ofNullable(mediaContainer);
+        return this;
+    }
+
+    public GetAllLibrariesResponseBody withMediaContainer(Optional<? extends GetAllLibrariesMediaContainer> mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
         this.mediaContainer = mediaContainer;
         return this;
@@ -71,13 +87,19 @@ public class GetAllLibrariesResponseBody {
     
     public final static class Builder {
  
-        private GetAllLibrariesMediaContainer mediaContainer;
+        private Optional<? extends GetAllLibrariesMediaContainer> mediaContainer = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
         }
 
         public Builder mediaContainer(GetAllLibrariesMediaContainer mediaContainer) {
+            Utils.checkNotNull(mediaContainer, "mediaContainer");
+            this.mediaContainer = Optional.ofNullable(mediaContainer);
+            return this;
+        }
+
+        public Builder mediaContainer(Optional<? extends GetAllLibrariesMediaContainer> mediaContainer) {
             Utils.checkNotNull(mediaContainer, "mediaContainer");
             this.mediaContainer = mediaContainer;
             return this;

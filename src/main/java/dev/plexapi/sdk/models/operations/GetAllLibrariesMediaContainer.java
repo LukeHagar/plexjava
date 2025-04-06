@@ -5,35 +5,49 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class GetAllLibrariesMediaContainer {
 
+    /**
+     * Number of media items returned in this response.
+     */
     @JsonProperty("size")
     private int size;
 
+    /**
+     * Indicates whether syncing is allowed.
+     */
     @JsonProperty("allowSync")
     private boolean allowSync;
 
+    /**
+     * The primary title of the media container.
+     */
     @JsonProperty("title1")
     private String title1;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Directory")
-    private List<GetAllLibrariesDirectory> directory;
+    private Optional<? extends List<GetAllLibrariesDirectory>> directory;
 
     @JsonCreator
     public GetAllLibrariesMediaContainer(
             @JsonProperty("size") int size,
             @JsonProperty("allowSync") boolean allowSync,
             @JsonProperty("title1") String title1,
-            @JsonProperty("Directory") List<GetAllLibrariesDirectory> directory) {
+            @JsonProperty("Directory") Optional<? extends List<GetAllLibrariesDirectory>> directory) {
         Utils.checkNotNull(size, "size");
         Utils.checkNotNull(allowSync, "allowSync");
         Utils.checkNotNull(title1, "title1");
@@ -43,43 +57,69 @@ public class GetAllLibrariesMediaContainer {
         this.title1 = title1;
         this.directory = directory;
     }
+    
+    public GetAllLibrariesMediaContainer(
+            int size,
+            boolean allowSync,
+            String title1) {
+        this(size, allowSync, title1, Optional.empty());
+    }
 
+    /**
+     * Number of media items returned in this response.
+     */
     @JsonIgnore
     public int size() {
         return size;
     }
 
+    /**
+     * Indicates whether syncing is allowed.
+     */
     @JsonIgnore
     public boolean allowSync() {
         return allowSync;
     }
 
+    /**
+     * The primary title of the media container.
+     */
     @JsonIgnore
     public String title1() {
         return title1;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public List<GetAllLibrariesDirectory> directory() {
-        return directory;
+    public Optional<List<GetAllLibrariesDirectory>> directory() {
+        return (Optional<List<GetAllLibrariesDirectory>>) directory;
     }
 
     public final static Builder builder() {
         return new Builder();
     }    
 
+    /**
+     * Number of media items returned in this response.
+     */
     public GetAllLibrariesMediaContainer withSize(int size) {
         Utils.checkNotNull(size, "size");
         this.size = size;
         return this;
     }
 
+    /**
+     * Indicates whether syncing is allowed.
+     */
     public GetAllLibrariesMediaContainer withAllowSync(boolean allowSync) {
         Utils.checkNotNull(allowSync, "allowSync");
         this.allowSync = allowSync;
         return this;
     }
 
+    /**
+     * The primary title of the media container.
+     */
     public GetAllLibrariesMediaContainer withTitle1(String title1) {
         Utils.checkNotNull(title1, "title1");
         this.title1 = title1;
@@ -87,6 +127,12 @@ public class GetAllLibrariesMediaContainer {
     }
 
     public GetAllLibrariesMediaContainer withDirectory(List<GetAllLibrariesDirectory> directory) {
+        Utils.checkNotNull(directory, "directory");
+        this.directory = Optional.ofNullable(directory);
+        return this;
+    }
+
+    public GetAllLibrariesMediaContainer withDirectory(Optional<? extends List<GetAllLibrariesDirectory>> directory) {
         Utils.checkNotNull(directory, "directory");
         this.directory = directory;
         return this;
@@ -135,24 +181,33 @@ public class GetAllLibrariesMediaContainer {
  
         private String title1;
  
-        private List<GetAllLibrariesDirectory> directory;
+        private Optional<? extends List<GetAllLibrariesDirectory>> directory = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
         }
 
+        /**
+         * Number of media items returned in this response.
+         */
         public Builder size(int size) {
             Utils.checkNotNull(size, "size");
             this.size = size;
             return this;
         }
 
+        /**
+         * Indicates whether syncing is allowed.
+         */
         public Builder allowSync(boolean allowSync) {
             Utils.checkNotNull(allowSync, "allowSync");
             this.allowSync = allowSync;
             return this;
         }
 
+        /**
+         * The primary title of the media container.
+         */
         public Builder title1(String title1) {
             Utils.checkNotNull(title1, "title1");
             this.title1 = title1;
@@ -160,6 +215,12 @@ public class GetAllLibrariesMediaContainer {
         }
 
         public Builder directory(List<GetAllLibrariesDirectory> directory) {
+            Utils.checkNotNull(directory, "directory");
+            this.directory = Optional.ofNullable(directory);
+            return this;
+        }
+
+        public Builder directory(Optional<? extends List<GetAllLibrariesDirectory>> directory) {
             Utils.checkNotNull(directory, "directory");
             this.directory = directory;
             return this;

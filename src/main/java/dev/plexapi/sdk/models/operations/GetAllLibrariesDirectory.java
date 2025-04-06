@@ -5,54 +5,96 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class GetAllLibrariesDirectory {
 
+    /**
+     * Indicates whether syncing is allowed.
+     */
     @JsonProperty("allowSync")
     private boolean allowSync;
 
+    /**
+     * URL for the background artwork of the media container.
+     */
     @JsonProperty("art")
     private String art;
 
+    /**
+     * The relative path to the composite media item.
+     */
     @JsonProperty("composite")
     private String composite;
 
+    /**
+     * UNKNOWN
+     */
     @JsonProperty("filters")
     private boolean filters;
 
+    /**
+     * Indicates whether the library is currently being refreshed or updated
+     */
     @JsonProperty("refreshing")
     private boolean refreshing;
 
+    /**
+     * URL for the thumbnail image of the media container.
+     */
     @JsonProperty("thumb")
     private String thumb;
 
+    /**
+     * The library key representing the unique identifier
+     */
     @JsonProperty("key")
     private String key;
 
     @JsonProperty("type")
-    private String type;
+    private GetAllLibrariesType type;
 
+    /**
+     * The title of the library
+     */
     @JsonProperty("title")
     private String title;
 
+    /**
+     * The Plex agent used to match and retrieve media metadata.
+     */
     @JsonProperty("agent")
     private String agent;
 
+    /**
+     * UNKNOWN
+     */
     @JsonProperty("scanner")
     private String scanner;
 
+    /**
+     * The Plex library language that has been set
+     */
     @JsonProperty("language")
     private String language;
 
+    /**
+     * The universally unique identifier for the library.
+     */
     @JsonProperty("uuid")
     private String uuid;
 
@@ -62,11 +104,9 @@ public class GetAllLibrariesDirectory {
     @JsonProperty("updatedAt")
     private long updatedAt;
 
-    /**
-     * Unix epoch datetime in seconds
-     */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("createdAt")
-    private long createdAt;
+    private Optional<Long> createdAt;
 
     /**
      * Unix epoch datetime in seconds
@@ -74,20 +114,27 @@ public class GetAllLibrariesDirectory {
     @JsonProperty("scannedAt")
     private long scannedAt;
 
+    /**
+     * UNKNOWN
+     */
     @JsonProperty("content")
     private boolean content;
 
+    /**
+     * UNKNOWN
+     */
     @JsonProperty("directory")
     private boolean directory;
 
     /**
-     * Unix epoch datetime in seconds
+     * The number of seconds since the content was last changed relative to now.
      */
     @JsonProperty("contentChangedAt")
-    private long contentChangedAt;
+    private int contentChangedAt;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hidden")
-    private int hidden;
+    private Optional<? extends Hidden> hidden;
 
     @JsonProperty("Location")
     private List<GetAllLibrariesLocation> location;
@@ -101,19 +148,19 @@ public class GetAllLibrariesDirectory {
             @JsonProperty("refreshing") boolean refreshing,
             @JsonProperty("thumb") String thumb,
             @JsonProperty("key") String key,
-            @JsonProperty("type") String type,
+            @JsonProperty("type") GetAllLibrariesType type,
             @JsonProperty("title") String title,
             @JsonProperty("agent") String agent,
             @JsonProperty("scanner") String scanner,
             @JsonProperty("language") String language,
             @JsonProperty("uuid") String uuid,
             @JsonProperty("updatedAt") long updatedAt,
-            @JsonProperty("createdAt") long createdAt,
+            @JsonProperty("createdAt") Optional<Long> createdAt,
             @JsonProperty("scannedAt") long scannedAt,
             @JsonProperty("content") boolean content,
             @JsonProperty("directory") boolean directory,
-            @JsonProperty("contentChangedAt") long contentChangedAt,
-            @JsonProperty("hidden") int hidden,
+            @JsonProperty("contentChangedAt") int contentChangedAt,
+            @JsonProperty("hidden") Optional<? extends Hidden> hidden,
             @JsonProperty("Location") List<GetAllLibrariesLocation> location) {
         Utils.checkNotNull(allowSync, "allowSync");
         Utils.checkNotNull(art, "art");
@@ -158,67 +205,126 @@ public class GetAllLibrariesDirectory {
         this.hidden = hidden;
         this.location = location;
     }
+    
+    public GetAllLibrariesDirectory(
+            boolean allowSync,
+            String art,
+            String composite,
+            boolean filters,
+            boolean refreshing,
+            String thumb,
+            String key,
+            GetAllLibrariesType type,
+            String title,
+            String agent,
+            String scanner,
+            String language,
+            String uuid,
+            long updatedAt,
+            long scannedAt,
+            boolean content,
+            boolean directory,
+            int contentChangedAt,
+            List<GetAllLibrariesLocation> location) {
+        this(allowSync, art, composite, filters, refreshing, thumb, key, type, title, agent, scanner, language, uuid, updatedAt, Optional.empty(), scannedAt, content, directory, contentChangedAt, Optional.empty(), location);
+    }
 
+    /**
+     * Indicates whether syncing is allowed.
+     */
     @JsonIgnore
     public boolean allowSync() {
         return allowSync;
     }
 
+    /**
+     * URL for the background artwork of the media container.
+     */
     @JsonIgnore
     public String art() {
         return art;
     }
 
+    /**
+     * The relative path to the composite media item.
+     */
     @JsonIgnore
     public String composite() {
         return composite;
     }
 
+    /**
+     * UNKNOWN
+     */
     @JsonIgnore
     public boolean filters() {
         return filters;
     }
 
+    /**
+     * Indicates whether the library is currently being refreshed or updated
+     */
     @JsonIgnore
     public boolean refreshing() {
         return refreshing;
     }
 
+    /**
+     * URL for the thumbnail image of the media container.
+     */
     @JsonIgnore
     public String thumb() {
         return thumb;
     }
 
+    /**
+     * The library key representing the unique identifier
+     */
     @JsonIgnore
     public String key() {
         return key;
     }
 
     @JsonIgnore
-    public String type() {
+    public GetAllLibrariesType type() {
         return type;
     }
 
+    /**
+     * The title of the library
+     */
     @JsonIgnore
     public String title() {
         return title;
     }
 
+    /**
+     * The Plex agent used to match and retrieve media metadata.
+     */
     @JsonIgnore
     public String agent() {
         return agent;
     }
 
+    /**
+     * UNKNOWN
+     */
     @JsonIgnore
     public String scanner() {
         return scanner;
     }
 
+    /**
+     * The Plex library language that has been set
+     */
     @JsonIgnore
     public String language() {
         return language;
     }
 
+    /**
+     * The universally unique identifier for the library.
+     */
     @JsonIgnore
     public String uuid() {
         return uuid;
@@ -232,11 +338,8 @@ public class GetAllLibrariesDirectory {
         return updatedAt;
     }
 
-    /**
-     * Unix epoch datetime in seconds
-     */
     @JsonIgnore
-    public long createdAt() {
+    public Optional<Long> createdAt() {
         return createdAt;
     }
 
@@ -248,27 +351,34 @@ public class GetAllLibrariesDirectory {
         return scannedAt;
     }
 
+    /**
+     * UNKNOWN
+     */
     @JsonIgnore
     public boolean content() {
         return content;
     }
 
+    /**
+     * UNKNOWN
+     */
     @JsonIgnore
     public boolean directory() {
         return directory;
     }
 
     /**
-     * Unix epoch datetime in seconds
+     * The number of seconds since the content was last changed relative to now.
      */
     @JsonIgnore
-    public long contentChangedAt() {
+    public int contentChangedAt() {
         return contentChangedAt;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public int hidden() {
-        return hidden;
+    public Optional<Hidden> hidden() {
+        return (Optional<Hidden>) hidden;
     }
 
     @JsonIgnore
@@ -280,78 +390,114 @@ public class GetAllLibrariesDirectory {
         return new Builder();
     }    
 
+    /**
+     * Indicates whether syncing is allowed.
+     */
     public GetAllLibrariesDirectory withAllowSync(boolean allowSync) {
         Utils.checkNotNull(allowSync, "allowSync");
         this.allowSync = allowSync;
         return this;
     }
 
+    /**
+     * URL for the background artwork of the media container.
+     */
     public GetAllLibrariesDirectory withArt(String art) {
         Utils.checkNotNull(art, "art");
         this.art = art;
         return this;
     }
 
+    /**
+     * The relative path to the composite media item.
+     */
     public GetAllLibrariesDirectory withComposite(String composite) {
         Utils.checkNotNull(composite, "composite");
         this.composite = composite;
         return this;
     }
 
+    /**
+     * UNKNOWN
+     */
     public GetAllLibrariesDirectory withFilters(boolean filters) {
         Utils.checkNotNull(filters, "filters");
         this.filters = filters;
         return this;
     }
 
+    /**
+     * Indicates whether the library is currently being refreshed or updated
+     */
     public GetAllLibrariesDirectory withRefreshing(boolean refreshing) {
         Utils.checkNotNull(refreshing, "refreshing");
         this.refreshing = refreshing;
         return this;
     }
 
+    /**
+     * URL for the thumbnail image of the media container.
+     */
     public GetAllLibrariesDirectory withThumb(String thumb) {
         Utils.checkNotNull(thumb, "thumb");
         this.thumb = thumb;
         return this;
     }
 
+    /**
+     * The library key representing the unique identifier
+     */
     public GetAllLibrariesDirectory withKey(String key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
         return this;
     }
 
-    public GetAllLibrariesDirectory withType(String type) {
+    public GetAllLibrariesDirectory withType(GetAllLibrariesType type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
     }
 
+    /**
+     * The title of the library
+     */
     public GetAllLibrariesDirectory withTitle(String title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
         return this;
     }
 
+    /**
+     * The Plex agent used to match and retrieve media metadata.
+     */
     public GetAllLibrariesDirectory withAgent(String agent) {
         Utils.checkNotNull(agent, "agent");
         this.agent = agent;
         return this;
     }
 
+    /**
+     * UNKNOWN
+     */
     public GetAllLibrariesDirectory withScanner(String scanner) {
         Utils.checkNotNull(scanner, "scanner");
         this.scanner = scanner;
         return this;
     }
 
+    /**
+     * The Plex library language that has been set
+     */
     public GetAllLibrariesDirectory withLanguage(String language) {
         Utils.checkNotNull(language, "language");
         this.language = language;
         return this;
     }
 
+    /**
+     * The universally unique identifier for the library.
+     */
     public GetAllLibrariesDirectory withUuid(String uuid) {
         Utils.checkNotNull(uuid, "uuid");
         this.uuid = uuid;
@@ -367,10 +513,13 @@ public class GetAllLibrariesDirectory {
         return this;
     }
 
-    /**
-     * Unix epoch datetime in seconds
-     */
     public GetAllLibrariesDirectory withCreatedAt(long createdAt) {
+        Utils.checkNotNull(createdAt, "createdAt");
+        this.createdAt = Optional.ofNullable(createdAt);
+        return this;
+    }
+
+    public GetAllLibrariesDirectory withCreatedAt(Optional<Long> createdAt) {
         Utils.checkNotNull(createdAt, "createdAt");
         this.createdAt = createdAt;
         return this;
@@ -385,12 +534,18 @@ public class GetAllLibrariesDirectory {
         return this;
     }
 
+    /**
+     * UNKNOWN
+     */
     public GetAllLibrariesDirectory withContent(boolean content) {
         Utils.checkNotNull(content, "content");
         this.content = content;
         return this;
     }
 
+    /**
+     * UNKNOWN
+     */
     public GetAllLibrariesDirectory withDirectory(boolean directory) {
         Utils.checkNotNull(directory, "directory");
         this.directory = directory;
@@ -398,15 +553,21 @@ public class GetAllLibrariesDirectory {
     }
 
     /**
-     * Unix epoch datetime in seconds
+     * The number of seconds since the content was last changed relative to now.
      */
-    public GetAllLibrariesDirectory withContentChangedAt(long contentChangedAt) {
+    public GetAllLibrariesDirectory withContentChangedAt(int contentChangedAt) {
         Utils.checkNotNull(contentChangedAt, "contentChangedAt");
         this.contentChangedAt = contentChangedAt;
         return this;
     }
 
-    public GetAllLibrariesDirectory withHidden(int hidden) {
+    public GetAllLibrariesDirectory withHidden(Hidden hidden) {
+        Utils.checkNotNull(hidden, "hidden");
+        this.hidden = Optional.ofNullable(hidden);
+        return this;
+    }
+
+    public GetAllLibrariesDirectory withHidden(Optional<? extends Hidden> hidden) {
         Utils.checkNotNull(hidden, "hidden");
         this.hidden = hidden;
         return this;
@@ -520,7 +681,7 @@ public class GetAllLibrariesDirectory {
  
         private String key;
  
-        private String type;
+        private GetAllLibrariesType type;
  
         private String title;
  
@@ -534,7 +695,7 @@ public class GetAllLibrariesDirectory {
  
         private Long updatedAt;
  
-        private Long createdAt;
+        private Optional<Long> createdAt = Optional.empty();
  
         private Long scannedAt;
  
@@ -542,9 +703,9 @@ public class GetAllLibrariesDirectory {
  
         private Boolean directory;
  
-        private Long contentChangedAt;
+        private Integer contentChangedAt;
  
-        private Integer hidden;
+        private Optional<? extends Hidden> hidden;
  
         private List<GetAllLibrariesLocation> location;
         
@@ -552,78 +713,114 @@ public class GetAllLibrariesDirectory {
           // force use of static builder() method
         }
 
+        /**
+         * Indicates whether syncing is allowed.
+         */
         public Builder allowSync(boolean allowSync) {
             Utils.checkNotNull(allowSync, "allowSync");
             this.allowSync = allowSync;
             return this;
         }
 
+        /**
+         * URL for the background artwork of the media container.
+         */
         public Builder art(String art) {
             Utils.checkNotNull(art, "art");
             this.art = art;
             return this;
         }
 
+        /**
+         * The relative path to the composite media item.
+         */
         public Builder composite(String composite) {
             Utils.checkNotNull(composite, "composite");
             this.composite = composite;
             return this;
         }
 
+        /**
+         * UNKNOWN
+         */
         public Builder filters(boolean filters) {
             Utils.checkNotNull(filters, "filters");
             this.filters = filters;
             return this;
         }
 
+        /**
+         * Indicates whether the library is currently being refreshed or updated
+         */
         public Builder refreshing(boolean refreshing) {
             Utils.checkNotNull(refreshing, "refreshing");
             this.refreshing = refreshing;
             return this;
         }
 
+        /**
+         * URL for the thumbnail image of the media container.
+         */
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
             this.thumb = thumb;
             return this;
         }
 
+        /**
+         * The library key representing the unique identifier
+         */
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = key;
             return this;
         }
 
-        public Builder type(String type) {
+        public Builder type(GetAllLibrariesType type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
         }
 
+        /**
+         * The title of the library
+         */
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = title;
             return this;
         }
 
+        /**
+         * The Plex agent used to match and retrieve media metadata.
+         */
         public Builder agent(String agent) {
             Utils.checkNotNull(agent, "agent");
             this.agent = agent;
             return this;
         }
 
+        /**
+         * UNKNOWN
+         */
         public Builder scanner(String scanner) {
             Utils.checkNotNull(scanner, "scanner");
             this.scanner = scanner;
             return this;
         }
 
+        /**
+         * The Plex library language that has been set
+         */
         public Builder language(String language) {
             Utils.checkNotNull(language, "language");
             this.language = language;
             return this;
         }
 
+        /**
+         * The universally unique identifier for the library.
+         */
         public Builder uuid(String uuid) {
             Utils.checkNotNull(uuid, "uuid");
             this.uuid = uuid;
@@ -639,10 +836,13 @@ public class GetAllLibrariesDirectory {
             return this;
         }
 
-        /**
-         * Unix epoch datetime in seconds
-         */
         public Builder createdAt(long createdAt) {
+            Utils.checkNotNull(createdAt, "createdAt");
+            this.createdAt = Optional.ofNullable(createdAt);
+            return this;
+        }
+
+        public Builder createdAt(Optional<Long> createdAt) {
             Utils.checkNotNull(createdAt, "createdAt");
             this.createdAt = createdAt;
             return this;
@@ -657,12 +857,18 @@ public class GetAllLibrariesDirectory {
             return this;
         }
 
+        /**
+         * UNKNOWN
+         */
         public Builder content(boolean content) {
             Utils.checkNotNull(content, "content");
             this.content = content;
             return this;
         }
 
+        /**
+         * UNKNOWN
+         */
         public Builder directory(boolean directory) {
             Utils.checkNotNull(directory, "directory");
             this.directory = directory;
@@ -670,15 +876,21 @@ public class GetAllLibrariesDirectory {
         }
 
         /**
-         * Unix epoch datetime in seconds
+         * The number of seconds since the content was last changed relative to now.
          */
-        public Builder contentChangedAt(long contentChangedAt) {
+        public Builder contentChangedAt(int contentChangedAt) {
             Utils.checkNotNull(contentChangedAt, "contentChangedAt");
             this.contentChangedAt = contentChangedAt;
             return this;
         }
 
-        public Builder hidden(int hidden) {
+        public Builder hidden(Hidden hidden) {
+            Utils.checkNotNull(hidden, "hidden");
+            this.hidden = Optional.ofNullable(hidden);
+            return this;
+        }
+
+        public Builder hidden(Optional<? extends Hidden> hidden) {
             Utils.checkNotNull(hidden, "hidden");
             this.hidden = hidden;
             return this;
@@ -691,6 +903,9 @@ public class GetAllLibrariesDirectory {
         }
         
         public GetAllLibrariesDirectory build() {
+            if (hidden == null) {
+                hidden = _SINGLETON_VALUE_Hidden.value();
+            }
             return new GetAllLibrariesDirectory(
                 allowSync,
                 art,
@@ -714,5 +929,11 @@ public class GetAllLibrariesDirectory {
                 hidden,
                 location);
         }
+
+        private static final LazySingletonValue<Optional<? extends Hidden>> _SINGLETON_VALUE_Hidden =
+                new LazySingletonValue<>(
+                        "hidden",
+                        "0",
+                        new TypeReference<Optional<? extends Hidden>>() {});
     }
 }

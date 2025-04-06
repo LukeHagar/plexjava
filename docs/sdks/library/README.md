@@ -54,7 +54,6 @@ public class Application {
 
         GetFileHashResponse res = sdk.library().getFileHash()
                 .url("file://C:\Image.png&type=13")
-                .type(4462.17)
                 .call();
 
         // handle response
@@ -257,7 +256,6 @@ import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.GetLibraryDetailsBadRequest;
 import dev.plexapi.sdk.models.errors.GetLibraryDetailsUnauthorized;
 import dev.plexapi.sdk.models.operations.GetLibraryDetailsResponse;
-import dev.plexapi.sdk.models.operations.IncludeDetails;
 import java.lang.Exception;
 
 public class Application {
@@ -269,7 +267,6 @@ public class Application {
             .build();
 
         GetLibraryDetailsResponse res = sdk.library().getLibraryDetails()
-                .includeDetails(IncludeDetails.ZERO)
                 .sectionKey(9518)
                 .call();
 
@@ -973,7 +970,6 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.operations.PostMediaArtsResponse;
 import java.lang.Exception;
-import java.nio.charset.StandardCharsets;
 
 public class Application {
 
@@ -986,7 +982,6 @@ public class Application {
         PostMediaArtsResponse res = sdk.library().postMediaArts()
                 .ratingKey(2268L)
                 .url("https://api.mediux.pro/assets/fcfdc487-dd07-4993-a0c1-0a3015362e5b")
-                .requestBody("0xee51EFC6De".getBytes(StandardCharsets.UTF_8))
                 .call();
 
         // handle response
@@ -1072,7 +1067,6 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.operations.PostMediaPosterResponse;
 import java.lang.Exception;
-import java.nio.charset.StandardCharsets;
 
 public class Application {
 
@@ -1085,7 +1079,6 @@ public class Application {
         PostMediaPosterResponse res = sdk.library().postMediaPoster()
                 .ratingKey(2268L)
                 .url("https://api.mediux.pro/assets/fcfdc487-dd07-4993-a0c1-0a3015362e5b")
-                .requestBody("0x7C3d45ad4B".getBytes(StandardCharsets.UTF_8))
                 .call();
 
         // handle response

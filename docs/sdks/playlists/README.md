@@ -95,7 +95,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.GetPlaylistsBadRequest;
 import dev.plexapi.sdk.models.errors.GetPlaylistsUnauthorized;
-import dev.plexapi.sdk.models.operations.*;
+import dev.plexapi.sdk.models.operations.GetPlaylistsResponse;
 import java.lang.Exception;
 
 public class Application {
@@ -107,8 +107,6 @@ public class Application {
             .build();
 
         GetPlaylistsResponse res = sdk.playlists().getPlaylists()
-                .playlistType(PlaylistType.AUDIO)
-                .smart(QueryParamSmart.ZERO)
                 .call();
 
         if (res.object().isPresent()) {
@@ -268,8 +266,6 @@ public class Application {
 
         UpdatePlaylistResponse res = sdk.playlists().updatePlaylist()
                 .playlistID(3915)
-                .title("<value>")
-                .summary("<value>")
                 .call();
 
         // handle response

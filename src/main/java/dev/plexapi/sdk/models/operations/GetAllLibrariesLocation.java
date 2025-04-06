@@ -14,9 +14,15 @@ import java.util.Objects;
 
 public class GetAllLibrariesLocation {
 
+    /**
+     * The ID of the location.
+     */
     @JsonProperty("id")
     private int id;
 
+    /**
+     * The path to the media item.
+     */
     @JsonProperty("path")
     private String path;
 
@@ -30,11 +36,17 @@ public class GetAllLibrariesLocation {
         this.path = path;
     }
 
+    /**
+     * The ID of the location.
+     */
     @JsonIgnore
     public int id() {
         return id;
     }
 
+    /**
+     * The path to the media item.
+     */
     @JsonIgnore
     public String path() {
         return path;
@@ -44,12 +56,18 @@ public class GetAllLibrariesLocation {
         return new Builder();
     }    
 
+    /**
+     * The ID of the location.
+     */
     public GetAllLibrariesLocation withId(int id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
     }
 
+    /**
+     * The path to the media item.
+     */
     public GetAllLibrariesLocation withPath(String path) {
         Utils.checkNotNull(path, "path");
         this.path = path;
@@ -95,12 +113,18 @@ public class GetAllLibrariesLocation {
           // force use of static builder() method
         }
 
+        /**
+         * The ID of the location.
+         */
         public Builder id(int id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;
         }
 
+        /**
+         * The path to the media item.
+         */
         public Builder path(String path) {
             Utils.checkNotNull(path, "path");
             this.path = path;

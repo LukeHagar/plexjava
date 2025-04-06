@@ -25,7 +25,6 @@ import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.GetGlobalHubsBadRequest;
 import dev.plexapi.sdk.models.errors.GetGlobalHubsUnauthorized;
 import dev.plexapi.sdk.models.operations.GetGlobalHubsResponse;
-import dev.plexapi.sdk.models.operations.OnlyTransient;
 import java.lang.Exception;
 
 public class Application {
@@ -37,8 +36,6 @@ public class Application {
             .build();
 
         GetGlobalHubsResponse res = sdk.hubs().getGlobalHubs()
-                .count(1262.49)
-                .onlyTransient(OnlyTransient.ONE)
                 .call();
 
         if (res.object().isPresent()) {
@@ -136,7 +133,6 @@ import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.GetLibraryHubsBadRequest;
 import dev.plexapi.sdk.models.errors.GetLibraryHubsUnauthorized;
 import dev.plexapi.sdk.models.operations.GetLibraryHubsResponse;
-import dev.plexapi.sdk.models.operations.QueryParamOnlyTransient;
 import java.lang.Exception;
 
 public class Application {
@@ -149,8 +145,6 @@ public class Application {
 
         GetLibraryHubsResponse res = sdk.hubs().getLibraryHubs()
                 .sectionId(6728.76)
-                .count(6728.76)
-                .onlyTransient(QueryParamOnlyTransient.ZERO)
                 .call();
 
         if (res.object().isPresent()) {

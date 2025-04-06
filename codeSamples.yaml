@@ -11,10 +11,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetServerCapabilitiesBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetServerCapabilitiesUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetServerCapabilitiesResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest;
+            import dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetServerCapabilitiesResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -41,10 +41,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetServerPreferencesBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetServerPreferencesUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetServerPreferencesResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetServerPreferencesBadRequest;
+            import dev.plexapi.sdk.models.errors.GetServerPreferencesUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetServerPreferencesResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -71,10 +71,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.UpdatePlayProgressBadRequest;
-            import dev.plexapi.plexapi.models.errors.UpdatePlayProgressUnauthorized;
-            import dev.plexapi.plexapi.models.operations.UpdatePlayProgressResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.UpdatePlayProgressBadRequest;
+            import dev.plexapi.sdk.models.errors.UpdatePlayProgressUnauthorized;
+            import dev.plexapi.sdk.models.operations.UpdatePlayProgressResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -102,10 +102,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.MarkPlayedBadRequest;
-            import dev.plexapi.plexapi.models.errors.MarkPlayedUnauthorized;
-            import dev.plexapi.plexapi.models.operations.MarkPlayedResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.MarkPlayedBadRequest;
+            import dev.plexapi.sdk.models.errors.MarkPlayedUnauthorized;
+            import dev.plexapi.sdk.models.operations.MarkPlayedResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -131,10 +131,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetTimelineBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetTimelineUnauthorized;
-            import dev.plexapi.plexapi.models.operations.*;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetTimelineBadRequest;
+            import dev.plexapi.sdk.models.errors.GetTimelineUnauthorized;
+            import dev.plexapi.sdk.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -173,10 +173,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.MarkUnplayedBadRequest;
-            import dev.plexapi.plexapi.models.errors.MarkUnplayedUnauthorized;
-            import dev.plexapi.plexapi.models.operations.MarkUnplayedResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.MarkUnplayedBadRequest;
+            import dev.plexapi.sdk.models.errors.MarkUnplayedUnauthorized;
+            import dev.plexapi.sdk.models.operations.MarkUnplayedResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -202,10 +202,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetServerActivitiesBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetServerActivitiesUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetServerActivitiesResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetServerActivitiesBadRequest;
+            import dev.plexapi.sdk.models.errors.GetServerActivitiesUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetServerActivitiesResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -232,10 +232,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.CancelServerActivitiesBadRequest;
-            import dev.plexapi.plexapi.models.errors.CancelServerActivitiesUnauthorized;
-            import dev.plexapi.plexapi.models.operations.CancelServerActivitiesResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.CancelServerActivitiesBadRequest;
+            import dev.plexapi.sdk.models.errors.CancelServerActivitiesUnauthorized;
+            import dev.plexapi.sdk.models.operations.CancelServerActivitiesResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -261,10 +261,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.StopAllTasksBadRequest;
-            import dev.plexapi.plexapi.models.errors.StopAllTasksUnauthorized;
-            import dev.plexapi.plexapi.models.operations.StopAllTasksResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.StopAllTasksBadRequest;
+            import dev.plexapi.sdk.models.errors.StopAllTasksUnauthorized;
+            import dev.plexapi.sdk.models.operations.StopAllTasksResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -289,10 +289,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetButlerTasksBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetButlerTasksUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetButlerTasksResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetButlerTasksBadRequest;
+            import dev.plexapi.sdk.models.errors.GetButlerTasksUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetButlerTasksResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -319,10 +319,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.StartAllTasksBadRequest;
-            import dev.plexapi.plexapi.models.errors.StartAllTasksUnauthorized;
-            import dev.plexapi.plexapi.models.operations.StartAllTasksResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.StartAllTasksBadRequest;
+            import dev.plexapi.sdk.models.errors.StartAllTasksUnauthorized;
+            import dev.plexapi.sdk.models.operations.StartAllTasksResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -347,11 +347,11 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.StopTaskBadRequest;
-            import dev.plexapi.plexapi.models.errors.StopTaskUnauthorized;
-            import dev.plexapi.plexapi.models.operations.PathParamTaskName;
-            import dev.plexapi.plexapi.models.operations.StopTaskResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.StopTaskBadRequest;
+            import dev.plexapi.sdk.models.errors.StopTaskUnauthorized;
+            import dev.plexapi.sdk.models.operations.PathParamTaskName;
+            import dev.plexapi.sdk.models.operations.StopTaskResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -377,11 +377,11 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.StartTaskBadRequest;
-            import dev.plexapi.plexapi.models.errors.StartTaskUnauthorized;
-            import dev.plexapi.plexapi.models.operations.StartTaskResponse;
-            import dev.plexapi.plexapi.models.operations.TaskName;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.StartTaskBadRequest;
+            import dev.plexapi.sdk.models.errors.StartTaskUnauthorized;
+            import dev.plexapi.sdk.models.operations.StartTaskResponse;
+            import dev.plexapi.sdk.models.operations.TaskName;
             import java.lang.Exception;
 
             public class Application {
@@ -407,10 +407,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetAvailableClientsBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetAvailableClientsUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetAvailableClientsResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetAvailableClientsBadRequest;
+            import dev.plexapi.sdk.models.errors.GetAvailableClientsUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetAvailableClientsResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -437,10 +437,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetCompanionsDataBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetCompanionsDataUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetCompanionsDataResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetCompanionsDataBadRequest;
+            import dev.plexapi.sdk.models.errors.GetCompanionsDataUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetCompanionsDataResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -467,10 +467,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetDevicesBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetDevicesUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetDevicesResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetDevicesBadRequest;
+            import dev.plexapi.sdk.models.errors.GetDevicesUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetDevicesResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -497,10 +497,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetUserFriendsBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetUserFriendsUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetUserFriendsResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetUserFriendsBadRequest;
+            import dev.plexapi.sdk.models.errors.GetUserFriendsUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetUserFriendsResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -527,10 +527,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetGeoDataBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetGeoDataUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetGeoDataResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetGeoDataBadRequest;
+            import dev.plexapi.sdk.models.errors.GetGeoDataUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetGeoDataResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -556,10 +556,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetHomeDataBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetHomeDataUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetHomeDataResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetHomeDataBadRequest;
+            import dev.plexapi.sdk.models.errors.GetHomeDataUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetHomeDataResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -586,11 +586,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetGlobalHubsBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetGlobalHubsUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetGlobalHubsResponse;
-            import dev.plexapi.plexapi.models.operations.OnlyTransient;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetGlobalHubsBadRequest;
+            import dev.plexapi.sdk.models.errors.GetGlobalHubsUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetGlobalHubsResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -602,8 +601,6 @@ actions:
                         .build();
 
                     GetGlobalHubsResponse res = sdk.hubs().getGlobalHubs()
-                            .count(1262.49)
-                            .onlyTransient(OnlyTransient.ONE)
                             .call();
 
                     if (res.object().isPresent()) {
@@ -619,8 +616,8 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.operations.*;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -654,10 +651,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.PerformSearchBadRequest;
-            import dev.plexapi.plexapi.models.errors.PerformSearchUnauthorized;
-            import dev.plexapi.plexapi.models.operations.PerformSearchResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.PerformSearchBadRequest;
+            import dev.plexapi.sdk.models.errors.PerformSearchUnauthorized;
+            import dev.plexapi.sdk.models.operations.PerformSearchResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -670,8 +667,6 @@ actions:
 
                     PerformSearchResponse res = sdk.search().performSearch()
                             .query("dylan")
-                            .sectionId(9487.88)
-                            .limit(5)
                             .call();
 
                     // handle response
@@ -685,10 +680,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.PerformVoiceSearchBadRequest;
-            import dev.plexapi.plexapi.models.errors.PerformVoiceSearchUnauthorized;
-            import dev.plexapi.plexapi.models.operations.PerformVoiceSearchResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.PerformVoiceSearchBadRequest;
+            import dev.plexapi.sdk.models.errors.PerformVoiceSearchUnauthorized;
+            import dev.plexapi.sdk.models.operations.PerformVoiceSearchResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -701,8 +696,6 @@ actions:
 
                     PerformVoiceSearchResponse res = sdk.search().performVoiceSearch()
                             .query("dead+poop")
-                            .sectionId(4094.8)
-                            .limit(5)
                             .call();
 
                     // handle response
@@ -716,11 +709,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetLibraryHubsBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetLibraryHubsUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetLibraryHubsResponse;
-            import dev.plexapi.plexapi.models.operations.QueryParamOnlyTransient;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetLibraryHubsBadRequest;
+            import dev.plexapi.sdk.models.errors.GetLibraryHubsUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetLibraryHubsResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -733,8 +725,6 @@ actions:
 
                     GetLibraryHubsResponse res = sdk.hubs().getLibraryHubs()
                             .sectionId(6728.76)
-                            .count(6728.76)
-                            .onlyTransient(QueryParamOnlyTransient.ZERO)
                             .call();
 
                     if (res.object().isPresent()) {
@@ -750,9 +740,9 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetServerIdentityRequestTimeout;
-            import dev.plexapi.plexapi.models.operations.GetServerIdentityResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetServerIdentityRequestTimeout;
+            import dev.plexapi.sdk.models.operations.GetServerIdentityResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -778,11 +768,11 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetTopWatchedContentBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetTopWatchedContentUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetTopWatchedContentQueryParamType;
-            import dev.plexapi.plexapi.models.operations.GetTopWatchedContentResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetTopWatchedContentBadRequest;
+            import dev.plexapi.sdk.models.errors.GetTopWatchedContentUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetTopWatchedContentQueryParamType;
+            import dev.plexapi.sdk.models.operations.GetTopWatchedContentResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -811,10 +801,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetFileHashBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetFileHashUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetFileHashResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetFileHashBadRequest;
+            import dev.plexapi.sdk.models.errors.GetFileHashUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetFileHashResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -827,7 +817,6 @@ actions:
 
                     GetFileHashResponse res = sdk.library().getFileHash()
                             .url("file://C:\Image.png&type=13")
-                            .type(4462.17)
                             .call();
 
                     // handle response
@@ -841,11 +830,11 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetMediaMetaDataBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetMediaMetaDataUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetMediaMetaDataRequest;
-            import dev.plexapi.plexapi.models.operations.GetMediaMetaDataResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetMediaMetaDataBadRequest;
+            import dev.plexapi.sdk.models.errors.GetMediaMetaDataUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetMediaMetaDataRequest;
+            import dev.plexapi.sdk.models.operations.GetMediaMetaDataResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -890,8 +879,8 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.operations.GetMediaArtsResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.operations.GetMediaArtsResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -919,10 +908,9 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.operations.PostMediaArtsResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.operations.PostMediaArtsResponse;
             import java.lang.Exception;
-            import java.nio.charset.StandardCharsets;
 
             public class Application {
 
@@ -935,7 +923,6 @@ actions:
                     PostMediaArtsResponse res = sdk.library().postMediaArts()
                             .ratingKey(2268L)
                             .url("https://api.mediux.pro/assets/fcfdc487-dd07-4993-a0c1-0a3015362e5b")
-                            .requestBody("0xee51EFC6De".getBytes(StandardCharsets.UTF_8))
                             .call();
 
                     // handle response
@@ -949,11 +936,11 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetBannerImageBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetBannerImageUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetBannerImageRequest;
-            import dev.plexapi.plexapi.models.operations.GetBannerImageResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetBannerImageBadRequest;
+            import dev.plexapi.sdk.models.errors.GetBannerImageUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetBannerImageRequest;
+            import dev.plexapi.sdk.models.operations.GetBannerImageResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -990,10 +977,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetMetadataChildrenBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetMetadataChildrenUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetMetadataChildrenResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetMetadataChildrenBadRequest;
+            import dev.plexapi.sdk.models.errors.GetMetadataChildrenUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetMetadataChildrenResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -1022,8 +1009,8 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.operations.GetMediaPostersResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.operations.GetMediaPostersResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -1051,10 +1038,9 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.operations.PostMediaPosterResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.operations.PostMediaPosterResponse;
             import java.lang.Exception;
-            import java.nio.charset.StandardCharsets;
 
             public class Application {
 
@@ -1067,7 +1053,6 @@ actions:
                     PostMediaPosterResponse res = sdk.library().postMediaPoster()
                             .ratingKey(2268L)
                             .url("https://api.mediux.pro/assets/fcfdc487-dd07-4993-a0c1-0a3015362e5b")
-                            .requestBody("0x7C3d45ad4B".getBytes(StandardCharsets.UTF_8))
                             .call();
 
                     // handle response
@@ -1081,11 +1066,11 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetThumbImageBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetThumbImageUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetThumbImageRequest;
-            import dev.plexapi.plexapi.models.operations.GetThumbImageResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetThumbImageBadRequest;
+            import dev.plexapi.sdk.models.errors.GetThumbImageUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetThumbImageRequest;
+            import dev.plexapi.sdk.models.operations.GetThumbImageResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -1122,10 +1107,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetRecentlyAddedLibraryBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetRecentlyAddedLibraryUnauthorized;
-            import dev.plexapi.plexapi.models.operations.*;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetRecentlyAddedLibraryBadRequest;
+            import dev.plexapi.sdk.models.errors.GetRecentlyAddedLibraryUnauthorized;
+            import dev.plexapi.sdk.models.operations.*;
             import java.lang.Exception;
             import java.util.List;
 
@@ -1173,10 +1158,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetSearchAllLibrariesBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetSearchAllLibrariesUnauthorized;
-            import dev.plexapi.plexapi.models.operations.*;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetSearchAllLibrariesBadRequest;
+            import dev.plexapi.sdk.models.errors.GetSearchAllLibrariesUnauthorized;
+            import dev.plexapi.sdk.models.operations.*;
             import java.lang.Exception;
             import java.util.List;
 
@@ -1212,10 +1197,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetAllLibrariesBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetAllLibrariesUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetAllLibrariesResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetAllLibrariesBadRequest;
+            import dev.plexapi.sdk.models.errors.GetAllLibrariesUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetAllLibrariesResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -1242,10 +1227,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetWatchListBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetWatchListUnauthorized;
-            import dev.plexapi.plexapi.models.operations.*;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetWatchListBadRequest;
+            import dev.plexapi.sdk.models.errors.GetWatchListUnauthorized;
+            import dev.plexapi.sdk.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -1278,10 +1263,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.DeleteLibraryBadRequest;
-            import dev.plexapi.plexapi.models.errors.DeleteLibraryUnauthorized;
-            import dev.plexapi.plexapi.models.operations.DeleteLibraryResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.DeleteLibraryBadRequest;
+            import dev.plexapi.sdk.models.errors.DeleteLibraryUnauthorized;
+            import dev.plexapi.sdk.models.operations.DeleteLibraryResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -1307,11 +1292,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetLibraryDetailsBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetLibraryDetailsUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetLibraryDetailsResponse;
-            import dev.plexapi.plexapi.models.operations.IncludeDetails;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetLibraryDetailsBadRequest;
+            import dev.plexapi.sdk.models.errors.GetLibraryDetailsUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetLibraryDetailsResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -1323,7 +1307,6 @@ actions:
                         .build();
 
                     GetLibraryDetailsResponse res = sdk.library().getLibraryDetails()
-                            .includeDetails(IncludeDetails.ZERO)
                             .sectionKey(9518)
                             .call();
 
@@ -1340,11 +1323,11 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetActorsLibraryBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetActorsLibraryUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetActorsLibraryQueryParamType;
-            import dev.plexapi.plexapi.models.operations.GetActorsLibraryResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetActorsLibraryBadRequest;
+            import dev.plexapi.sdk.models.errors.GetActorsLibraryUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetActorsLibraryQueryParamType;
+            import dev.plexapi.sdk.models.operations.GetActorsLibraryResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -1373,10 +1356,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetAllMediaLibraryBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetAllMediaLibraryUnauthorized;
-            import dev.plexapi.plexapi.models.operations.*;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetAllMediaLibraryBadRequest;
+            import dev.plexapi.sdk.models.errors.GetAllMediaLibraryUnauthorized;
+            import dev.plexapi.sdk.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -1409,11 +1392,11 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetCountriesLibraryBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetCountriesLibraryUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetCountriesLibraryQueryParamType;
-            import dev.plexapi.plexapi.models.operations.GetCountriesLibraryResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetCountriesLibraryBadRequest;
+            import dev.plexapi.sdk.models.errors.GetCountriesLibraryUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetCountriesLibraryQueryParamType;
+            import dev.plexapi.sdk.models.operations.GetCountriesLibraryResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -1442,11 +1425,11 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetGenresLibraryBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetGenresLibraryUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetGenresLibraryQueryParamType;
-            import dev.plexapi.plexapi.models.operations.GetGenresLibraryResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetGenresLibraryBadRequest;
+            import dev.plexapi.sdk.models.errors.GetGenresLibraryUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetGenresLibraryQueryParamType;
+            import dev.plexapi.sdk.models.operations.GetGenresLibraryResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -1475,11 +1458,11 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetRefreshLibraryMetadataBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetRefreshLibraryMetadataUnauthorized;
-            import dev.plexapi.plexapi.models.operations.Force;
-            import dev.plexapi.plexapi.models.operations.GetRefreshLibraryMetadataResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetRefreshLibraryMetadataBadRequest;
+            import dev.plexapi.sdk.models.errors.GetRefreshLibraryMetadataUnauthorized;
+            import dev.plexapi.sdk.models.operations.Force;
+            import dev.plexapi.sdk.models.operations.GetRefreshLibraryMetadataResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -1506,11 +1489,11 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetSearchLibraryBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetSearchLibraryUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetSearchLibraryQueryParamType;
-            import dev.plexapi.plexapi.models.operations.GetSearchLibraryResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetSearchLibraryBadRequest;
+            import dev.plexapi.sdk.models.errors.GetSearchLibraryUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetSearchLibraryQueryParamType;
+            import dev.plexapi.sdk.models.operations.GetSearchLibraryResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -1539,10 +1522,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetLibraryItemsBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetLibraryItemsUnauthorized;
-            import dev.plexapi.plexapi.models.operations.*;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetLibraryItemsBadRequest;
+            import dev.plexapi.sdk.models.errors.GetLibraryItemsUnauthorized;
+            import dev.plexapi.sdk.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -1576,11 +1559,11 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.LogLineBadRequest;
-            import dev.plexapi.plexapi.models.errors.LogLineUnauthorized;
-            import dev.plexapi.plexapi.models.operations.Level;
-            import dev.plexapi.plexapi.models.operations.LogLineResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.LogLineBadRequest;
+            import dev.plexapi.sdk.models.errors.LogLineUnauthorized;
+            import dev.plexapi.sdk.models.operations.Level;
+            import dev.plexapi.sdk.models.operations.LogLineResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -1608,10 +1591,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.LogMultiLineBadRequest;
-            import dev.plexapi.plexapi.models.errors.LogMultiLineUnauthorized;
-            import dev.plexapi.plexapi.models.operations.LogMultiLineResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.LogMultiLineBadRequest;
+            import dev.plexapi.sdk.models.errors.LogMultiLineUnauthorized;
+            import dev.plexapi.sdk.models.operations.LogMultiLineResponse;
             import java.lang.Exception;
             import java.lang.String;
 
@@ -1640,10 +1623,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.EnablePaperTrailBadRequest;
-            import dev.plexapi.plexapi.models.errors.EnablePaperTrailUnauthorized;
-            import dev.plexapi.plexapi.models.operations.EnablePaperTrailResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.EnablePaperTrailBadRequest;
+            import dev.plexapi.sdk.models.errors.EnablePaperTrailUnauthorized;
+            import dev.plexapi.sdk.models.operations.EnablePaperTrailResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -1668,10 +1651,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetMediaProvidersBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetMediaProvidersUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetMediaProvidersResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetMediaProvidersBadRequest;
+            import dev.plexapi.sdk.models.errors.GetMediaProvidersUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetMediaProvidersResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -1699,10 +1682,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetMyPlexAccountBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetMyPlexAccountUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetMyPlexAccountResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetMyPlexAccountBadRequest;
+            import dev.plexapi.sdk.models.errors.GetMyPlexAccountUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetMyPlexAccountResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -1729,10 +1712,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetResizedPhotoBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetResizedPhotoUnauthorized;
-            import dev.plexapi.plexapi.models.operations.*;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetResizedPhotoBadRequest;
+            import dev.plexapi.sdk.models.errors.GetResizedPhotoUnauthorized;
+            import dev.plexapi.sdk.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -1768,10 +1751,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetPinBadRequest;
-            import dev.plexapi.plexapi.models.operations.GetPinRequest;
-            import dev.plexapi.plexapi.models.operations.GetPinResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetPinBadRequest;
+            import dev.plexapi.sdk.models.operations.GetPinRequest;
+            import dev.plexapi.sdk.models.operations.GetPinResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -1806,11 +1789,11 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetTokenByPinIdBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetTokenByPinIdResponseBody;
-            import dev.plexapi.plexapi.models.operations.GetTokenByPinIdRequest;
-            import dev.plexapi.plexapi.models.operations.GetTokenByPinIdResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetTokenByPinIdBadRequest;
+            import dev.plexapi.sdk.models.errors.GetTokenByPinIdResponseBody;
+            import dev.plexapi.sdk.models.operations.GetTokenByPinIdRequest;
+            import dev.plexapi.sdk.models.operations.GetTokenByPinIdResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -1846,10 +1829,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetPlaylistsBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetPlaylistsUnauthorized;
-            import dev.plexapi.plexapi.models.operations.*;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetPlaylistsBadRequest;
+            import dev.plexapi.sdk.models.errors.GetPlaylistsUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetPlaylistsResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -1861,8 +1844,6 @@ actions:
                         .build();
 
                     GetPlaylistsResponse res = sdk.playlists().getPlaylists()
-                            .playlistType(PlaylistType.AUDIO)
-                            .smart(QueryParamSmart.ZERO)
                             .call();
 
                     if (res.object().isPresent()) {
@@ -1878,10 +1859,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.CreatePlaylistBadRequest;
-            import dev.plexapi.plexapi.models.errors.CreatePlaylistUnauthorized;
-            import dev.plexapi.plexapi.models.operations.*;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.CreatePlaylistBadRequest;
+            import dev.plexapi.sdk.models.errors.CreatePlaylistUnauthorized;
+            import dev.plexapi.sdk.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -1916,11 +1897,11 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.UploadPlaylistBadRequest;
-            import dev.plexapi.plexapi.models.errors.UploadPlaylistUnauthorized;
-            import dev.plexapi.plexapi.models.operations.QueryParamForce;
-            import dev.plexapi.plexapi.models.operations.UploadPlaylistResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.UploadPlaylistBadRequest;
+            import dev.plexapi.sdk.models.errors.UploadPlaylistUnauthorized;
+            import dev.plexapi.sdk.models.operations.QueryParamForce;
+            import dev.plexapi.sdk.models.operations.UploadPlaylistResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -1948,10 +1929,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.DeletePlaylistBadRequest;
-            import dev.plexapi.plexapi.models.errors.DeletePlaylistUnauthorized;
-            import dev.plexapi.plexapi.models.operations.DeletePlaylistResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.DeletePlaylistBadRequest;
+            import dev.plexapi.sdk.models.errors.DeletePlaylistUnauthorized;
+            import dev.plexapi.sdk.models.operations.DeletePlaylistResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -1977,10 +1958,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetPlaylistBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetPlaylistUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetPlaylistResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetPlaylistBadRequest;
+            import dev.plexapi.sdk.models.errors.GetPlaylistUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetPlaylistResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -2008,10 +1989,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.UpdatePlaylistBadRequest;
-            import dev.plexapi.plexapi.models.errors.UpdatePlaylistUnauthorized;
-            import dev.plexapi.plexapi.models.operations.UpdatePlaylistResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.UpdatePlaylistBadRequest;
+            import dev.plexapi.sdk.models.errors.UpdatePlaylistUnauthorized;
+            import dev.plexapi.sdk.models.operations.UpdatePlaylistResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -2024,8 +2005,6 @@ actions:
 
                     UpdatePlaylistResponse res = sdk.playlists().updatePlaylist()
                             .playlistID(3915)
-                            .title("<value>")
-                            .summary("<value>")
                             .call();
 
                     // handle response
@@ -2039,10 +2018,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.ClearPlaylistContentsBadRequest;
-            import dev.plexapi.plexapi.models.errors.ClearPlaylistContentsUnauthorized;
-            import dev.plexapi.plexapi.models.operations.ClearPlaylistContentsResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.ClearPlaylistContentsBadRequest;
+            import dev.plexapi.sdk.models.errors.ClearPlaylistContentsUnauthorized;
+            import dev.plexapi.sdk.models.operations.ClearPlaylistContentsResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -2068,11 +2047,11 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetPlaylistContentsBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetPlaylistContentsUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetPlaylistContentsQueryParamType;
-            import dev.plexapi.plexapi.models.operations.GetPlaylistContentsResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetPlaylistContentsBadRequest;
+            import dev.plexapi.sdk.models.errors.GetPlaylistContentsUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetPlaylistContentsQueryParamType;
+            import dev.plexapi.sdk.models.operations.GetPlaylistContentsResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -2101,10 +2080,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.AddPlaylistContentsBadRequest;
-            import dev.plexapi.plexapi.models.errors.AddPlaylistContentsUnauthorized;
-            import dev.plexapi.plexapi.models.operations.AddPlaylistContentsResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.AddPlaylistContentsBadRequest;
+            import dev.plexapi.sdk.models.errors.AddPlaylistContentsUnauthorized;
+            import dev.plexapi.sdk.models.operations.AddPlaylistContentsResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -2134,10 +2113,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetServerResourcesBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetServerResourcesUnauthorized;
-            import dev.plexapi.plexapi.models.operations.*;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetServerResourcesBadRequest;
+            import dev.plexapi.sdk.models.errors.GetServerResourcesUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetServerResourcesResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -2149,9 +2128,6 @@ actions:
                         .build();
 
                     GetServerResourcesResponse res = sdk.plex().getServerResources()
-                            .includeHttps(IncludeHttps.Enable)
-                            .includeRelay(IncludeRelay.Enable)
-                            .includeIPv6(IncludeIPv6.Enable)
                             .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
                             .call();
 
@@ -2168,10 +2144,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetSearchResultsBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetSearchResultsUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetSearchResultsResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetSearchResultsBadRequest;
+            import dev.plexapi.sdk.models.errors.GetSearchResultsUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetSearchResultsResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -2199,10 +2175,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetSourceConnectionInformationBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetSourceConnectionInformationUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetSourceConnectionInformationResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetSourceConnectionInformationBadRequest;
+            import dev.plexapi.sdk.models.errors.GetSourceConnectionInformationUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetSourceConnectionInformationResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -2228,10 +2204,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetTransientTokenBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetTransientTokenUnauthorized;
-            import dev.plexapi.plexapi.models.operations.*;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetTransientTokenBadRequest;
+            import dev.plexapi.sdk.models.errors.GetTransientTokenUnauthorized;
+            import dev.plexapi.sdk.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -2258,10 +2234,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetServerListBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetServerListUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetServerListResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetServerListBadRequest;
+            import dev.plexapi.sdk.models.errors.GetServerListUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetServerListResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -2288,10 +2264,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetBandwidthStatisticsBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetBandwidthStatisticsUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetBandwidthStatisticsResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetBandwidthStatisticsBadRequest;
+            import dev.plexapi.sdk.models.errors.GetBandwidthStatisticsUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetBandwidthStatisticsResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -2319,10 +2295,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetStatisticsBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetStatisticsUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetStatisticsResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetStatisticsBadRequest;
+            import dev.plexapi.sdk.models.errors.GetStatisticsUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetStatisticsResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -2350,10 +2326,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetResourcesStatisticsBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetResourcesStatisticsUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetResourcesStatisticsResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetResourcesStatisticsBadRequest;
+            import dev.plexapi.sdk.models.errors.GetResourcesStatisticsUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetResourcesStatisticsResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -2381,10 +2357,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetSessionsBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetSessionsUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetSessionsResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetSessionsBadRequest;
+            import dev.plexapi.sdk.models.errors.GetSessionsUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetSessionsResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -2411,11 +2387,11 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetSessionHistoryBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetSessionHistoryUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetSessionHistoryResponse;
-            import dev.plexapi.plexapi.models.operations.QueryParamFilter;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetSessionHistoryBadRequest;
+            import dev.plexapi.sdk.models.errors.GetSessionHistoryUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetSessionHistoryResponse;
+            import dev.plexapi.sdk.models.operations.QueryParamFilter;
             import java.lang.Exception;
 
             public class Application {
@@ -2447,10 +2423,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetTranscodeSessionsBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetTranscodeSessionsUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetTranscodeSessionsResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetTranscodeSessionsBadRequest;
+            import dev.plexapi.sdk.models.errors.GetTranscodeSessionsUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetTranscodeSessionsResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -2477,10 +2453,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.StopTranscodeSessionBadRequest;
-            import dev.plexapi.plexapi.models.errors.StopTranscodeSessionUnauthorized;
-            import dev.plexapi.plexapi.models.operations.StopTranscodeSessionResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.StopTranscodeSessionBadRequest;
+            import dev.plexapi.sdk.models.errors.StopTranscodeSessionUnauthorized;
+            import dev.plexapi.sdk.models.operations.StopTranscodeSessionResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -2506,10 +2482,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.ApplyUpdatesBadRequest;
-            import dev.plexapi.plexapi.models.errors.ApplyUpdatesUnauthorized;
-            import dev.plexapi.plexapi.models.operations.*;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.ApplyUpdatesBadRequest;
+            import dev.plexapi.sdk.models.errors.ApplyUpdatesUnauthorized;
+            import dev.plexapi.sdk.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -2536,11 +2512,11 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.CheckForUpdatesBadRequest;
-            import dev.plexapi.plexapi.models.errors.CheckForUpdatesUnauthorized;
-            import dev.plexapi.plexapi.models.operations.CheckForUpdatesResponse;
-            import dev.plexapi.plexapi.models.operations.Download;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.CheckForUpdatesBadRequest;
+            import dev.plexapi.sdk.models.errors.CheckForUpdatesUnauthorized;
+            import dev.plexapi.sdk.models.operations.CheckForUpdatesResponse;
+            import dev.plexapi.sdk.models.operations.Download;
             import java.lang.Exception;
 
             public class Application {
@@ -2566,10 +2542,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetUpdateStatusBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetUpdateStatusUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetUpdateStatusResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetUpdateStatusBadRequest;
+            import dev.plexapi.sdk.models.errors.GetUpdateStatusUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetUpdateStatusResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -2596,10 +2572,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetTokenDetailsBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetTokenDetailsUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetTokenDetailsResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetTokenDetailsBadRequest;
+            import dev.plexapi.sdk.models.errors.GetTokenDetailsUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetTokenDetailsResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -2626,11 +2602,11 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.GetUsersBadRequest;
-            import dev.plexapi.plexapi.models.errors.GetUsersUnauthorized;
-            import dev.plexapi.plexapi.models.operations.GetUsersRequest;
-            import dev.plexapi.plexapi.models.operations.GetUsersResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetUsersBadRequest;
+            import dev.plexapi.sdk.models.errors.GetUsersUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetUsersRequest;
+            import dev.plexapi.sdk.models.operations.GetUsersResponse;
             import java.lang.Exception;
 
             public class Application {
@@ -2673,10 +2649,10 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.PostUsersSignInDataBadRequest;
-            import dev.plexapi.plexapi.models.errors.PostUsersSignInDataUnauthorized;
-            import dev.plexapi.plexapi.models.operations.*;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.PostUsersSignInDataBadRequest;
+            import dev.plexapi.sdk.models.errors.PostUsersSignInDataUnauthorized;
+            import dev.plexapi.sdk.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -2716,11 +2692,11 @@ actions:
           source: |-
             package hello.world;
 
-            import dev.plexapi.plexapi.PlexAPI;
-            import dev.plexapi.plexapi.models.errors.StartUniversalTranscodeBadRequest;
-            import dev.plexapi.plexapi.models.errors.StartUniversalTranscodeUnauthorized;
-            import dev.plexapi.plexapi.models.operations.StartUniversalTranscodeRequest;
-            import dev.plexapi.plexapi.models.operations.StartUniversalTranscodeResponse;
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.StartUniversalTranscodeBadRequest;
+            import dev.plexapi.sdk.models.errors.StartUniversalTranscodeUnauthorized;
+            import dev.plexapi.sdk.models.operations.StartUniversalTranscodeRequest;
+            import dev.plexapi.sdk.models.operations.StartUniversalTranscodeResponse;
             import java.lang.Exception;
 
             public class Application {

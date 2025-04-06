@@ -49,8 +49,6 @@ public class Application {
 
         PerformSearchResponse res = sdk.search().performSearch()
                 .query("dylan")
-                .sectionId(9487.88)
-                .limit(5)
                 .call();
 
         // handle response
@@ -107,8 +105,6 @@ public class Application {
 
         PerformVoiceSearchResponse res = sdk.search().performVoiceSearch()
                 .query("dead+poop")
-                .sectionId(4094.8)
-                .limit(5)
                 .call();
 
         // handle response
