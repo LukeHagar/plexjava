@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 1732900d-e173-47c1-a90d-d45182eb35d9
 management:
-  docChecksum: 184db864cffee563d43aae06915b9671
+  docChecksum: fa4c9c5c23680ad02fdbe831ad9d2403
   docVersion: 0.0.3
-  speakeasyVersion: 1.529.1
-  generationVersion: 2.566.5
-  releaseVersion: 0.14.2
-  configChecksum: bad4d944912dc794f8497b0cfca8b8b2
+  speakeasyVersion: 1.531.4
+  generationVersion: 2.570.4
+  releaseVersion: 0.15.0
+  configChecksum: 8a775baa0e7c2ba4c10a7c8bb26dbcd3
   repoURL: https://github.com/LukeHagar/plexjava.git
   published: true
 features:
   java:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.36.2
+    core: 3.37.1
     deprecations: 2.81.1
     downloadStreams: 0.1.1
     enums: 2.81.2

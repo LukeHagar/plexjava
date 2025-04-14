@@ -52,7 +52,7 @@ public class PlexAPI {
         /**
          * The full address of your Plex Server
          */
-        "https://10.10.10.47:32400",
+        "{protocol}://{ip}:{port}",
     };
 
     /**

@@ -12,7 +12,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Integer;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -127,10 +126,11 @@ public class GetAllLibrariesDirectory {
     private boolean directory;
 
     /**
-     * The number of seconds since the content was last changed relative to now.
+     * Timestamp (in seconds) representing the last time the content was modified.
+     * NOTE: Some Plex server have some absurd values for this field, like 8457612157633039800 so it should be int64
      */
     @JsonProperty("contentChangedAt")
-    private int contentChangedAt;
+    private long contentChangedAt;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hidden")
@@ -159,7 +159,7 @@ public class GetAllLibrariesDirectory {
             @JsonProperty("scannedAt") long scannedAt,
             @JsonProperty("content") boolean content,
             @JsonProperty("directory") boolean directory,
-            @JsonProperty("contentChangedAt") int contentChangedAt,
+            @JsonProperty("contentChangedAt") long contentChangedAt,
             @JsonProperty("hidden") Optional<? extends Hidden> hidden,
             @JsonProperty("Location") List<GetAllLibrariesLocation> location) {
         Utils.checkNotNull(allowSync, "allowSync");
@@ -224,7 +224,7 @@ public class GetAllLibrariesDirectory {
             long scannedAt,
             boolean content,
             boolean directory,
-            int contentChangedAt,
+            long contentChangedAt,
             List<GetAllLibrariesLocation> location) {
         this(allowSync, art, composite, filters, refreshing, thumb, key, type, title, agent, scanner, language, uuid, updatedAt, Optional.empty(), scannedAt, content, directory, contentChangedAt, Optional.empty(), location);
     }
@@ -368,10 +368,11 @@ public class GetAllLibrariesDirectory {
     }
 
     /**
-     * The number of seconds since the content was last changed relative to now.
+     * Timestamp (in seconds) representing the last time the content was modified.
+     * NOTE: Some Plex server have some absurd values for this field, like 8457612157633039800 so it should be int64
      */
     @JsonIgnore
-    public int contentChangedAt() {
+    public long contentChangedAt() {
         return contentChangedAt;
     }
 
@@ -553,9 +554,10 @@ public class GetAllLibrariesDirectory {
     }
 
     /**
-     * The number of seconds since the content was last changed relative to now.
+     * Timestamp (in seconds) representing the last time the content was modified.
+     * NOTE: Some Plex server have some absurd values for this field, like 8457612157633039800 so it should be int64
      */
-    public GetAllLibrariesDirectory withContentChangedAt(int contentChangedAt) {
+    public GetAllLibrariesDirectory withContentChangedAt(long contentChangedAt) {
         Utils.checkNotNull(contentChangedAt, "contentChangedAt");
         this.contentChangedAt = contentChangedAt;
         return this;
@@ -703,7 +705,7 @@ public class GetAllLibrariesDirectory {
  
         private Boolean directory;
  
-        private Integer contentChangedAt;
+        private Long contentChangedAt;
  
         private Optional<? extends Hidden> hidden;
  
@@ -876,9 +878,10 @@ public class GetAllLibrariesDirectory {
         }
 
         /**
-         * The number of seconds since the content was last changed relative to now.
+         * Timestamp (in seconds) representing the last time the content was modified.
+         * NOTE: Some Plex server have some absurd values for this field, like 8457612157633039800 so it should be int64
          */
-        public Builder contentChangedAt(int contentChangedAt) {
+        public Builder contentChangedAt(long contentChangedAt) {
             Utils.checkNotNull(contentChangedAt, "contentChangedAt");
             this.contentChangedAt = contentChangedAt;
             return this;
