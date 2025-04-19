@@ -14,11 +14,11 @@ import java.util.Objects;
 public class LogLineRequest {
 
     /**
-     * An integer log level to write to the PMS log with.  
-     * 0: Error  
-     * 1: Warning  
-     * 2: Info  
-     * 3: Debug  
+     * An integer log level to write to the PMS log with.
+     * 0: Error
+     * 1: Warning
+     * 2: Info
+     * 3: Debug
      * 4: Verbose
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=level")
@@ -50,11 +50,11 @@ public class LogLineRequest {
     }
 
     /**
-     * An integer log level to write to the PMS log with.  
-     * 0: Error  
-     * 1: Warning  
-     * 2: Info  
-     * 3: Debug  
+     * An integer log level to write to the PMS log with.
+     * 0: Error
+     * 1: Warning
+     * 2: Info
+     * 3: Debug
      * 4: Verbose
      */
     @JsonIgnore
@@ -83,11 +83,11 @@ public class LogLineRequest {
     }    
 
     /**
-     * An integer log level to write to the PMS log with.  
-     * 0: Error  
-     * 1: Warning  
-     * 2: Info  
-     * 3: Debug  
+     * An integer log level to write to the PMS log with.
+     * 0: Error
+     * 1: Warning
+     * 2: Info
+     * 3: Debug
      * 4: Verbose
      */
     public LogLineRequest withLevel(Level level) {
@@ -159,11 +159,11 @@ public class LogLineRequest {
         }
 
         /**
-         * An integer log level to write to the PMS log with.  
-         * 0: Error  
-         * 1: Warning  
-         * 2: Info  
-         * 3: Debug  
+         * An integer log level to write to the PMS log with.
+         * 0: Error
+         * 1: Warning
+         * 2: Info
+         * 3: Debug
          * 4: Verbose
          */
         public Builder level(Level level) {

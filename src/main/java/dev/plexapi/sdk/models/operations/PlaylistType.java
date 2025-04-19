@@ -3,39 +3,186 @@
  */
 package dev.plexapi.sdk.models.operations;
 
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.core.JacksonException;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import java.io.IOException;
+import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * <p>Wrapper class for an "open" enum. "Open" enums are those that are expected
+ * to evolve (particularly with the addition of enum members over time). If an
+ * open enum is used then the appearance of unexpected enum values (say in a 
+ * response from an updated an API) will not bring about a runtime error thus 
+ * ensuring that non-updated client versions can continue to work without error.
+ *
+ * <p>Note that instances are immutable and are singletons (an internal thread-safe
+ * cache is maintained to ensure that). As a consequence instances created with the 
+ * same value will satisfy reference equality (via {@code ==}).
+ * 
+ * <p>This class is intended to emulate an enum (in terms of common usage and with 
+ * reference equality) but with the ability to carry unknown values. Unfortunately
+ * Java does not permit the use of an instance in a switch expression but you can 
+ * use the {@code asEnum()} method (after dealing with the `Optional` appropriately).
+ *
+ */
 /**
  * PlaylistType
  * 
  * <p>limit to a type of playlist.
  */
-public enum PlaylistType {
-    AUDIO("audio"),
-    VIDEO("video"),
-    PHOTO("photo");
+@JsonDeserialize(using = PlaylistType._Deserializer.class)
+@JsonSerialize(using = PlaylistType._Serializer.class)
+public class PlaylistType {
 
-    @JsonValue
+    public static final PlaylistType AUDIO = new PlaylistType("audio");
+    public static final PlaylistType VIDEO = new PlaylistType("video");
+    public static final PlaylistType PHOTO = new PlaylistType("photo");
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, PlaylistType> values = createValuesMap();
+    private static final Map<String, PlaylistTypeEnum> enums = createEnumsMap();
+
     private final String value;
 
     private PlaylistType(String value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a PlaylistType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as PlaylistType
+     */ 
+    public static PlaylistType of(String value) {
+        synchronized (PlaylistType.class) {
+            return values.computeIfAbsent(value, v -> new PlaylistType(v));
+        }
+    }
+
     public String value() {
         return value;
     }
-    
-    public static Optional<PlaylistType> fromValue(String value) {
-        for (PlaylistType o: PlaylistType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<PlaylistTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        PlaylistType other = (PlaylistType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "PlaylistType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static PlaylistType[] values() {
+        synchronized (PlaylistType.class) {
+            return values.values().toArray(new PlaylistType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<String, PlaylistType> createValuesMap() {
+        Map<String, PlaylistType> map = new LinkedHashMap<>();
+        map.put("audio", AUDIO);
+        map.put("video", VIDEO);
+        map.put("photo", PHOTO);
+        return map;
+    }
+
+    private static final Map<String, PlaylistTypeEnum> createEnumsMap() {
+        Map<String, PlaylistTypeEnum> map = new HashMap<>();
+        map.put("audio", PlaylistTypeEnum.AUDIO);
+        map.put("video", PlaylistTypeEnum.VIDEO);
+        map.put("photo", PlaylistTypeEnum.PHOTO);
+        return map;
+    }
+    
+    @SuppressWarnings("serial")
+    public static final class _Serializer extends StdSerializer<PlaylistType> {
+
+        protected _Serializer() {
+            super(PlaylistType.class);
+        }
+
+        @Override
+        public void serialize(PlaylistType value, JsonGenerator g, SerializerProvider provider)
+                throws IOException, JsonProcessingException {
+            g.writeObject(value.value);
+        }
+    }
+
+    @SuppressWarnings("serial")
+    public static final class _Deserializer extends StdDeserializer<PlaylistType> {
+
+        protected _Deserializer() {
+            super(PlaylistType.class);
+        }
+
+        @Override
+        public PlaylistType deserialize(JsonParser p, DeserializationContext ctxt)
+                throws IOException, JacksonException {
+            String v = p.readValueAs(new TypeReference<String>() {});
+            // use the factory method to ensure we get singletons
+            return PlaylistType.of(v);
+        }
+    }
+    
+    public enum PlaylistTypeEnum {
+
+        AUDIO("audio"),
+        VIDEO("video"),
+        PHOTO("photo"),;
+
+        private final String value;
+
+        private PlaylistTypeEnum(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
     }
 }
 

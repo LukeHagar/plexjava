@@ -3,10 +3,45 @@
  */
 package dev.plexapi.sdk.models.operations;
 
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.core.JacksonException;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import java.io.IOException;
+import java.lang.Long;
+import java.lang.Override;
+import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * <p>Wrapper class for an "open" enum. "Open" enums are those that are expected
+ * to evolve (particularly with the addition of enum members over time). If an
+ * open enum is used then the appearance of unexpected enum values (say in a 
+ * response from an updated an API) will not bring about a runtime error thus 
+ * ensuring that non-updated client versions can continue to work without error.
+ *
+ * <p>Note that instances are immutable and are singletons (an internal thread-safe
+ * cache is maintained to ensure that). As a consequence instances created with the 
+ * same value will satisfy reference equality (via {@code ==}).
+ * 
+ * <p>This class is intended to emulate an enum (in terms of common usage and with 
+ * reference equality) but with the ability to carry unknown values. Unfortunately
+ * Java does not permit the use of an instance in a switch expression but you can 
+ * use the {@code asEnum()} method (after dealing with the `Optional` appropriately).
+ *
+ */
 /**
  * Type
  * 
@@ -17,33 +52,159 @@ import java.util.Optional;
  * 4 = episode
  * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
  */
-public enum Type {
-    Movie(1L),
-    TvShow(2L),
-    Season(3L),
-    Episode(4L),
-    Audio(8L),
-    Album(9L),
-    Track(10L);
+@JsonDeserialize(using = Type._Deserializer.class)
+@JsonSerialize(using = Type._Serializer.class)
+public class Type {
 
-    @JsonValue
+    public static final Type Movie = new Type(1L);
+    public static final Type TvShow = new Type(2L);
+    public static final Type Season = new Type(3L);
+    public static final Type Episode = new Type(4L);
+    public static final Type Audio = new Type(8L);
+    public static final Type Album = new Type(9L);
+    public static final Type Track = new Type(10L);
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<Long, Type> values = createValuesMap();
+    private static final Map<Long, TypeEnum> enums = createEnumsMap();
+
     private final long value;
 
     private Type(long value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a Type with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as Type
+     */ 
+    public static Type of(long value) {
+        synchronized (Type.class) {
+            return values.computeIfAbsent(value, v -> new Type(v));
+        }
+    }
+
     public long value() {
         return value;
     }
-    
-    public static Optional<Type> fromValue(long value) {
-        for (Type o: Type.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<TypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Type other = (Type) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "Type [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static Type[] values() {
+        synchronized (Type.class) {
+            return values.values().toArray(new Type[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<Long, Type> createValuesMap() {
+        Map<Long, Type> map = new LinkedHashMap<>();
+        map.put(1L, Movie);
+        map.put(2L, TvShow);
+        map.put(3L, Season);
+        map.put(4L, Episode);
+        map.put(8L, Audio);
+        map.put(9L, Album);
+        map.put(10L, Track);
+        return map;
+    }
+
+    private static final Map<Long, TypeEnum> createEnumsMap() {
+        Map<Long, TypeEnum> map = new HashMap<>();
+        map.put(1L, TypeEnum.Movie);
+        map.put(2L, TypeEnum.TvShow);
+        map.put(3L, TypeEnum.Season);
+        map.put(4L, TypeEnum.Episode);
+        map.put(8L, TypeEnum.Audio);
+        map.put(9L, TypeEnum.Album);
+        map.put(10L, TypeEnum.Track);
+        return map;
+    }
+    
+    @SuppressWarnings("serial")
+    public static final class _Serializer extends StdSerializer<Type> {
+
+        protected _Serializer() {
+            super(Type.class);
+        }
+
+        @Override
+        public void serialize(Type value, JsonGenerator g, SerializerProvider provider)
+                throws IOException, JsonProcessingException {
+            g.writeObject(value.value);
+        }
+    }
+
+    @SuppressWarnings("serial")
+    public static final class _Deserializer extends StdDeserializer<Type> {
+
+        protected _Deserializer() {
+            super(Type.class);
+        }
+
+        @Override
+        public Type deserialize(JsonParser p, DeserializationContext ctxt)
+                throws IOException, JacksonException {
+            long v = p.readValueAs(new TypeReference<Long>() {});
+            // use the factory method to ensure we get singletons
+            return Type.of(v);
+        }
+    }
+    
+    public enum TypeEnum {
+
+        Movie(1L),
+        TvShow(2L),
+        Season(3L),
+        Episode(4L),
+        Audio(8L),
+        Album(9L),
+        Track(10L),;
+
+        private final long value;
+
+        private TypeEnum(long value) {
+            this.value = value;
+        }
+
+        public long value() {
+            return value;
+        }
     }
 }
 

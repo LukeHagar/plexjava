@@ -700,14 +700,14 @@ public class Library implements
      * 
      * <p>## Library Details Endpoint
      * 
-     * <p>This endpoint provides comprehensive details about the library, focusing on organizational aspects rather than the content itself.   
+     * <p>This endpoint provides comprehensive details about the library, focusing on organizational aspects rather than the content itself.
      * 
      * <p>The details include:
      * 
      * <p>### Directories
      * Organized into three categories:
      * 
-     * <p>- **Primary Directories**: 
+     * <p>- **Primary Directories**:
      *   - Used in some clients for quick access to media subsets (e.g., "All", "On Deck").
      *   - Most can be replicated via media queries.
      *   - Customizable by users.
@@ -749,14 +749,14 @@ public class Library implements
      * 
      * <p>## Library Details Endpoint
      * 
-     * <p>This endpoint provides comprehensive details about the library, focusing on organizational aspects rather than the content itself.   
+     * <p>This endpoint provides comprehensive details about the library, focusing on organizational aspects rather than the content itself.
      * 
      * <p>The details include:
      * 
      * <p>### Directories
      * Organized into three categories:
      * 
-     * <p>- **Primary Directories**: 
+     * <p>- **Primary Directories**:
      *   - Used in some clients for quick access to media subsets (e.g., "All", "On Deck").
      *   - Most can be replicated via media queries.
      *   - Customizable by users.
@@ -803,14 +803,14 @@ public class Library implements
      * 
      * <p>## Library Details Endpoint
      * 
-     * <p>This endpoint provides comprehensive details about the library, focusing on organizational aspects rather than the content itself.   
+     * <p>This endpoint provides comprehensive details about the library, focusing on organizational aspects rather than the content itself.
      * 
      * <p>The details include:
      * 
      * <p>### Directories
      * Organized into three categories:
      * 
-     * <p>- **Primary Directories**: 
+     * <p>- **Primary Directories**:
      *   - Used in some clients for quick access to media subsets (e.g., "All", "On Deck").
      *   - Most can be replicated via media queries.
      *   - Customizable by users.
@@ -841,7 +841,7 @@ public class Library implements
      * 
      * <p>&gt; **Note**: Filters and sorts are optional; without them, no filtering controls are rendered.
      * 
-     * @param includeDetails Whether or not to include details for a section (types, filters, and sorts). 
+     * @param includeDetails Whether or not to include details for a section (types, filters, and sorts).
      *         Only exists for backwards compatibility, media providers other than the server libraries have it on always.
      *         
      * @param sectionKey The unique key of the Plex library. 

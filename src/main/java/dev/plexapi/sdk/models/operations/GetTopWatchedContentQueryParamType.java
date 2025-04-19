@@ -3,10 +3,45 @@
  */
 package dev.plexapi.sdk.models.operations;
 
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.core.JacksonException;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import java.io.IOException;
+import java.lang.Long;
+import java.lang.Override;
+import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * <p>Wrapper class for an "open" enum. "Open" enums are those that are expected
+ * to evolve (particularly with the addition of enum members over time). If an
+ * open enum is used then the appearance of unexpected enum values (say in a 
+ * response from an updated an API) will not bring about a runtime error thus 
+ * ensuring that non-updated client versions can continue to work without error.
+ *
+ * <p>Note that instances are immutable and are singletons (an internal thread-safe
+ * cache is maintained to ensure that). As a consequence instances created with the 
+ * same value will satisfy reference equality (via {@code ==}).
+ * 
+ * <p>This class is intended to emulate an enum (in terms of common usage and with 
+ * reference equality) but with the ability to carry unknown values. Unfortunately
+ * Java does not permit the use of an instance in a switch expression but you can 
+ * use the {@code asEnum()} method (after dealing with the `Optional` appropriately).
+ *
+ */
 /**
  * GetTopWatchedContentQueryParamType
  * 
@@ -17,33 +52,159 @@ import java.util.Optional;
  * 4 = episode
  * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
  */
-public enum GetTopWatchedContentQueryParamType {
-    Movie(1L),
-    TvShow(2L),
-    Season(3L),
-    Episode(4L),
-    Audio(8L),
-    Album(9L),
-    Track(10L);
+@JsonDeserialize(using = GetTopWatchedContentQueryParamType._Deserializer.class)
+@JsonSerialize(using = GetTopWatchedContentQueryParamType._Serializer.class)
+public class GetTopWatchedContentQueryParamType {
 
-    @JsonValue
+    public static final GetTopWatchedContentQueryParamType Movie = new GetTopWatchedContentQueryParamType(1L);
+    public static final GetTopWatchedContentQueryParamType TvShow = new GetTopWatchedContentQueryParamType(2L);
+    public static final GetTopWatchedContentQueryParamType Season = new GetTopWatchedContentQueryParamType(3L);
+    public static final GetTopWatchedContentQueryParamType Episode = new GetTopWatchedContentQueryParamType(4L);
+    public static final GetTopWatchedContentQueryParamType Audio = new GetTopWatchedContentQueryParamType(8L);
+    public static final GetTopWatchedContentQueryParamType Album = new GetTopWatchedContentQueryParamType(9L);
+    public static final GetTopWatchedContentQueryParamType Track = new GetTopWatchedContentQueryParamType(10L);
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<Long, GetTopWatchedContentQueryParamType> values = createValuesMap();
+    private static final Map<Long, GetTopWatchedContentQueryParamTypeEnum> enums = createEnumsMap();
+
     private final long value;
 
     private GetTopWatchedContentQueryParamType(long value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a GetTopWatchedContentQueryParamType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as GetTopWatchedContentQueryParamType
+     */ 
+    public static GetTopWatchedContentQueryParamType of(long value) {
+        synchronized (GetTopWatchedContentQueryParamType.class) {
+            return values.computeIfAbsent(value, v -> new GetTopWatchedContentQueryParamType(v));
+        }
+    }
+
     public long value() {
         return value;
     }
-    
-    public static Optional<GetTopWatchedContentQueryParamType> fromValue(long value) {
-        for (GetTopWatchedContentQueryParamType o: GetTopWatchedContentQueryParamType.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<GetTopWatchedContentQueryParamTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        GetTopWatchedContentQueryParamType other = (GetTopWatchedContentQueryParamType) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "GetTopWatchedContentQueryParamType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static GetTopWatchedContentQueryParamType[] values() {
+        synchronized (GetTopWatchedContentQueryParamType.class) {
+            return values.values().toArray(new GetTopWatchedContentQueryParamType[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<Long, GetTopWatchedContentQueryParamType> createValuesMap() {
+        Map<Long, GetTopWatchedContentQueryParamType> map = new LinkedHashMap<>();
+        map.put(1L, Movie);
+        map.put(2L, TvShow);
+        map.put(3L, Season);
+        map.put(4L, Episode);
+        map.put(8L, Audio);
+        map.put(9L, Album);
+        map.put(10L, Track);
+        return map;
+    }
+
+    private static final Map<Long, GetTopWatchedContentQueryParamTypeEnum> createEnumsMap() {
+        Map<Long, GetTopWatchedContentQueryParamTypeEnum> map = new HashMap<>();
+        map.put(1L, GetTopWatchedContentQueryParamTypeEnum.Movie);
+        map.put(2L, GetTopWatchedContentQueryParamTypeEnum.TvShow);
+        map.put(3L, GetTopWatchedContentQueryParamTypeEnum.Season);
+        map.put(4L, GetTopWatchedContentQueryParamTypeEnum.Episode);
+        map.put(8L, GetTopWatchedContentQueryParamTypeEnum.Audio);
+        map.put(9L, GetTopWatchedContentQueryParamTypeEnum.Album);
+        map.put(10L, GetTopWatchedContentQueryParamTypeEnum.Track);
+        return map;
+    }
+    
+    @SuppressWarnings("serial")
+    public static final class _Serializer extends StdSerializer<GetTopWatchedContentQueryParamType> {
+
+        protected _Serializer() {
+            super(GetTopWatchedContentQueryParamType.class);
+        }
+
+        @Override
+        public void serialize(GetTopWatchedContentQueryParamType value, JsonGenerator g, SerializerProvider provider)
+                throws IOException, JsonProcessingException {
+            g.writeObject(value.value);
+        }
+    }
+
+    @SuppressWarnings("serial")
+    public static final class _Deserializer extends StdDeserializer<GetTopWatchedContentQueryParamType> {
+
+        protected _Deserializer() {
+            super(GetTopWatchedContentQueryParamType.class);
+        }
+
+        @Override
+        public GetTopWatchedContentQueryParamType deserialize(JsonParser p, DeserializationContext ctxt)
+                throws IOException, JacksonException {
+            long v = p.readValueAs(new TypeReference<Long>() {});
+            // use the factory method to ensure we get singletons
+            return GetTopWatchedContentQueryParamType.of(v);
+        }
+    }
+    
+    public enum GetTopWatchedContentQueryParamTypeEnum {
+
+        Movie(1L),
+        TvShow(2L),
+        Season(3L),
+        Episode(4L),
+        Audio(8L),
+        Album(9L),
+        Track(10L),;
+
+        private final long value;
+
+        private GetTopWatchedContentQueryParamTypeEnum(long value) {
+            this.value = value;
+        }
+
+        public long value() {
+            return value;
+        }
     }
 }
 

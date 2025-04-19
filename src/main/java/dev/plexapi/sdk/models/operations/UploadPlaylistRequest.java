@@ -17,20 +17,20 @@ import java.util.Objects;
 public class UploadPlaylistRequest {
 
     /**
-     * absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server. 
-     * If the `path` argument is a directory, that path will be scanned for playlist files to be processed. 
-     * Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it. 
-     * The GUID of each playlist is based on the filename. 
-     * If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it. 
+     * absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server.
+     * If the `path` argument is a directory, that path will be scanned for playlist files to be processed.
+     * Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it.
+     * The GUID of each playlist is based on the filename.
+     * If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it.
      * The GUID of each playlist is based on the filename.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=path")
     private String path;
 
     /**
-     * Force overwriting of duplicate playlists.  
-     * By default, a playlist file uploaded with the same path will overwrite the existing playlist. 
-     * The `force` argument is used to disable overwriting.  
+     * Force overwriting of duplicate playlists.
+     * By default, a playlist file uploaded with the same path will overwrite the existing playlist.
+     * The `force` argument is used to disable overwriting.
      * If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=force")
@@ -56,11 +56,11 @@ public class UploadPlaylistRequest {
     }
 
     /**
-     * absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server. 
-     * If the `path` argument is a directory, that path will be scanned for playlist files to be processed. 
-     * Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it. 
-     * The GUID of each playlist is based on the filename. 
-     * If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it. 
+     * absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server.
+     * If the `path` argument is a directory, that path will be scanned for playlist files to be processed.
+     * Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it.
+     * The GUID of each playlist is based on the filename.
+     * If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it.
      * The GUID of each playlist is based on the filename.
      */
     @JsonIgnore
@@ -69,9 +69,9 @@ public class UploadPlaylistRequest {
     }
 
     /**
-     * Force overwriting of duplicate playlists.  
-     * By default, a playlist file uploaded with the same path will overwrite the existing playlist. 
-     * The `force` argument is used to disable overwriting.  
+     * Force overwriting of duplicate playlists.
+     * By default, a playlist file uploaded with the same path will overwrite the existing playlist.
+     * The `force` argument is used to disable overwriting.
      * If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.
      */
     @JsonIgnore
@@ -92,11 +92,11 @@ public class UploadPlaylistRequest {
     }    
 
     /**
-     * absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server. 
-     * If the `path` argument is a directory, that path will be scanned for playlist files to be processed. 
-     * Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it. 
-     * The GUID of each playlist is based on the filename. 
-     * If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it. 
+     * absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server.
+     * If the `path` argument is a directory, that path will be scanned for playlist files to be processed.
+     * Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it.
+     * The GUID of each playlist is based on the filename.
+     * If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it.
      * The GUID of each playlist is based on the filename.
      */
     public UploadPlaylistRequest withPath(String path) {
@@ -106,9 +106,9 @@ public class UploadPlaylistRequest {
     }
 
     /**
-     * Force overwriting of duplicate playlists.  
-     * By default, a playlist file uploaded with the same path will overwrite the existing playlist. 
-     * The `force` argument is used to disable overwriting.  
+     * Force overwriting of duplicate playlists.
+     * By default, a playlist file uploaded with the same path will overwrite the existing playlist.
+     * The `force` argument is used to disable overwriting.
      * If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.
      */
     public UploadPlaylistRequest withForce(QueryParamForce force) {
@@ -171,11 +171,11 @@ public class UploadPlaylistRequest {
         }
 
         /**
-         * absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server. 
-         * If the `path` argument is a directory, that path will be scanned for playlist files to be processed. 
-         * Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it. 
-         * The GUID of each playlist is based on the filename. 
-         * If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it. 
+         * absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server.
+         * If the `path` argument is a directory, that path will be scanned for playlist files to be processed.
+         * Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it.
+         * The GUID of each playlist is based on the filename.
+         * If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it.
          * The GUID of each playlist is based on the filename.
          */
         public Builder path(String path) {
@@ -185,9 +185,9 @@ public class UploadPlaylistRequest {
         }
 
         /**
-         * Force overwriting of duplicate playlists.  
-         * By default, a playlist file uploaded with the same path will overwrite the existing playlist. 
-         * The `force` argument is used to disable overwriting.  
+         * Force overwriting of duplicate playlists.
+         * By default, a playlist file uploaded with the same path will overwrite the existing playlist.
+         * The `force` argument is used to disable overwriting.
          * If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.
          */
         public Builder force(QueryParamForce force) {

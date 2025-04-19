@@ -68,11 +68,11 @@ public class Log implements
      * 
      * <p>This endpoint will write a single-line log message, including a level and source to the main Plex Media Server log.
      * 
-     * @param level An integer log level to write to the PMS log with.  
-     *         0: Error  
-     *         1: Warning  
-     *         2: Info  
-     *         3: Debug  
+     * @param level An integer log level to write to the PMS log with.
+     *         0: Error
+     *         1: Warning
+     *         2: Info
+     *         3: Debug
      *         4: Verbose
      *         
      * @param message The text of the message to write to the log.
@@ -232,13 +232,13 @@ public class Log implements
     /**
      * Logging a multi-line message
      * 
-     * <p>This endpoint allows for the batch addition of log entries to the main Plex Media Server log.  
-     * It accepts a text/plain request body, where each line represents a distinct log entry.  
-     * Each log entry consists of URL-encoded key-value pairs, specifying log attributes such as 'level', 'message', and 'source'.  
+     * <p>This endpoint allows for the batch addition of log entries to the main Plex Media Server log.
+     * It accepts a text/plain request body, where each line represents a distinct log entry.
+     * Each log entry consists of URL-encoded key-value pairs, specifying log attributes such as 'level', 'message', and 'source'.
      * 
-     * <p>Log entries are separated by a newline character (`\n`).  
-     * Each entry's parameters should be URL-encoded to ensure accurate parsing and handling of special characters.  
-     * This method is efficient for logging multiple entries in a single API call, reducing the overhead of multiple individual requests.  
+     * <p>Log entries are separated by a newline character (`\n`).
+     * Each entry's parameters should be URL-encoded to ensure accurate parsing and handling of special characters.
+     * This method is efficient for logging multiple entries in a single API call, reducing the overhead of multiple individual requests.
      * 
      * <p>The 'level' parameter specifies the log entry's severity or importance, with the following integer values:
      * - `0`: Error - Critical issues that require immediate attention.
@@ -263,13 +263,13 @@ public class Log implements
     /**
      * Logging a multi-line message
      * 
-     * <p>This endpoint allows for the batch addition of log entries to the main Plex Media Server log.  
-     * It accepts a text/plain request body, where each line represents a distinct log entry.  
-     * Each log entry consists of URL-encoded key-value pairs, specifying log attributes such as 'level', 'message', and 'source'.  
+     * <p>This endpoint allows for the batch addition of log entries to the main Plex Media Server log.
+     * It accepts a text/plain request body, where each line represents a distinct log entry.
+     * Each log entry consists of URL-encoded key-value pairs, specifying log attributes such as 'level', 'message', and 'source'.
      * 
-     * <p>Log entries are separated by a newline character (`\n`).  
-     * Each entry's parameters should be URL-encoded to ensure accurate parsing and handling of special characters.  
-     * This method is efficient for logging multiple entries in a single API call, reducing the overhead of multiple individual requests.  
+     * <p>Log entries are separated by a newline character (`\n`).
+     * Each entry's parameters should be URL-encoded to ensure accurate parsing and handling of special characters.
+     * This method is efficient for logging multiple entries in a single API call, reducing the overhead of multiple individual requests.
      * 
      * <p>The 'level' parameter specifies the log entry's severity or importance, with the following integer values:
      * - `0`: Error - Critical issues that require immediate attention.

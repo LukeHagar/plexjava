@@ -3,45 +3,200 @@
  */
 package dev.plexapi.sdk.models.operations;
 
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.core.JacksonException;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import java.io.IOException;
+import java.lang.Long;
+import java.lang.Override;
+import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
 /**
+ * <p>Wrapper class for an "open" enum. "Open" enums are those that are expected
+ * to evolve (particularly with the addition of enum members over time). If an
+ * open enum is used then the appearance of unexpected enum values (say in a 
+ * response from an updated an API) will not bring about a runtime error thus 
+ * ensuring that non-updated client versions can continue to work without error.
+ *
+ * <p>Note that instances are immutable and are singletons (an internal thread-safe
+ * cache is maintained to ensure that). As a consequence instances created with the 
+ * same value will satisfy reference equality (via {@code ==}).
+ * 
+ * <p>This class is intended to emulate an enum (in terms of common usage and with 
+ * reference equality) but with the ability to carry unknown values. Unfortunately
+ * Java does not permit the use of an instance in a switch expression but you can 
+ * use the {@code asEnum()} method (after dealing with the `Optional` appropriately).
+ *
+ */
+/**
  * Level
  * 
- * <p>An integer log level to write to the PMS log with.  
- * 0: Error  
- * 1: Warning  
- * 2: Info  
- * 3: Debug  
+ * <p>An integer log level to write to the PMS log with.
+ * 0: Error
+ * 1: Warning
+ * 2: Info
+ * 3: Debug
  * 4: Verbose
  */
-public enum Level {
-    ZERO(0L),
-    ONE(1L),
-    TWO(2L),
-    THREE(3L),
-    FOUR(4L);
+@JsonDeserialize(using = Level._Deserializer.class)
+@JsonSerialize(using = Level._Serializer.class)
+public class Level {
 
-    @JsonValue
+    public static final Level ZERO = new Level(0L);
+    public static final Level ONE = new Level(1L);
+    public static final Level TWO = new Level(2L);
+    public static final Level THREE = new Level(3L);
+    public static final Level FOUR = new Level(4L);
+
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<Long, Level> values = createValuesMap();
+    private static final Map<Long, LevelEnum> enums = createEnumsMap();
+
     private final long value;
 
     private Level(long value) {
         this.value = value;
     }
-    
+
+    /**
+     * Returns a Level with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as Level
+     */ 
+    public static Level of(long value) {
+        synchronized (Level.class) {
+            return values.computeIfAbsent(value, v -> new Level(v));
+        }
+    }
+
     public long value() {
         return value;
     }
-    
-    public static Optional<Level> fromValue(long value) {
-        for (Level o: Level.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+
+    public Optional<LevelEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Level other = (Level) obj;
+        return Objects.equals(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "Level [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static Level[] values() {
+        synchronized (Level.class) {
+            return values.values().toArray(new Level[] {});
         }
-        return Optional.empty();
+    }
+
+    private static final Map<Long, Level> createValuesMap() {
+        Map<Long, Level> map = new LinkedHashMap<>();
+        map.put(0L, ZERO);
+        map.put(1L, ONE);
+        map.put(2L, TWO);
+        map.put(3L, THREE);
+        map.put(4L, FOUR);
+        return map;
+    }
+
+    private static final Map<Long, LevelEnum> createEnumsMap() {
+        Map<Long, LevelEnum> map = new HashMap<>();
+        map.put(0L, LevelEnum.ZERO);
+        map.put(1L, LevelEnum.ONE);
+        map.put(2L, LevelEnum.TWO);
+        map.put(3L, LevelEnum.THREE);
+        map.put(4L, LevelEnum.FOUR);
+        return map;
+    }
+    
+    @SuppressWarnings("serial")
+    public static final class _Serializer extends StdSerializer<Level> {
+
+        protected _Serializer() {
+            super(Level.class);
+        }
+
+        @Override
+        public void serialize(Level value, JsonGenerator g, SerializerProvider provider)
+                throws IOException, JsonProcessingException {
+            g.writeObject(value.value);
+        }
+    }
+
+    @SuppressWarnings("serial")
+    public static final class _Deserializer extends StdDeserializer<Level> {
+
+        protected _Deserializer() {
+            super(Level.class);
+        }
+
+        @Override
+        public Level deserialize(JsonParser p, DeserializationContext ctxt)
+                throws IOException, JacksonException {
+            long v = p.readValueAs(new TypeReference<Long>() {});
+            // use the factory method to ensure we get singletons
+            return Level.of(v);
+        }
+    }
+    
+    public enum LevelEnum {
+
+        ZERO(0L),
+        ONE(1L),
+        TWO(2L),
+        THREE(3L),
+        FOUR(4L),;
+
+        private final long value;
+
+        private LevelEnum(long value) {
+            this.value = value;
+        }
+
+        public long value() {
+            return value;
+        }
     }
 }
 

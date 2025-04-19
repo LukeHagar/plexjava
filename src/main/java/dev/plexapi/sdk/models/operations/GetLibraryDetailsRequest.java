@@ -19,7 +19,7 @@ import java.util.Optional;
 public class GetLibraryDetailsRequest {
 
     /**
-     * Whether or not to include details for a section (types, filters, and sorts). 
+     * Whether or not to include details for a section (types, filters, and sorts).
      * Only exists for backwards compatibility, media providers other than the server libraries have it on always.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeDetails")
@@ -48,7 +48,7 @@ public class GetLibraryDetailsRequest {
     }
 
     /**
-     * Whether or not to include details for a section (types, filters, and sorts). 
+     * Whether or not to include details for a section (types, filters, and sorts).
      * Only exists for backwards compatibility, media providers other than the server libraries have it on always.
      */
     @SuppressWarnings("unchecked")
@@ -71,7 +71,7 @@ public class GetLibraryDetailsRequest {
     }    
 
     /**
-     * Whether or not to include details for a section (types, filters, and sorts). 
+     * Whether or not to include details for a section (types, filters, and sorts).
      * Only exists for backwards compatibility, media providers other than the server libraries have it on always.
      */
     public GetLibraryDetailsRequest withIncludeDetails(IncludeDetails includeDetails) {
@@ -81,7 +81,7 @@ public class GetLibraryDetailsRequest {
     }
 
     /**
-     * Whether or not to include details for a section (types, filters, and sorts). 
+     * Whether or not to include details for a section (types, filters, and sorts).
      * Only exists for backwards compatibility, media providers other than the server libraries have it on always.
      */
     public GetLibraryDetailsRequest withIncludeDetails(Optional<? extends IncludeDetails> includeDetails) {
@@ -140,7 +140,7 @@ public class GetLibraryDetailsRequest {
         }
 
         /**
-         * Whether or not to include details for a section (types, filters, and sorts). 
+         * Whether or not to include details for a section (types, filters, and sorts).
          * Only exists for backwards compatibility, media providers other than the server libraries have it on always.
          */
         public Builder includeDetails(IncludeDetails includeDetails) {
@@ -150,7 +150,7 @@ public class GetLibraryDetailsRequest {
         }
 
         /**
-         * Whether or not to include details for a section (types, filters, and sorts). 
+         * Whether or not to include details for a section (types, filters, and sorts).
          * Only exists for backwards compatibility, media providers other than the server libraries have it on always.
          */
         public Builder includeDetails(Optional<? extends IncludeDetails> includeDetails) {

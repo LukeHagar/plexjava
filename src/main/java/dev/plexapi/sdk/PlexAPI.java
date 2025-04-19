@@ -52,7 +52,7 @@ public class PlexAPI {
         /**
          * The full address of your Plex Server
          */
-        "{protocol}://{ip}:{port}",
+        "https://10.10.10.47:32400",
     };
 
     /**
@@ -117,9 +117,9 @@ public class PlexAPI {
     private final Log log;
 
     /**
-     * Playlists are ordered collections of media. They can be dumb (just a list of media) or smart (based on a media query, such as "all albums from 2017"). 
+     * Playlists are ordered collections of media. They can be dumb (just a list of media) or smart (based on a media query, such as "all albums from 2017").
      * They can be organized in (optionally nesting) folders.
-     * Retrieving a playlist, or its items, will trigger a refresh of its metadata. 
+     * Retrieving a playlist, or its items, will trigger a refresh of its metadata.
      * This may cause the duration and number of items to change.
      */
     private final Playlists playlists;
@@ -231,9 +231,9 @@ public class PlexAPI {
     }
 
     /**
-     * Playlists are ordered collections of media. They can be dumb (just a list of media) or smart (based on a media query, such as "all albums from 2017"). 
+     * Playlists are ordered collections of media. They can be dumb (just a list of media) or smart (based on a media query, such as "all albums from 2017").
      * They can be organized in (optionally nesting) folders.
-     * Retrieving a playlist, or its items, will trigger a refresh of its metadata. 
+     * Retrieving a playlist, or its items, will trigger a refresh of its metadata.
      * This may cause the duration and number of items to change.
      */
     public Playlists playlists() {

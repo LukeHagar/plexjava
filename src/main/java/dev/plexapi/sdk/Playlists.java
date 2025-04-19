@@ -76,9 +76,9 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Playlists are ordered collections of media. They can be dumb (just a list of media) or smart (based on a media query, such as "all albums from 2017"). 
+ * Playlists are ordered collections of media. They can be dumb (just a list of media) or smart (based on a media query, such as "all albums from 2017").
  * They can be organized in (optionally nesting) folders.
- * Retrieving a playlist, or its items, will trigger a refresh of its metadata. 
+ * Retrieving a playlist, or its items, will trigger a refresh of its metadata.
  * This may cause the duration and number of items to change.
  */
 public class Playlists implements
@@ -1562,16 +1562,16 @@ public class Playlists implements
      * 
      * <p>Imports m3u playlists by passing a path on the server to scan for m3u-formatted playlist files, or a path to a single playlist file.
      * 
-     * @param path absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server. 
-     *         If the `path` argument is a directory, that path will be scanned for playlist files to be processed. 
-     *         Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it. 
-     *         The GUID of each playlist is based on the filename. 
-     *         If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it. 
+     * @param path absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server.
+     *         If the `path` argument is a directory, that path will be scanned for playlist files to be processed.
+     *         Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it.
+     *         The GUID of each playlist is based on the filename.
+     *         If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it.
      *         The GUID of each playlist is based on the filename.
      *         
-     * @param force Force overwriting of duplicate playlists.  
-     *         By default, a playlist file uploaded with the same path will overwrite the existing playlist. 
-     *         The `force` argument is used to disable overwriting.  
+     * @param force Force overwriting of duplicate playlists.
+     *         By default, a playlist file uploaded with the same path will overwrite the existing playlist.
+     *         The `force` argument is used to disable overwriting.
      *         If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.
      *         
      * @param sectionID Possibly the section ID to upload the playlist to, we are not certain.
