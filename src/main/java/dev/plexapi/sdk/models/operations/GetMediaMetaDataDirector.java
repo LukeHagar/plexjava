@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Long;
+import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -18,38 +18,32 @@ import java.util.Optional;
 public class GetMediaMetaDataDirector {
 
     /**
-     * The unique role identifier.
+     * Unique identifier for the director.
      */
     @JsonProperty("id")
-    private long id;
+    private int id;
 
     /**
-     * The filter string for the role.
-     */
-    @JsonProperty("filter")
-    private String filter;
-
-    /**
-     * The actor's name.
+     * The role of Director
      */
     @JsonProperty("tag")
     private String tag;
 
     /**
-     * A key associated with the actor tag.
+     * The filter string used to query this director.
      */
-    @JsonProperty("tagKey")
-    private String tagKey;
+    @JsonProperty("filter")
+    private String filter;
 
     /**
-     * The character name or role.
+     * A unique key associated with the director's tag, used for internal identification.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("role")
-    private Optional<String> role;
+    @JsonProperty("tagKey")
+    private Optional<String> tagKey;
 
     /**
-     * URL for the role thumbnail image.
+     * The URL of the thumbnail image for the director.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
@@ -57,52 +51,40 @@ public class GetMediaMetaDataDirector {
 
     @JsonCreator
     public GetMediaMetaDataDirector(
-            @JsonProperty("id") long id,
-            @JsonProperty("filter") String filter,
+            @JsonProperty("id") int id,
             @JsonProperty("tag") String tag,
-            @JsonProperty("tagKey") String tagKey,
-            @JsonProperty("role") Optional<String> role,
+            @JsonProperty("filter") String filter,
+            @JsonProperty("tagKey") Optional<String> tagKey,
             @JsonProperty("thumb") Optional<String> thumb) {
         Utils.checkNotNull(id, "id");
-        Utils.checkNotNull(filter, "filter");
         Utils.checkNotNull(tag, "tag");
+        Utils.checkNotNull(filter, "filter");
         Utils.checkNotNull(tagKey, "tagKey");
-        Utils.checkNotNull(role, "role");
         Utils.checkNotNull(thumb, "thumb");
         this.id = id;
-        this.filter = filter;
         this.tag = tag;
+        this.filter = filter;
         this.tagKey = tagKey;
-        this.role = role;
         this.thumb = thumb;
     }
     
     public GetMediaMetaDataDirector(
-            long id,
-            String filter,
+            int id,
             String tag,
-            String tagKey) {
-        this(id, filter, tag, tagKey, Optional.empty(), Optional.empty());
+            String filter) {
+        this(id, tag, filter, Optional.empty(), Optional.empty());
     }
 
     /**
-     * The unique role identifier.
+     * Unique identifier for the director.
      */
     @JsonIgnore
-    public long id() {
+    public int id() {
         return id;
     }
 
     /**
-     * The filter string for the role.
-     */
-    @JsonIgnore
-    public String filter() {
-        return filter;
-    }
-
-    /**
-     * The actor's name.
+     * The role of Director
      */
     @JsonIgnore
     public String tag() {
@@ -110,23 +92,23 @@ public class GetMediaMetaDataDirector {
     }
 
     /**
-     * A key associated with the actor tag.
+     * The filter string used to query this director.
      */
     @JsonIgnore
-    public String tagKey() {
+    public String filter() {
+        return filter;
+    }
+
+    /**
+     * A unique key associated with the director's tag, used for internal identification.
+     */
+    @JsonIgnore
+    public Optional<String> tagKey() {
         return tagKey;
     }
 
     /**
-     * The character name or role.
-     */
-    @JsonIgnore
-    public Optional<String> role() {
-        return role;
-    }
-
-    /**
-     * URL for the role thumbnail image.
+     * The URL of the thumbnail image for the director.
      */
     @JsonIgnore
     public Optional<String> thumb() {
@@ -138,25 +120,16 @@ public class GetMediaMetaDataDirector {
     }    
 
     /**
-     * The unique role identifier.
+     * Unique identifier for the director.
      */
-    public GetMediaMetaDataDirector withId(long id) {
+    public GetMediaMetaDataDirector withId(int id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
     }
 
     /**
-     * The filter string for the role.
-     */
-    public GetMediaMetaDataDirector withFilter(String filter) {
-        Utils.checkNotNull(filter, "filter");
-        this.filter = filter;
-        return this;
-    }
-
-    /**
-     * The actor's name.
+     * The role of Director
      */
     public GetMediaMetaDataDirector withTag(String tag) {
         Utils.checkNotNull(tag, "tag");
@@ -165,34 +138,34 @@ public class GetMediaMetaDataDirector {
     }
 
     /**
-     * A key associated with the actor tag.
+     * The filter string used to query this director.
+     */
+    public GetMediaMetaDataDirector withFilter(String filter) {
+        Utils.checkNotNull(filter, "filter");
+        this.filter = filter;
+        return this;
+    }
+
+    /**
+     * A unique key associated with the director's tag, used for internal identification.
      */
     public GetMediaMetaDataDirector withTagKey(String tagKey) {
+        Utils.checkNotNull(tagKey, "tagKey");
+        this.tagKey = Optional.ofNullable(tagKey);
+        return this;
+    }
+
+    /**
+     * A unique key associated with the director's tag, used for internal identification.
+     */
+    public GetMediaMetaDataDirector withTagKey(Optional<String> tagKey) {
         Utils.checkNotNull(tagKey, "tagKey");
         this.tagKey = tagKey;
         return this;
     }
 
     /**
-     * The character name or role.
-     */
-    public GetMediaMetaDataDirector withRole(String role) {
-        Utils.checkNotNull(role, "role");
-        this.role = Optional.ofNullable(role);
-        return this;
-    }
-
-    /**
-     * The character name or role.
-     */
-    public GetMediaMetaDataDirector withRole(Optional<String> role) {
-        Utils.checkNotNull(role, "role");
-        this.role = role;
-        return this;
-    }
-
-    /**
-     * URL for the role thumbnail image.
+     * The URL of the thumbnail image for the director.
      */
     public GetMediaMetaDataDirector withThumb(String thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -201,7 +174,7 @@ public class GetMediaMetaDataDirector {
     }
 
     /**
-     * URL for the role thumbnail image.
+     * The URL of the thumbnail image for the director.
      */
     public GetMediaMetaDataDirector withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -221,10 +194,9 @@ public class GetMediaMetaDataDirector {
         GetMediaMetaDataDirector other = (GetMediaMetaDataDirector) o;
         return 
             Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.filter, other.filter) &&
             Objects.deepEquals(this.tag, other.tag) &&
+            Objects.deepEquals(this.filter, other.filter) &&
             Objects.deepEquals(this.tagKey, other.tagKey) &&
-            Objects.deepEquals(this.role, other.role) &&
             Objects.deepEquals(this.thumb, other.thumb);
     }
     
@@ -232,10 +204,9 @@ public class GetMediaMetaDataDirector {
     public int hashCode() {
         return Objects.hash(
             id,
-            filter,
             tag,
+            filter,
             tagKey,
-            role,
             thumb);
     }
     
@@ -243,24 +214,21 @@ public class GetMediaMetaDataDirector {
     public String toString() {
         return Utils.toString(GetMediaMetaDataDirector.class,
                 "id", id,
-                "filter", filter,
                 "tag", tag,
+                "filter", filter,
                 "tagKey", tagKey,
-                "role", role,
                 "thumb", thumb);
     }
     
     public final static class Builder {
  
-        private Long id;
- 
-        private String filter;
+        private Integer id;
  
         private String tag;
  
-        private String tagKey;
+        private String filter;
  
-        private Optional<String> role = Optional.empty();
+        private Optional<String> tagKey = Optional.empty();
  
         private Optional<String> thumb = Optional.empty();
         
@@ -269,25 +237,16 @@ public class GetMediaMetaDataDirector {
         }
 
         /**
-         * The unique role identifier.
+         * Unique identifier for the director.
          */
-        public Builder id(long id) {
+        public Builder id(int id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;
         }
 
         /**
-         * The filter string for the role.
-         */
-        public Builder filter(String filter) {
-            Utils.checkNotNull(filter, "filter");
-            this.filter = filter;
-            return this;
-        }
-
-        /**
-         * The actor's name.
+         * The role of Director
          */
         public Builder tag(String tag) {
             Utils.checkNotNull(tag, "tag");
@@ -296,34 +255,34 @@ public class GetMediaMetaDataDirector {
         }
 
         /**
-         * A key associated with the actor tag.
+         * The filter string used to query this director.
+         */
+        public Builder filter(String filter) {
+            Utils.checkNotNull(filter, "filter");
+            this.filter = filter;
+            return this;
+        }
+
+        /**
+         * A unique key associated with the director's tag, used for internal identification.
          */
         public Builder tagKey(String tagKey) {
+            Utils.checkNotNull(tagKey, "tagKey");
+            this.tagKey = Optional.ofNullable(tagKey);
+            return this;
+        }
+
+        /**
+         * A unique key associated with the director's tag, used for internal identification.
+         */
+        public Builder tagKey(Optional<String> tagKey) {
             Utils.checkNotNull(tagKey, "tagKey");
             this.tagKey = tagKey;
             return this;
         }
 
         /**
-         * The character name or role.
-         */
-        public Builder role(String role) {
-            Utils.checkNotNull(role, "role");
-            this.role = Optional.ofNullable(role);
-            return this;
-        }
-
-        /**
-         * The character name or role.
-         */
-        public Builder role(Optional<String> role) {
-            Utils.checkNotNull(role, "role");
-            this.role = role;
-            return this;
-        }
-
-        /**
-         * URL for the role thumbnail image.
+         * The URL of the thumbnail image for the director.
          */
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -332,7 +291,7 @@ public class GetMediaMetaDataDirector {
         }
 
         /**
-         * URL for the role thumbnail image.
+         * The URL of the thumbnail image for the director.
          */
         public Builder thumb(Optional<String> thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -343,10 +302,9 @@ public class GetMediaMetaDataDirector {
         public GetMediaMetaDataDirector build() {
             return new GetMediaMetaDataDirector(
                 id,
-                filter,
                 tag,
+                filter,
                 tagKey,
-                role,
                 thumb);
         }
     }

@@ -13,27 +13,15 @@ import java.util.Objects;
 
 public class GetMediaMetaDataUltraBlurColors {
 
-    /**
-     * The top-left color value.
-     */
     @JsonProperty("topLeft")
     private String topLeft;
 
-    /**
-     * The top-right color value.
-     */
     @JsonProperty("topRight")
     private String topRight;
 
-    /**
-     * The bottom-right color value.
-     */
     @JsonProperty("bottomRight")
     private String bottomRight;
 
-    /**
-     * The bottom-left color value.
-     */
     @JsonProperty("bottomLeft")
     private String bottomLeft;
 
@@ -53,33 +41,21 @@ public class GetMediaMetaDataUltraBlurColors {
         this.bottomLeft = bottomLeft;
     }
 
-    /**
-     * The top-left color value.
-     */
     @JsonIgnore
     public String topLeft() {
         return topLeft;
     }
 
-    /**
-     * The top-right color value.
-     */
     @JsonIgnore
     public String topRight() {
         return topRight;
     }
 
-    /**
-     * The bottom-right color value.
-     */
     @JsonIgnore
     public String bottomRight() {
         return bottomRight;
     }
 
-    /**
-     * The bottom-left color value.
-     */
     @JsonIgnore
     public String bottomLeft() {
         return bottomLeft;
@@ -89,36 +65,24 @@ public class GetMediaMetaDataUltraBlurColors {
         return new Builder();
     }    
 
-    /**
-     * The top-left color value.
-     */
     public GetMediaMetaDataUltraBlurColors withTopLeft(String topLeft) {
         Utils.checkNotNull(topLeft, "topLeft");
         this.topLeft = topLeft;
         return this;
     }
 
-    /**
-     * The top-right color value.
-     */
     public GetMediaMetaDataUltraBlurColors withTopRight(String topRight) {
         Utils.checkNotNull(topRight, "topRight");
         this.topRight = topRight;
         return this;
     }
 
-    /**
-     * The bottom-right color value.
-     */
     public GetMediaMetaDataUltraBlurColors withBottomRight(String bottomRight) {
         Utils.checkNotNull(bottomRight, "bottomRight");
         this.bottomRight = bottomRight;
         return this;
     }
 
-    /**
-     * The bottom-left color value.
-     */
     public GetMediaMetaDataUltraBlurColors withBottomLeft(String bottomLeft) {
         Utils.checkNotNull(bottomLeft, "bottomLeft");
         this.bottomLeft = bottomLeft;
@@ -174,36 +138,24 @@ public class GetMediaMetaDataUltraBlurColors {
           // force use of static builder() method
         }
 
-        /**
-         * The top-left color value.
-         */
         public Builder topLeft(String topLeft) {
             Utils.checkNotNull(topLeft, "topLeft");
             this.topLeft = topLeft;
             return this;
         }
 
-        /**
-         * The top-right color value.
-         */
         public Builder topRight(String topRight) {
             Utils.checkNotNull(topRight, "topRight");
             this.topRight = topRight;
             return this;
         }
 
-        /**
-         * The bottom-right color value.
-         */
         public Builder bottomRight(String bottomRight) {
             Utils.checkNotNull(bottomRight, "bottomRight");
             this.bottomRight = bottomRight;
             return this;
         }
 
-        /**
-         * The bottom-left color value.
-         */
         public Builder bottomLeft(String bottomLeft) {
             Utils.checkNotNull(bottomLeft, "bottomLeft");
             this.bottomLeft = bottomLeft;

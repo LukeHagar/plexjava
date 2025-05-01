@@ -27,10 +27,20 @@ public class GetMediaMetaDataStream {
     private long id;
 
     /**
-     * Stream type (1=video, 2=audio, 3=subtitle).
+     * Stream type:
+     *   - 1 = video
+     *   - 2 = audio
+     *   - 3 = subtitle
      */
     @JsonProperty("streamType")
-    private int streamType;
+    private GetMediaMetaDataStreamType streamType;
+
+    /**
+     * Format of the stream (e.g., srt).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("format")
+    private Optional<String> format;
 
     /**
      * Indicates if this stream is default.
@@ -48,8 +58,9 @@ public class GetMediaMetaDataStream {
     /**
      * Index of the stream.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("index")
-    private int index;
+    private Optional<Integer> index;
 
     /**
      * Bitrate of the stream.
@@ -217,6 +228,13 @@ public class GetMediaMetaDataStream {
     private Optional<Float> frameRate;
 
     /**
+     * Key to access this stream part.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("key")
+    private Optional<String> key;
+
+    /**
      * Height of the video stream.
      */
     @JsonInclude(Include.NON_ABSENT)
@@ -345,10 +363,11 @@ public class GetMediaMetaDataStream {
     @JsonCreator
     public GetMediaMetaDataStream(
             @JsonProperty("id") long id,
-            @JsonProperty("streamType") int streamType,
+            @JsonProperty("streamType") GetMediaMetaDataStreamType streamType,
+            @JsonProperty("format") Optional<String> format,
             @JsonProperty("default") Optional<Boolean> default_,
             @JsonProperty("codec") String codec,
-            @JsonProperty("index") int index,
+            @JsonProperty("index") Optional<Integer> index,
             @JsonProperty("bitrate") Optional<Integer> bitrate,
             @JsonProperty("language") Optional<String> language,
             @JsonProperty("languageTag") Optional<String> languageTag,
@@ -373,6 +392,7 @@ public class GetMediaMetaDataStream {
             @JsonProperty("colorSpace") Optional<String> colorSpace,
             @JsonProperty("colorTrc") Optional<String> colorTrc,
             @JsonProperty("frameRate") Optional<Float> frameRate,
+            @JsonProperty("key") Optional<String> key,
             @JsonProperty("height") Optional<Integer> height,
             @JsonProperty("level") Optional<Integer> level,
             @JsonProperty("original") Optional<Boolean> original,
@@ -395,6 +415,7 @@ public class GetMediaMetaDataStream {
             @JsonProperty("title") Optional<String> title) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(streamType, "streamType");
+        Utils.checkNotNull(format, "format");
         Utils.checkNotNull(default_, "default_");
         Utils.checkNotNull(codec, "codec");
         Utils.checkNotNull(index, "index");
@@ -422,6 +443,7 @@ public class GetMediaMetaDataStream {
         Utils.checkNotNull(colorSpace, "colorSpace");
         Utils.checkNotNull(colorTrc, "colorTrc");
         Utils.checkNotNull(frameRate, "frameRate");
+        Utils.checkNotNull(key, "key");
         Utils.checkNotNull(height, "height");
         Utils.checkNotNull(level, "level");
         Utils.checkNotNull(original, "original");
@@ -444,6 +466,7 @@ public class GetMediaMetaDataStream {
         Utils.checkNotNull(title, "title");
         this.id = id;
         this.streamType = streamType;
+        this.format = format;
         this.default_ = default_;
         this.codec = codec;
         this.index = index;
@@ -471,6 +494,7 @@ public class GetMediaMetaDataStream {
         this.colorSpace = colorSpace;
         this.colorTrc = colorTrc;
         this.frameRate = frameRate;
+        this.key = key;
         this.height = height;
         this.level = level;
         this.original = original;
@@ -495,12 +519,11 @@ public class GetMediaMetaDataStream {
     
     public GetMediaMetaDataStream(
             long id,
-            int streamType,
+            GetMediaMetaDataStreamType streamType,
             String codec,
-            int index,
             String displayTitle,
             String extendedDisplayTitle) {
-        this(id, streamType, Optional.empty(), codec, index, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), displayTitle, extendedDisplayTitle, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(id, streamType, Optional.empty(), Optional.empty(), codec, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), displayTitle, extendedDisplayTitle, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -512,11 +535,22 @@ public class GetMediaMetaDataStream {
     }
 
     /**
-     * Stream type (1=video, 2=audio, 3=subtitle).
+     * Stream type:
+     *   - 1 = video
+     *   - 2 = audio
+     *   - 3 = subtitle
      */
     @JsonIgnore
-    public int streamType() {
+    public GetMediaMetaDataStreamType streamType() {
         return streamType;
+    }
+
+    /**
+     * Format of the stream (e.g., srt).
+     */
+    @JsonIgnore
+    public Optional<String> format() {
+        return format;
     }
 
     /**
@@ -539,7 +573,7 @@ public class GetMediaMetaDataStream {
      * Index of the stream.
      */
     @JsonIgnore
-    public int index() {
+    public Optional<Integer> index() {
         return index;
     }
 
@@ -733,6 +767,14 @@ public class GetMediaMetaDataStream {
     }
 
     /**
+     * Key to access this stream part.
+     */
+    @JsonIgnore
+    public Optional<String> key() {
+        return key;
+    }
+
+    /**
      * Height of the video stream.
      */
     @JsonIgnore
@@ -894,11 +936,32 @@ public class GetMediaMetaDataStream {
     }
 
     /**
-     * Stream type (1=video, 2=audio, 3=subtitle).
+     * Stream type:
+     *   - 1 = video
+     *   - 2 = audio
+     *   - 3 = subtitle
      */
-    public GetMediaMetaDataStream withStreamType(int streamType) {
+    public GetMediaMetaDataStream withStreamType(GetMediaMetaDataStreamType streamType) {
         Utils.checkNotNull(streamType, "streamType");
         this.streamType = streamType;
+        return this;
+    }
+
+    /**
+     * Format of the stream (e.g., srt).
+     */
+    public GetMediaMetaDataStream withFormat(String format) {
+        Utils.checkNotNull(format, "format");
+        this.format = Optional.ofNullable(format);
+        return this;
+    }
+
+    /**
+     * Format of the stream (e.g., srt).
+     */
+    public GetMediaMetaDataStream withFormat(Optional<String> format) {
+        Utils.checkNotNull(format, "format");
+        this.format = format;
         return this;
     }
 
@@ -933,6 +996,15 @@ public class GetMediaMetaDataStream {
      * Index of the stream.
      */
     public GetMediaMetaDataStream withIndex(int index) {
+        Utils.checkNotNull(index, "index");
+        this.index = Optional.ofNullable(index);
+        return this;
+    }
+
+    /**
+     * Index of the stream.
+     */
+    public GetMediaMetaDataStream withIndex(Optional<Integer> index) {
         Utils.checkNotNull(index, "index");
         this.index = index;
         return this;
@@ -1365,6 +1437,24 @@ public class GetMediaMetaDataStream {
     }
 
     /**
+     * Key to access this stream part.
+     */
+    public GetMediaMetaDataStream withKey(String key) {
+        Utils.checkNotNull(key, "key");
+        this.key = Optional.ofNullable(key);
+        return this;
+    }
+
+    /**
+     * Key to access this stream part.
+     */
+    public GetMediaMetaDataStream withKey(Optional<String> key) {
+        Utils.checkNotNull(key, "key");
+        this.key = key;
+        return this;
+    }
+
+    /**
      * Height of the video stream.
      */
     public GetMediaMetaDataStream withHeight(int height) {
@@ -1695,6 +1785,7 @@ public class GetMediaMetaDataStream {
         return 
             Objects.deepEquals(this.id, other.id) &&
             Objects.deepEquals(this.streamType, other.streamType) &&
+            Objects.deepEquals(this.format, other.format) &&
             Objects.deepEquals(this.default_, other.default_) &&
             Objects.deepEquals(this.codec, other.codec) &&
             Objects.deepEquals(this.index, other.index) &&
@@ -1722,6 +1813,7 @@ public class GetMediaMetaDataStream {
             Objects.deepEquals(this.colorSpace, other.colorSpace) &&
             Objects.deepEquals(this.colorTrc, other.colorTrc) &&
             Objects.deepEquals(this.frameRate, other.frameRate) &&
+            Objects.deepEquals(this.key, other.key) &&
             Objects.deepEquals(this.height, other.height) &&
             Objects.deepEquals(this.level, other.level) &&
             Objects.deepEquals(this.original, other.original) &&
@@ -1749,6 +1841,7 @@ public class GetMediaMetaDataStream {
         return Objects.hash(
             id,
             streamType,
+            format,
             default_,
             codec,
             index,
@@ -1776,6 +1869,7 @@ public class GetMediaMetaDataStream {
             colorSpace,
             colorTrc,
             frameRate,
+            key,
             height,
             level,
             original,
@@ -1803,6 +1897,7 @@ public class GetMediaMetaDataStream {
         return Utils.toString(GetMediaMetaDataStream.class,
                 "id", id,
                 "streamType", streamType,
+                "format", format,
                 "default_", default_,
                 "codec", codec,
                 "index", index,
@@ -1830,6 +1925,7 @@ public class GetMediaMetaDataStream {
                 "colorSpace", colorSpace,
                 "colorTrc", colorTrc,
                 "frameRate", frameRate,
+                "key", key,
                 "height", height,
                 "level", level,
                 "original", original,
@@ -1856,13 +1952,15 @@ public class GetMediaMetaDataStream {
  
         private Long id;
  
-        private Integer streamType;
+        private GetMediaMetaDataStreamType streamType;
+ 
+        private Optional<String> format = Optional.empty();
  
         private Optional<Boolean> default_ = Optional.empty();
  
         private String codec;
  
-        private Integer index;
+        private Optional<Integer> index = Optional.empty();
  
         private Optional<Integer> bitrate = Optional.empty();
  
@@ -1911,6 +2009,8 @@ public class GetMediaMetaDataStream {
         private Optional<String> colorTrc = Optional.empty();
  
         private Optional<Float> frameRate = Optional.empty();
+ 
+        private Optional<String> key = Optional.empty();
  
         private Optional<Integer> height = Optional.empty();
  
@@ -1966,11 +2066,32 @@ public class GetMediaMetaDataStream {
         }
 
         /**
-         * Stream type (1=video, 2=audio, 3=subtitle).
+         * Stream type:
+         *   - 1 = video
+         *   - 2 = audio
+         *   - 3 = subtitle
          */
-        public Builder streamType(int streamType) {
+        public Builder streamType(GetMediaMetaDataStreamType streamType) {
             Utils.checkNotNull(streamType, "streamType");
             this.streamType = streamType;
+            return this;
+        }
+
+        /**
+         * Format of the stream (e.g., srt).
+         */
+        public Builder format(String format) {
+            Utils.checkNotNull(format, "format");
+            this.format = Optional.ofNullable(format);
+            return this;
+        }
+
+        /**
+         * Format of the stream (e.g., srt).
+         */
+        public Builder format(Optional<String> format) {
+            Utils.checkNotNull(format, "format");
+            this.format = format;
             return this;
         }
 
@@ -2005,6 +2126,15 @@ public class GetMediaMetaDataStream {
          * Index of the stream.
          */
         public Builder index(int index) {
+            Utils.checkNotNull(index, "index");
+            this.index = Optional.ofNullable(index);
+            return this;
+        }
+
+        /**
+         * Index of the stream.
+         */
+        public Builder index(Optional<Integer> index) {
             Utils.checkNotNull(index, "index");
             this.index = index;
             return this;
@@ -2437,6 +2567,24 @@ public class GetMediaMetaDataStream {
         }
 
         /**
+         * Key to access this stream part.
+         */
+        public Builder key(String key) {
+            Utils.checkNotNull(key, "key");
+            this.key = Optional.ofNullable(key);
+            return this;
+        }
+
+        /**
+         * Key to access this stream part.
+         */
+        public Builder key(Optional<String> key) {
+            Utils.checkNotNull(key, "key");
+            this.key = key;
+            return this;
+        }
+
+        /**
          * Height of the video stream.
          */
         public Builder height(int height) {
@@ -2758,6 +2906,7 @@ public class GetMediaMetaDataStream {
             return new GetMediaMetaDataStream(
                 id,
                 streamType,
+                format,
                 default_,
                 codec,
                 index,
@@ -2785,6 +2934,7 @@ public class GetMediaMetaDataStream {
                 colorSpace,
                 colorTrc,
                 frameRate,
+                key,
                 height,
                 level,
                 original,

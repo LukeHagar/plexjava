@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Long;
+import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -18,91 +18,73 @@ import java.util.Optional;
 public class GetMediaMetaDataWriter {
 
     /**
-     * The unique role identifier.
+     * Unique identifier for the writer.
      */
     @JsonProperty("id")
-    private long id;
+    private int id;
 
     /**
-     * The filter string for the role.
-     */
-    @JsonProperty("filter")
-    private String filter;
-
-    /**
-     * The actor's name.
+     * The role of Writer
      */
     @JsonProperty("tag")
     private String tag;
 
     /**
-     * A key associated with the actor tag.
+     * The filter string used to query this writer.
      */
-    @JsonProperty("tagKey")
-    private String tagKey;
+    @JsonProperty("filter")
+    private String filter;
 
     /**
-     * The character name or role.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("role")
-    private Optional<String> role;
-
-    /**
-     * URL for the role thumbnail image.
+     * The URL of the thumbnail image for the writer.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
     private Optional<String> thumb;
 
+    /**
+     * A unique key associated with the writers tag, used for internal identification.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("tagKey")
+    private Optional<String> tagKey;
+
     @JsonCreator
     public GetMediaMetaDataWriter(
-            @JsonProperty("id") long id,
-            @JsonProperty("filter") String filter,
+            @JsonProperty("id") int id,
             @JsonProperty("tag") String tag,
-            @JsonProperty("tagKey") String tagKey,
-            @JsonProperty("role") Optional<String> role,
-            @JsonProperty("thumb") Optional<String> thumb) {
+            @JsonProperty("filter") String filter,
+            @JsonProperty("thumb") Optional<String> thumb,
+            @JsonProperty("tagKey") Optional<String> tagKey) {
         Utils.checkNotNull(id, "id");
-        Utils.checkNotNull(filter, "filter");
         Utils.checkNotNull(tag, "tag");
-        Utils.checkNotNull(tagKey, "tagKey");
-        Utils.checkNotNull(role, "role");
+        Utils.checkNotNull(filter, "filter");
         Utils.checkNotNull(thumb, "thumb");
+        Utils.checkNotNull(tagKey, "tagKey");
         this.id = id;
-        this.filter = filter;
         this.tag = tag;
-        this.tagKey = tagKey;
-        this.role = role;
+        this.filter = filter;
         this.thumb = thumb;
+        this.tagKey = tagKey;
     }
     
     public GetMediaMetaDataWriter(
-            long id,
-            String filter,
+            int id,
             String tag,
-            String tagKey) {
-        this(id, filter, tag, tagKey, Optional.empty(), Optional.empty());
+            String filter) {
+        this(id, tag, filter, Optional.empty(), Optional.empty());
     }
 
     /**
-     * The unique role identifier.
+     * Unique identifier for the writer.
      */
     @JsonIgnore
-    public long id() {
+    public int id() {
         return id;
     }
 
     /**
-     * The filter string for the role.
-     */
-    @JsonIgnore
-    public String filter() {
-        return filter;
-    }
-
-    /**
-     * The actor's name.
+     * The role of Writer
      */
     @JsonIgnore
     public String tag() {
@@ -110,27 +92,27 @@ public class GetMediaMetaDataWriter {
     }
 
     /**
-     * A key associated with the actor tag.
+     * The filter string used to query this writer.
      */
     @JsonIgnore
-    public String tagKey() {
-        return tagKey;
+    public String filter() {
+        return filter;
     }
 
     /**
-     * The character name or role.
-     */
-    @JsonIgnore
-    public Optional<String> role() {
-        return role;
-    }
-
-    /**
-     * URL for the role thumbnail image.
+     * The URL of the thumbnail image for the writer.
      */
     @JsonIgnore
     public Optional<String> thumb() {
         return thumb;
+    }
+
+    /**
+     * A unique key associated with the writers tag, used for internal identification.
+     */
+    @JsonIgnore
+    public Optional<String> tagKey() {
+        return tagKey;
     }
 
     public final static Builder builder() {
@@ -138,25 +120,16 @@ public class GetMediaMetaDataWriter {
     }    
 
     /**
-     * The unique role identifier.
+     * Unique identifier for the writer.
      */
-    public GetMediaMetaDataWriter withId(long id) {
+    public GetMediaMetaDataWriter withId(int id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
     }
 
     /**
-     * The filter string for the role.
-     */
-    public GetMediaMetaDataWriter withFilter(String filter) {
-        Utils.checkNotNull(filter, "filter");
-        this.filter = filter;
-        return this;
-    }
-
-    /**
-     * The actor's name.
+     * The role of Writer
      */
     public GetMediaMetaDataWriter withTag(String tag) {
         Utils.checkNotNull(tag, "tag");
@@ -165,34 +138,16 @@ public class GetMediaMetaDataWriter {
     }
 
     /**
-     * A key associated with the actor tag.
+     * The filter string used to query this writer.
      */
-    public GetMediaMetaDataWriter withTagKey(String tagKey) {
-        Utils.checkNotNull(tagKey, "tagKey");
-        this.tagKey = tagKey;
+    public GetMediaMetaDataWriter withFilter(String filter) {
+        Utils.checkNotNull(filter, "filter");
+        this.filter = filter;
         return this;
     }
 
     /**
-     * The character name or role.
-     */
-    public GetMediaMetaDataWriter withRole(String role) {
-        Utils.checkNotNull(role, "role");
-        this.role = Optional.ofNullable(role);
-        return this;
-    }
-
-    /**
-     * The character name or role.
-     */
-    public GetMediaMetaDataWriter withRole(Optional<String> role) {
-        Utils.checkNotNull(role, "role");
-        this.role = role;
-        return this;
-    }
-
-    /**
-     * URL for the role thumbnail image.
+     * The URL of the thumbnail image for the writer.
      */
     public GetMediaMetaDataWriter withThumb(String thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -201,11 +156,29 @@ public class GetMediaMetaDataWriter {
     }
 
     /**
-     * URL for the role thumbnail image.
+     * The URL of the thumbnail image for the writer.
      */
     public GetMediaMetaDataWriter withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
         this.thumb = thumb;
+        return this;
+    }
+
+    /**
+     * A unique key associated with the writers tag, used for internal identification.
+     */
+    public GetMediaMetaDataWriter withTagKey(String tagKey) {
+        Utils.checkNotNull(tagKey, "tagKey");
+        this.tagKey = Optional.ofNullable(tagKey);
+        return this;
+    }
+
+    /**
+     * A unique key associated with the writers tag, used for internal identification.
+     */
+    public GetMediaMetaDataWriter withTagKey(Optional<String> tagKey) {
+        Utils.checkNotNull(tagKey, "tagKey");
+        this.tagKey = tagKey;
         return this;
     }
 
@@ -221,73 +194,59 @@ public class GetMediaMetaDataWriter {
         GetMediaMetaDataWriter other = (GetMediaMetaDataWriter) o;
         return 
             Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.filter, other.filter) &&
             Objects.deepEquals(this.tag, other.tag) &&
-            Objects.deepEquals(this.tagKey, other.tagKey) &&
-            Objects.deepEquals(this.role, other.role) &&
-            Objects.deepEquals(this.thumb, other.thumb);
+            Objects.deepEquals(this.filter, other.filter) &&
+            Objects.deepEquals(this.thumb, other.thumb) &&
+            Objects.deepEquals(this.tagKey, other.tagKey);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
             id,
-            filter,
             tag,
-            tagKey,
-            role,
-            thumb);
+            filter,
+            thumb,
+            tagKey);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetMediaMetaDataWriter.class,
                 "id", id,
-                "filter", filter,
                 "tag", tag,
-                "tagKey", tagKey,
-                "role", role,
-                "thumb", thumb);
+                "filter", filter,
+                "thumb", thumb,
+                "tagKey", tagKey);
     }
     
     public final static class Builder {
  
-        private Long id;
- 
-        private String filter;
+        private Integer id;
  
         private String tag;
  
-        private String tagKey;
- 
-        private Optional<String> role = Optional.empty();
+        private String filter;
  
         private Optional<String> thumb = Optional.empty();
+ 
+        private Optional<String> tagKey = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
         }
 
         /**
-         * The unique role identifier.
+         * Unique identifier for the writer.
          */
-        public Builder id(long id) {
+        public Builder id(int id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;
         }
 
         /**
-         * The filter string for the role.
-         */
-        public Builder filter(String filter) {
-            Utils.checkNotNull(filter, "filter");
-            this.filter = filter;
-            return this;
-        }
-
-        /**
-         * The actor's name.
+         * The role of Writer
          */
         public Builder tag(String tag) {
             Utils.checkNotNull(tag, "tag");
@@ -296,34 +255,16 @@ public class GetMediaMetaDataWriter {
         }
 
         /**
-         * A key associated with the actor tag.
+         * The filter string used to query this writer.
          */
-        public Builder tagKey(String tagKey) {
-            Utils.checkNotNull(tagKey, "tagKey");
-            this.tagKey = tagKey;
+        public Builder filter(String filter) {
+            Utils.checkNotNull(filter, "filter");
+            this.filter = filter;
             return this;
         }
 
         /**
-         * The character name or role.
-         */
-        public Builder role(String role) {
-            Utils.checkNotNull(role, "role");
-            this.role = Optional.ofNullable(role);
-            return this;
-        }
-
-        /**
-         * The character name or role.
-         */
-        public Builder role(Optional<String> role) {
-            Utils.checkNotNull(role, "role");
-            this.role = role;
-            return this;
-        }
-
-        /**
-         * URL for the role thumbnail image.
+         * The URL of the thumbnail image for the writer.
          */
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -332,22 +273,39 @@ public class GetMediaMetaDataWriter {
         }
 
         /**
-         * URL for the role thumbnail image.
+         * The URL of the thumbnail image for the writer.
          */
         public Builder thumb(Optional<String> thumb) {
             Utils.checkNotNull(thumb, "thumb");
             this.thumb = thumb;
             return this;
         }
+
+        /**
+         * A unique key associated with the writers tag, used for internal identification.
+         */
+        public Builder tagKey(String tagKey) {
+            Utils.checkNotNull(tagKey, "tagKey");
+            this.tagKey = Optional.ofNullable(tagKey);
+            return this;
+        }
+
+        /**
+         * A unique key associated with the writers tag, used for internal identification.
+         */
+        public Builder tagKey(Optional<String> tagKey) {
+            Utils.checkNotNull(tagKey, "tagKey");
+            this.tagKey = tagKey;
+            return this;
+        }
         
         public GetMediaMetaDataWriter build() {
             return new GetMediaMetaDataWriter(
                 id,
-                filter,
                 tag,
-                tagKey,
-                role,
-                thumb);
+                filter,
+                thumb,
+                tagKey);
         }
     }
 }

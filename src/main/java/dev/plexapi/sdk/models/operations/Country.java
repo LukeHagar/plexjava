@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Long;
+import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -23,7 +23,7 @@ import java.util.Optional;
 public class Country {
 
     @JsonProperty("id")
-    private long id;
+    private int id;
 
     /**
      * The country of origin of this media item
@@ -37,7 +37,7 @@ public class Country {
 
     @JsonCreator
     public Country(
-            @JsonProperty("id") long id,
+            @JsonProperty("id") int id,
             @JsonProperty("tag") String tag,
             @JsonProperty("filter") Optional<String> filter) {
         Utils.checkNotNull(id, "id");
@@ -49,13 +49,13 @@ public class Country {
     }
     
     public Country(
-            long id,
+            int id,
             String tag) {
         this(id, tag, Optional.empty());
     }
 
     @JsonIgnore
-    public long id() {
+    public int id() {
         return id;
     }
 
@@ -76,7 +76,7 @@ public class Country {
         return new Builder();
     }    
 
-    public Country withId(long id) {
+    public Country withId(int id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
@@ -137,7 +137,7 @@ public class Country {
     
     public final static class Builder {
  
-        private Long id;
+        private Integer id;
  
         private String tag;
  
@@ -147,7 +147,7 @@ public class Country {
           // force use of static builder() method
         }
 
-        public Builder id(long id) {
+        public Builder id(int id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;

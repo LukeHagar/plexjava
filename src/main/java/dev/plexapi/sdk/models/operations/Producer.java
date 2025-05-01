@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Long;
+import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -21,7 +21,7 @@ public class Producer {
      * Unique identifier for the producer.
      */
     @JsonProperty("id")
-    private long id;
+    private int id;
 
     /**
      * The filter string used to query this producer.
@@ -51,7 +51,7 @@ public class Producer {
 
     @JsonCreator
     public Producer(
-            @JsonProperty("id") long id,
+            @JsonProperty("id") int id,
             @JsonProperty("filter") String filter,
             @JsonProperty("tag") String tag,
             @JsonProperty("tagKey") Optional<String> tagKey,
@@ -69,7 +69,7 @@ public class Producer {
     }
     
     public Producer(
-            long id,
+            int id,
             String filter,
             String tag) {
         this(id, filter, tag, Optional.empty(), Optional.empty());
@@ -79,7 +79,7 @@ public class Producer {
      * Unique identifier for the producer.
      */
     @JsonIgnore
-    public long id() {
+    public int id() {
         return id;
     }
 
@@ -122,7 +122,7 @@ public class Producer {
     /**
      * Unique identifier for the producer.
      */
-    public Producer withId(long id) {
+    public Producer withId(int id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
@@ -222,7 +222,7 @@ public class Producer {
     
     public final static class Builder {
  
-        private Long id;
+        private Integer id;
  
         private String filter;
  
@@ -239,7 +239,7 @@ public class Producer {
         /**
          * Unique identifier for the producer.
          */
-        public Builder id(long id) {
+        public Builder id(int id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;

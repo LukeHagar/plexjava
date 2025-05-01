@@ -12,70 +12,60 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
 
+/**
+ * GetMediaMetaDataGenre
+ * 
+ * <p>The filter query string for similar items.
+ */
 public class GetMediaMetaDataGenre {
 
-    /**
-     * The unique genre identifier.
-     */
     @JsonProperty("id")
     private long id;
 
     /**
-     * The filter string for the genre.
-     */
-    @JsonProperty("filter")
-    private String filter;
-
-    /**
-     * The genre name.
+     * The genre name of this media-item
      */
     @JsonProperty("tag")
     private String tag;
 
+    @JsonProperty("filter")
+    private String filter;
+
     @JsonCreator
     public GetMediaMetaDataGenre(
             @JsonProperty("id") long id,
-            @JsonProperty("filter") String filter,
-            @JsonProperty("tag") String tag) {
+            @JsonProperty("tag") String tag,
+            @JsonProperty("filter") String filter) {
         Utils.checkNotNull(id, "id");
-        Utils.checkNotNull(filter, "filter");
         Utils.checkNotNull(tag, "tag");
+        Utils.checkNotNull(filter, "filter");
         this.id = id;
-        this.filter = filter;
         this.tag = tag;
+        this.filter = filter;
     }
 
-    /**
-     * The unique genre identifier.
-     */
     @JsonIgnore
     public long id() {
         return id;
     }
 
     /**
-     * The filter string for the genre.
-     */
-    @JsonIgnore
-    public String filter() {
-        return filter;
-    }
-
-    /**
-     * The genre name.
+     * The genre name of this media-item
      */
     @JsonIgnore
     public String tag() {
         return tag;
     }
 
+    @JsonIgnore
+    public String filter() {
+        return filter;
+    }
+
     public final static Builder builder() {
         return new Builder();
     }    
 
-    /**
-     * The unique genre identifier.
-     */
     public GetMediaMetaDataGenre withId(long id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
@@ -83,20 +73,17 @@ public class GetMediaMetaDataGenre {
     }
 
     /**
-     * The filter string for the genre.
-     */
-    public GetMediaMetaDataGenre withFilter(String filter) {
-        Utils.checkNotNull(filter, "filter");
-        this.filter = filter;
-        return this;
-    }
-
-    /**
-     * The genre name.
+     * The genre name of this media-item
      */
     public GetMediaMetaDataGenre withTag(String tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = tag;
+        return this;
+    }
+
+    public GetMediaMetaDataGenre withFilter(String filter) {
+        Utils.checkNotNull(filter, "filter");
+        this.filter = filter;
         return this;
     }
 
@@ -112,41 +99,38 @@ public class GetMediaMetaDataGenre {
         GetMediaMetaDataGenre other = (GetMediaMetaDataGenre) o;
         return 
             Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.tag, other.tag);
+            Objects.deepEquals(this.tag, other.tag) &&
+            Objects.deepEquals(this.filter, other.filter);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
             id,
-            filter,
-            tag);
+            tag,
+            filter);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetMediaMetaDataGenre.class,
                 "id", id,
-                "filter", filter,
-                "tag", tag);
+                "tag", tag,
+                "filter", filter);
     }
     
     public final static class Builder {
  
         private Long id;
  
-        private String filter;
- 
         private String tag;
+ 
+        private String filter;
         
         private Builder() {
           // force use of static builder() method
         }
 
-        /**
-         * The unique genre identifier.
-         */
         public Builder id(long id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
@@ -154,28 +138,25 @@ public class GetMediaMetaDataGenre {
         }
 
         /**
-         * The filter string for the genre.
-         */
-        public Builder filter(String filter) {
-            Utils.checkNotNull(filter, "filter");
-            this.filter = filter;
-            return this;
-        }
-
-        /**
-         * The genre name.
+         * The genre name of this media-item
          */
         public Builder tag(String tag) {
             Utils.checkNotNull(tag, "tag");
             this.tag = tag;
             return this;
         }
+
+        public Builder filter(String filter) {
+            Utils.checkNotNull(filter, "filter");
+            this.filter = filter;
+            return this;
+        }
         
         public GetMediaMetaDataGenre build() {
             return new GetMediaMetaDataGenre(
                 id,
-                filter,
-                tag);
+                tag,
+                filter);
         }
     }
 }

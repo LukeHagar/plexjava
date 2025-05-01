@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
+import java.lang.Double;
 import java.lang.Float;
 import java.lang.Integer;
 import java.lang.Long;
@@ -20,281 +21,168 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * GetMediaMetaDataMetadata
+ * 
+ * <p>Unknown
+ */
 public class GetMediaMetaDataMetadata {
 
     /**
-     * The rating key of the metadata item.
+     * The rating key (Media ID) of this media item. Note: Although this is always an integer, it is represented as a string in the API.
      */
     @JsonProperty("ratingKey")
     private String ratingKey;
 
     /**
-     * The rating key of the parent of this metadata item.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("parentRatingKey")
-    private Optional<String> parentRatingKey;
-
-    /**
-     * The rating key of the grandparent of this metadata item.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("grandparentRatingKey")
-    private Optional<String> grandparentRatingKey;
-
-    /**
-     * A GUID identifying the parent entity (e.g., season) for the item.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("parentGuid")
-    private Optional<String> parentGuid;
-
-    /**
-     * A GUID identifying the grandparent entity (e.g., show).
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("grandparentGuid")
-    private Optional<String> grandparentGuid;
-
-    /**
-     * A URL-friendly identifier (slug) for the grandparent entity.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("grandparentSlug")
-    private Optional<String> grandparentSlug;
-
-    /**
-     * A key identifying the grandparent metadata in the library.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("grandparentKey")
-    private Optional<String> grandparentKey;
-
-    /**
-     * A key identifying the parent metadata in the library.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("parentKey")
-    private Optional<String> parentKey;
-
-    /**
-     * The API key to access metadata details.
+     * The unique key for the media item.
      */
     @JsonProperty("key")
     private String key;
 
     /**
-     * The globally unique identifier for the item.
+     * The globally unique identifier for the media item.
      */
     @JsonProperty("guid")
     private String guid;
 
     /**
-     * A URL-friendly identifier for the item.
+     * A URL‐friendly version of the media title.
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("slug")
-    private Optional<String> slug;
+    private String slug;
 
     /**
-     * The studio that produced the content.
+     * The studio that produced the media item.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("studio")
     private Optional<String> studio;
 
-    /**
-     * The type of content (e.g., show, movie).
-     */
     @JsonProperty("type")
-    private String type;
+    private GetMediaMetaDataType type;
 
     /**
-     * The title of the content.
+     * The title of the media item.
      */
     @JsonProperty("title")
     private String title;
 
     /**
-     * The original title of the content.
+     * The sort title used for ordering media items.
      */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("originalTitle")
-    private Optional<String> originalTitle;
+    @JsonProperty("titleSort")
+    private String titleSort;
 
     /**
-     * The title of the library section.
-     */
-    @JsonProperty("librarySectionTitle")
-    private String librarySectionTitle;
-
-    /**
-     * The ID of the library section.
-     */
-    @JsonProperty("librarySectionID")
-    private long librarySectionID;
-
-    /**
-     * The key of the library section.
-     */
-    @JsonProperty("librarySectionKey")
-    private String librarySectionKey;
-
-    /**
-     * The content rating (e.g., TV-MA).
+     * The content rating for the media item.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contentRating")
     private Optional<String> contentRating;
 
     /**
-     * A summary of the content.
+     * A synopsis of the media item.
      */
     @JsonProperty("summary")
     private String summary;
 
     /**
-     * The index or order of the item.
+     * The critic rating for the media item.
      */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("index")
-    private Optional<Long> index;
-
-    /**
-     * The title of the grandparent entity (typically the show's title).
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("grandparentTitle")
-    private Optional<String> grandparentTitle;
-
-    /**
-     * The title of the parent entity (typically the season's title).
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("parentTitle")
-    private Optional<String> parentTitle;
-
-    /**
-     * The audience rating for the content.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("audienceRating")
-    private Optional<Float> audienceRating;
-
-    /**
-     * The number of times the item has been viewed.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("viewCount")
-    private Optional<Long> viewCount;
-
-    /**
-     * The number of times the item has been skipped.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("skipCount")
-    private Optional<Long> skipCount;
-
-    /**
-     * Unix timestamp of when the item was last viewed.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("lastViewedAt")
-    private Optional<Long> lastViewedAt;
-
-    /**
-     * The release year.
-     */
-    @JsonProperty("year")
-    private int year;
-
-    /**
-     * The general rating
-     */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("rating")
-    private Optional<Float> rating;
+    private float rating;
 
     /**
-     * The URL or identifier for the rating image (e.g., Rotten Tomatoes rating image).
+     * The audience rating for the media item.
      */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("ratingImage")
-    private Optional<String> ratingImage;
+    @JsonProperty("audienceRating")
+    private double audienceRating;
 
     /**
-     * The tagline of the content.
+     * The release year of the media item.
      */
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("year")
+    private Optional<Integer> year;
+
+    /**
+     * A brief tagline for the media item.
+     */
     @JsonProperty("tagline")
-    private Optional<String> tagline;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("chapterSource")
-    private Optional<String> chapterSource;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("primaryExtraKey")
-    private Optional<String> primaryExtraKey;
+    private String tagline;
 
     /**
-     * URL of the thumbnail image.
+     * The thumbnail image URL for the media item.
      */
     @JsonProperty("thumb")
     private String thumb;
 
     /**
-     * URL of the art image.
+     * The art image URL for the media item.
      */
     @JsonProperty("art")
     private String art;
 
     /**
-     * URL of the theme image.
+     * The theme URL for the media item.
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("theme")
-    private Optional<String> theme;
+    private String theme;
 
     /**
-     * Duration of the content in milliseconds.
+     * The index position of the media item.
+     */
+    @JsonProperty("index")
+    private int index;
+
+    /**
+     * The number of leaf items (end nodes) under this media item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("leafCount")
+    private Optional<Integer> leafCount;
+
+    /**
+     * The number of leaf items that have been viewed.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("viewedLeafCount")
+    private Optional<Integer> viewedLeafCount;
+
+    /**
+     * The number of child items associated with this media item.
+     */
+    @JsonProperty("childCount")
+    private int childCount;
+
+    /**
+     * The total number of seasons (for TV shows).
+     */
+    @JsonProperty("seasonCount")
+    private int seasonCount;
+
+    /**
+     * The duration of the media item in milliseconds.
      */
     @JsonProperty("duration")
     private int duration;
 
     /**
-     * The original release date.
+     * The original release date of the media item.
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("originallyAvailableAt")
-    private Optional<LocalDate> originallyAvailableAt;
-
-    /**
-     * The total number of episodes (or leaves).
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("leafCount")
-    private Optional<Long> leafCount;
-
-    /**
-     * The number of episodes that have been viewed.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("viewedLeafCount")
-    private Optional<Long> viewedLeafCount;
-
-    /**
-     * The number of child items.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("childCount")
-    private Optional<Integer> childCount;
+    private LocalDate originallyAvailableAt;
 
     @JsonProperty("addedAt")
     private long addedAt;
 
+    /**
+     * Unix epoch datetime in seconds
+     */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("updatedAt")
-    private long updatedAt;
+    private Optional<Long> updatedAt;
 
     /**
      * The URL for the audience rating image.
@@ -304,119 +192,308 @@ public class GetMediaMetaDataMetadata {
     private Optional<String> audienceRatingImage;
 
     /**
-     * The index number of the parent entity, which could indicate its order or position.
+     * The source from which chapter data is derived.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("parentIndex")
-    private Optional<Long> parentIndex;
+    @JsonProperty("chapterSource")
+    private Optional<String> chapterSource;
 
     /**
-     * The URL of the parent's thumbnail image.
+     * The primary extra key associated with this media item.
      */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("parentThumb")
-    private Optional<String> parentThumb;
+    @JsonProperty("primaryExtraKey")
+    private Optional<String> primaryExtraKey;
 
     /**
-     * The URL of the grandparent's thumbnail image.
+     * The original title of the media item (if different).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("originalTitle")
+    private Optional<String> originalTitle;
+
+    /**
+     * The rating key of the parent media item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentRatingKey")
+    private Optional<String> parentRatingKey;
+
+    /**
+     * The rating key of the grandparent media item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentRatingKey")
+    private Optional<String> grandparentRatingKey;
+
+    /**
+     * The GUID of the parent media item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentGuid")
+    private Optional<String> parentGuid;
+
+    /**
+     * The GUID of the grandparent media item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentGuid")
+    private Optional<String> grandparentGuid;
+
+    /**
+     * The slug for the grandparent media item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentSlug")
+    private Optional<String> grandparentSlug;
+
+    /**
+     * The key of the grandparent media item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentKey")
+    private Optional<String> grandparentKey;
+
+    /**
+     * The key of the parent media item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentKey")
+    private Optional<String> parentKey;
+
+    /**
+     * The title of the grandparent media item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentTitle")
+    private Optional<String> grandparentTitle;
+
+    /**
+     * The thumbnail URL for the grandparent media item.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("grandparentThumb")
     private Optional<String> grandparentThumb;
 
     /**
-     * The URL of the grandparent's art image.
+     * The theme URL for the grandparent media item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentTheme")
+    private Optional<String> grandparentTheme;
+
+    /**
+     * The art URL for the grandparent media item.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("grandparentArt")
     private Optional<String> grandparentArt;
 
+    /**
+     * The title of the parent media item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentTitle")
+    private Optional<String> parentTitle;
+
+    /**
+     * The index position of the parent media item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentIndex")
+    private Optional<Integer> parentIndex;
+
+    /**
+     * The thumbnail URL for the parent media item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentThumb")
+    private Optional<String> parentThumb;
+
+    /**
+     * The URL for the rating image.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("ratingImage")
+    private Optional<String> ratingImage;
+
+    /**
+     * The number of times this media item has been viewed.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("viewCount")
+    private Optional<Integer> viewCount;
+
+    /**
+     * The current playback offset (in milliseconds).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("viewOffset")
+    private Optional<Integer> viewOffset;
+
+    /**
+     * The number of times this media item has been skipped.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("skipCount")
+    private Optional<Integer> skipCount;
+
+    /**
+     * A classification that further describes the type of media item. For example, 'clip' indicates that the item is a short video clip.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("subtype")
+    private Optional<String> subtype;
+
+    /**
+     * The Unix timestamp representing the last time the item was rated.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("lastRatedAt")
+    private Optional<Long> lastRatedAt;
+
+    /**
+     * The accuracy of the creation timestamp. This value indicates the format(s) provided (for example, 'epoch,local' means both epoch and local time formats are available).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("createdAtAccuracy")
+    private Optional<String> createdAtAccuracy;
+
+    /**
+     * The time zone offset for the creation timestamp, represented as a string. This offset indicates the difference from UTC.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("createdAtTZOffset")
+    private Optional<String> createdAtTZOffset;
+
+    /**
+     * Unix timestamp for when the media item was last viewed.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("lastViewedAt")
+    private Optional<Integer> lastViewedAt;
+
+    /**
+     * The rating provided by a user for the item. This value is expressed as a decimal number.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("userRating")
+    private Optional<Float> userRating;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Image")
+    private Optional<? extends List<GetMediaMetaDataImage>> image;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("UltraBlurColors")
+    private Optional<? extends GetMediaMetaDataUltraBlurColors> ultraBlurColors;
+
+    /**
+     * The identifier for the library section.
+     */
+    @JsonProperty("librarySectionID")
+    private long librarySectionID;
+
+    /**
+     * The title of the library section.
+     */
+    @JsonProperty("librarySectionTitle")
+    private String librarySectionTitle;
+
+    /**
+     * The key corresponding to the library section.
+     */
+    @JsonProperty("librarySectionKey")
+    private String librarySectionKey;
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Media")
     private Optional<? extends List<GetMediaMetaDataMedia>> media;
 
-    /**
-     * An array of image objects.
-     */
-    @JsonProperty("Image")
-    private List<GetMediaMetaDataImage> image;
-
-    @JsonProperty("UltraBlurColors")
-    private GetMediaMetaDataUltraBlurColors ultraBlurColors;
-
-    /**
-     * An array of genre tags.
-     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Genre")
     private Optional<? extends List<GetMediaMetaDataGenre>> genre;
 
-    /**
-     * An array of country tags.
-     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Country")
     private Optional<? extends List<GetMediaMetaDataCountry>> country;
 
-    /**
-     * An array of GUID objects.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("Guid")
-    private Optional<? extends List<GetMediaMetaDataGuids>> guids;
-
-    /**
-     * An array of rating objects.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("Rating")
-    private Optional<? extends List<Ratings>> ratings;
-
-    /**
-     * An array of Actor roles.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("Role")
-    private Optional<? extends List<GetMediaMetaDataRole>> role;
-
-    /**
-     * An array of Director roles.
-     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Director")
     private Optional<? extends List<GetMediaMetaDataDirector>> director;
 
-    /**
-     * An array of Writer roles.
-     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Writer")
     private Optional<? extends List<GetMediaMetaDataWriter>> writer;
 
-    /**
-     * An array of Writer roles.
-     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Producer")
     private Optional<? extends List<GetMediaMetaDataProducer>> producer;
 
-    /**
-     * An array of similar content objects.
-     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Role")
+    private Optional<? extends List<GetMediaMetaDataRole>> role;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Guid")
+    private Optional<? extends List<GetMediaMetaDataGuids>> guids;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Rating")
+    private Optional<? extends List<Ratings>> ratings;
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Similar")
     private Optional<? extends List<GetMediaMetaDataSimilar>> similar;
 
-    /**
-     * An array of location objects.
-     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Location")
     private Optional<? extends List<GetMediaMetaDataLocation>> location;
 
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Chapter")
+    private Optional<? extends List<Chapter>> chapter;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Marker")
+    private Optional<? extends List<Marker>> marker;
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Extras")
+    private Optional<? extends Extras> extras;
+
     @JsonCreator
     public GetMediaMetaDataMetadata(
             @JsonProperty("ratingKey") String ratingKey,
+            @JsonProperty("key") String key,
+            @JsonProperty("guid") String guid,
+            @JsonProperty("slug") String slug,
+            @JsonProperty("studio") Optional<String> studio,
+            @JsonProperty("type") GetMediaMetaDataType type,
+            @JsonProperty("title") String title,
+            @JsonProperty("titleSort") String titleSort,
+            @JsonProperty("contentRating") Optional<String> contentRating,
+            @JsonProperty("summary") String summary,
+            @JsonProperty("rating") float rating,
+            @JsonProperty("audienceRating") double audienceRating,
+            @JsonProperty("year") Optional<Integer> year,
+            @JsonProperty("tagline") String tagline,
+            @JsonProperty("thumb") String thumb,
+            @JsonProperty("art") String art,
+            @JsonProperty("theme") String theme,
+            @JsonProperty("index") int index,
+            @JsonProperty("leafCount") Optional<Integer> leafCount,
+            @JsonProperty("viewedLeafCount") Optional<Integer> viewedLeafCount,
+            @JsonProperty("childCount") int childCount,
+            @JsonProperty("seasonCount") int seasonCount,
+            @JsonProperty("duration") int duration,
+            @JsonProperty("originallyAvailableAt") LocalDate originallyAvailableAt,
+            @JsonProperty("addedAt") long addedAt,
+            @JsonProperty("updatedAt") Optional<Long> updatedAt,
+            @JsonProperty("audienceRatingImage") Optional<String> audienceRatingImage,
+            @JsonProperty("chapterSource") Optional<String> chapterSource,
+            @JsonProperty("primaryExtraKey") Optional<String> primaryExtraKey,
+            @JsonProperty("originalTitle") Optional<String> originalTitle,
             @JsonProperty("parentRatingKey") Optional<String> parentRatingKey,
             @JsonProperty("grandparentRatingKey") Optional<String> grandparentRatingKey,
             @JsonProperty("parentGuid") Optional<String> parentGuid,
@@ -424,60 +501,72 @@ public class GetMediaMetaDataMetadata {
             @JsonProperty("grandparentSlug") Optional<String> grandparentSlug,
             @JsonProperty("grandparentKey") Optional<String> grandparentKey,
             @JsonProperty("parentKey") Optional<String> parentKey,
-            @JsonProperty("key") String key,
-            @JsonProperty("guid") String guid,
-            @JsonProperty("slug") Optional<String> slug,
-            @JsonProperty("studio") Optional<String> studio,
-            @JsonProperty("type") String type,
-            @JsonProperty("title") String title,
-            @JsonProperty("originalTitle") Optional<String> originalTitle,
-            @JsonProperty("librarySectionTitle") String librarySectionTitle,
-            @JsonProperty("librarySectionID") long librarySectionID,
-            @JsonProperty("librarySectionKey") String librarySectionKey,
-            @JsonProperty("contentRating") Optional<String> contentRating,
-            @JsonProperty("summary") String summary,
-            @JsonProperty("index") Optional<Long> index,
             @JsonProperty("grandparentTitle") Optional<String> grandparentTitle,
-            @JsonProperty("parentTitle") Optional<String> parentTitle,
-            @JsonProperty("audienceRating") Optional<Float> audienceRating,
-            @JsonProperty("viewCount") Optional<Long> viewCount,
-            @JsonProperty("skipCount") Optional<Long> skipCount,
-            @JsonProperty("lastViewedAt") Optional<Long> lastViewedAt,
-            @JsonProperty("year") int year,
-            @JsonProperty("rating") Optional<Float> rating,
-            @JsonProperty("ratingImage") Optional<String> ratingImage,
-            @JsonProperty("tagline") Optional<String> tagline,
-            @JsonProperty("chapterSource") Optional<String> chapterSource,
-            @JsonProperty("primaryExtraKey") Optional<String> primaryExtraKey,
-            @JsonProperty("thumb") String thumb,
-            @JsonProperty("art") String art,
-            @JsonProperty("theme") Optional<String> theme,
-            @JsonProperty("duration") int duration,
-            @JsonProperty("originallyAvailableAt") Optional<LocalDate> originallyAvailableAt,
-            @JsonProperty("leafCount") Optional<Long> leafCount,
-            @JsonProperty("viewedLeafCount") Optional<Long> viewedLeafCount,
-            @JsonProperty("childCount") Optional<Integer> childCount,
-            @JsonProperty("addedAt") long addedAt,
-            @JsonProperty("updatedAt") long updatedAt,
-            @JsonProperty("audienceRatingImage") Optional<String> audienceRatingImage,
-            @JsonProperty("parentIndex") Optional<Long> parentIndex,
-            @JsonProperty("parentThumb") Optional<String> parentThumb,
             @JsonProperty("grandparentThumb") Optional<String> grandparentThumb,
+            @JsonProperty("grandparentTheme") Optional<String> grandparentTheme,
             @JsonProperty("grandparentArt") Optional<String> grandparentArt,
+            @JsonProperty("parentTitle") Optional<String> parentTitle,
+            @JsonProperty("parentIndex") Optional<Integer> parentIndex,
+            @JsonProperty("parentThumb") Optional<String> parentThumb,
+            @JsonProperty("ratingImage") Optional<String> ratingImage,
+            @JsonProperty("viewCount") Optional<Integer> viewCount,
+            @JsonProperty("viewOffset") Optional<Integer> viewOffset,
+            @JsonProperty("skipCount") Optional<Integer> skipCount,
+            @JsonProperty("subtype") Optional<String> subtype,
+            @JsonProperty("lastRatedAt") Optional<Long> lastRatedAt,
+            @JsonProperty("createdAtAccuracy") Optional<String> createdAtAccuracy,
+            @JsonProperty("createdAtTZOffset") Optional<String> createdAtTZOffset,
+            @JsonProperty("lastViewedAt") Optional<Integer> lastViewedAt,
+            @JsonProperty("userRating") Optional<Float> userRating,
+            @JsonProperty("Image") Optional<? extends List<GetMediaMetaDataImage>> image,
+            @JsonProperty("UltraBlurColors") Optional<? extends GetMediaMetaDataUltraBlurColors> ultraBlurColors,
+            @JsonProperty("librarySectionID") long librarySectionID,
+            @JsonProperty("librarySectionTitle") String librarySectionTitle,
+            @JsonProperty("librarySectionKey") String librarySectionKey,
             @JsonProperty("Media") Optional<? extends List<GetMediaMetaDataMedia>> media,
-            @JsonProperty("Image") List<GetMediaMetaDataImage> image,
-            @JsonProperty("UltraBlurColors") GetMediaMetaDataUltraBlurColors ultraBlurColors,
             @JsonProperty("Genre") Optional<? extends List<GetMediaMetaDataGenre>> genre,
             @JsonProperty("Country") Optional<? extends List<GetMediaMetaDataCountry>> country,
-            @JsonProperty("Guid") Optional<? extends List<GetMediaMetaDataGuids>> guids,
-            @JsonProperty("Rating") Optional<? extends List<Ratings>> ratings,
-            @JsonProperty("Role") Optional<? extends List<GetMediaMetaDataRole>> role,
             @JsonProperty("Director") Optional<? extends List<GetMediaMetaDataDirector>> director,
             @JsonProperty("Writer") Optional<? extends List<GetMediaMetaDataWriter>> writer,
             @JsonProperty("Producer") Optional<? extends List<GetMediaMetaDataProducer>> producer,
+            @JsonProperty("Role") Optional<? extends List<GetMediaMetaDataRole>> role,
+            @JsonProperty("Guid") Optional<? extends List<GetMediaMetaDataGuids>> guids,
+            @JsonProperty("Rating") Optional<? extends List<Ratings>> ratings,
             @JsonProperty("Similar") Optional<? extends List<GetMediaMetaDataSimilar>> similar,
-            @JsonProperty("Location") Optional<? extends List<GetMediaMetaDataLocation>> location) {
+            @JsonProperty("Location") Optional<? extends List<GetMediaMetaDataLocation>> location,
+            @JsonProperty("Chapter") Optional<? extends List<Chapter>> chapter,
+            @JsonProperty("Marker") Optional<? extends List<Marker>> marker,
+            @JsonProperty("Extras") Optional<? extends Extras> extras) {
         Utils.checkNotNull(ratingKey, "ratingKey");
+        Utils.checkNotNull(key, "key");
+        Utils.checkNotNull(guid, "guid");
+        Utils.checkNotNull(slug, "slug");
+        Utils.checkNotNull(studio, "studio");
+        Utils.checkNotNull(type, "type");
+        Utils.checkNotNull(title, "title");
+        Utils.checkNotNull(titleSort, "titleSort");
+        Utils.checkNotNull(contentRating, "contentRating");
+        Utils.checkNotNull(summary, "summary");
+        Utils.checkNotNull(rating, "rating");
+        Utils.checkNotNull(audienceRating, "audienceRating");
+        Utils.checkNotNull(year, "year");
+        Utils.checkNotNull(tagline, "tagline");
+        Utils.checkNotNull(thumb, "thumb");
+        Utils.checkNotNull(art, "art");
+        Utils.checkNotNull(theme, "theme");
+        Utils.checkNotNull(index, "index");
+        Utils.checkNotNull(leafCount, "leafCount");
+        Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
+        Utils.checkNotNull(childCount, "childCount");
+        Utils.checkNotNull(seasonCount, "seasonCount");
+        Utils.checkNotNull(duration, "duration");
+        Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
+        Utils.checkNotNull(addedAt, "addedAt");
+        Utils.checkNotNull(updatedAt, "updatedAt");
+        Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
+        Utils.checkNotNull(chapterSource, "chapterSource");
+        Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
+        Utils.checkNotNull(originalTitle, "originalTitle");
         Utils.checkNotNull(parentRatingKey, "parentRatingKey");
         Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
         Utils.checkNotNull(parentGuid, "parentGuid");
@@ -485,60 +574,72 @@ public class GetMediaMetaDataMetadata {
         Utils.checkNotNull(grandparentSlug, "grandparentSlug");
         Utils.checkNotNull(grandparentKey, "grandparentKey");
         Utils.checkNotNull(parentKey, "parentKey");
-        Utils.checkNotNull(key, "key");
-        Utils.checkNotNull(guid, "guid");
-        Utils.checkNotNull(slug, "slug");
-        Utils.checkNotNull(studio, "studio");
-        Utils.checkNotNull(type, "type");
-        Utils.checkNotNull(title, "title");
-        Utils.checkNotNull(originalTitle, "originalTitle");
-        Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
-        Utils.checkNotNull(librarySectionID, "librarySectionID");
-        Utils.checkNotNull(librarySectionKey, "librarySectionKey");
-        Utils.checkNotNull(contentRating, "contentRating");
-        Utils.checkNotNull(summary, "summary");
-        Utils.checkNotNull(index, "index");
         Utils.checkNotNull(grandparentTitle, "grandparentTitle");
+        Utils.checkNotNull(grandparentThumb, "grandparentThumb");
+        Utils.checkNotNull(grandparentTheme, "grandparentTheme");
+        Utils.checkNotNull(grandparentArt, "grandparentArt");
         Utils.checkNotNull(parentTitle, "parentTitle");
-        Utils.checkNotNull(audienceRating, "audienceRating");
-        Utils.checkNotNull(viewCount, "viewCount");
-        Utils.checkNotNull(skipCount, "skipCount");
-        Utils.checkNotNull(lastViewedAt, "lastViewedAt");
-        Utils.checkNotNull(year, "year");
-        Utils.checkNotNull(rating, "rating");
-        Utils.checkNotNull(ratingImage, "ratingImage");
-        Utils.checkNotNull(tagline, "tagline");
-        Utils.checkNotNull(chapterSource, "chapterSource");
-        Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
-        Utils.checkNotNull(thumb, "thumb");
-        Utils.checkNotNull(art, "art");
-        Utils.checkNotNull(theme, "theme");
-        Utils.checkNotNull(duration, "duration");
-        Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
-        Utils.checkNotNull(leafCount, "leafCount");
-        Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
-        Utils.checkNotNull(childCount, "childCount");
-        Utils.checkNotNull(addedAt, "addedAt");
-        Utils.checkNotNull(updatedAt, "updatedAt");
-        Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
         Utils.checkNotNull(parentIndex, "parentIndex");
         Utils.checkNotNull(parentThumb, "parentThumb");
-        Utils.checkNotNull(grandparentThumb, "grandparentThumb");
-        Utils.checkNotNull(grandparentArt, "grandparentArt");
-        Utils.checkNotNull(media, "media");
+        Utils.checkNotNull(ratingImage, "ratingImage");
+        Utils.checkNotNull(viewCount, "viewCount");
+        Utils.checkNotNull(viewOffset, "viewOffset");
+        Utils.checkNotNull(skipCount, "skipCount");
+        Utils.checkNotNull(subtype, "subtype");
+        Utils.checkNotNull(lastRatedAt, "lastRatedAt");
+        Utils.checkNotNull(createdAtAccuracy, "createdAtAccuracy");
+        Utils.checkNotNull(createdAtTZOffset, "createdAtTZOffset");
+        Utils.checkNotNull(lastViewedAt, "lastViewedAt");
+        Utils.checkNotNull(userRating, "userRating");
         Utils.checkNotNull(image, "image");
         Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
+        Utils.checkNotNull(librarySectionID, "librarySectionID");
+        Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+        Utils.checkNotNull(librarySectionKey, "librarySectionKey");
+        Utils.checkNotNull(media, "media");
         Utils.checkNotNull(genre, "genre");
         Utils.checkNotNull(country, "country");
-        Utils.checkNotNull(guids, "guids");
-        Utils.checkNotNull(ratings, "ratings");
-        Utils.checkNotNull(role, "role");
         Utils.checkNotNull(director, "director");
         Utils.checkNotNull(writer, "writer");
         Utils.checkNotNull(producer, "producer");
+        Utils.checkNotNull(role, "role");
+        Utils.checkNotNull(guids, "guids");
+        Utils.checkNotNull(ratings, "ratings");
         Utils.checkNotNull(similar, "similar");
         Utils.checkNotNull(location, "location");
+        Utils.checkNotNull(chapter, "chapter");
+        Utils.checkNotNull(marker, "marker");
+        Utils.checkNotNull(extras, "extras");
         this.ratingKey = ratingKey;
+        this.key = key;
+        this.guid = guid;
+        this.slug = slug;
+        this.studio = studio;
+        this.type = type;
+        this.title = title;
+        this.titleSort = titleSort;
+        this.contentRating = contentRating;
+        this.summary = summary;
+        this.rating = rating;
+        this.audienceRating = audienceRating;
+        this.year = year;
+        this.tagline = tagline;
+        this.thumb = thumb;
+        this.art = art;
+        this.theme = theme;
+        this.index = index;
+        this.leafCount = leafCount;
+        this.viewedLeafCount = viewedLeafCount;
+        this.childCount = childCount;
+        this.seasonCount = seasonCount;
+        this.duration = duration;
+        this.originallyAvailableAt = originallyAvailableAt;
+        this.addedAt = addedAt;
+        this.updatedAt = updatedAt;
+        this.audienceRatingImage = audienceRatingImage;
+        this.chapterSource = chapterSource;
+        this.primaryExtraKey = primaryExtraKey;
+        this.originalTitle = originalTitle;
         this.parentRatingKey = parentRatingKey;
         this.grandparentRatingKey = grandparentRatingKey;
         this.parentGuid = parentGuid;
@@ -546,84 +647,73 @@ public class GetMediaMetaDataMetadata {
         this.grandparentSlug = grandparentSlug;
         this.grandparentKey = grandparentKey;
         this.parentKey = parentKey;
-        this.key = key;
-        this.guid = guid;
-        this.slug = slug;
-        this.studio = studio;
-        this.type = type;
-        this.title = title;
-        this.originalTitle = originalTitle;
-        this.librarySectionTitle = librarySectionTitle;
-        this.librarySectionID = librarySectionID;
-        this.librarySectionKey = librarySectionKey;
-        this.contentRating = contentRating;
-        this.summary = summary;
-        this.index = index;
         this.grandparentTitle = grandparentTitle;
+        this.grandparentThumb = grandparentThumb;
+        this.grandparentTheme = grandparentTheme;
+        this.grandparentArt = grandparentArt;
         this.parentTitle = parentTitle;
-        this.audienceRating = audienceRating;
-        this.viewCount = viewCount;
-        this.skipCount = skipCount;
-        this.lastViewedAt = lastViewedAt;
-        this.year = year;
-        this.rating = rating;
-        this.ratingImage = ratingImage;
-        this.tagline = tagline;
-        this.chapterSource = chapterSource;
-        this.primaryExtraKey = primaryExtraKey;
-        this.thumb = thumb;
-        this.art = art;
-        this.theme = theme;
-        this.duration = duration;
-        this.originallyAvailableAt = originallyAvailableAt;
-        this.leafCount = leafCount;
-        this.viewedLeafCount = viewedLeafCount;
-        this.childCount = childCount;
-        this.addedAt = addedAt;
-        this.updatedAt = updatedAt;
-        this.audienceRatingImage = audienceRatingImage;
         this.parentIndex = parentIndex;
         this.parentThumb = parentThumb;
-        this.grandparentThumb = grandparentThumb;
-        this.grandparentArt = grandparentArt;
-        this.media = media;
+        this.ratingImage = ratingImage;
+        this.viewCount = viewCount;
+        this.viewOffset = viewOffset;
+        this.skipCount = skipCount;
+        this.subtype = subtype;
+        this.lastRatedAt = lastRatedAt;
+        this.createdAtAccuracy = createdAtAccuracy;
+        this.createdAtTZOffset = createdAtTZOffset;
+        this.lastViewedAt = lastViewedAt;
+        this.userRating = userRating;
         this.image = image;
         this.ultraBlurColors = ultraBlurColors;
+        this.librarySectionID = librarySectionID;
+        this.librarySectionTitle = librarySectionTitle;
+        this.librarySectionKey = librarySectionKey;
+        this.media = media;
         this.genre = genre;
         this.country = country;
-        this.guids = guids;
-        this.ratings = ratings;
-        this.role = role;
         this.director = director;
         this.writer = writer;
         this.producer = producer;
+        this.role = role;
+        this.guids = guids;
+        this.ratings = ratings;
         this.similar = similar;
         this.location = location;
+        this.chapter = chapter;
+        this.marker = marker;
+        this.extras = extras;
     }
     
     public GetMediaMetaDataMetadata(
             String ratingKey,
             String key,
             String guid,
-            String type,
+            String slug,
+            GetMediaMetaDataType type,
             String title,
-            String librarySectionTitle,
-            long librarySectionID,
-            String librarySectionKey,
+            String titleSort,
             String summary,
-            int year,
+            float rating,
+            double audienceRating,
+            String tagline,
             String thumb,
             String art,
+            String theme,
+            int index,
+            int childCount,
+            int seasonCount,
             int duration,
+            LocalDate originallyAvailableAt,
             long addedAt,
-            long updatedAt,
-            List<GetMediaMetaDataImage> image,
-            GetMediaMetaDataUltraBlurColors ultraBlurColors) {
-        this(ratingKey, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), key, guid, Optional.empty(), Optional.empty(), type, title, Optional.empty(), librarySectionTitle, librarySectionID, librarySectionKey, Optional.empty(), summary, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), year, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), thumb, art, Optional.empty(), duration, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), addedAt, updatedAt, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), image, ultraBlurColors, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+            long librarySectionID,
+            String librarySectionTitle,
+            String librarySectionKey) {
+        this(ratingKey, key, guid, slug, Optional.empty(), type, title, titleSort, Optional.empty(), summary, rating, audienceRating, Optional.empty(), tagline, thumb, art, theme, index, Optional.empty(), Optional.empty(), childCount, seasonCount, duration, originallyAvailableAt, addedAt, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), librarySectionID, librarySectionTitle, librarySectionKey, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
-     * The rating key of the metadata item.
+     * The rating key (Media ID) of this media item. Note: Although this is always an integer, it is represented as a string in the API.
      */
     @JsonIgnore
     public String ratingKey() {
@@ -631,63 +721,7 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * The rating key of the parent of this metadata item.
-     */
-    @JsonIgnore
-    public Optional<String> parentRatingKey() {
-        return parentRatingKey;
-    }
-
-    /**
-     * The rating key of the grandparent of this metadata item.
-     */
-    @JsonIgnore
-    public Optional<String> grandparentRatingKey() {
-        return grandparentRatingKey;
-    }
-
-    /**
-     * A GUID identifying the parent entity (e.g., season) for the item.
-     */
-    @JsonIgnore
-    public Optional<String> parentGuid() {
-        return parentGuid;
-    }
-
-    /**
-     * A GUID identifying the grandparent entity (e.g., show).
-     */
-    @JsonIgnore
-    public Optional<String> grandparentGuid() {
-        return grandparentGuid;
-    }
-
-    /**
-     * A URL-friendly identifier (slug) for the grandparent entity.
-     */
-    @JsonIgnore
-    public Optional<String> grandparentSlug() {
-        return grandparentSlug;
-    }
-
-    /**
-     * A key identifying the grandparent metadata in the library.
-     */
-    @JsonIgnore
-    public Optional<String> grandparentKey() {
-        return grandparentKey;
-    }
-
-    /**
-     * A key identifying the parent metadata in the library.
-     */
-    @JsonIgnore
-    public Optional<String> parentKey() {
-        return parentKey;
-    }
-
-    /**
-     * The API key to access metadata details.
+     * The unique key for the media item.
      */
     @JsonIgnore
     public String key() {
@@ -695,7 +729,7 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * The globally unique identifier for the item.
+     * The globally unique identifier for the media item.
      */
     @JsonIgnore
     public String guid() {
@@ -703,31 +737,28 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * A URL-friendly identifier for the item.
+     * A URL‐friendly version of the media title.
      */
     @JsonIgnore
-    public Optional<String> slug() {
+    public String slug() {
         return slug;
     }
 
     /**
-     * The studio that produced the content.
+     * The studio that produced the media item.
      */
     @JsonIgnore
     public Optional<String> studio() {
         return studio;
     }
 
-    /**
-     * The type of content (e.g., show, movie).
-     */
     @JsonIgnore
-    public String type() {
+    public GetMediaMetaDataType type() {
         return type;
     }
 
     /**
-     * The title of the content.
+     * The title of the media item.
      */
     @JsonIgnore
     public String title() {
@@ -735,39 +766,15 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * The original title of the content.
+     * The sort title used for ordering media items.
      */
     @JsonIgnore
-    public Optional<String> originalTitle() {
-        return originalTitle;
+    public String titleSort() {
+        return titleSort;
     }
 
     /**
-     * The title of the library section.
-     */
-    @JsonIgnore
-    public String librarySectionTitle() {
-        return librarySectionTitle;
-    }
-
-    /**
-     * The ID of the library section.
-     */
-    @JsonIgnore
-    public long librarySectionID() {
-        return librarySectionID;
-    }
-
-    /**
-     * The key of the library section.
-     */
-    @JsonIgnore
-    public String librarySectionKey() {
-        return librarySectionKey;
-    }
-
-    /**
-     * The content rating (e.g., TV-MA).
+     * The content rating for the media item.
      */
     @JsonIgnore
     public Optional<String> contentRating() {
@@ -775,7 +782,7 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * A summary of the content.
+     * A synopsis of the media item.
      */
     @JsonIgnore
     public String summary() {
@@ -783,105 +790,39 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * The index or order of the item.
+     * The critic rating for the media item.
      */
     @JsonIgnore
-    public Optional<Long> index() {
-        return index;
-    }
-
-    /**
-     * The title of the grandparent entity (typically the show's title).
-     */
-    @JsonIgnore
-    public Optional<String> grandparentTitle() {
-        return grandparentTitle;
-    }
-
-    /**
-     * The title of the parent entity (typically the season's title).
-     */
-    @JsonIgnore
-    public Optional<String> parentTitle() {
-        return parentTitle;
-    }
-
-    /**
-     * The audience rating for the content.
-     */
-    @JsonIgnore
-    public Optional<Float> audienceRating() {
-        return audienceRating;
-    }
-
-    /**
-     * The number of times the item has been viewed.
-     */
-    @JsonIgnore
-    public Optional<Long> viewCount() {
-        return viewCount;
-    }
-
-    /**
-     * The number of times the item has been skipped.
-     */
-    @JsonIgnore
-    public Optional<Long> skipCount() {
-        return skipCount;
-    }
-
-    /**
-     * Unix timestamp of when the item was last viewed.
-     */
-    @JsonIgnore
-    public Optional<Long> lastViewedAt() {
-        return lastViewedAt;
-    }
-
-    /**
-     * The release year.
-     */
-    @JsonIgnore
-    public int year() {
-        return year;
-    }
-
-    /**
-     * The general rating
-     */
-    @JsonIgnore
-    public Optional<Float> rating() {
+    public float rating() {
         return rating;
     }
 
     /**
-     * The URL or identifier for the rating image (e.g., Rotten Tomatoes rating image).
+     * The audience rating for the media item.
      */
     @JsonIgnore
-    public Optional<String> ratingImage() {
-        return ratingImage;
+    public double audienceRating() {
+        return audienceRating;
     }
 
     /**
-     * The tagline of the content.
+     * The release year of the media item.
      */
     @JsonIgnore
-    public Optional<String> tagline() {
+    public Optional<Integer> year() {
+        return year;
+    }
+
+    /**
+     * A brief tagline for the media item.
+     */
+    @JsonIgnore
+    public String tagline() {
         return tagline;
     }
 
-    @JsonIgnore
-    public Optional<String> chapterSource() {
-        return chapterSource;
-    }
-
-    @JsonIgnore
-    public Optional<String> primaryExtraKey() {
-        return primaryExtraKey;
-    }
-
     /**
-     * URL of the thumbnail image.
+     * The thumbnail image URL for the media item.
      */
     @JsonIgnore
     public String thumb() {
@@ -889,7 +830,7 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * URL of the art image.
+     * The art image URL for the media item.
      */
     @JsonIgnore
     public String art() {
@@ -897,15 +838,55 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * URL of the theme image.
+     * The theme URL for the media item.
      */
     @JsonIgnore
-    public Optional<String> theme() {
+    public String theme() {
         return theme;
     }
 
     /**
-     * Duration of the content in milliseconds.
+     * The index position of the media item.
+     */
+    @JsonIgnore
+    public int index() {
+        return index;
+    }
+
+    /**
+     * The number of leaf items (end nodes) under this media item.
+     */
+    @JsonIgnore
+    public Optional<Integer> leafCount() {
+        return leafCount;
+    }
+
+    /**
+     * The number of leaf items that have been viewed.
+     */
+    @JsonIgnore
+    public Optional<Integer> viewedLeafCount() {
+        return viewedLeafCount;
+    }
+
+    /**
+     * The number of child items associated with this media item.
+     */
+    @JsonIgnore
+    public int childCount() {
+        return childCount;
+    }
+
+    /**
+     * The total number of seasons (for TV shows).
+     */
+    @JsonIgnore
+    public int seasonCount() {
+        return seasonCount;
+    }
+
+    /**
+     * The duration of the media item in milliseconds.
      */
     @JsonIgnore
     public int duration() {
@@ -913,35 +894,11 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * The original release date.
+     * The original release date of the media item.
      */
     @JsonIgnore
-    public Optional<LocalDate> originallyAvailableAt() {
+    public LocalDate originallyAvailableAt() {
         return originallyAvailableAt;
-    }
-
-    /**
-     * The total number of episodes (or leaves).
-     */
-    @JsonIgnore
-    public Optional<Long> leafCount() {
-        return leafCount;
-    }
-
-    /**
-     * The number of episodes that have been viewed.
-     */
-    @JsonIgnore
-    public Optional<Long> viewedLeafCount() {
-        return viewedLeafCount;
-    }
-
-    /**
-     * The number of child items.
-     */
-    @JsonIgnore
-    public Optional<Integer> childCount() {
-        return childCount;
     }
 
     @JsonIgnore
@@ -949,8 +906,11 @@ public class GetMediaMetaDataMetadata {
         return addedAt;
     }
 
+    /**
+     * Unix epoch datetime in seconds
+     */
     @JsonIgnore
-    public long updatedAt() {
+    public Optional<Long> updatedAt() {
         return updatedAt;
     }
 
@@ -963,23 +923,95 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * The index number of the parent entity, which could indicate its order or position.
+     * The source from which chapter data is derived.
      */
     @JsonIgnore
-    public Optional<Long> parentIndex() {
-        return parentIndex;
+    public Optional<String> chapterSource() {
+        return chapterSource;
     }
 
     /**
-     * The URL of the parent's thumbnail image.
+     * The primary extra key associated with this media item.
      */
     @JsonIgnore
-    public Optional<String> parentThumb() {
-        return parentThumb;
+    public Optional<String> primaryExtraKey() {
+        return primaryExtraKey;
     }
 
     /**
-     * The URL of the grandparent's thumbnail image.
+     * The original title of the media item (if different).
+     */
+    @JsonIgnore
+    public Optional<String> originalTitle() {
+        return originalTitle;
+    }
+
+    /**
+     * The rating key of the parent media item.
+     */
+    @JsonIgnore
+    public Optional<String> parentRatingKey() {
+        return parentRatingKey;
+    }
+
+    /**
+     * The rating key of the grandparent media item.
+     */
+    @JsonIgnore
+    public Optional<String> grandparentRatingKey() {
+        return grandparentRatingKey;
+    }
+
+    /**
+     * The GUID of the parent media item.
+     */
+    @JsonIgnore
+    public Optional<String> parentGuid() {
+        return parentGuid;
+    }
+
+    /**
+     * The GUID of the grandparent media item.
+     */
+    @JsonIgnore
+    public Optional<String> grandparentGuid() {
+        return grandparentGuid;
+    }
+
+    /**
+     * The slug for the grandparent media item.
+     */
+    @JsonIgnore
+    public Optional<String> grandparentSlug() {
+        return grandparentSlug;
+    }
+
+    /**
+     * The key of the grandparent media item.
+     */
+    @JsonIgnore
+    public Optional<String> grandparentKey() {
+        return grandparentKey;
+    }
+
+    /**
+     * The key of the parent media item.
+     */
+    @JsonIgnore
+    public Optional<String> parentKey() {
+        return parentKey;
+    }
+
+    /**
+     * The title of the grandparent media item.
+     */
+    @JsonIgnore
+    public Optional<String> grandparentTitle() {
+        return grandparentTitle;
+    }
+
+    /**
+     * The thumbnail URL for the grandparent media item.
      */
     @JsonIgnore
     public Optional<String> grandparentThumb() {
@@ -987,11 +1019,159 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * The URL of the grandparent's art image.
+     * The theme URL for the grandparent media item.
+     */
+    @JsonIgnore
+    public Optional<String> grandparentTheme() {
+        return grandparentTheme;
+    }
+
+    /**
+     * The art URL for the grandparent media item.
      */
     @JsonIgnore
     public Optional<String> grandparentArt() {
         return grandparentArt;
+    }
+
+    /**
+     * The title of the parent media item.
+     */
+    @JsonIgnore
+    public Optional<String> parentTitle() {
+        return parentTitle;
+    }
+
+    /**
+     * The index position of the parent media item.
+     */
+    @JsonIgnore
+    public Optional<Integer> parentIndex() {
+        return parentIndex;
+    }
+
+    /**
+     * The thumbnail URL for the parent media item.
+     */
+    @JsonIgnore
+    public Optional<String> parentThumb() {
+        return parentThumb;
+    }
+
+    /**
+     * The URL for the rating image.
+     */
+    @JsonIgnore
+    public Optional<String> ratingImage() {
+        return ratingImage;
+    }
+
+    /**
+     * The number of times this media item has been viewed.
+     */
+    @JsonIgnore
+    public Optional<Integer> viewCount() {
+        return viewCount;
+    }
+
+    /**
+     * The current playback offset (in milliseconds).
+     */
+    @JsonIgnore
+    public Optional<Integer> viewOffset() {
+        return viewOffset;
+    }
+
+    /**
+     * The number of times this media item has been skipped.
+     */
+    @JsonIgnore
+    public Optional<Integer> skipCount() {
+        return skipCount;
+    }
+
+    /**
+     * A classification that further describes the type of media item. For example, 'clip' indicates that the item is a short video clip.
+     */
+    @JsonIgnore
+    public Optional<String> subtype() {
+        return subtype;
+    }
+
+    /**
+     * The Unix timestamp representing the last time the item was rated.
+     */
+    @JsonIgnore
+    public Optional<Long> lastRatedAt() {
+        return lastRatedAt;
+    }
+
+    /**
+     * The accuracy of the creation timestamp. This value indicates the format(s) provided (for example, 'epoch,local' means both epoch and local time formats are available).
+     */
+    @JsonIgnore
+    public Optional<String> createdAtAccuracy() {
+        return createdAtAccuracy;
+    }
+
+    /**
+     * The time zone offset for the creation timestamp, represented as a string. This offset indicates the difference from UTC.
+     */
+    @JsonIgnore
+    public Optional<String> createdAtTZOffset() {
+        return createdAtTZOffset;
+    }
+
+    /**
+     * Unix timestamp for when the media item was last viewed.
+     */
+    @JsonIgnore
+    public Optional<Integer> lastViewedAt() {
+        return lastViewedAt;
+    }
+
+    /**
+     * The rating provided by a user for the item. This value is expressed as a decimal number.
+     */
+    @JsonIgnore
+    public Optional<Float> userRating() {
+        return userRating;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<GetMediaMetaDataImage>> image() {
+        return (Optional<List<GetMediaMetaDataImage>>) image;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetMediaMetaDataUltraBlurColors> ultraBlurColors() {
+        return (Optional<GetMediaMetaDataUltraBlurColors>) ultraBlurColors;
+    }
+
+    /**
+     * The identifier for the library section.
+     */
+    @JsonIgnore
+    public long librarySectionID() {
+        return librarySectionID;
+    }
+
+    /**
+     * The title of the library section.
+     */
+    @JsonIgnore
+    public String librarySectionTitle() {
+        return librarySectionTitle;
+    }
+
+    /**
+     * The key corresponding to the library section.
+     */
+    @JsonIgnore
+    public String librarySectionKey() {
+        return librarySectionKey;
     }
 
     @SuppressWarnings("unchecked")
@@ -1000,107 +1180,82 @@ public class GetMediaMetaDataMetadata {
         return (Optional<List<GetMediaMetaDataMedia>>) media;
     }
 
-    /**
-     * An array of image objects.
-     */
-    @JsonIgnore
-    public List<GetMediaMetaDataImage> image() {
-        return image;
-    }
-
-    @JsonIgnore
-    public GetMediaMetaDataUltraBlurColors ultraBlurColors() {
-        return ultraBlurColors;
-    }
-
-    /**
-     * An array of genre tags.
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<List<GetMediaMetaDataGenre>> genre() {
         return (Optional<List<GetMediaMetaDataGenre>>) genre;
     }
 
-    /**
-     * An array of country tags.
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<List<GetMediaMetaDataCountry>> country() {
         return (Optional<List<GetMediaMetaDataCountry>>) country;
     }
 
-    /**
-     * An array of GUID objects.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<GetMediaMetaDataGuids>> guids() {
-        return (Optional<List<GetMediaMetaDataGuids>>) guids;
-    }
-
-    /**
-     * An array of rating objects.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<Ratings>> ratings() {
-        return (Optional<List<Ratings>>) ratings;
-    }
-
-    /**
-     * An array of Actor roles.
-     */
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<GetMediaMetaDataRole>> role() {
-        return (Optional<List<GetMediaMetaDataRole>>) role;
-    }
-
-    /**
-     * An array of Director roles.
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<List<GetMediaMetaDataDirector>> director() {
         return (Optional<List<GetMediaMetaDataDirector>>) director;
     }
 
-    /**
-     * An array of Writer roles.
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<List<GetMediaMetaDataWriter>> writer() {
         return (Optional<List<GetMediaMetaDataWriter>>) writer;
     }
 
-    /**
-     * An array of Writer roles.
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<List<GetMediaMetaDataProducer>> producer() {
         return (Optional<List<GetMediaMetaDataProducer>>) producer;
     }
 
-    /**
-     * An array of similar content objects.
-     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<GetMediaMetaDataRole>> role() {
+        return (Optional<List<GetMediaMetaDataRole>>) role;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<GetMediaMetaDataGuids>> guids() {
+        return (Optional<List<GetMediaMetaDataGuids>>) guids;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<Ratings>> ratings() {
+        return (Optional<List<Ratings>>) ratings;
+    }
+
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<List<GetMediaMetaDataSimilar>> similar() {
         return (Optional<List<GetMediaMetaDataSimilar>>) similar;
     }
 
-    /**
-     * An array of location objects.
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<List<GetMediaMetaDataLocation>> location() {
         return (Optional<List<GetMediaMetaDataLocation>>) location;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<Chapter>> chapter() {
+        return (Optional<List<Chapter>>) chapter;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<Marker>> marker() {
+        return (Optional<List<Marker>>) marker;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Extras> extras() {
+        return (Optional<Extras>) extras;
     }
 
     public final static Builder builder() {
@@ -1108,7 +1263,7 @@ public class GetMediaMetaDataMetadata {
     }    
 
     /**
-     * The rating key of the metadata item.
+     * The rating key (Media ID) of this media item. Note: Although this is always an integer, it is represented as a string in the API.
      */
     public GetMediaMetaDataMetadata withRatingKey(String ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
@@ -1117,133 +1272,7 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * The rating key of the parent of this metadata item.
-     */
-    public GetMediaMetaDataMetadata withParentRatingKey(String parentRatingKey) {
-        Utils.checkNotNull(parentRatingKey, "parentRatingKey");
-        this.parentRatingKey = Optional.ofNullable(parentRatingKey);
-        return this;
-    }
-
-    /**
-     * The rating key of the parent of this metadata item.
-     */
-    public GetMediaMetaDataMetadata withParentRatingKey(Optional<String> parentRatingKey) {
-        Utils.checkNotNull(parentRatingKey, "parentRatingKey");
-        this.parentRatingKey = parentRatingKey;
-        return this;
-    }
-
-    /**
-     * The rating key of the grandparent of this metadata item.
-     */
-    public GetMediaMetaDataMetadata withGrandparentRatingKey(String grandparentRatingKey) {
-        Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
-        this.grandparentRatingKey = Optional.ofNullable(grandparentRatingKey);
-        return this;
-    }
-
-    /**
-     * The rating key of the grandparent of this metadata item.
-     */
-    public GetMediaMetaDataMetadata withGrandparentRatingKey(Optional<String> grandparentRatingKey) {
-        Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
-        this.grandparentRatingKey = grandparentRatingKey;
-        return this;
-    }
-
-    /**
-     * A GUID identifying the parent entity (e.g., season) for the item.
-     */
-    public GetMediaMetaDataMetadata withParentGuid(String parentGuid) {
-        Utils.checkNotNull(parentGuid, "parentGuid");
-        this.parentGuid = Optional.ofNullable(parentGuid);
-        return this;
-    }
-
-    /**
-     * A GUID identifying the parent entity (e.g., season) for the item.
-     */
-    public GetMediaMetaDataMetadata withParentGuid(Optional<String> parentGuid) {
-        Utils.checkNotNull(parentGuid, "parentGuid");
-        this.parentGuid = parentGuid;
-        return this;
-    }
-
-    /**
-     * A GUID identifying the grandparent entity (e.g., show).
-     */
-    public GetMediaMetaDataMetadata withGrandparentGuid(String grandparentGuid) {
-        Utils.checkNotNull(grandparentGuid, "grandparentGuid");
-        this.grandparentGuid = Optional.ofNullable(grandparentGuid);
-        return this;
-    }
-
-    /**
-     * A GUID identifying the grandparent entity (e.g., show).
-     */
-    public GetMediaMetaDataMetadata withGrandparentGuid(Optional<String> grandparentGuid) {
-        Utils.checkNotNull(grandparentGuid, "grandparentGuid");
-        this.grandparentGuid = grandparentGuid;
-        return this;
-    }
-
-    /**
-     * A URL-friendly identifier (slug) for the grandparent entity.
-     */
-    public GetMediaMetaDataMetadata withGrandparentSlug(String grandparentSlug) {
-        Utils.checkNotNull(grandparentSlug, "grandparentSlug");
-        this.grandparentSlug = Optional.ofNullable(grandparentSlug);
-        return this;
-    }
-
-    /**
-     * A URL-friendly identifier (slug) for the grandparent entity.
-     */
-    public GetMediaMetaDataMetadata withGrandparentSlug(Optional<String> grandparentSlug) {
-        Utils.checkNotNull(grandparentSlug, "grandparentSlug");
-        this.grandparentSlug = grandparentSlug;
-        return this;
-    }
-
-    /**
-     * A key identifying the grandparent metadata in the library.
-     */
-    public GetMediaMetaDataMetadata withGrandparentKey(String grandparentKey) {
-        Utils.checkNotNull(grandparentKey, "grandparentKey");
-        this.grandparentKey = Optional.ofNullable(grandparentKey);
-        return this;
-    }
-
-    /**
-     * A key identifying the grandparent metadata in the library.
-     */
-    public GetMediaMetaDataMetadata withGrandparentKey(Optional<String> grandparentKey) {
-        Utils.checkNotNull(grandparentKey, "grandparentKey");
-        this.grandparentKey = grandparentKey;
-        return this;
-    }
-
-    /**
-     * A key identifying the parent metadata in the library.
-     */
-    public GetMediaMetaDataMetadata withParentKey(String parentKey) {
-        Utils.checkNotNull(parentKey, "parentKey");
-        this.parentKey = Optional.ofNullable(parentKey);
-        return this;
-    }
-
-    /**
-     * A key identifying the parent metadata in the library.
-     */
-    public GetMediaMetaDataMetadata withParentKey(Optional<String> parentKey) {
-        Utils.checkNotNull(parentKey, "parentKey");
-        this.parentKey = parentKey;
-        return this;
-    }
-
-    /**
-     * The API key to access metadata details.
+     * The unique key for the media item.
      */
     public GetMediaMetaDataMetadata withKey(String key) {
         Utils.checkNotNull(key, "key");
@@ -1252,7 +1281,7 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * The globally unique identifier for the item.
+     * The globally unique identifier for the media item.
      */
     public GetMediaMetaDataMetadata withGuid(String guid) {
         Utils.checkNotNull(guid, "guid");
@@ -1261,25 +1290,16 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * A URL-friendly identifier for the item.
+     * A URL‐friendly version of the media title.
      */
     public GetMediaMetaDataMetadata withSlug(String slug) {
-        Utils.checkNotNull(slug, "slug");
-        this.slug = Optional.ofNullable(slug);
-        return this;
-    }
-
-    /**
-     * A URL-friendly identifier for the item.
-     */
-    public GetMediaMetaDataMetadata withSlug(Optional<String> slug) {
         Utils.checkNotNull(slug, "slug");
         this.slug = slug;
         return this;
     }
 
     /**
-     * The studio that produced the content.
+     * The studio that produced the media item.
      */
     public GetMediaMetaDataMetadata withStudio(String studio) {
         Utils.checkNotNull(studio, "studio");
@@ -1288,7 +1308,7 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * The studio that produced the content.
+     * The studio that produced the media item.
      */
     public GetMediaMetaDataMetadata withStudio(Optional<String> studio) {
         Utils.checkNotNull(studio, "studio");
@@ -1296,17 +1316,14 @@ public class GetMediaMetaDataMetadata {
         return this;
     }
 
-    /**
-     * The type of content (e.g., show, movie).
-     */
-    public GetMediaMetaDataMetadata withType(String type) {
+    public GetMediaMetaDataMetadata withType(GetMediaMetaDataType type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
     }
 
     /**
-     * The title of the content.
+     * The title of the media item.
      */
     public GetMediaMetaDataMetadata withTitle(String title) {
         Utils.checkNotNull(title, "title");
@@ -1315,52 +1332,16 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * The original title of the content.
+     * The sort title used for ordering media items.
      */
-    public GetMediaMetaDataMetadata withOriginalTitle(String originalTitle) {
-        Utils.checkNotNull(originalTitle, "originalTitle");
-        this.originalTitle = Optional.ofNullable(originalTitle);
+    public GetMediaMetaDataMetadata withTitleSort(String titleSort) {
+        Utils.checkNotNull(titleSort, "titleSort");
+        this.titleSort = titleSort;
         return this;
     }
 
     /**
-     * The original title of the content.
-     */
-    public GetMediaMetaDataMetadata withOriginalTitle(Optional<String> originalTitle) {
-        Utils.checkNotNull(originalTitle, "originalTitle");
-        this.originalTitle = originalTitle;
-        return this;
-    }
-
-    /**
-     * The title of the library section.
-     */
-    public GetMediaMetaDataMetadata withLibrarySectionTitle(String librarySectionTitle) {
-        Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
-        this.librarySectionTitle = librarySectionTitle;
-        return this;
-    }
-
-    /**
-     * The ID of the library section.
-     */
-    public GetMediaMetaDataMetadata withLibrarySectionID(long librarySectionID) {
-        Utils.checkNotNull(librarySectionID, "librarySectionID");
-        this.librarySectionID = librarySectionID;
-        return this;
-    }
-
-    /**
-     * The key of the library section.
-     */
-    public GetMediaMetaDataMetadata withLibrarySectionKey(String librarySectionKey) {
-        Utils.checkNotNull(librarySectionKey, "librarySectionKey");
-        this.librarySectionKey = librarySectionKey;
-        return this;
-    }
-
-    /**
-     * The content rating (e.g., TV-MA).
+     * The content rating for the media item.
      */
     public GetMediaMetaDataMetadata withContentRating(String contentRating) {
         Utils.checkNotNull(contentRating, "contentRating");
@@ -1369,7 +1350,7 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * The content rating (e.g., TV-MA).
+     * The content rating for the media item.
      */
     public GetMediaMetaDataMetadata withContentRating(Optional<String> contentRating) {
         Utils.checkNotNull(contentRating, "contentRating");
@@ -1378,7 +1359,7 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * A summary of the content.
+     * A synopsis of the media item.
      */
     public GetMediaMetaDataMetadata withSummary(String summary) {
         Utils.checkNotNull(summary, "summary");
@@ -1387,220 +1368,52 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * The index or order of the item.
-     */
-    public GetMediaMetaDataMetadata withIndex(long index) {
-        Utils.checkNotNull(index, "index");
-        this.index = Optional.ofNullable(index);
-        return this;
-    }
-
-    /**
-     * The index or order of the item.
-     */
-    public GetMediaMetaDataMetadata withIndex(Optional<Long> index) {
-        Utils.checkNotNull(index, "index");
-        this.index = index;
-        return this;
-    }
-
-    /**
-     * The title of the grandparent entity (typically the show's title).
-     */
-    public GetMediaMetaDataMetadata withGrandparentTitle(String grandparentTitle) {
-        Utils.checkNotNull(grandparentTitle, "grandparentTitle");
-        this.grandparentTitle = Optional.ofNullable(grandparentTitle);
-        return this;
-    }
-
-    /**
-     * The title of the grandparent entity (typically the show's title).
-     */
-    public GetMediaMetaDataMetadata withGrandparentTitle(Optional<String> grandparentTitle) {
-        Utils.checkNotNull(grandparentTitle, "grandparentTitle");
-        this.grandparentTitle = grandparentTitle;
-        return this;
-    }
-
-    /**
-     * The title of the parent entity (typically the season's title).
-     */
-    public GetMediaMetaDataMetadata withParentTitle(String parentTitle) {
-        Utils.checkNotNull(parentTitle, "parentTitle");
-        this.parentTitle = Optional.ofNullable(parentTitle);
-        return this;
-    }
-
-    /**
-     * The title of the parent entity (typically the season's title).
-     */
-    public GetMediaMetaDataMetadata withParentTitle(Optional<String> parentTitle) {
-        Utils.checkNotNull(parentTitle, "parentTitle");
-        this.parentTitle = parentTitle;
-        return this;
-    }
-
-    /**
-     * The audience rating for the content.
-     */
-    public GetMediaMetaDataMetadata withAudienceRating(float audienceRating) {
-        Utils.checkNotNull(audienceRating, "audienceRating");
-        this.audienceRating = Optional.ofNullable(audienceRating);
-        return this;
-    }
-
-    /**
-     * The audience rating for the content.
-     */
-    public GetMediaMetaDataMetadata withAudienceRating(Optional<Float> audienceRating) {
-        Utils.checkNotNull(audienceRating, "audienceRating");
-        this.audienceRating = audienceRating;
-        return this;
-    }
-
-    /**
-     * The number of times the item has been viewed.
-     */
-    public GetMediaMetaDataMetadata withViewCount(long viewCount) {
-        Utils.checkNotNull(viewCount, "viewCount");
-        this.viewCount = Optional.ofNullable(viewCount);
-        return this;
-    }
-
-    /**
-     * The number of times the item has been viewed.
-     */
-    public GetMediaMetaDataMetadata withViewCount(Optional<Long> viewCount) {
-        Utils.checkNotNull(viewCount, "viewCount");
-        this.viewCount = viewCount;
-        return this;
-    }
-
-    /**
-     * The number of times the item has been skipped.
-     */
-    public GetMediaMetaDataMetadata withSkipCount(long skipCount) {
-        Utils.checkNotNull(skipCount, "skipCount");
-        this.skipCount = Optional.ofNullable(skipCount);
-        return this;
-    }
-
-    /**
-     * The number of times the item has been skipped.
-     */
-    public GetMediaMetaDataMetadata withSkipCount(Optional<Long> skipCount) {
-        Utils.checkNotNull(skipCount, "skipCount");
-        this.skipCount = skipCount;
-        return this;
-    }
-
-    /**
-     * Unix timestamp of when the item was last viewed.
-     */
-    public GetMediaMetaDataMetadata withLastViewedAt(long lastViewedAt) {
-        Utils.checkNotNull(lastViewedAt, "lastViewedAt");
-        this.lastViewedAt = Optional.ofNullable(lastViewedAt);
-        return this;
-    }
-
-    /**
-     * Unix timestamp of when the item was last viewed.
-     */
-    public GetMediaMetaDataMetadata withLastViewedAt(Optional<Long> lastViewedAt) {
-        Utils.checkNotNull(lastViewedAt, "lastViewedAt");
-        this.lastViewedAt = lastViewedAt;
-        return this;
-    }
-
-    /**
-     * The release year.
-     */
-    public GetMediaMetaDataMetadata withYear(int year) {
-        Utils.checkNotNull(year, "year");
-        this.year = year;
-        return this;
-    }
-
-    /**
-     * The general rating
+     * The critic rating for the media item.
      */
     public GetMediaMetaDataMetadata withRating(float rating) {
-        Utils.checkNotNull(rating, "rating");
-        this.rating = Optional.ofNullable(rating);
-        return this;
-    }
-
-    /**
-     * The general rating
-     */
-    public GetMediaMetaDataMetadata withRating(Optional<Float> rating) {
         Utils.checkNotNull(rating, "rating");
         this.rating = rating;
         return this;
     }
 
     /**
-     * The URL or identifier for the rating image (e.g., Rotten Tomatoes rating image).
+     * The audience rating for the media item.
      */
-    public GetMediaMetaDataMetadata withRatingImage(String ratingImage) {
-        Utils.checkNotNull(ratingImage, "ratingImage");
-        this.ratingImage = Optional.ofNullable(ratingImage);
+    public GetMediaMetaDataMetadata withAudienceRating(double audienceRating) {
+        Utils.checkNotNull(audienceRating, "audienceRating");
+        this.audienceRating = audienceRating;
         return this;
     }
 
     /**
-     * The URL or identifier for the rating image (e.g., Rotten Tomatoes rating image).
+     * The release year of the media item.
      */
-    public GetMediaMetaDataMetadata withRatingImage(Optional<String> ratingImage) {
-        Utils.checkNotNull(ratingImage, "ratingImage");
-        this.ratingImage = ratingImage;
+    public GetMediaMetaDataMetadata withYear(int year) {
+        Utils.checkNotNull(year, "year");
+        this.year = Optional.ofNullable(year);
         return this;
     }
 
     /**
-     * The tagline of the content.
+     * The release year of the media item.
+     */
+    public GetMediaMetaDataMetadata withYear(Optional<Integer> year) {
+        Utils.checkNotNull(year, "year");
+        this.year = year;
+        return this;
+    }
+
+    /**
+     * A brief tagline for the media item.
      */
     public GetMediaMetaDataMetadata withTagline(String tagline) {
-        Utils.checkNotNull(tagline, "tagline");
-        this.tagline = Optional.ofNullable(tagline);
-        return this;
-    }
-
-    /**
-     * The tagline of the content.
-     */
-    public GetMediaMetaDataMetadata withTagline(Optional<String> tagline) {
         Utils.checkNotNull(tagline, "tagline");
         this.tagline = tagline;
         return this;
     }
 
-    public GetMediaMetaDataMetadata withChapterSource(String chapterSource) {
-        Utils.checkNotNull(chapterSource, "chapterSource");
-        this.chapterSource = Optional.ofNullable(chapterSource);
-        return this;
-    }
-
-    public GetMediaMetaDataMetadata withChapterSource(Optional<String> chapterSource) {
-        Utils.checkNotNull(chapterSource, "chapterSource");
-        this.chapterSource = chapterSource;
-        return this;
-    }
-
-    public GetMediaMetaDataMetadata withPrimaryExtraKey(String primaryExtraKey) {
-        Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
-        this.primaryExtraKey = Optional.ofNullable(primaryExtraKey);
-        return this;
-    }
-
-    public GetMediaMetaDataMetadata withPrimaryExtraKey(Optional<String> primaryExtraKey) {
-        Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
-        this.primaryExtraKey = primaryExtraKey;
-        return this;
-    }
-
     /**
-     * URL of the thumbnail image.
+     * The thumbnail image URL for the media item.
      */
     public GetMediaMetaDataMetadata withThumb(String thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -1609,7 +1422,7 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * URL of the art image.
+     * The art image URL for the media item.
      */
     public GetMediaMetaDataMetadata withArt(String art) {
         Utils.checkNotNull(art, "art");
@@ -1618,25 +1431,79 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * URL of the theme image.
+     * The theme URL for the media item.
      */
     public GetMediaMetaDataMetadata withTheme(String theme) {
-        Utils.checkNotNull(theme, "theme");
-        this.theme = Optional.ofNullable(theme);
-        return this;
-    }
-
-    /**
-     * URL of the theme image.
-     */
-    public GetMediaMetaDataMetadata withTheme(Optional<String> theme) {
         Utils.checkNotNull(theme, "theme");
         this.theme = theme;
         return this;
     }
 
     /**
-     * Duration of the content in milliseconds.
+     * The index position of the media item.
+     */
+    public GetMediaMetaDataMetadata withIndex(int index) {
+        Utils.checkNotNull(index, "index");
+        this.index = index;
+        return this;
+    }
+
+    /**
+     * The number of leaf items (end nodes) under this media item.
+     */
+    public GetMediaMetaDataMetadata withLeafCount(int leafCount) {
+        Utils.checkNotNull(leafCount, "leafCount");
+        this.leafCount = Optional.ofNullable(leafCount);
+        return this;
+    }
+
+    /**
+     * The number of leaf items (end nodes) under this media item.
+     */
+    public GetMediaMetaDataMetadata withLeafCount(Optional<Integer> leafCount) {
+        Utils.checkNotNull(leafCount, "leafCount");
+        this.leafCount = leafCount;
+        return this;
+    }
+
+    /**
+     * The number of leaf items that have been viewed.
+     */
+    public GetMediaMetaDataMetadata withViewedLeafCount(int viewedLeafCount) {
+        Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
+        this.viewedLeafCount = Optional.ofNullable(viewedLeafCount);
+        return this;
+    }
+
+    /**
+     * The number of leaf items that have been viewed.
+     */
+    public GetMediaMetaDataMetadata withViewedLeafCount(Optional<Integer> viewedLeafCount) {
+        Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
+        this.viewedLeafCount = viewedLeafCount;
+        return this;
+    }
+
+    /**
+     * The number of child items associated with this media item.
+     */
+    public GetMediaMetaDataMetadata withChildCount(int childCount) {
+        Utils.checkNotNull(childCount, "childCount");
+        this.childCount = childCount;
+        return this;
+    }
+
+    /**
+     * The total number of seasons (for TV shows).
+     */
+    public GetMediaMetaDataMetadata withSeasonCount(int seasonCount) {
+        Utils.checkNotNull(seasonCount, "seasonCount");
+        this.seasonCount = seasonCount;
+        return this;
+    }
+
+    /**
+     * The duration of the media item in milliseconds.
      */
     public GetMediaMetaDataMetadata withDuration(int duration) {
         Utils.checkNotNull(duration, "duration");
@@ -1645,74 +1512,11 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * The original release date.
+     * The original release date of the media item.
      */
     public GetMediaMetaDataMetadata withOriginallyAvailableAt(LocalDate originallyAvailableAt) {
         Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
-        this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
-        return this;
-    }
-
-    /**
-     * The original release date.
-     */
-    public GetMediaMetaDataMetadata withOriginallyAvailableAt(Optional<LocalDate> originallyAvailableAt) {
-        Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
         this.originallyAvailableAt = originallyAvailableAt;
-        return this;
-    }
-
-    /**
-     * The total number of episodes (or leaves).
-     */
-    public GetMediaMetaDataMetadata withLeafCount(long leafCount) {
-        Utils.checkNotNull(leafCount, "leafCount");
-        this.leafCount = Optional.ofNullable(leafCount);
-        return this;
-    }
-
-    /**
-     * The total number of episodes (or leaves).
-     */
-    public GetMediaMetaDataMetadata withLeafCount(Optional<Long> leafCount) {
-        Utils.checkNotNull(leafCount, "leafCount");
-        this.leafCount = leafCount;
-        return this;
-    }
-
-    /**
-     * The number of episodes that have been viewed.
-     */
-    public GetMediaMetaDataMetadata withViewedLeafCount(long viewedLeafCount) {
-        Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
-        this.viewedLeafCount = Optional.ofNullable(viewedLeafCount);
-        return this;
-    }
-
-    /**
-     * The number of episodes that have been viewed.
-     */
-    public GetMediaMetaDataMetadata withViewedLeafCount(Optional<Long> viewedLeafCount) {
-        Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
-        this.viewedLeafCount = viewedLeafCount;
-        return this;
-    }
-
-    /**
-     * The number of child items.
-     */
-    public GetMediaMetaDataMetadata withChildCount(int childCount) {
-        Utils.checkNotNull(childCount, "childCount");
-        this.childCount = Optional.ofNullable(childCount);
-        return this;
-    }
-
-    /**
-     * The number of child items.
-     */
-    public GetMediaMetaDataMetadata withChildCount(Optional<Integer> childCount) {
-        Utils.checkNotNull(childCount, "childCount");
-        this.childCount = childCount;
         return this;
     }
 
@@ -1722,7 +1526,19 @@ public class GetMediaMetaDataMetadata {
         return this;
     }
 
+    /**
+     * Unix epoch datetime in seconds
+     */
     public GetMediaMetaDataMetadata withUpdatedAt(long updatedAt) {
+        Utils.checkNotNull(updatedAt, "updatedAt");
+        this.updatedAt = Optional.ofNullable(updatedAt);
+        return this;
+    }
+
+    /**
+     * Unix epoch datetime in seconds
+     */
+    public GetMediaMetaDataMetadata withUpdatedAt(Optional<Long> updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
         this.updatedAt = updatedAt;
         return this;
@@ -1747,43 +1563,205 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * The index number of the parent entity, which could indicate its order or position.
+     * The source from which chapter data is derived.
      */
-    public GetMediaMetaDataMetadata withParentIndex(long parentIndex) {
-        Utils.checkNotNull(parentIndex, "parentIndex");
-        this.parentIndex = Optional.ofNullable(parentIndex);
+    public GetMediaMetaDataMetadata withChapterSource(String chapterSource) {
+        Utils.checkNotNull(chapterSource, "chapterSource");
+        this.chapterSource = Optional.ofNullable(chapterSource);
         return this;
     }
 
     /**
-     * The index number of the parent entity, which could indicate its order or position.
+     * The source from which chapter data is derived.
      */
-    public GetMediaMetaDataMetadata withParentIndex(Optional<Long> parentIndex) {
-        Utils.checkNotNull(parentIndex, "parentIndex");
-        this.parentIndex = parentIndex;
+    public GetMediaMetaDataMetadata withChapterSource(Optional<String> chapterSource) {
+        Utils.checkNotNull(chapterSource, "chapterSource");
+        this.chapterSource = chapterSource;
         return this;
     }
 
     /**
-     * The URL of the parent's thumbnail image.
+     * The primary extra key associated with this media item.
      */
-    public GetMediaMetaDataMetadata withParentThumb(String parentThumb) {
-        Utils.checkNotNull(parentThumb, "parentThumb");
-        this.parentThumb = Optional.ofNullable(parentThumb);
+    public GetMediaMetaDataMetadata withPrimaryExtraKey(String primaryExtraKey) {
+        Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
+        this.primaryExtraKey = Optional.ofNullable(primaryExtraKey);
         return this;
     }
 
     /**
-     * The URL of the parent's thumbnail image.
+     * The primary extra key associated with this media item.
      */
-    public GetMediaMetaDataMetadata withParentThumb(Optional<String> parentThumb) {
-        Utils.checkNotNull(parentThumb, "parentThumb");
-        this.parentThumb = parentThumb;
+    public GetMediaMetaDataMetadata withPrimaryExtraKey(Optional<String> primaryExtraKey) {
+        Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
+        this.primaryExtraKey = primaryExtraKey;
         return this;
     }
 
     /**
-     * The URL of the grandparent's thumbnail image.
+     * The original title of the media item (if different).
+     */
+    public GetMediaMetaDataMetadata withOriginalTitle(String originalTitle) {
+        Utils.checkNotNull(originalTitle, "originalTitle");
+        this.originalTitle = Optional.ofNullable(originalTitle);
+        return this;
+    }
+
+    /**
+     * The original title of the media item (if different).
+     */
+    public GetMediaMetaDataMetadata withOriginalTitle(Optional<String> originalTitle) {
+        Utils.checkNotNull(originalTitle, "originalTitle");
+        this.originalTitle = originalTitle;
+        return this;
+    }
+
+    /**
+     * The rating key of the parent media item.
+     */
+    public GetMediaMetaDataMetadata withParentRatingKey(String parentRatingKey) {
+        Utils.checkNotNull(parentRatingKey, "parentRatingKey");
+        this.parentRatingKey = Optional.ofNullable(parentRatingKey);
+        return this;
+    }
+
+    /**
+     * The rating key of the parent media item.
+     */
+    public GetMediaMetaDataMetadata withParentRatingKey(Optional<String> parentRatingKey) {
+        Utils.checkNotNull(parentRatingKey, "parentRatingKey");
+        this.parentRatingKey = parentRatingKey;
+        return this;
+    }
+
+    /**
+     * The rating key of the grandparent media item.
+     */
+    public GetMediaMetaDataMetadata withGrandparentRatingKey(String grandparentRatingKey) {
+        Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
+        this.grandparentRatingKey = Optional.ofNullable(grandparentRatingKey);
+        return this;
+    }
+
+    /**
+     * The rating key of the grandparent media item.
+     */
+    public GetMediaMetaDataMetadata withGrandparentRatingKey(Optional<String> grandparentRatingKey) {
+        Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
+        this.grandparentRatingKey = grandparentRatingKey;
+        return this;
+    }
+
+    /**
+     * The GUID of the parent media item.
+     */
+    public GetMediaMetaDataMetadata withParentGuid(String parentGuid) {
+        Utils.checkNotNull(parentGuid, "parentGuid");
+        this.parentGuid = Optional.ofNullable(parentGuid);
+        return this;
+    }
+
+    /**
+     * The GUID of the parent media item.
+     */
+    public GetMediaMetaDataMetadata withParentGuid(Optional<String> parentGuid) {
+        Utils.checkNotNull(parentGuid, "parentGuid");
+        this.parentGuid = parentGuid;
+        return this;
+    }
+
+    /**
+     * The GUID of the grandparent media item.
+     */
+    public GetMediaMetaDataMetadata withGrandparentGuid(String grandparentGuid) {
+        Utils.checkNotNull(grandparentGuid, "grandparentGuid");
+        this.grandparentGuid = Optional.ofNullable(grandparentGuid);
+        return this;
+    }
+
+    /**
+     * The GUID of the grandparent media item.
+     */
+    public GetMediaMetaDataMetadata withGrandparentGuid(Optional<String> grandparentGuid) {
+        Utils.checkNotNull(grandparentGuid, "grandparentGuid");
+        this.grandparentGuid = grandparentGuid;
+        return this;
+    }
+
+    /**
+     * The slug for the grandparent media item.
+     */
+    public GetMediaMetaDataMetadata withGrandparentSlug(String grandparentSlug) {
+        Utils.checkNotNull(grandparentSlug, "grandparentSlug");
+        this.grandparentSlug = Optional.ofNullable(grandparentSlug);
+        return this;
+    }
+
+    /**
+     * The slug for the grandparent media item.
+     */
+    public GetMediaMetaDataMetadata withGrandparentSlug(Optional<String> grandparentSlug) {
+        Utils.checkNotNull(grandparentSlug, "grandparentSlug");
+        this.grandparentSlug = grandparentSlug;
+        return this;
+    }
+
+    /**
+     * The key of the grandparent media item.
+     */
+    public GetMediaMetaDataMetadata withGrandparentKey(String grandparentKey) {
+        Utils.checkNotNull(grandparentKey, "grandparentKey");
+        this.grandparentKey = Optional.ofNullable(grandparentKey);
+        return this;
+    }
+
+    /**
+     * The key of the grandparent media item.
+     */
+    public GetMediaMetaDataMetadata withGrandparentKey(Optional<String> grandparentKey) {
+        Utils.checkNotNull(grandparentKey, "grandparentKey");
+        this.grandparentKey = grandparentKey;
+        return this;
+    }
+
+    /**
+     * The key of the parent media item.
+     */
+    public GetMediaMetaDataMetadata withParentKey(String parentKey) {
+        Utils.checkNotNull(parentKey, "parentKey");
+        this.parentKey = Optional.ofNullable(parentKey);
+        return this;
+    }
+
+    /**
+     * The key of the parent media item.
+     */
+    public GetMediaMetaDataMetadata withParentKey(Optional<String> parentKey) {
+        Utils.checkNotNull(parentKey, "parentKey");
+        this.parentKey = parentKey;
+        return this;
+    }
+
+    /**
+     * The title of the grandparent media item.
+     */
+    public GetMediaMetaDataMetadata withGrandparentTitle(String grandparentTitle) {
+        Utils.checkNotNull(grandparentTitle, "grandparentTitle");
+        this.grandparentTitle = Optional.ofNullable(grandparentTitle);
+        return this;
+    }
+
+    /**
+     * The title of the grandparent media item.
+     */
+    public GetMediaMetaDataMetadata withGrandparentTitle(Optional<String> grandparentTitle) {
+        Utils.checkNotNull(grandparentTitle, "grandparentTitle");
+        this.grandparentTitle = grandparentTitle;
+        return this;
+    }
+
+    /**
+     * The thumbnail URL for the grandparent media item.
      */
     public GetMediaMetaDataMetadata withGrandparentThumb(String grandparentThumb) {
         Utils.checkNotNull(grandparentThumb, "grandparentThumb");
@@ -1792,7 +1770,7 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * The URL of the grandparent's thumbnail image.
+     * The thumbnail URL for the grandparent media item.
      */
     public GetMediaMetaDataMetadata withGrandparentThumb(Optional<String> grandparentThumb) {
         Utils.checkNotNull(grandparentThumb, "grandparentThumb");
@@ -1801,7 +1779,25 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * The URL of the grandparent's art image.
+     * The theme URL for the grandparent media item.
+     */
+    public GetMediaMetaDataMetadata withGrandparentTheme(String grandparentTheme) {
+        Utils.checkNotNull(grandparentTheme, "grandparentTheme");
+        this.grandparentTheme = Optional.ofNullable(grandparentTheme);
+        return this;
+    }
+
+    /**
+     * The theme URL for the grandparent media item.
+     */
+    public GetMediaMetaDataMetadata withGrandparentTheme(Optional<String> grandparentTheme) {
+        Utils.checkNotNull(grandparentTheme, "grandparentTheme");
+        this.grandparentTheme = grandparentTheme;
+        return this;
+    }
+
+    /**
+     * The art URL for the grandparent media item.
      */
     public GetMediaMetaDataMetadata withGrandparentArt(String grandparentArt) {
         Utils.checkNotNull(grandparentArt, "grandparentArt");
@@ -1810,11 +1806,296 @@ public class GetMediaMetaDataMetadata {
     }
 
     /**
-     * The URL of the grandparent's art image.
+     * The art URL for the grandparent media item.
      */
     public GetMediaMetaDataMetadata withGrandparentArt(Optional<String> grandparentArt) {
         Utils.checkNotNull(grandparentArt, "grandparentArt");
         this.grandparentArt = grandparentArt;
+        return this;
+    }
+
+    /**
+     * The title of the parent media item.
+     */
+    public GetMediaMetaDataMetadata withParentTitle(String parentTitle) {
+        Utils.checkNotNull(parentTitle, "parentTitle");
+        this.parentTitle = Optional.ofNullable(parentTitle);
+        return this;
+    }
+
+    /**
+     * The title of the parent media item.
+     */
+    public GetMediaMetaDataMetadata withParentTitle(Optional<String> parentTitle) {
+        Utils.checkNotNull(parentTitle, "parentTitle");
+        this.parentTitle = parentTitle;
+        return this;
+    }
+
+    /**
+     * The index position of the parent media item.
+     */
+    public GetMediaMetaDataMetadata withParentIndex(int parentIndex) {
+        Utils.checkNotNull(parentIndex, "parentIndex");
+        this.parentIndex = Optional.ofNullable(parentIndex);
+        return this;
+    }
+
+    /**
+     * The index position of the parent media item.
+     */
+    public GetMediaMetaDataMetadata withParentIndex(Optional<Integer> parentIndex) {
+        Utils.checkNotNull(parentIndex, "parentIndex");
+        this.parentIndex = parentIndex;
+        return this;
+    }
+
+    /**
+     * The thumbnail URL for the parent media item.
+     */
+    public GetMediaMetaDataMetadata withParentThumb(String parentThumb) {
+        Utils.checkNotNull(parentThumb, "parentThumb");
+        this.parentThumb = Optional.ofNullable(parentThumb);
+        return this;
+    }
+
+    /**
+     * The thumbnail URL for the parent media item.
+     */
+    public GetMediaMetaDataMetadata withParentThumb(Optional<String> parentThumb) {
+        Utils.checkNotNull(parentThumb, "parentThumb");
+        this.parentThumb = parentThumb;
+        return this;
+    }
+
+    /**
+     * The URL for the rating image.
+     */
+    public GetMediaMetaDataMetadata withRatingImage(String ratingImage) {
+        Utils.checkNotNull(ratingImage, "ratingImage");
+        this.ratingImage = Optional.ofNullable(ratingImage);
+        return this;
+    }
+
+    /**
+     * The URL for the rating image.
+     */
+    public GetMediaMetaDataMetadata withRatingImage(Optional<String> ratingImage) {
+        Utils.checkNotNull(ratingImage, "ratingImage");
+        this.ratingImage = ratingImage;
+        return this;
+    }
+
+    /**
+     * The number of times this media item has been viewed.
+     */
+    public GetMediaMetaDataMetadata withViewCount(int viewCount) {
+        Utils.checkNotNull(viewCount, "viewCount");
+        this.viewCount = Optional.ofNullable(viewCount);
+        return this;
+    }
+
+    /**
+     * The number of times this media item has been viewed.
+     */
+    public GetMediaMetaDataMetadata withViewCount(Optional<Integer> viewCount) {
+        Utils.checkNotNull(viewCount, "viewCount");
+        this.viewCount = viewCount;
+        return this;
+    }
+
+    /**
+     * The current playback offset (in milliseconds).
+     */
+    public GetMediaMetaDataMetadata withViewOffset(int viewOffset) {
+        Utils.checkNotNull(viewOffset, "viewOffset");
+        this.viewOffset = Optional.ofNullable(viewOffset);
+        return this;
+    }
+
+    /**
+     * The current playback offset (in milliseconds).
+     */
+    public GetMediaMetaDataMetadata withViewOffset(Optional<Integer> viewOffset) {
+        Utils.checkNotNull(viewOffset, "viewOffset");
+        this.viewOffset = viewOffset;
+        return this;
+    }
+
+    /**
+     * The number of times this media item has been skipped.
+     */
+    public GetMediaMetaDataMetadata withSkipCount(int skipCount) {
+        Utils.checkNotNull(skipCount, "skipCount");
+        this.skipCount = Optional.ofNullable(skipCount);
+        return this;
+    }
+
+    /**
+     * The number of times this media item has been skipped.
+     */
+    public GetMediaMetaDataMetadata withSkipCount(Optional<Integer> skipCount) {
+        Utils.checkNotNull(skipCount, "skipCount");
+        this.skipCount = skipCount;
+        return this;
+    }
+
+    /**
+     * A classification that further describes the type of media item. For example, 'clip' indicates that the item is a short video clip.
+     */
+    public GetMediaMetaDataMetadata withSubtype(String subtype) {
+        Utils.checkNotNull(subtype, "subtype");
+        this.subtype = Optional.ofNullable(subtype);
+        return this;
+    }
+
+    /**
+     * A classification that further describes the type of media item. For example, 'clip' indicates that the item is a short video clip.
+     */
+    public GetMediaMetaDataMetadata withSubtype(Optional<String> subtype) {
+        Utils.checkNotNull(subtype, "subtype");
+        this.subtype = subtype;
+        return this;
+    }
+
+    /**
+     * The Unix timestamp representing the last time the item was rated.
+     */
+    public GetMediaMetaDataMetadata withLastRatedAt(long lastRatedAt) {
+        Utils.checkNotNull(lastRatedAt, "lastRatedAt");
+        this.lastRatedAt = Optional.ofNullable(lastRatedAt);
+        return this;
+    }
+
+    /**
+     * The Unix timestamp representing the last time the item was rated.
+     */
+    public GetMediaMetaDataMetadata withLastRatedAt(Optional<Long> lastRatedAt) {
+        Utils.checkNotNull(lastRatedAt, "lastRatedAt");
+        this.lastRatedAt = lastRatedAt;
+        return this;
+    }
+
+    /**
+     * The accuracy of the creation timestamp. This value indicates the format(s) provided (for example, 'epoch,local' means both epoch and local time formats are available).
+     */
+    public GetMediaMetaDataMetadata withCreatedAtAccuracy(String createdAtAccuracy) {
+        Utils.checkNotNull(createdAtAccuracy, "createdAtAccuracy");
+        this.createdAtAccuracy = Optional.ofNullable(createdAtAccuracy);
+        return this;
+    }
+
+    /**
+     * The accuracy of the creation timestamp. This value indicates the format(s) provided (for example, 'epoch,local' means both epoch and local time formats are available).
+     */
+    public GetMediaMetaDataMetadata withCreatedAtAccuracy(Optional<String> createdAtAccuracy) {
+        Utils.checkNotNull(createdAtAccuracy, "createdAtAccuracy");
+        this.createdAtAccuracy = createdAtAccuracy;
+        return this;
+    }
+
+    /**
+     * The time zone offset for the creation timestamp, represented as a string. This offset indicates the difference from UTC.
+     */
+    public GetMediaMetaDataMetadata withCreatedAtTZOffset(String createdAtTZOffset) {
+        Utils.checkNotNull(createdAtTZOffset, "createdAtTZOffset");
+        this.createdAtTZOffset = Optional.ofNullable(createdAtTZOffset);
+        return this;
+    }
+
+    /**
+     * The time zone offset for the creation timestamp, represented as a string. This offset indicates the difference from UTC.
+     */
+    public GetMediaMetaDataMetadata withCreatedAtTZOffset(Optional<String> createdAtTZOffset) {
+        Utils.checkNotNull(createdAtTZOffset, "createdAtTZOffset");
+        this.createdAtTZOffset = createdAtTZOffset;
+        return this;
+    }
+
+    /**
+     * Unix timestamp for when the media item was last viewed.
+     */
+    public GetMediaMetaDataMetadata withLastViewedAt(int lastViewedAt) {
+        Utils.checkNotNull(lastViewedAt, "lastViewedAt");
+        this.lastViewedAt = Optional.ofNullable(lastViewedAt);
+        return this;
+    }
+
+    /**
+     * Unix timestamp for when the media item was last viewed.
+     */
+    public GetMediaMetaDataMetadata withLastViewedAt(Optional<Integer> lastViewedAt) {
+        Utils.checkNotNull(lastViewedAt, "lastViewedAt");
+        this.lastViewedAt = lastViewedAt;
+        return this;
+    }
+
+    /**
+     * The rating provided by a user for the item. This value is expressed as a decimal number.
+     */
+    public GetMediaMetaDataMetadata withUserRating(float userRating) {
+        Utils.checkNotNull(userRating, "userRating");
+        this.userRating = Optional.ofNullable(userRating);
+        return this;
+    }
+
+    /**
+     * The rating provided by a user for the item. This value is expressed as a decimal number.
+     */
+    public GetMediaMetaDataMetadata withUserRating(Optional<Float> userRating) {
+        Utils.checkNotNull(userRating, "userRating");
+        this.userRating = userRating;
+        return this;
+    }
+
+    public GetMediaMetaDataMetadata withImage(List<GetMediaMetaDataImage> image) {
+        Utils.checkNotNull(image, "image");
+        this.image = Optional.ofNullable(image);
+        return this;
+    }
+
+    public GetMediaMetaDataMetadata withImage(Optional<? extends List<GetMediaMetaDataImage>> image) {
+        Utils.checkNotNull(image, "image");
+        this.image = image;
+        return this;
+    }
+
+    public GetMediaMetaDataMetadata withUltraBlurColors(GetMediaMetaDataUltraBlurColors ultraBlurColors) {
+        Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
+        this.ultraBlurColors = Optional.ofNullable(ultraBlurColors);
+        return this;
+    }
+
+    public GetMediaMetaDataMetadata withUltraBlurColors(Optional<? extends GetMediaMetaDataUltraBlurColors> ultraBlurColors) {
+        Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
+        this.ultraBlurColors = ultraBlurColors;
+        return this;
+    }
+
+    /**
+     * The identifier for the library section.
+     */
+    public GetMediaMetaDataMetadata withLibrarySectionID(long librarySectionID) {
+        Utils.checkNotNull(librarySectionID, "librarySectionID");
+        this.librarySectionID = librarySectionID;
+        return this;
+    }
+
+    /**
+     * The title of the library section.
+     */
+    public GetMediaMetaDataMetadata withLibrarySectionTitle(String librarySectionTitle) {
+        Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+        this.librarySectionTitle = librarySectionTitle;
+        return this;
+    }
+
+    /**
+     * The key corresponding to the library section.
+     */
+    public GetMediaMetaDataMetadata withLibrarySectionKey(String librarySectionKey) {
+        Utils.checkNotNull(librarySectionKey, "librarySectionKey");
+        this.librarySectionKey = librarySectionKey;
         return this;
     }
 
@@ -1830,198 +2111,159 @@ public class GetMediaMetaDataMetadata {
         return this;
     }
 
-    /**
-     * An array of image objects.
-     */
-    public GetMediaMetaDataMetadata withImage(List<GetMediaMetaDataImage> image) {
-        Utils.checkNotNull(image, "image");
-        this.image = image;
-        return this;
-    }
-
-    public GetMediaMetaDataMetadata withUltraBlurColors(GetMediaMetaDataUltraBlurColors ultraBlurColors) {
-        Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
-        this.ultraBlurColors = ultraBlurColors;
-        return this;
-    }
-
-    /**
-     * An array of genre tags.
-     */
     public GetMediaMetaDataMetadata withGenre(List<GetMediaMetaDataGenre> genre) {
         Utils.checkNotNull(genre, "genre");
         this.genre = Optional.ofNullable(genre);
         return this;
     }
 
-    /**
-     * An array of genre tags.
-     */
     public GetMediaMetaDataMetadata withGenre(Optional<? extends List<GetMediaMetaDataGenre>> genre) {
         Utils.checkNotNull(genre, "genre");
         this.genre = genre;
         return this;
     }
 
-    /**
-     * An array of country tags.
-     */
     public GetMediaMetaDataMetadata withCountry(List<GetMediaMetaDataCountry> country) {
         Utils.checkNotNull(country, "country");
         this.country = Optional.ofNullable(country);
         return this;
     }
 
-    /**
-     * An array of country tags.
-     */
     public GetMediaMetaDataMetadata withCountry(Optional<? extends List<GetMediaMetaDataCountry>> country) {
         Utils.checkNotNull(country, "country");
         this.country = country;
         return this;
     }
 
-    /**
-     * An array of GUID objects.
-     */
-    public GetMediaMetaDataMetadata withGuids(List<GetMediaMetaDataGuids> guids) {
-        Utils.checkNotNull(guids, "guids");
-        this.guids = Optional.ofNullable(guids);
-        return this;
-    }
-
-    /**
-     * An array of GUID objects.
-     */
-    public GetMediaMetaDataMetadata withGuids(Optional<? extends List<GetMediaMetaDataGuids>> guids) {
-        Utils.checkNotNull(guids, "guids");
-        this.guids = guids;
-        return this;
-    }
-
-    /**
-     * An array of rating objects.
-     */
-    public GetMediaMetaDataMetadata withRatings(List<Ratings> ratings) {
-        Utils.checkNotNull(ratings, "ratings");
-        this.ratings = Optional.ofNullable(ratings);
-        return this;
-    }
-
-    /**
-     * An array of rating objects.
-     */
-    public GetMediaMetaDataMetadata withRatings(Optional<? extends List<Ratings>> ratings) {
-        Utils.checkNotNull(ratings, "ratings");
-        this.ratings = ratings;
-        return this;
-    }
-
-    /**
-     * An array of Actor roles.
-     */
-    public GetMediaMetaDataMetadata withRole(List<GetMediaMetaDataRole> role) {
-        Utils.checkNotNull(role, "role");
-        this.role = Optional.ofNullable(role);
-        return this;
-    }
-
-    /**
-     * An array of Actor roles.
-     */
-    public GetMediaMetaDataMetadata withRole(Optional<? extends List<GetMediaMetaDataRole>> role) {
-        Utils.checkNotNull(role, "role");
-        this.role = role;
-        return this;
-    }
-
-    /**
-     * An array of Director roles.
-     */
     public GetMediaMetaDataMetadata withDirector(List<GetMediaMetaDataDirector> director) {
         Utils.checkNotNull(director, "director");
         this.director = Optional.ofNullable(director);
         return this;
     }
 
-    /**
-     * An array of Director roles.
-     */
     public GetMediaMetaDataMetadata withDirector(Optional<? extends List<GetMediaMetaDataDirector>> director) {
         Utils.checkNotNull(director, "director");
         this.director = director;
         return this;
     }
 
-    /**
-     * An array of Writer roles.
-     */
     public GetMediaMetaDataMetadata withWriter(List<GetMediaMetaDataWriter> writer) {
         Utils.checkNotNull(writer, "writer");
         this.writer = Optional.ofNullable(writer);
         return this;
     }
 
-    /**
-     * An array of Writer roles.
-     */
     public GetMediaMetaDataMetadata withWriter(Optional<? extends List<GetMediaMetaDataWriter>> writer) {
         Utils.checkNotNull(writer, "writer");
         this.writer = writer;
         return this;
     }
 
-    /**
-     * An array of Writer roles.
-     */
     public GetMediaMetaDataMetadata withProducer(List<GetMediaMetaDataProducer> producer) {
         Utils.checkNotNull(producer, "producer");
         this.producer = Optional.ofNullable(producer);
         return this;
     }
 
-    /**
-     * An array of Writer roles.
-     */
     public GetMediaMetaDataMetadata withProducer(Optional<? extends List<GetMediaMetaDataProducer>> producer) {
         Utils.checkNotNull(producer, "producer");
         this.producer = producer;
         return this;
     }
 
-    /**
-     * An array of similar content objects.
-     */
+    public GetMediaMetaDataMetadata withRole(List<GetMediaMetaDataRole> role) {
+        Utils.checkNotNull(role, "role");
+        this.role = Optional.ofNullable(role);
+        return this;
+    }
+
+    public GetMediaMetaDataMetadata withRole(Optional<? extends List<GetMediaMetaDataRole>> role) {
+        Utils.checkNotNull(role, "role");
+        this.role = role;
+        return this;
+    }
+
+    public GetMediaMetaDataMetadata withGuids(List<GetMediaMetaDataGuids> guids) {
+        Utils.checkNotNull(guids, "guids");
+        this.guids = Optional.ofNullable(guids);
+        return this;
+    }
+
+    public GetMediaMetaDataMetadata withGuids(Optional<? extends List<GetMediaMetaDataGuids>> guids) {
+        Utils.checkNotNull(guids, "guids");
+        this.guids = guids;
+        return this;
+    }
+
+    public GetMediaMetaDataMetadata withRatings(List<Ratings> ratings) {
+        Utils.checkNotNull(ratings, "ratings");
+        this.ratings = Optional.ofNullable(ratings);
+        return this;
+    }
+
+    public GetMediaMetaDataMetadata withRatings(Optional<? extends List<Ratings>> ratings) {
+        Utils.checkNotNull(ratings, "ratings");
+        this.ratings = ratings;
+        return this;
+    }
+
     public GetMediaMetaDataMetadata withSimilar(List<GetMediaMetaDataSimilar> similar) {
         Utils.checkNotNull(similar, "similar");
         this.similar = Optional.ofNullable(similar);
         return this;
     }
 
-    /**
-     * An array of similar content objects.
-     */
     public GetMediaMetaDataMetadata withSimilar(Optional<? extends List<GetMediaMetaDataSimilar>> similar) {
         Utils.checkNotNull(similar, "similar");
         this.similar = similar;
         return this;
     }
 
-    /**
-     * An array of location objects.
-     */
     public GetMediaMetaDataMetadata withLocation(List<GetMediaMetaDataLocation> location) {
         Utils.checkNotNull(location, "location");
         this.location = Optional.ofNullable(location);
         return this;
     }
 
-    /**
-     * An array of location objects.
-     */
     public GetMediaMetaDataMetadata withLocation(Optional<? extends List<GetMediaMetaDataLocation>> location) {
         Utils.checkNotNull(location, "location");
         this.location = location;
+        return this;
+    }
+
+    public GetMediaMetaDataMetadata withChapter(List<Chapter> chapter) {
+        Utils.checkNotNull(chapter, "chapter");
+        this.chapter = Optional.ofNullable(chapter);
+        return this;
+    }
+
+    public GetMediaMetaDataMetadata withChapter(Optional<? extends List<Chapter>> chapter) {
+        Utils.checkNotNull(chapter, "chapter");
+        this.chapter = chapter;
+        return this;
+    }
+
+    public GetMediaMetaDataMetadata withMarker(List<Marker> marker) {
+        Utils.checkNotNull(marker, "marker");
+        this.marker = Optional.ofNullable(marker);
+        return this;
+    }
+
+    public GetMediaMetaDataMetadata withMarker(Optional<? extends List<Marker>> marker) {
+        Utils.checkNotNull(marker, "marker");
+        this.marker = marker;
+        return this;
+    }
+
+    public GetMediaMetaDataMetadata withExtras(Extras extras) {
+        Utils.checkNotNull(extras, "extras");
+        this.extras = Optional.ofNullable(extras);
+        return this;
+    }
+
+    public GetMediaMetaDataMetadata withExtras(Optional<? extends Extras> extras) {
+        Utils.checkNotNull(extras, "extras");
+        this.extras = extras;
         return this;
     }
 
@@ -2037,6 +2279,35 @@ public class GetMediaMetaDataMetadata {
         GetMediaMetaDataMetadata other = (GetMediaMetaDataMetadata) o;
         return 
             Objects.deepEquals(this.ratingKey, other.ratingKey) &&
+            Objects.deepEquals(this.key, other.key) &&
+            Objects.deepEquals(this.guid, other.guid) &&
+            Objects.deepEquals(this.slug, other.slug) &&
+            Objects.deepEquals(this.studio, other.studio) &&
+            Objects.deepEquals(this.type, other.type) &&
+            Objects.deepEquals(this.title, other.title) &&
+            Objects.deepEquals(this.titleSort, other.titleSort) &&
+            Objects.deepEquals(this.contentRating, other.contentRating) &&
+            Objects.deepEquals(this.summary, other.summary) &&
+            Objects.deepEquals(this.rating, other.rating) &&
+            Objects.deepEquals(this.audienceRating, other.audienceRating) &&
+            Objects.deepEquals(this.year, other.year) &&
+            Objects.deepEquals(this.tagline, other.tagline) &&
+            Objects.deepEquals(this.thumb, other.thumb) &&
+            Objects.deepEquals(this.art, other.art) &&
+            Objects.deepEquals(this.theme, other.theme) &&
+            Objects.deepEquals(this.index, other.index) &&
+            Objects.deepEquals(this.leafCount, other.leafCount) &&
+            Objects.deepEquals(this.viewedLeafCount, other.viewedLeafCount) &&
+            Objects.deepEquals(this.childCount, other.childCount) &&
+            Objects.deepEquals(this.seasonCount, other.seasonCount) &&
+            Objects.deepEquals(this.duration, other.duration) &&
+            Objects.deepEquals(this.originallyAvailableAt, other.originallyAvailableAt) &&
+            Objects.deepEquals(this.addedAt, other.addedAt) &&
+            Objects.deepEquals(this.updatedAt, other.updatedAt) &&
+            Objects.deepEquals(this.audienceRatingImage, other.audienceRatingImage) &&
+            Objects.deepEquals(this.chapterSource, other.chapterSource) &&
+            Objects.deepEquals(this.primaryExtraKey, other.primaryExtraKey) &&
+            Objects.deepEquals(this.originalTitle, other.originalTitle) &&
             Objects.deepEquals(this.parentRatingKey, other.parentRatingKey) &&
             Objects.deepEquals(this.grandparentRatingKey, other.grandparentRatingKey) &&
             Objects.deepEquals(this.parentGuid, other.parentGuid) &&
@@ -2044,65 +2315,77 @@ public class GetMediaMetaDataMetadata {
             Objects.deepEquals(this.grandparentSlug, other.grandparentSlug) &&
             Objects.deepEquals(this.grandparentKey, other.grandparentKey) &&
             Objects.deepEquals(this.parentKey, other.parentKey) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.guid, other.guid) &&
-            Objects.deepEquals(this.slug, other.slug) &&
-            Objects.deepEquals(this.studio, other.studio) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.originalTitle, other.originalTitle) &&
-            Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
-            Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
-            Objects.deepEquals(this.librarySectionKey, other.librarySectionKey) &&
-            Objects.deepEquals(this.contentRating, other.contentRating) &&
-            Objects.deepEquals(this.summary, other.summary) &&
-            Objects.deepEquals(this.index, other.index) &&
             Objects.deepEquals(this.grandparentTitle, other.grandparentTitle) &&
+            Objects.deepEquals(this.grandparentThumb, other.grandparentThumb) &&
+            Objects.deepEquals(this.grandparentTheme, other.grandparentTheme) &&
+            Objects.deepEquals(this.grandparentArt, other.grandparentArt) &&
             Objects.deepEquals(this.parentTitle, other.parentTitle) &&
-            Objects.deepEquals(this.audienceRating, other.audienceRating) &&
-            Objects.deepEquals(this.viewCount, other.viewCount) &&
-            Objects.deepEquals(this.skipCount, other.skipCount) &&
-            Objects.deepEquals(this.lastViewedAt, other.lastViewedAt) &&
-            Objects.deepEquals(this.year, other.year) &&
-            Objects.deepEquals(this.rating, other.rating) &&
-            Objects.deepEquals(this.ratingImage, other.ratingImage) &&
-            Objects.deepEquals(this.tagline, other.tagline) &&
-            Objects.deepEquals(this.chapterSource, other.chapterSource) &&
-            Objects.deepEquals(this.primaryExtraKey, other.primaryExtraKey) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.art, other.art) &&
-            Objects.deepEquals(this.theme, other.theme) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.originallyAvailableAt, other.originallyAvailableAt) &&
-            Objects.deepEquals(this.leafCount, other.leafCount) &&
-            Objects.deepEquals(this.viewedLeafCount, other.viewedLeafCount) &&
-            Objects.deepEquals(this.childCount, other.childCount) &&
-            Objects.deepEquals(this.addedAt, other.addedAt) &&
-            Objects.deepEquals(this.updatedAt, other.updatedAt) &&
-            Objects.deepEquals(this.audienceRatingImage, other.audienceRatingImage) &&
             Objects.deepEquals(this.parentIndex, other.parentIndex) &&
             Objects.deepEquals(this.parentThumb, other.parentThumb) &&
-            Objects.deepEquals(this.grandparentThumb, other.grandparentThumb) &&
-            Objects.deepEquals(this.grandparentArt, other.grandparentArt) &&
-            Objects.deepEquals(this.media, other.media) &&
+            Objects.deepEquals(this.ratingImage, other.ratingImage) &&
+            Objects.deepEquals(this.viewCount, other.viewCount) &&
+            Objects.deepEquals(this.viewOffset, other.viewOffset) &&
+            Objects.deepEquals(this.skipCount, other.skipCount) &&
+            Objects.deepEquals(this.subtype, other.subtype) &&
+            Objects.deepEquals(this.lastRatedAt, other.lastRatedAt) &&
+            Objects.deepEquals(this.createdAtAccuracy, other.createdAtAccuracy) &&
+            Objects.deepEquals(this.createdAtTZOffset, other.createdAtTZOffset) &&
+            Objects.deepEquals(this.lastViewedAt, other.lastViewedAt) &&
+            Objects.deepEquals(this.userRating, other.userRating) &&
             Objects.deepEquals(this.image, other.image) &&
             Objects.deepEquals(this.ultraBlurColors, other.ultraBlurColors) &&
+            Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
+            Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
+            Objects.deepEquals(this.librarySectionKey, other.librarySectionKey) &&
+            Objects.deepEquals(this.media, other.media) &&
             Objects.deepEquals(this.genre, other.genre) &&
             Objects.deepEquals(this.country, other.country) &&
-            Objects.deepEquals(this.guids, other.guids) &&
-            Objects.deepEquals(this.ratings, other.ratings) &&
-            Objects.deepEquals(this.role, other.role) &&
             Objects.deepEquals(this.director, other.director) &&
             Objects.deepEquals(this.writer, other.writer) &&
             Objects.deepEquals(this.producer, other.producer) &&
+            Objects.deepEquals(this.role, other.role) &&
+            Objects.deepEquals(this.guids, other.guids) &&
+            Objects.deepEquals(this.ratings, other.ratings) &&
             Objects.deepEquals(this.similar, other.similar) &&
-            Objects.deepEquals(this.location, other.location);
+            Objects.deepEquals(this.location, other.location) &&
+            Objects.deepEquals(this.chapter, other.chapter) &&
+            Objects.deepEquals(this.marker, other.marker) &&
+            Objects.deepEquals(this.extras, other.extras);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
             ratingKey,
+            key,
+            guid,
+            slug,
+            studio,
+            type,
+            title,
+            titleSort,
+            contentRating,
+            summary,
+            rating,
+            audienceRating,
+            year,
+            tagline,
+            thumb,
+            art,
+            theme,
+            index,
+            leafCount,
+            viewedLeafCount,
+            childCount,
+            seasonCount,
+            duration,
+            originallyAvailableAt,
+            addedAt,
+            updatedAt,
+            audienceRatingImage,
+            chapterSource,
+            primaryExtraKey,
+            originalTitle,
             parentRatingKey,
             grandparentRatingKey,
             parentGuid,
@@ -2110,65 +2393,77 @@ public class GetMediaMetaDataMetadata {
             grandparentSlug,
             grandparentKey,
             parentKey,
-            key,
-            guid,
-            slug,
-            studio,
-            type,
-            title,
-            originalTitle,
-            librarySectionTitle,
-            librarySectionID,
-            librarySectionKey,
-            contentRating,
-            summary,
-            index,
             grandparentTitle,
+            grandparentThumb,
+            grandparentTheme,
+            grandparentArt,
             parentTitle,
-            audienceRating,
-            viewCount,
-            skipCount,
-            lastViewedAt,
-            year,
-            rating,
-            ratingImage,
-            tagline,
-            chapterSource,
-            primaryExtraKey,
-            thumb,
-            art,
-            theme,
-            duration,
-            originallyAvailableAt,
-            leafCount,
-            viewedLeafCount,
-            childCount,
-            addedAt,
-            updatedAt,
-            audienceRatingImage,
             parentIndex,
             parentThumb,
-            grandparentThumb,
-            grandparentArt,
-            media,
+            ratingImage,
+            viewCount,
+            viewOffset,
+            skipCount,
+            subtype,
+            lastRatedAt,
+            createdAtAccuracy,
+            createdAtTZOffset,
+            lastViewedAt,
+            userRating,
             image,
             ultraBlurColors,
+            librarySectionID,
+            librarySectionTitle,
+            librarySectionKey,
+            media,
             genre,
             country,
-            guids,
-            ratings,
-            role,
             director,
             writer,
             producer,
+            role,
+            guids,
+            ratings,
             similar,
-            location);
+            location,
+            chapter,
+            marker,
+            extras);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetMediaMetaDataMetadata.class,
                 "ratingKey", ratingKey,
+                "key", key,
+                "guid", guid,
+                "slug", slug,
+                "studio", studio,
+                "type", type,
+                "title", title,
+                "titleSort", titleSort,
+                "contentRating", contentRating,
+                "summary", summary,
+                "rating", rating,
+                "audienceRating", audienceRating,
+                "year", year,
+                "tagline", tagline,
+                "thumb", thumb,
+                "art", art,
+                "theme", theme,
+                "index", index,
+                "leafCount", leafCount,
+                "viewedLeafCount", viewedLeafCount,
+                "childCount", childCount,
+                "seasonCount", seasonCount,
+                "duration", duration,
+                "originallyAvailableAt", originallyAvailableAt,
+                "addedAt", addedAt,
+                "updatedAt", updatedAt,
+                "audienceRatingImage", audienceRatingImage,
+                "chapterSource", chapterSource,
+                "primaryExtraKey", primaryExtraKey,
+                "originalTitle", originalTitle,
                 "parentRatingKey", parentRatingKey,
                 "grandparentRatingKey", grandparentRatingKey,
                 "parentGuid", parentGuid,
@@ -2176,64 +2471,105 @@ public class GetMediaMetaDataMetadata {
                 "grandparentSlug", grandparentSlug,
                 "grandparentKey", grandparentKey,
                 "parentKey", parentKey,
-                "key", key,
-                "guid", guid,
-                "slug", slug,
-                "studio", studio,
-                "type", type,
-                "title", title,
-                "originalTitle", originalTitle,
-                "librarySectionTitle", librarySectionTitle,
-                "librarySectionID", librarySectionID,
-                "librarySectionKey", librarySectionKey,
-                "contentRating", contentRating,
-                "summary", summary,
-                "index", index,
                 "grandparentTitle", grandparentTitle,
+                "grandparentThumb", grandparentThumb,
+                "grandparentTheme", grandparentTheme,
+                "grandparentArt", grandparentArt,
                 "parentTitle", parentTitle,
-                "audienceRating", audienceRating,
-                "viewCount", viewCount,
-                "skipCount", skipCount,
-                "lastViewedAt", lastViewedAt,
-                "year", year,
-                "rating", rating,
-                "ratingImage", ratingImage,
-                "tagline", tagline,
-                "chapterSource", chapterSource,
-                "primaryExtraKey", primaryExtraKey,
-                "thumb", thumb,
-                "art", art,
-                "theme", theme,
-                "duration", duration,
-                "originallyAvailableAt", originallyAvailableAt,
-                "leafCount", leafCount,
-                "viewedLeafCount", viewedLeafCount,
-                "childCount", childCount,
-                "addedAt", addedAt,
-                "updatedAt", updatedAt,
-                "audienceRatingImage", audienceRatingImage,
                 "parentIndex", parentIndex,
                 "parentThumb", parentThumb,
-                "grandparentThumb", grandparentThumb,
-                "grandparentArt", grandparentArt,
-                "media", media,
+                "ratingImage", ratingImage,
+                "viewCount", viewCount,
+                "viewOffset", viewOffset,
+                "skipCount", skipCount,
+                "subtype", subtype,
+                "lastRatedAt", lastRatedAt,
+                "createdAtAccuracy", createdAtAccuracy,
+                "createdAtTZOffset", createdAtTZOffset,
+                "lastViewedAt", lastViewedAt,
+                "userRating", userRating,
                 "image", image,
                 "ultraBlurColors", ultraBlurColors,
+                "librarySectionID", librarySectionID,
+                "librarySectionTitle", librarySectionTitle,
+                "librarySectionKey", librarySectionKey,
+                "media", media,
                 "genre", genre,
                 "country", country,
-                "guids", guids,
-                "ratings", ratings,
-                "role", role,
                 "director", director,
                 "writer", writer,
                 "producer", producer,
+                "role", role,
+                "guids", guids,
+                "ratings", ratings,
                 "similar", similar,
-                "location", location);
+                "location", location,
+                "chapter", chapter,
+                "marker", marker,
+                "extras", extras);
     }
     
     public final static class Builder {
  
         private String ratingKey;
+ 
+        private String key;
+ 
+        private String guid;
+ 
+        private String slug;
+ 
+        private Optional<String> studio = Optional.empty();
+ 
+        private GetMediaMetaDataType type;
+ 
+        private String title;
+ 
+        private String titleSort;
+ 
+        private Optional<String> contentRating = Optional.empty();
+ 
+        private String summary;
+ 
+        private Float rating;
+ 
+        private Double audienceRating;
+ 
+        private Optional<Integer> year = Optional.empty();
+ 
+        private String tagline;
+ 
+        private String thumb;
+ 
+        private String art;
+ 
+        private String theme;
+ 
+        private Integer index;
+ 
+        private Optional<Integer> leafCount = Optional.empty();
+ 
+        private Optional<Integer> viewedLeafCount = Optional.empty();
+ 
+        private Integer childCount;
+ 
+        private Integer seasonCount;
+ 
+        private Integer duration;
+ 
+        private LocalDate originallyAvailableAt;
+ 
+        private Long addedAt;
+ 
+        private Optional<Long> updatedAt = Optional.empty();
+ 
+        private Optional<String> audienceRatingImage = Optional.empty();
+ 
+        private Optional<String> chapterSource = Optional.empty();
+ 
+        private Optional<String> primaryExtraKey = Optional.empty();
+ 
+        private Optional<String> originalTitle = Optional.empty();
  
         private Optional<String> parentRatingKey = Optional.empty();
  
@@ -2249,101 +2585,55 @@ public class GetMediaMetaDataMetadata {
  
         private Optional<String> parentKey = Optional.empty();
  
-        private String key;
- 
-        private String guid;
- 
-        private Optional<String> slug = Optional.empty();
- 
-        private Optional<String> studio = Optional.empty();
- 
-        private String type;
- 
-        private String title;
- 
-        private Optional<String> originalTitle = Optional.empty();
- 
-        private String librarySectionTitle;
- 
-        private Long librarySectionID;
- 
-        private String librarySectionKey;
- 
-        private Optional<String> contentRating = Optional.empty();
- 
-        private String summary;
- 
-        private Optional<Long> index = Optional.empty();
- 
         private Optional<String> grandparentTitle = Optional.empty();
- 
-        private Optional<String> parentTitle = Optional.empty();
- 
-        private Optional<Float> audienceRating = Optional.empty();
- 
-        private Optional<Long> viewCount = Optional.empty();
- 
-        private Optional<Long> skipCount = Optional.empty();
- 
-        private Optional<Long> lastViewedAt = Optional.empty();
- 
-        private Integer year;
- 
-        private Optional<Float> rating = Optional.empty();
- 
-        private Optional<String> ratingImage = Optional.empty();
- 
-        private Optional<String> tagline = Optional.empty();
- 
-        private Optional<String> chapterSource = Optional.empty();
- 
-        private Optional<String> primaryExtraKey = Optional.empty();
- 
-        private String thumb;
- 
-        private String art;
- 
-        private Optional<String> theme = Optional.empty();
- 
-        private Integer duration;
- 
-        private Optional<LocalDate> originallyAvailableAt = Optional.empty();
- 
-        private Optional<Long> leafCount = Optional.empty();
- 
-        private Optional<Long> viewedLeafCount = Optional.empty();
- 
-        private Optional<Integer> childCount = Optional.empty();
- 
-        private Long addedAt;
- 
-        private Long updatedAt;
- 
-        private Optional<String> audienceRatingImage = Optional.empty();
- 
-        private Optional<Long> parentIndex = Optional.empty();
- 
-        private Optional<String> parentThumb = Optional.empty();
  
         private Optional<String> grandparentThumb = Optional.empty();
  
+        private Optional<String> grandparentTheme = Optional.empty();
+ 
         private Optional<String> grandparentArt = Optional.empty();
  
+        private Optional<String> parentTitle = Optional.empty();
+ 
+        private Optional<Integer> parentIndex = Optional.empty();
+ 
+        private Optional<String> parentThumb = Optional.empty();
+ 
+        private Optional<String> ratingImage = Optional.empty();
+ 
+        private Optional<Integer> viewCount = Optional.empty();
+ 
+        private Optional<Integer> viewOffset = Optional.empty();
+ 
+        private Optional<Integer> skipCount = Optional.empty();
+ 
+        private Optional<String> subtype = Optional.empty();
+ 
+        private Optional<Long> lastRatedAt = Optional.empty();
+ 
+        private Optional<String> createdAtAccuracy = Optional.empty();
+ 
+        private Optional<String> createdAtTZOffset = Optional.empty();
+ 
+        private Optional<Integer> lastViewedAt = Optional.empty();
+ 
+        private Optional<Float> userRating = Optional.empty();
+ 
+        private Optional<? extends List<GetMediaMetaDataImage>> image = Optional.empty();
+ 
+        private Optional<? extends GetMediaMetaDataUltraBlurColors> ultraBlurColors = Optional.empty();
+ 
+        private Long librarySectionID;
+ 
+        private String librarySectionTitle;
+ 
+        private String librarySectionKey;
+ 
         private Optional<? extends List<GetMediaMetaDataMedia>> media = Optional.empty();
- 
-        private List<GetMediaMetaDataImage> image;
- 
-        private GetMediaMetaDataUltraBlurColors ultraBlurColors;
  
         private Optional<? extends List<GetMediaMetaDataGenre>> genre = Optional.empty();
  
         private Optional<? extends List<GetMediaMetaDataCountry>> country = Optional.empty();
- 
-        private Optional<? extends List<GetMediaMetaDataGuids>> guids = Optional.empty();
- 
-        private Optional<? extends List<Ratings>> ratings = Optional.empty();
- 
-        private Optional<? extends List<GetMediaMetaDataRole>> role = Optional.empty();
  
         private Optional<? extends List<GetMediaMetaDataDirector>> director = Optional.empty();
  
@@ -2351,16 +2641,28 @@ public class GetMediaMetaDataMetadata {
  
         private Optional<? extends List<GetMediaMetaDataProducer>> producer = Optional.empty();
  
+        private Optional<? extends List<GetMediaMetaDataRole>> role = Optional.empty();
+ 
+        private Optional<? extends List<GetMediaMetaDataGuids>> guids = Optional.empty();
+ 
+        private Optional<? extends List<Ratings>> ratings = Optional.empty();
+ 
         private Optional<? extends List<GetMediaMetaDataSimilar>> similar = Optional.empty();
  
         private Optional<? extends List<GetMediaMetaDataLocation>> location = Optional.empty();
+ 
+        private Optional<? extends List<Chapter>> chapter = Optional.empty();
+ 
+        private Optional<? extends List<Marker>> marker = Optional.empty();
+ 
+        private Optional<? extends Extras> extras = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
         }
 
         /**
-         * The rating key of the metadata item.
+         * The rating key (Media ID) of this media item. Note: Although this is always an integer, it is represented as a string in the API.
          */
         public Builder ratingKey(String ratingKey) {
             Utils.checkNotNull(ratingKey, "ratingKey");
@@ -2369,133 +2671,7 @@ public class GetMediaMetaDataMetadata {
         }
 
         /**
-         * The rating key of the parent of this metadata item.
-         */
-        public Builder parentRatingKey(String parentRatingKey) {
-            Utils.checkNotNull(parentRatingKey, "parentRatingKey");
-            this.parentRatingKey = Optional.ofNullable(parentRatingKey);
-            return this;
-        }
-
-        /**
-         * The rating key of the parent of this metadata item.
-         */
-        public Builder parentRatingKey(Optional<String> parentRatingKey) {
-            Utils.checkNotNull(parentRatingKey, "parentRatingKey");
-            this.parentRatingKey = parentRatingKey;
-            return this;
-        }
-
-        /**
-         * The rating key of the grandparent of this metadata item.
-         */
-        public Builder grandparentRatingKey(String grandparentRatingKey) {
-            Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
-            this.grandparentRatingKey = Optional.ofNullable(grandparentRatingKey);
-            return this;
-        }
-
-        /**
-         * The rating key of the grandparent of this metadata item.
-         */
-        public Builder grandparentRatingKey(Optional<String> grandparentRatingKey) {
-            Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
-            this.grandparentRatingKey = grandparentRatingKey;
-            return this;
-        }
-
-        /**
-         * A GUID identifying the parent entity (e.g., season) for the item.
-         */
-        public Builder parentGuid(String parentGuid) {
-            Utils.checkNotNull(parentGuid, "parentGuid");
-            this.parentGuid = Optional.ofNullable(parentGuid);
-            return this;
-        }
-
-        /**
-         * A GUID identifying the parent entity (e.g., season) for the item.
-         */
-        public Builder parentGuid(Optional<String> parentGuid) {
-            Utils.checkNotNull(parentGuid, "parentGuid");
-            this.parentGuid = parentGuid;
-            return this;
-        }
-
-        /**
-         * A GUID identifying the grandparent entity (e.g., show).
-         */
-        public Builder grandparentGuid(String grandparentGuid) {
-            Utils.checkNotNull(grandparentGuid, "grandparentGuid");
-            this.grandparentGuid = Optional.ofNullable(grandparentGuid);
-            return this;
-        }
-
-        /**
-         * A GUID identifying the grandparent entity (e.g., show).
-         */
-        public Builder grandparentGuid(Optional<String> grandparentGuid) {
-            Utils.checkNotNull(grandparentGuid, "grandparentGuid");
-            this.grandparentGuid = grandparentGuid;
-            return this;
-        }
-
-        /**
-         * A URL-friendly identifier (slug) for the grandparent entity.
-         */
-        public Builder grandparentSlug(String grandparentSlug) {
-            Utils.checkNotNull(grandparentSlug, "grandparentSlug");
-            this.grandparentSlug = Optional.ofNullable(grandparentSlug);
-            return this;
-        }
-
-        /**
-         * A URL-friendly identifier (slug) for the grandparent entity.
-         */
-        public Builder grandparentSlug(Optional<String> grandparentSlug) {
-            Utils.checkNotNull(grandparentSlug, "grandparentSlug");
-            this.grandparentSlug = grandparentSlug;
-            return this;
-        }
-
-        /**
-         * A key identifying the grandparent metadata in the library.
-         */
-        public Builder grandparentKey(String grandparentKey) {
-            Utils.checkNotNull(grandparentKey, "grandparentKey");
-            this.grandparentKey = Optional.ofNullable(grandparentKey);
-            return this;
-        }
-
-        /**
-         * A key identifying the grandparent metadata in the library.
-         */
-        public Builder grandparentKey(Optional<String> grandparentKey) {
-            Utils.checkNotNull(grandparentKey, "grandparentKey");
-            this.grandparentKey = grandparentKey;
-            return this;
-        }
-
-        /**
-         * A key identifying the parent metadata in the library.
-         */
-        public Builder parentKey(String parentKey) {
-            Utils.checkNotNull(parentKey, "parentKey");
-            this.parentKey = Optional.ofNullable(parentKey);
-            return this;
-        }
-
-        /**
-         * A key identifying the parent metadata in the library.
-         */
-        public Builder parentKey(Optional<String> parentKey) {
-            Utils.checkNotNull(parentKey, "parentKey");
-            this.parentKey = parentKey;
-            return this;
-        }
-
-        /**
-         * The API key to access metadata details.
+         * The unique key for the media item.
          */
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
@@ -2504,7 +2680,7 @@ public class GetMediaMetaDataMetadata {
         }
 
         /**
-         * The globally unique identifier for the item.
+         * The globally unique identifier for the media item.
          */
         public Builder guid(String guid) {
             Utils.checkNotNull(guid, "guid");
@@ -2513,25 +2689,16 @@ public class GetMediaMetaDataMetadata {
         }
 
         /**
-         * A URL-friendly identifier for the item.
+         * A URL‐friendly version of the media title.
          */
         public Builder slug(String slug) {
-            Utils.checkNotNull(slug, "slug");
-            this.slug = Optional.ofNullable(slug);
-            return this;
-        }
-
-        /**
-         * A URL-friendly identifier for the item.
-         */
-        public Builder slug(Optional<String> slug) {
             Utils.checkNotNull(slug, "slug");
             this.slug = slug;
             return this;
         }
 
         /**
-         * The studio that produced the content.
+         * The studio that produced the media item.
          */
         public Builder studio(String studio) {
             Utils.checkNotNull(studio, "studio");
@@ -2540,7 +2707,7 @@ public class GetMediaMetaDataMetadata {
         }
 
         /**
-         * The studio that produced the content.
+         * The studio that produced the media item.
          */
         public Builder studio(Optional<String> studio) {
             Utils.checkNotNull(studio, "studio");
@@ -2548,17 +2715,14 @@ public class GetMediaMetaDataMetadata {
             return this;
         }
 
-        /**
-         * The type of content (e.g., show, movie).
-         */
-        public Builder type(String type) {
+        public Builder type(GetMediaMetaDataType type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
         }
 
         /**
-         * The title of the content.
+         * The title of the media item.
          */
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
@@ -2567,52 +2731,16 @@ public class GetMediaMetaDataMetadata {
         }
 
         /**
-         * The original title of the content.
+         * The sort title used for ordering media items.
          */
-        public Builder originalTitle(String originalTitle) {
-            Utils.checkNotNull(originalTitle, "originalTitle");
-            this.originalTitle = Optional.ofNullable(originalTitle);
+        public Builder titleSort(String titleSort) {
+            Utils.checkNotNull(titleSort, "titleSort");
+            this.titleSort = titleSort;
             return this;
         }
 
         /**
-         * The original title of the content.
-         */
-        public Builder originalTitle(Optional<String> originalTitle) {
-            Utils.checkNotNull(originalTitle, "originalTitle");
-            this.originalTitle = originalTitle;
-            return this;
-        }
-
-        /**
-         * The title of the library section.
-         */
-        public Builder librarySectionTitle(String librarySectionTitle) {
-            Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
-            this.librarySectionTitle = librarySectionTitle;
-            return this;
-        }
-
-        /**
-         * The ID of the library section.
-         */
-        public Builder librarySectionID(long librarySectionID) {
-            Utils.checkNotNull(librarySectionID, "librarySectionID");
-            this.librarySectionID = librarySectionID;
-            return this;
-        }
-
-        /**
-         * The key of the library section.
-         */
-        public Builder librarySectionKey(String librarySectionKey) {
-            Utils.checkNotNull(librarySectionKey, "librarySectionKey");
-            this.librarySectionKey = librarySectionKey;
-            return this;
-        }
-
-        /**
-         * The content rating (e.g., TV-MA).
+         * The content rating for the media item.
          */
         public Builder contentRating(String contentRating) {
             Utils.checkNotNull(contentRating, "contentRating");
@@ -2621,7 +2749,7 @@ public class GetMediaMetaDataMetadata {
         }
 
         /**
-         * The content rating (e.g., TV-MA).
+         * The content rating for the media item.
          */
         public Builder contentRating(Optional<String> contentRating) {
             Utils.checkNotNull(contentRating, "contentRating");
@@ -2630,7 +2758,7 @@ public class GetMediaMetaDataMetadata {
         }
 
         /**
-         * A summary of the content.
+         * A synopsis of the media item.
          */
         public Builder summary(String summary) {
             Utils.checkNotNull(summary, "summary");
@@ -2639,220 +2767,52 @@ public class GetMediaMetaDataMetadata {
         }
 
         /**
-         * The index or order of the item.
-         */
-        public Builder index(long index) {
-            Utils.checkNotNull(index, "index");
-            this.index = Optional.ofNullable(index);
-            return this;
-        }
-
-        /**
-         * The index or order of the item.
-         */
-        public Builder index(Optional<Long> index) {
-            Utils.checkNotNull(index, "index");
-            this.index = index;
-            return this;
-        }
-
-        /**
-         * The title of the grandparent entity (typically the show's title).
-         */
-        public Builder grandparentTitle(String grandparentTitle) {
-            Utils.checkNotNull(grandparentTitle, "grandparentTitle");
-            this.grandparentTitle = Optional.ofNullable(grandparentTitle);
-            return this;
-        }
-
-        /**
-         * The title of the grandparent entity (typically the show's title).
-         */
-        public Builder grandparentTitle(Optional<String> grandparentTitle) {
-            Utils.checkNotNull(grandparentTitle, "grandparentTitle");
-            this.grandparentTitle = grandparentTitle;
-            return this;
-        }
-
-        /**
-         * The title of the parent entity (typically the season's title).
-         */
-        public Builder parentTitle(String parentTitle) {
-            Utils.checkNotNull(parentTitle, "parentTitle");
-            this.parentTitle = Optional.ofNullable(parentTitle);
-            return this;
-        }
-
-        /**
-         * The title of the parent entity (typically the season's title).
-         */
-        public Builder parentTitle(Optional<String> parentTitle) {
-            Utils.checkNotNull(parentTitle, "parentTitle");
-            this.parentTitle = parentTitle;
-            return this;
-        }
-
-        /**
-         * The audience rating for the content.
-         */
-        public Builder audienceRating(float audienceRating) {
-            Utils.checkNotNull(audienceRating, "audienceRating");
-            this.audienceRating = Optional.ofNullable(audienceRating);
-            return this;
-        }
-
-        /**
-         * The audience rating for the content.
-         */
-        public Builder audienceRating(Optional<Float> audienceRating) {
-            Utils.checkNotNull(audienceRating, "audienceRating");
-            this.audienceRating = audienceRating;
-            return this;
-        }
-
-        /**
-         * The number of times the item has been viewed.
-         */
-        public Builder viewCount(long viewCount) {
-            Utils.checkNotNull(viewCount, "viewCount");
-            this.viewCount = Optional.ofNullable(viewCount);
-            return this;
-        }
-
-        /**
-         * The number of times the item has been viewed.
-         */
-        public Builder viewCount(Optional<Long> viewCount) {
-            Utils.checkNotNull(viewCount, "viewCount");
-            this.viewCount = viewCount;
-            return this;
-        }
-
-        /**
-         * The number of times the item has been skipped.
-         */
-        public Builder skipCount(long skipCount) {
-            Utils.checkNotNull(skipCount, "skipCount");
-            this.skipCount = Optional.ofNullable(skipCount);
-            return this;
-        }
-
-        /**
-         * The number of times the item has been skipped.
-         */
-        public Builder skipCount(Optional<Long> skipCount) {
-            Utils.checkNotNull(skipCount, "skipCount");
-            this.skipCount = skipCount;
-            return this;
-        }
-
-        /**
-         * Unix timestamp of when the item was last viewed.
-         */
-        public Builder lastViewedAt(long lastViewedAt) {
-            Utils.checkNotNull(lastViewedAt, "lastViewedAt");
-            this.lastViewedAt = Optional.ofNullable(lastViewedAt);
-            return this;
-        }
-
-        /**
-         * Unix timestamp of when the item was last viewed.
-         */
-        public Builder lastViewedAt(Optional<Long> lastViewedAt) {
-            Utils.checkNotNull(lastViewedAt, "lastViewedAt");
-            this.lastViewedAt = lastViewedAt;
-            return this;
-        }
-
-        /**
-         * The release year.
-         */
-        public Builder year(int year) {
-            Utils.checkNotNull(year, "year");
-            this.year = year;
-            return this;
-        }
-
-        /**
-         * The general rating
+         * The critic rating for the media item.
          */
         public Builder rating(float rating) {
-            Utils.checkNotNull(rating, "rating");
-            this.rating = Optional.ofNullable(rating);
-            return this;
-        }
-
-        /**
-         * The general rating
-         */
-        public Builder rating(Optional<Float> rating) {
             Utils.checkNotNull(rating, "rating");
             this.rating = rating;
             return this;
         }
 
         /**
-         * The URL or identifier for the rating image (e.g., Rotten Tomatoes rating image).
+         * The audience rating for the media item.
          */
-        public Builder ratingImage(String ratingImage) {
-            Utils.checkNotNull(ratingImage, "ratingImage");
-            this.ratingImage = Optional.ofNullable(ratingImage);
+        public Builder audienceRating(double audienceRating) {
+            Utils.checkNotNull(audienceRating, "audienceRating");
+            this.audienceRating = audienceRating;
             return this;
         }
 
         /**
-         * The URL or identifier for the rating image (e.g., Rotten Tomatoes rating image).
+         * The release year of the media item.
          */
-        public Builder ratingImage(Optional<String> ratingImage) {
-            Utils.checkNotNull(ratingImage, "ratingImage");
-            this.ratingImage = ratingImage;
+        public Builder year(int year) {
+            Utils.checkNotNull(year, "year");
+            this.year = Optional.ofNullable(year);
             return this;
         }
 
         /**
-         * The tagline of the content.
+         * The release year of the media item.
+         */
+        public Builder year(Optional<Integer> year) {
+            Utils.checkNotNull(year, "year");
+            this.year = year;
+            return this;
+        }
+
+        /**
+         * A brief tagline for the media item.
          */
         public Builder tagline(String tagline) {
-            Utils.checkNotNull(tagline, "tagline");
-            this.tagline = Optional.ofNullable(tagline);
-            return this;
-        }
-
-        /**
-         * The tagline of the content.
-         */
-        public Builder tagline(Optional<String> tagline) {
             Utils.checkNotNull(tagline, "tagline");
             this.tagline = tagline;
             return this;
         }
 
-        public Builder chapterSource(String chapterSource) {
-            Utils.checkNotNull(chapterSource, "chapterSource");
-            this.chapterSource = Optional.ofNullable(chapterSource);
-            return this;
-        }
-
-        public Builder chapterSource(Optional<String> chapterSource) {
-            Utils.checkNotNull(chapterSource, "chapterSource");
-            this.chapterSource = chapterSource;
-            return this;
-        }
-
-        public Builder primaryExtraKey(String primaryExtraKey) {
-            Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
-            this.primaryExtraKey = Optional.ofNullable(primaryExtraKey);
-            return this;
-        }
-
-        public Builder primaryExtraKey(Optional<String> primaryExtraKey) {
-            Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
-            this.primaryExtraKey = primaryExtraKey;
-            return this;
-        }
-
         /**
-         * URL of the thumbnail image.
+         * The thumbnail image URL for the media item.
          */
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -2861,7 +2821,7 @@ public class GetMediaMetaDataMetadata {
         }
 
         /**
-         * URL of the art image.
+         * The art image URL for the media item.
          */
         public Builder art(String art) {
             Utils.checkNotNull(art, "art");
@@ -2870,25 +2830,79 @@ public class GetMediaMetaDataMetadata {
         }
 
         /**
-         * URL of the theme image.
+         * The theme URL for the media item.
          */
         public Builder theme(String theme) {
-            Utils.checkNotNull(theme, "theme");
-            this.theme = Optional.ofNullable(theme);
-            return this;
-        }
-
-        /**
-         * URL of the theme image.
-         */
-        public Builder theme(Optional<String> theme) {
             Utils.checkNotNull(theme, "theme");
             this.theme = theme;
             return this;
         }
 
         /**
-         * Duration of the content in milliseconds.
+         * The index position of the media item.
+         */
+        public Builder index(int index) {
+            Utils.checkNotNull(index, "index");
+            this.index = index;
+            return this;
+        }
+
+        /**
+         * The number of leaf items (end nodes) under this media item.
+         */
+        public Builder leafCount(int leafCount) {
+            Utils.checkNotNull(leafCount, "leafCount");
+            this.leafCount = Optional.ofNullable(leafCount);
+            return this;
+        }
+
+        /**
+         * The number of leaf items (end nodes) under this media item.
+         */
+        public Builder leafCount(Optional<Integer> leafCount) {
+            Utils.checkNotNull(leafCount, "leafCount");
+            this.leafCount = leafCount;
+            return this;
+        }
+
+        /**
+         * The number of leaf items that have been viewed.
+         */
+        public Builder viewedLeafCount(int viewedLeafCount) {
+            Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
+            this.viewedLeafCount = Optional.ofNullable(viewedLeafCount);
+            return this;
+        }
+
+        /**
+         * The number of leaf items that have been viewed.
+         */
+        public Builder viewedLeafCount(Optional<Integer> viewedLeafCount) {
+            Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
+            this.viewedLeafCount = viewedLeafCount;
+            return this;
+        }
+
+        /**
+         * The number of child items associated with this media item.
+         */
+        public Builder childCount(int childCount) {
+            Utils.checkNotNull(childCount, "childCount");
+            this.childCount = childCount;
+            return this;
+        }
+
+        /**
+         * The total number of seasons (for TV shows).
+         */
+        public Builder seasonCount(int seasonCount) {
+            Utils.checkNotNull(seasonCount, "seasonCount");
+            this.seasonCount = seasonCount;
+            return this;
+        }
+
+        /**
+         * The duration of the media item in milliseconds.
          */
         public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
@@ -2897,74 +2911,11 @@ public class GetMediaMetaDataMetadata {
         }
 
         /**
-         * The original release date.
+         * The original release date of the media item.
          */
         public Builder originallyAvailableAt(LocalDate originallyAvailableAt) {
             Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
-            this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
-            return this;
-        }
-
-        /**
-         * The original release date.
-         */
-        public Builder originallyAvailableAt(Optional<LocalDate> originallyAvailableAt) {
-            Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
             this.originallyAvailableAt = originallyAvailableAt;
-            return this;
-        }
-
-        /**
-         * The total number of episodes (or leaves).
-         */
-        public Builder leafCount(long leafCount) {
-            Utils.checkNotNull(leafCount, "leafCount");
-            this.leafCount = Optional.ofNullable(leafCount);
-            return this;
-        }
-
-        /**
-         * The total number of episodes (or leaves).
-         */
-        public Builder leafCount(Optional<Long> leafCount) {
-            Utils.checkNotNull(leafCount, "leafCount");
-            this.leafCount = leafCount;
-            return this;
-        }
-
-        /**
-         * The number of episodes that have been viewed.
-         */
-        public Builder viewedLeafCount(long viewedLeafCount) {
-            Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
-            this.viewedLeafCount = Optional.ofNullable(viewedLeafCount);
-            return this;
-        }
-
-        /**
-         * The number of episodes that have been viewed.
-         */
-        public Builder viewedLeafCount(Optional<Long> viewedLeafCount) {
-            Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
-            this.viewedLeafCount = viewedLeafCount;
-            return this;
-        }
-
-        /**
-         * The number of child items.
-         */
-        public Builder childCount(int childCount) {
-            Utils.checkNotNull(childCount, "childCount");
-            this.childCount = Optional.ofNullable(childCount);
-            return this;
-        }
-
-        /**
-         * The number of child items.
-         */
-        public Builder childCount(Optional<Integer> childCount) {
-            Utils.checkNotNull(childCount, "childCount");
-            this.childCount = childCount;
             return this;
         }
 
@@ -2974,7 +2925,19 @@ public class GetMediaMetaDataMetadata {
             return this;
         }
 
+        /**
+         * Unix epoch datetime in seconds
+         */
         public Builder updatedAt(long updatedAt) {
+            Utils.checkNotNull(updatedAt, "updatedAt");
+            this.updatedAt = Optional.ofNullable(updatedAt);
+            return this;
+        }
+
+        /**
+         * Unix epoch datetime in seconds
+         */
+        public Builder updatedAt(Optional<Long> updatedAt) {
             Utils.checkNotNull(updatedAt, "updatedAt");
             this.updatedAt = updatedAt;
             return this;
@@ -2999,43 +2962,205 @@ public class GetMediaMetaDataMetadata {
         }
 
         /**
-         * The index number of the parent entity, which could indicate its order or position.
+         * The source from which chapter data is derived.
          */
-        public Builder parentIndex(long parentIndex) {
-            Utils.checkNotNull(parentIndex, "parentIndex");
-            this.parentIndex = Optional.ofNullable(parentIndex);
+        public Builder chapterSource(String chapterSource) {
+            Utils.checkNotNull(chapterSource, "chapterSource");
+            this.chapterSource = Optional.ofNullable(chapterSource);
             return this;
         }
 
         /**
-         * The index number of the parent entity, which could indicate its order or position.
+         * The source from which chapter data is derived.
          */
-        public Builder parentIndex(Optional<Long> parentIndex) {
-            Utils.checkNotNull(parentIndex, "parentIndex");
-            this.parentIndex = parentIndex;
+        public Builder chapterSource(Optional<String> chapterSource) {
+            Utils.checkNotNull(chapterSource, "chapterSource");
+            this.chapterSource = chapterSource;
             return this;
         }
 
         /**
-         * The URL of the parent's thumbnail image.
+         * The primary extra key associated with this media item.
          */
-        public Builder parentThumb(String parentThumb) {
-            Utils.checkNotNull(parentThumb, "parentThumb");
-            this.parentThumb = Optional.ofNullable(parentThumb);
+        public Builder primaryExtraKey(String primaryExtraKey) {
+            Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
+            this.primaryExtraKey = Optional.ofNullable(primaryExtraKey);
             return this;
         }
 
         /**
-         * The URL of the parent's thumbnail image.
+         * The primary extra key associated with this media item.
          */
-        public Builder parentThumb(Optional<String> parentThumb) {
-            Utils.checkNotNull(parentThumb, "parentThumb");
-            this.parentThumb = parentThumb;
+        public Builder primaryExtraKey(Optional<String> primaryExtraKey) {
+            Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
+            this.primaryExtraKey = primaryExtraKey;
             return this;
         }
 
         /**
-         * The URL of the grandparent's thumbnail image.
+         * The original title of the media item (if different).
+         */
+        public Builder originalTitle(String originalTitle) {
+            Utils.checkNotNull(originalTitle, "originalTitle");
+            this.originalTitle = Optional.ofNullable(originalTitle);
+            return this;
+        }
+
+        /**
+         * The original title of the media item (if different).
+         */
+        public Builder originalTitle(Optional<String> originalTitle) {
+            Utils.checkNotNull(originalTitle, "originalTitle");
+            this.originalTitle = originalTitle;
+            return this;
+        }
+
+        /**
+         * The rating key of the parent media item.
+         */
+        public Builder parentRatingKey(String parentRatingKey) {
+            Utils.checkNotNull(parentRatingKey, "parentRatingKey");
+            this.parentRatingKey = Optional.ofNullable(parentRatingKey);
+            return this;
+        }
+
+        /**
+         * The rating key of the parent media item.
+         */
+        public Builder parentRatingKey(Optional<String> parentRatingKey) {
+            Utils.checkNotNull(parentRatingKey, "parentRatingKey");
+            this.parentRatingKey = parentRatingKey;
+            return this;
+        }
+
+        /**
+         * The rating key of the grandparent media item.
+         */
+        public Builder grandparentRatingKey(String grandparentRatingKey) {
+            Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
+            this.grandparentRatingKey = Optional.ofNullable(grandparentRatingKey);
+            return this;
+        }
+
+        /**
+         * The rating key of the grandparent media item.
+         */
+        public Builder grandparentRatingKey(Optional<String> grandparentRatingKey) {
+            Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
+            this.grandparentRatingKey = grandparentRatingKey;
+            return this;
+        }
+
+        /**
+         * The GUID of the parent media item.
+         */
+        public Builder parentGuid(String parentGuid) {
+            Utils.checkNotNull(parentGuid, "parentGuid");
+            this.parentGuid = Optional.ofNullable(parentGuid);
+            return this;
+        }
+
+        /**
+         * The GUID of the parent media item.
+         */
+        public Builder parentGuid(Optional<String> parentGuid) {
+            Utils.checkNotNull(parentGuid, "parentGuid");
+            this.parentGuid = parentGuid;
+            return this;
+        }
+
+        /**
+         * The GUID of the grandparent media item.
+         */
+        public Builder grandparentGuid(String grandparentGuid) {
+            Utils.checkNotNull(grandparentGuid, "grandparentGuid");
+            this.grandparentGuid = Optional.ofNullable(grandparentGuid);
+            return this;
+        }
+
+        /**
+         * The GUID of the grandparent media item.
+         */
+        public Builder grandparentGuid(Optional<String> grandparentGuid) {
+            Utils.checkNotNull(grandparentGuid, "grandparentGuid");
+            this.grandparentGuid = grandparentGuid;
+            return this;
+        }
+
+        /**
+         * The slug for the grandparent media item.
+         */
+        public Builder grandparentSlug(String grandparentSlug) {
+            Utils.checkNotNull(grandparentSlug, "grandparentSlug");
+            this.grandparentSlug = Optional.ofNullable(grandparentSlug);
+            return this;
+        }
+
+        /**
+         * The slug for the grandparent media item.
+         */
+        public Builder grandparentSlug(Optional<String> grandparentSlug) {
+            Utils.checkNotNull(grandparentSlug, "grandparentSlug");
+            this.grandparentSlug = grandparentSlug;
+            return this;
+        }
+
+        /**
+         * The key of the grandparent media item.
+         */
+        public Builder grandparentKey(String grandparentKey) {
+            Utils.checkNotNull(grandparentKey, "grandparentKey");
+            this.grandparentKey = Optional.ofNullable(grandparentKey);
+            return this;
+        }
+
+        /**
+         * The key of the grandparent media item.
+         */
+        public Builder grandparentKey(Optional<String> grandparentKey) {
+            Utils.checkNotNull(grandparentKey, "grandparentKey");
+            this.grandparentKey = grandparentKey;
+            return this;
+        }
+
+        /**
+         * The key of the parent media item.
+         */
+        public Builder parentKey(String parentKey) {
+            Utils.checkNotNull(parentKey, "parentKey");
+            this.parentKey = Optional.ofNullable(parentKey);
+            return this;
+        }
+
+        /**
+         * The key of the parent media item.
+         */
+        public Builder parentKey(Optional<String> parentKey) {
+            Utils.checkNotNull(parentKey, "parentKey");
+            this.parentKey = parentKey;
+            return this;
+        }
+
+        /**
+         * The title of the grandparent media item.
+         */
+        public Builder grandparentTitle(String grandparentTitle) {
+            Utils.checkNotNull(grandparentTitle, "grandparentTitle");
+            this.grandparentTitle = Optional.ofNullable(grandparentTitle);
+            return this;
+        }
+
+        /**
+         * The title of the grandparent media item.
+         */
+        public Builder grandparentTitle(Optional<String> grandparentTitle) {
+            Utils.checkNotNull(grandparentTitle, "grandparentTitle");
+            this.grandparentTitle = grandparentTitle;
+            return this;
+        }
+
+        /**
+         * The thumbnail URL for the grandparent media item.
          */
         public Builder grandparentThumb(String grandparentThumb) {
             Utils.checkNotNull(grandparentThumb, "grandparentThumb");
@@ -3044,7 +3169,7 @@ public class GetMediaMetaDataMetadata {
         }
 
         /**
-         * The URL of the grandparent's thumbnail image.
+         * The thumbnail URL for the grandparent media item.
          */
         public Builder grandparentThumb(Optional<String> grandparentThumb) {
             Utils.checkNotNull(grandparentThumb, "grandparentThumb");
@@ -3053,7 +3178,25 @@ public class GetMediaMetaDataMetadata {
         }
 
         /**
-         * The URL of the grandparent's art image.
+         * The theme URL for the grandparent media item.
+         */
+        public Builder grandparentTheme(String grandparentTheme) {
+            Utils.checkNotNull(grandparentTheme, "grandparentTheme");
+            this.grandparentTheme = Optional.ofNullable(grandparentTheme);
+            return this;
+        }
+
+        /**
+         * The theme URL for the grandparent media item.
+         */
+        public Builder grandparentTheme(Optional<String> grandparentTheme) {
+            Utils.checkNotNull(grandparentTheme, "grandparentTheme");
+            this.grandparentTheme = grandparentTheme;
+            return this;
+        }
+
+        /**
+         * The art URL for the grandparent media item.
          */
         public Builder grandparentArt(String grandparentArt) {
             Utils.checkNotNull(grandparentArt, "grandparentArt");
@@ -3062,11 +3205,296 @@ public class GetMediaMetaDataMetadata {
         }
 
         /**
-         * The URL of the grandparent's art image.
+         * The art URL for the grandparent media item.
          */
         public Builder grandparentArt(Optional<String> grandparentArt) {
             Utils.checkNotNull(grandparentArt, "grandparentArt");
             this.grandparentArt = grandparentArt;
+            return this;
+        }
+
+        /**
+         * The title of the parent media item.
+         */
+        public Builder parentTitle(String parentTitle) {
+            Utils.checkNotNull(parentTitle, "parentTitle");
+            this.parentTitle = Optional.ofNullable(parentTitle);
+            return this;
+        }
+
+        /**
+         * The title of the parent media item.
+         */
+        public Builder parentTitle(Optional<String> parentTitle) {
+            Utils.checkNotNull(parentTitle, "parentTitle");
+            this.parentTitle = parentTitle;
+            return this;
+        }
+
+        /**
+         * The index position of the parent media item.
+         */
+        public Builder parentIndex(int parentIndex) {
+            Utils.checkNotNull(parentIndex, "parentIndex");
+            this.parentIndex = Optional.ofNullable(parentIndex);
+            return this;
+        }
+
+        /**
+         * The index position of the parent media item.
+         */
+        public Builder parentIndex(Optional<Integer> parentIndex) {
+            Utils.checkNotNull(parentIndex, "parentIndex");
+            this.parentIndex = parentIndex;
+            return this;
+        }
+
+        /**
+         * The thumbnail URL for the parent media item.
+         */
+        public Builder parentThumb(String parentThumb) {
+            Utils.checkNotNull(parentThumb, "parentThumb");
+            this.parentThumb = Optional.ofNullable(parentThumb);
+            return this;
+        }
+
+        /**
+         * The thumbnail URL for the parent media item.
+         */
+        public Builder parentThumb(Optional<String> parentThumb) {
+            Utils.checkNotNull(parentThumb, "parentThumb");
+            this.parentThumb = parentThumb;
+            return this;
+        }
+
+        /**
+         * The URL for the rating image.
+         */
+        public Builder ratingImage(String ratingImage) {
+            Utils.checkNotNull(ratingImage, "ratingImage");
+            this.ratingImage = Optional.ofNullable(ratingImage);
+            return this;
+        }
+
+        /**
+         * The URL for the rating image.
+         */
+        public Builder ratingImage(Optional<String> ratingImage) {
+            Utils.checkNotNull(ratingImage, "ratingImage");
+            this.ratingImage = ratingImage;
+            return this;
+        }
+
+        /**
+         * The number of times this media item has been viewed.
+         */
+        public Builder viewCount(int viewCount) {
+            Utils.checkNotNull(viewCount, "viewCount");
+            this.viewCount = Optional.ofNullable(viewCount);
+            return this;
+        }
+
+        /**
+         * The number of times this media item has been viewed.
+         */
+        public Builder viewCount(Optional<Integer> viewCount) {
+            Utils.checkNotNull(viewCount, "viewCount");
+            this.viewCount = viewCount;
+            return this;
+        }
+
+        /**
+         * The current playback offset (in milliseconds).
+         */
+        public Builder viewOffset(int viewOffset) {
+            Utils.checkNotNull(viewOffset, "viewOffset");
+            this.viewOffset = Optional.ofNullable(viewOffset);
+            return this;
+        }
+
+        /**
+         * The current playback offset (in milliseconds).
+         */
+        public Builder viewOffset(Optional<Integer> viewOffset) {
+            Utils.checkNotNull(viewOffset, "viewOffset");
+            this.viewOffset = viewOffset;
+            return this;
+        }
+
+        /**
+         * The number of times this media item has been skipped.
+         */
+        public Builder skipCount(int skipCount) {
+            Utils.checkNotNull(skipCount, "skipCount");
+            this.skipCount = Optional.ofNullable(skipCount);
+            return this;
+        }
+
+        /**
+         * The number of times this media item has been skipped.
+         */
+        public Builder skipCount(Optional<Integer> skipCount) {
+            Utils.checkNotNull(skipCount, "skipCount");
+            this.skipCount = skipCount;
+            return this;
+        }
+
+        /**
+         * A classification that further describes the type of media item. For example, 'clip' indicates that the item is a short video clip.
+         */
+        public Builder subtype(String subtype) {
+            Utils.checkNotNull(subtype, "subtype");
+            this.subtype = Optional.ofNullable(subtype);
+            return this;
+        }
+
+        /**
+         * A classification that further describes the type of media item. For example, 'clip' indicates that the item is a short video clip.
+         */
+        public Builder subtype(Optional<String> subtype) {
+            Utils.checkNotNull(subtype, "subtype");
+            this.subtype = subtype;
+            return this;
+        }
+
+        /**
+         * The Unix timestamp representing the last time the item was rated.
+         */
+        public Builder lastRatedAt(long lastRatedAt) {
+            Utils.checkNotNull(lastRatedAt, "lastRatedAt");
+            this.lastRatedAt = Optional.ofNullable(lastRatedAt);
+            return this;
+        }
+
+        /**
+         * The Unix timestamp representing the last time the item was rated.
+         */
+        public Builder lastRatedAt(Optional<Long> lastRatedAt) {
+            Utils.checkNotNull(lastRatedAt, "lastRatedAt");
+            this.lastRatedAt = lastRatedAt;
+            return this;
+        }
+
+        /**
+         * The accuracy of the creation timestamp. This value indicates the format(s) provided (for example, 'epoch,local' means both epoch and local time formats are available).
+         */
+        public Builder createdAtAccuracy(String createdAtAccuracy) {
+            Utils.checkNotNull(createdAtAccuracy, "createdAtAccuracy");
+            this.createdAtAccuracy = Optional.ofNullable(createdAtAccuracy);
+            return this;
+        }
+
+        /**
+         * The accuracy of the creation timestamp. This value indicates the format(s) provided (for example, 'epoch,local' means both epoch and local time formats are available).
+         */
+        public Builder createdAtAccuracy(Optional<String> createdAtAccuracy) {
+            Utils.checkNotNull(createdAtAccuracy, "createdAtAccuracy");
+            this.createdAtAccuracy = createdAtAccuracy;
+            return this;
+        }
+
+        /**
+         * The time zone offset for the creation timestamp, represented as a string. This offset indicates the difference from UTC.
+         */
+        public Builder createdAtTZOffset(String createdAtTZOffset) {
+            Utils.checkNotNull(createdAtTZOffset, "createdAtTZOffset");
+            this.createdAtTZOffset = Optional.ofNullable(createdAtTZOffset);
+            return this;
+        }
+
+        /**
+         * The time zone offset for the creation timestamp, represented as a string. This offset indicates the difference from UTC.
+         */
+        public Builder createdAtTZOffset(Optional<String> createdAtTZOffset) {
+            Utils.checkNotNull(createdAtTZOffset, "createdAtTZOffset");
+            this.createdAtTZOffset = createdAtTZOffset;
+            return this;
+        }
+
+        /**
+         * Unix timestamp for when the media item was last viewed.
+         */
+        public Builder lastViewedAt(int lastViewedAt) {
+            Utils.checkNotNull(lastViewedAt, "lastViewedAt");
+            this.lastViewedAt = Optional.ofNullable(lastViewedAt);
+            return this;
+        }
+
+        /**
+         * Unix timestamp for when the media item was last viewed.
+         */
+        public Builder lastViewedAt(Optional<Integer> lastViewedAt) {
+            Utils.checkNotNull(lastViewedAt, "lastViewedAt");
+            this.lastViewedAt = lastViewedAt;
+            return this;
+        }
+
+        /**
+         * The rating provided by a user for the item. This value is expressed as a decimal number.
+         */
+        public Builder userRating(float userRating) {
+            Utils.checkNotNull(userRating, "userRating");
+            this.userRating = Optional.ofNullable(userRating);
+            return this;
+        }
+
+        /**
+         * The rating provided by a user for the item. This value is expressed as a decimal number.
+         */
+        public Builder userRating(Optional<Float> userRating) {
+            Utils.checkNotNull(userRating, "userRating");
+            this.userRating = userRating;
+            return this;
+        }
+
+        public Builder image(List<GetMediaMetaDataImage> image) {
+            Utils.checkNotNull(image, "image");
+            this.image = Optional.ofNullable(image);
+            return this;
+        }
+
+        public Builder image(Optional<? extends List<GetMediaMetaDataImage>> image) {
+            Utils.checkNotNull(image, "image");
+            this.image = image;
+            return this;
+        }
+
+        public Builder ultraBlurColors(GetMediaMetaDataUltraBlurColors ultraBlurColors) {
+            Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
+            this.ultraBlurColors = Optional.ofNullable(ultraBlurColors);
+            return this;
+        }
+
+        public Builder ultraBlurColors(Optional<? extends GetMediaMetaDataUltraBlurColors> ultraBlurColors) {
+            Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
+            this.ultraBlurColors = ultraBlurColors;
+            return this;
+        }
+
+        /**
+         * The identifier for the library section.
+         */
+        public Builder librarySectionID(long librarySectionID) {
+            Utils.checkNotNull(librarySectionID, "librarySectionID");
+            this.librarySectionID = librarySectionID;
+            return this;
+        }
+
+        /**
+         * The title of the library section.
+         */
+        public Builder librarySectionTitle(String librarySectionTitle) {
+            Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+            this.librarySectionTitle = librarySectionTitle;
+            return this;
+        }
+
+        /**
+         * The key corresponding to the library section.
+         */
+        public Builder librarySectionKey(String librarySectionKey) {
+            Utils.checkNotNull(librarySectionKey, "librarySectionKey");
+            this.librarySectionKey = librarySectionKey;
             return this;
         }
 
@@ -3082,204 +3510,194 @@ public class GetMediaMetaDataMetadata {
             return this;
         }
 
-        /**
-         * An array of image objects.
-         */
-        public Builder image(List<GetMediaMetaDataImage> image) {
-            Utils.checkNotNull(image, "image");
-            this.image = image;
-            return this;
-        }
-
-        public Builder ultraBlurColors(GetMediaMetaDataUltraBlurColors ultraBlurColors) {
-            Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
-            this.ultraBlurColors = ultraBlurColors;
-            return this;
-        }
-
-        /**
-         * An array of genre tags.
-         */
         public Builder genre(List<GetMediaMetaDataGenre> genre) {
             Utils.checkNotNull(genre, "genre");
             this.genre = Optional.ofNullable(genre);
             return this;
         }
 
-        /**
-         * An array of genre tags.
-         */
         public Builder genre(Optional<? extends List<GetMediaMetaDataGenre>> genre) {
             Utils.checkNotNull(genre, "genre");
             this.genre = genre;
             return this;
         }
 
-        /**
-         * An array of country tags.
-         */
         public Builder country(List<GetMediaMetaDataCountry> country) {
             Utils.checkNotNull(country, "country");
             this.country = Optional.ofNullable(country);
             return this;
         }
 
-        /**
-         * An array of country tags.
-         */
         public Builder country(Optional<? extends List<GetMediaMetaDataCountry>> country) {
             Utils.checkNotNull(country, "country");
             this.country = country;
             return this;
         }
 
-        /**
-         * An array of GUID objects.
-         */
-        public Builder guids(List<GetMediaMetaDataGuids> guids) {
-            Utils.checkNotNull(guids, "guids");
-            this.guids = Optional.ofNullable(guids);
-            return this;
-        }
-
-        /**
-         * An array of GUID objects.
-         */
-        public Builder guids(Optional<? extends List<GetMediaMetaDataGuids>> guids) {
-            Utils.checkNotNull(guids, "guids");
-            this.guids = guids;
-            return this;
-        }
-
-        /**
-         * An array of rating objects.
-         */
-        public Builder ratings(List<Ratings> ratings) {
-            Utils.checkNotNull(ratings, "ratings");
-            this.ratings = Optional.ofNullable(ratings);
-            return this;
-        }
-
-        /**
-         * An array of rating objects.
-         */
-        public Builder ratings(Optional<? extends List<Ratings>> ratings) {
-            Utils.checkNotNull(ratings, "ratings");
-            this.ratings = ratings;
-            return this;
-        }
-
-        /**
-         * An array of Actor roles.
-         */
-        public Builder role(List<GetMediaMetaDataRole> role) {
-            Utils.checkNotNull(role, "role");
-            this.role = Optional.ofNullable(role);
-            return this;
-        }
-
-        /**
-         * An array of Actor roles.
-         */
-        public Builder role(Optional<? extends List<GetMediaMetaDataRole>> role) {
-            Utils.checkNotNull(role, "role");
-            this.role = role;
-            return this;
-        }
-
-        /**
-         * An array of Director roles.
-         */
         public Builder director(List<GetMediaMetaDataDirector> director) {
             Utils.checkNotNull(director, "director");
             this.director = Optional.ofNullable(director);
             return this;
         }
 
-        /**
-         * An array of Director roles.
-         */
         public Builder director(Optional<? extends List<GetMediaMetaDataDirector>> director) {
             Utils.checkNotNull(director, "director");
             this.director = director;
             return this;
         }
 
-        /**
-         * An array of Writer roles.
-         */
         public Builder writer(List<GetMediaMetaDataWriter> writer) {
             Utils.checkNotNull(writer, "writer");
             this.writer = Optional.ofNullable(writer);
             return this;
         }
 
-        /**
-         * An array of Writer roles.
-         */
         public Builder writer(Optional<? extends List<GetMediaMetaDataWriter>> writer) {
             Utils.checkNotNull(writer, "writer");
             this.writer = writer;
             return this;
         }
 
-        /**
-         * An array of Writer roles.
-         */
         public Builder producer(List<GetMediaMetaDataProducer> producer) {
             Utils.checkNotNull(producer, "producer");
             this.producer = Optional.ofNullable(producer);
             return this;
         }
 
-        /**
-         * An array of Writer roles.
-         */
         public Builder producer(Optional<? extends List<GetMediaMetaDataProducer>> producer) {
             Utils.checkNotNull(producer, "producer");
             this.producer = producer;
             return this;
         }
 
-        /**
-         * An array of similar content objects.
-         */
+        public Builder role(List<GetMediaMetaDataRole> role) {
+            Utils.checkNotNull(role, "role");
+            this.role = Optional.ofNullable(role);
+            return this;
+        }
+
+        public Builder role(Optional<? extends List<GetMediaMetaDataRole>> role) {
+            Utils.checkNotNull(role, "role");
+            this.role = role;
+            return this;
+        }
+
+        public Builder guids(List<GetMediaMetaDataGuids> guids) {
+            Utils.checkNotNull(guids, "guids");
+            this.guids = Optional.ofNullable(guids);
+            return this;
+        }
+
+        public Builder guids(Optional<? extends List<GetMediaMetaDataGuids>> guids) {
+            Utils.checkNotNull(guids, "guids");
+            this.guids = guids;
+            return this;
+        }
+
+        public Builder ratings(List<Ratings> ratings) {
+            Utils.checkNotNull(ratings, "ratings");
+            this.ratings = Optional.ofNullable(ratings);
+            return this;
+        }
+
+        public Builder ratings(Optional<? extends List<Ratings>> ratings) {
+            Utils.checkNotNull(ratings, "ratings");
+            this.ratings = ratings;
+            return this;
+        }
+
         public Builder similar(List<GetMediaMetaDataSimilar> similar) {
             Utils.checkNotNull(similar, "similar");
             this.similar = Optional.ofNullable(similar);
             return this;
         }
 
-        /**
-         * An array of similar content objects.
-         */
         public Builder similar(Optional<? extends List<GetMediaMetaDataSimilar>> similar) {
             Utils.checkNotNull(similar, "similar");
             this.similar = similar;
             return this;
         }
 
-        /**
-         * An array of location objects.
-         */
         public Builder location(List<GetMediaMetaDataLocation> location) {
             Utils.checkNotNull(location, "location");
             this.location = Optional.ofNullable(location);
             return this;
         }
 
-        /**
-         * An array of location objects.
-         */
         public Builder location(Optional<? extends List<GetMediaMetaDataLocation>> location) {
             Utils.checkNotNull(location, "location");
             this.location = location;
+            return this;
+        }
+
+        public Builder chapter(List<Chapter> chapter) {
+            Utils.checkNotNull(chapter, "chapter");
+            this.chapter = Optional.ofNullable(chapter);
+            return this;
+        }
+
+        public Builder chapter(Optional<? extends List<Chapter>> chapter) {
+            Utils.checkNotNull(chapter, "chapter");
+            this.chapter = chapter;
+            return this;
+        }
+
+        public Builder marker(List<Marker> marker) {
+            Utils.checkNotNull(marker, "marker");
+            this.marker = Optional.ofNullable(marker);
+            return this;
+        }
+
+        public Builder marker(Optional<? extends List<Marker>> marker) {
+            Utils.checkNotNull(marker, "marker");
+            this.marker = marker;
+            return this;
+        }
+
+        public Builder extras(Extras extras) {
+            Utils.checkNotNull(extras, "extras");
+            this.extras = Optional.ofNullable(extras);
+            return this;
+        }
+
+        public Builder extras(Optional<? extends Extras> extras) {
+            Utils.checkNotNull(extras, "extras");
+            this.extras = extras;
             return this;
         }
         
         public GetMediaMetaDataMetadata build() {
             return new GetMediaMetaDataMetadata(
                 ratingKey,
+                key,
+                guid,
+                slug,
+                studio,
+                type,
+                title,
+                titleSort,
+                contentRating,
+                summary,
+                rating,
+                audienceRating,
+                year,
+                tagline,
+                thumb,
+                art,
+                theme,
+                index,
+                leafCount,
+                viewedLeafCount,
+                childCount,
+                seasonCount,
+                duration,
+                originallyAvailableAt,
+                addedAt,
+                updatedAt,
+                audienceRatingImage,
+                chapterSource,
+                primaryExtraKey,
+                originalTitle,
                 parentRatingKey,
                 grandparentRatingKey,
                 parentGuid,
@@ -3287,59 +3705,42 @@ public class GetMediaMetaDataMetadata {
                 grandparentSlug,
                 grandparentKey,
                 parentKey,
-                key,
-                guid,
-                slug,
-                studio,
-                type,
-                title,
-                originalTitle,
-                librarySectionTitle,
-                librarySectionID,
-                librarySectionKey,
-                contentRating,
-                summary,
-                index,
                 grandparentTitle,
+                grandparentThumb,
+                grandparentTheme,
+                grandparentArt,
                 parentTitle,
-                audienceRating,
-                viewCount,
-                skipCount,
-                lastViewedAt,
-                year,
-                rating,
-                ratingImage,
-                tagline,
-                chapterSource,
-                primaryExtraKey,
-                thumb,
-                art,
-                theme,
-                duration,
-                originallyAvailableAt,
-                leafCount,
-                viewedLeafCount,
-                childCount,
-                addedAt,
-                updatedAt,
-                audienceRatingImage,
                 parentIndex,
                 parentThumb,
-                grandparentThumb,
-                grandparentArt,
-                media,
+                ratingImage,
+                viewCount,
+                viewOffset,
+                skipCount,
+                subtype,
+                lastRatedAt,
+                createdAtAccuracy,
+                createdAtTZOffset,
+                lastViewedAt,
+                userRating,
                 image,
                 ultraBlurColors,
+                librarySectionID,
+                librarySectionTitle,
+                librarySectionKey,
+                media,
                 genre,
                 country,
-                guids,
-                ratings,
-                role,
                 director,
                 writer,
                 producer,
+                role,
+                guids,
+                ratings,
                 similar,
-                location);
+                location,
+                chapter,
+                marker,
+                extras);
         }
     }
 }

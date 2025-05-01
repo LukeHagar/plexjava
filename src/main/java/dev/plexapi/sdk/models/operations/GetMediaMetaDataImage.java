@@ -13,28 +13,19 @@ import java.util.Objects;
 
 public class GetMediaMetaDataImage {
 
-    /**
-     * Alternate text for the image.
-     */
     @JsonProperty("alt")
     private String alt;
 
-    /**
-     * The type of image (e.g., coverPoster, background, clearLogo).
-     */
     @JsonProperty("type")
-    private String type;
+    private GetMediaMetaDataLibraryType type;
 
-    /**
-     * The URL of the image.
-     */
     @JsonProperty("url")
     private String url;
 
     @JsonCreator
     public GetMediaMetaDataImage(
             @JsonProperty("alt") String alt,
-            @JsonProperty("type") String type,
+            @JsonProperty("type") GetMediaMetaDataLibraryType type,
             @JsonProperty("url") String url) {
         Utils.checkNotNull(alt, "alt");
         Utils.checkNotNull(type, "type");
@@ -44,25 +35,16 @@ public class GetMediaMetaDataImage {
         this.url = url;
     }
 
-    /**
-     * Alternate text for the image.
-     */
     @JsonIgnore
     public String alt() {
         return alt;
     }
 
-    /**
-     * The type of image (e.g., coverPoster, background, clearLogo).
-     */
     @JsonIgnore
-    public String type() {
+    public GetMediaMetaDataLibraryType type() {
         return type;
     }
 
-    /**
-     * The URL of the image.
-     */
     @JsonIgnore
     public String url() {
         return url;
@@ -72,27 +54,18 @@ public class GetMediaMetaDataImage {
         return new Builder();
     }    
 
-    /**
-     * Alternate text for the image.
-     */
     public GetMediaMetaDataImage withAlt(String alt) {
         Utils.checkNotNull(alt, "alt");
         this.alt = alt;
         return this;
     }
 
-    /**
-     * The type of image (e.g., coverPoster, background, clearLogo).
-     */
-    public GetMediaMetaDataImage withType(String type) {
+    public GetMediaMetaDataImage withType(GetMediaMetaDataLibraryType type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
     }
 
-    /**
-     * The URL of the image.
-     */
     public GetMediaMetaDataImage withUrl(String url) {
         Utils.checkNotNull(url, "url");
         this.url = url;
@@ -135,7 +108,7 @@ public class GetMediaMetaDataImage {
  
         private String alt;
  
-        private String type;
+        private GetMediaMetaDataLibraryType type;
  
         private String url;
         
@@ -143,27 +116,18 @@ public class GetMediaMetaDataImage {
           // force use of static builder() method
         }
 
-        /**
-         * Alternate text for the image.
-         */
         public Builder alt(String alt) {
             Utils.checkNotNull(alt, "alt");
             this.alt = alt;
             return this;
         }
 
-        /**
-         * The type of image (e.g., coverPoster, background, clearLogo).
-         */
-        public Builder type(String type) {
+        public Builder type(GetMediaMetaDataLibraryType type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
         }
 
-        /**
-         * The URL of the image.
-         */
         public Builder url(String url) {
             Utils.checkNotNull(url, "url");
             this.url = url;

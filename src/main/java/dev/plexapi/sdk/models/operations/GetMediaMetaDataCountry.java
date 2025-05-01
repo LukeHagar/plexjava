@@ -5,77 +5,77 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
+import java.util.Optional;
 
+/**
+ * GetMediaMetaDataCountry
+ * 
+ * <p>The filter query string for country media items.
+ */
 public class GetMediaMetaDataCountry {
 
-    /**
-     * The unique country identifier.
-     */
     @JsonProperty("id")
     private int id;
 
     /**
-     * The filter string for the country.
-     */
-    @JsonProperty("filter")
-    private String filter;
-
-    /**
-     * The country name.
+     * The country of origin of this media item
      */
     @JsonProperty("tag")
     private String tag;
 
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("filter")
+    private Optional<String> filter;
+
     @JsonCreator
     public GetMediaMetaDataCountry(
             @JsonProperty("id") int id,
-            @JsonProperty("filter") String filter,
-            @JsonProperty("tag") String tag) {
+            @JsonProperty("tag") String tag,
+            @JsonProperty("filter") Optional<String> filter) {
         Utils.checkNotNull(id, "id");
-        Utils.checkNotNull(filter, "filter");
         Utils.checkNotNull(tag, "tag");
+        Utils.checkNotNull(filter, "filter");
         this.id = id;
-        this.filter = filter;
         this.tag = tag;
+        this.filter = filter;
+    }
+    
+    public GetMediaMetaDataCountry(
+            int id,
+            String tag) {
+        this(id, tag, Optional.empty());
     }
 
-    /**
-     * The unique country identifier.
-     */
     @JsonIgnore
     public int id() {
         return id;
     }
 
     /**
-     * The filter string for the country.
-     */
-    @JsonIgnore
-    public String filter() {
-        return filter;
-    }
-
-    /**
-     * The country name.
+     * The country of origin of this media item
      */
     @JsonIgnore
     public String tag() {
         return tag;
     }
 
+    @JsonIgnore
+    public Optional<String> filter() {
+        return filter;
+    }
+
     public final static Builder builder() {
         return new Builder();
     }    
 
-    /**
-     * The unique country identifier.
-     */
     public GetMediaMetaDataCountry withId(int id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
@@ -83,20 +83,23 @@ public class GetMediaMetaDataCountry {
     }
 
     /**
-     * The filter string for the country.
-     */
-    public GetMediaMetaDataCountry withFilter(String filter) {
-        Utils.checkNotNull(filter, "filter");
-        this.filter = filter;
-        return this;
-    }
-
-    /**
-     * The country name.
+     * The country of origin of this media item
      */
     public GetMediaMetaDataCountry withTag(String tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = tag;
+        return this;
+    }
+
+    public GetMediaMetaDataCountry withFilter(String filter) {
+        Utils.checkNotNull(filter, "filter");
+        this.filter = Optional.ofNullable(filter);
+        return this;
+    }
+
+    public GetMediaMetaDataCountry withFilter(Optional<String> filter) {
+        Utils.checkNotNull(filter, "filter");
+        this.filter = filter;
         return this;
     }
 
@@ -112,41 +115,38 @@ public class GetMediaMetaDataCountry {
         GetMediaMetaDataCountry other = (GetMediaMetaDataCountry) o;
         return 
             Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.tag, other.tag);
+            Objects.deepEquals(this.tag, other.tag) &&
+            Objects.deepEquals(this.filter, other.filter);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
             id,
-            filter,
-            tag);
+            tag,
+            filter);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetMediaMetaDataCountry.class,
                 "id", id,
-                "filter", filter,
-                "tag", tag);
+                "tag", tag,
+                "filter", filter);
     }
     
     public final static class Builder {
  
         private Integer id;
  
-        private String filter;
- 
         private String tag;
+ 
+        private Optional<String> filter = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
         }
 
-        /**
-         * The unique country identifier.
-         */
         public Builder id(int id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
@@ -154,28 +154,31 @@ public class GetMediaMetaDataCountry {
         }
 
         /**
-         * The filter string for the country.
-         */
-        public Builder filter(String filter) {
-            Utils.checkNotNull(filter, "filter");
-            this.filter = filter;
-            return this;
-        }
-
-        /**
-         * The country name.
+         * The country of origin of this media item
          */
         public Builder tag(String tag) {
             Utils.checkNotNull(tag, "tag");
             this.tag = tag;
             return this;
         }
+
+        public Builder filter(String filter) {
+            Utils.checkNotNull(filter, "filter");
+            this.filter = Optional.ofNullable(filter);
+            return this;
+        }
+
+        public Builder filter(Optional<String> filter) {
+            Utils.checkNotNull(filter, "filter");
+            this.filter = filter;
+            return this;
+        }
         
         public GetMediaMetaDataCountry build() {
             return new GetMediaMetaDataCountry(
                 id,
-                filter,
-                tag);
+                tag,
+                filter);
         }
     }
 }
