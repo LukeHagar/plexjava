@@ -132,6 +132,9 @@ public class GetAllLibrariesDirectory {
     @JsonProperty("contentChangedAt")
     private long contentChangedAt;
 
+    /**
+     * The Plex library visibility setting
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hidden")
     private Optional<? extends Hidden> hidden;
@@ -376,6 +379,9 @@ public class GetAllLibrariesDirectory {
         return contentChangedAt;
     }
 
+    /**
+     * The Plex library visibility setting
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<Hidden> hidden() {
@@ -563,12 +569,18 @@ public class GetAllLibrariesDirectory {
         return this;
     }
 
+    /**
+     * The Plex library visibility setting
+     */
     public GetAllLibrariesDirectory withHidden(Hidden hidden) {
         Utils.checkNotNull(hidden, "hidden");
         this.hidden = Optional.ofNullable(hidden);
         return this;
     }
 
+    /**
+     * The Plex library visibility setting
+     */
     public GetAllLibrariesDirectory withHidden(Optional<? extends Hidden> hidden) {
         Utils.checkNotNull(hidden, "hidden");
         this.hidden = hidden;
@@ -887,12 +899,18 @@ public class GetAllLibrariesDirectory {
             return this;
         }
 
+        /**
+         * The Plex library visibility setting
+         */
         public Builder hidden(Hidden hidden) {
             Utils.checkNotNull(hidden, "hidden");
             this.hidden = Optional.ofNullable(hidden);
             return this;
         }
 
+        /**
+         * The Plex library visibility setting
+         */
         public Builder hidden(Optional<? extends Hidden> hidden) {
             Utils.checkNotNull(hidden, "hidden");
             this.hidden = hidden;

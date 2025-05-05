@@ -10,11 +10,12 @@ import java.util.Optional;
 /**
  * Hidden
  * 
- * <p>UNKNOWN
+ * <p>The Plex library visibility setting
  */
 public enum Hidden {
-    Disable(0),
-    Enable(1);
+    Visible(0),
+    ExcludeHomeScreen(1),
+    ExcludeHomeScreenAndGlobalSearch(2);
 
     @JsonValue
     private final int value;
