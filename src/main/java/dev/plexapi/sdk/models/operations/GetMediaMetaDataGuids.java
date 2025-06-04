@@ -14,7 +14,7 @@ import java.util.Objects;
 public class GetMediaMetaDataGuids {
 
     /**
-     * The GUID value.
+     * The unique identifier for the Guid. Can be prefixed with imdb://, tmdb://, tvdb://
      */
     @JsonProperty("id")
     private String id;
@@ -27,7 +27,7 @@ public class GetMediaMetaDataGuids {
     }
 
     /**
-     * The GUID value.
+     * The unique identifier for the Guid. Can be prefixed with imdb://, tmdb://, tvdb://
      */
     @JsonIgnore
     public String id() {
@@ -39,7 +39,7 @@ public class GetMediaMetaDataGuids {
     }    
 
     /**
-     * The GUID value.
+     * The unique identifier for the Guid. Can be prefixed with imdb://, tmdb://, tvdb://
      */
     public GetMediaMetaDataGuids withId(String id) {
         Utils.checkNotNull(id, "id");
@@ -82,7 +82,7 @@ public class GetMediaMetaDataGuids {
         }
 
         /**
-         * The GUID value.
+         * The unique identifier for the Guid. Can be prefixed with imdb://, tmdb://, tvdb://
          */
         public Builder id(String id) {
             Utils.checkNotNull(id, "id");

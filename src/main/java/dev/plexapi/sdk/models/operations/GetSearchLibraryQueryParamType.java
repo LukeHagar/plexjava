@@ -60,9 +60,11 @@ public class GetSearchLibraryQueryParamType {
     public static final GetSearchLibraryQueryParamType TvShow = new GetSearchLibraryQueryParamType(2L);
     public static final GetSearchLibraryQueryParamType Season = new GetSearchLibraryQueryParamType(3L);
     public static final GetSearchLibraryQueryParamType Episode = new GetSearchLibraryQueryParamType(4L);
-    public static final GetSearchLibraryQueryParamType Audio = new GetSearchLibraryQueryParamType(8L);
-    public static final GetSearchLibraryQueryParamType Album = new GetSearchLibraryQueryParamType(9L);
-    public static final GetSearchLibraryQueryParamType Track = new GetSearchLibraryQueryParamType(10L);
+    public static final GetSearchLibraryQueryParamType Artist = new GetSearchLibraryQueryParamType(5L);
+    public static final GetSearchLibraryQueryParamType Album = new GetSearchLibraryQueryParamType(6L);
+    public static final GetSearchLibraryQueryParamType Track = new GetSearchLibraryQueryParamType(7L);
+    public static final GetSearchLibraryQueryParamType PhotoAlbum = new GetSearchLibraryQueryParamType(8L);
+    public static final GetSearchLibraryQueryParamType Photo = new GetSearchLibraryQueryParamType(9L);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -138,9 +140,11 @@ public class GetSearchLibraryQueryParamType {
         map.put(2L, TvShow);
         map.put(3L, Season);
         map.put(4L, Episode);
-        map.put(8L, Audio);
-        map.put(9L, Album);
-        map.put(10L, Track);
+        map.put(5L, Artist);
+        map.put(6L, Album);
+        map.put(7L, Track);
+        map.put(8L, PhotoAlbum);
+        map.put(9L, Photo);
         return map;
     }
 
@@ -150,9 +154,11 @@ public class GetSearchLibraryQueryParamType {
         map.put(2L, GetSearchLibraryQueryParamTypeEnum.TvShow);
         map.put(3L, GetSearchLibraryQueryParamTypeEnum.Season);
         map.put(4L, GetSearchLibraryQueryParamTypeEnum.Episode);
-        map.put(8L, GetSearchLibraryQueryParamTypeEnum.Audio);
-        map.put(9L, GetSearchLibraryQueryParamTypeEnum.Album);
-        map.put(10L, GetSearchLibraryQueryParamTypeEnum.Track);
+        map.put(5L, GetSearchLibraryQueryParamTypeEnum.Artist);
+        map.put(6L, GetSearchLibraryQueryParamTypeEnum.Album);
+        map.put(7L, GetSearchLibraryQueryParamTypeEnum.Track);
+        map.put(8L, GetSearchLibraryQueryParamTypeEnum.PhotoAlbum);
+        map.put(9L, GetSearchLibraryQueryParamTypeEnum.Photo);
         return map;
     }
     
@@ -192,9 +198,11 @@ public class GetSearchLibraryQueryParamType {
         TvShow(2L),
         Season(3L),
         Episode(4L),
-        Audio(8L),
-        Album(9L),
-        Track(10L),;
+        Artist(5L),
+        Album(6L),
+        Track(7L),
+        PhotoAlbum(8L),
+        Photo(9L),;
 
         private final long value;
 

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Double;
+import java.lang.Float;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -19,11 +19,14 @@ import java.util.Objects;
  */
 public class Rating {
 
+    /**
+     * The URL for the rating image, for example from IMDb.
+     */
     @JsonProperty("image")
     private String image;
 
     @JsonProperty("value")
-    private double value;
+    private float value;
 
     @JsonProperty("type")
     private String type;
@@ -31,7 +34,7 @@ public class Rating {
     @JsonCreator
     public Rating(
             @JsonProperty("image") String image,
-            @JsonProperty("value") double value,
+            @JsonProperty("value") float value,
             @JsonProperty("type") String type) {
         Utils.checkNotNull(image, "image");
         Utils.checkNotNull(value, "value");
@@ -41,13 +44,16 @@ public class Rating {
         this.type = type;
     }
 
+    /**
+     * The URL for the rating image, for example from IMDb.
+     */
     @JsonIgnore
     public String image() {
         return image;
     }
 
     @JsonIgnore
-    public double value() {
+    public float value() {
         return value;
     }
 
@@ -60,13 +66,16 @@ public class Rating {
         return new Builder();
     }    
 
+    /**
+     * The URL for the rating image, for example from IMDb.
+     */
     public Rating withImage(String image) {
         Utils.checkNotNull(image, "image");
         this.image = image;
         return this;
     }
 
-    public Rating withValue(double value) {
+    public Rating withValue(float value) {
         Utils.checkNotNull(value, "value");
         this.value = value;
         return this;
@@ -114,7 +123,7 @@ public class Rating {
  
         private String image;
  
-        private Double value;
+        private Float value;
  
         private String type;
         
@@ -122,13 +131,16 @@ public class Rating {
           // force use of static builder() method
         }
 
+        /**
+         * The URL for the rating image, for example from IMDb.
+         */
         public Builder image(String image) {
             Utils.checkNotNull(image, "image");
             this.image = image;
             return this;
         }
 
-        public Builder value(double value) {
+        public Builder value(float value) {
             Utils.checkNotNull(value, "value");
             this.value = value;
             return this;

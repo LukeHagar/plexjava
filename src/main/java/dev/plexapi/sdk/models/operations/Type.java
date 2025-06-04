@@ -60,9 +60,11 @@ public class Type {
     public static final Type TvShow = new Type(2L);
     public static final Type Season = new Type(3L);
     public static final Type Episode = new Type(4L);
-    public static final Type Audio = new Type(8L);
-    public static final Type Album = new Type(9L);
-    public static final Type Track = new Type(10L);
+    public static final Type Artist = new Type(5L);
+    public static final Type Album = new Type(6L);
+    public static final Type Track = new Type(7L);
+    public static final Type PhotoAlbum = new Type(8L);
+    public static final Type Photo = new Type(9L);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -138,9 +140,11 @@ public class Type {
         map.put(2L, TvShow);
         map.put(3L, Season);
         map.put(4L, Episode);
-        map.put(8L, Audio);
-        map.put(9L, Album);
-        map.put(10L, Track);
+        map.put(5L, Artist);
+        map.put(6L, Album);
+        map.put(7L, Track);
+        map.put(8L, PhotoAlbum);
+        map.put(9L, Photo);
         return map;
     }
 
@@ -150,9 +154,11 @@ public class Type {
         map.put(2L, TypeEnum.TvShow);
         map.put(3L, TypeEnum.Season);
         map.put(4L, TypeEnum.Episode);
-        map.put(8L, TypeEnum.Audio);
-        map.put(9L, TypeEnum.Album);
-        map.put(10L, TypeEnum.Track);
+        map.put(5L, TypeEnum.Artist);
+        map.put(6L, TypeEnum.Album);
+        map.put(7L, TypeEnum.Track);
+        map.put(8L, TypeEnum.PhotoAlbum);
+        map.put(9L, TypeEnum.Photo);
         return map;
     }
     
@@ -192,9 +198,11 @@ public class Type {
         TvShow(2L),
         Season(3L),
         Episode(4L),
-        Audio(8L),
-        Album(9L),
-        Track(10L),;
+        Artist(5L),
+        Album(6L),
+        Track(7L),
+        PhotoAlbum(8L),
+        Photo(9L),;
 
         private final long value;
 

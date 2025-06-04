@@ -5,21 +5,17 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.SpeakeasyMetadata;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Objects;
 import java.util.Optional;
 
 public class GetTopWatchedContentRequest {
-
-    /**
-     * Adds the Guids object to the response
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeGuids")
-    private Optional<Long> includeGuids;
 
     /**
      * The type of media to retrieve or filter by.
@@ -32,27 +28,25 @@ public class GetTopWatchedContentRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")
     private GetTopWatchedContentQueryParamType type;
 
+    /**
+     * Adds the Guid object to the response
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeGuids")
+    private Optional<? extends GetTopWatchedContentQueryParamIncludeGuids> includeGuids;
+
     @JsonCreator
     public GetTopWatchedContentRequest(
-            Optional<Long> includeGuids,
-            GetTopWatchedContentQueryParamType type) {
-        Utils.checkNotNull(includeGuids, "includeGuids");
+            GetTopWatchedContentQueryParamType type,
+            Optional<? extends GetTopWatchedContentQueryParamIncludeGuids> includeGuids) {
         Utils.checkNotNull(type, "type");
-        this.includeGuids = includeGuids;
+        Utils.checkNotNull(includeGuids, "includeGuids");
         this.type = type;
+        this.includeGuids = includeGuids;
     }
     
     public GetTopWatchedContentRequest(
             GetTopWatchedContentQueryParamType type) {
-        this(Optional.empty(), type);
-    }
-
-    /**
-     * Adds the Guids object to the response
-     */
-    @JsonIgnore
-    public Optional<Long> includeGuids() {
-        return includeGuids;
+        this(type, Optional.empty());
     }
 
     /**
@@ -68,27 +62,18 @@ public class GetTopWatchedContentRequest {
         return type;
     }
 
+    /**
+     * Adds the Guid object to the response
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetTopWatchedContentQueryParamIncludeGuids> includeGuids() {
+        return (Optional<GetTopWatchedContentQueryParamIncludeGuids>) includeGuids;
+    }
+
     public final static Builder builder() {
         return new Builder();
     }    
-
-    /**
-     * Adds the Guids object to the response
-     */
-    public GetTopWatchedContentRequest withIncludeGuids(long includeGuids) {
-        Utils.checkNotNull(includeGuids, "includeGuids");
-        this.includeGuids = Optional.ofNullable(includeGuids);
-        return this;
-    }
-
-    /**
-     * Adds the Guids object to the response
-     */
-    public GetTopWatchedContentRequest withIncludeGuids(Optional<Long> includeGuids) {
-        Utils.checkNotNull(includeGuids, "includeGuids");
-        this.includeGuids = includeGuids;
-        return this;
-    }
 
     /**
      * The type of media to retrieve or filter by.
@@ -104,6 +89,24 @@ public class GetTopWatchedContentRequest {
         return this;
     }
 
+    /**
+     * Adds the Guid object to the response
+     */
+    public GetTopWatchedContentRequest withIncludeGuids(GetTopWatchedContentQueryParamIncludeGuids includeGuids) {
+        Utils.checkNotNull(includeGuids, "includeGuids");
+        this.includeGuids = Optional.ofNullable(includeGuids);
+        return this;
+    }
+
+    /**
+     * Adds the Guid object to the response
+     */
+    public GetTopWatchedContentRequest withIncludeGuids(Optional<? extends GetTopWatchedContentQueryParamIncludeGuids> includeGuids) {
+        Utils.checkNotNull(includeGuids, "includeGuids");
+        this.includeGuids = includeGuids;
+        return this;
+    }
+
     
     @Override
     public boolean equals(java.lang.Object o) {
@@ -115,50 +118,32 @@ public class GetTopWatchedContentRequest {
         }
         GetTopWatchedContentRequest other = (GetTopWatchedContentRequest) o;
         return 
-            Objects.deepEquals(this.includeGuids, other.includeGuids) &&
-            Objects.deepEquals(this.type, other.type);
+            Objects.deepEquals(this.type, other.type) &&
+            Objects.deepEquals(this.includeGuids, other.includeGuids);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
-            includeGuids,
-            type);
+            type,
+            includeGuids);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetTopWatchedContentRequest.class,
-                "includeGuids", includeGuids,
-                "type", type);
+                "type", type,
+                "includeGuids", includeGuids);
     }
     
     public final static class Builder {
  
-        private Optional<Long> includeGuids = Optional.empty();
- 
         private GetTopWatchedContentQueryParamType type;
+ 
+        private Optional<? extends GetTopWatchedContentQueryParamIncludeGuids> includeGuids;
         
         private Builder() {
           // force use of static builder() method
-        }
-
-        /**
-         * Adds the Guids object to the response
-         */
-        public Builder includeGuids(long includeGuids) {
-            Utils.checkNotNull(includeGuids, "includeGuids");
-            this.includeGuids = Optional.ofNullable(includeGuids);
-            return this;
-        }
-
-        /**
-         * Adds the Guids object to the response
-         */
-        public Builder includeGuids(Optional<Long> includeGuids) {
-            Utils.checkNotNull(includeGuids, "includeGuids");
-            this.includeGuids = includeGuids;
-            return this;
         }
 
         /**
@@ -174,11 +159,38 @@ public class GetTopWatchedContentRequest {
             this.type = type;
             return this;
         }
+
+        /**
+         * Adds the Guid object to the response
+         */
+        public Builder includeGuids(GetTopWatchedContentQueryParamIncludeGuids includeGuids) {
+            Utils.checkNotNull(includeGuids, "includeGuids");
+            this.includeGuids = Optional.ofNullable(includeGuids);
+            return this;
+        }
+
+        /**
+         * Adds the Guid object to the response
+         */
+        public Builder includeGuids(Optional<? extends GetTopWatchedContentQueryParamIncludeGuids> includeGuids) {
+            Utils.checkNotNull(includeGuids, "includeGuids");
+            this.includeGuids = includeGuids;
+            return this;
+        }
         
         public GetTopWatchedContentRequest build() {
+            if (includeGuids == null) {
+                includeGuids = _SINGLETON_VALUE_IncludeGuids.value();
+            }
             return new GetTopWatchedContentRequest(
-                includeGuids,
-                type);
+                type,
+                includeGuids);
         }
+
+        private static final LazySingletonValue<Optional<? extends GetTopWatchedContentQueryParamIncludeGuids>> _SINGLETON_VALUE_IncludeGuids =
+                new LazySingletonValue<>(
+                        "includeGuids",
+                        "0",
+                        new TypeReference<Optional<? extends GetTopWatchedContentQueryParamIncludeGuids>>() {});
     }
 }

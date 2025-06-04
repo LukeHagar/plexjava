@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Integer;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -20,25 +21,35 @@ import java.util.Optional;
 
 public class GetTopWatchedContentMediaContainer {
 
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * Number of media items returned in this response.
+     */
     @JsonProperty("size")
-    private Optional<Integer> size;
+    private int size;
 
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * Indicates whether syncing is allowed.
+     */
     @JsonProperty("allowSync")
-    private Optional<Boolean> allowSync;
+    private boolean allowSync;
 
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * An plugin identifier for the media container.
+     */
     @JsonProperty("identifier")
-    private Optional<String> identifier;
+    private String identifier;
 
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * The prefix used for media tag resource paths.
+     */
     @JsonProperty("mediaTagPrefix")
-    private Optional<String> mediaTagPrefix;
+    private String mediaTagPrefix;
 
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * The version number for media tags.
+     */
     @JsonProperty("mediaTagVersion")
-    private Optional<Integer> mediaTagVersion;
+    private long mediaTagVersion;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Metadata")
@@ -46,11 +57,11 @@ public class GetTopWatchedContentMediaContainer {
 
     @JsonCreator
     public GetTopWatchedContentMediaContainer(
-            @JsonProperty("size") Optional<Integer> size,
-            @JsonProperty("allowSync") Optional<Boolean> allowSync,
-            @JsonProperty("identifier") Optional<String> identifier,
-            @JsonProperty("mediaTagPrefix") Optional<String> mediaTagPrefix,
-            @JsonProperty("mediaTagVersion") Optional<Integer> mediaTagVersion,
+            @JsonProperty("size") int size,
+            @JsonProperty("allowSync") boolean allowSync,
+            @JsonProperty("identifier") String identifier,
+            @JsonProperty("mediaTagPrefix") String mediaTagPrefix,
+            @JsonProperty("mediaTagVersion") long mediaTagVersion,
             @JsonProperty("Metadata") Optional<? extends List<GetTopWatchedContentMetadata>> metadata) {
         Utils.checkNotNull(size, "size");
         Utils.checkNotNull(allowSync, "allowSync");
@@ -66,32 +77,52 @@ public class GetTopWatchedContentMediaContainer {
         this.metadata = metadata;
     }
     
-    public GetTopWatchedContentMediaContainer() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    public GetTopWatchedContentMediaContainer(
+            int size,
+            boolean allowSync,
+            String identifier,
+            String mediaTagPrefix,
+            long mediaTagVersion) {
+        this(size, allowSync, identifier, mediaTagPrefix, mediaTagVersion, Optional.empty());
     }
 
+    /**
+     * Number of media items returned in this response.
+     */
     @JsonIgnore
-    public Optional<Integer> size() {
+    public int size() {
         return size;
     }
 
+    /**
+     * Indicates whether syncing is allowed.
+     */
     @JsonIgnore
-    public Optional<Boolean> allowSync() {
+    public boolean allowSync() {
         return allowSync;
     }
 
+    /**
+     * An plugin identifier for the media container.
+     */
     @JsonIgnore
-    public Optional<String> identifier() {
+    public String identifier() {
         return identifier;
     }
 
+    /**
+     * The prefix used for media tag resource paths.
+     */
     @JsonIgnore
-    public Optional<String> mediaTagPrefix() {
+    public String mediaTagPrefix() {
         return mediaTagPrefix;
     }
 
+    /**
+     * The version number for media tags.
+     */
     @JsonIgnore
-    public Optional<Integer> mediaTagVersion() {
+    public long mediaTagVersion() {
         return mediaTagVersion;
     }
 
@@ -105,61 +136,46 @@ public class GetTopWatchedContentMediaContainer {
         return new Builder();
     }    
 
+    /**
+     * Number of media items returned in this response.
+     */
     public GetTopWatchedContentMediaContainer withSize(int size) {
-        Utils.checkNotNull(size, "size");
-        this.size = Optional.ofNullable(size);
-        return this;
-    }
-
-    public GetTopWatchedContentMediaContainer withSize(Optional<Integer> size) {
         Utils.checkNotNull(size, "size");
         this.size = size;
         return this;
     }
 
+    /**
+     * Indicates whether syncing is allowed.
+     */
     public GetTopWatchedContentMediaContainer withAllowSync(boolean allowSync) {
-        Utils.checkNotNull(allowSync, "allowSync");
-        this.allowSync = Optional.ofNullable(allowSync);
-        return this;
-    }
-
-    public GetTopWatchedContentMediaContainer withAllowSync(Optional<Boolean> allowSync) {
         Utils.checkNotNull(allowSync, "allowSync");
         this.allowSync = allowSync;
         return this;
     }
 
+    /**
+     * An plugin identifier for the media container.
+     */
     public GetTopWatchedContentMediaContainer withIdentifier(String identifier) {
-        Utils.checkNotNull(identifier, "identifier");
-        this.identifier = Optional.ofNullable(identifier);
-        return this;
-    }
-
-    public GetTopWatchedContentMediaContainer withIdentifier(Optional<String> identifier) {
         Utils.checkNotNull(identifier, "identifier");
         this.identifier = identifier;
         return this;
     }
 
+    /**
+     * The prefix used for media tag resource paths.
+     */
     public GetTopWatchedContentMediaContainer withMediaTagPrefix(String mediaTagPrefix) {
-        Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
-        this.mediaTagPrefix = Optional.ofNullable(mediaTagPrefix);
-        return this;
-    }
-
-    public GetTopWatchedContentMediaContainer withMediaTagPrefix(Optional<String> mediaTagPrefix) {
         Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
         this.mediaTagPrefix = mediaTagPrefix;
         return this;
     }
 
-    public GetTopWatchedContentMediaContainer withMediaTagVersion(int mediaTagVersion) {
-        Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
-        this.mediaTagVersion = Optional.ofNullable(mediaTagVersion);
-        return this;
-    }
-
-    public GetTopWatchedContentMediaContainer withMediaTagVersion(Optional<Integer> mediaTagVersion) {
+    /**
+     * The version number for media tags.
+     */
+    public GetTopWatchedContentMediaContainer withMediaTagVersion(long mediaTagVersion) {
         Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
         this.mediaTagVersion = mediaTagVersion;
         return this;
@@ -220,15 +236,15 @@ public class GetTopWatchedContentMediaContainer {
     
     public final static class Builder {
  
-        private Optional<Integer> size = Optional.empty();
+        private Integer size;
  
-        private Optional<Boolean> allowSync = Optional.empty();
+        private Boolean allowSync;
  
-        private Optional<String> identifier = Optional.empty();
+        private String identifier;
  
-        private Optional<String> mediaTagPrefix = Optional.empty();
+        private String mediaTagPrefix;
  
-        private Optional<Integer> mediaTagVersion = Optional.empty();
+        private Long mediaTagVersion;
  
         private Optional<? extends List<GetTopWatchedContentMetadata>> metadata = Optional.empty();
         
@@ -236,61 +252,46 @@ public class GetTopWatchedContentMediaContainer {
           // force use of static builder() method
         }
 
+        /**
+         * Number of media items returned in this response.
+         */
         public Builder size(int size) {
-            Utils.checkNotNull(size, "size");
-            this.size = Optional.ofNullable(size);
-            return this;
-        }
-
-        public Builder size(Optional<Integer> size) {
             Utils.checkNotNull(size, "size");
             this.size = size;
             return this;
         }
 
+        /**
+         * Indicates whether syncing is allowed.
+         */
         public Builder allowSync(boolean allowSync) {
-            Utils.checkNotNull(allowSync, "allowSync");
-            this.allowSync = Optional.ofNullable(allowSync);
-            return this;
-        }
-
-        public Builder allowSync(Optional<Boolean> allowSync) {
             Utils.checkNotNull(allowSync, "allowSync");
             this.allowSync = allowSync;
             return this;
         }
 
+        /**
+         * An plugin identifier for the media container.
+         */
         public Builder identifier(String identifier) {
-            Utils.checkNotNull(identifier, "identifier");
-            this.identifier = Optional.ofNullable(identifier);
-            return this;
-        }
-
-        public Builder identifier(Optional<String> identifier) {
             Utils.checkNotNull(identifier, "identifier");
             this.identifier = identifier;
             return this;
         }
 
+        /**
+         * The prefix used for media tag resource paths.
+         */
         public Builder mediaTagPrefix(String mediaTagPrefix) {
-            Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
-            this.mediaTagPrefix = Optional.ofNullable(mediaTagPrefix);
-            return this;
-        }
-
-        public Builder mediaTagPrefix(Optional<String> mediaTagPrefix) {
             Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
             this.mediaTagPrefix = mediaTagPrefix;
             return this;
         }
 
-        public Builder mediaTagVersion(int mediaTagVersion) {
-            Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
-            this.mediaTagVersion = Optional.ofNullable(mediaTagVersion);
-            return this;
-        }
-
-        public Builder mediaTagVersion(Optional<Integer> mediaTagVersion) {
+        /**
+         * The version number for media tags.
+         */
+        public Builder mediaTagVersion(long mediaTagVersion) {
             Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
             this.mediaTagVersion = mediaTagVersion;
             return this;

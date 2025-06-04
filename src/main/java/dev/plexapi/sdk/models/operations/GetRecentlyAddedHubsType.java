@@ -44,7 +44,7 @@ import java.util.Optional;
 /**
  * GetRecentlyAddedHubsType
  * 
- * <p>The type of media content
+ * <p>The type of media content in the Plex library. This can represent videos, music, or photos.
  */
 @JsonDeserialize(using = GetRecentlyAddedHubsType._Deserializer.class)
 @JsonSerialize(using = GetRecentlyAddedHubsType._Serializer.class)
@@ -56,6 +56,10 @@ public class GetRecentlyAddedHubsType {
     public static final GetRecentlyAddedHubsType Episode = new GetRecentlyAddedHubsType("episode");
     public static final GetRecentlyAddedHubsType Artist = new GetRecentlyAddedHubsType("artist");
     public static final GetRecentlyAddedHubsType Album = new GetRecentlyAddedHubsType("album");
+    public static final GetRecentlyAddedHubsType Track = new GetRecentlyAddedHubsType("track");
+    public static final GetRecentlyAddedHubsType PhotoAlbum = new GetRecentlyAddedHubsType("photoalbum");
+    public static final GetRecentlyAddedHubsType Photo = new GetRecentlyAddedHubsType("photo");
+    public static final GetRecentlyAddedHubsType Collection = new GetRecentlyAddedHubsType("collection");
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -133,6 +137,10 @@ public class GetRecentlyAddedHubsType {
         map.put("episode", Episode);
         map.put("artist", Artist);
         map.put("album", Album);
+        map.put("track", Track);
+        map.put("photoalbum", PhotoAlbum);
+        map.put("photo", Photo);
+        map.put("collection", Collection);
         return map;
     }
 
@@ -144,6 +152,10 @@ public class GetRecentlyAddedHubsType {
         map.put("episode", GetRecentlyAddedHubsTypeEnum.Episode);
         map.put("artist", GetRecentlyAddedHubsTypeEnum.Artist);
         map.put("album", GetRecentlyAddedHubsTypeEnum.Album);
+        map.put("track", GetRecentlyAddedHubsTypeEnum.Track);
+        map.put("photoalbum", GetRecentlyAddedHubsTypeEnum.PhotoAlbum);
+        map.put("photo", GetRecentlyAddedHubsTypeEnum.Photo);
+        map.put("collection", GetRecentlyAddedHubsTypeEnum.Collection);
         return map;
     }
     
@@ -184,7 +196,11 @@ public class GetRecentlyAddedHubsType {
         Season("season"),
         Episode("episode"),
         Artist("artist"),
-        Album("album"),;
+        Album("album"),
+        Track("track"),
+        PhotoAlbum("photoalbum"),
+        Photo("photo"),
+        Collection("collection"),;
 
         private final String value;
 

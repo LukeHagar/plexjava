@@ -69,7 +69,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'dev.plexapi:plexapi:0.16.2'
+implementation 'dev.plexapi:plexapi:0.17.0'
 ```
 
 Maven:
@@ -77,7 +77,7 @@ Maven:
 <dependency>
     <groupId>dev.plexapi</groupId>
     <artifactId>plexapi</artifactId>
-    <version>0.16.2</version>
+    <version>0.17.0</version>
 </dependency>
 ```
 
@@ -192,7 +192,7 @@ public class Application {
 * [getLibraryDetails](docs/sdks/library/README.md#getlibrarydetails) - Get Library Details
 * [deleteLibrary](docs/sdks/library/README.md#deletelibrary) - Delete Library Section
 * [getLibraryItems](docs/sdks/library/README.md#getlibraryitems) - Get Library Items
-* [getAllMediaLibrary](docs/sdks/library/README.md#getallmedialibrary) - Get all media of library
+* [getLibrarySectionsAll](docs/sdks/library/README.md#getlibrarysectionsall) - Get Library section media by tag ALL
 * [getRefreshLibraryMetadata](docs/sdks/library/README.md#getrefreshlibrarymetadata) - Refresh Metadata Of The Library
 * [getSearchLibrary](docs/sdks/library/README.md#getsearchlibrary) - Search Library
 * [getGenresLibrary](docs/sdks/library/README.md#getgenreslibrary) - Get Genres of library media
@@ -371,8 +371,8 @@ public class Application {
 
         PlexAPI sdk = PlexAPI.builder()
                 .protocol(ServerProtocol.HTTPS)
-                .ip("e0c3:bcc0:6bac:dccc:c4ec:34b1:ca98:4cb9")
-                .port("40311")
+                .ip("4982:bc2a:b4f8:efb5:2394:5bc3:ab4f:0e6d")
+                .port("44765")
                 .accessToken("<YOUR_API_KEY_HERE>")
             .build();
 

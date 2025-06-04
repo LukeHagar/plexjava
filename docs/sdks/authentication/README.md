@@ -92,7 +92,7 @@ public class Application {
             .build();
 
         GetSourceConnectionInformationResponse res = sdk.authentication().getSourceConnectionInformation()
-                .source("provider://provider-identifier")
+                .source("server://client-identifier")
                 .call();
 
         // handle response

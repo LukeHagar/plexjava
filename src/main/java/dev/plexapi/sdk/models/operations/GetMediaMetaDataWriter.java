@@ -36,14 +36,14 @@ public class GetMediaMetaDataWriter {
     private String filter;
 
     /**
-     * The URL of the thumbnail image for the writer.
+     * The absolute URL of the thumbnail image for the writer.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
     private Optional<String> thumb;
 
     /**
-     * A unique key associated with the writers tag, used for internal identification.
+     * A 24-character hexadecimal unique key associated with the writer’s tag, used for internal identification.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tagKey")
@@ -100,7 +100,7 @@ public class GetMediaMetaDataWriter {
     }
 
     /**
-     * The URL of the thumbnail image for the writer.
+     * The absolute URL of the thumbnail image for the writer.
      */
     @JsonIgnore
     public Optional<String> thumb() {
@@ -108,7 +108,7 @@ public class GetMediaMetaDataWriter {
     }
 
     /**
-     * A unique key associated with the writers tag, used for internal identification.
+     * A 24-character hexadecimal unique key associated with the writer’s tag, used for internal identification.
      */
     @JsonIgnore
     public Optional<String> tagKey() {
@@ -147,7 +147,7 @@ public class GetMediaMetaDataWriter {
     }
 
     /**
-     * The URL of the thumbnail image for the writer.
+     * The absolute URL of the thumbnail image for the writer.
      */
     public GetMediaMetaDataWriter withThumb(String thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -156,7 +156,7 @@ public class GetMediaMetaDataWriter {
     }
 
     /**
-     * The URL of the thumbnail image for the writer.
+     * The absolute URL of the thumbnail image for the writer.
      */
     public GetMediaMetaDataWriter withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -165,7 +165,7 @@ public class GetMediaMetaDataWriter {
     }
 
     /**
-     * A unique key associated with the writers tag, used for internal identification.
+     * A 24-character hexadecimal unique key associated with the writer’s tag, used for internal identification.
      */
     public GetMediaMetaDataWriter withTagKey(String tagKey) {
         Utils.checkNotNull(tagKey, "tagKey");
@@ -174,7 +174,7 @@ public class GetMediaMetaDataWriter {
     }
 
     /**
-     * A unique key associated with the writers tag, used for internal identification.
+     * A 24-character hexadecimal unique key associated with the writer’s tag, used for internal identification.
      */
     public GetMediaMetaDataWriter withTagKey(Optional<String> tagKey) {
         Utils.checkNotNull(tagKey, "tagKey");
@@ -264,7 +264,7 @@ public class GetMediaMetaDataWriter {
         }
 
         /**
-         * The URL of the thumbnail image for the writer.
+         * The absolute URL of the thumbnail image for the writer.
          */
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -273,7 +273,7 @@ public class GetMediaMetaDataWriter {
         }
 
         /**
-         * The URL of the thumbnail image for the writer.
+         * The absolute URL of the thumbnail image for the writer.
          */
         public Builder thumb(Optional<String> thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -282,7 +282,7 @@ public class GetMediaMetaDataWriter {
         }
 
         /**
-         * A unique key associated with the writers tag, used for internal identification.
+         * A 24-character hexadecimal unique key associated with the writer’s tag, used for internal identification.
          */
         public Builder tagKey(String tagKey) {
             Utils.checkNotNull(tagKey, "tagKey");
@@ -291,7 +291,7 @@ public class GetMediaMetaDataWriter {
         }
 
         /**
-         * A unique key associated with the writers tag, used for internal identification.
+         * A 24-character hexadecimal unique key associated with the writer’s tag, used for internal identification.
          */
         public Builder tagKey(Optional<String> tagKey) {
             Utils.checkNotNull(tagKey, "tagKey");

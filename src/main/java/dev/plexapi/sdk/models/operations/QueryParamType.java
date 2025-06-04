@@ -60,9 +60,11 @@ public class QueryParamType {
     public static final QueryParamType TvShow = new QueryParamType(2L);
     public static final QueryParamType Season = new QueryParamType(3L);
     public static final QueryParamType Episode = new QueryParamType(4L);
-    public static final QueryParamType Audio = new QueryParamType(8L);
-    public static final QueryParamType Album = new QueryParamType(9L);
-    public static final QueryParamType Track = new QueryParamType(10L);
+    public static final QueryParamType Artist = new QueryParamType(5L);
+    public static final QueryParamType Album = new QueryParamType(6L);
+    public static final QueryParamType Track = new QueryParamType(7L);
+    public static final QueryParamType PhotoAlbum = new QueryParamType(8L);
+    public static final QueryParamType Photo = new QueryParamType(9L);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -138,9 +140,11 @@ public class QueryParamType {
         map.put(2L, TvShow);
         map.put(3L, Season);
         map.put(4L, Episode);
-        map.put(8L, Audio);
-        map.put(9L, Album);
-        map.put(10L, Track);
+        map.put(5L, Artist);
+        map.put(6L, Album);
+        map.put(7L, Track);
+        map.put(8L, PhotoAlbum);
+        map.put(9L, Photo);
         return map;
     }
 
@@ -150,9 +154,11 @@ public class QueryParamType {
         map.put(2L, QueryParamTypeEnum.TvShow);
         map.put(3L, QueryParamTypeEnum.Season);
         map.put(4L, QueryParamTypeEnum.Episode);
-        map.put(8L, QueryParamTypeEnum.Audio);
-        map.put(9L, QueryParamTypeEnum.Album);
-        map.put(10L, QueryParamTypeEnum.Track);
+        map.put(5L, QueryParamTypeEnum.Artist);
+        map.put(6L, QueryParamTypeEnum.Album);
+        map.put(7L, QueryParamTypeEnum.Track);
+        map.put(8L, QueryParamTypeEnum.PhotoAlbum);
+        map.put(9L, QueryParamTypeEnum.Photo);
         return map;
     }
     
@@ -192,9 +198,11 @@ public class QueryParamType {
         TvShow(2L),
         Season(3L),
         Episode(4L),
-        Audio(8L),
-        Album(9L),
-        Track(10L),;
+        Artist(5L),
+        Album(6L),
+        Track(7L),
+        PhotoAlbum(8L),
+        Photo(9L),;
 
         private final long value;
 

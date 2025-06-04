@@ -10,8 +10,6 @@ import dev.plexapi.sdk.models.errors.GetActorsLibraryBadRequest;
 import dev.plexapi.sdk.models.errors.GetActorsLibraryUnauthorized;
 import dev.plexapi.sdk.models.errors.GetAllLibrariesBadRequest;
 import dev.plexapi.sdk.models.errors.GetAllLibrariesUnauthorized;
-import dev.plexapi.sdk.models.errors.GetAllMediaLibraryBadRequest;
-import dev.plexapi.sdk.models.errors.GetAllMediaLibraryUnauthorized;
 import dev.plexapi.sdk.models.errors.GetCountriesLibraryBadRequest;
 import dev.plexapi.sdk.models.errors.GetCountriesLibraryUnauthorized;
 import dev.plexapi.sdk.models.errors.GetFileHashBadRequest;
@@ -22,6 +20,8 @@ import dev.plexapi.sdk.models.errors.GetLibraryDetailsBadRequest;
 import dev.plexapi.sdk.models.errors.GetLibraryDetailsUnauthorized;
 import dev.plexapi.sdk.models.errors.GetLibraryItemsBadRequest;
 import dev.plexapi.sdk.models.errors.GetLibraryItemsUnauthorized;
+import dev.plexapi.sdk.models.errors.GetLibrarySectionsAllBadRequest;
+import dev.plexapi.sdk.models.errors.GetLibrarySectionsAllUnauthorized;
 import dev.plexapi.sdk.models.errors.GetMediaMetaDataBadRequest;
 import dev.plexapi.sdk.models.errors.GetMediaMetaDataUnauthorized;
 import dev.plexapi.sdk.models.errors.GetMetadataChildrenBadRequest;
@@ -49,10 +49,6 @@ import dev.plexapi.sdk.models.operations.GetActorsLibraryResponseBody;
 import dev.plexapi.sdk.models.operations.GetAllLibrariesRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetAllLibrariesResponse;
 import dev.plexapi.sdk.models.operations.GetAllLibrariesResponseBody;
-import dev.plexapi.sdk.models.operations.GetAllMediaLibraryRequest;
-import dev.plexapi.sdk.models.operations.GetAllMediaLibraryRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetAllMediaLibraryResponse;
-import dev.plexapi.sdk.models.operations.GetAllMediaLibraryResponseBody;
 import dev.plexapi.sdk.models.operations.GetCountriesLibraryQueryParamType;
 import dev.plexapi.sdk.models.operations.GetCountriesLibraryRequest;
 import dev.plexapi.sdk.models.operations.GetCountriesLibraryRequestBuilder;
@@ -74,6 +70,10 @@ import dev.plexapi.sdk.models.operations.GetLibraryItemsRequest;
 import dev.plexapi.sdk.models.operations.GetLibraryItemsRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetLibraryItemsResponse;
 import dev.plexapi.sdk.models.operations.GetLibraryItemsResponseBody;
+import dev.plexapi.sdk.models.operations.GetLibrarySectionsAllRequest;
+import dev.plexapi.sdk.models.operations.GetLibrarySectionsAllRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetLibrarySectionsAllResponse;
+import dev.plexapi.sdk.models.operations.GetLibrarySectionsAllResponseBody;
 import dev.plexapi.sdk.models.operations.GetMediaArtsRequest;
 import dev.plexapi.sdk.models.operations.GetMediaArtsRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetMediaArtsResponse;
@@ -106,6 +106,7 @@ import dev.plexapi.sdk.models.operations.GetSearchLibraryRequest;
 import dev.plexapi.sdk.models.operations.GetSearchLibraryRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetSearchLibraryResponse;
 import dev.plexapi.sdk.models.operations.GetSearchLibraryResponseBody;
+import dev.plexapi.sdk.models.operations.GetTopWatchedContentQueryParamIncludeGuids;
 import dev.plexapi.sdk.models.operations.GetTopWatchedContentQueryParamType;
 import dev.plexapi.sdk.models.operations.GetTopWatchedContentRequest;
 import dev.plexapi.sdk.models.operations.GetTopWatchedContentRequestBuilder;
@@ -130,7 +131,6 @@ import dev.plexapi.sdk.utils.Utils;
 import java.io.InputStream;
 import java.lang.Double;
 import java.lang.Exception;
-import java.lang.Long;
 import java.lang.Object;
 import java.lang.String;
 import java.net.http.HttpRequest;
@@ -148,7 +148,7 @@ public class Library implements
             MethodCallGetLibraryDetails,
             MethodCallDeleteLibrary,
             MethodCallGetLibraryItems,
-            MethodCallGetAllMediaLibrary,
+            MethodCallGetLibrarySectionsAll,
             MethodCallGetRefreshLibraryMetadata,
             MethodCallGetSearchLibrary,
             MethodCallGetGenresLibrary,
@@ -216,7 +216,7 @@ public class Library implements
                 .build();
         
         String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
                 _baseUrl,
                 "/library/hashes");
@@ -231,14 +231,15 @@ public class Library implements
                 request, 
                 null));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "getFileHash", 
                       Optional.of(List.of()), 
@@ -251,6 +252,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getFileHash",
                             Optional.of(List.of()),
@@ -261,6 +263,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getFileHash",
                             Optional.of(List.of()), 
@@ -271,6 +274,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getFileHash",
                             Optional.of(List.of()),
@@ -375,7 +379,7 @@ public class Library implements
     public GetRecentlyAddedLibraryResponse getRecentlyAddedLibrary(
             GetRecentlyAddedLibraryRequest request) throws Exception {
         String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
                 _baseUrl,
                 "/library/recentlyAdded");
@@ -390,14 +394,15 @@ public class Library implements
                 request, 
                 null));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "get-recently-added-library", 
                       Optional.of(List.of()), 
@@ -410,6 +415,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-recently-added-library",
                             Optional.of(List.of()),
@@ -420,6 +426,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-recently-added-library",
                             Optional.of(List.of()), 
@@ -430,6 +437,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-recently-added-library",
                             Optional.of(List.of()),
@@ -553,7 +561,7 @@ public class Library implements
      */
     public GetAllLibrariesResponse getAllLibrariesDirect() throws Exception {
         String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
                 _baseUrl,
                 "/library/sections");
@@ -563,14 +571,15 @@ public class Library implements
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "get-all-libraries", 
                       Optional.of(List.of()), 
@@ -583,6 +592,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-all-libraries",
                             Optional.of(List.of()),
@@ -593,6 +603,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-all-libraries",
                             Optional.of(List.of()), 
@@ -603,6 +614,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-all-libraries",
                             Optional.of(List.of()),
@@ -861,7 +873,7 @@ public class Library implements
                 .build();
         
         String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
                 GetLibraryDetailsRequest.class,
                 _baseUrl,
@@ -878,14 +890,15 @@ public class Library implements
                 request, 
                 null));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "get-library-details", 
                       Optional.of(List.of()), 
@@ -898,6 +911,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-library-details",
                             Optional.of(List.of()),
@@ -908,6 +922,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-library-details",
                             Optional.of(List.of()), 
@@ -918,6 +933,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-library-details",
                             Optional.of(List.of()),
@@ -1041,7 +1057,7 @@ public class Library implements
                 .build();
         
         String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
                 DeleteLibraryRequest.class,
                 _baseUrl,
@@ -1053,14 +1069,15 @@ public class Library implements
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "deleteLibrary", 
                       Optional.of(List.of()), 
@@ -1073,6 +1090,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "deleteLibrary",
                             Optional.of(List.of()),
@@ -1083,6 +1101,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "deleteLibrary",
                             Optional.of(List.of()), 
@@ -1093,6 +1112,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "deleteLibrary",
                             Optional.of(List.of()),
@@ -1237,7 +1257,7 @@ public class Library implements
     public GetLibraryItemsResponse getLibraryItems(
             GetLibraryItemsRequest request) throws Exception {
         String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
                 GetLibraryItemsRequest.class,
                 _baseUrl,
@@ -1254,14 +1274,15 @@ public class Library implements
                 request, 
                 null));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "get-library-items", 
                       Optional.of(List.of()), 
@@ -1274,6 +1295,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-library-items",
                             Optional.of(List.of()),
@@ -1284,6 +1306,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-library-items",
                             Optional.of(List.of()), 
@@ -1294,6 +1317,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-library-items",
                             Optional.of(List.of()),
@@ -1387,18 +1411,18 @@ public class Library implements
 
 
     /**
-     * Get all media of library
+     * Get Library section media by tag ALL
      * 
      * <p>Retrieves a list of all general media data for this library.
      * 
      * @return The call builder
      */
-    public GetAllMediaLibraryRequestBuilder getAllMediaLibrary() {
-        return new GetAllMediaLibraryRequestBuilder(this);
+    public GetLibrarySectionsAllRequestBuilder getLibrarySectionsAll() {
+        return new GetLibrarySectionsAllRequestBuilder(this);
     }
 
     /**
-     * Get all media of library
+     * Get Library section media by tag ALL
      * 
      * <p>Retrieves a list of all general media data for this library.
      * 
@@ -1406,12 +1430,12 @@ public class Library implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetAllMediaLibraryResponse getAllMediaLibrary(
-            GetAllMediaLibraryRequest request) throws Exception {
+    public GetLibrarySectionsAllResponse getLibrarySectionsAll(
+            GetLibrarySectionsAllRequest request) throws Exception {
         String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
-                GetAllMediaLibraryRequest.class,
+                GetLibrarySectionsAllRequest.class,
                 _baseUrl,
                 "/library/sections/{sectionKey}/all",
                 request, null);
@@ -1422,20 +1446,21 @@ public class Library implements
                 SDKConfiguration.USER_AGENT);
 
         _req.addQueryParams(Utils.getQueryParams(
-                GetAllMediaLibraryRequest.class,
+                GetLibrarySectionsAllRequest.class,
                 request, 
                 null));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
-                      "get-all-media-library", 
+                      "get-library-sections-all", 
                       Optional.of(List.of()), 
                       _hookSecuritySource),
                   _req.build());
@@ -1446,8 +1471,9 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
-                            "get-all-media-library",
+                            "get-library-sections-all",
                             Optional.of(List.of()),
                             _hookSecuritySource),
                         Optional.of(_httpRes),
@@ -1456,8 +1482,9 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
-                            "get-all-media-library",
+                            "get-library-sections-all",
                             Optional.of(List.of()), 
                             _hookSecuritySource),
                          _httpRes);
@@ -1466,8 +1493,9 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
-                            "get-all-media-library",
+                            "get-library-sections-all",
                             Optional.of(List.of()),
                             _hookSecuritySource), 
                         Optional.empty(),
@@ -1477,20 +1505,20 @@ public class Library implements
             .headers()
             .firstValue("Content-Type")
             .orElse("application/octet-stream");
-        GetAllMediaLibraryResponse.Builder _resBuilder = 
-            GetAllMediaLibraryResponse
+        GetLibrarySectionsAllResponse.Builder _resBuilder = 
+            GetLibrarySectionsAllResponse
                 .builder()
                 .contentType(_contentType)
                 .statusCode(_httpRes.statusCode())
                 .rawResponse(_httpRes);
 
-        GetAllMediaLibraryResponse _res = _resBuilder.build();
+        GetLibrarySectionsAllResponse _res = _resBuilder.build();
         
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetAllMediaLibraryResponseBody _out = Utils.mapper().readValue(
+                GetLibrarySectionsAllResponseBody _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetAllMediaLibraryResponseBody>() {});
+                    new TypeReference<GetLibrarySectionsAllResponseBody>() {});
                 _res.withObject(Optional.ofNullable(_out));
                 return _res;
             } else {
@@ -1503,9 +1531,9 @@ public class Library implements
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetAllMediaLibraryBadRequest _out = Utils.mapper().readValue(
+                GetLibrarySectionsAllBadRequest _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetAllMediaLibraryBadRequest>() {});
+                    new TypeReference<GetLibrarySectionsAllBadRequest>() {});
                     _out.withRawResponse(Optional.ofNullable(_httpRes));
                 
                 throw _out;
@@ -1519,9 +1547,9 @@ public class Library implements
         }
         if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
             if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetAllMediaLibraryUnauthorized _out = Utils.mapper().readValue(
+                GetLibrarySectionsAllUnauthorized _out = Utils.mapper().readValue(
                     Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetAllMediaLibraryUnauthorized>() {});
+                    new TypeReference<GetLibrarySectionsAllUnauthorized>() {});
                     _out.withRawResponse(Optional.ofNullable(_httpRes));
                 
                 throw _out;
@@ -1608,7 +1636,7 @@ public class Library implements
                 .build();
         
         String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
                 GetRefreshLibraryMetadataRequest.class,
                 _baseUrl,
@@ -1625,14 +1653,15 @@ public class Library implements
                 request, 
                 null));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "get-refresh-library-metadata", 
                       Optional.of(List.of()), 
@@ -1645,6 +1674,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-refresh-library-metadata",
                             Optional.of(List.of()),
@@ -1655,6 +1685,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-refresh-library-metadata",
                             Optional.of(List.of()), 
@@ -1665,6 +1696,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-refresh-library-metadata",
                             Optional.of(List.of()),
@@ -1820,7 +1852,7 @@ public class Library implements
                 .build();
         
         String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
                 GetSearchLibraryRequest.class,
                 _baseUrl,
@@ -1837,14 +1869,15 @@ public class Library implements
                 request, 
                 null));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "get-search-library", 
                       Optional.of(List.of()), 
@@ -1857,6 +1890,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-search-library",
                             Optional.of(List.of()),
@@ -1867,6 +1901,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-search-library",
                             Optional.of(List.of()), 
@@ -1877,6 +1912,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-search-library",
                             Optional.of(List.of()),
@@ -2009,7 +2045,7 @@ public class Library implements
                 .build();
         
         String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
                 GetGenresLibraryRequest.class,
                 _baseUrl,
@@ -2026,14 +2062,15 @@ public class Library implements
                 request, 
                 null));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "get-genres-library", 
                       Optional.of(List.of()), 
@@ -2046,6 +2083,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-genres-library",
                             Optional.of(List.of()),
@@ -2056,6 +2094,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-genres-library",
                             Optional.of(List.of()), 
@@ -2066,6 +2105,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-genres-library",
                             Optional.of(List.of()),
@@ -2198,7 +2238,7 @@ public class Library implements
                 .build();
         
         String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
                 GetCountriesLibraryRequest.class,
                 _baseUrl,
@@ -2215,14 +2255,15 @@ public class Library implements
                 request, 
                 null));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "get-countries-library", 
                       Optional.of(List.of()), 
@@ -2235,6 +2276,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-countries-library",
                             Optional.of(List.of()),
@@ -2245,6 +2287,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-countries-library",
                             Optional.of(List.of()), 
@@ -2255,6 +2298,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-countries-library",
                             Optional.of(List.of()),
@@ -2387,7 +2431,7 @@ public class Library implements
                 .build();
         
         String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
                 GetActorsLibraryRequest.class,
                 _baseUrl,
@@ -2404,14 +2448,15 @@ public class Library implements
                 request, 
                 null));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "get-actors-library", 
                       Optional.of(List.of()), 
@@ -2424,6 +2469,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-actors-library",
                             Optional.of(List.of()),
@@ -2434,6 +2480,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-actors-library",
                             Optional.of(List.of()), 
@@ -2444,6 +2491,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-actors-library",
                             Optional.of(List.of()),
@@ -2559,7 +2607,7 @@ public class Library implements
     public GetSearchAllLibrariesResponse getSearchAllLibraries(
             GetSearchAllLibrariesRequest request) throws Exception {
         String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
                 _baseUrl,
                 "/library/search");
@@ -2575,14 +2623,15 @@ public class Library implements
                 null));
         _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "get-search-all-libraries", 
                       Optional.of(List.of()), 
@@ -2595,6 +2644,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-search-all-libraries",
                             Optional.of(List.of()),
@@ -2605,6 +2655,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-search-all-libraries",
                             Optional.of(List.of()), 
@@ -2615,6 +2666,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-search-all-libraries",
                             Optional.of(List.of()),
@@ -2710,7 +2762,8 @@ public class Library implements
     /**
      * Get Media Metadata
      * 
-     * <p>This endpoint will return all the (meta)data of a library item specified with by the ratingKey.
+     * <p>This endpoint will return all the (meta)data of one or more library items specified by the ratingKey.
+     * Multiple rating keys can be provided as a comma-separated list (e.g., "21119,21617").
      * 
      * @return The call builder
      */
@@ -2721,7 +2774,8 @@ public class Library implements
     /**
      * Get Media Metadata
      * 
-     * <p>This endpoint will return all the (meta)data of a library item specified with by the ratingKey.
+     * <p>This endpoint will return all the (meta)data of one or more library items specified by the ratingKey.
+     * Multiple rating keys can be provided as a comma-separated list (e.g., "21119,21617").
      * 
      * @param request The request object containing all of the parameters for the API call.
      * @return The response from the API call
@@ -2730,7 +2784,7 @@ public class Library implements
     public GetMediaMetaDataResponse getMediaMetaData(
             GetMediaMetaDataRequest request) throws Exception {
         String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
                 GetMediaMetaDataRequest.class,
                 _baseUrl,
@@ -2747,14 +2801,15 @@ public class Library implements
                 request, 
                 null));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "get-media-meta-data", 
                       Optional.of(List.of()), 
@@ -2767,6 +2822,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-media-meta-data",
                             Optional.of(List.of()),
@@ -2777,6 +2833,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-media-meta-data",
                             Optional.of(List.of()), 
@@ -2787,6 +2844,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-media-meta-data",
                             Optional.of(List.of()),
@@ -2908,7 +2966,7 @@ public class Library implements
                 .build();
         
         String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
                 GetMediaArtsRequest.class,
                 _baseUrl,
@@ -2920,14 +2978,15 @@ public class Library implements
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "get-media-arts", 
                       Optional.of(List.of()), 
@@ -2940,6 +2999,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-media-arts",
                             Optional.of(List.of()),
@@ -2950,6 +3010,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-media-arts",
                             Optional.of(List.of()), 
@@ -2960,6 +3021,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-media-arts",
                             Optional.of(List.of()),
@@ -3069,7 +3131,7 @@ public class Library implements
                 .build();
         
         String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
                 PostMediaArtsRequest.class,
                 _baseUrl,
@@ -3096,14 +3158,15 @@ public class Library implements
                 request, 
                 null));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "post-media-arts", 
                       Optional.of(List.of()), 
@@ -3116,6 +3179,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "post-media-arts",
                             Optional.of(List.of()),
@@ -3126,6 +3190,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "post-media-arts",
                             Optional.of(List.of()), 
@@ -3136,6 +3201,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "post-media-arts",
                             Optional.of(List.of()),
@@ -3214,7 +3280,7 @@ public class Library implements
                 .build();
         
         String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
                 GetMediaPostersRequest.class,
                 _baseUrl,
@@ -3226,14 +3292,15 @@ public class Library implements
             .addHeader("user-agent", 
                 SDKConfiguration.USER_AGENT);
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "get-media-posters", 
                       Optional.of(List.of()), 
@@ -3246,6 +3313,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-media-posters",
                             Optional.of(List.of()),
@@ -3256,6 +3324,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-media-posters",
                             Optional.of(List.of()), 
@@ -3266,6 +3335,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "get-media-posters",
                             Optional.of(List.of()),
@@ -3375,7 +3445,7 @@ public class Library implements
                 .build();
         
         String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
                 PostMediaPosterRequest.class,
                 _baseUrl,
@@ -3402,14 +3472,15 @@ public class Library implements
                 request, 
                 null));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "post-media-poster", 
                       Optional.of(List.of()), 
@@ -3422,6 +3493,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "post-media-poster",
                             Optional.of(List.of()),
@@ -3432,6 +3504,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "post-media-poster",
                             Optional.of(List.of()), 
@@ -3442,6 +3515,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "post-media-poster",
                             Optional.of(List.of()),
@@ -3538,7 +3612,7 @@ public class Library implements
                 .build();
         
         String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
                 GetMetadataChildrenRequest.class,
                 _baseUrl,
@@ -3555,14 +3629,15 @@ public class Library implements
                 request, 
                 null));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "getMetadataChildren", 
                       Optional.of(List.of()), 
@@ -3575,6 +3650,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getMetadataChildren",
                             Optional.of(List.of()),
@@ -3585,6 +3661,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getMetadataChildren",
                             Optional.of(List.of()), 
@@ -3595,6 +3672,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getMetadataChildren",
                             Optional.of(List.of()),
@@ -3715,7 +3793,7 @@ public class Library implements
      */
     public GetTopWatchedContentResponse getTopWatchedContent(
             GetTopWatchedContentQueryParamType type) throws Exception {
-        return getTopWatchedContent(Optional.empty(), type);
+        return getTopWatchedContent(type, Optional.empty());
     }
     
     /**
@@ -3723,8 +3801,6 @@ public class Library implements
      * 
      * <p>This endpoint will return the top watched content from libraries of a certain type
      * 
-     * @param includeGuids Adds the Guids object to the response
-     *         
      * @param type The type of media to retrieve or filter by.
      *         1 = movie
      *         2 = show
@@ -3732,21 +3808,23 @@ public class Library implements
      *         4 = episode
      *         E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
      *         
+     * @param includeGuids Adds the Guid object to the response
+     *         
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
     public GetTopWatchedContentResponse getTopWatchedContent(
-            Optional<Long> includeGuids,
-            GetTopWatchedContentQueryParamType type) throws Exception {
+            GetTopWatchedContentQueryParamType type,
+            Optional<? extends GetTopWatchedContentQueryParamIncludeGuids> includeGuids) throws Exception {
         GetTopWatchedContentRequest request =
             GetTopWatchedContentRequest
                 .builder()
-                .includeGuids(includeGuids)
                 .type(type)
+                .includeGuids(includeGuids)
                 .build();
         
         String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl, this.sdkConfiguration.getServerVariableDefaults());
+                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
         String _url = Utils.generateURL(
                 _baseUrl,
                 "/library/all/top");
@@ -3761,14 +3839,15 @@ public class Library implements
                 request, 
                 null));
         
-        Optional<SecuritySource> _hookSecuritySource = this.sdkConfiguration.securitySource();
+        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
         Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource.getSecurity());
-        HTTPClient _client = this.sdkConfiguration.defaultClient;
+                this.sdkConfiguration.securitySource().getSecurity());
+        HTTPClient _client = this.sdkConfiguration.client();
         HttpRequest _r = 
             sdkConfiguration.hooks()
                .beforeRequest(
                   new BeforeRequestContextImpl(
+                      this.sdkConfiguration,
                       _baseUrl,
                       "getTopWatchedContent", 
                       Optional.of(List.of()), 
@@ -3781,6 +3860,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getTopWatchedContent",
                             Optional.of(List.of()),
@@ -3791,6 +3871,7 @@ public class Library implements
                 _httpRes = sdkConfiguration.hooks()
                     .afterSuccess(
                         new AfterSuccessContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getTopWatchedContent",
                             Optional.of(List.of()), 
@@ -3801,6 +3882,7 @@ public class Library implements
             _httpRes = sdkConfiguration.hooks()
                     .afterError(
                         new AfterErrorContextImpl(
+                            this.sdkConfiguration,
                             _baseUrl,
                             "getTopWatchedContent",
                             Optional.of(List.of()),

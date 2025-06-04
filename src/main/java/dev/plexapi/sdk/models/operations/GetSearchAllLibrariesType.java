@@ -44,7 +44,7 @@ import java.util.Optional;
 /**
  * GetSearchAllLibrariesType
  * 
- * <p>The type of media content
+ * <p>The type of media content in the Plex library. This can represent videos, music, or photos.
  */
 @JsonDeserialize(using = GetSearchAllLibrariesType._Deserializer.class)
 @JsonSerialize(using = GetSearchAllLibrariesType._Serializer.class)
@@ -56,6 +56,10 @@ public class GetSearchAllLibrariesType {
     public static final GetSearchAllLibrariesType Episode = new GetSearchAllLibrariesType("episode");
     public static final GetSearchAllLibrariesType Artist = new GetSearchAllLibrariesType("artist");
     public static final GetSearchAllLibrariesType Album = new GetSearchAllLibrariesType("album");
+    public static final GetSearchAllLibrariesType Track = new GetSearchAllLibrariesType("track");
+    public static final GetSearchAllLibrariesType PhotoAlbum = new GetSearchAllLibrariesType("photoalbum");
+    public static final GetSearchAllLibrariesType Photo = new GetSearchAllLibrariesType("photo");
+    public static final GetSearchAllLibrariesType Collection = new GetSearchAllLibrariesType("collection");
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -133,6 +137,10 @@ public class GetSearchAllLibrariesType {
         map.put("episode", Episode);
         map.put("artist", Artist);
         map.put("album", Album);
+        map.put("track", Track);
+        map.put("photoalbum", PhotoAlbum);
+        map.put("photo", Photo);
+        map.put("collection", Collection);
         return map;
     }
 
@@ -144,6 +152,10 @@ public class GetSearchAllLibrariesType {
         map.put("episode", GetSearchAllLibrariesTypeEnum.Episode);
         map.put("artist", GetSearchAllLibrariesTypeEnum.Artist);
         map.put("album", GetSearchAllLibrariesTypeEnum.Album);
+        map.put("track", GetSearchAllLibrariesTypeEnum.Track);
+        map.put("photoalbum", GetSearchAllLibrariesTypeEnum.PhotoAlbum);
+        map.put("photo", GetSearchAllLibrariesTypeEnum.Photo);
+        map.put("collection", GetSearchAllLibrariesTypeEnum.Collection);
         return map;
     }
     
@@ -184,7 +196,11 @@ public class GetSearchAllLibrariesType {
         Season("season"),
         Episode("episode"),
         Artist("artist"),
-        Album("album"),;
+        Album("album"),
+        Track("track"),
+        PhotoAlbum("photoalbum"),
+        Photo("photo"),
+        Collection("collection"),;
 
         private final String value;
 

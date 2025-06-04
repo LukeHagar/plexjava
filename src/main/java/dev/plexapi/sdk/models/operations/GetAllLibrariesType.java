@@ -56,6 +56,10 @@ public class GetAllLibrariesType {
     public static final GetAllLibrariesType Episode = new GetAllLibrariesType("episode");
     public static final GetAllLibrariesType Artist = new GetAllLibrariesType("artist");
     public static final GetAllLibrariesType Album = new GetAllLibrariesType("album");
+    public static final GetAllLibrariesType Track = new GetAllLibrariesType("track");
+    public static final GetAllLibrariesType PhotoAlbum = new GetAllLibrariesType("photoalbum");
+    public static final GetAllLibrariesType Photo = new GetAllLibrariesType("photo");
+    public static final GetAllLibrariesType Collection = new GetAllLibrariesType("collection");
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -133,6 +137,10 @@ public class GetAllLibrariesType {
         map.put("episode", Episode);
         map.put("artist", Artist);
         map.put("album", Album);
+        map.put("track", Track);
+        map.put("photoalbum", PhotoAlbum);
+        map.put("photo", Photo);
+        map.put("collection", Collection);
         return map;
     }
 
@@ -144,6 +152,10 @@ public class GetAllLibrariesType {
         map.put("episode", GetAllLibrariesTypeEnum.Episode);
         map.put("artist", GetAllLibrariesTypeEnum.Artist);
         map.put("album", GetAllLibrariesTypeEnum.Album);
+        map.put("track", GetAllLibrariesTypeEnum.Track);
+        map.put("photoalbum", GetAllLibrariesTypeEnum.PhotoAlbum);
+        map.put("photo", GetAllLibrariesTypeEnum.Photo);
+        map.put("collection", GetAllLibrariesTypeEnum.Collection);
         return map;
     }
     
@@ -184,7 +196,11 @@ public class GetAllLibrariesType {
         Season("season"),
         Episode("episode"),
         Artist("artist"),
-        Album("album"),;
+        Album("album"),
+        Track("track"),
+        PhotoAlbum("photoalbum"),
+        Photo("photo"),
+        Collection("collection"),;
 
         private final String value;
 

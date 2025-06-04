@@ -36,14 +36,13 @@ public class GetMediaMetaDataDirector {
     private String filter;
 
     /**
-     * A unique key associated with the director's tag, used for internal identification.
+     * A unique 24-character hexadecimal key associated with the director's tag, used for internal identification.
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tagKey")
-    private Optional<String> tagKey;
+    private String tagKey;
 
     /**
-     * The URL of the thumbnail image for the director.
+     * The absolute URL of the thumbnail image for the director.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
@@ -54,7 +53,7 @@ public class GetMediaMetaDataDirector {
             @JsonProperty("id") int id,
             @JsonProperty("tag") String tag,
             @JsonProperty("filter") String filter,
-            @JsonProperty("tagKey") Optional<String> tagKey,
+            @JsonProperty("tagKey") String tagKey,
             @JsonProperty("thumb") Optional<String> thumb) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(tag, "tag");
@@ -71,8 +70,9 @@ public class GetMediaMetaDataDirector {
     public GetMediaMetaDataDirector(
             int id,
             String tag,
-            String filter) {
-        this(id, tag, filter, Optional.empty(), Optional.empty());
+            String filter,
+            String tagKey) {
+        this(id, tag, filter, tagKey, Optional.empty());
     }
 
     /**
@@ -100,15 +100,15 @@ public class GetMediaMetaDataDirector {
     }
 
     /**
-     * A unique key associated with the director's tag, used for internal identification.
+     * A unique 24-character hexadecimal key associated with the director's tag, used for internal identification.
      */
     @JsonIgnore
-    public Optional<String> tagKey() {
+    public String tagKey() {
         return tagKey;
     }
 
     /**
-     * The URL of the thumbnail image for the director.
+     * The absolute URL of the thumbnail image for the director.
      */
     @JsonIgnore
     public Optional<String> thumb() {
@@ -147,25 +147,16 @@ public class GetMediaMetaDataDirector {
     }
 
     /**
-     * A unique key associated with the director's tag, used for internal identification.
+     * A unique 24-character hexadecimal key associated with the director's tag, used for internal identification.
      */
     public GetMediaMetaDataDirector withTagKey(String tagKey) {
-        Utils.checkNotNull(tagKey, "tagKey");
-        this.tagKey = Optional.ofNullable(tagKey);
-        return this;
-    }
-
-    /**
-     * A unique key associated with the director's tag, used for internal identification.
-     */
-    public GetMediaMetaDataDirector withTagKey(Optional<String> tagKey) {
         Utils.checkNotNull(tagKey, "tagKey");
         this.tagKey = tagKey;
         return this;
     }
 
     /**
-     * The URL of the thumbnail image for the director.
+     * The absolute URL of the thumbnail image for the director.
      */
     public GetMediaMetaDataDirector withThumb(String thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -174,7 +165,7 @@ public class GetMediaMetaDataDirector {
     }
 
     /**
-     * The URL of the thumbnail image for the director.
+     * The absolute URL of the thumbnail image for the director.
      */
     public GetMediaMetaDataDirector withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -228,7 +219,7 @@ public class GetMediaMetaDataDirector {
  
         private String filter;
  
-        private Optional<String> tagKey = Optional.empty();
+        private String tagKey;
  
         private Optional<String> thumb = Optional.empty();
         
@@ -264,25 +255,16 @@ public class GetMediaMetaDataDirector {
         }
 
         /**
-         * A unique key associated with the director's tag, used for internal identification.
+         * A unique 24-character hexadecimal key associated with the director's tag, used for internal identification.
          */
         public Builder tagKey(String tagKey) {
-            Utils.checkNotNull(tagKey, "tagKey");
-            this.tagKey = Optional.ofNullable(tagKey);
-            return this;
-        }
-
-        /**
-         * A unique key associated with the director's tag, used for internal identification.
-         */
-        public Builder tagKey(Optional<String> tagKey) {
             Utils.checkNotNull(tagKey, "tagKey");
             this.tagKey = tagKey;
             return this;
         }
 
         /**
-         * The URL of the thumbnail image for the director.
+         * The absolute URL of the thumbnail image for the director.
          */
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -291,7 +273,7 @@ public class GetMediaMetaDataDirector {
         }
 
         /**
-         * The URL of the thumbnail image for the director.
+         * The absolute URL of the thumbnail image for the director.
          */
         public Builder thumb(Optional<String> thumb) {
             Utils.checkNotNull(thumb, "thumb");

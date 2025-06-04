@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Long;
+import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -19,8 +19,12 @@ import java.util.Objects;
  */
 public class Genre {
 
+    /**
+     * The unique identifier for the genre.
+     * NOTE: This is different for each Plex server and is not globally unique.
+     */
     @JsonProperty("id")
-    private long id;
+    private int id;
 
     @JsonProperty("filter")
     private String filter;
@@ -33,7 +37,7 @@ public class Genre {
 
     @JsonCreator
     public Genre(
-            @JsonProperty("id") long id,
+            @JsonProperty("id") int id,
             @JsonProperty("filter") String filter,
             @JsonProperty("tag") String tag) {
         Utils.checkNotNull(id, "id");
@@ -44,8 +48,12 @@ public class Genre {
         this.tag = tag;
     }
 
+    /**
+     * The unique identifier for the genre.
+     * NOTE: This is different for each Plex server and is not globally unique.
+     */
     @JsonIgnore
-    public long id() {
+    public int id() {
         return id;
     }
 
@@ -66,7 +74,11 @@ public class Genre {
         return new Builder();
     }    
 
-    public Genre withId(long id) {
+    /**
+     * The unique identifier for the genre.
+     * NOTE: This is different for each Plex server and is not globally unique.
+     */
+    public Genre withId(int id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
@@ -121,7 +133,7 @@ public class Genre {
     
     public final static class Builder {
  
-        private Long id;
+        private Integer id;
  
         private String filter;
  
@@ -131,7 +143,11 @@ public class Genre {
           // force use of static builder() method
         }
 
-        public Builder id(long id) {
+        /**
+         * The unique identifier for the genre.
+         * NOTE: This is different for each Plex server and is not globally unique.
+         */
+        public Builder id(int id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;

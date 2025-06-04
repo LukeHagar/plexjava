@@ -5,15 +5,12 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * GetMediaMetaDataCountry
@@ -22,6 +19,10 @@ import java.util.Optional;
  */
 public class GetMediaMetaDataCountry {
 
+    /**
+     * The unique identifier for the country.
+     * NOTE: This is different for each Plex server and is not globally unique.
+     */
     @JsonProperty("id")
     private int id;
 
@@ -31,15 +32,14 @@ public class GetMediaMetaDataCountry {
     @JsonProperty("tag")
     private String tag;
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("filter")
-    private Optional<String> filter;
+    private String filter;
 
     @JsonCreator
     public GetMediaMetaDataCountry(
             @JsonProperty("id") int id,
             @JsonProperty("tag") String tag,
-            @JsonProperty("filter") Optional<String> filter) {
+            @JsonProperty("filter") String filter) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(tag, "tag");
         Utils.checkNotNull(filter, "filter");
@@ -47,13 +47,11 @@ public class GetMediaMetaDataCountry {
         this.tag = tag;
         this.filter = filter;
     }
-    
-    public GetMediaMetaDataCountry(
-            int id,
-            String tag) {
-        this(id, tag, Optional.empty());
-    }
 
+    /**
+     * The unique identifier for the country.
+     * NOTE: This is different for each Plex server and is not globally unique.
+     */
     @JsonIgnore
     public int id() {
         return id;
@@ -68,7 +66,7 @@ public class GetMediaMetaDataCountry {
     }
 
     @JsonIgnore
-    public Optional<String> filter() {
+    public String filter() {
         return filter;
     }
 
@@ -76,6 +74,10 @@ public class GetMediaMetaDataCountry {
         return new Builder();
     }    
 
+    /**
+     * The unique identifier for the country.
+     * NOTE: This is different for each Plex server and is not globally unique.
+     */
     public GetMediaMetaDataCountry withId(int id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
@@ -92,12 +94,6 @@ public class GetMediaMetaDataCountry {
     }
 
     public GetMediaMetaDataCountry withFilter(String filter) {
-        Utils.checkNotNull(filter, "filter");
-        this.filter = Optional.ofNullable(filter);
-        return this;
-    }
-
-    public GetMediaMetaDataCountry withFilter(Optional<String> filter) {
         Utils.checkNotNull(filter, "filter");
         this.filter = filter;
         return this;
@@ -141,12 +137,16 @@ public class GetMediaMetaDataCountry {
  
         private String tag;
  
-        private Optional<String> filter = Optional.empty();
+        private String filter;
         
         private Builder() {
           // force use of static builder() method
         }
 
+        /**
+         * The unique identifier for the country.
+         * NOTE: This is different for each Plex server and is not globally unique.
+         */
         public Builder id(int id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
@@ -163,12 +163,6 @@ public class GetMediaMetaDataCountry {
         }
 
         public Builder filter(String filter) {
-            Utils.checkNotNull(filter, "filter");
-            this.filter = Optional.ofNullable(filter);
-            return this;
-        }
-
-        public Builder filter(Optional<String> filter) {
             Utils.checkNotNull(filter, "filter");
             this.filter = filter;
             return this;

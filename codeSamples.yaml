@@ -363,7 +363,7 @@ actions:
                         .build();
 
                     StopTaskResponse res = sdk.butler().stopTask()
-                            .taskName(PathParamTaskName.BACKUP_DATABASE)
+                            .taskName(PathParamTaskName.CLEAN_OLD_CACHE_FILES)
                             .call();
 
                     // handle response
@@ -393,7 +393,7 @@ actions:
                         .build();
 
                     StartTaskResponse res = sdk.butler().startTask()
-                            .taskName(TaskName.CLEAN_OLD_BUNDLES)
+                            .taskName(TaskName.REFRESH_PERIODIC_METADATA)
                             .call();
 
                     // handle response
@@ -629,9 +629,10 @@ actions:
                         .build();
 
                     GetRecentlyAddedRequest req = GetRecentlyAddedRequest.builder()
-                            .contentDirectoryID(470161L)
+                            .contentDirectoryID(39486L)
                             .type(Type.TvShow)
                             .sectionID(2L)
+                            .includeMeta(IncludeMeta.Enable)
                             .build();
 
                     GetRecentlyAddedResponse res = sdk.hubs().getRecentlyAdded()
@@ -666,7 +667,8 @@ actions:
                         .build();
 
                     PerformSearchResponse res = sdk.search().performSearch()
-                            .query("dylan")
+                            .query("arnold")
+                            .limit(5)
                             .call();
 
                     // handle response
@@ -696,6 +698,7 @@ actions:
 
                     PerformVoiceSearchResponse res = sdk.search().performVoiceSearch()
                             .query("dead+poop")
+                            .limit(5)
                             .call();
 
                     // handle response
@@ -724,7 +727,7 @@ actions:
                         .build();
 
                     GetLibraryHubsResponse res = sdk.hubs().getLibraryHubs()
-                            .sectionId(6728.76)
+                            .sectionId(492.74)
                             .call();
 
                     if (res.object().isPresent()) {
@@ -771,8 +774,7 @@ actions:
             import dev.plexapi.sdk.PlexAPI;
             import dev.plexapi.sdk.models.errors.GetTopWatchedContentBadRequest;
             import dev.plexapi.sdk.models.errors.GetTopWatchedContentUnauthorized;
-            import dev.plexapi.sdk.models.operations.GetTopWatchedContentQueryParamType;
-            import dev.plexapi.sdk.models.operations.GetTopWatchedContentResponse;
+            import dev.plexapi.sdk.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -784,8 +786,8 @@ actions:
                         .build();
 
                     GetTopWatchedContentResponse res = sdk.library().getTopWatchedContent()
-                            .includeGuids(1L)
                             .type(GetTopWatchedContentQueryParamType.TvShow)
+                            .includeGuids(GetTopWatchedContentQueryParamIncludeGuids.Enable)
                             .call();
 
                     if (res.object().isPresent()) {
@@ -846,7 +848,7 @@ actions:
                         .build();
 
                     GetMediaMetaDataRequest req = GetMediaMetaDataRequest.builder()
-                            .ratingKey(9518L)
+                            .ratingKey("21119,21617")
                             .includeConcerts(true)
                             .includeExtras(true)
                             .includeOnDeck(true)
@@ -992,7 +994,7 @@ actions:
                         .build();
 
                     GetMetadataChildrenResponse res = sdk.library().getMetadataChildren()
-                            .ratingKey(1539.14)
+                            .ratingKey(2403.67)
                             .includeElements("Stream")
                             .call();
 
@@ -1139,6 +1141,7 @@ actions:
                                 16L,
                                 17L))
                             .sectionID(2L)
+                            .includeMeta(QueryParamIncludeMeta.Enable)
                             .build();
 
                     GetRecentlyAddedLibraryResponse res = sdk.library().getRecentlyAddedLibrary()
@@ -1178,6 +1181,8 @@ actions:
                             .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
                             .searchTypes(List.of(
                                 SearchTypes.PEOPLE))
+                            .includeCollections(GetSearchAllLibrariesQueryParamIncludeCollections.Enable)
+                            .includeExternalMedia(GetSearchAllLibrariesQueryParamIncludeExternalMedia.Enable)
                             .build();
 
                     GetSearchAllLibrariesResponse res = sdk.library().getSearchAllLibraries()
@@ -1242,7 +1247,7 @@ actions:
                         .build();
 
                     GetWatchListRequest req = GetWatchListRequest.builder()
-                            .filter(Filter.AVAILABLE)
+                            .filter(Filter.RELEASED)
                             .xPlexToken("CV5xoxjTpFKUzBTShsaf")
                             .build();
 
@@ -1296,6 +1301,7 @@ actions:
             import dev.plexapi.sdk.models.errors.GetLibraryDetailsBadRequest;
             import dev.plexapi.sdk.models.errors.GetLibraryDetailsUnauthorized;
             import dev.plexapi.sdk.models.operations.GetLibraryDetailsResponse;
+            import dev.plexapi.sdk.models.operations.IncludeDetails;
             import java.lang.Exception;
 
             public class Application {
@@ -1307,6 +1313,7 @@ actions:
                         .build();
 
                     GetLibraryDetailsResponse res = sdk.library().getLibraryDetails()
+                            .includeDetails(IncludeDetails.ZERO)
                             .sectionKey(9518)
                             .call();
 
@@ -1357,25 +1364,30 @@ actions:
             package hello.world;
 
             import dev.plexapi.sdk.PlexAPI;
-            import dev.plexapi.sdk.models.errors.GetAllMediaLibraryBadRequest;
-            import dev.plexapi.sdk.models.errors.GetAllMediaLibraryUnauthorized;
+            import dev.plexapi.sdk.models.errors.GetLibrarySectionsAllBadRequest;
+            import dev.plexapi.sdk.models.errors.GetLibrarySectionsAllUnauthorized;
             import dev.plexapi.sdk.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
 
-                public static void main(String[] args) throws GetAllMediaLibraryBadRequest, GetAllMediaLibraryUnauthorized, Exception {
+                public static void main(String[] args) throws GetLibrarySectionsAllBadRequest, GetLibrarySectionsAllUnauthorized, Exception {
 
                     PlexAPI sdk = PlexAPI.builder()
                             .accessToken("<YOUR_API_KEY_HERE>")
                         .build();
 
-                    GetAllMediaLibraryRequest req = GetAllMediaLibraryRequest.builder()
+                    GetLibrarySectionsAllRequest req = GetLibrarySectionsAllRequest.builder()
                             .sectionKey(9518)
-                            .type(GetAllMediaLibraryQueryParamType.TvShow)
+                            .type(GetLibrarySectionsAllQueryParamType.TvShow)
+                            .includeMeta(GetLibrarySectionsAllQueryParamIncludeMeta.Enable)
+                            .includeGuids(QueryParamIncludeGuids.Enable)
+                            .includeAdvanced(IncludeAdvanced.Enable)
+                            .includeCollections(QueryParamIncludeCollections.Enable)
+                            .includeExternalMedia(QueryParamIncludeExternalMedia.Enable)
                             .build();
 
-                    GetAllMediaLibraryResponse res = sdk.library().getAllMediaLibrary()
+                    GetLibrarySectionsAllResponse res = sdk.library().getLibrarySectionsAll()
                             .request(req)
                             .call();
 
@@ -1474,7 +1486,7 @@ actions:
                         .build();
 
                     GetRefreshLibraryMetadataResponse res = sdk.library().getRefreshLibraryMetadata()
-                            .force(Force.ONE)
+                            .force(Force.ZERO)
                             .sectionKey(9518)
                             .call();
 
@@ -1537,9 +1549,11 @@ actions:
                         .build();
 
                     GetLibraryItemsRequest req = GetLibraryItemsRequest.builder()
-                            .tag(Tag.EDITION)
+                            .tag(Tag.NEWEST)
                             .type(GetLibraryItemsQueryParamType.TvShow)
                             .sectionKey(9518)
+                            .includeGuids(IncludeGuids.Enable)
+                            .includeMeta(GetLibraryItemsQueryParamIncludeMeta.Enable)
                             .build();
 
                     GetLibraryItemsResponse res = sdk.library().getLibraryItems()
@@ -1731,8 +1745,8 @@ actions:
                             .height(165)
                             .opacity(100L)
                             .blur(0)
-                            .minSize(MinSize.ONE)
-                            .upscale(Upscale.ONE)
+                            .minSize(MinSize.ZERO)
+                            .upscale(Upscale.ZERO)
                             .url("/library/metadata/49564/thumb/1654258204")
                             .build();
 
@@ -1804,7 +1818,7 @@ actions:
                         .build();
 
                     GetTokenByPinIdRequest req = GetTokenByPinIdRequest.builder()
-                            .pinID(408895L)
+                            .pinID(232248L)
                             .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
                             .clientName("Plex for Roku")
                             .deviceNickname("Roku 3")
@@ -1875,9 +1889,9 @@ actions:
 
                     CreatePlaylistRequest req = CreatePlaylistRequest.builder()
                             .title("<value>")
-                            .type(CreatePlaylistQueryParamType.PHOTO)
+                            .type(CreatePlaylistQueryParamType.AUDIO)
                             .smart(Smart.ONE)
-                            .uri("https://hoarse-testing.info/")
+                            .uri("https://short-term-disconnection.name/")
                             .build();
 
                     CreatePlaylistResponse res = sdk.playlists().createPlaylist()
@@ -1914,7 +1928,7 @@ actions:
 
                     UploadPlaylistResponse res = sdk.playlists().uploadPlaylist()
                             .path("/home/barkley/playlist.m3u")
-                            .force(QueryParamForce.ZERO)
+                            .force(QueryParamForce.ONE)
                             .sectionID(1L)
                             .call();
 
@@ -1944,7 +1958,7 @@ actions:
                         .build();
 
                     DeletePlaylistResponse res = sdk.playlists().deletePlaylist()
-                            .playlistID(216.22)
+                            .playlistID(3432.93)
                             .call();
 
                     // handle response
@@ -1973,7 +1987,7 @@ actions:
                         .build();
 
                     GetPlaylistResponse res = sdk.playlists().getPlaylist()
-                            .playlistID(4109.48)
+                            .playlistID(8419.53)
                             .call();
 
                     if (res.object().isPresent()) {
@@ -2004,7 +2018,7 @@ actions:
                         .build();
 
                     UpdatePlaylistResponse res = sdk.playlists().updatePlaylist()
-                            .playlistID(3915)
+                            .playlistID(1579.66)
                             .call();
 
                     // handle response
@@ -2033,7 +2047,7 @@ actions:
                         .build();
 
                     ClearPlaylistContentsResponse res = sdk.playlists().clearPlaylistContents()
-                            .playlistID(1893.18)
+                            .playlistID(4137.37)
                             .call();
 
                     // handle response
@@ -2063,7 +2077,7 @@ actions:
                         .build();
 
                     GetPlaylistContentsResponse res = sdk.playlists().getPlaylistContents()
-                            .playlistID(5004.46)
+                            .playlistID(5535.42)
                             .type(GetPlaylistContentsQueryParamType.TvShow)
                             .call();
 
@@ -2095,7 +2109,7 @@ actions:
                         .build();
 
                     AddPlaylistContentsResponse res = sdk.playlists().addPlaylistContents()
-                            .playlistID(8502.01)
+                            .playlistID(7013.44)
                             .uri("server://12345/com.plexapp.plugins.library/library/metadata/1")
                             .playQueueID(123)
                             .call();
@@ -2116,7 +2130,7 @@ actions:
             import dev.plexapi.sdk.PlexAPI;
             import dev.plexapi.sdk.models.errors.GetServerResourcesBadRequest;
             import dev.plexapi.sdk.models.errors.GetServerResourcesUnauthorized;
-            import dev.plexapi.sdk.models.operations.GetServerResourcesResponse;
+            import dev.plexapi.sdk.models.operations.*;
             import java.lang.Exception;
 
             public class Application {
@@ -2128,6 +2142,9 @@ actions:
                         .build();
 
                     GetServerResourcesResponse res = sdk.plex().getServerResources()
+                            .includeHttps(IncludeHttps.Enable)
+                            .includeRelay(IncludeRelay.Enable)
+                            .includeIPv6(IncludeIPv6.Enable)
                             .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
                             .call();
 
@@ -2190,7 +2207,7 @@ actions:
                         .build();
 
                     GetSourceConnectionInformationResponse res = sdk.authentication().getSourceConnectionInformation()
-                            .source("provider://provider-identifier")
+                            .source("server://client-identifier")
                             .call();
 
                     // handle response

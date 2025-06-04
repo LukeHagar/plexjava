@@ -57,7 +57,7 @@ public class GetSearchAllLibrariesMetadata {
     private Optional<String> librarySectionKey;
 
     /**
-     * The type of media content
+     * The type of media content in the Plex library. This can represent videos, music, or photos.
      */
     @JsonProperty("type")
     private GetSearchAllLibrariesType type;
@@ -647,7 +647,7 @@ public class GetSearchAllLibrariesMetadata {
     }
 
     /**
-     * The type of media content
+     * The type of media content in the Plex library. This can represent videos, music, or photos.
      */
     @JsonIgnore
     public GetSearchAllLibrariesType type() {
@@ -1124,7 +1124,7 @@ public class GetSearchAllLibrariesMetadata {
     }
 
     /**
-     * The type of media content
+     * The type of media content in the Plex library. This can represent videos, music, or photos.
      */
     public GetSearchAllLibrariesMetadata withType(GetSearchAllLibrariesType type) {
         Utils.checkNotNull(type, "type");
@@ -2471,7 +2471,7 @@ public class GetSearchAllLibrariesMetadata {
         }
 
         /**
-         * The type of media content
+         * The type of media content in the Plex library. This can represent videos, music, or photos.
          */
         public Builder type(GetSearchAllLibrariesType type) {
             Utils.checkNotNull(type, "type");

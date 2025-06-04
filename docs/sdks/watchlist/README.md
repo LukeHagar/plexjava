@@ -34,7 +34,7 @@ public class Application {
             .build();
 
         GetWatchListRequest req = GetWatchListRequest.builder()
-                .filter(Filter.AVAILABLE)
+                .filter(Filter.RELEASED)
                 .xPlexToken("CV5xoxjTpFKUzBTShsaf")
                 .build();
 

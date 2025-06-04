@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Long;
+import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -20,7 +20,7 @@ import java.util.Objects;
 public class Similar {
 
     @JsonProperty("id")
-    private long id;
+    private int id;
 
     @JsonProperty("filter")
     private String filter;
@@ -30,7 +30,7 @@ public class Similar {
 
     @JsonCreator
     public Similar(
-            @JsonProperty("id") long id,
+            @JsonProperty("id") int id,
             @JsonProperty("filter") String filter,
             @JsonProperty("tag") String tag) {
         Utils.checkNotNull(id, "id");
@@ -42,7 +42,7 @@ public class Similar {
     }
 
     @JsonIgnore
-    public long id() {
+    public int id() {
         return id;
     }
 
@@ -60,7 +60,7 @@ public class Similar {
         return new Builder();
     }    
 
-    public Similar withId(long id) {
+    public Similar withId(int id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
@@ -112,7 +112,7 @@ public class Similar {
     
     public final static class Builder {
  
-        private Long id;
+        private Integer id;
  
         private String filter;
  
@@ -122,7 +122,7 @@ public class Similar {
           // force use of static builder() method
         }
 
-        public Builder id(long id) {
+        public Builder id(int id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;

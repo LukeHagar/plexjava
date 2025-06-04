@@ -225,9 +225,9 @@ public class SDKMethodInterfaces {
             GetLibraryItemsRequest request) throws Exception;
     }
 
-    public interface MethodCallGetAllMediaLibrary {
-        GetAllMediaLibraryResponse getAllMediaLibrary(
-            GetAllMediaLibraryRequest request) throws Exception;
+    public interface MethodCallGetLibrarySectionsAll {
+        GetLibrarySectionsAllResponse getLibrarySectionsAll(
+            GetLibrarySectionsAllRequest request) throws Exception;
     }
 
     public interface MethodCallGetRefreshLibraryMetadata {
@@ -302,8 +302,8 @@ public class SDKMethodInterfaces {
 
     public interface MethodCallGetTopWatchedContent {
         GetTopWatchedContentResponse getTopWatchedContent(
-            Optional<Long> includeGuids,
-            GetTopWatchedContentQueryParamType type) throws Exception;
+            GetTopWatchedContentQueryParamType type,
+            Optional<? extends GetTopWatchedContentQueryParamIncludeGuids> includeGuids) throws Exception;
     }
 
     public interface MethodCallGetWatchList {

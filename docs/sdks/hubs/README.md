@@ -87,9 +87,10 @@ public class Application {
             .build();
 
         GetRecentlyAddedRequest req = GetRecentlyAddedRequest.builder()
-                .contentDirectoryID(470161L)
+                .contentDirectoryID(39486L)
                 .type(Type.TvShow)
                 .sectionID(2L)
+                .includeMeta(IncludeMeta.Enable)
                 .build();
 
         GetRecentlyAddedResponse res = sdk.hubs().getRecentlyAdded()
@@ -144,7 +145,7 @@ public class Application {
             .build();
 
         GetLibraryHubsResponse res = sdk.hubs().getLibraryHubs()
-                .sectionId(6728.76)
+                .sectionId(492.74)
                 .call();
 
         if (res.object().isPresent()) {

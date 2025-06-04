@@ -3,31 +3,23 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
-import java.lang.Long;
 import java.util.Optional;
 
 public class GetTopWatchedContentRequestBuilder {
 
-    private Optional<Long> includeGuids = Optional.empty();
     private GetTopWatchedContentQueryParamType type;
+    private Optional<? extends GetTopWatchedContentQueryParamIncludeGuids> includeGuids = Utils.readDefaultOrConstValue(
+                            "includeGuids",
+                            "0",
+                            new TypeReference<Optional<? extends GetTopWatchedContentQueryParamIncludeGuids>>() {});
     private final SDKMethodInterfaces.MethodCallGetTopWatchedContent sdk;
 
     public GetTopWatchedContentRequestBuilder(SDKMethodInterfaces.MethodCallGetTopWatchedContent sdk) {
         this.sdk = sdk;
-    }
-                
-    public GetTopWatchedContentRequestBuilder includeGuids(long includeGuids) {
-        Utils.checkNotNull(includeGuids, "includeGuids");
-        this.includeGuids = Optional.of(includeGuids);
-        return this;
-    }
-
-    public GetTopWatchedContentRequestBuilder includeGuids(Optional<Long> includeGuids) {
-        Utils.checkNotNull(includeGuids, "includeGuids");
-        this.includeGuids = includeGuids;
-        return this;
     }
 
     public GetTopWatchedContentRequestBuilder type(GetTopWatchedContentQueryParamType type) {
@@ -35,11 +27,31 @@ public class GetTopWatchedContentRequestBuilder {
         this.type = type;
         return this;
     }
+                
+    public GetTopWatchedContentRequestBuilder includeGuids(GetTopWatchedContentQueryParamIncludeGuids includeGuids) {
+        Utils.checkNotNull(includeGuids, "includeGuids");
+        this.includeGuids = Optional.of(includeGuids);
+        return this;
+    }
+
+    public GetTopWatchedContentRequestBuilder includeGuids(Optional<? extends GetTopWatchedContentQueryParamIncludeGuids> includeGuids) {
+        Utils.checkNotNull(includeGuids, "includeGuids");
+        this.includeGuids = includeGuids;
+        return this;
+    }
 
     public GetTopWatchedContentResponse call() throws Exception {
-
+        if (includeGuids == null) {
+            includeGuids = _SINGLETON_VALUE_IncludeGuids.value();
+        }
         return sdk.getTopWatchedContent(
-            includeGuids,
-            type);
+            type,
+            includeGuids);
     }
+
+    private static final LazySingletonValue<Optional<? extends GetTopWatchedContentQueryParamIncludeGuids>> _SINGLETON_VALUE_IncludeGuids =
+            new LazySingletonValue<>(
+                    "includeGuids",
+                    "0",
+                    new TypeReference<Optional<? extends GetTopWatchedContentQueryParamIncludeGuids>>() {});
 }

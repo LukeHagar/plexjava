@@ -36,14 +36,13 @@ public class Producer {
     private String tag;
 
     /**
-     * A unique key associated with the producer's tag, used for internal identification.
+     * A 24-character hexadecimal unique key associated with the producer's tag, used for internal identification.
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tagKey")
-    private Optional<String> tagKey;
+    private String tagKey;
 
     /**
-     * The URL of the thumbnail image for the actor.
+     * The absolute URL of the thumbnail image for the producer.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
@@ -54,7 +53,7 @@ public class Producer {
             @JsonProperty("id") int id,
             @JsonProperty("filter") String filter,
             @JsonProperty("tag") String tag,
-            @JsonProperty("tagKey") Optional<String> tagKey,
+            @JsonProperty("tagKey") String tagKey,
             @JsonProperty("thumb") Optional<String> thumb) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(filter, "filter");
@@ -71,8 +70,9 @@ public class Producer {
     public Producer(
             int id,
             String filter,
-            String tag) {
-        this(id, filter, tag, Optional.empty(), Optional.empty());
+            String tag,
+            String tagKey) {
+        this(id, filter, tag, tagKey, Optional.empty());
     }
 
     /**
@@ -100,15 +100,15 @@ public class Producer {
     }
 
     /**
-     * A unique key associated with the producer's tag, used for internal identification.
+     * A 24-character hexadecimal unique key associated with the producer's tag, used for internal identification.
      */
     @JsonIgnore
-    public Optional<String> tagKey() {
+    public String tagKey() {
         return tagKey;
     }
 
     /**
-     * The URL of the thumbnail image for the actor.
+     * The absolute URL of the thumbnail image for the producer.
      */
     @JsonIgnore
     public Optional<String> thumb() {
@@ -147,25 +147,16 @@ public class Producer {
     }
 
     /**
-     * A unique key associated with the producer's tag, used for internal identification.
+     * A 24-character hexadecimal unique key associated with the producer's tag, used for internal identification.
      */
     public Producer withTagKey(String tagKey) {
-        Utils.checkNotNull(tagKey, "tagKey");
-        this.tagKey = Optional.ofNullable(tagKey);
-        return this;
-    }
-
-    /**
-     * A unique key associated with the producer's tag, used for internal identification.
-     */
-    public Producer withTagKey(Optional<String> tagKey) {
         Utils.checkNotNull(tagKey, "tagKey");
         this.tagKey = tagKey;
         return this;
     }
 
     /**
-     * The URL of the thumbnail image for the actor.
+     * The absolute URL of the thumbnail image for the producer.
      */
     public Producer withThumb(String thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -174,7 +165,7 @@ public class Producer {
     }
 
     /**
-     * The URL of the thumbnail image for the actor.
+     * The absolute URL of the thumbnail image for the producer.
      */
     public Producer withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -228,7 +219,7 @@ public class Producer {
  
         private String tag;
  
-        private Optional<String> tagKey = Optional.empty();
+        private String tagKey;
  
         private Optional<String> thumb = Optional.empty();
         
@@ -264,25 +255,16 @@ public class Producer {
         }
 
         /**
-         * A unique key associated with the producer's tag, used for internal identification.
+         * A 24-character hexadecimal unique key associated with the producer's tag, used for internal identification.
          */
         public Builder tagKey(String tagKey) {
-            Utils.checkNotNull(tagKey, "tagKey");
-            this.tagKey = Optional.ofNullable(tagKey);
-            return this;
-        }
-
-        /**
-         * A unique key associated with the producer's tag, used for internal identification.
-         */
-        public Builder tagKey(Optional<String> tagKey) {
             Utils.checkNotNull(tagKey, "tagKey");
             this.tagKey = tagKey;
             return this;
         }
 
         /**
-         * The URL of the thumbnail image for the actor.
+         * The absolute URL of the thumbnail image for the producer.
          */
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -291,7 +273,7 @@ public class Producer {
         }
 
         /**
-         * The URL of the thumbnail image for the actor.
+         * The absolute URL of the thumbnail image for the producer.
          */
         public Builder thumb(Optional<String> thumb) {
             Utils.checkNotNull(thumb, "thumb");

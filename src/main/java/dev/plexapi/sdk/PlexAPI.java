@@ -5,8 +5,8 @@ package dev.plexapi.sdk;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import dev.plexapi.sdk.utils.HTTPClient;
+import dev.plexapi.sdk.utils.Hook.SdkInitData;
 import dev.plexapi.sdk.utils.RetryConfig;
-import dev.plexapi.sdk.utils.SpeakeasyHTTPClient;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.String;
 import java.util.Map;
@@ -52,7 +52,7 @@ public class PlexAPI {
         /**
          * The full address of your Plex Server
          */
-        "https://10.10.10.47:32400",
+        "{protocol}://{ip}:{port}",
     };
 
     /**
@@ -273,7 +273,7 @@ public class PlexAPI {
         return users;
     }
 
-    private final SDKConfiguration sdkConfiguration;
+    private SDKConfiguration sdkConfiguration;
 
     /**
      * The Builder class allows the configuration of a new instance of the SDK.
@@ -281,6 +281,9 @@ public class PlexAPI {
     public static class Builder {
 
         private final SDKConfiguration sdkConfiguration = new SDKConfiguration();
+        private String serverUrl;
+        private String server;
+        
 
         private Builder() {
         }
@@ -292,7 +295,7 @@ public class PlexAPI {
          * @return The builder instance.
          */
         public Builder client(HTTPClient client) {
-            this.sdkConfiguration.defaultClient = client;
+            this.sdkConfiguration.setClient(client);
             return this;
         }
         /**
@@ -302,9 +305,9 @@ public class PlexAPI {
          * @return The builder instance.
          */
         public Builder accessToken(String accessToken) {
-            this.sdkConfiguration.securitySource = SecuritySource.of(dev.plexapi.sdk.models.shared.Security.builder()
+            this.sdkConfiguration.setSecuritySource(SecuritySource.of(dev.plexapi.sdk.models.shared.Security.builder()
               .accessToken(accessToken)
-              .build());
+              .build()));
             return this;
         }
 
@@ -315,7 +318,8 @@ public class PlexAPI {
          * @return The builder instance.
          */
         public Builder securitySource(SecuritySource securitySource) {
-            this.sdkConfiguration.securitySource = securitySource;
+            Utils.checkNotNull(securitySource, "securitySource");
+            this.sdkConfiguration.setSecuritySource(securitySource);
             return this;
         }
         
@@ -326,7 +330,7 @@ public class PlexAPI {
          * @return The builder instance.
          */
         public Builder serverURL(String serverUrl) {
-            this.sdkConfiguration.serverUrl = serverUrl;
+            this.serverUrl = serverUrl;
             return this;
         }
 
@@ -338,7 +342,7 @@ public class PlexAPI {
          * @return The builder instance.
          */
         public Builder serverURL(String serverUrl, Map<String, String> params) {
-            this.sdkConfiguration.serverUrl = Utils.templateUrl(serverUrl, params);
+            this.serverUrl = Utils.templateUrl(serverUrl, params);
             return this;
         }
         
@@ -349,8 +353,8 @@ public class PlexAPI {
          * @return The builder instance.
          */
         public Builder serverIndex(int serverIdx) {
-            this.sdkConfiguration.serverIdx = serverIdx;
-            this.sdkConfiguration.serverUrl = SERVERS[serverIdx];
+            this.sdkConfiguration.setServerIdx(serverIdx);
+            this.serverUrl= SERVERS[serverIdx];
             return this;
         }
         
@@ -361,7 +365,7 @@ public class PlexAPI {
          * @return The builder instance.
          */
         public Builder retryConfig(RetryConfig retryConfig) {
-            this.sdkConfiguration.retryConfig = Optional.of(retryConfig);
+            this.sdkConfiguration.setRetryConfig(Optional.of(retryConfig));
             return this;
         }
         /**
@@ -400,7 +404,7 @@ public class PlexAPI {
          * @return The builder instance.
          */
         public Builder protocol(ServerProtocol protocol) {
-            for (Map<String, String> server : this.sdkConfiguration.serverDefaults) {
+            for (Map<String, String> server : this.sdkConfiguration.serverVariables()) {
                 if (!server.containsKey("protocol")) {
                     continue;
                 }
@@ -417,7 +421,7 @@ public class PlexAPI {
          * @return The builder instance.
          */
         public Builder ip(String ip) {
-            for (Map<String, String> server : this.sdkConfiguration.serverDefaults) {
+            for (Map<String, String> server : this.sdkConfiguration.serverVariables()) {
                 if (!server.containsKey("ip")) {
                     continue;
                 }
@@ -434,7 +438,7 @@ public class PlexAPI {
          * @return The builder instance.
          */
         public Builder port(String port) {
-            for (Map<String, String> server : this.sdkConfiguration.serverDefaults) {
+            for (Map<String, String> server : this.sdkConfiguration.serverVariables()) {
                 if (!server.containsKey("port")) {
                     continue;
                 }
@@ -462,19 +466,11 @@ public class PlexAPI {
          * @return The SDK instance.
          */
         public PlexAPI build() {
-            if (sdkConfiguration.defaultClient == null) {
-                sdkConfiguration.defaultClient = new SpeakeasyHTTPClient();
+            if (serverUrl == null || serverUrl.isBlank()) {
+                serverUrl = SERVERS[0];
+                sdkConfiguration.setServerIdx(0);
             }
-	        if (sdkConfiguration.securitySource == null) {
-	    	    sdkConfiguration.securitySource = SecuritySource.of(null);
-	        }
-            if (sdkConfiguration.serverUrl == null || sdkConfiguration.serverUrl.isBlank()) {
-                sdkConfiguration.serverUrl = SERVERS[0];
-                sdkConfiguration.serverIdx = 0;
-            }
-            if (sdkConfiguration.serverUrl.endsWith("/")) {
-                sdkConfiguration.serverUrl = sdkConfiguration.serverUrl.substring(0, sdkConfiguration.serverUrl.length() - 1);
-            }
+            sdkConfiguration.setServerUrl(serverUrl);
             return new PlexAPI(sdkConfiguration);
         }
     }
@@ -490,6 +486,7 @@ public class PlexAPI {
 
     private PlexAPI(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+        this.sdkConfiguration.initialize();
         this.server = new Server(sdkConfiguration);
         this.media = new Media(sdkConfiguration);
         this.video = new Video(sdkConfiguration);
@@ -507,6 +504,9 @@ public class PlexAPI {
         this.sessions = new Sessions(sdkConfiguration);
         this.updater = new Updater(sdkConfiguration);
         this.users = new Users(sdkConfiguration);
-        this.sdkConfiguration.initialize();
+        
+        SdkInitData data = this.sdkConfiguration.hooks().sdkInit(new SdkInitData(this.sdkConfiguration.resolvedServerUrl(), this.sdkConfiguration.client()));
+        this.sdkConfiguration.setServerUrl(data.baseUrl());
+        this.sdkConfiguration.setClient(data.client());
     }
 }

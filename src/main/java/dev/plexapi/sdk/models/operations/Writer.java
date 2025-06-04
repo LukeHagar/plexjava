@@ -36,33 +36,43 @@ public class Writer {
     private String tag;
 
     /**
-     * A unique key associated with the writers tag, used for internal identification.
+     * A 24-character hexadecimal unique key associated with the writer’s tag, used for internal identification.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tagKey")
     private Optional<String> tagKey;
+
+    /**
+     * The absolute URL of the thumbnail image for the writer.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("thumb")
+    private Optional<String> thumb;
 
     @JsonCreator
     public Writer(
             @JsonProperty("id") int id,
             @JsonProperty("filter") String filter,
             @JsonProperty("tag") String tag,
-            @JsonProperty("tagKey") Optional<String> tagKey) {
+            @JsonProperty("tagKey") Optional<String> tagKey,
+            @JsonProperty("thumb") Optional<String> thumb) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(filter, "filter");
         Utils.checkNotNull(tag, "tag");
         Utils.checkNotNull(tagKey, "tagKey");
+        Utils.checkNotNull(thumb, "thumb");
         this.id = id;
         this.filter = filter;
         this.tag = tag;
         this.tagKey = tagKey;
+        this.thumb = thumb;
     }
     
     public Writer(
             int id,
             String filter,
             String tag) {
-        this(id, filter, tag, Optional.empty());
+        this(id, filter, tag, Optional.empty(), Optional.empty());
     }
 
     /**
@@ -90,11 +100,19 @@ public class Writer {
     }
 
     /**
-     * A unique key associated with the writers tag, used for internal identification.
+     * A 24-character hexadecimal unique key associated with the writer’s tag, used for internal identification.
      */
     @JsonIgnore
     public Optional<String> tagKey() {
         return tagKey;
+    }
+
+    /**
+     * The absolute URL of the thumbnail image for the writer.
+     */
+    @JsonIgnore
+    public Optional<String> thumb() {
+        return thumb;
     }
 
     public final static Builder builder() {
@@ -129,7 +147,7 @@ public class Writer {
     }
 
     /**
-     * A unique key associated with the writers tag, used for internal identification.
+     * A 24-character hexadecimal unique key associated with the writer’s tag, used for internal identification.
      */
     public Writer withTagKey(String tagKey) {
         Utils.checkNotNull(tagKey, "tagKey");
@@ -138,11 +156,29 @@ public class Writer {
     }
 
     /**
-     * A unique key associated with the writers tag, used for internal identification.
+     * A 24-character hexadecimal unique key associated with the writer’s tag, used for internal identification.
      */
     public Writer withTagKey(Optional<String> tagKey) {
         Utils.checkNotNull(tagKey, "tagKey");
         this.tagKey = tagKey;
+        return this;
+    }
+
+    /**
+     * The absolute URL of the thumbnail image for the writer.
+     */
+    public Writer withThumb(String thumb) {
+        Utils.checkNotNull(thumb, "thumb");
+        this.thumb = Optional.ofNullable(thumb);
+        return this;
+    }
+
+    /**
+     * The absolute URL of the thumbnail image for the writer.
+     */
+    public Writer withThumb(Optional<String> thumb) {
+        Utils.checkNotNull(thumb, "thumb");
+        this.thumb = thumb;
         return this;
     }
 
@@ -160,7 +196,8 @@ public class Writer {
             Objects.deepEquals(this.id, other.id) &&
             Objects.deepEquals(this.filter, other.filter) &&
             Objects.deepEquals(this.tag, other.tag) &&
-            Objects.deepEquals(this.tagKey, other.tagKey);
+            Objects.deepEquals(this.tagKey, other.tagKey) &&
+            Objects.deepEquals(this.thumb, other.thumb);
     }
     
     @Override
@@ -169,7 +206,8 @@ public class Writer {
             id,
             filter,
             tag,
-            tagKey);
+            tagKey,
+            thumb);
     }
     
     @Override
@@ -178,7 +216,8 @@ public class Writer {
                 "id", id,
                 "filter", filter,
                 "tag", tag,
-                "tagKey", tagKey);
+                "tagKey", tagKey,
+                "thumb", thumb);
     }
     
     public final static class Builder {
@@ -190,6 +229,8 @@ public class Writer {
         private String tag;
  
         private Optional<String> tagKey = Optional.empty();
+ 
+        private Optional<String> thumb = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
@@ -223,7 +264,7 @@ public class Writer {
         }
 
         /**
-         * A unique key associated with the writers tag, used for internal identification.
+         * A 24-character hexadecimal unique key associated with the writer’s tag, used for internal identification.
          */
         public Builder tagKey(String tagKey) {
             Utils.checkNotNull(tagKey, "tagKey");
@@ -232,11 +273,29 @@ public class Writer {
         }
 
         /**
-         * A unique key associated with the writers tag, used for internal identification.
+         * A 24-character hexadecimal unique key associated with the writer’s tag, used for internal identification.
          */
         public Builder tagKey(Optional<String> tagKey) {
             Utils.checkNotNull(tagKey, "tagKey");
             this.tagKey = tagKey;
+            return this;
+        }
+
+        /**
+         * The absolute URL of the thumbnail image for the writer.
+         */
+        public Builder thumb(String thumb) {
+            Utils.checkNotNull(thumb, "thumb");
+            this.thumb = Optional.ofNullable(thumb);
+            return this;
+        }
+
+        /**
+         * The absolute URL of the thumbnail image for the writer.
+         */
+        public Builder thumb(Optional<String> thumb) {
+            Utils.checkNotNull(thumb, "thumb");
+            this.thumb = thumb;
             return this;
         }
         
@@ -245,7 +304,8 @@ public class Writer {
                 id,
                 filter,
                 tag,
-                tagKey);
+                tagKey,
+                thumb);
         }
     }
 }

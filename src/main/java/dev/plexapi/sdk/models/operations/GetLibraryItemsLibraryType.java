@@ -44,7 +44,7 @@ import java.util.Optional;
 /**
  * GetLibraryItemsLibraryType
  * 
- * <p>The type of media content
+ * <p>The type of media content in the Plex library. This can represent videos, music, or photos.
  */
 @JsonDeserialize(using = GetLibraryItemsLibraryType._Deserializer.class)
 @JsonSerialize(using = GetLibraryItemsLibraryType._Serializer.class)
@@ -56,6 +56,10 @@ public class GetLibraryItemsLibraryType {
     public static final GetLibraryItemsLibraryType Episode = new GetLibraryItemsLibraryType("episode");
     public static final GetLibraryItemsLibraryType Artist = new GetLibraryItemsLibraryType("artist");
     public static final GetLibraryItemsLibraryType Album = new GetLibraryItemsLibraryType("album");
+    public static final GetLibraryItemsLibraryType Track = new GetLibraryItemsLibraryType("track");
+    public static final GetLibraryItemsLibraryType PhotoAlbum = new GetLibraryItemsLibraryType("photoalbum");
+    public static final GetLibraryItemsLibraryType Photo = new GetLibraryItemsLibraryType("photo");
+    public static final GetLibraryItemsLibraryType Collection = new GetLibraryItemsLibraryType("collection");
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -133,6 +137,10 @@ public class GetLibraryItemsLibraryType {
         map.put("episode", Episode);
         map.put("artist", Artist);
         map.put("album", Album);
+        map.put("track", Track);
+        map.put("photoalbum", PhotoAlbum);
+        map.put("photo", Photo);
+        map.put("collection", Collection);
         return map;
     }
 
@@ -144,6 +152,10 @@ public class GetLibraryItemsLibraryType {
         map.put("episode", GetLibraryItemsLibraryTypeEnum.Episode);
         map.put("artist", GetLibraryItemsLibraryTypeEnum.Artist);
         map.put("album", GetLibraryItemsLibraryTypeEnum.Album);
+        map.put("track", GetLibraryItemsLibraryTypeEnum.Track);
+        map.put("photoalbum", GetLibraryItemsLibraryTypeEnum.PhotoAlbum);
+        map.put("photo", GetLibraryItemsLibraryTypeEnum.Photo);
+        map.put("collection", GetLibraryItemsLibraryTypeEnum.Collection);
         return map;
     }
     
@@ -184,7 +196,11 @@ public class GetLibraryItemsLibraryType {
         Season("season"),
         Episode("episode"),
         Artist("artist"),
-        Album("album"),;
+        Album("album"),
+        Track("track"),
+        PhotoAlbum("photoalbum"),
+        Photo("photo"),
+        Collection("collection"),;
 
         private final String value;
 

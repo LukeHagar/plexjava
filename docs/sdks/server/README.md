@@ -314,8 +314,8 @@ public class Application {
                 .height(165)
                 .opacity(100L)
                 .blur(0)
-                .minSize(MinSize.ONE)
-                .upscale(Upscale.ONE)
+                .minSize(MinSize.ZERO)
+                .upscale(Upscale.ZERO)
                 .url("/library/metadata/49564/thumb/1654258204")
                 .build();
 

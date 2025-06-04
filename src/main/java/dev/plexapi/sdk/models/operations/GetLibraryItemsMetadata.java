@@ -57,7 +57,7 @@ public class GetLibraryItemsMetadata {
     private Optional<String> librarySectionKey;
 
     /**
-     * The type of media content
+     * The type of media content in the Plex library. This can represent videos, music, or photos.
      */
     @JsonProperty("type")
     private GetLibraryItemsLibraryType type;
@@ -647,7 +647,7 @@ public class GetLibraryItemsMetadata {
     }
 
     /**
-     * The type of media content
+     * The type of media content in the Plex library. This can represent videos, music, or photos.
      */
     @JsonIgnore
     public GetLibraryItemsLibraryType type() {
@@ -1124,7 +1124,7 @@ public class GetLibraryItemsMetadata {
     }
 
     /**
-     * The type of media content
+     * The type of media content in the Plex library. This can represent videos, music, or photos.
      */
     public GetLibraryItemsMetadata withType(GetLibraryItemsLibraryType type) {
         Utils.checkNotNull(type, "type");
@@ -2471,7 +2471,7 @@ public class GetLibraryItemsMetadata {
         }
 
         /**
-         * The type of media content
+         * The type of media content in the Plex library. This can represent videos, music, or photos.
          */
         public Builder type(GetLibraryItemsLibraryType type) {
             Utils.checkNotNull(type, "type");

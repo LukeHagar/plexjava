@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.plexapi.sdk.utils.SpeakeasyMetadata;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -17,10 +16,10 @@ import java.util.Optional;
 public class GetMediaMetaDataRequest {
 
     /**
-     * the id of the library item to return the children of.
+     * The id(s) of the library item(s) to return metadata for. Can be a single ID or comma-separated list of IDs.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=ratingKey")
-    private long ratingKey;
+    private String ratingKey;
 
     /**
      * Include concerts data if set to true.
@@ -102,7 +101,7 @@ public class GetMediaMetaDataRequest {
 
     @JsonCreator
     public GetMediaMetaDataRequest(
-            long ratingKey,
+            String ratingKey,
             Optional<Boolean> includeConcerts,
             Optional<Boolean> includeExtras,
             Optional<Boolean> includeOnDeck,
@@ -147,15 +146,15 @@ public class GetMediaMetaDataRequest {
     }
     
     public GetMediaMetaDataRequest(
-            long ratingKey) {
+            String ratingKey) {
         this(ratingKey, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
-     * the id of the library item to return the children of.
+     * The id(s) of the library item(s) to return metadata for. Can be a single ID or comma-separated list of IDs.
      */
     @JsonIgnore
-    public long ratingKey() {
+    public String ratingKey() {
         return ratingKey;
     }
 
@@ -268,9 +267,9 @@ public class GetMediaMetaDataRequest {
     }    
 
     /**
-     * the id of the library item to return the children of.
+     * The id(s) of the library item(s) to return metadata for. Can be a single ID or comma-separated list of IDs.
      */
-    public GetMediaMetaDataRequest withRatingKey(long ratingKey) {
+    public GetMediaMetaDataRequest withRatingKey(String ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         this.ratingKey = ratingKey;
         return this;
@@ -577,7 +576,7 @@ public class GetMediaMetaDataRequest {
     
     public final static class Builder {
  
-        private Long ratingKey;
+        private String ratingKey;
  
         private Optional<Boolean> includeConcerts = Optional.empty();
  
@@ -610,9 +609,9 @@ public class GetMediaMetaDataRequest {
         }
 
         /**
-         * the id of the library item to return the children of.
+         * The id(s) of the library item(s) to return metadata for. Can be a single ID or comma-separated list of IDs.
          */
-        public Builder ratingKey(long ratingKey) {
+        public Builder ratingKey(String ratingKey) {
             Utils.checkNotNull(ratingKey, "ratingKey");
             this.ratingKey = ratingKey;
             return this;

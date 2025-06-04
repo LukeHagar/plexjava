@@ -48,7 +48,8 @@ public class Application {
             .build();
 
         PerformSearchResponse res = sdk.search().performSearch()
-                .query("dylan")
+                .query("arnold")
+                .limit(5)
                 .call();
 
         // handle response
@@ -105,6 +106,7 @@ public class Application {
 
         PerformVoiceSearchResponse res = sdk.search().performVoiceSearch()
                 .query("dead+poop")
+                .limit(5)
                 .call();
 
         // handle response

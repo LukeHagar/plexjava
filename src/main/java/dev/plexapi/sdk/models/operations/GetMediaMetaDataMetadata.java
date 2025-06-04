@@ -407,6 +407,10 @@ public class GetMediaMetaDataMetadata {
     private String librarySectionKey;
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Guid")
+    private Optional<? extends List<GetMediaMetaDataGuids>> guids;
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Media")
     private Optional<? extends List<GetMediaMetaDataMedia>> media;
 
@@ -433,10 +437,6 @@ public class GetMediaMetaDataMetadata {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Role")
     private Optional<? extends List<GetMediaMetaDataRole>> role;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("Guid")
-    private Optional<? extends List<GetMediaMetaDataGuids>> guids;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Rating")
@@ -523,6 +523,7 @@ public class GetMediaMetaDataMetadata {
             @JsonProperty("librarySectionID") long librarySectionID,
             @JsonProperty("librarySectionTitle") String librarySectionTitle,
             @JsonProperty("librarySectionKey") String librarySectionKey,
+            @JsonProperty("Guid") Optional<? extends List<GetMediaMetaDataGuids>> guids,
             @JsonProperty("Media") Optional<? extends List<GetMediaMetaDataMedia>> media,
             @JsonProperty("Genre") Optional<? extends List<GetMediaMetaDataGenre>> genre,
             @JsonProperty("Country") Optional<? extends List<GetMediaMetaDataCountry>> country,
@@ -530,7 +531,6 @@ public class GetMediaMetaDataMetadata {
             @JsonProperty("Writer") Optional<? extends List<GetMediaMetaDataWriter>> writer,
             @JsonProperty("Producer") Optional<? extends List<GetMediaMetaDataProducer>> producer,
             @JsonProperty("Role") Optional<? extends List<GetMediaMetaDataRole>> role,
-            @JsonProperty("Guid") Optional<? extends List<GetMediaMetaDataGuids>> guids,
             @JsonProperty("Rating") Optional<? extends List<Ratings>> ratings,
             @JsonProperty("Similar") Optional<? extends List<GetMediaMetaDataSimilar>> similar,
             @JsonProperty("Location") Optional<? extends List<GetMediaMetaDataLocation>> location,
@@ -596,6 +596,7 @@ public class GetMediaMetaDataMetadata {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
         Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
         Utils.checkNotNull(librarySectionKey, "librarySectionKey");
+        Utils.checkNotNull(guids, "guids");
         Utils.checkNotNull(media, "media");
         Utils.checkNotNull(genre, "genre");
         Utils.checkNotNull(country, "country");
@@ -603,7 +604,6 @@ public class GetMediaMetaDataMetadata {
         Utils.checkNotNull(writer, "writer");
         Utils.checkNotNull(producer, "producer");
         Utils.checkNotNull(role, "role");
-        Utils.checkNotNull(guids, "guids");
         Utils.checkNotNull(ratings, "ratings");
         Utils.checkNotNull(similar, "similar");
         Utils.checkNotNull(location, "location");
@@ -669,6 +669,7 @@ public class GetMediaMetaDataMetadata {
         this.librarySectionID = librarySectionID;
         this.librarySectionTitle = librarySectionTitle;
         this.librarySectionKey = librarySectionKey;
+        this.guids = guids;
         this.media = media;
         this.genre = genre;
         this.country = country;
@@ -676,7 +677,6 @@ public class GetMediaMetaDataMetadata {
         this.writer = writer;
         this.producer = producer;
         this.role = role;
-        this.guids = guids;
         this.ratings = ratings;
         this.similar = similar;
         this.location = location;
@@ -1176,6 +1176,12 @@ public class GetMediaMetaDataMetadata {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
+    public Optional<List<GetMediaMetaDataGuids>> guids() {
+        return (Optional<List<GetMediaMetaDataGuids>>) guids;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
     public Optional<List<GetMediaMetaDataMedia>> media() {
         return (Optional<List<GetMediaMetaDataMedia>>) media;
     }
@@ -1214,12 +1220,6 @@ public class GetMediaMetaDataMetadata {
     @JsonIgnore
     public Optional<List<GetMediaMetaDataRole>> role() {
         return (Optional<List<GetMediaMetaDataRole>>) role;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<GetMediaMetaDataGuids>> guids() {
-        return (Optional<List<GetMediaMetaDataGuids>>) guids;
     }
 
     @SuppressWarnings("unchecked")
@@ -2099,6 +2099,18 @@ public class GetMediaMetaDataMetadata {
         return this;
     }
 
+    public GetMediaMetaDataMetadata withGuids(List<GetMediaMetaDataGuids> guids) {
+        Utils.checkNotNull(guids, "guids");
+        this.guids = Optional.ofNullable(guids);
+        return this;
+    }
+
+    public GetMediaMetaDataMetadata withGuids(Optional<? extends List<GetMediaMetaDataGuids>> guids) {
+        Utils.checkNotNull(guids, "guids");
+        this.guids = guids;
+        return this;
+    }
+
     public GetMediaMetaDataMetadata withMedia(List<GetMediaMetaDataMedia> media) {
         Utils.checkNotNull(media, "media");
         this.media = Optional.ofNullable(media);
@@ -2180,18 +2192,6 @@ public class GetMediaMetaDataMetadata {
     public GetMediaMetaDataMetadata withRole(Optional<? extends List<GetMediaMetaDataRole>> role) {
         Utils.checkNotNull(role, "role");
         this.role = role;
-        return this;
-    }
-
-    public GetMediaMetaDataMetadata withGuids(List<GetMediaMetaDataGuids> guids) {
-        Utils.checkNotNull(guids, "guids");
-        this.guids = Optional.ofNullable(guids);
-        return this;
-    }
-
-    public GetMediaMetaDataMetadata withGuids(Optional<? extends List<GetMediaMetaDataGuids>> guids) {
-        Utils.checkNotNull(guids, "guids");
-        this.guids = guids;
         return this;
     }
 
@@ -2337,6 +2337,7 @@ public class GetMediaMetaDataMetadata {
             Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
             Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
             Objects.deepEquals(this.librarySectionKey, other.librarySectionKey) &&
+            Objects.deepEquals(this.guids, other.guids) &&
             Objects.deepEquals(this.media, other.media) &&
             Objects.deepEquals(this.genre, other.genre) &&
             Objects.deepEquals(this.country, other.country) &&
@@ -2344,7 +2345,6 @@ public class GetMediaMetaDataMetadata {
             Objects.deepEquals(this.writer, other.writer) &&
             Objects.deepEquals(this.producer, other.producer) &&
             Objects.deepEquals(this.role, other.role) &&
-            Objects.deepEquals(this.guids, other.guids) &&
             Objects.deepEquals(this.ratings, other.ratings) &&
             Objects.deepEquals(this.similar, other.similar) &&
             Objects.deepEquals(this.location, other.location) &&
@@ -2415,6 +2415,7 @@ public class GetMediaMetaDataMetadata {
             librarySectionID,
             librarySectionTitle,
             librarySectionKey,
+            guids,
             media,
             genre,
             country,
@@ -2422,7 +2423,6 @@ public class GetMediaMetaDataMetadata {
             writer,
             producer,
             role,
-            guids,
             ratings,
             similar,
             location,
@@ -2493,6 +2493,7 @@ public class GetMediaMetaDataMetadata {
                 "librarySectionID", librarySectionID,
                 "librarySectionTitle", librarySectionTitle,
                 "librarySectionKey", librarySectionKey,
+                "guids", guids,
                 "media", media,
                 "genre", genre,
                 "country", country,
@@ -2500,7 +2501,6 @@ public class GetMediaMetaDataMetadata {
                 "writer", writer,
                 "producer", producer,
                 "role", role,
-                "guids", guids,
                 "ratings", ratings,
                 "similar", similar,
                 "location", location,
@@ -2629,6 +2629,8 @@ public class GetMediaMetaDataMetadata {
  
         private String librarySectionKey;
  
+        private Optional<? extends List<GetMediaMetaDataGuids>> guids = Optional.empty();
+ 
         private Optional<? extends List<GetMediaMetaDataMedia>> media = Optional.empty();
  
         private Optional<? extends List<GetMediaMetaDataGenre>> genre = Optional.empty();
@@ -2642,8 +2644,6 @@ public class GetMediaMetaDataMetadata {
         private Optional<? extends List<GetMediaMetaDataProducer>> producer = Optional.empty();
  
         private Optional<? extends List<GetMediaMetaDataRole>> role = Optional.empty();
- 
-        private Optional<? extends List<GetMediaMetaDataGuids>> guids = Optional.empty();
  
         private Optional<? extends List<Ratings>> ratings = Optional.empty();
  
@@ -3498,6 +3498,18 @@ public class GetMediaMetaDataMetadata {
             return this;
         }
 
+        public Builder guids(List<GetMediaMetaDataGuids> guids) {
+            Utils.checkNotNull(guids, "guids");
+            this.guids = Optional.ofNullable(guids);
+            return this;
+        }
+
+        public Builder guids(Optional<? extends List<GetMediaMetaDataGuids>> guids) {
+            Utils.checkNotNull(guids, "guids");
+            this.guids = guids;
+            return this;
+        }
+
         public Builder media(List<GetMediaMetaDataMedia> media) {
             Utils.checkNotNull(media, "media");
             this.media = Optional.ofNullable(media);
@@ -3579,18 +3591,6 @@ public class GetMediaMetaDataMetadata {
         public Builder role(Optional<? extends List<GetMediaMetaDataRole>> role) {
             Utils.checkNotNull(role, "role");
             this.role = role;
-            return this;
-        }
-
-        public Builder guids(List<GetMediaMetaDataGuids> guids) {
-            Utils.checkNotNull(guids, "guids");
-            this.guids = Optional.ofNullable(guids);
-            return this;
-        }
-
-        public Builder guids(Optional<? extends List<GetMediaMetaDataGuids>> guids) {
-            Utils.checkNotNull(guids, "guids");
-            this.guids = guids;
             return this;
         }
 
@@ -3727,6 +3727,7 @@ public class GetMediaMetaDataMetadata {
                 librarySectionID,
                 librarySectionTitle,
                 librarySectionKey,
+                guids,
                 media,
                 genre,
                 country,
@@ -3734,7 +3735,6 @@ public class GetMediaMetaDataMetadata {
                 writer,
                 producer,
                 role,
-                guids,
                 ratings,
                 similar,
                 location,

@@ -60,9 +60,11 @@ public class GetTopWatchedContentQueryParamType {
     public static final GetTopWatchedContentQueryParamType TvShow = new GetTopWatchedContentQueryParamType(2L);
     public static final GetTopWatchedContentQueryParamType Season = new GetTopWatchedContentQueryParamType(3L);
     public static final GetTopWatchedContentQueryParamType Episode = new GetTopWatchedContentQueryParamType(4L);
-    public static final GetTopWatchedContentQueryParamType Audio = new GetTopWatchedContentQueryParamType(8L);
-    public static final GetTopWatchedContentQueryParamType Album = new GetTopWatchedContentQueryParamType(9L);
-    public static final GetTopWatchedContentQueryParamType Track = new GetTopWatchedContentQueryParamType(10L);
+    public static final GetTopWatchedContentQueryParamType Artist = new GetTopWatchedContentQueryParamType(5L);
+    public static final GetTopWatchedContentQueryParamType Album = new GetTopWatchedContentQueryParamType(6L);
+    public static final GetTopWatchedContentQueryParamType Track = new GetTopWatchedContentQueryParamType(7L);
+    public static final GetTopWatchedContentQueryParamType PhotoAlbum = new GetTopWatchedContentQueryParamType(8L);
+    public static final GetTopWatchedContentQueryParamType Photo = new GetTopWatchedContentQueryParamType(9L);
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -138,9 +140,11 @@ public class GetTopWatchedContentQueryParamType {
         map.put(2L, TvShow);
         map.put(3L, Season);
         map.put(4L, Episode);
-        map.put(8L, Audio);
-        map.put(9L, Album);
-        map.put(10L, Track);
+        map.put(5L, Artist);
+        map.put(6L, Album);
+        map.put(7L, Track);
+        map.put(8L, PhotoAlbum);
+        map.put(9L, Photo);
         return map;
     }
 
@@ -150,9 +154,11 @@ public class GetTopWatchedContentQueryParamType {
         map.put(2L, GetTopWatchedContentQueryParamTypeEnum.TvShow);
         map.put(3L, GetTopWatchedContentQueryParamTypeEnum.Season);
         map.put(4L, GetTopWatchedContentQueryParamTypeEnum.Episode);
-        map.put(8L, GetTopWatchedContentQueryParamTypeEnum.Audio);
-        map.put(9L, GetTopWatchedContentQueryParamTypeEnum.Album);
-        map.put(10L, GetTopWatchedContentQueryParamTypeEnum.Track);
+        map.put(5L, GetTopWatchedContentQueryParamTypeEnum.Artist);
+        map.put(6L, GetTopWatchedContentQueryParamTypeEnum.Album);
+        map.put(7L, GetTopWatchedContentQueryParamTypeEnum.Track);
+        map.put(8L, GetTopWatchedContentQueryParamTypeEnum.PhotoAlbum);
+        map.put(9L, GetTopWatchedContentQueryParamTypeEnum.Photo);
         return map;
     }
     
@@ -192,9 +198,11 @@ public class GetTopWatchedContentQueryParamType {
         TvShow(2L),
         Season(3L),
         Episode(4L),
-        Audio(8L),
-        Album(9L),
-        Track(10L),;
+        Artist(5L),
+        Album(6L),
+        Track(7L),
+        PhotoAlbum(8L),
+        Photo(9L),;
 
         private final long value;
 

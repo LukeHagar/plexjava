@@ -433,6 +433,10 @@ public class GetRecentlyAddedMetadata {
     private Optional<? extends UltraBlurColors> ultraBlurColors;
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Guid")
+    private Optional<? extends List<Guids>> guids;
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Media")
     private Optional<? extends List<Media>> media;
 
@@ -471,10 +475,6 @@ public class GetRecentlyAddedMetadata {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Location")
     private Optional<? extends List<Location>> location;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("Guid")
-    private Optional<? extends List<Guids>> guids;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Collection")
@@ -545,6 +545,7 @@ public class GetRecentlyAddedMetadata {
             @JsonProperty("year") Optional<Integer> year,
             @JsonProperty("Image") Optional<? extends List<GetRecentlyAddedImage>> image,
             @JsonProperty("UltraBlurColors") Optional<? extends UltraBlurColors> ultraBlurColors,
+            @JsonProperty("Guid") Optional<? extends List<Guids>> guids,
             @JsonProperty("Media") Optional<? extends List<Media>> media,
             @JsonProperty("Genre") Optional<? extends List<Genre>> genre,
             @JsonProperty("Country") Optional<? extends List<Country>> country,
@@ -555,7 +556,6 @@ public class GetRecentlyAddedMetadata {
             @JsonProperty("Rating") Optional<? extends List<Rating>> rating1,
             @JsonProperty("Similar") Optional<? extends List<Similar>> similar,
             @JsonProperty("Location") Optional<? extends List<Location>> location,
-            @JsonProperty("Guid") Optional<? extends List<Guids>> guids,
             @JsonProperty("Collection") Optional<? extends List<Collection>> collection) {
         Utils.checkNotNull(addedAt, "addedAt");
         Utils.checkNotNull(art, "art");
@@ -620,6 +620,7 @@ public class GetRecentlyAddedMetadata {
         Utils.checkNotNull(year, "year");
         Utils.checkNotNull(image, "image");
         Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
+        Utils.checkNotNull(guids, "guids");
         Utils.checkNotNull(media, "media");
         Utils.checkNotNull(genre, "genre");
         Utils.checkNotNull(country, "country");
@@ -630,7 +631,6 @@ public class GetRecentlyAddedMetadata {
         Utils.checkNotNull(rating1, "rating1");
         Utils.checkNotNull(similar, "similar");
         Utils.checkNotNull(location, "location");
-        Utils.checkNotNull(guids, "guids");
         Utils.checkNotNull(collection, "collection");
         this.addedAt = addedAt;
         this.art = art;
@@ -695,6 +695,7 @@ public class GetRecentlyAddedMetadata {
         this.year = year;
         this.image = image;
         this.ultraBlurColors = ultraBlurColors;
+        this.guids = guids;
         this.media = media;
         this.genre = genre;
         this.country = country;
@@ -705,7 +706,6 @@ public class GetRecentlyAddedMetadata {
         this.rating1 = rating1;
         this.similar = similar;
         this.location = location;
-        this.guids = guids;
         this.collection = collection;
     }
     
@@ -1234,6 +1234,12 @@ public class GetRecentlyAddedMetadata {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
+    public Optional<List<Guids>> guids() {
+        return (Optional<List<Guids>>) guids;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
     public Optional<List<Media>> media() {
         return (Optional<List<Media>>) media;
     }
@@ -1290,12 +1296,6 @@ public class GetRecentlyAddedMetadata {
     @JsonIgnore
     public Optional<List<Location>> location() {
         return (Optional<List<Location>>) location;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<Guids>> guids() {
-        return (Optional<List<Guids>>) guids;
     }
 
     @SuppressWarnings("unchecked")
@@ -2199,6 +2199,18 @@ public class GetRecentlyAddedMetadata {
         return this;
     }
 
+    public GetRecentlyAddedMetadata withGuids(List<Guids> guids) {
+        Utils.checkNotNull(guids, "guids");
+        this.guids = Optional.ofNullable(guids);
+        return this;
+    }
+
+    public GetRecentlyAddedMetadata withGuids(Optional<? extends List<Guids>> guids) {
+        Utils.checkNotNull(guids, "guids");
+        this.guids = guids;
+        return this;
+    }
+
     public GetRecentlyAddedMetadata withMedia(List<Media> media) {
         Utils.checkNotNull(media, "media");
         this.media = Optional.ofNullable(media);
@@ -2319,18 +2331,6 @@ public class GetRecentlyAddedMetadata {
         return this;
     }
 
-    public GetRecentlyAddedMetadata withGuids(List<Guids> guids) {
-        Utils.checkNotNull(guids, "guids");
-        this.guids = Optional.ofNullable(guids);
-        return this;
-    }
-
-    public GetRecentlyAddedMetadata withGuids(Optional<? extends List<Guids>> guids) {
-        Utils.checkNotNull(guids, "guids");
-        this.guids = guids;
-        return this;
-    }
-
     public GetRecentlyAddedMetadata withCollection(List<Collection> collection) {
         Utils.checkNotNull(collection, "collection");
         this.collection = Optional.ofNullable(collection);
@@ -2417,6 +2417,7 @@ public class GetRecentlyAddedMetadata {
             Objects.deepEquals(this.year, other.year) &&
             Objects.deepEquals(this.image, other.image) &&
             Objects.deepEquals(this.ultraBlurColors, other.ultraBlurColors) &&
+            Objects.deepEquals(this.guids, other.guids) &&
             Objects.deepEquals(this.media, other.media) &&
             Objects.deepEquals(this.genre, other.genre) &&
             Objects.deepEquals(this.country, other.country) &&
@@ -2427,7 +2428,6 @@ public class GetRecentlyAddedMetadata {
             Objects.deepEquals(this.rating1, other.rating1) &&
             Objects.deepEquals(this.similar, other.similar) &&
             Objects.deepEquals(this.location, other.location) &&
-            Objects.deepEquals(this.guids, other.guids) &&
             Objects.deepEquals(this.collection, other.collection);
     }
     
@@ -2497,6 +2497,7 @@ public class GetRecentlyAddedMetadata {
             year,
             image,
             ultraBlurColors,
+            guids,
             media,
             genre,
             country,
@@ -2507,7 +2508,6 @@ public class GetRecentlyAddedMetadata {
             rating1,
             similar,
             location,
-            guids,
             collection);
     }
     
@@ -2577,6 +2577,7 @@ public class GetRecentlyAddedMetadata {
                 "year", year,
                 "image", image,
                 "ultraBlurColors", ultraBlurColors,
+                "guids", guids,
                 "media", media,
                 "genre", genre,
                 "country", country,
@@ -2587,7 +2588,6 @@ public class GetRecentlyAddedMetadata {
                 "rating1", rating1,
                 "similar", similar,
                 "location", location,
-                "guids", guids,
                 "collection", collection);
     }
     
@@ -2719,6 +2719,8 @@ public class GetRecentlyAddedMetadata {
  
         private Optional<? extends UltraBlurColors> ultraBlurColors = Optional.empty();
  
+        private Optional<? extends List<Guids>> guids = Optional.empty();
+ 
         private Optional<? extends List<Media>> media = Optional.empty();
  
         private Optional<? extends List<Genre>> genre = Optional.empty();
@@ -2738,8 +2740,6 @@ public class GetRecentlyAddedMetadata {
         private Optional<? extends List<Similar>> similar = Optional.empty();
  
         private Optional<? extends List<Location>> location = Optional.empty();
- 
-        private Optional<? extends List<Guids>> guids = Optional.empty();
  
         private Optional<? extends List<Collection>> collection = Optional.empty();
         
@@ -3638,6 +3638,18 @@ public class GetRecentlyAddedMetadata {
             return this;
         }
 
+        public Builder guids(List<Guids> guids) {
+            Utils.checkNotNull(guids, "guids");
+            this.guids = Optional.ofNullable(guids);
+            return this;
+        }
+
+        public Builder guids(Optional<? extends List<Guids>> guids) {
+            Utils.checkNotNull(guids, "guids");
+            this.guids = guids;
+            return this;
+        }
+
         public Builder media(List<Media> media) {
             Utils.checkNotNull(media, "media");
             this.media = Optional.ofNullable(media);
@@ -3758,18 +3770,6 @@ public class GetRecentlyAddedMetadata {
             return this;
         }
 
-        public Builder guids(List<Guids> guids) {
-            Utils.checkNotNull(guids, "guids");
-            this.guids = Optional.ofNullable(guids);
-            return this;
-        }
-
-        public Builder guids(Optional<? extends List<Guids>> guids) {
-            Utils.checkNotNull(guids, "guids");
-            this.guids = guids;
-            return this;
-        }
-
         public Builder collection(List<Collection> collection) {
             Utils.checkNotNull(collection, "collection");
             this.collection = Optional.ofNullable(collection);
@@ -3847,6 +3847,7 @@ public class GetRecentlyAddedMetadata {
                 year,
                 image,
                 ultraBlurColors,
+                guids,
                 media,
                 genre,
                 country,
@@ -3857,7 +3858,6 @@ public class GetRecentlyAddedMetadata {
                 rating1,
                 similar,
                 location,
-                guids,
                 collection);
         }
     }

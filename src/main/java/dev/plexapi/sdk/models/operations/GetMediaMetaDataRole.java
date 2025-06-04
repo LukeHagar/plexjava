@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Long;
+import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -18,10 +18,11 @@ import java.util.Optional;
 public class GetMediaMetaDataRole {
 
     /**
-     * Unique identifier for the actor or role.
+     * The unique identifier for the role.
+     * NOTE: This is different for each Plex server and is not globally unique.
      */
     @JsonProperty("id")
-    private long id;
+    private int id;
 
     /**
      * The display tag for the actor (typically the actor's name).
@@ -43,14 +44,14 @@ public class GetMediaMetaDataRole {
     private String filter;
 
     /**
-     * A unique key associated with the actor's tag, used for internal identification.
+     * A 24-character hexadecimal unique key associated with the actor's tag, used for internal identification.
+     * NOTE: This is globally unique across all Plex Servers.
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tagKey")
-    private Optional<String> tagKey;
+    private String tagKey;
 
     /**
-     * The URL of the thumbnail image for the actor.
+     * The absolute URL of the thumbnail image for the actor.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
@@ -58,11 +59,11 @@ public class GetMediaMetaDataRole {
 
     @JsonCreator
     public GetMediaMetaDataRole(
-            @JsonProperty("id") long id,
+            @JsonProperty("id") int id,
             @JsonProperty("tag") String tag,
             @JsonProperty("role") Optional<String> role,
             @JsonProperty("filter") String filter,
-            @JsonProperty("tagKey") Optional<String> tagKey,
+            @JsonProperty("tagKey") String tagKey,
             @JsonProperty("thumb") Optional<String> thumb) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(tag, "tag");
@@ -79,17 +80,19 @@ public class GetMediaMetaDataRole {
     }
     
     public GetMediaMetaDataRole(
-            long id,
+            int id,
             String tag,
-            String filter) {
-        this(id, tag, Optional.empty(), filter, Optional.empty(), Optional.empty());
+            String filter,
+            String tagKey) {
+        this(id, tag, Optional.empty(), filter, tagKey, Optional.empty());
     }
 
     /**
-     * Unique identifier for the actor or role.
+     * The unique identifier for the role.
+     * NOTE: This is different for each Plex server and is not globally unique.
      */
     @JsonIgnore
-    public long id() {
+    public int id() {
         return id;
     }
 
@@ -118,15 +121,16 @@ public class GetMediaMetaDataRole {
     }
 
     /**
-     * A unique key associated with the actor's tag, used for internal identification.
+     * A 24-character hexadecimal unique key associated with the actor's tag, used for internal identification.
+     * NOTE: This is globally unique across all Plex Servers.
      */
     @JsonIgnore
-    public Optional<String> tagKey() {
+    public String tagKey() {
         return tagKey;
     }
 
     /**
-     * The URL of the thumbnail image for the actor.
+     * The absolute URL of the thumbnail image for the actor.
      */
     @JsonIgnore
     public Optional<String> thumb() {
@@ -138,9 +142,10 @@ public class GetMediaMetaDataRole {
     }    
 
     /**
-     * Unique identifier for the actor or role.
+     * The unique identifier for the role.
+     * NOTE: This is different for each Plex server and is not globally unique.
      */
-    public GetMediaMetaDataRole withId(long id) {
+    public GetMediaMetaDataRole withId(int id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
@@ -183,25 +188,17 @@ public class GetMediaMetaDataRole {
     }
 
     /**
-     * A unique key associated with the actor's tag, used for internal identification.
+     * A 24-character hexadecimal unique key associated with the actor's tag, used for internal identification.
+     * NOTE: This is globally unique across all Plex Servers.
      */
     public GetMediaMetaDataRole withTagKey(String tagKey) {
-        Utils.checkNotNull(tagKey, "tagKey");
-        this.tagKey = Optional.ofNullable(tagKey);
-        return this;
-    }
-
-    /**
-     * A unique key associated with the actor's tag, used for internal identification.
-     */
-    public GetMediaMetaDataRole withTagKey(Optional<String> tagKey) {
         Utils.checkNotNull(tagKey, "tagKey");
         this.tagKey = tagKey;
         return this;
     }
 
     /**
-     * The URL of the thumbnail image for the actor.
+     * The absolute URL of the thumbnail image for the actor.
      */
     public GetMediaMetaDataRole withThumb(String thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -210,7 +207,7 @@ public class GetMediaMetaDataRole {
     }
 
     /**
-     * The URL of the thumbnail image for the actor.
+     * The absolute URL of the thumbnail image for the actor.
      */
     public GetMediaMetaDataRole withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -261,7 +258,7 @@ public class GetMediaMetaDataRole {
     
     public final static class Builder {
  
-        private Long id;
+        private Integer id;
  
         private String tag;
  
@@ -269,7 +266,7 @@ public class GetMediaMetaDataRole {
  
         private String filter;
  
-        private Optional<String> tagKey = Optional.empty();
+        private String tagKey;
  
         private Optional<String> thumb = Optional.empty();
         
@@ -278,9 +275,10 @@ public class GetMediaMetaDataRole {
         }
 
         /**
-         * Unique identifier for the actor or role.
+         * The unique identifier for the role.
+         * NOTE: This is different for each Plex server and is not globally unique.
          */
-        public Builder id(long id) {
+        public Builder id(int id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;
@@ -323,25 +321,17 @@ public class GetMediaMetaDataRole {
         }
 
         /**
-         * A unique key associated with the actor's tag, used for internal identification.
+         * A 24-character hexadecimal unique key associated with the actor's tag, used for internal identification.
+         * NOTE: This is globally unique across all Plex Servers.
          */
         public Builder tagKey(String tagKey) {
-            Utils.checkNotNull(tagKey, "tagKey");
-            this.tagKey = Optional.ofNullable(tagKey);
-            return this;
-        }
-
-        /**
-         * A unique key associated with the actor's tag, used for internal identification.
-         */
-        public Builder tagKey(Optional<String> tagKey) {
             Utils.checkNotNull(tagKey, "tagKey");
             this.tagKey = tagKey;
             return this;
         }
 
         /**
-         * The URL of the thumbnail image for the actor.
+         * The absolute URL of the thumbnail image for the actor.
          */
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -350,7 +340,7 @@ public class GetMediaMetaDataRole {
         }
 
         /**
-         * The URL of the thumbnail image for the actor.
+         * The absolute URL of the thumbnail image for the actor.
          */
         public Builder thumb(Optional<String> thumb) {
             Utils.checkNotNull(thumb, "thumb");

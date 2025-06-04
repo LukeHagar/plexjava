@@ -14,7 +14,7 @@ API Calls interacting with Plex Media Server Libraries
 * [getLibraryDetails](#getlibrarydetails) - Get Library Details
 * [deleteLibrary](#deletelibrary) - Delete Library Section
 * [getLibraryItems](#getlibraryitems) - Get Library Items
-* [getAllMediaLibrary](#getallmedialibrary) - Get all media of library
+* [getLibrarySectionsAll](#getlibrarysectionsall) - Get Library section media by tag ALL
 * [getRefreshLibraryMetadata](#getrefreshlibrarymetadata) - Refresh Metadata Of The Library
 * [getSearchLibrary](#getsearchlibrary) - Search Library
 * [getGenresLibrary](#getgenreslibrary) - Get Genres of library media
@@ -122,6 +122,7 @@ public class Application {
                     16L,
                     17L))
                 .sectionID(2L)
+                .includeMeta(QueryParamIncludeMeta.Enable)
                 .build();
 
         GetRecentlyAddedLibraryResponse res = sdk.library().getRecentlyAddedLibrary()
@@ -256,6 +257,7 @@ import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.GetLibraryDetailsBadRequest;
 import dev.plexapi.sdk.models.errors.GetLibraryDetailsUnauthorized;
 import dev.plexapi.sdk.models.operations.GetLibraryDetailsResponse;
+import dev.plexapi.sdk.models.operations.IncludeDetails;
 import java.lang.Exception;
 
 public class Application {
@@ -267,6 +269,7 @@ public class Application {
             .build();
 
         GetLibraryDetailsResponse res = sdk.library().getLibraryDetails()
+                .includeDetails(IncludeDetails.ZERO)
                 .sectionKey(9518)
                 .call();
 
@@ -391,9 +394,11 @@ public class Application {
             .build();
 
         GetLibraryItemsRequest req = GetLibraryItemsRequest.builder()
-                .tag(Tag.EDITION)
+                .tag(Tag.NEWEST)
                 .type(GetLibraryItemsQueryParamType.TvShow)
                 .sectionKey(9518)
+                .includeGuids(IncludeGuids.Enable)
+                .includeMeta(GetLibraryItemsQueryParamIncludeMeta.Enable)
                 .build();
 
         GetLibraryItemsResponse res = sdk.library().getLibraryItems()
@@ -425,7 +430,7 @@ public class Application {
 | models/errors/GetLibraryItemsUnauthorized | 401                                       | application/json                          |
 | models/errors/SDKError                    | 4XX, 5XX                                  | \*/\*                                     |
 
-## getAllMediaLibrary
+## getLibrarySectionsAll
 
 Retrieves a list of all general media data for this library.
 
@@ -436,25 +441,30 @@ Retrieves a list of all general media data for this library.
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.GetAllMediaLibraryBadRequest;
-import dev.plexapi.sdk.models.errors.GetAllMediaLibraryUnauthorized;
+import dev.plexapi.sdk.models.errors.GetLibrarySectionsAllBadRequest;
+import dev.plexapi.sdk.models.errors.GetLibrarySectionsAllUnauthorized;
 import dev.plexapi.sdk.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws GetAllMediaLibraryBadRequest, GetAllMediaLibraryUnauthorized, Exception {
+    public static void main(String[] args) throws GetLibrarySectionsAllBadRequest, GetLibrarySectionsAllUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accessToken("<YOUR_API_KEY_HERE>")
             .build();
 
-        GetAllMediaLibraryRequest req = GetAllMediaLibraryRequest.builder()
+        GetLibrarySectionsAllRequest req = GetLibrarySectionsAllRequest.builder()
                 .sectionKey(9518)
-                .type(GetAllMediaLibraryQueryParamType.TvShow)
+                .type(GetLibrarySectionsAllQueryParamType.TvShow)
+                .includeMeta(GetLibrarySectionsAllQueryParamIncludeMeta.Enable)
+                .includeGuids(QueryParamIncludeGuids.Enable)
+                .includeAdvanced(IncludeAdvanced.Enable)
+                .includeCollections(QueryParamIncludeCollections.Enable)
+                .includeExternalMedia(QueryParamIncludeExternalMedia.Enable)
                 .build();
 
-        GetAllMediaLibraryResponse res = sdk.library().getAllMediaLibrary()
+        GetLibrarySectionsAllResponse res = sdk.library().getLibrarySectionsAll()
                 .request(req)
                 .call();
 
@@ -467,21 +477,21 @@ public class Application {
 
 ### Parameters
 
-| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `request`                                                                         | [GetAllMediaLibraryRequest](../../models/operations/GetAllMediaLibraryRequest.md) | :heavy_check_mark:                                                                | The request object to use for the request.                                        |
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `request`                                                                               | [GetLibrarySectionsAllRequest](../../models/operations/GetLibrarySectionsAllRequest.md) | :heavy_check_mark:                                                                      | The request object to use for the request.                                              |
 
 ### Response
 
-**[GetAllMediaLibraryResponse](../../models/operations/GetAllMediaLibraryResponse.md)**
+**[GetLibrarySectionsAllResponse](../../models/operations/GetLibrarySectionsAllResponse.md)**
 
 ### Errors
 
-| Error Type                                   | Status Code                                  | Content Type                                 |
-| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/GetAllMediaLibraryBadRequest   | 400                                          | application/json                             |
-| models/errors/GetAllMediaLibraryUnauthorized | 401                                          | application/json                             |
-| models/errors/SDKError                       | 4XX, 5XX                                     | \*/\*                                        |
+| Error Type                                      | Status Code                                     | Content Type                                    |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| models/errors/GetLibrarySectionsAllBadRequest   | 400                                             | application/json                                |
+| models/errors/GetLibrarySectionsAllUnauthorized | 401                                             | application/json                                |
+| models/errors/SDKError                          | 4XX, 5XX                                        | \*/\*                                           |
 
 ## getRefreshLibraryMetadata
 
@@ -509,7 +519,7 @@ public class Application {
             .build();
 
         GetRefreshLibraryMetadataResponse res = sdk.library().getRefreshLibraryMetadata()
-                .force(Force.ONE)
+                .force(Force.ZERO)
                 .sectionKey(9518)
                 .call();
 
@@ -808,6 +818,8 @@ public class Application {
                 .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
                 .searchTypes(List.of(
                     SearchTypes.PEOPLE))
+                .includeCollections(GetSearchAllLibrariesQueryParamIncludeCollections.Enable)
+                .includeExternalMedia(GetSearchAllLibrariesQueryParamIncludeExternalMedia.Enable)
                 .build();
 
         GetSearchAllLibrariesResponse res = sdk.library().getSearchAllLibraries()
@@ -841,7 +853,8 @@ public class Application {
 
 ## getMediaMetaData
 
-This endpoint will return all the (meta)data of a library item specified with by the ratingKey.
+This endpoint will return all the (meta)data of one or more library items specified by the ratingKey.
+Multiple rating keys can be provided as a comma-separated list (e.g., "21119,21617").
 
 
 ### Example Usage
@@ -865,7 +878,7 @@ public class Application {
             .build();
 
         GetMediaMetaDataRequest req = GetMediaMetaDataRequest.builder()
-                .ratingKey(9518L)
+                .ratingKey("21119,21617")
                 .includeConcerts(true)
                 .includeExtras(true)
                 .includeOnDeck(true)
@@ -1129,7 +1142,7 @@ public class Application {
             .build();
 
         GetMetadataChildrenResponse res = sdk.library().getMetadataChildren()
-                .ratingKey(1539.14)
+                .ratingKey(2403.67)
                 .includeElements("Stream")
                 .call();
 
@@ -1172,8 +1185,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.GetTopWatchedContentBadRequest;
 import dev.plexapi.sdk.models.errors.GetTopWatchedContentUnauthorized;
-import dev.plexapi.sdk.models.operations.GetTopWatchedContentQueryParamType;
-import dev.plexapi.sdk.models.operations.GetTopWatchedContentResponse;
+import dev.plexapi.sdk.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -1185,8 +1197,8 @@ public class Application {
             .build();
 
         GetTopWatchedContentResponse res = sdk.library().getTopWatchedContent()
-                .includeGuids(1L)
                 .type(GetTopWatchedContentQueryParamType.TvShow)
+                .includeGuids(GetTopWatchedContentQueryParamIncludeGuids.Enable)
                 .call();
 
         if (res.object().isPresent()) {
@@ -1200,8 +1212,8 @@ public class Application {
 
 | Parameter                                                                                                                                                                                    | Type                                                                                                                                                                                         | Required                                                                                                                                                                                     | Description                                                                                                                                                                                  | Example                                                                                                                                                                                      |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `includeGuids`                                                                                                                                                                               | *Optional\<Long>*                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                           | Adds the Guids object to the response<br/>                                                                                                                                                   | 1                                                                                                                                                                                            |
 | `type`                                                                                                                                                                                       | [GetTopWatchedContentQueryParamType](../../models/operations/GetTopWatchedContentQueryParamType.md)                                                                                          | :heavy_check_mark:                                                                                                                                                                           | The type of media to retrieve or filter by.<br/>1 = movie<br/>2 = show<br/>3 = season<br/>4 = episode<br/>E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries<br/> | 2                                                                                                                                                                                            |
+| `includeGuids`                                                                                                                                                                               | [Optional\<GetTopWatchedContentQueryParamIncludeGuids>](../../models/operations/GetTopWatchedContentQueryParamIncludeGuids.md)                                                               | :heavy_minus_sign:                                                                                                                                                                           | Adds the Guid object to the response<br/>                                                                                                                                                    | 1                                                                                                                                                                                            |
 
 ### Response
 

@@ -103,7 +103,7 @@ publishing {
             // https://github.com/gradle/gradle/issues/18619
             groupId = "dev.plexapi"
             artifactId = "plexapi"
-            version = "0.16.2"
+            version = "0.17.0"
 
             from components.java
 

@@ -44,7 +44,7 @@ import java.util.Optional;
 /**
  * GetMediaMetaDataType
  * 
- * <p>The type of media content
+ * <p>The type of media content in the Plex library. This can represent videos, music, or photos.
  */
 @JsonDeserialize(using = GetMediaMetaDataType._Deserializer.class)
 @JsonSerialize(using = GetMediaMetaDataType._Serializer.class)
@@ -56,6 +56,10 @@ public class GetMediaMetaDataType {
     public static final GetMediaMetaDataType Episode = new GetMediaMetaDataType("episode");
     public static final GetMediaMetaDataType Artist = new GetMediaMetaDataType("artist");
     public static final GetMediaMetaDataType Album = new GetMediaMetaDataType("album");
+    public static final GetMediaMetaDataType Track = new GetMediaMetaDataType("track");
+    public static final GetMediaMetaDataType PhotoAlbum = new GetMediaMetaDataType("photoalbum");
+    public static final GetMediaMetaDataType Photo = new GetMediaMetaDataType("photo");
+    public static final GetMediaMetaDataType Collection = new GetMediaMetaDataType("collection");
 
     // This map will grow whenever a Color gets created with a new
     // unrecognized value (a potential memory leak if the user is not
@@ -133,6 +137,10 @@ public class GetMediaMetaDataType {
         map.put("episode", Episode);
         map.put("artist", Artist);
         map.put("album", Album);
+        map.put("track", Track);
+        map.put("photoalbum", PhotoAlbum);
+        map.put("photo", Photo);
+        map.put("collection", Collection);
         return map;
     }
 
@@ -144,6 +152,10 @@ public class GetMediaMetaDataType {
         map.put("episode", GetMediaMetaDataTypeEnum.Episode);
         map.put("artist", GetMediaMetaDataTypeEnum.Artist);
         map.put("album", GetMediaMetaDataTypeEnum.Album);
+        map.put("track", GetMediaMetaDataTypeEnum.Track);
+        map.put("photoalbum", GetMediaMetaDataTypeEnum.PhotoAlbum);
+        map.put("photo", GetMediaMetaDataTypeEnum.Photo);
+        map.put("collection", GetMediaMetaDataTypeEnum.Collection);
         return map;
     }
     
@@ -184,7 +196,11 @@ public class GetMediaMetaDataType {
         Season("season"),
         Episode("episode"),
         Artist("artist"),
-        Album("album"),;
+        Album("album"),
+        Track("track"),
+        PhotoAlbum("photoalbum"),
+        Photo("photo"),
+        Collection("collection"),;
 
         private final String value;
 

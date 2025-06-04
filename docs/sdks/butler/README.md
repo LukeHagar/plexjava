@@ -181,7 +181,7 @@ public class Application {
             .build();
 
         StartTaskResponse res = sdk.butler().startTask()
-                .taskName(TaskName.CLEAN_OLD_BUNDLES)
+                .taskName(TaskName.REFRESH_PERIODIC_METADATA)
                 .call();
 
         // handle response
@@ -233,7 +233,7 @@ public class Application {
             .build();
 
         StopTaskResponse res = sdk.butler().stopTask()
-                .taskName(PathParamTaskName.BACKUP_DATABASE)
+                .taskName(PathParamTaskName.CLEAN_OLD_CACHE_FILES)
                 .call();
 
         // handle response

@@ -49,9 +49,9 @@ public class Application {
 
         CreatePlaylistRequest req = CreatePlaylistRequest.builder()
                 .title("<value>")
-                .type(CreatePlaylistQueryParamType.PHOTO)
+                .type(CreatePlaylistQueryParamType.AUDIO)
                 .smart(Smart.ONE)
-                .uri("https://hoarse-testing.info/")
+                .uri("https://short-term-disconnection.name/")
                 .build();
 
         CreatePlaylistResponse res = sdk.playlists().createPlaylist()
@@ -161,7 +161,7 @@ public class Application {
             .build();
 
         GetPlaylistResponse res = sdk.playlists().getPlaylist()
-                .playlistID(4109.48)
+                .playlistID(8419.53)
                 .call();
 
         if (res.object().isPresent()) {
@@ -214,7 +214,7 @@ public class Application {
             .build();
 
         DeletePlaylistResponse res = sdk.playlists().deletePlaylist()
-                .playlistID(216.22)
+                .playlistID(3432.93)
                 .call();
 
         // handle response
@@ -265,7 +265,7 @@ public class Application {
             .build();
 
         UpdatePlaylistResponse res = sdk.playlists().updatePlaylist()
-                .playlistID(3915)
+                .playlistID(1579.66)
                 .call();
 
         // handle response
@@ -322,7 +322,7 @@ public class Application {
             .build();
 
         GetPlaylistContentsResponse res = sdk.playlists().getPlaylistContents()
-                .playlistID(5004.46)
+                .playlistID(5535.42)
                 .type(GetPlaylistContentsQueryParamType.TvShow)
                 .call();
 
@@ -377,7 +377,7 @@ public class Application {
             .build();
 
         ClearPlaylistContentsResponse res = sdk.playlists().clearPlaylistContents()
-                .playlistID(1893.18)
+                .playlistID(4137.37)
                 .call();
 
         // handle response
@@ -429,7 +429,7 @@ public class Application {
             .build();
 
         AddPlaylistContentsResponse res = sdk.playlists().addPlaylistContents()
-                .playlistID(8502.01)
+                .playlistID(7013.44)
                 .uri("server://12345/com.plexapp.plugins.library/library/metadata/1")
                 .playQueueID(123)
                 .call();
@@ -488,7 +488,7 @@ public class Application {
 
         UploadPlaylistResponse res = sdk.playlists().uploadPlaylist()
                 .path("/home/barkley/playlist.m3u")
-                .force(QueryParamForce.ZERO)
+                .force(QueryParamForce.ONE)
                 .sectionID(1L)
                 .call();
 

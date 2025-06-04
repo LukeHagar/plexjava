@@ -225,7 +225,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.errors.GetServerResourcesBadRequest;
 import dev.plexapi.sdk.models.errors.GetServerResourcesUnauthorized;
-import dev.plexapi.sdk.models.operations.GetServerResourcesResponse;
+import dev.plexapi.sdk.models.operations.*;
 import java.lang.Exception;
 
 public class Application {
@@ -237,6 +237,9 @@ public class Application {
             .build();
 
         GetServerResourcesResponse res = sdk.plex().getServerResources()
+                .includeHttps(IncludeHttps.Enable)
+                .includeRelay(IncludeRelay.Enable)
+                .includeIPv6(IncludeIPv6.Enable)
                 .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
                 .call();
 
@@ -352,7 +355,7 @@ public class Application {
             .build();
 
         GetTokenByPinIdRequest req = GetTokenByPinIdRequest.builder()
-                .pinID(408895L)
+                .pinID(232248L)
                 .clientID("3381b62b-9ab7-4e37-827b-203e9809eb58")
                 .clientName("Plex for Roku")
                 .deviceNickname("Roku 3")
