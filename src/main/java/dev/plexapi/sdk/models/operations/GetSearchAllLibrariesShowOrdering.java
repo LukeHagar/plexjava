@@ -45,11 +45,12 @@ import java.util.Optional;
  * GetSearchAllLibrariesShowOrdering
  * 
  * <p>Setting that indicates the episode ordering for the show.
- * None = Library default,
- * tmdbAiring = The Movie Database (Aired),
- * aired = TheTVDB (Aired),
- * dvd = TheTVDB (DVD),
- * absolute = TheTVDB (Absolute)).
+ * Options:
+ *   - None = Library default
+ *   - tmdbAiring = The Movie Database (Aired)
+ *   - aired = TheTVDB (Aired)
+ *   - dvd = TheTVDB (DVD)
+ *   - absolute = TheTVDB (Absolute)
  */
 @JsonDeserialize(using = GetSearchAllLibrariesShowOrdering._Deserializer.class)
 @JsonSerialize(using = GetSearchAllLibrariesShowOrdering._Serializer.class)

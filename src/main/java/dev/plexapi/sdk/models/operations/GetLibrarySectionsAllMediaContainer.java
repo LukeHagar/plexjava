@@ -66,14 +66,16 @@ public class GetLibrarySectionsAllMediaContainer {
     /**
      * The unique identifier for the library section.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionID")
-    private long librarySectionID;
+    private Optional<Long> librarySectionID;
 
     /**
      * The title of the library section.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionTitle")
-    private String librarySectionTitle;
+    private Optional<String> librarySectionTitle;
 
     /**
      * The universally unique identifier for the library section.
@@ -147,8 +149,8 @@ public class GetLibrarySectionsAllMediaContainer {
             @JsonProperty("art") String art,
             @JsonProperty("content") String content,
             @JsonProperty("identifier") String identifier,
-            @JsonProperty("librarySectionID") long librarySectionID,
-            @JsonProperty("librarySectionTitle") String librarySectionTitle,
+            @JsonProperty("librarySectionID") Optional<Long> librarySectionID,
+            @JsonProperty("librarySectionTitle") Optional<String> librarySectionTitle,
             @JsonProperty("librarySectionUUID") Optional<String> librarySectionUUID,
             @JsonProperty("mediaTagPrefix") String mediaTagPrefix,
             @JsonProperty("mediaTagVersion") long mediaTagVersion,
@@ -207,8 +209,6 @@ public class GetLibrarySectionsAllMediaContainer {
             String art,
             String content,
             String identifier,
-            long librarySectionID,
-            String librarySectionTitle,
             String mediaTagPrefix,
             long mediaTagVersion,
             String thumb,
@@ -216,7 +216,7 @@ public class GetLibrarySectionsAllMediaContainer {
             String title1,
             String title2,
             String viewGroup) {
-        this(size, totalSize, offset, allowSync, art, content, identifier, librarySectionID, librarySectionTitle, Optional.empty(), mediaTagPrefix, mediaTagVersion, thumb, nocache, title1, title2, viewGroup, Optional.empty(), Optional.empty());
+        this(size, totalSize, offset, allowSync, art, content, identifier, Optional.empty(), Optional.empty(), Optional.empty(), mediaTagPrefix, mediaTagVersion, thumb, nocache, title1, title2, viewGroup, Optional.empty(), Optional.empty());
     }
 
     /**
@@ -279,7 +279,7 @@ public class GetLibrarySectionsAllMediaContainer {
      * The unique identifier for the library section.
      */
     @JsonIgnore
-    public long librarySectionID() {
+    public Optional<Long> librarySectionID() {
         return librarySectionID;
     }
 
@@ -287,7 +287,7 @@ public class GetLibrarySectionsAllMediaContainer {
      * The title of the library section.
      */
     @JsonIgnore
-    public String librarySectionTitle() {
+    public Optional<String> librarySectionTitle() {
         return librarySectionTitle;
     }
 
@@ -445,6 +445,15 @@ public class GetLibrarySectionsAllMediaContainer {
      */
     public GetLibrarySectionsAllMediaContainer withLibrarySectionID(long librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
+        this.librarySectionID = Optional.ofNullable(librarySectionID);
+        return this;
+    }
+
+    /**
+     * The unique identifier for the library section.
+     */
+    public GetLibrarySectionsAllMediaContainer withLibrarySectionID(Optional<Long> librarySectionID) {
+        Utils.checkNotNull(librarySectionID, "librarySectionID");
         this.librarySectionID = librarySectionID;
         return this;
     }
@@ -453,6 +462,15 @@ public class GetLibrarySectionsAllMediaContainer {
      * The title of the library section.
      */
     public GetLibrarySectionsAllMediaContainer withLibrarySectionTitle(String librarySectionTitle) {
+        Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+        this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
+        return this;
+    }
+
+    /**
+     * The title of the library section.
+     */
+    public GetLibrarySectionsAllMediaContainer withLibrarySectionTitle(Optional<String> librarySectionTitle) {
         Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
         this.librarySectionTitle = librarySectionTitle;
         return this;
@@ -671,9 +689,9 @@ public class GetLibrarySectionsAllMediaContainer {
  
         private String identifier;
  
-        private Long librarySectionID;
+        private Optional<Long> librarySectionID = Optional.empty();
  
-        private String librarySectionTitle;
+        private Optional<String> librarySectionTitle = Optional.empty();
  
         private Optional<String> librarySectionUUID = Optional.empty();
  
@@ -767,6 +785,15 @@ public class GetLibrarySectionsAllMediaContainer {
          */
         public Builder librarySectionID(long librarySectionID) {
             Utils.checkNotNull(librarySectionID, "librarySectionID");
+            this.librarySectionID = Optional.ofNullable(librarySectionID);
+            return this;
+        }
+
+        /**
+         * The unique identifier for the library section.
+         */
+        public Builder librarySectionID(Optional<Long> librarySectionID) {
+            Utils.checkNotNull(librarySectionID, "librarySectionID");
             this.librarySectionID = librarySectionID;
             return this;
         }
@@ -775,6 +802,15 @@ public class GetLibrarySectionsAllMediaContainer {
          * The title of the library section.
          */
         public Builder librarySectionTitle(String librarySectionTitle) {
+            Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+            this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
+            return this;
+        }
+
+        /**
+         * The title of the library section.
+         */
+        public Builder librarySectionTitle(Optional<String> librarySectionTitle) {
             Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
             this.librarySectionTitle = librarySectionTitle;
             return this;

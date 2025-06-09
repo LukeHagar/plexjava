@@ -96,7 +96,7 @@ public class GetMediaMetaDataMedia {
     private Optional<String> videoResolution;
 
     /**
-     * File container type.
+     * Container format of the media.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("container")
@@ -137,13 +137,14 @@ public class GetMediaMetaDataMedia {
     @JsonProperty("optimizedForStreaming")
     private Optional<? extends GetMediaMetaDataOptimizedForStreaming> optimizedForStreaming;
 
+    /**
+     * Indicates whether the media has 64-bit offsets.
+     * This is relevant for media files that may require larger offsets than what 32-bit integers can provide.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("has64bitOffsets")
     private Optional<Boolean> has64bitOffsets;
 
-    /**
-     * An array of parts for this media item.
-     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Part")
     private Optional<? extends List<GetMediaMetaDataPart>> part;
@@ -300,7 +301,7 @@ public class GetMediaMetaDataMedia {
     }
 
     /**
-     * File container type.
+     * Container format of the media.
      */
     @JsonIgnore
     public Optional<String> container() {
@@ -348,14 +349,15 @@ public class GetMediaMetaDataMedia {
         return (Optional<GetMediaMetaDataOptimizedForStreaming>) optimizedForStreaming;
     }
 
+    /**
+     * Indicates whether the media has 64-bit offsets.
+     * This is relevant for media files that may require larger offsets than what 32-bit integers can provide.
+     */
     @JsonIgnore
     public Optional<Boolean> has64bitOffsets() {
         return has64bitOffsets;
     }
 
-    /**
-     * An array of parts for this media item.
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<List<GetMediaMetaDataPart>> part() {
@@ -550,7 +552,7 @@ public class GetMediaMetaDataMedia {
     }
 
     /**
-     * File container type.
+     * Container format of the media.
      */
     public GetMediaMetaDataMedia withContainer(String container) {
         Utils.checkNotNull(container, "container");
@@ -559,7 +561,7 @@ public class GetMediaMetaDataMedia {
     }
 
     /**
-     * File container type.
+     * Container format of the media.
      */
     public GetMediaMetaDataMedia withContainer(Optional<String> container) {
         Utils.checkNotNull(container, "container");
@@ -657,30 +659,32 @@ public class GetMediaMetaDataMedia {
         return this;
     }
 
+    /**
+     * Indicates whether the media has 64-bit offsets.
+     * This is relevant for media files that may require larger offsets than what 32-bit integers can provide.
+     */
     public GetMediaMetaDataMedia withHas64bitOffsets(boolean has64bitOffsets) {
         Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
         this.has64bitOffsets = Optional.ofNullable(has64bitOffsets);
         return this;
     }
 
+    /**
+     * Indicates whether the media has 64-bit offsets.
+     * This is relevant for media files that may require larger offsets than what 32-bit integers can provide.
+     */
     public GetMediaMetaDataMedia withHas64bitOffsets(Optional<Boolean> has64bitOffsets) {
         Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
         this.has64bitOffsets = has64bitOffsets;
         return this;
     }
 
-    /**
-     * An array of parts for this media item.
-     */
     public GetMediaMetaDataMedia withPart(List<GetMediaMetaDataPart> part) {
         Utils.checkNotNull(part, "part");
         this.part = Optional.ofNullable(part);
         return this;
     }
 
-    /**
-     * An array of parts for this media item.
-     */
     public GetMediaMetaDataMedia withPart(Optional<? extends List<GetMediaMetaDataPart>> part) {
         Utils.checkNotNull(part, "part");
         this.part = part;
@@ -995,7 +999,7 @@ public class GetMediaMetaDataMedia {
         }
 
         /**
-         * File container type.
+         * Container format of the media.
          */
         public Builder container(String container) {
             Utils.checkNotNull(container, "container");
@@ -1004,7 +1008,7 @@ public class GetMediaMetaDataMedia {
         }
 
         /**
-         * File container type.
+         * Container format of the media.
          */
         public Builder container(Optional<String> container) {
             Utils.checkNotNull(container, "container");
@@ -1102,30 +1106,32 @@ public class GetMediaMetaDataMedia {
             return this;
         }
 
+        /**
+         * Indicates whether the media has 64-bit offsets.
+         * This is relevant for media files that may require larger offsets than what 32-bit integers can provide.
+         */
         public Builder has64bitOffsets(boolean has64bitOffsets) {
             Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
             this.has64bitOffsets = Optional.ofNullable(has64bitOffsets);
             return this;
         }
 
+        /**
+         * Indicates whether the media has 64-bit offsets.
+         * This is relevant for media files that may require larger offsets than what 32-bit integers can provide.
+         */
         public Builder has64bitOffsets(Optional<Boolean> has64bitOffsets) {
             Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
             this.has64bitOffsets = has64bitOffsets;
             return this;
         }
 
-        /**
-         * An array of parts for this media item.
-         */
         public Builder part(List<GetMediaMetaDataPart> part) {
             Utils.checkNotNull(part, "part");
             this.part = Optional.ofNullable(part);
             return this;
         }
 
-        /**
-         * An array of parts for this media item.
-         */
         public Builder part(Optional<? extends List<GetMediaMetaDataPart>> part) {
             Utils.checkNotNull(part, "part");
             this.part = part;

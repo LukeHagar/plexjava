@@ -1,20 +1,14 @@
 # GetLibraryItemsLibraryType
 
-The type of media content in the Plex library. This can represent videos, music, or photos.
 
+## Fields
 
-
-## Values
-
-| Name         | Value        |
-| ------------ | ------------ |
-| `Movie`      | movie        |
-| `TvShow`     | show         |
-| `Season`     | season       |
-| `Episode`    | episode      |
-| `Artist`     | artist       |
-| `Album`      | album        |
-| `Track`      | track        |
-| `PhotoAlbum` | photoalbum   |
-| `Photo`      | photo        |
-| `Collection` | collection   |
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `key`                                                                            | *String*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              | /library/sections/2/all?type=2                                                   |
+| `type`                                                                           | *String*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              | show                                                                             |
+| `title`                                                                          | *String*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              | TV Shows                                                                         |
+| `active`                                                                         | *boolean*                                                                        | :heavy_check_mark:                                                               | N/A                                                                              | false                                                                            |
+| `filter`                                                                         | List\<[GetLibraryItemsFilter](../../models/operations/GetLibraryItemsFilter.md)> | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| `sort`                                                                           | List\<[GetLibraryItemsSort](../../models/operations/GetLibraryItemsSort.md)>     | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| `field`                                                                          | List\<[GetLibraryItemsField](../../models/operations/GetLibraryItemsField.md)>   | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |

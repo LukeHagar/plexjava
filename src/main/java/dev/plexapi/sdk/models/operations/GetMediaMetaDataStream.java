@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Float;
@@ -28,12 +30,12 @@ public class GetMediaMetaDataStream {
 
     /**
      * Stream type:
-     *   - 1 = video
-     *   - 2 = audio
-     *   - 3 = subtitle
+     *   - VIDEO = 1
+     *   - AUDIO = 2
+     *   - SUBTITLE = 3
      */
     @JsonProperty("streamType")
-    private GetMediaMetaDataStreamType streamType;
+    private long streamType;
 
     /**
      * Format of the stream (e.g., srt).
@@ -52,8 +54,9 @@ public class GetMediaMetaDataStream {
     /**
      * Codec used by the stream.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("codec")
-    private String codec;
+    private Optional<String> codec;
 
     /**
      * Index of the stream.
@@ -291,14 +294,16 @@ public class GetMediaMetaDataStream {
     /**
      * Display title for the stream.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("displayTitle")
-    private String displayTitle;
+    private Optional<String> displayTitle;
 
     /**
      * Extended display title for the stream.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("extendedDisplayTitle")
-    private String extendedDisplayTitle;
+    private Optional<String> extendedDisplayTitle;
 
     /**
      * Indicates if this stream is selected (applicable for audio streams).
@@ -363,10 +368,9 @@ public class GetMediaMetaDataStream {
     @JsonCreator
     public GetMediaMetaDataStream(
             @JsonProperty("id") long id,
-            @JsonProperty("streamType") GetMediaMetaDataStreamType streamType,
             @JsonProperty("format") Optional<String> format,
             @JsonProperty("default") Optional<Boolean> default_,
-            @JsonProperty("codec") String codec,
+            @JsonProperty("codec") Optional<String> codec,
             @JsonProperty("index") Optional<Integer> index,
             @JsonProperty("bitrate") Optional<Integer> bitrate,
             @JsonProperty("language") Optional<String> language,
@@ -402,8 +406,8 @@ public class GetMediaMetaDataStream {
             @JsonProperty("embeddedInVideo") Optional<String> embeddedInVideo,
             @JsonProperty("refFrames") Optional<Integer> refFrames,
             @JsonProperty("width") Optional<Integer> width,
-            @JsonProperty("displayTitle") String displayTitle,
-            @JsonProperty("extendedDisplayTitle") String extendedDisplayTitle,
+            @JsonProperty("displayTitle") Optional<String> displayTitle,
+            @JsonProperty("extendedDisplayTitle") Optional<String> extendedDisplayTitle,
             @JsonProperty("selected") Optional<Boolean> selected,
             @JsonProperty("forced") Optional<Boolean> forced,
             @JsonProperty("channels") Optional<Integer> channels,
@@ -414,7 +418,6 @@ public class GetMediaMetaDataStream {
             @JsonProperty("dub") Optional<Boolean> dub,
             @JsonProperty("title") Optional<String> title) {
         Utils.checkNotNull(id, "id");
-        Utils.checkNotNull(streamType, "streamType");
         Utils.checkNotNull(format, "format");
         Utils.checkNotNull(default_, "default_");
         Utils.checkNotNull(codec, "codec");
@@ -465,7 +468,7 @@ public class GetMediaMetaDataStream {
         Utils.checkNotNull(dub, "dub");
         Utils.checkNotNull(title, "title");
         this.id = id;
-        this.streamType = streamType;
+        this.streamType = Builder._SINGLETON_VALUE_StreamType.value();
         this.format = format;
         this.default_ = default_;
         this.codec = codec;
@@ -518,12 +521,8 @@ public class GetMediaMetaDataStream {
     }
     
     public GetMediaMetaDataStream(
-            long id,
-            GetMediaMetaDataStreamType streamType,
-            String codec,
-            String displayTitle,
-            String extendedDisplayTitle) {
-        this(id, streamType, Optional.empty(), Optional.empty(), codec, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), displayTitle, extendedDisplayTitle, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+            long id) {
+        this(id, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -536,12 +535,12 @@ public class GetMediaMetaDataStream {
 
     /**
      * Stream type:
-     *   - 1 = video
-     *   - 2 = audio
-     *   - 3 = subtitle
+     *   - VIDEO = 1
+     *   - AUDIO = 2
+     *   - SUBTITLE = 3
      */
     @JsonIgnore
-    public GetMediaMetaDataStreamType streamType() {
+    public long streamType() {
         return streamType;
     }
 
@@ -565,7 +564,7 @@ public class GetMediaMetaDataStream {
      * Codec used by the stream.
      */
     @JsonIgnore
-    public String codec() {
+    public Optional<String> codec() {
         return codec;
     }
 
@@ -841,7 +840,7 @@ public class GetMediaMetaDataStream {
      * Display title for the stream.
      */
     @JsonIgnore
-    public String displayTitle() {
+    public Optional<String> displayTitle() {
         return displayTitle;
     }
 
@@ -849,7 +848,7 @@ public class GetMediaMetaDataStream {
      * Extended display title for the stream.
      */
     @JsonIgnore
-    public String extendedDisplayTitle() {
+    public Optional<String> extendedDisplayTitle() {
         return extendedDisplayTitle;
     }
 
@@ -936,18 +935,6 @@ public class GetMediaMetaDataStream {
     }
 
     /**
-     * Stream type:
-     *   - 1 = video
-     *   - 2 = audio
-     *   - 3 = subtitle
-     */
-    public GetMediaMetaDataStream withStreamType(GetMediaMetaDataStreamType streamType) {
-        Utils.checkNotNull(streamType, "streamType");
-        this.streamType = streamType;
-        return this;
-    }
-
-    /**
      * Format of the stream (e.g., srt).
      */
     public GetMediaMetaDataStream withFormat(String format) {
@@ -987,6 +974,15 @@ public class GetMediaMetaDataStream {
      * Codec used by the stream.
      */
     public GetMediaMetaDataStream withCodec(String codec) {
+        Utils.checkNotNull(codec, "codec");
+        this.codec = Optional.ofNullable(codec);
+        return this;
+    }
+
+    /**
+     * Codec used by the stream.
+     */
+    public GetMediaMetaDataStream withCodec(Optional<String> codec) {
         Utils.checkNotNull(codec, "codec");
         this.codec = codec;
         return this;
@@ -1603,6 +1599,15 @@ public class GetMediaMetaDataStream {
      */
     public GetMediaMetaDataStream withDisplayTitle(String displayTitle) {
         Utils.checkNotNull(displayTitle, "displayTitle");
+        this.displayTitle = Optional.ofNullable(displayTitle);
+        return this;
+    }
+
+    /**
+     * Display title for the stream.
+     */
+    public GetMediaMetaDataStream withDisplayTitle(Optional<String> displayTitle) {
+        Utils.checkNotNull(displayTitle, "displayTitle");
         this.displayTitle = displayTitle;
         return this;
     }
@@ -1611,6 +1616,15 @@ public class GetMediaMetaDataStream {
      * Extended display title for the stream.
      */
     public GetMediaMetaDataStream withExtendedDisplayTitle(String extendedDisplayTitle) {
+        Utils.checkNotNull(extendedDisplayTitle, "extendedDisplayTitle");
+        this.extendedDisplayTitle = Optional.ofNullable(extendedDisplayTitle);
+        return this;
+    }
+
+    /**
+     * Extended display title for the stream.
+     */
+    public GetMediaMetaDataStream withExtendedDisplayTitle(Optional<String> extendedDisplayTitle) {
         Utils.checkNotNull(extendedDisplayTitle, "extendedDisplayTitle");
         this.extendedDisplayTitle = extendedDisplayTitle;
         return this;
@@ -1952,13 +1966,11 @@ public class GetMediaMetaDataStream {
  
         private Long id;
  
-        private GetMediaMetaDataStreamType streamType;
- 
         private Optional<String> format = Optional.empty();
  
         private Optional<Boolean> default_ = Optional.empty();
  
-        private String codec;
+        private Optional<String> codec = Optional.empty();
  
         private Optional<Integer> index = Optional.empty();
  
@@ -2030,9 +2042,9 @@ public class GetMediaMetaDataStream {
  
         private Optional<Integer> width = Optional.empty();
  
-        private String displayTitle;
+        private Optional<String> displayTitle = Optional.empty();
  
-        private String extendedDisplayTitle;
+        private Optional<String> extendedDisplayTitle = Optional.empty();
  
         private Optional<Boolean> selected = Optional.empty();
  
@@ -2062,18 +2074,6 @@ public class GetMediaMetaDataStream {
         public Builder id(long id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
-            return this;
-        }
-
-        /**
-         * Stream type:
-         *   - 1 = video
-         *   - 2 = audio
-         *   - 3 = subtitle
-         */
-        public Builder streamType(GetMediaMetaDataStreamType streamType) {
-            Utils.checkNotNull(streamType, "streamType");
-            this.streamType = streamType;
             return this;
         }
 
@@ -2117,6 +2117,15 @@ public class GetMediaMetaDataStream {
          * Codec used by the stream.
          */
         public Builder codec(String codec) {
+            Utils.checkNotNull(codec, "codec");
+            this.codec = Optional.ofNullable(codec);
+            return this;
+        }
+
+        /**
+         * Codec used by the stream.
+         */
+        public Builder codec(Optional<String> codec) {
             Utils.checkNotNull(codec, "codec");
             this.codec = codec;
             return this;
@@ -2733,6 +2742,15 @@ public class GetMediaMetaDataStream {
          */
         public Builder displayTitle(String displayTitle) {
             Utils.checkNotNull(displayTitle, "displayTitle");
+            this.displayTitle = Optional.ofNullable(displayTitle);
+            return this;
+        }
+
+        /**
+         * Display title for the stream.
+         */
+        public Builder displayTitle(Optional<String> displayTitle) {
+            Utils.checkNotNull(displayTitle, "displayTitle");
             this.displayTitle = displayTitle;
             return this;
         }
@@ -2741,6 +2759,15 @@ public class GetMediaMetaDataStream {
          * Extended display title for the stream.
          */
         public Builder extendedDisplayTitle(String extendedDisplayTitle) {
+            Utils.checkNotNull(extendedDisplayTitle, "extendedDisplayTitle");
+            this.extendedDisplayTitle = Optional.ofNullable(extendedDisplayTitle);
+            return this;
+        }
+
+        /**
+         * Extended display title for the stream.
+         */
+        public Builder extendedDisplayTitle(Optional<String> extendedDisplayTitle) {
             Utils.checkNotNull(extendedDisplayTitle, "extendedDisplayTitle");
             this.extendedDisplayTitle = extendedDisplayTitle;
             return this;
@@ -2905,7 +2932,6 @@ public class GetMediaMetaDataStream {
         public GetMediaMetaDataStream build() {
             return new GetMediaMetaDataStream(
                 id,
-                streamType,
                 format,
                 default_,
                 codec,
@@ -2956,5 +2982,11 @@ public class GetMediaMetaDataStream {
                 dub,
                 title);
         }
+
+        private static final LazySingletonValue<Long> _SINGLETON_VALUE_StreamType =
+                new LazySingletonValue<>(
+                        "streamType",
+                        "1",
+                        new TypeReference<Long>() {});
     }
 }

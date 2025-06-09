@@ -5,35 +5,178 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Double;
+import java.lang.Boolean;
+import java.lang.Integer;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class GetSearchAllLibrariesMediaContainer {
 
+    /**
+     * Number of media items returned in this response.
+     */
     @JsonProperty("size")
-    private double size;
+    private int size;
+
+    /**
+     * Indicates whether syncing is allowed.
+     */
+    @JsonProperty("allowSync")
+    private boolean allowSync;
+
+    /**
+     * An plugin identifier for the media container.
+     */
+    @JsonProperty("identifier")
+    private String identifier;
+
+    /**
+     * The unique identifier for the library section.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("librarySectionID")
+    private Optional<Long> librarySectionID;
+
+    /**
+     * The title of the library section.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("librarySectionTitle")
+    private Optional<String> librarySectionTitle;
+
+    /**
+     * The universally unique identifier for the library section.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("librarySectionUUID")
+    private Optional<String> librarySectionUUID;
+
+    /**
+     * The prefix used for media tag resource paths.
+     */
+    @JsonProperty("mediaTagPrefix")
+    private String mediaTagPrefix;
+
+    /**
+     * The version number for media tags.
+     */
+    @JsonProperty("mediaTagVersion")
+    private long mediaTagVersion;
 
     @JsonProperty("SearchResult")
     private List<SearchResult> searchResult;
 
     @JsonCreator
     public GetSearchAllLibrariesMediaContainer(
-            @JsonProperty("size") double size,
+            @JsonProperty("size") int size,
+            @JsonProperty("allowSync") boolean allowSync,
+            @JsonProperty("identifier") String identifier,
+            @JsonProperty("librarySectionID") Optional<Long> librarySectionID,
+            @JsonProperty("librarySectionTitle") Optional<String> librarySectionTitle,
+            @JsonProperty("librarySectionUUID") Optional<String> librarySectionUUID,
+            @JsonProperty("mediaTagPrefix") String mediaTagPrefix,
+            @JsonProperty("mediaTagVersion") long mediaTagVersion,
             @JsonProperty("SearchResult") List<SearchResult> searchResult) {
         Utils.checkNotNull(size, "size");
+        Utils.checkNotNull(allowSync, "allowSync");
+        Utils.checkNotNull(identifier, "identifier");
+        Utils.checkNotNull(librarySectionID, "librarySectionID");
+        Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+        Utils.checkNotNull(librarySectionUUID, "librarySectionUUID");
+        Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
+        Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
         Utils.checkNotNull(searchResult, "searchResult");
         this.size = size;
+        this.allowSync = allowSync;
+        this.identifier = identifier;
+        this.librarySectionID = librarySectionID;
+        this.librarySectionTitle = librarySectionTitle;
+        this.librarySectionUUID = librarySectionUUID;
+        this.mediaTagPrefix = mediaTagPrefix;
+        this.mediaTagVersion = mediaTagVersion;
         this.searchResult = searchResult;
     }
+    
+    public GetSearchAllLibrariesMediaContainer(
+            int size,
+            boolean allowSync,
+            String identifier,
+            String mediaTagPrefix,
+            long mediaTagVersion,
+            List<SearchResult> searchResult) {
+        this(size, allowSync, identifier, Optional.empty(), Optional.empty(), Optional.empty(), mediaTagPrefix, mediaTagVersion, searchResult);
+    }
 
+    /**
+     * Number of media items returned in this response.
+     */
     @JsonIgnore
-    public double size() {
+    public int size() {
         return size;
+    }
+
+    /**
+     * Indicates whether syncing is allowed.
+     */
+    @JsonIgnore
+    public boolean allowSync() {
+        return allowSync;
+    }
+
+    /**
+     * An plugin identifier for the media container.
+     */
+    @JsonIgnore
+    public String identifier() {
+        return identifier;
+    }
+
+    /**
+     * The unique identifier for the library section.
+     */
+    @JsonIgnore
+    public Optional<Long> librarySectionID() {
+        return librarySectionID;
+    }
+
+    /**
+     * The title of the library section.
+     */
+    @JsonIgnore
+    public Optional<String> librarySectionTitle() {
+        return librarySectionTitle;
+    }
+
+    /**
+     * The universally unique identifier for the library section.
+     */
+    @JsonIgnore
+    public Optional<String> librarySectionUUID() {
+        return librarySectionUUID;
+    }
+
+    /**
+     * The prefix used for media tag resource paths.
+     */
+    @JsonIgnore
+    public String mediaTagPrefix() {
+        return mediaTagPrefix;
+    }
+
+    /**
+     * The version number for media tags.
+     */
+    @JsonIgnore
+    public long mediaTagVersion() {
+        return mediaTagVersion;
     }
 
     @JsonIgnore
@@ -45,9 +188,102 @@ public class GetSearchAllLibrariesMediaContainer {
         return new Builder();
     }    
 
-    public GetSearchAllLibrariesMediaContainer withSize(double size) {
+    /**
+     * Number of media items returned in this response.
+     */
+    public GetSearchAllLibrariesMediaContainer withSize(int size) {
         Utils.checkNotNull(size, "size");
         this.size = size;
+        return this;
+    }
+
+    /**
+     * Indicates whether syncing is allowed.
+     */
+    public GetSearchAllLibrariesMediaContainer withAllowSync(boolean allowSync) {
+        Utils.checkNotNull(allowSync, "allowSync");
+        this.allowSync = allowSync;
+        return this;
+    }
+
+    /**
+     * An plugin identifier for the media container.
+     */
+    public GetSearchAllLibrariesMediaContainer withIdentifier(String identifier) {
+        Utils.checkNotNull(identifier, "identifier");
+        this.identifier = identifier;
+        return this;
+    }
+
+    /**
+     * The unique identifier for the library section.
+     */
+    public GetSearchAllLibrariesMediaContainer withLibrarySectionID(long librarySectionID) {
+        Utils.checkNotNull(librarySectionID, "librarySectionID");
+        this.librarySectionID = Optional.ofNullable(librarySectionID);
+        return this;
+    }
+
+    /**
+     * The unique identifier for the library section.
+     */
+    public GetSearchAllLibrariesMediaContainer withLibrarySectionID(Optional<Long> librarySectionID) {
+        Utils.checkNotNull(librarySectionID, "librarySectionID");
+        this.librarySectionID = librarySectionID;
+        return this;
+    }
+
+    /**
+     * The title of the library section.
+     */
+    public GetSearchAllLibrariesMediaContainer withLibrarySectionTitle(String librarySectionTitle) {
+        Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+        this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
+        return this;
+    }
+
+    /**
+     * The title of the library section.
+     */
+    public GetSearchAllLibrariesMediaContainer withLibrarySectionTitle(Optional<String> librarySectionTitle) {
+        Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+        this.librarySectionTitle = librarySectionTitle;
+        return this;
+    }
+
+    /**
+     * The universally unique identifier for the library section.
+     */
+    public GetSearchAllLibrariesMediaContainer withLibrarySectionUUID(String librarySectionUUID) {
+        Utils.checkNotNull(librarySectionUUID, "librarySectionUUID");
+        this.librarySectionUUID = Optional.ofNullable(librarySectionUUID);
+        return this;
+    }
+
+    /**
+     * The universally unique identifier for the library section.
+     */
+    public GetSearchAllLibrariesMediaContainer withLibrarySectionUUID(Optional<String> librarySectionUUID) {
+        Utils.checkNotNull(librarySectionUUID, "librarySectionUUID");
+        this.librarySectionUUID = librarySectionUUID;
+        return this;
+    }
+
+    /**
+     * The prefix used for media tag resource paths.
+     */
+    public GetSearchAllLibrariesMediaContainer withMediaTagPrefix(String mediaTagPrefix) {
+        Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
+        this.mediaTagPrefix = mediaTagPrefix;
+        return this;
+    }
+
+    /**
+     * The version number for media tags.
+     */
+    public GetSearchAllLibrariesMediaContainer withMediaTagVersion(long mediaTagVersion) {
+        Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
+        this.mediaTagVersion = mediaTagVersion;
         return this;
     }
 
@@ -69,6 +305,13 @@ public class GetSearchAllLibrariesMediaContainer {
         GetSearchAllLibrariesMediaContainer other = (GetSearchAllLibrariesMediaContainer) o;
         return 
             Objects.deepEquals(this.size, other.size) &&
+            Objects.deepEquals(this.allowSync, other.allowSync) &&
+            Objects.deepEquals(this.identifier, other.identifier) &&
+            Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
+            Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
+            Objects.deepEquals(this.librarySectionUUID, other.librarySectionUUID) &&
+            Objects.deepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
+            Objects.deepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
             Objects.deepEquals(this.searchResult, other.searchResult);
     }
     
@@ -76,6 +319,13 @@ public class GetSearchAllLibrariesMediaContainer {
     public int hashCode() {
         return Objects.hash(
             size,
+            allowSync,
+            identifier,
+            librarySectionID,
+            librarySectionTitle,
+            librarySectionUUID,
+            mediaTagPrefix,
+            mediaTagVersion,
             searchResult);
     }
     
@@ -83,12 +333,33 @@ public class GetSearchAllLibrariesMediaContainer {
     public String toString() {
         return Utils.toString(GetSearchAllLibrariesMediaContainer.class,
                 "size", size,
+                "allowSync", allowSync,
+                "identifier", identifier,
+                "librarySectionID", librarySectionID,
+                "librarySectionTitle", librarySectionTitle,
+                "librarySectionUUID", librarySectionUUID,
+                "mediaTagPrefix", mediaTagPrefix,
+                "mediaTagVersion", mediaTagVersion,
                 "searchResult", searchResult);
     }
     
     public final static class Builder {
  
-        private Double size;
+        private Integer size;
+ 
+        private Boolean allowSync;
+ 
+        private String identifier;
+ 
+        private Optional<Long> librarySectionID = Optional.empty();
+ 
+        private Optional<String> librarySectionTitle = Optional.empty();
+ 
+        private Optional<String> librarySectionUUID = Optional.empty();
+ 
+        private String mediaTagPrefix;
+ 
+        private Long mediaTagVersion;
  
         private List<SearchResult> searchResult;
         
@@ -96,9 +367,102 @@ public class GetSearchAllLibrariesMediaContainer {
           // force use of static builder() method
         }
 
-        public Builder size(double size) {
+        /**
+         * Number of media items returned in this response.
+         */
+        public Builder size(int size) {
             Utils.checkNotNull(size, "size");
             this.size = size;
+            return this;
+        }
+
+        /**
+         * Indicates whether syncing is allowed.
+         */
+        public Builder allowSync(boolean allowSync) {
+            Utils.checkNotNull(allowSync, "allowSync");
+            this.allowSync = allowSync;
+            return this;
+        }
+
+        /**
+         * An plugin identifier for the media container.
+         */
+        public Builder identifier(String identifier) {
+            Utils.checkNotNull(identifier, "identifier");
+            this.identifier = identifier;
+            return this;
+        }
+
+        /**
+         * The unique identifier for the library section.
+         */
+        public Builder librarySectionID(long librarySectionID) {
+            Utils.checkNotNull(librarySectionID, "librarySectionID");
+            this.librarySectionID = Optional.ofNullable(librarySectionID);
+            return this;
+        }
+
+        /**
+         * The unique identifier for the library section.
+         */
+        public Builder librarySectionID(Optional<Long> librarySectionID) {
+            Utils.checkNotNull(librarySectionID, "librarySectionID");
+            this.librarySectionID = librarySectionID;
+            return this;
+        }
+
+        /**
+         * The title of the library section.
+         */
+        public Builder librarySectionTitle(String librarySectionTitle) {
+            Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+            this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
+            return this;
+        }
+
+        /**
+         * The title of the library section.
+         */
+        public Builder librarySectionTitle(Optional<String> librarySectionTitle) {
+            Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+            this.librarySectionTitle = librarySectionTitle;
+            return this;
+        }
+
+        /**
+         * The universally unique identifier for the library section.
+         */
+        public Builder librarySectionUUID(String librarySectionUUID) {
+            Utils.checkNotNull(librarySectionUUID, "librarySectionUUID");
+            this.librarySectionUUID = Optional.ofNullable(librarySectionUUID);
+            return this;
+        }
+
+        /**
+         * The universally unique identifier for the library section.
+         */
+        public Builder librarySectionUUID(Optional<String> librarySectionUUID) {
+            Utils.checkNotNull(librarySectionUUID, "librarySectionUUID");
+            this.librarySectionUUID = librarySectionUUID;
+            return this;
+        }
+
+        /**
+         * The prefix used for media tag resource paths.
+         */
+        public Builder mediaTagPrefix(String mediaTagPrefix) {
+            Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
+            this.mediaTagPrefix = mediaTagPrefix;
+            return this;
+        }
+
+        /**
+         * The version number for media tags.
+         */
+        public Builder mediaTagVersion(long mediaTagVersion) {
+            Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
+            this.mediaTagVersion = mediaTagVersion;
             return this;
         }
 
@@ -111,6 +475,13 @@ public class GetSearchAllLibrariesMediaContainer {
         public GetSearchAllLibrariesMediaContainer build() {
             return new GetSearchAllLibrariesMediaContainer(
                 size,
+                allowSync,
+                identifier,
+                librarySectionID,
+                librarySectionTitle,
+                librarySectionUUID,
+                mediaTagPrefix,
+                mediaTagVersion,
                 searchResult);
         }
     }

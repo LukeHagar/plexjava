@@ -8,6 +8,11 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * GetLibraryItemsHasThumbnail
+ * 
+ * <p>Indicates if the part has a thumbnail.
+ */
 public enum GetLibraryItemsHasThumbnail {
     False("0"),
     True("1");

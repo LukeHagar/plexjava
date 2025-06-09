@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Float;
@@ -28,12 +30,12 @@ public class Stream {
 
     /**
      * Stream type:
-     *   - 1 = video
-     *   - 2 = audio
-     *   - 3 = subtitle
+     *   - VIDEO = 1
+     *   - AUDIO = 2
+     *   - SUBTITLE = 3
      */
     @JsonProperty("streamType")
-    private StreamType streamType;
+    private long streamType;
 
     /**
      * Format of the stream (e.g., srt).
@@ -363,7 +365,6 @@ public class Stream {
     @JsonCreator
     public Stream(
             @JsonProperty("id") long id,
-            @JsonProperty("streamType") StreamType streamType,
             @JsonProperty("format") Optional<String> format,
             @JsonProperty("default") Optional<Boolean> default_,
             @JsonProperty("codec") String codec,
@@ -414,7 +415,6 @@ public class Stream {
             @JsonProperty("dub") Optional<Boolean> dub,
             @JsonProperty("title") Optional<String> title) {
         Utils.checkNotNull(id, "id");
-        Utils.checkNotNull(streamType, "streamType");
         Utils.checkNotNull(format, "format");
         Utils.checkNotNull(default_, "default_");
         Utils.checkNotNull(codec, "codec");
@@ -465,7 +465,7 @@ public class Stream {
         Utils.checkNotNull(dub, "dub");
         Utils.checkNotNull(title, "title");
         this.id = id;
-        this.streamType = streamType;
+        this.streamType = Builder._SINGLETON_VALUE_StreamType.value();
         this.format = format;
         this.default_ = default_;
         this.codec = codec;
@@ -519,11 +519,10 @@ public class Stream {
     
     public Stream(
             long id,
-            StreamType streamType,
             String codec,
             String displayTitle,
             String extendedDisplayTitle) {
-        this(id, streamType, Optional.empty(), Optional.empty(), codec, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), displayTitle, extendedDisplayTitle, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(id, Optional.empty(), Optional.empty(), codec, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), displayTitle, extendedDisplayTitle, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -536,12 +535,12 @@ public class Stream {
 
     /**
      * Stream type:
-     *   - 1 = video
-     *   - 2 = audio
-     *   - 3 = subtitle
+     *   - VIDEO = 1
+     *   - AUDIO = 2
+     *   - SUBTITLE = 3
      */
     @JsonIgnore
-    public StreamType streamType() {
+    public long streamType() {
         return streamType;
     }
 
@@ -932,18 +931,6 @@ public class Stream {
     public Stream withId(long id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
-        return this;
-    }
-
-    /**
-     * Stream type:
-     *   - 1 = video
-     *   - 2 = audio
-     *   - 3 = subtitle
-     */
-    public Stream withStreamType(StreamType streamType) {
-        Utils.checkNotNull(streamType, "streamType");
-        this.streamType = streamType;
         return this;
     }
 
@@ -1952,8 +1939,6 @@ public class Stream {
  
         private Long id;
  
-        private StreamType streamType;
- 
         private Optional<String> format = Optional.empty();
  
         private Optional<Boolean> default_ = Optional.empty();
@@ -2062,18 +2047,6 @@ public class Stream {
         public Builder id(long id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
-            return this;
-        }
-
-        /**
-         * Stream type:
-         *   - 1 = video
-         *   - 2 = audio
-         *   - 3 = subtitle
-         */
-        public Builder streamType(StreamType streamType) {
-            Utils.checkNotNull(streamType, "streamType");
-            this.streamType = streamType;
             return this;
         }
 
@@ -2905,7 +2878,6 @@ public class Stream {
         public Stream build() {
             return new Stream(
                 id,
-                streamType,
                 format,
                 default_,
                 codec,
@@ -2956,5 +2928,11 @@ public class Stream {
                 dub,
                 title);
         }
+
+        private static final LazySingletonValue<Long> _SINGLETON_VALUE_StreamType =
+                new LazySingletonValue<>(
+                        "streamType",
+                        "1",
+                        new TypeReference<Long>() {});
     }
 }

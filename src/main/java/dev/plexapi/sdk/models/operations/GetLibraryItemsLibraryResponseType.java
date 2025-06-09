@@ -3,314 +3,185 @@
  */
 package dev.plexapi.sdk.models.operations;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import dev.plexapi.sdk.utils.Utils;
-import java.lang.Boolean;
+import com.fasterxml.jackson.core.JacksonException;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import java.io.IOException;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.List;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * <p>Wrapper class for an "open" enum. "Open" enums are those that are expected
+ * to evolve (particularly with the addition of enum members over time). If an
+ * open enum is used then the appearance of unexpected enum values (say in a 
+ * response from an updated an API) will not bring about a runtime error thus 
+ * ensuring that non-updated client versions can continue to work without error.
+ *
+ * <p>Note that instances are immutable and are singletons (an internal thread-safe
+ * cache is maintained to ensure that). As a consequence instances created with the 
+ * same value will satisfy reference equality (via {@code ==}).
+ * 
+ * <p>This class is intended to emulate an enum (in terms of common usage and with 
+ * reference equality) but with the ability to carry unknown values. Unfortunately
+ * Java does not permit the use of an instance in a switch expression but you can 
+ * use the {@code asEnum()} method (after dealing with the `Optional` appropriately).
+ *
+ */
+@JsonDeserialize(using = GetLibraryItemsLibraryResponseType._Deserializer.class)
+@JsonSerialize(using = GetLibraryItemsLibraryResponseType._Serializer.class)
 public class GetLibraryItemsLibraryResponseType {
 
-    @JsonProperty("key")
-    private String key;
+    public static final GetLibraryItemsLibraryResponseType COVER_POSTER = new GetLibraryItemsLibraryResponseType("coverPoster");
+    public static final GetLibraryItemsLibraryResponseType BACKGROUND = new GetLibraryItemsLibraryResponseType("background");
+    public static final GetLibraryItemsLibraryResponseType SNAPSHOT = new GetLibraryItemsLibraryResponseType("snapshot");
+    public static final GetLibraryItemsLibraryResponseType CLEAR_LOGO = new GetLibraryItemsLibraryResponseType("clearLogo");
 
-    @JsonProperty("type")
-    private String type;
+    // This map will grow whenever a Color gets created with a new
+    // unrecognized value (a potential memory leak if the user is not
+    // careful). Keep this field lower case to avoid clashing with
+    // generated member names which will always be upper cased (Java
+    // convention)
+    private static final Map<String, GetLibraryItemsLibraryResponseType> values = createValuesMap();
+    private static final Map<String, GetLibraryItemsLibraryResponseTypeEnum> enums = createEnumsMap();
 
-    @JsonProperty("title")
-    private String title;
+    private final String value;
 
-    @JsonProperty("active")
-    private boolean active;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("Filter")
-    private Optional<? extends List<GetLibraryItemsLibraryFilter>> filter;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("Sort")
-    private Optional<? extends List<GetLibraryItemsLibrarySort>> sort;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("Field")
-    private Optional<? extends List<GetLibraryItemsLibraryField>> field;
-
-    @JsonCreator
-    public GetLibraryItemsLibraryResponseType(
-            @JsonProperty("key") String key,
-            @JsonProperty("type") String type,
-            @JsonProperty("title") String title,
-            @JsonProperty("active") boolean active,
-            @JsonProperty("Filter") Optional<? extends List<GetLibraryItemsLibraryFilter>> filter,
-            @JsonProperty("Sort") Optional<? extends List<GetLibraryItemsLibrarySort>> sort,
-            @JsonProperty("Field") Optional<? extends List<GetLibraryItemsLibraryField>> field) {
-        Utils.checkNotNull(key, "key");
-        Utils.checkNotNull(type, "type");
-        Utils.checkNotNull(title, "title");
-        Utils.checkNotNull(active, "active");
-        Utils.checkNotNull(filter, "filter");
-        Utils.checkNotNull(sort, "sort");
-        Utils.checkNotNull(field, "field");
-        this.key = key;
-        this.type = type;
-        this.title = title;
-        this.active = active;
-        this.filter = filter;
-        this.sort = sort;
-        this.field = field;
-    }
-    
-    public GetLibraryItemsLibraryResponseType(
-            String key,
-            String type,
-            String title,
-            boolean active) {
-        this(key, type, title, active, Optional.empty(), Optional.empty(), Optional.empty());
+    private GetLibraryItemsLibraryResponseType(String value) {
+        this.value = value;
     }
 
-    @JsonIgnore
-    public String key() {
-        return key;
-    }
-
-    @JsonIgnore
-    public String type() {
-        return type;
-    }
-
-    @JsonIgnore
-    public String title() {
-        return title;
-    }
-
-    @JsonIgnore
-    public boolean active() {
-        return active;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<GetLibraryItemsLibraryFilter>> filter() {
-        return (Optional<List<GetLibraryItemsLibraryFilter>>) filter;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<GetLibraryItemsLibrarySort>> sort() {
-        return (Optional<List<GetLibraryItemsLibrarySort>>) sort;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<GetLibraryItemsLibraryField>> field() {
-        return (Optional<List<GetLibraryItemsLibraryField>>) field;
-    }
-
-    public final static Builder builder() {
-        return new Builder();
-    }    
-
-    public GetLibraryItemsLibraryResponseType withKey(String key) {
-        Utils.checkNotNull(key, "key");
-        this.key = key;
-        return this;
-    }
-
-    public GetLibraryItemsLibraryResponseType withType(String type) {
-        Utils.checkNotNull(type, "type");
-        this.type = type;
-        return this;
-    }
-
-    public GetLibraryItemsLibraryResponseType withTitle(String title) {
-        Utils.checkNotNull(title, "title");
-        this.title = title;
-        return this;
-    }
-
-    public GetLibraryItemsLibraryResponseType withActive(boolean active) {
-        Utils.checkNotNull(active, "active");
-        this.active = active;
-        return this;
-    }
-
-    public GetLibraryItemsLibraryResponseType withFilter(List<GetLibraryItemsLibraryFilter> filter) {
-        Utils.checkNotNull(filter, "filter");
-        this.filter = Optional.ofNullable(filter);
-        return this;
-    }
-
-    public GetLibraryItemsLibraryResponseType withFilter(Optional<? extends List<GetLibraryItemsLibraryFilter>> filter) {
-        Utils.checkNotNull(filter, "filter");
-        this.filter = filter;
-        return this;
-    }
-
-    public GetLibraryItemsLibraryResponseType withSort(List<GetLibraryItemsLibrarySort> sort) {
-        Utils.checkNotNull(sort, "sort");
-        this.sort = Optional.ofNullable(sort);
-        return this;
-    }
-
-    public GetLibraryItemsLibraryResponseType withSort(Optional<? extends List<GetLibraryItemsLibrarySort>> sort) {
-        Utils.checkNotNull(sort, "sort");
-        this.sort = sort;
-        return this;
-    }
-
-    public GetLibraryItemsLibraryResponseType withField(List<GetLibraryItemsLibraryField> field) {
-        Utils.checkNotNull(field, "field");
-        this.field = Optional.ofNullable(field);
-        return this;
-    }
-
-    public GetLibraryItemsLibraryResponseType withField(Optional<? extends List<GetLibraryItemsLibraryField>> field) {
-        Utils.checkNotNull(field, "field");
-        this.field = field;
-        return this;
-    }
-
-    
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
+    /**
+     * Returns a GetLibraryItemsLibraryResponseType with the given value. For a specific value the 
+     * returned object will always be a singleton so reference equality 
+     * is satisfied when the values are the same.
+     * 
+     * @param value value to be wrapped as GetLibraryItemsLibraryResponseType
+     */ 
+    public static GetLibraryItemsLibraryResponseType of(String value) {
+        synchronized (GetLibraryItemsLibraryResponseType.class) {
+            return values.computeIfAbsent(value, v -> new GetLibraryItemsLibraryResponseType(v));
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        GetLibraryItemsLibraryResponseType other = (GetLibraryItemsLibraryResponseType) o;
-        return 
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.active, other.active) &&
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.sort, other.sort) &&
-            Objects.deepEquals(this.field, other.field);
     }
-    
+
+    public String value() {
+        return value;
+    }
+
+    public Optional<GetLibraryItemsLibraryResponseTypeEnum> asEnum() {
+        return Optional.ofNullable(enums.getOrDefault(value, null));
+    }
+
+    public boolean isKnown() {
+        return asEnum().isPresent();
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(
-            key,
-            type,
-            title,
-            active,
-            filter,
-            sort,
-            field);
+        return Objects.hash(value);
     }
-    
+
+    @Override
+    public boolean equals(java.lang.Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        GetLibraryItemsLibraryResponseType other = (GetLibraryItemsLibraryResponseType) obj;
+        return Objects.equals(value, other.value);
+    }
+
     @Override
     public String toString() {
-        return Utils.toString(GetLibraryItemsLibraryResponseType.class,
-                "key", key,
-                "type", type,
-                "title", title,
-                "active", active,
-                "filter", filter,
-                "sort", sort,
-                "field", field);
+        return "GetLibraryItemsLibraryResponseType [value=" + value + "]";
+    }
+
+    // return an array just like an enum
+    public static GetLibraryItemsLibraryResponseType[] values() {
+        synchronized (GetLibraryItemsLibraryResponseType.class) {
+            return values.values().toArray(new GetLibraryItemsLibraryResponseType[] {});
+        }
+    }
+
+    private static final Map<String, GetLibraryItemsLibraryResponseType> createValuesMap() {
+        Map<String, GetLibraryItemsLibraryResponseType> map = new LinkedHashMap<>();
+        map.put("coverPoster", COVER_POSTER);
+        map.put("background", BACKGROUND);
+        map.put("snapshot", SNAPSHOT);
+        map.put("clearLogo", CLEAR_LOGO);
+        return map;
+    }
+
+    private static final Map<String, GetLibraryItemsLibraryResponseTypeEnum> createEnumsMap() {
+        Map<String, GetLibraryItemsLibraryResponseTypeEnum> map = new HashMap<>();
+        map.put("coverPoster", GetLibraryItemsLibraryResponseTypeEnum.COVER_POSTER);
+        map.put("background", GetLibraryItemsLibraryResponseTypeEnum.BACKGROUND);
+        map.put("snapshot", GetLibraryItemsLibraryResponseTypeEnum.SNAPSHOT);
+        map.put("clearLogo", GetLibraryItemsLibraryResponseTypeEnum.CLEAR_LOGO);
+        return map;
     }
     
-    public final static class Builder {
- 
-        private String key;
- 
-        private String type;
- 
-        private String title;
- 
-        private Boolean active;
- 
-        private Optional<? extends List<GetLibraryItemsLibraryFilter>> filter = Optional.empty();
- 
-        private Optional<? extends List<GetLibraryItemsLibrarySort>> sort = Optional.empty();
- 
-        private Optional<? extends List<GetLibraryItemsLibraryField>> field = Optional.empty();
-        
-        private Builder() {
-          // force use of static builder() method
+    @SuppressWarnings("serial")
+    public static final class _Serializer extends StdSerializer<GetLibraryItemsLibraryResponseType> {
+
+        protected _Serializer() {
+            super(GetLibraryItemsLibraryResponseType.class);
         }
 
-        public Builder key(String key) {
-            Utils.checkNotNull(key, "key");
-            this.key = key;
-            return this;
+        @Override
+        public void serialize(GetLibraryItemsLibraryResponseType value, JsonGenerator g, SerializerProvider provider)
+                throws IOException, JsonProcessingException {
+            g.writeObject(value.value);
+        }
+    }
+
+    @SuppressWarnings("serial")
+    public static final class _Deserializer extends StdDeserializer<GetLibraryItemsLibraryResponseType> {
+
+        protected _Deserializer() {
+            super(GetLibraryItemsLibraryResponseType.class);
         }
 
-        public Builder type(String type) {
-            Utils.checkNotNull(type, "type");
-            this.type = type;
-            return this;
+        @Override
+        public GetLibraryItemsLibraryResponseType deserialize(JsonParser p, DeserializationContext ctxt)
+                throws IOException, JacksonException {
+            String v = p.readValueAs(new TypeReference<String>() {});
+            // use the factory method to ensure we get singletons
+            return GetLibraryItemsLibraryResponseType.of(v);
+        }
+    }
+    
+    public enum GetLibraryItemsLibraryResponseTypeEnum {
+
+        COVER_POSTER("coverPoster"),
+        BACKGROUND("background"),
+        SNAPSHOT("snapshot"),
+        CLEAR_LOGO("clearLogo"),;
+
+        private final String value;
+
+        private GetLibraryItemsLibraryResponseTypeEnum(String value) {
+            this.value = value;
         }
 
-        public Builder title(String title) {
-            Utils.checkNotNull(title, "title");
-            this.title = title;
-            return this;
-        }
-
-        public Builder active(boolean active) {
-            Utils.checkNotNull(active, "active");
-            this.active = active;
-            return this;
-        }
-
-        public Builder filter(List<GetLibraryItemsLibraryFilter> filter) {
-            Utils.checkNotNull(filter, "filter");
-            this.filter = Optional.ofNullable(filter);
-            return this;
-        }
-
-        public Builder filter(Optional<? extends List<GetLibraryItemsLibraryFilter>> filter) {
-            Utils.checkNotNull(filter, "filter");
-            this.filter = filter;
-            return this;
-        }
-
-        public Builder sort(List<GetLibraryItemsLibrarySort> sort) {
-            Utils.checkNotNull(sort, "sort");
-            this.sort = Optional.ofNullable(sort);
-            return this;
-        }
-
-        public Builder sort(Optional<? extends List<GetLibraryItemsLibrarySort>> sort) {
-            Utils.checkNotNull(sort, "sort");
-            this.sort = sort;
-            return this;
-        }
-
-        public Builder field(List<GetLibraryItemsLibraryField> field) {
-            Utils.checkNotNull(field, "field");
-            this.field = Optional.ofNullable(field);
-            return this;
-        }
-
-        public Builder field(Optional<? extends List<GetLibraryItemsLibraryField>> field) {
-            Utils.checkNotNull(field, "field");
-            this.field = field;
-            return this;
-        }
-        
-        public GetLibraryItemsLibraryResponseType build() {
-            return new GetLibraryItemsLibraryResponseType(
-                key,
-                type,
-                title,
-                active,
-                filter,
-                sort,
-                field);
+        public String value() {
+            return value;
         }
     }
 }
+

@@ -41,14 +41,16 @@ public class GetMediaMetaDataMediaContainer {
     /**
      * The unique identifier for the library section.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionID")
-    private long librarySectionID;
+    private Optional<Long> librarySectionID;
 
     /**
      * The title of the library section.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionTitle")
-    private String librarySectionTitle;
+    private Optional<String> librarySectionTitle;
 
     /**
      * The universally unique identifier for the library section.
@@ -80,8 +82,8 @@ public class GetMediaMetaDataMediaContainer {
             @JsonProperty("size") int size,
             @JsonProperty("allowSync") boolean allowSync,
             @JsonProperty("identifier") String identifier,
-            @JsonProperty("librarySectionID") long librarySectionID,
-            @JsonProperty("librarySectionTitle") String librarySectionTitle,
+            @JsonProperty("librarySectionID") Optional<Long> librarySectionID,
+            @JsonProperty("librarySectionTitle") Optional<String> librarySectionTitle,
             @JsonProperty("librarySectionUUID") Optional<String> librarySectionUUID,
             @JsonProperty("mediaTagPrefix") String mediaTagPrefix,
             @JsonProperty("mediaTagVersion") long mediaTagVersion,
@@ -110,12 +112,10 @@ public class GetMediaMetaDataMediaContainer {
             int size,
             boolean allowSync,
             String identifier,
-            long librarySectionID,
-            String librarySectionTitle,
             String mediaTagPrefix,
             long mediaTagVersion,
             List<GetMediaMetaDataMetadata> metadata) {
-        this(size, allowSync, identifier, librarySectionID, librarySectionTitle, Optional.empty(), mediaTagPrefix, mediaTagVersion, metadata);
+        this(size, allowSync, identifier, Optional.empty(), Optional.empty(), Optional.empty(), mediaTagPrefix, mediaTagVersion, metadata);
     }
 
     /**
@@ -146,7 +146,7 @@ public class GetMediaMetaDataMediaContainer {
      * The unique identifier for the library section.
      */
     @JsonIgnore
-    public long librarySectionID() {
+    public Optional<Long> librarySectionID() {
         return librarySectionID;
     }
 
@@ -154,7 +154,7 @@ public class GetMediaMetaDataMediaContainer {
      * The title of the library section.
      */
     @JsonIgnore
-    public String librarySectionTitle() {
+    public Optional<String> librarySectionTitle() {
         return librarySectionTitle;
     }
 
@@ -226,6 +226,15 @@ public class GetMediaMetaDataMediaContainer {
      */
     public GetMediaMetaDataMediaContainer withLibrarySectionID(long librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
+        this.librarySectionID = Optional.ofNullable(librarySectionID);
+        return this;
+    }
+
+    /**
+     * The unique identifier for the library section.
+     */
+    public GetMediaMetaDataMediaContainer withLibrarySectionID(Optional<Long> librarySectionID) {
+        Utils.checkNotNull(librarySectionID, "librarySectionID");
         this.librarySectionID = librarySectionID;
         return this;
     }
@@ -234,6 +243,15 @@ public class GetMediaMetaDataMediaContainer {
      * The title of the library section.
      */
     public GetMediaMetaDataMediaContainer withLibrarySectionTitle(String librarySectionTitle) {
+        Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+        this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
+        return this;
+    }
+
+    /**
+     * The title of the library section.
+     */
+    public GetMediaMetaDataMediaContainer withLibrarySectionTitle(Optional<String> librarySectionTitle) {
         Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
         this.librarySectionTitle = librarySectionTitle;
         return this;
@@ -342,9 +360,9 @@ public class GetMediaMetaDataMediaContainer {
  
         private String identifier;
  
-        private Long librarySectionID;
+        private Optional<Long> librarySectionID = Optional.empty();
  
-        private String librarySectionTitle;
+        private Optional<String> librarySectionTitle = Optional.empty();
  
         private Optional<String> librarySectionUUID = Optional.empty();
  
@@ -390,6 +408,15 @@ public class GetMediaMetaDataMediaContainer {
          */
         public Builder librarySectionID(long librarySectionID) {
             Utils.checkNotNull(librarySectionID, "librarySectionID");
+            this.librarySectionID = Optional.ofNullable(librarySectionID);
+            return this;
+        }
+
+        /**
+         * The unique identifier for the library section.
+         */
+        public Builder librarySectionID(Optional<Long> librarySectionID) {
+            Utils.checkNotNull(librarySectionID, "librarySectionID");
             this.librarySectionID = librarySectionID;
             return this;
         }
@@ -398,6 +425,15 @@ public class GetMediaMetaDataMediaContainer {
          * The title of the library section.
          */
         public Builder librarySectionTitle(String librarySectionTitle) {
+            Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+            this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
+            return this;
+        }
+
+        /**
+         * The title of the library section.
+         */
+        public Builder librarySectionTitle(Optional<String> librarySectionTitle) {
             Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
             this.librarySectionTitle = librarySectionTitle;
             return this;

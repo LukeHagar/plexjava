@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Long;
+import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -18,119 +18,85 @@ import java.util.Optional;
 public class GetSearchAllLibrariesRole {
 
     /**
-     * The ID of the tag or actor.
+     * The unique identifier for the role.
+     * NOTE: This is different for each Plex server and is not globally unique.
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("id")
-    private Optional<Long> id;
+    private int id;
 
     /**
-     * The filter used to find the actor or tag.
+     * The display tag for the actor (typically the actor's name).
      */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("filter")
-    private Optional<String> filter;
-
-    /**
-     * The thumbnail of the actor
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("thumb")
-    private Optional<String> thumb;
-
-    /**
-     * The name of the tag or actor.
-     */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tag")
-    private Optional<String> tag;
+    private String tag;
 
     /**
-     * Unique identifier for the tag.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("tagKey")
-    private Optional<String> tagKey;
-
-    /**
-     * The role of the actor or tag in the media.
+     * The role played by the actor in the media item.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("role")
     private Optional<String> role;
 
+    /**
+     * The absolute URL of the thumbnail image for the actor.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("thumb")
+    private Optional<String> thumb;
+
     @JsonCreator
     public GetSearchAllLibrariesRole(
-            @JsonProperty("id") Optional<Long> id,
-            @JsonProperty("filter") Optional<String> filter,
-            @JsonProperty("thumb") Optional<String> thumb,
-            @JsonProperty("tag") Optional<String> tag,
-            @JsonProperty("tagKey") Optional<String> tagKey,
-            @JsonProperty("role") Optional<String> role) {
+            @JsonProperty("id") int id,
+            @JsonProperty("tag") String tag,
+            @JsonProperty("role") Optional<String> role,
+            @JsonProperty("thumb") Optional<String> thumb) {
         Utils.checkNotNull(id, "id");
-        Utils.checkNotNull(filter, "filter");
-        Utils.checkNotNull(thumb, "thumb");
         Utils.checkNotNull(tag, "tag");
-        Utils.checkNotNull(tagKey, "tagKey");
         Utils.checkNotNull(role, "role");
+        Utils.checkNotNull(thumb, "thumb");
         this.id = id;
-        this.filter = filter;
-        this.thumb = thumb;
         this.tag = tag;
-        this.tagKey = tagKey;
         this.role = role;
+        this.thumb = thumb;
     }
     
-    public GetSearchAllLibrariesRole() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    public GetSearchAllLibrariesRole(
+            int id,
+            String tag) {
+        this(id, tag, Optional.empty(), Optional.empty());
     }
 
     /**
-     * The ID of the tag or actor.
+     * The unique identifier for the role.
+     * NOTE: This is different for each Plex server and is not globally unique.
      */
     @JsonIgnore
-    public Optional<Long> id() {
+    public int id() {
         return id;
     }
 
     /**
-     * The filter used to find the actor or tag.
+     * The display tag for the actor (typically the actor's name).
      */
     @JsonIgnore
-    public Optional<String> filter() {
-        return filter;
-    }
-
-    /**
-     * The thumbnail of the actor
-     */
-    @JsonIgnore
-    public Optional<String> thumb() {
-        return thumb;
-    }
-
-    /**
-     * The name of the tag or actor.
-     */
-    @JsonIgnore
-    public Optional<String> tag() {
+    public String tag() {
         return tag;
     }
 
     /**
-     * Unique identifier for the tag.
-     */
-    @JsonIgnore
-    public Optional<String> tagKey() {
-        return tagKey;
-    }
-
-    /**
-     * The role of the actor or tag in the media.
+     * The role played by the actor in the media item.
      */
     @JsonIgnore
     public Optional<String> role() {
         return role;
+    }
+
+    /**
+     * The absolute URL of the thumbnail image for the actor.
+     */
+    @JsonIgnore
+    public Optional<String> thumb() {
+        return thumb;
     }
 
     public final static Builder builder() {
@@ -138,97 +104,26 @@ public class GetSearchAllLibrariesRole {
     }    
 
     /**
-     * The ID of the tag or actor.
+     * The unique identifier for the role.
+     * NOTE: This is different for each Plex server and is not globally unique.
      */
-    public GetSearchAllLibrariesRole withId(long id) {
-        Utils.checkNotNull(id, "id");
-        this.id = Optional.ofNullable(id);
-        return this;
-    }
-
-    /**
-     * The ID of the tag or actor.
-     */
-    public GetSearchAllLibrariesRole withId(Optional<Long> id) {
+    public GetSearchAllLibrariesRole withId(int id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
     }
 
     /**
-     * The filter used to find the actor or tag.
-     */
-    public GetSearchAllLibrariesRole withFilter(String filter) {
-        Utils.checkNotNull(filter, "filter");
-        this.filter = Optional.ofNullable(filter);
-        return this;
-    }
-
-    /**
-     * The filter used to find the actor or tag.
-     */
-    public GetSearchAllLibrariesRole withFilter(Optional<String> filter) {
-        Utils.checkNotNull(filter, "filter");
-        this.filter = filter;
-        return this;
-    }
-
-    /**
-     * The thumbnail of the actor
-     */
-    public GetSearchAllLibrariesRole withThumb(String thumb) {
-        Utils.checkNotNull(thumb, "thumb");
-        this.thumb = Optional.ofNullable(thumb);
-        return this;
-    }
-
-    /**
-     * The thumbnail of the actor
-     */
-    public GetSearchAllLibrariesRole withThumb(Optional<String> thumb) {
-        Utils.checkNotNull(thumb, "thumb");
-        this.thumb = thumb;
-        return this;
-    }
-
-    /**
-     * The name of the tag or actor.
+     * The display tag for the actor (typically the actor's name).
      */
     public GetSearchAllLibrariesRole withTag(String tag) {
-        Utils.checkNotNull(tag, "tag");
-        this.tag = Optional.ofNullable(tag);
-        return this;
-    }
-
-    /**
-     * The name of the tag or actor.
-     */
-    public GetSearchAllLibrariesRole withTag(Optional<String> tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = tag;
         return this;
     }
 
     /**
-     * Unique identifier for the tag.
-     */
-    public GetSearchAllLibrariesRole withTagKey(String tagKey) {
-        Utils.checkNotNull(tagKey, "tagKey");
-        this.tagKey = Optional.ofNullable(tagKey);
-        return this;
-    }
-
-    /**
-     * Unique identifier for the tag.
-     */
-    public GetSearchAllLibrariesRole withTagKey(Optional<String> tagKey) {
-        Utils.checkNotNull(tagKey, "tagKey");
-        this.tagKey = tagKey;
-        return this;
-    }
-
-    /**
-     * The role of the actor or tag in the media.
+     * The role played by the actor in the media item.
      */
     public GetSearchAllLibrariesRole withRole(String role) {
         Utils.checkNotNull(role, "role");
@@ -237,11 +132,29 @@ public class GetSearchAllLibrariesRole {
     }
 
     /**
-     * The role of the actor or tag in the media.
+     * The role played by the actor in the media item.
      */
     public GetSearchAllLibrariesRole withRole(Optional<String> role) {
         Utils.checkNotNull(role, "role");
         this.role = role;
+        return this;
+    }
+
+    /**
+     * The absolute URL of the thumbnail image for the actor.
+     */
+    public GetSearchAllLibrariesRole withThumb(String thumb) {
+        Utils.checkNotNull(thumb, "thumb");
+        this.thumb = Optional.ofNullable(thumb);
+        return this;
+    }
+
+    /**
+     * The absolute URL of the thumbnail image for the actor.
+     */
+    public GetSearchAllLibrariesRole withThumb(Optional<String> thumb) {
+        Utils.checkNotNull(thumb, "thumb");
+        this.thumb = thumb;
         return this;
     }
 
@@ -257,145 +170,64 @@ public class GetSearchAllLibrariesRole {
         GetSearchAllLibrariesRole other = (GetSearchAllLibrariesRole) o;
         return 
             Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
             Objects.deepEquals(this.tag, other.tag) &&
-            Objects.deepEquals(this.tagKey, other.tagKey) &&
-            Objects.deepEquals(this.role, other.role);
+            Objects.deepEquals(this.role, other.role) &&
+            Objects.deepEquals(this.thumb, other.thumb);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
             id,
-            filter,
-            thumb,
             tag,
-            tagKey,
-            role);
+            role,
+            thumb);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetSearchAllLibrariesRole.class,
                 "id", id,
-                "filter", filter,
-                "thumb", thumb,
                 "tag", tag,
-                "tagKey", tagKey,
-                "role", role);
+                "role", role,
+                "thumb", thumb);
     }
     
     public final static class Builder {
  
-        private Optional<Long> id = Optional.empty();
+        private Integer id;
  
-        private Optional<String> filter = Optional.empty();
- 
-        private Optional<String> thumb = Optional.empty();
- 
-        private Optional<String> tag = Optional.empty();
- 
-        private Optional<String> tagKey = Optional.empty();
+        private String tag;
  
         private Optional<String> role = Optional.empty();
+ 
+        private Optional<String> thumb = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
         }
 
         /**
-         * The ID of the tag or actor.
+         * The unique identifier for the role.
+         * NOTE: This is different for each Plex server and is not globally unique.
          */
-        public Builder id(long id) {
-            Utils.checkNotNull(id, "id");
-            this.id = Optional.ofNullable(id);
-            return this;
-        }
-
-        /**
-         * The ID of the tag or actor.
-         */
-        public Builder id(Optional<Long> id) {
+        public Builder id(int id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;
         }
 
         /**
-         * The filter used to find the actor or tag.
-         */
-        public Builder filter(String filter) {
-            Utils.checkNotNull(filter, "filter");
-            this.filter = Optional.ofNullable(filter);
-            return this;
-        }
-
-        /**
-         * The filter used to find the actor or tag.
-         */
-        public Builder filter(Optional<String> filter) {
-            Utils.checkNotNull(filter, "filter");
-            this.filter = filter;
-            return this;
-        }
-
-        /**
-         * The thumbnail of the actor
-         */
-        public Builder thumb(String thumb) {
-            Utils.checkNotNull(thumb, "thumb");
-            this.thumb = Optional.ofNullable(thumb);
-            return this;
-        }
-
-        /**
-         * The thumbnail of the actor
-         */
-        public Builder thumb(Optional<String> thumb) {
-            Utils.checkNotNull(thumb, "thumb");
-            this.thumb = thumb;
-            return this;
-        }
-
-        /**
-         * The name of the tag or actor.
+         * The display tag for the actor (typically the actor's name).
          */
         public Builder tag(String tag) {
-            Utils.checkNotNull(tag, "tag");
-            this.tag = Optional.ofNullable(tag);
-            return this;
-        }
-
-        /**
-         * The name of the tag or actor.
-         */
-        public Builder tag(Optional<String> tag) {
             Utils.checkNotNull(tag, "tag");
             this.tag = tag;
             return this;
         }
 
         /**
-         * Unique identifier for the tag.
-         */
-        public Builder tagKey(String tagKey) {
-            Utils.checkNotNull(tagKey, "tagKey");
-            this.tagKey = Optional.ofNullable(tagKey);
-            return this;
-        }
-
-        /**
-         * Unique identifier for the tag.
-         */
-        public Builder tagKey(Optional<String> tagKey) {
-            Utils.checkNotNull(tagKey, "tagKey");
-            this.tagKey = tagKey;
-            return this;
-        }
-
-        /**
-         * The role of the actor or tag in the media.
+         * The role played by the actor in the media item.
          */
         public Builder role(String role) {
             Utils.checkNotNull(role, "role");
@@ -404,22 +236,38 @@ public class GetSearchAllLibrariesRole {
         }
 
         /**
-         * The role of the actor or tag in the media.
+         * The role played by the actor in the media item.
          */
         public Builder role(Optional<String> role) {
             Utils.checkNotNull(role, "role");
             this.role = role;
             return this;
         }
+
+        /**
+         * The absolute URL of the thumbnail image for the actor.
+         */
+        public Builder thumb(String thumb) {
+            Utils.checkNotNull(thumb, "thumb");
+            this.thumb = Optional.ofNullable(thumb);
+            return this;
+        }
+
+        /**
+         * The absolute URL of the thumbnail image for the actor.
+         */
+        public Builder thumb(Optional<String> thumb) {
+            Utils.checkNotNull(thumb, "thumb");
+            this.thumb = thumb;
+            return this;
+        }
         
         public GetSearchAllLibrariesRole build() {
             return new GetSearchAllLibrariesRole(
                 id,
-                filter,
-                thumb,
                 tag,
-                tagKey,
-                role);
+                role,
+                thumb);
         }
     }
 }

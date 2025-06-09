@@ -4,31 +4,98 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import dev.plexapi.sdk.utils.OneOfDeserializer;
+import dev.plexapi.sdk.utils.TypedObject;
+import dev.plexapi.sdk.utils.Utils.JsonShape;
+import dev.plexapi.sdk.utils.Utils.TypeReferenceWithShape;
+import dev.plexapi.sdk.utils.Utils;
+import java.lang.Boolean;
+import java.lang.Override;
+import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Objects;
-import java.util.Optional;
 
-public enum GetLibraryItemsOptimizedForStreaming {
-    Disable(0),
-    Enable(1);
+/**
+ * GetLibraryItemsOptimizedForStreaming
+ * 
+ * <p>Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
+ */
+@JsonDeserialize(using = GetLibraryItemsOptimizedForStreaming._Deserializer.class)
+public class GetLibraryItemsOptimizedForStreaming {
 
     @JsonValue
-    private final int value;
-
-    private GetLibraryItemsOptimizedForStreaming(int value) {
+    private TypedObject value;
+    
+    private GetLibraryItemsOptimizedForStreaming(TypedObject value) {
         this.value = value;
     }
-    
-    public int value() {
-        return value;
+
+    public static GetLibraryItemsOptimizedForStreaming of(OptimizedForStreaming1 value) {
+        Utils.checkNotNull(value, "value");
+        return new GetLibraryItemsOptimizedForStreaming(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<OptimizedForStreaming1>(){}));
+    }
+
+    public static GetLibraryItemsOptimizedForStreaming of(boolean value) {
+        Utils.checkNotNull(value, "value");
+        return new GetLibraryItemsOptimizedForStreaming(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<java.lang.Boolean>(){}));
     }
     
-    public static Optional<GetLibraryItemsOptimizedForStreaming> fromValue(int value) {
-        for (GetLibraryItemsOptimizedForStreaming o: GetLibraryItemsOptimizedForStreaming.values()) {
-            if (Objects.deepEquals(o.value, value)) {
-                return Optional.of(o);
-            }
+    /**
+     * Returns an instance of one of these types:
+     * <ul>
+     * <li>{@code dev.plexapi.sdk.models.operations.OptimizedForStreaming1}</li>
+     * <li>{@code boolean}</li>
+     * </ul>
+     * 
+     * <p>Use {@code instanceof} to determine what type is returned. For example:
+     * 
+     * <pre>
+     * if (obj.value() instanceof String) {
+     *     String answer = (String) obj.value();
+     *     System.out.println("answer=" + answer);
+     * }
+     * </pre>
+     * 
+     * @return value of oneOf type
+     **/ 
+    public java.lang.Object value() {
+        return value.value();
+    }    
+    
+    @Override
+    public boolean equals(java.lang.Object o) {
+        if (this == o) {
+            return true;
         }
-        return Optional.empty();
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        GetLibraryItemsOptimizedForStreaming other = (GetLibraryItemsOptimizedForStreaming) o;
+        return Objects.deepEquals(this.value.value(), other.value.value()); 
     }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(value.value());
+    }
+    
+    @SuppressWarnings("serial")
+    public static final class _Deserializer extends OneOfDeserializer<GetLibraryItemsOptimizedForStreaming> {
+
+        public _Deserializer() {
+            super(GetLibraryItemsOptimizedForStreaming.class, false,
+                  TypeReferenceWithShape.of(new TypeReference<Boolean>() {}, JsonShape.DEFAULT),
+                  TypeReferenceWithShape.of(new TypeReference<OptimizedForStreaming1>() {}, JsonShape.DEFAULT));
+        }
+    }
+    
+    @Override
+    public String toString() {
+        return Utils.toString(GetLibraryItemsOptimizedForStreaming.class,
+                "value", value);
+    }
+ 
 }
 

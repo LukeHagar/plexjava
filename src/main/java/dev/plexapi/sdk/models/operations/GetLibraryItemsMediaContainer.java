@@ -19,84 +19,132 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * GetLibraryItemsMediaContainer
- * 
- * <p>The Meta object is only included in the response if the `includeMeta` parameter is set to `1`.
- */
 public class GetLibraryItemsMediaContainer {
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("Type")
-    private Optional<? extends List<GetLibraryItemsType>> type;
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("FieldType")
-    private Optional<? extends List<GetLibraryItemsFieldType>> fieldType;
-
+    /**
+     * Number of media items returned in this response.
+     */
     @JsonProperty("size")
     private int size;
 
+    /**
+     * Total number of media items in the library.
+     */
     @JsonProperty("totalSize")
     private int totalSize;
 
+    /**
+     * Offset value for pagination.
+     */
     @JsonProperty("offset")
-    private int offset;
+    private long offset;
 
+    /**
+     * The content type or mode.
+     */
     @JsonProperty("content")
     private String content;
 
+    /**
+     * Indicates whether syncing is allowed.
+     */
     @JsonProperty("allowSync")
     private boolean allowSync;
 
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * Specifies whether caching is disabled.
+     */
     @JsonProperty("nocache")
-    private Optional<Boolean> nocache;
+    private boolean nocache;
 
+    /**
+     * URL for the background artwork of the media container.
+     */
     @JsonProperty("art")
     private String art;
 
+    /**
+     * An plugin identifier for the media container.
+     */
     @JsonProperty("identifier")
     private String identifier;
 
+    /**
+     * The unique identifier for the library section.
+     */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionID")
-    private long librarySectionID;
+    private Optional<Long> librarySectionID;
 
+    /**
+     * The title of the library section.
+     */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionTitle")
-    private String librarySectionTitle;
+    private Optional<String> librarySectionTitle;
 
+    /**
+     * The universally unique identifier for the library section.
+     */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionUUID")
-    private String librarySectionUUID;
+    private Optional<String> librarySectionUUID;
 
+    /**
+     * The prefix used for media tag resource paths.
+     */
     @JsonProperty("mediaTagPrefix")
     private String mediaTagPrefix;
 
+    /**
+     * The version number for media tags.
+     */
     @JsonProperty("mediaTagVersion")
-    private int mediaTagVersion;
+    private long mediaTagVersion;
 
+    /**
+     * URL for the thumbnail image of the media container.
+     */
     @JsonProperty("thumb")
     private String thumb;
 
+    /**
+     * The primary title of the media container.
+     */
     @JsonProperty("title1")
     private String title1;
 
+    /**
+     * The secondary title of the media container.
+     */
     @JsonProperty("title2")
     private String title2;
 
+    /**
+     * Identifier for the view group layout.
+     */
     @JsonProperty("viewGroup")
     private String viewGroup;
 
+    /**
+     * Identifier for the view mode.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("viewMode")
-    private Optional<Integer> viewMode;
+    private Optional<String> viewMode;
 
+    /**
+     * Indicates if the media container has mixed parents.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mixedParents")
     private Optional<Boolean> mixedParents;
 
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * An array of metadata items.
+     */
     @JsonProperty("Metadata")
-    private Optional<? extends List<GetLibraryItemsMetadata>> metadata;
+    private List<GetLibraryItemsMetadata> metadata;
 
     /**
      * The Meta object is only included in the response if the `includeMeta` parameter is set to `1`.
@@ -107,31 +155,27 @@ public class GetLibraryItemsMediaContainer {
 
     @JsonCreator
     public GetLibraryItemsMediaContainer(
-            @JsonProperty("Type") Optional<? extends List<GetLibraryItemsType>> type,
-            @JsonProperty("FieldType") Optional<? extends List<GetLibraryItemsFieldType>> fieldType,
             @JsonProperty("size") int size,
             @JsonProperty("totalSize") int totalSize,
-            @JsonProperty("offset") int offset,
+            @JsonProperty("offset") long offset,
             @JsonProperty("content") String content,
             @JsonProperty("allowSync") boolean allowSync,
-            @JsonProperty("nocache") Optional<Boolean> nocache,
+            @JsonProperty("nocache") boolean nocache,
             @JsonProperty("art") String art,
             @JsonProperty("identifier") String identifier,
-            @JsonProperty("librarySectionID") long librarySectionID,
-            @JsonProperty("librarySectionTitle") String librarySectionTitle,
-            @JsonProperty("librarySectionUUID") String librarySectionUUID,
+            @JsonProperty("librarySectionID") Optional<Long> librarySectionID,
+            @JsonProperty("librarySectionTitle") Optional<String> librarySectionTitle,
+            @JsonProperty("librarySectionUUID") Optional<String> librarySectionUUID,
             @JsonProperty("mediaTagPrefix") String mediaTagPrefix,
-            @JsonProperty("mediaTagVersion") int mediaTagVersion,
+            @JsonProperty("mediaTagVersion") long mediaTagVersion,
             @JsonProperty("thumb") String thumb,
             @JsonProperty("title1") String title1,
             @JsonProperty("title2") String title2,
             @JsonProperty("viewGroup") String viewGroup,
-            @JsonProperty("viewMode") Optional<Integer> viewMode,
+            @JsonProperty("viewMode") Optional<String> viewMode,
             @JsonProperty("mixedParents") Optional<Boolean> mixedParents,
-            @JsonProperty("Metadata") Optional<? extends List<GetLibraryItemsMetadata>> metadata,
+            @JsonProperty("Metadata") List<GetLibraryItemsMetadata> metadata,
             @JsonProperty("Meta") Optional<? extends GetLibraryItemsMeta> meta) {
-        Utils.checkNotNull(type, "type");
-        Utils.checkNotNull(fieldType, "fieldType");
         Utils.checkNotNull(size, "size");
         Utils.checkNotNull(totalSize, "totalSize");
         Utils.checkNotNull(offset, "offset");
@@ -153,8 +197,6 @@ public class GetLibraryItemsMediaContainer {
         Utils.checkNotNull(mixedParents, "mixedParents");
         Utils.checkNotNull(metadata, "metadata");
         Utils.checkNotNull(meta, "meta");
-        this.type = type;
-        this.fieldType = fieldType;
         this.size = size;
         this.totalSize = totalSize;
         this.offset = offset;
@@ -181,134 +223,180 @@ public class GetLibraryItemsMediaContainer {
     public GetLibraryItemsMediaContainer(
             int size,
             int totalSize,
-            int offset,
+            long offset,
             String content,
             boolean allowSync,
+            boolean nocache,
             String art,
             String identifier,
-            long librarySectionID,
-            String librarySectionTitle,
-            String librarySectionUUID,
             String mediaTagPrefix,
-            int mediaTagVersion,
+            long mediaTagVersion,
             String thumb,
             String title1,
             String title2,
-            String viewGroup) {
-        this(Optional.empty(), Optional.empty(), size, totalSize, offset, content, allowSync, Optional.empty(), art, identifier, librarySectionID, librarySectionTitle, librarySectionUUID, mediaTagPrefix, mediaTagVersion, thumb, title1, title2, viewGroup, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+            String viewGroup,
+            List<GetLibraryItemsMetadata> metadata) {
+        this(size, totalSize, offset, content, allowSync, nocache, art, identifier, Optional.empty(), Optional.empty(), Optional.empty(), mediaTagPrefix, mediaTagVersion, thumb, title1, title2, viewGroup, Optional.empty(), Optional.empty(), metadata, Optional.empty());
     }
 
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<GetLibraryItemsType>> type() {
-        return (Optional<List<GetLibraryItemsType>>) type;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<GetLibraryItemsFieldType>> fieldType() {
-        return (Optional<List<GetLibraryItemsFieldType>>) fieldType;
-    }
-
+    /**
+     * Number of media items returned in this response.
+     */
     @JsonIgnore
     public int size() {
         return size;
     }
 
+    /**
+     * Total number of media items in the library.
+     */
     @JsonIgnore
     public int totalSize() {
         return totalSize;
     }
 
+    /**
+     * Offset value for pagination.
+     */
     @JsonIgnore
-    public int offset() {
+    public long offset() {
         return offset;
     }
 
+    /**
+     * The content type or mode.
+     */
     @JsonIgnore
     public String content() {
         return content;
     }
 
+    /**
+     * Indicates whether syncing is allowed.
+     */
     @JsonIgnore
     public boolean allowSync() {
         return allowSync;
     }
 
+    /**
+     * Specifies whether caching is disabled.
+     */
     @JsonIgnore
-    public Optional<Boolean> nocache() {
+    public boolean nocache() {
         return nocache;
     }
 
+    /**
+     * URL for the background artwork of the media container.
+     */
     @JsonIgnore
     public String art() {
         return art;
     }
 
+    /**
+     * An plugin identifier for the media container.
+     */
     @JsonIgnore
     public String identifier() {
         return identifier;
     }
 
+    /**
+     * The unique identifier for the library section.
+     */
     @JsonIgnore
-    public long librarySectionID() {
+    public Optional<Long> librarySectionID() {
         return librarySectionID;
     }
 
+    /**
+     * The title of the library section.
+     */
     @JsonIgnore
-    public String librarySectionTitle() {
+    public Optional<String> librarySectionTitle() {
         return librarySectionTitle;
     }
 
+    /**
+     * The universally unique identifier for the library section.
+     */
     @JsonIgnore
-    public String librarySectionUUID() {
+    public Optional<String> librarySectionUUID() {
         return librarySectionUUID;
     }
 
+    /**
+     * The prefix used for media tag resource paths.
+     */
     @JsonIgnore
     public String mediaTagPrefix() {
         return mediaTagPrefix;
     }
 
+    /**
+     * The version number for media tags.
+     */
     @JsonIgnore
-    public int mediaTagVersion() {
+    public long mediaTagVersion() {
         return mediaTagVersion;
     }
 
+    /**
+     * URL for the thumbnail image of the media container.
+     */
     @JsonIgnore
     public String thumb() {
         return thumb;
     }
 
+    /**
+     * The primary title of the media container.
+     */
     @JsonIgnore
     public String title1() {
         return title1;
     }
 
+    /**
+     * The secondary title of the media container.
+     */
     @JsonIgnore
     public String title2() {
         return title2;
     }
 
+    /**
+     * Identifier for the view group layout.
+     */
     @JsonIgnore
     public String viewGroup() {
         return viewGroup;
     }
 
+    /**
+     * Identifier for the view mode.
+     */
     @JsonIgnore
-    public Optional<Integer> viewMode() {
+    public Optional<String> viewMode() {
         return viewMode;
     }
 
+    /**
+     * Indicates if the media container has mixed parents.
+     */
     @JsonIgnore
     public Optional<Boolean> mixedParents() {
         return mixedParents;
     }
 
-    @SuppressWarnings("unchecked")
+    /**
+     * An array of metadata items.
+     */
     @JsonIgnore
-    public Optional<List<GetLibraryItemsMetadata>> metadata() {
-        return (Optional<List<GetLibraryItemsMetadata>>) metadata;
+    public List<GetLibraryItemsMetadata> metadata() {
+        return metadata;
     }
 
     /**
@@ -324,169 +412,226 @@ public class GetLibraryItemsMediaContainer {
         return new Builder();
     }    
 
-    public GetLibraryItemsMediaContainer withType(List<GetLibraryItemsType> type) {
-        Utils.checkNotNull(type, "type");
-        this.type = Optional.ofNullable(type);
-        return this;
-    }
-
-    public GetLibraryItemsMediaContainer withType(Optional<? extends List<GetLibraryItemsType>> type) {
-        Utils.checkNotNull(type, "type");
-        this.type = type;
-        return this;
-    }
-
-    public GetLibraryItemsMediaContainer withFieldType(List<GetLibraryItemsFieldType> fieldType) {
-        Utils.checkNotNull(fieldType, "fieldType");
-        this.fieldType = Optional.ofNullable(fieldType);
-        return this;
-    }
-
-    public GetLibraryItemsMediaContainer withFieldType(Optional<? extends List<GetLibraryItemsFieldType>> fieldType) {
-        Utils.checkNotNull(fieldType, "fieldType");
-        this.fieldType = fieldType;
-        return this;
-    }
-
+    /**
+     * Number of media items returned in this response.
+     */
     public GetLibraryItemsMediaContainer withSize(int size) {
         Utils.checkNotNull(size, "size");
         this.size = size;
         return this;
     }
 
+    /**
+     * Total number of media items in the library.
+     */
     public GetLibraryItemsMediaContainer withTotalSize(int totalSize) {
         Utils.checkNotNull(totalSize, "totalSize");
         this.totalSize = totalSize;
         return this;
     }
 
-    public GetLibraryItemsMediaContainer withOffset(int offset) {
+    /**
+     * Offset value for pagination.
+     */
+    public GetLibraryItemsMediaContainer withOffset(long offset) {
         Utils.checkNotNull(offset, "offset");
         this.offset = offset;
         return this;
     }
 
+    /**
+     * The content type or mode.
+     */
     public GetLibraryItemsMediaContainer withContent(String content) {
         Utils.checkNotNull(content, "content");
         this.content = content;
         return this;
     }
 
+    /**
+     * Indicates whether syncing is allowed.
+     */
     public GetLibraryItemsMediaContainer withAllowSync(boolean allowSync) {
         Utils.checkNotNull(allowSync, "allowSync");
         this.allowSync = allowSync;
         return this;
     }
 
+    /**
+     * Specifies whether caching is disabled.
+     */
     public GetLibraryItemsMediaContainer withNocache(boolean nocache) {
-        Utils.checkNotNull(nocache, "nocache");
-        this.nocache = Optional.ofNullable(nocache);
-        return this;
-    }
-
-    public GetLibraryItemsMediaContainer withNocache(Optional<Boolean> nocache) {
         Utils.checkNotNull(nocache, "nocache");
         this.nocache = nocache;
         return this;
     }
 
+    /**
+     * URL for the background artwork of the media container.
+     */
     public GetLibraryItemsMediaContainer withArt(String art) {
         Utils.checkNotNull(art, "art");
         this.art = art;
         return this;
     }
 
+    /**
+     * An plugin identifier for the media container.
+     */
     public GetLibraryItemsMediaContainer withIdentifier(String identifier) {
         Utils.checkNotNull(identifier, "identifier");
         this.identifier = identifier;
         return this;
     }
 
+    /**
+     * The unique identifier for the library section.
+     */
     public GetLibraryItemsMediaContainer withLibrarySectionID(long librarySectionID) {
+        Utils.checkNotNull(librarySectionID, "librarySectionID");
+        this.librarySectionID = Optional.ofNullable(librarySectionID);
+        return this;
+    }
+
+    /**
+     * The unique identifier for the library section.
+     */
+    public GetLibraryItemsMediaContainer withLibrarySectionID(Optional<Long> librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
         this.librarySectionID = librarySectionID;
         return this;
     }
 
+    /**
+     * The title of the library section.
+     */
     public GetLibraryItemsMediaContainer withLibrarySectionTitle(String librarySectionTitle) {
+        Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+        this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
+        return this;
+    }
+
+    /**
+     * The title of the library section.
+     */
+    public GetLibraryItemsMediaContainer withLibrarySectionTitle(Optional<String> librarySectionTitle) {
         Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
         this.librarySectionTitle = librarySectionTitle;
         return this;
     }
 
+    /**
+     * The universally unique identifier for the library section.
+     */
     public GetLibraryItemsMediaContainer withLibrarySectionUUID(String librarySectionUUID) {
+        Utils.checkNotNull(librarySectionUUID, "librarySectionUUID");
+        this.librarySectionUUID = Optional.ofNullable(librarySectionUUID);
+        return this;
+    }
+
+    /**
+     * The universally unique identifier for the library section.
+     */
+    public GetLibraryItemsMediaContainer withLibrarySectionUUID(Optional<String> librarySectionUUID) {
         Utils.checkNotNull(librarySectionUUID, "librarySectionUUID");
         this.librarySectionUUID = librarySectionUUID;
         return this;
     }
 
+    /**
+     * The prefix used for media tag resource paths.
+     */
     public GetLibraryItemsMediaContainer withMediaTagPrefix(String mediaTagPrefix) {
         Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
         this.mediaTagPrefix = mediaTagPrefix;
         return this;
     }
 
-    public GetLibraryItemsMediaContainer withMediaTagVersion(int mediaTagVersion) {
+    /**
+     * The version number for media tags.
+     */
+    public GetLibraryItemsMediaContainer withMediaTagVersion(long mediaTagVersion) {
         Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
         this.mediaTagVersion = mediaTagVersion;
         return this;
     }
 
+    /**
+     * URL for the thumbnail image of the media container.
+     */
     public GetLibraryItemsMediaContainer withThumb(String thumb) {
         Utils.checkNotNull(thumb, "thumb");
         this.thumb = thumb;
         return this;
     }
 
+    /**
+     * The primary title of the media container.
+     */
     public GetLibraryItemsMediaContainer withTitle1(String title1) {
         Utils.checkNotNull(title1, "title1");
         this.title1 = title1;
         return this;
     }
 
+    /**
+     * The secondary title of the media container.
+     */
     public GetLibraryItemsMediaContainer withTitle2(String title2) {
         Utils.checkNotNull(title2, "title2");
         this.title2 = title2;
         return this;
     }
 
+    /**
+     * Identifier for the view group layout.
+     */
     public GetLibraryItemsMediaContainer withViewGroup(String viewGroup) {
         Utils.checkNotNull(viewGroup, "viewGroup");
         this.viewGroup = viewGroup;
         return this;
     }
 
-    public GetLibraryItemsMediaContainer withViewMode(int viewMode) {
+    /**
+     * Identifier for the view mode.
+     */
+    public GetLibraryItemsMediaContainer withViewMode(String viewMode) {
         Utils.checkNotNull(viewMode, "viewMode");
         this.viewMode = Optional.ofNullable(viewMode);
         return this;
     }
 
-    public GetLibraryItemsMediaContainer withViewMode(Optional<Integer> viewMode) {
+    /**
+     * Identifier for the view mode.
+     */
+    public GetLibraryItemsMediaContainer withViewMode(Optional<String> viewMode) {
         Utils.checkNotNull(viewMode, "viewMode");
         this.viewMode = viewMode;
         return this;
     }
 
+    /**
+     * Indicates if the media container has mixed parents.
+     */
     public GetLibraryItemsMediaContainer withMixedParents(boolean mixedParents) {
         Utils.checkNotNull(mixedParents, "mixedParents");
         this.mixedParents = Optional.ofNullable(mixedParents);
         return this;
     }
 
+    /**
+     * Indicates if the media container has mixed parents.
+     */
     public GetLibraryItemsMediaContainer withMixedParents(Optional<Boolean> mixedParents) {
         Utils.checkNotNull(mixedParents, "mixedParents");
         this.mixedParents = mixedParents;
         return this;
     }
 
+    /**
+     * An array of metadata items.
+     */
     public GetLibraryItemsMediaContainer withMetadata(List<GetLibraryItemsMetadata> metadata) {
-        Utils.checkNotNull(metadata, "metadata");
-        this.metadata = Optional.ofNullable(metadata);
-        return this;
-    }
-
-    public GetLibraryItemsMediaContainer withMetadata(Optional<? extends List<GetLibraryItemsMetadata>> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
         return this;
@@ -521,8 +666,6 @@ public class GetLibraryItemsMediaContainer {
         }
         GetLibraryItemsMediaContainer other = (GetLibraryItemsMediaContainer) o;
         return 
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.fieldType, other.fieldType) &&
             Objects.deepEquals(this.size, other.size) &&
             Objects.deepEquals(this.totalSize, other.totalSize) &&
             Objects.deepEquals(this.offset, other.offset) &&
@@ -549,8 +692,6 @@ public class GetLibraryItemsMediaContainer {
     @Override
     public int hashCode() {
         return Objects.hash(
-            type,
-            fieldType,
             size,
             totalSize,
             offset,
@@ -577,8 +718,6 @@ public class GetLibraryItemsMediaContainer {
     @Override
     public String toString() {
         return Utils.toString(GetLibraryItemsMediaContainer.class,
-                "type", type,
-                "fieldType", fieldType,
                 "size", size,
                 "totalSize", totalSize,
                 "offset", offset,
@@ -604,35 +743,31 @@ public class GetLibraryItemsMediaContainer {
     
     public final static class Builder {
  
-        private Optional<? extends List<GetLibraryItemsType>> type = Optional.empty();
- 
-        private Optional<? extends List<GetLibraryItemsFieldType>> fieldType = Optional.empty();
- 
         private Integer size;
  
         private Integer totalSize;
  
-        private Integer offset;
+        private Long offset;
  
         private String content;
  
         private Boolean allowSync;
  
-        private Optional<Boolean> nocache = Optional.empty();
+        private Boolean nocache;
  
         private String art;
  
         private String identifier;
  
-        private Long librarySectionID;
+        private Optional<Long> librarySectionID = Optional.empty();
  
-        private String librarySectionTitle;
+        private Optional<String> librarySectionTitle = Optional.empty();
  
-        private String librarySectionUUID;
+        private Optional<String> librarySectionUUID = Optional.empty();
  
         private String mediaTagPrefix;
  
-        private Integer mediaTagVersion;
+        private Long mediaTagVersion;
  
         private String thumb;
  
@@ -642,11 +777,11 @@ public class GetLibraryItemsMediaContainer {
  
         private String viewGroup;
  
-        private Optional<Integer> viewMode = Optional.empty();
+        private Optional<String> viewMode = Optional.empty();
  
         private Optional<Boolean> mixedParents = Optional.empty();
  
-        private Optional<? extends List<GetLibraryItemsMetadata>> metadata = Optional.empty();
+        private List<GetLibraryItemsMetadata> metadata;
  
         private Optional<? extends GetLibraryItemsMeta> meta = Optional.empty();
         
@@ -654,169 +789,226 @@ public class GetLibraryItemsMediaContainer {
           // force use of static builder() method
         }
 
-        public Builder type(List<GetLibraryItemsType> type) {
-            Utils.checkNotNull(type, "type");
-            this.type = Optional.ofNullable(type);
-            return this;
-        }
-
-        public Builder type(Optional<? extends List<GetLibraryItemsType>> type) {
-            Utils.checkNotNull(type, "type");
-            this.type = type;
-            return this;
-        }
-
-        public Builder fieldType(List<GetLibraryItemsFieldType> fieldType) {
-            Utils.checkNotNull(fieldType, "fieldType");
-            this.fieldType = Optional.ofNullable(fieldType);
-            return this;
-        }
-
-        public Builder fieldType(Optional<? extends List<GetLibraryItemsFieldType>> fieldType) {
-            Utils.checkNotNull(fieldType, "fieldType");
-            this.fieldType = fieldType;
-            return this;
-        }
-
+        /**
+         * Number of media items returned in this response.
+         */
         public Builder size(int size) {
             Utils.checkNotNull(size, "size");
             this.size = size;
             return this;
         }
 
+        /**
+         * Total number of media items in the library.
+         */
         public Builder totalSize(int totalSize) {
             Utils.checkNotNull(totalSize, "totalSize");
             this.totalSize = totalSize;
             return this;
         }
 
-        public Builder offset(int offset) {
+        /**
+         * Offset value for pagination.
+         */
+        public Builder offset(long offset) {
             Utils.checkNotNull(offset, "offset");
             this.offset = offset;
             return this;
         }
 
+        /**
+         * The content type or mode.
+         */
         public Builder content(String content) {
             Utils.checkNotNull(content, "content");
             this.content = content;
             return this;
         }
 
+        /**
+         * Indicates whether syncing is allowed.
+         */
         public Builder allowSync(boolean allowSync) {
             Utils.checkNotNull(allowSync, "allowSync");
             this.allowSync = allowSync;
             return this;
         }
 
+        /**
+         * Specifies whether caching is disabled.
+         */
         public Builder nocache(boolean nocache) {
-            Utils.checkNotNull(nocache, "nocache");
-            this.nocache = Optional.ofNullable(nocache);
-            return this;
-        }
-
-        public Builder nocache(Optional<Boolean> nocache) {
             Utils.checkNotNull(nocache, "nocache");
             this.nocache = nocache;
             return this;
         }
 
+        /**
+         * URL for the background artwork of the media container.
+         */
         public Builder art(String art) {
             Utils.checkNotNull(art, "art");
             this.art = art;
             return this;
         }
 
+        /**
+         * An plugin identifier for the media container.
+         */
         public Builder identifier(String identifier) {
             Utils.checkNotNull(identifier, "identifier");
             this.identifier = identifier;
             return this;
         }
 
+        /**
+         * The unique identifier for the library section.
+         */
         public Builder librarySectionID(long librarySectionID) {
+            Utils.checkNotNull(librarySectionID, "librarySectionID");
+            this.librarySectionID = Optional.ofNullable(librarySectionID);
+            return this;
+        }
+
+        /**
+         * The unique identifier for the library section.
+         */
+        public Builder librarySectionID(Optional<Long> librarySectionID) {
             Utils.checkNotNull(librarySectionID, "librarySectionID");
             this.librarySectionID = librarySectionID;
             return this;
         }
 
+        /**
+         * The title of the library section.
+         */
         public Builder librarySectionTitle(String librarySectionTitle) {
+            Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+            this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
+            return this;
+        }
+
+        /**
+         * The title of the library section.
+         */
+        public Builder librarySectionTitle(Optional<String> librarySectionTitle) {
             Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
             this.librarySectionTitle = librarySectionTitle;
             return this;
         }
 
+        /**
+         * The universally unique identifier for the library section.
+         */
         public Builder librarySectionUUID(String librarySectionUUID) {
+            Utils.checkNotNull(librarySectionUUID, "librarySectionUUID");
+            this.librarySectionUUID = Optional.ofNullable(librarySectionUUID);
+            return this;
+        }
+
+        /**
+         * The universally unique identifier for the library section.
+         */
+        public Builder librarySectionUUID(Optional<String> librarySectionUUID) {
             Utils.checkNotNull(librarySectionUUID, "librarySectionUUID");
             this.librarySectionUUID = librarySectionUUID;
             return this;
         }
 
+        /**
+         * The prefix used for media tag resource paths.
+         */
         public Builder mediaTagPrefix(String mediaTagPrefix) {
             Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
             this.mediaTagPrefix = mediaTagPrefix;
             return this;
         }
 
-        public Builder mediaTagVersion(int mediaTagVersion) {
+        /**
+         * The version number for media tags.
+         */
+        public Builder mediaTagVersion(long mediaTagVersion) {
             Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
             this.mediaTagVersion = mediaTagVersion;
             return this;
         }
 
+        /**
+         * URL for the thumbnail image of the media container.
+         */
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
             this.thumb = thumb;
             return this;
         }
 
+        /**
+         * The primary title of the media container.
+         */
         public Builder title1(String title1) {
             Utils.checkNotNull(title1, "title1");
             this.title1 = title1;
             return this;
         }
 
+        /**
+         * The secondary title of the media container.
+         */
         public Builder title2(String title2) {
             Utils.checkNotNull(title2, "title2");
             this.title2 = title2;
             return this;
         }
 
+        /**
+         * Identifier for the view group layout.
+         */
         public Builder viewGroup(String viewGroup) {
             Utils.checkNotNull(viewGroup, "viewGroup");
             this.viewGroup = viewGroup;
             return this;
         }
 
-        public Builder viewMode(int viewMode) {
+        /**
+         * Identifier for the view mode.
+         */
+        public Builder viewMode(String viewMode) {
             Utils.checkNotNull(viewMode, "viewMode");
             this.viewMode = Optional.ofNullable(viewMode);
             return this;
         }
 
-        public Builder viewMode(Optional<Integer> viewMode) {
+        /**
+         * Identifier for the view mode.
+         */
+        public Builder viewMode(Optional<String> viewMode) {
             Utils.checkNotNull(viewMode, "viewMode");
             this.viewMode = viewMode;
             return this;
         }
 
+        /**
+         * Indicates if the media container has mixed parents.
+         */
         public Builder mixedParents(boolean mixedParents) {
             Utils.checkNotNull(mixedParents, "mixedParents");
             this.mixedParents = Optional.ofNullable(mixedParents);
             return this;
         }
 
+        /**
+         * Indicates if the media container has mixed parents.
+         */
         public Builder mixedParents(Optional<Boolean> mixedParents) {
             Utils.checkNotNull(mixedParents, "mixedParents");
             this.mixedParents = mixedParents;
             return this;
         }
 
+        /**
+         * An array of metadata items.
+         */
         public Builder metadata(List<GetLibraryItemsMetadata> metadata) {
-            Utils.checkNotNull(metadata, "metadata");
-            this.metadata = Optional.ofNullable(metadata);
-            return this;
-        }
-
-        public Builder metadata(Optional<? extends List<GetLibraryItemsMetadata>> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = metadata;
             return this;
@@ -842,8 +1034,6 @@ public class GetLibraryItemsMediaContainer {
         
         public GetLibraryItemsMediaContainer build() {
             return new GetLibraryItemsMediaContainer(
-                type,
-                fieldType,
                 size,
                 totalSize,
                 offset,

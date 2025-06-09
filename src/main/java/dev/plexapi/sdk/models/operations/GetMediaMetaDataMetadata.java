@@ -171,8 +171,9 @@ public class GetMediaMetaDataMetadata {
     /**
      * The original release date of the media item.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("originallyAvailableAt")
-    private LocalDate originallyAvailableAt;
+    private Optional<LocalDate> originallyAvailableAt;
 
     @JsonProperty("addedAt")
     private long addedAt;
@@ -391,20 +392,23 @@ public class GetMediaMetaDataMetadata {
     /**
      * The identifier for the library section.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionID")
-    private long librarySectionID;
+    private Optional<Long> librarySectionID;
 
     /**
      * The title of the library section.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionTitle")
-    private String librarySectionTitle;
+    private Optional<String> librarySectionTitle;
 
     /**
      * The key corresponding to the library section.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionKey")
-    private String librarySectionKey;
+    private Optional<String> librarySectionKey;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Guid")
@@ -440,7 +444,7 @@ public class GetMediaMetaDataMetadata {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Rating")
-    private Optional<? extends List<Ratings>> ratings;
+    private Optional<? extends List<GetMediaMetaDataRatings>> ratings;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Similar")
@@ -452,15 +456,15 @@ public class GetMediaMetaDataMetadata {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Chapter")
-    private Optional<? extends List<Chapter>> chapter;
+    private Optional<? extends List<GetMediaMetaDataChapter>> chapter;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Marker")
-    private Optional<? extends List<Marker>> marker;
+    private Optional<? extends List<GetMediaMetaDataMarker>> marker;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Extras")
-    private Optional<? extends Extras> extras;
+    private Optional<? extends GetMediaMetaDataExtras> extras;
 
     @JsonCreator
     public GetMediaMetaDataMetadata(
@@ -487,7 +491,7 @@ public class GetMediaMetaDataMetadata {
             @JsonProperty("childCount") int childCount,
             @JsonProperty("seasonCount") int seasonCount,
             @JsonProperty("duration") int duration,
-            @JsonProperty("originallyAvailableAt") LocalDate originallyAvailableAt,
+            @JsonProperty("originallyAvailableAt") Optional<LocalDate> originallyAvailableAt,
             @JsonProperty("addedAt") long addedAt,
             @JsonProperty("updatedAt") Optional<Long> updatedAt,
             @JsonProperty("audienceRatingImage") Optional<String> audienceRatingImage,
@@ -520,9 +524,9 @@ public class GetMediaMetaDataMetadata {
             @JsonProperty("userRating") Optional<Float> userRating,
             @JsonProperty("Image") Optional<? extends List<GetMediaMetaDataImage>> image,
             @JsonProperty("UltraBlurColors") Optional<? extends GetMediaMetaDataUltraBlurColors> ultraBlurColors,
-            @JsonProperty("librarySectionID") long librarySectionID,
-            @JsonProperty("librarySectionTitle") String librarySectionTitle,
-            @JsonProperty("librarySectionKey") String librarySectionKey,
+            @JsonProperty("librarySectionID") Optional<Long> librarySectionID,
+            @JsonProperty("librarySectionTitle") Optional<String> librarySectionTitle,
+            @JsonProperty("librarySectionKey") Optional<String> librarySectionKey,
             @JsonProperty("Guid") Optional<? extends List<GetMediaMetaDataGuids>> guids,
             @JsonProperty("Media") Optional<? extends List<GetMediaMetaDataMedia>> media,
             @JsonProperty("Genre") Optional<? extends List<GetMediaMetaDataGenre>> genre,
@@ -531,12 +535,12 @@ public class GetMediaMetaDataMetadata {
             @JsonProperty("Writer") Optional<? extends List<GetMediaMetaDataWriter>> writer,
             @JsonProperty("Producer") Optional<? extends List<GetMediaMetaDataProducer>> producer,
             @JsonProperty("Role") Optional<? extends List<GetMediaMetaDataRole>> role,
-            @JsonProperty("Rating") Optional<? extends List<Ratings>> ratings,
+            @JsonProperty("Rating") Optional<? extends List<GetMediaMetaDataRatings>> ratings,
             @JsonProperty("Similar") Optional<? extends List<GetMediaMetaDataSimilar>> similar,
             @JsonProperty("Location") Optional<? extends List<GetMediaMetaDataLocation>> location,
-            @JsonProperty("Chapter") Optional<? extends List<Chapter>> chapter,
-            @JsonProperty("Marker") Optional<? extends List<Marker>> marker,
-            @JsonProperty("Extras") Optional<? extends Extras> extras) {
+            @JsonProperty("Chapter") Optional<? extends List<GetMediaMetaDataChapter>> chapter,
+            @JsonProperty("Marker") Optional<? extends List<GetMediaMetaDataMarker>> marker,
+            @JsonProperty("Extras") Optional<? extends GetMediaMetaDataExtras> extras) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(guid, "guid");
@@ -704,12 +708,8 @@ public class GetMediaMetaDataMetadata {
             int childCount,
             int seasonCount,
             int duration,
-            LocalDate originallyAvailableAt,
-            long addedAt,
-            long librarySectionID,
-            String librarySectionTitle,
-            String librarySectionKey) {
-        this(ratingKey, key, guid, slug, Optional.empty(), type, title, titleSort, Optional.empty(), summary, rating, audienceRating, Optional.empty(), tagline, thumb, art, theme, index, Optional.empty(), Optional.empty(), childCount, seasonCount, duration, originallyAvailableAt, addedAt, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), librarySectionID, librarySectionTitle, librarySectionKey, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+            long addedAt) {
+        this(ratingKey, key, guid, slug, Optional.empty(), type, title, titleSort, Optional.empty(), summary, rating, audienceRating, Optional.empty(), tagline, thumb, art, theme, index, Optional.empty(), Optional.empty(), childCount, seasonCount, duration, Optional.empty(), addedAt, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -897,7 +897,7 @@ public class GetMediaMetaDataMetadata {
      * The original release date of the media item.
      */
     @JsonIgnore
-    public LocalDate originallyAvailableAt() {
+    public Optional<LocalDate> originallyAvailableAt() {
         return originallyAvailableAt;
     }
 
@@ -1154,7 +1154,7 @@ public class GetMediaMetaDataMetadata {
      * The identifier for the library section.
      */
     @JsonIgnore
-    public long librarySectionID() {
+    public Optional<Long> librarySectionID() {
         return librarySectionID;
     }
 
@@ -1162,7 +1162,7 @@ public class GetMediaMetaDataMetadata {
      * The title of the library section.
      */
     @JsonIgnore
-    public String librarySectionTitle() {
+    public Optional<String> librarySectionTitle() {
         return librarySectionTitle;
     }
 
@@ -1170,7 +1170,7 @@ public class GetMediaMetaDataMetadata {
      * The key corresponding to the library section.
      */
     @JsonIgnore
-    public String librarySectionKey() {
+    public Optional<String> librarySectionKey() {
         return librarySectionKey;
     }
 
@@ -1224,8 +1224,8 @@ public class GetMediaMetaDataMetadata {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Ratings>> ratings() {
-        return (Optional<List<Ratings>>) ratings;
+    public Optional<List<GetMediaMetaDataRatings>> ratings() {
+        return (Optional<List<GetMediaMetaDataRatings>>) ratings;
     }
 
     @SuppressWarnings("unchecked")
@@ -1242,20 +1242,20 @@ public class GetMediaMetaDataMetadata {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Chapter>> chapter() {
-        return (Optional<List<Chapter>>) chapter;
+    public Optional<List<GetMediaMetaDataChapter>> chapter() {
+        return (Optional<List<GetMediaMetaDataChapter>>) chapter;
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Marker>> marker() {
-        return (Optional<List<Marker>>) marker;
+    public Optional<List<GetMediaMetaDataMarker>> marker() {
+        return (Optional<List<GetMediaMetaDataMarker>>) marker;
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Extras> extras() {
-        return (Optional<Extras>) extras;
+    public Optional<GetMediaMetaDataExtras> extras() {
+        return (Optional<GetMediaMetaDataExtras>) extras;
     }
 
     public final static Builder builder() {
@@ -1515,6 +1515,15 @@ public class GetMediaMetaDataMetadata {
      * The original release date of the media item.
      */
     public GetMediaMetaDataMetadata withOriginallyAvailableAt(LocalDate originallyAvailableAt) {
+        Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
+        this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
+        return this;
+    }
+
+    /**
+     * The original release date of the media item.
+     */
+    public GetMediaMetaDataMetadata withOriginallyAvailableAt(Optional<LocalDate> originallyAvailableAt) {
         Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
         this.originallyAvailableAt = originallyAvailableAt;
         return this;
@@ -2077,6 +2086,15 @@ public class GetMediaMetaDataMetadata {
      */
     public GetMediaMetaDataMetadata withLibrarySectionID(long librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
+        this.librarySectionID = Optional.ofNullable(librarySectionID);
+        return this;
+    }
+
+    /**
+     * The identifier for the library section.
+     */
+    public GetMediaMetaDataMetadata withLibrarySectionID(Optional<Long> librarySectionID) {
+        Utils.checkNotNull(librarySectionID, "librarySectionID");
         this.librarySectionID = librarySectionID;
         return this;
     }
@@ -2086,6 +2104,15 @@ public class GetMediaMetaDataMetadata {
      */
     public GetMediaMetaDataMetadata withLibrarySectionTitle(String librarySectionTitle) {
         Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+        this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
+        return this;
+    }
+
+    /**
+     * The title of the library section.
+     */
+    public GetMediaMetaDataMetadata withLibrarySectionTitle(Optional<String> librarySectionTitle) {
+        Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
         this.librarySectionTitle = librarySectionTitle;
         return this;
     }
@@ -2094,6 +2121,15 @@ public class GetMediaMetaDataMetadata {
      * The key corresponding to the library section.
      */
     public GetMediaMetaDataMetadata withLibrarySectionKey(String librarySectionKey) {
+        Utils.checkNotNull(librarySectionKey, "librarySectionKey");
+        this.librarySectionKey = Optional.ofNullable(librarySectionKey);
+        return this;
+    }
+
+    /**
+     * The key corresponding to the library section.
+     */
+    public GetMediaMetaDataMetadata withLibrarySectionKey(Optional<String> librarySectionKey) {
         Utils.checkNotNull(librarySectionKey, "librarySectionKey");
         this.librarySectionKey = librarySectionKey;
         return this;
@@ -2195,13 +2231,13 @@ public class GetMediaMetaDataMetadata {
         return this;
     }
 
-    public GetMediaMetaDataMetadata withRatings(List<Ratings> ratings) {
+    public GetMediaMetaDataMetadata withRatings(List<GetMediaMetaDataRatings> ratings) {
         Utils.checkNotNull(ratings, "ratings");
         this.ratings = Optional.ofNullable(ratings);
         return this;
     }
 
-    public GetMediaMetaDataMetadata withRatings(Optional<? extends List<Ratings>> ratings) {
+    public GetMediaMetaDataMetadata withRatings(Optional<? extends List<GetMediaMetaDataRatings>> ratings) {
         Utils.checkNotNull(ratings, "ratings");
         this.ratings = ratings;
         return this;
@@ -2231,37 +2267,37 @@ public class GetMediaMetaDataMetadata {
         return this;
     }
 
-    public GetMediaMetaDataMetadata withChapter(List<Chapter> chapter) {
+    public GetMediaMetaDataMetadata withChapter(List<GetMediaMetaDataChapter> chapter) {
         Utils.checkNotNull(chapter, "chapter");
         this.chapter = Optional.ofNullable(chapter);
         return this;
     }
 
-    public GetMediaMetaDataMetadata withChapter(Optional<? extends List<Chapter>> chapter) {
+    public GetMediaMetaDataMetadata withChapter(Optional<? extends List<GetMediaMetaDataChapter>> chapter) {
         Utils.checkNotNull(chapter, "chapter");
         this.chapter = chapter;
         return this;
     }
 
-    public GetMediaMetaDataMetadata withMarker(List<Marker> marker) {
+    public GetMediaMetaDataMetadata withMarker(List<GetMediaMetaDataMarker> marker) {
         Utils.checkNotNull(marker, "marker");
         this.marker = Optional.ofNullable(marker);
         return this;
     }
 
-    public GetMediaMetaDataMetadata withMarker(Optional<? extends List<Marker>> marker) {
+    public GetMediaMetaDataMetadata withMarker(Optional<? extends List<GetMediaMetaDataMarker>> marker) {
         Utils.checkNotNull(marker, "marker");
         this.marker = marker;
         return this;
     }
 
-    public GetMediaMetaDataMetadata withExtras(Extras extras) {
+    public GetMediaMetaDataMetadata withExtras(GetMediaMetaDataExtras extras) {
         Utils.checkNotNull(extras, "extras");
         this.extras = Optional.ofNullable(extras);
         return this;
     }
 
-    public GetMediaMetaDataMetadata withExtras(Optional<? extends Extras> extras) {
+    public GetMediaMetaDataMetadata withExtras(Optional<? extends GetMediaMetaDataExtras> extras) {
         Utils.checkNotNull(extras, "extras");
         this.extras = extras;
         return this;
@@ -2557,7 +2593,7 @@ public class GetMediaMetaDataMetadata {
  
         private Integer duration;
  
-        private LocalDate originallyAvailableAt;
+        private Optional<LocalDate> originallyAvailableAt = Optional.empty();
  
         private Long addedAt;
  
@@ -2623,11 +2659,11 @@ public class GetMediaMetaDataMetadata {
  
         private Optional<? extends GetMediaMetaDataUltraBlurColors> ultraBlurColors = Optional.empty();
  
-        private Long librarySectionID;
+        private Optional<Long> librarySectionID = Optional.empty();
  
-        private String librarySectionTitle;
+        private Optional<String> librarySectionTitle = Optional.empty();
  
-        private String librarySectionKey;
+        private Optional<String> librarySectionKey = Optional.empty();
  
         private Optional<? extends List<GetMediaMetaDataGuids>> guids = Optional.empty();
  
@@ -2645,17 +2681,17 @@ public class GetMediaMetaDataMetadata {
  
         private Optional<? extends List<GetMediaMetaDataRole>> role = Optional.empty();
  
-        private Optional<? extends List<Ratings>> ratings = Optional.empty();
+        private Optional<? extends List<GetMediaMetaDataRatings>> ratings = Optional.empty();
  
         private Optional<? extends List<GetMediaMetaDataSimilar>> similar = Optional.empty();
  
         private Optional<? extends List<GetMediaMetaDataLocation>> location = Optional.empty();
  
-        private Optional<? extends List<Chapter>> chapter = Optional.empty();
+        private Optional<? extends List<GetMediaMetaDataChapter>> chapter = Optional.empty();
  
-        private Optional<? extends List<Marker>> marker = Optional.empty();
+        private Optional<? extends List<GetMediaMetaDataMarker>> marker = Optional.empty();
  
-        private Optional<? extends Extras> extras = Optional.empty();
+        private Optional<? extends GetMediaMetaDataExtras> extras = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
@@ -2914,6 +2950,15 @@ public class GetMediaMetaDataMetadata {
          * The original release date of the media item.
          */
         public Builder originallyAvailableAt(LocalDate originallyAvailableAt) {
+            Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
+            this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
+            return this;
+        }
+
+        /**
+         * The original release date of the media item.
+         */
+        public Builder originallyAvailableAt(Optional<LocalDate> originallyAvailableAt) {
             Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
             this.originallyAvailableAt = originallyAvailableAt;
             return this;
@@ -3476,6 +3521,15 @@ public class GetMediaMetaDataMetadata {
          */
         public Builder librarySectionID(long librarySectionID) {
             Utils.checkNotNull(librarySectionID, "librarySectionID");
+            this.librarySectionID = Optional.ofNullable(librarySectionID);
+            return this;
+        }
+
+        /**
+         * The identifier for the library section.
+         */
+        public Builder librarySectionID(Optional<Long> librarySectionID) {
+            Utils.checkNotNull(librarySectionID, "librarySectionID");
             this.librarySectionID = librarySectionID;
             return this;
         }
@@ -3485,6 +3539,15 @@ public class GetMediaMetaDataMetadata {
          */
         public Builder librarySectionTitle(String librarySectionTitle) {
             Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+            this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
+            return this;
+        }
+
+        /**
+         * The title of the library section.
+         */
+        public Builder librarySectionTitle(Optional<String> librarySectionTitle) {
+            Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
             this.librarySectionTitle = librarySectionTitle;
             return this;
         }
@@ -3493,6 +3556,15 @@ public class GetMediaMetaDataMetadata {
          * The key corresponding to the library section.
          */
         public Builder librarySectionKey(String librarySectionKey) {
+            Utils.checkNotNull(librarySectionKey, "librarySectionKey");
+            this.librarySectionKey = Optional.ofNullable(librarySectionKey);
+            return this;
+        }
+
+        /**
+         * The key corresponding to the library section.
+         */
+        public Builder librarySectionKey(Optional<String> librarySectionKey) {
             Utils.checkNotNull(librarySectionKey, "librarySectionKey");
             this.librarySectionKey = librarySectionKey;
             return this;
@@ -3594,13 +3666,13 @@ public class GetMediaMetaDataMetadata {
             return this;
         }
 
-        public Builder ratings(List<Ratings> ratings) {
+        public Builder ratings(List<GetMediaMetaDataRatings> ratings) {
             Utils.checkNotNull(ratings, "ratings");
             this.ratings = Optional.ofNullable(ratings);
             return this;
         }
 
-        public Builder ratings(Optional<? extends List<Ratings>> ratings) {
+        public Builder ratings(Optional<? extends List<GetMediaMetaDataRatings>> ratings) {
             Utils.checkNotNull(ratings, "ratings");
             this.ratings = ratings;
             return this;
@@ -3630,37 +3702,37 @@ public class GetMediaMetaDataMetadata {
             return this;
         }
 
-        public Builder chapter(List<Chapter> chapter) {
+        public Builder chapter(List<GetMediaMetaDataChapter> chapter) {
             Utils.checkNotNull(chapter, "chapter");
             this.chapter = Optional.ofNullable(chapter);
             return this;
         }
 
-        public Builder chapter(Optional<? extends List<Chapter>> chapter) {
+        public Builder chapter(Optional<? extends List<GetMediaMetaDataChapter>> chapter) {
             Utils.checkNotNull(chapter, "chapter");
             this.chapter = chapter;
             return this;
         }
 
-        public Builder marker(List<Marker> marker) {
+        public Builder marker(List<GetMediaMetaDataMarker> marker) {
             Utils.checkNotNull(marker, "marker");
             this.marker = Optional.ofNullable(marker);
             return this;
         }
 
-        public Builder marker(Optional<? extends List<Marker>> marker) {
+        public Builder marker(Optional<? extends List<GetMediaMetaDataMarker>> marker) {
             Utils.checkNotNull(marker, "marker");
             this.marker = marker;
             return this;
         }
 
-        public Builder extras(Extras extras) {
+        public Builder extras(GetMediaMetaDataExtras extras) {
             Utils.checkNotNull(extras, "extras");
             this.extras = Optional.ofNullable(extras);
             return this;
         }
 
-        public Builder extras(Optional<? extends Extras> extras) {
+        public Builder extras(Optional<? extends GetMediaMetaDataExtras> extras) {
             Utils.checkNotNull(extras, "extras");
             this.extras = extras;
             return this;

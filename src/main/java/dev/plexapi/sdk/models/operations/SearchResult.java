@@ -5,52 +5,103 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Float;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Objects;
+import java.util.Optional;
 
 public class SearchResult {
 
+    /**
+     * The score of the search result, typically a float value between 0 and 1.
+     */
     @JsonProperty("score")
     private float score;
 
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Directory")
+    private Optional<? extends GetSearchAllLibrariesDirectory> directory;
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Metadata")
-    private GetSearchAllLibrariesMetadata metadata;
+    private Optional<? extends GetSearchAllLibrariesMetadata> metadata;
 
     @JsonCreator
     public SearchResult(
             @JsonProperty("score") float score,
-            @JsonProperty("Metadata") GetSearchAllLibrariesMetadata metadata) {
+            @JsonProperty("Directory") Optional<? extends GetSearchAllLibrariesDirectory> directory,
+            @JsonProperty("Metadata") Optional<? extends GetSearchAllLibrariesMetadata> metadata) {
         Utils.checkNotNull(score, "score");
+        Utils.checkNotNull(directory, "directory");
         Utils.checkNotNull(metadata, "metadata");
         this.score = score;
+        this.directory = directory;
         this.metadata = metadata;
     }
+    
+    public SearchResult(
+            float score) {
+        this(score, Optional.empty(), Optional.empty());
+    }
 
+    /**
+     * The score of the search result, typically a float value between 0 and 1.
+     */
     @JsonIgnore
     public float score() {
         return score;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public GetSearchAllLibrariesMetadata metadata() {
-        return metadata;
+    public Optional<GetSearchAllLibrariesDirectory> directory() {
+        return (Optional<GetSearchAllLibrariesDirectory>) directory;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetSearchAllLibrariesMetadata> metadata() {
+        return (Optional<GetSearchAllLibrariesMetadata>) metadata;
     }
 
     public final static Builder builder() {
         return new Builder();
     }    
 
+    /**
+     * The score of the search result, typically a float value between 0 and 1.
+     */
     public SearchResult withScore(float score) {
         Utils.checkNotNull(score, "score");
         this.score = score;
         return this;
     }
 
+    public SearchResult withDirectory(GetSearchAllLibrariesDirectory directory) {
+        Utils.checkNotNull(directory, "directory");
+        this.directory = Optional.ofNullable(directory);
+        return this;
+    }
+
+    public SearchResult withDirectory(Optional<? extends GetSearchAllLibrariesDirectory> directory) {
+        Utils.checkNotNull(directory, "directory");
+        this.directory = directory;
+        return this;
+    }
+
     public SearchResult withMetadata(GetSearchAllLibrariesMetadata metadata) {
+        Utils.checkNotNull(metadata, "metadata");
+        this.metadata = Optional.ofNullable(metadata);
+        return this;
+    }
+
+    public SearchResult withMetadata(Optional<? extends GetSearchAllLibrariesMetadata> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
         return this;
@@ -68,6 +119,7 @@ public class SearchResult {
         SearchResult other = (SearchResult) o;
         return 
             Objects.deepEquals(this.score, other.score) &&
+            Objects.deepEquals(this.directory, other.directory) &&
             Objects.deepEquals(this.metadata, other.metadata);
     }
     
@@ -75,6 +127,7 @@ public class SearchResult {
     public int hashCode() {
         return Objects.hash(
             score,
+            directory,
             metadata);
     }
     
@@ -82,6 +135,7 @@ public class SearchResult {
     public String toString() {
         return Utils.toString(SearchResult.class,
                 "score", score,
+                "directory", directory,
                 "metadata", metadata);
     }
     
@@ -89,19 +143,42 @@ public class SearchResult {
  
         private Float score;
  
-        private GetSearchAllLibrariesMetadata metadata;
+        private Optional<? extends GetSearchAllLibrariesDirectory> directory = Optional.empty();
+ 
+        private Optional<? extends GetSearchAllLibrariesMetadata> metadata = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
         }
 
+        /**
+         * The score of the search result, typically a float value between 0 and 1.
+         */
         public Builder score(float score) {
             Utils.checkNotNull(score, "score");
             this.score = score;
             return this;
         }
 
+        public Builder directory(GetSearchAllLibrariesDirectory directory) {
+            Utils.checkNotNull(directory, "directory");
+            this.directory = Optional.ofNullable(directory);
+            return this;
+        }
+
+        public Builder directory(Optional<? extends GetSearchAllLibrariesDirectory> directory) {
+            Utils.checkNotNull(directory, "directory");
+            this.directory = directory;
+            return this;
+        }
+
         public Builder metadata(GetSearchAllLibrariesMetadata metadata) {
+            Utils.checkNotNull(metadata, "metadata");
+            this.metadata = Optional.ofNullable(metadata);
+            return this;
+        }
+
+        public Builder metadata(Optional<? extends GetSearchAllLibrariesMetadata> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = metadata;
             return this;
@@ -110,6 +187,7 @@ public class SearchResult {
         public SearchResult build() {
             return new SearchResult(
                 score,
+                directory,
                 metadata);
         }
     }

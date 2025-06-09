@@ -188,20 +188,23 @@ public class GetRecentlyAddedMetadata {
     /**
      * The identifier for the library section.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionID")
-    private long librarySectionID;
+    private Optional<Long> librarySectionID;
 
     /**
      * The key corresponding to the library section.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionKey")
-    private String librarySectionKey;
+    private Optional<String> librarySectionKey;
 
     /**
      * The title of the library section.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionTitle")
-    private String librarySectionTitle;
+    private Optional<String> librarySectionTitle;
 
     /**
      * The original title of the media item (if different).
@@ -213,8 +216,9 @@ public class GetRecentlyAddedMetadata {
     /**
      * The original release date of the media item.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("originallyAvailableAt")
-    private LocalDate originallyAvailableAt;
+    private Optional<LocalDate> originallyAvailableAt;
 
     /**
      * The GUID of the parent media item.
@@ -506,11 +510,11 @@ public class GetRecentlyAddedMetadata {
             @JsonProperty("lastRatedAt") Optional<Long> lastRatedAt,
             @JsonProperty("lastViewedAt") Optional<Integer> lastViewedAt,
             @JsonProperty("leafCount") Optional<Integer> leafCount,
-            @JsonProperty("librarySectionID") long librarySectionID,
-            @JsonProperty("librarySectionKey") String librarySectionKey,
-            @JsonProperty("librarySectionTitle") String librarySectionTitle,
+            @JsonProperty("librarySectionID") Optional<Long> librarySectionID,
+            @JsonProperty("librarySectionKey") Optional<String> librarySectionKey,
+            @JsonProperty("librarySectionTitle") Optional<String> librarySectionTitle,
             @JsonProperty("originalTitle") Optional<String> originalTitle,
-            @JsonProperty("originallyAvailableAt") LocalDate originallyAvailableAt,
+            @JsonProperty("originallyAvailableAt") Optional<LocalDate> originallyAvailableAt,
             @JsonProperty("parentGuid") Optional<String> parentGuid,
             @JsonProperty("parentIndex") Optional<Integer> parentIndex,
             @JsonProperty("parentKey") Optional<String> parentKey,
@@ -718,10 +722,6 @@ public class GetRecentlyAddedMetadata {
             String guid,
             int index,
             String key,
-            long librarySectionID,
-            String librarySectionKey,
-            String librarySectionTitle,
-            LocalDate originallyAvailableAt,
             String parentStudio,
             String parentTheme,
             String ratingKey,
@@ -735,7 +735,7 @@ public class GetRecentlyAddedMetadata {
             String titleSort,
             String title,
             GetRecentlyAddedHubsType type) {
-        this(addedAt, art, Optional.empty(), audienceRating, Optional.empty(), childCount, Optional.empty(), Optional.empty(), Optional.empty(), duration, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), guid, index, key, Optional.empty(), Optional.empty(), Optional.empty(), librarySectionID, librarySectionKey, librarySectionTitle, Optional.empty(), originallyAvailableAt, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), parentStudio, parentTheme, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), ratingKey, rating, seasonCount, Optional.empty(), slug, Optional.empty(), Optional.empty(), summary, tagline, theme, thumb, titleSort, title, type, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(addedAt, art, Optional.empty(), audienceRating, Optional.empty(), childCount, Optional.empty(), Optional.empty(), Optional.empty(), duration, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), guid, index, key, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), parentStudio, parentTheme, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), ratingKey, rating, seasonCount, Optional.empty(), slug, Optional.empty(), Optional.empty(), summary, tagline, theme, thumb, titleSort, title, type, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -931,7 +931,7 @@ public class GetRecentlyAddedMetadata {
      * The identifier for the library section.
      */
     @JsonIgnore
-    public long librarySectionID() {
+    public Optional<Long> librarySectionID() {
         return librarySectionID;
     }
 
@@ -939,7 +939,7 @@ public class GetRecentlyAddedMetadata {
      * The key corresponding to the library section.
      */
     @JsonIgnore
-    public String librarySectionKey() {
+    public Optional<String> librarySectionKey() {
         return librarySectionKey;
     }
 
@@ -947,7 +947,7 @@ public class GetRecentlyAddedMetadata {
      * The title of the library section.
      */
     @JsonIgnore
-    public String librarySectionTitle() {
+    public Optional<String> librarySectionTitle() {
         return librarySectionTitle;
     }
 
@@ -963,7 +963,7 @@ public class GetRecentlyAddedMetadata {
      * The original release date of the media item.
      */
     @JsonIgnore
-    public LocalDate originallyAvailableAt() {
+    public Optional<LocalDate> originallyAvailableAt() {
         return originallyAvailableAt;
     }
 
@@ -1670,6 +1670,15 @@ public class GetRecentlyAddedMetadata {
      */
     public GetRecentlyAddedMetadata withLibrarySectionID(long librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
+        this.librarySectionID = Optional.ofNullable(librarySectionID);
+        return this;
+    }
+
+    /**
+     * The identifier for the library section.
+     */
+    public GetRecentlyAddedMetadata withLibrarySectionID(Optional<Long> librarySectionID) {
+        Utils.checkNotNull(librarySectionID, "librarySectionID");
         this.librarySectionID = librarySectionID;
         return this;
     }
@@ -1679,6 +1688,15 @@ public class GetRecentlyAddedMetadata {
      */
     public GetRecentlyAddedMetadata withLibrarySectionKey(String librarySectionKey) {
         Utils.checkNotNull(librarySectionKey, "librarySectionKey");
+        this.librarySectionKey = Optional.ofNullable(librarySectionKey);
+        return this;
+    }
+
+    /**
+     * The key corresponding to the library section.
+     */
+    public GetRecentlyAddedMetadata withLibrarySectionKey(Optional<String> librarySectionKey) {
+        Utils.checkNotNull(librarySectionKey, "librarySectionKey");
         this.librarySectionKey = librarySectionKey;
         return this;
     }
@@ -1687,6 +1705,15 @@ public class GetRecentlyAddedMetadata {
      * The title of the library section.
      */
     public GetRecentlyAddedMetadata withLibrarySectionTitle(String librarySectionTitle) {
+        Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+        this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
+        return this;
+    }
+
+    /**
+     * The title of the library section.
+     */
+    public GetRecentlyAddedMetadata withLibrarySectionTitle(Optional<String> librarySectionTitle) {
         Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
         this.librarySectionTitle = librarySectionTitle;
         return this;
@@ -1714,6 +1741,15 @@ public class GetRecentlyAddedMetadata {
      * The original release date of the media item.
      */
     public GetRecentlyAddedMetadata withOriginallyAvailableAt(LocalDate originallyAvailableAt) {
+        Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
+        this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
+        return this;
+    }
+
+    /**
+     * The original release date of the media item.
+     */
+    public GetRecentlyAddedMetadata withOriginallyAvailableAt(Optional<LocalDate> originallyAvailableAt) {
         Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
         this.originallyAvailableAt = originallyAvailableAt;
         return this;
@@ -2641,15 +2677,15 @@ public class GetRecentlyAddedMetadata {
  
         private Optional<Integer> leafCount = Optional.empty();
  
-        private Long librarySectionID;
+        private Optional<Long> librarySectionID = Optional.empty();
  
-        private String librarySectionKey;
+        private Optional<String> librarySectionKey = Optional.empty();
  
-        private String librarySectionTitle;
+        private Optional<String> librarySectionTitle = Optional.empty();
  
         private Optional<String> originalTitle = Optional.empty();
  
-        private LocalDate originallyAvailableAt;
+        private Optional<LocalDate> originallyAvailableAt = Optional.empty();
  
         private Optional<String> parentGuid = Optional.empty();
  
@@ -3109,6 +3145,15 @@ public class GetRecentlyAddedMetadata {
          */
         public Builder librarySectionID(long librarySectionID) {
             Utils.checkNotNull(librarySectionID, "librarySectionID");
+            this.librarySectionID = Optional.ofNullable(librarySectionID);
+            return this;
+        }
+
+        /**
+         * The identifier for the library section.
+         */
+        public Builder librarySectionID(Optional<Long> librarySectionID) {
+            Utils.checkNotNull(librarySectionID, "librarySectionID");
             this.librarySectionID = librarySectionID;
             return this;
         }
@@ -3118,6 +3163,15 @@ public class GetRecentlyAddedMetadata {
          */
         public Builder librarySectionKey(String librarySectionKey) {
             Utils.checkNotNull(librarySectionKey, "librarySectionKey");
+            this.librarySectionKey = Optional.ofNullable(librarySectionKey);
+            return this;
+        }
+
+        /**
+         * The key corresponding to the library section.
+         */
+        public Builder librarySectionKey(Optional<String> librarySectionKey) {
+            Utils.checkNotNull(librarySectionKey, "librarySectionKey");
             this.librarySectionKey = librarySectionKey;
             return this;
         }
@@ -3126,6 +3180,15 @@ public class GetRecentlyAddedMetadata {
          * The title of the library section.
          */
         public Builder librarySectionTitle(String librarySectionTitle) {
+            Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
+            this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
+            return this;
+        }
+
+        /**
+         * The title of the library section.
+         */
+        public Builder librarySectionTitle(Optional<String> librarySectionTitle) {
             Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
             this.librarySectionTitle = librarySectionTitle;
             return this;
@@ -3153,6 +3216,15 @@ public class GetRecentlyAddedMetadata {
          * The original release date of the media item.
          */
         public Builder originallyAvailableAt(LocalDate originallyAvailableAt) {
+            Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
+            this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
+            return this;
+        }
+
+        /**
+         * The original release date of the media item.
+         */
+        public Builder originallyAvailableAt(Optional<LocalDate> originallyAvailableAt) {
             Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
             this.originallyAvailableAt = originallyAvailableAt;
             return this;

@@ -8,12 +8,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
-import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Double;
+import java.lang.Float;
 import java.lang.Integer;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -23,103 +22,162 @@ import java.util.Optional;
 
 public class GetSearchAllLibrariesMedia {
 
+    /**
+     * Unique media identifier.
+     */
     @JsonProperty("id")
-    private int id;
+    private long id;
 
+    /**
+     * Duration of the media in milliseconds.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
     private Optional<Integer> duration;
 
+    /**
+     * Bitrate in bits per second.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bitrate")
     private Optional<Integer> bitrate;
 
+    /**
+     * Video width in pixels.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("width")
     private Optional<Integer> width;
 
+    /**
+     * Video height in pixels.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("height")
     private Optional<Integer> height;
 
+    /**
+     * Aspect ratio of the video.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("aspectRatio")
-    private Optional<Double> aspectRatio;
+    private Optional<Float> aspectRatio;
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("audioProfile")
-    private Optional<String> audioProfile;
-
+    /**
+     * Number of audio channels.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioChannels")
     private Optional<Integer> audioChannels;
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("displayOffset")
+    private Optional<Integer> displayOffset;
+
+    /**
+     * Audio codec used.
+     */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioCodec")
     private Optional<String> audioCodec;
 
+    /**
+     * Video codec used.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoCodec")
     private Optional<String> videoCodec;
 
+    /**
+     * Video resolution (e.g., 4k).
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoResolution")
     private Optional<String> videoResolution;
 
+    /**
+     * Container format of the media.
+     */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("container")
-    private String container;
+    private Optional<String> container;
 
+    /**
+     * Frame rate of the video. Values found include NTSC, PAL, 24p
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoFrameRate")
     private Optional<String> videoFrameRate;
 
+    /**
+     * Video profile (e.g., main 10).
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoProfile")
     private Optional<String> videoProfile;
 
+    /**
+     * Indicates whether voice activity is detected.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hasVoiceActivity")
     private Optional<Boolean> hasVoiceActivity;
 
+    /**
+     * The audio profile used for the media (e.g., DTS, Dolby Digital, etc.).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("audioProfile")
+    private Optional<String> audioProfile;
+
+    /**
+     * Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("optimizedForStreaming")
     private Optional<? extends GetSearchAllLibrariesOptimizedForStreaming> optimizedForStreaming;
 
+    /**
+     * Indicates whether the media has 64-bit offsets.
+     * This is relevant for media files that may require larger offsets than what 32-bit integers can provide.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("has64bitOffsets")
     private Optional<Boolean> has64bitOffsets;
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Part")
-    private List<GetSearchAllLibrariesPart> part;
+    private Optional<? extends List<GetSearchAllLibrariesPart>> part;
 
     @JsonCreator
     public GetSearchAllLibrariesMedia(
-            @JsonProperty("id") int id,
+            @JsonProperty("id") long id,
             @JsonProperty("duration") Optional<Integer> duration,
             @JsonProperty("bitrate") Optional<Integer> bitrate,
             @JsonProperty("width") Optional<Integer> width,
             @JsonProperty("height") Optional<Integer> height,
-            @JsonProperty("aspectRatio") Optional<Double> aspectRatio,
-            @JsonProperty("audioProfile") Optional<String> audioProfile,
+            @JsonProperty("aspectRatio") Optional<Float> aspectRatio,
             @JsonProperty("audioChannels") Optional<Integer> audioChannels,
+            @JsonProperty("displayOffset") Optional<Integer> displayOffset,
             @JsonProperty("audioCodec") Optional<String> audioCodec,
             @JsonProperty("videoCodec") Optional<String> videoCodec,
             @JsonProperty("videoResolution") Optional<String> videoResolution,
-            @JsonProperty("container") String container,
+            @JsonProperty("container") Optional<String> container,
             @JsonProperty("videoFrameRate") Optional<String> videoFrameRate,
             @JsonProperty("videoProfile") Optional<String> videoProfile,
             @JsonProperty("hasVoiceActivity") Optional<Boolean> hasVoiceActivity,
+            @JsonProperty("audioProfile") Optional<String> audioProfile,
             @JsonProperty("optimizedForStreaming") Optional<? extends GetSearchAllLibrariesOptimizedForStreaming> optimizedForStreaming,
             @JsonProperty("has64bitOffsets") Optional<Boolean> has64bitOffsets,
-            @JsonProperty("Part") List<GetSearchAllLibrariesPart> part) {
+            @JsonProperty("Part") Optional<? extends List<GetSearchAllLibrariesPart>> part) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(duration, "duration");
         Utils.checkNotNull(bitrate, "bitrate");
         Utils.checkNotNull(width, "width");
         Utils.checkNotNull(height, "height");
         Utils.checkNotNull(aspectRatio, "aspectRatio");
-        Utils.checkNotNull(audioProfile, "audioProfile");
         Utils.checkNotNull(audioChannels, "audioChannels");
+        Utils.checkNotNull(displayOffset, "displayOffset");
         Utils.checkNotNull(audioCodec, "audioCodec");
         Utils.checkNotNull(videoCodec, "videoCodec");
         Utils.checkNotNull(videoResolution, "videoResolution");
@@ -127,6 +185,7 @@ public class GetSearchAllLibrariesMedia {
         Utils.checkNotNull(videoFrameRate, "videoFrameRate");
         Utils.checkNotNull(videoProfile, "videoProfile");
         Utils.checkNotNull(hasVoiceActivity, "hasVoiceActivity");
+        Utils.checkNotNull(audioProfile, "audioProfile");
         Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
         Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
         Utils.checkNotNull(part, "part");
@@ -136,8 +195,8 @@ public class GetSearchAllLibrariesMedia {
         this.width = width;
         this.height = height;
         this.aspectRatio = aspectRatio;
-        this.audioProfile = audioProfile;
         this.audioChannels = audioChannels;
+        this.displayOffset = displayOffset;
         this.audioCodec = audioCodec;
         this.videoCodec = videoCodec;
         this.videoResolution = videoResolution;
@@ -145,299 +204,475 @@ public class GetSearchAllLibrariesMedia {
         this.videoFrameRate = videoFrameRate;
         this.videoProfile = videoProfile;
         this.hasVoiceActivity = hasVoiceActivity;
+        this.audioProfile = audioProfile;
         this.optimizedForStreaming = optimizedForStreaming;
         this.has64bitOffsets = has64bitOffsets;
         this.part = part;
     }
     
     public GetSearchAllLibrariesMedia(
-            int id,
-            String container,
-            List<GetSearchAllLibrariesPart> part) {
-        this(id, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), container, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), part);
+            long id) {
+        this(id, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
+    /**
+     * Unique media identifier.
+     */
     @JsonIgnore
-    public int id() {
+    public long id() {
         return id;
     }
 
+    /**
+     * Duration of the media in milliseconds.
+     */
     @JsonIgnore
     public Optional<Integer> duration() {
         return duration;
     }
 
+    /**
+     * Bitrate in bits per second.
+     */
     @JsonIgnore
     public Optional<Integer> bitrate() {
         return bitrate;
     }
 
+    /**
+     * Video width in pixels.
+     */
     @JsonIgnore
     public Optional<Integer> width() {
         return width;
     }
 
+    /**
+     * Video height in pixels.
+     */
     @JsonIgnore
     public Optional<Integer> height() {
         return height;
     }
 
+    /**
+     * Aspect ratio of the video.
+     */
     @JsonIgnore
-    public Optional<Double> aspectRatio() {
+    public Optional<Float> aspectRatio() {
         return aspectRatio;
     }
 
-    @JsonIgnore
-    public Optional<String> audioProfile() {
-        return audioProfile;
-    }
-
+    /**
+     * Number of audio channels.
+     */
     @JsonIgnore
     public Optional<Integer> audioChannels() {
         return audioChannels;
     }
 
     @JsonIgnore
+    public Optional<Integer> displayOffset() {
+        return displayOffset;
+    }
+
+    /**
+     * Audio codec used.
+     */
+    @JsonIgnore
     public Optional<String> audioCodec() {
         return audioCodec;
     }
 
+    /**
+     * Video codec used.
+     */
     @JsonIgnore
     public Optional<String> videoCodec() {
         return videoCodec;
     }
 
+    /**
+     * Video resolution (e.g., 4k).
+     */
     @JsonIgnore
     public Optional<String> videoResolution() {
         return videoResolution;
     }
 
+    /**
+     * Container format of the media.
+     */
     @JsonIgnore
-    public String container() {
+    public Optional<String> container() {
         return container;
     }
 
+    /**
+     * Frame rate of the video. Values found include NTSC, PAL, 24p
+     */
     @JsonIgnore
     public Optional<String> videoFrameRate() {
         return videoFrameRate;
     }
 
+    /**
+     * Video profile (e.g., main 10).
+     */
     @JsonIgnore
     public Optional<String> videoProfile() {
         return videoProfile;
     }
 
+    /**
+     * Indicates whether voice activity is detected.
+     */
     @JsonIgnore
     public Optional<Boolean> hasVoiceActivity() {
         return hasVoiceActivity;
     }
 
+    /**
+     * The audio profile used for the media (e.g., DTS, Dolby Digital, etc.).
+     */
+    @JsonIgnore
+    public Optional<String> audioProfile() {
+        return audioProfile;
+    }
+
+    /**
+     * Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<GetSearchAllLibrariesOptimizedForStreaming> optimizedForStreaming() {
         return (Optional<GetSearchAllLibrariesOptimizedForStreaming>) optimizedForStreaming;
     }
 
+    /**
+     * Indicates whether the media has 64-bit offsets.
+     * This is relevant for media files that may require larger offsets than what 32-bit integers can provide.
+     */
     @JsonIgnore
     public Optional<Boolean> has64bitOffsets() {
         return has64bitOffsets;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public List<GetSearchAllLibrariesPart> part() {
-        return part;
+    public Optional<List<GetSearchAllLibrariesPart>> part() {
+        return (Optional<List<GetSearchAllLibrariesPart>>) part;
     }
 
     public final static Builder builder() {
         return new Builder();
     }    
 
-    public GetSearchAllLibrariesMedia withId(int id) {
+    /**
+     * Unique media identifier.
+     */
+    public GetSearchAllLibrariesMedia withId(long id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
     }
 
+    /**
+     * Duration of the media in milliseconds.
+     */
     public GetSearchAllLibrariesMedia withDuration(int duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = Optional.ofNullable(duration);
         return this;
     }
 
+    /**
+     * Duration of the media in milliseconds.
+     */
     public GetSearchAllLibrariesMedia withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = duration;
         return this;
     }
 
+    /**
+     * Bitrate in bits per second.
+     */
     public GetSearchAllLibrariesMedia withBitrate(int bitrate) {
         Utils.checkNotNull(bitrate, "bitrate");
         this.bitrate = Optional.ofNullable(bitrate);
         return this;
     }
 
+    /**
+     * Bitrate in bits per second.
+     */
     public GetSearchAllLibrariesMedia withBitrate(Optional<Integer> bitrate) {
         Utils.checkNotNull(bitrate, "bitrate");
         this.bitrate = bitrate;
         return this;
     }
 
+    /**
+     * Video width in pixels.
+     */
     public GetSearchAllLibrariesMedia withWidth(int width) {
         Utils.checkNotNull(width, "width");
         this.width = Optional.ofNullable(width);
         return this;
     }
 
+    /**
+     * Video width in pixels.
+     */
     public GetSearchAllLibrariesMedia withWidth(Optional<Integer> width) {
         Utils.checkNotNull(width, "width");
         this.width = width;
         return this;
     }
 
+    /**
+     * Video height in pixels.
+     */
     public GetSearchAllLibrariesMedia withHeight(int height) {
         Utils.checkNotNull(height, "height");
         this.height = Optional.ofNullable(height);
         return this;
     }
 
+    /**
+     * Video height in pixels.
+     */
     public GetSearchAllLibrariesMedia withHeight(Optional<Integer> height) {
         Utils.checkNotNull(height, "height");
         this.height = height;
         return this;
     }
 
-    public GetSearchAllLibrariesMedia withAspectRatio(double aspectRatio) {
+    /**
+     * Aspect ratio of the video.
+     */
+    public GetSearchAllLibrariesMedia withAspectRatio(float aspectRatio) {
         Utils.checkNotNull(aspectRatio, "aspectRatio");
         this.aspectRatio = Optional.ofNullable(aspectRatio);
         return this;
     }
 
-    public GetSearchAllLibrariesMedia withAspectRatio(Optional<Double> aspectRatio) {
+    /**
+     * Aspect ratio of the video.
+     */
+    public GetSearchAllLibrariesMedia withAspectRatio(Optional<Float> aspectRatio) {
         Utils.checkNotNull(aspectRatio, "aspectRatio");
         this.aspectRatio = aspectRatio;
         return this;
     }
 
-    public GetSearchAllLibrariesMedia withAudioProfile(String audioProfile) {
-        Utils.checkNotNull(audioProfile, "audioProfile");
-        this.audioProfile = Optional.ofNullable(audioProfile);
-        return this;
-    }
-
-    public GetSearchAllLibrariesMedia withAudioProfile(Optional<String> audioProfile) {
-        Utils.checkNotNull(audioProfile, "audioProfile");
-        this.audioProfile = audioProfile;
-        return this;
-    }
-
+    /**
+     * Number of audio channels.
+     */
     public GetSearchAllLibrariesMedia withAudioChannels(int audioChannels) {
         Utils.checkNotNull(audioChannels, "audioChannels");
         this.audioChannels = Optional.ofNullable(audioChannels);
         return this;
     }
 
+    /**
+     * Number of audio channels.
+     */
     public GetSearchAllLibrariesMedia withAudioChannels(Optional<Integer> audioChannels) {
         Utils.checkNotNull(audioChannels, "audioChannels");
         this.audioChannels = audioChannels;
         return this;
     }
 
+    public GetSearchAllLibrariesMedia withDisplayOffset(int displayOffset) {
+        Utils.checkNotNull(displayOffset, "displayOffset");
+        this.displayOffset = Optional.ofNullable(displayOffset);
+        return this;
+    }
+
+    public GetSearchAllLibrariesMedia withDisplayOffset(Optional<Integer> displayOffset) {
+        Utils.checkNotNull(displayOffset, "displayOffset");
+        this.displayOffset = displayOffset;
+        return this;
+    }
+
+    /**
+     * Audio codec used.
+     */
     public GetSearchAllLibrariesMedia withAudioCodec(String audioCodec) {
         Utils.checkNotNull(audioCodec, "audioCodec");
         this.audioCodec = Optional.ofNullable(audioCodec);
         return this;
     }
 
+    /**
+     * Audio codec used.
+     */
     public GetSearchAllLibrariesMedia withAudioCodec(Optional<String> audioCodec) {
         Utils.checkNotNull(audioCodec, "audioCodec");
         this.audioCodec = audioCodec;
         return this;
     }
 
+    /**
+     * Video codec used.
+     */
     public GetSearchAllLibrariesMedia withVideoCodec(String videoCodec) {
         Utils.checkNotNull(videoCodec, "videoCodec");
         this.videoCodec = Optional.ofNullable(videoCodec);
         return this;
     }
 
+    /**
+     * Video codec used.
+     */
     public GetSearchAllLibrariesMedia withVideoCodec(Optional<String> videoCodec) {
         Utils.checkNotNull(videoCodec, "videoCodec");
         this.videoCodec = videoCodec;
         return this;
     }
 
+    /**
+     * Video resolution (e.g., 4k).
+     */
     public GetSearchAllLibrariesMedia withVideoResolution(String videoResolution) {
         Utils.checkNotNull(videoResolution, "videoResolution");
         this.videoResolution = Optional.ofNullable(videoResolution);
         return this;
     }
 
+    /**
+     * Video resolution (e.g., 4k).
+     */
     public GetSearchAllLibrariesMedia withVideoResolution(Optional<String> videoResolution) {
         Utils.checkNotNull(videoResolution, "videoResolution");
         this.videoResolution = videoResolution;
         return this;
     }
 
+    /**
+     * Container format of the media.
+     */
     public GetSearchAllLibrariesMedia withContainer(String container) {
+        Utils.checkNotNull(container, "container");
+        this.container = Optional.ofNullable(container);
+        return this;
+    }
+
+    /**
+     * Container format of the media.
+     */
+    public GetSearchAllLibrariesMedia withContainer(Optional<String> container) {
         Utils.checkNotNull(container, "container");
         this.container = container;
         return this;
     }
 
+    /**
+     * Frame rate of the video. Values found include NTSC, PAL, 24p
+     */
     public GetSearchAllLibrariesMedia withVideoFrameRate(String videoFrameRate) {
         Utils.checkNotNull(videoFrameRate, "videoFrameRate");
         this.videoFrameRate = Optional.ofNullable(videoFrameRate);
         return this;
     }
 
+    /**
+     * Frame rate of the video. Values found include NTSC, PAL, 24p
+     */
     public GetSearchAllLibrariesMedia withVideoFrameRate(Optional<String> videoFrameRate) {
         Utils.checkNotNull(videoFrameRate, "videoFrameRate");
         this.videoFrameRate = videoFrameRate;
         return this;
     }
 
+    /**
+     * Video profile (e.g., main 10).
+     */
     public GetSearchAllLibrariesMedia withVideoProfile(String videoProfile) {
         Utils.checkNotNull(videoProfile, "videoProfile");
         this.videoProfile = Optional.ofNullable(videoProfile);
         return this;
     }
 
+    /**
+     * Video profile (e.g., main 10).
+     */
     public GetSearchAllLibrariesMedia withVideoProfile(Optional<String> videoProfile) {
         Utils.checkNotNull(videoProfile, "videoProfile");
         this.videoProfile = videoProfile;
         return this;
     }
 
+    /**
+     * Indicates whether voice activity is detected.
+     */
     public GetSearchAllLibrariesMedia withHasVoiceActivity(boolean hasVoiceActivity) {
         Utils.checkNotNull(hasVoiceActivity, "hasVoiceActivity");
         this.hasVoiceActivity = Optional.ofNullable(hasVoiceActivity);
         return this;
     }
 
+    /**
+     * Indicates whether voice activity is detected.
+     */
     public GetSearchAllLibrariesMedia withHasVoiceActivity(Optional<Boolean> hasVoiceActivity) {
         Utils.checkNotNull(hasVoiceActivity, "hasVoiceActivity");
         this.hasVoiceActivity = hasVoiceActivity;
         return this;
     }
 
+    /**
+     * The audio profile used for the media (e.g., DTS, Dolby Digital, etc.).
+     */
+    public GetSearchAllLibrariesMedia withAudioProfile(String audioProfile) {
+        Utils.checkNotNull(audioProfile, "audioProfile");
+        this.audioProfile = Optional.ofNullable(audioProfile);
+        return this;
+    }
+
+    /**
+     * The audio profile used for the media (e.g., DTS, Dolby Digital, etc.).
+     */
+    public GetSearchAllLibrariesMedia withAudioProfile(Optional<String> audioProfile) {
+        Utils.checkNotNull(audioProfile, "audioProfile");
+        this.audioProfile = audioProfile;
+        return this;
+    }
+
+    /**
+     * Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
+     */
     public GetSearchAllLibrariesMedia withOptimizedForStreaming(GetSearchAllLibrariesOptimizedForStreaming optimizedForStreaming) {
         Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
         this.optimizedForStreaming = Optional.ofNullable(optimizedForStreaming);
         return this;
     }
 
+    /**
+     * Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
+     */
     public GetSearchAllLibrariesMedia withOptimizedForStreaming(Optional<? extends GetSearchAllLibrariesOptimizedForStreaming> optimizedForStreaming) {
         Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
         this.optimizedForStreaming = optimizedForStreaming;
         return this;
     }
 
+    /**
+     * Indicates whether the media has 64-bit offsets.
+     * This is relevant for media files that may require larger offsets than what 32-bit integers can provide.
+     */
     public GetSearchAllLibrariesMedia withHas64bitOffsets(boolean has64bitOffsets) {
         Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
         this.has64bitOffsets = Optional.ofNullable(has64bitOffsets);
         return this;
     }
 
+    /**
+     * Indicates whether the media has 64-bit offsets.
+     * This is relevant for media files that may require larger offsets than what 32-bit integers can provide.
+     */
     public GetSearchAllLibrariesMedia withHas64bitOffsets(Optional<Boolean> has64bitOffsets) {
         Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
         this.has64bitOffsets = has64bitOffsets;
@@ -445,6 +680,12 @@ public class GetSearchAllLibrariesMedia {
     }
 
     public GetSearchAllLibrariesMedia withPart(List<GetSearchAllLibrariesPart> part) {
+        Utils.checkNotNull(part, "part");
+        this.part = Optional.ofNullable(part);
+        return this;
+    }
+
+    public GetSearchAllLibrariesMedia withPart(Optional<? extends List<GetSearchAllLibrariesPart>> part) {
         Utils.checkNotNull(part, "part");
         this.part = part;
         return this;
@@ -467,8 +708,8 @@ public class GetSearchAllLibrariesMedia {
             Objects.deepEquals(this.width, other.width) &&
             Objects.deepEquals(this.height, other.height) &&
             Objects.deepEquals(this.aspectRatio, other.aspectRatio) &&
-            Objects.deepEquals(this.audioProfile, other.audioProfile) &&
             Objects.deepEquals(this.audioChannels, other.audioChannels) &&
+            Objects.deepEquals(this.displayOffset, other.displayOffset) &&
             Objects.deepEquals(this.audioCodec, other.audioCodec) &&
             Objects.deepEquals(this.videoCodec, other.videoCodec) &&
             Objects.deepEquals(this.videoResolution, other.videoResolution) &&
@@ -476,6 +717,7 @@ public class GetSearchAllLibrariesMedia {
             Objects.deepEquals(this.videoFrameRate, other.videoFrameRate) &&
             Objects.deepEquals(this.videoProfile, other.videoProfile) &&
             Objects.deepEquals(this.hasVoiceActivity, other.hasVoiceActivity) &&
+            Objects.deepEquals(this.audioProfile, other.audioProfile) &&
             Objects.deepEquals(this.optimizedForStreaming, other.optimizedForStreaming) &&
             Objects.deepEquals(this.has64bitOffsets, other.has64bitOffsets) &&
             Objects.deepEquals(this.part, other.part);
@@ -490,8 +732,8 @@ public class GetSearchAllLibrariesMedia {
             width,
             height,
             aspectRatio,
-            audioProfile,
             audioChannels,
+            displayOffset,
             audioCodec,
             videoCodec,
             videoResolution,
@@ -499,6 +741,7 @@ public class GetSearchAllLibrariesMedia {
             videoFrameRate,
             videoProfile,
             hasVoiceActivity,
+            audioProfile,
             optimizedForStreaming,
             has64bitOffsets,
             part);
@@ -513,8 +756,8 @@ public class GetSearchAllLibrariesMedia {
                 "width", width,
                 "height", height,
                 "aspectRatio", aspectRatio,
-                "audioProfile", audioProfile,
                 "audioChannels", audioChannels,
+                "displayOffset", displayOffset,
                 "audioCodec", audioCodec,
                 "videoCodec", videoCodec,
                 "videoResolution", videoResolution,
@@ -522,6 +765,7 @@ public class GetSearchAllLibrariesMedia {
                 "videoFrameRate", videoFrameRate,
                 "videoProfile", videoProfile,
                 "hasVoiceActivity", hasVoiceActivity,
+                "audioProfile", audioProfile,
                 "optimizedForStreaming", optimizedForStreaming,
                 "has64bitOffsets", has64bitOffsets,
                 "part", part);
@@ -529,7 +773,7 @@ public class GetSearchAllLibrariesMedia {
     
     public final static class Builder {
  
-        private Integer id;
+        private Long id;
  
         private Optional<Integer> duration = Optional.empty();
  
@@ -539,11 +783,11 @@ public class GetSearchAllLibrariesMedia {
  
         private Optional<Integer> height = Optional.empty();
  
-        private Optional<Double> aspectRatio = Optional.empty();
- 
-        private Optional<String> audioProfile = Optional.empty();
+        private Optional<Float> aspectRatio = Optional.empty();
  
         private Optional<Integer> audioChannels = Optional.empty();
+ 
+        private Optional<Integer> displayOffset = Optional.empty();
  
         private Optional<String> audioCodec = Optional.empty();
  
@@ -551,7 +795,7 @@ public class GetSearchAllLibrariesMedia {
  
         private Optional<String> videoResolution = Optional.empty();
  
-        private String container;
+        private Optional<String> container = Optional.empty();
  
         private Optional<String> videoFrameRate = Optional.empty();
  
@@ -559,202 +803,323 @@ public class GetSearchAllLibrariesMedia {
  
         private Optional<Boolean> hasVoiceActivity = Optional.empty();
  
-        private Optional<? extends GetSearchAllLibrariesOptimizedForStreaming> optimizedForStreaming;
+        private Optional<String> audioProfile = Optional.empty();
+ 
+        private Optional<? extends GetSearchAllLibrariesOptimizedForStreaming> optimizedForStreaming = Optional.empty();
  
         private Optional<Boolean> has64bitOffsets = Optional.empty();
  
-        private List<GetSearchAllLibrariesPart> part;
+        private Optional<? extends List<GetSearchAllLibrariesPart>> part = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
         }
 
-        public Builder id(int id) {
+        /**
+         * Unique media identifier.
+         */
+        public Builder id(long id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;
         }
 
+        /**
+         * Duration of the media in milliseconds.
+         */
         public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = Optional.ofNullable(duration);
             return this;
         }
 
+        /**
+         * Duration of the media in milliseconds.
+         */
         public Builder duration(Optional<Integer> duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = duration;
             return this;
         }
 
+        /**
+         * Bitrate in bits per second.
+         */
         public Builder bitrate(int bitrate) {
             Utils.checkNotNull(bitrate, "bitrate");
             this.bitrate = Optional.ofNullable(bitrate);
             return this;
         }
 
+        /**
+         * Bitrate in bits per second.
+         */
         public Builder bitrate(Optional<Integer> bitrate) {
             Utils.checkNotNull(bitrate, "bitrate");
             this.bitrate = bitrate;
             return this;
         }
 
+        /**
+         * Video width in pixels.
+         */
         public Builder width(int width) {
             Utils.checkNotNull(width, "width");
             this.width = Optional.ofNullable(width);
             return this;
         }
 
+        /**
+         * Video width in pixels.
+         */
         public Builder width(Optional<Integer> width) {
             Utils.checkNotNull(width, "width");
             this.width = width;
             return this;
         }
 
+        /**
+         * Video height in pixels.
+         */
         public Builder height(int height) {
             Utils.checkNotNull(height, "height");
             this.height = Optional.ofNullable(height);
             return this;
         }
 
+        /**
+         * Video height in pixels.
+         */
         public Builder height(Optional<Integer> height) {
             Utils.checkNotNull(height, "height");
             this.height = height;
             return this;
         }
 
-        public Builder aspectRatio(double aspectRatio) {
+        /**
+         * Aspect ratio of the video.
+         */
+        public Builder aspectRatio(float aspectRatio) {
             Utils.checkNotNull(aspectRatio, "aspectRatio");
             this.aspectRatio = Optional.ofNullable(aspectRatio);
             return this;
         }
 
-        public Builder aspectRatio(Optional<Double> aspectRatio) {
+        /**
+         * Aspect ratio of the video.
+         */
+        public Builder aspectRatio(Optional<Float> aspectRatio) {
             Utils.checkNotNull(aspectRatio, "aspectRatio");
             this.aspectRatio = aspectRatio;
             return this;
         }
 
-        public Builder audioProfile(String audioProfile) {
-            Utils.checkNotNull(audioProfile, "audioProfile");
-            this.audioProfile = Optional.ofNullable(audioProfile);
-            return this;
-        }
-
-        public Builder audioProfile(Optional<String> audioProfile) {
-            Utils.checkNotNull(audioProfile, "audioProfile");
-            this.audioProfile = audioProfile;
-            return this;
-        }
-
+        /**
+         * Number of audio channels.
+         */
         public Builder audioChannels(int audioChannels) {
             Utils.checkNotNull(audioChannels, "audioChannels");
             this.audioChannels = Optional.ofNullable(audioChannels);
             return this;
         }
 
+        /**
+         * Number of audio channels.
+         */
         public Builder audioChannels(Optional<Integer> audioChannels) {
             Utils.checkNotNull(audioChannels, "audioChannels");
             this.audioChannels = audioChannels;
             return this;
         }
 
+        public Builder displayOffset(int displayOffset) {
+            Utils.checkNotNull(displayOffset, "displayOffset");
+            this.displayOffset = Optional.ofNullable(displayOffset);
+            return this;
+        }
+
+        public Builder displayOffset(Optional<Integer> displayOffset) {
+            Utils.checkNotNull(displayOffset, "displayOffset");
+            this.displayOffset = displayOffset;
+            return this;
+        }
+
+        /**
+         * Audio codec used.
+         */
         public Builder audioCodec(String audioCodec) {
             Utils.checkNotNull(audioCodec, "audioCodec");
             this.audioCodec = Optional.ofNullable(audioCodec);
             return this;
         }
 
+        /**
+         * Audio codec used.
+         */
         public Builder audioCodec(Optional<String> audioCodec) {
             Utils.checkNotNull(audioCodec, "audioCodec");
             this.audioCodec = audioCodec;
             return this;
         }
 
+        /**
+         * Video codec used.
+         */
         public Builder videoCodec(String videoCodec) {
             Utils.checkNotNull(videoCodec, "videoCodec");
             this.videoCodec = Optional.ofNullable(videoCodec);
             return this;
         }
 
+        /**
+         * Video codec used.
+         */
         public Builder videoCodec(Optional<String> videoCodec) {
             Utils.checkNotNull(videoCodec, "videoCodec");
             this.videoCodec = videoCodec;
             return this;
         }
 
+        /**
+         * Video resolution (e.g., 4k).
+         */
         public Builder videoResolution(String videoResolution) {
             Utils.checkNotNull(videoResolution, "videoResolution");
             this.videoResolution = Optional.ofNullable(videoResolution);
             return this;
         }
 
+        /**
+         * Video resolution (e.g., 4k).
+         */
         public Builder videoResolution(Optional<String> videoResolution) {
             Utils.checkNotNull(videoResolution, "videoResolution");
             this.videoResolution = videoResolution;
             return this;
         }
 
+        /**
+         * Container format of the media.
+         */
         public Builder container(String container) {
+            Utils.checkNotNull(container, "container");
+            this.container = Optional.ofNullable(container);
+            return this;
+        }
+
+        /**
+         * Container format of the media.
+         */
+        public Builder container(Optional<String> container) {
             Utils.checkNotNull(container, "container");
             this.container = container;
             return this;
         }
 
+        /**
+         * Frame rate of the video. Values found include NTSC, PAL, 24p
+         */
         public Builder videoFrameRate(String videoFrameRate) {
             Utils.checkNotNull(videoFrameRate, "videoFrameRate");
             this.videoFrameRate = Optional.ofNullable(videoFrameRate);
             return this;
         }
 
+        /**
+         * Frame rate of the video. Values found include NTSC, PAL, 24p
+         */
         public Builder videoFrameRate(Optional<String> videoFrameRate) {
             Utils.checkNotNull(videoFrameRate, "videoFrameRate");
             this.videoFrameRate = videoFrameRate;
             return this;
         }
 
+        /**
+         * Video profile (e.g., main 10).
+         */
         public Builder videoProfile(String videoProfile) {
             Utils.checkNotNull(videoProfile, "videoProfile");
             this.videoProfile = Optional.ofNullable(videoProfile);
             return this;
         }
 
+        /**
+         * Video profile (e.g., main 10).
+         */
         public Builder videoProfile(Optional<String> videoProfile) {
             Utils.checkNotNull(videoProfile, "videoProfile");
             this.videoProfile = videoProfile;
             return this;
         }
 
+        /**
+         * Indicates whether voice activity is detected.
+         */
         public Builder hasVoiceActivity(boolean hasVoiceActivity) {
             Utils.checkNotNull(hasVoiceActivity, "hasVoiceActivity");
             this.hasVoiceActivity = Optional.ofNullable(hasVoiceActivity);
             return this;
         }
 
+        /**
+         * Indicates whether voice activity is detected.
+         */
         public Builder hasVoiceActivity(Optional<Boolean> hasVoiceActivity) {
             Utils.checkNotNull(hasVoiceActivity, "hasVoiceActivity");
             this.hasVoiceActivity = hasVoiceActivity;
             return this;
         }
 
+        /**
+         * The audio profile used for the media (e.g., DTS, Dolby Digital, etc.).
+         */
+        public Builder audioProfile(String audioProfile) {
+            Utils.checkNotNull(audioProfile, "audioProfile");
+            this.audioProfile = Optional.ofNullable(audioProfile);
+            return this;
+        }
+
+        /**
+         * The audio profile used for the media (e.g., DTS, Dolby Digital, etc.).
+         */
+        public Builder audioProfile(Optional<String> audioProfile) {
+            Utils.checkNotNull(audioProfile, "audioProfile");
+            this.audioProfile = audioProfile;
+            return this;
+        }
+
+        /**
+         * Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
+         */
         public Builder optimizedForStreaming(GetSearchAllLibrariesOptimizedForStreaming optimizedForStreaming) {
             Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
             this.optimizedForStreaming = Optional.ofNullable(optimizedForStreaming);
             return this;
         }
 
+        /**
+         * Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
+         */
         public Builder optimizedForStreaming(Optional<? extends GetSearchAllLibrariesOptimizedForStreaming> optimizedForStreaming) {
             Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
             this.optimizedForStreaming = optimizedForStreaming;
             return this;
         }
 
+        /**
+         * Indicates whether the media has 64-bit offsets.
+         * This is relevant for media files that may require larger offsets than what 32-bit integers can provide.
+         */
         public Builder has64bitOffsets(boolean has64bitOffsets) {
             Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
             this.has64bitOffsets = Optional.ofNullable(has64bitOffsets);
             return this;
         }
 
+        /**
+         * Indicates whether the media has 64-bit offsets.
+         * This is relevant for media files that may require larger offsets than what 32-bit integers can provide.
+         */
         public Builder has64bitOffsets(Optional<Boolean> has64bitOffsets) {
             Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
             this.has64bitOffsets = has64bitOffsets;
@@ -763,14 +1128,17 @@ public class GetSearchAllLibrariesMedia {
 
         public Builder part(List<GetSearchAllLibrariesPart> part) {
             Utils.checkNotNull(part, "part");
+            this.part = Optional.ofNullable(part);
+            return this;
+        }
+
+        public Builder part(Optional<? extends List<GetSearchAllLibrariesPart>> part) {
+            Utils.checkNotNull(part, "part");
             this.part = part;
             return this;
         }
         
         public GetSearchAllLibrariesMedia build() {
-            if (optimizedForStreaming == null) {
-                optimizedForStreaming = _SINGLETON_VALUE_OptimizedForStreaming.value();
-            }
             return new GetSearchAllLibrariesMedia(
                 id,
                 duration,
@@ -778,8 +1146,8 @@ public class GetSearchAllLibrariesMedia {
                 width,
                 height,
                 aspectRatio,
-                audioProfile,
                 audioChannels,
+                displayOffset,
                 audioCodec,
                 videoCodec,
                 videoResolution,
@@ -787,15 +1155,10 @@ public class GetSearchAllLibrariesMedia {
                 videoFrameRate,
                 videoProfile,
                 hasVoiceActivity,
+                audioProfile,
                 optimizedForStreaming,
                 has64bitOffsets,
                 part);
         }
-
-        private static final LazySingletonValue<Optional<? extends GetSearchAllLibrariesOptimizedForStreaming>> _SINGLETON_VALUE_OptimizedForStreaming =
-                new LazySingletonValue<>(
-                        "optimizedForStreaming",
-                        "0",
-                        new TypeReference<Optional<? extends GetSearchAllLibrariesOptimizedForStreaming>>() {});
     }
 }

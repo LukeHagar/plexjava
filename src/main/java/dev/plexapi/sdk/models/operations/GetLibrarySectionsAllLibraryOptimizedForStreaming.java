@@ -32,9 +32,9 @@ public class GetLibrarySectionsAllLibraryOptimizedForStreaming {
         this.value = value;
     }
 
-    public static GetLibrarySectionsAllLibraryOptimizedForStreaming of(GetLibrarySectionsAllOptimizedForStreaming1 value) {
+    public static GetLibrarySectionsAllLibraryOptimizedForStreaming of(GetLibrarySectionsAllOptimizedForStreamingLibrary1 value) {
         Utils.checkNotNull(value, "value");
-        return new GetLibrarySectionsAllLibraryOptimizedForStreaming(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<GetLibrarySectionsAllOptimizedForStreaming1>(){}));
+        return new GetLibrarySectionsAllLibraryOptimizedForStreaming(TypedObject.of(value, JsonShape.DEFAULT, new TypeReference<GetLibrarySectionsAllOptimizedForStreamingLibrary1>(){}));
     }
 
     public static GetLibrarySectionsAllLibraryOptimizedForStreaming of(boolean value) {
@@ -45,7 +45,7 @@ public class GetLibrarySectionsAllLibraryOptimizedForStreaming {
     /**
      * Returns an instance of one of these types:
      * <ul>
-     * <li>{@code dev.plexapi.sdk.models.operations.GetLibrarySectionsAllOptimizedForStreaming1}</li>
+     * <li>{@code dev.plexapi.sdk.models.operations.GetLibrarySectionsAllOptimizedForStreamingLibrary1}</li>
      * <li>{@code boolean}</li>
      * </ul>
      * 
@@ -87,7 +87,7 @@ public class GetLibrarySectionsAllLibraryOptimizedForStreaming {
         public _Deserializer() {
             super(GetLibrarySectionsAllLibraryOptimizedForStreaming.class, false,
                   TypeReferenceWithShape.of(new TypeReference<Boolean>() {}, JsonShape.DEFAULT),
-                  TypeReferenceWithShape.of(new TypeReference<GetLibrarySectionsAllOptimizedForStreaming1>() {}, JsonShape.DEFAULT));
+                  TypeReferenceWithShape.of(new TypeReference<GetLibrarySectionsAllOptimizedForStreamingLibrary1>() {}, JsonShape.DEFAULT));
         }
     }
     

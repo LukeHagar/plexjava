@@ -8,6 +8,11 @@ import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * GetSearchAllLibrariesHasThumbnail
+ * 
+ * <p>Indicates if the part has a thumbnail.
+ */
 public enum GetSearchAllLibrariesHasThumbnail {
     False("0"),
     True("1");

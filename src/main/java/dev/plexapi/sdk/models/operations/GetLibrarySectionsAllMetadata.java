@@ -171,8 +171,9 @@ public class GetLibrarySectionsAllMetadata {
     /**
      * The original release date of the media item.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("originallyAvailableAt")
-    private LocalDate originallyAvailableAt;
+    private Optional<LocalDate> originallyAvailableAt;
 
     @JsonProperty("addedAt")
     private long addedAt;
@@ -445,7 +446,7 @@ public class GetLibrarySectionsAllMetadata {
             @JsonProperty("childCount") int childCount,
             @JsonProperty("seasonCount") int seasonCount,
             @JsonProperty("duration") int duration,
-            @JsonProperty("originallyAvailableAt") LocalDate originallyAvailableAt,
+            @JsonProperty("originallyAvailableAt") Optional<LocalDate> originallyAvailableAt,
             @JsonProperty("addedAt") long addedAt,
             @JsonProperty("updatedAt") Optional<Long> updatedAt,
             @JsonProperty("audienceRatingImage") Optional<String> audienceRatingImage,
@@ -635,9 +636,8 @@ public class GetLibrarySectionsAllMetadata {
             int childCount,
             int seasonCount,
             int duration,
-            LocalDate originallyAvailableAt,
             long addedAt) {
-        this(ratingKey, key, guid, slug, Optional.empty(), type, title, titleSort, Optional.empty(), summary, rating, audienceRating, Optional.empty(), tagline, thumb, art, theme, index, Optional.empty(), Optional.empty(), childCount, seasonCount, duration, originallyAvailableAt, addedAt, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(ratingKey, key, guid, slug, Optional.empty(), type, title, titleSort, Optional.empty(), summary, rating, audienceRating, Optional.empty(), tagline, thumb, art, theme, index, Optional.empty(), Optional.empty(), childCount, seasonCount, duration, Optional.empty(), addedAt, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -825,7 +825,7 @@ public class GetLibrarySectionsAllMetadata {
      * The original release date of the media item.
      */
     @JsonIgnore
-    public LocalDate originallyAvailableAt() {
+    public Optional<LocalDate> originallyAvailableAt() {
         return originallyAvailableAt;
     }
 
@@ -1383,6 +1383,15 @@ public class GetLibrarySectionsAllMetadata {
      * The original release date of the media item.
      */
     public GetLibrarySectionsAllMetadata withOriginallyAvailableAt(LocalDate originallyAvailableAt) {
+        Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
+        this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
+        return this;
+    }
+
+    /**
+     * The original release date of the media item.
+     */
+    public GetLibrarySectionsAllMetadata withOriginallyAvailableAt(Optional<LocalDate> originallyAvailableAt) {
         Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
         this.originallyAvailableAt = originallyAvailableAt;
         return this;
@@ -2299,7 +2308,7 @@ public class GetLibrarySectionsAllMetadata {
  
         private Integer duration;
  
-        private LocalDate originallyAvailableAt;
+        private Optional<LocalDate> originallyAvailableAt = Optional.empty();
  
         private Long addedAt;
  
@@ -2638,6 +2647,15 @@ public class GetLibrarySectionsAllMetadata {
          * The original release date of the media item.
          */
         public Builder originallyAvailableAt(LocalDate originallyAvailableAt) {
+            Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
+            this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
+            return this;
+        }
+
+        /**
+         * The original release date of the media item.
+         */
+        public Builder originallyAvailableAt(Optional<LocalDate> originallyAvailableAt) {
             Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
             this.originallyAvailableAt = originallyAvailableAt;
             return this;

@@ -25,16 +25,16 @@ public class GetLibraryItemsMeta {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Type")
-    private Optional<? extends List<GetLibraryItemsLibraryResponseType>> type;
+    private Optional<? extends List<GetLibraryItemsLibraryType>> type;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("FieldType")
-    private Optional<? extends List<GetLibraryItemsLibraryFieldType>> fieldType;
+    private Optional<? extends List<GetLibraryItemsFieldType>> fieldType;
 
     @JsonCreator
     public GetLibraryItemsMeta(
-            @JsonProperty("Type") Optional<? extends List<GetLibraryItemsLibraryResponseType>> type,
-            @JsonProperty("FieldType") Optional<? extends List<GetLibraryItemsLibraryFieldType>> fieldType) {
+            @JsonProperty("Type") Optional<? extends List<GetLibraryItemsLibraryType>> type,
+            @JsonProperty("FieldType") Optional<? extends List<GetLibraryItemsFieldType>> fieldType) {
         Utils.checkNotNull(type, "type");
         Utils.checkNotNull(fieldType, "fieldType");
         this.type = type;
@@ -47,39 +47,39 @@ public class GetLibraryItemsMeta {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<GetLibraryItemsLibraryResponseType>> type() {
-        return (Optional<List<GetLibraryItemsLibraryResponseType>>) type;
+    public Optional<List<GetLibraryItemsLibraryType>> type() {
+        return (Optional<List<GetLibraryItemsLibraryType>>) type;
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<GetLibraryItemsLibraryFieldType>> fieldType() {
-        return (Optional<List<GetLibraryItemsLibraryFieldType>>) fieldType;
+    public Optional<List<GetLibraryItemsFieldType>> fieldType() {
+        return (Optional<List<GetLibraryItemsFieldType>>) fieldType;
     }
 
     public final static Builder builder() {
         return new Builder();
     }    
 
-    public GetLibraryItemsMeta withType(List<GetLibraryItemsLibraryResponseType> type) {
+    public GetLibraryItemsMeta withType(List<GetLibraryItemsLibraryType> type) {
         Utils.checkNotNull(type, "type");
         this.type = Optional.ofNullable(type);
         return this;
     }
 
-    public GetLibraryItemsMeta withType(Optional<? extends List<GetLibraryItemsLibraryResponseType>> type) {
+    public GetLibraryItemsMeta withType(Optional<? extends List<GetLibraryItemsLibraryType>> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
     }
 
-    public GetLibraryItemsMeta withFieldType(List<GetLibraryItemsLibraryFieldType> fieldType) {
+    public GetLibraryItemsMeta withFieldType(List<GetLibraryItemsFieldType> fieldType) {
         Utils.checkNotNull(fieldType, "fieldType");
         this.fieldType = Optional.ofNullable(fieldType);
         return this;
     }
 
-    public GetLibraryItemsMeta withFieldType(Optional<? extends List<GetLibraryItemsLibraryFieldType>> fieldType) {
+    public GetLibraryItemsMeta withFieldType(Optional<? extends List<GetLibraryItemsFieldType>> fieldType) {
         Utils.checkNotNull(fieldType, "fieldType");
         this.fieldType = fieldType;
         return this;
@@ -116,33 +116,33 @@ public class GetLibraryItemsMeta {
     
     public final static class Builder {
  
-        private Optional<? extends List<GetLibraryItemsLibraryResponseType>> type = Optional.empty();
+        private Optional<? extends List<GetLibraryItemsLibraryType>> type = Optional.empty();
  
-        private Optional<? extends List<GetLibraryItemsLibraryFieldType>> fieldType = Optional.empty();
+        private Optional<? extends List<GetLibraryItemsFieldType>> fieldType = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
         }
 
-        public Builder type(List<GetLibraryItemsLibraryResponseType> type) {
+        public Builder type(List<GetLibraryItemsLibraryType> type) {
             Utils.checkNotNull(type, "type");
             this.type = Optional.ofNullable(type);
             return this;
         }
 
-        public Builder type(Optional<? extends List<GetLibraryItemsLibraryResponseType>> type) {
+        public Builder type(Optional<? extends List<GetLibraryItemsLibraryType>> type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
         }
 
-        public Builder fieldType(List<GetLibraryItemsLibraryFieldType> fieldType) {
+        public Builder fieldType(List<GetLibraryItemsFieldType> fieldType) {
             Utils.checkNotNull(fieldType, "fieldType");
             this.fieldType = Optional.ofNullable(fieldType);
             return this;
         }
 
-        public Builder fieldType(Optional<? extends List<GetLibraryItemsLibraryFieldType>> fieldType) {
+        public Builder fieldType(Optional<? extends List<GetLibraryItemsFieldType>> fieldType) {
             Utils.checkNotNull(fieldType, "fieldType");
             this.fieldType = fieldType;
             return this;

@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
+import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
@@ -16,39 +17,105 @@ import java.util.Optional;
 
 public class GetSearchAllLibrariesWriter {
 
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * Unique identifier for the writer.
+     */
+    @JsonProperty("id")
+    private int id;
+
+    /**
+     * The role of Writer
+     */
     @JsonProperty("tag")
-    private Optional<String> tag;
+    private String tag;
+
+    /**
+     * The absolute URL of the thumbnail image for the writer.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("thumb")
+    private Optional<String> thumb;
 
     @JsonCreator
     public GetSearchAllLibrariesWriter(
-            @JsonProperty("tag") Optional<String> tag) {
+            @JsonProperty("id") int id,
+            @JsonProperty("tag") String tag,
+            @JsonProperty("thumb") Optional<String> thumb) {
+        Utils.checkNotNull(id, "id");
         Utils.checkNotNull(tag, "tag");
+        Utils.checkNotNull(thumb, "thumb");
+        this.id = id;
         this.tag = tag;
+        this.thumb = thumb;
     }
     
-    public GetSearchAllLibrariesWriter() {
-        this(Optional.empty());
+    public GetSearchAllLibrariesWriter(
+            int id,
+            String tag) {
+        this(id, tag, Optional.empty());
     }
 
+    /**
+     * Unique identifier for the writer.
+     */
     @JsonIgnore
-    public Optional<String> tag() {
+    public int id() {
+        return id;
+    }
+
+    /**
+     * The role of Writer
+     */
+    @JsonIgnore
+    public String tag() {
         return tag;
+    }
+
+    /**
+     * The absolute URL of the thumbnail image for the writer.
+     */
+    @JsonIgnore
+    public Optional<String> thumb() {
+        return thumb;
     }
 
     public final static Builder builder() {
         return new Builder();
     }    
 
-    public GetSearchAllLibrariesWriter withTag(String tag) {
-        Utils.checkNotNull(tag, "tag");
-        this.tag = Optional.ofNullable(tag);
+    /**
+     * Unique identifier for the writer.
+     */
+    public GetSearchAllLibrariesWriter withId(int id) {
+        Utils.checkNotNull(id, "id");
+        this.id = id;
         return this;
     }
 
-    public GetSearchAllLibrariesWriter withTag(Optional<String> tag) {
+    /**
+     * The role of Writer
+     */
+    public GetSearchAllLibrariesWriter withTag(String tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = tag;
+        return this;
+    }
+
+    /**
+     * The absolute URL of the thumbnail image for the writer.
+     */
+    public GetSearchAllLibrariesWriter withThumb(String thumb) {
+        Utils.checkNotNull(thumb, "thumb");
+        this.thumb = Optional.ofNullable(thumb);
+        return this;
+    }
+
+    /**
+     * The absolute URL of the thumbnail image for the writer.
+     */
+    public GetSearchAllLibrariesWriter withThumb(Optional<String> thumb) {
+        Utils.checkNotNull(thumb, "thumb");
+        this.thumb = thumb;
         return this;
     }
 
@@ -63,44 +130,80 @@ public class GetSearchAllLibrariesWriter {
         }
         GetSearchAllLibrariesWriter other = (GetSearchAllLibrariesWriter) o;
         return 
-            Objects.deepEquals(this.tag, other.tag);
+            Objects.deepEquals(this.id, other.id) &&
+            Objects.deepEquals(this.tag, other.tag) &&
+            Objects.deepEquals(this.thumb, other.thumb);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
-            tag);
+            id,
+            tag,
+            thumb);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetSearchAllLibrariesWriter.class,
-                "tag", tag);
+                "id", id,
+                "tag", tag,
+                "thumb", thumb);
     }
     
     public final static class Builder {
  
-        private Optional<String> tag = Optional.empty();
+        private Integer id;
+ 
+        private String tag;
+ 
+        private Optional<String> thumb = Optional.empty();
         
         private Builder() {
           // force use of static builder() method
         }
 
-        public Builder tag(String tag) {
-            Utils.checkNotNull(tag, "tag");
-            this.tag = Optional.ofNullable(tag);
+        /**
+         * Unique identifier for the writer.
+         */
+        public Builder id(int id) {
+            Utils.checkNotNull(id, "id");
+            this.id = id;
             return this;
         }
 
-        public Builder tag(Optional<String> tag) {
+        /**
+         * The role of Writer
+         */
+        public Builder tag(String tag) {
             Utils.checkNotNull(tag, "tag");
             this.tag = tag;
+            return this;
+        }
+
+        /**
+         * The absolute URL of the thumbnail image for the writer.
+         */
+        public Builder thumb(String thumb) {
+            Utils.checkNotNull(thumb, "thumb");
+            this.thumb = Optional.ofNullable(thumb);
+            return this;
+        }
+
+        /**
+         * The absolute URL of the thumbnail image for the writer.
+         */
+        public Builder thumb(Optional<String> thumb) {
+            Utils.checkNotNull(thumb, "thumb");
+            this.thumb = thumb;
             return this;
         }
         
         public GetSearchAllLibrariesWriter build() {
             return new GetSearchAllLibrariesWriter(
-                tag);
+                id,
+                tag,
+                thumb);
         }
     }
 }

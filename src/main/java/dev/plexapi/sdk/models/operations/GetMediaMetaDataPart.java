@@ -46,8 +46,9 @@ public class GetMediaMetaDataPart {
     /**
      * Key to access this part.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
-    private String key;
+    private Optional<String> key;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("indexes")
@@ -63,14 +64,16 @@ public class GetMediaMetaDataPart {
     /**
      * File path for the part.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("file")
-    private String file;
+    private Optional<String> file;
 
     /**
      * File size in bytes.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("size")
-    private long size;
+    private Optional<Long> size;
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("packetLength")
@@ -112,9 +115,6 @@ public class GetMediaMetaDataPart {
     @JsonProperty("hasThumbnail")
     private Optional<? extends GetMediaMetaDataHasThumbnail> hasThumbnail;
 
-    /**
-     * An array of streams for this part.
-     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Stream")
     private Optional<? extends List<GetMediaMetaDataStream>> stream;
@@ -124,11 +124,11 @@ public class GetMediaMetaDataPart {
             @JsonProperty("accessible") Optional<Boolean> accessible,
             @JsonProperty("exists") Optional<Boolean> exists,
             @JsonProperty("id") long id,
-            @JsonProperty("key") String key,
+            @JsonProperty("key") Optional<String> key,
             @JsonProperty("indexes") Optional<String> indexes,
             @JsonProperty("duration") Optional<Integer> duration,
-            @JsonProperty("file") String file,
-            @JsonProperty("size") long size,
+            @JsonProperty("file") Optional<String> file,
+            @JsonProperty("size") Optional<Long> size,
             @JsonProperty("packetLength") Optional<Integer> packetLength,
             @JsonProperty("container") Optional<String> container,
             @JsonProperty("videoProfile") Optional<String> videoProfile,
@@ -172,11 +172,8 @@ public class GetMediaMetaDataPart {
     }
     
     public GetMediaMetaDataPart(
-            long id,
-            String key,
-            String file,
-            long size) {
-        this(Optional.empty(), Optional.empty(), id, key, Optional.empty(), Optional.empty(), file, size, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+            long id) {
+        this(Optional.empty(), Optional.empty(), id, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -207,7 +204,7 @@ public class GetMediaMetaDataPart {
      * Key to access this part.
      */
     @JsonIgnore
-    public String key() {
+    public Optional<String> key() {
         return key;
     }
 
@@ -228,7 +225,7 @@ public class GetMediaMetaDataPart {
      * File path for the part.
      */
     @JsonIgnore
-    public String file() {
+    public Optional<String> file() {
         return file;
     }
 
@@ -236,7 +233,7 @@ public class GetMediaMetaDataPart {
      * File size in bytes.
      */
     @JsonIgnore
-    public long size() {
+    public Optional<Long> size() {
         return size;
     }
 
@@ -289,9 +286,6 @@ public class GetMediaMetaDataPart {
         return (Optional<GetMediaMetaDataHasThumbnail>) hasThumbnail;
     }
 
-    /**
-     * An array of streams for this part.
-     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<List<GetMediaMetaDataStream>> stream() {
@@ -352,6 +346,15 @@ public class GetMediaMetaDataPart {
      */
     public GetMediaMetaDataPart withKey(String key) {
         Utils.checkNotNull(key, "key");
+        this.key = Optional.ofNullable(key);
+        return this;
+    }
+
+    /**
+     * Key to access this part.
+     */
+    public GetMediaMetaDataPart withKey(Optional<String> key) {
+        Utils.checkNotNull(key, "key");
         this.key = key;
         return this;
     }
@@ -391,6 +394,15 @@ public class GetMediaMetaDataPart {
      */
     public GetMediaMetaDataPart withFile(String file) {
         Utils.checkNotNull(file, "file");
+        this.file = Optional.ofNullable(file);
+        return this;
+    }
+
+    /**
+     * File path for the part.
+     */
+    public GetMediaMetaDataPart withFile(Optional<String> file) {
+        Utils.checkNotNull(file, "file");
         this.file = file;
         return this;
     }
@@ -399,6 +411,15 @@ public class GetMediaMetaDataPart {
      * File size in bytes.
      */
     public GetMediaMetaDataPart withSize(long size) {
+        Utils.checkNotNull(size, "size");
+        this.size = Optional.ofNullable(size);
+        return this;
+    }
+
+    /**
+     * File size in bytes.
+     */
+    public GetMediaMetaDataPart withSize(Optional<Long> size) {
         Utils.checkNotNull(size, "size");
         this.size = size;
         return this;
@@ -512,18 +533,12 @@ public class GetMediaMetaDataPart {
         return this;
     }
 
-    /**
-     * An array of streams for this part.
-     */
     public GetMediaMetaDataPart withStream(List<GetMediaMetaDataStream> stream) {
         Utils.checkNotNull(stream, "stream");
         this.stream = Optional.ofNullable(stream);
         return this;
     }
 
-    /**
-     * An array of streams for this part.
-     */
     public GetMediaMetaDataPart withStream(Optional<? extends List<GetMediaMetaDataStream>> stream) {
         Utils.checkNotNull(stream, "stream");
         this.stream = stream;
@@ -609,15 +624,15 @@ public class GetMediaMetaDataPart {
  
         private Long id;
  
-        private String key;
+        private Optional<String> key = Optional.empty();
  
         private Optional<String> indexes = Optional.empty();
  
         private Optional<Integer> duration = Optional.empty();
  
-        private String file;
+        private Optional<String> file = Optional.empty();
  
-        private Long size;
+        private Optional<Long> size = Optional.empty();
  
         private Optional<Integer> packetLength = Optional.empty();
  
@@ -689,6 +704,15 @@ public class GetMediaMetaDataPart {
          */
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
+            this.key = Optional.ofNullable(key);
+            return this;
+        }
+
+        /**
+         * Key to access this part.
+         */
+        public Builder key(Optional<String> key) {
+            Utils.checkNotNull(key, "key");
             this.key = key;
             return this;
         }
@@ -728,6 +752,15 @@ public class GetMediaMetaDataPart {
          */
         public Builder file(String file) {
             Utils.checkNotNull(file, "file");
+            this.file = Optional.ofNullable(file);
+            return this;
+        }
+
+        /**
+         * File path for the part.
+         */
+        public Builder file(Optional<String> file) {
+            Utils.checkNotNull(file, "file");
             this.file = file;
             return this;
         }
@@ -736,6 +769,15 @@ public class GetMediaMetaDataPart {
          * File size in bytes.
          */
         public Builder size(long size) {
+            Utils.checkNotNull(size, "size");
+            this.size = Optional.ofNullable(size);
+            return this;
+        }
+
+        /**
+         * File size in bytes.
+         */
+        public Builder size(Optional<Long> size) {
             Utils.checkNotNull(size, "size");
             this.size = size;
             return this;
@@ -849,18 +891,12 @@ public class GetMediaMetaDataPart {
             return this;
         }
 
-        /**
-         * An array of streams for this part.
-         */
         public Builder stream(List<GetMediaMetaDataStream> stream) {
             Utils.checkNotNull(stream, "stream");
             this.stream = Optional.ofNullable(stream);
             return this;
         }
 
-        /**
-         * An array of streams for this part.
-         */
         public Builder stream(Optional<? extends List<GetMediaMetaDataStream>> stream) {
             Utils.checkNotNull(stream, "stream");
             this.stream = stream;

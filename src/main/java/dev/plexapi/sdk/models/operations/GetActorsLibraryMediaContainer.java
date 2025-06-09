@@ -90,8 +90,9 @@ public class GetActorsLibraryMediaContainer {
     /**
      * Identifier for the view mode.
      */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("viewMode")
-    private String viewMode;
+    private Optional<String> viewMode;
 
     /**
      * An array of actor entries for media items.
@@ -113,7 +114,7 @@ public class GetActorsLibraryMediaContainer {
             @JsonProperty("title1") String title1,
             @JsonProperty("title2") String title2,
             @JsonProperty("viewGroup") String viewGroup,
-            @JsonProperty("viewMode") String viewMode,
+            @JsonProperty("viewMode") Optional<String> viewMode,
             @JsonProperty("Directory") Optional<? extends List<GetActorsLibraryDirectory>> directory) {
         Utils.checkNotNull(size, "size");
         Utils.checkNotNull(allowSync, "allowSync");
@@ -154,9 +155,8 @@ public class GetActorsLibraryMediaContainer {
             String thumb,
             String title1,
             String title2,
-            String viewGroup,
-            String viewMode) {
-        this(size, allowSync, art, identifier, mediaTagPrefix, mediaTagVersion, nocache, thumb, title1, title2, viewGroup, viewMode, Optional.empty());
+            String viewGroup) {
+        this(size, allowSync, art, identifier, mediaTagPrefix, mediaTagVersion, nocache, thumb, title1, title2, viewGroup, Optional.empty(), Optional.empty());
     }
 
     /**
@@ -251,7 +251,7 @@ public class GetActorsLibraryMediaContainer {
      * Identifier for the view mode.
      */
     @JsonIgnore
-    public String viewMode() {
+    public Optional<String> viewMode() {
         return viewMode;
     }
 
@@ -372,6 +372,15 @@ public class GetActorsLibraryMediaContainer {
      */
     public GetActorsLibraryMediaContainer withViewMode(String viewMode) {
         Utils.checkNotNull(viewMode, "viewMode");
+        this.viewMode = Optional.ofNullable(viewMode);
+        return this;
+    }
+
+    /**
+     * Identifier for the view mode.
+     */
+    public GetActorsLibraryMediaContainer withViewMode(Optional<String> viewMode) {
+        Utils.checkNotNull(viewMode, "viewMode");
         this.viewMode = viewMode;
         return this;
     }
@@ -480,7 +489,7 @@ public class GetActorsLibraryMediaContainer {
  
         private String viewGroup;
  
-        private String viewMode;
+        private Optional<String> viewMode = Optional.empty();
  
         private Optional<? extends List<GetActorsLibraryDirectory>> directory = Optional.empty();
         
@@ -591,6 +600,15 @@ public class GetActorsLibraryMediaContainer {
          * Identifier for the view mode.
          */
         public Builder viewMode(String viewMode) {
+            Utils.checkNotNull(viewMode, "viewMode");
+            this.viewMode = Optional.ofNullable(viewMode);
+            return this;
+        }
+
+        /**
+         * Identifier for the view mode.
+         */
+        public Builder viewMode(Optional<String> viewMode) {
             Utils.checkNotNull(viewMode, "viewMode");
             this.viewMode = viewMode;
             return this;

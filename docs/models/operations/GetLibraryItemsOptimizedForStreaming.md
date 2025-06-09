@@ -1,9 +1,4 @@
 # GetLibraryItemsOptimizedForStreaming
 
+Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
 
-## Values
-
-| Name      | Value     |
-| --------- | --------- |
-| `Disable` | 0         |
-| `Enable`  | 1         |

@@ -5,34 +5,52 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
+import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Objects;
-import java.util.Optional;
 
 public class GetLibraryItemsCountry {
 
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * The unique identifier for the country.
+     * NOTE: This is different for each Plex server and is not globally unique.
+     */
+    @JsonProperty("id")
+    private int id;
+
+    /**
+     * The country of origin of this media item
+     */
     @JsonProperty("tag")
-    private Optional<String> tag;
+    private String tag;
 
     @JsonCreator
     public GetLibraryItemsCountry(
-            @JsonProperty("tag") Optional<String> tag) {
+            @JsonProperty("id") int id,
+            @JsonProperty("tag") String tag) {
+        Utils.checkNotNull(id, "id");
         Utils.checkNotNull(tag, "tag");
+        this.id = id;
         this.tag = tag;
     }
-    
-    public GetLibraryItemsCountry() {
-        this(Optional.empty());
+
+    /**
+     * The unique identifier for the country.
+     * NOTE: This is different for each Plex server and is not globally unique.
+     */
+    @JsonIgnore
+    public int id() {
+        return id;
     }
 
+    /**
+     * The country of origin of this media item
+     */
     @JsonIgnore
-    public Optional<String> tag() {
+    public String tag() {
         return tag;
     }
 
@@ -40,13 +58,20 @@ public class GetLibraryItemsCountry {
         return new Builder();
     }    
 
-    public GetLibraryItemsCountry withTag(String tag) {
-        Utils.checkNotNull(tag, "tag");
-        this.tag = Optional.ofNullable(tag);
+    /**
+     * The unique identifier for the country.
+     * NOTE: This is different for each Plex server and is not globally unique.
+     */
+    public GetLibraryItemsCountry withId(int id) {
+        Utils.checkNotNull(id, "id");
+        this.id = id;
         return this;
     }
 
-    public GetLibraryItemsCountry withTag(Optional<String> tag) {
+    /**
+     * The country of origin of this media item
+     */
+    public GetLibraryItemsCountry withTag(String tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = tag;
         return this;
@@ -63,36 +88,48 @@ public class GetLibraryItemsCountry {
         }
         GetLibraryItemsCountry other = (GetLibraryItemsCountry) o;
         return 
+            Objects.deepEquals(this.id, other.id) &&
             Objects.deepEquals(this.tag, other.tag);
     }
     
     @Override
     public int hashCode() {
         return Objects.hash(
+            id,
             tag);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetLibraryItemsCountry.class,
+                "id", id,
                 "tag", tag);
     }
     
     public final static class Builder {
  
-        private Optional<String> tag = Optional.empty();
+        private Integer id;
+ 
+        private String tag;
         
         private Builder() {
           // force use of static builder() method
         }
 
-        public Builder tag(String tag) {
-            Utils.checkNotNull(tag, "tag");
-            this.tag = Optional.ofNullable(tag);
+        /**
+         * The unique identifier for the country.
+         * NOTE: This is different for each Plex server and is not globally unique.
+         */
+        public Builder id(int id) {
+            Utils.checkNotNull(id, "id");
+            this.id = id;
             return this;
         }
 
-        public Builder tag(Optional<String> tag) {
+        /**
+         * The country of origin of this media item
+         */
+        public Builder tag(String tag) {
             Utils.checkNotNull(tag, "tag");
             this.tag = tag;
             return this;
@@ -100,6 +137,7 @@ public class GetLibraryItemsCountry {
         
         public GetLibraryItemsCountry build() {
             return new GetLibraryItemsCountry(
+                id,
                 tag);
         }
     }
