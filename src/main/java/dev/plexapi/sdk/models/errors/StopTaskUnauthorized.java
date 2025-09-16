@@ -16,7 +16,6 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -42,6 +41,7 @@ public class StopTaskUnauthorized extends RuntimeException {
     public StopTaskUnauthorized(
             @JsonProperty("errors") Optional<? extends List<StopTaskButlerErrors>> errors,
             @JsonProperty("RawResponse") Optional<? extends HttpResponse<InputStream>> rawResponse) {
+        super("API error occurred");
         Utils.checkNotNull(errors, "errors");
         Utils.checkNotNull(rawResponse, "rawResponse");
         this.errors = errors;
@@ -67,15 +67,17 @@ public class StopTaskUnauthorized extends RuntimeException {
         return (Optional<HttpResponse<InputStream>>) rawResponse;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public StopTaskUnauthorized withErrors(List<StopTaskButlerErrors> errors) {
         Utils.checkNotNull(errors, "errors");
         this.errors = Optional.ofNullable(errors);
         return this;
     }
+
 
     public StopTaskUnauthorized withErrors(Optional<? extends List<StopTaskButlerErrors>> errors) {
         Utils.checkNotNull(errors, "errors");
@@ -92,6 +94,7 @@ public class StopTaskUnauthorized extends RuntimeException {
         return this;
     }
 
+
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
@@ -101,7 +104,6 @@ public class StopTaskUnauthorized extends RuntimeException {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -112,15 +114,14 @@ public class StopTaskUnauthorized extends RuntimeException {
         }
         StopTaskUnauthorized other = (StopTaskUnauthorized) o;
         return 
-            Objects.deepEquals(this.errors, other.errors) &&
-            Objects.deepEquals(this.rawResponse, other.rawResponse);
+            Utils.enhancedDeepEquals(this.errors, other.errors) &&
+            Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            errors,
-            rawResponse);
+        return Utils.enhancedHash(
+            errors, rawResponse);
     }
     
     @Override
@@ -129,16 +130,18 @@ public class StopTaskUnauthorized extends RuntimeException {
                 "errors", errors,
                 "rawResponse", rawResponse);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends List<StopTaskButlerErrors>> errors = Optional.empty();
- 
+
         private Optional<? extends HttpResponse<InputStream>> rawResponse;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder errors(List<StopTaskButlerErrors> errors) {
             Utils.checkNotNull(errors, "errors");
@@ -151,6 +154,7 @@ public class StopTaskUnauthorized extends RuntimeException {
             this.errors = errors;
             return this;
         }
+
 
         /**
          * Raw HTTP response; suitable for custom response parsing
@@ -169,12 +173,13 @@ public class StopTaskUnauthorized extends RuntimeException {
             this.rawResponse = rawResponse;
             return this;
         }
-        
+
         public StopTaskUnauthorized build() {
+
             return new StopTaskUnauthorized(
-                errors,
-                rawResponse);
+                errors, rawResponse);
         }
+
     }
 }
 

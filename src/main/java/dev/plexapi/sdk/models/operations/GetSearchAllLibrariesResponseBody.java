@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * GetSearchAllLibrariesResponseBody
@@ -33,9 +32,10 @@ public class GetSearchAllLibrariesResponseBody {
         return mediaContainer;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetSearchAllLibrariesResponseBody withMediaContainer(GetSearchAllLibrariesMediaContainer mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
@@ -43,7 +43,6 @@ public class GetSearchAllLibrariesResponseBody {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -54,12 +53,12 @@ public class GetSearchAllLibrariesResponseBody {
         }
         GetSearchAllLibrariesResponseBody other = (GetSearchAllLibrariesResponseBody) o;
         return 
-            Objects.deepEquals(this.mediaContainer, other.mediaContainer);
+            Utils.enhancedDeepEquals(this.mediaContainer, other.mediaContainer);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             mediaContainer);
     }
     
@@ -68,24 +67,28 @@ public class GetSearchAllLibrariesResponseBody {
         return Utils.toString(GetSearchAllLibrariesResponseBody.class,
                 "mediaContainer", mediaContainer);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private GetSearchAllLibrariesMediaContainer mediaContainer;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder mediaContainer(GetSearchAllLibrariesMediaContainer mediaContainer) {
             Utils.checkNotNull(mediaContainer, "mediaContainer");
             this.mediaContainer = mediaContainer;
             return this;
         }
-        
+
         public GetSearchAllLibrariesResponseBody build() {
+
             return new GetSearchAllLibrariesResponseBody(
                 mediaContainer);
         }
+
     }
 }

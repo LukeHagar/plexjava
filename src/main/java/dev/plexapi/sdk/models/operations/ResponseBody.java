@@ -9,21 +9,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class ResponseBody {
 
     @JsonProperty("identifier")
     private String identifier;
 
+
     @JsonProperty("baseURL")
     private String baseURL;
+
 
     @JsonProperty("title")
     private String title;
 
+
     @JsonProperty("linkURL")
     private String linkURL;
+
 
     @JsonProperty("provides")
     private String provides;
@@ -89,9 +93,10 @@ public class ResponseBody {
         return token;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ResponseBody withIdentifier(String identifier) {
         Utils.checkNotNull(identifier, "identifier");
@@ -132,7 +137,6 @@ public class ResponseBody {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -143,23 +147,19 @@ public class ResponseBody {
         }
         ResponseBody other = (ResponseBody) o;
         return 
-            Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.baseURL, other.baseURL) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.linkURL, other.linkURL) &&
-            Objects.deepEquals(this.provides, other.provides) &&
-            Objects.deepEquals(this.token, other.token);
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.baseURL, other.baseURL) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.linkURL, other.linkURL) &&
+            Utils.enhancedDeepEquals(this.provides, other.provides) &&
+            Utils.enhancedDeepEquals(this.token, other.token);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            identifier,
-            baseURL,
-            title,
-            linkURL,
-            provides,
-            token);
+        return Utils.enhancedHash(
+            identifier, baseURL, title,
+            linkURL, provides, token);
     }
     
     @Override
@@ -172,24 +172,26 @@ public class ResponseBody {
                 "provides", provides,
                 "token", token);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String identifier;
- 
+
         private String baseURL;
- 
+
         private String title;
- 
+
         private String linkURL;
- 
+
         private String provides;
- 
+
         private String token;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder identifier(String identifier) {
             Utils.checkNotNull(identifier, "identifier");
@@ -197,11 +199,13 @@ public class ResponseBody {
             return this;
         }
 
+
         public Builder baseURL(String baseURL) {
             Utils.checkNotNull(baseURL, "baseURL");
             this.baseURL = baseURL;
             return this;
         }
+
 
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
@@ -209,17 +213,20 @@ public class ResponseBody {
             return this;
         }
 
+
         public Builder linkURL(String linkURL) {
             Utils.checkNotNull(linkURL, "linkURL");
             this.linkURL = linkURL;
             return this;
         }
 
+
         public Builder provides(String provides) {
             Utils.checkNotNull(provides, "provides");
             this.provides = provides;
             return this;
         }
+
 
         /**
          * The plex authtoken used to identify with
@@ -229,15 +236,13 @@ public class ResponseBody {
             this.token = token;
             return this;
         }
-        
+
         public ResponseBody build() {
+
             return new ResponseBody(
-                identifier,
-                baseURL,
-                title,
-                linkURL,
-                provides,
-                token);
+                identifier, baseURL, title,
+                linkURL, provides, token);
         }
+
     }
 }

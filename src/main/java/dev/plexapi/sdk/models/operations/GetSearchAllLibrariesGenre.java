@@ -10,10 +10,9 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetSearchAllLibrariesGenre {
-
     /**
      * The unique identifier for the genre.
      * NOTE: This is different for each Plex server and is not globally unique.
@@ -54,9 +53,10 @@ public class GetSearchAllLibrariesGenre {
         return tag;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The unique identifier for the genre.
@@ -77,7 +77,6 @@ public class GetSearchAllLibrariesGenre {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -88,15 +87,14 @@ public class GetSearchAllLibrariesGenre {
         }
         GetSearchAllLibrariesGenre other = (GetSearchAllLibrariesGenre) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.tag, other.tag);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.tag, other.tag);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            tag);
+        return Utils.enhancedHash(
+            id, tag);
     }
     
     @Override
@@ -105,16 +103,18 @@ public class GetSearchAllLibrariesGenre {
                 "id", id,
                 "tag", tag);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer id;
- 
+
         private String tag;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The unique identifier for the genre.
@@ -126,6 +126,7 @@ public class GetSearchAllLibrariesGenre {
             return this;
         }
 
+
         /**
          * The genre name of this media-item
          */
@@ -134,11 +135,12 @@ public class GetSearchAllLibrariesGenre {
             this.tag = tag;
             return this;
         }
-        
+
         public GetSearchAllLibrariesGenre build() {
+
             return new GetSearchAllLibrariesGenre(
-                id,
-                tag);
+                id, tag);
         }
+
     }
 }

@@ -18,11 +18,10 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetMediaMetaDataPart {
 
+public class GetMediaMetaDataPart {
     /**
      * Indicates if the part is accessible.
      */
@@ -50,6 +49,7 @@ public class GetMediaMetaDataPart {
     @JsonProperty("key")
     private Optional<String> key;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("indexes")
     private Optional<String> indexes;
@@ -74,6 +74,7 @@ public class GetMediaMetaDataPart {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("size")
     private Optional<Long> size;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("packetLength")
@@ -100,6 +101,7 @@ public class GetMediaMetaDataPart {
     @JsonProperty("audioProfile")
     private Optional<String> audioProfile;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("has64bitOffsets")
     private Optional<Boolean> has64bitOffsets;
@@ -111,9 +113,11 @@ public class GetMediaMetaDataPart {
     @JsonProperty("optimizedForStreaming")
     private Optional<? extends GetMediaMetaDataLibraryOptimizedForStreaming> optimizedForStreaming;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hasThumbnail")
     private Optional<? extends GetMediaMetaDataHasThumbnail> hasThumbnail;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Stream")
@@ -173,7 +177,12 @@ public class GetMediaMetaDataPart {
     
     public GetMediaMetaDataPart(
             long id) {
-        this(Optional.empty(), Optional.empty(), id, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), id,
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -292,9 +301,10 @@ public class GetMediaMetaDataPart {
         return (Optional<List<GetMediaMetaDataStream>>) stream;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Indicates if the part is accessible.
@@ -304,6 +314,7 @@ public class GetMediaMetaDataPart {
         this.accessible = Optional.ofNullable(accessible);
         return this;
     }
+
 
     /**
      * Indicates if the part is accessible.
@@ -322,6 +333,7 @@ public class GetMediaMetaDataPart {
         this.exists = Optional.ofNullable(exists);
         return this;
     }
+
 
     /**
      * Indicates if the part exists.
@@ -350,6 +362,7 @@ public class GetMediaMetaDataPart {
         return this;
     }
 
+
     /**
      * Key to access this part.
      */
@@ -365,6 +378,7 @@ public class GetMediaMetaDataPart {
         return this;
     }
 
+
     public GetMediaMetaDataPart withIndexes(Optional<String> indexes) {
         Utils.checkNotNull(indexes, "indexes");
         this.indexes = indexes;
@@ -379,6 +393,7 @@ public class GetMediaMetaDataPart {
         this.duration = Optional.ofNullable(duration);
         return this;
     }
+
 
     /**
      * Duration of the part in milliseconds.
@@ -398,6 +413,7 @@ public class GetMediaMetaDataPart {
         return this;
     }
 
+
     /**
      * File path for the part.
      */
@@ -416,6 +432,7 @@ public class GetMediaMetaDataPart {
         return this;
     }
 
+
     /**
      * File size in bytes.
      */
@@ -431,6 +448,7 @@ public class GetMediaMetaDataPart {
         return this;
     }
 
+
     public GetMediaMetaDataPart withPacketLength(Optional<Integer> packetLength) {
         Utils.checkNotNull(packetLength, "packetLength");
         this.packetLength = packetLength;
@@ -445,6 +463,7 @@ public class GetMediaMetaDataPart {
         this.container = Optional.ofNullable(container);
         return this;
     }
+
 
     /**
      * Container format of the part.
@@ -464,6 +483,7 @@ public class GetMediaMetaDataPart {
         return this;
     }
 
+
     /**
      * Video profile for the part.
      */
@@ -482,6 +502,7 @@ public class GetMediaMetaDataPart {
         return this;
     }
 
+
     /**
      * The audio profile used for the media (e.g., DTS, Dolby Digital, etc.).
      */
@@ -496,6 +517,7 @@ public class GetMediaMetaDataPart {
         this.has64bitOffsets = Optional.ofNullable(has64bitOffsets);
         return this;
     }
+
 
     public GetMediaMetaDataPart withHas64bitOffsets(Optional<Boolean> has64bitOffsets) {
         Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
@@ -512,6 +534,7 @@ public class GetMediaMetaDataPart {
         return this;
     }
 
+
     /**
      * Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
      */
@@ -527,6 +550,7 @@ public class GetMediaMetaDataPart {
         return this;
     }
 
+
     public GetMediaMetaDataPart withHasThumbnail(Optional<? extends GetMediaMetaDataHasThumbnail> hasThumbnail) {
         Utils.checkNotNull(hasThumbnail, "hasThumbnail");
         this.hasThumbnail = hasThumbnail;
@@ -539,13 +563,13 @@ public class GetMediaMetaDataPart {
         return this;
     }
 
+
     public GetMediaMetaDataPart withStream(Optional<? extends List<GetMediaMetaDataStream>> stream) {
         Utils.checkNotNull(stream, "stream");
         this.stream = stream;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -556,42 +580,32 @@ public class GetMediaMetaDataPart {
         }
         GetMediaMetaDataPart other = (GetMediaMetaDataPart) o;
         return 
-            Objects.deepEquals(this.accessible, other.accessible) &&
-            Objects.deepEquals(this.exists, other.exists) &&
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.indexes, other.indexes) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.file, other.file) &&
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.packetLength, other.packetLength) &&
-            Objects.deepEquals(this.container, other.container) &&
-            Objects.deepEquals(this.videoProfile, other.videoProfile) &&
-            Objects.deepEquals(this.audioProfile, other.audioProfile) &&
-            Objects.deepEquals(this.has64bitOffsets, other.has64bitOffsets) &&
-            Objects.deepEquals(this.optimizedForStreaming, other.optimizedForStreaming) &&
-            Objects.deepEquals(this.hasThumbnail, other.hasThumbnail) &&
-            Objects.deepEquals(this.stream, other.stream);
+            Utils.enhancedDeepEquals(this.accessible, other.accessible) &&
+            Utils.enhancedDeepEquals(this.exists, other.exists) &&
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.indexes, other.indexes) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.file, other.file) &&
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.packetLength, other.packetLength) &&
+            Utils.enhancedDeepEquals(this.container, other.container) &&
+            Utils.enhancedDeepEquals(this.videoProfile, other.videoProfile) &&
+            Utils.enhancedDeepEquals(this.audioProfile, other.audioProfile) &&
+            Utils.enhancedDeepEquals(this.has64bitOffsets, other.has64bitOffsets) &&
+            Utils.enhancedDeepEquals(this.optimizedForStreaming, other.optimizedForStreaming) &&
+            Utils.enhancedDeepEquals(this.hasThumbnail, other.hasThumbnail) &&
+            Utils.enhancedDeepEquals(this.stream, other.stream);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            accessible,
-            exists,
-            id,
-            key,
-            indexes,
-            duration,
-            file,
-            size,
-            packetLength,
-            container,
-            videoProfile,
-            audioProfile,
-            has64bitOffsets,
-            optimizedForStreaming,
-            hasThumbnail,
+        return Utils.enhancedHash(
+            accessible, exists, id,
+            key, indexes, duration,
+            file, size, packetLength,
+            container, videoProfile, audioProfile,
+            has64bitOffsets, optimizedForStreaming, hasThumbnail,
             stream);
     }
     
@@ -615,44 +629,46 @@ public class GetMediaMetaDataPart {
                 "hasThumbnail", hasThumbnail,
                 "stream", stream);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Boolean> accessible = Optional.empty();
- 
+
         private Optional<Boolean> exists = Optional.empty();
- 
+
         private Long id;
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> indexes = Optional.empty();
- 
+
         private Optional<Integer> duration = Optional.empty();
- 
+
         private Optional<String> file = Optional.empty();
- 
+
         private Optional<Long> size = Optional.empty();
- 
+
         private Optional<Integer> packetLength = Optional.empty();
- 
+
         private Optional<String> container = Optional.empty();
- 
+
         private Optional<String> videoProfile = Optional.empty();
- 
+
         private Optional<String> audioProfile = Optional.empty();
- 
+
         private Optional<Boolean> has64bitOffsets = Optional.empty();
- 
+
         private Optional<? extends GetMediaMetaDataLibraryOptimizedForStreaming> optimizedForStreaming = Optional.empty();
- 
+
         private Optional<? extends GetMediaMetaDataHasThumbnail> hasThumbnail;
- 
+
         private Optional<? extends List<GetMediaMetaDataStream>> stream = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Indicates if the part is accessible.
@@ -672,6 +688,7 @@ public class GetMediaMetaDataPart {
             return this;
         }
 
+
         /**
          * Indicates if the part exists.
          */
@@ -690,6 +707,7 @@ public class GetMediaMetaDataPart {
             return this;
         }
 
+
         /**
          * Unique part identifier.
          */
@@ -698,6 +716,7 @@ public class GetMediaMetaDataPart {
             this.id = id;
             return this;
         }
+
 
         /**
          * Key to access this part.
@@ -717,6 +736,7 @@ public class GetMediaMetaDataPart {
             return this;
         }
 
+
         public Builder indexes(String indexes) {
             Utils.checkNotNull(indexes, "indexes");
             this.indexes = Optional.ofNullable(indexes);
@@ -728,6 +748,7 @@ public class GetMediaMetaDataPart {
             this.indexes = indexes;
             return this;
         }
+
 
         /**
          * Duration of the part in milliseconds.
@@ -747,6 +768,7 @@ public class GetMediaMetaDataPart {
             return this;
         }
 
+
         /**
          * File path for the part.
          */
@@ -764,6 +786,7 @@ public class GetMediaMetaDataPart {
             this.file = file;
             return this;
         }
+
 
         /**
          * File size in bytes.
@@ -783,6 +806,7 @@ public class GetMediaMetaDataPart {
             return this;
         }
 
+
         public Builder packetLength(int packetLength) {
             Utils.checkNotNull(packetLength, "packetLength");
             this.packetLength = Optional.ofNullable(packetLength);
@@ -794,6 +818,7 @@ public class GetMediaMetaDataPart {
             this.packetLength = packetLength;
             return this;
         }
+
 
         /**
          * Container format of the part.
@@ -813,6 +838,7 @@ public class GetMediaMetaDataPart {
             return this;
         }
 
+
         /**
          * Video profile for the part.
          */
@@ -830,6 +856,7 @@ public class GetMediaMetaDataPart {
             this.videoProfile = videoProfile;
             return this;
         }
+
 
         /**
          * The audio profile used for the media (e.g., DTS, Dolby Digital, etc.).
@@ -849,6 +876,7 @@ public class GetMediaMetaDataPart {
             return this;
         }
 
+
         public Builder has64bitOffsets(boolean has64bitOffsets) {
             Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
             this.has64bitOffsets = Optional.ofNullable(has64bitOffsets);
@@ -860,6 +888,7 @@ public class GetMediaMetaDataPart {
             this.has64bitOffsets = has64bitOffsets;
             return this;
         }
+
 
         /**
          * Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
@@ -879,6 +908,7 @@ public class GetMediaMetaDataPart {
             return this;
         }
 
+
         public Builder hasThumbnail(GetMediaMetaDataHasThumbnail hasThumbnail) {
             Utils.checkNotNull(hasThumbnail, "hasThumbnail");
             this.hasThumbnail = Optional.ofNullable(hasThumbnail);
@@ -891,6 +921,7 @@ public class GetMediaMetaDataPart {
             return this;
         }
 
+
         public Builder stream(List<GetMediaMetaDataStream> stream) {
             Utils.checkNotNull(stream, "stream");
             this.stream = Optional.ofNullable(stream);
@@ -902,29 +933,21 @@ public class GetMediaMetaDataPart {
             this.stream = stream;
             return this;
         }
-        
+
         public GetMediaMetaDataPart build() {
             if (hasThumbnail == null) {
                 hasThumbnail = _SINGLETON_VALUE_HasThumbnail.value();
             }
+
             return new GetMediaMetaDataPart(
-                accessible,
-                exists,
-                id,
-                key,
-                indexes,
-                duration,
-                file,
-                size,
-                packetLength,
-                container,
-                videoProfile,
-                audioProfile,
-                has64bitOffsets,
-                optimizedForStreaming,
-                hasThumbnail,
+                accessible, exists, id,
+                key, indexes, duration,
+                file, size, packetLength,
+                container, videoProfile, audioProfile,
+                has64bitOffsets, optimizedForStreaming, hasThumbnail,
                 stream);
         }
+
 
         private static final LazySingletonValue<Optional<? extends GetMediaMetaDataHasThumbnail>> _SINGLETON_VALUE_HasThumbnail =
                 new LazySingletonValue<>(

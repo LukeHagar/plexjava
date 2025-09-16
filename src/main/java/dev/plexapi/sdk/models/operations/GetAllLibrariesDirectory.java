@@ -17,11 +17,10 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetAllLibrariesDirectory {
 
+public class GetAllLibrariesDirectory {
     /**
      * Indicates whether syncing is allowed.
      */
@@ -64,6 +63,7 @@ public class GetAllLibrariesDirectory {
     @JsonProperty("key")
     private String key;
 
+
     @JsonProperty("type")
     private GetAllLibrariesType type;
 
@@ -103,6 +103,7 @@ public class GetAllLibrariesDirectory {
     @JsonProperty("updatedAt")
     private long updatedAt;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("createdAt")
     private Optional<Long> createdAt;
@@ -138,6 +139,7 @@ public class GetAllLibrariesDirectory {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hidden")
     private Optional<? extends Hidden> hidden;
+
 
     @JsonProperty("Location")
     private List<GetAllLibrariesLocation> location;
@@ -229,7 +231,13 @@ public class GetAllLibrariesDirectory {
             boolean directory,
             long contentChangedAt,
             List<GetAllLibrariesLocation> location) {
-        this(allowSync, art, composite, filters, refreshing, thumb, key, type, title, agent, scanner, language, uuid, updatedAt, Optional.empty(), scannedAt, content, directory, contentChangedAt, Optional.empty(), location);
+        this(allowSync, art, composite,
+            filters, refreshing, thumb,
+            key, type, title,
+            agent, scanner, language,
+            uuid, updatedAt, Optional.empty(),
+            scannedAt, content, directory,
+            contentChangedAt, Optional.empty(), location);
     }
 
     /**
@@ -393,9 +401,10 @@ public class GetAllLibrariesDirectory {
         return location;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Indicates whether syncing is allowed.
@@ -526,6 +535,7 @@ public class GetAllLibrariesDirectory {
         return this;
     }
 
+
     public GetAllLibrariesDirectory withCreatedAt(Optional<Long> createdAt) {
         Utils.checkNotNull(createdAt, "createdAt");
         this.createdAt = createdAt;
@@ -578,6 +588,7 @@ public class GetAllLibrariesDirectory {
         return this;
     }
 
+
     /**
      * The Plex library visibility setting
      */
@@ -593,7 +604,6 @@ public class GetAllLibrariesDirectory {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -604,53 +614,39 @@ public class GetAllLibrariesDirectory {
         }
         GetAllLibrariesDirectory other = (GetAllLibrariesDirectory) o;
         return 
-            Objects.deepEquals(this.allowSync, other.allowSync) &&
-            Objects.deepEquals(this.art, other.art) &&
-            Objects.deepEquals(this.composite, other.composite) &&
-            Objects.deepEquals(this.filters, other.filters) &&
-            Objects.deepEquals(this.refreshing, other.refreshing) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.agent, other.agent) &&
-            Objects.deepEquals(this.scanner, other.scanner) &&
-            Objects.deepEquals(this.language, other.language) &&
-            Objects.deepEquals(this.uuid, other.uuid) &&
-            Objects.deepEquals(this.updatedAt, other.updatedAt) &&
-            Objects.deepEquals(this.createdAt, other.createdAt) &&
-            Objects.deepEquals(this.scannedAt, other.scannedAt) &&
-            Objects.deepEquals(this.content, other.content) &&
-            Objects.deepEquals(this.directory, other.directory) &&
-            Objects.deepEquals(this.contentChangedAt, other.contentChangedAt) &&
-            Objects.deepEquals(this.hidden, other.hidden) &&
-            Objects.deepEquals(this.location, other.location);
+            Utils.enhancedDeepEquals(this.allowSync, other.allowSync) &&
+            Utils.enhancedDeepEquals(this.art, other.art) &&
+            Utils.enhancedDeepEquals(this.composite, other.composite) &&
+            Utils.enhancedDeepEquals(this.filters, other.filters) &&
+            Utils.enhancedDeepEquals(this.refreshing, other.refreshing) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.agent, other.agent) &&
+            Utils.enhancedDeepEquals(this.scanner, other.scanner) &&
+            Utils.enhancedDeepEquals(this.language, other.language) &&
+            Utils.enhancedDeepEquals(this.uuid, other.uuid) &&
+            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt) &&
+            Utils.enhancedDeepEquals(this.createdAt, other.createdAt) &&
+            Utils.enhancedDeepEquals(this.scannedAt, other.scannedAt) &&
+            Utils.enhancedDeepEquals(this.content, other.content) &&
+            Utils.enhancedDeepEquals(this.directory, other.directory) &&
+            Utils.enhancedDeepEquals(this.contentChangedAt, other.contentChangedAt) &&
+            Utils.enhancedDeepEquals(this.hidden, other.hidden) &&
+            Utils.enhancedDeepEquals(this.location, other.location);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            allowSync,
-            art,
-            composite,
-            filters,
-            refreshing,
-            thumb,
-            key,
-            type,
-            title,
-            agent,
-            scanner,
-            language,
-            uuid,
-            updatedAt,
-            createdAt,
-            scannedAt,
-            content,
-            directory,
-            contentChangedAt,
-            hidden,
-            location);
+        return Utils.enhancedHash(
+            allowSync, art, composite,
+            filters, refreshing, thumb,
+            key, type, title,
+            agent, scanner, language,
+            uuid, updatedAt, createdAt,
+            scannedAt, content, directory,
+            contentChangedAt, hidden, location);
     }
     
     @Override
@@ -678,54 +674,56 @@ public class GetAllLibrariesDirectory {
                 "hidden", hidden,
                 "location", location);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Boolean allowSync;
- 
+
         private String art;
- 
+
         private String composite;
- 
+
         private Boolean filters;
- 
+
         private Boolean refreshing;
- 
+
         private String thumb;
- 
+
         private String key;
- 
+
         private GetAllLibrariesType type;
- 
+
         private String title;
- 
+
         private String agent;
- 
+
         private String scanner;
- 
+
         private String language;
- 
+
         private String uuid;
- 
+
         private Long updatedAt;
- 
+
         private Optional<Long> createdAt = Optional.empty();
- 
+
         private Long scannedAt;
- 
+
         private Boolean content;
- 
+
         private Boolean directory;
- 
+
         private Long contentChangedAt;
- 
+
         private Optional<? extends Hidden> hidden;
- 
+
         private List<GetAllLibrariesLocation> location;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Indicates whether syncing is allowed.
@@ -736,6 +734,7 @@ public class GetAllLibrariesDirectory {
             return this;
         }
 
+
         /**
          * URL for the background artwork of the media container.
          */
@@ -744,6 +743,7 @@ public class GetAllLibrariesDirectory {
             this.art = art;
             return this;
         }
+
 
         /**
          * The relative path to the composite media item.
@@ -754,6 +754,7 @@ public class GetAllLibrariesDirectory {
             return this;
         }
 
+
         /**
          * UNKNOWN
          */
@@ -762,6 +763,7 @@ public class GetAllLibrariesDirectory {
             this.filters = filters;
             return this;
         }
+
 
         /**
          * Indicates whether the library is currently being refreshed or updated
@@ -772,6 +774,7 @@ public class GetAllLibrariesDirectory {
             return this;
         }
 
+
         /**
          * URL for the thumbnail image of the media container.
          */
@@ -780,6 +783,7 @@ public class GetAllLibrariesDirectory {
             this.thumb = thumb;
             return this;
         }
+
 
         /**
          * The library key representing the unique identifier
@@ -790,11 +794,13 @@ public class GetAllLibrariesDirectory {
             return this;
         }
 
+
         public Builder type(GetAllLibrariesType type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
         }
+
 
         /**
          * The title of the library
@@ -805,6 +811,7 @@ public class GetAllLibrariesDirectory {
             return this;
         }
 
+
         /**
          * The Plex agent used to match and retrieve media metadata.
          */
@@ -813,6 +820,7 @@ public class GetAllLibrariesDirectory {
             this.agent = agent;
             return this;
         }
+
 
         /**
          * UNKNOWN
@@ -823,6 +831,7 @@ public class GetAllLibrariesDirectory {
             return this;
         }
 
+
         /**
          * The Plex library language that has been set
          */
@@ -831,6 +840,7 @@ public class GetAllLibrariesDirectory {
             this.language = language;
             return this;
         }
+
 
         /**
          * The universally unique identifier for the library.
@@ -841,6 +851,7 @@ public class GetAllLibrariesDirectory {
             return this;
         }
 
+
         /**
          * Unix epoch datetime in seconds
          */
@@ -849,6 +860,7 @@ public class GetAllLibrariesDirectory {
             this.updatedAt = updatedAt;
             return this;
         }
+
 
         public Builder createdAt(long createdAt) {
             Utils.checkNotNull(createdAt, "createdAt");
@@ -862,6 +874,7 @@ public class GetAllLibrariesDirectory {
             return this;
         }
 
+
         /**
          * Unix epoch datetime in seconds
          */
@@ -870,6 +883,7 @@ public class GetAllLibrariesDirectory {
             this.scannedAt = scannedAt;
             return this;
         }
+
 
         /**
          * UNKNOWN
@@ -880,6 +894,7 @@ public class GetAllLibrariesDirectory {
             return this;
         }
 
+
         /**
          * UNKNOWN
          */
@@ -888,6 +903,7 @@ public class GetAllLibrariesDirectory {
             this.directory = directory;
             return this;
         }
+
 
         /**
          * Timestamp (in seconds) representing the last time the content was modified.
@@ -898,6 +914,7 @@ public class GetAllLibrariesDirectory {
             this.contentChangedAt = contentChangedAt;
             return this;
         }
+
 
         /**
          * The Plex library visibility setting
@@ -917,39 +934,28 @@ public class GetAllLibrariesDirectory {
             return this;
         }
 
+
         public Builder location(List<GetAllLibrariesLocation> location) {
             Utils.checkNotNull(location, "location");
             this.location = location;
             return this;
         }
-        
+
         public GetAllLibrariesDirectory build() {
             if (hidden == null) {
                 hidden = _SINGLETON_VALUE_Hidden.value();
             }
+
             return new GetAllLibrariesDirectory(
-                allowSync,
-                art,
-                composite,
-                filters,
-                refreshing,
-                thumb,
-                key,
-                type,
-                title,
-                agent,
-                scanner,
-                language,
-                uuid,
-                updatedAt,
-                createdAt,
-                scannedAt,
-                content,
-                directory,
-                contentChangedAt,
-                hidden,
-                location);
+                allowSync, art, composite,
+                filters, refreshing, thumb,
+                key, type, title,
+                agent, scanner, language,
+                uuid, updatedAt, createdAt,
+                scannedAt, content, directory,
+                contentChangedAt, hidden, location);
         }
+
 
         private static final LazySingletonValue<Optional<? extends Hidden>> _SINGLETON_VALUE_Hidden =
                 new LazySingletonValue<>(

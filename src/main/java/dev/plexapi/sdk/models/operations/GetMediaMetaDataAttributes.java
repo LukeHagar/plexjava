@@ -12,7 +12,6 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -21,7 +20,6 @@ import java.util.Optional;
  * <p>Attributes associated with the marker.
  */
 public class GetMediaMetaDataAttributes {
-
     /**
      * The identifier for the attributes.
      */
@@ -66,9 +64,10 @@ public class GetMediaMetaDataAttributes {
         return version;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The identifier for the attributes.
@@ -88,6 +87,7 @@ public class GetMediaMetaDataAttributes {
         return this;
     }
 
+
     /**
      * The version number of the marker attributes.
      */
@@ -97,7 +97,6 @@ public class GetMediaMetaDataAttributes {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -108,15 +107,14 @@ public class GetMediaMetaDataAttributes {
         }
         GetMediaMetaDataAttributes other = (GetMediaMetaDataAttributes) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.version, other.version);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.version, other.version);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            version);
+        return Utils.enhancedHash(
+            id, version);
     }
     
     @Override
@@ -125,16 +123,18 @@ public class GetMediaMetaDataAttributes {
                 "id", id,
                 "version", version);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Long id;
- 
+
         private Optional<Long> version = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The identifier for the attributes.
@@ -144,6 +144,7 @@ public class GetMediaMetaDataAttributes {
             this.id = id;
             return this;
         }
+
 
         /**
          * The version number of the marker attributes.
@@ -162,11 +163,12 @@ public class GetMediaMetaDataAttributes {
             this.version = version;
             return this;
         }
-        
+
         public GetMediaMetaDataAttributes build() {
+
             return new GetMediaMetaDataAttributes(
-                id,
-                version);
+                id, version);
         }
+
     }
 }

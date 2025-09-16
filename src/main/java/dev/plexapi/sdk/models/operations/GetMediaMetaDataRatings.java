@@ -10,10 +10,9 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Float;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetMediaMetaDataRatings {
-
     /**
      * The image or reference for the rating.
      */
@@ -69,9 +68,10 @@ public class GetMediaMetaDataRatings {
         return type;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The image or reference for the rating.
@@ -100,7 +100,6 @@ public class GetMediaMetaDataRatings {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,17 +110,15 @@ public class GetMediaMetaDataRatings {
         }
         GetMediaMetaDataRatings other = (GetMediaMetaDataRatings) o;
         return 
-            Objects.deepEquals(this.image, other.image) &&
-            Objects.deepEquals(this.value, other.value) &&
-            Objects.deepEquals(this.type, other.type);
+            Utils.enhancedDeepEquals(this.image, other.image) &&
+            Utils.enhancedDeepEquals(this.value, other.value) &&
+            Utils.enhancedDeepEquals(this.type, other.type);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            image,
-            value,
-            type);
+        return Utils.enhancedHash(
+            image, value, type);
     }
     
     @Override
@@ -131,18 +128,20 @@ public class GetMediaMetaDataRatings {
                 "value", value,
                 "type", type);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String image;
- 
+
         private Float value;
- 
+
         private String type;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The image or reference for the rating.
@@ -153,6 +152,7 @@ public class GetMediaMetaDataRatings {
             return this;
         }
 
+
         /**
          * The rating value.
          */
@@ -162,6 +162,7 @@ public class GetMediaMetaDataRatings {
             return this;
         }
 
+
         /**
          * The type of rating (e.g., audience, critic).
          */
@@ -170,12 +171,12 @@ public class GetMediaMetaDataRatings {
             this.type = type;
             return this;
         }
-        
+
         public GetMediaMetaDataRatings build() {
+
             return new GetMediaMetaDataRatings(
-                image,
-                value,
-                type);
+                image, value, type);
         }
+
     }
 }

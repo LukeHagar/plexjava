@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetSearchResultsCountry {
 
@@ -36,9 +36,10 @@ public class GetSearchResultsCountry {
         return tag;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetSearchResultsCountry withTag(String tag) {
         Utils.checkNotNull(tag, "tag");
@@ -46,13 +47,13 @@ public class GetSearchResultsCountry {
         return this;
     }
 
+
     public GetSearchResultsCountry withTag(Optional<String> tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = tag;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -63,12 +64,12 @@ public class GetSearchResultsCountry {
         }
         GetSearchResultsCountry other = (GetSearchResultsCountry) o;
         return 
-            Objects.deepEquals(this.tag, other.tag);
+            Utils.enhancedDeepEquals(this.tag, other.tag);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             tag);
     }
     
@@ -77,14 +78,16 @@ public class GetSearchResultsCountry {
         return Utils.toString(GetSearchResultsCountry.class,
                 "tag", tag);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> tag = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder tag(String tag) {
             Utils.checkNotNull(tag, "tag");
@@ -97,10 +100,12 @@ public class GetSearchResultsCountry {
             this.tag = tag;
             return this;
         }
-        
+
         public GetSearchResultsCountry build() {
+
             return new GetSearchResultsCountry(
                 tag);
         }
+
     }
 }

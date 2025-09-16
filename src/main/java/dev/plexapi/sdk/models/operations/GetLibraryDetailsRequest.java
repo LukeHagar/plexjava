@@ -13,11 +13,10 @@ import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetLibraryDetailsRequest {
 
+public class GetLibraryDetailsRequest {
     /**
      * Whether or not to include details for a section (types, filters, and sorts).
      * Only exists for backwards compatibility, media providers other than the server libraries have it on always.
@@ -66,9 +65,10 @@ public class GetLibraryDetailsRequest {
         return sectionKey;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Whether or not to include details for a section (types, filters, and sorts).
@@ -79,6 +79,7 @@ public class GetLibraryDetailsRequest {
         this.includeDetails = Optional.ofNullable(includeDetails);
         return this;
     }
+
 
     /**
      * Whether or not to include details for a section (types, filters, and sorts).
@@ -100,7 +101,6 @@ public class GetLibraryDetailsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,15 +111,14 @@ public class GetLibraryDetailsRequest {
         }
         GetLibraryDetailsRequest other = (GetLibraryDetailsRequest) o;
         return 
-            Objects.deepEquals(this.includeDetails, other.includeDetails) &&
-            Objects.deepEquals(this.sectionKey, other.sectionKey);
+            Utils.enhancedDeepEquals(this.includeDetails, other.includeDetails) &&
+            Utils.enhancedDeepEquals(this.sectionKey, other.sectionKey);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            includeDetails,
-            sectionKey);
+        return Utils.enhancedHash(
+            includeDetails, sectionKey);
     }
     
     @Override
@@ -128,16 +127,18 @@ public class GetLibraryDetailsRequest {
                 "includeDetails", includeDetails,
                 "sectionKey", sectionKey);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends IncludeDetails> includeDetails;
- 
+
         private Integer sectionKey;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Whether or not to include details for a section (types, filters, and sorts).
@@ -159,6 +160,7 @@ public class GetLibraryDetailsRequest {
             return this;
         }
 
+
         /**
          * The unique key of the Plex library. 
          * Note: This is unique in the context of the Plex server.
@@ -168,15 +170,16 @@ public class GetLibraryDetailsRequest {
             this.sectionKey = sectionKey;
             return this;
         }
-        
+
         public GetLibraryDetailsRequest build() {
             if (includeDetails == null) {
                 includeDetails = _SINGLETON_VALUE_IncludeDetails.value();
             }
+
             return new GetLibraryDetailsRequest(
-                includeDetails,
-                sectionKey);
+                includeDetails, sectionKey);
         }
+
 
         private static final LazySingletonValue<Optional<? extends IncludeDetails>> _SINGLETON_VALUE_IncludeDetails =
                 new LazySingletonValue<>(

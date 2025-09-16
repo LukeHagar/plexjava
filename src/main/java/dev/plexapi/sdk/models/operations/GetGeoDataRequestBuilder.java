@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetGeoData;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -11,10 +15,10 @@ import java.util.Optional;
 public class GetGeoDataRequestBuilder {
 
     private Optional<String> serverURL = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallGetGeoData sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetGeoDataRequestBuilder(SDKMethodInterfaces.MethodCallGetGeoData sdk) {
-        this.sdk = sdk;
+    public GetGeoDataRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
                 
     public GetGeoDataRequestBuilder serverURL(String serverURL) {
@@ -30,8 +34,10 @@ public class GetGeoDataRequestBuilder {
     }
 
     public GetGeoDataResponse call() throws Exception {
+        
+        RequestlessOperation<GetGeoDataResponse> operation
+            = new GetGeoData.Sync(sdkConfiguration, serverURL);
 
-        return sdk.getGeoData(
-            serverURL);
+        return operation.handleResponse(operation.doRequest());
     }
 }

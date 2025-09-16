@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.CancelServerActivities;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -10,10 +14,10 @@ import java.lang.String;
 public class CancelServerActivitiesRequestBuilder {
 
     private String activityUUID;
-    private final SDKMethodInterfaces.MethodCallCancelServerActivities sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public CancelServerActivitiesRequestBuilder(SDKMethodInterfaces.MethodCallCancelServerActivities sdk) {
-        this.sdk = sdk;
+    public CancelServerActivitiesRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public CancelServerActivitiesRequestBuilder activityUUID(String activityUUID) {
@@ -22,9 +26,20 @@ public class CancelServerActivitiesRequestBuilder {
         return this;
     }
 
-    public CancelServerActivitiesResponse call() throws Exception {
 
-        return sdk.cancelServerActivities(
-            activityUUID);
+    private CancelServerActivitiesRequest buildRequest() {
+
+        CancelServerActivitiesRequest request = new CancelServerActivitiesRequest(activityUUID);
+
+        return request;
+    }
+
+    public CancelServerActivitiesResponse call() throws Exception {
+        
+        RequestOperation<CancelServerActivitiesRequest, CancelServerActivitiesResponse> operation
+              = new CancelServerActivities.Sync(sdkConfiguration);
+        CancelServerActivitiesRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

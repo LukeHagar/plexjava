@@ -3,16 +3,20 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetTimeline;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class GetTimelineRequestBuilder {
 
     private GetTimelineRequest request;
-    private final SDKMethodInterfaces.MethodCallGetTimeline sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetTimelineRequestBuilder(SDKMethodInterfaces.MethodCallGetTimeline sdk) {
-        this.sdk = sdk;
+    public GetTimelineRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetTimelineRequestBuilder request(GetTimelineRequest request) {
@@ -22,8 +26,10 @@ public class GetTimelineRequestBuilder {
     }
 
     public GetTimelineResponse call() throws Exception {
+        
+        RequestOperation<GetTimelineRequest, GetTimelineResponse> operation
+              = new GetTimeline.Sync(sdkConfiguration);
 
-        return sdk.getTimeline(
-            request);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

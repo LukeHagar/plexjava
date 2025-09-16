@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetActorsLibrary;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.Integer;
@@ -11,10 +15,10 @@ public class GetActorsLibraryRequestBuilder {
 
     private Integer sectionKey;
     private GetActorsLibraryQueryParamType type;
-    private final SDKMethodInterfaces.MethodCallGetActorsLibrary sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetActorsLibraryRequestBuilder(SDKMethodInterfaces.MethodCallGetActorsLibrary sdk) {
-        this.sdk = sdk;
+    public GetActorsLibraryRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetActorsLibraryRequestBuilder sectionKey(int sectionKey) {
@@ -29,10 +33,21 @@ public class GetActorsLibraryRequestBuilder {
         return this;
     }
 
-    public GetActorsLibraryResponse call() throws Exception {
 
-        return sdk.getActorsLibrary(
-            sectionKey,
+    private GetActorsLibraryRequest buildRequest() {
+
+        GetActorsLibraryRequest request = new GetActorsLibraryRequest(sectionKey,
             type);
+
+        return request;
+    }
+
+    public GetActorsLibraryResponse call() throws Exception {
+        
+        RequestOperation<GetActorsLibraryRequest, GetActorsLibraryResponse> operation
+              = new GetActorsLibrary.Sync(sdkConfiguration);
+        GetActorsLibraryRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

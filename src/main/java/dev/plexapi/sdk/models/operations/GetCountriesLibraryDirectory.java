@@ -9,15 +9,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetCountriesLibraryDirectory {
 
     @JsonProperty("fastKey")
     private String fastKey;
 
+
     @JsonProperty("key")
     private String key;
+
 
     @JsonProperty("title")
     private String title;
@@ -50,9 +52,10 @@ public class GetCountriesLibraryDirectory {
         return title;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetCountriesLibraryDirectory withFastKey(String fastKey) {
         Utils.checkNotNull(fastKey, "fastKey");
@@ -72,7 +75,6 @@ public class GetCountriesLibraryDirectory {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -83,17 +85,15 @@ public class GetCountriesLibraryDirectory {
         }
         GetCountriesLibraryDirectory other = (GetCountriesLibraryDirectory) o;
         return 
-            Objects.deepEquals(this.fastKey, other.fastKey) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.title, other.title);
+            Utils.enhancedDeepEquals(this.fastKey, other.fastKey) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.title, other.title);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            fastKey,
-            key,
-            title);
+        return Utils.enhancedHash(
+            fastKey, key, title);
     }
     
     @Override
@@ -103,18 +103,20 @@ public class GetCountriesLibraryDirectory {
                 "key", key,
                 "title", title);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String fastKey;
- 
+
         private String key;
- 
+
         private String title;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder fastKey(String fastKey) {
             Utils.checkNotNull(fastKey, "fastKey");
@@ -122,23 +124,25 @@ public class GetCountriesLibraryDirectory {
             return this;
         }
 
+
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = key;
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = title;
             return this;
         }
-        
+
         public GetCountriesLibraryDirectory build() {
+
             return new GetCountriesLibraryDirectory(
-                fastKey,
-                key,
-                title);
+                fastKey, key, title);
         }
+
     }
 }

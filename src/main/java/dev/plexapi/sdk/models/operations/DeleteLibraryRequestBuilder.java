@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.DeleteLibrary;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.Integer;
@@ -10,10 +14,10 @@ import java.lang.Integer;
 public class DeleteLibraryRequestBuilder {
 
     private Integer sectionKey;
-    private final SDKMethodInterfaces.MethodCallDeleteLibrary sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public DeleteLibraryRequestBuilder(SDKMethodInterfaces.MethodCallDeleteLibrary sdk) {
-        this.sdk = sdk;
+    public DeleteLibraryRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public DeleteLibraryRequestBuilder sectionKey(int sectionKey) {
@@ -22,9 +26,20 @@ public class DeleteLibraryRequestBuilder {
         return this;
     }
 
-    public DeleteLibraryResponse call() throws Exception {
 
-        return sdk.deleteLibrary(
-            sectionKey);
+    private DeleteLibraryRequest buildRequest() {
+
+        DeleteLibraryRequest request = new DeleteLibraryRequest(sectionKey);
+
+        return request;
+    }
+
+    public DeleteLibraryResponse call() throws Exception {
+        
+        RequestOperation<DeleteLibraryRequest, DeleteLibraryResponse> operation
+              = new DeleteLibrary.Sync(sdkConfiguration);
+        DeleteLibraryRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

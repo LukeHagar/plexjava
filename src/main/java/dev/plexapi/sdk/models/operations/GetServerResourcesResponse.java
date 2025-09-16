@@ -14,11 +14,10 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetServerResourcesResponse implements Response {
 
+public class GetServerResourcesResponse implements Response {
     /**
      * HTTP response content type for this operation
      */
@@ -59,7 +58,8 @@ public class GetServerResourcesResponse implements Response {
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse) {
-        this(contentType, statusCode, rawResponse, Optional.empty());
+        this(contentType, statusCode, rawResponse,
+            Optional.empty());
     }
 
     /**
@@ -95,9 +95,10 @@ public class GetServerResourcesResponse implements Response {
         return (Optional<List<PlexDevice>>) plexDevices;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * HTTP response content type for this operation
@@ -135,6 +136,7 @@ public class GetServerResourcesResponse implements Response {
         return this;
     }
 
+
     /**
      * List of Plex Devices. This includes Plex hosted servers and clients
      */
@@ -144,7 +146,6 @@ public class GetServerResourcesResponse implements Response {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -155,18 +156,16 @@ public class GetServerResourcesResponse implements Response {
         }
         GetServerResourcesResponse other = (GetServerResourcesResponse) o;
         return 
-            Objects.deepEquals(this.contentType, other.contentType) &&
-            Objects.deepEquals(this.statusCode, other.statusCode) &&
-            Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.plexDevices, other.plexDevices);
+            Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
+            Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
+            Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
+            Utils.enhancedDeepEquals(this.plexDevices, other.plexDevices);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            contentType,
-            statusCode,
-            rawResponse,
+        return Utils.enhancedHash(
+            contentType, statusCode, rawResponse,
             plexDevices);
     }
     
@@ -178,20 +177,22 @@ public class GetServerResourcesResponse implements Response {
                 "rawResponse", rawResponse,
                 "plexDevices", plexDevices);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String contentType;
- 
+
         private Integer statusCode;
- 
+
         private HttpResponse<InputStream> rawResponse;
- 
+
         private Optional<? extends List<PlexDevice>> plexDevices = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * HTTP response content type for this operation
@@ -202,6 +203,7 @@ public class GetServerResourcesResponse implements Response {
             return this;
         }
 
+
         /**
          * HTTP response status code for this operation
          */
@@ -211,6 +213,7 @@ public class GetServerResourcesResponse implements Response {
             return this;
         }
 
+
         /**
          * Raw HTTP response; suitable for custom response parsing
          */
@@ -219,6 +222,7 @@ public class GetServerResourcesResponse implements Response {
             this.rawResponse = rawResponse;
             return this;
         }
+
 
         /**
          * List of Plex Devices. This includes Plex hosted servers and clients
@@ -237,13 +241,13 @@ public class GetServerResourcesResponse implements Response {
             this.plexDevices = plexDevices;
             return this;
         }
-        
+
         public GetServerResourcesResponse build() {
+
             return new GetServerResourcesResponse(
-                contentType,
-                statusCode,
-                rawResponse,
+                contentType, statusCode, rawResponse,
                 plexDevices);
         }
+
     }
 }

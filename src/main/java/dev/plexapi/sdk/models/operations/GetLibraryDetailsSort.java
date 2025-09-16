@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetLibraryDetailsSort {
 
@@ -20,21 +20,26 @@ public class GetLibraryDetailsSort {
     @JsonProperty("default")
     private Optional<String> default_;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("defaultDirection")
     private Optional<String> defaultDirection;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("descKey")
     private Optional<String> descKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("firstCharacterKey")
     private Optional<String> firstCharacterKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
@@ -63,7 +68,8 @@ public class GetLibraryDetailsSort {
     }
     
     public GetLibraryDetailsSort() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -96,15 +102,17 @@ public class GetLibraryDetailsSort {
         return title;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetLibraryDetailsSort withDefault(String default_) {
         Utils.checkNotNull(default_, "default_");
         this.default_ = Optional.ofNullable(default_);
         return this;
     }
+
 
     public GetLibraryDetailsSort withDefault(Optional<String> default_) {
         Utils.checkNotNull(default_, "default_");
@@ -118,6 +126,7 @@ public class GetLibraryDetailsSort {
         return this;
     }
 
+
     public GetLibraryDetailsSort withDefaultDirection(Optional<String> defaultDirection) {
         Utils.checkNotNull(defaultDirection, "defaultDirection");
         this.defaultDirection = defaultDirection;
@@ -129,6 +138,7 @@ public class GetLibraryDetailsSort {
         this.descKey = Optional.ofNullable(descKey);
         return this;
     }
+
 
     public GetLibraryDetailsSort withDescKey(Optional<String> descKey) {
         Utils.checkNotNull(descKey, "descKey");
@@ -142,6 +152,7 @@ public class GetLibraryDetailsSort {
         return this;
     }
 
+
     public GetLibraryDetailsSort withFirstCharacterKey(Optional<String> firstCharacterKey) {
         Utils.checkNotNull(firstCharacterKey, "firstCharacterKey");
         this.firstCharacterKey = firstCharacterKey;
@@ -153,6 +164,7 @@ public class GetLibraryDetailsSort {
         this.key = Optional.ofNullable(key);
         return this;
     }
+
 
     public GetLibraryDetailsSort withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
@@ -166,13 +178,13 @@ public class GetLibraryDetailsSort {
         return this;
     }
 
+
     public GetLibraryDetailsSort withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -183,23 +195,19 @@ public class GetLibraryDetailsSort {
         }
         GetLibraryDetailsSort other = (GetLibraryDetailsSort) o;
         return 
-            Objects.deepEquals(this.default_, other.default_) &&
-            Objects.deepEquals(this.defaultDirection, other.defaultDirection) &&
-            Objects.deepEquals(this.descKey, other.descKey) &&
-            Objects.deepEquals(this.firstCharacterKey, other.firstCharacterKey) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.title, other.title);
+            Utils.enhancedDeepEquals(this.default_, other.default_) &&
+            Utils.enhancedDeepEquals(this.defaultDirection, other.defaultDirection) &&
+            Utils.enhancedDeepEquals(this.descKey, other.descKey) &&
+            Utils.enhancedDeepEquals(this.firstCharacterKey, other.firstCharacterKey) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.title, other.title);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            default_,
-            defaultDirection,
-            descKey,
-            firstCharacterKey,
-            key,
-            title);
+        return Utils.enhancedHash(
+            default_, defaultDirection, descKey,
+            firstCharacterKey, key, title);
     }
     
     @Override
@@ -212,24 +220,26 @@ public class GetLibraryDetailsSort {
                 "key", key,
                 "title", title);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> default_ = Optional.empty();
- 
+
         private Optional<String> defaultDirection = Optional.empty();
- 
+
         private Optional<String> descKey = Optional.empty();
- 
+
         private Optional<String> firstCharacterKey = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder default_(String default_) {
             Utils.checkNotNull(default_, "default_");
@@ -243,6 +253,7 @@ public class GetLibraryDetailsSort {
             return this;
         }
 
+
         public Builder defaultDirection(String defaultDirection) {
             Utils.checkNotNull(defaultDirection, "defaultDirection");
             this.defaultDirection = Optional.ofNullable(defaultDirection);
@@ -254,6 +265,7 @@ public class GetLibraryDetailsSort {
             this.defaultDirection = defaultDirection;
             return this;
         }
+
 
         public Builder descKey(String descKey) {
             Utils.checkNotNull(descKey, "descKey");
@@ -267,6 +279,7 @@ public class GetLibraryDetailsSort {
             return this;
         }
 
+
         public Builder firstCharacterKey(String firstCharacterKey) {
             Utils.checkNotNull(firstCharacterKey, "firstCharacterKey");
             this.firstCharacterKey = Optional.ofNullable(firstCharacterKey);
@@ -278,6 +291,7 @@ public class GetLibraryDetailsSort {
             this.firstCharacterKey = firstCharacterKey;
             return this;
         }
+
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
@@ -291,6 +305,7 @@ public class GetLibraryDetailsSort {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -302,15 +317,13 @@ public class GetLibraryDetailsSort {
             this.title = title;
             return this;
         }
-        
+
         public GetLibraryDetailsSort build() {
+
             return new GetLibraryDetailsSort(
-                default_,
-                defaultDirection,
-                descKey,
-                firstCharacterKey,
-                key,
-                title);
+                default_, defaultDirection, descKey,
+                firstCharacterKey, key, title);
         }
+
     }
 }

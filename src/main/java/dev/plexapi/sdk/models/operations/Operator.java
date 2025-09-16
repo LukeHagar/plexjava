@@ -9,12 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class Operator {
 
     @JsonProperty("key")
     private String key;
+
 
     @JsonProperty("title")
     private String title;
@@ -39,9 +40,10 @@ public class Operator {
         return title;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Operator withKey(String key) {
         Utils.checkNotNull(key, "key");
@@ -55,7 +57,6 @@ public class Operator {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -66,15 +67,14 @@ public class Operator {
         }
         Operator other = (Operator) o;
         return 
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.title, other.title);
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.title, other.title);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            key,
-            title);
+        return Utils.enhancedHash(
+            key, title);
     }
     
     @Override
@@ -83,16 +83,18 @@ public class Operator {
                 "key", key,
                 "title", title);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String key;
- 
+
         private String title;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
@@ -100,16 +102,18 @@ public class Operator {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = title;
             return this;
         }
-        
+
         public Operator build() {
+
             return new Operator(
-                key,
-                title);
+                key, title);
         }
+
     }
 }

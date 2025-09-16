@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetPin;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -12,10 +16,10 @@ public class GetPinRequestBuilder {
 
     private GetPinRequest request;
     private Optional<String> serverURL = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallGetPin sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetPinRequestBuilder(SDKMethodInterfaces.MethodCallGetPin sdk) {
-        this.sdk = sdk;
+    public GetPinRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetPinRequestBuilder request(GetPinRequest request) {
@@ -37,9 +41,10 @@ public class GetPinRequestBuilder {
     }
 
     public GetPinResponse call() throws Exception {
+        
+        RequestOperation<GetPinRequest, GetPinResponse> operation
+              = new GetPin.Sync(sdkConfiguration, serverURL);
 
-        return sdk.getPin(
-            request,
-            serverURL);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

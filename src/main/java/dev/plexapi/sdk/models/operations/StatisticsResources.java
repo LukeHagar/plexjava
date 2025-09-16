@@ -13,8 +13,8 @@ import java.lang.Float;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class StatisticsResources {
 
@@ -22,21 +22,26 @@ public class StatisticsResources {
     @JsonProperty("timespan")
     private Optional<Long> timespan;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("at")
     private Optional<Long> at;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hostCpuUtilization")
     private Optional<Float> hostCpuUtilization;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("processCpuUtilization")
     private Optional<Float> processCpuUtilization;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hostMemoryUtilization")
     private Optional<Float> hostMemoryUtilization;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("processMemoryUtilization")
@@ -65,7 +70,8 @@ public class StatisticsResources {
     }
     
     public StatisticsResources() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -98,15 +104,17 @@ public class StatisticsResources {
         return processMemoryUtilization;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public StatisticsResources withTimespan(long timespan) {
         Utils.checkNotNull(timespan, "timespan");
         this.timespan = Optional.ofNullable(timespan);
         return this;
     }
+
 
     public StatisticsResources withTimespan(Optional<Long> timespan) {
         Utils.checkNotNull(timespan, "timespan");
@@ -120,6 +128,7 @@ public class StatisticsResources {
         return this;
     }
 
+
     public StatisticsResources withAt(Optional<Long> at) {
         Utils.checkNotNull(at, "at");
         this.at = at;
@@ -131,6 +140,7 @@ public class StatisticsResources {
         this.hostCpuUtilization = Optional.ofNullable(hostCpuUtilization);
         return this;
     }
+
 
     public StatisticsResources withHostCpuUtilization(Optional<Float> hostCpuUtilization) {
         Utils.checkNotNull(hostCpuUtilization, "hostCpuUtilization");
@@ -144,6 +154,7 @@ public class StatisticsResources {
         return this;
     }
 
+
     public StatisticsResources withProcessCpuUtilization(Optional<Float> processCpuUtilization) {
         Utils.checkNotNull(processCpuUtilization, "processCpuUtilization");
         this.processCpuUtilization = processCpuUtilization;
@@ -155,6 +166,7 @@ public class StatisticsResources {
         this.hostMemoryUtilization = Optional.ofNullable(hostMemoryUtilization);
         return this;
     }
+
 
     public StatisticsResources withHostMemoryUtilization(Optional<Float> hostMemoryUtilization) {
         Utils.checkNotNull(hostMemoryUtilization, "hostMemoryUtilization");
@@ -168,13 +180,13 @@ public class StatisticsResources {
         return this;
     }
 
+
     public StatisticsResources withProcessMemoryUtilization(Optional<Float> processMemoryUtilization) {
         Utils.checkNotNull(processMemoryUtilization, "processMemoryUtilization");
         this.processMemoryUtilization = processMemoryUtilization;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -185,23 +197,19 @@ public class StatisticsResources {
         }
         StatisticsResources other = (StatisticsResources) o;
         return 
-            Objects.deepEquals(this.timespan, other.timespan) &&
-            Objects.deepEquals(this.at, other.at) &&
-            Objects.deepEquals(this.hostCpuUtilization, other.hostCpuUtilization) &&
-            Objects.deepEquals(this.processCpuUtilization, other.processCpuUtilization) &&
-            Objects.deepEquals(this.hostMemoryUtilization, other.hostMemoryUtilization) &&
-            Objects.deepEquals(this.processMemoryUtilization, other.processMemoryUtilization);
+            Utils.enhancedDeepEquals(this.timespan, other.timespan) &&
+            Utils.enhancedDeepEquals(this.at, other.at) &&
+            Utils.enhancedDeepEquals(this.hostCpuUtilization, other.hostCpuUtilization) &&
+            Utils.enhancedDeepEquals(this.processCpuUtilization, other.processCpuUtilization) &&
+            Utils.enhancedDeepEquals(this.hostMemoryUtilization, other.hostMemoryUtilization) &&
+            Utils.enhancedDeepEquals(this.processMemoryUtilization, other.processMemoryUtilization);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            timespan,
-            at,
-            hostCpuUtilization,
-            processCpuUtilization,
-            hostMemoryUtilization,
-            processMemoryUtilization);
+        return Utils.enhancedHash(
+            timespan, at, hostCpuUtilization,
+            processCpuUtilization, hostMemoryUtilization, processMemoryUtilization);
     }
     
     @Override
@@ -214,24 +222,26 @@ public class StatisticsResources {
                 "hostMemoryUtilization", hostMemoryUtilization,
                 "processMemoryUtilization", processMemoryUtilization);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Long> timespan = Optional.empty();
- 
+
         private Optional<Long> at = Optional.empty();
- 
+
         private Optional<Float> hostCpuUtilization = Optional.empty();
- 
+
         private Optional<Float> processCpuUtilization = Optional.empty();
- 
+
         private Optional<Float> hostMemoryUtilization = Optional.empty();
- 
+
         private Optional<Float> processMemoryUtilization = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder timespan(long timespan) {
             Utils.checkNotNull(timespan, "timespan");
@@ -245,6 +255,7 @@ public class StatisticsResources {
             return this;
         }
 
+
         public Builder at(long at) {
             Utils.checkNotNull(at, "at");
             this.at = Optional.ofNullable(at);
@@ -256,6 +267,7 @@ public class StatisticsResources {
             this.at = at;
             return this;
         }
+
 
         public Builder hostCpuUtilization(float hostCpuUtilization) {
             Utils.checkNotNull(hostCpuUtilization, "hostCpuUtilization");
@@ -269,6 +281,7 @@ public class StatisticsResources {
             return this;
         }
 
+
         public Builder processCpuUtilization(float processCpuUtilization) {
             Utils.checkNotNull(processCpuUtilization, "processCpuUtilization");
             this.processCpuUtilization = Optional.ofNullable(processCpuUtilization);
@@ -280,6 +293,7 @@ public class StatisticsResources {
             this.processCpuUtilization = processCpuUtilization;
             return this;
         }
+
 
         public Builder hostMemoryUtilization(float hostMemoryUtilization) {
             Utils.checkNotNull(hostMemoryUtilization, "hostMemoryUtilization");
@@ -293,6 +307,7 @@ public class StatisticsResources {
             return this;
         }
 
+
         public Builder processMemoryUtilization(float processMemoryUtilization) {
             Utils.checkNotNull(processMemoryUtilization, "processMemoryUtilization");
             this.processMemoryUtilization = Optional.ofNullable(processMemoryUtilization);
@@ -304,15 +319,13 @@ public class StatisticsResources {
             this.processMemoryUtilization = processMemoryUtilization;
             return this;
         }
-        
+
         public StatisticsResources build() {
+
             return new StatisticsResources(
-                timespan,
-                at,
-                hostCpuUtilization,
-                processCpuUtilization,
-                hostMemoryUtilization,
-                processMemoryUtilization);
+                timespan, at, hostCpuUtilization,
+                processCpuUtilization, hostMemoryUtilization, processMemoryUtilization);
         }
+
     }
 }

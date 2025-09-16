@@ -19,7 +19,7 @@ public enum AllowSync {
     @JsonValue
     private final int value;
 
-    private AllowSync(int value) {
+    AllowSync(int value) {
         this.value = value;
     }
     

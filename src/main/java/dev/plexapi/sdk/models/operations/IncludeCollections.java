@@ -19,7 +19,7 @@ public enum IncludeCollections {
     @JsonValue
     private final long value;
 
-    private IncludeCollections(long value) {
+    IncludeCollections(long value) {
         this.value = value;
     }
     

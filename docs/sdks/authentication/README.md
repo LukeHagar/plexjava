@@ -20,6 +20,7 @@ This endpoint provides the caller with a temporary token with the same access le
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getTransientToken" method="get" path="/security/token" -->
 ```java
 package hello.world;
 
@@ -34,7 +35,7 @@ public class Application {
     public static void main(String[] args) throws GetTransientTokenBadRequest, GetTransientTokenUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetTransientTokenResponse res = sdk.authentication().getTransientToken()
@@ -74,6 +75,7 @@ Note: requires Plex Media Server >= 1.15.4.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getSourceConnectionInformation" method="get" path="/security/resources" -->
 ```java
 package hello.world;
 
@@ -88,7 +90,7 @@ public class Application {
     public static void main(String[] args) throws GetSourceConnectionInformationBadRequest, GetSourceConnectionInformationUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetSourceConnectionInformationResponse res = sdk.authentication().getSourceConnectionInformation()
@@ -124,6 +126,7 @@ Get the User data from the provided X-Plex-Token
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getTokenDetails" method="get" path="/user" -->
 ```java
 package hello.world;
 
@@ -138,7 +141,7 @@ public class Application {
     public static void main(String[] args) throws GetTokenDetailsBadRequest, GetTokenDetailsUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetTokenDetailsResponse res = sdk.authentication().getTokenDetails()
@@ -175,6 +178,7 @@ Sign in user with username and password and return user data with Plex authentic
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-users-sign-in-data" method="post" path="/users/signin" -->
 ```java
 package hello.world;
 

@@ -3,16 +3,20 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.StartUniversalTranscode;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class StartUniversalTranscodeRequestBuilder {
 
     private StartUniversalTranscodeRequest request;
-    private final SDKMethodInterfaces.MethodCallStartUniversalTranscode sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public StartUniversalTranscodeRequestBuilder(SDKMethodInterfaces.MethodCallStartUniversalTranscode sdk) {
-        this.sdk = sdk;
+    public StartUniversalTranscodeRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public StartUniversalTranscodeRequestBuilder request(StartUniversalTranscodeRequest request) {
@@ -22,8 +26,10 @@ public class StartUniversalTranscodeRequestBuilder {
     }
 
     public StartUniversalTranscodeResponse call() throws Exception {
+        
+        RequestOperation<StartUniversalTranscodeRequest, StartUniversalTranscodeResponse> operation
+              = new StartUniversalTranscode.Sync(sdkConfiguration);
 
-        return sdk.startUniversalTranscode(
-            request);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

@@ -10,10 +10,9 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetAllLibrariesLocation {
-
     /**
      * The ID of the location.
      */
@@ -52,9 +51,10 @@ public class GetAllLibrariesLocation {
         return path;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The ID of the location.
@@ -74,7 +74,6 @@ public class GetAllLibrariesLocation {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -85,15 +84,14 @@ public class GetAllLibrariesLocation {
         }
         GetAllLibrariesLocation other = (GetAllLibrariesLocation) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.path, other.path);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.path, other.path);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            path);
+        return Utils.enhancedHash(
+            id, path);
     }
     
     @Override
@@ -102,16 +100,18 @@ public class GetAllLibrariesLocation {
                 "id", id,
                 "path", path);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer id;
- 
+
         private String path;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The ID of the location.
@@ -122,6 +122,7 @@ public class GetAllLibrariesLocation {
             return this;
         }
 
+
         /**
          * The path to the media item.
          */
@@ -130,11 +131,12 @@ public class GetAllLibrariesLocation {
             this.path = path;
             return this;
         }
-        
+
         public GetAllLibrariesLocation build() {
+
             return new GetAllLibrariesLocation(
-                id,
-                path);
+                id, path);
         }
+
     }
 }

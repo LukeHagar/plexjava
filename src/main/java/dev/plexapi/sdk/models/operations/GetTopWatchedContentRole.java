@@ -12,8 +12,8 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetTopWatchedContentRole {
 
@@ -21,21 +21,26 @@ public class GetTopWatchedContentRole {
     @JsonProperty("id")
     private Optional<Integer> id;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("filter")
     private Optional<String> filter;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tag")
     private Optional<String> tag;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tagKey")
     private Optional<String> tagKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("role")
     private Optional<String> role;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
@@ -64,7 +69,8 @@ public class GetTopWatchedContentRole {
     }
     
     public GetTopWatchedContentRole() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -97,15 +103,17 @@ public class GetTopWatchedContentRole {
         return thumb;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetTopWatchedContentRole withId(int id) {
         Utils.checkNotNull(id, "id");
         this.id = Optional.ofNullable(id);
         return this;
     }
+
 
     public GetTopWatchedContentRole withId(Optional<Integer> id) {
         Utils.checkNotNull(id, "id");
@@ -119,6 +127,7 @@ public class GetTopWatchedContentRole {
         return this;
     }
 
+
     public GetTopWatchedContentRole withFilter(Optional<String> filter) {
         Utils.checkNotNull(filter, "filter");
         this.filter = filter;
@@ -130,6 +139,7 @@ public class GetTopWatchedContentRole {
         this.tag = Optional.ofNullable(tag);
         return this;
     }
+
 
     public GetTopWatchedContentRole withTag(Optional<String> tag) {
         Utils.checkNotNull(tag, "tag");
@@ -143,6 +153,7 @@ public class GetTopWatchedContentRole {
         return this;
     }
 
+
     public GetTopWatchedContentRole withTagKey(Optional<String> tagKey) {
         Utils.checkNotNull(tagKey, "tagKey");
         this.tagKey = tagKey;
@@ -154,6 +165,7 @@ public class GetTopWatchedContentRole {
         this.role = Optional.ofNullable(role);
         return this;
     }
+
 
     public GetTopWatchedContentRole withRole(Optional<String> role) {
         Utils.checkNotNull(role, "role");
@@ -167,13 +179,13 @@ public class GetTopWatchedContentRole {
         return this;
     }
 
+
     public GetTopWatchedContentRole withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
         this.thumb = thumb;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -184,23 +196,19 @@ public class GetTopWatchedContentRole {
         }
         GetTopWatchedContentRole other = (GetTopWatchedContentRole) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.tag, other.tag) &&
-            Objects.deepEquals(this.tagKey, other.tagKey) &&
-            Objects.deepEquals(this.role, other.role) &&
-            Objects.deepEquals(this.thumb, other.thumb);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.filter, other.filter) &&
+            Utils.enhancedDeepEquals(this.tag, other.tag) &&
+            Utils.enhancedDeepEquals(this.tagKey, other.tagKey) &&
+            Utils.enhancedDeepEquals(this.role, other.role) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            filter,
-            tag,
-            tagKey,
-            role,
-            thumb);
+        return Utils.enhancedHash(
+            id, filter, tag,
+            tagKey, role, thumb);
     }
     
     @Override
@@ -213,24 +221,26 @@ public class GetTopWatchedContentRole {
                 "role", role,
                 "thumb", thumb);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> id = Optional.empty();
- 
+
         private Optional<String> filter = Optional.empty();
- 
+
         private Optional<String> tag = Optional.empty();
- 
+
         private Optional<String> tagKey = Optional.empty();
- 
+
         private Optional<String> role = Optional.empty();
- 
+
         private Optional<String> thumb = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder id(int id) {
             Utils.checkNotNull(id, "id");
@@ -244,6 +254,7 @@ public class GetTopWatchedContentRole {
             return this;
         }
 
+
         public Builder filter(String filter) {
             Utils.checkNotNull(filter, "filter");
             this.filter = Optional.ofNullable(filter);
@@ -255,6 +266,7 @@ public class GetTopWatchedContentRole {
             this.filter = filter;
             return this;
         }
+
 
         public Builder tag(String tag) {
             Utils.checkNotNull(tag, "tag");
@@ -268,6 +280,7 @@ public class GetTopWatchedContentRole {
             return this;
         }
 
+
         public Builder tagKey(String tagKey) {
             Utils.checkNotNull(tagKey, "tagKey");
             this.tagKey = Optional.ofNullable(tagKey);
@@ -279,6 +292,7 @@ public class GetTopWatchedContentRole {
             this.tagKey = tagKey;
             return this;
         }
+
 
         public Builder role(String role) {
             Utils.checkNotNull(role, "role");
@@ -292,6 +306,7 @@ public class GetTopWatchedContentRole {
             return this;
         }
 
+
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
             this.thumb = Optional.ofNullable(thumb);
@@ -303,15 +318,13 @@ public class GetTopWatchedContentRole {
             this.thumb = thumb;
             return this;
         }
-        
+
         public GetTopWatchedContentRole build() {
+
             return new GetTopWatchedContentRole(
-                id,
-                filter,
-                tag,
-                tagKey,
-                role,
-                thumb);
+                id, filter, tag,
+                tagKey, role, thumb);
         }
+
     }
 }

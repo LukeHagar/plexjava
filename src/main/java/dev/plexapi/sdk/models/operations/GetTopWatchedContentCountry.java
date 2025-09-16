@@ -12,8 +12,8 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetTopWatchedContentCountry {
 
@@ -21,9 +21,11 @@ public class GetTopWatchedContentCountry {
     @JsonProperty("id")
     private Optional<Integer> id;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("filter")
     private Optional<String> filter;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tag")
@@ -61,15 +63,17 @@ public class GetTopWatchedContentCountry {
         return tag;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetTopWatchedContentCountry withId(int id) {
         Utils.checkNotNull(id, "id");
         this.id = Optional.ofNullable(id);
         return this;
     }
+
 
     public GetTopWatchedContentCountry withId(Optional<Integer> id) {
         Utils.checkNotNull(id, "id");
@@ -83,6 +87,7 @@ public class GetTopWatchedContentCountry {
         return this;
     }
 
+
     public GetTopWatchedContentCountry withFilter(Optional<String> filter) {
         Utils.checkNotNull(filter, "filter");
         this.filter = filter;
@@ -95,13 +100,13 @@ public class GetTopWatchedContentCountry {
         return this;
     }
 
+
     public GetTopWatchedContentCountry withTag(Optional<String> tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = tag;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -112,17 +117,15 @@ public class GetTopWatchedContentCountry {
         }
         GetTopWatchedContentCountry other = (GetTopWatchedContentCountry) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.tag, other.tag);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.filter, other.filter) &&
+            Utils.enhancedDeepEquals(this.tag, other.tag);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            filter,
-            tag);
+        return Utils.enhancedHash(
+            id, filter, tag);
     }
     
     @Override
@@ -132,18 +135,20 @@ public class GetTopWatchedContentCountry {
                 "filter", filter,
                 "tag", tag);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> id = Optional.empty();
- 
+
         private Optional<String> filter = Optional.empty();
- 
+
         private Optional<String> tag = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder id(int id) {
             Utils.checkNotNull(id, "id");
@@ -157,6 +162,7 @@ public class GetTopWatchedContentCountry {
             return this;
         }
 
+
         public Builder filter(String filter) {
             Utils.checkNotNull(filter, "filter");
             this.filter = Optional.ofNullable(filter);
@@ -169,6 +175,7 @@ public class GetTopWatchedContentCountry {
             return this;
         }
 
+
         public Builder tag(String tag) {
             Utils.checkNotNull(tag, "tag");
             this.tag = Optional.ofNullable(tag);
@@ -180,12 +187,12 @@ public class GetTopWatchedContentCountry {
             this.tag = tag;
             return this;
         }
-        
+
         public GetTopWatchedContentCountry build() {
+
             return new GetTopWatchedContentCountry(
-                id,
-                filter,
-                tag);
+                id, filter, tag);
         }
+
     }
 }

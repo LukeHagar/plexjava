@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.LogMultiLine;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -10,10 +14,10 @@ import java.lang.String;
 public class LogMultiLineRequestBuilder {
 
     private String request;
-    private final SDKMethodInterfaces.MethodCallLogMultiLine sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public LogMultiLineRequestBuilder(SDKMethodInterfaces.MethodCallLogMultiLine sdk) {
-        this.sdk = sdk;
+    public LogMultiLineRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public LogMultiLineRequestBuilder request(String request) {
@@ -23,8 +27,10 @@ public class LogMultiLineRequestBuilder {
     }
 
     public LogMultiLineResponse call() throws Exception {
+        
+        RequestOperation<String, LogMultiLineResponse> operation
+              = new LogMultiLine.Sync(sdkConfiguration);
 
-        return sdk.logMultiLine(
-            request);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

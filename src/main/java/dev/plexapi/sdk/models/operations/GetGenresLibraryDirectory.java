@@ -9,18 +9,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetGenresLibraryDirectory {
 
     @JsonProperty("fastKey")
     private String fastKey;
 
+
     @JsonProperty("key")
     private String key;
 
+
     @JsonProperty("title")
     private String title;
+
 
     @JsonProperty("type")
     private String type;
@@ -61,9 +64,10 @@ public class GetGenresLibraryDirectory {
         return type;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetGenresLibraryDirectory withFastKey(String fastKey) {
         Utils.checkNotNull(fastKey, "fastKey");
@@ -89,7 +93,6 @@ public class GetGenresLibraryDirectory {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -100,18 +103,16 @@ public class GetGenresLibraryDirectory {
         }
         GetGenresLibraryDirectory other = (GetGenresLibraryDirectory) o;
         return 
-            Objects.deepEquals(this.fastKey, other.fastKey) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.type, other.type);
+            Utils.enhancedDeepEquals(this.fastKey, other.fastKey) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.type, other.type);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            fastKey,
-            key,
-            title,
+        return Utils.enhancedHash(
+            fastKey, key, title,
             type);
     }
     
@@ -123,20 +124,22 @@ public class GetGenresLibraryDirectory {
                 "title", title,
                 "type", type);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String fastKey;
- 
+
         private String key;
- 
+
         private String title;
- 
+
         private String type;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder fastKey(String fastKey) {
             Utils.checkNotNull(fastKey, "fastKey");
@@ -144,11 +147,13 @@ public class GetGenresLibraryDirectory {
             return this;
         }
 
+
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = key;
             return this;
         }
+
 
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
@@ -156,18 +161,19 @@ public class GetGenresLibraryDirectory {
             return this;
         }
 
+
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
         }
-        
+
         public GetGenresLibraryDirectory build() {
+
             return new GetGenresLibraryDirectory(
-                fastKey,
-                key,
-                title,
+                fastKey, key, title,
                 type);
         }
+
     }
 }

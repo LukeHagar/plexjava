@@ -14,14 +14,15 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetServerPreferencesMediaContainer {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("size")
     private Optional<Integer> size;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Setting")
@@ -52,15 +53,17 @@ public class GetServerPreferencesMediaContainer {
         return (Optional<List<Setting>>) setting;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetServerPreferencesMediaContainer withSize(int size) {
         Utils.checkNotNull(size, "size");
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetServerPreferencesMediaContainer withSize(Optional<Integer> size) {
         Utils.checkNotNull(size, "size");
@@ -74,13 +77,13 @@ public class GetServerPreferencesMediaContainer {
         return this;
     }
 
+
     public GetServerPreferencesMediaContainer withSetting(Optional<? extends List<Setting>> setting) {
         Utils.checkNotNull(setting, "setting");
         this.setting = setting;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -91,15 +94,14 @@ public class GetServerPreferencesMediaContainer {
         }
         GetServerPreferencesMediaContainer other = (GetServerPreferencesMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.setting, other.setting);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.setting, other.setting);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            setting);
+        return Utils.enhancedHash(
+            size, setting);
     }
     
     @Override
@@ -108,16 +110,18 @@ public class GetServerPreferencesMediaContainer {
                 "size", size,
                 "setting", setting);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> size = Optional.empty();
- 
+
         private Optional<? extends List<Setting>> setting = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder size(int size) {
             Utils.checkNotNull(size, "size");
@@ -131,6 +135,7 @@ public class GetServerPreferencesMediaContainer {
             return this;
         }
 
+
         public Builder setting(List<Setting> setting) {
             Utils.checkNotNull(setting, "setting");
             this.setting = Optional.ofNullable(setting);
@@ -142,11 +147,12 @@ public class GetServerPreferencesMediaContainer {
             this.setting = setting;
             return this;
         }
-        
+
         public GetServerPreferencesMediaContainer build() {
+
             return new GetServerPreferencesMediaContainer(
-                size,
-                setting);
+                size, setting);
         }
+
     }
 }

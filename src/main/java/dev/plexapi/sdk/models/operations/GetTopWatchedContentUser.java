@@ -12,8 +12,8 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetTopWatchedContentUser {
 
@@ -37,9 +37,10 @@ public class GetTopWatchedContentUser {
         return id;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetTopWatchedContentUser withId(int id) {
         Utils.checkNotNull(id, "id");
@@ -47,13 +48,13 @@ public class GetTopWatchedContentUser {
         return this;
     }
 
+
     public GetTopWatchedContentUser withId(Optional<Integer> id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -64,12 +65,12 @@ public class GetTopWatchedContentUser {
         }
         GetTopWatchedContentUser other = (GetTopWatchedContentUser) o;
         return 
-            Objects.deepEquals(this.id, other.id);
+            Utils.enhancedDeepEquals(this.id, other.id);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             id);
     }
     
@@ -78,14 +79,16 @@ public class GetTopWatchedContentUser {
         return Utils.toString(GetTopWatchedContentUser.class,
                 "id", id);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> id = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder id(int id) {
             Utils.checkNotNull(id, "id");
@@ -98,10 +101,12 @@ public class GetTopWatchedContentUser {
             this.id = id;
             return this;
         }
-        
+
         public GetTopWatchedContentUser build() {
+
             return new GetTopWatchedContentUser(
                 id);
         }
+
     }
 }

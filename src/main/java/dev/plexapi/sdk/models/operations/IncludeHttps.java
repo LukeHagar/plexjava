@@ -19,7 +19,7 @@ public enum IncludeHttps {
     @JsonValue
     private final int value;
 
-    private IncludeHttps(int value) {
+    IncludeHttps(int value) {
         this.value = value;
     }
     

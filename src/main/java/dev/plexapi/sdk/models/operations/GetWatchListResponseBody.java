@@ -14,7 +14,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -28,25 +27,31 @@ public class GetWatchListResponseBody {
     @JsonProperty("librarySectionID")
     private Optional<String> librarySectionID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionTitle")
     private Optional<String> librarySectionTitle;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("offset")
     private Optional<Integer> offset;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("totalSize")
     private Optional<Integer> totalSize;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("identifier")
     private Optional<String> identifier;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("size")
     private Optional<Integer> size;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Metadata")
@@ -78,7 +83,9 @@ public class GetWatchListResponseBody {
     }
     
     public GetWatchListResponseBody() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -117,15 +124,17 @@ public class GetWatchListResponseBody {
         return (Optional<List<Metadata>>) metadata;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetWatchListResponseBody withLibrarySectionID(String librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
         this.librarySectionID = Optional.ofNullable(librarySectionID);
         return this;
     }
+
 
     public GetWatchListResponseBody withLibrarySectionID(Optional<String> librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
@@ -139,6 +148,7 @@ public class GetWatchListResponseBody {
         return this;
     }
 
+
     public GetWatchListResponseBody withLibrarySectionTitle(Optional<String> librarySectionTitle) {
         Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
         this.librarySectionTitle = librarySectionTitle;
@@ -150,6 +160,7 @@ public class GetWatchListResponseBody {
         this.offset = Optional.ofNullable(offset);
         return this;
     }
+
 
     public GetWatchListResponseBody withOffset(Optional<Integer> offset) {
         Utils.checkNotNull(offset, "offset");
@@ -163,6 +174,7 @@ public class GetWatchListResponseBody {
         return this;
     }
 
+
     public GetWatchListResponseBody withTotalSize(Optional<Integer> totalSize) {
         Utils.checkNotNull(totalSize, "totalSize");
         this.totalSize = totalSize;
@@ -174,6 +186,7 @@ public class GetWatchListResponseBody {
         this.identifier = Optional.ofNullable(identifier);
         return this;
     }
+
 
     public GetWatchListResponseBody withIdentifier(Optional<String> identifier) {
         Utils.checkNotNull(identifier, "identifier");
@@ -187,6 +200,7 @@ public class GetWatchListResponseBody {
         return this;
     }
 
+
     public GetWatchListResponseBody withSize(Optional<Integer> size) {
         Utils.checkNotNull(size, "size");
         this.size = size;
@@ -199,13 +213,13 @@ public class GetWatchListResponseBody {
         return this;
     }
 
+
     public GetWatchListResponseBody withMetadata(Optional<? extends List<Metadata>> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -216,24 +230,20 @@ public class GetWatchListResponseBody {
         }
         GetWatchListResponseBody other = (GetWatchListResponseBody) o;
         return 
-            Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
-            Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
-            Objects.deepEquals(this.offset, other.offset) &&
-            Objects.deepEquals(this.totalSize, other.totalSize) &&
-            Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.librarySectionID, other.librarySectionID) &&
+            Utils.enhancedDeepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
+            Utils.enhancedDeepEquals(this.offset, other.offset) &&
+            Utils.enhancedDeepEquals(this.totalSize, other.totalSize) &&
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            librarySectionID,
-            librarySectionTitle,
-            offset,
-            totalSize,
-            identifier,
-            size,
+        return Utils.enhancedHash(
+            librarySectionID, librarySectionTitle, offset,
+            totalSize, identifier, size,
             metadata);
     }
     
@@ -248,26 +258,28 @@ public class GetWatchListResponseBody {
                 "size", size,
                 "metadata", metadata);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> librarySectionID = Optional.empty();
- 
+
         private Optional<String> librarySectionTitle = Optional.empty();
- 
+
         private Optional<Integer> offset = Optional.empty();
- 
+
         private Optional<Integer> totalSize = Optional.empty();
- 
+
         private Optional<String> identifier = Optional.empty();
- 
+
         private Optional<Integer> size = Optional.empty();
- 
+
         private Optional<? extends List<Metadata>> metadata = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder librarySectionID(String librarySectionID) {
             Utils.checkNotNull(librarySectionID, "librarySectionID");
@@ -281,6 +293,7 @@ public class GetWatchListResponseBody {
             return this;
         }
 
+
         public Builder librarySectionTitle(String librarySectionTitle) {
             Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
             this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
@@ -292,6 +305,7 @@ public class GetWatchListResponseBody {
             this.librarySectionTitle = librarySectionTitle;
             return this;
         }
+
 
         public Builder offset(int offset) {
             Utils.checkNotNull(offset, "offset");
@@ -305,6 +319,7 @@ public class GetWatchListResponseBody {
             return this;
         }
 
+
         public Builder totalSize(int totalSize) {
             Utils.checkNotNull(totalSize, "totalSize");
             this.totalSize = Optional.ofNullable(totalSize);
@@ -316,6 +331,7 @@ public class GetWatchListResponseBody {
             this.totalSize = totalSize;
             return this;
         }
+
 
         public Builder identifier(String identifier) {
             Utils.checkNotNull(identifier, "identifier");
@@ -329,6 +345,7 @@ public class GetWatchListResponseBody {
             return this;
         }
 
+
         public Builder size(int size) {
             Utils.checkNotNull(size, "size");
             this.size = Optional.ofNullable(size);
@@ -341,6 +358,7 @@ public class GetWatchListResponseBody {
             return this;
         }
 
+
         public Builder metadata(List<Metadata> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = Optional.ofNullable(metadata);
@@ -352,16 +370,14 @@ public class GetWatchListResponseBody {
             this.metadata = metadata;
             return this;
         }
-        
+
         public GetWatchListResponseBody build() {
+
             return new GetWatchListResponseBody(
-                librarySectionID,
-                librarySectionTitle,
-                offset,
-                totalSize,
-                identifier,
-                size,
+                librarySectionID, librarySectionTitle, offset,
+                totalSize, identifier, size,
                 metadata);
         }
+
     }
 }

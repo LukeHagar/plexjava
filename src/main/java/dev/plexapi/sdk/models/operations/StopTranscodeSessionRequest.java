@@ -9,10 +9,9 @@ import dev.plexapi.sdk.utils.SpeakeasyMetadata;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class StopTranscodeSessionRequest {
-
     /**
      * the Key of the transcode session to stop
      */
@@ -34,9 +33,10 @@ public class StopTranscodeSessionRequest {
         return sessionKey;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * the Key of the transcode session to stop
@@ -47,7 +47,6 @@ public class StopTranscodeSessionRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -58,12 +57,12 @@ public class StopTranscodeSessionRequest {
         }
         StopTranscodeSessionRequest other = (StopTranscodeSessionRequest) o;
         return 
-            Objects.deepEquals(this.sessionKey, other.sessionKey);
+            Utils.enhancedDeepEquals(this.sessionKey, other.sessionKey);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             sessionKey);
     }
     
@@ -72,14 +71,16 @@ public class StopTranscodeSessionRequest {
         return Utils.toString(StopTranscodeSessionRequest.class,
                 "sessionKey", sessionKey);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String sessionKey;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * the Key of the transcode session to stop
@@ -89,10 +90,12 @@ public class StopTranscodeSessionRequest {
             this.sessionKey = sessionKey;
             return this;
         }
-        
+
         public StopTranscodeSessionRequest build() {
+
             return new StopTranscodeSessionRequest(
                 sessionKey);
         }
+
     }
 }

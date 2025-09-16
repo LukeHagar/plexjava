@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetSessionHistory;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.Long;
@@ -15,10 +19,10 @@ public class GetSessionHistoryRequestBuilder {
     private Optional<Long> accountId = Optional.empty();
     private Optional<? extends QueryParamFilter> filter = Optional.empty();
     private Optional<Long> librarySectionID = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallGetSessionHistory sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetSessionHistoryRequestBuilder(SDKMethodInterfaces.MethodCallGetSessionHistory sdk) {
-        this.sdk = sdk;
+    public GetSessionHistoryRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
                 
     public GetSessionHistoryRequestBuilder sort(String sort) {
@@ -69,12 +73,23 @@ public class GetSessionHistoryRequestBuilder {
         return this;
     }
 
-    public GetSessionHistoryResponse call() throws Exception {
 
-        return sdk.getSessionHistory(
-            sort,
+    private GetSessionHistoryRequest buildRequest() {
+
+        GetSessionHistoryRequest request = new GetSessionHistoryRequest(sort,
             accountId,
             filter,
             librarySectionID);
+
+        return request;
+    }
+
+    public GetSessionHistoryResponse call() throws Exception {
+        
+        RequestOperation<GetSessionHistoryRequest, GetSessionHistoryResponse> operation
+              = new GetSessionHistory.Sync(sdkConfiguration);
+        GetSessionHistoryRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

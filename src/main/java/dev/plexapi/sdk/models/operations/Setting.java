@@ -12,8 +12,8 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class Setting {
 
@@ -21,37 +21,46 @@ public class Setting {
     @JsonProperty("id")
     private Optional<String> id;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("label")
     private Optional<String> label;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("summary")
     private Optional<String> summary;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
     private Optional<String> type;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("default")
     private Optional<Boolean> default_;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("value")
     private Optional<Boolean> value;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hidden")
     private Optional<Boolean> hidden;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("advanced")
     private Optional<Boolean> advanced;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("group")
     private Optional<String> group;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("enumValues")
@@ -92,7 +101,10 @@ public class Setting {
     }
     
     public Setting() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -145,15 +157,17 @@ public class Setting {
         return enumValues;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Setting withId(String id) {
         Utils.checkNotNull(id, "id");
         this.id = Optional.ofNullable(id);
         return this;
     }
+
 
     public Setting withId(Optional<String> id) {
         Utils.checkNotNull(id, "id");
@@ -167,6 +181,7 @@ public class Setting {
         return this;
     }
 
+
     public Setting withLabel(Optional<String> label) {
         Utils.checkNotNull(label, "label");
         this.label = label;
@@ -178,6 +193,7 @@ public class Setting {
         this.summary = Optional.ofNullable(summary);
         return this;
     }
+
 
     public Setting withSummary(Optional<String> summary) {
         Utils.checkNotNull(summary, "summary");
@@ -191,6 +207,7 @@ public class Setting {
         return this;
     }
 
+
     public Setting withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
@@ -202,6 +219,7 @@ public class Setting {
         this.default_ = Optional.ofNullable(default_);
         return this;
     }
+
 
     public Setting withDefault(Optional<Boolean> default_) {
         Utils.checkNotNull(default_, "default_");
@@ -215,6 +233,7 @@ public class Setting {
         return this;
     }
 
+
     public Setting withValue(Optional<Boolean> value) {
         Utils.checkNotNull(value, "value");
         this.value = value;
@@ -226,6 +245,7 @@ public class Setting {
         this.hidden = Optional.ofNullable(hidden);
         return this;
     }
+
 
     public Setting withHidden(Optional<Boolean> hidden) {
         Utils.checkNotNull(hidden, "hidden");
@@ -239,6 +259,7 @@ public class Setting {
         return this;
     }
 
+
     public Setting withAdvanced(Optional<Boolean> advanced) {
         Utils.checkNotNull(advanced, "advanced");
         this.advanced = advanced;
@@ -250,6 +271,7 @@ public class Setting {
         this.group = Optional.ofNullable(group);
         return this;
     }
+
 
     public Setting withGroup(Optional<String> group) {
         Utils.checkNotNull(group, "group");
@@ -263,13 +285,13 @@ public class Setting {
         return this;
     }
 
+
     public Setting withEnumValues(Optional<String> enumValues) {
         Utils.checkNotNull(enumValues, "enumValues");
         this.enumValues = enumValues;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -280,30 +302,24 @@ public class Setting {
         }
         Setting other = (Setting) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.label, other.label) &&
-            Objects.deepEquals(this.summary, other.summary) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.default_, other.default_) &&
-            Objects.deepEquals(this.value, other.value) &&
-            Objects.deepEquals(this.hidden, other.hidden) &&
-            Objects.deepEquals(this.advanced, other.advanced) &&
-            Objects.deepEquals(this.group, other.group) &&
-            Objects.deepEquals(this.enumValues, other.enumValues);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.label, other.label) &&
+            Utils.enhancedDeepEquals(this.summary, other.summary) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.default_, other.default_) &&
+            Utils.enhancedDeepEquals(this.value, other.value) &&
+            Utils.enhancedDeepEquals(this.hidden, other.hidden) &&
+            Utils.enhancedDeepEquals(this.advanced, other.advanced) &&
+            Utils.enhancedDeepEquals(this.group, other.group) &&
+            Utils.enhancedDeepEquals(this.enumValues, other.enumValues);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            label,
-            summary,
-            type,
-            default_,
-            value,
-            hidden,
-            advanced,
-            group,
+        return Utils.enhancedHash(
+            id, label, summary,
+            type, default_, value,
+            hidden, advanced, group,
             enumValues);
     }
     
@@ -321,32 +337,34 @@ public class Setting {
                 "group", group,
                 "enumValues", enumValues);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> id = Optional.empty();
- 
+
         private Optional<String> label = Optional.empty();
- 
+
         private Optional<String> summary = Optional.empty();
- 
+
         private Optional<String> type = Optional.empty();
- 
+
         private Optional<Boolean> default_ = Optional.empty();
- 
+
         private Optional<Boolean> value = Optional.empty();
- 
+
         private Optional<Boolean> hidden = Optional.empty();
- 
+
         private Optional<Boolean> advanced = Optional.empty();
- 
+
         private Optional<String> group = Optional.empty();
- 
+
         private Optional<String> enumValues = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder id(String id) {
             Utils.checkNotNull(id, "id");
@@ -360,6 +378,7 @@ public class Setting {
             return this;
         }
 
+
         public Builder label(String label) {
             Utils.checkNotNull(label, "label");
             this.label = Optional.ofNullable(label);
@@ -371,6 +390,7 @@ public class Setting {
             this.label = label;
             return this;
         }
+
 
         public Builder summary(String summary) {
             Utils.checkNotNull(summary, "summary");
@@ -384,6 +404,7 @@ public class Setting {
             return this;
         }
 
+
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = Optional.ofNullable(type);
@@ -395,6 +416,7 @@ public class Setting {
             this.type = type;
             return this;
         }
+
 
         public Builder default_(boolean default_) {
             Utils.checkNotNull(default_, "default_");
@@ -408,6 +430,7 @@ public class Setting {
             return this;
         }
 
+
         public Builder value(boolean value) {
             Utils.checkNotNull(value, "value");
             this.value = Optional.ofNullable(value);
@@ -419,6 +442,7 @@ public class Setting {
             this.value = value;
             return this;
         }
+
 
         public Builder hidden(boolean hidden) {
             Utils.checkNotNull(hidden, "hidden");
@@ -432,6 +456,7 @@ public class Setting {
             return this;
         }
 
+
         public Builder advanced(boolean advanced) {
             Utils.checkNotNull(advanced, "advanced");
             this.advanced = Optional.ofNullable(advanced);
@@ -443,6 +468,7 @@ public class Setting {
             this.advanced = advanced;
             return this;
         }
+
 
         public Builder group(String group) {
             Utils.checkNotNull(group, "group");
@@ -456,6 +482,7 @@ public class Setting {
             return this;
         }
 
+
         public Builder enumValues(String enumValues) {
             Utils.checkNotNull(enumValues, "enumValues");
             this.enumValues = Optional.ofNullable(enumValues);
@@ -467,19 +494,15 @@ public class Setting {
             this.enumValues = enumValues;
             return this;
         }
-        
+
         public Setting build() {
+
             return new Setting(
-                id,
-                label,
-                summary,
-                type,
-                default_,
-                value,
-                hidden,
-                advanced,
-                group,
+                id, label, summary,
+                type, default_, value,
+                hidden, advanced, group,
                 enumValues);
         }
+
     }
 }

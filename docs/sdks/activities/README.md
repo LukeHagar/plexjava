@@ -23,6 +23,7 @@ Get Server Activities
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getServerActivities" method="get" path="/activities" -->
 ```java
 package hello.world;
 
@@ -37,7 +38,7 @@ public class Application {
     public static void main(String[] args) throws GetServerActivitiesBadRequest, GetServerActivitiesUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetServerActivitiesResponse res = sdk.activities().getServerActivities()
@@ -68,6 +69,7 @@ Cancel Server Activities
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="cancelServerActivities" method="delete" path="/activities/{activityUUID}" -->
 ```java
 package hello.world;
 
@@ -82,7 +84,7 @@ public class Application {
     public static void main(String[] args) throws CancelServerActivitiesBadRequest, CancelServerActivitiesUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         CancelServerActivitiesResponse res = sdk.activities().cancelServerActivities()

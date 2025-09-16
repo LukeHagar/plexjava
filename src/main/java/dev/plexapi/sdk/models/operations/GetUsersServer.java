@@ -12,11 +12,10 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetUsersServer {
 
+public class GetUsersServer {
     /**
      * Unique ID of the server of the connected user
      */
@@ -37,6 +36,7 @@ public class GetUsersServer {
      */
     private String name;
 
+
     private long lastSeenAt;
 
     /**
@@ -44,9 +44,12 @@ public class GetUsersServer {
      */
     private long numLibraries;
 
+
     private Optional<? extends AllLibraries> allLibraries;
 
+
     private Optional<? extends Owned> owned;
+
 
     private Optional<? extends Pending> pending;
 
@@ -88,7 +91,9 @@ public class GetUsersServer {
             String name,
             long lastSeenAt,
             long numLibraries) {
-        this(id, serverId, machineIdentifier, name, lastSeenAt, numLibraries, Optional.empty(), Optional.empty(), Optional.empty());
+        this(id, serverId, machineIdentifier,
+            name, lastSeenAt, numLibraries,
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -154,9 +159,10 @@ public class GetUsersServer {
         return (Optional<Pending>) pending;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Unique ID of the server of the connected user
@@ -215,6 +221,7 @@ public class GetUsersServer {
         return this;
     }
 
+
     public GetUsersServer withAllLibraries(Optional<? extends AllLibraries> allLibraries) {
         Utils.checkNotNull(allLibraries, "allLibraries");
         this.allLibraries = allLibraries;
@@ -226,6 +233,7 @@ public class GetUsersServer {
         this.owned = Optional.ofNullable(owned);
         return this;
     }
+
 
     public GetUsersServer withOwned(Optional<? extends Owned> owned) {
         Utils.checkNotNull(owned, "owned");
@@ -239,13 +247,13 @@ public class GetUsersServer {
         return this;
     }
 
+
     public GetUsersServer withPending(Optional<? extends Pending> pending) {
         Utils.checkNotNull(pending, "pending");
         this.pending = pending;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -256,29 +264,23 @@ public class GetUsersServer {
         }
         GetUsersServer other = (GetUsersServer) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.serverId, other.serverId) &&
-            Objects.deepEquals(this.machineIdentifier, other.machineIdentifier) &&
-            Objects.deepEquals(this.name, other.name) &&
-            Objects.deepEquals(this.lastSeenAt, other.lastSeenAt) &&
-            Objects.deepEquals(this.numLibraries, other.numLibraries) &&
-            Objects.deepEquals(this.allLibraries, other.allLibraries) &&
-            Objects.deepEquals(this.owned, other.owned) &&
-            Objects.deepEquals(this.pending, other.pending);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.serverId, other.serverId) &&
+            Utils.enhancedDeepEquals(this.machineIdentifier, other.machineIdentifier) &&
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.lastSeenAt, other.lastSeenAt) &&
+            Utils.enhancedDeepEquals(this.numLibraries, other.numLibraries) &&
+            Utils.enhancedDeepEquals(this.allLibraries, other.allLibraries) &&
+            Utils.enhancedDeepEquals(this.owned, other.owned) &&
+            Utils.enhancedDeepEquals(this.pending, other.pending);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            serverId,
-            machineIdentifier,
-            name,
-            lastSeenAt,
-            numLibraries,
-            allLibraries,
-            owned,
-            pending);
+        return Utils.enhancedHash(
+            id, serverId, machineIdentifier,
+            name, lastSeenAt, numLibraries,
+            allLibraries, owned, pending);
     }
     
     @Override
@@ -294,30 +296,32 @@ public class GetUsersServer {
                 "owned", owned,
                 "pending", pending);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Long id;
- 
+
         private Long serverId;
- 
+
         private String machineIdentifier;
- 
+
         private String name;
- 
+
         private Long lastSeenAt;
- 
+
         private Long numLibraries;
- 
+
         private Optional<? extends AllLibraries> allLibraries;
- 
+
         private Optional<? extends Owned> owned;
- 
+
         private Optional<? extends Pending> pending;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Unique ID of the server of the connected user
@@ -328,6 +332,7 @@ public class GetUsersServer {
             return this;
         }
 
+
         /**
          * ID of the actual Plex server.
          */
@@ -336,6 +341,7 @@ public class GetUsersServer {
             this.serverId = serverId;
             return this;
         }
+
 
         /**
          * Machine identifier of the Plex server.
@@ -346,6 +352,7 @@ public class GetUsersServer {
             return this;
         }
 
+
         /**
          * Name of the Plex server of the connected user.
          */
@@ -355,11 +362,13 @@ public class GetUsersServer {
             return this;
         }
 
+
         public Builder lastSeenAt(long lastSeenAt) {
             Utils.checkNotNull(lastSeenAt, "lastSeenAt");
             this.lastSeenAt = lastSeenAt;
             return this;
         }
+
 
         /**
          * Number of libraries in the server this user has access to.
@@ -369,6 +378,7 @@ public class GetUsersServer {
             this.numLibraries = numLibraries;
             return this;
         }
+
 
         public Builder allLibraries(AllLibraries allLibraries) {
             Utils.checkNotNull(allLibraries, "allLibraries");
@@ -382,6 +392,7 @@ public class GetUsersServer {
             return this;
         }
 
+
         public Builder owned(Owned owned) {
             Utils.checkNotNull(owned, "owned");
             this.owned = Optional.ofNullable(owned);
@@ -394,6 +405,7 @@ public class GetUsersServer {
             return this;
         }
 
+
         public Builder pending(Pending pending) {
             Utils.checkNotNull(pending, "pending");
             this.pending = Optional.ofNullable(pending);
@@ -405,7 +417,7 @@ public class GetUsersServer {
             this.pending = pending;
             return this;
         }
-        
+
         public GetUsersServer build() {
             if (allLibraries == null) {
                 allLibraries = _SINGLETON_VALUE_AllLibraries.value();
@@ -416,17 +428,13 @@ public class GetUsersServer {
             if (pending == null) {
                 pending = _SINGLETON_VALUE_Pending.value();
             }
+
             return new GetUsersServer(
-                id,
-                serverId,
-                machineIdentifier,
-                name,
-                lastSeenAt,
-                numLibraries,
-                allLibraries,
-                owned,
-                pending);
+                id, serverId, machineIdentifier,
+                name, lastSeenAt, numLibraries,
+                allLibraries, owned, pending);
         }
+
 
         private static final LazySingletonValue<Optional<? extends AllLibraries>> _SINGLETON_VALUE_AllLibraries =
                 new LazySingletonValue<>(

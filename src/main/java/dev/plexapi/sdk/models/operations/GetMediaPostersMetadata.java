@@ -12,11 +12,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetMediaPostersMetadata {
 
+public class GetMediaPostersMetadata {
     /**
      * The URL of the poster.
      */
@@ -72,7 +71,8 @@ public class GetMediaPostersMetadata {
             String ratingKey,
             boolean selected,
             String thumb) {
-        this(key, Optional.empty(), ratingKey, selected, thumb);
+        this(key, Optional.empty(), ratingKey,
+            selected, thumb);
     }
 
     /**
@@ -115,9 +115,10 @@ public class GetMediaPostersMetadata {
         return thumb;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The URL of the poster.
@@ -136,6 +137,7 @@ public class GetMediaPostersMetadata {
         this.provider = Optional.ofNullable(provider);
         return this;
     }
+
 
     /**
      * The provider of the poster.
@@ -173,7 +175,6 @@ public class GetMediaPostersMetadata {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -184,21 +185,18 @@ public class GetMediaPostersMetadata {
         }
         GetMediaPostersMetadata other = (GetMediaPostersMetadata) o;
         return 
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.provider, other.provider) &&
-            Objects.deepEquals(this.ratingKey, other.ratingKey) &&
-            Objects.deepEquals(this.selected, other.selected) &&
-            Objects.deepEquals(this.thumb, other.thumb);
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.provider, other.provider) &&
+            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey) &&
+            Utils.enhancedDeepEquals(this.selected, other.selected) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            key,
-            provider,
-            ratingKey,
-            selected,
-            thumb);
+        return Utils.enhancedHash(
+            key, provider, ratingKey,
+            selected, thumb);
     }
     
     @Override
@@ -210,22 +208,24 @@ public class GetMediaPostersMetadata {
                 "selected", selected,
                 "thumb", thumb);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String key;
- 
+
         private Optional<String> provider = Optional.empty();
- 
+
         private String ratingKey;
- 
+
         private Boolean selected;
- 
+
         private String thumb;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The URL of the poster.
@@ -235,6 +235,7 @@ public class GetMediaPostersMetadata {
             this.key = key;
             return this;
         }
+
 
         /**
          * The provider of the poster.
@@ -254,6 +255,7 @@ public class GetMediaPostersMetadata {
             return this;
         }
 
+
         /**
          * The URL of the poster.
          */
@@ -262,6 +264,7 @@ public class GetMediaPostersMetadata {
             this.ratingKey = ratingKey;
             return this;
         }
+
 
         /**
          * Whether this is the selected poster.
@@ -272,6 +275,7 @@ public class GetMediaPostersMetadata {
             return this;
         }
 
+
         /**
          * The URL of the poster thumbnail.
          */
@@ -280,14 +284,13 @@ public class GetMediaPostersMetadata {
             this.thumb = thumb;
             return this;
         }
-        
+
         public GetMediaPostersMetadata build() {
+
             return new GetMediaPostersMetadata(
-                key,
-                provider,
-                ratingKey,
-                selected,
-                thumb);
+                key, provider, ratingKey,
+                selected, thumb);
         }
+
     }
 }

@@ -20,7 +20,7 @@ public enum ActiveDirection {
     @JsonValue
     private final String value;
 
-    private ActiveDirection(String value) {
+    ActiveDirection(String value) {
         this.value = value;
     }
     

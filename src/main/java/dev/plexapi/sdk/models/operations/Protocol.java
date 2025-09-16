@@ -20,7 +20,7 @@ public enum Protocol {
     @JsonValue
     private final String value;
 
-    private Protocol(String value) {
+    Protocol(String value) {
         this.value = value;
     }
     

@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetSearchResults;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -10,10 +14,10 @@ import java.lang.String;
 public class GetSearchResultsRequestBuilder {
 
     private String query;
-    private final SDKMethodInterfaces.MethodCallGetSearchResults sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetSearchResultsRequestBuilder(SDKMethodInterfaces.MethodCallGetSearchResults sdk) {
-        this.sdk = sdk;
+    public GetSearchResultsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetSearchResultsRequestBuilder query(String query) {
@@ -22,9 +26,20 @@ public class GetSearchResultsRequestBuilder {
         return this;
     }
 
-    public GetSearchResultsResponse call() throws Exception {
 
-        return sdk.getSearchResults(
-            query);
+    private GetSearchResultsRequest buildRequest() {
+
+        GetSearchResultsRequest request = new GetSearchResultsRequest(query);
+
+        return request;
+    }
+
+    public GetSearchResultsResponse call() throws Exception {
+        
+        RequestOperation<GetSearchResultsRequest, GetSearchResultsResponse> operation
+              = new GetSearchResults.Sync(sdkConfiguration);
+        GetSearchResultsRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

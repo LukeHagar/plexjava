@@ -20,7 +20,7 @@ public enum GetMediaMetaDataHasThumbnail {
     @JsonValue
     private final String value;
 
-    private GetMediaMetaDataHasThumbnail(String value) {
+    GetMediaMetaDataHasThumbnail(String value) {
         this.value = value;
     }
     

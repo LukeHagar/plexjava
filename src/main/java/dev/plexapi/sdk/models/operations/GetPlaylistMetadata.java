@@ -13,8 +13,8 @@ import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetPlaylistMetadata {
 
@@ -22,57 +22,71 @@ public class GetPlaylistMetadata {
     @JsonProperty("content")
     private Optional<String> content;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ratingKey")
     private Optional<String> ratingKey;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("guid")
     private Optional<String> guid;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
     private Optional<String> type;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("summary")
     private Optional<String> summary;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("smart")
     private Optional<Boolean> smart;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("playlistType")
     private Optional<String> playlistType;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("composite")
     private Optional<String> composite;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("icon")
     private Optional<String> icon;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
     private Optional<Integer> duration;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("leafCount")
     private Optional<Integer> leafCount;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("addedAt")
     private Optional<Integer> addedAt;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("updatedAt")
@@ -128,7 +142,11 @@ public class GetPlaylistMetadata {
     }
     
     public GetPlaylistMetadata() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -206,15 +224,17 @@ public class GetPlaylistMetadata {
         return updatedAt;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetPlaylistMetadata withContent(String content) {
         Utils.checkNotNull(content, "content");
         this.content = Optional.ofNullable(content);
         return this;
     }
+
 
     public GetPlaylistMetadata withContent(Optional<String> content) {
         Utils.checkNotNull(content, "content");
@@ -228,6 +248,7 @@ public class GetPlaylistMetadata {
         return this;
     }
 
+
     public GetPlaylistMetadata withRatingKey(Optional<String> ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         this.ratingKey = ratingKey;
@@ -239,6 +260,7 @@ public class GetPlaylistMetadata {
         this.key = Optional.ofNullable(key);
         return this;
     }
+
 
     public GetPlaylistMetadata withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
@@ -252,6 +274,7 @@ public class GetPlaylistMetadata {
         return this;
     }
 
+
     public GetPlaylistMetadata withGuid(Optional<String> guid) {
         Utils.checkNotNull(guid, "guid");
         this.guid = guid;
@@ -263,6 +286,7 @@ public class GetPlaylistMetadata {
         this.type = Optional.ofNullable(type);
         return this;
     }
+
 
     public GetPlaylistMetadata withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
@@ -276,6 +300,7 @@ public class GetPlaylistMetadata {
         return this;
     }
 
+
     public GetPlaylistMetadata withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
@@ -287,6 +312,7 @@ public class GetPlaylistMetadata {
         this.summary = Optional.ofNullable(summary);
         return this;
     }
+
 
     public GetPlaylistMetadata withSummary(Optional<String> summary) {
         Utils.checkNotNull(summary, "summary");
@@ -300,6 +326,7 @@ public class GetPlaylistMetadata {
         return this;
     }
 
+
     public GetPlaylistMetadata withSmart(Optional<Boolean> smart) {
         Utils.checkNotNull(smart, "smart");
         this.smart = smart;
@@ -311,6 +338,7 @@ public class GetPlaylistMetadata {
         this.playlistType = Optional.ofNullable(playlistType);
         return this;
     }
+
 
     public GetPlaylistMetadata withPlaylistType(Optional<String> playlistType) {
         Utils.checkNotNull(playlistType, "playlistType");
@@ -324,6 +352,7 @@ public class GetPlaylistMetadata {
         return this;
     }
 
+
     public GetPlaylistMetadata withComposite(Optional<String> composite) {
         Utils.checkNotNull(composite, "composite");
         this.composite = composite;
@@ -335,6 +364,7 @@ public class GetPlaylistMetadata {
         this.icon = Optional.ofNullable(icon);
         return this;
     }
+
 
     public GetPlaylistMetadata withIcon(Optional<String> icon) {
         Utils.checkNotNull(icon, "icon");
@@ -348,6 +378,7 @@ public class GetPlaylistMetadata {
         return this;
     }
 
+
     public GetPlaylistMetadata withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = duration;
@@ -359,6 +390,7 @@ public class GetPlaylistMetadata {
         this.leafCount = Optional.ofNullable(leafCount);
         return this;
     }
+
 
     public GetPlaylistMetadata withLeafCount(Optional<Integer> leafCount) {
         Utils.checkNotNull(leafCount, "leafCount");
@@ -372,6 +404,7 @@ public class GetPlaylistMetadata {
         return this;
     }
 
+
     public GetPlaylistMetadata withAddedAt(Optional<Integer> addedAt) {
         Utils.checkNotNull(addedAt, "addedAt");
         this.addedAt = addedAt;
@@ -384,13 +417,13 @@ public class GetPlaylistMetadata {
         return this;
     }
 
+
     public GetPlaylistMetadata withUpdatedAt(Optional<Integer> updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
         this.updatedAt = updatedAt;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -401,41 +434,31 @@ public class GetPlaylistMetadata {
         }
         GetPlaylistMetadata other = (GetPlaylistMetadata) o;
         return 
-            Objects.deepEquals(this.content, other.content) &&
-            Objects.deepEquals(this.ratingKey, other.ratingKey) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.guid, other.guid) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.summary, other.summary) &&
-            Objects.deepEquals(this.smart, other.smart) &&
-            Objects.deepEquals(this.playlistType, other.playlistType) &&
-            Objects.deepEquals(this.composite, other.composite) &&
-            Objects.deepEquals(this.icon, other.icon) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.leafCount, other.leafCount) &&
-            Objects.deepEquals(this.addedAt, other.addedAt) &&
-            Objects.deepEquals(this.updatedAt, other.updatedAt);
+            Utils.enhancedDeepEquals(this.content, other.content) &&
+            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.guid, other.guid) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.summary, other.summary) &&
+            Utils.enhancedDeepEquals(this.smart, other.smart) &&
+            Utils.enhancedDeepEquals(this.playlistType, other.playlistType) &&
+            Utils.enhancedDeepEquals(this.composite, other.composite) &&
+            Utils.enhancedDeepEquals(this.icon, other.icon) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.leafCount, other.leafCount) &&
+            Utils.enhancedDeepEquals(this.addedAt, other.addedAt) &&
+            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            content,
-            ratingKey,
-            key,
-            guid,
-            type,
-            title,
-            summary,
-            smart,
-            playlistType,
-            composite,
-            icon,
-            duration,
-            leafCount,
-            addedAt,
-            updatedAt);
+        return Utils.enhancedHash(
+            content, ratingKey, key,
+            guid, type, title,
+            summary, smart, playlistType,
+            composite, icon, duration,
+            leafCount, addedAt, updatedAt);
     }
     
     @Override
@@ -457,42 +480,44 @@ public class GetPlaylistMetadata {
                 "addedAt", addedAt,
                 "updatedAt", updatedAt);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> content = Optional.empty();
- 
+
         private Optional<String> ratingKey = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> guid = Optional.empty();
- 
+
         private Optional<String> type = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> summary = Optional.empty();
- 
+
         private Optional<Boolean> smart = Optional.empty();
- 
+
         private Optional<String> playlistType = Optional.empty();
- 
+
         private Optional<String> composite = Optional.empty();
- 
+
         private Optional<String> icon = Optional.empty();
- 
+
         private Optional<Integer> duration = Optional.empty();
- 
+
         private Optional<Integer> leafCount = Optional.empty();
- 
+
         private Optional<Integer> addedAt = Optional.empty();
- 
+
         private Optional<Integer> updatedAt = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder content(String content) {
             Utils.checkNotNull(content, "content");
@@ -506,6 +531,7 @@ public class GetPlaylistMetadata {
             return this;
         }
 
+
         public Builder ratingKey(String ratingKey) {
             Utils.checkNotNull(ratingKey, "ratingKey");
             this.ratingKey = Optional.ofNullable(ratingKey);
@@ -517,6 +543,7 @@ public class GetPlaylistMetadata {
             this.ratingKey = ratingKey;
             return this;
         }
+
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
@@ -530,6 +557,7 @@ public class GetPlaylistMetadata {
             return this;
         }
 
+
         public Builder guid(String guid) {
             Utils.checkNotNull(guid, "guid");
             this.guid = Optional.ofNullable(guid);
@@ -541,6 +569,7 @@ public class GetPlaylistMetadata {
             this.guid = guid;
             return this;
         }
+
 
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
@@ -554,6 +583,7 @@ public class GetPlaylistMetadata {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -565,6 +595,7 @@ public class GetPlaylistMetadata {
             this.title = title;
             return this;
         }
+
 
         public Builder summary(String summary) {
             Utils.checkNotNull(summary, "summary");
@@ -578,6 +609,7 @@ public class GetPlaylistMetadata {
             return this;
         }
 
+
         public Builder smart(boolean smart) {
             Utils.checkNotNull(smart, "smart");
             this.smart = Optional.ofNullable(smart);
@@ -589,6 +621,7 @@ public class GetPlaylistMetadata {
             this.smart = smart;
             return this;
         }
+
 
         public Builder playlistType(String playlistType) {
             Utils.checkNotNull(playlistType, "playlistType");
@@ -602,6 +635,7 @@ public class GetPlaylistMetadata {
             return this;
         }
 
+
         public Builder composite(String composite) {
             Utils.checkNotNull(composite, "composite");
             this.composite = Optional.ofNullable(composite);
@@ -613,6 +647,7 @@ public class GetPlaylistMetadata {
             this.composite = composite;
             return this;
         }
+
 
         public Builder icon(String icon) {
             Utils.checkNotNull(icon, "icon");
@@ -626,6 +661,7 @@ public class GetPlaylistMetadata {
             return this;
         }
 
+
         public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = Optional.ofNullable(duration);
@@ -637,6 +673,7 @@ public class GetPlaylistMetadata {
             this.duration = duration;
             return this;
         }
+
 
         public Builder leafCount(int leafCount) {
             Utils.checkNotNull(leafCount, "leafCount");
@@ -650,6 +687,7 @@ public class GetPlaylistMetadata {
             return this;
         }
 
+
         public Builder addedAt(int addedAt) {
             Utils.checkNotNull(addedAt, "addedAt");
             this.addedAt = Optional.ofNullable(addedAt);
@@ -662,6 +700,7 @@ public class GetPlaylistMetadata {
             return this;
         }
 
+
         public Builder updatedAt(int updatedAt) {
             Utils.checkNotNull(updatedAt, "updatedAt");
             this.updatedAt = Optional.ofNullable(updatedAt);
@@ -673,24 +712,16 @@ public class GetPlaylistMetadata {
             this.updatedAt = updatedAt;
             return this;
         }
-        
+
         public GetPlaylistMetadata build() {
+
             return new GetPlaylistMetadata(
-                content,
-                ratingKey,
-                key,
-                guid,
-                type,
-                title,
-                summary,
-                smart,
-                playlistType,
-                composite,
-                icon,
-                duration,
-                leafCount,
-                addedAt,
-                updatedAt);
+                content, ratingKey, key,
+                guid, type, title,
+                summary, smart, playlistType,
+                composite, icon, duration,
+                leafCount, addedAt, updatedAt);
         }
+
     }
 }

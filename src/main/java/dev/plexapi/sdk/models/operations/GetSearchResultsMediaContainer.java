@@ -14,8 +14,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetSearchResultsMediaContainer {
 
@@ -23,21 +23,26 @@ public class GetSearchResultsMediaContainer {
     @JsonProperty("size")
     private Optional<Double> size;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("identifier")
     private Optional<String> identifier;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mediaTagPrefix")
     private Optional<String> mediaTagPrefix;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mediaTagVersion")
     private Optional<Double> mediaTagVersion;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Metadata")
     private Optional<? extends List<GetSearchResultsMetadata>> metadata;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Provider")
@@ -66,7 +71,8 @@ public class GetSearchResultsMediaContainer {
     }
     
     public GetSearchResultsMediaContainer() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -101,15 +107,17 @@ public class GetSearchResultsMediaContainer {
         return (Optional<List<Provider>>) provider;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetSearchResultsMediaContainer withSize(double size) {
         Utils.checkNotNull(size, "size");
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetSearchResultsMediaContainer withSize(Optional<Double> size) {
         Utils.checkNotNull(size, "size");
@@ -123,6 +131,7 @@ public class GetSearchResultsMediaContainer {
         return this;
     }
 
+
     public GetSearchResultsMediaContainer withIdentifier(Optional<String> identifier) {
         Utils.checkNotNull(identifier, "identifier");
         this.identifier = identifier;
@@ -134,6 +143,7 @@ public class GetSearchResultsMediaContainer {
         this.mediaTagPrefix = Optional.ofNullable(mediaTagPrefix);
         return this;
     }
+
 
     public GetSearchResultsMediaContainer withMediaTagPrefix(Optional<String> mediaTagPrefix) {
         Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
@@ -147,6 +157,7 @@ public class GetSearchResultsMediaContainer {
         return this;
     }
 
+
     public GetSearchResultsMediaContainer withMediaTagVersion(Optional<Double> mediaTagVersion) {
         Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
         this.mediaTagVersion = mediaTagVersion;
@@ -158,6 +169,7 @@ public class GetSearchResultsMediaContainer {
         this.metadata = Optional.ofNullable(metadata);
         return this;
     }
+
 
     public GetSearchResultsMediaContainer withMetadata(Optional<? extends List<GetSearchResultsMetadata>> metadata) {
         Utils.checkNotNull(metadata, "metadata");
@@ -171,13 +183,13 @@ public class GetSearchResultsMediaContainer {
         return this;
     }
 
+
     public GetSearchResultsMediaContainer withProvider(Optional<? extends List<Provider>> provider) {
         Utils.checkNotNull(provider, "provider");
         this.provider = provider;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -188,23 +200,19 @@ public class GetSearchResultsMediaContainer {
         }
         GetSearchResultsMediaContainer other = (GetSearchResultsMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
-            Objects.deepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
-            Objects.deepEquals(this.metadata, other.metadata) &&
-            Objects.deepEquals(this.provider, other.provider);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
+            Utils.enhancedDeepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+            Utils.enhancedDeepEquals(this.provider, other.provider);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            identifier,
-            mediaTagPrefix,
-            mediaTagVersion,
-            metadata,
-            provider);
+        return Utils.enhancedHash(
+            size, identifier, mediaTagPrefix,
+            mediaTagVersion, metadata, provider);
     }
     
     @Override
@@ -217,24 +225,26 @@ public class GetSearchResultsMediaContainer {
                 "metadata", metadata,
                 "provider", provider);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Double> size = Optional.empty();
- 
+
         private Optional<String> identifier = Optional.empty();
- 
+
         private Optional<String> mediaTagPrefix = Optional.empty();
- 
+
         private Optional<Double> mediaTagVersion = Optional.empty();
- 
+
         private Optional<? extends List<GetSearchResultsMetadata>> metadata = Optional.empty();
- 
+
         private Optional<? extends List<Provider>> provider = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder size(double size) {
             Utils.checkNotNull(size, "size");
@@ -248,6 +258,7 @@ public class GetSearchResultsMediaContainer {
             return this;
         }
 
+
         public Builder identifier(String identifier) {
             Utils.checkNotNull(identifier, "identifier");
             this.identifier = Optional.ofNullable(identifier);
@@ -259,6 +270,7 @@ public class GetSearchResultsMediaContainer {
             this.identifier = identifier;
             return this;
         }
+
 
         public Builder mediaTagPrefix(String mediaTagPrefix) {
             Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
@@ -272,6 +284,7 @@ public class GetSearchResultsMediaContainer {
             return this;
         }
 
+
         public Builder mediaTagVersion(double mediaTagVersion) {
             Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
             this.mediaTagVersion = Optional.ofNullable(mediaTagVersion);
@@ -283,6 +296,7 @@ public class GetSearchResultsMediaContainer {
             this.mediaTagVersion = mediaTagVersion;
             return this;
         }
+
 
         public Builder metadata(List<GetSearchResultsMetadata> metadata) {
             Utils.checkNotNull(metadata, "metadata");
@@ -296,6 +310,7 @@ public class GetSearchResultsMediaContainer {
             return this;
         }
 
+
         public Builder provider(List<Provider> provider) {
             Utils.checkNotNull(provider, "provider");
             this.provider = Optional.ofNullable(provider);
@@ -307,15 +322,13 @@ public class GetSearchResultsMediaContainer {
             this.provider = provider;
             return this;
         }
-        
+
         public GetSearchResultsMediaContainer build() {
+
             return new GetSearchResultsMediaContainer(
-                size,
-                identifier,
-                mediaTagPrefix,
-                mediaTagVersion,
-                metadata,
-                provider);
+                size, identifier, mediaTagPrefix,
+                mediaTagVersion, metadata, provider);
         }
+
     }
 }

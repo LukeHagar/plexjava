@@ -11,11 +11,10 @@ import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetGlobalHubsRequest {
 
+public class GetGlobalHubsRequest {
     /**
      * The number of items to return with each hub.
      */
@@ -59,9 +58,10 @@ public class GetGlobalHubsRequest {
         return (Optional<OnlyTransient>) onlyTransient;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The number of items to return with each hub.
@@ -71,6 +71,7 @@ public class GetGlobalHubsRequest {
         this.count = Optional.ofNullable(count);
         return this;
     }
+
 
     /**
      * The number of items to return with each hub.
@@ -90,6 +91,7 @@ public class GetGlobalHubsRequest {
         return this;
     }
 
+
     /**
      * Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added).
      */
@@ -99,7 +101,6 @@ public class GetGlobalHubsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -110,15 +111,14 @@ public class GetGlobalHubsRequest {
         }
         GetGlobalHubsRequest other = (GetGlobalHubsRequest) o;
         return 
-            Objects.deepEquals(this.count, other.count) &&
-            Objects.deepEquals(this.onlyTransient, other.onlyTransient);
+            Utils.enhancedDeepEquals(this.count, other.count) &&
+            Utils.enhancedDeepEquals(this.onlyTransient, other.onlyTransient);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            count,
-            onlyTransient);
+        return Utils.enhancedHash(
+            count, onlyTransient);
     }
     
     @Override
@@ -127,16 +127,18 @@ public class GetGlobalHubsRequest {
                 "count", count,
                 "onlyTransient", onlyTransient);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Double> count = Optional.empty();
- 
+
         private Optional<? extends OnlyTransient> onlyTransient = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The number of items to return with each hub.
@@ -156,6 +158,7 @@ public class GetGlobalHubsRequest {
             return this;
         }
 
+
         /**
          * Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added).
          */
@@ -173,11 +176,12 @@ public class GetGlobalHubsRequest {
             this.onlyTransient = onlyTransient;
             return this;
         }
-        
+
         public GetGlobalHubsRequest build() {
+
             return new GetGlobalHubsRequest(
-                count,
-                onlyTransient);
+                count, onlyTransient);
         }
+
     }
 }

@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetMediaProviders;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -10,10 +14,10 @@ import java.lang.String;
 public class GetMediaProvidersRequestBuilder {
 
     private String xPlexToken;
-    private final SDKMethodInterfaces.MethodCallGetMediaProviders sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetMediaProvidersRequestBuilder(SDKMethodInterfaces.MethodCallGetMediaProviders sdk) {
-        this.sdk = sdk;
+    public GetMediaProvidersRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetMediaProvidersRequestBuilder xPlexToken(String xPlexToken) {
@@ -22,9 +26,20 @@ public class GetMediaProvidersRequestBuilder {
         return this;
     }
 
-    public GetMediaProvidersResponse call() throws Exception {
 
-        return sdk.getMediaProviders(
-            xPlexToken);
+    private GetMediaProvidersRequest buildRequest() {
+
+        GetMediaProvidersRequest request = new GetMediaProvidersRequest(xPlexToken);
+
+        return request;
+    }
+
+    public GetMediaProvidersResponse call() throws Exception {
+        
+        RequestOperation<GetMediaProvidersRequest, GetMediaProvidersResponse> operation
+              = new GetMediaProviders.Sync(sdkConfiguration);
+        GetMediaProvidersRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

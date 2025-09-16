@@ -17,11 +17,10 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetLibraryItemsPart {
 
+public class GetLibraryItemsPart {
     /**
      * Indicates if the part is accessible.
      */
@@ -49,6 +48,7 @@ public class GetLibraryItemsPart {
     @JsonProperty("key")
     private Optional<String> key;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("indexes")
     private Optional<String> indexes;
@@ -73,6 +73,7 @@ public class GetLibraryItemsPart {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("size")
     private Optional<Long> size;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("packetLength")
@@ -99,6 +100,7 @@ public class GetLibraryItemsPart {
     @JsonProperty("audioProfile")
     private Optional<String> audioProfile;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("has64bitOffsets")
     private Optional<Boolean> has64bitOffsets;
@@ -109,6 +111,7 @@ public class GetLibraryItemsPart {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("optimizedForStreaming")
     private Optional<? extends GetLibraryItemsLibraryOptimizedForStreaming> optimizedForStreaming;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hasThumbnail")
@@ -165,7 +168,11 @@ public class GetLibraryItemsPart {
     
     public GetLibraryItemsPart(
             long id) {
-        this(Optional.empty(), Optional.empty(), id, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), id,
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -278,9 +285,10 @@ public class GetLibraryItemsPart {
         return (Optional<GetLibraryItemsHasThumbnail>) hasThumbnail;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Indicates if the part is accessible.
@@ -290,6 +298,7 @@ public class GetLibraryItemsPart {
         this.accessible = Optional.ofNullable(accessible);
         return this;
     }
+
 
     /**
      * Indicates if the part is accessible.
@@ -308,6 +317,7 @@ public class GetLibraryItemsPart {
         this.exists = Optional.ofNullable(exists);
         return this;
     }
+
 
     /**
      * Indicates if the part exists.
@@ -336,6 +346,7 @@ public class GetLibraryItemsPart {
         return this;
     }
 
+
     /**
      * Key to access this part.
      */
@@ -351,6 +362,7 @@ public class GetLibraryItemsPart {
         return this;
     }
 
+
     public GetLibraryItemsPart withIndexes(Optional<String> indexes) {
         Utils.checkNotNull(indexes, "indexes");
         this.indexes = indexes;
@@ -365,6 +377,7 @@ public class GetLibraryItemsPart {
         this.duration = Optional.ofNullable(duration);
         return this;
     }
+
 
     /**
      * Duration of the part in milliseconds.
@@ -384,6 +397,7 @@ public class GetLibraryItemsPart {
         return this;
     }
 
+
     /**
      * File path for the part.
      */
@@ -402,6 +416,7 @@ public class GetLibraryItemsPart {
         return this;
     }
 
+
     /**
      * File size in bytes.
      */
@@ -417,6 +432,7 @@ public class GetLibraryItemsPart {
         return this;
     }
 
+
     public GetLibraryItemsPart withPacketLength(Optional<Integer> packetLength) {
         Utils.checkNotNull(packetLength, "packetLength");
         this.packetLength = packetLength;
@@ -431,6 +447,7 @@ public class GetLibraryItemsPart {
         this.container = Optional.ofNullable(container);
         return this;
     }
+
 
     /**
      * Container format of the part.
@@ -450,6 +467,7 @@ public class GetLibraryItemsPart {
         return this;
     }
 
+
     /**
      * Video profile for the part.
      */
@@ -468,6 +486,7 @@ public class GetLibraryItemsPart {
         return this;
     }
 
+
     /**
      * The audio profile used for the media (e.g., DTS, Dolby Digital, etc.).
      */
@@ -482,6 +501,7 @@ public class GetLibraryItemsPart {
         this.has64bitOffsets = Optional.ofNullable(has64bitOffsets);
         return this;
     }
+
 
     public GetLibraryItemsPart withHas64bitOffsets(Optional<Boolean> has64bitOffsets) {
         Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
@@ -498,6 +518,7 @@ public class GetLibraryItemsPart {
         return this;
     }
 
+
     /**
      * Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
      */
@@ -513,13 +534,13 @@ public class GetLibraryItemsPart {
         return this;
     }
 
+
     public GetLibraryItemsPart withHasThumbnail(Optional<? extends GetLibraryItemsHasThumbnail> hasThumbnail) {
         Utils.checkNotNull(hasThumbnail, "hasThumbnail");
         this.hasThumbnail = hasThumbnail;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -530,41 +551,31 @@ public class GetLibraryItemsPart {
         }
         GetLibraryItemsPart other = (GetLibraryItemsPart) o;
         return 
-            Objects.deepEquals(this.accessible, other.accessible) &&
-            Objects.deepEquals(this.exists, other.exists) &&
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.indexes, other.indexes) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.file, other.file) &&
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.packetLength, other.packetLength) &&
-            Objects.deepEquals(this.container, other.container) &&
-            Objects.deepEquals(this.videoProfile, other.videoProfile) &&
-            Objects.deepEquals(this.audioProfile, other.audioProfile) &&
-            Objects.deepEquals(this.has64bitOffsets, other.has64bitOffsets) &&
-            Objects.deepEquals(this.optimizedForStreaming, other.optimizedForStreaming) &&
-            Objects.deepEquals(this.hasThumbnail, other.hasThumbnail);
+            Utils.enhancedDeepEquals(this.accessible, other.accessible) &&
+            Utils.enhancedDeepEquals(this.exists, other.exists) &&
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.indexes, other.indexes) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.file, other.file) &&
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.packetLength, other.packetLength) &&
+            Utils.enhancedDeepEquals(this.container, other.container) &&
+            Utils.enhancedDeepEquals(this.videoProfile, other.videoProfile) &&
+            Utils.enhancedDeepEquals(this.audioProfile, other.audioProfile) &&
+            Utils.enhancedDeepEquals(this.has64bitOffsets, other.has64bitOffsets) &&
+            Utils.enhancedDeepEquals(this.optimizedForStreaming, other.optimizedForStreaming) &&
+            Utils.enhancedDeepEquals(this.hasThumbnail, other.hasThumbnail);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            accessible,
-            exists,
-            id,
-            key,
-            indexes,
-            duration,
-            file,
-            size,
-            packetLength,
-            container,
-            videoProfile,
-            audioProfile,
-            has64bitOffsets,
-            optimizedForStreaming,
-            hasThumbnail);
+        return Utils.enhancedHash(
+            accessible, exists, id,
+            key, indexes, duration,
+            file, size, packetLength,
+            container, videoProfile, audioProfile,
+            has64bitOffsets, optimizedForStreaming, hasThumbnail);
     }
     
     @Override
@@ -586,42 +597,44 @@ public class GetLibraryItemsPart {
                 "optimizedForStreaming", optimizedForStreaming,
                 "hasThumbnail", hasThumbnail);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Boolean> accessible = Optional.empty();
- 
+
         private Optional<Boolean> exists = Optional.empty();
- 
+
         private Long id;
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> indexes = Optional.empty();
- 
+
         private Optional<Integer> duration = Optional.empty();
- 
+
         private Optional<String> file = Optional.empty();
- 
+
         private Optional<Long> size = Optional.empty();
- 
+
         private Optional<Integer> packetLength = Optional.empty();
- 
+
         private Optional<String> container = Optional.empty();
- 
+
         private Optional<String> videoProfile = Optional.empty();
- 
+
         private Optional<String> audioProfile = Optional.empty();
- 
+
         private Optional<Boolean> has64bitOffsets = Optional.empty();
- 
+
         private Optional<? extends GetLibraryItemsLibraryOptimizedForStreaming> optimizedForStreaming = Optional.empty();
- 
+
         private Optional<? extends GetLibraryItemsHasThumbnail> hasThumbnail;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Indicates if the part is accessible.
@@ -641,6 +654,7 @@ public class GetLibraryItemsPart {
             return this;
         }
 
+
         /**
          * Indicates if the part exists.
          */
@@ -659,6 +673,7 @@ public class GetLibraryItemsPart {
             return this;
         }
 
+
         /**
          * Unique part identifier.
          */
@@ -667,6 +682,7 @@ public class GetLibraryItemsPart {
             this.id = id;
             return this;
         }
+
 
         /**
          * Key to access this part.
@@ -686,6 +702,7 @@ public class GetLibraryItemsPart {
             return this;
         }
 
+
         public Builder indexes(String indexes) {
             Utils.checkNotNull(indexes, "indexes");
             this.indexes = Optional.ofNullable(indexes);
@@ -697,6 +714,7 @@ public class GetLibraryItemsPart {
             this.indexes = indexes;
             return this;
         }
+
 
         /**
          * Duration of the part in milliseconds.
@@ -716,6 +734,7 @@ public class GetLibraryItemsPart {
             return this;
         }
 
+
         /**
          * File path for the part.
          */
@@ -733,6 +752,7 @@ public class GetLibraryItemsPart {
             this.file = file;
             return this;
         }
+
 
         /**
          * File size in bytes.
@@ -752,6 +772,7 @@ public class GetLibraryItemsPart {
             return this;
         }
 
+
         public Builder packetLength(int packetLength) {
             Utils.checkNotNull(packetLength, "packetLength");
             this.packetLength = Optional.ofNullable(packetLength);
@@ -763,6 +784,7 @@ public class GetLibraryItemsPart {
             this.packetLength = packetLength;
             return this;
         }
+
 
         /**
          * Container format of the part.
@@ -782,6 +804,7 @@ public class GetLibraryItemsPart {
             return this;
         }
 
+
         /**
          * Video profile for the part.
          */
@@ -799,6 +822,7 @@ public class GetLibraryItemsPart {
             this.videoProfile = videoProfile;
             return this;
         }
+
 
         /**
          * The audio profile used for the media (e.g., DTS, Dolby Digital, etc.).
@@ -818,6 +842,7 @@ public class GetLibraryItemsPart {
             return this;
         }
 
+
         public Builder has64bitOffsets(boolean has64bitOffsets) {
             Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
             this.has64bitOffsets = Optional.ofNullable(has64bitOffsets);
@@ -829,6 +854,7 @@ public class GetLibraryItemsPart {
             this.has64bitOffsets = has64bitOffsets;
             return this;
         }
+
 
         /**
          * Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
@@ -848,6 +874,7 @@ public class GetLibraryItemsPart {
             return this;
         }
 
+
         public Builder hasThumbnail(GetLibraryItemsHasThumbnail hasThumbnail) {
             Utils.checkNotNull(hasThumbnail, "hasThumbnail");
             this.hasThumbnail = Optional.ofNullable(hasThumbnail);
@@ -859,28 +886,20 @@ public class GetLibraryItemsPart {
             this.hasThumbnail = hasThumbnail;
             return this;
         }
-        
+
         public GetLibraryItemsPart build() {
             if (hasThumbnail == null) {
                 hasThumbnail = _SINGLETON_VALUE_HasThumbnail.value();
             }
+
             return new GetLibraryItemsPart(
-                accessible,
-                exists,
-                id,
-                key,
-                indexes,
-                duration,
-                file,
-                size,
-                packetLength,
-                container,
-                videoProfile,
-                audioProfile,
-                has64bitOffsets,
-                optimizedForStreaming,
-                hasThumbnail);
+                accessible, exists, id,
+                key, indexes, duration,
+                file, size, packetLength,
+                container, videoProfile, audioProfile,
+                has64bitOffsets, optimizedForStreaming, hasThumbnail);
         }
+
 
         private static final LazySingletonValue<Optional<? extends GetLibraryItemsHasThumbnail>> _SINGLETON_VALUE_HasThumbnail =
                 new LazySingletonValue<>(

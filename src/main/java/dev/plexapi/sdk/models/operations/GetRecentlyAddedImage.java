@@ -9,15 +9,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetRecentlyAddedImage {
 
     @JsonProperty("alt")
     private String alt;
 
+
     @JsonProperty("type")
     private GetRecentlyAddedHubsResponseType type;
+
 
     @JsonProperty("url")
     private String url;
@@ -50,9 +52,10 @@ public class GetRecentlyAddedImage {
         return url;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetRecentlyAddedImage withAlt(String alt) {
         Utils.checkNotNull(alt, "alt");
@@ -72,7 +75,6 @@ public class GetRecentlyAddedImage {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -83,17 +85,15 @@ public class GetRecentlyAddedImage {
         }
         GetRecentlyAddedImage other = (GetRecentlyAddedImage) o;
         return 
-            Objects.deepEquals(this.alt, other.alt) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.url, other.url);
+            Utils.enhancedDeepEquals(this.alt, other.alt) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.url, other.url);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            alt,
-            type,
-            url);
+        return Utils.enhancedHash(
+            alt, type, url);
     }
     
     @Override
@@ -103,18 +103,20 @@ public class GetRecentlyAddedImage {
                 "type", type,
                 "url", url);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String alt;
- 
+
         private GetRecentlyAddedHubsResponseType type;
- 
+
         private String url;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder alt(String alt) {
             Utils.checkNotNull(alt, "alt");
@@ -122,23 +124,25 @@ public class GetRecentlyAddedImage {
             return this;
         }
 
+
         public Builder type(GetRecentlyAddedHubsResponseType type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
         }
 
+
         public Builder url(String url) {
             Utils.checkNotNull(url, "url");
             this.url = url;
             return this;
         }
-        
+
         public GetRecentlyAddedImage build() {
+
             return new GetRecentlyAddedImage(
-                alt,
-                type,
-                url);
+                alt, type, url);
         }
+
     }
 }

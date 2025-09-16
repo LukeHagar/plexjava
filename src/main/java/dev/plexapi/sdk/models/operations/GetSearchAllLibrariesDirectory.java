@@ -14,11 +14,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetSearchAllLibrariesDirectory {
 
+public class GetSearchAllLibrariesDirectory {
     /**
      * The unique identifier path for the search result item.
      */
@@ -43,6 +42,7 @@ public class GetSearchAllLibrariesDirectory {
     @JsonProperty("librarySectionTitle")
     private String librarySectionTitle;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionType")
     private Optional<Long> librarySectionType;
@@ -53,6 +53,7 @@ public class GetSearchAllLibrariesDirectory {
     @JsonProperty("type")
     private String type;
 
+
     @JsonProperty("id")
     private long id;
 
@@ -62,6 +63,7 @@ public class GetSearchAllLibrariesDirectory {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("filter")
     private Optional<String> filter;
+
 
     @JsonProperty("tag")
     private String tag;
@@ -141,7 +143,10 @@ public class GetSearchAllLibrariesDirectory {
             String type,
             long id,
             String tag) {
-        this(key, librarySectionID, librarySectionKey, librarySectionTitle, type, id, Optional.empty(), tag, Optional.empty(), Optional.empty(), Optional.empty());
+        this(key, librarySectionID, librarySectionKey,
+            librarySectionTitle, type, id,
+            Optional.empty(), tag, Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -239,9 +244,10 @@ public class GetSearchAllLibrariesDirectory {
         return count;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The unique identifier path for the search result item.
@@ -303,6 +309,7 @@ public class GetSearchAllLibrariesDirectory {
         return this;
     }
 
+
     /**
      * The filter string used to query this specific item in the library.
      */
@@ -327,6 +334,7 @@ public class GetSearchAllLibrariesDirectory {
         return this;
     }
 
+
     /**
      * The unique identifier for the tag associated with this search result.
      */
@@ -344,6 +352,7 @@ public class GetSearchAllLibrariesDirectory {
         this.thumb = Optional.ofNullable(thumb);
         return this;
     }
+
 
     /**
      * The URL to the thumbnail image associated with this search result.
@@ -363,6 +372,7 @@ public class GetSearchAllLibrariesDirectory {
         return this;
     }
 
+
     /**
      * The number of items associated with this search result.
      */
@@ -372,7 +382,6 @@ public class GetSearchAllLibrariesDirectory {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -383,36 +392,28 @@ public class GetSearchAllLibrariesDirectory {
         }
         GetSearchAllLibrariesDirectory other = (GetSearchAllLibrariesDirectory) o;
         return 
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
-            Objects.deepEquals(this.librarySectionKey, other.librarySectionKey) &&
-            Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
-            Objects.deepEquals(this.librarySectionType, other.librarySectionType) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.tag, other.tag) &&
-            Objects.deepEquals(this.tagType, other.tagType) &&
-            Objects.deepEquals(this.tagKey, other.tagKey) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.count, other.count);
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.librarySectionID, other.librarySectionID) &&
+            Utils.enhancedDeepEquals(this.librarySectionKey, other.librarySectionKey) &&
+            Utils.enhancedDeepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
+            Utils.enhancedDeepEquals(this.librarySectionType, other.librarySectionType) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.filter, other.filter) &&
+            Utils.enhancedDeepEquals(this.tag, other.tag) &&
+            Utils.enhancedDeepEquals(this.tagType, other.tagType) &&
+            Utils.enhancedDeepEquals(this.tagKey, other.tagKey) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.count, other.count);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            key,
-            librarySectionID,
-            librarySectionKey,
-            librarySectionTitle,
-            librarySectionType,
-            type,
-            id,
-            filter,
-            tag,
-            tagType,
-            tagKey,
-            thumb,
+        return Utils.enhancedHash(
+            key, librarySectionID, librarySectionKey,
+            librarySectionTitle, librarySectionType, type,
+            id, filter, tag,
+            tagType, tagKey, thumb,
             count);
     }
     
@@ -433,34 +434,36 @@ public class GetSearchAllLibrariesDirectory {
                 "thumb", thumb,
                 "count", count);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String key;
- 
+
         private Long librarySectionID;
- 
+
         private String librarySectionKey;
- 
+
         private String librarySectionTitle;
- 
+
         private String type;
- 
+
         private Long id;
- 
+
         private Optional<String> filter = Optional.empty();
- 
+
         private String tag;
- 
+
         private Optional<String> tagKey = Optional.empty();
- 
+
         private Optional<String> thumb = Optional.empty();
- 
+
         private Optional<Long> count = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The unique identifier path for the search result item.
@@ -471,6 +474,7 @@ public class GetSearchAllLibrariesDirectory {
             return this;
         }
 
+
         /**
          * The identifier for the library section.
          */
@@ -479,6 +483,7 @@ public class GetSearchAllLibrariesDirectory {
             this.librarySectionID = librarySectionID;
             return this;
         }
+
 
         /**
          * The key corresponding to the library section.
@@ -489,6 +494,7 @@ public class GetSearchAllLibrariesDirectory {
             return this;
         }
 
+
         /**
          * The title of the library section.
          */
@@ -497,6 +503,7 @@ public class GetSearchAllLibrariesDirectory {
             this.librarySectionTitle = librarySectionTitle;
             return this;
         }
+
 
         /**
          * The type of the directory.
@@ -507,11 +514,13 @@ public class GetSearchAllLibrariesDirectory {
             return this;
         }
 
+
         public Builder id(long id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;
         }
+
 
         /**
          * The filter string used to query this specific item in the library.
@@ -531,11 +540,13 @@ public class GetSearchAllLibrariesDirectory {
             return this;
         }
 
+
         public Builder tag(String tag) {
             Utils.checkNotNull(tag, "tag");
             this.tag = tag;
             return this;
         }
+
 
         /**
          * The unique identifier for the tag associated with this search result.
@@ -555,6 +566,7 @@ public class GetSearchAllLibrariesDirectory {
             return this;
         }
 
+
         /**
          * The URL to the thumbnail image associated with this search result.
          */
@@ -573,6 +585,7 @@ public class GetSearchAllLibrariesDirectory {
             return this;
         }
 
+
         /**
          * The number of items associated with this search result.
          */
@@ -590,21 +603,16 @@ public class GetSearchAllLibrariesDirectory {
             this.count = count;
             return this;
         }
-        
+
         public GetSearchAllLibrariesDirectory build() {
+
             return new GetSearchAllLibrariesDirectory(
-                key,
-                librarySectionID,
-                librarySectionKey,
-                librarySectionTitle,
-                type,
-                id,
-                filter,
-                tag,
-                tagKey,
-                thumb,
-                count);
+                key, librarySectionID, librarySectionKey,
+                librarySectionTitle, type, id,
+                filter, tag, tagKey,
+                thumb, count);
         }
+
 
         private static final LazySingletonValue<Optional<Long>> _SINGLETON_VALUE_LibrarySectionType =
                 new LazySingletonValue<>(

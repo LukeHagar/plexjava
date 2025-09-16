@@ -17,11 +17,10 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-public class Media {
 
+public class Media {
     /**
      * Unique media identifier.
      */
@@ -69,6 +68,7 @@ public class Media {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioChannels")
     private Optional<Integer> audioChannels;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("displayOffset")
@@ -136,6 +136,7 @@ public class Media {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("optimizedForStreaming")
     private Optional<? extends OptimizedForStreaming> optimizedForStreaming;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("has64bitOffsets")
@@ -211,7 +212,13 @@ public class Media {
     
     public Media(
             long id) {
-        this(id, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(id, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -362,9 +369,10 @@ public class Media {
         return (Optional<List<Part>>) part;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Unique media identifier.
@@ -384,6 +392,7 @@ public class Media {
         return this;
     }
 
+
     /**
      * Duration of the media in milliseconds.
      */
@@ -401,6 +410,7 @@ public class Media {
         this.bitrate = Optional.ofNullable(bitrate);
         return this;
     }
+
 
     /**
      * Bitrate in bits per second.
@@ -420,6 +430,7 @@ public class Media {
         return this;
     }
 
+
     /**
      * Video width in pixels.
      */
@@ -437,6 +448,7 @@ public class Media {
         this.height = Optional.ofNullable(height);
         return this;
     }
+
 
     /**
      * Video height in pixels.
@@ -456,6 +468,7 @@ public class Media {
         return this;
     }
 
+
     /**
      * Aspect ratio of the video.
      */
@@ -474,6 +487,7 @@ public class Media {
         return this;
     }
 
+
     /**
      * Number of audio channels.
      */
@@ -489,6 +503,7 @@ public class Media {
         return this;
     }
 
+
     public Media withDisplayOffset(Optional<Integer> displayOffset) {
         Utils.checkNotNull(displayOffset, "displayOffset");
         this.displayOffset = displayOffset;
@@ -503,6 +518,7 @@ public class Media {
         this.audioCodec = Optional.ofNullable(audioCodec);
         return this;
     }
+
 
     /**
      * Audio codec used.
@@ -522,6 +538,7 @@ public class Media {
         return this;
     }
 
+
     /**
      * Video codec used.
      */
@@ -539,6 +556,7 @@ public class Media {
         this.videoResolution = Optional.ofNullable(videoResolution);
         return this;
     }
+
 
     /**
      * Video resolution (e.g., 4k).
@@ -558,6 +576,7 @@ public class Media {
         return this;
     }
 
+
     /**
      * File container type.
      */
@@ -575,6 +594,7 @@ public class Media {
         this.videoFrameRate = Optional.ofNullable(videoFrameRate);
         return this;
     }
+
 
     /**
      * Frame rate of the video. Values found include NTSC, PAL, 24p
@@ -594,6 +614,7 @@ public class Media {
         return this;
     }
 
+
     /**
      * Video profile (e.g., main 10).
      */
@@ -611,6 +632,7 @@ public class Media {
         this.hasVoiceActivity = Optional.ofNullable(hasVoiceActivity);
         return this;
     }
+
 
     /**
      * Indicates whether voice activity is detected.
@@ -630,6 +652,7 @@ public class Media {
         return this;
     }
 
+
     /**
      * The audio profile used for the media (e.g., DTS, Dolby Digital, etc.).
      */
@@ -648,6 +671,7 @@ public class Media {
         return this;
     }
 
+
     /**
      * Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
      */
@@ -662,6 +686,7 @@ public class Media {
         this.has64bitOffsets = Optional.ofNullable(has64bitOffsets);
         return this;
     }
+
 
     public Media withHas64bitOffsets(Optional<Boolean> has64bitOffsets) {
         Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
@@ -678,6 +703,7 @@ public class Media {
         return this;
     }
 
+
     /**
      * An array of parts for this media item.
      */
@@ -687,7 +713,6 @@ public class Media {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -698,48 +723,36 @@ public class Media {
         }
         Media other = (Media) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.bitrate, other.bitrate) &&
-            Objects.deepEquals(this.width, other.width) &&
-            Objects.deepEquals(this.height, other.height) &&
-            Objects.deepEquals(this.aspectRatio, other.aspectRatio) &&
-            Objects.deepEquals(this.audioChannels, other.audioChannels) &&
-            Objects.deepEquals(this.displayOffset, other.displayOffset) &&
-            Objects.deepEquals(this.audioCodec, other.audioCodec) &&
-            Objects.deepEquals(this.videoCodec, other.videoCodec) &&
-            Objects.deepEquals(this.videoResolution, other.videoResolution) &&
-            Objects.deepEquals(this.container, other.container) &&
-            Objects.deepEquals(this.videoFrameRate, other.videoFrameRate) &&
-            Objects.deepEquals(this.videoProfile, other.videoProfile) &&
-            Objects.deepEquals(this.hasVoiceActivity, other.hasVoiceActivity) &&
-            Objects.deepEquals(this.audioProfile, other.audioProfile) &&
-            Objects.deepEquals(this.optimizedForStreaming, other.optimizedForStreaming) &&
-            Objects.deepEquals(this.has64bitOffsets, other.has64bitOffsets) &&
-            Objects.deepEquals(this.part, other.part);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.bitrate, other.bitrate) &&
+            Utils.enhancedDeepEquals(this.width, other.width) &&
+            Utils.enhancedDeepEquals(this.height, other.height) &&
+            Utils.enhancedDeepEquals(this.aspectRatio, other.aspectRatio) &&
+            Utils.enhancedDeepEquals(this.audioChannels, other.audioChannels) &&
+            Utils.enhancedDeepEquals(this.displayOffset, other.displayOffset) &&
+            Utils.enhancedDeepEquals(this.audioCodec, other.audioCodec) &&
+            Utils.enhancedDeepEquals(this.videoCodec, other.videoCodec) &&
+            Utils.enhancedDeepEquals(this.videoResolution, other.videoResolution) &&
+            Utils.enhancedDeepEquals(this.container, other.container) &&
+            Utils.enhancedDeepEquals(this.videoFrameRate, other.videoFrameRate) &&
+            Utils.enhancedDeepEquals(this.videoProfile, other.videoProfile) &&
+            Utils.enhancedDeepEquals(this.hasVoiceActivity, other.hasVoiceActivity) &&
+            Utils.enhancedDeepEquals(this.audioProfile, other.audioProfile) &&
+            Utils.enhancedDeepEquals(this.optimizedForStreaming, other.optimizedForStreaming) &&
+            Utils.enhancedDeepEquals(this.has64bitOffsets, other.has64bitOffsets) &&
+            Utils.enhancedDeepEquals(this.part, other.part);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            duration,
-            bitrate,
-            width,
-            height,
-            aspectRatio,
-            audioChannels,
-            displayOffset,
-            audioCodec,
-            videoCodec,
-            videoResolution,
-            container,
-            videoFrameRate,
-            videoProfile,
-            hasVoiceActivity,
-            audioProfile,
-            optimizedForStreaming,
-            has64bitOffsets,
+        return Utils.enhancedHash(
+            id, duration, bitrate,
+            width, height, aspectRatio,
+            audioChannels, displayOffset, audioCodec,
+            videoCodec, videoResolution, container,
+            videoFrameRate, videoProfile, hasVoiceActivity,
+            audioProfile, optimizedForStreaming, has64bitOffsets,
             part);
     }
     
@@ -766,50 +779,52 @@ public class Media {
                 "has64bitOffsets", has64bitOffsets,
                 "part", part);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Long id;
- 
+
         private Optional<Integer> duration = Optional.empty();
- 
+
         private Optional<Integer> bitrate = Optional.empty();
- 
+
         private Optional<Integer> width = Optional.empty();
- 
+
         private Optional<Integer> height = Optional.empty();
- 
+
         private Optional<Float> aspectRatio = Optional.empty();
- 
+
         private Optional<Integer> audioChannels = Optional.empty();
- 
+
         private Optional<Integer> displayOffset = Optional.empty();
- 
+
         private Optional<String> audioCodec = Optional.empty();
- 
+
         private Optional<String> videoCodec = Optional.empty();
- 
+
         private Optional<String> videoResolution = Optional.empty();
- 
+
         private Optional<String> container = Optional.empty();
- 
+
         private Optional<String> videoFrameRate = Optional.empty();
- 
+
         private Optional<String> videoProfile = Optional.empty();
- 
+
         private Optional<Boolean> hasVoiceActivity = Optional.empty();
- 
+
         private Optional<String> audioProfile = Optional.empty();
- 
+
         private Optional<? extends OptimizedForStreaming> optimizedForStreaming = Optional.empty();
- 
+
         private Optional<Boolean> has64bitOffsets = Optional.empty();
- 
+
         private Optional<? extends List<Part>> part = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Unique media identifier.
@@ -819,6 +834,7 @@ public class Media {
             this.id = id;
             return this;
         }
+
 
         /**
          * Duration of the media in milliseconds.
@@ -838,6 +854,7 @@ public class Media {
             return this;
         }
 
+
         /**
          * Bitrate in bits per second.
          */
@@ -855,6 +872,7 @@ public class Media {
             this.bitrate = bitrate;
             return this;
         }
+
 
         /**
          * Video width in pixels.
@@ -874,6 +892,7 @@ public class Media {
             return this;
         }
 
+
         /**
          * Video height in pixels.
          */
@@ -891,6 +910,7 @@ public class Media {
             this.height = height;
             return this;
         }
+
 
         /**
          * Aspect ratio of the video.
@@ -910,6 +930,7 @@ public class Media {
             return this;
         }
 
+
         /**
          * Number of audio channels.
          */
@@ -928,6 +949,7 @@ public class Media {
             return this;
         }
 
+
         public Builder displayOffset(int displayOffset) {
             Utils.checkNotNull(displayOffset, "displayOffset");
             this.displayOffset = Optional.ofNullable(displayOffset);
@@ -939,6 +961,7 @@ public class Media {
             this.displayOffset = displayOffset;
             return this;
         }
+
 
         /**
          * Audio codec used.
@@ -958,6 +981,7 @@ public class Media {
             return this;
         }
 
+
         /**
          * Video codec used.
          */
@@ -975,6 +999,7 @@ public class Media {
             this.videoCodec = videoCodec;
             return this;
         }
+
 
         /**
          * Video resolution (e.g., 4k).
@@ -994,6 +1019,7 @@ public class Media {
             return this;
         }
 
+
         /**
          * File container type.
          */
@@ -1011,6 +1037,7 @@ public class Media {
             this.container = container;
             return this;
         }
+
 
         /**
          * Frame rate of the video. Values found include NTSC, PAL, 24p
@@ -1030,6 +1057,7 @@ public class Media {
             return this;
         }
 
+
         /**
          * Video profile (e.g., main 10).
          */
@@ -1047,6 +1075,7 @@ public class Media {
             this.videoProfile = videoProfile;
             return this;
         }
+
 
         /**
          * Indicates whether voice activity is detected.
@@ -1066,6 +1095,7 @@ public class Media {
             return this;
         }
 
+
         /**
          * The audio profile used for the media (e.g., DTS, Dolby Digital, etc.).
          */
@@ -1083,6 +1113,7 @@ public class Media {
             this.audioProfile = audioProfile;
             return this;
         }
+
 
         /**
          * Has this media been optimized for streaming. NOTE: This can be 0, 1, false or true
@@ -1102,6 +1133,7 @@ public class Media {
             return this;
         }
 
+
         public Builder has64bitOffsets(boolean has64bitOffsets) {
             Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
             this.has64bitOffsets = Optional.ofNullable(has64bitOffsets);
@@ -1113,6 +1145,7 @@ public class Media {
             this.has64bitOffsets = has64bitOffsets;
             return this;
         }
+
 
         /**
          * An array of parts for this media item.
@@ -1131,28 +1164,18 @@ public class Media {
             this.part = part;
             return this;
         }
-        
+
         public Media build() {
+
             return new Media(
-                id,
-                duration,
-                bitrate,
-                width,
-                height,
-                aspectRatio,
-                audioChannels,
-                displayOffset,
-                audioCodec,
-                videoCodec,
-                videoResolution,
-                container,
-                videoFrameRate,
-                videoProfile,
-                hasVoiceActivity,
-                audioProfile,
-                optimizedForStreaming,
-                has64bitOffsets,
+                id, duration, bitrate,
+                width, height, aspectRatio,
+                audioChannels, displayOffset, audioCodec,
+                videoCodec, videoResolution, container,
+                videoFrameRate, videoProfile, hasVoiceActivity,
+                audioProfile, optimizedForStreaming, has64bitOffsets,
                 part);
         }
+
     }
 }

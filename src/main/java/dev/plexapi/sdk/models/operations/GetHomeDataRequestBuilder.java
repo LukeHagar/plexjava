@@ -3,18 +3,25 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetHomeData;
 import java.lang.Exception;
 
 public class GetHomeDataRequestBuilder {
 
-    private final SDKMethodInterfaces.MethodCallGetHomeData sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetHomeDataRequestBuilder(SDKMethodInterfaces.MethodCallGetHomeData sdk) {
-        this.sdk = sdk;
+    public GetHomeDataRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetHomeDataResponse call() throws Exception {
+        
+        RequestlessOperation<GetHomeDataResponse> operation
+            = new GetHomeData.Sync(sdkConfiguration);
 
-        return sdk.getHomeDataDirect();
+        return operation.handleResponse(operation.doRequest());
     }
 }

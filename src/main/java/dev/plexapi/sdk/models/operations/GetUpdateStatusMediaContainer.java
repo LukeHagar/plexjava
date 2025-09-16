@@ -15,8 +15,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetUpdateStatusMediaContainer {
 
@@ -24,21 +24,26 @@ public class GetUpdateStatusMediaContainer {
     @JsonProperty("size")
     private Optional<Integer> size;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("canInstall")
     private Optional<Boolean> canInstall;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("checkedAt")
     private Optional<Integer> checkedAt;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("downloadURL")
     private Optional<String> downloadURL;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("status")
     private Optional<Integer> status;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Release")
@@ -67,7 +72,8 @@ public class GetUpdateStatusMediaContainer {
     }
     
     public GetUpdateStatusMediaContainer() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -101,15 +107,17 @@ public class GetUpdateStatusMediaContainer {
         return (Optional<List<Release>>) release;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetUpdateStatusMediaContainer withSize(int size) {
         Utils.checkNotNull(size, "size");
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetUpdateStatusMediaContainer withSize(Optional<Integer> size) {
         Utils.checkNotNull(size, "size");
@@ -123,6 +131,7 @@ public class GetUpdateStatusMediaContainer {
         return this;
     }
 
+
     public GetUpdateStatusMediaContainer withCanInstall(Optional<Boolean> canInstall) {
         Utils.checkNotNull(canInstall, "canInstall");
         this.canInstall = canInstall;
@@ -134,6 +143,7 @@ public class GetUpdateStatusMediaContainer {
         this.checkedAt = Optional.ofNullable(checkedAt);
         return this;
     }
+
 
     public GetUpdateStatusMediaContainer withCheckedAt(Optional<Integer> checkedAt) {
         Utils.checkNotNull(checkedAt, "checkedAt");
@@ -147,6 +157,7 @@ public class GetUpdateStatusMediaContainer {
         return this;
     }
 
+
     public GetUpdateStatusMediaContainer withDownloadURL(Optional<String> downloadURL) {
         Utils.checkNotNull(downloadURL, "downloadURL");
         this.downloadURL = downloadURL;
@@ -158,6 +169,7 @@ public class GetUpdateStatusMediaContainer {
         this.status = Optional.ofNullable(status);
         return this;
     }
+
 
     public GetUpdateStatusMediaContainer withStatus(Optional<Integer> status) {
         Utils.checkNotNull(status, "status");
@@ -171,13 +183,13 @@ public class GetUpdateStatusMediaContainer {
         return this;
     }
 
+
     public GetUpdateStatusMediaContainer withRelease(Optional<? extends List<Release>> release) {
         Utils.checkNotNull(release, "release");
         this.release = release;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -188,23 +200,19 @@ public class GetUpdateStatusMediaContainer {
         }
         GetUpdateStatusMediaContainer other = (GetUpdateStatusMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.canInstall, other.canInstall) &&
-            Objects.deepEquals(this.checkedAt, other.checkedAt) &&
-            Objects.deepEquals(this.downloadURL, other.downloadURL) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.release, other.release);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.canInstall, other.canInstall) &&
+            Utils.enhancedDeepEquals(this.checkedAt, other.checkedAt) &&
+            Utils.enhancedDeepEquals(this.downloadURL, other.downloadURL) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.release, other.release);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            canInstall,
-            checkedAt,
-            downloadURL,
-            status,
-            release);
+        return Utils.enhancedHash(
+            size, canInstall, checkedAt,
+            downloadURL, status, release);
     }
     
     @Override
@@ -217,24 +225,26 @@ public class GetUpdateStatusMediaContainer {
                 "status", status,
                 "release", release);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> size = Optional.empty();
- 
+
         private Optional<Boolean> canInstall = Optional.empty();
- 
+
         private Optional<Integer> checkedAt = Optional.empty();
- 
+
         private Optional<String> downloadURL = Optional.empty();
- 
+
         private Optional<Integer> status = Optional.empty();
- 
+
         private Optional<? extends List<Release>> release = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder size(int size) {
             Utils.checkNotNull(size, "size");
@@ -248,6 +258,7 @@ public class GetUpdateStatusMediaContainer {
             return this;
         }
 
+
         public Builder canInstall(boolean canInstall) {
             Utils.checkNotNull(canInstall, "canInstall");
             this.canInstall = Optional.ofNullable(canInstall);
@@ -259,6 +270,7 @@ public class GetUpdateStatusMediaContainer {
             this.canInstall = canInstall;
             return this;
         }
+
 
         public Builder checkedAt(int checkedAt) {
             Utils.checkNotNull(checkedAt, "checkedAt");
@@ -272,6 +284,7 @@ public class GetUpdateStatusMediaContainer {
             return this;
         }
 
+
         public Builder downloadURL(String downloadURL) {
             Utils.checkNotNull(downloadURL, "downloadURL");
             this.downloadURL = Optional.ofNullable(downloadURL);
@@ -283,6 +296,7 @@ public class GetUpdateStatusMediaContainer {
             this.downloadURL = downloadURL;
             return this;
         }
+
 
         public Builder status(int status) {
             Utils.checkNotNull(status, "status");
@@ -296,6 +310,7 @@ public class GetUpdateStatusMediaContainer {
             return this;
         }
 
+
         public Builder release(List<Release> release) {
             Utils.checkNotNull(release, "release");
             this.release = Optional.ofNullable(release);
@@ -307,15 +322,13 @@ public class GetUpdateStatusMediaContainer {
             this.release = release;
             return this;
         }
-        
+
         public GetUpdateStatusMediaContainer build() {
+
             return new GetUpdateStatusMediaContainer(
-                size,
-                canInstall,
-                checkedAt,
-                downloadURL,
-                status,
-                release);
+                size, canInstall, checkedAt,
+                downloadURL, status, release);
         }
+
     }
 }

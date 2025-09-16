@@ -10,11 +10,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class CreatePlaylistRequest {
 
+public class CreatePlaylistRequest {
     /**
      * name of the playlist
      */
@@ -69,7 +68,8 @@ public class CreatePlaylistRequest {
             CreatePlaylistQueryParamType type,
             Smart smart,
             String uri) {
-        this(title, type, smart, uri, Optional.empty());
+        this(title, type, smart,
+            uri, Optional.empty());
     }
 
     /**
@@ -112,9 +112,10 @@ public class CreatePlaylistRequest {
         return playQueueID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * name of the playlist
@@ -161,6 +162,7 @@ public class CreatePlaylistRequest {
         return this;
     }
 
+
     /**
      * the play queue to copy to a playlist
      */
@@ -170,7 +172,6 @@ public class CreatePlaylistRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -181,21 +182,18 @@ public class CreatePlaylistRequest {
         }
         CreatePlaylistRequest other = (CreatePlaylistRequest) o;
         return 
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.smart, other.smart) &&
-            Objects.deepEquals(this.uri, other.uri) &&
-            Objects.deepEquals(this.playQueueID, other.playQueueID);
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.smart, other.smart) &&
+            Utils.enhancedDeepEquals(this.uri, other.uri) &&
+            Utils.enhancedDeepEquals(this.playQueueID, other.playQueueID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            title,
-            type,
-            smart,
-            uri,
-            playQueueID);
+        return Utils.enhancedHash(
+            title, type, smart,
+            uri, playQueueID);
     }
     
     @Override
@@ -207,22 +205,24 @@ public class CreatePlaylistRequest {
                 "uri", uri,
                 "playQueueID", playQueueID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String title;
- 
+
         private CreatePlaylistQueryParamType type;
- 
+
         private Smart smart;
- 
+
         private String uri;
- 
+
         private Optional<Double> playQueueID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * name of the playlist
@@ -233,6 +233,7 @@ public class CreatePlaylistRequest {
             return this;
         }
 
+
         /**
          * type of playlist to create
          */
@@ -241,6 +242,7 @@ public class CreatePlaylistRequest {
             this.type = type;
             return this;
         }
+
 
         /**
          * whether the playlist is smart or not
@@ -251,6 +253,7 @@ public class CreatePlaylistRequest {
             return this;
         }
 
+
         /**
          * the content URI for the playlist
          */
@@ -259,6 +262,7 @@ public class CreatePlaylistRequest {
             this.uri = uri;
             return this;
         }
+
 
         /**
          * the play queue to copy to a playlist
@@ -277,14 +281,13 @@ public class CreatePlaylistRequest {
             this.playQueueID = playQueueID;
             return this;
         }
-        
+
         public CreatePlaylistRequest build() {
+
             return new CreatePlaylistRequest(
-                title,
-                type,
-                smart,
-                uri,
-                playQueueID);
+                title, type, smart,
+                uri, playQueueID);
         }
+
     }
 }

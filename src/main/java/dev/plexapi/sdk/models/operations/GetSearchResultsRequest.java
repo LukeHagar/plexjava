@@ -9,10 +9,9 @@ import dev.plexapi.sdk.utils.SpeakeasyMetadata;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetSearchResultsRequest {
-
     /**
      * The search query string to use
      */
@@ -34,9 +33,10 @@ public class GetSearchResultsRequest {
         return query;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The search query string to use
@@ -47,7 +47,6 @@ public class GetSearchResultsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -58,12 +57,12 @@ public class GetSearchResultsRequest {
         }
         GetSearchResultsRequest other = (GetSearchResultsRequest) o;
         return 
-            Objects.deepEquals(this.query, other.query);
+            Utils.enhancedDeepEquals(this.query, other.query);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             query);
     }
     
@@ -72,14 +71,16 @@ public class GetSearchResultsRequest {
         return Utils.toString(GetSearchResultsRequest.class,
                 "query", query);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String query;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The search query string to use
@@ -89,10 +90,12 @@ public class GetSearchResultsRequest {
             this.query = query;
             return this;
         }
-        
+
         public GetSearchResultsRequest build() {
+
             return new GetSearchResultsRequest(
                 query);
         }
+
     }
 }

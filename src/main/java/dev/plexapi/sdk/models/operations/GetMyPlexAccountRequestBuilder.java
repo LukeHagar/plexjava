@@ -3,18 +3,25 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetMyPlexAccount;
 import java.lang.Exception;
 
 public class GetMyPlexAccountRequestBuilder {
 
-    private final SDKMethodInterfaces.MethodCallGetMyPlexAccount sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetMyPlexAccountRequestBuilder(SDKMethodInterfaces.MethodCallGetMyPlexAccount sdk) {
-        this.sdk = sdk;
+    public GetMyPlexAccountRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetMyPlexAccountResponse call() throws Exception {
+        
+        RequestlessOperation<GetMyPlexAccountResponse> operation
+            = new GetMyPlexAccount.Sync(sdkConfiguration);
 
-        return sdk.getMyPlexAccountDirect();
+        return operation.handleResponse(operation.doRequest());
     }
 }

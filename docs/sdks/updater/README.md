@@ -19,6 +19,7 @@ Querying status of updates
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getUpdateStatus" method="get" path="/updater/status" -->
 ```java
 package hello.world;
 
@@ -33,7 +34,7 @@ public class Application {
     public static void main(String[] args) throws GetUpdateStatusBadRequest, GetUpdateStatusUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetUpdateStatusResponse res = sdk.updater().getUpdateStatus()
@@ -64,6 +65,7 @@ Checking for updates
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="checkForUpdates" method="put" path="/updater/check" -->
 ```java
 package hello.world;
 
@@ -79,7 +81,7 @@ public class Application {
     public static void main(String[] args) throws CheckForUpdatesBadRequest, CheckForUpdatesUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         CheckForUpdatesResponse res = sdk.updater().checkForUpdates()
@@ -116,6 +118,7 @@ Note that these two parameters are effectively mutually exclusive. The `tonight`
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="applyUpdates" method="put" path="/updater/apply" -->
 ```java
 package hello.world;
 
@@ -130,7 +133,7 @@ public class Application {
     public static void main(String[] args) throws ApplyUpdatesBadRequest, ApplyUpdatesUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         ApplyUpdatesResponse res = sdk.updater().applyUpdates()

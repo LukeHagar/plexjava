@@ -24,6 +24,7 @@ Get Server Capabilities
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getServerCapabilities" method="get" path="/" -->
 ```java
 package hello.world;
 
@@ -38,7 +39,7 @@ public class Application {
     public static void main(String[] args) throws GetServerCapabilitiesBadRequest, GetServerCapabilitiesUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
@@ -69,6 +70,7 @@ Get Server Preferences
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getServerPreferences" method="get" path="/:/prefs" -->
 ```java
 package hello.world;
 
@@ -83,7 +85,7 @@ public class Application {
     public static void main(String[] args) throws GetServerPreferencesBadRequest, GetServerPreferencesUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetServerPreferencesResponse res = sdk.server().getServerPreferences()
@@ -114,6 +116,7 @@ Get Available Clients
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getAvailableClients" method="get" path="/clients" -->
 ```java
 package hello.world;
 
@@ -128,7 +131,7 @@ public class Application {
     public static void main(String[] args) throws GetAvailableClientsBadRequest, GetAvailableClientsUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetAvailableClientsResponse res = sdk.server().getAvailableClients()
@@ -159,6 +162,7 @@ Get Devices
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getDevices" method="get" path="/devices" -->
 ```java
 package hello.world;
 
@@ -173,7 +177,7 @@ public class Application {
     public static void main(String[] args) throws GetDevicesBadRequest, GetDevicesUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetDevicesResponse res = sdk.server().getDevices()
@@ -204,6 +208,7 @@ This request is useful to determine if the server is online or offline
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-server-identity" method="get" path="/identity" -->
 ```java
 package hello.world;
 
@@ -246,6 +251,7 @@ Returns MyPlex Account Information
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getMyPlexAccount" method="get" path="/myplex/account" -->
 ```java
 package hello.world;
 
@@ -260,7 +266,7 @@ public class Application {
     public static void main(String[] args) throws GetMyPlexAccountBadRequest, GetMyPlexAccountUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetMyPlexAccountResponse res = sdk.server().getMyPlexAccount()
@@ -292,6 +298,7 @@ Plex's Photo transcoder is used throughout the service to serve images at specif
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getResizedPhoto" method="get" path="/photo/:/transcode" -->
 ```java
 package hello.world;
 
@@ -306,14 +313,14 @@ public class Application {
     public static void main(String[] args) throws GetResizedPhotoBadRequest, GetResizedPhotoUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetResizedPhotoRequest req = GetResizedPhotoRequest.builder()
-                .width(110)
-                .height(165)
+                .width(110d)
+                .height(165d)
                 .opacity(100L)
-                .blur(0)
+                .blur(0d)
                 .minSize(MinSize.ZERO)
                 .upscale(Upscale.ZERO)
                 .url("/library/metadata/49564/thumb/1654258204")
@@ -352,6 +359,7 @@ Retrieves media providers and their features from the Plex server.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-media-providers" method="get" path="/media/providers" -->
 ```java
 package hello.world;
 
@@ -366,7 +374,7 @@ public class Application {
     public static void main(String[] args) throws GetMediaProvidersBadRequest, GetMediaProvidersUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetMediaProvidersResponse res = sdk.server().getMediaProviders()
@@ -404,6 +412,7 @@ Get Server List
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getServerList" method="get" path="/servers" -->
 ```java
 package hello.world;
 
@@ -418,7 +427,7 @@ public class Application {
     public static void main(String[] args) throws GetServerListBadRequest, GetServerListUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetServerListResponse res = sdk.server().getServerList()

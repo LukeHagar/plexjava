@@ -3,7 +3,11 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
 import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.PerformVoiceSearch;
 import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
@@ -19,10 +23,10 @@ public class PerformVoiceSearchRequestBuilder {
                             "limit",
                             "3",
                             new TypeReference<Optional<Double>>() {});
-    private final SDKMethodInterfaces.MethodCallPerformVoiceSearch sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public PerformVoiceSearchRequestBuilder(SDKMethodInterfaces.MethodCallPerformVoiceSearch sdk) {
-        this.sdk = sdk;
+    public PerformVoiceSearchRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public PerformVoiceSearchRequestBuilder query(String query) {
@@ -55,14 +59,26 @@ public class PerformVoiceSearchRequestBuilder {
         return this;
     }
 
-    public PerformVoiceSearchResponse call() throws Exception {
+
+    private PerformVoiceSearchRequest buildRequest() {
         if (limit == null) {
             limit = _SINGLETON_VALUE_Limit.value();
         }
-        return sdk.performVoiceSearch(
-            query,
+
+        PerformVoiceSearchRequest request = new PerformVoiceSearchRequest(query,
             sectionId,
             limit);
+
+        return request;
+    }
+
+    public PerformVoiceSearchResponse call() throws Exception {
+        
+        RequestOperation<PerformVoiceSearchRequest, PerformVoiceSearchResponse> operation
+              = new PerformVoiceSearch.Sync(sdkConfiguration);
+        PerformVoiceSearchRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 
     private static final LazySingletonValue<Optional<Double>> _SINGLETON_VALUE_Limit =

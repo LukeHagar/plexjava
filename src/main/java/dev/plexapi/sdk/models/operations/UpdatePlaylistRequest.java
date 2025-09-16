@@ -10,11 +10,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class UpdatePlaylistRequest {
 
+public class UpdatePlaylistRequest {
     /**
      * the ID of the playlist
      */
@@ -75,9 +74,10 @@ public class UpdatePlaylistRequest {
         return summary;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * the ID of the playlist
@@ -97,6 +97,7 @@ public class UpdatePlaylistRequest {
         return this;
     }
 
+
     /**
      * name of the playlist
      */
@@ -115,6 +116,7 @@ public class UpdatePlaylistRequest {
         return this;
     }
 
+
     /**
      * summary description of the playlist
      */
@@ -124,7 +126,6 @@ public class UpdatePlaylistRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -135,17 +136,15 @@ public class UpdatePlaylistRequest {
         }
         UpdatePlaylistRequest other = (UpdatePlaylistRequest) o;
         return 
-            Objects.deepEquals(this.playlistID, other.playlistID) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.summary, other.summary);
+            Utils.enhancedDeepEquals(this.playlistID, other.playlistID) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.summary, other.summary);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            playlistID,
-            title,
-            summary);
+        return Utils.enhancedHash(
+            playlistID, title, summary);
     }
     
     @Override
@@ -155,18 +154,20 @@ public class UpdatePlaylistRequest {
                 "title", title,
                 "summary", summary);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Double playlistID;
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> summary = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * the ID of the playlist
@@ -176,6 +177,7 @@ public class UpdatePlaylistRequest {
             this.playlistID = playlistID;
             return this;
         }
+
 
         /**
          * name of the playlist
@@ -195,6 +197,7 @@ public class UpdatePlaylistRequest {
             return this;
         }
 
+
         /**
          * summary description of the playlist
          */
@@ -212,12 +215,12 @@ public class UpdatePlaylistRequest {
             this.summary = summary;
             return this;
         }
-        
+
         public UpdatePlaylistRequest build() {
+
             return new UpdatePlaylistRequest(
-                playlistID,
-                title,
-                summary);
+                playlistID, title, summary);
         }
+
     }
 }

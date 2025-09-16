@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.CheckForUpdates;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.util.Optional;
@@ -10,10 +14,10 @@ import java.util.Optional;
 public class CheckForUpdatesRequestBuilder {
 
     private Optional<? extends Download> download = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallCheckForUpdates sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public CheckForUpdatesRequestBuilder(SDKMethodInterfaces.MethodCallCheckForUpdates sdk) {
-        this.sdk = sdk;
+    public CheckForUpdatesRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
                 
     public CheckForUpdatesRequestBuilder download(Download download) {
@@ -28,9 +32,20 @@ public class CheckForUpdatesRequestBuilder {
         return this;
     }
 
-    public CheckForUpdatesResponse call() throws Exception {
 
-        return sdk.checkForUpdates(
-            download);
+    private CheckForUpdatesRequest buildRequest() {
+
+        CheckForUpdatesRequest request = new CheckForUpdatesRequest(download);
+
+        return request;
+    }
+
+    public CheckForUpdatesResponse call() throws Exception {
+        
+        RequestOperation<CheckForUpdatesRequest, CheckForUpdatesResponse> operation
+              = new CheckForUpdates.Sync(sdkConfiguration);
+        CheckForUpdatesRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

@@ -30,6 +30,7 @@ Create a new playlist. By default the playlist is blank. To create a playlist al
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="createPlaylist" method="post" path="/playlists" -->
 ```java
 package hello.world;
 
@@ -44,7 +45,7 @@ public class Application {
     public static void main(String[] args) throws CreatePlaylistBadRequest, CreatePlaylistUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         CreatePlaylistRequest req = CreatePlaylistRequest.builder()
@@ -89,6 +90,7 @@ Get All Playlists given the specified filters.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getPlaylists" method="get" path="/playlists" -->
 ```java
 package hello.world;
 
@@ -103,7 +105,7 @@ public class Application {
     public static void main(String[] args) throws GetPlaylistsBadRequest, GetPlaylistsUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetPlaylistsResponse res = sdk.playlists().getPlaylists()
@@ -143,6 +145,7 @@ Smart playlist details contain the `content` attribute. This is the content URI 
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getPlaylist" method="get" path="/playlists/{playlistID}" -->
 ```java
 package hello.world;
 
@@ -157,7 +160,7 @@ public class Application {
     public static void main(String[] args) throws GetPlaylistBadRequest, GetPlaylistUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetPlaylistResponse res = sdk.playlists().getPlaylist()
@@ -196,6 +199,7 @@ This endpoint will delete a playlist
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="deletePlaylist" method="delete" path="/playlists/{playlistID}" -->
 ```java
 package hello.world;
 
@@ -210,7 +214,7 @@ public class Application {
     public static void main(String[] args) throws DeletePlaylistBadRequest, DeletePlaylistUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         DeletePlaylistResponse res = sdk.playlists().deletePlaylist()
@@ -247,6 +251,7 @@ From PMS version 1.9.1 clients can also edit playlist metadata using this endpoi
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="updatePlaylist" method="put" path="/playlists/{playlistID}" -->
 ```java
 package hello.world;
 
@@ -261,7 +266,7 @@ public class Application {
     public static void main(String[] args) throws UpdatePlaylistBadRequest, UpdatePlaylistUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         UpdatePlaylistResponse res = sdk.playlists().updatePlaylist()
@@ -303,6 +308,7 @@ Note that for dumb playlists, items have a `playlistItemID` attribute which is u
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getPlaylistContents" method="get" path="/playlists/{playlistID}/items" -->
 ```java
 package hello.world;
 
@@ -318,7 +324,7 @@ public class Application {
     public static void main(String[] args) throws GetPlaylistContentsBadRequest, GetPlaylistContentsUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetPlaylistContentsResponse res = sdk.playlists().getPlaylistContents()
@@ -359,6 +365,7 @@ Clears a playlist, only works with dumb playlists. Returns the playlist.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="clearPlaylistContents" method="delete" path="/playlists/{playlistID}/items" -->
 ```java
 package hello.world;
 
@@ -373,7 +380,7 @@ public class Application {
     public static void main(String[] args) throws ClearPlaylistContentsBadRequest, ClearPlaylistContentsUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         ClearPlaylistContentsResponse res = sdk.playlists().clearPlaylistContents()
@@ -411,6 +418,7 @@ With a smart playlist, passing a new `uri` parameter replaces the rules for the 
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="addPlaylistContents" method="put" path="/playlists/{playlistID}/items" -->
 ```java
 package hello.world;
 
@@ -425,13 +433,13 @@ public class Application {
     public static void main(String[] args) throws AddPlaylistContentsBadRequest, AddPlaylistContentsUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         AddPlaylistContentsResponse res = sdk.playlists().addPlaylistContents()
                 .playlistID(7013.44)
                 .uri("server://12345/com.plexapp.plugins.library/library/metadata/1")
-                .playQueueID(123)
+                .playQueueID(123d)
                 .call();
 
         if (res.object().isPresent()) {
@@ -468,6 +476,7 @@ Imports m3u playlists by passing a path on the server to scan for m3u-formatted 
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="uploadPlaylist" method="post" path="/playlists/upload" -->
 ```java
 package hello.world;
 
@@ -483,7 +492,7 @@ public class Application {
     public static void main(String[] args) throws UploadPlaylistBadRequest, UploadPlaylistUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         UploadPlaylistResponse res = sdk.playlists().uploadPlaylist()

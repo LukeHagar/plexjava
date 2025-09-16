@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetSourceConnectionInformation;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -10,10 +14,10 @@ import java.lang.String;
 public class GetSourceConnectionInformationRequestBuilder {
 
     private String source;
-    private final SDKMethodInterfaces.MethodCallGetSourceConnectionInformation sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetSourceConnectionInformationRequestBuilder(SDKMethodInterfaces.MethodCallGetSourceConnectionInformation sdk) {
-        this.sdk = sdk;
+    public GetSourceConnectionInformationRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetSourceConnectionInformationRequestBuilder source(String source) {
@@ -22,9 +26,20 @@ public class GetSourceConnectionInformationRequestBuilder {
         return this;
     }
 
-    public GetSourceConnectionInformationResponse call() throws Exception {
 
-        return sdk.getSourceConnectionInformation(
-            source);
+    private GetSourceConnectionInformationRequest buildRequest() {
+
+        GetSourceConnectionInformationRequest request = new GetSourceConnectionInformationRequest(source);
+
+        return request;
+    }
+
+    public GetSourceConnectionInformationResponse call() throws Exception {
+        
+        RequestOperation<GetSourceConnectionInformationRequest, GetSourceConnectionInformationResponse> operation
+              = new GetSourceConnectionInformation.Sync(sdkConfiguration);
+        GetSourceConnectionInformationRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

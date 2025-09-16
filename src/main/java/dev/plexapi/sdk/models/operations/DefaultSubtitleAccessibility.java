@@ -19,7 +19,7 @@ public enum DefaultSubtitleAccessibility {
     @JsonValue
     private final int value;
 
-    private DefaultSubtitleAccessibility(int value) {
+    DefaultSubtitleAccessibility(int value) {
         this.value = value;
     }
     

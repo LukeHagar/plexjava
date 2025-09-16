@@ -15,8 +15,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetPlaylistContentsMediaContainer {
 
@@ -24,33 +24,41 @@ public class GetPlaylistContentsMediaContainer {
     @JsonProperty("size")
     private Optional<Integer> size;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("composite")
     private Optional<String> composite;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
     private Optional<Integer> duration;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("leafCount")
     private Optional<Integer> leafCount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("playlistType")
     private Optional<String> playlistType;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ratingKey")
     private Optional<String> ratingKey;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("smart")
     private Optional<Boolean> smart;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Metadata")
@@ -88,7 +96,9 @@ public class GetPlaylistContentsMediaContainer {
     }
     
     public GetPlaylistContentsMediaContainer() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -137,15 +147,17 @@ public class GetPlaylistContentsMediaContainer {
         return (Optional<List<GetPlaylistContentsMetadata>>) metadata;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetPlaylistContentsMediaContainer withSize(int size) {
         Utils.checkNotNull(size, "size");
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetPlaylistContentsMediaContainer withSize(Optional<Integer> size) {
         Utils.checkNotNull(size, "size");
@@ -159,6 +171,7 @@ public class GetPlaylistContentsMediaContainer {
         return this;
     }
 
+
     public GetPlaylistContentsMediaContainer withComposite(Optional<String> composite) {
         Utils.checkNotNull(composite, "composite");
         this.composite = composite;
@@ -170,6 +183,7 @@ public class GetPlaylistContentsMediaContainer {
         this.duration = Optional.ofNullable(duration);
         return this;
     }
+
 
     public GetPlaylistContentsMediaContainer withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
@@ -183,6 +197,7 @@ public class GetPlaylistContentsMediaContainer {
         return this;
     }
 
+
     public GetPlaylistContentsMediaContainer withLeafCount(Optional<Integer> leafCount) {
         Utils.checkNotNull(leafCount, "leafCount");
         this.leafCount = leafCount;
@@ -194,6 +209,7 @@ public class GetPlaylistContentsMediaContainer {
         this.playlistType = Optional.ofNullable(playlistType);
         return this;
     }
+
 
     public GetPlaylistContentsMediaContainer withPlaylistType(Optional<String> playlistType) {
         Utils.checkNotNull(playlistType, "playlistType");
@@ -207,6 +223,7 @@ public class GetPlaylistContentsMediaContainer {
         return this;
     }
 
+
     public GetPlaylistContentsMediaContainer withRatingKey(Optional<String> ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         this.ratingKey = ratingKey;
@@ -218,6 +235,7 @@ public class GetPlaylistContentsMediaContainer {
         this.smart = Optional.ofNullable(smart);
         return this;
     }
+
 
     public GetPlaylistContentsMediaContainer withSmart(Optional<Boolean> smart) {
         Utils.checkNotNull(smart, "smart");
@@ -231,6 +249,7 @@ public class GetPlaylistContentsMediaContainer {
         return this;
     }
 
+
     public GetPlaylistContentsMediaContainer withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
@@ -243,13 +262,13 @@ public class GetPlaylistContentsMediaContainer {
         return this;
     }
 
+
     public GetPlaylistContentsMediaContainer withMetadata(Optional<? extends List<GetPlaylistContentsMetadata>> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -260,29 +279,23 @@ public class GetPlaylistContentsMediaContainer {
         }
         GetPlaylistContentsMediaContainer other = (GetPlaylistContentsMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.composite, other.composite) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.leafCount, other.leafCount) &&
-            Objects.deepEquals(this.playlistType, other.playlistType) &&
-            Objects.deepEquals(this.ratingKey, other.ratingKey) &&
-            Objects.deepEquals(this.smart, other.smart) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.composite, other.composite) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.leafCount, other.leafCount) &&
+            Utils.enhancedDeepEquals(this.playlistType, other.playlistType) &&
+            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey) &&
+            Utils.enhancedDeepEquals(this.smart, other.smart) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            composite,
-            duration,
-            leafCount,
-            playlistType,
-            ratingKey,
-            smart,
-            title,
-            metadata);
+        return Utils.enhancedHash(
+            size, composite, duration,
+            leafCount, playlistType, ratingKey,
+            smart, title, metadata);
     }
     
     @Override
@@ -298,30 +311,32 @@ public class GetPlaylistContentsMediaContainer {
                 "title", title,
                 "metadata", metadata);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> size = Optional.empty();
- 
+
         private Optional<String> composite = Optional.empty();
- 
+
         private Optional<Integer> duration = Optional.empty();
- 
+
         private Optional<Integer> leafCount = Optional.empty();
- 
+
         private Optional<String> playlistType = Optional.empty();
- 
+
         private Optional<String> ratingKey = Optional.empty();
- 
+
         private Optional<Boolean> smart = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<? extends List<GetPlaylistContentsMetadata>> metadata = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder size(int size) {
             Utils.checkNotNull(size, "size");
@@ -335,6 +350,7 @@ public class GetPlaylistContentsMediaContainer {
             return this;
         }
 
+
         public Builder composite(String composite) {
             Utils.checkNotNull(composite, "composite");
             this.composite = Optional.ofNullable(composite);
@@ -346,6 +362,7 @@ public class GetPlaylistContentsMediaContainer {
             this.composite = composite;
             return this;
         }
+
 
         public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
@@ -359,6 +376,7 @@ public class GetPlaylistContentsMediaContainer {
             return this;
         }
 
+
         public Builder leafCount(int leafCount) {
             Utils.checkNotNull(leafCount, "leafCount");
             this.leafCount = Optional.ofNullable(leafCount);
@@ -370,6 +388,7 @@ public class GetPlaylistContentsMediaContainer {
             this.leafCount = leafCount;
             return this;
         }
+
 
         public Builder playlistType(String playlistType) {
             Utils.checkNotNull(playlistType, "playlistType");
@@ -383,6 +402,7 @@ public class GetPlaylistContentsMediaContainer {
             return this;
         }
 
+
         public Builder ratingKey(String ratingKey) {
             Utils.checkNotNull(ratingKey, "ratingKey");
             this.ratingKey = Optional.ofNullable(ratingKey);
@@ -394,6 +414,7 @@ public class GetPlaylistContentsMediaContainer {
             this.ratingKey = ratingKey;
             return this;
         }
+
 
         public Builder smart(boolean smart) {
             Utils.checkNotNull(smart, "smart");
@@ -407,6 +428,7 @@ public class GetPlaylistContentsMediaContainer {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -419,6 +441,7 @@ public class GetPlaylistContentsMediaContainer {
             return this;
         }
 
+
         public Builder metadata(List<GetPlaylistContentsMetadata> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = Optional.ofNullable(metadata);
@@ -430,18 +453,14 @@ public class GetPlaylistContentsMediaContainer {
             this.metadata = metadata;
             return this;
         }
-        
+
         public GetPlaylistContentsMediaContainer build() {
+
             return new GetPlaylistContentsMediaContainer(
-                size,
-                composite,
-                duration,
-                leafCount,
-                playlistType,
-                ratingKey,
-                smart,
-                title,
-                metadata);
+                size, composite, duration,
+                leafCount, playlistType, ratingKey,
+                smart, title, metadata);
         }
+
     }
 }

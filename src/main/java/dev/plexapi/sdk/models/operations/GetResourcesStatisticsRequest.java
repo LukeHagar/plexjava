@@ -10,11 +10,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetResourcesStatisticsRequest {
 
+public class GetResourcesStatisticsRequest {
     /**
      * The timespan to retrieve statistics for
      * the exact meaning of this parameter is not known
@@ -42,9 +41,10 @@ public class GetResourcesStatisticsRequest {
         return timespan;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The timespan to retrieve statistics for
@@ -56,6 +56,7 @@ public class GetResourcesStatisticsRequest {
         return this;
     }
 
+
     /**
      * The timespan to retrieve statistics for
      * the exact meaning of this parameter is not known
@@ -66,7 +67,6 @@ public class GetResourcesStatisticsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -77,12 +77,12 @@ public class GetResourcesStatisticsRequest {
         }
         GetResourcesStatisticsRequest other = (GetResourcesStatisticsRequest) o;
         return 
-            Objects.deepEquals(this.timespan, other.timespan);
+            Utils.enhancedDeepEquals(this.timespan, other.timespan);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             timespan);
     }
     
@@ -91,14 +91,16 @@ public class GetResourcesStatisticsRequest {
         return Utils.toString(GetResourcesStatisticsRequest.class,
                 "timespan", timespan);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Long> timespan = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The timespan to retrieve statistics for
@@ -119,10 +121,12 @@ public class GetResourcesStatisticsRequest {
             this.timespan = timespan;
             return this;
         }
-        
+
         public GetResourcesStatisticsRequest build() {
+
             return new GetResourcesStatisticsRequest(
                 timespan);
         }
+
     }
 }

@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * GetLibraryItemsLocation
@@ -33,9 +32,10 @@ public class GetLibraryItemsLocation {
         return path;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetLibraryItemsLocation withPath(String path) {
         Utils.checkNotNull(path, "path");
@@ -43,7 +43,6 @@ public class GetLibraryItemsLocation {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -54,12 +53,12 @@ public class GetLibraryItemsLocation {
         }
         GetLibraryItemsLocation other = (GetLibraryItemsLocation) o;
         return 
-            Objects.deepEquals(this.path, other.path);
+            Utils.enhancedDeepEquals(this.path, other.path);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             path);
     }
     
@@ -68,24 +67,28 @@ public class GetLibraryItemsLocation {
         return Utils.toString(GetLibraryItemsLocation.class,
                 "path", path);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String path;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder path(String path) {
             Utils.checkNotNull(path, "path");
             this.path = path;
             return this;
         }
-        
+
         public GetLibraryItemsLocation build() {
+
             return new GetLibraryItemsLocation(
                 path);
         }
+
     }
 }

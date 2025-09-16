@@ -9,10 +9,9 @@ import dev.plexapi.sdk.utils.SpeakeasyMetadata;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class CancelServerActivitiesRequest {
-
     /**
      * The UUID of the activity to cancel.
      */
@@ -34,9 +33,10 @@ public class CancelServerActivitiesRequest {
         return activityUUID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The UUID of the activity to cancel.
@@ -47,7 +47,6 @@ public class CancelServerActivitiesRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -58,12 +57,12 @@ public class CancelServerActivitiesRequest {
         }
         CancelServerActivitiesRequest other = (CancelServerActivitiesRequest) o;
         return 
-            Objects.deepEquals(this.activityUUID, other.activityUUID);
+            Utils.enhancedDeepEquals(this.activityUUID, other.activityUUID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             activityUUID);
     }
     
@@ -72,14 +71,16 @@ public class CancelServerActivitiesRequest {
         return Utils.toString(CancelServerActivitiesRequest.class,
                 "activityUUID", activityUUID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String activityUUID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The UUID of the activity to cancel.
@@ -89,10 +90,12 @@ public class CancelServerActivitiesRequest {
             this.activityUUID = activityUUID;
             return this;
         }
-        
+
         public CancelServerActivitiesRequest build() {
+
             return new CancelServerActivitiesRequest(
                 activityUUID);
         }
+
     }
 }

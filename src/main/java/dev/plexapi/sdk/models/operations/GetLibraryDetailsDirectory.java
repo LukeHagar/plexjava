@@ -12,8 +12,8 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetLibraryDetailsDirectory {
 
@@ -21,17 +21,21 @@ public class GetLibraryDetailsDirectory {
     @JsonProperty("key")
     private Optional<String> key;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("secondary")
     private Optional<Boolean> secondary;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("prompt")
     private Optional<String> prompt;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("search")
@@ -57,7 +61,8 @@ public class GetLibraryDetailsDirectory {
     }
     
     public GetLibraryDetailsDirectory() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -85,15 +90,17 @@ public class GetLibraryDetailsDirectory {
         return search;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetLibraryDetailsDirectory withKey(String key) {
         Utils.checkNotNull(key, "key");
         this.key = Optional.ofNullable(key);
         return this;
     }
+
 
     public GetLibraryDetailsDirectory withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
@@ -107,6 +114,7 @@ public class GetLibraryDetailsDirectory {
         return this;
     }
 
+
     public GetLibraryDetailsDirectory withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
@@ -118,6 +126,7 @@ public class GetLibraryDetailsDirectory {
         this.secondary = Optional.ofNullable(secondary);
         return this;
     }
+
 
     public GetLibraryDetailsDirectory withSecondary(Optional<Boolean> secondary) {
         Utils.checkNotNull(secondary, "secondary");
@@ -131,6 +140,7 @@ public class GetLibraryDetailsDirectory {
         return this;
     }
 
+
     public GetLibraryDetailsDirectory withPrompt(Optional<String> prompt) {
         Utils.checkNotNull(prompt, "prompt");
         this.prompt = prompt;
@@ -143,13 +153,13 @@ public class GetLibraryDetailsDirectory {
         return this;
     }
 
+
     public GetLibraryDetailsDirectory withSearch(Optional<Boolean> search) {
         Utils.checkNotNull(search, "search");
         this.search = search;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -160,21 +170,18 @@ public class GetLibraryDetailsDirectory {
         }
         GetLibraryDetailsDirectory other = (GetLibraryDetailsDirectory) o;
         return 
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.secondary, other.secondary) &&
-            Objects.deepEquals(this.prompt, other.prompt) &&
-            Objects.deepEquals(this.search, other.search);
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.secondary, other.secondary) &&
+            Utils.enhancedDeepEquals(this.prompt, other.prompt) &&
+            Utils.enhancedDeepEquals(this.search, other.search);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            key,
-            title,
-            secondary,
-            prompt,
-            search);
+        return Utils.enhancedHash(
+            key, title, secondary,
+            prompt, search);
     }
     
     @Override
@@ -186,22 +193,24 @@ public class GetLibraryDetailsDirectory {
                 "prompt", prompt,
                 "search", search);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<Boolean> secondary = Optional.empty();
- 
+
         private Optional<String> prompt = Optional.empty();
- 
+
         private Optional<Boolean> search = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
@@ -215,6 +224,7 @@ public class GetLibraryDetailsDirectory {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -226,6 +236,7 @@ public class GetLibraryDetailsDirectory {
             this.title = title;
             return this;
         }
+
 
         public Builder secondary(boolean secondary) {
             Utils.checkNotNull(secondary, "secondary");
@@ -239,6 +250,7 @@ public class GetLibraryDetailsDirectory {
             return this;
         }
 
+
         public Builder prompt(String prompt) {
             Utils.checkNotNull(prompt, "prompt");
             this.prompt = Optional.ofNullable(prompt);
@@ -251,6 +263,7 @@ public class GetLibraryDetailsDirectory {
             return this;
         }
 
+
         public Builder search(boolean search) {
             Utils.checkNotNull(search, "search");
             this.search = Optional.ofNullable(search);
@@ -262,14 +275,13 @@ public class GetLibraryDetailsDirectory {
             this.search = search;
             return this;
         }
-        
+
         public GetLibraryDetailsDirectory build() {
+
             return new GetLibraryDetailsDirectory(
-                key,
-                title,
-                secondary,
-                prompt,
-                search);
+                key, title, secondary,
+                prompt, search);
         }
+
     }
 }

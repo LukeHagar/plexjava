@@ -12,8 +12,8 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class StatisticsMedia {
 
@@ -21,25 +21,31 @@ public class StatisticsMedia {
     @JsonProperty("accountID")
     private Optional<Integer> accountID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("deviceID")
     private Optional<Integer> deviceID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("timespan")
     private Optional<Integer> timespan;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("at")
     private Optional<Integer> at;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("metadataType")
     private Optional<Integer> metadataType;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("count")
     private Optional<Integer> count;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
@@ -71,7 +77,9 @@ public class StatisticsMedia {
     }
     
     public StatisticsMedia() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -109,15 +117,17 @@ public class StatisticsMedia {
         return duration;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public StatisticsMedia withAccountID(int accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = Optional.ofNullable(accountID);
         return this;
     }
+
 
     public StatisticsMedia withAccountID(Optional<Integer> accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -131,6 +141,7 @@ public class StatisticsMedia {
         return this;
     }
 
+
     public StatisticsMedia withDeviceID(Optional<Integer> deviceID) {
         Utils.checkNotNull(deviceID, "deviceID");
         this.deviceID = deviceID;
@@ -142,6 +153,7 @@ public class StatisticsMedia {
         this.timespan = Optional.ofNullable(timespan);
         return this;
     }
+
 
     public StatisticsMedia withTimespan(Optional<Integer> timespan) {
         Utils.checkNotNull(timespan, "timespan");
@@ -155,6 +167,7 @@ public class StatisticsMedia {
         return this;
     }
 
+
     public StatisticsMedia withAt(Optional<Integer> at) {
         Utils.checkNotNull(at, "at");
         this.at = at;
@@ -166,6 +179,7 @@ public class StatisticsMedia {
         this.metadataType = Optional.ofNullable(metadataType);
         return this;
     }
+
 
     public StatisticsMedia withMetadataType(Optional<Integer> metadataType) {
         Utils.checkNotNull(metadataType, "metadataType");
@@ -179,6 +193,7 @@ public class StatisticsMedia {
         return this;
     }
 
+
     public StatisticsMedia withCount(Optional<Integer> count) {
         Utils.checkNotNull(count, "count");
         this.count = count;
@@ -191,13 +206,13 @@ public class StatisticsMedia {
         return this;
     }
 
+
     public StatisticsMedia withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = duration;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -208,24 +223,20 @@ public class StatisticsMedia {
         }
         StatisticsMedia other = (StatisticsMedia) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.deviceID, other.deviceID) &&
-            Objects.deepEquals(this.timespan, other.timespan) &&
-            Objects.deepEquals(this.at, other.at) &&
-            Objects.deepEquals(this.metadataType, other.metadataType) &&
-            Objects.deepEquals(this.count, other.count) &&
-            Objects.deepEquals(this.duration, other.duration);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.deviceID, other.deviceID) &&
+            Utils.enhancedDeepEquals(this.timespan, other.timespan) &&
+            Utils.enhancedDeepEquals(this.at, other.at) &&
+            Utils.enhancedDeepEquals(this.metadataType, other.metadataType) &&
+            Utils.enhancedDeepEquals(this.count, other.count) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            accountID,
-            deviceID,
-            timespan,
-            at,
-            metadataType,
-            count,
+        return Utils.enhancedHash(
+            accountID, deviceID, timespan,
+            at, metadataType, count,
             duration);
     }
     
@@ -240,26 +251,28 @@ public class StatisticsMedia {
                 "count", count,
                 "duration", duration);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> accountID = Optional.empty();
- 
+
         private Optional<Integer> deviceID = Optional.empty();
- 
+
         private Optional<Integer> timespan = Optional.empty();
- 
+
         private Optional<Integer> at = Optional.empty();
- 
+
         private Optional<Integer> metadataType = Optional.empty();
- 
+
         private Optional<Integer> count = Optional.empty();
- 
+
         private Optional<Integer> duration = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(int accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -273,6 +286,7 @@ public class StatisticsMedia {
             return this;
         }
 
+
         public Builder deviceID(int deviceID) {
             Utils.checkNotNull(deviceID, "deviceID");
             this.deviceID = Optional.ofNullable(deviceID);
@@ -284,6 +298,7 @@ public class StatisticsMedia {
             this.deviceID = deviceID;
             return this;
         }
+
 
         public Builder timespan(int timespan) {
             Utils.checkNotNull(timespan, "timespan");
@@ -297,6 +312,7 @@ public class StatisticsMedia {
             return this;
         }
 
+
         public Builder at(int at) {
             Utils.checkNotNull(at, "at");
             this.at = Optional.ofNullable(at);
@@ -308,6 +324,7 @@ public class StatisticsMedia {
             this.at = at;
             return this;
         }
+
 
         public Builder metadataType(int metadataType) {
             Utils.checkNotNull(metadataType, "metadataType");
@@ -321,6 +338,7 @@ public class StatisticsMedia {
             return this;
         }
 
+
         public Builder count(int count) {
             Utils.checkNotNull(count, "count");
             this.count = Optional.ofNullable(count);
@@ -333,6 +351,7 @@ public class StatisticsMedia {
             return this;
         }
 
+
         public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = Optional.ofNullable(duration);
@@ -344,16 +363,14 @@ public class StatisticsMedia {
             this.duration = duration;
             return this;
         }
-        
+
         public StatisticsMedia build() {
+
             return new StatisticsMedia(
-                accountID,
-                deviceID,
-                timespan,
-                at,
-                metadataType,
-                count,
+                accountID, deviceID, timespan,
+                at, metadataType, count,
                 duration);
         }
+
     }
 }

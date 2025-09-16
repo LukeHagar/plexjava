@@ -19,7 +19,7 @@ public enum AllowChannels {
     @JsonValue
     private final int value;
 
-    private AllowChannels(int value) {
+    AllowChannels(int value) {
         this.value = value;
     }
     

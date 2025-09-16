@@ -22,6 +22,7 @@ Get Companions Data
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getCompanionsData" method="get" path="/companions" -->
 ```java
 package hello.world;
 
@@ -36,7 +37,7 @@ public class Application {
     public static void main(String[] args) throws GetCompanionsDataBadRequest, GetCompanionsDataUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetCompanionsDataResponse res = sdk.plex().getCompanionsData()
@@ -73,6 +74,7 @@ Get friends of provided auth token.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getUserFriends" method="get" path="/friends" -->
 ```java
 package hello.world;
 
@@ -87,7 +89,7 @@ public class Application {
     public static void main(String[] args) throws GetUserFriendsBadRequest, GetUserFriendsUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetUserFriendsResponse res = sdk.plex().getUserFriends()
@@ -124,6 +126,7 @@ Returns the geolocation and locale data of the caller
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getGeoData" method="get" path="/geoip" -->
 ```java
 package hello.world;
 
@@ -174,6 +177,7 @@ Retrieves the home data for the authenticated user, including details like home 
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getHomeData" method="get" path="/home" -->
 ```java
 package hello.world;
 
@@ -188,7 +192,7 @@ public class Application {
     public static void main(String[] args) throws GetHomeDataBadRequest, GetHomeDataUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetHomeDataResponse res = sdk.plex().getHomeData()
@@ -219,6 +223,7 @@ Get Plex server access tokens and server connections
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-server-resources" method="get" path="/resources" -->
 ```java
 package hello.world;
 
@@ -233,7 +238,7 @@ public class Application {
     public static void main(String[] args) throws GetServerResourcesBadRequest, GetServerResourcesUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetServerResourcesResponse res = sdk.plex().getServerResources()
@@ -278,6 +283,7 @@ Retrieve a Pin ID from Plex.tv to use for authentication flows
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getPin" method="post" path="/pins" -->
 ```java
 package hello.world;
 
@@ -337,6 +343,7 @@ Retrieve an Access Token from Plex.tv after the Pin has been authenticated
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getTokenByPinId" method="get" path="/pins/{pinID}" -->
 ```java
 package hello.world;
 

@@ -16,11 +16,10 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetTopWatchedContentMediaContainer {
 
+public class GetTopWatchedContentMediaContainer {
     /**
      * Number of media items returned in this response.
      */
@@ -50,6 +49,7 @@ public class GetTopWatchedContentMediaContainer {
      */
     @JsonProperty("mediaTagVersion")
     private long mediaTagVersion;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Metadata")
@@ -83,7 +83,8 @@ public class GetTopWatchedContentMediaContainer {
             String identifier,
             String mediaTagPrefix,
             long mediaTagVersion) {
-        this(size, allowSync, identifier, mediaTagPrefix, mediaTagVersion, Optional.empty());
+        this(size, allowSync, identifier,
+            mediaTagPrefix, mediaTagVersion, Optional.empty());
     }
 
     /**
@@ -132,9 +133,10 @@ public class GetTopWatchedContentMediaContainer {
         return (Optional<List<GetTopWatchedContentMetadata>>) metadata;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Number of media items returned in this response.
@@ -187,13 +189,13 @@ public class GetTopWatchedContentMediaContainer {
         return this;
     }
 
+
     public GetTopWatchedContentMediaContainer withMetadata(Optional<? extends List<GetTopWatchedContentMetadata>> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -204,23 +206,19 @@ public class GetTopWatchedContentMediaContainer {
         }
         GetTopWatchedContentMediaContainer other = (GetTopWatchedContentMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.allowSync, other.allowSync) &&
-            Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
-            Objects.deepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
-            Objects.deepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.allowSync, other.allowSync) &&
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
+            Utils.enhancedDeepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            allowSync,
-            identifier,
-            mediaTagPrefix,
-            mediaTagVersion,
-            metadata);
+        return Utils.enhancedHash(
+            size, allowSync, identifier,
+            mediaTagPrefix, mediaTagVersion, metadata);
     }
     
     @Override
@@ -233,24 +231,26 @@ public class GetTopWatchedContentMediaContainer {
                 "mediaTagVersion", mediaTagVersion,
                 "metadata", metadata);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer size;
- 
+
         private Boolean allowSync;
- 
+
         private String identifier;
- 
+
         private String mediaTagPrefix;
- 
+
         private Long mediaTagVersion;
- 
+
         private Optional<? extends List<GetTopWatchedContentMetadata>> metadata = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Number of media items returned in this response.
@@ -261,6 +261,7 @@ public class GetTopWatchedContentMediaContainer {
             return this;
         }
 
+
         /**
          * Indicates whether syncing is allowed.
          */
@@ -269,6 +270,7 @@ public class GetTopWatchedContentMediaContainer {
             this.allowSync = allowSync;
             return this;
         }
+
 
         /**
          * An plugin identifier for the media container.
@@ -279,6 +281,7 @@ public class GetTopWatchedContentMediaContainer {
             return this;
         }
 
+
         /**
          * The prefix used for media tag resource paths.
          */
@@ -288,6 +291,7 @@ public class GetTopWatchedContentMediaContainer {
             return this;
         }
 
+
         /**
          * The version number for media tags.
          */
@@ -296,6 +300,7 @@ public class GetTopWatchedContentMediaContainer {
             this.mediaTagVersion = mediaTagVersion;
             return this;
         }
+
 
         public Builder metadata(List<GetTopWatchedContentMetadata> metadata) {
             Utils.checkNotNull(metadata, "metadata");
@@ -308,15 +313,13 @@ public class GetTopWatchedContentMediaContainer {
             this.metadata = metadata;
             return this;
         }
-        
+
         public GetTopWatchedContentMediaContainer build() {
+
             return new GetTopWatchedContentMediaContainer(
-                size,
-                allowSync,
-                identifier,
-                mediaTagPrefix,
-                mediaTagVersion,
-                metadata);
+                size, allowSync, identifier,
+                mediaTagPrefix, mediaTagVersion, metadata);
         }
+
     }
 }

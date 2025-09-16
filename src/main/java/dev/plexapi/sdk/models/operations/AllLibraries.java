@@ -19,7 +19,7 @@ public enum AllLibraries {
     @JsonValue
     private final int value;
 
-    private AllLibraries(int value) {
+    AllLibraries(int value) {
         this.value = value;
     }
     

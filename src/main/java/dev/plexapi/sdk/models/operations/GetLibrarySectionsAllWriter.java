@@ -9,10 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetLibrarySectionsAllWriter {
-
     /**
      * The role of Writer
      */
@@ -34,9 +33,10 @@ public class GetLibrarySectionsAllWriter {
         return tag;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The role of Writer
@@ -47,7 +47,6 @@ public class GetLibrarySectionsAllWriter {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -58,12 +57,12 @@ public class GetLibrarySectionsAllWriter {
         }
         GetLibrarySectionsAllWriter other = (GetLibrarySectionsAllWriter) o;
         return 
-            Objects.deepEquals(this.tag, other.tag);
+            Utils.enhancedDeepEquals(this.tag, other.tag);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             tag);
     }
     
@@ -72,14 +71,16 @@ public class GetLibrarySectionsAllWriter {
         return Utils.toString(GetLibrarySectionsAllWriter.class,
                 "tag", tag);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String tag;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The role of Writer
@@ -89,10 +90,12 @@ public class GetLibrarySectionsAllWriter {
             this.tag = tag;
             return this;
         }
-        
+
         public GetLibrarySectionsAllWriter build() {
+
             return new GetLibrarySectionsAllWriter(
                 tag);
         }
+
     }
 }

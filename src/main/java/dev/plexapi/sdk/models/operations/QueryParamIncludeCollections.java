@@ -17,7 +17,7 @@ public enum QueryParamIncludeCollections {
     @JsonValue
     private final int value;
 
-    private QueryParamIncludeCollections(int value) {
+    QueryParamIncludeCollections(int value) {
         this.value = value;
     }
     

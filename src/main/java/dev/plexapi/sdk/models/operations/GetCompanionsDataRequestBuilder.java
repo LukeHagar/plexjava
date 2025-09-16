@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetCompanionsData;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -11,10 +15,10 @@ import java.util.Optional;
 public class GetCompanionsDataRequestBuilder {
 
     private Optional<String> serverURL = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallGetCompanionsData sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetCompanionsDataRequestBuilder(SDKMethodInterfaces.MethodCallGetCompanionsData sdk) {
-        this.sdk = sdk;
+    public GetCompanionsDataRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
                 
     public GetCompanionsDataRequestBuilder serverURL(String serverURL) {
@@ -30,8 +34,10 @@ public class GetCompanionsDataRequestBuilder {
     }
 
     public GetCompanionsDataResponse call() throws Exception {
+        
+        RequestlessOperation<GetCompanionsDataResponse> operation
+            = new GetCompanionsData.Sync(sdkConfiguration, serverURL);
 
-        return sdk.getCompanionsData(
-            serverURL);
+        return operation.handleResponse(operation.doRequest());
     }
 }

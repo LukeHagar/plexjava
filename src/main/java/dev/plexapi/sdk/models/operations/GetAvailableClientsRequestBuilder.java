@@ -3,18 +3,25 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetAvailableClients;
 import java.lang.Exception;
 
 public class GetAvailableClientsRequestBuilder {
 
-    private final SDKMethodInterfaces.MethodCallGetAvailableClients sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetAvailableClientsRequestBuilder(SDKMethodInterfaces.MethodCallGetAvailableClients sdk) {
-        this.sdk = sdk;
+    public GetAvailableClientsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetAvailableClientsResponse call() throws Exception {
+        
+        RequestlessOperation<GetAvailableClientsResponse> operation
+            = new GetAvailableClients.Sync(sdkConfiguration);
 
-        return sdk.getAvailableClientsDirect();
+        return operation.handleResponse(operation.doRequest());
     }
 }

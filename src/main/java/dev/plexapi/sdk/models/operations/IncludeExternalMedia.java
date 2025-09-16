@@ -19,7 +19,7 @@ public enum IncludeExternalMedia {
     @JsonValue
     private final long value;
 
-    private IncludeExternalMedia(long value) {
+    IncludeExternalMedia(long value) {
         this.value = value;
     }
     

@@ -12,8 +12,8 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class Device {
 
@@ -21,17 +21,21 @@ public class Device {
     @JsonProperty("id")
     private Optional<Double> id;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("name")
     private Optional<String> name;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("platform")
     private Optional<String> platform;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("clientIdentifier")
     private Optional<String> clientIdentifier;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("createdAt")
@@ -57,7 +61,8 @@ public class Device {
     }
     
     public Device() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -85,15 +90,17 @@ public class Device {
         return createdAt;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Device withId(double id) {
         Utils.checkNotNull(id, "id");
         this.id = Optional.ofNullable(id);
         return this;
     }
+
 
     public Device withId(Optional<Double> id) {
         Utils.checkNotNull(id, "id");
@@ -107,6 +114,7 @@ public class Device {
         return this;
     }
 
+
     public Device withName(Optional<String> name) {
         Utils.checkNotNull(name, "name");
         this.name = name;
@@ -118,6 +126,7 @@ public class Device {
         this.platform = Optional.ofNullable(platform);
         return this;
     }
+
 
     public Device withPlatform(Optional<String> platform) {
         Utils.checkNotNull(platform, "platform");
@@ -131,6 +140,7 @@ public class Device {
         return this;
     }
 
+
     public Device withClientIdentifier(Optional<String> clientIdentifier) {
         Utils.checkNotNull(clientIdentifier, "clientIdentifier");
         this.clientIdentifier = clientIdentifier;
@@ -143,13 +153,13 @@ public class Device {
         return this;
     }
 
+
     public Device withCreatedAt(Optional<Double> createdAt) {
         Utils.checkNotNull(createdAt, "createdAt");
         this.createdAt = createdAt;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -160,21 +170,18 @@ public class Device {
         }
         Device other = (Device) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.name, other.name) &&
-            Objects.deepEquals(this.platform, other.platform) &&
-            Objects.deepEquals(this.clientIdentifier, other.clientIdentifier) &&
-            Objects.deepEquals(this.createdAt, other.createdAt);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.platform, other.platform) &&
+            Utils.enhancedDeepEquals(this.clientIdentifier, other.clientIdentifier) &&
+            Utils.enhancedDeepEquals(this.createdAt, other.createdAt);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            name,
-            platform,
-            clientIdentifier,
-            createdAt);
+        return Utils.enhancedHash(
+            id, name, platform,
+            clientIdentifier, createdAt);
     }
     
     @Override
@@ -186,22 +193,24 @@ public class Device {
                 "clientIdentifier", clientIdentifier,
                 "createdAt", createdAt);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Double> id = Optional.empty();
- 
+
         private Optional<String> name = Optional.empty();
- 
+
         private Optional<String> platform = Optional.empty();
- 
+
         private Optional<String> clientIdentifier = Optional.empty();
- 
+
         private Optional<Double> createdAt = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder id(double id) {
             Utils.checkNotNull(id, "id");
@@ -215,6 +224,7 @@ public class Device {
             return this;
         }
 
+
         public Builder name(String name) {
             Utils.checkNotNull(name, "name");
             this.name = Optional.ofNullable(name);
@@ -226,6 +236,7 @@ public class Device {
             this.name = name;
             return this;
         }
+
 
         public Builder platform(String platform) {
             Utils.checkNotNull(platform, "platform");
@@ -239,6 +250,7 @@ public class Device {
             return this;
         }
 
+
         public Builder clientIdentifier(String clientIdentifier) {
             Utils.checkNotNull(clientIdentifier, "clientIdentifier");
             this.clientIdentifier = Optional.ofNullable(clientIdentifier);
@@ -251,6 +263,7 @@ public class Device {
             return this;
         }
 
+
         public Builder createdAt(double createdAt) {
             Utils.checkNotNull(createdAt, "createdAt");
             this.createdAt = Optional.ofNullable(createdAt);
@@ -262,14 +275,13 @@ public class Device {
             this.createdAt = createdAt;
             return this;
         }
-        
+
         public Device build() {
+
             return new Device(
-                id,
-                name,
-                platform,
-                clientIdentifier,
-                createdAt);
+                id, name, platform,
+                clientIdentifier, createdAt);
         }
+
     }
 }

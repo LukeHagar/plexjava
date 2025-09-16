@@ -15,8 +15,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetMediaProvidersMediaContainer {
 
@@ -24,173 +24,216 @@ public class GetMediaProvidersMediaContainer {
     @JsonProperty("size")
     private Optional<Long> size;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("allowCameraUpload")
     private Optional<Boolean> allowCameraUpload;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("allowChannelAccess")
     private Optional<Boolean> allowChannelAccess;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("allowSharing")
     private Optional<Boolean> allowSharing;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("allowSync")
     private Optional<Boolean> allowSync;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("allowTuners")
     private Optional<Boolean> allowTuners;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("backgroundProcessing")
     private Optional<Boolean> backgroundProcessing;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("certificate")
     private Optional<Boolean> certificate;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("companionProxy")
     private Optional<Boolean> companionProxy;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("countryCode")
     private Optional<String> countryCode;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("diagnostics")
     private Optional<String> diagnostics;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("eventStream")
     private Optional<Boolean> eventStream;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("friendlyName")
     private Optional<String> friendlyName;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("livetv")
     private Optional<Long> livetv;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("machineIdentifier")
     private Optional<String> machineIdentifier;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("musicAnalysis")
     private Optional<Long> musicAnalysis;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("myPlex")
     private Optional<Boolean> myPlex;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("myPlexMappingState")
     private Optional<String> myPlexMappingState;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("myPlexSigninState")
     private Optional<String> myPlexSigninState;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("myPlexSubscription")
     private Optional<Boolean> myPlexSubscription;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("myPlexUsername")
     private Optional<String> myPlexUsername;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("offlineTranscode")
     private Optional<Long> offlineTranscode;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ownerFeatures")
     private Optional<String> ownerFeatures;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("platform")
     private Optional<String> platform;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("platformVersion")
     private Optional<String> platformVersion;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pluginHost")
     private Optional<Boolean> pluginHost;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("pushNotifications")
     private Optional<Boolean> pushNotifications;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("readOnlyLibraries")
     private Optional<Boolean> readOnlyLibraries;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("streamingBrainABRVersion")
     private Optional<Long> streamingBrainABRVersion;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("streamingBrainVersion")
     private Optional<Long> streamingBrainVersion;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sync")
     private Optional<Boolean> sync;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("transcoderActiveVideoSessions")
     private Optional<Long> transcoderActiveVideoSessions;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("transcoderAudio")
     private Optional<Boolean> transcoderAudio;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("transcoderLyrics")
     private Optional<Boolean> transcoderLyrics;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("transcoderSubtitles")
     private Optional<Boolean> transcoderSubtitles;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("transcoderVideo")
     private Optional<Boolean> transcoderVideo;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("transcoderVideoBitrates")
     private Optional<String> transcoderVideoBitrates;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("transcoderVideoQualities")
     private Optional<String> transcoderVideoQualities;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("transcoderVideoResolutions")
     private Optional<String> transcoderVideoResolutions;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("updatedAt")
     private Optional<Long> updatedAt;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("updater")
     private Optional<Boolean> updater;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("version")
     private Optional<String> version;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("voiceSearch")
     private Optional<Boolean> voiceSearch;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("MediaProvider")
@@ -333,7 +376,21 @@ public class GetMediaProvidersMediaContainer {
     }
     
     public GetMediaProvidersMediaContainer() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -557,15 +614,17 @@ public class GetMediaProvidersMediaContainer {
         return (Optional<List<MediaProvider>>) mediaProvider;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetMediaProvidersMediaContainer withSize(long size) {
         Utils.checkNotNull(size, "size");
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withSize(Optional<Long> size) {
         Utils.checkNotNull(size, "size");
@@ -579,6 +638,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withAllowCameraUpload(Optional<Boolean> allowCameraUpload) {
         Utils.checkNotNull(allowCameraUpload, "allowCameraUpload");
         this.allowCameraUpload = allowCameraUpload;
@@ -590,6 +650,7 @@ public class GetMediaProvidersMediaContainer {
         this.allowChannelAccess = Optional.ofNullable(allowChannelAccess);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withAllowChannelAccess(Optional<Boolean> allowChannelAccess) {
         Utils.checkNotNull(allowChannelAccess, "allowChannelAccess");
@@ -603,6 +664,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withAllowSharing(Optional<Boolean> allowSharing) {
         Utils.checkNotNull(allowSharing, "allowSharing");
         this.allowSharing = allowSharing;
@@ -614,6 +676,7 @@ public class GetMediaProvidersMediaContainer {
         this.allowSync = Optional.ofNullable(allowSync);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withAllowSync(Optional<Boolean> allowSync) {
         Utils.checkNotNull(allowSync, "allowSync");
@@ -627,6 +690,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withAllowTuners(Optional<Boolean> allowTuners) {
         Utils.checkNotNull(allowTuners, "allowTuners");
         this.allowTuners = allowTuners;
@@ -638,6 +702,7 @@ public class GetMediaProvidersMediaContainer {
         this.backgroundProcessing = Optional.ofNullable(backgroundProcessing);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withBackgroundProcessing(Optional<Boolean> backgroundProcessing) {
         Utils.checkNotNull(backgroundProcessing, "backgroundProcessing");
@@ -651,6 +716,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withCertificate(Optional<Boolean> certificate) {
         Utils.checkNotNull(certificate, "certificate");
         this.certificate = certificate;
@@ -662,6 +728,7 @@ public class GetMediaProvidersMediaContainer {
         this.companionProxy = Optional.ofNullable(companionProxy);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withCompanionProxy(Optional<Boolean> companionProxy) {
         Utils.checkNotNull(companionProxy, "companionProxy");
@@ -675,6 +742,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withCountryCode(Optional<String> countryCode) {
         Utils.checkNotNull(countryCode, "countryCode");
         this.countryCode = countryCode;
@@ -686,6 +754,7 @@ public class GetMediaProvidersMediaContainer {
         this.diagnostics = Optional.ofNullable(diagnostics);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withDiagnostics(Optional<String> diagnostics) {
         Utils.checkNotNull(diagnostics, "diagnostics");
@@ -699,6 +768,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withEventStream(Optional<Boolean> eventStream) {
         Utils.checkNotNull(eventStream, "eventStream");
         this.eventStream = eventStream;
@@ -710,6 +780,7 @@ public class GetMediaProvidersMediaContainer {
         this.friendlyName = Optional.ofNullable(friendlyName);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withFriendlyName(Optional<String> friendlyName) {
         Utils.checkNotNull(friendlyName, "friendlyName");
@@ -723,6 +794,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withLivetv(Optional<Long> livetv) {
         Utils.checkNotNull(livetv, "livetv");
         this.livetv = livetv;
@@ -734,6 +806,7 @@ public class GetMediaProvidersMediaContainer {
         this.machineIdentifier = Optional.ofNullable(machineIdentifier);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withMachineIdentifier(Optional<String> machineIdentifier) {
         Utils.checkNotNull(machineIdentifier, "machineIdentifier");
@@ -747,6 +820,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withMusicAnalysis(Optional<Long> musicAnalysis) {
         Utils.checkNotNull(musicAnalysis, "musicAnalysis");
         this.musicAnalysis = musicAnalysis;
@@ -758,6 +832,7 @@ public class GetMediaProvidersMediaContainer {
         this.myPlex = Optional.ofNullable(myPlex);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withMyPlex(Optional<Boolean> myPlex) {
         Utils.checkNotNull(myPlex, "myPlex");
@@ -771,6 +846,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withMyPlexMappingState(Optional<String> myPlexMappingState) {
         Utils.checkNotNull(myPlexMappingState, "myPlexMappingState");
         this.myPlexMappingState = myPlexMappingState;
@@ -782,6 +858,7 @@ public class GetMediaProvidersMediaContainer {
         this.myPlexSigninState = Optional.ofNullable(myPlexSigninState);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withMyPlexSigninState(Optional<String> myPlexSigninState) {
         Utils.checkNotNull(myPlexSigninState, "myPlexSigninState");
@@ -795,6 +872,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withMyPlexSubscription(Optional<Boolean> myPlexSubscription) {
         Utils.checkNotNull(myPlexSubscription, "myPlexSubscription");
         this.myPlexSubscription = myPlexSubscription;
@@ -806,6 +884,7 @@ public class GetMediaProvidersMediaContainer {
         this.myPlexUsername = Optional.ofNullable(myPlexUsername);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withMyPlexUsername(Optional<String> myPlexUsername) {
         Utils.checkNotNull(myPlexUsername, "myPlexUsername");
@@ -819,6 +898,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withOfflineTranscode(Optional<Long> offlineTranscode) {
         Utils.checkNotNull(offlineTranscode, "offlineTranscode");
         this.offlineTranscode = offlineTranscode;
@@ -830,6 +910,7 @@ public class GetMediaProvidersMediaContainer {
         this.ownerFeatures = Optional.ofNullable(ownerFeatures);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withOwnerFeatures(Optional<String> ownerFeatures) {
         Utils.checkNotNull(ownerFeatures, "ownerFeatures");
@@ -843,6 +924,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withPlatform(Optional<String> platform) {
         Utils.checkNotNull(platform, "platform");
         this.platform = platform;
@@ -854,6 +936,7 @@ public class GetMediaProvidersMediaContainer {
         this.platformVersion = Optional.ofNullable(platformVersion);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withPlatformVersion(Optional<String> platformVersion) {
         Utils.checkNotNull(platformVersion, "platformVersion");
@@ -867,6 +950,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withPluginHost(Optional<Boolean> pluginHost) {
         Utils.checkNotNull(pluginHost, "pluginHost");
         this.pluginHost = pluginHost;
@@ -878,6 +962,7 @@ public class GetMediaProvidersMediaContainer {
         this.pushNotifications = Optional.ofNullable(pushNotifications);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withPushNotifications(Optional<Boolean> pushNotifications) {
         Utils.checkNotNull(pushNotifications, "pushNotifications");
@@ -891,6 +976,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withReadOnlyLibraries(Optional<Boolean> readOnlyLibraries) {
         Utils.checkNotNull(readOnlyLibraries, "readOnlyLibraries");
         this.readOnlyLibraries = readOnlyLibraries;
@@ -902,6 +988,7 @@ public class GetMediaProvidersMediaContainer {
         this.streamingBrainABRVersion = Optional.ofNullable(streamingBrainABRVersion);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withStreamingBrainABRVersion(Optional<Long> streamingBrainABRVersion) {
         Utils.checkNotNull(streamingBrainABRVersion, "streamingBrainABRVersion");
@@ -915,6 +1002,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withStreamingBrainVersion(Optional<Long> streamingBrainVersion) {
         Utils.checkNotNull(streamingBrainVersion, "streamingBrainVersion");
         this.streamingBrainVersion = streamingBrainVersion;
@@ -926,6 +1014,7 @@ public class GetMediaProvidersMediaContainer {
         this.sync = Optional.ofNullable(sync);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withSync(Optional<Boolean> sync) {
         Utils.checkNotNull(sync, "sync");
@@ -939,6 +1028,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withTranscoderActiveVideoSessions(Optional<Long> transcoderActiveVideoSessions) {
         Utils.checkNotNull(transcoderActiveVideoSessions, "transcoderActiveVideoSessions");
         this.transcoderActiveVideoSessions = transcoderActiveVideoSessions;
@@ -950,6 +1040,7 @@ public class GetMediaProvidersMediaContainer {
         this.transcoderAudio = Optional.ofNullable(transcoderAudio);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withTranscoderAudio(Optional<Boolean> transcoderAudio) {
         Utils.checkNotNull(transcoderAudio, "transcoderAudio");
@@ -963,6 +1054,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withTranscoderLyrics(Optional<Boolean> transcoderLyrics) {
         Utils.checkNotNull(transcoderLyrics, "transcoderLyrics");
         this.transcoderLyrics = transcoderLyrics;
@@ -974,6 +1066,7 @@ public class GetMediaProvidersMediaContainer {
         this.transcoderSubtitles = Optional.ofNullable(transcoderSubtitles);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withTranscoderSubtitles(Optional<Boolean> transcoderSubtitles) {
         Utils.checkNotNull(transcoderSubtitles, "transcoderSubtitles");
@@ -987,6 +1080,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withTranscoderVideo(Optional<Boolean> transcoderVideo) {
         Utils.checkNotNull(transcoderVideo, "transcoderVideo");
         this.transcoderVideo = transcoderVideo;
@@ -998,6 +1092,7 @@ public class GetMediaProvidersMediaContainer {
         this.transcoderVideoBitrates = Optional.ofNullable(transcoderVideoBitrates);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withTranscoderVideoBitrates(Optional<String> transcoderVideoBitrates) {
         Utils.checkNotNull(transcoderVideoBitrates, "transcoderVideoBitrates");
@@ -1011,6 +1106,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withTranscoderVideoQualities(Optional<String> transcoderVideoQualities) {
         Utils.checkNotNull(transcoderVideoQualities, "transcoderVideoQualities");
         this.transcoderVideoQualities = transcoderVideoQualities;
@@ -1022,6 +1118,7 @@ public class GetMediaProvidersMediaContainer {
         this.transcoderVideoResolutions = Optional.ofNullable(transcoderVideoResolutions);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withTranscoderVideoResolutions(Optional<String> transcoderVideoResolutions) {
         Utils.checkNotNull(transcoderVideoResolutions, "transcoderVideoResolutions");
@@ -1035,6 +1132,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withUpdatedAt(Optional<Long> updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
         this.updatedAt = updatedAt;
@@ -1046,6 +1144,7 @@ public class GetMediaProvidersMediaContainer {
         this.updater = Optional.ofNullable(updater);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withUpdater(Optional<Boolean> updater) {
         Utils.checkNotNull(updater, "updater");
@@ -1059,6 +1158,7 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withVersion(Optional<String> version) {
         Utils.checkNotNull(version, "version");
         this.version = version;
@@ -1070,6 +1170,7 @@ public class GetMediaProvidersMediaContainer {
         this.voiceSearch = Optional.ofNullable(voiceSearch);
         return this;
     }
+
 
     public GetMediaProvidersMediaContainer withVoiceSearch(Optional<Boolean> voiceSearch) {
         Utils.checkNotNull(voiceSearch, "voiceSearch");
@@ -1083,13 +1184,13 @@ public class GetMediaProvidersMediaContainer {
         return this;
     }
 
+
     public GetMediaProvidersMediaContainer withMediaProvider(Optional<? extends List<MediaProvider>> mediaProvider) {
         Utils.checkNotNull(mediaProvider, "mediaProvider");
         this.mediaProvider = mediaProvider;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -1100,99 +1201,70 @@ public class GetMediaProvidersMediaContainer {
         }
         GetMediaProvidersMediaContainer other = (GetMediaProvidersMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.allowCameraUpload, other.allowCameraUpload) &&
-            Objects.deepEquals(this.allowChannelAccess, other.allowChannelAccess) &&
-            Objects.deepEquals(this.allowSharing, other.allowSharing) &&
-            Objects.deepEquals(this.allowSync, other.allowSync) &&
-            Objects.deepEquals(this.allowTuners, other.allowTuners) &&
-            Objects.deepEquals(this.backgroundProcessing, other.backgroundProcessing) &&
-            Objects.deepEquals(this.certificate, other.certificate) &&
-            Objects.deepEquals(this.companionProxy, other.companionProxy) &&
-            Objects.deepEquals(this.countryCode, other.countryCode) &&
-            Objects.deepEquals(this.diagnostics, other.diagnostics) &&
-            Objects.deepEquals(this.eventStream, other.eventStream) &&
-            Objects.deepEquals(this.friendlyName, other.friendlyName) &&
-            Objects.deepEquals(this.livetv, other.livetv) &&
-            Objects.deepEquals(this.machineIdentifier, other.machineIdentifier) &&
-            Objects.deepEquals(this.musicAnalysis, other.musicAnalysis) &&
-            Objects.deepEquals(this.myPlex, other.myPlex) &&
-            Objects.deepEquals(this.myPlexMappingState, other.myPlexMappingState) &&
-            Objects.deepEquals(this.myPlexSigninState, other.myPlexSigninState) &&
-            Objects.deepEquals(this.myPlexSubscription, other.myPlexSubscription) &&
-            Objects.deepEquals(this.myPlexUsername, other.myPlexUsername) &&
-            Objects.deepEquals(this.offlineTranscode, other.offlineTranscode) &&
-            Objects.deepEquals(this.ownerFeatures, other.ownerFeatures) &&
-            Objects.deepEquals(this.platform, other.platform) &&
-            Objects.deepEquals(this.platformVersion, other.platformVersion) &&
-            Objects.deepEquals(this.pluginHost, other.pluginHost) &&
-            Objects.deepEquals(this.pushNotifications, other.pushNotifications) &&
-            Objects.deepEquals(this.readOnlyLibraries, other.readOnlyLibraries) &&
-            Objects.deepEquals(this.streamingBrainABRVersion, other.streamingBrainABRVersion) &&
-            Objects.deepEquals(this.streamingBrainVersion, other.streamingBrainVersion) &&
-            Objects.deepEquals(this.sync, other.sync) &&
-            Objects.deepEquals(this.transcoderActiveVideoSessions, other.transcoderActiveVideoSessions) &&
-            Objects.deepEquals(this.transcoderAudio, other.transcoderAudio) &&
-            Objects.deepEquals(this.transcoderLyrics, other.transcoderLyrics) &&
-            Objects.deepEquals(this.transcoderSubtitles, other.transcoderSubtitles) &&
-            Objects.deepEquals(this.transcoderVideo, other.transcoderVideo) &&
-            Objects.deepEquals(this.transcoderVideoBitrates, other.transcoderVideoBitrates) &&
-            Objects.deepEquals(this.transcoderVideoQualities, other.transcoderVideoQualities) &&
-            Objects.deepEquals(this.transcoderVideoResolutions, other.transcoderVideoResolutions) &&
-            Objects.deepEquals(this.updatedAt, other.updatedAt) &&
-            Objects.deepEquals(this.updater, other.updater) &&
-            Objects.deepEquals(this.version, other.version) &&
-            Objects.deepEquals(this.voiceSearch, other.voiceSearch) &&
-            Objects.deepEquals(this.mediaProvider, other.mediaProvider);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.allowCameraUpload, other.allowCameraUpload) &&
+            Utils.enhancedDeepEquals(this.allowChannelAccess, other.allowChannelAccess) &&
+            Utils.enhancedDeepEquals(this.allowSharing, other.allowSharing) &&
+            Utils.enhancedDeepEquals(this.allowSync, other.allowSync) &&
+            Utils.enhancedDeepEquals(this.allowTuners, other.allowTuners) &&
+            Utils.enhancedDeepEquals(this.backgroundProcessing, other.backgroundProcessing) &&
+            Utils.enhancedDeepEquals(this.certificate, other.certificate) &&
+            Utils.enhancedDeepEquals(this.companionProxy, other.companionProxy) &&
+            Utils.enhancedDeepEquals(this.countryCode, other.countryCode) &&
+            Utils.enhancedDeepEquals(this.diagnostics, other.diagnostics) &&
+            Utils.enhancedDeepEquals(this.eventStream, other.eventStream) &&
+            Utils.enhancedDeepEquals(this.friendlyName, other.friendlyName) &&
+            Utils.enhancedDeepEquals(this.livetv, other.livetv) &&
+            Utils.enhancedDeepEquals(this.machineIdentifier, other.machineIdentifier) &&
+            Utils.enhancedDeepEquals(this.musicAnalysis, other.musicAnalysis) &&
+            Utils.enhancedDeepEquals(this.myPlex, other.myPlex) &&
+            Utils.enhancedDeepEquals(this.myPlexMappingState, other.myPlexMappingState) &&
+            Utils.enhancedDeepEquals(this.myPlexSigninState, other.myPlexSigninState) &&
+            Utils.enhancedDeepEquals(this.myPlexSubscription, other.myPlexSubscription) &&
+            Utils.enhancedDeepEquals(this.myPlexUsername, other.myPlexUsername) &&
+            Utils.enhancedDeepEquals(this.offlineTranscode, other.offlineTranscode) &&
+            Utils.enhancedDeepEquals(this.ownerFeatures, other.ownerFeatures) &&
+            Utils.enhancedDeepEquals(this.platform, other.platform) &&
+            Utils.enhancedDeepEquals(this.platformVersion, other.platformVersion) &&
+            Utils.enhancedDeepEquals(this.pluginHost, other.pluginHost) &&
+            Utils.enhancedDeepEquals(this.pushNotifications, other.pushNotifications) &&
+            Utils.enhancedDeepEquals(this.readOnlyLibraries, other.readOnlyLibraries) &&
+            Utils.enhancedDeepEquals(this.streamingBrainABRVersion, other.streamingBrainABRVersion) &&
+            Utils.enhancedDeepEquals(this.streamingBrainVersion, other.streamingBrainVersion) &&
+            Utils.enhancedDeepEquals(this.sync, other.sync) &&
+            Utils.enhancedDeepEquals(this.transcoderActiveVideoSessions, other.transcoderActiveVideoSessions) &&
+            Utils.enhancedDeepEquals(this.transcoderAudio, other.transcoderAudio) &&
+            Utils.enhancedDeepEquals(this.transcoderLyrics, other.transcoderLyrics) &&
+            Utils.enhancedDeepEquals(this.transcoderSubtitles, other.transcoderSubtitles) &&
+            Utils.enhancedDeepEquals(this.transcoderVideo, other.transcoderVideo) &&
+            Utils.enhancedDeepEquals(this.transcoderVideoBitrates, other.transcoderVideoBitrates) &&
+            Utils.enhancedDeepEquals(this.transcoderVideoQualities, other.transcoderVideoQualities) &&
+            Utils.enhancedDeepEquals(this.transcoderVideoResolutions, other.transcoderVideoResolutions) &&
+            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt) &&
+            Utils.enhancedDeepEquals(this.updater, other.updater) &&
+            Utils.enhancedDeepEquals(this.version, other.version) &&
+            Utils.enhancedDeepEquals(this.voiceSearch, other.voiceSearch) &&
+            Utils.enhancedDeepEquals(this.mediaProvider, other.mediaProvider);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            allowCameraUpload,
-            allowChannelAccess,
-            allowSharing,
-            allowSync,
-            allowTuners,
-            backgroundProcessing,
-            certificate,
-            companionProxy,
-            countryCode,
-            diagnostics,
-            eventStream,
-            friendlyName,
-            livetv,
-            machineIdentifier,
-            musicAnalysis,
-            myPlex,
-            myPlexMappingState,
-            myPlexSigninState,
-            myPlexSubscription,
-            myPlexUsername,
-            offlineTranscode,
-            ownerFeatures,
-            platform,
-            platformVersion,
-            pluginHost,
-            pushNotifications,
-            readOnlyLibraries,
-            streamingBrainABRVersion,
-            streamingBrainVersion,
-            sync,
-            transcoderActiveVideoSessions,
-            transcoderAudio,
-            transcoderLyrics,
-            transcoderSubtitles,
-            transcoderVideo,
-            transcoderVideoBitrates,
-            transcoderVideoQualities,
-            transcoderVideoResolutions,
-            updatedAt,
-            updater,
-            version,
-            voiceSearch,
-            mediaProvider);
+        return Utils.enhancedHash(
+            size, allowCameraUpload, allowChannelAccess,
+            allowSharing, allowSync, allowTuners,
+            backgroundProcessing, certificate, companionProxy,
+            countryCode, diagnostics, eventStream,
+            friendlyName, livetv, machineIdentifier,
+            musicAnalysis, myPlex, myPlexMappingState,
+            myPlexSigninState, myPlexSubscription, myPlexUsername,
+            offlineTranscode, ownerFeatures, platform,
+            platformVersion, pluginHost, pushNotifications,
+            readOnlyLibraries, streamingBrainABRVersion, streamingBrainVersion,
+            sync, transcoderActiveVideoSessions, transcoderAudio,
+            transcoderLyrics, transcoderSubtitles, transcoderVideo,
+            transcoderVideoBitrates, transcoderVideoQualities, transcoderVideoResolutions,
+            updatedAt, updater, version,
+            voiceSearch, mediaProvider);
     }
     
     @Override
@@ -1243,100 +1315,102 @@ public class GetMediaProvidersMediaContainer {
                 "voiceSearch", voiceSearch,
                 "mediaProvider", mediaProvider);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Long> size = Optional.empty();
- 
+
         private Optional<Boolean> allowCameraUpload = Optional.empty();
- 
+
         private Optional<Boolean> allowChannelAccess = Optional.empty();
- 
+
         private Optional<Boolean> allowSharing = Optional.empty();
- 
+
         private Optional<Boolean> allowSync = Optional.empty();
- 
+
         private Optional<Boolean> allowTuners = Optional.empty();
- 
+
         private Optional<Boolean> backgroundProcessing = Optional.empty();
- 
+
         private Optional<Boolean> certificate = Optional.empty();
- 
+
         private Optional<Boolean> companionProxy = Optional.empty();
- 
+
         private Optional<String> countryCode = Optional.empty();
- 
+
         private Optional<String> diagnostics = Optional.empty();
- 
+
         private Optional<Boolean> eventStream = Optional.empty();
- 
+
         private Optional<String> friendlyName = Optional.empty();
- 
+
         private Optional<Long> livetv = Optional.empty();
- 
+
         private Optional<String> machineIdentifier = Optional.empty();
- 
+
         private Optional<Long> musicAnalysis = Optional.empty();
- 
+
         private Optional<Boolean> myPlex = Optional.empty();
- 
+
         private Optional<String> myPlexMappingState = Optional.empty();
- 
+
         private Optional<String> myPlexSigninState = Optional.empty();
- 
+
         private Optional<Boolean> myPlexSubscription = Optional.empty();
- 
+
         private Optional<String> myPlexUsername = Optional.empty();
- 
+
         private Optional<Long> offlineTranscode = Optional.empty();
- 
+
         private Optional<String> ownerFeatures = Optional.empty();
- 
+
         private Optional<String> platform = Optional.empty();
- 
+
         private Optional<String> platformVersion = Optional.empty();
- 
+
         private Optional<Boolean> pluginHost = Optional.empty();
- 
+
         private Optional<Boolean> pushNotifications = Optional.empty();
- 
+
         private Optional<Boolean> readOnlyLibraries = Optional.empty();
- 
+
         private Optional<Long> streamingBrainABRVersion = Optional.empty();
- 
+
         private Optional<Long> streamingBrainVersion = Optional.empty();
- 
+
         private Optional<Boolean> sync = Optional.empty();
- 
+
         private Optional<Long> transcoderActiveVideoSessions = Optional.empty();
- 
+
         private Optional<Boolean> transcoderAudio = Optional.empty();
- 
+
         private Optional<Boolean> transcoderLyrics = Optional.empty();
- 
+
         private Optional<Boolean> transcoderSubtitles = Optional.empty();
- 
+
         private Optional<Boolean> transcoderVideo = Optional.empty();
- 
+
         private Optional<String> transcoderVideoBitrates = Optional.empty();
- 
+
         private Optional<String> transcoderVideoQualities = Optional.empty();
- 
+
         private Optional<String> transcoderVideoResolutions = Optional.empty();
- 
+
         private Optional<Long> updatedAt = Optional.empty();
- 
+
         private Optional<Boolean> updater = Optional.empty();
- 
+
         private Optional<String> version = Optional.empty();
- 
+
         private Optional<Boolean> voiceSearch = Optional.empty();
- 
+
         private Optional<? extends List<MediaProvider>> mediaProvider = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder size(long size) {
             Utils.checkNotNull(size, "size");
@@ -1350,6 +1424,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder allowCameraUpload(boolean allowCameraUpload) {
             Utils.checkNotNull(allowCameraUpload, "allowCameraUpload");
             this.allowCameraUpload = Optional.ofNullable(allowCameraUpload);
@@ -1361,6 +1436,7 @@ public class GetMediaProvidersMediaContainer {
             this.allowCameraUpload = allowCameraUpload;
             return this;
         }
+
 
         public Builder allowChannelAccess(boolean allowChannelAccess) {
             Utils.checkNotNull(allowChannelAccess, "allowChannelAccess");
@@ -1374,6 +1450,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder allowSharing(boolean allowSharing) {
             Utils.checkNotNull(allowSharing, "allowSharing");
             this.allowSharing = Optional.ofNullable(allowSharing);
@@ -1385,6 +1462,7 @@ public class GetMediaProvidersMediaContainer {
             this.allowSharing = allowSharing;
             return this;
         }
+
 
         public Builder allowSync(boolean allowSync) {
             Utils.checkNotNull(allowSync, "allowSync");
@@ -1398,6 +1476,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder allowTuners(boolean allowTuners) {
             Utils.checkNotNull(allowTuners, "allowTuners");
             this.allowTuners = Optional.ofNullable(allowTuners);
@@ -1409,6 +1488,7 @@ public class GetMediaProvidersMediaContainer {
             this.allowTuners = allowTuners;
             return this;
         }
+
 
         public Builder backgroundProcessing(boolean backgroundProcessing) {
             Utils.checkNotNull(backgroundProcessing, "backgroundProcessing");
@@ -1422,6 +1502,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder certificate(boolean certificate) {
             Utils.checkNotNull(certificate, "certificate");
             this.certificate = Optional.ofNullable(certificate);
@@ -1433,6 +1514,7 @@ public class GetMediaProvidersMediaContainer {
             this.certificate = certificate;
             return this;
         }
+
 
         public Builder companionProxy(boolean companionProxy) {
             Utils.checkNotNull(companionProxy, "companionProxy");
@@ -1446,6 +1528,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder countryCode(String countryCode) {
             Utils.checkNotNull(countryCode, "countryCode");
             this.countryCode = Optional.ofNullable(countryCode);
@@ -1457,6 +1540,7 @@ public class GetMediaProvidersMediaContainer {
             this.countryCode = countryCode;
             return this;
         }
+
 
         public Builder diagnostics(String diagnostics) {
             Utils.checkNotNull(diagnostics, "diagnostics");
@@ -1470,6 +1554,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder eventStream(boolean eventStream) {
             Utils.checkNotNull(eventStream, "eventStream");
             this.eventStream = Optional.ofNullable(eventStream);
@@ -1481,6 +1566,7 @@ public class GetMediaProvidersMediaContainer {
             this.eventStream = eventStream;
             return this;
         }
+
 
         public Builder friendlyName(String friendlyName) {
             Utils.checkNotNull(friendlyName, "friendlyName");
@@ -1494,6 +1580,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder livetv(long livetv) {
             Utils.checkNotNull(livetv, "livetv");
             this.livetv = Optional.ofNullable(livetv);
@@ -1505,6 +1592,7 @@ public class GetMediaProvidersMediaContainer {
             this.livetv = livetv;
             return this;
         }
+
 
         public Builder machineIdentifier(String machineIdentifier) {
             Utils.checkNotNull(machineIdentifier, "machineIdentifier");
@@ -1518,6 +1606,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder musicAnalysis(long musicAnalysis) {
             Utils.checkNotNull(musicAnalysis, "musicAnalysis");
             this.musicAnalysis = Optional.ofNullable(musicAnalysis);
@@ -1529,6 +1618,7 @@ public class GetMediaProvidersMediaContainer {
             this.musicAnalysis = musicAnalysis;
             return this;
         }
+
 
         public Builder myPlex(boolean myPlex) {
             Utils.checkNotNull(myPlex, "myPlex");
@@ -1542,6 +1632,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder myPlexMappingState(String myPlexMappingState) {
             Utils.checkNotNull(myPlexMappingState, "myPlexMappingState");
             this.myPlexMappingState = Optional.ofNullable(myPlexMappingState);
@@ -1553,6 +1644,7 @@ public class GetMediaProvidersMediaContainer {
             this.myPlexMappingState = myPlexMappingState;
             return this;
         }
+
 
         public Builder myPlexSigninState(String myPlexSigninState) {
             Utils.checkNotNull(myPlexSigninState, "myPlexSigninState");
@@ -1566,6 +1658,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder myPlexSubscription(boolean myPlexSubscription) {
             Utils.checkNotNull(myPlexSubscription, "myPlexSubscription");
             this.myPlexSubscription = Optional.ofNullable(myPlexSubscription);
@@ -1577,6 +1670,7 @@ public class GetMediaProvidersMediaContainer {
             this.myPlexSubscription = myPlexSubscription;
             return this;
         }
+
 
         public Builder myPlexUsername(String myPlexUsername) {
             Utils.checkNotNull(myPlexUsername, "myPlexUsername");
@@ -1590,6 +1684,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder offlineTranscode(long offlineTranscode) {
             Utils.checkNotNull(offlineTranscode, "offlineTranscode");
             this.offlineTranscode = Optional.ofNullable(offlineTranscode);
@@ -1601,6 +1696,7 @@ public class GetMediaProvidersMediaContainer {
             this.offlineTranscode = offlineTranscode;
             return this;
         }
+
 
         public Builder ownerFeatures(String ownerFeatures) {
             Utils.checkNotNull(ownerFeatures, "ownerFeatures");
@@ -1614,6 +1710,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder platform(String platform) {
             Utils.checkNotNull(platform, "platform");
             this.platform = Optional.ofNullable(platform);
@@ -1625,6 +1722,7 @@ public class GetMediaProvidersMediaContainer {
             this.platform = platform;
             return this;
         }
+
 
         public Builder platformVersion(String platformVersion) {
             Utils.checkNotNull(platformVersion, "platformVersion");
@@ -1638,6 +1736,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder pluginHost(boolean pluginHost) {
             Utils.checkNotNull(pluginHost, "pluginHost");
             this.pluginHost = Optional.ofNullable(pluginHost);
@@ -1649,6 +1748,7 @@ public class GetMediaProvidersMediaContainer {
             this.pluginHost = pluginHost;
             return this;
         }
+
 
         public Builder pushNotifications(boolean pushNotifications) {
             Utils.checkNotNull(pushNotifications, "pushNotifications");
@@ -1662,6 +1762,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder readOnlyLibraries(boolean readOnlyLibraries) {
             Utils.checkNotNull(readOnlyLibraries, "readOnlyLibraries");
             this.readOnlyLibraries = Optional.ofNullable(readOnlyLibraries);
@@ -1673,6 +1774,7 @@ public class GetMediaProvidersMediaContainer {
             this.readOnlyLibraries = readOnlyLibraries;
             return this;
         }
+
 
         public Builder streamingBrainABRVersion(long streamingBrainABRVersion) {
             Utils.checkNotNull(streamingBrainABRVersion, "streamingBrainABRVersion");
@@ -1686,6 +1788,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder streamingBrainVersion(long streamingBrainVersion) {
             Utils.checkNotNull(streamingBrainVersion, "streamingBrainVersion");
             this.streamingBrainVersion = Optional.ofNullable(streamingBrainVersion);
@@ -1697,6 +1800,7 @@ public class GetMediaProvidersMediaContainer {
             this.streamingBrainVersion = streamingBrainVersion;
             return this;
         }
+
 
         public Builder sync(boolean sync) {
             Utils.checkNotNull(sync, "sync");
@@ -1710,6 +1814,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder transcoderActiveVideoSessions(long transcoderActiveVideoSessions) {
             Utils.checkNotNull(transcoderActiveVideoSessions, "transcoderActiveVideoSessions");
             this.transcoderActiveVideoSessions = Optional.ofNullable(transcoderActiveVideoSessions);
@@ -1721,6 +1826,7 @@ public class GetMediaProvidersMediaContainer {
             this.transcoderActiveVideoSessions = transcoderActiveVideoSessions;
             return this;
         }
+
 
         public Builder transcoderAudio(boolean transcoderAudio) {
             Utils.checkNotNull(transcoderAudio, "transcoderAudio");
@@ -1734,6 +1840,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder transcoderLyrics(boolean transcoderLyrics) {
             Utils.checkNotNull(transcoderLyrics, "transcoderLyrics");
             this.transcoderLyrics = Optional.ofNullable(transcoderLyrics);
@@ -1745,6 +1852,7 @@ public class GetMediaProvidersMediaContainer {
             this.transcoderLyrics = transcoderLyrics;
             return this;
         }
+
 
         public Builder transcoderSubtitles(boolean transcoderSubtitles) {
             Utils.checkNotNull(transcoderSubtitles, "transcoderSubtitles");
@@ -1758,6 +1866,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder transcoderVideo(boolean transcoderVideo) {
             Utils.checkNotNull(transcoderVideo, "transcoderVideo");
             this.transcoderVideo = Optional.ofNullable(transcoderVideo);
@@ -1769,6 +1878,7 @@ public class GetMediaProvidersMediaContainer {
             this.transcoderVideo = transcoderVideo;
             return this;
         }
+
 
         public Builder transcoderVideoBitrates(String transcoderVideoBitrates) {
             Utils.checkNotNull(transcoderVideoBitrates, "transcoderVideoBitrates");
@@ -1782,6 +1892,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder transcoderVideoQualities(String transcoderVideoQualities) {
             Utils.checkNotNull(transcoderVideoQualities, "transcoderVideoQualities");
             this.transcoderVideoQualities = Optional.ofNullable(transcoderVideoQualities);
@@ -1793,6 +1904,7 @@ public class GetMediaProvidersMediaContainer {
             this.transcoderVideoQualities = transcoderVideoQualities;
             return this;
         }
+
 
         public Builder transcoderVideoResolutions(String transcoderVideoResolutions) {
             Utils.checkNotNull(transcoderVideoResolutions, "transcoderVideoResolutions");
@@ -1806,6 +1918,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder updatedAt(long updatedAt) {
             Utils.checkNotNull(updatedAt, "updatedAt");
             this.updatedAt = Optional.ofNullable(updatedAt);
@@ -1817,6 +1930,7 @@ public class GetMediaProvidersMediaContainer {
             this.updatedAt = updatedAt;
             return this;
         }
+
 
         public Builder updater(boolean updater) {
             Utils.checkNotNull(updater, "updater");
@@ -1830,6 +1944,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder version(String version) {
             Utils.checkNotNull(version, "version");
             this.version = Optional.ofNullable(version);
@@ -1841,6 +1956,7 @@ public class GetMediaProvidersMediaContainer {
             this.version = version;
             return this;
         }
+
 
         public Builder voiceSearch(boolean voiceSearch) {
             Utils.checkNotNull(voiceSearch, "voiceSearch");
@@ -1854,6 +1970,7 @@ public class GetMediaProvidersMediaContainer {
             return this;
         }
 
+
         public Builder mediaProvider(List<MediaProvider> mediaProvider) {
             Utils.checkNotNull(mediaProvider, "mediaProvider");
             this.mediaProvider = Optional.ofNullable(mediaProvider);
@@ -1865,53 +1982,26 @@ public class GetMediaProvidersMediaContainer {
             this.mediaProvider = mediaProvider;
             return this;
         }
-        
+
         public GetMediaProvidersMediaContainer build() {
+
             return new GetMediaProvidersMediaContainer(
-                size,
-                allowCameraUpload,
-                allowChannelAccess,
-                allowSharing,
-                allowSync,
-                allowTuners,
-                backgroundProcessing,
-                certificate,
-                companionProxy,
-                countryCode,
-                diagnostics,
-                eventStream,
-                friendlyName,
-                livetv,
-                machineIdentifier,
-                musicAnalysis,
-                myPlex,
-                myPlexMappingState,
-                myPlexSigninState,
-                myPlexSubscription,
-                myPlexUsername,
-                offlineTranscode,
-                ownerFeatures,
-                platform,
-                platformVersion,
-                pluginHost,
-                pushNotifications,
-                readOnlyLibraries,
-                streamingBrainABRVersion,
-                streamingBrainVersion,
-                sync,
-                transcoderActiveVideoSessions,
-                transcoderAudio,
-                transcoderLyrics,
-                transcoderSubtitles,
-                transcoderVideo,
-                transcoderVideoBitrates,
-                transcoderVideoQualities,
-                transcoderVideoResolutions,
-                updatedAt,
-                updater,
-                version,
-                voiceSearch,
-                mediaProvider);
+                size, allowCameraUpload, allowChannelAccess,
+                allowSharing, allowSync, allowTuners,
+                backgroundProcessing, certificate, companionProxy,
+                countryCode, diagnostics, eventStream,
+                friendlyName, livetv, machineIdentifier,
+                musicAnalysis, myPlex, myPlexMappingState,
+                myPlexSigninState, myPlexSubscription, myPlexUsername,
+                offlineTranscode, ownerFeatures, platform,
+                platformVersion, pluginHost, pushNotifications,
+                readOnlyLibraries, streamingBrainABRVersion, streamingBrainVersion,
+                sync, transcoderActiveVideoSessions, transcoderAudio,
+                transcoderLyrics, transcoderSubtitles, transcoderVideo,
+                transcoderVideoBitrates, transcoderVideoQualities, transcoderVideoResolutions,
+                updatedAt, updater, version,
+                voiceSearch, mediaProvider);
         }
+
     }
 }

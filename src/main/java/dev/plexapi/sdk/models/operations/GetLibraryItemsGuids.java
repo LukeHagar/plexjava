@@ -9,10 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetLibraryItemsGuids {
-
     /**
      * The unique identifier for the Guid. Can be prefixed with imdb://, tmdb://, tvdb://
      */
@@ -34,9 +33,10 @@ public class GetLibraryItemsGuids {
         return id;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The unique identifier for the Guid. Can be prefixed with imdb://, tmdb://, tvdb://
@@ -47,7 +47,6 @@ public class GetLibraryItemsGuids {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -58,12 +57,12 @@ public class GetLibraryItemsGuids {
         }
         GetLibraryItemsGuids other = (GetLibraryItemsGuids) o;
         return 
-            Objects.deepEquals(this.id, other.id);
+            Utils.enhancedDeepEquals(this.id, other.id);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             id);
     }
     
@@ -72,14 +71,16 @@ public class GetLibraryItemsGuids {
         return Utils.toString(GetLibraryItemsGuids.class,
                 "id", id);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String id;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The unique identifier for the Guid. Can be prefixed with imdb://, tmdb://, tvdb://
@@ -89,10 +90,12 @@ public class GetLibraryItemsGuids {
             this.id = id;
             return this;
         }
-        
+
         public GetLibraryItemsGuids build() {
+
             return new GetLibraryItemsGuids(
                 id);
         }
+
     }
 }

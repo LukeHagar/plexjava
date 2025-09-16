@@ -15,7 +15,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -29,33 +28,41 @@ public class GetRecentlyAddedLibraryMediaContainer {
     @JsonProperty("Type")
     private Optional<? extends List<GetRecentlyAddedLibraryType>> type;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("FieldType")
     private Optional<? extends List<FieldType>> fieldType;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("size")
     private Optional<Double> size;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("allowSync")
     private Optional<Boolean> allowSync;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("identifier")
     private Optional<String> identifier;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mediaTagPrefix")
     private Optional<String> mediaTagPrefix;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mediaTagVersion")
     private Optional<Double> mediaTagVersion;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mixedParents")
     private Optional<Boolean> mixedParents;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Metadata")
@@ -93,7 +100,9 @@ public class GetRecentlyAddedLibraryMediaContainer {
     }
     
     public GetRecentlyAddedLibraryMediaContainer() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
@@ -144,15 +153,17 @@ public class GetRecentlyAddedLibraryMediaContainer {
         return (Optional<List<GetRecentlyAddedLibraryMetadata>>) metadata;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetRecentlyAddedLibraryMediaContainer withType(List<GetRecentlyAddedLibraryType> type) {
         Utils.checkNotNull(type, "type");
         this.type = Optional.ofNullable(type);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryMediaContainer withType(Optional<? extends List<GetRecentlyAddedLibraryType>> type) {
         Utils.checkNotNull(type, "type");
@@ -166,6 +177,7 @@ public class GetRecentlyAddedLibraryMediaContainer {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMediaContainer withFieldType(Optional<? extends List<FieldType>> fieldType) {
         Utils.checkNotNull(fieldType, "fieldType");
         this.fieldType = fieldType;
@@ -177,6 +189,7 @@ public class GetRecentlyAddedLibraryMediaContainer {
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryMediaContainer withSize(Optional<Double> size) {
         Utils.checkNotNull(size, "size");
@@ -190,6 +203,7 @@ public class GetRecentlyAddedLibraryMediaContainer {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMediaContainer withAllowSync(Optional<Boolean> allowSync) {
         Utils.checkNotNull(allowSync, "allowSync");
         this.allowSync = allowSync;
@@ -201,6 +215,7 @@ public class GetRecentlyAddedLibraryMediaContainer {
         this.identifier = Optional.ofNullable(identifier);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryMediaContainer withIdentifier(Optional<String> identifier) {
         Utils.checkNotNull(identifier, "identifier");
@@ -214,6 +229,7 @@ public class GetRecentlyAddedLibraryMediaContainer {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMediaContainer withMediaTagPrefix(Optional<String> mediaTagPrefix) {
         Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
         this.mediaTagPrefix = mediaTagPrefix;
@@ -225,6 +241,7 @@ public class GetRecentlyAddedLibraryMediaContainer {
         this.mediaTagVersion = Optional.ofNullable(mediaTagVersion);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryMediaContainer withMediaTagVersion(Optional<Double> mediaTagVersion) {
         Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
@@ -238,6 +255,7 @@ public class GetRecentlyAddedLibraryMediaContainer {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMediaContainer withMixedParents(Optional<Boolean> mixedParents) {
         Utils.checkNotNull(mixedParents, "mixedParents");
         this.mixedParents = mixedParents;
@@ -250,13 +268,13 @@ public class GetRecentlyAddedLibraryMediaContainer {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMediaContainer withMetadata(Optional<? extends List<GetRecentlyAddedLibraryMetadata>> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -267,29 +285,23 @@ public class GetRecentlyAddedLibraryMediaContainer {
         }
         GetRecentlyAddedLibraryMediaContainer other = (GetRecentlyAddedLibraryMediaContainer) o;
         return 
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.fieldType, other.fieldType) &&
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.allowSync, other.allowSync) &&
-            Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
-            Objects.deepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
-            Objects.deepEquals(this.mixedParents, other.mixedParents) &&
-            Objects.deepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.fieldType, other.fieldType) &&
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.allowSync, other.allowSync) &&
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
+            Utils.enhancedDeepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
+            Utils.enhancedDeepEquals(this.mixedParents, other.mixedParents) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            type,
-            fieldType,
-            size,
-            allowSync,
-            identifier,
-            mediaTagPrefix,
-            mediaTagVersion,
-            mixedParents,
-            metadata);
+        return Utils.enhancedHash(
+            type, fieldType, size,
+            allowSync, identifier, mediaTagPrefix,
+            mediaTagVersion, mixedParents, metadata);
     }
     
     @Override
@@ -305,30 +317,32 @@ public class GetRecentlyAddedLibraryMediaContainer {
                 "mixedParents", mixedParents,
                 "metadata", metadata);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends List<GetRecentlyAddedLibraryType>> type = Optional.empty();
- 
+
         private Optional<? extends List<FieldType>> fieldType = Optional.empty();
- 
+
         private Optional<Double> size = Optional.empty();
- 
+
         private Optional<Boolean> allowSync = Optional.empty();
- 
+
         private Optional<String> identifier = Optional.empty();
- 
+
         private Optional<String> mediaTagPrefix = Optional.empty();
- 
+
         private Optional<Double> mediaTagVersion = Optional.empty();
- 
+
         private Optional<Boolean> mixedParents = Optional.empty();
- 
+
         private Optional<? extends List<GetRecentlyAddedLibraryMetadata>> metadata = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder type(List<GetRecentlyAddedLibraryType> type) {
             Utils.checkNotNull(type, "type");
@@ -342,6 +356,7 @@ public class GetRecentlyAddedLibraryMediaContainer {
             return this;
         }
 
+
         public Builder fieldType(List<FieldType> fieldType) {
             Utils.checkNotNull(fieldType, "fieldType");
             this.fieldType = Optional.ofNullable(fieldType);
@@ -353,6 +368,7 @@ public class GetRecentlyAddedLibraryMediaContainer {
             this.fieldType = fieldType;
             return this;
         }
+
 
         public Builder size(double size) {
             Utils.checkNotNull(size, "size");
@@ -366,6 +382,7 @@ public class GetRecentlyAddedLibraryMediaContainer {
             return this;
         }
 
+
         public Builder allowSync(boolean allowSync) {
             Utils.checkNotNull(allowSync, "allowSync");
             this.allowSync = Optional.ofNullable(allowSync);
@@ -377,6 +394,7 @@ public class GetRecentlyAddedLibraryMediaContainer {
             this.allowSync = allowSync;
             return this;
         }
+
 
         public Builder identifier(String identifier) {
             Utils.checkNotNull(identifier, "identifier");
@@ -390,6 +408,7 @@ public class GetRecentlyAddedLibraryMediaContainer {
             return this;
         }
 
+
         public Builder mediaTagPrefix(String mediaTagPrefix) {
             Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
             this.mediaTagPrefix = Optional.ofNullable(mediaTagPrefix);
@@ -401,6 +420,7 @@ public class GetRecentlyAddedLibraryMediaContainer {
             this.mediaTagPrefix = mediaTagPrefix;
             return this;
         }
+
 
         public Builder mediaTagVersion(double mediaTagVersion) {
             Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
@@ -414,6 +434,7 @@ public class GetRecentlyAddedLibraryMediaContainer {
             return this;
         }
 
+
         public Builder mixedParents(boolean mixedParents) {
             Utils.checkNotNull(mixedParents, "mixedParents");
             this.mixedParents = Optional.ofNullable(mixedParents);
@@ -426,6 +447,7 @@ public class GetRecentlyAddedLibraryMediaContainer {
             return this;
         }
 
+
         public Builder metadata(List<GetRecentlyAddedLibraryMetadata> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = Optional.ofNullable(metadata);
@@ -437,18 +459,14 @@ public class GetRecentlyAddedLibraryMediaContainer {
             this.metadata = metadata;
             return this;
         }
-        
+
         public GetRecentlyAddedLibraryMediaContainer build() {
+
             return new GetRecentlyAddedLibraryMediaContainer(
-                type,
-                fieldType,
-                size,
-                allowSync,
-                identifier,
-                mediaTagPrefix,
-                mediaTagVersion,
-                mixedParents,
-                metadata);
+                type, fieldType, size,
+                allowSync, identifier, mediaTagPrefix,
+                mediaTagVersion, mixedParents, metadata);
         }
+
     }
 }

@@ -10,11 +10,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetTokenByPinIdRequest {
 
+public class GetTokenByPinIdRequest {
     /**
      * The PinID to retrieve an access token for
      */
@@ -76,7 +75,8 @@ public class GetTokenByPinIdRequest {
     public GetTokenByPinIdRequest(
             long pinID,
             String clientID) {
-        this(pinID, clientID, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(pinID, clientID, Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -127,9 +127,10 @@ public class GetTokenByPinIdRequest {
         return platform;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The PinID to retrieve an access token for
@@ -158,6 +159,7 @@ public class GetTokenByPinIdRequest {
         return this;
     }
 
+
     /**
      * The name of the client application. (Plex Web, Plex Media Server, etc.)
      */
@@ -175,6 +177,7 @@ public class GetTokenByPinIdRequest {
         this.deviceNickname = Optional.ofNullable(deviceNickname);
         return this;
     }
+
 
     /**
      * A relatively friendly name for the client device
@@ -194,6 +197,7 @@ public class GetTokenByPinIdRequest {
         return this;
     }
 
+
     /**
      * The version of the client application.
      */
@@ -212,6 +216,7 @@ public class GetTokenByPinIdRequest {
         return this;
     }
 
+
     /**
      * The platform of the client application.
      */
@@ -221,7 +226,6 @@ public class GetTokenByPinIdRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -232,23 +236,19 @@ public class GetTokenByPinIdRequest {
         }
         GetTokenByPinIdRequest other = (GetTokenByPinIdRequest) o;
         return 
-            Objects.deepEquals(this.pinID, other.pinID) &&
-            Objects.deepEquals(this.clientID, other.clientID) &&
-            Objects.deepEquals(this.clientName, other.clientName) &&
-            Objects.deepEquals(this.deviceNickname, other.deviceNickname) &&
-            Objects.deepEquals(this.clientVersion, other.clientVersion) &&
-            Objects.deepEquals(this.platform, other.platform);
+            Utils.enhancedDeepEquals(this.pinID, other.pinID) &&
+            Utils.enhancedDeepEquals(this.clientID, other.clientID) &&
+            Utils.enhancedDeepEquals(this.clientName, other.clientName) &&
+            Utils.enhancedDeepEquals(this.deviceNickname, other.deviceNickname) &&
+            Utils.enhancedDeepEquals(this.clientVersion, other.clientVersion) &&
+            Utils.enhancedDeepEquals(this.platform, other.platform);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            pinID,
-            clientID,
-            clientName,
-            deviceNickname,
-            clientVersion,
-            platform);
+        return Utils.enhancedHash(
+            pinID, clientID, clientName,
+            deviceNickname, clientVersion, platform);
     }
     
     @Override
@@ -261,24 +261,26 @@ public class GetTokenByPinIdRequest {
                 "clientVersion", clientVersion,
                 "platform", platform);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Long pinID;
- 
+
         private String clientID;
- 
+
         private Optional<String> clientName = Optional.empty();
- 
+
         private Optional<String> deviceNickname = Optional.empty();
- 
+
         private Optional<String> clientVersion = Optional.empty();
- 
+
         private Optional<String> platform = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The PinID to retrieve an access token for
@@ -289,6 +291,7 @@ public class GetTokenByPinIdRequest {
             return this;
         }
 
+
         /**
          * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
          */
@@ -297,6 +300,7 @@ public class GetTokenByPinIdRequest {
             this.clientID = clientID;
             return this;
         }
+
 
         /**
          * The name of the client application. (Plex Web, Plex Media Server, etc.)
@@ -316,6 +320,7 @@ public class GetTokenByPinIdRequest {
             return this;
         }
 
+
         /**
          * A relatively friendly name for the client device
          */
@@ -333,6 +338,7 @@ public class GetTokenByPinIdRequest {
             this.deviceNickname = deviceNickname;
             return this;
         }
+
 
         /**
          * The version of the client application.
@@ -352,6 +358,7 @@ public class GetTokenByPinIdRequest {
             return this;
         }
 
+
         /**
          * The platform of the client application.
          */
@@ -369,15 +376,13 @@ public class GetTokenByPinIdRequest {
             this.platform = platform;
             return this;
         }
-        
+
         public GetTokenByPinIdRequest build() {
+
             return new GetTokenByPinIdRequest(
-                pinID,
-                clientID,
-                clientName,
-                deviceNickname,
-                clientVersion,
-                platform);
+                pinID, clientID, clientName,
+                deviceNickname, clientVersion, platform);
         }
+
     }
 }

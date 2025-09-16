@@ -18,7 +18,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
@@ -32,15 +31,19 @@ public class GetPinAuthPinContainer {
     @JsonProperty("id")
     private long id;
 
+
     @JsonProperty("code")
     private String code;
+
 
     @JsonProperty("product")
     private String product;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("trusted")
     private Optional<Boolean> trusted;
+
 
     @JsonProperty("qr")
     private String qr;
@@ -64,15 +67,19 @@ public class GetPinAuthPinContainer {
     @JsonProperty("expiresIn")
     private Optional<Long> expiresIn;
 
+
     @JsonProperty("createdAt")
     private OffsetDateTime createdAt;
+
 
     @JsonProperty("expiresAt")
     private OffsetDateTime expiresAt;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("authToken")
     private JsonNullable<String> authToken;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("newRegistration")
@@ -127,7 +134,10 @@ public class GetPinAuthPinContainer {
             GeoData location,
             OffsetDateTime createdAt,
             OffsetDateTime expiresAt) {
-        this(id, code, product, Optional.empty(), qr, clientIdentifier, location, Optional.empty(), createdAt, expiresAt, JsonNullable.undefined(), JsonNullable.undefined());
+        this(id, code, product,
+            Optional.empty(), qr, clientIdentifier,
+            location, Optional.empty(), createdAt,
+            expiresAt, JsonNullable.undefined(), JsonNullable.undefined());
     }
 
     @JsonIgnore
@@ -200,9 +210,10 @@ public class GetPinAuthPinContainer {
         return (JsonNullable<Object>) newRegistration;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetPinAuthPinContainer withId(long id) {
         Utils.checkNotNull(id, "id");
@@ -227,6 +238,7 @@ public class GetPinAuthPinContainer {
         this.trusted = Optional.ofNullable(trusted);
         return this;
     }
+
 
     public GetPinAuthPinContainer withTrusted(Optional<Boolean> trusted) {
         Utils.checkNotNull(trusted, "trusted");
@@ -266,6 +278,7 @@ public class GetPinAuthPinContainer {
         this.expiresIn = Optional.ofNullable(expiresIn);
         return this;
     }
+
 
     /**
      * The number of seconds this pin expires, by default 900 seconds
@@ -312,7 +325,6 @@ public class GetPinAuthPinContainer {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -323,35 +335,27 @@ public class GetPinAuthPinContainer {
         }
         GetPinAuthPinContainer other = (GetPinAuthPinContainer) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.code, other.code) &&
-            Objects.deepEquals(this.product, other.product) &&
-            Objects.deepEquals(this.trusted, other.trusted) &&
-            Objects.deepEquals(this.qr, other.qr) &&
-            Objects.deepEquals(this.clientIdentifier, other.clientIdentifier) &&
-            Objects.deepEquals(this.location, other.location) &&
-            Objects.deepEquals(this.expiresIn, other.expiresIn) &&
-            Objects.deepEquals(this.createdAt, other.createdAt) &&
-            Objects.deepEquals(this.expiresAt, other.expiresAt) &&
-            Objects.deepEquals(this.authToken, other.authToken) &&
-            Objects.deepEquals(this.newRegistration, other.newRegistration);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.code, other.code) &&
+            Utils.enhancedDeepEquals(this.product, other.product) &&
+            Utils.enhancedDeepEquals(this.trusted, other.trusted) &&
+            Utils.enhancedDeepEquals(this.qr, other.qr) &&
+            Utils.enhancedDeepEquals(this.clientIdentifier, other.clientIdentifier) &&
+            Utils.enhancedDeepEquals(this.location, other.location) &&
+            Utils.enhancedDeepEquals(this.expiresIn, other.expiresIn) &&
+            Utils.enhancedDeepEquals(this.createdAt, other.createdAt) &&
+            Utils.enhancedDeepEquals(this.expiresAt, other.expiresAt) &&
+            Utils.enhancedDeepEquals(this.authToken, other.authToken) &&
+            Utils.enhancedDeepEquals(this.newRegistration, other.newRegistration);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            code,
-            product,
-            trusted,
-            qr,
-            clientIdentifier,
-            location,
-            expiresIn,
-            createdAt,
-            expiresAt,
-            authToken,
-            newRegistration);
+        return Utils.enhancedHash(
+            id, code, product,
+            trusted, qr, clientIdentifier,
+            location, expiresIn, createdAt,
+            expiresAt, authToken, newRegistration);
     }
     
     @Override
@@ -370,36 +374,38 @@ public class GetPinAuthPinContainer {
                 "authToken", authToken,
                 "newRegistration", newRegistration);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Long id;
- 
+
         private String code;
- 
+
         private String product;
- 
+
         private Optional<Boolean> trusted;
- 
+
         private String qr;
- 
+
         private String clientIdentifier;
- 
+
         private GeoData location;
- 
+
         private Optional<Long> expiresIn;
- 
+
         private OffsetDateTime createdAt;
- 
+
         private OffsetDateTime expiresAt;
- 
+
         private JsonNullable<String> authToken = JsonNullable.undefined();
- 
+
         private JsonNullable<? extends Object> newRegistration = JsonNullable.undefined();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder id(long id) {
             Utils.checkNotNull(id, "id");
@@ -407,17 +413,20 @@ public class GetPinAuthPinContainer {
             return this;
         }
 
+
         public Builder code(String code) {
             Utils.checkNotNull(code, "code");
             this.code = code;
             return this;
         }
 
+
         public Builder product(String product) {
             Utils.checkNotNull(product, "product");
             this.product = product;
             return this;
         }
+
 
         public Builder trusted(boolean trusted) {
             Utils.checkNotNull(trusted, "trusted");
@@ -431,11 +440,13 @@ public class GetPinAuthPinContainer {
             return this;
         }
 
+
         public Builder qr(String qr) {
             Utils.checkNotNull(qr, "qr");
             this.qr = qr;
             return this;
         }
+
 
         /**
          * The X-Client-Identifier used in the request
@@ -446,6 +457,7 @@ public class GetPinAuthPinContainer {
             return this;
         }
 
+
         /**
          * Geo location data
          */
@@ -454,6 +466,7 @@ public class GetPinAuthPinContainer {
             this.location = location;
             return this;
         }
+
 
         /**
          * The number of seconds this pin expires, by default 900 seconds
@@ -473,17 +486,20 @@ public class GetPinAuthPinContainer {
             return this;
         }
 
+
         public Builder createdAt(OffsetDateTime createdAt) {
             Utils.checkNotNull(createdAt, "createdAt");
             this.createdAt = createdAt;
             return this;
         }
 
+
         public Builder expiresAt(OffsetDateTime expiresAt) {
             Utils.checkNotNull(expiresAt, "expiresAt");
             this.expiresAt = expiresAt;
             return this;
         }
+
 
         public Builder authToken(String authToken) {
             Utils.checkNotNull(authToken, "authToken");
@@ -497,6 +513,7 @@ public class GetPinAuthPinContainer {
             return this;
         }
 
+
         public Builder newRegistration(Object newRegistration) {
             Utils.checkNotNull(newRegistration, "newRegistration");
             this.newRegistration = JsonNullable.of(newRegistration);
@@ -508,7 +525,7 @@ public class GetPinAuthPinContainer {
             this.newRegistration = newRegistration;
             return this;
         }
-        
+
         public GetPinAuthPinContainer build() {
             if (trusted == null) {
                 trusted = _SINGLETON_VALUE_Trusted.value();
@@ -516,20 +533,14 @@ public class GetPinAuthPinContainer {
             if (expiresIn == null) {
                 expiresIn = _SINGLETON_VALUE_ExpiresIn.value();
             }
+
             return new GetPinAuthPinContainer(
-                id,
-                code,
-                product,
-                trusted,
-                qr,
-                clientIdentifier,
-                location,
-                expiresIn,
-                createdAt,
-                expiresAt,
-                authToken,
-                newRegistration);
+                id, code, product,
+                trusted, qr, clientIdentifier,
+                location, expiresIn, createdAt,
+                expiresAt, authToken, newRegistration);
         }
+
 
         private static final LazySingletonValue<Optional<Boolean>> _SINGLETON_VALUE_Trusted =
                 new LazySingletonValue<>(

@@ -17,8 +17,8 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetTopWatchedContentMetadata {
 
@@ -26,125 +26,156 @@ public class GetTopWatchedContentMetadata {
     @JsonProperty("ratingKey")
     private Optional<String> ratingKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("guid")
     private Optional<String> guid;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("slug")
     private Optional<String> slug;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("studio")
     private Optional<String> studio;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
     private Optional<String> type;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionTitle")
     private Optional<String> librarySectionTitle;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionID")
     private Optional<Integer> librarySectionID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionKey")
     private Optional<String> librarySectionKey;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contentRating")
     private Optional<String> contentRating;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("summary")
     private Optional<String> summary;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("index")
     private Optional<Long> index;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audienceRating")
     private Optional<Double> audienceRating;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("year")
     private Optional<Integer> year;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tagline")
     private Optional<String> tagline;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
     private Optional<String> thumb;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("art")
     private Optional<String> art;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
     private Optional<Integer> duration;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("originallyAvailableAt")
     private Optional<LocalDate> originallyAvailableAt;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("leafCount")
     private Optional<Long> leafCount;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("viewedLeafCount")
     private Optional<Long> viewedLeafCount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("childCount")
     private Optional<Long> childCount;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("addedAt")
     private Optional<Integer> addedAt;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("updatedAt")
     private Optional<Integer> updatedAt;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("globalViewCount")
     private Optional<Long> globalViewCount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audienceRatingImage")
     private Optional<String> audienceRatingImage;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Genre")
     private Optional<? extends List<GetTopWatchedContentGenre>> genre;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Country")
     private Optional<? extends List<GetTopWatchedContentCountry>> country;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Guid")
     private Optional<? extends List<GetTopWatchedContentGuids>> guids;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Role")
     private Optional<? extends List<GetTopWatchedContentRole>> role;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("User")
@@ -251,7 +282,17 @@ public class GetTopWatchedContentMetadata {
     }
     
     public GetTopWatchedContentMetadata() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -419,15 +460,17 @@ public class GetTopWatchedContentMetadata {
         return (Optional<List<GetTopWatchedContentUser>>) user;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetTopWatchedContentMetadata withRatingKey(String ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         this.ratingKey = Optional.ofNullable(ratingKey);
         return this;
     }
+
 
     public GetTopWatchedContentMetadata withRatingKey(Optional<String> ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
@@ -441,6 +484,7 @@ public class GetTopWatchedContentMetadata {
         return this;
     }
 
+
     public GetTopWatchedContentMetadata withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
@@ -452,6 +496,7 @@ public class GetTopWatchedContentMetadata {
         this.guid = Optional.ofNullable(guid);
         return this;
     }
+
 
     public GetTopWatchedContentMetadata withGuid(Optional<String> guid) {
         Utils.checkNotNull(guid, "guid");
@@ -465,6 +510,7 @@ public class GetTopWatchedContentMetadata {
         return this;
     }
 
+
     public GetTopWatchedContentMetadata withSlug(Optional<String> slug) {
         Utils.checkNotNull(slug, "slug");
         this.slug = slug;
@@ -476,6 +522,7 @@ public class GetTopWatchedContentMetadata {
         this.studio = Optional.ofNullable(studio);
         return this;
     }
+
 
     public GetTopWatchedContentMetadata withStudio(Optional<String> studio) {
         Utils.checkNotNull(studio, "studio");
@@ -489,6 +536,7 @@ public class GetTopWatchedContentMetadata {
         return this;
     }
 
+
     public GetTopWatchedContentMetadata withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
@@ -500,6 +548,7 @@ public class GetTopWatchedContentMetadata {
         this.title = Optional.ofNullable(title);
         return this;
     }
+
 
     public GetTopWatchedContentMetadata withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
@@ -513,6 +562,7 @@ public class GetTopWatchedContentMetadata {
         return this;
     }
 
+
     public GetTopWatchedContentMetadata withLibrarySectionTitle(Optional<String> librarySectionTitle) {
         Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
         this.librarySectionTitle = librarySectionTitle;
@@ -524,6 +574,7 @@ public class GetTopWatchedContentMetadata {
         this.librarySectionID = Optional.ofNullable(librarySectionID);
         return this;
     }
+
 
     public GetTopWatchedContentMetadata withLibrarySectionID(Optional<Integer> librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
@@ -537,6 +588,7 @@ public class GetTopWatchedContentMetadata {
         return this;
     }
 
+
     public GetTopWatchedContentMetadata withLibrarySectionKey(Optional<String> librarySectionKey) {
         Utils.checkNotNull(librarySectionKey, "librarySectionKey");
         this.librarySectionKey = librarySectionKey;
@@ -548,6 +600,7 @@ public class GetTopWatchedContentMetadata {
         this.contentRating = Optional.ofNullable(contentRating);
         return this;
     }
+
 
     public GetTopWatchedContentMetadata withContentRating(Optional<String> contentRating) {
         Utils.checkNotNull(contentRating, "contentRating");
@@ -561,6 +614,7 @@ public class GetTopWatchedContentMetadata {
         return this;
     }
 
+
     public GetTopWatchedContentMetadata withSummary(Optional<String> summary) {
         Utils.checkNotNull(summary, "summary");
         this.summary = summary;
@@ -572,6 +626,7 @@ public class GetTopWatchedContentMetadata {
         this.index = Optional.ofNullable(index);
         return this;
     }
+
 
     public GetTopWatchedContentMetadata withIndex(Optional<Long> index) {
         Utils.checkNotNull(index, "index");
@@ -585,6 +640,7 @@ public class GetTopWatchedContentMetadata {
         return this;
     }
 
+
     public GetTopWatchedContentMetadata withAudienceRating(Optional<Double> audienceRating) {
         Utils.checkNotNull(audienceRating, "audienceRating");
         this.audienceRating = audienceRating;
@@ -596,6 +652,7 @@ public class GetTopWatchedContentMetadata {
         this.year = Optional.ofNullable(year);
         return this;
     }
+
 
     public GetTopWatchedContentMetadata withYear(Optional<Integer> year) {
         Utils.checkNotNull(year, "year");
@@ -609,6 +666,7 @@ public class GetTopWatchedContentMetadata {
         return this;
     }
 
+
     public GetTopWatchedContentMetadata withTagline(Optional<String> tagline) {
         Utils.checkNotNull(tagline, "tagline");
         this.tagline = tagline;
@@ -620,6 +678,7 @@ public class GetTopWatchedContentMetadata {
         this.thumb = Optional.ofNullable(thumb);
         return this;
     }
+
 
     public GetTopWatchedContentMetadata withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -633,6 +692,7 @@ public class GetTopWatchedContentMetadata {
         return this;
     }
 
+
     public GetTopWatchedContentMetadata withArt(Optional<String> art) {
         Utils.checkNotNull(art, "art");
         this.art = art;
@@ -644,6 +704,7 @@ public class GetTopWatchedContentMetadata {
         this.duration = Optional.ofNullable(duration);
         return this;
     }
+
 
     public GetTopWatchedContentMetadata withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
@@ -657,6 +718,7 @@ public class GetTopWatchedContentMetadata {
         return this;
     }
 
+
     public GetTopWatchedContentMetadata withOriginallyAvailableAt(Optional<LocalDate> originallyAvailableAt) {
         Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
         this.originallyAvailableAt = originallyAvailableAt;
@@ -668,6 +730,7 @@ public class GetTopWatchedContentMetadata {
         this.leafCount = Optional.ofNullable(leafCount);
         return this;
     }
+
 
     public GetTopWatchedContentMetadata withLeafCount(Optional<Long> leafCount) {
         Utils.checkNotNull(leafCount, "leafCount");
@@ -681,6 +744,7 @@ public class GetTopWatchedContentMetadata {
         return this;
     }
 
+
     public GetTopWatchedContentMetadata withViewedLeafCount(Optional<Long> viewedLeafCount) {
         Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
         this.viewedLeafCount = viewedLeafCount;
@@ -692,6 +756,7 @@ public class GetTopWatchedContentMetadata {
         this.childCount = Optional.ofNullable(childCount);
         return this;
     }
+
 
     public GetTopWatchedContentMetadata withChildCount(Optional<Long> childCount) {
         Utils.checkNotNull(childCount, "childCount");
@@ -705,6 +770,7 @@ public class GetTopWatchedContentMetadata {
         return this;
     }
 
+
     public GetTopWatchedContentMetadata withAddedAt(Optional<Integer> addedAt) {
         Utils.checkNotNull(addedAt, "addedAt");
         this.addedAt = addedAt;
@@ -716,6 +782,7 @@ public class GetTopWatchedContentMetadata {
         this.updatedAt = Optional.ofNullable(updatedAt);
         return this;
     }
+
 
     public GetTopWatchedContentMetadata withUpdatedAt(Optional<Integer> updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
@@ -729,6 +796,7 @@ public class GetTopWatchedContentMetadata {
         return this;
     }
 
+
     public GetTopWatchedContentMetadata withGlobalViewCount(Optional<Long> globalViewCount) {
         Utils.checkNotNull(globalViewCount, "globalViewCount");
         this.globalViewCount = globalViewCount;
@@ -740,6 +808,7 @@ public class GetTopWatchedContentMetadata {
         this.audienceRatingImage = Optional.ofNullable(audienceRatingImage);
         return this;
     }
+
 
     public GetTopWatchedContentMetadata withAudienceRatingImage(Optional<String> audienceRatingImage) {
         Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
@@ -753,6 +822,7 @@ public class GetTopWatchedContentMetadata {
         return this;
     }
 
+
     public GetTopWatchedContentMetadata withGenre(Optional<? extends List<GetTopWatchedContentGenre>> genre) {
         Utils.checkNotNull(genre, "genre");
         this.genre = genre;
@@ -764,6 +834,7 @@ public class GetTopWatchedContentMetadata {
         this.country = Optional.ofNullable(country);
         return this;
     }
+
 
     public GetTopWatchedContentMetadata withCountry(Optional<? extends List<GetTopWatchedContentCountry>> country) {
         Utils.checkNotNull(country, "country");
@@ -777,6 +848,7 @@ public class GetTopWatchedContentMetadata {
         return this;
     }
 
+
     public GetTopWatchedContentMetadata withGuids(Optional<? extends List<GetTopWatchedContentGuids>> guids) {
         Utils.checkNotNull(guids, "guids");
         this.guids = guids;
@@ -788,6 +860,7 @@ public class GetTopWatchedContentMetadata {
         this.role = Optional.ofNullable(role);
         return this;
     }
+
 
     public GetTopWatchedContentMetadata withRole(Optional<? extends List<GetTopWatchedContentRole>> role) {
         Utils.checkNotNull(role, "role");
@@ -801,13 +874,13 @@ public class GetTopWatchedContentMetadata {
         return this;
     }
 
+
     public GetTopWatchedContentMetadata withUser(Optional<? extends List<GetTopWatchedContentUser>> user) {
         Utils.checkNotNull(user, "user");
         this.user = user;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -818,75 +891,54 @@ public class GetTopWatchedContentMetadata {
         }
         GetTopWatchedContentMetadata other = (GetTopWatchedContentMetadata) o;
         return 
-            Objects.deepEquals(this.ratingKey, other.ratingKey) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.guid, other.guid) &&
-            Objects.deepEquals(this.slug, other.slug) &&
-            Objects.deepEquals(this.studio, other.studio) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
-            Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
-            Objects.deepEquals(this.librarySectionKey, other.librarySectionKey) &&
-            Objects.deepEquals(this.contentRating, other.contentRating) &&
-            Objects.deepEquals(this.summary, other.summary) &&
-            Objects.deepEquals(this.index, other.index) &&
-            Objects.deepEquals(this.audienceRating, other.audienceRating) &&
-            Objects.deepEquals(this.year, other.year) &&
-            Objects.deepEquals(this.tagline, other.tagline) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.art, other.art) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.originallyAvailableAt, other.originallyAvailableAt) &&
-            Objects.deepEquals(this.leafCount, other.leafCount) &&
-            Objects.deepEquals(this.viewedLeafCount, other.viewedLeafCount) &&
-            Objects.deepEquals(this.childCount, other.childCount) &&
-            Objects.deepEquals(this.addedAt, other.addedAt) &&
-            Objects.deepEquals(this.updatedAt, other.updatedAt) &&
-            Objects.deepEquals(this.globalViewCount, other.globalViewCount) &&
-            Objects.deepEquals(this.audienceRatingImage, other.audienceRatingImage) &&
-            Objects.deepEquals(this.genre, other.genre) &&
-            Objects.deepEquals(this.country, other.country) &&
-            Objects.deepEquals(this.guids, other.guids) &&
-            Objects.deepEquals(this.role, other.role) &&
-            Objects.deepEquals(this.user, other.user);
+            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.guid, other.guid) &&
+            Utils.enhancedDeepEquals(this.slug, other.slug) &&
+            Utils.enhancedDeepEquals(this.studio, other.studio) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
+            Utils.enhancedDeepEquals(this.librarySectionID, other.librarySectionID) &&
+            Utils.enhancedDeepEquals(this.librarySectionKey, other.librarySectionKey) &&
+            Utils.enhancedDeepEquals(this.contentRating, other.contentRating) &&
+            Utils.enhancedDeepEquals(this.summary, other.summary) &&
+            Utils.enhancedDeepEquals(this.index, other.index) &&
+            Utils.enhancedDeepEquals(this.audienceRating, other.audienceRating) &&
+            Utils.enhancedDeepEquals(this.year, other.year) &&
+            Utils.enhancedDeepEquals(this.tagline, other.tagline) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.art, other.art) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.originallyAvailableAt, other.originallyAvailableAt) &&
+            Utils.enhancedDeepEquals(this.leafCount, other.leafCount) &&
+            Utils.enhancedDeepEquals(this.viewedLeafCount, other.viewedLeafCount) &&
+            Utils.enhancedDeepEquals(this.childCount, other.childCount) &&
+            Utils.enhancedDeepEquals(this.addedAt, other.addedAt) &&
+            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt) &&
+            Utils.enhancedDeepEquals(this.globalViewCount, other.globalViewCount) &&
+            Utils.enhancedDeepEquals(this.audienceRatingImage, other.audienceRatingImage) &&
+            Utils.enhancedDeepEquals(this.genre, other.genre) &&
+            Utils.enhancedDeepEquals(this.country, other.country) &&
+            Utils.enhancedDeepEquals(this.guids, other.guids) &&
+            Utils.enhancedDeepEquals(this.role, other.role) &&
+            Utils.enhancedDeepEquals(this.user, other.user);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            ratingKey,
-            key,
-            guid,
-            slug,
-            studio,
-            type,
-            title,
-            librarySectionTitle,
-            librarySectionID,
-            librarySectionKey,
-            contentRating,
-            summary,
-            index,
-            audienceRating,
-            year,
-            tagline,
-            thumb,
-            art,
-            duration,
-            originallyAvailableAt,
-            leafCount,
-            viewedLeafCount,
-            childCount,
-            addedAt,
-            updatedAt,
-            globalViewCount,
-            audienceRatingImage,
-            genre,
-            country,
-            guids,
-            role,
-            user);
+        return Utils.enhancedHash(
+            ratingKey, key, guid,
+            slug, studio, type,
+            title, librarySectionTitle, librarySectionID,
+            librarySectionKey, contentRating, summary,
+            index, audienceRating, year,
+            tagline, thumb, art,
+            duration, originallyAvailableAt, leafCount,
+            viewedLeafCount, childCount, addedAt,
+            updatedAt, globalViewCount, audienceRatingImage,
+            genre, country, guids,
+            role, user);
     }
     
     @Override
@@ -925,76 +977,78 @@ public class GetTopWatchedContentMetadata {
                 "role", role,
                 "user", user);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> ratingKey = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> guid = Optional.empty();
- 
+
         private Optional<String> slug = Optional.empty();
- 
+
         private Optional<String> studio = Optional.empty();
- 
+
         private Optional<String> type = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> librarySectionTitle = Optional.empty();
- 
+
         private Optional<Integer> librarySectionID = Optional.empty();
- 
+
         private Optional<String> librarySectionKey = Optional.empty();
- 
+
         private Optional<String> contentRating = Optional.empty();
- 
+
         private Optional<String> summary = Optional.empty();
- 
+
         private Optional<Long> index = Optional.empty();
- 
+
         private Optional<Double> audienceRating = Optional.empty();
- 
+
         private Optional<Integer> year = Optional.empty();
- 
+
         private Optional<String> tagline = Optional.empty();
- 
+
         private Optional<String> thumb = Optional.empty();
- 
+
         private Optional<String> art = Optional.empty();
- 
+
         private Optional<Integer> duration = Optional.empty();
- 
+
         private Optional<LocalDate> originallyAvailableAt = Optional.empty();
- 
+
         private Optional<Long> leafCount = Optional.empty();
- 
+
         private Optional<Long> viewedLeafCount = Optional.empty();
- 
+
         private Optional<Long> childCount = Optional.empty();
- 
+
         private Optional<Integer> addedAt = Optional.empty();
- 
+
         private Optional<Integer> updatedAt = Optional.empty();
- 
+
         private Optional<Long> globalViewCount = Optional.empty();
- 
+
         private Optional<String> audienceRatingImage = Optional.empty();
- 
+
         private Optional<? extends List<GetTopWatchedContentGenre>> genre = Optional.empty();
- 
+
         private Optional<? extends List<GetTopWatchedContentCountry>> country = Optional.empty();
- 
+
         private Optional<? extends List<GetTopWatchedContentGuids>> guids = Optional.empty();
- 
+
         private Optional<? extends List<GetTopWatchedContentRole>> role = Optional.empty();
- 
+
         private Optional<? extends List<GetTopWatchedContentUser>> user = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder ratingKey(String ratingKey) {
             Utils.checkNotNull(ratingKey, "ratingKey");
@@ -1008,6 +1062,7 @@ public class GetTopWatchedContentMetadata {
             return this;
         }
 
+
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = Optional.ofNullable(key);
@@ -1019,6 +1074,7 @@ public class GetTopWatchedContentMetadata {
             this.key = key;
             return this;
         }
+
 
         public Builder guid(String guid) {
             Utils.checkNotNull(guid, "guid");
@@ -1032,6 +1088,7 @@ public class GetTopWatchedContentMetadata {
             return this;
         }
 
+
         public Builder slug(String slug) {
             Utils.checkNotNull(slug, "slug");
             this.slug = Optional.ofNullable(slug);
@@ -1043,6 +1100,7 @@ public class GetTopWatchedContentMetadata {
             this.slug = slug;
             return this;
         }
+
 
         public Builder studio(String studio) {
             Utils.checkNotNull(studio, "studio");
@@ -1056,6 +1114,7 @@ public class GetTopWatchedContentMetadata {
             return this;
         }
 
+
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = Optional.ofNullable(type);
@@ -1067,6 +1126,7 @@ public class GetTopWatchedContentMetadata {
             this.type = type;
             return this;
         }
+
 
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
@@ -1080,6 +1140,7 @@ public class GetTopWatchedContentMetadata {
             return this;
         }
 
+
         public Builder librarySectionTitle(String librarySectionTitle) {
             Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
             this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
@@ -1091,6 +1152,7 @@ public class GetTopWatchedContentMetadata {
             this.librarySectionTitle = librarySectionTitle;
             return this;
         }
+
 
         public Builder librarySectionID(int librarySectionID) {
             Utils.checkNotNull(librarySectionID, "librarySectionID");
@@ -1104,6 +1166,7 @@ public class GetTopWatchedContentMetadata {
             return this;
         }
 
+
         public Builder librarySectionKey(String librarySectionKey) {
             Utils.checkNotNull(librarySectionKey, "librarySectionKey");
             this.librarySectionKey = Optional.ofNullable(librarySectionKey);
@@ -1115,6 +1178,7 @@ public class GetTopWatchedContentMetadata {
             this.librarySectionKey = librarySectionKey;
             return this;
         }
+
 
         public Builder contentRating(String contentRating) {
             Utils.checkNotNull(contentRating, "contentRating");
@@ -1128,6 +1192,7 @@ public class GetTopWatchedContentMetadata {
             return this;
         }
 
+
         public Builder summary(String summary) {
             Utils.checkNotNull(summary, "summary");
             this.summary = Optional.ofNullable(summary);
@@ -1139,6 +1204,7 @@ public class GetTopWatchedContentMetadata {
             this.summary = summary;
             return this;
         }
+
 
         public Builder index(long index) {
             Utils.checkNotNull(index, "index");
@@ -1152,6 +1218,7 @@ public class GetTopWatchedContentMetadata {
             return this;
         }
 
+
         public Builder audienceRating(double audienceRating) {
             Utils.checkNotNull(audienceRating, "audienceRating");
             this.audienceRating = Optional.ofNullable(audienceRating);
@@ -1163,6 +1230,7 @@ public class GetTopWatchedContentMetadata {
             this.audienceRating = audienceRating;
             return this;
         }
+
 
         public Builder year(int year) {
             Utils.checkNotNull(year, "year");
@@ -1176,6 +1244,7 @@ public class GetTopWatchedContentMetadata {
             return this;
         }
 
+
         public Builder tagline(String tagline) {
             Utils.checkNotNull(tagline, "tagline");
             this.tagline = Optional.ofNullable(tagline);
@@ -1187,6 +1256,7 @@ public class GetTopWatchedContentMetadata {
             this.tagline = tagline;
             return this;
         }
+
 
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -1200,6 +1270,7 @@ public class GetTopWatchedContentMetadata {
             return this;
         }
 
+
         public Builder art(String art) {
             Utils.checkNotNull(art, "art");
             this.art = Optional.ofNullable(art);
@@ -1211,6 +1282,7 @@ public class GetTopWatchedContentMetadata {
             this.art = art;
             return this;
         }
+
 
         public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
@@ -1224,6 +1296,7 @@ public class GetTopWatchedContentMetadata {
             return this;
         }
 
+
         public Builder originallyAvailableAt(LocalDate originallyAvailableAt) {
             Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
             this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
@@ -1235,6 +1308,7 @@ public class GetTopWatchedContentMetadata {
             this.originallyAvailableAt = originallyAvailableAt;
             return this;
         }
+
 
         public Builder leafCount(long leafCount) {
             Utils.checkNotNull(leafCount, "leafCount");
@@ -1248,6 +1322,7 @@ public class GetTopWatchedContentMetadata {
             return this;
         }
 
+
         public Builder viewedLeafCount(long viewedLeafCount) {
             Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
             this.viewedLeafCount = Optional.ofNullable(viewedLeafCount);
@@ -1259,6 +1334,7 @@ public class GetTopWatchedContentMetadata {
             this.viewedLeafCount = viewedLeafCount;
             return this;
         }
+
 
         public Builder childCount(long childCount) {
             Utils.checkNotNull(childCount, "childCount");
@@ -1272,6 +1348,7 @@ public class GetTopWatchedContentMetadata {
             return this;
         }
 
+
         public Builder addedAt(int addedAt) {
             Utils.checkNotNull(addedAt, "addedAt");
             this.addedAt = Optional.ofNullable(addedAt);
@@ -1283,6 +1360,7 @@ public class GetTopWatchedContentMetadata {
             this.addedAt = addedAt;
             return this;
         }
+
 
         public Builder updatedAt(int updatedAt) {
             Utils.checkNotNull(updatedAt, "updatedAt");
@@ -1296,6 +1374,7 @@ public class GetTopWatchedContentMetadata {
             return this;
         }
 
+
         public Builder globalViewCount(long globalViewCount) {
             Utils.checkNotNull(globalViewCount, "globalViewCount");
             this.globalViewCount = Optional.ofNullable(globalViewCount);
@@ -1307,6 +1386,7 @@ public class GetTopWatchedContentMetadata {
             this.globalViewCount = globalViewCount;
             return this;
         }
+
 
         public Builder audienceRatingImage(String audienceRatingImage) {
             Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
@@ -1320,6 +1400,7 @@ public class GetTopWatchedContentMetadata {
             return this;
         }
 
+
         public Builder genre(List<GetTopWatchedContentGenre> genre) {
             Utils.checkNotNull(genre, "genre");
             this.genre = Optional.ofNullable(genre);
@@ -1331,6 +1412,7 @@ public class GetTopWatchedContentMetadata {
             this.genre = genre;
             return this;
         }
+
 
         public Builder country(List<GetTopWatchedContentCountry> country) {
             Utils.checkNotNull(country, "country");
@@ -1344,6 +1426,7 @@ public class GetTopWatchedContentMetadata {
             return this;
         }
 
+
         public Builder guids(List<GetTopWatchedContentGuids> guids) {
             Utils.checkNotNull(guids, "guids");
             this.guids = Optional.ofNullable(guids);
@@ -1355,6 +1438,7 @@ public class GetTopWatchedContentMetadata {
             this.guids = guids;
             return this;
         }
+
 
         public Builder role(List<GetTopWatchedContentRole> role) {
             Utils.checkNotNull(role, "role");
@@ -1368,6 +1452,7 @@ public class GetTopWatchedContentMetadata {
             return this;
         }
 
+
         public Builder user(List<GetTopWatchedContentUser> user) {
             Utils.checkNotNull(user, "user");
             this.user = Optional.ofNullable(user);
@@ -1379,41 +1464,22 @@ public class GetTopWatchedContentMetadata {
             this.user = user;
             return this;
         }
-        
+
         public GetTopWatchedContentMetadata build() {
+
             return new GetTopWatchedContentMetadata(
-                ratingKey,
-                key,
-                guid,
-                slug,
-                studio,
-                type,
-                title,
-                librarySectionTitle,
-                librarySectionID,
-                librarySectionKey,
-                contentRating,
-                summary,
-                index,
-                audienceRating,
-                year,
-                tagline,
-                thumb,
-                art,
-                duration,
-                originallyAvailableAt,
-                leafCount,
-                viewedLeafCount,
-                childCount,
-                addedAt,
-                updatedAt,
-                globalViewCount,
-                audienceRatingImage,
-                genre,
-                country,
-                guids,
-                role,
-                user);
+                ratingKey, key, guid,
+                slug, studio, type,
+                title, librarySectionTitle, librarySectionID,
+                librarySectionKey, contentRating, summary,
+                index, audienceRating, year,
+                tagline, thumb, art,
+                duration, originallyAvailableAt, leafCount,
+                viewedLeafCount, childCount, addedAt,
+                updatedAt, globalViewCount, audienceRatingImage,
+                genre, country, guids,
+                role, user);
         }
+
     }
 }

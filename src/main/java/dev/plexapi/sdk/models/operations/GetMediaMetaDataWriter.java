@@ -12,11 +12,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetMediaMetaDataWriter {
 
+public class GetMediaMetaDataWriter {
     /**
      * Unique identifier for the writer.
      */
@@ -72,7 +71,8 @@ public class GetMediaMetaDataWriter {
             int id,
             String tag,
             String filter) {
-        this(id, tag, filter, Optional.empty(), Optional.empty());
+        this(id, tag, filter,
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -115,9 +115,10 @@ public class GetMediaMetaDataWriter {
         return tagKey;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Unique identifier for the writer.
@@ -155,6 +156,7 @@ public class GetMediaMetaDataWriter {
         return this;
     }
 
+
     /**
      * The absolute URL of the thumbnail image for the writer.
      */
@@ -173,6 +175,7 @@ public class GetMediaMetaDataWriter {
         return this;
     }
 
+
     /**
      * A 24-character hexadecimal unique key associated with the writer’s tag, used for internal identification.
      */
@@ -182,7 +185,6 @@ public class GetMediaMetaDataWriter {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -193,21 +195,18 @@ public class GetMediaMetaDataWriter {
         }
         GetMediaMetaDataWriter other = (GetMediaMetaDataWriter) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.tag, other.tag) &&
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.tagKey, other.tagKey);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.tag, other.tag) &&
+            Utils.enhancedDeepEquals(this.filter, other.filter) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.tagKey, other.tagKey);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            tag,
-            filter,
-            thumb,
-            tagKey);
+        return Utils.enhancedHash(
+            id, tag, filter,
+            thumb, tagKey);
     }
     
     @Override
@@ -219,22 +218,24 @@ public class GetMediaMetaDataWriter {
                 "thumb", thumb,
                 "tagKey", tagKey);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer id;
- 
+
         private String tag;
- 
+
         private String filter;
- 
+
         private Optional<String> thumb = Optional.empty();
- 
+
         private Optional<String> tagKey = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Unique identifier for the writer.
@@ -245,6 +246,7 @@ public class GetMediaMetaDataWriter {
             return this;
         }
 
+
         /**
          * The role of Writer
          */
@@ -254,6 +256,7 @@ public class GetMediaMetaDataWriter {
             return this;
         }
 
+
         /**
          * The filter string used to query this writer.
          */
@@ -262,6 +265,7 @@ public class GetMediaMetaDataWriter {
             this.filter = filter;
             return this;
         }
+
 
         /**
          * The absolute URL of the thumbnail image for the writer.
@@ -281,6 +285,7 @@ public class GetMediaMetaDataWriter {
             return this;
         }
 
+
         /**
          * A 24-character hexadecimal unique key associated with the writer’s tag, used for internal identification.
          */
@@ -298,14 +303,13 @@ public class GetMediaMetaDataWriter {
             this.tagKey = tagKey;
             return this;
         }
-        
+
         public GetMediaMetaDataWriter build() {
+
             return new GetMediaMetaDataWriter(
-                id,
-                tag,
-                filter,
-                thumb,
-                tagKey);
+                id, tag, filter,
+                thumb, tagKey);
         }
+
     }
 }

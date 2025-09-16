@@ -9,12 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class Action {
 
     @JsonProperty("id")
     private String id;
+
 
     @JsonProperty("key")
     private String key;
@@ -39,9 +40,10 @@ public class Action {
         return key;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Action withId(String id) {
         Utils.checkNotNull(id, "id");
@@ -55,7 +57,6 @@ public class Action {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -66,15 +67,14 @@ public class Action {
         }
         Action other = (Action) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.key, other.key);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.key, other.key);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            key);
+        return Utils.enhancedHash(
+            id, key);
     }
     
     @Override
@@ -83,16 +83,18 @@ public class Action {
                 "id", id,
                 "key", key);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String id;
- 
+
         private String key;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder id(String id) {
             Utils.checkNotNull(id, "id");
@@ -100,16 +102,18 @@ public class Action {
             return this;
         }
 
+
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = key;
             return this;
         }
-        
+
         public Action build() {
+
             return new Action(
-                id,
-                key);
+                id, key);
         }
+
     }
 }

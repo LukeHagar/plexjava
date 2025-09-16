@@ -19,7 +19,7 @@ public enum IncludeGuids {
     @JsonValue
     private final int value;
 
-    private IncludeGuids(int value) {
+    IncludeGuids(int value) {
         this.value = value;
     }
     

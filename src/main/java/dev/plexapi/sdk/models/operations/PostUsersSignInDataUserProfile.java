@@ -15,11 +15,10 @@ import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
-public class PostUsersSignInDataUserProfile {
 
+public class PostUsersSignInDataUserProfile {
     /**
      * If the account has automatically select audio and subtitle tracks enabled
      */
@@ -41,21 +40,26 @@ public class PostUsersSignInDataUserProfile {
     @JsonProperty("defaultSubtitleLanguage")
     private Optional<String> defaultSubtitleLanguage;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("autoSelectSubtitle")
     private Optional<? extends PostUsersSignInDataAutoSelectSubtitle> autoSelectSubtitle;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("defaultSubtitleAccessibility")
     private Optional<? extends PostUsersSignInDataDefaultSubtitleAccessibility> defaultSubtitleAccessibility;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("defaultSubtitleForced")
     private Optional<? extends PostUsersSignInDataDefaultSubtitleForced> defaultSubtitleForced;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("watchedIndicator")
     private Optional<? extends PostUsersSignInDataWatchedIndicator> watchedIndicator;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mediaReviewsVisibility")
@@ -90,7 +94,9 @@ public class PostUsersSignInDataUserProfile {
     }
     
     public PostUsersSignInDataUserProfile() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -147,9 +153,10 @@ public class PostUsersSignInDataUserProfile {
         return (Optional<PostUsersSignInDataMediaReviewsVisibility>) mediaReviewsVisibility;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * If the account has automatically select audio and subtitle tracks enabled
@@ -159,6 +166,7 @@ public class PostUsersSignInDataUserProfile {
         this.autoSelectAudio = Optional.ofNullable(autoSelectAudio);
         return this;
     }
+
 
     /**
      * If the account has automatically select audio and subtitle tracks enabled
@@ -178,6 +186,7 @@ public class PostUsersSignInDataUserProfile {
         return this;
     }
 
+
     /**
      * The preferred audio language for the account
      */
@@ -196,6 +205,7 @@ public class PostUsersSignInDataUserProfile {
         return this;
     }
 
+
     /**
      * The preferred subtitle language for the account
      */
@@ -211,6 +221,7 @@ public class PostUsersSignInDataUserProfile {
         return this;
     }
 
+
     public PostUsersSignInDataUserProfile withAutoSelectSubtitle(Optional<? extends PostUsersSignInDataAutoSelectSubtitle> autoSelectSubtitle) {
         Utils.checkNotNull(autoSelectSubtitle, "autoSelectSubtitle");
         this.autoSelectSubtitle = autoSelectSubtitle;
@@ -222,6 +233,7 @@ public class PostUsersSignInDataUserProfile {
         this.defaultSubtitleAccessibility = Optional.ofNullable(defaultSubtitleAccessibility);
         return this;
     }
+
 
     public PostUsersSignInDataUserProfile withDefaultSubtitleAccessibility(Optional<? extends PostUsersSignInDataDefaultSubtitleAccessibility> defaultSubtitleAccessibility) {
         Utils.checkNotNull(defaultSubtitleAccessibility, "defaultSubtitleAccessibility");
@@ -235,6 +247,7 @@ public class PostUsersSignInDataUserProfile {
         return this;
     }
 
+
     public PostUsersSignInDataUserProfile withDefaultSubtitleForced(Optional<? extends PostUsersSignInDataDefaultSubtitleForced> defaultSubtitleForced) {
         Utils.checkNotNull(defaultSubtitleForced, "defaultSubtitleForced");
         this.defaultSubtitleForced = defaultSubtitleForced;
@@ -246,6 +259,7 @@ public class PostUsersSignInDataUserProfile {
         this.watchedIndicator = Optional.ofNullable(watchedIndicator);
         return this;
     }
+
 
     public PostUsersSignInDataUserProfile withWatchedIndicator(Optional<? extends PostUsersSignInDataWatchedIndicator> watchedIndicator) {
         Utils.checkNotNull(watchedIndicator, "watchedIndicator");
@@ -259,13 +273,13 @@ public class PostUsersSignInDataUserProfile {
         return this;
     }
 
+
     public PostUsersSignInDataUserProfile withMediaReviewsVisibility(Optional<? extends PostUsersSignInDataMediaReviewsVisibility> mediaReviewsVisibility) {
         Utils.checkNotNull(mediaReviewsVisibility, "mediaReviewsVisibility");
         this.mediaReviewsVisibility = mediaReviewsVisibility;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -276,27 +290,22 @@ public class PostUsersSignInDataUserProfile {
         }
         PostUsersSignInDataUserProfile other = (PostUsersSignInDataUserProfile) o;
         return 
-            Objects.deepEquals(this.autoSelectAudio, other.autoSelectAudio) &&
-            Objects.deepEquals(this.defaultAudioLanguage, other.defaultAudioLanguage) &&
-            Objects.deepEquals(this.defaultSubtitleLanguage, other.defaultSubtitleLanguage) &&
-            Objects.deepEquals(this.autoSelectSubtitle, other.autoSelectSubtitle) &&
-            Objects.deepEquals(this.defaultSubtitleAccessibility, other.defaultSubtitleAccessibility) &&
-            Objects.deepEquals(this.defaultSubtitleForced, other.defaultSubtitleForced) &&
-            Objects.deepEquals(this.watchedIndicator, other.watchedIndicator) &&
-            Objects.deepEquals(this.mediaReviewsVisibility, other.mediaReviewsVisibility);
+            Utils.enhancedDeepEquals(this.autoSelectAudio, other.autoSelectAudio) &&
+            Utils.enhancedDeepEquals(this.defaultAudioLanguage, other.defaultAudioLanguage) &&
+            Utils.enhancedDeepEquals(this.defaultSubtitleLanguage, other.defaultSubtitleLanguage) &&
+            Utils.enhancedDeepEquals(this.autoSelectSubtitle, other.autoSelectSubtitle) &&
+            Utils.enhancedDeepEquals(this.defaultSubtitleAccessibility, other.defaultSubtitleAccessibility) &&
+            Utils.enhancedDeepEquals(this.defaultSubtitleForced, other.defaultSubtitleForced) &&
+            Utils.enhancedDeepEquals(this.watchedIndicator, other.watchedIndicator) &&
+            Utils.enhancedDeepEquals(this.mediaReviewsVisibility, other.mediaReviewsVisibility);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            autoSelectAudio,
-            defaultAudioLanguage,
-            defaultSubtitleLanguage,
-            autoSelectSubtitle,
-            defaultSubtitleAccessibility,
-            defaultSubtitleForced,
-            watchedIndicator,
-            mediaReviewsVisibility);
+        return Utils.enhancedHash(
+            autoSelectAudio, defaultAudioLanguage, defaultSubtitleLanguage,
+            autoSelectSubtitle, defaultSubtitleAccessibility, defaultSubtitleForced,
+            watchedIndicator, mediaReviewsVisibility);
     }
     
     @Override
@@ -311,28 +320,30 @@ public class PostUsersSignInDataUserProfile {
                 "watchedIndicator", watchedIndicator,
                 "mediaReviewsVisibility", mediaReviewsVisibility);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Boolean> autoSelectAudio;
- 
+
         private Optional<String> defaultAudioLanguage = Optional.empty();
- 
+
         private Optional<String> defaultSubtitleLanguage = Optional.empty();
- 
+
         private Optional<? extends PostUsersSignInDataAutoSelectSubtitle> autoSelectSubtitle;
- 
+
         private Optional<? extends PostUsersSignInDataDefaultSubtitleAccessibility> defaultSubtitleAccessibility;
- 
+
         private Optional<? extends PostUsersSignInDataDefaultSubtitleForced> defaultSubtitleForced;
- 
+
         private Optional<? extends PostUsersSignInDataWatchedIndicator> watchedIndicator;
- 
+
         private Optional<? extends PostUsersSignInDataMediaReviewsVisibility> mediaReviewsVisibility;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * If the account has automatically select audio and subtitle tracks enabled
@@ -352,6 +363,7 @@ public class PostUsersSignInDataUserProfile {
             return this;
         }
 
+
         /**
          * The preferred audio language for the account
          */
@@ -369,6 +381,7 @@ public class PostUsersSignInDataUserProfile {
             this.defaultAudioLanguage = defaultAudioLanguage;
             return this;
         }
+
 
         /**
          * The preferred subtitle language for the account
@@ -388,6 +401,7 @@ public class PostUsersSignInDataUserProfile {
             return this;
         }
 
+
         public Builder autoSelectSubtitle(PostUsersSignInDataAutoSelectSubtitle autoSelectSubtitle) {
             Utils.checkNotNull(autoSelectSubtitle, "autoSelectSubtitle");
             this.autoSelectSubtitle = Optional.ofNullable(autoSelectSubtitle);
@@ -399,6 +413,7 @@ public class PostUsersSignInDataUserProfile {
             this.autoSelectSubtitle = autoSelectSubtitle;
             return this;
         }
+
 
         public Builder defaultSubtitleAccessibility(PostUsersSignInDataDefaultSubtitleAccessibility defaultSubtitleAccessibility) {
             Utils.checkNotNull(defaultSubtitleAccessibility, "defaultSubtitleAccessibility");
@@ -412,6 +427,7 @@ public class PostUsersSignInDataUserProfile {
             return this;
         }
 
+
         public Builder defaultSubtitleForced(PostUsersSignInDataDefaultSubtitleForced defaultSubtitleForced) {
             Utils.checkNotNull(defaultSubtitleForced, "defaultSubtitleForced");
             this.defaultSubtitleForced = Optional.ofNullable(defaultSubtitleForced);
@@ -423,6 +439,7 @@ public class PostUsersSignInDataUserProfile {
             this.defaultSubtitleForced = defaultSubtitleForced;
             return this;
         }
+
 
         public Builder watchedIndicator(PostUsersSignInDataWatchedIndicator watchedIndicator) {
             Utils.checkNotNull(watchedIndicator, "watchedIndicator");
@@ -436,6 +453,7 @@ public class PostUsersSignInDataUserProfile {
             return this;
         }
 
+
         public Builder mediaReviewsVisibility(PostUsersSignInDataMediaReviewsVisibility mediaReviewsVisibility) {
             Utils.checkNotNull(mediaReviewsVisibility, "mediaReviewsVisibility");
             this.mediaReviewsVisibility = Optional.ofNullable(mediaReviewsVisibility);
@@ -447,7 +465,7 @@ public class PostUsersSignInDataUserProfile {
             this.mediaReviewsVisibility = mediaReviewsVisibility;
             return this;
         }
-        
+
         public PostUsersSignInDataUserProfile build() {
             if (autoSelectAudio == null) {
                 autoSelectAudio = _SINGLETON_VALUE_AutoSelectAudio.value();
@@ -467,16 +485,13 @@ public class PostUsersSignInDataUserProfile {
             if (mediaReviewsVisibility == null) {
                 mediaReviewsVisibility = _SINGLETON_VALUE_MediaReviewsVisibility.value();
             }
+
             return new PostUsersSignInDataUserProfile(
-                autoSelectAudio,
-                defaultAudioLanguage,
-                defaultSubtitleLanguage,
-                autoSelectSubtitle,
-                defaultSubtitleAccessibility,
-                defaultSubtitleForced,
-                watchedIndicator,
-                mediaReviewsVisibility);
+                autoSelectAudio, defaultAudioLanguage, defaultSubtitleLanguage,
+                autoSelectSubtitle, defaultSubtitleAccessibility, defaultSubtitleForced,
+                watchedIndicator, mediaReviewsVisibility);
         }
+
 
         private static final LazySingletonValue<Optional<Boolean>> _SINGLETON_VALUE_AutoSelectAudio =
                 new LazySingletonValue<>(

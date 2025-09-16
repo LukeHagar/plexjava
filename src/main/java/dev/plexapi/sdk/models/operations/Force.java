@@ -19,7 +19,7 @@ public enum Force {
     @JsonValue
     private final long value;
 
-    private Force(long value) {
+    Force(long value) {
         this.value = value;
     }
     

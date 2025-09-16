@@ -18,6 +18,7 @@ Get Global Hubs filtered by the parameters provided.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getGlobalHubs" method="get" path="/hubs" -->
 ```java
 package hello.world;
 
@@ -32,7 +33,7 @@ public class Application {
     public static void main(String[] args) throws GetGlobalHubsBadRequest, GetGlobalHubsUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetGlobalHubsResponse res = sdk.hubs().getGlobalHubs()
@@ -71,6 +72,7 @@ This endpoint will return the recently added content.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-recently-added" method="get" path="/hubs/home/recentlyAdded" -->
 ```java
 package hello.world;
 
@@ -83,7 +85,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetRecentlyAddedRequest req = GetRecentlyAddedRequest.builder()
@@ -127,6 +129,7 @@ This endpoint will return a list of library specific hubs
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getLibraryHubs" method="get" path="/hubs/sections/{sectionId}" -->
 ```java
 package hello.world;
 
@@ -141,7 +144,7 @@ public class Application {
     public static void main(String[] args) throws GetLibraryHubsBadRequest, GetLibraryHubsUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetLibraryHubsResponse res = sdk.hubs().getLibraryHubs()

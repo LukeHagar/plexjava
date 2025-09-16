@@ -9,10 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetLibrarySectionsAllDirector {
-
     /**
      * The role of Director
      */
@@ -34,9 +33,10 @@ public class GetLibrarySectionsAllDirector {
         return tag;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The role of Director
@@ -47,7 +47,6 @@ public class GetLibrarySectionsAllDirector {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -58,12 +57,12 @@ public class GetLibrarySectionsAllDirector {
         }
         GetLibrarySectionsAllDirector other = (GetLibrarySectionsAllDirector) o;
         return 
-            Objects.deepEquals(this.tag, other.tag);
+            Utils.enhancedDeepEquals(this.tag, other.tag);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             tag);
     }
     
@@ -72,14 +71,16 @@ public class GetLibrarySectionsAllDirector {
         return Utils.toString(GetLibrarySectionsAllDirector.class,
                 "tag", tag);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String tag;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The role of Director
@@ -89,10 +90,12 @@ public class GetLibrarySectionsAllDirector {
             this.tag = tag;
             return this;
         }
-        
+
         public GetLibrarySectionsAllDirector build() {
+
             return new GetLibrarySectionsAllDirector(
                 tag);
         }
+
     }
 }

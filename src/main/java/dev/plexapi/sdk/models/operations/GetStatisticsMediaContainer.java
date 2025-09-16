@@ -14,8 +14,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetStatisticsMediaContainer {
 
@@ -23,13 +23,16 @@ public class GetStatisticsMediaContainer {
     @JsonProperty("size")
     private Optional<Integer> size;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Device")
     private Optional<? extends List<GetStatisticsDevice>> device;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Account")
     private Optional<? extends List<Account>> account;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("StatisticsMedia")
@@ -52,7 +55,8 @@ public class GetStatisticsMediaContainer {
     }
     
     public GetStatisticsMediaContainer() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -78,15 +82,17 @@ public class GetStatisticsMediaContainer {
         return (Optional<List<StatisticsMedia>>) statisticsMedia;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetStatisticsMediaContainer withSize(int size) {
         Utils.checkNotNull(size, "size");
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetStatisticsMediaContainer withSize(Optional<Integer> size) {
         Utils.checkNotNull(size, "size");
@@ -100,6 +106,7 @@ public class GetStatisticsMediaContainer {
         return this;
     }
 
+
     public GetStatisticsMediaContainer withDevice(Optional<? extends List<GetStatisticsDevice>> device) {
         Utils.checkNotNull(device, "device");
         this.device = device;
@@ -111,6 +118,7 @@ public class GetStatisticsMediaContainer {
         this.account = Optional.ofNullable(account);
         return this;
     }
+
 
     public GetStatisticsMediaContainer withAccount(Optional<? extends List<Account>> account) {
         Utils.checkNotNull(account, "account");
@@ -124,13 +132,13 @@ public class GetStatisticsMediaContainer {
         return this;
     }
 
+
     public GetStatisticsMediaContainer withStatisticsMedia(Optional<? extends List<StatisticsMedia>> statisticsMedia) {
         Utils.checkNotNull(statisticsMedia, "statisticsMedia");
         this.statisticsMedia = statisticsMedia;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -141,18 +149,16 @@ public class GetStatisticsMediaContainer {
         }
         GetStatisticsMediaContainer other = (GetStatisticsMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.device, other.device) &&
-            Objects.deepEquals(this.account, other.account) &&
-            Objects.deepEquals(this.statisticsMedia, other.statisticsMedia);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.device, other.device) &&
+            Utils.enhancedDeepEquals(this.account, other.account) &&
+            Utils.enhancedDeepEquals(this.statisticsMedia, other.statisticsMedia);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            device,
-            account,
+        return Utils.enhancedHash(
+            size, device, account,
             statisticsMedia);
     }
     
@@ -164,20 +170,22 @@ public class GetStatisticsMediaContainer {
                 "account", account,
                 "statisticsMedia", statisticsMedia);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> size = Optional.empty();
- 
+
         private Optional<? extends List<GetStatisticsDevice>> device = Optional.empty();
- 
+
         private Optional<? extends List<Account>> account = Optional.empty();
- 
+
         private Optional<? extends List<StatisticsMedia>> statisticsMedia = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder size(int size) {
             Utils.checkNotNull(size, "size");
@@ -191,6 +199,7 @@ public class GetStatisticsMediaContainer {
             return this;
         }
 
+
         public Builder device(List<GetStatisticsDevice> device) {
             Utils.checkNotNull(device, "device");
             this.device = Optional.ofNullable(device);
@@ -202,6 +211,7 @@ public class GetStatisticsMediaContainer {
             this.device = device;
             return this;
         }
+
 
         public Builder account(List<Account> account) {
             Utils.checkNotNull(account, "account");
@@ -215,6 +225,7 @@ public class GetStatisticsMediaContainer {
             return this;
         }
 
+
         public Builder statisticsMedia(List<StatisticsMedia> statisticsMedia) {
             Utils.checkNotNull(statisticsMedia, "statisticsMedia");
             this.statisticsMedia = Optional.ofNullable(statisticsMedia);
@@ -226,13 +237,13 @@ public class GetStatisticsMediaContainer {
             this.statisticsMedia = statisticsMedia;
             return this;
         }
-        
+
         public GetStatisticsMediaContainer build() {
+
             return new GetStatisticsMediaContainer(
-                size,
-                device,
-                account,
+                size, device, account,
                 statisticsMedia);
         }
+
     }
 }

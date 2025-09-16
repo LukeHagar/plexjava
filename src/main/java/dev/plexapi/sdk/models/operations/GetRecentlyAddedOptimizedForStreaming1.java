@@ -14,7 +14,7 @@ public enum GetRecentlyAddedOptimizedForStreaming1 {
     @JsonValue
     private final int value;
 
-    private GetRecentlyAddedOptimizedForStreaming1(int value) {
+    GetRecentlyAddedOptimizedForStreaming1(int value) {
         this.value = value;
     }
     

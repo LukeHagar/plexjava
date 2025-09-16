@@ -3,16 +3,20 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.CreatePlaylist;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class CreatePlaylistRequestBuilder {
 
     private CreatePlaylistRequest request;
-    private final SDKMethodInterfaces.MethodCallCreatePlaylist sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public CreatePlaylistRequestBuilder(SDKMethodInterfaces.MethodCallCreatePlaylist sdk) {
-        this.sdk = sdk;
+    public CreatePlaylistRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public CreatePlaylistRequestBuilder request(CreatePlaylistRequest request) {
@@ -22,8 +26,10 @@ public class CreatePlaylistRequestBuilder {
     }
 
     public CreatePlaylistResponse call() throws Exception {
+        
+        RequestOperation<CreatePlaylistRequest, CreatePlaylistResponse> operation
+              = new CreatePlaylist.Sync(sdkConfiguration);
 
-        return sdk.createPlaylist(
-            request);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

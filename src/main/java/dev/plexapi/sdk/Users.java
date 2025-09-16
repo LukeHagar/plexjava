@@ -3,45 +3,34 @@
  */
 package dev.plexapi.sdk;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import dev.plexapi.sdk.models.errors.GetUsersBadRequest;
-import dev.plexapi.sdk.models.errors.GetUsersUnauthorized;
-import dev.plexapi.sdk.models.errors.SDKError;
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
 import dev.plexapi.sdk.models.operations.GetUsersRequest;
 import dev.plexapi.sdk.models.operations.GetUsersRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetUsersResponse;
-import dev.plexapi.sdk.models.operations.SDKMethodInterfaces.*;
-import dev.plexapi.sdk.utils.HTTPClient;
-import dev.plexapi.sdk.utils.HTTPRequest;
-import dev.plexapi.sdk.utils.Hook.AfterErrorContextImpl;
-import dev.plexapi.sdk.utils.Hook.AfterSuccessContextImpl;
-import dev.plexapi.sdk.utils.Hook.BeforeRequestContextImpl;
-import dev.plexapi.sdk.utils.Utils;
-import java.io.InputStream;
+import dev.plexapi.sdk.operations.GetUsers;
 import java.lang.Exception;
 import java.lang.String;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Optional;
 
-public class Users implements
-            MethodCallGetUsers {
-    
-    /**
-     * GET_USERS_SERVERS contains the list of server urls available to the SDK.
-     */
-    public static final String[] GET_USERS_SERVERS = {
-        "https://plex.tv/api",
-    };
 
+public class Users {
     private final SDKConfiguration sdkConfiguration;
+    private final AsyncUsers asyncSDK;
 
     Users(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+        this.asyncSDK = new AsyncUsers(this, sdkConfiguration);
     }
 
+    /**
+     * Switches to the async SDK.
+     * 
+     * @return The async SDK
+     */
+    public AsyncUsers async() {
+        return asyncSDK;
+    }
 
     /**
      * Get list of all connected users
@@ -51,7 +40,7 @@ public class Users implements
      * @return The call builder
      */
     public GetUsersRequestBuilder getUsers() {
-        return new GetUsersRequestBuilder(this);
+        return new GetUsersRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -59,169 +48,28 @@ public class Users implements
      * 
      * <p>Get list of all users that are friends and have library access with the provided Plex authentication token
      * 
-     * @param request The request object containing all of the parameters for the API call.
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetUsersResponse getUsers(
-            GetUsersRequest request) throws Exception {
+    public GetUsersResponse getUsers(GetUsersRequest request) throws Exception {
         return getUsers(request, Optional.empty());
     }
-    
+
     /**
      * Get list of all connected users
      * 
      * <p>Get list of all users that are friends and have library access with the provided Plex authentication token
      * 
-     * @param request The request object containing all of the parameters for the API call.
+     * @param request The request object containing all the parameters for the API call.
      * @param serverURL Overrides the server URL.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetUsersResponse getUsers(
-            GetUsersRequest request,
-            Optional<String> serverURL) throws Exception {
-        final String _baseUrl;
-        if (serverURL.isPresent() && !serverURL.get().isBlank()) {
-            _baseUrl = serverURL.get();
-        } else {
-            _baseUrl = Utils.templateUrl(GET_USERS_SERVERS[0], new HashMap<String, String>());
-        }
-        String _url = Utils.generateURL(
-                _baseUrl,
-                "/users");
-        
-        HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "application/xml")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
-        Optional<SecuritySource> _hookSecuritySource = Optional.empty();
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "get-users", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "get-users",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "get-users",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "get-users",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        GetUsersResponse.Builder _resBuilder = 
-            GetUsersResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        GetUsersResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            if (Utils.contentTypeMatches(_contentType, "application/xml")) {
-                return _res;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetUsersBadRequest _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetUsersBadRequest>() {});
-                    _out.withRawResponse(Optional.ofNullable(_httpRes));
-                
-                throw _out;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetUsersUnauthorized _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetUsersUnauthorized>() {});
-                    _out.withRawResponse(Optional.ofNullable(_httpRes));
-                
-                throw _out;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new SDKError(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+    public GetUsersResponse getUsers(GetUsersRequest request, Optional<String> serverURL) throws Exception {
+        RequestOperation<GetUsersRequest, GetUsersResponse> operation
+              = new GetUsers.Sync(sdkConfiguration, serverURL);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 }

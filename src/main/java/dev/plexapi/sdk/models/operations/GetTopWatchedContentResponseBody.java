@@ -12,7 +12,6 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -43,9 +42,10 @@ public class GetTopWatchedContentResponseBody {
         return (Optional<GetTopWatchedContentMediaContainer>) mediaContainer;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetTopWatchedContentResponseBody withMediaContainer(GetTopWatchedContentMediaContainer mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
@@ -53,13 +53,13 @@ public class GetTopWatchedContentResponseBody {
         return this;
     }
 
+
     public GetTopWatchedContentResponseBody withMediaContainer(Optional<? extends GetTopWatchedContentMediaContainer> mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
         this.mediaContainer = mediaContainer;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -70,12 +70,12 @@ public class GetTopWatchedContentResponseBody {
         }
         GetTopWatchedContentResponseBody other = (GetTopWatchedContentResponseBody) o;
         return 
-            Objects.deepEquals(this.mediaContainer, other.mediaContainer);
+            Utils.enhancedDeepEquals(this.mediaContainer, other.mediaContainer);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             mediaContainer);
     }
     
@@ -84,14 +84,16 @@ public class GetTopWatchedContentResponseBody {
         return Utils.toString(GetTopWatchedContentResponseBody.class,
                 "mediaContainer", mediaContainer);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends GetTopWatchedContentMediaContainer> mediaContainer = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder mediaContainer(GetTopWatchedContentMediaContainer mediaContainer) {
             Utils.checkNotNull(mediaContainer, "mediaContainer");
@@ -104,10 +106,12 @@ public class GetTopWatchedContentResponseBody {
             this.mediaContainer = mediaContainer;
             return this;
         }
-        
+
         public GetTopWatchedContentResponseBody build() {
+
             return new GetTopWatchedContentResponseBody(
                 mediaContainer);
         }
+
     }
 }

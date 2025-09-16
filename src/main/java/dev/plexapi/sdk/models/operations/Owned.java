@@ -19,7 +19,7 @@ public enum Owned {
     @JsonValue
     private final int value;
 
-    private Owned(int value) {
+    Owned(int value) {
         this.value = value;
     }
     

@@ -3,18 +3,25 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetServerList;
 import java.lang.Exception;
 
 public class GetServerListRequestBuilder {
 
-    private final SDKMethodInterfaces.MethodCallGetServerList sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetServerListRequestBuilder(SDKMethodInterfaces.MethodCallGetServerList sdk) {
-        this.sdk = sdk;
+    public GetServerListRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetServerListResponse call() throws Exception {
+        
+        RequestlessOperation<GetServerListResponse> operation
+            = new GetServerList.Sync(sdkConfiguration);
 
-        return sdk.getServerListDirect();
+        return operation.handleResponse(operation.doRequest());
     }
 }

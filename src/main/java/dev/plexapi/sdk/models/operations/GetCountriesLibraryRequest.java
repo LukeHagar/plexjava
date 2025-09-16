@@ -10,10 +10,9 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetCountriesLibraryRequest {
-
     /**
      * The unique key of the Plex library. 
      * Note: This is unique in the context of the Plex server.
@@ -64,9 +63,10 @@ public class GetCountriesLibraryRequest {
         return type;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The unique key of the Plex library. 
@@ -92,7 +92,6 @@ public class GetCountriesLibraryRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -103,15 +102,14 @@ public class GetCountriesLibraryRequest {
         }
         GetCountriesLibraryRequest other = (GetCountriesLibraryRequest) o;
         return 
-            Objects.deepEquals(this.sectionKey, other.sectionKey) &&
-            Objects.deepEquals(this.type, other.type);
+            Utils.enhancedDeepEquals(this.sectionKey, other.sectionKey) &&
+            Utils.enhancedDeepEquals(this.type, other.type);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            sectionKey,
-            type);
+        return Utils.enhancedHash(
+            sectionKey, type);
     }
     
     @Override
@@ -120,16 +118,18 @@ public class GetCountriesLibraryRequest {
                 "sectionKey", sectionKey,
                 "type", type);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer sectionKey;
- 
+
         private GetCountriesLibraryQueryParamType type;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The unique key of the Plex library. 
@@ -140,6 +140,7 @@ public class GetCountriesLibraryRequest {
             this.sectionKey = sectionKey;
             return this;
         }
+
 
         /**
          * The type of media to retrieve or filter by.
@@ -154,11 +155,12 @@ public class GetCountriesLibraryRequest {
             this.type = type;
             return this;
         }
-        
+
         public GetCountriesLibraryRequest build() {
+
             return new GetCountriesLibraryRequest(
-                sectionKey,
-                type);
+                sectionKey, type);
         }
+
     }
 }

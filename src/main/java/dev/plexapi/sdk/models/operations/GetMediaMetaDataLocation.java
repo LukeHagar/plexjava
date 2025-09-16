@@ -9,10 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetMediaMetaDataLocation {
-
     /**
      * The file path for the location.
      */
@@ -34,9 +33,10 @@ public class GetMediaMetaDataLocation {
         return path;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The file path for the location.
@@ -47,7 +47,6 @@ public class GetMediaMetaDataLocation {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -58,12 +57,12 @@ public class GetMediaMetaDataLocation {
         }
         GetMediaMetaDataLocation other = (GetMediaMetaDataLocation) o;
         return 
-            Objects.deepEquals(this.path, other.path);
+            Utils.enhancedDeepEquals(this.path, other.path);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             path);
     }
     
@@ -72,14 +71,16 @@ public class GetMediaMetaDataLocation {
         return Utils.toString(GetMediaMetaDataLocation.class,
                 "path", path);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String path;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The file path for the location.
@@ -89,10 +90,12 @@ public class GetMediaMetaDataLocation {
             this.path = path;
             return this;
         }
-        
+
         public GetMediaMetaDataLocation build() {
+
             return new GetMediaMetaDataLocation(
                 path);
         }
+
     }
 }

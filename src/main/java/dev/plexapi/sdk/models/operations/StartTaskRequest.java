@@ -9,10 +9,9 @@ import dev.plexapi.sdk.utils.SpeakeasyMetadata;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class StartTaskRequest {
-
     /**
      * the name of the task to be started.
      */
@@ -34,9 +33,10 @@ public class StartTaskRequest {
         return taskName;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * the name of the task to be started.
@@ -47,7 +47,6 @@ public class StartTaskRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -58,12 +57,12 @@ public class StartTaskRequest {
         }
         StartTaskRequest other = (StartTaskRequest) o;
         return 
-            Objects.deepEquals(this.taskName, other.taskName);
+            Utils.enhancedDeepEquals(this.taskName, other.taskName);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             taskName);
     }
     
@@ -72,14 +71,16 @@ public class StartTaskRequest {
         return Utils.toString(StartTaskRequest.class,
                 "taskName", taskName);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private TaskName taskName;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * the name of the task to be started.
@@ -89,10 +90,12 @@ public class StartTaskRequest {
             this.taskName = taskName;
             return this;
         }
-        
+
         public StartTaskRequest build() {
+
             return new StartTaskRequest(
                 taskName);
         }
+
     }
 }

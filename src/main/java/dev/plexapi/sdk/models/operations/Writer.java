@@ -12,11 +12,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class Writer {
 
+public class Writer {
     /**
      * Unique identifier for the writer.
      */
@@ -72,7 +71,8 @@ public class Writer {
             int id,
             String filter,
             String tag) {
-        this(id, filter, tag, Optional.empty(), Optional.empty());
+        this(id, filter, tag,
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -115,9 +115,10 @@ public class Writer {
         return thumb;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Unique identifier for the writer.
@@ -155,6 +156,7 @@ public class Writer {
         return this;
     }
 
+
     /**
      * A 24-character hexadecimal unique key associated with the writer’s tag, used for internal identification.
      */
@@ -173,6 +175,7 @@ public class Writer {
         return this;
     }
 
+
     /**
      * The absolute URL of the thumbnail image for the writer.
      */
@@ -182,7 +185,6 @@ public class Writer {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -193,21 +195,18 @@ public class Writer {
         }
         Writer other = (Writer) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.tag, other.tag) &&
-            Objects.deepEquals(this.tagKey, other.tagKey) &&
-            Objects.deepEquals(this.thumb, other.thumb);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.filter, other.filter) &&
+            Utils.enhancedDeepEquals(this.tag, other.tag) &&
+            Utils.enhancedDeepEquals(this.tagKey, other.tagKey) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            filter,
-            tag,
-            tagKey,
-            thumb);
+        return Utils.enhancedHash(
+            id, filter, tag,
+            tagKey, thumb);
     }
     
     @Override
@@ -219,22 +218,24 @@ public class Writer {
                 "tagKey", tagKey,
                 "thumb", thumb);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer id;
- 
+
         private String filter;
- 
+
         private String tag;
- 
+
         private Optional<String> tagKey = Optional.empty();
- 
+
         private Optional<String> thumb = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Unique identifier for the writer.
@@ -245,6 +246,7 @@ public class Writer {
             return this;
         }
 
+
         /**
          * The filter string used to query this writer.
          */
@@ -254,6 +256,7 @@ public class Writer {
             return this;
         }
 
+
         /**
          * The role of Writer
          */
@@ -262,6 +265,7 @@ public class Writer {
             this.tag = tag;
             return this;
         }
+
 
         /**
          * A 24-character hexadecimal unique key associated with the writer’s tag, used for internal identification.
@@ -281,6 +285,7 @@ public class Writer {
             return this;
         }
 
+
         /**
          * The absolute URL of the thumbnail image for the writer.
          */
@@ -298,14 +303,13 @@ public class Writer {
             this.thumb = thumb;
             return this;
         }
-        
+
         public Writer build() {
+
             return new Writer(
-                id,
-                filter,
-                tag,
-                tagKey,
-                thumb);
+                id, filter, tag,
+                tagKey, thumb);
         }
+
     }
 }

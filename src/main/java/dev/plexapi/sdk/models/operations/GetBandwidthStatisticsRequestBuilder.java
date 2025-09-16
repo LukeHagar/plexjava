@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetBandwidthStatistics;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.Long;
@@ -11,10 +15,10 @@ import java.util.Optional;
 public class GetBandwidthStatisticsRequestBuilder {
 
     private Optional<Long> timespan = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallGetBandwidthStatistics sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetBandwidthStatisticsRequestBuilder(SDKMethodInterfaces.MethodCallGetBandwidthStatistics sdk) {
-        this.sdk = sdk;
+    public GetBandwidthStatisticsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
                 
     public GetBandwidthStatisticsRequestBuilder timespan(long timespan) {
@@ -29,9 +33,20 @@ public class GetBandwidthStatisticsRequestBuilder {
         return this;
     }
 
-    public GetBandwidthStatisticsResponse call() throws Exception {
 
-        return sdk.getBandwidthStatistics(
-            timespan);
+    private GetBandwidthStatisticsRequest buildRequest() {
+
+        GetBandwidthStatisticsRequest request = new GetBandwidthStatisticsRequest(timespan);
+
+        return request;
+    }
+
+    public GetBandwidthStatisticsResponse call() throws Exception {
+        
+        RequestOperation<GetBandwidthStatisticsRequest, GetBandwidthStatisticsResponse> operation
+              = new GetBandwidthStatistics.Sync(sdkConfiguration);
+        GetBandwidthStatisticsRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

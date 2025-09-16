@@ -19,7 +19,6 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -28,7 +27,6 @@ import java.util.Optional;
  * <p>Unknown
  */
 public class GetSearchAllLibrariesMetadata {
-
     /**
      * The rating key (Media ID) of this media item. Note: Although this is always an integer, it is represented as a string in the API.
      */
@@ -59,6 +57,7 @@ public class GetSearchAllLibrariesMetadata {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("studio")
     private Optional<String> studio;
+
 
     @JsonProperty("type")
     private GetSearchAllLibrariesType type;
@@ -181,6 +180,7 @@ public class GetSearchAllLibrariesMetadata {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("originallyAvailableAt")
     private Optional<LocalDate> originallyAvailableAt;
+
 
     @JsonProperty("addedAt")
     private long addedAt;
@@ -395,13 +395,16 @@ public class GetSearchAllLibrariesMetadata {
     @JsonProperty("userRating")
     private Optional<Float> userRating;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Image")
     private Optional<? extends List<GetSearchAllLibrariesImage>> image;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("UltraBlurColors")
     private Optional<? extends GetSearchAllLibrariesUltraBlurColors> ultraBlurColors;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Guid")
@@ -455,29 +458,36 @@ public class GetSearchAllLibrariesMetadata {
     @JsonProperty("skipChildren")
     private Optional<Boolean> skipChildren;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Media")
     private Optional<? extends List<GetSearchAllLibrariesMedia>> media;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Genre")
     private Optional<? extends List<GetSearchAllLibrariesGenre>> genre;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Country")
     private Optional<? extends List<GetSearchAllLibrariesCountry>> country;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Director")
     private Optional<? extends List<GetSearchAllLibrariesDirector>> director;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Writer")
     private Optional<? extends List<GetSearchAllLibrariesWriter>> writer;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Role")
     private Optional<? extends List<GetSearchAllLibrariesRole>> role;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Location")
@@ -724,7 +734,30 @@ public class GetSearchAllLibrariesMetadata {
             int seasonCount,
             int duration,
             long addedAt) {
-        this(ratingKey, key, guid, slug, Optional.empty(), type, title, banner, titleSort, Optional.empty(), summary, rating, audienceRating, Optional.empty(), tagline, thumb, art, theme, index, Optional.empty(), Optional.empty(), childCount, seasonCount, duration, Optional.empty(), addedAt, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(ratingKey, key, guid,
+            slug, Optional.empty(), type,
+            title, banner, titleSort,
+            Optional.empty(), summary, rating,
+            audienceRating, Optional.empty(), tagline,
+            thumb, art, theme,
+            index, Optional.empty(), Optional.empty(),
+            childCount, seasonCount, duration,
+            Optional.empty(), addedAt, Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -1285,9 +1318,10 @@ public class GetSearchAllLibrariesMetadata {
         return (Optional<List<GetSearchAllLibrariesLocation>>) location;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The rating key (Media ID) of this media item. Note: Although this is always an integer, it is represented as a string in the API.
@@ -1333,6 +1367,7 @@ public class GetSearchAllLibrariesMetadata {
         this.studio = Optional.ofNullable(studio);
         return this;
     }
+
 
     /**
      * The studio that produced the media item.
@@ -1385,6 +1420,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * The content rating for the media item.
      */
@@ -1429,6 +1465,7 @@ public class GetSearchAllLibrariesMetadata {
         this.year = Optional.ofNullable(year);
         return this;
     }
+
 
     /**
      * The release year of the media item.
@@ -1493,6 +1530,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * The number of leaf items (end nodes) under this media item.
      */
@@ -1510,6 +1548,7 @@ public class GetSearchAllLibrariesMetadata {
         this.viewedLeafCount = Optional.ofNullable(viewedLeafCount);
         return this;
     }
+
 
     /**
      * The number of leaf items that have been viewed.
@@ -1556,6 +1595,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * The original release date of the media item.
      */
@@ -1580,6 +1620,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * Unix epoch datetime in seconds
      */
@@ -1597,6 +1638,7 @@ public class GetSearchAllLibrariesMetadata {
         this.parentYear = Optional.ofNullable(parentYear);
         return this;
     }
+
 
     /**
      * The release year of the parent media item.
@@ -1616,6 +1658,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * The URL for the audience rating image.
      */
@@ -1633,6 +1676,7 @@ public class GetSearchAllLibrariesMetadata {
         this.chapterSource = Optional.ofNullable(chapterSource);
         return this;
     }
+
 
     /**
      * The source from which chapter data is derived.
@@ -1652,6 +1696,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * The primary extra key associated with this media item.
      */
@@ -1669,6 +1714,7 @@ public class GetSearchAllLibrariesMetadata {
         this.originalTitle = Optional.ofNullable(originalTitle);
         return this;
     }
+
 
     /**
      * The original title of the media item (if different).
@@ -1688,6 +1734,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * The rating key of the parent media item.
      */
@@ -1705,6 +1752,7 @@ public class GetSearchAllLibrariesMetadata {
         this.grandparentRatingKey = Optional.ofNullable(grandparentRatingKey);
         return this;
     }
+
 
     /**
      * The rating key of the grandparent media item.
@@ -1724,6 +1772,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * The GUID of the parent media item.
      */
@@ -1741,6 +1790,7 @@ public class GetSearchAllLibrariesMetadata {
         this.grandparentGuid = Optional.ofNullable(grandparentGuid);
         return this;
     }
+
 
     /**
      * The GUID of the grandparent media item.
@@ -1760,6 +1810,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * The slug for the grandparent media item.
      */
@@ -1777,6 +1828,7 @@ public class GetSearchAllLibrariesMetadata {
         this.grandparentKey = Optional.ofNullable(grandparentKey);
         return this;
     }
+
 
     /**
      * The key of the grandparent media item.
@@ -1796,6 +1848,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * The key of the parent media item.
      */
@@ -1813,6 +1866,7 @@ public class GetSearchAllLibrariesMetadata {
         this.grandparentTitle = Optional.ofNullable(grandparentTitle);
         return this;
     }
+
 
     /**
      * The title of the grandparent media item.
@@ -1832,6 +1886,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * The thumbnail URL for the grandparent media item.
      */
@@ -1849,6 +1904,7 @@ public class GetSearchAllLibrariesMetadata {
         this.grandparentTheme = Optional.ofNullable(grandparentTheme);
         return this;
     }
+
 
     /**
      * The theme URL for the grandparent media item.
@@ -1868,6 +1924,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * The art URL for the grandparent media item.
      */
@@ -1885,6 +1942,7 @@ public class GetSearchAllLibrariesMetadata {
         this.parentTitle = Optional.ofNullable(parentTitle);
         return this;
     }
+
 
     /**
      * The title of the parent media item.
@@ -1904,6 +1962,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * The index position of the parent media item.
      */
@@ -1921,6 +1980,7 @@ public class GetSearchAllLibrariesMetadata {
         this.parentThumb = Optional.ofNullable(parentThumb);
         return this;
     }
+
 
     /**
      * The thumbnail URL for the parent media item.
@@ -1940,6 +2000,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * The URL for the rating image.
      */
@@ -1957,6 +2018,7 @@ public class GetSearchAllLibrariesMetadata {
         this.viewCount = Optional.ofNullable(viewCount);
         return this;
     }
+
 
     /**
      * The number of times this media item has been viewed.
@@ -1976,6 +2038,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * The current playback offset (in milliseconds).
      */
@@ -1993,6 +2056,7 @@ public class GetSearchAllLibrariesMetadata {
         this.skipCount = Optional.ofNullable(skipCount);
         return this;
     }
+
 
     /**
      * The number of times this media item has been skipped.
@@ -2012,6 +2076,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * A classification that further describes the type of media item. For example, 'clip' indicates that the item is a short video clip.
      */
@@ -2029,6 +2094,7 @@ public class GetSearchAllLibrariesMetadata {
         this.lastRatedAt = Optional.ofNullable(lastRatedAt);
         return this;
     }
+
 
     /**
      * The Unix timestamp representing the last time the item was rated.
@@ -2048,6 +2114,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * The accuracy of the creation timestamp. This value indicates the format(s) provided (for example, 'epoch,local' means both epoch and local time formats are available).
      */
@@ -2065,6 +2132,7 @@ public class GetSearchAllLibrariesMetadata {
         this.createdAtTZOffset = Optional.ofNullable(createdAtTZOffset);
         return this;
     }
+
 
     /**
      * The time zone offset for the creation timestamp, represented as a string. This offset indicates the difference from UTC.
@@ -2084,6 +2152,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * Unix timestamp for when the media item was last viewed.
      */
@@ -2102,6 +2171,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * The rating provided by a user for the item. This value is expressed as a decimal number.
      */
@@ -2117,6 +2187,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     public GetSearchAllLibrariesMetadata withImage(Optional<? extends List<GetSearchAllLibrariesImage>> image) {
         Utils.checkNotNull(image, "image");
         this.image = image;
@@ -2129,6 +2200,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     public GetSearchAllLibrariesMetadata withUltraBlurColors(Optional<? extends GetSearchAllLibrariesUltraBlurColors> ultraBlurColors) {
         Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
         this.ultraBlurColors = ultraBlurColors;
@@ -2140,6 +2212,7 @@ public class GetSearchAllLibrariesMetadata {
         this.guids = Optional.ofNullable(guids);
         return this;
     }
+
 
     public GetSearchAllLibrariesMetadata withGuids(Optional<? extends List<GetSearchAllLibrariesGuids>> guids) {
         Utils.checkNotNull(guids, "guids");
@@ -2155,6 +2228,7 @@ public class GetSearchAllLibrariesMetadata {
         this.librarySectionID = Optional.ofNullable(librarySectionID);
         return this;
     }
+
 
     /**
      * The identifier for the library section.
@@ -2174,6 +2248,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * The title of the library section.
      */
@@ -2191,6 +2266,7 @@ public class GetSearchAllLibrariesMetadata {
         this.librarySectionKey = Optional.ofNullable(librarySectionKey);
         return this;
     }
+
 
     /**
      * The key corresponding to the library section.
@@ -2216,6 +2292,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * Setting that indicates the episode ordering for the show.
      * Options:
@@ -2240,6 +2317,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * Setting that indicates if seasons are set to hidden for the show. (-1 = Library default, 0 = Hide, 1 = Show).
      */
@@ -2258,6 +2336,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     /**
      * Indicates whether child items should be skipped.
      */
@@ -2273,6 +2352,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     public GetSearchAllLibrariesMetadata withMedia(Optional<? extends List<GetSearchAllLibrariesMedia>> media) {
         Utils.checkNotNull(media, "media");
         this.media = media;
@@ -2284,6 +2364,7 @@ public class GetSearchAllLibrariesMetadata {
         this.genre = Optional.ofNullable(genre);
         return this;
     }
+
 
     public GetSearchAllLibrariesMetadata withGenre(Optional<? extends List<GetSearchAllLibrariesGenre>> genre) {
         Utils.checkNotNull(genre, "genre");
@@ -2297,6 +2378,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     public GetSearchAllLibrariesMetadata withCountry(Optional<? extends List<GetSearchAllLibrariesCountry>> country) {
         Utils.checkNotNull(country, "country");
         this.country = country;
@@ -2308,6 +2390,7 @@ public class GetSearchAllLibrariesMetadata {
         this.director = Optional.ofNullable(director);
         return this;
     }
+
 
     public GetSearchAllLibrariesMetadata withDirector(Optional<? extends List<GetSearchAllLibrariesDirector>> director) {
         Utils.checkNotNull(director, "director");
@@ -2321,6 +2404,7 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     public GetSearchAllLibrariesMetadata withWriter(Optional<? extends List<GetSearchAllLibrariesWriter>> writer) {
         Utils.checkNotNull(writer, "writer");
         this.writer = writer;
@@ -2332,6 +2416,7 @@ public class GetSearchAllLibrariesMetadata {
         this.role = Optional.ofNullable(role);
         return this;
     }
+
 
     public GetSearchAllLibrariesMetadata withRole(Optional<? extends List<GetSearchAllLibrariesRole>> role) {
         Utils.checkNotNull(role, "role");
@@ -2345,13 +2430,13 @@ public class GetSearchAllLibrariesMetadata {
         return this;
     }
 
+
     public GetSearchAllLibrariesMetadata withLocation(Optional<? extends List<GetSearchAllLibrariesLocation>> location) {
         Utils.checkNotNull(location, "location");
         this.location = location;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -2362,155 +2447,107 @@ public class GetSearchAllLibrariesMetadata {
         }
         GetSearchAllLibrariesMetadata other = (GetSearchAllLibrariesMetadata) o;
         return 
-            Objects.deepEquals(this.ratingKey, other.ratingKey) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.guid, other.guid) &&
-            Objects.deepEquals(this.slug, other.slug) &&
-            Objects.deepEquals(this.studio, other.studio) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.banner, other.banner) &&
-            Objects.deepEquals(this.titleSort, other.titleSort) &&
-            Objects.deepEquals(this.contentRating, other.contentRating) &&
-            Objects.deepEquals(this.summary, other.summary) &&
-            Objects.deepEquals(this.rating, other.rating) &&
-            Objects.deepEquals(this.audienceRating, other.audienceRating) &&
-            Objects.deepEquals(this.year, other.year) &&
-            Objects.deepEquals(this.tagline, other.tagline) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.art, other.art) &&
-            Objects.deepEquals(this.theme, other.theme) &&
-            Objects.deepEquals(this.index, other.index) &&
-            Objects.deepEquals(this.leafCount, other.leafCount) &&
-            Objects.deepEquals(this.viewedLeafCount, other.viewedLeafCount) &&
-            Objects.deepEquals(this.childCount, other.childCount) &&
-            Objects.deepEquals(this.seasonCount, other.seasonCount) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.originallyAvailableAt, other.originallyAvailableAt) &&
-            Objects.deepEquals(this.addedAt, other.addedAt) &&
-            Objects.deepEquals(this.updatedAt, other.updatedAt) &&
-            Objects.deepEquals(this.parentYear, other.parentYear) &&
-            Objects.deepEquals(this.audienceRatingImage, other.audienceRatingImage) &&
-            Objects.deepEquals(this.chapterSource, other.chapterSource) &&
-            Objects.deepEquals(this.primaryExtraKey, other.primaryExtraKey) &&
-            Objects.deepEquals(this.originalTitle, other.originalTitle) &&
-            Objects.deepEquals(this.parentRatingKey, other.parentRatingKey) &&
-            Objects.deepEquals(this.grandparentRatingKey, other.grandparentRatingKey) &&
-            Objects.deepEquals(this.parentGuid, other.parentGuid) &&
-            Objects.deepEquals(this.grandparentGuid, other.grandparentGuid) &&
-            Objects.deepEquals(this.grandparentSlug, other.grandparentSlug) &&
-            Objects.deepEquals(this.grandparentKey, other.grandparentKey) &&
-            Objects.deepEquals(this.parentKey, other.parentKey) &&
-            Objects.deepEquals(this.grandparentTitle, other.grandparentTitle) &&
-            Objects.deepEquals(this.grandparentThumb, other.grandparentThumb) &&
-            Objects.deepEquals(this.grandparentTheme, other.grandparentTheme) &&
-            Objects.deepEquals(this.grandparentArt, other.grandparentArt) &&
-            Objects.deepEquals(this.parentTitle, other.parentTitle) &&
-            Objects.deepEquals(this.parentIndex, other.parentIndex) &&
-            Objects.deepEquals(this.parentThumb, other.parentThumb) &&
-            Objects.deepEquals(this.ratingImage, other.ratingImage) &&
-            Objects.deepEquals(this.viewCount, other.viewCount) &&
-            Objects.deepEquals(this.viewOffset, other.viewOffset) &&
-            Objects.deepEquals(this.skipCount, other.skipCount) &&
-            Objects.deepEquals(this.subtype, other.subtype) &&
-            Objects.deepEquals(this.lastRatedAt, other.lastRatedAt) &&
-            Objects.deepEquals(this.createdAtAccuracy, other.createdAtAccuracy) &&
-            Objects.deepEquals(this.createdAtTZOffset, other.createdAtTZOffset) &&
-            Objects.deepEquals(this.lastViewedAt, other.lastViewedAt) &&
-            Objects.deepEquals(this.userRating, other.userRating) &&
-            Objects.deepEquals(this.image, other.image) &&
-            Objects.deepEquals(this.ultraBlurColors, other.ultraBlurColors) &&
-            Objects.deepEquals(this.guids, other.guids) &&
-            Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
-            Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
-            Objects.deepEquals(this.librarySectionKey, other.librarySectionKey) &&
-            Objects.deepEquals(this.showOrdering, other.showOrdering) &&
-            Objects.deepEquals(this.flattenSeasons, other.flattenSeasons) &&
-            Objects.deepEquals(this.skipChildren, other.skipChildren) &&
-            Objects.deepEquals(this.media, other.media) &&
-            Objects.deepEquals(this.genre, other.genre) &&
-            Objects.deepEquals(this.country, other.country) &&
-            Objects.deepEquals(this.director, other.director) &&
-            Objects.deepEquals(this.writer, other.writer) &&
-            Objects.deepEquals(this.role, other.role) &&
-            Objects.deepEquals(this.location, other.location);
+            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.guid, other.guid) &&
+            Utils.enhancedDeepEquals(this.slug, other.slug) &&
+            Utils.enhancedDeepEquals(this.studio, other.studio) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.banner, other.banner) &&
+            Utils.enhancedDeepEquals(this.titleSort, other.titleSort) &&
+            Utils.enhancedDeepEquals(this.contentRating, other.contentRating) &&
+            Utils.enhancedDeepEquals(this.summary, other.summary) &&
+            Utils.enhancedDeepEquals(this.rating, other.rating) &&
+            Utils.enhancedDeepEquals(this.audienceRating, other.audienceRating) &&
+            Utils.enhancedDeepEquals(this.year, other.year) &&
+            Utils.enhancedDeepEquals(this.tagline, other.tagline) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.art, other.art) &&
+            Utils.enhancedDeepEquals(this.theme, other.theme) &&
+            Utils.enhancedDeepEquals(this.index, other.index) &&
+            Utils.enhancedDeepEquals(this.leafCount, other.leafCount) &&
+            Utils.enhancedDeepEquals(this.viewedLeafCount, other.viewedLeafCount) &&
+            Utils.enhancedDeepEquals(this.childCount, other.childCount) &&
+            Utils.enhancedDeepEquals(this.seasonCount, other.seasonCount) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.originallyAvailableAt, other.originallyAvailableAt) &&
+            Utils.enhancedDeepEquals(this.addedAt, other.addedAt) &&
+            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt) &&
+            Utils.enhancedDeepEquals(this.parentYear, other.parentYear) &&
+            Utils.enhancedDeepEquals(this.audienceRatingImage, other.audienceRatingImage) &&
+            Utils.enhancedDeepEquals(this.chapterSource, other.chapterSource) &&
+            Utils.enhancedDeepEquals(this.primaryExtraKey, other.primaryExtraKey) &&
+            Utils.enhancedDeepEquals(this.originalTitle, other.originalTitle) &&
+            Utils.enhancedDeepEquals(this.parentRatingKey, other.parentRatingKey) &&
+            Utils.enhancedDeepEquals(this.grandparentRatingKey, other.grandparentRatingKey) &&
+            Utils.enhancedDeepEquals(this.parentGuid, other.parentGuid) &&
+            Utils.enhancedDeepEquals(this.grandparentGuid, other.grandparentGuid) &&
+            Utils.enhancedDeepEquals(this.grandparentSlug, other.grandparentSlug) &&
+            Utils.enhancedDeepEquals(this.grandparentKey, other.grandparentKey) &&
+            Utils.enhancedDeepEquals(this.parentKey, other.parentKey) &&
+            Utils.enhancedDeepEquals(this.grandparentTitle, other.grandparentTitle) &&
+            Utils.enhancedDeepEquals(this.grandparentThumb, other.grandparentThumb) &&
+            Utils.enhancedDeepEquals(this.grandparentTheme, other.grandparentTheme) &&
+            Utils.enhancedDeepEquals(this.grandparentArt, other.grandparentArt) &&
+            Utils.enhancedDeepEquals(this.parentTitle, other.parentTitle) &&
+            Utils.enhancedDeepEquals(this.parentIndex, other.parentIndex) &&
+            Utils.enhancedDeepEquals(this.parentThumb, other.parentThumb) &&
+            Utils.enhancedDeepEquals(this.ratingImage, other.ratingImage) &&
+            Utils.enhancedDeepEquals(this.viewCount, other.viewCount) &&
+            Utils.enhancedDeepEquals(this.viewOffset, other.viewOffset) &&
+            Utils.enhancedDeepEquals(this.skipCount, other.skipCount) &&
+            Utils.enhancedDeepEquals(this.subtype, other.subtype) &&
+            Utils.enhancedDeepEquals(this.lastRatedAt, other.lastRatedAt) &&
+            Utils.enhancedDeepEquals(this.createdAtAccuracy, other.createdAtAccuracy) &&
+            Utils.enhancedDeepEquals(this.createdAtTZOffset, other.createdAtTZOffset) &&
+            Utils.enhancedDeepEquals(this.lastViewedAt, other.lastViewedAt) &&
+            Utils.enhancedDeepEquals(this.userRating, other.userRating) &&
+            Utils.enhancedDeepEquals(this.image, other.image) &&
+            Utils.enhancedDeepEquals(this.ultraBlurColors, other.ultraBlurColors) &&
+            Utils.enhancedDeepEquals(this.guids, other.guids) &&
+            Utils.enhancedDeepEquals(this.librarySectionID, other.librarySectionID) &&
+            Utils.enhancedDeepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
+            Utils.enhancedDeepEquals(this.librarySectionKey, other.librarySectionKey) &&
+            Utils.enhancedDeepEquals(this.showOrdering, other.showOrdering) &&
+            Utils.enhancedDeepEquals(this.flattenSeasons, other.flattenSeasons) &&
+            Utils.enhancedDeepEquals(this.skipChildren, other.skipChildren) &&
+            Utils.enhancedDeepEquals(this.media, other.media) &&
+            Utils.enhancedDeepEquals(this.genre, other.genre) &&
+            Utils.enhancedDeepEquals(this.country, other.country) &&
+            Utils.enhancedDeepEquals(this.director, other.director) &&
+            Utils.enhancedDeepEquals(this.writer, other.writer) &&
+            Utils.enhancedDeepEquals(this.role, other.role) &&
+            Utils.enhancedDeepEquals(this.location, other.location);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            ratingKey,
-            key,
-            guid,
-            slug,
-            studio,
-            type,
-            title,
-            banner,
-            titleSort,
-            contentRating,
-            summary,
-            rating,
-            audienceRating,
-            year,
-            tagline,
-            thumb,
-            art,
-            theme,
-            index,
-            leafCount,
-            viewedLeafCount,
-            childCount,
-            seasonCount,
-            duration,
-            originallyAvailableAt,
-            addedAt,
-            updatedAt,
-            parentYear,
-            audienceRatingImage,
-            chapterSource,
-            primaryExtraKey,
-            originalTitle,
-            parentRatingKey,
-            grandparentRatingKey,
-            parentGuid,
-            grandparentGuid,
-            grandparentSlug,
-            grandparentKey,
-            parentKey,
-            grandparentTitle,
-            grandparentThumb,
-            grandparentTheme,
-            grandparentArt,
-            parentTitle,
-            parentIndex,
-            parentThumb,
-            ratingImage,
-            viewCount,
-            viewOffset,
-            skipCount,
-            subtype,
-            lastRatedAt,
-            createdAtAccuracy,
-            createdAtTZOffset,
-            lastViewedAt,
-            userRating,
-            image,
-            ultraBlurColors,
-            guids,
-            librarySectionID,
-            librarySectionTitle,
-            librarySectionKey,
-            showOrdering,
-            flattenSeasons,
-            skipChildren,
-            media,
-            genre,
-            country,
-            director,
-            writer,
-            role,
-            location);
+        return Utils.enhancedHash(
+            ratingKey, key, guid,
+            slug, studio, type,
+            title, banner, titleSort,
+            contentRating, summary, rating,
+            audienceRating, year, tagline,
+            thumb, art, theme,
+            index, leafCount, viewedLeafCount,
+            childCount, seasonCount, duration,
+            originallyAvailableAt, addedAt, updatedAt,
+            parentYear, audienceRatingImage, chapterSource,
+            primaryExtraKey, originalTitle, parentRatingKey,
+            grandparentRatingKey, parentGuid, grandparentGuid,
+            grandparentSlug, grandparentKey, parentKey,
+            grandparentTitle, grandparentThumb, grandparentTheme,
+            grandparentArt, parentTitle, parentIndex,
+            parentThumb, ratingImage, viewCount,
+            viewOffset, skipCount, subtype,
+            lastRatedAt, createdAtAccuracy, createdAtTZOffset,
+            lastViewedAt, userRating, image,
+            ultraBlurColors, guids, librarySectionID,
+            librarySectionTitle, librarySectionKey, showOrdering,
+            flattenSeasons, skipChildren, media,
+            genre, country, director,
+            writer, role, location);
     }
     
     @Override
@@ -2589,156 +2626,158 @@ public class GetSearchAllLibrariesMetadata {
                 "role", role,
                 "location", location);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String ratingKey;
- 
+
         private String key;
- 
+
         private String guid;
- 
+
         private String slug;
- 
+
         private Optional<String> studio = Optional.empty();
- 
+
         private GetSearchAllLibrariesType type;
- 
+
         private String title;
- 
+
         private String banner;
- 
+
         private String titleSort;
- 
+
         private Optional<String> contentRating = Optional.empty();
- 
+
         private String summary;
- 
+
         private Float rating;
- 
+
         private Double audienceRating;
- 
+
         private Optional<Integer> year = Optional.empty();
- 
+
         private String tagline;
- 
+
         private String thumb;
- 
+
         private String art;
- 
+
         private String theme;
- 
+
         private Integer index;
- 
+
         private Optional<Integer> leafCount = Optional.empty();
- 
+
         private Optional<Integer> viewedLeafCount = Optional.empty();
- 
+
         private Integer childCount;
- 
+
         private Integer seasonCount;
- 
+
         private Integer duration;
- 
+
         private Optional<LocalDate> originallyAvailableAt = Optional.empty();
- 
+
         private Long addedAt;
- 
+
         private Optional<Long> updatedAt = Optional.empty();
- 
+
         private Optional<Integer> parentYear = Optional.empty();
- 
+
         private Optional<String> audienceRatingImage = Optional.empty();
- 
+
         private Optional<String> chapterSource = Optional.empty();
- 
+
         private Optional<String> primaryExtraKey = Optional.empty();
- 
+
         private Optional<String> originalTitle = Optional.empty();
- 
+
         private Optional<String> parentRatingKey = Optional.empty();
- 
+
         private Optional<String> grandparentRatingKey = Optional.empty();
- 
+
         private Optional<String> parentGuid = Optional.empty();
- 
+
         private Optional<String> grandparentGuid = Optional.empty();
- 
+
         private Optional<String> grandparentSlug = Optional.empty();
- 
+
         private Optional<String> grandparentKey = Optional.empty();
- 
+
         private Optional<String> parentKey = Optional.empty();
- 
+
         private Optional<String> grandparentTitle = Optional.empty();
- 
+
         private Optional<String> grandparentThumb = Optional.empty();
- 
+
         private Optional<String> grandparentTheme = Optional.empty();
- 
+
         private Optional<String> grandparentArt = Optional.empty();
- 
+
         private Optional<String> parentTitle = Optional.empty();
- 
+
         private Optional<Integer> parentIndex = Optional.empty();
- 
+
         private Optional<String> parentThumb = Optional.empty();
- 
+
         private Optional<String> ratingImage = Optional.empty();
- 
+
         private Optional<Integer> viewCount = Optional.empty();
- 
+
         private Optional<Integer> viewOffset = Optional.empty();
- 
+
         private Optional<Integer> skipCount = Optional.empty();
- 
+
         private Optional<String> subtype = Optional.empty();
- 
+
         private Optional<Long> lastRatedAt = Optional.empty();
- 
+
         private Optional<String> createdAtAccuracy = Optional.empty();
- 
+
         private Optional<String> createdAtTZOffset = Optional.empty();
- 
+
         private Optional<Integer> lastViewedAt = Optional.empty();
- 
+
         private Optional<Float> userRating = Optional.empty();
- 
+
         private Optional<? extends List<GetSearchAllLibrariesImage>> image = Optional.empty();
- 
+
         private Optional<? extends GetSearchAllLibrariesUltraBlurColors> ultraBlurColors = Optional.empty();
- 
+
         private Optional<? extends List<GetSearchAllLibrariesGuids>> guids = Optional.empty();
- 
+
         private Optional<Long> librarySectionID = Optional.empty();
- 
+
         private Optional<String> librarySectionTitle = Optional.empty();
- 
+
         private Optional<String> librarySectionKey = Optional.empty();
- 
+
         private Optional<? extends GetSearchAllLibrariesShowOrdering> showOrdering = Optional.empty();
- 
+
         private Optional<? extends GetSearchAllLibrariesFlattenSeasons> flattenSeasons = Optional.empty();
- 
+
         private Optional<Boolean> skipChildren = Optional.empty();
- 
+
         private Optional<? extends List<GetSearchAllLibrariesMedia>> media = Optional.empty();
- 
+
         private Optional<? extends List<GetSearchAllLibrariesGenre>> genre = Optional.empty();
- 
+
         private Optional<? extends List<GetSearchAllLibrariesCountry>> country = Optional.empty();
- 
+
         private Optional<? extends List<GetSearchAllLibrariesDirector>> director = Optional.empty();
- 
+
         private Optional<? extends List<GetSearchAllLibrariesWriter>> writer = Optional.empty();
- 
+
         private Optional<? extends List<GetSearchAllLibrariesRole>> role = Optional.empty();
- 
+
         private Optional<? extends List<GetSearchAllLibrariesLocation>> location = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The rating key (Media ID) of this media item. Note: Although this is always an integer, it is represented as a string in the API.
@@ -2749,6 +2788,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The unique key for the media item.
          */
@@ -2757,6 +2797,7 @@ public class GetSearchAllLibrariesMetadata {
             this.key = key;
             return this;
         }
+
 
         /**
          * The globally unique identifier for the media item.
@@ -2767,6 +2808,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * A URL‐friendly version of the media title.
          */
@@ -2775,6 +2817,7 @@ public class GetSearchAllLibrariesMetadata {
             this.slug = slug;
             return this;
         }
+
 
         /**
          * The studio that produced the media item.
@@ -2794,11 +2837,13 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         public Builder type(GetSearchAllLibrariesType type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
         }
+
 
         /**
          * The title of the media item.
@@ -2809,6 +2854,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The banner image URL for the media item.
          */
@@ -2818,6 +2864,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The sort title used for ordering media items.
          */
@@ -2826,6 +2873,7 @@ public class GetSearchAllLibrariesMetadata {
             this.titleSort = titleSort;
             return this;
         }
+
 
         /**
          * The content rating for the media item.
@@ -2845,6 +2893,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * A synopsis of the media item.
          */
@@ -2853,6 +2902,7 @@ public class GetSearchAllLibrariesMetadata {
             this.summary = summary;
             return this;
         }
+
 
         /**
          * The critic rating for the media item.
@@ -2863,6 +2913,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The audience rating for the media item.
          */
@@ -2871,6 +2922,7 @@ public class GetSearchAllLibrariesMetadata {
             this.audienceRating = audienceRating;
             return this;
         }
+
 
         /**
          * The release year of the media item.
@@ -2890,6 +2942,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * A brief tagline for the media item.
          */
@@ -2898,6 +2951,7 @@ public class GetSearchAllLibrariesMetadata {
             this.tagline = tagline;
             return this;
         }
+
 
         /**
          * The thumbnail image URL for the media item.
@@ -2908,6 +2962,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The art image URL for the media item.
          */
@@ -2916,6 +2971,7 @@ public class GetSearchAllLibrariesMetadata {
             this.art = art;
             return this;
         }
+
 
         /**
          * The theme URL for the media item.
@@ -2926,6 +2982,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The index position of the media item.
          */
@@ -2934,6 +2991,7 @@ public class GetSearchAllLibrariesMetadata {
             this.index = index;
             return this;
         }
+
 
         /**
          * The number of leaf items (end nodes) under this media item.
@@ -2953,6 +3011,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The number of leaf items that have been viewed.
          */
@@ -2971,6 +3030,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The number of child items associated with this media item.
          */
@@ -2979,6 +3039,7 @@ public class GetSearchAllLibrariesMetadata {
             this.childCount = childCount;
             return this;
         }
+
 
         /**
          * The total number of seasons (for TV shows).
@@ -2989,6 +3050,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The duration of the media item in milliseconds.
          */
@@ -2997,6 +3059,7 @@ public class GetSearchAllLibrariesMetadata {
             this.duration = duration;
             return this;
         }
+
 
         /**
          * The original release date of the media item.
@@ -3016,11 +3079,13 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         public Builder addedAt(long addedAt) {
             Utils.checkNotNull(addedAt, "addedAt");
             this.addedAt = addedAt;
             return this;
         }
+
 
         /**
          * Unix epoch datetime in seconds
@@ -3040,6 +3105,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The release year of the parent media item.
          */
@@ -3057,6 +3123,7 @@ public class GetSearchAllLibrariesMetadata {
             this.parentYear = parentYear;
             return this;
         }
+
 
         /**
          * The URL for the audience rating image.
@@ -3076,6 +3143,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The source from which chapter data is derived.
          */
@@ -3093,6 +3161,7 @@ public class GetSearchAllLibrariesMetadata {
             this.chapterSource = chapterSource;
             return this;
         }
+
 
         /**
          * The primary extra key associated with this media item.
@@ -3112,6 +3181,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The original title of the media item (if different).
          */
@@ -3129,6 +3199,7 @@ public class GetSearchAllLibrariesMetadata {
             this.originalTitle = originalTitle;
             return this;
         }
+
 
         /**
          * The rating key of the parent media item.
@@ -3148,6 +3219,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The rating key of the grandparent media item.
          */
@@ -3165,6 +3237,7 @@ public class GetSearchAllLibrariesMetadata {
             this.grandparentRatingKey = grandparentRatingKey;
             return this;
         }
+
 
         /**
          * The GUID of the parent media item.
@@ -3184,6 +3257,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The GUID of the grandparent media item.
          */
@@ -3201,6 +3275,7 @@ public class GetSearchAllLibrariesMetadata {
             this.grandparentGuid = grandparentGuid;
             return this;
         }
+
 
         /**
          * The slug for the grandparent media item.
@@ -3220,6 +3295,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The key of the grandparent media item.
          */
@@ -3237,6 +3313,7 @@ public class GetSearchAllLibrariesMetadata {
             this.grandparentKey = grandparentKey;
             return this;
         }
+
 
         /**
          * The key of the parent media item.
@@ -3256,6 +3333,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The title of the grandparent media item.
          */
@@ -3273,6 +3351,7 @@ public class GetSearchAllLibrariesMetadata {
             this.grandparentTitle = grandparentTitle;
             return this;
         }
+
 
         /**
          * The thumbnail URL for the grandparent media item.
@@ -3292,6 +3371,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The theme URL for the grandparent media item.
          */
@@ -3309,6 +3389,7 @@ public class GetSearchAllLibrariesMetadata {
             this.grandparentTheme = grandparentTheme;
             return this;
         }
+
 
         /**
          * The art URL for the grandparent media item.
@@ -3328,6 +3409,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The title of the parent media item.
          */
@@ -3345,6 +3427,7 @@ public class GetSearchAllLibrariesMetadata {
             this.parentTitle = parentTitle;
             return this;
         }
+
 
         /**
          * The index position of the parent media item.
@@ -3364,6 +3447,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The thumbnail URL for the parent media item.
          */
@@ -3381,6 +3465,7 @@ public class GetSearchAllLibrariesMetadata {
             this.parentThumb = parentThumb;
             return this;
         }
+
 
         /**
          * The URL for the rating image.
@@ -3400,6 +3485,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The number of times this media item has been viewed.
          */
@@ -3417,6 +3503,7 @@ public class GetSearchAllLibrariesMetadata {
             this.viewCount = viewCount;
             return this;
         }
+
 
         /**
          * The current playback offset (in milliseconds).
@@ -3436,6 +3523,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The number of times this media item has been skipped.
          */
@@ -3453,6 +3541,7 @@ public class GetSearchAllLibrariesMetadata {
             this.skipCount = skipCount;
             return this;
         }
+
 
         /**
          * A classification that further describes the type of media item. For example, 'clip' indicates that the item is a short video clip.
@@ -3472,6 +3561,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The Unix timestamp representing the last time the item was rated.
          */
@@ -3489,6 +3579,7 @@ public class GetSearchAllLibrariesMetadata {
             this.lastRatedAt = lastRatedAt;
             return this;
         }
+
 
         /**
          * The accuracy of the creation timestamp. This value indicates the format(s) provided (for example, 'epoch,local' means both epoch and local time formats are available).
@@ -3508,6 +3599,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The time zone offset for the creation timestamp, represented as a string. This offset indicates the difference from UTC.
          */
@@ -3525,6 +3617,7 @@ public class GetSearchAllLibrariesMetadata {
             this.createdAtTZOffset = createdAtTZOffset;
             return this;
         }
+
 
         /**
          * Unix timestamp for when the media item was last viewed.
@@ -3544,6 +3637,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The rating provided by a user for the item. This value is expressed as a decimal number.
          */
@@ -3562,6 +3656,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         public Builder image(List<GetSearchAllLibrariesImage> image) {
             Utils.checkNotNull(image, "image");
             this.image = Optional.ofNullable(image);
@@ -3573,6 +3668,7 @@ public class GetSearchAllLibrariesMetadata {
             this.image = image;
             return this;
         }
+
 
         public Builder ultraBlurColors(GetSearchAllLibrariesUltraBlurColors ultraBlurColors) {
             Utils.checkNotNull(ultraBlurColors, "ultraBlurColors");
@@ -3586,6 +3682,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         public Builder guids(List<GetSearchAllLibrariesGuids> guids) {
             Utils.checkNotNull(guids, "guids");
             this.guids = Optional.ofNullable(guids);
@@ -3597,6 +3694,7 @@ public class GetSearchAllLibrariesMetadata {
             this.guids = guids;
             return this;
         }
+
 
         /**
          * The identifier for the library section.
@@ -3616,6 +3714,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The title of the library section.
          */
@@ -3634,6 +3733,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * The key corresponding to the library section.
          */
@@ -3651,6 +3751,7 @@ public class GetSearchAllLibrariesMetadata {
             this.librarySectionKey = librarySectionKey;
             return this;
         }
+
 
         /**
          * Setting that indicates the episode ordering for the show.
@@ -3682,6 +3783,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         /**
          * Setting that indicates if seasons are set to hidden for the show. (-1 = Library default, 0 = Hide, 1 = Show).
          */
@@ -3699,6 +3801,7 @@ public class GetSearchAllLibrariesMetadata {
             this.flattenSeasons = flattenSeasons;
             return this;
         }
+
 
         /**
          * Indicates whether child items should be skipped.
@@ -3718,6 +3821,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         public Builder media(List<GetSearchAllLibrariesMedia> media) {
             Utils.checkNotNull(media, "media");
             this.media = Optional.ofNullable(media);
@@ -3729,6 +3833,7 @@ public class GetSearchAllLibrariesMetadata {
             this.media = media;
             return this;
         }
+
 
         public Builder genre(List<GetSearchAllLibrariesGenre> genre) {
             Utils.checkNotNull(genre, "genre");
@@ -3742,6 +3847,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         public Builder country(List<GetSearchAllLibrariesCountry> country) {
             Utils.checkNotNull(country, "country");
             this.country = Optional.ofNullable(country);
@@ -3753,6 +3859,7 @@ public class GetSearchAllLibrariesMetadata {
             this.country = country;
             return this;
         }
+
 
         public Builder director(List<GetSearchAllLibrariesDirector> director) {
             Utils.checkNotNull(director, "director");
@@ -3766,6 +3873,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         public Builder writer(List<GetSearchAllLibrariesWriter> writer) {
             Utils.checkNotNull(writer, "writer");
             this.writer = Optional.ofNullable(writer);
@@ -3777,6 +3885,7 @@ public class GetSearchAllLibrariesMetadata {
             this.writer = writer;
             return this;
         }
+
 
         public Builder role(List<GetSearchAllLibrariesRole> role) {
             Utils.checkNotNull(role, "role");
@@ -3790,6 +3899,7 @@ public class GetSearchAllLibrariesMetadata {
             return this;
         }
 
+
         public Builder location(List<GetSearchAllLibrariesLocation> location) {
             Utils.checkNotNull(location, "location");
             this.location = Optional.ofNullable(location);
@@ -3801,81 +3911,35 @@ public class GetSearchAllLibrariesMetadata {
             this.location = location;
             return this;
         }
-        
+
         public GetSearchAllLibrariesMetadata build() {
+
             return new GetSearchAllLibrariesMetadata(
-                ratingKey,
-                key,
-                guid,
-                slug,
-                studio,
-                type,
-                title,
-                banner,
-                titleSort,
-                contentRating,
-                summary,
-                rating,
-                audienceRating,
-                year,
-                tagline,
-                thumb,
-                art,
-                theme,
-                index,
-                leafCount,
-                viewedLeafCount,
-                childCount,
-                seasonCount,
-                duration,
-                originallyAvailableAt,
-                addedAt,
-                updatedAt,
-                parentYear,
-                audienceRatingImage,
-                chapterSource,
-                primaryExtraKey,
-                originalTitle,
-                parentRatingKey,
-                grandparentRatingKey,
-                parentGuid,
-                grandparentGuid,
-                grandparentSlug,
-                grandparentKey,
-                parentKey,
-                grandparentTitle,
-                grandparentThumb,
-                grandparentTheme,
-                grandparentArt,
-                parentTitle,
-                parentIndex,
-                parentThumb,
-                ratingImage,
-                viewCount,
-                viewOffset,
-                skipCount,
-                subtype,
-                lastRatedAt,
-                createdAtAccuracy,
-                createdAtTZOffset,
-                lastViewedAt,
-                userRating,
-                image,
-                ultraBlurColors,
-                guids,
-                librarySectionID,
-                librarySectionTitle,
-                librarySectionKey,
-                showOrdering,
-                flattenSeasons,
-                skipChildren,
-                media,
-                genre,
-                country,
-                director,
-                writer,
-                role,
-                location);
+                ratingKey, key, guid,
+                slug, studio, type,
+                title, banner, titleSort,
+                contentRating, summary, rating,
+                audienceRating, year, tagline,
+                thumb, art, theme,
+                index, leafCount, viewedLeafCount,
+                childCount, seasonCount, duration,
+                originallyAvailableAt, addedAt, updatedAt,
+                parentYear, audienceRatingImage, chapterSource,
+                primaryExtraKey, originalTitle, parentRatingKey,
+                grandparentRatingKey, parentGuid, grandparentGuid,
+                grandparentSlug, grandparentKey, parentKey,
+                grandparentTitle, grandparentThumb, grandparentTheme,
+                grandparentArt, parentTitle, parentIndex,
+                parentThumb, ratingImage, viewCount,
+                viewOffset, skipCount, subtype,
+                lastRatedAt, createdAtAccuracy, createdAtTZOffset,
+                lastViewedAt, userRating, image,
+                ultraBlurColors, guids, librarySectionID,
+                librarySectionTitle, librarySectionKey, showOrdering,
+                flattenSeasons, skipChildren, media,
+                genre, country, director,
+                writer, role, location);
         }
+
     }
 }

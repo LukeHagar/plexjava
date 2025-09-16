@@ -14,7 +14,6 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -23,7 +22,6 @@ import java.util.Optional;
  * <p>Geo location data
  */
 public class GetGeoDataGeoData {
-
     /**
      * The ISO 3166-1 alpha-2 code of the country.
      */
@@ -139,7 +137,10 @@ public class GetGeoDataGeoData {
             String postalCode,
             String subdivisions,
             String coordinates) {
-        this(code, continentCode, country, city, Optional.empty(), timeZone, postalCode, Optional.empty(), Optional.empty(), subdivisions, coordinates);
+        this(code, continentCode, country,
+            city, Optional.empty(), timeZone,
+            postalCode, Optional.empty(), Optional.empty(),
+            subdivisions, coordinates);
     }
 
     /**
@@ -230,9 +231,10 @@ public class GetGeoDataGeoData {
         return coordinates;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The ISO 3166-1 alpha-2 code of the country.
@@ -279,6 +281,7 @@ public class GetGeoDataGeoData {
         return this;
     }
 
+
     /**
      * Indicates if the country is a member of the European Union.
      */
@@ -315,6 +318,7 @@ public class GetGeoDataGeoData {
         return this;
     }
 
+
     /**
      * Indicates if the country has privacy restrictions.
      */
@@ -332,6 +336,7 @@ public class GetGeoDataGeoData {
         this.inPrivacyRestrictedRegion = Optional.ofNullable(inPrivacyRestrictedRegion);
         return this;
     }
+
 
     /**
      * Indicates if the region has privacy restrictions.
@@ -360,7 +365,6 @@ public class GetGeoDataGeoData {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -371,33 +375,26 @@ public class GetGeoDataGeoData {
         }
         GetGeoDataGeoData other = (GetGeoDataGeoData) o;
         return 
-            Objects.deepEquals(this.code, other.code) &&
-            Objects.deepEquals(this.continentCode, other.continentCode) &&
-            Objects.deepEquals(this.country, other.country) &&
-            Objects.deepEquals(this.city, other.city) &&
-            Objects.deepEquals(this.europeanUnionMember, other.europeanUnionMember) &&
-            Objects.deepEquals(this.timeZone, other.timeZone) &&
-            Objects.deepEquals(this.postalCode, other.postalCode) &&
-            Objects.deepEquals(this.inPrivacyRestrictedCountry, other.inPrivacyRestrictedCountry) &&
-            Objects.deepEquals(this.inPrivacyRestrictedRegion, other.inPrivacyRestrictedRegion) &&
-            Objects.deepEquals(this.subdivisions, other.subdivisions) &&
-            Objects.deepEquals(this.coordinates, other.coordinates);
+            Utils.enhancedDeepEquals(this.code, other.code) &&
+            Utils.enhancedDeepEquals(this.continentCode, other.continentCode) &&
+            Utils.enhancedDeepEquals(this.country, other.country) &&
+            Utils.enhancedDeepEquals(this.city, other.city) &&
+            Utils.enhancedDeepEquals(this.europeanUnionMember, other.europeanUnionMember) &&
+            Utils.enhancedDeepEquals(this.timeZone, other.timeZone) &&
+            Utils.enhancedDeepEquals(this.postalCode, other.postalCode) &&
+            Utils.enhancedDeepEquals(this.inPrivacyRestrictedCountry, other.inPrivacyRestrictedCountry) &&
+            Utils.enhancedDeepEquals(this.inPrivacyRestrictedRegion, other.inPrivacyRestrictedRegion) &&
+            Utils.enhancedDeepEquals(this.subdivisions, other.subdivisions) &&
+            Utils.enhancedDeepEquals(this.coordinates, other.coordinates);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            code,
-            continentCode,
-            country,
-            city,
-            europeanUnionMember,
-            timeZone,
-            postalCode,
-            inPrivacyRestrictedCountry,
-            inPrivacyRestrictedRegion,
-            subdivisions,
-            coordinates);
+        return Utils.enhancedHash(
+            code, continentCode, country,
+            city, europeanUnionMember, timeZone,
+            postalCode, inPrivacyRestrictedCountry, inPrivacyRestrictedRegion,
+            subdivisions, coordinates);
     }
     
     @Override
@@ -415,34 +412,36 @@ public class GetGeoDataGeoData {
                 "subdivisions", subdivisions,
                 "coordinates", coordinates);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String code;
- 
+
         private String continentCode;
- 
+
         private String country;
- 
+
         private String city;
- 
+
         private Optional<Boolean> europeanUnionMember;
- 
+
         private String timeZone;
- 
+
         private String postalCode;
- 
+
         private Optional<Boolean> inPrivacyRestrictedCountry;
- 
+
         private Optional<Boolean> inPrivacyRestrictedRegion;
- 
+
         private String subdivisions;
- 
+
         private String coordinates;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The ISO 3166-1 alpha-2 code of the country.
@@ -453,6 +452,7 @@ public class GetGeoDataGeoData {
             return this;
         }
 
+
         /**
          * The continent code where the country is located.
          */
@@ -461,6 +461,7 @@ public class GetGeoDataGeoData {
             this.continentCode = continentCode;
             return this;
         }
+
 
         /**
          * The official name of the country.
@@ -471,6 +472,7 @@ public class GetGeoDataGeoData {
             return this;
         }
 
+
         /**
          * The name of the city.
          */
@@ -479,6 +481,7 @@ public class GetGeoDataGeoData {
             this.city = city;
             return this;
         }
+
 
         /**
          * Indicates if the country is a member of the European Union.
@@ -498,6 +501,7 @@ public class GetGeoDataGeoData {
             return this;
         }
 
+
         /**
          * The time zone of the country.
          */
@@ -507,6 +511,7 @@ public class GetGeoDataGeoData {
             return this;
         }
 
+
         /**
          * The postal code of the location.
          */
@@ -515,6 +520,7 @@ public class GetGeoDataGeoData {
             this.postalCode = postalCode;
             return this;
         }
+
 
         /**
          * Indicates if the country has privacy restrictions.
@@ -534,6 +540,7 @@ public class GetGeoDataGeoData {
             return this;
         }
 
+
         /**
          * Indicates if the region has privacy restrictions.
          */
@@ -552,6 +559,7 @@ public class GetGeoDataGeoData {
             return this;
         }
 
+
         /**
          * The name of the primary administrative subdivision.
          */
@@ -561,6 +569,7 @@ public class GetGeoDataGeoData {
             return this;
         }
 
+
         /**
          * The geographical coordinates (latitude, longitude) of the location.
          */
@@ -569,7 +578,7 @@ public class GetGeoDataGeoData {
             this.coordinates = coordinates;
             return this;
         }
-        
+
         public GetGeoDataGeoData build() {
             if (europeanUnionMember == null) {
                 europeanUnionMember = _SINGLETON_VALUE_EuropeanUnionMember.value();
@@ -580,19 +589,14 @@ public class GetGeoDataGeoData {
             if (inPrivacyRestrictedRegion == null) {
                 inPrivacyRestrictedRegion = _SINGLETON_VALUE_InPrivacyRestrictedRegion.value();
             }
+
             return new GetGeoDataGeoData(
-                code,
-                continentCode,
-                country,
-                city,
-                europeanUnionMember,
-                timeZone,
-                postalCode,
-                inPrivacyRestrictedCountry,
-                inPrivacyRestrictedRegion,
-                subdivisions,
-                coordinates);
+                code, continentCode, country,
+                city, europeanUnionMember, timeZone,
+                postalCode, inPrivacyRestrictedCountry, inPrivacyRestrictedRegion,
+                subdivisions, coordinates);
         }
+
 
         private static final LazySingletonValue<Optional<Boolean>> _SINGLETON_VALUE_EuropeanUnionMember =
                 new LazySingletonValue<>(

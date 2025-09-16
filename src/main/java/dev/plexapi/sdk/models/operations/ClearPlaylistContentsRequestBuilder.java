@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.ClearPlaylistContents;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Exception;
@@ -10,10 +14,10 @@ import java.lang.Exception;
 public class ClearPlaylistContentsRequestBuilder {
 
     private Double playlistID;
-    private final SDKMethodInterfaces.MethodCallClearPlaylistContents sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public ClearPlaylistContentsRequestBuilder(SDKMethodInterfaces.MethodCallClearPlaylistContents sdk) {
-        this.sdk = sdk;
+    public ClearPlaylistContentsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public ClearPlaylistContentsRequestBuilder playlistID(double playlistID) {
@@ -22,9 +26,20 @@ public class ClearPlaylistContentsRequestBuilder {
         return this;
     }
 
-    public ClearPlaylistContentsResponse call() throws Exception {
 
-        return sdk.clearPlaylistContents(
-            playlistID);
+    private ClearPlaylistContentsRequest buildRequest() {
+
+        ClearPlaylistContentsRequest request = new ClearPlaylistContentsRequest(playlistID);
+
+        return request;
+    }
+
+    public ClearPlaylistContentsResponse call() throws Exception {
+        
+        RequestOperation<ClearPlaylistContentsRequest, ClearPlaylistContentsResponse> operation
+              = new ClearPlaylistContents.Sync(sdkConfiguration);
+        ClearPlaylistContentsRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

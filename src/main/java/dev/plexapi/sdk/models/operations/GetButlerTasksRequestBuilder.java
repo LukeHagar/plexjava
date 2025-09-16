@@ -3,18 +3,25 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetButlerTasks;
 import java.lang.Exception;
 
 public class GetButlerTasksRequestBuilder {
 
-    private final SDKMethodInterfaces.MethodCallGetButlerTasks sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetButlerTasksRequestBuilder(SDKMethodInterfaces.MethodCallGetButlerTasks sdk) {
-        this.sdk = sdk;
+    public GetButlerTasksRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetButlerTasksResponse call() throws Exception {
+        
+        RequestlessOperation<GetButlerTasksResponse> operation
+            = new GetButlerTasks.Sync(sdkConfiguration);
 
-        return sdk.getButlerTasksDirect();
+        return operation.handleResponse(operation.doRequest());
     }
 }

@@ -13,7 +13,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -26,6 +25,7 @@ public class GetLibrarySectionsAllMeta {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Type")
     private Optional<? extends List<GetLibrarySectionsAllType>> type;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("FieldType")
@@ -57,15 +57,17 @@ public class GetLibrarySectionsAllMeta {
         return (Optional<List<GetLibrarySectionsAllFieldType>>) fieldType;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetLibrarySectionsAllMeta withType(List<GetLibrarySectionsAllType> type) {
         Utils.checkNotNull(type, "type");
         this.type = Optional.ofNullable(type);
         return this;
     }
+
 
     public GetLibrarySectionsAllMeta withType(Optional<? extends List<GetLibrarySectionsAllType>> type) {
         Utils.checkNotNull(type, "type");
@@ -79,13 +81,13 @@ public class GetLibrarySectionsAllMeta {
         return this;
     }
 
+
     public GetLibrarySectionsAllMeta withFieldType(Optional<? extends List<GetLibrarySectionsAllFieldType>> fieldType) {
         Utils.checkNotNull(fieldType, "fieldType");
         this.fieldType = fieldType;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -96,15 +98,14 @@ public class GetLibrarySectionsAllMeta {
         }
         GetLibrarySectionsAllMeta other = (GetLibrarySectionsAllMeta) o;
         return 
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.fieldType, other.fieldType);
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.fieldType, other.fieldType);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            type,
-            fieldType);
+        return Utils.enhancedHash(
+            type, fieldType);
     }
     
     @Override
@@ -113,16 +114,18 @@ public class GetLibrarySectionsAllMeta {
                 "type", type,
                 "fieldType", fieldType);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends List<GetLibrarySectionsAllType>> type = Optional.empty();
- 
+
         private Optional<? extends List<GetLibrarySectionsAllFieldType>> fieldType = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder type(List<GetLibrarySectionsAllType> type) {
             Utils.checkNotNull(type, "type");
@@ -136,6 +139,7 @@ public class GetLibrarySectionsAllMeta {
             return this;
         }
 
+
         public Builder fieldType(List<GetLibrarySectionsAllFieldType> fieldType) {
             Utils.checkNotNull(fieldType, "fieldType");
             this.fieldType = Optional.ofNullable(fieldType);
@@ -147,11 +151,12 @@ public class GetLibrarySectionsAllMeta {
             this.fieldType = fieldType;
             return this;
         }
-        
+
         public GetLibrarySectionsAllMeta build() {
+
             return new GetLibrarySectionsAllMeta(
-                type,
-                fieldType);
+                type, fieldType);
         }
+
     }
 }

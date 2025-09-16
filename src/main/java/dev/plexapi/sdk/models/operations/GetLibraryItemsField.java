@@ -11,19 +11,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetLibraryItemsField {
 
     @JsonProperty("key")
     private String key;
 
+
     @JsonProperty("title")
     private String title;
 
+
     @JsonProperty("type")
     private String type;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("subType")
@@ -49,7 +52,8 @@ public class GetLibraryItemsField {
             String key,
             String title,
             String type) {
-        this(key, title, type, Optional.empty());
+        this(key, title, type,
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -72,9 +76,10 @@ public class GetLibraryItemsField {
         return subType;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetLibraryItemsField withKey(String key) {
         Utils.checkNotNull(key, "key");
@@ -100,13 +105,13 @@ public class GetLibraryItemsField {
         return this;
     }
 
+
     public GetLibraryItemsField withSubType(Optional<String> subType) {
         Utils.checkNotNull(subType, "subType");
         this.subType = subType;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -117,18 +122,16 @@ public class GetLibraryItemsField {
         }
         GetLibraryItemsField other = (GetLibraryItemsField) o;
         return 
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.subType, other.subType);
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.subType, other.subType);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            key,
-            title,
-            type,
+        return Utils.enhancedHash(
+            key, title, type,
             subType);
     }
     
@@ -140,20 +143,22 @@ public class GetLibraryItemsField {
                 "type", type,
                 "subType", subType);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String key;
- 
+
         private String title;
- 
+
         private String type;
- 
+
         private Optional<String> subType = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
@@ -161,17 +166,20 @@ public class GetLibraryItemsField {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = title;
             return this;
         }
 
+
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
         }
+
 
         public Builder subType(String subType) {
             Utils.checkNotNull(subType, "subType");
@@ -184,13 +192,13 @@ public class GetLibraryItemsField {
             this.subType = subType;
             return this;
         }
-        
+
         public GetLibraryItemsField build() {
+
             return new GetLibraryItemsField(
-                key,
-                title,
-                type,
+                key, title, type,
                 subType);
         }
+
     }
 }

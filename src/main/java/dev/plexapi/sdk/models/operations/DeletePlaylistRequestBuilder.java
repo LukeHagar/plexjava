@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.DeletePlaylist;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Exception;
@@ -10,10 +14,10 @@ import java.lang.Exception;
 public class DeletePlaylistRequestBuilder {
 
     private Double playlistID;
-    private final SDKMethodInterfaces.MethodCallDeletePlaylist sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public DeletePlaylistRequestBuilder(SDKMethodInterfaces.MethodCallDeletePlaylist sdk) {
-        this.sdk = sdk;
+    public DeletePlaylistRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public DeletePlaylistRequestBuilder playlistID(double playlistID) {
@@ -22,9 +26,20 @@ public class DeletePlaylistRequestBuilder {
         return this;
     }
 
-    public DeletePlaylistResponse call() throws Exception {
 
-        return sdk.deletePlaylist(
-            playlistID);
+    private DeletePlaylistRequest buildRequest() {
+
+        DeletePlaylistRequest request = new DeletePlaylistRequest(playlistID);
+
+        return request;
+    }
+
+    public DeletePlaylistResponse call() throws Exception {
+        
+        RequestOperation<DeletePlaylistRequest, DeletePlaylistResponse> operation
+              = new DeletePlaylist.Sync(sdkConfiguration);
+        DeletePlaylistRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

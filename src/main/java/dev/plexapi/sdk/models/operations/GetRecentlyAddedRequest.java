@@ -14,11 +14,10 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetRecentlyAddedRequest {
 
+public class GetRecentlyAddedRequest {
     /**
      * The content directory ID.
      */
@@ -98,7 +97,9 @@ public class GetRecentlyAddedRequest {
     public GetRecentlyAddedRequest(
             long contentDirectoryID,
             Type type) {
-        this(contentDirectoryID, Optional.empty(), Optional.empty(), type, Optional.empty(), Optional.empty(), Optional.empty());
+        this(contentDirectoryID, Optional.empty(), Optional.empty(),
+            type, Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -167,9 +168,10 @@ public class GetRecentlyAddedRequest {
         return xPlexContainerSize;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The content directory ID.
@@ -189,6 +191,7 @@ public class GetRecentlyAddedRequest {
         return this;
     }
 
+
     /**
      * Comma-separated list of pinned content directory IDs.
      */
@@ -206,6 +209,7 @@ public class GetRecentlyAddedRequest {
         this.sectionID = Optional.ofNullable(sectionID);
         return this;
     }
+
 
     /**
      * The library section ID for filtering content.
@@ -239,6 +243,7 @@ public class GetRecentlyAddedRequest {
         return this;
     }
 
+
     /**
      * Adds the Meta object to the response
      */
@@ -258,6 +263,7 @@ public class GetRecentlyAddedRequest {
         this.xPlexContainerStart = Optional.ofNullable(xPlexContainerStart);
         return this;
     }
+
 
     /**
      * The index of the first item to return. If not specified, the first item will be returned.
@@ -281,6 +287,7 @@ public class GetRecentlyAddedRequest {
         return this;
     }
 
+
     /**
      * The number of items to return. If not specified, all items will be returned.
      * If the number of items exceeds the limit, the response will be paginated.
@@ -292,7 +299,6 @@ public class GetRecentlyAddedRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -303,24 +309,20 @@ public class GetRecentlyAddedRequest {
         }
         GetRecentlyAddedRequest other = (GetRecentlyAddedRequest) o;
         return 
-            Objects.deepEquals(this.contentDirectoryID, other.contentDirectoryID) &&
-            Objects.deepEquals(this.pinnedContentDirectoryID, other.pinnedContentDirectoryID) &&
-            Objects.deepEquals(this.sectionID, other.sectionID) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.includeMeta, other.includeMeta) &&
-            Objects.deepEquals(this.xPlexContainerStart, other.xPlexContainerStart) &&
-            Objects.deepEquals(this.xPlexContainerSize, other.xPlexContainerSize);
+            Utils.enhancedDeepEquals(this.contentDirectoryID, other.contentDirectoryID) &&
+            Utils.enhancedDeepEquals(this.pinnedContentDirectoryID, other.pinnedContentDirectoryID) &&
+            Utils.enhancedDeepEquals(this.sectionID, other.sectionID) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.includeMeta, other.includeMeta) &&
+            Utils.enhancedDeepEquals(this.xPlexContainerStart, other.xPlexContainerStart) &&
+            Utils.enhancedDeepEquals(this.xPlexContainerSize, other.xPlexContainerSize);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            contentDirectoryID,
-            pinnedContentDirectoryID,
-            sectionID,
-            type,
-            includeMeta,
-            xPlexContainerStart,
+        return Utils.enhancedHash(
+            contentDirectoryID, pinnedContentDirectoryID, sectionID,
+            type, includeMeta, xPlexContainerStart,
             xPlexContainerSize);
     }
     
@@ -335,26 +337,28 @@ public class GetRecentlyAddedRequest {
                 "xPlexContainerStart", xPlexContainerStart,
                 "xPlexContainerSize", xPlexContainerSize);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Long contentDirectoryID;
- 
+
         private Optional<String> pinnedContentDirectoryID = Optional.empty();
- 
+
         private Optional<Long> sectionID = Optional.empty();
- 
+
         private Type type;
- 
+
         private Optional<? extends IncludeMeta> includeMeta;
- 
+
         private Optional<Integer> xPlexContainerStart;
- 
+
         private Optional<Integer> xPlexContainerSize;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The content directory ID.
@@ -364,6 +368,7 @@ public class GetRecentlyAddedRequest {
             this.contentDirectoryID = contentDirectoryID;
             return this;
         }
+
 
         /**
          * Comma-separated list of pinned content directory IDs.
@@ -383,6 +388,7 @@ public class GetRecentlyAddedRequest {
             return this;
         }
 
+
         /**
          * The library section ID for filtering content.
          */
@@ -401,6 +407,7 @@ public class GetRecentlyAddedRequest {
             return this;
         }
 
+
         /**
          * The type of media to retrieve or filter by.
          * 1 = movie
@@ -414,6 +421,7 @@ public class GetRecentlyAddedRequest {
             this.type = type;
             return this;
         }
+
 
         /**
          * Adds the Meta object to the response
@@ -432,6 +440,7 @@ public class GetRecentlyAddedRequest {
             this.includeMeta = includeMeta;
             return this;
         }
+
 
         /**
          * The index of the first item to return. If not specified, the first item will be returned.
@@ -455,6 +464,7 @@ public class GetRecentlyAddedRequest {
             return this;
         }
 
+
         /**
          * The number of items to return. If not specified, all items will be returned.
          * If the number of items exceeds the limit, the response will be paginated.
@@ -476,7 +486,7 @@ public class GetRecentlyAddedRequest {
             this.xPlexContainerSize = xPlexContainerSize;
             return this;
         }
-        
+
         public GetRecentlyAddedRequest build() {
             if (includeMeta == null) {
                 includeMeta = _SINGLETON_VALUE_IncludeMeta.value();
@@ -487,15 +497,13 @@ public class GetRecentlyAddedRequest {
             if (xPlexContainerSize == null) {
                 xPlexContainerSize = _SINGLETON_VALUE_XPlexContainerSize.value();
             }
+
             return new GetRecentlyAddedRequest(
-                contentDirectoryID,
-                pinnedContentDirectoryID,
-                sectionID,
-                type,
-                includeMeta,
-                xPlexContainerStart,
+                contentDirectoryID, pinnedContentDirectoryID, sectionID,
+                type, includeMeta, xPlexContainerStart,
                 xPlexContainerSize);
         }
+
 
         private static final LazySingletonValue<Optional<? extends IncludeMeta>> _SINGLETON_VALUE_IncludeMeta =
                 new LazySingletonValue<>(

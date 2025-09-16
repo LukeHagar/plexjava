@@ -20,7 +20,7 @@ public enum HasThumbnail {
     @JsonValue
     private final String value;
 
-    private HasThumbnail(String value) {
+    HasThumbnail(String value) {
         this.value = value;
     }
     

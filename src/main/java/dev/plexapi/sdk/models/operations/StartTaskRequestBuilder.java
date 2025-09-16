@@ -3,16 +3,20 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.StartTask;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class StartTaskRequestBuilder {
 
     private TaskName taskName;
-    private final SDKMethodInterfaces.MethodCallStartTask sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public StartTaskRequestBuilder(SDKMethodInterfaces.MethodCallStartTask sdk) {
-        this.sdk = sdk;
+    public StartTaskRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public StartTaskRequestBuilder taskName(TaskName taskName) {
@@ -21,9 +25,20 @@ public class StartTaskRequestBuilder {
         return this;
     }
 
-    public StartTaskResponse call() throws Exception {
 
-        return sdk.startTask(
-            taskName);
+    private StartTaskRequest buildRequest() {
+
+        StartTaskRequest request = new StartTaskRequest(taskName);
+
+        return request;
+    }
+
+    public StartTaskResponse call() throws Exception {
+        
+        RequestOperation<StartTaskRequest, StartTaskResponse> operation
+              = new StartTask.Sync(sdkConfiguration);
+        StartTaskRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

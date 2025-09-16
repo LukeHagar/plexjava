@@ -19,7 +19,7 @@ public enum Home {
     @JsonValue
     private final int value;
 
-    private Home(int value) {
+    Home(int value) {
         this.value = value;
     }
     

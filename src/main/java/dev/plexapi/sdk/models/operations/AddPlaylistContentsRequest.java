@@ -10,11 +10,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class AddPlaylistContentsRequest {
 
+public class AddPlaylistContentsRequest {
     /**
      * the ID of the playlist
      */
@@ -76,9 +75,10 @@ public class AddPlaylistContentsRequest {
         return playQueueID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * the ID of the playlist
@@ -107,6 +107,7 @@ public class AddPlaylistContentsRequest {
         return this;
     }
 
+
     /**
      * the play queue to add to a playlist
      */
@@ -116,7 +117,6 @@ public class AddPlaylistContentsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -127,17 +127,15 @@ public class AddPlaylistContentsRequest {
         }
         AddPlaylistContentsRequest other = (AddPlaylistContentsRequest) o;
         return 
-            Objects.deepEquals(this.playlistID, other.playlistID) &&
-            Objects.deepEquals(this.uri, other.uri) &&
-            Objects.deepEquals(this.playQueueID, other.playQueueID);
+            Utils.enhancedDeepEquals(this.playlistID, other.playlistID) &&
+            Utils.enhancedDeepEquals(this.uri, other.uri) &&
+            Utils.enhancedDeepEquals(this.playQueueID, other.playQueueID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            playlistID,
-            uri,
-            playQueueID);
+        return Utils.enhancedHash(
+            playlistID, uri, playQueueID);
     }
     
     @Override
@@ -147,18 +145,20 @@ public class AddPlaylistContentsRequest {
                 "uri", uri,
                 "playQueueID", playQueueID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Double playlistID;
- 
+
         private String uri;
- 
+
         private Optional<Double> playQueueID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * the ID of the playlist
@@ -169,6 +169,7 @@ public class AddPlaylistContentsRequest {
             return this;
         }
 
+
         /**
          * the content URI for the playlist
          */
@@ -177,6 +178,7 @@ public class AddPlaylistContentsRequest {
             this.uri = uri;
             return this;
         }
+
 
         /**
          * the play queue to add to a playlist
@@ -195,12 +197,12 @@ public class AddPlaylistContentsRequest {
             this.playQueueID = playQueueID;
             return this;
         }
-        
+
         public AddPlaylistContentsRequest build() {
+
             return new AddPlaylistContentsRequest(
-                playlistID,
-                uri,
-                playQueueID);
+                playlistID, uri, playQueueID);
         }
+
     }
 }

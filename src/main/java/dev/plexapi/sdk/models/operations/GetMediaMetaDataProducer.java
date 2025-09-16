@@ -12,11 +12,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetMediaMetaDataProducer {
 
+public class GetMediaMetaDataProducer {
     /**
      * The unique role identifier.
      */
@@ -82,7 +81,8 @@ public class GetMediaMetaDataProducer {
             String filter,
             String tag,
             String tagKey) {
-        this(id, filter, tag, tagKey, Optional.empty(), Optional.empty());
+        this(id, filter, tag,
+            tagKey, Optional.empty(), Optional.empty());
     }
 
     /**
@@ -133,9 +133,10 @@ public class GetMediaMetaDataProducer {
         return thumb;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The unique role identifier.
@@ -182,6 +183,7 @@ public class GetMediaMetaDataProducer {
         return this;
     }
 
+
     /**
      * The character name or role.
      */
@@ -200,6 +202,7 @@ public class GetMediaMetaDataProducer {
         return this;
     }
 
+
     /**
      * URL for the role thumbnail image.
      */
@@ -209,7 +212,6 @@ public class GetMediaMetaDataProducer {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -220,23 +222,19 @@ public class GetMediaMetaDataProducer {
         }
         GetMediaMetaDataProducer other = (GetMediaMetaDataProducer) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.tag, other.tag) &&
-            Objects.deepEquals(this.tagKey, other.tagKey) &&
-            Objects.deepEquals(this.role, other.role) &&
-            Objects.deepEquals(this.thumb, other.thumb);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.filter, other.filter) &&
+            Utils.enhancedDeepEquals(this.tag, other.tag) &&
+            Utils.enhancedDeepEquals(this.tagKey, other.tagKey) &&
+            Utils.enhancedDeepEquals(this.role, other.role) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            filter,
-            tag,
-            tagKey,
-            role,
-            thumb);
+        return Utils.enhancedHash(
+            id, filter, tag,
+            tagKey, role, thumb);
     }
     
     @Override
@@ -249,24 +247,26 @@ public class GetMediaMetaDataProducer {
                 "role", role,
                 "thumb", thumb);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Long id;
- 
+
         private String filter;
- 
+
         private String tag;
- 
+
         private String tagKey;
- 
+
         private Optional<String> role = Optional.empty();
- 
+
         private Optional<String> thumb = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The unique role identifier.
@@ -277,6 +277,7 @@ public class GetMediaMetaDataProducer {
             return this;
         }
 
+
         /**
          * The filter string for the role.
          */
@@ -285,6 +286,7 @@ public class GetMediaMetaDataProducer {
             this.filter = filter;
             return this;
         }
+
 
         /**
          * The actor's name.
@@ -295,6 +297,7 @@ public class GetMediaMetaDataProducer {
             return this;
         }
 
+
         /**
          * A key associated with the actor tag.
          */
@@ -303,6 +306,7 @@ public class GetMediaMetaDataProducer {
             this.tagKey = tagKey;
             return this;
         }
+
 
         /**
          * The character name or role.
@@ -322,6 +326,7 @@ public class GetMediaMetaDataProducer {
             return this;
         }
 
+
         /**
          * URL for the role thumbnail image.
          */
@@ -339,15 +344,13 @@ public class GetMediaMetaDataProducer {
             this.thumb = thumb;
             return this;
         }
-        
+
         public GetMediaMetaDataProducer build() {
+
             return new GetMediaMetaDataProducer(
-                id,
-                filter,
-                tag,
-                tagKey,
-                role,
-                thumb);
+                id, filter, tag,
+                tagKey, role, thumb);
         }
+
     }
 }

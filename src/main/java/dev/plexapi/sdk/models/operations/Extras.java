@@ -12,11 +12,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class Extras {
 
+public class Extras {
     /**
      * The size of the extras.
      */
@@ -43,9 +42,10 @@ public class Extras {
         return size;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The size of the extras.
@@ -56,6 +56,7 @@ public class Extras {
         return this;
     }
 
+
     /**
      * The size of the extras.
      */
@@ -65,7 +66,6 @@ public class Extras {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -76,12 +76,12 @@ public class Extras {
         }
         Extras other = (Extras) o;
         return 
-            Objects.deepEquals(this.size, other.size);
+            Utils.enhancedDeepEquals(this.size, other.size);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             size);
     }
     
@@ -90,14 +90,16 @@ public class Extras {
         return Utils.toString(Extras.class,
                 "size", size);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Long> size = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The size of the extras.
@@ -116,10 +118,12 @@ public class Extras {
             this.size = size;
             return this;
         }
-        
+
         public Extras build() {
+
             return new Extras(
                 size);
         }
+
     }
 }

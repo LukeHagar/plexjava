@@ -14,8 +14,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetBandwidthStatisticsMediaContainer {
 
@@ -23,13 +23,16 @@ public class GetBandwidthStatisticsMediaContainer {
     @JsonProperty("size")
     private Optional<Integer> size;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Device")
     private Optional<? extends List<GetBandwidthStatisticsDevice>> device;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Account")
     private Optional<? extends List<GetBandwidthStatisticsAccount>> account;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("StatisticsBandwidth")
@@ -52,7 +55,8 @@ public class GetBandwidthStatisticsMediaContainer {
     }
     
     public GetBandwidthStatisticsMediaContainer() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -78,15 +82,17 @@ public class GetBandwidthStatisticsMediaContainer {
         return (Optional<List<StatisticsBandwidth>>) statisticsBandwidth;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetBandwidthStatisticsMediaContainer withSize(int size) {
         Utils.checkNotNull(size, "size");
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetBandwidthStatisticsMediaContainer withSize(Optional<Integer> size) {
         Utils.checkNotNull(size, "size");
@@ -100,6 +106,7 @@ public class GetBandwidthStatisticsMediaContainer {
         return this;
     }
 
+
     public GetBandwidthStatisticsMediaContainer withDevice(Optional<? extends List<GetBandwidthStatisticsDevice>> device) {
         Utils.checkNotNull(device, "device");
         this.device = device;
@@ -111,6 +118,7 @@ public class GetBandwidthStatisticsMediaContainer {
         this.account = Optional.ofNullable(account);
         return this;
     }
+
 
     public GetBandwidthStatisticsMediaContainer withAccount(Optional<? extends List<GetBandwidthStatisticsAccount>> account) {
         Utils.checkNotNull(account, "account");
@@ -124,13 +132,13 @@ public class GetBandwidthStatisticsMediaContainer {
         return this;
     }
 
+
     public GetBandwidthStatisticsMediaContainer withStatisticsBandwidth(Optional<? extends List<StatisticsBandwidth>> statisticsBandwidth) {
         Utils.checkNotNull(statisticsBandwidth, "statisticsBandwidth");
         this.statisticsBandwidth = statisticsBandwidth;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -141,18 +149,16 @@ public class GetBandwidthStatisticsMediaContainer {
         }
         GetBandwidthStatisticsMediaContainer other = (GetBandwidthStatisticsMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.device, other.device) &&
-            Objects.deepEquals(this.account, other.account) &&
-            Objects.deepEquals(this.statisticsBandwidth, other.statisticsBandwidth);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.device, other.device) &&
+            Utils.enhancedDeepEquals(this.account, other.account) &&
+            Utils.enhancedDeepEquals(this.statisticsBandwidth, other.statisticsBandwidth);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            device,
-            account,
+        return Utils.enhancedHash(
+            size, device, account,
             statisticsBandwidth);
     }
     
@@ -164,20 +170,22 @@ public class GetBandwidthStatisticsMediaContainer {
                 "account", account,
                 "statisticsBandwidth", statisticsBandwidth);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> size = Optional.empty();
- 
+
         private Optional<? extends List<GetBandwidthStatisticsDevice>> device = Optional.empty();
- 
+
         private Optional<? extends List<GetBandwidthStatisticsAccount>> account = Optional.empty();
- 
+
         private Optional<? extends List<StatisticsBandwidth>> statisticsBandwidth = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder size(int size) {
             Utils.checkNotNull(size, "size");
@@ -191,6 +199,7 @@ public class GetBandwidthStatisticsMediaContainer {
             return this;
         }
 
+
         public Builder device(List<GetBandwidthStatisticsDevice> device) {
             Utils.checkNotNull(device, "device");
             this.device = Optional.ofNullable(device);
@@ -202,6 +211,7 @@ public class GetBandwidthStatisticsMediaContainer {
             this.device = device;
             return this;
         }
+
 
         public Builder account(List<GetBandwidthStatisticsAccount> account) {
             Utils.checkNotNull(account, "account");
@@ -215,6 +225,7 @@ public class GetBandwidthStatisticsMediaContainer {
             return this;
         }
 
+
         public Builder statisticsBandwidth(List<StatisticsBandwidth> statisticsBandwidth) {
             Utils.checkNotNull(statisticsBandwidth, "statisticsBandwidth");
             this.statisticsBandwidth = Optional.ofNullable(statisticsBandwidth);
@@ -226,13 +237,13 @@ public class GetBandwidthStatisticsMediaContainer {
             this.statisticsBandwidth = statisticsBandwidth;
             return this;
         }
-        
+
         public GetBandwidthStatisticsMediaContainer build() {
+
             return new GetBandwidthStatisticsMediaContainer(
-                size,
-                device,
-                account,
+                size, device, account,
                 statisticsBandwidth);
         }
+
     }
 }

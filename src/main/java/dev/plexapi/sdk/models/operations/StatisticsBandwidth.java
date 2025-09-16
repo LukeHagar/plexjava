@@ -14,8 +14,8 @@ import java.lang.Integer;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class StatisticsBandwidth {
 
@@ -23,21 +23,26 @@ public class StatisticsBandwidth {
     @JsonProperty("accountID")
     private Optional<Integer> accountID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("deviceID")
     private Optional<Integer> deviceID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("timespan")
     private Optional<Long> timespan;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("at")
     private Optional<Integer> at;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lan")
     private Optional<Boolean> lan;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bytes")
@@ -66,7 +71,8 @@ public class StatisticsBandwidth {
     }
     
     public StatisticsBandwidth() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -99,15 +105,17 @@ public class StatisticsBandwidth {
         return bytes;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public StatisticsBandwidth withAccountID(int accountID) {
         Utils.checkNotNull(accountID, "accountID");
         this.accountID = Optional.ofNullable(accountID);
         return this;
     }
+
 
     public StatisticsBandwidth withAccountID(Optional<Integer> accountID) {
         Utils.checkNotNull(accountID, "accountID");
@@ -121,6 +129,7 @@ public class StatisticsBandwidth {
         return this;
     }
 
+
     public StatisticsBandwidth withDeviceID(Optional<Integer> deviceID) {
         Utils.checkNotNull(deviceID, "deviceID");
         this.deviceID = deviceID;
@@ -132,6 +141,7 @@ public class StatisticsBandwidth {
         this.timespan = Optional.ofNullable(timespan);
         return this;
     }
+
 
     public StatisticsBandwidth withTimespan(Optional<Long> timespan) {
         Utils.checkNotNull(timespan, "timespan");
@@ -145,6 +155,7 @@ public class StatisticsBandwidth {
         return this;
     }
 
+
     public StatisticsBandwidth withAt(Optional<Integer> at) {
         Utils.checkNotNull(at, "at");
         this.at = at;
@@ -156,6 +167,7 @@ public class StatisticsBandwidth {
         this.lan = Optional.ofNullable(lan);
         return this;
     }
+
 
     public StatisticsBandwidth withLan(Optional<Boolean> lan) {
         Utils.checkNotNull(lan, "lan");
@@ -169,13 +181,13 @@ public class StatisticsBandwidth {
         return this;
     }
 
+
     public StatisticsBandwidth withBytes(Optional<Long> bytes) {
         Utils.checkNotNull(bytes, "bytes");
         this.bytes = bytes;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -186,23 +198,19 @@ public class StatisticsBandwidth {
         }
         StatisticsBandwidth other = (StatisticsBandwidth) o;
         return 
-            Objects.deepEquals(this.accountID, other.accountID) &&
-            Objects.deepEquals(this.deviceID, other.deviceID) &&
-            Objects.deepEquals(this.timespan, other.timespan) &&
-            Objects.deepEquals(this.at, other.at) &&
-            Objects.deepEquals(this.lan, other.lan) &&
-            Objects.deepEquals(this.bytes, other.bytes);
+            Utils.enhancedDeepEquals(this.accountID, other.accountID) &&
+            Utils.enhancedDeepEquals(this.deviceID, other.deviceID) &&
+            Utils.enhancedDeepEquals(this.timespan, other.timespan) &&
+            Utils.enhancedDeepEquals(this.at, other.at) &&
+            Utils.enhancedDeepEquals(this.lan, other.lan) &&
+            Utils.enhancedDeepEquals(this.bytes, other.bytes);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            accountID,
-            deviceID,
-            timespan,
-            at,
-            lan,
-            bytes);
+        return Utils.enhancedHash(
+            accountID, deviceID, timespan,
+            at, lan, bytes);
     }
     
     @Override
@@ -215,24 +223,26 @@ public class StatisticsBandwidth {
                 "lan", lan,
                 "bytes", bytes);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> accountID = Optional.empty();
- 
+
         private Optional<Integer> deviceID = Optional.empty();
- 
+
         private Optional<Long> timespan = Optional.empty();
- 
+
         private Optional<Integer> at = Optional.empty();
- 
+
         private Optional<Boolean> lan = Optional.empty();
- 
+
         private Optional<Long> bytes = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accountID(int accountID) {
             Utils.checkNotNull(accountID, "accountID");
@@ -246,6 +256,7 @@ public class StatisticsBandwidth {
             return this;
         }
 
+
         public Builder deviceID(int deviceID) {
             Utils.checkNotNull(deviceID, "deviceID");
             this.deviceID = Optional.ofNullable(deviceID);
@@ -257,6 +268,7 @@ public class StatisticsBandwidth {
             this.deviceID = deviceID;
             return this;
         }
+
 
         public Builder timespan(long timespan) {
             Utils.checkNotNull(timespan, "timespan");
@@ -270,6 +282,7 @@ public class StatisticsBandwidth {
             return this;
         }
 
+
         public Builder at(int at) {
             Utils.checkNotNull(at, "at");
             this.at = Optional.ofNullable(at);
@@ -281,6 +294,7 @@ public class StatisticsBandwidth {
             this.at = at;
             return this;
         }
+
 
         public Builder lan(boolean lan) {
             Utils.checkNotNull(lan, "lan");
@@ -294,6 +308,7 @@ public class StatisticsBandwidth {
             return this;
         }
 
+
         public Builder bytes(long bytes) {
             Utils.checkNotNull(bytes, "bytes");
             this.bytes = Optional.ofNullable(bytes);
@@ -305,15 +320,13 @@ public class StatisticsBandwidth {
             this.bytes = bytes;
             return this;
         }
-        
+
         public StatisticsBandwidth build() {
+
             return new StatisticsBandwidth(
-                accountID,
-                deviceID,
-                timespan,
-                at,
-                lan,
-                bytes);
+                accountID, deviceID, timespan,
+                at, lan, bytes);
         }
+
     }
 }

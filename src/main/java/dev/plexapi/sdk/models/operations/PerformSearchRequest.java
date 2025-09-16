@@ -12,11 +12,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class PerformSearchRequest {
 
+public class PerformSearchRequest {
     /**
      * The query term
      */
@@ -77,9 +76,10 @@ public class PerformSearchRequest {
         return limit;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The query term
@@ -99,6 +99,7 @@ public class PerformSearchRequest {
         return this;
     }
 
+
     /**
      * This gives context to the search, and can result in re-ordering of search result hubs
      */
@@ -117,6 +118,7 @@ public class PerformSearchRequest {
         return this;
     }
 
+
     /**
      * The number of items to return per hub
      */
@@ -126,7 +128,6 @@ public class PerformSearchRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -137,17 +138,15 @@ public class PerformSearchRequest {
         }
         PerformSearchRequest other = (PerformSearchRequest) o;
         return 
-            Objects.deepEquals(this.query, other.query) &&
-            Objects.deepEquals(this.sectionId, other.sectionId) &&
-            Objects.deepEquals(this.limit, other.limit);
+            Utils.enhancedDeepEquals(this.query, other.query) &&
+            Utils.enhancedDeepEquals(this.sectionId, other.sectionId) &&
+            Utils.enhancedDeepEquals(this.limit, other.limit);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            query,
-            sectionId,
-            limit);
+        return Utils.enhancedHash(
+            query, sectionId, limit);
     }
     
     @Override
@@ -157,18 +156,20 @@ public class PerformSearchRequest {
                 "sectionId", sectionId,
                 "limit", limit);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String query;
- 
+
         private Optional<Double> sectionId = Optional.empty();
- 
+
         private Optional<Double> limit;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The query term
@@ -178,6 +179,7 @@ public class PerformSearchRequest {
             this.query = query;
             return this;
         }
+
 
         /**
          * This gives context to the search, and can result in re-ordering of search result hubs
@@ -197,6 +199,7 @@ public class PerformSearchRequest {
             return this;
         }
 
+
         /**
          * The number of items to return per hub
          */
@@ -214,16 +217,16 @@ public class PerformSearchRequest {
             this.limit = limit;
             return this;
         }
-        
+
         public PerformSearchRequest build() {
             if (limit == null) {
                 limit = _SINGLETON_VALUE_Limit.value();
             }
+
             return new PerformSearchRequest(
-                query,
-                sectionId,
-                limit);
+                query, sectionId, limit);
         }
+
 
         private static final LazySingletonValue<Optional<Double>> _SINGLETON_VALUE_Limit =
                 new LazySingletonValue<>(

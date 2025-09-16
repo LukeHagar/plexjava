@@ -3,18 +3,25 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.StartAllTasks;
 import java.lang.Exception;
 
 public class StartAllTasksRequestBuilder {
 
-    private final SDKMethodInterfaces.MethodCallStartAllTasks sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public StartAllTasksRequestBuilder(SDKMethodInterfaces.MethodCallStartAllTasks sdk) {
-        this.sdk = sdk;
+    public StartAllTasksRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public StartAllTasksResponse call() throws Exception {
+        
+        RequestlessOperation<StartAllTasksResponse> operation
+            = new StartAllTasks.Sync(sdkConfiguration);
 
-        return sdk.startAllTasksDirect();
+        return operation.handleResponse(operation.doRequest());
     }
 }

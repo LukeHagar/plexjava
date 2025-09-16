@@ -10,10 +10,9 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetLibraryItemsSimilar {
-
     /**
      * The unique similar item identifier.
      */
@@ -69,9 +68,10 @@ public class GetLibraryItemsSimilar {
         return tag;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The unique similar item identifier.
@@ -100,7 +100,6 @@ public class GetLibraryItemsSimilar {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,17 +110,15 @@ public class GetLibraryItemsSimilar {
         }
         GetLibraryItemsSimilar other = (GetLibraryItemsSimilar) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.tag, other.tag);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.filter, other.filter) &&
+            Utils.enhancedDeepEquals(this.tag, other.tag);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            filter,
-            tag);
+        return Utils.enhancedHash(
+            id, filter, tag);
     }
     
     @Override
@@ -131,18 +128,20 @@ public class GetLibraryItemsSimilar {
                 "filter", filter,
                 "tag", tag);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Long id;
- 
+
         private String filter;
- 
+
         private String tag;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The unique similar item identifier.
@@ -153,6 +152,7 @@ public class GetLibraryItemsSimilar {
             return this;
         }
 
+
         /**
          * The filter string for similar items.
          */
@@ -162,6 +162,7 @@ public class GetLibraryItemsSimilar {
             return this;
         }
 
+
         /**
          * The tag or title of the similar content.
          */
@@ -170,12 +171,12 @@ public class GetLibraryItemsSimilar {
             this.tag = tag;
             return this;
         }
-        
+
         public GetLibraryItemsSimilar build() {
+
             return new GetLibraryItemsSimilar(
-                id,
-                filter,
-                tag);
+                id, filter, tag);
         }
+
     }
 }

@@ -3,18 +3,25 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetSessions;
 import java.lang.Exception;
 
 public class GetSessionsRequestBuilder {
 
-    private final SDKMethodInterfaces.MethodCallGetSessions sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetSessionsRequestBuilder(SDKMethodInterfaces.MethodCallGetSessions sdk) {
-        this.sdk = sdk;
+    public GetSessionsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetSessionsResponse call() throws Exception {
+        
+        RequestlessOperation<GetSessionsResponse> operation
+            = new GetSessions.Sync(sdkConfiguration);
 
-        return sdk.getSessionsDirect();
+        return operation.handleResponse(operation.doRequest());
     }
 }

@@ -30,6 +30,7 @@ This request is intended to be very fast, and called as the user types.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="performSearch" method="get" path="/hubs/search" -->
 ```java
 package hello.world;
 
@@ -44,12 +45,12 @@ public class Application {
     public static void main(String[] args) throws PerformSearchBadRequest, PerformSearchUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         PerformSearchResponse res = sdk.search().performSearch()
                 .query("arnold")
-                .limit(5)
+                .limit(5d)
                 .call();
 
         // handle response
@@ -87,6 +88,7 @@ Results, as well as their containing per-type hubs, contain a `distance` attribu
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="performVoiceSearch" method="get" path="/hubs/search/voice" -->
 ```java
 package hello.world;
 
@@ -101,12 +103,12 @@ public class Application {
     public static void main(String[] args) throws PerformVoiceSearchBadRequest, PerformVoiceSearchUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         PerformVoiceSearchResponse res = sdk.search().performVoiceSearch()
                 .query("dead+poop")
-                .limit(5)
+                .limit(5d)
                 .call();
 
         // handle response
@@ -140,6 +142,7 @@ This will search the database for the string provided.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getSearchResults" method="get" path="/search" -->
 ```java
 package hello.world;
 
@@ -154,7 +157,7 @@ public class Application {
     public static void main(String[] args) throws GetSearchResultsBadRequest, GetSearchResultsUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetSearchResultsResponse res = sdk.search().getSearchResults()

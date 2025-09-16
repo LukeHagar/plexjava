@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.UpdatePlayProgress;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Exception;
@@ -13,10 +17,10 @@ public class UpdatePlayProgressRequestBuilder {
     private String key;
     private Double time;
     private String state;
-    private final SDKMethodInterfaces.MethodCallUpdatePlayProgress sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public UpdatePlayProgressRequestBuilder(SDKMethodInterfaces.MethodCallUpdatePlayProgress sdk) {
-        this.sdk = sdk;
+    public UpdatePlayProgressRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public UpdatePlayProgressRequestBuilder key(String key) {
@@ -37,11 +41,22 @@ public class UpdatePlayProgressRequestBuilder {
         return this;
     }
 
-    public UpdatePlayProgressResponse call() throws Exception {
 
-        return sdk.updatePlayProgress(
-            key,
+    private UpdatePlayProgressRequest buildRequest() {
+
+        UpdatePlayProgressRequest request = new UpdatePlayProgressRequest(key,
             time,
             state);
+
+        return request;
+    }
+
+    public UpdatePlayProgressResponse call() throws Exception {
+        
+        RequestOperation<UpdatePlayProgressRequest, UpdatePlayProgressResponse> operation
+              = new UpdatePlayProgress.Sync(sdkConfiguration);
+        UpdatePlayProgressRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

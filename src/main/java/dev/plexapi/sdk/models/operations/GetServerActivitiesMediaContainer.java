@@ -14,14 +14,15 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetServerActivitiesMediaContainer {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("size")
     private Optional<Double> size;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Activity")
@@ -52,15 +53,17 @@ public class GetServerActivitiesMediaContainer {
         return (Optional<List<Activity>>) activity;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetServerActivitiesMediaContainer withSize(double size) {
         Utils.checkNotNull(size, "size");
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetServerActivitiesMediaContainer withSize(Optional<Double> size) {
         Utils.checkNotNull(size, "size");
@@ -74,13 +77,13 @@ public class GetServerActivitiesMediaContainer {
         return this;
     }
 
+
     public GetServerActivitiesMediaContainer withActivity(Optional<? extends List<Activity>> activity) {
         Utils.checkNotNull(activity, "activity");
         this.activity = activity;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -91,15 +94,14 @@ public class GetServerActivitiesMediaContainer {
         }
         GetServerActivitiesMediaContainer other = (GetServerActivitiesMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.activity, other.activity);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.activity, other.activity);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            activity);
+        return Utils.enhancedHash(
+            size, activity);
     }
     
     @Override
@@ -108,16 +110,18 @@ public class GetServerActivitiesMediaContainer {
                 "size", size,
                 "activity", activity);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Double> size = Optional.empty();
- 
+
         private Optional<? extends List<Activity>> activity = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder size(double size) {
             Utils.checkNotNull(size, "size");
@@ -131,6 +135,7 @@ public class GetServerActivitiesMediaContainer {
             return this;
         }
 
+
         public Builder activity(List<Activity> activity) {
             Utils.checkNotNull(activity, "activity");
             this.activity = Optional.ofNullable(activity);
@@ -142,11 +147,12 @@ public class GetServerActivitiesMediaContainer {
             this.activity = activity;
             return this;
         }
-        
+
         public GetServerActivitiesMediaContainer build() {
+
             return new GetServerActivitiesMediaContainer(
-                size,
-                activity);
+                size, activity);
         }
+
     }
 }

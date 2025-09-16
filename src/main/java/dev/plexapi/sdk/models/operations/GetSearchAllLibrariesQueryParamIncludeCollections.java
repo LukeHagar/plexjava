@@ -19,7 +19,7 @@ public enum GetSearchAllLibrariesQueryParamIncludeCollections {
     @JsonValue
     private final int value;
 
-    private GetSearchAllLibrariesQueryParamIncludeCollections(int value) {
+    GetSearchAllLibrariesQueryParamIncludeCollections(int value) {
         this.value = value;
     }
     

@@ -12,8 +12,8 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetServerListServer {
 
@@ -21,21 +21,26 @@ public class GetServerListServer {
     @JsonProperty("name")
     private Optional<String> name;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("host")
     private Optional<String> host;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("address")
     private Optional<String> address;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("port")
     private Optional<Double> port;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("machineIdentifier")
     private Optional<String> machineIdentifier;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("version")
@@ -64,7 +69,8 @@ public class GetServerListServer {
     }
     
     public GetServerListServer() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -97,15 +103,17 @@ public class GetServerListServer {
         return version;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetServerListServer withName(String name) {
         Utils.checkNotNull(name, "name");
         this.name = Optional.ofNullable(name);
         return this;
     }
+
 
     public GetServerListServer withName(Optional<String> name) {
         Utils.checkNotNull(name, "name");
@@ -119,6 +127,7 @@ public class GetServerListServer {
         return this;
     }
 
+
     public GetServerListServer withHost(Optional<String> host) {
         Utils.checkNotNull(host, "host");
         this.host = host;
@@ -130,6 +139,7 @@ public class GetServerListServer {
         this.address = Optional.ofNullable(address);
         return this;
     }
+
 
     public GetServerListServer withAddress(Optional<String> address) {
         Utils.checkNotNull(address, "address");
@@ -143,6 +153,7 @@ public class GetServerListServer {
         return this;
     }
 
+
     public GetServerListServer withPort(Optional<Double> port) {
         Utils.checkNotNull(port, "port");
         this.port = port;
@@ -154,6 +165,7 @@ public class GetServerListServer {
         this.machineIdentifier = Optional.ofNullable(machineIdentifier);
         return this;
     }
+
 
     public GetServerListServer withMachineIdentifier(Optional<String> machineIdentifier) {
         Utils.checkNotNull(machineIdentifier, "machineIdentifier");
@@ -167,13 +179,13 @@ public class GetServerListServer {
         return this;
     }
 
+
     public GetServerListServer withVersion(Optional<String> version) {
         Utils.checkNotNull(version, "version");
         this.version = version;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -184,23 +196,19 @@ public class GetServerListServer {
         }
         GetServerListServer other = (GetServerListServer) o;
         return 
-            Objects.deepEquals(this.name, other.name) &&
-            Objects.deepEquals(this.host, other.host) &&
-            Objects.deepEquals(this.address, other.address) &&
-            Objects.deepEquals(this.port, other.port) &&
-            Objects.deepEquals(this.machineIdentifier, other.machineIdentifier) &&
-            Objects.deepEquals(this.version, other.version);
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.host, other.host) &&
+            Utils.enhancedDeepEquals(this.address, other.address) &&
+            Utils.enhancedDeepEquals(this.port, other.port) &&
+            Utils.enhancedDeepEquals(this.machineIdentifier, other.machineIdentifier) &&
+            Utils.enhancedDeepEquals(this.version, other.version);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            name,
-            host,
-            address,
-            port,
-            machineIdentifier,
-            version);
+        return Utils.enhancedHash(
+            name, host, address,
+            port, machineIdentifier, version);
     }
     
     @Override
@@ -213,24 +221,26 @@ public class GetServerListServer {
                 "machineIdentifier", machineIdentifier,
                 "version", version);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> name = Optional.empty();
- 
+
         private Optional<String> host = Optional.empty();
- 
+
         private Optional<String> address = Optional.empty();
- 
+
         private Optional<Double> port = Optional.empty();
- 
+
         private Optional<String> machineIdentifier = Optional.empty();
- 
+
         private Optional<String> version = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder name(String name) {
             Utils.checkNotNull(name, "name");
@@ -244,6 +254,7 @@ public class GetServerListServer {
             return this;
         }
 
+
         public Builder host(String host) {
             Utils.checkNotNull(host, "host");
             this.host = Optional.ofNullable(host);
@@ -255,6 +266,7 @@ public class GetServerListServer {
             this.host = host;
             return this;
         }
+
 
         public Builder address(String address) {
             Utils.checkNotNull(address, "address");
@@ -268,6 +280,7 @@ public class GetServerListServer {
             return this;
         }
 
+
         public Builder port(double port) {
             Utils.checkNotNull(port, "port");
             this.port = Optional.ofNullable(port);
@@ -279,6 +292,7 @@ public class GetServerListServer {
             this.port = port;
             return this;
         }
+
 
         public Builder machineIdentifier(String machineIdentifier) {
             Utils.checkNotNull(machineIdentifier, "machineIdentifier");
@@ -292,6 +306,7 @@ public class GetServerListServer {
             return this;
         }
 
+
         public Builder version(String version) {
             Utils.checkNotNull(version, "version");
             this.version = Optional.ofNullable(version);
@@ -303,15 +318,13 @@ public class GetServerListServer {
             this.version = version;
             return this;
         }
-        
+
         public GetServerListServer build() {
+
             return new GetServerListServer(
-                name,
-                host,
-                address,
-                port,
-                machineIdentifier,
-                version);
+                name, host, address,
+                port, machineIdentifier, version);
         }
+
     }
 }

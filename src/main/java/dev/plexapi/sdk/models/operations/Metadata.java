@@ -17,8 +17,8 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class Metadata {
 
@@ -26,137 +26,171 @@ public class Metadata {
     @JsonProperty("art")
     private Optional<String> art;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("guid")
     private Optional<String> guid;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ratingKey")
     private Optional<String> ratingKey;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("studio")
     private Optional<String> studio;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tagline")
     private Optional<String> tagline;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
     private Optional<String> type;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
     private Optional<String> thumb;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("addedAt")
     private Optional<Integer> addedAt;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
     private Optional<Integer> duration;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("publicPagesURL")
     private Optional<String> publicPagesURL;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("slug")
     private Optional<String> slug;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("userState")
     private Optional<Boolean> userState;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contentRating")
     private Optional<String> contentRating;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("originallyAvailableAt")
     private Optional<LocalDate> originallyAvailableAt;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("year")
     private Optional<Integer> year;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Image")
     private Optional<? extends List<Image>> image;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("banner")
     private Optional<String> banner;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("rating")
     private Optional<Double> rating;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("expiresAt")
     private Optional<Integer> expiresAt;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("originalTitle")
     private Optional<String> originalTitle;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audienceRating")
     private Optional<Double> audienceRating;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audienceRatingImage")
     private Optional<String> audienceRatingImage;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ratingImage")
     private Optional<String> ratingImage;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("imdbRatingCount")
     private Optional<Integer> imdbRatingCount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("subtype")
     private Optional<String> subtype;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("theme")
     private Optional<String> theme;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("leafCount")
     private Optional<Integer> leafCount;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("childCount")
     private Optional<Integer> childCount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("isContinuingSeries")
     private Optional<Boolean> isContinuingSeries;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("skipChildren")
     private Optional<Boolean> skipChildren;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("availabilityId")
     private Optional<String> availabilityId;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("streamingMediaId")
     private Optional<String> streamingMediaId;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("playableKey")
@@ -272,7 +306,18 @@ public class Metadata {
     }
     
     public Metadata() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -451,15 +496,17 @@ public class Metadata {
         return playableKey;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Metadata withArt(String art) {
         Utils.checkNotNull(art, "art");
         this.art = Optional.ofNullable(art);
         return this;
     }
+
 
     public Metadata withArt(Optional<String> art) {
         Utils.checkNotNull(art, "art");
@@ -473,6 +520,7 @@ public class Metadata {
         return this;
     }
 
+
     public Metadata withGuid(Optional<String> guid) {
         Utils.checkNotNull(guid, "guid");
         this.guid = guid;
@@ -484,6 +532,7 @@ public class Metadata {
         this.key = Optional.ofNullable(key);
         return this;
     }
+
 
     public Metadata withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
@@ -497,6 +546,7 @@ public class Metadata {
         return this;
     }
 
+
     public Metadata withRatingKey(Optional<String> ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         this.ratingKey = ratingKey;
@@ -508,6 +558,7 @@ public class Metadata {
         this.studio = Optional.ofNullable(studio);
         return this;
     }
+
 
     public Metadata withStudio(Optional<String> studio) {
         Utils.checkNotNull(studio, "studio");
@@ -521,6 +572,7 @@ public class Metadata {
         return this;
     }
 
+
     public Metadata withTagline(Optional<String> tagline) {
         Utils.checkNotNull(tagline, "tagline");
         this.tagline = tagline;
@@ -532,6 +584,7 @@ public class Metadata {
         this.type = Optional.ofNullable(type);
         return this;
     }
+
 
     public Metadata withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
@@ -545,6 +598,7 @@ public class Metadata {
         return this;
     }
 
+
     public Metadata withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
         this.thumb = thumb;
@@ -556,6 +610,7 @@ public class Metadata {
         this.addedAt = Optional.ofNullable(addedAt);
         return this;
     }
+
 
     public Metadata withAddedAt(Optional<Integer> addedAt) {
         Utils.checkNotNull(addedAt, "addedAt");
@@ -569,6 +624,7 @@ public class Metadata {
         return this;
     }
 
+
     public Metadata withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = duration;
@@ -580,6 +636,7 @@ public class Metadata {
         this.publicPagesURL = Optional.ofNullable(publicPagesURL);
         return this;
     }
+
 
     public Metadata withPublicPagesURL(Optional<String> publicPagesURL) {
         Utils.checkNotNull(publicPagesURL, "publicPagesURL");
@@ -593,6 +650,7 @@ public class Metadata {
         return this;
     }
 
+
     public Metadata withSlug(Optional<String> slug) {
         Utils.checkNotNull(slug, "slug");
         this.slug = slug;
@@ -604,6 +662,7 @@ public class Metadata {
         this.userState = Optional.ofNullable(userState);
         return this;
     }
+
 
     public Metadata withUserState(Optional<Boolean> userState) {
         Utils.checkNotNull(userState, "userState");
@@ -617,6 +676,7 @@ public class Metadata {
         return this;
     }
 
+
     public Metadata withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
@@ -628,6 +688,7 @@ public class Metadata {
         this.contentRating = Optional.ofNullable(contentRating);
         return this;
     }
+
 
     public Metadata withContentRating(Optional<String> contentRating) {
         Utils.checkNotNull(contentRating, "contentRating");
@@ -641,6 +702,7 @@ public class Metadata {
         return this;
     }
 
+
     public Metadata withOriginallyAvailableAt(Optional<LocalDate> originallyAvailableAt) {
         Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
         this.originallyAvailableAt = originallyAvailableAt;
@@ -652,6 +714,7 @@ public class Metadata {
         this.year = Optional.ofNullable(year);
         return this;
     }
+
 
     public Metadata withYear(Optional<Integer> year) {
         Utils.checkNotNull(year, "year");
@@ -665,6 +728,7 @@ public class Metadata {
         return this;
     }
 
+
     public Metadata withImage(Optional<? extends List<Image>> image) {
         Utils.checkNotNull(image, "image");
         this.image = image;
@@ -676,6 +740,7 @@ public class Metadata {
         this.banner = Optional.ofNullable(banner);
         return this;
     }
+
 
     public Metadata withBanner(Optional<String> banner) {
         Utils.checkNotNull(banner, "banner");
@@ -689,6 +754,7 @@ public class Metadata {
         return this;
     }
 
+
     public Metadata withRating(Optional<Double> rating) {
         Utils.checkNotNull(rating, "rating");
         this.rating = rating;
@@ -700,6 +766,7 @@ public class Metadata {
         this.expiresAt = Optional.ofNullable(expiresAt);
         return this;
     }
+
 
     public Metadata withExpiresAt(Optional<Integer> expiresAt) {
         Utils.checkNotNull(expiresAt, "expiresAt");
@@ -713,6 +780,7 @@ public class Metadata {
         return this;
     }
 
+
     public Metadata withOriginalTitle(Optional<String> originalTitle) {
         Utils.checkNotNull(originalTitle, "originalTitle");
         this.originalTitle = originalTitle;
@@ -724,6 +792,7 @@ public class Metadata {
         this.audienceRating = Optional.ofNullable(audienceRating);
         return this;
     }
+
 
     public Metadata withAudienceRating(Optional<Double> audienceRating) {
         Utils.checkNotNull(audienceRating, "audienceRating");
@@ -737,6 +806,7 @@ public class Metadata {
         return this;
     }
 
+
     public Metadata withAudienceRatingImage(Optional<String> audienceRatingImage) {
         Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
         this.audienceRatingImage = audienceRatingImage;
@@ -748,6 +818,7 @@ public class Metadata {
         this.ratingImage = Optional.ofNullable(ratingImage);
         return this;
     }
+
 
     public Metadata withRatingImage(Optional<String> ratingImage) {
         Utils.checkNotNull(ratingImage, "ratingImage");
@@ -761,6 +832,7 @@ public class Metadata {
         return this;
     }
 
+
     public Metadata withImdbRatingCount(Optional<Integer> imdbRatingCount) {
         Utils.checkNotNull(imdbRatingCount, "imdbRatingCount");
         this.imdbRatingCount = imdbRatingCount;
@@ -772,6 +844,7 @@ public class Metadata {
         this.subtype = Optional.ofNullable(subtype);
         return this;
     }
+
 
     public Metadata withSubtype(Optional<String> subtype) {
         Utils.checkNotNull(subtype, "subtype");
@@ -785,6 +858,7 @@ public class Metadata {
         return this;
     }
 
+
     public Metadata withTheme(Optional<String> theme) {
         Utils.checkNotNull(theme, "theme");
         this.theme = theme;
@@ -796,6 +870,7 @@ public class Metadata {
         this.leafCount = Optional.ofNullable(leafCount);
         return this;
     }
+
 
     public Metadata withLeafCount(Optional<Integer> leafCount) {
         Utils.checkNotNull(leafCount, "leafCount");
@@ -809,6 +884,7 @@ public class Metadata {
         return this;
     }
 
+
     public Metadata withChildCount(Optional<Integer> childCount) {
         Utils.checkNotNull(childCount, "childCount");
         this.childCount = childCount;
@@ -820,6 +896,7 @@ public class Metadata {
         this.isContinuingSeries = Optional.ofNullable(isContinuingSeries);
         return this;
     }
+
 
     public Metadata withIsContinuingSeries(Optional<Boolean> isContinuingSeries) {
         Utils.checkNotNull(isContinuingSeries, "isContinuingSeries");
@@ -833,6 +910,7 @@ public class Metadata {
         return this;
     }
 
+
     public Metadata withSkipChildren(Optional<Boolean> skipChildren) {
         Utils.checkNotNull(skipChildren, "skipChildren");
         this.skipChildren = skipChildren;
@@ -844,6 +922,7 @@ public class Metadata {
         this.availabilityId = Optional.ofNullable(availabilityId);
         return this;
     }
+
 
     public Metadata withAvailabilityId(Optional<String> availabilityId) {
         Utils.checkNotNull(availabilityId, "availabilityId");
@@ -857,6 +936,7 @@ public class Metadata {
         return this;
     }
 
+
     public Metadata withStreamingMediaId(Optional<String> streamingMediaId) {
         Utils.checkNotNull(streamingMediaId, "streamingMediaId");
         this.streamingMediaId = streamingMediaId;
@@ -869,13 +949,13 @@ public class Metadata {
         return this;
     }
 
+
     public Metadata withPlayableKey(Optional<String> playableKey) {
         Utils.checkNotNull(playableKey, "playableKey");
         this.playableKey = playableKey;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -886,81 +966,58 @@ public class Metadata {
         }
         Metadata other = (Metadata) o;
         return 
-            Objects.deepEquals(this.art, other.art) &&
-            Objects.deepEquals(this.guid, other.guid) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.ratingKey, other.ratingKey) &&
-            Objects.deepEquals(this.studio, other.studio) &&
-            Objects.deepEquals(this.tagline, other.tagline) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.addedAt, other.addedAt) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.publicPagesURL, other.publicPagesURL) &&
-            Objects.deepEquals(this.slug, other.slug) &&
-            Objects.deepEquals(this.userState, other.userState) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.contentRating, other.contentRating) &&
-            Objects.deepEquals(this.originallyAvailableAt, other.originallyAvailableAt) &&
-            Objects.deepEquals(this.year, other.year) &&
-            Objects.deepEquals(this.image, other.image) &&
-            Objects.deepEquals(this.banner, other.banner) &&
-            Objects.deepEquals(this.rating, other.rating) &&
-            Objects.deepEquals(this.expiresAt, other.expiresAt) &&
-            Objects.deepEquals(this.originalTitle, other.originalTitle) &&
-            Objects.deepEquals(this.audienceRating, other.audienceRating) &&
-            Objects.deepEquals(this.audienceRatingImage, other.audienceRatingImage) &&
-            Objects.deepEquals(this.ratingImage, other.ratingImage) &&
-            Objects.deepEquals(this.imdbRatingCount, other.imdbRatingCount) &&
-            Objects.deepEquals(this.subtype, other.subtype) &&
-            Objects.deepEquals(this.theme, other.theme) &&
-            Objects.deepEquals(this.leafCount, other.leafCount) &&
-            Objects.deepEquals(this.childCount, other.childCount) &&
-            Objects.deepEquals(this.isContinuingSeries, other.isContinuingSeries) &&
-            Objects.deepEquals(this.skipChildren, other.skipChildren) &&
-            Objects.deepEquals(this.availabilityId, other.availabilityId) &&
-            Objects.deepEquals(this.streamingMediaId, other.streamingMediaId) &&
-            Objects.deepEquals(this.playableKey, other.playableKey);
+            Utils.enhancedDeepEquals(this.art, other.art) &&
+            Utils.enhancedDeepEquals(this.guid, other.guid) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey) &&
+            Utils.enhancedDeepEquals(this.studio, other.studio) &&
+            Utils.enhancedDeepEquals(this.tagline, other.tagline) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.addedAt, other.addedAt) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.publicPagesURL, other.publicPagesURL) &&
+            Utils.enhancedDeepEquals(this.slug, other.slug) &&
+            Utils.enhancedDeepEquals(this.userState, other.userState) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.contentRating, other.contentRating) &&
+            Utils.enhancedDeepEquals(this.originallyAvailableAt, other.originallyAvailableAt) &&
+            Utils.enhancedDeepEquals(this.year, other.year) &&
+            Utils.enhancedDeepEquals(this.image, other.image) &&
+            Utils.enhancedDeepEquals(this.banner, other.banner) &&
+            Utils.enhancedDeepEquals(this.rating, other.rating) &&
+            Utils.enhancedDeepEquals(this.expiresAt, other.expiresAt) &&
+            Utils.enhancedDeepEquals(this.originalTitle, other.originalTitle) &&
+            Utils.enhancedDeepEquals(this.audienceRating, other.audienceRating) &&
+            Utils.enhancedDeepEquals(this.audienceRatingImage, other.audienceRatingImage) &&
+            Utils.enhancedDeepEquals(this.ratingImage, other.ratingImage) &&
+            Utils.enhancedDeepEquals(this.imdbRatingCount, other.imdbRatingCount) &&
+            Utils.enhancedDeepEquals(this.subtype, other.subtype) &&
+            Utils.enhancedDeepEquals(this.theme, other.theme) &&
+            Utils.enhancedDeepEquals(this.leafCount, other.leafCount) &&
+            Utils.enhancedDeepEquals(this.childCount, other.childCount) &&
+            Utils.enhancedDeepEquals(this.isContinuingSeries, other.isContinuingSeries) &&
+            Utils.enhancedDeepEquals(this.skipChildren, other.skipChildren) &&
+            Utils.enhancedDeepEquals(this.availabilityId, other.availabilityId) &&
+            Utils.enhancedDeepEquals(this.streamingMediaId, other.streamingMediaId) &&
+            Utils.enhancedDeepEquals(this.playableKey, other.playableKey);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            art,
-            guid,
-            key,
-            ratingKey,
-            studio,
-            tagline,
-            type,
-            thumb,
-            addedAt,
-            duration,
-            publicPagesURL,
-            slug,
-            userState,
-            title,
-            contentRating,
-            originallyAvailableAt,
-            year,
-            image,
-            banner,
-            rating,
-            expiresAt,
-            originalTitle,
-            audienceRating,
-            audienceRatingImage,
-            ratingImage,
-            imdbRatingCount,
-            subtype,
-            theme,
-            leafCount,
-            childCount,
-            isContinuingSeries,
-            skipChildren,
-            availabilityId,
-            streamingMediaId,
-            playableKey);
+        return Utils.enhancedHash(
+            art, guid, key,
+            ratingKey, studio, tagline,
+            type, thumb, addedAt,
+            duration, publicPagesURL, slug,
+            userState, title, contentRating,
+            originallyAvailableAt, year, image,
+            banner, rating, expiresAt,
+            originalTitle, audienceRating, audienceRatingImage,
+            ratingImage, imdbRatingCount, subtype,
+            theme, leafCount, childCount,
+            isContinuingSeries, skipChildren, availabilityId,
+            streamingMediaId, playableKey);
     }
     
     @Override
@@ -1002,82 +1059,84 @@ public class Metadata {
                 "streamingMediaId", streamingMediaId,
                 "playableKey", playableKey);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> art = Optional.empty();
- 
+
         private Optional<String> guid = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> ratingKey = Optional.empty();
- 
+
         private Optional<String> studio = Optional.empty();
- 
+
         private Optional<String> tagline = Optional.empty();
- 
+
         private Optional<String> type = Optional.empty();
- 
+
         private Optional<String> thumb = Optional.empty();
- 
+
         private Optional<Integer> addedAt = Optional.empty();
- 
+
         private Optional<Integer> duration = Optional.empty();
- 
+
         private Optional<String> publicPagesURL = Optional.empty();
- 
+
         private Optional<String> slug = Optional.empty();
- 
+
         private Optional<Boolean> userState = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> contentRating = Optional.empty();
- 
+
         private Optional<LocalDate> originallyAvailableAt = Optional.empty();
- 
+
         private Optional<Integer> year = Optional.empty();
- 
+
         private Optional<? extends List<Image>> image = Optional.empty();
- 
+
         private Optional<String> banner = Optional.empty();
- 
+
         private Optional<Double> rating = Optional.empty();
- 
+
         private Optional<Integer> expiresAt = Optional.empty();
- 
+
         private Optional<String> originalTitle = Optional.empty();
- 
+
         private Optional<Double> audienceRating = Optional.empty();
- 
+
         private Optional<String> audienceRatingImage = Optional.empty();
- 
+
         private Optional<String> ratingImage = Optional.empty();
- 
+
         private Optional<Integer> imdbRatingCount = Optional.empty();
- 
+
         private Optional<String> subtype = Optional.empty();
- 
+
         private Optional<String> theme = Optional.empty();
- 
+
         private Optional<Integer> leafCount = Optional.empty();
- 
+
         private Optional<Integer> childCount = Optional.empty();
- 
+
         private Optional<Boolean> isContinuingSeries = Optional.empty();
- 
+
         private Optional<Boolean> skipChildren = Optional.empty();
- 
+
         private Optional<String> availabilityId = Optional.empty();
- 
+
         private Optional<String> streamingMediaId = Optional.empty();
- 
+
         private Optional<String> playableKey = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder art(String art) {
             Utils.checkNotNull(art, "art");
@@ -1091,6 +1150,7 @@ public class Metadata {
             return this;
         }
 
+
         public Builder guid(String guid) {
             Utils.checkNotNull(guid, "guid");
             this.guid = Optional.ofNullable(guid);
@@ -1102,6 +1162,7 @@ public class Metadata {
             this.guid = guid;
             return this;
         }
+
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
@@ -1115,6 +1176,7 @@ public class Metadata {
             return this;
         }
 
+
         public Builder ratingKey(String ratingKey) {
             Utils.checkNotNull(ratingKey, "ratingKey");
             this.ratingKey = Optional.ofNullable(ratingKey);
@@ -1126,6 +1188,7 @@ public class Metadata {
             this.ratingKey = ratingKey;
             return this;
         }
+
 
         public Builder studio(String studio) {
             Utils.checkNotNull(studio, "studio");
@@ -1139,6 +1202,7 @@ public class Metadata {
             return this;
         }
 
+
         public Builder tagline(String tagline) {
             Utils.checkNotNull(tagline, "tagline");
             this.tagline = Optional.ofNullable(tagline);
@@ -1150,6 +1214,7 @@ public class Metadata {
             this.tagline = tagline;
             return this;
         }
+
 
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
@@ -1163,6 +1228,7 @@ public class Metadata {
             return this;
         }
 
+
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
             this.thumb = Optional.ofNullable(thumb);
@@ -1174,6 +1240,7 @@ public class Metadata {
             this.thumb = thumb;
             return this;
         }
+
 
         public Builder addedAt(int addedAt) {
             Utils.checkNotNull(addedAt, "addedAt");
@@ -1187,6 +1254,7 @@ public class Metadata {
             return this;
         }
 
+
         public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = Optional.ofNullable(duration);
@@ -1198,6 +1266,7 @@ public class Metadata {
             this.duration = duration;
             return this;
         }
+
 
         public Builder publicPagesURL(String publicPagesURL) {
             Utils.checkNotNull(publicPagesURL, "publicPagesURL");
@@ -1211,6 +1280,7 @@ public class Metadata {
             return this;
         }
 
+
         public Builder slug(String slug) {
             Utils.checkNotNull(slug, "slug");
             this.slug = Optional.ofNullable(slug);
@@ -1222,6 +1292,7 @@ public class Metadata {
             this.slug = slug;
             return this;
         }
+
 
         public Builder userState(boolean userState) {
             Utils.checkNotNull(userState, "userState");
@@ -1235,6 +1306,7 @@ public class Metadata {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -1246,6 +1318,7 @@ public class Metadata {
             this.title = title;
             return this;
         }
+
 
         public Builder contentRating(String contentRating) {
             Utils.checkNotNull(contentRating, "contentRating");
@@ -1259,6 +1332,7 @@ public class Metadata {
             return this;
         }
 
+
         public Builder originallyAvailableAt(LocalDate originallyAvailableAt) {
             Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
             this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
@@ -1270,6 +1344,7 @@ public class Metadata {
             this.originallyAvailableAt = originallyAvailableAt;
             return this;
         }
+
 
         public Builder year(int year) {
             Utils.checkNotNull(year, "year");
@@ -1283,6 +1358,7 @@ public class Metadata {
             return this;
         }
 
+
         public Builder image(List<Image> image) {
             Utils.checkNotNull(image, "image");
             this.image = Optional.ofNullable(image);
@@ -1294,6 +1370,7 @@ public class Metadata {
             this.image = image;
             return this;
         }
+
 
         public Builder banner(String banner) {
             Utils.checkNotNull(banner, "banner");
@@ -1307,6 +1384,7 @@ public class Metadata {
             return this;
         }
 
+
         public Builder rating(double rating) {
             Utils.checkNotNull(rating, "rating");
             this.rating = Optional.ofNullable(rating);
@@ -1318,6 +1396,7 @@ public class Metadata {
             this.rating = rating;
             return this;
         }
+
 
         public Builder expiresAt(int expiresAt) {
             Utils.checkNotNull(expiresAt, "expiresAt");
@@ -1331,6 +1410,7 @@ public class Metadata {
             return this;
         }
 
+
         public Builder originalTitle(String originalTitle) {
             Utils.checkNotNull(originalTitle, "originalTitle");
             this.originalTitle = Optional.ofNullable(originalTitle);
@@ -1342,6 +1422,7 @@ public class Metadata {
             this.originalTitle = originalTitle;
             return this;
         }
+
 
         public Builder audienceRating(double audienceRating) {
             Utils.checkNotNull(audienceRating, "audienceRating");
@@ -1355,6 +1436,7 @@ public class Metadata {
             return this;
         }
 
+
         public Builder audienceRatingImage(String audienceRatingImage) {
             Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
             this.audienceRatingImage = Optional.ofNullable(audienceRatingImage);
@@ -1366,6 +1448,7 @@ public class Metadata {
             this.audienceRatingImage = audienceRatingImage;
             return this;
         }
+
 
         public Builder ratingImage(String ratingImage) {
             Utils.checkNotNull(ratingImage, "ratingImage");
@@ -1379,6 +1462,7 @@ public class Metadata {
             return this;
         }
 
+
         public Builder imdbRatingCount(int imdbRatingCount) {
             Utils.checkNotNull(imdbRatingCount, "imdbRatingCount");
             this.imdbRatingCount = Optional.ofNullable(imdbRatingCount);
@@ -1390,6 +1474,7 @@ public class Metadata {
             this.imdbRatingCount = imdbRatingCount;
             return this;
         }
+
 
         public Builder subtype(String subtype) {
             Utils.checkNotNull(subtype, "subtype");
@@ -1403,6 +1488,7 @@ public class Metadata {
             return this;
         }
 
+
         public Builder theme(String theme) {
             Utils.checkNotNull(theme, "theme");
             this.theme = Optional.ofNullable(theme);
@@ -1414,6 +1500,7 @@ public class Metadata {
             this.theme = theme;
             return this;
         }
+
 
         public Builder leafCount(int leafCount) {
             Utils.checkNotNull(leafCount, "leafCount");
@@ -1427,6 +1514,7 @@ public class Metadata {
             return this;
         }
 
+
         public Builder childCount(int childCount) {
             Utils.checkNotNull(childCount, "childCount");
             this.childCount = Optional.ofNullable(childCount);
@@ -1438,6 +1526,7 @@ public class Metadata {
             this.childCount = childCount;
             return this;
         }
+
 
         public Builder isContinuingSeries(boolean isContinuingSeries) {
             Utils.checkNotNull(isContinuingSeries, "isContinuingSeries");
@@ -1451,6 +1540,7 @@ public class Metadata {
             return this;
         }
 
+
         public Builder skipChildren(boolean skipChildren) {
             Utils.checkNotNull(skipChildren, "skipChildren");
             this.skipChildren = Optional.ofNullable(skipChildren);
@@ -1462,6 +1552,7 @@ public class Metadata {
             this.skipChildren = skipChildren;
             return this;
         }
+
 
         public Builder availabilityId(String availabilityId) {
             Utils.checkNotNull(availabilityId, "availabilityId");
@@ -1475,6 +1566,7 @@ public class Metadata {
             return this;
         }
 
+
         public Builder streamingMediaId(String streamingMediaId) {
             Utils.checkNotNull(streamingMediaId, "streamingMediaId");
             this.streamingMediaId = Optional.ofNullable(streamingMediaId);
@@ -1487,6 +1579,7 @@ public class Metadata {
             return this;
         }
 
+
         public Builder playableKey(String playableKey) {
             Utils.checkNotNull(playableKey, "playableKey");
             this.playableKey = Optional.ofNullable(playableKey);
@@ -1498,44 +1591,23 @@ public class Metadata {
             this.playableKey = playableKey;
             return this;
         }
-        
+
         public Metadata build() {
+
             return new Metadata(
-                art,
-                guid,
-                key,
-                ratingKey,
-                studio,
-                tagline,
-                type,
-                thumb,
-                addedAt,
-                duration,
-                publicPagesURL,
-                slug,
-                userState,
-                title,
-                contentRating,
-                originallyAvailableAt,
-                year,
-                image,
-                banner,
-                rating,
-                expiresAt,
-                originalTitle,
-                audienceRating,
-                audienceRatingImage,
-                ratingImage,
-                imdbRatingCount,
-                subtype,
-                theme,
-                leafCount,
-                childCount,
-                isContinuingSeries,
-                skipChildren,
-                availabilityId,
-                streamingMediaId,
-                playableKey);
+                art, guid, key,
+                ratingKey, studio, tagline,
+                type, thumb, addedAt,
+                duration, publicPagesURL, slug,
+                userState, title, contentRating,
+                originallyAvailableAt, year, image,
+                banner, rating, expiresAt,
+                originalTitle, audienceRating, audienceRatingImage,
+                ratingImage, imdbRatingCount, subtype,
+                theme, leafCount, childCount,
+                isContinuingSeries, skipChildren, availabilityId,
+                streamingMediaId, playableKey);
         }
+
     }
 }

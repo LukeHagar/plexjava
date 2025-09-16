@@ -3,7 +3,11 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
 import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetTopWatchedContent;
 import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
@@ -16,10 +20,10 @@ public class GetTopWatchedContentRequestBuilder {
                             "includeGuids",
                             "0",
                             new TypeReference<Optional<? extends GetTopWatchedContentQueryParamIncludeGuids>>() {});
-    private final SDKMethodInterfaces.MethodCallGetTopWatchedContent sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetTopWatchedContentRequestBuilder(SDKMethodInterfaces.MethodCallGetTopWatchedContent sdk) {
-        this.sdk = sdk;
+    public GetTopWatchedContentRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetTopWatchedContentRequestBuilder type(GetTopWatchedContentQueryParamType type) {
@@ -40,13 +44,25 @@ public class GetTopWatchedContentRequestBuilder {
         return this;
     }
 
-    public GetTopWatchedContentResponse call() throws Exception {
+
+    private GetTopWatchedContentRequest buildRequest() {
         if (includeGuids == null) {
             includeGuids = _SINGLETON_VALUE_IncludeGuids.value();
         }
-        return sdk.getTopWatchedContent(
-            type,
+
+        GetTopWatchedContentRequest request = new GetTopWatchedContentRequest(type,
             includeGuids);
+
+        return request;
+    }
+
+    public GetTopWatchedContentResponse call() throws Exception {
+        
+        RequestOperation<GetTopWatchedContentRequest, GetTopWatchedContentResponse> operation
+              = new GetTopWatchedContent.Sync(sdkConfiguration);
+        GetTopWatchedContentRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 
     private static final LazySingletonValue<Optional<? extends GetTopWatchedContentQueryParamIncludeGuids>> _SINGLETON_VALUE_IncludeGuids =

@@ -11,11 +11,10 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetSessionHistoryRequest {
 
+public class GetSessionHistoryRequest {
     /**
      * Sorts the results by the specified field followed by the direction (asc, desc)
      */
@@ -58,7 +57,8 @@ public class GetSessionHistoryRequest {
     }
     
     public GetSessionHistoryRequest() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -95,9 +95,10 @@ public class GetSessionHistoryRequest {
         return librarySectionID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Sorts the results by the specified field followed by the direction (asc, desc)
@@ -107,6 +108,7 @@ public class GetSessionHistoryRequest {
         this.sort = Optional.ofNullable(sort);
         return this;
     }
+
 
     /**
      * Sorts the results by the specified field followed by the direction (asc, desc)
@@ -125,6 +127,7 @@ public class GetSessionHistoryRequest {
         this.accountId = Optional.ofNullable(accountId);
         return this;
     }
+
 
     /**
      * Filter results by those that are related to a specific users id
@@ -145,6 +148,7 @@ public class GetSessionHistoryRequest {
         return this;
     }
 
+
     /**
      * Filters content by field and direction/equality
      * (Unknown if viewedAt is the only supported column)
@@ -164,6 +168,7 @@ public class GetSessionHistoryRequest {
         return this;
     }
 
+
     /**
      * Filters the results based on the id of a valid library section
      */
@@ -173,7 +178,6 @@ public class GetSessionHistoryRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -184,18 +188,16 @@ public class GetSessionHistoryRequest {
         }
         GetSessionHistoryRequest other = (GetSessionHistoryRequest) o;
         return 
-            Objects.deepEquals(this.sort, other.sort) &&
-            Objects.deepEquals(this.accountId, other.accountId) &&
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.librarySectionID, other.librarySectionID);
+            Utils.enhancedDeepEquals(this.sort, other.sort) &&
+            Utils.enhancedDeepEquals(this.accountId, other.accountId) &&
+            Utils.enhancedDeepEquals(this.filter, other.filter) &&
+            Utils.enhancedDeepEquals(this.librarySectionID, other.librarySectionID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            sort,
-            accountId,
-            filter,
+        return Utils.enhancedHash(
+            sort, accountId, filter,
             librarySectionID);
     }
     
@@ -207,20 +209,22 @@ public class GetSessionHistoryRequest {
                 "filter", filter,
                 "librarySectionID", librarySectionID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> sort = Optional.empty();
- 
+
         private Optional<Long> accountId = Optional.empty();
- 
+
         private Optional<? extends QueryParamFilter> filter = Optional.empty();
- 
+
         private Optional<Long> librarySectionID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Sorts the results by the specified field followed by the direction (asc, desc)
@@ -240,6 +244,7 @@ public class GetSessionHistoryRequest {
             return this;
         }
 
+
         /**
          * Filter results by those that are related to a specific users id
          */
@@ -257,6 +262,7 @@ public class GetSessionHistoryRequest {
             this.accountId = accountId;
             return this;
         }
+
 
         /**
          * Filters content by field and direction/equality
@@ -278,6 +284,7 @@ public class GetSessionHistoryRequest {
             return this;
         }
 
+
         /**
          * Filters the results based on the id of a valid library section
          */
@@ -295,13 +302,13 @@ public class GetSessionHistoryRequest {
             this.librarySectionID = librarySectionID;
             return this;
         }
-        
+
         public GetSessionHistoryRequest build() {
+
             return new GetSessionHistoryRequest(
-                sort,
-                accountId,
-                filter,
+                sort, accountId, filter,
                 librarySectionID);
         }
+
     }
 }

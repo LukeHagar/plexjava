@@ -16,11 +16,10 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetRecentlyAddedMediaContainer {
 
+public class GetRecentlyAddedMediaContainer {
     /**
      * Number of media items returned in this response.
      */
@@ -96,7 +95,9 @@ public class GetRecentlyAddedMediaContainer {
             long offset,
             boolean allowSync,
             String identifier) {
-        this(size, totalSize, offset, allowSync, identifier, Optional.empty(), Optional.empty());
+        this(size, totalSize, offset,
+            allowSync, identifier, Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -157,9 +158,10 @@ public class GetRecentlyAddedMediaContainer {
         return (Optional<List<GetRecentlyAddedMetadata>>) metadata;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Number of media items returned in this response.
@@ -215,6 +217,7 @@ public class GetRecentlyAddedMediaContainer {
         return this;
     }
 
+
     /**
      * The Meta object is only included in the response if the `includeMeta` parameter is set to `1`.
      */
@@ -233,6 +236,7 @@ public class GetRecentlyAddedMediaContainer {
         return this;
     }
 
+
     /**
      * An array of metadata items.
      */
@@ -242,7 +246,6 @@ public class GetRecentlyAddedMediaContainer {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -253,24 +256,20 @@ public class GetRecentlyAddedMediaContainer {
         }
         GetRecentlyAddedMediaContainer other = (GetRecentlyAddedMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.totalSize, other.totalSize) &&
-            Objects.deepEquals(this.offset, other.offset) &&
-            Objects.deepEquals(this.allowSync, other.allowSync) &&
-            Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.meta, other.meta) &&
-            Objects.deepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.totalSize, other.totalSize) &&
+            Utils.enhancedDeepEquals(this.offset, other.offset) &&
+            Utils.enhancedDeepEquals(this.allowSync, other.allowSync) &&
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.meta, other.meta) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            totalSize,
-            offset,
-            allowSync,
-            identifier,
-            meta,
+        return Utils.enhancedHash(
+            size, totalSize, offset,
+            allowSync, identifier, meta,
             metadata);
     }
     
@@ -285,26 +284,28 @@ public class GetRecentlyAddedMediaContainer {
                 "meta", meta,
                 "metadata", metadata);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer size;
- 
+
         private Integer totalSize;
- 
+
         private Long offset;
- 
+
         private Boolean allowSync;
- 
+
         private String identifier;
- 
+
         private Optional<? extends Meta> meta = Optional.empty();
- 
+
         private Optional<? extends List<GetRecentlyAddedMetadata>> metadata = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Number of media items returned in this response.
@@ -315,6 +316,7 @@ public class GetRecentlyAddedMediaContainer {
             return this;
         }
 
+
         /**
          * Total number of media items in the library.
          */
@@ -323,6 +325,7 @@ public class GetRecentlyAddedMediaContainer {
             this.totalSize = totalSize;
             return this;
         }
+
 
         /**
          * Offset value for pagination.
@@ -333,6 +336,7 @@ public class GetRecentlyAddedMediaContainer {
             return this;
         }
 
+
         /**
          * Indicates whether syncing is allowed.
          */
@@ -342,6 +346,7 @@ public class GetRecentlyAddedMediaContainer {
             return this;
         }
 
+
         /**
          * An plugin identifier for the media container.
          */
@@ -350,6 +355,7 @@ public class GetRecentlyAddedMediaContainer {
             this.identifier = identifier;
             return this;
         }
+
 
         /**
          * The Meta object is only included in the response if the `includeMeta` parameter is set to `1`.
@@ -369,6 +375,7 @@ public class GetRecentlyAddedMediaContainer {
             return this;
         }
 
+
         /**
          * An array of metadata items.
          */
@@ -386,16 +393,14 @@ public class GetRecentlyAddedMediaContainer {
             this.metadata = metadata;
             return this;
         }
-        
+
         public GetRecentlyAddedMediaContainer build() {
+
             return new GetRecentlyAddedMediaContainer(
-                size,
-                totalSize,
-                offset,
-                allowSync,
-                identifier,
-                meta,
+                size, totalSize, offset,
+                allowSync, identifier, meta,
                 metadata);
         }
+
     }
 }

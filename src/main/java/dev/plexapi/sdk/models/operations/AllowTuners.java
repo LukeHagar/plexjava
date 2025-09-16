@@ -19,7 +19,7 @@ public enum AllowTuners {
     @JsonValue
     private final int value;
 
-    private AllowTuners(int value) {
+    AllowTuners(int value) {
         this.value = value;
     }
     

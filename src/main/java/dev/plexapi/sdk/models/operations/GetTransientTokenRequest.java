@@ -9,10 +9,9 @@ import dev.plexapi.sdk.utils.SpeakeasyMetadata;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetTransientTokenRequest {
-
     /**
      * `delegation` - This is the only supported `type` parameter.
      */
@@ -51,9 +50,10 @@ public class GetTransientTokenRequest {
         return scope;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * `delegation` - This is the only supported `type` parameter.
@@ -73,7 +73,6 @@ public class GetTransientTokenRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -84,15 +83,14 @@ public class GetTransientTokenRequest {
         }
         GetTransientTokenRequest other = (GetTransientTokenRequest) o;
         return 
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.scope, other.scope);
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.scope, other.scope);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            type,
-            scope);
+        return Utils.enhancedHash(
+            type, scope);
     }
     
     @Override
@@ -101,16 +99,18 @@ public class GetTransientTokenRequest {
                 "type", type,
                 "scope", scope);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private GetTransientTokenQueryParamType type;
- 
+
         private Scope scope;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * `delegation` - This is the only supported `type` parameter.
@@ -121,6 +121,7 @@ public class GetTransientTokenRequest {
             return this;
         }
 
+
         /**
          * `all` - This is the only supported `scope` parameter.
          */
@@ -129,11 +130,12 @@ public class GetTransientTokenRequest {
             this.scope = scope;
             return this;
         }
-        
+
         public GetTransientTokenRequest build() {
+
             return new GetTransientTokenRequest(
-                type,
-                scope);
+                type, scope);
         }
+
     }
 }

@@ -19,7 +19,7 @@ public enum AutoSelectSubtitle {
     @JsonValue
     private final int value;
 
-    private AutoSelectSubtitle(int value) {
+    AutoSelectSubtitle(int value) {
         this.value = value;
     }
     

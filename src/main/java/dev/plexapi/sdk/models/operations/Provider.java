@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class Provider {
 
@@ -20,9 +20,11 @@ public class Provider {
     @JsonProperty("key")
     private Optional<String> key;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
@@ -60,15 +62,17 @@ public class Provider {
         return type;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Provider withKey(String key) {
         Utils.checkNotNull(key, "key");
         this.key = Optional.ofNullable(key);
         return this;
     }
+
 
     public Provider withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
@@ -82,6 +86,7 @@ public class Provider {
         return this;
     }
 
+
     public Provider withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
@@ -94,13 +99,13 @@ public class Provider {
         return this;
     }
 
+
     public Provider withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,17 +116,15 @@ public class Provider {
         }
         Provider other = (Provider) o;
         return 
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.type, other.type);
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.type, other.type);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            key,
-            title,
-            type);
+        return Utils.enhancedHash(
+            key, title, type);
     }
     
     @Override
@@ -131,18 +134,20 @@ public class Provider {
                 "title", title,
                 "type", type);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> type = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
@@ -156,6 +161,7 @@ public class Provider {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -168,6 +174,7 @@ public class Provider {
             return this;
         }
 
+
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = Optional.ofNullable(type);
@@ -179,12 +186,12 @@ public class Provider {
             this.type = type;
             return this;
         }
-        
+
         public Provider build() {
+
             return new Provider(
-                key,
-                title,
-                type);
+                key, title, type);
         }
+
     }
 }

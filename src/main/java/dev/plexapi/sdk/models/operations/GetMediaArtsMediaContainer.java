@@ -12,10 +12,9 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
-import java.util.Objects;
+
 
 public class GetMediaArtsMediaContainer {
-
     /**
      * Number of media items returned in this response.
      */
@@ -39,6 +38,7 @@ public class GetMediaArtsMediaContainer {
      */
     @JsonProperty("identifier")
     private String identifier;
+
 
     @JsonProperty("Metadata")
     private List<GetMediaArtsMetadata> metadata;
@@ -99,9 +99,10 @@ public class GetMediaArtsMediaContainer {
         return metadata;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Number of media items returned in this response.
@@ -145,7 +146,6 @@ public class GetMediaArtsMediaContainer {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -156,21 +156,18 @@ public class GetMediaArtsMediaContainer {
         }
         GetMediaArtsMediaContainer other = (GetMediaArtsMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
-            Objects.deepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
-            Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
+            Utils.enhancedDeepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            mediaTagVersion,
-            mediaTagPrefix,
-            identifier,
-            metadata);
+        return Utils.enhancedHash(
+            size, mediaTagVersion, mediaTagPrefix,
+            identifier, metadata);
     }
     
     @Override
@@ -182,22 +179,24 @@ public class GetMediaArtsMediaContainer {
                 "identifier", identifier,
                 "metadata", metadata);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer size;
- 
+
         private Long mediaTagVersion;
- 
+
         private String mediaTagPrefix;
- 
+
         private String identifier;
- 
+
         private List<GetMediaArtsMetadata> metadata;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Number of media items returned in this response.
@@ -208,6 +207,7 @@ public class GetMediaArtsMediaContainer {
             return this;
         }
 
+
         /**
          * The version number for media tags.
          */
@@ -216,6 +216,7 @@ public class GetMediaArtsMediaContainer {
             this.mediaTagVersion = mediaTagVersion;
             return this;
         }
+
 
         /**
          * The prefix used for media tag resource paths.
@@ -226,6 +227,7 @@ public class GetMediaArtsMediaContainer {
             return this;
         }
 
+
         /**
          * An plugin identifier for the media container.
          */
@@ -235,19 +237,19 @@ public class GetMediaArtsMediaContainer {
             return this;
         }
 
+
         public Builder metadata(List<GetMediaArtsMetadata> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = metadata;
             return this;
         }
-        
+
         public GetMediaArtsMediaContainer build() {
+
             return new GetMediaArtsMediaContainer(
-                size,
-                mediaTagVersion,
-                mediaTagPrefix,
-                identifier,
-                metadata);
+                size, mediaTagVersion, mediaTagPrefix,
+                identifier, metadata);
         }
+
     }
 }

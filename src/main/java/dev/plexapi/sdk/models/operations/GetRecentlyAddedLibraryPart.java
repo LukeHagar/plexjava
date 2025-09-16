@@ -13,8 +13,8 @@ import java.lang.Boolean;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetRecentlyAddedLibraryPart {
 
@@ -22,37 +22,46 @@ public class GetRecentlyAddedLibraryPart {
     @JsonProperty("id")
     private Optional<Double> id;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
     private Optional<Double> duration;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("file")
     private Optional<String> file;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("size")
     private Optional<Double> size;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("container")
     private Optional<String> container;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("has64bitOffsets")
     private Optional<Boolean> has64bitOffsets;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hasThumbnail")
     private Optional<Double> hasThumbnail;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("optimizedForStreaming")
     private Optional<Boolean> optimizedForStreaming;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoProfile")
@@ -93,7 +102,10 @@ public class GetRecentlyAddedLibraryPart {
     }
     
     public GetRecentlyAddedLibraryPart() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -146,15 +158,17 @@ public class GetRecentlyAddedLibraryPart {
         return videoProfile;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetRecentlyAddedLibraryPart withId(double id) {
         Utils.checkNotNull(id, "id");
         this.id = Optional.ofNullable(id);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryPart withId(Optional<Double> id) {
         Utils.checkNotNull(id, "id");
@@ -168,6 +182,7 @@ public class GetRecentlyAddedLibraryPart {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryPart withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
@@ -179,6 +194,7 @@ public class GetRecentlyAddedLibraryPart {
         this.duration = Optional.ofNullable(duration);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryPart withDuration(Optional<Double> duration) {
         Utils.checkNotNull(duration, "duration");
@@ -192,6 +208,7 @@ public class GetRecentlyAddedLibraryPart {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryPart withFile(Optional<String> file) {
         Utils.checkNotNull(file, "file");
         this.file = file;
@@ -203,6 +220,7 @@ public class GetRecentlyAddedLibraryPart {
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryPart withSize(Optional<Double> size) {
         Utils.checkNotNull(size, "size");
@@ -216,6 +234,7 @@ public class GetRecentlyAddedLibraryPart {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryPart withContainer(Optional<String> container) {
         Utils.checkNotNull(container, "container");
         this.container = container;
@@ -227,6 +246,7 @@ public class GetRecentlyAddedLibraryPart {
         this.has64bitOffsets = Optional.ofNullable(has64bitOffsets);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryPart withHas64bitOffsets(Optional<Boolean> has64bitOffsets) {
         Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
@@ -240,6 +260,7 @@ public class GetRecentlyAddedLibraryPart {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryPart withHasThumbnail(Optional<Double> hasThumbnail) {
         Utils.checkNotNull(hasThumbnail, "hasThumbnail");
         this.hasThumbnail = hasThumbnail;
@@ -251,6 +272,7 @@ public class GetRecentlyAddedLibraryPart {
         this.optimizedForStreaming = Optional.ofNullable(optimizedForStreaming);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryPart withOptimizedForStreaming(Optional<Boolean> optimizedForStreaming) {
         Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
@@ -264,13 +286,13 @@ public class GetRecentlyAddedLibraryPart {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryPart withVideoProfile(Optional<String> videoProfile) {
         Utils.checkNotNull(videoProfile, "videoProfile");
         this.videoProfile = videoProfile;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -281,30 +303,24 @@ public class GetRecentlyAddedLibraryPart {
         }
         GetRecentlyAddedLibraryPart other = (GetRecentlyAddedLibraryPart) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.file, other.file) &&
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.container, other.container) &&
-            Objects.deepEquals(this.has64bitOffsets, other.has64bitOffsets) &&
-            Objects.deepEquals(this.hasThumbnail, other.hasThumbnail) &&
-            Objects.deepEquals(this.optimizedForStreaming, other.optimizedForStreaming) &&
-            Objects.deepEquals(this.videoProfile, other.videoProfile);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.file, other.file) &&
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.container, other.container) &&
+            Utils.enhancedDeepEquals(this.has64bitOffsets, other.has64bitOffsets) &&
+            Utils.enhancedDeepEquals(this.hasThumbnail, other.hasThumbnail) &&
+            Utils.enhancedDeepEquals(this.optimizedForStreaming, other.optimizedForStreaming) &&
+            Utils.enhancedDeepEquals(this.videoProfile, other.videoProfile);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            key,
-            duration,
-            file,
-            size,
-            container,
-            has64bitOffsets,
-            hasThumbnail,
-            optimizedForStreaming,
+        return Utils.enhancedHash(
+            id, key, duration,
+            file, size, container,
+            has64bitOffsets, hasThumbnail, optimizedForStreaming,
             videoProfile);
     }
     
@@ -322,32 +338,34 @@ public class GetRecentlyAddedLibraryPart {
                 "optimizedForStreaming", optimizedForStreaming,
                 "videoProfile", videoProfile);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Double> id = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<Double> duration = Optional.empty();
- 
+
         private Optional<String> file = Optional.empty();
- 
+
         private Optional<Double> size = Optional.empty();
- 
+
         private Optional<String> container = Optional.empty();
- 
+
         private Optional<Boolean> has64bitOffsets = Optional.empty();
- 
+
         private Optional<Double> hasThumbnail = Optional.empty();
- 
+
         private Optional<Boolean> optimizedForStreaming = Optional.empty();
- 
+
         private Optional<String> videoProfile = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder id(double id) {
             Utils.checkNotNull(id, "id");
@@ -361,6 +379,7 @@ public class GetRecentlyAddedLibraryPart {
             return this;
         }
 
+
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = Optional.ofNullable(key);
@@ -372,6 +391,7 @@ public class GetRecentlyAddedLibraryPart {
             this.key = key;
             return this;
         }
+
 
         public Builder duration(double duration) {
             Utils.checkNotNull(duration, "duration");
@@ -385,6 +405,7 @@ public class GetRecentlyAddedLibraryPart {
             return this;
         }
 
+
         public Builder file(String file) {
             Utils.checkNotNull(file, "file");
             this.file = Optional.ofNullable(file);
@@ -396,6 +417,7 @@ public class GetRecentlyAddedLibraryPart {
             this.file = file;
             return this;
         }
+
 
         public Builder size(double size) {
             Utils.checkNotNull(size, "size");
@@ -409,6 +431,7 @@ public class GetRecentlyAddedLibraryPart {
             return this;
         }
 
+
         public Builder container(String container) {
             Utils.checkNotNull(container, "container");
             this.container = Optional.ofNullable(container);
@@ -420,6 +443,7 @@ public class GetRecentlyAddedLibraryPart {
             this.container = container;
             return this;
         }
+
 
         public Builder has64bitOffsets(boolean has64bitOffsets) {
             Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
@@ -433,6 +457,7 @@ public class GetRecentlyAddedLibraryPart {
             return this;
         }
 
+
         public Builder hasThumbnail(double hasThumbnail) {
             Utils.checkNotNull(hasThumbnail, "hasThumbnail");
             this.hasThumbnail = Optional.ofNullable(hasThumbnail);
@@ -444,6 +469,7 @@ public class GetRecentlyAddedLibraryPart {
             this.hasThumbnail = hasThumbnail;
             return this;
         }
+
 
         public Builder optimizedForStreaming(boolean optimizedForStreaming) {
             Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
@@ -457,6 +483,7 @@ public class GetRecentlyAddedLibraryPart {
             return this;
         }
 
+
         public Builder videoProfile(String videoProfile) {
             Utils.checkNotNull(videoProfile, "videoProfile");
             this.videoProfile = Optional.ofNullable(videoProfile);
@@ -468,19 +495,15 @@ public class GetRecentlyAddedLibraryPart {
             this.videoProfile = videoProfile;
             return this;
         }
-        
+
         public GetRecentlyAddedLibraryPart build() {
+
             return new GetRecentlyAddedLibraryPart(
-                id,
-                key,
-                duration,
-                file,
-                size,
-                container,
-                has64bitOffsets,
-                hasThumbnail,
-                optimizedForStreaming,
+                id, key, duration,
+                file, size, container,
+                has64bitOffsets, hasThumbnail, optimizedForStreaming,
                 videoProfile);
         }
+
     }
 }

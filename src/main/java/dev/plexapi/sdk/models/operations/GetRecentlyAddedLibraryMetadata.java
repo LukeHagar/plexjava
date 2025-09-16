@@ -16,8 +16,8 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetRecentlyAddedLibraryMetadata {
 
@@ -25,125 +25,156 @@ public class GetRecentlyAddedLibraryMetadata {
     @JsonProperty("allowSync")
     private Optional<Boolean> allowSync;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionID")
     private Optional<Double> librarySectionID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionTitle")
     private Optional<String> librarySectionTitle;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionUUID")
     private Optional<String> librarySectionUUID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ratingKey")
     private Optional<Double> ratingKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("guid")
     private Optional<String> guid;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("studio")
     private Optional<String> studio;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
     private Optional<String> type;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contentRating")
     private Optional<String> contentRating;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("summary")
     private Optional<String> summary;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("rating")
     private Optional<Double> rating;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audienceRating")
     private Optional<Double> audienceRating;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("year")
     private Optional<Double> year;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tagline")
     private Optional<String> tagline;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
     private Optional<String> thumb;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("art")
     private Optional<String> art;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
     private Optional<Double> duration;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("originallyAvailableAt")
     private Optional<OffsetDateTime> originallyAvailableAt;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("addedAt")
     private Optional<Double> addedAt;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("updatedAt")
     private Optional<Double> updatedAt;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audienceRatingImage")
     private Optional<String> audienceRatingImage;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("chapterSource")
     private Optional<String> chapterSource;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("primaryExtraKey")
     private Optional<String> primaryExtraKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ratingImage")
     private Optional<String> ratingImage;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Media")
     private Optional<? extends List<GetRecentlyAddedLibraryMedia>> media;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Genre")
     private Optional<? extends List<GetRecentlyAddedLibraryGenre>> genre;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Director")
     private Optional<? extends List<GetRecentlyAddedLibraryDirector>> director;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Writer")
     private Optional<? extends List<GetRecentlyAddedLibraryWriter>> writer;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Country")
     private Optional<? extends List<GetRecentlyAddedLibraryCountry>> country;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Role")
@@ -250,7 +281,17 @@ public class GetRecentlyAddedLibraryMetadata {
     }
     
     public GetRecentlyAddedLibraryMetadata() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -419,15 +460,17 @@ public class GetRecentlyAddedLibraryMetadata {
         return (Optional<List<GetRecentlyAddedLibraryRole>>) role;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetRecentlyAddedLibraryMetadata withAllowSync(boolean allowSync) {
         Utils.checkNotNull(allowSync, "allowSync");
         this.allowSync = Optional.ofNullable(allowSync);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryMetadata withAllowSync(Optional<Boolean> allowSync) {
         Utils.checkNotNull(allowSync, "allowSync");
@@ -441,6 +484,7 @@ public class GetRecentlyAddedLibraryMetadata {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMetadata withLibrarySectionID(Optional<Double> librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
         this.librarySectionID = librarySectionID;
@@ -452,6 +496,7 @@ public class GetRecentlyAddedLibraryMetadata {
         this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryMetadata withLibrarySectionTitle(Optional<String> librarySectionTitle) {
         Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
@@ -465,6 +510,7 @@ public class GetRecentlyAddedLibraryMetadata {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMetadata withLibrarySectionUUID(Optional<String> librarySectionUUID) {
         Utils.checkNotNull(librarySectionUUID, "librarySectionUUID");
         this.librarySectionUUID = librarySectionUUID;
@@ -476,6 +522,7 @@ public class GetRecentlyAddedLibraryMetadata {
         this.ratingKey = Optional.ofNullable(ratingKey);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryMetadata withRatingKey(Optional<Double> ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
@@ -489,6 +536,7 @@ public class GetRecentlyAddedLibraryMetadata {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMetadata withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
@@ -500,6 +548,7 @@ public class GetRecentlyAddedLibraryMetadata {
         this.guid = Optional.ofNullable(guid);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryMetadata withGuid(Optional<String> guid) {
         Utils.checkNotNull(guid, "guid");
@@ -513,6 +562,7 @@ public class GetRecentlyAddedLibraryMetadata {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMetadata withStudio(Optional<String> studio) {
         Utils.checkNotNull(studio, "studio");
         this.studio = studio;
@@ -524,6 +574,7 @@ public class GetRecentlyAddedLibraryMetadata {
         this.type = Optional.ofNullable(type);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryMetadata withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
@@ -537,6 +588,7 @@ public class GetRecentlyAddedLibraryMetadata {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMetadata withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
@@ -548,6 +600,7 @@ public class GetRecentlyAddedLibraryMetadata {
         this.contentRating = Optional.ofNullable(contentRating);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryMetadata withContentRating(Optional<String> contentRating) {
         Utils.checkNotNull(contentRating, "contentRating");
@@ -561,6 +614,7 @@ public class GetRecentlyAddedLibraryMetadata {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMetadata withSummary(Optional<String> summary) {
         Utils.checkNotNull(summary, "summary");
         this.summary = summary;
@@ -572,6 +626,7 @@ public class GetRecentlyAddedLibraryMetadata {
         this.rating = Optional.ofNullable(rating);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryMetadata withRating(Optional<Double> rating) {
         Utils.checkNotNull(rating, "rating");
@@ -585,6 +640,7 @@ public class GetRecentlyAddedLibraryMetadata {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMetadata withAudienceRating(Optional<Double> audienceRating) {
         Utils.checkNotNull(audienceRating, "audienceRating");
         this.audienceRating = audienceRating;
@@ -596,6 +652,7 @@ public class GetRecentlyAddedLibraryMetadata {
         this.year = Optional.ofNullable(year);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryMetadata withYear(Optional<Double> year) {
         Utils.checkNotNull(year, "year");
@@ -609,6 +666,7 @@ public class GetRecentlyAddedLibraryMetadata {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMetadata withTagline(Optional<String> tagline) {
         Utils.checkNotNull(tagline, "tagline");
         this.tagline = tagline;
@@ -620,6 +678,7 @@ public class GetRecentlyAddedLibraryMetadata {
         this.thumb = Optional.ofNullable(thumb);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryMetadata withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -633,6 +692,7 @@ public class GetRecentlyAddedLibraryMetadata {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMetadata withArt(Optional<String> art) {
         Utils.checkNotNull(art, "art");
         this.art = art;
@@ -644,6 +704,7 @@ public class GetRecentlyAddedLibraryMetadata {
         this.duration = Optional.ofNullable(duration);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryMetadata withDuration(Optional<Double> duration) {
         Utils.checkNotNull(duration, "duration");
@@ -657,6 +718,7 @@ public class GetRecentlyAddedLibraryMetadata {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMetadata withOriginallyAvailableAt(Optional<OffsetDateTime> originallyAvailableAt) {
         Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
         this.originallyAvailableAt = originallyAvailableAt;
@@ -668,6 +730,7 @@ public class GetRecentlyAddedLibraryMetadata {
         this.addedAt = Optional.ofNullable(addedAt);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryMetadata withAddedAt(Optional<Double> addedAt) {
         Utils.checkNotNull(addedAt, "addedAt");
@@ -681,6 +744,7 @@ public class GetRecentlyAddedLibraryMetadata {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMetadata withUpdatedAt(Optional<Double> updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
         this.updatedAt = updatedAt;
@@ -692,6 +756,7 @@ public class GetRecentlyAddedLibraryMetadata {
         this.audienceRatingImage = Optional.ofNullable(audienceRatingImage);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryMetadata withAudienceRatingImage(Optional<String> audienceRatingImage) {
         Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
@@ -705,6 +770,7 @@ public class GetRecentlyAddedLibraryMetadata {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMetadata withChapterSource(Optional<String> chapterSource) {
         Utils.checkNotNull(chapterSource, "chapterSource");
         this.chapterSource = chapterSource;
@@ -716,6 +782,7 @@ public class GetRecentlyAddedLibraryMetadata {
         this.primaryExtraKey = Optional.ofNullable(primaryExtraKey);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryMetadata withPrimaryExtraKey(Optional<String> primaryExtraKey) {
         Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
@@ -729,6 +796,7 @@ public class GetRecentlyAddedLibraryMetadata {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMetadata withRatingImage(Optional<String> ratingImage) {
         Utils.checkNotNull(ratingImage, "ratingImage");
         this.ratingImage = ratingImage;
@@ -740,6 +808,7 @@ public class GetRecentlyAddedLibraryMetadata {
         this.media = Optional.ofNullable(media);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryMetadata withMedia(Optional<? extends List<GetRecentlyAddedLibraryMedia>> media) {
         Utils.checkNotNull(media, "media");
@@ -753,6 +822,7 @@ public class GetRecentlyAddedLibraryMetadata {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMetadata withGenre(Optional<? extends List<GetRecentlyAddedLibraryGenre>> genre) {
         Utils.checkNotNull(genre, "genre");
         this.genre = genre;
@@ -764,6 +834,7 @@ public class GetRecentlyAddedLibraryMetadata {
         this.director = Optional.ofNullable(director);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryMetadata withDirector(Optional<? extends List<GetRecentlyAddedLibraryDirector>> director) {
         Utils.checkNotNull(director, "director");
@@ -777,6 +848,7 @@ public class GetRecentlyAddedLibraryMetadata {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMetadata withWriter(Optional<? extends List<GetRecentlyAddedLibraryWriter>> writer) {
         Utils.checkNotNull(writer, "writer");
         this.writer = writer;
@@ -788,6 +860,7 @@ public class GetRecentlyAddedLibraryMetadata {
         this.country = Optional.ofNullable(country);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryMetadata withCountry(Optional<? extends List<GetRecentlyAddedLibraryCountry>> country) {
         Utils.checkNotNull(country, "country");
@@ -801,13 +874,13 @@ public class GetRecentlyAddedLibraryMetadata {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryMetadata withRole(Optional<? extends List<GetRecentlyAddedLibraryRole>> role) {
         Utils.checkNotNull(role, "role");
         this.role = role;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -818,75 +891,54 @@ public class GetRecentlyAddedLibraryMetadata {
         }
         GetRecentlyAddedLibraryMetadata other = (GetRecentlyAddedLibraryMetadata) o;
         return 
-            Objects.deepEquals(this.allowSync, other.allowSync) &&
-            Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
-            Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
-            Objects.deepEquals(this.librarySectionUUID, other.librarySectionUUID) &&
-            Objects.deepEquals(this.ratingKey, other.ratingKey) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.guid, other.guid) &&
-            Objects.deepEquals(this.studio, other.studio) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.contentRating, other.contentRating) &&
-            Objects.deepEquals(this.summary, other.summary) &&
-            Objects.deepEquals(this.rating, other.rating) &&
-            Objects.deepEquals(this.audienceRating, other.audienceRating) &&
-            Objects.deepEquals(this.year, other.year) &&
-            Objects.deepEquals(this.tagline, other.tagline) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.art, other.art) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.originallyAvailableAt, other.originallyAvailableAt) &&
-            Objects.deepEquals(this.addedAt, other.addedAt) &&
-            Objects.deepEquals(this.updatedAt, other.updatedAt) &&
-            Objects.deepEquals(this.audienceRatingImage, other.audienceRatingImage) &&
-            Objects.deepEquals(this.chapterSource, other.chapterSource) &&
-            Objects.deepEquals(this.primaryExtraKey, other.primaryExtraKey) &&
-            Objects.deepEquals(this.ratingImage, other.ratingImage) &&
-            Objects.deepEquals(this.media, other.media) &&
-            Objects.deepEquals(this.genre, other.genre) &&
-            Objects.deepEquals(this.director, other.director) &&
-            Objects.deepEquals(this.writer, other.writer) &&
-            Objects.deepEquals(this.country, other.country) &&
-            Objects.deepEquals(this.role, other.role);
+            Utils.enhancedDeepEquals(this.allowSync, other.allowSync) &&
+            Utils.enhancedDeepEquals(this.librarySectionID, other.librarySectionID) &&
+            Utils.enhancedDeepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
+            Utils.enhancedDeepEquals(this.librarySectionUUID, other.librarySectionUUID) &&
+            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.guid, other.guid) &&
+            Utils.enhancedDeepEquals(this.studio, other.studio) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.contentRating, other.contentRating) &&
+            Utils.enhancedDeepEquals(this.summary, other.summary) &&
+            Utils.enhancedDeepEquals(this.rating, other.rating) &&
+            Utils.enhancedDeepEquals(this.audienceRating, other.audienceRating) &&
+            Utils.enhancedDeepEquals(this.year, other.year) &&
+            Utils.enhancedDeepEquals(this.tagline, other.tagline) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.art, other.art) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.originallyAvailableAt, other.originallyAvailableAt) &&
+            Utils.enhancedDeepEquals(this.addedAt, other.addedAt) &&
+            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt) &&
+            Utils.enhancedDeepEquals(this.audienceRatingImage, other.audienceRatingImage) &&
+            Utils.enhancedDeepEquals(this.chapterSource, other.chapterSource) &&
+            Utils.enhancedDeepEquals(this.primaryExtraKey, other.primaryExtraKey) &&
+            Utils.enhancedDeepEquals(this.ratingImage, other.ratingImage) &&
+            Utils.enhancedDeepEquals(this.media, other.media) &&
+            Utils.enhancedDeepEquals(this.genre, other.genre) &&
+            Utils.enhancedDeepEquals(this.director, other.director) &&
+            Utils.enhancedDeepEquals(this.writer, other.writer) &&
+            Utils.enhancedDeepEquals(this.country, other.country) &&
+            Utils.enhancedDeepEquals(this.role, other.role);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            allowSync,
-            librarySectionID,
-            librarySectionTitle,
-            librarySectionUUID,
-            ratingKey,
-            key,
-            guid,
-            studio,
-            type,
-            title,
-            contentRating,
-            summary,
-            rating,
-            audienceRating,
-            year,
-            tagline,
-            thumb,
-            art,
-            duration,
-            originallyAvailableAt,
-            addedAt,
-            updatedAt,
-            audienceRatingImage,
-            chapterSource,
-            primaryExtraKey,
-            ratingImage,
-            media,
-            genre,
-            director,
-            writer,
-            country,
-            role);
+        return Utils.enhancedHash(
+            allowSync, librarySectionID, librarySectionTitle,
+            librarySectionUUID, ratingKey, key,
+            guid, studio, type,
+            title, contentRating, summary,
+            rating, audienceRating, year,
+            tagline, thumb, art,
+            duration, originallyAvailableAt, addedAt,
+            updatedAt, audienceRatingImage, chapterSource,
+            primaryExtraKey, ratingImage, media,
+            genre, director, writer,
+            country, role);
     }
     
     @Override
@@ -925,76 +977,78 @@ public class GetRecentlyAddedLibraryMetadata {
                 "country", country,
                 "role", role);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Boolean> allowSync = Optional.empty();
- 
+
         private Optional<Double> librarySectionID = Optional.empty();
- 
+
         private Optional<String> librarySectionTitle = Optional.empty();
- 
+
         private Optional<String> librarySectionUUID = Optional.empty();
- 
+
         private Optional<Double> ratingKey = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> guid = Optional.empty();
- 
+
         private Optional<String> studio = Optional.empty();
- 
+
         private Optional<String> type = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> contentRating = Optional.empty();
- 
+
         private Optional<String> summary = Optional.empty();
- 
+
         private Optional<Double> rating = Optional.empty();
- 
+
         private Optional<Double> audienceRating = Optional.empty();
- 
+
         private Optional<Double> year = Optional.empty();
- 
+
         private Optional<String> tagline = Optional.empty();
- 
+
         private Optional<String> thumb = Optional.empty();
- 
+
         private Optional<String> art = Optional.empty();
- 
+
         private Optional<Double> duration = Optional.empty();
- 
+
         private Optional<OffsetDateTime> originallyAvailableAt = Optional.empty();
- 
+
         private Optional<Double> addedAt = Optional.empty();
- 
+
         private Optional<Double> updatedAt = Optional.empty();
- 
+
         private Optional<String> audienceRatingImage = Optional.empty();
- 
+
         private Optional<String> chapterSource = Optional.empty();
- 
+
         private Optional<String> primaryExtraKey = Optional.empty();
- 
+
         private Optional<String> ratingImage = Optional.empty();
- 
+
         private Optional<? extends List<GetRecentlyAddedLibraryMedia>> media = Optional.empty();
- 
+
         private Optional<? extends List<GetRecentlyAddedLibraryGenre>> genre = Optional.empty();
- 
+
         private Optional<? extends List<GetRecentlyAddedLibraryDirector>> director = Optional.empty();
- 
+
         private Optional<? extends List<GetRecentlyAddedLibraryWriter>> writer = Optional.empty();
- 
+
         private Optional<? extends List<GetRecentlyAddedLibraryCountry>> country = Optional.empty();
- 
+
         private Optional<? extends List<GetRecentlyAddedLibraryRole>> role = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder allowSync(boolean allowSync) {
             Utils.checkNotNull(allowSync, "allowSync");
@@ -1008,6 +1062,7 @@ public class GetRecentlyAddedLibraryMetadata {
             return this;
         }
 
+
         public Builder librarySectionID(double librarySectionID) {
             Utils.checkNotNull(librarySectionID, "librarySectionID");
             this.librarySectionID = Optional.ofNullable(librarySectionID);
@@ -1019,6 +1074,7 @@ public class GetRecentlyAddedLibraryMetadata {
             this.librarySectionID = librarySectionID;
             return this;
         }
+
 
         public Builder librarySectionTitle(String librarySectionTitle) {
             Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
@@ -1032,6 +1088,7 @@ public class GetRecentlyAddedLibraryMetadata {
             return this;
         }
 
+
         public Builder librarySectionUUID(String librarySectionUUID) {
             Utils.checkNotNull(librarySectionUUID, "librarySectionUUID");
             this.librarySectionUUID = Optional.ofNullable(librarySectionUUID);
@@ -1043,6 +1100,7 @@ public class GetRecentlyAddedLibraryMetadata {
             this.librarySectionUUID = librarySectionUUID;
             return this;
         }
+
 
         public Builder ratingKey(double ratingKey) {
             Utils.checkNotNull(ratingKey, "ratingKey");
@@ -1056,6 +1114,7 @@ public class GetRecentlyAddedLibraryMetadata {
             return this;
         }
 
+
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = Optional.ofNullable(key);
@@ -1067,6 +1126,7 @@ public class GetRecentlyAddedLibraryMetadata {
             this.key = key;
             return this;
         }
+
 
         public Builder guid(String guid) {
             Utils.checkNotNull(guid, "guid");
@@ -1080,6 +1140,7 @@ public class GetRecentlyAddedLibraryMetadata {
             return this;
         }
 
+
         public Builder studio(String studio) {
             Utils.checkNotNull(studio, "studio");
             this.studio = Optional.ofNullable(studio);
@@ -1091,6 +1152,7 @@ public class GetRecentlyAddedLibraryMetadata {
             this.studio = studio;
             return this;
         }
+
 
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
@@ -1104,6 +1166,7 @@ public class GetRecentlyAddedLibraryMetadata {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -1115,6 +1178,7 @@ public class GetRecentlyAddedLibraryMetadata {
             this.title = title;
             return this;
         }
+
 
         public Builder contentRating(String contentRating) {
             Utils.checkNotNull(contentRating, "contentRating");
@@ -1128,6 +1192,7 @@ public class GetRecentlyAddedLibraryMetadata {
             return this;
         }
 
+
         public Builder summary(String summary) {
             Utils.checkNotNull(summary, "summary");
             this.summary = Optional.ofNullable(summary);
@@ -1139,6 +1204,7 @@ public class GetRecentlyAddedLibraryMetadata {
             this.summary = summary;
             return this;
         }
+
 
         public Builder rating(double rating) {
             Utils.checkNotNull(rating, "rating");
@@ -1152,6 +1218,7 @@ public class GetRecentlyAddedLibraryMetadata {
             return this;
         }
 
+
         public Builder audienceRating(double audienceRating) {
             Utils.checkNotNull(audienceRating, "audienceRating");
             this.audienceRating = Optional.ofNullable(audienceRating);
@@ -1163,6 +1230,7 @@ public class GetRecentlyAddedLibraryMetadata {
             this.audienceRating = audienceRating;
             return this;
         }
+
 
         public Builder year(double year) {
             Utils.checkNotNull(year, "year");
@@ -1176,6 +1244,7 @@ public class GetRecentlyAddedLibraryMetadata {
             return this;
         }
 
+
         public Builder tagline(String tagline) {
             Utils.checkNotNull(tagline, "tagline");
             this.tagline = Optional.ofNullable(tagline);
@@ -1187,6 +1256,7 @@ public class GetRecentlyAddedLibraryMetadata {
             this.tagline = tagline;
             return this;
         }
+
 
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -1200,6 +1270,7 @@ public class GetRecentlyAddedLibraryMetadata {
             return this;
         }
 
+
         public Builder art(String art) {
             Utils.checkNotNull(art, "art");
             this.art = Optional.ofNullable(art);
@@ -1211,6 +1282,7 @@ public class GetRecentlyAddedLibraryMetadata {
             this.art = art;
             return this;
         }
+
 
         public Builder duration(double duration) {
             Utils.checkNotNull(duration, "duration");
@@ -1224,6 +1296,7 @@ public class GetRecentlyAddedLibraryMetadata {
             return this;
         }
 
+
         public Builder originallyAvailableAt(OffsetDateTime originallyAvailableAt) {
             Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
             this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
@@ -1235,6 +1308,7 @@ public class GetRecentlyAddedLibraryMetadata {
             this.originallyAvailableAt = originallyAvailableAt;
             return this;
         }
+
 
         public Builder addedAt(double addedAt) {
             Utils.checkNotNull(addedAt, "addedAt");
@@ -1248,6 +1322,7 @@ public class GetRecentlyAddedLibraryMetadata {
             return this;
         }
 
+
         public Builder updatedAt(double updatedAt) {
             Utils.checkNotNull(updatedAt, "updatedAt");
             this.updatedAt = Optional.ofNullable(updatedAt);
@@ -1259,6 +1334,7 @@ public class GetRecentlyAddedLibraryMetadata {
             this.updatedAt = updatedAt;
             return this;
         }
+
 
         public Builder audienceRatingImage(String audienceRatingImage) {
             Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
@@ -1272,6 +1348,7 @@ public class GetRecentlyAddedLibraryMetadata {
             return this;
         }
 
+
         public Builder chapterSource(String chapterSource) {
             Utils.checkNotNull(chapterSource, "chapterSource");
             this.chapterSource = Optional.ofNullable(chapterSource);
@@ -1283,6 +1360,7 @@ public class GetRecentlyAddedLibraryMetadata {
             this.chapterSource = chapterSource;
             return this;
         }
+
 
         public Builder primaryExtraKey(String primaryExtraKey) {
             Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
@@ -1296,6 +1374,7 @@ public class GetRecentlyAddedLibraryMetadata {
             return this;
         }
 
+
         public Builder ratingImage(String ratingImage) {
             Utils.checkNotNull(ratingImage, "ratingImage");
             this.ratingImage = Optional.ofNullable(ratingImage);
@@ -1307,6 +1386,7 @@ public class GetRecentlyAddedLibraryMetadata {
             this.ratingImage = ratingImage;
             return this;
         }
+
 
         public Builder media(List<GetRecentlyAddedLibraryMedia> media) {
             Utils.checkNotNull(media, "media");
@@ -1320,6 +1400,7 @@ public class GetRecentlyAddedLibraryMetadata {
             return this;
         }
 
+
         public Builder genre(List<GetRecentlyAddedLibraryGenre> genre) {
             Utils.checkNotNull(genre, "genre");
             this.genre = Optional.ofNullable(genre);
@@ -1331,6 +1412,7 @@ public class GetRecentlyAddedLibraryMetadata {
             this.genre = genre;
             return this;
         }
+
 
         public Builder director(List<GetRecentlyAddedLibraryDirector> director) {
             Utils.checkNotNull(director, "director");
@@ -1344,6 +1426,7 @@ public class GetRecentlyAddedLibraryMetadata {
             return this;
         }
 
+
         public Builder writer(List<GetRecentlyAddedLibraryWriter> writer) {
             Utils.checkNotNull(writer, "writer");
             this.writer = Optional.ofNullable(writer);
@@ -1355,6 +1438,7 @@ public class GetRecentlyAddedLibraryMetadata {
             this.writer = writer;
             return this;
         }
+
 
         public Builder country(List<GetRecentlyAddedLibraryCountry> country) {
             Utils.checkNotNull(country, "country");
@@ -1368,6 +1452,7 @@ public class GetRecentlyAddedLibraryMetadata {
             return this;
         }
 
+
         public Builder role(List<GetRecentlyAddedLibraryRole> role) {
             Utils.checkNotNull(role, "role");
             this.role = Optional.ofNullable(role);
@@ -1379,41 +1464,22 @@ public class GetRecentlyAddedLibraryMetadata {
             this.role = role;
             return this;
         }
-        
+
         public GetRecentlyAddedLibraryMetadata build() {
+
             return new GetRecentlyAddedLibraryMetadata(
-                allowSync,
-                librarySectionID,
-                librarySectionTitle,
-                librarySectionUUID,
-                ratingKey,
-                key,
-                guid,
-                studio,
-                type,
-                title,
-                contentRating,
-                summary,
-                rating,
-                audienceRating,
-                year,
-                tagline,
-                thumb,
-                art,
-                duration,
-                originallyAvailableAt,
-                addedAt,
-                updatedAt,
-                audienceRatingImage,
-                chapterSource,
-                primaryExtraKey,
-                ratingImage,
-                media,
-                genre,
-                director,
-                writer,
-                country,
-                role);
+                allowSync, librarySectionID, librarySectionTitle,
+                librarySectionUUID, ratingKey, key,
+                guid, studio, type,
+                title, contentRating, summary,
+                rating, audienceRating, year,
+                tagline, thumb, art,
+                duration, originallyAvailableAt, addedAt,
+                updatedAt, audienceRatingImage, chapterSource,
+                primaryExtraKey, ratingImage, media,
+                genre, director, writer,
+                country, role);
         }
+
     }
 }

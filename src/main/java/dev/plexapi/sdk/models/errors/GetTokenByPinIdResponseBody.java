@@ -16,7 +16,6 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -42,6 +41,7 @@ public class GetTokenByPinIdResponseBody extends RuntimeException {
     public GetTokenByPinIdResponseBody(
             @JsonProperty("errors") Optional<? extends List<GetTokenByPinIdPlexErrors>> errors,
             @JsonProperty("RawResponse") Optional<? extends HttpResponse<InputStream>> rawResponse) {
+        super("API error occurred");
         Utils.checkNotNull(errors, "errors");
         Utils.checkNotNull(rawResponse, "rawResponse");
         this.errors = errors;
@@ -67,15 +67,17 @@ public class GetTokenByPinIdResponseBody extends RuntimeException {
         return (Optional<HttpResponse<InputStream>>) rawResponse;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetTokenByPinIdResponseBody withErrors(List<GetTokenByPinIdPlexErrors> errors) {
         Utils.checkNotNull(errors, "errors");
         this.errors = Optional.ofNullable(errors);
         return this;
     }
+
 
     public GetTokenByPinIdResponseBody withErrors(Optional<? extends List<GetTokenByPinIdPlexErrors>> errors) {
         Utils.checkNotNull(errors, "errors");
@@ -92,6 +94,7 @@ public class GetTokenByPinIdResponseBody extends RuntimeException {
         return this;
     }
 
+
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
@@ -101,7 +104,6 @@ public class GetTokenByPinIdResponseBody extends RuntimeException {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -112,15 +114,14 @@ public class GetTokenByPinIdResponseBody extends RuntimeException {
         }
         GetTokenByPinIdResponseBody other = (GetTokenByPinIdResponseBody) o;
         return 
-            Objects.deepEquals(this.errors, other.errors) &&
-            Objects.deepEquals(this.rawResponse, other.rawResponse);
+            Utils.enhancedDeepEquals(this.errors, other.errors) &&
+            Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            errors,
-            rawResponse);
+        return Utils.enhancedHash(
+            errors, rawResponse);
     }
     
     @Override
@@ -129,16 +130,18 @@ public class GetTokenByPinIdResponseBody extends RuntimeException {
                 "errors", errors,
                 "rawResponse", rawResponse);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends List<GetTokenByPinIdPlexErrors>> errors = Optional.empty();
- 
+
         private Optional<? extends HttpResponse<InputStream>> rawResponse;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder errors(List<GetTokenByPinIdPlexErrors> errors) {
             Utils.checkNotNull(errors, "errors");
@@ -151,6 +154,7 @@ public class GetTokenByPinIdResponseBody extends RuntimeException {
             this.errors = errors;
             return this;
         }
+
 
         /**
          * Raw HTTP response; suitable for custom response parsing
@@ -169,12 +173,13 @@ public class GetTokenByPinIdResponseBody extends RuntimeException {
             this.rawResponse = rawResponse;
             return this;
         }
-        
+
         public GetTokenByPinIdResponseBody build() {
+
             return new GetTokenByPinIdResponseBody(
-                errors,
-                rawResponse);
+                errors, rawResponse);
         }
+
     }
 }
 

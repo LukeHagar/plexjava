@@ -14,34 +14,41 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetRecentlyAddedType {
 
     @JsonProperty("key")
     private String key;
 
+
     @JsonProperty("type")
     private String type;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("subtype")
     private Optional<String> subtype;
 
+
     @JsonProperty("title")
     private String title;
 
+
     @JsonProperty("active")
     private boolean active;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Filter")
     private Optional<? extends List<GetRecentlyAddedFilter>> filter;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Sort")
     private Optional<? extends List<GetRecentlyAddedSort>> sort;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Field")
@@ -80,7 +87,9 @@ public class GetRecentlyAddedType {
             String type,
             String title,
             boolean active) {
-        this(key, type, Optional.empty(), title, active, Optional.empty(), Optional.empty(), Optional.empty());
+        this(key, type, Optional.empty(),
+            title, active, Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -126,9 +135,10 @@ public class GetRecentlyAddedType {
         return (Optional<List<GetRecentlyAddedField>>) field;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetRecentlyAddedType withKey(String key) {
         Utils.checkNotNull(key, "key");
@@ -147,6 +157,7 @@ public class GetRecentlyAddedType {
         this.subtype = Optional.ofNullable(subtype);
         return this;
     }
+
 
     public GetRecentlyAddedType withSubtype(Optional<String> subtype) {
         Utils.checkNotNull(subtype, "subtype");
@@ -172,6 +183,7 @@ public class GetRecentlyAddedType {
         return this;
     }
 
+
     public GetRecentlyAddedType withFilter(Optional<? extends List<GetRecentlyAddedFilter>> filter) {
         Utils.checkNotNull(filter, "filter");
         this.filter = filter;
@@ -183,6 +195,7 @@ public class GetRecentlyAddedType {
         this.sort = Optional.ofNullable(sort);
         return this;
     }
+
 
     public GetRecentlyAddedType withSort(Optional<? extends List<GetRecentlyAddedSort>> sort) {
         Utils.checkNotNull(sort, "sort");
@@ -196,13 +209,13 @@ public class GetRecentlyAddedType {
         return this;
     }
 
+
     public GetRecentlyAddedType withField(Optional<? extends List<GetRecentlyAddedField>> field) {
         Utils.checkNotNull(field, "field");
         this.field = field;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -213,27 +226,22 @@ public class GetRecentlyAddedType {
         }
         GetRecentlyAddedType other = (GetRecentlyAddedType) o;
         return 
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.subtype, other.subtype) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.active, other.active) &&
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.sort, other.sort) &&
-            Objects.deepEquals(this.field, other.field);
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.subtype, other.subtype) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.active, other.active) &&
+            Utils.enhancedDeepEquals(this.filter, other.filter) &&
+            Utils.enhancedDeepEquals(this.sort, other.sort) &&
+            Utils.enhancedDeepEquals(this.field, other.field);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            key,
-            type,
-            subtype,
-            title,
-            active,
-            filter,
-            sort,
-            field);
+        return Utils.enhancedHash(
+            key, type, subtype,
+            title, active, filter,
+            sort, field);
     }
     
     @Override
@@ -248,28 +256,30 @@ public class GetRecentlyAddedType {
                 "sort", sort,
                 "field", field);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String key;
- 
+
         private String type;
- 
+
         private Optional<String> subtype = Optional.empty();
- 
+
         private String title;
- 
+
         private Boolean active;
- 
+
         private Optional<? extends List<GetRecentlyAddedFilter>> filter = Optional.empty();
- 
+
         private Optional<? extends List<GetRecentlyAddedSort>> sort = Optional.empty();
- 
+
         private Optional<? extends List<GetRecentlyAddedField>> field = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
@@ -277,11 +287,13 @@ public class GetRecentlyAddedType {
             return this;
         }
 
+
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
         }
+
 
         public Builder subtype(String subtype) {
             Utils.checkNotNull(subtype, "subtype");
@@ -295,17 +307,20 @@ public class GetRecentlyAddedType {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = title;
             return this;
         }
 
+
         public Builder active(boolean active) {
             Utils.checkNotNull(active, "active");
             this.active = active;
             return this;
         }
+
 
         public Builder filter(List<GetRecentlyAddedFilter> filter) {
             Utils.checkNotNull(filter, "filter");
@@ -319,6 +334,7 @@ public class GetRecentlyAddedType {
             return this;
         }
 
+
         public Builder sort(List<GetRecentlyAddedSort> sort) {
             Utils.checkNotNull(sort, "sort");
             this.sort = Optional.ofNullable(sort);
@@ -331,6 +347,7 @@ public class GetRecentlyAddedType {
             return this;
         }
 
+
         public Builder field(List<GetRecentlyAddedField> field) {
             Utils.checkNotNull(field, "field");
             this.field = Optional.ofNullable(field);
@@ -342,17 +359,14 @@ public class GetRecentlyAddedType {
             this.field = field;
             return this;
         }
-        
+
         public GetRecentlyAddedType build() {
+
             return new GetRecentlyAddedType(
-                key,
-                type,
-                subtype,
-                title,
-                active,
-                filter,
-                sort,
-                field);
+                key, type, subtype,
+                title, active, filter,
+                sort, field);
         }
+
     }
 }

@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetStatistics;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.Long;
@@ -11,10 +15,10 @@ import java.util.Optional;
 public class GetStatisticsRequestBuilder {
 
     private Optional<Long> timespan = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallGetStatistics sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetStatisticsRequestBuilder(SDKMethodInterfaces.MethodCallGetStatistics sdk) {
-        this.sdk = sdk;
+    public GetStatisticsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
                 
     public GetStatisticsRequestBuilder timespan(long timespan) {
@@ -29,9 +33,20 @@ public class GetStatisticsRequestBuilder {
         return this;
     }
 
-    public GetStatisticsResponse call() throws Exception {
 
-        return sdk.getStatistics(
-            timespan);
+    private GetStatisticsRequest buildRequest() {
+
+        GetStatisticsRequest request = new GetStatisticsRequest(timespan);
+
+        return request;
+    }
+
+    public GetStatisticsResponse call() throws Exception {
+        
+        RequestOperation<GetStatisticsRequest, GetStatisticsResponse> operation
+              = new GetStatistics.Sync(sdkConfiguration);
+        GetStatisticsRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

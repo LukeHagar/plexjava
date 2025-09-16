@@ -10,24 +10,27 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetThumbImageRequest {
-
     /**
      * the id of the library item to return the children of.
      */
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=ratingKey")
     private long ratingKey;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=width")
     private long width;
+
 
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=height")
     private long height;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=minSize")
     private long minSize;
+
 
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=upscale")
     private long upscale;
@@ -96,9 +99,10 @@ public class GetThumbImageRequest {
         return xPlexToken;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * the id of the library item to return the children of.
@@ -142,7 +146,6 @@ public class GetThumbImageRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -153,23 +156,19 @@ public class GetThumbImageRequest {
         }
         GetThumbImageRequest other = (GetThumbImageRequest) o;
         return 
-            Objects.deepEquals(this.ratingKey, other.ratingKey) &&
-            Objects.deepEquals(this.width, other.width) &&
-            Objects.deepEquals(this.height, other.height) &&
-            Objects.deepEquals(this.minSize, other.minSize) &&
-            Objects.deepEquals(this.upscale, other.upscale) &&
-            Objects.deepEquals(this.xPlexToken, other.xPlexToken);
+            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey) &&
+            Utils.enhancedDeepEquals(this.width, other.width) &&
+            Utils.enhancedDeepEquals(this.height, other.height) &&
+            Utils.enhancedDeepEquals(this.minSize, other.minSize) &&
+            Utils.enhancedDeepEquals(this.upscale, other.upscale) &&
+            Utils.enhancedDeepEquals(this.xPlexToken, other.xPlexToken);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            ratingKey,
-            width,
-            height,
-            minSize,
-            upscale,
-            xPlexToken);
+        return Utils.enhancedHash(
+            ratingKey, width, height,
+            minSize, upscale, xPlexToken);
     }
     
     @Override
@@ -182,24 +181,26 @@ public class GetThumbImageRequest {
                 "upscale", upscale,
                 "xPlexToken", xPlexToken);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Long ratingKey;
- 
+
         private Long width;
- 
+
         private Long height;
- 
+
         private Long minSize;
- 
+
         private Long upscale;
- 
+
         private String xPlexToken;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * the id of the library item to return the children of.
@@ -210,11 +211,13 @@ public class GetThumbImageRequest {
             return this;
         }
 
+
         public Builder width(long width) {
             Utils.checkNotNull(width, "width");
             this.width = width;
             return this;
         }
+
 
         public Builder height(long height) {
             Utils.checkNotNull(height, "height");
@@ -222,17 +225,20 @@ public class GetThumbImageRequest {
             return this;
         }
 
+
         public Builder minSize(long minSize) {
             Utils.checkNotNull(minSize, "minSize");
             this.minSize = minSize;
             return this;
         }
 
+
         public Builder upscale(long upscale) {
             Utils.checkNotNull(upscale, "upscale");
             this.upscale = upscale;
             return this;
         }
+
 
         /**
          * An authentication token, obtained from plex.tv
@@ -242,15 +248,13 @@ public class GetThumbImageRequest {
             this.xPlexToken = xPlexToken;
             return this;
         }
-        
+
         public GetThumbImageRequest build() {
+
             return new GetThumbImageRequest(
-                ratingKey,
-                width,
-                height,
-                minSize,
-                upscale,
-                xPlexToken);
+                ratingKey, width, height,
+                minSize, upscale, xPlexToken);
         }
+
     }
 }

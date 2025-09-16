@@ -13,11 +13,10 @@ import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetLibrarySectionsAllRequest {
 
+public class GetLibrarySectionsAllRequest {
     /**
      * The unique key of the Plex library. 
      * Note: This is unique in the context of the Plex server.
@@ -48,11 +47,14 @@ public class GetLibrarySectionsAllRequest {
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeGuids")
     private Optional<? extends QueryParamIncludeGuids> includeGuids;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeAdvanced")
     private Optional<? extends IncludeAdvanced> includeAdvanced;
 
+
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeCollections")
     private Optional<? extends QueryParamIncludeCollections> includeCollections;
+
 
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeExternalMedia")
     private Optional<? extends QueryParamIncludeExternalMedia> includeExternalMedia;
@@ -107,7 +109,9 @@ public class GetLibrarySectionsAllRequest {
     public GetLibrarySectionsAllRequest(
             int sectionKey,
             GetLibrarySectionsAllQueryParamType type) {
-        this(sectionKey, type, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(sectionKey, type, Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -188,9 +192,10 @@ public class GetLibrarySectionsAllRequest {
         return xPlexContainerSize;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The unique key of the Plex library. 
@@ -225,6 +230,7 @@ public class GetLibrarySectionsAllRequest {
         return this;
     }
 
+
     /**
      * Adds the Meta object to the response
      */
@@ -243,6 +249,7 @@ public class GetLibrarySectionsAllRequest {
         return this;
     }
 
+
     /**
      * Adds the Guid object to the response
      */
@@ -258,6 +265,7 @@ public class GetLibrarySectionsAllRequest {
         return this;
     }
 
+
     public GetLibrarySectionsAllRequest withIncludeAdvanced(Optional<? extends IncludeAdvanced> includeAdvanced) {
         Utils.checkNotNull(includeAdvanced, "includeAdvanced");
         this.includeAdvanced = includeAdvanced;
@@ -270,6 +278,7 @@ public class GetLibrarySectionsAllRequest {
         return this;
     }
 
+
     public GetLibrarySectionsAllRequest withIncludeCollections(Optional<? extends QueryParamIncludeCollections> includeCollections) {
         Utils.checkNotNull(includeCollections, "includeCollections");
         this.includeCollections = includeCollections;
@@ -281,6 +290,7 @@ public class GetLibrarySectionsAllRequest {
         this.includeExternalMedia = Optional.ofNullable(includeExternalMedia);
         return this;
     }
+
 
     public GetLibrarySectionsAllRequest withIncludeExternalMedia(Optional<? extends QueryParamIncludeExternalMedia> includeExternalMedia) {
         Utils.checkNotNull(includeExternalMedia, "includeExternalMedia");
@@ -298,6 +308,7 @@ public class GetLibrarySectionsAllRequest {
         this.xPlexContainerStart = Optional.ofNullable(xPlexContainerStart);
         return this;
     }
+
 
     /**
      * The index of the first item to return. If not specified, the first item will be returned.
@@ -321,6 +332,7 @@ public class GetLibrarySectionsAllRequest {
         return this;
     }
 
+
     /**
      * The number of items to return. If not specified, all items will be returned.
      * If the number of items exceeds the limit, the response will be paginated.
@@ -332,7 +344,6 @@ public class GetLibrarySectionsAllRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -343,29 +354,23 @@ public class GetLibrarySectionsAllRequest {
         }
         GetLibrarySectionsAllRequest other = (GetLibrarySectionsAllRequest) o;
         return 
-            Objects.deepEquals(this.sectionKey, other.sectionKey) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.includeMeta, other.includeMeta) &&
-            Objects.deepEquals(this.includeGuids, other.includeGuids) &&
-            Objects.deepEquals(this.includeAdvanced, other.includeAdvanced) &&
-            Objects.deepEquals(this.includeCollections, other.includeCollections) &&
-            Objects.deepEquals(this.includeExternalMedia, other.includeExternalMedia) &&
-            Objects.deepEquals(this.xPlexContainerStart, other.xPlexContainerStart) &&
-            Objects.deepEquals(this.xPlexContainerSize, other.xPlexContainerSize);
+            Utils.enhancedDeepEquals(this.sectionKey, other.sectionKey) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.includeMeta, other.includeMeta) &&
+            Utils.enhancedDeepEquals(this.includeGuids, other.includeGuids) &&
+            Utils.enhancedDeepEquals(this.includeAdvanced, other.includeAdvanced) &&
+            Utils.enhancedDeepEquals(this.includeCollections, other.includeCollections) &&
+            Utils.enhancedDeepEquals(this.includeExternalMedia, other.includeExternalMedia) &&
+            Utils.enhancedDeepEquals(this.xPlexContainerStart, other.xPlexContainerStart) &&
+            Utils.enhancedDeepEquals(this.xPlexContainerSize, other.xPlexContainerSize);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            sectionKey,
-            type,
-            includeMeta,
-            includeGuids,
-            includeAdvanced,
-            includeCollections,
-            includeExternalMedia,
-            xPlexContainerStart,
-            xPlexContainerSize);
+        return Utils.enhancedHash(
+            sectionKey, type, includeMeta,
+            includeGuids, includeAdvanced, includeCollections,
+            includeExternalMedia, xPlexContainerStart, xPlexContainerSize);
     }
     
     @Override
@@ -381,30 +386,32 @@ public class GetLibrarySectionsAllRequest {
                 "xPlexContainerStart", xPlexContainerStart,
                 "xPlexContainerSize", xPlexContainerSize);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer sectionKey;
- 
+
         private GetLibrarySectionsAllQueryParamType type;
- 
+
         private Optional<? extends GetLibrarySectionsAllQueryParamIncludeMeta> includeMeta;
- 
+
         private Optional<? extends QueryParamIncludeGuids> includeGuids;
- 
+
         private Optional<? extends IncludeAdvanced> includeAdvanced;
- 
+
         private Optional<? extends QueryParamIncludeCollections> includeCollections;
- 
+
         private Optional<? extends QueryParamIncludeExternalMedia> includeExternalMedia;
- 
+
         private Optional<Integer> xPlexContainerStart;
- 
+
         private Optional<Integer> xPlexContainerSize;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The unique key of the Plex library. 
@@ -415,6 +422,7 @@ public class GetLibrarySectionsAllRequest {
             this.sectionKey = sectionKey;
             return this;
         }
+
 
         /**
          * The type of media to retrieve or filter by.
@@ -429,6 +437,7 @@ public class GetLibrarySectionsAllRequest {
             this.type = type;
             return this;
         }
+
 
         /**
          * Adds the Meta object to the response
@@ -448,6 +457,7 @@ public class GetLibrarySectionsAllRequest {
             return this;
         }
 
+
         /**
          * Adds the Guid object to the response
          */
@@ -466,6 +476,7 @@ public class GetLibrarySectionsAllRequest {
             return this;
         }
 
+
         public Builder includeAdvanced(IncludeAdvanced includeAdvanced) {
             Utils.checkNotNull(includeAdvanced, "includeAdvanced");
             this.includeAdvanced = Optional.ofNullable(includeAdvanced);
@@ -477,6 +488,7 @@ public class GetLibrarySectionsAllRequest {
             this.includeAdvanced = includeAdvanced;
             return this;
         }
+
 
         public Builder includeCollections(QueryParamIncludeCollections includeCollections) {
             Utils.checkNotNull(includeCollections, "includeCollections");
@@ -490,6 +502,7 @@ public class GetLibrarySectionsAllRequest {
             return this;
         }
 
+
         public Builder includeExternalMedia(QueryParamIncludeExternalMedia includeExternalMedia) {
             Utils.checkNotNull(includeExternalMedia, "includeExternalMedia");
             this.includeExternalMedia = Optional.ofNullable(includeExternalMedia);
@@ -501,6 +514,7 @@ public class GetLibrarySectionsAllRequest {
             this.includeExternalMedia = includeExternalMedia;
             return this;
         }
+
 
         /**
          * The index of the first item to return. If not specified, the first item will be returned.
@@ -524,6 +538,7 @@ public class GetLibrarySectionsAllRequest {
             return this;
         }
 
+
         /**
          * The number of items to return. If not specified, all items will be returned.
          * If the number of items exceeds the limit, the response will be paginated.
@@ -545,7 +560,7 @@ public class GetLibrarySectionsAllRequest {
             this.xPlexContainerSize = xPlexContainerSize;
             return this;
         }
-        
+
         public GetLibrarySectionsAllRequest build() {
             if (includeMeta == null) {
                 includeMeta = _SINGLETON_VALUE_IncludeMeta.value();
@@ -568,17 +583,13 @@ public class GetLibrarySectionsAllRequest {
             if (xPlexContainerSize == null) {
                 xPlexContainerSize = _SINGLETON_VALUE_XPlexContainerSize.value();
             }
+
             return new GetLibrarySectionsAllRequest(
-                sectionKey,
-                type,
-                includeMeta,
-                includeGuids,
-                includeAdvanced,
-                includeCollections,
-                includeExternalMedia,
-                xPlexContainerStart,
-                xPlexContainerSize);
+                sectionKey, type, includeMeta,
+                includeGuids, includeAdvanced, includeCollections,
+                includeExternalMedia, xPlexContainerStart, xPlexContainerSize);
         }
+
 
         private static final LazySingletonValue<Optional<? extends GetLibrarySectionsAllQueryParamIncludeMeta>> _SINGLETON_VALUE_IncludeMeta =
                 new LazySingletonValue<>(

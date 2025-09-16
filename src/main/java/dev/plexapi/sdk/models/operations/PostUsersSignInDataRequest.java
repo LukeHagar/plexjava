@@ -10,11 +10,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
-public class PostUsersSignInDataRequest {
 
+public class PostUsersSignInDataRequest {
     /**
      * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
      */
@@ -75,7 +74,8 @@ public class PostUsersSignInDataRequest {
     
     public PostUsersSignInDataRequest(
             String clientID) {
-        this(clientID, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(clientID, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -127,9 +127,10 @@ public class PostUsersSignInDataRequest {
         return (Optional<PostUsersSignInDataRequestBody>) requestBody;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
@@ -149,6 +150,7 @@ public class PostUsersSignInDataRequest {
         return this;
     }
 
+
     /**
      * The name of the client application. (Plex Web, Plex Media Server, etc.)
      */
@@ -166,6 +168,7 @@ public class PostUsersSignInDataRequest {
         this.deviceNickname = Optional.ofNullable(deviceNickname);
         return this;
     }
+
 
     /**
      * A relatively friendly name for the client device
@@ -185,6 +188,7 @@ public class PostUsersSignInDataRequest {
         return this;
     }
 
+
     /**
      * The version of the client application.
      */
@@ -202,6 +206,7 @@ public class PostUsersSignInDataRequest {
         this.platform = Optional.ofNullable(platform);
         return this;
     }
+
 
     /**
      * The platform of the client application.
@@ -221,6 +226,7 @@ public class PostUsersSignInDataRequest {
         return this;
     }
 
+
     /**
      * Login credentials
      */
@@ -230,7 +236,6 @@ public class PostUsersSignInDataRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -241,23 +246,19 @@ public class PostUsersSignInDataRequest {
         }
         PostUsersSignInDataRequest other = (PostUsersSignInDataRequest) o;
         return 
-            Objects.deepEquals(this.clientID, other.clientID) &&
-            Objects.deepEquals(this.clientName, other.clientName) &&
-            Objects.deepEquals(this.deviceNickname, other.deviceNickname) &&
-            Objects.deepEquals(this.clientVersion, other.clientVersion) &&
-            Objects.deepEquals(this.platform, other.platform) &&
-            Objects.deepEquals(this.requestBody, other.requestBody);
+            Utils.enhancedDeepEquals(this.clientID, other.clientID) &&
+            Utils.enhancedDeepEquals(this.clientName, other.clientName) &&
+            Utils.enhancedDeepEquals(this.deviceNickname, other.deviceNickname) &&
+            Utils.enhancedDeepEquals(this.clientVersion, other.clientVersion) &&
+            Utils.enhancedDeepEquals(this.platform, other.platform) &&
+            Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            clientID,
-            clientName,
-            deviceNickname,
-            clientVersion,
-            platform,
-            requestBody);
+        return Utils.enhancedHash(
+            clientID, clientName, deviceNickname,
+            clientVersion, platform, requestBody);
     }
     
     @Override
@@ -270,24 +271,26 @@ public class PostUsersSignInDataRequest {
                 "platform", platform,
                 "requestBody", requestBody);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String clientID;
- 
+
         private Optional<String> clientName = Optional.empty();
- 
+
         private Optional<String> deviceNickname = Optional.empty();
- 
+
         private Optional<String> clientVersion = Optional.empty();
- 
+
         private Optional<String> platform = Optional.empty();
- 
+
         private Optional<? extends PostUsersSignInDataRequestBody> requestBody = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
@@ -297,6 +300,7 @@ public class PostUsersSignInDataRequest {
             this.clientID = clientID;
             return this;
         }
+
 
         /**
          * The name of the client application. (Plex Web, Plex Media Server, etc.)
@@ -316,6 +320,7 @@ public class PostUsersSignInDataRequest {
             return this;
         }
 
+
         /**
          * A relatively friendly name for the client device
          */
@@ -333,6 +338,7 @@ public class PostUsersSignInDataRequest {
             this.deviceNickname = deviceNickname;
             return this;
         }
+
 
         /**
          * The version of the client application.
@@ -352,6 +358,7 @@ public class PostUsersSignInDataRequest {
             return this;
         }
 
+
         /**
          * The platform of the client application.
          */
@@ -370,6 +377,7 @@ public class PostUsersSignInDataRequest {
             return this;
         }
 
+
         /**
          * Login credentials
          */
@@ -387,15 +395,13 @@ public class PostUsersSignInDataRequest {
             this.requestBody = requestBody;
             return this;
         }
-        
+
         public PostUsersSignInDataRequest build() {
+
             return new PostUsersSignInDataRequest(
-                clientID,
-                clientName,
-                deviceNickname,
-                clientVersion,
-                platform,
-                requestBody);
+                clientID, clientName, deviceNickname,
+                clientVersion, platform, requestBody);
         }
+
     }
 }

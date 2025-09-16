@@ -9,10 +9,9 @@ import dev.plexapi.sdk.utils.SpeakeasyMetadata;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetMediaProvidersRequest {
-
     /**
      * An authentication token, obtained from plex.tv
      */
@@ -34,9 +33,10 @@ public class GetMediaProvidersRequest {
         return xPlexToken;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * An authentication token, obtained from plex.tv
@@ -47,7 +47,6 @@ public class GetMediaProvidersRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -58,12 +57,12 @@ public class GetMediaProvidersRequest {
         }
         GetMediaProvidersRequest other = (GetMediaProvidersRequest) o;
         return 
-            Objects.deepEquals(this.xPlexToken, other.xPlexToken);
+            Utils.enhancedDeepEquals(this.xPlexToken, other.xPlexToken);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             xPlexToken);
     }
     
@@ -72,14 +71,16 @@ public class GetMediaProvidersRequest {
         return Utils.toString(GetMediaProvidersRequest.class,
                 "xPlexToken", xPlexToken);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String xPlexToken;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * An authentication token, obtained from plex.tv
@@ -89,10 +90,12 @@ public class GetMediaProvidersRequest {
             this.xPlexToken = xPlexToken;
             return this;
         }
-        
+
         public GetMediaProvidersRequest build() {
+
             return new GetMediaProvidersRequest(
                 xPlexToken);
         }
+
     }
 }

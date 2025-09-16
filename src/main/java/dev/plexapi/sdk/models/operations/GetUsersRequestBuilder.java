@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetUsers;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -12,10 +16,10 @@ public class GetUsersRequestBuilder {
 
     private GetUsersRequest request;
     private Optional<String> serverURL = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallGetUsers sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetUsersRequestBuilder(SDKMethodInterfaces.MethodCallGetUsers sdk) {
-        this.sdk = sdk;
+    public GetUsersRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetUsersRequestBuilder request(GetUsersRequest request) {
@@ -37,9 +41,10 @@ public class GetUsersRequestBuilder {
     }
 
     public GetUsersResponse call() throws Exception {
+        
+        RequestOperation<GetUsersRequest, GetUsersResponse> operation
+              = new GetUsers.Sync(sdkConfiguration, serverURL);
 
-        return sdk.getUsers(
-            request,
-            serverURL);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

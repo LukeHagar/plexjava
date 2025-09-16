@@ -20,7 +20,7 @@ public enum GetLibrarySectionsAllHasThumbnail {
     @JsonValue
     private final String value;
 
-    private GetLibrarySectionsAllHasThumbnail(String value) {
+    GetLibrarySectionsAllHasThumbnail(String value) {
         this.value = value;
     }
     

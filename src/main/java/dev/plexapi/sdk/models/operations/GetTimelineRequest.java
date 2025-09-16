@@ -10,10 +10,9 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetTimelineRequest {
-
     /**
      * The rating key of the media item
      */
@@ -188,9 +187,10 @@ public class GetTimelineRequest {
         return row;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The rating key of the media item
@@ -282,7 +282,6 @@ public class GetTimelineRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -293,30 +292,24 @@ public class GetTimelineRequest {
         }
         GetTimelineRequest other = (GetTimelineRequest) o;
         return 
-            Objects.deepEquals(this.ratingKey, other.ratingKey) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.state, other.state) &&
-            Objects.deepEquals(this.hasMDE, other.hasMDE) &&
-            Objects.deepEquals(this.time, other.time) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.context, other.context) &&
-            Objects.deepEquals(this.playQueueItemID, other.playQueueItemID) &&
-            Objects.deepEquals(this.playBackTime, other.playBackTime) &&
-            Objects.deepEquals(this.row, other.row);
+            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.state, other.state) &&
+            Utils.enhancedDeepEquals(this.hasMDE, other.hasMDE) &&
+            Utils.enhancedDeepEquals(this.time, other.time) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.context, other.context) &&
+            Utils.enhancedDeepEquals(this.playQueueItemID, other.playQueueItemID) &&
+            Utils.enhancedDeepEquals(this.playBackTime, other.playBackTime) &&
+            Utils.enhancedDeepEquals(this.row, other.row);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            ratingKey,
-            key,
-            state,
-            hasMDE,
-            time,
-            duration,
-            context,
-            playQueueItemID,
-            playBackTime,
+        return Utils.enhancedHash(
+            ratingKey, key, state,
+            hasMDE, time, duration,
+            context, playQueueItemID, playBackTime,
             row);
     }
     
@@ -334,32 +327,34 @@ public class GetTimelineRequest {
                 "playBackTime", playBackTime,
                 "row", row);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Double ratingKey;
- 
+
         private String key;
- 
+
         private State state;
- 
+
         private Double hasMDE;
- 
+
         private Double time;
- 
+
         private Double duration;
- 
+
         private String context;
- 
+
         private Double playQueueItemID;
- 
+
         private Double playBackTime;
- 
+
         private Double row;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The rating key of the media item
@@ -370,6 +365,7 @@ public class GetTimelineRequest {
             return this;
         }
 
+
         /**
          * The key of the media item to get the timeline for
          */
@@ -378,6 +374,7 @@ public class GetTimelineRequest {
             this.key = key;
             return this;
         }
+
 
         /**
          * The state of the media item
@@ -388,6 +385,7 @@ public class GetTimelineRequest {
             return this;
         }
 
+
         /**
          * Whether the media item has MDE
          */
@@ -396,6 +394,7 @@ public class GetTimelineRequest {
             this.hasMDE = hasMDE;
             return this;
         }
+
 
         /**
          * The time of the media item
@@ -406,6 +405,7 @@ public class GetTimelineRequest {
             return this;
         }
 
+
         /**
          * The duration of the media item
          */
@@ -414,6 +414,7 @@ public class GetTimelineRequest {
             this.duration = duration;
             return this;
         }
+
 
         /**
          * The context of the media item
@@ -424,6 +425,7 @@ public class GetTimelineRequest {
             return this;
         }
 
+
         /**
          * The play queue item ID of the media item
          */
@@ -432,6 +434,7 @@ public class GetTimelineRequest {
             this.playQueueItemID = playQueueItemID;
             return this;
         }
+
 
         /**
          * The playback time of the media item
@@ -442,6 +445,7 @@ public class GetTimelineRequest {
             return this;
         }
 
+
         /**
          * The row of the media item
          */
@@ -450,19 +454,15 @@ public class GetTimelineRequest {
             this.row = row;
             return this;
         }
-        
+
         public GetTimelineRequest build() {
+
             return new GetTimelineRequest(
-                ratingKey,
-                key,
-                state,
-                hasMDE,
-                time,
-                duration,
-                context,
-                playQueueItemID,
-                playBackTime,
+                ratingKey, key, state,
+                hasMDE, time, duration,
+                context, playQueueItemID, playBackTime,
                 row);
         }
+
     }
 }

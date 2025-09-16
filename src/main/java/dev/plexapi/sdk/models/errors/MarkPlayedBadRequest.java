@@ -16,7 +16,6 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -42,6 +41,7 @@ public class MarkPlayedBadRequest extends RuntimeException {
     public MarkPlayedBadRequest(
             @JsonProperty("errors") Optional<? extends List<MarkPlayedErrors>> errors,
             @JsonProperty("RawResponse") Optional<? extends HttpResponse<InputStream>> rawResponse) {
+        super("API error occurred");
         Utils.checkNotNull(errors, "errors");
         Utils.checkNotNull(rawResponse, "rawResponse");
         this.errors = errors;
@@ -67,15 +67,17 @@ public class MarkPlayedBadRequest extends RuntimeException {
         return (Optional<HttpResponse<InputStream>>) rawResponse;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public MarkPlayedBadRequest withErrors(List<MarkPlayedErrors> errors) {
         Utils.checkNotNull(errors, "errors");
         this.errors = Optional.ofNullable(errors);
         return this;
     }
+
 
     public MarkPlayedBadRequest withErrors(Optional<? extends List<MarkPlayedErrors>> errors) {
         Utils.checkNotNull(errors, "errors");
@@ -92,6 +94,7 @@ public class MarkPlayedBadRequest extends RuntimeException {
         return this;
     }
 
+
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
@@ -101,7 +104,6 @@ public class MarkPlayedBadRequest extends RuntimeException {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -112,15 +114,14 @@ public class MarkPlayedBadRequest extends RuntimeException {
         }
         MarkPlayedBadRequest other = (MarkPlayedBadRequest) o;
         return 
-            Objects.deepEquals(this.errors, other.errors) &&
-            Objects.deepEquals(this.rawResponse, other.rawResponse);
+            Utils.enhancedDeepEquals(this.errors, other.errors) &&
+            Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            errors,
-            rawResponse);
+        return Utils.enhancedHash(
+            errors, rawResponse);
     }
     
     @Override
@@ -129,16 +130,18 @@ public class MarkPlayedBadRequest extends RuntimeException {
                 "errors", errors,
                 "rawResponse", rawResponse);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends List<MarkPlayedErrors>> errors = Optional.empty();
- 
+
         private Optional<? extends HttpResponse<InputStream>> rawResponse;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder errors(List<MarkPlayedErrors> errors) {
             Utils.checkNotNull(errors, "errors");
@@ -151,6 +154,7 @@ public class MarkPlayedBadRequest extends RuntimeException {
             this.errors = errors;
             return this;
         }
+
 
         /**
          * Raw HTTP response; suitable for custom response parsing
@@ -169,12 +173,13 @@ public class MarkPlayedBadRequest extends RuntimeException {
             this.rawResponse = rawResponse;
             return this;
         }
-        
+
         public MarkPlayedBadRequest build() {
+
             return new MarkPlayedBadRequest(
-                errors,
-                rawResponse);
+                errors, rawResponse);
         }
+
     }
 }
 

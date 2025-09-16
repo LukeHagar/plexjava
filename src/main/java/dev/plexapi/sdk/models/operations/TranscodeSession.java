@@ -14,8 +14,8 @@ import java.lang.Double;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class TranscodeSession {
 
@@ -23,93 +23,116 @@ public class TranscodeSession {
     @JsonProperty("key")
     private Optional<String> key;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("throttled")
     private Optional<Boolean> throttled;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("complete")
     private Optional<Boolean> complete;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("progress")
     private Optional<Double> progress;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("size")
     private Optional<Integer> size;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("speed")
     private Optional<Double> speed;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("error")
     private Optional<Boolean> error;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
     private Optional<Integer> duration;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("remaining")
     private Optional<Integer> remaining;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("context")
     private Optional<String> context;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sourceVideoCodec")
     private Optional<String> sourceVideoCodec;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sourceAudioCodec")
     private Optional<String> sourceAudioCodec;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoDecision")
     private Optional<String> videoDecision;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioDecision")
     private Optional<String> audioDecision;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("subtitleDecision")
     private Optional<String> subtitleDecision;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("protocol")
     private Optional<String> protocol;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("container")
     private Optional<String> container;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoCodec")
     private Optional<String> videoCodec;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioCodec")
     private Optional<String> audioCodec;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioChannels")
     private Optional<Integer> audioChannels;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("transcodeHwRequested")
     private Optional<Boolean> transcodeHwRequested;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("timeStamp")
     private Optional<Double> timeStamp;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("maxOffsetAvailable")
     private Optional<Double> maxOffsetAvailable;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("minOffsetAvailable")
@@ -192,7 +215,14 @@ public class TranscodeSession {
     }
     
     public TranscodeSession() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -315,15 +345,17 @@ public class TranscodeSession {
         return minOffsetAvailable;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public TranscodeSession withKey(String key) {
         Utils.checkNotNull(key, "key");
         this.key = Optional.ofNullable(key);
         return this;
     }
+
 
     public TranscodeSession withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
@@ -337,6 +369,7 @@ public class TranscodeSession {
         return this;
     }
 
+
     public TranscodeSession withThrottled(Optional<Boolean> throttled) {
         Utils.checkNotNull(throttled, "throttled");
         this.throttled = throttled;
@@ -348,6 +381,7 @@ public class TranscodeSession {
         this.complete = Optional.ofNullable(complete);
         return this;
     }
+
 
     public TranscodeSession withComplete(Optional<Boolean> complete) {
         Utils.checkNotNull(complete, "complete");
@@ -361,6 +395,7 @@ public class TranscodeSession {
         return this;
     }
 
+
     public TranscodeSession withProgress(Optional<Double> progress) {
         Utils.checkNotNull(progress, "progress");
         this.progress = progress;
@@ -372,6 +407,7 @@ public class TranscodeSession {
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public TranscodeSession withSize(Optional<Integer> size) {
         Utils.checkNotNull(size, "size");
@@ -385,6 +421,7 @@ public class TranscodeSession {
         return this;
     }
 
+
     public TranscodeSession withSpeed(Optional<Double> speed) {
         Utils.checkNotNull(speed, "speed");
         this.speed = speed;
@@ -396,6 +433,7 @@ public class TranscodeSession {
         this.error = Optional.ofNullable(error);
         return this;
     }
+
 
     public TranscodeSession withError(Optional<Boolean> error) {
         Utils.checkNotNull(error, "error");
@@ -409,6 +447,7 @@ public class TranscodeSession {
         return this;
     }
 
+
     public TranscodeSession withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = duration;
@@ -420,6 +459,7 @@ public class TranscodeSession {
         this.remaining = Optional.ofNullable(remaining);
         return this;
     }
+
 
     public TranscodeSession withRemaining(Optional<Integer> remaining) {
         Utils.checkNotNull(remaining, "remaining");
@@ -433,6 +473,7 @@ public class TranscodeSession {
         return this;
     }
 
+
     public TranscodeSession withContext(Optional<String> context) {
         Utils.checkNotNull(context, "context");
         this.context = context;
@@ -444,6 +485,7 @@ public class TranscodeSession {
         this.sourceVideoCodec = Optional.ofNullable(sourceVideoCodec);
         return this;
     }
+
 
     public TranscodeSession withSourceVideoCodec(Optional<String> sourceVideoCodec) {
         Utils.checkNotNull(sourceVideoCodec, "sourceVideoCodec");
@@ -457,6 +499,7 @@ public class TranscodeSession {
         return this;
     }
 
+
     public TranscodeSession withSourceAudioCodec(Optional<String> sourceAudioCodec) {
         Utils.checkNotNull(sourceAudioCodec, "sourceAudioCodec");
         this.sourceAudioCodec = sourceAudioCodec;
@@ -468,6 +511,7 @@ public class TranscodeSession {
         this.videoDecision = Optional.ofNullable(videoDecision);
         return this;
     }
+
 
     public TranscodeSession withVideoDecision(Optional<String> videoDecision) {
         Utils.checkNotNull(videoDecision, "videoDecision");
@@ -481,6 +525,7 @@ public class TranscodeSession {
         return this;
     }
 
+
     public TranscodeSession withAudioDecision(Optional<String> audioDecision) {
         Utils.checkNotNull(audioDecision, "audioDecision");
         this.audioDecision = audioDecision;
@@ -492,6 +537,7 @@ public class TranscodeSession {
         this.subtitleDecision = Optional.ofNullable(subtitleDecision);
         return this;
     }
+
 
     public TranscodeSession withSubtitleDecision(Optional<String> subtitleDecision) {
         Utils.checkNotNull(subtitleDecision, "subtitleDecision");
@@ -505,6 +551,7 @@ public class TranscodeSession {
         return this;
     }
 
+
     public TranscodeSession withProtocol(Optional<String> protocol) {
         Utils.checkNotNull(protocol, "protocol");
         this.protocol = protocol;
@@ -516,6 +563,7 @@ public class TranscodeSession {
         this.container = Optional.ofNullable(container);
         return this;
     }
+
 
     public TranscodeSession withContainer(Optional<String> container) {
         Utils.checkNotNull(container, "container");
@@ -529,6 +577,7 @@ public class TranscodeSession {
         return this;
     }
 
+
     public TranscodeSession withVideoCodec(Optional<String> videoCodec) {
         Utils.checkNotNull(videoCodec, "videoCodec");
         this.videoCodec = videoCodec;
@@ -540,6 +589,7 @@ public class TranscodeSession {
         this.audioCodec = Optional.ofNullable(audioCodec);
         return this;
     }
+
 
     public TranscodeSession withAudioCodec(Optional<String> audioCodec) {
         Utils.checkNotNull(audioCodec, "audioCodec");
@@ -553,6 +603,7 @@ public class TranscodeSession {
         return this;
     }
 
+
     public TranscodeSession withAudioChannels(Optional<Integer> audioChannels) {
         Utils.checkNotNull(audioChannels, "audioChannels");
         this.audioChannels = audioChannels;
@@ -564,6 +615,7 @@ public class TranscodeSession {
         this.transcodeHwRequested = Optional.ofNullable(transcodeHwRequested);
         return this;
     }
+
 
     public TranscodeSession withTranscodeHwRequested(Optional<Boolean> transcodeHwRequested) {
         Utils.checkNotNull(transcodeHwRequested, "transcodeHwRequested");
@@ -577,6 +629,7 @@ public class TranscodeSession {
         return this;
     }
 
+
     public TranscodeSession withTimeStamp(Optional<Double> timeStamp) {
         Utils.checkNotNull(timeStamp, "timeStamp");
         this.timeStamp = timeStamp;
@@ -588,6 +641,7 @@ public class TranscodeSession {
         this.maxOffsetAvailable = Optional.ofNullable(maxOffsetAvailable);
         return this;
     }
+
 
     public TranscodeSession withMaxOffsetAvailable(Optional<Double> maxOffsetAvailable) {
         Utils.checkNotNull(maxOffsetAvailable, "maxOffsetAvailable");
@@ -601,13 +655,13 @@ public class TranscodeSession {
         return this;
     }
 
+
     public TranscodeSession withMinOffsetAvailable(Optional<Double> minOffsetAvailable) {
         Utils.checkNotNull(minOffsetAvailable, "minOffsetAvailable");
         this.minOffsetAvailable = minOffsetAvailable;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -618,59 +672,43 @@ public class TranscodeSession {
         }
         TranscodeSession other = (TranscodeSession) o;
         return 
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.throttled, other.throttled) &&
-            Objects.deepEquals(this.complete, other.complete) &&
-            Objects.deepEquals(this.progress, other.progress) &&
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.speed, other.speed) &&
-            Objects.deepEquals(this.error, other.error) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.remaining, other.remaining) &&
-            Objects.deepEquals(this.context, other.context) &&
-            Objects.deepEquals(this.sourceVideoCodec, other.sourceVideoCodec) &&
-            Objects.deepEquals(this.sourceAudioCodec, other.sourceAudioCodec) &&
-            Objects.deepEquals(this.videoDecision, other.videoDecision) &&
-            Objects.deepEquals(this.audioDecision, other.audioDecision) &&
-            Objects.deepEquals(this.subtitleDecision, other.subtitleDecision) &&
-            Objects.deepEquals(this.protocol, other.protocol) &&
-            Objects.deepEquals(this.container, other.container) &&
-            Objects.deepEquals(this.videoCodec, other.videoCodec) &&
-            Objects.deepEquals(this.audioCodec, other.audioCodec) &&
-            Objects.deepEquals(this.audioChannels, other.audioChannels) &&
-            Objects.deepEquals(this.transcodeHwRequested, other.transcodeHwRequested) &&
-            Objects.deepEquals(this.timeStamp, other.timeStamp) &&
-            Objects.deepEquals(this.maxOffsetAvailable, other.maxOffsetAvailable) &&
-            Objects.deepEquals(this.minOffsetAvailable, other.minOffsetAvailable);
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.throttled, other.throttled) &&
+            Utils.enhancedDeepEquals(this.complete, other.complete) &&
+            Utils.enhancedDeepEquals(this.progress, other.progress) &&
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.speed, other.speed) &&
+            Utils.enhancedDeepEquals(this.error, other.error) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.remaining, other.remaining) &&
+            Utils.enhancedDeepEquals(this.context, other.context) &&
+            Utils.enhancedDeepEquals(this.sourceVideoCodec, other.sourceVideoCodec) &&
+            Utils.enhancedDeepEquals(this.sourceAudioCodec, other.sourceAudioCodec) &&
+            Utils.enhancedDeepEquals(this.videoDecision, other.videoDecision) &&
+            Utils.enhancedDeepEquals(this.audioDecision, other.audioDecision) &&
+            Utils.enhancedDeepEquals(this.subtitleDecision, other.subtitleDecision) &&
+            Utils.enhancedDeepEquals(this.protocol, other.protocol) &&
+            Utils.enhancedDeepEquals(this.container, other.container) &&
+            Utils.enhancedDeepEquals(this.videoCodec, other.videoCodec) &&
+            Utils.enhancedDeepEquals(this.audioCodec, other.audioCodec) &&
+            Utils.enhancedDeepEquals(this.audioChannels, other.audioChannels) &&
+            Utils.enhancedDeepEquals(this.transcodeHwRequested, other.transcodeHwRequested) &&
+            Utils.enhancedDeepEquals(this.timeStamp, other.timeStamp) &&
+            Utils.enhancedDeepEquals(this.maxOffsetAvailable, other.maxOffsetAvailable) &&
+            Utils.enhancedDeepEquals(this.minOffsetAvailable, other.minOffsetAvailable);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            key,
-            throttled,
-            complete,
-            progress,
-            size,
-            speed,
-            error,
-            duration,
-            remaining,
-            context,
-            sourceVideoCodec,
-            sourceAudioCodec,
-            videoDecision,
-            audioDecision,
-            subtitleDecision,
-            protocol,
-            container,
-            videoCodec,
-            audioCodec,
-            audioChannels,
-            transcodeHwRequested,
-            timeStamp,
-            maxOffsetAvailable,
-            minOffsetAvailable);
+        return Utils.enhancedHash(
+            key, throttled, complete,
+            progress, size, speed,
+            error, duration, remaining,
+            context, sourceVideoCodec, sourceAudioCodec,
+            videoDecision, audioDecision, subtitleDecision,
+            protocol, container, videoCodec,
+            audioCodec, audioChannels, transcodeHwRequested,
+            timeStamp, maxOffsetAvailable, minOffsetAvailable);
     }
     
     @Override
@@ -701,60 +739,62 @@ public class TranscodeSession {
                 "maxOffsetAvailable", maxOffsetAvailable,
                 "minOffsetAvailable", minOffsetAvailable);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<Boolean> throttled = Optional.empty();
- 
+
         private Optional<Boolean> complete = Optional.empty();
- 
+
         private Optional<Double> progress = Optional.empty();
- 
+
         private Optional<Integer> size = Optional.empty();
- 
+
         private Optional<Double> speed = Optional.empty();
- 
+
         private Optional<Boolean> error = Optional.empty();
- 
+
         private Optional<Integer> duration = Optional.empty();
- 
+
         private Optional<Integer> remaining = Optional.empty();
- 
+
         private Optional<String> context = Optional.empty();
- 
+
         private Optional<String> sourceVideoCodec = Optional.empty();
- 
+
         private Optional<String> sourceAudioCodec = Optional.empty();
- 
+
         private Optional<String> videoDecision = Optional.empty();
- 
+
         private Optional<String> audioDecision = Optional.empty();
- 
+
         private Optional<String> subtitleDecision = Optional.empty();
- 
+
         private Optional<String> protocol = Optional.empty();
- 
+
         private Optional<String> container = Optional.empty();
- 
+
         private Optional<String> videoCodec = Optional.empty();
- 
+
         private Optional<String> audioCodec = Optional.empty();
- 
+
         private Optional<Integer> audioChannels = Optional.empty();
- 
+
         private Optional<Boolean> transcodeHwRequested = Optional.empty();
- 
+
         private Optional<Double> timeStamp = Optional.empty();
- 
+
         private Optional<Double> maxOffsetAvailable = Optional.empty();
- 
+
         private Optional<Double> minOffsetAvailable = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
@@ -768,6 +808,7 @@ public class TranscodeSession {
             return this;
         }
 
+
         public Builder throttled(boolean throttled) {
             Utils.checkNotNull(throttled, "throttled");
             this.throttled = Optional.ofNullable(throttled);
@@ -779,6 +820,7 @@ public class TranscodeSession {
             this.throttled = throttled;
             return this;
         }
+
 
         public Builder complete(boolean complete) {
             Utils.checkNotNull(complete, "complete");
@@ -792,6 +834,7 @@ public class TranscodeSession {
             return this;
         }
 
+
         public Builder progress(double progress) {
             Utils.checkNotNull(progress, "progress");
             this.progress = Optional.ofNullable(progress);
@@ -803,6 +846,7 @@ public class TranscodeSession {
             this.progress = progress;
             return this;
         }
+
 
         public Builder size(int size) {
             Utils.checkNotNull(size, "size");
@@ -816,6 +860,7 @@ public class TranscodeSession {
             return this;
         }
 
+
         public Builder speed(double speed) {
             Utils.checkNotNull(speed, "speed");
             this.speed = Optional.ofNullable(speed);
@@ -827,6 +872,7 @@ public class TranscodeSession {
             this.speed = speed;
             return this;
         }
+
 
         public Builder error(boolean error) {
             Utils.checkNotNull(error, "error");
@@ -840,6 +886,7 @@ public class TranscodeSession {
             return this;
         }
 
+
         public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = Optional.ofNullable(duration);
@@ -851,6 +898,7 @@ public class TranscodeSession {
             this.duration = duration;
             return this;
         }
+
 
         public Builder remaining(int remaining) {
             Utils.checkNotNull(remaining, "remaining");
@@ -864,6 +912,7 @@ public class TranscodeSession {
             return this;
         }
 
+
         public Builder context(String context) {
             Utils.checkNotNull(context, "context");
             this.context = Optional.ofNullable(context);
@@ -875,6 +924,7 @@ public class TranscodeSession {
             this.context = context;
             return this;
         }
+
 
         public Builder sourceVideoCodec(String sourceVideoCodec) {
             Utils.checkNotNull(sourceVideoCodec, "sourceVideoCodec");
@@ -888,6 +938,7 @@ public class TranscodeSession {
             return this;
         }
 
+
         public Builder sourceAudioCodec(String sourceAudioCodec) {
             Utils.checkNotNull(sourceAudioCodec, "sourceAudioCodec");
             this.sourceAudioCodec = Optional.ofNullable(sourceAudioCodec);
@@ -899,6 +950,7 @@ public class TranscodeSession {
             this.sourceAudioCodec = sourceAudioCodec;
             return this;
         }
+
 
         public Builder videoDecision(String videoDecision) {
             Utils.checkNotNull(videoDecision, "videoDecision");
@@ -912,6 +964,7 @@ public class TranscodeSession {
             return this;
         }
 
+
         public Builder audioDecision(String audioDecision) {
             Utils.checkNotNull(audioDecision, "audioDecision");
             this.audioDecision = Optional.ofNullable(audioDecision);
@@ -923,6 +976,7 @@ public class TranscodeSession {
             this.audioDecision = audioDecision;
             return this;
         }
+
 
         public Builder subtitleDecision(String subtitleDecision) {
             Utils.checkNotNull(subtitleDecision, "subtitleDecision");
@@ -936,6 +990,7 @@ public class TranscodeSession {
             return this;
         }
 
+
         public Builder protocol(String protocol) {
             Utils.checkNotNull(protocol, "protocol");
             this.protocol = Optional.ofNullable(protocol);
@@ -947,6 +1002,7 @@ public class TranscodeSession {
             this.protocol = protocol;
             return this;
         }
+
 
         public Builder container(String container) {
             Utils.checkNotNull(container, "container");
@@ -960,6 +1016,7 @@ public class TranscodeSession {
             return this;
         }
 
+
         public Builder videoCodec(String videoCodec) {
             Utils.checkNotNull(videoCodec, "videoCodec");
             this.videoCodec = Optional.ofNullable(videoCodec);
@@ -971,6 +1028,7 @@ public class TranscodeSession {
             this.videoCodec = videoCodec;
             return this;
         }
+
 
         public Builder audioCodec(String audioCodec) {
             Utils.checkNotNull(audioCodec, "audioCodec");
@@ -984,6 +1042,7 @@ public class TranscodeSession {
             return this;
         }
 
+
         public Builder audioChannels(int audioChannels) {
             Utils.checkNotNull(audioChannels, "audioChannels");
             this.audioChannels = Optional.ofNullable(audioChannels);
@@ -995,6 +1054,7 @@ public class TranscodeSession {
             this.audioChannels = audioChannels;
             return this;
         }
+
 
         public Builder transcodeHwRequested(boolean transcodeHwRequested) {
             Utils.checkNotNull(transcodeHwRequested, "transcodeHwRequested");
@@ -1008,6 +1068,7 @@ public class TranscodeSession {
             return this;
         }
 
+
         public Builder timeStamp(double timeStamp) {
             Utils.checkNotNull(timeStamp, "timeStamp");
             this.timeStamp = Optional.ofNullable(timeStamp);
@@ -1019,6 +1080,7 @@ public class TranscodeSession {
             this.timeStamp = timeStamp;
             return this;
         }
+
 
         public Builder maxOffsetAvailable(double maxOffsetAvailable) {
             Utils.checkNotNull(maxOffsetAvailable, "maxOffsetAvailable");
@@ -1032,6 +1094,7 @@ public class TranscodeSession {
             return this;
         }
 
+
         public Builder minOffsetAvailable(double minOffsetAvailable) {
             Utils.checkNotNull(minOffsetAvailable, "minOffsetAvailable");
             this.minOffsetAvailable = Optional.ofNullable(minOffsetAvailable);
@@ -1043,33 +1106,19 @@ public class TranscodeSession {
             this.minOffsetAvailable = minOffsetAvailable;
             return this;
         }
-        
+
         public TranscodeSession build() {
+
             return new TranscodeSession(
-                key,
-                throttled,
-                complete,
-                progress,
-                size,
-                speed,
-                error,
-                duration,
-                remaining,
-                context,
-                sourceVideoCodec,
-                sourceAudioCodec,
-                videoDecision,
-                audioDecision,
-                subtitleDecision,
-                protocol,
-                container,
-                videoCodec,
-                audioCodec,
-                audioChannels,
-                transcodeHwRequested,
-                timeStamp,
-                maxOffsetAvailable,
-                minOffsetAvailable);
+                key, throttled, complete,
+                progress, size, speed,
+                error, duration, remaining,
+                context, sourceVideoCodec, sourceAudioCodec,
+                videoDecision, audioDecision, subtitleDecision,
+                protocol, container, videoCodec,
+                audioCodec, audioChannels, transcodeHwRequested,
+                timeStamp, maxOffsetAvailable, minOffsetAvailable);
         }
+
     }
 }

@@ -14,8 +14,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetDevicesMediaContainer {
 
@@ -23,9 +23,11 @@ public class GetDevicesMediaContainer {
     @JsonProperty("size")
     private Optional<Double> size;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("identifier")
     private Optional<String> identifier;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Device")
@@ -64,15 +66,17 @@ public class GetDevicesMediaContainer {
         return (Optional<List<Device>>) device;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetDevicesMediaContainer withSize(double size) {
         Utils.checkNotNull(size, "size");
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetDevicesMediaContainer withSize(Optional<Double> size) {
         Utils.checkNotNull(size, "size");
@@ -86,6 +90,7 @@ public class GetDevicesMediaContainer {
         return this;
     }
 
+
     public GetDevicesMediaContainer withIdentifier(Optional<String> identifier) {
         Utils.checkNotNull(identifier, "identifier");
         this.identifier = identifier;
@@ -98,13 +103,13 @@ public class GetDevicesMediaContainer {
         return this;
     }
 
+
     public GetDevicesMediaContainer withDevice(Optional<? extends List<Device>> device) {
         Utils.checkNotNull(device, "device");
         this.device = device;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -115,17 +120,15 @@ public class GetDevicesMediaContainer {
         }
         GetDevicesMediaContainer other = (GetDevicesMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.device, other.device);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.device, other.device);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            identifier,
-            device);
+        return Utils.enhancedHash(
+            size, identifier, device);
     }
     
     @Override
@@ -135,18 +138,20 @@ public class GetDevicesMediaContainer {
                 "identifier", identifier,
                 "device", device);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Double> size = Optional.empty();
- 
+
         private Optional<String> identifier = Optional.empty();
- 
+
         private Optional<? extends List<Device>> device = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder size(double size) {
             Utils.checkNotNull(size, "size");
@@ -160,6 +165,7 @@ public class GetDevicesMediaContainer {
             return this;
         }
 
+
         public Builder identifier(String identifier) {
             Utils.checkNotNull(identifier, "identifier");
             this.identifier = Optional.ofNullable(identifier);
@@ -172,6 +178,7 @@ public class GetDevicesMediaContainer {
             return this;
         }
 
+
         public Builder device(List<Device> device) {
             Utils.checkNotNull(device, "device");
             this.device = Optional.ofNullable(device);
@@ -183,12 +190,12 @@ public class GetDevicesMediaContainer {
             this.device = device;
             return this;
         }
-        
+
         public GetDevicesMediaContainer build() {
+
             return new GetDevicesMediaContainer(
-                size,
-                identifier,
-                device);
+                size, identifier, device);
         }
+
     }
 }

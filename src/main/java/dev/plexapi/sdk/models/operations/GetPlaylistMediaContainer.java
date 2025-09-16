@@ -14,14 +14,15 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetPlaylistMediaContainer {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("size")
     private Optional<Integer> size;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Metadata")
@@ -52,15 +53,17 @@ public class GetPlaylistMediaContainer {
         return (Optional<List<GetPlaylistMetadata>>) metadata;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetPlaylistMediaContainer withSize(int size) {
         Utils.checkNotNull(size, "size");
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetPlaylistMediaContainer withSize(Optional<Integer> size) {
         Utils.checkNotNull(size, "size");
@@ -74,13 +77,13 @@ public class GetPlaylistMediaContainer {
         return this;
     }
 
+
     public GetPlaylistMediaContainer withMetadata(Optional<? extends List<GetPlaylistMetadata>> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -91,15 +94,14 @@ public class GetPlaylistMediaContainer {
         }
         GetPlaylistMediaContainer other = (GetPlaylistMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            metadata);
+        return Utils.enhancedHash(
+            size, metadata);
     }
     
     @Override
@@ -108,16 +110,18 @@ public class GetPlaylistMediaContainer {
                 "size", size,
                 "metadata", metadata);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> size = Optional.empty();
- 
+
         private Optional<? extends List<GetPlaylistMetadata>> metadata = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder size(int size) {
             Utils.checkNotNull(size, "size");
@@ -131,6 +135,7 @@ public class GetPlaylistMediaContainer {
             return this;
         }
 
+
         public Builder metadata(List<GetPlaylistMetadata> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = Optional.ofNullable(metadata);
@@ -142,11 +147,12 @@ public class GetPlaylistMediaContainer {
             this.metadata = metadata;
             return this;
         }
-        
+
         public GetPlaylistMediaContainer build() {
+
             return new GetPlaylistMediaContainer(
-                size,
-                metadata);
+                size, metadata);
         }
+
     }
 }

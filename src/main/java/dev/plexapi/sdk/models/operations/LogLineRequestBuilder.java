@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.LogLine;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -12,10 +16,10 @@ public class LogLineRequestBuilder {
     private Level level;
     private String message;
     private String source;
-    private final SDKMethodInterfaces.MethodCallLogLine sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public LogLineRequestBuilder(SDKMethodInterfaces.MethodCallLogLine sdk) {
-        this.sdk = sdk;
+    public LogLineRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public LogLineRequestBuilder level(Level level) {
@@ -36,11 +40,22 @@ public class LogLineRequestBuilder {
         return this;
     }
 
-    public LogLineResponse call() throws Exception {
 
-        return sdk.logLine(
-            level,
+    private LogLineRequest buildRequest() {
+
+        LogLineRequest request = new LogLineRequest(level,
             message,
             source);
+
+        return request;
+    }
+
+    public LogLineResponse call() throws Exception {
+        
+        RequestOperation<LogLineRequest, LogLineResponse> operation
+              = new LogLine.Sync(sdkConfiguration);
+        LogLineRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

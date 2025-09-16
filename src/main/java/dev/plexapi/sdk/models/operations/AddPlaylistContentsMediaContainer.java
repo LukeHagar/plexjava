@@ -14,8 +14,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class AddPlaylistContentsMediaContainer {
 
@@ -23,13 +23,16 @@ public class AddPlaylistContentsMediaContainer {
     @JsonProperty("size")
     private Optional<Integer> size;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("leafCountAdded")
     private Optional<Integer> leafCountAdded;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("leafCountRequested")
     private Optional<Integer> leafCountRequested;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Metadata")
@@ -52,7 +55,8 @@ public class AddPlaylistContentsMediaContainer {
     }
     
     public AddPlaylistContentsMediaContainer() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -76,15 +80,17 @@ public class AddPlaylistContentsMediaContainer {
         return (Optional<List<AddPlaylistContentsMetadata>>) metadata;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public AddPlaylistContentsMediaContainer withSize(int size) {
         Utils.checkNotNull(size, "size");
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public AddPlaylistContentsMediaContainer withSize(Optional<Integer> size) {
         Utils.checkNotNull(size, "size");
@@ -98,6 +104,7 @@ public class AddPlaylistContentsMediaContainer {
         return this;
     }
 
+
     public AddPlaylistContentsMediaContainer withLeafCountAdded(Optional<Integer> leafCountAdded) {
         Utils.checkNotNull(leafCountAdded, "leafCountAdded");
         this.leafCountAdded = leafCountAdded;
@@ -109,6 +116,7 @@ public class AddPlaylistContentsMediaContainer {
         this.leafCountRequested = Optional.ofNullable(leafCountRequested);
         return this;
     }
+
 
     public AddPlaylistContentsMediaContainer withLeafCountRequested(Optional<Integer> leafCountRequested) {
         Utils.checkNotNull(leafCountRequested, "leafCountRequested");
@@ -122,13 +130,13 @@ public class AddPlaylistContentsMediaContainer {
         return this;
     }
 
+
     public AddPlaylistContentsMediaContainer withMetadata(Optional<? extends List<AddPlaylistContentsMetadata>> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -139,18 +147,16 @@ public class AddPlaylistContentsMediaContainer {
         }
         AddPlaylistContentsMediaContainer other = (AddPlaylistContentsMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.leafCountAdded, other.leafCountAdded) &&
-            Objects.deepEquals(this.leafCountRequested, other.leafCountRequested) &&
-            Objects.deepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.leafCountAdded, other.leafCountAdded) &&
+            Utils.enhancedDeepEquals(this.leafCountRequested, other.leafCountRequested) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            leafCountAdded,
-            leafCountRequested,
+        return Utils.enhancedHash(
+            size, leafCountAdded, leafCountRequested,
             metadata);
     }
     
@@ -162,20 +168,22 @@ public class AddPlaylistContentsMediaContainer {
                 "leafCountRequested", leafCountRequested,
                 "metadata", metadata);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> size = Optional.empty();
- 
+
         private Optional<Integer> leafCountAdded = Optional.empty();
- 
+
         private Optional<Integer> leafCountRequested = Optional.empty();
- 
+
         private Optional<? extends List<AddPlaylistContentsMetadata>> metadata = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder size(int size) {
             Utils.checkNotNull(size, "size");
@@ -189,6 +197,7 @@ public class AddPlaylistContentsMediaContainer {
             return this;
         }
 
+
         public Builder leafCountAdded(int leafCountAdded) {
             Utils.checkNotNull(leafCountAdded, "leafCountAdded");
             this.leafCountAdded = Optional.ofNullable(leafCountAdded);
@@ -200,6 +209,7 @@ public class AddPlaylistContentsMediaContainer {
             this.leafCountAdded = leafCountAdded;
             return this;
         }
+
 
         public Builder leafCountRequested(int leafCountRequested) {
             Utils.checkNotNull(leafCountRequested, "leafCountRequested");
@@ -213,6 +223,7 @@ public class AddPlaylistContentsMediaContainer {
             return this;
         }
 
+
         public Builder metadata(List<AddPlaylistContentsMetadata> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = Optional.ofNullable(metadata);
@@ -224,13 +235,13 @@ public class AddPlaylistContentsMediaContainer {
             this.metadata = metadata;
             return this;
         }
-        
+
         public AddPlaylistContentsMediaContainer build() {
+
             return new AddPlaylistContentsMediaContainer(
-                size,
-                leafCountAdded,
-                leafCountRequested,
+                size, leafCountAdded, leafCountRequested,
                 metadata);
         }
+
     }
 }

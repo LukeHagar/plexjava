@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: 1732900d-e173-47c1-a90d-d45182eb35d9
 management:
-  docChecksum: 77bdddd188d0778dc73b7f7906e1677c
+  docChecksum: addaf2dfdac23cef2e234b64492b9c90
   docVersion: 0.0.3
-  speakeasyVersion: 1.557.0
-  generationVersion: 2.623.0
-  releaseVersion: 0.17.1
-  configChecksum: f865745905f2269f88f086ce18e82519
+  speakeasyVersion: 1.615.2
+  generationVersion: 2.698.4
+  releaseVersion: 0.18.0
+  configChecksum: 334e78bbbc1d2066c9f2041346a79b94
   repoURL: https://github.com/LukeHagar/plexjava.git
   published: true
 features:
   java:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.1
-    core: 3.37.4
+    core: 3.47.2
     deprecations: 2.81.1
     downloadStreams: 0.1.1
     enums: 2.81.2
-    errors: 0.3.0
+    errors: 0.5.0
     flattening: 2.81.1
-    globalSecurity: 2.82.8
+    globalSecurity: 2.83.1
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.2
@@ -29,6 +29,7 @@ features:
     openEnums: 0.2.0
     sdkHooks: 1.1.0
     unions: 0.0.6
+    uploadStreams: 0.1.0
 generatedFiles:
   - .gitattributes
   - USAGE.md
@@ -962,6 +963,7 @@ generatedFiles:
   - docs/sdks/users/README.md
   - docs/sdks/video/README.md
   - docs/sdks/watchlist/README.md
+  - docs/utils/Blob.md
   - gradle.properties
   - gradle/wrapper/gradle-wrapper.jar
   - gradle/wrapper/gradle-wrapper.properties
@@ -969,6 +971,24 @@ generatedFiles:
   - gradlew.bat
   - settings.gradle
   - src/main/java/dev/plexapi/sdk/Activities.java
+  - src/main/java/dev/plexapi/sdk/AsyncActivities.java
+  - src/main/java/dev/plexapi/sdk/AsyncAuthentication.java
+  - src/main/java/dev/plexapi/sdk/AsyncButler.java
+  - src/main/java/dev/plexapi/sdk/AsyncHubs.java
+  - src/main/java/dev/plexapi/sdk/AsyncLibrary.java
+  - src/main/java/dev/plexapi/sdk/AsyncLog.java
+  - src/main/java/dev/plexapi/sdk/AsyncMedia.java
+  - src/main/java/dev/plexapi/sdk/AsyncPlaylists.java
+  - src/main/java/dev/plexapi/sdk/AsyncPlex.java
+  - src/main/java/dev/plexapi/sdk/AsyncPlexAPI.java
+  - src/main/java/dev/plexapi/sdk/AsyncSearch.java
+  - src/main/java/dev/plexapi/sdk/AsyncServer.java
+  - src/main/java/dev/plexapi/sdk/AsyncSessions.java
+  - src/main/java/dev/plexapi/sdk/AsyncStatistics.java
+  - src/main/java/dev/plexapi/sdk/AsyncUpdater.java
+  - src/main/java/dev/plexapi/sdk/AsyncUsers.java
+  - src/main/java/dev/plexapi/sdk/AsyncVideo.java
+  - src/main/java/dev/plexapi/sdk/AsyncWatchlist.java
   - src/main/java/dev/plexapi/sdk/Authentication.java
   - src/main/java/dev/plexapi/sdk/Butler.java
   - src/main/java/dev/plexapi/sdk/Hubs.java
@@ -1289,6 +1309,7 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/errors/StopTranscodeSessionErrors.java
   - src/main/java/dev/plexapi/sdk/models/errors/StopTranscodeSessionSessionsErrors.java
   - src/main/java/dev/plexapi/sdk/models/errors/StopTranscodeSessionUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/UncheckedSDKError.java
   - src/main/java/dev/plexapi/sdk/models/errors/UpdatePlayProgressBadRequest.java
   - src/main/java/dev/plexapi/sdk/models/errors/UpdatePlayProgressErrors.java
   - src/main/java/dev/plexapi/sdk/models/errors/UpdatePlayProgressMediaErrors.java
@@ -1301,6 +1322,246 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/errors/UploadPlaylistErrors.java
   - src/main/java/dev/plexapi/sdk/models/errors/UploadPlaylistPlaylistsErrors.java
   - src/main/java/dev/plexapi/sdk/models/errors/UploadPlaylistUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/AddPlaylistContentsBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/AddPlaylistContentsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/ApplyUpdatesBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/ApplyUpdatesUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/CancelServerActivitiesBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/CancelServerActivitiesUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/CheckForUpdatesBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/CheckForUpdatesUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/ClearPlaylistContentsBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/ClearPlaylistContentsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/CreatePlaylistBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/CreatePlaylistUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/DeleteLibraryBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/DeleteLibraryUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/DeletePlaylistBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/DeletePlaylistUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/EnablePaperTrailBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/EnablePaperTrailUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetActorsLibraryBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetActorsLibraryUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetAllLibrariesBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetAllLibrariesUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetAvailableClientsBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetAvailableClientsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetBandwidthStatisticsBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetBandwidthStatisticsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetBannerImageBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetBannerImageUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetButlerTasksBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetButlerTasksUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetCompanionsDataBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetCompanionsDataUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetCountriesLibraryBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetCountriesLibraryUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetDevicesBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetDevicesUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetFileHashBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetFileHashUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetGenresLibraryBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetGenresLibraryUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetGeoDataBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetGeoDataUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetGlobalHubsBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetGlobalHubsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetHomeDataBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetHomeDataUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetLibraryDetailsBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetLibraryDetailsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetLibraryHubsBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetLibraryHubsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetLibraryItemsBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetLibraryItemsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetLibrarySectionsAllBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetLibrarySectionsAllUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetMediaMetaDataBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetMediaMetaDataUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetMediaProvidersBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetMediaProvidersUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetMetadataChildrenBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetMetadataChildrenUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetMyPlexAccountBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetMyPlexAccountUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetPinBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetPlaylistBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetPlaylistContentsBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetPlaylistContentsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetPlaylistUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetPlaylistsBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetPlaylistsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetRecentlyAddedLibraryBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetRecentlyAddedLibraryUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetRefreshLibraryMetadataBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetRefreshLibraryMetadataUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetResizedPhotoBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetResizedPhotoUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetResourcesStatisticsBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetResourcesStatisticsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetSearchAllLibrariesBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetSearchAllLibrariesUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetSearchLibraryBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetSearchLibraryUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetSearchResultsBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetSearchResultsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetServerActivitiesBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetServerActivitiesUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetServerCapabilitiesBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetServerCapabilitiesUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetServerIdentityRequestTimeout.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetServerListBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetServerListUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetServerPreferencesBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetServerPreferencesUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetServerResourcesBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetServerResourcesUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetSessionHistoryBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetSessionHistoryUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetSessionsBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetSessionsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetSourceConnectionInformationBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetSourceConnectionInformationUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetStatisticsBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetStatisticsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetThumbImageBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetThumbImageUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetTimelineBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetTimelineUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetTokenByPinIdBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetTokenByPinIdResponseBody.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetTokenDetailsBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetTokenDetailsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetTopWatchedContentBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetTopWatchedContentUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetTranscodeSessionsBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetTranscodeSessionsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetTransientTokenBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetTransientTokenUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetUpdateStatusBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetUpdateStatusUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetUserFriendsBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetUserFriendsUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetUsersBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetUsersUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetWatchListBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/GetWatchListUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/LogLineBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/LogLineUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/LogMultiLineBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/LogMultiLineUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/MarkPlayedBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/MarkPlayedUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/MarkUnplayedBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/MarkUnplayedUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/PerformSearchBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/PerformSearchUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/PerformVoiceSearchBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/PerformVoiceSearchUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/PostUsersSignInDataBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/PostUsersSignInDataUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/StartAllTasksBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/StartAllTasksUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/StartTaskBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/StartTaskUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/StartUniversalTranscodeBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/StartUniversalTranscodeUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/StopAllTasksBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/StopAllTasksUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/StopTaskBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/StopTaskUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/StopTranscodeSessionBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/StopTranscodeSessionUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/UpdatePlayProgressBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/UpdatePlayProgressUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/UpdatePlaylistBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/UpdatePlaylistUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/UploadPlaylistBadRequest.java
+  - src/main/java/dev/plexapi/sdk/models/errors/async/UploadPlaylistUnauthorized.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/AddPlaylistContentsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/ApplyUpdatesRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/CancelServerActivitiesRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/CheckForUpdatesRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/ClearPlaylistContentsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/CreatePlaylistRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/DeleteLibraryRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/DeletePlaylistRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/EnablePaperTrailRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetActorsLibraryRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetAllLibrariesRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetAvailableClientsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetBandwidthStatisticsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetBannerImageRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetButlerTasksRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetCompanionsDataRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetCountriesLibraryRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetDevicesRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetFileHashRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetGenresLibraryRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetGeoDataRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetGlobalHubsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetHomeDataRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetLibraryDetailsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetLibraryHubsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetLibraryItemsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetLibrarySectionsAllRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetMediaArtsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetMediaMetaDataRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetMediaPostersRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetMediaProvidersRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetMetadataChildrenRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetMyPlexAccountRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetPinRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetPlaylistContentsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetPlaylistRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetPlaylistsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetRecentlyAddedLibraryRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetRecentlyAddedRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetRefreshLibraryMetadataRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetResizedPhotoRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetResourcesStatisticsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetSearchAllLibrariesRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetSearchLibraryRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetSearchResultsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetServerActivitiesRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetServerCapabilitiesRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetServerIdentityRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetServerListRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetServerPreferencesRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetServerResourcesRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetSessionHistoryRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetSessionsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetSourceConnectionInformationRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetStatisticsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetThumbImageRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetTimelineRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetTokenByPinIdRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetTokenDetailsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetTopWatchedContentRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetTranscodeSessionsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetTransientTokenRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetUpdateStatusRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetUserFriendsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetUsersRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/GetWatchListRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/LogLineRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/LogMultiLineRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/MarkPlayedRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/MarkUnplayedRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/PerformSearchRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/PerformVoiceSearchRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/PostMediaArtsRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/PostMediaPosterRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/PostUsersSignInDataRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/StartAllTasksRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/StartTaskRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/StartUniversalTranscodeRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/StopAllTasksRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/StopTaskRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/StopTranscodeSessionRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/UpdatePlayProgressRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/UpdatePlaylistRequestBuilder.java
+  - src/main/java/dev/plexapi/sdk/models/operations//async/UploadPlaylistRequestBuilder.java
   - src/main/java/dev/plexapi/sdk/models/operations/Account.java
   - src/main/java/dev/plexapi/sdk/models/operations/Action.java
   - src/main/java/dev/plexapi/sdk/models/operations/ActiveDirection.java
@@ -1926,7 +2187,6 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/operations/ResponseBody.java
   - src/main/java/dev/plexapi/sdk/models/operations/Restricted.java
   - src/main/java/dev/plexapi/sdk/models/operations/Role.java
-  - src/main/java/dev/plexapi/sdk/models/operations/SDKMethodInterfaces.java
   - src/main/java/dev/plexapi/sdk/models/operations/Scope.java
   - src/main/java/dev/plexapi/sdk/models/operations/SearchResult.java
   - src/main/java/dev/plexapi/sdk/models/operations/SearchTypes.java
@@ -1985,23 +2245,201 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/operations/UserProfile.java
   - src/main/java/dev/plexapi/sdk/models/operations/WatchedIndicator.java
   - src/main/java/dev/plexapi/sdk/models/operations/Writer.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/AddPlaylistContentsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/ApplyUpdatesResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/CancelServerActivitiesResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/CheckForUpdatesResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/ClearPlaylistContentsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/CreatePlaylistResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/DeleteLibraryResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/DeletePlaylistResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/EnablePaperTrailResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetActorsLibraryResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetAllLibrariesResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetAvailableClientsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetBandwidthStatisticsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetBannerImageResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetButlerTasksResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetCompanionsDataResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetCountriesLibraryResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetDevicesResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetFileHashResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetGenresLibraryResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetGeoDataResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetGlobalHubsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetHomeDataResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetLibraryDetailsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetLibraryHubsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetLibraryItemsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetLibrarySectionsAllResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetMediaArtsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetMediaMetaDataResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetMediaPostersResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetMediaProvidersResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetMetadataChildrenResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetMyPlexAccountResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetPinResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetPlaylistContentsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetPlaylistResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetPlaylistsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetRecentlyAddedLibraryResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetRecentlyAddedResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetRefreshLibraryMetadataResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetResizedPhotoResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetResourcesStatisticsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetSearchAllLibrariesResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetSearchLibraryResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetSearchResultsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetServerActivitiesResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetServerCapabilitiesResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetServerIdentityResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetServerListResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetServerPreferencesResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetServerResourcesResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetSessionHistoryResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetSessionsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetSourceConnectionInformationResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetStatisticsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetThumbImageResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetTimelineResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetTokenByPinIdResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetTokenDetailsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetTopWatchedContentResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetTranscodeSessionsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetTransientTokenResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetUpdateStatusResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetUserFriendsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetUsersResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/GetWatchListResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/LogLineResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/LogMultiLineResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/MarkPlayedResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/MarkUnplayedResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/PerformSearchResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/PerformVoiceSearchResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/PostMediaArtsResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/PostMediaPosterResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/PostUsersSignInDataResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/StartAllTasksResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/StartTaskResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/StartUniversalTranscodeResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/StopAllTasksResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/StopTaskResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/StopTranscodeSessionResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/UpdatePlayProgressResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/UpdatePlaylistResponse.java
+  - src/main/java/dev/plexapi/sdk/models/operations/async/UploadPlaylistResponse.java
   - src/main/java/dev/plexapi/sdk/models/shared/Security.java
+  - src/main/java/dev/plexapi/sdk/operations/AddPlaylistContents.java
+  - src/main/java/dev/plexapi/sdk/operations/ApplyUpdates.java
+  - src/main/java/dev/plexapi/sdk/operations/CancelServerActivities.java
+  - src/main/java/dev/plexapi/sdk/operations/CheckForUpdates.java
+  - src/main/java/dev/plexapi/sdk/operations/ClearPlaylistContents.java
+  - src/main/java/dev/plexapi/sdk/operations/CreatePlaylist.java
+  - src/main/java/dev/plexapi/sdk/operations/DeleteLibrary.java
+  - src/main/java/dev/plexapi/sdk/operations/DeletePlaylist.java
+  - src/main/java/dev/plexapi/sdk/operations/EnablePaperTrail.java
+  - src/main/java/dev/plexapi/sdk/operations/GetActorsLibrary.java
+  - src/main/java/dev/plexapi/sdk/operations/GetAllLibraries.java
+  - src/main/java/dev/plexapi/sdk/operations/GetAvailableClients.java
+  - src/main/java/dev/plexapi/sdk/operations/GetBandwidthStatistics.java
+  - src/main/java/dev/plexapi/sdk/operations/GetBannerImage.java
+  - src/main/java/dev/plexapi/sdk/operations/GetButlerTasks.java
+  - src/main/java/dev/plexapi/sdk/operations/GetCompanionsData.java
+  - src/main/java/dev/plexapi/sdk/operations/GetCountriesLibrary.java
+  - src/main/java/dev/plexapi/sdk/operations/GetDevices.java
+  - src/main/java/dev/plexapi/sdk/operations/GetFileHash.java
+  - src/main/java/dev/plexapi/sdk/operations/GetGenresLibrary.java
+  - src/main/java/dev/plexapi/sdk/operations/GetGeoData.java
+  - src/main/java/dev/plexapi/sdk/operations/GetGlobalHubs.java
+  - src/main/java/dev/plexapi/sdk/operations/GetHomeData.java
+  - src/main/java/dev/plexapi/sdk/operations/GetLibraryDetails.java
+  - src/main/java/dev/plexapi/sdk/operations/GetLibraryHubs.java
+  - src/main/java/dev/plexapi/sdk/operations/GetLibraryItems.java
+  - src/main/java/dev/plexapi/sdk/operations/GetLibrarySectionsAll.java
+  - src/main/java/dev/plexapi/sdk/operations/GetMediaArts.java
+  - src/main/java/dev/plexapi/sdk/operations/GetMediaMetaData.java
+  - src/main/java/dev/plexapi/sdk/operations/GetMediaPosters.java
+  - src/main/java/dev/plexapi/sdk/operations/GetMediaProviders.java
+  - src/main/java/dev/plexapi/sdk/operations/GetMetadataChildren.java
+  - src/main/java/dev/plexapi/sdk/operations/GetMyPlexAccount.java
+  - src/main/java/dev/plexapi/sdk/operations/GetPin.java
+  - src/main/java/dev/plexapi/sdk/operations/GetPlaylist.java
+  - src/main/java/dev/plexapi/sdk/operations/GetPlaylistContents.java
+  - src/main/java/dev/plexapi/sdk/operations/GetPlaylists.java
+  - src/main/java/dev/plexapi/sdk/operations/GetRecentlyAdded.java
+  - src/main/java/dev/plexapi/sdk/operations/GetRecentlyAddedLibrary.java
+  - src/main/java/dev/plexapi/sdk/operations/GetRefreshLibraryMetadata.java
+  - src/main/java/dev/plexapi/sdk/operations/GetResizedPhoto.java
+  - src/main/java/dev/plexapi/sdk/operations/GetResourcesStatistics.java
+  - src/main/java/dev/plexapi/sdk/operations/GetSearchAllLibraries.java
+  - src/main/java/dev/plexapi/sdk/operations/GetSearchLibrary.java
+  - src/main/java/dev/plexapi/sdk/operations/GetSearchResults.java
+  - src/main/java/dev/plexapi/sdk/operations/GetServerActivities.java
+  - src/main/java/dev/plexapi/sdk/operations/GetServerCapabilities.java
+  - src/main/java/dev/plexapi/sdk/operations/GetServerIdentity.java
+  - src/main/java/dev/plexapi/sdk/operations/GetServerList.java
+  - src/main/java/dev/plexapi/sdk/operations/GetServerPreferences.java
+  - src/main/java/dev/plexapi/sdk/operations/GetServerResources.java
+  - src/main/java/dev/plexapi/sdk/operations/GetSessionHistory.java
+  - src/main/java/dev/plexapi/sdk/operations/GetSessions.java
+  - src/main/java/dev/plexapi/sdk/operations/GetSourceConnectionInformation.java
+  - src/main/java/dev/plexapi/sdk/operations/GetStatistics.java
+  - src/main/java/dev/plexapi/sdk/operations/GetThumbImage.java
+  - src/main/java/dev/plexapi/sdk/operations/GetTimeline.java
+  - src/main/java/dev/plexapi/sdk/operations/GetTokenByPinId.java
+  - src/main/java/dev/plexapi/sdk/operations/GetTokenDetails.java
+  - src/main/java/dev/plexapi/sdk/operations/GetTopWatchedContent.java
+  - src/main/java/dev/plexapi/sdk/operations/GetTranscodeSessions.java
+  - src/main/java/dev/plexapi/sdk/operations/GetTransientToken.java
+  - src/main/java/dev/plexapi/sdk/operations/GetUpdateStatus.java
+  - src/main/java/dev/plexapi/sdk/operations/GetUserFriends.java
+  - src/main/java/dev/plexapi/sdk/operations/GetUsers.java
+  - src/main/java/dev/plexapi/sdk/operations/GetWatchList.java
+  - src/main/java/dev/plexapi/sdk/operations/LogLine.java
+  - src/main/java/dev/plexapi/sdk/operations/LogMultiLine.java
+  - src/main/java/dev/plexapi/sdk/operations/MarkPlayed.java
+  - src/main/java/dev/plexapi/sdk/operations/MarkUnplayed.java
+  - src/main/java/dev/plexapi/sdk/operations/Operations.java
+  - src/main/java/dev/plexapi/sdk/operations/PerformSearch.java
+  - src/main/java/dev/plexapi/sdk/operations/PerformVoiceSearch.java
+  - src/main/java/dev/plexapi/sdk/operations/PostMediaArts.java
+  - src/main/java/dev/plexapi/sdk/operations/PostMediaPoster.java
+  - src/main/java/dev/plexapi/sdk/operations/PostUsersSignInData.java
+  - src/main/java/dev/plexapi/sdk/operations/StartAllTasks.java
+  - src/main/java/dev/plexapi/sdk/operations/StartTask.java
+  - src/main/java/dev/plexapi/sdk/operations/StartUniversalTranscode.java
+  - src/main/java/dev/plexapi/sdk/operations/StopAllTasks.java
+  - src/main/java/dev/plexapi/sdk/operations/StopTask.java
+  - src/main/java/dev/plexapi/sdk/operations/StopTranscodeSession.java
+  - src/main/java/dev/plexapi/sdk/operations/UpdatePlayProgress.java
+  - src/main/java/dev/plexapi/sdk/operations/UpdatePlaylist.java
+  - src/main/java/dev/plexapi/sdk/operations/UploadPlaylist.java
+  - src/main/java/dev/plexapi/sdk/utils/AsyncHook.java
+  - src/main/java/dev/plexapi/sdk/utils/AsyncHooks.java
+  - src/main/java/dev/plexapi/sdk/utils/AsyncResponse.java
+  - src/main/java/dev/plexapi/sdk/utils/AsyncRetries.java
+  - src/main/java/dev/plexapi/sdk/utils/AsyncRetryableException.java
   - src/main/java/dev/plexapi/sdk/utils/BackoffStrategy.java
   - src/main/java/dev/plexapi/sdk/utils/BigDecimalString.java
   - src/main/java/dev/plexapi/sdk/utils/BigIntegerString.java
+  - src/main/java/dev/plexapi/sdk/utils/Blob.java
+  - src/main/java/dev/plexapi/sdk/utils/BlockingParser.java
   - src/main/java/dev/plexapi/sdk/utils/Constants.java
+  - src/main/java/dev/plexapi/sdk/utils/CopiableInputStream.java
   - src/main/java/dev/plexapi/sdk/utils/Deserializers.java
   - src/main/java/dev/plexapi/sdk/utils/EventStream.java
-  - src/main/java/dev/plexapi/sdk/utils/EventStreamLineReader.java
   - src/main/java/dev/plexapi/sdk/utils/EventStreamMessage.java
-  - src/main/java/dev/plexapi/sdk/utils/EventStreamReader.java
+  - src/main/java/dev/plexapi/sdk/utils/Exceptions.java
   - src/main/java/dev/plexapi/sdk/utils/FormMetadata.java
+  - src/main/java/dev/plexapi/sdk/utils/Globals.java
   - src/main/java/dev/plexapi/sdk/utils/HTTPClient.java
   - src/main/java/dev/plexapi/sdk/utils/HTTPRequest.java
   - src/main/java/dev/plexapi/sdk/utils/HasSecurity.java
   - src/main/java/dev/plexapi/sdk/utils/HeaderMetadata.java
   - src/main/java/dev/plexapi/sdk/utils/Helpers.java
   - src/main/java/dev/plexapi/sdk/utils/Hook.java
+  - src/main/java/dev/plexapi/sdk/utils/HookAdapters.java
   - src/main/java/dev/plexapi/sdk/utils/Hooks.java
   - src/main/java/dev/plexapi/sdk/utils/JSON.java
   - src/main/java/dev/plexapi/sdk/utils/LazySingletonValue.java
@@ -2009,6 +2447,7 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/utils/Multipart.java
   - src/main/java/dev/plexapi/sdk/utils/MultipartFormMetadata.java
   - src/main/java/dev/plexapi/sdk/utils/NameValue.java
+  - src/main/java/dev/plexapi/sdk/utils/NonRetryableException.java
   - src/main/java/dev/plexapi/sdk/utils/OneOfDeserializer.java
   - src/main/java/dev/plexapi/sdk/utils/Options.java
   - src/main/java/dev/plexapi/sdk/utils/PathParamsMetadata.java
@@ -2017,21 +2456,27 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/utils/QueryParameters.java
   - src/main/java/dev/plexapi/sdk/utils/QueryParamsMetadata.java
   - src/main/java/dev/plexapi/sdk/utils/RecordingClient.java
+  - src/main/java/dev/plexapi/sdk/utils/Reflections.java
   - src/main/java/dev/plexapi/sdk/utils/RequestBody.java
   - src/main/java/dev/plexapi/sdk/utils/RequestMetadata.java
   - src/main/java/dev/plexapi/sdk/utils/Response.java
+  - src/main/java/dev/plexapi/sdk/utils/ResponseWithBody.java
   - src/main/java/dev/plexapi/sdk/utils/Retries.java
   - src/main/java/dev/plexapi/sdk/utils/RetryConfig.java
+  - src/main/java/dev/plexapi/sdk/utils/RetryableException.java
   - src/main/java/dev/plexapi/sdk/utils/Security.java
   - src/main/java/dev/plexapi/sdk/utils/SecurityMetadata.java
   - src/main/java/dev/plexapi/sdk/utils/SerializedBody.java
   - src/main/java/dev/plexapi/sdk/utils/SessionManager.java
   - src/main/java/dev/plexapi/sdk/utils/SpeakeasyHTTPClient.java
   - src/main/java/dev/plexapi/sdk/utils/SpeakeasyMetadata.java
+  - src/main/java/dev/plexapi/sdk/utils/StreamingParser.java
   - src/main/java/dev/plexapi/sdk/utils/TypedObject.java
   - src/main/java/dev/plexapi/sdk/utils/Types.java
   - src/main/java/dev/plexapi/sdk/utils/Utf8UrlEncoder.java
   - src/main/java/dev/plexapi/sdk/utils/Utils.java
+  - src/main/java/dev/plexapi/sdk/utils/reactive/EventStream.java
+  - src/main/java/dev/plexapi/sdk/utils/reactive/ReactiveUtils.java
 examples:
   getServerCapabilities:
     speakeasy-default-get-server-capabilities:
@@ -2154,6 +2599,17 @@ examples:
           application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
         "401":
           application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
+    speakeasy-default-update-play-progress:
+      parameters:
+        query:
+          key: "<key>"
+          time: 90000
+          state: "played"
+      responses:
+        "400":
+          application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
+        "401":
+          application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
   get-banner-image:
     speakeasy-default-get-banner-image:
       parameters:
@@ -2211,8 +2667,50 @@ examples:
           application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
         "401":
           application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
+    speakeasy-default-get-timeline:
+      parameters:
+        query:
+          ratingKey: 23409
+          key: "/library/metadata/23409"
+          state: "playing"
+          hasMDE: 1
+          time: 2000
+          duration: 10000
+          context: "home:hub.continueWatching"
+          playQueueItemID: 1
+          playBackTime: 2000
+          row: 1
+      responses:
+        "400":
+          application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
+        "401":
+          application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
   startUniversalTranscode:
     "":
+      parameters:
+        query:
+          hasMDE: 1
+          path: "/library/metadata/23409"
+          mediaIndex: 0
+          partIndex: 0
+          protocol: "hls"
+          fastSeek: 0
+          directPlay: 0
+          directStream: 0
+          subtitleSize: 100
+          subtites: "burn"
+          audioBoost: 100
+          location: "lan"
+          mediaBufferSize: 102400
+          session: "zvcage8b7rkioqcm8f4uns4c"
+          addDebugOverlay: 0
+          autoAdjustQuality: 0
+      responses:
+        "400":
+          application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
+        "401":
+          application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
+    speakeasy-default-start-universal-transcode:
       parameters:
         query:
           hasMDE: 1
@@ -2247,6 +2745,15 @@ examples:
           application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
   cancelServerActivities:
     "":
+      parameters:
+        path:
+          activityUUID: "25b71ed5-0f9d-461c-baa7-d404e9e10d3e"
+      responses:
+        "400":
+          application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
+        "401":
+          application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
+    speakeasy-default-cancel-server-activities:
       parameters:
         path:
           activityUUID: "25b71ed5-0f9d-461c-baa7-d404e9e10d3e"
@@ -2350,8 +2857,38 @@ examples:
           application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
         "401":
           application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
+    speakeasy-default-get-server-resources:
+      parameters:
+        query:
+          includeHttps: 1
+          includeRelay: 1
+          includeIPv6: 1
+        header:
+          X-Plex-Client-Identifier: "3381b62b-9ab7-4e37-827b-203e9809eb58"
+      responses:
+        "200":
+          application/json: [{"name": "<value>", "product": "Ergonomic Plastic Hat", "productVersion": "<value>", "platform": "<value>", "platformVersion": "<value>", "device": "Mobile", "clientIdentifier": "<value>", "createdAt": "2019-06-24T11:38:02Z", "lastSeenAt": "2019-06-24T11:38:02Z", "provides": "<value>", "ownerId": null, "sourceTitle": "<value>", "publicAddress": "<value>", "accessToken": "<value>", "owned": true, "home": false, "synced": false, "relay": true, "presence": false, "httpsRequired": true, "publicAddressMatches": false, "dnsRebindingProtection": true, "natLoopbackSupported": false, "connections": [{"protocol": "http", "address": "5746 Mount Street", "port": 441996, "uri": "https://wide-kick.name/", "local": false, "relay": true, "IPv6": true}]}]
+        "400":
+          application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
+        "401":
+          application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
   getPin:
     "":
+      parameters:
+        query:
+          strong: false
+        header:
+          X-Plex-Client-Identifier: "3381b62b-9ab7-4e37-827b-203e9809eb58"
+          X-Plex-Product: "Plex for Roku"
+          X-Plex-Device: "Roku 3"
+          X-Plex-Version: "2.4.1"
+          X-Plex-Platform: "Roku"
+      responses:
+        "201":
+          application/json: {"id": 308667304, "code": "7RQZ", "product": "0", "trusted": false, "qr": "https://plex.tv/api/v2/pins/qr/7RQZ", "clientIdentifier": "string", "location": {"code": "VI", "continent_code": "NA", "country": "United States Virgin Islands", "city": "Amsterdam", "european_union_member": true, "time_zone": "America/St_Thomas", "postal_code": "802", "in_privacy_restricted_country": true, "in_privacy_restricted_region": true, "subdivisions": "Saint Thomas", "coordinates": "18.3381, -64.8941"}, "expiresIn": 876, "createdAt": "2024-07-16T17:03:05Z", "expiresAt": "2024-07-16T17:18:05Z", "authToken": null, "newRegistration": null}
+        "400":
+          application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
+    speakeasy-default-get-pin:
       parameters:
         query:
           strong: false
@@ -2378,6 +2915,23 @@ examples:
           X-Plex-Version: "2.4.1"
           X-Plex-Platform: "Roku"
       responses:
+        "404":
+          application/json: {"errors": [{"code": 1020, "message": "Code not found or expired"}]}
+    speakeasy-default-get-token-by-pin-id:
+      parameters:
+        path:
+          pinID: 232248
+        header:
+          X-Plex-Client-Identifier: "3381b62b-9ab7-4e37-827b-203e9809eb58"
+          X-Plex-Product: "Plex for Roku"
+          X-Plex-Device: "Roku 3"
+          X-Plex-Version: "2.4.1"
+          X-Plex-Platform: "Roku"
+      responses:
+        "200":
+          application/json: {"id": 308667304, "code": "7RQZ", "product": "0", "trusted": false, "qr": "https://plex.tv/api/v2/pins/qr/7RQZ", "clientIdentifier": "string", "location": {"code": "VI", "continent_code": "NA", "country": "United States Virgin Islands", "city": "Amsterdam", "european_union_member": true, "time_zone": "America/St_Thomas", "postal_code": "802", "in_privacy_restricted_country": true, "in_privacy_restricted_region": true, "subdivisions": "Saint Thomas", "coordinates": "18.3381, -64.8941"}, "expiresIn": 876, "createdAt": "2024-07-16T17:03:05Z", "expiresAt": "2024-07-16T17:18:05Z", "authToken": null, "newRegistration": null}
+        "400":
+          application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
         "404":
           application/json: {"errors": [{"code": 1020, "message": "Code not found or expired"}]}
   getGlobalHubs:
@@ -2630,6 +3184,22 @@ examples:
       responses:
         "200":
           application/json: {"MediaContainer": {"size": 50, "allowSync": false, "identifier": "com.plexapp.plugins.library", "librarySectionID": 2, "librarySectionTitle": "TV Series", "librarySectionUUID": "e69655a2-ef48-4aba-bb19-0cc34d1e7d36", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1734362201, "SearchResult": []}}
+        "400":
+          application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
+        "401":
+          application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
+    speakeasy-default-get-search-all-libraries:
+      parameters:
+        query:
+          query: "<value>"
+          searchTypes: ["people"]
+          includeCollections: 1
+          includeExternalMedia: 1
+        header:
+          X-Plex-Client-Identifier: "3381b62b-9ab7-4e37-827b-203e9809eb58"
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 50, "allowSync": false, "identifier": "com.plexapp.plugins.library", "librarySectionID": 2, "librarySectionTitle": "TV Series", "librarySectionUUID": "e69655a2-ef48-4aba-bb19-0cc34d1e7d36", "mediaTagPrefix": "/system/bundle/media/flags/", "mediaTagVersion": 1734362201, "SearchResult": [{"score": 0.92, "Directory": {"key": "/library/sections/3/all?actor=197429", "librarySectionID": 1, "librarySectionKey": "/library/sections/1", "librarySectionTitle": "Movies", "librarySectionType": 1, "type": "tag", "id": 197429, "filter": "actor=197429", "tag": "Ben Stiller", "tagType": 4, "tagKey": "5d776826999c64001ec2c606", "thumb": "https://metadata-static.plex.tv/5/people/57bd7c7d6c5c9e2881251b30e5603d3d.jpg", "count": 10}, "Metadata": {"ratingKey": "58683", "key": "/library/metadata/58683", "guid": "plex://movie/5d7768ba96b655001fdc0408", "slug": "4-for-texas", "studio": "20th Century Studios", "type": "movie", "title": "Avatar: The Way of Water", "banner": "/library/metadata/58683/banner/1703239236", "titleSort": "Whale", "contentRating": "PG-13", "summary": "Jake Sully lives with his newfound family formed on the extrasolar moon Pandora.\nOnce a familiar threat returns to finish what was previously started, Jake must\nwork with Neytiri and the army of the Na'vi race to protect their home.\n", "rating": 7.6, "audienceRating": 9.2, "year": 2022, "tagline": "Return to Pandora.", "thumb": "/library/metadata/58683/thumb/1703239236", "art": "/library/metadata/58683/art/1703239236", "theme": "/library/metadata/1/theme/1705636920", "index": 1, "leafCount": 14, "viewedLeafCount": 0, "childCount": 1, "seasonCount": 2022, "duration": 11558112, "originallyAvailableAt": "2022-12-14", "addedAt": 1556281940, "updatedAt": 1556281940, "parentYear": 2010, "audienceRatingImage": "rottentomatoes://image.rating.upright", "chapterSource": "media", "primaryExtraKey": "/library/metadata/58684", "originalTitle": "映画 ブラッククローバー 魔法帝の剣", "parentRatingKey": "66", "grandparentRatingKey": "66", "parentGuid": "plex://show/5d9c081b170e24001f2a7be4", "grandparentGuid": "plex://show/5d9c081b170e24001f2a7be4", "grandparentSlug": "alice-in-borderland-2020", "grandparentKey": "/library/metadata/66", "parentKey": "/library/metadata/66", "grandparentTitle": "Caprica", "grandparentThumb": "/library/metadata/66/thumb/1705716261", "grandparentTheme": "/library/metadata/66/theme/1705716261", "grandparentArt": "/library/metadata/66/art/1705716261", "parentTitle": "Caprica", "parentIndex": 1, "parentThumb": "/library/metadata/66/thumb/1705716261", "ratingImage": "rottentomatoes://image.rating.ripe", "viewCount": 1, "viewOffset": 5222500, "skipCount": 1, "subtype": "clip", "lastRatedAt": 1721813113, "createdAtAccuracy": "epoch,local", "createdAtTZOffset": "0", "lastViewedAt": 1682752242, "userRating": 10, "Image": [{"alt": "Episode 1", "type": "background", "url": "/library/metadata/45521/thumb/1644710589"}], "UltraBlurColors": {"topLeft": "11333b", "topRight": "0a232d", "bottomRight": "73958", "bottomLeft": "1f5066"}, "Guid": [{"id": "{\"imdbExample\":{\"summary\":\"IMDB example\",\"value\":\"imdb://tt13015952\"},\"tmdbExample\":{\"summary\":\"TMDB example\",\"value\":\"tmdb://2434012\"},\"tvdbExample\":{\"summary\":\"TVDB example\",\"value\":\"tvdb://7945991\"}}"}], "librarySectionID": 1, "librarySectionTitle": "Movies", "librarySectionKey": "/library/sections/1", "showOrdering": "absolute", "flattenSeasons": "1", "skipChildren": false, "Media": [{"id": 387322, "duration": 9610350, "bitrate": 25512, "width": 3840, "height": 1602, "aspectRatio": 2.35, "audioChannels": 6, "displayOffset": 50, "audioCodec": "aac", "videoCodec": "hevc", "videoResolution": "4k", "container": "mp4", "videoFrameRate": "24p", "videoProfile": "main 10", "hasVoiceActivity": false, "audioProfile": "dts", "has64bitOffsets": false, "Part": [{"accessible": true, "exists": true, "id": 418385, "key": "/library/parts/418385/1735864239/file.mkv", "indexes": "sd", "duration": 9610350, "file": "/mnt/Movies_1/W/Wicked (2024).mkv", "size": 30649952104, "packetLength": 188, "container": "mkv", "videoProfile": "main 10", "audioProfile": "dts", "has64bitOffsets": false, "hasThumbnail": "1"}]}], "Genre": [{"id": 259, "tag": "Crime"}], "Country": [{"id": 259, "tag": "United States of America"}], "Director": [{"id": 126522, "tag": "Danny Boyle", "thumb": "https://metadata-static.plex.tv/8/people/8d65fa96804802e08f2de09fe014408e.jpg"}], "Writer": [{"id": 126522, "tag": "Jamie P. Hanson", "thumb": "https://metadata-static.plex.tv/8/people/8d65fa96804802e08f2de09fe014408e.jpg"}], "Role": [{"id": 126522, "tag": "Teller", "role": "Self - Judge", "thumb": "https://metadata-static.plex.tv/7/people/708568fd018d7aa8b1032dcf867747e8.jpg"}], "Location": [{"path": "/TV Shows/Clarkson's Farm"}]}}]}}
         "400":
           application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
         "401":
@@ -2943,8 +3513,36 @@ examples:
           application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
         "401":
           application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
+    speakeasy-default-post-users-sign-in-data:
+      parameters:
+        header:
+          X-Plex-Client-Identifier: "3381b62b-9ab7-4e37-827b-203e9809eb58"
+          X-Plex-Product: "Plex for Roku"
+          X-Plex-Device: "Roku 3"
+          X-Plex-Version: "2.4.1"
+          X-Plex-Platform: "Roku"
+      requestBody:
+        application/x-www-form-urlencoded: {"login": "username@email.com", "password": "password123", "rememberMe": false, "verificationCode": "123456"}
+      responses:
+        "201":
+          application/json: {"adsConsent": null, "adsConsentReminderAt": 1556281940, "adsConsentSetAt": 1556281940, "anonymous": false, "authToken": "CxoUzBTSV5hsxjTpFKaf", "backupCodesCreated": false, "confirmed": false, "country": "US", "email": "username@email.com", "emailOnlyAuth": false, "experimentalFeatures": false, "friendlyName": "friendlyUsername", "entitlements": ["[]"], "guest": false, "hasPassword": true, "home": false, "homeAdmin": false, "homeSize": 1, "id": 13692262, "joinedAt": 1556281940, "locale": "ru", "mailingListActive": false, "mailingListStatus": "active", "maxHomeSize": 15, "profile": {"autoSelectAudio": true, "defaultAudioLanguage": "ja", "defaultSubtitleLanguage": "en", "autoSelectSubtitle": 1, "defaultSubtitleAccessibility": 1, "defaultSubtitleForced": 1, "watchedIndicator": 1, "mediaReviewsVisibility": 1}, "protected": false, "rememberExpiresAt": 1556281940, "restricted": false, "scrobbleTypes": "<value>", "services": [], "subscription": {"active": true, "subscribedAt": "2021-04-12T18:21:12Z", "status": "Inactive"}, "subscriptionDescription": "<value>", "subscriptions": [{"active": true, "subscribedAt": "2021-04-12T18:21:12Z", "status": "Inactive"}], "thumb": "https://plex.tv/users/a4f43c1ebfde43a5/avatar?c=8372075101", "title": "UsernameTitle", "twoFactorEnabled": false, "username": "Username", "uuid": "dae343c1f45beb4f", "attributionPartner": null, "pastSubscriptions": [], "trials": []}
+        "400":
+          application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
+        "401":
+          application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
   getStatistics:
     "":
+      parameters:
+        query:
+          timespan: 4
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 5497, "Device": [{"id": 208, "name": "Roku Express", "platform": "Roku", "clientIdentifier": "793095d235660625108ef785cc7646e9", "createdAt": 1706470556}], "Account": [{"id": 238960586, "key": "/accounts/238960586", "name": "Diane", "defaultAudioLanguage": "en", "autoSelectAudio": true, "defaultSubtitleLanguage": "en", "subtitleMode": 1, "thumb": "https://plex.tv/users/50d83634246da1de/avatar?c=1707110967"}], "StatisticsMedia": [{"accountID": 1, "deviceID": 13, "timespan": 4, "at": 1707141600, "metadataType": 4, "count": 1, "duration": 1555}]}}
+        "400":
+          application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
+        "401":
+          application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
+    speakeasy-default-get-statistics:
       parameters:
         query:
           timespan: 4
@@ -2967,8 +3565,30 @@ examples:
           application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
         "401":
           application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
+    speakeasy-default-get-resources-statistics:
+      parameters:
+        query:
+          timespan: 4
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 5497, "StatisticsResources": [{"timespan": 6, "at": 1718384427, "hostCpuUtilization": 1.276, "processCpuUtilization": 0.025, "hostMemoryUtilization": 17.026, "processMemoryUtilization": 0.493}]}}
+        "400":
+          application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
+        "401":
+          application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
   getBandwidthStatistics:
     "":
+      parameters:
+        query:
+          timespan: 4
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 5497, "Device": [{"id": 208, "name": "Roku Express", "platform": "Roku", "clientIdentifier": "793095d235660625108ef785cc7646e9", "createdAt": 1706470556}], "Account": [{"id": 238960586, "key": "/accounts/238960586", "name": "Diane", "defaultAudioLanguage": "en", "autoSelectAudio": true, "defaultSubtitleLanguage": "en", "subtitleMode": 1, "thumb": "https://plex.tv/users/50d83634246da1de/avatar?c=1707110967"}], "StatisticsBandwidth": [{"accountID": 238960586, "deviceID": 208, "timespan": 6, "at": 1718387650, "lan": true, "bytes": 22}]}}
+        "400":
+          application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
+        "401":
+          application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
+    speakeasy-default-get-bandwidth-statistics:
       parameters:
         query:
           timespan: 4
@@ -3071,6 +3691,19 @@ examples:
           application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
         "401":
           application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
+    speakeasy-default-get-session-history:
+      parameters:
+        query:
+          accountId: 1
+          filter: {}
+          librarySectionID: 12
+      responses:
+        "200":
+          application/json: {"MediaContainer": {"size": 10855, "Metadata": [{"historyKey": "/status/sessions/history/1", "key": "/library/metadata/32171", "ratingKey": "32171", "librarySectionID": "2", "parentKey": "/library/metadata/32170", "grandparentKey": "/library/metadata/32132", "title": "The Noise That Blue Makes", "grandparentTitle": "Taskmaster", "type": "episode", "thumb": "/library/metadata/32171/thumb/-1", "parentThumb": "/library/metadata/32170/thumb/1654134301", "grandparentThumb": "/library/metadata/32132/thumb/1703933346", "grandparentArt": "/library/metadata/32132/art/1703933346", "index": 1, "parentIndex": 13, "originallyAvailableAt": "2022-04-14T00:00:00Z", "viewedAt": 1654139223, "accountID": 1, "deviceID": 5}]}}
+        "400":
+          application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
+        "401":
+          application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
   getTranscodeSessions:
     speakeasy-default-get-transcode-sessions:
       responses:
@@ -3109,6 +3742,15 @@ examples:
           application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
         "401":
           application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
+    speakeasy-default-check-for-updates:
+      parameters:
+        query:
+          download: 1
+      responses:
+        "400":
+          application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
+        "401":
+          application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
   applyUpdates:
     "":
       parameters:
@@ -3120,8 +3762,41 @@ examples:
           application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
         "401":
           application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
+    speakeasy-default-apply-updates:
+      parameters:
+        query:
+          tonight: 1
+          skip: 1
+      responses:
+        "400":
+          application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
+        "401":
+          application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
   get-users:
     "":
+      parameters:
+        header:
+          X-Plex-Client-Identifier: "3381b62b-9ab7-4e37-827b-203e9809eb58"
+          X-Plex-Product: "Plex for Roku"
+          X-Plex-Device: "Roku 3"
+          X-Plex-Device-Name: "Chrome"
+          X-Plex-Device-Screen-Resolution: "1487x1165,2560x1440"
+          X-Plex-Version: "2.4.1"
+          X-Plex-Platform: "Roku"
+          X-Plex-Features: "external-media,indirect-media,hub-style-list"
+          X-Plex-Model: "4200X"
+          X-Plex-Session-Id: "97e136ef-4ddd-4ff3-89a7-a5820c96c2ca"
+          X-Plex-Language: "en"
+          X-Plex-Platform-Version: "4.3 build 1057"
+          X-Plex-Token: "CV5xoxjTpFKUzBTShsaf"
+      responses:
+        "200":
+          application/xml: "0xfD5052DbD1"
+        "400":
+          application/json: {"errors": [{"code": 1000, "message": "X-Plex-Client-Identifier is missing", "status": 400}]}
+        "401":
+          application/json: {"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}
+    speakeasy-default-get-users:
       parameters:
         header:
           X-Plex-Client-Identifier: "3381b62b-9ab7-4e37-827b-203e9809eb58"

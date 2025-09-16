@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import dev.plexapi.sdk.utils.HTTPClient;
 import dev.plexapi.sdk.utils.Hook.SdkInitData;
 import dev.plexapi.sdk.utils.RetryConfig;
+import dev.plexapi.sdk.utils.SpeakeasyHTTPClient;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.String;
 import java.util.Map;
@@ -145,6 +146,7 @@ public class PlexAPI {
      */
     private final Updater updater;
 
+
     private final Users users;
 
     /**
@@ -269,11 +271,13 @@ public class PlexAPI {
         return updater;
     }
 
+
     public Users users() {
         return users;
     }
 
-    private SDKConfiguration sdkConfiguration;
+    private final SDKConfiguration sdkConfiguration;
+    private final AsyncPlexAPI asyncSDK;
 
     /**
      * The Builder class allows the configuration of a new instance of the SDK.
@@ -368,6 +372,23 @@ public class PlexAPI {
             this.sdkConfiguration.setRetryConfig(Optional.of(retryConfig));
             return this;
         }
+
+        /**
+         * Enables debug logging for HTTP requests and responses, including JSON body content.
+         * <p>
+         * Convenience method that calls {@link HTTPClient#enableDebugLogging(boolean)}.
+         * {@link SpeakeasyHTTPClient} honors this setting. If you are using a custom HTTP client,
+         * it is up to the custom client to honor this setting.
+         * </p>
+         *
+         * @param enabled Whether to enable debug logging.
+         * @return The builder instance.
+         */
+        public Builder enableHTTPDebugLogging(boolean enabled) {
+            this.sdkConfiguration.client().enableDebugLogging(enabled);
+            return this;
+        }
+
         /**
          * ServerProtocol
          * 
@@ -504,9 +525,22 @@ public class PlexAPI {
         this.sessions = new Sessions(sdkConfiguration);
         this.updater = new Updater(sdkConfiguration);
         this.users = new Users(sdkConfiguration);
-        
-        SdkInitData data = this.sdkConfiguration.hooks().sdkInit(new SdkInitData(this.sdkConfiguration.resolvedServerUrl(), this.sdkConfiguration.client()));
+        SdkInitData data = this.sdkConfiguration.hooks().sdkInit(
+                new SdkInitData(
+                        this.sdkConfiguration.resolvedServerUrl(), 
+                        this.sdkConfiguration.client()));
         this.sdkConfiguration.setServerUrl(data.baseUrl());
         this.sdkConfiguration.setClient(data.client());
+        this.asyncSDK = new AsyncPlexAPI(this, sdkConfiguration);
     }
+
+    /**
+     * Switches to the async SDK.
+     * 
+     * @return The async SDK
+     */
+    public AsyncPlexAPI async() {
+        return asyncSDK;
+    }
+
 }

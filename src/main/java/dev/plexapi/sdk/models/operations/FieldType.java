@@ -10,12 +10,13 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
-import java.util.Objects;
+
 
 public class FieldType {
 
     @JsonProperty("type")
     private String type;
+
 
     @JsonProperty("Operator")
     private List<Operator> operator;
@@ -40,9 +41,10 @@ public class FieldType {
         return operator;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public FieldType withType(String type) {
         Utils.checkNotNull(type, "type");
@@ -56,7 +58,6 @@ public class FieldType {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -67,15 +68,14 @@ public class FieldType {
         }
         FieldType other = (FieldType) o;
         return 
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.operator, other.operator);
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.operator, other.operator);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            type,
-            operator);
+        return Utils.enhancedHash(
+            type, operator);
     }
     
     @Override
@@ -84,16 +84,18 @@ public class FieldType {
                 "type", type,
                 "operator", operator);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String type;
- 
+
         private List<Operator> operator;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
@@ -101,16 +103,18 @@ public class FieldType {
             return this;
         }
 
+
         public Builder operator(List<Operator> operator) {
             Utils.checkNotNull(operator, "operator");
             this.operator = operator;
             return this;
         }
-        
+
         public FieldType build() {
+
             return new FieldType(
-                type,
-                operator);
+                type, operator);
         }
+
     }
 }

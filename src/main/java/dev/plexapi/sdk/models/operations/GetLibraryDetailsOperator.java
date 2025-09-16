@@ -11,14 +11,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetLibraryDetailsOperator {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
@@ -48,15 +49,17 @@ public class GetLibraryDetailsOperator {
         return title;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetLibraryDetailsOperator withKey(String key) {
         Utils.checkNotNull(key, "key");
         this.key = Optional.ofNullable(key);
         return this;
     }
+
 
     public GetLibraryDetailsOperator withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
@@ -70,13 +73,13 @@ public class GetLibraryDetailsOperator {
         return this;
     }
 
+
     public GetLibraryDetailsOperator withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -87,15 +90,14 @@ public class GetLibraryDetailsOperator {
         }
         GetLibraryDetailsOperator other = (GetLibraryDetailsOperator) o;
         return 
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.title, other.title);
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.title, other.title);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            key,
-            title);
+        return Utils.enhancedHash(
+            key, title);
     }
     
     @Override
@@ -104,16 +106,18 @@ public class GetLibraryDetailsOperator {
                 "key", key,
                 "title", title);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
@@ -127,6 +131,7 @@ public class GetLibraryDetailsOperator {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -138,11 +143,12 @@ public class GetLibraryDetailsOperator {
             this.title = title;
             return this;
         }
-        
+
         public GetLibraryDetailsOperator build() {
+
             return new GetLibraryDetailsOperator(
-                key,
-                title);
+                key, title);
         }
+
     }
 }

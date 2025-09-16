@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.AddPlaylistContents;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Exception;
@@ -14,10 +18,10 @@ public class AddPlaylistContentsRequestBuilder {
     private Double playlistID;
     private String uri;
     private Optional<Double> playQueueID = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallAddPlaylistContents sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public AddPlaylistContentsRequestBuilder(SDKMethodInterfaces.MethodCallAddPlaylistContents sdk) {
-        this.sdk = sdk;
+    public AddPlaylistContentsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public AddPlaylistContentsRequestBuilder playlistID(double playlistID) {
@@ -44,11 +48,22 @@ public class AddPlaylistContentsRequestBuilder {
         return this;
     }
 
-    public AddPlaylistContentsResponse call() throws Exception {
 
-        return sdk.addPlaylistContents(
-            playlistID,
+    private AddPlaylistContentsRequest buildRequest() {
+
+        AddPlaylistContentsRequest request = new AddPlaylistContentsRequest(playlistID,
             uri,
             playQueueID);
+
+        return request;
+    }
+
+    public AddPlaylistContentsResponse call() throws Exception {
+        
+        RequestOperation<AddPlaylistContentsRequest, AddPlaylistContentsResponse> operation
+              = new AddPlaylistContents.Sync(sdkConfiguration);
+        AddPlaylistContentsRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

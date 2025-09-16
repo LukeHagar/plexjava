@@ -9,10 +9,9 @@ import dev.plexapi.sdk.utils.SpeakeasyMetadata;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetSourceConnectionInformationRequest {
-
     /**
      * The source identifier with an included prefix.
      */
@@ -34,9 +33,10 @@ public class GetSourceConnectionInformationRequest {
         return source;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The source identifier with an included prefix.
@@ -47,7 +47,6 @@ public class GetSourceConnectionInformationRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -58,12 +57,12 @@ public class GetSourceConnectionInformationRequest {
         }
         GetSourceConnectionInformationRequest other = (GetSourceConnectionInformationRequest) o;
         return 
-            Objects.deepEquals(this.source, other.source);
+            Utils.enhancedDeepEquals(this.source, other.source);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             source);
     }
     
@@ -72,14 +71,16 @@ public class GetSourceConnectionInformationRequest {
         return Utils.toString(GetSourceConnectionInformationRequest.class,
                 "source", source);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String source;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The source identifier with an included prefix.
@@ -89,10 +90,12 @@ public class GetSourceConnectionInformationRequest {
             this.source = source;
             return this;
         }
-        
+
         public GetSourceConnectionInformationRequest build() {
+
             return new GetSourceConnectionInformationRequest(
                 source);
         }
+
     }
 }

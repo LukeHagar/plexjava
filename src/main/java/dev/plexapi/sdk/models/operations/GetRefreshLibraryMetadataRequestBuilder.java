@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetRefreshLibraryMetadata;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.Integer;
@@ -12,10 +16,10 @@ public class GetRefreshLibraryMetadataRequestBuilder {
 
     private Optional<? extends Force> force = Optional.empty();
     private Integer sectionKey;
-    private final SDKMethodInterfaces.MethodCallGetRefreshLibraryMetadata sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetRefreshLibraryMetadataRequestBuilder(SDKMethodInterfaces.MethodCallGetRefreshLibraryMetadata sdk) {
-        this.sdk = sdk;
+    public GetRefreshLibraryMetadataRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
                 
     public GetRefreshLibraryMetadataRequestBuilder force(Force force) {
@@ -36,10 +40,21 @@ public class GetRefreshLibraryMetadataRequestBuilder {
         return this;
     }
 
-    public GetRefreshLibraryMetadataResponse call() throws Exception {
 
-        return sdk.getRefreshLibraryMetadata(
-            force,
+    private GetRefreshLibraryMetadataRequest buildRequest() {
+
+        GetRefreshLibraryMetadataRequest request = new GetRefreshLibraryMetadataRequest(force,
             sectionKey);
+
+        return request;
+    }
+
+    public GetRefreshLibraryMetadataResponse call() throws Exception {
+        
+        RequestOperation<GetRefreshLibraryMetadataRequest, GetRefreshLibraryMetadataResponse> operation
+              = new GetRefreshLibraryMetadata.Sync(sdkConfiguration);
+        GetRefreshLibraryMetadataRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

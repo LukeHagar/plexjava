@@ -15,8 +15,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class Hub {
 
@@ -24,41 +24,51 @@ public class Hub {
     @JsonProperty("hubKey")
     private Optional<String> hubKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
     private Optional<String> type;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hubIdentifier")
     private Optional<String> hubIdentifier;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("context")
     private Optional<String> context;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("size")
     private Optional<Integer> size;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("more")
     private Optional<Boolean> more;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("style")
     private Optional<String> style;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("promoted")
     private Optional<Boolean> promoted;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Metadata")
@@ -102,7 +112,10 @@ public class Hub {
     }
     
     public Hub() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -161,15 +174,17 @@ public class Hub {
         return (Optional<List<GetGlobalHubsMetadata>>) metadata;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Hub withHubKey(String hubKey) {
         Utils.checkNotNull(hubKey, "hubKey");
         this.hubKey = Optional.ofNullable(hubKey);
         return this;
     }
+
 
     public Hub withHubKey(Optional<String> hubKey) {
         Utils.checkNotNull(hubKey, "hubKey");
@@ -183,6 +198,7 @@ public class Hub {
         return this;
     }
 
+
     public Hub withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
@@ -194,6 +210,7 @@ public class Hub {
         this.title = Optional.ofNullable(title);
         return this;
     }
+
 
     public Hub withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
@@ -207,6 +224,7 @@ public class Hub {
         return this;
     }
 
+
     public Hub withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
@@ -218,6 +236,7 @@ public class Hub {
         this.hubIdentifier = Optional.ofNullable(hubIdentifier);
         return this;
     }
+
 
     public Hub withHubIdentifier(Optional<String> hubIdentifier) {
         Utils.checkNotNull(hubIdentifier, "hubIdentifier");
@@ -231,6 +250,7 @@ public class Hub {
         return this;
     }
 
+
     public Hub withContext(Optional<String> context) {
         Utils.checkNotNull(context, "context");
         this.context = context;
@@ -242,6 +262,7 @@ public class Hub {
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public Hub withSize(Optional<Integer> size) {
         Utils.checkNotNull(size, "size");
@@ -255,6 +276,7 @@ public class Hub {
         return this;
     }
 
+
     public Hub withMore(Optional<Boolean> more) {
         Utils.checkNotNull(more, "more");
         this.more = more;
@@ -266,6 +288,7 @@ public class Hub {
         this.style = Optional.ofNullable(style);
         return this;
     }
+
 
     public Hub withStyle(Optional<String> style) {
         Utils.checkNotNull(style, "style");
@@ -279,6 +302,7 @@ public class Hub {
         return this;
     }
 
+
     public Hub withPromoted(Optional<Boolean> promoted) {
         Utils.checkNotNull(promoted, "promoted");
         this.promoted = promoted;
@@ -291,13 +315,13 @@ public class Hub {
         return this;
     }
 
+
     public Hub withMetadata(Optional<? extends List<GetGlobalHubsMetadata>> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -308,33 +332,26 @@ public class Hub {
         }
         Hub other = (Hub) o;
         return 
-            Objects.deepEquals(this.hubKey, other.hubKey) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.hubIdentifier, other.hubIdentifier) &&
-            Objects.deepEquals(this.context, other.context) &&
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.more, other.more) &&
-            Objects.deepEquals(this.style, other.style) &&
-            Objects.deepEquals(this.promoted, other.promoted) &&
-            Objects.deepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.hubKey, other.hubKey) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.hubIdentifier, other.hubIdentifier) &&
+            Utils.enhancedDeepEquals(this.context, other.context) &&
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.more, other.more) &&
+            Utils.enhancedDeepEquals(this.style, other.style) &&
+            Utils.enhancedDeepEquals(this.promoted, other.promoted) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            hubKey,
-            key,
-            title,
-            type,
-            hubIdentifier,
-            context,
-            size,
-            more,
-            style,
-            promoted,
-            metadata);
+        return Utils.enhancedHash(
+            hubKey, key, title,
+            type, hubIdentifier, context,
+            size, more, style,
+            promoted, metadata);
     }
     
     @Override
@@ -352,34 +369,36 @@ public class Hub {
                 "promoted", promoted,
                 "metadata", metadata);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> hubKey = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> type = Optional.empty();
- 
+
         private Optional<String> hubIdentifier = Optional.empty();
- 
+
         private Optional<String> context = Optional.empty();
- 
+
         private Optional<Integer> size = Optional.empty();
- 
+
         private Optional<Boolean> more = Optional.empty();
- 
+
         private Optional<String> style = Optional.empty();
- 
+
         private Optional<Boolean> promoted = Optional.empty();
- 
+
         private Optional<? extends List<GetGlobalHubsMetadata>> metadata = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder hubKey(String hubKey) {
             Utils.checkNotNull(hubKey, "hubKey");
@@ -393,6 +412,7 @@ public class Hub {
             return this;
         }
 
+
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = Optional.ofNullable(key);
@@ -404,6 +424,7 @@ public class Hub {
             this.key = key;
             return this;
         }
+
 
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
@@ -417,6 +438,7 @@ public class Hub {
             return this;
         }
 
+
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = Optional.ofNullable(type);
@@ -428,6 +450,7 @@ public class Hub {
             this.type = type;
             return this;
         }
+
 
         public Builder hubIdentifier(String hubIdentifier) {
             Utils.checkNotNull(hubIdentifier, "hubIdentifier");
@@ -441,6 +464,7 @@ public class Hub {
             return this;
         }
 
+
         public Builder context(String context) {
             Utils.checkNotNull(context, "context");
             this.context = Optional.ofNullable(context);
@@ -452,6 +476,7 @@ public class Hub {
             this.context = context;
             return this;
         }
+
 
         public Builder size(int size) {
             Utils.checkNotNull(size, "size");
@@ -465,6 +490,7 @@ public class Hub {
             return this;
         }
 
+
         public Builder more(boolean more) {
             Utils.checkNotNull(more, "more");
             this.more = Optional.ofNullable(more);
@@ -476,6 +502,7 @@ public class Hub {
             this.more = more;
             return this;
         }
+
 
         public Builder style(String style) {
             Utils.checkNotNull(style, "style");
@@ -489,6 +516,7 @@ public class Hub {
             return this;
         }
 
+
         public Builder promoted(boolean promoted) {
             Utils.checkNotNull(promoted, "promoted");
             this.promoted = Optional.ofNullable(promoted);
@@ -501,6 +529,7 @@ public class Hub {
             return this;
         }
 
+
         public Builder metadata(List<GetGlobalHubsMetadata> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = Optional.ofNullable(metadata);
@@ -512,20 +541,15 @@ public class Hub {
             this.metadata = metadata;
             return this;
         }
-        
+
         public Hub build() {
+
             return new Hub(
-                hubKey,
-                key,
-                title,
-                type,
-                hubIdentifier,
-                context,
-                size,
-                more,
-                style,
-                promoted,
-                metadata);
+                hubKey, key, title,
+                type, hubIdentifier, context,
+                size, more, style,
+                promoted, metadata);
         }
+
     }
 }

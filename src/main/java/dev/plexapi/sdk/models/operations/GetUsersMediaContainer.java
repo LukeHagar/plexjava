@@ -10,7 +10,6 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * GetUsersMediaContainer
@@ -18,11 +17,11 @@ import java.util.Objects;
  * <p>Container holding user and server details.
  */
 public class GetUsersMediaContainer {
-
     /**
      * The friendly name of the Plex instance.
      */
     private String friendlyName;
+
 
     private String identifier;
 
@@ -113,9 +112,10 @@ public class GetUsersMediaContainer {
         return user;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The friendly name of the Plex instance.
@@ -168,7 +168,6 @@ public class GetUsersMediaContainer {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -179,23 +178,19 @@ public class GetUsersMediaContainer {
         }
         GetUsersMediaContainer other = (GetUsersMediaContainer) o;
         return 
-            Objects.deepEquals(this.friendlyName, other.friendlyName) &&
-            Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.machineIdentifier, other.machineIdentifier) &&
-            Objects.deepEquals(this.totalSize, other.totalSize) &&
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.user, other.user);
+            Utils.enhancedDeepEquals(this.friendlyName, other.friendlyName) &&
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.machineIdentifier, other.machineIdentifier) &&
+            Utils.enhancedDeepEquals(this.totalSize, other.totalSize) &&
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.user, other.user);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            friendlyName,
-            identifier,
-            machineIdentifier,
-            totalSize,
-            size,
-            user);
+        return Utils.enhancedHash(
+            friendlyName, identifier, machineIdentifier,
+            totalSize, size, user);
     }
     
     @Override
@@ -208,24 +203,26 @@ public class GetUsersMediaContainer {
                 "size", size,
                 "user", user);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String friendlyName;
- 
+
         private String identifier;
- 
+
         private String machineIdentifier;
- 
+
         private Long totalSize;
- 
+
         private Long size;
- 
+
         private List<User> user;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The friendly name of the Plex instance.
@@ -236,11 +233,13 @@ public class GetUsersMediaContainer {
             return this;
         }
 
+
         public Builder identifier(String identifier) {
             Utils.checkNotNull(identifier, "identifier");
             this.identifier = identifier;
             return this;
         }
+
 
         /**
          * Unique Machine identifier of the Plex server.
@@ -251,6 +250,7 @@ public class GetUsersMediaContainer {
             return this;
         }
 
+
         /**
          * Total number of users.
          */
@@ -259,6 +259,7 @@ public class GetUsersMediaContainer {
             this.totalSize = totalSize;
             return this;
         }
+
 
         /**
          * Number of users in the current response.
@@ -269,6 +270,7 @@ public class GetUsersMediaContainer {
             return this;
         }
 
+
         /**
          * List of users with access to the Plex server.
          */
@@ -277,15 +279,13 @@ public class GetUsersMediaContainer {
             this.user = user;
             return this;
         }
-        
+
         public GetUsersMediaContainer build() {
+
             return new GetUsersMediaContainer(
-                friendlyName,
-                identifier,
-                machineIdentifier,
-                totalSize,
-                size,
-                user);
+                friendlyName, identifier, machineIdentifier,
+                totalSize, size, user);
         }
+
     }
 }

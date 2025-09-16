@@ -3,18 +3,25 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetAllLibraries;
 import java.lang.Exception;
 
 public class GetAllLibrariesRequestBuilder {
 
-    private final SDKMethodInterfaces.MethodCallGetAllLibraries sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetAllLibrariesRequestBuilder(SDKMethodInterfaces.MethodCallGetAllLibraries sdk) {
-        this.sdk = sdk;
+    public GetAllLibrariesRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetAllLibrariesResponse call() throws Exception {
+        
+        RequestlessOperation<GetAllLibrariesResponse> operation
+            = new GetAllLibraries.Sync(sdkConfiguration);
 
-        return sdk.getAllLibrariesDirect();
+        return operation.handleResponse(operation.doRequest());
     }
 }

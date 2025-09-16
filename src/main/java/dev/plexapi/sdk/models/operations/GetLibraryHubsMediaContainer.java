@@ -15,8 +15,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetLibraryHubsMediaContainer {
 
@@ -24,25 +24,31 @@ public class GetLibraryHubsMediaContainer {
     @JsonProperty("size")
     private Optional<Integer> size;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("allowSync")
     private Optional<Boolean> allowSync;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("identifier")
     private Optional<String> identifier;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionID")
     private Optional<Integer> librarySectionID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionTitle")
     private Optional<String> librarySectionTitle;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionUUID")
     private Optional<String> librarySectionUUID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Hub")
@@ -74,7 +80,9 @@ public class GetLibraryHubsMediaContainer {
     }
     
     public GetLibraryHubsMediaContainer() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -113,15 +121,17 @@ public class GetLibraryHubsMediaContainer {
         return (Optional<List<GetLibraryHubsHub>>) hub;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetLibraryHubsMediaContainer withSize(int size) {
         Utils.checkNotNull(size, "size");
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetLibraryHubsMediaContainer withSize(Optional<Integer> size) {
         Utils.checkNotNull(size, "size");
@@ -135,6 +145,7 @@ public class GetLibraryHubsMediaContainer {
         return this;
     }
 
+
     public GetLibraryHubsMediaContainer withAllowSync(Optional<Boolean> allowSync) {
         Utils.checkNotNull(allowSync, "allowSync");
         this.allowSync = allowSync;
@@ -146,6 +157,7 @@ public class GetLibraryHubsMediaContainer {
         this.identifier = Optional.ofNullable(identifier);
         return this;
     }
+
 
     public GetLibraryHubsMediaContainer withIdentifier(Optional<String> identifier) {
         Utils.checkNotNull(identifier, "identifier");
@@ -159,6 +171,7 @@ public class GetLibraryHubsMediaContainer {
         return this;
     }
 
+
     public GetLibraryHubsMediaContainer withLibrarySectionID(Optional<Integer> librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
         this.librarySectionID = librarySectionID;
@@ -170,6 +183,7 @@ public class GetLibraryHubsMediaContainer {
         this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
         return this;
     }
+
 
     public GetLibraryHubsMediaContainer withLibrarySectionTitle(Optional<String> librarySectionTitle) {
         Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
@@ -183,6 +197,7 @@ public class GetLibraryHubsMediaContainer {
         return this;
     }
 
+
     public GetLibraryHubsMediaContainer withLibrarySectionUUID(Optional<String> librarySectionUUID) {
         Utils.checkNotNull(librarySectionUUID, "librarySectionUUID");
         this.librarySectionUUID = librarySectionUUID;
@@ -195,13 +210,13 @@ public class GetLibraryHubsMediaContainer {
         return this;
     }
 
+
     public GetLibraryHubsMediaContainer withHub(Optional<? extends List<GetLibraryHubsHub>> hub) {
         Utils.checkNotNull(hub, "hub");
         this.hub = hub;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -212,24 +227,20 @@ public class GetLibraryHubsMediaContainer {
         }
         GetLibraryHubsMediaContainer other = (GetLibraryHubsMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.allowSync, other.allowSync) &&
-            Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
-            Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
-            Objects.deepEquals(this.librarySectionUUID, other.librarySectionUUID) &&
-            Objects.deepEquals(this.hub, other.hub);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.allowSync, other.allowSync) &&
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.librarySectionID, other.librarySectionID) &&
+            Utils.enhancedDeepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
+            Utils.enhancedDeepEquals(this.librarySectionUUID, other.librarySectionUUID) &&
+            Utils.enhancedDeepEquals(this.hub, other.hub);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            allowSync,
-            identifier,
-            librarySectionID,
-            librarySectionTitle,
-            librarySectionUUID,
+        return Utils.enhancedHash(
+            size, allowSync, identifier,
+            librarySectionID, librarySectionTitle, librarySectionUUID,
             hub);
     }
     
@@ -244,26 +255,28 @@ public class GetLibraryHubsMediaContainer {
                 "librarySectionUUID", librarySectionUUID,
                 "hub", hub);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> size = Optional.empty();
- 
+
         private Optional<Boolean> allowSync = Optional.empty();
- 
+
         private Optional<String> identifier = Optional.empty();
- 
+
         private Optional<Integer> librarySectionID = Optional.empty();
- 
+
         private Optional<String> librarySectionTitle = Optional.empty();
- 
+
         private Optional<String> librarySectionUUID = Optional.empty();
- 
+
         private Optional<? extends List<GetLibraryHubsHub>> hub = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder size(int size) {
             Utils.checkNotNull(size, "size");
@@ -277,6 +290,7 @@ public class GetLibraryHubsMediaContainer {
             return this;
         }
 
+
         public Builder allowSync(boolean allowSync) {
             Utils.checkNotNull(allowSync, "allowSync");
             this.allowSync = Optional.ofNullable(allowSync);
@@ -288,6 +302,7 @@ public class GetLibraryHubsMediaContainer {
             this.allowSync = allowSync;
             return this;
         }
+
 
         public Builder identifier(String identifier) {
             Utils.checkNotNull(identifier, "identifier");
@@ -301,6 +316,7 @@ public class GetLibraryHubsMediaContainer {
             return this;
         }
 
+
         public Builder librarySectionID(int librarySectionID) {
             Utils.checkNotNull(librarySectionID, "librarySectionID");
             this.librarySectionID = Optional.ofNullable(librarySectionID);
@@ -312,6 +328,7 @@ public class GetLibraryHubsMediaContainer {
             this.librarySectionID = librarySectionID;
             return this;
         }
+
 
         public Builder librarySectionTitle(String librarySectionTitle) {
             Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
@@ -325,6 +342,7 @@ public class GetLibraryHubsMediaContainer {
             return this;
         }
 
+
         public Builder librarySectionUUID(String librarySectionUUID) {
             Utils.checkNotNull(librarySectionUUID, "librarySectionUUID");
             this.librarySectionUUID = Optional.ofNullable(librarySectionUUID);
@@ -337,6 +355,7 @@ public class GetLibraryHubsMediaContainer {
             return this;
         }
 
+
         public Builder hub(List<GetLibraryHubsHub> hub) {
             Utils.checkNotNull(hub, "hub");
             this.hub = Optional.ofNullable(hub);
@@ -348,16 +367,14 @@ public class GetLibraryHubsMediaContainer {
             this.hub = hub;
             return this;
         }
-        
+
         public GetLibraryHubsMediaContainer build() {
+
             return new GetLibraryHubsMediaContainer(
-                size,
-                allowSync,
-                identifier,
-                librarySectionID,
-                librarySectionTitle,
-                librarySectionUUID,
+                size, allowSync, identifier,
+                librarySectionID, librarySectionTitle, librarySectionUUID,
                 hub);
         }
+
     }
 }

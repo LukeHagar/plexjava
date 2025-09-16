@@ -10,11 +10,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetFileHashRequest {
 
+public class GetFileHashRequest {
     /**
      * This is the path to the local file, must be prefixed by `file://`
      */
@@ -58,9 +57,10 @@ public class GetFileHashRequest {
         return type;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * This is the path to the local file, must be prefixed by `file://`
@@ -80,6 +80,7 @@ public class GetFileHashRequest {
         return this;
     }
 
+
     /**
      * Item type
      */
@@ -89,7 +90,6 @@ public class GetFileHashRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -100,15 +100,14 @@ public class GetFileHashRequest {
         }
         GetFileHashRequest other = (GetFileHashRequest) o;
         return 
-            Objects.deepEquals(this.url, other.url) &&
-            Objects.deepEquals(this.type, other.type);
+            Utils.enhancedDeepEquals(this.url, other.url) &&
+            Utils.enhancedDeepEquals(this.type, other.type);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            url,
-            type);
+        return Utils.enhancedHash(
+            url, type);
     }
     
     @Override
@@ -117,16 +116,18 @@ public class GetFileHashRequest {
                 "url", url,
                 "type", type);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String url;
- 
+
         private Optional<Double> type = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * This is the path to the local file, must be prefixed by `file://`
@@ -136,6 +137,7 @@ public class GetFileHashRequest {
             this.url = url;
             return this;
         }
+
 
         /**
          * Item type
@@ -154,11 +156,12 @@ public class GetFileHashRequest {
             this.type = type;
             return this;
         }
-        
+
         public GetFileHashRequest build() {
+
             return new GetFileHashRequest(
-                url,
-                type);
+                url, type);
         }
+
     }
 }

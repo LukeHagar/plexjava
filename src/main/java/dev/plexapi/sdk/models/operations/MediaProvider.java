@@ -13,8 +13,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class MediaProvider {
 
@@ -22,17 +22,21 @@ public class MediaProvider {
     @JsonProperty("identifier")
     private Optional<String> identifier;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("types")
     private Optional<String> types;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("protocols")
     private Optional<String> protocols;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Feature")
@@ -58,7 +62,8 @@ public class MediaProvider {
     }
     
     public MediaProvider() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -87,15 +92,17 @@ public class MediaProvider {
         return (Optional<List<Feature>>) feature;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public MediaProvider withIdentifier(String identifier) {
         Utils.checkNotNull(identifier, "identifier");
         this.identifier = Optional.ofNullable(identifier);
         return this;
     }
+
 
     public MediaProvider withIdentifier(Optional<String> identifier) {
         Utils.checkNotNull(identifier, "identifier");
@@ -109,6 +116,7 @@ public class MediaProvider {
         return this;
     }
 
+
     public MediaProvider withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
@@ -120,6 +128,7 @@ public class MediaProvider {
         this.types = Optional.ofNullable(types);
         return this;
     }
+
 
     public MediaProvider withTypes(Optional<String> types) {
         Utils.checkNotNull(types, "types");
@@ -133,6 +142,7 @@ public class MediaProvider {
         return this;
     }
 
+
     public MediaProvider withProtocols(Optional<String> protocols) {
         Utils.checkNotNull(protocols, "protocols");
         this.protocols = protocols;
@@ -145,13 +155,13 @@ public class MediaProvider {
         return this;
     }
 
+
     public MediaProvider withFeature(Optional<? extends List<Feature>> feature) {
         Utils.checkNotNull(feature, "feature");
         this.feature = feature;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -162,21 +172,18 @@ public class MediaProvider {
         }
         MediaProvider other = (MediaProvider) o;
         return 
-            Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.types, other.types) &&
-            Objects.deepEquals(this.protocols, other.protocols) &&
-            Objects.deepEquals(this.feature, other.feature);
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.types, other.types) &&
+            Utils.enhancedDeepEquals(this.protocols, other.protocols) &&
+            Utils.enhancedDeepEquals(this.feature, other.feature);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            identifier,
-            title,
-            types,
-            protocols,
-            feature);
+        return Utils.enhancedHash(
+            identifier, title, types,
+            protocols, feature);
     }
     
     @Override
@@ -188,22 +195,24 @@ public class MediaProvider {
                 "protocols", protocols,
                 "feature", feature);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> identifier = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> types = Optional.empty();
- 
+
         private Optional<String> protocols = Optional.empty();
- 
+
         private Optional<? extends List<Feature>> feature = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder identifier(String identifier) {
             Utils.checkNotNull(identifier, "identifier");
@@ -217,6 +226,7 @@ public class MediaProvider {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -228,6 +238,7 @@ public class MediaProvider {
             this.title = title;
             return this;
         }
+
 
         public Builder types(String types) {
             Utils.checkNotNull(types, "types");
@@ -241,6 +252,7 @@ public class MediaProvider {
             return this;
         }
 
+
         public Builder protocols(String protocols) {
             Utils.checkNotNull(protocols, "protocols");
             this.protocols = Optional.ofNullable(protocols);
@@ -253,6 +265,7 @@ public class MediaProvider {
             return this;
         }
 
+
         public Builder feature(List<Feature> feature) {
             Utils.checkNotNull(feature, "feature");
             this.feature = Optional.ofNullable(feature);
@@ -264,14 +277,13 @@ public class MediaProvider {
             this.feature = feature;
             return this;
         }
-        
+
         public MediaProvider build() {
+
             return new MediaProvider(
-                identifier,
-                title,
-                types,
-                protocols,
-                feature);
+                identifier, title, types,
+                protocols, feature);
         }
+
     }
 }

@@ -19,7 +19,7 @@ public enum PostUsersSignInDataMediaReviewsVisibility {
     @JsonValue
     private final int value;
 
-    private PostUsersSignInDataMediaReviewsVisibility(int value) {
+    PostUsersSignInDataMediaReviewsVisibility(int value) {
         this.value = value;
     }
     

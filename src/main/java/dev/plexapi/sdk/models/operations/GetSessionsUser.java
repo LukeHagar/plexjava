@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetSessionsUser {
 
@@ -20,9 +20,11 @@ public class GetSessionsUser {
     @JsonProperty("id")
     private Optional<String> id;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
     private Optional<String> thumb;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
@@ -60,15 +62,17 @@ public class GetSessionsUser {
         return title;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetSessionsUser withId(String id) {
         Utils.checkNotNull(id, "id");
         this.id = Optional.ofNullable(id);
         return this;
     }
+
 
     public GetSessionsUser withId(Optional<String> id) {
         Utils.checkNotNull(id, "id");
@@ -82,6 +86,7 @@ public class GetSessionsUser {
         return this;
     }
 
+
     public GetSessionsUser withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
         this.thumb = thumb;
@@ -94,13 +99,13 @@ public class GetSessionsUser {
         return this;
     }
 
+
     public GetSessionsUser withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,17 +116,15 @@ public class GetSessionsUser {
         }
         GetSessionsUser other = (GetSessionsUser) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.title, other.title);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.title, other.title);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            thumb,
-            title);
+        return Utils.enhancedHash(
+            id, thumb, title);
     }
     
     @Override
@@ -131,18 +134,20 @@ public class GetSessionsUser {
                 "thumb", thumb,
                 "title", title);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> id = Optional.empty();
- 
+
         private Optional<String> thumb = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder id(String id) {
             Utils.checkNotNull(id, "id");
@@ -156,6 +161,7 @@ public class GetSessionsUser {
             return this;
         }
 
+
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
             this.thumb = Optional.ofNullable(thumb);
@@ -168,6 +174,7 @@ public class GetSessionsUser {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -179,12 +186,12 @@ public class GetSessionsUser {
             this.title = title;
             return this;
         }
-        
+
         public GetSessionsUser build() {
+
             return new GetSessionsUser(
-                id,
-                thumb,
-                title);
+                id, thumb, title);
         }
+
     }
 }

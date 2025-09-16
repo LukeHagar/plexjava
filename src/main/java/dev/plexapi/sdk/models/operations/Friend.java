@@ -16,11 +16,10 @@ import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-public class Friend {
 
+public class Friend {
     /**
      * The account email address
      */
@@ -53,8 +52,10 @@ public class Friend {
     @JsonProperty("restricted")
     private Optional<Boolean> restricted;
 
+
     @JsonProperty("sharedServers")
     private List<SharedServers> sharedServers;
+
 
     @JsonProperty("sharedSources")
     private List<SharedSources> sharedSources;
@@ -140,7 +141,10 @@ public class Friend {
             String title,
             String username,
             String uuid) {
-        this(email, Optional.empty(), home, id, Optional.empty(), sharedServers, sharedSources, status, thumb, title, username, uuid);
+        this(email, Optional.empty(), home,
+            id, Optional.empty(), sharedServers,
+            sharedSources, status, thumb,
+            title, username, uuid);
     }
 
     /**
@@ -233,9 +237,10 @@ public class Friend {
         return uuid;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The account email address
@@ -254,6 +259,7 @@ public class Friend {
         this.friendlyName = Optional.ofNullable(friendlyName);
         return this;
     }
+
 
     /**
      * The account full name
@@ -290,6 +296,7 @@ public class Friend {
         this.restricted = Optional.ofNullable(restricted);
         return this;
     }
+
 
     /**
      * If the account is a Plex Home managed user
@@ -357,7 +364,6 @@ public class Friend {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -368,35 +374,27 @@ public class Friend {
         }
         Friend other = (Friend) o;
         return 
-            Objects.deepEquals(this.email, other.email) &&
-            Objects.deepEquals(this.friendlyName, other.friendlyName) &&
-            Objects.deepEquals(this.home, other.home) &&
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.restricted, other.restricted) &&
-            Objects.deepEquals(this.sharedServers, other.sharedServers) &&
-            Objects.deepEquals(this.sharedSources, other.sharedSources) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.username, other.username) &&
-            Objects.deepEquals(this.uuid, other.uuid);
+            Utils.enhancedDeepEquals(this.email, other.email) &&
+            Utils.enhancedDeepEquals(this.friendlyName, other.friendlyName) &&
+            Utils.enhancedDeepEquals(this.home, other.home) &&
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.restricted, other.restricted) &&
+            Utils.enhancedDeepEquals(this.sharedServers, other.sharedServers) &&
+            Utils.enhancedDeepEquals(this.sharedSources, other.sharedSources) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.username, other.username) &&
+            Utils.enhancedDeepEquals(this.uuid, other.uuid);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            email,
-            friendlyName,
-            home,
-            id,
-            restricted,
-            sharedServers,
-            sharedSources,
-            status,
-            thumb,
-            title,
-            username,
-            uuid);
+        return Utils.enhancedHash(
+            email, friendlyName, home,
+            id, restricted, sharedServers,
+            sharedSources, status, thumb,
+            title, username, uuid);
     }
     
     @Override
@@ -415,36 +413,38 @@ public class Friend {
                 "username", username,
                 "uuid", uuid);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String email;
- 
+
         private Optional<String> friendlyName = Optional.empty();
- 
+
         private Boolean home;
- 
+
         private Integer id;
- 
+
         private Optional<Boolean> restricted;
- 
+
         private List<SharedServers> sharedServers;
- 
+
         private List<SharedSources> sharedSources;
- 
+
         private Status status;
- 
+
         private String thumb;
- 
+
         private String title;
- 
+
         private String username;
- 
+
         private String uuid;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The account email address
@@ -454,6 +454,7 @@ public class Friend {
             this.email = email;
             return this;
         }
+
 
         /**
          * The account full name
@@ -473,6 +474,7 @@ public class Friend {
             return this;
         }
 
+
         /**
          * If the account is a Plex Home user
          */
@@ -482,6 +484,7 @@ public class Friend {
             return this;
         }
 
+
         /**
          * The Plex account ID
          */
@@ -490,6 +493,7 @@ public class Friend {
             this.id = id;
             return this;
         }
+
 
         /**
          * If the account is a Plex Home managed user
@@ -509,17 +513,20 @@ public class Friend {
             return this;
         }
 
+
         public Builder sharedServers(List<SharedServers> sharedServers) {
             Utils.checkNotNull(sharedServers, "sharedServers");
             this.sharedServers = sharedServers;
             return this;
         }
 
+
         public Builder sharedSources(List<SharedSources> sharedSources) {
             Utils.checkNotNull(sharedSources, "sharedSources");
             this.sharedSources = sharedSources;
             return this;
         }
+
 
         /**
          * Current friend request status
@@ -530,6 +537,7 @@ public class Friend {
             return this;
         }
 
+
         /**
          * URL of the account thumbnail
          */
@@ -538,6 +546,7 @@ public class Friend {
             this.thumb = thumb;
             return this;
         }
+
 
         /**
          * The title of the account (username or friendly name)
@@ -548,6 +557,7 @@ public class Friend {
             return this;
         }
 
+
         /**
          * The account username
          */
@@ -557,6 +567,7 @@ public class Friend {
             return this;
         }
 
+
         /**
          * The account Universally Unique Identifier (UUID)
          */
@@ -565,25 +576,19 @@ public class Friend {
             this.uuid = uuid;
             return this;
         }
-        
+
         public Friend build() {
             if (restricted == null) {
                 restricted = _SINGLETON_VALUE_Restricted.value();
             }
+
             return new Friend(
-                email,
-                friendlyName,
-                home,
-                id,
-                restricted,
-                sharedServers,
-                sharedSources,
-                status,
-                thumb,
-                title,
-                username,
-                uuid);
+                email, friendlyName, home,
+                id, restricted, sharedServers,
+                sharedSources, status, thumb,
+                title, username, uuid);
         }
+
 
         private static final LazySingletonValue<Optional<Boolean>> _SINGLETON_VALUE_Restricted =
                 new LazySingletonValue<>(

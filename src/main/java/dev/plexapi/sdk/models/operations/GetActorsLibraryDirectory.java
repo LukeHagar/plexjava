@@ -9,10 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetActorsLibraryDirectory {
-
     /**
      * A fast lookup key for the actor relative url.
      */
@@ -85,9 +84,10 @@ public class GetActorsLibraryDirectory {
         return title;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * A fast lookup key for the actor relative url.
@@ -125,7 +125,6 @@ public class GetActorsLibraryDirectory {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -136,18 +135,16 @@ public class GetActorsLibraryDirectory {
         }
         GetActorsLibraryDirectory other = (GetActorsLibraryDirectory) o;
         return 
-            Objects.deepEquals(this.fastKey, other.fastKey) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.title, other.title);
+            Utils.enhancedDeepEquals(this.fastKey, other.fastKey) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.title, other.title);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            fastKey,
-            thumb,
-            key,
+        return Utils.enhancedHash(
+            fastKey, thumb, key,
             title);
     }
     
@@ -159,20 +156,22 @@ public class GetActorsLibraryDirectory {
                 "key", key,
                 "title", title);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String fastKey;
- 
+
         private String thumb;
- 
+
         private String key;
- 
+
         private String title;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * A fast lookup key for the actor relative url.
@@ -183,6 +182,7 @@ public class GetActorsLibraryDirectory {
             return this;
         }
 
+
         /**
          * URL for the thumbnail image of the actor.
          */
@@ -191,6 +191,7 @@ public class GetActorsLibraryDirectory {
             this.thumb = thumb;
             return this;
         }
+
 
         /**
          * A unique key representing the actor.
@@ -201,6 +202,7 @@ public class GetActorsLibraryDirectory {
             return this;
         }
 
+
         /**
          * The name of the actor.
          */
@@ -209,13 +211,13 @@ public class GetActorsLibraryDirectory {
             this.title = title;
             return this;
         }
-        
+
         public GetActorsLibraryDirectory build() {
+
             return new GetActorsLibraryDirectory(
-                fastKey,
-                thumb,
-                key,
+                fastKey, thumb, key,
                 title);
         }
+
     }
 }

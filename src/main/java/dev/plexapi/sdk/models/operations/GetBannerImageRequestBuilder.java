@@ -3,16 +3,20 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetBannerImage;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class GetBannerImageRequestBuilder {
 
     private GetBannerImageRequest request;
-    private final SDKMethodInterfaces.MethodCallGetBannerImage sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetBannerImageRequestBuilder(SDKMethodInterfaces.MethodCallGetBannerImage sdk) {
-        this.sdk = sdk;
+    public GetBannerImageRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetBannerImageRequestBuilder request(GetBannerImageRequest request) {
@@ -22,8 +26,10 @@ public class GetBannerImageRequestBuilder {
     }
 
     public GetBannerImageResponse call() throws Exception {
+        
+        RequestOperation<GetBannerImageRequest, GetBannerImageResponse> operation
+              = new GetBannerImage.Sync(sdkConfiguration);
 
-        return sdk.getBannerImage(
-            request);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

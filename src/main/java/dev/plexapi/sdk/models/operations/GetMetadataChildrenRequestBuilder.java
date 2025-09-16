@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetMetadataChildren;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Exception;
@@ -13,10 +17,10 @@ public class GetMetadataChildrenRequestBuilder {
 
     private Double ratingKey;
     private Optional<String> includeElements = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallGetMetadataChildren sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetMetadataChildrenRequestBuilder(SDKMethodInterfaces.MethodCallGetMetadataChildren sdk) {
-        this.sdk = sdk;
+    public GetMetadataChildrenRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetMetadataChildrenRequestBuilder ratingKey(double ratingKey) {
@@ -37,10 +41,21 @@ public class GetMetadataChildrenRequestBuilder {
         return this;
     }
 
-    public GetMetadataChildrenResponse call() throws Exception {
 
-        return sdk.getMetadataChildren(
-            ratingKey,
+    private GetMetadataChildrenRequest buildRequest() {
+
+        GetMetadataChildrenRequest request = new GetMetadataChildrenRequest(ratingKey,
             includeElements);
+
+        return request;
+    }
+
+    public GetMetadataChildrenResponse call() throws Exception {
+        
+        RequestOperation<GetMetadataChildrenRequest, GetMetadataChildrenResponse> operation
+              = new GetMetadataChildren.Sync(sdkConfiguration);
+        GetMetadataChildrenRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

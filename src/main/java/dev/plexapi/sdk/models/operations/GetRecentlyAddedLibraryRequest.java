@@ -15,13 +15,14 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetRecentlyAddedLibraryRequest {
 
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=contentDirectoryID")
     private Optional<Long> contentDirectoryID;
+
 
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=pinnedContentDirectoryID")
     private Optional<? extends List<Long>> pinnedContentDirectoryID;
@@ -92,7 +93,9 @@ public class GetRecentlyAddedLibraryRequest {
     
     public GetRecentlyAddedLibraryRequest(
             QueryParamType type) {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), type, Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            type, Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -156,15 +159,17 @@ public class GetRecentlyAddedLibraryRequest {
         return xPlexContainerSize;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetRecentlyAddedLibraryRequest withContentDirectoryID(long contentDirectoryID) {
         Utils.checkNotNull(contentDirectoryID, "contentDirectoryID");
         this.contentDirectoryID = Optional.ofNullable(contentDirectoryID);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryRequest withContentDirectoryID(Optional<Long> contentDirectoryID) {
         Utils.checkNotNull(contentDirectoryID, "contentDirectoryID");
@@ -177,6 +182,7 @@ public class GetRecentlyAddedLibraryRequest {
         this.pinnedContentDirectoryID = Optional.ofNullable(pinnedContentDirectoryID);
         return this;
     }
+
 
     public GetRecentlyAddedLibraryRequest withPinnedContentDirectoryID(Optional<? extends List<Long>> pinnedContentDirectoryID) {
         Utils.checkNotNull(pinnedContentDirectoryID, "pinnedContentDirectoryID");
@@ -192,6 +198,7 @@ public class GetRecentlyAddedLibraryRequest {
         this.sectionID = Optional.ofNullable(sectionID);
         return this;
     }
+
 
     /**
      * The library section ID for filtering content.
@@ -225,6 +232,7 @@ public class GetRecentlyAddedLibraryRequest {
         return this;
     }
 
+
     /**
      * Adds the Meta object to the response
      */
@@ -244,6 +252,7 @@ public class GetRecentlyAddedLibraryRequest {
         this.xPlexContainerStart = Optional.ofNullable(xPlexContainerStart);
         return this;
     }
+
 
     /**
      * The index of the first item to return. If not specified, the first item will be returned.
@@ -267,6 +276,7 @@ public class GetRecentlyAddedLibraryRequest {
         return this;
     }
 
+
     /**
      * The number of items to return. If not specified, all items will be returned.
      * If the number of items exceeds the limit, the response will be paginated.
@@ -278,7 +288,6 @@ public class GetRecentlyAddedLibraryRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -289,24 +298,20 @@ public class GetRecentlyAddedLibraryRequest {
         }
         GetRecentlyAddedLibraryRequest other = (GetRecentlyAddedLibraryRequest) o;
         return 
-            Objects.deepEquals(this.contentDirectoryID, other.contentDirectoryID) &&
-            Objects.deepEquals(this.pinnedContentDirectoryID, other.pinnedContentDirectoryID) &&
-            Objects.deepEquals(this.sectionID, other.sectionID) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.includeMeta, other.includeMeta) &&
-            Objects.deepEquals(this.xPlexContainerStart, other.xPlexContainerStart) &&
-            Objects.deepEquals(this.xPlexContainerSize, other.xPlexContainerSize);
+            Utils.enhancedDeepEquals(this.contentDirectoryID, other.contentDirectoryID) &&
+            Utils.enhancedDeepEquals(this.pinnedContentDirectoryID, other.pinnedContentDirectoryID) &&
+            Utils.enhancedDeepEquals(this.sectionID, other.sectionID) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.includeMeta, other.includeMeta) &&
+            Utils.enhancedDeepEquals(this.xPlexContainerStart, other.xPlexContainerStart) &&
+            Utils.enhancedDeepEquals(this.xPlexContainerSize, other.xPlexContainerSize);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            contentDirectoryID,
-            pinnedContentDirectoryID,
-            sectionID,
-            type,
-            includeMeta,
-            xPlexContainerStart,
+        return Utils.enhancedHash(
+            contentDirectoryID, pinnedContentDirectoryID, sectionID,
+            type, includeMeta, xPlexContainerStart,
             xPlexContainerSize);
     }
     
@@ -321,26 +326,28 @@ public class GetRecentlyAddedLibraryRequest {
                 "xPlexContainerStart", xPlexContainerStart,
                 "xPlexContainerSize", xPlexContainerSize);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Long> contentDirectoryID = Optional.empty();
- 
+
         private Optional<? extends List<Long>> pinnedContentDirectoryID = Optional.empty();
- 
+
         private Optional<Long> sectionID = Optional.empty();
- 
+
         private QueryParamType type;
- 
+
         private Optional<? extends QueryParamIncludeMeta> includeMeta;
- 
+
         private Optional<Integer> xPlexContainerStart;
- 
+
         private Optional<Integer> xPlexContainerSize;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder contentDirectoryID(long contentDirectoryID) {
             Utils.checkNotNull(contentDirectoryID, "contentDirectoryID");
@@ -354,6 +361,7 @@ public class GetRecentlyAddedLibraryRequest {
             return this;
         }
 
+
         public Builder pinnedContentDirectoryID(List<Long> pinnedContentDirectoryID) {
             Utils.checkNotNull(pinnedContentDirectoryID, "pinnedContentDirectoryID");
             this.pinnedContentDirectoryID = Optional.ofNullable(pinnedContentDirectoryID);
@@ -365,6 +373,7 @@ public class GetRecentlyAddedLibraryRequest {
             this.pinnedContentDirectoryID = pinnedContentDirectoryID;
             return this;
         }
+
 
         /**
          * The library section ID for filtering content.
@@ -384,6 +393,7 @@ public class GetRecentlyAddedLibraryRequest {
             return this;
         }
 
+
         /**
          * The type of media to retrieve or filter by.
          * 1 = movie
@@ -397,6 +407,7 @@ public class GetRecentlyAddedLibraryRequest {
             this.type = type;
             return this;
         }
+
 
         /**
          * Adds the Meta object to the response
@@ -415,6 +426,7 @@ public class GetRecentlyAddedLibraryRequest {
             this.includeMeta = includeMeta;
             return this;
         }
+
 
         /**
          * The index of the first item to return. If not specified, the first item will be returned.
@@ -438,6 +450,7 @@ public class GetRecentlyAddedLibraryRequest {
             return this;
         }
 
+
         /**
          * The number of items to return. If not specified, all items will be returned.
          * If the number of items exceeds the limit, the response will be paginated.
@@ -459,7 +472,7 @@ public class GetRecentlyAddedLibraryRequest {
             this.xPlexContainerSize = xPlexContainerSize;
             return this;
         }
-        
+
         public GetRecentlyAddedLibraryRequest build() {
             if (includeMeta == null) {
                 includeMeta = _SINGLETON_VALUE_IncludeMeta.value();
@@ -470,15 +483,13 @@ public class GetRecentlyAddedLibraryRequest {
             if (xPlexContainerSize == null) {
                 xPlexContainerSize = _SINGLETON_VALUE_XPlexContainerSize.value();
             }
+
             return new GetRecentlyAddedLibraryRequest(
-                contentDirectoryID,
-                pinnedContentDirectoryID,
-                sectionID,
-                type,
-                includeMeta,
-                xPlexContainerStart,
+                contentDirectoryID, pinnedContentDirectoryID, sectionID,
+                type, includeMeta, xPlexContainerStart,
                 xPlexContainerSize);
         }
+
 
         private static final LazySingletonValue<Optional<? extends QueryParamIncludeMeta>> _SINGLETON_VALUE_IncludeMeta =
                 new LazySingletonValue<>(

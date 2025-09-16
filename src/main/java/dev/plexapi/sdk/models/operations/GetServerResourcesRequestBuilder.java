@@ -3,7 +3,11 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
 import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetServerResources;
 import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
@@ -26,10 +30,10 @@ public class GetServerResourcesRequestBuilder {
                             new TypeReference<Optional<? extends IncludeIPv6>>() {});
     private String clientID;
     private Optional<String> serverURL = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallGetServerResources sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetServerResourcesRequestBuilder(SDKMethodInterfaces.MethodCallGetServerResources sdk) {
-        this.sdk = sdk;
+    public GetServerResourcesRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
                 
     public GetServerResourcesRequestBuilder includeHttps(IncludeHttps includeHttps) {
@@ -86,7 +90,8 @@ public class GetServerResourcesRequestBuilder {
         return this;
     }
 
-    public GetServerResourcesResponse call() throws Exception {
+
+    private GetServerResourcesRequest buildRequest() {
         if (includeHttps == null) {
             includeHttps = _SINGLETON_VALUE_IncludeHttps.value();
         }
@@ -96,12 +101,22 @@ public class GetServerResourcesRequestBuilder {
         if (includeIPv6 == null) {
             includeIPv6 = _SINGLETON_VALUE_IncludeIPv6.value();
         }
-        return sdk.getServerResources(
-            includeHttps,
+
+        GetServerResourcesRequest request = new GetServerResourcesRequest(includeHttps,
             includeRelay,
             includeIPv6,
-            clientID,
-            serverURL);
+            clientID);
+
+        return request;
+    }
+
+    public GetServerResourcesResponse call() throws Exception {
+        
+        RequestOperation<GetServerResourcesRequest, GetServerResourcesResponse> operation
+              = new GetServerResources.Sync(sdkConfiguration, serverURL);
+        GetServerResourcesRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 
     private static final LazySingletonValue<Optional<? extends IncludeHttps>> _SINGLETON_VALUE_IncludeHttps =

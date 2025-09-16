@@ -15,11 +15,10 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetSearchAllLibrariesMediaContainer {
 
+public class GetSearchAllLibrariesMediaContainer {
     /**
      * Number of media items returned in this response.
      */
@@ -71,6 +70,7 @@ public class GetSearchAllLibrariesMediaContainer {
     @JsonProperty("mediaTagVersion")
     private long mediaTagVersion;
 
+
     @JsonProperty("SearchResult")
     private List<SearchResult> searchResult;
 
@@ -112,7 +112,9 @@ public class GetSearchAllLibrariesMediaContainer {
             String mediaTagPrefix,
             long mediaTagVersion,
             List<SearchResult> searchResult) {
-        this(size, allowSync, identifier, Optional.empty(), Optional.empty(), Optional.empty(), mediaTagPrefix, mediaTagVersion, searchResult);
+        this(size, allowSync, identifier,
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            mediaTagPrefix, mediaTagVersion, searchResult);
     }
 
     /**
@@ -184,9 +186,10 @@ public class GetSearchAllLibrariesMediaContainer {
         return searchResult;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Number of media items returned in this response.
@@ -224,6 +227,7 @@ public class GetSearchAllLibrariesMediaContainer {
         return this;
     }
 
+
     /**
      * The unique identifier for the library section.
      */
@@ -242,6 +246,7 @@ public class GetSearchAllLibrariesMediaContainer {
         return this;
     }
 
+
     /**
      * The title of the library section.
      */
@@ -259,6 +264,7 @@ public class GetSearchAllLibrariesMediaContainer {
         this.librarySectionUUID = Optional.ofNullable(librarySectionUUID);
         return this;
     }
+
 
     /**
      * The universally unique identifier for the library section.
@@ -293,7 +299,6 @@ public class GetSearchAllLibrariesMediaContainer {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -304,29 +309,23 @@ public class GetSearchAllLibrariesMediaContainer {
         }
         GetSearchAllLibrariesMediaContainer other = (GetSearchAllLibrariesMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.allowSync, other.allowSync) &&
-            Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
-            Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
-            Objects.deepEquals(this.librarySectionUUID, other.librarySectionUUID) &&
-            Objects.deepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
-            Objects.deepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
-            Objects.deepEquals(this.searchResult, other.searchResult);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.allowSync, other.allowSync) &&
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.librarySectionID, other.librarySectionID) &&
+            Utils.enhancedDeepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
+            Utils.enhancedDeepEquals(this.librarySectionUUID, other.librarySectionUUID) &&
+            Utils.enhancedDeepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
+            Utils.enhancedDeepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
+            Utils.enhancedDeepEquals(this.searchResult, other.searchResult);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            allowSync,
-            identifier,
-            librarySectionID,
-            librarySectionTitle,
-            librarySectionUUID,
-            mediaTagPrefix,
-            mediaTagVersion,
-            searchResult);
+        return Utils.enhancedHash(
+            size, allowSync, identifier,
+            librarySectionID, librarySectionTitle, librarySectionUUID,
+            mediaTagPrefix, mediaTagVersion, searchResult);
     }
     
     @Override
@@ -342,30 +341,32 @@ public class GetSearchAllLibrariesMediaContainer {
                 "mediaTagVersion", mediaTagVersion,
                 "searchResult", searchResult);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer size;
- 
+
         private Boolean allowSync;
- 
+
         private String identifier;
- 
+
         private Optional<Long> librarySectionID = Optional.empty();
- 
+
         private Optional<String> librarySectionTitle = Optional.empty();
- 
+
         private Optional<String> librarySectionUUID = Optional.empty();
- 
+
         private String mediaTagPrefix;
- 
+
         private Long mediaTagVersion;
- 
+
         private List<SearchResult> searchResult;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Number of media items returned in this response.
@@ -376,6 +377,7 @@ public class GetSearchAllLibrariesMediaContainer {
             return this;
         }
 
+
         /**
          * Indicates whether syncing is allowed.
          */
@@ -385,6 +387,7 @@ public class GetSearchAllLibrariesMediaContainer {
             return this;
         }
 
+
         /**
          * An plugin identifier for the media container.
          */
@@ -393,6 +396,7 @@ public class GetSearchAllLibrariesMediaContainer {
             this.identifier = identifier;
             return this;
         }
+
 
         /**
          * The unique identifier for the library section.
@@ -412,6 +416,7 @@ public class GetSearchAllLibrariesMediaContainer {
             return this;
         }
 
+
         /**
          * The title of the library section.
          */
@@ -429,6 +434,7 @@ public class GetSearchAllLibrariesMediaContainer {
             this.librarySectionTitle = librarySectionTitle;
             return this;
         }
+
 
         /**
          * The universally unique identifier for the library section.
@@ -448,6 +454,7 @@ public class GetSearchAllLibrariesMediaContainer {
             return this;
         }
 
+
         /**
          * The prefix used for media tag resource paths.
          */
@@ -456,6 +463,7 @@ public class GetSearchAllLibrariesMediaContainer {
             this.mediaTagPrefix = mediaTagPrefix;
             return this;
         }
+
 
         /**
          * The version number for media tags.
@@ -466,23 +474,20 @@ public class GetSearchAllLibrariesMediaContainer {
             return this;
         }
 
+
         public Builder searchResult(List<SearchResult> searchResult) {
             Utils.checkNotNull(searchResult, "searchResult");
             this.searchResult = searchResult;
             return this;
         }
-        
+
         public GetSearchAllLibrariesMediaContainer build() {
+
             return new GetSearchAllLibrariesMediaContainer(
-                size,
-                allowSync,
-                identifier,
-                librarySectionID,
-                librarySectionTitle,
-                librarySectionUUID,
-                mediaTagPrefix,
-                mediaTagVersion,
-                searchResult);
+                size, allowSync, identifier,
+                librarySectionID, librarySectionTitle, librarySectionUUID,
+                mediaTagPrefix, mediaTagVersion, searchResult);
         }
+
     }
 }

@@ -3,18 +3,25 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.EnablePaperTrail;
 import java.lang.Exception;
 
 public class EnablePaperTrailRequestBuilder {
 
-    private final SDKMethodInterfaces.MethodCallEnablePaperTrail sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public EnablePaperTrailRequestBuilder(SDKMethodInterfaces.MethodCallEnablePaperTrail sdk) {
-        this.sdk = sdk;
+    public EnablePaperTrailRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public EnablePaperTrailResponse call() throws Exception {
+        
+        RequestlessOperation<EnablePaperTrailResponse> operation
+            = new EnablePaperTrail.Sync(sdkConfiguration);
 
-        return sdk.enablePaperTrailDirect();
+        return operation.handleResponse(operation.doRequest());
     }
 }

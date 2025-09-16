@@ -11,11 +11,10 @@ import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetLibraryHubsRequest {
 
+public class GetLibraryHubsRequest {
     /**
      * the Id of the library to query
      */
@@ -77,9 +76,10 @@ public class GetLibraryHubsRequest {
         return (Optional<QueryParamOnlyTransient>) onlyTransient;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * the Id of the library to query
@@ -99,6 +99,7 @@ public class GetLibraryHubsRequest {
         return this;
     }
 
+
     /**
      * The number of items to return with each hub.
      */
@@ -117,6 +118,7 @@ public class GetLibraryHubsRequest {
         return this;
     }
 
+
     /**
      * Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added).
      */
@@ -126,7 +128,6 @@ public class GetLibraryHubsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -137,17 +138,15 @@ public class GetLibraryHubsRequest {
         }
         GetLibraryHubsRequest other = (GetLibraryHubsRequest) o;
         return 
-            Objects.deepEquals(this.sectionId, other.sectionId) &&
-            Objects.deepEquals(this.count, other.count) &&
-            Objects.deepEquals(this.onlyTransient, other.onlyTransient);
+            Utils.enhancedDeepEquals(this.sectionId, other.sectionId) &&
+            Utils.enhancedDeepEquals(this.count, other.count) &&
+            Utils.enhancedDeepEquals(this.onlyTransient, other.onlyTransient);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            sectionId,
-            count,
-            onlyTransient);
+        return Utils.enhancedHash(
+            sectionId, count, onlyTransient);
     }
     
     @Override
@@ -157,18 +156,20 @@ public class GetLibraryHubsRequest {
                 "count", count,
                 "onlyTransient", onlyTransient);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Double sectionId;
- 
+
         private Optional<Double> count = Optional.empty();
- 
+
         private Optional<? extends QueryParamOnlyTransient> onlyTransient = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * the Id of the library to query
@@ -178,6 +179,7 @@ public class GetLibraryHubsRequest {
             this.sectionId = sectionId;
             return this;
         }
+
 
         /**
          * The number of items to return with each hub.
@@ -197,6 +199,7 @@ public class GetLibraryHubsRequest {
             return this;
         }
 
+
         /**
          * Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added).
          */
@@ -214,12 +217,12 @@ public class GetLibraryHubsRequest {
             this.onlyTransient = onlyTransient;
             return this;
         }
-        
+
         public GetLibraryHubsRequest build() {
+
             return new GetLibraryHubsRequest(
-                sectionId,
-                count,
-                onlyTransient);
+                sectionId, count, onlyTransient);
         }
+
     }
 }

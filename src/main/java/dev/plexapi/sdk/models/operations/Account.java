@@ -13,8 +13,8 @@ import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class Account {
 
@@ -22,29 +22,36 @@ public class Account {
     @JsonProperty("id")
     private Optional<Integer> id;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("name")
     private Optional<String> name;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("defaultAudioLanguage")
     private Optional<String> defaultAudioLanguage;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("autoSelectAudio")
     private Optional<Boolean> autoSelectAudio;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("defaultSubtitleLanguage")
     private Optional<String> defaultSubtitleLanguage;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("subtitleMode")
     private Optional<Integer> subtitleMode;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
@@ -79,7 +86,9 @@ public class Account {
     }
     
     public Account() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -122,15 +131,17 @@ public class Account {
         return thumb;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Account withId(int id) {
         Utils.checkNotNull(id, "id");
         this.id = Optional.ofNullable(id);
         return this;
     }
+
 
     public Account withId(Optional<Integer> id) {
         Utils.checkNotNull(id, "id");
@@ -144,6 +155,7 @@ public class Account {
         return this;
     }
 
+
     public Account withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
@@ -155,6 +167,7 @@ public class Account {
         this.name = Optional.ofNullable(name);
         return this;
     }
+
 
     public Account withName(Optional<String> name) {
         Utils.checkNotNull(name, "name");
@@ -168,6 +181,7 @@ public class Account {
         return this;
     }
 
+
     public Account withDefaultAudioLanguage(Optional<String> defaultAudioLanguage) {
         Utils.checkNotNull(defaultAudioLanguage, "defaultAudioLanguage");
         this.defaultAudioLanguage = defaultAudioLanguage;
@@ -179,6 +193,7 @@ public class Account {
         this.autoSelectAudio = Optional.ofNullable(autoSelectAudio);
         return this;
     }
+
 
     public Account withAutoSelectAudio(Optional<Boolean> autoSelectAudio) {
         Utils.checkNotNull(autoSelectAudio, "autoSelectAudio");
@@ -192,6 +207,7 @@ public class Account {
         return this;
     }
 
+
     public Account withDefaultSubtitleLanguage(Optional<String> defaultSubtitleLanguage) {
         Utils.checkNotNull(defaultSubtitleLanguage, "defaultSubtitleLanguage");
         this.defaultSubtitleLanguage = defaultSubtitleLanguage;
@@ -203,6 +219,7 @@ public class Account {
         this.subtitleMode = Optional.ofNullable(subtitleMode);
         return this;
     }
+
 
     public Account withSubtitleMode(Optional<Integer> subtitleMode) {
         Utils.checkNotNull(subtitleMode, "subtitleMode");
@@ -216,13 +233,13 @@ public class Account {
         return this;
     }
 
+
     public Account withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
         this.thumb = thumb;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -233,27 +250,22 @@ public class Account {
         }
         Account other = (Account) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.name, other.name) &&
-            Objects.deepEquals(this.defaultAudioLanguage, other.defaultAudioLanguage) &&
-            Objects.deepEquals(this.autoSelectAudio, other.autoSelectAudio) &&
-            Objects.deepEquals(this.defaultSubtitleLanguage, other.defaultSubtitleLanguage) &&
-            Objects.deepEquals(this.subtitleMode, other.subtitleMode) &&
-            Objects.deepEquals(this.thumb, other.thumb);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.defaultAudioLanguage, other.defaultAudioLanguage) &&
+            Utils.enhancedDeepEquals(this.autoSelectAudio, other.autoSelectAudio) &&
+            Utils.enhancedDeepEquals(this.defaultSubtitleLanguage, other.defaultSubtitleLanguage) &&
+            Utils.enhancedDeepEquals(this.subtitleMode, other.subtitleMode) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            key,
-            name,
-            defaultAudioLanguage,
-            autoSelectAudio,
-            defaultSubtitleLanguage,
-            subtitleMode,
-            thumb);
+        return Utils.enhancedHash(
+            id, key, name,
+            defaultAudioLanguage, autoSelectAudio, defaultSubtitleLanguage,
+            subtitleMode, thumb);
     }
     
     @Override
@@ -268,28 +280,30 @@ public class Account {
                 "subtitleMode", subtitleMode,
                 "thumb", thumb);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> id = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> name = Optional.empty();
- 
+
         private Optional<String> defaultAudioLanguage = Optional.empty();
- 
+
         private Optional<Boolean> autoSelectAudio = Optional.empty();
- 
+
         private Optional<String> defaultSubtitleLanguage = Optional.empty();
- 
+
         private Optional<Integer> subtitleMode = Optional.empty();
- 
+
         private Optional<String> thumb = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder id(int id) {
             Utils.checkNotNull(id, "id");
@@ -303,6 +317,7 @@ public class Account {
             return this;
         }
 
+
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = Optional.ofNullable(key);
@@ -314,6 +329,7 @@ public class Account {
             this.key = key;
             return this;
         }
+
 
         public Builder name(String name) {
             Utils.checkNotNull(name, "name");
@@ -327,6 +343,7 @@ public class Account {
             return this;
         }
 
+
         public Builder defaultAudioLanguage(String defaultAudioLanguage) {
             Utils.checkNotNull(defaultAudioLanguage, "defaultAudioLanguage");
             this.defaultAudioLanguage = Optional.ofNullable(defaultAudioLanguage);
@@ -338,6 +355,7 @@ public class Account {
             this.defaultAudioLanguage = defaultAudioLanguage;
             return this;
         }
+
 
         public Builder autoSelectAudio(boolean autoSelectAudio) {
             Utils.checkNotNull(autoSelectAudio, "autoSelectAudio");
@@ -351,6 +369,7 @@ public class Account {
             return this;
         }
 
+
         public Builder defaultSubtitleLanguage(String defaultSubtitleLanguage) {
             Utils.checkNotNull(defaultSubtitleLanguage, "defaultSubtitleLanguage");
             this.defaultSubtitleLanguage = Optional.ofNullable(defaultSubtitleLanguage);
@@ -362,6 +381,7 @@ public class Account {
             this.defaultSubtitleLanguage = defaultSubtitleLanguage;
             return this;
         }
+
 
         public Builder subtitleMode(int subtitleMode) {
             Utils.checkNotNull(subtitleMode, "subtitleMode");
@@ -375,6 +395,7 @@ public class Account {
             return this;
         }
 
+
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
             this.thumb = Optional.ofNullable(thumb);
@@ -386,17 +407,14 @@ public class Account {
             this.thumb = thumb;
             return this;
         }
-        
+
         public Account build() {
+
             return new Account(
-                id,
-                key,
-                name,
-                defaultAudioLanguage,
-                autoSelectAudio,
-                defaultSubtitleLanguage,
-                subtitleMode,
-                thumb);
+                id, key, name,
+                defaultAudioLanguage, autoSelectAudio, defaultSubtitleLanguage,
+                subtitleMode, thumb);
         }
+
     }
 }

@@ -17,6 +17,7 @@ Get the timeline for a media item
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getTimeline" method="get" path="/:/timeline" -->
 ```java
 package hello.world;
 
@@ -31,20 +32,20 @@ public class Application {
     public static void main(String[] args) throws GetTimelineBadRequest, GetTimelineUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetTimelineRequest req = GetTimelineRequest.builder()
-                .ratingKey(23409)
+                .ratingKey(23409d)
                 .key("/library/metadata/23409")
                 .state(State.PLAYING)
-                .hasMDE(1)
-                .time(2000)
-                .duration(10000)
+                .hasMDE(1d)
+                .time(2000d)
+                .duration(10000d)
                 .context("home:hub.continueWatching")
-                .playQueueItemID(1)
-                .playBackTime(2000)
-                .row(1)
+                .playQueueItemID(1d)
+                .playBackTime(2000d)
+                .row(1d)
                 .build();
 
         GetTimelineResponse res = sdk.video().getTimeline()
@@ -80,6 +81,7 @@ Begin a Universal Transcode Session
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="startUniversalTranscode" method="get" path="/video/:/transcode/universal/start.mpd" -->
 ```java
 package hello.world;
 
@@ -95,26 +97,26 @@ public class Application {
     public static void main(String[] args) throws StartUniversalTranscodeBadRequest, StartUniversalTranscodeUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         StartUniversalTranscodeRequest req = StartUniversalTranscodeRequest.builder()
-                .hasMDE(1)
+                .hasMDE(1d)
                 .path("/library/metadata/23409")
-                .mediaIndex(0)
-                .partIndex(0)
+                .mediaIndex(0d)
+                .partIndex(0d)
                 .protocol("hls")
-                .fastSeek(0)
-                .directPlay(0)
-                .directStream(0)
-                .subtitleSize(100)
+                .fastSeek(0d)
+                .directPlay(0d)
+                .directStream(0d)
+                .subtitleSize(100d)
                 .subtites("burn")
-                .audioBoost(100)
+                .audioBoost(100d)
                 .location("lan")
-                .mediaBufferSize(102400)
+                .mediaBufferSize(102400d)
                 .session("zvcage8b7rkioqcm8f4uns4c")
-                .addDebugOverlay(0)
-                .autoAdjustQuality(0)
+                .addDebugOverlay(0d)
+                .autoAdjustQuality(0d)
                 .build();
 
         StartUniversalTranscodeResponse res = sdk.video().startUniversalTranscode()

@@ -16,6 +16,7 @@ Get User Watchlist
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-watch-list" method="get" path="/library/sections/watchlist/{filter}" -->
 ```java
 package hello.world;
 
@@ -30,7 +31,7 @@ public class Application {
     public static void main(String[] args) throws GetWatchListBadRequest, GetWatchListUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetWatchListRequest req = GetWatchListRequest.builder()

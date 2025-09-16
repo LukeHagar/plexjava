@@ -12,11 +12,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetSearchAllLibrariesDirector {
 
+public class GetSearchAllLibrariesDirector {
     /**
      * Unique identifier for the director.
      */
@@ -79,9 +78,10 @@ public class GetSearchAllLibrariesDirector {
         return thumb;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Unique identifier for the director.
@@ -110,6 +110,7 @@ public class GetSearchAllLibrariesDirector {
         return this;
     }
 
+
     /**
      * The absolute URL of the thumbnail image for the director.
      */
@@ -119,7 +120,6 @@ public class GetSearchAllLibrariesDirector {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -130,17 +130,15 @@ public class GetSearchAllLibrariesDirector {
         }
         GetSearchAllLibrariesDirector other = (GetSearchAllLibrariesDirector) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.tag, other.tag) &&
-            Objects.deepEquals(this.thumb, other.thumb);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.tag, other.tag) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            tag,
-            thumb);
+        return Utils.enhancedHash(
+            id, tag, thumb);
     }
     
     @Override
@@ -150,18 +148,20 @@ public class GetSearchAllLibrariesDirector {
                 "tag", tag,
                 "thumb", thumb);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer id;
- 
+
         private String tag;
- 
+
         private Optional<String> thumb = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Unique identifier for the director.
@@ -172,6 +172,7 @@ public class GetSearchAllLibrariesDirector {
             return this;
         }
 
+
         /**
          * The role of Director
          */
@@ -180,6 +181,7 @@ public class GetSearchAllLibrariesDirector {
             this.tag = tag;
             return this;
         }
+
 
         /**
          * The absolute URL of the thumbnail image for the director.
@@ -198,12 +200,12 @@ public class GetSearchAllLibrariesDirector {
             this.thumb = thumb;
             return this;
         }
-        
+
         public GetSearchAllLibrariesDirector build() {
+
             return new GetSearchAllLibrariesDirector(
-                id,
-                tag,
-                thumb);
+                id, tag, thumb);
         }
+
     }
 }

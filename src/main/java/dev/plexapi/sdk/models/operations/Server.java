@@ -12,8 +12,8 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class Server {
 
@@ -21,41 +21,51 @@ public class Server {
     @JsonProperty("name")
     private Optional<String> name;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("host")
     private Optional<String> host;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("address")
     private Optional<String> address;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("port")
     private Optional<Double> port;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("machineIdentifier")
     private Optional<String> machineIdentifier;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("version")
     private Optional<String> version;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("protocol")
     private Optional<String> protocol;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("product")
     private Optional<String> product;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("deviceClass")
     private Optional<String> deviceClass;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("protocolVersion")
     private Optional<Double> protocolVersion;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("protocolCapabilities")
@@ -99,7 +109,10 @@ public class Server {
     }
     
     public Server() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -157,15 +170,17 @@ public class Server {
         return protocolCapabilities;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Server withName(String name) {
         Utils.checkNotNull(name, "name");
         this.name = Optional.ofNullable(name);
         return this;
     }
+
 
     public Server withName(Optional<String> name) {
         Utils.checkNotNull(name, "name");
@@ -179,6 +194,7 @@ public class Server {
         return this;
     }
 
+
     public Server withHost(Optional<String> host) {
         Utils.checkNotNull(host, "host");
         this.host = host;
@@ -190,6 +206,7 @@ public class Server {
         this.address = Optional.ofNullable(address);
         return this;
     }
+
 
     public Server withAddress(Optional<String> address) {
         Utils.checkNotNull(address, "address");
@@ -203,6 +220,7 @@ public class Server {
         return this;
     }
 
+
     public Server withPort(Optional<Double> port) {
         Utils.checkNotNull(port, "port");
         this.port = port;
@@ -214,6 +232,7 @@ public class Server {
         this.machineIdentifier = Optional.ofNullable(machineIdentifier);
         return this;
     }
+
 
     public Server withMachineIdentifier(Optional<String> machineIdentifier) {
         Utils.checkNotNull(machineIdentifier, "machineIdentifier");
@@ -227,6 +246,7 @@ public class Server {
         return this;
     }
 
+
     public Server withVersion(Optional<String> version) {
         Utils.checkNotNull(version, "version");
         this.version = version;
@@ -238,6 +258,7 @@ public class Server {
         this.protocol = Optional.ofNullable(protocol);
         return this;
     }
+
 
     public Server withProtocol(Optional<String> protocol) {
         Utils.checkNotNull(protocol, "protocol");
@@ -251,6 +272,7 @@ public class Server {
         return this;
     }
 
+
     public Server withProduct(Optional<String> product) {
         Utils.checkNotNull(product, "product");
         this.product = product;
@@ -262,6 +284,7 @@ public class Server {
         this.deviceClass = Optional.ofNullable(deviceClass);
         return this;
     }
+
 
     public Server withDeviceClass(Optional<String> deviceClass) {
         Utils.checkNotNull(deviceClass, "deviceClass");
@@ -275,6 +298,7 @@ public class Server {
         return this;
     }
 
+
     public Server withProtocolVersion(Optional<Double> protocolVersion) {
         Utils.checkNotNull(protocolVersion, "protocolVersion");
         this.protocolVersion = protocolVersion;
@@ -287,13 +311,13 @@ public class Server {
         return this;
     }
 
+
     public Server withProtocolCapabilities(Optional<String> protocolCapabilities) {
         Utils.checkNotNull(protocolCapabilities, "protocolCapabilities");
         this.protocolCapabilities = protocolCapabilities;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -304,33 +328,26 @@ public class Server {
         }
         Server other = (Server) o;
         return 
-            Objects.deepEquals(this.name, other.name) &&
-            Objects.deepEquals(this.host, other.host) &&
-            Objects.deepEquals(this.address, other.address) &&
-            Objects.deepEquals(this.port, other.port) &&
-            Objects.deepEquals(this.machineIdentifier, other.machineIdentifier) &&
-            Objects.deepEquals(this.version, other.version) &&
-            Objects.deepEquals(this.protocol, other.protocol) &&
-            Objects.deepEquals(this.product, other.product) &&
-            Objects.deepEquals(this.deviceClass, other.deviceClass) &&
-            Objects.deepEquals(this.protocolVersion, other.protocolVersion) &&
-            Objects.deepEquals(this.protocolCapabilities, other.protocolCapabilities);
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.host, other.host) &&
+            Utils.enhancedDeepEquals(this.address, other.address) &&
+            Utils.enhancedDeepEquals(this.port, other.port) &&
+            Utils.enhancedDeepEquals(this.machineIdentifier, other.machineIdentifier) &&
+            Utils.enhancedDeepEquals(this.version, other.version) &&
+            Utils.enhancedDeepEquals(this.protocol, other.protocol) &&
+            Utils.enhancedDeepEquals(this.product, other.product) &&
+            Utils.enhancedDeepEquals(this.deviceClass, other.deviceClass) &&
+            Utils.enhancedDeepEquals(this.protocolVersion, other.protocolVersion) &&
+            Utils.enhancedDeepEquals(this.protocolCapabilities, other.protocolCapabilities);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            name,
-            host,
-            address,
-            port,
-            machineIdentifier,
-            version,
-            protocol,
-            product,
-            deviceClass,
-            protocolVersion,
-            protocolCapabilities);
+        return Utils.enhancedHash(
+            name, host, address,
+            port, machineIdentifier, version,
+            protocol, product, deviceClass,
+            protocolVersion, protocolCapabilities);
     }
     
     @Override
@@ -348,34 +365,36 @@ public class Server {
                 "protocolVersion", protocolVersion,
                 "protocolCapabilities", protocolCapabilities);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> name = Optional.empty();
- 
+
         private Optional<String> host = Optional.empty();
- 
+
         private Optional<String> address = Optional.empty();
- 
+
         private Optional<Double> port = Optional.empty();
- 
+
         private Optional<String> machineIdentifier = Optional.empty();
- 
+
         private Optional<String> version = Optional.empty();
- 
+
         private Optional<String> protocol = Optional.empty();
- 
+
         private Optional<String> product = Optional.empty();
- 
+
         private Optional<String> deviceClass = Optional.empty();
- 
+
         private Optional<Double> protocolVersion = Optional.empty();
- 
+
         private Optional<String> protocolCapabilities = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder name(String name) {
             Utils.checkNotNull(name, "name");
@@ -389,6 +408,7 @@ public class Server {
             return this;
         }
 
+
         public Builder host(String host) {
             Utils.checkNotNull(host, "host");
             this.host = Optional.ofNullable(host);
@@ -400,6 +420,7 @@ public class Server {
             this.host = host;
             return this;
         }
+
 
         public Builder address(String address) {
             Utils.checkNotNull(address, "address");
@@ -413,6 +434,7 @@ public class Server {
             return this;
         }
 
+
         public Builder port(double port) {
             Utils.checkNotNull(port, "port");
             this.port = Optional.ofNullable(port);
@@ -424,6 +446,7 @@ public class Server {
             this.port = port;
             return this;
         }
+
 
         public Builder machineIdentifier(String machineIdentifier) {
             Utils.checkNotNull(machineIdentifier, "machineIdentifier");
@@ -437,6 +460,7 @@ public class Server {
             return this;
         }
 
+
         public Builder version(String version) {
             Utils.checkNotNull(version, "version");
             this.version = Optional.ofNullable(version);
@@ -448,6 +472,7 @@ public class Server {
             this.version = version;
             return this;
         }
+
 
         public Builder protocol(String protocol) {
             Utils.checkNotNull(protocol, "protocol");
@@ -461,6 +486,7 @@ public class Server {
             return this;
         }
 
+
         public Builder product(String product) {
             Utils.checkNotNull(product, "product");
             this.product = Optional.ofNullable(product);
@@ -472,6 +498,7 @@ public class Server {
             this.product = product;
             return this;
         }
+
 
         public Builder deviceClass(String deviceClass) {
             Utils.checkNotNull(deviceClass, "deviceClass");
@@ -485,6 +512,7 @@ public class Server {
             return this;
         }
 
+
         public Builder protocolVersion(double protocolVersion) {
             Utils.checkNotNull(protocolVersion, "protocolVersion");
             this.protocolVersion = Optional.ofNullable(protocolVersion);
@@ -497,6 +525,7 @@ public class Server {
             return this;
         }
 
+
         public Builder protocolCapabilities(String protocolCapabilities) {
             Utils.checkNotNull(protocolCapabilities, "protocolCapabilities");
             this.protocolCapabilities = Optional.ofNullable(protocolCapabilities);
@@ -508,20 +537,15 @@ public class Server {
             this.protocolCapabilities = protocolCapabilities;
             return this;
         }
-        
+
         public Server build() {
+
             return new Server(
-                name,
-                host,
-                address,
-                port,
-                machineIdentifier,
-                version,
-                protocol,
-                product,
-                deviceClass,
-                protocolVersion,
-                protocolCapabilities);
+                name, host, address,
+                port, machineIdentifier, version,
+                protocol, product, deviceClass,
+                protocolVersion, protocolCapabilities);
         }
+
     }
 }

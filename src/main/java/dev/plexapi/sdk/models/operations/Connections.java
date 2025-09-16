@@ -11,10 +11,9 @@ import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class Connections {
-
     /**
      * The protocol used for the connection (http, https, etc)
      */
@@ -138,9 +137,10 @@ public class Connections {
         return iPv6;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The protocol used for the connection (http, https, etc)
@@ -205,7 +205,6 @@ public class Connections {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -216,24 +215,20 @@ public class Connections {
         }
         Connections other = (Connections) o;
         return 
-            Objects.deepEquals(this.protocol, other.protocol) &&
-            Objects.deepEquals(this.address, other.address) &&
-            Objects.deepEquals(this.port, other.port) &&
-            Objects.deepEquals(this.uri, other.uri) &&
-            Objects.deepEquals(this.local, other.local) &&
-            Objects.deepEquals(this.relay, other.relay) &&
-            Objects.deepEquals(this.iPv6, other.iPv6);
+            Utils.enhancedDeepEquals(this.protocol, other.protocol) &&
+            Utils.enhancedDeepEquals(this.address, other.address) &&
+            Utils.enhancedDeepEquals(this.port, other.port) &&
+            Utils.enhancedDeepEquals(this.uri, other.uri) &&
+            Utils.enhancedDeepEquals(this.local, other.local) &&
+            Utils.enhancedDeepEquals(this.relay, other.relay) &&
+            Utils.enhancedDeepEquals(this.iPv6, other.iPv6);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            protocol,
-            address,
-            port,
-            uri,
-            local,
-            relay,
+        return Utils.enhancedHash(
+            protocol, address, port,
+            uri, local, relay,
             iPv6);
     }
     
@@ -248,26 +243,28 @@ public class Connections {
                 "relay", relay,
                 "iPv6", iPv6);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Protocol protocol;
- 
+
         private String address;
- 
+
         private Integer port;
- 
+
         private String uri;
- 
+
         private Boolean local;
- 
+
         private Boolean relay;
- 
+
         private Boolean iPv6;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The protocol used for the connection (http, https, etc)
@@ -278,6 +275,7 @@ public class Connections {
             return this;
         }
 
+
         /**
          * The (ip) address or domain name used for the connection
          */
@@ -286,6 +284,7 @@ public class Connections {
             this.address = address;
             return this;
         }
+
 
         /**
          * The port used for the connection
@@ -296,6 +295,7 @@ public class Connections {
             return this;
         }
 
+
         /**
          * The full URI of the connection
          */
@@ -304,6 +304,7 @@ public class Connections {
             this.uri = uri;
             return this;
         }
+
 
         /**
          * If the connection is local address
@@ -314,6 +315,7 @@ public class Connections {
             return this;
         }
 
+
         /**
          * If the connection is relayed through plex.direct
          */
@@ -323,6 +325,7 @@ public class Connections {
             return this;
         }
 
+
         /**
          * If the connection is using IPv6
          */
@@ -331,16 +334,14 @@ public class Connections {
             this.iPv6 = iPv6;
             return this;
         }
-        
+
         public Connections build() {
+
             return new Connections(
-                protocol,
-                address,
-                port,
-                uri,
-                local,
-                relay,
+                protocol, address, port,
+                uri, local, relay,
                 iPv6);
         }
+
     }
 }

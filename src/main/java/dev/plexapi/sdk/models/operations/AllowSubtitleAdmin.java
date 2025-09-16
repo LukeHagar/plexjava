@@ -19,7 +19,7 @@ public enum AllowSubtitleAdmin {
     @JsonValue
     private final int value;
 
-    private AllowSubtitleAdmin(int value) {
+    AllowSubtitleAdmin(int value) {
         this.value = value;
     }
     

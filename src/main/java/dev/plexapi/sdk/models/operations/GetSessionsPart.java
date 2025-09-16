@@ -15,8 +15,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetSessionsPart {
 
@@ -24,37 +24,46 @@ public class GetSessionsPart {
     @JsonProperty("container")
     private Optional<String> container;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
     private Optional<Integer> duration;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("file")
     private Optional<String> file;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hasThumbnail")
     private Optional<String> hasThumbnail;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("id")
     private Optional<String> id;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("size")
     private Optional<Integer> size;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("decision")
     private Optional<String> decision;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("selected")
     private Optional<Boolean> selected;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Stream")
@@ -95,7 +104,10 @@ public class GetSessionsPart {
     }
     
     public GetSessionsPart() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -149,15 +161,17 @@ public class GetSessionsPart {
         return (Optional<List<GetSessionsStream>>) stream;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetSessionsPart withContainer(String container) {
         Utils.checkNotNull(container, "container");
         this.container = Optional.ofNullable(container);
         return this;
     }
+
 
     public GetSessionsPart withContainer(Optional<String> container) {
         Utils.checkNotNull(container, "container");
@@ -171,6 +185,7 @@ public class GetSessionsPart {
         return this;
     }
 
+
     public GetSessionsPart withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = duration;
@@ -182,6 +197,7 @@ public class GetSessionsPart {
         this.file = Optional.ofNullable(file);
         return this;
     }
+
 
     public GetSessionsPart withFile(Optional<String> file) {
         Utils.checkNotNull(file, "file");
@@ -195,6 +211,7 @@ public class GetSessionsPart {
         return this;
     }
 
+
     public GetSessionsPart withHasThumbnail(Optional<String> hasThumbnail) {
         Utils.checkNotNull(hasThumbnail, "hasThumbnail");
         this.hasThumbnail = hasThumbnail;
@@ -206,6 +223,7 @@ public class GetSessionsPart {
         this.id = Optional.ofNullable(id);
         return this;
     }
+
 
     public GetSessionsPart withId(Optional<String> id) {
         Utils.checkNotNull(id, "id");
@@ -219,6 +237,7 @@ public class GetSessionsPart {
         return this;
     }
 
+
     public GetSessionsPart withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
@@ -230,6 +249,7 @@ public class GetSessionsPart {
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetSessionsPart withSize(Optional<Integer> size) {
         Utils.checkNotNull(size, "size");
@@ -243,6 +263,7 @@ public class GetSessionsPart {
         return this;
     }
 
+
     public GetSessionsPart withDecision(Optional<String> decision) {
         Utils.checkNotNull(decision, "decision");
         this.decision = decision;
@@ -254,6 +275,7 @@ public class GetSessionsPart {
         this.selected = Optional.ofNullable(selected);
         return this;
     }
+
 
     public GetSessionsPart withSelected(Optional<Boolean> selected) {
         Utils.checkNotNull(selected, "selected");
@@ -267,13 +289,13 @@ public class GetSessionsPart {
         return this;
     }
 
+
     public GetSessionsPart withStream(Optional<? extends List<GetSessionsStream>> stream) {
         Utils.checkNotNull(stream, "stream");
         this.stream = stream;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -284,30 +306,24 @@ public class GetSessionsPart {
         }
         GetSessionsPart other = (GetSessionsPart) o;
         return 
-            Objects.deepEquals(this.container, other.container) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.file, other.file) &&
-            Objects.deepEquals(this.hasThumbnail, other.hasThumbnail) &&
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.decision, other.decision) &&
-            Objects.deepEquals(this.selected, other.selected) &&
-            Objects.deepEquals(this.stream, other.stream);
+            Utils.enhancedDeepEquals(this.container, other.container) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.file, other.file) &&
+            Utils.enhancedDeepEquals(this.hasThumbnail, other.hasThumbnail) &&
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.decision, other.decision) &&
+            Utils.enhancedDeepEquals(this.selected, other.selected) &&
+            Utils.enhancedDeepEquals(this.stream, other.stream);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            container,
-            duration,
-            file,
-            hasThumbnail,
-            id,
-            key,
-            size,
-            decision,
-            selected,
+        return Utils.enhancedHash(
+            container, duration, file,
+            hasThumbnail, id, key,
+            size, decision, selected,
             stream);
     }
     
@@ -325,32 +341,34 @@ public class GetSessionsPart {
                 "selected", selected,
                 "stream", stream);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> container = Optional.empty();
- 
+
         private Optional<Integer> duration = Optional.empty();
- 
+
         private Optional<String> file = Optional.empty();
- 
+
         private Optional<String> hasThumbnail = Optional.empty();
- 
+
         private Optional<String> id = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<Integer> size = Optional.empty();
- 
+
         private Optional<String> decision = Optional.empty();
- 
+
         private Optional<Boolean> selected = Optional.empty();
- 
+
         private Optional<? extends List<GetSessionsStream>> stream = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder container(String container) {
             Utils.checkNotNull(container, "container");
@@ -364,6 +382,7 @@ public class GetSessionsPart {
             return this;
         }
 
+
         public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = Optional.ofNullable(duration);
@@ -375,6 +394,7 @@ public class GetSessionsPart {
             this.duration = duration;
             return this;
         }
+
 
         public Builder file(String file) {
             Utils.checkNotNull(file, "file");
@@ -388,6 +408,7 @@ public class GetSessionsPart {
             return this;
         }
 
+
         public Builder hasThumbnail(String hasThumbnail) {
             Utils.checkNotNull(hasThumbnail, "hasThumbnail");
             this.hasThumbnail = Optional.ofNullable(hasThumbnail);
@@ -399,6 +420,7 @@ public class GetSessionsPart {
             this.hasThumbnail = hasThumbnail;
             return this;
         }
+
 
         public Builder id(String id) {
             Utils.checkNotNull(id, "id");
@@ -412,6 +434,7 @@ public class GetSessionsPart {
             return this;
         }
 
+
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = Optional.ofNullable(key);
@@ -423,6 +446,7 @@ public class GetSessionsPart {
             this.key = key;
             return this;
         }
+
 
         public Builder size(int size) {
             Utils.checkNotNull(size, "size");
@@ -436,6 +460,7 @@ public class GetSessionsPart {
             return this;
         }
 
+
         public Builder decision(String decision) {
             Utils.checkNotNull(decision, "decision");
             this.decision = Optional.ofNullable(decision);
@@ -447,6 +472,7 @@ public class GetSessionsPart {
             this.decision = decision;
             return this;
         }
+
 
         public Builder selected(boolean selected) {
             Utils.checkNotNull(selected, "selected");
@@ -460,6 +486,7 @@ public class GetSessionsPart {
             return this;
         }
 
+
         public Builder stream(List<GetSessionsStream> stream) {
             Utils.checkNotNull(stream, "stream");
             this.stream = Optional.ofNullable(stream);
@@ -471,19 +498,15 @@ public class GetSessionsPart {
             this.stream = stream;
             return this;
         }
-        
+
         public GetSessionsPart build() {
+
             return new GetSessionsPart(
-                container,
-                duration,
-                file,
-                hasThumbnail,
-                id,
-                key,
-                size,
-                decision,
-                selected,
+                container, duration, file,
+                hasThumbnail, id, key,
+                size, decision, selected,
                 stream);
         }
+
     }
 }

@@ -15,11 +15,10 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetAllLibrariesMediaContainer {
 
+public class GetAllLibrariesMediaContainer {
     /**
      * Number of media items returned in this response.
      */
@@ -37,6 +36,7 @@ public class GetAllLibrariesMediaContainer {
      */
     @JsonProperty("title1")
     private String title1;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Directory")
@@ -62,7 +62,8 @@ public class GetAllLibrariesMediaContainer {
             int size,
             boolean allowSync,
             String title1) {
-        this(size, allowSync, title1, Optional.empty());
+        this(size, allowSync, title1,
+            Optional.empty());
     }
 
     /**
@@ -95,9 +96,10 @@ public class GetAllLibrariesMediaContainer {
         return (Optional<List<GetAllLibrariesDirectory>>) directory;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Number of media items returned in this response.
@@ -132,13 +134,13 @@ public class GetAllLibrariesMediaContainer {
         return this;
     }
 
+
     public GetAllLibrariesMediaContainer withDirectory(Optional<? extends List<GetAllLibrariesDirectory>> directory) {
         Utils.checkNotNull(directory, "directory");
         this.directory = directory;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -149,18 +151,16 @@ public class GetAllLibrariesMediaContainer {
         }
         GetAllLibrariesMediaContainer other = (GetAllLibrariesMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.allowSync, other.allowSync) &&
-            Objects.deepEquals(this.title1, other.title1) &&
-            Objects.deepEquals(this.directory, other.directory);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.allowSync, other.allowSync) &&
+            Utils.enhancedDeepEquals(this.title1, other.title1) &&
+            Utils.enhancedDeepEquals(this.directory, other.directory);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            allowSync,
-            title1,
+        return Utils.enhancedHash(
+            size, allowSync, title1,
             directory);
     }
     
@@ -172,20 +172,22 @@ public class GetAllLibrariesMediaContainer {
                 "title1", title1,
                 "directory", directory);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer size;
- 
+
         private Boolean allowSync;
- 
+
         private String title1;
- 
+
         private Optional<? extends List<GetAllLibrariesDirectory>> directory = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Number of media items returned in this response.
@@ -196,6 +198,7 @@ public class GetAllLibrariesMediaContainer {
             return this;
         }
 
+
         /**
          * Indicates whether syncing is allowed.
          */
@@ -205,6 +208,7 @@ public class GetAllLibrariesMediaContainer {
             return this;
         }
 
+
         /**
          * The primary title of the media container.
          */
@@ -213,6 +217,7 @@ public class GetAllLibrariesMediaContainer {
             this.title1 = title1;
             return this;
         }
+
 
         public Builder directory(List<GetAllLibrariesDirectory> directory) {
             Utils.checkNotNull(directory, "directory");
@@ -225,13 +230,13 @@ public class GetAllLibrariesMediaContainer {
             this.directory = directory;
             return this;
         }
-        
+
         public GetAllLibrariesMediaContainer build() {
+
             return new GetAllLibrariesMediaContainer(
-                size,
-                allowSync,
-                title1,
+                size, allowSync, title1,
                 directory);
         }
+
     }
 }

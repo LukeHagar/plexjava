@@ -19,6 +19,7 @@ This endpoint will write a single-line log message, including a level and source
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="logLine" method="get" path="/log" -->
 ```java
 package hello.world;
 
@@ -34,7 +35,7 @@ public class Application {
     public static void main(String[] args) throws LogLineBadRequest, LogLineUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         LogLineResponse res = sdk.log().logLine()
@@ -95,6 +96,7 @@ Ensure each parameter is properly URL-encoded to avoid interpretation issues.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="logMultiLine" method="post" path="/log" -->
 ```java
 package hello.world;
 
@@ -110,7 +112,7 @@ public class Application {
     public static void main(String[] args) throws LogMultiLineBadRequest, LogMultiLineUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         String req = "level=4&message=Test%20message%201&source=postman\nlevel=3&message=Test%20message%202&source=postman\nlevel=1&message=Test%20message%203&source=postman";
@@ -149,6 +151,7 @@ This endpoint will enable all Plex Media Serverlogs to be sent to the Papertrail
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="enablePaperTrail" method="get" path="/log/networked" -->
 ```java
 package hello.world;
 
@@ -163,7 +166,7 @@ public class Application {
     public static void main(String[] args) throws EnablePaperTrailBadRequest, EnablePaperTrailUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         EnablePaperTrailResponse res = sdk.log().enablePaperTrail()

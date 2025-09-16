@@ -14,8 +14,8 @@ import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class Activity {
 
@@ -23,29 +23,36 @@ public class Activity {
     @JsonProperty("uuid")
     private Optional<String> uuid;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
     private Optional<String> type;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cancellable")
     private Optional<Boolean> cancellable;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("userID")
     private Optional<Double> userID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("subtitle")
     private Optional<String> subtitle;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("progress")
     private Optional<Double> progress;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Context")
@@ -80,7 +87,9 @@ public class Activity {
     }
     
     public Activity() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -124,15 +133,17 @@ public class Activity {
         return (Optional<Context>) context;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Activity withUuid(String uuid) {
         Utils.checkNotNull(uuid, "uuid");
         this.uuid = Optional.ofNullable(uuid);
         return this;
     }
+
 
     public Activity withUuid(Optional<String> uuid) {
         Utils.checkNotNull(uuid, "uuid");
@@ -146,6 +157,7 @@ public class Activity {
         return this;
     }
 
+
     public Activity withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
@@ -157,6 +169,7 @@ public class Activity {
         this.cancellable = Optional.ofNullable(cancellable);
         return this;
     }
+
 
     public Activity withCancellable(Optional<Boolean> cancellable) {
         Utils.checkNotNull(cancellable, "cancellable");
@@ -170,6 +183,7 @@ public class Activity {
         return this;
     }
 
+
     public Activity withUserID(Optional<Double> userID) {
         Utils.checkNotNull(userID, "userID");
         this.userID = userID;
@@ -181,6 +195,7 @@ public class Activity {
         this.title = Optional.ofNullable(title);
         return this;
     }
+
 
     public Activity withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
@@ -194,6 +209,7 @@ public class Activity {
         return this;
     }
 
+
     public Activity withSubtitle(Optional<String> subtitle) {
         Utils.checkNotNull(subtitle, "subtitle");
         this.subtitle = subtitle;
@@ -205,6 +221,7 @@ public class Activity {
         this.progress = Optional.ofNullable(progress);
         return this;
     }
+
 
     public Activity withProgress(Optional<Double> progress) {
         Utils.checkNotNull(progress, "progress");
@@ -218,13 +235,13 @@ public class Activity {
         return this;
     }
 
+
     public Activity withContext(Optional<? extends Context> context) {
         Utils.checkNotNull(context, "context");
         this.context = context;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -235,27 +252,22 @@ public class Activity {
         }
         Activity other = (Activity) o;
         return 
-            Objects.deepEquals(this.uuid, other.uuid) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.cancellable, other.cancellable) &&
-            Objects.deepEquals(this.userID, other.userID) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.subtitle, other.subtitle) &&
-            Objects.deepEquals(this.progress, other.progress) &&
-            Objects.deepEquals(this.context, other.context);
+            Utils.enhancedDeepEquals(this.uuid, other.uuid) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.cancellable, other.cancellable) &&
+            Utils.enhancedDeepEquals(this.userID, other.userID) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.subtitle, other.subtitle) &&
+            Utils.enhancedDeepEquals(this.progress, other.progress) &&
+            Utils.enhancedDeepEquals(this.context, other.context);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            uuid,
-            type,
-            cancellable,
-            userID,
-            title,
-            subtitle,
-            progress,
-            context);
+        return Utils.enhancedHash(
+            uuid, type, cancellable,
+            userID, title, subtitle,
+            progress, context);
     }
     
     @Override
@@ -270,28 +282,30 @@ public class Activity {
                 "progress", progress,
                 "context", context);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> uuid = Optional.empty();
- 
+
         private Optional<String> type = Optional.empty();
- 
+
         private Optional<Boolean> cancellable = Optional.empty();
- 
+
         private Optional<Double> userID = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> subtitle = Optional.empty();
- 
+
         private Optional<Double> progress = Optional.empty();
- 
+
         private Optional<? extends Context> context = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder uuid(String uuid) {
             Utils.checkNotNull(uuid, "uuid");
@@ -305,6 +319,7 @@ public class Activity {
             return this;
         }
 
+
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = Optional.ofNullable(type);
@@ -316,6 +331,7 @@ public class Activity {
             this.type = type;
             return this;
         }
+
 
         public Builder cancellable(boolean cancellable) {
             Utils.checkNotNull(cancellable, "cancellable");
@@ -329,6 +345,7 @@ public class Activity {
             return this;
         }
 
+
         public Builder userID(double userID) {
             Utils.checkNotNull(userID, "userID");
             this.userID = Optional.ofNullable(userID);
@@ -340,6 +357,7 @@ public class Activity {
             this.userID = userID;
             return this;
         }
+
 
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
@@ -353,6 +371,7 @@ public class Activity {
             return this;
         }
 
+
         public Builder subtitle(String subtitle) {
             Utils.checkNotNull(subtitle, "subtitle");
             this.subtitle = Optional.ofNullable(subtitle);
@@ -364,6 +383,7 @@ public class Activity {
             this.subtitle = subtitle;
             return this;
         }
+
 
         public Builder progress(double progress) {
             Utils.checkNotNull(progress, "progress");
@@ -377,6 +397,7 @@ public class Activity {
             return this;
         }
 
+
         public Builder context(Context context) {
             Utils.checkNotNull(context, "context");
             this.context = Optional.ofNullable(context);
@@ -388,17 +409,14 @@ public class Activity {
             this.context = context;
             return this;
         }
-        
+
         public Activity build() {
+
             return new Activity(
-                uuid,
-                type,
-                cancellable,
-                userID,
-                title,
-                subtitle,
-                progress,
-                context);
+                uuid, type, cancellable,
+                userID, title, subtitle,
+                progress, context);
         }
+
     }
 }

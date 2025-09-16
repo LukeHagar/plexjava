@@ -15,8 +15,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetLibraryHubsHub {
 
@@ -24,45 +24,56 @@ public class GetLibraryHubsHub {
     @JsonProperty("key")
     private Optional<String> key;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
     private Optional<String> type;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hubIdentifier")
     private Optional<String> hubIdentifier;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("context")
     private Optional<String> context;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("size")
     private Optional<Integer> size;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("more")
     private Optional<Boolean> more;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("style")
     private Optional<String> style;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hubKey")
     private Optional<String> hubKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Metadata")
     private Optional<? extends List<GetLibraryHubsMetadata>> metadata;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("promoted")
     private Optional<Boolean> promoted;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("random")
@@ -109,7 +120,10 @@ public class GetLibraryHubsHub {
     }
     
     public GetLibraryHubsHub() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -173,15 +187,17 @@ public class GetLibraryHubsHub {
         return random;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetLibraryHubsHub withKey(String key) {
         Utils.checkNotNull(key, "key");
         this.key = Optional.ofNullable(key);
         return this;
     }
+
 
     public GetLibraryHubsHub withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
@@ -195,6 +211,7 @@ public class GetLibraryHubsHub {
         return this;
     }
 
+
     public GetLibraryHubsHub withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
@@ -206,6 +223,7 @@ public class GetLibraryHubsHub {
         this.type = Optional.ofNullable(type);
         return this;
     }
+
 
     public GetLibraryHubsHub withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
@@ -219,6 +237,7 @@ public class GetLibraryHubsHub {
         return this;
     }
 
+
     public GetLibraryHubsHub withHubIdentifier(Optional<String> hubIdentifier) {
         Utils.checkNotNull(hubIdentifier, "hubIdentifier");
         this.hubIdentifier = hubIdentifier;
@@ -230,6 +249,7 @@ public class GetLibraryHubsHub {
         this.context = Optional.ofNullable(context);
         return this;
     }
+
 
     public GetLibraryHubsHub withContext(Optional<String> context) {
         Utils.checkNotNull(context, "context");
@@ -243,6 +263,7 @@ public class GetLibraryHubsHub {
         return this;
     }
 
+
     public GetLibraryHubsHub withSize(Optional<Integer> size) {
         Utils.checkNotNull(size, "size");
         this.size = size;
@@ -254,6 +275,7 @@ public class GetLibraryHubsHub {
         this.more = Optional.ofNullable(more);
         return this;
     }
+
 
     public GetLibraryHubsHub withMore(Optional<Boolean> more) {
         Utils.checkNotNull(more, "more");
@@ -267,6 +289,7 @@ public class GetLibraryHubsHub {
         return this;
     }
 
+
     public GetLibraryHubsHub withStyle(Optional<String> style) {
         Utils.checkNotNull(style, "style");
         this.style = style;
@@ -278,6 +301,7 @@ public class GetLibraryHubsHub {
         this.hubKey = Optional.ofNullable(hubKey);
         return this;
     }
+
 
     public GetLibraryHubsHub withHubKey(Optional<String> hubKey) {
         Utils.checkNotNull(hubKey, "hubKey");
@@ -291,6 +315,7 @@ public class GetLibraryHubsHub {
         return this;
     }
 
+
     public GetLibraryHubsHub withMetadata(Optional<? extends List<GetLibraryHubsMetadata>> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
@@ -302,6 +327,7 @@ public class GetLibraryHubsHub {
         this.promoted = Optional.ofNullable(promoted);
         return this;
     }
+
 
     public GetLibraryHubsHub withPromoted(Optional<Boolean> promoted) {
         Utils.checkNotNull(promoted, "promoted");
@@ -315,13 +341,13 @@ public class GetLibraryHubsHub {
         return this;
     }
 
+
     public GetLibraryHubsHub withRandom(Optional<Boolean> random) {
         Utils.checkNotNull(random, "random");
         this.random = random;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -332,35 +358,27 @@ public class GetLibraryHubsHub {
         }
         GetLibraryHubsHub other = (GetLibraryHubsHub) o;
         return 
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.hubIdentifier, other.hubIdentifier) &&
-            Objects.deepEquals(this.context, other.context) &&
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.more, other.more) &&
-            Objects.deepEquals(this.style, other.style) &&
-            Objects.deepEquals(this.hubKey, other.hubKey) &&
-            Objects.deepEquals(this.metadata, other.metadata) &&
-            Objects.deepEquals(this.promoted, other.promoted) &&
-            Objects.deepEquals(this.random, other.random);
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.hubIdentifier, other.hubIdentifier) &&
+            Utils.enhancedDeepEquals(this.context, other.context) &&
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.more, other.more) &&
+            Utils.enhancedDeepEquals(this.style, other.style) &&
+            Utils.enhancedDeepEquals(this.hubKey, other.hubKey) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+            Utils.enhancedDeepEquals(this.promoted, other.promoted) &&
+            Utils.enhancedDeepEquals(this.random, other.random);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            key,
-            title,
-            type,
-            hubIdentifier,
-            context,
-            size,
-            more,
-            style,
-            hubKey,
-            metadata,
-            promoted,
-            random);
+        return Utils.enhancedHash(
+            key, title, type,
+            hubIdentifier, context, size,
+            more, style, hubKey,
+            metadata, promoted, random);
     }
     
     @Override
@@ -379,36 +397,38 @@ public class GetLibraryHubsHub {
                 "promoted", promoted,
                 "random", random);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> type = Optional.empty();
- 
+
         private Optional<String> hubIdentifier = Optional.empty();
- 
+
         private Optional<String> context = Optional.empty();
- 
+
         private Optional<Integer> size = Optional.empty();
- 
+
         private Optional<Boolean> more = Optional.empty();
- 
+
         private Optional<String> style = Optional.empty();
- 
+
         private Optional<String> hubKey = Optional.empty();
- 
+
         private Optional<? extends List<GetLibraryHubsMetadata>> metadata = Optional.empty();
- 
+
         private Optional<Boolean> promoted = Optional.empty();
- 
+
         private Optional<Boolean> random = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
@@ -422,6 +442,7 @@ public class GetLibraryHubsHub {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -433,6 +454,7 @@ public class GetLibraryHubsHub {
             this.title = title;
             return this;
         }
+
 
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
@@ -446,6 +468,7 @@ public class GetLibraryHubsHub {
             return this;
         }
 
+
         public Builder hubIdentifier(String hubIdentifier) {
             Utils.checkNotNull(hubIdentifier, "hubIdentifier");
             this.hubIdentifier = Optional.ofNullable(hubIdentifier);
@@ -457,6 +480,7 @@ public class GetLibraryHubsHub {
             this.hubIdentifier = hubIdentifier;
             return this;
         }
+
 
         public Builder context(String context) {
             Utils.checkNotNull(context, "context");
@@ -470,6 +494,7 @@ public class GetLibraryHubsHub {
             return this;
         }
 
+
         public Builder size(int size) {
             Utils.checkNotNull(size, "size");
             this.size = Optional.ofNullable(size);
@@ -481,6 +506,7 @@ public class GetLibraryHubsHub {
             this.size = size;
             return this;
         }
+
 
         public Builder more(boolean more) {
             Utils.checkNotNull(more, "more");
@@ -494,6 +520,7 @@ public class GetLibraryHubsHub {
             return this;
         }
 
+
         public Builder style(String style) {
             Utils.checkNotNull(style, "style");
             this.style = Optional.ofNullable(style);
@@ -505,6 +532,7 @@ public class GetLibraryHubsHub {
             this.style = style;
             return this;
         }
+
 
         public Builder hubKey(String hubKey) {
             Utils.checkNotNull(hubKey, "hubKey");
@@ -518,6 +546,7 @@ public class GetLibraryHubsHub {
             return this;
         }
 
+
         public Builder metadata(List<GetLibraryHubsMetadata> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = Optional.ofNullable(metadata);
@@ -529,6 +558,7 @@ public class GetLibraryHubsHub {
             this.metadata = metadata;
             return this;
         }
+
 
         public Builder promoted(boolean promoted) {
             Utils.checkNotNull(promoted, "promoted");
@@ -542,6 +572,7 @@ public class GetLibraryHubsHub {
             return this;
         }
 
+
         public Builder random(boolean random) {
             Utils.checkNotNull(random, "random");
             this.random = Optional.ofNullable(random);
@@ -553,21 +584,15 @@ public class GetLibraryHubsHub {
             this.random = random;
             return this;
         }
-        
+
         public GetLibraryHubsHub build() {
+
             return new GetLibraryHubsHub(
-                key,
-                title,
-                type,
-                hubIdentifier,
-                context,
-                size,
-                more,
-                style,
-                hubKey,
-                metadata,
-                promoted,
-                random);
+                key, title, type,
+                hubIdentifier, context, size,
+                more, style, hubKey,
+                metadata, promoted, random);
         }
+
     }
 }

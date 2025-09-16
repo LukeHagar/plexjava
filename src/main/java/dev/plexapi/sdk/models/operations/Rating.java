@@ -10,7 +10,6 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Float;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * Rating
@@ -18,15 +17,16 @@ import java.util.Objects;
  * <p>The type of rating, for example 'audience' or 'critic'.
  */
 public class Rating {
-
     /**
      * The URL for the rating image, for example from IMDb.
      */
     @JsonProperty("image")
     private String image;
 
+
     @JsonProperty("value")
     private float value;
+
 
     @JsonProperty("type")
     private String type;
@@ -62,9 +62,10 @@ public class Rating {
         return type;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The URL for the rating image, for example from IMDb.
@@ -87,7 +88,6 @@ public class Rating {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -98,17 +98,15 @@ public class Rating {
         }
         Rating other = (Rating) o;
         return 
-            Objects.deepEquals(this.image, other.image) &&
-            Objects.deepEquals(this.value, other.value) &&
-            Objects.deepEquals(this.type, other.type);
+            Utils.enhancedDeepEquals(this.image, other.image) &&
+            Utils.enhancedDeepEquals(this.value, other.value) &&
+            Utils.enhancedDeepEquals(this.type, other.type);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            image,
-            value,
-            type);
+        return Utils.enhancedHash(
+            image, value, type);
     }
     
     @Override
@@ -118,18 +116,20 @@ public class Rating {
                 "value", value,
                 "type", type);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String image;
- 
+
         private Float value;
- 
+
         private String type;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The URL for the rating image, for example from IMDb.
@@ -140,23 +140,25 @@ public class Rating {
             return this;
         }
 
+
         public Builder value(float value) {
             Utils.checkNotNull(value, "value");
             this.value = value;
             return this;
         }
 
+
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
         }
-        
+
         public Rating build() {
+
             return new Rating(
-                image,
-                value,
-                type);
+                image, value, type);
         }
+
     }
 }

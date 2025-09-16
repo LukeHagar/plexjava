@@ -19,7 +19,7 @@ public enum WatchedIndicator {
     @JsonValue
     private final int value;
 
-    private WatchedIndicator(int value) {
+    WatchedIndicator(int value) {
         this.value = value;
     }
     

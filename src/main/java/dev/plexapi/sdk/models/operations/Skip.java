@@ -19,7 +19,7 @@ public enum Skip {
     @JsonValue
     private final long value;
 
-    private Skip(long value) {
+    Skip(long value) {
         this.value = value;
     }
     

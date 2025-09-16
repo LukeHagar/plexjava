@@ -15,8 +15,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetMediaProvidersDirectory {
 
@@ -24,53 +24,66 @@ public class GetMediaProvidersDirectory {
     @JsonProperty("hubKey")
     private Optional<String> hubKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("agent")
     private Optional<String> agent;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("language")
     private Optional<String> language;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("refreshing")
     private Optional<Boolean> refreshing;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("scanner")
     private Optional<String> scanner;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("uuid")
     private Optional<String> uuid;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("id")
     private Optional<String> id;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
     private Optional<String> type;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("subtype")
     private Optional<String> subtype;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("updatedAt")
     private Optional<Long> updatedAt;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("scannedAt")
     private Optional<Long> scannedAt;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Pivot")
@@ -123,7 +136,11 @@ public class GetMediaProvidersDirectory {
     }
     
     public GetMediaProvidersDirectory() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -197,15 +214,17 @@ public class GetMediaProvidersDirectory {
         return (Optional<List<Pivot>>) pivot;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetMediaProvidersDirectory withHubKey(String hubKey) {
         Utils.checkNotNull(hubKey, "hubKey");
         this.hubKey = Optional.ofNullable(hubKey);
         return this;
     }
+
 
     public GetMediaProvidersDirectory withHubKey(Optional<String> hubKey) {
         Utils.checkNotNull(hubKey, "hubKey");
@@ -219,6 +238,7 @@ public class GetMediaProvidersDirectory {
         return this;
     }
 
+
     public GetMediaProvidersDirectory withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
@@ -230,6 +250,7 @@ public class GetMediaProvidersDirectory {
         this.agent = Optional.ofNullable(agent);
         return this;
     }
+
 
     public GetMediaProvidersDirectory withAgent(Optional<String> agent) {
         Utils.checkNotNull(agent, "agent");
@@ -243,6 +264,7 @@ public class GetMediaProvidersDirectory {
         return this;
     }
 
+
     public GetMediaProvidersDirectory withLanguage(Optional<String> language) {
         Utils.checkNotNull(language, "language");
         this.language = language;
@@ -254,6 +276,7 @@ public class GetMediaProvidersDirectory {
         this.refreshing = Optional.ofNullable(refreshing);
         return this;
     }
+
 
     public GetMediaProvidersDirectory withRefreshing(Optional<Boolean> refreshing) {
         Utils.checkNotNull(refreshing, "refreshing");
@@ -267,6 +290,7 @@ public class GetMediaProvidersDirectory {
         return this;
     }
 
+
     public GetMediaProvidersDirectory withScanner(Optional<String> scanner) {
         Utils.checkNotNull(scanner, "scanner");
         this.scanner = scanner;
@@ -278,6 +302,7 @@ public class GetMediaProvidersDirectory {
         this.uuid = Optional.ofNullable(uuid);
         return this;
     }
+
 
     public GetMediaProvidersDirectory withUuid(Optional<String> uuid) {
         Utils.checkNotNull(uuid, "uuid");
@@ -291,6 +316,7 @@ public class GetMediaProvidersDirectory {
         return this;
     }
 
+
     public GetMediaProvidersDirectory withId(Optional<String> id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
@@ -302,6 +328,7 @@ public class GetMediaProvidersDirectory {
         this.key = Optional.ofNullable(key);
         return this;
     }
+
 
     public GetMediaProvidersDirectory withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
@@ -315,6 +342,7 @@ public class GetMediaProvidersDirectory {
         return this;
     }
 
+
     public GetMediaProvidersDirectory withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
@@ -326,6 +354,7 @@ public class GetMediaProvidersDirectory {
         this.subtype = Optional.ofNullable(subtype);
         return this;
     }
+
 
     public GetMediaProvidersDirectory withSubtype(Optional<String> subtype) {
         Utils.checkNotNull(subtype, "subtype");
@@ -339,6 +368,7 @@ public class GetMediaProvidersDirectory {
         return this;
     }
 
+
     public GetMediaProvidersDirectory withUpdatedAt(Optional<Long> updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
         this.updatedAt = updatedAt;
@@ -350,6 +380,7 @@ public class GetMediaProvidersDirectory {
         this.scannedAt = Optional.ofNullable(scannedAt);
         return this;
     }
+
 
     public GetMediaProvidersDirectory withScannedAt(Optional<Long> scannedAt) {
         Utils.checkNotNull(scannedAt, "scannedAt");
@@ -363,13 +394,13 @@ public class GetMediaProvidersDirectory {
         return this;
     }
 
+
     public GetMediaProvidersDirectory withPivot(Optional<? extends List<Pivot>> pivot) {
         Utils.checkNotNull(pivot, "pivot");
         this.pivot = pivot;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -380,39 +411,30 @@ public class GetMediaProvidersDirectory {
         }
         GetMediaProvidersDirectory other = (GetMediaProvidersDirectory) o;
         return 
-            Objects.deepEquals(this.hubKey, other.hubKey) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.agent, other.agent) &&
-            Objects.deepEquals(this.language, other.language) &&
-            Objects.deepEquals(this.refreshing, other.refreshing) &&
-            Objects.deepEquals(this.scanner, other.scanner) &&
-            Objects.deepEquals(this.uuid, other.uuid) &&
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.subtype, other.subtype) &&
-            Objects.deepEquals(this.updatedAt, other.updatedAt) &&
-            Objects.deepEquals(this.scannedAt, other.scannedAt) &&
-            Objects.deepEquals(this.pivot, other.pivot);
+            Utils.enhancedDeepEquals(this.hubKey, other.hubKey) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.agent, other.agent) &&
+            Utils.enhancedDeepEquals(this.language, other.language) &&
+            Utils.enhancedDeepEquals(this.refreshing, other.refreshing) &&
+            Utils.enhancedDeepEquals(this.scanner, other.scanner) &&
+            Utils.enhancedDeepEquals(this.uuid, other.uuid) &&
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.subtype, other.subtype) &&
+            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt) &&
+            Utils.enhancedDeepEquals(this.scannedAt, other.scannedAt) &&
+            Utils.enhancedDeepEquals(this.pivot, other.pivot);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            hubKey,
-            title,
-            agent,
-            language,
-            refreshing,
-            scanner,
-            uuid,
-            id,
-            key,
-            type,
-            subtype,
-            updatedAt,
-            scannedAt,
-            pivot);
+        return Utils.enhancedHash(
+            hubKey, title, agent,
+            language, refreshing, scanner,
+            uuid, id, key,
+            type, subtype, updatedAt,
+            scannedAt, pivot);
     }
     
     @Override
@@ -433,40 +455,42 @@ public class GetMediaProvidersDirectory {
                 "scannedAt", scannedAt,
                 "pivot", pivot);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> hubKey = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> agent = Optional.empty();
- 
+
         private Optional<String> language = Optional.empty();
- 
+
         private Optional<Boolean> refreshing = Optional.empty();
- 
+
         private Optional<String> scanner = Optional.empty();
- 
+
         private Optional<String> uuid = Optional.empty();
- 
+
         private Optional<String> id = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> type = Optional.empty();
- 
+
         private Optional<String> subtype = Optional.empty();
- 
+
         private Optional<Long> updatedAt = Optional.empty();
- 
+
         private Optional<Long> scannedAt = Optional.empty();
- 
+
         private Optional<? extends List<Pivot>> pivot = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder hubKey(String hubKey) {
             Utils.checkNotNull(hubKey, "hubKey");
@@ -480,6 +504,7 @@ public class GetMediaProvidersDirectory {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -491,6 +516,7 @@ public class GetMediaProvidersDirectory {
             this.title = title;
             return this;
         }
+
 
         public Builder agent(String agent) {
             Utils.checkNotNull(agent, "agent");
@@ -504,6 +530,7 @@ public class GetMediaProvidersDirectory {
             return this;
         }
 
+
         public Builder language(String language) {
             Utils.checkNotNull(language, "language");
             this.language = Optional.ofNullable(language);
@@ -515,6 +542,7 @@ public class GetMediaProvidersDirectory {
             this.language = language;
             return this;
         }
+
 
         public Builder refreshing(boolean refreshing) {
             Utils.checkNotNull(refreshing, "refreshing");
@@ -528,6 +556,7 @@ public class GetMediaProvidersDirectory {
             return this;
         }
 
+
         public Builder scanner(String scanner) {
             Utils.checkNotNull(scanner, "scanner");
             this.scanner = Optional.ofNullable(scanner);
@@ -539,6 +568,7 @@ public class GetMediaProvidersDirectory {
             this.scanner = scanner;
             return this;
         }
+
 
         public Builder uuid(String uuid) {
             Utils.checkNotNull(uuid, "uuid");
@@ -552,6 +582,7 @@ public class GetMediaProvidersDirectory {
             return this;
         }
 
+
         public Builder id(String id) {
             Utils.checkNotNull(id, "id");
             this.id = Optional.ofNullable(id);
@@ -563,6 +594,7 @@ public class GetMediaProvidersDirectory {
             this.id = id;
             return this;
         }
+
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
@@ -576,6 +608,7 @@ public class GetMediaProvidersDirectory {
             return this;
         }
 
+
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = Optional.ofNullable(type);
@@ -587,6 +620,7 @@ public class GetMediaProvidersDirectory {
             this.type = type;
             return this;
         }
+
 
         public Builder subtype(String subtype) {
             Utils.checkNotNull(subtype, "subtype");
@@ -600,6 +634,7 @@ public class GetMediaProvidersDirectory {
             return this;
         }
 
+
         public Builder updatedAt(long updatedAt) {
             Utils.checkNotNull(updatedAt, "updatedAt");
             this.updatedAt = Optional.ofNullable(updatedAt);
@@ -611,6 +646,7 @@ public class GetMediaProvidersDirectory {
             this.updatedAt = updatedAt;
             return this;
         }
+
 
         public Builder scannedAt(long scannedAt) {
             Utils.checkNotNull(scannedAt, "scannedAt");
@@ -624,6 +660,7 @@ public class GetMediaProvidersDirectory {
             return this;
         }
 
+
         public Builder pivot(List<Pivot> pivot) {
             Utils.checkNotNull(pivot, "pivot");
             this.pivot = Optional.ofNullable(pivot);
@@ -635,23 +672,16 @@ public class GetMediaProvidersDirectory {
             this.pivot = pivot;
             return this;
         }
-        
+
         public GetMediaProvidersDirectory build() {
+
             return new GetMediaProvidersDirectory(
-                hubKey,
-                title,
-                agent,
-                language,
-                refreshing,
-                scanner,
-                uuid,
-                id,
-                key,
-                type,
-                subtype,
-                updatedAt,
-                scannedAt,
-                pivot);
+                hubKey, title, agent,
+                language, refreshing, scanner,
+                uuid, id, key,
+                type, subtype, updatedAt,
+                scannedAt, pivot);
         }
+
     }
 }

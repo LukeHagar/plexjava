@@ -3,7 +3,11 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
 import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetLibraryDetails;
 import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
@@ -17,10 +21,10 @@ public class GetLibraryDetailsRequestBuilder {
                             "0",
                             new TypeReference<Optional<? extends IncludeDetails>>() {});
     private Integer sectionKey;
-    private final SDKMethodInterfaces.MethodCallGetLibraryDetails sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetLibraryDetailsRequestBuilder(SDKMethodInterfaces.MethodCallGetLibraryDetails sdk) {
-        this.sdk = sdk;
+    public GetLibraryDetailsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
                 
     public GetLibraryDetailsRequestBuilder includeDetails(IncludeDetails includeDetails) {
@@ -41,13 +45,25 @@ public class GetLibraryDetailsRequestBuilder {
         return this;
     }
 
-    public GetLibraryDetailsResponse call() throws Exception {
+
+    private GetLibraryDetailsRequest buildRequest() {
         if (includeDetails == null) {
             includeDetails = _SINGLETON_VALUE_IncludeDetails.value();
         }
-        return sdk.getLibraryDetails(
-            includeDetails,
+
+        GetLibraryDetailsRequest request = new GetLibraryDetailsRequest(includeDetails,
             sectionKey);
+
+        return request;
+    }
+
+    public GetLibraryDetailsResponse call() throws Exception {
+        
+        RequestOperation<GetLibraryDetailsRequest, GetLibraryDetailsResponse> operation
+              = new GetLibraryDetails.Sync(sdkConfiguration);
+        GetLibraryDetailsRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 
     private static final LazySingletonValue<Optional<? extends IncludeDetails>> _SINGLETON_VALUE_IncludeDetails =

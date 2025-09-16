@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * Location
@@ -33,9 +32,10 @@ public class Location {
         return path;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Location withPath(String path) {
         Utils.checkNotNull(path, "path");
@@ -43,7 +43,6 @@ public class Location {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -54,12 +53,12 @@ public class Location {
         }
         Location other = (Location) o;
         return 
-            Objects.deepEquals(this.path, other.path);
+            Utils.enhancedDeepEquals(this.path, other.path);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             path);
     }
     
@@ -68,24 +67,28 @@ public class Location {
         return Utils.toString(Location.class,
                 "path", path);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String path;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder path(String path) {
             Utils.checkNotNull(path, "path");
             this.path = path;
             return this;
         }
-        
+
         public Location build() {
+
             return new Location(
                 path);
         }
+
     }
 }

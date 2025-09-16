@@ -9,7 +9,6 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -18,7 +17,6 @@ import java.util.Optional;
  * <p>Successful response with media container data in XML
  */
 public class GetUsersResponseBody {
-
     /**
      * Container holding user and server details.
      */
@@ -44,9 +42,10 @@ public class GetUsersResponseBody {
         return (Optional<GetUsersMediaContainer>) mediaContainer;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Container holding user and server details.
@@ -57,6 +56,7 @@ public class GetUsersResponseBody {
         return this;
     }
 
+
     /**
      * Container holding user and server details.
      */
@@ -66,7 +66,6 @@ public class GetUsersResponseBody {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -77,12 +76,12 @@ public class GetUsersResponseBody {
         }
         GetUsersResponseBody other = (GetUsersResponseBody) o;
         return 
-            Objects.deepEquals(this.mediaContainer, other.mediaContainer);
+            Utils.enhancedDeepEquals(this.mediaContainer, other.mediaContainer);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             mediaContainer);
     }
     
@@ -91,14 +90,16 @@ public class GetUsersResponseBody {
         return Utils.toString(GetUsersResponseBody.class,
                 "mediaContainer", mediaContainer);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends GetUsersMediaContainer> mediaContainer = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Container holding user and server details.
@@ -117,10 +118,12 @@ public class GetUsersResponseBody {
             this.mediaContainer = mediaContainer;
             return this;
         }
-        
+
         public GetUsersResponseBody build() {
+
             return new GetUsersResponseBody(
                 mediaContainer);
         }
+
     }
 }

@@ -15,8 +15,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetGlobalHubsMediaContainer {
 
@@ -24,13 +24,16 @@ public class GetGlobalHubsMediaContainer {
     @JsonProperty("size")
     private Optional<Integer> size;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("allowSync")
     private Optional<Boolean> allowSync;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("identifier")
     private Optional<String> identifier;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Hub")
@@ -53,7 +56,8 @@ public class GetGlobalHubsMediaContainer {
     }
     
     public GetGlobalHubsMediaContainer() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -77,15 +81,17 @@ public class GetGlobalHubsMediaContainer {
         return (Optional<List<Hub>>) hub;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetGlobalHubsMediaContainer withSize(int size) {
         Utils.checkNotNull(size, "size");
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetGlobalHubsMediaContainer withSize(Optional<Integer> size) {
         Utils.checkNotNull(size, "size");
@@ -99,6 +105,7 @@ public class GetGlobalHubsMediaContainer {
         return this;
     }
 
+
     public GetGlobalHubsMediaContainer withAllowSync(Optional<Boolean> allowSync) {
         Utils.checkNotNull(allowSync, "allowSync");
         this.allowSync = allowSync;
@@ -110,6 +117,7 @@ public class GetGlobalHubsMediaContainer {
         this.identifier = Optional.ofNullable(identifier);
         return this;
     }
+
 
     public GetGlobalHubsMediaContainer withIdentifier(Optional<String> identifier) {
         Utils.checkNotNull(identifier, "identifier");
@@ -123,13 +131,13 @@ public class GetGlobalHubsMediaContainer {
         return this;
     }
 
+
     public GetGlobalHubsMediaContainer withHub(Optional<? extends List<Hub>> hub) {
         Utils.checkNotNull(hub, "hub");
         this.hub = hub;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -140,18 +148,16 @@ public class GetGlobalHubsMediaContainer {
         }
         GetGlobalHubsMediaContainer other = (GetGlobalHubsMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.allowSync, other.allowSync) &&
-            Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.hub, other.hub);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.allowSync, other.allowSync) &&
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.hub, other.hub);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            allowSync,
-            identifier,
+        return Utils.enhancedHash(
+            size, allowSync, identifier,
             hub);
     }
     
@@ -163,20 +169,22 @@ public class GetGlobalHubsMediaContainer {
                 "identifier", identifier,
                 "hub", hub);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> size = Optional.empty();
- 
+
         private Optional<Boolean> allowSync = Optional.empty();
- 
+
         private Optional<String> identifier = Optional.empty();
- 
+
         private Optional<? extends List<Hub>> hub = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder size(int size) {
             Utils.checkNotNull(size, "size");
@@ -190,6 +198,7 @@ public class GetGlobalHubsMediaContainer {
             return this;
         }
 
+
         public Builder allowSync(boolean allowSync) {
             Utils.checkNotNull(allowSync, "allowSync");
             this.allowSync = Optional.ofNullable(allowSync);
@@ -201,6 +210,7 @@ public class GetGlobalHubsMediaContainer {
             this.allowSync = allowSync;
             return this;
         }
+
 
         public Builder identifier(String identifier) {
             Utils.checkNotNull(identifier, "identifier");
@@ -214,6 +224,7 @@ public class GetGlobalHubsMediaContainer {
             return this;
         }
 
+
         public Builder hub(List<Hub> hub) {
             Utils.checkNotNull(hub, "hub");
             this.hub = Optional.ofNullable(hub);
@@ -225,13 +236,13 @@ public class GetGlobalHubsMediaContainer {
             this.hub = hub;
             return this;
         }
-        
+
         public GetGlobalHubsMediaContainer build() {
+
             return new GetGlobalHubsMediaContainer(
-                size,
-                allowSync,
-                identifier,
+                size, allowSync, identifier,
                 hub);
         }
+
     }
 }

@@ -10,7 +10,6 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * Country
@@ -18,7 +17,6 @@ import java.util.Objects;
  * <p>The filter query string for country media items.
  */
 public class Country {
-
     /**
      * The unique identifier for the country.
      * NOTE: This is different for each Plex server and is not globally unique.
@@ -31,6 +29,7 @@ public class Country {
      */
     @JsonProperty("tag")
     private String tag;
+
 
     @JsonProperty("filter")
     private String filter;
@@ -70,9 +69,10 @@ public class Country {
         return filter;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The unique identifier for the country.
@@ -99,7 +99,6 @@ public class Country {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -110,17 +109,15 @@ public class Country {
         }
         Country other = (Country) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.tag, other.tag) &&
-            Objects.deepEquals(this.filter, other.filter);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.tag, other.tag) &&
+            Utils.enhancedDeepEquals(this.filter, other.filter);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            tag,
-            filter);
+        return Utils.enhancedHash(
+            id, tag, filter);
     }
     
     @Override
@@ -130,18 +127,20 @@ public class Country {
                 "tag", tag,
                 "filter", filter);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer id;
- 
+
         private String tag;
- 
+
         private String filter;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The unique identifier for the country.
@@ -153,6 +152,7 @@ public class Country {
             return this;
         }
 
+
         /**
          * The country of origin of this media item
          */
@@ -162,17 +162,18 @@ public class Country {
             return this;
         }
 
+
         public Builder filter(String filter) {
             Utils.checkNotNull(filter, "filter");
             this.filter = filter;
             return this;
         }
-        
+
         public Country build() {
+
             return new Country(
-                id,
-                tag,
-                filter);
+                id, tag, filter);
         }
+
     }
 }

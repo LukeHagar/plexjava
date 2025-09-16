@@ -4,6 +4,7 @@
 package dev.plexapi.sdk;
 
 import dev.plexapi.sdk.hooks.SDKHooks;
+import dev.plexapi.sdk.utils.AsyncHooks;
 import dev.plexapi.sdk.utils.HTTPClient;
 import dev.plexapi.sdk.utils.Hooks;
 import dev.plexapi.sdk.utils.RetryConfig;
@@ -16,13 +17,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class SDKConfiguration {
 
     private static final String LANGUAGE = "java";
     public static final String OPENAPI_DOC_VERSION = "0.0.3";
-    public static final String SDK_VERSION = "0.17.1";
-    public static final String GEN_VERSION = "2.623.0";
+    public static final String SDK_VERSION = "0.18.0";
+    public static final String GEN_VERSION = "2.698.4";
     private static final String BASE_PACKAGE = "dev.plexapi.sdk";
     public static final String USER_AGENT = 
             String.format("speakeasy-sdk/%s %s %s %s %s",
@@ -113,11 +116,12 @@ public class SDKConfiguration {
         this._hooks = hooks;
     }
 
-    /** 
+    /**
      * Initializes state (for example hooks).
      **/
     public void initialize() {
         SDKHooks.initialize(_hooks);
+        SDKHooks.initialize(_asyncHooks);
     }
 
     
@@ -130,9 +134,30 @@ public class SDKConfiguration {
     public Optional<RetryConfig> retryConfig() {
         return retryConfig;
     }
-    
+
     public void setRetryConfig(Optional<RetryConfig> retryConfig) {
         Utils.checkNotNull(retryConfig, "retryConfig");
         this.retryConfig = retryConfig;
+    }
+    private ScheduledExecutorService retryScheduler = Executors.newSingleThreadScheduledExecutor();
+    
+    public ScheduledExecutorService retryScheduler() {
+        return retryScheduler;
+    }
+
+    public void setAsyncRetryScheduler(ScheduledExecutorService retryScheduler) {
+        Utils.checkNotNull(retryScheduler, "retryScheduler");
+        this.retryScheduler = retryScheduler;
+    }
+
+    private AsyncHooks _asyncHooks = new AsyncHooks();
+
+    public AsyncHooks asyncHooks() {
+        return _asyncHooks;
+    }
+
+    public void setAsyncHooks(AsyncHooks asyncHooks) {
+        Utils.checkNotNull(asyncHooks, "asyncHooks");
+        this._asyncHooks = asyncHooks;
     }
 }

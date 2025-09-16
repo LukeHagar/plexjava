@@ -7,21 +7,18 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class InternalPaymentMethod {
-
     @JsonCreator
     public InternalPaymentMethod() {
-        
-        
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
 
-    
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -35,7 +32,7 @@ public class InternalPaymentMethod {
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             );
     }
     
@@ -43,16 +40,19 @@ public class InternalPaymentMethod {
     public String toString() {
         return Utils.toString(InternalPaymentMethod.class);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
-        
+
         private Builder() {
           // force use of static builder() method
         }
-        
+
         public InternalPaymentMethod build() {
+
             return new InternalPaymentMethod(
                 );
         }
+
     }
 }

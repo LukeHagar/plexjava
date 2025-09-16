@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetWatchList;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -12,10 +16,10 @@ public class GetWatchListRequestBuilder {
 
     private GetWatchListRequest request;
     private Optional<String> serverURL = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallGetWatchList sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetWatchListRequestBuilder(SDKMethodInterfaces.MethodCallGetWatchList sdk) {
-        this.sdk = sdk;
+    public GetWatchListRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetWatchListRequestBuilder request(GetWatchListRequest request) {
@@ -37,9 +41,10 @@ public class GetWatchListRequestBuilder {
     }
 
     public GetWatchListResponse call() throws Exception {
+        
+        RequestOperation<GetWatchListRequest, GetWatchListResponse> operation
+              = new GetWatchList.Sync(sdkConfiguration, serverURL);
 
-        return sdk.getWatchList(
-            request,
-            serverURL);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

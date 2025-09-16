@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.PostMediaArts;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.Long;
@@ -14,10 +18,10 @@ public class PostMediaArtsRequestBuilder {
     private Long ratingKey;
     private Optional<String> url = Optional.empty();
     private Optional<byte[]> requestBody = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallPostMediaArts sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public PostMediaArtsRequestBuilder(SDKMethodInterfaces.MethodCallPostMediaArts sdk) {
-        this.sdk = sdk;
+    public PostMediaArtsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public PostMediaArtsRequestBuilder ratingKey(long ratingKey) {
@@ -50,11 +54,22 @@ public class PostMediaArtsRequestBuilder {
         return this;
     }
 
-    public PostMediaArtsResponse call() throws Exception {
 
-        return sdk.postMediaArts(
-            ratingKey,
+    private PostMediaArtsRequest buildRequest() {
+
+        PostMediaArtsRequest request = new PostMediaArtsRequest(ratingKey,
             url,
             requestBody);
+
+        return request;
+    }
+
+    public PostMediaArtsResponse call() throws Exception {
+        
+        RequestOperation<PostMediaArtsRequest, PostMediaArtsResponse> operation
+              = new PostMediaArts.Sync(sdkConfiguration);
+        PostMediaArtsRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

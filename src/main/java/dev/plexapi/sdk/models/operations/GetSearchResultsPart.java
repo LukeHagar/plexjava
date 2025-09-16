@@ -12,8 +12,8 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetSearchResultsPart {
 
@@ -21,29 +21,36 @@ public class GetSearchResultsPart {
     @JsonProperty("id")
     private Optional<Double> id;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
     private Optional<Double> duration;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("file")
     private Optional<String> file;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("size")
     private Optional<Double> size;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioProfile")
     private Optional<String> audioProfile;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("container")
     private Optional<String> container;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoProfile")
@@ -78,7 +85,9 @@ public class GetSearchResultsPart {
     }
     
     public GetSearchResultsPart() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -121,15 +130,17 @@ public class GetSearchResultsPart {
         return videoProfile;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetSearchResultsPart withId(double id) {
         Utils.checkNotNull(id, "id");
         this.id = Optional.ofNullable(id);
         return this;
     }
+
 
     public GetSearchResultsPart withId(Optional<Double> id) {
         Utils.checkNotNull(id, "id");
@@ -143,6 +154,7 @@ public class GetSearchResultsPart {
         return this;
     }
 
+
     public GetSearchResultsPart withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
@@ -154,6 +166,7 @@ public class GetSearchResultsPart {
         this.duration = Optional.ofNullable(duration);
         return this;
     }
+
 
     public GetSearchResultsPart withDuration(Optional<Double> duration) {
         Utils.checkNotNull(duration, "duration");
@@ -167,6 +180,7 @@ public class GetSearchResultsPart {
         return this;
     }
 
+
     public GetSearchResultsPart withFile(Optional<String> file) {
         Utils.checkNotNull(file, "file");
         this.file = file;
@@ -178,6 +192,7 @@ public class GetSearchResultsPart {
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetSearchResultsPart withSize(Optional<Double> size) {
         Utils.checkNotNull(size, "size");
@@ -191,6 +206,7 @@ public class GetSearchResultsPart {
         return this;
     }
 
+
     public GetSearchResultsPart withAudioProfile(Optional<String> audioProfile) {
         Utils.checkNotNull(audioProfile, "audioProfile");
         this.audioProfile = audioProfile;
@@ -202,6 +218,7 @@ public class GetSearchResultsPart {
         this.container = Optional.ofNullable(container);
         return this;
     }
+
 
     public GetSearchResultsPart withContainer(Optional<String> container) {
         Utils.checkNotNull(container, "container");
@@ -215,13 +232,13 @@ public class GetSearchResultsPart {
         return this;
     }
 
+
     public GetSearchResultsPart withVideoProfile(Optional<String> videoProfile) {
         Utils.checkNotNull(videoProfile, "videoProfile");
         this.videoProfile = videoProfile;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -232,27 +249,22 @@ public class GetSearchResultsPart {
         }
         GetSearchResultsPart other = (GetSearchResultsPart) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.file, other.file) &&
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.audioProfile, other.audioProfile) &&
-            Objects.deepEquals(this.container, other.container) &&
-            Objects.deepEquals(this.videoProfile, other.videoProfile);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.file, other.file) &&
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.audioProfile, other.audioProfile) &&
+            Utils.enhancedDeepEquals(this.container, other.container) &&
+            Utils.enhancedDeepEquals(this.videoProfile, other.videoProfile);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            key,
-            duration,
-            file,
-            size,
-            audioProfile,
-            container,
-            videoProfile);
+        return Utils.enhancedHash(
+            id, key, duration,
+            file, size, audioProfile,
+            container, videoProfile);
     }
     
     @Override
@@ -267,28 +279,30 @@ public class GetSearchResultsPart {
                 "container", container,
                 "videoProfile", videoProfile);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Double> id = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<Double> duration = Optional.empty();
- 
+
         private Optional<String> file = Optional.empty();
- 
+
         private Optional<Double> size = Optional.empty();
- 
+
         private Optional<String> audioProfile = Optional.empty();
- 
+
         private Optional<String> container = Optional.empty();
- 
+
         private Optional<String> videoProfile = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder id(double id) {
             Utils.checkNotNull(id, "id");
@@ -302,6 +316,7 @@ public class GetSearchResultsPart {
             return this;
         }
 
+
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = Optional.ofNullable(key);
@@ -313,6 +328,7 @@ public class GetSearchResultsPart {
             this.key = key;
             return this;
         }
+
 
         public Builder duration(double duration) {
             Utils.checkNotNull(duration, "duration");
@@ -326,6 +342,7 @@ public class GetSearchResultsPart {
             return this;
         }
 
+
         public Builder file(String file) {
             Utils.checkNotNull(file, "file");
             this.file = Optional.ofNullable(file);
@@ -337,6 +354,7 @@ public class GetSearchResultsPart {
             this.file = file;
             return this;
         }
+
 
         public Builder size(double size) {
             Utils.checkNotNull(size, "size");
@@ -350,6 +368,7 @@ public class GetSearchResultsPart {
             return this;
         }
 
+
         public Builder audioProfile(String audioProfile) {
             Utils.checkNotNull(audioProfile, "audioProfile");
             this.audioProfile = Optional.ofNullable(audioProfile);
@@ -361,6 +380,7 @@ public class GetSearchResultsPart {
             this.audioProfile = audioProfile;
             return this;
         }
+
 
         public Builder container(String container) {
             Utils.checkNotNull(container, "container");
@@ -374,6 +394,7 @@ public class GetSearchResultsPart {
             return this;
         }
 
+
         public Builder videoProfile(String videoProfile) {
             Utils.checkNotNull(videoProfile, "videoProfile");
             this.videoProfile = Optional.ofNullable(videoProfile);
@@ -385,17 +406,14 @@ public class GetSearchResultsPart {
             this.videoProfile = videoProfile;
             return this;
         }
-        
+
         public GetSearchResultsPart build() {
+
             return new GetSearchResultsPart(
-                id,
-                key,
-                duration,
-                file,
-                size,
-                audioProfile,
-                container,
-                videoProfile);
+                id, key, duration,
+                file, size, audioProfile,
+                container, videoProfile);
         }
+
     }
 }

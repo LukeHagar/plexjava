@@ -13,7 +13,6 @@ import java.lang.Boolean;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -27,21 +26,26 @@ public class GetHomeDataResponseBody {
     @JsonProperty("id")
     private Optional<Double> id;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("name")
     private Optional<String> name;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("guestUserID")
     private Optional<Double> guestUserID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("guestUserUUID")
     private Optional<String> guestUserUUID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("guestEnabled")
     private Optional<Boolean> guestEnabled;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("subscription")
@@ -70,7 +74,8 @@ public class GetHomeDataResponseBody {
     }
     
     public GetHomeDataResponseBody() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -103,15 +108,17 @@ public class GetHomeDataResponseBody {
         return subscription;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetHomeDataResponseBody withId(double id) {
         Utils.checkNotNull(id, "id");
         this.id = Optional.ofNullable(id);
         return this;
     }
+
 
     public GetHomeDataResponseBody withId(Optional<Double> id) {
         Utils.checkNotNull(id, "id");
@@ -125,6 +132,7 @@ public class GetHomeDataResponseBody {
         return this;
     }
 
+
     public GetHomeDataResponseBody withName(Optional<String> name) {
         Utils.checkNotNull(name, "name");
         this.name = name;
@@ -136,6 +144,7 @@ public class GetHomeDataResponseBody {
         this.guestUserID = Optional.ofNullable(guestUserID);
         return this;
     }
+
 
     public GetHomeDataResponseBody withGuestUserID(Optional<Double> guestUserID) {
         Utils.checkNotNull(guestUserID, "guestUserID");
@@ -149,6 +158,7 @@ public class GetHomeDataResponseBody {
         return this;
     }
 
+
     public GetHomeDataResponseBody withGuestUserUUID(Optional<String> guestUserUUID) {
         Utils.checkNotNull(guestUserUUID, "guestUserUUID");
         this.guestUserUUID = guestUserUUID;
@@ -160,6 +170,7 @@ public class GetHomeDataResponseBody {
         this.guestEnabled = Optional.ofNullable(guestEnabled);
         return this;
     }
+
 
     public GetHomeDataResponseBody withGuestEnabled(Optional<Boolean> guestEnabled) {
         Utils.checkNotNull(guestEnabled, "guestEnabled");
@@ -173,13 +184,13 @@ public class GetHomeDataResponseBody {
         return this;
     }
 
+
     public GetHomeDataResponseBody withSubscription(Optional<Boolean> subscription) {
         Utils.checkNotNull(subscription, "subscription");
         this.subscription = subscription;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -190,23 +201,19 @@ public class GetHomeDataResponseBody {
         }
         GetHomeDataResponseBody other = (GetHomeDataResponseBody) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.name, other.name) &&
-            Objects.deepEquals(this.guestUserID, other.guestUserID) &&
-            Objects.deepEquals(this.guestUserUUID, other.guestUserUUID) &&
-            Objects.deepEquals(this.guestEnabled, other.guestEnabled) &&
-            Objects.deepEquals(this.subscription, other.subscription);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.guestUserID, other.guestUserID) &&
+            Utils.enhancedDeepEquals(this.guestUserUUID, other.guestUserUUID) &&
+            Utils.enhancedDeepEquals(this.guestEnabled, other.guestEnabled) &&
+            Utils.enhancedDeepEquals(this.subscription, other.subscription);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            name,
-            guestUserID,
-            guestUserUUID,
-            guestEnabled,
-            subscription);
+        return Utils.enhancedHash(
+            id, name, guestUserID,
+            guestUserUUID, guestEnabled, subscription);
     }
     
     @Override
@@ -219,24 +226,26 @@ public class GetHomeDataResponseBody {
                 "guestEnabled", guestEnabled,
                 "subscription", subscription);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Double> id = Optional.empty();
- 
+
         private Optional<String> name = Optional.empty();
- 
+
         private Optional<Double> guestUserID = Optional.empty();
- 
+
         private Optional<String> guestUserUUID = Optional.empty();
- 
+
         private Optional<Boolean> guestEnabled = Optional.empty();
- 
+
         private Optional<Boolean> subscription = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder id(double id) {
             Utils.checkNotNull(id, "id");
@@ -250,6 +259,7 @@ public class GetHomeDataResponseBody {
             return this;
         }
 
+
         public Builder name(String name) {
             Utils.checkNotNull(name, "name");
             this.name = Optional.ofNullable(name);
@@ -261,6 +271,7 @@ public class GetHomeDataResponseBody {
             this.name = name;
             return this;
         }
+
 
         public Builder guestUserID(double guestUserID) {
             Utils.checkNotNull(guestUserID, "guestUserID");
@@ -274,6 +285,7 @@ public class GetHomeDataResponseBody {
             return this;
         }
 
+
         public Builder guestUserUUID(String guestUserUUID) {
             Utils.checkNotNull(guestUserUUID, "guestUserUUID");
             this.guestUserUUID = Optional.ofNullable(guestUserUUID);
@@ -285,6 +297,7 @@ public class GetHomeDataResponseBody {
             this.guestUserUUID = guestUserUUID;
             return this;
         }
+
 
         public Builder guestEnabled(boolean guestEnabled) {
             Utils.checkNotNull(guestEnabled, "guestEnabled");
@@ -298,6 +311,7 @@ public class GetHomeDataResponseBody {
             return this;
         }
 
+
         public Builder subscription(boolean subscription) {
             Utils.checkNotNull(subscription, "subscription");
             this.subscription = Optional.ofNullable(subscription);
@@ -309,15 +323,13 @@ public class GetHomeDataResponseBody {
             this.subscription = subscription;
             return this;
         }
-        
+
         public GetHomeDataResponseBody build() {
+
             return new GetHomeDataResponseBody(
-                id,
-                name,
-                guestUserID,
-                guestUserUUID,
-                guestEnabled,
-                subscription);
+                id, name, guestUserID,
+                guestUserUUID, guestEnabled, subscription);
         }
+
     }
 }

@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetTokenByPinId;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -12,10 +16,10 @@ public class GetTokenByPinIdRequestBuilder {
 
     private GetTokenByPinIdRequest request;
     private Optional<String> serverURL = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallGetTokenByPinId sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetTokenByPinIdRequestBuilder(SDKMethodInterfaces.MethodCallGetTokenByPinId sdk) {
-        this.sdk = sdk;
+    public GetTokenByPinIdRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetTokenByPinIdRequestBuilder request(GetTokenByPinIdRequest request) {
@@ -37,9 +41,10 @@ public class GetTokenByPinIdRequestBuilder {
     }
 
     public GetTokenByPinIdResponse call() throws Exception {
+        
+        RequestOperation<GetTokenByPinIdRequest, GetTokenByPinIdResponse> operation
+              = new GetTokenByPinId.Sync(sdkConfiguration, serverURL);
 
-        return sdk.getTokenByPinId(
-            request,
-            serverURL);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

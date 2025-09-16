@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetLibraryDetailsField {
 
@@ -20,13 +20,16 @@ public class GetLibraryDetailsField {
     @JsonProperty("key")
     private Optional<String> key;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
     private Optional<String> type;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("subType")
@@ -49,7 +52,8 @@ public class GetLibraryDetailsField {
     }
     
     public GetLibraryDetailsField() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -72,15 +76,17 @@ public class GetLibraryDetailsField {
         return subType;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetLibraryDetailsField withKey(String key) {
         Utils.checkNotNull(key, "key");
         this.key = Optional.ofNullable(key);
         return this;
     }
+
 
     public GetLibraryDetailsField withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
@@ -94,6 +100,7 @@ public class GetLibraryDetailsField {
         return this;
     }
 
+
     public GetLibraryDetailsField withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
@@ -105,6 +112,7 @@ public class GetLibraryDetailsField {
         this.type = Optional.ofNullable(type);
         return this;
     }
+
 
     public GetLibraryDetailsField withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
@@ -118,13 +126,13 @@ public class GetLibraryDetailsField {
         return this;
     }
 
+
     public GetLibraryDetailsField withSubType(Optional<String> subType) {
         Utils.checkNotNull(subType, "subType");
         this.subType = subType;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -135,18 +143,16 @@ public class GetLibraryDetailsField {
         }
         GetLibraryDetailsField other = (GetLibraryDetailsField) o;
         return 
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.subType, other.subType);
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.subType, other.subType);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            key,
-            title,
-            type,
+        return Utils.enhancedHash(
+            key, title, type,
             subType);
     }
     
@@ -158,20 +164,22 @@ public class GetLibraryDetailsField {
                 "type", type,
                 "subType", subType);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> type = Optional.empty();
- 
+
         private Optional<String> subType = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
@@ -185,6 +193,7 @@ public class GetLibraryDetailsField {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -196,6 +205,7 @@ public class GetLibraryDetailsField {
             this.title = title;
             return this;
         }
+
 
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
@@ -209,6 +219,7 @@ public class GetLibraryDetailsField {
             return this;
         }
 
+
         public Builder subType(String subType) {
             Utils.checkNotNull(subType, "subType");
             this.subType = Optional.ofNullable(subType);
@@ -220,13 +231,13 @@ public class GetLibraryDetailsField {
             this.subType = subType;
             return this;
         }
-        
+
         public GetLibraryDetailsField build() {
+
             return new GetLibraryDetailsField(
-                key,
-                title,
-                type,
+                key, title, type,
                 subType);
         }
+
     }
 }

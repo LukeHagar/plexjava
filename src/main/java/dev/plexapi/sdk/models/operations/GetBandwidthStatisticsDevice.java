@@ -12,8 +12,8 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetBandwidthStatisticsDevice {
 
@@ -21,17 +21,21 @@ public class GetBandwidthStatisticsDevice {
     @JsonProperty("id")
     private Optional<Integer> id;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("name")
     private Optional<String> name;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("platform")
     private Optional<String> platform;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("clientIdentifier")
     private Optional<String> clientIdentifier;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("createdAt")
@@ -57,7 +61,8 @@ public class GetBandwidthStatisticsDevice {
     }
     
     public GetBandwidthStatisticsDevice() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -85,15 +90,17 @@ public class GetBandwidthStatisticsDevice {
         return createdAt;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetBandwidthStatisticsDevice withId(int id) {
         Utils.checkNotNull(id, "id");
         this.id = Optional.ofNullable(id);
         return this;
     }
+
 
     public GetBandwidthStatisticsDevice withId(Optional<Integer> id) {
         Utils.checkNotNull(id, "id");
@@ -107,6 +114,7 @@ public class GetBandwidthStatisticsDevice {
         return this;
     }
 
+
     public GetBandwidthStatisticsDevice withName(Optional<String> name) {
         Utils.checkNotNull(name, "name");
         this.name = name;
@@ -118,6 +126,7 @@ public class GetBandwidthStatisticsDevice {
         this.platform = Optional.ofNullable(platform);
         return this;
     }
+
 
     public GetBandwidthStatisticsDevice withPlatform(Optional<String> platform) {
         Utils.checkNotNull(platform, "platform");
@@ -131,6 +140,7 @@ public class GetBandwidthStatisticsDevice {
         return this;
     }
 
+
     public GetBandwidthStatisticsDevice withClientIdentifier(Optional<String> clientIdentifier) {
         Utils.checkNotNull(clientIdentifier, "clientIdentifier");
         this.clientIdentifier = clientIdentifier;
@@ -143,13 +153,13 @@ public class GetBandwidthStatisticsDevice {
         return this;
     }
 
+
     public GetBandwidthStatisticsDevice withCreatedAt(Optional<Integer> createdAt) {
         Utils.checkNotNull(createdAt, "createdAt");
         this.createdAt = createdAt;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -160,21 +170,18 @@ public class GetBandwidthStatisticsDevice {
         }
         GetBandwidthStatisticsDevice other = (GetBandwidthStatisticsDevice) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.name, other.name) &&
-            Objects.deepEquals(this.platform, other.platform) &&
-            Objects.deepEquals(this.clientIdentifier, other.clientIdentifier) &&
-            Objects.deepEquals(this.createdAt, other.createdAt);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.platform, other.platform) &&
+            Utils.enhancedDeepEquals(this.clientIdentifier, other.clientIdentifier) &&
+            Utils.enhancedDeepEquals(this.createdAt, other.createdAt);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            name,
-            platform,
-            clientIdentifier,
-            createdAt);
+        return Utils.enhancedHash(
+            id, name, platform,
+            clientIdentifier, createdAt);
     }
     
     @Override
@@ -186,22 +193,24 @@ public class GetBandwidthStatisticsDevice {
                 "clientIdentifier", clientIdentifier,
                 "createdAt", createdAt);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> id = Optional.empty();
- 
+
         private Optional<String> name = Optional.empty();
- 
+
         private Optional<String> platform = Optional.empty();
- 
+
         private Optional<String> clientIdentifier = Optional.empty();
- 
+
         private Optional<Integer> createdAt = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder id(int id) {
             Utils.checkNotNull(id, "id");
@@ -215,6 +224,7 @@ public class GetBandwidthStatisticsDevice {
             return this;
         }
 
+
         public Builder name(String name) {
             Utils.checkNotNull(name, "name");
             this.name = Optional.ofNullable(name);
@@ -226,6 +236,7 @@ public class GetBandwidthStatisticsDevice {
             this.name = name;
             return this;
         }
+
 
         public Builder platform(String platform) {
             Utils.checkNotNull(platform, "platform");
@@ -239,6 +250,7 @@ public class GetBandwidthStatisticsDevice {
             return this;
         }
 
+
         public Builder clientIdentifier(String clientIdentifier) {
             Utils.checkNotNull(clientIdentifier, "clientIdentifier");
             this.clientIdentifier = Optional.ofNullable(clientIdentifier);
@@ -251,6 +263,7 @@ public class GetBandwidthStatisticsDevice {
             return this;
         }
 
+
         public Builder createdAt(int createdAt) {
             Utils.checkNotNull(createdAt, "createdAt");
             this.createdAt = Optional.ofNullable(createdAt);
@@ -262,14 +275,13 @@ public class GetBandwidthStatisticsDevice {
             this.createdAt = createdAt;
             return this;
         }
-        
+
         public GetBandwidthStatisticsDevice build() {
+
             return new GetBandwidthStatisticsDevice(
-                id,
-                name,
-                platform,
-                clientIdentifier,
-                createdAt);
+                id, name, platform,
+                clientIdentifier, createdAt);
         }
+
     }
 }

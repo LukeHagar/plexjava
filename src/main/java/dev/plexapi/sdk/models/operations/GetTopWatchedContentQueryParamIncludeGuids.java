@@ -19,7 +19,7 @@ public enum GetTopWatchedContentQueryParamIncludeGuids {
     @JsonValue
     private final int value;
 
-    private GetTopWatchedContentQueryParamIncludeGuids(int value) {
+    GetTopWatchedContentQueryParamIncludeGuids(int value) {
         this.value = value;
     }
     

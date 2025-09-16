@@ -19,7 +19,7 @@ public enum PostUsersSignInDataDefaultSubtitleAccessibility {
     @JsonValue
     private final int value;
 
-    private PostUsersSignInDataDefaultSubtitleAccessibility(int value) {
+    PostUsersSignInDataDefaultSubtitleAccessibility(int value) {
         this.value = value;
     }
     

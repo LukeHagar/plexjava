@@ -14,7 +14,7 @@ public enum GetMediaMetaDataOptimizedForStreamingLibrary1 {
     @JsonValue
     private final int value;
 
-    private GetMediaMetaDataOptimizedForStreamingLibrary1(int value) {
+    GetMediaMetaDataOptimizedForStreamingLibrary1(int value) {
         this.value = value;
     }
     

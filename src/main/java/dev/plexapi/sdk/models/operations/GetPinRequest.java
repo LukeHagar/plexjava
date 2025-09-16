@@ -12,11 +12,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetPinRequest {
 
+public class GetPinRequest {
     /**
      * Determines the kind of code returned by the API call
      * Strong codes are used for Pin authentication flows
@@ -79,7 +78,8 @@ public class GetPinRequest {
     
     public GetPinRequest(
             String clientID) {
-        this(Optional.empty(), clientID, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), clientID, Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -132,9 +132,10 @@ public class GetPinRequest {
         return platform;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Determines the kind of code returned by the API call
@@ -146,6 +147,7 @@ public class GetPinRequest {
         this.strong = Optional.ofNullable(strong);
         return this;
     }
+
 
     /**
      * Determines the kind of code returned by the API call
@@ -176,6 +178,7 @@ public class GetPinRequest {
         return this;
     }
 
+
     /**
      * The name of the client application. (Plex Web, Plex Media Server, etc.)
      */
@@ -193,6 +196,7 @@ public class GetPinRequest {
         this.deviceNickname = Optional.ofNullable(deviceNickname);
         return this;
     }
+
 
     /**
      * A relatively friendly name for the client device
@@ -212,6 +216,7 @@ public class GetPinRequest {
         return this;
     }
 
+
     /**
      * The version of the client application.
      */
@@ -230,6 +235,7 @@ public class GetPinRequest {
         return this;
     }
 
+
     /**
      * The platform of the client application.
      */
@@ -239,7 +245,6 @@ public class GetPinRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -250,23 +255,19 @@ public class GetPinRequest {
         }
         GetPinRequest other = (GetPinRequest) o;
         return 
-            Objects.deepEquals(this.strong, other.strong) &&
-            Objects.deepEquals(this.clientID, other.clientID) &&
-            Objects.deepEquals(this.clientName, other.clientName) &&
-            Objects.deepEquals(this.deviceNickname, other.deviceNickname) &&
-            Objects.deepEquals(this.clientVersion, other.clientVersion) &&
-            Objects.deepEquals(this.platform, other.platform);
+            Utils.enhancedDeepEquals(this.strong, other.strong) &&
+            Utils.enhancedDeepEquals(this.clientID, other.clientID) &&
+            Utils.enhancedDeepEquals(this.clientName, other.clientName) &&
+            Utils.enhancedDeepEquals(this.deviceNickname, other.deviceNickname) &&
+            Utils.enhancedDeepEquals(this.clientVersion, other.clientVersion) &&
+            Utils.enhancedDeepEquals(this.platform, other.platform);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            strong,
-            clientID,
-            clientName,
-            deviceNickname,
-            clientVersion,
-            platform);
+        return Utils.enhancedHash(
+            strong, clientID, clientName,
+            deviceNickname, clientVersion, platform);
     }
     
     @Override
@@ -279,24 +280,26 @@ public class GetPinRequest {
                 "clientVersion", clientVersion,
                 "platform", platform);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Boolean> strong;
- 
+
         private String clientID;
- 
+
         private Optional<String> clientName = Optional.empty();
- 
+
         private Optional<String> deviceNickname = Optional.empty();
- 
+
         private Optional<String> clientVersion = Optional.empty();
- 
+
         private Optional<String> platform = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Determines the kind of code returned by the API call
@@ -320,6 +323,7 @@ public class GetPinRequest {
             return this;
         }
 
+
         /**
          * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
          */
@@ -328,6 +332,7 @@ public class GetPinRequest {
             this.clientID = clientID;
             return this;
         }
+
 
         /**
          * The name of the client application. (Plex Web, Plex Media Server, etc.)
@@ -347,6 +352,7 @@ public class GetPinRequest {
             return this;
         }
 
+
         /**
          * A relatively friendly name for the client device
          */
@@ -364,6 +370,7 @@ public class GetPinRequest {
             this.deviceNickname = deviceNickname;
             return this;
         }
+
 
         /**
          * The version of the client application.
@@ -383,6 +390,7 @@ public class GetPinRequest {
             return this;
         }
 
+
         /**
          * The platform of the client application.
          */
@@ -400,19 +408,17 @@ public class GetPinRequest {
             this.platform = platform;
             return this;
         }
-        
+
         public GetPinRequest build() {
             if (strong == null) {
                 strong = _SINGLETON_VALUE_Strong.value();
             }
+
             return new GetPinRequest(
-                strong,
-                clientID,
-                clientName,
-                deviceNickname,
-                clientVersion,
-                platform);
+                strong, clientID, clientName,
+                deviceNickname, clientVersion, platform);
         }
+
 
         private static final LazySingletonValue<Optional<Boolean>> _SINGLETON_VALUE_Strong =
                 new LazySingletonValue<>(

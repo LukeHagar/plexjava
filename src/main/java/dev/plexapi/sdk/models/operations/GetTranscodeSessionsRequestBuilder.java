@@ -3,18 +3,25 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetTranscodeSessions;
 import java.lang.Exception;
 
 public class GetTranscodeSessionsRequestBuilder {
 
-    private final SDKMethodInterfaces.MethodCallGetTranscodeSessions sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetTranscodeSessionsRequestBuilder(SDKMethodInterfaces.MethodCallGetTranscodeSessions sdk) {
-        this.sdk = sdk;
+    public GetTranscodeSessionsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetTranscodeSessionsResponse call() throws Exception {
+        
+        RequestlessOperation<GetTranscodeSessionsResponse> operation
+            = new GetTranscodeSessions.Sync(sdkConfiguration);
 
-        return sdk.getTranscodeSessionsDirect();
+        return operation.handleResponse(operation.doRequest());
     }
 }

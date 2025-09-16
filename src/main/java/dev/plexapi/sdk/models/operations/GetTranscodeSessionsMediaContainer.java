@@ -14,14 +14,15 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetTranscodeSessionsMediaContainer {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("size")
     private Optional<Integer> size;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("TranscodeSession")
@@ -52,15 +53,17 @@ public class GetTranscodeSessionsMediaContainer {
         return (Optional<List<TranscodeSession>>) transcodeSession;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetTranscodeSessionsMediaContainer withSize(int size) {
         Utils.checkNotNull(size, "size");
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetTranscodeSessionsMediaContainer withSize(Optional<Integer> size) {
         Utils.checkNotNull(size, "size");
@@ -74,13 +77,13 @@ public class GetTranscodeSessionsMediaContainer {
         return this;
     }
 
+
     public GetTranscodeSessionsMediaContainer withTranscodeSession(Optional<? extends List<TranscodeSession>> transcodeSession) {
         Utils.checkNotNull(transcodeSession, "transcodeSession");
         this.transcodeSession = transcodeSession;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -91,15 +94,14 @@ public class GetTranscodeSessionsMediaContainer {
         }
         GetTranscodeSessionsMediaContainer other = (GetTranscodeSessionsMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.transcodeSession, other.transcodeSession);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.transcodeSession, other.transcodeSession);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            transcodeSession);
+        return Utils.enhancedHash(
+            size, transcodeSession);
     }
     
     @Override
@@ -108,16 +110,18 @@ public class GetTranscodeSessionsMediaContainer {
                 "size", size,
                 "transcodeSession", transcodeSession);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> size = Optional.empty();
- 
+
         private Optional<? extends List<TranscodeSession>> transcodeSession = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder size(int size) {
             Utils.checkNotNull(size, "size");
@@ -131,6 +135,7 @@ public class GetTranscodeSessionsMediaContainer {
             return this;
         }
 
+
         public Builder transcodeSession(List<TranscodeSession> transcodeSession) {
             Utils.checkNotNull(transcodeSession, "transcodeSession");
             this.transcodeSession = Optional.ofNullable(transcodeSession);
@@ -142,11 +147,12 @@ public class GetTranscodeSessionsMediaContainer {
             this.transcodeSession = transcodeSession;
             return this;
         }
-        
+
         public GetTranscodeSessionsMediaContainer build() {
+
             return new GetTranscodeSessionsMediaContainer(
-                size,
-                transcodeSession);
+                size, transcodeSession);
         }
+
     }
 }

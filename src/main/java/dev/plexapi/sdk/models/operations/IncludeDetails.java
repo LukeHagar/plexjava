@@ -20,7 +20,7 @@ public enum IncludeDetails {
     @JsonValue
     private final long value;
 
-    private IncludeDetails(long value) {
+    IncludeDetails(long value) {
         this.value = value;
     }
     

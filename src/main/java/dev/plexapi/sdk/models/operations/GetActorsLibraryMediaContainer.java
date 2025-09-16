@@ -16,11 +16,10 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetActorsLibraryMediaContainer {
 
+public class GetActorsLibraryMediaContainer {
     /**
      * Number of media items returned in this response.
      */
@@ -156,7 +155,11 @@ public class GetActorsLibraryMediaContainer {
             String title1,
             String title2,
             String viewGroup) {
-        this(size, allowSync, art, identifier, mediaTagPrefix, mediaTagVersion, nocache, thumb, title1, title2, viewGroup, Optional.empty(), Optional.empty());
+        this(size, allowSync, art,
+            identifier, mediaTagPrefix, mediaTagVersion,
+            nocache, thumb, title1,
+            title2, viewGroup, Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -264,9 +267,10 @@ public class GetActorsLibraryMediaContainer {
         return (Optional<List<GetActorsLibraryDirectory>>) directory;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Number of media items returned in this response.
@@ -376,6 +380,7 @@ public class GetActorsLibraryMediaContainer {
         return this;
     }
 
+
     /**
      * Identifier for the view mode.
      */
@@ -394,6 +399,7 @@ public class GetActorsLibraryMediaContainer {
         return this;
     }
 
+
     /**
      * An array of actor entries for media items.
      */
@@ -403,7 +409,6 @@ public class GetActorsLibraryMediaContainer {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -414,36 +419,28 @@ public class GetActorsLibraryMediaContainer {
         }
         GetActorsLibraryMediaContainer other = (GetActorsLibraryMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.allowSync, other.allowSync) &&
-            Objects.deepEquals(this.art, other.art) &&
-            Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
-            Objects.deepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
-            Objects.deepEquals(this.nocache, other.nocache) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.title1, other.title1) &&
-            Objects.deepEquals(this.title2, other.title2) &&
-            Objects.deepEquals(this.viewGroup, other.viewGroup) &&
-            Objects.deepEquals(this.viewMode, other.viewMode) &&
-            Objects.deepEquals(this.directory, other.directory);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.allowSync, other.allowSync) &&
+            Utils.enhancedDeepEquals(this.art, other.art) &&
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
+            Utils.enhancedDeepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
+            Utils.enhancedDeepEquals(this.nocache, other.nocache) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.title1, other.title1) &&
+            Utils.enhancedDeepEquals(this.title2, other.title2) &&
+            Utils.enhancedDeepEquals(this.viewGroup, other.viewGroup) &&
+            Utils.enhancedDeepEquals(this.viewMode, other.viewMode) &&
+            Utils.enhancedDeepEquals(this.directory, other.directory);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            allowSync,
-            art,
-            identifier,
-            mediaTagPrefix,
-            mediaTagVersion,
-            nocache,
-            thumb,
-            title1,
-            title2,
-            viewGroup,
-            viewMode,
+        return Utils.enhancedHash(
+            size, allowSync, art,
+            identifier, mediaTagPrefix, mediaTagVersion,
+            nocache, thumb, title1,
+            title2, viewGroup, viewMode,
             directory);
     }
     
@@ -464,38 +461,40 @@ public class GetActorsLibraryMediaContainer {
                 "viewMode", viewMode,
                 "directory", directory);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer size;
- 
+
         private Boolean allowSync;
- 
+
         private String art;
- 
+
         private String identifier;
- 
+
         private String mediaTagPrefix;
- 
+
         private Long mediaTagVersion;
- 
+
         private Boolean nocache;
- 
+
         private String thumb;
- 
+
         private String title1;
- 
+
         private String title2;
- 
+
         private String viewGroup;
- 
+
         private Optional<String> viewMode = Optional.empty();
- 
+
         private Optional<? extends List<GetActorsLibraryDirectory>> directory = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Number of media items returned in this response.
@@ -506,6 +505,7 @@ public class GetActorsLibraryMediaContainer {
             return this;
         }
 
+
         /**
          * Indicates whether syncing is allowed.
          */
@@ -514,6 +514,7 @@ public class GetActorsLibraryMediaContainer {
             this.allowSync = allowSync;
             return this;
         }
+
 
         /**
          * URL for the background artwork of the media container.
@@ -524,6 +525,7 @@ public class GetActorsLibraryMediaContainer {
             return this;
         }
 
+
         /**
          * An plugin identifier for the media container.
          */
@@ -532,6 +534,7 @@ public class GetActorsLibraryMediaContainer {
             this.identifier = identifier;
             return this;
         }
+
 
         /**
          * The prefix used for media tag resource paths.
@@ -542,6 +545,7 @@ public class GetActorsLibraryMediaContainer {
             return this;
         }
 
+
         /**
          * The version number for media tags.
          */
@@ -550,6 +554,7 @@ public class GetActorsLibraryMediaContainer {
             this.mediaTagVersion = mediaTagVersion;
             return this;
         }
+
 
         /**
          * Specifies whether caching is disabled.
@@ -560,6 +565,7 @@ public class GetActorsLibraryMediaContainer {
             return this;
         }
 
+
         /**
          * URL for the thumbnail image of the media container.
          */
@@ -568,6 +574,7 @@ public class GetActorsLibraryMediaContainer {
             this.thumb = thumb;
             return this;
         }
+
 
         /**
          * The primary title of the media container.
@@ -578,6 +585,7 @@ public class GetActorsLibraryMediaContainer {
             return this;
         }
 
+
         /**
          * The secondary title of the media container.
          */
@@ -587,6 +595,7 @@ public class GetActorsLibraryMediaContainer {
             return this;
         }
 
+
         /**
          * Identifier for the view group layout.
          */
@@ -595,6 +604,7 @@ public class GetActorsLibraryMediaContainer {
             this.viewGroup = viewGroup;
             return this;
         }
+
 
         /**
          * Identifier for the view mode.
@@ -614,6 +624,7 @@ public class GetActorsLibraryMediaContainer {
             return this;
         }
 
+
         /**
          * An array of actor entries for media items.
          */
@@ -631,22 +642,16 @@ public class GetActorsLibraryMediaContainer {
             this.directory = directory;
             return this;
         }
-        
+
         public GetActorsLibraryMediaContainer build() {
+
             return new GetActorsLibraryMediaContainer(
-                size,
-                allowSync,
-                art,
-                identifier,
-                mediaTagPrefix,
-                mediaTagVersion,
-                nocache,
-                thumb,
-                title1,
-                title2,
-                viewGroup,
-                viewMode,
+                size, allowSync, art,
+                identifier, mediaTagPrefix, mediaTagVersion,
+                nocache, thumb, title1,
+                title2, viewGroup, viewMode,
                 directory);
         }
+
     }
 }

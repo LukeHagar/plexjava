@@ -12,8 +12,8 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetMetadataChildrenDirectory {
 
@@ -21,17 +21,21 @@ public class GetMetadataChildrenDirectory {
     @JsonProperty("leafCount")
     private Optional<Integer> leafCount;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
     private Optional<String> thumb;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("viewedLeafCount")
     private Optional<Integer> viewedLeafCount;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
@@ -57,7 +61,8 @@ public class GetMetadataChildrenDirectory {
     }
     
     public GetMetadataChildrenDirectory() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -85,15 +90,17 @@ public class GetMetadataChildrenDirectory {
         return title;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetMetadataChildrenDirectory withLeafCount(int leafCount) {
         Utils.checkNotNull(leafCount, "leafCount");
         this.leafCount = Optional.ofNullable(leafCount);
         return this;
     }
+
 
     public GetMetadataChildrenDirectory withLeafCount(Optional<Integer> leafCount) {
         Utils.checkNotNull(leafCount, "leafCount");
@@ -107,6 +114,7 @@ public class GetMetadataChildrenDirectory {
         return this;
     }
 
+
     public GetMetadataChildrenDirectory withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
         this.thumb = thumb;
@@ -118,6 +126,7 @@ public class GetMetadataChildrenDirectory {
         this.viewedLeafCount = Optional.ofNullable(viewedLeafCount);
         return this;
     }
+
 
     public GetMetadataChildrenDirectory withViewedLeafCount(Optional<Integer> viewedLeafCount) {
         Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
@@ -131,6 +140,7 @@ public class GetMetadataChildrenDirectory {
         return this;
     }
 
+
     public GetMetadataChildrenDirectory withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
@@ -143,13 +153,13 @@ public class GetMetadataChildrenDirectory {
         return this;
     }
 
+
     public GetMetadataChildrenDirectory withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -160,21 +170,18 @@ public class GetMetadataChildrenDirectory {
         }
         GetMetadataChildrenDirectory other = (GetMetadataChildrenDirectory) o;
         return 
-            Objects.deepEquals(this.leafCount, other.leafCount) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.viewedLeafCount, other.viewedLeafCount) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.title, other.title);
+            Utils.enhancedDeepEquals(this.leafCount, other.leafCount) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.viewedLeafCount, other.viewedLeafCount) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.title, other.title);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            leafCount,
-            thumb,
-            viewedLeafCount,
-            key,
-            title);
+        return Utils.enhancedHash(
+            leafCount, thumb, viewedLeafCount,
+            key, title);
     }
     
     @Override
@@ -186,22 +193,24 @@ public class GetMetadataChildrenDirectory {
                 "key", key,
                 "title", title);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> leafCount = Optional.empty();
- 
+
         private Optional<String> thumb = Optional.empty();
- 
+
         private Optional<Integer> viewedLeafCount = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder leafCount(int leafCount) {
             Utils.checkNotNull(leafCount, "leafCount");
@@ -215,6 +224,7 @@ public class GetMetadataChildrenDirectory {
             return this;
         }
 
+
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
             this.thumb = Optional.ofNullable(thumb);
@@ -226,6 +236,7 @@ public class GetMetadataChildrenDirectory {
             this.thumb = thumb;
             return this;
         }
+
 
         public Builder viewedLeafCount(int viewedLeafCount) {
             Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
@@ -239,6 +250,7 @@ public class GetMetadataChildrenDirectory {
             return this;
         }
 
+
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = Optional.ofNullable(key);
@@ -251,6 +263,7 @@ public class GetMetadataChildrenDirectory {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -262,14 +275,13 @@ public class GetMetadataChildrenDirectory {
             this.title = title;
             return this;
         }
-        
+
         public GetMetadataChildrenDirectory build() {
+
             return new GetMetadataChildrenDirectory(
-                leafCount,
-                thumb,
-                viewedLeafCount,
-                key,
-                title);
+                leafCount, thumb, viewedLeafCount,
+                key, title);
         }
+
     }
 }

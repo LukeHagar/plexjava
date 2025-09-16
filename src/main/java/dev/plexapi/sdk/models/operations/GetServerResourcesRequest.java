@@ -12,11 +12,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetServerResourcesRequest {
 
+public class GetServerResourcesRequest {
     /**
      * Include Https entries in the results
      */
@@ -60,7 +59,8 @@ public class GetServerResourcesRequest {
     
     public GetServerResourcesRequest(
             String clientID) {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), clientID);
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            clientID);
     }
 
     /**
@@ -99,9 +99,10 @@ public class GetServerResourcesRequest {
         return clientID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Include Https entries in the results
@@ -111,6 +112,7 @@ public class GetServerResourcesRequest {
         this.includeHttps = Optional.ofNullable(includeHttps);
         return this;
     }
+
 
     /**
      * Include Https entries in the results
@@ -131,6 +133,7 @@ public class GetServerResourcesRequest {
         return this;
     }
 
+
     /**
      * Include Relay addresses in the results 
      * E.g: https://10-0-0-25.bbf8e10c7fa20447cacee74cd9914cde.plex.direct:32400
@@ -150,6 +153,7 @@ public class GetServerResourcesRequest {
         return this;
     }
 
+
     /**
      * Include IPv6 entries in the results
      */
@@ -168,7 +172,6 @@ public class GetServerResourcesRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -179,18 +182,16 @@ public class GetServerResourcesRequest {
         }
         GetServerResourcesRequest other = (GetServerResourcesRequest) o;
         return 
-            Objects.deepEquals(this.includeHttps, other.includeHttps) &&
-            Objects.deepEquals(this.includeRelay, other.includeRelay) &&
-            Objects.deepEquals(this.includeIPv6, other.includeIPv6) &&
-            Objects.deepEquals(this.clientID, other.clientID);
+            Utils.enhancedDeepEquals(this.includeHttps, other.includeHttps) &&
+            Utils.enhancedDeepEquals(this.includeRelay, other.includeRelay) &&
+            Utils.enhancedDeepEquals(this.includeIPv6, other.includeIPv6) &&
+            Utils.enhancedDeepEquals(this.clientID, other.clientID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            includeHttps,
-            includeRelay,
-            includeIPv6,
+        return Utils.enhancedHash(
+            includeHttps, includeRelay, includeIPv6,
             clientID);
     }
     
@@ -202,20 +203,22 @@ public class GetServerResourcesRequest {
                 "includeIPv6", includeIPv6,
                 "clientID", clientID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends IncludeHttps> includeHttps;
- 
+
         private Optional<? extends IncludeRelay> includeRelay;
- 
+
         private Optional<? extends IncludeIPv6> includeIPv6;
- 
+
         private String clientID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Include Https entries in the results
@@ -234,6 +237,7 @@ public class GetServerResourcesRequest {
             this.includeHttps = includeHttps;
             return this;
         }
+
 
         /**
          * Include Relay addresses in the results 
@@ -255,6 +259,7 @@ public class GetServerResourcesRequest {
             return this;
         }
 
+
         /**
          * Include IPv6 entries in the results
          */
@@ -273,6 +278,7 @@ public class GetServerResourcesRequest {
             return this;
         }
 
+
         /**
          * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
          */
@@ -281,7 +287,7 @@ public class GetServerResourcesRequest {
             this.clientID = clientID;
             return this;
         }
-        
+
         public GetServerResourcesRequest build() {
             if (includeHttps == null) {
                 includeHttps = _SINGLETON_VALUE_IncludeHttps.value();
@@ -292,12 +298,12 @@ public class GetServerResourcesRequest {
             if (includeIPv6 == null) {
                 includeIPv6 = _SINGLETON_VALUE_IncludeIPv6.value();
             }
+
             return new GetServerResourcesRequest(
-                includeHttps,
-                includeRelay,
-                includeIPv6,
+                includeHttps, includeRelay, includeIPv6,
                 clientID);
         }
+
 
         private static final LazySingletonValue<Optional<? extends IncludeHttps>> _SINGLETON_VALUE_IncludeHttps =
                 new LazySingletonValue<>(

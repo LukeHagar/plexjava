@@ -12,7 +12,6 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -43,9 +42,10 @@ public class GetPlaylistContentsResponseBody {
         return (Optional<GetPlaylistContentsMediaContainer>) mediaContainer;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetPlaylistContentsResponseBody withMediaContainer(GetPlaylistContentsMediaContainer mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
@@ -53,13 +53,13 @@ public class GetPlaylistContentsResponseBody {
         return this;
     }
 
+
     public GetPlaylistContentsResponseBody withMediaContainer(Optional<? extends GetPlaylistContentsMediaContainer> mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
         this.mediaContainer = mediaContainer;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -70,12 +70,12 @@ public class GetPlaylistContentsResponseBody {
         }
         GetPlaylistContentsResponseBody other = (GetPlaylistContentsResponseBody) o;
         return 
-            Objects.deepEquals(this.mediaContainer, other.mediaContainer);
+            Utils.enhancedDeepEquals(this.mediaContainer, other.mediaContainer);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             mediaContainer);
     }
     
@@ -84,14 +84,16 @@ public class GetPlaylistContentsResponseBody {
         return Utils.toString(GetPlaylistContentsResponseBody.class,
                 "mediaContainer", mediaContainer);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends GetPlaylistContentsMediaContainer> mediaContainer = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder mediaContainer(GetPlaylistContentsMediaContainer mediaContainer) {
             Utils.checkNotNull(mediaContainer, "mediaContainer");
@@ -104,10 +106,12 @@ public class GetPlaylistContentsResponseBody {
             this.mediaContainer = mediaContainer;
             return this;
         }
-        
+
         public GetPlaylistContentsResponseBody build() {
+
             return new GetPlaylistContentsResponseBody(
                 mediaContainer);
         }
+
     }
 }

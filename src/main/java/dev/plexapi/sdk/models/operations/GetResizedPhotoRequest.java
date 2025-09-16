@@ -13,10 +13,9 @@ import java.lang.Double;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetResizedPhotoRequest {
-
     /**
      * The width for the resized photo
      */
@@ -140,9 +139,10 @@ public class GetResizedPhotoRequest {
         return url;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The width for the resized photo
@@ -207,7 +207,6 @@ public class GetResizedPhotoRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -218,24 +217,20 @@ public class GetResizedPhotoRequest {
         }
         GetResizedPhotoRequest other = (GetResizedPhotoRequest) o;
         return 
-            Objects.deepEquals(this.width, other.width) &&
-            Objects.deepEquals(this.height, other.height) &&
-            Objects.deepEquals(this.opacity, other.opacity) &&
-            Objects.deepEquals(this.blur, other.blur) &&
-            Objects.deepEquals(this.minSize, other.minSize) &&
-            Objects.deepEquals(this.upscale, other.upscale) &&
-            Objects.deepEquals(this.url, other.url);
+            Utils.enhancedDeepEquals(this.width, other.width) &&
+            Utils.enhancedDeepEquals(this.height, other.height) &&
+            Utils.enhancedDeepEquals(this.opacity, other.opacity) &&
+            Utils.enhancedDeepEquals(this.blur, other.blur) &&
+            Utils.enhancedDeepEquals(this.minSize, other.minSize) &&
+            Utils.enhancedDeepEquals(this.upscale, other.upscale) &&
+            Utils.enhancedDeepEquals(this.url, other.url);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            width,
-            height,
-            opacity,
-            blur,
-            minSize,
-            upscale,
+        return Utils.enhancedHash(
+            width, height, opacity,
+            blur, minSize, upscale,
             url);
     }
     
@@ -250,26 +245,28 @@ public class GetResizedPhotoRequest {
                 "upscale", upscale,
                 "url", url);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Double width;
- 
+
         private Double height;
- 
+
         private Long opacity;
- 
+
         private Double blur;
- 
+
         private MinSize minSize;
- 
+
         private Upscale upscale;
- 
+
         private String url;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The width for the resized photo
@@ -280,6 +277,7 @@ public class GetResizedPhotoRequest {
             return this;
         }
 
+
         /**
          * The height for the resized photo
          */
@@ -288,6 +286,7 @@ public class GetResizedPhotoRequest {
             this.height = height;
             return this;
         }
+
 
         /**
          * The opacity for the resized photo
@@ -298,6 +297,7 @@ public class GetResizedPhotoRequest {
             return this;
         }
 
+
         /**
          * The width for the resized photo
          */
@@ -306,6 +306,7 @@ public class GetResizedPhotoRequest {
             this.blur = blur;
             return this;
         }
+
 
         /**
          * images are always scaled proportionally. A value of '1' in minSize will make the smaller native dimension the dimension resized against.
@@ -316,6 +317,7 @@ public class GetResizedPhotoRequest {
             return this;
         }
 
+
         /**
          * allow images to be resized beyond native dimensions.
          */
@@ -325,6 +327,7 @@ public class GetResizedPhotoRequest {
             return this;
         }
 
+
         /**
          * path to image within Plex
          */
@@ -333,20 +336,18 @@ public class GetResizedPhotoRequest {
             this.url = url;
             return this;
         }
-        
+
         public GetResizedPhotoRequest build() {
             if (opacity == null) {
                 opacity = _SINGLETON_VALUE_Opacity.value();
             }
+
             return new GetResizedPhotoRequest(
-                width,
-                height,
-                opacity,
-                blur,
-                minSize,
-                upscale,
+                width, height, opacity,
+                blur, minSize, upscale,
                 url);
         }
+
 
         private static final LazySingletonValue<Long> _SINGLETON_VALUE_Opacity =
                 new LazySingletonValue<>(

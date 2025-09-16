@@ -12,7 +12,6 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -43,9 +42,10 @@ public class GetButlerTasksResponseBody {
         return (Optional<ButlerTasks>) butlerTasks;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetButlerTasksResponseBody withButlerTasks(ButlerTasks butlerTasks) {
         Utils.checkNotNull(butlerTasks, "butlerTasks");
@@ -53,13 +53,13 @@ public class GetButlerTasksResponseBody {
         return this;
     }
 
+
     public GetButlerTasksResponseBody withButlerTasks(Optional<? extends ButlerTasks> butlerTasks) {
         Utils.checkNotNull(butlerTasks, "butlerTasks");
         this.butlerTasks = butlerTasks;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -70,12 +70,12 @@ public class GetButlerTasksResponseBody {
         }
         GetButlerTasksResponseBody other = (GetButlerTasksResponseBody) o;
         return 
-            Objects.deepEquals(this.butlerTasks, other.butlerTasks);
+            Utils.enhancedDeepEquals(this.butlerTasks, other.butlerTasks);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             butlerTasks);
     }
     
@@ -84,14 +84,16 @@ public class GetButlerTasksResponseBody {
         return Utils.toString(GetButlerTasksResponseBody.class,
                 "butlerTasks", butlerTasks);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends ButlerTasks> butlerTasks = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder butlerTasks(ButlerTasks butlerTasks) {
             Utils.checkNotNull(butlerTasks, "butlerTasks");
@@ -104,10 +106,12 @@ public class GetButlerTasksResponseBody {
             this.butlerTasks = butlerTasks;
             return this;
         }
-        
+
         public GetButlerTasksResponseBody build() {
+
             return new GetButlerTasksResponseBody(
                 butlerTasks);
         }
+
     }
 }

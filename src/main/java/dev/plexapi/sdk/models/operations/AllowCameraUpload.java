@@ -19,7 +19,7 @@ public enum AllowCameraUpload {
     @JsonValue
     private final int value;
 
-    private AllowCameraUpload(int value) {
+    AllowCameraUpload(int value) {
         this.value = value;
     }
     

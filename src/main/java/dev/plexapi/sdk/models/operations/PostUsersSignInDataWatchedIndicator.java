@@ -19,7 +19,7 @@ public enum PostUsersSignInDataWatchedIndicator {
     @JsonValue
     private final int value;
 
-    private PostUsersSignInDataWatchedIndicator(int value) {
+    PostUsersSignInDataWatchedIndicator(int value) {
         this.value = value;
     }
     

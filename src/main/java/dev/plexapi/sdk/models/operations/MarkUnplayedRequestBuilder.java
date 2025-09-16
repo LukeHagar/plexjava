@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.MarkUnplayed;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Exception;
@@ -10,10 +14,10 @@ import java.lang.Exception;
 public class MarkUnplayedRequestBuilder {
 
     private Double key;
-    private final SDKMethodInterfaces.MethodCallMarkUnplayed sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public MarkUnplayedRequestBuilder(SDKMethodInterfaces.MethodCallMarkUnplayed sdk) {
-        this.sdk = sdk;
+    public MarkUnplayedRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public MarkUnplayedRequestBuilder key(double key) {
@@ -22,9 +26,20 @@ public class MarkUnplayedRequestBuilder {
         return this;
     }
 
-    public MarkUnplayedResponse call() throws Exception {
 
-        return sdk.markUnplayed(
-            key);
+    private MarkUnplayedRequest buildRequest() {
+
+        MarkUnplayedRequest request = new MarkUnplayedRequest(key);
+
+        return request;
+    }
+
+    public MarkUnplayedResponse call() throws Exception {
+        
+        RequestOperation<MarkUnplayedRequest, MarkUnplayedResponse> operation
+              = new MarkUnplayed.Sync(sdkConfiguration);
+        MarkUnplayedRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

@@ -19,7 +19,7 @@ public enum Tonight {
     @JsonValue
     private final long value;
 
-    private Tonight(long value) {
+    Tonight(long value) {
         this.value = value;
     }
     

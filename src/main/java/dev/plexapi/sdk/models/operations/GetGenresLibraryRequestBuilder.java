@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetGenresLibrary;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.Integer;
@@ -11,10 +15,10 @@ public class GetGenresLibraryRequestBuilder {
 
     private Integer sectionKey;
     private GetGenresLibraryQueryParamType type;
-    private final SDKMethodInterfaces.MethodCallGetGenresLibrary sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetGenresLibraryRequestBuilder(SDKMethodInterfaces.MethodCallGetGenresLibrary sdk) {
-        this.sdk = sdk;
+    public GetGenresLibraryRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetGenresLibraryRequestBuilder sectionKey(int sectionKey) {
@@ -29,10 +33,21 @@ public class GetGenresLibraryRequestBuilder {
         return this;
     }
 
-    public GetGenresLibraryResponse call() throws Exception {
 
-        return sdk.getGenresLibrary(
-            sectionKey,
+    private GetGenresLibraryRequest buildRequest() {
+
+        GetGenresLibraryRequest request = new GetGenresLibraryRequest(sectionKey,
             type);
+
+        return request;
+    }
+
+    public GetGenresLibraryResponse call() throws Exception {
+        
+        RequestOperation<GetGenresLibraryRequest, GetGenresLibraryResponse> operation
+              = new GetGenresLibrary.Sync(sdkConfiguration);
+        GetGenresLibraryRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

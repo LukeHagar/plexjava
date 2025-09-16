@@ -12,8 +12,8 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetSearchLibraryMetadata {
 
@@ -21,77 +21,96 @@ public class GetSearchLibraryMetadata {
     @JsonProperty("ratingKey")
     private Optional<String> ratingKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentRatingKey")
     private Optional<String> parentRatingKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("guid")
     private Optional<String> guid;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentGuid")
     private Optional<String> parentGuid;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentStudio")
     private Optional<String> parentStudio;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
     private Optional<String> type;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentKey")
     private Optional<String> parentKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentTitle")
     private Optional<String> parentTitle;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("summary")
     private Optional<String> summary;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("index")
     private Optional<Integer> index;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentIndex")
     private Optional<Integer> parentIndex;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentYear")
     private Optional<Integer> parentYear;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
     private Optional<String> thumb;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("art")
     private Optional<String> art;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentThumb")
     private Optional<String> parentThumb;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentTheme")
     private Optional<String> parentTheme;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("addedAt")
     private Optional<Integer> addedAt;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("updatedAt")
@@ -162,7 +181,13 @@ public class GetSearchLibraryMetadata {
     }
     
     public GetSearchLibraryMetadata() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -265,15 +290,17 @@ public class GetSearchLibraryMetadata {
         return updatedAt;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetSearchLibraryMetadata withRatingKey(String ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         this.ratingKey = Optional.ofNullable(ratingKey);
         return this;
     }
+
 
     public GetSearchLibraryMetadata withRatingKey(Optional<String> ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
@@ -287,6 +314,7 @@ public class GetSearchLibraryMetadata {
         return this;
     }
 
+
     public GetSearchLibraryMetadata withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
@@ -298,6 +326,7 @@ public class GetSearchLibraryMetadata {
         this.parentRatingKey = Optional.ofNullable(parentRatingKey);
         return this;
     }
+
 
     public GetSearchLibraryMetadata withParentRatingKey(Optional<String> parentRatingKey) {
         Utils.checkNotNull(parentRatingKey, "parentRatingKey");
@@ -311,6 +340,7 @@ public class GetSearchLibraryMetadata {
         return this;
     }
 
+
     public GetSearchLibraryMetadata withGuid(Optional<String> guid) {
         Utils.checkNotNull(guid, "guid");
         this.guid = guid;
@@ -322,6 +352,7 @@ public class GetSearchLibraryMetadata {
         this.parentGuid = Optional.ofNullable(parentGuid);
         return this;
     }
+
 
     public GetSearchLibraryMetadata withParentGuid(Optional<String> parentGuid) {
         Utils.checkNotNull(parentGuid, "parentGuid");
@@ -335,6 +366,7 @@ public class GetSearchLibraryMetadata {
         return this;
     }
 
+
     public GetSearchLibraryMetadata withParentStudio(Optional<String> parentStudio) {
         Utils.checkNotNull(parentStudio, "parentStudio");
         this.parentStudio = parentStudio;
@@ -346,6 +378,7 @@ public class GetSearchLibraryMetadata {
         this.type = Optional.ofNullable(type);
         return this;
     }
+
 
     public GetSearchLibraryMetadata withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
@@ -359,6 +392,7 @@ public class GetSearchLibraryMetadata {
         return this;
     }
 
+
     public GetSearchLibraryMetadata withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
@@ -370,6 +404,7 @@ public class GetSearchLibraryMetadata {
         this.parentKey = Optional.ofNullable(parentKey);
         return this;
     }
+
 
     public GetSearchLibraryMetadata withParentKey(Optional<String> parentKey) {
         Utils.checkNotNull(parentKey, "parentKey");
@@ -383,6 +418,7 @@ public class GetSearchLibraryMetadata {
         return this;
     }
 
+
     public GetSearchLibraryMetadata withParentTitle(Optional<String> parentTitle) {
         Utils.checkNotNull(parentTitle, "parentTitle");
         this.parentTitle = parentTitle;
@@ -394,6 +430,7 @@ public class GetSearchLibraryMetadata {
         this.summary = Optional.ofNullable(summary);
         return this;
     }
+
 
     public GetSearchLibraryMetadata withSummary(Optional<String> summary) {
         Utils.checkNotNull(summary, "summary");
@@ -407,6 +444,7 @@ public class GetSearchLibraryMetadata {
         return this;
     }
 
+
     public GetSearchLibraryMetadata withIndex(Optional<Integer> index) {
         Utils.checkNotNull(index, "index");
         this.index = index;
@@ -418,6 +456,7 @@ public class GetSearchLibraryMetadata {
         this.parentIndex = Optional.ofNullable(parentIndex);
         return this;
     }
+
 
     public GetSearchLibraryMetadata withParentIndex(Optional<Integer> parentIndex) {
         Utils.checkNotNull(parentIndex, "parentIndex");
@@ -431,6 +470,7 @@ public class GetSearchLibraryMetadata {
         return this;
     }
 
+
     public GetSearchLibraryMetadata withParentYear(Optional<Integer> parentYear) {
         Utils.checkNotNull(parentYear, "parentYear");
         this.parentYear = parentYear;
@@ -442,6 +482,7 @@ public class GetSearchLibraryMetadata {
         this.thumb = Optional.ofNullable(thumb);
         return this;
     }
+
 
     public GetSearchLibraryMetadata withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -455,6 +496,7 @@ public class GetSearchLibraryMetadata {
         return this;
     }
 
+
     public GetSearchLibraryMetadata withArt(Optional<String> art) {
         Utils.checkNotNull(art, "art");
         this.art = art;
@@ -466,6 +508,7 @@ public class GetSearchLibraryMetadata {
         this.parentThumb = Optional.ofNullable(parentThumb);
         return this;
     }
+
 
     public GetSearchLibraryMetadata withParentThumb(Optional<String> parentThumb) {
         Utils.checkNotNull(parentThumb, "parentThumb");
@@ -479,6 +522,7 @@ public class GetSearchLibraryMetadata {
         return this;
     }
 
+
     public GetSearchLibraryMetadata withParentTheme(Optional<String> parentTheme) {
         Utils.checkNotNull(parentTheme, "parentTheme");
         this.parentTheme = parentTheme;
@@ -490,6 +534,7 @@ public class GetSearchLibraryMetadata {
         this.addedAt = Optional.ofNullable(addedAt);
         return this;
     }
+
 
     public GetSearchLibraryMetadata withAddedAt(Optional<Integer> addedAt) {
         Utils.checkNotNull(addedAt, "addedAt");
@@ -503,13 +548,13 @@ public class GetSearchLibraryMetadata {
         return this;
     }
 
+
     public GetSearchLibraryMetadata withUpdatedAt(Optional<Integer> updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
         this.updatedAt = updatedAt;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -520,51 +565,38 @@ public class GetSearchLibraryMetadata {
         }
         GetSearchLibraryMetadata other = (GetSearchLibraryMetadata) o;
         return 
-            Objects.deepEquals(this.ratingKey, other.ratingKey) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.parentRatingKey, other.parentRatingKey) &&
-            Objects.deepEquals(this.guid, other.guid) &&
-            Objects.deepEquals(this.parentGuid, other.parentGuid) &&
-            Objects.deepEquals(this.parentStudio, other.parentStudio) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.parentKey, other.parentKey) &&
-            Objects.deepEquals(this.parentTitle, other.parentTitle) &&
-            Objects.deepEquals(this.summary, other.summary) &&
-            Objects.deepEquals(this.index, other.index) &&
-            Objects.deepEquals(this.parentIndex, other.parentIndex) &&
-            Objects.deepEquals(this.parentYear, other.parentYear) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.art, other.art) &&
-            Objects.deepEquals(this.parentThumb, other.parentThumb) &&
-            Objects.deepEquals(this.parentTheme, other.parentTheme) &&
-            Objects.deepEquals(this.addedAt, other.addedAt) &&
-            Objects.deepEquals(this.updatedAt, other.updatedAt);
+            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.parentRatingKey, other.parentRatingKey) &&
+            Utils.enhancedDeepEquals(this.guid, other.guid) &&
+            Utils.enhancedDeepEquals(this.parentGuid, other.parentGuid) &&
+            Utils.enhancedDeepEquals(this.parentStudio, other.parentStudio) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.parentKey, other.parentKey) &&
+            Utils.enhancedDeepEquals(this.parentTitle, other.parentTitle) &&
+            Utils.enhancedDeepEquals(this.summary, other.summary) &&
+            Utils.enhancedDeepEquals(this.index, other.index) &&
+            Utils.enhancedDeepEquals(this.parentIndex, other.parentIndex) &&
+            Utils.enhancedDeepEquals(this.parentYear, other.parentYear) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.art, other.art) &&
+            Utils.enhancedDeepEquals(this.parentThumb, other.parentThumb) &&
+            Utils.enhancedDeepEquals(this.parentTheme, other.parentTheme) &&
+            Utils.enhancedDeepEquals(this.addedAt, other.addedAt) &&
+            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            ratingKey,
-            key,
-            parentRatingKey,
-            guid,
-            parentGuid,
-            parentStudio,
-            type,
-            title,
-            parentKey,
-            parentTitle,
-            summary,
-            index,
-            parentIndex,
-            parentYear,
-            thumb,
-            art,
-            parentThumb,
-            parentTheme,
-            addedAt,
-            updatedAt);
+        return Utils.enhancedHash(
+            ratingKey, key, parentRatingKey,
+            guid, parentGuid, parentStudio,
+            type, title, parentKey,
+            parentTitle, summary, index,
+            parentIndex, parentYear, thumb,
+            art, parentThumb, parentTheme,
+            addedAt, updatedAt);
     }
     
     @Override
@@ -591,52 +623,54 @@ public class GetSearchLibraryMetadata {
                 "addedAt", addedAt,
                 "updatedAt", updatedAt);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> ratingKey = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> parentRatingKey = Optional.empty();
- 
+
         private Optional<String> guid = Optional.empty();
- 
+
         private Optional<String> parentGuid = Optional.empty();
- 
+
         private Optional<String> parentStudio = Optional.empty();
- 
+
         private Optional<String> type = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> parentKey = Optional.empty();
- 
+
         private Optional<String> parentTitle = Optional.empty();
- 
+
         private Optional<String> summary = Optional.empty();
- 
+
         private Optional<Integer> index = Optional.empty();
- 
+
         private Optional<Integer> parentIndex = Optional.empty();
- 
+
         private Optional<Integer> parentYear = Optional.empty();
- 
+
         private Optional<String> thumb = Optional.empty();
- 
+
         private Optional<String> art = Optional.empty();
- 
+
         private Optional<String> parentThumb = Optional.empty();
- 
+
         private Optional<String> parentTheme = Optional.empty();
- 
+
         private Optional<Integer> addedAt = Optional.empty();
- 
+
         private Optional<Integer> updatedAt = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder ratingKey(String ratingKey) {
             Utils.checkNotNull(ratingKey, "ratingKey");
@@ -650,6 +684,7 @@ public class GetSearchLibraryMetadata {
             return this;
         }
 
+
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = Optional.ofNullable(key);
@@ -661,6 +696,7 @@ public class GetSearchLibraryMetadata {
             this.key = key;
             return this;
         }
+
 
         public Builder parentRatingKey(String parentRatingKey) {
             Utils.checkNotNull(parentRatingKey, "parentRatingKey");
@@ -674,6 +710,7 @@ public class GetSearchLibraryMetadata {
             return this;
         }
 
+
         public Builder guid(String guid) {
             Utils.checkNotNull(guid, "guid");
             this.guid = Optional.ofNullable(guid);
@@ -685,6 +722,7 @@ public class GetSearchLibraryMetadata {
             this.guid = guid;
             return this;
         }
+
 
         public Builder parentGuid(String parentGuid) {
             Utils.checkNotNull(parentGuid, "parentGuid");
@@ -698,6 +736,7 @@ public class GetSearchLibraryMetadata {
             return this;
         }
 
+
         public Builder parentStudio(String parentStudio) {
             Utils.checkNotNull(parentStudio, "parentStudio");
             this.parentStudio = Optional.ofNullable(parentStudio);
@@ -709,6 +748,7 @@ public class GetSearchLibraryMetadata {
             this.parentStudio = parentStudio;
             return this;
         }
+
 
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
@@ -722,6 +762,7 @@ public class GetSearchLibraryMetadata {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -733,6 +774,7 @@ public class GetSearchLibraryMetadata {
             this.title = title;
             return this;
         }
+
 
         public Builder parentKey(String parentKey) {
             Utils.checkNotNull(parentKey, "parentKey");
@@ -746,6 +788,7 @@ public class GetSearchLibraryMetadata {
             return this;
         }
 
+
         public Builder parentTitle(String parentTitle) {
             Utils.checkNotNull(parentTitle, "parentTitle");
             this.parentTitle = Optional.ofNullable(parentTitle);
@@ -757,6 +800,7 @@ public class GetSearchLibraryMetadata {
             this.parentTitle = parentTitle;
             return this;
         }
+
 
         public Builder summary(String summary) {
             Utils.checkNotNull(summary, "summary");
@@ -770,6 +814,7 @@ public class GetSearchLibraryMetadata {
             return this;
         }
 
+
         public Builder index(int index) {
             Utils.checkNotNull(index, "index");
             this.index = Optional.ofNullable(index);
@@ -781,6 +826,7 @@ public class GetSearchLibraryMetadata {
             this.index = index;
             return this;
         }
+
 
         public Builder parentIndex(int parentIndex) {
             Utils.checkNotNull(parentIndex, "parentIndex");
@@ -794,6 +840,7 @@ public class GetSearchLibraryMetadata {
             return this;
         }
 
+
         public Builder parentYear(int parentYear) {
             Utils.checkNotNull(parentYear, "parentYear");
             this.parentYear = Optional.ofNullable(parentYear);
@@ -805,6 +852,7 @@ public class GetSearchLibraryMetadata {
             this.parentYear = parentYear;
             return this;
         }
+
 
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -818,6 +866,7 @@ public class GetSearchLibraryMetadata {
             return this;
         }
 
+
         public Builder art(String art) {
             Utils.checkNotNull(art, "art");
             this.art = Optional.ofNullable(art);
@@ -829,6 +878,7 @@ public class GetSearchLibraryMetadata {
             this.art = art;
             return this;
         }
+
 
         public Builder parentThumb(String parentThumb) {
             Utils.checkNotNull(parentThumb, "parentThumb");
@@ -842,6 +892,7 @@ public class GetSearchLibraryMetadata {
             return this;
         }
 
+
         public Builder parentTheme(String parentTheme) {
             Utils.checkNotNull(parentTheme, "parentTheme");
             this.parentTheme = Optional.ofNullable(parentTheme);
@@ -853,6 +904,7 @@ public class GetSearchLibraryMetadata {
             this.parentTheme = parentTheme;
             return this;
         }
+
 
         public Builder addedAt(int addedAt) {
             Utils.checkNotNull(addedAt, "addedAt");
@@ -866,6 +918,7 @@ public class GetSearchLibraryMetadata {
             return this;
         }
 
+
         public Builder updatedAt(int updatedAt) {
             Utils.checkNotNull(updatedAt, "updatedAt");
             this.updatedAt = Optional.ofNullable(updatedAt);
@@ -877,29 +930,18 @@ public class GetSearchLibraryMetadata {
             this.updatedAt = updatedAt;
             return this;
         }
-        
+
         public GetSearchLibraryMetadata build() {
+
             return new GetSearchLibraryMetadata(
-                ratingKey,
-                key,
-                parentRatingKey,
-                guid,
-                parentGuid,
-                parentStudio,
-                type,
-                title,
-                parentKey,
-                parentTitle,
-                summary,
-                index,
-                parentIndex,
-                parentYear,
-                thumb,
-                art,
-                parentThumb,
-                parentTheme,
-                addedAt,
-                updatedAt);
+                ratingKey, key, parentRatingKey,
+                guid, parentGuid, parentStudio,
+                type, title, parentKey,
+                parentTitle, summary, index,
+                parentIndex, parentYear, thumb,
+                art, parentThumb, parentTheme,
+                addedAt, updatedAt);
         }
+
     }
 }

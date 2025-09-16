@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.StopTranscodeSession;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -10,10 +14,10 @@ import java.lang.String;
 public class StopTranscodeSessionRequestBuilder {
 
     private String sessionKey;
-    private final SDKMethodInterfaces.MethodCallStopTranscodeSession sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public StopTranscodeSessionRequestBuilder(SDKMethodInterfaces.MethodCallStopTranscodeSession sdk) {
-        this.sdk = sdk;
+    public StopTranscodeSessionRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public StopTranscodeSessionRequestBuilder sessionKey(String sessionKey) {
@@ -22,9 +26,20 @@ public class StopTranscodeSessionRequestBuilder {
         return this;
     }
 
-    public StopTranscodeSessionResponse call() throws Exception {
 
-        return sdk.stopTranscodeSession(
-            sessionKey);
+    private StopTranscodeSessionRequest buildRequest() {
+
+        StopTranscodeSessionRequest request = new StopTranscodeSessionRequest(sessionKey);
+
+        return request;
+    }
+
+    public StopTranscodeSessionResponse call() throws Exception {
+        
+        RequestOperation<StopTranscodeSessionRequest, StopTranscodeSessionResponse> operation
+              = new StopTranscodeSession.Sync(sdkConfiguration);
+        StopTranscodeSessionRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

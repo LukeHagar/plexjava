@@ -12,11 +12,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetTopWatchedContentRequest {
 
+public class GetTopWatchedContentRequest {
     /**
      * The type of media to retrieve or filter by.
      * 1 = movie
@@ -71,9 +70,10 @@ public class GetTopWatchedContentRequest {
         return (Optional<GetTopWatchedContentQueryParamIncludeGuids>) includeGuids;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The type of media to retrieve or filter by.
@@ -98,6 +98,7 @@ public class GetTopWatchedContentRequest {
         return this;
     }
 
+
     /**
      * Adds the Guid object to the response
      */
@@ -107,7 +108,6 @@ public class GetTopWatchedContentRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -118,15 +118,14 @@ public class GetTopWatchedContentRequest {
         }
         GetTopWatchedContentRequest other = (GetTopWatchedContentRequest) o;
         return 
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.includeGuids, other.includeGuids);
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.includeGuids, other.includeGuids);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            type,
-            includeGuids);
+        return Utils.enhancedHash(
+            type, includeGuids);
     }
     
     @Override
@@ -135,16 +134,18 @@ public class GetTopWatchedContentRequest {
                 "type", type,
                 "includeGuids", includeGuids);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private GetTopWatchedContentQueryParamType type;
- 
+
         private Optional<? extends GetTopWatchedContentQueryParamIncludeGuids> includeGuids;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The type of media to retrieve or filter by.
@@ -159,6 +160,7 @@ public class GetTopWatchedContentRequest {
             this.type = type;
             return this;
         }
+
 
         /**
          * Adds the Guid object to the response
@@ -177,15 +179,16 @@ public class GetTopWatchedContentRequest {
             this.includeGuids = includeGuids;
             return this;
         }
-        
+
         public GetTopWatchedContentRequest build() {
             if (includeGuids == null) {
                 includeGuids = _SINGLETON_VALUE_IncludeGuids.value();
             }
+
             return new GetTopWatchedContentRequest(
-                type,
-                includeGuids);
+                type, includeGuids);
         }
+
 
         private static final LazySingletonValue<Optional<? extends GetTopWatchedContentQueryParamIncludeGuids>> _SINGLETON_VALUE_IncludeGuids =
                 new LazySingletonValue<>(

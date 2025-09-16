@@ -19,7 +19,7 @@ public enum MediaReviewsVisibility {
     @JsonValue
     private final int value;
 
-    private MediaReviewsVisibility(int value) {
+    MediaReviewsVisibility(int value) {
         this.value = value;
     }
     

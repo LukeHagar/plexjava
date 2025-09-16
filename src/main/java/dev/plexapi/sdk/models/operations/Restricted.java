@@ -19,7 +19,7 @@ public enum Restricted {
     @JsonValue
     private final int value;
 
-    private Restricted(int value) {
+    Restricted(int value) {
         this.value = value;
     }
     

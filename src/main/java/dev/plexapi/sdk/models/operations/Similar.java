@@ -10,7 +10,6 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * Similar
@@ -22,8 +21,10 @@ public class Similar {
     @JsonProperty("id")
     private int id;
 
+
     @JsonProperty("filter")
     private String filter;
+
 
     @JsonProperty("tag")
     private String tag;
@@ -56,9 +57,10 @@ public class Similar {
         return tag;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Similar withId(int id) {
         Utils.checkNotNull(id, "id");
@@ -78,7 +80,6 @@ public class Similar {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -89,17 +90,15 @@ public class Similar {
         }
         Similar other = (Similar) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.tag, other.tag);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.filter, other.filter) &&
+            Utils.enhancedDeepEquals(this.tag, other.tag);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            filter,
-            tag);
+        return Utils.enhancedHash(
+            id, filter, tag);
     }
     
     @Override
@@ -109,18 +108,20 @@ public class Similar {
                 "filter", filter,
                 "tag", tag);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer id;
- 
+
         private String filter;
- 
+
         private String tag;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder id(int id) {
             Utils.checkNotNull(id, "id");
@@ -128,23 +129,25 @@ public class Similar {
             return this;
         }
 
+
         public Builder filter(String filter) {
             Utils.checkNotNull(filter, "filter");
             this.filter = filter;
             return this;
         }
 
+
         public Builder tag(String tag) {
             Utils.checkNotNull(tag, "tag");
             this.tag = tag;
             return this;
         }
-        
+
         public Similar build() {
+
             return new Similar(
-                id,
-                filter,
-                tag);
+                id, filter, tag);
         }
+
     }
 }

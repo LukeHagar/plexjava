@@ -13,8 +13,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class Feature {
 
@@ -22,24 +22,30 @@ public class Feature {
     @JsonProperty("key")
     private Optional<String> key;
 
+
     @JsonProperty("type")
     private String type;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("flavor")
     private Optional<String> flavor;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("scrobbleKey")
     private Optional<String> scrobbleKey;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("unscrobbleKey")
     private Optional<String> unscrobbleKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Directory")
     private Optional<? extends List<GetMediaProvidersDirectory>> directory;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Action")
@@ -72,7 +78,9 @@ public class Feature {
     
     public Feature(
             String type) {
-        this(Optional.empty(), type, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), type, Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -112,15 +120,17 @@ public class Feature {
         return (Optional<List<Action>>) action;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Feature withKey(String key) {
         Utils.checkNotNull(key, "key");
         this.key = Optional.ofNullable(key);
         return this;
     }
+
 
     public Feature withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
@@ -140,6 +150,7 @@ public class Feature {
         return this;
     }
 
+
     public Feature withFlavor(Optional<String> flavor) {
         Utils.checkNotNull(flavor, "flavor");
         this.flavor = flavor;
@@ -151,6 +162,7 @@ public class Feature {
         this.scrobbleKey = Optional.ofNullable(scrobbleKey);
         return this;
     }
+
 
     public Feature withScrobbleKey(Optional<String> scrobbleKey) {
         Utils.checkNotNull(scrobbleKey, "scrobbleKey");
@@ -164,6 +176,7 @@ public class Feature {
         return this;
     }
 
+
     public Feature withUnscrobbleKey(Optional<String> unscrobbleKey) {
         Utils.checkNotNull(unscrobbleKey, "unscrobbleKey");
         this.unscrobbleKey = unscrobbleKey;
@@ -175,6 +188,7 @@ public class Feature {
         this.directory = Optional.ofNullable(directory);
         return this;
     }
+
 
     public Feature withDirectory(Optional<? extends List<GetMediaProvidersDirectory>> directory) {
         Utils.checkNotNull(directory, "directory");
@@ -188,13 +202,13 @@ public class Feature {
         return this;
     }
 
+
     public Feature withAction(Optional<? extends List<Action>> action) {
         Utils.checkNotNull(action, "action");
         this.action = action;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -205,24 +219,20 @@ public class Feature {
         }
         Feature other = (Feature) o;
         return 
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.flavor, other.flavor) &&
-            Objects.deepEquals(this.scrobbleKey, other.scrobbleKey) &&
-            Objects.deepEquals(this.unscrobbleKey, other.unscrobbleKey) &&
-            Objects.deepEquals(this.directory, other.directory) &&
-            Objects.deepEquals(this.action, other.action);
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.flavor, other.flavor) &&
+            Utils.enhancedDeepEquals(this.scrobbleKey, other.scrobbleKey) &&
+            Utils.enhancedDeepEquals(this.unscrobbleKey, other.unscrobbleKey) &&
+            Utils.enhancedDeepEquals(this.directory, other.directory) &&
+            Utils.enhancedDeepEquals(this.action, other.action);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            key,
-            type,
-            flavor,
-            scrobbleKey,
-            unscrobbleKey,
-            directory,
+        return Utils.enhancedHash(
+            key, type, flavor,
+            scrobbleKey, unscrobbleKey, directory,
             action);
     }
     
@@ -237,26 +247,28 @@ public class Feature {
                 "directory", directory,
                 "action", action);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private String type;
- 
+
         private Optional<String> flavor = Optional.empty();
- 
+
         private Optional<String> scrobbleKey = Optional.empty();
- 
+
         private Optional<String> unscrobbleKey = Optional.empty();
- 
+
         private Optional<? extends List<GetMediaProvidersDirectory>> directory = Optional.empty();
- 
+
         private Optional<? extends List<Action>> action = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
@@ -270,11 +282,13 @@ public class Feature {
             return this;
         }
 
+
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
         }
+
 
         public Builder flavor(String flavor) {
             Utils.checkNotNull(flavor, "flavor");
@@ -288,6 +302,7 @@ public class Feature {
             return this;
         }
 
+
         public Builder scrobbleKey(String scrobbleKey) {
             Utils.checkNotNull(scrobbleKey, "scrobbleKey");
             this.scrobbleKey = Optional.ofNullable(scrobbleKey);
@@ -299,6 +314,7 @@ public class Feature {
             this.scrobbleKey = scrobbleKey;
             return this;
         }
+
 
         public Builder unscrobbleKey(String unscrobbleKey) {
             Utils.checkNotNull(unscrobbleKey, "unscrobbleKey");
@@ -312,6 +328,7 @@ public class Feature {
             return this;
         }
 
+
         public Builder directory(List<GetMediaProvidersDirectory> directory) {
             Utils.checkNotNull(directory, "directory");
             this.directory = Optional.ofNullable(directory);
@@ -324,6 +341,7 @@ public class Feature {
             return this;
         }
 
+
         public Builder action(List<Action> action) {
             Utils.checkNotNull(action, "action");
             this.action = Optional.ofNullable(action);
@@ -335,16 +353,14 @@ public class Feature {
             this.action = action;
             return this;
         }
-        
+
         public Feature build() {
+
             return new Feature(
-                key,
-                type,
-                flavor,
-                scrobbleKey,
-                unscrobbleKey,
-                directory,
+                key, type, flavor,
+                scrobbleKey, unscrobbleKey, directory,
                 action);
         }
+
     }
 }

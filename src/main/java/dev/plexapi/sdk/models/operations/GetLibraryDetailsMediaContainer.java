@@ -15,8 +15,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetLibraryDetailsMediaContainer {
 
@@ -24,57 +24,71 @@ public class GetLibraryDetailsMediaContainer {
     @JsonProperty("size")
     private Optional<Integer> size;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("allowSync")
     private Optional<Boolean> allowSync;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("art")
     private Optional<String> art;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("content")
     private Optional<String> content;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("identifier")
     private Optional<String> identifier;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionID")
     private Optional<Integer> librarySectionID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mediaTagPrefix")
     private Optional<String> mediaTagPrefix;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mediaTagVersion")
     private Optional<Integer> mediaTagVersion;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
     private Optional<String> thumb;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title1")
     private Optional<String> title1;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("viewGroup")
     private Optional<String> viewGroup;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("viewMode")
     private Optional<Integer> viewMode;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Directory")
     private Optional<? extends List<GetLibraryDetailsDirectory>> directory;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Type")
     private Optional<? extends List<GetLibraryDetailsType>> type;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("FieldType")
@@ -130,7 +144,11 @@ public class GetLibraryDetailsMediaContainer {
     }
     
     public GetLibraryDetailsMediaContainer() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -211,15 +229,17 @@ public class GetLibraryDetailsMediaContainer {
         return (Optional<List<GetLibraryDetailsFieldType>>) fieldType;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetLibraryDetailsMediaContainer withSize(int size) {
         Utils.checkNotNull(size, "size");
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetLibraryDetailsMediaContainer withSize(Optional<Integer> size) {
         Utils.checkNotNull(size, "size");
@@ -233,6 +253,7 @@ public class GetLibraryDetailsMediaContainer {
         return this;
     }
 
+
     public GetLibraryDetailsMediaContainer withAllowSync(Optional<Boolean> allowSync) {
         Utils.checkNotNull(allowSync, "allowSync");
         this.allowSync = allowSync;
@@ -244,6 +265,7 @@ public class GetLibraryDetailsMediaContainer {
         this.art = Optional.ofNullable(art);
         return this;
     }
+
 
     public GetLibraryDetailsMediaContainer withArt(Optional<String> art) {
         Utils.checkNotNull(art, "art");
@@ -257,6 +279,7 @@ public class GetLibraryDetailsMediaContainer {
         return this;
     }
 
+
     public GetLibraryDetailsMediaContainer withContent(Optional<String> content) {
         Utils.checkNotNull(content, "content");
         this.content = content;
@@ -268,6 +291,7 @@ public class GetLibraryDetailsMediaContainer {
         this.identifier = Optional.ofNullable(identifier);
         return this;
     }
+
 
     public GetLibraryDetailsMediaContainer withIdentifier(Optional<String> identifier) {
         Utils.checkNotNull(identifier, "identifier");
@@ -281,6 +305,7 @@ public class GetLibraryDetailsMediaContainer {
         return this;
     }
 
+
     public GetLibraryDetailsMediaContainer withLibrarySectionID(Optional<Integer> librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
         this.librarySectionID = librarySectionID;
@@ -292,6 +317,7 @@ public class GetLibraryDetailsMediaContainer {
         this.mediaTagPrefix = Optional.ofNullable(mediaTagPrefix);
         return this;
     }
+
 
     public GetLibraryDetailsMediaContainer withMediaTagPrefix(Optional<String> mediaTagPrefix) {
         Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
@@ -305,6 +331,7 @@ public class GetLibraryDetailsMediaContainer {
         return this;
     }
 
+
     public GetLibraryDetailsMediaContainer withMediaTagVersion(Optional<Integer> mediaTagVersion) {
         Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
         this.mediaTagVersion = mediaTagVersion;
@@ -316,6 +343,7 @@ public class GetLibraryDetailsMediaContainer {
         this.thumb = Optional.ofNullable(thumb);
         return this;
     }
+
 
     public GetLibraryDetailsMediaContainer withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -329,6 +357,7 @@ public class GetLibraryDetailsMediaContainer {
         return this;
     }
 
+
     public GetLibraryDetailsMediaContainer withTitle1(Optional<String> title1) {
         Utils.checkNotNull(title1, "title1");
         this.title1 = title1;
@@ -340,6 +369,7 @@ public class GetLibraryDetailsMediaContainer {
         this.viewGroup = Optional.ofNullable(viewGroup);
         return this;
     }
+
 
     public GetLibraryDetailsMediaContainer withViewGroup(Optional<String> viewGroup) {
         Utils.checkNotNull(viewGroup, "viewGroup");
@@ -353,6 +383,7 @@ public class GetLibraryDetailsMediaContainer {
         return this;
     }
 
+
     public GetLibraryDetailsMediaContainer withViewMode(Optional<Integer> viewMode) {
         Utils.checkNotNull(viewMode, "viewMode");
         this.viewMode = viewMode;
@@ -364,6 +395,7 @@ public class GetLibraryDetailsMediaContainer {
         this.directory = Optional.ofNullable(directory);
         return this;
     }
+
 
     public GetLibraryDetailsMediaContainer withDirectory(Optional<? extends List<GetLibraryDetailsDirectory>> directory) {
         Utils.checkNotNull(directory, "directory");
@@ -377,6 +409,7 @@ public class GetLibraryDetailsMediaContainer {
         return this;
     }
 
+
     public GetLibraryDetailsMediaContainer withType(Optional<? extends List<GetLibraryDetailsType>> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
@@ -389,13 +422,13 @@ public class GetLibraryDetailsMediaContainer {
         return this;
     }
 
+
     public GetLibraryDetailsMediaContainer withFieldType(Optional<? extends List<GetLibraryDetailsFieldType>> fieldType) {
         Utils.checkNotNull(fieldType, "fieldType");
         this.fieldType = fieldType;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -406,41 +439,31 @@ public class GetLibraryDetailsMediaContainer {
         }
         GetLibraryDetailsMediaContainer other = (GetLibraryDetailsMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.allowSync, other.allowSync) &&
-            Objects.deepEquals(this.art, other.art) &&
-            Objects.deepEquals(this.content, other.content) &&
-            Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
-            Objects.deepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
-            Objects.deepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.title1, other.title1) &&
-            Objects.deepEquals(this.viewGroup, other.viewGroup) &&
-            Objects.deepEquals(this.viewMode, other.viewMode) &&
-            Objects.deepEquals(this.directory, other.directory) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.fieldType, other.fieldType);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.allowSync, other.allowSync) &&
+            Utils.enhancedDeepEquals(this.art, other.art) &&
+            Utils.enhancedDeepEquals(this.content, other.content) &&
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.librarySectionID, other.librarySectionID) &&
+            Utils.enhancedDeepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
+            Utils.enhancedDeepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.title1, other.title1) &&
+            Utils.enhancedDeepEquals(this.viewGroup, other.viewGroup) &&
+            Utils.enhancedDeepEquals(this.viewMode, other.viewMode) &&
+            Utils.enhancedDeepEquals(this.directory, other.directory) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.fieldType, other.fieldType);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            allowSync,
-            art,
-            content,
-            identifier,
-            librarySectionID,
-            mediaTagPrefix,
-            mediaTagVersion,
-            thumb,
-            title1,
-            viewGroup,
-            viewMode,
-            directory,
-            type,
-            fieldType);
+        return Utils.enhancedHash(
+            size, allowSync, art,
+            content, identifier, librarySectionID,
+            mediaTagPrefix, mediaTagVersion, thumb,
+            title1, viewGroup, viewMode,
+            directory, type, fieldType);
     }
     
     @Override
@@ -462,42 +485,44 @@ public class GetLibraryDetailsMediaContainer {
                 "type", type,
                 "fieldType", fieldType);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> size = Optional.empty();
- 
+
         private Optional<Boolean> allowSync = Optional.empty();
- 
+
         private Optional<String> art = Optional.empty();
- 
+
         private Optional<String> content = Optional.empty();
- 
+
         private Optional<String> identifier = Optional.empty();
- 
+
         private Optional<Integer> librarySectionID = Optional.empty();
- 
+
         private Optional<String> mediaTagPrefix = Optional.empty();
- 
+
         private Optional<Integer> mediaTagVersion = Optional.empty();
- 
+
         private Optional<String> thumb = Optional.empty();
- 
+
         private Optional<String> title1 = Optional.empty();
- 
+
         private Optional<String> viewGroup = Optional.empty();
- 
+
         private Optional<Integer> viewMode = Optional.empty();
- 
+
         private Optional<? extends List<GetLibraryDetailsDirectory>> directory = Optional.empty();
- 
+
         private Optional<? extends List<GetLibraryDetailsType>> type = Optional.empty();
- 
+
         private Optional<? extends List<GetLibraryDetailsFieldType>> fieldType = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder size(int size) {
             Utils.checkNotNull(size, "size");
@@ -511,6 +536,7 @@ public class GetLibraryDetailsMediaContainer {
             return this;
         }
 
+
         public Builder allowSync(boolean allowSync) {
             Utils.checkNotNull(allowSync, "allowSync");
             this.allowSync = Optional.ofNullable(allowSync);
@@ -522,6 +548,7 @@ public class GetLibraryDetailsMediaContainer {
             this.allowSync = allowSync;
             return this;
         }
+
 
         public Builder art(String art) {
             Utils.checkNotNull(art, "art");
@@ -535,6 +562,7 @@ public class GetLibraryDetailsMediaContainer {
             return this;
         }
 
+
         public Builder content(String content) {
             Utils.checkNotNull(content, "content");
             this.content = Optional.ofNullable(content);
@@ -546,6 +574,7 @@ public class GetLibraryDetailsMediaContainer {
             this.content = content;
             return this;
         }
+
 
         public Builder identifier(String identifier) {
             Utils.checkNotNull(identifier, "identifier");
@@ -559,6 +588,7 @@ public class GetLibraryDetailsMediaContainer {
             return this;
         }
 
+
         public Builder librarySectionID(int librarySectionID) {
             Utils.checkNotNull(librarySectionID, "librarySectionID");
             this.librarySectionID = Optional.ofNullable(librarySectionID);
@@ -570,6 +600,7 @@ public class GetLibraryDetailsMediaContainer {
             this.librarySectionID = librarySectionID;
             return this;
         }
+
 
         public Builder mediaTagPrefix(String mediaTagPrefix) {
             Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
@@ -583,6 +614,7 @@ public class GetLibraryDetailsMediaContainer {
             return this;
         }
 
+
         public Builder mediaTagVersion(int mediaTagVersion) {
             Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
             this.mediaTagVersion = Optional.ofNullable(mediaTagVersion);
@@ -594,6 +626,7 @@ public class GetLibraryDetailsMediaContainer {
             this.mediaTagVersion = mediaTagVersion;
             return this;
         }
+
 
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -607,6 +640,7 @@ public class GetLibraryDetailsMediaContainer {
             return this;
         }
 
+
         public Builder title1(String title1) {
             Utils.checkNotNull(title1, "title1");
             this.title1 = Optional.ofNullable(title1);
@@ -618,6 +652,7 @@ public class GetLibraryDetailsMediaContainer {
             this.title1 = title1;
             return this;
         }
+
 
         public Builder viewGroup(String viewGroup) {
             Utils.checkNotNull(viewGroup, "viewGroup");
@@ -631,6 +666,7 @@ public class GetLibraryDetailsMediaContainer {
             return this;
         }
 
+
         public Builder viewMode(int viewMode) {
             Utils.checkNotNull(viewMode, "viewMode");
             this.viewMode = Optional.ofNullable(viewMode);
@@ -642,6 +678,7 @@ public class GetLibraryDetailsMediaContainer {
             this.viewMode = viewMode;
             return this;
         }
+
 
         public Builder directory(List<GetLibraryDetailsDirectory> directory) {
             Utils.checkNotNull(directory, "directory");
@@ -655,6 +692,7 @@ public class GetLibraryDetailsMediaContainer {
             return this;
         }
 
+
         public Builder type(List<GetLibraryDetailsType> type) {
             Utils.checkNotNull(type, "type");
             this.type = Optional.ofNullable(type);
@@ -667,6 +705,7 @@ public class GetLibraryDetailsMediaContainer {
             return this;
         }
 
+
         public Builder fieldType(List<GetLibraryDetailsFieldType> fieldType) {
             Utils.checkNotNull(fieldType, "fieldType");
             this.fieldType = Optional.ofNullable(fieldType);
@@ -678,24 +717,16 @@ public class GetLibraryDetailsMediaContainer {
             this.fieldType = fieldType;
             return this;
         }
-        
+
         public GetLibraryDetailsMediaContainer build() {
+
             return new GetLibraryDetailsMediaContainer(
-                size,
-                allowSync,
-                art,
-                content,
-                identifier,
-                librarySectionID,
-                mediaTagPrefix,
-                mediaTagVersion,
-                thumb,
-                title1,
-                viewGroup,
-                viewMode,
-                directory,
-                type,
-                fieldType);
+                size, allowSync, art,
+                content, identifier, librarySectionID,
+                mediaTagPrefix, mediaTagVersion, thumb,
+                title1, viewGroup, viewMode,
+                directory, type, fieldType);
         }
+
     }
 }

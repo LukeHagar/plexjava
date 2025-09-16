@@ -9,11 +9,10 @@ import dev.plexapi.sdk.utils.SpeakeasyMetadata;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetUsersRequest {
 
+public class GetUsersRequest {
     /**
      * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
      */
@@ -138,7 +137,11 @@ public class GetUsersRequest {
     public GetUsersRequest(
             String clientID,
             String xPlexToken) {
-        this(clientID, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), xPlexToken);
+        this(clientID, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            xPlexToken);
     }
 
     /**
@@ -245,9 +248,10 @@ public class GetUsersRequest {
         return xPlexToken;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
@@ -267,6 +271,7 @@ public class GetUsersRequest {
         return this;
     }
 
+
     /**
      * The name of the client application. (Plex Web, Plex Media Server, etc.)
      */
@@ -284,6 +289,7 @@ public class GetUsersRequest {
         this.deviceNickname = Optional.ofNullable(deviceNickname);
         return this;
     }
+
 
     /**
      * A relatively friendly name for the client device
@@ -303,6 +309,7 @@ public class GetUsersRequest {
         return this;
     }
 
+
     /**
      * The name of the device the client application is running on. This is used to track the client application and its usage. (Chrome, Safari, etc.)
      */
@@ -320,6 +327,7 @@ public class GetUsersRequest {
         this.deviceScreenResolution = Optional.ofNullable(deviceScreenResolution);
         return this;
     }
+
 
     /**
      * The resolution of the device the client application is running on. This is used to track the client application and its usage. (1487x1165,2560x1440)
@@ -339,6 +347,7 @@ public class GetUsersRequest {
         return this;
     }
 
+
     /**
      * The version of the client application.
      */
@@ -356,6 +365,7 @@ public class GetUsersRequest {
         this.platform = Optional.ofNullable(platform);
         return this;
     }
+
 
     /**
      * The platform of the client application.
@@ -375,6 +385,7 @@ public class GetUsersRequest {
         return this;
     }
 
+
     /**
      * The features of the client application. This is used to track the client application and its usage. (external-media,indirect-media,hub-style-list)
      */
@@ -392,6 +403,7 @@ public class GetUsersRequest {
         this.model = Optional.ofNullable(model);
         return this;
     }
+
 
     /**
      * A potentially less friendly identifier for the device model
@@ -411,6 +423,7 @@ public class GetUsersRequest {
         return this;
     }
 
+
     /**
      * The session ID of the client application. This is used to track the client application and its usage. (97e136ef-4ddd-4ff3-89a7-a5820c96c2ca)
      */
@@ -428,6 +441,7 @@ public class GetUsersRequest {
         this.xPlexLanguage = Optional.ofNullable(xPlexLanguage);
         return this;
     }
+
 
     /**
      * The language of the client application.
@@ -447,6 +461,7 @@ public class GetUsersRequest {
         return this;
     }
 
+
     /**
      * The version of the platform
      */
@@ -465,7 +480,6 @@ public class GetUsersRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -476,36 +490,28 @@ public class GetUsersRequest {
         }
         GetUsersRequest other = (GetUsersRequest) o;
         return 
-            Objects.deepEquals(this.clientID, other.clientID) &&
-            Objects.deepEquals(this.clientName, other.clientName) &&
-            Objects.deepEquals(this.deviceNickname, other.deviceNickname) &&
-            Objects.deepEquals(this.deviceName, other.deviceName) &&
-            Objects.deepEquals(this.deviceScreenResolution, other.deviceScreenResolution) &&
-            Objects.deepEquals(this.clientVersion, other.clientVersion) &&
-            Objects.deepEquals(this.platform, other.platform) &&
-            Objects.deepEquals(this.clientFeatures, other.clientFeatures) &&
-            Objects.deepEquals(this.model, other.model) &&
-            Objects.deepEquals(this.xPlexSessionId, other.xPlexSessionId) &&
-            Objects.deepEquals(this.xPlexLanguage, other.xPlexLanguage) &&
-            Objects.deepEquals(this.platformVersion, other.platformVersion) &&
-            Objects.deepEquals(this.xPlexToken, other.xPlexToken);
+            Utils.enhancedDeepEquals(this.clientID, other.clientID) &&
+            Utils.enhancedDeepEquals(this.clientName, other.clientName) &&
+            Utils.enhancedDeepEquals(this.deviceNickname, other.deviceNickname) &&
+            Utils.enhancedDeepEquals(this.deviceName, other.deviceName) &&
+            Utils.enhancedDeepEquals(this.deviceScreenResolution, other.deviceScreenResolution) &&
+            Utils.enhancedDeepEquals(this.clientVersion, other.clientVersion) &&
+            Utils.enhancedDeepEquals(this.platform, other.platform) &&
+            Utils.enhancedDeepEquals(this.clientFeatures, other.clientFeatures) &&
+            Utils.enhancedDeepEquals(this.model, other.model) &&
+            Utils.enhancedDeepEquals(this.xPlexSessionId, other.xPlexSessionId) &&
+            Utils.enhancedDeepEquals(this.xPlexLanguage, other.xPlexLanguage) &&
+            Utils.enhancedDeepEquals(this.platformVersion, other.platformVersion) &&
+            Utils.enhancedDeepEquals(this.xPlexToken, other.xPlexToken);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            clientID,
-            clientName,
-            deviceNickname,
-            deviceName,
-            deviceScreenResolution,
-            clientVersion,
-            platform,
-            clientFeatures,
-            model,
-            xPlexSessionId,
-            xPlexLanguage,
-            platformVersion,
+        return Utils.enhancedHash(
+            clientID, clientName, deviceNickname,
+            deviceName, deviceScreenResolution, clientVersion,
+            platform, clientFeatures, model,
+            xPlexSessionId, xPlexLanguage, platformVersion,
             xPlexToken);
     }
     
@@ -526,38 +532,40 @@ public class GetUsersRequest {
                 "platformVersion", platformVersion,
                 "xPlexToken", xPlexToken);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String clientID;
- 
+
         private Optional<String> clientName = Optional.empty();
- 
+
         private Optional<String> deviceNickname = Optional.empty();
- 
+
         private Optional<String> deviceName = Optional.empty();
- 
+
         private Optional<String> deviceScreenResolution = Optional.empty();
- 
+
         private Optional<String> clientVersion = Optional.empty();
- 
+
         private Optional<String> platform = Optional.empty();
- 
+
         private Optional<String> clientFeatures = Optional.empty();
- 
+
         private Optional<String> model = Optional.empty();
- 
+
         private Optional<String> xPlexSessionId = Optional.empty();
- 
+
         private Optional<String> xPlexLanguage = Optional.empty();
- 
+
         private Optional<String> platformVersion = Optional.empty();
- 
+
         private String xPlexToken;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
@@ -567,6 +575,7 @@ public class GetUsersRequest {
             this.clientID = clientID;
             return this;
         }
+
 
         /**
          * The name of the client application. (Plex Web, Plex Media Server, etc.)
@@ -586,6 +595,7 @@ public class GetUsersRequest {
             return this;
         }
 
+
         /**
          * A relatively friendly name for the client device
          */
@@ -603,6 +613,7 @@ public class GetUsersRequest {
             this.deviceNickname = deviceNickname;
             return this;
         }
+
 
         /**
          * The name of the device the client application is running on. This is used to track the client application and its usage. (Chrome, Safari, etc.)
@@ -622,6 +633,7 @@ public class GetUsersRequest {
             return this;
         }
 
+
         /**
          * The resolution of the device the client application is running on. This is used to track the client application and its usage. (1487x1165,2560x1440)
          */
@@ -639,6 +651,7 @@ public class GetUsersRequest {
             this.deviceScreenResolution = deviceScreenResolution;
             return this;
         }
+
 
         /**
          * The version of the client application.
@@ -658,6 +671,7 @@ public class GetUsersRequest {
             return this;
         }
 
+
         /**
          * The platform of the client application.
          */
@@ -675,6 +689,7 @@ public class GetUsersRequest {
             this.platform = platform;
             return this;
         }
+
 
         /**
          * The features of the client application. This is used to track the client application and its usage. (external-media,indirect-media,hub-style-list)
@@ -694,6 +709,7 @@ public class GetUsersRequest {
             return this;
         }
 
+
         /**
          * A potentially less friendly identifier for the device model
          */
@@ -711,6 +727,7 @@ public class GetUsersRequest {
             this.model = model;
             return this;
         }
+
 
         /**
          * The session ID of the client application. This is used to track the client application and its usage. (97e136ef-4ddd-4ff3-89a7-a5820c96c2ca)
@@ -730,6 +747,7 @@ public class GetUsersRequest {
             return this;
         }
 
+
         /**
          * The language of the client application.
          */
@@ -747,6 +765,7 @@ public class GetUsersRequest {
             this.xPlexLanguage = xPlexLanguage;
             return this;
         }
+
 
         /**
          * The version of the platform
@@ -766,6 +785,7 @@ public class GetUsersRequest {
             return this;
         }
 
+
         /**
          * An authentication token, obtained from plex.tv
          */
@@ -774,22 +794,16 @@ public class GetUsersRequest {
             this.xPlexToken = xPlexToken;
             return this;
         }
-        
+
         public GetUsersRequest build() {
+
             return new GetUsersRequest(
-                clientID,
-                clientName,
-                deviceNickname,
-                deviceName,
-                deviceScreenResolution,
-                clientVersion,
-                platform,
-                clientFeatures,
-                model,
-                xPlexSessionId,
-                xPlexLanguage,
-                platformVersion,
+                clientID, clientName, deviceNickname,
+                deviceName, deviceScreenResolution, clientVersion,
+                platform, clientFeatures, model,
+                xPlexSessionId, xPlexLanguage, platformVersion,
                 xPlexToken);
         }
+
     }
 }

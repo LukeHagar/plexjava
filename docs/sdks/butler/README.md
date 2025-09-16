@@ -20,6 +20,7 @@ Returns a list of butler tasks
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getButlerTasks" method="get" path="/butler" -->
 ```java
 package hello.world;
 
@@ -34,7 +35,7 @@ public class Application {
     public static void main(String[] args) throws GetButlerTasksBadRequest, GetButlerTasksUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetButlerTasksResponse res = sdk.butler().getButlerTasks()
@@ -70,6 +71,7 @@ This endpoint will attempt to start all Butler tasks that are enabled in the set
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="startAllTasks" method="post" path="/butler" -->
 ```java
 package hello.world;
 
@@ -84,7 +86,7 @@ public class Application {
     public static void main(String[] args) throws StartAllTasksBadRequest, StartAllTasksUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         StartAllTasksResponse res = sdk.butler().startAllTasks()
@@ -114,6 +116,7 @@ This endpoint will stop all currently running tasks and remove any scheduled tas
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="stopAllTasks" method="delete" path="/butler" -->
 ```java
 package hello.world;
 
@@ -128,7 +131,7 @@ public class Application {
     public static void main(String[] args) throws StopAllTasksBadRequest, StopAllTasksUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         StopAllTasksResponse res = sdk.butler().stopAllTasks()
@@ -162,6 +165,7 @@ This endpoint will attempt to start a single Butler task that is enabled in the 
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="startTask" method="post" path="/butler/{taskName}" -->
 ```java
 package hello.world;
 
@@ -177,7 +181,7 @@ public class Application {
     public static void main(String[] args) throws StartTaskBadRequest, StartTaskUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         StartTaskResponse res = sdk.butler().startTask()
@@ -214,6 +218,7 @@ This endpoint will stop a currently running task by name, or remove it from the 
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="stopTask" method="delete" path="/butler/{taskName}" -->
 ```java
 package hello.world;
 
@@ -229,7 +234,7 @@ public class Application {
     public static void main(String[] args) throws StopTaskBadRequest, StopTaskUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         StopTaskResponse res = sdk.butler().stopTask()

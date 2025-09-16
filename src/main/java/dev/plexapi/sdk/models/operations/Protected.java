@@ -19,7 +19,7 @@ public enum Protected {
     @JsonValue
     private final int value;
 
-    private Protected(int value) {
+    Protected(int value) {
         this.value = value;
     }
     

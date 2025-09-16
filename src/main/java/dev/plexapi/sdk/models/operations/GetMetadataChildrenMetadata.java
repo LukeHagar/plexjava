@@ -12,8 +12,8 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetMetadataChildrenMetadata {
 
@@ -21,105 +21,131 @@ public class GetMetadataChildrenMetadata {
     @JsonProperty("ratingKey")
     private Optional<String> ratingKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentRatingKey")
     private Optional<String> parentRatingKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("guid")
     private Optional<String> guid;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentGuid")
     private Optional<String> parentGuid;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentStudio")
     private Optional<String> parentStudio;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
     private Optional<String> type;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentKey")
     private Optional<String> parentKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentTitle")
     private Optional<String> parentTitle;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("summary")
     private Optional<String> summary;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("index")
     private Optional<Integer> index;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentIndex")
     private Optional<Integer> parentIndex;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("viewCount")
     private Optional<Integer> viewCount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lastViewedAt")
     private Optional<Integer> lastViewedAt;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentYear")
     private Optional<Integer> parentYear;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
     private Optional<String> thumb;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("art")
     private Optional<String> art;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentThumb")
     private Optional<String> parentThumb;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentTheme")
     private Optional<String> parentTheme;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("leafCount")
     private Optional<Integer> leafCount;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("viewedLeafCount")
     private Optional<Integer> viewedLeafCount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("addedAt")
     private Optional<Integer> addedAt;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("updatedAt")
     private Optional<Integer> updatedAt;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("userRating")
     private Optional<Integer> userRating;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("skipCount")
     private Optional<Integer> skipCount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lastRatedAt")
@@ -211,7 +237,15 @@ public class GetMetadataChildrenMetadata {
     }
     
     public GetMetadataChildrenMetadata() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -349,15 +383,17 @@ public class GetMetadataChildrenMetadata {
         return lastRatedAt;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetMetadataChildrenMetadata withRatingKey(String ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         this.ratingKey = Optional.ofNullable(ratingKey);
         return this;
     }
+
 
     public GetMetadataChildrenMetadata withRatingKey(Optional<String> ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
@@ -371,6 +407,7 @@ public class GetMetadataChildrenMetadata {
         return this;
     }
 
+
     public GetMetadataChildrenMetadata withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
@@ -382,6 +419,7 @@ public class GetMetadataChildrenMetadata {
         this.parentRatingKey = Optional.ofNullable(parentRatingKey);
         return this;
     }
+
 
     public GetMetadataChildrenMetadata withParentRatingKey(Optional<String> parentRatingKey) {
         Utils.checkNotNull(parentRatingKey, "parentRatingKey");
@@ -395,6 +433,7 @@ public class GetMetadataChildrenMetadata {
         return this;
     }
 
+
     public GetMetadataChildrenMetadata withGuid(Optional<String> guid) {
         Utils.checkNotNull(guid, "guid");
         this.guid = guid;
@@ -406,6 +445,7 @@ public class GetMetadataChildrenMetadata {
         this.parentGuid = Optional.ofNullable(parentGuid);
         return this;
     }
+
 
     public GetMetadataChildrenMetadata withParentGuid(Optional<String> parentGuid) {
         Utils.checkNotNull(parentGuid, "parentGuid");
@@ -419,6 +459,7 @@ public class GetMetadataChildrenMetadata {
         return this;
     }
 
+
     public GetMetadataChildrenMetadata withParentStudio(Optional<String> parentStudio) {
         Utils.checkNotNull(parentStudio, "parentStudio");
         this.parentStudio = parentStudio;
@@ -430,6 +471,7 @@ public class GetMetadataChildrenMetadata {
         this.type = Optional.ofNullable(type);
         return this;
     }
+
 
     public GetMetadataChildrenMetadata withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
@@ -443,6 +485,7 @@ public class GetMetadataChildrenMetadata {
         return this;
     }
 
+
     public GetMetadataChildrenMetadata withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
@@ -454,6 +497,7 @@ public class GetMetadataChildrenMetadata {
         this.parentKey = Optional.ofNullable(parentKey);
         return this;
     }
+
 
     public GetMetadataChildrenMetadata withParentKey(Optional<String> parentKey) {
         Utils.checkNotNull(parentKey, "parentKey");
@@ -467,6 +511,7 @@ public class GetMetadataChildrenMetadata {
         return this;
     }
 
+
     public GetMetadataChildrenMetadata withParentTitle(Optional<String> parentTitle) {
         Utils.checkNotNull(parentTitle, "parentTitle");
         this.parentTitle = parentTitle;
@@ -478,6 +523,7 @@ public class GetMetadataChildrenMetadata {
         this.summary = Optional.ofNullable(summary);
         return this;
     }
+
 
     public GetMetadataChildrenMetadata withSummary(Optional<String> summary) {
         Utils.checkNotNull(summary, "summary");
@@ -491,6 +537,7 @@ public class GetMetadataChildrenMetadata {
         return this;
     }
 
+
     public GetMetadataChildrenMetadata withIndex(Optional<Integer> index) {
         Utils.checkNotNull(index, "index");
         this.index = index;
@@ -502,6 +549,7 @@ public class GetMetadataChildrenMetadata {
         this.parentIndex = Optional.ofNullable(parentIndex);
         return this;
     }
+
 
     public GetMetadataChildrenMetadata withParentIndex(Optional<Integer> parentIndex) {
         Utils.checkNotNull(parentIndex, "parentIndex");
@@ -515,6 +563,7 @@ public class GetMetadataChildrenMetadata {
         return this;
     }
 
+
     public GetMetadataChildrenMetadata withViewCount(Optional<Integer> viewCount) {
         Utils.checkNotNull(viewCount, "viewCount");
         this.viewCount = viewCount;
@@ -526,6 +575,7 @@ public class GetMetadataChildrenMetadata {
         this.lastViewedAt = Optional.ofNullable(lastViewedAt);
         return this;
     }
+
 
     public GetMetadataChildrenMetadata withLastViewedAt(Optional<Integer> lastViewedAt) {
         Utils.checkNotNull(lastViewedAt, "lastViewedAt");
@@ -539,6 +589,7 @@ public class GetMetadataChildrenMetadata {
         return this;
     }
 
+
     public GetMetadataChildrenMetadata withParentYear(Optional<Integer> parentYear) {
         Utils.checkNotNull(parentYear, "parentYear");
         this.parentYear = parentYear;
@@ -550,6 +601,7 @@ public class GetMetadataChildrenMetadata {
         this.thumb = Optional.ofNullable(thumb);
         return this;
     }
+
 
     public GetMetadataChildrenMetadata withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -563,6 +615,7 @@ public class GetMetadataChildrenMetadata {
         return this;
     }
 
+
     public GetMetadataChildrenMetadata withArt(Optional<String> art) {
         Utils.checkNotNull(art, "art");
         this.art = art;
@@ -574,6 +627,7 @@ public class GetMetadataChildrenMetadata {
         this.parentThumb = Optional.ofNullable(parentThumb);
         return this;
     }
+
 
     public GetMetadataChildrenMetadata withParentThumb(Optional<String> parentThumb) {
         Utils.checkNotNull(parentThumb, "parentThumb");
@@ -587,6 +641,7 @@ public class GetMetadataChildrenMetadata {
         return this;
     }
 
+
     public GetMetadataChildrenMetadata withParentTheme(Optional<String> parentTheme) {
         Utils.checkNotNull(parentTheme, "parentTheme");
         this.parentTheme = parentTheme;
@@ -598,6 +653,7 @@ public class GetMetadataChildrenMetadata {
         this.leafCount = Optional.ofNullable(leafCount);
         return this;
     }
+
 
     public GetMetadataChildrenMetadata withLeafCount(Optional<Integer> leafCount) {
         Utils.checkNotNull(leafCount, "leafCount");
@@ -611,6 +667,7 @@ public class GetMetadataChildrenMetadata {
         return this;
     }
 
+
     public GetMetadataChildrenMetadata withViewedLeafCount(Optional<Integer> viewedLeafCount) {
         Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
         this.viewedLeafCount = viewedLeafCount;
@@ -622,6 +679,7 @@ public class GetMetadataChildrenMetadata {
         this.addedAt = Optional.ofNullable(addedAt);
         return this;
     }
+
 
     public GetMetadataChildrenMetadata withAddedAt(Optional<Integer> addedAt) {
         Utils.checkNotNull(addedAt, "addedAt");
@@ -635,6 +693,7 @@ public class GetMetadataChildrenMetadata {
         return this;
     }
 
+
     public GetMetadataChildrenMetadata withUpdatedAt(Optional<Integer> updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
         this.updatedAt = updatedAt;
@@ -646,6 +705,7 @@ public class GetMetadataChildrenMetadata {
         this.userRating = Optional.ofNullable(userRating);
         return this;
     }
+
 
     public GetMetadataChildrenMetadata withUserRating(Optional<Integer> userRating) {
         Utils.checkNotNull(userRating, "userRating");
@@ -659,6 +719,7 @@ public class GetMetadataChildrenMetadata {
         return this;
     }
 
+
     public GetMetadataChildrenMetadata withSkipCount(Optional<Integer> skipCount) {
         Utils.checkNotNull(skipCount, "skipCount");
         this.skipCount = skipCount;
@@ -671,13 +732,13 @@ public class GetMetadataChildrenMetadata {
         return this;
     }
 
+
     public GetMetadataChildrenMetadata withLastRatedAt(Optional<Integer> lastRatedAt) {
         Utils.checkNotNull(lastRatedAt, "lastRatedAt");
         this.lastRatedAt = lastRatedAt;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -688,65 +749,47 @@ public class GetMetadataChildrenMetadata {
         }
         GetMetadataChildrenMetadata other = (GetMetadataChildrenMetadata) o;
         return 
-            Objects.deepEquals(this.ratingKey, other.ratingKey) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.parentRatingKey, other.parentRatingKey) &&
-            Objects.deepEquals(this.guid, other.guid) &&
-            Objects.deepEquals(this.parentGuid, other.parentGuid) &&
-            Objects.deepEquals(this.parentStudio, other.parentStudio) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.parentKey, other.parentKey) &&
-            Objects.deepEquals(this.parentTitle, other.parentTitle) &&
-            Objects.deepEquals(this.summary, other.summary) &&
-            Objects.deepEquals(this.index, other.index) &&
-            Objects.deepEquals(this.parentIndex, other.parentIndex) &&
-            Objects.deepEquals(this.viewCount, other.viewCount) &&
-            Objects.deepEquals(this.lastViewedAt, other.lastViewedAt) &&
-            Objects.deepEquals(this.parentYear, other.parentYear) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.art, other.art) &&
-            Objects.deepEquals(this.parentThumb, other.parentThumb) &&
-            Objects.deepEquals(this.parentTheme, other.parentTheme) &&
-            Objects.deepEquals(this.leafCount, other.leafCount) &&
-            Objects.deepEquals(this.viewedLeafCount, other.viewedLeafCount) &&
-            Objects.deepEquals(this.addedAt, other.addedAt) &&
-            Objects.deepEquals(this.updatedAt, other.updatedAt) &&
-            Objects.deepEquals(this.userRating, other.userRating) &&
-            Objects.deepEquals(this.skipCount, other.skipCount) &&
-            Objects.deepEquals(this.lastRatedAt, other.lastRatedAt);
+            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.parentRatingKey, other.parentRatingKey) &&
+            Utils.enhancedDeepEquals(this.guid, other.guid) &&
+            Utils.enhancedDeepEquals(this.parentGuid, other.parentGuid) &&
+            Utils.enhancedDeepEquals(this.parentStudio, other.parentStudio) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.parentKey, other.parentKey) &&
+            Utils.enhancedDeepEquals(this.parentTitle, other.parentTitle) &&
+            Utils.enhancedDeepEquals(this.summary, other.summary) &&
+            Utils.enhancedDeepEquals(this.index, other.index) &&
+            Utils.enhancedDeepEquals(this.parentIndex, other.parentIndex) &&
+            Utils.enhancedDeepEquals(this.viewCount, other.viewCount) &&
+            Utils.enhancedDeepEquals(this.lastViewedAt, other.lastViewedAt) &&
+            Utils.enhancedDeepEquals(this.parentYear, other.parentYear) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.art, other.art) &&
+            Utils.enhancedDeepEquals(this.parentThumb, other.parentThumb) &&
+            Utils.enhancedDeepEquals(this.parentTheme, other.parentTheme) &&
+            Utils.enhancedDeepEquals(this.leafCount, other.leafCount) &&
+            Utils.enhancedDeepEquals(this.viewedLeafCount, other.viewedLeafCount) &&
+            Utils.enhancedDeepEquals(this.addedAt, other.addedAt) &&
+            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt) &&
+            Utils.enhancedDeepEquals(this.userRating, other.userRating) &&
+            Utils.enhancedDeepEquals(this.skipCount, other.skipCount) &&
+            Utils.enhancedDeepEquals(this.lastRatedAt, other.lastRatedAt);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            ratingKey,
-            key,
-            parentRatingKey,
-            guid,
-            parentGuid,
-            parentStudio,
-            type,
-            title,
-            parentKey,
-            parentTitle,
-            summary,
-            index,
-            parentIndex,
-            viewCount,
-            lastViewedAt,
-            parentYear,
-            thumb,
-            art,
-            parentThumb,
-            parentTheme,
-            leafCount,
-            viewedLeafCount,
-            addedAt,
-            updatedAt,
-            userRating,
-            skipCount,
-            lastRatedAt);
+        return Utils.enhancedHash(
+            ratingKey, key, parentRatingKey,
+            guid, parentGuid, parentStudio,
+            type, title, parentKey,
+            parentTitle, summary, index,
+            parentIndex, viewCount, lastViewedAt,
+            parentYear, thumb, art,
+            parentThumb, parentTheme, leafCount,
+            viewedLeafCount, addedAt, updatedAt,
+            userRating, skipCount, lastRatedAt);
     }
     
     @Override
@@ -780,66 +823,68 @@ public class GetMetadataChildrenMetadata {
                 "skipCount", skipCount,
                 "lastRatedAt", lastRatedAt);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> ratingKey = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> parentRatingKey = Optional.empty();
- 
+
         private Optional<String> guid = Optional.empty();
- 
+
         private Optional<String> parentGuid = Optional.empty();
- 
+
         private Optional<String> parentStudio = Optional.empty();
- 
+
         private Optional<String> type = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> parentKey = Optional.empty();
- 
+
         private Optional<String> parentTitle = Optional.empty();
- 
+
         private Optional<String> summary = Optional.empty();
- 
+
         private Optional<Integer> index = Optional.empty();
- 
+
         private Optional<Integer> parentIndex = Optional.empty();
- 
+
         private Optional<Integer> viewCount = Optional.empty();
- 
+
         private Optional<Integer> lastViewedAt = Optional.empty();
- 
+
         private Optional<Integer> parentYear = Optional.empty();
- 
+
         private Optional<String> thumb = Optional.empty();
- 
+
         private Optional<String> art = Optional.empty();
- 
+
         private Optional<String> parentThumb = Optional.empty();
- 
+
         private Optional<String> parentTheme = Optional.empty();
- 
+
         private Optional<Integer> leafCount = Optional.empty();
- 
+
         private Optional<Integer> viewedLeafCount = Optional.empty();
- 
+
         private Optional<Integer> addedAt = Optional.empty();
- 
+
         private Optional<Integer> updatedAt = Optional.empty();
- 
+
         private Optional<Integer> userRating = Optional.empty();
- 
+
         private Optional<Integer> skipCount = Optional.empty();
- 
+
         private Optional<Integer> lastRatedAt = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder ratingKey(String ratingKey) {
             Utils.checkNotNull(ratingKey, "ratingKey");
@@ -853,6 +898,7 @@ public class GetMetadataChildrenMetadata {
             return this;
         }
 
+
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = Optional.ofNullable(key);
@@ -864,6 +910,7 @@ public class GetMetadataChildrenMetadata {
             this.key = key;
             return this;
         }
+
 
         public Builder parentRatingKey(String parentRatingKey) {
             Utils.checkNotNull(parentRatingKey, "parentRatingKey");
@@ -877,6 +924,7 @@ public class GetMetadataChildrenMetadata {
             return this;
         }
 
+
         public Builder guid(String guid) {
             Utils.checkNotNull(guid, "guid");
             this.guid = Optional.ofNullable(guid);
@@ -888,6 +936,7 @@ public class GetMetadataChildrenMetadata {
             this.guid = guid;
             return this;
         }
+
 
         public Builder parentGuid(String parentGuid) {
             Utils.checkNotNull(parentGuid, "parentGuid");
@@ -901,6 +950,7 @@ public class GetMetadataChildrenMetadata {
             return this;
         }
 
+
         public Builder parentStudio(String parentStudio) {
             Utils.checkNotNull(parentStudio, "parentStudio");
             this.parentStudio = Optional.ofNullable(parentStudio);
@@ -912,6 +962,7 @@ public class GetMetadataChildrenMetadata {
             this.parentStudio = parentStudio;
             return this;
         }
+
 
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
@@ -925,6 +976,7 @@ public class GetMetadataChildrenMetadata {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -936,6 +988,7 @@ public class GetMetadataChildrenMetadata {
             this.title = title;
             return this;
         }
+
 
         public Builder parentKey(String parentKey) {
             Utils.checkNotNull(parentKey, "parentKey");
@@ -949,6 +1002,7 @@ public class GetMetadataChildrenMetadata {
             return this;
         }
 
+
         public Builder parentTitle(String parentTitle) {
             Utils.checkNotNull(parentTitle, "parentTitle");
             this.parentTitle = Optional.ofNullable(parentTitle);
@@ -960,6 +1014,7 @@ public class GetMetadataChildrenMetadata {
             this.parentTitle = parentTitle;
             return this;
         }
+
 
         public Builder summary(String summary) {
             Utils.checkNotNull(summary, "summary");
@@ -973,6 +1028,7 @@ public class GetMetadataChildrenMetadata {
             return this;
         }
 
+
         public Builder index(int index) {
             Utils.checkNotNull(index, "index");
             this.index = Optional.ofNullable(index);
@@ -984,6 +1040,7 @@ public class GetMetadataChildrenMetadata {
             this.index = index;
             return this;
         }
+
 
         public Builder parentIndex(int parentIndex) {
             Utils.checkNotNull(parentIndex, "parentIndex");
@@ -997,6 +1054,7 @@ public class GetMetadataChildrenMetadata {
             return this;
         }
 
+
         public Builder viewCount(int viewCount) {
             Utils.checkNotNull(viewCount, "viewCount");
             this.viewCount = Optional.ofNullable(viewCount);
@@ -1008,6 +1066,7 @@ public class GetMetadataChildrenMetadata {
             this.viewCount = viewCount;
             return this;
         }
+
 
         public Builder lastViewedAt(int lastViewedAt) {
             Utils.checkNotNull(lastViewedAt, "lastViewedAt");
@@ -1021,6 +1080,7 @@ public class GetMetadataChildrenMetadata {
             return this;
         }
 
+
         public Builder parentYear(int parentYear) {
             Utils.checkNotNull(parentYear, "parentYear");
             this.parentYear = Optional.ofNullable(parentYear);
@@ -1032,6 +1092,7 @@ public class GetMetadataChildrenMetadata {
             this.parentYear = parentYear;
             return this;
         }
+
 
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -1045,6 +1106,7 @@ public class GetMetadataChildrenMetadata {
             return this;
         }
 
+
         public Builder art(String art) {
             Utils.checkNotNull(art, "art");
             this.art = Optional.ofNullable(art);
@@ -1056,6 +1118,7 @@ public class GetMetadataChildrenMetadata {
             this.art = art;
             return this;
         }
+
 
         public Builder parentThumb(String parentThumb) {
             Utils.checkNotNull(parentThumb, "parentThumb");
@@ -1069,6 +1132,7 @@ public class GetMetadataChildrenMetadata {
             return this;
         }
 
+
         public Builder parentTheme(String parentTheme) {
             Utils.checkNotNull(parentTheme, "parentTheme");
             this.parentTheme = Optional.ofNullable(parentTheme);
@@ -1080,6 +1144,7 @@ public class GetMetadataChildrenMetadata {
             this.parentTheme = parentTheme;
             return this;
         }
+
 
         public Builder leafCount(int leafCount) {
             Utils.checkNotNull(leafCount, "leafCount");
@@ -1093,6 +1158,7 @@ public class GetMetadataChildrenMetadata {
             return this;
         }
 
+
         public Builder viewedLeafCount(int viewedLeafCount) {
             Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
             this.viewedLeafCount = Optional.ofNullable(viewedLeafCount);
@@ -1104,6 +1170,7 @@ public class GetMetadataChildrenMetadata {
             this.viewedLeafCount = viewedLeafCount;
             return this;
         }
+
 
         public Builder addedAt(int addedAt) {
             Utils.checkNotNull(addedAt, "addedAt");
@@ -1117,6 +1184,7 @@ public class GetMetadataChildrenMetadata {
             return this;
         }
 
+
         public Builder updatedAt(int updatedAt) {
             Utils.checkNotNull(updatedAt, "updatedAt");
             this.updatedAt = Optional.ofNullable(updatedAt);
@@ -1128,6 +1196,7 @@ public class GetMetadataChildrenMetadata {
             this.updatedAt = updatedAt;
             return this;
         }
+
 
         public Builder userRating(int userRating) {
             Utils.checkNotNull(userRating, "userRating");
@@ -1141,6 +1210,7 @@ public class GetMetadataChildrenMetadata {
             return this;
         }
 
+
         public Builder skipCount(int skipCount) {
             Utils.checkNotNull(skipCount, "skipCount");
             this.skipCount = Optional.ofNullable(skipCount);
@@ -1153,6 +1223,7 @@ public class GetMetadataChildrenMetadata {
             return this;
         }
 
+
         public Builder lastRatedAt(int lastRatedAt) {
             Utils.checkNotNull(lastRatedAt, "lastRatedAt");
             this.lastRatedAt = Optional.ofNullable(lastRatedAt);
@@ -1164,36 +1235,20 @@ public class GetMetadataChildrenMetadata {
             this.lastRatedAt = lastRatedAt;
             return this;
         }
-        
+
         public GetMetadataChildrenMetadata build() {
+
             return new GetMetadataChildrenMetadata(
-                ratingKey,
-                key,
-                parentRatingKey,
-                guid,
-                parentGuid,
-                parentStudio,
-                type,
-                title,
-                parentKey,
-                parentTitle,
-                summary,
-                index,
-                parentIndex,
-                viewCount,
-                lastViewedAt,
-                parentYear,
-                thumb,
-                art,
-                parentThumb,
-                parentTheme,
-                leafCount,
-                viewedLeafCount,
-                addedAt,
-                updatedAt,
-                userRating,
-                skipCount,
-                lastRatedAt);
+                ratingKey, key, parentRatingKey,
+                guid, parentGuid, parentStudio,
+                type, title, parentKey,
+                parentTitle, summary, index,
+                parentIndex, viewCount, lastViewedAt,
+                parentYear, thumb, art,
+                parentThumb, parentTheme, leafCount,
+                viewedLeafCount, addedAt, updatedAt,
+                userRating, skipCount, lastRatedAt);
         }
+
     }
 }

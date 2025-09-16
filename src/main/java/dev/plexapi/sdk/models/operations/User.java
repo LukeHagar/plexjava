@@ -13,12 +13,11 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
-public class User {
 
+public class User {
     /**
      * User's unique ID.
      */
@@ -49,17 +48,24 @@ public class User {
      */
     private String thumb;
 
+
     private Optional<? extends Protected> protected_;
+
 
     private Optional<? extends Home> home;
 
+
     private Optional<? extends AllowTuners> allowTuners;
+
 
     private Optional<? extends AllowSync> allowSync;
 
+
     private Optional<? extends AllowCameraUpload> allowCameraUpload;
 
+
     private Optional<? extends AllowChannels> allowChannels;
+
 
     private Optional<? extends AllowSubtitleAdmin> allowSubtitleAdmin;
 
@@ -87,6 +93,7 @@ public class User {
      * Filters applied for television.
      */
     private Optional<String> filterTelevision;
+
 
     private Optional<? extends Restricted> restricted;
 
@@ -166,7 +173,13 @@ public class User {
             String email,
             String thumb,
             List<GetUsersServer> server) {
-        this(id, title, username, email, JsonNullable.undefined(), thumb, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(), Optional.empty(), server);
+        this(id, title, username,
+            email, JsonNullable.undefined(), thumb,
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined(),
+            JsonNullable.undefined(), JsonNullable.undefined(), Optional.empty(),
+            Optional.empty(), server);
     }
 
     /**
@@ -313,9 +326,10 @@ public class User {
         return server;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * User's unique ID.
@@ -386,6 +400,7 @@ public class User {
         return this;
     }
 
+
     public User withProtected(Optional<? extends Protected> protected_) {
         Utils.checkNotNull(protected_, "protected_");
         this.protected_ = protected_;
@@ -397,6 +412,7 @@ public class User {
         this.home = Optional.ofNullable(home);
         return this;
     }
+
 
     public User withHome(Optional<? extends Home> home) {
         Utils.checkNotNull(home, "home");
@@ -410,6 +426,7 @@ public class User {
         return this;
     }
 
+
     public User withAllowTuners(Optional<? extends AllowTuners> allowTuners) {
         Utils.checkNotNull(allowTuners, "allowTuners");
         this.allowTuners = allowTuners;
@@ -421,6 +438,7 @@ public class User {
         this.allowSync = Optional.ofNullable(allowSync);
         return this;
     }
+
 
     public User withAllowSync(Optional<? extends AllowSync> allowSync) {
         Utils.checkNotNull(allowSync, "allowSync");
@@ -434,6 +452,7 @@ public class User {
         return this;
     }
 
+
     public User withAllowCameraUpload(Optional<? extends AllowCameraUpload> allowCameraUpload) {
         Utils.checkNotNull(allowCameraUpload, "allowCameraUpload");
         this.allowCameraUpload = allowCameraUpload;
@@ -446,6 +465,7 @@ public class User {
         return this;
     }
 
+
     public User withAllowChannels(Optional<? extends AllowChannels> allowChannels) {
         Utils.checkNotNull(allowChannels, "allowChannels");
         this.allowChannels = allowChannels;
@@ -457,6 +477,7 @@ public class User {
         this.allowSubtitleAdmin = Optional.ofNullable(allowSubtitleAdmin);
         return this;
     }
+
 
     public User withAllowSubtitleAdmin(Optional<? extends AllowSubtitleAdmin> allowSubtitleAdmin) {
         Utils.checkNotNull(allowSubtitleAdmin, "allowSubtitleAdmin");
@@ -545,6 +566,7 @@ public class User {
         return this;
     }
 
+
     /**
      * Filters applied for television.
      */
@@ -559,6 +581,7 @@ public class User {
         this.restricted = Optional.ofNullable(restricted);
         return this;
     }
+
 
     public User withRestricted(Optional<? extends Restricted> restricted) {
         Utils.checkNotNull(restricted, "restricted");
@@ -575,7 +598,6 @@ public class User {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -586,51 +608,38 @@ public class User {
         }
         User other = (User) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.username, other.username) &&
-            Objects.deepEquals(this.email, other.email) &&
-            Objects.deepEquals(this.recommendationsPlaylistId, other.recommendationsPlaylistId) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.protected_, other.protected_) &&
-            Objects.deepEquals(this.home, other.home) &&
-            Objects.deepEquals(this.allowTuners, other.allowTuners) &&
-            Objects.deepEquals(this.allowSync, other.allowSync) &&
-            Objects.deepEquals(this.allowCameraUpload, other.allowCameraUpload) &&
-            Objects.deepEquals(this.allowChannels, other.allowChannels) &&
-            Objects.deepEquals(this.allowSubtitleAdmin, other.allowSubtitleAdmin) &&
-            Objects.deepEquals(this.filterAll, other.filterAll) &&
-            Objects.deepEquals(this.filterMovies, other.filterMovies) &&
-            Objects.deepEquals(this.filterMusic, other.filterMusic) &&
-            Objects.deepEquals(this.filterPhotos, other.filterPhotos) &&
-            Objects.deepEquals(this.filterTelevision, other.filterTelevision) &&
-            Objects.deepEquals(this.restricted, other.restricted) &&
-            Objects.deepEquals(this.server, other.server);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.username, other.username) &&
+            Utils.enhancedDeepEquals(this.email, other.email) &&
+            Utils.enhancedDeepEquals(this.recommendationsPlaylistId, other.recommendationsPlaylistId) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.protected_, other.protected_) &&
+            Utils.enhancedDeepEquals(this.home, other.home) &&
+            Utils.enhancedDeepEquals(this.allowTuners, other.allowTuners) &&
+            Utils.enhancedDeepEquals(this.allowSync, other.allowSync) &&
+            Utils.enhancedDeepEquals(this.allowCameraUpload, other.allowCameraUpload) &&
+            Utils.enhancedDeepEquals(this.allowChannels, other.allowChannels) &&
+            Utils.enhancedDeepEquals(this.allowSubtitleAdmin, other.allowSubtitleAdmin) &&
+            Utils.enhancedDeepEquals(this.filterAll, other.filterAll) &&
+            Utils.enhancedDeepEquals(this.filterMovies, other.filterMovies) &&
+            Utils.enhancedDeepEquals(this.filterMusic, other.filterMusic) &&
+            Utils.enhancedDeepEquals(this.filterPhotos, other.filterPhotos) &&
+            Utils.enhancedDeepEquals(this.filterTelevision, other.filterTelevision) &&
+            Utils.enhancedDeepEquals(this.restricted, other.restricted) &&
+            Utils.enhancedDeepEquals(this.server, other.server);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            title,
-            username,
-            email,
-            recommendationsPlaylistId,
-            thumb,
-            protected_,
-            home,
-            allowTuners,
-            allowSync,
-            allowCameraUpload,
-            allowChannels,
-            allowSubtitleAdmin,
-            filterAll,
-            filterMovies,
-            filterMusic,
-            filterPhotos,
-            filterTelevision,
-            restricted,
-            server);
+        return Utils.enhancedHash(
+            id, title, username,
+            email, recommendationsPlaylistId, thumb,
+            protected_, home, allowTuners,
+            allowSync, allowCameraUpload, allowChannels,
+            allowSubtitleAdmin, filterAll, filterMovies,
+            filterMusic, filterPhotos, filterTelevision,
+            restricted, server);
     }
     
     @Override
@@ -657,52 +666,54 @@ public class User {
                 "restricted", restricted,
                 "server", server);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Long id;
- 
+
         private String title;
- 
+
         private String username;
- 
+
         private String email;
- 
+
         private JsonNullable<String> recommendationsPlaylistId = JsonNullable.undefined();
- 
+
         private String thumb;
- 
+
         private Optional<? extends Protected> protected_;
- 
+
         private Optional<? extends Home> home;
- 
+
         private Optional<? extends AllowTuners> allowTuners;
- 
+
         private Optional<? extends AllowSync> allowSync;
- 
+
         private Optional<? extends AllowCameraUpload> allowCameraUpload;
- 
+
         private Optional<? extends AllowChannels> allowChannels;
- 
+
         private Optional<? extends AllowSubtitleAdmin> allowSubtitleAdmin;
- 
+
         private JsonNullable<String> filterAll = JsonNullable.undefined();
- 
+
         private JsonNullable<String> filterMovies = JsonNullable.undefined();
- 
+
         private JsonNullable<String> filterMusic = JsonNullable.undefined();
- 
+
         private JsonNullable<String> filterPhotos = JsonNullable.undefined();
- 
+
         private Optional<String> filterTelevision = Optional.empty();
- 
+
         private Optional<? extends Restricted> restricted;
- 
+
         private List<GetUsersServer> server;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * User's unique ID.
@@ -713,6 +724,7 @@ public class User {
             return this;
         }
 
+
         /**
          * User's display name.
          */
@@ -721,6 +733,7 @@ public class User {
             this.title = title;
             return this;
         }
+
 
         /**
          * User's username.
@@ -731,6 +744,7 @@ public class User {
             return this;
         }
 
+
         /**
          * User's email address.
          */
@@ -739,6 +753,7 @@ public class User {
             this.email = email;
             return this;
         }
+
 
         /**
          * ID of the user's recommendation playlist.
@@ -758,6 +773,7 @@ public class User {
             return this;
         }
 
+
         /**
          * URL to the user's avatar image.
          */
@@ -766,6 +782,7 @@ public class User {
             this.thumb = thumb;
             return this;
         }
+
 
         public Builder protected_(Protected protected_) {
             Utils.checkNotNull(protected_, "protected_");
@@ -779,6 +796,7 @@ public class User {
             return this;
         }
 
+
         public Builder home(Home home) {
             Utils.checkNotNull(home, "home");
             this.home = Optional.ofNullable(home);
@@ -790,6 +808,7 @@ public class User {
             this.home = home;
             return this;
         }
+
 
         public Builder allowTuners(AllowTuners allowTuners) {
             Utils.checkNotNull(allowTuners, "allowTuners");
@@ -803,6 +822,7 @@ public class User {
             return this;
         }
 
+
         public Builder allowSync(AllowSync allowSync) {
             Utils.checkNotNull(allowSync, "allowSync");
             this.allowSync = Optional.ofNullable(allowSync);
@@ -814,6 +834,7 @@ public class User {
             this.allowSync = allowSync;
             return this;
         }
+
 
         public Builder allowCameraUpload(AllowCameraUpload allowCameraUpload) {
             Utils.checkNotNull(allowCameraUpload, "allowCameraUpload");
@@ -827,6 +848,7 @@ public class User {
             return this;
         }
 
+
         public Builder allowChannels(AllowChannels allowChannels) {
             Utils.checkNotNull(allowChannels, "allowChannels");
             this.allowChannels = Optional.ofNullable(allowChannels);
@@ -839,6 +861,7 @@ public class User {
             return this;
         }
 
+
         public Builder allowSubtitleAdmin(AllowSubtitleAdmin allowSubtitleAdmin) {
             Utils.checkNotNull(allowSubtitleAdmin, "allowSubtitleAdmin");
             this.allowSubtitleAdmin = Optional.ofNullable(allowSubtitleAdmin);
@@ -850,6 +873,7 @@ public class User {
             this.allowSubtitleAdmin = allowSubtitleAdmin;
             return this;
         }
+
 
         /**
          * Filters applied for all content.
@@ -869,6 +893,7 @@ public class User {
             return this;
         }
 
+
         /**
          * Filters applied for movies.
          */
@@ -886,6 +911,7 @@ public class User {
             this.filterMovies = filterMovies;
             return this;
         }
+
 
         /**
          * Filters applied for music.
@@ -905,6 +931,7 @@ public class User {
             return this;
         }
 
+
         /**
          * Filters applied for photos.
          */
@@ -922,6 +949,7 @@ public class User {
             this.filterPhotos = filterPhotos;
             return this;
         }
+
 
         /**
          * Filters applied for television.
@@ -941,6 +969,7 @@ public class User {
             return this;
         }
 
+
         public Builder restricted(Restricted restricted) {
             Utils.checkNotNull(restricted, "restricted");
             this.restricted = Optional.ofNullable(restricted);
@@ -953,6 +982,7 @@ public class User {
             return this;
         }
 
+
         /**
          * List of servers owned by the user.
          */
@@ -961,7 +991,7 @@ public class User {
             this.server = server;
             return this;
         }
-        
+
         public User build() {
             if (protected_ == null) {
                 protected_ = _SINGLETON_VALUE_Protected.value();
@@ -987,28 +1017,17 @@ public class User {
             if (restricted == null) {
                 restricted = _SINGLETON_VALUE_Restricted.value();
             }
+
             return new User(
-                id,
-                title,
-                username,
-                email,
-                recommendationsPlaylistId,
-                thumb,
-                protected_,
-                home,
-                allowTuners,
-                allowSync,
-                allowCameraUpload,
-                allowChannels,
-                allowSubtitleAdmin,
-                filterAll,
-                filterMovies,
-                filterMusic,
-                filterPhotos,
-                filterTelevision,
-                restricted,
-                server);
+                id, title, username,
+                email, recommendationsPlaylistId, thumb,
+                protected_, home, allowTuners,
+                allowSync, allowCameraUpload, allowChannels,
+                allowSubtitleAdmin, filterAll, filterMovies,
+                filterMusic, filterPhotos, filterTelevision,
+                restricted, server);
         }
+
 
         private static final LazySingletonValue<Optional<? extends Protected>> _SINGLETON_VALUE_Protected =
                 new LazySingletonValue<>(

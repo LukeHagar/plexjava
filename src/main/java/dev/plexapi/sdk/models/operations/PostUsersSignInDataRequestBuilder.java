@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.PostUsersSignInData;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -12,10 +16,10 @@ public class PostUsersSignInDataRequestBuilder {
 
     private PostUsersSignInDataRequest request;
     private Optional<String> serverURL = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallPostUsersSignInData sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public PostUsersSignInDataRequestBuilder(SDKMethodInterfaces.MethodCallPostUsersSignInData sdk) {
-        this.sdk = sdk;
+    public PostUsersSignInDataRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public PostUsersSignInDataRequestBuilder request(PostUsersSignInDataRequest request) {
@@ -37,9 +41,10 @@ public class PostUsersSignInDataRequestBuilder {
     }
 
     public PostUsersSignInDataResponse call() throws Exception {
+        
+        RequestOperation<PostUsersSignInDataRequest, PostUsersSignInDataResponse> operation
+              = new PostUsersSignInData.Sync(sdkConfiguration, serverURL);
 
-        return sdk.postUsersSignInData(
-            request,
-            serverURL);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

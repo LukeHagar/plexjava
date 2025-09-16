@@ -19,7 +19,7 @@ public enum Smart {
     @JsonValue
     private final long value;
 
-    private Smart(long value) {
+    Smart(long value) {
         this.value = value;
     }
     

@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class Pivot {
 
@@ -20,21 +20,26 @@ public class Pivot {
     @JsonProperty("id")
     private Optional<String> id;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
     private Optional<String> type;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("context")
     private Optional<String> context;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("symbol")
@@ -63,7 +68,8 @@ public class Pivot {
     }
     
     public Pivot() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -96,15 +102,17 @@ public class Pivot {
         return symbol;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Pivot withId(String id) {
         Utils.checkNotNull(id, "id");
         this.id = Optional.ofNullable(id);
         return this;
     }
+
 
     public Pivot withId(Optional<String> id) {
         Utils.checkNotNull(id, "id");
@@ -118,6 +126,7 @@ public class Pivot {
         return this;
     }
 
+
     public Pivot withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
@@ -129,6 +138,7 @@ public class Pivot {
         this.type = Optional.ofNullable(type);
         return this;
     }
+
 
     public Pivot withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
@@ -142,6 +152,7 @@ public class Pivot {
         return this;
     }
 
+
     public Pivot withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
@@ -153,6 +164,7 @@ public class Pivot {
         this.context = Optional.ofNullable(context);
         return this;
     }
+
 
     public Pivot withContext(Optional<String> context) {
         Utils.checkNotNull(context, "context");
@@ -166,13 +178,13 @@ public class Pivot {
         return this;
     }
 
+
     public Pivot withSymbol(Optional<String> symbol) {
         Utils.checkNotNull(symbol, "symbol");
         this.symbol = symbol;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -183,23 +195,19 @@ public class Pivot {
         }
         Pivot other = (Pivot) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.context, other.context) &&
-            Objects.deepEquals(this.symbol, other.symbol);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.context, other.context) &&
+            Utils.enhancedDeepEquals(this.symbol, other.symbol);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            key,
-            type,
-            title,
-            context,
-            symbol);
+        return Utils.enhancedHash(
+            id, key, type,
+            title, context, symbol);
     }
     
     @Override
@@ -212,24 +220,26 @@ public class Pivot {
                 "context", context,
                 "symbol", symbol);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> id = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> type = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> context = Optional.empty();
- 
+
         private Optional<String> symbol = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder id(String id) {
             Utils.checkNotNull(id, "id");
@@ -243,6 +253,7 @@ public class Pivot {
             return this;
         }
 
+
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = Optional.ofNullable(key);
@@ -254,6 +265,7 @@ public class Pivot {
             this.key = key;
             return this;
         }
+
 
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
@@ -267,6 +279,7 @@ public class Pivot {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -278,6 +291,7 @@ public class Pivot {
             this.title = title;
             return this;
         }
+
 
         public Builder context(String context) {
             Utils.checkNotNull(context, "context");
@@ -291,6 +305,7 @@ public class Pivot {
             return this;
         }
 
+
         public Builder symbol(String symbol) {
             Utils.checkNotNull(symbol, "symbol");
             this.symbol = Optional.ofNullable(symbol);
@@ -302,15 +317,13 @@ public class Pivot {
             this.symbol = symbol;
             return this;
         }
-        
+
         public Pivot build() {
+
             return new Pivot(
-                id,
-                key,
-                type,
-                title,
-                context,
-                symbol);
+                id, key, type,
+                title, context, symbol);
         }
+
     }
 }

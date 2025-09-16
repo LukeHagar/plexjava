@@ -9,10 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetLibrarySectionsAllGenre {
-
     /**
      * The genre name of this media-item
      */
@@ -34,9 +33,10 @@ public class GetLibrarySectionsAllGenre {
         return tag;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The genre name of this media-item
@@ -47,7 +47,6 @@ public class GetLibrarySectionsAllGenre {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -58,12 +57,12 @@ public class GetLibrarySectionsAllGenre {
         }
         GetLibrarySectionsAllGenre other = (GetLibrarySectionsAllGenre) o;
         return 
-            Objects.deepEquals(this.tag, other.tag);
+            Utils.enhancedDeepEquals(this.tag, other.tag);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             tag);
     }
     
@@ -72,14 +71,16 @@ public class GetLibrarySectionsAllGenre {
         return Utils.toString(GetLibrarySectionsAllGenre.class,
                 "tag", tag);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String tag;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The genre name of this media-item
@@ -89,10 +90,12 @@ public class GetLibrarySectionsAllGenre {
             this.tag = tag;
             return this;
         }
-        
+
         public GetLibrarySectionsAllGenre build() {
+
             return new GetLibrarySectionsAllGenre(
                 tag);
         }
+
     }
 }

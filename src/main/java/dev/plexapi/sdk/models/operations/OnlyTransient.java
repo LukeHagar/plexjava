@@ -19,7 +19,7 @@ public enum OnlyTransient {
     @JsonValue
     private final long value;
 
-    private OnlyTransient(long value) {
+    OnlyTransient(long value) {
         this.value = value;
     }
     

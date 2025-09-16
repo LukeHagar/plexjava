@@ -10,7 +10,6 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 
 /**
  * GetMediaMetaDataChapter
@@ -22,17 +21,22 @@ public class GetMediaMetaDataChapter {
     @JsonProperty("id")
     private long id;
 
+
     @JsonProperty("filter")
     private String filter;
+
 
     @JsonProperty("index")
     private long index;
 
+
     @JsonProperty("startTimeOffset")
     private long startTimeOffset;
 
+
     @JsonProperty("endTimeOffset")
     private long endTimeOffset;
+
 
     @JsonProperty("thumb")
     private String thumb;
@@ -89,9 +93,10 @@ public class GetMediaMetaDataChapter {
         return thumb;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetMediaMetaDataChapter withId(long id) {
         Utils.checkNotNull(id, "id");
@@ -129,7 +134,6 @@ public class GetMediaMetaDataChapter {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -140,23 +144,19 @@ public class GetMediaMetaDataChapter {
         }
         GetMediaMetaDataChapter other = (GetMediaMetaDataChapter) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.index, other.index) &&
-            Objects.deepEquals(this.startTimeOffset, other.startTimeOffset) &&
-            Objects.deepEquals(this.endTimeOffset, other.endTimeOffset) &&
-            Objects.deepEquals(this.thumb, other.thumb);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.filter, other.filter) &&
+            Utils.enhancedDeepEquals(this.index, other.index) &&
+            Utils.enhancedDeepEquals(this.startTimeOffset, other.startTimeOffset) &&
+            Utils.enhancedDeepEquals(this.endTimeOffset, other.endTimeOffset) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            filter,
-            index,
-            startTimeOffset,
-            endTimeOffset,
-            thumb);
+        return Utils.enhancedHash(
+            id, filter, index,
+            startTimeOffset, endTimeOffset, thumb);
     }
     
     @Override
@@ -169,24 +169,26 @@ public class GetMediaMetaDataChapter {
                 "endTimeOffset", endTimeOffset,
                 "thumb", thumb);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Long id;
- 
+
         private String filter;
- 
+
         private Long index;
- 
+
         private Long startTimeOffset;
- 
+
         private Long endTimeOffset;
- 
+
         private String thumb;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder id(long id) {
             Utils.checkNotNull(id, "id");
@@ -194,11 +196,13 @@ public class GetMediaMetaDataChapter {
             return this;
         }
 
+
         public Builder filter(String filter) {
             Utils.checkNotNull(filter, "filter");
             this.filter = filter;
             return this;
         }
+
 
         public Builder index(long index) {
             Utils.checkNotNull(index, "index");
@@ -206,11 +210,13 @@ public class GetMediaMetaDataChapter {
             return this;
         }
 
+
         public Builder startTimeOffset(long startTimeOffset) {
             Utils.checkNotNull(startTimeOffset, "startTimeOffset");
             this.startTimeOffset = startTimeOffset;
             return this;
         }
+
 
         public Builder endTimeOffset(long endTimeOffset) {
             Utils.checkNotNull(endTimeOffset, "endTimeOffset");
@@ -218,20 +224,19 @@ public class GetMediaMetaDataChapter {
             return this;
         }
 
+
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
             this.thumb = thumb;
             return this;
         }
-        
+
         public GetMediaMetaDataChapter build() {
+
             return new GetMediaMetaDataChapter(
-                id,
-                filter,
-                index,
-                startTimeOffset,
-                endTimeOffset,
-                thumb);
+                id, filter, index,
+                startTimeOffset, endTimeOffset, thumb);
         }
+
     }
 }

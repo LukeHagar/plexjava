@@ -16,7 +16,6 @@ import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -30,6 +29,7 @@ public class GetServerIdentityRequestTimeout extends RuntimeException {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("code")
     private Optional<Integer> code;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("message")
@@ -47,7 +47,7 @@ public class GetServerIdentityRequestTimeout extends RuntimeException {
             @JsonProperty("code") Optional<Integer> code,
             @JsonProperty("message") Optional<String> message,
             @JsonProperty("RawResponse") Optional<? extends HttpResponse<InputStream>> rawResponse) {
-        super(message.orElse(null));
+        super(Utils.valueOrElse(message, "API error occurred"));
         Utils.checkNotNull(code, "code");
         Utils.checkNotNull(message, "message");
         Utils.checkNotNull(rawResponse, "rawResponse");
@@ -85,15 +85,17 @@ public class GetServerIdentityRequestTimeout extends RuntimeException {
         return (Optional<HttpResponse<InputStream>>) rawResponse;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetServerIdentityRequestTimeout withCode(int code) {
         Utils.checkNotNull(code, "code");
         this.code = Optional.ofNullable(code);
         return this;
     }
+
 
     public GetServerIdentityRequestTimeout withCode(Optional<Integer> code) {
         Utils.checkNotNull(code, "code");
@@ -106,6 +108,7 @@ public class GetServerIdentityRequestTimeout extends RuntimeException {
         this.message = Optional.ofNullable(message);
         return this;
     }
+
 
     public GetServerIdentityRequestTimeout withMessage(Optional<String> message) {
         Utils.checkNotNull(message, "message");
@@ -122,6 +125,7 @@ public class GetServerIdentityRequestTimeout extends RuntimeException {
         return this;
     }
 
+
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
@@ -131,7 +135,6 @@ public class GetServerIdentityRequestTimeout extends RuntimeException {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -142,17 +145,15 @@ public class GetServerIdentityRequestTimeout extends RuntimeException {
         }
         GetServerIdentityRequestTimeout other = (GetServerIdentityRequestTimeout) o;
         return 
-            Objects.deepEquals(this.code, other.code) &&
-            Objects.deepEquals(this.message, other.message) &&
-            Objects.deepEquals(this.rawResponse, other.rawResponse);
+            Utils.enhancedDeepEquals(this.code, other.code) &&
+            Utils.enhancedDeepEquals(this.message, other.message) &&
+            Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            code,
-            message,
-            rawResponse);
+        return Utils.enhancedHash(
+            code, message, rawResponse);
     }
     
     @Override
@@ -162,18 +163,20 @@ public class GetServerIdentityRequestTimeout extends RuntimeException {
                 "message", message,
                 "rawResponse", rawResponse);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> code = Optional.empty();
- 
+
         private Optional<String> message = Optional.empty();
- 
+
         private Optional<? extends HttpResponse<InputStream>> rawResponse;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder code(int code) {
             Utils.checkNotNull(code, "code");
@@ -187,6 +190,7 @@ public class GetServerIdentityRequestTimeout extends RuntimeException {
             return this;
         }
 
+
         public Builder message(String message) {
             Utils.checkNotNull(message, "message");
             this.message = Optional.ofNullable(message);
@@ -198,6 +202,7 @@ public class GetServerIdentityRequestTimeout extends RuntimeException {
             this.message = message;
             return this;
         }
+
 
         /**
          * Raw HTTP response; suitable for custom response parsing
@@ -216,13 +221,13 @@ public class GetServerIdentityRequestTimeout extends RuntimeException {
             this.rawResponse = rawResponse;
             return this;
         }
-        
+
         public GetServerIdentityRequestTimeout build() {
+
             return new GetServerIdentityRequestTimeout(
-                code,
-                message,
-                rawResponse);
+                code, message, rawResponse);
         }
+
     }
 }
 

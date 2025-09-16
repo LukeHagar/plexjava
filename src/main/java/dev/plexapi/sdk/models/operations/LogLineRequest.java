@@ -9,10 +9,9 @@ import dev.plexapi.sdk.utils.SpeakeasyMetadata;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class LogLineRequest {
-
     /**
      * An integer log level to write to the PMS log with.
      * 0: Error
@@ -78,9 +77,10 @@ public class LogLineRequest {
         return source;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * An integer log level to write to the PMS log with.
@@ -114,7 +114,6 @@ public class LogLineRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -125,17 +124,15 @@ public class LogLineRequest {
         }
         LogLineRequest other = (LogLineRequest) o;
         return 
-            Objects.deepEquals(this.level, other.level) &&
-            Objects.deepEquals(this.message, other.message) &&
-            Objects.deepEquals(this.source, other.source);
+            Utils.enhancedDeepEquals(this.level, other.level) &&
+            Utils.enhancedDeepEquals(this.message, other.message) &&
+            Utils.enhancedDeepEquals(this.source, other.source);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            level,
-            message,
-            source);
+        return Utils.enhancedHash(
+            level, message, source);
     }
     
     @Override
@@ -145,18 +142,20 @@ public class LogLineRequest {
                 "message", message,
                 "source", source);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Level level;
- 
+
         private String message;
- 
+
         private String source;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * An integer log level to write to the PMS log with.
@@ -172,6 +171,7 @@ public class LogLineRequest {
             return this;
         }
 
+
         /**
          * The text of the message to write to the log.
          */
@@ -181,6 +181,7 @@ public class LogLineRequest {
             return this;
         }
 
+
         /**
          * a string indicating the source of the message.
          */
@@ -189,12 +190,12 @@ public class LogLineRequest {
             this.source = source;
             return this;
         }
-        
+
         public LogLineRequest build() {
+
             return new LogLineRequest(
-                level,
-                message,
-                source);
+                level, message, source);
         }
+
     }
 }

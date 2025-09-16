@@ -11,24 +11,28 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class Services {
 
     @JsonProperty("identifier")
     private String identifier;
 
+
     @JsonProperty("endpoint")
     private String endpoint;
+
 
     @JsonInclude(Include.ALWAYS)
     @JsonProperty("token")
     private Optional<String> token;
 
+
     @JsonInclude(Include.ALWAYS)
     @JsonProperty("secret")
     private Optional<String> secret;
+
 
     @JsonProperty("status")
     private GetTokenDetailsStatus status;
@@ -56,7 +60,8 @@ public class Services {
             String identifier,
             String endpoint,
             GetTokenDetailsStatus status) {
-        this(identifier, endpoint, Optional.empty(), Optional.empty(), status);
+        this(identifier, endpoint, Optional.empty(),
+            Optional.empty(), status);
     }
 
     @JsonIgnore
@@ -84,9 +89,10 @@ public class Services {
         return status;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Services withIdentifier(String identifier) {
         Utils.checkNotNull(identifier, "identifier");
@@ -106,6 +112,7 @@ public class Services {
         return this;
     }
 
+
     public Services withToken(Optional<String> token) {
         Utils.checkNotNull(token, "token");
         this.token = token;
@@ -117,6 +124,7 @@ public class Services {
         this.secret = Optional.ofNullable(secret);
         return this;
     }
+
 
     public Services withSecret(Optional<String> secret) {
         Utils.checkNotNull(secret, "secret");
@@ -130,7 +138,6 @@ public class Services {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -141,21 +148,18 @@ public class Services {
         }
         Services other = (Services) o;
         return 
-            Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.endpoint, other.endpoint) &&
-            Objects.deepEquals(this.token, other.token) &&
-            Objects.deepEquals(this.secret, other.secret) &&
-            Objects.deepEquals(this.status, other.status);
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.endpoint, other.endpoint) &&
+            Utils.enhancedDeepEquals(this.token, other.token) &&
+            Utils.enhancedDeepEquals(this.secret, other.secret) &&
+            Utils.enhancedDeepEquals(this.status, other.status);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            identifier,
-            endpoint,
-            token,
-            secret,
-            status);
+        return Utils.enhancedHash(
+            identifier, endpoint, token,
+            secret, status);
     }
     
     @Override
@@ -167,22 +171,24 @@ public class Services {
                 "secret", secret,
                 "status", status);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String identifier;
- 
+
         private String endpoint;
- 
+
         private Optional<String> token = Optional.empty();
- 
+
         private Optional<String> secret = Optional.empty();
- 
+
         private GetTokenDetailsStatus status;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder identifier(String identifier) {
             Utils.checkNotNull(identifier, "identifier");
@@ -190,11 +196,13 @@ public class Services {
             return this;
         }
 
+
         public Builder endpoint(String endpoint) {
             Utils.checkNotNull(endpoint, "endpoint");
             this.endpoint = endpoint;
             return this;
         }
+
 
         public Builder token(String token) {
             Utils.checkNotNull(token, "token");
@@ -208,6 +216,7 @@ public class Services {
             return this;
         }
 
+
         public Builder secret(String secret) {
             Utils.checkNotNull(secret, "secret");
             this.secret = Optional.ofNullable(secret);
@@ -220,19 +229,19 @@ public class Services {
             return this;
         }
 
+
         public Builder status(GetTokenDetailsStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;
         }
-        
+
         public Services build() {
+
             return new Services(
-                identifier,
-                endpoint,
-                token,
-                secret,
-                status);
+                identifier, endpoint, token,
+                secret, status);
         }
+
     }
 }

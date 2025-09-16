@@ -19,7 +19,7 @@ public enum QueryParamOnlyTransient {
     @JsonValue
     private final long value;
 
-    private QueryParamOnlyTransient(long value) {
+    QueryParamOnlyTransient(long value) {
         this.value = value;
     }
     

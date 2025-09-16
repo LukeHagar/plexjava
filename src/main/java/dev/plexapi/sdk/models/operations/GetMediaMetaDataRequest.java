@@ -10,11 +10,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetMediaMetaDataRequest {
 
+public class GetMediaMetaDataRequest {
     /**
      * The id(s) of the library item(s) to return metadata for. Can be a single ID or comma-separated list of IDs.
      */
@@ -147,7 +146,11 @@ public class GetMediaMetaDataRequest {
     
     public GetMediaMetaDataRequest(
             String ratingKey) {
-        this(ratingKey, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(ratingKey, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -262,9 +265,10 @@ public class GetMediaMetaDataRequest {
         return asyncRefreshLocalMediaAgent;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The id(s) of the library item(s) to return metadata for. Can be a single ID or comma-separated list of IDs.
@@ -284,6 +288,7 @@ public class GetMediaMetaDataRequest {
         return this;
     }
 
+
     /**
      * Include concerts data if set to true.
      */
@@ -301,6 +306,7 @@ public class GetMediaMetaDataRequest {
         this.includeExtras = Optional.ofNullable(includeExtras);
         return this;
     }
+
 
     /**
      * Include extra content (e.g. bonus features).
@@ -320,6 +326,7 @@ public class GetMediaMetaDataRequest {
         return this;
     }
 
+
     /**
      * Include on-deck items.
      */
@@ -337,6 +344,7 @@ public class GetMediaMetaDataRequest {
         this.includePopularLeaves = Optional.ofNullable(includePopularLeaves);
         return this;
     }
+
 
     /**
      * Include popular leaves (episodes/chapters).
@@ -356,6 +364,7 @@ public class GetMediaMetaDataRequest {
         return this;
     }
 
+
     /**
      * Include preferences information.
      */
@@ -373,6 +382,7 @@ public class GetMediaMetaDataRequest {
         this.includeReviews = Optional.ofNullable(includeReviews);
         return this;
     }
+
 
     /**
      * Include reviews for the content.
@@ -392,6 +402,7 @@ public class GetMediaMetaDataRequest {
         return this;
     }
 
+
     /**
      * Include chapter details.
      */
@@ -409,6 +420,7 @@ public class GetMediaMetaDataRequest {
         this.includeStations = Optional.ofNullable(includeStations);
         return this;
     }
+
 
     /**
      * Include station data.
@@ -428,6 +440,7 @@ public class GetMediaMetaDataRequest {
         return this;
     }
 
+
     /**
      * Include external media data.
      */
@@ -445,6 +458,7 @@ public class GetMediaMetaDataRequest {
         this.asyncAugmentMetadata = Optional.ofNullable(asyncAugmentMetadata);
         return this;
     }
+
 
     /**
      * Trigger asynchronous metadata augmentation.
@@ -464,6 +478,7 @@ public class GetMediaMetaDataRequest {
         return this;
     }
 
+
     /**
      * Trigger asynchronous file checking.
      */
@@ -481,6 +496,7 @@ public class GetMediaMetaDataRequest {
         this.asyncRefreshAnalysis = Optional.ofNullable(asyncRefreshAnalysis);
         return this;
     }
+
 
     /**
      * Trigger asynchronous refresh of analysis.
@@ -500,6 +516,7 @@ public class GetMediaMetaDataRequest {
         return this;
     }
 
+
     /**
      * Trigger asynchronous refresh of the local media agent.
      */
@@ -509,7 +526,6 @@ public class GetMediaMetaDataRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -520,39 +536,30 @@ public class GetMediaMetaDataRequest {
         }
         GetMediaMetaDataRequest other = (GetMediaMetaDataRequest) o;
         return 
-            Objects.deepEquals(this.ratingKey, other.ratingKey) &&
-            Objects.deepEquals(this.includeConcerts, other.includeConcerts) &&
-            Objects.deepEquals(this.includeExtras, other.includeExtras) &&
-            Objects.deepEquals(this.includeOnDeck, other.includeOnDeck) &&
-            Objects.deepEquals(this.includePopularLeaves, other.includePopularLeaves) &&
-            Objects.deepEquals(this.includePreferences, other.includePreferences) &&
-            Objects.deepEquals(this.includeReviews, other.includeReviews) &&
-            Objects.deepEquals(this.includeChapters, other.includeChapters) &&
-            Objects.deepEquals(this.includeStations, other.includeStations) &&
-            Objects.deepEquals(this.includeExternalMedia, other.includeExternalMedia) &&
-            Objects.deepEquals(this.asyncAugmentMetadata, other.asyncAugmentMetadata) &&
-            Objects.deepEquals(this.asyncCheckFiles, other.asyncCheckFiles) &&
-            Objects.deepEquals(this.asyncRefreshAnalysis, other.asyncRefreshAnalysis) &&
-            Objects.deepEquals(this.asyncRefreshLocalMediaAgent, other.asyncRefreshLocalMediaAgent);
+            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey) &&
+            Utils.enhancedDeepEquals(this.includeConcerts, other.includeConcerts) &&
+            Utils.enhancedDeepEquals(this.includeExtras, other.includeExtras) &&
+            Utils.enhancedDeepEquals(this.includeOnDeck, other.includeOnDeck) &&
+            Utils.enhancedDeepEquals(this.includePopularLeaves, other.includePopularLeaves) &&
+            Utils.enhancedDeepEquals(this.includePreferences, other.includePreferences) &&
+            Utils.enhancedDeepEquals(this.includeReviews, other.includeReviews) &&
+            Utils.enhancedDeepEquals(this.includeChapters, other.includeChapters) &&
+            Utils.enhancedDeepEquals(this.includeStations, other.includeStations) &&
+            Utils.enhancedDeepEquals(this.includeExternalMedia, other.includeExternalMedia) &&
+            Utils.enhancedDeepEquals(this.asyncAugmentMetadata, other.asyncAugmentMetadata) &&
+            Utils.enhancedDeepEquals(this.asyncCheckFiles, other.asyncCheckFiles) &&
+            Utils.enhancedDeepEquals(this.asyncRefreshAnalysis, other.asyncRefreshAnalysis) &&
+            Utils.enhancedDeepEquals(this.asyncRefreshLocalMediaAgent, other.asyncRefreshLocalMediaAgent);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            ratingKey,
-            includeConcerts,
-            includeExtras,
-            includeOnDeck,
-            includePopularLeaves,
-            includePreferences,
-            includeReviews,
-            includeChapters,
-            includeStations,
-            includeExternalMedia,
-            asyncAugmentMetadata,
-            asyncCheckFiles,
-            asyncRefreshAnalysis,
-            asyncRefreshLocalMediaAgent);
+        return Utils.enhancedHash(
+            ratingKey, includeConcerts, includeExtras,
+            includeOnDeck, includePopularLeaves, includePreferences,
+            includeReviews, includeChapters, includeStations,
+            includeExternalMedia, asyncAugmentMetadata, asyncCheckFiles,
+            asyncRefreshAnalysis, asyncRefreshLocalMediaAgent);
     }
     
     @Override
@@ -573,40 +580,42 @@ public class GetMediaMetaDataRequest {
                 "asyncRefreshAnalysis", asyncRefreshAnalysis,
                 "asyncRefreshLocalMediaAgent", asyncRefreshLocalMediaAgent);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String ratingKey;
- 
+
         private Optional<Boolean> includeConcerts = Optional.empty();
- 
+
         private Optional<Boolean> includeExtras = Optional.empty();
- 
+
         private Optional<Boolean> includeOnDeck = Optional.empty();
- 
+
         private Optional<Boolean> includePopularLeaves = Optional.empty();
- 
+
         private Optional<Boolean> includePreferences = Optional.empty();
- 
+
         private Optional<Boolean> includeReviews = Optional.empty();
- 
+
         private Optional<Boolean> includeChapters = Optional.empty();
- 
+
         private Optional<Boolean> includeStations = Optional.empty();
- 
+
         private Optional<Boolean> includeExternalMedia = Optional.empty();
- 
+
         private Optional<Boolean> asyncAugmentMetadata = Optional.empty();
- 
+
         private Optional<Boolean> asyncCheckFiles = Optional.empty();
- 
+
         private Optional<Boolean> asyncRefreshAnalysis = Optional.empty();
- 
+
         private Optional<Boolean> asyncRefreshLocalMediaAgent = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The id(s) of the library item(s) to return metadata for. Can be a single ID or comma-separated list of IDs.
@@ -616,6 +625,7 @@ public class GetMediaMetaDataRequest {
             this.ratingKey = ratingKey;
             return this;
         }
+
 
         /**
          * Include concerts data if set to true.
@@ -635,6 +645,7 @@ public class GetMediaMetaDataRequest {
             return this;
         }
 
+
         /**
          * Include extra content (e.g. bonus features).
          */
@@ -652,6 +663,7 @@ public class GetMediaMetaDataRequest {
             this.includeExtras = includeExtras;
             return this;
         }
+
 
         /**
          * Include on-deck items.
@@ -671,6 +683,7 @@ public class GetMediaMetaDataRequest {
             return this;
         }
 
+
         /**
          * Include popular leaves (episodes/chapters).
          */
@@ -688,6 +701,7 @@ public class GetMediaMetaDataRequest {
             this.includePopularLeaves = includePopularLeaves;
             return this;
         }
+
 
         /**
          * Include preferences information.
@@ -707,6 +721,7 @@ public class GetMediaMetaDataRequest {
             return this;
         }
 
+
         /**
          * Include reviews for the content.
          */
@@ -724,6 +739,7 @@ public class GetMediaMetaDataRequest {
             this.includeReviews = includeReviews;
             return this;
         }
+
 
         /**
          * Include chapter details.
@@ -743,6 +759,7 @@ public class GetMediaMetaDataRequest {
             return this;
         }
 
+
         /**
          * Include station data.
          */
@@ -760,6 +777,7 @@ public class GetMediaMetaDataRequest {
             this.includeStations = includeStations;
             return this;
         }
+
 
         /**
          * Include external media data.
@@ -779,6 +797,7 @@ public class GetMediaMetaDataRequest {
             return this;
         }
 
+
         /**
          * Trigger asynchronous metadata augmentation.
          */
@@ -796,6 +815,7 @@ public class GetMediaMetaDataRequest {
             this.asyncAugmentMetadata = asyncAugmentMetadata;
             return this;
         }
+
 
         /**
          * Trigger asynchronous file checking.
@@ -815,6 +835,7 @@ public class GetMediaMetaDataRequest {
             return this;
         }
 
+
         /**
          * Trigger asynchronous refresh of analysis.
          */
@@ -833,6 +854,7 @@ public class GetMediaMetaDataRequest {
             return this;
         }
 
+
         /**
          * Trigger asynchronous refresh of the local media agent.
          */
@@ -850,23 +872,16 @@ public class GetMediaMetaDataRequest {
             this.asyncRefreshLocalMediaAgent = asyncRefreshLocalMediaAgent;
             return this;
         }
-        
+
         public GetMediaMetaDataRequest build() {
+
             return new GetMediaMetaDataRequest(
-                ratingKey,
-                includeConcerts,
-                includeExtras,
-                includeOnDeck,
-                includePopularLeaves,
-                includePreferences,
-                includeReviews,
-                includeChapters,
-                includeStations,
-                includeExternalMedia,
-                asyncAugmentMetadata,
-                asyncCheckFiles,
-                asyncRefreshAnalysis,
-                asyncRefreshLocalMediaAgent);
+                ratingKey, includeConcerts, includeExtras,
+                includeOnDeck, includePopularLeaves, includePreferences,
+                includeReviews, includeChapters, includeStations,
+                includeExternalMedia, asyncAugmentMetadata, asyncCheckFiles,
+                asyncRefreshAnalysis, asyncRefreshLocalMediaAgent);
         }
+
     }
 }

@@ -3,16 +3,20 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetResizedPhoto;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class GetResizedPhotoRequestBuilder {
 
     private GetResizedPhotoRequest request;
-    private final SDKMethodInterfaces.MethodCallGetResizedPhoto sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetResizedPhotoRequestBuilder(SDKMethodInterfaces.MethodCallGetResizedPhoto sdk) {
-        this.sdk = sdk;
+    public GetResizedPhotoRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetResizedPhotoRequestBuilder request(GetResizedPhotoRequest request) {
@@ -22,8 +26,10 @@ public class GetResizedPhotoRequestBuilder {
     }
 
     public GetResizedPhotoResponse call() throws Exception {
+        
+        RequestOperation<GetResizedPhotoRequest, GetResizedPhotoResponse> operation
+              = new GetResizedPhoto.Sync(sdkConfiguration);
 
-        return sdk.getResizedPhoto(
-            request);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

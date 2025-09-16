@@ -10,11 +10,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetMetadataChildrenRequest {
 
+public class GetMetadataChildrenRequest {
     /**
      * the id of the library item to return the children of.
      */
@@ -58,9 +57,10 @@ public class GetMetadataChildrenRequest {
         return includeElements;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * the id of the library item to return the children of.
@@ -80,6 +80,7 @@ public class GetMetadataChildrenRequest {
         return this;
     }
 
+
     /**
      * Adds additional elements to the response. Supported types are (Stream)
      */
@@ -89,7 +90,6 @@ public class GetMetadataChildrenRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -100,15 +100,14 @@ public class GetMetadataChildrenRequest {
         }
         GetMetadataChildrenRequest other = (GetMetadataChildrenRequest) o;
         return 
-            Objects.deepEquals(this.ratingKey, other.ratingKey) &&
-            Objects.deepEquals(this.includeElements, other.includeElements);
+            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey) &&
+            Utils.enhancedDeepEquals(this.includeElements, other.includeElements);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            ratingKey,
-            includeElements);
+        return Utils.enhancedHash(
+            ratingKey, includeElements);
     }
     
     @Override
@@ -117,16 +116,18 @@ public class GetMetadataChildrenRequest {
                 "ratingKey", ratingKey,
                 "includeElements", includeElements);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Double ratingKey;
- 
+
         private Optional<String> includeElements = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * the id of the library item to return the children of.
@@ -136,6 +137,7 @@ public class GetMetadataChildrenRequest {
             this.ratingKey = ratingKey;
             return this;
         }
+
 
         /**
          * Adds additional elements to the response. Supported types are (Stream)
@@ -154,11 +156,12 @@ public class GetMetadataChildrenRequest {
             this.includeElements = includeElements;
             return this;
         }
-        
+
         public GetMetadataChildrenRequest build() {
+
             return new GetMetadataChildrenRequest(
-                ratingKey,
-                includeElements);
+                ratingKey, includeElements);
         }
+
     }
 }

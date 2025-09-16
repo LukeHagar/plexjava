@@ -13,8 +13,8 @@ import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetSessionsStream {
 
@@ -22,77 +22,96 @@ public class GetSessionsStream {
     @JsonProperty("albumGain")
     private Optional<String> albumGain;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("albumPeak")
     private Optional<String> albumPeak;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("albumRange")
     private Optional<String> albumRange;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioChannelLayout")
     private Optional<String> audioChannelLayout;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bitDepth")
     private Optional<Integer> bitDepth;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bitrate")
     private Optional<Integer> bitrate;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("channels")
     private Optional<Integer> channels;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("codec")
     private Optional<String> codec;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("displayTitle")
     private Optional<String> displayTitle;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("extendedDisplayTitle")
     private Optional<String> extendedDisplayTitle;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("gain")
     private Optional<String> gain;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("id")
     private Optional<String> id;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("index")
     private Optional<Integer> index;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("loudness")
     private Optional<String> loudness;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lra")
     private Optional<String> lra;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("peak")
     private Optional<String> peak;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("samplingRate")
     private Optional<Integer> samplingRate;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("selected")
     private Optional<Boolean> selected;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("streamType")
     private Optional<Integer> streamType;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("location")
@@ -163,7 +182,13 @@ public class GetSessionsStream {
     }
     
     public GetSessionsStream() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -266,15 +291,17 @@ public class GetSessionsStream {
         return location;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetSessionsStream withAlbumGain(String albumGain) {
         Utils.checkNotNull(albumGain, "albumGain");
         this.albumGain = Optional.ofNullable(albumGain);
         return this;
     }
+
 
     public GetSessionsStream withAlbumGain(Optional<String> albumGain) {
         Utils.checkNotNull(albumGain, "albumGain");
@@ -288,6 +315,7 @@ public class GetSessionsStream {
         return this;
     }
 
+
     public GetSessionsStream withAlbumPeak(Optional<String> albumPeak) {
         Utils.checkNotNull(albumPeak, "albumPeak");
         this.albumPeak = albumPeak;
@@ -299,6 +327,7 @@ public class GetSessionsStream {
         this.albumRange = Optional.ofNullable(albumRange);
         return this;
     }
+
 
     public GetSessionsStream withAlbumRange(Optional<String> albumRange) {
         Utils.checkNotNull(albumRange, "albumRange");
@@ -312,6 +341,7 @@ public class GetSessionsStream {
         return this;
     }
 
+
     public GetSessionsStream withAudioChannelLayout(Optional<String> audioChannelLayout) {
         Utils.checkNotNull(audioChannelLayout, "audioChannelLayout");
         this.audioChannelLayout = audioChannelLayout;
@@ -323,6 +353,7 @@ public class GetSessionsStream {
         this.bitDepth = Optional.ofNullable(bitDepth);
         return this;
     }
+
 
     public GetSessionsStream withBitDepth(Optional<Integer> bitDepth) {
         Utils.checkNotNull(bitDepth, "bitDepth");
@@ -336,6 +367,7 @@ public class GetSessionsStream {
         return this;
     }
 
+
     public GetSessionsStream withBitrate(Optional<Integer> bitrate) {
         Utils.checkNotNull(bitrate, "bitrate");
         this.bitrate = bitrate;
@@ -347,6 +379,7 @@ public class GetSessionsStream {
         this.channels = Optional.ofNullable(channels);
         return this;
     }
+
 
     public GetSessionsStream withChannels(Optional<Integer> channels) {
         Utils.checkNotNull(channels, "channels");
@@ -360,6 +393,7 @@ public class GetSessionsStream {
         return this;
     }
 
+
     public GetSessionsStream withCodec(Optional<String> codec) {
         Utils.checkNotNull(codec, "codec");
         this.codec = codec;
@@ -371,6 +405,7 @@ public class GetSessionsStream {
         this.displayTitle = Optional.ofNullable(displayTitle);
         return this;
     }
+
 
     public GetSessionsStream withDisplayTitle(Optional<String> displayTitle) {
         Utils.checkNotNull(displayTitle, "displayTitle");
@@ -384,6 +419,7 @@ public class GetSessionsStream {
         return this;
     }
 
+
     public GetSessionsStream withExtendedDisplayTitle(Optional<String> extendedDisplayTitle) {
         Utils.checkNotNull(extendedDisplayTitle, "extendedDisplayTitle");
         this.extendedDisplayTitle = extendedDisplayTitle;
@@ -395,6 +431,7 @@ public class GetSessionsStream {
         this.gain = Optional.ofNullable(gain);
         return this;
     }
+
 
     public GetSessionsStream withGain(Optional<String> gain) {
         Utils.checkNotNull(gain, "gain");
@@ -408,6 +445,7 @@ public class GetSessionsStream {
         return this;
     }
 
+
     public GetSessionsStream withId(Optional<String> id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
@@ -419,6 +457,7 @@ public class GetSessionsStream {
         this.index = Optional.ofNullable(index);
         return this;
     }
+
 
     public GetSessionsStream withIndex(Optional<Integer> index) {
         Utils.checkNotNull(index, "index");
@@ -432,6 +471,7 @@ public class GetSessionsStream {
         return this;
     }
 
+
     public GetSessionsStream withLoudness(Optional<String> loudness) {
         Utils.checkNotNull(loudness, "loudness");
         this.loudness = loudness;
@@ -443,6 +483,7 @@ public class GetSessionsStream {
         this.lra = Optional.ofNullable(lra);
         return this;
     }
+
 
     public GetSessionsStream withLra(Optional<String> lra) {
         Utils.checkNotNull(lra, "lra");
@@ -456,6 +497,7 @@ public class GetSessionsStream {
         return this;
     }
 
+
     public GetSessionsStream withPeak(Optional<String> peak) {
         Utils.checkNotNull(peak, "peak");
         this.peak = peak;
@@ -467,6 +509,7 @@ public class GetSessionsStream {
         this.samplingRate = Optional.ofNullable(samplingRate);
         return this;
     }
+
 
     public GetSessionsStream withSamplingRate(Optional<Integer> samplingRate) {
         Utils.checkNotNull(samplingRate, "samplingRate");
@@ -480,6 +523,7 @@ public class GetSessionsStream {
         return this;
     }
 
+
     public GetSessionsStream withSelected(Optional<Boolean> selected) {
         Utils.checkNotNull(selected, "selected");
         this.selected = selected;
@@ -491,6 +535,7 @@ public class GetSessionsStream {
         this.streamType = Optional.ofNullable(streamType);
         return this;
     }
+
 
     public GetSessionsStream withStreamType(Optional<Integer> streamType) {
         Utils.checkNotNull(streamType, "streamType");
@@ -504,13 +549,13 @@ public class GetSessionsStream {
         return this;
     }
 
+
     public GetSessionsStream withLocation(Optional<String> location) {
         Utils.checkNotNull(location, "location");
         this.location = location;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -521,51 +566,38 @@ public class GetSessionsStream {
         }
         GetSessionsStream other = (GetSessionsStream) o;
         return 
-            Objects.deepEquals(this.albumGain, other.albumGain) &&
-            Objects.deepEquals(this.albumPeak, other.albumPeak) &&
-            Objects.deepEquals(this.albumRange, other.albumRange) &&
-            Objects.deepEquals(this.audioChannelLayout, other.audioChannelLayout) &&
-            Objects.deepEquals(this.bitDepth, other.bitDepth) &&
-            Objects.deepEquals(this.bitrate, other.bitrate) &&
-            Objects.deepEquals(this.channels, other.channels) &&
-            Objects.deepEquals(this.codec, other.codec) &&
-            Objects.deepEquals(this.displayTitle, other.displayTitle) &&
-            Objects.deepEquals(this.extendedDisplayTitle, other.extendedDisplayTitle) &&
-            Objects.deepEquals(this.gain, other.gain) &&
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.index, other.index) &&
-            Objects.deepEquals(this.loudness, other.loudness) &&
-            Objects.deepEquals(this.lra, other.lra) &&
-            Objects.deepEquals(this.peak, other.peak) &&
-            Objects.deepEquals(this.samplingRate, other.samplingRate) &&
-            Objects.deepEquals(this.selected, other.selected) &&
-            Objects.deepEquals(this.streamType, other.streamType) &&
-            Objects.deepEquals(this.location, other.location);
+            Utils.enhancedDeepEquals(this.albumGain, other.albumGain) &&
+            Utils.enhancedDeepEquals(this.albumPeak, other.albumPeak) &&
+            Utils.enhancedDeepEquals(this.albumRange, other.albumRange) &&
+            Utils.enhancedDeepEquals(this.audioChannelLayout, other.audioChannelLayout) &&
+            Utils.enhancedDeepEquals(this.bitDepth, other.bitDepth) &&
+            Utils.enhancedDeepEquals(this.bitrate, other.bitrate) &&
+            Utils.enhancedDeepEquals(this.channels, other.channels) &&
+            Utils.enhancedDeepEquals(this.codec, other.codec) &&
+            Utils.enhancedDeepEquals(this.displayTitle, other.displayTitle) &&
+            Utils.enhancedDeepEquals(this.extendedDisplayTitle, other.extendedDisplayTitle) &&
+            Utils.enhancedDeepEquals(this.gain, other.gain) &&
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.index, other.index) &&
+            Utils.enhancedDeepEquals(this.loudness, other.loudness) &&
+            Utils.enhancedDeepEquals(this.lra, other.lra) &&
+            Utils.enhancedDeepEquals(this.peak, other.peak) &&
+            Utils.enhancedDeepEquals(this.samplingRate, other.samplingRate) &&
+            Utils.enhancedDeepEquals(this.selected, other.selected) &&
+            Utils.enhancedDeepEquals(this.streamType, other.streamType) &&
+            Utils.enhancedDeepEquals(this.location, other.location);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            albumGain,
-            albumPeak,
-            albumRange,
-            audioChannelLayout,
-            bitDepth,
-            bitrate,
-            channels,
-            codec,
-            displayTitle,
-            extendedDisplayTitle,
-            gain,
-            id,
-            index,
-            loudness,
-            lra,
-            peak,
-            samplingRate,
-            selected,
-            streamType,
-            location);
+        return Utils.enhancedHash(
+            albumGain, albumPeak, albumRange,
+            audioChannelLayout, bitDepth, bitrate,
+            channels, codec, displayTitle,
+            extendedDisplayTitle, gain, id,
+            index, loudness, lra,
+            peak, samplingRate, selected,
+            streamType, location);
     }
     
     @Override
@@ -592,52 +624,54 @@ public class GetSessionsStream {
                 "streamType", streamType,
                 "location", location);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> albumGain = Optional.empty();
- 
+
         private Optional<String> albumPeak = Optional.empty();
- 
+
         private Optional<String> albumRange = Optional.empty();
- 
+
         private Optional<String> audioChannelLayout = Optional.empty();
- 
+
         private Optional<Integer> bitDepth = Optional.empty();
- 
+
         private Optional<Integer> bitrate = Optional.empty();
- 
+
         private Optional<Integer> channels = Optional.empty();
- 
+
         private Optional<String> codec = Optional.empty();
- 
+
         private Optional<String> displayTitle = Optional.empty();
- 
+
         private Optional<String> extendedDisplayTitle = Optional.empty();
- 
+
         private Optional<String> gain = Optional.empty();
- 
+
         private Optional<String> id = Optional.empty();
- 
+
         private Optional<Integer> index = Optional.empty();
- 
+
         private Optional<String> loudness = Optional.empty();
- 
+
         private Optional<String> lra = Optional.empty();
- 
+
         private Optional<String> peak = Optional.empty();
- 
+
         private Optional<Integer> samplingRate = Optional.empty();
- 
+
         private Optional<Boolean> selected = Optional.empty();
- 
+
         private Optional<Integer> streamType = Optional.empty();
- 
+
         private Optional<String> location = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder albumGain(String albumGain) {
             Utils.checkNotNull(albumGain, "albumGain");
@@ -651,6 +685,7 @@ public class GetSessionsStream {
             return this;
         }
 
+
         public Builder albumPeak(String albumPeak) {
             Utils.checkNotNull(albumPeak, "albumPeak");
             this.albumPeak = Optional.ofNullable(albumPeak);
@@ -662,6 +697,7 @@ public class GetSessionsStream {
             this.albumPeak = albumPeak;
             return this;
         }
+
 
         public Builder albumRange(String albumRange) {
             Utils.checkNotNull(albumRange, "albumRange");
@@ -675,6 +711,7 @@ public class GetSessionsStream {
             return this;
         }
 
+
         public Builder audioChannelLayout(String audioChannelLayout) {
             Utils.checkNotNull(audioChannelLayout, "audioChannelLayout");
             this.audioChannelLayout = Optional.ofNullable(audioChannelLayout);
@@ -686,6 +723,7 @@ public class GetSessionsStream {
             this.audioChannelLayout = audioChannelLayout;
             return this;
         }
+
 
         public Builder bitDepth(int bitDepth) {
             Utils.checkNotNull(bitDepth, "bitDepth");
@@ -699,6 +737,7 @@ public class GetSessionsStream {
             return this;
         }
 
+
         public Builder bitrate(int bitrate) {
             Utils.checkNotNull(bitrate, "bitrate");
             this.bitrate = Optional.ofNullable(bitrate);
@@ -710,6 +749,7 @@ public class GetSessionsStream {
             this.bitrate = bitrate;
             return this;
         }
+
 
         public Builder channels(int channels) {
             Utils.checkNotNull(channels, "channels");
@@ -723,6 +763,7 @@ public class GetSessionsStream {
             return this;
         }
 
+
         public Builder codec(String codec) {
             Utils.checkNotNull(codec, "codec");
             this.codec = Optional.ofNullable(codec);
@@ -734,6 +775,7 @@ public class GetSessionsStream {
             this.codec = codec;
             return this;
         }
+
 
         public Builder displayTitle(String displayTitle) {
             Utils.checkNotNull(displayTitle, "displayTitle");
@@ -747,6 +789,7 @@ public class GetSessionsStream {
             return this;
         }
 
+
         public Builder extendedDisplayTitle(String extendedDisplayTitle) {
             Utils.checkNotNull(extendedDisplayTitle, "extendedDisplayTitle");
             this.extendedDisplayTitle = Optional.ofNullable(extendedDisplayTitle);
@@ -758,6 +801,7 @@ public class GetSessionsStream {
             this.extendedDisplayTitle = extendedDisplayTitle;
             return this;
         }
+
 
         public Builder gain(String gain) {
             Utils.checkNotNull(gain, "gain");
@@ -771,6 +815,7 @@ public class GetSessionsStream {
             return this;
         }
 
+
         public Builder id(String id) {
             Utils.checkNotNull(id, "id");
             this.id = Optional.ofNullable(id);
@@ -782,6 +827,7 @@ public class GetSessionsStream {
             this.id = id;
             return this;
         }
+
 
         public Builder index(int index) {
             Utils.checkNotNull(index, "index");
@@ -795,6 +841,7 @@ public class GetSessionsStream {
             return this;
         }
 
+
         public Builder loudness(String loudness) {
             Utils.checkNotNull(loudness, "loudness");
             this.loudness = Optional.ofNullable(loudness);
@@ -806,6 +853,7 @@ public class GetSessionsStream {
             this.loudness = loudness;
             return this;
         }
+
 
         public Builder lra(String lra) {
             Utils.checkNotNull(lra, "lra");
@@ -819,6 +867,7 @@ public class GetSessionsStream {
             return this;
         }
 
+
         public Builder peak(String peak) {
             Utils.checkNotNull(peak, "peak");
             this.peak = Optional.ofNullable(peak);
@@ -830,6 +879,7 @@ public class GetSessionsStream {
             this.peak = peak;
             return this;
         }
+
 
         public Builder samplingRate(int samplingRate) {
             Utils.checkNotNull(samplingRate, "samplingRate");
@@ -843,6 +893,7 @@ public class GetSessionsStream {
             return this;
         }
 
+
         public Builder selected(boolean selected) {
             Utils.checkNotNull(selected, "selected");
             this.selected = Optional.ofNullable(selected);
@@ -854,6 +905,7 @@ public class GetSessionsStream {
             this.selected = selected;
             return this;
         }
+
 
         public Builder streamType(int streamType) {
             Utils.checkNotNull(streamType, "streamType");
@@ -867,6 +919,7 @@ public class GetSessionsStream {
             return this;
         }
 
+
         public Builder location(String location) {
             Utils.checkNotNull(location, "location");
             this.location = Optional.ofNullable(location);
@@ -878,29 +931,18 @@ public class GetSessionsStream {
             this.location = location;
             return this;
         }
-        
+
         public GetSessionsStream build() {
+
             return new GetSessionsStream(
-                albumGain,
-                albumPeak,
-                albumRange,
-                audioChannelLayout,
-                bitDepth,
-                bitrate,
-                channels,
-                codec,
-                displayTitle,
-                extendedDisplayTitle,
-                gain,
-                id,
-                index,
-                loudness,
-                lra,
-                peak,
-                samplingRate,
-                selected,
-                streamType,
-                location);
+                albumGain, albumPeak, albumRange,
+                audioChannelLayout, bitDepth, bitrate,
+                channels, codec, displayTitle,
+                extendedDisplayTitle, gain, id,
+                index, loudness, lra,
+                peak, samplingRate, selected,
+                streamType, location);
         }
+
     }
 }

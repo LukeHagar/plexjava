@@ -13,8 +13,8 @@ import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetPlaylistsMetadata {
 
@@ -22,61 +22,76 @@ public class GetPlaylistsMetadata {
     @JsonProperty("ratingKey")
     private Optional<String> ratingKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("guid")
     private Optional<String> guid;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
     private Optional<String> type;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("summary")
     private Optional<String> summary;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("smart")
     private Optional<Boolean> smart;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("playlistType")
     private Optional<String> playlistType;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("composite")
     private Optional<String> composite;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("icon")
     private Optional<String> icon;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("viewCount")
     private Optional<Integer> viewCount;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lastViewedAt")
     private Optional<Integer> lastViewedAt;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
     private Optional<Integer> duration;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("leafCount")
     private Optional<Integer> leafCount;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("addedAt")
     private Optional<Integer> addedAt;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("updatedAt")
@@ -135,7 +150,12 @@ public class GetPlaylistsMetadata {
     }
     
     public GetPlaylistsMetadata() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -218,15 +238,17 @@ public class GetPlaylistsMetadata {
         return updatedAt;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetPlaylistsMetadata withRatingKey(String ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         this.ratingKey = Optional.ofNullable(ratingKey);
         return this;
     }
+
 
     public GetPlaylistsMetadata withRatingKey(Optional<String> ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
@@ -240,6 +262,7 @@ public class GetPlaylistsMetadata {
         return this;
     }
 
+
     public GetPlaylistsMetadata withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
@@ -251,6 +274,7 @@ public class GetPlaylistsMetadata {
         this.guid = Optional.ofNullable(guid);
         return this;
     }
+
 
     public GetPlaylistsMetadata withGuid(Optional<String> guid) {
         Utils.checkNotNull(guid, "guid");
@@ -264,6 +288,7 @@ public class GetPlaylistsMetadata {
         return this;
     }
 
+
     public GetPlaylistsMetadata withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
@@ -275,6 +300,7 @@ public class GetPlaylistsMetadata {
         this.title = Optional.ofNullable(title);
         return this;
     }
+
 
     public GetPlaylistsMetadata withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
@@ -288,6 +314,7 @@ public class GetPlaylistsMetadata {
         return this;
     }
 
+
     public GetPlaylistsMetadata withSummary(Optional<String> summary) {
         Utils.checkNotNull(summary, "summary");
         this.summary = summary;
@@ -299,6 +326,7 @@ public class GetPlaylistsMetadata {
         this.smart = Optional.ofNullable(smart);
         return this;
     }
+
 
     public GetPlaylistsMetadata withSmart(Optional<Boolean> smart) {
         Utils.checkNotNull(smart, "smart");
@@ -312,6 +340,7 @@ public class GetPlaylistsMetadata {
         return this;
     }
 
+
     public GetPlaylistsMetadata withPlaylistType(Optional<String> playlistType) {
         Utils.checkNotNull(playlistType, "playlistType");
         this.playlistType = playlistType;
@@ -323,6 +352,7 @@ public class GetPlaylistsMetadata {
         this.composite = Optional.ofNullable(composite);
         return this;
     }
+
 
     public GetPlaylistsMetadata withComposite(Optional<String> composite) {
         Utils.checkNotNull(composite, "composite");
@@ -336,6 +366,7 @@ public class GetPlaylistsMetadata {
         return this;
     }
 
+
     public GetPlaylistsMetadata withIcon(Optional<String> icon) {
         Utils.checkNotNull(icon, "icon");
         this.icon = icon;
@@ -347,6 +378,7 @@ public class GetPlaylistsMetadata {
         this.viewCount = Optional.ofNullable(viewCount);
         return this;
     }
+
 
     public GetPlaylistsMetadata withViewCount(Optional<Integer> viewCount) {
         Utils.checkNotNull(viewCount, "viewCount");
@@ -360,6 +392,7 @@ public class GetPlaylistsMetadata {
         return this;
     }
 
+
     public GetPlaylistsMetadata withLastViewedAt(Optional<Integer> lastViewedAt) {
         Utils.checkNotNull(lastViewedAt, "lastViewedAt");
         this.lastViewedAt = lastViewedAt;
@@ -371,6 +404,7 @@ public class GetPlaylistsMetadata {
         this.duration = Optional.ofNullable(duration);
         return this;
     }
+
 
     public GetPlaylistsMetadata withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
@@ -384,6 +418,7 @@ public class GetPlaylistsMetadata {
         return this;
     }
 
+
     public GetPlaylistsMetadata withLeafCount(Optional<Integer> leafCount) {
         Utils.checkNotNull(leafCount, "leafCount");
         this.leafCount = leafCount;
@@ -395,6 +430,7 @@ public class GetPlaylistsMetadata {
         this.addedAt = Optional.ofNullable(addedAt);
         return this;
     }
+
 
     public GetPlaylistsMetadata withAddedAt(Optional<Integer> addedAt) {
         Utils.checkNotNull(addedAt, "addedAt");
@@ -408,13 +444,13 @@ public class GetPlaylistsMetadata {
         return this;
     }
 
+
     public GetPlaylistsMetadata withUpdatedAt(Optional<Integer> updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
         this.updatedAt = updatedAt;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -425,42 +461,32 @@ public class GetPlaylistsMetadata {
         }
         GetPlaylistsMetadata other = (GetPlaylistsMetadata) o;
         return 
-            Objects.deepEquals(this.ratingKey, other.ratingKey) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.guid, other.guid) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.summary, other.summary) &&
-            Objects.deepEquals(this.smart, other.smart) &&
-            Objects.deepEquals(this.playlistType, other.playlistType) &&
-            Objects.deepEquals(this.composite, other.composite) &&
-            Objects.deepEquals(this.icon, other.icon) &&
-            Objects.deepEquals(this.viewCount, other.viewCount) &&
-            Objects.deepEquals(this.lastViewedAt, other.lastViewedAt) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.leafCount, other.leafCount) &&
-            Objects.deepEquals(this.addedAt, other.addedAt) &&
-            Objects.deepEquals(this.updatedAt, other.updatedAt);
+            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.guid, other.guid) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.summary, other.summary) &&
+            Utils.enhancedDeepEquals(this.smart, other.smart) &&
+            Utils.enhancedDeepEquals(this.playlistType, other.playlistType) &&
+            Utils.enhancedDeepEquals(this.composite, other.composite) &&
+            Utils.enhancedDeepEquals(this.icon, other.icon) &&
+            Utils.enhancedDeepEquals(this.viewCount, other.viewCount) &&
+            Utils.enhancedDeepEquals(this.lastViewedAt, other.lastViewedAt) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.leafCount, other.leafCount) &&
+            Utils.enhancedDeepEquals(this.addedAt, other.addedAt) &&
+            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            ratingKey,
-            key,
-            guid,
-            type,
-            title,
-            summary,
-            smart,
-            playlistType,
-            composite,
-            icon,
-            viewCount,
-            lastViewedAt,
-            duration,
-            leafCount,
-            addedAt,
+        return Utils.enhancedHash(
+            ratingKey, key, guid,
+            type, title, summary,
+            smart, playlistType, composite,
+            icon, viewCount, lastViewedAt,
+            duration, leafCount, addedAt,
             updatedAt);
     }
     
@@ -484,44 +510,46 @@ public class GetPlaylistsMetadata {
                 "addedAt", addedAt,
                 "updatedAt", updatedAt);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> ratingKey = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> guid = Optional.empty();
- 
+
         private Optional<String> type = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> summary = Optional.empty();
- 
+
         private Optional<Boolean> smart = Optional.empty();
- 
+
         private Optional<String> playlistType = Optional.empty();
- 
+
         private Optional<String> composite = Optional.empty();
- 
+
         private Optional<String> icon = Optional.empty();
- 
+
         private Optional<Integer> viewCount = Optional.empty();
- 
+
         private Optional<Integer> lastViewedAt = Optional.empty();
- 
+
         private Optional<Integer> duration = Optional.empty();
- 
+
         private Optional<Integer> leafCount = Optional.empty();
- 
+
         private Optional<Integer> addedAt = Optional.empty();
- 
+
         private Optional<Integer> updatedAt = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder ratingKey(String ratingKey) {
             Utils.checkNotNull(ratingKey, "ratingKey");
@@ -535,6 +563,7 @@ public class GetPlaylistsMetadata {
             return this;
         }
 
+
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = Optional.ofNullable(key);
@@ -546,6 +575,7 @@ public class GetPlaylistsMetadata {
             this.key = key;
             return this;
         }
+
 
         public Builder guid(String guid) {
             Utils.checkNotNull(guid, "guid");
@@ -559,6 +589,7 @@ public class GetPlaylistsMetadata {
             return this;
         }
 
+
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = Optional.ofNullable(type);
@@ -570,6 +601,7 @@ public class GetPlaylistsMetadata {
             this.type = type;
             return this;
         }
+
 
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
@@ -583,6 +615,7 @@ public class GetPlaylistsMetadata {
             return this;
         }
 
+
         public Builder summary(String summary) {
             Utils.checkNotNull(summary, "summary");
             this.summary = Optional.ofNullable(summary);
@@ -594,6 +627,7 @@ public class GetPlaylistsMetadata {
             this.summary = summary;
             return this;
         }
+
 
         public Builder smart(boolean smart) {
             Utils.checkNotNull(smart, "smart");
@@ -607,6 +641,7 @@ public class GetPlaylistsMetadata {
             return this;
         }
 
+
         public Builder playlistType(String playlistType) {
             Utils.checkNotNull(playlistType, "playlistType");
             this.playlistType = Optional.ofNullable(playlistType);
@@ -618,6 +653,7 @@ public class GetPlaylistsMetadata {
             this.playlistType = playlistType;
             return this;
         }
+
 
         public Builder composite(String composite) {
             Utils.checkNotNull(composite, "composite");
@@ -631,6 +667,7 @@ public class GetPlaylistsMetadata {
             return this;
         }
 
+
         public Builder icon(String icon) {
             Utils.checkNotNull(icon, "icon");
             this.icon = Optional.ofNullable(icon);
@@ -642,6 +679,7 @@ public class GetPlaylistsMetadata {
             this.icon = icon;
             return this;
         }
+
 
         public Builder viewCount(int viewCount) {
             Utils.checkNotNull(viewCount, "viewCount");
@@ -655,6 +693,7 @@ public class GetPlaylistsMetadata {
             return this;
         }
 
+
         public Builder lastViewedAt(int lastViewedAt) {
             Utils.checkNotNull(lastViewedAt, "lastViewedAt");
             this.lastViewedAt = Optional.ofNullable(lastViewedAt);
@@ -666,6 +705,7 @@ public class GetPlaylistsMetadata {
             this.lastViewedAt = lastViewedAt;
             return this;
         }
+
 
         public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
@@ -679,6 +719,7 @@ public class GetPlaylistsMetadata {
             return this;
         }
 
+
         public Builder leafCount(int leafCount) {
             Utils.checkNotNull(leafCount, "leafCount");
             this.leafCount = Optional.ofNullable(leafCount);
@@ -690,6 +731,7 @@ public class GetPlaylistsMetadata {
             this.leafCount = leafCount;
             return this;
         }
+
 
         public Builder addedAt(int addedAt) {
             Utils.checkNotNull(addedAt, "addedAt");
@@ -703,6 +745,7 @@ public class GetPlaylistsMetadata {
             return this;
         }
 
+
         public Builder updatedAt(int updatedAt) {
             Utils.checkNotNull(updatedAt, "updatedAt");
             this.updatedAt = Optional.ofNullable(updatedAt);
@@ -714,25 +757,17 @@ public class GetPlaylistsMetadata {
             this.updatedAt = updatedAt;
             return this;
         }
-        
+
         public GetPlaylistsMetadata build() {
+
             return new GetPlaylistsMetadata(
-                ratingKey,
-                key,
-                guid,
-                type,
-                title,
-                summary,
-                smart,
-                playlistType,
-                composite,
-                icon,
-                viewCount,
-                lastViewedAt,
-                duration,
-                leafCount,
-                addedAt,
+                ratingKey, key, guid,
+                type, title, summary,
+                smart, playlistType, composite,
+                icon, viewCount, lastViewedAt,
+                duration, leafCount, addedAt,
                 updatedAt);
         }
+
     }
 }

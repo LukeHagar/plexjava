@@ -14,8 +14,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetLibraryDetailsType {
 
@@ -23,25 +23,31 @@ public class GetLibraryDetailsType {
     @JsonProperty("key")
     private Optional<String> key;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
     private Optional<String> type;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("active")
     private Optional<Boolean> active;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Filter")
     private Optional<? extends List<GetLibraryDetailsFilter>> filter;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Sort")
     private Optional<? extends List<GetLibraryDetailsSort>> sort;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Field")
@@ -73,7 +79,9 @@ public class GetLibraryDetailsType {
     }
     
     public GetLibraryDetailsType() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -114,15 +122,17 @@ public class GetLibraryDetailsType {
         return (Optional<List<GetLibraryDetailsField>>) field;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetLibraryDetailsType withKey(String key) {
         Utils.checkNotNull(key, "key");
         this.key = Optional.ofNullable(key);
         return this;
     }
+
 
     public GetLibraryDetailsType withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
@@ -136,6 +146,7 @@ public class GetLibraryDetailsType {
         return this;
     }
 
+
     public GetLibraryDetailsType withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
@@ -147,6 +158,7 @@ public class GetLibraryDetailsType {
         this.title = Optional.ofNullable(title);
         return this;
     }
+
 
     public GetLibraryDetailsType withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
@@ -160,6 +172,7 @@ public class GetLibraryDetailsType {
         return this;
     }
 
+
     public GetLibraryDetailsType withActive(Optional<Boolean> active) {
         Utils.checkNotNull(active, "active");
         this.active = active;
@@ -171,6 +184,7 @@ public class GetLibraryDetailsType {
         this.filter = Optional.ofNullable(filter);
         return this;
     }
+
 
     public GetLibraryDetailsType withFilter(Optional<? extends List<GetLibraryDetailsFilter>> filter) {
         Utils.checkNotNull(filter, "filter");
@@ -184,6 +198,7 @@ public class GetLibraryDetailsType {
         return this;
     }
 
+
     public GetLibraryDetailsType withSort(Optional<? extends List<GetLibraryDetailsSort>> sort) {
         Utils.checkNotNull(sort, "sort");
         this.sort = sort;
@@ -196,13 +211,13 @@ public class GetLibraryDetailsType {
         return this;
     }
 
+
     public GetLibraryDetailsType withField(Optional<? extends List<GetLibraryDetailsField>> field) {
         Utils.checkNotNull(field, "field");
         this.field = field;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -213,24 +228,20 @@ public class GetLibraryDetailsType {
         }
         GetLibraryDetailsType other = (GetLibraryDetailsType) o;
         return 
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.active, other.active) &&
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.sort, other.sort) &&
-            Objects.deepEquals(this.field, other.field);
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.active, other.active) &&
+            Utils.enhancedDeepEquals(this.filter, other.filter) &&
+            Utils.enhancedDeepEquals(this.sort, other.sort) &&
+            Utils.enhancedDeepEquals(this.field, other.field);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            key,
-            type,
-            title,
-            active,
-            filter,
-            sort,
+        return Utils.enhancedHash(
+            key, type, title,
+            active, filter, sort,
             field);
     }
     
@@ -245,26 +256,28 @@ public class GetLibraryDetailsType {
                 "sort", sort,
                 "field", field);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> type = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<Boolean> active = Optional.empty();
- 
+
         private Optional<? extends List<GetLibraryDetailsFilter>> filter = Optional.empty();
- 
+
         private Optional<? extends List<GetLibraryDetailsSort>> sort = Optional.empty();
- 
+
         private Optional<? extends List<GetLibraryDetailsField>> field = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
@@ -278,6 +291,7 @@ public class GetLibraryDetailsType {
             return this;
         }
 
+
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = Optional.ofNullable(type);
@@ -289,6 +303,7 @@ public class GetLibraryDetailsType {
             this.type = type;
             return this;
         }
+
 
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
@@ -302,6 +317,7 @@ public class GetLibraryDetailsType {
             return this;
         }
 
+
         public Builder active(boolean active) {
             Utils.checkNotNull(active, "active");
             this.active = Optional.ofNullable(active);
@@ -313,6 +329,7 @@ public class GetLibraryDetailsType {
             this.active = active;
             return this;
         }
+
 
         public Builder filter(List<GetLibraryDetailsFilter> filter) {
             Utils.checkNotNull(filter, "filter");
@@ -326,6 +343,7 @@ public class GetLibraryDetailsType {
             return this;
         }
 
+
         public Builder sort(List<GetLibraryDetailsSort> sort) {
             Utils.checkNotNull(sort, "sort");
             this.sort = Optional.ofNullable(sort);
@@ -338,6 +356,7 @@ public class GetLibraryDetailsType {
             return this;
         }
 
+
         public Builder field(List<GetLibraryDetailsField> field) {
             Utils.checkNotNull(field, "field");
             this.field = Optional.ofNullable(field);
@@ -349,16 +368,14 @@ public class GetLibraryDetailsType {
             this.field = field;
             return this;
         }
-        
+
         public GetLibraryDetailsType build() {
+
             return new GetLibraryDetailsType(
-                key,
-                type,
-                title,
-                active,
-                filter,
-                sort,
+                key, type, title,
+                active, filter, sort,
                 field);
         }
+
     }
 }

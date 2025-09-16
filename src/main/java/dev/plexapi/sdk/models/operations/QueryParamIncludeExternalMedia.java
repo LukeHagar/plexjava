@@ -17,7 +17,7 @@ public enum QueryParamIncludeExternalMedia {
     @JsonValue
     private final int value;
 
-    private QueryParamIncludeExternalMedia(int value) {
+    QueryParamIncludeExternalMedia(int value) {
         this.value = value;
     }
     

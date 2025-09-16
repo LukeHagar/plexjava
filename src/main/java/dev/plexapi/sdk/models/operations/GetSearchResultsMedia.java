@@ -14,8 +14,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetSearchResultsMedia {
 
@@ -23,57 +23,71 @@ public class GetSearchResultsMedia {
     @JsonProperty("id")
     private Optional<Double> id;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
     private Optional<Double> duration;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bitrate")
     private Optional<Double> bitrate;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("width")
     private Optional<Double> width;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("height")
     private Optional<Double> height;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("aspectRatio")
     private Optional<Double> aspectRatio;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioChannels")
     private Optional<Double> audioChannels;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioCodec")
     private Optional<String> audioCodec;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoCodec")
     private Optional<String> videoCodec;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoResolution")
     private Optional<Double> videoResolution;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("container")
     private Optional<String> container;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoFrameRate")
     private Optional<String> videoFrameRate;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioProfile")
     private Optional<String> audioProfile;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoProfile")
     private Optional<String> videoProfile;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Part")
@@ -129,7 +143,11 @@ public class GetSearchResultsMedia {
     }
     
     public GetSearchResultsMedia() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -208,15 +226,17 @@ public class GetSearchResultsMedia {
         return (Optional<List<GetSearchResultsPart>>) part;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetSearchResultsMedia withId(double id) {
         Utils.checkNotNull(id, "id");
         this.id = Optional.ofNullable(id);
         return this;
     }
+
 
     public GetSearchResultsMedia withId(Optional<Double> id) {
         Utils.checkNotNull(id, "id");
@@ -230,6 +250,7 @@ public class GetSearchResultsMedia {
         return this;
     }
 
+
     public GetSearchResultsMedia withDuration(Optional<Double> duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = duration;
@@ -241,6 +262,7 @@ public class GetSearchResultsMedia {
         this.bitrate = Optional.ofNullable(bitrate);
         return this;
     }
+
 
     public GetSearchResultsMedia withBitrate(Optional<Double> bitrate) {
         Utils.checkNotNull(bitrate, "bitrate");
@@ -254,6 +276,7 @@ public class GetSearchResultsMedia {
         return this;
     }
 
+
     public GetSearchResultsMedia withWidth(Optional<Double> width) {
         Utils.checkNotNull(width, "width");
         this.width = width;
@@ -265,6 +288,7 @@ public class GetSearchResultsMedia {
         this.height = Optional.ofNullable(height);
         return this;
     }
+
 
     public GetSearchResultsMedia withHeight(Optional<Double> height) {
         Utils.checkNotNull(height, "height");
@@ -278,6 +302,7 @@ public class GetSearchResultsMedia {
         return this;
     }
 
+
     public GetSearchResultsMedia withAspectRatio(Optional<Double> aspectRatio) {
         Utils.checkNotNull(aspectRatio, "aspectRatio");
         this.aspectRatio = aspectRatio;
@@ -289,6 +314,7 @@ public class GetSearchResultsMedia {
         this.audioChannels = Optional.ofNullable(audioChannels);
         return this;
     }
+
 
     public GetSearchResultsMedia withAudioChannels(Optional<Double> audioChannels) {
         Utils.checkNotNull(audioChannels, "audioChannels");
@@ -302,6 +328,7 @@ public class GetSearchResultsMedia {
         return this;
     }
 
+
     public GetSearchResultsMedia withAudioCodec(Optional<String> audioCodec) {
         Utils.checkNotNull(audioCodec, "audioCodec");
         this.audioCodec = audioCodec;
@@ -313,6 +340,7 @@ public class GetSearchResultsMedia {
         this.videoCodec = Optional.ofNullable(videoCodec);
         return this;
     }
+
 
     public GetSearchResultsMedia withVideoCodec(Optional<String> videoCodec) {
         Utils.checkNotNull(videoCodec, "videoCodec");
@@ -326,6 +354,7 @@ public class GetSearchResultsMedia {
         return this;
     }
 
+
     public GetSearchResultsMedia withVideoResolution(Optional<Double> videoResolution) {
         Utils.checkNotNull(videoResolution, "videoResolution");
         this.videoResolution = videoResolution;
@@ -337,6 +366,7 @@ public class GetSearchResultsMedia {
         this.container = Optional.ofNullable(container);
         return this;
     }
+
 
     public GetSearchResultsMedia withContainer(Optional<String> container) {
         Utils.checkNotNull(container, "container");
@@ -350,6 +380,7 @@ public class GetSearchResultsMedia {
         return this;
     }
 
+
     public GetSearchResultsMedia withVideoFrameRate(Optional<String> videoFrameRate) {
         Utils.checkNotNull(videoFrameRate, "videoFrameRate");
         this.videoFrameRate = videoFrameRate;
@@ -361,6 +392,7 @@ public class GetSearchResultsMedia {
         this.audioProfile = Optional.ofNullable(audioProfile);
         return this;
     }
+
 
     public GetSearchResultsMedia withAudioProfile(Optional<String> audioProfile) {
         Utils.checkNotNull(audioProfile, "audioProfile");
@@ -374,6 +406,7 @@ public class GetSearchResultsMedia {
         return this;
     }
 
+
     public GetSearchResultsMedia withVideoProfile(Optional<String> videoProfile) {
         Utils.checkNotNull(videoProfile, "videoProfile");
         this.videoProfile = videoProfile;
@@ -386,13 +419,13 @@ public class GetSearchResultsMedia {
         return this;
     }
 
+
     public GetSearchResultsMedia withPart(Optional<? extends List<GetSearchResultsPart>> part) {
         Utils.checkNotNull(part, "part");
         this.part = part;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -403,41 +436,31 @@ public class GetSearchResultsMedia {
         }
         GetSearchResultsMedia other = (GetSearchResultsMedia) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.bitrate, other.bitrate) &&
-            Objects.deepEquals(this.width, other.width) &&
-            Objects.deepEquals(this.height, other.height) &&
-            Objects.deepEquals(this.aspectRatio, other.aspectRatio) &&
-            Objects.deepEquals(this.audioChannels, other.audioChannels) &&
-            Objects.deepEquals(this.audioCodec, other.audioCodec) &&
-            Objects.deepEquals(this.videoCodec, other.videoCodec) &&
-            Objects.deepEquals(this.videoResolution, other.videoResolution) &&
-            Objects.deepEquals(this.container, other.container) &&
-            Objects.deepEquals(this.videoFrameRate, other.videoFrameRate) &&
-            Objects.deepEquals(this.audioProfile, other.audioProfile) &&
-            Objects.deepEquals(this.videoProfile, other.videoProfile) &&
-            Objects.deepEquals(this.part, other.part);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.bitrate, other.bitrate) &&
+            Utils.enhancedDeepEquals(this.width, other.width) &&
+            Utils.enhancedDeepEquals(this.height, other.height) &&
+            Utils.enhancedDeepEquals(this.aspectRatio, other.aspectRatio) &&
+            Utils.enhancedDeepEquals(this.audioChannels, other.audioChannels) &&
+            Utils.enhancedDeepEquals(this.audioCodec, other.audioCodec) &&
+            Utils.enhancedDeepEquals(this.videoCodec, other.videoCodec) &&
+            Utils.enhancedDeepEquals(this.videoResolution, other.videoResolution) &&
+            Utils.enhancedDeepEquals(this.container, other.container) &&
+            Utils.enhancedDeepEquals(this.videoFrameRate, other.videoFrameRate) &&
+            Utils.enhancedDeepEquals(this.audioProfile, other.audioProfile) &&
+            Utils.enhancedDeepEquals(this.videoProfile, other.videoProfile) &&
+            Utils.enhancedDeepEquals(this.part, other.part);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            duration,
-            bitrate,
-            width,
-            height,
-            aspectRatio,
-            audioChannels,
-            audioCodec,
-            videoCodec,
-            videoResolution,
-            container,
-            videoFrameRate,
-            audioProfile,
-            videoProfile,
-            part);
+        return Utils.enhancedHash(
+            id, duration, bitrate,
+            width, height, aspectRatio,
+            audioChannels, audioCodec, videoCodec,
+            videoResolution, container, videoFrameRate,
+            audioProfile, videoProfile, part);
     }
     
     @Override
@@ -459,42 +482,44 @@ public class GetSearchResultsMedia {
                 "videoProfile", videoProfile,
                 "part", part);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Double> id = Optional.empty();
- 
+
         private Optional<Double> duration = Optional.empty();
- 
+
         private Optional<Double> bitrate = Optional.empty();
- 
+
         private Optional<Double> width = Optional.empty();
- 
+
         private Optional<Double> height = Optional.empty();
- 
+
         private Optional<Double> aspectRatio = Optional.empty();
- 
+
         private Optional<Double> audioChannels = Optional.empty();
- 
+
         private Optional<String> audioCodec = Optional.empty();
- 
+
         private Optional<String> videoCodec = Optional.empty();
- 
+
         private Optional<Double> videoResolution = Optional.empty();
- 
+
         private Optional<String> container = Optional.empty();
- 
+
         private Optional<String> videoFrameRate = Optional.empty();
- 
+
         private Optional<String> audioProfile = Optional.empty();
- 
+
         private Optional<String> videoProfile = Optional.empty();
- 
+
         private Optional<? extends List<GetSearchResultsPart>> part = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder id(double id) {
             Utils.checkNotNull(id, "id");
@@ -508,6 +533,7 @@ public class GetSearchResultsMedia {
             return this;
         }
 
+
         public Builder duration(double duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = Optional.ofNullable(duration);
@@ -519,6 +545,7 @@ public class GetSearchResultsMedia {
             this.duration = duration;
             return this;
         }
+
 
         public Builder bitrate(double bitrate) {
             Utils.checkNotNull(bitrate, "bitrate");
@@ -532,6 +559,7 @@ public class GetSearchResultsMedia {
             return this;
         }
 
+
         public Builder width(double width) {
             Utils.checkNotNull(width, "width");
             this.width = Optional.ofNullable(width);
@@ -543,6 +571,7 @@ public class GetSearchResultsMedia {
             this.width = width;
             return this;
         }
+
 
         public Builder height(double height) {
             Utils.checkNotNull(height, "height");
@@ -556,6 +585,7 @@ public class GetSearchResultsMedia {
             return this;
         }
 
+
         public Builder aspectRatio(double aspectRatio) {
             Utils.checkNotNull(aspectRatio, "aspectRatio");
             this.aspectRatio = Optional.ofNullable(aspectRatio);
@@ -567,6 +597,7 @@ public class GetSearchResultsMedia {
             this.aspectRatio = aspectRatio;
             return this;
         }
+
 
         public Builder audioChannels(double audioChannels) {
             Utils.checkNotNull(audioChannels, "audioChannels");
@@ -580,6 +611,7 @@ public class GetSearchResultsMedia {
             return this;
         }
 
+
         public Builder audioCodec(String audioCodec) {
             Utils.checkNotNull(audioCodec, "audioCodec");
             this.audioCodec = Optional.ofNullable(audioCodec);
@@ -591,6 +623,7 @@ public class GetSearchResultsMedia {
             this.audioCodec = audioCodec;
             return this;
         }
+
 
         public Builder videoCodec(String videoCodec) {
             Utils.checkNotNull(videoCodec, "videoCodec");
@@ -604,6 +637,7 @@ public class GetSearchResultsMedia {
             return this;
         }
 
+
         public Builder videoResolution(double videoResolution) {
             Utils.checkNotNull(videoResolution, "videoResolution");
             this.videoResolution = Optional.ofNullable(videoResolution);
@@ -615,6 +649,7 @@ public class GetSearchResultsMedia {
             this.videoResolution = videoResolution;
             return this;
         }
+
 
         public Builder container(String container) {
             Utils.checkNotNull(container, "container");
@@ -628,6 +663,7 @@ public class GetSearchResultsMedia {
             return this;
         }
 
+
         public Builder videoFrameRate(String videoFrameRate) {
             Utils.checkNotNull(videoFrameRate, "videoFrameRate");
             this.videoFrameRate = Optional.ofNullable(videoFrameRate);
@@ -639,6 +675,7 @@ public class GetSearchResultsMedia {
             this.videoFrameRate = videoFrameRate;
             return this;
         }
+
 
         public Builder audioProfile(String audioProfile) {
             Utils.checkNotNull(audioProfile, "audioProfile");
@@ -652,6 +689,7 @@ public class GetSearchResultsMedia {
             return this;
         }
 
+
         public Builder videoProfile(String videoProfile) {
             Utils.checkNotNull(videoProfile, "videoProfile");
             this.videoProfile = Optional.ofNullable(videoProfile);
@@ -664,6 +702,7 @@ public class GetSearchResultsMedia {
             return this;
         }
 
+
         public Builder part(List<GetSearchResultsPart> part) {
             Utils.checkNotNull(part, "part");
             this.part = Optional.ofNullable(part);
@@ -675,24 +714,16 @@ public class GetSearchResultsMedia {
             this.part = part;
             return this;
         }
-        
+
         public GetSearchResultsMedia build() {
+
             return new GetSearchResultsMedia(
-                id,
-                duration,
-                bitrate,
-                width,
-                height,
-                aspectRatio,
-                audioChannels,
-                audioCodec,
-                videoCodec,
-                videoResolution,
-                container,
-                videoFrameRate,
-                audioProfile,
-                videoProfile,
-                part);
+                id, duration, bitrate,
+                width, height, aspectRatio,
+                audioChannels, audioCodec, videoCodec,
+                videoResolution, container, videoFrameRate,
+                audioProfile, videoProfile, part);
         }
+
     }
 }

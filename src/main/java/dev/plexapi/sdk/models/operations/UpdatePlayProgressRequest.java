@@ -10,10 +10,9 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class UpdatePlayProgressRequest {
-
     /**
      * the media key
      */
@@ -69,9 +68,10 @@ public class UpdatePlayProgressRequest {
         return state;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * the media key
@@ -100,7 +100,6 @@ public class UpdatePlayProgressRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,17 +110,15 @@ public class UpdatePlayProgressRequest {
         }
         UpdatePlayProgressRequest other = (UpdatePlayProgressRequest) o;
         return 
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.time, other.time) &&
-            Objects.deepEquals(this.state, other.state);
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.time, other.time) &&
+            Utils.enhancedDeepEquals(this.state, other.state);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            key,
-            time,
-            state);
+        return Utils.enhancedHash(
+            key, time, state);
     }
     
     @Override
@@ -131,18 +128,20 @@ public class UpdatePlayProgressRequest {
                 "time", time,
                 "state", state);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String key;
- 
+
         private Double time;
- 
+
         private String state;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * the media key
@@ -153,6 +152,7 @@ public class UpdatePlayProgressRequest {
             return this;
         }
 
+
         /**
          * The time, in milliseconds, used to set the media playback progress.
          */
@@ -162,6 +162,7 @@ public class UpdatePlayProgressRequest {
             return this;
         }
 
+
         /**
          * The playback state of the media item.
          */
@@ -170,12 +171,12 @@ public class UpdatePlayProgressRequest {
             this.state = state;
             return this;
         }
-        
+
         public UpdatePlayProgressRequest build() {
+
             return new UpdatePlayProgressRequest(
-                key,
-                time,
-                state);
+                key, time, state);
         }
+
     }
 }

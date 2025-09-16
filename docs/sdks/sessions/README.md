@@ -19,6 +19,7 @@ This will retrieve the "Now Playing" Information of the PMS.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getSessions" method="get" path="/status/sessions" -->
 ```java
 package hello.world;
 
@@ -33,7 +34,7 @@ public class Application {
     public static void main(String[] args) throws GetSessionsBadRequest, GetSessionsUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetSessionsResponse res = sdk.sessions().getSessions()
@@ -64,6 +65,7 @@ This will Retrieve a listing of all history views.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getSessionHistory" method="get" path="/status/sessions/history/all" -->
 ```java
 package hello.world;
 
@@ -79,7 +81,7 @@ public class Application {
     public static void main(String[] args) throws GetSessionHistoryBadRequest, GetSessionHistoryUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetSessionHistoryResponse res = sdk.sessions().getSessionHistory()
@@ -124,6 +126,7 @@ Get Transcode Sessions
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getTranscodeSessions" method="get" path="/transcode/sessions" -->
 ```java
 package hello.world;
 
@@ -138,7 +141,7 @@ public class Application {
     public static void main(String[] args) throws GetTranscodeSessionsBadRequest, GetTranscodeSessionsUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetTranscodeSessionsResponse res = sdk.sessions().getTranscodeSessions()
@@ -169,6 +172,7 @@ Stop a Transcode Session
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="stopTranscodeSession" method="delete" path="/transcode/sessions/{sessionKey}" -->
 ```java
 package hello.world;
 
@@ -183,7 +187,7 @@ public class Application {
     public static void main(String[] args) throws StopTranscodeSessionBadRequest, StopTranscodeSessionUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         StopTranscodeSessionResponse res = sdk.sessions().stopTranscodeSession()

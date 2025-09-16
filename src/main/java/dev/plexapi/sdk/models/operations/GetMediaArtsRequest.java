@@ -10,10 +10,9 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetMediaArtsRequest {
-
     /**
      * the id of the library item to return the artwork of.
      */
@@ -35,9 +34,10 @@ public class GetMediaArtsRequest {
         return ratingKey;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * the id of the library item to return the artwork of.
@@ -48,7 +48,6 @@ public class GetMediaArtsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -59,12 +58,12 @@ public class GetMediaArtsRequest {
         }
         GetMediaArtsRequest other = (GetMediaArtsRequest) o;
         return 
-            Objects.deepEquals(this.ratingKey, other.ratingKey);
+            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             ratingKey);
     }
     
@@ -73,14 +72,16 @@ public class GetMediaArtsRequest {
         return Utils.toString(GetMediaArtsRequest.class,
                 "ratingKey", ratingKey);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Long ratingKey;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * the id of the library item to return the artwork of.
@@ -90,10 +91,12 @@ public class GetMediaArtsRequest {
             this.ratingKey = ratingKey;
             return this;
         }
-        
+
         public GetMediaArtsRequest build() {
+
             return new GetMediaArtsRequest(
                 ratingKey);
         }
+
     }
 }

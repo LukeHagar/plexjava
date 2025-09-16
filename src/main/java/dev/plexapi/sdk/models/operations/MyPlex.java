@@ -13,8 +13,8 @@ import java.lang.Boolean;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class MyPlex {
 
@@ -22,45 +22,56 @@ public class MyPlex {
     @JsonProperty("authToken")
     private Optional<String> authToken;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("username")
     private Optional<String> username;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mappingState")
     private Optional<String> mappingState;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mappingError")
     private Optional<String> mappingError;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("signInState")
     private Optional<String> signInState;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("publicAddress")
     private Optional<String> publicAddress;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("publicPort")
     private Optional<Double> publicPort;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("privateAddress")
     private Optional<String> privateAddress;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("privatePort")
     private Optional<Double> privatePort;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("subscriptionFeatures")
     private Optional<String> subscriptionFeatures;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("subscriptionActive")
     private Optional<Boolean> subscriptionActive;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("subscriptionState")
@@ -107,7 +118,10 @@ public class MyPlex {
     }
     
     public MyPlex() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -170,15 +184,17 @@ public class MyPlex {
         return subscriptionState;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public MyPlex withAuthToken(String authToken) {
         Utils.checkNotNull(authToken, "authToken");
         this.authToken = Optional.ofNullable(authToken);
         return this;
     }
+
 
     public MyPlex withAuthToken(Optional<String> authToken) {
         Utils.checkNotNull(authToken, "authToken");
@@ -192,6 +208,7 @@ public class MyPlex {
         return this;
     }
 
+
     public MyPlex withUsername(Optional<String> username) {
         Utils.checkNotNull(username, "username");
         this.username = username;
@@ -203,6 +220,7 @@ public class MyPlex {
         this.mappingState = Optional.ofNullable(mappingState);
         return this;
     }
+
 
     public MyPlex withMappingState(Optional<String> mappingState) {
         Utils.checkNotNull(mappingState, "mappingState");
@@ -216,6 +234,7 @@ public class MyPlex {
         return this;
     }
 
+
     public MyPlex withMappingError(Optional<String> mappingError) {
         Utils.checkNotNull(mappingError, "mappingError");
         this.mappingError = mappingError;
@@ -227,6 +246,7 @@ public class MyPlex {
         this.signInState = Optional.ofNullable(signInState);
         return this;
     }
+
 
     public MyPlex withSignInState(Optional<String> signInState) {
         Utils.checkNotNull(signInState, "signInState");
@@ -240,6 +260,7 @@ public class MyPlex {
         return this;
     }
 
+
     public MyPlex withPublicAddress(Optional<String> publicAddress) {
         Utils.checkNotNull(publicAddress, "publicAddress");
         this.publicAddress = publicAddress;
@@ -251,6 +272,7 @@ public class MyPlex {
         this.publicPort = Optional.ofNullable(publicPort);
         return this;
     }
+
 
     public MyPlex withPublicPort(Optional<Double> publicPort) {
         Utils.checkNotNull(publicPort, "publicPort");
@@ -264,6 +286,7 @@ public class MyPlex {
         return this;
     }
 
+
     public MyPlex withPrivateAddress(Optional<String> privateAddress) {
         Utils.checkNotNull(privateAddress, "privateAddress");
         this.privateAddress = privateAddress;
@@ -275,6 +298,7 @@ public class MyPlex {
         this.privatePort = Optional.ofNullable(privatePort);
         return this;
     }
+
 
     public MyPlex withPrivatePort(Optional<Double> privatePort) {
         Utils.checkNotNull(privatePort, "privatePort");
@@ -288,6 +312,7 @@ public class MyPlex {
         return this;
     }
 
+
     public MyPlex withSubscriptionFeatures(Optional<String> subscriptionFeatures) {
         Utils.checkNotNull(subscriptionFeatures, "subscriptionFeatures");
         this.subscriptionFeatures = subscriptionFeatures;
@@ -299,6 +324,7 @@ public class MyPlex {
         this.subscriptionActive = Optional.ofNullable(subscriptionActive);
         return this;
     }
+
 
     public MyPlex withSubscriptionActive(Optional<Boolean> subscriptionActive) {
         Utils.checkNotNull(subscriptionActive, "subscriptionActive");
@@ -312,13 +338,13 @@ public class MyPlex {
         return this;
     }
 
+
     public MyPlex withSubscriptionState(Optional<String> subscriptionState) {
         Utils.checkNotNull(subscriptionState, "subscriptionState");
         this.subscriptionState = subscriptionState;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -329,35 +355,27 @@ public class MyPlex {
         }
         MyPlex other = (MyPlex) o;
         return 
-            Objects.deepEquals(this.authToken, other.authToken) &&
-            Objects.deepEquals(this.username, other.username) &&
-            Objects.deepEquals(this.mappingState, other.mappingState) &&
-            Objects.deepEquals(this.mappingError, other.mappingError) &&
-            Objects.deepEquals(this.signInState, other.signInState) &&
-            Objects.deepEquals(this.publicAddress, other.publicAddress) &&
-            Objects.deepEquals(this.publicPort, other.publicPort) &&
-            Objects.deepEquals(this.privateAddress, other.privateAddress) &&
-            Objects.deepEquals(this.privatePort, other.privatePort) &&
-            Objects.deepEquals(this.subscriptionFeatures, other.subscriptionFeatures) &&
-            Objects.deepEquals(this.subscriptionActive, other.subscriptionActive) &&
-            Objects.deepEquals(this.subscriptionState, other.subscriptionState);
+            Utils.enhancedDeepEquals(this.authToken, other.authToken) &&
+            Utils.enhancedDeepEquals(this.username, other.username) &&
+            Utils.enhancedDeepEquals(this.mappingState, other.mappingState) &&
+            Utils.enhancedDeepEquals(this.mappingError, other.mappingError) &&
+            Utils.enhancedDeepEquals(this.signInState, other.signInState) &&
+            Utils.enhancedDeepEquals(this.publicAddress, other.publicAddress) &&
+            Utils.enhancedDeepEquals(this.publicPort, other.publicPort) &&
+            Utils.enhancedDeepEquals(this.privateAddress, other.privateAddress) &&
+            Utils.enhancedDeepEquals(this.privatePort, other.privatePort) &&
+            Utils.enhancedDeepEquals(this.subscriptionFeatures, other.subscriptionFeatures) &&
+            Utils.enhancedDeepEquals(this.subscriptionActive, other.subscriptionActive) &&
+            Utils.enhancedDeepEquals(this.subscriptionState, other.subscriptionState);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            authToken,
-            username,
-            mappingState,
-            mappingError,
-            signInState,
-            publicAddress,
-            publicPort,
-            privateAddress,
-            privatePort,
-            subscriptionFeatures,
-            subscriptionActive,
-            subscriptionState);
+        return Utils.enhancedHash(
+            authToken, username, mappingState,
+            mappingError, signInState, publicAddress,
+            publicPort, privateAddress, privatePort,
+            subscriptionFeatures, subscriptionActive, subscriptionState);
     }
     
     @Override
@@ -376,36 +394,38 @@ public class MyPlex {
                 "subscriptionActive", subscriptionActive,
                 "subscriptionState", subscriptionState);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> authToken = Optional.empty();
- 
+
         private Optional<String> username = Optional.empty();
- 
+
         private Optional<String> mappingState = Optional.empty();
- 
+
         private Optional<String> mappingError = Optional.empty();
- 
+
         private Optional<String> signInState = Optional.empty();
- 
+
         private Optional<String> publicAddress = Optional.empty();
- 
+
         private Optional<Double> publicPort = Optional.empty();
- 
+
         private Optional<String> privateAddress = Optional.empty();
- 
+
         private Optional<Double> privatePort = Optional.empty();
- 
+
         private Optional<String> subscriptionFeatures = Optional.empty();
- 
+
         private Optional<Boolean> subscriptionActive = Optional.empty();
- 
+
         private Optional<String> subscriptionState = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder authToken(String authToken) {
             Utils.checkNotNull(authToken, "authToken");
@@ -419,6 +439,7 @@ public class MyPlex {
             return this;
         }
 
+
         public Builder username(String username) {
             Utils.checkNotNull(username, "username");
             this.username = Optional.ofNullable(username);
@@ -430,6 +451,7 @@ public class MyPlex {
             this.username = username;
             return this;
         }
+
 
         public Builder mappingState(String mappingState) {
             Utils.checkNotNull(mappingState, "mappingState");
@@ -443,6 +465,7 @@ public class MyPlex {
             return this;
         }
 
+
         public Builder mappingError(String mappingError) {
             Utils.checkNotNull(mappingError, "mappingError");
             this.mappingError = Optional.ofNullable(mappingError);
@@ -454,6 +477,7 @@ public class MyPlex {
             this.mappingError = mappingError;
             return this;
         }
+
 
         public Builder signInState(String signInState) {
             Utils.checkNotNull(signInState, "signInState");
@@ -467,6 +491,7 @@ public class MyPlex {
             return this;
         }
 
+
         public Builder publicAddress(String publicAddress) {
             Utils.checkNotNull(publicAddress, "publicAddress");
             this.publicAddress = Optional.ofNullable(publicAddress);
@@ -478,6 +503,7 @@ public class MyPlex {
             this.publicAddress = publicAddress;
             return this;
         }
+
 
         public Builder publicPort(double publicPort) {
             Utils.checkNotNull(publicPort, "publicPort");
@@ -491,6 +517,7 @@ public class MyPlex {
             return this;
         }
 
+
         public Builder privateAddress(String privateAddress) {
             Utils.checkNotNull(privateAddress, "privateAddress");
             this.privateAddress = Optional.ofNullable(privateAddress);
@@ -502,6 +529,7 @@ public class MyPlex {
             this.privateAddress = privateAddress;
             return this;
         }
+
 
         public Builder privatePort(double privatePort) {
             Utils.checkNotNull(privatePort, "privatePort");
@@ -515,6 +543,7 @@ public class MyPlex {
             return this;
         }
 
+
         public Builder subscriptionFeatures(String subscriptionFeatures) {
             Utils.checkNotNull(subscriptionFeatures, "subscriptionFeatures");
             this.subscriptionFeatures = Optional.ofNullable(subscriptionFeatures);
@@ -526,6 +555,7 @@ public class MyPlex {
             this.subscriptionFeatures = subscriptionFeatures;
             return this;
         }
+
 
         public Builder subscriptionActive(boolean subscriptionActive) {
             Utils.checkNotNull(subscriptionActive, "subscriptionActive");
@@ -539,6 +569,7 @@ public class MyPlex {
             return this;
         }
 
+
         public Builder subscriptionState(String subscriptionState) {
             Utils.checkNotNull(subscriptionState, "subscriptionState");
             this.subscriptionState = Optional.ofNullable(subscriptionState);
@@ -550,21 +581,15 @@ public class MyPlex {
             this.subscriptionState = subscriptionState;
             return this;
         }
-        
+
         public MyPlex build() {
+
             return new MyPlex(
-                authToken,
-                username,
-                mappingState,
-                mappingError,
-                signInState,
-                publicAddress,
-                publicPort,
-                privateAddress,
-                privatePort,
-                subscriptionFeatures,
-                subscriptionActive,
-                subscriptionState);
+                authToken, username, mappingState,
+                mappingError, signInState, publicAddress,
+                publicPort, privateAddress, privatePort,
+                subscriptionFeatures, subscriptionActive, subscriptionState);
         }
+
     }
 }

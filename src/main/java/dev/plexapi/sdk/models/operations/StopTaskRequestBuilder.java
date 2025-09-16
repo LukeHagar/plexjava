@@ -3,16 +3,20 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.StopTask;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class StopTaskRequestBuilder {
 
     private PathParamTaskName taskName;
-    private final SDKMethodInterfaces.MethodCallStopTask sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public StopTaskRequestBuilder(SDKMethodInterfaces.MethodCallStopTask sdk) {
-        this.sdk = sdk;
+    public StopTaskRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public StopTaskRequestBuilder taskName(PathParamTaskName taskName) {
@@ -21,9 +25,20 @@ public class StopTaskRequestBuilder {
         return this;
     }
 
-    public StopTaskResponse call() throws Exception {
 
-        return sdk.stopTask(
-            taskName);
+    private StopTaskRequest buildRequest() {
+
+        StopTaskRequest request = new StopTaskRequest(taskName);
+
+        return request;
+    }
+
+    public StopTaskResponse call() throws Exception {
+        
+        RequestOperation<StopTaskRequest, StopTaskResponse> operation
+              = new StopTask.Sync(sdkConfiguration);
+        StopTaskRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

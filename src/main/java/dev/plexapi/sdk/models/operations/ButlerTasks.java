@@ -13,8 +13,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class ButlerTasks {
 
@@ -39,9 +39,10 @@ public class ButlerTasks {
         return (Optional<List<ButlerTask>>) butlerTask;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ButlerTasks withButlerTask(List<ButlerTask> butlerTask) {
         Utils.checkNotNull(butlerTask, "butlerTask");
@@ -49,13 +50,13 @@ public class ButlerTasks {
         return this;
     }
 
+
     public ButlerTasks withButlerTask(Optional<? extends List<ButlerTask>> butlerTask) {
         Utils.checkNotNull(butlerTask, "butlerTask");
         this.butlerTask = butlerTask;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -66,12 +67,12 @@ public class ButlerTasks {
         }
         ButlerTasks other = (ButlerTasks) o;
         return 
-            Objects.deepEquals(this.butlerTask, other.butlerTask);
+            Utils.enhancedDeepEquals(this.butlerTask, other.butlerTask);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             butlerTask);
     }
     
@@ -80,14 +81,16 @@ public class ButlerTasks {
         return Utils.toString(ButlerTasks.class,
                 "butlerTask", butlerTask);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends List<ButlerTask>> butlerTask = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder butlerTask(List<ButlerTask> butlerTask) {
             Utils.checkNotNull(butlerTask, "butlerTask");
@@ -100,10 +103,12 @@ public class ButlerTasks {
             this.butlerTask = butlerTask;
             return this;
         }
-        
+
         public ButlerTasks build() {
+
             return new ButlerTasks(
                 butlerTask);
         }
+
     }
 }

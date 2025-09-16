@@ -3,16 +3,20 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetThumbImage;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class GetThumbImageRequestBuilder {
 
     private GetThumbImageRequest request;
-    private final SDKMethodInterfaces.MethodCallGetThumbImage sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetThumbImageRequestBuilder(SDKMethodInterfaces.MethodCallGetThumbImage sdk) {
-        this.sdk = sdk;
+    public GetThumbImageRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetThumbImageRequestBuilder request(GetThumbImageRequest request) {
@@ -22,8 +26,10 @@ public class GetThumbImageRequestBuilder {
     }
 
     public GetThumbImageResponse call() throws Exception {
+        
+        RequestOperation<GetThumbImageRequest, GetThumbImageResponse> operation
+              = new GetThumbImage.Sync(sdkConfiguration);
 
-        return sdk.getThumbImage(
-            request);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

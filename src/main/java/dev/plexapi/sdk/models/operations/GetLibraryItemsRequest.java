@@ -13,11 +13,10 @@ import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetLibraryItemsRequest {
 
+public class GetLibraryItemsRequest {
     /**
      * A key representing a specific tag within the section.
      */
@@ -99,7 +98,9 @@ public class GetLibraryItemsRequest {
             Tag tag,
             GetLibraryItemsQueryParamType type,
             int sectionKey) {
-        this(tag, Optional.empty(), type, sectionKey, Optional.empty(), Optional.empty(), Optional.empty());
+        this(tag, Optional.empty(), type,
+            sectionKey, Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -170,9 +171,10 @@ public class GetLibraryItemsRequest {
         return xPlexContainerSize;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * A key representing a specific tag within the section.
@@ -191,6 +193,7 @@ public class GetLibraryItemsRequest {
         this.includeGuids = Optional.ofNullable(includeGuids);
         return this;
     }
+
 
     /**
      * Adds the Guids object to the response
@@ -234,6 +237,7 @@ public class GetLibraryItemsRequest {
         return this;
     }
 
+
     /**
      * Adds the Meta object to the response
      */
@@ -253,6 +257,7 @@ public class GetLibraryItemsRequest {
         this.xPlexContainerStart = Optional.ofNullable(xPlexContainerStart);
         return this;
     }
+
 
     /**
      * The index of the first item to return. If not specified, the first item will be returned.
@@ -276,6 +281,7 @@ public class GetLibraryItemsRequest {
         return this;
     }
 
+
     /**
      * The number of items to return. If not specified, all items will be returned.
      * If the number of items exceeds the limit, the response will be paginated.
@@ -287,7 +293,6 @@ public class GetLibraryItemsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -298,24 +303,20 @@ public class GetLibraryItemsRequest {
         }
         GetLibraryItemsRequest other = (GetLibraryItemsRequest) o;
         return 
-            Objects.deepEquals(this.tag, other.tag) &&
-            Objects.deepEquals(this.includeGuids, other.includeGuids) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.sectionKey, other.sectionKey) &&
-            Objects.deepEquals(this.includeMeta, other.includeMeta) &&
-            Objects.deepEquals(this.xPlexContainerStart, other.xPlexContainerStart) &&
-            Objects.deepEquals(this.xPlexContainerSize, other.xPlexContainerSize);
+            Utils.enhancedDeepEquals(this.tag, other.tag) &&
+            Utils.enhancedDeepEquals(this.includeGuids, other.includeGuids) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.sectionKey, other.sectionKey) &&
+            Utils.enhancedDeepEquals(this.includeMeta, other.includeMeta) &&
+            Utils.enhancedDeepEquals(this.xPlexContainerStart, other.xPlexContainerStart) &&
+            Utils.enhancedDeepEquals(this.xPlexContainerSize, other.xPlexContainerSize);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            tag,
-            includeGuids,
-            type,
-            sectionKey,
-            includeMeta,
-            xPlexContainerStart,
+        return Utils.enhancedHash(
+            tag, includeGuids, type,
+            sectionKey, includeMeta, xPlexContainerStart,
             xPlexContainerSize);
     }
     
@@ -330,26 +331,28 @@ public class GetLibraryItemsRequest {
                 "xPlexContainerStart", xPlexContainerStart,
                 "xPlexContainerSize", xPlexContainerSize);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Tag tag;
- 
+
         private Optional<? extends IncludeGuids> includeGuids;
- 
+
         private GetLibraryItemsQueryParamType type;
- 
+
         private Integer sectionKey;
- 
+
         private Optional<? extends GetLibraryItemsQueryParamIncludeMeta> includeMeta;
- 
+
         private Optional<Integer> xPlexContainerStart;
- 
+
         private Optional<Integer> xPlexContainerSize;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * A key representing a specific tag within the section.
@@ -359,6 +362,7 @@ public class GetLibraryItemsRequest {
             this.tag = tag;
             return this;
         }
+
 
         /**
          * Adds the Guids object to the response
@@ -378,6 +382,7 @@ public class GetLibraryItemsRequest {
             return this;
         }
 
+
         /**
          * The type of media to retrieve or filter by.
          * 1 = movie
@@ -392,6 +397,7 @@ public class GetLibraryItemsRequest {
             return this;
         }
 
+
         /**
          * The unique key of the Plex library. 
          * Note: This is unique in the context of the Plex server.
@@ -401,6 +407,7 @@ public class GetLibraryItemsRequest {
             this.sectionKey = sectionKey;
             return this;
         }
+
 
         /**
          * Adds the Meta object to the response
@@ -419,6 +426,7 @@ public class GetLibraryItemsRequest {
             this.includeMeta = includeMeta;
             return this;
         }
+
 
         /**
          * The index of the first item to return. If not specified, the first item will be returned.
@@ -442,6 +450,7 @@ public class GetLibraryItemsRequest {
             return this;
         }
 
+
         /**
          * The number of items to return. If not specified, all items will be returned.
          * If the number of items exceeds the limit, the response will be paginated.
@@ -463,7 +472,7 @@ public class GetLibraryItemsRequest {
             this.xPlexContainerSize = xPlexContainerSize;
             return this;
         }
-        
+
         public GetLibraryItemsRequest build() {
             if (includeGuids == null) {
                 includeGuids = _SINGLETON_VALUE_IncludeGuids.value();
@@ -477,15 +486,13 @@ public class GetLibraryItemsRequest {
             if (xPlexContainerSize == null) {
                 xPlexContainerSize = _SINGLETON_VALUE_XPlexContainerSize.value();
             }
+
             return new GetLibraryItemsRequest(
-                tag,
-                includeGuids,
-                type,
-                sectionKey,
-                includeMeta,
-                xPlexContainerStart,
+                tag, includeGuids, type,
+                sectionKey, includeMeta, xPlexContainerStart,
                 xPlexContainerSize);
         }
+
 
         private static final LazySingletonValue<Optional<? extends IncludeGuids>> _SINGLETON_VALUE_IncludeGuids =
                 new LazySingletonValue<>(

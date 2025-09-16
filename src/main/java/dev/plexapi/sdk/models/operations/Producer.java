@@ -12,11 +12,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class Producer {
 
+public class Producer {
     /**
      * Unique identifier for the producer.
      */
@@ -72,7 +71,8 @@ public class Producer {
             String filter,
             String tag,
             String tagKey) {
-        this(id, filter, tag, tagKey, Optional.empty());
+        this(id, filter, tag,
+            tagKey, Optional.empty());
     }
 
     /**
@@ -115,9 +115,10 @@ public class Producer {
         return thumb;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Unique identifier for the producer.
@@ -164,6 +165,7 @@ public class Producer {
         return this;
     }
 
+
     /**
      * The absolute URL of the thumbnail image for the producer.
      */
@@ -173,7 +175,6 @@ public class Producer {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -184,21 +185,18 @@ public class Producer {
         }
         Producer other = (Producer) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.tag, other.tag) &&
-            Objects.deepEquals(this.tagKey, other.tagKey) &&
-            Objects.deepEquals(this.thumb, other.thumb);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.filter, other.filter) &&
+            Utils.enhancedDeepEquals(this.tag, other.tag) &&
+            Utils.enhancedDeepEquals(this.tagKey, other.tagKey) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            filter,
-            tag,
-            tagKey,
-            thumb);
+        return Utils.enhancedHash(
+            id, filter, tag,
+            tagKey, thumb);
     }
     
     @Override
@@ -210,22 +208,24 @@ public class Producer {
                 "tagKey", tagKey,
                 "thumb", thumb);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer id;
- 
+
         private String filter;
- 
+
         private String tag;
- 
+
         private String tagKey;
- 
+
         private Optional<String> thumb = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Unique identifier for the producer.
@@ -236,6 +236,7 @@ public class Producer {
             return this;
         }
 
+
         /**
          * The filter string used to query this producer.
          */
@@ -244,6 +245,7 @@ public class Producer {
             this.filter = filter;
             return this;
         }
+
 
         /**
          * The name of the producer
@@ -254,6 +256,7 @@ public class Producer {
             return this;
         }
 
+
         /**
          * A 24-character hexadecimal unique key associated with the producer's tag, used for internal identification.
          */
@@ -262,6 +265,7 @@ public class Producer {
             this.tagKey = tagKey;
             return this;
         }
+
 
         /**
          * The absolute URL of the thumbnail image for the producer.
@@ -280,14 +284,13 @@ public class Producer {
             this.thumb = thumb;
             return this;
         }
-        
+
         public Producer build() {
+
             return new Producer(
-                id,
-                filter,
-                tag,
-                tagKey,
-                thumb);
+                id, filter, tag,
+                tagKey, thumb);
         }
+
     }
 }

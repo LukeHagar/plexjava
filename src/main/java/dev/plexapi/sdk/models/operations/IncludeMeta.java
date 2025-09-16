@@ -19,7 +19,7 @@ public enum IncludeMeta {
     @JsonValue
     private final int value;
 
-    private IncludeMeta(int value) {
+    IncludeMeta(int value) {
         this.value = value;
     }
     

@@ -15,8 +15,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetMetadataChildrenMediaContainer {
 
@@ -24,89 +24,111 @@ public class GetMetadataChildrenMediaContainer {
     @JsonProperty("size")
     private Optional<Integer> size;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("allowSync")
     private Optional<Boolean> allowSync;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("art")
     private Optional<String> art;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("identifier")
     private Optional<String> identifier;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionID")
     private Optional<Integer> librarySectionID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionTitle")
     private Optional<String> librarySectionTitle;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionUUID")
     private Optional<String> librarySectionUUID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mediaTagPrefix")
     private Optional<String> mediaTagPrefix;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mediaTagVersion")
     private Optional<Integer> mediaTagVersion;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("nocache")
     private Optional<Boolean> nocache;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentIndex")
     private Optional<Integer> parentIndex;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentTitle")
     private Optional<String> parentTitle;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentYear")
     private Optional<Integer> parentYear;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("summary")
     private Optional<String> summary;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("theme")
     private Optional<String> theme;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
     private Optional<String> thumb;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title1")
     private Optional<String> title1;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title2")
     private Optional<String> title2;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("viewGroup")
     private Optional<String> viewGroup;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("viewMode")
     private Optional<Integer> viewMode;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Directory")
     private Optional<? extends List<GetMetadataChildrenDirectory>> directory;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Metadata")
@@ -186,7 +208,14 @@ public class GetMetadataChildrenMediaContainer {
     }
     
     public GetMetadataChildrenMediaContainer() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -306,15 +335,17 @@ public class GetMetadataChildrenMediaContainer {
         return (Optional<List<GetMetadataChildrenMetadata>>) metadata;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetMetadataChildrenMediaContainer withSize(int size) {
         Utils.checkNotNull(size, "size");
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetMetadataChildrenMediaContainer withSize(Optional<Integer> size) {
         Utils.checkNotNull(size, "size");
@@ -328,6 +359,7 @@ public class GetMetadataChildrenMediaContainer {
         return this;
     }
 
+
     public GetMetadataChildrenMediaContainer withAllowSync(Optional<Boolean> allowSync) {
         Utils.checkNotNull(allowSync, "allowSync");
         this.allowSync = allowSync;
@@ -339,6 +371,7 @@ public class GetMetadataChildrenMediaContainer {
         this.art = Optional.ofNullable(art);
         return this;
     }
+
 
     public GetMetadataChildrenMediaContainer withArt(Optional<String> art) {
         Utils.checkNotNull(art, "art");
@@ -352,6 +385,7 @@ public class GetMetadataChildrenMediaContainer {
         return this;
     }
 
+
     public GetMetadataChildrenMediaContainer withIdentifier(Optional<String> identifier) {
         Utils.checkNotNull(identifier, "identifier");
         this.identifier = identifier;
@@ -363,6 +397,7 @@ public class GetMetadataChildrenMediaContainer {
         this.key = Optional.ofNullable(key);
         return this;
     }
+
 
     public GetMetadataChildrenMediaContainer withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
@@ -376,6 +411,7 @@ public class GetMetadataChildrenMediaContainer {
         return this;
     }
 
+
     public GetMetadataChildrenMediaContainer withLibrarySectionID(Optional<Integer> librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
         this.librarySectionID = librarySectionID;
@@ -387,6 +423,7 @@ public class GetMetadataChildrenMediaContainer {
         this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
         return this;
     }
+
 
     public GetMetadataChildrenMediaContainer withLibrarySectionTitle(Optional<String> librarySectionTitle) {
         Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
@@ -400,6 +437,7 @@ public class GetMetadataChildrenMediaContainer {
         return this;
     }
 
+
     public GetMetadataChildrenMediaContainer withLibrarySectionUUID(Optional<String> librarySectionUUID) {
         Utils.checkNotNull(librarySectionUUID, "librarySectionUUID");
         this.librarySectionUUID = librarySectionUUID;
@@ -411,6 +449,7 @@ public class GetMetadataChildrenMediaContainer {
         this.mediaTagPrefix = Optional.ofNullable(mediaTagPrefix);
         return this;
     }
+
 
     public GetMetadataChildrenMediaContainer withMediaTagPrefix(Optional<String> mediaTagPrefix) {
         Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
@@ -424,6 +463,7 @@ public class GetMetadataChildrenMediaContainer {
         return this;
     }
 
+
     public GetMetadataChildrenMediaContainer withMediaTagVersion(Optional<Integer> mediaTagVersion) {
         Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
         this.mediaTagVersion = mediaTagVersion;
@@ -435,6 +475,7 @@ public class GetMetadataChildrenMediaContainer {
         this.nocache = Optional.ofNullable(nocache);
         return this;
     }
+
 
     public GetMetadataChildrenMediaContainer withNocache(Optional<Boolean> nocache) {
         Utils.checkNotNull(nocache, "nocache");
@@ -448,6 +489,7 @@ public class GetMetadataChildrenMediaContainer {
         return this;
     }
 
+
     public GetMetadataChildrenMediaContainer withParentIndex(Optional<Integer> parentIndex) {
         Utils.checkNotNull(parentIndex, "parentIndex");
         this.parentIndex = parentIndex;
@@ -459,6 +501,7 @@ public class GetMetadataChildrenMediaContainer {
         this.parentTitle = Optional.ofNullable(parentTitle);
         return this;
     }
+
 
     public GetMetadataChildrenMediaContainer withParentTitle(Optional<String> parentTitle) {
         Utils.checkNotNull(parentTitle, "parentTitle");
@@ -472,6 +515,7 @@ public class GetMetadataChildrenMediaContainer {
         return this;
     }
 
+
     public GetMetadataChildrenMediaContainer withParentYear(Optional<Integer> parentYear) {
         Utils.checkNotNull(parentYear, "parentYear");
         this.parentYear = parentYear;
@@ -483,6 +527,7 @@ public class GetMetadataChildrenMediaContainer {
         this.summary = Optional.ofNullable(summary);
         return this;
     }
+
 
     public GetMetadataChildrenMediaContainer withSummary(Optional<String> summary) {
         Utils.checkNotNull(summary, "summary");
@@ -496,6 +541,7 @@ public class GetMetadataChildrenMediaContainer {
         return this;
     }
 
+
     public GetMetadataChildrenMediaContainer withTheme(Optional<String> theme) {
         Utils.checkNotNull(theme, "theme");
         this.theme = theme;
@@ -507,6 +553,7 @@ public class GetMetadataChildrenMediaContainer {
         this.thumb = Optional.ofNullable(thumb);
         return this;
     }
+
 
     public GetMetadataChildrenMediaContainer withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -520,6 +567,7 @@ public class GetMetadataChildrenMediaContainer {
         return this;
     }
 
+
     public GetMetadataChildrenMediaContainer withTitle1(Optional<String> title1) {
         Utils.checkNotNull(title1, "title1");
         this.title1 = title1;
@@ -531,6 +579,7 @@ public class GetMetadataChildrenMediaContainer {
         this.title2 = Optional.ofNullable(title2);
         return this;
     }
+
 
     public GetMetadataChildrenMediaContainer withTitle2(Optional<String> title2) {
         Utils.checkNotNull(title2, "title2");
@@ -544,6 +593,7 @@ public class GetMetadataChildrenMediaContainer {
         return this;
     }
 
+
     public GetMetadataChildrenMediaContainer withViewGroup(Optional<String> viewGroup) {
         Utils.checkNotNull(viewGroup, "viewGroup");
         this.viewGroup = viewGroup;
@@ -555,6 +605,7 @@ public class GetMetadataChildrenMediaContainer {
         this.viewMode = Optional.ofNullable(viewMode);
         return this;
     }
+
 
     public GetMetadataChildrenMediaContainer withViewMode(Optional<Integer> viewMode) {
         Utils.checkNotNull(viewMode, "viewMode");
@@ -568,6 +619,7 @@ public class GetMetadataChildrenMediaContainer {
         return this;
     }
 
+
     public GetMetadataChildrenMediaContainer withDirectory(Optional<? extends List<GetMetadataChildrenDirectory>> directory) {
         Utils.checkNotNull(directory, "directory");
         this.directory = directory;
@@ -580,13 +632,13 @@ public class GetMetadataChildrenMediaContainer {
         return this;
     }
 
+
     public GetMetadataChildrenMediaContainer withMetadata(Optional<? extends List<GetMetadataChildrenMetadata>> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -597,57 +649,42 @@ public class GetMetadataChildrenMediaContainer {
         }
         GetMetadataChildrenMediaContainer other = (GetMetadataChildrenMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.allowSync, other.allowSync) &&
-            Objects.deepEquals(this.art, other.art) &&
-            Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
-            Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
-            Objects.deepEquals(this.librarySectionUUID, other.librarySectionUUID) &&
-            Objects.deepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
-            Objects.deepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
-            Objects.deepEquals(this.nocache, other.nocache) &&
-            Objects.deepEquals(this.parentIndex, other.parentIndex) &&
-            Objects.deepEquals(this.parentTitle, other.parentTitle) &&
-            Objects.deepEquals(this.parentYear, other.parentYear) &&
-            Objects.deepEquals(this.summary, other.summary) &&
-            Objects.deepEquals(this.theme, other.theme) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.title1, other.title1) &&
-            Objects.deepEquals(this.title2, other.title2) &&
-            Objects.deepEquals(this.viewGroup, other.viewGroup) &&
-            Objects.deepEquals(this.viewMode, other.viewMode) &&
-            Objects.deepEquals(this.directory, other.directory) &&
-            Objects.deepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.allowSync, other.allowSync) &&
+            Utils.enhancedDeepEquals(this.art, other.art) &&
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.librarySectionID, other.librarySectionID) &&
+            Utils.enhancedDeepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
+            Utils.enhancedDeepEquals(this.librarySectionUUID, other.librarySectionUUID) &&
+            Utils.enhancedDeepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
+            Utils.enhancedDeepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
+            Utils.enhancedDeepEquals(this.nocache, other.nocache) &&
+            Utils.enhancedDeepEquals(this.parentIndex, other.parentIndex) &&
+            Utils.enhancedDeepEquals(this.parentTitle, other.parentTitle) &&
+            Utils.enhancedDeepEquals(this.parentYear, other.parentYear) &&
+            Utils.enhancedDeepEquals(this.summary, other.summary) &&
+            Utils.enhancedDeepEquals(this.theme, other.theme) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.title1, other.title1) &&
+            Utils.enhancedDeepEquals(this.title2, other.title2) &&
+            Utils.enhancedDeepEquals(this.viewGroup, other.viewGroup) &&
+            Utils.enhancedDeepEquals(this.viewMode, other.viewMode) &&
+            Utils.enhancedDeepEquals(this.directory, other.directory) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            allowSync,
-            art,
-            identifier,
-            key,
-            librarySectionID,
-            librarySectionTitle,
-            librarySectionUUID,
-            mediaTagPrefix,
-            mediaTagVersion,
-            nocache,
-            parentIndex,
-            parentTitle,
-            parentYear,
-            summary,
-            theme,
-            thumb,
-            title1,
-            title2,
-            viewGroup,
-            viewMode,
-            directory,
-            metadata);
+        return Utils.enhancedHash(
+            size, allowSync, art,
+            identifier, key, librarySectionID,
+            librarySectionTitle, librarySectionUUID, mediaTagPrefix,
+            mediaTagVersion, nocache, parentIndex,
+            parentTitle, parentYear, summary,
+            theme, thumb, title1,
+            title2, viewGroup, viewMode,
+            directory, metadata);
     }
     
     @Override
@@ -677,58 +714,60 @@ public class GetMetadataChildrenMediaContainer {
                 "directory", directory,
                 "metadata", metadata);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> size = Optional.empty();
- 
+
         private Optional<Boolean> allowSync = Optional.empty();
- 
+
         private Optional<String> art = Optional.empty();
- 
+
         private Optional<String> identifier = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<Integer> librarySectionID = Optional.empty();
- 
+
         private Optional<String> librarySectionTitle = Optional.empty();
- 
+
         private Optional<String> librarySectionUUID = Optional.empty();
- 
+
         private Optional<String> mediaTagPrefix = Optional.empty();
- 
+
         private Optional<Integer> mediaTagVersion = Optional.empty();
- 
+
         private Optional<Boolean> nocache = Optional.empty();
- 
+
         private Optional<Integer> parentIndex = Optional.empty();
- 
+
         private Optional<String> parentTitle = Optional.empty();
- 
+
         private Optional<Integer> parentYear = Optional.empty();
- 
+
         private Optional<String> summary = Optional.empty();
- 
+
         private Optional<String> theme = Optional.empty();
- 
+
         private Optional<String> thumb = Optional.empty();
- 
+
         private Optional<String> title1 = Optional.empty();
- 
+
         private Optional<String> title2 = Optional.empty();
- 
+
         private Optional<String> viewGroup = Optional.empty();
- 
+
         private Optional<Integer> viewMode = Optional.empty();
- 
+
         private Optional<? extends List<GetMetadataChildrenDirectory>> directory = Optional.empty();
- 
+
         private Optional<? extends List<GetMetadataChildrenMetadata>> metadata = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder size(int size) {
             Utils.checkNotNull(size, "size");
@@ -742,6 +781,7 @@ public class GetMetadataChildrenMediaContainer {
             return this;
         }
 
+
         public Builder allowSync(boolean allowSync) {
             Utils.checkNotNull(allowSync, "allowSync");
             this.allowSync = Optional.ofNullable(allowSync);
@@ -753,6 +793,7 @@ public class GetMetadataChildrenMediaContainer {
             this.allowSync = allowSync;
             return this;
         }
+
 
         public Builder art(String art) {
             Utils.checkNotNull(art, "art");
@@ -766,6 +807,7 @@ public class GetMetadataChildrenMediaContainer {
             return this;
         }
 
+
         public Builder identifier(String identifier) {
             Utils.checkNotNull(identifier, "identifier");
             this.identifier = Optional.ofNullable(identifier);
@@ -777,6 +819,7 @@ public class GetMetadataChildrenMediaContainer {
             this.identifier = identifier;
             return this;
         }
+
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
@@ -790,6 +833,7 @@ public class GetMetadataChildrenMediaContainer {
             return this;
         }
 
+
         public Builder librarySectionID(int librarySectionID) {
             Utils.checkNotNull(librarySectionID, "librarySectionID");
             this.librarySectionID = Optional.ofNullable(librarySectionID);
@@ -801,6 +845,7 @@ public class GetMetadataChildrenMediaContainer {
             this.librarySectionID = librarySectionID;
             return this;
         }
+
 
         public Builder librarySectionTitle(String librarySectionTitle) {
             Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
@@ -814,6 +859,7 @@ public class GetMetadataChildrenMediaContainer {
             return this;
         }
 
+
         public Builder librarySectionUUID(String librarySectionUUID) {
             Utils.checkNotNull(librarySectionUUID, "librarySectionUUID");
             this.librarySectionUUID = Optional.ofNullable(librarySectionUUID);
@@ -825,6 +871,7 @@ public class GetMetadataChildrenMediaContainer {
             this.librarySectionUUID = librarySectionUUID;
             return this;
         }
+
 
         public Builder mediaTagPrefix(String mediaTagPrefix) {
             Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
@@ -838,6 +885,7 @@ public class GetMetadataChildrenMediaContainer {
             return this;
         }
 
+
         public Builder mediaTagVersion(int mediaTagVersion) {
             Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
             this.mediaTagVersion = Optional.ofNullable(mediaTagVersion);
@@ -849,6 +897,7 @@ public class GetMetadataChildrenMediaContainer {
             this.mediaTagVersion = mediaTagVersion;
             return this;
         }
+
 
         public Builder nocache(boolean nocache) {
             Utils.checkNotNull(nocache, "nocache");
@@ -862,6 +911,7 @@ public class GetMetadataChildrenMediaContainer {
             return this;
         }
 
+
         public Builder parentIndex(int parentIndex) {
             Utils.checkNotNull(parentIndex, "parentIndex");
             this.parentIndex = Optional.ofNullable(parentIndex);
@@ -873,6 +923,7 @@ public class GetMetadataChildrenMediaContainer {
             this.parentIndex = parentIndex;
             return this;
         }
+
 
         public Builder parentTitle(String parentTitle) {
             Utils.checkNotNull(parentTitle, "parentTitle");
@@ -886,6 +937,7 @@ public class GetMetadataChildrenMediaContainer {
             return this;
         }
 
+
         public Builder parentYear(int parentYear) {
             Utils.checkNotNull(parentYear, "parentYear");
             this.parentYear = Optional.ofNullable(parentYear);
@@ -897,6 +949,7 @@ public class GetMetadataChildrenMediaContainer {
             this.parentYear = parentYear;
             return this;
         }
+
 
         public Builder summary(String summary) {
             Utils.checkNotNull(summary, "summary");
@@ -910,6 +963,7 @@ public class GetMetadataChildrenMediaContainer {
             return this;
         }
 
+
         public Builder theme(String theme) {
             Utils.checkNotNull(theme, "theme");
             this.theme = Optional.ofNullable(theme);
@@ -921,6 +975,7 @@ public class GetMetadataChildrenMediaContainer {
             this.theme = theme;
             return this;
         }
+
 
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -934,6 +989,7 @@ public class GetMetadataChildrenMediaContainer {
             return this;
         }
 
+
         public Builder title1(String title1) {
             Utils.checkNotNull(title1, "title1");
             this.title1 = Optional.ofNullable(title1);
@@ -945,6 +1001,7 @@ public class GetMetadataChildrenMediaContainer {
             this.title1 = title1;
             return this;
         }
+
 
         public Builder title2(String title2) {
             Utils.checkNotNull(title2, "title2");
@@ -958,6 +1015,7 @@ public class GetMetadataChildrenMediaContainer {
             return this;
         }
 
+
         public Builder viewGroup(String viewGroup) {
             Utils.checkNotNull(viewGroup, "viewGroup");
             this.viewGroup = Optional.ofNullable(viewGroup);
@@ -969,6 +1027,7 @@ public class GetMetadataChildrenMediaContainer {
             this.viewGroup = viewGroup;
             return this;
         }
+
 
         public Builder viewMode(int viewMode) {
             Utils.checkNotNull(viewMode, "viewMode");
@@ -982,6 +1041,7 @@ public class GetMetadataChildrenMediaContainer {
             return this;
         }
 
+
         public Builder directory(List<GetMetadataChildrenDirectory> directory) {
             Utils.checkNotNull(directory, "directory");
             this.directory = Optional.ofNullable(directory);
@@ -994,6 +1054,7 @@ public class GetMetadataChildrenMediaContainer {
             return this;
         }
 
+
         public Builder metadata(List<GetMetadataChildrenMetadata> metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = Optional.ofNullable(metadata);
@@ -1005,32 +1066,19 @@ public class GetMetadataChildrenMediaContainer {
             this.metadata = metadata;
             return this;
         }
-        
+
         public GetMetadataChildrenMediaContainer build() {
+
             return new GetMetadataChildrenMediaContainer(
-                size,
-                allowSync,
-                art,
-                identifier,
-                key,
-                librarySectionID,
-                librarySectionTitle,
-                librarySectionUUID,
-                mediaTagPrefix,
-                mediaTagVersion,
-                nocache,
-                parentIndex,
-                parentTitle,
-                parentYear,
-                summary,
-                theme,
-                thumb,
-                title1,
-                title2,
-                viewGroup,
-                viewMode,
-                directory,
-                metadata);
+                size, allowSync, art,
+                identifier, key, librarySectionID,
+                librarySectionTitle, librarySectionUUID, mediaTagPrefix,
+                mediaTagVersion, nocache, parentIndex,
+                parentTitle, parentYear, summary,
+                theme, thumb, title1,
+                title2, viewGroup, viewMode,
+                directory, metadata);
         }
+
     }
 }

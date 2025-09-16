@@ -15,8 +15,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetSessionsMedia {
 
@@ -24,29 +24,36 @@ public class GetSessionsMedia {
     @JsonProperty("audioChannels")
     private Optional<Integer> audioChannels;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioCodec")
     private Optional<String> audioCodec;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bitrate")
     private Optional<Integer> bitrate;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("container")
     private Optional<String> container;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
     private Optional<Integer> duration;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("id")
     private Optional<String> id;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("selected")
     private Optional<Boolean> selected;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Part")
@@ -81,7 +88,9 @@ public class GetSessionsMedia {
     }
     
     public GetSessionsMedia() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -125,15 +134,17 @@ public class GetSessionsMedia {
         return (Optional<List<GetSessionsPart>>) part;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetSessionsMedia withAudioChannels(int audioChannels) {
         Utils.checkNotNull(audioChannels, "audioChannels");
         this.audioChannels = Optional.ofNullable(audioChannels);
         return this;
     }
+
 
     public GetSessionsMedia withAudioChannels(Optional<Integer> audioChannels) {
         Utils.checkNotNull(audioChannels, "audioChannels");
@@ -147,6 +158,7 @@ public class GetSessionsMedia {
         return this;
     }
 
+
     public GetSessionsMedia withAudioCodec(Optional<String> audioCodec) {
         Utils.checkNotNull(audioCodec, "audioCodec");
         this.audioCodec = audioCodec;
@@ -158,6 +170,7 @@ public class GetSessionsMedia {
         this.bitrate = Optional.ofNullable(bitrate);
         return this;
     }
+
 
     public GetSessionsMedia withBitrate(Optional<Integer> bitrate) {
         Utils.checkNotNull(bitrate, "bitrate");
@@ -171,6 +184,7 @@ public class GetSessionsMedia {
         return this;
     }
 
+
     public GetSessionsMedia withContainer(Optional<String> container) {
         Utils.checkNotNull(container, "container");
         this.container = container;
@@ -182,6 +196,7 @@ public class GetSessionsMedia {
         this.duration = Optional.ofNullable(duration);
         return this;
     }
+
 
     public GetSessionsMedia withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
@@ -195,6 +210,7 @@ public class GetSessionsMedia {
         return this;
     }
 
+
     public GetSessionsMedia withId(Optional<String> id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
@@ -206,6 +222,7 @@ public class GetSessionsMedia {
         this.selected = Optional.ofNullable(selected);
         return this;
     }
+
 
     public GetSessionsMedia withSelected(Optional<Boolean> selected) {
         Utils.checkNotNull(selected, "selected");
@@ -219,13 +236,13 @@ public class GetSessionsMedia {
         return this;
     }
 
+
     public GetSessionsMedia withPart(Optional<? extends List<GetSessionsPart>> part) {
         Utils.checkNotNull(part, "part");
         this.part = part;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -236,27 +253,22 @@ public class GetSessionsMedia {
         }
         GetSessionsMedia other = (GetSessionsMedia) o;
         return 
-            Objects.deepEquals(this.audioChannels, other.audioChannels) &&
-            Objects.deepEquals(this.audioCodec, other.audioCodec) &&
-            Objects.deepEquals(this.bitrate, other.bitrate) &&
-            Objects.deepEquals(this.container, other.container) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.selected, other.selected) &&
-            Objects.deepEquals(this.part, other.part);
+            Utils.enhancedDeepEquals(this.audioChannels, other.audioChannels) &&
+            Utils.enhancedDeepEquals(this.audioCodec, other.audioCodec) &&
+            Utils.enhancedDeepEquals(this.bitrate, other.bitrate) &&
+            Utils.enhancedDeepEquals(this.container, other.container) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.selected, other.selected) &&
+            Utils.enhancedDeepEquals(this.part, other.part);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            audioChannels,
-            audioCodec,
-            bitrate,
-            container,
-            duration,
-            id,
-            selected,
-            part);
+        return Utils.enhancedHash(
+            audioChannels, audioCodec, bitrate,
+            container, duration, id,
+            selected, part);
     }
     
     @Override
@@ -271,28 +283,30 @@ public class GetSessionsMedia {
                 "selected", selected,
                 "part", part);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> audioChannels = Optional.empty();
- 
+
         private Optional<String> audioCodec = Optional.empty();
- 
+
         private Optional<Integer> bitrate = Optional.empty();
- 
+
         private Optional<String> container = Optional.empty();
- 
+
         private Optional<Integer> duration = Optional.empty();
- 
+
         private Optional<String> id = Optional.empty();
- 
+
         private Optional<Boolean> selected = Optional.empty();
- 
+
         private Optional<? extends List<GetSessionsPart>> part = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder audioChannels(int audioChannels) {
             Utils.checkNotNull(audioChannels, "audioChannels");
@@ -306,6 +320,7 @@ public class GetSessionsMedia {
             return this;
         }
 
+
         public Builder audioCodec(String audioCodec) {
             Utils.checkNotNull(audioCodec, "audioCodec");
             this.audioCodec = Optional.ofNullable(audioCodec);
@@ -317,6 +332,7 @@ public class GetSessionsMedia {
             this.audioCodec = audioCodec;
             return this;
         }
+
 
         public Builder bitrate(int bitrate) {
             Utils.checkNotNull(bitrate, "bitrate");
@@ -330,6 +346,7 @@ public class GetSessionsMedia {
             return this;
         }
 
+
         public Builder container(String container) {
             Utils.checkNotNull(container, "container");
             this.container = Optional.ofNullable(container);
@@ -341,6 +358,7 @@ public class GetSessionsMedia {
             this.container = container;
             return this;
         }
+
 
         public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
@@ -354,6 +372,7 @@ public class GetSessionsMedia {
             return this;
         }
 
+
         public Builder id(String id) {
             Utils.checkNotNull(id, "id");
             this.id = Optional.ofNullable(id);
@@ -365,6 +384,7 @@ public class GetSessionsMedia {
             this.id = id;
             return this;
         }
+
 
         public Builder selected(boolean selected) {
             Utils.checkNotNull(selected, "selected");
@@ -378,6 +398,7 @@ public class GetSessionsMedia {
             return this;
         }
 
+
         public Builder part(List<GetSessionsPart> part) {
             Utils.checkNotNull(part, "part");
             this.part = Optional.ofNullable(part);
@@ -389,17 +410,14 @@ public class GetSessionsMedia {
             this.part = part;
             return this;
         }
-        
+
         public GetSessionsMedia build() {
+
             return new GetSessionsMedia(
-                audioChannels,
-                audioCodec,
-                bitrate,
-                container,
-                duration,
-                id,
-                selected,
-                part);
+                audioChannels, audioCodec, bitrate,
+                container, duration, id,
+                selected, part);
         }
+
     }
 }

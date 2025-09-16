@@ -16,8 +16,8 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetPlaylistContentsMetadata {
 
@@ -25,125 +25,156 @@ public class GetPlaylistContentsMetadata {
     @JsonProperty("ratingKey")
     private Optional<String> ratingKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("guid")
     private Optional<String> guid;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("studio")
     private Optional<String> studio;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
     private Optional<String> type;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("titleSort")
     private Optional<String> titleSort;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionTitle")
     private Optional<String> librarySectionTitle;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionID")
     private Optional<Integer> librarySectionID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionKey")
     private Optional<String> librarySectionKey;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contentRating")
     private Optional<String> contentRating;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("summary")
     private Optional<String> summary;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("rating")
     private Optional<Double> rating;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audienceRating")
     private Optional<Double> audienceRating;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("year")
     private Optional<Integer> year;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tagline")
     private Optional<String> tagline;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
     private Optional<String> thumb;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("art")
     private Optional<String> art;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
     private Optional<Integer> duration;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("originallyAvailableAt")
     private Optional<LocalDate> originallyAvailableAt;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("addedAt")
     private Optional<Integer> addedAt;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("updatedAt")
     private Optional<Integer> updatedAt;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audienceRatingImage")
     private Optional<String> audienceRatingImage;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hasPremiumExtras")
     private Optional<String> hasPremiumExtras;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hasPremiumPrimaryExtra")
     private Optional<String> hasPremiumPrimaryExtra;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ratingImage")
     private Optional<String> ratingImage;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Media")
     private Optional<? extends List<GetPlaylistContentsMedia>> media;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Genre")
     private Optional<? extends List<GetPlaylistContentsGenre>> genre;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Country")
     private Optional<? extends List<GetPlaylistContentsCountry>> country;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Director")
     private Optional<? extends List<GetPlaylistContentsDirector>> director;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Writer")
     private Optional<? extends List<GetPlaylistContentsWriter>> writer;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Role")
@@ -250,7 +281,17 @@ public class GetPlaylistContentsMetadata {
     }
     
     public GetPlaylistContentsMetadata() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -419,15 +460,17 @@ public class GetPlaylistContentsMetadata {
         return (Optional<List<GetPlaylistContentsRole>>) role;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetPlaylistContentsMetadata withRatingKey(String ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         this.ratingKey = Optional.ofNullable(ratingKey);
         return this;
     }
+
 
     public GetPlaylistContentsMetadata withRatingKey(Optional<String> ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
@@ -441,6 +484,7 @@ public class GetPlaylistContentsMetadata {
         return this;
     }
 
+
     public GetPlaylistContentsMetadata withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
@@ -452,6 +496,7 @@ public class GetPlaylistContentsMetadata {
         this.guid = Optional.ofNullable(guid);
         return this;
     }
+
 
     public GetPlaylistContentsMetadata withGuid(Optional<String> guid) {
         Utils.checkNotNull(guid, "guid");
@@ -465,6 +510,7 @@ public class GetPlaylistContentsMetadata {
         return this;
     }
 
+
     public GetPlaylistContentsMetadata withStudio(Optional<String> studio) {
         Utils.checkNotNull(studio, "studio");
         this.studio = studio;
@@ -476,6 +522,7 @@ public class GetPlaylistContentsMetadata {
         this.type = Optional.ofNullable(type);
         return this;
     }
+
 
     public GetPlaylistContentsMetadata withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
@@ -489,6 +536,7 @@ public class GetPlaylistContentsMetadata {
         return this;
     }
 
+
     public GetPlaylistContentsMetadata withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
@@ -500,6 +548,7 @@ public class GetPlaylistContentsMetadata {
         this.titleSort = Optional.ofNullable(titleSort);
         return this;
     }
+
 
     public GetPlaylistContentsMetadata withTitleSort(Optional<String> titleSort) {
         Utils.checkNotNull(titleSort, "titleSort");
@@ -513,6 +562,7 @@ public class GetPlaylistContentsMetadata {
         return this;
     }
 
+
     public GetPlaylistContentsMetadata withLibrarySectionTitle(Optional<String> librarySectionTitle) {
         Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
         this.librarySectionTitle = librarySectionTitle;
@@ -524,6 +574,7 @@ public class GetPlaylistContentsMetadata {
         this.librarySectionID = Optional.ofNullable(librarySectionID);
         return this;
     }
+
 
     public GetPlaylistContentsMetadata withLibrarySectionID(Optional<Integer> librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
@@ -537,6 +588,7 @@ public class GetPlaylistContentsMetadata {
         return this;
     }
 
+
     public GetPlaylistContentsMetadata withLibrarySectionKey(Optional<String> librarySectionKey) {
         Utils.checkNotNull(librarySectionKey, "librarySectionKey");
         this.librarySectionKey = librarySectionKey;
@@ -548,6 +600,7 @@ public class GetPlaylistContentsMetadata {
         this.contentRating = Optional.ofNullable(contentRating);
         return this;
     }
+
 
     public GetPlaylistContentsMetadata withContentRating(Optional<String> contentRating) {
         Utils.checkNotNull(contentRating, "contentRating");
@@ -561,6 +614,7 @@ public class GetPlaylistContentsMetadata {
         return this;
     }
 
+
     public GetPlaylistContentsMetadata withSummary(Optional<String> summary) {
         Utils.checkNotNull(summary, "summary");
         this.summary = summary;
@@ -572,6 +626,7 @@ public class GetPlaylistContentsMetadata {
         this.rating = Optional.ofNullable(rating);
         return this;
     }
+
 
     public GetPlaylistContentsMetadata withRating(Optional<Double> rating) {
         Utils.checkNotNull(rating, "rating");
@@ -585,6 +640,7 @@ public class GetPlaylistContentsMetadata {
         return this;
     }
 
+
     public GetPlaylistContentsMetadata withAudienceRating(Optional<Double> audienceRating) {
         Utils.checkNotNull(audienceRating, "audienceRating");
         this.audienceRating = audienceRating;
@@ -596,6 +652,7 @@ public class GetPlaylistContentsMetadata {
         this.year = Optional.ofNullable(year);
         return this;
     }
+
 
     public GetPlaylistContentsMetadata withYear(Optional<Integer> year) {
         Utils.checkNotNull(year, "year");
@@ -609,6 +666,7 @@ public class GetPlaylistContentsMetadata {
         return this;
     }
 
+
     public GetPlaylistContentsMetadata withTagline(Optional<String> tagline) {
         Utils.checkNotNull(tagline, "tagline");
         this.tagline = tagline;
@@ -620,6 +678,7 @@ public class GetPlaylistContentsMetadata {
         this.thumb = Optional.ofNullable(thumb);
         return this;
     }
+
 
     public GetPlaylistContentsMetadata withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -633,6 +692,7 @@ public class GetPlaylistContentsMetadata {
         return this;
     }
 
+
     public GetPlaylistContentsMetadata withArt(Optional<String> art) {
         Utils.checkNotNull(art, "art");
         this.art = art;
@@ -644,6 +704,7 @@ public class GetPlaylistContentsMetadata {
         this.duration = Optional.ofNullable(duration);
         return this;
     }
+
 
     public GetPlaylistContentsMetadata withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
@@ -657,6 +718,7 @@ public class GetPlaylistContentsMetadata {
         return this;
     }
 
+
     public GetPlaylistContentsMetadata withOriginallyAvailableAt(Optional<LocalDate> originallyAvailableAt) {
         Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
         this.originallyAvailableAt = originallyAvailableAt;
@@ -668,6 +730,7 @@ public class GetPlaylistContentsMetadata {
         this.addedAt = Optional.ofNullable(addedAt);
         return this;
     }
+
 
     public GetPlaylistContentsMetadata withAddedAt(Optional<Integer> addedAt) {
         Utils.checkNotNull(addedAt, "addedAt");
@@ -681,6 +744,7 @@ public class GetPlaylistContentsMetadata {
         return this;
     }
 
+
     public GetPlaylistContentsMetadata withUpdatedAt(Optional<Integer> updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
         this.updatedAt = updatedAt;
@@ -692,6 +756,7 @@ public class GetPlaylistContentsMetadata {
         this.audienceRatingImage = Optional.ofNullable(audienceRatingImage);
         return this;
     }
+
 
     public GetPlaylistContentsMetadata withAudienceRatingImage(Optional<String> audienceRatingImage) {
         Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
@@ -705,6 +770,7 @@ public class GetPlaylistContentsMetadata {
         return this;
     }
 
+
     public GetPlaylistContentsMetadata withHasPremiumExtras(Optional<String> hasPremiumExtras) {
         Utils.checkNotNull(hasPremiumExtras, "hasPremiumExtras");
         this.hasPremiumExtras = hasPremiumExtras;
@@ -716,6 +782,7 @@ public class GetPlaylistContentsMetadata {
         this.hasPremiumPrimaryExtra = Optional.ofNullable(hasPremiumPrimaryExtra);
         return this;
     }
+
 
     public GetPlaylistContentsMetadata withHasPremiumPrimaryExtra(Optional<String> hasPremiumPrimaryExtra) {
         Utils.checkNotNull(hasPremiumPrimaryExtra, "hasPremiumPrimaryExtra");
@@ -729,6 +796,7 @@ public class GetPlaylistContentsMetadata {
         return this;
     }
 
+
     public GetPlaylistContentsMetadata withRatingImage(Optional<String> ratingImage) {
         Utils.checkNotNull(ratingImage, "ratingImage");
         this.ratingImage = ratingImage;
@@ -740,6 +808,7 @@ public class GetPlaylistContentsMetadata {
         this.media = Optional.ofNullable(media);
         return this;
     }
+
 
     public GetPlaylistContentsMetadata withMedia(Optional<? extends List<GetPlaylistContentsMedia>> media) {
         Utils.checkNotNull(media, "media");
@@ -753,6 +822,7 @@ public class GetPlaylistContentsMetadata {
         return this;
     }
 
+
     public GetPlaylistContentsMetadata withGenre(Optional<? extends List<GetPlaylistContentsGenre>> genre) {
         Utils.checkNotNull(genre, "genre");
         this.genre = genre;
@@ -764,6 +834,7 @@ public class GetPlaylistContentsMetadata {
         this.country = Optional.ofNullable(country);
         return this;
     }
+
 
     public GetPlaylistContentsMetadata withCountry(Optional<? extends List<GetPlaylistContentsCountry>> country) {
         Utils.checkNotNull(country, "country");
@@ -777,6 +848,7 @@ public class GetPlaylistContentsMetadata {
         return this;
     }
 
+
     public GetPlaylistContentsMetadata withDirector(Optional<? extends List<GetPlaylistContentsDirector>> director) {
         Utils.checkNotNull(director, "director");
         this.director = director;
@@ -788,6 +860,7 @@ public class GetPlaylistContentsMetadata {
         this.writer = Optional.ofNullable(writer);
         return this;
     }
+
 
     public GetPlaylistContentsMetadata withWriter(Optional<? extends List<GetPlaylistContentsWriter>> writer) {
         Utils.checkNotNull(writer, "writer");
@@ -801,13 +874,13 @@ public class GetPlaylistContentsMetadata {
         return this;
     }
 
+
     public GetPlaylistContentsMetadata withRole(Optional<? extends List<GetPlaylistContentsRole>> role) {
         Utils.checkNotNull(role, "role");
         this.role = role;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -818,75 +891,54 @@ public class GetPlaylistContentsMetadata {
         }
         GetPlaylistContentsMetadata other = (GetPlaylistContentsMetadata) o;
         return 
-            Objects.deepEquals(this.ratingKey, other.ratingKey) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.guid, other.guid) &&
-            Objects.deepEquals(this.studio, other.studio) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.titleSort, other.titleSort) &&
-            Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
-            Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
-            Objects.deepEquals(this.librarySectionKey, other.librarySectionKey) &&
-            Objects.deepEquals(this.contentRating, other.contentRating) &&
-            Objects.deepEquals(this.summary, other.summary) &&
-            Objects.deepEquals(this.rating, other.rating) &&
-            Objects.deepEquals(this.audienceRating, other.audienceRating) &&
-            Objects.deepEquals(this.year, other.year) &&
-            Objects.deepEquals(this.tagline, other.tagline) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.art, other.art) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.originallyAvailableAt, other.originallyAvailableAt) &&
-            Objects.deepEquals(this.addedAt, other.addedAt) &&
-            Objects.deepEquals(this.updatedAt, other.updatedAt) &&
-            Objects.deepEquals(this.audienceRatingImage, other.audienceRatingImage) &&
-            Objects.deepEquals(this.hasPremiumExtras, other.hasPremiumExtras) &&
-            Objects.deepEquals(this.hasPremiumPrimaryExtra, other.hasPremiumPrimaryExtra) &&
-            Objects.deepEquals(this.ratingImage, other.ratingImage) &&
-            Objects.deepEquals(this.media, other.media) &&
-            Objects.deepEquals(this.genre, other.genre) &&
-            Objects.deepEquals(this.country, other.country) &&
-            Objects.deepEquals(this.director, other.director) &&
-            Objects.deepEquals(this.writer, other.writer) &&
-            Objects.deepEquals(this.role, other.role);
+            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.guid, other.guid) &&
+            Utils.enhancedDeepEquals(this.studio, other.studio) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.titleSort, other.titleSort) &&
+            Utils.enhancedDeepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
+            Utils.enhancedDeepEquals(this.librarySectionID, other.librarySectionID) &&
+            Utils.enhancedDeepEquals(this.librarySectionKey, other.librarySectionKey) &&
+            Utils.enhancedDeepEquals(this.contentRating, other.contentRating) &&
+            Utils.enhancedDeepEquals(this.summary, other.summary) &&
+            Utils.enhancedDeepEquals(this.rating, other.rating) &&
+            Utils.enhancedDeepEquals(this.audienceRating, other.audienceRating) &&
+            Utils.enhancedDeepEquals(this.year, other.year) &&
+            Utils.enhancedDeepEquals(this.tagline, other.tagline) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.art, other.art) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.originallyAvailableAt, other.originallyAvailableAt) &&
+            Utils.enhancedDeepEquals(this.addedAt, other.addedAt) &&
+            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt) &&
+            Utils.enhancedDeepEquals(this.audienceRatingImage, other.audienceRatingImage) &&
+            Utils.enhancedDeepEquals(this.hasPremiumExtras, other.hasPremiumExtras) &&
+            Utils.enhancedDeepEquals(this.hasPremiumPrimaryExtra, other.hasPremiumPrimaryExtra) &&
+            Utils.enhancedDeepEquals(this.ratingImage, other.ratingImage) &&
+            Utils.enhancedDeepEquals(this.media, other.media) &&
+            Utils.enhancedDeepEquals(this.genre, other.genre) &&
+            Utils.enhancedDeepEquals(this.country, other.country) &&
+            Utils.enhancedDeepEquals(this.director, other.director) &&
+            Utils.enhancedDeepEquals(this.writer, other.writer) &&
+            Utils.enhancedDeepEquals(this.role, other.role);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            ratingKey,
-            key,
-            guid,
-            studio,
-            type,
-            title,
-            titleSort,
-            librarySectionTitle,
-            librarySectionID,
-            librarySectionKey,
-            contentRating,
-            summary,
-            rating,
-            audienceRating,
-            year,
-            tagline,
-            thumb,
-            art,
-            duration,
-            originallyAvailableAt,
-            addedAt,
-            updatedAt,
-            audienceRatingImage,
-            hasPremiumExtras,
-            hasPremiumPrimaryExtra,
-            ratingImage,
-            media,
-            genre,
-            country,
-            director,
-            writer,
-            role);
+        return Utils.enhancedHash(
+            ratingKey, key, guid,
+            studio, type, title,
+            titleSort, librarySectionTitle, librarySectionID,
+            librarySectionKey, contentRating, summary,
+            rating, audienceRating, year,
+            tagline, thumb, art,
+            duration, originallyAvailableAt, addedAt,
+            updatedAt, audienceRatingImage, hasPremiumExtras,
+            hasPremiumPrimaryExtra, ratingImage, media,
+            genre, country, director,
+            writer, role);
     }
     
     @Override
@@ -925,76 +977,78 @@ public class GetPlaylistContentsMetadata {
                 "writer", writer,
                 "role", role);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> ratingKey = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> guid = Optional.empty();
- 
+
         private Optional<String> studio = Optional.empty();
- 
+
         private Optional<String> type = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> titleSort = Optional.empty();
- 
+
         private Optional<String> librarySectionTitle = Optional.empty();
- 
+
         private Optional<Integer> librarySectionID = Optional.empty();
- 
+
         private Optional<String> librarySectionKey = Optional.empty();
- 
+
         private Optional<String> contentRating = Optional.empty();
- 
+
         private Optional<String> summary = Optional.empty();
- 
+
         private Optional<Double> rating = Optional.empty();
- 
+
         private Optional<Double> audienceRating = Optional.empty();
- 
+
         private Optional<Integer> year = Optional.empty();
- 
+
         private Optional<String> tagline = Optional.empty();
- 
+
         private Optional<String> thumb = Optional.empty();
- 
+
         private Optional<String> art = Optional.empty();
- 
+
         private Optional<Integer> duration = Optional.empty();
- 
+
         private Optional<LocalDate> originallyAvailableAt = Optional.empty();
- 
+
         private Optional<Integer> addedAt = Optional.empty();
- 
+
         private Optional<Integer> updatedAt = Optional.empty();
- 
+
         private Optional<String> audienceRatingImage = Optional.empty();
- 
+
         private Optional<String> hasPremiumExtras = Optional.empty();
- 
+
         private Optional<String> hasPremiumPrimaryExtra = Optional.empty();
- 
+
         private Optional<String> ratingImage = Optional.empty();
- 
+
         private Optional<? extends List<GetPlaylistContentsMedia>> media = Optional.empty();
- 
+
         private Optional<? extends List<GetPlaylistContentsGenre>> genre = Optional.empty();
- 
+
         private Optional<? extends List<GetPlaylistContentsCountry>> country = Optional.empty();
- 
+
         private Optional<? extends List<GetPlaylistContentsDirector>> director = Optional.empty();
- 
+
         private Optional<? extends List<GetPlaylistContentsWriter>> writer = Optional.empty();
- 
+
         private Optional<? extends List<GetPlaylistContentsRole>> role = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder ratingKey(String ratingKey) {
             Utils.checkNotNull(ratingKey, "ratingKey");
@@ -1008,6 +1062,7 @@ public class GetPlaylistContentsMetadata {
             return this;
         }
 
+
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = Optional.ofNullable(key);
@@ -1019,6 +1074,7 @@ public class GetPlaylistContentsMetadata {
             this.key = key;
             return this;
         }
+
 
         public Builder guid(String guid) {
             Utils.checkNotNull(guid, "guid");
@@ -1032,6 +1088,7 @@ public class GetPlaylistContentsMetadata {
             return this;
         }
 
+
         public Builder studio(String studio) {
             Utils.checkNotNull(studio, "studio");
             this.studio = Optional.ofNullable(studio);
@@ -1043,6 +1100,7 @@ public class GetPlaylistContentsMetadata {
             this.studio = studio;
             return this;
         }
+
 
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
@@ -1056,6 +1114,7 @@ public class GetPlaylistContentsMetadata {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -1067,6 +1126,7 @@ public class GetPlaylistContentsMetadata {
             this.title = title;
             return this;
         }
+
 
         public Builder titleSort(String titleSort) {
             Utils.checkNotNull(titleSort, "titleSort");
@@ -1080,6 +1140,7 @@ public class GetPlaylistContentsMetadata {
             return this;
         }
 
+
         public Builder librarySectionTitle(String librarySectionTitle) {
             Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
             this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
@@ -1091,6 +1152,7 @@ public class GetPlaylistContentsMetadata {
             this.librarySectionTitle = librarySectionTitle;
             return this;
         }
+
 
         public Builder librarySectionID(int librarySectionID) {
             Utils.checkNotNull(librarySectionID, "librarySectionID");
@@ -1104,6 +1166,7 @@ public class GetPlaylistContentsMetadata {
             return this;
         }
 
+
         public Builder librarySectionKey(String librarySectionKey) {
             Utils.checkNotNull(librarySectionKey, "librarySectionKey");
             this.librarySectionKey = Optional.ofNullable(librarySectionKey);
@@ -1115,6 +1178,7 @@ public class GetPlaylistContentsMetadata {
             this.librarySectionKey = librarySectionKey;
             return this;
         }
+
 
         public Builder contentRating(String contentRating) {
             Utils.checkNotNull(contentRating, "contentRating");
@@ -1128,6 +1192,7 @@ public class GetPlaylistContentsMetadata {
             return this;
         }
 
+
         public Builder summary(String summary) {
             Utils.checkNotNull(summary, "summary");
             this.summary = Optional.ofNullable(summary);
@@ -1139,6 +1204,7 @@ public class GetPlaylistContentsMetadata {
             this.summary = summary;
             return this;
         }
+
 
         public Builder rating(double rating) {
             Utils.checkNotNull(rating, "rating");
@@ -1152,6 +1218,7 @@ public class GetPlaylistContentsMetadata {
             return this;
         }
 
+
         public Builder audienceRating(double audienceRating) {
             Utils.checkNotNull(audienceRating, "audienceRating");
             this.audienceRating = Optional.ofNullable(audienceRating);
@@ -1163,6 +1230,7 @@ public class GetPlaylistContentsMetadata {
             this.audienceRating = audienceRating;
             return this;
         }
+
 
         public Builder year(int year) {
             Utils.checkNotNull(year, "year");
@@ -1176,6 +1244,7 @@ public class GetPlaylistContentsMetadata {
             return this;
         }
 
+
         public Builder tagline(String tagline) {
             Utils.checkNotNull(tagline, "tagline");
             this.tagline = Optional.ofNullable(tagline);
@@ -1187,6 +1256,7 @@ public class GetPlaylistContentsMetadata {
             this.tagline = tagline;
             return this;
         }
+
 
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -1200,6 +1270,7 @@ public class GetPlaylistContentsMetadata {
             return this;
         }
 
+
         public Builder art(String art) {
             Utils.checkNotNull(art, "art");
             this.art = Optional.ofNullable(art);
@@ -1211,6 +1282,7 @@ public class GetPlaylistContentsMetadata {
             this.art = art;
             return this;
         }
+
 
         public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
@@ -1224,6 +1296,7 @@ public class GetPlaylistContentsMetadata {
             return this;
         }
 
+
         public Builder originallyAvailableAt(LocalDate originallyAvailableAt) {
             Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
             this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
@@ -1235,6 +1308,7 @@ public class GetPlaylistContentsMetadata {
             this.originallyAvailableAt = originallyAvailableAt;
             return this;
         }
+
 
         public Builder addedAt(int addedAt) {
             Utils.checkNotNull(addedAt, "addedAt");
@@ -1248,6 +1322,7 @@ public class GetPlaylistContentsMetadata {
             return this;
         }
 
+
         public Builder updatedAt(int updatedAt) {
             Utils.checkNotNull(updatedAt, "updatedAt");
             this.updatedAt = Optional.ofNullable(updatedAt);
@@ -1259,6 +1334,7 @@ public class GetPlaylistContentsMetadata {
             this.updatedAt = updatedAt;
             return this;
         }
+
 
         public Builder audienceRatingImage(String audienceRatingImage) {
             Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
@@ -1272,6 +1348,7 @@ public class GetPlaylistContentsMetadata {
             return this;
         }
 
+
         public Builder hasPremiumExtras(String hasPremiumExtras) {
             Utils.checkNotNull(hasPremiumExtras, "hasPremiumExtras");
             this.hasPremiumExtras = Optional.ofNullable(hasPremiumExtras);
@@ -1283,6 +1360,7 @@ public class GetPlaylistContentsMetadata {
             this.hasPremiumExtras = hasPremiumExtras;
             return this;
         }
+
 
         public Builder hasPremiumPrimaryExtra(String hasPremiumPrimaryExtra) {
             Utils.checkNotNull(hasPremiumPrimaryExtra, "hasPremiumPrimaryExtra");
@@ -1296,6 +1374,7 @@ public class GetPlaylistContentsMetadata {
             return this;
         }
 
+
         public Builder ratingImage(String ratingImage) {
             Utils.checkNotNull(ratingImage, "ratingImage");
             this.ratingImage = Optional.ofNullable(ratingImage);
@@ -1307,6 +1386,7 @@ public class GetPlaylistContentsMetadata {
             this.ratingImage = ratingImage;
             return this;
         }
+
 
         public Builder media(List<GetPlaylistContentsMedia> media) {
             Utils.checkNotNull(media, "media");
@@ -1320,6 +1400,7 @@ public class GetPlaylistContentsMetadata {
             return this;
         }
 
+
         public Builder genre(List<GetPlaylistContentsGenre> genre) {
             Utils.checkNotNull(genre, "genre");
             this.genre = Optional.ofNullable(genre);
@@ -1331,6 +1412,7 @@ public class GetPlaylistContentsMetadata {
             this.genre = genre;
             return this;
         }
+
 
         public Builder country(List<GetPlaylistContentsCountry> country) {
             Utils.checkNotNull(country, "country");
@@ -1344,6 +1426,7 @@ public class GetPlaylistContentsMetadata {
             return this;
         }
 
+
         public Builder director(List<GetPlaylistContentsDirector> director) {
             Utils.checkNotNull(director, "director");
             this.director = Optional.ofNullable(director);
@@ -1355,6 +1438,7 @@ public class GetPlaylistContentsMetadata {
             this.director = director;
             return this;
         }
+
 
         public Builder writer(List<GetPlaylistContentsWriter> writer) {
             Utils.checkNotNull(writer, "writer");
@@ -1368,6 +1452,7 @@ public class GetPlaylistContentsMetadata {
             return this;
         }
 
+
         public Builder role(List<GetPlaylistContentsRole> role) {
             Utils.checkNotNull(role, "role");
             this.role = Optional.ofNullable(role);
@@ -1379,41 +1464,22 @@ public class GetPlaylistContentsMetadata {
             this.role = role;
             return this;
         }
-        
+
         public GetPlaylistContentsMetadata build() {
+
             return new GetPlaylistContentsMetadata(
-                ratingKey,
-                key,
-                guid,
-                studio,
-                type,
-                title,
-                titleSort,
-                librarySectionTitle,
-                librarySectionID,
-                librarySectionKey,
-                contentRating,
-                summary,
-                rating,
-                audienceRating,
-                year,
-                tagline,
-                thumb,
-                art,
-                duration,
-                originallyAvailableAt,
-                addedAt,
-                updatedAt,
-                audienceRatingImage,
-                hasPremiumExtras,
-                hasPremiumPrimaryExtra,
-                ratingImage,
-                media,
-                genre,
-                country,
-                director,
-                writer,
-                role);
+                ratingKey, key, guid,
+                studio, type, title,
+                titleSort, librarySectionTitle, librarySectionID,
+                librarySectionKey, contentRating, summary,
+                rating, audienceRating, year,
+                tagline, thumb, art,
+                duration, originallyAvailableAt, addedAt,
+                updatedAt, audienceRatingImage, hasPremiumExtras,
+                hasPremiumPrimaryExtra, ratingImage, media,
+                genre, country, director,
+                writer, role);
         }
+
     }
 }

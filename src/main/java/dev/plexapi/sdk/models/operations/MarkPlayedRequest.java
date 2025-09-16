@@ -10,10 +10,9 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class MarkPlayedRequest {
-
     /**
      * The media key to mark as played
      */
@@ -35,9 +34,10 @@ public class MarkPlayedRequest {
         return key;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The media key to mark as played
@@ -48,7 +48,6 @@ public class MarkPlayedRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -59,12 +58,12 @@ public class MarkPlayedRequest {
         }
         MarkPlayedRequest other = (MarkPlayedRequest) o;
         return 
-            Objects.deepEquals(this.key, other.key);
+            Utils.enhancedDeepEquals(this.key, other.key);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             key);
     }
     
@@ -73,14 +72,16 @@ public class MarkPlayedRequest {
         return Utils.toString(MarkPlayedRequest.class,
                 "key", key);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Double key;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The media key to mark as played
@@ -90,10 +91,12 @@ public class MarkPlayedRequest {
             this.key = key;
             return this;
         }
-        
+
         public MarkPlayedRequest build() {
+
             return new MarkPlayedRequest(
                 key);
         }
+
     }
 }

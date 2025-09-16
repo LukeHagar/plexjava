@@ -19,7 +19,7 @@ public enum PostUsersSignInDataAutoSelectSubtitle {
     @JsonValue
     private final int value;
 
-    private PostUsersSignInDataAutoSelectSubtitle(int value) {
+    PostUsersSignInDataAutoSelectSubtitle(int value) {
         this.value = value;
     }
     

@@ -12,7 +12,6 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -43,9 +42,10 @@ public class GetRecentlyAddedLibraryResponseBody {
         return (Optional<GetRecentlyAddedLibraryMediaContainer>) mediaContainer;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetRecentlyAddedLibraryResponseBody withMediaContainer(GetRecentlyAddedLibraryMediaContainer mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
@@ -53,13 +53,13 @@ public class GetRecentlyAddedLibraryResponseBody {
         return this;
     }
 
+
     public GetRecentlyAddedLibraryResponseBody withMediaContainer(Optional<? extends GetRecentlyAddedLibraryMediaContainer> mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
         this.mediaContainer = mediaContainer;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -70,12 +70,12 @@ public class GetRecentlyAddedLibraryResponseBody {
         }
         GetRecentlyAddedLibraryResponseBody other = (GetRecentlyAddedLibraryResponseBody) o;
         return 
-            Objects.deepEquals(this.mediaContainer, other.mediaContainer);
+            Utils.enhancedDeepEquals(this.mediaContainer, other.mediaContainer);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             mediaContainer);
     }
     
@@ -84,14 +84,16 @@ public class GetRecentlyAddedLibraryResponseBody {
         return Utils.toString(GetRecentlyAddedLibraryResponseBody.class,
                 "mediaContainer", mediaContainer);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends GetRecentlyAddedLibraryMediaContainer> mediaContainer = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder mediaContainer(GetRecentlyAddedLibraryMediaContainer mediaContainer) {
             Utils.checkNotNull(mediaContainer, "mediaContainer");
@@ -104,10 +106,12 @@ public class GetRecentlyAddedLibraryResponseBody {
             this.mediaContainer = mediaContainer;
             return this;
         }
-        
+
         public GetRecentlyAddedLibraryResponseBody build() {
+
             return new GetRecentlyAddedLibraryResponseBody(
                 mediaContainer);
         }
+
     }
 }

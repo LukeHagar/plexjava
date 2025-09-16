@@ -14,7 +14,6 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -27,14 +26,18 @@ public class Marker {
     @JsonProperty("id")
     private long id;
 
+
     @JsonProperty("type")
     private String type;
+
 
     @JsonProperty("startTimeOffset")
     private long startTimeOffset;
 
+
     @JsonProperty("endTimeOffset")
     private long endTimeOffset;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("final")
@@ -74,7 +77,8 @@ public class Marker {
             String type,
             long startTimeOffset,
             long endTimeOffset) {
-        this(id, type, startTimeOffset, endTimeOffset, Optional.empty(), Optional.empty());
+        this(id, type, startTimeOffset,
+            endTimeOffset, Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -111,9 +115,10 @@ public class Marker {
         return (Optional<Attributes>) attributes;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Marker withId(long id) {
         Utils.checkNotNull(id, "id");
@@ -145,6 +150,7 @@ public class Marker {
         return this;
     }
 
+
     public Marker withFinal(Optional<Boolean> final_) {
         Utils.checkNotNull(final_, "final_");
         this.final_ = final_;
@@ -160,6 +166,7 @@ public class Marker {
         return this;
     }
 
+
     /**
      * Attributes associated with the marker.
      */
@@ -169,7 +176,6 @@ public class Marker {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -180,23 +186,19 @@ public class Marker {
         }
         Marker other = (Marker) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.startTimeOffset, other.startTimeOffset) &&
-            Objects.deepEquals(this.endTimeOffset, other.endTimeOffset) &&
-            Objects.deepEquals(this.final_, other.final_) &&
-            Objects.deepEquals(this.attributes, other.attributes);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.startTimeOffset, other.startTimeOffset) &&
+            Utils.enhancedDeepEquals(this.endTimeOffset, other.endTimeOffset) &&
+            Utils.enhancedDeepEquals(this.final_, other.final_) &&
+            Utils.enhancedDeepEquals(this.attributes, other.attributes);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            type,
-            startTimeOffset,
-            endTimeOffset,
-            final_,
-            attributes);
+        return Utils.enhancedHash(
+            id, type, startTimeOffset,
+            endTimeOffset, final_, attributes);
     }
     
     @Override
@@ -209,24 +211,26 @@ public class Marker {
                 "final_", final_,
                 "attributes", attributes);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Long id;
- 
+
         private String type;
- 
+
         private Long startTimeOffset;
- 
+
         private Long endTimeOffset;
- 
+
         private Optional<Boolean> final_ = Optional.empty();
- 
+
         private Optional<? extends Attributes> attributes = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder id(long id) {
             Utils.checkNotNull(id, "id");
@@ -234,11 +238,13 @@ public class Marker {
             return this;
         }
 
+
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
         }
+
 
         public Builder startTimeOffset(long startTimeOffset) {
             Utils.checkNotNull(startTimeOffset, "startTimeOffset");
@@ -246,11 +252,13 @@ public class Marker {
             return this;
         }
 
+
         public Builder endTimeOffset(long endTimeOffset) {
             Utils.checkNotNull(endTimeOffset, "endTimeOffset");
             this.endTimeOffset = endTimeOffset;
             return this;
         }
+
 
         public Builder final_(boolean final_) {
             Utils.checkNotNull(final_, "final_");
@@ -263,6 +271,7 @@ public class Marker {
             this.final_ = final_;
             return this;
         }
+
 
         /**
          * Attributes associated with the marker.
@@ -281,15 +290,13 @@ public class Marker {
             this.attributes = attributes;
             return this;
         }
-        
+
         public Marker build() {
+
             return new Marker(
-                id,
-                type,
-                startTimeOffset,
-                endTimeOffset,
-                final_,
-                attributes);
+                id, type, startTimeOffset,
+                endTimeOffset, final_, attributes);
         }
+
     }
 }

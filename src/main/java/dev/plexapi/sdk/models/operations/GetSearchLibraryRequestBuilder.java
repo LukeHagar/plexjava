@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetSearchLibrary;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.Integer;
@@ -11,10 +15,10 @@ public class GetSearchLibraryRequestBuilder {
 
     private Integer sectionKey;
     private GetSearchLibraryQueryParamType type;
-    private final SDKMethodInterfaces.MethodCallGetSearchLibrary sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetSearchLibraryRequestBuilder(SDKMethodInterfaces.MethodCallGetSearchLibrary sdk) {
-        this.sdk = sdk;
+    public GetSearchLibraryRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetSearchLibraryRequestBuilder sectionKey(int sectionKey) {
@@ -29,10 +33,21 @@ public class GetSearchLibraryRequestBuilder {
         return this;
     }
 
-    public GetSearchLibraryResponse call() throws Exception {
 
-        return sdk.getSearchLibrary(
-            sectionKey,
+    private GetSearchLibraryRequest buildRequest() {
+
+        GetSearchLibraryRequest request = new GetSearchLibraryRequest(sectionKey,
             type);
+
+        return request;
+    }
+
+    public GetSearchLibraryResponse call() throws Exception {
+        
+        RequestOperation<GetSearchLibraryRequest, GetSearchLibraryResponse> operation
+              = new GetSearchLibrary.Sync(sdkConfiguration);
+        GetSearchLibraryRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

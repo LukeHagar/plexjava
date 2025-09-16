@@ -20,7 +20,7 @@ public enum Hidden {
     @JsonValue
     private final int value;
 
-    private Hidden(int value) {
+    Hidden(int value) {
         this.value = value;
     }
     

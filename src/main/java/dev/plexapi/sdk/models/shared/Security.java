@@ -10,8 +10,8 @@ import dev.plexapi.sdk.utils.SpeakeasyMetadata;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class Security implements HasSecurity {
 
@@ -34,9 +34,10 @@ public class Security implements HasSecurity {
         return accessToken;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Security withAccessToken(String accessToken) {
         Utils.checkNotNull(accessToken, "accessToken");
@@ -44,13 +45,13 @@ public class Security implements HasSecurity {
         return this;
     }
 
+
     public Security withAccessToken(Optional<String> accessToken) {
         Utils.checkNotNull(accessToken, "accessToken");
         this.accessToken = accessToken;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -61,12 +62,12 @@ public class Security implements HasSecurity {
         }
         Security other = (Security) o;
         return 
-            Objects.deepEquals(this.accessToken, other.accessToken);
+            Utils.enhancedDeepEquals(this.accessToken, other.accessToken);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             accessToken);
     }
     
@@ -75,14 +76,16 @@ public class Security implements HasSecurity {
         return Utils.toString(Security.class,
                 "accessToken", accessToken);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> accessToken = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder accessToken(String accessToken) {
             Utils.checkNotNull(accessToken, "accessToken");
@@ -95,10 +98,12 @@ public class Security implements HasSecurity {
             this.accessToken = accessToken;
             return this;
         }
-        
+
         public Security build() {
+
             return new Security(
                 accessToken);
         }
+
     }
 }

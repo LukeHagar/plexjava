@@ -12,13 +12,14 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class Billing {
 
     @JsonProperty("internalPaymentMethod")
     private InternalPaymentMethod internalPaymentMethod;
+
 
     @JsonInclude(Include.ALWAYS)
     @JsonProperty("paymentMethodId")
@@ -49,9 +50,10 @@ public class Billing {
         return paymentMethodId;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Billing withInternalPaymentMethod(InternalPaymentMethod internalPaymentMethod) {
         Utils.checkNotNull(internalPaymentMethod, "internalPaymentMethod");
@@ -65,13 +67,13 @@ public class Billing {
         return this;
     }
 
+
     public Billing withPaymentMethodId(Optional<Long> paymentMethodId) {
         Utils.checkNotNull(paymentMethodId, "paymentMethodId");
         this.paymentMethodId = paymentMethodId;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -82,15 +84,14 @@ public class Billing {
         }
         Billing other = (Billing) o;
         return 
-            Objects.deepEquals(this.internalPaymentMethod, other.internalPaymentMethod) &&
-            Objects.deepEquals(this.paymentMethodId, other.paymentMethodId);
+            Utils.enhancedDeepEquals(this.internalPaymentMethod, other.internalPaymentMethod) &&
+            Utils.enhancedDeepEquals(this.paymentMethodId, other.paymentMethodId);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            internalPaymentMethod,
-            paymentMethodId);
+        return Utils.enhancedHash(
+            internalPaymentMethod, paymentMethodId);
     }
     
     @Override
@@ -99,22 +100,25 @@ public class Billing {
                 "internalPaymentMethod", internalPaymentMethod,
                 "paymentMethodId", paymentMethodId);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private InternalPaymentMethod internalPaymentMethod;
- 
+
         private Optional<Long> paymentMethodId = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder internalPaymentMethod(InternalPaymentMethod internalPaymentMethod) {
             Utils.checkNotNull(internalPaymentMethod, "internalPaymentMethod");
             this.internalPaymentMethod = internalPaymentMethod;
             return this;
         }
+
 
         public Builder paymentMethodId(long paymentMethodId) {
             Utils.checkNotNull(paymentMethodId, "paymentMethodId");
@@ -127,11 +131,12 @@ public class Billing {
             this.paymentMethodId = paymentMethodId;
             return this;
         }
-        
+
         public Billing build() {
+
             return new Billing(
-                internalPaymentMethod,
-                paymentMethodId);
+                internalPaymentMethod, paymentMethodId);
         }
+
     }
 }

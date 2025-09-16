@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class Release {
 
@@ -20,21 +20,26 @@ public class Release {
     @JsonProperty("key")
     private Optional<String> key;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("version")
     private Optional<String> version;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("added")
     private Optional<String> added;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("fixed")
     private Optional<String> fixed;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("downloadURL")
     private Optional<String> downloadURL;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("state")
@@ -63,7 +68,8 @@ public class Release {
     }
     
     public Release() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -96,15 +102,17 @@ public class Release {
         return state;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Release withKey(String key) {
         Utils.checkNotNull(key, "key");
         this.key = Optional.ofNullable(key);
         return this;
     }
+
 
     public Release withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
@@ -118,6 +126,7 @@ public class Release {
         return this;
     }
 
+
     public Release withVersion(Optional<String> version) {
         Utils.checkNotNull(version, "version");
         this.version = version;
@@ -129,6 +138,7 @@ public class Release {
         this.added = Optional.ofNullable(added);
         return this;
     }
+
 
     public Release withAdded(Optional<String> added) {
         Utils.checkNotNull(added, "added");
@@ -142,6 +152,7 @@ public class Release {
         return this;
     }
 
+
     public Release withFixed(Optional<String> fixed) {
         Utils.checkNotNull(fixed, "fixed");
         this.fixed = fixed;
@@ -153,6 +164,7 @@ public class Release {
         this.downloadURL = Optional.ofNullable(downloadURL);
         return this;
     }
+
 
     public Release withDownloadURL(Optional<String> downloadURL) {
         Utils.checkNotNull(downloadURL, "downloadURL");
@@ -166,13 +178,13 @@ public class Release {
         return this;
     }
 
+
     public Release withState(Optional<String> state) {
         Utils.checkNotNull(state, "state");
         this.state = state;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -183,23 +195,19 @@ public class Release {
         }
         Release other = (Release) o;
         return 
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.version, other.version) &&
-            Objects.deepEquals(this.added, other.added) &&
-            Objects.deepEquals(this.fixed, other.fixed) &&
-            Objects.deepEquals(this.downloadURL, other.downloadURL) &&
-            Objects.deepEquals(this.state, other.state);
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.version, other.version) &&
+            Utils.enhancedDeepEquals(this.added, other.added) &&
+            Utils.enhancedDeepEquals(this.fixed, other.fixed) &&
+            Utils.enhancedDeepEquals(this.downloadURL, other.downloadURL) &&
+            Utils.enhancedDeepEquals(this.state, other.state);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            key,
-            version,
-            added,
-            fixed,
-            downloadURL,
-            state);
+        return Utils.enhancedHash(
+            key, version, added,
+            fixed, downloadURL, state);
     }
     
     @Override
@@ -212,24 +220,26 @@ public class Release {
                 "downloadURL", downloadURL,
                 "state", state);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> version = Optional.empty();
- 
+
         private Optional<String> added = Optional.empty();
- 
+
         private Optional<String> fixed = Optional.empty();
- 
+
         private Optional<String> downloadURL = Optional.empty();
- 
+
         private Optional<String> state = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
@@ -243,6 +253,7 @@ public class Release {
             return this;
         }
 
+
         public Builder version(String version) {
             Utils.checkNotNull(version, "version");
             this.version = Optional.ofNullable(version);
@@ -254,6 +265,7 @@ public class Release {
             this.version = version;
             return this;
         }
+
 
         public Builder added(String added) {
             Utils.checkNotNull(added, "added");
@@ -267,6 +279,7 @@ public class Release {
             return this;
         }
 
+
         public Builder fixed(String fixed) {
             Utils.checkNotNull(fixed, "fixed");
             this.fixed = Optional.ofNullable(fixed);
@@ -278,6 +291,7 @@ public class Release {
             this.fixed = fixed;
             return this;
         }
+
 
         public Builder downloadURL(String downloadURL) {
             Utils.checkNotNull(downloadURL, "downloadURL");
@@ -291,6 +305,7 @@ public class Release {
             return this;
         }
 
+
         public Builder state(String state) {
             Utils.checkNotNull(state, "state");
             this.state = Optional.ofNullable(state);
@@ -302,15 +317,13 @@ public class Release {
             this.state = state;
             return this;
         }
-        
+
         public Release build() {
+
             return new Release(
-                key,
-                version,
-                added,
-                fixed,
-                downloadURL,
-                state);
+                key, version, added,
+                fixed, downloadURL, state);
         }
+
     }
 }

@@ -12,7 +12,6 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -25,11 +24,14 @@ public class PostUsersSignInDataRequestBody {
     @SpeakeasyMetadata("form:name=login")
     private String login;
 
+
     @SpeakeasyMetadata("form:name=password")
     private String password;
 
+
     @SpeakeasyMetadata("form:name=rememberMe")
     private Optional<Boolean> rememberMe;
+
 
     @SpeakeasyMetadata("form:name=verificationCode")
     private Optional<String> verificationCode;
@@ -53,7 +55,8 @@ public class PostUsersSignInDataRequestBody {
     public PostUsersSignInDataRequestBody(
             String login,
             String password) {
-        this(login, password, Optional.empty(), Optional.empty());
+        this(login, password, Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -76,9 +79,10 @@ public class PostUsersSignInDataRequestBody {
         return verificationCode;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public PostUsersSignInDataRequestBody withLogin(String login) {
         Utils.checkNotNull(login, "login");
@@ -98,6 +102,7 @@ public class PostUsersSignInDataRequestBody {
         return this;
     }
 
+
     public PostUsersSignInDataRequestBody withRememberMe(Optional<Boolean> rememberMe) {
         Utils.checkNotNull(rememberMe, "rememberMe");
         this.rememberMe = rememberMe;
@@ -110,13 +115,13 @@ public class PostUsersSignInDataRequestBody {
         return this;
     }
 
+
     public PostUsersSignInDataRequestBody withVerificationCode(Optional<String> verificationCode) {
         Utils.checkNotNull(verificationCode, "verificationCode");
         this.verificationCode = verificationCode;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -127,18 +132,16 @@ public class PostUsersSignInDataRequestBody {
         }
         PostUsersSignInDataRequestBody other = (PostUsersSignInDataRequestBody) o;
         return 
-            Objects.deepEquals(this.login, other.login) &&
-            Objects.deepEquals(this.password, other.password) &&
-            Objects.deepEquals(this.rememberMe, other.rememberMe) &&
-            Objects.deepEquals(this.verificationCode, other.verificationCode);
+            Utils.enhancedDeepEquals(this.login, other.login) &&
+            Utils.enhancedDeepEquals(this.password, other.password) &&
+            Utils.enhancedDeepEquals(this.rememberMe, other.rememberMe) &&
+            Utils.enhancedDeepEquals(this.verificationCode, other.verificationCode);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            login,
-            password,
-            rememberMe,
+        return Utils.enhancedHash(
+            login, password, rememberMe,
             verificationCode);
     }
     
@@ -150,20 +153,22 @@ public class PostUsersSignInDataRequestBody {
                 "rememberMe", rememberMe,
                 "verificationCode", verificationCode);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String login;
- 
+
         private String password;
- 
+
         private Optional<Boolean> rememberMe;
- 
+
         private Optional<String> verificationCode = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder login(String login) {
             Utils.checkNotNull(login, "login");
@@ -171,11 +176,13 @@ public class PostUsersSignInDataRequestBody {
             return this;
         }
 
+
         public Builder password(String password) {
             Utils.checkNotNull(password, "password");
             this.password = password;
             return this;
         }
+
 
         public Builder rememberMe(boolean rememberMe) {
             Utils.checkNotNull(rememberMe, "rememberMe");
@@ -189,6 +196,7 @@ public class PostUsersSignInDataRequestBody {
             return this;
         }
 
+
         public Builder verificationCode(String verificationCode) {
             Utils.checkNotNull(verificationCode, "verificationCode");
             this.verificationCode = Optional.ofNullable(verificationCode);
@@ -200,17 +208,17 @@ public class PostUsersSignInDataRequestBody {
             this.verificationCode = verificationCode;
             return this;
         }
-        
+
         public PostUsersSignInDataRequestBody build() {
             if (rememberMe == null) {
                 rememberMe = _SINGLETON_VALUE_RememberMe.value();
             }
+
             return new PostUsersSignInDataRequestBody(
-                login,
-                password,
-                rememberMe,
+                login, password, rememberMe,
                 verificationCode);
         }
+
 
         private static final LazySingletonValue<Optional<Boolean>> _SINGLETON_VALUE_RememberMe =
                 new LazySingletonValue<>(

@@ -12,7 +12,6 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -43,9 +42,10 @@ public class GetMyPlexAccountResponseBody {
         return (Optional<MyPlex>) myPlex;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetMyPlexAccountResponseBody withMyPlex(MyPlex myPlex) {
         Utils.checkNotNull(myPlex, "myPlex");
@@ -53,13 +53,13 @@ public class GetMyPlexAccountResponseBody {
         return this;
     }
 
+
     public GetMyPlexAccountResponseBody withMyPlex(Optional<? extends MyPlex> myPlex) {
         Utils.checkNotNull(myPlex, "myPlex");
         this.myPlex = myPlex;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -70,12 +70,12 @@ public class GetMyPlexAccountResponseBody {
         }
         GetMyPlexAccountResponseBody other = (GetMyPlexAccountResponseBody) o;
         return 
-            Objects.deepEquals(this.myPlex, other.myPlex);
+            Utils.enhancedDeepEquals(this.myPlex, other.myPlex);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             myPlex);
     }
     
@@ -84,14 +84,16 @@ public class GetMyPlexAccountResponseBody {
         return Utils.toString(GetMyPlexAccountResponseBody.class,
                 "myPlex", myPlex);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends MyPlex> myPlex = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder myPlex(MyPlex myPlex) {
             Utils.checkNotNull(myPlex, "myPlex");
@@ -104,10 +106,12 @@ public class GetMyPlexAccountResponseBody {
             this.myPlex = myPlex;
             return this;
         }
-        
+
         public GetMyPlexAccountResponseBody build() {
+
             return new GetMyPlexAccountResponseBody(
                 myPlex);
         }
+
     }
 }

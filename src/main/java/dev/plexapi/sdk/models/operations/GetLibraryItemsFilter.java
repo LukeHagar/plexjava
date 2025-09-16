@@ -9,21 +9,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetLibraryItemsFilter {
 
     @JsonProperty("filter")
     private String filter;
 
+
     @JsonProperty("filterType")
     private String filterType;
+
 
     @JsonProperty("key")
     private String key;
 
+
     @JsonProperty("title")
     private String title;
+
 
     @JsonProperty("type")
     private String type;
@@ -72,9 +76,10 @@ public class GetLibraryItemsFilter {
         return type;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetLibraryItemsFilter withFilter(String filter) {
         Utils.checkNotNull(filter, "filter");
@@ -106,7 +111,6 @@ public class GetLibraryItemsFilter {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -117,21 +121,18 @@ public class GetLibraryItemsFilter {
         }
         GetLibraryItemsFilter other = (GetLibraryItemsFilter) o;
         return 
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.filterType, other.filterType) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.type, other.type);
+            Utils.enhancedDeepEquals(this.filter, other.filter) &&
+            Utils.enhancedDeepEquals(this.filterType, other.filterType) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.type, other.type);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            filter,
-            filterType,
-            key,
-            title,
-            type);
+        return Utils.enhancedHash(
+            filter, filterType, key,
+            title, type);
     }
     
     @Override
@@ -143,22 +144,24 @@ public class GetLibraryItemsFilter {
                 "title", title,
                 "type", type);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String filter;
- 
+
         private String filterType;
- 
+
         private String key;
- 
+
         private String title;
- 
+
         private String type;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder filter(String filter) {
             Utils.checkNotNull(filter, "filter");
@@ -166,11 +169,13 @@ public class GetLibraryItemsFilter {
             return this;
         }
 
+
         public Builder filterType(String filterType) {
             Utils.checkNotNull(filterType, "filterType");
             this.filterType = filterType;
             return this;
         }
+
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
@@ -178,25 +183,26 @@ public class GetLibraryItemsFilter {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = title;
             return this;
         }
 
+
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
         }
-        
+
         public GetLibraryItemsFilter build() {
+
             return new GetLibraryItemsFilter(
-                filter,
-                filterType,
-                key,
-                title,
-                type);
+                filter, filterType, key,
+                title, type);
         }
+
     }
 }

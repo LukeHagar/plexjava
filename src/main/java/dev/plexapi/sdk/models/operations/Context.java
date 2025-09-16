@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class Context {
 
@@ -36,9 +36,10 @@ public class Context {
         return librarySectionID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Context withLibrarySectionID(String librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
@@ -46,13 +47,13 @@ public class Context {
         return this;
     }
 
+
     public Context withLibrarySectionID(Optional<String> librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
         this.librarySectionID = librarySectionID;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -63,12 +64,12 @@ public class Context {
         }
         Context other = (Context) o;
         return 
-            Objects.deepEquals(this.librarySectionID, other.librarySectionID);
+            Utils.enhancedDeepEquals(this.librarySectionID, other.librarySectionID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             librarySectionID);
     }
     
@@ -77,14 +78,16 @@ public class Context {
         return Utils.toString(Context.class,
                 "librarySectionID", librarySectionID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> librarySectionID = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder librarySectionID(String librarySectionID) {
             Utils.checkNotNull(librarySectionID, "librarySectionID");
@@ -97,10 +100,12 @@ public class Context {
             this.librarySectionID = librarySectionID;
             return this;
         }
-        
+
         public Context build() {
+
             return new Context(
                 librarySectionID);
         }
+
     }
 }

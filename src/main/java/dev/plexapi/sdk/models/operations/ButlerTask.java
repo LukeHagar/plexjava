@@ -13,8 +13,8 @@ import java.lang.Boolean;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class ButlerTask {
 
@@ -22,21 +22,26 @@ public class ButlerTask {
     @JsonProperty("name")
     private Optional<String> name;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("interval")
     private Optional<Double> interval;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("scheduleRandomized")
     private Optional<Boolean> scheduleRandomized;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("enabled")
     private Optional<Boolean> enabled;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
@@ -65,7 +70,8 @@ public class ButlerTask {
     }
     
     public ButlerTask() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -98,15 +104,17 @@ public class ButlerTask {
         return description;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public ButlerTask withName(String name) {
         Utils.checkNotNull(name, "name");
         this.name = Optional.ofNullable(name);
         return this;
     }
+
 
     public ButlerTask withName(Optional<String> name) {
         Utils.checkNotNull(name, "name");
@@ -120,6 +128,7 @@ public class ButlerTask {
         return this;
     }
 
+
     public ButlerTask withInterval(Optional<Double> interval) {
         Utils.checkNotNull(interval, "interval");
         this.interval = interval;
@@ -131,6 +140,7 @@ public class ButlerTask {
         this.scheduleRandomized = Optional.ofNullable(scheduleRandomized);
         return this;
     }
+
 
     public ButlerTask withScheduleRandomized(Optional<Boolean> scheduleRandomized) {
         Utils.checkNotNull(scheduleRandomized, "scheduleRandomized");
@@ -144,6 +154,7 @@ public class ButlerTask {
         return this;
     }
 
+
     public ButlerTask withEnabled(Optional<Boolean> enabled) {
         Utils.checkNotNull(enabled, "enabled");
         this.enabled = enabled;
@@ -155,6 +166,7 @@ public class ButlerTask {
         this.title = Optional.ofNullable(title);
         return this;
     }
+
 
     public ButlerTask withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
@@ -168,13 +180,13 @@ public class ButlerTask {
         return this;
     }
 
+
     public ButlerTask withDescription(Optional<String> description) {
         Utils.checkNotNull(description, "description");
         this.description = description;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -185,23 +197,19 @@ public class ButlerTask {
         }
         ButlerTask other = (ButlerTask) o;
         return 
-            Objects.deepEquals(this.name, other.name) &&
-            Objects.deepEquals(this.interval, other.interval) &&
-            Objects.deepEquals(this.scheduleRandomized, other.scheduleRandomized) &&
-            Objects.deepEquals(this.enabled, other.enabled) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.description, other.description);
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.interval, other.interval) &&
+            Utils.enhancedDeepEquals(this.scheduleRandomized, other.scheduleRandomized) &&
+            Utils.enhancedDeepEquals(this.enabled, other.enabled) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.description, other.description);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            name,
-            interval,
-            scheduleRandomized,
-            enabled,
-            title,
-            description);
+        return Utils.enhancedHash(
+            name, interval, scheduleRandomized,
+            enabled, title, description);
     }
     
     @Override
@@ -214,24 +222,26 @@ public class ButlerTask {
                 "title", title,
                 "description", description);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> name = Optional.empty();
- 
+
         private Optional<Double> interval = Optional.empty();
- 
+
         private Optional<Boolean> scheduleRandomized = Optional.empty();
- 
+
         private Optional<Boolean> enabled = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> description = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder name(String name) {
             Utils.checkNotNull(name, "name");
@@ -245,6 +255,7 @@ public class ButlerTask {
             return this;
         }
 
+
         public Builder interval(double interval) {
             Utils.checkNotNull(interval, "interval");
             this.interval = Optional.ofNullable(interval);
@@ -256,6 +267,7 @@ public class ButlerTask {
             this.interval = interval;
             return this;
         }
+
 
         public Builder scheduleRandomized(boolean scheduleRandomized) {
             Utils.checkNotNull(scheduleRandomized, "scheduleRandomized");
@@ -269,6 +281,7 @@ public class ButlerTask {
             return this;
         }
 
+
         public Builder enabled(boolean enabled) {
             Utils.checkNotNull(enabled, "enabled");
             this.enabled = Optional.ofNullable(enabled);
@@ -280,6 +293,7 @@ public class ButlerTask {
             this.enabled = enabled;
             return this;
         }
+
 
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
@@ -293,6 +307,7 @@ public class ButlerTask {
             return this;
         }
 
+
         public Builder description(String description) {
             Utils.checkNotNull(description, "description");
             this.description = Optional.ofNullable(description);
@@ -304,15 +319,13 @@ public class ButlerTask {
             this.description = description;
             return this;
         }
-        
+
         public ButlerTask build() {
+
             return new ButlerTask(
-                name,
-                interval,
-                scheduleRandomized,
-                enabled,
-                title,
-                description);
+                name, interval, scheduleRandomized,
+                enabled, title, description);
         }
+
     }
 }

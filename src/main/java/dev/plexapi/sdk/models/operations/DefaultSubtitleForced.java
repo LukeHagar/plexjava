@@ -19,7 +19,7 @@ public enum DefaultSubtitleForced {
     @JsonValue
     private final int value;
 
-    private DefaultSubtitleForced(int value) {
+    DefaultSubtitleForced(int value) {
         this.value = value;
     }
     

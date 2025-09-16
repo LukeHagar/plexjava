@@ -10,11 +10,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
-public class CheckForUpdatesRequest {
 
+public class CheckForUpdatesRequest {
     /**
      * Indicate that you want to start download any updates found.
      */
@@ -41,9 +40,10 @@ public class CheckForUpdatesRequest {
         return (Optional<Download>) download;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Indicate that you want to start download any updates found.
@@ -54,6 +54,7 @@ public class CheckForUpdatesRequest {
         return this;
     }
 
+
     /**
      * Indicate that you want to start download any updates found.
      */
@@ -63,7 +64,6 @@ public class CheckForUpdatesRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -74,12 +74,12 @@ public class CheckForUpdatesRequest {
         }
         CheckForUpdatesRequest other = (CheckForUpdatesRequest) o;
         return 
-            Objects.deepEquals(this.download, other.download);
+            Utils.enhancedDeepEquals(this.download, other.download);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             download);
     }
     
@@ -88,14 +88,16 @@ public class CheckForUpdatesRequest {
         return Utils.toString(CheckForUpdatesRequest.class,
                 "download", download);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends Download> download = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Indicate that you want to start download any updates found.
@@ -114,10 +116,12 @@ public class CheckForUpdatesRequest {
             this.download = download;
             return this;
         }
-        
+
         public CheckForUpdatesRequest build() {
+
             return new CheckForUpdatesRequest(
                 download);
         }
+
     }
 }

@@ -19,7 +19,7 @@ public enum GetLibraryItemsQueryParamIncludeMeta {
     @JsonValue
     private final int value;
 
-    private GetLibraryItemsQueryParamIncludeMeta(int value) {
+    GetLibraryItemsQueryParamIncludeMeta(int value) {
         this.value = value;
     }
     

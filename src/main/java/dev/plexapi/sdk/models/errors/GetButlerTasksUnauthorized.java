@@ -16,7 +16,6 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -42,6 +41,7 @@ public class GetButlerTasksUnauthorized extends RuntimeException {
     public GetButlerTasksUnauthorized(
             @JsonProperty("errors") Optional<? extends List<GetButlerTasksButlerErrors>> errors,
             @JsonProperty("RawResponse") Optional<? extends HttpResponse<InputStream>> rawResponse) {
+        super("API error occurred");
         Utils.checkNotNull(errors, "errors");
         Utils.checkNotNull(rawResponse, "rawResponse");
         this.errors = errors;
@@ -67,15 +67,17 @@ public class GetButlerTasksUnauthorized extends RuntimeException {
         return (Optional<HttpResponse<InputStream>>) rawResponse;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetButlerTasksUnauthorized withErrors(List<GetButlerTasksButlerErrors> errors) {
         Utils.checkNotNull(errors, "errors");
         this.errors = Optional.ofNullable(errors);
         return this;
     }
+
 
     public GetButlerTasksUnauthorized withErrors(Optional<? extends List<GetButlerTasksButlerErrors>> errors) {
         Utils.checkNotNull(errors, "errors");
@@ -92,6 +94,7 @@ public class GetButlerTasksUnauthorized extends RuntimeException {
         return this;
     }
 
+
     /**
      * Raw HTTP response; suitable for custom response parsing
      */
@@ -101,7 +104,6 @@ public class GetButlerTasksUnauthorized extends RuntimeException {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -112,15 +114,14 @@ public class GetButlerTasksUnauthorized extends RuntimeException {
         }
         GetButlerTasksUnauthorized other = (GetButlerTasksUnauthorized) o;
         return 
-            Objects.deepEquals(this.errors, other.errors) &&
-            Objects.deepEquals(this.rawResponse, other.rawResponse);
+            Utils.enhancedDeepEquals(this.errors, other.errors) &&
+            Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            errors,
-            rawResponse);
+        return Utils.enhancedHash(
+            errors, rawResponse);
     }
     
     @Override
@@ -129,16 +130,18 @@ public class GetButlerTasksUnauthorized extends RuntimeException {
                 "errors", errors,
                 "rawResponse", rawResponse);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends List<GetButlerTasksButlerErrors>> errors = Optional.empty();
- 
+
         private Optional<? extends HttpResponse<InputStream>> rawResponse;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder errors(List<GetButlerTasksButlerErrors> errors) {
             Utils.checkNotNull(errors, "errors");
@@ -151,6 +154,7 @@ public class GetButlerTasksUnauthorized extends RuntimeException {
             this.errors = errors;
             return this;
         }
+
 
         /**
          * Raw HTTP response; suitable for custom response parsing
@@ -169,12 +173,13 @@ public class GetButlerTasksUnauthorized extends RuntimeException {
             this.rawResponse = rawResponse;
             return this;
         }
-        
+
         public GetButlerTasksUnauthorized build() {
+
             return new GetButlerTasksUnauthorized(
-                errors,
-                rawResponse);
+                errors, rawResponse);
         }
+
     }
 }
 

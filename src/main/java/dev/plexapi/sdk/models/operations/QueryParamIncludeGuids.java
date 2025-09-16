@@ -19,7 +19,7 @@ public enum QueryParamIncludeGuids {
     @JsonValue
     private final int value;
 
-    private QueryParamIncludeGuids(int value) {
+    QueryParamIncludeGuids(int value) {
         this.value = value;
     }
     

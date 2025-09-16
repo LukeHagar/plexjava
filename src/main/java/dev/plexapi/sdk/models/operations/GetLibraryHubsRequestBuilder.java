@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetLibraryHubs;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Exception;
@@ -13,10 +17,10 @@ public class GetLibraryHubsRequestBuilder {
     private Double sectionId;
     private Optional<Double> count = Optional.empty();
     private Optional<? extends QueryParamOnlyTransient> onlyTransient = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallGetLibraryHubs sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetLibraryHubsRequestBuilder(SDKMethodInterfaces.MethodCallGetLibraryHubs sdk) {
-        this.sdk = sdk;
+    public GetLibraryHubsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetLibraryHubsRequestBuilder sectionId(double sectionId) {
@@ -49,11 +53,22 @@ public class GetLibraryHubsRequestBuilder {
         return this;
     }
 
-    public GetLibraryHubsResponse call() throws Exception {
 
-        return sdk.getLibraryHubs(
-            sectionId,
+    private GetLibraryHubsRequest buildRequest() {
+
+        GetLibraryHubsRequest request = new GetLibraryHubsRequest(sectionId,
             count,
             onlyTransient);
+
+        return request;
+    }
+
+    public GetLibraryHubsResponse call() throws Exception {
+        
+        RequestOperation<GetLibraryHubsRequest, GetLibraryHubsResponse> operation
+              = new GetLibraryHubs.Sync(sdkConfiguration);
+        GetLibraryHubsRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

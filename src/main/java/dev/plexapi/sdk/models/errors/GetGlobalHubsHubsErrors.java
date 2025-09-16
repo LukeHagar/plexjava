@@ -12,8 +12,8 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetGlobalHubsHubsErrors {
 
@@ -21,9 +21,11 @@ public class GetGlobalHubsHubsErrors {
     @JsonProperty("code")
     private Optional<Integer> code;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("message")
     private Optional<String> message;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("status")
@@ -61,15 +63,17 @@ public class GetGlobalHubsHubsErrors {
         return status;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetGlobalHubsHubsErrors withCode(int code) {
         Utils.checkNotNull(code, "code");
         this.code = Optional.ofNullable(code);
         return this;
     }
+
 
     public GetGlobalHubsHubsErrors withCode(Optional<Integer> code) {
         Utils.checkNotNull(code, "code");
@@ -83,6 +87,7 @@ public class GetGlobalHubsHubsErrors {
         return this;
     }
 
+
     public GetGlobalHubsHubsErrors withMessage(Optional<String> message) {
         Utils.checkNotNull(message, "message");
         this.message = message;
@@ -95,13 +100,13 @@ public class GetGlobalHubsHubsErrors {
         return this;
     }
 
+
     public GetGlobalHubsHubsErrors withStatus(Optional<Integer> status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -112,17 +117,15 @@ public class GetGlobalHubsHubsErrors {
         }
         GetGlobalHubsHubsErrors other = (GetGlobalHubsHubsErrors) o;
         return 
-            Objects.deepEquals(this.code, other.code) &&
-            Objects.deepEquals(this.message, other.message) &&
-            Objects.deepEquals(this.status, other.status);
+            Utils.enhancedDeepEquals(this.code, other.code) &&
+            Utils.enhancedDeepEquals(this.message, other.message) &&
+            Utils.enhancedDeepEquals(this.status, other.status);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            code,
-            message,
-            status);
+        return Utils.enhancedHash(
+            code, message, status);
     }
     
     @Override
@@ -132,18 +135,20 @@ public class GetGlobalHubsHubsErrors {
                 "message", message,
                 "status", status);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> code = Optional.empty();
- 
+
         private Optional<String> message = Optional.empty();
- 
+
         private Optional<Integer> status = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder code(int code) {
             Utils.checkNotNull(code, "code");
@@ -157,6 +162,7 @@ public class GetGlobalHubsHubsErrors {
             return this;
         }
 
+
         public Builder message(String message) {
             Utils.checkNotNull(message, "message");
             this.message = Optional.ofNullable(message);
@@ -169,6 +175,7 @@ public class GetGlobalHubsHubsErrors {
             return this;
         }
 
+
         public Builder status(int status) {
             Utils.checkNotNull(status, "status");
             this.status = Optional.ofNullable(status);
@@ -180,12 +187,12 @@ public class GetGlobalHubsHubsErrors {
             this.status = status;
             return this;
         }
-        
+
         public GetGlobalHubsHubsErrors build() {
+
             return new GetGlobalHubsHubsErrors(
-                code,
-                message,
-                status);
+                code, message, status);
         }
+
     }
 }

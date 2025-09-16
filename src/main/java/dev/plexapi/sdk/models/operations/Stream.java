@@ -17,11 +17,10 @@ import java.lang.Integer;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class Stream {
 
+public class Stream {
     /**
      * Unique stream identifier.
      */
@@ -190,6 +189,7 @@ public class Stream {
     @JsonProperty("codedWidth")
     private Optional<Integer> codedWidth;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("closedCaptions")
     private Optional<Boolean> closedCaptions;
@@ -257,6 +257,7 @@ public class Stream {
     @JsonProperty("original")
     private Optional<Boolean> original;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hasScalingMatrix")
     private Optional<Boolean> hasScalingMatrix;
@@ -268,9 +269,11 @@ public class Stream {
     @JsonProperty("profile")
     private Optional<String> profile;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("scanType")
     private Optional<String> scanType;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("embeddedInVideo")
@@ -308,6 +311,7 @@ public class Stream {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("selected")
     private Optional<Boolean> selected;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("forced")
@@ -522,7 +526,23 @@ public class Stream {
             String codec,
             String displayTitle,
             String extendedDisplayTitle) {
-        this(id, Optional.empty(), Optional.empty(), codec, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), displayTitle, extendedDisplayTitle, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(id, Optional.empty(), Optional.empty(),
+            codec, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            displayTitle, extendedDisplayTitle, Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -921,9 +941,10 @@ public class Stream {
         return title;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Unique stream identifier.
@@ -943,6 +964,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Format of the stream (e.g., srt).
      */
@@ -960,6 +982,7 @@ public class Stream {
         this.default_ = Optional.ofNullable(default_);
         return this;
     }
+
 
     /**
      * Indicates if this stream is default.
@@ -988,6 +1011,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Index of the stream.
      */
@@ -1005,6 +1029,7 @@ public class Stream {
         this.bitrate = Optional.ofNullable(bitrate);
         return this;
     }
+
 
     /**
      * Bitrate of the stream.
@@ -1024,6 +1049,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Language of the stream.
      */
@@ -1041,6 +1067,7 @@ public class Stream {
         this.languageTag = Optional.ofNullable(languageTag);
         return this;
     }
+
 
     /**
      * Language tag (e.g., en).
@@ -1060,6 +1087,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * ISO language code.
      */
@@ -1077,6 +1105,7 @@ public class Stream {
         this.headerCompression = Optional.ofNullable(headerCompression);
         return this;
     }
+
 
     /**
      * Indicates whether header compression is enabled.
@@ -1096,6 +1125,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Dolby Vision BL compatibility ID.
      */
@@ -1113,6 +1143,7 @@ public class Stream {
         this.doviblPresent = Optional.ofNullable(doviblPresent);
         return this;
     }
+
 
     /**
      * Indicates if Dolby Vision BL is present.
@@ -1132,6 +1163,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Indicates if Dolby Vision EL is present.
      */
@@ -1149,6 +1181,7 @@ public class Stream {
         this.doviLevel = Optional.ofNullable(doviLevel);
         return this;
     }
+
 
     /**
      * Dolby Vision level.
@@ -1168,6 +1201,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Indicates if Dolby Vision is present.
      */
@@ -1185,6 +1219,7 @@ public class Stream {
         this.doviProfile = Optional.ofNullable(doviProfile);
         return this;
     }
+
 
     /**
      * Dolby Vision profile.
@@ -1204,6 +1239,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Indicates if Dolby Vision RPU is present.
      */
@@ -1221,6 +1257,7 @@ public class Stream {
         this.doviVersion = Optional.ofNullable(doviVersion);
         return this;
     }
+
 
     /**
      * Dolby Vision version.
@@ -1240,6 +1277,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Bit depth of the video stream.
      */
@@ -1257,6 +1295,7 @@ public class Stream {
         this.chromaLocation = Optional.ofNullable(chromaLocation);
         return this;
     }
+
 
     /**
      * Chroma sample location.
@@ -1276,6 +1315,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Chroma subsampling format.
      */
@@ -1293,6 +1333,7 @@ public class Stream {
         this.codedHeight = Optional.ofNullable(codedHeight);
         return this;
     }
+
 
     /**
      * Coded video height.
@@ -1312,6 +1353,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Coded video width.
      */
@@ -1327,6 +1369,7 @@ public class Stream {
         return this;
     }
 
+
     public Stream withClosedCaptions(Optional<Boolean> closedCaptions) {
         Utils.checkNotNull(closedCaptions, "closedCaptions");
         this.closedCaptions = closedCaptions;
@@ -1341,6 +1384,7 @@ public class Stream {
         this.colorPrimaries = Optional.ofNullable(colorPrimaries);
         return this;
     }
+
 
     /**
      * Color primaries used.
@@ -1360,6 +1404,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Color range (e.g., tv).
      */
@@ -1377,6 +1422,7 @@ public class Stream {
         this.colorSpace = Optional.ofNullable(colorSpace);
         return this;
     }
+
 
     /**
      * Color space.
@@ -1396,6 +1442,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Color transfer characteristics.
      */
@@ -1413,6 +1460,7 @@ public class Stream {
         this.frameRate = Optional.ofNullable(frameRate);
         return this;
     }
+
 
     /**
      * Frame rate of the stream.
@@ -1432,6 +1480,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Key to access this stream part.
      */
@@ -1449,6 +1498,7 @@ public class Stream {
         this.height = Optional.ofNullable(height);
         return this;
     }
+
 
     /**
      * Height of the video stream.
@@ -1468,6 +1518,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Video level.
      */
@@ -1486,6 +1537,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Indicates if this is the original stream.
      */
@@ -1500,6 +1552,7 @@ public class Stream {
         this.hasScalingMatrix = Optional.ofNullable(hasScalingMatrix);
         return this;
     }
+
 
     public Stream withHasScalingMatrix(Optional<Boolean> hasScalingMatrix) {
         Utils.checkNotNull(hasScalingMatrix, "hasScalingMatrix");
@@ -1516,6 +1569,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Video profile.
      */
@@ -1531,6 +1585,7 @@ public class Stream {
         return this;
     }
 
+
     public Stream withScanType(Optional<String> scanType) {
         Utils.checkNotNull(scanType, "scanType");
         this.scanType = scanType;
@@ -1542,6 +1597,7 @@ public class Stream {
         this.embeddedInVideo = Optional.ofNullable(embeddedInVideo);
         return this;
     }
+
 
     public Stream withEmbeddedInVideo(Optional<String> embeddedInVideo) {
         Utils.checkNotNull(embeddedInVideo, "embeddedInVideo");
@@ -1557,6 +1613,7 @@ public class Stream {
         this.refFrames = Optional.ofNullable(refFrames);
         return this;
     }
+
 
     /**
      * Number of reference frames.
@@ -1575,6 +1632,7 @@ public class Stream {
         this.width = Optional.ofNullable(width);
         return this;
     }
+
 
     /**
      * Width of the video stream.
@@ -1612,6 +1670,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Indicates if this stream is selected (applicable for audio streams).
      */
@@ -1627,6 +1686,7 @@ public class Stream {
         return this;
     }
 
+
     public Stream withForced(Optional<Boolean> forced) {
         Utils.checkNotNull(forced, "forced");
         this.forced = forced;
@@ -1641,6 +1701,7 @@ public class Stream {
         this.channels = Optional.ofNullable(channels);
         return this;
     }
+
 
     /**
      * Number of audio channels (for audio streams).
@@ -1660,6 +1721,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Audio channel layout.
      */
@@ -1677,6 +1739,7 @@ public class Stream {
         this.samplingRate = Optional.ofNullable(samplingRate);
         return this;
     }
+
 
     /**
      * Sampling rate for the audio stream.
@@ -1696,6 +1759,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Indicates if the stream can auto-sync.
      */
@@ -1713,6 +1777,7 @@ public class Stream {
         this.hearingImpaired = Optional.ofNullable(hearingImpaired);
         return this;
     }
+
 
     /**
      * Indicates if the stream is for the hearing impaired.
@@ -1732,6 +1797,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Indicates if the stream is a dub.
      */
@@ -1750,6 +1816,7 @@ public class Stream {
         return this;
     }
 
+
     /**
      * Optional title for the stream (e.g., language variant).
      */
@@ -1759,7 +1826,6 @@ public class Stream {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -1770,113 +1836,79 @@ public class Stream {
         }
         Stream other = (Stream) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.streamType, other.streamType) &&
-            Objects.deepEquals(this.format, other.format) &&
-            Objects.deepEquals(this.default_, other.default_) &&
-            Objects.deepEquals(this.codec, other.codec) &&
-            Objects.deepEquals(this.index, other.index) &&
-            Objects.deepEquals(this.bitrate, other.bitrate) &&
-            Objects.deepEquals(this.language, other.language) &&
-            Objects.deepEquals(this.languageTag, other.languageTag) &&
-            Objects.deepEquals(this.languageCode, other.languageCode) &&
-            Objects.deepEquals(this.headerCompression, other.headerCompression) &&
-            Objects.deepEquals(this.doviblCompatID, other.doviblCompatID) &&
-            Objects.deepEquals(this.doviblPresent, other.doviblPresent) &&
-            Objects.deepEquals(this.dovielPresent, other.dovielPresent) &&
-            Objects.deepEquals(this.doviLevel, other.doviLevel) &&
-            Objects.deepEquals(this.doviPresent, other.doviPresent) &&
-            Objects.deepEquals(this.doviProfile, other.doviProfile) &&
-            Objects.deepEquals(this.dovirpuPresent, other.dovirpuPresent) &&
-            Objects.deepEquals(this.doviVersion, other.doviVersion) &&
-            Objects.deepEquals(this.bitDepth, other.bitDepth) &&
-            Objects.deepEquals(this.chromaLocation, other.chromaLocation) &&
-            Objects.deepEquals(this.chromaSubsampling, other.chromaSubsampling) &&
-            Objects.deepEquals(this.codedHeight, other.codedHeight) &&
-            Objects.deepEquals(this.codedWidth, other.codedWidth) &&
-            Objects.deepEquals(this.closedCaptions, other.closedCaptions) &&
-            Objects.deepEquals(this.colorPrimaries, other.colorPrimaries) &&
-            Objects.deepEquals(this.colorRange, other.colorRange) &&
-            Objects.deepEquals(this.colorSpace, other.colorSpace) &&
-            Objects.deepEquals(this.colorTrc, other.colorTrc) &&
-            Objects.deepEquals(this.frameRate, other.frameRate) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.height, other.height) &&
-            Objects.deepEquals(this.level, other.level) &&
-            Objects.deepEquals(this.original, other.original) &&
-            Objects.deepEquals(this.hasScalingMatrix, other.hasScalingMatrix) &&
-            Objects.deepEquals(this.profile, other.profile) &&
-            Objects.deepEquals(this.scanType, other.scanType) &&
-            Objects.deepEquals(this.embeddedInVideo, other.embeddedInVideo) &&
-            Objects.deepEquals(this.refFrames, other.refFrames) &&
-            Objects.deepEquals(this.width, other.width) &&
-            Objects.deepEquals(this.displayTitle, other.displayTitle) &&
-            Objects.deepEquals(this.extendedDisplayTitle, other.extendedDisplayTitle) &&
-            Objects.deepEquals(this.selected, other.selected) &&
-            Objects.deepEquals(this.forced, other.forced) &&
-            Objects.deepEquals(this.channels, other.channels) &&
-            Objects.deepEquals(this.audioChannelLayout, other.audioChannelLayout) &&
-            Objects.deepEquals(this.samplingRate, other.samplingRate) &&
-            Objects.deepEquals(this.canAutoSync, other.canAutoSync) &&
-            Objects.deepEquals(this.hearingImpaired, other.hearingImpaired) &&
-            Objects.deepEquals(this.dub, other.dub) &&
-            Objects.deepEquals(this.title, other.title);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.streamType, other.streamType) &&
+            Utils.enhancedDeepEquals(this.format, other.format) &&
+            Utils.enhancedDeepEquals(this.default_, other.default_) &&
+            Utils.enhancedDeepEquals(this.codec, other.codec) &&
+            Utils.enhancedDeepEquals(this.index, other.index) &&
+            Utils.enhancedDeepEquals(this.bitrate, other.bitrate) &&
+            Utils.enhancedDeepEquals(this.language, other.language) &&
+            Utils.enhancedDeepEquals(this.languageTag, other.languageTag) &&
+            Utils.enhancedDeepEquals(this.languageCode, other.languageCode) &&
+            Utils.enhancedDeepEquals(this.headerCompression, other.headerCompression) &&
+            Utils.enhancedDeepEquals(this.doviblCompatID, other.doviblCompatID) &&
+            Utils.enhancedDeepEquals(this.doviblPresent, other.doviblPresent) &&
+            Utils.enhancedDeepEquals(this.dovielPresent, other.dovielPresent) &&
+            Utils.enhancedDeepEquals(this.doviLevel, other.doviLevel) &&
+            Utils.enhancedDeepEquals(this.doviPresent, other.doviPresent) &&
+            Utils.enhancedDeepEquals(this.doviProfile, other.doviProfile) &&
+            Utils.enhancedDeepEquals(this.dovirpuPresent, other.dovirpuPresent) &&
+            Utils.enhancedDeepEquals(this.doviVersion, other.doviVersion) &&
+            Utils.enhancedDeepEquals(this.bitDepth, other.bitDepth) &&
+            Utils.enhancedDeepEquals(this.chromaLocation, other.chromaLocation) &&
+            Utils.enhancedDeepEquals(this.chromaSubsampling, other.chromaSubsampling) &&
+            Utils.enhancedDeepEquals(this.codedHeight, other.codedHeight) &&
+            Utils.enhancedDeepEquals(this.codedWidth, other.codedWidth) &&
+            Utils.enhancedDeepEquals(this.closedCaptions, other.closedCaptions) &&
+            Utils.enhancedDeepEquals(this.colorPrimaries, other.colorPrimaries) &&
+            Utils.enhancedDeepEquals(this.colorRange, other.colorRange) &&
+            Utils.enhancedDeepEquals(this.colorSpace, other.colorSpace) &&
+            Utils.enhancedDeepEquals(this.colorTrc, other.colorTrc) &&
+            Utils.enhancedDeepEquals(this.frameRate, other.frameRate) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.height, other.height) &&
+            Utils.enhancedDeepEquals(this.level, other.level) &&
+            Utils.enhancedDeepEquals(this.original, other.original) &&
+            Utils.enhancedDeepEquals(this.hasScalingMatrix, other.hasScalingMatrix) &&
+            Utils.enhancedDeepEquals(this.profile, other.profile) &&
+            Utils.enhancedDeepEquals(this.scanType, other.scanType) &&
+            Utils.enhancedDeepEquals(this.embeddedInVideo, other.embeddedInVideo) &&
+            Utils.enhancedDeepEquals(this.refFrames, other.refFrames) &&
+            Utils.enhancedDeepEquals(this.width, other.width) &&
+            Utils.enhancedDeepEquals(this.displayTitle, other.displayTitle) &&
+            Utils.enhancedDeepEquals(this.extendedDisplayTitle, other.extendedDisplayTitle) &&
+            Utils.enhancedDeepEquals(this.selected, other.selected) &&
+            Utils.enhancedDeepEquals(this.forced, other.forced) &&
+            Utils.enhancedDeepEquals(this.channels, other.channels) &&
+            Utils.enhancedDeepEquals(this.audioChannelLayout, other.audioChannelLayout) &&
+            Utils.enhancedDeepEquals(this.samplingRate, other.samplingRate) &&
+            Utils.enhancedDeepEquals(this.canAutoSync, other.canAutoSync) &&
+            Utils.enhancedDeepEquals(this.hearingImpaired, other.hearingImpaired) &&
+            Utils.enhancedDeepEquals(this.dub, other.dub) &&
+            Utils.enhancedDeepEquals(this.title, other.title);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            streamType,
-            format,
-            default_,
-            codec,
-            index,
-            bitrate,
-            language,
-            languageTag,
-            languageCode,
-            headerCompression,
-            doviblCompatID,
-            doviblPresent,
-            dovielPresent,
-            doviLevel,
-            doviPresent,
-            doviProfile,
-            dovirpuPresent,
-            doviVersion,
-            bitDepth,
-            chromaLocation,
-            chromaSubsampling,
-            codedHeight,
-            codedWidth,
-            closedCaptions,
-            colorPrimaries,
-            colorRange,
-            colorSpace,
-            colorTrc,
-            frameRate,
-            key,
-            height,
-            level,
-            original,
-            hasScalingMatrix,
-            profile,
-            scanType,
-            embeddedInVideo,
-            refFrames,
-            width,
-            displayTitle,
-            extendedDisplayTitle,
-            selected,
-            forced,
-            channels,
-            audioChannelLayout,
-            samplingRate,
-            canAutoSync,
-            hearingImpaired,
-            dub,
-            title);
+        return Utils.enhancedHash(
+            id, streamType, format,
+            default_, codec, index,
+            bitrate, language, languageTag,
+            languageCode, headerCompression, doviblCompatID,
+            doviblPresent, dovielPresent, doviLevel,
+            doviPresent, doviProfile, dovirpuPresent,
+            doviVersion, bitDepth, chromaLocation,
+            chromaSubsampling, codedHeight, codedWidth,
+            closedCaptions, colorPrimaries, colorRange,
+            colorSpace, colorTrc, frameRate,
+            key, height, level,
+            original, hasScalingMatrix, profile,
+            scanType, embeddedInVideo, refFrames,
+            width, displayTitle, extendedDisplayTitle,
+            selected, forced, channels,
+            audioChannelLayout, samplingRate, canAutoSync,
+            hearingImpaired, dub, title);
     }
     
     @Override
@@ -1934,112 +1966,114 @@ public class Stream {
                 "dub", dub,
                 "title", title);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Long id;
- 
+
         private Optional<String> format = Optional.empty();
- 
+
         private Optional<Boolean> default_ = Optional.empty();
- 
+
         private String codec;
- 
+
         private Optional<Integer> index = Optional.empty();
- 
+
         private Optional<Integer> bitrate = Optional.empty();
- 
+
         private Optional<String> language = Optional.empty();
- 
+
         private Optional<String> languageTag = Optional.empty();
- 
+
         private Optional<String> languageCode = Optional.empty();
- 
+
         private Optional<Boolean> headerCompression = Optional.empty();
- 
+
         private Optional<Integer> doviblCompatID = Optional.empty();
- 
+
         private Optional<Boolean> doviblPresent = Optional.empty();
- 
+
         private Optional<Boolean> dovielPresent = Optional.empty();
- 
+
         private Optional<Integer> doviLevel = Optional.empty();
- 
+
         private Optional<Boolean> doviPresent = Optional.empty();
- 
+
         private Optional<Integer> doviProfile = Optional.empty();
- 
+
         private Optional<Boolean> dovirpuPresent = Optional.empty();
- 
+
         private Optional<String> doviVersion = Optional.empty();
- 
+
         private Optional<Integer> bitDepth = Optional.empty();
- 
+
         private Optional<String> chromaLocation = Optional.empty();
- 
+
         private Optional<String> chromaSubsampling = Optional.empty();
- 
+
         private Optional<Integer> codedHeight = Optional.empty();
- 
+
         private Optional<Integer> codedWidth = Optional.empty();
- 
+
         private Optional<Boolean> closedCaptions = Optional.empty();
- 
+
         private Optional<String> colorPrimaries = Optional.empty();
- 
+
         private Optional<String> colorRange = Optional.empty();
- 
+
         private Optional<String> colorSpace = Optional.empty();
- 
+
         private Optional<String> colorTrc = Optional.empty();
- 
+
         private Optional<Float> frameRate = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<Integer> height = Optional.empty();
- 
+
         private Optional<Integer> level = Optional.empty();
- 
+
         private Optional<Boolean> original = Optional.empty();
- 
+
         private Optional<Boolean> hasScalingMatrix = Optional.empty();
- 
+
         private Optional<String> profile = Optional.empty();
- 
+
         private Optional<String> scanType = Optional.empty();
- 
+
         private Optional<String> embeddedInVideo = Optional.empty();
- 
+
         private Optional<Integer> refFrames = Optional.empty();
- 
+
         private Optional<Integer> width = Optional.empty();
- 
+
         private String displayTitle;
- 
+
         private String extendedDisplayTitle;
- 
+
         private Optional<Boolean> selected = Optional.empty();
- 
+
         private Optional<Boolean> forced = Optional.empty();
- 
+
         private Optional<Integer> channels = Optional.empty();
- 
+
         private Optional<String> audioChannelLayout = Optional.empty();
- 
+
         private Optional<Integer> samplingRate = Optional.empty();
- 
+
         private Optional<Boolean> canAutoSync = Optional.empty();
- 
+
         private Optional<Boolean> hearingImpaired = Optional.empty();
- 
+
         private Optional<Boolean> dub = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Unique stream identifier.
@@ -2049,6 +2083,7 @@ public class Stream {
             this.id = id;
             return this;
         }
+
 
         /**
          * Format of the stream (e.g., srt).
@@ -2068,6 +2103,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Indicates if this stream is default.
          */
@@ -2086,6 +2122,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Codec used by the stream.
          */
@@ -2094,6 +2131,7 @@ public class Stream {
             this.codec = codec;
             return this;
         }
+
 
         /**
          * Index of the stream.
@@ -2113,6 +2151,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Bitrate of the stream.
          */
@@ -2130,6 +2169,7 @@ public class Stream {
             this.bitrate = bitrate;
             return this;
         }
+
 
         /**
          * Language of the stream.
@@ -2149,6 +2189,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Language tag (e.g., en).
          */
@@ -2166,6 +2207,7 @@ public class Stream {
             this.languageTag = languageTag;
             return this;
         }
+
 
         /**
          * ISO language code.
@@ -2185,6 +2227,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Indicates whether header compression is enabled.
          */
@@ -2202,6 +2245,7 @@ public class Stream {
             this.headerCompression = headerCompression;
             return this;
         }
+
 
         /**
          * Dolby Vision BL compatibility ID.
@@ -2221,6 +2265,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Indicates if Dolby Vision BL is present.
          */
@@ -2238,6 +2283,7 @@ public class Stream {
             this.doviblPresent = doviblPresent;
             return this;
         }
+
 
         /**
          * Indicates if Dolby Vision EL is present.
@@ -2257,6 +2303,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Dolby Vision level.
          */
@@ -2274,6 +2321,7 @@ public class Stream {
             this.doviLevel = doviLevel;
             return this;
         }
+
 
         /**
          * Indicates if Dolby Vision is present.
@@ -2293,6 +2341,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Dolby Vision profile.
          */
@@ -2310,6 +2359,7 @@ public class Stream {
             this.doviProfile = doviProfile;
             return this;
         }
+
 
         /**
          * Indicates if Dolby Vision RPU is present.
@@ -2329,6 +2379,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Dolby Vision version.
          */
@@ -2346,6 +2397,7 @@ public class Stream {
             this.doviVersion = doviVersion;
             return this;
         }
+
 
         /**
          * Bit depth of the video stream.
@@ -2365,6 +2417,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Chroma sample location.
          */
@@ -2382,6 +2435,7 @@ public class Stream {
             this.chromaLocation = chromaLocation;
             return this;
         }
+
 
         /**
          * Chroma subsampling format.
@@ -2401,6 +2455,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Coded video height.
          */
@@ -2418,6 +2473,7 @@ public class Stream {
             this.codedHeight = codedHeight;
             return this;
         }
+
 
         /**
          * Coded video width.
@@ -2437,6 +2493,7 @@ public class Stream {
             return this;
         }
 
+
         public Builder closedCaptions(boolean closedCaptions) {
             Utils.checkNotNull(closedCaptions, "closedCaptions");
             this.closedCaptions = Optional.ofNullable(closedCaptions);
@@ -2448,6 +2505,7 @@ public class Stream {
             this.closedCaptions = closedCaptions;
             return this;
         }
+
 
         /**
          * Color primaries used.
@@ -2467,6 +2525,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Color range (e.g., tv).
          */
@@ -2484,6 +2543,7 @@ public class Stream {
             this.colorRange = colorRange;
             return this;
         }
+
 
         /**
          * Color space.
@@ -2503,6 +2563,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Color transfer characteristics.
          */
@@ -2520,6 +2581,7 @@ public class Stream {
             this.colorTrc = colorTrc;
             return this;
         }
+
 
         /**
          * Frame rate of the stream.
@@ -2539,6 +2601,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Key to access this stream part.
          */
@@ -2556,6 +2619,7 @@ public class Stream {
             this.key = key;
             return this;
         }
+
 
         /**
          * Height of the video stream.
@@ -2575,6 +2639,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Video level.
          */
@@ -2592,6 +2657,7 @@ public class Stream {
             this.level = level;
             return this;
         }
+
 
         /**
          * Indicates if this is the original stream.
@@ -2611,6 +2677,7 @@ public class Stream {
             return this;
         }
 
+
         public Builder hasScalingMatrix(boolean hasScalingMatrix) {
             Utils.checkNotNull(hasScalingMatrix, "hasScalingMatrix");
             this.hasScalingMatrix = Optional.ofNullable(hasScalingMatrix);
@@ -2622,6 +2689,7 @@ public class Stream {
             this.hasScalingMatrix = hasScalingMatrix;
             return this;
         }
+
 
         /**
          * Video profile.
@@ -2641,6 +2709,7 @@ public class Stream {
             return this;
         }
 
+
         public Builder scanType(String scanType) {
             Utils.checkNotNull(scanType, "scanType");
             this.scanType = Optional.ofNullable(scanType);
@@ -2653,6 +2722,7 @@ public class Stream {
             return this;
         }
 
+
         public Builder embeddedInVideo(String embeddedInVideo) {
             Utils.checkNotNull(embeddedInVideo, "embeddedInVideo");
             this.embeddedInVideo = Optional.ofNullable(embeddedInVideo);
@@ -2664,6 +2734,7 @@ public class Stream {
             this.embeddedInVideo = embeddedInVideo;
             return this;
         }
+
 
         /**
          * Number of reference frames.
@@ -2683,6 +2754,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Width of the video stream.
          */
@@ -2701,6 +2773,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Display title for the stream.
          */
@@ -2710,6 +2783,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Extended display title for the stream.
          */
@@ -2718,6 +2792,7 @@ public class Stream {
             this.extendedDisplayTitle = extendedDisplayTitle;
             return this;
         }
+
 
         /**
          * Indicates if this stream is selected (applicable for audio streams).
@@ -2737,6 +2812,7 @@ public class Stream {
             return this;
         }
 
+
         public Builder forced(boolean forced) {
             Utils.checkNotNull(forced, "forced");
             this.forced = Optional.ofNullable(forced);
@@ -2748,6 +2824,7 @@ public class Stream {
             this.forced = forced;
             return this;
         }
+
 
         /**
          * Number of audio channels (for audio streams).
@@ -2767,6 +2844,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Audio channel layout.
          */
@@ -2784,6 +2862,7 @@ public class Stream {
             this.audioChannelLayout = audioChannelLayout;
             return this;
         }
+
 
         /**
          * Sampling rate for the audio stream.
@@ -2803,6 +2882,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Indicates if the stream can auto-sync.
          */
@@ -2820,6 +2900,7 @@ public class Stream {
             this.canAutoSync = canAutoSync;
             return this;
         }
+
 
         /**
          * Indicates if the stream is for the hearing impaired.
@@ -2839,6 +2920,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Indicates if the stream is a dub.
          */
@@ -2857,6 +2939,7 @@ public class Stream {
             return this;
         }
 
+
         /**
          * Optional title for the stream (e.g., language variant).
          */
@@ -2874,60 +2957,29 @@ public class Stream {
             this.title = title;
             return this;
         }
-        
+
         public Stream build() {
+
             return new Stream(
-                id,
-                format,
-                default_,
-                codec,
-                index,
-                bitrate,
-                language,
-                languageTag,
-                languageCode,
-                headerCompression,
-                doviblCompatID,
-                doviblPresent,
-                dovielPresent,
-                doviLevel,
-                doviPresent,
-                doviProfile,
-                dovirpuPresent,
-                doviVersion,
-                bitDepth,
-                chromaLocation,
-                chromaSubsampling,
-                codedHeight,
-                codedWidth,
-                closedCaptions,
-                colorPrimaries,
-                colorRange,
-                colorSpace,
-                colorTrc,
-                frameRate,
-                key,
-                height,
-                level,
-                original,
-                hasScalingMatrix,
-                profile,
-                scanType,
-                embeddedInVideo,
-                refFrames,
-                width,
-                displayTitle,
-                extendedDisplayTitle,
-                selected,
-                forced,
-                channels,
-                audioChannelLayout,
-                samplingRate,
-                canAutoSync,
-                hearingImpaired,
-                dub,
-                title);
+                id, format, default_,
+                codec, index, bitrate,
+                language, languageTag, languageCode,
+                headerCompression, doviblCompatID, doviblPresent,
+                dovielPresent, doviLevel, doviPresent,
+                doviProfile, dovirpuPresent, doviVersion,
+                bitDepth, chromaLocation, chromaSubsampling,
+                codedHeight, codedWidth, closedCaptions,
+                colorPrimaries, colorRange, colorSpace,
+                colorTrc, frameRate, key,
+                height, level, original,
+                hasScalingMatrix, profile, scanType,
+                embeddedInVideo, refFrames, width,
+                displayTitle, extendedDisplayTitle, selected,
+                forced, channels, audioChannelLayout,
+                samplingRate, canAutoSync, hearingImpaired,
+                dub, title);
         }
+
 
         private static final LazySingletonValue<Long> _SINGLETON_VALUE_StreamType =
                 new LazySingletonValue<>(

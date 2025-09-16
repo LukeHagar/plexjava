@@ -3,16 +3,20 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetSearchAllLibraries;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class GetSearchAllLibrariesRequestBuilder {
 
     private GetSearchAllLibrariesRequest request;
-    private final SDKMethodInterfaces.MethodCallGetSearchAllLibraries sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetSearchAllLibrariesRequestBuilder(SDKMethodInterfaces.MethodCallGetSearchAllLibraries sdk) {
-        this.sdk = sdk;
+    public GetSearchAllLibrariesRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetSearchAllLibrariesRequestBuilder request(GetSearchAllLibrariesRequest request) {
@@ -22,8 +26,10 @@ public class GetSearchAllLibrariesRequestBuilder {
     }
 
     public GetSearchAllLibrariesResponse call() throws Exception {
+        
+        RequestOperation<GetSearchAllLibrariesRequest, GetSearchAllLibrariesResponse> operation
+              = new GetSearchAllLibraries.Sync(sdkConfiguration);
 
-        return sdk.getSearchAllLibraries(
-            request);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

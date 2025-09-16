@@ -3,18 +3,25 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetServerActivities;
 import java.lang.Exception;
 
 public class GetServerActivitiesRequestBuilder {
 
-    private final SDKMethodInterfaces.MethodCallGetServerActivities sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetServerActivitiesRequestBuilder(SDKMethodInterfaces.MethodCallGetServerActivities sdk) {
-        this.sdk = sdk;
+    public GetServerActivitiesRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetServerActivitiesResponse call() throws Exception {
+        
+        RequestlessOperation<GetServerActivitiesResponse> operation
+            = new GetServerActivities.Sync(sdkConfiguration);
 
-        return sdk.getServerActivitiesDirect();
+        return operation.handleResponse(operation.doRequest());
     }
 }

@@ -3,16 +3,20 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetRecentlyAdded;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class GetRecentlyAddedRequestBuilder {
 
     private GetRecentlyAddedRequest request;
-    private final SDKMethodInterfaces.MethodCallGetRecentlyAdded sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetRecentlyAddedRequestBuilder(SDKMethodInterfaces.MethodCallGetRecentlyAdded sdk) {
-        this.sdk = sdk;
+    public GetRecentlyAddedRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetRecentlyAddedRequestBuilder request(GetRecentlyAddedRequest request) {
@@ -22,8 +26,10 @@ public class GetRecentlyAddedRequestBuilder {
     }
 
     public GetRecentlyAddedResponse call() throws Exception {
+        
+        RequestOperation<GetRecentlyAddedRequest, GetRecentlyAddedResponse> operation
+              = new GetRecentlyAdded.Sync(sdkConfiguration);
 
-        return sdk.getRecentlyAdded(
-            request);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

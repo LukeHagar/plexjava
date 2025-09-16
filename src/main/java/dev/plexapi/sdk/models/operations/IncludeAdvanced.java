@@ -17,7 +17,7 @@ public enum IncludeAdvanced {
     @JsonValue
     private final int value;
 
-    private IncludeAdvanced(int value) {
+    IncludeAdvanced(int value) {
         this.value = value;
     }
     

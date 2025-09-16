@@ -19,7 +19,7 @@ public enum GetLibrarySectionsAllQueryParamIncludeMeta {
     @JsonValue
     private final int value;
 
-    private GetLibrarySectionsAllQueryParamIncludeMeta(int value) {
+    GetLibrarySectionsAllQueryParamIncludeMeta(int value) {
         this.value = value;
     }
     

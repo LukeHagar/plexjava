@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetCountriesLibrary;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.Integer;
@@ -11,10 +15,10 @@ public class GetCountriesLibraryRequestBuilder {
 
     private Integer sectionKey;
     private GetCountriesLibraryQueryParamType type;
-    private final SDKMethodInterfaces.MethodCallGetCountriesLibrary sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetCountriesLibraryRequestBuilder(SDKMethodInterfaces.MethodCallGetCountriesLibrary sdk) {
-        this.sdk = sdk;
+    public GetCountriesLibraryRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetCountriesLibraryRequestBuilder sectionKey(int sectionKey) {
@@ -29,10 +33,21 @@ public class GetCountriesLibraryRequestBuilder {
         return this;
     }
 
-    public GetCountriesLibraryResponse call() throws Exception {
 
-        return sdk.getCountriesLibrary(
-            sectionKey,
+    private GetCountriesLibraryRequest buildRequest() {
+
+        GetCountriesLibraryRequest request = new GetCountriesLibraryRequest(sectionKey,
             type);
+
+        return request;
+    }
+
+    public GetCountriesLibraryResponse call() throws Exception {
+        
+        RequestOperation<GetCountriesLibraryRequest, GetCountriesLibraryResponse> operation
+              = new GetCountriesLibrary.Sync(sdkConfiguration);
+        GetCountriesLibraryRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

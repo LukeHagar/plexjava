@@ -3,18 +3,25 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetDevices;
 import java.lang.Exception;
 
 public class GetDevicesRequestBuilder {
 
-    private final SDKMethodInterfaces.MethodCallGetDevices sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetDevicesRequestBuilder(SDKMethodInterfaces.MethodCallGetDevices sdk) {
-        this.sdk = sdk;
+    public GetDevicesRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetDevicesResponse call() throws Exception {
+        
+        RequestlessOperation<GetDevicesResponse> operation
+            = new GetDevices.Sync(sdkConfiguration);
 
-        return sdk.getDevicesDirect();
+        return operation.handleResponse(operation.doRequest());
     }
 }

@@ -12,11 +12,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetMediaMetaDataRole {
 
+public class GetMediaMetaDataRole {
     /**
      * The unique identifier for the role.
      * NOTE: This is different for each Plex server and is not globally unique.
@@ -84,7 +83,8 @@ public class GetMediaMetaDataRole {
             String tag,
             String filter,
             String tagKey) {
-        this(id, tag, Optional.empty(), filter, tagKey, Optional.empty());
+        this(id, tag, Optional.empty(),
+            filter, tagKey, Optional.empty());
     }
 
     /**
@@ -137,9 +137,10 @@ public class GetMediaMetaDataRole {
         return thumb;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The unique identifier for the role.
@@ -168,6 +169,7 @@ public class GetMediaMetaDataRole {
         this.role = Optional.ofNullable(role);
         return this;
     }
+
 
     /**
      * The role played by the actor in the media item.
@@ -206,6 +208,7 @@ public class GetMediaMetaDataRole {
         return this;
     }
 
+
     /**
      * The absolute URL of the thumbnail image for the actor.
      */
@@ -215,7 +218,6 @@ public class GetMediaMetaDataRole {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -226,23 +228,19 @@ public class GetMediaMetaDataRole {
         }
         GetMediaMetaDataRole other = (GetMediaMetaDataRole) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.tag, other.tag) &&
-            Objects.deepEquals(this.role, other.role) &&
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.tagKey, other.tagKey) &&
-            Objects.deepEquals(this.thumb, other.thumb);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.tag, other.tag) &&
+            Utils.enhancedDeepEquals(this.role, other.role) &&
+            Utils.enhancedDeepEquals(this.filter, other.filter) &&
+            Utils.enhancedDeepEquals(this.tagKey, other.tagKey) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            tag,
-            role,
-            filter,
-            tagKey,
-            thumb);
+        return Utils.enhancedHash(
+            id, tag, role,
+            filter, tagKey, thumb);
     }
     
     @Override
@@ -255,24 +253,26 @@ public class GetMediaMetaDataRole {
                 "tagKey", tagKey,
                 "thumb", thumb);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer id;
- 
+
         private String tag;
- 
+
         private Optional<String> role = Optional.empty();
- 
+
         private String filter;
- 
+
         private String tagKey;
- 
+
         private Optional<String> thumb = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The unique identifier for the role.
@@ -284,6 +284,7 @@ public class GetMediaMetaDataRole {
             return this;
         }
 
+
         /**
          * The display tag for the actor (typically the actor's name).
          */
@@ -292,6 +293,7 @@ public class GetMediaMetaDataRole {
             this.tag = tag;
             return this;
         }
+
 
         /**
          * The role played by the actor in the media item.
@@ -311,6 +313,7 @@ public class GetMediaMetaDataRole {
             return this;
         }
 
+
         /**
          * The filter string used to query this actor. For example, it may indicate that this is an actor with a given key.
          */
@@ -319,6 +322,7 @@ public class GetMediaMetaDataRole {
             this.filter = filter;
             return this;
         }
+
 
         /**
          * A 24-character hexadecimal unique key associated with the actor's tag, used for internal identification.
@@ -329,6 +333,7 @@ public class GetMediaMetaDataRole {
             this.tagKey = tagKey;
             return this;
         }
+
 
         /**
          * The absolute URL of the thumbnail image for the actor.
@@ -347,15 +352,13 @@ public class GetMediaMetaDataRole {
             this.thumb = thumb;
             return this;
         }
-        
+
         public GetMediaMetaDataRole build() {
+
             return new GetMediaMetaDataRole(
-                id,
-                tag,
-                role,
-                filter,
-                tagKey,
-                thumb);
+                id, tag, role,
+                filter, tagKey, thumb);
         }
+
     }
 }

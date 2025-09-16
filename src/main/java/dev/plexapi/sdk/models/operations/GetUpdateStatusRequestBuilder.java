@@ -3,18 +3,25 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetUpdateStatus;
 import java.lang.Exception;
 
 public class GetUpdateStatusRequestBuilder {
 
-    private final SDKMethodInterfaces.MethodCallGetUpdateStatus sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetUpdateStatusRequestBuilder(SDKMethodInterfaces.MethodCallGetUpdateStatus sdk) {
-        this.sdk = sdk;
+    public GetUpdateStatusRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetUpdateStatusResponse call() throws Exception {
+        
+        RequestlessOperation<GetUpdateStatusResponse> operation
+            = new GetUpdateStatus.Sync(sdkConfiguration);
 
-        return sdk.getUpdateStatusDirect();
+        return operation.handleResponse(operation.doRequest());
     }
 }

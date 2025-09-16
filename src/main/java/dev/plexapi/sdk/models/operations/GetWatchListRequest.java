@@ -13,11 +13,10 @@ import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetWatchListRequest {
 
+public class GetWatchListRequest {
     /**
      * Filter
      */
@@ -113,7 +112,9 @@ public class GetWatchListRequest {
     public GetWatchListRequest(
             Filter filter,
             String xPlexToken) {
-        this(filter, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), xPlexToken);
+        this(filter, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), xPlexToken);
     }
 
     /**
@@ -198,9 +199,10 @@ public class GetWatchListRequest {
         return xPlexToken;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Filter
@@ -222,6 +224,7 @@ public class GetWatchListRequest {
         return this;
     }
 
+
     /**
      * In the format "field:dir". Available fields are "watchlistedAt" (Added At),
      * "titleSort" (Title), "originallyAvailableAt" (Release Date), or "rating" (Critic Rating).
@@ -242,6 +245,7 @@ public class GetWatchListRequest {
         return this;
     }
 
+
     /**
      * The type of library to filter. Can be "movie" or "show", or all if not present.
      */
@@ -260,6 +264,7 @@ public class GetWatchListRequest {
         this.maxresults = Optional.ofNullable(maxresults);
         return this;
     }
+
 
     /**
      * The number of items to return. If not specified, all items will be returned.
@@ -280,6 +285,7 @@ public class GetWatchListRequest {
         return this;
     }
 
+
     /**
      * include collections in the results
      */
@@ -297,6 +303,7 @@ public class GetWatchListRequest {
         this.includeExternalMedia = Optional.ofNullable(includeExternalMedia);
         return this;
     }
+
 
     /**
      * include external media in the results
@@ -317,6 +324,7 @@ public class GetWatchListRequest {
         this.xPlexContainerStart = Optional.ofNullable(xPlexContainerStart);
         return this;
     }
+
 
     /**
      * The index of the first item to return. If not specified, the first item will be returned.
@@ -340,6 +348,7 @@ public class GetWatchListRequest {
         return this;
     }
 
+
     /**
      * The number of items to return. If not specified, all items will be returned.
      * If the number of items exceeds the limit, the response will be paginated.
@@ -360,7 +369,6 @@ public class GetWatchListRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -371,29 +379,23 @@ public class GetWatchListRequest {
         }
         GetWatchListRequest other = (GetWatchListRequest) o;
         return 
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.sort, other.sort) &&
-            Objects.deepEquals(this.libtype, other.libtype) &&
-            Objects.deepEquals(this.maxresults, other.maxresults) &&
-            Objects.deepEquals(this.includeCollections, other.includeCollections) &&
-            Objects.deepEquals(this.includeExternalMedia, other.includeExternalMedia) &&
-            Objects.deepEquals(this.xPlexContainerStart, other.xPlexContainerStart) &&
-            Objects.deepEquals(this.xPlexContainerSize, other.xPlexContainerSize) &&
-            Objects.deepEquals(this.xPlexToken, other.xPlexToken);
+            Utils.enhancedDeepEquals(this.filter, other.filter) &&
+            Utils.enhancedDeepEquals(this.sort, other.sort) &&
+            Utils.enhancedDeepEquals(this.libtype, other.libtype) &&
+            Utils.enhancedDeepEquals(this.maxresults, other.maxresults) &&
+            Utils.enhancedDeepEquals(this.includeCollections, other.includeCollections) &&
+            Utils.enhancedDeepEquals(this.includeExternalMedia, other.includeExternalMedia) &&
+            Utils.enhancedDeepEquals(this.xPlexContainerStart, other.xPlexContainerStart) &&
+            Utils.enhancedDeepEquals(this.xPlexContainerSize, other.xPlexContainerSize) &&
+            Utils.enhancedDeepEquals(this.xPlexToken, other.xPlexToken);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            filter,
-            sort,
-            libtype,
-            maxresults,
-            includeCollections,
-            includeExternalMedia,
-            xPlexContainerStart,
-            xPlexContainerSize,
-            xPlexToken);
+        return Utils.enhancedHash(
+            filter, sort, libtype,
+            maxresults, includeCollections, includeExternalMedia,
+            xPlexContainerStart, xPlexContainerSize, xPlexToken);
     }
     
     @Override
@@ -409,30 +411,32 @@ public class GetWatchListRequest {
                 "xPlexContainerSize", xPlexContainerSize,
                 "xPlexToken", xPlexToken);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Filter filter;
- 
+
         private Optional<String> sort = Optional.empty();
- 
+
         private Optional<? extends Libtype> libtype = Optional.empty();
- 
+
         private Optional<Integer> maxresults = Optional.empty();
- 
+
         private Optional<? extends IncludeCollections> includeCollections = Optional.empty();
- 
+
         private Optional<? extends IncludeExternalMedia> includeExternalMedia = Optional.empty();
- 
+
         private Optional<Integer> xPlexContainerStart;
- 
+
         private Optional<Integer> xPlexContainerSize;
- 
+
         private String xPlexToken;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Filter
@@ -442,6 +446,7 @@ public class GetWatchListRequest {
             this.filter = filter;
             return this;
         }
+
 
         /**
          * In the format "field:dir". Available fields are "watchlistedAt" (Added At),
@@ -465,6 +470,7 @@ public class GetWatchListRequest {
             return this;
         }
 
+
         /**
          * The type of library to filter. Can be "movie" or "show", or all if not present.
          */
@@ -482,6 +488,7 @@ public class GetWatchListRequest {
             this.libtype = libtype;
             return this;
         }
+
 
         /**
          * The number of items to return. If not specified, all items will be returned.
@@ -503,6 +510,7 @@ public class GetWatchListRequest {
             return this;
         }
 
+
         /**
          * include collections in the results
          */
@@ -521,6 +529,7 @@ public class GetWatchListRequest {
             return this;
         }
 
+
         /**
          * include external media in the results
          */
@@ -538,6 +547,7 @@ public class GetWatchListRequest {
             this.includeExternalMedia = includeExternalMedia;
             return this;
         }
+
 
         /**
          * The index of the first item to return. If not specified, the first item will be returned.
@@ -561,6 +571,7 @@ public class GetWatchListRequest {
             return this;
         }
 
+
         /**
          * The number of items to return. If not specified, all items will be returned.
          * If the number of items exceeds the limit, the response will be paginated.
@@ -583,6 +594,7 @@ public class GetWatchListRequest {
             return this;
         }
 
+
         /**
          * An authentication token, obtained from plex.tv
          */
@@ -591,7 +603,7 @@ public class GetWatchListRequest {
             this.xPlexToken = xPlexToken;
             return this;
         }
-        
+
         public GetWatchListRequest build() {
             if (xPlexContainerStart == null) {
                 xPlexContainerStart = _SINGLETON_VALUE_XPlexContainerStart.value();
@@ -599,17 +611,13 @@ public class GetWatchListRequest {
             if (xPlexContainerSize == null) {
                 xPlexContainerSize = _SINGLETON_VALUE_XPlexContainerSize.value();
             }
+
             return new GetWatchListRequest(
-                filter,
-                sort,
-                libtype,
-                maxresults,
-                includeCollections,
-                includeExternalMedia,
-                xPlexContainerStart,
-                xPlexContainerSize,
-                xPlexToken);
+                filter, sort, libtype,
+                maxresults, includeCollections, includeExternalMedia,
+                xPlexContainerStart, xPlexContainerSize, xPlexToken);
         }
+
 
         private static final LazySingletonValue<Optional<Integer>> _SINGLETON_VALUE_XPlexContainerStart =
                 new LazySingletonValue<>(

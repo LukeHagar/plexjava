@@ -16,8 +16,8 @@ import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetLibraryHubsMetadata {
 
@@ -25,133 +25,166 @@ public class GetLibraryHubsMetadata {
     @JsonProperty("ratingKey")
     private Optional<String> ratingKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("guid")
     private Optional<String> guid;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("studio")
     private Optional<String> studio;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
     private Optional<String> type;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionTitle")
     private Optional<String> librarySectionTitle;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionID")
     private Optional<Integer> librarySectionID;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionKey")
     private Optional<String> librarySectionKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contentRating")
     private Optional<String> contentRating;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("summary")
     private Optional<String> summary;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("rating")
     private Optional<Double> rating;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audienceRating")
     private Optional<Double> audienceRating;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("viewCount")
     private Optional<Integer> viewCount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lastViewedAt")
     private Optional<Integer> lastViewedAt;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("year")
     private Optional<Integer> year;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tagline")
     private Optional<String> tagline;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
     private Optional<String> thumb;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("art")
     private Optional<String> art;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
     private Optional<Integer> duration;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("originallyAvailableAt")
     private Optional<LocalDate> originallyAvailableAt;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("addedAt")
     private Optional<Integer> addedAt;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("updatedAt")
     private Optional<Integer> updatedAt;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audienceRatingImage")
     private Optional<String> audienceRatingImage;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("primaryExtraKey")
     private Optional<String> primaryExtraKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ratingImage")
     private Optional<String> ratingImage;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Media")
     private Optional<? extends List<GetLibraryHubsMedia>> media;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Genre")
     private Optional<? extends List<GetLibraryHubsGenre>> genre;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Country")
     private Optional<? extends List<GetLibraryHubsCountry>> country;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Director")
     private Optional<? extends List<GetLibraryHubsDirector>> director;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Role")
     private Optional<? extends List<GetLibraryHubsRole>> role;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Writer")
     private Optional<? extends List<GetLibraryHubsWriter>> writer;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("skipCount")
     private Optional<Integer> skipCount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("chapterSource")
@@ -264,7 +297,18 @@ public class GetLibraryHubsMetadata {
     }
     
     public GetLibraryHubsMetadata() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -443,15 +487,17 @@ public class GetLibraryHubsMetadata {
         return chapterSource;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetLibraryHubsMetadata withRatingKey(String ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         this.ratingKey = Optional.ofNullable(ratingKey);
         return this;
     }
+
 
     public GetLibraryHubsMetadata withRatingKey(Optional<String> ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
@@ -465,6 +511,7 @@ public class GetLibraryHubsMetadata {
         return this;
     }
 
+
     public GetLibraryHubsMetadata withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
@@ -476,6 +523,7 @@ public class GetLibraryHubsMetadata {
         this.guid = Optional.ofNullable(guid);
         return this;
     }
+
 
     public GetLibraryHubsMetadata withGuid(Optional<String> guid) {
         Utils.checkNotNull(guid, "guid");
@@ -489,6 +537,7 @@ public class GetLibraryHubsMetadata {
         return this;
     }
 
+
     public GetLibraryHubsMetadata withStudio(Optional<String> studio) {
         Utils.checkNotNull(studio, "studio");
         this.studio = studio;
@@ -500,6 +549,7 @@ public class GetLibraryHubsMetadata {
         this.type = Optional.ofNullable(type);
         return this;
     }
+
 
     public GetLibraryHubsMetadata withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
@@ -513,6 +563,7 @@ public class GetLibraryHubsMetadata {
         return this;
     }
 
+
     public GetLibraryHubsMetadata withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
@@ -524,6 +575,7 @@ public class GetLibraryHubsMetadata {
         this.librarySectionTitle = Optional.ofNullable(librarySectionTitle);
         return this;
     }
+
 
     public GetLibraryHubsMetadata withLibrarySectionTitle(Optional<String> librarySectionTitle) {
         Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
@@ -537,6 +589,7 @@ public class GetLibraryHubsMetadata {
         return this;
     }
 
+
     public GetLibraryHubsMetadata withLibrarySectionID(Optional<Integer> librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
         this.librarySectionID = librarySectionID;
@@ -548,6 +601,7 @@ public class GetLibraryHubsMetadata {
         this.librarySectionKey = Optional.ofNullable(librarySectionKey);
         return this;
     }
+
 
     public GetLibraryHubsMetadata withLibrarySectionKey(Optional<String> librarySectionKey) {
         Utils.checkNotNull(librarySectionKey, "librarySectionKey");
@@ -561,6 +615,7 @@ public class GetLibraryHubsMetadata {
         return this;
     }
 
+
     public GetLibraryHubsMetadata withContentRating(Optional<String> contentRating) {
         Utils.checkNotNull(contentRating, "contentRating");
         this.contentRating = contentRating;
@@ -572,6 +627,7 @@ public class GetLibraryHubsMetadata {
         this.summary = Optional.ofNullable(summary);
         return this;
     }
+
 
     public GetLibraryHubsMetadata withSummary(Optional<String> summary) {
         Utils.checkNotNull(summary, "summary");
@@ -585,6 +641,7 @@ public class GetLibraryHubsMetadata {
         return this;
     }
 
+
     public GetLibraryHubsMetadata withRating(Optional<Double> rating) {
         Utils.checkNotNull(rating, "rating");
         this.rating = rating;
@@ -596,6 +653,7 @@ public class GetLibraryHubsMetadata {
         this.audienceRating = Optional.ofNullable(audienceRating);
         return this;
     }
+
 
     public GetLibraryHubsMetadata withAudienceRating(Optional<Double> audienceRating) {
         Utils.checkNotNull(audienceRating, "audienceRating");
@@ -609,6 +667,7 @@ public class GetLibraryHubsMetadata {
         return this;
     }
 
+
     public GetLibraryHubsMetadata withViewCount(Optional<Integer> viewCount) {
         Utils.checkNotNull(viewCount, "viewCount");
         this.viewCount = viewCount;
@@ -620,6 +679,7 @@ public class GetLibraryHubsMetadata {
         this.lastViewedAt = Optional.ofNullable(lastViewedAt);
         return this;
     }
+
 
     public GetLibraryHubsMetadata withLastViewedAt(Optional<Integer> lastViewedAt) {
         Utils.checkNotNull(lastViewedAt, "lastViewedAt");
@@ -633,6 +693,7 @@ public class GetLibraryHubsMetadata {
         return this;
     }
 
+
     public GetLibraryHubsMetadata withYear(Optional<Integer> year) {
         Utils.checkNotNull(year, "year");
         this.year = year;
@@ -644,6 +705,7 @@ public class GetLibraryHubsMetadata {
         this.tagline = Optional.ofNullable(tagline);
         return this;
     }
+
 
     public GetLibraryHubsMetadata withTagline(Optional<String> tagline) {
         Utils.checkNotNull(tagline, "tagline");
@@ -657,6 +719,7 @@ public class GetLibraryHubsMetadata {
         return this;
     }
 
+
     public GetLibraryHubsMetadata withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
         this.thumb = thumb;
@@ -668,6 +731,7 @@ public class GetLibraryHubsMetadata {
         this.art = Optional.ofNullable(art);
         return this;
     }
+
 
     public GetLibraryHubsMetadata withArt(Optional<String> art) {
         Utils.checkNotNull(art, "art");
@@ -681,6 +745,7 @@ public class GetLibraryHubsMetadata {
         return this;
     }
 
+
     public GetLibraryHubsMetadata withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = duration;
@@ -692,6 +757,7 @@ public class GetLibraryHubsMetadata {
         this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
         return this;
     }
+
 
     public GetLibraryHubsMetadata withOriginallyAvailableAt(Optional<LocalDate> originallyAvailableAt) {
         Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
@@ -705,6 +771,7 @@ public class GetLibraryHubsMetadata {
         return this;
     }
 
+
     public GetLibraryHubsMetadata withAddedAt(Optional<Integer> addedAt) {
         Utils.checkNotNull(addedAt, "addedAt");
         this.addedAt = addedAt;
@@ -716,6 +783,7 @@ public class GetLibraryHubsMetadata {
         this.updatedAt = Optional.ofNullable(updatedAt);
         return this;
     }
+
 
     public GetLibraryHubsMetadata withUpdatedAt(Optional<Integer> updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
@@ -729,6 +797,7 @@ public class GetLibraryHubsMetadata {
         return this;
     }
 
+
     public GetLibraryHubsMetadata withAudienceRatingImage(Optional<String> audienceRatingImage) {
         Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
         this.audienceRatingImage = audienceRatingImage;
@@ -740,6 +809,7 @@ public class GetLibraryHubsMetadata {
         this.primaryExtraKey = Optional.ofNullable(primaryExtraKey);
         return this;
     }
+
 
     public GetLibraryHubsMetadata withPrimaryExtraKey(Optional<String> primaryExtraKey) {
         Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
@@ -753,6 +823,7 @@ public class GetLibraryHubsMetadata {
         return this;
     }
 
+
     public GetLibraryHubsMetadata withRatingImage(Optional<String> ratingImage) {
         Utils.checkNotNull(ratingImage, "ratingImage");
         this.ratingImage = ratingImage;
@@ -764,6 +835,7 @@ public class GetLibraryHubsMetadata {
         this.media = Optional.ofNullable(media);
         return this;
     }
+
 
     public GetLibraryHubsMetadata withMedia(Optional<? extends List<GetLibraryHubsMedia>> media) {
         Utils.checkNotNull(media, "media");
@@ -777,6 +849,7 @@ public class GetLibraryHubsMetadata {
         return this;
     }
 
+
     public GetLibraryHubsMetadata withGenre(Optional<? extends List<GetLibraryHubsGenre>> genre) {
         Utils.checkNotNull(genre, "genre");
         this.genre = genre;
@@ -788,6 +861,7 @@ public class GetLibraryHubsMetadata {
         this.country = Optional.ofNullable(country);
         return this;
     }
+
 
     public GetLibraryHubsMetadata withCountry(Optional<? extends List<GetLibraryHubsCountry>> country) {
         Utils.checkNotNull(country, "country");
@@ -801,6 +875,7 @@ public class GetLibraryHubsMetadata {
         return this;
     }
 
+
     public GetLibraryHubsMetadata withDirector(Optional<? extends List<GetLibraryHubsDirector>> director) {
         Utils.checkNotNull(director, "director");
         this.director = director;
@@ -812,6 +887,7 @@ public class GetLibraryHubsMetadata {
         this.role = Optional.ofNullable(role);
         return this;
     }
+
 
     public GetLibraryHubsMetadata withRole(Optional<? extends List<GetLibraryHubsRole>> role) {
         Utils.checkNotNull(role, "role");
@@ -825,6 +901,7 @@ public class GetLibraryHubsMetadata {
         return this;
     }
 
+
     public GetLibraryHubsMetadata withWriter(Optional<? extends List<GetLibraryHubsWriter>> writer) {
         Utils.checkNotNull(writer, "writer");
         this.writer = writer;
@@ -836,6 +913,7 @@ public class GetLibraryHubsMetadata {
         this.skipCount = Optional.ofNullable(skipCount);
         return this;
     }
+
 
     public GetLibraryHubsMetadata withSkipCount(Optional<Integer> skipCount) {
         Utils.checkNotNull(skipCount, "skipCount");
@@ -849,13 +927,13 @@ public class GetLibraryHubsMetadata {
         return this;
     }
 
+
     public GetLibraryHubsMetadata withChapterSource(Optional<String> chapterSource) {
         Utils.checkNotNull(chapterSource, "chapterSource");
         this.chapterSource = chapterSource;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -866,78 +944,56 @@ public class GetLibraryHubsMetadata {
         }
         GetLibraryHubsMetadata other = (GetLibraryHubsMetadata) o;
         return 
-            Objects.deepEquals(this.ratingKey, other.ratingKey) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.guid, other.guid) &&
-            Objects.deepEquals(this.studio, other.studio) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
-            Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
-            Objects.deepEquals(this.librarySectionKey, other.librarySectionKey) &&
-            Objects.deepEquals(this.contentRating, other.contentRating) &&
-            Objects.deepEquals(this.summary, other.summary) &&
-            Objects.deepEquals(this.rating, other.rating) &&
-            Objects.deepEquals(this.audienceRating, other.audienceRating) &&
-            Objects.deepEquals(this.viewCount, other.viewCount) &&
-            Objects.deepEquals(this.lastViewedAt, other.lastViewedAt) &&
-            Objects.deepEquals(this.year, other.year) &&
-            Objects.deepEquals(this.tagline, other.tagline) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.art, other.art) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.originallyAvailableAt, other.originallyAvailableAt) &&
-            Objects.deepEquals(this.addedAt, other.addedAt) &&
-            Objects.deepEquals(this.updatedAt, other.updatedAt) &&
-            Objects.deepEquals(this.audienceRatingImage, other.audienceRatingImage) &&
-            Objects.deepEquals(this.primaryExtraKey, other.primaryExtraKey) &&
-            Objects.deepEquals(this.ratingImage, other.ratingImage) &&
-            Objects.deepEquals(this.media, other.media) &&
-            Objects.deepEquals(this.genre, other.genre) &&
-            Objects.deepEquals(this.country, other.country) &&
-            Objects.deepEquals(this.director, other.director) &&
-            Objects.deepEquals(this.role, other.role) &&
-            Objects.deepEquals(this.writer, other.writer) &&
-            Objects.deepEquals(this.skipCount, other.skipCount) &&
-            Objects.deepEquals(this.chapterSource, other.chapterSource);
+            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.guid, other.guid) &&
+            Utils.enhancedDeepEquals(this.studio, other.studio) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
+            Utils.enhancedDeepEquals(this.librarySectionID, other.librarySectionID) &&
+            Utils.enhancedDeepEquals(this.librarySectionKey, other.librarySectionKey) &&
+            Utils.enhancedDeepEquals(this.contentRating, other.contentRating) &&
+            Utils.enhancedDeepEquals(this.summary, other.summary) &&
+            Utils.enhancedDeepEquals(this.rating, other.rating) &&
+            Utils.enhancedDeepEquals(this.audienceRating, other.audienceRating) &&
+            Utils.enhancedDeepEquals(this.viewCount, other.viewCount) &&
+            Utils.enhancedDeepEquals(this.lastViewedAt, other.lastViewedAt) &&
+            Utils.enhancedDeepEquals(this.year, other.year) &&
+            Utils.enhancedDeepEquals(this.tagline, other.tagline) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.art, other.art) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.originallyAvailableAt, other.originallyAvailableAt) &&
+            Utils.enhancedDeepEquals(this.addedAt, other.addedAt) &&
+            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt) &&
+            Utils.enhancedDeepEquals(this.audienceRatingImage, other.audienceRatingImage) &&
+            Utils.enhancedDeepEquals(this.primaryExtraKey, other.primaryExtraKey) &&
+            Utils.enhancedDeepEquals(this.ratingImage, other.ratingImage) &&
+            Utils.enhancedDeepEquals(this.media, other.media) &&
+            Utils.enhancedDeepEquals(this.genre, other.genre) &&
+            Utils.enhancedDeepEquals(this.country, other.country) &&
+            Utils.enhancedDeepEquals(this.director, other.director) &&
+            Utils.enhancedDeepEquals(this.role, other.role) &&
+            Utils.enhancedDeepEquals(this.writer, other.writer) &&
+            Utils.enhancedDeepEquals(this.skipCount, other.skipCount) &&
+            Utils.enhancedDeepEquals(this.chapterSource, other.chapterSource);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            ratingKey,
-            key,
-            guid,
-            studio,
-            type,
-            title,
-            librarySectionTitle,
-            librarySectionID,
-            librarySectionKey,
-            contentRating,
-            summary,
-            rating,
-            audienceRating,
-            viewCount,
-            lastViewedAt,
-            year,
-            tagline,
-            thumb,
-            art,
-            duration,
-            originallyAvailableAt,
-            addedAt,
-            updatedAt,
-            audienceRatingImage,
-            primaryExtraKey,
-            ratingImage,
-            media,
-            genre,
-            country,
-            director,
-            role,
-            writer,
-            skipCount,
+        return Utils.enhancedHash(
+            ratingKey, key, guid,
+            studio, type, title,
+            librarySectionTitle, librarySectionID, librarySectionKey,
+            contentRating, summary, rating,
+            audienceRating, viewCount, lastViewedAt,
+            year, tagline, thumb,
+            art, duration, originallyAvailableAt,
+            addedAt, updatedAt, audienceRatingImage,
+            primaryExtraKey, ratingImage, media,
+            genre, country, director,
+            role, writer, skipCount,
             chapterSource);
     }
     
@@ -979,80 +1035,82 @@ public class GetLibraryHubsMetadata {
                 "skipCount", skipCount,
                 "chapterSource", chapterSource);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> ratingKey = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> guid = Optional.empty();
- 
+
         private Optional<String> studio = Optional.empty();
- 
+
         private Optional<String> type = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> librarySectionTitle = Optional.empty();
- 
+
         private Optional<Integer> librarySectionID = Optional.empty();
- 
+
         private Optional<String> librarySectionKey = Optional.empty();
- 
+
         private Optional<String> contentRating = Optional.empty();
- 
+
         private Optional<String> summary = Optional.empty();
- 
+
         private Optional<Double> rating = Optional.empty();
- 
+
         private Optional<Double> audienceRating = Optional.empty();
- 
+
         private Optional<Integer> viewCount = Optional.empty();
- 
+
         private Optional<Integer> lastViewedAt = Optional.empty();
- 
+
         private Optional<Integer> year = Optional.empty();
- 
+
         private Optional<String> tagline = Optional.empty();
- 
+
         private Optional<String> thumb = Optional.empty();
- 
+
         private Optional<String> art = Optional.empty();
- 
+
         private Optional<Integer> duration = Optional.empty();
- 
+
         private Optional<LocalDate> originallyAvailableAt = Optional.empty();
- 
+
         private Optional<Integer> addedAt = Optional.empty();
- 
+
         private Optional<Integer> updatedAt = Optional.empty();
- 
+
         private Optional<String> audienceRatingImage = Optional.empty();
- 
+
         private Optional<String> primaryExtraKey = Optional.empty();
- 
+
         private Optional<String> ratingImage = Optional.empty();
- 
+
         private Optional<? extends List<GetLibraryHubsMedia>> media = Optional.empty();
- 
+
         private Optional<? extends List<GetLibraryHubsGenre>> genre = Optional.empty();
- 
+
         private Optional<? extends List<GetLibraryHubsCountry>> country = Optional.empty();
- 
+
         private Optional<? extends List<GetLibraryHubsDirector>> director = Optional.empty();
- 
+
         private Optional<? extends List<GetLibraryHubsRole>> role = Optional.empty();
- 
+
         private Optional<? extends List<GetLibraryHubsWriter>> writer = Optional.empty();
- 
+
         private Optional<Integer> skipCount = Optional.empty();
- 
+
         private Optional<String> chapterSource = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder ratingKey(String ratingKey) {
             Utils.checkNotNull(ratingKey, "ratingKey");
@@ -1066,6 +1124,7 @@ public class GetLibraryHubsMetadata {
             return this;
         }
 
+
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = Optional.ofNullable(key);
@@ -1077,6 +1136,7 @@ public class GetLibraryHubsMetadata {
             this.key = key;
             return this;
         }
+
 
         public Builder guid(String guid) {
             Utils.checkNotNull(guid, "guid");
@@ -1090,6 +1150,7 @@ public class GetLibraryHubsMetadata {
             return this;
         }
 
+
         public Builder studio(String studio) {
             Utils.checkNotNull(studio, "studio");
             this.studio = Optional.ofNullable(studio);
@@ -1101,6 +1162,7 @@ public class GetLibraryHubsMetadata {
             this.studio = studio;
             return this;
         }
+
 
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
@@ -1114,6 +1176,7 @@ public class GetLibraryHubsMetadata {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -1125,6 +1188,7 @@ public class GetLibraryHubsMetadata {
             this.title = title;
             return this;
         }
+
 
         public Builder librarySectionTitle(String librarySectionTitle) {
             Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
@@ -1138,6 +1202,7 @@ public class GetLibraryHubsMetadata {
             return this;
         }
 
+
         public Builder librarySectionID(int librarySectionID) {
             Utils.checkNotNull(librarySectionID, "librarySectionID");
             this.librarySectionID = Optional.ofNullable(librarySectionID);
@@ -1149,6 +1214,7 @@ public class GetLibraryHubsMetadata {
             this.librarySectionID = librarySectionID;
             return this;
         }
+
 
         public Builder librarySectionKey(String librarySectionKey) {
             Utils.checkNotNull(librarySectionKey, "librarySectionKey");
@@ -1162,6 +1228,7 @@ public class GetLibraryHubsMetadata {
             return this;
         }
 
+
         public Builder contentRating(String contentRating) {
             Utils.checkNotNull(contentRating, "contentRating");
             this.contentRating = Optional.ofNullable(contentRating);
@@ -1173,6 +1240,7 @@ public class GetLibraryHubsMetadata {
             this.contentRating = contentRating;
             return this;
         }
+
 
         public Builder summary(String summary) {
             Utils.checkNotNull(summary, "summary");
@@ -1186,6 +1254,7 @@ public class GetLibraryHubsMetadata {
             return this;
         }
 
+
         public Builder rating(double rating) {
             Utils.checkNotNull(rating, "rating");
             this.rating = Optional.ofNullable(rating);
@@ -1197,6 +1266,7 @@ public class GetLibraryHubsMetadata {
             this.rating = rating;
             return this;
         }
+
 
         public Builder audienceRating(double audienceRating) {
             Utils.checkNotNull(audienceRating, "audienceRating");
@@ -1210,6 +1280,7 @@ public class GetLibraryHubsMetadata {
             return this;
         }
 
+
         public Builder viewCount(int viewCount) {
             Utils.checkNotNull(viewCount, "viewCount");
             this.viewCount = Optional.ofNullable(viewCount);
@@ -1221,6 +1292,7 @@ public class GetLibraryHubsMetadata {
             this.viewCount = viewCount;
             return this;
         }
+
 
         public Builder lastViewedAt(int lastViewedAt) {
             Utils.checkNotNull(lastViewedAt, "lastViewedAt");
@@ -1234,6 +1306,7 @@ public class GetLibraryHubsMetadata {
             return this;
         }
 
+
         public Builder year(int year) {
             Utils.checkNotNull(year, "year");
             this.year = Optional.ofNullable(year);
@@ -1245,6 +1318,7 @@ public class GetLibraryHubsMetadata {
             this.year = year;
             return this;
         }
+
 
         public Builder tagline(String tagline) {
             Utils.checkNotNull(tagline, "tagline");
@@ -1258,6 +1332,7 @@ public class GetLibraryHubsMetadata {
             return this;
         }
 
+
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
             this.thumb = Optional.ofNullable(thumb);
@@ -1269,6 +1344,7 @@ public class GetLibraryHubsMetadata {
             this.thumb = thumb;
             return this;
         }
+
 
         public Builder art(String art) {
             Utils.checkNotNull(art, "art");
@@ -1282,6 +1358,7 @@ public class GetLibraryHubsMetadata {
             return this;
         }
 
+
         public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = Optional.ofNullable(duration);
@@ -1293,6 +1370,7 @@ public class GetLibraryHubsMetadata {
             this.duration = duration;
             return this;
         }
+
 
         public Builder originallyAvailableAt(LocalDate originallyAvailableAt) {
             Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
@@ -1306,6 +1384,7 @@ public class GetLibraryHubsMetadata {
             return this;
         }
 
+
         public Builder addedAt(int addedAt) {
             Utils.checkNotNull(addedAt, "addedAt");
             this.addedAt = Optional.ofNullable(addedAt);
@@ -1317,6 +1396,7 @@ public class GetLibraryHubsMetadata {
             this.addedAt = addedAt;
             return this;
         }
+
 
         public Builder updatedAt(int updatedAt) {
             Utils.checkNotNull(updatedAt, "updatedAt");
@@ -1330,6 +1410,7 @@ public class GetLibraryHubsMetadata {
             return this;
         }
 
+
         public Builder audienceRatingImage(String audienceRatingImage) {
             Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
             this.audienceRatingImage = Optional.ofNullable(audienceRatingImage);
@@ -1341,6 +1422,7 @@ public class GetLibraryHubsMetadata {
             this.audienceRatingImage = audienceRatingImage;
             return this;
         }
+
 
         public Builder primaryExtraKey(String primaryExtraKey) {
             Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
@@ -1354,6 +1436,7 @@ public class GetLibraryHubsMetadata {
             return this;
         }
 
+
         public Builder ratingImage(String ratingImage) {
             Utils.checkNotNull(ratingImage, "ratingImage");
             this.ratingImage = Optional.ofNullable(ratingImage);
@@ -1365,6 +1448,7 @@ public class GetLibraryHubsMetadata {
             this.ratingImage = ratingImage;
             return this;
         }
+
 
         public Builder media(List<GetLibraryHubsMedia> media) {
             Utils.checkNotNull(media, "media");
@@ -1378,6 +1462,7 @@ public class GetLibraryHubsMetadata {
             return this;
         }
 
+
         public Builder genre(List<GetLibraryHubsGenre> genre) {
             Utils.checkNotNull(genre, "genre");
             this.genre = Optional.ofNullable(genre);
@@ -1389,6 +1474,7 @@ public class GetLibraryHubsMetadata {
             this.genre = genre;
             return this;
         }
+
 
         public Builder country(List<GetLibraryHubsCountry> country) {
             Utils.checkNotNull(country, "country");
@@ -1402,6 +1488,7 @@ public class GetLibraryHubsMetadata {
             return this;
         }
 
+
         public Builder director(List<GetLibraryHubsDirector> director) {
             Utils.checkNotNull(director, "director");
             this.director = Optional.ofNullable(director);
@@ -1413,6 +1500,7 @@ public class GetLibraryHubsMetadata {
             this.director = director;
             return this;
         }
+
 
         public Builder role(List<GetLibraryHubsRole> role) {
             Utils.checkNotNull(role, "role");
@@ -1426,6 +1514,7 @@ public class GetLibraryHubsMetadata {
             return this;
         }
 
+
         public Builder writer(List<GetLibraryHubsWriter> writer) {
             Utils.checkNotNull(writer, "writer");
             this.writer = Optional.ofNullable(writer);
@@ -1437,6 +1526,7 @@ public class GetLibraryHubsMetadata {
             this.writer = writer;
             return this;
         }
+
 
         public Builder skipCount(int skipCount) {
             Utils.checkNotNull(skipCount, "skipCount");
@@ -1450,6 +1540,7 @@ public class GetLibraryHubsMetadata {
             return this;
         }
 
+
         public Builder chapterSource(String chapterSource) {
             Utils.checkNotNull(chapterSource, "chapterSource");
             this.chapterSource = Optional.ofNullable(chapterSource);
@@ -1461,43 +1552,23 @@ public class GetLibraryHubsMetadata {
             this.chapterSource = chapterSource;
             return this;
         }
-        
+
         public GetLibraryHubsMetadata build() {
+
             return new GetLibraryHubsMetadata(
-                ratingKey,
-                key,
-                guid,
-                studio,
-                type,
-                title,
-                librarySectionTitle,
-                librarySectionID,
-                librarySectionKey,
-                contentRating,
-                summary,
-                rating,
-                audienceRating,
-                viewCount,
-                lastViewedAt,
-                year,
-                tagline,
-                thumb,
-                art,
-                duration,
-                originallyAvailableAt,
-                addedAt,
-                updatedAt,
-                audienceRatingImage,
-                primaryExtraKey,
-                ratingImage,
-                media,
-                genre,
-                country,
-                director,
-                role,
-                writer,
-                skipCount,
+                ratingKey, key, guid,
+                studio, type, title,
+                librarySectionTitle, librarySectionID, librarySectionKey,
+                contentRating, summary, rating,
+                audienceRating, viewCount, lastViewedAt,
+                year, tagline, thumb,
+                art, duration, originallyAvailableAt,
+                addedAt, updatedAt, audienceRatingImage,
+                primaryExtraKey, ratingImage, media,
+                genre, country, director,
+                role, writer, skipCount,
                 chapterSource);
         }
+
     }
 }

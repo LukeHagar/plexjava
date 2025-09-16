@@ -13,8 +13,8 @@ import java.lang.Boolean;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetServerIdentityMediaContainer {
 
@@ -22,13 +22,16 @@ public class GetServerIdentityMediaContainer {
     @JsonProperty("size")
     private Optional<Double> size;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("claimed")
     private Optional<Boolean> claimed;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("machineIdentifier")
     private Optional<String> machineIdentifier;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("version")
@@ -51,7 +54,8 @@ public class GetServerIdentityMediaContainer {
     }
     
     public GetServerIdentityMediaContainer() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     @JsonIgnore
@@ -74,15 +78,17 @@ public class GetServerIdentityMediaContainer {
         return version;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetServerIdentityMediaContainer withSize(double size) {
         Utils.checkNotNull(size, "size");
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetServerIdentityMediaContainer withSize(Optional<Double> size) {
         Utils.checkNotNull(size, "size");
@@ -96,6 +102,7 @@ public class GetServerIdentityMediaContainer {
         return this;
     }
 
+
     public GetServerIdentityMediaContainer withClaimed(Optional<Boolean> claimed) {
         Utils.checkNotNull(claimed, "claimed");
         this.claimed = claimed;
@@ -107,6 +114,7 @@ public class GetServerIdentityMediaContainer {
         this.machineIdentifier = Optional.ofNullable(machineIdentifier);
         return this;
     }
+
 
     public GetServerIdentityMediaContainer withMachineIdentifier(Optional<String> machineIdentifier) {
         Utils.checkNotNull(machineIdentifier, "machineIdentifier");
@@ -120,13 +128,13 @@ public class GetServerIdentityMediaContainer {
         return this;
     }
 
+
     public GetServerIdentityMediaContainer withVersion(Optional<String> version) {
         Utils.checkNotNull(version, "version");
         this.version = version;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -137,18 +145,16 @@ public class GetServerIdentityMediaContainer {
         }
         GetServerIdentityMediaContainer other = (GetServerIdentityMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.claimed, other.claimed) &&
-            Objects.deepEquals(this.machineIdentifier, other.machineIdentifier) &&
-            Objects.deepEquals(this.version, other.version);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.claimed, other.claimed) &&
+            Utils.enhancedDeepEquals(this.machineIdentifier, other.machineIdentifier) &&
+            Utils.enhancedDeepEquals(this.version, other.version);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            claimed,
-            machineIdentifier,
+        return Utils.enhancedHash(
+            size, claimed, machineIdentifier,
             version);
     }
     
@@ -160,20 +166,22 @@ public class GetServerIdentityMediaContainer {
                 "machineIdentifier", machineIdentifier,
                 "version", version);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Double> size = Optional.empty();
- 
+
         private Optional<Boolean> claimed = Optional.empty();
- 
+
         private Optional<String> machineIdentifier = Optional.empty();
- 
+
         private Optional<String> version = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder size(double size) {
             Utils.checkNotNull(size, "size");
@@ -187,6 +195,7 @@ public class GetServerIdentityMediaContainer {
             return this;
         }
 
+
         public Builder claimed(boolean claimed) {
             Utils.checkNotNull(claimed, "claimed");
             this.claimed = Optional.ofNullable(claimed);
@@ -198,6 +207,7 @@ public class GetServerIdentityMediaContainer {
             this.claimed = claimed;
             return this;
         }
+
 
         public Builder machineIdentifier(String machineIdentifier) {
             Utils.checkNotNull(machineIdentifier, "machineIdentifier");
@@ -211,6 +221,7 @@ public class GetServerIdentityMediaContainer {
             return this;
         }
 
+
         public Builder version(String version) {
             Utils.checkNotNull(version, "version");
             this.version = Optional.ofNullable(version);
@@ -222,13 +233,13 @@ public class GetServerIdentityMediaContainer {
             this.version = version;
             return this;
         }
-        
+
         public GetServerIdentityMediaContainer build() {
+
             return new GetServerIdentityMediaContainer(
-                size,
-                claimed,
-                machineIdentifier,
+                size, claimed, machineIdentifier,
                 version);
         }
+
     }
 }

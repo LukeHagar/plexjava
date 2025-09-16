@@ -3,18 +3,25 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetServerPreferences;
 import java.lang.Exception;
 
 public class GetServerPreferencesRequestBuilder {
 
-    private final SDKMethodInterfaces.MethodCallGetServerPreferences sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetServerPreferencesRequestBuilder(SDKMethodInterfaces.MethodCallGetServerPreferences sdk) {
-        this.sdk = sdk;
+    public GetServerPreferencesRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetServerPreferencesResponse call() throws Exception {
+        
+        RequestlessOperation<GetServerPreferencesResponse> operation
+            = new GetServerPreferences.Sync(sdkConfiguration);
 
-        return sdk.getServerPreferencesDirect();
+        return operation.handleResponse(operation.doRequest());
     }
 }

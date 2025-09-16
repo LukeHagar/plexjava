@@ -11,11 +11,10 @@ import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetRefreshLibraryMetadataRequest {
 
+public class GetRefreshLibraryMetadataRequest {
     /**
      * Force the refresh even if the library is already being refreshed.
      */
@@ -62,9 +61,10 @@ public class GetRefreshLibraryMetadataRequest {
         return sectionKey;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Force the refresh even if the library is already being refreshed.
@@ -74,6 +74,7 @@ public class GetRefreshLibraryMetadataRequest {
         this.force = Optional.ofNullable(force);
         return this;
     }
+
 
     /**
      * Force the refresh even if the library is already being refreshed.
@@ -94,7 +95,6 @@ public class GetRefreshLibraryMetadataRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -105,15 +105,14 @@ public class GetRefreshLibraryMetadataRequest {
         }
         GetRefreshLibraryMetadataRequest other = (GetRefreshLibraryMetadataRequest) o;
         return 
-            Objects.deepEquals(this.force, other.force) &&
-            Objects.deepEquals(this.sectionKey, other.sectionKey);
+            Utils.enhancedDeepEquals(this.force, other.force) &&
+            Utils.enhancedDeepEquals(this.sectionKey, other.sectionKey);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            force,
-            sectionKey);
+        return Utils.enhancedHash(
+            force, sectionKey);
     }
     
     @Override
@@ -122,16 +121,18 @@ public class GetRefreshLibraryMetadataRequest {
                 "force", force,
                 "sectionKey", sectionKey);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends Force> force = Optional.empty();
- 
+
         private Integer sectionKey;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Force the refresh even if the library is already being refreshed.
@@ -151,6 +152,7 @@ public class GetRefreshLibraryMetadataRequest {
             return this;
         }
 
+
         /**
          * The unique key of the Plex library. 
          * Note: This is unique in the context of the Plex server.
@@ -160,11 +162,12 @@ public class GetRefreshLibraryMetadataRequest {
             this.sectionKey = sectionKey;
             return this;
         }
-        
+
         public GetRefreshLibraryMetadataRequest build() {
+
             return new GetRefreshLibraryMetadataRequest(
-                force,
-                sectionKey);
+                force, sectionKey);
         }
+
     }
 }

@@ -19,7 +19,6 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
@@ -29,7 +28,6 @@ import org.openapitools.jackson.nullable.JsonNullable;
  * <p>Logged in user details
  */
 public class GetTokenDetailsUserPlexAccount {
-
     /**
      * Unknown
      */
@@ -37,9 +35,11 @@ public class GetTokenDetailsUserPlexAccount {
     @JsonProperty("adsConsent")
     private Optional<Boolean> adsConsent;
 
+
     @JsonInclude(Include.ALWAYS)
     @JsonProperty("adsConsentReminderAt")
     private Optional<Long> adsConsentReminderAt;
+
 
     @JsonInclude(Include.ALWAYS)
     @JsonProperty("adsConsentSetAt")
@@ -192,6 +192,7 @@ public class GetTokenDetailsUserPlexAccount {
     @Deprecated
     private Optional<String> pin;
 
+
     @JsonProperty("profile")
     private UserProfile profile;
 
@@ -228,6 +229,7 @@ public class GetTokenDetailsUserPlexAccount {
     @JsonProperty("scrobbleTypes")
     private String scrobbleTypes;
 
+
     @JsonProperty("services")
     private List<Services> services;
 
@@ -243,6 +245,7 @@ public class GetTokenDetailsUserPlexAccount {
     @JsonInclude(Include.ALWAYS)
     @JsonProperty("subscriptionDescription")
     private Optional<String> subscriptionDescription;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("subscriptions")
@@ -278,6 +281,7 @@ public class GetTokenDetailsUserPlexAccount {
      */
     @JsonProperty("uuid")
     private String uuid;
+
 
     @JsonInclude(Include.ALWAYS)
     @JsonProperty("attributionPartner")
@@ -430,7 +434,20 @@ public class GetTokenDetailsUserPlexAccount {
             String title,
             String username,
             String uuid) {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), JsonNullable.undefined(), authToken, Optional.empty(), Optional.empty(), country, email, Optional.empty(), Optional.empty(), friendlyName, entitlements, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), homeSize, id, joinedAt, Optional.empty(), Optional.empty(), mailingListStatus, maxHomeSize, Optional.empty(), profile, Optional.empty(), rememberExpiresAt, Optional.empty(), Optional.empty(), scrobbleTypes, services, subscription, Optional.empty(), Optional.empty(), thumb, title, Optional.empty(), username, uuid, Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            JsonNullable.undefined(), authToken, Optional.empty(),
+            Optional.empty(), country, email,
+            Optional.empty(), Optional.empty(), friendlyName,
+            entitlements, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), homeSize,
+            id, joinedAt, Optional.empty(),
+            Optional.empty(), mailingListStatus, maxHomeSize,
+            Optional.empty(), profile, Optional.empty(),
+            rememberExpiresAt, Optional.empty(), Optional.empty(),
+            scrobbleTypes, services, subscription,
+            Optional.empty(), Optional.empty(), thumb,
+            title, Optional.empty(), username,
+            uuid, Optional.empty());
     }
 
     /**
@@ -748,9 +765,10 @@ public class GetTokenDetailsUserPlexAccount {
         return attributionPartner;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Unknown
@@ -760,6 +778,7 @@ public class GetTokenDetailsUserPlexAccount {
         this.adsConsent = Optional.ofNullable(adsConsent);
         return this;
     }
+
 
     /**
      * Unknown
@@ -776,6 +795,7 @@ public class GetTokenDetailsUserPlexAccount {
         return this;
     }
 
+
     public GetTokenDetailsUserPlexAccount withAdsConsentReminderAt(Optional<Long> adsConsentReminderAt) {
         Utils.checkNotNull(adsConsentReminderAt, "adsConsentReminderAt");
         this.adsConsentReminderAt = adsConsentReminderAt;
@@ -787,6 +807,7 @@ public class GetTokenDetailsUserPlexAccount {
         this.adsConsentSetAt = Optional.ofNullable(adsConsentSetAt);
         return this;
     }
+
 
     public GetTokenDetailsUserPlexAccount withAdsConsentSetAt(Optional<Long> adsConsentSetAt) {
         Utils.checkNotNull(adsConsentSetAt, "adsConsentSetAt");
@@ -830,6 +851,7 @@ public class GetTokenDetailsUserPlexAccount {
         return this;
     }
 
+
     /**
      * If the two-factor authentication backup codes have been created
      */
@@ -847,6 +869,7 @@ public class GetTokenDetailsUserPlexAccount {
         this.confirmed = Optional.ofNullable(confirmed);
         return this;
     }
+
 
     /**
      * If the account has been confirmed
@@ -884,6 +907,7 @@ public class GetTokenDetailsUserPlexAccount {
         return this;
     }
 
+
     /**
      * If login with email only is enabled
      */
@@ -901,6 +925,7 @@ public class GetTokenDetailsUserPlexAccount {
         this.experimentalFeatures = Optional.ofNullable(experimentalFeatures);
         return this;
     }
+
 
     /**
      * If experimental features are enabled
@@ -938,6 +963,7 @@ public class GetTokenDetailsUserPlexAccount {
         return this;
     }
 
+
     /**
      * If the account is a Plex Home guest user
      */
@@ -955,6 +981,7 @@ public class GetTokenDetailsUserPlexAccount {
         this.hasPassword = Optional.ofNullable(hasPassword);
         return this;
     }
+
 
     /**
      * If the account has a password
@@ -974,6 +1001,7 @@ public class GetTokenDetailsUserPlexAccount {
         return this;
     }
 
+
     /**
      * If the account is a Plex Home user
      */
@@ -991,6 +1019,7 @@ public class GetTokenDetailsUserPlexAccount {
         this.homeAdmin = Optional.ofNullable(homeAdmin);
         return this;
     }
+
 
     /**
      * If the account is the Plex Home admin
@@ -1037,6 +1066,7 @@ public class GetTokenDetailsUserPlexAccount {
         return this;
     }
 
+
     /**
      * The account locale
      */
@@ -1054,6 +1084,7 @@ public class GetTokenDetailsUserPlexAccount {
         this.mailingListActive = Optional.ofNullable(mailingListActive);
         return this;
     }
+
 
     /**
      * If you are subscribed to the Plex newsletter
@@ -1094,6 +1125,7 @@ public class GetTokenDetailsUserPlexAccount {
         return this;
     }
 
+
     /**
      * [Might be removed] The hashed Plex Home PIN
      * 
@@ -1120,6 +1152,7 @@ public class GetTokenDetailsUserPlexAccount {
         this.protected_ = Optional.ofNullable(protected_);
         return this;
     }
+
 
     /**
      * If the account has a Plex Home PIN enabled
@@ -1148,6 +1181,7 @@ public class GetTokenDetailsUserPlexAccount {
         return this;
     }
 
+
     /**
      * If the account is a Plex Home managed user
      */
@@ -1165,6 +1199,7 @@ public class GetTokenDetailsUserPlexAccount {
         this.roles = Optional.ofNullable(roles);
         return this;
     }
+
 
     /**
      * [Might be removed] List of account roles. Plexpass membership listed here
@@ -1208,6 +1243,7 @@ public class GetTokenDetailsUserPlexAccount {
         return this;
     }
 
+
     /**
      * Description of the Plex Pass subscription
      */
@@ -1222,6 +1258,7 @@ public class GetTokenDetailsUserPlexAccount {
         this.subscriptions = Optional.ofNullable(subscriptions);
         return this;
     }
+
 
     public GetTokenDetailsUserPlexAccount withSubscriptions(Optional<? extends List<GetTokenDetailsSubscription>> subscriptions) {
         Utils.checkNotNull(subscriptions, "subscriptions");
@@ -1256,6 +1293,7 @@ public class GetTokenDetailsUserPlexAccount {
         return this;
     }
 
+
     /**
      * If two-factor authentication is enabled
      */
@@ -1289,13 +1327,13 @@ public class GetTokenDetailsUserPlexAccount {
         return this;
     }
 
+
     public GetTokenDetailsUserPlexAccount withAttributionPartner(Optional<String> attributionPartner) {
         Utils.checkNotNull(attributionPartner, "attributionPartner");
         this.attributionPartner = attributionPartner;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -1306,93 +1344,66 @@ public class GetTokenDetailsUserPlexAccount {
         }
         GetTokenDetailsUserPlexAccount other = (GetTokenDetailsUserPlexAccount) o;
         return 
-            Objects.deepEquals(this.adsConsent, other.adsConsent) &&
-            Objects.deepEquals(this.adsConsentReminderAt, other.adsConsentReminderAt) &&
-            Objects.deepEquals(this.adsConsentSetAt, other.adsConsentSetAt) &&
-            Objects.deepEquals(this.anonymous, other.anonymous) &&
-            Objects.deepEquals(this.authToken, other.authToken) &&
-            Objects.deepEquals(this.backupCodesCreated, other.backupCodesCreated) &&
-            Objects.deepEquals(this.confirmed, other.confirmed) &&
-            Objects.deepEquals(this.country, other.country) &&
-            Objects.deepEquals(this.email, other.email) &&
-            Objects.deepEquals(this.emailOnlyAuth, other.emailOnlyAuth) &&
-            Objects.deepEquals(this.experimentalFeatures, other.experimentalFeatures) &&
-            Objects.deepEquals(this.friendlyName, other.friendlyName) &&
-            Objects.deepEquals(this.entitlements, other.entitlements) &&
-            Objects.deepEquals(this.guest, other.guest) &&
-            Objects.deepEquals(this.hasPassword, other.hasPassword) &&
-            Objects.deepEquals(this.home, other.home) &&
-            Objects.deepEquals(this.homeAdmin, other.homeAdmin) &&
-            Objects.deepEquals(this.homeSize, other.homeSize) &&
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.joinedAt, other.joinedAt) &&
-            Objects.deepEquals(this.locale, other.locale) &&
-            Objects.deepEquals(this.mailingListActive, other.mailingListActive) &&
-            Objects.deepEquals(this.mailingListStatus, other.mailingListStatus) &&
-            Objects.deepEquals(this.maxHomeSize, other.maxHomeSize) &&
-            Objects.deepEquals(this.pin, other.pin) &&
-            Objects.deepEquals(this.profile, other.profile) &&
-            Objects.deepEquals(this.protected_, other.protected_) &&
-            Objects.deepEquals(this.rememberExpiresAt, other.rememberExpiresAt) &&
-            Objects.deepEquals(this.restricted, other.restricted) &&
-            Objects.deepEquals(this.roles, other.roles) &&
-            Objects.deepEquals(this.scrobbleTypes, other.scrobbleTypes) &&
-            Objects.deepEquals(this.services, other.services) &&
-            Objects.deepEquals(this.subscription, other.subscription) &&
-            Objects.deepEquals(this.subscriptionDescription, other.subscriptionDescription) &&
-            Objects.deepEquals(this.subscriptions, other.subscriptions) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.twoFactorEnabled, other.twoFactorEnabled) &&
-            Objects.deepEquals(this.username, other.username) &&
-            Objects.deepEquals(this.uuid, other.uuid) &&
-            Objects.deepEquals(this.attributionPartner, other.attributionPartner);
+            Utils.enhancedDeepEquals(this.adsConsent, other.adsConsent) &&
+            Utils.enhancedDeepEquals(this.adsConsentReminderAt, other.adsConsentReminderAt) &&
+            Utils.enhancedDeepEquals(this.adsConsentSetAt, other.adsConsentSetAt) &&
+            Utils.enhancedDeepEquals(this.anonymous, other.anonymous) &&
+            Utils.enhancedDeepEquals(this.authToken, other.authToken) &&
+            Utils.enhancedDeepEquals(this.backupCodesCreated, other.backupCodesCreated) &&
+            Utils.enhancedDeepEquals(this.confirmed, other.confirmed) &&
+            Utils.enhancedDeepEquals(this.country, other.country) &&
+            Utils.enhancedDeepEquals(this.email, other.email) &&
+            Utils.enhancedDeepEquals(this.emailOnlyAuth, other.emailOnlyAuth) &&
+            Utils.enhancedDeepEquals(this.experimentalFeatures, other.experimentalFeatures) &&
+            Utils.enhancedDeepEquals(this.friendlyName, other.friendlyName) &&
+            Utils.enhancedDeepEquals(this.entitlements, other.entitlements) &&
+            Utils.enhancedDeepEquals(this.guest, other.guest) &&
+            Utils.enhancedDeepEquals(this.hasPassword, other.hasPassword) &&
+            Utils.enhancedDeepEquals(this.home, other.home) &&
+            Utils.enhancedDeepEquals(this.homeAdmin, other.homeAdmin) &&
+            Utils.enhancedDeepEquals(this.homeSize, other.homeSize) &&
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.joinedAt, other.joinedAt) &&
+            Utils.enhancedDeepEquals(this.locale, other.locale) &&
+            Utils.enhancedDeepEquals(this.mailingListActive, other.mailingListActive) &&
+            Utils.enhancedDeepEquals(this.mailingListStatus, other.mailingListStatus) &&
+            Utils.enhancedDeepEquals(this.maxHomeSize, other.maxHomeSize) &&
+            Utils.enhancedDeepEquals(this.pin, other.pin) &&
+            Utils.enhancedDeepEquals(this.profile, other.profile) &&
+            Utils.enhancedDeepEquals(this.protected_, other.protected_) &&
+            Utils.enhancedDeepEquals(this.rememberExpiresAt, other.rememberExpiresAt) &&
+            Utils.enhancedDeepEquals(this.restricted, other.restricted) &&
+            Utils.enhancedDeepEquals(this.roles, other.roles) &&
+            Utils.enhancedDeepEquals(this.scrobbleTypes, other.scrobbleTypes) &&
+            Utils.enhancedDeepEquals(this.services, other.services) &&
+            Utils.enhancedDeepEquals(this.subscription, other.subscription) &&
+            Utils.enhancedDeepEquals(this.subscriptionDescription, other.subscriptionDescription) &&
+            Utils.enhancedDeepEquals(this.subscriptions, other.subscriptions) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.twoFactorEnabled, other.twoFactorEnabled) &&
+            Utils.enhancedDeepEquals(this.username, other.username) &&
+            Utils.enhancedDeepEquals(this.uuid, other.uuid) &&
+            Utils.enhancedDeepEquals(this.attributionPartner, other.attributionPartner);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            adsConsent,
-            adsConsentReminderAt,
-            adsConsentSetAt,
-            anonymous,
-            authToken,
-            backupCodesCreated,
-            confirmed,
-            country,
-            email,
-            emailOnlyAuth,
-            experimentalFeatures,
-            friendlyName,
-            entitlements,
-            guest,
-            hasPassword,
-            home,
-            homeAdmin,
-            homeSize,
-            id,
-            joinedAt,
-            locale,
-            mailingListActive,
-            mailingListStatus,
-            maxHomeSize,
-            pin,
-            profile,
-            protected_,
-            rememberExpiresAt,
-            restricted,
-            roles,
-            scrobbleTypes,
-            services,
-            subscription,
-            subscriptionDescription,
-            subscriptions,
-            thumb,
-            title,
-            twoFactorEnabled,
-            username,
-            uuid,
-            attributionPartner);
+        return Utils.enhancedHash(
+            adsConsent, adsConsentReminderAt, adsConsentSetAt,
+            anonymous, authToken, backupCodesCreated,
+            confirmed, country, email,
+            emailOnlyAuth, experimentalFeatures, friendlyName,
+            entitlements, guest, hasPassword,
+            home, homeAdmin, homeSize,
+            id, joinedAt, locale,
+            mailingListActive, mailingListStatus, maxHomeSize,
+            pin, profile, protected_,
+            rememberExpiresAt, restricted, roles,
+            scrobbleTypes, services, subscription,
+            subscriptionDescription, subscriptions, thumb,
+            title, twoFactorEnabled, username,
+            uuid, attributionPartner);
     }
     
     @Override
@@ -1440,95 +1451,97 @@ public class GetTokenDetailsUserPlexAccount {
                 "uuid", uuid,
                 "attributionPartner", attributionPartner);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Boolean> adsConsent = Optional.empty();
- 
+
         private Optional<Long> adsConsentReminderAt = Optional.empty();
- 
+
         private Optional<Long> adsConsentSetAt = Optional.empty();
- 
+
         private JsonNullable<Boolean> anonymous;
- 
+
         private String authToken;
- 
+
         private Optional<Boolean> backupCodesCreated;
- 
+
         private Optional<Boolean> confirmed;
- 
+
         private String country;
- 
+
         private String email;
- 
+
         private Optional<Boolean> emailOnlyAuth;
- 
+
         private Optional<Boolean> experimentalFeatures;
- 
+
         private String friendlyName;
- 
+
         private List<String> entitlements;
- 
+
         private Optional<Boolean> guest;
- 
+
         private Optional<Boolean> hasPassword;
- 
+
         private Optional<Boolean> home;
- 
+
         private Optional<Boolean> homeAdmin;
- 
+
         private Integer homeSize;
- 
+
         private Integer id;
- 
+
         private Long joinedAt;
- 
+
         private Optional<String> locale = Optional.empty();
- 
+
         private Optional<Boolean> mailingListActive;
- 
+
         private MailingListStatus mailingListStatus;
- 
+
         private Integer maxHomeSize;
- 
+
         @Deprecated
         private Optional<String> pin = Optional.empty();
- 
+
         private UserProfile profile;
- 
+
         private Optional<Boolean> protected_;
- 
+
         private Long rememberExpiresAt;
- 
+
         private Optional<Boolean> restricted;
- 
+
         private Optional<? extends List<String>> roles = Optional.empty();
- 
+
         private String scrobbleTypes;
- 
+
         private List<Services> services;
- 
+
         private Subscription subscription;
- 
+
         private Optional<String> subscriptionDescription = Optional.empty();
- 
+
         private Optional<? extends List<GetTokenDetailsSubscription>> subscriptions = Optional.empty();
- 
+
         private String thumb;
- 
+
         private String title;
- 
+
         private Optional<Boolean> twoFactorEnabled;
- 
+
         private String username;
- 
+
         private String uuid;
- 
+
         private Optional<String> attributionPartner = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Unknown
@@ -1548,6 +1561,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         public Builder adsConsentReminderAt(long adsConsentReminderAt) {
             Utils.checkNotNull(adsConsentReminderAt, "adsConsentReminderAt");
             this.adsConsentReminderAt = Optional.ofNullable(adsConsentReminderAt);
@@ -1560,6 +1574,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         public Builder adsConsentSetAt(long adsConsentSetAt) {
             Utils.checkNotNull(adsConsentSetAt, "adsConsentSetAt");
             this.adsConsentSetAt = Optional.ofNullable(adsConsentSetAt);
@@ -1571,6 +1586,7 @@ public class GetTokenDetailsUserPlexAccount {
             this.adsConsentSetAt = adsConsentSetAt;
             return this;
         }
+
 
         /**
          * Unknown
@@ -1590,6 +1606,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * The account token
          */
@@ -1598,6 +1615,7 @@ public class GetTokenDetailsUserPlexAccount {
             this.authToken = authToken;
             return this;
         }
+
 
         /**
          * If the two-factor authentication backup codes have been created
@@ -1617,6 +1635,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * If the account has been confirmed
          */
@@ -1635,6 +1654,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * The account country
          */
@@ -1644,6 +1664,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * The account email address
          */
@@ -1652,6 +1673,7 @@ public class GetTokenDetailsUserPlexAccount {
             this.email = email;
             return this;
         }
+
 
         /**
          * If login with email only is enabled
@@ -1671,6 +1693,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * If experimental features are enabled
          */
@@ -1689,6 +1712,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * Your account full name
          */
@@ -1698,6 +1722,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * List of devices your allowed to use with this account
          */
@@ -1706,6 +1731,7 @@ public class GetTokenDetailsUserPlexAccount {
             this.entitlements = entitlements;
             return this;
         }
+
 
         /**
          * If the account is a Plex Home guest user
@@ -1725,6 +1751,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * If the account has a password
          */
@@ -1742,6 +1769,7 @@ public class GetTokenDetailsUserPlexAccount {
             this.hasPassword = hasPassword;
             return this;
         }
+
 
         /**
          * If the account is a Plex Home user
@@ -1761,6 +1789,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * If the account is the Plex Home admin
          */
@@ -1779,6 +1808,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * The number of accounts in the Plex Home
          */
@@ -1787,6 +1817,7 @@ public class GetTokenDetailsUserPlexAccount {
             this.homeSize = homeSize;
             return this;
         }
+
 
         /**
          * The Plex account ID
@@ -1797,6 +1828,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * Unix epoch datetime in seconds
          */
@@ -1805,6 +1837,7 @@ public class GetTokenDetailsUserPlexAccount {
             this.joinedAt = joinedAt;
             return this;
         }
+
 
         /**
          * The account locale
@@ -1824,6 +1857,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * If you are subscribed to the Plex newsletter
          */
@@ -1842,6 +1876,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * Your current mailing list status (active or unsubscribed)
          */
@@ -1851,6 +1886,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * The maximum number of accounts allowed in the Plex Home
          */
@@ -1859,6 +1895,7 @@ public class GetTokenDetailsUserPlexAccount {
             this.maxHomeSize = maxHomeSize;
             return this;
         }
+
 
         /**
          * [Might be removed] The hashed Plex Home PIN
@@ -1884,11 +1921,13 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         public Builder profile(UserProfile profile) {
             Utils.checkNotNull(profile, "profile");
             this.profile = profile;
             return this;
         }
+
 
         /**
          * If the account has a Plex Home PIN enabled
@@ -1908,6 +1947,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * Unix epoch datetime in seconds
          */
@@ -1916,6 +1956,7 @@ public class GetTokenDetailsUserPlexAccount {
             this.rememberExpiresAt = rememberExpiresAt;
             return this;
         }
+
 
         /**
          * If the account is a Plex Home managed user
@@ -1935,6 +1976,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * [Might be removed] List of account roles. Plexpass membership listed here
          */
@@ -1953,6 +1995,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * Unknown
          */
@@ -1962,11 +2005,13 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         public Builder services(List<Services> services) {
             Utils.checkNotNull(services, "services");
             this.services = services;
             return this;
         }
+
 
         /**
          * If the account’s Plex Pass subscription is active
@@ -1976,6 +2021,7 @@ public class GetTokenDetailsUserPlexAccount {
             this.subscription = subscription;
             return this;
         }
+
 
         /**
          * Description of the Plex Pass subscription
@@ -1995,6 +2041,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         public Builder subscriptions(List<GetTokenDetailsSubscription> subscriptions) {
             Utils.checkNotNull(subscriptions, "subscriptions");
             this.subscriptions = Optional.ofNullable(subscriptions);
@@ -2007,6 +2054,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * URL of the account thumbnail
          */
@@ -2016,6 +2064,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * The title of the account (username or friendly name)
          */
@@ -2024,6 +2073,7 @@ public class GetTokenDetailsUserPlexAccount {
             this.title = title;
             return this;
         }
+
 
         /**
          * If two-factor authentication is enabled
@@ -2043,6 +2093,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * The account username
          */
@@ -2052,6 +2103,7 @@ public class GetTokenDetailsUserPlexAccount {
             return this;
         }
 
+
         /**
          * The account UUID
          */
@@ -2060,6 +2112,7 @@ public class GetTokenDetailsUserPlexAccount {
             this.uuid = uuid;
             return this;
         }
+
 
         public Builder attributionPartner(String attributionPartner) {
             Utils.checkNotNull(attributionPartner, "attributionPartner");
@@ -2072,7 +2125,7 @@ public class GetTokenDetailsUserPlexAccount {
             this.attributionPartner = attributionPartner;
             return this;
         }
-        
+
         public GetTokenDetailsUserPlexAccount build() {
             if (anonymous == null) {
                 anonymous = _SINGLETON_VALUE_Anonymous.value();
@@ -2113,49 +2166,24 @@ public class GetTokenDetailsUserPlexAccount {
             if (twoFactorEnabled == null) {
                 twoFactorEnabled = _SINGLETON_VALUE_TwoFactorEnabled.value();
             }
+
             return new GetTokenDetailsUserPlexAccount(
-                adsConsent,
-                adsConsentReminderAt,
-                adsConsentSetAt,
-                anonymous,
-                authToken,
-                backupCodesCreated,
-                confirmed,
-                country,
-                email,
-                emailOnlyAuth,
-                experimentalFeatures,
-                friendlyName,
-                entitlements,
-                guest,
-                hasPassword,
-                home,
-                homeAdmin,
-                homeSize,
-                id,
-                joinedAt,
-                locale,
-                mailingListActive,
-                mailingListStatus,
-                maxHomeSize,
-                pin,
-                profile,
-                protected_,
-                rememberExpiresAt,
-                restricted,
-                roles,
-                scrobbleTypes,
-                services,
-                subscription,
-                subscriptionDescription,
-                subscriptions,
-                thumb,
-                title,
-                twoFactorEnabled,
-                username,
-                uuid,
-                attributionPartner);
+                adsConsent, adsConsentReminderAt, adsConsentSetAt,
+                anonymous, authToken, backupCodesCreated,
+                confirmed, country, email,
+                emailOnlyAuth, experimentalFeatures, friendlyName,
+                entitlements, guest, hasPassword,
+                home, homeAdmin, homeSize,
+                id, joinedAt, locale,
+                mailingListActive, mailingListStatus, maxHomeSize,
+                pin, profile, protected_,
+                rememberExpiresAt, restricted, roles,
+                scrobbleTypes, services, subscription,
+                subscriptionDescription, subscriptions, thumb,
+                title, twoFactorEnabled, username,
+                uuid, attributionPartner);
         }
+
 
         private static final LazySingletonValue<JsonNullable<Boolean>> _SINGLETON_VALUE_Anonymous =
                 new LazySingletonValue<>(

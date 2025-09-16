@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetPlaylists;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.util.Optional;
@@ -11,10 +15,10 @@ public class GetPlaylistsRequestBuilder {
 
     private Optional<? extends PlaylistType> playlistType = Optional.empty();
     private Optional<? extends QueryParamSmart> smart = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallGetPlaylists sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetPlaylistsRequestBuilder(SDKMethodInterfaces.MethodCallGetPlaylists sdk) {
-        this.sdk = sdk;
+    public GetPlaylistsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
                 
     public GetPlaylistsRequestBuilder playlistType(PlaylistType playlistType) {
@@ -41,10 +45,21 @@ public class GetPlaylistsRequestBuilder {
         return this;
     }
 
-    public GetPlaylistsResponse call() throws Exception {
 
-        return sdk.getPlaylists(
-            playlistType,
+    private GetPlaylistsRequest buildRequest() {
+
+        GetPlaylistsRequest request = new GetPlaylistsRequest(playlistType,
             smart);
+
+        return request;
+    }
+
+    public GetPlaylistsResponse call() throws Exception {
+        
+        RequestOperation<GetPlaylistsRequest, GetPlaylistsResponse> operation
+              = new GetPlaylists.Sync(sdkConfiguration);
+        GetPlaylistsRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

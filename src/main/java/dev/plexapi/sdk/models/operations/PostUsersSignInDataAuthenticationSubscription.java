@@ -14,12 +14,11 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
-public class PostUsersSignInDataAuthenticationSubscription {
 
+public class PostUsersSignInDataAuthenticationSubscription {
     /**
      * List of features allowed on your Plex Pass subscription
      */
@@ -85,7 +84,8 @@ public class PostUsersSignInDataAuthenticationSubscription {
     }
     
     public PostUsersSignInDataAuthenticationSubscription() {
-        this(Optional.empty(), Optional.empty(), JsonNullable.undefined(), Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined());
+        this(Optional.empty(), Optional.empty(), JsonNullable.undefined(),
+            Optional.empty(), JsonNullable.undefined(), JsonNullable.undefined());
     }
 
     /**
@@ -138,9 +138,10 @@ public class PostUsersSignInDataAuthenticationSubscription {
         return plan;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * List of features allowed on your Plex Pass subscription
@@ -150,6 +151,7 @@ public class PostUsersSignInDataAuthenticationSubscription {
         this.features = Optional.ofNullable(features);
         return this;
     }
+
 
     /**
      * List of features allowed on your Plex Pass subscription
@@ -168,6 +170,7 @@ public class PostUsersSignInDataAuthenticationSubscription {
         this.active = Optional.ofNullable(active);
         return this;
     }
+
 
     /**
      * If the account's Plex Pass subscription is active
@@ -204,6 +207,7 @@ public class PostUsersSignInDataAuthenticationSubscription {
         this.status = Optional.ofNullable(status);
         return this;
     }
+
 
     /**
      * String representation of subscriptionActive
@@ -250,7 +254,6 @@ public class PostUsersSignInDataAuthenticationSubscription {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -261,23 +264,19 @@ public class PostUsersSignInDataAuthenticationSubscription {
         }
         PostUsersSignInDataAuthenticationSubscription other = (PostUsersSignInDataAuthenticationSubscription) o;
         return 
-            Objects.deepEquals(this.features, other.features) &&
-            Objects.deepEquals(this.active, other.active) &&
-            Objects.deepEquals(this.subscribedAt, other.subscribedAt) &&
-            Objects.deepEquals(this.status, other.status) &&
-            Objects.deepEquals(this.paymentService, other.paymentService) &&
-            Objects.deepEquals(this.plan, other.plan);
+            Utils.enhancedDeepEquals(this.features, other.features) &&
+            Utils.enhancedDeepEquals(this.active, other.active) &&
+            Utils.enhancedDeepEquals(this.subscribedAt, other.subscribedAt) &&
+            Utils.enhancedDeepEquals(this.status, other.status) &&
+            Utils.enhancedDeepEquals(this.paymentService, other.paymentService) &&
+            Utils.enhancedDeepEquals(this.plan, other.plan);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            features,
-            active,
-            subscribedAt,
-            status,
-            paymentService,
-            plan);
+        return Utils.enhancedHash(
+            features, active, subscribedAt,
+            status, paymentService, plan);
     }
     
     @Override
@@ -290,24 +289,26 @@ public class PostUsersSignInDataAuthenticationSubscription {
                 "paymentService", paymentService,
                 "plan", plan);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends List<String>> features = Optional.empty();
- 
+
         private Optional<Boolean> active = Optional.empty();
- 
+
         private JsonNullable<String> subscribedAt = JsonNullable.undefined();
- 
+
         private Optional<? extends PostUsersSignInDataAuthenticationResponseStatus> status = Optional.empty();
- 
+
         private JsonNullable<String> paymentService = JsonNullable.undefined();
- 
+
         private JsonNullable<String> plan = JsonNullable.undefined();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * List of features allowed on your Plex Pass subscription
@@ -327,6 +328,7 @@ public class PostUsersSignInDataAuthenticationSubscription {
             return this;
         }
 
+
         /**
          * If the account's Plex Pass subscription is active
          */
@@ -344,6 +346,7 @@ public class PostUsersSignInDataAuthenticationSubscription {
             this.active = active;
             return this;
         }
+
 
         /**
          * Date the account subscribed to Plex Pass
@@ -363,6 +366,7 @@ public class PostUsersSignInDataAuthenticationSubscription {
             return this;
         }
 
+
         /**
          * String representation of subscriptionActive
          */
@@ -380,6 +384,7 @@ public class PostUsersSignInDataAuthenticationSubscription {
             this.status = status;
             return this;
         }
+
 
         /**
          * Payment service used for your Plex Pass subscription
@@ -399,6 +404,7 @@ public class PostUsersSignInDataAuthenticationSubscription {
             return this;
         }
 
+
         /**
          * Name of Plex Pass subscription plan
          */
@@ -416,15 +422,13 @@ public class PostUsersSignInDataAuthenticationSubscription {
             this.plan = plan;
             return this;
         }
-        
+
         public PostUsersSignInDataAuthenticationSubscription build() {
+
             return new PostUsersSignInDataAuthenticationSubscription(
-                features,
-                active,
-                subscribedAt,
-                status,
-                paymentService,
-                plan);
+                features, active, subscribedAt,
+                status, paymentService, plan);
         }
+
     }
 }

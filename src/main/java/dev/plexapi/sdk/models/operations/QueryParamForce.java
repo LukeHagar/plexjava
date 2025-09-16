@@ -22,7 +22,7 @@ public enum QueryParamForce {
     @JsonValue
     private final long value;
 
-    private QueryParamForce(long value) {
+    QueryParamForce(long value) {
         this.value = value;
     }
     

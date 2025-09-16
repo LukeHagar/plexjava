@@ -12,11 +12,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetLibraryItemsWriter {
 
+public class GetLibraryItemsWriter {
     /**
      * Unique identifier for the writer.
      */
@@ -79,9 +78,10 @@ public class GetLibraryItemsWriter {
         return thumb;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Unique identifier for the writer.
@@ -110,6 +110,7 @@ public class GetLibraryItemsWriter {
         return this;
     }
 
+
     /**
      * The absolute URL of the thumbnail image for the writer.
      */
@@ -119,7 +120,6 @@ public class GetLibraryItemsWriter {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -130,17 +130,15 @@ public class GetLibraryItemsWriter {
         }
         GetLibraryItemsWriter other = (GetLibraryItemsWriter) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.tag, other.tag) &&
-            Objects.deepEquals(this.thumb, other.thumb);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.tag, other.tag) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            tag,
-            thumb);
+        return Utils.enhancedHash(
+            id, tag, thumb);
     }
     
     @Override
@@ -150,18 +148,20 @@ public class GetLibraryItemsWriter {
                 "tag", tag,
                 "thumb", thumb);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer id;
- 
+
         private String tag;
- 
+
         private Optional<String> thumb = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Unique identifier for the writer.
@@ -172,6 +172,7 @@ public class GetLibraryItemsWriter {
             return this;
         }
 
+
         /**
          * The role of Writer
          */
@@ -180,6 +181,7 @@ public class GetLibraryItemsWriter {
             this.tag = tag;
             return this;
         }
+
 
         /**
          * The absolute URL of the thumbnail image for the writer.
@@ -198,12 +200,12 @@ public class GetLibraryItemsWriter {
             this.thumb = thumb;
             return this;
         }
-        
+
         public GetLibraryItemsWriter build() {
+
             return new GetLibraryItemsWriter(
-                id,
-                tag,
-                thumb);
+                id, tag, thumb);
         }
+
     }
 }

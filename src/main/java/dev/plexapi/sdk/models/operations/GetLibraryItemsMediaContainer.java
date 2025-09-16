@@ -16,11 +16,10 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetLibraryItemsMediaContainer {
 
+public class GetLibraryItemsMediaContainer {
     /**
      * Number of media items returned in this response.
      */
@@ -236,7 +235,13 @@ public class GetLibraryItemsMediaContainer {
             String title2,
             String viewGroup,
             List<GetLibraryItemsMetadata> metadata) {
-        this(size, totalSize, offset, content, allowSync, nocache, art, identifier, Optional.empty(), Optional.empty(), Optional.empty(), mediaTagPrefix, mediaTagVersion, thumb, title1, title2, viewGroup, Optional.empty(), Optional.empty(), metadata, Optional.empty());
+        this(size, totalSize, offset,
+            content, allowSync, nocache,
+            art, identifier, Optional.empty(),
+            Optional.empty(), Optional.empty(), mediaTagPrefix,
+            mediaTagVersion, thumb, title1,
+            title2, viewGroup, Optional.empty(),
+            Optional.empty(), metadata, Optional.empty());
     }
 
     /**
@@ -408,9 +413,10 @@ public class GetLibraryItemsMediaContainer {
         return (Optional<GetLibraryItemsMeta>) meta;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Number of media items returned in this response.
@@ -493,6 +499,7 @@ public class GetLibraryItemsMediaContainer {
         return this;
     }
 
+
     /**
      * The unique identifier for the library section.
      */
@@ -511,6 +518,7 @@ public class GetLibraryItemsMediaContainer {
         return this;
     }
 
+
     /**
      * The title of the library section.
      */
@@ -528,6 +536,7 @@ public class GetLibraryItemsMediaContainer {
         this.librarySectionUUID = Optional.ofNullable(librarySectionUUID);
         return this;
     }
+
 
     /**
      * The universally unique identifier for the library section.
@@ -601,6 +610,7 @@ public class GetLibraryItemsMediaContainer {
         return this;
     }
 
+
     /**
      * Identifier for the view mode.
      */
@@ -618,6 +628,7 @@ public class GetLibraryItemsMediaContainer {
         this.mixedParents = Optional.ofNullable(mixedParents);
         return this;
     }
+
 
     /**
      * Indicates if the media container has mixed parents.
@@ -646,6 +657,7 @@ public class GetLibraryItemsMediaContainer {
         return this;
     }
 
+
     /**
      * The Meta object is only included in the response if the `includeMeta` parameter is set to `1`.
      */
@@ -655,7 +667,6 @@ public class GetLibraryItemsMediaContainer {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -666,53 +677,39 @@ public class GetLibraryItemsMediaContainer {
         }
         GetLibraryItemsMediaContainer other = (GetLibraryItemsMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.totalSize, other.totalSize) &&
-            Objects.deepEquals(this.offset, other.offset) &&
-            Objects.deepEquals(this.content, other.content) &&
-            Objects.deepEquals(this.allowSync, other.allowSync) &&
-            Objects.deepEquals(this.nocache, other.nocache) &&
-            Objects.deepEquals(this.art, other.art) &&
-            Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
-            Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
-            Objects.deepEquals(this.librarySectionUUID, other.librarySectionUUID) &&
-            Objects.deepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
-            Objects.deepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.title1, other.title1) &&
-            Objects.deepEquals(this.title2, other.title2) &&
-            Objects.deepEquals(this.viewGroup, other.viewGroup) &&
-            Objects.deepEquals(this.viewMode, other.viewMode) &&
-            Objects.deepEquals(this.mixedParents, other.mixedParents) &&
-            Objects.deepEquals(this.metadata, other.metadata) &&
-            Objects.deepEquals(this.meta, other.meta);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.totalSize, other.totalSize) &&
+            Utils.enhancedDeepEquals(this.offset, other.offset) &&
+            Utils.enhancedDeepEquals(this.content, other.content) &&
+            Utils.enhancedDeepEquals(this.allowSync, other.allowSync) &&
+            Utils.enhancedDeepEquals(this.nocache, other.nocache) &&
+            Utils.enhancedDeepEquals(this.art, other.art) &&
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.librarySectionID, other.librarySectionID) &&
+            Utils.enhancedDeepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
+            Utils.enhancedDeepEquals(this.librarySectionUUID, other.librarySectionUUID) &&
+            Utils.enhancedDeepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
+            Utils.enhancedDeepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.title1, other.title1) &&
+            Utils.enhancedDeepEquals(this.title2, other.title2) &&
+            Utils.enhancedDeepEquals(this.viewGroup, other.viewGroup) &&
+            Utils.enhancedDeepEquals(this.viewMode, other.viewMode) &&
+            Utils.enhancedDeepEquals(this.mixedParents, other.mixedParents) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata) &&
+            Utils.enhancedDeepEquals(this.meta, other.meta);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            totalSize,
-            offset,
-            content,
-            allowSync,
-            nocache,
-            art,
-            identifier,
-            librarySectionID,
-            librarySectionTitle,
-            librarySectionUUID,
-            mediaTagPrefix,
-            mediaTagVersion,
-            thumb,
-            title1,
-            title2,
-            viewGroup,
-            viewMode,
-            mixedParents,
-            metadata,
-            meta);
+        return Utils.enhancedHash(
+            size, totalSize, offset,
+            content, allowSync, nocache,
+            art, identifier, librarySectionID,
+            librarySectionTitle, librarySectionUUID, mediaTagPrefix,
+            mediaTagVersion, thumb, title1,
+            title2, viewGroup, viewMode,
+            mixedParents, metadata, meta);
     }
     
     @Override
@@ -740,54 +737,56 @@ public class GetLibraryItemsMediaContainer {
                 "metadata", metadata,
                 "meta", meta);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer size;
- 
+
         private Integer totalSize;
- 
+
         private Long offset;
- 
+
         private String content;
- 
+
         private Boolean allowSync;
- 
+
         private Boolean nocache;
- 
+
         private String art;
- 
+
         private String identifier;
- 
+
         private Optional<Long> librarySectionID = Optional.empty();
- 
+
         private Optional<String> librarySectionTitle = Optional.empty();
- 
+
         private Optional<String> librarySectionUUID = Optional.empty();
- 
+
         private String mediaTagPrefix;
- 
+
         private Long mediaTagVersion;
- 
+
         private String thumb;
- 
+
         private String title1;
- 
+
         private String title2;
- 
+
         private String viewGroup;
- 
+
         private Optional<String> viewMode = Optional.empty();
- 
+
         private Optional<Boolean> mixedParents = Optional.empty();
- 
+
         private List<GetLibraryItemsMetadata> metadata;
- 
+
         private Optional<? extends GetLibraryItemsMeta> meta = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Number of media items returned in this response.
@@ -798,6 +797,7 @@ public class GetLibraryItemsMediaContainer {
             return this;
         }
 
+
         /**
          * Total number of media items in the library.
          */
@@ -806,6 +806,7 @@ public class GetLibraryItemsMediaContainer {
             this.totalSize = totalSize;
             return this;
         }
+
 
         /**
          * Offset value for pagination.
@@ -816,6 +817,7 @@ public class GetLibraryItemsMediaContainer {
             return this;
         }
 
+
         /**
          * The content type or mode.
          */
@@ -824,6 +826,7 @@ public class GetLibraryItemsMediaContainer {
             this.content = content;
             return this;
         }
+
 
         /**
          * Indicates whether syncing is allowed.
@@ -834,6 +837,7 @@ public class GetLibraryItemsMediaContainer {
             return this;
         }
 
+
         /**
          * Specifies whether caching is disabled.
          */
@@ -842,6 +846,7 @@ public class GetLibraryItemsMediaContainer {
             this.nocache = nocache;
             return this;
         }
+
 
         /**
          * URL for the background artwork of the media container.
@@ -852,6 +857,7 @@ public class GetLibraryItemsMediaContainer {
             return this;
         }
 
+
         /**
          * An plugin identifier for the media container.
          */
@@ -860,6 +866,7 @@ public class GetLibraryItemsMediaContainer {
             this.identifier = identifier;
             return this;
         }
+
 
         /**
          * The unique identifier for the library section.
@@ -879,6 +886,7 @@ public class GetLibraryItemsMediaContainer {
             return this;
         }
 
+
         /**
          * The title of the library section.
          */
@@ -896,6 +904,7 @@ public class GetLibraryItemsMediaContainer {
             this.librarySectionTitle = librarySectionTitle;
             return this;
         }
+
 
         /**
          * The universally unique identifier for the library section.
@@ -915,6 +924,7 @@ public class GetLibraryItemsMediaContainer {
             return this;
         }
 
+
         /**
          * The prefix used for media tag resource paths.
          */
@@ -923,6 +933,7 @@ public class GetLibraryItemsMediaContainer {
             this.mediaTagPrefix = mediaTagPrefix;
             return this;
         }
+
 
         /**
          * The version number for media tags.
@@ -933,6 +944,7 @@ public class GetLibraryItemsMediaContainer {
             return this;
         }
 
+
         /**
          * URL for the thumbnail image of the media container.
          */
@@ -941,6 +953,7 @@ public class GetLibraryItemsMediaContainer {
             this.thumb = thumb;
             return this;
         }
+
 
         /**
          * The primary title of the media container.
@@ -951,6 +964,7 @@ public class GetLibraryItemsMediaContainer {
             return this;
         }
 
+
         /**
          * The secondary title of the media container.
          */
@@ -960,6 +974,7 @@ public class GetLibraryItemsMediaContainer {
             return this;
         }
 
+
         /**
          * Identifier for the view group layout.
          */
@@ -968,6 +983,7 @@ public class GetLibraryItemsMediaContainer {
             this.viewGroup = viewGroup;
             return this;
         }
+
 
         /**
          * Identifier for the view mode.
@@ -987,6 +1003,7 @@ public class GetLibraryItemsMediaContainer {
             return this;
         }
 
+
         /**
          * Indicates if the media container has mixed parents.
          */
@@ -1005,6 +1022,7 @@ public class GetLibraryItemsMediaContainer {
             return this;
         }
 
+
         /**
          * An array of metadata items.
          */
@@ -1013,6 +1031,7 @@ public class GetLibraryItemsMediaContainer {
             this.metadata = metadata;
             return this;
         }
+
 
         /**
          * The Meta object is only included in the response if the `includeMeta` parameter is set to `1`.
@@ -1031,30 +1050,18 @@ public class GetLibraryItemsMediaContainer {
             this.meta = meta;
             return this;
         }
-        
+
         public GetLibraryItemsMediaContainer build() {
+
             return new GetLibraryItemsMediaContainer(
-                size,
-                totalSize,
-                offset,
-                content,
-                allowSync,
-                nocache,
-                art,
-                identifier,
-                librarySectionID,
-                librarySectionTitle,
-                librarySectionUUID,
-                mediaTagPrefix,
-                mediaTagVersion,
-                thumb,
-                title1,
-                title2,
-                viewGroup,
-                viewMode,
-                mixedParents,
-                metadata,
-                meta);
+                size, totalSize, offset,
+                content, allowSync, nocache,
+                art, identifier, librarySectionID,
+                librarySectionTitle, librarySectionUUID, mediaTagPrefix,
+                mediaTagVersion, thumb, title1,
+                title2, viewGroup, viewMode,
+                mixedParents, metadata, meta);
         }
+
     }
 }

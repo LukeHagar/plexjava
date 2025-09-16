@@ -15,14 +15,15 @@ import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetRecentlyAddedSort {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("default")
     private Optional<String> default_;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("active")
@@ -42,16 +43,20 @@ public class GetRecentlyAddedSort {
     @JsonProperty("defaultDirection")
     private Optional<? extends GetRecentlyAddedDefaultDirection> defaultDirection;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("descKey")
     private Optional<String> descKey;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("firstCharacterKey")
     private Optional<String> firstCharacterKey;
 
+
     @JsonProperty("key")
     private String key;
+
 
     @JsonProperty("title")
     private String title;
@@ -87,7 +92,9 @@ public class GetRecentlyAddedSort {
     public GetRecentlyAddedSort(
             String key,
             String title) {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), key, title);
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            key, title);
     }
 
     @JsonIgnore
@@ -138,15 +145,17 @@ public class GetRecentlyAddedSort {
         return title;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetRecentlyAddedSort withDefault(String default_) {
         Utils.checkNotNull(default_, "default_");
         this.default_ = Optional.ofNullable(default_);
         return this;
     }
+
 
     public GetRecentlyAddedSort withDefault(Optional<String> default_) {
         Utils.checkNotNull(default_, "default_");
@@ -159,6 +168,7 @@ public class GetRecentlyAddedSort {
         this.active = Optional.ofNullable(active);
         return this;
     }
+
 
     public GetRecentlyAddedSort withActive(Optional<Boolean> active) {
         Utils.checkNotNull(active, "active");
@@ -174,6 +184,7 @@ public class GetRecentlyAddedSort {
         this.activeDirection = Optional.ofNullable(activeDirection);
         return this;
     }
+
 
     /**
      * The direction of the sort. Can be either `asc` or `desc`.
@@ -193,6 +204,7 @@ public class GetRecentlyAddedSort {
         return this;
     }
 
+
     /**
      * The direction of the sort. Can be either `asc` or `desc`.
      */
@@ -208,6 +220,7 @@ public class GetRecentlyAddedSort {
         return this;
     }
 
+
     public GetRecentlyAddedSort withDescKey(Optional<String> descKey) {
         Utils.checkNotNull(descKey, "descKey");
         this.descKey = descKey;
@@ -219,6 +232,7 @@ public class GetRecentlyAddedSort {
         this.firstCharacterKey = Optional.ofNullable(firstCharacterKey);
         return this;
     }
+
 
     public GetRecentlyAddedSort withFirstCharacterKey(Optional<String> firstCharacterKey) {
         Utils.checkNotNull(firstCharacterKey, "firstCharacterKey");
@@ -238,7 +252,6 @@ public class GetRecentlyAddedSort {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -249,27 +262,22 @@ public class GetRecentlyAddedSort {
         }
         GetRecentlyAddedSort other = (GetRecentlyAddedSort) o;
         return 
-            Objects.deepEquals(this.default_, other.default_) &&
-            Objects.deepEquals(this.active, other.active) &&
-            Objects.deepEquals(this.activeDirection, other.activeDirection) &&
-            Objects.deepEquals(this.defaultDirection, other.defaultDirection) &&
-            Objects.deepEquals(this.descKey, other.descKey) &&
-            Objects.deepEquals(this.firstCharacterKey, other.firstCharacterKey) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.title, other.title);
+            Utils.enhancedDeepEquals(this.default_, other.default_) &&
+            Utils.enhancedDeepEquals(this.active, other.active) &&
+            Utils.enhancedDeepEquals(this.activeDirection, other.activeDirection) &&
+            Utils.enhancedDeepEquals(this.defaultDirection, other.defaultDirection) &&
+            Utils.enhancedDeepEquals(this.descKey, other.descKey) &&
+            Utils.enhancedDeepEquals(this.firstCharacterKey, other.firstCharacterKey) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.title, other.title);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            default_,
-            active,
-            activeDirection,
-            defaultDirection,
-            descKey,
-            firstCharacterKey,
-            key,
-            title);
+        return Utils.enhancedHash(
+            default_, active, activeDirection,
+            defaultDirection, descKey, firstCharacterKey,
+            key, title);
     }
     
     @Override
@@ -284,28 +292,30 @@ public class GetRecentlyAddedSort {
                 "key", key,
                 "title", title);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> default_ = Optional.empty();
- 
+
         private Optional<Boolean> active = Optional.empty();
- 
+
         private Optional<? extends GetRecentlyAddedActiveDirection> activeDirection;
- 
+
         private Optional<? extends GetRecentlyAddedDefaultDirection> defaultDirection;
- 
+
         private Optional<String> descKey = Optional.empty();
- 
+
         private Optional<String> firstCharacterKey = Optional.empty();
- 
+
         private String key;
- 
+
         private String title;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder default_(String default_) {
             Utils.checkNotNull(default_, "default_");
@@ -319,6 +329,7 @@ public class GetRecentlyAddedSort {
             return this;
         }
 
+
         public Builder active(boolean active) {
             Utils.checkNotNull(active, "active");
             this.active = Optional.ofNullable(active);
@@ -330,6 +341,7 @@ public class GetRecentlyAddedSort {
             this.active = active;
             return this;
         }
+
 
         /**
          * The direction of the sort. Can be either `asc` or `desc`.
@@ -349,6 +361,7 @@ public class GetRecentlyAddedSort {
             return this;
         }
 
+
         /**
          * The direction of the sort. Can be either `asc` or `desc`.
          */
@@ -367,6 +380,7 @@ public class GetRecentlyAddedSort {
             return this;
         }
 
+
         public Builder descKey(String descKey) {
             Utils.checkNotNull(descKey, "descKey");
             this.descKey = Optional.ofNullable(descKey);
@@ -378,6 +392,7 @@ public class GetRecentlyAddedSort {
             this.descKey = descKey;
             return this;
         }
+
 
         public Builder firstCharacterKey(String firstCharacterKey) {
             Utils.checkNotNull(firstCharacterKey, "firstCharacterKey");
@@ -391,18 +406,20 @@ public class GetRecentlyAddedSort {
             return this;
         }
 
+
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = key;
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = title;
             return this;
         }
-        
+
         public GetRecentlyAddedSort build() {
             if (activeDirection == null) {
                 activeDirection = _SINGLETON_VALUE_ActiveDirection.value();
@@ -410,16 +427,13 @@ public class GetRecentlyAddedSort {
             if (defaultDirection == null) {
                 defaultDirection = _SINGLETON_VALUE_DefaultDirection.value();
             }
+
             return new GetRecentlyAddedSort(
-                default_,
-                active,
-                activeDirection,
-                defaultDirection,
-                descKey,
-                firstCharacterKey,
-                key,
-                title);
+                default_, active, activeDirection,
+                defaultDirection, descKey, firstCharacterKey,
+                key, title);
         }
+
 
         private static final LazySingletonValue<Optional<? extends GetRecentlyAddedActiveDirection>> _SINGLETON_VALUE_ActiveDirection =
                 new LazySingletonValue<>(

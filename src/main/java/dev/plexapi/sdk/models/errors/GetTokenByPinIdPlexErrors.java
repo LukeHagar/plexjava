@@ -12,14 +12,15 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetTokenByPinIdPlexErrors {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("code")
     private Optional<Long> code;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("message")
@@ -49,15 +50,17 @@ public class GetTokenByPinIdPlexErrors {
         return message;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetTokenByPinIdPlexErrors withCode(long code) {
         Utils.checkNotNull(code, "code");
         this.code = Optional.ofNullable(code);
         return this;
     }
+
 
     public GetTokenByPinIdPlexErrors withCode(Optional<Long> code) {
         Utils.checkNotNull(code, "code");
@@ -71,13 +74,13 @@ public class GetTokenByPinIdPlexErrors {
         return this;
     }
 
+
     public GetTokenByPinIdPlexErrors withMessage(Optional<String> message) {
         Utils.checkNotNull(message, "message");
         this.message = message;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -88,15 +91,14 @@ public class GetTokenByPinIdPlexErrors {
         }
         GetTokenByPinIdPlexErrors other = (GetTokenByPinIdPlexErrors) o;
         return 
-            Objects.deepEquals(this.code, other.code) &&
-            Objects.deepEquals(this.message, other.message);
+            Utils.enhancedDeepEquals(this.code, other.code) &&
+            Utils.enhancedDeepEquals(this.message, other.message);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            code,
-            message);
+        return Utils.enhancedHash(
+            code, message);
     }
     
     @Override
@@ -105,16 +107,18 @@ public class GetTokenByPinIdPlexErrors {
                 "code", code,
                 "message", message);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Long> code = Optional.empty();
- 
+
         private Optional<String> message = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder code(long code) {
             Utils.checkNotNull(code, "code");
@@ -128,6 +132,7 @@ public class GetTokenByPinIdPlexErrors {
             return this;
         }
 
+
         public Builder message(String message) {
             Utils.checkNotNull(message, "message");
             this.message = Optional.ofNullable(message);
@@ -139,11 +144,12 @@ public class GetTokenByPinIdPlexErrors {
             this.message = message;
             return this;
         }
-        
+
         public GetTokenByPinIdPlexErrors build() {
+
             return new GetTokenByPinIdPlexErrors(
-                code,
-                message);
+                code, message);
         }
+
     }
 }

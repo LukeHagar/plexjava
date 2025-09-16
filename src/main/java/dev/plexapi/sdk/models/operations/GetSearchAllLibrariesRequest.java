@@ -14,11 +14,10 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetSearchAllLibrariesRequest {
 
+public class GetSearchAllLibrariesRequest {
     /**
      * The search query term.
      */
@@ -80,7 +79,8 @@ public class GetSearchAllLibrariesRequest {
     public GetSearchAllLibrariesRequest(
             String query,
             String clientID) {
-        this(query, clientID, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(query, clientID, Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -134,9 +134,10 @@ public class GetSearchAllLibrariesRequest {
         return (Optional<GetSearchAllLibrariesQueryParamIncludeExternalMedia>) includeExternalMedia;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The search query term.
@@ -165,6 +166,7 @@ public class GetSearchAllLibrariesRequest {
         return this;
     }
 
+
     /**
      * Limit the number of results returned.
      */
@@ -182,6 +184,7 @@ public class GetSearchAllLibrariesRequest {
         this.searchTypes = Optional.ofNullable(searchTypes);
         return this;
     }
+
 
     /**
      * A comma-separated list of search types to include. Valid values are: movies, music, otherVideos, people, tv.
@@ -201,6 +204,7 @@ public class GetSearchAllLibrariesRequest {
         return this;
     }
 
+
     /**
      * Whether to include collections in the search results.
      */
@@ -219,6 +223,7 @@ public class GetSearchAllLibrariesRequest {
         return this;
     }
 
+
     /**
      * Whether to include external media in the search results.
      */
@@ -228,7 +233,6 @@ public class GetSearchAllLibrariesRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -239,23 +243,19 @@ public class GetSearchAllLibrariesRequest {
         }
         GetSearchAllLibrariesRequest other = (GetSearchAllLibrariesRequest) o;
         return 
-            Objects.deepEquals(this.query, other.query) &&
-            Objects.deepEquals(this.clientID, other.clientID) &&
-            Objects.deepEquals(this.limit, other.limit) &&
-            Objects.deepEquals(this.searchTypes, other.searchTypes) &&
-            Objects.deepEquals(this.includeCollections, other.includeCollections) &&
-            Objects.deepEquals(this.includeExternalMedia, other.includeExternalMedia);
+            Utils.enhancedDeepEquals(this.query, other.query) &&
+            Utils.enhancedDeepEquals(this.clientID, other.clientID) &&
+            Utils.enhancedDeepEquals(this.limit, other.limit) &&
+            Utils.enhancedDeepEquals(this.searchTypes, other.searchTypes) &&
+            Utils.enhancedDeepEquals(this.includeCollections, other.includeCollections) &&
+            Utils.enhancedDeepEquals(this.includeExternalMedia, other.includeExternalMedia);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            query,
-            clientID,
-            limit,
-            searchTypes,
-            includeCollections,
-            includeExternalMedia);
+        return Utils.enhancedHash(
+            query, clientID, limit,
+            searchTypes, includeCollections, includeExternalMedia);
     }
     
     @Override
@@ -268,24 +268,26 @@ public class GetSearchAllLibrariesRequest {
                 "includeCollections", includeCollections,
                 "includeExternalMedia", includeExternalMedia);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String query;
- 
+
         private String clientID;
- 
+
         private Optional<Long> limit = Optional.empty();
- 
+
         private Optional<? extends List<SearchTypes>> searchTypes = Optional.empty();
- 
+
         private Optional<? extends GetSearchAllLibrariesQueryParamIncludeCollections> includeCollections;
- 
+
         private Optional<? extends GetSearchAllLibrariesQueryParamIncludeExternalMedia> includeExternalMedia;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The search query term.
@@ -296,6 +298,7 @@ public class GetSearchAllLibrariesRequest {
             return this;
         }
 
+
         /**
          * An opaque identifier unique to the client (UUID, serial number, or other unique device ID)
          */
@@ -304,6 +307,7 @@ public class GetSearchAllLibrariesRequest {
             this.clientID = clientID;
             return this;
         }
+
 
         /**
          * Limit the number of results returned.
@@ -323,6 +327,7 @@ public class GetSearchAllLibrariesRequest {
             return this;
         }
 
+
         /**
          * A comma-separated list of search types to include. Valid values are: movies, music, otherVideos, people, tv.
          */
@@ -340,6 +345,7 @@ public class GetSearchAllLibrariesRequest {
             this.searchTypes = searchTypes;
             return this;
         }
+
 
         /**
          * Whether to include collections in the search results.
@@ -359,6 +365,7 @@ public class GetSearchAllLibrariesRequest {
             return this;
         }
 
+
         /**
          * Whether to include external media in the search results.
          */
@@ -376,7 +383,7 @@ public class GetSearchAllLibrariesRequest {
             this.includeExternalMedia = includeExternalMedia;
             return this;
         }
-        
+
         public GetSearchAllLibrariesRequest build() {
             if (includeCollections == null) {
                 includeCollections = _SINGLETON_VALUE_IncludeCollections.value();
@@ -384,14 +391,12 @@ public class GetSearchAllLibrariesRequest {
             if (includeExternalMedia == null) {
                 includeExternalMedia = _SINGLETON_VALUE_IncludeExternalMedia.value();
             }
+
             return new GetSearchAllLibrariesRequest(
-                query,
-                clientID,
-                limit,
-                searchTypes,
-                includeCollections,
-                includeExternalMedia);
+                query, clientID, limit,
+                searchTypes, includeCollections, includeExternalMedia);
         }
+
 
         private static final LazySingletonValue<Optional<? extends GetSearchAllLibrariesQueryParamIncludeCollections>> _SINGLETON_VALUE_IncludeCollections =
                 new LazySingletonValue<>(

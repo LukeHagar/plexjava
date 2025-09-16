@@ -14,7 +14,7 @@ public enum OptimizedForStreaming1 {
     @JsonValue
     private final int value;
 
-    private OptimizedForStreaming1(int value) {
+    OptimizedForStreaming1(int value) {
         this.value = value;
     }
     

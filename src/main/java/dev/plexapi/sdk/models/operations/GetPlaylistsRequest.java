@@ -10,11 +10,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetPlaylistsRequest {
 
+public class GetPlaylistsRequest {
     /**
      * limit to a type of playlist.
      */
@@ -59,9 +58,10 @@ public class GetPlaylistsRequest {
         return (Optional<QueryParamSmart>) smart;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * limit to a type of playlist.
@@ -71,6 +71,7 @@ public class GetPlaylistsRequest {
         this.playlistType = Optional.ofNullable(playlistType);
         return this;
     }
+
 
     /**
      * limit to a type of playlist.
@@ -90,6 +91,7 @@ public class GetPlaylistsRequest {
         return this;
     }
 
+
     /**
      * type of playlists to return (default is all).
      */
@@ -99,7 +101,6 @@ public class GetPlaylistsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -110,15 +111,14 @@ public class GetPlaylistsRequest {
         }
         GetPlaylistsRequest other = (GetPlaylistsRequest) o;
         return 
-            Objects.deepEquals(this.playlistType, other.playlistType) &&
-            Objects.deepEquals(this.smart, other.smart);
+            Utils.enhancedDeepEquals(this.playlistType, other.playlistType) &&
+            Utils.enhancedDeepEquals(this.smart, other.smart);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            playlistType,
-            smart);
+        return Utils.enhancedHash(
+            playlistType, smart);
     }
     
     @Override
@@ -127,16 +127,18 @@ public class GetPlaylistsRequest {
                 "playlistType", playlistType,
                 "smart", smart);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends PlaylistType> playlistType = Optional.empty();
- 
+
         private Optional<? extends QueryParamSmart> smart = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * limit to a type of playlist.
@@ -156,6 +158,7 @@ public class GetPlaylistsRequest {
             return this;
         }
 
+
         /**
          * type of playlists to return (default is all).
          */
@@ -173,11 +176,12 @@ public class GetPlaylistsRequest {
             this.smart = smart;
             return this;
         }
-        
+
         public GetPlaylistsRequest build() {
+
             return new GetPlaylistsRequest(
-                playlistType,
-                smart);
+                playlistType, smart);
         }
+
     }
 }

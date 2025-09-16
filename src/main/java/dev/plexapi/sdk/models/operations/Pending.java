@@ -19,7 +19,7 @@ public enum Pending {
     @JsonValue
     private final int value;
 
-    private Pending(int value) {
+    Pending(int value) {
         this.value = value;
     }
     

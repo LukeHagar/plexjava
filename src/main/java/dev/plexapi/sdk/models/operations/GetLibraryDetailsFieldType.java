@@ -13,14 +13,15 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetLibraryDetailsFieldType {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
     private Optional<String> type;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Operator")
@@ -51,15 +52,17 @@ public class GetLibraryDetailsFieldType {
         return (Optional<List<GetLibraryDetailsOperator>>) operator;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetLibraryDetailsFieldType withType(String type) {
         Utils.checkNotNull(type, "type");
         this.type = Optional.ofNullable(type);
         return this;
     }
+
 
     public GetLibraryDetailsFieldType withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
@@ -73,13 +76,13 @@ public class GetLibraryDetailsFieldType {
         return this;
     }
 
+
     public GetLibraryDetailsFieldType withOperator(Optional<? extends List<GetLibraryDetailsOperator>> operator) {
         Utils.checkNotNull(operator, "operator");
         this.operator = operator;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -90,15 +93,14 @@ public class GetLibraryDetailsFieldType {
         }
         GetLibraryDetailsFieldType other = (GetLibraryDetailsFieldType) o;
         return 
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.operator, other.operator);
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.operator, other.operator);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            type,
-            operator);
+        return Utils.enhancedHash(
+            type, operator);
     }
     
     @Override
@@ -107,16 +109,18 @@ public class GetLibraryDetailsFieldType {
                 "type", type,
                 "operator", operator);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> type = Optional.empty();
- 
+
         private Optional<? extends List<GetLibraryDetailsOperator>> operator = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
@@ -130,6 +134,7 @@ public class GetLibraryDetailsFieldType {
             return this;
         }
 
+
         public Builder operator(List<GetLibraryDetailsOperator> operator) {
             Utils.checkNotNull(operator, "operator");
             this.operator = Optional.ofNullable(operator);
@@ -141,11 +146,12 @@ public class GetLibraryDetailsFieldType {
             this.operator = operator;
             return this;
         }
-        
+
         public GetLibraryDetailsFieldType build() {
+
             return new GetLibraryDetailsFieldType(
-                type,
-                operator);
+                type, operator);
         }
+
     }
 }

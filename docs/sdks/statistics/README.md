@@ -18,6 +18,7 @@ This will return the media statistics for the server
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getStatistics" method="get" path="/statistics/media" -->
 ```java
 package hello.world;
 
@@ -32,7 +33,7 @@ public class Application {
     public static void main(String[] args) throws GetStatisticsBadRequest, GetStatisticsUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetStatisticsResponse res = sdk.statistics().getStatistics()
@@ -70,6 +71,7 @@ This will return the resources for the server
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getResourcesStatistics" method="get" path="/statistics/resources" -->
 ```java
 package hello.world;
 
@@ -84,7 +86,7 @@ public class Application {
     public static void main(String[] args) throws GetResourcesStatisticsBadRequest, GetResourcesStatisticsUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetResourcesStatisticsResponse res = sdk.statistics().getResourcesStatistics()
@@ -122,6 +124,7 @@ This will return the bandwidth statistics for the server
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getBandwidthStatistics" method="get" path="/statistics/bandwidth" -->
 ```java
 package hello.world;
 
@@ -136,7 +139,7 @@ public class Application {
     public static void main(String[] args) throws GetBandwidthStatisticsBadRequest, GetBandwidthStatisticsUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetBandwidthStatisticsResponse res = sdk.statistics().getBandwidthStatistics()

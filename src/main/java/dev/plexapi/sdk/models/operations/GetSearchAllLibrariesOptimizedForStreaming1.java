@@ -14,7 +14,7 @@ public enum GetSearchAllLibrariesOptimizedForStreaming1 {
     @JsonValue
     private final int value;
 
-    private GetSearchAllLibrariesOptimizedForStreaming1(int value) {
+    GetSearchAllLibrariesOptimizedForStreaming1(int value) {
         this.value = value;
     }
     

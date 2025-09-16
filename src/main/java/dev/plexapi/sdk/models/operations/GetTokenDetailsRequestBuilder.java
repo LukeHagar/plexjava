@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetTokenDetails;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -11,10 +15,10 @@ import java.util.Optional;
 public class GetTokenDetailsRequestBuilder {
 
     private Optional<String> serverURL = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallGetTokenDetails sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetTokenDetailsRequestBuilder(SDKMethodInterfaces.MethodCallGetTokenDetails sdk) {
-        this.sdk = sdk;
+    public GetTokenDetailsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
                 
     public GetTokenDetailsRequestBuilder serverURL(String serverURL) {
@@ -30,8 +34,10 @@ public class GetTokenDetailsRequestBuilder {
     }
 
     public GetTokenDetailsResponse call() throws Exception {
+        
+        RequestlessOperation<GetTokenDetailsResponse> operation
+            = new GetTokenDetails.Sync(sdkConfiguration, serverURL);
 
-        return sdk.getTokenDetails(
-            serverURL);
+        return operation.handleResponse(operation.doRequest());
     }
 }

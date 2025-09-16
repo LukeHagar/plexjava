@@ -3,7 +3,11 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
 import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.UploadPlaylist;
 import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
@@ -15,10 +19,10 @@ public class UploadPlaylistRequestBuilder {
     private String path;
     private QueryParamForce force;
     private Long sectionID;
-    private final SDKMethodInterfaces.MethodCallUploadPlaylist sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public UploadPlaylistRequestBuilder(SDKMethodInterfaces.MethodCallUploadPlaylist sdk) {
-        this.sdk = sdk;
+    public UploadPlaylistRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public UploadPlaylistRequestBuilder path(String path) {
@@ -39,14 +43,26 @@ public class UploadPlaylistRequestBuilder {
         return this;
     }
 
-    public UploadPlaylistResponse call() throws Exception {
+
+    private UploadPlaylistRequest buildRequest() {
         if (sectionID == null) {
             sectionID = _SINGLETON_VALUE_SectionID.value();
         }
-        return sdk.uploadPlaylist(
-            path,
+
+        UploadPlaylistRequest request = new UploadPlaylistRequest(path,
             force,
             sectionID);
+
+        return request;
+    }
+
+    public UploadPlaylistResponse call() throws Exception {
+        
+        RequestOperation<UploadPlaylistRequest, UploadPlaylistResponse> operation
+              = new UploadPlaylist.Sync(sdkConfiguration);
+        UploadPlaylistRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 
     private static final LazySingletonValue<Long> _SINGLETON_VALUE_SectionID =

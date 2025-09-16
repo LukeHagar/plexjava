@@ -19,7 +19,7 @@ public enum MinSize {
     @JsonValue
     private final long value;
 
-    private MinSize(long value) {
+    MinSize(long value) {
         this.value = value;
     }
     

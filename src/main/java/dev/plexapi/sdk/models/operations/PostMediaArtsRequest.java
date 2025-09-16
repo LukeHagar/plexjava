@@ -10,11 +10,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class PostMediaArtsRequest {
 
+public class PostMediaArtsRequest {
     /**
      * the id of the library item to return the posters of.
      */
@@ -75,9 +74,10 @@ public class PostMediaArtsRequest {
         return requestBody;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * the id of the library item to return the posters of.
@@ -97,6 +97,7 @@ public class PostMediaArtsRequest {
         return this;
     }
 
+
     /**
      * The URL of the image, if uploading a remote image
      */
@@ -115,6 +116,7 @@ public class PostMediaArtsRequest {
         return this;
     }
 
+
     /**
      * The contents of the image, if uploading a local file
      */
@@ -124,7 +126,6 @@ public class PostMediaArtsRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -135,17 +136,15 @@ public class PostMediaArtsRequest {
         }
         PostMediaArtsRequest other = (PostMediaArtsRequest) o;
         return 
-            Objects.deepEquals(this.ratingKey, other.ratingKey) &&
-            Objects.deepEquals(this.url, other.url) &&
-            Objects.deepEquals(this.requestBody, other.requestBody);
+            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey) &&
+            Utils.enhancedDeepEquals(this.url, other.url) &&
+            Utils.enhancedDeepEquals(this.requestBody, other.requestBody);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            ratingKey,
-            url,
-            requestBody);
+        return Utils.enhancedHash(
+            ratingKey, url, requestBody);
     }
     
     @Override
@@ -155,18 +154,20 @@ public class PostMediaArtsRequest {
                 "url", url,
                 "requestBody", requestBody);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Long ratingKey;
- 
+
         private Optional<String> url = Optional.empty();
- 
+
         private Optional<byte[]> requestBody = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * the id of the library item to return the posters of.
@@ -176,6 +177,7 @@ public class PostMediaArtsRequest {
             this.ratingKey = ratingKey;
             return this;
         }
+
 
         /**
          * The URL of the image, if uploading a remote image
@@ -195,6 +197,7 @@ public class PostMediaArtsRequest {
             return this;
         }
 
+
         /**
          * The contents of the image, if uploading a local file
          */
@@ -212,12 +215,12 @@ public class PostMediaArtsRequest {
             this.requestBody = requestBody;
             return this;
         }
-        
+
         public PostMediaArtsRequest build() {
+
             return new PostMediaArtsRequest(
-                ratingKey,
-                url,
-                requestBody);
+                ratingKey, url, requestBody);
         }
+
     }
 }

@@ -13,11 +13,10 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetTokenByPinIdResponse implements Response {
 
+public class GetTokenByPinIdResponse implements Response {
     /**
      * HTTP response content type for this operation
      */
@@ -58,7 +57,8 @@ public class GetTokenByPinIdResponse implements Response {
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse) {
-        this(contentType, statusCode, rawResponse, Optional.empty());
+        this(contentType, statusCode, rawResponse,
+            Optional.empty());
     }
 
     /**
@@ -94,9 +94,10 @@ public class GetTokenByPinIdResponse implements Response {
         return (Optional<GetTokenByPinIdAuthPinContainer>) authPinContainer;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * HTTP response content type for this operation
@@ -134,6 +135,7 @@ public class GetTokenByPinIdResponse implements Response {
         return this;
     }
 
+
     /**
      * The Pin with a non-null authToken when it has been verified by the user
      */
@@ -143,7 +145,6 @@ public class GetTokenByPinIdResponse implements Response {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -154,18 +155,16 @@ public class GetTokenByPinIdResponse implements Response {
         }
         GetTokenByPinIdResponse other = (GetTokenByPinIdResponse) o;
         return 
-            Objects.deepEquals(this.contentType, other.contentType) &&
-            Objects.deepEquals(this.statusCode, other.statusCode) &&
-            Objects.deepEquals(this.rawResponse, other.rawResponse) &&
-            Objects.deepEquals(this.authPinContainer, other.authPinContainer);
+            Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
+            Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
+            Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
+            Utils.enhancedDeepEquals(this.authPinContainer, other.authPinContainer);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            contentType,
-            statusCode,
-            rawResponse,
+        return Utils.enhancedHash(
+            contentType, statusCode, rawResponse,
             authPinContainer);
     }
     
@@ -177,20 +176,22 @@ public class GetTokenByPinIdResponse implements Response {
                 "rawResponse", rawResponse,
                 "authPinContainer", authPinContainer);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String contentType;
- 
+
         private Integer statusCode;
- 
+
         private HttpResponse<InputStream> rawResponse;
- 
+
         private Optional<? extends GetTokenByPinIdAuthPinContainer> authPinContainer = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * HTTP response content type for this operation
@@ -201,6 +202,7 @@ public class GetTokenByPinIdResponse implements Response {
             return this;
         }
 
+
         /**
          * HTTP response status code for this operation
          */
@@ -210,6 +212,7 @@ public class GetTokenByPinIdResponse implements Response {
             return this;
         }
 
+
         /**
          * Raw HTTP response; suitable for custom response parsing
          */
@@ -218,6 +221,7 @@ public class GetTokenByPinIdResponse implements Response {
             this.rawResponse = rawResponse;
             return this;
         }
+
 
         /**
          * The Pin with a non-null authToken when it has been verified by the user
@@ -236,13 +240,13 @@ public class GetTokenByPinIdResponse implements Response {
             this.authPinContainer = authPinContainer;
             return this;
         }
-        
+
         public GetTokenByPinIdResponse build() {
+
             return new GetTokenByPinIdResponse(
-                contentType,
-                statusCode,
-                rawResponse,
+                contentType, statusCode, rawResponse,
                 authPinContainer);
         }
+
     }
 }

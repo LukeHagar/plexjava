@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.UpdatePlaylist;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Exception;
@@ -14,10 +18,10 @@ public class UpdatePlaylistRequestBuilder {
     private Double playlistID;
     private Optional<String> title = Optional.empty();
     private Optional<String> summary = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallUpdatePlaylist sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public UpdatePlaylistRequestBuilder(SDKMethodInterfaces.MethodCallUpdatePlaylist sdk) {
-        this.sdk = sdk;
+    public UpdatePlaylistRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public UpdatePlaylistRequestBuilder playlistID(double playlistID) {
@@ -50,11 +54,22 @@ public class UpdatePlaylistRequestBuilder {
         return this;
     }
 
-    public UpdatePlaylistResponse call() throws Exception {
 
-        return sdk.updatePlaylist(
-            playlistID,
+    private UpdatePlaylistRequest buildRequest() {
+
+        UpdatePlaylistRequest request = new UpdatePlaylistRequest(playlistID,
             title,
             summary);
+
+        return request;
+    }
+
+    public UpdatePlaylistResponse call() throws Exception {
+        
+        RequestOperation<UpdatePlaylistRequest, UpdatePlaylistResponse> operation
+              = new UpdatePlaylist.Sync(sdkConfiguration);
+        UpdatePlaylistRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

@@ -12,25 +12,30 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetLibrarySectionsAllFilter {
 
     @JsonProperty("filter")
     private String filter;
 
+
     @JsonProperty("filterType")
     private String filterType;
+
 
     @JsonProperty("key")
     private String key;
 
+
     @JsonProperty("title")
     private String title;
 
+
     @JsonProperty("type")
     private String type;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("advanced")
@@ -64,7 +69,8 @@ public class GetLibrarySectionsAllFilter {
             String key,
             String title,
             String type) {
-        this(filter, filterType, key, title, type, Optional.empty());
+        this(filter, filterType, key,
+            title, type, Optional.empty());
     }
 
     @JsonIgnore
@@ -97,9 +103,10 @@ public class GetLibrarySectionsAllFilter {
         return advanced;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetLibrarySectionsAllFilter withFilter(String filter) {
         Utils.checkNotNull(filter, "filter");
@@ -137,13 +144,13 @@ public class GetLibrarySectionsAllFilter {
         return this;
     }
 
+
     public GetLibrarySectionsAllFilter withAdvanced(Optional<Boolean> advanced) {
         Utils.checkNotNull(advanced, "advanced");
         this.advanced = advanced;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -154,23 +161,19 @@ public class GetLibrarySectionsAllFilter {
         }
         GetLibrarySectionsAllFilter other = (GetLibrarySectionsAllFilter) o;
         return 
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.filterType, other.filterType) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.advanced, other.advanced);
+            Utils.enhancedDeepEquals(this.filter, other.filter) &&
+            Utils.enhancedDeepEquals(this.filterType, other.filterType) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.advanced, other.advanced);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            filter,
-            filterType,
-            key,
-            title,
-            type,
-            advanced);
+        return Utils.enhancedHash(
+            filter, filterType, key,
+            title, type, advanced);
     }
     
     @Override
@@ -183,24 +186,26 @@ public class GetLibrarySectionsAllFilter {
                 "type", type,
                 "advanced", advanced);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String filter;
- 
+
         private String filterType;
- 
+
         private String key;
- 
+
         private String title;
- 
+
         private String type;
- 
+
         private Optional<Boolean> advanced = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder filter(String filter) {
             Utils.checkNotNull(filter, "filter");
@@ -208,11 +213,13 @@ public class GetLibrarySectionsAllFilter {
             return this;
         }
 
+
         public Builder filterType(String filterType) {
             Utils.checkNotNull(filterType, "filterType");
             this.filterType = filterType;
             return this;
         }
+
 
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
@@ -220,17 +227,20 @@ public class GetLibrarySectionsAllFilter {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = title;
             return this;
         }
 
+
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
         }
+
 
         public Builder advanced(boolean advanced) {
             Utils.checkNotNull(advanced, "advanced");
@@ -243,15 +253,13 @@ public class GetLibrarySectionsAllFilter {
             this.advanced = advanced;
             return this;
         }
-        
+
         public GetLibrarySectionsAllFilter build() {
+
             return new GetLibrarySectionsAllFilter(
-                filter,
-                filterType,
-                key,
-                title,
-                type,
-                advanced);
+                filter, filterType, key,
+                title, type, advanced);
         }
+
     }
 }

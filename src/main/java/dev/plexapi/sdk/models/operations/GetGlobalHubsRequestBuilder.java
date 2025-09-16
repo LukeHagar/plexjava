@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetGlobalHubs;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Exception;
@@ -12,10 +16,10 @@ public class GetGlobalHubsRequestBuilder {
 
     private Optional<Double> count = Optional.empty();
     private Optional<? extends OnlyTransient> onlyTransient = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallGetGlobalHubs sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetGlobalHubsRequestBuilder(SDKMethodInterfaces.MethodCallGetGlobalHubs sdk) {
-        this.sdk = sdk;
+    public GetGlobalHubsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
                 
     public GetGlobalHubsRequestBuilder count(double count) {
@@ -42,10 +46,21 @@ public class GetGlobalHubsRequestBuilder {
         return this;
     }
 
-    public GetGlobalHubsResponse call() throws Exception {
 
-        return sdk.getGlobalHubs(
-            count,
+    private GetGlobalHubsRequest buildRequest() {
+
+        GetGlobalHubsRequest request = new GetGlobalHubsRequest(count,
             onlyTransient);
+
+        return request;
+    }
+
+    public GetGlobalHubsResponse call() throws Exception {
+        
+        RequestOperation<GetGlobalHubsRequest, GetGlobalHubsResponse> operation
+              = new GetGlobalHubs.Sync(sdkConfiguration);
+        GetGlobalHubsRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

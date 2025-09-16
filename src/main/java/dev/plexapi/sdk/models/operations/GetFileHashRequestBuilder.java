@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetFileHash;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Exception;
@@ -13,10 +17,10 @@ public class GetFileHashRequestBuilder {
 
     private String url;
     private Optional<Double> type = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallGetFileHash sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetFileHashRequestBuilder(SDKMethodInterfaces.MethodCallGetFileHash sdk) {
-        this.sdk = sdk;
+    public GetFileHashRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetFileHashRequestBuilder url(String url) {
@@ -37,10 +41,21 @@ public class GetFileHashRequestBuilder {
         return this;
     }
 
-    public GetFileHashResponse call() throws Exception {
 
-        return sdk.getFileHash(
-            url,
+    private GetFileHashRequest buildRequest() {
+
+        GetFileHashRequest request = new GetFileHashRequest(url,
             type);
+
+        return request;
+    }
+
+    public GetFileHashResponse call() throws Exception {
+        
+        RequestOperation<GetFileHashRequest, GetFileHashResponse> operation
+              = new GetFileHash.Sync(sdkConfiguration);
+        GetFileHashRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

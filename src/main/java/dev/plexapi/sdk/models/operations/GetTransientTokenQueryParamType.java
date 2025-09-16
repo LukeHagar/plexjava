@@ -19,7 +19,7 @@ public enum GetTransientTokenQueryParamType {
     @JsonValue
     private final String value;
 
-    private GetTransientTokenQueryParamType(String value) {
+    GetTransientTokenQueryParamType(String value) {
         this.value = value;
     }
     

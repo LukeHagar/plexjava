@@ -20,7 +20,7 @@ public enum GetRecentlyAddedActiveDirection {
     @JsonValue
     private final String value;
 
-    private GetRecentlyAddedActiveDirection(String value) {
+    GetRecentlyAddedActiveDirection(String value) {
         this.value = value;
     }
     

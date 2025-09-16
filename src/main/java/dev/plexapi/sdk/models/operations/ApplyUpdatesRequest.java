@@ -10,11 +10,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
-public class ApplyUpdatesRequest {
 
+public class ApplyUpdatesRequest {
     /**
      * Indicate that you want the update to run during the next Butler execution. Omitting this or setting it to false indicates that the update should install
      */
@@ -59,9 +58,10 @@ public class ApplyUpdatesRequest {
         return (Optional<Skip>) skip;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Indicate that you want the update to run during the next Butler execution. Omitting this or setting it to false indicates that the update should install
@@ -71,6 +71,7 @@ public class ApplyUpdatesRequest {
         this.tonight = Optional.ofNullable(tonight);
         return this;
     }
+
 
     /**
      * Indicate that you want the update to run during the next Butler execution. Omitting this or setting it to false indicates that the update should install
@@ -90,6 +91,7 @@ public class ApplyUpdatesRequest {
         return this;
     }
 
+
     /**
      * Indicate that the latest version should be marked as skipped. The [Release] entry for this version will have the `state` set to `skipped`.
      */
@@ -99,7 +101,6 @@ public class ApplyUpdatesRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -110,15 +111,14 @@ public class ApplyUpdatesRequest {
         }
         ApplyUpdatesRequest other = (ApplyUpdatesRequest) o;
         return 
-            Objects.deepEquals(this.tonight, other.tonight) &&
-            Objects.deepEquals(this.skip, other.skip);
+            Utils.enhancedDeepEquals(this.tonight, other.tonight) &&
+            Utils.enhancedDeepEquals(this.skip, other.skip);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            tonight,
-            skip);
+        return Utils.enhancedHash(
+            tonight, skip);
     }
     
     @Override
@@ -127,16 +127,18 @@ public class ApplyUpdatesRequest {
                 "tonight", tonight,
                 "skip", skip);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends Tonight> tonight = Optional.empty();
- 
+
         private Optional<? extends Skip> skip = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Indicate that you want the update to run during the next Butler execution. Omitting this or setting it to false indicates that the update should install
@@ -156,6 +158,7 @@ public class ApplyUpdatesRequest {
             return this;
         }
 
+
         /**
          * Indicate that the latest version should be marked as skipped. The [Release] entry for this version will have the `state` set to `skipped`.
          */
@@ -173,11 +176,12 @@ public class ApplyUpdatesRequest {
             this.skip = skip;
             return this;
         }
-        
+
         public ApplyUpdatesRequest build() {
+
             return new ApplyUpdatesRequest(
-                tonight,
-                skip);
+                tonight, skip);
         }
+
     }
 }

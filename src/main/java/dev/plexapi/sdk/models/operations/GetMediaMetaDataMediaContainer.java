@@ -15,11 +15,10 @@ import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetMediaMetaDataMediaContainer {
 
+public class GetMediaMetaDataMediaContainer {
     /**
      * Number of media items returned in this response.
      */
@@ -115,7 +114,9 @@ public class GetMediaMetaDataMediaContainer {
             String mediaTagPrefix,
             long mediaTagVersion,
             List<GetMediaMetaDataMetadata> metadata) {
-        this(size, allowSync, identifier, Optional.empty(), Optional.empty(), Optional.empty(), mediaTagPrefix, mediaTagVersion, metadata);
+        this(size, allowSync, identifier,
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            mediaTagPrefix, mediaTagVersion, metadata);
     }
 
     /**
@@ -190,9 +191,10 @@ public class GetMediaMetaDataMediaContainer {
         return metadata;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Number of media items returned in this response.
@@ -230,6 +232,7 @@ public class GetMediaMetaDataMediaContainer {
         return this;
     }
 
+
     /**
      * The unique identifier for the library section.
      */
@@ -248,6 +251,7 @@ public class GetMediaMetaDataMediaContainer {
         return this;
     }
 
+
     /**
      * The title of the library section.
      */
@@ -265,6 +269,7 @@ public class GetMediaMetaDataMediaContainer {
         this.librarySectionUUID = Optional.ofNullable(librarySectionUUID);
         return this;
     }
+
 
     /**
      * The universally unique identifier for the library section.
@@ -302,7 +307,6 @@ public class GetMediaMetaDataMediaContainer {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -313,29 +317,23 @@ public class GetMediaMetaDataMediaContainer {
         }
         GetMediaMetaDataMediaContainer other = (GetMediaMetaDataMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.allowSync, other.allowSync) &&
-            Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
-            Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
-            Objects.deepEquals(this.librarySectionUUID, other.librarySectionUUID) &&
-            Objects.deepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
-            Objects.deepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
-            Objects.deepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.allowSync, other.allowSync) &&
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.librarySectionID, other.librarySectionID) &&
+            Utils.enhancedDeepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
+            Utils.enhancedDeepEquals(this.librarySectionUUID, other.librarySectionUUID) &&
+            Utils.enhancedDeepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
+            Utils.enhancedDeepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            allowSync,
-            identifier,
-            librarySectionID,
-            librarySectionTitle,
-            librarySectionUUID,
-            mediaTagPrefix,
-            mediaTagVersion,
-            metadata);
+        return Utils.enhancedHash(
+            size, allowSync, identifier,
+            librarySectionID, librarySectionTitle, librarySectionUUID,
+            mediaTagPrefix, mediaTagVersion, metadata);
     }
     
     @Override
@@ -351,30 +349,32 @@ public class GetMediaMetaDataMediaContainer {
                 "mediaTagVersion", mediaTagVersion,
                 "metadata", metadata);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer size;
- 
+
         private Boolean allowSync;
- 
+
         private String identifier;
- 
+
         private Optional<Long> librarySectionID = Optional.empty();
- 
+
         private Optional<String> librarySectionTitle = Optional.empty();
- 
+
         private Optional<String> librarySectionUUID = Optional.empty();
- 
+
         private String mediaTagPrefix;
- 
+
         private Long mediaTagVersion;
- 
+
         private List<GetMediaMetaDataMetadata> metadata;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Number of media items returned in this response.
@@ -385,6 +385,7 @@ public class GetMediaMetaDataMediaContainer {
             return this;
         }
 
+
         /**
          * Indicates whether syncing is allowed.
          */
@@ -394,6 +395,7 @@ public class GetMediaMetaDataMediaContainer {
             return this;
         }
 
+
         /**
          * An plugin identifier for the media container.
          */
@@ -402,6 +404,7 @@ public class GetMediaMetaDataMediaContainer {
             this.identifier = identifier;
             return this;
         }
+
 
         /**
          * The unique identifier for the library section.
@@ -421,6 +424,7 @@ public class GetMediaMetaDataMediaContainer {
             return this;
         }
 
+
         /**
          * The title of the library section.
          */
@@ -438,6 +442,7 @@ public class GetMediaMetaDataMediaContainer {
             this.librarySectionTitle = librarySectionTitle;
             return this;
         }
+
 
         /**
          * The universally unique identifier for the library section.
@@ -457,6 +462,7 @@ public class GetMediaMetaDataMediaContainer {
             return this;
         }
 
+
         /**
          * The prefix used for media tag resource paths.
          */
@@ -465,6 +471,7 @@ public class GetMediaMetaDataMediaContainer {
             this.mediaTagPrefix = mediaTagPrefix;
             return this;
         }
+
 
         /**
          * The version number for media tags.
@@ -475,6 +482,7 @@ public class GetMediaMetaDataMediaContainer {
             return this;
         }
 
+
         /**
          * An array of metadata items.
          */
@@ -483,18 +491,14 @@ public class GetMediaMetaDataMediaContainer {
             this.metadata = metadata;
             return this;
         }
-        
+
         public GetMediaMetaDataMediaContainer build() {
+
             return new GetMediaMetaDataMediaContainer(
-                size,
-                allowSync,
-                identifier,
-                librarySectionID,
-                librarySectionTitle,
-                librarySectionUUID,
-                mediaTagPrefix,
-                mediaTagVersion,
-                metadata);
+                size, allowSync, identifier,
+                librarySectionID, librarySectionTitle, librarySectionUUID,
+                mediaTagPrefix, mediaTagVersion, metadata);
         }
+
     }
 }

@@ -12,8 +12,8 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class Session {
 
@@ -21,9 +21,11 @@ public class Session {
     @JsonProperty("id")
     private Optional<String> id;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bandwidth")
     private Optional<Integer> bandwidth;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("location")
@@ -61,15 +63,17 @@ public class Session {
         return location;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Session withId(String id) {
         Utils.checkNotNull(id, "id");
         this.id = Optional.ofNullable(id);
         return this;
     }
+
 
     public Session withId(Optional<String> id) {
         Utils.checkNotNull(id, "id");
@@ -83,6 +87,7 @@ public class Session {
         return this;
     }
 
+
     public Session withBandwidth(Optional<Integer> bandwidth) {
         Utils.checkNotNull(bandwidth, "bandwidth");
         this.bandwidth = bandwidth;
@@ -95,13 +100,13 @@ public class Session {
         return this;
     }
 
+
     public Session withLocation(Optional<String> location) {
         Utils.checkNotNull(location, "location");
         this.location = location;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -112,17 +117,15 @@ public class Session {
         }
         Session other = (Session) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.bandwidth, other.bandwidth) &&
-            Objects.deepEquals(this.location, other.location);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.bandwidth, other.bandwidth) &&
+            Utils.enhancedDeepEquals(this.location, other.location);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            bandwidth,
-            location);
+        return Utils.enhancedHash(
+            id, bandwidth, location);
     }
     
     @Override
@@ -132,18 +135,20 @@ public class Session {
                 "bandwidth", bandwidth,
                 "location", location);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> id = Optional.empty();
- 
+
         private Optional<Integer> bandwidth = Optional.empty();
- 
+
         private Optional<String> location = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder id(String id) {
             Utils.checkNotNull(id, "id");
@@ -157,6 +162,7 @@ public class Session {
             return this;
         }
 
+
         public Builder bandwidth(int bandwidth) {
             Utils.checkNotNull(bandwidth, "bandwidth");
             this.bandwidth = Optional.ofNullable(bandwidth);
@@ -169,6 +175,7 @@ public class Session {
             return this;
         }
 
+
         public Builder location(String location) {
             Utils.checkNotNull(location, "location");
             this.location = Optional.ofNullable(location);
@@ -180,12 +187,12 @@ public class Session {
             this.location = location;
             return this;
         }
-        
+
         public Session build() {
+
             return new Session(
-                id,
-                bandwidth,
-                location);
+                id, bandwidth, location);
         }
+
     }
 }

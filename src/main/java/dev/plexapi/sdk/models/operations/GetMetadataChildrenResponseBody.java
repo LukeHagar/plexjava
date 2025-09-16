@@ -12,7 +12,6 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -43,9 +42,10 @@ public class GetMetadataChildrenResponseBody {
         return (Optional<GetMetadataChildrenMediaContainer>) mediaContainer;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetMetadataChildrenResponseBody withMediaContainer(GetMetadataChildrenMediaContainer mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
@@ -53,13 +53,13 @@ public class GetMetadataChildrenResponseBody {
         return this;
     }
 
+
     public GetMetadataChildrenResponseBody withMediaContainer(Optional<? extends GetMetadataChildrenMediaContainer> mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
         this.mediaContainer = mediaContainer;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -70,12 +70,12 @@ public class GetMetadataChildrenResponseBody {
         }
         GetMetadataChildrenResponseBody other = (GetMetadataChildrenResponseBody) o;
         return 
-            Objects.deepEquals(this.mediaContainer, other.mediaContainer);
+            Utils.enhancedDeepEquals(this.mediaContainer, other.mediaContainer);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             mediaContainer);
     }
     
@@ -84,14 +84,16 @@ public class GetMetadataChildrenResponseBody {
         return Utils.toString(GetMetadataChildrenResponseBody.class,
                 "mediaContainer", mediaContainer);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<? extends GetMetadataChildrenMediaContainer> mediaContainer = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder mediaContainer(GetMetadataChildrenMediaContainer mediaContainer) {
             Utils.checkNotNull(mediaContainer, "mediaContainer");
@@ -104,10 +106,12 @@ public class GetMetadataChildrenResponseBody {
             this.mediaContainer = mediaContainer;
             return this;
         }
-        
+
         public GetMetadataChildrenResponseBody build() {
+
             return new GetMetadataChildrenResponseBody(
                 mediaContainer);
         }
+
     }
 }

@@ -14,7 +14,7 @@ public enum One {
     @JsonValue
     private final int value;
 
-    private One(int value) {
+    One(int value) {
         this.value = value;
     }
     

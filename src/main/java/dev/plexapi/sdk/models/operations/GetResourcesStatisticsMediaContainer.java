@@ -14,14 +14,15 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetResourcesStatisticsMediaContainer {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("size")
     private Optional<Integer> size;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("StatisticsResources")
@@ -52,15 +53,17 @@ public class GetResourcesStatisticsMediaContainer {
         return (Optional<List<StatisticsResources>>) statisticsResources;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetResourcesStatisticsMediaContainer withSize(int size) {
         Utils.checkNotNull(size, "size");
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetResourcesStatisticsMediaContainer withSize(Optional<Integer> size) {
         Utils.checkNotNull(size, "size");
@@ -74,13 +77,13 @@ public class GetResourcesStatisticsMediaContainer {
         return this;
     }
 
+
     public GetResourcesStatisticsMediaContainer withStatisticsResources(Optional<? extends List<StatisticsResources>> statisticsResources) {
         Utils.checkNotNull(statisticsResources, "statisticsResources");
         this.statisticsResources = statisticsResources;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -91,15 +94,14 @@ public class GetResourcesStatisticsMediaContainer {
         }
         GetResourcesStatisticsMediaContainer other = (GetResourcesStatisticsMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.statisticsResources, other.statisticsResources);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.statisticsResources, other.statisticsResources);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            statisticsResources);
+        return Utils.enhancedHash(
+            size, statisticsResources);
     }
     
     @Override
@@ -108,16 +110,18 @@ public class GetResourcesStatisticsMediaContainer {
                 "size", size,
                 "statisticsResources", statisticsResources);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> size = Optional.empty();
- 
+
         private Optional<? extends List<StatisticsResources>> statisticsResources = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder size(int size) {
             Utils.checkNotNull(size, "size");
@@ -131,6 +135,7 @@ public class GetResourcesStatisticsMediaContainer {
             return this;
         }
 
+
         public Builder statisticsResources(List<StatisticsResources> statisticsResources) {
             Utils.checkNotNull(statisticsResources, "statisticsResources");
             this.statisticsResources = Optional.ofNullable(statisticsResources);
@@ -142,11 +147,12 @@ public class GetResourcesStatisticsMediaContainer {
             this.statisticsResources = statisticsResources;
             return this;
         }
-        
+
         public GetResourcesStatisticsMediaContainer build() {
+
             return new GetResourcesStatisticsMediaContainer(
-                size,
-                statisticsResources);
+                size, statisticsResources);
         }
+
     }
 }

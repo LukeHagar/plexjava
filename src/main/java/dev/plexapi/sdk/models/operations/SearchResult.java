@@ -13,20 +13,21 @@ import java.lang.Float;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 import java.util.Optional;
 
-public class SearchResult {
 
+public class SearchResult {
     /**
      * The score of the search result, typically a float value between 0 and 1.
      */
     @JsonProperty("score")
     private float score;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Directory")
     private Optional<? extends GetSearchAllLibrariesDirectory> directory;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Metadata")
@@ -70,9 +71,10 @@ public class SearchResult {
         return (Optional<GetSearchAllLibrariesMetadata>) metadata;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The score of the search result, typically a float value between 0 and 1.
@@ -89,6 +91,7 @@ public class SearchResult {
         return this;
     }
 
+
     public SearchResult withDirectory(Optional<? extends GetSearchAllLibrariesDirectory> directory) {
         Utils.checkNotNull(directory, "directory");
         this.directory = directory;
@@ -101,13 +104,13 @@ public class SearchResult {
         return this;
     }
 
+
     public SearchResult withMetadata(Optional<? extends GetSearchAllLibrariesMetadata> metadata) {
         Utils.checkNotNull(metadata, "metadata");
         this.metadata = metadata;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -118,17 +121,15 @@ public class SearchResult {
         }
         SearchResult other = (SearchResult) o;
         return 
-            Objects.deepEquals(this.score, other.score) &&
-            Objects.deepEquals(this.directory, other.directory) &&
-            Objects.deepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.score, other.score) &&
+            Utils.enhancedDeepEquals(this.directory, other.directory) &&
+            Utils.enhancedDeepEquals(this.metadata, other.metadata);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            score,
-            directory,
-            metadata);
+        return Utils.enhancedHash(
+            score, directory, metadata);
     }
     
     @Override
@@ -138,18 +139,20 @@ public class SearchResult {
                 "directory", directory,
                 "metadata", metadata);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Float score;
- 
+
         private Optional<? extends GetSearchAllLibrariesDirectory> directory = Optional.empty();
- 
+
         private Optional<? extends GetSearchAllLibrariesMetadata> metadata = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The score of the search result, typically a float value between 0 and 1.
@@ -159,6 +162,7 @@ public class SearchResult {
             this.score = score;
             return this;
         }
+
 
         public Builder directory(GetSearchAllLibrariesDirectory directory) {
             Utils.checkNotNull(directory, "directory");
@@ -172,6 +176,7 @@ public class SearchResult {
             return this;
         }
 
+
         public Builder metadata(GetSearchAllLibrariesMetadata metadata) {
             Utils.checkNotNull(metadata, "metadata");
             this.metadata = Optional.ofNullable(metadata);
@@ -183,12 +188,12 @@ public class SearchResult {
             this.metadata = metadata;
             return this;
         }
-        
+
         public SearchResult build() {
+
             return new SearchResult(
-                score,
-                directory,
-                metadata);
+                score, directory, metadata);
         }
+
     }
 }

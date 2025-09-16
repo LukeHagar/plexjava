@@ -10,10 +10,9 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetPlaylistRequest {
-
     /**
      * the ID of the playlist
      */
@@ -35,9 +34,10 @@ public class GetPlaylistRequest {
         return playlistID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * the ID of the playlist
@@ -48,7 +48,6 @@ public class GetPlaylistRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -59,12 +58,12 @@ public class GetPlaylistRequest {
         }
         GetPlaylistRequest other = (GetPlaylistRequest) o;
         return 
-            Objects.deepEquals(this.playlistID, other.playlistID);
+            Utils.enhancedDeepEquals(this.playlistID, other.playlistID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             playlistID);
     }
     
@@ -73,14 +72,16 @@ public class GetPlaylistRequest {
         return Utils.toString(GetPlaylistRequest.class,
                 "playlistID", playlistID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Double playlistID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * the ID of the playlist
@@ -90,10 +91,12 @@ public class GetPlaylistRequest {
             this.playlistID = playlistID;
             return this;
         }
-        
+
         public GetPlaylistRequest build() {
+
             return new GetPlaylistRequest(
                 playlistID);
         }
+
     }
 }

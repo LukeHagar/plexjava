@@ -3,16 +3,20 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetMediaMetaData;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class GetMediaMetaDataRequestBuilder {
 
     private GetMediaMetaDataRequest request;
-    private final SDKMethodInterfaces.MethodCallGetMediaMetaData sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetMediaMetaDataRequestBuilder(SDKMethodInterfaces.MethodCallGetMediaMetaData sdk) {
-        this.sdk = sdk;
+    public GetMediaMetaDataRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetMediaMetaDataRequestBuilder request(GetMediaMetaDataRequest request) {
@@ -22,8 +26,10 @@ public class GetMediaMetaDataRequestBuilder {
     }
 
     public GetMediaMetaDataResponse call() throws Exception {
+        
+        RequestOperation<GetMediaMetaDataRequest, GetMediaMetaDataResponse> operation
+              = new GetMediaMetaData.Sync(sdkConfiguration);
 
-        return sdk.getMediaMetaData(
-            request);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

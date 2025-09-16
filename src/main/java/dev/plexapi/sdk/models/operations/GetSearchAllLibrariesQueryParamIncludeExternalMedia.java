@@ -19,7 +19,7 @@ public enum GetSearchAllLibrariesQueryParamIncludeExternalMedia {
     @JsonValue
     private final int value;
 
-    private GetSearchAllLibrariesQueryParamIncludeExternalMedia(int value) {
+    GetSearchAllLibrariesQueryParamIncludeExternalMedia(int value) {
         this.value = value;
     }
     

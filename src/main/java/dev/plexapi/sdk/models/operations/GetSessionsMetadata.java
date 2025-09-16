@@ -14,8 +14,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetSessionsMetadata {
 
@@ -23,61 +23,76 @@ public class GetSessionsMetadata {
     @JsonProperty("addedAt")
     private Optional<Integer> addedAt;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("art")
     private Optional<String> art;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
     private Optional<Integer> duration;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("grandparentArt")
     private Optional<String> grandparentArt;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("grandparentGuid")
     private Optional<String> grandparentGuid;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("grandparentKey")
     private Optional<String> grandparentKey;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("grandparentRatingKey")
     private Optional<String> grandparentRatingKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("grandparentThumb")
     private Optional<String> grandparentThumb;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("grandparentTitle")
     private Optional<String> grandparentTitle;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("guid")
     private Optional<String> guid;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("index")
     private Optional<Integer> index;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionID")
     private Optional<String> librarySectionID;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionKey")
     private Optional<String> librarySectionKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionTitle")
     private Optional<String> librarySectionTitle;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("musicAnalysisVersion")
@@ -90,85 +105,106 @@ public class GetSessionsMetadata {
     @JsonProperty("originalTitle")
     private Optional<String> originalTitle;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentGuid")
     private Optional<String> parentGuid;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentIndex")
     private Optional<Integer> parentIndex;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentKey")
     private Optional<String> parentKey;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentRatingKey")
     private Optional<String> parentRatingKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentStudio")
     private Optional<String> parentStudio;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentThumb")
     private Optional<String> parentThumb;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentTitle")
     private Optional<String> parentTitle;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentYear")
     private Optional<Integer> parentYear;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ratingCount")
     private Optional<Integer> ratingCount;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ratingKey")
     private Optional<String> ratingKey;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("sessionKey")
     private Optional<String> sessionKey;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
     private Optional<String> thumb;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("titleSort")
     private Optional<String> titleSort;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
     private Optional<String> type;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("updatedAt")
     private Optional<Integer> updatedAt;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("viewOffset")
     private Optional<Integer> viewOffset;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Media")
     private Optional<? extends List<GetSessionsMedia>> media;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("User")
     private Optional<? extends GetSessionsUser> user;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Player")
     private Optional<? extends Player> player;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Session")
@@ -293,7 +329,19 @@ public class GetSessionsMetadata {
     }
     
     public GetSessionsMetadata() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
@@ -493,15 +541,17 @@ public class GetSessionsMetadata {
         return (Optional<Session>) session;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetSessionsMetadata withAddedAt(int addedAt) {
         Utils.checkNotNull(addedAt, "addedAt");
         this.addedAt = Optional.ofNullable(addedAt);
         return this;
     }
+
 
     public GetSessionsMetadata withAddedAt(Optional<Integer> addedAt) {
         Utils.checkNotNull(addedAt, "addedAt");
@@ -515,6 +565,7 @@ public class GetSessionsMetadata {
         return this;
     }
 
+
     public GetSessionsMetadata withArt(Optional<String> art) {
         Utils.checkNotNull(art, "art");
         this.art = art;
@@ -526,6 +577,7 @@ public class GetSessionsMetadata {
         this.duration = Optional.ofNullable(duration);
         return this;
     }
+
 
     public GetSessionsMetadata withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
@@ -539,6 +591,7 @@ public class GetSessionsMetadata {
         return this;
     }
 
+
     public GetSessionsMetadata withGrandparentArt(Optional<String> grandparentArt) {
         Utils.checkNotNull(grandparentArt, "grandparentArt");
         this.grandparentArt = grandparentArt;
@@ -550,6 +603,7 @@ public class GetSessionsMetadata {
         this.grandparentGuid = Optional.ofNullable(grandparentGuid);
         return this;
     }
+
 
     public GetSessionsMetadata withGrandparentGuid(Optional<String> grandparentGuid) {
         Utils.checkNotNull(grandparentGuid, "grandparentGuid");
@@ -563,6 +617,7 @@ public class GetSessionsMetadata {
         return this;
     }
 
+
     public GetSessionsMetadata withGrandparentKey(Optional<String> grandparentKey) {
         Utils.checkNotNull(grandparentKey, "grandparentKey");
         this.grandparentKey = grandparentKey;
@@ -574,6 +629,7 @@ public class GetSessionsMetadata {
         this.grandparentRatingKey = Optional.ofNullable(grandparentRatingKey);
         return this;
     }
+
 
     public GetSessionsMetadata withGrandparentRatingKey(Optional<String> grandparentRatingKey) {
         Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
@@ -587,6 +643,7 @@ public class GetSessionsMetadata {
         return this;
     }
 
+
     public GetSessionsMetadata withGrandparentThumb(Optional<String> grandparentThumb) {
         Utils.checkNotNull(grandparentThumb, "grandparentThumb");
         this.grandparentThumb = grandparentThumb;
@@ -598,6 +655,7 @@ public class GetSessionsMetadata {
         this.grandparentTitle = Optional.ofNullable(grandparentTitle);
         return this;
     }
+
 
     public GetSessionsMetadata withGrandparentTitle(Optional<String> grandparentTitle) {
         Utils.checkNotNull(grandparentTitle, "grandparentTitle");
@@ -611,6 +669,7 @@ public class GetSessionsMetadata {
         return this;
     }
 
+
     public GetSessionsMetadata withGuid(Optional<String> guid) {
         Utils.checkNotNull(guid, "guid");
         this.guid = guid;
@@ -622,6 +681,7 @@ public class GetSessionsMetadata {
         this.index = Optional.ofNullable(index);
         return this;
     }
+
 
     public GetSessionsMetadata withIndex(Optional<Integer> index) {
         Utils.checkNotNull(index, "index");
@@ -635,6 +695,7 @@ public class GetSessionsMetadata {
         return this;
     }
 
+
     public GetSessionsMetadata withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
@@ -646,6 +707,7 @@ public class GetSessionsMetadata {
         this.librarySectionID = Optional.ofNullable(librarySectionID);
         return this;
     }
+
 
     public GetSessionsMetadata withLibrarySectionID(Optional<String> librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
@@ -659,6 +721,7 @@ public class GetSessionsMetadata {
         return this;
     }
 
+
     public GetSessionsMetadata withLibrarySectionKey(Optional<String> librarySectionKey) {
         Utils.checkNotNull(librarySectionKey, "librarySectionKey");
         this.librarySectionKey = librarySectionKey;
@@ -671,6 +734,7 @@ public class GetSessionsMetadata {
         return this;
     }
 
+
     public GetSessionsMetadata withLibrarySectionTitle(Optional<String> librarySectionTitle) {
         Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
         this.librarySectionTitle = librarySectionTitle;
@@ -682,6 +746,7 @@ public class GetSessionsMetadata {
         this.musicAnalysisVersion = Optional.ofNullable(musicAnalysisVersion);
         return this;
     }
+
 
     public GetSessionsMetadata withMusicAnalysisVersion(Optional<String> musicAnalysisVersion) {
         Utils.checkNotNull(musicAnalysisVersion, "musicAnalysisVersion");
@@ -698,6 +763,7 @@ public class GetSessionsMetadata {
         return this;
     }
 
+
     /**
      * The original untranslated name of the media item when non-english, or the track artist if an audio Item has an album artist
      */
@@ -713,6 +779,7 @@ public class GetSessionsMetadata {
         return this;
     }
 
+
     public GetSessionsMetadata withParentGuid(Optional<String> parentGuid) {
         Utils.checkNotNull(parentGuid, "parentGuid");
         this.parentGuid = parentGuid;
@@ -724,6 +791,7 @@ public class GetSessionsMetadata {
         this.parentIndex = Optional.ofNullable(parentIndex);
         return this;
     }
+
 
     public GetSessionsMetadata withParentIndex(Optional<Integer> parentIndex) {
         Utils.checkNotNull(parentIndex, "parentIndex");
@@ -737,6 +805,7 @@ public class GetSessionsMetadata {
         return this;
     }
 
+
     public GetSessionsMetadata withParentKey(Optional<String> parentKey) {
         Utils.checkNotNull(parentKey, "parentKey");
         this.parentKey = parentKey;
@@ -748,6 +817,7 @@ public class GetSessionsMetadata {
         this.parentRatingKey = Optional.ofNullable(parentRatingKey);
         return this;
     }
+
 
     public GetSessionsMetadata withParentRatingKey(Optional<String> parentRatingKey) {
         Utils.checkNotNull(parentRatingKey, "parentRatingKey");
@@ -761,6 +831,7 @@ public class GetSessionsMetadata {
         return this;
     }
 
+
     public GetSessionsMetadata withParentStudio(Optional<String> parentStudio) {
         Utils.checkNotNull(parentStudio, "parentStudio");
         this.parentStudio = parentStudio;
@@ -772,6 +843,7 @@ public class GetSessionsMetadata {
         this.parentThumb = Optional.ofNullable(parentThumb);
         return this;
     }
+
 
     public GetSessionsMetadata withParentThumb(Optional<String> parentThumb) {
         Utils.checkNotNull(parentThumb, "parentThumb");
@@ -785,6 +857,7 @@ public class GetSessionsMetadata {
         return this;
     }
 
+
     public GetSessionsMetadata withParentTitle(Optional<String> parentTitle) {
         Utils.checkNotNull(parentTitle, "parentTitle");
         this.parentTitle = parentTitle;
@@ -796,6 +869,7 @@ public class GetSessionsMetadata {
         this.parentYear = Optional.ofNullable(parentYear);
         return this;
     }
+
 
     public GetSessionsMetadata withParentYear(Optional<Integer> parentYear) {
         Utils.checkNotNull(parentYear, "parentYear");
@@ -809,6 +883,7 @@ public class GetSessionsMetadata {
         return this;
     }
 
+
     public GetSessionsMetadata withRatingCount(Optional<Integer> ratingCount) {
         Utils.checkNotNull(ratingCount, "ratingCount");
         this.ratingCount = ratingCount;
@@ -820,6 +895,7 @@ public class GetSessionsMetadata {
         this.ratingKey = Optional.ofNullable(ratingKey);
         return this;
     }
+
 
     public GetSessionsMetadata withRatingKey(Optional<String> ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
@@ -833,6 +909,7 @@ public class GetSessionsMetadata {
         return this;
     }
 
+
     public GetSessionsMetadata withSessionKey(Optional<String> sessionKey) {
         Utils.checkNotNull(sessionKey, "sessionKey");
         this.sessionKey = sessionKey;
@@ -844,6 +921,7 @@ public class GetSessionsMetadata {
         this.thumb = Optional.ofNullable(thumb);
         return this;
     }
+
 
     public GetSessionsMetadata withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
@@ -857,6 +935,7 @@ public class GetSessionsMetadata {
         return this;
     }
 
+
     public GetSessionsMetadata withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
@@ -868,6 +947,7 @@ public class GetSessionsMetadata {
         this.titleSort = Optional.ofNullable(titleSort);
         return this;
     }
+
 
     public GetSessionsMetadata withTitleSort(Optional<String> titleSort) {
         Utils.checkNotNull(titleSort, "titleSort");
@@ -881,6 +961,7 @@ public class GetSessionsMetadata {
         return this;
     }
 
+
     public GetSessionsMetadata withType(Optional<String> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
@@ -892,6 +973,7 @@ public class GetSessionsMetadata {
         this.updatedAt = Optional.ofNullable(updatedAt);
         return this;
     }
+
 
     public GetSessionsMetadata withUpdatedAt(Optional<Integer> updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
@@ -905,6 +987,7 @@ public class GetSessionsMetadata {
         return this;
     }
 
+
     public GetSessionsMetadata withViewOffset(Optional<Integer> viewOffset) {
         Utils.checkNotNull(viewOffset, "viewOffset");
         this.viewOffset = viewOffset;
@@ -916,6 +999,7 @@ public class GetSessionsMetadata {
         this.media = Optional.ofNullable(media);
         return this;
     }
+
 
     public GetSessionsMetadata withMedia(Optional<? extends List<GetSessionsMedia>> media) {
         Utils.checkNotNull(media, "media");
@@ -929,6 +1013,7 @@ public class GetSessionsMetadata {
         return this;
     }
 
+
     public GetSessionsMetadata withUser(Optional<? extends GetSessionsUser> user) {
         Utils.checkNotNull(user, "user");
         this.user = user;
@@ -940,6 +1025,7 @@ public class GetSessionsMetadata {
         this.player = Optional.ofNullable(player);
         return this;
     }
+
 
     public GetSessionsMetadata withPlayer(Optional<? extends Player> player) {
         Utils.checkNotNull(player, "player");
@@ -953,13 +1039,13 @@ public class GetSessionsMetadata {
         return this;
     }
 
+
     public GetSessionsMetadata withSession(Optional<? extends Session> session) {
         Utils.checkNotNull(session, "session");
         this.session = session;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -970,87 +1056,62 @@ public class GetSessionsMetadata {
         }
         GetSessionsMetadata other = (GetSessionsMetadata) o;
         return 
-            Objects.deepEquals(this.addedAt, other.addedAt) &&
-            Objects.deepEquals(this.art, other.art) &&
-            Objects.deepEquals(this.duration, other.duration) &&
-            Objects.deepEquals(this.grandparentArt, other.grandparentArt) &&
-            Objects.deepEquals(this.grandparentGuid, other.grandparentGuid) &&
-            Objects.deepEquals(this.grandparentKey, other.grandparentKey) &&
-            Objects.deepEquals(this.grandparentRatingKey, other.grandparentRatingKey) &&
-            Objects.deepEquals(this.grandparentThumb, other.grandparentThumb) &&
-            Objects.deepEquals(this.grandparentTitle, other.grandparentTitle) &&
-            Objects.deepEquals(this.guid, other.guid) &&
-            Objects.deepEquals(this.index, other.index) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.librarySectionID, other.librarySectionID) &&
-            Objects.deepEquals(this.librarySectionKey, other.librarySectionKey) &&
-            Objects.deepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
-            Objects.deepEquals(this.musicAnalysisVersion, other.musicAnalysisVersion) &&
-            Objects.deepEquals(this.originalTitle, other.originalTitle) &&
-            Objects.deepEquals(this.parentGuid, other.parentGuid) &&
-            Objects.deepEquals(this.parentIndex, other.parentIndex) &&
-            Objects.deepEquals(this.parentKey, other.parentKey) &&
-            Objects.deepEquals(this.parentRatingKey, other.parentRatingKey) &&
-            Objects.deepEquals(this.parentStudio, other.parentStudio) &&
-            Objects.deepEquals(this.parentThumb, other.parentThumb) &&
-            Objects.deepEquals(this.parentTitle, other.parentTitle) &&
-            Objects.deepEquals(this.parentYear, other.parentYear) &&
-            Objects.deepEquals(this.ratingCount, other.ratingCount) &&
-            Objects.deepEquals(this.ratingKey, other.ratingKey) &&
-            Objects.deepEquals(this.sessionKey, other.sessionKey) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.title, other.title) &&
-            Objects.deepEquals(this.titleSort, other.titleSort) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.updatedAt, other.updatedAt) &&
-            Objects.deepEquals(this.viewOffset, other.viewOffset) &&
-            Objects.deepEquals(this.media, other.media) &&
-            Objects.deepEquals(this.user, other.user) &&
-            Objects.deepEquals(this.player, other.player) &&
-            Objects.deepEquals(this.session, other.session);
+            Utils.enhancedDeepEquals(this.addedAt, other.addedAt) &&
+            Utils.enhancedDeepEquals(this.art, other.art) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.grandparentArt, other.grandparentArt) &&
+            Utils.enhancedDeepEquals(this.grandparentGuid, other.grandparentGuid) &&
+            Utils.enhancedDeepEquals(this.grandparentKey, other.grandparentKey) &&
+            Utils.enhancedDeepEquals(this.grandparentRatingKey, other.grandparentRatingKey) &&
+            Utils.enhancedDeepEquals(this.grandparentThumb, other.grandparentThumb) &&
+            Utils.enhancedDeepEquals(this.grandparentTitle, other.grandparentTitle) &&
+            Utils.enhancedDeepEquals(this.guid, other.guid) &&
+            Utils.enhancedDeepEquals(this.index, other.index) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.librarySectionID, other.librarySectionID) &&
+            Utils.enhancedDeepEquals(this.librarySectionKey, other.librarySectionKey) &&
+            Utils.enhancedDeepEquals(this.librarySectionTitle, other.librarySectionTitle) &&
+            Utils.enhancedDeepEquals(this.musicAnalysisVersion, other.musicAnalysisVersion) &&
+            Utils.enhancedDeepEquals(this.originalTitle, other.originalTitle) &&
+            Utils.enhancedDeepEquals(this.parentGuid, other.parentGuid) &&
+            Utils.enhancedDeepEquals(this.parentIndex, other.parentIndex) &&
+            Utils.enhancedDeepEquals(this.parentKey, other.parentKey) &&
+            Utils.enhancedDeepEquals(this.parentRatingKey, other.parentRatingKey) &&
+            Utils.enhancedDeepEquals(this.parentStudio, other.parentStudio) &&
+            Utils.enhancedDeepEquals(this.parentThumb, other.parentThumb) &&
+            Utils.enhancedDeepEquals(this.parentTitle, other.parentTitle) &&
+            Utils.enhancedDeepEquals(this.parentYear, other.parentYear) &&
+            Utils.enhancedDeepEquals(this.ratingCount, other.ratingCount) &&
+            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey) &&
+            Utils.enhancedDeepEquals(this.sessionKey, other.sessionKey) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.titleSort, other.titleSort) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt) &&
+            Utils.enhancedDeepEquals(this.viewOffset, other.viewOffset) &&
+            Utils.enhancedDeepEquals(this.media, other.media) &&
+            Utils.enhancedDeepEquals(this.user, other.user) &&
+            Utils.enhancedDeepEquals(this.player, other.player) &&
+            Utils.enhancedDeepEquals(this.session, other.session);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            addedAt,
-            art,
-            duration,
-            grandparentArt,
-            grandparentGuid,
-            grandparentKey,
-            grandparentRatingKey,
-            grandparentThumb,
-            grandparentTitle,
-            guid,
-            index,
-            key,
-            librarySectionID,
-            librarySectionKey,
-            librarySectionTitle,
-            musicAnalysisVersion,
-            originalTitle,
-            parentGuid,
-            parentIndex,
-            parentKey,
-            parentRatingKey,
-            parentStudio,
-            parentThumb,
-            parentTitle,
-            parentYear,
-            ratingCount,
-            ratingKey,
-            sessionKey,
-            thumb,
-            title,
-            titleSort,
-            type,
-            updatedAt,
-            viewOffset,
-            media,
-            user,
-            player,
-            session);
+        return Utils.enhancedHash(
+            addedAt, art, duration,
+            grandparentArt, grandparentGuid, grandparentKey,
+            grandparentRatingKey, grandparentThumb, grandparentTitle,
+            guid, index, key,
+            librarySectionID, librarySectionKey, librarySectionTitle,
+            musicAnalysisVersion, originalTitle, parentGuid,
+            parentIndex, parentKey, parentRatingKey,
+            parentStudio, parentThumb, parentTitle,
+            parentYear, ratingCount, ratingKey,
+            sessionKey, thumb, title,
+            titleSort, type, updatedAt,
+            viewOffset, media, user,
+            player, session);
     }
     
     @Override
@@ -1095,88 +1156,90 @@ public class GetSessionsMetadata {
                 "player", player,
                 "session", session);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Integer> addedAt = Optional.empty();
- 
+
         private Optional<String> art = Optional.empty();
- 
+
         private Optional<Integer> duration = Optional.empty();
- 
+
         private Optional<String> grandparentArt = Optional.empty();
- 
+
         private Optional<String> grandparentGuid = Optional.empty();
- 
+
         private Optional<String> grandparentKey = Optional.empty();
- 
+
         private Optional<String> grandparentRatingKey = Optional.empty();
- 
+
         private Optional<String> grandparentThumb = Optional.empty();
- 
+
         private Optional<String> grandparentTitle = Optional.empty();
- 
+
         private Optional<String> guid = Optional.empty();
- 
+
         private Optional<Integer> index = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> librarySectionID = Optional.empty();
- 
+
         private Optional<String> librarySectionKey = Optional.empty();
- 
+
         private Optional<String> librarySectionTitle = Optional.empty();
- 
+
         private Optional<String> musicAnalysisVersion = Optional.empty();
- 
+
         private Optional<String> originalTitle = Optional.empty();
- 
+
         private Optional<String> parentGuid = Optional.empty();
- 
+
         private Optional<Integer> parentIndex = Optional.empty();
- 
+
         private Optional<String> parentKey = Optional.empty();
- 
+
         private Optional<String> parentRatingKey = Optional.empty();
- 
+
         private Optional<String> parentStudio = Optional.empty();
- 
+
         private Optional<String> parentThumb = Optional.empty();
- 
+
         private Optional<String> parentTitle = Optional.empty();
- 
+
         private Optional<Integer> parentYear = Optional.empty();
- 
+
         private Optional<Integer> ratingCount = Optional.empty();
- 
+
         private Optional<String> ratingKey = Optional.empty();
- 
+
         private Optional<String> sessionKey = Optional.empty();
- 
+
         private Optional<String> thumb = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
- 
+
         private Optional<String> titleSort = Optional.empty();
- 
+
         private Optional<String> type = Optional.empty();
- 
+
         private Optional<Integer> updatedAt = Optional.empty();
- 
+
         private Optional<Integer> viewOffset = Optional.empty();
- 
+
         private Optional<? extends List<GetSessionsMedia>> media = Optional.empty();
- 
+
         private Optional<? extends GetSessionsUser> user = Optional.empty();
- 
+
         private Optional<? extends Player> player = Optional.empty();
- 
+
         private Optional<? extends Session> session = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder addedAt(int addedAt) {
             Utils.checkNotNull(addedAt, "addedAt");
@@ -1190,6 +1253,7 @@ public class GetSessionsMetadata {
             return this;
         }
 
+
         public Builder art(String art) {
             Utils.checkNotNull(art, "art");
             this.art = Optional.ofNullable(art);
@@ -1201,6 +1265,7 @@ public class GetSessionsMetadata {
             this.art = art;
             return this;
         }
+
 
         public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
@@ -1214,6 +1279,7 @@ public class GetSessionsMetadata {
             return this;
         }
 
+
         public Builder grandparentArt(String grandparentArt) {
             Utils.checkNotNull(grandparentArt, "grandparentArt");
             this.grandparentArt = Optional.ofNullable(grandparentArt);
@@ -1225,6 +1291,7 @@ public class GetSessionsMetadata {
             this.grandparentArt = grandparentArt;
             return this;
         }
+
 
         public Builder grandparentGuid(String grandparentGuid) {
             Utils.checkNotNull(grandparentGuid, "grandparentGuid");
@@ -1238,6 +1305,7 @@ public class GetSessionsMetadata {
             return this;
         }
 
+
         public Builder grandparentKey(String grandparentKey) {
             Utils.checkNotNull(grandparentKey, "grandparentKey");
             this.grandparentKey = Optional.ofNullable(grandparentKey);
@@ -1249,6 +1317,7 @@ public class GetSessionsMetadata {
             this.grandparentKey = grandparentKey;
             return this;
         }
+
 
         public Builder grandparentRatingKey(String grandparentRatingKey) {
             Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
@@ -1262,6 +1331,7 @@ public class GetSessionsMetadata {
             return this;
         }
 
+
         public Builder grandparentThumb(String grandparentThumb) {
             Utils.checkNotNull(grandparentThumb, "grandparentThumb");
             this.grandparentThumb = Optional.ofNullable(grandparentThumb);
@@ -1273,6 +1343,7 @@ public class GetSessionsMetadata {
             this.grandparentThumb = grandparentThumb;
             return this;
         }
+
 
         public Builder grandparentTitle(String grandparentTitle) {
             Utils.checkNotNull(grandparentTitle, "grandparentTitle");
@@ -1286,6 +1357,7 @@ public class GetSessionsMetadata {
             return this;
         }
 
+
         public Builder guid(String guid) {
             Utils.checkNotNull(guid, "guid");
             this.guid = Optional.ofNullable(guid);
@@ -1297,6 +1369,7 @@ public class GetSessionsMetadata {
             this.guid = guid;
             return this;
         }
+
 
         public Builder index(int index) {
             Utils.checkNotNull(index, "index");
@@ -1310,6 +1383,7 @@ public class GetSessionsMetadata {
             return this;
         }
 
+
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = Optional.ofNullable(key);
@@ -1321,6 +1395,7 @@ public class GetSessionsMetadata {
             this.key = key;
             return this;
         }
+
 
         public Builder librarySectionID(String librarySectionID) {
             Utils.checkNotNull(librarySectionID, "librarySectionID");
@@ -1334,6 +1409,7 @@ public class GetSessionsMetadata {
             return this;
         }
 
+
         public Builder librarySectionKey(String librarySectionKey) {
             Utils.checkNotNull(librarySectionKey, "librarySectionKey");
             this.librarySectionKey = Optional.ofNullable(librarySectionKey);
@@ -1345,6 +1421,7 @@ public class GetSessionsMetadata {
             this.librarySectionKey = librarySectionKey;
             return this;
         }
+
 
         public Builder librarySectionTitle(String librarySectionTitle) {
             Utils.checkNotNull(librarySectionTitle, "librarySectionTitle");
@@ -1358,6 +1435,7 @@ public class GetSessionsMetadata {
             return this;
         }
 
+
         public Builder musicAnalysisVersion(String musicAnalysisVersion) {
             Utils.checkNotNull(musicAnalysisVersion, "musicAnalysisVersion");
             this.musicAnalysisVersion = Optional.ofNullable(musicAnalysisVersion);
@@ -1369,6 +1447,7 @@ public class GetSessionsMetadata {
             this.musicAnalysisVersion = musicAnalysisVersion;
             return this;
         }
+
 
         /**
          * The original untranslated name of the media item when non-english, or the track artist if an audio Item has an album artist
@@ -1388,6 +1467,7 @@ public class GetSessionsMetadata {
             return this;
         }
 
+
         public Builder parentGuid(String parentGuid) {
             Utils.checkNotNull(parentGuid, "parentGuid");
             this.parentGuid = Optional.ofNullable(parentGuid);
@@ -1399,6 +1479,7 @@ public class GetSessionsMetadata {
             this.parentGuid = parentGuid;
             return this;
         }
+
 
         public Builder parentIndex(int parentIndex) {
             Utils.checkNotNull(parentIndex, "parentIndex");
@@ -1412,6 +1493,7 @@ public class GetSessionsMetadata {
             return this;
         }
 
+
         public Builder parentKey(String parentKey) {
             Utils.checkNotNull(parentKey, "parentKey");
             this.parentKey = Optional.ofNullable(parentKey);
@@ -1423,6 +1505,7 @@ public class GetSessionsMetadata {
             this.parentKey = parentKey;
             return this;
         }
+
 
         public Builder parentRatingKey(String parentRatingKey) {
             Utils.checkNotNull(parentRatingKey, "parentRatingKey");
@@ -1436,6 +1519,7 @@ public class GetSessionsMetadata {
             return this;
         }
 
+
         public Builder parentStudio(String parentStudio) {
             Utils.checkNotNull(parentStudio, "parentStudio");
             this.parentStudio = Optional.ofNullable(parentStudio);
@@ -1447,6 +1531,7 @@ public class GetSessionsMetadata {
             this.parentStudio = parentStudio;
             return this;
         }
+
 
         public Builder parentThumb(String parentThumb) {
             Utils.checkNotNull(parentThumb, "parentThumb");
@@ -1460,6 +1545,7 @@ public class GetSessionsMetadata {
             return this;
         }
 
+
         public Builder parentTitle(String parentTitle) {
             Utils.checkNotNull(parentTitle, "parentTitle");
             this.parentTitle = Optional.ofNullable(parentTitle);
@@ -1471,6 +1557,7 @@ public class GetSessionsMetadata {
             this.parentTitle = parentTitle;
             return this;
         }
+
 
         public Builder parentYear(int parentYear) {
             Utils.checkNotNull(parentYear, "parentYear");
@@ -1484,6 +1571,7 @@ public class GetSessionsMetadata {
             return this;
         }
 
+
         public Builder ratingCount(int ratingCount) {
             Utils.checkNotNull(ratingCount, "ratingCount");
             this.ratingCount = Optional.ofNullable(ratingCount);
@@ -1495,6 +1583,7 @@ public class GetSessionsMetadata {
             this.ratingCount = ratingCount;
             return this;
         }
+
 
         public Builder ratingKey(String ratingKey) {
             Utils.checkNotNull(ratingKey, "ratingKey");
@@ -1508,6 +1597,7 @@ public class GetSessionsMetadata {
             return this;
         }
 
+
         public Builder sessionKey(String sessionKey) {
             Utils.checkNotNull(sessionKey, "sessionKey");
             this.sessionKey = Optional.ofNullable(sessionKey);
@@ -1519,6 +1609,7 @@ public class GetSessionsMetadata {
             this.sessionKey = sessionKey;
             return this;
         }
+
 
         public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
@@ -1532,6 +1623,7 @@ public class GetSessionsMetadata {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -1543,6 +1635,7 @@ public class GetSessionsMetadata {
             this.title = title;
             return this;
         }
+
 
         public Builder titleSort(String titleSort) {
             Utils.checkNotNull(titleSort, "titleSort");
@@ -1556,6 +1649,7 @@ public class GetSessionsMetadata {
             return this;
         }
 
+
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = Optional.ofNullable(type);
@@ -1567,6 +1661,7 @@ public class GetSessionsMetadata {
             this.type = type;
             return this;
         }
+
 
         public Builder updatedAt(int updatedAt) {
             Utils.checkNotNull(updatedAt, "updatedAt");
@@ -1580,6 +1675,7 @@ public class GetSessionsMetadata {
             return this;
         }
 
+
         public Builder viewOffset(int viewOffset) {
             Utils.checkNotNull(viewOffset, "viewOffset");
             this.viewOffset = Optional.ofNullable(viewOffset);
@@ -1591,6 +1687,7 @@ public class GetSessionsMetadata {
             this.viewOffset = viewOffset;
             return this;
         }
+
 
         public Builder media(List<GetSessionsMedia> media) {
             Utils.checkNotNull(media, "media");
@@ -1604,6 +1701,7 @@ public class GetSessionsMetadata {
             return this;
         }
 
+
         public Builder user(GetSessionsUser user) {
             Utils.checkNotNull(user, "user");
             this.user = Optional.ofNullable(user);
@@ -1615,6 +1713,7 @@ public class GetSessionsMetadata {
             this.user = user;
             return this;
         }
+
 
         public Builder player(Player player) {
             Utils.checkNotNull(player, "player");
@@ -1628,6 +1727,7 @@ public class GetSessionsMetadata {
             return this;
         }
 
+
         public Builder session(Session session) {
             Utils.checkNotNull(session, "session");
             this.session = Optional.ofNullable(session);
@@ -1639,47 +1739,24 @@ public class GetSessionsMetadata {
             this.session = session;
             return this;
         }
-        
+
         public GetSessionsMetadata build() {
+
             return new GetSessionsMetadata(
-                addedAt,
-                art,
-                duration,
-                grandparentArt,
-                grandparentGuid,
-                grandparentKey,
-                grandparentRatingKey,
-                grandparentThumb,
-                grandparentTitle,
-                guid,
-                index,
-                key,
-                librarySectionID,
-                librarySectionKey,
-                librarySectionTitle,
-                musicAnalysisVersion,
-                originalTitle,
-                parentGuid,
-                parentIndex,
-                parentKey,
-                parentRatingKey,
-                parentStudio,
-                parentThumb,
-                parentTitle,
-                parentYear,
-                ratingCount,
-                ratingKey,
-                sessionKey,
-                thumb,
-                title,
-                titleSort,
-                type,
-                updatedAt,
-                viewOffset,
-                media,
-                user,
-                player,
-                session);
+                addedAt, art, duration,
+                grandparentArt, grandparentGuid, grandparentKey,
+                grandparentRatingKey, grandparentThumb, grandparentTitle,
+                guid, index, key,
+                librarySectionID, librarySectionKey, librarySectionTitle,
+                musicAnalysisVersion, originalTitle, parentGuid,
+                parentIndex, parentKey, parentRatingKey,
+                parentStudio, parentThumb, parentTitle,
+                parentYear, ratingCount, ratingKey,
+                sessionKey, thumb, title,
+                titleSort, type, updatedAt,
+                viewOffset, media, user,
+                player, session);
         }
+
     }
 }

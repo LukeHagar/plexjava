@@ -12,10 +12,9 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class UploadPlaylistRequest {
-
     /**
      * absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server.
      * If the `path` argument is a directory, that path will be scanned for playlist files to be processed.
@@ -87,9 +86,10 @@ public class UploadPlaylistRequest {
         return sectionID;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server.
@@ -126,7 +126,6 @@ public class UploadPlaylistRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -137,17 +136,15 @@ public class UploadPlaylistRequest {
         }
         UploadPlaylistRequest other = (UploadPlaylistRequest) o;
         return 
-            Objects.deepEquals(this.path, other.path) &&
-            Objects.deepEquals(this.force, other.force) &&
-            Objects.deepEquals(this.sectionID, other.sectionID);
+            Utils.enhancedDeepEquals(this.path, other.path) &&
+            Utils.enhancedDeepEquals(this.force, other.force) &&
+            Utils.enhancedDeepEquals(this.sectionID, other.sectionID);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            path,
-            force,
-            sectionID);
+        return Utils.enhancedHash(
+            path, force, sectionID);
     }
     
     @Override
@@ -157,18 +154,20 @@ public class UploadPlaylistRequest {
                 "force", force,
                 "sectionID", sectionID);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String path;
- 
+
         private QueryParamForce force;
- 
+
         private Long sectionID;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server.
@@ -184,6 +183,7 @@ public class UploadPlaylistRequest {
             return this;
         }
 
+
         /**
          * Force overwriting of duplicate playlists.
          * By default, a playlist file uploaded with the same path will overwrite the existing playlist.
@@ -196,6 +196,7 @@ public class UploadPlaylistRequest {
             return this;
         }
 
+
         /**
          * Possibly the section ID to upload the playlist to, we are not certain.
          */
@@ -204,16 +205,16 @@ public class UploadPlaylistRequest {
             this.sectionID = sectionID;
             return this;
         }
-        
+
         public UploadPlaylistRequest build() {
             if (sectionID == null) {
                 sectionID = _SINGLETON_VALUE_SectionID.value();
             }
+
             return new UploadPlaylistRequest(
-                path,
-                force,
-                sectionID);
+                path, force, sectionID);
         }
+
 
         private static final LazySingletonValue<Long> _SINGLETON_VALUE_SectionID =
                 new LazySingletonValue<>(

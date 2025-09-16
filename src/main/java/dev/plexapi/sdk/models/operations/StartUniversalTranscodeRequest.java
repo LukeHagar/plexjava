@@ -10,11 +10,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class StartUniversalTranscodeRequest {
 
+public class StartUniversalTranscodeRequest {
     /**
      * Whether the media item has MDE
      */
@@ -169,7 +168,12 @@ public class StartUniversalTranscodeRequest {
             double mediaIndex,
             double partIndex,
             String protocol) {
-        this(hasMDE, path, mediaIndex, partIndex, protocol, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        this(hasMDE, path, mediaIndex,
+            partIndex, protocol, Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -300,9 +304,10 @@ public class StartUniversalTranscodeRequest {
         return autoAdjustQuality;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Whether the media item has MDE
@@ -358,6 +363,7 @@ public class StartUniversalTranscodeRequest {
         return this;
     }
 
+
     /**
      * Whether to use fast seek or not
      */
@@ -375,6 +381,7 @@ public class StartUniversalTranscodeRequest {
         this.directPlay = Optional.ofNullable(directPlay);
         return this;
     }
+
 
     /**
      * Whether to use direct play or not
@@ -394,6 +401,7 @@ public class StartUniversalTranscodeRequest {
         return this;
     }
 
+
     /**
      * Whether to use direct stream or not
      */
@@ -411,6 +419,7 @@ public class StartUniversalTranscodeRequest {
         this.subtitleSize = Optional.ofNullable(subtitleSize);
         return this;
     }
+
 
     /**
      * The size of the subtitles
@@ -430,6 +439,7 @@ public class StartUniversalTranscodeRequest {
         return this;
     }
 
+
     /**
      * The subtitles
      */
@@ -447,6 +457,7 @@ public class StartUniversalTranscodeRequest {
         this.audioBoost = Optional.ofNullable(audioBoost);
         return this;
     }
+
 
     /**
      * The audio boost
@@ -466,6 +477,7 @@ public class StartUniversalTranscodeRequest {
         return this;
     }
 
+
     /**
      * The location of the transcode session
      */
@@ -483,6 +495,7 @@ public class StartUniversalTranscodeRequest {
         this.mediaBufferSize = Optional.ofNullable(mediaBufferSize);
         return this;
     }
+
 
     /**
      * The size of the media buffer
@@ -502,6 +515,7 @@ public class StartUniversalTranscodeRequest {
         return this;
     }
 
+
     /**
      * The session ID
      */
@@ -519,6 +533,7 @@ public class StartUniversalTranscodeRequest {
         this.addDebugOverlay = Optional.ofNullable(addDebugOverlay);
         return this;
     }
+
 
     /**
      * Whether to add a debug overlay or not
@@ -538,6 +553,7 @@ public class StartUniversalTranscodeRequest {
         return this;
     }
 
+
     /**
      * Whether to auto adjust quality or not
      */
@@ -547,7 +563,6 @@ public class StartUniversalTranscodeRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -558,42 +573,32 @@ public class StartUniversalTranscodeRequest {
         }
         StartUniversalTranscodeRequest other = (StartUniversalTranscodeRequest) o;
         return 
-            Objects.deepEquals(this.hasMDE, other.hasMDE) &&
-            Objects.deepEquals(this.path, other.path) &&
-            Objects.deepEquals(this.mediaIndex, other.mediaIndex) &&
-            Objects.deepEquals(this.partIndex, other.partIndex) &&
-            Objects.deepEquals(this.protocol, other.protocol) &&
-            Objects.deepEquals(this.fastSeek, other.fastSeek) &&
-            Objects.deepEquals(this.directPlay, other.directPlay) &&
-            Objects.deepEquals(this.directStream, other.directStream) &&
-            Objects.deepEquals(this.subtitleSize, other.subtitleSize) &&
-            Objects.deepEquals(this.subtites, other.subtites) &&
-            Objects.deepEquals(this.audioBoost, other.audioBoost) &&
-            Objects.deepEquals(this.location, other.location) &&
-            Objects.deepEquals(this.mediaBufferSize, other.mediaBufferSize) &&
-            Objects.deepEquals(this.session, other.session) &&
-            Objects.deepEquals(this.addDebugOverlay, other.addDebugOverlay) &&
-            Objects.deepEquals(this.autoAdjustQuality, other.autoAdjustQuality);
+            Utils.enhancedDeepEquals(this.hasMDE, other.hasMDE) &&
+            Utils.enhancedDeepEquals(this.path, other.path) &&
+            Utils.enhancedDeepEquals(this.mediaIndex, other.mediaIndex) &&
+            Utils.enhancedDeepEquals(this.partIndex, other.partIndex) &&
+            Utils.enhancedDeepEquals(this.protocol, other.protocol) &&
+            Utils.enhancedDeepEquals(this.fastSeek, other.fastSeek) &&
+            Utils.enhancedDeepEquals(this.directPlay, other.directPlay) &&
+            Utils.enhancedDeepEquals(this.directStream, other.directStream) &&
+            Utils.enhancedDeepEquals(this.subtitleSize, other.subtitleSize) &&
+            Utils.enhancedDeepEquals(this.subtites, other.subtites) &&
+            Utils.enhancedDeepEquals(this.audioBoost, other.audioBoost) &&
+            Utils.enhancedDeepEquals(this.location, other.location) &&
+            Utils.enhancedDeepEquals(this.mediaBufferSize, other.mediaBufferSize) &&
+            Utils.enhancedDeepEquals(this.session, other.session) &&
+            Utils.enhancedDeepEquals(this.addDebugOverlay, other.addDebugOverlay) &&
+            Utils.enhancedDeepEquals(this.autoAdjustQuality, other.autoAdjustQuality);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            hasMDE,
-            path,
-            mediaIndex,
-            partIndex,
-            protocol,
-            fastSeek,
-            directPlay,
-            directStream,
-            subtitleSize,
-            subtites,
-            audioBoost,
-            location,
-            mediaBufferSize,
-            session,
-            addDebugOverlay,
+        return Utils.enhancedHash(
+            hasMDE, path, mediaIndex,
+            partIndex, protocol, fastSeek,
+            directPlay, directStream, subtitleSize,
+            subtites, audioBoost, location,
+            mediaBufferSize, session, addDebugOverlay,
             autoAdjustQuality);
     }
     
@@ -617,44 +622,46 @@ public class StartUniversalTranscodeRequest {
                 "addDebugOverlay", addDebugOverlay,
                 "autoAdjustQuality", autoAdjustQuality);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Double hasMDE;
- 
+
         private String path;
- 
+
         private Double mediaIndex;
- 
+
         private Double partIndex;
- 
+
         private String protocol;
- 
+
         private Optional<Double> fastSeek = Optional.empty();
- 
+
         private Optional<Double> directPlay = Optional.empty();
- 
+
         private Optional<Double> directStream = Optional.empty();
- 
+
         private Optional<Double> subtitleSize = Optional.empty();
- 
+
         private Optional<String> subtites = Optional.empty();
- 
+
         private Optional<Double> audioBoost = Optional.empty();
- 
+
         private Optional<String> location = Optional.empty();
- 
+
         private Optional<Double> mediaBufferSize = Optional.empty();
- 
+
         private Optional<String> session = Optional.empty();
- 
+
         private Optional<Double> addDebugOverlay = Optional.empty();
- 
+
         private Optional<Double> autoAdjustQuality = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Whether the media item has MDE
@@ -665,6 +672,7 @@ public class StartUniversalTranscodeRequest {
             return this;
         }
 
+
         /**
          * The path to the media item to transcode
          */
@@ -673,6 +681,7 @@ public class StartUniversalTranscodeRequest {
             this.path = path;
             return this;
         }
+
 
         /**
          * The index of the media item to transcode
@@ -683,6 +692,7 @@ public class StartUniversalTranscodeRequest {
             return this;
         }
 
+
         /**
          * The index of the part to transcode
          */
@@ -692,6 +702,7 @@ public class StartUniversalTranscodeRequest {
             return this;
         }
 
+
         /**
          * The protocol to use for the transcode session
          */
@@ -700,6 +711,7 @@ public class StartUniversalTranscodeRequest {
             this.protocol = protocol;
             return this;
         }
+
 
         /**
          * Whether to use fast seek or not
@@ -719,6 +731,7 @@ public class StartUniversalTranscodeRequest {
             return this;
         }
 
+
         /**
          * Whether to use direct play or not
          */
@@ -736,6 +749,7 @@ public class StartUniversalTranscodeRequest {
             this.directPlay = directPlay;
             return this;
         }
+
 
         /**
          * Whether to use direct stream or not
@@ -755,6 +769,7 @@ public class StartUniversalTranscodeRequest {
             return this;
         }
 
+
         /**
          * The size of the subtitles
          */
@@ -772,6 +787,7 @@ public class StartUniversalTranscodeRequest {
             this.subtitleSize = subtitleSize;
             return this;
         }
+
 
         /**
          * The subtitles
@@ -791,6 +807,7 @@ public class StartUniversalTranscodeRequest {
             return this;
         }
 
+
         /**
          * The audio boost
          */
@@ -808,6 +825,7 @@ public class StartUniversalTranscodeRequest {
             this.audioBoost = audioBoost;
             return this;
         }
+
 
         /**
          * The location of the transcode session
@@ -827,6 +845,7 @@ public class StartUniversalTranscodeRequest {
             return this;
         }
 
+
         /**
          * The size of the media buffer
          */
@@ -844,6 +863,7 @@ public class StartUniversalTranscodeRequest {
             this.mediaBufferSize = mediaBufferSize;
             return this;
         }
+
 
         /**
          * The session ID
@@ -863,6 +883,7 @@ public class StartUniversalTranscodeRequest {
             return this;
         }
 
+
         /**
          * Whether to add a debug overlay or not
          */
@@ -881,6 +902,7 @@ public class StartUniversalTranscodeRequest {
             return this;
         }
 
+
         /**
          * Whether to auto adjust quality or not
          */
@@ -898,25 +920,17 @@ public class StartUniversalTranscodeRequest {
             this.autoAdjustQuality = autoAdjustQuality;
             return this;
         }
-        
+
         public StartUniversalTranscodeRequest build() {
+
             return new StartUniversalTranscodeRequest(
-                hasMDE,
-                path,
-                mediaIndex,
-                partIndex,
-                protocol,
-                fastSeek,
-                directPlay,
-                directStream,
-                subtitleSize,
-                subtites,
-                audioBoost,
-                location,
-                mediaBufferSize,
-                session,
-                addDebugOverlay,
+                hasMDE, path, mediaIndex,
+                partIndex, protocol, fastSeek,
+                directPlay, directStream, subtitleSize,
+                subtites, audioBoost, location,
+                mediaBufferSize, session, addDebugOverlay,
                 autoAdjustQuality);
         }
+
     }
 }

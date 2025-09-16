@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetUserFriends;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.String;
@@ -11,10 +15,10 @@ import java.util.Optional;
 public class GetUserFriendsRequestBuilder {
 
     private Optional<String> serverURL = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallGetUserFriends sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetUserFriendsRequestBuilder(SDKMethodInterfaces.MethodCallGetUserFriends sdk) {
-        this.sdk = sdk;
+    public GetUserFriendsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
                 
     public GetUserFriendsRequestBuilder serverURL(String serverURL) {
@@ -30,8 +34,10 @@ public class GetUserFriendsRequestBuilder {
     }
 
     public GetUserFriendsResponse call() throws Exception {
+        
+        RequestlessOperation<GetUserFriendsResponse> operation
+            = new GetUserFriends.Sync(sdkConfiguration, serverURL);
 
-        return sdk.getUserFriends(
-            serverURL);
+        return operation.handleResponse(operation.doRequest());
     }
 }

@@ -15,40 +15,49 @@ import java.lang.Override;
 import java.lang.String;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class PlexDevice {
 
     @JsonProperty("name")
     private String name;
 
+
     @JsonProperty("product")
     private String product;
 
+
     @JsonProperty("productVersion")
     private String productVersion;
+
 
     @JsonInclude(Include.ALWAYS)
     @JsonProperty("platform")
     private Optional<String> platform;
 
+
     @JsonInclude(Include.ALWAYS)
     @JsonProperty("platformVersion")
     private Optional<String> platformVersion;
+
 
     @JsonInclude(Include.ALWAYS)
     @JsonProperty("device")
     private Optional<String> device;
 
+
     @JsonProperty("clientIdentifier")
     private String clientIdentifier;
+
 
     @JsonProperty("createdAt")
     private OffsetDateTime createdAt;
 
+
     @JsonProperty("lastSeenAt")
     private OffsetDateTime lastSeenAt;
+
 
     @JsonProperty("provides")
     private String provides;
@@ -60,42 +69,55 @@ public class PlexDevice {
     @JsonProperty("ownerId")
     private Optional<Long> ownerId;
 
+
     @JsonInclude(Include.ALWAYS)
     @JsonProperty("sourceTitle")
     private Optional<String> sourceTitle;
 
+
     @JsonProperty("publicAddress")
     private String publicAddress;
+
 
     @JsonProperty("accessToken")
     private String accessToken;
 
+
     @JsonProperty("owned")
     private boolean owned;
+
 
     @JsonProperty("home")
     private boolean home;
 
+
     @JsonProperty("synced")
     private boolean synced;
+
 
     @JsonProperty("relay")
     private boolean relay;
 
+
     @JsonProperty("presence")
     private boolean presence;
+
 
     @JsonProperty("httpsRequired")
     private boolean httpsRequired;
 
+
     @JsonProperty("publicAddressMatches")
     private boolean publicAddressMatches;
+
 
     @JsonProperty("dnsRebindingProtection")
     private boolean dnsRebindingProtection;
 
+
     @JsonProperty("natLoopbackSupported")
     private boolean natLoopbackSupported;
+
 
     @JsonProperty("connections")
     private List<Connections> connections;
@@ -196,7 +218,14 @@ public class PlexDevice {
             boolean dnsRebindingProtection,
             boolean natLoopbackSupported,
             List<Connections> connections) {
-        this(name, product, productVersion, Optional.empty(), Optional.empty(), Optional.empty(), clientIdentifier, createdAt, lastSeenAt, provides, Optional.empty(), Optional.empty(), publicAddress, accessToken, owned, home, synced, relay, presence, httpsRequired, publicAddressMatches, dnsRebindingProtection, natLoopbackSupported, connections);
+        this(name, product, productVersion,
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            clientIdentifier, createdAt, lastSeenAt,
+            provides, Optional.empty(), Optional.empty(),
+            publicAddress, accessToken, owned,
+            home, synced, relay,
+            presence, httpsRequired, publicAddressMatches,
+            dnsRebindingProtection, natLoopbackSupported, connections);
     }
 
     @JsonIgnore
@@ -322,9 +351,10 @@ public class PlexDevice {
         return connections;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public PlexDevice withName(String name) {
         Utils.checkNotNull(name, "name");
@@ -350,6 +380,7 @@ public class PlexDevice {
         return this;
     }
 
+
     public PlexDevice withPlatform(Optional<String> platform) {
         Utils.checkNotNull(platform, "platform");
         this.platform = platform;
@@ -362,6 +393,7 @@ public class PlexDevice {
         return this;
     }
 
+
     public PlexDevice withPlatformVersion(Optional<String> platformVersion) {
         Utils.checkNotNull(platformVersion, "platformVersion");
         this.platformVersion = platformVersion;
@@ -373,6 +405,7 @@ public class PlexDevice {
         this.device = Optional.ofNullable(device);
         return this;
     }
+
 
     public PlexDevice withDevice(Optional<String> device) {
         Utils.checkNotNull(device, "device");
@@ -413,6 +446,7 @@ public class PlexDevice {
         return this;
     }
 
+
     /**
      * ownerId is null when the device is owned by the token used to send the request
      */
@@ -427,6 +461,7 @@ public class PlexDevice {
         this.sourceTitle = Optional.ofNullable(sourceTitle);
         return this;
     }
+
 
     public PlexDevice withSourceTitle(Optional<String> sourceTitle) {
         Utils.checkNotNull(sourceTitle, "sourceTitle");
@@ -506,7 +541,6 @@ public class PlexDevice {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -517,59 +551,43 @@ public class PlexDevice {
         }
         PlexDevice other = (PlexDevice) o;
         return 
-            Objects.deepEquals(this.name, other.name) &&
-            Objects.deepEquals(this.product, other.product) &&
-            Objects.deepEquals(this.productVersion, other.productVersion) &&
-            Objects.deepEquals(this.platform, other.platform) &&
-            Objects.deepEquals(this.platformVersion, other.platformVersion) &&
-            Objects.deepEquals(this.device, other.device) &&
-            Objects.deepEquals(this.clientIdentifier, other.clientIdentifier) &&
-            Objects.deepEquals(this.createdAt, other.createdAt) &&
-            Objects.deepEquals(this.lastSeenAt, other.lastSeenAt) &&
-            Objects.deepEquals(this.provides, other.provides) &&
-            Objects.deepEquals(this.ownerId, other.ownerId) &&
-            Objects.deepEquals(this.sourceTitle, other.sourceTitle) &&
-            Objects.deepEquals(this.publicAddress, other.publicAddress) &&
-            Objects.deepEquals(this.accessToken, other.accessToken) &&
-            Objects.deepEquals(this.owned, other.owned) &&
-            Objects.deepEquals(this.home, other.home) &&
-            Objects.deepEquals(this.synced, other.synced) &&
-            Objects.deepEquals(this.relay, other.relay) &&
-            Objects.deepEquals(this.presence, other.presence) &&
-            Objects.deepEquals(this.httpsRequired, other.httpsRequired) &&
-            Objects.deepEquals(this.publicAddressMatches, other.publicAddressMatches) &&
-            Objects.deepEquals(this.dnsRebindingProtection, other.dnsRebindingProtection) &&
-            Objects.deepEquals(this.natLoopbackSupported, other.natLoopbackSupported) &&
-            Objects.deepEquals(this.connections, other.connections);
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.product, other.product) &&
+            Utils.enhancedDeepEquals(this.productVersion, other.productVersion) &&
+            Utils.enhancedDeepEquals(this.platform, other.platform) &&
+            Utils.enhancedDeepEquals(this.platformVersion, other.platformVersion) &&
+            Utils.enhancedDeepEquals(this.device, other.device) &&
+            Utils.enhancedDeepEquals(this.clientIdentifier, other.clientIdentifier) &&
+            Utils.enhancedDeepEquals(this.createdAt, other.createdAt) &&
+            Utils.enhancedDeepEquals(this.lastSeenAt, other.lastSeenAt) &&
+            Utils.enhancedDeepEquals(this.provides, other.provides) &&
+            Utils.enhancedDeepEquals(this.ownerId, other.ownerId) &&
+            Utils.enhancedDeepEquals(this.sourceTitle, other.sourceTitle) &&
+            Utils.enhancedDeepEquals(this.publicAddress, other.publicAddress) &&
+            Utils.enhancedDeepEquals(this.accessToken, other.accessToken) &&
+            Utils.enhancedDeepEquals(this.owned, other.owned) &&
+            Utils.enhancedDeepEquals(this.home, other.home) &&
+            Utils.enhancedDeepEquals(this.synced, other.synced) &&
+            Utils.enhancedDeepEquals(this.relay, other.relay) &&
+            Utils.enhancedDeepEquals(this.presence, other.presence) &&
+            Utils.enhancedDeepEquals(this.httpsRequired, other.httpsRequired) &&
+            Utils.enhancedDeepEquals(this.publicAddressMatches, other.publicAddressMatches) &&
+            Utils.enhancedDeepEquals(this.dnsRebindingProtection, other.dnsRebindingProtection) &&
+            Utils.enhancedDeepEquals(this.natLoopbackSupported, other.natLoopbackSupported) &&
+            Utils.enhancedDeepEquals(this.connections, other.connections);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            name,
-            product,
-            productVersion,
-            platform,
-            platformVersion,
-            device,
-            clientIdentifier,
-            createdAt,
-            lastSeenAt,
-            provides,
-            ownerId,
-            sourceTitle,
-            publicAddress,
-            accessToken,
-            owned,
-            home,
-            synced,
-            relay,
-            presence,
-            httpsRequired,
-            publicAddressMatches,
-            dnsRebindingProtection,
-            natLoopbackSupported,
-            connections);
+        return Utils.enhancedHash(
+            name, product, productVersion,
+            platform, platformVersion, device,
+            clientIdentifier, createdAt, lastSeenAt,
+            provides, ownerId, sourceTitle,
+            publicAddress, accessToken, owned,
+            home, synced, relay,
+            presence, httpsRequired, publicAddressMatches,
+            dnsRebindingProtection, natLoopbackSupported, connections);
     }
     
     @Override
@@ -600,60 +618,62 @@ public class PlexDevice {
                 "natLoopbackSupported", natLoopbackSupported,
                 "connections", connections);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String name;
- 
+
         private String product;
- 
+
         private String productVersion;
- 
+
         private Optional<String> platform = Optional.empty();
- 
+
         private Optional<String> platformVersion = Optional.empty();
- 
+
         private Optional<String> device = Optional.empty();
- 
+
         private String clientIdentifier;
- 
+
         private OffsetDateTime createdAt;
- 
+
         private OffsetDateTime lastSeenAt;
- 
+
         private String provides;
- 
+
         private Optional<Long> ownerId = Optional.empty();
- 
+
         private Optional<String> sourceTitle = Optional.empty();
- 
+
         private String publicAddress;
- 
+
         private String accessToken;
- 
+
         private Boolean owned;
- 
+
         private Boolean home;
- 
+
         private Boolean synced;
- 
+
         private Boolean relay;
- 
+
         private Boolean presence;
- 
+
         private Boolean httpsRequired;
- 
+
         private Boolean publicAddressMatches;
- 
+
         private Boolean dnsRebindingProtection;
- 
+
         private Boolean natLoopbackSupported;
- 
+
         private List<Connections> connections;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder name(String name) {
             Utils.checkNotNull(name, "name");
@@ -661,17 +681,20 @@ public class PlexDevice {
             return this;
         }
 
+
         public Builder product(String product) {
             Utils.checkNotNull(product, "product");
             this.product = product;
             return this;
         }
 
+
         public Builder productVersion(String productVersion) {
             Utils.checkNotNull(productVersion, "productVersion");
             this.productVersion = productVersion;
             return this;
         }
+
 
         public Builder platform(String platform) {
             Utils.checkNotNull(platform, "platform");
@@ -685,6 +708,7 @@ public class PlexDevice {
             return this;
         }
 
+
         public Builder platformVersion(String platformVersion) {
             Utils.checkNotNull(platformVersion, "platformVersion");
             this.platformVersion = Optional.ofNullable(platformVersion);
@@ -696,6 +720,7 @@ public class PlexDevice {
             this.platformVersion = platformVersion;
             return this;
         }
+
 
         public Builder device(String device) {
             Utils.checkNotNull(device, "device");
@@ -709,11 +734,13 @@ public class PlexDevice {
             return this;
         }
 
+
         public Builder clientIdentifier(String clientIdentifier) {
             Utils.checkNotNull(clientIdentifier, "clientIdentifier");
             this.clientIdentifier = clientIdentifier;
             return this;
         }
+
 
         public Builder createdAt(OffsetDateTime createdAt) {
             Utils.checkNotNull(createdAt, "createdAt");
@@ -721,17 +748,20 @@ public class PlexDevice {
             return this;
         }
 
+
         public Builder lastSeenAt(OffsetDateTime lastSeenAt) {
             Utils.checkNotNull(lastSeenAt, "lastSeenAt");
             this.lastSeenAt = lastSeenAt;
             return this;
         }
 
+
         public Builder provides(String provides) {
             Utils.checkNotNull(provides, "provides");
             this.provides = provides;
             return this;
         }
+
 
         /**
          * ownerId is null when the device is owned by the token used to send the request
@@ -751,6 +781,7 @@ public class PlexDevice {
             return this;
         }
 
+
         public Builder sourceTitle(String sourceTitle) {
             Utils.checkNotNull(sourceTitle, "sourceTitle");
             this.sourceTitle = Optional.ofNullable(sourceTitle);
@@ -763,11 +794,13 @@ public class PlexDevice {
             return this;
         }
 
+
         public Builder publicAddress(String publicAddress) {
             Utils.checkNotNull(publicAddress, "publicAddress");
             this.publicAddress = publicAddress;
             return this;
         }
+
 
         public Builder accessToken(String accessToken) {
             Utils.checkNotNull(accessToken, "accessToken");
@@ -775,11 +808,13 @@ public class PlexDevice {
             return this;
         }
 
+
         public Builder owned(boolean owned) {
             Utils.checkNotNull(owned, "owned");
             this.owned = owned;
             return this;
         }
+
 
         public Builder home(boolean home) {
             Utils.checkNotNull(home, "home");
@@ -787,11 +822,13 @@ public class PlexDevice {
             return this;
         }
 
+
         public Builder synced(boolean synced) {
             Utils.checkNotNull(synced, "synced");
             this.synced = synced;
             return this;
         }
+
 
         public Builder relay(boolean relay) {
             Utils.checkNotNull(relay, "relay");
@@ -799,11 +836,13 @@ public class PlexDevice {
             return this;
         }
 
+
         public Builder presence(boolean presence) {
             Utils.checkNotNull(presence, "presence");
             this.presence = presence;
             return this;
         }
+
 
         public Builder httpsRequired(boolean httpsRequired) {
             Utils.checkNotNull(httpsRequired, "httpsRequired");
@@ -811,11 +850,13 @@ public class PlexDevice {
             return this;
         }
 
+
         public Builder publicAddressMatches(boolean publicAddressMatches) {
             Utils.checkNotNull(publicAddressMatches, "publicAddressMatches");
             this.publicAddressMatches = publicAddressMatches;
             return this;
         }
+
 
         public Builder dnsRebindingProtection(boolean dnsRebindingProtection) {
             Utils.checkNotNull(dnsRebindingProtection, "dnsRebindingProtection");
@@ -823,44 +864,32 @@ public class PlexDevice {
             return this;
         }
 
+
         public Builder natLoopbackSupported(boolean natLoopbackSupported) {
             Utils.checkNotNull(natLoopbackSupported, "natLoopbackSupported");
             this.natLoopbackSupported = natLoopbackSupported;
             return this;
         }
 
+
         public Builder connections(List<Connections> connections) {
             Utils.checkNotNull(connections, "connections");
             this.connections = connections;
             return this;
         }
-        
+
         public PlexDevice build() {
+
             return new PlexDevice(
-                name,
-                product,
-                productVersion,
-                platform,
-                platformVersion,
-                device,
-                clientIdentifier,
-                createdAt,
-                lastSeenAt,
-                provides,
-                ownerId,
-                sourceTitle,
-                publicAddress,
-                accessToken,
-                owned,
-                home,
-                synced,
-                relay,
-                presence,
-                httpsRequired,
-                publicAddressMatches,
-                dnsRebindingProtection,
-                natLoopbackSupported,
-                connections);
+                name, product, productVersion,
+                platform, platformVersion, device,
+                clientIdentifier, createdAt, lastSeenAt,
+                provides, ownerId, sourceTitle,
+                publicAddress, accessToken, owned,
+                home, synced, relay,
+                presence, httpsRequired, publicAddressMatches,
+                dnsRebindingProtection, natLoopbackSupported, connections);
         }
+
     }
 }

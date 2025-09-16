@@ -3,7 +3,11 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
 import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.PerformSearch;
 import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
@@ -19,10 +23,10 @@ public class PerformSearchRequestBuilder {
                             "limit",
                             "3",
                             new TypeReference<Optional<Double>>() {});
-    private final SDKMethodInterfaces.MethodCallPerformSearch sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public PerformSearchRequestBuilder(SDKMethodInterfaces.MethodCallPerformSearch sdk) {
-        this.sdk = sdk;
+    public PerformSearchRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public PerformSearchRequestBuilder query(String query) {
@@ -55,14 +59,26 @@ public class PerformSearchRequestBuilder {
         return this;
     }
 
-    public PerformSearchResponse call() throws Exception {
+
+    private PerformSearchRequest buildRequest() {
         if (limit == null) {
             limit = _SINGLETON_VALUE_Limit.value();
         }
-        return sdk.performSearch(
-            query,
+
+        PerformSearchRequest request = new PerformSearchRequest(query,
             sectionId,
             limit);
+
+        return request;
+    }
+
+    public PerformSearchResponse call() throws Exception {
+        
+        RequestOperation<PerformSearchRequest, PerformSearchResponse> operation
+              = new PerformSearch.Sync(sdkConfiguration);
+        PerformSearchRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 
     private static final LazySingletonValue<Optional<Double>> _SINGLETON_VALUE_Limit =

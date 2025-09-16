@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetTransientToken;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 
@@ -10,10 +14,10 @@ public class GetTransientTokenRequestBuilder {
 
     private GetTransientTokenQueryParamType type;
     private Scope scope;
-    private final SDKMethodInterfaces.MethodCallGetTransientToken sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetTransientTokenRequestBuilder(SDKMethodInterfaces.MethodCallGetTransientToken sdk) {
-        this.sdk = sdk;
+    public GetTransientTokenRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetTransientTokenRequestBuilder type(GetTransientTokenQueryParamType type) {
@@ -28,10 +32,21 @@ public class GetTransientTokenRequestBuilder {
         return this;
     }
 
-    public GetTransientTokenResponse call() throws Exception {
 
-        return sdk.getTransientToken(
-            type,
+    private GetTransientTokenRequest buildRequest() {
+
+        GetTransientTokenRequest request = new GetTransientTokenRequest(type,
             scope);
+
+        return request;
+    }
+
+    public GetTransientTokenResponse call() throws Exception {
+        
+        RequestOperation<GetTransientTokenRequest, GetTransientTokenResponse> operation
+              = new GetTransientToken.Sync(sdkConfiguration);
+        GetTransientTokenRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

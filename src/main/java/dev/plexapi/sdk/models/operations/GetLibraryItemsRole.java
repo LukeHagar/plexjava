@@ -12,11 +12,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetLibraryItemsRole {
 
+public class GetLibraryItemsRole {
     /**
      * The unique identifier for the role.
      * NOTE: This is different for each Plex server and is not globally unique.
@@ -63,7 +62,8 @@ public class GetLibraryItemsRole {
     public GetLibraryItemsRole(
             int id,
             String tag) {
-        this(id, tag, Optional.empty(), Optional.empty());
+        this(id, tag, Optional.empty(),
+            Optional.empty());
     }
 
     /**
@@ -99,9 +99,10 @@ public class GetLibraryItemsRole {
         return thumb;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The unique identifier for the role.
@@ -131,6 +132,7 @@ public class GetLibraryItemsRole {
         return this;
     }
 
+
     /**
      * The role played by the actor in the media item.
      */
@@ -149,6 +151,7 @@ public class GetLibraryItemsRole {
         return this;
     }
 
+
     /**
      * The absolute URL of the thumbnail image for the actor.
      */
@@ -158,7 +161,6 @@ public class GetLibraryItemsRole {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -169,18 +171,16 @@ public class GetLibraryItemsRole {
         }
         GetLibraryItemsRole other = (GetLibraryItemsRole) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.tag, other.tag) &&
-            Objects.deepEquals(this.role, other.role) &&
-            Objects.deepEquals(this.thumb, other.thumb);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.tag, other.tag) &&
+            Utils.enhancedDeepEquals(this.role, other.role) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            tag,
-            role,
+        return Utils.enhancedHash(
+            id, tag, role,
             thumb);
     }
     
@@ -192,20 +192,22 @@ public class GetLibraryItemsRole {
                 "role", role,
                 "thumb", thumb);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer id;
- 
+
         private String tag;
- 
+
         private Optional<String> role = Optional.empty();
- 
+
         private Optional<String> thumb = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The unique identifier for the role.
@@ -217,6 +219,7 @@ public class GetLibraryItemsRole {
             return this;
         }
 
+
         /**
          * The display tag for the actor (typically the actor's name).
          */
@@ -225,6 +228,7 @@ public class GetLibraryItemsRole {
             this.tag = tag;
             return this;
         }
+
 
         /**
          * The role played by the actor in the media item.
@@ -244,6 +248,7 @@ public class GetLibraryItemsRole {
             return this;
         }
 
+
         /**
          * The absolute URL of the thumbnail image for the actor.
          */
@@ -261,13 +266,13 @@ public class GetLibraryItemsRole {
             this.thumb = thumb;
             return this;
         }
-        
+
         public GetLibraryItemsRole build() {
+
             return new GetLibraryItemsRole(
-                id,
-                tag,
-                role,
+                id, tag, role,
                 thumb);
         }
+
     }
 }

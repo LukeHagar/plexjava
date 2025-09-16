@@ -20,6 +20,7 @@ This will mark the provided media key as Played.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="markPlayed" method="get" path="/:/scrobble" -->
 ```java
 package hello.world;
 
@@ -34,11 +35,11 @@ public class Application {
     public static void main(String[] args) throws MarkPlayedBadRequest, MarkPlayedUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         MarkPlayedResponse res = sdk.media().markPlayed()
-                .key(59398)
+                .key(59398d)
                 .call();
 
         // handle response
@@ -70,6 +71,7 @@ This will mark the provided media key as Unplayed.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="markUnplayed" method="get" path="/:/unscrobble" -->
 ```java
 package hello.world;
 
@@ -84,11 +86,11 @@ public class Application {
     public static void main(String[] args) throws MarkUnplayedBadRequest, MarkUnplayedUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         MarkUnplayedResponse res = sdk.media().markUnplayed()
-                .key(59398)
+                .key(59398d)
                 .call();
 
         // handle response
@@ -121,6 +123,7 @@ This API command can be used to update the play progress of a media item.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="updatePlayProgress" method="post" path="/:/progress" -->
 ```java
 package hello.world;
 
@@ -135,12 +138,12 @@ public class Application {
     public static void main(String[] args) throws UpdatePlayProgressBadRequest, UpdatePlayProgressUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         UpdatePlayProgressResponse res = sdk.media().updatePlayProgress()
                 .key("<key>")
-                .time(90000)
+                .time(90000d)
                 .state("played")
                 .call();
 
@@ -175,6 +178,7 @@ Gets the banner image of the media item
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-banner-image" method="get" path="/library/metadata/{ratingKey}/banner" -->
 ```java
 package hello.world;
 
@@ -190,7 +194,7 @@ public class Application {
     public static void main(String[] args) throws GetBannerImageBadRequest, GetBannerImageUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetBannerImageRequest req = GetBannerImageRequest.builder()
@@ -237,6 +241,7 @@ Gets the thumbnail image of the media item
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-thumb-image" method="get" path="/library/metadata/{ratingKey}/thumb" -->
 ```java
 package hello.world;
 
@@ -252,7 +257,7 @@ public class Application {
     public static void main(String[] args) throws GetThumbImageBadRequest, GetThumbImageUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetThumbImageRequest req = GetThumbImageRequest.builder()

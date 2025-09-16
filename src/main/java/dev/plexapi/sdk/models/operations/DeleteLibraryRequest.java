@@ -10,10 +10,9 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class DeleteLibraryRequest {
-
     /**
      * The unique key of the Plex library. 
      * Note: This is unique in the context of the Plex server.
@@ -37,9 +36,10 @@ public class DeleteLibraryRequest {
         return sectionKey;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The unique key of the Plex library. 
@@ -51,7 +51,6 @@ public class DeleteLibraryRequest {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -62,12 +61,12 @@ public class DeleteLibraryRequest {
         }
         DeleteLibraryRequest other = (DeleteLibraryRequest) o;
         return 
-            Objects.deepEquals(this.sectionKey, other.sectionKey);
+            Utils.enhancedDeepEquals(this.sectionKey, other.sectionKey);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             sectionKey);
     }
     
@@ -76,14 +75,16 @@ public class DeleteLibraryRequest {
         return Utils.toString(DeleteLibraryRequest.class,
                 "sectionKey", sectionKey);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer sectionKey;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The unique key of the Plex library. 
@@ -94,10 +95,12 @@ public class DeleteLibraryRequest {
             this.sectionKey = sectionKey;
             return this;
         }
-        
+
         public DeleteLibraryRequest build() {
+
             return new DeleteLibraryRequest(
                 sectionKey);
         }
+
     }
 }

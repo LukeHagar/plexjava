@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetMediaArts;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.Long;
@@ -10,10 +14,10 @@ import java.lang.Long;
 public class GetMediaArtsRequestBuilder {
 
     private Long ratingKey;
-    private final SDKMethodInterfaces.MethodCallGetMediaArts sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetMediaArtsRequestBuilder(SDKMethodInterfaces.MethodCallGetMediaArts sdk) {
-        this.sdk = sdk;
+    public GetMediaArtsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetMediaArtsRequestBuilder ratingKey(long ratingKey) {
@@ -22,9 +26,20 @@ public class GetMediaArtsRequestBuilder {
         return this;
     }
 
-    public GetMediaArtsResponse call() throws Exception {
 
-        return sdk.getMediaArts(
-            ratingKey);
+    private GetMediaArtsRequest buildRequest() {
+
+        GetMediaArtsRequest request = new GetMediaArtsRequest(ratingKey);
+
+        return request;
+    }
+
+    public GetMediaArtsResponse call() throws Exception {
+        
+        RequestOperation<GetMediaArtsRequest, GetMediaArtsResponse> operation
+              = new GetMediaArts.Sync(sdkConfiguration);
+        GetMediaArtsRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

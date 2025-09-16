@@ -12,8 +12,8 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class Directory {
 
@@ -21,9 +21,11 @@ public class Directory {
     @JsonProperty("count")
     private Optional<Double> count;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
@@ -61,15 +63,17 @@ public class Directory {
         return title;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public Directory withCount(double count) {
         Utils.checkNotNull(count, "count");
         this.count = Optional.ofNullable(count);
         return this;
     }
+
 
     public Directory withCount(Optional<Double> count) {
         Utils.checkNotNull(count, "count");
@@ -83,6 +87,7 @@ public class Directory {
         return this;
     }
 
+
     public Directory withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
@@ -95,13 +100,13 @@ public class Directory {
         return this;
     }
 
+
     public Directory withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -112,17 +117,15 @@ public class Directory {
         }
         Directory other = (Directory) o;
         return 
-            Objects.deepEquals(this.count, other.count) &&
-            Objects.deepEquals(this.key, other.key) &&
-            Objects.deepEquals(this.title, other.title);
+            Utils.enhancedDeepEquals(this.count, other.count) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.title, other.title);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            count,
-            key,
-            title);
+        return Utils.enhancedHash(
+            count, key, title);
     }
     
     @Override
@@ -132,18 +135,20 @@ public class Directory {
                 "key", key,
                 "title", title);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Double> count = Optional.empty();
- 
+
         private Optional<String> key = Optional.empty();
- 
+
         private Optional<String> title = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder count(double count) {
             Utils.checkNotNull(count, "count");
@@ -157,6 +162,7 @@ public class Directory {
             return this;
         }
 
+
         public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = Optional.ofNullable(key);
@@ -169,6 +175,7 @@ public class Directory {
             return this;
         }
 
+
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
@@ -180,12 +187,12 @@ public class Directory {
             this.title = title;
             return this;
         }
-        
+
         public Directory build() {
+
             return new Directory(
-                count,
-                key,
-                title);
+                count, key, title);
         }
+
     }
 }

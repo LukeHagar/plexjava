@@ -15,7 +15,6 @@ import java.lang.Boolean;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.Objects;
 
 /**
  * GetMediaMetaDataOptimizedForStreaming
@@ -73,12 +72,12 @@ public class GetMediaMetaDataOptimizedForStreaming {
             return false;
         }
         GetMediaMetaDataOptimizedForStreaming other = (GetMediaMetaDataOptimizedForStreaming) o;
-        return Objects.deepEquals(this.value.value(), other.value.value()); 
+        return Utils.enhancedDeepEquals(this.value.value(), other.value.value()); 
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(value.value());
+        return Utils.enhancedHash(value.value());
     }
     
     @SuppressWarnings("serial")

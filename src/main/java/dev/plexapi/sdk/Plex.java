@@ -3,38 +3,21 @@
  */
 package dev.plexapi.sdk;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import dev.plexapi.sdk.models.errors.GetCompanionsDataBadRequest;
-import dev.plexapi.sdk.models.errors.GetCompanionsDataUnauthorized;
-import dev.plexapi.sdk.models.errors.GetGeoDataBadRequest;
-import dev.plexapi.sdk.models.errors.GetGeoDataUnauthorized;
-import dev.plexapi.sdk.models.errors.GetHomeDataBadRequest;
-import dev.plexapi.sdk.models.errors.GetHomeDataUnauthorized;
-import dev.plexapi.sdk.models.errors.GetPinBadRequest;
-import dev.plexapi.sdk.models.errors.GetServerResourcesBadRequest;
-import dev.plexapi.sdk.models.errors.GetServerResourcesUnauthorized;
-import dev.plexapi.sdk.models.errors.GetTokenByPinIdBadRequest;
-import dev.plexapi.sdk.models.errors.GetTokenByPinIdResponseBody;
-import dev.plexapi.sdk.models.errors.GetUserFriendsBadRequest;
-import dev.plexapi.sdk.models.errors.GetUserFriendsUnauthorized;
-import dev.plexapi.sdk.models.errors.SDKError;
-import dev.plexapi.sdk.models.operations.Friend;
+import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
 import dev.plexapi.sdk.models.operations.GetCompanionsDataRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetCompanionsDataResponse;
-import dev.plexapi.sdk.models.operations.GetGeoDataGeoData;
 import dev.plexapi.sdk.models.operations.GetGeoDataRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetGeoDataResponse;
 import dev.plexapi.sdk.models.operations.GetHomeDataRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetHomeDataResponse;
-import dev.plexapi.sdk.models.operations.GetHomeDataResponseBody;
-import dev.plexapi.sdk.models.operations.GetPinAuthPinContainer;
 import dev.plexapi.sdk.models.operations.GetPinRequest;
 import dev.plexapi.sdk.models.operations.GetPinRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetPinResponse;
 import dev.plexapi.sdk.models.operations.GetServerResourcesRequest;
 import dev.plexapi.sdk.models.operations.GetServerResourcesRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetServerResourcesResponse;
-import dev.plexapi.sdk.models.operations.GetTokenByPinIdAuthPinContainer;
 import dev.plexapi.sdk.models.operations.GetTokenByPinIdRequest;
 import dev.plexapi.sdk.models.operations.GetTokenByPinIdRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetTokenByPinIdResponse;
@@ -43,84 +26,37 @@ import dev.plexapi.sdk.models.operations.GetUserFriendsResponse;
 import dev.plexapi.sdk.models.operations.IncludeHttps;
 import dev.plexapi.sdk.models.operations.IncludeIPv6;
 import dev.plexapi.sdk.models.operations.IncludeRelay;
-import dev.plexapi.sdk.models.operations.PlexDevice;
-import dev.plexapi.sdk.models.operations.ResponseBody;
-import dev.plexapi.sdk.models.operations.SDKMethodInterfaces.*;
-import dev.plexapi.sdk.utils.HTTPClient;
-import dev.plexapi.sdk.utils.HTTPRequest;
-import dev.plexapi.sdk.utils.Hook.AfterErrorContextImpl;
-import dev.plexapi.sdk.utils.Hook.AfterSuccessContextImpl;
-import dev.plexapi.sdk.utils.Hook.BeforeRequestContextImpl;
-import dev.plexapi.sdk.utils.Utils;
-import java.io.InputStream;
+import dev.plexapi.sdk.operations.GetCompanionsData;
+import dev.plexapi.sdk.operations.GetGeoData;
+import dev.plexapi.sdk.operations.GetHomeData;
+import dev.plexapi.sdk.operations.GetPin;
+import dev.plexapi.sdk.operations.GetServerResources;
+import dev.plexapi.sdk.operations.GetTokenByPinId;
+import dev.plexapi.sdk.operations.GetUserFriends;
 import java.lang.Exception;
 import java.lang.String;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Optional;
 
 /**
  * API Calls that perform operations directly against https://Plex.tv
  */
-public class Plex implements
-            MethodCallGetCompanionsData,
-            MethodCallGetUserFriends,
-            MethodCallGetGeoData,
-            MethodCallGetHomeData,
-            MethodCallGetServerResources,
-            MethodCallGetPin,
-            MethodCallGetTokenByPinId {
-    
-    /**
-     * GET_COMPANIONS_DATA_SERVERS contains the list of server urls available to the SDK.
-     */
-    public static final String[] GET_COMPANIONS_DATA_SERVERS = {
-        "https://plex.tv/api/v2",
-    };
-    
-    /**
-     * GET_USER_FRIENDS_SERVERS contains the list of server urls available to the SDK.
-     */
-    public static final String[] GET_USER_FRIENDS_SERVERS = {
-        "https://plex.tv/api/v2",
-    };
-    
-    /**
-     * GET_GEO_DATA_SERVERS contains the list of server urls available to the SDK.
-     */
-    public static final String[] GET_GEO_DATA_SERVERS = {
-        "https://plex.tv/api/v2",
-    };
-    
-    /**
-     * GET_SERVER_RESOURCES_SERVERS contains the list of server urls available to the SDK.
-     */
-    public static final String[] GET_SERVER_RESOURCES_SERVERS = {
-        "https://plex.tv/api/v2",
-    };
-    
-    /**
-     * GET_PIN_SERVERS contains the list of server urls available to the SDK.
-     */
-    public static final String[] GET_PIN_SERVERS = {
-        "https://plex.tv/api/v2",
-    };
-    
-    /**
-     * GET_TOKEN_BY_PIN_ID_SERVERS contains the list of server urls available to the SDK.
-     */
-    public static final String[] GET_TOKEN_BY_PIN_ID_SERVERS = {
-        "https://plex.tv/api/v2",
-    };
-
+public class Plex {
     private final SDKConfiguration sdkConfiguration;
+    private final AsyncPlex asyncSDK;
 
     Plex(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
+        this.asyncSDK = new AsyncPlex(this, sdkConfiguration);
     }
 
+    /**
+     * Switches to the async SDK.
+     * 
+     * @return The async SDK
+     */
+    public AsyncPlex async() {
+        return asyncSDK;
+    }
 
     /**
      * Get Companions Data
@@ -130,7 +66,7 @@ public class Plex implements
      * @return The call builder
      */
     public GetCompanionsDataRequestBuilder getCompanionsData() {
-        return new GetCompanionsDataRequestBuilder(this);
+        return new GetCompanionsDataRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -144,7 +80,7 @@ public class Plex implements
     public GetCompanionsDataResponse getCompanionsDataDirect() throws Exception {
         return getCompanionsData(Optional.empty());
     }
-    
+
     /**
      * Get Companions Data
      * 
@@ -154,158 +90,11 @@ public class Plex implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetCompanionsDataResponse getCompanionsData(
-            Optional<String> serverURL) throws Exception {
-        final String _baseUrl;
-        if (serverURL.isPresent() && !serverURL.get().isBlank()) {
-            _baseUrl = serverURL.get();
-        } else {
-            _baseUrl = Utils.templateUrl(GET_COMPANIONS_DATA_SERVERS[0], new HashMap<String, String>());
-        }
-        String _url = Utils.generateURL(
-                _baseUrl,
-                "/companions");
-        
-        HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "getCompanionsData", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getCompanionsData",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getCompanionsData",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getCompanionsData",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        GetCompanionsDataResponse.Builder _resBuilder = 
-            GetCompanionsDataResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        GetCompanionsDataResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                List<ResponseBody> _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<List<ResponseBody>>() {});
-                _res.withResponseBodies(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetCompanionsDataBadRequest _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetCompanionsDataBadRequest>() {});
-                    _out.withRawResponse(Optional.ofNullable(_httpRes));
-                
-                throw _out;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetCompanionsDataUnauthorized _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetCompanionsDataUnauthorized>() {});
-                    _out.withRawResponse(Optional.ofNullable(_httpRes));
-                
-                throw _out;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new SDKError(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+    public GetCompanionsDataResponse getCompanionsData(Optional<String> serverURL) throws Exception {
+        RequestlessOperation<GetCompanionsDataResponse> operation
+            = new GetCompanionsData.Sync(sdkConfiguration, serverURL);
+        return operation.handleResponse(operation.doRequest());
     }
-
-
 
     /**
      * Get list of friends of the user logged in
@@ -315,7 +104,7 @@ public class Plex implements
      * @return The call builder
      */
     public GetUserFriendsRequestBuilder getUserFriends() {
-        return new GetUserFriendsRequestBuilder(this);
+        return new GetUserFriendsRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -329,7 +118,7 @@ public class Plex implements
     public GetUserFriendsResponse getUserFriendsDirect() throws Exception {
         return getUserFriends(Optional.empty());
     }
-    
+
     /**
      * Get list of friends of the user logged in
      * 
@@ -339,158 +128,11 @@ public class Plex implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetUserFriendsResponse getUserFriends(
-            Optional<String> serverURL) throws Exception {
-        final String _baseUrl;
-        if (serverURL.isPresent() && !serverURL.get().isBlank()) {
-            _baseUrl = serverURL.get();
-        } else {
-            _baseUrl = Utils.templateUrl(GET_USER_FRIENDS_SERVERS[0], new HashMap<String, String>());
-        }
-        String _url = Utils.generateURL(
-                _baseUrl,
-                "/friends");
-        
-        HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "getUserFriends", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getUserFriends",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getUserFriends",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getUserFriends",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        GetUserFriendsResponse.Builder _resBuilder = 
-            GetUserFriendsResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        GetUserFriendsResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                List<Friend> _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<List<Friend>>() {});
-                _res.withFriends(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetUserFriendsBadRequest _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetUserFriendsBadRequest>() {});
-                    _out.withRawResponse(Optional.ofNullable(_httpRes));
-                
-                throw _out;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetUserFriendsUnauthorized _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetUserFriendsUnauthorized>() {});
-                    _out.withRawResponse(Optional.ofNullable(_httpRes));
-                
-                throw _out;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new SDKError(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+    public GetUserFriendsResponse getUserFriends(Optional<String> serverURL) throws Exception {
+        RequestlessOperation<GetUserFriendsResponse> operation
+            = new GetUserFriends.Sync(sdkConfiguration, serverURL);
+        return operation.handleResponse(operation.doRequest());
     }
-
-
 
     /**
      * Get Geo Data
@@ -500,7 +142,7 @@ public class Plex implements
      * @return The call builder
      */
     public GetGeoDataRequestBuilder getGeoData() {
-        return new GetGeoDataRequestBuilder(this);
+        return new GetGeoDataRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -514,7 +156,7 @@ public class Plex implements
     public GetGeoDataResponse getGeoDataDirect() throws Exception {
         return getGeoData(Optional.empty());
     }
-    
+
     /**
      * Get Geo Data
      * 
@@ -524,155 +166,11 @@ public class Plex implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetGeoDataResponse getGeoData(
-            Optional<String> serverURL) throws Exception {
-        final String _baseUrl;
-        if (serverURL.isPresent() && !serverURL.get().isBlank()) {
-            _baseUrl = serverURL.get();
-        } else {
-            _baseUrl = Utils.templateUrl(GET_GEO_DATA_SERVERS[0], new HashMap<String, String>());
-        }
-        String _url = Utils.generateURL(
-                _baseUrl,
-                "/geoip");
-        
-        HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        Optional<SecuritySource> _hookSecuritySource = Optional.empty();
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "getGeoData", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getGeoData",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getGeoData",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getGeoData",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        GetGeoDataResponse.Builder _resBuilder = 
-            GetGeoDataResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        GetGeoDataResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetGeoDataGeoData _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetGeoDataGeoData>() {});
-                _res.withGeoData(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetGeoDataBadRequest _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetGeoDataBadRequest>() {});
-                    _out.withRawResponse(Optional.ofNullable(_httpRes));
-                
-                throw _out;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetGeoDataUnauthorized _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetGeoDataUnauthorized>() {});
-                    _out.withRawResponse(Optional.ofNullable(_httpRes));
-                
-                throw _out;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new SDKError(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+    public GetGeoDataResponse getGeoData(Optional<String> serverURL) throws Exception {
+        RequestlessOperation<GetGeoDataResponse> operation
+            = new GetGeoData.Sync(sdkConfiguration, serverURL);
+        return operation.handleResponse(operation.doRequest());
     }
-
-
 
     /**
      * Get Plex Home Data
@@ -682,7 +180,7 @@ public class Plex implements
      * @return The call builder
      */
     public GetHomeDataRequestBuilder getHomeData() {
-        return new GetHomeDataRequestBuilder(this);
+        return new GetHomeDataRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -694,152 +192,10 @@ public class Plex implements
      * @throws Exception if the API call fails
      */
     public GetHomeDataResponse getHomeDataDirect() throws Exception {
-        String _baseUrl = Utils.templateUrl(
-                this.sdkConfiguration.serverUrl(), this.sdkConfiguration.getServerVariableDefaults());
-        String _url = Utils.generateURL(
-                _baseUrl,
-                "/home");
-        
-        HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "getHomeData", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getHomeData",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getHomeData",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getHomeData",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        GetHomeDataResponse.Builder _resBuilder = 
-            GetHomeDataResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        GetHomeDataResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetHomeDataResponseBody _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetHomeDataResponseBody>() {});
-                _res.withObject(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetHomeDataBadRequest _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetHomeDataBadRequest>() {});
-                    _out.withRawResponse(Optional.ofNullable(_httpRes));
-                
-                throw _out;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetHomeDataUnauthorized _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetHomeDataUnauthorized>() {});
-                    _out.withRawResponse(Optional.ofNullable(_httpRes));
-                
-                throw _out;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new SDKError(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestlessOperation<GetHomeDataResponse> operation
+            = new GetHomeData.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest());
     }
-
-
 
     /**
      * Get Server Resources
@@ -849,7 +205,7 @@ public class Plex implements
      * @return The call builder
      */
     public GetServerResourcesRequestBuilder getServerResources() {
-        return new GetServerResourcesRequestBuilder(this);
+        return new GetServerResourcesRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -861,11 +217,11 @@ public class Plex implements
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetServerResourcesResponse getServerResources(
-            String clientID) throws Exception {
-        return getServerResources(Optional.empty(), Optional.empty(), Optional.empty(), clientID, Optional.empty());
+    public GetServerResourcesResponse getServerResources(String clientID) throws Exception {
+        return getServerResources(Optional.empty(), Optional.empty(), Optional.empty(),
+            clientID, Optional.empty());
     }
-    
+
     /**
      * Get Server Resources
      * 
@@ -882,10 +238,8 @@ public class Plex implements
      * @throws Exception if the API call fails
      */
     public GetServerResourcesResponse getServerResources(
-            Optional<? extends IncludeHttps> includeHttps,
-            Optional<? extends IncludeRelay> includeRelay,
-            Optional<? extends IncludeIPv6> includeIPv6,
-            String clientID,
+            Optional<? extends IncludeHttps> includeHttps, Optional<? extends IncludeRelay> includeRelay,
+            Optional<? extends IncludeIPv6> includeIPv6, String clientID,
             Optional<String> serverURL) throws Exception {
         GetServerResourcesRequest request =
             GetServerResourcesRequest
@@ -895,163 +249,10 @@ public class Plex implements
                 .includeIPv6(includeIPv6)
                 .clientID(clientID)
                 .build();
-        
-        final String _baseUrl;
-        if (serverURL.isPresent() && !serverURL.get().isBlank()) {
-            _baseUrl = serverURL.get();
-        } else {
-            _baseUrl = Utils.templateUrl(GET_SERVER_RESOURCES_SERVERS[0], new HashMap<String, String>());
-        }
-        String _url = Utils.generateURL(
-                _baseUrl,
-                "/resources");
-        
-        HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-
-        _req.addQueryParams(Utils.getQueryParams(
-                GetServerResourcesRequest.class,
-                request, 
-                null));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
-        
-        Optional<SecuritySource> _hookSecuritySource = Optional.of(this.sdkConfiguration.securitySource());
-        Utils.configureSecurity(_req,  
-                this.sdkConfiguration.securitySource().getSecurity());
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "get-server-resources", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "get-server-resources",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "get-server-resources",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "get-server-resources",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        GetServerResourcesResponse.Builder _resBuilder = 
-            GetServerResourcesResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        GetServerResourcesResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                List<PlexDevice> _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<List<PlexDevice>>() {});
-                _res.withPlexDevices(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetServerResourcesBadRequest _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetServerResourcesBadRequest>() {});
-                    _out.withRawResponse(Optional.ofNullable(_httpRes));
-                
-                throw _out;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "401")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetServerResourcesUnauthorized _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetServerResourcesUnauthorized>() {});
-                    _out.withRawResponse(Optional.ofNullable(_httpRes));
-                
-                throw _out;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new SDKError(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+        RequestOperation<GetServerResourcesRequest, GetServerResourcesResponse> operation
+              = new GetServerResources.Sync(sdkConfiguration, serverURL);
+        return operation.handleResponse(operation.doRequest(request));
     }
-
-
 
     /**
      * Get a Pin
@@ -1061,7 +262,7 @@ public class Plex implements
      * @return The call builder
      */
     public GetPinRequestBuilder getPin() {
-        return new GetPinRequestBuilder(this);
+        return new GetPinRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -1069,165 +270,29 @@ public class Plex implements
      * 
      * <p>Retrieve a Pin ID from Plex.tv to use for authentication flows
      * 
-     * @param request The request object containing all of the parameters for the API call.
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetPinResponse getPin(
-            GetPinRequest request) throws Exception {
+    public GetPinResponse getPin(GetPinRequest request) throws Exception {
         return getPin(request, Optional.empty());
     }
-    
+
     /**
      * Get a Pin
      * 
      * <p>Retrieve a Pin ID from Plex.tv to use for authentication flows
      * 
-     * @param request The request object containing all of the parameters for the API call.
+     * @param request The request object containing all the parameters for the API call.
      * @param serverURL Overrides the server URL.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetPinResponse getPin(
-            GetPinRequest request,
-            Optional<String> serverURL) throws Exception {
-        final String _baseUrl;
-        if (serverURL.isPresent() && !serverURL.get().isBlank()) {
-            _baseUrl = serverURL.get();
-        } else {
-            _baseUrl = Utils.templateUrl(GET_PIN_SERVERS[0], new HashMap<String, String>());
-        }
-        String _url = Utils.generateURL(
-                _baseUrl,
-                "/pins");
-        
-        HTTPRequest _req = new HTTPRequest(_url, "POST");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-
-        _req.addQueryParams(Utils.getQueryParams(
-                GetPinRequest.class,
-                request, 
-                null));
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
-        Optional<SecuritySource> _hookSecuritySource = Optional.empty();
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "getPin", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "4XX", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getPin",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getPin",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getPin",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        GetPinResponse.Builder _resBuilder = 
-            GetPinResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        GetPinResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "201")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetPinAuthPinContainer _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetPinAuthPinContainer>() {});
-                _res.withAuthPinContainer(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetPinBadRequest _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetPinBadRequest>() {});
-                    _out.withRawResponse(Optional.ofNullable(_httpRes));
-                
-                throw _out;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new SDKError(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+    public GetPinResponse getPin(GetPinRequest request, Optional<String> serverURL) throws Exception {
+        RequestOperation<GetPinRequest, GetPinResponse> operation
+              = new GetPin.Sync(sdkConfiguration, serverURL);
+        return operation.handleResponse(operation.doRequest(request));
     }
-
-
 
     /**
      * Get Access Token by PinId
@@ -1237,7 +302,7 @@ public class Plex implements
      * @return The call builder
      */
     public GetTokenByPinIdRequestBuilder getTokenByPinId() {
-        return new GetTokenByPinIdRequestBuilder(this);
+        return new GetTokenByPinIdRequestBuilder(sdkConfiguration);
     }
 
     /**
@@ -1245,175 +310,28 @@ public class Plex implements
      * 
      * <p>Retrieve an Access Token from Plex.tv after the Pin has been authenticated
      * 
-     * @param request The request object containing all of the parameters for the API call.
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetTokenByPinIdResponse getTokenByPinId(
-            GetTokenByPinIdRequest request) throws Exception {
+    public GetTokenByPinIdResponse getTokenByPinId(GetTokenByPinIdRequest request) throws Exception {
         return getTokenByPinId(request, Optional.empty());
     }
-    
+
     /**
      * Get Access Token by PinId
      * 
      * <p>Retrieve an Access Token from Plex.tv after the Pin has been authenticated
      * 
-     * @param request The request object containing all of the parameters for the API call.
+     * @param request The request object containing all the parameters for the API call.
      * @param serverURL Overrides the server URL.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetTokenByPinIdResponse getTokenByPinId(
-            GetTokenByPinIdRequest request,
-            Optional<String> serverURL) throws Exception {
-        final String _baseUrl;
-        if (serverURL.isPresent() && !serverURL.get().isBlank()) {
-            _baseUrl = serverURL.get();
-        } else {
-            _baseUrl = Utils.templateUrl(GET_TOKEN_BY_PIN_ID_SERVERS[0], new HashMap<String, String>());
-        }
-        String _url = Utils.generateURL(
-                GetTokenByPinIdRequest.class,
-                _baseUrl,
-                "/pins/{pinID}",
-                request, null);
-        
-        HTTPRequest _req = new HTTPRequest(_url, "GET");
-        _req.addHeader("Accept", "application/json")
-            .addHeader("user-agent", 
-                SDKConfiguration.USER_AGENT);
-        _req.addHeaders(Utils.getHeadersFromMetadata(request, null));
-        Optional<SecuritySource> _hookSecuritySource = Optional.empty();
-        HTTPClient _client = this.sdkConfiguration.client();
-        HttpRequest _r = 
-            sdkConfiguration.hooks()
-               .beforeRequest(
-                  new BeforeRequestContextImpl(
-                      this.sdkConfiguration,
-                      _baseUrl,
-                      "getTokenByPinId", 
-                      Optional.of(List.of()), 
-                      _hookSecuritySource),
-                  _req.build());
-        HttpResponse<InputStream> _httpRes;
-        try {
-            _httpRes = _client.send(_r);
-            if (Utils.statusCodeMatches(_httpRes.statusCode(), "400", "404", "4XX", "5XX")) {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getTokenByPinId",
-                            Optional.of(List.of()),
-                            _hookSecuritySource),
-                        Optional.of(_httpRes),
-                        Optional.empty());
-            } else {
-                _httpRes = sdkConfiguration.hooks()
-                    .afterSuccess(
-                        new AfterSuccessContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getTokenByPinId",
-                            Optional.of(List.of()), 
-                            _hookSecuritySource),
-                         _httpRes);
-            }
-        } catch (Exception _e) {
-            _httpRes = sdkConfiguration.hooks()
-                    .afterError(
-                        new AfterErrorContextImpl(
-                            this.sdkConfiguration,
-                            _baseUrl,
-                            "getTokenByPinId",
-                            Optional.of(List.of()),
-                            _hookSecuritySource), 
-                        Optional.empty(),
-                        Optional.of(_e));
-        }
-        String _contentType = _httpRes
-            .headers()
-            .firstValue("Content-Type")
-            .orElse("application/octet-stream");
-        GetTokenByPinIdResponse.Builder _resBuilder = 
-            GetTokenByPinIdResponse
-                .builder()
-                .contentType(_contentType)
-                .statusCode(_httpRes.statusCode())
-                .rawResponse(_httpRes);
-
-        GetTokenByPinIdResponse _res = _resBuilder.build();
-        
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "200")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetTokenByPinIdAuthPinContainer _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetTokenByPinIdAuthPinContainer>() {});
-                _res.withAuthPinContainer(Optional.ofNullable(_out));
-                return _res;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "400")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetTokenByPinIdBadRequest _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetTokenByPinIdBadRequest>() {});
-                    _out.withRawResponse(Optional.ofNullable(_httpRes));
-                
-                throw _out;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "404")) {
-            if (Utils.contentTypeMatches(_contentType, "application/json")) {
-                GetTokenByPinIdResponseBody _out = Utils.mapper().readValue(
-                    Utils.toUtf8AndClose(_httpRes.body()),
-                    new TypeReference<GetTokenByPinIdResponseBody>() {});
-                    _out.withRawResponse(Optional.ofNullable(_httpRes));
-                
-                throw _out;
-            } else {
-                throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "Unexpected content-type received: " + _contentType, 
-                    Utils.extractByteArrayFromBody(_httpRes));
-            }
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "4XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        if (Utils.statusCodeMatches(_httpRes.statusCode(), "5XX")) {
-            // no content 
-            throw new SDKError(
-                    _httpRes, 
-                    _httpRes.statusCode(), 
-                    "API error occurred", 
-                    Utils.extractByteArrayFromBody(_httpRes));
-        }
-        throw new SDKError(
-            _httpRes, 
-            _httpRes.statusCode(), 
-            "Unexpected status code received: " + _httpRes.statusCode(), 
-            Utils.extractByteArrayFromBody(_httpRes));
+    public GetTokenByPinIdResponse getTokenByPinId(GetTokenByPinIdRequest request, Optional<String> serverURL) throws Exception {
+        RequestOperation<GetTokenByPinIdRequest, GetTokenByPinIdResponse> operation
+              = new GetTokenByPinId.Sync(sdkConfiguration, serverURL);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 }

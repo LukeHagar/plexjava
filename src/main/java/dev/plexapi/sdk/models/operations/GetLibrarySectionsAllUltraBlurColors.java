@@ -9,18 +9,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetLibrarySectionsAllUltraBlurColors {
 
     @JsonProperty("topLeft")
     private String topLeft;
 
+
     @JsonProperty("topRight")
     private String topRight;
 
+
     @JsonProperty("bottomRight")
     private String bottomRight;
+
 
     @JsonProperty("bottomLeft")
     private String bottomLeft;
@@ -61,9 +64,10 @@ public class GetLibrarySectionsAllUltraBlurColors {
         return bottomLeft;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetLibrarySectionsAllUltraBlurColors withTopLeft(String topLeft) {
         Utils.checkNotNull(topLeft, "topLeft");
@@ -89,7 +93,6 @@ public class GetLibrarySectionsAllUltraBlurColors {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -100,18 +103,16 @@ public class GetLibrarySectionsAllUltraBlurColors {
         }
         GetLibrarySectionsAllUltraBlurColors other = (GetLibrarySectionsAllUltraBlurColors) o;
         return 
-            Objects.deepEquals(this.topLeft, other.topLeft) &&
-            Objects.deepEquals(this.topRight, other.topRight) &&
-            Objects.deepEquals(this.bottomRight, other.bottomRight) &&
-            Objects.deepEquals(this.bottomLeft, other.bottomLeft);
+            Utils.enhancedDeepEquals(this.topLeft, other.topLeft) &&
+            Utils.enhancedDeepEquals(this.topRight, other.topRight) &&
+            Utils.enhancedDeepEquals(this.bottomRight, other.bottomRight) &&
+            Utils.enhancedDeepEquals(this.bottomLeft, other.bottomLeft);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            topLeft,
-            topRight,
-            bottomRight,
+        return Utils.enhancedHash(
+            topLeft, topRight, bottomRight,
             bottomLeft);
     }
     
@@ -123,20 +124,22 @@ public class GetLibrarySectionsAllUltraBlurColors {
                 "bottomRight", bottomRight,
                 "bottomLeft", bottomLeft);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String topLeft;
- 
+
         private String topRight;
- 
+
         private String bottomRight;
- 
+
         private String bottomLeft;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder topLeft(String topLeft) {
             Utils.checkNotNull(topLeft, "topLeft");
@@ -144,11 +147,13 @@ public class GetLibrarySectionsAllUltraBlurColors {
             return this;
         }
 
+
         public Builder topRight(String topRight) {
             Utils.checkNotNull(topRight, "topRight");
             this.topRight = topRight;
             return this;
         }
+
 
         public Builder bottomRight(String bottomRight) {
             Utils.checkNotNull(bottomRight, "bottomRight");
@@ -156,18 +161,19 @@ public class GetLibrarySectionsAllUltraBlurColors {
             return this;
         }
 
+
         public Builder bottomLeft(String bottomLeft) {
             Utils.checkNotNull(bottomLeft, "bottomLeft");
             this.bottomLeft = bottomLeft;
             return this;
         }
-        
+
         public GetLibrarySectionsAllUltraBlurColors build() {
+
             return new GetLibrarySectionsAllUltraBlurColors(
-                topLeft,
-                topRight,
-                bottomRight,
+                topLeft, topRight, bottomRight,
                 bottomLeft);
         }
+
     }
 }

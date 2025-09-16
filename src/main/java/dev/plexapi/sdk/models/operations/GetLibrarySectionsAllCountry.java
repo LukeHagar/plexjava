@@ -9,10 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
+
 
 public class GetLibrarySectionsAllCountry {
-
     /**
      * The country of origin of this media item
      */
@@ -34,9 +33,10 @@ public class GetLibrarySectionsAllCountry {
         return tag;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The country of origin of this media item
@@ -47,7 +47,6 @@ public class GetLibrarySectionsAllCountry {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -58,12 +57,12 @@ public class GetLibrarySectionsAllCountry {
         }
         GetLibrarySectionsAllCountry other = (GetLibrarySectionsAllCountry) o;
         return 
-            Objects.deepEquals(this.tag, other.tag);
+            Utils.enhancedDeepEquals(this.tag, other.tag);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
+        return Utils.enhancedHash(
             tag);
     }
     
@@ -72,14 +71,16 @@ public class GetLibrarySectionsAllCountry {
         return Utils.toString(GetLibrarySectionsAllCountry.class,
                 "tag", tag);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private String tag;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The country of origin of this media item
@@ -89,10 +90,12 @@ public class GetLibrarySectionsAllCountry {
             this.tag = tag;
             return this;
         }
-        
+
         public GetLibrarySectionsAllCountry build() {
+
             return new GetLibrarySectionsAllCountry(
                 tag);
         }
+
     }
 }

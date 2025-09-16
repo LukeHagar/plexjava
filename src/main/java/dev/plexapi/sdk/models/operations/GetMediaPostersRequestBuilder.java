@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetMediaPosters;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.lang.Long;
@@ -10,10 +14,10 @@ import java.lang.Long;
 public class GetMediaPostersRequestBuilder {
 
     private Long ratingKey;
-    private final SDKMethodInterfaces.MethodCallGetMediaPosters sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetMediaPostersRequestBuilder(SDKMethodInterfaces.MethodCallGetMediaPosters sdk) {
-        this.sdk = sdk;
+    public GetMediaPostersRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetMediaPostersRequestBuilder ratingKey(long ratingKey) {
@@ -22,9 +26,20 @@ public class GetMediaPostersRequestBuilder {
         return this;
     }
 
-    public GetMediaPostersResponse call() throws Exception {
 
-        return sdk.getMediaPosters(
-            ratingKey);
+    private GetMediaPostersRequest buildRequest() {
+
+        GetMediaPostersRequest request = new GetMediaPostersRequest(ratingKey);
+
+        return request;
+    }
+
+    public GetMediaPostersResponse call() throws Exception {
+        
+        RequestOperation<GetMediaPostersRequest, GetMediaPostersResponse> operation
+              = new GetMediaPosters.Sync(sdkConfiguration);
+        GetMediaPostersRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

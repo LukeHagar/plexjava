@@ -35,6 +35,7 @@ This resource returns hash values for local files
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getFileHash" method="get" path="/library/hashes" -->
 ```java
 package hello.world;
 
@@ -49,11 +50,11 @@ public class Application {
     public static void main(String[] args) throws GetFileHashBadRequest, GetFileHashUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetFileHashResponse res = sdk.library().getFileHash()
-                .url("file://C:\Image.png&type=13")
+                .url("file://C:\\Image.png&type=13")
                 .call();
 
         // handle response
@@ -87,6 +88,7 @@ This endpoint will return the recently added content.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-recently-added-library" method="get" path="/library/recentlyAdded" -->
 ```java
 package hello.world;
 
@@ -102,7 +104,7 @@ public class Application {
     public static void main(String[] args) throws GetRecentlyAddedLibraryBadRequest, GetRecentlyAddedLibraryUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetRecentlyAddedLibraryRequest req = GetRecentlyAddedLibraryRequest.builder()
@@ -166,6 +168,7 @@ This allows a client to provide a rich interface around the media (e.g. allow so
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-all-libraries" method="get" path="/library/sections" -->
 ```java
 package hello.world;
 
@@ -180,7 +183,7 @@ public class Application {
     public static void main(String[] args) throws GetAllLibrariesBadRequest, GetAllLibrariesUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetAllLibrariesResponse res = sdk.library().getAllLibraries()
@@ -250,6 +253,7 @@ Each type in the library comes with a set of filters and sorts, aiding in buildi
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-library-details" method="get" path="/library/sections/{sectionKey}" -->
 ```java
 package hello.world;
 
@@ -265,7 +269,7 @@ public class Application {
     public static void main(String[] args) throws GetLibraryDetailsBadRequest, GetLibraryDetailsUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetLibraryDetailsResponse res = sdk.library().getLibraryDetails()
@@ -305,6 +309,7 @@ Delete a library using a specific section id
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="deleteLibrary" method="delete" path="/library/sections/{sectionKey}" -->
 ```java
 package hello.world;
 
@@ -319,7 +324,7 @@ public class Application {
     public static void main(String[] args) throws DeleteLibraryBadRequest, DeleteLibraryUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         DeleteLibraryResponse res = sdk.library().deleteLibrary()
@@ -376,6 +381,7 @@ Fetches details from a specific section of the library identified by a section k
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-library-items" method="get" path="/library/sections/{sectionKey}/{tag}" -->
 ```java
 package hello.world;
 
@@ -390,7 +396,7 @@ public class Application {
     public static void main(String[] args) throws GetLibraryItemsBadRequest, GetLibraryItemsUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetLibraryItemsRequest req = GetLibraryItemsRequest.builder()
@@ -437,6 +443,7 @@ Retrieves a list of all general media data for this library.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-library-sections-all" method="get" path="/library/sections/{sectionKey}/all" -->
 ```java
 package hello.world;
 
@@ -451,7 +458,7 @@ public class Application {
     public static void main(String[] args) throws GetLibrarySectionsAllBadRequest, GetLibrarySectionsAllUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetLibrarySectionsAllRequest req = GetLibrarySectionsAllRequest.builder()
@@ -500,6 +507,7 @@ This endpoint Refreshes all the Metadata of the library.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-refresh-library-metadata" method="get" path="/library/sections/{sectionKey}/refresh" -->
 ```java
 package hello.world;
 
@@ -515,7 +523,7 @@ public class Application {
     public static void main(String[] args) throws GetRefreshLibraryMetadataBadRequest, GetRefreshLibraryMetadataUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetRefreshLibraryMetadataResponse res = sdk.library().getRefreshLibraryMetadata()
@@ -571,6 +579,7 @@ Each type in the library comes with a set of filters and sorts, aiding in buildi
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-search-library" method="get" path="/library/sections/{sectionKey}/search" -->
 ```java
 package hello.world;
 
@@ -586,7 +595,7 @@ public class Application {
     public static void main(String[] args) throws GetSearchLibraryBadRequest, GetSearchLibraryUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetSearchLibraryResponse res = sdk.library().getSearchLibrary()
@@ -627,6 +636,7 @@ Retrieves a list of all the genres that are found for the media in this library.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-genres-library" method="get" path="/library/sections/{sectionKey}/genre" -->
 ```java
 package hello.world;
 
@@ -642,7 +652,7 @@ public class Application {
     public static void main(String[] args) throws GetGenresLibraryBadRequest, GetGenresLibraryUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetGenresLibraryResponse res = sdk.library().getGenresLibrary()
@@ -683,6 +693,7 @@ Retrieves a list of all the countries that are found for the media in this libra
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-countries-library" method="get" path="/library/sections/{sectionKey}/country" -->
 ```java
 package hello.world;
 
@@ -698,7 +709,7 @@ public class Application {
     public static void main(String[] args) throws GetCountriesLibraryBadRequest, GetCountriesLibraryUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetCountriesLibraryResponse res = sdk.library().getCountriesLibrary()
@@ -739,6 +750,7 @@ Retrieves a list of all the actors that are found for the media in this library.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-actors-library" method="get" path="/library/sections/{sectionKey}/actor" -->
 ```java
 package hello.world;
 
@@ -754,7 +766,7 @@ public class Application {
     public static void main(String[] args) throws GetActorsLibraryBadRequest, GetActorsLibraryUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetActorsLibraryResponse res = sdk.library().getActorsLibrary()
@@ -795,6 +807,7 @@ Search the provided query across all library sections, or a single section, and 
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-search-all-libraries" method="get" path="/library/search" -->
 ```java
 package hello.world;
 
@@ -810,7 +823,7 @@ public class Application {
     public static void main(String[] args) throws GetSearchAllLibrariesBadRequest, GetSearchAllLibrariesUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetSearchAllLibrariesRequest req = GetSearchAllLibrariesRequest.builder()
@@ -859,6 +872,7 @@ Multiple rating keys can be provided as a comma-separated list (e.g., "21119,216
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-media-meta-data" method="get" path="/library/metadata/{ratingKey}" -->
 ```java
 package hello.world;
 
@@ -874,7 +888,7 @@ public class Application {
     public static void main(String[] args) throws GetMediaMetaDataBadRequest, GetMediaMetaDataUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetMediaMetaDataRequest req = GetMediaMetaDataRequest.builder()
@@ -929,6 +943,7 @@ Returns the background artwork for a library item.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-media-arts" method="get" path="/library/metadata/{ratingKey}/arts" -->
 ```java
 package hello.world;
 
@@ -941,7 +956,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetMediaArtsResponse res = sdk.library().getMediaArts()
@@ -977,6 +992,7 @@ Uploads an image to use as the background artwork for a library item, either fro
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-media-arts" method="post" path="/library/metadata/{ratingKey}/arts" -->
 ```java
 package hello.world;
 
@@ -989,7 +1005,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         PostMediaArtsResponse res = sdk.library().postMediaArts()
@@ -997,7 +1013,6 @@ public class Application {
                 .url("https://api.mediux.pro/assets/fcfdc487-dd07-4993-a0c1-0a3015362e5b")
                 .call();
 
-        // handle response
     }
 }
 ```
@@ -1008,7 +1023,7 @@ public class Application {
 | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
 | `ratingKey`                                                        | *long*                                                             | :heavy_check_mark:                                                 | the id of the library item to return the posters of.               | 2268                                                               |
 | `url`                                                              | *Optional\<String>*                                                | :heavy_minus_sign:                                                 | The URL of the image, if uploading a remote image                  | https://api.mediux.pro/assets/fcfdc487-dd07-4993-a0c1-0a3015362e5b |
-| `requestBody`                                                      | *Optional\<byte[]>*                                                | :heavy_minus_sign:                                                 | The contents of the image, if uploading a local file               |                                                                    |
+| `requestBody`                                                      | byte[]                                                             | :heavy_minus_sign:                                                 | The contents of the image, if uploading a local file               |                                                                    |
 
 ### Response
 
@@ -1026,6 +1041,7 @@ Returns the available posters for a library item.
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-media-posters" method="get" path="/library/metadata/{ratingKey}/posters" -->
 ```java
 package hello.world;
 
@@ -1038,7 +1054,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetMediaPostersResponse res = sdk.library().getMediaPosters()
@@ -1074,6 +1090,7 @@ Uploads a poster to a library item, either from a local file or a remote URL
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="post-media-poster" method="post" path="/library/metadata/{ratingKey}/posters" -->
 ```java
 package hello.world;
 
@@ -1086,7 +1103,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         PostMediaPosterResponse res = sdk.library().postMediaPoster()
@@ -1094,7 +1111,6 @@ public class Application {
                 .url("https://api.mediux.pro/assets/fcfdc487-dd07-4993-a0c1-0a3015362e5b")
                 .call();
 
-        // handle response
     }
 }
 ```
@@ -1105,7 +1121,7 @@ public class Application {
 | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
 | `ratingKey`                                                        | *long*                                                             | :heavy_check_mark:                                                 | the id of the library item to return the posters of.               | 2268                                                               |
 | `url`                                                              | *Optional\<String>*                                                | :heavy_minus_sign:                                                 | The URL of the image, if uploading a remote image                  | https://api.mediux.pro/assets/fcfdc487-dd07-4993-a0c1-0a3015362e5b |
-| `requestBody`                                                      | *Optional\<byte[]>*                                                | :heavy_minus_sign:                                                 | The contents of the image, if uploading a local file               |                                                                    |
+| `requestBody`                                                      | byte[]                                                             | :heavy_minus_sign:                                                 | The contents of the image, if uploading a local file               |                                                                    |
 
 ### Response
 
@@ -1124,6 +1140,7 @@ This endpoint will return the children of of a library item specified with the r
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getMetadataChildren" method="get" path="/library/metadata/{ratingKey}/children" -->
 ```java
 package hello.world;
 
@@ -1138,7 +1155,7 @@ public class Application {
     public static void main(String[] args) throws GetMetadataChildrenBadRequest, GetMetadataChildrenUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetMetadataChildrenResponse res = sdk.library().getMetadataChildren()
@@ -1179,6 +1196,7 @@ This endpoint will return the top watched content from libraries of a certain ty
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="getTopWatchedContent" method="get" path="/library/all/top" -->
 ```java
 package hello.world;
 
@@ -1193,7 +1211,7 @@ public class Application {
     public static void main(String[] args) throws GetTopWatchedContentBadRequest, GetTopWatchedContentUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken("<YOUR_API_KEY_HERE>")
+                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
             .build();
 
         GetTopWatchedContentResponse res = sdk.library().getTopWatchedContent()

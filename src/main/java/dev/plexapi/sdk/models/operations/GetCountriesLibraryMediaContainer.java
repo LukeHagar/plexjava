@@ -16,11 +16,10 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-public class GetCountriesLibraryMediaContainer {
 
+public class GetCountriesLibraryMediaContainer {
     /**
      * Number of media items returned in this response.
      */
@@ -93,6 +92,7 @@ public class GetCountriesLibraryMediaContainer {
     @JsonProperty("viewGroup")
     private String viewGroup;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Directory")
     private Optional<? extends List<GetCountriesLibraryDirectory>> directory;
@@ -153,7 +153,11 @@ public class GetCountriesLibraryMediaContainer {
             String title1,
             String title2,
             String viewGroup) {
-        this(size, allowSync, art, content, identifier, mediaTagPrefix, mediaTagVersion, nocache, thumb, title1, title2, viewGroup, Optional.empty());
+        this(size, allowSync, art,
+            content, identifier, mediaTagPrefix,
+            mediaTagVersion, nocache, thumb,
+            title1, title2, viewGroup,
+            Optional.empty());
     }
 
     /**
@@ -258,9 +262,10 @@ public class GetCountriesLibraryMediaContainer {
         return (Optional<List<GetCountriesLibraryDirectory>>) directory;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * Number of media items returned in this response.
@@ -376,13 +381,13 @@ public class GetCountriesLibraryMediaContainer {
         return this;
     }
 
+
     public GetCountriesLibraryMediaContainer withDirectory(Optional<? extends List<GetCountriesLibraryDirectory>> directory) {
         Utils.checkNotNull(directory, "directory");
         this.directory = directory;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -393,36 +398,28 @@ public class GetCountriesLibraryMediaContainer {
         }
         GetCountriesLibraryMediaContainer other = (GetCountriesLibraryMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.allowSync, other.allowSync) &&
-            Objects.deepEquals(this.art, other.art) &&
-            Objects.deepEquals(this.content, other.content) &&
-            Objects.deepEquals(this.identifier, other.identifier) &&
-            Objects.deepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
-            Objects.deepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
-            Objects.deepEquals(this.nocache, other.nocache) &&
-            Objects.deepEquals(this.thumb, other.thumb) &&
-            Objects.deepEquals(this.title1, other.title1) &&
-            Objects.deepEquals(this.title2, other.title2) &&
-            Objects.deepEquals(this.viewGroup, other.viewGroup) &&
-            Objects.deepEquals(this.directory, other.directory);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.allowSync, other.allowSync) &&
+            Utils.enhancedDeepEquals(this.art, other.art) &&
+            Utils.enhancedDeepEquals(this.content, other.content) &&
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
+            Utils.enhancedDeepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
+            Utils.enhancedDeepEquals(this.nocache, other.nocache) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.title1, other.title1) &&
+            Utils.enhancedDeepEquals(this.title2, other.title2) &&
+            Utils.enhancedDeepEquals(this.viewGroup, other.viewGroup) &&
+            Utils.enhancedDeepEquals(this.directory, other.directory);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            allowSync,
-            art,
-            content,
-            identifier,
-            mediaTagPrefix,
-            mediaTagVersion,
-            nocache,
-            thumb,
-            title1,
-            title2,
-            viewGroup,
+        return Utils.enhancedHash(
+            size, allowSync, art,
+            content, identifier, mediaTagPrefix,
+            mediaTagVersion, nocache, thumb,
+            title1, title2, viewGroup,
             directory);
     }
     
@@ -443,38 +440,40 @@ public class GetCountriesLibraryMediaContainer {
                 "viewGroup", viewGroup,
                 "directory", directory);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer size;
- 
+
         private Boolean allowSync;
- 
+
         private String art;
- 
+
         private String content;
- 
+
         private String identifier;
- 
+
         private String mediaTagPrefix;
- 
+
         private Long mediaTagVersion;
- 
+
         private Boolean nocache;
- 
+
         private String thumb;
- 
+
         private String title1;
- 
+
         private String title2;
- 
+
         private String viewGroup;
- 
+
         private Optional<? extends List<GetCountriesLibraryDirectory>> directory = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * Number of media items returned in this response.
@@ -485,6 +484,7 @@ public class GetCountriesLibraryMediaContainer {
             return this;
         }
 
+
         /**
          * Indicates whether syncing is allowed.
          */
@@ -493,6 +493,7 @@ public class GetCountriesLibraryMediaContainer {
             this.allowSync = allowSync;
             return this;
         }
+
 
         /**
          * URL for the background artwork of the media container.
@@ -503,6 +504,7 @@ public class GetCountriesLibraryMediaContainer {
             return this;
         }
 
+
         /**
          * The content type or mode.
          */
@@ -511,6 +513,7 @@ public class GetCountriesLibraryMediaContainer {
             this.content = content;
             return this;
         }
+
 
         /**
          * An plugin identifier for the media container.
@@ -521,6 +524,7 @@ public class GetCountriesLibraryMediaContainer {
             return this;
         }
 
+
         /**
          * The prefix used for media tag resource paths.
          */
@@ -529,6 +533,7 @@ public class GetCountriesLibraryMediaContainer {
             this.mediaTagPrefix = mediaTagPrefix;
             return this;
         }
+
 
         /**
          * The version number for media tags.
@@ -539,6 +544,7 @@ public class GetCountriesLibraryMediaContainer {
             return this;
         }
 
+
         /**
          * Specifies whether caching is disabled.
          */
@@ -547,6 +553,7 @@ public class GetCountriesLibraryMediaContainer {
             this.nocache = nocache;
             return this;
         }
+
 
         /**
          * URL for the thumbnail image of the media container.
@@ -557,6 +564,7 @@ public class GetCountriesLibraryMediaContainer {
             return this;
         }
 
+
         /**
          * The primary title of the media container.
          */
@@ -565,6 +573,7 @@ public class GetCountriesLibraryMediaContainer {
             this.title1 = title1;
             return this;
         }
+
 
         /**
          * The secondary title of the media container.
@@ -575,6 +584,7 @@ public class GetCountriesLibraryMediaContainer {
             return this;
         }
 
+
         /**
          * Identifier for the view group layout.
          */
@@ -583,6 +593,7 @@ public class GetCountriesLibraryMediaContainer {
             this.viewGroup = viewGroup;
             return this;
         }
+
 
         public Builder directory(List<GetCountriesLibraryDirectory> directory) {
             Utils.checkNotNull(directory, "directory");
@@ -595,22 +606,16 @@ public class GetCountriesLibraryMediaContainer {
             this.directory = directory;
             return this;
         }
-        
+
         public GetCountriesLibraryMediaContainer build() {
+
             return new GetCountriesLibraryMediaContainer(
-                size,
-                allowSync,
-                art,
-                content,
-                identifier,
-                mediaTagPrefix,
-                mediaTagVersion,
-                nocache,
-                thumb,
-                title1,
-                title2,
-                viewGroup,
+                size, allowSync, art,
+                content, identifier, mediaTagPrefix,
+                mediaTagVersion, nocache, thumb,
+                title1, title2, viewGroup,
                 directory);
         }
+
     }
 }

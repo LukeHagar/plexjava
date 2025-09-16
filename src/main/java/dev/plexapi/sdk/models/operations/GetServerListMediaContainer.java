@@ -14,14 +14,15 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class GetServerListMediaContainer {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("size")
     private Optional<Double> size;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Server")
@@ -52,15 +53,17 @@ public class GetServerListMediaContainer {
         return (Optional<List<GetServerListServer>>) server;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public GetServerListMediaContainer withSize(double size) {
         Utils.checkNotNull(size, "size");
         this.size = Optional.ofNullable(size);
         return this;
     }
+
 
     public GetServerListMediaContainer withSize(Optional<Double> size) {
         Utils.checkNotNull(size, "size");
@@ -74,13 +77,13 @@ public class GetServerListMediaContainer {
         return this;
     }
 
+
     public GetServerListMediaContainer withServer(Optional<? extends List<GetServerListServer>> server) {
         Utils.checkNotNull(server, "server");
         this.server = server;
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -91,15 +94,14 @@ public class GetServerListMediaContainer {
         }
         GetServerListMediaContainer other = (GetServerListMediaContainer) o;
         return 
-            Objects.deepEquals(this.size, other.size) &&
-            Objects.deepEquals(this.server, other.server);
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.server, other.server);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            size,
-            server);
+        return Utils.enhancedHash(
+            size, server);
     }
     
     @Override
@@ -108,16 +110,18 @@ public class GetServerListMediaContainer {
                 "size", size,
                 "server", server);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<Double> size = Optional.empty();
- 
+
         private Optional<? extends List<GetServerListServer>> server = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder size(double size) {
             Utils.checkNotNull(size, "size");
@@ -131,6 +135,7 @@ public class GetServerListMediaContainer {
             return this;
         }
 
+
         public Builder server(List<GetServerListServer> server) {
             Utils.checkNotNull(server, "server");
             this.server = Optional.ofNullable(server);
@@ -142,11 +147,12 @@ public class GetServerListMediaContainer {
             this.server = server;
             return this;
         }
-        
+
         public GetServerListMediaContainer build() {
+
             return new GetServerListMediaContainer(
-                size,
-                server);
+                size, server);
         }
+
     }
 }

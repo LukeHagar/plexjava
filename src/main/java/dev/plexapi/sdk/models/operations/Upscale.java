@@ -19,7 +19,7 @@ public enum Upscale {
     @JsonValue
     private final long value;
 
-    private Upscale(long value) {
+    Upscale(long value) {
         this.value = value;
     }
     

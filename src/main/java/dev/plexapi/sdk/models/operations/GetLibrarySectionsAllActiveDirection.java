@@ -20,7 +20,7 @@ public enum GetLibrarySectionsAllActiveDirection {
     @JsonValue
     private final String value;
 
-    private GetLibrarySectionsAllActiveDirection(String value) {
+    GetLibrarySectionsAllActiveDirection(String value) {
         this.value = value;
     }
     

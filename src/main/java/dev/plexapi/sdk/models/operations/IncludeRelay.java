@@ -20,7 +20,7 @@ public enum IncludeRelay {
     @JsonValue
     private final int value;
 
-    private IncludeRelay(int value) {
+    IncludeRelay(int value) {
         this.value = value;
     }
     

@@ -19,7 +19,7 @@ public enum IncludeIPv6 {
     @JsonValue
     private final int value;
 
-    private IncludeIPv6(int value) {
+    IncludeIPv6(int value) {
         this.value = value;
     }
     

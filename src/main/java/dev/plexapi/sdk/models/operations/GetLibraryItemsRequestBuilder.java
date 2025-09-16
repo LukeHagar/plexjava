@@ -3,16 +3,20 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.GetLibraryItems;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 
 public class GetLibraryItemsRequestBuilder {
 
     private GetLibraryItemsRequest request;
-    private final SDKMethodInterfaces.MethodCallGetLibraryItems sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public GetLibraryItemsRequestBuilder(SDKMethodInterfaces.MethodCallGetLibraryItems sdk) {
-        this.sdk = sdk;
+    public GetLibraryItemsRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
 
     public GetLibraryItemsRequestBuilder request(GetLibraryItemsRequest request) {
@@ -22,8 +26,10 @@ public class GetLibraryItemsRequestBuilder {
     }
 
     public GetLibraryItemsResponse call() throws Exception {
+        
+        RequestOperation<GetLibraryItemsRequest, GetLibraryItemsResponse> operation
+              = new GetLibraryItems.Sync(sdkConfiguration);
 
-        return sdk.getLibraryItems(
-            request);
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

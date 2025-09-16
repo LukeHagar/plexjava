@@ -19,7 +19,7 @@ public enum Download {
     @JsonValue
     private final long value;
 
-    private Download(long value) {
+    Download(long value) {
         this.value = value;
     }
     

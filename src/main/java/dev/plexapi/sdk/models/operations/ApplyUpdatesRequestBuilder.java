@@ -3,6 +3,10 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+
+import dev.plexapi.sdk.SDKConfiguration;
+import dev.plexapi.sdk.operations.ApplyUpdates;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
 import java.util.Optional;
@@ -11,10 +15,10 @@ public class ApplyUpdatesRequestBuilder {
 
     private Optional<? extends Tonight> tonight = Optional.empty();
     private Optional<? extends Skip> skip = Optional.empty();
-    private final SDKMethodInterfaces.MethodCallApplyUpdates sdk;
+    private final SDKConfiguration sdkConfiguration;
 
-    public ApplyUpdatesRequestBuilder(SDKMethodInterfaces.MethodCallApplyUpdates sdk) {
-        this.sdk = sdk;
+    public ApplyUpdatesRequestBuilder(SDKConfiguration sdkConfiguration) {
+        this.sdkConfiguration = sdkConfiguration;
     }
                 
     public ApplyUpdatesRequestBuilder tonight(Tonight tonight) {
@@ -41,10 +45,21 @@ public class ApplyUpdatesRequestBuilder {
         return this;
     }
 
-    public ApplyUpdatesResponse call() throws Exception {
 
-        return sdk.applyUpdates(
-            tonight,
+    private ApplyUpdatesRequest buildRequest() {
+
+        ApplyUpdatesRequest request = new ApplyUpdatesRequest(tonight,
             skip);
+
+        return request;
+    }
+
+    public ApplyUpdatesResponse call() throws Exception {
+        
+        RequestOperation<ApplyUpdatesRequest, ApplyUpdatesResponse> operation
+              = new ApplyUpdates.Sync(sdkConfiguration);
+        ApplyUpdatesRequest request = buildRequest();
+
+        return operation.handleResponse(operation.doRequest(request));
     }
 }

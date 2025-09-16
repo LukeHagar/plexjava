@@ -15,8 +15,8 @@ import java.lang.Boolean;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
+
 
 public class PastSubscription {
 
@@ -24,55 +24,69 @@ public class PastSubscription {
     @JsonProperty("id")
     private Optional<String> id;
 
+
     @JsonInclude(Include.ALWAYS)
     @JsonProperty("mode")
     private Optional<String> mode;
+
 
     @JsonInclude(Include.ALWAYS)
     @JsonProperty("renewsAt")
     private Optional<Long> renewsAt;
 
+
     @JsonInclude(Include.ALWAYS)
     @JsonProperty("endsAt")
     private Optional<Long> endsAt;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("canceled")
     private Optional<Boolean> canceled;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("gracePeriod")
     private Optional<Boolean> gracePeriod;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("onHold")
     private Optional<Boolean> onHold;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("canReactivate")
     private Optional<Boolean> canReactivate;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("canUpgrade")
     private Optional<Boolean> canUpgrade;
 
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("canDowngrade")
     private Optional<Boolean> canDowngrade;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("canConvert")
     private Optional<Boolean> canConvert;
 
+
     @JsonProperty("type")
     private String type;
+
 
     @JsonInclude(Include.ALWAYS)
     @JsonProperty("transfer")
     private Optional<String> transfer;
 
+
     @JsonProperty("state")
     private PostUsersSignInDataState state;
+
 
     @JsonProperty("billing")
     private Billing billing;
@@ -130,7 +144,11 @@ public class PastSubscription {
             String type,
             PostUsersSignInDataState state,
             Billing billing) {
-        this(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), type, Optional.empty(), state, billing);
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), type,
+            Optional.empty(), state, billing);
     }
 
     @JsonIgnore
@@ -208,15 +226,17 @@ public class PastSubscription {
         return billing;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     public PastSubscription withId(String id) {
         Utils.checkNotNull(id, "id");
         this.id = Optional.ofNullable(id);
         return this;
     }
+
 
     public PastSubscription withId(Optional<String> id) {
         Utils.checkNotNull(id, "id");
@@ -230,6 +250,7 @@ public class PastSubscription {
         return this;
     }
 
+
     public PastSubscription withMode(Optional<String> mode) {
         Utils.checkNotNull(mode, "mode");
         this.mode = mode;
@@ -241,6 +262,7 @@ public class PastSubscription {
         this.renewsAt = Optional.ofNullable(renewsAt);
         return this;
     }
+
 
     public PastSubscription withRenewsAt(Optional<Long> renewsAt) {
         Utils.checkNotNull(renewsAt, "renewsAt");
@@ -254,6 +276,7 @@ public class PastSubscription {
         return this;
     }
 
+
     public PastSubscription withEndsAt(Optional<Long> endsAt) {
         Utils.checkNotNull(endsAt, "endsAt");
         this.endsAt = endsAt;
@@ -265,6 +288,7 @@ public class PastSubscription {
         this.canceled = Optional.ofNullable(canceled);
         return this;
     }
+
 
     public PastSubscription withCanceled(Optional<Boolean> canceled) {
         Utils.checkNotNull(canceled, "canceled");
@@ -278,6 +302,7 @@ public class PastSubscription {
         return this;
     }
 
+
     public PastSubscription withGracePeriod(Optional<Boolean> gracePeriod) {
         Utils.checkNotNull(gracePeriod, "gracePeriod");
         this.gracePeriod = gracePeriod;
@@ -289,6 +314,7 @@ public class PastSubscription {
         this.onHold = Optional.ofNullable(onHold);
         return this;
     }
+
 
     public PastSubscription withOnHold(Optional<Boolean> onHold) {
         Utils.checkNotNull(onHold, "onHold");
@@ -302,6 +328,7 @@ public class PastSubscription {
         return this;
     }
 
+
     public PastSubscription withCanReactivate(Optional<Boolean> canReactivate) {
         Utils.checkNotNull(canReactivate, "canReactivate");
         this.canReactivate = canReactivate;
@@ -313,6 +340,7 @@ public class PastSubscription {
         this.canUpgrade = Optional.ofNullable(canUpgrade);
         return this;
     }
+
 
     public PastSubscription withCanUpgrade(Optional<Boolean> canUpgrade) {
         Utils.checkNotNull(canUpgrade, "canUpgrade");
@@ -326,6 +354,7 @@ public class PastSubscription {
         return this;
     }
 
+
     public PastSubscription withCanDowngrade(Optional<Boolean> canDowngrade) {
         Utils.checkNotNull(canDowngrade, "canDowngrade");
         this.canDowngrade = canDowngrade;
@@ -337,6 +366,7 @@ public class PastSubscription {
         this.canConvert = Optional.ofNullable(canConvert);
         return this;
     }
+
 
     public PastSubscription withCanConvert(Optional<Boolean> canConvert) {
         Utils.checkNotNull(canConvert, "canConvert");
@@ -356,6 +386,7 @@ public class PastSubscription {
         return this;
     }
 
+
     public PastSubscription withTransfer(Optional<String> transfer) {
         Utils.checkNotNull(transfer, "transfer");
         this.transfer = transfer;
@@ -374,7 +405,6 @@ public class PastSubscription {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -385,41 +415,31 @@ public class PastSubscription {
         }
         PastSubscription other = (PastSubscription) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.mode, other.mode) &&
-            Objects.deepEquals(this.renewsAt, other.renewsAt) &&
-            Objects.deepEquals(this.endsAt, other.endsAt) &&
-            Objects.deepEquals(this.canceled, other.canceled) &&
-            Objects.deepEquals(this.gracePeriod, other.gracePeriod) &&
-            Objects.deepEquals(this.onHold, other.onHold) &&
-            Objects.deepEquals(this.canReactivate, other.canReactivate) &&
-            Objects.deepEquals(this.canUpgrade, other.canUpgrade) &&
-            Objects.deepEquals(this.canDowngrade, other.canDowngrade) &&
-            Objects.deepEquals(this.canConvert, other.canConvert) &&
-            Objects.deepEquals(this.type, other.type) &&
-            Objects.deepEquals(this.transfer, other.transfer) &&
-            Objects.deepEquals(this.state, other.state) &&
-            Objects.deepEquals(this.billing, other.billing);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.mode, other.mode) &&
+            Utils.enhancedDeepEquals(this.renewsAt, other.renewsAt) &&
+            Utils.enhancedDeepEquals(this.endsAt, other.endsAt) &&
+            Utils.enhancedDeepEquals(this.canceled, other.canceled) &&
+            Utils.enhancedDeepEquals(this.gracePeriod, other.gracePeriod) &&
+            Utils.enhancedDeepEquals(this.onHold, other.onHold) &&
+            Utils.enhancedDeepEquals(this.canReactivate, other.canReactivate) &&
+            Utils.enhancedDeepEquals(this.canUpgrade, other.canUpgrade) &&
+            Utils.enhancedDeepEquals(this.canDowngrade, other.canDowngrade) &&
+            Utils.enhancedDeepEquals(this.canConvert, other.canConvert) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.transfer, other.transfer) &&
+            Utils.enhancedDeepEquals(this.state, other.state) &&
+            Utils.enhancedDeepEquals(this.billing, other.billing);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            mode,
-            renewsAt,
-            endsAt,
-            canceled,
-            gracePeriod,
-            onHold,
-            canReactivate,
-            canUpgrade,
-            canDowngrade,
-            canConvert,
-            type,
-            transfer,
-            state,
-            billing);
+        return Utils.enhancedHash(
+            id, mode, renewsAt,
+            endsAt, canceled, gracePeriod,
+            onHold, canReactivate, canUpgrade,
+            canDowngrade, canConvert, type,
+            transfer, state, billing);
     }
     
     @Override
@@ -441,42 +461,44 @@ public class PastSubscription {
                 "state", state,
                 "billing", billing);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Optional<String> id = Optional.empty();
- 
+
         private Optional<String> mode = Optional.empty();
- 
+
         private Optional<Long> renewsAt = Optional.empty();
- 
+
         private Optional<Long> endsAt = Optional.empty();
- 
+
         private Optional<Boolean> canceled;
- 
+
         private Optional<Boolean> gracePeriod;
- 
+
         private Optional<Boolean> onHold;
- 
+
         private Optional<Boolean> canReactivate;
- 
+
         private Optional<Boolean> canUpgrade;
- 
+
         private Optional<Boolean> canDowngrade;
- 
+
         private Optional<Boolean> canConvert;
- 
+
         private String type;
- 
+
         private Optional<String> transfer = Optional.empty();
- 
+
         private PostUsersSignInDataState state;
- 
+
         private Billing billing;
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         public Builder id(String id) {
             Utils.checkNotNull(id, "id");
@@ -490,6 +512,7 @@ public class PastSubscription {
             return this;
         }
 
+
         public Builder mode(String mode) {
             Utils.checkNotNull(mode, "mode");
             this.mode = Optional.ofNullable(mode);
@@ -501,6 +524,7 @@ public class PastSubscription {
             this.mode = mode;
             return this;
         }
+
 
         public Builder renewsAt(long renewsAt) {
             Utils.checkNotNull(renewsAt, "renewsAt");
@@ -514,6 +538,7 @@ public class PastSubscription {
             return this;
         }
 
+
         public Builder endsAt(long endsAt) {
             Utils.checkNotNull(endsAt, "endsAt");
             this.endsAt = Optional.ofNullable(endsAt);
@@ -525,6 +550,7 @@ public class PastSubscription {
             this.endsAt = endsAt;
             return this;
         }
+
 
         public Builder canceled(boolean canceled) {
             Utils.checkNotNull(canceled, "canceled");
@@ -538,6 +564,7 @@ public class PastSubscription {
             return this;
         }
 
+
         public Builder gracePeriod(boolean gracePeriod) {
             Utils.checkNotNull(gracePeriod, "gracePeriod");
             this.gracePeriod = Optional.ofNullable(gracePeriod);
@@ -549,6 +576,7 @@ public class PastSubscription {
             this.gracePeriod = gracePeriod;
             return this;
         }
+
 
         public Builder onHold(boolean onHold) {
             Utils.checkNotNull(onHold, "onHold");
@@ -562,6 +590,7 @@ public class PastSubscription {
             return this;
         }
 
+
         public Builder canReactivate(boolean canReactivate) {
             Utils.checkNotNull(canReactivate, "canReactivate");
             this.canReactivate = Optional.ofNullable(canReactivate);
@@ -573,6 +602,7 @@ public class PastSubscription {
             this.canReactivate = canReactivate;
             return this;
         }
+
 
         public Builder canUpgrade(boolean canUpgrade) {
             Utils.checkNotNull(canUpgrade, "canUpgrade");
@@ -586,6 +616,7 @@ public class PastSubscription {
             return this;
         }
 
+
         public Builder canDowngrade(boolean canDowngrade) {
             Utils.checkNotNull(canDowngrade, "canDowngrade");
             this.canDowngrade = Optional.ofNullable(canDowngrade);
@@ -597,6 +628,7 @@ public class PastSubscription {
             this.canDowngrade = canDowngrade;
             return this;
         }
+
 
         public Builder canConvert(boolean canConvert) {
             Utils.checkNotNull(canConvert, "canConvert");
@@ -610,11 +642,13 @@ public class PastSubscription {
             return this;
         }
 
+
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
         }
+
 
         public Builder transfer(String transfer) {
             Utils.checkNotNull(transfer, "transfer");
@@ -628,18 +662,20 @@ public class PastSubscription {
             return this;
         }
 
+
         public Builder state(PostUsersSignInDataState state) {
             Utils.checkNotNull(state, "state");
             this.state = state;
             return this;
         }
 
+
         public Builder billing(Billing billing) {
             Utils.checkNotNull(billing, "billing");
             this.billing = billing;
             return this;
         }
-        
+
         public PastSubscription build() {
             if (canceled == null) {
                 canceled = _SINGLETON_VALUE_Canceled.value();
@@ -662,23 +698,15 @@ public class PastSubscription {
             if (canConvert == null) {
                 canConvert = _SINGLETON_VALUE_CanConvert.value();
             }
+
             return new PastSubscription(
-                id,
-                mode,
-                renewsAt,
-                endsAt,
-                canceled,
-                gracePeriod,
-                onHold,
-                canReactivate,
-                canUpgrade,
-                canDowngrade,
-                canConvert,
-                type,
-                transfer,
-                state,
-                billing);
+                id, mode, renewsAt,
+                endsAt, canceled, gracePeriod,
+                onHold, canReactivate, canUpgrade,
+                canDowngrade, canConvert, type,
+                transfer, state, billing);
         }
+
 
         private static final LazySingletonValue<Optional<Boolean>> _SINGLETON_VALUE_Canceled =
                 new LazySingletonValue<>(

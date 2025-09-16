@@ -13,6 +13,7 @@ Get list of all users that are friends and have library access with the provided
 
 ### Example Usage
 
+<!-- UsageSnippet language="java" operationID="get-users" method="get" path="/users" -->
 ```java
 package hello.world;
 

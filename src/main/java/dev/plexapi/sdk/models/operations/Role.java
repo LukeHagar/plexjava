@@ -12,11 +12,10 @@ import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Objects;
 import java.util.Optional;
 
-public class Role {
 
+public class Role {
     /**
      * The unique identifier for the role.
      * NOTE: This is different for each Plex server and is not globally unique.
@@ -84,7 +83,8 @@ public class Role {
             String filter,
             String tag,
             String tagKey) {
-        this(id, filter, tag, tagKey, Optional.empty(), Optional.empty());
+        this(id, filter, tag,
+            tagKey, Optional.empty(), Optional.empty());
     }
 
     /**
@@ -137,9 +137,10 @@ public class Role {
         return thumb;
     }
 
-    public final static Builder builder() {
+    public static Builder builder() {
         return new Builder();
-    }    
+    }
+
 
     /**
      * The unique identifier for the role.
@@ -188,6 +189,7 @@ public class Role {
         return this;
     }
 
+
     /**
      * The role played by the actor in the media item.
      */
@@ -206,6 +208,7 @@ public class Role {
         return this;
     }
 
+
     /**
      * The absolute URL of the thumbnail image for the actor.
      */
@@ -215,7 +218,6 @@ public class Role {
         return this;
     }
 
-    
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -226,23 +228,19 @@ public class Role {
         }
         Role other = (Role) o;
         return 
-            Objects.deepEquals(this.id, other.id) &&
-            Objects.deepEquals(this.filter, other.filter) &&
-            Objects.deepEquals(this.tag, other.tag) &&
-            Objects.deepEquals(this.tagKey, other.tagKey) &&
-            Objects.deepEquals(this.role, other.role) &&
-            Objects.deepEquals(this.thumb, other.thumb);
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.filter, other.filter) &&
+            Utils.enhancedDeepEquals(this.tag, other.tag) &&
+            Utils.enhancedDeepEquals(this.tagKey, other.tagKey) &&
+            Utils.enhancedDeepEquals(this.role, other.role) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            filter,
-            tag,
-            tagKey,
-            role,
-            thumb);
+        return Utils.enhancedHash(
+            id, filter, tag,
+            tagKey, role, thumb);
     }
     
     @Override
@@ -255,24 +253,26 @@ public class Role {
                 "role", role,
                 "thumb", thumb);
     }
-    
+
+    @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
- 
+
         private Integer id;
- 
+
         private String filter;
- 
+
         private String tag;
- 
+
         private String tagKey;
- 
+
         private Optional<String> role = Optional.empty();
- 
+
         private Optional<String> thumb = Optional.empty();
-        
+
         private Builder() {
           // force use of static builder() method
         }
+
 
         /**
          * The unique identifier for the role.
@@ -284,6 +284,7 @@ public class Role {
             return this;
         }
 
+
         /**
          * The filter string used to query this actor. For example, it may indicate that this is an actor with a given key.
          */
@@ -292,6 +293,7 @@ public class Role {
             this.filter = filter;
             return this;
         }
+
 
         /**
          * The display tag for the actor (typically the actor's name).
@@ -302,6 +304,7 @@ public class Role {
             return this;
         }
 
+
         /**
          * A 24-character hexadecimal unique key associated with the actor's tag, used for internal identification.
          * NOTE: This is globally unique across all Plex Servers.
@@ -311,6 +314,7 @@ public class Role {
             this.tagKey = tagKey;
             return this;
         }
+
 
         /**
          * The role played by the actor in the media item.
@@ -330,6 +334,7 @@ public class Role {
             return this;
         }
 
+
         /**
          * The absolute URL of the thumbnail image for the actor.
          */
@@ -347,15 +352,13 @@ public class Role {
             this.thumb = thumb;
             return this;
         }
-        
+
         public Role build() {
+
             return new Role(
-                id,
-                filter,
-                tag,
-                tagKey,
-                role,
-                thumb);
+                id, filter, tag,
+                tagKey, role, thumb);
         }
+
     }
 }

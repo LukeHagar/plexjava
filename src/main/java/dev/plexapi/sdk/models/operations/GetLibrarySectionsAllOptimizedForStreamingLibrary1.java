@@ -14,7 +14,7 @@ public enum GetLibrarySectionsAllOptimizedForStreamingLibrary1 {
     @JsonValue
     private final int value;
 
-    private GetLibrarySectionsAllOptimizedForStreamingLibrary1(int value) {
+    GetLibrarySectionsAllOptimizedForStreamingLibrary1(int value) {
         this.value = value;
     }
     
