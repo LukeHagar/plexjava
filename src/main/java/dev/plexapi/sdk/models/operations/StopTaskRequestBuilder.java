@@ -12,32 +12,23 @@ import java.lang.Exception;
 
 public class StopTaskRequestBuilder {
 
-    private PathParamTaskName taskName;
+    private StopTaskRequest request;
     private final SDKConfiguration sdkConfiguration;
 
     public StopTaskRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-    public StopTaskRequestBuilder taskName(PathParamTaskName taskName) {
-        Utils.checkNotNull(taskName, "taskName");
-        this.taskName = taskName;
+    public StopTaskRequestBuilder request(StopTaskRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
-    }
-
-
-    private StopTaskRequest buildRequest() {
-
-        StopTaskRequest request = new StopTaskRequest(taskName);
-
-        return request;
     }
 
     public StopTaskResponse call() throws Exception {
         
         RequestOperation<StopTaskRequest, StopTaskResponse> operation
               = new StopTask.Sync(sdkConfiguration);
-        StopTaskRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));
     }

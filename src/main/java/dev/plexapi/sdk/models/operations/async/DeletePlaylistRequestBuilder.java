@@ -9,38 +9,28 @@ import dev.plexapi.sdk.SDKConfiguration;
 import dev.plexapi.sdk.models.operations.DeletePlaylistRequest;
 import dev.plexapi.sdk.operations.DeletePlaylist;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Double;
 import java.lang.Exception;
 import java.util.concurrent.CompletableFuture;
 
 public class DeletePlaylistRequestBuilder {
 
-    private Double playlistID;
+    private DeletePlaylistRequest request;
     private final SDKConfiguration sdkConfiguration;
 
     public DeletePlaylistRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-    public DeletePlaylistRequestBuilder playlistID(double playlistID) {
-        Utils.checkNotNull(playlistID, "playlistID");
-        this.playlistID = playlistID;
+    public DeletePlaylistRequestBuilder request(DeletePlaylistRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
-    }
-
-
-    private DeletePlaylistRequest buildRequest() {
-
-        DeletePlaylistRequest request = new DeletePlaylistRequest(playlistID);
-
-        return request;
     }
 
     public CompletableFuture<DeletePlaylistResponse> call() throws Exception {
         
         AsyncRequestOperation<DeletePlaylistRequest, DeletePlaylistResponse> operation
               = new DeletePlaylist.Async(sdkConfiguration);
-        DeletePlaylistRequest request = buildRequest();
 
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);

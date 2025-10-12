@@ -4,98 +4,24 @@
 package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
-import java.util.Optional;
 
 /**
  * Attributes
  * 
- * <p>Attributes associated with the marker.
+ * <p>The attributes to assign to this marker
  */
 public class Attributes {
-    /**
-     * The identifier for the attributes.
-     */
-    @JsonProperty("id")
-    private long id;
-
-    /**
-     * The version number of the marker attributes.
-     */
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("version")
-    private Optional<Long> version;
-
     @JsonCreator
-    public Attributes(
-            @JsonProperty("id") long id,
-            @JsonProperty("version") Optional<Long> version) {
-        Utils.checkNotNull(id, "id");
-        Utils.checkNotNull(version, "version");
-        this.id = id;
-        this.version = version;
-    }
-    
-    public Attributes(
-            long id) {
-        this(id, Optional.empty());
-    }
-
-    /**
-     * The identifier for the attributes.
-     */
-    @JsonIgnore
-    public long id() {
-        return id;
-    }
-
-    /**
-     * The version number of the marker attributes.
-     */
-    @JsonIgnore
-    public Optional<Long> version() {
-        return version;
+    public Attributes() {
     }
 
     public static Builder builder() {
         return new Builder();
     }
 
-
-    /**
-     * The identifier for the attributes.
-     */
-    public Attributes withId(long id) {
-        Utils.checkNotNull(id, "id");
-        this.id = id;
-        return this;
-    }
-
-    /**
-     * The version number of the marker attributes.
-     */
-    public Attributes withVersion(long version) {
-        Utils.checkNotNull(version, "version");
-        this.version = Optional.ofNullable(version);
-        return this;
-    }
-
-
-    /**
-     * The version number of the marker attributes.
-     */
-    public Attributes withVersion(Optional<Long> version) {
-        Utils.checkNotNull(version, "version");
-        this.version = version;
-        return this;
-    }
 
     @Override
     public boolean equals(java.lang.Object o) {
@@ -105,69 +31,31 @@ public class Attributes {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Attributes other = (Attributes) o;
-        return 
-            Utils.enhancedDeepEquals(this.id, other.id) &&
-            Utils.enhancedDeepEquals(this.version, other.version);
+        return true;
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            id, version);
+            );
     }
     
     @Override
     public String toString() {
-        return Utils.toString(Attributes.class,
-                "id", id,
-                "version", version);
+        return Utils.toString(Attributes.class);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Long id;
-
-        private Optional<Long> version = Optional.empty();
-
         private Builder() {
           // force use of static builder() method
-        }
-
-
-        /**
-         * The identifier for the attributes.
-         */
-        public Builder id(long id) {
-            Utils.checkNotNull(id, "id");
-            this.id = id;
-            return this;
-        }
-
-
-        /**
-         * The version number of the marker attributes.
-         */
-        public Builder version(long version) {
-            Utils.checkNotNull(version, "version");
-            this.version = Optional.ofNullable(version);
-            return this;
-        }
-
-        /**
-         * The version number of the marker attributes.
-         */
-        public Builder version(Optional<Long> version) {
-            Utils.checkNotNull(version, "version");
-            this.version = version;
-            return this;
         }
 
         public Attributes build() {
 
             return new Attributes(
-                id, version);
+                );
         }
 
     }

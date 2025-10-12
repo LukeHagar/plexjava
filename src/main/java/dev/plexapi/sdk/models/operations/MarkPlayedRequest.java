@@ -5,33 +5,268 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.models.shared.Accepts;
+import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.SpeakeasyMetadata;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.Optional;
 
 
 public class MarkPlayedRequest {
     /**
-     * The media key to mark as played
+     * Indicates the client accepts the indicated media types
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=accepts")
+    private Optional<? extends Accepts> accepts;
+
+    /**
+     * An opaque identifier unique to the client
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Client-Identifier")
+    private Optional<String> clientIdentifier;
+
+    /**
+     * The name of the client product
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Product")
+    private Optional<String> product;
+
+    /**
+     * The version of the client application
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Version")
+    private Optional<String> version;
+
+    /**
+     * The platform of the client
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Platform")
+    private Optional<String> platform;
+
+    /**
+     * The version of the platform
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Platform-Version")
+    private Optional<String> platformVersion;
+
+    /**
+     * A relatively friendly name for the client device
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Device")
+    private Optional<String> device;
+
+    /**
+     * A potentially less friendly identifier for the device model
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Model")
+    private Optional<String> model;
+
+    /**
+     * The device vendor
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Device-Vendor")
+    private Optional<String> deviceVendor;
+
+    /**
+     * A friendly name for the client
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Device-Name")
+    private Optional<String> deviceName;
+
+    /**
+     * The marketplace on which the client application is distributed
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Marketplace")
+    private Optional<String> marketplace;
+
+    /**
+     * The identifier of the media provider containing the media to rate.  Typically `com.plexapp.plugins.library`
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=identifier")
+    private String identifier;
+
+    /**
+     * The key of the item to rate.  This is the `ratingKey` found in metadata items
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=key")
-    private double key;
+    private Optional<String> key;
+
+    /**
+     * The URI of the item to mark as played.  See intro for description of the URIs
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=uri")
+    private Optional<String> uri;
 
     @JsonCreator
     public MarkPlayedRequest(
-            double key) {
+            Optional<? extends Accepts> accepts,
+            Optional<String> clientIdentifier,
+            Optional<String> product,
+            Optional<String> version,
+            Optional<String> platform,
+            Optional<String> platformVersion,
+            Optional<String> device,
+            Optional<String> model,
+            Optional<String> deviceVendor,
+            Optional<String> deviceName,
+            Optional<String> marketplace,
+            String identifier,
+            Optional<String> key,
+            Optional<String> uri) {
+        Utils.checkNotNull(accepts, "accepts");
+        Utils.checkNotNull(clientIdentifier, "clientIdentifier");
+        Utils.checkNotNull(product, "product");
+        Utils.checkNotNull(version, "version");
+        Utils.checkNotNull(platform, "platform");
+        Utils.checkNotNull(platformVersion, "platformVersion");
+        Utils.checkNotNull(device, "device");
+        Utils.checkNotNull(model, "model");
+        Utils.checkNotNull(deviceVendor, "deviceVendor");
+        Utils.checkNotNull(deviceName, "deviceName");
+        Utils.checkNotNull(marketplace, "marketplace");
+        Utils.checkNotNull(identifier, "identifier");
         Utils.checkNotNull(key, "key");
+        Utils.checkNotNull(uri, "uri");
+        this.accepts = accepts;
+        this.clientIdentifier = clientIdentifier;
+        this.product = product;
+        this.version = version;
+        this.platform = platform;
+        this.platformVersion = platformVersion;
+        this.device = device;
+        this.model = model;
+        this.deviceVendor = deviceVendor;
+        this.deviceName = deviceName;
+        this.marketplace = marketplace;
+        this.identifier = identifier;
         this.key = key;
+        this.uri = uri;
+    }
+    
+    public MarkPlayedRequest(
+            String identifier) {
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), identifier,
+            Optional.empty(), Optional.empty());
     }
 
     /**
-     * The media key to mark as played
+     * Indicates the client accepts the indicated media types
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Accepts> accepts() {
+        return (Optional<Accepts>) accepts;
+    }
+
+    /**
+     * An opaque identifier unique to the client
      */
     @JsonIgnore
-    public double key() {
+    public Optional<String> clientIdentifier() {
+        return clientIdentifier;
+    }
+
+    /**
+     * The name of the client product
+     */
+    @JsonIgnore
+    public Optional<String> product() {
+        return product;
+    }
+
+    /**
+     * The version of the client application
+     */
+    @JsonIgnore
+    public Optional<String> version() {
+        return version;
+    }
+
+    /**
+     * The platform of the client
+     */
+    @JsonIgnore
+    public Optional<String> platform() {
+        return platform;
+    }
+
+    /**
+     * The version of the platform
+     */
+    @JsonIgnore
+    public Optional<String> platformVersion() {
+        return platformVersion;
+    }
+
+    /**
+     * A relatively friendly name for the client device
+     */
+    @JsonIgnore
+    public Optional<String> device() {
+        return device;
+    }
+
+    /**
+     * A potentially less friendly identifier for the device model
+     */
+    @JsonIgnore
+    public Optional<String> model() {
+        return model;
+    }
+
+    /**
+     * The device vendor
+     */
+    @JsonIgnore
+    public Optional<String> deviceVendor() {
+        return deviceVendor;
+    }
+
+    /**
+     * A friendly name for the client
+     */
+    @JsonIgnore
+    public Optional<String> deviceName() {
+        return deviceName;
+    }
+
+    /**
+     * The marketplace on which the client application is distributed
+     */
+    @JsonIgnore
+    public Optional<String> marketplace() {
+        return marketplace;
+    }
+
+    /**
+     * The identifier of the media provider containing the media to rate.  Typically `com.plexapp.plugins.library`
+     */
+    @JsonIgnore
+    public String identifier() {
+        return identifier;
+    }
+
+    /**
+     * The key of the item to rate.  This is the `ratingKey` found in metadata items
+     */
+    @JsonIgnore
+    public Optional<String> key() {
         return key;
+    }
+
+    /**
+     * The URI of the item to mark as played.  See intro for description of the URIs
+     */
+    @JsonIgnore
+    public Optional<String> uri() {
+        return uri;
     }
 
     public static Builder builder() {
@@ -40,11 +275,258 @@ public class MarkPlayedRequest {
 
 
     /**
-     * The media key to mark as played
+     * Indicates the client accepts the indicated media types
      */
-    public MarkPlayedRequest withKey(double key) {
+    public MarkPlayedRequest withAccepts(Accepts accepts) {
+        Utils.checkNotNull(accepts, "accepts");
+        this.accepts = Optional.ofNullable(accepts);
+        return this;
+    }
+
+
+    /**
+     * Indicates the client accepts the indicated media types
+     */
+    public MarkPlayedRequest withAccepts(Optional<? extends Accepts> accepts) {
+        Utils.checkNotNull(accepts, "accepts");
+        this.accepts = accepts;
+        return this;
+    }
+
+    /**
+     * An opaque identifier unique to the client
+     */
+    public MarkPlayedRequest withClientIdentifier(String clientIdentifier) {
+        Utils.checkNotNull(clientIdentifier, "clientIdentifier");
+        this.clientIdentifier = Optional.ofNullable(clientIdentifier);
+        return this;
+    }
+
+
+    /**
+     * An opaque identifier unique to the client
+     */
+    public MarkPlayedRequest withClientIdentifier(Optional<String> clientIdentifier) {
+        Utils.checkNotNull(clientIdentifier, "clientIdentifier");
+        this.clientIdentifier = clientIdentifier;
+        return this;
+    }
+
+    /**
+     * The name of the client product
+     */
+    public MarkPlayedRequest withProduct(String product) {
+        Utils.checkNotNull(product, "product");
+        this.product = Optional.ofNullable(product);
+        return this;
+    }
+
+
+    /**
+     * The name of the client product
+     */
+    public MarkPlayedRequest withProduct(Optional<String> product) {
+        Utils.checkNotNull(product, "product");
+        this.product = product;
+        return this;
+    }
+
+    /**
+     * The version of the client application
+     */
+    public MarkPlayedRequest withVersion(String version) {
+        Utils.checkNotNull(version, "version");
+        this.version = Optional.ofNullable(version);
+        return this;
+    }
+
+
+    /**
+     * The version of the client application
+     */
+    public MarkPlayedRequest withVersion(Optional<String> version) {
+        Utils.checkNotNull(version, "version");
+        this.version = version;
+        return this;
+    }
+
+    /**
+     * The platform of the client
+     */
+    public MarkPlayedRequest withPlatform(String platform) {
+        Utils.checkNotNull(platform, "platform");
+        this.platform = Optional.ofNullable(platform);
+        return this;
+    }
+
+
+    /**
+     * The platform of the client
+     */
+    public MarkPlayedRequest withPlatform(Optional<String> platform) {
+        Utils.checkNotNull(platform, "platform");
+        this.platform = platform;
+        return this;
+    }
+
+    /**
+     * The version of the platform
+     */
+    public MarkPlayedRequest withPlatformVersion(String platformVersion) {
+        Utils.checkNotNull(platformVersion, "platformVersion");
+        this.platformVersion = Optional.ofNullable(platformVersion);
+        return this;
+    }
+
+
+    /**
+     * The version of the platform
+     */
+    public MarkPlayedRequest withPlatformVersion(Optional<String> platformVersion) {
+        Utils.checkNotNull(platformVersion, "platformVersion");
+        this.platformVersion = platformVersion;
+        return this;
+    }
+
+    /**
+     * A relatively friendly name for the client device
+     */
+    public MarkPlayedRequest withDevice(String device) {
+        Utils.checkNotNull(device, "device");
+        this.device = Optional.ofNullable(device);
+        return this;
+    }
+
+
+    /**
+     * A relatively friendly name for the client device
+     */
+    public MarkPlayedRequest withDevice(Optional<String> device) {
+        Utils.checkNotNull(device, "device");
+        this.device = device;
+        return this;
+    }
+
+    /**
+     * A potentially less friendly identifier for the device model
+     */
+    public MarkPlayedRequest withModel(String model) {
+        Utils.checkNotNull(model, "model");
+        this.model = Optional.ofNullable(model);
+        return this;
+    }
+
+
+    /**
+     * A potentially less friendly identifier for the device model
+     */
+    public MarkPlayedRequest withModel(Optional<String> model) {
+        Utils.checkNotNull(model, "model");
+        this.model = model;
+        return this;
+    }
+
+    /**
+     * The device vendor
+     */
+    public MarkPlayedRequest withDeviceVendor(String deviceVendor) {
+        Utils.checkNotNull(deviceVendor, "deviceVendor");
+        this.deviceVendor = Optional.ofNullable(deviceVendor);
+        return this;
+    }
+
+
+    /**
+     * The device vendor
+     */
+    public MarkPlayedRequest withDeviceVendor(Optional<String> deviceVendor) {
+        Utils.checkNotNull(deviceVendor, "deviceVendor");
+        this.deviceVendor = deviceVendor;
+        return this;
+    }
+
+    /**
+     * A friendly name for the client
+     */
+    public MarkPlayedRequest withDeviceName(String deviceName) {
+        Utils.checkNotNull(deviceName, "deviceName");
+        this.deviceName = Optional.ofNullable(deviceName);
+        return this;
+    }
+
+
+    /**
+     * A friendly name for the client
+     */
+    public MarkPlayedRequest withDeviceName(Optional<String> deviceName) {
+        Utils.checkNotNull(deviceName, "deviceName");
+        this.deviceName = deviceName;
+        return this;
+    }
+
+    /**
+     * The marketplace on which the client application is distributed
+     */
+    public MarkPlayedRequest withMarketplace(String marketplace) {
+        Utils.checkNotNull(marketplace, "marketplace");
+        this.marketplace = Optional.ofNullable(marketplace);
+        return this;
+    }
+
+
+    /**
+     * The marketplace on which the client application is distributed
+     */
+    public MarkPlayedRequest withMarketplace(Optional<String> marketplace) {
+        Utils.checkNotNull(marketplace, "marketplace");
+        this.marketplace = marketplace;
+        return this;
+    }
+
+    /**
+     * The identifier of the media provider containing the media to rate.  Typically `com.plexapp.plugins.library`
+     */
+    public MarkPlayedRequest withIdentifier(String identifier) {
+        Utils.checkNotNull(identifier, "identifier");
+        this.identifier = identifier;
+        return this;
+    }
+
+    /**
+     * The key of the item to rate.  This is the `ratingKey` found in metadata items
+     */
+    public MarkPlayedRequest withKey(String key) {
+        Utils.checkNotNull(key, "key");
+        this.key = Optional.ofNullable(key);
+        return this;
+    }
+
+
+    /**
+     * The key of the item to rate.  This is the `ratingKey` found in metadata items
+     */
+    public MarkPlayedRequest withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
+        return this;
+    }
+
+    /**
+     * The URI of the item to mark as played.  See intro for description of the URIs
+     */
+    public MarkPlayedRequest withUri(String uri) {
+        Utils.checkNotNull(uri, "uri");
+        this.uri = Optional.ofNullable(uri);
+        return this;
+    }
+
+
+    /**
+     * The URI of the item to mark as played.  See intro for description of the URIs
+     */
+    public MarkPlayedRequest withUri(Optional<String> uri) {
+        Utils.checkNotNull(uri, "uri");
+        this.uri = uri;
         return this;
     }
 
@@ -58,25 +540,81 @@ public class MarkPlayedRequest {
         }
         MarkPlayedRequest other = (MarkPlayedRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.key, other.key);
+            Utils.enhancedDeepEquals(this.accepts, other.accepts) &&
+            Utils.enhancedDeepEquals(this.clientIdentifier, other.clientIdentifier) &&
+            Utils.enhancedDeepEquals(this.product, other.product) &&
+            Utils.enhancedDeepEquals(this.version, other.version) &&
+            Utils.enhancedDeepEquals(this.platform, other.platform) &&
+            Utils.enhancedDeepEquals(this.platformVersion, other.platformVersion) &&
+            Utils.enhancedDeepEquals(this.device, other.device) &&
+            Utils.enhancedDeepEquals(this.model, other.model) &&
+            Utils.enhancedDeepEquals(this.deviceVendor, other.deviceVendor) &&
+            Utils.enhancedDeepEquals(this.deviceName, other.deviceName) &&
+            Utils.enhancedDeepEquals(this.marketplace, other.marketplace) &&
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.uri, other.uri);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            key);
+            accepts, clientIdentifier, product,
+            version, platform, platformVersion,
+            device, model, deviceVendor,
+            deviceName, marketplace, identifier,
+            key, uri);
     }
     
     @Override
     public String toString() {
         return Utils.toString(MarkPlayedRequest.class,
-                "key", key);
+                "accepts", accepts,
+                "clientIdentifier", clientIdentifier,
+                "product", product,
+                "version", version,
+                "platform", platform,
+                "platformVersion", platformVersion,
+                "device", device,
+                "model", model,
+                "deviceVendor", deviceVendor,
+                "deviceName", deviceName,
+                "marketplace", marketplace,
+                "identifier", identifier,
+                "key", key,
+                "uri", uri);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Double key;
+        private Optional<? extends Accepts> accepts;
+
+        private Optional<String> clientIdentifier = Optional.empty();
+
+        private Optional<String> product = Optional.empty();
+
+        private Optional<String> version = Optional.empty();
+
+        private Optional<String> platform = Optional.empty();
+
+        private Optional<String> platformVersion = Optional.empty();
+
+        private Optional<String> device = Optional.empty();
+
+        private Optional<String> model = Optional.empty();
+
+        private Optional<String> deviceVendor = Optional.empty();
+
+        private Optional<String> deviceName = Optional.empty();
+
+        private Optional<String> marketplace = Optional.empty();
+
+        private String identifier;
+
+        private Optional<String> key = Optional.empty();
+
+        private Optional<String> uri = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -84,19 +622,279 @@ public class MarkPlayedRequest {
 
 
         /**
-         * The media key to mark as played
+         * Indicates the client accepts the indicated media types
          */
-        public Builder key(double key) {
+        public Builder accepts(Accepts accepts) {
+            Utils.checkNotNull(accepts, "accepts");
+            this.accepts = Optional.ofNullable(accepts);
+            return this;
+        }
+
+        /**
+         * Indicates the client accepts the indicated media types
+         */
+        public Builder accepts(Optional<? extends Accepts> accepts) {
+            Utils.checkNotNull(accepts, "accepts");
+            this.accepts = accepts;
+            return this;
+        }
+
+
+        /**
+         * An opaque identifier unique to the client
+         */
+        public Builder clientIdentifier(String clientIdentifier) {
+            Utils.checkNotNull(clientIdentifier, "clientIdentifier");
+            this.clientIdentifier = Optional.ofNullable(clientIdentifier);
+            return this;
+        }
+
+        /**
+         * An opaque identifier unique to the client
+         */
+        public Builder clientIdentifier(Optional<String> clientIdentifier) {
+            Utils.checkNotNull(clientIdentifier, "clientIdentifier");
+            this.clientIdentifier = clientIdentifier;
+            return this;
+        }
+
+
+        /**
+         * The name of the client product
+         */
+        public Builder product(String product) {
+            Utils.checkNotNull(product, "product");
+            this.product = Optional.ofNullable(product);
+            return this;
+        }
+
+        /**
+         * The name of the client product
+         */
+        public Builder product(Optional<String> product) {
+            Utils.checkNotNull(product, "product");
+            this.product = product;
+            return this;
+        }
+
+
+        /**
+         * The version of the client application
+         */
+        public Builder version(String version) {
+            Utils.checkNotNull(version, "version");
+            this.version = Optional.ofNullable(version);
+            return this;
+        }
+
+        /**
+         * The version of the client application
+         */
+        public Builder version(Optional<String> version) {
+            Utils.checkNotNull(version, "version");
+            this.version = version;
+            return this;
+        }
+
+
+        /**
+         * The platform of the client
+         */
+        public Builder platform(String platform) {
+            Utils.checkNotNull(platform, "platform");
+            this.platform = Optional.ofNullable(platform);
+            return this;
+        }
+
+        /**
+         * The platform of the client
+         */
+        public Builder platform(Optional<String> platform) {
+            Utils.checkNotNull(platform, "platform");
+            this.platform = platform;
+            return this;
+        }
+
+
+        /**
+         * The version of the platform
+         */
+        public Builder platformVersion(String platformVersion) {
+            Utils.checkNotNull(platformVersion, "platformVersion");
+            this.platformVersion = Optional.ofNullable(platformVersion);
+            return this;
+        }
+
+        /**
+         * The version of the platform
+         */
+        public Builder platformVersion(Optional<String> platformVersion) {
+            Utils.checkNotNull(platformVersion, "platformVersion");
+            this.platformVersion = platformVersion;
+            return this;
+        }
+
+
+        /**
+         * A relatively friendly name for the client device
+         */
+        public Builder device(String device) {
+            Utils.checkNotNull(device, "device");
+            this.device = Optional.ofNullable(device);
+            return this;
+        }
+
+        /**
+         * A relatively friendly name for the client device
+         */
+        public Builder device(Optional<String> device) {
+            Utils.checkNotNull(device, "device");
+            this.device = device;
+            return this;
+        }
+
+
+        /**
+         * A potentially less friendly identifier for the device model
+         */
+        public Builder model(String model) {
+            Utils.checkNotNull(model, "model");
+            this.model = Optional.ofNullable(model);
+            return this;
+        }
+
+        /**
+         * A potentially less friendly identifier for the device model
+         */
+        public Builder model(Optional<String> model) {
+            Utils.checkNotNull(model, "model");
+            this.model = model;
+            return this;
+        }
+
+
+        /**
+         * The device vendor
+         */
+        public Builder deviceVendor(String deviceVendor) {
+            Utils.checkNotNull(deviceVendor, "deviceVendor");
+            this.deviceVendor = Optional.ofNullable(deviceVendor);
+            return this;
+        }
+
+        /**
+         * The device vendor
+         */
+        public Builder deviceVendor(Optional<String> deviceVendor) {
+            Utils.checkNotNull(deviceVendor, "deviceVendor");
+            this.deviceVendor = deviceVendor;
+            return this;
+        }
+
+
+        /**
+         * A friendly name for the client
+         */
+        public Builder deviceName(String deviceName) {
+            Utils.checkNotNull(deviceName, "deviceName");
+            this.deviceName = Optional.ofNullable(deviceName);
+            return this;
+        }
+
+        /**
+         * A friendly name for the client
+         */
+        public Builder deviceName(Optional<String> deviceName) {
+            Utils.checkNotNull(deviceName, "deviceName");
+            this.deviceName = deviceName;
+            return this;
+        }
+
+
+        /**
+         * The marketplace on which the client application is distributed
+         */
+        public Builder marketplace(String marketplace) {
+            Utils.checkNotNull(marketplace, "marketplace");
+            this.marketplace = Optional.ofNullable(marketplace);
+            return this;
+        }
+
+        /**
+         * The marketplace on which the client application is distributed
+         */
+        public Builder marketplace(Optional<String> marketplace) {
+            Utils.checkNotNull(marketplace, "marketplace");
+            this.marketplace = marketplace;
+            return this;
+        }
+
+
+        /**
+         * The identifier of the media provider containing the media to rate.  Typically `com.plexapp.plugins.library`
+         */
+        public Builder identifier(String identifier) {
+            Utils.checkNotNull(identifier, "identifier");
+            this.identifier = identifier;
+            return this;
+        }
+
+
+        /**
+         * The key of the item to rate.  This is the `ratingKey` found in metadata items
+         */
+        public Builder key(String key) {
+            Utils.checkNotNull(key, "key");
+            this.key = Optional.ofNullable(key);
+            return this;
+        }
+
+        /**
+         * The key of the item to rate.  This is the `ratingKey` found in metadata items
+         */
+        public Builder key(Optional<String> key) {
             Utils.checkNotNull(key, "key");
             this.key = key;
             return this;
         }
 
-        public MarkPlayedRequest build() {
 
-            return new MarkPlayedRequest(
-                key);
+        /**
+         * The URI of the item to mark as played.  See intro for description of the URIs
+         */
+        public Builder uri(String uri) {
+            Utils.checkNotNull(uri, "uri");
+            this.uri = Optional.ofNullable(uri);
+            return this;
         }
 
+        /**
+         * The URI of the item to mark as played.  See intro for description of the URIs
+         */
+        public Builder uri(Optional<String> uri) {
+            Utils.checkNotNull(uri, "uri");
+            this.uri = uri;
+            return this;
+        }
+
+        public MarkPlayedRequest build() {
+            if (accepts == null) {
+                accepts = _SINGLETON_VALUE_Accepts.value();
+            }
+
+            return new MarkPlayedRequest(
+                accepts, clientIdentifier, product,
+                version, platform, platformVersion,
+                device, model, deviceVendor,
+                deviceName, marketplace, identifier,
+                key, uri);
+        }
+
+
+        private static final LazySingletonValue<Optional<? extends Accepts>> _SINGLETON_VALUE_Accepts =
+                new LazySingletonValue<>(
+                        "accepts",
+                        "\"application/xml\"",
+                        new TypeReference<Optional<? extends Accepts>>() {});
     }
 }

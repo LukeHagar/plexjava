@@ -6,100 +6,322 @@ package dev.plexapi.sdk;
 import static dev.plexapi.sdk.operations.Operations.AsyncRequestOperation;
 import static dev.plexapi.sdk.operations.Operations.AsyncRequestlessOperation;
 
-import dev.plexapi.sdk.models.operations.DeleteLibraryRequest;
-import dev.plexapi.sdk.models.operations.Force;
-import dev.plexapi.sdk.models.operations.GetActorsLibraryQueryParamType;
-import dev.plexapi.sdk.models.operations.GetActorsLibraryRequest;
-import dev.plexapi.sdk.models.operations.GetCountriesLibraryQueryParamType;
-import dev.plexapi.sdk.models.operations.GetCountriesLibraryRequest;
-import dev.plexapi.sdk.models.operations.GetFileHashRequest;
-import dev.plexapi.sdk.models.operations.GetGenresLibraryQueryParamType;
-import dev.plexapi.sdk.models.operations.GetGenresLibraryRequest;
+import dev.plexapi.sdk.models.operations.AddExtrasRequest;
+import dev.plexapi.sdk.models.operations.AddSectionRequest;
+import dev.plexapi.sdk.models.operations.AddSubtitlesRequest;
+import dev.plexapi.sdk.models.operations.AnalyzeMetadataRequest;
+import dev.plexapi.sdk.models.operations.AutocompleteRequest;
+import dev.plexapi.sdk.models.operations.CancelRefreshRequest;
+import dev.plexapi.sdk.models.operations.CreateMarkerRequest;
+import dev.plexapi.sdk.models.operations.DeleteCollectionRequest;
+import dev.plexapi.sdk.models.operations.DeleteIndexesRequest;
+import dev.plexapi.sdk.models.operations.DeleteIntrosRequest;
+import dev.plexapi.sdk.models.operations.DeleteLibrarySectionRequest;
+import dev.plexapi.sdk.models.operations.DeleteMarkerRequest;
+import dev.plexapi.sdk.models.operations.DeleteMediaItemRequest;
+import dev.plexapi.sdk.models.operations.DeleteMetadataItemRequest;
+import dev.plexapi.sdk.models.operations.DeleteStreamRequest;
+import dev.plexapi.sdk.models.operations.DetectAdsRequest;
+import dev.plexapi.sdk.models.operations.DetectCreditsRequest;
+import dev.plexapi.sdk.models.operations.DetectIntrosRequest;
+import dev.plexapi.sdk.models.operations.DetectVoiceActivityRequest;
+import dev.plexapi.sdk.models.operations.EditMarkerRequest;
+import dev.plexapi.sdk.models.operations.EditMetadataItemRequest;
+import dev.plexapi.sdk.models.operations.EditSectionRequest;
+import dev.plexapi.sdk.models.operations.EmptyTrashRequest;
+import dev.plexapi.sdk.models.operations.GenerateThumbsRequest;
+import dev.plexapi.sdk.models.operations.GetAllItemLeavesRequest;
+import dev.plexapi.sdk.models.operations.GetAugmentationStatusRequest;
+import dev.plexapi.sdk.models.operations.GetAvailableSortsRequest;
+import dev.plexapi.sdk.models.operations.GetChapterImageRequest;
+import dev.plexapi.sdk.models.operations.GetCollectionsRequest;
+import dev.plexapi.sdk.models.operations.GetCommonRequest;
+import dev.plexapi.sdk.models.operations.GetExtrasRequest;
+import dev.plexapi.sdk.models.operations.GetFileRequest;
+import dev.plexapi.sdk.models.operations.GetFirstCharactersRequest;
+import dev.plexapi.sdk.models.operations.GetImageFromBifRequest;
+import dev.plexapi.sdk.models.operations.GetItemArtworkRequest;
+import dev.plexapi.sdk.models.operations.GetItemTreeRequest;
 import dev.plexapi.sdk.models.operations.GetLibraryDetailsRequest;
 import dev.plexapi.sdk.models.operations.GetLibraryItemsRequest;
-import dev.plexapi.sdk.models.operations.GetLibrarySectionsAllRequest;
-import dev.plexapi.sdk.models.operations.GetMediaArtsRequest;
-import dev.plexapi.sdk.models.operations.GetMediaMetaDataRequest;
-import dev.plexapi.sdk.models.operations.GetMediaPostersRequest;
-import dev.plexapi.sdk.models.operations.GetMetadataChildrenRequest;
-import dev.plexapi.sdk.models.operations.GetRecentlyAddedLibraryRequest;
-import dev.plexapi.sdk.models.operations.GetRefreshLibraryMetadataRequest;
-import dev.plexapi.sdk.models.operations.GetSearchAllLibrariesRequest;
-import dev.plexapi.sdk.models.operations.GetSearchLibraryQueryParamType;
-import dev.plexapi.sdk.models.operations.GetSearchLibraryRequest;
-import dev.plexapi.sdk.models.operations.GetTopWatchedContentQueryParamIncludeGuids;
-import dev.plexapi.sdk.models.operations.GetTopWatchedContentQueryParamType;
-import dev.plexapi.sdk.models.operations.GetTopWatchedContentRequest;
-import dev.plexapi.sdk.models.operations.IncludeDetails;
-import dev.plexapi.sdk.models.operations.PostMediaArtsRequest;
-import dev.plexapi.sdk.models.operations.PostMediaPosterRequest;
-import dev.plexapi.sdk.models.operations.async.DeleteLibraryRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.DeleteLibraryResponse;
-import dev.plexapi.sdk.models.operations.async.GetActorsLibraryRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.GetActorsLibraryResponse;
-import dev.plexapi.sdk.models.operations.async.GetAllLibrariesRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.GetAllLibrariesResponse;
-import dev.plexapi.sdk.models.operations.async.GetCountriesLibraryRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.GetCountriesLibraryResponse;
-import dev.plexapi.sdk.models.operations.async.GetFileHashRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.GetFileHashResponse;
-import dev.plexapi.sdk.models.operations.async.GetGenresLibraryRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.GetGenresLibraryResponse;
+import dev.plexapi.sdk.models.operations.GetLibraryMatchesRequest;
+import dev.plexapi.sdk.models.operations.GetMediaPartRequest;
+import dev.plexapi.sdk.models.operations.GetPartIndexRequest;
+import dev.plexapi.sdk.models.operations.GetPersonRequest;
+import dev.plexapi.sdk.models.operations.GetRandomArtworkRequest;
+import dev.plexapi.sdk.models.operations.GetRelatedItemsRequest;
+import dev.plexapi.sdk.models.operations.GetSectionFiltersRequest;
+import dev.plexapi.sdk.models.operations.GetSectionImageRequest;
+import dev.plexapi.sdk.models.operations.GetSectionPreferencesRequest;
+import dev.plexapi.sdk.models.operations.GetSectionsPrefsRequest;
+import dev.plexapi.sdk.models.operations.GetStreamLevelsRequest;
+import dev.plexapi.sdk.models.operations.GetStreamLoudnessRequest;
+import dev.plexapi.sdk.models.operations.GetStreamRequest;
+import dev.plexapi.sdk.models.operations.GetTagsRequest;
+import dev.plexapi.sdk.models.operations.IngestTransientItemRequest;
+import dev.plexapi.sdk.models.operations.ListMatchesRequest;
+import dev.plexapi.sdk.models.operations.ListPersonMediaRequest;
+import dev.plexapi.sdk.models.operations.ListSimilarRequest;
+import dev.plexapi.sdk.models.operations.ListSonicallySimilarRequest;
+import dev.plexapi.sdk.models.operations.ListTopUsersRequest;
+import dev.plexapi.sdk.models.operations.MatchItemRequest;
+import dev.plexapi.sdk.models.operations.MergeItemsRequest;
+import dev.plexapi.sdk.models.operations.OptimizeDatabaseRequest;
+import dev.plexapi.sdk.models.operations.RefreshItemsMetadataRequest;
+import dev.plexapi.sdk.models.operations.RefreshSectionRequest;
+import dev.plexapi.sdk.models.operations.RefreshSectionsMetadataRequest;
+import dev.plexapi.sdk.models.operations.SetItemArtworkRequest;
+import dev.plexapi.sdk.models.operations.SetItemPreferencesRequest;
+import dev.plexapi.sdk.models.operations.SetSectionPreferencesRequest;
+import dev.plexapi.sdk.models.operations.SetStreamOffsetRequest;
+import dev.plexapi.sdk.models.operations.SetStreamSelectionRequest;
+import dev.plexapi.sdk.models.operations.SplitItemRequest;
+import dev.plexapi.sdk.models.operations.StartAnalysisRequest;
+import dev.plexapi.sdk.models.operations.StartBifGenerationRequest;
+import dev.plexapi.sdk.models.operations.UnmatchRequest;
+import dev.plexapi.sdk.models.operations.UpdateItemArtworkRequest;
+import dev.plexapi.sdk.models.operations.UpdateItemsRequest;
+import dev.plexapi.sdk.models.operations.async.AddExtrasRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.AddExtrasResponse;
+import dev.plexapi.sdk.models.operations.async.AddSectionRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.AddSectionResponse;
+import dev.plexapi.sdk.models.operations.async.AddSubtitlesRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.AddSubtitlesResponse;
+import dev.plexapi.sdk.models.operations.async.AnalyzeMetadataRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.AnalyzeMetadataResponse;
+import dev.plexapi.sdk.models.operations.async.AutocompleteRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.AutocompleteResponse;
+import dev.plexapi.sdk.models.operations.async.CancelRefreshRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.CancelRefreshResponse;
+import dev.plexapi.sdk.models.operations.async.CleanBundlesRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.CleanBundlesResponse;
+import dev.plexapi.sdk.models.operations.async.CreateMarkerRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.CreateMarkerResponse;
+import dev.plexapi.sdk.models.operations.async.DeleteCachesRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.DeleteCachesResponse;
+import dev.plexapi.sdk.models.operations.async.DeleteCollectionRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.DeleteCollectionResponse;
+import dev.plexapi.sdk.models.operations.async.DeleteIndexesRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.DeleteIndexesResponse;
+import dev.plexapi.sdk.models.operations.async.DeleteIntrosRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.DeleteIntrosResponse;
+import dev.plexapi.sdk.models.operations.async.DeleteLibrarySectionRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.DeleteLibrarySectionResponse;
+import dev.plexapi.sdk.models.operations.async.DeleteMarkerRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.DeleteMarkerResponse;
+import dev.plexapi.sdk.models.operations.async.DeleteMediaItemRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.DeleteMediaItemResponse;
+import dev.plexapi.sdk.models.operations.async.DeleteMetadataItemRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.DeleteMetadataItemResponse;
+import dev.plexapi.sdk.models.operations.async.DeleteStreamRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.DeleteStreamResponse;
+import dev.plexapi.sdk.models.operations.async.DetectAdsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.DetectAdsResponse;
+import dev.plexapi.sdk.models.operations.async.DetectCreditsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.DetectCreditsResponse;
+import dev.plexapi.sdk.models.operations.async.DetectIntrosRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.DetectIntrosResponse;
+import dev.plexapi.sdk.models.operations.async.DetectVoiceActivityRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.DetectVoiceActivityResponse;
+import dev.plexapi.sdk.models.operations.async.EditMarkerRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.EditMarkerResponse;
+import dev.plexapi.sdk.models.operations.async.EditMetadataItemRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.EditMetadataItemResponse;
+import dev.plexapi.sdk.models.operations.async.EditSectionRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.EditSectionResponse;
+import dev.plexapi.sdk.models.operations.async.EmptyTrashRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.EmptyTrashResponse;
+import dev.plexapi.sdk.models.operations.async.GenerateThumbsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GenerateThumbsResponse;
+import dev.plexapi.sdk.models.operations.async.GetAllItemLeavesRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetAllItemLeavesResponse;
+import dev.plexapi.sdk.models.operations.async.GetAugmentationStatusRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetAugmentationStatusResponse;
+import dev.plexapi.sdk.models.operations.async.GetAvailableSortsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetAvailableSortsResponse;
+import dev.plexapi.sdk.models.operations.async.GetChapterImageRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetChapterImageResponse;
+import dev.plexapi.sdk.models.operations.async.GetCollectionsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetCollectionsResponse;
+import dev.plexapi.sdk.models.operations.async.GetCommonRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetCommonResponse;
+import dev.plexapi.sdk.models.operations.async.GetExtrasRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetExtrasResponse;
+import dev.plexapi.sdk.models.operations.async.GetFileRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetFileResponse;
+import dev.plexapi.sdk.models.operations.async.GetFirstCharactersRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetFirstCharactersResponse;
+import dev.plexapi.sdk.models.operations.async.GetImageFromBifRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetImageFromBifResponse;
+import dev.plexapi.sdk.models.operations.async.GetItemArtworkRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetItemArtworkResponse;
+import dev.plexapi.sdk.models.operations.async.GetItemTreeRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetItemTreeResponse;
 import dev.plexapi.sdk.models.operations.async.GetLibraryDetailsRequestBuilder;
 import dev.plexapi.sdk.models.operations.async.GetLibraryDetailsResponse;
 import dev.plexapi.sdk.models.operations.async.GetLibraryItemsRequestBuilder;
 import dev.plexapi.sdk.models.operations.async.GetLibraryItemsResponse;
-import dev.plexapi.sdk.models.operations.async.GetLibrarySectionsAllRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.GetLibrarySectionsAllResponse;
-import dev.plexapi.sdk.models.operations.async.GetMediaArtsRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.GetMediaArtsResponse;
-import dev.plexapi.sdk.models.operations.async.GetMediaMetaDataRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.GetMediaMetaDataResponse;
-import dev.plexapi.sdk.models.operations.async.GetMediaPostersRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.GetMediaPostersResponse;
-import dev.plexapi.sdk.models.operations.async.GetMetadataChildrenRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.GetMetadataChildrenResponse;
-import dev.plexapi.sdk.models.operations.async.GetRecentlyAddedLibraryRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.GetRecentlyAddedLibraryResponse;
-import dev.plexapi.sdk.models.operations.async.GetRefreshLibraryMetadataRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.GetRefreshLibraryMetadataResponse;
-import dev.plexapi.sdk.models.operations.async.GetSearchAllLibrariesRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.GetSearchAllLibrariesResponse;
-import dev.plexapi.sdk.models.operations.async.GetSearchLibraryRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.GetSearchLibraryResponse;
-import dev.plexapi.sdk.models.operations.async.GetTopWatchedContentRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.GetTopWatchedContentResponse;
-import dev.plexapi.sdk.models.operations.async.PostMediaArtsRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.PostMediaArtsResponse;
-import dev.plexapi.sdk.models.operations.async.PostMediaPosterRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.PostMediaPosterResponse;
-import dev.plexapi.sdk.operations.DeleteLibrary;
-import dev.plexapi.sdk.operations.GetActorsLibrary;
-import dev.plexapi.sdk.operations.GetAllLibraries;
-import dev.plexapi.sdk.operations.GetCountriesLibrary;
-import dev.plexapi.sdk.operations.GetFileHash;
-import dev.plexapi.sdk.operations.GetGenresLibrary;
+import dev.plexapi.sdk.models.operations.async.GetLibraryMatchesRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetLibraryMatchesResponse;
+import dev.plexapi.sdk.models.operations.async.GetMediaPartRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetMediaPartResponse;
+import dev.plexapi.sdk.models.operations.async.GetPartIndexRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetPartIndexResponse;
+import dev.plexapi.sdk.models.operations.async.GetPersonRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetPersonResponse;
+import dev.plexapi.sdk.models.operations.async.GetRandomArtworkRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetRandomArtworkResponse;
+import dev.plexapi.sdk.models.operations.async.GetRelatedItemsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetRelatedItemsResponse;
+import dev.plexapi.sdk.models.operations.async.GetSectionFiltersRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetSectionFiltersResponse;
+import dev.plexapi.sdk.models.operations.async.GetSectionImageRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetSectionImageResponse;
+import dev.plexapi.sdk.models.operations.async.GetSectionPreferencesRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetSectionPreferencesResponse;
+import dev.plexapi.sdk.models.operations.async.GetSectionsPrefsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetSectionsPrefsResponse;
+import dev.plexapi.sdk.models.operations.async.GetSectionsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetSectionsResponse;
+import dev.plexapi.sdk.models.operations.async.GetStreamLevelsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetStreamLevelsResponse;
+import dev.plexapi.sdk.models.operations.async.GetStreamLoudnessRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetStreamLoudnessResponse;
+import dev.plexapi.sdk.models.operations.async.GetStreamRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetStreamResponse;
+import dev.plexapi.sdk.models.operations.async.GetTagsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetTagsResponse;
+import dev.plexapi.sdk.models.operations.async.IngestTransientItemRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.IngestTransientItemResponse;
+import dev.plexapi.sdk.models.operations.async.ListMatchesRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.ListMatchesResponse;
+import dev.plexapi.sdk.models.operations.async.ListPersonMediaRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.ListPersonMediaResponse;
+import dev.plexapi.sdk.models.operations.async.ListSimilarRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.ListSimilarResponse;
+import dev.plexapi.sdk.models.operations.async.ListSonicallySimilarRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.ListSonicallySimilarResponse;
+import dev.plexapi.sdk.models.operations.async.ListTopUsersRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.ListTopUsersResponse;
+import dev.plexapi.sdk.models.operations.async.MatchItemRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.MatchItemResponse;
+import dev.plexapi.sdk.models.operations.async.MergeItemsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.MergeItemsResponse;
+import dev.plexapi.sdk.models.operations.async.OptimizeDatabaseRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.OptimizeDatabaseResponse;
+import dev.plexapi.sdk.models.operations.async.RefreshItemsMetadataRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.RefreshItemsMetadataResponse;
+import dev.plexapi.sdk.models.operations.async.RefreshSectionRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.RefreshSectionResponse;
+import dev.plexapi.sdk.models.operations.async.RefreshSectionsMetadataRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.RefreshSectionsMetadataResponse;
+import dev.plexapi.sdk.models.operations.async.SetItemArtworkRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.SetItemArtworkResponse;
+import dev.plexapi.sdk.models.operations.async.SetItemPreferencesRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.SetItemPreferencesResponse;
+import dev.plexapi.sdk.models.operations.async.SetSectionPreferencesRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.SetSectionPreferencesResponse;
+import dev.plexapi.sdk.models.operations.async.SetStreamOffsetRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.SetStreamOffsetResponse;
+import dev.plexapi.sdk.models.operations.async.SetStreamSelectionRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.SetStreamSelectionResponse;
+import dev.plexapi.sdk.models.operations.async.SplitItemRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.SplitItemResponse;
+import dev.plexapi.sdk.models.operations.async.StartAnalysisRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.StartAnalysisResponse;
+import dev.plexapi.sdk.models.operations.async.StartBifGenerationRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.StartBifGenerationResponse;
+import dev.plexapi.sdk.models.operations.async.StopAllRefreshesRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.StopAllRefreshesResponse;
+import dev.plexapi.sdk.models.operations.async.UnmatchRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.UnmatchResponse;
+import dev.plexapi.sdk.models.operations.async.UpdateItemArtworkRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.UpdateItemArtworkResponse;
+import dev.plexapi.sdk.models.operations.async.UpdateItemsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.UpdateItemsResponse;
+import dev.plexapi.sdk.operations.AddExtras;
+import dev.plexapi.sdk.operations.AddSection;
+import dev.plexapi.sdk.operations.AddSubtitles;
+import dev.plexapi.sdk.operations.AnalyzeMetadata;
+import dev.plexapi.sdk.operations.Autocomplete;
+import dev.plexapi.sdk.operations.CancelRefresh;
+import dev.plexapi.sdk.operations.CleanBundles;
+import dev.plexapi.sdk.operations.CreateMarker;
+import dev.plexapi.sdk.operations.DeleteCaches;
+import dev.plexapi.sdk.operations.DeleteCollection;
+import dev.plexapi.sdk.operations.DeleteIndexes;
+import dev.plexapi.sdk.operations.DeleteIntros;
+import dev.plexapi.sdk.operations.DeleteLibrarySection;
+import dev.plexapi.sdk.operations.DeleteMarker;
+import dev.plexapi.sdk.operations.DeleteMediaItem;
+import dev.plexapi.sdk.operations.DeleteMetadataItem;
+import dev.plexapi.sdk.operations.DeleteStream;
+import dev.plexapi.sdk.operations.DetectAds;
+import dev.plexapi.sdk.operations.DetectCredits;
+import dev.plexapi.sdk.operations.DetectIntros;
+import dev.plexapi.sdk.operations.DetectVoiceActivity;
+import dev.plexapi.sdk.operations.EditMarker;
+import dev.plexapi.sdk.operations.EditMetadataItem;
+import dev.plexapi.sdk.operations.EditSection;
+import dev.plexapi.sdk.operations.EmptyTrash;
+import dev.plexapi.sdk.operations.GenerateThumbs;
+import dev.plexapi.sdk.operations.GetAllItemLeaves;
+import dev.plexapi.sdk.operations.GetAugmentationStatus;
+import dev.plexapi.sdk.operations.GetAvailableSorts;
+import dev.plexapi.sdk.operations.GetChapterImage;
+import dev.plexapi.sdk.operations.GetCollections;
+import dev.plexapi.sdk.operations.GetCommon;
+import dev.plexapi.sdk.operations.GetExtras;
+import dev.plexapi.sdk.operations.GetFile;
+import dev.plexapi.sdk.operations.GetFirstCharacters;
+import dev.plexapi.sdk.operations.GetImageFromBif;
+import dev.plexapi.sdk.operations.GetItemArtwork;
+import dev.plexapi.sdk.operations.GetItemTree;
 import dev.plexapi.sdk.operations.GetLibraryDetails;
 import dev.plexapi.sdk.operations.GetLibraryItems;
-import dev.plexapi.sdk.operations.GetLibrarySectionsAll;
-import dev.plexapi.sdk.operations.GetMediaArts;
-import dev.plexapi.sdk.operations.GetMediaMetaData;
-import dev.plexapi.sdk.operations.GetMediaPosters;
-import dev.plexapi.sdk.operations.GetMetadataChildren;
-import dev.plexapi.sdk.operations.GetRecentlyAddedLibrary;
-import dev.plexapi.sdk.operations.GetRefreshLibraryMetadata;
-import dev.plexapi.sdk.operations.GetSearchAllLibraries;
-import dev.plexapi.sdk.operations.GetSearchLibrary;
-import dev.plexapi.sdk.operations.GetTopWatchedContent;
-import dev.plexapi.sdk.operations.PostMediaArts;
-import dev.plexapi.sdk.operations.PostMediaPoster;
-import java.lang.Double;
-import java.lang.String;
-import java.util.Optional;
+import dev.plexapi.sdk.operations.GetLibraryMatches;
+import dev.plexapi.sdk.operations.GetMediaPart;
+import dev.plexapi.sdk.operations.GetPartIndex;
+import dev.plexapi.sdk.operations.GetPerson;
+import dev.plexapi.sdk.operations.GetRandomArtwork;
+import dev.plexapi.sdk.operations.GetRelatedItems;
+import dev.plexapi.sdk.operations.GetSectionFilters;
+import dev.plexapi.sdk.operations.GetSectionImage;
+import dev.plexapi.sdk.operations.GetSectionPreferences;
+import dev.plexapi.sdk.operations.GetSections;
+import dev.plexapi.sdk.operations.GetSectionsPrefs;
+import dev.plexapi.sdk.operations.GetStream;
+import dev.plexapi.sdk.operations.GetStreamLevels;
+import dev.plexapi.sdk.operations.GetStreamLoudness;
+import dev.plexapi.sdk.operations.GetTags;
+import dev.plexapi.sdk.operations.IngestTransientItem;
+import dev.plexapi.sdk.operations.ListMatches;
+import dev.plexapi.sdk.operations.ListPersonMedia;
+import dev.plexapi.sdk.operations.ListSimilar;
+import dev.plexapi.sdk.operations.ListSonicallySimilar;
+import dev.plexapi.sdk.operations.ListTopUsers;
+import dev.plexapi.sdk.operations.MatchItem;
+import dev.plexapi.sdk.operations.MergeItems;
+import dev.plexapi.sdk.operations.OptimizeDatabase;
+import dev.plexapi.sdk.operations.RefreshItemsMetadata;
+import dev.plexapi.sdk.operations.RefreshSection;
+import dev.plexapi.sdk.operations.RefreshSectionsMetadata;
+import dev.plexapi.sdk.operations.SetItemArtwork;
+import dev.plexapi.sdk.operations.SetItemPreferences;
+import dev.plexapi.sdk.operations.SetSectionPreferences;
+import dev.plexapi.sdk.operations.SetStreamOffset;
+import dev.plexapi.sdk.operations.SetStreamSelection;
+import dev.plexapi.sdk.operations.SplitItem;
+import dev.plexapi.sdk.operations.StartAnalysis;
+import dev.plexapi.sdk.operations.StartBifGeneration;
+import dev.plexapi.sdk.operations.StopAllRefreshes;
+import dev.plexapi.sdk.operations.Unmatch;
+import dev.plexapi.sdk.operations.UpdateItemArtwork;
+import dev.plexapi.sdk.operations.UpdateItems;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * API Calls interacting with Plex Media Server Libraries
+ * Library endpoints which are outside of the Media Provider API.  Typically this is manipulation of the library (adding/removing sections, modifying preferences, etc).
  */
 public class AsyncLibrary {
     private final SDKConfiguration sdkConfiguration;
@@ -121,338 +343,9 @@ public class AsyncLibrary {
 
 
     /**
-     * Get Hash Value
+     * Get all items in library
      * 
-     * <p>This resource returns hash values for local files
-     * 
-     * @return The async call builder
-     */
-    public GetFileHashRequestBuilder getFileHash() {
-        return new GetFileHashRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get Hash Value
-     * 
-     * <p>This resource returns hash values for local files
-     * 
-     * @param url This is the path to the local file, must be prefixed by `file://`
-     * @return CompletableFuture&lt;GetFileHashResponse&gt; - The async response
-     */
-    public CompletableFuture<GetFileHashResponse> getFileHash(String url) {
-        return getFileHash(url, Optional.empty());
-    }
-
-    /**
-     * Get Hash Value
-     * 
-     * <p>This resource returns hash values for local files
-     * 
-     * @param url This is the path to the local file, must be prefixed by `file://`
-     * @param type Item type
-     * @return CompletableFuture&lt;GetFileHashResponse&gt; - The async response
-     */
-    public CompletableFuture<GetFileHashResponse> getFileHash(String url, Optional<Double> type) {
-        GetFileHashRequest request =
-            GetFileHashRequest
-                .builder()
-                .url(url)
-                .type(type)
-                .build();
-        AsyncRequestOperation<GetFileHashRequest, GetFileHashResponse> operation
-              = new GetFileHash.Async(sdkConfiguration);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Get Recently Added
-     * 
-     * <p>This endpoint will return the recently added content.
-     * 
-     * @return The async call builder
-     */
-    public GetRecentlyAddedLibraryRequestBuilder getRecentlyAddedLibrary() {
-        return new GetRecentlyAddedLibraryRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get Recently Added
-     * 
-     * <p>This endpoint will return the recently added content.
-     * 
-     * @param request The request object containing all the parameters for the API call.
-     * @return CompletableFuture&lt;GetRecentlyAddedLibraryResponse&gt; - The async response
-     */
-    public CompletableFuture<GetRecentlyAddedLibraryResponse> getRecentlyAddedLibrary(GetRecentlyAddedLibraryRequest request) {
-        AsyncRequestOperation<GetRecentlyAddedLibraryRequest, GetRecentlyAddedLibraryResponse> operation
-              = new GetRecentlyAddedLibrary.Async(sdkConfiguration);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Get All Libraries
-     * 
-     * <p>A library section (commonly referred to as just a library) is a collection of media. 
-     * Libraries are typed, and depending on their type provide either a flat or a hierarchical view of the media. 
-     * For example, a music library has an artist &gt; albums &gt; tracks structure, whereas a movie library is flat.
-     * 
-     * <p>Libraries have features beyond just being a collection of media; for starters, they include information about supported types, filters and sorts. 
-     * This allows a client to provide a rich interface around the media (e.g. allow sorting movies by release year).
-     * 
-     * @return The async call builder
-     */
-    public GetAllLibrariesRequestBuilder getAllLibraries() {
-        return new GetAllLibrariesRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get All Libraries
-     * 
-     * <p>A library section (commonly referred to as just a library) is a collection of media. 
-     * Libraries are typed, and depending on their type provide either a flat or a hierarchical view of the media. 
-     * For example, a music library has an artist &gt; albums &gt; tracks structure, whereas a movie library is flat.
-     * 
-     * <p>Libraries have features beyond just being a collection of media; for starters, they include information about supported types, filters and sorts. 
-     * This allows a client to provide a rich interface around the media (e.g. allow sorting movies by release year).
-     * 
-     * @return CompletableFuture&lt;GetAllLibrariesResponse&gt; - The async response
-     */
-    public CompletableFuture<GetAllLibrariesResponse> getAllLibrariesDirect() {
-        AsyncRequestlessOperation<GetAllLibrariesResponse> operation
-            = new GetAllLibraries.Async(sdkConfiguration);
-        return operation.doRequest()
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Get Library Details
-     * 
-     * <p>## Library Details Endpoint
-     * 
-     * <p>This endpoint provides comprehensive details about the library, focusing on organizational aspects rather than the content itself.
-     * 
-     * <p>The details include:
-     * 
-     * <p>### Directories
-     * Organized into three categories:
-     * 
-     * <p>- **Primary Directories**:
-     *   - Used in some clients for quick access to media subsets (e.g., "All", "On Deck").
-     *   - Most can be replicated via media queries.
-     *   - Customizable by users.
-     * 
-     * <p>- **Secondary Directories**:
-     *   - Marked with `secondary="1"`.
-     *   - Used in older clients for structured navigation.
-     * 
-     * <p>- **Special Directories**:
-     *   - Includes a "By Folder" entry for filesystem-based browsing.
-     *   - Contains an obsolete `search="1"` entry for on-the-fly search dialog creation.
-     * 
-     * <p>### Types
-     * Each type in the library comes with a set of filters and sorts, aiding in building dynamic media controls:
-     * 
-     * <p>- **Type Object Attributes**:
-     *   - `key`: Endpoint for the media list of this type.
-     *   - `type`: Metadata type (if standard Plex type).
-     *   - `title`: Title for this content type (e.g., "Movies").
-     * 
-     * <p>- **Filter Objects**:
-     *   - Subset of the media query language.
-     *   - Attributes include `filter` (name), `filterType` (data type), `key` (endpoint for value range), and `title`.
-     * 
-     * <p>- **Sort Objects**:
-     *   - Description of sort fields.
-     *   - Attributes include `defaultDirection` (asc/desc), `descKey` and `key` (sort parameters), and `title`.
-     * 
-     * <p>&gt; **Note**: Filters and sorts are optional; without them, no filtering controls are rendered.
-     * 
-     * @return The async call builder
-     */
-    public GetLibraryDetailsRequestBuilder getLibraryDetails() {
-        return new GetLibraryDetailsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get Library Details
-     * 
-     * <p>## Library Details Endpoint
-     * 
-     * <p>This endpoint provides comprehensive details about the library, focusing on organizational aspects rather than the content itself.
-     * 
-     * <p>The details include:
-     * 
-     * <p>### Directories
-     * Organized into three categories:
-     * 
-     * <p>- **Primary Directories**:
-     *   - Used in some clients for quick access to media subsets (e.g., "All", "On Deck").
-     *   - Most can be replicated via media queries.
-     *   - Customizable by users.
-     * 
-     * <p>- **Secondary Directories**:
-     *   - Marked with `secondary="1"`.
-     *   - Used in older clients for structured navigation.
-     * 
-     * <p>- **Special Directories**:
-     *   - Includes a "By Folder" entry for filesystem-based browsing.
-     *   - Contains an obsolete `search="1"` entry for on-the-fly search dialog creation.
-     * 
-     * <p>### Types
-     * Each type in the library comes with a set of filters and sorts, aiding in building dynamic media controls:
-     * 
-     * <p>- **Type Object Attributes**:
-     *   - `key`: Endpoint for the media list of this type.
-     *   - `type`: Metadata type (if standard Plex type).
-     *   - `title`: Title for this content type (e.g., "Movies").
-     * 
-     * <p>- **Filter Objects**:
-     *   - Subset of the media query language.
-     *   - Attributes include `filter` (name), `filterType` (data type), `key` (endpoint for value range), and `title`.
-     * 
-     * <p>- **Sort Objects**:
-     *   - Description of sort fields.
-     *   - Attributes include `defaultDirection` (asc/desc), `descKey` and `key` (sort parameters), and `title`.
-     * 
-     * <p>&gt; **Note**: Filters and sorts are optional; without them, no filtering controls are rendered.
-     * 
-     * @param sectionKey The unique key of the Plex library. 
-     *         Note: This is unique in the context of the Plex server.
-     *         
-     * @return CompletableFuture&lt;GetLibraryDetailsResponse&gt; - The async response
-     */
-    public CompletableFuture<GetLibraryDetailsResponse> getLibraryDetails(int sectionKey) {
-        return getLibraryDetails(Optional.empty(), sectionKey);
-    }
-
-    /**
-     * Get Library Details
-     * 
-     * <p>## Library Details Endpoint
-     * 
-     * <p>This endpoint provides comprehensive details about the library, focusing on organizational aspects rather than the content itself.
-     * 
-     * <p>The details include:
-     * 
-     * <p>### Directories
-     * Organized into three categories:
-     * 
-     * <p>- **Primary Directories**:
-     *   - Used in some clients for quick access to media subsets (e.g., "All", "On Deck").
-     *   - Most can be replicated via media queries.
-     *   - Customizable by users.
-     * 
-     * <p>- **Secondary Directories**:
-     *   - Marked with `secondary="1"`.
-     *   - Used in older clients for structured navigation.
-     * 
-     * <p>- **Special Directories**:
-     *   - Includes a "By Folder" entry for filesystem-based browsing.
-     *   - Contains an obsolete `search="1"` entry for on-the-fly search dialog creation.
-     * 
-     * <p>### Types
-     * Each type in the library comes with a set of filters and sorts, aiding in building dynamic media controls:
-     * 
-     * <p>- **Type Object Attributes**:
-     *   - `key`: Endpoint for the media list of this type.
-     *   - `type`: Metadata type (if standard Plex type).
-     *   - `title`: Title for this content type (e.g., "Movies").
-     * 
-     * <p>- **Filter Objects**:
-     *   - Subset of the media query language.
-     *   - Attributes include `filter` (name), `filterType` (data type), `key` (endpoint for value range), and `title`.
-     * 
-     * <p>- **Sort Objects**:
-     *   - Description of sort fields.
-     *   - Attributes include `defaultDirection` (asc/desc), `descKey` and `key` (sort parameters), and `title`.
-     * 
-     * <p>&gt; **Note**: Filters and sorts are optional; without them, no filtering controls are rendered.
-     * 
-     * @param includeDetails Whether or not to include details for a section (types, filters, and sorts).
-     *         Only exists for backwards compatibility, media providers other than the server libraries have it on always.
-     *         
-     * @param sectionKey The unique key of the Plex library. 
-     *         Note: This is unique in the context of the Plex server.
-     *         
-     * @return CompletableFuture&lt;GetLibraryDetailsResponse&gt; - The async response
-     */
-    public CompletableFuture<GetLibraryDetailsResponse> getLibraryDetails(Optional<? extends IncludeDetails> includeDetails, int sectionKey) {
-        GetLibraryDetailsRequest request =
-            GetLibraryDetailsRequest
-                .builder()
-                .includeDetails(includeDetails)
-                .sectionKey(sectionKey)
-                .build();
-        AsyncRequestOperation<GetLibraryDetailsRequest, GetLibraryDetailsResponse> operation
-              = new GetLibraryDetails.Async(sdkConfiguration);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Delete Library Section
-     * 
-     * <p>Delete a library using a specific section id
-     * 
-     * @return The async call builder
-     */
-    public DeleteLibraryRequestBuilder deleteLibrary() {
-        return new DeleteLibraryRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Delete Library Section
-     * 
-     * <p>Delete a library using a specific section id
-     * 
-     * @param sectionKey The unique key of the Plex library. 
-     *         Note: This is unique in the context of the Plex server.
-     *         
-     * @return CompletableFuture&lt;DeleteLibraryResponse&gt; - The async response
-     */
-    public CompletableFuture<DeleteLibraryResponse> deleteLibrary(int sectionKey) {
-        DeleteLibraryRequest request =
-            DeleteLibraryRequest
-                .builder()
-                .sectionKey(sectionKey)
-                .build();
-        AsyncRequestOperation<DeleteLibraryRequest, DeleteLibraryResponse> operation
-              = new DeleteLibrary.Async(sdkConfiguration);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Get Library Items
-     * 
-     * <p>Fetches details from a specific section of the library identified by a section key and a tag. The tag parameter accepts the following values:
-     * - `all`: All items in the section.
-     * - `unwatched`: Items that have not been played.
-     * - `newest`: Items that are recently released.
-     * - `recentlyAdded`: Items that are recently added to the library.
-     * - `recentlyViewed`: Items that were recently viewed.
-     * - `onDeck`: Items to continue watching.
-     * - `collection`: Items categorized by collection.
-     * - `edition`: Items categorized by edition.
-     * - `genre`: Items categorized by genre.
-     * - `year`: Items categorized by year of release.
-     * - `decade`: Items categorized by decade.
-     * - `director`: Items categorized by director.
-     * - `actor`: Items categorized by starring actor.
-     * - `country`: Items categorized by country of origin.
-     * - `contentRating`: Items categorized by content rating.
-     * - `rating`: Items categorized by rating.
-     * - `resolution`: Items categorized by resolution.
-     * - `firstCharacter`: Items categorized by the first letter.
-     * - `folder`: Items categorized by folder.
-     * - `albums`: Items categorized by album.
+     * <p>Request all metadata items according to a query.
      * 
      * @return The async call builder
      */
@@ -461,29 +354,9 @@ public class AsyncLibrary {
     }
 
     /**
-     * Get Library Items
+     * Get all items in library
      * 
-     * <p>Fetches details from a specific section of the library identified by a section key and a tag. The tag parameter accepts the following values:
-     * - `all`: All items in the section.
-     * - `unwatched`: Items that have not been played.
-     * - `newest`: Items that are recently released.
-     * - `recentlyAdded`: Items that are recently added to the library.
-     * - `recentlyViewed`: Items that were recently viewed.
-     * - `onDeck`: Items to continue watching.
-     * - `collection`: Items categorized by collection.
-     * - `edition`: Items categorized by edition.
-     * - `genre`: Items categorized by genre.
-     * - `year`: Items categorized by year of release.
-     * - `decade`: Items categorized by decade.
-     * - `director`: Items categorized by director.
-     * - `actor`: Items categorized by starring actor.
-     * - `country`: Items categorized by country of origin.
-     * - `contentRating`: Items categorized by content rating.
-     * - `rating`: Items categorized by rating.
-     * - `resolution`: Items categorized by resolution.
-     * - `firstCharacter`: Items categorized by the first letter.
-     * - `folder`: Items categorized by folder.
-     * - `albums`: Items categorized by album.
+     * <p>Request all metadata items according to a query.
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return CompletableFuture&lt;GetLibraryItemsResponse&gt; - The async response
@@ -497,605 +370,2218 @@ public class AsyncLibrary {
 
 
     /**
-     * Get Library section media by tag ALL
+     * Delete library caches
      * 
-     * <p>Retrieves a list of all general media data for this library.
+     * <p>Delete the hub caches so they are recomputed on next request
      * 
      * @return The async call builder
      */
-    public GetLibrarySectionsAllRequestBuilder getLibrarySectionsAll() {
-        return new GetLibrarySectionsAllRequestBuilder(sdkConfiguration);
+    public DeleteCachesRequestBuilder deleteCaches() {
+        return new DeleteCachesRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get Library section media by tag ALL
+     * Delete library caches
      * 
-     * <p>Retrieves a list of all general media data for this library.
+     * <p>Delete the hub caches so they are recomputed on next request
+     * 
+     * @return CompletableFuture&lt;DeleteCachesResponse&gt; - The async response
+     */
+    public CompletableFuture<DeleteCachesResponse> deleteCachesDirect() {
+        AsyncRequestlessOperation<DeleteCachesResponse> operation
+            = new DeleteCaches.Async(sdkConfiguration);
+        return operation.doRequest()
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Clean bundles
+     * 
+     * <p>Clean out any now unused bundles. Bundles can become unused when media is deleted
+     * 
+     * @return The async call builder
+     */
+    public CleanBundlesRequestBuilder cleanBundles() {
+        return new CleanBundlesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Clean bundles
+     * 
+     * <p>Clean out any now unused bundles. Bundles can become unused when media is deleted
+     * 
+     * @return CompletableFuture&lt;CleanBundlesResponse&gt; - The async response
+     */
+    public CompletableFuture<CleanBundlesResponse> cleanBundlesDirect() {
+        AsyncRequestlessOperation<CleanBundlesResponse> operation
+            = new CleanBundles.Async(sdkConfiguration);
+        return operation.doRequest()
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Ingest a transient item
+     * 
+     * <p>This endpoint takes a file path specified in the `url` parameter, matches it using the scanner's match mechanism, downloads rich metadata, and then ingests the item as a transient item (without a library section). In the case where the file represents an episode, the entire tree (show, season, and episode) is added as transient items. At this time, movies and episodes are the only supported types, which are gleaned automatically from the file path.
+     * Note that any of the parameters passed to the metadata details endpoint (e.g. `includeExtras=1`) work here.
+     * 
+     * @return The async call builder
+     */
+    public IngestTransientItemRequestBuilder ingestTransientItem() {
+        return new IngestTransientItemRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Ingest a transient item
+     * 
+     * <p>This endpoint takes a file path specified in the `url` parameter, matches it using the scanner's match mechanism, downloads rich metadata, and then ingests the item as a transient item (without a library section). In the case where the file represents an episode, the entire tree (show, season, and episode) is added as transient items. At this time, movies and episodes are the only supported types, which are gleaned automatically from the file path.
+     * Note that any of the parameters passed to the metadata details endpoint (e.g. `includeExtras=1`) work here.
      * 
      * @param request The request object containing all the parameters for the API call.
-     * @return CompletableFuture&lt;GetLibrarySectionsAllResponse&gt; - The async response
+     * @return CompletableFuture&lt;IngestTransientItemResponse&gt; - The async response
      */
-    public CompletableFuture<GetLibrarySectionsAllResponse> getLibrarySectionsAll(GetLibrarySectionsAllRequest request) {
-        AsyncRequestOperation<GetLibrarySectionsAllRequest, GetLibrarySectionsAllResponse> operation
-              = new GetLibrarySectionsAll.Async(sdkConfiguration);
+    public CompletableFuture<IngestTransientItemResponse> ingestTransientItem(IngestTransientItemRequest request) {
+        AsyncRequestOperation<IngestTransientItemRequest, IngestTransientItemResponse> operation
+              = new IngestTransientItem.Async(sdkConfiguration);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
 
 
     /**
-     * Refresh Metadata Of The Library
+     * Get library matches
      * 
-     * <p>This endpoint Refreshes all the Metadata of the library.
-     * 
-     * @return The async call builder
-     */
-    public GetRefreshLibraryMetadataRequestBuilder getRefreshLibraryMetadata() {
-        return new GetRefreshLibraryMetadataRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Refresh Metadata Of The Library
-     * 
-     * <p>This endpoint Refreshes all the Metadata of the library.
-     * 
-     * @param sectionKey The unique key of the Plex library. 
-     *         Note: This is unique in the context of the Plex server.
-     *         
-     * @return CompletableFuture&lt;GetRefreshLibraryMetadataResponse&gt; - The async response
-     */
-    public CompletableFuture<GetRefreshLibraryMetadataResponse> getRefreshLibraryMetadata(int sectionKey) {
-        return getRefreshLibraryMetadata(Optional.empty(), sectionKey);
-    }
-
-    /**
-     * Refresh Metadata Of The Library
-     * 
-     * <p>This endpoint Refreshes all the Metadata of the library.
-     * 
-     * @param force Force the refresh even if the library is already being refreshed.
-     * @param sectionKey The unique key of the Plex library. 
-     *         Note: This is unique in the context of the Plex server.
-     *         
-     * @return CompletableFuture&lt;GetRefreshLibraryMetadataResponse&gt; - The async response
-     */
-    public CompletableFuture<GetRefreshLibraryMetadataResponse> getRefreshLibraryMetadata(Optional<? extends Force> force, int sectionKey) {
-        GetRefreshLibraryMetadataRequest request =
-            GetRefreshLibraryMetadataRequest
-                .builder()
-                .force(force)
-                .sectionKey(sectionKey)
-                .build();
-        AsyncRequestOperation<GetRefreshLibraryMetadataRequest, GetRefreshLibraryMetadataResponse> operation
-              = new GetRefreshLibraryMetadata.Async(sdkConfiguration);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Search Library
-     * 
-     * <p>Search for content within a specific section of the library.
-     * 
-     * <p>### Types
-     * Each type in the library comes with a set of filters and sorts, aiding in building dynamic media controls:
-     * 
-     * <p>- **Type Object Attributes**:
-     *   - `type`: Metadata type (if standard Plex type).  
-     *   - `title`: Title for this content type (e.g., "Movies").
-     * 
-     * <p>- **Filter Objects**:
-     *   - Subset of the media query language.
-     *   - Attributes include `filter` (name), `filterType` (data type), `key` (endpoint for value range), and `title`.
-     * 
-     * <p>- **Sort Objects**:
-     *   - Description of sort fields.
-     *   - Attributes include `defaultDirection` (asc/desc), `descKey` and `key` (sort parameters), and `title`.
-     * 
-     * <p>&gt; **Note**: Filters and sorts are optional; without them, no filtering controls are rendered.
+     * <p>The matches endpoint is used to match content external to the library with content inside the library. This is done by passing a series of semantic "hints" about the content (its type, name, or release year). Each type (e.g. movie) has a canonical set of minimal required hints.
+     * This ability to match content is useful in a variety of scenarios. For example, in the DVR, the EPG uses the endpoint to match recording rules against airing content. And in the cloud, the UMP uses the endpoint to match up a piece of media with rich metadata.
+     * The endpoint response can including multiple matches, if there is ambiguity, each one containing a `score` from 0 to 100. For somewhat historical reasons, anything over 85 is considered a positive match (we prefer false negatives over false positives in general for matching).
+     * The `guid` hint is somewhat special, in that it generally represents a unique identity for a piece of media (e.g. the IMDB `ttXXX`) identifier, in contrast with other hints which can be much more ambiguous (e.g. a title of `Jane Eyre`, which could refer to the 1943 or the 2011 version).
+     * Episodes require either a season/episode pair, or an air date (or both). Either the path must be sent, or the show title
      * 
      * @return The async call builder
      */
-    public GetSearchLibraryRequestBuilder getSearchLibrary() {
-        return new GetSearchLibraryRequestBuilder(sdkConfiguration);
+    public GetLibraryMatchesRequestBuilder getLibraryMatches() {
+        return new GetLibraryMatchesRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Search Library
+     * Get library matches
      * 
-     * <p>Search for content within a specific section of the library.
-     * 
-     * <p>### Types
-     * Each type in the library comes with a set of filters and sorts, aiding in building dynamic media controls:
-     * 
-     * <p>- **Type Object Attributes**:
-     *   - `type`: Metadata type (if standard Plex type).  
-     *   - `title`: Title for this content type (e.g., "Movies").
-     * 
-     * <p>- **Filter Objects**:
-     *   - Subset of the media query language.
-     *   - Attributes include `filter` (name), `filterType` (data type), `key` (endpoint for value range), and `title`.
-     * 
-     * <p>- **Sort Objects**:
-     *   - Description of sort fields.
-     *   - Attributes include `defaultDirection` (asc/desc), `descKey` and `key` (sort parameters), and `title`.
-     * 
-     * <p>&gt; **Note**: Filters and sorts are optional; without them, no filtering controls are rendered.
-     * 
-     * @param sectionKey The unique key of the Plex library. 
-     *         Note: This is unique in the context of the Plex server.
-     *         
-     * @param type The type of media to retrieve or filter by.
-     *         1 = movie
-     *         2 = show
-     *         3 = season
-     *         4 = episode
-     *         E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
-     *         
-     * @return CompletableFuture&lt;GetSearchLibraryResponse&gt; - The async response
-     */
-    public CompletableFuture<GetSearchLibraryResponse> getSearchLibrary(int sectionKey, GetSearchLibraryQueryParamType type) {
-        GetSearchLibraryRequest request =
-            GetSearchLibraryRequest
-                .builder()
-                .sectionKey(sectionKey)
-                .type(type)
-                .build();
-        AsyncRequestOperation<GetSearchLibraryRequest, GetSearchLibraryResponse> operation
-              = new GetSearchLibrary.Async(sdkConfiguration);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Get Genres of library media
-     * 
-     * <p>Retrieves a list of all the genres that are found for the media in this library.
-     * 
-     * @return The async call builder
-     */
-    public GetGenresLibraryRequestBuilder getGenresLibrary() {
-        return new GetGenresLibraryRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get Genres of library media
-     * 
-     * <p>Retrieves a list of all the genres that are found for the media in this library.
-     * 
-     * @param sectionKey The unique key of the Plex library. 
-     *         Note: This is unique in the context of the Plex server.
-     *         
-     * @param type The type of media to retrieve or filter by.
-     *         1 = movie
-     *         2 = show
-     *         3 = season
-     *         4 = episode
-     *         E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
-     *         
-     * @return CompletableFuture&lt;GetGenresLibraryResponse&gt; - The async response
-     */
-    public CompletableFuture<GetGenresLibraryResponse> getGenresLibrary(int sectionKey, GetGenresLibraryQueryParamType type) {
-        GetGenresLibraryRequest request =
-            GetGenresLibraryRequest
-                .builder()
-                .sectionKey(sectionKey)
-                .type(type)
-                .build();
-        AsyncRequestOperation<GetGenresLibraryRequest, GetGenresLibraryResponse> operation
-              = new GetGenresLibrary.Async(sdkConfiguration);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Get Countries of library media
-     * 
-     * <p>Retrieves a list of all the countries that are found for the media in this library.
-     * 
-     * @return The async call builder
-     */
-    public GetCountriesLibraryRequestBuilder getCountriesLibrary() {
-        return new GetCountriesLibraryRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get Countries of library media
-     * 
-     * <p>Retrieves a list of all the countries that are found for the media in this library.
-     * 
-     * @param sectionKey The unique key of the Plex library. 
-     *         Note: This is unique in the context of the Plex server.
-     *         
-     * @param type The type of media to retrieve or filter by.
-     *         1 = movie
-     *         2 = show
-     *         3 = season
-     *         4 = episode
-     *         E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
-     *         
-     * @return CompletableFuture&lt;GetCountriesLibraryResponse&gt; - The async response
-     */
-    public CompletableFuture<GetCountriesLibraryResponse> getCountriesLibrary(int sectionKey, GetCountriesLibraryQueryParamType type) {
-        GetCountriesLibraryRequest request =
-            GetCountriesLibraryRequest
-                .builder()
-                .sectionKey(sectionKey)
-                .type(type)
-                .build();
-        AsyncRequestOperation<GetCountriesLibraryRequest, GetCountriesLibraryResponse> operation
-              = new GetCountriesLibrary.Async(sdkConfiguration);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Get Actors of library media
-     * 
-     * <p>Retrieves a list of all the actors that are found for the media in this library.
-     * 
-     * @return The async call builder
-     */
-    public GetActorsLibraryRequestBuilder getActorsLibrary() {
-        return new GetActorsLibraryRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get Actors of library media
-     * 
-     * <p>Retrieves a list of all the actors that are found for the media in this library.
-     * 
-     * @param sectionKey The unique key of the Plex library. 
-     *         Note: This is unique in the context of the Plex server.
-     *         
-     * @param type The type of media to retrieve or filter by.
-     *         1 = movie
-     *         2 = show
-     *         3 = season
-     *         4 = episode
-     *         E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
-     *         
-     * @return CompletableFuture&lt;GetActorsLibraryResponse&gt; - The async response
-     */
-    public CompletableFuture<GetActorsLibraryResponse> getActorsLibrary(int sectionKey, GetActorsLibraryQueryParamType type) {
-        GetActorsLibraryRequest request =
-            GetActorsLibraryRequest
-                .builder()
-                .sectionKey(sectionKey)
-                .type(type)
-                .build();
-        AsyncRequestOperation<GetActorsLibraryRequest, GetActorsLibraryResponse> operation
-              = new GetActorsLibrary.Async(sdkConfiguration);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Search All Libraries
-     * 
-     * <p>Search the provided query across all library sections, or a single section, and return matches as hubs, split up by type.
-     * 
-     * @return The async call builder
-     */
-    public GetSearchAllLibrariesRequestBuilder getSearchAllLibraries() {
-        return new GetSearchAllLibrariesRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Search All Libraries
-     * 
-     * <p>Search the provided query across all library sections, or a single section, and return matches as hubs, split up by type.
+     * <p>The matches endpoint is used to match content external to the library with content inside the library. This is done by passing a series of semantic "hints" about the content (its type, name, or release year). Each type (e.g. movie) has a canonical set of minimal required hints.
+     * This ability to match content is useful in a variety of scenarios. For example, in the DVR, the EPG uses the endpoint to match recording rules against airing content. And in the cloud, the UMP uses the endpoint to match up a piece of media with rich metadata.
+     * The endpoint response can including multiple matches, if there is ambiguity, each one containing a `score` from 0 to 100. For somewhat historical reasons, anything over 85 is considered a positive match (we prefer false negatives over false positives in general for matching).
+     * The `guid` hint is somewhat special, in that it generally represents a unique identity for a piece of media (e.g. the IMDB `ttXXX`) identifier, in contrast with other hints which can be much more ambiguous (e.g. a title of `Jane Eyre`, which could refer to the 1943 or the 2011 version).
+     * Episodes require either a season/episode pair, or an air date (or both). Either the path must be sent, or the show title
      * 
      * @param request The request object containing all the parameters for the API call.
-     * @return CompletableFuture&lt;GetSearchAllLibrariesResponse&gt; - The async response
+     * @return CompletableFuture&lt;GetLibraryMatchesResponse&gt; - The async response
      */
-    public CompletableFuture<GetSearchAllLibrariesResponse> getSearchAllLibraries(GetSearchAllLibrariesRequest request) {
-        AsyncRequestOperation<GetSearchAllLibrariesRequest, GetSearchAllLibrariesResponse> operation
-              = new GetSearchAllLibraries.Async(sdkConfiguration);
+    public CompletableFuture<GetLibraryMatchesResponse> getLibraryMatches(GetLibraryMatchesRequest request) {
+        AsyncRequestOperation<GetLibraryMatchesRequest, GetLibraryMatchesResponse> operation
+              = new GetLibraryMatches.Async(sdkConfiguration);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
 
 
     /**
-     * Get Media Metadata
+     * Optimize the Database
      * 
-     * <p>This endpoint will return all the (meta)data of one or more library items specified by the ratingKey.
-     * Multiple rating keys can be provided as a comma-separated list (e.g., "21119,21617").
+     * <p>Initiate optimize on the database.
      * 
      * @return The async call builder
      */
-    public GetMediaMetaDataRequestBuilder getMediaMetaData() {
-        return new GetMediaMetaDataRequestBuilder(sdkConfiguration);
+    public OptimizeDatabaseRequestBuilder optimizeDatabase() {
+        return new OptimizeDatabaseRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get Media Metadata
+     * Optimize the Database
      * 
-     * <p>This endpoint will return all the (meta)data of one or more library items specified by the ratingKey.
-     * Multiple rating keys can be provided as a comma-separated list (e.g., "21119,21617").
+     * <p>Initiate optimize on the database.
      * 
      * @param request The request object containing all the parameters for the API call.
-     * @return CompletableFuture&lt;GetMediaMetaDataResponse&gt; - The async response
+     * @return CompletableFuture&lt;OptimizeDatabaseResponse&gt; - The async response
      */
-    public CompletableFuture<GetMediaMetaDataResponse> getMediaMetaData(GetMediaMetaDataRequest request) {
-        AsyncRequestOperation<GetMediaMetaDataRequest, GetMediaMetaDataResponse> operation
-              = new GetMediaMetaData.Async(sdkConfiguration);
+    public CompletableFuture<OptimizeDatabaseResponse> optimizeDatabase(OptimizeDatabaseRequest request) {
+        AsyncRequestOperation<OptimizeDatabaseRequest, OptimizeDatabaseResponse> operation
+              = new OptimizeDatabase.Async(sdkConfiguration);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
 
 
     /**
-     * Get Media Background Artwork
+     * Get random artwork
      * 
-     * <p>Returns the background artwork for a library item.
+     * <p>Get random artwork across sections.  This is commonly used for a screensaver.
+     * 
+     * <p>This retrieves 100 random artwork paths in the specified sections and returns them.  Restrictions are put in place to not return artwork for items the user is not allowed to access.  Artwork will be for Movies, Shows, and Artists only.
      * 
      * @return The async call builder
      */
-    public GetMediaArtsRequestBuilder getMediaArts() {
-        return new GetMediaArtsRequestBuilder(sdkConfiguration);
+    public GetRandomArtworkRequestBuilder getRandomArtwork() {
+        return new GetRandomArtworkRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get Media Background Artwork
+     * Get random artwork
      * 
-     * <p>Returns the background artwork for a library item.
+     * <p>Get random artwork across sections.  This is commonly used for a screensaver.
      * 
-     * @param ratingKey the id of the library item to return the artwork of.
-     * @return CompletableFuture&lt;GetMediaArtsResponse&gt; - The async response
+     * <p>This retrieves 100 random artwork paths in the specified sections and returns them.  Restrictions are put in place to not return artwork for items the user is not allowed to access.  Artwork will be for Movies, Shows, and Artists only.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetRandomArtworkResponse&gt; - The async response
      */
-    public CompletableFuture<GetMediaArtsResponse> getMediaArts(long ratingKey) {
-        GetMediaArtsRequest request =
-            GetMediaArtsRequest
-                .builder()
-                .ratingKey(ratingKey)
-                .build();
-        AsyncRequestOperation<GetMediaArtsRequest, GetMediaArtsResponse> operation
-              = new GetMediaArts.Async(sdkConfiguration);
+    public CompletableFuture<GetRandomArtworkResponse> getRandomArtwork(GetRandomArtworkRequest request) {
+        AsyncRequestOperation<GetRandomArtworkRequest, GetRandomArtworkResponse> operation
+              = new GetRandomArtwork.Async(sdkConfiguration);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
 
 
     /**
-     * Upload Media Background Artwork
+     * Get library sections (main Media Provider Only)
      * 
-     * <p>Uploads an image to use as the background artwork for a library item, either from a local file or a remote URL
+     * <p>A library section (commonly referred to as just a library) is a collection of media. Libraries are typed, and depending on their type provide either a flat or a hierarchical view of the media. For example, a music library has an artist &gt; albums &gt; tracks structure, whereas a movie library is flat.
+     * Libraries have features beyond just being a collection of media; for starters, they include information about supported types, filters and sorts. This allows a client to provide a rich interface around the media (e.g. allow sorting movies by release year).
      * 
      * @return The async call builder
      */
-    public PostMediaArtsRequestBuilder postMediaArts() {
-        return new PostMediaArtsRequestBuilder(sdkConfiguration);
+    public GetSectionsRequestBuilder getSections() {
+        return new GetSectionsRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Upload Media Background Artwork
+     * Get library sections (main Media Provider Only)
      * 
-     * <p>Uploads an image to use as the background artwork for a library item, either from a local file or a remote URL
+     * <p>A library section (commonly referred to as just a library) is a collection of media. Libraries are typed, and depending on their type provide either a flat or a hierarchical view of the media. For example, a music library has an artist &gt; albums &gt; tracks structure, whereas a movie library is flat.
+     * Libraries have features beyond just being a collection of media; for starters, they include information about supported types, filters and sorts. This allows a client to provide a rich interface around the media (e.g. allow sorting movies by release year).
      * 
-     * @param ratingKey the id of the library item to return the posters of.
-     * @return CompletableFuture&lt;PostMediaArtsResponse&gt; - The async response
+     * @return CompletableFuture&lt;GetSectionsResponse&gt; - The async response
      */
-    public CompletableFuture<PostMediaArtsResponse> postMediaArts(long ratingKey) {
-        return postMediaArts(ratingKey, Optional.empty(), Optional.empty());
+    public CompletableFuture<GetSectionsResponse> getSectionsDirect() {
+        AsyncRequestlessOperation<GetSectionsResponse> operation
+            = new GetSections.Async(sdkConfiguration);
+        return operation.doRequest()
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Add a library section
+     * 
+     * <p>Add a new library section to the server
+     * 
+     * @return The async call builder
+     */
+    public AddSectionRequestBuilder addSection() {
+        return new AddSectionRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Upload Media Background Artwork
+     * Add a library section
      * 
-     * <p>Uploads an image to use as the background artwork for a library item, either from a local file or a remote URL
+     * <p>Add a new library section to the server
      * 
-     * @param ratingKey the id of the library item to return the posters of.
-     * @param url The URL of the image, if uploading a remote image
-     * @param requestBody The contents of the image, if uploading a local file
-     * @return CompletableFuture&lt;PostMediaArtsResponse&gt; - The async response
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;AddSectionResponse&gt; - The async response
      */
-    public CompletableFuture<PostMediaArtsResponse> postMediaArts(
-            long ratingKey, Optional<String> url,
-            Optional<byte[]> requestBody) {
-        PostMediaArtsRequest request =
-            PostMediaArtsRequest
-                .builder()
-                .ratingKey(ratingKey)
-                .url(url)
-                .requestBody(requestBody)
-                .build();
-        AsyncRequestOperation<PostMediaArtsRequest, PostMediaArtsResponse> operation
-              = new PostMediaArts.Async(sdkConfiguration);
+    public CompletableFuture<AddSectionResponse> addSection(AddSectionRequest request) {
+        AsyncRequestOperation<AddSectionRequest, AddSectionResponse> operation
+              = new AddSection.Async(sdkConfiguration);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
 
 
     /**
-     * Get Media Posters
+     * Stop refresh
      * 
-     * <p>Returns the available posters for a library item.
+     * <p>Stop all refreshes across all sections
      * 
      * @return The async call builder
      */
-    public GetMediaPostersRequestBuilder getMediaPosters() {
-        return new GetMediaPostersRequestBuilder(sdkConfiguration);
+    public StopAllRefreshesRequestBuilder stopAllRefreshes() {
+        return new StopAllRefreshesRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get Media Posters
+     * Stop refresh
      * 
-     * <p>Returns the available posters for a library item.
+     * <p>Stop all refreshes across all sections
      * 
-     * @param ratingKey the id of the library item to return the posters of.
-     * @return CompletableFuture&lt;GetMediaPostersResponse&gt; - The async response
+     * @return CompletableFuture&lt;StopAllRefreshesResponse&gt; - The async response
      */
-    public CompletableFuture<GetMediaPostersResponse> getMediaPosters(long ratingKey) {
-        GetMediaPostersRequest request =
-            GetMediaPostersRequest
-                .builder()
-                .ratingKey(ratingKey)
-                .build();
-        AsyncRequestOperation<GetMediaPostersRequest, GetMediaPostersResponse> operation
-              = new GetMediaPosters.Async(sdkConfiguration);
+    public CompletableFuture<StopAllRefreshesResponse> stopAllRefreshesDirect() {
+        AsyncRequestlessOperation<StopAllRefreshesResponse> operation
+            = new StopAllRefreshes.Async(sdkConfiguration);
+        return operation.doRequest()
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get section prefs
+     * 
+     * <p>Get a section's preferences for a metadata type
+     * 
+     * @return The async call builder
+     */
+    public GetSectionsPrefsRequestBuilder getSectionsPrefs() {
+        return new GetSectionsPrefsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get section prefs
+     * 
+     * <p>Get a section's preferences for a metadata type
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetSectionsPrefsResponse&gt; - The async response
+     */
+    public CompletableFuture<GetSectionsPrefsResponse> getSectionsPrefs(GetSectionsPrefsRequest request) {
+        AsyncRequestOperation<GetSectionsPrefsRequest, GetSectionsPrefsResponse> operation
+              = new GetSectionsPrefs.Async(sdkConfiguration);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
 
 
     /**
-     * Upload Media Poster
+     * Refresh all sections
      * 
-     * <p>Uploads a poster to a library item, either from a local file or a remote URL
+     * <p>Tell PMS to refresh all section metadata
      * 
      * @return The async call builder
      */
-    public PostMediaPosterRequestBuilder postMediaPoster() {
-        return new PostMediaPosterRequestBuilder(sdkConfiguration);
+    public RefreshSectionsMetadataRequestBuilder refreshSectionsMetadata() {
+        return new RefreshSectionsMetadataRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Upload Media Poster
+     * Refresh all sections
      * 
-     * <p>Uploads a poster to a library item, either from a local file or a remote URL
+     * <p>Tell PMS to refresh all section metadata
      * 
-     * @param ratingKey the id of the library item to return the posters of.
-     * @return CompletableFuture&lt;PostMediaPosterResponse&gt; - The async response
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;RefreshSectionsMetadataResponse&gt; - The async response
      */
-    public CompletableFuture<PostMediaPosterResponse> postMediaPoster(long ratingKey) {
-        return postMediaPoster(ratingKey, Optional.empty(), Optional.empty());
-    }
-
-    /**
-     * Upload Media Poster
-     * 
-     * <p>Uploads a poster to a library item, either from a local file or a remote URL
-     * 
-     * @param ratingKey the id of the library item to return the posters of.
-     * @param url The URL of the image, if uploading a remote image
-     * @param requestBody The contents of the image, if uploading a local file
-     * @return CompletableFuture&lt;PostMediaPosterResponse&gt; - The async response
-     */
-    public CompletableFuture<PostMediaPosterResponse> postMediaPoster(
-            long ratingKey, Optional<String> url,
-            Optional<byte[]> requestBody) {
-        PostMediaPosterRequest request =
-            PostMediaPosterRequest
-                .builder()
-                .ratingKey(ratingKey)
-                .url(url)
-                .requestBody(requestBody)
-                .build();
-        AsyncRequestOperation<PostMediaPosterRequest, PostMediaPosterResponse> operation
-              = new PostMediaPoster.Async(sdkConfiguration);
+    public CompletableFuture<RefreshSectionsMetadataResponse> refreshSectionsMetadata(RefreshSectionsMetadataRequest request) {
+        AsyncRequestOperation<RefreshSectionsMetadataRequest, RefreshSectionsMetadataResponse> operation
+              = new RefreshSectionsMetadata.Async(sdkConfiguration);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
 
 
     /**
-     * Get Items Children
+     * Get all library tags of a type
      * 
-     * <p>This endpoint will return the children of of a library item specified with the ratingKey.
+     * <p>Get all library tags of a type
      * 
      * @return The async call builder
      */
-    public GetMetadataChildrenRequestBuilder getMetadataChildren() {
-        return new GetMetadataChildrenRequestBuilder(sdkConfiguration);
+    public GetTagsRequestBuilder getTags() {
+        return new GetTagsRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get Items Children
+     * Get all library tags of a type
      * 
-     * <p>This endpoint will return the children of of a library item specified with the ratingKey.
+     * <p>Get all library tags of a type
      * 
-     * @param ratingKey the id of the library item to return the children of.
-     * @return CompletableFuture&lt;GetMetadataChildrenResponse&gt; - The async response
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetTagsResponse&gt; - The async response
      */
-    public CompletableFuture<GetMetadataChildrenResponse> getMetadataChildren(double ratingKey) {
-        return getMetadataChildren(ratingKey, Optional.empty());
-    }
-
-    /**
-     * Get Items Children
-     * 
-     * <p>This endpoint will return the children of of a library item specified with the ratingKey.
-     * 
-     * @param ratingKey the id of the library item to return the children of.
-     * @param includeElements Adds additional elements to the response. Supported types are (Stream)
-     *         
-     * @return CompletableFuture&lt;GetMetadataChildrenResponse&gt; - The async response
-     */
-    public CompletableFuture<GetMetadataChildrenResponse> getMetadataChildren(double ratingKey, Optional<String> includeElements) {
-        GetMetadataChildrenRequest request =
-            GetMetadataChildrenRequest
-                .builder()
-                .ratingKey(ratingKey)
-                .includeElements(includeElements)
-                .build();
-        AsyncRequestOperation<GetMetadataChildrenRequest, GetMetadataChildrenResponse> operation
-              = new GetMetadataChildren.Async(sdkConfiguration);
+    public CompletableFuture<GetTagsResponse> getTags(GetTagsRequest request) {
+        AsyncRequestOperation<GetTagsRequest, GetTagsResponse> operation
+              = new GetTags.Async(sdkConfiguration);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
 
 
     /**
-     * Get Top Watched Content
+     * Delete a metadata item
      * 
-     * <p>This endpoint will return the top watched content from libraries of a certain type
+     * <p>Delete a single metadata item from the library, deleting media as well
      * 
      * @return The async call builder
      */
-    public GetTopWatchedContentRequestBuilder getTopWatchedContent() {
-        return new GetTopWatchedContentRequestBuilder(sdkConfiguration);
+    public DeleteMetadataItemRequestBuilder deleteMetadataItem() {
+        return new DeleteMetadataItemRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get Top Watched Content
+     * Delete a metadata item
      * 
-     * <p>This endpoint will return the top watched content from libraries of a certain type
+     * <p>Delete a single metadata item from the library, deleting media as well
      * 
-     * @param type The type of media to retrieve or filter by.
-     *         1 = movie
-     *         2 = show
-     *         3 = season
-     *         4 = episode
-     *         E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
-     *         
-     * @return CompletableFuture&lt;GetTopWatchedContentResponse&gt; - The async response
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;DeleteMetadataItemResponse&gt; - The async response
      */
-    public CompletableFuture<GetTopWatchedContentResponse> getTopWatchedContent(GetTopWatchedContentQueryParamType type) {
-        return getTopWatchedContent(type, Optional.empty());
+    public CompletableFuture<DeleteMetadataItemResponse> deleteMetadataItem(DeleteMetadataItemRequest request) {
+        AsyncRequestOperation<DeleteMetadataItemRequest, DeleteMetadataItemResponse> operation
+              = new DeleteMetadataItem.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Edit a metadata item
+     * 
+     * <p>Edit metadata items setting fields
+     * 
+     * @return The async call builder
+     */
+    public EditMetadataItemRequestBuilder editMetadataItem() {
+        return new EditMetadataItemRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get Top Watched Content
+     * Edit a metadata item
      * 
-     * <p>This endpoint will return the top watched content from libraries of a certain type
+     * <p>Edit metadata items setting fields
      * 
-     * @param type The type of media to retrieve or filter by.
-     *         1 = movie
-     *         2 = show
-     *         3 = season
-     *         4 = episode
-     *         E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
-     *         
-     * @param includeGuids Adds the Guid object to the response
-     *         
-     * @return CompletableFuture&lt;GetTopWatchedContentResponse&gt; - The async response
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;EditMetadataItemResponse&gt; - The async response
      */
-    public CompletableFuture<GetTopWatchedContentResponse> getTopWatchedContent(GetTopWatchedContentQueryParamType type, Optional<? extends GetTopWatchedContentQueryParamIncludeGuids> includeGuids) {
-        GetTopWatchedContentRequest request =
-            GetTopWatchedContentRequest
-                .builder()
-                .type(type)
-                .includeGuids(includeGuids)
-                .build();
-        AsyncRequestOperation<GetTopWatchedContentRequest, GetTopWatchedContentResponse> operation
-              = new GetTopWatchedContent.Async(sdkConfiguration);
+    public CompletableFuture<EditMetadataItemResponse> editMetadataItem(EditMetadataItemRequest request) {
+        AsyncRequestOperation<EditMetadataItemRequest, EditMetadataItemResponse> operation
+              = new EditMetadataItem.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Ad-detect an item
+     * 
+     * <p>Start the detection of ads in a metadata item
+     * 
+     * @return The async call builder
+     */
+    public DetectAdsRequestBuilder detectAds() {
+        return new DetectAdsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Ad-detect an item
+     * 
+     * <p>Start the detection of ads in a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;DetectAdsResponse&gt; - The async response
+     */
+    public CompletableFuture<DetectAdsResponse> detectAds(DetectAdsRequest request) {
+        AsyncRequestOperation<DetectAdsRequest, DetectAdsResponse> operation
+              = new DetectAds.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get the leaves of an item
+     * 
+     * <p>Get the leaves for a metadata item such as the episodes in a show
+     * 
+     * @return The async call builder
+     */
+    public GetAllItemLeavesRequestBuilder getAllItemLeaves() {
+        return new GetAllItemLeavesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get the leaves of an item
+     * 
+     * <p>Get the leaves for a metadata item such as the episodes in a show
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetAllItemLeavesResponse&gt; - The async response
+     */
+    public CompletableFuture<GetAllItemLeavesResponse> getAllItemLeaves(GetAllItemLeavesRequest request) {
+        AsyncRequestOperation<GetAllItemLeavesRequest, GetAllItemLeavesResponse> operation
+              = new GetAllItemLeaves.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Analyze an item
+     * 
+     * <p>Start the analysis of a metadata item
+     * 
+     * @return The async call builder
+     */
+    public AnalyzeMetadataRequestBuilder analyzeMetadata() {
+        return new AnalyzeMetadataRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Analyze an item
+     * 
+     * <p>Start the analysis of a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;AnalyzeMetadataResponse&gt; - The async response
+     */
+    public CompletableFuture<AnalyzeMetadataResponse> analyzeMetadata(AnalyzeMetadataRequest request) {
+        AsyncRequestOperation<AnalyzeMetadataRequest, AnalyzeMetadataResponse> operation
+              = new AnalyzeMetadata.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Generate thumbs of chapters for an item
+     * 
+     * <p>Start the chapter thumb generation for an item
+     * 
+     * @return The async call builder
+     */
+    public GenerateThumbsRequestBuilder generateThumbs() {
+        return new GenerateThumbsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Generate thumbs of chapters for an item
+     * 
+     * <p>Start the chapter thumb generation for an item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GenerateThumbsResponse&gt; - The async response
+     */
+    public CompletableFuture<GenerateThumbsResponse> generateThumbs(GenerateThumbsRequest request) {
+        AsyncRequestOperation<GenerateThumbsRequest, GenerateThumbsResponse> operation
+              = new GenerateThumbs.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Credit detect a metadata item
+     * 
+     * <p>Start credit detection on a metadata item
+     * 
+     * @return The async call builder
+     */
+    public DetectCreditsRequestBuilder detectCredits() {
+        return new DetectCreditsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Credit detect a metadata item
+     * 
+     * <p>Start credit detection on a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;DetectCreditsResponse&gt; - The async response
+     */
+    public CompletableFuture<DetectCreditsResponse> detectCredits(DetectCreditsRequest request) {
+        AsyncRequestOperation<DetectCreditsRequest, DetectCreditsResponse> operation
+              = new DetectCredits.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get an item's extras
+     * 
+     * <p>Get the extras for a metadata item
+     * 
+     * @return The async call builder
+     */
+    public GetExtrasRequestBuilder getExtras() {
+        return new GetExtrasRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get an item's extras
+     * 
+     * <p>Get the extras for a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetExtrasResponse&gt; - The async response
+     */
+    public CompletableFuture<GetExtrasResponse> getExtras(GetExtrasRequest request) {
+        AsyncRequestOperation<GetExtrasRequest, GetExtrasResponse> operation
+              = new GetExtras.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Add to an item's extras
+     * 
+     * <p>Add an extra to a metadata item
+     * 
+     * @return The async call builder
+     */
+    public AddExtrasRequestBuilder addExtras() {
+        return new AddExtrasRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Add to an item's extras
+     * 
+     * <p>Add an extra to a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;AddExtrasResponse&gt; - The async response
+     */
+    public CompletableFuture<AddExtrasResponse> addExtras(AddExtrasRequest request) {
+        AsyncRequestOperation<AddExtrasRequest, AddExtrasResponse> operation
+              = new AddExtras.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get a file from a metadata or media bundle
+     * 
+     * <p>Get a bundle file for a metadata or media item.  This is either an image or a mp3 (for a show's theme)
+     * 
+     * @return The async call builder
+     */
+    public GetFileRequestBuilder getFile() {
+        return new GetFileRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a file from a metadata or media bundle
+     * 
+     * <p>Get a bundle file for a metadata or media item.  This is either an image or a mp3 (for a show's theme)
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetFileResponse&gt; - The async response
+     */
+    public CompletableFuture<GetFileResponse> getFile(GetFileRequest request) {
+        AsyncRequestOperation<GetFileRequest, GetFileResponse> operation
+              = new GetFile.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Start BIF generation of an item
+     * 
+     * <p>Start the indexing (BIF generation) of an item
+     * 
+     * @return The async call builder
+     */
+    public StartBifGenerationRequestBuilder startBifGeneration() {
+        return new StartBifGenerationRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Start BIF generation of an item
+     * 
+     * <p>Start the indexing (BIF generation) of an item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;StartBifGenerationResponse&gt; - The async response
+     */
+    public CompletableFuture<StartBifGenerationResponse> startBifGeneration(StartBifGenerationRequest request) {
+        AsyncRequestOperation<StartBifGenerationRequest, StartBifGenerationResponse> operation
+              = new StartBifGeneration.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Intro detect an item
+     * 
+     * <p>Start the detection of intros in a metadata item
+     * 
+     * @return The async call builder
+     */
+    public DetectIntrosRequestBuilder detectIntros() {
+        return new DetectIntrosRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Intro detect an item
+     * 
+     * <p>Start the detection of intros in a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;DetectIntrosResponse&gt; - The async response
+     */
+    public CompletableFuture<DetectIntrosResponse> detectIntros(DetectIntrosRequest request) {
+        AsyncRequestOperation<DetectIntrosRequest, DetectIntrosResponse> operation
+              = new DetectIntros.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Create a marker
+     * 
+     * <p>Create a marker for this user on the metadata item
+     * 
+     * @return The async call builder
+     */
+    public CreateMarkerRequestBuilder createMarker() {
+        return new CreateMarkerRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Create a marker
+     * 
+     * <p>Create a marker for this user on the metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;CreateMarkerResponse&gt; - The async response
+     */
+    public CompletableFuture<CreateMarkerResponse> createMarker(CreateMarkerRequest request) {
+        AsyncRequestOperation<CreateMarkerRequest, CreateMarkerResponse> operation
+              = new CreateMarker.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Match a metadata item
+     * 
+     * <p>Match a metadata item to a guid
+     * 
+     * @return The async call builder
+     */
+    public MatchItemRequestBuilder matchItem() {
+        return new MatchItemRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Match a metadata item
+     * 
+     * <p>Match a metadata item to a guid
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;MatchItemResponse&gt; - The async response
+     */
+    public CompletableFuture<MatchItemResponse> matchItem(MatchItemRequest request) {
+        AsyncRequestOperation<MatchItemRequest, MatchItemResponse> operation
+              = new MatchItem.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get metadata matches for an item
+     * 
+     * <p>Get the list of metadata matches for a metadata item
+     * 
+     * @return The async call builder
+     */
+    public ListMatchesRequestBuilder listMatches() {
+        return new ListMatchesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get metadata matches for an item
+     * 
+     * <p>Get the list of metadata matches for a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;ListMatchesResponse&gt; - The async response
+     */
+    public CompletableFuture<ListMatchesResponse> listMatches(ListMatchesRequest request) {
+        AsyncRequestOperation<ListMatchesRequest, ListMatchesResponse> operation
+              = new ListMatches.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Merge a metadata item
+     * 
+     * <p>Merge a metadata item with other items
+     * 
+     * @return The async call builder
+     */
+    public MergeItemsRequestBuilder mergeItems() {
+        return new MergeItemsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Merge a metadata item
+     * 
+     * <p>Merge a metadata item with other items
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;MergeItemsResponse&gt; - The async response
+     */
+    public CompletableFuture<MergeItemsResponse> mergeItems(MergeItemsRequest request) {
+        AsyncRequestOperation<MergeItemsRequest, MergeItemsResponse> operation
+              = new MergeItems.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get nearest tracks to metadata item
+     * 
+     * <p>Get the nearest tracks, sonically, to the provided track
+     * 
+     * @return The async call builder
+     */
+    public ListSonicallySimilarRequestBuilder listSonicallySimilar() {
+        return new ListSonicallySimilarRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get nearest tracks to metadata item
+     * 
+     * <p>Get the nearest tracks, sonically, to the provided track
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;ListSonicallySimilarResponse&gt; - The async response
+     */
+    public CompletableFuture<ListSonicallySimilarResponse> listSonicallySimilar(ListSonicallySimilarRequest request) {
+        AsyncRequestOperation<ListSonicallySimilarRequest, ListSonicallySimilarResponse> operation
+              = new ListSonicallySimilar.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Set metadata preferences
+     * 
+     * <p>Set the preferences on a metadata item
+     * 
+     * @return The async call builder
+     */
+    public SetItemPreferencesRequestBuilder setItemPreferences() {
+        return new SetItemPreferencesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Set metadata preferences
+     * 
+     * <p>Set the preferences on a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;SetItemPreferencesResponse&gt; - The async response
+     */
+    public CompletableFuture<SetItemPreferencesResponse> setItemPreferences(SetItemPreferencesRequest request) {
+        AsyncRequestOperation<SetItemPreferencesRequest, SetItemPreferencesResponse> operation
+              = new SetItemPreferences.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Refresh a metadata item
+     * 
+     * <p>Refresh a metadata item from the agent
+     * 
+     * @return The async call builder
+     */
+    public RefreshItemsMetadataRequestBuilder refreshItemsMetadata() {
+        return new RefreshItemsMetadataRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Refresh a metadata item
+     * 
+     * <p>Refresh a metadata item from the agent
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;RefreshItemsMetadataResponse&gt; - The async response
+     */
+    public CompletableFuture<RefreshItemsMetadataResponse> refreshItemsMetadata(RefreshItemsMetadataRequest request) {
+        AsyncRequestOperation<RefreshItemsMetadataRequest, RefreshItemsMetadataResponse> operation
+              = new RefreshItemsMetadata.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get related items
+     * 
+     * <p>Get a hub of related items to a metadata item
+     * 
+     * @return The async call builder
+     */
+    public GetRelatedItemsRequestBuilder getRelatedItems() {
+        return new GetRelatedItemsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get related items
+     * 
+     * <p>Get a hub of related items to a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetRelatedItemsResponse&gt; - The async response
+     */
+    public CompletableFuture<GetRelatedItemsResponse> getRelatedItems(GetRelatedItemsRequest request) {
+        AsyncRequestOperation<GetRelatedItemsRequest, GetRelatedItemsResponse> operation
+              = new GetRelatedItems.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get similar items
+     * 
+     * <p>Get a list of similar items to a metadata item
+     * 
+     * @return The async call builder
+     */
+    public ListSimilarRequestBuilder listSimilar() {
+        return new ListSimilarRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get similar items
+     * 
+     * <p>Get a list of similar items to a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;ListSimilarResponse&gt; - The async response
+     */
+    public CompletableFuture<ListSimilarResponse> listSimilar(ListSimilarRequest request) {
+        AsyncRequestOperation<ListSimilarRequest, ListSimilarResponse> operation
+              = new ListSimilar.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Split a metadata item
+     * 
+     * <p>Split a metadata item into multiple items
+     * 
+     * @return The async call builder
+     */
+    public SplitItemRequestBuilder splitItem() {
+        return new SplitItemRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Split a metadata item
+     * 
+     * <p>Split a metadata item into multiple items
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;SplitItemResponse&gt; - The async response
+     */
+    public CompletableFuture<SplitItemResponse> splitItem(SplitItemRequest request) {
+        AsyncRequestOperation<SplitItemRequest, SplitItemResponse> operation
+              = new SplitItem.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Add subtitles
+     * 
+     * <p>Add a subtitle to a metadata item
+     * 
+     * @return The async call builder
+     */
+    public AddSubtitlesRequestBuilder addSubtitles() {
+        return new AddSubtitlesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Add subtitles
+     * 
+     * <p>Add a subtitle to a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;AddSubtitlesResponse&gt; - The async response
+     */
+    public CompletableFuture<AddSubtitlesResponse> addSubtitles(AddSubtitlesRequest request) {
+        AsyncRequestOperation<AddSubtitlesRequest, AddSubtitlesResponse> operation
+              = new AddSubtitles.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get metadata items as a tree
+     * 
+     * <p>Get a tree of metadata items, such as the seasons/episodes of a show
+     * 
+     * @return The async call builder
+     */
+    public GetItemTreeRequestBuilder getItemTree() {
+        return new GetItemTreeRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get metadata items as a tree
+     * 
+     * <p>Get a tree of metadata items, such as the seasons/episodes of a show
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetItemTreeResponse&gt; - The async response
+     */
+    public CompletableFuture<GetItemTreeResponse> getItemTree(GetItemTreeRequest request) {
+        AsyncRequestOperation<GetItemTreeRequest, GetItemTreeResponse> operation
+              = new GetItemTree.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Unmatch a metadata item
+     * 
+     * <p>Unmatch a metadata item to info fetched from the agent
+     * 
+     * @return The async call builder
+     */
+    public UnmatchRequestBuilder unmatch() {
+        return new UnmatchRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Unmatch a metadata item
+     * 
+     * <p>Unmatch a metadata item to info fetched from the agent
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;UnmatchResponse&gt; - The async response
+     */
+    public CompletableFuture<UnmatchResponse> unmatch(UnmatchRequest request) {
+        AsyncRequestOperation<UnmatchRequest, UnmatchResponse> operation
+              = new Unmatch.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get metadata top users
+     * 
+     * <p>Get the list of users which have played this item starting with the most
+     * 
+     * @return The async call builder
+     */
+    public ListTopUsersRequestBuilder listTopUsers() {
+        return new ListTopUsersRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get metadata top users
+     * 
+     * <p>Get the list of users which have played this item starting with the most
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;ListTopUsersResponse&gt; - The async response
+     */
+    public CompletableFuture<ListTopUsersResponse> listTopUsers(ListTopUsersRequest request) {
+        AsyncRequestOperation<ListTopUsersRequest, ListTopUsersResponse> operation
+              = new ListTopUsers.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Detect voice activity
+     * 
+     * <p>Start the detection of voice in a metadata item
+     * 
+     * @return The async call builder
+     */
+    public DetectVoiceActivityRequestBuilder detectVoiceActivity() {
+        return new DetectVoiceActivityRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Detect voice activity
+     * 
+     * <p>Start the detection of voice in a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;DetectVoiceActivityResponse&gt; - The async response
+     */
+    public CompletableFuture<DetectVoiceActivityResponse> detectVoiceActivity(DetectVoiceActivityRequest request) {
+        AsyncRequestOperation<DetectVoiceActivityRequest, DetectVoiceActivityResponse> operation
+              = new DetectVoiceActivity.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get augmentation status
+     * 
+     * <p>Get augmentation status and potentially wait for completion
+     * 
+     * @return The async call builder
+     */
+    public GetAugmentationStatusRequestBuilder getAugmentationStatus() {
+        return new GetAugmentationStatusRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get augmentation status
+     * 
+     * <p>Get augmentation status and potentially wait for completion
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetAugmentationStatusResponse&gt; - The async response
+     */
+    public CompletableFuture<GetAugmentationStatusResponse> getAugmentationStatus(GetAugmentationStatusRequest request) {
+        AsyncRequestOperation<GetAugmentationStatusRequest, GetAugmentationStatusResponse> operation
+              = new GetAugmentationStatus.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Set stream selection
+     * 
+     * <p>Set which streams (audio/subtitle) are selected by this user
+     * 
+     * @return The async call builder
+     */
+    public SetStreamSelectionRequestBuilder setStreamSelection() {
+        return new SetStreamSelectionRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Set stream selection
+     * 
+     * <p>Set which streams (audio/subtitle) are selected by this user
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;SetStreamSelectionResponse&gt; - The async response
+     */
+    public CompletableFuture<SetStreamSelectionResponse> setStreamSelection(SetStreamSelectionRequest request) {
+        AsyncRequestOperation<SetStreamSelectionRequest, SetStreamSelectionResponse> operation
+              = new SetStreamSelection.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get person details
+     * 
+     * <p>Get details for a single actor.
+     * 
+     * @return The async call builder
+     */
+    public GetPersonRequestBuilder getPerson() {
+        return new GetPersonRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get person details
+     * 
+     * <p>Get details for a single actor.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetPersonResponse&gt; - The async response
+     */
+    public CompletableFuture<GetPersonResponse> getPerson(GetPersonRequest request) {
+        AsyncRequestOperation<GetPersonRequest, GetPersonResponse> operation
+              = new GetPerson.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get media for a person
+     * 
+     * <p>Get all the media for a single actor.
+     * 
+     * @return The async call builder
+     */
+    public ListPersonMediaRequestBuilder listPersonMedia() {
+        return new ListPersonMediaRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get media for a person
+     * 
+     * <p>Get all the media for a single actor.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;ListPersonMediaResponse&gt; - The async response
+     */
+    public CompletableFuture<ListPersonMediaResponse> listPersonMedia(ListPersonMediaRequest request) {
+        AsyncRequestOperation<ListPersonMediaRequest, ListPersonMediaResponse> operation
+              = new ListPersonMedia.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Delete a library section
+     * 
+     * <p>Delete a library section by id
+     * 
+     * @return The async call builder
+     */
+    public DeleteLibrarySectionRequestBuilder deleteLibrarySection() {
+        return new DeleteLibrarySectionRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Delete a library section
+     * 
+     * <p>Delete a library section by id
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;DeleteLibrarySectionResponse&gt; - The async response
+     */
+    public CompletableFuture<DeleteLibrarySectionResponse> deleteLibrarySection(DeleteLibrarySectionRequest request) {
+        AsyncRequestOperation<DeleteLibrarySectionRequest, DeleteLibrarySectionResponse> operation
+              = new DeleteLibrarySection.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get a library section by id
+     * 
+     * <p>Returns details for the library. This can be thought of as an interstitial endpoint because it contains information about the library, rather than content itself. It often contains a list of `Directory` metadata objects: These used to be used by clients to build a menuing system.
+     * 
+     * @return The async call builder
+     */
+    public GetLibraryDetailsRequestBuilder getLibraryDetails() {
+        return new GetLibraryDetailsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a library section by id
+     * 
+     * <p>Returns details for the library. This can be thought of as an interstitial endpoint because it contains information about the library, rather than content itself. It often contains a list of `Directory` metadata objects: These used to be used by clients to build a menuing system.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetLibraryDetailsResponse&gt; - The async response
+     */
+    public CompletableFuture<GetLibraryDetailsResponse> getLibraryDetails(GetLibraryDetailsRequest request) {
+        AsyncRequestOperation<GetLibraryDetailsRequest, GetLibraryDetailsResponse> operation
+              = new GetLibraryDetails.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Edit a library section
+     * 
+     * <p>Edit a library section by id setting parameters
+     * 
+     * @return The async call builder
+     */
+    public EditSectionRequestBuilder editSection() {
+        return new EditSectionRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Edit a library section
+     * 
+     * <p>Edit a library section by id setting parameters
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;EditSectionResponse&gt; - The async response
+     */
+    public CompletableFuture<EditSectionResponse> editSection(EditSectionRequest request) {
+        AsyncRequestOperation<EditSectionRequest, EditSectionResponse> operation
+              = new EditSection.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Set the fields of the filtered items
+     * 
+     * <p>This endpoint takes an large possible set of values.  Here are some examples.
+     * - **Parameters, extra documentation**
+     *   - artist.title.value
+     *       - When used with track, both artist.title.value and album.title.value need to be specified
+     *   - title.value usage
+     *       - Summary
+     *           - Tracks always rename and never merge
+     *           - Albums and Artists
+     *               - if single item and item without title does not exist, it is renamed.
+     *               - if single item and item with title does exist they are merged.
+     *               - if multiple they are always merged.
+     *       - Tracks
+     *           - Works as expected will update the track's title
+     *           - Single track:    `/library/sections/{id}/all?type=10&amp;id=42&amp;title.value=NewName`
+     *           - Multiple tracks: `/library/sections/{id}/all?type=10&amp;id=42,43,44&amp;title.value=NewName`
+     *           - All tracks:      `/library/sections/{id}/all?type=10&amp;title.value=NewName`
+     *       - Albums
+     *           - Functionality changes depending on the existence of an album with the same title
+     *           - Album exists
+     *               - Single album: `/library/sections/{id}/all?type=9&amp;id=42&amp;title.value=Album 2`
+     *                   - Album with id 42 is merged into album titled "Album 2"
+     *               - Multiple/All albums: `/library/sections/{id}/all?type=9&amp;title.value=Moo Album`
+     *                   - All albums are merged into the existing album titled "Moo Album"
+     *           - Album does not exist
+     *               - Single album: `/library/sections/{id}/all?type=9&amp;id=42&amp;title.value=NewAlbumTitle`
+     *                   - Album with id 42 has title modified to "NewAlbumTitle"
+     *               - Multiple/All albums: `/library/sections/{id}/all?type=9&amp;title.value=NewAlbumTitle`
+     *                   - All albums are merged into a new album with title="NewAlbumTitle"
+     *       - Artists
+     *           - Functionaly changes depending on the existence of an artist with the same title.
+     *           - Artist exists
+     *               - Single artist: `/library/sections/{id}/all?type=8&amp;id=42&amp;title.value=Artist 2`
+     *                   - Artist with id 42 is merged into existing artist titled "Artist 2"
+     *               - Multiple/All artists: `/library/sections/{id}/all?type=8&amp;title.value=Artist 3`
+     *                   - All artists are merged into the existing artist titled "Artist 3"
+     *           - Artist does not exist
+     *               - Single artist: `/library/sections/{id}/all?type=8&amp;id=42&amp;title.value=NewArtistTitle`
+     *                   - Artist with id 42 has title modified to "NewArtistTitle"
+     *               - Multiple/All artists: `/library/sections/{id}/all?type=8&amp;title.value=NewArtistTitle`
+     *                   - All artists are merged into a new artist with title="NewArtistTitle"
+     * 
+     * <p>- **Notes**
+     *     - Technically square brackets are not allowed in an URI except the Internet Protocol Literal Address
+     *     - RFC3513: A host identified by an Internet Protocol literal address, version 6 [RFC3513] or later, is distinguished by enclosing the IP literal within square brackets ("[" and "]"). This is the only place where square bracket characters are allowed in the URI syntax.
+     *     - Escaped square brackets are allowed, but don't render well
+     * 
+     * @return The async call builder
+     */
+    public UpdateItemsRequestBuilder updateItems() {
+        return new UpdateItemsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Set the fields of the filtered items
+     * 
+     * <p>This endpoint takes an large possible set of values.  Here are some examples.
+     * - **Parameters, extra documentation**
+     *   - artist.title.value
+     *       - When used with track, both artist.title.value and album.title.value need to be specified
+     *   - title.value usage
+     *       - Summary
+     *           - Tracks always rename and never merge
+     *           - Albums and Artists
+     *               - if single item and item without title does not exist, it is renamed.
+     *               - if single item and item with title does exist they are merged.
+     *               - if multiple they are always merged.
+     *       - Tracks
+     *           - Works as expected will update the track's title
+     *           - Single track:    `/library/sections/{id}/all?type=10&amp;id=42&amp;title.value=NewName`
+     *           - Multiple tracks: `/library/sections/{id}/all?type=10&amp;id=42,43,44&amp;title.value=NewName`
+     *           - All tracks:      `/library/sections/{id}/all?type=10&amp;title.value=NewName`
+     *       - Albums
+     *           - Functionality changes depending on the existence of an album with the same title
+     *           - Album exists
+     *               - Single album: `/library/sections/{id}/all?type=9&amp;id=42&amp;title.value=Album 2`
+     *                   - Album with id 42 is merged into album titled "Album 2"
+     *               - Multiple/All albums: `/library/sections/{id}/all?type=9&amp;title.value=Moo Album`
+     *                   - All albums are merged into the existing album titled "Moo Album"
+     *           - Album does not exist
+     *               - Single album: `/library/sections/{id}/all?type=9&amp;id=42&amp;title.value=NewAlbumTitle`
+     *                   - Album with id 42 has title modified to "NewAlbumTitle"
+     *               - Multiple/All albums: `/library/sections/{id}/all?type=9&amp;title.value=NewAlbumTitle`
+     *                   - All albums are merged into a new album with title="NewAlbumTitle"
+     *       - Artists
+     *           - Functionaly changes depending on the existence of an artist with the same title.
+     *           - Artist exists
+     *               - Single artist: `/library/sections/{id}/all?type=8&amp;id=42&amp;title.value=Artist 2`
+     *                   - Artist with id 42 is merged into existing artist titled "Artist 2"
+     *               - Multiple/All artists: `/library/sections/{id}/all?type=8&amp;title.value=Artist 3`
+     *                   - All artists are merged into the existing artist titled "Artist 3"
+     *           - Artist does not exist
+     *               - Single artist: `/library/sections/{id}/all?type=8&amp;id=42&amp;title.value=NewArtistTitle`
+     *                   - Artist with id 42 has title modified to "NewArtistTitle"
+     *               - Multiple/All artists: `/library/sections/{id}/all?type=8&amp;title.value=NewArtistTitle`
+     *                   - All artists are merged into a new artist with title="NewArtistTitle"
+     * 
+     * <p>- **Notes**
+     *     - Technically square brackets are not allowed in an URI except the Internet Protocol Literal Address
+     *     - RFC3513: A host identified by an Internet Protocol literal address, version 6 [RFC3513] or later, is distinguished by enclosing the IP literal within square brackets ("[" and "]"). This is the only place where square bracket characters are allowed in the URI syntax.
+     *     - Escaped square brackets are allowed, but don't render well
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;UpdateItemsResponse&gt; - The async response
+     */
+    public CompletableFuture<UpdateItemsResponse> updateItems(UpdateItemsRequest request) {
+        AsyncRequestOperation<UpdateItemsRequest, UpdateItemsResponse> operation
+              = new UpdateItems.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Analyze a section
+     * 
+     * <p>Start analysis of all items in a section.  If BIF generation is enabled, this will also be started on this section
+     * 
+     * @return The async call builder
+     */
+    public StartAnalysisRequestBuilder startAnalysis() {
+        return new StartAnalysisRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Analyze a section
+     * 
+     * <p>Start analysis of all items in a section.  If BIF generation is enabled, this will also be started on this section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;StartAnalysisResponse&gt; - The async response
+     */
+    public CompletableFuture<StartAnalysisResponse> startAnalysis(StartAnalysisRequest request) {
+        AsyncRequestOperation<StartAnalysisRequest, StartAnalysisResponse> operation
+              = new StartAnalysis.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get autocompletions for search
+     * 
+     * <p>The field to autocomplete on is specified by the {field}.query parameter. For example `genre.query` or `title.query`.
+     * Returns a set of items from the filtered items whose {field} starts with {field}.query.  In the results, a {field}.queryRange will be present to express the range of the match
+     * 
+     * @return The async call builder
+     */
+    public AutocompleteRequestBuilder autocomplete() {
+        return new AutocompleteRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get autocompletions for search
+     * 
+     * <p>The field to autocomplete on is specified by the {field}.query parameter. For example `genre.query` or `title.query`.
+     * Returns a set of items from the filtered items whose {field} starts with {field}.query.  In the results, a {field}.queryRange will be present to express the range of the match
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;AutocompleteResponse&gt; - The async response
+     */
+    public CompletableFuture<AutocompleteResponse> autocomplete(AutocompleteRequest request) {
+        AsyncRequestOperation<AutocompleteRequest, AutocompleteResponse> operation
+              = new Autocomplete.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get collections in a section
+     * 
+     * <p>Get all collections in a section
+     * 
+     * @return The async call builder
+     */
+    public GetCollectionsRequestBuilder getCollections() {
+        return new GetCollectionsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get collections in a section
+     * 
+     * <p>Get all collections in a section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetCollectionsResponse&gt; - The async response
+     */
+    public CompletableFuture<GetCollectionsResponse> getCollections(GetCollectionsRequest request) {
+        AsyncRequestOperation<GetCollectionsRequest, GetCollectionsResponse> operation
+              = new GetCollections.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get common fields for items
+     * 
+     * <p>Represents a "Common" item. It contains only the common attributes of the items selected by the provided filter
+     * Fields which are not common will be expressed in the `mixedFields` field
+     * 
+     * @return The async call builder
+     */
+    public GetCommonRequestBuilder getCommon() {
+        return new GetCommonRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get common fields for items
+     * 
+     * <p>Represents a "Common" item. It contains only the common attributes of the items selected by the provided filter
+     * Fields which are not common will be expressed in the `mixedFields` field
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetCommonResponse&gt; - The async response
+     */
+    public CompletableFuture<GetCommonResponse> getCommon(GetCommonRequest request) {
+        AsyncRequestOperation<GetCommonRequest, GetCommonResponse> operation
+              = new GetCommon.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Empty section trash
+     * 
+     * <p>Empty trash in the section, permanently deleting media/metadata for missing media
+     * 
+     * @return The async call builder
+     */
+    public EmptyTrashRequestBuilder emptyTrash() {
+        return new EmptyTrashRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Empty section trash
+     * 
+     * <p>Empty trash in the section, permanently deleting media/metadata for missing media
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;EmptyTrashResponse&gt; - The async response
+     */
+    public CompletableFuture<EmptyTrashResponse> emptyTrash(EmptyTrashRequest request) {
+        AsyncRequestOperation<EmptyTrashRequest, EmptyTrashResponse> operation
+              = new EmptyTrash.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get section filters
+     * 
+     * <p>Get common filters on a section
+     * 
+     * @return The async call builder
+     */
+    public GetSectionFiltersRequestBuilder getSectionFilters() {
+        return new GetSectionFiltersRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get section filters
+     * 
+     * <p>Get common filters on a section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetSectionFiltersResponse&gt; - The async response
+     */
+    public CompletableFuture<GetSectionFiltersResponse> getSectionFilters(GetSectionFiltersRequest request) {
+        AsyncRequestOperation<GetSectionFiltersRequest, GetSectionFiltersResponse> operation
+              = new GetSectionFilters.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get list of first characters
+     * 
+     * <p>Get list of first characters in this section
+     * 
+     * @return The async call builder
+     */
+    public GetFirstCharactersRequestBuilder getFirstCharacters() {
+        return new GetFirstCharactersRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get list of first characters
+     * 
+     * <p>Get list of first characters in this section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetFirstCharactersResponse&gt; - The async response
+     */
+    public CompletableFuture<GetFirstCharactersResponse> getFirstCharacters(GetFirstCharactersRequest request) {
+        AsyncRequestOperation<GetFirstCharactersRequest, GetFirstCharactersResponse> operation
+              = new GetFirstCharacters.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Delete section indexes
+     * 
+     * <p>Delete all the indexes in a section
+     * 
+     * @return The async call builder
+     */
+    public DeleteIndexesRequestBuilder deleteIndexes() {
+        return new DeleteIndexesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Delete section indexes
+     * 
+     * <p>Delete all the indexes in a section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;DeleteIndexesResponse&gt; - The async response
+     */
+    public CompletableFuture<DeleteIndexesResponse> deleteIndexes(DeleteIndexesRequest request) {
+        AsyncRequestOperation<DeleteIndexesRequest, DeleteIndexesResponse> operation
+              = new DeleteIndexes.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Delete section intro markers
+     * 
+     * <p>Delete all the intro markers in a section
+     * 
+     * @return The async call builder
+     */
+    public DeleteIntrosRequestBuilder deleteIntros() {
+        return new DeleteIntrosRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Delete section intro markers
+     * 
+     * <p>Delete all the intro markers in a section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;DeleteIntrosResponse&gt; - The async response
+     */
+    public CompletableFuture<DeleteIntrosResponse> deleteIntros(DeleteIntrosRequest request) {
+        AsyncRequestOperation<DeleteIntrosRequest, DeleteIntrosResponse> operation
+              = new DeleteIntros.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get section prefs
+     * 
+     * <p>Get the prefs for a section by id and potentially overriding the agent
+     * 
+     * @return The async call builder
+     */
+    public GetSectionPreferencesRequestBuilder getSectionPreferences() {
+        return new GetSectionPreferencesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get section prefs
+     * 
+     * <p>Get the prefs for a section by id and potentially overriding the agent
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetSectionPreferencesResponse&gt; - The async response
+     */
+    public CompletableFuture<GetSectionPreferencesResponse> getSectionPreferences(GetSectionPreferencesRequest request) {
+        AsyncRequestOperation<GetSectionPreferencesRequest, GetSectionPreferencesResponse> operation
+              = new GetSectionPreferences.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Set section prefs
+     * 
+     * <p>Set the prefs for a section by id
+     * 
+     * @return The async call builder
+     */
+    public SetSectionPreferencesRequestBuilder setSectionPreferences() {
+        return new SetSectionPreferencesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Set section prefs
+     * 
+     * <p>Set the prefs for a section by id
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;SetSectionPreferencesResponse&gt; - The async response
+     */
+    public CompletableFuture<SetSectionPreferencesResponse> setSectionPreferences(SetSectionPreferencesRequest request) {
+        AsyncRequestOperation<SetSectionPreferencesRequest, SetSectionPreferencesResponse> operation
+              = new SetSectionPreferences.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Cancel section refresh
+     * 
+     * <p>Cancel the refresh of a section
+     * 
+     * @return The async call builder
+     */
+    public CancelRefreshRequestBuilder cancelRefresh() {
+        return new CancelRefreshRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Cancel section refresh
+     * 
+     * <p>Cancel the refresh of a section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;CancelRefreshResponse&gt; - The async response
+     */
+    public CompletableFuture<CancelRefreshResponse> cancelRefresh(CancelRefreshRequest request) {
+        AsyncRequestOperation<CancelRefreshRequest, CancelRefreshResponse> operation
+              = new CancelRefresh.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Refresh section
+     * 
+     * <p>Start a refresh of this section
+     * 
+     * @return The async call builder
+     */
+    public RefreshSectionRequestBuilder refreshSection() {
+        return new RefreshSectionRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Refresh section
+     * 
+     * <p>Start a refresh of this section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;RefreshSectionResponse&gt; - The async response
+     */
+    public CompletableFuture<RefreshSectionResponse> refreshSection(RefreshSectionRequest request) {
+        AsyncRequestOperation<RefreshSectionRequest, RefreshSectionResponse> operation
+              = new RefreshSection.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get a section sorts
+     * 
+     * <p>Get the sort mechanisms available in a section
+     * 
+     * @return The async call builder
+     */
+    public GetAvailableSortsRequestBuilder getAvailableSorts() {
+        return new GetAvailableSortsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a section sorts
+     * 
+     * <p>Get the sort mechanisms available in a section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetAvailableSortsResponse&gt; - The async response
+     */
+    public CompletableFuture<GetAvailableSortsResponse> getAvailableSorts(GetAvailableSortsRequest request) {
+        AsyncRequestOperation<GetAvailableSortsRequest, GetAvailableSortsResponse> operation
+              = new GetAvailableSorts.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get loudness about a stream in json
+     * 
+     * <p>The the loudness of a stream in db, one entry per 100ms
+     * 
+     * @return The async call builder
+     */
+    public GetStreamLevelsRequestBuilder getStreamLevels() {
+        return new GetStreamLevelsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get loudness about a stream in json
+     * 
+     * <p>The the loudness of a stream in db, one entry per 100ms
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetStreamLevelsResponse&gt; - The async response
+     */
+    public CompletableFuture<GetStreamLevelsResponse> getStreamLevels(GetStreamLevelsRequest request) {
+        AsyncRequestOperation<GetStreamLevelsRequest, GetStreamLevelsResponse> operation
+              = new GetStreamLevels.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get loudness about a stream
+     * 
+     * <p>The the loudness of a stream in db, one number per line, one entry per 100ms
+     * 
+     * @return The async call builder
+     */
+    public GetStreamLoudnessRequestBuilder getStreamLoudness() {
+        return new GetStreamLoudnessRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get loudness about a stream
+     * 
+     * <p>The the loudness of a stream in db, one number per line, one entry per 100ms
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetStreamLoudnessResponse&gt; - The async response
+     */
+    public CompletableFuture<GetStreamLoudnessResponse> getStreamLoudness(GetStreamLoudnessRequest request) {
+        AsyncRequestOperation<GetStreamLoudnessRequest, GetStreamLoudnessResponse> operation
+              = new GetStreamLoudness.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get a chapter image
+     * 
+     * <p>Get a single chapter image for a piece of media
+     * 
+     * @return The async call builder
+     */
+    public GetChapterImageRequestBuilder getChapterImage() {
+        return new GetChapterImageRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a chapter image
+     * 
+     * <p>Get a single chapter image for a piece of media
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetChapterImageResponse&gt; - The async response
+     */
+    public CompletableFuture<GetChapterImageResponse> getChapterImage(GetChapterImageRequest request) {
+        AsyncRequestOperation<GetChapterImageRequest, GetChapterImageResponse> operation
+              = new GetChapterImage.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Set an item's artwork, theme, etc
+     * 
+     * <p>Set the artwork, thumb, element for a metadata item
+     * Generally only the admin can perform this action.  The exception is if the metadata is a playlist created by the user
+     * 
+     * @return The async call builder
+     */
+    public SetItemArtworkRequestBuilder setItemArtwork() {
+        return new SetItemArtworkRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Set an item's artwork, theme, etc
+     * 
+     * <p>Set the artwork, thumb, element for a metadata item
+     * Generally only the admin can perform this action.  The exception is if the metadata is a playlist created by the user
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;SetItemArtworkResponse&gt; - The async response
+     */
+    public CompletableFuture<SetItemArtworkResponse> setItemArtwork(SetItemArtworkRequest request) {
+        AsyncRequestOperation<SetItemArtworkRequest, SetItemArtworkResponse> operation
+              = new SetItemArtwork.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Set an item's artwork, theme, etc
+     * 
+     * <p>Set the artwork, thumb, element for a metadata item
+     * Generally only the admin can perform this action.  The exception is if the metadata is a playlist created by the user
+     * 
+     * @return The async call builder
+     */
+    public UpdateItemArtworkRequestBuilder updateItemArtwork() {
+        return new UpdateItemArtworkRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Set an item's artwork, theme, etc
+     * 
+     * <p>Set the artwork, thumb, element for a metadata item
+     * Generally only the admin can perform this action.  The exception is if the metadata is a playlist created by the user
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;UpdateItemArtworkResponse&gt; - The async response
+     */
+    public CompletableFuture<UpdateItemArtworkResponse> updateItemArtwork(UpdateItemArtworkRequest request) {
+        AsyncRequestOperation<UpdateItemArtworkRequest, UpdateItemArtworkResponse> operation
+              = new UpdateItemArtwork.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Delete a marker
+     * 
+     * <p>Delete a marker for this user on the metadata item
+     * 
+     * @return The async call builder
+     */
+    public DeleteMarkerRequestBuilder deleteMarker() {
+        return new DeleteMarkerRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Delete a marker
+     * 
+     * <p>Delete a marker for this user on the metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;DeleteMarkerResponse&gt; - The async response
+     */
+    public CompletableFuture<DeleteMarkerResponse> deleteMarker(DeleteMarkerRequest request) {
+        AsyncRequestOperation<DeleteMarkerRequest, DeleteMarkerResponse> operation
+              = new DeleteMarker.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Edit a marker
+     * 
+     * <p>Edit a marker for this user on the metadata item
+     * 
+     * @return The async call builder
+     */
+    public EditMarkerRequestBuilder editMarker() {
+        return new EditMarkerRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Edit a marker
+     * 
+     * <p>Edit a marker for this user on the metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;EditMarkerResponse&gt; - The async response
+     */
+    public CompletableFuture<EditMarkerResponse> editMarker(EditMarkerRequest request) {
+        AsyncRequestOperation<EditMarkerRequest, EditMarkerResponse> operation
+              = new EditMarker.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Delete a media item
+     * 
+     * <p>Delete a single media from a metadata item in the library
+     * 
+     * @return The async call builder
+     */
+    public DeleteMediaItemRequestBuilder deleteMediaItem() {
+        return new DeleteMediaItemRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Delete a media item
+     * 
+     * <p>Delete a single media from a metadata item in the library
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;DeleteMediaItemResponse&gt; - The async response
+     */
+    public CompletableFuture<DeleteMediaItemResponse> deleteMediaItem(DeleteMediaItemRequest request) {
+        AsyncRequestOperation<DeleteMediaItemRequest, DeleteMediaItemResponse> operation
+              = new DeleteMediaItem.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get BIF index for a part
+     * 
+     * <p>Get BIF index for a part by index type
+     * 
+     * @return The async call builder
+     */
+    public GetPartIndexRequestBuilder getPartIndex() {
+        return new GetPartIndexRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get BIF index for a part
+     * 
+     * <p>Get BIF index for a part by index type
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetPartIndexResponse&gt; - The async response
+     */
+    public CompletableFuture<GetPartIndexResponse> getPartIndex(GetPartIndexRequest request) {
+        AsyncRequestOperation<GetPartIndexRequest, GetPartIndexResponse> operation
+              = new GetPartIndex.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Delete a collection
+     * 
+     * <p>Delete a library collection from the PMS
+     * 
+     * @return The async call builder
+     */
+    public DeleteCollectionRequestBuilder deleteCollection() {
+        return new DeleteCollectionRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Delete a collection
+     * 
+     * <p>Delete a library collection from the PMS
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;DeleteCollectionResponse&gt; - The async response
+     */
+    public CompletableFuture<DeleteCollectionResponse> deleteCollection(DeleteCollectionRequest request) {
+        AsyncRequestOperation<DeleteCollectionRequest, DeleteCollectionResponse> operation
+              = new DeleteCollection.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get a section composite image
+     * 
+     * <p>Get a composite image of images in this section
+     * 
+     * @return The async call builder
+     */
+    public GetSectionImageRequestBuilder getSectionImage() {
+        return new GetSectionImageRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a section composite image
+     * 
+     * <p>Get a composite image of images in this section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetSectionImageResponse&gt; - The async response
+     */
+    public CompletableFuture<GetSectionImageResponse> getSectionImage(GetSectionImageRequest request) {
+        AsyncRequestOperation<GetSectionImageRequest, GetSectionImageResponse> operation
+              = new GetSectionImage.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Delete a stream
+     * 
+     * <p>Delete a stream.  Only applies to downloaded subtitle streams or a sidecar subtitle when media deletion is enabled.
+     * 
+     * @return The async call builder
+     */
+    public DeleteStreamRequestBuilder deleteStream() {
+        return new DeleteStreamRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Delete a stream
+     * 
+     * <p>Delete a stream.  Only applies to downloaded subtitle streams or a sidecar subtitle when media deletion is enabled.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;DeleteStreamResponse&gt; - The async response
+     */
+    public CompletableFuture<DeleteStreamResponse> deleteStream(DeleteStreamRequest request) {
+        AsyncRequestOperation<DeleteStreamRequest, DeleteStreamResponse> operation
+              = new DeleteStream.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get a stream
+     * 
+     * <p>Get a stream (such as a sidecar subtitle stream)
+     * 
+     * @return The async call builder
+     */
+    public GetStreamRequestBuilder getStream() {
+        return new GetStreamRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a stream
+     * 
+     * <p>Get a stream (such as a sidecar subtitle stream)
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetStreamResponse&gt; - The async response
+     */
+    public CompletableFuture<GetStreamResponse> getStream(GetStreamRequest request) {
+        AsyncRequestOperation<GetStreamRequest, GetStreamResponse> operation
+              = new GetStream.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Set a stream offset
+     * 
+     * <p>Set a stream offset in ms.  This may not be respected by all clients
+     * 
+     * @return The async call builder
+     */
+    public SetStreamOffsetRequestBuilder setStreamOffset() {
+        return new SetStreamOffsetRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Set a stream offset
+     * 
+     * <p>Set a stream offset in ms.  This may not be respected by all clients
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;SetStreamOffsetResponse&gt; - The async response
+     */
+    public CompletableFuture<SetStreamOffsetResponse> setStreamOffset(SetStreamOffsetRequest request) {
+        AsyncRequestOperation<SetStreamOffsetRequest, SetStreamOffsetResponse> operation
+              = new SetStreamOffset.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get an item's artwork, theme, etc
+     * 
+     * <p>Get the artwork, thumb, element for a metadata item
+     * 
+     * @return The async call builder
+     */
+    public GetItemArtworkRequestBuilder getItemArtwork() {
+        return new GetItemArtworkRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get an item's artwork, theme, etc
+     * 
+     * <p>Get the artwork, thumb, element for a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetItemArtworkResponse&gt; - The async response
+     */
+    public CompletableFuture<GetItemArtworkResponse> getItemArtwork(GetItemArtworkRequest request) {
+        AsyncRequestOperation<GetItemArtworkRequest, GetItemArtworkResponse> operation
+              = new GetItemArtwork.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get a media part
+     * 
+     * <p>Get a media part for streaming or download.
+     *   - streaming: This is the default scenario.  Bandwidth usage on this endpoint will be guaranteed (on the server's end) to be at least the bandwidth reservation given in the decision.  If no decision exists, an ad-hoc decision will be created if sufficient bandwidth exists.  Clients should not rely on ad-hoc decisions being made as this may be removed in the future.
+     *   - download: Indicated if the query parameter indicates this is a download.  Bandwidth will be prioritized behind playbacks and will get a fair share of what remains.
+     * 
+     * @return The async call builder
+     */
+    public GetMediaPartRequestBuilder getMediaPart() {
+        return new GetMediaPartRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a media part
+     * 
+     * <p>Get a media part for streaming or download.
+     *   - streaming: This is the default scenario.  Bandwidth usage on this endpoint will be guaranteed (on the server's end) to be at least the bandwidth reservation given in the decision.  If no decision exists, an ad-hoc decision will be created if sufficient bandwidth exists.  Clients should not rely on ad-hoc decisions being made as this may be removed in the future.
+     *   - download: Indicated if the query parameter indicates this is a download.  Bandwidth will be prioritized behind playbacks and will get a fair share of what remains.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetMediaPartResponse&gt; - The async response
+     */
+    public CompletableFuture<GetMediaPartResponse> getMediaPart(GetMediaPartRequest request) {
+        AsyncRequestOperation<GetMediaPartRequest, GetMediaPartResponse> operation
+              = new GetMediaPart.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get an image from part BIF
+     * 
+     * <p>Extract an image from the BIF for a part at a particular offset
+     * 
+     * @return The async call builder
+     */
+    public GetImageFromBifRequestBuilder getImageFromBif() {
+        return new GetImageFromBifRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get an image from part BIF
+     * 
+     * <p>Extract an image from the BIF for a part at a particular offset
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetImageFromBifResponse&gt; - The async response
+     */
+    public CompletableFuture<GetImageFromBifResponse> getImageFromBif(GetImageFromBifRequest request) {
+        AsyncRequestOperation<GetImageFromBifRequest, GetImageFromBifResponse> operation
+              = new GetImageFromBif.Async(sdkConfiguration);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

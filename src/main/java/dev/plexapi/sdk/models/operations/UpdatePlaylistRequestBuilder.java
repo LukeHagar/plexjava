@@ -8,67 +8,27 @@ import static dev.plexapi.sdk.operations.Operations.RequestOperation;
 import dev.plexapi.sdk.SDKConfiguration;
 import dev.plexapi.sdk.operations.UpdatePlaylist;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Double;
 import java.lang.Exception;
-import java.lang.String;
-import java.util.Optional;
 
 public class UpdatePlaylistRequestBuilder {
 
-    private Double playlistID;
-    private Optional<String> title = Optional.empty();
-    private Optional<String> summary = Optional.empty();
+    private UpdatePlaylistRequest request;
     private final SDKConfiguration sdkConfiguration;
 
     public UpdatePlaylistRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-    public UpdatePlaylistRequestBuilder playlistID(double playlistID) {
-        Utils.checkNotNull(playlistID, "playlistID");
-        this.playlistID = playlistID;
+    public UpdatePlaylistRequestBuilder request(UpdatePlaylistRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
-    }
-                
-    public UpdatePlaylistRequestBuilder title(String title) {
-        Utils.checkNotNull(title, "title");
-        this.title = Optional.of(title);
-        return this;
-    }
-
-    public UpdatePlaylistRequestBuilder title(Optional<String> title) {
-        Utils.checkNotNull(title, "title");
-        this.title = title;
-        return this;
-    }
-                
-    public UpdatePlaylistRequestBuilder summary(String summary) {
-        Utils.checkNotNull(summary, "summary");
-        this.summary = Optional.of(summary);
-        return this;
-    }
-
-    public UpdatePlaylistRequestBuilder summary(Optional<String> summary) {
-        Utils.checkNotNull(summary, "summary");
-        this.summary = summary;
-        return this;
-    }
-
-
-    private UpdatePlaylistRequest buildRequest() {
-
-        UpdatePlaylistRequest request = new UpdatePlaylistRequest(playlistID,
-            title,
-            summary);
-
-        return request;
     }
 
     public UpdatePlaylistResponse call() throws Exception {
         
         RequestOperation<UpdatePlaylistRequest, UpdatePlaylistResponse> operation
               = new UpdatePlaylist.Sync(sdkConfiguration);
-        UpdatePlaylistRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));
     }

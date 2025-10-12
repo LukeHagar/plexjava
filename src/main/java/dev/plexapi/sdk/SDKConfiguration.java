@@ -5,6 +5,7 @@ package dev.plexapi.sdk;
 
 import dev.plexapi.sdk.hooks.SDKHooks;
 import dev.plexapi.sdk.utils.AsyncHooks;
+import dev.plexapi.sdk.utils.Globals;
 import dev.plexapi.sdk.utils.HTTPClient;
 import dev.plexapi.sdk.utils.Hooks;
 import dev.plexapi.sdk.utils.RetryConfig;
@@ -23,8 +24,8 @@ import java.util.concurrent.ScheduledExecutorService;
 public class SDKConfiguration {
 
     private static final String LANGUAGE = "java";
-    public static final String OPENAPI_DOC_VERSION = "0.0.3";
-    public static final String SDK_VERSION = "0.18.0";
+    public static final String OPENAPI_DOC_VERSION = "1.1.1";
+    public static final String SDK_VERSION = "0.19.1";
     public static final String GEN_VERSION = "2.698.4";
     private static final String BASE_PACKAGE = "dev.plexapi.sdk";
     public static final String USER_AGENT = 
@@ -91,9 +92,17 @@ public class SDKConfiguration {
     @SuppressWarnings("serial")
     private List<Map<String, String>> serverVariables = new ArrayList<>(){ {
         add(new HashMap<>(){ {
-            put("protocol", "https");
-            put("ip", "10.10.10.47");
+            put("identifier", "0123456789abcdef0123456789abcdef");
+            put("IP-description", "1-2-3-4");
             put("port", "32400");
+        } });
+        add(new HashMap<>(){ {
+            put("protocol", "http");
+            put("host", "localhost");
+            put("port", "32400");
+        } });
+        add(new HashMap<>(){ {
+            put("server_url", "http://localhost:32400");
         } });
     } };
     
@@ -124,7 +133,8 @@ public class SDKConfiguration {
         SDKHooks.initialize(_asyncHooks);
     }
 
-    
+    @SuppressWarnings("serial")
+    public Globals globals = new Globals();
     
      public Map<String, String> getServerVariableDefaults() {
          return serverVariables.get(this.serverIdx);

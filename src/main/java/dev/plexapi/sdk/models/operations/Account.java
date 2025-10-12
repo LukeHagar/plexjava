@@ -9,8 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Boolean;
-import java.lang.Integer;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
@@ -19,116 +18,36 @@ import java.util.Optional;
 public class Account {
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("globalViewCount")
+    private Optional<Long> globalViewCount;
+
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("id")
-    private Optional<Integer> id;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("key")
-    private Optional<String> key;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("name")
-    private Optional<String> name;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("defaultAudioLanguage")
-    private Optional<String> defaultAudioLanguage;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("autoSelectAudio")
-    private Optional<Boolean> autoSelectAudio;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("defaultSubtitleLanguage")
-    private Optional<String> defaultSubtitleLanguage;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("subtitleMode")
-    private Optional<Integer> subtitleMode;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("thumb")
-    private Optional<String> thumb;
+    private Optional<Long> id;
 
     @JsonCreator
     public Account(
-            @JsonProperty("id") Optional<Integer> id,
-            @JsonProperty("key") Optional<String> key,
-            @JsonProperty("name") Optional<String> name,
-            @JsonProperty("defaultAudioLanguage") Optional<String> defaultAudioLanguage,
-            @JsonProperty("autoSelectAudio") Optional<Boolean> autoSelectAudio,
-            @JsonProperty("defaultSubtitleLanguage") Optional<String> defaultSubtitleLanguage,
-            @JsonProperty("subtitleMode") Optional<Integer> subtitleMode,
-            @JsonProperty("thumb") Optional<String> thumb) {
+            @JsonProperty("globalViewCount") Optional<Long> globalViewCount,
+            @JsonProperty("id") Optional<Long> id) {
+        Utils.checkNotNull(globalViewCount, "globalViewCount");
         Utils.checkNotNull(id, "id");
-        Utils.checkNotNull(key, "key");
-        Utils.checkNotNull(name, "name");
-        Utils.checkNotNull(defaultAudioLanguage, "defaultAudioLanguage");
-        Utils.checkNotNull(autoSelectAudio, "autoSelectAudio");
-        Utils.checkNotNull(defaultSubtitleLanguage, "defaultSubtitleLanguage");
-        Utils.checkNotNull(subtitleMode, "subtitleMode");
-        Utils.checkNotNull(thumb, "thumb");
+        this.globalViewCount = globalViewCount;
         this.id = id;
-        this.key = key;
-        this.name = name;
-        this.defaultAudioLanguage = defaultAudioLanguage;
-        this.autoSelectAudio = autoSelectAudio;
-        this.defaultSubtitleLanguage = defaultSubtitleLanguage;
-        this.subtitleMode = subtitleMode;
-        this.thumb = thumb;
     }
     
     public Account() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
-    public Optional<Integer> id() {
+    public Optional<Long> globalViewCount() {
+        return globalViewCount;
+    }
+
+    @JsonIgnore
+    public Optional<Long> id() {
         return id;
-    }
-
-    @JsonIgnore
-    public Optional<String> key() {
-        return key;
-    }
-
-    @JsonIgnore
-    public Optional<String> name() {
-        return name;
-    }
-
-    @JsonIgnore
-    public Optional<String> defaultAudioLanguage() {
-        return defaultAudioLanguage;
-    }
-
-    @JsonIgnore
-    public Optional<Boolean> autoSelectAudio() {
-        return autoSelectAudio;
-    }
-
-    @JsonIgnore
-    public Optional<String> defaultSubtitleLanguage() {
-        return defaultSubtitleLanguage;
-    }
-
-    @JsonIgnore
-    public Optional<Integer> subtitleMode() {
-        return subtitleMode;
-    }
-
-    @JsonIgnore
-    public Optional<String> thumb() {
-        return thumb;
     }
 
     public static Builder builder() {
@@ -136,107 +55,29 @@ public class Account {
     }
 
 
-    public Account withId(int id) {
+    public Account withGlobalViewCount(long globalViewCount) {
+        Utils.checkNotNull(globalViewCount, "globalViewCount");
+        this.globalViewCount = Optional.ofNullable(globalViewCount);
+        return this;
+    }
+
+
+    public Account withGlobalViewCount(Optional<Long> globalViewCount) {
+        Utils.checkNotNull(globalViewCount, "globalViewCount");
+        this.globalViewCount = globalViewCount;
+        return this;
+    }
+
+    public Account withId(long id) {
         Utils.checkNotNull(id, "id");
         this.id = Optional.ofNullable(id);
         return this;
     }
 
 
-    public Account withId(Optional<Integer> id) {
+    public Account withId(Optional<Long> id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
-        return this;
-    }
-
-    public Account withKey(String key) {
-        Utils.checkNotNull(key, "key");
-        this.key = Optional.ofNullable(key);
-        return this;
-    }
-
-
-    public Account withKey(Optional<String> key) {
-        Utils.checkNotNull(key, "key");
-        this.key = key;
-        return this;
-    }
-
-    public Account withName(String name) {
-        Utils.checkNotNull(name, "name");
-        this.name = Optional.ofNullable(name);
-        return this;
-    }
-
-
-    public Account withName(Optional<String> name) {
-        Utils.checkNotNull(name, "name");
-        this.name = name;
-        return this;
-    }
-
-    public Account withDefaultAudioLanguage(String defaultAudioLanguage) {
-        Utils.checkNotNull(defaultAudioLanguage, "defaultAudioLanguage");
-        this.defaultAudioLanguage = Optional.ofNullable(defaultAudioLanguage);
-        return this;
-    }
-
-
-    public Account withDefaultAudioLanguage(Optional<String> defaultAudioLanguage) {
-        Utils.checkNotNull(defaultAudioLanguage, "defaultAudioLanguage");
-        this.defaultAudioLanguage = defaultAudioLanguage;
-        return this;
-    }
-
-    public Account withAutoSelectAudio(boolean autoSelectAudio) {
-        Utils.checkNotNull(autoSelectAudio, "autoSelectAudio");
-        this.autoSelectAudio = Optional.ofNullable(autoSelectAudio);
-        return this;
-    }
-
-
-    public Account withAutoSelectAudio(Optional<Boolean> autoSelectAudio) {
-        Utils.checkNotNull(autoSelectAudio, "autoSelectAudio");
-        this.autoSelectAudio = autoSelectAudio;
-        return this;
-    }
-
-    public Account withDefaultSubtitleLanguage(String defaultSubtitleLanguage) {
-        Utils.checkNotNull(defaultSubtitleLanguage, "defaultSubtitleLanguage");
-        this.defaultSubtitleLanguage = Optional.ofNullable(defaultSubtitleLanguage);
-        return this;
-    }
-
-
-    public Account withDefaultSubtitleLanguage(Optional<String> defaultSubtitleLanguage) {
-        Utils.checkNotNull(defaultSubtitleLanguage, "defaultSubtitleLanguage");
-        this.defaultSubtitleLanguage = defaultSubtitleLanguage;
-        return this;
-    }
-
-    public Account withSubtitleMode(int subtitleMode) {
-        Utils.checkNotNull(subtitleMode, "subtitleMode");
-        this.subtitleMode = Optional.ofNullable(subtitleMode);
-        return this;
-    }
-
-
-    public Account withSubtitleMode(Optional<Integer> subtitleMode) {
-        Utils.checkNotNull(subtitleMode, "subtitleMode");
-        this.subtitleMode = subtitleMode;
-        return this;
-    }
-
-    public Account withThumb(String thumb) {
-        Utils.checkNotNull(thumb, "thumb");
-        this.thumb = Optional.ofNullable(thumb);
-        return this;
-    }
-
-
-    public Account withThumb(Optional<String> thumb) {
-        Utils.checkNotNull(thumb, "thumb");
-        this.thumb = thumb;
         return this;
     }
 
@@ -250,170 +91,64 @@ public class Account {
         }
         Account other = (Account) o;
         return 
-            Utils.enhancedDeepEquals(this.id, other.id) &&
-            Utils.enhancedDeepEquals(this.key, other.key) &&
-            Utils.enhancedDeepEquals(this.name, other.name) &&
-            Utils.enhancedDeepEquals(this.defaultAudioLanguage, other.defaultAudioLanguage) &&
-            Utils.enhancedDeepEquals(this.autoSelectAudio, other.autoSelectAudio) &&
-            Utils.enhancedDeepEquals(this.defaultSubtitleLanguage, other.defaultSubtitleLanguage) &&
-            Utils.enhancedDeepEquals(this.subtitleMode, other.subtitleMode) &&
-            Utils.enhancedDeepEquals(this.thumb, other.thumb);
+            Utils.enhancedDeepEquals(this.globalViewCount, other.globalViewCount) &&
+            Utils.enhancedDeepEquals(this.id, other.id);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            id, key, name,
-            defaultAudioLanguage, autoSelectAudio, defaultSubtitleLanguage,
-            subtitleMode, thumb);
+            globalViewCount, id);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Account.class,
-                "id", id,
-                "key", key,
-                "name", name,
-                "defaultAudioLanguage", defaultAudioLanguage,
-                "autoSelectAudio", autoSelectAudio,
-                "defaultSubtitleLanguage", defaultSubtitleLanguage,
-                "subtitleMode", subtitleMode,
-                "thumb", thumb);
+                "globalViewCount", globalViewCount,
+                "id", id);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<Integer> id = Optional.empty();
+        private Optional<Long> globalViewCount = Optional.empty();
 
-        private Optional<String> key = Optional.empty();
-
-        private Optional<String> name = Optional.empty();
-
-        private Optional<String> defaultAudioLanguage = Optional.empty();
-
-        private Optional<Boolean> autoSelectAudio = Optional.empty();
-
-        private Optional<String> defaultSubtitleLanguage = Optional.empty();
-
-        private Optional<Integer> subtitleMode = Optional.empty();
-
-        private Optional<String> thumb = Optional.empty();
+        private Optional<Long> id = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        public Builder id(int id) {
+        public Builder globalViewCount(long globalViewCount) {
+            Utils.checkNotNull(globalViewCount, "globalViewCount");
+            this.globalViewCount = Optional.ofNullable(globalViewCount);
+            return this;
+        }
+
+        public Builder globalViewCount(Optional<Long> globalViewCount) {
+            Utils.checkNotNull(globalViewCount, "globalViewCount");
+            this.globalViewCount = globalViewCount;
+            return this;
+        }
+
+
+        public Builder id(long id) {
             Utils.checkNotNull(id, "id");
             this.id = Optional.ofNullable(id);
             return this;
         }
 
-        public Builder id(Optional<Integer> id) {
+        public Builder id(Optional<Long> id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
-            return this;
-        }
-
-
-        public Builder key(String key) {
-            Utils.checkNotNull(key, "key");
-            this.key = Optional.ofNullable(key);
-            return this;
-        }
-
-        public Builder key(Optional<String> key) {
-            Utils.checkNotNull(key, "key");
-            this.key = key;
-            return this;
-        }
-
-
-        public Builder name(String name) {
-            Utils.checkNotNull(name, "name");
-            this.name = Optional.ofNullable(name);
-            return this;
-        }
-
-        public Builder name(Optional<String> name) {
-            Utils.checkNotNull(name, "name");
-            this.name = name;
-            return this;
-        }
-
-
-        public Builder defaultAudioLanguage(String defaultAudioLanguage) {
-            Utils.checkNotNull(defaultAudioLanguage, "defaultAudioLanguage");
-            this.defaultAudioLanguage = Optional.ofNullable(defaultAudioLanguage);
-            return this;
-        }
-
-        public Builder defaultAudioLanguage(Optional<String> defaultAudioLanguage) {
-            Utils.checkNotNull(defaultAudioLanguage, "defaultAudioLanguage");
-            this.defaultAudioLanguage = defaultAudioLanguage;
-            return this;
-        }
-
-
-        public Builder autoSelectAudio(boolean autoSelectAudio) {
-            Utils.checkNotNull(autoSelectAudio, "autoSelectAudio");
-            this.autoSelectAudio = Optional.ofNullable(autoSelectAudio);
-            return this;
-        }
-
-        public Builder autoSelectAudio(Optional<Boolean> autoSelectAudio) {
-            Utils.checkNotNull(autoSelectAudio, "autoSelectAudio");
-            this.autoSelectAudio = autoSelectAudio;
-            return this;
-        }
-
-
-        public Builder defaultSubtitleLanguage(String defaultSubtitleLanguage) {
-            Utils.checkNotNull(defaultSubtitleLanguage, "defaultSubtitleLanguage");
-            this.defaultSubtitleLanguage = Optional.ofNullable(defaultSubtitleLanguage);
-            return this;
-        }
-
-        public Builder defaultSubtitleLanguage(Optional<String> defaultSubtitleLanguage) {
-            Utils.checkNotNull(defaultSubtitleLanguage, "defaultSubtitleLanguage");
-            this.defaultSubtitleLanguage = defaultSubtitleLanguage;
-            return this;
-        }
-
-
-        public Builder subtitleMode(int subtitleMode) {
-            Utils.checkNotNull(subtitleMode, "subtitleMode");
-            this.subtitleMode = Optional.ofNullable(subtitleMode);
-            return this;
-        }
-
-        public Builder subtitleMode(Optional<Integer> subtitleMode) {
-            Utils.checkNotNull(subtitleMode, "subtitleMode");
-            this.subtitleMode = subtitleMode;
-            return this;
-        }
-
-
-        public Builder thumb(String thumb) {
-            Utils.checkNotNull(thumb, "thumb");
-            this.thumb = Optional.ofNullable(thumb);
-            return this;
-        }
-
-        public Builder thumb(Optional<String> thumb) {
-            Utils.checkNotNull(thumb, "thumb");
-            this.thumb = thumb;
             return this;
         }
 
         public Account build() {
 
             return new Account(
-                id, key, name,
-                defaultAudioLanguage, autoSelectAudio, defaultSubtitleLanguage,
-                subtitleMode, thumb);
+                globalViewCount, id);
         }
 
     }

@@ -11,126 +11,188 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Double;
+import java.lang.Long;
+import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.util.Map;
 import java.util.Optional;
 
 
 public class Activity {
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("uuid")
-    private Optional<String> uuid;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("type")
-    private Optional<String> type;
-
-
+    /**
+     * Indicates whether this activity can be cancelled
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("cancellable")
     private Optional<Boolean> cancellable;
 
-
+    /**
+     * An object with additional values
+     */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("userID")
-    private Optional<Double> userID;
+    @JsonProperty("Context")
+    private Optional<? extends Map<String, Object>> context;
 
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("title")
-    private Optional<String> title;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("subtitle")
-    private Optional<String> subtitle;
-
-
+    /**
+     * A progress percentage.  A value of -1 means the progress is indeterminate
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("progress")
     private Optional<Double> progress;
 
-
+    /**
+     * An object with the response to the async opperation
+     */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("Context")
-    private Optional<? extends Context> context;
+    @JsonProperty("Response")
+    private Optional<? extends Map<String, Object>> response;
+
+    /**
+     * A user-friendly sub-title for this activity
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("subtitle")
+    private Optional<String> subtitle;
+
+    /**
+     * A user-friendly title for this activity
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("title")
+    private Optional<String> title;
+
+    /**
+     * The type of activity
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("type")
+    private Optional<String> type;
+
+    /**
+     * The user this activity belongs to
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("userID")
+    private Optional<Long> userID;
+
+    /**
+     * The ID of the activity
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("uuid")
+    private Optional<String> uuid;
 
     @JsonCreator
     public Activity(
-            @JsonProperty("uuid") Optional<String> uuid,
-            @JsonProperty("type") Optional<String> type,
             @JsonProperty("cancellable") Optional<Boolean> cancellable,
-            @JsonProperty("userID") Optional<Double> userID,
-            @JsonProperty("title") Optional<String> title,
-            @JsonProperty("subtitle") Optional<String> subtitle,
+            @JsonProperty("Context") Optional<? extends Map<String, Object>> context,
             @JsonProperty("progress") Optional<Double> progress,
-            @JsonProperty("Context") Optional<? extends Context> context) {
-        Utils.checkNotNull(uuid, "uuid");
-        Utils.checkNotNull(type, "type");
+            @JsonProperty("Response") Optional<? extends Map<String, Object>> response,
+            @JsonProperty("subtitle") Optional<String> subtitle,
+            @JsonProperty("title") Optional<String> title,
+            @JsonProperty("type") Optional<String> type,
+            @JsonProperty("userID") Optional<Long> userID,
+            @JsonProperty("uuid") Optional<String> uuid) {
         Utils.checkNotNull(cancellable, "cancellable");
-        Utils.checkNotNull(userID, "userID");
-        Utils.checkNotNull(title, "title");
-        Utils.checkNotNull(subtitle, "subtitle");
-        Utils.checkNotNull(progress, "progress");
         Utils.checkNotNull(context, "context");
-        this.uuid = uuid;
-        this.type = type;
+        Utils.checkNotNull(progress, "progress");
+        Utils.checkNotNull(response, "response");
+        Utils.checkNotNull(subtitle, "subtitle");
+        Utils.checkNotNull(title, "title");
+        Utils.checkNotNull(type, "type");
+        Utils.checkNotNull(userID, "userID");
+        Utils.checkNotNull(uuid, "uuid");
         this.cancellable = cancellable;
-        this.userID = userID;
-        this.title = title;
-        this.subtitle = subtitle;
-        this.progress = progress;
         this.context = context;
+        this.progress = progress;
+        this.response = response;
+        this.subtitle = subtitle;
+        this.title = title;
+        this.type = type;
+        this.userID = userID;
+        this.uuid = uuid;
     }
     
     public Activity() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    @JsonIgnore
-    public Optional<String> uuid() {
-        return uuid;
-    }
-
-    @JsonIgnore
-    public Optional<String> type() {
-        return type;
-    }
-
+    /**
+     * Indicates whether this activity can be cancelled
+     */
     @JsonIgnore
     public Optional<Boolean> cancellable() {
         return cancellable;
     }
 
+    /**
+     * An object with additional values
+     */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Double> userID() {
-        return userID;
+    public Optional<Map<String, Object>> context() {
+        return (Optional<Map<String, Object>>) context;
     }
 
-    @JsonIgnore
-    public Optional<String> title() {
-        return title;
-    }
-
-    @JsonIgnore
-    public Optional<String> subtitle() {
-        return subtitle;
-    }
-
+    /**
+     * A progress percentage.  A value of -1 means the progress is indeterminate
+     */
     @JsonIgnore
     public Optional<Double> progress() {
         return progress;
     }
 
+    /**
+     * An object with the response to the async opperation
+     */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Context> context() {
-        return (Optional<Context>) context;
+    public Optional<Map<String, Object>> response() {
+        return (Optional<Map<String, Object>>) response;
+    }
+
+    /**
+     * A user-friendly sub-title for this activity
+     */
+    @JsonIgnore
+    public Optional<String> subtitle() {
+        return subtitle;
+    }
+
+    /**
+     * A user-friendly title for this activity
+     */
+    @JsonIgnore
+    public Optional<String> title() {
+        return title;
+    }
+
+    /**
+     * The type of activity
+     */
+    @JsonIgnore
+    public Optional<String> type() {
+        return type;
+    }
+
+    /**
+     * The user this activity belongs to
+     */
+    @JsonIgnore
+    public Optional<Long> userID() {
+        return userID;
+    }
+
+    /**
+     * The ID of the activity
+     */
+    @JsonIgnore
+    public Optional<String> uuid() {
+        return uuid;
     }
 
     public static Builder builder() {
@@ -138,32 +200,9 @@ public class Activity {
     }
 
 
-    public Activity withUuid(String uuid) {
-        Utils.checkNotNull(uuid, "uuid");
-        this.uuid = Optional.ofNullable(uuid);
-        return this;
-    }
-
-
-    public Activity withUuid(Optional<String> uuid) {
-        Utils.checkNotNull(uuid, "uuid");
-        this.uuid = uuid;
-        return this;
-    }
-
-    public Activity withType(String type) {
-        Utils.checkNotNull(type, "type");
-        this.type = Optional.ofNullable(type);
-        return this;
-    }
-
-
-    public Activity withType(Optional<String> type) {
-        Utils.checkNotNull(type, "type");
-        this.type = type;
-        return this;
-    }
-
+    /**
+     * Indicates whether this activity can be cancelled
+     */
     public Activity withCancellable(boolean cancellable) {
         Utils.checkNotNull(cancellable, "cancellable");
         this.cancellable = Optional.ofNullable(cancellable);
@@ -171,51 +210,37 @@ public class Activity {
     }
 
 
+    /**
+     * Indicates whether this activity can be cancelled
+     */
     public Activity withCancellable(Optional<Boolean> cancellable) {
         Utils.checkNotNull(cancellable, "cancellable");
         this.cancellable = cancellable;
         return this;
     }
 
-    public Activity withUserID(double userID) {
-        Utils.checkNotNull(userID, "userID");
-        this.userID = Optional.ofNullable(userID);
+    /**
+     * An object with additional values
+     */
+    public Activity withContext(Map<String, Object> context) {
+        Utils.checkNotNull(context, "context");
+        this.context = Optional.ofNullable(context);
         return this;
     }
 
 
-    public Activity withUserID(Optional<Double> userID) {
-        Utils.checkNotNull(userID, "userID");
-        this.userID = userID;
+    /**
+     * An object with additional values
+     */
+    public Activity withContext(Optional<? extends Map<String, Object>> context) {
+        Utils.checkNotNull(context, "context");
+        this.context = context;
         return this;
     }
 
-    public Activity withTitle(String title) {
-        Utils.checkNotNull(title, "title");
-        this.title = Optional.ofNullable(title);
-        return this;
-    }
-
-
-    public Activity withTitle(Optional<String> title) {
-        Utils.checkNotNull(title, "title");
-        this.title = title;
-        return this;
-    }
-
-    public Activity withSubtitle(String subtitle) {
-        Utils.checkNotNull(subtitle, "subtitle");
-        this.subtitle = Optional.ofNullable(subtitle);
-        return this;
-    }
-
-
-    public Activity withSubtitle(Optional<String> subtitle) {
-        Utils.checkNotNull(subtitle, "subtitle");
-        this.subtitle = subtitle;
-        return this;
-    }
-
+    /**
+     * A progress percentage.  A value of -1 means the progress is indeterminate
+     */
     public Activity withProgress(double progress) {
         Utils.checkNotNull(progress, "progress");
         this.progress = Optional.ofNullable(progress);
@@ -223,22 +248,126 @@ public class Activity {
     }
 
 
+    /**
+     * A progress percentage.  A value of -1 means the progress is indeterminate
+     */
     public Activity withProgress(Optional<Double> progress) {
         Utils.checkNotNull(progress, "progress");
         this.progress = progress;
         return this;
     }
 
-    public Activity withContext(Context context) {
-        Utils.checkNotNull(context, "context");
-        this.context = Optional.ofNullable(context);
+    /**
+     * An object with the response to the async opperation
+     */
+    public Activity withResponse(Map<String, Object> response) {
+        Utils.checkNotNull(response, "response");
+        this.response = Optional.ofNullable(response);
         return this;
     }
 
 
-    public Activity withContext(Optional<? extends Context> context) {
-        Utils.checkNotNull(context, "context");
-        this.context = context;
+    /**
+     * An object with the response to the async opperation
+     */
+    public Activity withResponse(Optional<? extends Map<String, Object>> response) {
+        Utils.checkNotNull(response, "response");
+        this.response = response;
+        return this;
+    }
+
+    /**
+     * A user-friendly sub-title for this activity
+     */
+    public Activity withSubtitle(String subtitle) {
+        Utils.checkNotNull(subtitle, "subtitle");
+        this.subtitle = Optional.ofNullable(subtitle);
+        return this;
+    }
+
+
+    /**
+     * A user-friendly sub-title for this activity
+     */
+    public Activity withSubtitle(Optional<String> subtitle) {
+        Utils.checkNotNull(subtitle, "subtitle");
+        this.subtitle = subtitle;
+        return this;
+    }
+
+    /**
+     * A user-friendly title for this activity
+     */
+    public Activity withTitle(String title) {
+        Utils.checkNotNull(title, "title");
+        this.title = Optional.ofNullable(title);
+        return this;
+    }
+
+
+    /**
+     * A user-friendly title for this activity
+     */
+    public Activity withTitle(Optional<String> title) {
+        Utils.checkNotNull(title, "title");
+        this.title = title;
+        return this;
+    }
+
+    /**
+     * The type of activity
+     */
+    public Activity withType(String type) {
+        Utils.checkNotNull(type, "type");
+        this.type = Optional.ofNullable(type);
+        return this;
+    }
+
+
+    /**
+     * The type of activity
+     */
+    public Activity withType(Optional<String> type) {
+        Utils.checkNotNull(type, "type");
+        this.type = type;
+        return this;
+    }
+
+    /**
+     * The user this activity belongs to
+     */
+    public Activity withUserID(long userID) {
+        Utils.checkNotNull(userID, "userID");
+        this.userID = Optional.ofNullable(userID);
+        return this;
+    }
+
+
+    /**
+     * The user this activity belongs to
+     */
+    public Activity withUserID(Optional<Long> userID) {
+        Utils.checkNotNull(userID, "userID");
+        this.userID = userID;
+        return this;
+    }
+
+    /**
+     * The ID of the activity
+     */
+    public Activity withUuid(String uuid) {
+        Utils.checkNotNull(uuid, "uuid");
+        this.uuid = Optional.ofNullable(uuid);
+        return this;
+    }
+
+
+    /**
+     * The ID of the activity
+     */
+    public Activity withUuid(Optional<String> uuid) {
+        Utils.checkNotNull(uuid, "uuid");
+        this.uuid = uuid;
         return this;
     }
 
@@ -252,93 +381,77 @@ public class Activity {
         }
         Activity other = (Activity) o;
         return 
-            Utils.enhancedDeepEquals(this.uuid, other.uuid) &&
-            Utils.enhancedDeepEquals(this.type, other.type) &&
             Utils.enhancedDeepEquals(this.cancellable, other.cancellable) &&
-            Utils.enhancedDeepEquals(this.userID, other.userID) &&
-            Utils.enhancedDeepEquals(this.title, other.title) &&
-            Utils.enhancedDeepEquals(this.subtitle, other.subtitle) &&
+            Utils.enhancedDeepEquals(this.context, other.context) &&
             Utils.enhancedDeepEquals(this.progress, other.progress) &&
-            Utils.enhancedDeepEquals(this.context, other.context);
+            Utils.enhancedDeepEquals(this.response, other.response) &&
+            Utils.enhancedDeepEquals(this.subtitle, other.subtitle) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.userID, other.userID) &&
+            Utils.enhancedDeepEquals(this.uuid, other.uuid);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            uuid, type, cancellable,
-            userID, title, subtitle,
-            progress, context);
+            cancellable, context, progress,
+            response, subtitle, title,
+            type, userID, uuid);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Activity.class,
-                "uuid", uuid,
-                "type", type,
                 "cancellable", cancellable,
-                "userID", userID,
-                "title", title,
-                "subtitle", subtitle,
+                "context", context,
                 "progress", progress,
-                "context", context);
+                "response", response,
+                "subtitle", subtitle,
+                "title", title,
+                "type", type,
+                "userID", userID,
+                "uuid", uuid);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> uuid = Optional.empty();
-
-        private Optional<String> type = Optional.empty();
-
         private Optional<Boolean> cancellable = Optional.empty();
 
-        private Optional<Double> userID = Optional.empty();
-
-        private Optional<String> title = Optional.empty();
-
-        private Optional<String> subtitle = Optional.empty();
+        private Optional<? extends Map<String, Object>> context = Optional.empty();
 
         private Optional<Double> progress = Optional.empty();
 
-        private Optional<? extends Context> context = Optional.empty();
+        private Optional<? extends Map<String, Object>> response = Optional.empty();
+
+        private Optional<String> subtitle = Optional.empty();
+
+        private Optional<String> title = Optional.empty();
+
+        private Optional<String> type = Optional.empty();
+
+        private Optional<Long> userID = Optional.empty();
+
+        private Optional<String> uuid = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        public Builder uuid(String uuid) {
-            Utils.checkNotNull(uuid, "uuid");
-            this.uuid = Optional.ofNullable(uuid);
-            return this;
-        }
-
-        public Builder uuid(Optional<String> uuid) {
-            Utils.checkNotNull(uuid, "uuid");
-            this.uuid = uuid;
-            return this;
-        }
-
-
-        public Builder type(String type) {
-            Utils.checkNotNull(type, "type");
-            this.type = Optional.ofNullable(type);
-            return this;
-        }
-
-        public Builder type(Optional<String> type) {
-            Utils.checkNotNull(type, "type");
-            this.type = type;
-            return this;
-        }
-
-
+        /**
+         * Indicates whether this activity can be cancelled
+         */
         public Builder cancellable(boolean cancellable) {
             Utils.checkNotNull(cancellable, "cancellable");
             this.cancellable = Optional.ofNullable(cancellable);
             return this;
         }
 
+        /**
+         * Indicates whether this activity can be cancelled
+         */
         public Builder cancellable(Optional<Boolean> cancellable) {
             Utils.checkNotNull(cancellable, "cancellable");
             this.cancellable = cancellable;
@@ -346,51 +459,37 @@ public class Activity {
         }
 
 
-        public Builder userID(double userID) {
-            Utils.checkNotNull(userID, "userID");
-            this.userID = Optional.ofNullable(userID);
+        /**
+         * An object with additional values
+         */
+        public Builder context(Map<String, Object> context) {
+            Utils.checkNotNull(context, "context");
+            this.context = Optional.ofNullable(context);
             return this;
         }
 
-        public Builder userID(Optional<Double> userID) {
-            Utils.checkNotNull(userID, "userID");
-            this.userID = userID;
-            return this;
-        }
-
-
-        public Builder title(String title) {
-            Utils.checkNotNull(title, "title");
-            this.title = Optional.ofNullable(title);
-            return this;
-        }
-
-        public Builder title(Optional<String> title) {
-            Utils.checkNotNull(title, "title");
-            this.title = title;
+        /**
+         * An object with additional values
+         */
+        public Builder context(Optional<? extends Map<String, Object>> context) {
+            Utils.checkNotNull(context, "context");
+            this.context = context;
             return this;
         }
 
 
-        public Builder subtitle(String subtitle) {
-            Utils.checkNotNull(subtitle, "subtitle");
-            this.subtitle = Optional.ofNullable(subtitle);
-            return this;
-        }
-
-        public Builder subtitle(Optional<String> subtitle) {
-            Utils.checkNotNull(subtitle, "subtitle");
-            this.subtitle = subtitle;
-            return this;
-        }
-
-
+        /**
+         * A progress percentage.  A value of -1 means the progress is indeterminate
+         */
         public Builder progress(double progress) {
             Utils.checkNotNull(progress, "progress");
             this.progress = Optional.ofNullable(progress);
             return this;
         }
 
+        /**
+         * A progress percentage.  A value of -1 means the progress is indeterminate
+         */
         public Builder progress(Optional<Double> progress) {
             Utils.checkNotNull(progress, "progress");
             this.progress = progress;
@@ -398,24 +497,125 @@ public class Activity {
         }
 
 
-        public Builder context(Context context) {
-            Utils.checkNotNull(context, "context");
-            this.context = Optional.ofNullable(context);
+        /**
+         * An object with the response to the async opperation
+         */
+        public Builder response(Map<String, Object> response) {
+            Utils.checkNotNull(response, "response");
+            this.response = Optional.ofNullable(response);
             return this;
         }
 
-        public Builder context(Optional<? extends Context> context) {
-            Utils.checkNotNull(context, "context");
-            this.context = context;
+        /**
+         * An object with the response to the async opperation
+         */
+        public Builder response(Optional<? extends Map<String, Object>> response) {
+            Utils.checkNotNull(response, "response");
+            this.response = response;
+            return this;
+        }
+
+
+        /**
+         * A user-friendly sub-title for this activity
+         */
+        public Builder subtitle(String subtitle) {
+            Utils.checkNotNull(subtitle, "subtitle");
+            this.subtitle = Optional.ofNullable(subtitle);
+            return this;
+        }
+
+        /**
+         * A user-friendly sub-title for this activity
+         */
+        public Builder subtitle(Optional<String> subtitle) {
+            Utils.checkNotNull(subtitle, "subtitle");
+            this.subtitle = subtitle;
+            return this;
+        }
+
+
+        /**
+         * A user-friendly title for this activity
+         */
+        public Builder title(String title) {
+            Utils.checkNotNull(title, "title");
+            this.title = Optional.ofNullable(title);
+            return this;
+        }
+
+        /**
+         * A user-friendly title for this activity
+         */
+        public Builder title(Optional<String> title) {
+            Utils.checkNotNull(title, "title");
+            this.title = title;
+            return this;
+        }
+
+
+        /**
+         * The type of activity
+         */
+        public Builder type(String type) {
+            Utils.checkNotNull(type, "type");
+            this.type = Optional.ofNullable(type);
+            return this;
+        }
+
+        /**
+         * The type of activity
+         */
+        public Builder type(Optional<String> type) {
+            Utils.checkNotNull(type, "type");
+            this.type = type;
+            return this;
+        }
+
+
+        /**
+         * The user this activity belongs to
+         */
+        public Builder userID(long userID) {
+            Utils.checkNotNull(userID, "userID");
+            this.userID = Optional.ofNullable(userID);
+            return this;
+        }
+
+        /**
+         * The user this activity belongs to
+         */
+        public Builder userID(Optional<Long> userID) {
+            Utils.checkNotNull(userID, "userID");
+            this.userID = userID;
+            return this;
+        }
+
+
+        /**
+         * The ID of the activity
+         */
+        public Builder uuid(String uuid) {
+            Utils.checkNotNull(uuid, "uuid");
+            this.uuid = Optional.ofNullable(uuid);
+            return this;
+        }
+
+        /**
+         * The ID of the activity
+         */
+        public Builder uuid(Optional<String> uuid) {
+            Utils.checkNotNull(uuid, "uuid");
+            this.uuid = uuid;
             return this;
         }
 
         public Activity build() {
 
             return new Activity(
-                uuid, type, cancellable,
-                userID, title, subtitle,
-                progress, context);
+                cancellable, context, progress,
+                response, subtitle, title,
+                type, userID, uuid);
         }
 
     }

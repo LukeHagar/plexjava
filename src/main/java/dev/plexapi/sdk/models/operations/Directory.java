@@ -9,58 +9,123 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Double;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
 
 public class Directory {
-
+    /**
+     * The filter string to view metadata wit this tag
+     */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("count")
-    private Optional<Double> count;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("key")
-    private Optional<String> key;
+    @JsonProperty("filter")
+    private Optional<String> filter;
 
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("title")
-    private Optional<String> title;
+    @JsonProperty("id")
+    private Optional<Long> id;
+
+    /**
+     * The name of the tag
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("tag")
+    private Optional<String> tag;
+
+    /**
+     * The key of this tag.  This is a universal key across all PMS instances and plex.tv services
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("tagKey")
+    private Optional<String> tagKey;
+
+    /**
+     * The type of the tag
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("tagType")
+    private Optional<Long> tagType;
+
+    /**
+     * The URL to a thumbnail for this tag
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("thumb")
+    private Optional<String> thumb;
 
     @JsonCreator
     public Directory(
-            @JsonProperty("count") Optional<Double> count,
-            @JsonProperty("key") Optional<String> key,
-            @JsonProperty("title") Optional<String> title) {
-        Utils.checkNotNull(count, "count");
-        Utils.checkNotNull(key, "key");
-        Utils.checkNotNull(title, "title");
-        this.count = count;
-        this.key = key;
-        this.title = title;
+            @JsonProperty("filter") Optional<String> filter,
+            @JsonProperty("id") Optional<Long> id,
+            @JsonProperty("tag") Optional<String> tag,
+            @JsonProperty("tagKey") Optional<String> tagKey,
+            @JsonProperty("tagType") Optional<Long> tagType,
+            @JsonProperty("thumb") Optional<String> thumb) {
+        Utils.checkNotNull(filter, "filter");
+        Utils.checkNotNull(id, "id");
+        Utils.checkNotNull(tag, "tag");
+        Utils.checkNotNull(tagKey, "tagKey");
+        Utils.checkNotNull(tagType, "tagType");
+        Utils.checkNotNull(thumb, "thumb");
+        this.filter = filter;
+        this.id = id;
+        this.tag = tag;
+        this.tagKey = tagKey;
+        this.tagType = tagType;
+        this.thumb = thumb;
     }
     
     public Directory() {
-        this(Optional.empty(), Optional.empty(), Optional.empty());
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * The filter string to view metadata wit this tag
+     */
+    @JsonIgnore
+    public Optional<String> filter() {
+        return filter;
     }
 
     @JsonIgnore
-    public Optional<Double> count() {
-        return count;
+    public Optional<Long> id() {
+        return id;
     }
 
+    /**
+     * The name of the tag
+     */
     @JsonIgnore
-    public Optional<String> key() {
-        return key;
+    public Optional<String> tag() {
+        return tag;
     }
 
+    /**
+     * The key of this tag.  This is a universal key across all PMS instances and plex.tv services
+     */
     @JsonIgnore
-    public Optional<String> title() {
-        return title;
+    public Optional<String> tagKey() {
+        return tagKey;
+    }
+
+    /**
+     * The type of the tag
+     */
+    @JsonIgnore
+    public Optional<Long> tagType() {
+        return tagType;
+    }
+
+    /**
+     * The URL to a thumbnail for this tag
+     */
+    @JsonIgnore
+    public Optional<String> thumb() {
+        return thumb;
     }
 
     public static Builder builder() {
@@ -68,42 +133,111 @@ public class Directory {
     }
 
 
-    public Directory withCount(double count) {
-        Utils.checkNotNull(count, "count");
-        this.count = Optional.ofNullable(count);
+    /**
+     * The filter string to view metadata wit this tag
+     */
+    public Directory withFilter(String filter) {
+        Utils.checkNotNull(filter, "filter");
+        this.filter = Optional.ofNullable(filter);
         return this;
     }
 
 
-    public Directory withCount(Optional<Double> count) {
-        Utils.checkNotNull(count, "count");
-        this.count = count;
+    /**
+     * The filter string to view metadata wit this tag
+     */
+    public Directory withFilter(Optional<String> filter) {
+        Utils.checkNotNull(filter, "filter");
+        this.filter = filter;
         return this;
     }
 
-    public Directory withKey(String key) {
-        Utils.checkNotNull(key, "key");
-        this.key = Optional.ofNullable(key);
-        return this;
-    }
-
-
-    public Directory withKey(Optional<String> key) {
-        Utils.checkNotNull(key, "key");
-        this.key = key;
-        return this;
-    }
-
-    public Directory withTitle(String title) {
-        Utils.checkNotNull(title, "title");
-        this.title = Optional.ofNullable(title);
+    public Directory withId(long id) {
+        Utils.checkNotNull(id, "id");
+        this.id = Optional.ofNullable(id);
         return this;
     }
 
 
-    public Directory withTitle(Optional<String> title) {
-        Utils.checkNotNull(title, "title");
-        this.title = title;
+    public Directory withId(Optional<Long> id) {
+        Utils.checkNotNull(id, "id");
+        this.id = id;
+        return this;
+    }
+
+    /**
+     * The name of the tag
+     */
+    public Directory withTag(String tag) {
+        Utils.checkNotNull(tag, "tag");
+        this.tag = Optional.ofNullable(tag);
+        return this;
+    }
+
+
+    /**
+     * The name of the tag
+     */
+    public Directory withTag(Optional<String> tag) {
+        Utils.checkNotNull(tag, "tag");
+        this.tag = tag;
+        return this;
+    }
+
+    /**
+     * The key of this tag.  This is a universal key across all PMS instances and plex.tv services
+     */
+    public Directory withTagKey(String tagKey) {
+        Utils.checkNotNull(tagKey, "tagKey");
+        this.tagKey = Optional.ofNullable(tagKey);
+        return this;
+    }
+
+
+    /**
+     * The key of this tag.  This is a universal key across all PMS instances and plex.tv services
+     */
+    public Directory withTagKey(Optional<String> tagKey) {
+        Utils.checkNotNull(tagKey, "tagKey");
+        this.tagKey = tagKey;
+        return this;
+    }
+
+    /**
+     * The type of the tag
+     */
+    public Directory withTagType(long tagType) {
+        Utils.checkNotNull(tagType, "tagType");
+        this.tagType = Optional.ofNullable(tagType);
+        return this;
+    }
+
+
+    /**
+     * The type of the tag
+     */
+    public Directory withTagType(Optional<Long> tagType) {
+        Utils.checkNotNull(tagType, "tagType");
+        this.tagType = tagType;
+        return this;
+    }
+
+    /**
+     * The URL to a thumbnail for this tag
+     */
+    public Directory withThumb(String thumb) {
+        Utils.checkNotNull(thumb, "thumb");
+        this.thumb = Optional.ofNullable(thumb);
+        return this;
+    }
+
+
+    /**
+     * The URL to a thumbnail for this tag
+     */
+    public Directory withThumb(Optional<String> thumb) {
+        Utils.checkNotNull(thumb, "thumb");
+        this.thumb = thumb;
         return this;
     }
 
@@ -117,81 +251,164 @@ public class Directory {
         }
         Directory other = (Directory) o;
         return 
-            Utils.enhancedDeepEquals(this.count, other.count) &&
-            Utils.enhancedDeepEquals(this.key, other.key) &&
-            Utils.enhancedDeepEquals(this.title, other.title);
+            Utils.enhancedDeepEquals(this.filter, other.filter) &&
+            Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.tag, other.tag) &&
+            Utils.enhancedDeepEquals(this.tagKey, other.tagKey) &&
+            Utils.enhancedDeepEquals(this.tagType, other.tagType) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            count, key, title);
+            filter, id, tag,
+            tagKey, tagType, thumb);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Directory.class,
-                "count", count,
-                "key", key,
-                "title", title);
+                "filter", filter,
+                "id", id,
+                "tag", tag,
+                "tagKey", tagKey,
+                "tagType", tagType,
+                "thumb", thumb);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<Double> count = Optional.empty();
+        private Optional<String> filter = Optional.empty();
 
-        private Optional<String> key = Optional.empty();
+        private Optional<Long> id = Optional.empty();
 
-        private Optional<String> title = Optional.empty();
+        private Optional<String> tag = Optional.empty();
+
+        private Optional<String> tagKey = Optional.empty();
+
+        private Optional<Long> tagType = Optional.empty();
+
+        private Optional<String> thumb = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        public Builder count(double count) {
-            Utils.checkNotNull(count, "count");
-            this.count = Optional.ofNullable(count);
+        /**
+         * The filter string to view metadata wit this tag
+         */
+        public Builder filter(String filter) {
+            Utils.checkNotNull(filter, "filter");
+            this.filter = Optional.ofNullable(filter);
             return this;
         }
 
-        public Builder count(Optional<Double> count) {
-            Utils.checkNotNull(count, "count");
-            this.count = count;
-            return this;
-        }
-
-
-        public Builder key(String key) {
-            Utils.checkNotNull(key, "key");
-            this.key = Optional.ofNullable(key);
-            return this;
-        }
-
-        public Builder key(Optional<String> key) {
-            Utils.checkNotNull(key, "key");
-            this.key = key;
+        /**
+         * The filter string to view metadata wit this tag
+         */
+        public Builder filter(Optional<String> filter) {
+            Utils.checkNotNull(filter, "filter");
+            this.filter = filter;
             return this;
         }
 
 
-        public Builder title(String title) {
-            Utils.checkNotNull(title, "title");
-            this.title = Optional.ofNullable(title);
+        public Builder id(long id) {
+            Utils.checkNotNull(id, "id");
+            this.id = Optional.ofNullable(id);
             return this;
         }
 
-        public Builder title(Optional<String> title) {
-            Utils.checkNotNull(title, "title");
-            this.title = title;
+        public Builder id(Optional<Long> id) {
+            Utils.checkNotNull(id, "id");
+            this.id = id;
+            return this;
+        }
+
+
+        /**
+         * The name of the tag
+         */
+        public Builder tag(String tag) {
+            Utils.checkNotNull(tag, "tag");
+            this.tag = Optional.ofNullable(tag);
+            return this;
+        }
+
+        /**
+         * The name of the tag
+         */
+        public Builder tag(Optional<String> tag) {
+            Utils.checkNotNull(tag, "tag");
+            this.tag = tag;
+            return this;
+        }
+
+
+        /**
+         * The key of this tag.  This is a universal key across all PMS instances and plex.tv services
+         */
+        public Builder tagKey(String tagKey) {
+            Utils.checkNotNull(tagKey, "tagKey");
+            this.tagKey = Optional.ofNullable(tagKey);
+            return this;
+        }
+
+        /**
+         * The key of this tag.  This is a universal key across all PMS instances and plex.tv services
+         */
+        public Builder tagKey(Optional<String> tagKey) {
+            Utils.checkNotNull(tagKey, "tagKey");
+            this.tagKey = tagKey;
+            return this;
+        }
+
+
+        /**
+         * The type of the tag
+         */
+        public Builder tagType(long tagType) {
+            Utils.checkNotNull(tagType, "tagType");
+            this.tagType = Optional.ofNullable(tagType);
+            return this;
+        }
+
+        /**
+         * The type of the tag
+         */
+        public Builder tagType(Optional<Long> tagType) {
+            Utils.checkNotNull(tagType, "tagType");
+            this.tagType = tagType;
+            return this;
+        }
+
+
+        /**
+         * The URL to a thumbnail for this tag
+         */
+        public Builder thumb(String thumb) {
+            Utils.checkNotNull(thumb, "thumb");
+            this.thumb = Optional.ofNullable(thumb);
+            return this;
+        }
+
+        /**
+         * The URL to a thumbnail for this tag
+         */
+        public Builder thumb(Optional<String> thumb) {
+            Utils.checkNotNull(thumb, "thumb");
+            this.thumb = thumb;
             return this;
         }
 
         public Directory build() {
 
             return new Directory(
-                count, key, title);
+                filter, id, tag,
+                tagKey, tagType, thumb);
         }
 
     }

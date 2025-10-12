@@ -34,7 +34,7 @@ public class GetLibraryDetailsResponse implements AsyncResponse {
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * The details of the library
+     * OK
      */
     private Optional<? extends GetLibraryDetailsResponseBody> object;
 
@@ -87,7 +87,7 @@ public class GetLibraryDetailsResponse implements AsyncResponse {
     }
 
     /**
-     * The details of the library
+     * OK
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
@@ -128,7 +128,7 @@ public class GetLibraryDetailsResponse implements AsyncResponse {
     }
 
     /**
-     * The details of the library
+     * OK
      */
     public GetLibraryDetailsResponse withObject(GetLibraryDetailsResponseBody object) {
         Utils.checkNotNull(object, "object");
@@ -138,7 +138,7 @@ public class GetLibraryDetailsResponse implements AsyncResponse {
 
 
     /**
-     * The details of the library
+     * OK
      */
     public GetLibraryDetailsResponse withObject(Optional<? extends GetLibraryDetailsResponseBody> object) {
         Utils.checkNotNull(object, "object");
@@ -225,7 +225,7 @@ public class GetLibraryDetailsResponse implements AsyncResponse {
 
 
         /**
-         * The details of the library
+         * OK
          */
         public Builder object(GetLibraryDetailsResponseBody object) {
             Utils.checkNotNull(object, "object");
@@ -234,7 +234,7 @@ public class GetLibraryDetailsResponse implements AsyncResponse {
         }
 
         /**
-         * The details of the library
+         * OK
          */
         public Builder object(Optional<? extends GetLibraryDetailsResponseBody> object) {
             Utils.checkNotNull(object, "object");

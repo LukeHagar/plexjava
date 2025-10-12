@@ -6,7 +6,6 @@ package dev.plexapi.sdk.models.operations.async;
 import static dev.plexapi.sdk.operations.Operations.AsyncRequestOperation;
 
 import dev.plexapi.sdk.SDKConfiguration;
-import dev.plexapi.sdk.models.operations.PathParamTaskName;
 import dev.plexapi.sdk.models.operations.StopTaskRequest;
 import dev.plexapi.sdk.operations.StopTask;
 import dev.plexapi.sdk.utils.Utils;
@@ -15,32 +14,23 @@ import java.util.concurrent.CompletableFuture;
 
 public class StopTaskRequestBuilder {
 
-    private PathParamTaskName taskName;
+    private StopTaskRequest request;
     private final SDKConfiguration sdkConfiguration;
 
     public StopTaskRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-    public StopTaskRequestBuilder taskName(PathParamTaskName taskName) {
-        Utils.checkNotNull(taskName, "taskName");
-        this.taskName = taskName;
+    public StopTaskRequestBuilder request(StopTaskRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
-    }
-
-
-    private StopTaskRequest buildRequest() {
-
-        StopTaskRequest request = new StopTaskRequest(taskName);
-
-        return request;
     }
 
     public CompletableFuture<StopTaskResponse> call() throws Exception {
         
         AsyncRequestOperation<StopTaskRequest, StopTaskResponse> operation
               = new StopTask.Async(sdkConfiguration);
-        StopTaskRequest request = buildRequest();
 
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);

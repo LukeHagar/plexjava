@@ -3,16 +3,16 @@
 
 ## Overview
 
-API Calls that perform search operations with Plex Media Server
-
+The search feature within a media provider
 
 ### Available Operations
 
-* [performSearch](#performsearch) - Perform a search
-* [performVoiceSearch](#performvoicesearch) - Perform a voice search
-* [getSearchResults](#getsearchresults) - Get Search Results
+* [searchHubs](#searchhubs) - Search Hub
+* [voiceSearchHubs](#voicesearchhubs) - Voice Search Hub
 
-## performSearch
+## searchHubs
+
+Perform a search and get the result as hubs
 
 This endpoint performs a search across all library sections, or a single section, and returns matches as hubs, split up by type. It performs spell checking, looks for partial matches, and orders the hubs based on quality of results. In addition, based on matches, it will return other related matches (e.g. for a genre match, it may return movies in that genre, or for an actor match, movies with that actor).
 
@@ -30,138 +30,42 @@ This request is intended to be very fast, and called as the user types.
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="performSearch" method="get" path="/hubs/search" -->
+<!-- UsageSnippet language="java" operationID="searchHubs" method="get" path="/hubs/search" -->
 ```java
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.PerformSearchBadRequest;
-import dev.plexapi.sdk.models.errors.PerformSearchUnauthorized;
-import dev.plexapi.sdk.models.operations.PerformSearchResponse;
+import dev.plexapi.sdk.models.operations.SearchHubsRequest;
+import dev.plexapi.sdk.models.operations.SearchHubsResponse;
+import dev.plexapi.sdk.models.shared.Accepts;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws PerformSearchBadRequest, PerformSearchUnauthorized, Exception {
+    public static void main(String[] args) throws Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
+                .accepts(Accepts.APPLICATION_XML)
+                .clientIdentifier("abc123")
+                .product("Plex for Roku")
+                .version("2.4.1")
+                .platform("Roku")
+                .platformVersion("4.3 build 1057")
+                .device("Roku 3")
+                .model("4200X")
+                .deviceVendor("Roku")
+                .deviceName("Living Room TV")
+                .marketplace("googlePlay")
+                .token(System.getenv().getOrDefault("TOKEN", ""))
             .build();
 
-        PerformSearchResponse res = sdk.search().performSearch()
-                .query("arnold")
-                .limit(5d)
-                .call();
+        SearchHubsRequest req = SearchHubsRequest.builder()
+                .query("<value>")
+                .sectionId(1L)
+                .build();
 
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           | Example                                                                               |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `query`                                                                               | *String*                                                                              | :heavy_check_mark:                                                                    | The query term                                                                        | arnold                                                                                |
-| `sectionId`                                                                           | *Optional\<Double>*                                                                   | :heavy_minus_sign:                                                                    | This gives context to the search, and can result in re-ordering of search result hubs |                                                                                       |
-| `limit`                                                                               | *Optional\<Double>*                                                                   | :heavy_minus_sign:                                                                    | The number of items to return per hub                                                 | 5                                                                                     |
-
-### Response
-
-**[PerformSearchResponse](../../models/operations/PerformSearchResponse.md)**
-
-### Errors
-
-| Error Type                              | Status Code                             | Content Type                            |
-| --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| models/errors/PerformSearchBadRequest   | 400                                     | application/json                        |
-| models/errors/PerformSearchUnauthorized | 401                                     | application/json                        |
-| models/errors/SDKError                  | 4XX, 5XX                                | \*/\*                                   |
-
-## performVoiceSearch
-
-This endpoint performs a search specifically tailored towards voice or other imprecise input which may work badly with the substring and spell-checking heuristics used by the `/hubs/search` endpoint. 
-It uses a [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance) heuristic to search titles, and as such is much slower than the other search endpoint. 
-Whenever possible, clients should limit the search to the appropriate type. 
-Results, as well as their containing per-type hubs, contain a `distance` attribute which can be used to judge result quality.
-
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="performVoiceSearch" method="get" path="/hubs/search/voice" -->
-```java
-package hello.world;
-
-import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.PerformVoiceSearchBadRequest;
-import dev.plexapi.sdk.models.errors.PerformVoiceSearchUnauthorized;
-import dev.plexapi.sdk.models.operations.PerformVoiceSearchResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws PerformVoiceSearchBadRequest, PerformVoiceSearchUnauthorized, Exception {
-
-        PlexAPI sdk = PlexAPI.builder()
-                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
-            .build();
-
-        PerformVoiceSearchResponse res = sdk.search().performVoiceSearch()
-                .query("dead+poop")
-                .limit(5d)
-                .call();
-
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           | Example                                                                               |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `query`                                                                               | *String*                                                                              | :heavy_check_mark:                                                                    | The query term                                                                        | dead+poop                                                                             |
-| `sectionId`                                                                           | *Optional\<Double>*                                                                   | :heavy_minus_sign:                                                                    | This gives context to the search, and can result in re-ordering of search result hubs |                                                                                       |
-| `limit`                                                                               | *Optional\<Double>*                                                                   | :heavy_minus_sign:                                                                    | The number of items to return per hub                                                 | 5                                                                                     |
-
-### Response
-
-**[PerformVoiceSearchResponse](../../models/operations/PerformVoiceSearchResponse.md)**
-
-### Errors
-
-| Error Type                                   | Status Code                                  | Content Type                                 |
-| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| models/errors/PerformVoiceSearchBadRequest   | 400                                          | application/json                             |
-| models/errors/PerformVoiceSearchUnauthorized | 401                                          | application/json                             |
-| models/errors/SDKError                       | 4XX, 5XX                                     | \*/\*                                        |
-
-## getSearchResults
-
-This will search the database for the string provided.
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="getSearchResults" method="get" path="/search" -->
-```java
-package hello.world;
-
-import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.GetSearchResultsBadRequest;
-import dev.plexapi.sdk.models.errors.GetSearchResultsUnauthorized;
-import dev.plexapi.sdk.models.operations.GetSearchResultsResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws GetSearchResultsBadRequest, GetSearchResultsUnauthorized, Exception {
-
-        PlexAPI sdk = PlexAPI.builder()
-                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
-            .build();
-
-        GetSearchResultsResponse res = sdk.search().getSearchResults()
-                .query("110")
+        SearchHubsResponse res = sdk.search().searchHubs()
+                .request(req)
                 .call();
 
         if (res.object().isPresent()) {
@@ -173,18 +77,87 @@ public class Application {
 
 ### Parameters
 
-| Parameter                      | Type                           | Required                       | Description                    | Example                        |
-| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
-| `query`                        | *String*                       | :heavy_check_mark:             | The search query string to use | 110                            |
+| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `request`                                                         | [SearchHubsRequest](../../models/operations/SearchHubsRequest.md) | :heavy_check_mark:                                                | The request object to use for the request.                        |
 
 ### Response
 
-**[GetSearchResultsResponse](../../models/operations/GetSearchResultsResponse.md)**
+**[SearchHubsResponse](../../models/operations/SearchHubsResponse.md)**
 
 ### Errors
 
-| Error Type                                 | Status Code                                | Content Type                               |
-| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| models/errors/GetSearchResultsBadRequest   | 400                                        | application/json                           |
-| models/errors/GetSearchResultsUnauthorized | 401                                        | application/json                           |
-| models/errors/SDKError                     | 4XX, 5XX                                   | \*/\*                                      |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## voiceSearchHubs
+
+Perform a search tailored to voice input and get the result as hubs
+
+This endpoint performs a search specifically tailored towards voice or other imprecise input which may work badly with the substring and spell-checking heuristics used by the `/hubs/search` endpoint. It uses a [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance) heuristic to search titles, and as such is much slower than the other search endpoint. Whenever possible, clients should limit the search to the appropriate type.
+
+Results, as well as their containing per-type hubs, contain a `distance` attribute which can be used to judge result quality.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="voiceSearchHubs" method="get" path="/hubs/search/voice" -->
+```java
+package hello.world;
+
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.operations.VoiceSearchHubsRequest;
+import dev.plexapi.sdk.models.operations.VoiceSearchHubsResponse;
+import dev.plexapi.sdk.models.shared.Accepts;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
+                .accepts(Accepts.APPLICATION_XML)
+                .clientIdentifier("abc123")
+                .product("Plex for Roku")
+                .version("2.4.1")
+                .platform("Roku")
+                .platformVersion("4.3 build 1057")
+                .device("Roku 3")
+                .model("4200X")
+                .deviceVendor("Roku")
+                .deviceName("Living Room TV")
+                .marketplace("googlePlay")
+                .token(System.getenv().getOrDefault("TOKEN", ""))
+            .build();
+
+        VoiceSearchHubsRequest req = VoiceSearchHubsRequest.builder()
+                .query("<value>")
+                .build();
+
+        VoiceSearchHubsResponse res = sdk.search().voiceSearchHubs()
+                .request(req)
+                .call();
+
+        if (res.object().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `request`                                                                   | [VoiceSearchHubsRequest](../../models/operations/VoiceSearchHubsRequest.md) | :heavy_check_mark:                                                          | The request object to use for the request.                                  |
+
+### Response
+
+**[VoiceSearchHubsResponse](../../models/operations/VoiceSearchHubsResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |

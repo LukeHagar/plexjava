@@ -5,63 +5,95 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.util.Optional;
 
 
 public class UltraBlurColors {
-
-    @JsonProperty("topLeft")
-    private String topLeft;
-
-
-    @JsonProperty("topRight")
-    private String topRight;
-
-
-    @JsonProperty("bottomRight")
-    private String bottomRight;
-
-
+    /**
+     * The color (hex) for the bottom left quadrant.
+     */
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bottomLeft")
-    private String bottomLeft;
+    private Optional<String> bottomLeft;
+
+    /**
+     * The color (hex) for the bottom right quadrant.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("bottomRight")
+    private Optional<String> bottomRight;
+
+    /**
+     * The color (hex) for the top left quadrant.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("topLeft")
+    private Optional<String> topLeft;
+
+    /**
+     * The color (hex) for the top right quadrant.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("topRight")
+    private Optional<String> topRight;
 
     @JsonCreator
     public UltraBlurColors(
-            @JsonProperty("topLeft") String topLeft,
-            @JsonProperty("topRight") String topRight,
-            @JsonProperty("bottomRight") String bottomRight,
-            @JsonProperty("bottomLeft") String bottomLeft) {
+            @JsonProperty("bottomLeft") Optional<String> bottomLeft,
+            @JsonProperty("bottomRight") Optional<String> bottomRight,
+            @JsonProperty("topLeft") Optional<String> topLeft,
+            @JsonProperty("topRight") Optional<String> topRight) {
+        Utils.checkNotNull(bottomLeft, "bottomLeft");
+        Utils.checkNotNull(bottomRight, "bottomRight");
         Utils.checkNotNull(topLeft, "topLeft");
         Utils.checkNotNull(topRight, "topRight");
-        Utils.checkNotNull(bottomRight, "bottomRight");
-        Utils.checkNotNull(bottomLeft, "bottomLeft");
+        this.bottomLeft = bottomLeft;
+        this.bottomRight = bottomRight;
         this.topLeft = topLeft;
         this.topRight = topRight;
-        this.bottomRight = bottomRight;
-        this.bottomLeft = bottomLeft;
+    }
+    
+    public UltraBlurColors() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
+    /**
+     * The color (hex) for the bottom left quadrant.
+     */
     @JsonIgnore
-    public String topLeft() {
-        return topLeft;
+    public Optional<String> bottomLeft() {
+        return bottomLeft;
     }
 
+    /**
+     * The color (hex) for the bottom right quadrant.
+     */
     @JsonIgnore
-    public String topRight() {
-        return topRight;
-    }
-
-    @JsonIgnore
-    public String bottomRight() {
+    public Optional<String> bottomRight() {
         return bottomRight;
     }
 
+    /**
+     * The color (hex) for the top left quadrant.
+     */
     @JsonIgnore
-    public String bottomLeft() {
-        return bottomLeft;
+    public Optional<String> topLeft() {
+        return topLeft;
+    }
+
+    /**
+     * The color (hex) for the top right quadrant.
+     */
+    @JsonIgnore
+    public Optional<String> topRight() {
+        return topRight;
     }
 
     public static Builder builder() {
@@ -69,27 +101,79 @@ public class UltraBlurColors {
     }
 
 
-    public UltraBlurColors withTopLeft(String topLeft) {
-        Utils.checkNotNull(topLeft, "topLeft");
-        this.topLeft = topLeft;
+    /**
+     * The color (hex) for the bottom left quadrant.
+     */
+    public UltraBlurColors withBottomLeft(String bottomLeft) {
+        Utils.checkNotNull(bottomLeft, "bottomLeft");
+        this.bottomLeft = Optional.ofNullable(bottomLeft);
         return this;
     }
 
-    public UltraBlurColors withTopRight(String topRight) {
-        Utils.checkNotNull(topRight, "topRight");
-        this.topRight = topRight;
+
+    /**
+     * The color (hex) for the bottom left quadrant.
+     */
+    public UltraBlurColors withBottomLeft(Optional<String> bottomLeft) {
+        Utils.checkNotNull(bottomLeft, "bottomLeft");
+        this.bottomLeft = bottomLeft;
         return this;
     }
 
+    /**
+     * The color (hex) for the bottom right quadrant.
+     */
     public UltraBlurColors withBottomRight(String bottomRight) {
+        Utils.checkNotNull(bottomRight, "bottomRight");
+        this.bottomRight = Optional.ofNullable(bottomRight);
+        return this;
+    }
+
+
+    /**
+     * The color (hex) for the bottom right quadrant.
+     */
+    public UltraBlurColors withBottomRight(Optional<String> bottomRight) {
         Utils.checkNotNull(bottomRight, "bottomRight");
         this.bottomRight = bottomRight;
         return this;
     }
 
-    public UltraBlurColors withBottomLeft(String bottomLeft) {
-        Utils.checkNotNull(bottomLeft, "bottomLeft");
-        this.bottomLeft = bottomLeft;
+    /**
+     * The color (hex) for the top left quadrant.
+     */
+    public UltraBlurColors withTopLeft(String topLeft) {
+        Utils.checkNotNull(topLeft, "topLeft");
+        this.topLeft = Optional.ofNullable(topLeft);
+        return this;
+    }
+
+
+    /**
+     * The color (hex) for the top left quadrant.
+     */
+    public UltraBlurColors withTopLeft(Optional<String> topLeft) {
+        Utils.checkNotNull(topLeft, "topLeft");
+        this.topLeft = topLeft;
+        return this;
+    }
+
+    /**
+     * The color (hex) for the top right quadrant.
+     */
+    public UltraBlurColors withTopRight(String topRight) {
+        Utils.checkNotNull(topRight, "topRight");
+        this.topRight = Optional.ofNullable(topRight);
+        return this;
+    }
+
+
+    /**
+     * The color (hex) for the top right quadrant.
+     */
+    public UltraBlurColors withTopRight(Optional<String> topRight) {
+        Utils.checkNotNull(topRight, "topRight");
+        this.topRight = topRight;
         return this;
     }
 
@@ -103,76 +187,124 @@ public class UltraBlurColors {
         }
         UltraBlurColors other = (UltraBlurColors) o;
         return 
-            Utils.enhancedDeepEquals(this.topLeft, other.topLeft) &&
-            Utils.enhancedDeepEquals(this.topRight, other.topRight) &&
+            Utils.enhancedDeepEquals(this.bottomLeft, other.bottomLeft) &&
             Utils.enhancedDeepEquals(this.bottomRight, other.bottomRight) &&
-            Utils.enhancedDeepEquals(this.bottomLeft, other.bottomLeft);
+            Utils.enhancedDeepEquals(this.topLeft, other.topLeft) &&
+            Utils.enhancedDeepEquals(this.topRight, other.topRight);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            topLeft, topRight, bottomRight,
-            bottomLeft);
+            bottomLeft, bottomRight, topLeft,
+            topRight);
     }
     
     @Override
     public String toString() {
         return Utils.toString(UltraBlurColors.class,
-                "topLeft", topLeft,
-                "topRight", topRight,
+                "bottomLeft", bottomLeft,
                 "bottomRight", bottomRight,
-                "bottomLeft", bottomLeft);
+                "topLeft", topLeft,
+                "topRight", topRight);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String topLeft;
+        private Optional<String> bottomLeft = Optional.empty();
 
-        private String topRight;
+        private Optional<String> bottomRight = Optional.empty();
 
-        private String bottomRight;
+        private Optional<String> topLeft = Optional.empty();
 
-        private String bottomLeft;
+        private Optional<String> topRight = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        public Builder topLeft(String topLeft) {
-            Utils.checkNotNull(topLeft, "topLeft");
-            this.topLeft = topLeft;
+        /**
+         * The color (hex) for the bottom left quadrant.
+         */
+        public Builder bottomLeft(String bottomLeft) {
+            Utils.checkNotNull(bottomLeft, "bottomLeft");
+            this.bottomLeft = Optional.ofNullable(bottomLeft);
+            return this;
+        }
+
+        /**
+         * The color (hex) for the bottom left quadrant.
+         */
+        public Builder bottomLeft(Optional<String> bottomLeft) {
+            Utils.checkNotNull(bottomLeft, "bottomLeft");
+            this.bottomLeft = bottomLeft;
             return this;
         }
 
 
-        public Builder topRight(String topRight) {
-            Utils.checkNotNull(topRight, "topRight");
-            this.topRight = topRight;
-            return this;
-        }
-
-
+        /**
+         * The color (hex) for the bottom right quadrant.
+         */
         public Builder bottomRight(String bottomRight) {
+            Utils.checkNotNull(bottomRight, "bottomRight");
+            this.bottomRight = Optional.ofNullable(bottomRight);
+            return this;
+        }
+
+        /**
+         * The color (hex) for the bottom right quadrant.
+         */
+        public Builder bottomRight(Optional<String> bottomRight) {
             Utils.checkNotNull(bottomRight, "bottomRight");
             this.bottomRight = bottomRight;
             return this;
         }
 
 
-        public Builder bottomLeft(String bottomLeft) {
-            Utils.checkNotNull(bottomLeft, "bottomLeft");
-            this.bottomLeft = bottomLeft;
+        /**
+         * The color (hex) for the top left quadrant.
+         */
+        public Builder topLeft(String topLeft) {
+            Utils.checkNotNull(topLeft, "topLeft");
+            this.topLeft = Optional.ofNullable(topLeft);
+            return this;
+        }
+
+        /**
+         * The color (hex) for the top left quadrant.
+         */
+        public Builder topLeft(Optional<String> topLeft) {
+            Utils.checkNotNull(topLeft, "topLeft");
+            this.topLeft = topLeft;
+            return this;
+        }
+
+
+        /**
+         * The color (hex) for the top right quadrant.
+         */
+        public Builder topRight(String topRight) {
+            Utils.checkNotNull(topRight, "topRight");
+            this.topRight = Optional.ofNullable(topRight);
+            return this;
+        }
+
+        /**
+         * The color (hex) for the top right quadrant.
+         */
+        public Builder topRight(Optional<String> topRight) {
+            Utils.checkNotNull(topRight, "topRight");
+            this.topRight = topRight;
             return this;
         }
 
         public UltraBlurColors build() {
 
             return new UltraBlurColors(
-                topLeft, topRight, bottomRight,
-                bottomLeft);
+                bottomLeft, bottomRight, topLeft,
+                topRight);
         }
 
     }

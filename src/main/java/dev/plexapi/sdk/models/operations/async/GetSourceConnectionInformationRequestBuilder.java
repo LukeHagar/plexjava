@@ -10,37 +10,27 @@ import dev.plexapi.sdk.models.operations.GetSourceConnectionInformationRequest;
 import dev.plexapi.sdk.operations.GetSourceConnectionInformation;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
-import java.lang.String;
 import java.util.concurrent.CompletableFuture;
 
 public class GetSourceConnectionInformationRequestBuilder {
 
-    private String source;
+    private GetSourceConnectionInformationRequest request;
     private final SDKConfiguration sdkConfiguration;
 
     public GetSourceConnectionInformationRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-    public GetSourceConnectionInformationRequestBuilder source(String source) {
-        Utils.checkNotNull(source, "source");
-        this.source = source;
+    public GetSourceConnectionInformationRequestBuilder request(GetSourceConnectionInformationRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
-    }
-
-
-    private GetSourceConnectionInformationRequest buildRequest() {
-
-        GetSourceConnectionInformationRequest request = new GetSourceConnectionInformationRequest(source);
-
-        return request;
     }
 
     public CompletableFuture<GetSourceConnectionInformationResponse> call() throws Exception {
         
         AsyncRequestOperation<GetSourceConnectionInformationRequest, GetSourceConnectionInformationResponse> operation
               = new GetSourceConnectionInformation.Async(sdkConfiguration);
-        GetSourceConnectionInformationRequest request = buildRequest();
 
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);

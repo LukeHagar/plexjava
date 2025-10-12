@@ -6,11 +6,8 @@ package dev.plexapi.sdk.operations;
 import static dev.plexapi.sdk.operations.Operations.RequestOperation;
 import static dev.plexapi.sdk.operations.Operations.AsyncRequestOperation;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.SDKConfiguration;
 import dev.plexapi.sdk.SecuritySource;
-import dev.plexapi.sdk.models.errors.DeletePlaylistBadRequest;
-import dev.plexapi.sdk.models.errors.DeletePlaylistUnauthorized;
 import dev.plexapi.sdk.models.errors.SDKError;
 import dev.plexapi.sdk.models.operations.DeletePlaylistRequest;
 import dev.plexapi.sdk.models.operations.DeletePlaylistResponse;
@@ -24,7 +21,6 @@ import dev.plexapi.sdk.utils.Hook.BeforeRequestContextImpl;
 import dev.plexapi.sdk.utils.Utils;
 import java.io.InputStream;
 import java.lang.Exception;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.Throwable;
 import java.net.http.HttpRequest;
@@ -84,11 +80,12 @@ public class DeletePlaylist {
             String url = Utils.generateURL(
                     klass,
                     this.baseUrl,
-                    "/playlists/{playlistID}",
-                    request, null);
+                    "/playlists/{playlistId}",
+                    request, this.sdkConfiguration.globals);
             HTTPRequest req = new HTTPRequest(url, "DELETE");
-            req.addHeader("Accept", "application/json")
+            req.addHeader("Accept", "*/*")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
+            req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
             Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
 
             return req.build();
@@ -123,7 +120,7 @@ public class DeletePlaylist {
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);
-                if (Utils.statusCodeMatches(httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                if (Utils.statusCodeMatches(httpRes.statusCode(), "404", "4XX", "5XX")) {
                     httpRes = onError(httpRes, null);
                 } else {
                     httpRes = onSuccess(httpRes);
@@ -156,43 +153,7 @@ public class DeletePlaylist {
                 return res;
             }
             
-            if (Utils.statusCodeMatches(response.statusCode(), "400")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    DeletePlaylistBadRequest out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                        out.withRawResponse(response);
-                    
-                    throw out;
-                } else {
-                    throw new SDKError(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "401")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    DeletePlaylistUnauthorized out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                        out.withRawResponse(response);
-                    
-                    throw out;
-                } else {
-                    throw new SDKError(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "404", "4XX")) {
                 // no content
                 throw new SDKError(
                         response,
@@ -244,7 +205,7 @@ public class DeletePlaylist {
                         if (err != null) {
                             return onError(null, err);
                         }
-                        if (Utils.statusCodeMatches(resp.statusCode(), "400", "401", "4XX", "5XX")) {
+                        if (Utils.statusCodeMatches(resp.statusCode(), "404", "4XX", "5XX")) {
                             return onError(resp, null);
                         }
                         return CompletableFuture.completedFuture(resp);
@@ -274,47 +235,7 @@ public class DeletePlaylist {
                 return CompletableFuture.completedFuture(res);
             }
             
-            if (Utils.statusCodeMatches(response.statusCode(), "400")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return response.body().toByteArray().thenApply(bodyBytes -> {
-                        dev.plexapi.sdk.models.errors.async.DeletePlaylistBadRequest out;
-                        try {
-                            out = Utils.mapper().readValue(
-                                    bodyBytes,
-                                    new TypeReference<>() {
-                                    });
-                            out.withRawResponse(response);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                        throw out;
-                    });
-                } else {
-                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "401")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return response.body().toByteArray().thenApply(bodyBytes -> {
-                        dev.plexapi.sdk.models.errors.async.DeletePlaylistUnauthorized out;
-                        try {
-                            out = Utils.mapper().readValue(
-                                    bodyBytes,
-                                    new TypeReference<>() {
-                                    });
-                            out.withRawResponse(response);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                        throw out;
-                    });
-                } else {
-                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "404", "4XX")) {
                 // no content
                 return Utils.createAsyncApiError(response, "API error occurred");
             }

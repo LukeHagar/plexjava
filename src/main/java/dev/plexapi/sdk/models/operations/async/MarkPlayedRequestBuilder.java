@@ -9,38 +9,28 @@ import dev.plexapi.sdk.SDKConfiguration;
 import dev.plexapi.sdk.models.operations.MarkPlayedRequest;
 import dev.plexapi.sdk.operations.MarkPlayed;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Double;
 import java.lang.Exception;
 import java.util.concurrent.CompletableFuture;
 
 public class MarkPlayedRequestBuilder {
 
-    private Double key;
+    private MarkPlayedRequest request;
     private final SDKConfiguration sdkConfiguration;
 
     public MarkPlayedRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-    public MarkPlayedRequestBuilder key(double key) {
-        Utils.checkNotNull(key, "key");
-        this.key = key;
+    public MarkPlayedRequestBuilder request(MarkPlayedRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
-    }
-
-
-    private MarkPlayedRequest buildRequest() {
-
-        MarkPlayedRequest request = new MarkPlayedRequest(key);
-
-        return request;
     }
 
     public CompletableFuture<MarkPlayedResponse> call() throws Exception {
         
         AsyncRequestOperation<MarkPlayedRequest, MarkPlayedResponse> operation
               = new MarkPlayed.Async(sdkConfiguration);
-        MarkPlayedRequest request = buildRequest();
 
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);

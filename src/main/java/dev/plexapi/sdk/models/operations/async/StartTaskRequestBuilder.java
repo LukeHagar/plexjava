@@ -7,7 +7,6 @@ import static dev.plexapi.sdk.operations.Operations.AsyncRequestOperation;
 
 import dev.plexapi.sdk.SDKConfiguration;
 import dev.plexapi.sdk.models.operations.StartTaskRequest;
-import dev.plexapi.sdk.models.operations.TaskName;
 import dev.plexapi.sdk.operations.StartTask;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
@@ -15,32 +14,23 @@ import java.util.concurrent.CompletableFuture;
 
 public class StartTaskRequestBuilder {
 
-    private TaskName taskName;
+    private StartTaskRequest request;
     private final SDKConfiguration sdkConfiguration;
 
     public StartTaskRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-    public StartTaskRequestBuilder taskName(TaskName taskName) {
-        Utils.checkNotNull(taskName, "taskName");
-        this.taskName = taskName;
+    public StartTaskRequestBuilder request(StartTaskRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
-    }
-
-
-    private StartTaskRequest buildRequest() {
-
-        StartTaskRequest request = new StartTaskRequest(taskName);
-
-        return request;
     }
 
     public CompletableFuture<StartTaskResponse> call() throws Exception {
         
         AsyncRequestOperation<StartTaskRequest, StartTaskResponse> operation
               = new StartTask.Async(sdkConfiguration);
-        StartTaskRequest request = buildRequest();
 
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);

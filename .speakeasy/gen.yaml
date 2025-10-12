@@ -22,7 +22,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 java:
-  version: 0.18.0
+  version: 0.19.1
   additionalDependencies: []
   additionalPlugins: []
   artifactID: plexapi
@@ -36,6 +36,7 @@ java:
   enableCustomCodeRegions: false
   enableStreamingUploads: false
   flattenGlobalSecurity: true
+  generateSpringBootStarter: true
   githubURL: github.com/LukeHagar/plexjava
   groupID: dev.plexapi
   imports:

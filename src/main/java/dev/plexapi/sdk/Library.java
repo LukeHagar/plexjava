@@ -6,100 +6,322 @@ package dev.plexapi.sdk;
 import static dev.plexapi.sdk.operations.Operations.RequestOperation;
 import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
 
-import dev.plexapi.sdk.models.operations.DeleteLibraryRequest;
-import dev.plexapi.sdk.models.operations.DeleteLibraryRequestBuilder;
-import dev.plexapi.sdk.models.operations.DeleteLibraryResponse;
-import dev.plexapi.sdk.models.operations.Force;
-import dev.plexapi.sdk.models.operations.GetActorsLibraryQueryParamType;
-import dev.plexapi.sdk.models.operations.GetActorsLibraryRequest;
-import dev.plexapi.sdk.models.operations.GetActorsLibraryRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetActorsLibraryResponse;
-import dev.plexapi.sdk.models.operations.GetAllLibrariesRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetAllLibrariesResponse;
-import dev.plexapi.sdk.models.operations.GetCountriesLibraryQueryParamType;
-import dev.plexapi.sdk.models.operations.GetCountriesLibraryRequest;
-import dev.plexapi.sdk.models.operations.GetCountriesLibraryRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetCountriesLibraryResponse;
-import dev.plexapi.sdk.models.operations.GetFileHashRequest;
-import dev.plexapi.sdk.models.operations.GetFileHashRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetFileHashResponse;
-import dev.plexapi.sdk.models.operations.GetGenresLibraryQueryParamType;
-import dev.plexapi.sdk.models.operations.GetGenresLibraryRequest;
-import dev.plexapi.sdk.models.operations.GetGenresLibraryRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetGenresLibraryResponse;
+import dev.plexapi.sdk.models.operations.AddExtrasRequest;
+import dev.plexapi.sdk.models.operations.AddExtrasRequestBuilder;
+import dev.plexapi.sdk.models.operations.AddExtrasResponse;
+import dev.plexapi.sdk.models.operations.AddSectionRequest;
+import dev.plexapi.sdk.models.operations.AddSectionRequestBuilder;
+import dev.plexapi.sdk.models.operations.AddSectionResponse;
+import dev.plexapi.sdk.models.operations.AddSubtitlesRequest;
+import dev.plexapi.sdk.models.operations.AddSubtitlesRequestBuilder;
+import dev.plexapi.sdk.models.operations.AddSubtitlesResponse;
+import dev.plexapi.sdk.models.operations.AnalyzeMetadataRequest;
+import dev.plexapi.sdk.models.operations.AnalyzeMetadataRequestBuilder;
+import dev.plexapi.sdk.models.operations.AnalyzeMetadataResponse;
+import dev.plexapi.sdk.models.operations.AutocompleteRequest;
+import dev.plexapi.sdk.models.operations.AutocompleteRequestBuilder;
+import dev.plexapi.sdk.models.operations.AutocompleteResponse;
+import dev.plexapi.sdk.models.operations.CancelRefreshRequest;
+import dev.plexapi.sdk.models.operations.CancelRefreshRequestBuilder;
+import dev.plexapi.sdk.models.operations.CancelRefreshResponse;
+import dev.plexapi.sdk.models.operations.CleanBundlesRequestBuilder;
+import dev.plexapi.sdk.models.operations.CleanBundlesResponse;
+import dev.plexapi.sdk.models.operations.CreateMarkerRequest;
+import dev.plexapi.sdk.models.operations.CreateMarkerRequestBuilder;
+import dev.plexapi.sdk.models.operations.CreateMarkerResponse;
+import dev.plexapi.sdk.models.operations.DeleteCachesRequestBuilder;
+import dev.plexapi.sdk.models.operations.DeleteCachesResponse;
+import dev.plexapi.sdk.models.operations.DeleteCollectionRequest;
+import dev.plexapi.sdk.models.operations.DeleteCollectionRequestBuilder;
+import dev.plexapi.sdk.models.operations.DeleteCollectionResponse;
+import dev.plexapi.sdk.models.operations.DeleteIndexesRequest;
+import dev.plexapi.sdk.models.operations.DeleteIndexesRequestBuilder;
+import dev.plexapi.sdk.models.operations.DeleteIndexesResponse;
+import dev.plexapi.sdk.models.operations.DeleteIntrosRequest;
+import dev.plexapi.sdk.models.operations.DeleteIntrosRequestBuilder;
+import dev.plexapi.sdk.models.operations.DeleteIntrosResponse;
+import dev.plexapi.sdk.models.operations.DeleteLibrarySectionRequest;
+import dev.plexapi.sdk.models.operations.DeleteLibrarySectionRequestBuilder;
+import dev.plexapi.sdk.models.operations.DeleteLibrarySectionResponse;
+import dev.plexapi.sdk.models.operations.DeleteMarkerRequest;
+import dev.plexapi.sdk.models.operations.DeleteMarkerRequestBuilder;
+import dev.plexapi.sdk.models.operations.DeleteMarkerResponse;
+import dev.plexapi.sdk.models.operations.DeleteMediaItemRequest;
+import dev.plexapi.sdk.models.operations.DeleteMediaItemRequestBuilder;
+import dev.plexapi.sdk.models.operations.DeleteMediaItemResponse;
+import dev.plexapi.sdk.models.operations.DeleteMetadataItemRequest;
+import dev.plexapi.sdk.models.operations.DeleteMetadataItemRequestBuilder;
+import dev.plexapi.sdk.models.operations.DeleteMetadataItemResponse;
+import dev.plexapi.sdk.models.operations.DeleteStreamRequest;
+import dev.plexapi.sdk.models.operations.DeleteStreamRequestBuilder;
+import dev.plexapi.sdk.models.operations.DeleteStreamResponse;
+import dev.plexapi.sdk.models.operations.DetectAdsRequest;
+import dev.plexapi.sdk.models.operations.DetectAdsRequestBuilder;
+import dev.plexapi.sdk.models.operations.DetectAdsResponse;
+import dev.plexapi.sdk.models.operations.DetectCreditsRequest;
+import dev.plexapi.sdk.models.operations.DetectCreditsRequestBuilder;
+import dev.plexapi.sdk.models.operations.DetectCreditsResponse;
+import dev.plexapi.sdk.models.operations.DetectIntrosRequest;
+import dev.plexapi.sdk.models.operations.DetectIntrosRequestBuilder;
+import dev.plexapi.sdk.models.operations.DetectIntrosResponse;
+import dev.plexapi.sdk.models.operations.DetectVoiceActivityRequest;
+import dev.plexapi.sdk.models.operations.DetectVoiceActivityRequestBuilder;
+import dev.plexapi.sdk.models.operations.DetectVoiceActivityResponse;
+import dev.plexapi.sdk.models.operations.EditMarkerRequest;
+import dev.plexapi.sdk.models.operations.EditMarkerRequestBuilder;
+import dev.plexapi.sdk.models.operations.EditMarkerResponse;
+import dev.plexapi.sdk.models.operations.EditMetadataItemRequest;
+import dev.plexapi.sdk.models.operations.EditMetadataItemRequestBuilder;
+import dev.plexapi.sdk.models.operations.EditMetadataItemResponse;
+import dev.plexapi.sdk.models.operations.EditSectionRequest;
+import dev.plexapi.sdk.models.operations.EditSectionRequestBuilder;
+import dev.plexapi.sdk.models.operations.EditSectionResponse;
+import dev.plexapi.sdk.models.operations.EmptyTrashRequest;
+import dev.plexapi.sdk.models.operations.EmptyTrashRequestBuilder;
+import dev.plexapi.sdk.models.operations.EmptyTrashResponse;
+import dev.plexapi.sdk.models.operations.GenerateThumbsRequest;
+import dev.plexapi.sdk.models.operations.GenerateThumbsRequestBuilder;
+import dev.plexapi.sdk.models.operations.GenerateThumbsResponse;
+import dev.plexapi.sdk.models.operations.GetAllItemLeavesRequest;
+import dev.plexapi.sdk.models.operations.GetAllItemLeavesRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetAllItemLeavesResponse;
+import dev.plexapi.sdk.models.operations.GetAugmentationStatusRequest;
+import dev.plexapi.sdk.models.operations.GetAugmentationStatusRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetAugmentationStatusResponse;
+import dev.plexapi.sdk.models.operations.GetAvailableSortsRequest;
+import dev.plexapi.sdk.models.operations.GetAvailableSortsRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetAvailableSortsResponse;
+import dev.plexapi.sdk.models.operations.GetChapterImageRequest;
+import dev.plexapi.sdk.models.operations.GetChapterImageRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetChapterImageResponse;
+import dev.plexapi.sdk.models.operations.GetCollectionsRequest;
+import dev.plexapi.sdk.models.operations.GetCollectionsRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetCollectionsResponse;
+import dev.plexapi.sdk.models.operations.GetCommonRequest;
+import dev.plexapi.sdk.models.operations.GetCommonRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetCommonResponse;
+import dev.plexapi.sdk.models.operations.GetExtrasRequest;
+import dev.plexapi.sdk.models.operations.GetExtrasRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetExtrasResponse;
+import dev.plexapi.sdk.models.operations.GetFileRequest;
+import dev.plexapi.sdk.models.operations.GetFileRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetFileResponse;
+import dev.plexapi.sdk.models.operations.GetFirstCharactersRequest;
+import dev.plexapi.sdk.models.operations.GetFirstCharactersRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetFirstCharactersResponse;
+import dev.plexapi.sdk.models.operations.GetImageFromBifRequest;
+import dev.plexapi.sdk.models.operations.GetImageFromBifRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetImageFromBifResponse;
+import dev.plexapi.sdk.models.operations.GetItemArtworkRequest;
+import dev.plexapi.sdk.models.operations.GetItemArtworkRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetItemArtworkResponse;
+import dev.plexapi.sdk.models.operations.GetItemTreeRequest;
+import dev.plexapi.sdk.models.operations.GetItemTreeRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetItemTreeResponse;
 import dev.plexapi.sdk.models.operations.GetLibraryDetailsRequest;
 import dev.plexapi.sdk.models.operations.GetLibraryDetailsRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetLibraryDetailsResponse;
 import dev.plexapi.sdk.models.operations.GetLibraryItemsRequest;
 import dev.plexapi.sdk.models.operations.GetLibraryItemsRequestBuilder;
 import dev.plexapi.sdk.models.operations.GetLibraryItemsResponse;
-import dev.plexapi.sdk.models.operations.GetLibrarySectionsAllRequest;
-import dev.plexapi.sdk.models.operations.GetLibrarySectionsAllRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetLibrarySectionsAllResponse;
-import dev.plexapi.sdk.models.operations.GetMediaArtsRequest;
-import dev.plexapi.sdk.models.operations.GetMediaArtsRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetMediaArtsResponse;
-import dev.plexapi.sdk.models.operations.GetMediaMetaDataRequest;
-import dev.plexapi.sdk.models.operations.GetMediaMetaDataRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetMediaMetaDataResponse;
-import dev.plexapi.sdk.models.operations.GetMediaPostersRequest;
-import dev.plexapi.sdk.models.operations.GetMediaPostersRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetMediaPostersResponse;
-import dev.plexapi.sdk.models.operations.GetMetadataChildrenRequest;
-import dev.plexapi.sdk.models.operations.GetMetadataChildrenRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetMetadataChildrenResponse;
-import dev.plexapi.sdk.models.operations.GetRecentlyAddedLibraryRequest;
-import dev.plexapi.sdk.models.operations.GetRecentlyAddedLibraryRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetRecentlyAddedLibraryResponse;
-import dev.plexapi.sdk.models.operations.GetRefreshLibraryMetadataRequest;
-import dev.plexapi.sdk.models.operations.GetRefreshLibraryMetadataRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetRefreshLibraryMetadataResponse;
-import dev.plexapi.sdk.models.operations.GetSearchAllLibrariesRequest;
-import dev.plexapi.sdk.models.operations.GetSearchAllLibrariesRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetSearchAllLibrariesResponse;
-import dev.plexapi.sdk.models.operations.GetSearchLibraryQueryParamType;
-import dev.plexapi.sdk.models.operations.GetSearchLibraryRequest;
-import dev.plexapi.sdk.models.operations.GetSearchLibraryRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetSearchLibraryResponse;
-import dev.plexapi.sdk.models.operations.GetTopWatchedContentQueryParamIncludeGuids;
-import dev.plexapi.sdk.models.operations.GetTopWatchedContentQueryParamType;
-import dev.plexapi.sdk.models.operations.GetTopWatchedContentRequest;
-import dev.plexapi.sdk.models.operations.GetTopWatchedContentRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetTopWatchedContentResponse;
-import dev.plexapi.sdk.models.operations.IncludeDetails;
-import dev.plexapi.sdk.models.operations.PostMediaArtsRequest;
-import dev.plexapi.sdk.models.operations.PostMediaArtsRequestBuilder;
-import dev.plexapi.sdk.models.operations.PostMediaArtsResponse;
-import dev.plexapi.sdk.models.operations.PostMediaPosterRequest;
-import dev.plexapi.sdk.models.operations.PostMediaPosterRequestBuilder;
-import dev.plexapi.sdk.models.operations.PostMediaPosterResponse;
-import dev.plexapi.sdk.operations.DeleteLibrary;
-import dev.plexapi.sdk.operations.GetActorsLibrary;
-import dev.plexapi.sdk.operations.GetAllLibraries;
-import dev.plexapi.sdk.operations.GetCountriesLibrary;
-import dev.plexapi.sdk.operations.GetFileHash;
-import dev.plexapi.sdk.operations.GetGenresLibrary;
+import dev.plexapi.sdk.models.operations.GetLibraryMatchesRequest;
+import dev.plexapi.sdk.models.operations.GetLibraryMatchesRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetLibraryMatchesResponse;
+import dev.plexapi.sdk.models.operations.GetMediaPartRequest;
+import dev.plexapi.sdk.models.operations.GetMediaPartRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetMediaPartResponse;
+import dev.plexapi.sdk.models.operations.GetPartIndexRequest;
+import dev.plexapi.sdk.models.operations.GetPartIndexRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetPartIndexResponse;
+import dev.plexapi.sdk.models.operations.GetPersonRequest;
+import dev.plexapi.sdk.models.operations.GetPersonRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetPersonResponse;
+import dev.plexapi.sdk.models.operations.GetRandomArtworkRequest;
+import dev.plexapi.sdk.models.operations.GetRandomArtworkRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetRandomArtworkResponse;
+import dev.plexapi.sdk.models.operations.GetRelatedItemsRequest;
+import dev.plexapi.sdk.models.operations.GetRelatedItemsRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetRelatedItemsResponse;
+import dev.plexapi.sdk.models.operations.GetSectionFiltersRequest;
+import dev.plexapi.sdk.models.operations.GetSectionFiltersRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetSectionFiltersResponse;
+import dev.plexapi.sdk.models.operations.GetSectionImageRequest;
+import dev.plexapi.sdk.models.operations.GetSectionImageRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetSectionImageResponse;
+import dev.plexapi.sdk.models.operations.GetSectionPreferencesRequest;
+import dev.plexapi.sdk.models.operations.GetSectionPreferencesRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetSectionPreferencesResponse;
+import dev.plexapi.sdk.models.operations.GetSectionsPrefsRequest;
+import dev.plexapi.sdk.models.operations.GetSectionsPrefsRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetSectionsPrefsResponse;
+import dev.plexapi.sdk.models.operations.GetSectionsRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetSectionsResponse;
+import dev.plexapi.sdk.models.operations.GetStreamLevelsRequest;
+import dev.plexapi.sdk.models.operations.GetStreamLevelsRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetStreamLevelsResponse;
+import dev.plexapi.sdk.models.operations.GetStreamLoudnessRequest;
+import dev.plexapi.sdk.models.operations.GetStreamLoudnessRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetStreamLoudnessResponse;
+import dev.plexapi.sdk.models.operations.GetStreamRequest;
+import dev.plexapi.sdk.models.operations.GetStreamRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetStreamResponse;
+import dev.plexapi.sdk.models.operations.GetTagsRequest;
+import dev.plexapi.sdk.models.operations.GetTagsRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetTagsResponse;
+import dev.plexapi.sdk.models.operations.IngestTransientItemRequest;
+import dev.plexapi.sdk.models.operations.IngestTransientItemRequestBuilder;
+import dev.plexapi.sdk.models.operations.IngestTransientItemResponse;
+import dev.plexapi.sdk.models.operations.ListMatchesRequest;
+import dev.plexapi.sdk.models.operations.ListMatchesRequestBuilder;
+import dev.plexapi.sdk.models.operations.ListMatchesResponse;
+import dev.plexapi.sdk.models.operations.ListPersonMediaRequest;
+import dev.plexapi.sdk.models.operations.ListPersonMediaRequestBuilder;
+import dev.plexapi.sdk.models.operations.ListPersonMediaResponse;
+import dev.plexapi.sdk.models.operations.ListSimilarRequest;
+import dev.plexapi.sdk.models.operations.ListSimilarRequestBuilder;
+import dev.plexapi.sdk.models.operations.ListSimilarResponse;
+import dev.plexapi.sdk.models.operations.ListSonicallySimilarRequest;
+import dev.plexapi.sdk.models.operations.ListSonicallySimilarRequestBuilder;
+import dev.plexapi.sdk.models.operations.ListSonicallySimilarResponse;
+import dev.plexapi.sdk.models.operations.ListTopUsersRequest;
+import dev.plexapi.sdk.models.operations.ListTopUsersRequestBuilder;
+import dev.plexapi.sdk.models.operations.ListTopUsersResponse;
+import dev.plexapi.sdk.models.operations.MatchItemRequest;
+import dev.plexapi.sdk.models.operations.MatchItemRequestBuilder;
+import dev.plexapi.sdk.models.operations.MatchItemResponse;
+import dev.plexapi.sdk.models.operations.MergeItemsRequest;
+import dev.plexapi.sdk.models.operations.MergeItemsRequestBuilder;
+import dev.plexapi.sdk.models.operations.MergeItemsResponse;
+import dev.plexapi.sdk.models.operations.OptimizeDatabaseRequest;
+import dev.plexapi.sdk.models.operations.OptimizeDatabaseRequestBuilder;
+import dev.plexapi.sdk.models.operations.OptimizeDatabaseResponse;
+import dev.plexapi.sdk.models.operations.RefreshItemsMetadataRequest;
+import dev.plexapi.sdk.models.operations.RefreshItemsMetadataRequestBuilder;
+import dev.plexapi.sdk.models.operations.RefreshItemsMetadataResponse;
+import dev.plexapi.sdk.models.operations.RefreshSectionRequest;
+import dev.plexapi.sdk.models.operations.RefreshSectionRequestBuilder;
+import dev.plexapi.sdk.models.operations.RefreshSectionResponse;
+import dev.plexapi.sdk.models.operations.RefreshSectionsMetadataRequest;
+import dev.plexapi.sdk.models.operations.RefreshSectionsMetadataRequestBuilder;
+import dev.plexapi.sdk.models.operations.RefreshSectionsMetadataResponse;
+import dev.plexapi.sdk.models.operations.SetItemArtworkRequest;
+import dev.plexapi.sdk.models.operations.SetItemArtworkRequestBuilder;
+import dev.plexapi.sdk.models.operations.SetItemArtworkResponse;
+import dev.plexapi.sdk.models.operations.SetItemPreferencesRequest;
+import dev.plexapi.sdk.models.operations.SetItemPreferencesRequestBuilder;
+import dev.plexapi.sdk.models.operations.SetItemPreferencesResponse;
+import dev.plexapi.sdk.models.operations.SetSectionPreferencesRequest;
+import dev.plexapi.sdk.models.operations.SetSectionPreferencesRequestBuilder;
+import dev.plexapi.sdk.models.operations.SetSectionPreferencesResponse;
+import dev.plexapi.sdk.models.operations.SetStreamOffsetRequest;
+import dev.plexapi.sdk.models.operations.SetStreamOffsetRequestBuilder;
+import dev.plexapi.sdk.models.operations.SetStreamOffsetResponse;
+import dev.plexapi.sdk.models.operations.SetStreamSelectionRequest;
+import dev.plexapi.sdk.models.operations.SetStreamSelectionRequestBuilder;
+import dev.plexapi.sdk.models.operations.SetStreamSelectionResponse;
+import dev.plexapi.sdk.models.operations.SplitItemRequest;
+import dev.plexapi.sdk.models.operations.SplitItemRequestBuilder;
+import dev.plexapi.sdk.models.operations.SplitItemResponse;
+import dev.plexapi.sdk.models.operations.StartAnalysisRequest;
+import dev.plexapi.sdk.models.operations.StartAnalysisRequestBuilder;
+import dev.plexapi.sdk.models.operations.StartAnalysisResponse;
+import dev.plexapi.sdk.models.operations.StartBifGenerationRequest;
+import dev.plexapi.sdk.models.operations.StartBifGenerationRequestBuilder;
+import dev.plexapi.sdk.models.operations.StartBifGenerationResponse;
+import dev.plexapi.sdk.models.operations.StopAllRefreshesRequestBuilder;
+import dev.plexapi.sdk.models.operations.StopAllRefreshesResponse;
+import dev.plexapi.sdk.models.operations.UnmatchRequest;
+import dev.plexapi.sdk.models.operations.UnmatchRequestBuilder;
+import dev.plexapi.sdk.models.operations.UnmatchResponse;
+import dev.plexapi.sdk.models.operations.UpdateItemArtworkRequest;
+import dev.plexapi.sdk.models.operations.UpdateItemArtworkRequestBuilder;
+import dev.plexapi.sdk.models.operations.UpdateItemArtworkResponse;
+import dev.plexapi.sdk.models.operations.UpdateItemsRequest;
+import dev.plexapi.sdk.models.operations.UpdateItemsRequestBuilder;
+import dev.plexapi.sdk.models.operations.UpdateItemsResponse;
+import dev.plexapi.sdk.operations.AddExtras;
+import dev.plexapi.sdk.operations.AddSection;
+import dev.plexapi.sdk.operations.AddSubtitles;
+import dev.plexapi.sdk.operations.AnalyzeMetadata;
+import dev.plexapi.sdk.operations.Autocomplete;
+import dev.plexapi.sdk.operations.CancelRefresh;
+import dev.plexapi.sdk.operations.CleanBundles;
+import dev.plexapi.sdk.operations.CreateMarker;
+import dev.plexapi.sdk.operations.DeleteCaches;
+import dev.plexapi.sdk.operations.DeleteCollection;
+import dev.plexapi.sdk.operations.DeleteIndexes;
+import dev.plexapi.sdk.operations.DeleteIntros;
+import dev.plexapi.sdk.operations.DeleteLibrarySection;
+import dev.plexapi.sdk.operations.DeleteMarker;
+import dev.plexapi.sdk.operations.DeleteMediaItem;
+import dev.plexapi.sdk.operations.DeleteMetadataItem;
+import dev.plexapi.sdk.operations.DeleteStream;
+import dev.plexapi.sdk.operations.DetectAds;
+import dev.plexapi.sdk.operations.DetectCredits;
+import dev.plexapi.sdk.operations.DetectIntros;
+import dev.plexapi.sdk.operations.DetectVoiceActivity;
+import dev.plexapi.sdk.operations.EditMarker;
+import dev.plexapi.sdk.operations.EditMetadataItem;
+import dev.plexapi.sdk.operations.EditSection;
+import dev.plexapi.sdk.operations.EmptyTrash;
+import dev.plexapi.sdk.operations.GenerateThumbs;
+import dev.plexapi.sdk.operations.GetAllItemLeaves;
+import dev.plexapi.sdk.operations.GetAugmentationStatus;
+import dev.plexapi.sdk.operations.GetAvailableSorts;
+import dev.plexapi.sdk.operations.GetChapterImage;
+import dev.plexapi.sdk.operations.GetCollections;
+import dev.plexapi.sdk.operations.GetCommon;
+import dev.plexapi.sdk.operations.GetExtras;
+import dev.plexapi.sdk.operations.GetFile;
+import dev.plexapi.sdk.operations.GetFirstCharacters;
+import dev.plexapi.sdk.operations.GetImageFromBif;
+import dev.plexapi.sdk.operations.GetItemArtwork;
+import dev.plexapi.sdk.operations.GetItemTree;
 import dev.plexapi.sdk.operations.GetLibraryDetails;
 import dev.plexapi.sdk.operations.GetLibraryItems;
-import dev.plexapi.sdk.operations.GetLibrarySectionsAll;
-import dev.plexapi.sdk.operations.GetMediaArts;
-import dev.plexapi.sdk.operations.GetMediaMetaData;
-import dev.plexapi.sdk.operations.GetMediaPosters;
-import dev.plexapi.sdk.operations.GetMetadataChildren;
-import dev.plexapi.sdk.operations.GetRecentlyAddedLibrary;
-import dev.plexapi.sdk.operations.GetRefreshLibraryMetadata;
-import dev.plexapi.sdk.operations.GetSearchAllLibraries;
-import dev.plexapi.sdk.operations.GetSearchLibrary;
-import dev.plexapi.sdk.operations.GetTopWatchedContent;
-import dev.plexapi.sdk.operations.PostMediaArts;
-import dev.plexapi.sdk.operations.PostMediaPoster;
-import java.lang.Double;
+import dev.plexapi.sdk.operations.GetLibraryMatches;
+import dev.plexapi.sdk.operations.GetMediaPart;
+import dev.plexapi.sdk.operations.GetPartIndex;
+import dev.plexapi.sdk.operations.GetPerson;
+import dev.plexapi.sdk.operations.GetRandomArtwork;
+import dev.plexapi.sdk.operations.GetRelatedItems;
+import dev.plexapi.sdk.operations.GetSectionFilters;
+import dev.plexapi.sdk.operations.GetSectionImage;
+import dev.plexapi.sdk.operations.GetSectionPreferences;
+import dev.plexapi.sdk.operations.GetSections;
+import dev.plexapi.sdk.operations.GetSectionsPrefs;
+import dev.plexapi.sdk.operations.GetStream;
+import dev.plexapi.sdk.operations.GetStreamLevels;
+import dev.plexapi.sdk.operations.GetStreamLoudness;
+import dev.plexapi.sdk.operations.GetTags;
+import dev.plexapi.sdk.operations.IngestTransientItem;
+import dev.plexapi.sdk.operations.ListMatches;
+import dev.plexapi.sdk.operations.ListPersonMedia;
+import dev.plexapi.sdk.operations.ListSimilar;
+import dev.plexapi.sdk.operations.ListSonicallySimilar;
+import dev.plexapi.sdk.operations.ListTopUsers;
+import dev.plexapi.sdk.operations.MatchItem;
+import dev.plexapi.sdk.operations.MergeItems;
+import dev.plexapi.sdk.operations.OptimizeDatabase;
+import dev.plexapi.sdk.operations.RefreshItemsMetadata;
+import dev.plexapi.sdk.operations.RefreshSection;
+import dev.plexapi.sdk.operations.RefreshSectionsMetadata;
+import dev.plexapi.sdk.operations.SetItemArtwork;
+import dev.plexapi.sdk.operations.SetItemPreferences;
+import dev.plexapi.sdk.operations.SetSectionPreferences;
+import dev.plexapi.sdk.operations.SetStreamOffset;
+import dev.plexapi.sdk.operations.SetStreamSelection;
+import dev.plexapi.sdk.operations.SplitItem;
+import dev.plexapi.sdk.operations.StartAnalysis;
+import dev.plexapi.sdk.operations.StartBifGeneration;
+import dev.plexapi.sdk.operations.StopAllRefreshes;
+import dev.plexapi.sdk.operations.Unmatch;
+import dev.plexapi.sdk.operations.UpdateItemArtwork;
+import dev.plexapi.sdk.operations.UpdateItems;
 import java.lang.Exception;
-import java.lang.String;
-import java.util.Optional;
 
 /**
- * API Calls interacting with Plex Media Server Libraries
+ * Library endpoints which are outside of the Media Provider API.  Typically this is manipulation of the library (adding/removing sections, modifying preferences, etc).
  */
 public class Library {
     private final SDKConfiguration sdkConfiguration;
@@ -120,335 +342,9 @@ public class Library {
     }
 
     /**
-     * Get Hash Value
+     * Get all items in library
      * 
-     * <p>This resource returns hash values for local files
-     * 
-     * @return The call builder
-     */
-    public GetFileHashRequestBuilder getFileHash() {
-        return new GetFileHashRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get Hash Value
-     * 
-     * <p>This resource returns hash values for local files
-     * 
-     * @param url This is the path to the local file, must be prefixed by `file://`
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetFileHashResponse getFileHash(String url) throws Exception {
-        return getFileHash(url, Optional.empty());
-    }
-
-    /**
-     * Get Hash Value
-     * 
-     * <p>This resource returns hash values for local files
-     * 
-     * @param url This is the path to the local file, must be prefixed by `file://`
-     * @param type Item type
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetFileHashResponse getFileHash(String url, Optional<Double> type) throws Exception {
-        GetFileHashRequest request =
-            GetFileHashRequest
-                .builder()
-                .url(url)
-                .type(type)
-                .build();
-        RequestOperation<GetFileHashRequest, GetFileHashResponse> operation
-              = new GetFileHash.Sync(sdkConfiguration);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Get Recently Added
-     * 
-     * <p>This endpoint will return the recently added content.
-     * 
-     * @return The call builder
-     */
-    public GetRecentlyAddedLibraryRequestBuilder getRecentlyAddedLibrary() {
-        return new GetRecentlyAddedLibraryRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get Recently Added
-     * 
-     * <p>This endpoint will return the recently added content.
-     * 
-     * @param request The request object containing all the parameters for the API call.
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetRecentlyAddedLibraryResponse getRecentlyAddedLibrary(GetRecentlyAddedLibraryRequest request) throws Exception {
-        RequestOperation<GetRecentlyAddedLibraryRequest, GetRecentlyAddedLibraryResponse> operation
-              = new GetRecentlyAddedLibrary.Sync(sdkConfiguration);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Get All Libraries
-     * 
-     * <p>A library section (commonly referred to as just a library) is a collection of media. 
-     * Libraries are typed, and depending on their type provide either a flat or a hierarchical view of the media. 
-     * For example, a music library has an artist &gt; albums &gt; tracks structure, whereas a movie library is flat.
-     * 
-     * <p>Libraries have features beyond just being a collection of media; for starters, they include information about supported types, filters and sorts. 
-     * This allows a client to provide a rich interface around the media (e.g. allow sorting movies by release year).
-     * 
-     * @return The call builder
-     */
-    public GetAllLibrariesRequestBuilder getAllLibraries() {
-        return new GetAllLibrariesRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get All Libraries
-     * 
-     * <p>A library section (commonly referred to as just a library) is a collection of media. 
-     * Libraries are typed, and depending on their type provide either a flat or a hierarchical view of the media. 
-     * For example, a music library has an artist &gt; albums &gt; tracks structure, whereas a movie library is flat.
-     * 
-     * <p>Libraries have features beyond just being a collection of media; for starters, they include information about supported types, filters and sorts. 
-     * This allows a client to provide a rich interface around the media (e.g. allow sorting movies by release year).
-     * 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetAllLibrariesResponse getAllLibrariesDirect() throws Exception {
-        RequestlessOperation<GetAllLibrariesResponse> operation
-            = new GetAllLibraries.Sync(sdkConfiguration);
-        return operation.handleResponse(operation.doRequest());
-    }
-
-    /**
-     * Get Library Details
-     * 
-     * <p>## Library Details Endpoint
-     * 
-     * <p>This endpoint provides comprehensive details about the library, focusing on organizational aspects rather than the content itself.
-     * 
-     * <p>The details include:
-     * 
-     * <p>### Directories
-     * Organized into three categories:
-     * 
-     * <p>- **Primary Directories**:
-     *   - Used in some clients for quick access to media subsets (e.g., "All", "On Deck").
-     *   - Most can be replicated via media queries.
-     *   - Customizable by users.
-     * 
-     * <p>- **Secondary Directories**:
-     *   - Marked with `secondary="1"`.
-     *   - Used in older clients for structured navigation.
-     * 
-     * <p>- **Special Directories**:
-     *   - Includes a "By Folder" entry for filesystem-based browsing.
-     *   - Contains an obsolete `search="1"` entry for on-the-fly search dialog creation.
-     * 
-     * <p>### Types
-     * Each type in the library comes with a set of filters and sorts, aiding in building dynamic media controls:
-     * 
-     * <p>- **Type Object Attributes**:
-     *   - `key`: Endpoint for the media list of this type.
-     *   - `type`: Metadata type (if standard Plex type).
-     *   - `title`: Title for this content type (e.g., "Movies").
-     * 
-     * <p>- **Filter Objects**:
-     *   - Subset of the media query language.
-     *   - Attributes include `filter` (name), `filterType` (data type), `key` (endpoint for value range), and `title`.
-     * 
-     * <p>- **Sort Objects**:
-     *   - Description of sort fields.
-     *   - Attributes include `defaultDirection` (asc/desc), `descKey` and `key` (sort parameters), and `title`.
-     * 
-     * <p>&gt; **Note**: Filters and sorts are optional; without them, no filtering controls are rendered.
-     * 
-     * @return The call builder
-     */
-    public GetLibraryDetailsRequestBuilder getLibraryDetails() {
-        return new GetLibraryDetailsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get Library Details
-     * 
-     * <p>## Library Details Endpoint
-     * 
-     * <p>This endpoint provides comprehensive details about the library, focusing on organizational aspects rather than the content itself.
-     * 
-     * <p>The details include:
-     * 
-     * <p>### Directories
-     * Organized into three categories:
-     * 
-     * <p>- **Primary Directories**:
-     *   - Used in some clients for quick access to media subsets (e.g., "All", "On Deck").
-     *   - Most can be replicated via media queries.
-     *   - Customizable by users.
-     * 
-     * <p>- **Secondary Directories**:
-     *   - Marked with `secondary="1"`.
-     *   - Used in older clients for structured navigation.
-     * 
-     * <p>- **Special Directories**:
-     *   - Includes a "By Folder" entry for filesystem-based browsing.
-     *   - Contains an obsolete `search="1"` entry for on-the-fly search dialog creation.
-     * 
-     * <p>### Types
-     * Each type in the library comes with a set of filters and sorts, aiding in building dynamic media controls:
-     * 
-     * <p>- **Type Object Attributes**:
-     *   - `key`: Endpoint for the media list of this type.
-     *   - `type`: Metadata type (if standard Plex type).
-     *   - `title`: Title for this content type (e.g., "Movies").
-     * 
-     * <p>- **Filter Objects**:
-     *   - Subset of the media query language.
-     *   - Attributes include `filter` (name), `filterType` (data type), `key` (endpoint for value range), and `title`.
-     * 
-     * <p>- **Sort Objects**:
-     *   - Description of sort fields.
-     *   - Attributes include `defaultDirection` (asc/desc), `descKey` and `key` (sort parameters), and `title`.
-     * 
-     * <p>&gt; **Note**: Filters and sorts are optional; without them, no filtering controls are rendered.
-     * 
-     * @param sectionKey The unique key of the Plex library. 
-     *         Note: This is unique in the context of the Plex server.
-     *         
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetLibraryDetailsResponse getLibraryDetails(int sectionKey) throws Exception {
-        return getLibraryDetails(Optional.empty(), sectionKey);
-    }
-
-    /**
-     * Get Library Details
-     * 
-     * <p>## Library Details Endpoint
-     * 
-     * <p>This endpoint provides comprehensive details about the library, focusing on organizational aspects rather than the content itself.
-     * 
-     * <p>The details include:
-     * 
-     * <p>### Directories
-     * Organized into three categories:
-     * 
-     * <p>- **Primary Directories**:
-     *   - Used in some clients for quick access to media subsets (e.g., "All", "On Deck").
-     *   - Most can be replicated via media queries.
-     *   - Customizable by users.
-     * 
-     * <p>- **Secondary Directories**:
-     *   - Marked with `secondary="1"`.
-     *   - Used in older clients for structured navigation.
-     * 
-     * <p>- **Special Directories**:
-     *   - Includes a "By Folder" entry for filesystem-based browsing.
-     *   - Contains an obsolete `search="1"` entry for on-the-fly search dialog creation.
-     * 
-     * <p>### Types
-     * Each type in the library comes with a set of filters and sorts, aiding in building dynamic media controls:
-     * 
-     * <p>- **Type Object Attributes**:
-     *   - `key`: Endpoint for the media list of this type.
-     *   - `type`: Metadata type (if standard Plex type).
-     *   - `title`: Title for this content type (e.g., "Movies").
-     * 
-     * <p>- **Filter Objects**:
-     *   - Subset of the media query language.
-     *   - Attributes include `filter` (name), `filterType` (data type), `key` (endpoint for value range), and `title`.
-     * 
-     * <p>- **Sort Objects**:
-     *   - Description of sort fields.
-     *   - Attributes include `defaultDirection` (asc/desc), `descKey` and `key` (sort parameters), and `title`.
-     * 
-     * <p>&gt; **Note**: Filters and sorts are optional; without them, no filtering controls are rendered.
-     * 
-     * @param includeDetails Whether or not to include details for a section (types, filters, and sorts).
-     *         Only exists for backwards compatibility, media providers other than the server libraries have it on always.
-     *         
-     * @param sectionKey The unique key of the Plex library. 
-     *         Note: This is unique in the context of the Plex server.
-     *         
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetLibraryDetailsResponse getLibraryDetails(Optional<? extends IncludeDetails> includeDetails, int sectionKey) throws Exception {
-        GetLibraryDetailsRequest request =
-            GetLibraryDetailsRequest
-                .builder()
-                .includeDetails(includeDetails)
-                .sectionKey(sectionKey)
-                .build();
-        RequestOperation<GetLibraryDetailsRequest, GetLibraryDetailsResponse> operation
-              = new GetLibraryDetails.Sync(sdkConfiguration);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Delete Library Section
-     * 
-     * <p>Delete a library using a specific section id
-     * 
-     * @return The call builder
-     */
-    public DeleteLibraryRequestBuilder deleteLibrary() {
-        return new DeleteLibraryRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Delete Library Section
-     * 
-     * <p>Delete a library using a specific section id
-     * 
-     * @param sectionKey The unique key of the Plex library. 
-     *         Note: This is unique in the context of the Plex server.
-     *         
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public DeleteLibraryResponse deleteLibrary(int sectionKey) throws Exception {
-        DeleteLibraryRequest request =
-            DeleteLibraryRequest
-                .builder()
-                .sectionKey(sectionKey)
-                .build();
-        RequestOperation<DeleteLibraryRequest, DeleteLibraryResponse> operation
-              = new DeleteLibrary.Sync(sdkConfiguration);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Get Library Items
-     * 
-     * <p>Fetches details from a specific section of the library identified by a section key and a tag. The tag parameter accepts the following values:
-     * - `all`: All items in the section.
-     * - `unwatched`: Items that have not been played.
-     * - `newest`: Items that are recently released.
-     * - `recentlyAdded`: Items that are recently added to the library.
-     * - `recentlyViewed`: Items that were recently viewed.
-     * - `onDeck`: Items to continue watching.
-     * - `collection`: Items categorized by collection.
-     * - `edition`: Items categorized by edition.
-     * - `genre`: Items categorized by genre.
-     * - `year`: Items categorized by year of release.
-     * - `decade`: Items categorized by decade.
-     * - `director`: Items categorized by director.
-     * - `actor`: Items categorized by starring actor.
-     * - `country`: Items categorized by country of origin.
-     * - `contentRating`: Items categorized by content rating.
-     * - `rating`: Items categorized by rating.
-     * - `resolution`: Items categorized by resolution.
-     * - `firstCharacter`: Items categorized by the first letter.
-     * - `folder`: Items categorized by folder.
-     * - `albums`: Items categorized by album.
+     * <p>Request all metadata items according to a query.
      * 
      * @return The call builder
      */
@@ -457,29 +353,9 @@ public class Library {
     }
 
     /**
-     * Get Library Items
+     * Get all items in library
      * 
-     * <p>Fetches details from a specific section of the library identified by a section key and a tag. The tag parameter accepts the following values:
-     * - `all`: All items in the section.
-     * - `unwatched`: Items that have not been played.
-     * - `newest`: Items that are recently released.
-     * - `recentlyAdded`: Items that are recently added to the library.
-     * - `recentlyViewed`: Items that were recently viewed.
-     * - `onDeck`: Items to continue watching.
-     * - `collection`: Items categorized by collection.
-     * - `edition`: Items categorized by edition.
-     * - `genre`: Items categorized by genre.
-     * - `year`: Items categorized by year of release.
-     * - `decade`: Items categorized by decade.
-     * - `director`: Items categorized by director.
-     * - `actor`: Items categorized by starring actor.
-     * - `country`: Items categorized by country of origin.
-     * - `contentRating`: Items categorized by content rating.
-     * - `rating`: Items categorized by rating.
-     * - `resolution`: Items categorized by resolution.
-     * - `firstCharacter`: Items categorized by the first letter.
-     * - `folder`: Items categorized by folder.
-     * - `albums`: Items categorized by album.
+     * <p>Request all metadata items according to a query.
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
@@ -492,598 +368,2142 @@ public class Library {
     }
 
     /**
-     * Get Library section media by tag ALL
+     * Delete library caches
      * 
-     * <p>Retrieves a list of all general media data for this library.
+     * <p>Delete the hub caches so they are recomputed on next request
      * 
      * @return The call builder
      */
-    public GetLibrarySectionsAllRequestBuilder getLibrarySectionsAll() {
-        return new GetLibrarySectionsAllRequestBuilder(sdkConfiguration);
+    public DeleteCachesRequestBuilder deleteCaches() {
+        return new DeleteCachesRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get Library section media by tag ALL
+     * Delete library caches
      * 
-     * <p>Retrieves a list of all general media data for this library.
+     * <p>Delete the hub caches so they are recomputed on next request
+     * 
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public DeleteCachesResponse deleteCachesDirect() throws Exception {
+        RequestlessOperation<DeleteCachesResponse> operation
+            = new DeleteCaches.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest());
+    }
+
+    /**
+     * Clean bundles
+     * 
+     * <p>Clean out any now unused bundles. Bundles can become unused when media is deleted
+     * 
+     * @return The call builder
+     */
+    public CleanBundlesRequestBuilder cleanBundles() {
+        return new CleanBundlesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Clean bundles
+     * 
+     * <p>Clean out any now unused bundles. Bundles can become unused when media is deleted
+     * 
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public CleanBundlesResponse cleanBundlesDirect() throws Exception {
+        RequestlessOperation<CleanBundlesResponse> operation
+            = new CleanBundles.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest());
+    }
+
+    /**
+     * Ingest a transient item
+     * 
+     * <p>This endpoint takes a file path specified in the `url` parameter, matches it using the scanner's match mechanism, downloads rich metadata, and then ingests the item as a transient item (without a library section). In the case where the file represents an episode, the entire tree (show, season, and episode) is added as transient items. At this time, movies and episodes are the only supported types, which are gleaned automatically from the file path.
+     * Note that any of the parameters passed to the metadata details endpoint (e.g. `includeExtras=1`) work here.
+     * 
+     * @return The call builder
+     */
+    public IngestTransientItemRequestBuilder ingestTransientItem() {
+        return new IngestTransientItemRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Ingest a transient item
+     * 
+     * <p>This endpoint takes a file path specified in the `url` parameter, matches it using the scanner's match mechanism, downloads rich metadata, and then ingests the item as a transient item (without a library section). In the case where the file represents an episode, the entire tree (show, season, and episode) is added as transient items. At this time, movies and episodes are the only supported types, which are gleaned automatically from the file path.
+     * Note that any of the parameters passed to the metadata details endpoint (e.g. `includeExtras=1`) work here.
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetLibrarySectionsAllResponse getLibrarySectionsAll(GetLibrarySectionsAllRequest request) throws Exception {
-        RequestOperation<GetLibrarySectionsAllRequest, GetLibrarySectionsAllResponse> operation
-              = new GetLibrarySectionsAll.Sync(sdkConfiguration);
+    public IngestTransientItemResponse ingestTransientItem(IngestTransientItemRequest request) throws Exception {
+        RequestOperation<IngestTransientItemRequest, IngestTransientItemResponse> operation
+              = new IngestTransientItem.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
     /**
-     * Refresh Metadata Of The Library
+     * Get library matches
      * 
-     * <p>This endpoint Refreshes all the Metadata of the library.
-     * 
-     * @return The call builder
-     */
-    public GetRefreshLibraryMetadataRequestBuilder getRefreshLibraryMetadata() {
-        return new GetRefreshLibraryMetadataRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Refresh Metadata Of The Library
-     * 
-     * <p>This endpoint Refreshes all the Metadata of the library.
-     * 
-     * @param sectionKey The unique key of the Plex library. 
-     *         Note: This is unique in the context of the Plex server.
-     *         
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetRefreshLibraryMetadataResponse getRefreshLibraryMetadata(int sectionKey) throws Exception {
-        return getRefreshLibraryMetadata(Optional.empty(), sectionKey);
-    }
-
-    /**
-     * Refresh Metadata Of The Library
-     * 
-     * <p>This endpoint Refreshes all the Metadata of the library.
-     * 
-     * @param force Force the refresh even if the library is already being refreshed.
-     * @param sectionKey The unique key of the Plex library. 
-     *         Note: This is unique in the context of the Plex server.
-     *         
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetRefreshLibraryMetadataResponse getRefreshLibraryMetadata(Optional<? extends Force> force, int sectionKey) throws Exception {
-        GetRefreshLibraryMetadataRequest request =
-            GetRefreshLibraryMetadataRequest
-                .builder()
-                .force(force)
-                .sectionKey(sectionKey)
-                .build();
-        RequestOperation<GetRefreshLibraryMetadataRequest, GetRefreshLibraryMetadataResponse> operation
-              = new GetRefreshLibraryMetadata.Sync(sdkConfiguration);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Search Library
-     * 
-     * <p>Search for content within a specific section of the library.
-     * 
-     * <p>### Types
-     * Each type in the library comes with a set of filters and sorts, aiding in building dynamic media controls:
-     * 
-     * <p>- **Type Object Attributes**:
-     *   - `type`: Metadata type (if standard Plex type).  
-     *   - `title`: Title for this content type (e.g., "Movies").
-     * 
-     * <p>- **Filter Objects**:
-     *   - Subset of the media query language.
-     *   - Attributes include `filter` (name), `filterType` (data type), `key` (endpoint for value range), and `title`.
-     * 
-     * <p>- **Sort Objects**:
-     *   - Description of sort fields.
-     *   - Attributes include `defaultDirection` (asc/desc), `descKey` and `key` (sort parameters), and `title`.
-     * 
-     * <p>&gt; **Note**: Filters and sorts are optional; without them, no filtering controls are rendered.
+     * <p>The matches endpoint is used to match content external to the library with content inside the library. This is done by passing a series of semantic "hints" about the content (its type, name, or release year). Each type (e.g. movie) has a canonical set of minimal required hints.
+     * This ability to match content is useful in a variety of scenarios. For example, in the DVR, the EPG uses the endpoint to match recording rules against airing content. And in the cloud, the UMP uses the endpoint to match up a piece of media with rich metadata.
+     * The endpoint response can including multiple matches, if there is ambiguity, each one containing a `score` from 0 to 100. For somewhat historical reasons, anything over 85 is considered a positive match (we prefer false negatives over false positives in general for matching).
+     * The `guid` hint is somewhat special, in that it generally represents a unique identity for a piece of media (e.g. the IMDB `ttXXX`) identifier, in contrast with other hints which can be much more ambiguous (e.g. a title of `Jane Eyre`, which could refer to the 1943 or the 2011 version).
+     * Episodes require either a season/episode pair, or an air date (or both). Either the path must be sent, or the show title
      * 
      * @return The call builder
      */
-    public GetSearchLibraryRequestBuilder getSearchLibrary() {
-        return new GetSearchLibraryRequestBuilder(sdkConfiguration);
+    public GetLibraryMatchesRequestBuilder getLibraryMatches() {
+        return new GetLibraryMatchesRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Search Library
+     * Get library matches
      * 
-     * <p>Search for content within a specific section of the library.
-     * 
-     * <p>### Types
-     * Each type in the library comes with a set of filters and sorts, aiding in building dynamic media controls:
-     * 
-     * <p>- **Type Object Attributes**:
-     *   - `type`: Metadata type (if standard Plex type).  
-     *   - `title`: Title for this content type (e.g., "Movies").
-     * 
-     * <p>- **Filter Objects**:
-     *   - Subset of the media query language.
-     *   - Attributes include `filter` (name), `filterType` (data type), `key` (endpoint for value range), and `title`.
-     * 
-     * <p>- **Sort Objects**:
-     *   - Description of sort fields.
-     *   - Attributes include `defaultDirection` (asc/desc), `descKey` and `key` (sort parameters), and `title`.
-     * 
-     * <p>&gt; **Note**: Filters and sorts are optional; without them, no filtering controls are rendered.
-     * 
-     * @param sectionKey The unique key of the Plex library. 
-     *         Note: This is unique in the context of the Plex server.
-     *         
-     * @param type The type of media to retrieve or filter by.
-     *         1 = movie
-     *         2 = show
-     *         3 = season
-     *         4 = episode
-     *         E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
-     *         
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetSearchLibraryResponse getSearchLibrary(int sectionKey, GetSearchLibraryQueryParamType type) throws Exception {
-        GetSearchLibraryRequest request =
-            GetSearchLibraryRequest
-                .builder()
-                .sectionKey(sectionKey)
-                .type(type)
-                .build();
-        RequestOperation<GetSearchLibraryRequest, GetSearchLibraryResponse> operation
-              = new GetSearchLibrary.Sync(sdkConfiguration);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Get Genres of library media
-     * 
-     * <p>Retrieves a list of all the genres that are found for the media in this library.
-     * 
-     * @return The call builder
-     */
-    public GetGenresLibraryRequestBuilder getGenresLibrary() {
-        return new GetGenresLibraryRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get Genres of library media
-     * 
-     * <p>Retrieves a list of all the genres that are found for the media in this library.
-     * 
-     * @param sectionKey The unique key of the Plex library. 
-     *         Note: This is unique in the context of the Plex server.
-     *         
-     * @param type The type of media to retrieve or filter by.
-     *         1 = movie
-     *         2 = show
-     *         3 = season
-     *         4 = episode
-     *         E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
-     *         
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetGenresLibraryResponse getGenresLibrary(int sectionKey, GetGenresLibraryQueryParamType type) throws Exception {
-        GetGenresLibraryRequest request =
-            GetGenresLibraryRequest
-                .builder()
-                .sectionKey(sectionKey)
-                .type(type)
-                .build();
-        RequestOperation<GetGenresLibraryRequest, GetGenresLibraryResponse> operation
-              = new GetGenresLibrary.Sync(sdkConfiguration);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Get Countries of library media
-     * 
-     * <p>Retrieves a list of all the countries that are found for the media in this library.
-     * 
-     * @return The call builder
-     */
-    public GetCountriesLibraryRequestBuilder getCountriesLibrary() {
-        return new GetCountriesLibraryRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get Countries of library media
-     * 
-     * <p>Retrieves a list of all the countries that are found for the media in this library.
-     * 
-     * @param sectionKey The unique key of the Plex library. 
-     *         Note: This is unique in the context of the Plex server.
-     *         
-     * @param type The type of media to retrieve or filter by.
-     *         1 = movie
-     *         2 = show
-     *         3 = season
-     *         4 = episode
-     *         E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
-     *         
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetCountriesLibraryResponse getCountriesLibrary(int sectionKey, GetCountriesLibraryQueryParamType type) throws Exception {
-        GetCountriesLibraryRequest request =
-            GetCountriesLibraryRequest
-                .builder()
-                .sectionKey(sectionKey)
-                .type(type)
-                .build();
-        RequestOperation<GetCountriesLibraryRequest, GetCountriesLibraryResponse> operation
-              = new GetCountriesLibrary.Sync(sdkConfiguration);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Get Actors of library media
-     * 
-     * <p>Retrieves a list of all the actors that are found for the media in this library.
-     * 
-     * @return The call builder
-     */
-    public GetActorsLibraryRequestBuilder getActorsLibrary() {
-        return new GetActorsLibraryRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get Actors of library media
-     * 
-     * <p>Retrieves a list of all the actors that are found for the media in this library.
-     * 
-     * @param sectionKey The unique key of the Plex library. 
-     *         Note: This is unique in the context of the Plex server.
-     *         
-     * @param type The type of media to retrieve or filter by.
-     *         1 = movie
-     *         2 = show
-     *         3 = season
-     *         4 = episode
-     *         E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
-     *         
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetActorsLibraryResponse getActorsLibrary(int sectionKey, GetActorsLibraryQueryParamType type) throws Exception {
-        GetActorsLibraryRequest request =
-            GetActorsLibraryRequest
-                .builder()
-                .sectionKey(sectionKey)
-                .type(type)
-                .build();
-        RequestOperation<GetActorsLibraryRequest, GetActorsLibraryResponse> operation
-              = new GetActorsLibrary.Sync(sdkConfiguration);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Search All Libraries
-     * 
-     * <p>Search the provided query across all library sections, or a single section, and return matches as hubs, split up by type.
-     * 
-     * @return The call builder
-     */
-    public GetSearchAllLibrariesRequestBuilder getSearchAllLibraries() {
-        return new GetSearchAllLibrariesRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Search All Libraries
-     * 
-     * <p>Search the provided query across all library sections, or a single section, and return matches as hubs, split up by type.
+     * <p>The matches endpoint is used to match content external to the library with content inside the library. This is done by passing a series of semantic "hints" about the content (its type, name, or release year). Each type (e.g. movie) has a canonical set of minimal required hints.
+     * This ability to match content is useful in a variety of scenarios. For example, in the DVR, the EPG uses the endpoint to match recording rules against airing content. And in the cloud, the UMP uses the endpoint to match up a piece of media with rich metadata.
+     * The endpoint response can including multiple matches, if there is ambiguity, each one containing a `score` from 0 to 100. For somewhat historical reasons, anything over 85 is considered a positive match (we prefer false negatives over false positives in general for matching).
+     * The `guid` hint is somewhat special, in that it generally represents a unique identity for a piece of media (e.g. the IMDB `ttXXX`) identifier, in contrast with other hints which can be much more ambiguous (e.g. a title of `Jane Eyre`, which could refer to the 1943 or the 2011 version).
+     * Episodes require either a season/episode pair, or an air date (or both). Either the path must be sent, or the show title
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetSearchAllLibrariesResponse getSearchAllLibraries(GetSearchAllLibrariesRequest request) throws Exception {
-        RequestOperation<GetSearchAllLibrariesRequest, GetSearchAllLibrariesResponse> operation
-              = new GetSearchAllLibraries.Sync(sdkConfiguration);
+    public GetLibraryMatchesResponse getLibraryMatches(GetLibraryMatchesRequest request) throws Exception {
+        RequestOperation<GetLibraryMatchesRequest, GetLibraryMatchesResponse> operation
+              = new GetLibraryMatches.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
     /**
-     * Get Media Metadata
+     * Optimize the Database
      * 
-     * <p>This endpoint will return all the (meta)data of one or more library items specified by the ratingKey.
-     * Multiple rating keys can be provided as a comma-separated list (e.g., "21119,21617").
+     * <p>Initiate optimize on the database.
      * 
      * @return The call builder
      */
-    public GetMediaMetaDataRequestBuilder getMediaMetaData() {
-        return new GetMediaMetaDataRequestBuilder(sdkConfiguration);
+    public OptimizeDatabaseRequestBuilder optimizeDatabase() {
+        return new OptimizeDatabaseRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get Media Metadata
+     * Optimize the Database
      * 
-     * <p>This endpoint will return all the (meta)data of one or more library items specified by the ratingKey.
-     * Multiple rating keys can be provided as a comma-separated list (e.g., "21119,21617").
+     * <p>Initiate optimize on the database.
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetMediaMetaDataResponse getMediaMetaData(GetMediaMetaDataRequest request) throws Exception {
-        RequestOperation<GetMediaMetaDataRequest, GetMediaMetaDataResponse> operation
-              = new GetMediaMetaData.Sync(sdkConfiguration);
+    public OptimizeDatabaseResponse optimizeDatabase(OptimizeDatabaseRequest request) throws Exception {
+        RequestOperation<OptimizeDatabaseRequest, OptimizeDatabaseResponse> operation
+              = new OptimizeDatabase.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
     /**
-     * Get Media Background Artwork
+     * Get random artwork
      * 
-     * <p>Returns the background artwork for a library item.
+     * <p>Get random artwork across sections.  This is commonly used for a screensaver.
+     * 
+     * <p>This retrieves 100 random artwork paths in the specified sections and returns them.  Restrictions are put in place to not return artwork for items the user is not allowed to access.  Artwork will be for Movies, Shows, and Artists only.
      * 
      * @return The call builder
      */
-    public GetMediaArtsRequestBuilder getMediaArts() {
-        return new GetMediaArtsRequestBuilder(sdkConfiguration);
+    public GetRandomArtworkRequestBuilder getRandomArtwork() {
+        return new GetRandomArtworkRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get Media Background Artwork
+     * Get random artwork
      * 
-     * <p>Returns the background artwork for a library item.
+     * <p>Get random artwork across sections.  This is commonly used for a screensaver.
      * 
-     * @param ratingKey the id of the library item to return the artwork of.
+     * <p>This retrieves 100 random artwork paths in the specified sections and returns them.  Restrictions are put in place to not return artwork for items the user is not allowed to access.  Artwork will be for Movies, Shows, and Artists only.
+     * 
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetMediaArtsResponse getMediaArts(long ratingKey) throws Exception {
-        GetMediaArtsRequest request =
-            GetMediaArtsRequest
-                .builder()
-                .ratingKey(ratingKey)
-                .build();
-        RequestOperation<GetMediaArtsRequest, GetMediaArtsResponse> operation
-              = new GetMediaArts.Sync(sdkConfiguration);
+    public GetRandomArtworkResponse getRandomArtwork(GetRandomArtworkRequest request) throws Exception {
+        RequestOperation<GetRandomArtworkRequest, GetRandomArtworkResponse> operation
+              = new GetRandomArtwork.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
     /**
-     * Upload Media Background Artwork
+     * Get library sections (main Media Provider Only)
      * 
-     * <p>Uploads an image to use as the background artwork for a library item, either from a local file or a remote URL
+     * <p>A library section (commonly referred to as just a library) is a collection of media. Libraries are typed, and depending on their type provide either a flat or a hierarchical view of the media. For example, a music library has an artist &gt; albums &gt; tracks structure, whereas a movie library is flat.
+     * Libraries have features beyond just being a collection of media; for starters, they include information about supported types, filters and sorts. This allows a client to provide a rich interface around the media (e.g. allow sorting movies by release year).
      * 
      * @return The call builder
      */
-    public PostMediaArtsRequestBuilder postMediaArts() {
-        return new PostMediaArtsRequestBuilder(sdkConfiguration);
+    public GetSectionsRequestBuilder getSections() {
+        return new GetSectionsRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Upload Media Background Artwork
+     * Get library sections (main Media Provider Only)
      * 
-     * <p>Uploads an image to use as the background artwork for a library item, either from a local file or a remote URL
+     * <p>A library section (commonly referred to as just a library) is a collection of media. Libraries are typed, and depending on their type provide either a flat or a hierarchical view of the media. For example, a music library has an artist &gt; albums &gt; tracks structure, whereas a movie library is flat.
+     * Libraries have features beyond just being a collection of media; for starters, they include information about supported types, filters and sorts. This allows a client to provide a rich interface around the media (e.g. allow sorting movies by release year).
      * 
-     * @param ratingKey the id of the library item to return the posters of.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public PostMediaArtsResponse postMediaArts(long ratingKey) throws Exception {
-        return postMediaArts(ratingKey, Optional.empty(), Optional.empty());
+    public GetSectionsResponse getSectionsDirect() throws Exception {
+        RequestlessOperation<GetSectionsResponse> operation
+            = new GetSections.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest());
     }
 
     /**
-     * Upload Media Background Artwork
+     * Add a library section
      * 
-     * <p>Uploads an image to use as the background artwork for a library item, either from a local file or a remote URL
+     * <p>Add a new library section to the server
      * 
-     * @param ratingKey the id of the library item to return the posters of.
-     * @param url The URL of the image, if uploading a remote image
-     * @param requestBody The contents of the image, if uploading a local file
+     * @return The call builder
+     */
+    public AddSectionRequestBuilder addSection() {
+        return new AddSectionRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Add a library section
+     * 
+     * <p>Add a new library section to the server
+     * 
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public PostMediaArtsResponse postMediaArts(
-            long ratingKey, Optional<String> url,
-            Optional<byte[]> requestBody) throws Exception {
-        PostMediaArtsRequest request =
-            PostMediaArtsRequest
-                .builder()
-                .ratingKey(ratingKey)
-                .url(url)
-                .requestBody(requestBody)
-                .build();
-        RequestOperation<PostMediaArtsRequest, PostMediaArtsResponse> operation
-              = new PostMediaArts.Sync(sdkConfiguration);
+    public AddSectionResponse addSection(AddSectionRequest request) throws Exception {
+        RequestOperation<AddSectionRequest, AddSectionResponse> operation
+              = new AddSection.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
     /**
-     * Get Media Posters
+     * Stop refresh
      * 
-     * <p>Returns the available posters for a library item.
+     * <p>Stop all refreshes across all sections
      * 
      * @return The call builder
      */
-    public GetMediaPostersRequestBuilder getMediaPosters() {
-        return new GetMediaPostersRequestBuilder(sdkConfiguration);
+    public StopAllRefreshesRequestBuilder stopAllRefreshes() {
+        return new StopAllRefreshesRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get Media Posters
+     * Stop refresh
      * 
-     * <p>Returns the available posters for a library item.
+     * <p>Stop all refreshes across all sections
      * 
-     * @param ratingKey the id of the library item to return the posters of.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetMediaPostersResponse getMediaPosters(long ratingKey) throws Exception {
-        GetMediaPostersRequest request =
-            GetMediaPostersRequest
-                .builder()
-                .ratingKey(ratingKey)
-                .build();
-        RequestOperation<GetMediaPostersRequest, GetMediaPostersResponse> operation
-              = new GetMediaPosters.Sync(sdkConfiguration);
+    public StopAllRefreshesResponse stopAllRefreshesDirect() throws Exception {
+        RequestlessOperation<StopAllRefreshesResponse> operation
+            = new StopAllRefreshes.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest());
+    }
+
+    /**
+     * Get section prefs
+     * 
+     * <p>Get a section's preferences for a metadata type
+     * 
+     * @return The call builder
+     */
+    public GetSectionsPrefsRequestBuilder getSectionsPrefs() {
+        return new GetSectionsPrefsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get section prefs
+     * 
+     * <p>Get a section's preferences for a metadata type
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetSectionsPrefsResponse getSectionsPrefs(GetSectionsPrefsRequest request) throws Exception {
+        RequestOperation<GetSectionsPrefsRequest, GetSectionsPrefsResponse> operation
+              = new GetSectionsPrefs.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
     /**
-     * Upload Media Poster
+     * Refresh all sections
      * 
-     * <p>Uploads a poster to a library item, either from a local file or a remote URL
+     * <p>Tell PMS to refresh all section metadata
      * 
      * @return The call builder
      */
-    public PostMediaPosterRequestBuilder postMediaPoster() {
-        return new PostMediaPosterRequestBuilder(sdkConfiguration);
+    public RefreshSectionsMetadataRequestBuilder refreshSectionsMetadata() {
+        return new RefreshSectionsMetadataRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Upload Media Poster
+     * Refresh all sections
      * 
-     * <p>Uploads a poster to a library item, either from a local file or a remote URL
+     * <p>Tell PMS to refresh all section metadata
      * 
-     * @param ratingKey the id of the library item to return the posters of.
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public PostMediaPosterResponse postMediaPoster(long ratingKey) throws Exception {
-        return postMediaPoster(ratingKey, Optional.empty(), Optional.empty());
-    }
-
-    /**
-     * Upload Media Poster
-     * 
-     * <p>Uploads a poster to a library item, either from a local file or a remote URL
-     * 
-     * @param ratingKey the id of the library item to return the posters of.
-     * @param url The URL of the image, if uploading a remote image
-     * @param requestBody The contents of the image, if uploading a local file
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public PostMediaPosterResponse postMediaPoster(
-            long ratingKey, Optional<String> url,
-            Optional<byte[]> requestBody) throws Exception {
-        PostMediaPosterRequest request =
-            PostMediaPosterRequest
-                .builder()
-                .ratingKey(ratingKey)
-                .url(url)
-                .requestBody(requestBody)
-                .build();
-        RequestOperation<PostMediaPosterRequest, PostMediaPosterResponse> operation
-              = new PostMediaPoster.Sync(sdkConfiguration);
+    public RefreshSectionsMetadataResponse refreshSectionsMetadata(RefreshSectionsMetadataRequest request) throws Exception {
+        RequestOperation<RefreshSectionsMetadataRequest, RefreshSectionsMetadataResponse> operation
+              = new RefreshSectionsMetadata.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
     /**
-     * Get Items Children
+     * Get all library tags of a type
      * 
-     * <p>This endpoint will return the children of of a library item specified with the ratingKey.
+     * <p>Get all library tags of a type
      * 
      * @return The call builder
      */
-    public GetMetadataChildrenRequestBuilder getMetadataChildren() {
-        return new GetMetadataChildrenRequestBuilder(sdkConfiguration);
+    public GetTagsRequestBuilder getTags() {
+        return new GetTagsRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get Items Children
+     * Get all library tags of a type
      * 
-     * <p>This endpoint will return the children of of a library item specified with the ratingKey.
+     * <p>Get all library tags of a type
      * 
-     * @param ratingKey the id of the library item to return the children of.
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetMetadataChildrenResponse getMetadataChildren(double ratingKey) throws Exception {
-        return getMetadataChildren(ratingKey, Optional.empty());
-    }
-
-    /**
-     * Get Items Children
-     * 
-     * <p>This endpoint will return the children of of a library item specified with the ratingKey.
-     * 
-     * @param ratingKey the id of the library item to return the children of.
-     * @param includeElements Adds additional elements to the response. Supported types are (Stream)
-     *         
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetMetadataChildrenResponse getMetadataChildren(double ratingKey, Optional<String> includeElements) throws Exception {
-        GetMetadataChildrenRequest request =
-            GetMetadataChildrenRequest
-                .builder()
-                .ratingKey(ratingKey)
-                .includeElements(includeElements)
-                .build();
-        RequestOperation<GetMetadataChildrenRequest, GetMetadataChildrenResponse> operation
-              = new GetMetadataChildren.Sync(sdkConfiguration);
+    public GetTagsResponse getTags(GetTagsRequest request) throws Exception {
+        RequestOperation<GetTagsRequest, GetTagsResponse> operation
+              = new GetTags.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
     /**
-     * Get Top Watched Content
+     * Delete a metadata item
      * 
-     * <p>This endpoint will return the top watched content from libraries of a certain type
+     * <p>Delete a single metadata item from the library, deleting media as well
      * 
      * @return The call builder
      */
-    public GetTopWatchedContentRequestBuilder getTopWatchedContent() {
-        return new GetTopWatchedContentRequestBuilder(sdkConfiguration);
+    public DeleteMetadataItemRequestBuilder deleteMetadataItem() {
+        return new DeleteMetadataItemRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get Top Watched Content
+     * Delete a metadata item
      * 
-     * <p>This endpoint will return the top watched content from libraries of a certain type
+     * <p>Delete a single metadata item from the library, deleting media as well
      * 
-     * @param type The type of media to retrieve or filter by.
-     *         1 = movie
-     *         2 = show
-     *         3 = season
-     *         4 = episode
-     *         E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
-     *         
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetTopWatchedContentResponse getTopWatchedContent(GetTopWatchedContentQueryParamType type) throws Exception {
-        return getTopWatchedContent(type, Optional.empty());
+    public DeleteMetadataItemResponse deleteMetadataItem(DeleteMetadataItemRequest request) throws Exception {
+        RequestOperation<DeleteMetadataItemRequest, DeleteMetadataItemResponse> operation
+              = new DeleteMetadataItem.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
     /**
-     * Get Top Watched Content
+     * Edit a metadata item
      * 
-     * <p>This endpoint will return the top watched content from libraries of a certain type
+     * <p>Edit metadata items setting fields
      * 
-     * @param type The type of media to retrieve or filter by.
-     *         1 = movie
-     *         2 = show
-     *         3 = season
-     *         4 = episode
-     *         E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
-     *         
-     * @param includeGuids Adds the Guid object to the response
-     *         
+     * @return The call builder
+     */
+    public EditMetadataItemRequestBuilder editMetadataItem() {
+        return new EditMetadataItemRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Edit a metadata item
+     * 
+     * <p>Edit metadata items setting fields
+     * 
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetTopWatchedContentResponse getTopWatchedContent(GetTopWatchedContentQueryParamType type, Optional<? extends GetTopWatchedContentQueryParamIncludeGuids> includeGuids) throws Exception {
-        GetTopWatchedContentRequest request =
-            GetTopWatchedContentRequest
-                .builder()
-                .type(type)
-                .includeGuids(includeGuids)
-                .build();
-        RequestOperation<GetTopWatchedContentRequest, GetTopWatchedContentResponse> operation
-              = new GetTopWatchedContent.Sync(sdkConfiguration);
+    public EditMetadataItemResponse editMetadataItem(EditMetadataItemRequest request) throws Exception {
+        RequestOperation<EditMetadataItemRequest, EditMetadataItemResponse> operation
+              = new EditMetadataItem.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Ad-detect an item
+     * 
+     * <p>Start the detection of ads in a metadata item
+     * 
+     * @return The call builder
+     */
+    public DetectAdsRequestBuilder detectAds() {
+        return new DetectAdsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Ad-detect an item
+     * 
+     * <p>Start the detection of ads in a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public DetectAdsResponse detectAds(DetectAdsRequest request) throws Exception {
+        RequestOperation<DetectAdsRequest, DetectAdsResponse> operation
+              = new DetectAds.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get the leaves of an item
+     * 
+     * <p>Get the leaves for a metadata item such as the episodes in a show
+     * 
+     * @return The call builder
+     */
+    public GetAllItemLeavesRequestBuilder getAllItemLeaves() {
+        return new GetAllItemLeavesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get the leaves of an item
+     * 
+     * <p>Get the leaves for a metadata item such as the episodes in a show
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetAllItemLeavesResponse getAllItemLeaves(GetAllItemLeavesRequest request) throws Exception {
+        RequestOperation<GetAllItemLeavesRequest, GetAllItemLeavesResponse> operation
+              = new GetAllItemLeaves.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Analyze an item
+     * 
+     * <p>Start the analysis of a metadata item
+     * 
+     * @return The call builder
+     */
+    public AnalyzeMetadataRequestBuilder analyzeMetadata() {
+        return new AnalyzeMetadataRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Analyze an item
+     * 
+     * <p>Start the analysis of a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public AnalyzeMetadataResponse analyzeMetadata(AnalyzeMetadataRequest request) throws Exception {
+        RequestOperation<AnalyzeMetadataRequest, AnalyzeMetadataResponse> operation
+              = new AnalyzeMetadata.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Generate thumbs of chapters for an item
+     * 
+     * <p>Start the chapter thumb generation for an item
+     * 
+     * @return The call builder
+     */
+    public GenerateThumbsRequestBuilder generateThumbs() {
+        return new GenerateThumbsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Generate thumbs of chapters for an item
+     * 
+     * <p>Start the chapter thumb generation for an item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GenerateThumbsResponse generateThumbs(GenerateThumbsRequest request) throws Exception {
+        RequestOperation<GenerateThumbsRequest, GenerateThumbsResponse> operation
+              = new GenerateThumbs.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Credit detect a metadata item
+     * 
+     * <p>Start credit detection on a metadata item
+     * 
+     * @return The call builder
+     */
+    public DetectCreditsRequestBuilder detectCredits() {
+        return new DetectCreditsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Credit detect a metadata item
+     * 
+     * <p>Start credit detection on a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public DetectCreditsResponse detectCredits(DetectCreditsRequest request) throws Exception {
+        RequestOperation<DetectCreditsRequest, DetectCreditsResponse> operation
+              = new DetectCredits.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get an item's extras
+     * 
+     * <p>Get the extras for a metadata item
+     * 
+     * @return The call builder
+     */
+    public GetExtrasRequestBuilder getExtras() {
+        return new GetExtrasRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get an item's extras
+     * 
+     * <p>Get the extras for a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetExtrasResponse getExtras(GetExtrasRequest request) throws Exception {
+        RequestOperation<GetExtrasRequest, GetExtrasResponse> operation
+              = new GetExtras.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Add to an item's extras
+     * 
+     * <p>Add an extra to a metadata item
+     * 
+     * @return The call builder
+     */
+    public AddExtrasRequestBuilder addExtras() {
+        return new AddExtrasRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Add to an item's extras
+     * 
+     * <p>Add an extra to a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public AddExtrasResponse addExtras(AddExtrasRequest request) throws Exception {
+        RequestOperation<AddExtrasRequest, AddExtrasResponse> operation
+              = new AddExtras.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get a file from a metadata or media bundle
+     * 
+     * <p>Get a bundle file for a metadata or media item.  This is either an image or a mp3 (for a show's theme)
+     * 
+     * @return The call builder
+     */
+    public GetFileRequestBuilder getFile() {
+        return new GetFileRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a file from a metadata or media bundle
+     * 
+     * <p>Get a bundle file for a metadata or media item.  This is either an image or a mp3 (for a show's theme)
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetFileResponse getFile(GetFileRequest request) throws Exception {
+        RequestOperation<GetFileRequest, GetFileResponse> operation
+              = new GetFile.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Start BIF generation of an item
+     * 
+     * <p>Start the indexing (BIF generation) of an item
+     * 
+     * @return The call builder
+     */
+    public StartBifGenerationRequestBuilder startBifGeneration() {
+        return new StartBifGenerationRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Start BIF generation of an item
+     * 
+     * <p>Start the indexing (BIF generation) of an item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public StartBifGenerationResponse startBifGeneration(StartBifGenerationRequest request) throws Exception {
+        RequestOperation<StartBifGenerationRequest, StartBifGenerationResponse> operation
+              = new StartBifGeneration.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Intro detect an item
+     * 
+     * <p>Start the detection of intros in a metadata item
+     * 
+     * @return The call builder
+     */
+    public DetectIntrosRequestBuilder detectIntros() {
+        return new DetectIntrosRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Intro detect an item
+     * 
+     * <p>Start the detection of intros in a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public DetectIntrosResponse detectIntros(DetectIntrosRequest request) throws Exception {
+        RequestOperation<DetectIntrosRequest, DetectIntrosResponse> operation
+              = new DetectIntros.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Create a marker
+     * 
+     * <p>Create a marker for this user on the metadata item
+     * 
+     * @return The call builder
+     */
+    public CreateMarkerRequestBuilder createMarker() {
+        return new CreateMarkerRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Create a marker
+     * 
+     * <p>Create a marker for this user on the metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public CreateMarkerResponse createMarker(CreateMarkerRequest request) throws Exception {
+        RequestOperation<CreateMarkerRequest, CreateMarkerResponse> operation
+              = new CreateMarker.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Match a metadata item
+     * 
+     * <p>Match a metadata item to a guid
+     * 
+     * @return The call builder
+     */
+    public MatchItemRequestBuilder matchItem() {
+        return new MatchItemRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Match a metadata item
+     * 
+     * <p>Match a metadata item to a guid
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public MatchItemResponse matchItem(MatchItemRequest request) throws Exception {
+        RequestOperation<MatchItemRequest, MatchItemResponse> operation
+              = new MatchItem.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get metadata matches for an item
+     * 
+     * <p>Get the list of metadata matches for a metadata item
+     * 
+     * @return The call builder
+     */
+    public ListMatchesRequestBuilder listMatches() {
+        return new ListMatchesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get metadata matches for an item
+     * 
+     * <p>Get the list of metadata matches for a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public ListMatchesResponse listMatches(ListMatchesRequest request) throws Exception {
+        RequestOperation<ListMatchesRequest, ListMatchesResponse> operation
+              = new ListMatches.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Merge a metadata item
+     * 
+     * <p>Merge a metadata item with other items
+     * 
+     * @return The call builder
+     */
+    public MergeItemsRequestBuilder mergeItems() {
+        return new MergeItemsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Merge a metadata item
+     * 
+     * <p>Merge a metadata item with other items
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public MergeItemsResponse mergeItems(MergeItemsRequest request) throws Exception {
+        RequestOperation<MergeItemsRequest, MergeItemsResponse> operation
+              = new MergeItems.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get nearest tracks to metadata item
+     * 
+     * <p>Get the nearest tracks, sonically, to the provided track
+     * 
+     * @return The call builder
+     */
+    public ListSonicallySimilarRequestBuilder listSonicallySimilar() {
+        return new ListSonicallySimilarRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get nearest tracks to metadata item
+     * 
+     * <p>Get the nearest tracks, sonically, to the provided track
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public ListSonicallySimilarResponse listSonicallySimilar(ListSonicallySimilarRequest request) throws Exception {
+        RequestOperation<ListSonicallySimilarRequest, ListSonicallySimilarResponse> operation
+              = new ListSonicallySimilar.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Set metadata preferences
+     * 
+     * <p>Set the preferences on a metadata item
+     * 
+     * @return The call builder
+     */
+    public SetItemPreferencesRequestBuilder setItemPreferences() {
+        return new SetItemPreferencesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Set metadata preferences
+     * 
+     * <p>Set the preferences on a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public SetItemPreferencesResponse setItemPreferences(SetItemPreferencesRequest request) throws Exception {
+        RequestOperation<SetItemPreferencesRequest, SetItemPreferencesResponse> operation
+              = new SetItemPreferences.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Refresh a metadata item
+     * 
+     * <p>Refresh a metadata item from the agent
+     * 
+     * @return The call builder
+     */
+    public RefreshItemsMetadataRequestBuilder refreshItemsMetadata() {
+        return new RefreshItemsMetadataRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Refresh a metadata item
+     * 
+     * <p>Refresh a metadata item from the agent
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public RefreshItemsMetadataResponse refreshItemsMetadata(RefreshItemsMetadataRequest request) throws Exception {
+        RequestOperation<RefreshItemsMetadataRequest, RefreshItemsMetadataResponse> operation
+              = new RefreshItemsMetadata.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get related items
+     * 
+     * <p>Get a hub of related items to a metadata item
+     * 
+     * @return The call builder
+     */
+    public GetRelatedItemsRequestBuilder getRelatedItems() {
+        return new GetRelatedItemsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get related items
+     * 
+     * <p>Get a hub of related items to a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetRelatedItemsResponse getRelatedItems(GetRelatedItemsRequest request) throws Exception {
+        RequestOperation<GetRelatedItemsRequest, GetRelatedItemsResponse> operation
+              = new GetRelatedItems.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get similar items
+     * 
+     * <p>Get a list of similar items to a metadata item
+     * 
+     * @return The call builder
+     */
+    public ListSimilarRequestBuilder listSimilar() {
+        return new ListSimilarRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get similar items
+     * 
+     * <p>Get a list of similar items to a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public ListSimilarResponse listSimilar(ListSimilarRequest request) throws Exception {
+        RequestOperation<ListSimilarRequest, ListSimilarResponse> operation
+              = new ListSimilar.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Split a metadata item
+     * 
+     * <p>Split a metadata item into multiple items
+     * 
+     * @return The call builder
+     */
+    public SplitItemRequestBuilder splitItem() {
+        return new SplitItemRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Split a metadata item
+     * 
+     * <p>Split a metadata item into multiple items
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public SplitItemResponse splitItem(SplitItemRequest request) throws Exception {
+        RequestOperation<SplitItemRequest, SplitItemResponse> operation
+              = new SplitItem.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Add subtitles
+     * 
+     * <p>Add a subtitle to a metadata item
+     * 
+     * @return The call builder
+     */
+    public AddSubtitlesRequestBuilder addSubtitles() {
+        return new AddSubtitlesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Add subtitles
+     * 
+     * <p>Add a subtitle to a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public AddSubtitlesResponse addSubtitles(AddSubtitlesRequest request) throws Exception {
+        RequestOperation<AddSubtitlesRequest, AddSubtitlesResponse> operation
+              = new AddSubtitles.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get metadata items as a tree
+     * 
+     * <p>Get a tree of metadata items, such as the seasons/episodes of a show
+     * 
+     * @return The call builder
+     */
+    public GetItemTreeRequestBuilder getItemTree() {
+        return new GetItemTreeRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get metadata items as a tree
+     * 
+     * <p>Get a tree of metadata items, such as the seasons/episodes of a show
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetItemTreeResponse getItemTree(GetItemTreeRequest request) throws Exception {
+        RequestOperation<GetItemTreeRequest, GetItemTreeResponse> operation
+              = new GetItemTree.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Unmatch a metadata item
+     * 
+     * <p>Unmatch a metadata item to info fetched from the agent
+     * 
+     * @return The call builder
+     */
+    public UnmatchRequestBuilder unmatch() {
+        return new UnmatchRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Unmatch a metadata item
+     * 
+     * <p>Unmatch a metadata item to info fetched from the agent
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public UnmatchResponse unmatch(UnmatchRequest request) throws Exception {
+        RequestOperation<UnmatchRequest, UnmatchResponse> operation
+              = new Unmatch.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get metadata top users
+     * 
+     * <p>Get the list of users which have played this item starting with the most
+     * 
+     * @return The call builder
+     */
+    public ListTopUsersRequestBuilder listTopUsers() {
+        return new ListTopUsersRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get metadata top users
+     * 
+     * <p>Get the list of users which have played this item starting with the most
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public ListTopUsersResponse listTopUsers(ListTopUsersRequest request) throws Exception {
+        RequestOperation<ListTopUsersRequest, ListTopUsersResponse> operation
+              = new ListTopUsers.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Detect voice activity
+     * 
+     * <p>Start the detection of voice in a metadata item
+     * 
+     * @return The call builder
+     */
+    public DetectVoiceActivityRequestBuilder detectVoiceActivity() {
+        return new DetectVoiceActivityRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Detect voice activity
+     * 
+     * <p>Start the detection of voice in a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public DetectVoiceActivityResponse detectVoiceActivity(DetectVoiceActivityRequest request) throws Exception {
+        RequestOperation<DetectVoiceActivityRequest, DetectVoiceActivityResponse> operation
+              = new DetectVoiceActivity.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get augmentation status
+     * 
+     * <p>Get augmentation status and potentially wait for completion
+     * 
+     * @return The call builder
+     */
+    public GetAugmentationStatusRequestBuilder getAugmentationStatus() {
+        return new GetAugmentationStatusRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get augmentation status
+     * 
+     * <p>Get augmentation status and potentially wait for completion
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetAugmentationStatusResponse getAugmentationStatus(GetAugmentationStatusRequest request) throws Exception {
+        RequestOperation<GetAugmentationStatusRequest, GetAugmentationStatusResponse> operation
+              = new GetAugmentationStatus.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Set stream selection
+     * 
+     * <p>Set which streams (audio/subtitle) are selected by this user
+     * 
+     * @return The call builder
+     */
+    public SetStreamSelectionRequestBuilder setStreamSelection() {
+        return new SetStreamSelectionRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Set stream selection
+     * 
+     * <p>Set which streams (audio/subtitle) are selected by this user
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public SetStreamSelectionResponse setStreamSelection(SetStreamSelectionRequest request) throws Exception {
+        RequestOperation<SetStreamSelectionRequest, SetStreamSelectionResponse> operation
+              = new SetStreamSelection.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get person details
+     * 
+     * <p>Get details for a single actor.
+     * 
+     * @return The call builder
+     */
+    public GetPersonRequestBuilder getPerson() {
+        return new GetPersonRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get person details
+     * 
+     * <p>Get details for a single actor.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetPersonResponse getPerson(GetPersonRequest request) throws Exception {
+        RequestOperation<GetPersonRequest, GetPersonResponse> operation
+              = new GetPerson.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get media for a person
+     * 
+     * <p>Get all the media for a single actor.
+     * 
+     * @return The call builder
+     */
+    public ListPersonMediaRequestBuilder listPersonMedia() {
+        return new ListPersonMediaRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get media for a person
+     * 
+     * <p>Get all the media for a single actor.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public ListPersonMediaResponse listPersonMedia(ListPersonMediaRequest request) throws Exception {
+        RequestOperation<ListPersonMediaRequest, ListPersonMediaResponse> operation
+              = new ListPersonMedia.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Delete a library section
+     * 
+     * <p>Delete a library section by id
+     * 
+     * @return The call builder
+     */
+    public DeleteLibrarySectionRequestBuilder deleteLibrarySection() {
+        return new DeleteLibrarySectionRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Delete a library section
+     * 
+     * <p>Delete a library section by id
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public DeleteLibrarySectionResponse deleteLibrarySection(DeleteLibrarySectionRequest request) throws Exception {
+        RequestOperation<DeleteLibrarySectionRequest, DeleteLibrarySectionResponse> operation
+              = new DeleteLibrarySection.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get a library section by id
+     * 
+     * <p>Returns details for the library. This can be thought of as an interstitial endpoint because it contains information about the library, rather than content itself. It often contains a list of `Directory` metadata objects: These used to be used by clients to build a menuing system.
+     * 
+     * @return The call builder
+     */
+    public GetLibraryDetailsRequestBuilder getLibraryDetails() {
+        return new GetLibraryDetailsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a library section by id
+     * 
+     * <p>Returns details for the library. This can be thought of as an interstitial endpoint because it contains information about the library, rather than content itself. It often contains a list of `Directory` metadata objects: These used to be used by clients to build a menuing system.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetLibraryDetailsResponse getLibraryDetails(GetLibraryDetailsRequest request) throws Exception {
+        RequestOperation<GetLibraryDetailsRequest, GetLibraryDetailsResponse> operation
+              = new GetLibraryDetails.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Edit a library section
+     * 
+     * <p>Edit a library section by id setting parameters
+     * 
+     * @return The call builder
+     */
+    public EditSectionRequestBuilder editSection() {
+        return new EditSectionRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Edit a library section
+     * 
+     * <p>Edit a library section by id setting parameters
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public EditSectionResponse editSection(EditSectionRequest request) throws Exception {
+        RequestOperation<EditSectionRequest, EditSectionResponse> operation
+              = new EditSection.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Set the fields of the filtered items
+     * 
+     * <p>This endpoint takes an large possible set of values.  Here are some examples.
+     * - **Parameters, extra documentation**
+     *   - artist.title.value
+     *       - When used with track, both artist.title.value and album.title.value need to be specified
+     *   - title.value usage
+     *       - Summary
+     *           - Tracks always rename and never merge
+     *           - Albums and Artists
+     *               - if single item and item without title does not exist, it is renamed.
+     *               - if single item and item with title does exist they are merged.
+     *               - if multiple they are always merged.
+     *       - Tracks
+     *           - Works as expected will update the track's title
+     *           - Single track:    `/library/sections/{id}/all?type=10&amp;id=42&amp;title.value=NewName`
+     *           - Multiple tracks: `/library/sections/{id}/all?type=10&amp;id=42,43,44&amp;title.value=NewName`
+     *           - All tracks:      `/library/sections/{id}/all?type=10&amp;title.value=NewName`
+     *       - Albums
+     *           - Functionality changes depending on the existence of an album with the same title
+     *           - Album exists
+     *               - Single album: `/library/sections/{id}/all?type=9&amp;id=42&amp;title.value=Album 2`
+     *                   - Album with id 42 is merged into album titled "Album 2"
+     *               - Multiple/All albums: `/library/sections/{id}/all?type=9&amp;title.value=Moo Album`
+     *                   - All albums are merged into the existing album titled "Moo Album"
+     *           - Album does not exist
+     *               - Single album: `/library/sections/{id}/all?type=9&amp;id=42&amp;title.value=NewAlbumTitle`
+     *                   - Album with id 42 has title modified to "NewAlbumTitle"
+     *               - Multiple/All albums: `/library/sections/{id}/all?type=9&amp;title.value=NewAlbumTitle`
+     *                   - All albums are merged into a new album with title="NewAlbumTitle"
+     *       - Artists
+     *           - Functionaly changes depending on the existence of an artist with the same title.
+     *           - Artist exists
+     *               - Single artist: `/library/sections/{id}/all?type=8&amp;id=42&amp;title.value=Artist 2`
+     *                   - Artist with id 42 is merged into existing artist titled "Artist 2"
+     *               - Multiple/All artists: `/library/sections/{id}/all?type=8&amp;title.value=Artist 3`
+     *                   - All artists are merged into the existing artist titled "Artist 3"
+     *           - Artist does not exist
+     *               - Single artist: `/library/sections/{id}/all?type=8&amp;id=42&amp;title.value=NewArtistTitle`
+     *                   - Artist with id 42 has title modified to "NewArtistTitle"
+     *               - Multiple/All artists: `/library/sections/{id}/all?type=8&amp;title.value=NewArtistTitle`
+     *                   - All artists are merged into a new artist with title="NewArtistTitle"
+     * 
+     * <p>- **Notes**
+     *     - Technically square brackets are not allowed in an URI except the Internet Protocol Literal Address
+     *     - RFC3513: A host identified by an Internet Protocol literal address, version 6 [RFC3513] or later, is distinguished by enclosing the IP literal within square brackets ("[" and "]"). This is the only place where square bracket characters are allowed in the URI syntax.
+     *     - Escaped square brackets are allowed, but don't render well
+     * 
+     * @return The call builder
+     */
+    public UpdateItemsRequestBuilder updateItems() {
+        return new UpdateItemsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Set the fields of the filtered items
+     * 
+     * <p>This endpoint takes an large possible set of values.  Here are some examples.
+     * - **Parameters, extra documentation**
+     *   - artist.title.value
+     *       - When used with track, both artist.title.value and album.title.value need to be specified
+     *   - title.value usage
+     *       - Summary
+     *           - Tracks always rename and never merge
+     *           - Albums and Artists
+     *               - if single item and item without title does not exist, it is renamed.
+     *               - if single item and item with title does exist they are merged.
+     *               - if multiple they are always merged.
+     *       - Tracks
+     *           - Works as expected will update the track's title
+     *           - Single track:    `/library/sections/{id}/all?type=10&amp;id=42&amp;title.value=NewName`
+     *           - Multiple tracks: `/library/sections/{id}/all?type=10&amp;id=42,43,44&amp;title.value=NewName`
+     *           - All tracks:      `/library/sections/{id}/all?type=10&amp;title.value=NewName`
+     *       - Albums
+     *           - Functionality changes depending on the existence of an album with the same title
+     *           - Album exists
+     *               - Single album: `/library/sections/{id}/all?type=9&amp;id=42&amp;title.value=Album 2`
+     *                   - Album with id 42 is merged into album titled "Album 2"
+     *               - Multiple/All albums: `/library/sections/{id}/all?type=9&amp;title.value=Moo Album`
+     *                   - All albums are merged into the existing album titled "Moo Album"
+     *           - Album does not exist
+     *               - Single album: `/library/sections/{id}/all?type=9&amp;id=42&amp;title.value=NewAlbumTitle`
+     *                   - Album with id 42 has title modified to "NewAlbumTitle"
+     *               - Multiple/All albums: `/library/sections/{id}/all?type=9&amp;title.value=NewAlbumTitle`
+     *                   - All albums are merged into a new album with title="NewAlbumTitle"
+     *       - Artists
+     *           - Functionaly changes depending on the existence of an artist with the same title.
+     *           - Artist exists
+     *               - Single artist: `/library/sections/{id}/all?type=8&amp;id=42&amp;title.value=Artist 2`
+     *                   - Artist with id 42 is merged into existing artist titled "Artist 2"
+     *               - Multiple/All artists: `/library/sections/{id}/all?type=8&amp;title.value=Artist 3`
+     *                   - All artists are merged into the existing artist titled "Artist 3"
+     *           - Artist does not exist
+     *               - Single artist: `/library/sections/{id}/all?type=8&amp;id=42&amp;title.value=NewArtistTitle`
+     *                   - Artist with id 42 has title modified to "NewArtistTitle"
+     *               - Multiple/All artists: `/library/sections/{id}/all?type=8&amp;title.value=NewArtistTitle`
+     *                   - All artists are merged into a new artist with title="NewArtistTitle"
+     * 
+     * <p>- **Notes**
+     *     - Technically square brackets are not allowed in an URI except the Internet Protocol Literal Address
+     *     - RFC3513: A host identified by an Internet Protocol literal address, version 6 [RFC3513] or later, is distinguished by enclosing the IP literal within square brackets ("[" and "]"). This is the only place where square bracket characters are allowed in the URI syntax.
+     *     - Escaped square brackets are allowed, but don't render well
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public UpdateItemsResponse updateItems(UpdateItemsRequest request) throws Exception {
+        RequestOperation<UpdateItemsRequest, UpdateItemsResponse> operation
+              = new UpdateItems.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Analyze a section
+     * 
+     * <p>Start analysis of all items in a section.  If BIF generation is enabled, this will also be started on this section
+     * 
+     * @return The call builder
+     */
+    public StartAnalysisRequestBuilder startAnalysis() {
+        return new StartAnalysisRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Analyze a section
+     * 
+     * <p>Start analysis of all items in a section.  If BIF generation is enabled, this will also be started on this section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public StartAnalysisResponse startAnalysis(StartAnalysisRequest request) throws Exception {
+        RequestOperation<StartAnalysisRequest, StartAnalysisResponse> operation
+              = new StartAnalysis.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get autocompletions for search
+     * 
+     * <p>The field to autocomplete on is specified by the {field}.query parameter. For example `genre.query` or `title.query`.
+     * Returns a set of items from the filtered items whose {field} starts with {field}.query.  In the results, a {field}.queryRange will be present to express the range of the match
+     * 
+     * @return The call builder
+     */
+    public AutocompleteRequestBuilder autocomplete() {
+        return new AutocompleteRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get autocompletions for search
+     * 
+     * <p>The field to autocomplete on is specified by the {field}.query parameter. For example `genre.query` or `title.query`.
+     * Returns a set of items from the filtered items whose {field} starts with {field}.query.  In the results, a {field}.queryRange will be present to express the range of the match
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public AutocompleteResponse autocomplete(AutocompleteRequest request) throws Exception {
+        RequestOperation<AutocompleteRequest, AutocompleteResponse> operation
+              = new Autocomplete.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get collections in a section
+     * 
+     * <p>Get all collections in a section
+     * 
+     * @return The call builder
+     */
+    public GetCollectionsRequestBuilder getCollections() {
+        return new GetCollectionsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get collections in a section
+     * 
+     * <p>Get all collections in a section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetCollectionsResponse getCollections(GetCollectionsRequest request) throws Exception {
+        RequestOperation<GetCollectionsRequest, GetCollectionsResponse> operation
+              = new GetCollections.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get common fields for items
+     * 
+     * <p>Represents a "Common" item. It contains only the common attributes of the items selected by the provided filter
+     * Fields which are not common will be expressed in the `mixedFields` field
+     * 
+     * @return The call builder
+     */
+    public GetCommonRequestBuilder getCommon() {
+        return new GetCommonRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get common fields for items
+     * 
+     * <p>Represents a "Common" item. It contains only the common attributes of the items selected by the provided filter
+     * Fields which are not common will be expressed in the `mixedFields` field
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetCommonResponse getCommon(GetCommonRequest request) throws Exception {
+        RequestOperation<GetCommonRequest, GetCommonResponse> operation
+              = new GetCommon.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Empty section trash
+     * 
+     * <p>Empty trash in the section, permanently deleting media/metadata for missing media
+     * 
+     * @return The call builder
+     */
+    public EmptyTrashRequestBuilder emptyTrash() {
+        return new EmptyTrashRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Empty section trash
+     * 
+     * <p>Empty trash in the section, permanently deleting media/metadata for missing media
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public EmptyTrashResponse emptyTrash(EmptyTrashRequest request) throws Exception {
+        RequestOperation<EmptyTrashRequest, EmptyTrashResponse> operation
+              = new EmptyTrash.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get section filters
+     * 
+     * <p>Get common filters on a section
+     * 
+     * @return The call builder
+     */
+    public GetSectionFiltersRequestBuilder getSectionFilters() {
+        return new GetSectionFiltersRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get section filters
+     * 
+     * <p>Get common filters on a section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetSectionFiltersResponse getSectionFilters(GetSectionFiltersRequest request) throws Exception {
+        RequestOperation<GetSectionFiltersRequest, GetSectionFiltersResponse> operation
+              = new GetSectionFilters.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get list of first characters
+     * 
+     * <p>Get list of first characters in this section
+     * 
+     * @return The call builder
+     */
+    public GetFirstCharactersRequestBuilder getFirstCharacters() {
+        return new GetFirstCharactersRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get list of first characters
+     * 
+     * <p>Get list of first characters in this section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetFirstCharactersResponse getFirstCharacters(GetFirstCharactersRequest request) throws Exception {
+        RequestOperation<GetFirstCharactersRequest, GetFirstCharactersResponse> operation
+              = new GetFirstCharacters.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Delete section indexes
+     * 
+     * <p>Delete all the indexes in a section
+     * 
+     * @return The call builder
+     */
+    public DeleteIndexesRequestBuilder deleteIndexes() {
+        return new DeleteIndexesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Delete section indexes
+     * 
+     * <p>Delete all the indexes in a section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public DeleteIndexesResponse deleteIndexes(DeleteIndexesRequest request) throws Exception {
+        RequestOperation<DeleteIndexesRequest, DeleteIndexesResponse> operation
+              = new DeleteIndexes.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Delete section intro markers
+     * 
+     * <p>Delete all the intro markers in a section
+     * 
+     * @return The call builder
+     */
+    public DeleteIntrosRequestBuilder deleteIntros() {
+        return new DeleteIntrosRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Delete section intro markers
+     * 
+     * <p>Delete all the intro markers in a section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public DeleteIntrosResponse deleteIntros(DeleteIntrosRequest request) throws Exception {
+        RequestOperation<DeleteIntrosRequest, DeleteIntrosResponse> operation
+              = new DeleteIntros.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get section prefs
+     * 
+     * <p>Get the prefs for a section by id and potentially overriding the agent
+     * 
+     * @return The call builder
+     */
+    public GetSectionPreferencesRequestBuilder getSectionPreferences() {
+        return new GetSectionPreferencesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get section prefs
+     * 
+     * <p>Get the prefs for a section by id and potentially overriding the agent
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetSectionPreferencesResponse getSectionPreferences(GetSectionPreferencesRequest request) throws Exception {
+        RequestOperation<GetSectionPreferencesRequest, GetSectionPreferencesResponse> operation
+              = new GetSectionPreferences.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Set section prefs
+     * 
+     * <p>Set the prefs for a section by id
+     * 
+     * @return The call builder
+     */
+    public SetSectionPreferencesRequestBuilder setSectionPreferences() {
+        return new SetSectionPreferencesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Set section prefs
+     * 
+     * <p>Set the prefs for a section by id
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public SetSectionPreferencesResponse setSectionPreferences(SetSectionPreferencesRequest request) throws Exception {
+        RequestOperation<SetSectionPreferencesRequest, SetSectionPreferencesResponse> operation
+              = new SetSectionPreferences.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Cancel section refresh
+     * 
+     * <p>Cancel the refresh of a section
+     * 
+     * @return The call builder
+     */
+    public CancelRefreshRequestBuilder cancelRefresh() {
+        return new CancelRefreshRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Cancel section refresh
+     * 
+     * <p>Cancel the refresh of a section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public CancelRefreshResponse cancelRefresh(CancelRefreshRequest request) throws Exception {
+        RequestOperation<CancelRefreshRequest, CancelRefreshResponse> operation
+              = new CancelRefresh.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Refresh section
+     * 
+     * <p>Start a refresh of this section
+     * 
+     * @return The call builder
+     */
+    public RefreshSectionRequestBuilder refreshSection() {
+        return new RefreshSectionRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Refresh section
+     * 
+     * <p>Start a refresh of this section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public RefreshSectionResponse refreshSection(RefreshSectionRequest request) throws Exception {
+        RequestOperation<RefreshSectionRequest, RefreshSectionResponse> operation
+              = new RefreshSection.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get a section sorts
+     * 
+     * <p>Get the sort mechanisms available in a section
+     * 
+     * @return The call builder
+     */
+    public GetAvailableSortsRequestBuilder getAvailableSorts() {
+        return new GetAvailableSortsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a section sorts
+     * 
+     * <p>Get the sort mechanisms available in a section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetAvailableSortsResponse getAvailableSorts(GetAvailableSortsRequest request) throws Exception {
+        RequestOperation<GetAvailableSortsRequest, GetAvailableSortsResponse> operation
+              = new GetAvailableSorts.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get loudness about a stream in json
+     * 
+     * <p>The the loudness of a stream in db, one entry per 100ms
+     * 
+     * @return The call builder
+     */
+    public GetStreamLevelsRequestBuilder getStreamLevels() {
+        return new GetStreamLevelsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get loudness about a stream in json
+     * 
+     * <p>The the loudness of a stream in db, one entry per 100ms
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetStreamLevelsResponse getStreamLevels(GetStreamLevelsRequest request) throws Exception {
+        RequestOperation<GetStreamLevelsRequest, GetStreamLevelsResponse> operation
+              = new GetStreamLevels.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get loudness about a stream
+     * 
+     * <p>The the loudness of a stream in db, one number per line, one entry per 100ms
+     * 
+     * @return The call builder
+     */
+    public GetStreamLoudnessRequestBuilder getStreamLoudness() {
+        return new GetStreamLoudnessRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get loudness about a stream
+     * 
+     * <p>The the loudness of a stream in db, one number per line, one entry per 100ms
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetStreamLoudnessResponse getStreamLoudness(GetStreamLoudnessRequest request) throws Exception {
+        RequestOperation<GetStreamLoudnessRequest, GetStreamLoudnessResponse> operation
+              = new GetStreamLoudness.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get a chapter image
+     * 
+     * <p>Get a single chapter image for a piece of media
+     * 
+     * @return The call builder
+     */
+    public GetChapterImageRequestBuilder getChapterImage() {
+        return new GetChapterImageRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a chapter image
+     * 
+     * <p>Get a single chapter image for a piece of media
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetChapterImageResponse getChapterImage(GetChapterImageRequest request) throws Exception {
+        RequestOperation<GetChapterImageRequest, GetChapterImageResponse> operation
+              = new GetChapterImage.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Set an item's artwork, theme, etc
+     * 
+     * <p>Set the artwork, thumb, element for a metadata item
+     * Generally only the admin can perform this action.  The exception is if the metadata is a playlist created by the user
+     * 
+     * @return The call builder
+     */
+    public SetItemArtworkRequestBuilder setItemArtwork() {
+        return new SetItemArtworkRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Set an item's artwork, theme, etc
+     * 
+     * <p>Set the artwork, thumb, element for a metadata item
+     * Generally only the admin can perform this action.  The exception is if the metadata is a playlist created by the user
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public SetItemArtworkResponse setItemArtwork(SetItemArtworkRequest request) throws Exception {
+        RequestOperation<SetItemArtworkRequest, SetItemArtworkResponse> operation
+              = new SetItemArtwork.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Set an item's artwork, theme, etc
+     * 
+     * <p>Set the artwork, thumb, element for a metadata item
+     * Generally only the admin can perform this action.  The exception is if the metadata is a playlist created by the user
+     * 
+     * @return The call builder
+     */
+    public UpdateItemArtworkRequestBuilder updateItemArtwork() {
+        return new UpdateItemArtworkRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Set an item's artwork, theme, etc
+     * 
+     * <p>Set the artwork, thumb, element for a metadata item
+     * Generally only the admin can perform this action.  The exception is if the metadata is a playlist created by the user
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public UpdateItemArtworkResponse updateItemArtwork(UpdateItemArtworkRequest request) throws Exception {
+        RequestOperation<UpdateItemArtworkRequest, UpdateItemArtworkResponse> operation
+              = new UpdateItemArtwork.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Delete a marker
+     * 
+     * <p>Delete a marker for this user on the metadata item
+     * 
+     * @return The call builder
+     */
+    public DeleteMarkerRequestBuilder deleteMarker() {
+        return new DeleteMarkerRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Delete a marker
+     * 
+     * <p>Delete a marker for this user on the metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public DeleteMarkerResponse deleteMarker(DeleteMarkerRequest request) throws Exception {
+        RequestOperation<DeleteMarkerRequest, DeleteMarkerResponse> operation
+              = new DeleteMarker.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Edit a marker
+     * 
+     * <p>Edit a marker for this user on the metadata item
+     * 
+     * @return The call builder
+     */
+    public EditMarkerRequestBuilder editMarker() {
+        return new EditMarkerRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Edit a marker
+     * 
+     * <p>Edit a marker for this user on the metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public EditMarkerResponse editMarker(EditMarkerRequest request) throws Exception {
+        RequestOperation<EditMarkerRequest, EditMarkerResponse> operation
+              = new EditMarker.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Delete a media item
+     * 
+     * <p>Delete a single media from a metadata item in the library
+     * 
+     * @return The call builder
+     */
+    public DeleteMediaItemRequestBuilder deleteMediaItem() {
+        return new DeleteMediaItemRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Delete a media item
+     * 
+     * <p>Delete a single media from a metadata item in the library
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public DeleteMediaItemResponse deleteMediaItem(DeleteMediaItemRequest request) throws Exception {
+        RequestOperation<DeleteMediaItemRequest, DeleteMediaItemResponse> operation
+              = new DeleteMediaItem.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get BIF index for a part
+     * 
+     * <p>Get BIF index for a part by index type
+     * 
+     * @return The call builder
+     */
+    public GetPartIndexRequestBuilder getPartIndex() {
+        return new GetPartIndexRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get BIF index for a part
+     * 
+     * <p>Get BIF index for a part by index type
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetPartIndexResponse getPartIndex(GetPartIndexRequest request) throws Exception {
+        RequestOperation<GetPartIndexRequest, GetPartIndexResponse> operation
+              = new GetPartIndex.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Delete a collection
+     * 
+     * <p>Delete a library collection from the PMS
+     * 
+     * @return The call builder
+     */
+    public DeleteCollectionRequestBuilder deleteCollection() {
+        return new DeleteCollectionRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Delete a collection
+     * 
+     * <p>Delete a library collection from the PMS
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public DeleteCollectionResponse deleteCollection(DeleteCollectionRequest request) throws Exception {
+        RequestOperation<DeleteCollectionRequest, DeleteCollectionResponse> operation
+              = new DeleteCollection.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get a section composite image
+     * 
+     * <p>Get a composite image of images in this section
+     * 
+     * @return The call builder
+     */
+    public GetSectionImageRequestBuilder getSectionImage() {
+        return new GetSectionImageRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a section composite image
+     * 
+     * <p>Get a composite image of images in this section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetSectionImageResponse getSectionImage(GetSectionImageRequest request) throws Exception {
+        RequestOperation<GetSectionImageRequest, GetSectionImageResponse> operation
+              = new GetSectionImage.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Delete a stream
+     * 
+     * <p>Delete a stream.  Only applies to downloaded subtitle streams or a sidecar subtitle when media deletion is enabled.
+     * 
+     * @return The call builder
+     */
+    public DeleteStreamRequestBuilder deleteStream() {
+        return new DeleteStreamRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Delete a stream
+     * 
+     * <p>Delete a stream.  Only applies to downloaded subtitle streams or a sidecar subtitle when media deletion is enabled.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public DeleteStreamResponse deleteStream(DeleteStreamRequest request) throws Exception {
+        RequestOperation<DeleteStreamRequest, DeleteStreamResponse> operation
+              = new DeleteStream.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get a stream
+     * 
+     * <p>Get a stream (such as a sidecar subtitle stream)
+     * 
+     * @return The call builder
+     */
+    public GetStreamRequestBuilder getStream() {
+        return new GetStreamRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a stream
+     * 
+     * <p>Get a stream (such as a sidecar subtitle stream)
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetStreamResponse getStream(GetStreamRequest request) throws Exception {
+        RequestOperation<GetStreamRequest, GetStreamResponse> operation
+              = new GetStream.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Set a stream offset
+     * 
+     * <p>Set a stream offset in ms.  This may not be respected by all clients
+     * 
+     * @return The call builder
+     */
+    public SetStreamOffsetRequestBuilder setStreamOffset() {
+        return new SetStreamOffsetRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Set a stream offset
+     * 
+     * <p>Set a stream offset in ms.  This may not be respected by all clients
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public SetStreamOffsetResponse setStreamOffset(SetStreamOffsetRequest request) throws Exception {
+        RequestOperation<SetStreamOffsetRequest, SetStreamOffsetResponse> operation
+              = new SetStreamOffset.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get an item's artwork, theme, etc
+     * 
+     * <p>Get the artwork, thumb, element for a metadata item
+     * 
+     * @return The call builder
+     */
+    public GetItemArtworkRequestBuilder getItemArtwork() {
+        return new GetItemArtworkRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get an item's artwork, theme, etc
+     * 
+     * <p>Get the artwork, thumb, element for a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetItemArtworkResponse getItemArtwork(GetItemArtworkRequest request) throws Exception {
+        RequestOperation<GetItemArtworkRequest, GetItemArtworkResponse> operation
+              = new GetItemArtwork.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get a media part
+     * 
+     * <p>Get a media part for streaming or download.
+     *   - streaming: This is the default scenario.  Bandwidth usage on this endpoint will be guaranteed (on the server's end) to be at least the bandwidth reservation given in the decision.  If no decision exists, an ad-hoc decision will be created if sufficient bandwidth exists.  Clients should not rely on ad-hoc decisions being made as this may be removed in the future.
+     *   - download: Indicated if the query parameter indicates this is a download.  Bandwidth will be prioritized behind playbacks and will get a fair share of what remains.
+     * 
+     * @return The call builder
+     */
+    public GetMediaPartRequestBuilder getMediaPart() {
+        return new GetMediaPartRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a media part
+     * 
+     * <p>Get a media part for streaming or download.
+     *   - streaming: This is the default scenario.  Bandwidth usage on this endpoint will be guaranteed (on the server's end) to be at least the bandwidth reservation given in the decision.  If no decision exists, an ad-hoc decision will be created if sufficient bandwidth exists.  Clients should not rely on ad-hoc decisions being made as this may be removed in the future.
+     *   - download: Indicated if the query parameter indicates this is a download.  Bandwidth will be prioritized behind playbacks and will get a fair share of what remains.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetMediaPartResponse getMediaPart(GetMediaPartRequest request) throws Exception {
+        RequestOperation<GetMediaPartRequest, GetMediaPartResponse> operation
+              = new GetMediaPart.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get an image from part BIF
+     * 
+     * <p>Extract an image from the BIF for a part at a particular offset
+     * 
+     * @return The call builder
+     */
+    public GetImageFromBifRequestBuilder getImageFromBif() {
+        return new GetImageFromBifRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get an image from part BIF
+     * 
+     * <p>Extract an image from the BIF for a part at a particular offset
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetImageFromBifResponse getImageFromBif(GetImageFromBifRequest request) throws Exception {
+        RequestOperation<GetImageFromBifRequest, GetImageFromBifResponse> operation
+              = new GetImageFromBif.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

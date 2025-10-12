@@ -6,84 +6,251 @@ package dev.plexapi.sdk.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.models.shared.Accepts;
+import dev.plexapi.sdk.models.shared.BoolInt;
 import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.SpeakeasyMetadata;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.Optional;
 
 
 public class UploadPlaylistRequest {
     /**
-     * absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server.
-     * If the `path` argument is a directory, that path will be scanned for playlist files to be processed.
-     * Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it.
-     * The GUID of each playlist is based on the filename.
-     * If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it.
-     * The GUID of each playlist is based on the filename.
+     * Indicates the client accepts the indicated media types
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=accepts")
+    private Optional<? extends Accepts> accepts;
+
+    /**
+     * An opaque identifier unique to the client
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Client-Identifier")
+    private Optional<String> clientIdentifier;
+
+    /**
+     * The name of the client product
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Product")
+    private Optional<String> product;
+
+    /**
+     * The version of the client application
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Version")
+    private Optional<String> version;
+
+    /**
+     * The platform of the client
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Platform")
+    private Optional<String> platform;
+
+    /**
+     * The version of the platform
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Platform-Version")
+    private Optional<String> platformVersion;
+
+    /**
+     * A relatively friendly name for the client device
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Device")
+    private Optional<String> device;
+
+    /**
+     * A potentially less friendly identifier for the device model
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Model")
+    private Optional<String> model;
+
+    /**
+     * The device vendor
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Device-Vendor")
+    private Optional<String> deviceVendor;
+
+    /**
+     * A friendly name for the client
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Device-Name")
+    private Optional<String> deviceName;
+
+    /**
+     * The marketplace on which the client application is distributed
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Marketplace")
+    private Optional<String> marketplace;
+
+    /**
+     * Absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server. If the `path` argument is a directory, that path will be scanned for playlist files to be processed. Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it. The GUID of each playlist is based on the filename. If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it. The GUID of each playlist is based on the filename.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=path")
-    private String path;
+    private Optional<String> path;
 
     /**
-     * Force overwriting of duplicate playlists.
-     * By default, a playlist file uploaded with the same path will overwrite the existing playlist.
-     * The `force` argument is used to disable overwriting.
-     * If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.
+     * Force overwriting of duplicate playlists. By default, a playlist file uploaded with the same path will overwrite the existing playlist. The `force` argument is used to disable overwriting. If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=force")
-    private QueryParamForce force;
-
-    /**
-     * Possibly the section ID to upload the playlist to, we are not certain.
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=sectionID")
-    private long sectionID;
+    private Optional<? extends BoolInt> force;
 
     @JsonCreator
     public UploadPlaylistRequest(
-            String path,
-            QueryParamForce force,
-            long sectionID) {
+            Optional<? extends Accepts> accepts,
+            Optional<String> clientIdentifier,
+            Optional<String> product,
+            Optional<String> version,
+            Optional<String> platform,
+            Optional<String> platformVersion,
+            Optional<String> device,
+            Optional<String> model,
+            Optional<String> deviceVendor,
+            Optional<String> deviceName,
+            Optional<String> marketplace,
+            Optional<String> path,
+            Optional<? extends BoolInt> force) {
+        Utils.checkNotNull(accepts, "accepts");
+        Utils.checkNotNull(clientIdentifier, "clientIdentifier");
+        Utils.checkNotNull(product, "product");
+        Utils.checkNotNull(version, "version");
+        Utils.checkNotNull(platform, "platform");
+        Utils.checkNotNull(platformVersion, "platformVersion");
+        Utils.checkNotNull(device, "device");
+        Utils.checkNotNull(model, "model");
+        Utils.checkNotNull(deviceVendor, "deviceVendor");
+        Utils.checkNotNull(deviceName, "deviceName");
+        Utils.checkNotNull(marketplace, "marketplace");
         Utils.checkNotNull(path, "path");
         Utils.checkNotNull(force, "force");
-        Utils.checkNotNull(sectionID, "sectionID");
+        this.accepts = accepts;
+        this.clientIdentifier = clientIdentifier;
+        this.product = product;
+        this.version = version;
+        this.platform = platform;
+        this.platformVersion = platformVersion;
+        this.device = device;
+        this.model = model;
+        this.deviceVendor = deviceVendor;
+        this.deviceName = deviceName;
+        this.marketplace = marketplace;
         this.path = path;
         this.force = force;
-        this.sectionID = sectionID;
+    }
+    
+    public UploadPlaylistRequest() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
     /**
-     * absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server.
-     * If the `path` argument is a directory, that path will be scanned for playlist files to be processed.
-     * Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it.
-     * The GUID of each playlist is based on the filename.
-     * If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it.
-     * The GUID of each playlist is based on the filename.
+     * Indicates the client accepts the indicated media types
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Accepts> accepts() {
+        return (Optional<Accepts>) accepts;
+    }
+
+    /**
+     * An opaque identifier unique to the client
      */
     @JsonIgnore
-    public String path() {
+    public Optional<String> clientIdentifier() {
+        return clientIdentifier;
+    }
+
+    /**
+     * The name of the client product
+     */
+    @JsonIgnore
+    public Optional<String> product() {
+        return product;
+    }
+
+    /**
+     * The version of the client application
+     */
+    @JsonIgnore
+    public Optional<String> version() {
+        return version;
+    }
+
+    /**
+     * The platform of the client
+     */
+    @JsonIgnore
+    public Optional<String> platform() {
+        return platform;
+    }
+
+    /**
+     * The version of the platform
+     */
+    @JsonIgnore
+    public Optional<String> platformVersion() {
+        return platformVersion;
+    }
+
+    /**
+     * A relatively friendly name for the client device
+     */
+    @JsonIgnore
+    public Optional<String> device() {
+        return device;
+    }
+
+    /**
+     * A potentially less friendly identifier for the device model
+     */
+    @JsonIgnore
+    public Optional<String> model() {
+        return model;
+    }
+
+    /**
+     * The device vendor
+     */
+    @JsonIgnore
+    public Optional<String> deviceVendor() {
+        return deviceVendor;
+    }
+
+    /**
+     * A friendly name for the client
+     */
+    @JsonIgnore
+    public Optional<String> deviceName() {
+        return deviceName;
+    }
+
+    /**
+     * The marketplace on which the client application is distributed
+     */
+    @JsonIgnore
+    public Optional<String> marketplace() {
+        return marketplace;
+    }
+
+    /**
+     * Absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server. If the `path` argument is a directory, that path will be scanned for playlist files to be processed. Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it. The GUID of each playlist is based on the filename. If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it. The GUID of each playlist is based on the filename.
+     */
+    @JsonIgnore
+    public Optional<String> path() {
         return path;
     }
 
     /**
-     * Force overwriting of duplicate playlists.
-     * By default, a playlist file uploaded with the same path will overwrite the existing playlist.
-     * The `force` argument is used to disable overwriting.
-     * If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.
+     * Force overwriting of duplicate playlists. By default, a playlist file uploaded with the same path will overwrite the existing playlist. The `force` argument is used to disable overwriting. If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public QueryParamForce force() {
-        return force;
-    }
-
-    /**
-     * Possibly the section ID to upload the playlist to, we are not certain.
-     */
-    @JsonIgnore
-    public long sectionID() {
-        return sectionID;
+    public Optional<BoolInt> force() {
+        return (Optional<BoolInt>) force;
     }
 
     public static Builder builder() {
@@ -92,37 +259,249 @@ public class UploadPlaylistRequest {
 
 
     /**
-     * absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server.
-     * If the `path` argument is a directory, that path will be scanned for playlist files to be processed.
-     * Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it.
-     * The GUID of each playlist is based on the filename.
-     * If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it.
-     * The GUID of each playlist is based on the filename.
+     * Indicates the client accepts the indicated media types
+     */
+    public UploadPlaylistRequest withAccepts(Accepts accepts) {
+        Utils.checkNotNull(accepts, "accepts");
+        this.accepts = Optional.ofNullable(accepts);
+        return this;
+    }
+
+
+    /**
+     * Indicates the client accepts the indicated media types
+     */
+    public UploadPlaylistRequest withAccepts(Optional<? extends Accepts> accepts) {
+        Utils.checkNotNull(accepts, "accepts");
+        this.accepts = accepts;
+        return this;
+    }
+
+    /**
+     * An opaque identifier unique to the client
+     */
+    public UploadPlaylistRequest withClientIdentifier(String clientIdentifier) {
+        Utils.checkNotNull(clientIdentifier, "clientIdentifier");
+        this.clientIdentifier = Optional.ofNullable(clientIdentifier);
+        return this;
+    }
+
+
+    /**
+     * An opaque identifier unique to the client
+     */
+    public UploadPlaylistRequest withClientIdentifier(Optional<String> clientIdentifier) {
+        Utils.checkNotNull(clientIdentifier, "clientIdentifier");
+        this.clientIdentifier = clientIdentifier;
+        return this;
+    }
+
+    /**
+     * The name of the client product
+     */
+    public UploadPlaylistRequest withProduct(String product) {
+        Utils.checkNotNull(product, "product");
+        this.product = Optional.ofNullable(product);
+        return this;
+    }
+
+
+    /**
+     * The name of the client product
+     */
+    public UploadPlaylistRequest withProduct(Optional<String> product) {
+        Utils.checkNotNull(product, "product");
+        this.product = product;
+        return this;
+    }
+
+    /**
+     * The version of the client application
+     */
+    public UploadPlaylistRequest withVersion(String version) {
+        Utils.checkNotNull(version, "version");
+        this.version = Optional.ofNullable(version);
+        return this;
+    }
+
+
+    /**
+     * The version of the client application
+     */
+    public UploadPlaylistRequest withVersion(Optional<String> version) {
+        Utils.checkNotNull(version, "version");
+        this.version = version;
+        return this;
+    }
+
+    /**
+     * The platform of the client
+     */
+    public UploadPlaylistRequest withPlatform(String platform) {
+        Utils.checkNotNull(platform, "platform");
+        this.platform = Optional.ofNullable(platform);
+        return this;
+    }
+
+
+    /**
+     * The platform of the client
+     */
+    public UploadPlaylistRequest withPlatform(Optional<String> platform) {
+        Utils.checkNotNull(platform, "platform");
+        this.platform = platform;
+        return this;
+    }
+
+    /**
+     * The version of the platform
+     */
+    public UploadPlaylistRequest withPlatformVersion(String platformVersion) {
+        Utils.checkNotNull(platformVersion, "platformVersion");
+        this.platformVersion = Optional.ofNullable(platformVersion);
+        return this;
+    }
+
+
+    /**
+     * The version of the platform
+     */
+    public UploadPlaylistRequest withPlatformVersion(Optional<String> platformVersion) {
+        Utils.checkNotNull(platformVersion, "platformVersion");
+        this.platformVersion = platformVersion;
+        return this;
+    }
+
+    /**
+     * A relatively friendly name for the client device
+     */
+    public UploadPlaylistRequest withDevice(String device) {
+        Utils.checkNotNull(device, "device");
+        this.device = Optional.ofNullable(device);
+        return this;
+    }
+
+
+    /**
+     * A relatively friendly name for the client device
+     */
+    public UploadPlaylistRequest withDevice(Optional<String> device) {
+        Utils.checkNotNull(device, "device");
+        this.device = device;
+        return this;
+    }
+
+    /**
+     * A potentially less friendly identifier for the device model
+     */
+    public UploadPlaylistRequest withModel(String model) {
+        Utils.checkNotNull(model, "model");
+        this.model = Optional.ofNullable(model);
+        return this;
+    }
+
+
+    /**
+     * A potentially less friendly identifier for the device model
+     */
+    public UploadPlaylistRequest withModel(Optional<String> model) {
+        Utils.checkNotNull(model, "model");
+        this.model = model;
+        return this;
+    }
+
+    /**
+     * The device vendor
+     */
+    public UploadPlaylistRequest withDeviceVendor(String deviceVendor) {
+        Utils.checkNotNull(deviceVendor, "deviceVendor");
+        this.deviceVendor = Optional.ofNullable(deviceVendor);
+        return this;
+    }
+
+
+    /**
+     * The device vendor
+     */
+    public UploadPlaylistRequest withDeviceVendor(Optional<String> deviceVendor) {
+        Utils.checkNotNull(deviceVendor, "deviceVendor");
+        this.deviceVendor = deviceVendor;
+        return this;
+    }
+
+    /**
+     * A friendly name for the client
+     */
+    public UploadPlaylistRequest withDeviceName(String deviceName) {
+        Utils.checkNotNull(deviceName, "deviceName");
+        this.deviceName = Optional.ofNullable(deviceName);
+        return this;
+    }
+
+
+    /**
+     * A friendly name for the client
+     */
+    public UploadPlaylistRequest withDeviceName(Optional<String> deviceName) {
+        Utils.checkNotNull(deviceName, "deviceName");
+        this.deviceName = deviceName;
+        return this;
+    }
+
+    /**
+     * The marketplace on which the client application is distributed
+     */
+    public UploadPlaylistRequest withMarketplace(String marketplace) {
+        Utils.checkNotNull(marketplace, "marketplace");
+        this.marketplace = Optional.ofNullable(marketplace);
+        return this;
+    }
+
+
+    /**
+     * The marketplace on which the client application is distributed
+     */
+    public UploadPlaylistRequest withMarketplace(Optional<String> marketplace) {
+        Utils.checkNotNull(marketplace, "marketplace");
+        this.marketplace = marketplace;
+        return this;
+    }
+
+    /**
+     * Absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server. If the `path` argument is a directory, that path will be scanned for playlist files to be processed. Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it. The GUID of each playlist is based on the filename. If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it. The GUID of each playlist is based on the filename.
      */
     public UploadPlaylistRequest withPath(String path) {
+        Utils.checkNotNull(path, "path");
+        this.path = Optional.ofNullable(path);
+        return this;
+    }
+
+
+    /**
+     * Absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server. If the `path` argument is a directory, that path will be scanned for playlist files to be processed. Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it. The GUID of each playlist is based on the filename. If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it. The GUID of each playlist is based on the filename.
+     */
+    public UploadPlaylistRequest withPath(Optional<String> path) {
         Utils.checkNotNull(path, "path");
         this.path = path;
         return this;
     }
 
     /**
-     * Force overwriting of duplicate playlists.
-     * By default, a playlist file uploaded with the same path will overwrite the existing playlist.
-     * The `force` argument is used to disable overwriting.
-     * If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.
+     * Force overwriting of duplicate playlists. By default, a playlist file uploaded with the same path will overwrite the existing playlist. The `force` argument is used to disable overwriting. If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.
      */
-    public UploadPlaylistRequest withForce(QueryParamForce force) {
+    public UploadPlaylistRequest withForce(BoolInt force) {
         Utils.checkNotNull(force, "force");
-        this.force = force;
+        this.force = Optional.ofNullable(force);
         return this;
     }
 
+
     /**
-     * Possibly the section ID to upload the playlist to, we are not certain.
+     * Force overwriting of duplicate playlists. By default, a playlist file uploaded with the same path will overwrite the existing playlist. The `force` argument is used to disable overwriting. If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.
      */
-    public UploadPlaylistRequest withSectionID(long sectionID) {
-        Utils.checkNotNull(sectionID, "sectionID");
-        this.sectionID = sectionID;
+    public UploadPlaylistRequest withForce(Optional<? extends BoolInt> force) {
+        Utils.checkNotNull(force, "force");
+        this.force = force;
         return this;
     }
 
@@ -136,33 +515,77 @@ public class UploadPlaylistRequest {
         }
         UploadPlaylistRequest other = (UploadPlaylistRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.accepts, other.accepts) &&
+            Utils.enhancedDeepEquals(this.clientIdentifier, other.clientIdentifier) &&
+            Utils.enhancedDeepEquals(this.product, other.product) &&
+            Utils.enhancedDeepEquals(this.version, other.version) &&
+            Utils.enhancedDeepEquals(this.platform, other.platform) &&
+            Utils.enhancedDeepEquals(this.platformVersion, other.platformVersion) &&
+            Utils.enhancedDeepEquals(this.device, other.device) &&
+            Utils.enhancedDeepEquals(this.model, other.model) &&
+            Utils.enhancedDeepEquals(this.deviceVendor, other.deviceVendor) &&
+            Utils.enhancedDeepEquals(this.deviceName, other.deviceName) &&
+            Utils.enhancedDeepEquals(this.marketplace, other.marketplace) &&
             Utils.enhancedDeepEquals(this.path, other.path) &&
-            Utils.enhancedDeepEquals(this.force, other.force) &&
-            Utils.enhancedDeepEquals(this.sectionID, other.sectionID);
+            Utils.enhancedDeepEquals(this.force, other.force);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            path, force, sectionID);
+            accepts, clientIdentifier, product,
+            version, platform, platformVersion,
+            device, model, deviceVendor,
+            deviceName, marketplace, path,
+            force);
     }
     
     @Override
     public String toString() {
         return Utils.toString(UploadPlaylistRequest.class,
+                "accepts", accepts,
+                "clientIdentifier", clientIdentifier,
+                "product", product,
+                "version", version,
+                "platform", platform,
+                "platformVersion", platformVersion,
+                "device", device,
+                "model", model,
+                "deviceVendor", deviceVendor,
+                "deviceName", deviceName,
+                "marketplace", marketplace,
                 "path", path,
-                "force", force,
-                "sectionID", sectionID);
+                "force", force);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private String path;
+        private Optional<? extends Accepts> accepts;
 
-        private QueryParamForce force;
+        private Optional<String> clientIdentifier = Optional.empty();
 
-        private Long sectionID;
+        private Optional<String> product = Optional.empty();
+
+        private Optional<String> version = Optional.empty();
+
+        private Optional<String> platform = Optional.empty();
+
+        private Optional<String> platformVersion = Optional.empty();
+
+        private Optional<String> device = Optional.empty();
+
+        private Optional<String> model = Optional.empty();
+
+        private Optional<String> deviceVendor = Optional.empty();
+
+        private Optional<String> deviceName = Optional.empty();
+
+        private Optional<String> marketplace = Optional.empty();
+
+        private Optional<String> path = Optional.empty();
+
+        private Optional<? extends BoolInt> force = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -170,14 +593,227 @@ public class UploadPlaylistRequest {
 
 
         /**
-         * absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server.
-         * If the `path` argument is a directory, that path will be scanned for playlist files to be processed.
-         * Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it.
-         * The GUID of each playlist is based on the filename.
-         * If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it.
-         * The GUID of each playlist is based on the filename.
+         * Indicates the client accepts the indicated media types
+         */
+        public Builder accepts(Accepts accepts) {
+            Utils.checkNotNull(accepts, "accepts");
+            this.accepts = Optional.ofNullable(accepts);
+            return this;
+        }
+
+        /**
+         * Indicates the client accepts the indicated media types
+         */
+        public Builder accepts(Optional<? extends Accepts> accepts) {
+            Utils.checkNotNull(accepts, "accepts");
+            this.accepts = accepts;
+            return this;
+        }
+
+
+        /**
+         * An opaque identifier unique to the client
+         */
+        public Builder clientIdentifier(String clientIdentifier) {
+            Utils.checkNotNull(clientIdentifier, "clientIdentifier");
+            this.clientIdentifier = Optional.ofNullable(clientIdentifier);
+            return this;
+        }
+
+        /**
+         * An opaque identifier unique to the client
+         */
+        public Builder clientIdentifier(Optional<String> clientIdentifier) {
+            Utils.checkNotNull(clientIdentifier, "clientIdentifier");
+            this.clientIdentifier = clientIdentifier;
+            return this;
+        }
+
+
+        /**
+         * The name of the client product
+         */
+        public Builder product(String product) {
+            Utils.checkNotNull(product, "product");
+            this.product = Optional.ofNullable(product);
+            return this;
+        }
+
+        /**
+         * The name of the client product
+         */
+        public Builder product(Optional<String> product) {
+            Utils.checkNotNull(product, "product");
+            this.product = product;
+            return this;
+        }
+
+
+        /**
+         * The version of the client application
+         */
+        public Builder version(String version) {
+            Utils.checkNotNull(version, "version");
+            this.version = Optional.ofNullable(version);
+            return this;
+        }
+
+        /**
+         * The version of the client application
+         */
+        public Builder version(Optional<String> version) {
+            Utils.checkNotNull(version, "version");
+            this.version = version;
+            return this;
+        }
+
+
+        /**
+         * The platform of the client
+         */
+        public Builder platform(String platform) {
+            Utils.checkNotNull(platform, "platform");
+            this.platform = Optional.ofNullable(platform);
+            return this;
+        }
+
+        /**
+         * The platform of the client
+         */
+        public Builder platform(Optional<String> platform) {
+            Utils.checkNotNull(platform, "platform");
+            this.platform = platform;
+            return this;
+        }
+
+
+        /**
+         * The version of the platform
+         */
+        public Builder platformVersion(String platformVersion) {
+            Utils.checkNotNull(platformVersion, "platformVersion");
+            this.platformVersion = Optional.ofNullable(platformVersion);
+            return this;
+        }
+
+        /**
+         * The version of the platform
+         */
+        public Builder platformVersion(Optional<String> platformVersion) {
+            Utils.checkNotNull(platformVersion, "platformVersion");
+            this.platformVersion = platformVersion;
+            return this;
+        }
+
+
+        /**
+         * A relatively friendly name for the client device
+         */
+        public Builder device(String device) {
+            Utils.checkNotNull(device, "device");
+            this.device = Optional.ofNullable(device);
+            return this;
+        }
+
+        /**
+         * A relatively friendly name for the client device
+         */
+        public Builder device(Optional<String> device) {
+            Utils.checkNotNull(device, "device");
+            this.device = device;
+            return this;
+        }
+
+
+        /**
+         * A potentially less friendly identifier for the device model
+         */
+        public Builder model(String model) {
+            Utils.checkNotNull(model, "model");
+            this.model = Optional.ofNullable(model);
+            return this;
+        }
+
+        /**
+         * A potentially less friendly identifier for the device model
+         */
+        public Builder model(Optional<String> model) {
+            Utils.checkNotNull(model, "model");
+            this.model = model;
+            return this;
+        }
+
+
+        /**
+         * The device vendor
+         */
+        public Builder deviceVendor(String deviceVendor) {
+            Utils.checkNotNull(deviceVendor, "deviceVendor");
+            this.deviceVendor = Optional.ofNullable(deviceVendor);
+            return this;
+        }
+
+        /**
+         * The device vendor
+         */
+        public Builder deviceVendor(Optional<String> deviceVendor) {
+            Utils.checkNotNull(deviceVendor, "deviceVendor");
+            this.deviceVendor = deviceVendor;
+            return this;
+        }
+
+
+        /**
+         * A friendly name for the client
+         */
+        public Builder deviceName(String deviceName) {
+            Utils.checkNotNull(deviceName, "deviceName");
+            this.deviceName = Optional.ofNullable(deviceName);
+            return this;
+        }
+
+        /**
+         * A friendly name for the client
+         */
+        public Builder deviceName(Optional<String> deviceName) {
+            Utils.checkNotNull(deviceName, "deviceName");
+            this.deviceName = deviceName;
+            return this;
+        }
+
+
+        /**
+         * The marketplace on which the client application is distributed
+         */
+        public Builder marketplace(String marketplace) {
+            Utils.checkNotNull(marketplace, "marketplace");
+            this.marketplace = Optional.ofNullable(marketplace);
+            return this;
+        }
+
+        /**
+         * The marketplace on which the client application is distributed
+         */
+        public Builder marketplace(Optional<String> marketplace) {
+            Utils.checkNotNull(marketplace, "marketplace");
+            this.marketplace = marketplace;
+            return this;
+        }
+
+
+        /**
+         * Absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server. If the `path` argument is a directory, that path will be scanned for playlist files to be processed. Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it. The GUID of each playlist is based on the filename. If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it. The GUID of each playlist is based on the filename.
          */
         public Builder path(String path) {
+            Utils.checkNotNull(path, "path");
+            this.path = Optional.ofNullable(path);
+            return this;
+        }
+
+        /**
+         * Absolute path to a directory on the server where m3u files are stored, or the absolute path to a playlist file on the server. If the `path` argument is a directory, that path will be scanned for playlist files to be processed. Each file in that directory creates a separate playlist, with a name based on the filename of the file that created it. The GUID of each playlist is based on the filename. If the `path` argument is a file, that file will be used to create a new playlist, with the name based on the filename of the file that created it. The GUID of each playlist is based on the filename.
+         */
+        public Builder path(Optional<String> path) {
             Utils.checkNotNull(path, "path");
             this.path = path;
             return this;
@@ -185,41 +821,41 @@ public class UploadPlaylistRequest {
 
 
         /**
-         * Force overwriting of duplicate playlists.
-         * By default, a playlist file uploaded with the same path will overwrite the existing playlist.
-         * The `force` argument is used to disable overwriting.
-         * If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.
+         * Force overwriting of duplicate playlists. By default, a playlist file uploaded with the same path will overwrite the existing playlist. The `force` argument is used to disable overwriting. If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.
          */
-        public Builder force(QueryParamForce force) {
+        public Builder force(BoolInt force) {
+            Utils.checkNotNull(force, "force");
+            this.force = Optional.ofNullable(force);
+            return this;
+        }
+
+        /**
+         * Force overwriting of duplicate playlists. By default, a playlist file uploaded with the same path will overwrite the existing playlist. The `force` argument is used to disable overwriting. If the `force` argument is set to 0, a new playlist will be created suffixed with the date and time that the duplicate was uploaded.
+         */
+        public Builder force(Optional<? extends BoolInt> force) {
             Utils.checkNotNull(force, "force");
             this.force = force;
             return this;
         }
 
-
-        /**
-         * Possibly the section ID to upload the playlist to, we are not certain.
-         */
-        public Builder sectionID(long sectionID) {
-            Utils.checkNotNull(sectionID, "sectionID");
-            this.sectionID = sectionID;
-            return this;
-        }
-
         public UploadPlaylistRequest build() {
-            if (sectionID == null) {
-                sectionID = _SINGLETON_VALUE_SectionID.value();
+            if (accepts == null) {
+                accepts = _SINGLETON_VALUE_Accepts.value();
             }
 
             return new UploadPlaylistRequest(
-                path, force, sectionID);
+                accepts, clientIdentifier, product,
+                version, platform, platformVersion,
+                device, model, deviceVendor,
+                deviceName, marketplace, path,
+                force);
         }
 
 
-        private static final LazySingletonValue<Long> _SINGLETON_VALUE_SectionID =
+        private static final LazySingletonValue<Optional<? extends Accepts>> _SINGLETON_VALUE_Accepts =
                 new LazySingletonValue<>(
-                        "sectionID",
-                        "1",
-                        new TypeReference<Long>() {});
+                        "accepts",
+                        "\"application/xml\"",
+                        new TypeReference<Optional<? extends Accepts>>() {});
     }
 }

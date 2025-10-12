@@ -9,27 +9,18 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Double;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.List;
 import java.util.Optional;
 
 
 public class Device {
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("id")
-    private Optional<Double> id;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("name")
-    private Optional<String> name;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("platform")
-    private Optional<String> platform;
+    @JsonProperty("accessToken")
+    private Optional<String> accessToken;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -38,46 +29,38 @@ public class Device {
 
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("createdAt")
-    private Optional<Double> createdAt;
+    @JsonProperty("Connection")
+    private Optional<? extends List<Connection>> connection;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("name")
+    private Optional<String> name;
 
     @JsonCreator
     public Device(
-            @JsonProperty("id") Optional<Double> id,
-            @JsonProperty("name") Optional<String> name,
-            @JsonProperty("platform") Optional<String> platform,
+            @JsonProperty("accessToken") Optional<String> accessToken,
             @JsonProperty("clientIdentifier") Optional<String> clientIdentifier,
-            @JsonProperty("createdAt") Optional<Double> createdAt) {
-        Utils.checkNotNull(id, "id");
-        Utils.checkNotNull(name, "name");
-        Utils.checkNotNull(platform, "platform");
+            @JsonProperty("Connection") Optional<? extends List<Connection>> connection,
+            @JsonProperty("name") Optional<String> name) {
+        Utils.checkNotNull(accessToken, "accessToken");
         Utils.checkNotNull(clientIdentifier, "clientIdentifier");
-        Utils.checkNotNull(createdAt, "createdAt");
-        this.id = id;
-        this.name = name;
-        this.platform = platform;
+        Utils.checkNotNull(connection, "connection");
+        Utils.checkNotNull(name, "name");
+        this.accessToken = accessToken;
         this.clientIdentifier = clientIdentifier;
-        this.createdAt = createdAt;
+        this.connection = connection;
+        this.name = name;
     }
     
     public Device() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty());
     }
 
     @JsonIgnore
-    public Optional<Double> id() {
-        return id;
-    }
-
-    @JsonIgnore
-    public Optional<String> name() {
-        return name;
-    }
-
-    @JsonIgnore
-    public Optional<String> platform() {
-        return platform;
+    public Optional<String> accessToken() {
+        return accessToken;
     }
 
     @JsonIgnore
@@ -85,9 +68,15 @@ public class Device {
         return clientIdentifier;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Double> createdAt() {
-        return createdAt;
+    public Optional<List<Connection>> connection() {
+        return (Optional<List<Connection>>) connection;
+    }
+
+    @JsonIgnore
+    public Optional<String> name() {
+        return name;
     }
 
     public static Builder builder() {
@@ -95,42 +84,16 @@ public class Device {
     }
 
 
-    public Device withId(double id) {
-        Utils.checkNotNull(id, "id");
-        this.id = Optional.ofNullable(id);
+    public Device withAccessToken(String accessToken) {
+        Utils.checkNotNull(accessToken, "accessToken");
+        this.accessToken = Optional.ofNullable(accessToken);
         return this;
     }
 
 
-    public Device withId(Optional<Double> id) {
-        Utils.checkNotNull(id, "id");
-        this.id = id;
-        return this;
-    }
-
-    public Device withName(String name) {
-        Utils.checkNotNull(name, "name");
-        this.name = Optional.ofNullable(name);
-        return this;
-    }
-
-
-    public Device withName(Optional<String> name) {
-        Utils.checkNotNull(name, "name");
-        this.name = name;
-        return this;
-    }
-
-    public Device withPlatform(String platform) {
-        Utils.checkNotNull(platform, "platform");
-        this.platform = Optional.ofNullable(platform);
-        return this;
-    }
-
-
-    public Device withPlatform(Optional<String> platform) {
-        Utils.checkNotNull(platform, "platform");
-        this.platform = platform;
+    public Device withAccessToken(Optional<String> accessToken) {
+        Utils.checkNotNull(accessToken, "accessToken");
+        this.accessToken = accessToken;
         return this;
     }
 
@@ -147,16 +110,29 @@ public class Device {
         return this;
     }
 
-    public Device withCreatedAt(double createdAt) {
-        Utils.checkNotNull(createdAt, "createdAt");
-        this.createdAt = Optional.ofNullable(createdAt);
+    public Device withConnection(List<Connection> connection) {
+        Utils.checkNotNull(connection, "connection");
+        this.connection = Optional.ofNullable(connection);
         return this;
     }
 
 
-    public Device withCreatedAt(Optional<Double> createdAt) {
-        Utils.checkNotNull(createdAt, "createdAt");
-        this.createdAt = createdAt;
+    public Device withConnection(Optional<? extends List<Connection>> connection) {
+        Utils.checkNotNull(connection, "connection");
+        this.connection = connection;
+        return this;
+    }
+
+    public Device withName(String name) {
+        Utils.checkNotNull(name, "name");
+        this.name = Optional.ofNullable(name);
+        return this;
+    }
+
+
+    public Device withName(Optional<String> name) {
+        Utils.checkNotNull(name, "name");
+        this.name = name;
         return this;
     }
 
@@ -170,83 +146,53 @@ public class Device {
         }
         Device other = (Device) o;
         return 
-            Utils.enhancedDeepEquals(this.id, other.id) &&
-            Utils.enhancedDeepEquals(this.name, other.name) &&
-            Utils.enhancedDeepEquals(this.platform, other.platform) &&
+            Utils.enhancedDeepEquals(this.accessToken, other.accessToken) &&
             Utils.enhancedDeepEquals(this.clientIdentifier, other.clientIdentifier) &&
-            Utils.enhancedDeepEquals(this.createdAt, other.createdAt);
+            Utils.enhancedDeepEquals(this.connection, other.connection) &&
+            Utils.enhancedDeepEquals(this.name, other.name);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            id, name, platform,
-            clientIdentifier, createdAt);
+            accessToken, clientIdentifier, connection,
+            name);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Device.class,
-                "id", id,
-                "name", name,
-                "platform", platform,
+                "accessToken", accessToken,
                 "clientIdentifier", clientIdentifier,
-                "createdAt", createdAt);
+                "connection", connection,
+                "name", name);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<Double> id = Optional.empty();
-
-        private Optional<String> name = Optional.empty();
-
-        private Optional<String> platform = Optional.empty();
+        private Optional<String> accessToken = Optional.empty();
 
         private Optional<String> clientIdentifier = Optional.empty();
 
-        private Optional<Double> createdAt = Optional.empty();
+        private Optional<? extends List<Connection>> connection = Optional.empty();
+
+        private Optional<String> name = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        public Builder id(double id) {
-            Utils.checkNotNull(id, "id");
-            this.id = Optional.ofNullable(id);
+        public Builder accessToken(String accessToken) {
+            Utils.checkNotNull(accessToken, "accessToken");
+            this.accessToken = Optional.ofNullable(accessToken);
             return this;
         }
 
-        public Builder id(Optional<Double> id) {
-            Utils.checkNotNull(id, "id");
-            this.id = id;
-            return this;
-        }
-
-
-        public Builder name(String name) {
-            Utils.checkNotNull(name, "name");
-            this.name = Optional.ofNullable(name);
-            return this;
-        }
-
-        public Builder name(Optional<String> name) {
-            Utils.checkNotNull(name, "name");
-            this.name = name;
-            return this;
-        }
-
-
-        public Builder platform(String platform) {
-            Utils.checkNotNull(platform, "platform");
-            this.platform = Optional.ofNullable(platform);
-            return this;
-        }
-
-        public Builder platform(Optional<String> platform) {
-            Utils.checkNotNull(platform, "platform");
-            this.platform = platform;
+        public Builder accessToken(Optional<String> accessToken) {
+            Utils.checkNotNull(accessToken, "accessToken");
+            this.accessToken = accessToken;
             return this;
         }
 
@@ -264,23 +210,36 @@ public class Device {
         }
 
 
-        public Builder createdAt(double createdAt) {
-            Utils.checkNotNull(createdAt, "createdAt");
-            this.createdAt = Optional.ofNullable(createdAt);
+        public Builder connection(List<Connection> connection) {
+            Utils.checkNotNull(connection, "connection");
+            this.connection = Optional.ofNullable(connection);
             return this;
         }
 
-        public Builder createdAt(Optional<Double> createdAt) {
-            Utils.checkNotNull(createdAt, "createdAt");
-            this.createdAt = createdAt;
+        public Builder connection(Optional<? extends List<Connection>> connection) {
+            Utils.checkNotNull(connection, "connection");
+            this.connection = connection;
+            return this;
+        }
+
+
+        public Builder name(String name) {
+            Utils.checkNotNull(name, "name");
+            this.name = Optional.ofNullable(name);
+            return this;
+        }
+
+        public Builder name(Optional<String> name) {
+            Utils.checkNotNull(name, "name");
+            this.name = name;
             return this;
         }
 
         public Device build() {
 
             return new Device(
-                id, name, platform,
-                clientIdentifier, createdAt);
+                accessToken, clientIdentifier, connection,
+                name);
         }
 
     }

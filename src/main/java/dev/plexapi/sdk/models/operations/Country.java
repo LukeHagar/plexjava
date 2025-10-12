@@ -5,68 +5,154 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.Optional;
 
-/**
- * Country
- * 
- * <p>The filter query string for country media items.
- */
+
 public class Country {
     /**
-     * The unique identifier for the country.
-     * NOTE: This is different for each Plex server and is not globally unique.
+     * Three letter code
      */
-    @JsonProperty("id")
-    private int id;
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("code")
+    private Optional<String> code;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("example")
+    private Optional<String> example;
 
     /**
-     * The country of origin of this media item
+     * - `0`: The country is divided into regions, and following the key will lead to a list of regions.
+     * - `1`: The county is divided by postal codes, and an example code is returned in `example`.
+     * - `2`: The country has a single postal code, returned in `example`.
      */
-    @JsonProperty("tag")
-    private String tag;
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("flavor")
+    private Optional<? extends Flavor> flavor;
 
 
-    @JsonProperty("filter")
-    private String filter;
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("key")
+    private Optional<String> key;
+
+    /**
+     * Three letter language code
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("language")
+    private Optional<String> language;
+
+    /**
+     * The title of the language
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("languageTitle")
+    private Optional<String> languageTitle;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("title")
+    private Optional<String> title;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("type")
+    private Optional<String> type;
 
     @JsonCreator
     public Country(
-            @JsonProperty("id") int id,
-            @JsonProperty("tag") String tag,
-            @JsonProperty("filter") String filter) {
-        Utils.checkNotNull(id, "id");
-        Utils.checkNotNull(tag, "tag");
-        Utils.checkNotNull(filter, "filter");
-        this.id = id;
-        this.tag = tag;
-        this.filter = filter;
+            @JsonProperty("code") Optional<String> code,
+            @JsonProperty("example") Optional<String> example,
+            @JsonProperty("flavor") Optional<? extends Flavor> flavor,
+            @JsonProperty("key") Optional<String> key,
+            @JsonProperty("language") Optional<String> language,
+            @JsonProperty("languageTitle") Optional<String> languageTitle,
+            @JsonProperty("title") Optional<String> title,
+            @JsonProperty("type") Optional<String> type) {
+        Utils.checkNotNull(code, "code");
+        Utils.checkNotNull(example, "example");
+        Utils.checkNotNull(flavor, "flavor");
+        Utils.checkNotNull(key, "key");
+        Utils.checkNotNull(language, "language");
+        Utils.checkNotNull(languageTitle, "languageTitle");
+        Utils.checkNotNull(title, "title");
+        Utils.checkNotNull(type, "type");
+        this.code = code;
+        this.example = example;
+        this.flavor = flavor;
+        this.key = key;
+        this.language = language;
+        this.languageTitle = languageTitle;
+        this.title = title;
+        this.type = type;
+    }
+    
+    public Country() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty());
     }
 
     /**
-     * The unique identifier for the country.
-     * NOTE: This is different for each Plex server and is not globally unique.
+     * Three letter code
      */
     @JsonIgnore
-    public int id() {
-        return id;
+    public Optional<String> code() {
+        return code;
+    }
+
+    @JsonIgnore
+    public Optional<String> example() {
+        return example;
     }
 
     /**
-     * The country of origin of this media item
+     * - `0`: The country is divided into regions, and following the key will lead to a list of regions.
+     * - `1`: The county is divided by postal codes, and an example code is returned in `example`.
+     * - `2`: The country has a single postal code, returned in `example`.
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public String tag() {
-        return tag;
+    public Optional<Flavor> flavor() {
+        return (Optional<Flavor>) flavor;
     }
 
     @JsonIgnore
-    public String filter() {
-        return filter;
+    public Optional<String> key() {
+        return key;
+    }
+
+    /**
+     * Three letter language code
+     */
+    @JsonIgnore
+    public Optional<String> language() {
+        return language;
+    }
+
+    /**
+     * The title of the language
+     */
+    @JsonIgnore
+    public Optional<String> languageTitle() {
+        return languageTitle;
+    }
+
+    @JsonIgnore
+    public Optional<String> title() {
+        return title;
+    }
+
+    @JsonIgnore
+    public Optional<String> type() {
+        return type;
     }
 
     public static Builder builder() {
@@ -75,27 +161,134 @@ public class Country {
 
 
     /**
-     * The unique identifier for the country.
-     * NOTE: This is different for each Plex server and is not globally unique.
+     * Three letter code
      */
-    public Country withId(int id) {
-        Utils.checkNotNull(id, "id");
-        this.id = id;
+    public Country withCode(String code) {
+        Utils.checkNotNull(code, "code");
+        this.code = Optional.ofNullable(code);
+        return this;
+    }
+
+
+    /**
+     * Three letter code
+     */
+    public Country withCode(Optional<String> code) {
+        Utils.checkNotNull(code, "code");
+        this.code = code;
+        return this;
+    }
+
+    public Country withExample(String example) {
+        Utils.checkNotNull(example, "example");
+        this.example = Optional.ofNullable(example);
+        return this;
+    }
+
+
+    public Country withExample(Optional<String> example) {
+        Utils.checkNotNull(example, "example");
+        this.example = example;
         return this;
     }
 
     /**
-     * The country of origin of this media item
+     * - `0`: The country is divided into regions, and following the key will lead to a list of regions.
+     * - `1`: The county is divided by postal codes, and an example code is returned in `example`.
+     * - `2`: The country has a single postal code, returned in `example`.
      */
-    public Country withTag(String tag) {
-        Utils.checkNotNull(tag, "tag");
-        this.tag = tag;
+    public Country withFlavor(Flavor flavor) {
+        Utils.checkNotNull(flavor, "flavor");
+        this.flavor = Optional.ofNullable(flavor);
         return this;
     }
 
-    public Country withFilter(String filter) {
-        Utils.checkNotNull(filter, "filter");
-        this.filter = filter;
+
+    /**
+     * - `0`: The country is divided into regions, and following the key will lead to a list of regions.
+     * - `1`: The county is divided by postal codes, and an example code is returned in `example`.
+     * - `2`: The country has a single postal code, returned in `example`.
+     */
+    public Country withFlavor(Optional<? extends Flavor> flavor) {
+        Utils.checkNotNull(flavor, "flavor");
+        this.flavor = flavor;
+        return this;
+    }
+
+    public Country withKey(String key) {
+        Utils.checkNotNull(key, "key");
+        this.key = Optional.ofNullable(key);
+        return this;
+    }
+
+
+    public Country withKey(Optional<String> key) {
+        Utils.checkNotNull(key, "key");
+        this.key = key;
+        return this;
+    }
+
+    /**
+     * Three letter language code
+     */
+    public Country withLanguage(String language) {
+        Utils.checkNotNull(language, "language");
+        this.language = Optional.ofNullable(language);
+        return this;
+    }
+
+
+    /**
+     * Three letter language code
+     */
+    public Country withLanguage(Optional<String> language) {
+        Utils.checkNotNull(language, "language");
+        this.language = language;
+        return this;
+    }
+
+    /**
+     * The title of the language
+     */
+    public Country withLanguageTitle(String languageTitle) {
+        Utils.checkNotNull(languageTitle, "languageTitle");
+        this.languageTitle = Optional.ofNullable(languageTitle);
+        return this;
+    }
+
+
+    /**
+     * The title of the language
+     */
+    public Country withLanguageTitle(Optional<String> languageTitle) {
+        Utils.checkNotNull(languageTitle, "languageTitle");
+        this.languageTitle = languageTitle;
+        return this;
+    }
+
+    public Country withTitle(String title) {
+        Utils.checkNotNull(title, "title");
+        this.title = Optional.ofNullable(title);
+        return this;
+    }
+
+
+    public Country withTitle(Optional<String> title) {
+        Utils.checkNotNull(title, "title");
+        this.title = title;
+        return this;
+    }
+
+    public Country withType(String type) {
+        Utils.checkNotNull(type, "type");
+        this.type = Optional.ofNullable(type);
+        return this;
+    }
+
+
+    public Country withType(Optional<String> type) {
+        Utils.checkNotNull(type, "type");
+        this.type = type;
         return this;
     }
 
@@ -109,33 +302,55 @@ public class Country {
         }
         Country other = (Country) o;
         return 
-            Utils.enhancedDeepEquals(this.id, other.id) &&
-            Utils.enhancedDeepEquals(this.tag, other.tag) &&
-            Utils.enhancedDeepEquals(this.filter, other.filter);
+            Utils.enhancedDeepEquals(this.code, other.code) &&
+            Utils.enhancedDeepEquals(this.example, other.example) &&
+            Utils.enhancedDeepEquals(this.flavor, other.flavor) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.language, other.language) &&
+            Utils.enhancedDeepEquals(this.languageTitle, other.languageTitle) &&
+            Utils.enhancedDeepEquals(this.title, other.title) &&
+            Utils.enhancedDeepEquals(this.type, other.type);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            id, tag, filter);
+            code, example, flavor,
+            key, language, languageTitle,
+            title, type);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Country.class,
-                "id", id,
-                "tag", tag,
-                "filter", filter);
+                "code", code,
+                "example", example,
+                "flavor", flavor,
+                "key", key,
+                "language", language,
+                "languageTitle", languageTitle,
+                "title", title,
+                "type", type);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Integer id;
+        private Optional<String> code = Optional.empty();
 
-        private String tag;
+        private Optional<String> example = Optional.empty();
 
-        private String filter;
+        private Optional<? extends Flavor> flavor = Optional.empty();
+
+        private Optional<String> key = Optional.empty();
+
+        private Optional<String> language = Optional.empty();
+
+        private Optional<String> languageTitle = Optional.empty();
+
+        private Optional<String> title = Optional.empty();
+
+        private Optional<String> type = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -143,36 +358,142 @@ public class Country {
 
 
         /**
-         * The unique identifier for the country.
-         * NOTE: This is different for each Plex server and is not globally unique.
+         * Three letter code
          */
-        public Builder id(int id) {
-            Utils.checkNotNull(id, "id");
-            this.id = id;
+        public Builder code(String code) {
+            Utils.checkNotNull(code, "code");
+            this.code = Optional.ofNullable(code);
+            return this;
+        }
+
+        /**
+         * Three letter code
+         */
+        public Builder code(Optional<String> code) {
+            Utils.checkNotNull(code, "code");
+            this.code = code;
+            return this;
+        }
+
+
+        public Builder example(String example) {
+            Utils.checkNotNull(example, "example");
+            this.example = Optional.ofNullable(example);
+            return this;
+        }
+
+        public Builder example(Optional<String> example) {
+            Utils.checkNotNull(example, "example");
+            this.example = example;
             return this;
         }
 
 
         /**
-         * The country of origin of this media item
+         * - `0`: The country is divided into regions, and following the key will lead to a list of regions.
+         * - `1`: The county is divided by postal codes, and an example code is returned in `example`.
+         * - `2`: The country has a single postal code, returned in `example`.
          */
-        public Builder tag(String tag) {
-            Utils.checkNotNull(tag, "tag");
-            this.tag = tag;
+        public Builder flavor(Flavor flavor) {
+            Utils.checkNotNull(flavor, "flavor");
+            this.flavor = Optional.ofNullable(flavor);
+            return this;
+        }
+
+        /**
+         * - `0`: The country is divided into regions, and following the key will lead to a list of regions.
+         * - `1`: The county is divided by postal codes, and an example code is returned in `example`.
+         * - `2`: The country has a single postal code, returned in `example`.
+         */
+        public Builder flavor(Optional<? extends Flavor> flavor) {
+            Utils.checkNotNull(flavor, "flavor");
+            this.flavor = flavor;
             return this;
         }
 
 
-        public Builder filter(String filter) {
-            Utils.checkNotNull(filter, "filter");
-            this.filter = filter;
+        public Builder key(String key) {
+            Utils.checkNotNull(key, "key");
+            this.key = Optional.ofNullable(key);
+            return this;
+        }
+
+        public Builder key(Optional<String> key) {
+            Utils.checkNotNull(key, "key");
+            this.key = key;
+            return this;
+        }
+
+
+        /**
+         * Three letter language code
+         */
+        public Builder language(String language) {
+            Utils.checkNotNull(language, "language");
+            this.language = Optional.ofNullable(language);
+            return this;
+        }
+
+        /**
+         * Three letter language code
+         */
+        public Builder language(Optional<String> language) {
+            Utils.checkNotNull(language, "language");
+            this.language = language;
+            return this;
+        }
+
+
+        /**
+         * The title of the language
+         */
+        public Builder languageTitle(String languageTitle) {
+            Utils.checkNotNull(languageTitle, "languageTitle");
+            this.languageTitle = Optional.ofNullable(languageTitle);
+            return this;
+        }
+
+        /**
+         * The title of the language
+         */
+        public Builder languageTitle(Optional<String> languageTitle) {
+            Utils.checkNotNull(languageTitle, "languageTitle");
+            this.languageTitle = languageTitle;
+            return this;
+        }
+
+
+        public Builder title(String title) {
+            Utils.checkNotNull(title, "title");
+            this.title = Optional.ofNullable(title);
+            return this;
+        }
+
+        public Builder title(Optional<String> title) {
+            Utils.checkNotNull(title, "title");
+            this.title = title;
+            return this;
+        }
+
+
+        public Builder type(String type) {
+            Utils.checkNotNull(type, "type");
+            this.type = Optional.ofNullable(type);
+            return this;
+        }
+
+        public Builder type(Optional<String> type) {
+            Utils.checkNotNull(type, "type");
+            this.type = type;
             return this;
         }
 
         public Country build() {
 
             return new Country(
-                id, tag, filter);
+                code, example, flavor,
+                key, language, languageTitle,
+                title, type);
         }
 
     }

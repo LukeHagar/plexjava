@@ -6,10 +6,11 @@ package dev.plexapi.sdk.models.operations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.models.shared.Accepts;
+import dev.plexapi.sdk.models.shared.MediaQuery;
 import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.SpeakeasyMetadata;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -18,157 +19,220 @@ import java.util.Optional;
 
 public class GetLibraryItemsRequest {
     /**
-     * A key representing a specific tag within the section.
+     * Indicates the client accepts the indicated media types
      */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=tag")
-    private Tag tag;
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=accepts")
+    private Optional<? extends Accepts> accepts;
 
     /**
-     * Adds the Guids object to the response
+     * An opaque identifier unique to the client
      */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeGuids")
-    private Optional<? extends IncludeGuids> includeGuids;
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Client-Identifier")
+    private Optional<String> clientIdentifier;
 
     /**
-     * The type of media to retrieve or filter by.
-     * 1 = movie
-     * 2 = show
-     * 3 = season
-     * 4 = episode
-     * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
+     * The name of the client product
      */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")
-    private GetLibraryItemsQueryParamType type;
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Product")
+    private Optional<String> product;
 
     /**
-     * The unique key of the Plex library. 
-     * Note: This is unique in the context of the Plex server.
+     * The version of the client application
      */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=sectionKey")
-    private int sectionKey;
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Version")
+    private Optional<String> version;
 
     /**
-     * Adds the Meta object to the response
+     * The platform of the client
      */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeMeta")
-    private Optional<? extends GetLibraryItemsQueryParamIncludeMeta> includeMeta;
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Platform")
+    private Optional<String> platform;
 
     /**
-     * The index of the first item to return. If not specified, the first item will be returned.
-     * If the number of items exceeds the limit, the response will be paginated.
-     * By default this is 0
+     * The version of the platform
      */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Container-Start")
-    private Optional<Integer> xPlexContainerStart;
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Platform-Version")
+    private Optional<String> platformVersion;
 
     /**
-     * The number of items to return. If not specified, all items will be returned.
-     * If the number of items exceeds the limit, the response will be paginated.
-     * By default this is 50
+     * A relatively friendly name for the client device
      */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Container-Size")
-    private Optional<Integer> xPlexContainerSize;
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Device")
+    private Optional<String> device;
+
+    /**
+     * A potentially less friendly identifier for the device model
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Model")
+    private Optional<String> model;
+
+    /**
+     * The device vendor
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Device-Vendor")
+    private Optional<String> deviceVendor;
+
+    /**
+     * A friendly name for the client
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Device-Name")
+    private Optional<String> deviceName;
+
+    /**
+     * The marketplace on which the client application is distributed
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Marketplace")
+    private Optional<String> marketplace;
+
+    /**
+     * This is a complex query built of several parameters.  See [API Info section](#section/API-Info/Media-Queries) for information on building media queries
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=mediaQuery")
+    private Optional<? extends MediaQuery> mediaQuery;
 
     @JsonCreator
     public GetLibraryItemsRequest(
-            Tag tag,
-            Optional<? extends IncludeGuids> includeGuids,
-            GetLibraryItemsQueryParamType type,
-            int sectionKey,
-            Optional<? extends GetLibraryItemsQueryParamIncludeMeta> includeMeta,
-            Optional<Integer> xPlexContainerStart,
-            Optional<Integer> xPlexContainerSize) {
-        Utils.checkNotNull(tag, "tag");
-        Utils.checkNotNull(includeGuids, "includeGuids");
-        Utils.checkNotNull(type, "type");
-        Utils.checkNotNull(sectionKey, "sectionKey");
-        Utils.checkNotNull(includeMeta, "includeMeta");
-        Utils.checkNotNull(xPlexContainerStart, "xPlexContainerStart");
-        Utils.checkNotNull(xPlexContainerSize, "xPlexContainerSize");
-        this.tag = tag;
-        this.includeGuids = includeGuids;
-        this.type = type;
-        this.sectionKey = sectionKey;
-        this.includeMeta = includeMeta;
-        this.xPlexContainerStart = xPlexContainerStart;
-        this.xPlexContainerSize = xPlexContainerSize;
+            Optional<? extends Accepts> accepts,
+            Optional<String> clientIdentifier,
+            Optional<String> product,
+            Optional<String> version,
+            Optional<String> platform,
+            Optional<String> platformVersion,
+            Optional<String> device,
+            Optional<String> model,
+            Optional<String> deviceVendor,
+            Optional<String> deviceName,
+            Optional<String> marketplace,
+            Optional<? extends MediaQuery> mediaQuery) {
+        Utils.checkNotNull(accepts, "accepts");
+        Utils.checkNotNull(clientIdentifier, "clientIdentifier");
+        Utils.checkNotNull(product, "product");
+        Utils.checkNotNull(version, "version");
+        Utils.checkNotNull(platform, "platform");
+        Utils.checkNotNull(platformVersion, "platformVersion");
+        Utils.checkNotNull(device, "device");
+        Utils.checkNotNull(model, "model");
+        Utils.checkNotNull(deviceVendor, "deviceVendor");
+        Utils.checkNotNull(deviceName, "deviceName");
+        Utils.checkNotNull(marketplace, "marketplace");
+        Utils.checkNotNull(mediaQuery, "mediaQuery");
+        this.accepts = accepts;
+        this.clientIdentifier = clientIdentifier;
+        this.product = product;
+        this.version = version;
+        this.platform = platform;
+        this.platformVersion = platformVersion;
+        this.device = device;
+        this.model = model;
+        this.deviceVendor = deviceVendor;
+        this.deviceName = deviceName;
+        this.marketplace = marketplace;
+        this.mediaQuery = mediaQuery;
     }
     
-    public GetLibraryItemsRequest(
-            Tag tag,
-            GetLibraryItemsQueryParamType type,
-            int sectionKey) {
-        this(tag, Optional.empty(), type,
-            sectionKey, Optional.empty(), Optional.empty(),
-            Optional.empty());
+    public GetLibraryItemsRequest() {
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
-     * A key representing a specific tag within the section.
-     */
-    @JsonIgnore
-    public Tag tag() {
-        return tag;
-    }
-
-    /**
-     * Adds the Guids object to the response
+     * Indicates the client accepts the indicated media types
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<IncludeGuids> includeGuids() {
-        return (Optional<IncludeGuids>) includeGuids;
+    public Optional<Accepts> accepts() {
+        return (Optional<Accepts>) accepts;
     }
 
     /**
-     * The type of media to retrieve or filter by.
-     * 1 = movie
-     * 2 = show
-     * 3 = season
-     * 4 = episode
-     * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
+     * An opaque identifier unique to the client
      */
     @JsonIgnore
-    public GetLibraryItemsQueryParamType type() {
-        return type;
+    public Optional<String> clientIdentifier() {
+        return clientIdentifier;
     }
 
     /**
-     * The unique key of the Plex library. 
-     * Note: This is unique in the context of the Plex server.
+     * The name of the client product
      */
     @JsonIgnore
-    public int sectionKey() {
-        return sectionKey;
+    public Optional<String> product() {
+        return product;
     }
 
     /**
-     * Adds the Meta object to the response
+     * The version of the client application
+     */
+    @JsonIgnore
+    public Optional<String> version() {
+        return version;
+    }
+
+    /**
+     * The platform of the client
+     */
+    @JsonIgnore
+    public Optional<String> platform() {
+        return platform;
+    }
+
+    /**
+     * The version of the platform
+     */
+    @JsonIgnore
+    public Optional<String> platformVersion() {
+        return platformVersion;
+    }
+
+    /**
+     * A relatively friendly name for the client device
+     */
+    @JsonIgnore
+    public Optional<String> device() {
+        return device;
+    }
+
+    /**
+     * A potentially less friendly identifier for the device model
+     */
+    @JsonIgnore
+    public Optional<String> model() {
+        return model;
+    }
+
+    /**
+     * The device vendor
+     */
+    @JsonIgnore
+    public Optional<String> deviceVendor() {
+        return deviceVendor;
+    }
+
+    /**
+     * A friendly name for the client
+     */
+    @JsonIgnore
+    public Optional<String> deviceName() {
+        return deviceName;
+    }
+
+    /**
+     * The marketplace on which the client application is distributed
+     */
+    @JsonIgnore
+    public Optional<String> marketplace() {
+        return marketplace;
+    }
+
+    /**
+     * This is a complex query built of several parameters.  See [API Info section](#section/API-Info/Media-Queries) for information on building media queries
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<GetLibraryItemsQueryParamIncludeMeta> includeMeta() {
-        return (Optional<GetLibraryItemsQueryParamIncludeMeta>) includeMeta;
-    }
-
-    /**
-     * The index of the first item to return. If not specified, the first item will be returned.
-     * If the number of items exceeds the limit, the response will be paginated.
-     * By default this is 0
-     */
-    @JsonIgnore
-    public Optional<Integer> xPlexContainerStart() {
-        return xPlexContainerStart;
-    }
-
-    /**
-     * The number of items to return. If not specified, all items will be returned.
-     * If the number of items exceeds the limit, the response will be paginated.
-     * By default this is 50
-     */
-    @JsonIgnore
-    public Optional<Integer> xPlexContainerSize() {
-        return xPlexContainerSize;
+    public Optional<MediaQuery> mediaQuery() {
+        return (Optional<MediaQuery>) mediaQuery;
     }
 
     public static Builder builder() {
@@ -177,119 +241,230 @@ public class GetLibraryItemsRequest {
 
 
     /**
-     * A key representing a specific tag within the section.
+     * Indicates the client accepts the indicated media types
      */
-    public GetLibraryItemsRequest withTag(Tag tag) {
-        Utils.checkNotNull(tag, "tag");
-        this.tag = tag;
-        return this;
-    }
-
-    /**
-     * Adds the Guids object to the response
-     */
-    public GetLibraryItemsRequest withIncludeGuids(IncludeGuids includeGuids) {
-        Utils.checkNotNull(includeGuids, "includeGuids");
-        this.includeGuids = Optional.ofNullable(includeGuids);
+    public GetLibraryItemsRequest withAccepts(Accepts accepts) {
+        Utils.checkNotNull(accepts, "accepts");
+        this.accepts = Optional.ofNullable(accepts);
         return this;
     }
 
 
     /**
-     * Adds the Guids object to the response
+     * Indicates the client accepts the indicated media types
      */
-    public GetLibraryItemsRequest withIncludeGuids(Optional<? extends IncludeGuids> includeGuids) {
-        Utils.checkNotNull(includeGuids, "includeGuids");
-        this.includeGuids = includeGuids;
+    public GetLibraryItemsRequest withAccepts(Optional<? extends Accepts> accepts) {
+        Utils.checkNotNull(accepts, "accepts");
+        this.accepts = accepts;
         return this;
     }
 
     /**
-     * The type of media to retrieve or filter by.
-     * 1 = movie
-     * 2 = show
-     * 3 = season
-     * 4 = episode
-     * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
+     * An opaque identifier unique to the client
      */
-    public GetLibraryItemsRequest withType(GetLibraryItemsQueryParamType type) {
-        Utils.checkNotNull(type, "type");
-        this.type = type;
-        return this;
-    }
-
-    /**
-     * The unique key of the Plex library. 
-     * Note: This is unique in the context of the Plex server.
-     */
-    public GetLibraryItemsRequest withSectionKey(int sectionKey) {
-        Utils.checkNotNull(sectionKey, "sectionKey");
-        this.sectionKey = sectionKey;
-        return this;
-    }
-
-    /**
-     * Adds the Meta object to the response
-     */
-    public GetLibraryItemsRequest withIncludeMeta(GetLibraryItemsQueryParamIncludeMeta includeMeta) {
-        Utils.checkNotNull(includeMeta, "includeMeta");
-        this.includeMeta = Optional.ofNullable(includeMeta);
+    public GetLibraryItemsRequest withClientIdentifier(String clientIdentifier) {
+        Utils.checkNotNull(clientIdentifier, "clientIdentifier");
+        this.clientIdentifier = Optional.ofNullable(clientIdentifier);
         return this;
     }
 
 
     /**
-     * Adds the Meta object to the response
+     * An opaque identifier unique to the client
      */
-    public GetLibraryItemsRequest withIncludeMeta(Optional<? extends GetLibraryItemsQueryParamIncludeMeta> includeMeta) {
-        Utils.checkNotNull(includeMeta, "includeMeta");
-        this.includeMeta = includeMeta;
+    public GetLibraryItemsRequest withClientIdentifier(Optional<String> clientIdentifier) {
+        Utils.checkNotNull(clientIdentifier, "clientIdentifier");
+        this.clientIdentifier = clientIdentifier;
         return this;
     }
 
     /**
-     * The index of the first item to return. If not specified, the first item will be returned.
-     * If the number of items exceeds the limit, the response will be paginated.
-     * By default this is 0
+     * The name of the client product
      */
-    public GetLibraryItemsRequest withXPlexContainerStart(int xPlexContainerStart) {
-        Utils.checkNotNull(xPlexContainerStart, "xPlexContainerStart");
-        this.xPlexContainerStart = Optional.ofNullable(xPlexContainerStart);
-        return this;
-    }
-
-
-    /**
-     * The index of the first item to return. If not specified, the first item will be returned.
-     * If the number of items exceeds the limit, the response will be paginated.
-     * By default this is 0
-     */
-    public GetLibraryItemsRequest withXPlexContainerStart(Optional<Integer> xPlexContainerStart) {
-        Utils.checkNotNull(xPlexContainerStart, "xPlexContainerStart");
-        this.xPlexContainerStart = xPlexContainerStart;
-        return this;
-    }
-
-    /**
-     * The number of items to return. If not specified, all items will be returned.
-     * If the number of items exceeds the limit, the response will be paginated.
-     * By default this is 50
-     */
-    public GetLibraryItemsRequest withXPlexContainerSize(int xPlexContainerSize) {
-        Utils.checkNotNull(xPlexContainerSize, "xPlexContainerSize");
-        this.xPlexContainerSize = Optional.ofNullable(xPlexContainerSize);
+    public GetLibraryItemsRequest withProduct(String product) {
+        Utils.checkNotNull(product, "product");
+        this.product = Optional.ofNullable(product);
         return this;
     }
 
 
     /**
-     * The number of items to return. If not specified, all items will be returned.
-     * If the number of items exceeds the limit, the response will be paginated.
-     * By default this is 50
+     * The name of the client product
      */
-    public GetLibraryItemsRequest withXPlexContainerSize(Optional<Integer> xPlexContainerSize) {
-        Utils.checkNotNull(xPlexContainerSize, "xPlexContainerSize");
-        this.xPlexContainerSize = xPlexContainerSize;
+    public GetLibraryItemsRequest withProduct(Optional<String> product) {
+        Utils.checkNotNull(product, "product");
+        this.product = product;
+        return this;
+    }
+
+    /**
+     * The version of the client application
+     */
+    public GetLibraryItemsRequest withVersion(String version) {
+        Utils.checkNotNull(version, "version");
+        this.version = Optional.ofNullable(version);
+        return this;
+    }
+
+
+    /**
+     * The version of the client application
+     */
+    public GetLibraryItemsRequest withVersion(Optional<String> version) {
+        Utils.checkNotNull(version, "version");
+        this.version = version;
+        return this;
+    }
+
+    /**
+     * The platform of the client
+     */
+    public GetLibraryItemsRequest withPlatform(String platform) {
+        Utils.checkNotNull(platform, "platform");
+        this.platform = Optional.ofNullable(platform);
+        return this;
+    }
+
+
+    /**
+     * The platform of the client
+     */
+    public GetLibraryItemsRequest withPlatform(Optional<String> platform) {
+        Utils.checkNotNull(platform, "platform");
+        this.platform = platform;
+        return this;
+    }
+
+    /**
+     * The version of the platform
+     */
+    public GetLibraryItemsRequest withPlatformVersion(String platformVersion) {
+        Utils.checkNotNull(platformVersion, "platformVersion");
+        this.platformVersion = Optional.ofNullable(platformVersion);
+        return this;
+    }
+
+
+    /**
+     * The version of the platform
+     */
+    public GetLibraryItemsRequest withPlatformVersion(Optional<String> platformVersion) {
+        Utils.checkNotNull(platformVersion, "platformVersion");
+        this.platformVersion = platformVersion;
+        return this;
+    }
+
+    /**
+     * A relatively friendly name for the client device
+     */
+    public GetLibraryItemsRequest withDevice(String device) {
+        Utils.checkNotNull(device, "device");
+        this.device = Optional.ofNullable(device);
+        return this;
+    }
+
+
+    /**
+     * A relatively friendly name for the client device
+     */
+    public GetLibraryItemsRequest withDevice(Optional<String> device) {
+        Utils.checkNotNull(device, "device");
+        this.device = device;
+        return this;
+    }
+
+    /**
+     * A potentially less friendly identifier for the device model
+     */
+    public GetLibraryItemsRequest withModel(String model) {
+        Utils.checkNotNull(model, "model");
+        this.model = Optional.ofNullable(model);
+        return this;
+    }
+
+
+    /**
+     * A potentially less friendly identifier for the device model
+     */
+    public GetLibraryItemsRequest withModel(Optional<String> model) {
+        Utils.checkNotNull(model, "model");
+        this.model = model;
+        return this;
+    }
+
+    /**
+     * The device vendor
+     */
+    public GetLibraryItemsRequest withDeviceVendor(String deviceVendor) {
+        Utils.checkNotNull(deviceVendor, "deviceVendor");
+        this.deviceVendor = Optional.ofNullable(deviceVendor);
+        return this;
+    }
+
+
+    /**
+     * The device vendor
+     */
+    public GetLibraryItemsRequest withDeviceVendor(Optional<String> deviceVendor) {
+        Utils.checkNotNull(deviceVendor, "deviceVendor");
+        this.deviceVendor = deviceVendor;
+        return this;
+    }
+
+    /**
+     * A friendly name for the client
+     */
+    public GetLibraryItemsRequest withDeviceName(String deviceName) {
+        Utils.checkNotNull(deviceName, "deviceName");
+        this.deviceName = Optional.ofNullable(deviceName);
+        return this;
+    }
+
+
+    /**
+     * A friendly name for the client
+     */
+    public GetLibraryItemsRequest withDeviceName(Optional<String> deviceName) {
+        Utils.checkNotNull(deviceName, "deviceName");
+        this.deviceName = deviceName;
+        return this;
+    }
+
+    /**
+     * The marketplace on which the client application is distributed
+     */
+    public GetLibraryItemsRequest withMarketplace(String marketplace) {
+        Utils.checkNotNull(marketplace, "marketplace");
+        this.marketplace = Optional.ofNullable(marketplace);
+        return this;
+    }
+
+
+    /**
+     * The marketplace on which the client application is distributed
+     */
+    public GetLibraryItemsRequest withMarketplace(Optional<String> marketplace) {
+        Utils.checkNotNull(marketplace, "marketplace");
+        this.marketplace = marketplace;
+        return this;
+    }
+
+    /**
+     * This is a complex query built of several parameters.  See [API Info section](#section/API-Info/Media-Queries) for information on building media queries
+     */
+    public GetLibraryItemsRequest withMediaQuery(MediaQuery mediaQuery) {
+        Utils.checkNotNull(mediaQuery, "mediaQuery");
+        this.mediaQuery = Optional.ofNullable(mediaQuery);
+        return this;
+    }
+
+
+    /**
+     * This is a complex query built of several parameters.  See [API Info section](#section/API-Info/Media-Queries) for information on building media queries
+     */
+    public GetLibraryItemsRequest withMediaQuery(Optional<? extends MediaQuery> mediaQuery) {
+        Utils.checkNotNull(mediaQuery, "mediaQuery");
+        this.mediaQuery = mediaQuery;
         return this;
     }
 
@@ -303,51 +478,72 @@ public class GetLibraryItemsRequest {
         }
         GetLibraryItemsRequest other = (GetLibraryItemsRequest) o;
         return 
-            Utils.enhancedDeepEquals(this.tag, other.tag) &&
-            Utils.enhancedDeepEquals(this.includeGuids, other.includeGuids) &&
-            Utils.enhancedDeepEquals(this.type, other.type) &&
-            Utils.enhancedDeepEquals(this.sectionKey, other.sectionKey) &&
-            Utils.enhancedDeepEquals(this.includeMeta, other.includeMeta) &&
-            Utils.enhancedDeepEquals(this.xPlexContainerStart, other.xPlexContainerStart) &&
-            Utils.enhancedDeepEquals(this.xPlexContainerSize, other.xPlexContainerSize);
+            Utils.enhancedDeepEquals(this.accepts, other.accepts) &&
+            Utils.enhancedDeepEquals(this.clientIdentifier, other.clientIdentifier) &&
+            Utils.enhancedDeepEquals(this.product, other.product) &&
+            Utils.enhancedDeepEquals(this.version, other.version) &&
+            Utils.enhancedDeepEquals(this.platform, other.platform) &&
+            Utils.enhancedDeepEquals(this.platformVersion, other.platformVersion) &&
+            Utils.enhancedDeepEquals(this.device, other.device) &&
+            Utils.enhancedDeepEquals(this.model, other.model) &&
+            Utils.enhancedDeepEquals(this.deviceVendor, other.deviceVendor) &&
+            Utils.enhancedDeepEquals(this.deviceName, other.deviceName) &&
+            Utils.enhancedDeepEquals(this.marketplace, other.marketplace) &&
+            Utils.enhancedDeepEquals(this.mediaQuery, other.mediaQuery);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            tag, includeGuids, type,
-            sectionKey, includeMeta, xPlexContainerStart,
-            xPlexContainerSize);
+            accepts, clientIdentifier, product,
+            version, platform, platformVersion,
+            device, model, deviceVendor,
+            deviceName, marketplace, mediaQuery);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetLibraryItemsRequest.class,
-                "tag", tag,
-                "includeGuids", includeGuids,
-                "type", type,
-                "sectionKey", sectionKey,
-                "includeMeta", includeMeta,
-                "xPlexContainerStart", xPlexContainerStart,
-                "xPlexContainerSize", xPlexContainerSize);
+                "accepts", accepts,
+                "clientIdentifier", clientIdentifier,
+                "product", product,
+                "version", version,
+                "platform", platform,
+                "platformVersion", platformVersion,
+                "device", device,
+                "model", model,
+                "deviceVendor", deviceVendor,
+                "deviceName", deviceName,
+                "marketplace", marketplace,
+                "mediaQuery", mediaQuery);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Tag tag;
+        private Optional<? extends Accepts> accepts;
 
-        private Optional<? extends IncludeGuids> includeGuids;
+        private Optional<String> clientIdentifier = Optional.empty();
 
-        private GetLibraryItemsQueryParamType type;
+        private Optional<String> product = Optional.empty();
 
-        private Integer sectionKey;
+        private Optional<String> version = Optional.empty();
 
-        private Optional<? extends GetLibraryItemsQueryParamIncludeMeta> includeMeta;
+        private Optional<String> platform = Optional.empty();
 
-        private Optional<Integer> xPlexContainerStart;
+        private Optional<String> platformVersion = Optional.empty();
 
-        private Optional<Integer> xPlexContainerSize;
+        private Optional<String> device = Optional.empty();
+
+        private Optional<String> model = Optional.empty();
+
+        private Optional<String> deviceVendor = Optional.empty();
+
+        private Optional<String> deviceName = Optional.empty();
+
+        private Optional<String> marketplace = Optional.empty();
+
+        private Optional<? extends MediaQuery> mediaQuery = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -355,167 +551,249 @@ public class GetLibraryItemsRequest {
 
 
         /**
-         * A key representing a specific tag within the section.
+         * Indicates the client accepts the indicated media types
          */
-        public Builder tag(Tag tag) {
-            Utils.checkNotNull(tag, "tag");
-            this.tag = tag;
+        public Builder accepts(Accepts accepts) {
+            Utils.checkNotNull(accepts, "accepts");
+            this.accepts = Optional.ofNullable(accepts);
+            return this;
+        }
+
+        /**
+         * Indicates the client accepts the indicated media types
+         */
+        public Builder accepts(Optional<? extends Accepts> accepts) {
+            Utils.checkNotNull(accepts, "accepts");
+            this.accepts = accepts;
             return this;
         }
 
 
         /**
-         * Adds the Guids object to the response
+         * An opaque identifier unique to the client
          */
-        public Builder includeGuids(IncludeGuids includeGuids) {
-            Utils.checkNotNull(includeGuids, "includeGuids");
-            this.includeGuids = Optional.ofNullable(includeGuids);
+        public Builder clientIdentifier(String clientIdentifier) {
+            Utils.checkNotNull(clientIdentifier, "clientIdentifier");
+            this.clientIdentifier = Optional.ofNullable(clientIdentifier);
             return this;
         }
 
         /**
-         * Adds the Guids object to the response
+         * An opaque identifier unique to the client
          */
-        public Builder includeGuids(Optional<? extends IncludeGuids> includeGuids) {
-            Utils.checkNotNull(includeGuids, "includeGuids");
-            this.includeGuids = includeGuids;
-            return this;
-        }
-
-
-        /**
-         * The type of media to retrieve or filter by.
-         * 1 = movie
-         * 2 = show
-         * 3 = season
-         * 4 = episode
-         * E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
-         */
-        public Builder type(GetLibraryItemsQueryParamType type) {
-            Utils.checkNotNull(type, "type");
-            this.type = type;
+        public Builder clientIdentifier(Optional<String> clientIdentifier) {
+            Utils.checkNotNull(clientIdentifier, "clientIdentifier");
+            this.clientIdentifier = clientIdentifier;
             return this;
         }
 
 
         /**
-         * The unique key of the Plex library. 
-         * Note: This is unique in the context of the Plex server.
+         * The name of the client product
          */
-        public Builder sectionKey(int sectionKey) {
-            Utils.checkNotNull(sectionKey, "sectionKey");
-            this.sectionKey = sectionKey;
+        public Builder product(String product) {
+            Utils.checkNotNull(product, "product");
+            this.product = Optional.ofNullable(product);
+            return this;
+        }
+
+        /**
+         * The name of the client product
+         */
+        public Builder product(Optional<String> product) {
+            Utils.checkNotNull(product, "product");
+            this.product = product;
             return this;
         }
 
 
         /**
-         * Adds the Meta object to the response
+         * The version of the client application
          */
-        public Builder includeMeta(GetLibraryItemsQueryParamIncludeMeta includeMeta) {
-            Utils.checkNotNull(includeMeta, "includeMeta");
-            this.includeMeta = Optional.ofNullable(includeMeta);
+        public Builder version(String version) {
+            Utils.checkNotNull(version, "version");
+            this.version = Optional.ofNullable(version);
             return this;
         }
 
         /**
-         * Adds the Meta object to the response
+         * The version of the client application
          */
-        public Builder includeMeta(Optional<? extends GetLibraryItemsQueryParamIncludeMeta> includeMeta) {
-            Utils.checkNotNull(includeMeta, "includeMeta");
-            this.includeMeta = includeMeta;
-            return this;
-        }
-
-
-        /**
-         * The index of the first item to return. If not specified, the first item will be returned.
-         * If the number of items exceeds the limit, the response will be paginated.
-         * By default this is 0
-         */
-        public Builder xPlexContainerStart(int xPlexContainerStart) {
-            Utils.checkNotNull(xPlexContainerStart, "xPlexContainerStart");
-            this.xPlexContainerStart = Optional.ofNullable(xPlexContainerStart);
-            return this;
-        }
-
-        /**
-         * The index of the first item to return. If not specified, the first item will be returned.
-         * If the number of items exceeds the limit, the response will be paginated.
-         * By default this is 0
-         */
-        public Builder xPlexContainerStart(Optional<Integer> xPlexContainerStart) {
-            Utils.checkNotNull(xPlexContainerStart, "xPlexContainerStart");
-            this.xPlexContainerStart = xPlexContainerStart;
+        public Builder version(Optional<String> version) {
+            Utils.checkNotNull(version, "version");
+            this.version = version;
             return this;
         }
 
 
         /**
-         * The number of items to return. If not specified, all items will be returned.
-         * If the number of items exceeds the limit, the response will be paginated.
-         * By default this is 50
+         * The platform of the client
          */
-        public Builder xPlexContainerSize(int xPlexContainerSize) {
-            Utils.checkNotNull(xPlexContainerSize, "xPlexContainerSize");
-            this.xPlexContainerSize = Optional.ofNullable(xPlexContainerSize);
+        public Builder platform(String platform) {
+            Utils.checkNotNull(platform, "platform");
+            this.platform = Optional.ofNullable(platform);
             return this;
         }
 
         /**
-         * The number of items to return. If not specified, all items will be returned.
-         * If the number of items exceeds the limit, the response will be paginated.
-         * By default this is 50
+         * The platform of the client
          */
-        public Builder xPlexContainerSize(Optional<Integer> xPlexContainerSize) {
-            Utils.checkNotNull(xPlexContainerSize, "xPlexContainerSize");
-            this.xPlexContainerSize = xPlexContainerSize;
+        public Builder platform(Optional<String> platform) {
+            Utils.checkNotNull(platform, "platform");
+            this.platform = platform;
+            return this;
+        }
+
+
+        /**
+         * The version of the platform
+         */
+        public Builder platformVersion(String platformVersion) {
+            Utils.checkNotNull(platformVersion, "platformVersion");
+            this.platformVersion = Optional.ofNullable(platformVersion);
+            return this;
+        }
+
+        /**
+         * The version of the platform
+         */
+        public Builder platformVersion(Optional<String> platformVersion) {
+            Utils.checkNotNull(platformVersion, "platformVersion");
+            this.platformVersion = platformVersion;
+            return this;
+        }
+
+
+        /**
+         * A relatively friendly name for the client device
+         */
+        public Builder device(String device) {
+            Utils.checkNotNull(device, "device");
+            this.device = Optional.ofNullable(device);
+            return this;
+        }
+
+        /**
+         * A relatively friendly name for the client device
+         */
+        public Builder device(Optional<String> device) {
+            Utils.checkNotNull(device, "device");
+            this.device = device;
+            return this;
+        }
+
+
+        /**
+         * A potentially less friendly identifier for the device model
+         */
+        public Builder model(String model) {
+            Utils.checkNotNull(model, "model");
+            this.model = Optional.ofNullable(model);
+            return this;
+        }
+
+        /**
+         * A potentially less friendly identifier for the device model
+         */
+        public Builder model(Optional<String> model) {
+            Utils.checkNotNull(model, "model");
+            this.model = model;
+            return this;
+        }
+
+
+        /**
+         * The device vendor
+         */
+        public Builder deviceVendor(String deviceVendor) {
+            Utils.checkNotNull(deviceVendor, "deviceVendor");
+            this.deviceVendor = Optional.ofNullable(deviceVendor);
+            return this;
+        }
+
+        /**
+         * The device vendor
+         */
+        public Builder deviceVendor(Optional<String> deviceVendor) {
+            Utils.checkNotNull(deviceVendor, "deviceVendor");
+            this.deviceVendor = deviceVendor;
+            return this;
+        }
+
+
+        /**
+         * A friendly name for the client
+         */
+        public Builder deviceName(String deviceName) {
+            Utils.checkNotNull(deviceName, "deviceName");
+            this.deviceName = Optional.ofNullable(deviceName);
+            return this;
+        }
+
+        /**
+         * A friendly name for the client
+         */
+        public Builder deviceName(Optional<String> deviceName) {
+            Utils.checkNotNull(deviceName, "deviceName");
+            this.deviceName = deviceName;
+            return this;
+        }
+
+
+        /**
+         * The marketplace on which the client application is distributed
+         */
+        public Builder marketplace(String marketplace) {
+            Utils.checkNotNull(marketplace, "marketplace");
+            this.marketplace = Optional.ofNullable(marketplace);
+            return this;
+        }
+
+        /**
+         * The marketplace on which the client application is distributed
+         */
+        public Builder marketplace(Optional<String> marketplace) {
+            Utils.checkNotNull(marketplace, "marketplace");
+            this.marketplace = marketplace;
+            return this;
+        }
+
+
+        /**
+         * This is a complex query built of several parameters.  See [API Info section](#section/API-Info/Media-Queries) for information on building media queries
+         */
+        public Builder mediaQuery(MediaQuery mediaQuery) {
+            Utils.checkNotNull(mediaQuery, "mediaQuery");
+            this.mediaQuery = Optional.ofNullable(mediaQuery);
+            return this;
+        }
+
+        /**
+         * This is a complex query built of several parameters.  See [API Info section](#section/API-Info/Media-Queries) for information on building media queries
+         */
+        public Builder mediaQuery(Optional<? extends MediaQuery> mediaQuery) {
+            Utils.checkNotNull(mediaQuery, "mediaQuery");
+            this.mediaQuery = mediaQuery;
             return this;
         }
 
         public GetLibraryItemsRequest build() {
-            if (includeGuids == null) {
-                includeGuids = _SINGLETON_VALUE_IncludeGuids.value();
-            }
-            if (includeMeta == null) {
-                includeMeta = _SINGLETON_VALUE_IncludeMeta.value();
-            }
-            if (xPlexContainerStart == null) {
-                xPlexContainerStart = _SINGLETON_VALUE_XPlexContainerStart.value();
-            }
-            if (xPlexContainerSize == null) {
-                xPlexContainerSize = _SINGLETON_VALUE_XPlexContainerSize.value();
+            if (accepts == null) {
+                accepts = _SINGLETON_VALUE_Accepts.value();
             }
 
             return new GetLibraryItemsRequest(
-                tag, includeGuids, type,
-                sectionKey, includeMeta, xPlexContainerStart,
-                xPlexContainerSize);
+                accepts, clientIdentifier, product,
+                version, platform, platformVersion,
+                device, model, deviceVendor,
+                deviceName, marketplace, mediaQuery);
         }
 
 
-        private static final LazySingletonValue<Optional<? extends IncludeGuids>> _SINGLETON_VALUE_IncludeGuids =
+        private static final LazySingletonValue<Optional<? extends Accepts>> _SINGLETON_VALUE_Accepts =
                 new LazySingletonValue<>(
-                        "includeGuids",
-                        "0",
-                        new TypeReference<Optional<? extends IncludeGuids>>() {});
-
-        private static final LazySingletonValue<Optional<? extends GetLibraryItemsQueryParamIncludeMeta>> _SINGLETON_VALUE_IncludeMeta =
-                new LazySingletonValue<>(
-                        "includeMeta",
-                        "0",
-                        new TypeReference<Optional<? extends GetLibraryItemsQueryParamIncludeMeta>>() {});
-
-        private static final LazySingletonValue<Optional<Integer>> _SINGLETON_VALUE_XPlexContainerStart =
-                new LazySingletonValue<>(
-                        "X-Plex-Container-Start",
-                        "0",
-                        new TypeReference<Optional<Integer>>() {});
-
-        private static final LazySingletonValue<Optional<Integer>> _SINGLETON_VALUE_XPlexContainerSize =
-                new LazySingletonValue<>(
-                        "X-Plex-Container-Size",
-                        "50",
-                        new TypeReference<Optional<Integer>>() {});
+                        "accepts",
+                        "\"application/xml\"",
+                        new TypeReference<Optional<? extends Accepts>>() {});
     }
 }

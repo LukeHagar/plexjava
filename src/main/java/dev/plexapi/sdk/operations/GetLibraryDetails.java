@@ -9,8 +9,6 @@ import static dev.plexapi.sdk.operations.Operations.AsyncRequestOperation;
 import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.SDKConfiguration;
 import dev.plexapi.sdk.SecuritySource;
-import dev.plexapi.sdk.models.errors.GetLibraryDetailsBadRequest;
-import dev.plexapi.sdk.models.errors.GetLibraryDetailsUnauthorized;
 import dev.plexapi.sdk.models.errors.SDKError;
 import dev.plexapi.sdk.models.operations.GetLibraryDetailsRequest;
 import dev.plexapi.sdk.models.operations.GetLibraryDetailsResponse;
@@ -59,7 +57,7 @@ public class GetLibraryDetails {
             return new BeforeRequestContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "get-library-details",
+                    "getLibraryDetails",
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
@@ -68,7 +66,7 @@ public class GetLibraryDetails {
             return new AfterSuccessContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "get-library-details",
+                    "getLibraryDetails",
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
@@ -77,7 +75,7 @@ public class GetLibraryDetails {
             return new AfterErrorContextImpl(
                     this.sdkConfiguration,
                     this.baseUrl,
-                    "get-library-details",
+                    "getLibraryDetails",
                     java.util.Optional.of(java.util.List.of()),
                     securitySource());
         }
@@ -85,8 +83,8 @@ public class GetLibraryDetails {
             String url = Utils.generateURL(
                     klass,
                     this.baseUrl,
-                    "/library/sections/{sectionKey}",
-                    request, null);
+                    "/library/sections/{sectionId}",
+                    request, this.sdkConfiguration.globals);
             HTTPRequest req = new HTTPRequest(url, "GET");
             req.addHeader("Accept", "application/json")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
@@ -94,7 +92,8 @@ public class GetLibraryDetails {
             req.addQueryParams(Utils.getQueryParams(
                     klass,
                     request,
-                    null));
+                    this.sdkConfiguration.globals));
+            req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
             Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
 
             return req.build();
@@ -129,7 +128,7 @@ public class GetLibraryDetails {
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);
-                if (Utils.statusCodeMatches(httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                if (Utils.statusCodeMatches(httpRes.statusCode(), "4XX", "5XX")) {
                     httpRes = onError(httpRes, null);
                 } else {
                     httpRes = onSuccess(httpRes);
@@ -165,42 +164,6 @@ public class GetLibraryDetails {
                             });
                     res.withObject(out);
                     return res;
-                } else {
-                    throw new SDKError(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "400")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    GetLibraryDetailsBadRequest out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                        out.withRawResponse(response);
-                    
-                    throw out;
-                } else {
-                    throw new SDKError(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "401")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    GetLibraryDetailsUnauthorized out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                        out.withRawResponse(response);
-                    
-                    throw out;
                 } else {
                     throw new SDKError(
                             response,
@@ -262,7 +225,7 @@ public class GetLibraryDetails {
                         if (err != null) {
                             return onError(null, err);
                         }
-                        if (Utils.statusCodeMatches(resp.statusCode(), "400", "401", "4XX", "5XX")) {
+                        if (Utils.statusCodeMatches(resp.statusCode(), "4XX", "5XX")) {
                             return onError(resp, null);
                         }
                         return CompletableFuture.completedFuture(resp);
@@ -300,46 +263,6 @@ public class GetLibraryDetails {
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
-                    });
-                } else {
-                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "400")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return response.body().toByteArray().thenApply(bodyBytes -> {
-                        dev.plexapi.sdk.models.errors.async.GetLibraryDetailsBadRequest out;
-                        try {
-                            out = Utils.mapper().readValue(
-                                    bodyBytes,
-                                    new TypeReference<>() {
-                                    });
-                            out.withRawResponse(response);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                        throw out;
-                    });
-                } else {
-                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "401")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return response.body().toByteArray().thenApply(bodyBytes -> {
-                        dev.plexapi.sdk.models.errors.async.GetLibraryDetailsUnauthorized out;
-                        try {
-                            out = Utils.mapper().readValue(
-                                    bodyBytes,
-                                    new TypeReference<>() {
-                                    });
-                            out.withRawResponse(response);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                        throw out;
                     });
                 } else {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);

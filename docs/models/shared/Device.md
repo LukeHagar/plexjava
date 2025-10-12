@@ -1,0 +1,20 @@
+# Device
+
+
+## Fields
+
+| Field                                                          | Type                                                           | Required                                                       | Description                                                    |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| `channelMapping`                                               | List\<[ChannelMapping](../../models/shared/ChannelMapping.md)> | :heavy_minus_sign:                                             | N/A                                                            |
+| `key`                                                          | *Optional\<String>*                                            | :heavy_minus_sign:                                             | N/A                                                            |
+| `lastSeenAt`                                                   | *Optional\<Long>*                                              | :heavy_minus_sign:                                             | N/A                                                            |
+| `make`                                                         | *Optional\<String>*                                            | :heavy_minus_sign:                                             | N/A                                                            |
+| `model`                                                        | *Optional\<String>*                                            | :heavy_minus_sign:                                             | N/A                                                            |
+| `modelNumber`                                                  | *Optional\<String>*                                            | :heavy_minus_sign:                                             | N/A                                                            |
+| `protocol`                                                     | *Optional\<String>*                                            | :heavy_minus_sign:                                             | N/A                                                            |
+| `sources`                                                      | *Optional\<String>*                                            | :heavy_minus_sign:                                             | N/A                                                            |
+| `state`                                                        | *Optional\<String>*                                            | :heavy_minus_sign:                                             | N/A                                                            |
+| `status`                                                       | *Optional\<String>*                                            | :heavy_minus_sign:                                             | N/A                                                            |
+| `tuners`                                                       | *Optional\<String>*                                            | :heavy_minus_sign:                                             | N/A                                                            |
+| `uri`                                                          | *Optional\<String>*                                            | :heavy_minus_sign:                                             | N/A                                                            |
+| `uuid`                                                         | *Optional\<String>*                                            | :heavy_minus_sign:                                             | N/A                                                            |

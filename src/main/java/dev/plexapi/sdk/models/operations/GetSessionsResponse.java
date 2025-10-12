@@ -5,6 +5,7 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import dev.plexapi.sdk.models.shared.MediaContainerWithMetadata;
 import dev.plexapi.sdk.utils.Response;
 import dev.plexapi.sdk.utils.Utils;
 import java.io.InputStream;
@@ -13,6 +14,8 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -33,32 +36,40 @@ public class GetSessionsResponse implements Response {
     private HttpResponse<InputStream> rawResponse;
 
     /**
-     * List of Active Plex Sessions
+     * OK
      */
-    private Optional<? extends GetSessionsResponseBody> object;
+    private Optional<? extends MediaContainerWithMetadata> mediaContainerWithMetadata;
+
+
+    private Map<String, List<String>> headers;
 
     @JsonCreator
     public GetSessionsResponse(
             String contentType,
             int statusCode,
             HttpResponse<InputStream> rawResponse,
-            Optional<? extends GetSessionsResponseBody> object) {
+            Optional<? extends MediaContainerWithMetadata> mediaContainerWithMetadata,
+            Map<String, List<String>> headers) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(object, "object");
+        Utils.checkNotNull(mediaContainerWithMetadata, "mediaContainerWithMetadata");
+        headers = Utils.emptyMapIfNull(headers);
+        Utils.checkNotNull(headers, "headers");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.object = object;
+        this.mediaContainerWithMetadata = mediaContainerWithMetadata;
+        this.headers = headers;
     }
     
     public GetSessionsResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse) {
+            HttpResponse<InputStream> rawResponse,
+            Map<String, List<String>> headers) {
         this(contentType, statusCode, rawResponse,
-            Optional.empty());
+            Optional.empty(), headers);
     }
 
     /**
@@ -86,12 +97,17 @@ public class GetSessionsResponse implements Response {
     }
 
     /**
-     * List of Active Plex Sessions
+     * OK
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<GetSessionsResponseBody> object() {
-        return (Optional<GetSessionsResponseBody>) object;
+    public Optional<MediaContainerWithMetadata> mediaContainerWithMetadata() {
+        return (Optional<MediaContainerWithMetadata>) mediaContainerWithMetadata;
+    }
+
+    @JsonIgnore
+    public Map<String, List<String>> headers() {
+        return headers;
     }
 
     public static Builder builder() {
@@ -127,21 +143,27 @@ public class GetSessionsResponse implements Response {
     }
 
     /**
-     * List of Active Plex Sessions
+     * OK
      */
-    public GetSessionsResponse withObject(GetSessionsResponseBody object) {
-        Utils.checkNotNull(object, "object");
-        this.object = Optional.ofNullable(object);
+    public GetSessionsResponse withMediaContainerWithMetadata(MediaContainerWithMetadata mediaContainerWithMetadata) {
+        Utils.checkNotNull(mediaContainerWithMetadata, "mediaContainerWithMetadata");
+        this.mediaContainerWithMetadata = Optional.ofNullable(mediaContainerWithMetadata);
         return this;
     }
 
 
     /**
-     * List of Active Plex Sessions
+     * OK
      */
-    public GetSessionsResponse withObject(Optional<? extends GetSessionsResponseBody> object) {
-        Utils.checkNotNull(object, "object");
-        this.object = object;
+    public GetSessionsResponse withMediaContainerWithMetadata(Optional<? extends MediaContainerWithMetadata> mediaContainerWithMetadata) {
+        Utils.checkNotNull(mediaContainerWithMetadata, "mediaContainerWithMetadata");
+        this.mediaContainerWithMetadata = mediaContainerWithMetadata;
+        return this;
+    }
+
+    public GetSessionsResponse withHeaders(Map<String, List<String>> headers) {
+        Utils.checkNotNull(headers, "headers");
+        this.headers = headers;
         return this;
     }
 
@@ -158,14 +180,15 @@ public class GetSessionsResponse implements Response {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.object, other.object);
+            Utils.enhancedDeepEquals(this.mediaContainerWithMetadata, other.mediaContainerWithMetadata) &&
+            Utils.enhancedDeepEquals(this.headers, other.headers);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            object);
+            mediaContainerWithMetadata, headers);
     }
     
     @Override
@@ -174,7 +197,8 @@ public class GetSessionsResponse implements Response {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "object", object);
+                "mediaContainerWithMetadata", mediaContainerWithMetadata,
+                "headers", headers);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -186,7 +210,9 @@ public class GetSessionsResponse implements Response {
 
         private HttpResponse<InputStream> rawResponse;
 
-        private Optional<? extends GetSessionsResponseBody> object = Optional.empty();
+        private Optional<? extends MediaContainerWithMetadata> mediaContainerWithMetadata = Optional.empty();
+
+        private Map<String, List<String>> headers;
 
         private Builder() {
           // force use of static builder() method
@@ -224,20 +250,27 @@ public class GetSessionsResponse implements Response {
 
 
         /**
-         * List of Active Plex Sessions
+         * OK
          */
-        public Builder object(GetSessionsResponseBody object) {
-            Utils.checkNotNull(object, "object");
-            this.object = Optional.ofNullable(object);
+        public Builder mediaContainerWithMetadata(MediaContainerWithMetadata mediaContainerWithMetadata) {
+            Utils.checkNotNull(mediaContainerWithMetadata, "mediaContainerWithMetadata");
+            this.mediaContainerWithMetadata = Optional.ofNullable(mediaContainerWithMetadata);
             return this;
         }
 
         /**
-         * List of Active Plex Sessions
+         * OK
          */
-        public Builder object(Optional<? extends GetSessionsResponseBody> object) {
-            Utils.checkNotNull(object, "object");
-            this.object = object;
+        public Builder mediaContainerWithMetadata(Optional<? extends MediaContainerWithMetadata> mediaContainerWithMetadata) {
+            Utils.checkNotNull(mediaContainerWithMetadata, "mediaContainerWithMetadata");
+            this.mediaContainerWithMetadata = mediaContainerWithMetadata;
+            return this;
+        }
+
+
+        public Builder headers(Map<String, List<String>> headers) {
+            Utils.checkNotNull(headers, "headers");
+            this.headers = headers;
             return this;
         }
 
@@ -245,7 +278,7 @@ public class GetSessionsResponse implements Response {
 
             return new GetSessionsResponse(
                 contentType, statusCode, rawResponse,
-                object);
+                mediaContainerWithMetadata, headers);
         }
 
     }

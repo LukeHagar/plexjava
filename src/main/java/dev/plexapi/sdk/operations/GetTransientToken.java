@@ -9,11 +9,10 @@ import static dev.plexapi.sdk.operations.Operations.AsyncRequestOperation;
 import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.SDKConfiguration;
 import dev.plexapi.sdk.SecuritySource;
-import dev.plexapi.sdk.models.errors.GetTransientTokenBadRequest;
-import dev.plexapi.sdk.models.errors.GetTransientTokenUnauthorized;
 import dev.plexapi.sdk.models.errors.SDKError;
 import dev.plexapi.sdk.models.operations.GetTransientTokenRequest;
 import dev.plexapi.sdk.models.operations.GetTransientTokenResponse;
+import dev.plexapi.sdk.models.operations.GetTransientTokenResponseBody;
 import dev.plexapi.sdk.utils.Blob;
 import dev.plexapi.sdk.utils.Exceptions;
 import dev.plexapi.sdk.utils.HTTPClient;
@@ -84,14 +83,15 @@ public class GetTransientToken {
             String url = Utils.generateURL(
                     this.baseUrl,
                     "/security/token");
-            HTTPRequest req = new HTTPRequest(url, "GET");
+            HTTPRequest req = new HTTPRequest(url, "POST");
             req.addHeader("Accept", "application/json")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
 
             req.addQueryParams(Utils.getQueryParams(
                     klass,
                     request,
-                    null));
+                    this.sdkConfiguration.globals));
+            req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
             Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
 
             return req.build();
@@ -126,7 +126,7 @@ public class GetTransientToken {
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);
-                if (Utils.statusCodeMatches(httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                if (Utils.statusCodeMatches(httpRes.statusCode(), "400", "403", "4XX", "5XX")) {
                     httpRes = onError(httpRes, null);
                 } else {
                     httpRes = onSuccess(httpRes);
@@ -155,19 +155,13 @@ public class GetTransientToken {
             GetTransientTokenResponse res = resBuilder.build();
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
-                // no content
-                return res;
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "400")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    GetTransientTokenBadRequest out = Utils.mapper().readValue(
+                    GetTransientTokenResponseBody out = Utils.mapper().readValue(
                             response.body(),
                             new TypeReference<>() {
                             });
-                        out.withRawResponse(response);
-                    
-                    throw out;
+                    res.withObject(out);
+                    return res;
                 } else {
                     throw new SDKError(
                             response,
@@ -177,25 +171,7 @@ public class GetTransientToken {
                 }
             }
             
-            if (Utils.statusCodeMatches(response.statusCode(), "401")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    GetTransientTokenUnauthorized out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                        out.withRawResponse(response);
-                    
-                    throw out;
-                } else {
-                    throw new SDKError(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "400", "403", "4XX")) {
                 // no content
                 throw new SDKError(
                         response,
@@ -247,7 +223,7 @@ public class GetTransientToken {
                         if (err != null) {
                             return onError(null, err);
                         }
-                        if (Utils.statusCodeMatches(resp.statusCode(), "400", "401", "4XX", "5XX")) {
+                        if (Utils.statusCodeMatches(resp.statusCode(), "400", "403", "4XX", "5XX")) {
                             return onError(resp, null);
                         }
                         return CompletableFuture.completedFuture(resp);
@@ -273,51 +249,25 @@ public class GetTransientToken {
             dev.plexapi.sdk.models.operations.async.GetTransientTokenResponse res = resBuilder.build();
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
-                // no content
-                return CompletableFuture.completedFuture(res);
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "400")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
                     return response.body().toByteArray().thenApply(bodyBytes -> {
-                        dev.plexapi.sdk.models.errors.async.GetTransientTokenBadRequest out;
                         try {
-                            out = Utils.mapper().readValue(
+                            GetTransientTokenResponseBody out = Utils.mapper().readValue(
                                     bodyBytes,
                                     new TypeReference<>() {
                                     });
-                            out.withRawResponse(response);
+                            res.withObject(out);
+                            return res;
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
-                        throw out;
                     });
                 } else {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
                 }
             }
             
-            if (Utils.statusCodeMatches(response.statusCode(), "401")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return response.body().toByteArray().thenApply(bodyBytes -> {
-                        dev.plexapi.sdk.models.errors.async.GetTransientTokenUnauthorized out;
-                        try {
-                            out = Utils.mapper().readValue(
-                                    bodyBytes,
-                                    new TypeReference<>() {
-                                    });
-                            out.withRawResponse(response);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                        throw out;
-                    });
-                } else {
-                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "400", "403", "4XX")) {
                 // no content
                 return Utils.createAsyncApiError(response, "API error occurred");
             }

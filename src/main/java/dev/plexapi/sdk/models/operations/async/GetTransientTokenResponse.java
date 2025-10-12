@@ -5,13 +5,16 @@ package dev.plexapi.sdk.models.operations.async;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import dev.plexapi.sdk.models.operations.GetTransientTokenResponseBody;
 import dev.plexapi.sdk.utils.AsyncResponse;
 import dev.plexapi.sdk.utils.Blob;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
+import java.util.Optional;
 
 
 public class GetTransientTokenResponse implements AsyncResponse {
@@ -30,17 +33,33 @@ public class GetTransientTokenResponse implements AsyncResponse {
      */
     private HttpResponse<Blob> rawResponse;
 
+    /**
+     * OK
+     */
+    private Optional<? extends GetTransientTokenResponseBody> object;
+
     @JsonCreator
     public GetTransientTokenResponse(
             String contentType,
             int statusCode,
-            HttpResponse<Blob> rawResponse) {
+            HttpResponse<Blob> rawResponse,
+            Optional<? extends GetTransientTokenResponseBody> object) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
+        Utils.checkNotNull(object, "object");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
+        this.object = object;
+    }
+    
+    public GetTransientTokenResponse(
+            String contentType,
+            int statusCode,
+            HttpResponse<Blob> rawResponse) {
+        this(contentType, statusCode, rawResponse,
+            Optional.empty());
     }
 
     /**
@@ -65,6 +84,15 @@ public class GetTransientTokenResponse implements AsyncResponse {
     @JsonIgnore
     public HttpResponse<Blob> rawResponse() {
         return rawResponse;
+    }
+
+    /**
+     * OK
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetTransientTokenResponseBody> object() {
+        return (Optional<GetTransientTokenResponseBody>) object;
     }
 
     public static Builder builder() {
@@ -99,6 +127,25 @@ public class GetTransientTokenResponse implements AsyncResponse {
         return this;
     }
 
+    /**
+     * OK
+     */
+    public GetTransientTokenResponse withObject(GetTransientTokenResponseBody object) {
+        Utils.checkNotNull(object, "object");
+        this.object = Optional.ofNullable(object);
+        return this;
+    }
+
+
+    /**
+     * OK
+     */
+    public GetTransientTokenResponse withObject(Optional<? extends GetTransientTokenResponseBody> object) {
+        Utils.checkNotNull(object, "object");
+        this.object = object;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,13 +158,15 @@ public class GetTransientTokenResponse implements AsyncResponse {
         return 
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
-            Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse);
+            Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
+            Utils.enhancedDeepEquals(this.object, other.object);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            contentType, statusCode, rawResponse);
+            contentType, statusCode, rawResponse,
+            object);
     }
     
     @Override
@@ -125,7 +174,8 @@ public class GetTransientTokenResponse implements AsyncResponse {
         return Utils.toString(GetTransientTokenResponse.class,
                 "contentType", contentType,
                 "statusCode", statusCode,
-                "rawResponse", rawResponse);
+                "rawResponse", rawResponse,
+                "object", object);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -136,6 +186,8 @@ public class GetTransientTokenResponse implements AsyncResponse {
         private Integer statusCode;
 
         private HttpResponse<Blob> rawResponse;
+
+        private Optional<? extends GetTransientTokenResponseBody> object = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -171,10 +223,30 @@ public class GetTransientTokenResponse implements AsyncResponse {
             return this;
         }
 
+
+        /**
+         * OK
+         */
+        public Builder object(GetTransientTokenResponseBody object) {
+            Utils.checkNotNull(object, "object");
+            this.object = Optional.ofNullable(object);
+            return this;
+        }
+
+        /**
+         * OK
+         */
+        public Builder object(Optional<? extends GetTransientTokenResponseBody> object) {
+            Utils.checkNotNull(object, "object");
+            this.object = object;
+            return this;
+        }
+
         public GetTransientTokenResponse build() {
 
             return new GetTransientTokenResponse(
-                contentType, statusCode, rawResponse);
+                contentType, statusCode, rawResponse,
+                object);
         }
 
     }

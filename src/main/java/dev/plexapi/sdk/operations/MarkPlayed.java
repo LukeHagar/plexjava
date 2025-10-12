@@ -6,11 +6,8 @@ package dev.plexapi.sdk.operations;
 import static dev.plexapi.sdk.operations.Operations.RequestOperation;
 import static dev.plexapi.sdk.operations.Operations.AsyncRequestOperation;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.SDKConfiguration;
 import dev.plexapi.sdk.SecuritySource;
-import dev.plexapi.sdk.models.errors.MarkPlayedBadRequest;
-import dev.plexapi.sdk.models.errors.MarkPlayedUnauthorized;
 import dev.plexapi.sdk.models.errors.SDKError;
 import dev.plexapi.sdk.models.operations.MarkPlayedRequest;
 import dev.plexapi.sdk.models.operations.MarkPlayedResponse;
@@ -24,7 +21,6 @@ import dev.plexapi.sdk.utils.Hook.BeforeRequestContextImpl;
 import dev.plexapi.sdk.utils.Utils;
 import java.io.InputStream;
 import java.lang.Exception;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.Throwable;
 import java.net.http.HttpRequest;
@@ -84,14 +80,15 @@ public class MarkPlayed {
             String url = Utils.generateURL(
                     this.baseUrl,
                     "/:/scrobble");
-            HTTPRequest req = new HTTPRequest(url, "GET");
-            req.addHeader("Accept", "application/json")
+            HTTPRequest req = new HTTPRequest(url, "PUT");
+            req.addHeader("Accept", "*/*")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
 
             req.addQueryParams(Utils.getQueryParams(
                     klass,
                     request,
-                    null));
+                    this.sdkConfiguration.globals));
+            req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
             Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
 
             return req.build();
@@ -126,7 +123,7 @@ public class MarkPlayed {
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);
-                if (Utils.statusCodeMatches(httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                if (Utils.statusCodeMatches(httpRes.statusCode(), "400", "404", "4XX", "5XX")) {
                     httpRes = onError(httpRes, null);
                 } else {
                     httpRes = onSuccess(httpRes);
@@ -159,43 +156,7 @@ public class MarkPlayed {
                 return res;
             }
             
-            if (Utils.statusCodeMatches(response.statusCode(), "400")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    MarkPlayedBadRequest out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                        out.withRawResponse(response);
-                    
-                    throw out;
-                } else {
-                    throw new SDKError(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "401")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    MarkPlayedUnauthorized out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                        out.withRawResponse(response);
-                    
-                    throw out;
-                } else {
-                    throw new SDKError(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "400", "404", "4XX")) {
                 // no content
                 throw new SDKError(
                         response,
@@ -247,7 +208,7 @@ public class MarkPlayed {
                         if (err != null) {
                             return onError(null, err);
                         }
-                        if (Utils.statusCodeMatches(resp.statusCode(), "400", "401", "4XX", "5XX")) {
+                        if (Utils.statusCodeMatches(resp.statusCode(), "400", "404", "4XX", "5XX")) {
                             return onError(resp, null);
                         }
                         return CompletableFuture.completedFuture(resp);
@@ -277,47 +238,7 @@ public class MarkPlayed {
                 return CompletableFuture.completedFuture(res);
             }
             
-            if (Utils.statusCodeMatches(response.statusCode(), "400")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return response.body().toByteArray().thenApply(bodyBytes -> {
-                        dev.plexapi.sdk.models.errors.async.MarkPlayedBadRequest out;
-                        try {
-                            out = Utils.mapper().readValue(
-                                    bodyBytes,
-                                    new TypeReference<>() {
-                                    });
-                            out.withRawResponse(response);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                        throw out;
-                    });
-                } else {
-                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "401")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return response.body().toByteArray().thenApply(bodyBytes -> {
-                        dev.plexapi.sdk.models.errors.async.MarkPlayedUnauthorized out;
-                        try {
-                            out = Utils.mapper().readValue(
-                                    bodyBytes,
-                                    new TypeReference<>() {
-                                    });
-                            out.withRawResponse(response);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                        throw out;
-                    });
-                } else {
-                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "400", "404", "4XX")) {
                 // no content
                 return Utils.createAsyncApiError(response, "API error occurred");
             }

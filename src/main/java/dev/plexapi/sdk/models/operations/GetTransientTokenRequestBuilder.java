@@ -12,40 +12,23 @@ import java.lang.Exception;
 
 public class GetTransientTokenRequestBuilder {
 
-    private GetTransientTokenQueryParamType type;
-    private Scope scope;
+    private GetTransientTokenRequest request;
     private final SDKConfiguration sdkConfiguration;
 
     public GetTransientTokenRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-    public GetTransientTokenRequestBuilder type(GetTransientTokenQueryParamType type) {
-        Utils.checkNotNull(type, "type");
-        this.type = type;
+    public GetTransientTokenRequestBuilder request(GetTransientTokenRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
-    }
-
-    public GetTransientTokenRequestBuilder scope(Scope scope) {
-        Utils.checkNotNull(scope, "scope");
-        this.scope = scope;
-        return this;
-    }
-
-
-    private GetTransientTokenRequest buildRequest() {
-
-        GetTransientTokenRequest request = new GetTransientTokenRequest(type,
-            scope);
-
-        return request;
     }
 
     public GetTransientTokenResponse call() throws Exception {
         
         RequestOperation<GetTransientTokenRequest, GetTransientTokenResponse> operation
               = new GetTransientToken.Sync(sdkConfiguration);
-        GetTransientTokenRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));
     }

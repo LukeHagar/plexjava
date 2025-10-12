@@ -11,60 +11,83 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 
 public class Release {
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("key")
-    private Optional<String> key;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("version")
-    private Optional<String> version;
-
-
+    /**
+     * A list of what has been added in this version
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("added")
     private Optional<String> added;
 
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("fixed")
-    private Optional<String> fixed;
-
-
+    /**
+     * The URL of where this update is available
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("downloadURL")
     private Optional<String> downloadURL;
 
+    /**
+     * A list of what has been fixed in this version
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("fixed")
+    private Optional<String> fixed;
 
+    /**
+     * The URL key of the update
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("key")
+    private Optional<String> key;
+
+    /**
+     * The status of this update.
+     * 
+     * <p>- available - This release is available
+     * - downloading - This release is downloading
+     * - downloaded - This release has been downloaded
+     * - installing - This release is installing
+     * - tonight - This release will be installed tonight
+     * - skipped - This release has been skipped
+     * - error - This release has an error
+     * - notify - This release is only notifying it is available (typically because it cannot be installed on this setup)
+     * - done - This release is complete
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("state")
-    private Optional<String> state;
+    private Optional<? extends GetUpdatesStatusState> state;
+
+    /**
+     * The version available
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("version")
+    private Optional<String> version;
 
     @JsonCreator
     public Release(
-            @JsonProperty("key") Optional<String> key,
-            @JsonProperty("version") Optional<String> version,
             @JsonProperty("added") Optional<String> added,
-            @JsonProperty("fixed") Optional<String> fixed,
             @JsonProperty("downloadURL") Optional<String> downloadURL,
-            @JsonProperty("state") Optional<String> state) {
-        Utils.checkNotNull(key, "key");
-        Utils.checkNotNull(version, "version");
+            @JsonProperty("fixed") Optional<String> fixed,
+            @JsonProperty("key") Optional<String> key,
+            @JsonProperty("state") Optional<? extends GetUpdatesStatusState> state,
+            @JsonProperty("version") Optional<String> version) {
         Utils.checkNotNull(added, "added");
-        Utils.checkNotNull(fixed, "fixed");
         Utils.checkNotNull(downloadURL, "downloadURL");
+        Utils.checkNotNull(fixed, "fixed");
+        Utils.checkNotNull(key, "key");
         Utils.checkNotNull(state, "state");
-        this.key = key;
-        this.version = version;
+        Utils.checkNotNull(version, "version");
         this.added = added;
-        this.fixed = fixed;
         this.downloadURL = downloadURL;
+        this.fixed = fixed;
+        this.key = key;
         this.state = state;
+        this.version = version;
     }
     
     public Release() {
@@ -72,34 +95,63 @@ public class Release {
             Optional.empty(), Optional.empty(), Optional.empty());
     }
 
-    @JsonIgnore
-    public Optional<String> key() {
-        return key;
-    }
-
-    @JsonIgnore
-    public Optional<String> version() {
-        return version;
-    }
-
+    /**
+     * A list of what has been added in this version
+     */
     @JsonIgnore
     public Optional<String> added() {
         return added;
     }
 
-    @JsonIgnore
-    public Optional<String> fixed() {
-        return fixed;
-    }
-
+    /**
+     * The URL of where this update is available
+     */
     @JsonIgnore
     public Optional<String> downloadURL() {
         return downloadURL;
     }
 
+    /**
+     * A list of what has been fixed in this version
+     */
     @JsonIgnore
-    public Optional<String> state() {
-        return state;
+    public Optional<String> fixed() {
+        return fixed;
+    }
+
+    /**
+     * The URL key of the update
+     */
+    @JsonIgnore
+    public Optional<String> key() {
+        return key;
+    }
+
+    /**
+     * The status of this update.
+     * 
+     * <p>- available - This release is available
+     * - downloading - This release is downloading
+     * - downloaded - This release has been downloaded
+     * - installing - This release is installing
+     * - tonight - This release will be installed tonight
+     * - skipped - This release has been skipped
+     * - error - This release has an error
+     * - notify - This release is only notifying it is available (typically because it cannot be installed on this setup)
+     * - done - This release is complete
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetUpdatesStatusState> state() {
+        return (Optional<GetUpdatesStatusState>) state;
+    }
+
+    /**
+     * The version available
+     */
+    @JsonIgnore
+    public Optional<String> version() {
+        return version;
     }
 
     public static Builder builder() {
@@ -107,32 +159,9 @@ public class Release {
     }
 
 
-    public Release withKey(String key) {
-        Utils.checkNotNull(key, "key");
-        this.key = Optional.ofNullable(key);
-        return this;
-    }
-
-
-    public Release withKey(Optional<String> key) {
-        Utils.checkNotNull(key, "key");
-        this.key = key;
-        return this;
-    }
-
-    public Release withVersion(String version) {
-        Utils.checkNotNull(version, "version");
-        this.version = Optional.ofNullable(version);
-        return this;
-    }
-
-
-    public Release withVersion(Optional<String> version) {
-        Utils.checkNotNull(version, "version");
-        this.version = version;
-        return this;
-    }
-
+    /**
+     * A list of what has been added in this version
+     */
     public Release withAdded(String added) {
         Utils.checkNotNull(added, "added");
         this.added = Optional.ofNullable(added);
@@ -140,25 +169,18 @@ public class Release {
     }
 
 
+    /**
+     * A list of what has been added in this version
+     */
     public Release withAdded(Optional<String> added) {
         Utils.checkNotNull(added, "added");
         this.added = added;
         return this;
     }
 
-    public Release withFixed(String fixed) {
-        Utils.checkNotNull(fixed, "fixed");
-        this.fixed = Optional.ofNullable(fixed);
-        return this;
-    }
-
-
-    public Release withFixed(Optional<String> fixed) {
-        Utils.checkNotNull(fixed, "fixed");
-        this.fixed = fixed;
-        return this;
-    }
-
+    /**
+     * The URL of where this update is available
+     */
     public Release withDownloadURL(String downloadURL) {
         Utils.checkNotNull(downloadURL, "downloadURL");
         this.downloadURL = Optional.ofNullable(downloadURL);
@@ -166,22 +188,108 @@ public class Release {
     }
 
 
+    /**
+     * The URL of where this update is available
+     */
     public Release withDownloadURL(Optional<String> downloadURL) {
         Utils.checkNotNull(downloadURL, "downloadURL");
         this.downloadURL = downloadURL;
         return this;
     }
 
-    public Release withState(String state) {
+    /**
+     * A list of what has been fixed in this version
+     */
+    public Release withFixed(String fixed) {
+        Utils.checkNotNull(fixed, "fixed");
+        this.fixed = Optional.ofNullable(fixed);
+        return this;
+    }
+
+
+    /**
+     * A list of what has been fixed in this version
+     */
+    public Release withFixed(Optional<String> fixed) {
+        Utils.checkNotNull(fixed, "fixed");
+        this.fixed = fixed;
+        return this;
+    }
+
+    /**
+     * The URL key of the update
+     */
+    public Release withKey(String key) {
+        Utils.checkNotNull(key, "key");
+        this.key = Optional.ofNullable(key);
+        return this;
+    }
+
+
+    /**
+     * The URL key of the update
+     */
+    public Release withKey(Optional<String> key) {
+        Utils.checkNotNull(key, "key");
+        this.key = key;
+        return this;
+    }
+
+    /**
+     * The status of this update.
+     * 
+     * <p>- available - This release is available
+     * - downloading - This release is downloading
+     * - downloaded - This release has been downloaded
+     * - installing - This release is installing
+     * - tonight - This release will be installed tonight
+     * - skipped - This release has been skipped
+     * - error - This release has an error
+     * - notify - This release is only notifying it is available (typically because it cannot be installed on this setup)
+     * - done - This release is complete
+     */
+    public Release withState(GetUpdatesStatusState state) {
         Utils.checkNotNull(state, "state");
         this.state = Optional.ofNullable(state);
         return this;
     }
 
 
-    public Release withState(Optional<String> state) {
+    /**
+     * The status of this update.
+     * 
+     * <p>- available - This release is available
+     * - downloading - This release is downloading
+     * - downloaded - This release has been downloaded
+     * - installing - This release is installing
+     * - tonight - This release will be installed tonight
+     * - skipped - This release has been skipped
+     * - error - This release has an error
+     * - notify - This release is only notifying it is available (typically because it cannot be installed on this setup)
+     * - done - This release is complete
+     */
+    public Release withState(Optional<? extends GetUpdatesStatusState> state) {
         Utils.checkNotNull(state, "state");
         this.state = state;
+        return this;
+    }
+
+    /**
+     * The version available
+     */
+    public Release withVersion(String version) {
+        Utils.checkNotNull(version, "version");
+        this.version = Optional.ofNullable(version);
+        return this;
+    }
+
+
+    /**
+     * The version available
+     */
+    public Release withVersion(Optional<String> version) {
+        Utils.checkNotNull(version, "version");
+        this.version = version;
         return this;
     }
 
@@ -195,84 +303,64 @@ public class Release {
         }
         Release other = (Release) o;
         return 
-            Utils.enhancedDeepEquals(this.key, other.key) &&
-            Utils.enhancedDeepEquals(this.version, other.version) &&
             Utils.enhancedDeepEquals(this.added, other.added) &&
-            Utils.enhancedDeepEquals(this.fixed, other.fixed) &&
             Utils.enhancedDeepEquals(this.downloadURL, other.downloadURL) &&
-            Utils.enhancedDeepEquals(this.state, other.state);
+            Utils.enhancedDeepEquals(this.fixed, other.fixed) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.state, other.state) &&
+            Utils.enhancedDeepEquals(this.version, other.version);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            key, version, added,
-            fixed, downloadURL, state);
+            added, downloadURL, fixed,
+            key, state, version);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Release.class,
-                "key", key,
-                "version", version,
                 "added", added,
-                "fixed", fixed,
                 "downloadURL", downloadURL,
-                "state", state);
+                "fixed", fixed,
+                "key", key,
+                "state", state,
+                "version", version);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> key = Optional.empty();
-
-        private Optional<String> version = Optional.empty();
-
         private Optional<String> added = Optional.empty();
-
-        private Optional<String> fixed = Optional.empty();
 
         private Optional<String> downloadURL = Optional.empty();
 
-        private Optional<String> state = Optional.empty();
+        private Optional<String> fixed = Optional.empty();
+
+        private Optional<String> key = Optional.empty();
+
+        private Optional<? extends GetUpdatesStatusState> state = Optional.empty();
+
+        private Optional<String> version = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        public Builder key(String key) {
-            Utils.checkNotNull(key, "key");
-            this.key = Optional.ofNullable(key);
-            return this;
-        }
-
-        public Builder key(Optional<String> key) {
-            Utils.checkNotNull(key, "key");
-            this.key = key;
-            return this;
-        }
-
-
-        public Builder version(String version) {
-            Utils.checkNotNull(version, "version");
-            this.version = Optional.ofNullable(version);
-            return this;
-        }
-
-        public Builder version(Optional<String> version) {
-            Utils.checkNotNull(version, "version");
-            this.version = version;
-            return this;
-        }
-
-
+        /**
+         * A list of what has been added in this version
+         */
         public Builder added(String added) {
             Utils.checkNotNull(added, "added");
             this.added = Optional.ofNullable(added);
             return this;
         }
 
+        /**
+         * A list of what has been added in this version
+         */
         public Builder added(Optional<String> added) {
             Utils.checkNotNull(added, "added");
             this.added = added;
@@ -280,25 +368,18 @@ public class Release {
         }
 
 
-        public Builder fixed(String fixed) {
-            Utils.checkNotNull(fixed, "fixed");
-            this.fixed = Optional.ofNullable(fixed);
-            return this;
-        }
-
-        public Builder fixed(Optional<String> fixed) {
-            Utils.checkNotNull(fixed, "fixed");
-            this.fixed = fixed;
-            return this;
-        }
-
-
+        /**
+         * The URL of where this update is available
+         */
         public Builder downloadURL(String downloadURL) {
             Utils.checkNotNull(downloadURL, "downloadURL");
             this.downloadURL = Optional.ofNullable(downloadURL);
             return this;
         }
 
+        /**
+         * The URL of where this update is available
+         */
         public Builder downloadURL(Optional<String> downloadURL) {
             Utils.checkNotNull(downloadURL, "downloadURL");
             this.downloadURL = downloadURL;
@@ -306,23 +387,106 @@ public class Release {
         }
 
 
-        public Builder state(String state) {
+        /**
+         * A list of what has been fixed in this version
+         */
+        public Builder fixed(String fixed) {
+            Utils.checkNotNull(fixed, "fixed");
+            this.fixed = Optional.ofNullable(fixed);
+            return this;
+        }
+
+        /**
+         * A list of what has been fixed in this version
+         */
+        public Builder fixed(Optional<String> fixed) {
+            Utils.checkNotNull(fixed, "fixed");
+            this.fixed = fixed;
+            return this;
+        }
+
+
+        /**
+         * The URL key of the update
+         */
+        public Builder key(String key) {
+            Utils.checkNotNull(key, "key");
+            this.key = Optional.ofNullable(key);
+            return this;
+        }
+
+        /**
+         * The URL key of the update
+         */
+        public Builder key(Optional<String> key) {
+            Utils.checkNotNull(key, "key");
+            this.key = key;
+            return this;
+        }
+
+
+        /**
+         * The status of this update.
+         * 
+         * <p>- available - This release is available
+         * - downloading - This release is downloading
+         * - downloaded - This release has been downloaded
+         * - installing - This release is installing
+         * - tonight - This release will be installed tonight
+         * - skipped - This release has been skipped
+         * - error - This release has an error
+         * - notify - This release is only notifying it is available (typically because it cannot be installed on this setup)
+         * - done - This release is complete
+         */
+        public Builder state(GetUpdatesStatusState state) {
             Utils.checkNotNull(state, "state");
             this.state = Optional.ofNullable(state);
             return this;
         }
 
-        public Builder state(Optional<String> state) {
+        /**
+         * The status of this update.
+         * 
+         * <p>- available - This release is available
+         * - downloading - This release is downloading
+         * - downloaded - This release has been downloaded
+         * - installing - This release is installing
+         * - tonight - This release will be installed tonight
+         * - skipped - This release has been skipped
+         * - error - This release has an error
+         * - notify - This release is only notifying it is available (typically because it cannot be installed on this setup)
+         * - done - This release is complete
+         */
+        public Builder state(Optional<? extends GetUpdatesStatusState> state) {
             Utils.checkNotNull(state, "state");
             this.state = state;
+            return this;
+        }
+
+
+        /**
+         * The version available
+         */
+        public Builder version(String version) {
+            Utils.checkNotNull(version, "version");
+            this.version = Optional.ofNullable(version);
+            return this;
+        }
+
+        /**
+         * The version available
+         */
+        public Builder version(Optional<String> version) {
+            Utils.checkNotNull(version, "version");
+            this.version = version;
             return this;
         }
 
         public Release build() {
 
             return new Release(
-                key, version, added,
-                fixed, downloadURL, state);
+                added, downloadURL, fixed,
+                key, state, version);
         }
 
     }

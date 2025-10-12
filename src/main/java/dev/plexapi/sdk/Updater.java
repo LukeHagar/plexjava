@@ -3,25 +3,21 @@
  */
 package dev.plexapi.sdk;
 
-import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
 import static dev.plexapi.sdk.operations.Operations.RequestOperation;
+import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
 
 import dev.plexapi.sdk.models.operations.ApplyUpdatesRequest;
 import dev.plexapi.sdk.models.operations.ApplyUpdatesRequestBuilder;
 import dev.plexapi.sdk.models.operations.ApplyUpdatesResponse;
-import dev.plexapi.sdk.models.operations.CheckForUpdatesRequest;
-import dev.plexapi.sdk.models.operations.CheckForUpdatesRequestBuilder;
-import dev.plexapi.sdk.models.operations.CheckForUpdatesResponse;
-import dev.plexapi.sdk.models.operations.Download;
-import dev.plexapi.sdk.models.operations.GetUpdateStatusRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetUpdateStatusResponse;
-import dev.plexapi.sdk.models.operations.Skip;
-import dev.plexapi.sdk.models.operations.Tonight;
+import dev.plexapi.sdk.models.operations.CheckUpdatesRequest;
+import dev.plexapi.sdk.models.operations.CheckUpdatesRequestBuilder;
+import dev.plexapi.sdk.models.operations.CheckUpdatesResponse;
+import dev.plexapi.sdk.models.operations.GetUpdatesStatusRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetUpdatesStatusResponse;
 import dev.plexapi.sdk.operations.ApplyUpdates;
-import dev.plexapi.sdk.operations.CheckForUpdates;
-import dev.plexapi.sdk.operations.GetUpdateStatus;
+import dev.plexapi.sdk.operations.CheckUpdates;
+import dev.plexapi.sdk.operations.GetUpdatesStatus;
 import java.lang.Exception;
-import java.util.Optional;
 
 /**
  * This describes the API for searching and applying updates to the Plex Media Server.
@@ -46,77 +42,9 @@ public class Updater {
     }
 
     /**
-     * Querying status of updates
+     * Applying updates
      * 
-     * <p>Querying status of updates
-     * 
-     * @return The call builder
-     */
-    public GetUpdateStatusRequestBuilder getUpdateStatus() {
-        return new GetUpdateStatusRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Querying status of updates
-     * 
-     * <p>Querying status of updates
-     * 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetUpdateStatusResponse getUpdateStatusDirect() throws Exception {
-        RequestlessOperation<GetUpdateStatusResponse> operation
-            = new GetUpdateStatus.Sync(sdkConfiguration);
-        return operation.handleResponse(operation.doRequest());
-    }
-
-    /**
-     * Checking for updates
-     * 
-     * <p>Checking for updates
-     * 
-     * @return The call builder
-     */
-    public CheckForUpdatesRequestBuilder checkForUpdates() {
-        return new CheckForUpdatesRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Checking for updates
-     * 
-     * <p>Checking for updates
-     * 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public CheckForUpdatesResponse checkForUpdatesDirect() throws Exception {
-        return checkForUpdates(Optional.empty());
-    }
-
-    /**
-     * Checking for updates
-     * 
-     * <p>Checking for updates
-     * 
-     * @param download Indicate that you want to start download any updates found.
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public CheckForUpdatesResponse checkForUpdates(Optional<? extends Download> download) throws Exception {
-        CheckForUpdatesRequest request =
-            CheckForUpdatesRequest
-                .builder()
-                .download(download)
-                .build();
-        RequestOperation<CheckForUpdatesRequest, CheckForUpdatesResponse> operation
-              = new CheckForUpdates.Sync(sdkConfiguration);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Apply Updates
-     * 
-     * <p>Note that these two parameters are effectively mutually exclusive. The `tonight` parameter takes precedence and `skip` will be ignored if `tonight` is also passed
+     * <p>Apply any downloaded updates.  Note that the two parameters `tonight` and `skip` are effectively mutually exclusive. The `tonight` parameter takes precedence and `skip` will be ignored if `tonight` is also passed.
      * 
      * @return The call builder
      */
@@ -125,37 +53,69 @@ public class Updater {
     }
 
     /**
-     * Apply Updates
+     * Applying updates
      * 
-     * <p>Note that these two parameters are effectively mutually exclusive. The `tonight` parameter takes precedence and `skip` will be ignored if `tonight` is also passed
+     * <p>Apply any downloaded updates.  Note that the two parameters `tonight` and `skip` are effectively mutually exclusive. The `tonight` parameter takes precedence and `skip` will be ignored if `tonight` is also passed.
      * 
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public ApplyUpdatesResponse applyUpdatesDirect() throws Exception {
-        return applyUpdates(Optional.empty(), Optional.empty());
-    }
-
-    /**
-     * Apply Updates
-     * 
-     * <p>Note that these two parameters are effectively mutually exclusive. The `tonight` parameter takes precedence and `skip` will be ignored if `tonight` is also passed
-     * 
-     * @param tonight Indicate that you want the update to run during the next Butler execution. Omitting this or setting it to false indicates that the update should install
-     * @param skip Indicate that the latest version should be marked as skipped. The [Release] entry for this version will have the `state` set to `skipped`.
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public ApplyUpdatesResponse applyUpdates(Optional<? extends Tonight> tonight, Optional<? extends Skip> skip) throws Exception {
-        ApplyUpdatesRequest request =
-            ApplyUpdatesRequest
-                .builder()
-                .tonight(tonight)
-                .skip(skip)
-                .build();
+    public ApplyUpdatesResponse applyUpdates(ApplyUpdatesRequest request) throws Exception {
         RequestOperation<ApplyUpdatesRequest, ApplyUpdatesResponse> operation
               = new ApplyUpdates.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Checking for updates
+     * 
+     * <p>Perform an update check and potentially download
+     * 
+     * @return The call builder
+     */
+    public CheckUpdatesRequestBuilder checkUpdates() {
+        return new CheckUpdatesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Checking for updates
+     * 
+     * <p>Perform an update check and potentially download
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public CheckUpdatesResponse checkUpdates(CheckUpdatesRequest request) throws Exception {
+        RequestOperation<CheckUpdatesRequest, CheckUpdatesResponse> operation
+              = new CheckUpdates.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Querying status of updates
+     * 
+     * <p>Get the status of updating the server
+     * 
+     * @return The call builder
+     */
+    public GetUpdatesStatusRequestBuilder getUpdatesStatus() {
+        return new GetUpdatesStatusRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Querying status of updates
+     * 
+     * <p>Get the status of updating the server
+     * 
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetUpdatesStatusResponse getUpdatesStatusDirect() throws Exception {
+        RequestlessOperation<GetUpdatesStatusResponse> operation
+            = new GetUpdatesStatus.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest());
     }
 
 }

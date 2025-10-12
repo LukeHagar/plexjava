@@ -16,13 +16,13 @@ import java.util.Optional;
 public class Security implements HasSecurity {
 
     @SpeakeasyMetadata("security:scheme=true,type=apiKey,subtype=header,name=X-Plex-Token")
-    private Optional<String> accessToken;
+    private Optional<String> token;
 
     @JsonCreator
     public Security(
-            Optional<String> accessToken) {
-        Utils.checkNotNull(accessToken, "accessToken");
-        this.accessToken = accessToken;
+            Optional<String> token) {
+        Utils.checkNotNull(token, "token");
+        this.token = token;
     }
     
     public Security() {
@@ -30,8 +30,8 @@ public class Security implements HasSecurity {
     }
 
     @JsonIgnore
-    public Optional<String> accessToken() {
-        return accessToken;
+    public Optional<String> token() {
+        return token;
     }
 
     public static Builder builder() {
@@ -39,16 +39,16 @@ public class Security implements HasSecurity {
     }
 
 
-    public Security withAccessToken(String accessToken) {
-        Utils.checkNotNull(accessToken, "accessToken");
-        this.accessToken = Optional.ofNullable(accessToken);
+    public Security withToken(String token) {
+        Utils.checkNotNull(token, "token");
+        this.token = Optional.ofNullable(token);
         return this;
     }
 
 
-    public Security withAccessToken(Optional<String> accessToken) {
-        Utils.checkNotNull(accessToken, "accessToken");
-        this.accessToken = accessToken;
+    public Security withToken(Optional<String> token) {
+        Utils.checkNotNull(token, "token");
+        this.token = token;
         return this;
     }
 
@@ -62,47 +62,47 @@ public class Security implements HasSecurity {
         }
         Security other = (Security) o;
         return 
-            Utils.enhancedDeepEquals(this.accessToken, other.accessToken);
+            Utils.enhancedDeepEquals(this.token, other.token);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            accessToken);
+            token);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Security.class,
-                "accessToken", accessToken);
+                "token", token);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> accessToken = Optional.empty();
+        private Optional<String> token = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        public Builder accessToken(String accessToken) {
-            Utils.checkNotNull(accessToken, "accessToken");
-            this.accessToken = Optional.ofNullable(accessToken);
+        public Builder token(String token) {
+            Utils.checkNotNull(token, "token");
+            this.token = Optional.ofNullable(token);
             return this;
         }
 
-        public Builder accessToken(Optional<String> accessToken) {
-            Utils.checkNotNull(accessToken, "accessToken");
-            this.accessToken = accessToken;
+        public Builder token(Optional<String> token) {
+            Utils.checkNotNull(token, "token");
+            this.token = token;
             return this;
         }
 
         public Security build() {
 
             return new Security(
-                accessToken);
+                token);
         }
 
     }

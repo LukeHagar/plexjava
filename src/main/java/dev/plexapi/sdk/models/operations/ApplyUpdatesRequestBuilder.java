@@ -9,56 +9,26 @@ import dev.plexapi.sdk.SDKConfiguration;
 import dev.plexapi.sdk.operations.ApplyUpdates;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
-import java.util.Optional;
 
 public class ApplyUpdatesRequestBuilder {
 
-    private Optional<? extends Tonight> tonight = Optional.empty();
-    private Optional<? extends Skip> skip = Optional.empty();
+    private ApplyUpdatesRequest request;
     private final SDKConfiguration sdkConfiguration;
 
     public ApplyUpdatesRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-                
-    public ApplyUpdatesRequestBuilder tonight(Tonight tonight) {
-        Utils.checkNotNull(tonight, "tonight");
-        this.tonight = Optional.of(tonight);
+
+    public ApplyUpdatesRequestBuilder request(ApplyUpdatesRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
-    }
-
-    public ApplyUpdatesRequestBuilder tonight(Optional<? extends Tonight> tonight) {
-        Utils.checkNotNull(tonight, "tonight");
-        this.tonight = tonight;
-        return this;
-    }
-                
-    public ApplyUpdatesRequestBuilder skip(Skip skip) {
-        Utils.checkNotNull(skip, "skip");
-        this.skip = Optional.of(skip);
-        return this;
-    }
-
-    public ApplyUpdatesRequestBuilder skip(Optional<? extends Skip> skip) {
-        Utils.checkNotNull(skip, "skip");
-        this.skip = skip;
-        return this;
-    }
-
-
-    private ApplyUpdatesRequest buildRequest() {
-
-        ApplyUpdatesRequest request = new ApplyUpdatesRequest(tonight,
-            skip);
-
-        return request;
     }
 
     public ApplyUpdatesResponse call() throws Exception {
         
         RequestOperation<ApplyUpdatesRequest, ApplyUpdatesResponse> operation
               = new ApplyUpdates.Sync(sdkConfiguration);
-        ApplyUpdatesRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));
     }

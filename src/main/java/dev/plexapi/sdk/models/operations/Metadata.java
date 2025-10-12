@@ -3,306 +3,731 @@
  */
 package dev.plexapi.sdk.models.operations;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import dev.plexapi.sdk.models.shared.Filter;
+import dev.plexapi.sdk.models.shared.Image;
+import dev.plexapi.sdk.models.shared.Media;
+import dev.plexapi.sdk.models.shared.Player;
+import dev.plexapi.sdk.models.shared.Session;
+import dev.plexapi.sdk.models.shared.Sort;
+import dev.plexapi.sdk.models.shared.Tag;
+import dev.plexapi.sdk.models.shared.User;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Double;
-import java.lang.Integer;
+import java.lang.Long;
+import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-
+/**
+ * Metadata
+ * 
+ * <p>Items in a library are referred to as "metadata items." These metadata items are distinct from "media items" which represent actual instances of media that can be consumed. Consider a TV library that has a single video file in it for a particular episode of a show. The library has a single media item, but it has three metadata items: one for the show, one for the season, and one for the episode. Consider a movie library that has two video files in it: the same movie, but two different resolutions. The library has a single metadata item for the movie, but that metadata item has two media items, one for each resolution. Additionally a "media item" will have one or more "media parts" where the the parts are intended to be watched together, such as a CD1 and CD2 parts of the same movie.
+ * 
+ * <p>Note that when a metadata item has multiple media items, those media items should be isomorphic. That is, a 4K version and 1080p version of a movie are different versions of the same movie. They have the same duration, same summary, same rating, etc. and they can generally be considered interchangeable. A theatrical release vs. director's cut vs. unrated version on the other hand would be separate metadata items.
+ * 
+ * <p>Metadata items can often live in a hierarchy with relationships between them.  For example, the metadata item for an episodes is associated with a season metadata item which is associated with a show metadata item.  A similar hierarchy exists with track, album, and artist and photos and photo album.  The relationships may be expressed via relative terms and absolute terms.  For example, "leaves" refer to metadata items which has associated media (there is no media for a season nor show).  A show will have "children" in the form of seasons and a season will have "children" in the form of episodes and episodes have "parent" in the form of a season which has a "parent" in the form of a show.  Similarly, a show has "grandchildren" in the form of episodse and an episode has a "grandparent" in the form of a show.
+ */
 public class Metadata {
-
+    /**
+     * Information about the player being used for playback
+     */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("art")
-    private Optional<String> art;
+    @JsonProperty("Player")
+    private Optional<? extends Player> player;
 
-
+    /**
+     * Information about the playback session
+     */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("guid")
-    private Optional<String> guid;
+    @JsonProperty("Session")
+    private Optional<? extends Session> session;
 
-
+    /**
+     * The user playing the content
+     */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("key")
-    private Optional<String> key;
+    @JsonProperty("User")
+    private Optional<? extends User> user;
 
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("ratingKey")
-    private Optional<String> ratingKey;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("studio")
-    private Optional<String> studio;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("tagline")
-    private Optional<String> tagline;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("type")
-    private Optional<String> type;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("thumb")
-    private Optional<String> thumb;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("addedAt")
-    private Optional<Integer> addedAt;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("duration")
-    private Optional<Integer> duration;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("publicPagesURL")
-    private Optional<String> publicPagesURL;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("slug")
-    private Optional<String> slug;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("userState")
-    private Optional<Boolean> userState;
-
-
+    /**
+     * The title of the item (e.g. “300” or “The Simpsons”)
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
-    private Optional<String> title;
+    private Optional<? extends Object> title;
+
+    /**
+     * The type of the video item, such as `movie`, `episode`, or `clip`.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("type")
+    private Optional<? extends Object> type;
+
+    /**
+     * When present, contains the disc number for a track on multi-disc albums.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("absoluteIndex")
+    private Optional<Long> absoluteIndex;
+
+    /**
+     * In units of seconds since the epoch, returns the time at which the item was added to the library.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("addedAt")
+    private Optional<Long> addedAt;
+
+    /**
+     * When present, the URL for the background artwork for the item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("art")
+    private Optional<? extends Object> art;
+
+    /**
+     * Some rating systems separate reviewer ratings from audience ratings
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("audienceRating")
+    private Optional<Double> audienceRating;
+
+    /**
+     * A URI representing the image to be shown with the audience rating (e.g. rottentomatoes://image.rating.spilled).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("audienceRatingImage")
+    private Optional<? extends Object> audienceRatingImage;
 
 
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Autotag")
+    private Optional<? extends List<Tag>> autotag;
+
+    /**
+     * When present, the URL for a banner graphic for the item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("banner")
+    private Optional<? extends Object> banner;
+
+    /**
+     * When present, indicates the source for the chapters in the media file. Can be media (the chapters were embedded in the media itself), agent (a metadata agent computed them), or mixed (a combination of the two).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("chapterSource")
+    private Optional<? extends Object> chapterSource;
+
+    /**
+     * When present, the URL for a composite image for descendent items (e.g. photo albums or playlists).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("composite")
+    private Optional<? extends Object> composite;
+
+    /**
+     * If known, the content rating (e.g. MPAA) for an item.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contentRating")
-    private Optional<String> contentRating;
+    private Optional<? extends Object> contentRating;
 
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("originallyAvailableAt")
-    private Optional<LocalDate> originallyAvailableAt;
+    @JsonProperty("Country")
+    private Optional<? extends List<Tag>> country;
 
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("year")
-    private Optional<Integer> year;
+    @JsonProperty("Director")
+    private Optional<? extends List<Tag>> director;
+
+    /**
+     * When present, the duration for the item, in units of milliseconds.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("duration")
+    private Optional<Long> duration;
+
+    /**
+     * Typically only seen in metadata at a library's top level
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Filter")
+    private Optional<? extends List<Filter>> filter;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Genre")
+    private Optional<? extends List<Tag>> genre;
+
+    /**
+     * The `art` of the grandparent
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentArt")
+    private Optional<String> grandparentArt;
+
+    /**
+     * The `hero` of the grandparent
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentHero")
+    private Optional<String> grandparentHero;
+
+    /**
+     * The `key` of the grandparent
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentKey")
+    private Optional<String> grandparentKey;
+
+    /**
+     * The `ratingKey` of the grandparent
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentRatingKey")
+    private Optional<String> grandparentRatingKey;
+
+    /**
+     * The `theme` of the grandparent
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentTheme")
+    private Optional<String> grandparentTheme;
+
+    /**
+     * The `thumb` of the grandparent
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentThumb")
+    private Optional<String> grandparentThumb;
+
+    /**
+     * The `title` of the grandparent
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentTitle")
+    private Optional<String> grandparentTitle;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Guid")
+    private Optional<? extends List<Tag>> guid;
+
+    /**
+     * When present, the URL for a hero image for the item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("hero")
+    private Optional<? extends Object> hero;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Image")
     private Optional<? extends List<Image>> image;
 
+    /**
+     * When present, this represents the episode number for episodes, season number for seasons, or track number for audio tracks.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("index")
+    private Optional<Long> index;
+
+    /**
+     * The key at which the item's details can be fetched.  In many cases a metadata item may be passed without all the details (such as in a hub) and this key corresponds to the endpoint to fetch additional details.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("key")
+    private Optional<? extends Object> key;
+
+    /**
+     * When a user has watched or listened to an item, this contains a timestamp (epoch seconds) for that last consumption time.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("lastViewedAt")
+    private Optional<Long> lastViewedAt;
+
+    /**
+     * For shows and seasons, contains the number of total episodes.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("leafCount")
+    private Optional<Long> leafCount;
+
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("banner")
-    private Optional<String> banner;
+    @JsonProperty("Media")
+    private Optional<? extends List<Media>> media;
 
+    /**
+     * When present, in the format YYYY-MM-DD [HH:MM:SS] (the hours/minutes/seconds part is not always present). The air date, or a higher resolution release date for an item, depending on type. For example, episodes usually have air date like 1979-08-10 (we don't use epoch seconds because media existed prior to 1970). In some cases, recorded over-the-air content has higher resolution air date which includes a time component. Albums and movies may have day-resolution release dates as well.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("originallyAvailableAt")
+    private Optional<? extends Object> originallyAvailableAt;
 
+    /**
+     * When present, used to indicate an item's original title, e.g. a movie's foreign title.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("originalTitle")
+    private Optional<? extends Object> originalTitle;
+
+    /**
+     * The `hero` of the parent
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentHero")
+    private Optional<String> parentHero;
+
+    /**
+     * The `index` of the parent
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentIndex")
+    private Optional<Long> parentIndex;
+
+    /**
+     * The `key` of the parent
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentKey")
+    private Optional<String> parentKey;
+
+    /**
+     * The `ratingKey` of the parent
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentRatingKey")
+    private Optional<String> parentRatingKey;
+
+    /**
+     * The `thumb` of the parent
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentThumb")
+    private Optional<String> parentThumb;
+
+    /**
+     * The `title` of the parent
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentTitle")
+    private Optional<String> parentTitle;
+
+    /**
+     * Indicates that the item has a primary extra; for a movie, this is a trailer, and for a music track it is a music video. The URL points to the metadata details endpoint for the item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("primaryExtraKey")
+    private Optional<? extends Object> primaryExtraKey;
+
+    /**
+     * Prompt to give the user for this directory (such as `Search Movies`)
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("prompt")
+    private Optional<String> prompt;
+
+    /**
+     * When present, the rating for the item. The exact meaning and representation depends on where the rating was sourced from.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("rating")
     private Optional<Double> rating;
 
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("expiresAt")
-    private Optional<Integer> expiresAt;
+    @JsonProperty("Rating")
+    private Optional<? extends List<Tag>> ratingArray;
 
-
+    /**
+     * Number of ratings under this metadata
+     */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("originalTitle")
-    private Optional<String> originalTitle;
+    @JsonProperty("ratingCount")
+    private Optional<Long> ratingCount;
 
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("audienceRating")
-    private Optional<Double> audienceRating;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("audienceRatingImage")
-    private Optional<String> audienceRatingImage;
-
-
+    /**
+     * When present, indicates an image to be shown with the rating. This is passed back as a small set of defined URI values, e.g. rottentomatoes://image.rating.rotten.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ratingImage")
-    private Optional<String> ratingImage;
+    private Optional<? extends Object> ratingImage;
+
+    /**
+     * This is the opaque string to be passed into timeline, scrobble, and rating endpoints to identify them.  While it often appears to be numeric, this is not guaranteed.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("ratingKey")
+    private Optional<? extends Object> ratingKey;
 
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("imdbRatingCount")
-    private Optional<Integer> imdbRatingCount;
+    @JsonProperty("Role")
+    private Optional<? extends List<Tag>> role;
 
-
+    /**
+     * Indicates this is a search directory
+     */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("subtype")
-    private Optional<String> subtype;
+    @JsonProperty("search")
+    private Optional<Boolean> search;
 
-
+    /**
+     * Used by old clients to provide nested menus allowing for primative (but structured) navigation.
+     */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("theme")
-    private Optional<String> theme;
+    @JsonProperty("secondary")
+    private Optional<Boolean> secondary;
 
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("leafCount")
-    private Optional<Integer> leafCount;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("childCount")
-    private Optional<Integer> childCount;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("isContinuingSeries")
-    private Optional<Boolean> isContinuingSeries;
-
-
+    /**
+     * When found on a show item, indicates that the children (seasons) should be skipped in favor of the grandchildren (episodes). Useful for mini-series, etc.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("skipChildren")
     private Optional<Boolean> skipChildren;
 
+    /**
+     * When present on an episode or track item, indicates parent should be skipped in favor of grandparent (show).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("skipParent")
+    private Optional<Boolean> skipParent;
+
+    /**
+     * Typically only seen in metadata at a library's top level
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Sort")
+    private Optional<? extends List<Sort>> sort;
+
+    /**
+     * When present, the studio or label which produced an item (e.g. movie studio for movies, record label for albums).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("studio")
+    private Optional<? extends Object> studio;
+
+    /**
+     * The subtype of the video item, such as `photo` when the video item is in a photo library
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("subtype")
+    private Optional<? extends Object> subtype;
+
+    /**
+     * When present, the extended textual information about the item (e.g. movie plot, artist biography, album review).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("summary")
+    private Optional<? extends Object> summary;
+
+    /**
+     * When present, a pithy one-liner about the item (usually only seen for movies).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("tagline")
+    private Optional<? extends Object> tagline;
+
+    /**
+     * When present, the URL for theme music for the item (usually only for TV shows).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("theme")
+    private Optional<? extends Object> theme;
+
+    /**
+     * When present, the URL for the poster or thumbnail for the item. When available for types like movie, it will be the poster graphic, but fall-back to the extracted media thumbnail.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("thumb")
+    private Optional<? extends Object> thumb;
+
+    /**
+     * Whene present, this is the string used for sorting the item. It's usually the title with any leading articles removed (e.g. “Simpsons”).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("titleSort")
+    private Optional<? extends Object> titleSort;
+
+    /**
+     * In units of seconds since the epoch, returns the time at which the item was last changed (e.g. had its metadata updated).
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("updatedAt")
+    private Optional<Long> updatedAt;
+
+    /**
+     * When the user has rated an item, this contains the user rating
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("userRating")
+    private Optional<Double> userRating;
+
+    /**
+     * When a users has completed watched or listened to an item, this attribute contains the number of consumptions.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("viewCount")
+    private Optional<Long> viewCount;
+
+    /**
+     * For shows and seasons, contains the number of viewed episodes.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("viewedLeafCount")
+    private Optional<Long> viewedLeafCount;
+
+    /**
+     * When a user is in the process of viewing or listening to this item, this attribute contains the current offset, in units of milliseconds.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("viewOffset")
+    private Optional<Long> viewOffset;
+
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("availabilityId")
-    private Optional<String> availabilityId;
+    @JsonProperty("Writer")
+    private Optional<? extends List<Tag>> writer;
 
-
+    /**
+     * When present, the year associated with the item's release (e.g. release year for a movie).
+     */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("streamingMediaId")
-    private Optional<String> streamingMediaId;
+    @JsonProperty("year")
+    private Optional<Long> year;
 
 
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("playableKey")
-    private Optional<String> playableKey;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties;
 
     @JsonCreator
     public Metadata(
-            @JsonProperty("art") Optional<String> art,
-            @JsonProperty("guid") Optional<String> guid,
-            @JsonProperty("key") Optional<String> key,
-            @JsonProperty("ratingKey") Optional<String> ratingKey,
-            @JsonProperty("studio") Optional<String> studio,
-            @JsonProperty("tagline") Optional<String> tagline,
-            @JsonProperty("type") Optional<String> type,
-            @JsonProperty("thumb") Optional<String> thumb,
-            @JsonProperty("addedAt") Optional<Integer> addedAt,
-            @JsonProperty("duration") Optional<Integer> duration,
-            @JsonProperty("publicPagesURL") Optional<String> publicPagesURL,
-            @JsonProperty("slug") Optional<String> slug,
-            @JsonProperty("userState") Optional<Boolean> userState,
-            @JsonProperty("title") Optional<String> title,
-            @JsonProperty("contentRating") Optional<String> contentRating,
-            @JsonProperty("originallyAvailableAt") Optional<LocalDate> originallyAvailableAt,
-            @JsonProperty("year") Optional<Integer> year,
-            @JsonProperty("Image") Optional<? extends List<Image>> image,
-            @JsonProperty("banner") Optional<String> banner,
-            @JsonProperty("rating") Optional<Double> rating,
-            @JsonProperty("expiresAt") Optional<Integer> expiresAt,
-            @JsonProperty("originalTitle") Optional<String> originalTitle,
+            @JsonProperty("Player") Optional<? extends Player> player,
+            @JsonProperty("Session") Optional<? extends Session> session,
+            @JsonProperty("User") Optional<? extends User> user,
+            @JsonProperty("title") Optional<? extends Object> title,
+            @JsonProperty("type") Optional<? extends Object> type,
+            @JsonProperty("absoluteIndex") Optional<Long> absoluteIndex,
+            @JsonProperty("addedAt") Optional<Long> addedAt,
+            @JsonProperty("art") Optional<? extends Object> art,
             @JsonProperty("audienceRating") Optional<Double> audienceRating,
-            @JsonProperty("audienceRatingImage") Optional<String> audienceRatingImage,
-            @JsonProperty("ratingImage") Optional<String> ratingImage,
-            @JsonProperty("imdbRatingCount") Optional<Integer> imdbRatingCount,
-            @JsonProperty("subtype") Optional<String> subtype,
-            @JsonProperty("theme") Optional<String> theme,
-            @JsonProperty("leafCount") Optional<Integer> leafCount,
-            @JsonProperty("childCount") Optional<Integer> childCount,
-            @JsonProperty("isContinuingSeries") Optional<Boolean> isContinuingSeries,
+            @JsonProperty("audienceRatingImage") Optional<? extends Object> audienceRatingImage,
+            @JsonProperty("Autotag") Optional<? extends List<Tag>> autotag,
+            @JsonProperty("banner") Optional<? extends Object> banner,
+            @JsonProperty("chapterSource") Optional<? extends Object> chapterSource,
+            @JsonProperty("composite") Optional<? extends Object> composite,
+            @JsonProperty("contentRating") Optional<? extends Object> contentRating,
+            @JsonProperty("Country") Optional<? extends List<Tag>> country,
+            @JsonProperty("Director") Optional<? extends List<Tag>> director,
+            @JsonProperty("duration") Optional<Long> duration,
+            @JsonProperty("Filter") Optional<? extends List<Filter>> filter,
+            @JsonProperty("Genre") Optional<? extends List<Tag>> genre,
+            @JsonProperty("grandparentArt") Optional<String> grandparentArt,
+            @JsonProperty("grandparentHero") Optional<String> grandparentHero,
+            @JsonProperty("grandparentKey") Optional<String> grandparentKey,
+            @JsonProperty("grandparentRatingKey") Optional<String> grandparentRatingKey,
+            @JsonProperty("grandparentTheme") Optional<String> grandparentTheme,
+            @JsonProperty("grandparentThumb") Optional<String> grandparentThumb,
+            @JsonProperty("grandparentTitle") Optional<String> grandparentTitle,
+            @JsonProperty("Guid") Optional<? extends List<Tag>> guid,
+            @JsonProperty("hero") Optional<? extends Object> hero,
+            @JsonProperty("Image") Optional<? extends List<Image>> image,
+            @JsonProperty("index") Optional<Long> index,
+            @JsonProperty("key") Optional<? extends Object> key,
+            @JsonProperty("lastViewedAt") Optional<Long> lastViewedAt,
+            @JsonProperty("leafCount") Optional<Long> leafCount,
+            @JsonProperty("Media") Optional<? extends List<Media>> media,
+            @JsonProperty("originallyAvailableAt") Optional<? extends Object> originallyAvailableAt,
+            @JsonProperty("originalTitle") Optional<? extends Object> originalTitle,
+            @JsonProperty("parentHero") Optional<String> parentHero,
+            @JsonProperty("parentIndex") Optional<Long> parentIndex,
+            @JsonProperty("parentKey") Optional<String> parentKey,
+            @JsonProperty("parentRatingKey") Optional<String> parentRatingKey,
+            @JsonProperty("parentThumb") Optional<String> parentThumb,
+            @JsonProperty("parentTitle") Optional<String> parentTitle,
+            @JsonProperty("primaryExtraKey") Optional<? extends Object> primaryExtraKey,
+            @JsonProperty("prompt") Optional<String> prompt,
+            @JsonProperty("rating") Optional<Double> rating,
+            @JsonProperty("Rating") Optional<? extends List<Tag>> ratingArray,
+            @JsonProperty("ratingCount") Optional<Long> ratingCount,
+            @JsonProperty("ratingImage") Optional<? extends Object> ratingImage,
+            @JsonProperty("ratingKey") Optional<? extends Object> ratingKey,
+            @JsonProperty("Role") Optional<? extends List<Tag>> role,
+            @JsonProperty("search") Optional<Boolean> search,
+            @JsonProperty("secondary") Optional<Boolean> secondary,
             @JsonProperty("skipChildren") Optional<Boolean> skipChildren,
-            @JsonProperty("availabilityId") Optional<String> availabilityId,
-            @JsonProperty("streamingMediaId") Optional<String> streamingMediaId,
-            @JsonProperty("playableKey") Optional<String> playableKey) {
-        Utils.checkNotNull(art, "art");
-        Utils.checkNotNull(guid, "guid");
-        Utils.checkNotNull(key, "key");
-        Utils.checkNotNull(ratingKey, "ratingKey");
-        Utils.checkNotNull(studio, "studio");
-        Utils.checkNotNull(tagline, "tagline");
-        Utils.checkNotNull(type, "type");
-        Utils.checkNotNull(thumb, "thumb");
-        Utils.checkNotNull(addedAt, "addedAt");
-        Utils.checkNotNull(duration, "duration");
-        Utils.checkNotNull(publicPagesURL, "publicPagesURL");
-        Utils.checkNotNull(slug, "slug");
-        Utils.checkNotNull(userState, "userState");
+            @JsonProperty("skipParent") Optional<Boolean> skipParent,
+            @JsonProperty("Sort") Optional<? extends List<Sort>> sort,
+            @JsonProperty("studio") Optional<? extends Object> studio,
+            @JsonProperty("subtype") Optional<? extends Object> subtype,
+            @JsonProperty("summary") Optional<? extends Object> summary,
+            @JsonProperty("tagline") Optional<? extends Object> tagline,
+            @JsonProperty("theme") Optional<? extends Object> theme,
+            @JsonProperty("thumb") Optional<? extends Object> thumb,
+            @JsonProperty("titleSort") Optional<? extends Object> titleSort,
+            @JsonProperty("updatedAt") Optional<Long> updatedAt,
+            @JsonProperty("userRating") Optional<Double> userRating,
+            @JsonProperty("viewCount") Optional<Long> viewCount,
+            @JsonProperty("viewedLeafCount") Optional<Long> viewedLeafCount,
+            @JsonProperty("viewOffset") Optional<Long> viewOffset,
+            @JsonProperty("Writer") Optional<? extends List<Tag>> writer,
+            @JsonProperty("year") Optional<Long> year) {
+        Utils.checkNotNull(player, "player");
+        Utils.checkNotNull(session, "session");
+        Utils.checkNotNull(user, "user");
         Utils.checkNotNull(title, "title");
-        Utils.checkNotNull(contentRating, "contentRating");
-        Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
-        Utils.checkNotNull(year, "year");
-        Utils.checkNotNull(image, "image");
-        Utils.checkNotNull(banner, "banner");
-        Utils.checkNotNull(rating, "rating");
-        Utils.checkNotNull(expiresAt, "expiresAt");
-        Utils.checkNotNull(originalTitle, "originalTitle");
+        Utils.checkNotNull(type, "type");
+        Utils.checkNotNull(absoluteIndex, "absoluteIndex");
+        Utils.checkNotNull(addedAt, "addedAt");
+        Utils.checkNotNull(art, "art");
         Utils.checkNotNull(audienceRating, "audienceRating");
         Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
-        Utils.checkNotNull(ratingImage, "ratingImage");
-        Utils.checkNotNull(imdbRatingCount, "imdbRatingCount");
-        Utils.checkNotNull(subtype, "subtype");
-        Utils.checkNotNull(theme, "theme");
+        Utils.checkNotNull(autotag, "autotag");
+        Utils.checkNotNull(banner, "banner");
+        Utils.checkNotNull(chapterSource, "chapterSource");
+        Utils.checkNotNull(composite, "composite");
+        Utils.checkNotNull(contentRating, "contentRating");
+        Utils.checkNotNull(country, "country");
+        Utils.checkNotNull(director, "director");
+        Utils.checkNotNull(duration, "duration");
+        Utils.checkNotNull(filter, "filter");
+        Utils.checkNotNull(genre, "genre");
+        Utils.checkNotNull(grandparentArt, "grandparentArt");
+        Utils.checkNotNull(grandparentHero, "grandparentHero");
+        Utils.checkNotNull(grandparentKey, "grandparentKey");
+        Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
+        Utils.checkNotNull(grandparentTheme, "grandparentTheme");
+        Utils.checkNotNull(grandparentThumb, "grandparentThumb");
+        Utils.checkNotNull(grandparentTitle, "grandparentTitle");
+        Utils.checkNotNull(guid, "guid");
+        Utils.checkNotNull(hero, "hero");
+        Utils.checkNotNull(image, "image");
+        Utils.checkNotNull(index, "index");
+        Utils.checkNotNull(key, "key");
+        Utils.checkNotNull(lastViewedAt, "lastViewedAt");
         Utils.checkNotNull(leafCount, "leafCount");
-        Utils.checkNotNull(childCount, "childCount");
-        Utils.checkNotNull(isContinuingSeries, "isContinuingSeries");
+        Utils.checkNotNull(media, "media");
+        Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
+        Utils.checkNotNull(originalTitle, "originalTitle");
+        Utils.checkNotNull(parentHero, "parentHero");
+        Utils.checkNotNull(parentIndex, "parentIndex");
+        Utils.checkNotNull(parentKey, "parentKey");
+        Utils.checkNotNull(parentRatingKey, "parentRatingKey");
+        Utils.checkNotNull(parentThumb, "parentThumb");
+        Utils.checkNotNull(parentTitle, "parentTitle");
+        Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
+        Utils.checkNotNull(prompt, "prompt");
+        Utils.checkNotNull(rating, "rating");
+        Utils.checkNotNull(ratingArray, "ratingArray");
+        Utils.checkNotNull(ratingCount, "ratingCount");
+        Utils.checkNotNull(ratingImage, "ratingImage");
+        Utils.checkNotNull(ratingKey, "ratingKey");
+        Utils.checkNotNull(role, "role");
+        Utils.checkNotNull(search, "search");
+        Utils.checkNotNull(secondary, "secondary");
         Utils.checkNotNull(skipChildren, "skipChildren");
-        Utils.checkNotNull(availabilityId, "availabilityId");
-        Utils.checkNotNull(streamingMediaId, "streamingMediaId");
-        Utils.checkNotNull(playableKey, "playableKey");
-        this.art = art;
-        this.guid = guid;
-        this.key = key;
-        this.ratingKey = ratingKey;
-        this.studio = studio;
-        this.tagline = tagline;
-        this.type = type;
-        this.thumb = thumb;
-        this.addedAt = addedAt;
-        this.duration = duration;
-        this.publicPagesURL = publicPagesURL;
-        this.slug = slug;
-        this.userState = userState;
+        Utils.checkNotNull(skipParent, "skipParent");
+        Utils.checkNotNull(sort, "sort");
+        Utils.checkNotNull(studio, "studio");
+        Utils.checkNotNull(subtype, "subtype");
+        Utils.checkNotNull(summary, "summary");
+        Utils.checkNotNull(tagline, "tagline");
+        Utils.checkNotNull(theme, "theme");
+        Utils.checkNotNull(thumb, "thumb");
+        Utils.checkNotNull(titleSort, "titleSort");
+        Utils.checkNotNull(updatedAt, "updatedAt");
+        Utils.checkNotNull(userRating, "userRating");
+        Utils.checkNotNull(viewCount, "viewCount");
+        Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
+        Utils.checkNotNull(viewOffset, "viewOffset");
+        Utils.checkNotNull(writer, "writer");
+        Utils.checkNotNull(year, "year");
+        this.player = player;
+        this.session = session;
+        this.user = user;
         this.title = title;
-        this.contentRating = contentRating;
-        this.originallyAvailableAt = originallyAvailableAt;
-        this.year = year;
-        this.image = image;
-        this.banner = banner;
-        this.rating = rating;
-        this.expiresAt = expiresAt;
-        this.originalTitle = originalTitle;
+        this.type = type;
+        this.absoluteIndex = absoluteIndex;
+        this.addedAt = addedAt;
+        this.art = art;
         this.audienceRating = audienceRating;
         this.audienceRatingImage = audienceRatingImage;
-        this.ratingImage = ratingImage;
-        this.imdbRatingCount = imdbRatingCount;
-        this.subtype = subtype;
-        this.theme = theme;
+        this.autotag = autotag;
+        this.banner = banner;
+        this.chapterSource = chapterSource;
+        this.composite = composite;
+        this.contentRating = contentRating;
+        this.country = country;
+        this.director = director;
+        this.duration = duration;
+        this.filter = filter;
+        this.genre = genre;
+        this.grandparentArt = grandparentArt;
+        this.grandparentHero = grandparentHero;
+        this.grandparentKey = grandparentKey;
+        this.grandparentRatingKey = grandparentRatingKey;
+        this.grandparentTheme = grandparentTheme;
+        this.grandparentThumb = grandparentThumb;
+        this.grandparentTitle = grandparentTitle;
+        this.guid = guid;
+        this.hero = hero;
+        this.image = image;
+        this.index = index;
+        this.key = key;
+        this.lastViewedAt = lastViewedAt;
         this.leafCount = leafCount;
-        this.childCount = childCount;
-        this.isContinuingSeries = isContinuingSeries;
+        this.media = media;
+        this.originallyAvailableAt = originallyAvailableAt;
+        this.originalTitle = originalTitle;
+        this.parentHero = parentHero;
+        this.parentIndex = parentIndex;
+        this.parentKey = parentKey;
+        this.parentRatingKey = parentRatingKey;
+        this.parentThumb = parentThumb;
+        this.parentTitle = parentTitle;
+        this.primaryExtraKey = primaryExtraKey;
+        this.prompt = prompt;
+        this.rating = rating;
+        this.ratingArray = ratingArray;
+        this.ratingCount = ratingCount;
+        this.ratingImage = ratingImage;
+        this.ratingKey = ratingKey;
+        this.role = role;
+        this.search = search;
+        this.secondary = secondary;
         this.skipChildren = skipChildren;
-        this.availabilityId = availabilityId;
-        this.streamingMediaId = streamingMediaId;
-        this.playableKey = playableKey;
+        this.skipParent = skipParent;
+        this.sort = sort;
+        this.studio = studio;
+        this.subtype = subtype;
+        this.summary = summary;
+        this.tagline = tagline;
+        this.theme = theme;
+        this.thumb = thumb;
+        this.titleSort = titleSort;
+        this.updatedAt = updatedAt;
+        this.userRating = userRating;
+        this.viewCount = viewCount;
+        this.viewedLeafCount = viewedLeafCount;
+        this.viewOffset = viewOffset;
+        this.writer = writer;
+        this.year = year;
+        this.additionalProperties = new HashMap<>();
     }
     
     public Metadata() {
@@ -317,92 +742,254 @@ public class Metadata {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty());
     }
 
+    /**
+     * Information about the player being used for playback
+     */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> art() {
-        return art;
+    public Optional<Player> player() {
+        return (Optional<Player>) player;
     }
 
+    /**
+     * Information about the playback session
+     */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> guid() {
-        return guid;
+    public Optional<Session> session() {
+        return (Optional<Session>) session;
     }
 
+    /**
+     * The user playing the content
+     */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> key() {
-        return key;
+    public Optional<User> user() {
+        return (Optional<User>) user;
     }
 
+    /**
+     * The title of the item (e.g. “300” or “The Simpsons”)
+     */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> ratingKey() {
-        return ratingKey;
+    public Optional<Object> title() {
+        return (Optional<Object>) title;
     }
 
+    /**
+     * The type of the video item, such as `movie`, `episode`, or `clip`.
+     */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> studio() {
-        return studio;
+    public Optional<Object> type() {
+        return (Optional<Object>) type;
     }
 
+    /**
+     * When present, contains the disc number for a track on multi-disc albums.
+     */
     @JsonIgnore
-    public Optional<String> tagline() {
-        return tagline;
+    public Optional<Long> absoluteIndex() {
+        return absoluteIndex;
     }
 
+    /**
+     * In units of seconds since the epoch, returns the time at which the item was added to the library.
+     */
     @JsonIgnore
-    public Optional<String> type() {
-        return type;
-    }
-
-    @JsonIgnore
-    public Optional<String> thumb() {
-        return thumb;
-    }
-
-    @JsonIgnore
-    public Optional<Integer> addedAt() {
+    public Optional<Long> addedAt() {
         return addedAt;
     }
 
+    /**
+     * When present, the URL for the background artwork for the item.
+     */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Integer> duration() {
+    public Optional<Object> art() {
+        return (Optional<Object>) art;
+    }
+
+    /**
+     * Some rating systems separate reviewer ratings from audience ratings
+     */
+    @JsonIgnore
+    public Optional<Double> audienceRating() {
+        return audienceRating;
+    }
+
+    /**
+     * A URI representing the image to be shown with the audience rating (e.g. rottentomatoes://image.rating.spilled).
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Object> audienceRatingImage() {
+        return (Optional<Object>) audienceRatingImage;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<Tag>> autotag() {
+        return (Optional<List<Tag>>) autotag;
+    }
+
+    /**
+     * When present, the URL for a banner graphic for the item.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Object> banner() {
+        return (Optional<Object>) banner;
+    }
+
+    /**
+     * When present, indicates the source for the chapters in the media file. Can be media (the chapters were embedded in the media itself), agent (a metadata agent computed them), or mixed (a combination of the two).
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Object> chapterSource() {
+        return (Optional<Object>) chapterSource;
+    }
+
+    /**
+     * When present, the URL for a composite image for descendent items (e.g. photo albums or playlists).
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Object> composite() {
+        return (Optional<Object>) composite;
+    }
+
+    /**
+     * If known, the content rating (e.g. MPAA) for an item.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Object> contentRating() {
+        return (Optional<Object>) contentRating;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<Tag>> country() {
+        return (Optional<List<Tag>>) country;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<Tag>> director() {
+        return (Optional<List<Tag>>) director;
+    }
+
+    /**
+     * When present, the duration for the item, in units of milliseconds.
+     */
+    @JsonIgnore
+    public Optional<Long> duration() {
         return duration;
     }
 
+    /**
+     * Typically only seen in metadata at a library's top level
+     */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> publicPagesURL() {
-        return publicPagesURL;
+    public Optional<List<Filter>> filter() {
+        return (Optional<List<Filter>>) filter;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> slug() {
-        return slug;
+    public Optional<List<Tag>> genre() {
+        return (Optional<List<Tag>>) genre;
     }
 
+    /**
+     * The `art` of the grandparent
+     */
     @JsonIgnore
-    public Optional<Boolean> userState() {
-        return userState;
+    public Optional<String> grandparentArt() {
+        return grandparentArt;
     }
 
+    /**
+     * The `hero` of the grandparent
+     */
     @JsonIgnore
-    public Optional<String> title() {
-        return title;
+    public Optional<String> grandparentHero() {
+        return grandparentHero;
     }
 
+    /**
+     * The `key` of the grandparent
+     */
     @JsonIgnore
-    public Optional<String> contentRating() {
-        return contentRating;
+    public Optional<String> grandparentKey() {
+        return grandparentKey;
     }
 
+    /**
+     * The `ratingKey` of the grandparent
+     */
     @JsonIgnore
-    public Optional<LocalDate> originallyAvailableAt() {
-        return originallyAvailableAt;
+    public Optional<String> grandparentRatingKey() {
+        return grandparentRatingKey;
     }
 
+    /**
+     * The `theme` of the grandparent
+     */
     @JsonIgnore
-    public Optional<Integer> year() {
-        return year;
+    public Optional<String> grandparentTheme() {
+        return grandparentTheme;
+    }
+
+    /**
+     * The `thumb` of the grandparent
+     */
+    @JsonIgnore
+    public Optional<String> grandparentThumb() {
+        return grandparentThumb;
+    }
+
+    /**
+     * The `title` of the grandparent
+     */
+    @JsonIgnore
+    public Optional<String> grandparentTitle() {
+        return grandparentTitle;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<Tag>> guid() {
+        return (Optional<List<Tag>>) guid;
+    }
+
+    /**
+     * When present, the URL for a hero image for the item.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Object> hero() {
+        return (Optional<Object>) hero;
     }
 
     @SuppressWarnings("unchecked")
@@ -411,89 +998,335 @@ public class Metadata {
         return (Optional<List<Image>>) image;
     }
 
+    /**
+     * When present, this represents the episode number for episodes, season number for seasons, or track number for audio tracks.
+     */
     @JsonIgnore
-    public Optional<String> banner() {
-        return banner;
+    public Optional<Long> index() {
+        return index;
     }
 
+    /**
+     * The key at which the item's details can be fetched.  In many cases a metadata item may be passed without all the details (such as in a hub) and this key corresponds to the endpoint to fetch additional details.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Object> key() {
+        return (Optional<Object>) key;
+    }
+
+    /**
+     * When a user has watched or listened to an item, this contains a timestamp (epoch seconds) for that last consumption time.
+     */
+    @JsonIgnore
+    public Optional<Long> lastViewedAt() {
+        return lastViewedAt;
+    }
+
+    /**
+     * For shows and seasons, contains the number of total episodes.
+     */
+    @JsonIgnore
+    public Optional<Long> leafCount() {
+        return leafCount;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<Media>> media() {
+        return (Optional<List<Media>>) media;
+    }
+
+    /**
+     * When present, in the format YYYY-MM-DD [HH:MM:SS] (the hours/minutes/seconds part is not always present). The air date, or a higher resolution release date for an item, depending on type. For example, episodes usually have air date like 1979-08-10 (we don't use epoch seconds because media existed prior to 1970). In some cases, recorded over-the-air content has higher resolution air date which includes a time component. Albums and movies may have day-resolution release dates as well.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Object> originallyAvailableAt() {
+        return (Optional<Object>) originallyAvailableAt;
+    }
+
+    /**
+     * When present, used to indicate an item's original title, e.g. a movie's foreign title.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Object> originalTitle() {
+        return (Optional<Object>) originalTitle;
+    }
+
+    /**
+     * The `hero` of the parent
+     */
+    @JsonIgnore
+    public Optional<String> parentHero() {
+        return parentHero;
+    }
+
+    /**
+     * The `index` of the parent
+     */
+    @JsonIgnore
+    public Optional<Long> parentIndex() {
+        return parentIndex;
+    }
+
+    /**
+     * The `key` of the parent
+     */
+    @JsonIgnore
+    public Optional<String> parentKey() {
+        return parentKey;
+    }
+
+    /**
+     * The `ratingKey` of the parent
+     */
+    @JsonIgnore
+    public Optional<String> parentRatingKey() {
+        return parentRatingKey;
+    }
+
+    /**
+     * The `thumb` of the parent
+     */
+    @JsonIgnore
+    public Optional<String> parentThumb() {
+        return parentThumb;
+    }
+
+    /**
+     * The `title` of the parent
+     */
+    @JsonIgnore
+    public Optional<String> parentTitle() {
+        return parentTitle;
+    }
+
+    /**
+     * Indicates that the item has a primary extra; for a movie, this is a trailer, and for a music track it is a music video. The URL points to the metadata details endpoint for the item.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Object> primaryExtraKey() {
+        return (Optional<Object>) primaryExtraKey;
+    }
+
+    /**
+     * Prompt to give the user for this directory (such as `Search Movies`)
+     */
+    @JsonIgnore
+    public Optional<String> prompt() {
+        return prompt;
+    }
+
+    /**
+     * When present, the rating for the item. The exact meaning and representation depends on where the rating was sourced from.
+     */
     @JsonIgnore
     public Optional<Double> rating() {
         return rating;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Integer> expiresAt() {
-        return expiresAt;
+    public Optional<List<Tag>> ratingArray() {
+        return (Optional<List<Tag>>) ratingArray;
     }
 
+    /**
+     * Number of ratings under this metadata
+     */
     @JsonIgnore
-    public Optional<String> originalTitle() {
-        return originalTitle;
+    public Optional<Long> ratingCount() {
+        return ratingCount;
     }
 
+    /**
+     * When present, indicates an image to be shown with the rating. This is passed back as a small set of defined URI values, e.g. rottentomatoes://image.rating.rotten.
+     */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Double> audienceRating() {
-        return audienceRating;
+    public Optional<Object> ratingImage() {
+        return (Optional<Object>) ratingImage;
     }
 
+    /**
+     * This is the opaque string to be passed into timeline, scrobble, and rating endpoints to identify them.  While it often appears to be numeric, this is not guaranteed.
+     */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> audienceRatingImage() {
-        return audienceRatingImage;
+    public Optional<Object> ratingKey() {
+        return (Optional<Object>) ratingKey;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> ratingImage() {
-        return ratingImage;
+    public Optional<List<Tag>> role() {
+        return (Optional<List<Tag>>) role;
     }
 
+    /**
+     * Indicates this is a search directory
+     */
     @JsonIgnore
-    public Optional<Integer> imdbRatingCount() {
-        return imdbRatingCount;
+    public Optional<Boolean> search() {
+        return search;
     }
 
+    /**
+     * Used by old clients to provide nested menus allowing for primative (but structured) navigation.
+     */
     @JsonIgnore
-    public Optional<String> subtype() {
-        return subtype;
+    public Optional<Boolean> secondary() {
+        return secondary;
     }
 
-    @JsonIgnore
-    public Optional<String> theme() {
-        return theme;
-    }
-
-    @JsonIgnore
-    public Optional<Integer> leafCount() {
-        return leafCount;
-    }
-
-    @JsonIgnore
-    public Optional<Integer> childCount() {
-        return childCount;
-    }
-
-    @JsonIgnore
-    public Optional<Boolean> isContinuingSeries() {
-        return isContinuingSeries;
-    }
-
+    /**
+     * When found on a show item, indicates that the children (seasons) should be skipped in favor of the grandchildren (episodes). Useful for mini-series, etc.
+     */
     @JsonIgnore
     public Optional<Boolean> skipChildren() {
         return skipChildren;
     }
 
+    /**
+     * When present on an episode or track item, indicates parent should be skipped in favor of grandparent (show).
+     */
     @JsonIgnore
-    public Optional<String> availabilityId() {
-        return availabilityId;
+    public Optional<Boolean> skipParent() {
+        return skipParent;
     }
 
+    /**
+     * Typically only seen in metadata at a library's top level
+     */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> streamingMediaId() {
-        return streamingMediaId;
+    public Optional<List<Sort>> sort() {
+        return (Optional<List<Sort>>) sort;
     }
 
+    /**
+     * When present, the studio or label which produced an item (e.g. movie studio for movies, record label for albums).
+     */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> playableKey() {
-        return playableKey;
+    public Optional<Object> studio() {
+        return (Optional<Object>) studio;
+    }
+
+    /**
+     * The subtype of the video item, such as `photo` when the video item is in a photo library
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Object> subtype() {
+        return (Optional<Object>) subtype;
+    }
+
+    /**
+     * When present, the extended textual information about the item (e.g. movie plot, artist biography, album review).
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Object> summary() {
+        return (Optional<Object>) summary;
+    }
+
+    /**
+     * When present, a pithy one-liner about the item (usually only seen for movies).
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Object> tagline() {
+        return (Optional<Object>) tagline;
+    }
+
+    /**
+     * When present, the URL for theme music for the item (usually only for TV shows).
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Object> theme() {
+        return (Optional<Object>) theme;
+    }
+
+    /**
+     * When present, the URL for the poster or thumbnail for the item. When available for types like movie, it will be the poster graphic, but fall-back to the extracted media thumbnail.
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Object> thumb() {
+        return (Optional<Object>) thumb;
+    }
+
+    /**
+     * Whene present, this is the string used for sorting the item. It's usually the title with any leading articles removed (e.g. “Simpsons”).
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Object> titleSort() {
+        return (Optional<Object>) titleSort;
+    }
+
+    /**
+     * In units of seconds since the epoch, returns the time at which the item was last changed (e.g. had its metadata updated).
+     */
+    @JsonIgnore
+    public Optional<Long> updatedAt() {
+        return updatedAt;
+    }
+
+    /**
+     * When the user has rated an item, this contains the user rating
+     */
+    @JsonIgnore
+    public Optional<Double> userRating() {
+        return userRating;
+    }
+
+    /**
+     * When a users has completed watched or listened to an item, this attribute contains the number of consumptions.
+     */
+    @JsonIgnore
+    public Optional<Long> viewCount() {
+        return viewCount;
+    }
+
+    /**
+     * For shows and seasons, contains the number of viewed episodes.
+     */
+    @JsonIgnore
+    public Optional<Long> viewedLeafCount() {
+        return viewedLeafCount;
+    }
+
+    /**
+     * When a user is in the process of viewing or listening to this item, this attribute contains the current offset, in units of milliseconds.
+     */
+    @JsonIgnore
+    public Optional<Long> viewOffset() {
+        return viewOffset;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<Tag>> writer() {
+        return (Optional<List<Tag>>) writer;
+    }
+
+    /**
+     * When present, the year associated with the item's release (e.g. release year for a movie).
+     */
+    @JsonIgnore
+    public Optional<Long> year() {
+        return year;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> additionalProperties() {
+        return additionalProperties;
     }
 
     public static Builder builder() {
@@ -501,224 +1334,524 @@ public class Metadata {
     }
 
 
-    public Metadata withArt(String art) {
-        Utils.checkNotNull(art, "art");
-        this.art = Optional.ofNullable(art);
+    /**
+     * Information about the player being used for playback
+     */
+    public Metadata withPlayer(Player player) {
+        Utils.checkNotNull(player, "player");
+        this.player = Optional.ofNullable(player);
         return this;
     }
 
 
-    public Metadata withArt(Optional<String> art) {
-        Utils.checkNotNull(art, "art");
-        this.art = art;
+    /**
+     * Information about the player being used for playback
+     */
+    public Metadata withPlayer(Optional<? extends Player> player) {
+        Utils.checkNotNull(player, "player");
+        this.player = player;
         return this;
     }
 
-    public Metadata withGuid(String guid) {
-        Utils.checkNotNull(guid, "guid");
-        this.guid = Optional.ofNullable(guid);
-        return this;
-    }
-
-
-    public Metadata withGuid(Optional<String> guid) {
-        Utils.checkNotNull(guid, "guid");
-        this.guid = guid;
-        return this;
-    }
-
-    public Metadata withKey(String key) {
-        Utils.checkNotNull(key, "key");
-        this.key = Optional.ofNullable(key);
+    /**
+     * Information about the playback session
+     */
+    public Metadata withSession(Session session) {
+        Utils.checkNotNull(session, "session");
+        this.session = Optional.ofNullable(session);
         return this;
     }
 
 
-    public Metadata withKey(Optional<String> key) {
-        Utils.checkNotNull(key, "key");
-        this.key = key;
+    /**
+     * Information about the playback session
+     */
+    public Metadata withSession(Optional<? extends Session> session) {
+        Utils.checkNotNull(session, "session");
+        this.session = session;
         return this;
     }
 
-    public Metadata withRatingKey(String ratingKey) {
-        Utils.checkNotNull(ratingKey, "ratingKey");
-        this.ratingKey = Optional.ofNullable(ratingKey);
-        return this;
-    }
-
-
-    public Metadata withRatingKey(Optional<String> ratingKey) {
-        Utils.checkNotNull(ratingKey, "ratingKey");
-        this.ratingKey = ratingKey;
-        return this;
-    }
-
-    public Metadata withStudio(String studio) {
-        Utils.checkNotNull(studio, "studio");
-        this.studio = Optional.ofNullable(studio);
+    /**
+     * The user playing the content
+     */
+    public Metadata withUser(User user) {
+        Utils.checkNotNull(user, "user");
+        this.user = Optional.ofNullable(user);
         return this;
     }
 
 
-    public Metadata withStudio(Optional<String> studio) {
-        Utils.checkNotNull(studio, "studio");
-        this.studio = studio;
+    /**
+     * The user playing the content
+     */
+    public Metadata withUser(Optional<? extends User> user) {
+        Utils.checkNotNull(user, "user");
+        this.user = user;
         return this;
     }
 
-    public Metadata withTagline(String tagline) {
-        Utils.checkNotNull(tagline, "tagline");
-        this.tagline = Optional.ofNullable(tagline);
-        return this;
-    }
-
-
-    public Metadata withTagline(Optional<String> tagline) {
-        Utils.checkNotNull(tagline, "tagline");
-        this.tagline = tagline;
-        return this;
-    }
-
-    public Metadata withType(String type) {
-        Utils.checkNotNull(type, "type");
-        this.type = Optional.ofNullable(type);
-        return this;
-    }
-
-
-    public Metadata withType(Optional<String> type) {
-        Utils.checkNotNull(type, "type");
-        this.type = type;
-        return this;
-    }
-
-    public Metadata withThumb(String thumb) {
-        Utils.checkNotNull(thumb, "thumb");
-        this.thumb = Optional.ofNullable(thumb);
-        return this;
-    }
-
-
-    public Metadata withThumb(Optional<String> thumb) {
-        Utils.checkNotNull(thumb, "thumb");
-        this.thumb = thumb;
-        return this;
-    }
-
-    public Metadata withAddedAt(int addedAt) {
-        Utils.checkNotNull(addedAt, "addedAt");
-        this.addedAt = Optional.ofNullable(addedAt);
-        return this;
-    }
-
-
-    public Metadata withAddedAt(Optional<Integer> addedAt) {
-        Utils.checkNotNull(addedAt, "addedAt");
-        this.addedAt = addedAt;
-        return this;
-    }
-
-    public Metadata withDuration(int duration) {
-        Utils.checkNotNull(duration, "duration");
-        this.duration = Optional.ofNullable(duration);
-        return this;
-    }
-
-
-    public Metadata withDuration(Optional<Integer> duration) {
-        Utils.checkNotNull(duration, "duration");
-        this.duration = duration;
-        return this;
-    }
-
-    public Metadata withPublicPagesURL(String publicPagesURL) {
-        Utils.checkNotNull(publicPagesURL, "publicPagesURL");
-        this.publicPagesURL = Optional.ofNullable(publicPagesURL);
-        return this;
-    }
-
-
-    public Metadata withPublicPagesURL(Optional<String> publicPagesURL) {
-        Utils.checkNotNull(publicPagesURL, "publicPagesURL");
-        this.publicPagesURL = publicPagesURL;
-        return this;
-    }
-
-    public Metadata withSlug(String slug) {
-        Utils.checkNotNull(slug, "slug");
-        this.slug = Optional.ofNullable(slug);
-        return this;
-    }
-
-
-    public Metadata withSlug(Optional<String> slug) {
-        Utils.checkNotNull(slug, "slug");
-        this.slug = slug;
-        return this;
-    }
-
-    public Metadata withUserState(boolean userState) {
-        Utils.checkNotNull(userState, "userState");
-        this.userState = Optional.ofNullable(userState);
-        return this;
-    }
-
-
-    public Metadata withUserState(Optional<Boolean> userState) {
-        Utils.checkNotNull(userState, "userState");
-        this.userState = userState;
-        return this;
-    }
-
-    public Metadata withTitle(String title) {
+    /**
+     * The title of the item (e.g. “300” or “The Simpsons”)
+     */
+    public Metadata withTitle(Object title) {
         Utils.checkNotNull(title, "title");
         this.title = Optional.ofNullable(title);
         return this;
     }
 
 
-    public Metadata withTitle(Optional<String> title) {
+    /**
+     * The title of the item (e.g. “300” or “The Simpsons”)
+     */
+    public Metadata withTitle(Optional<? extends Object> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
         return this;
     }
 
-    public Metadata withContentRating(String contentRating) {
+    /**
+     * The type of the video item, such as `movie`, `episode`, or `clip`.
+     */
+    public Metadata withType(Object type) {
+        Utils.checkNotNull(type, "type");
+        this.type = Optional.ofNullable(type);
+        return this;
+    }
+
+
+    /**
+     * The type of the video item, such as `movie`, `episode`, or `clip`.
+     */
+    public Metadata withType(Optional<? extends Object> type) {
+        Utils.checkNotNull(type, "type");
+        this.type = type;
+        return this;
+    }
+
+    /**
+     * When present, contains the disc number for a track on multi-disc albums.
+     */
+    public Metadata withAbsoluteIndex(long absoluteIndex) {
+        Utils.checkNotNull(absoluteIndex, "absoluteIndex");
+        this.absoluteIndex = Optional.ofNullable(absoluteIndex);
+        return this;
+    }
+
+
+    /**
+     * When present, contains the disc number for a track on multi-disc albums.
+     */
+    public Metadata withAbsoluteIndex(Optional<Long> absoluteIndex) {
+        Utils.checkNotNull(absoluteIndex, "absoluteIndex");
+        this.absoluteIndex = absoluteIndex;
+        return this;
+    }
+
+    /**
+     * In units of seconds since the epoch, returns the time at which the item was added to the library.
+     */
+    public Metadata withAddedAt(long addedAt) {
+        Utils.checkNotNull(addedAt, "addedAt");
+        this.addedAt = Optional.ofNullable(addedAt);
+        return this;
+    }
+
+
+    /**
+     * In units of seconds since the epoch, returns the time at which the item was added to the library.
+     */
+    public Metadata withAddedAt(Optional<Long> addedAt) {
+        Utils.checkNotNull(addedAt, "addedAt");
+        this.addedAt = addedAt;
+        return this;
+    }
+
+    /**
+     * When present, the URL for the background artwork for the item.
+     */
+    public Metadata withArt(Object art) {
+        Utils.checkNotNull(art, "art");
+        this.art = Optional.ofNullable(art);
+        return this;
+    }
+
+
+    /**
+     * When present, the URL for the background artwork for the item.
+     */
+    public Metadata withArt(Optional<? extends Object> art) {
+        Utils.checkNotNull(art, "art");
+        this.art = art;
+        return this;
+    }
+
+    /**
+     * Some rating systems separate reviewer ratings from audience ratings
+     */
+    public Metadata withAudienceRating(double audienceRating) {
+        Utils.checkNotNull(audienceRating, "audienceRating");
+        this.audienceRating = Optional.ofNullable(audienceRating);
+        return this;
+    }
+
+
+    /**
+     * Some rating systems separate reviewer ratings from audience ratings
+     */
+    public Metadata withAudienceRating(Optional<Double> audienceRating) {
+        Utils.checkNotNull(audienceRating, "audienceRating");
+        this.audienceRating = audienceRating;
+        return this;
+    }
+
+    /**
+     * A URI representing the image to be shown with the audience rating (e.g. rottentomatoes://image.rating.spilled).
+     */
+    public Metadata withAudienceRatingImage(Object audienceRatingImage) {
+        Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
+        this.audienceRatingImage = Optional.ofNullable(audienceRatingImage);
+        return this;
+    }
+
+
+    /**
+     * A URI representing the image to be shown with the audience rating (e.g. rottentomatoes://image.rating.spilled).
+     */
+    public Metadata withAudienceRatingImage(Optional<? extends Object> audienceRatingImage) {
+        Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
+        this.audienceRatingImage = audienceRatingImage;
+        return this;
+    }
+
+    public Metadata withAutotag(List<Tag> autotag) {
+        Utils.checkNotNull(autotag, "autotag");
+        this.autotag = Optional.ofNullable(autotag);
+        return this;
+    }
+
+
+    public Metadata withAutotag(Optional<? extends List<Tag>> autotag) {
+        Utils.checkNotNull(autotag, "autotag");
+        this.autotag = autotag;
+        return this;
+    }
+
+    /**
+     * When present, the URL for a banner graphic for the item.
+     */
+    public Metadata withBanner(Object banner) {
+        Utils.checkNotNull(banner, "banner");
+        this.banner = Optional.ofNullable(banner);
+        return this;
+    }
+
+
+    /**
+     * When present, the URL for a banner graphic for the item.
+     */
+    public Metadata withBanner(Optional<? extends Object> banner) {
+        Utils.checkNotNull(banner, "banner");
+        this.banner = banner;
+        return this;
+    }
+
+    /**
+     * When present, indicates the source for the chapters in the media file. Can be media (the chapters were embedded in the media itself), agent (a metadata agent computed them), or mixed (a combination of the two).
+     */
+    public Metadata withChapterSource(Object chapterSource) {
+        Utils.checkNotNull(chapterSource, "chapterSource");
+        this.chapterSource = Optional.ofNullable(chapterSource);
+        return this;
+    }
+
+
+    /**
+     * When present, indicates the source for the chapters in the media file. Can be media (the chapters were embedded in the media itself), agent (a metadata agent computed them), or mixed (a combination of the two).
+     */
+    public Metadata withChapterSource(Optional<? extends Object> chapterSource) {
+        Utils.checkNotNull(chapterSource, "chapterSource");
+        this.chapterSource = chapterSource;
+        return this;
+    }
+
+    /**
+     * When present, the URL for a composite image for descendent items (e.g. photo albums or playlists).
+     */
+    public Metadata withComposite(Object composite) {
+        Utils.checkNotNull(composite, "composite");
+        this.composite = Optional.ofNullable(composite);
+        return this;
+    }
+
+
+    /**
+     * When present, the URL for a composite image for descendent items (e.g. photo albums or playlists).
+     */
+    public Metadata withComposite(Optional<? extends Object> composite) {
+        Utils.checkNotNull(composite, "composite");
+        this.composite = composite;
+        return this;
+    }
+
+    /**
+     * If known, the content rating (e.g. MPAA) for an item.
+     */
+    public Metadata withContentRating(Object contentRating) {
         Utils.checkNotNull(contentRating, "contentRating");
         this.contentRating = Optional.ofNullable(contentRating);
         return this;
     }
 
 
-    public Metadata withContentRating(Optional<String> contentRating) {
+    /**
+     * If known, the content rating (e.g. MPAA) for an item.
+     */
+    public Metadata withContentRating(Optional<? extends Object> contentRating) {
         Utils.checkNotNull(contentRating, "contentRating");
         this.contentRating = contentRating;
         return this;
     }
 
-    public Metadata withOriginallyAvailableAt(LocalDate originallyAvailableAt) {
-        Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
-        this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
+    public Metadata withCountry(List<Tag> country) {
+        Utils.checkNotNull(country, "country");
+        this.country = Optional.ofNullable(country);
         return this;
     }
 
 
-    public Metadata withOriginallyAvailableAt(Optional<LocalDate> originallyAvailableAt) {
-        Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
-        this.originallyAvailableAt = originallyAvailableAt;
+    public Metadata withCountry(Optional<? extends List<Tag>> country) {
+        Utils.checkNotNull(country, "country");
+        this.country = country;
         return this;
     }
 
-    public Metadata withYear(int year) {
-        Utils.checkNotNull(year, "year");
-        this.year = Optional.ofNullable(year);
+    public Metadata withDirector(List<Tag> director) {
+        Utils.checkNotNull(director, "director");
+        this.director = Optional.ofNullable(director);
         return this;
     }
 
 
-    public Metadata withYear(Optional<Integer> year) {
-        Utils.checkNotNull(year, "year");
-        this.year = year;
+    public Metadata withDirector(Optional<? extends List<Tag>> director) {
+        Utils.checkNotNull(director, "director");
+        this.director = director;
+        return this;
+    }
+
+    /**
+     * When present, the duration for the item, in units of milliseconds.
+     */
+    public Metadata withDuration(long duration) {
+        Utils.checkNotNull(duration, "duration");
+        this.duration = Optional.ofNullable(duration);
+        return this;
+    }
+
+
+    /**
+     * When present, the duration for the item, in units of milliseconds.
+     */
+    public Metadata withDuration(Optional<Long> duration) {
+        Utils.checkNotNull(duration, "duration");
+        this.duration = duration;
+        return this;
+    }
+
+    /**
+     * Typically only seen in metadata at a library's top level
+     */
+    public Metadata withFilter(List<Filter> filter) {
+        Utils.checkNotNull(filter, "filter");
+        this.filter = Optional.ofNullable(filter);
+        return this;
+    }
+
+
+    /**
+     * Typically only seen in metadata at a library's top level
+     */
+    public Metadata withFilter(Optional<? extends List<Filter>> filter) {
+        Utils.checkNotNull(filter, "filter");
+        this.filter = filter;
+        return this;
+    }
+
+    public Metadata withGenre(List<Tag> genre) {
+        Utils.checkNotNull(genre, "genre");
+        this.genre = Optional.ofNullable(genre);
+        return this;
+    }
+
+
+    public Metadata withGenre(Optional<? extends List<Tag>> genre) {
+        Utils.checkNotNull(genre, "genre");
+        this.genre = genre;
+        return this;
+    }
+
+    /**
+     * The `art` of the grandparent
+     */
+    public Metadata withGrandparentArt(String grandparentArt) {
+        Utils.checkNotNull(grandparentArt, "grandparentArt");
+        this.grandparentArt = Optional.ofNullable(grandparentArt);
+        return this;
+    }
+
+
+    /**
+     * The `art` of the grandparent
+     */
+    public Metadata withGrandparentArt(Optional<String> grandparentArt) {
+        Utils.checkNotNull(grandparentArt, "grandparentArt");
+        this.grandparentArt = grandparentArt;
+        return this;
+    }
+
+    /**
+     * The `hero` of the grandparent
+     */
+    public Metadata withGrandparentHero(String grandparentHero) {
+        Utils.checkNotNull(grandparentHero, "grandparentHero");
+        this.grandparentHero = Optional.ofNullable(grandparentHero);
+        return this;
+    }
+
+
+    /**
+     * The `hero` of the grandparent
+     */
+    public Metadata withGrandparentHero(Optional<String> grandparentHero) {
+        Utils.checkNotNull(grandparentHero, "grandparentHero");
+        this.grandparentHero = grandparentHero;
+        return this;
+    }
+
+    /**
+     * The `key` of the grandparent
+     */
+    public Metadata withGrandparentKey(String grandparentKey) {
+        Utils.checkNotNull(grandparentKey, "grandparentKey");
+        this.grandparentKey = Optional.ofNullable(grandparentKey);
+        return this;
+    }
+
+
+    /**
+     * The `key` of the grandparent
+     */
+    public Metadata withGrandparentKey(Optional<String> grandparentKey) {
+        Utils.checkNotNull(grandparentKey, "grandparentKey");
+        this.grandparentKey = grandparentKey;
+        return this;
+    }
+
+    /**
+     * The `ratingKey` of the grandparent
+     */
+    public Metadata withGrandparentRatingKey(String grandparentRatingKey) {
+        Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
+        this.grandparentRatingKey = Optional.ofNullable(grandparentRatingKey);
+        return this;
+    }
+
+
+    /**
+     * The `ratingKey` of the grandparent
+     */
+    public Metadata withGrandparentRatingKey(Optional<String> grandparentRatingKey) {
+        Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
+        this.grandparentRatingKey = grandparentRatingKey;
+        return this;
+    }
+
+    /**
+     * The `theme` of the grandparent
+     */
+    public Metadata withGrandparentTheme(String grandparentTheme) {
+        Utils.checkNotNull(grandparentTheme, "grandparentTheme");
+        this.grandparentTheme = Optional.ofNullable(grandparentTheme);
+        return this;
+    }
+
+
+    /**
+     * The `theme` of the grandparent
+     */
+    public Metadata withGrandparentTheme(Optional<String> grandparentTheme) {
+        Utils.checkNotNull(grandparentTheme, "grandparentTheme");
+        this.grandparentTheme = grandparentTheme;
+        return this;
+    }
+
+    /**
+     * The `thumb` of the grandparent
+     */
+    public Metadata withGrandparentThumb(String grandparentThumb) {
+        Utils.checkNotNull(grandparentThumb, "grandparentThumb");
+        this.grandparentThumb = Optional.ofNullable(grandparentThumb);
+        return this;
+    }
+
+
+    /**
+     * The `thumb` of the grandparent
+     */
+    public Metadata withGrandparentThumb(Optional<String> grandparentThumb) {
+        Utils.checkNotNull(grandparentThumb, "grandparentThumb");
+        this.grandparentThumb = grandparentThumb;
+        return this;
+    }
+
+    /**
+     * The `title` of the grandparent
+     */
+    public Metadata withGrandparentTitle(String grandparentTitle) {
+        Utils.checkNotNull(grandparentTitle, "grandparentTitle");
+        this.grandparentTitle = Optional.ofNullable(grandparentTitle);
+        return this;
+    }
+
+
+    /**
+     * The `title` of the grandparent
+     */
+    public Metadata withGrandparentTitle(Optional<String> grandparentTitle) {
+        Utils.checkNotNull(grandparentTitle, "grandparentTitle");
+        this.grandparentTitle = grandparentTitle;
+        return this;
+    }
+
+    public Metadata withGuid(List<Tag> guid) {
+        Utils.checkNotNull(guid, "guid");
+        this.guid = Optional.ofNullable(guid);
+        return this;
+    }
+
+
+    public Metadata withGuid(Optional<? extends List<Tag>> guid) {
+        Utils.checkNotNull(guid, "guid");
+        this.guid = guid;
+        return this;
+    }
+
+    /**
+     * When present, the URL for a hero image for the item.
+     */
+    public Metadata withHero(Object hero) {
+        Utils.checkNotNull(hero, "hero");
+        this.hero = Optional.ofNullable(hero);
+        return this;
+    }
+
+
+    /**
+     * When present, the URL for a hero image for the item.
+     */
+    public Metadata withHero(Optional<? extends Object> hero) {
+        Utils.checkNotNull(hero, "hero");
+        this.hero = hero;
         return this;
     }
 
@@ -735,19 +1868,288 @@ public class Metadata {
         return this;
     }
 
-    public Metadata withBanner(String banner) {
-        Utils.checkNotNull(banner, "banner");
-        this.banner = Optional.ofNullable(banner);
+    /**
+     * When present, this represents the episode number for episodes, season number for seasons, or track number for audio tracks.
+     */
+    public Metadata withIndex(long index) {
+        Utils.checkNotNull(index, "index");
+        this.index = Optional.ofNullable(index);
         return this;
     }
 
 
-    public Metadata withBanner(Optional<String> banner) {
-        Utils.checkNotNull(banner, "banner");
-        this.banner = banner;
+    /**
+     * When present, this represents the episode number for episodes, season number for seasons, or track number for audio tracks.
+     */
+    public Metadata withIndex(Optional<Long> index) {
+        Utils.checkNotNull(index, "index");
+        this.index = index;
         return this;
     }
 
+    /**
+     * The key at which the item's details can be fetched.  In many cases a metadata item may be passed without all the details (such as in a hub) and this key corresponds to the endpoint to fetch additional details.
+     */
+    public Metadata withKey(Object key) {
+        Utils.checkNotNull(key, "key");
+        this.key = Optional.ofNullable(key);
+        return this;
+    }
+
+
+    /**
+     * The key at which the item's details can be fetched.  In many cases a metadata item may be passed without all the details (such as in a hub) and this key corresponds to the endpoint to fetch additional details.
+     */
+    public Metadata withKey(Optional<? extends Object> key) {
+        Utils.checkNotNull(key, "key");
+        this.key = key;
+        return this;
+    }
+
+    /**
+     * When a user has watched or listened to an item, this contains a timestamp (epoch seconds) for that last consumption time.
+     */
+    public Metadata withLastViewedAt(long lastViewedAt) {
+        Utils.checkNotNull(lastViewedAt, "lastViewedAt");
+        this.lastViewedAt = Optional.ofNullable(lastViewedAt);
+        return this;
+    }
+
+
+    /**
+     * When a user has watched or listened to an item, this contains a timestamp (epoch seconds) for that last consumption time.
+     */
+    public Metadata withLastViewedAt(Optional<Long> lastViewedAt) {
+        Utils.checkNotNull(lastViewedAt, "lastViewedAt");
+        this.lastViewedAt = lastViewedAt;
+        return this;
+    }
+
+    /**
+     * For shows and seasons, contains the number of total episodes.
+     */
+    public Metadata withLeafCount(long leafCount) {
+        Utils.checkNotNull(leafCount, "leafCount");
+        this.leafCount = Optional.ofNullable(leafCount);
+        return this;
+    }
+
+
+    /**
+     * For shows and seasons, contains the number of total episodes.
+     */
+    public Metadata withLeafCount(Optional<Long> leafCount) {
+        Utils.checkNotNull(leafCount, "leafCount");
+        this.leafCount = leafCount;
+        return this;
+    }
+
+    public Metadata withMedia(List<Media> media) {
+        Utils.checkNotNull(media, "media");
+        this.media = Optional.ofNullable(media);
+        return this;
+    }
+
+
+    public Metadata withMedia(Optional<? extends List<Media>> media) {
+        Utils.checkNotNull(media, "media");
+        this.media = media;
+        return this;
+    }
+
+    /**
+     * When present, in the format YYYY-MM-DD [HH:MM:SS] (the hours/minutes/seconds part is not always present). The air date, or a higher resolution release date for an item, depending on type. For example, episodes usually have air date like 1979-08-10 (we don't use epoch seconds because media existed prior to 1970). In some cases, recorded over-the-air content has higher resolution air date which includes a time component. Albums and movies may have day-resolution release dates as well.
+     */
+    public Metadata withOriginallyAvailableAt(Object originallyAvailableAt) {
+        Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
+        this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
+        return this;
+    }
+
+
+    /**
+     * When present, in the format YYYY-MM-DD [HH:MM:SS] (the hours/minutes/seconds part is not always present). The air date, or a higher resolution release date for an item, depending on type. For example, episodes usually have air date like 1979-08-10 (we don't use epoch seconds because media existed prior to 1970). In some cases, recorded over-the-air content has higher resolution air date which includes a time component. Albums and movies may have day-resolution release dates as well.
+     */
+    public Metadata withOriginallyAvailableAt(Optional<? extends Object> originallyAvailableAt) {
+        Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
+        this.originallyAvailableAt = originallyAvailableAt;
+        return this;
+    }
+
+    /**
+     * When present, used to indicate an item's original title, e.g. a movie's foreign title.
+     */
+    public Metadata withOriginalTitle(Object originalTitle) {
+        Utils.checkNotNull(originalTitle, "originalTitle");
+        this.originalTitle = Optional.ofNullable(originalTitle);
+        return this;
+    }
+
+
+    /**
+     * When present, used to indicate an item's original title, e.g. a movie's foreign title.
+     */
+    public Metadata withOriginalTitle(Optional<? extends Object> originalTitle) {
+        Utils.checkNotNull(originalTitle, "originalTitle");
+        this.originalTitle = originalTitle;
+        return this;
+    }
+
+    /**
+     * The `hero` of the parent
+     */
+    public Metadata withParentHero(String parentHero) {
+        Utils.checkNotNull(parentHero, "parentHero");
+        this.parentHero = Optional.ofNullable(parentHero);
+        return this;
+    }
+
+
+    /**
+     * The `hero` of the parent
+     */
+    public Metadata withParentHero(Optional<String> parentHero) {
+        Utils.checkNotNull(parentHero, "parentHero");
+        this.parentHero = parentHero;
+        return this;
+    }
+
+    /**
+     * The `index` of the parent
+     */
+    public Metadata withParentIndex(long parentIndex) {
+        Utils.checkNotNull(parentIndex, "parentIndex");
+        this.parentIndex = Optional.ofNullable(parentIndex);
+        return this;
+    }
+
+
+    /**
+     * The `index` of the parent
+     */
+    public Metadata withParentIndex(Optional<Long> parentIndex) {
+        Utils.checkNotNull(parentIndex, "parentIndex");
+        this.parentIndex = parentIndex;
+        return this;
+    }
+
+    /**
+     * The `key` of the parent
+     */
+    public Metadata withParentKey(String parentKey) {
+        Utils.checkNotNull(parentKey, "parentKey");
+        this.parentKey = Optional.ofNullable(parentKey);
+        return this;
+    }
+
+
+    /**
+     * The `key` of the parent
+     */
+    public Metadata withParentKey(Optional<String> parentKey) {
+        Utils.checkNotNull(parentKey, "parentKey");
+        this.parentKey = parentKey;
+        return this;
+    }
+
+    /**
+     * The `ratingKey` of the parent
+     */
+    public Metadata withParentRatingKey(String parentRatingKey) {
+        Utils.checkNotNull(parentRatingKey, "parentRatingKey");
+        this.parentRatingKey = Optional.ofNullable(parentRatingKey);
+        return this;
+    }
+
+
+    /**
+     * The `ratingKey` of the parent
+     */
+    public Metadata withParentRatingKey(Optional<String> parentRatingKey) {
+        Utils.checkNotNull(parentRatingKey, "parentRatingKey");
+        this.parentRatingKey = parentRatingKey;
+        return this;
+    }
+
+    /**
+     * The `thumb` of the parent
+     */
+    public Metadata withParentThumb(String parentThumb) {
+        Utils.checkNotNull(parentThumb, "parentThumb");
+        this.parentThumb = Optional.ofNullable(parentThumb);
+        return this;
+    }
+
+
+    /**
+     * The `thumb` of the parent
+     */
+    public Metadata withParentThumb(Optional<String> parentThumb) {
+        Utils.checkNotNull(parentThumb, "parentThumb");
+        this.parentThumb = parentThumb;
+        return this;
+    }
+
+    /**
+     * The `title` of the parent
+     */
+    public Metadata withParentTitle(String parentTitle) {
+        Utils.checkNotNull(parentTitle, "parentTitle");
+        this.parentTitle = Optional.ofNullable(parentTitle);
+        return this;
+    }
+
+
+    /**
+     * The `title` of the parent
+     */
+    public Metadata withParentTitle(Optional<String> parentTitle) {
+        Utils.checkNotNull(parentTitle, "parentTitle");
+        this.parentTitle = parentTitle;
+        return this;
+    }
+
+    /**
+     * Indicates that the item has a primary extra; for a movie, this is a trailer, and for a music track it is a music video. The URL points to the metadata details endpoint for the item.
+     */
+    public Metadata withPrimaryExtraKey(Object primaryExtraKey) {
+        Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
+        this.primaryExtraKey = Optional.ofNullable(primaryExtraKey);
+        return this;
+    }
+
+
+    /**
+     * Indicates that the item has a primary extra; for a movie, this is a trailer, and for a music track it is a music video. The URL points to the metadata details endpoint for the item.
+     */
+    public Metadata withPrimaryExtraKey(Optional<? extends Object> primaryExtraKey) {
+        Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
+        this.primaryExtraKey = primaryExtraKey;
+        return this;
+    }
+
+    /**
+     * Prompt to give the user for this directory (such as `Search Movies`)
+     */
+    public Metadata withPrompt(String prompt) {
+        Utils.checkNotNull(prompt, "prompt");
+        this.prompt = Optional.ofNullable(prompt);
+        return this;
+    }
+
+
+    /**
+     * Prompt to give the user for this directory (such as `Search Movies`)
+     */
+    public Metadata withPrompt(Optional<String> prompt) {
+        Utils.checkNotNull(prompt, "prompt");
+        this.prompt = prompt;
+        return this;
+    }
+
+    /**
+     * When present, the rating for the item. The exact meaning and representation depends on where the rating was sourced from.
+     */
     public Metadata withRating(double rating) {
         Utils.checkNotNull(rating, "rating");
         this.rating = Optional.ofNullable(rating);
@@ -755,155 +2157,139 @@ public class Metadata {
     }
 
 
+    /**
+     * When present, the rating for the item. The exact meaning and representation depends on where the rating was sourced from.
+     */
     public Metadata withRating(Optional<Double> rating) {
         Utils.checkNotNull(rating, "rating");
         this.rating = rating;
         return this;
     }
 
-    public Metadata withExpiresAt(int expiresAt) {
-        Utils.checkNotNull(expiresAt, "expiresAt");
-        this.expiresAt = Optional.ofNullable(expiresAt);
+    public Metadata withRatingArray(List<Tag> ratingArray) {
+        Utils.checkNotNull(ratingArray, "ratingArray");
+        this.ratingArray = Optional.ofNullable(ratingArray);
         return this;
     }
 
 
-    public Metadata withExpiresAt(Optional<Integer> expiresAt) {
-        Utils.checkNotNull(expiresAt, "expiresAt");
-        this.expiresAt = expiresAt;
+    public Metadata withRatingArray(Optional<? extends List<Tag>> ratingArray) {
+        Utils.checkNotNull(ratingArray, "ratingArray");
+        this.ratingArray = ratingArray;
         return this;
     }
 
-    public Metadata withOriginalTitle(String originalTitle) {
-        Utils.checkNotNull(originalTitle, "originalTitle");
-        this.originalTitle = Optional.ofNullable(originalTitle);
-        return this;
-    }
-
-
-    public Metadata withOriginalTitle(Optional<String> originalTitle) {
-        Utils.checkNotNull(originalTitle, "originalTitle");
-        this.originalTitle = originalTitle;
-        return this;
-    }
-
-    public Metadata withAudienceRating(double audienceRating) {
-        Utils.checkNotNull(audienceRating, "audienceRating");
-        this.audienceRating = Optional.ofNullable(audienceRating);
+    /**
+     * Number of ratings under this metadata
+     */
+    public Metadata withRatingCount(long ratingCount) {
+        Utils.checkNotNull(ratingCount, "ratingCount");
+        this.ratingCount = Optional.ofNullable(ratingCount);
         return this;
     }
 
 
-    public Metadata withAudienceRating(Optional<Double> audienceRating) {
-        Utils.checkNotNull(audienceRating, "audienceRating");
-        this.audienceRating = audienceRating;
+    /**
+     * Number of ratings under this metadata
+     */
+    public Metadata withRatingCount(Optional<Long> ratingCount) {
+        Utils.checkNotNull(ratingCount, "ratingCount");
+        this.ratingCount = ratingCount;
         return this;
     }
 
-    public Metadata withAudienceRatingImage(String audienceRatingImage) {
-        Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
-        this.audienceRatingImage = Optional.ofNullable(audienceRatingImage);
-        return this;
-    }
-
-
-    public Metadata withAudienceRatingImage(Optional<String> audienceRatingImage) {
-        Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
-        this.audienceRatingImage = audienceRatingImage;
-        return this;
-    }
-
-    public Metadata withRatingImage(String ratingImage) {
+    /**
+     * When present, indicates an image to be shown with the rating. This is passed back as a small set of defined URI values, e.g. rottentomatoes://image.rating.rotten.
+     */
+    public Metadata withRatingImage(Object ratingImage) {
         Utils.checkNotNull(ratingImage, "ratingImage");
         this.ratingImage = Optional.ofNullable(ratingImage);
         return this;
     }
 
 
-    public Metadata withRatingImage(Optional<String> ratingImage) {
+    /**
+     * When present, indicates an image to be shown with the rating. This is passed back as a small set of defined URI values, e.g. rottentomatoes://image.rating.rotten.
+     */
+    public Metadata withRatingImage(Optional<? extends Object> ratingImage) {
         Utils.checkNotNull(ratingImage, "ratingImage");
         this.ratingImage = ratingImage;
         return this;
     }
 
-    public Metadata withImdbRatingCount(int imdbRatingCount) {
-        Utils.checkNotNull(imdbRatingCount, "imdbRatingCount");
-        this.imdbRatingCount = Optional.ofNullable(imdbRatingCount);
+    /**
+     * This is the opaque string to be passed into timeline, scrobble, and rating endpoints to identify them.  While it often appears to be numeric, this is not guaranteed.
+     */
+    public Metadata withRatingKey(Object ratingKey) {
+        Utils.checkNotNull(ratingKey, "ratingKey");
+        this.ratingKey = Optional.ofNullable(ratingKey);
         return this;
     }
 
 
-    public Metadata withImdbRatingCount(Optional<Integer> imdbRatingCount) {
-        Utils.checkNotNull(imdbRatingCount, "imdbRatingCount");
-        this.imdbRatingCount = imdbRatingCount;
+    /**
+     * This is the opaque string to be passed into timeline, scrobble, and rating endpoints to identify them.  While it often appears to be numeric, this is not guaranteed.
+     */
+    public Metadata withRatingKey(Optional<? extends Object> ratingKey) {
+        Utils.checkNotNull(ratingKey, "ratingKey");
+        this.ratingKey = ratingKey;
         return this;
     }
 
-    public Metadata withSubtype(String subtype) {
-        Utils.checkNotNull(subtype, "subtype");
-        this.subtype = Optional.ofNullable(subtype);
-        return this;
-    }
-
-
-    public Metadata withSubtype(Optional<String> subtype) {
-        Utils.checkNotNull(subtype, "subtype");
-        this.subtype = subtype;
-        return this;
-    }
-
-    public Metadata withTheme(String theme) {
-        Utils.checkNotNull(theme, "theme");
-        this.theme = Optional.ofNullable(theme);
+    public Metadata withRole(List<Tag> role) {
+        Utils.checkNotNull(role, "role");
+        this.role = Optional.ofNullable(role);
         return this;
     }
 
 
-    public Metadata withTheme(Optional<String> theme) {
-        Utils.checkNotNull(theme, "theme");
-        this.theme = theme;
+    public Metadata withRole(Optional<? extends List<Tag>> role) {
+        Utils.checkNotNull(role, "role");
+        this.role = role;
         return this;
     }
 
-    public Metadata withLeafCount(int leafCount) {
-        Utils.checkNotNull(leafCount, "leafCount");
-        this.leafCount = Optional.ofNullable(leafCount);
-        return this;
-    }
-
-
-    public Metadata withLeafCount(Optional<Integer> leafCount) {
-        Utils.checkNotNull(leafCount, "leafCount");
-        this.leafCount = leafCount;
-        return this;
-    }
-
-    public Metadata withChildCount(int childCount) {
-        Utils.checkNotNull(childCount, "childCount");
-        this.childCount = Optional.ofNullable(childCount);
+    /**
+     * Indicates this is a search directory
+     */
+    public Metadata withSearch(boolean search) {
+        Utils.checkNotNull(search, "search");
+        this.search = Optional.ofNullable(search);
         return this;
     }
 
 
-    public Metadata withChildCount(Optional<Integer> childCount) {
-        Utils.checkNotNull(childCount, "childCount");
-        this.childCount = childCount;
+    /**
+     * Indicates this is a search directory
+     */
+    public Metadata withSearch(Optional<Boolean> search) {
+        Utils.checkNotNull(search, "search");
+        this.search = search;
         return this;
     }
 
-    public Metadata withIsContinuingSeries(boolean isContinuingSeries) {
-        Utils.checkNotNull(isContinuingSeries, "isContinuingSeries");
-        this.isContinuingSeries = Optional.ofNullable(isContinuingSeries);
+    /**
+     * Used by old clients to provide nested menus allowing for primative (but structured) navigation.
+     */
+    public Metadata withSecondary(boolean secondary) {
+        Utils.checkNotNull(secondary, "secondary");
+        this.secondary = Optional.ofNullable(secondary);
         return this;
     }
 
 
-    public Metadata withIsContinuingSeries(Optional<Boolean> isContinuingSeries) {
-        Utils.checkNotNull(isContinuingSeries, "isContinuingSeries");
-        this.isContinuingSeries = isContinuingSeries;
+    /**
+     * Used by old clients to provide nested menus allowing for primative (but structured) navigation.
+     */
+    public Metadata withSecondary(Optional<Boolean> secondary) {
+        Utils.checkNotNull(secondary, "secondary");
+        this.secondary = secondary;
         return this;
     }
 
+    /**
+     * When found on a show item, indicates that the children (seasons) should be skipped in favor of the grandchildren (episodes). Useful for mini-series, etc.
+     */
     public Metadata withSkipChildren(boolean skipChildren) {
         Utils.checkNotNull(skipChildren, "skipChildren");
         this.skipChildren = Optional.ofNullable(skipChildren);
@@ -911,48 +2297,323 @@ public class Metadata {
     }
 
 
+    /**
+     * When found on a show item, indicates that the children (seasons) should be skipped in favor of the grandchildren (episodes). Useful for mini-series, etc.
+     */
     public Metadata withSkipChildren(Optional<Boolean> skipChildren) {
         Utils.checkNotNull(skipChildren, "skipChildren");
         this.skipChildren = skipChildren;
         return this;
     }
 
-    public Metadata withAvailabilityId(String availabilityId) {
-        Utils.checkNotNull(availabilityId, "availabilityId");
-        this.availabilityId = Optional.ofNullable(availabilityId);
+    /**
+     * When present on an episode or track item, indicates parent should be skipped in favor of grandparent (show).
+     */
+    public Metadata withSkipParent(boolean skipParent) {
+        Utils.checkNotNull(skipParent, "skipParent");
+        this.skipParent = Optional.ofNullable(skipParent);
         return this;
     }
 
 
-    public Metadata withAvailabilityId(Optional<String> availabilityId) {
-        Utils.checkNotNull(availabilityId, "availabilityId");
-        this.availabilityId = availabilityId;
+    /**
+     * When present on an episode or track item, indicates parent should be skipped in favor of grandparent (show).
+     */
+    public Metadata withSkipParent(Optional<Boolean> skipParent) {
+        Utils.checkNotNull(skipParent, "skipParent");
+        this.skipParent = skipParent;
         return this;
     }
 
-    public Metadata withStreamingMediaId(String streamingMediaId) {
-        Utils.checkNotNull(streamingMediaId, "streamingMediaId");
-        this.streamingMediaId = Optional.ofNullable(streamingMediaId);
-        return this;
-    }
-
-
-    public Metadata withStreamingMediaId(Optional<String> streamingMediaId) {
-        Utils.checkNotNull(streamingMediaId, "streamingMediaId");
-        this.streamingMediaId = streamingMediaId;
-        return this;
-    }
-
-    public Metadata withPlayableKey(String playableKey) {
-        Utils.checkNotNull(playableKey, "playableKey");
-        this.playableKey = Optional.ofNullable(playableKey);
+    /**
+     * Typically only seen in metadata at a library's top level
+     */
+    public Metadata withSort(List<Sort> sort) {
+        Utils.checkNotNull(sort, "sort");
+        this.sort = Optional.ofNullable(sort);
         return this;
     }
 
 
-    public Metadata withPlayableKey(Optional<String> playableKey) {
-        Utils.checkNotNull(playableKey, "playableKey");
-        this.playableKey = playableKey;
+    /**
+     * Typically only seen in metadata at a library's top level
+     */
+    public Metadata withSort(Optional<? extends List<Sort>> sort) {
+        Utils.checkNotNull(sort, "sort");
+        this.sort = sort;
+        return this;
+    }
+
+    /**
+     * When present, the studio or label which produced an item (e.g. movie studio for movies, record label for albums).
+     */
+    public Metadata withStudio(Object studio) {
+        Utils.checkNotNull(studio, "studio");
+        this.studio = Optional.ofNullable(studio);
+        return this;
+    }
+
+
+    /**
+     * When present, the studio or label which produced an item (e.g. movie studio for movies, record label for albums).
+     */
+    public Metadata withStudio(Optional<? extends Object> studio) {
+        Utils.checkNotNull(studio, "studio");
+        this.studio = studio;
+        return this;
+    }
+
+    /**
+     * The subtype of the video item, such as `photo` when the video item is in a photo library
+     */
+    public Metadata withSubtype(Object subtype) {
+        Utils.checkNotNull(subtype, "subtype");
+        this.subtype = Optional.ofNullable(subtype);
+        return this;
+    }
+
+
+    /**
+     * The subtype of the video item, such as `photo` when the video item is in a photo library
+     */
+    public Metadata withSubtype(Optional<? extends Object> subtype) {
+        Utils.checkNotNull(subtype, "subtype");
+        this.subtype = subtype;
+        return this;
+    }
+
+    /**
+     * When present, the extended textual information about the item (e.g. movie plot, artist biography, album review).
+     */
+    public Metadata withSummary(Object summary) {
+        Utils.checkNotNull(summary, "summary");
+        this.summary = Optional.ofNullable(summary);
+        return this;
+    }
+
+
+    /**
+     * When present, the extended textual information about the item (e.g. movie plot, artist biography, album review).
+     */
+    public Metadata withSummary(Optional<? extends Object> summary) {
+        Utils.checkNotNull(summary, "summary");
+        this.summary = summary;
+        return this;
+    }
+
+    /**
+     * When present, a pithy one-liner about the item (usually only seen for movies).
+     */
+    public Metadata withTagline(Object tagline) {
+        Utils.checkNotNull(tagline, "tagline");
+        this.tagline = Optional.ofNullable(tagline);
+        return this;
+    }
+
+
+    /**
+     * When present, a pithy one-liner about the item (usually only seen for movies).
+     */
+    public Metadata withTagline(Optional<? extends Object> tagline) {
+        Utils.checkNotNull(tagline, "tagline");
+        this.tagline = tagline;
+        return this;
+    }
+
+    /**
+     * When present, the URL for theme music for the item (usually only for TV shows).
+     */
+    public Metadata withTheme(Object theme) {
+        Utils.checkNotNull(theme, "theme");
+        this.theme = Optional.ofNullable(theme);
+        return this;
+    }
+
+
+    /**
+     * When present, the URL for theme music for the item (usually only for TV shows).
+     */
+    public Metadata withTheme(Optional<? extends Object> theme) {
+        Utils.checkNotNull(theme, "theme");
+        this.theme = theme;
+        return this;
+    }
+
+    /**
+     * When present, the URL for the poster or thumbnail for the item. When available for types like movie, it will be the poster graphic, but fall-back to the extracted media thumbnail.
+     */
+    public Metadata withThumb(Object thumb) {
+        Utils.checkNotNull(thumb, "thumb");
+        this.thumb = Optional.ofNullable(thumb);
+        return this;
+    }
+
+
+    /**
+     * When present, the URL for the poster or thumbnail for the item. When available for types like movie, it will be the poster graphic, but fall-back to the extracted media thumbnail.
+     */
+    public Metadata withThumb(Optional<? extends Object> thumb) {
+        Utils.checkNotNull(thumb, "thumb");
+        this.thumb = thumb;
+        return this;
+    }
+
+    /**
+     * Whene present, this is the string used for sorting the item. It's usually the title with any leading articles removed (e.g. “Simpsons”).
+     */
+    public Metadata withTitleSort(Object titleSort) {
+        Utils.checkNotNull(titleSort, "titleSort");
+        this.titleSort = Optional.ofNullable(titleSort);
+        return this;
+    }
+
+
+    /**
+     * Whene present, this is the string used for sorting the item. It's usually the title with any leading articles removed (e.g. “Simpsons”).
+     */
+    public Metadata withTitleSort(Optional<? extends Object> titleSort) {
+        Utils.checkNotNull(titleSort, "titleSort");
+        this.titleSort = titleSort;
+        return this;
+    }
+
+    /**
+     * In units of seconds since the epoch, returns the time at which the item was last changed (e.g. had its metadata updated).
+     */
+    public Metadata withUpdatedAt(long updatedAt) {
+        Utils.checkNotNull(updatedAt, "updatedAt");
+        this.updatedAt = Optional.ofNullable(updatedAt);
+        return this;
+    }
+
+
+    /**
+     * In units of seconds since the epoch, returns the time at which the item was last changed (e.g. had its metadata updated).
+     */
+    public Metadata withUpdatedAt(Optional<Long> updatedAt) {
+        Utils.checkNotNull(updatedAt, "updatedAt");
+        this.updatedAt = updatedAt;
+        return this;
+    }
+
+    /**
+     * When the user has rated an item, this contains the user rating
+     */
+    public Metadata withUserRating(double userRating) {
+        Utils.checkNotNull(userRating, "userRating");
+        this.userRating = Optional.ofNullable(userRating);
+        return this;
+    }
+
+
+    /**
+     * When the user has rated an item, this contains the user rating
+     */
+    public Metadata withUserRating(Optional<Double> userRating) {
+        Utils.checkNotNull(userRating, "userRating");
+        this.userRating = userRating;
+        return this;
+    }
+
+    /**
+     * When a users has completed watched or listened to an item, this attribute contains the number of consumptions.
+     */
+    public Metadata withViewCount(long viewCount) {
+        Utils.checkNotNull(viewCount, "viewCount");
+        this.viewCount = Optional.ofNullable(viewCount);
+        return this;
+    }
+
+
+    /**
+     * When a users has completed watched or listened to an item, this attribute contains the number of consumptions.
+     */
+    public Metadata withViewCount(Optional<Long> viewCount) {
+        Utils.checkNotNull(viewCount, "viewCount");
+        this.viewCount = viewCount;
+        return this;
+    }
+
+    /**
+     * For shows and seasons, contains the number of viewed episodes.
+     */
+    public Metadata withViewedLeafCount(long viewedLeafCount) {
+        Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
+        this.viewedLeafCount = Optional.ofNullable(viewedLeafCount);
+        return this;
+    }
+
+
+    /**
+     * For shows and seasons, contains the number of viewed episodes.
+     */
+    public Metadata withViewedLeafCount(Optional<Long> viewedLeafCount) {
+        Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
+        this.viewedLeafCount = viewedLeafCount;
+        return this;
+    }
+
+    /**
+     * When a user is in the process of viewing or listening to this item, this attribute contains the current offset, in units of milliseconds.
+     */
+    public Metadata withViewOffset(long viewOffset) {
+        Utils.checkNotNull(viewOffset, "viewOffset");
+        this.viewOffset = Optional.ofNullable(viewOffset);
+        return this;
+    }
+
+
+    /**
+     * When a user is in the process of viewing or listening to this item, this attribute contains the current offset, in units of milliseconds.
+     */
+    public Metadata withViewOffset(Optional<Long> viewOffset) {
+        Utils.checkNotNull(viewOffset, "viewOffset");
+        this.viewOffset = viewOffset;
+        return this;
+    }
+
+    public Metadata withWriter(List<Tag> writer) {
+        Utils.checkNotNull(writer, "writer");
+        this.writer = Optional.ofNullable(writer);
+        return this;
+    }
+
+
+    public Metadata withWriter(Optional<? extends List<Tag>> writer) {
+        Utils.checkNotNull(writer, "writer");
+        this.writer = writer;
+        return this;
+    }
+
+    /**
+     * When present, the year associated with the item's release (e.g. release year for a movie).
+     */
+    public Metadata withYear(long year) {
+        Utils.checkNotNull(year, "year");
+        this.year = Optional.ofNullable(year);
+        return this;
+    }
+
+
+    /**
+     * When present, the year associated with the item's release (e.g. release year for a movie).
+     */
+    public Metadata withYear(Optional<Long> year) {
+        Utils.checkNotNull(year, "year");
+        this.year = year;
+        return this;
+    }
+
+    @JsonAnySetter
+    public Metadata withAdditionalProperty(String key, Object value) {
+        // note that value can be null because of the way JsonAnySetter works
+        Utils.checkNotNull(key, "key");
+        additionalProperties.put(key, value); 
+        return this;
+    }
+    public Metadata withAdditionalProperties(Map<String, Object> additionalProperties) {
+        Utils.checkNotNull(additionalProperties, "additionalProperties");
+        this.additionalProperties = additionalProperties;
         return this;
     }
 
@@ -966,395 +2627,851 @@ public class Metadata {
         }
         Metadata other = (Metadata) o;
         return 
-            Utils.enhancedDeepEquals(this.art, other.art) &&
-            Utils.enhancedDeepEquals(this.guid, other.guid) &&
-            Utils.enhancedDeepEquals(this.key, other.key) &&
-            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey) &&
-            Utils.enhancedDeepEquals(this.studio, other.studio) &&
-            Utils.enhancedDeepEquals(this.tagline, other.tagline) &&
-            Utils.enhancedDeepEquals(this.type, other.type) &&
-            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
-            Utils.enhancedDeepEquals(this.addedAt, other.addedAt) &&
-            Utils.enhancedDeepEquals(this.duration, other.duration) &&
-            Utils.enhancedDeepEquals(this.publicPagesURL, other.publicPagesURL) &&
-            Utils.enhancedDeepEquals(this.slug, other.slug) &&
-            Utils.enhancedDeepEquals(this.userState, other.userState) &&
+            Utils.enhancedDeepEquals(this.player, other.player) &&
+            Utils.enhancedDeepEquals(this.session, other.session) &&
+            Utils.enhancedDeepEquals(this.user, other.user) &&
             Utils.enhancedDeepEquals(this.title, other.title) &&
-            Utils.enhancedDeepEquals(this.contentRating, other.contentRating) &&
-            Utils.enhancedDeepEquals(this.originallyAvailableAt, other.originallyAvailableAt) &&
-            Utils.enhancedDeepEquals(this.year, other.year) &&
-            Utils.enhancedDeepEquals(this.image, other.image) &&
-            Utils.enhancedDeepEquals(this.banner, other.banner) &&
-            Utils.enhancedDeepEquals(this.rating, other.rating) &&
-            Utils.enhancedDeepEquals(this.expiresAt, other.expiresAt) &&
-            Utils.enhancedDeepEquals(this.originalTitle, other.originalTitle) &&
+            Utils.enhancedDeepEquals(this.type, other.type) &&
+            Utils.enhancedDeepEquals(this.absoluteIndex, other.absoluteIndex) &&
+            Utils.enhancedDeepEquals(this.addedAt, other.addedAt) &&
+            Utils.enhancedDeepEquals(this.art, other.art) &&
             Utils.enhancedDeepEquals(this.audienceRating, other.audienceRating) &&
             Utils.enhancedDeepEquals(this.audienceRatingImage, other.audienceRatingImage) &&
-            Utils.enhancedDeepEquals(this.ratingImage, other.ratingImage) &&
-            Utils.enhancedDeepEquals(this.imdbRatingCount, other.imdbRatingCount) &&
-            Utils.enhancedDeepEquals(this.subtype, other.subtype) &&
-            Utils.enhancedDeepEquals(this.theme, other.theme) &&
+            Utils.enhancedDeepEquals(this.autotag, other.autotag) &&
+            Utils.enhancedDeepEquals(this.banner, other.banner) &&
+            Utils.enhancedDeepEquals(this.chapterSource, other.chapterSource) &&
+            Utils.enhancedDeepEquals(this.composite, other.composite) &&
+            Utils.enhancedDeepEquals(this.contentRating, other.contentRating) &&
+            Utils.enhancedDeepEquals(this.country, other.country) &&
+            Utils.enhancedDeepEquals(this.director, other.director) &&
+            Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.filter, other.filter) &&
+            Utils.enhancedDeepEquals(this.genre, other.genre) &&
+            Utils.enhancedDeepEquals(this.grandparentArt, other.grandparentArt) &&
+            Utils.enhancedDeepEquals(this.grandparentHero, other.grandparentHero) &&
+            Utils.enhancedDeepEquals(this.grandparentKey, other.grandparentKey) &&
+            Utils.enhancedDeepEquals(this.grandparentRatingKey, other.grandparentRatingKey) &&
+            Utils.enhancedDeepEquals(this.grandparentTheme, other.grandparentTheme) &&
+            Utils.enhancedDeepEquals(this.grandparentThumb, other.grandparentThumb) &&
+            Utils.enhancedDeepEquals(this.grandparentTitle, other.grandparentTitle) &&
+            Utils.enhancedDeepEquals(this.guid, other.guid) &&
+            Utils.enhancedDeepEquals(this.hero, other.hero) &&
+            Utils.enhancedDeepEquals(this.image, other.image) &&
+            Utils.enhancedDeepEquals(this.index, other.index) &&
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.lastViewedAt, other.lastViewedAt) &&
             Utils.enhancedDeepEquals(this.leafCount, other.leafCount) &&
-            Utils.enhancedDeepEquals(this.childCount, other.childCount) &&
-            Utils.enhancedDeepEquals(this.isContinuingSeries, other.isContinuingSeries) &&
+            Utils.enhancedDeepEquals(this.media, other.media) &&
+            Utils.enhancedDeepEquals(this.originallyAvailableAt, other.originallyAvailableAt) &&
+            Utils.enhancedDeepEquals(this.originalTitle, other.originalTitle) &&
+            Utils.enhancedDeepEquals(this.parentHero, other.parentHero) &&
+            Utils.enhancedDeepEquals(this.parentIndex, other.parentIndex) &&
+            Utils.enhancedDeepEquals(this.parentKey, other.parentKey) &&
+            Utils.enhancedDeepEquals(this.parentRatingKey, other.parentRatingKey) &&
+            Utils.enhancedDeepEquals(this.parentThumb, other.parentThumb) &&
+            Utils.enhancedDeepEquals(this.parentTitle, other.parentTitle) &&
+            Utils.enhancedDeepEquals(this.primaryExtraKey, other.primaryExtraKey) &&
+            Utils.enhancedDeepEquals(this.prompt, other.prompt) &&
+            Utils.enhancedDeepEquals(this.rating, other.rating) &&
+            Utils.enhancedDeepEquals(this.ratingArray, other.ratingArray) &&
+            Utils.enhancedDeepEquals(this.ratingCount, other.ratingCount) &&
+            Utils.enhancedDeepEquals(this.ratingImage, other.ratingImage) &&
+            Utils.enhancedDeepEquals(this.ratingKey, other.ratingKey) &&
+            Utils.enhancedDeepEquals(this.role, other.role) &&
+            Utils.enhancedDeepEquals(this.search, other.search) &&
+            Utils.enhancedDeepEquals(this.secondary, other.secondary) &&
             Utils.enhancedDeepEquals(this.skipChildren, other.skipChildren) &&
-            Utils.enhancedDeepEquals(this.availabilityId, other.availabilityId) &&
-            Utils.enhancedDeepEquals(this.streamingMediaId, other.streamingMediaId) &&
-            Utils.enhancedDeepEquals(this.playableKey, other.playableKey);
+            Utils.enhancedDeepEquals(this.skipParent, other.skipParent) &&
+            Utils.enhancedDeepEquals(this.sort, other.sort) &&
+            Utils.enhancedDeepEquals(this.studio, other.studio) &&
+            Utils.enhancedDeepEquals(this.subtype, other.subtype) &&
+            Utils.enhancedDeepEquals(this.summary, other.summary) &&
+            Utils.enhancedDeepEquals(this.tagline, other.tagline) &&
+            Utils.enhancedDeepEquals(this.theme, other.theme) &&
+            Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
+            Utils.enhancedDeepEquals(this.titleSort, other.titleSort) &&
+            Utils.enhancedDeepEquals(this.updatedAt, other.updatedAt) &&
+            Utils.enhancedDeepEquals(this.userRating, other.userRating) &&
+            Utils.enhancedDeepEquals(this.viewCount, other.viewCount) &&
+            Utils.enhancedDeepEquals(this.viewedLeafCount, other.viewedLeafCount) &&
+            Utils.enhancedDeepEquals(this.viewOffset, other.viewOffset) &&
+            Utils.enhancedDeepEquals(this.writer, other.writer) &&
+            Utils.enhancedDeepEquals(this.year, other.year) &&
+            Utils.enhancedDeepEquals(this.additionalProperties, other.additionalProperties);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            art, guid, key,
-            ratingKey, studio, tagline,
-            type, thumb, addedAt,
-            duration, publicPagesURL, slug,
-            userState, title, contentRating,
-            originallyAvailableAt, year, image,
-            banner, rating, expiresAt,
-            originalTitle, audienceRating, audienceRatingImage,
-            ratingImage, imdbRatingCount, subtype,
-            theme, leafCount, childCount,
-            isContinuingSeries, skipChildren, availabilityId,
-            streamingMediaId, playableKey);
+            player, session, user,
+            title, type, absoluteIndex,
+            addedAt, art, audienceRating,
+            audienceRatingImage, autotag, banner,
+            chapterSource, composite, contentRating,
+            country, director, duration,
+            filter, genre, grandparentArt,
+            grandparentHero, grandparentKey, grandparentRatingKey,
+            grandparentTheme, grandparentThumb, grandparentTitle,
+            guid, hero, image,
+            index, key, lastViewedAt,
+            leafCount, media, originallyAvailableAt,
+            originalTitle, parentHero, parentIndex,
+            parentKey, parentRatingKey, parentThumb,
+            parentTitle, primaryExtraKey, prompt,
+            rating, ratingArray, ratingCount,
+            ratingImage, ratingKey, role,
+            search, secondary, skipChildren,
+            skipParent, sort, studio,
+            subtype, summary, tagline,
+            theme, thumb, titleSort,
+            updatedAt, userRating, viewCount,
+            viewedLeafCount, viewOffset, writer,
+            year, additionalProperties);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Metadata.class,
-                "art", art,
-                "guid", guid,
-                "key", key,
-                "ratingKey", ratingKey,
-                "studio", studio,
-                "tagline", tagline,
-                "type", type,
-                "thumb", thumb,
-                "addedAt", addedAt,
-                "duration", duration,
-                "publicPagesURL", publicPagesURL,
-                "slug", slug,
-                "userState", userState,
+                "player", player,
+                "session", session,
+                "user", user,
                 "title", title,
-                "contentRating", contentRating,
-                "originallyAvailableAt", originallyAvailableAt,
-                "year", year,
-                "image", image,
-                "banner", banner,
-                "rating", rating,
-                "expiresAt", expiresAt,
-                "originalTitle", originalTitle,
+                "type", type,
+                "absoluteIndex", absoluteIndex,
+                "addedAt", addedAt,
+                "art", art,
                 "audienceRating", audienceRating,
                 "audienceRatingImage", audienceRatingImage,
-                "ratingImage", ratingImage,
-                "imdbRatingCount", imdbRatingCount,
-                "subtype", subtype,
-                "theme", theme,
+                "autotag", autotag,
+                "banner", banner,
+                "chapterSource", chapterSource,
+                "composite", composite,
+                "contentRating", contentRating,
+                "country", country,
+                "director", director,
+                "duration", duration,
+                "filter", filter,
+                "genre", genre,
+                "grandparentArt", grandparentArt,
+                "grandparentHero", grandparentHero,
+                "grandparentKey", grandparentKey,
+                "grandparentRatingKey", grandparentRatingKey,
+                "grandparentTheme", grandparentTheme,
+                "grandparentThumb", grandparentThumb,
+                "grandparentTitle", grandparentTitle,
+                "guid", guid,
+                "hero", hero,
+                "image", image,
+                "index", index,
+                "key", key,
+                "lastViewedAt", lastViewedAt,
                 "leafCount", leafCount,
-                "childCount", childCount,
-                "isContinuingSeries", isContinuingSeries,
+                "media", media,
+                "originallyAvailableAt", originallyAvailableAt,
+                "originalTitle", originalTitle,
+                "parentHero", parentHero,
+                "parentIndex", parentIndex,
+                "parentKey", parentKey,
+                "parentRatingKey", parentRatingKey,
+                "parentThumb", parentThumb,
+                "parentTitle", parentTitle,
+                "primaryExtraKey", primaryExtraKey,
+                "prompt", prompt,
+                "rating", rating,
+                "ratingArray", ratingArray,
+                "ratingCount", ratingCount,
+                "ratingImage", ratingImage,
+                "ratingKey", ratingKey,
+                "role", role,
+                "search", search,
+                "secondary", secondary,
                 "skipChildren", skipChildren,
-                "availabilityId", availabilityId,
-                "streamingMediaId", streamingMediaId,
-                "playableKey", playableKey);
+                "skipParent", skipParent,
+                "sort", sort,
+                "studio", studio,
+                "subtype", subtype,
+                "summary", summary,
+                "tagline", tagline,
+                "theme", theme,
+                "thumb", thumb,
+                "titleSort", titleSort,
+                "updatedAt", updatedAt,
+                "userRating", userRating,
+                "viewCount", viewCount,
+                "viewedLeafCount", viewedLeafCount,
+                "viewOffset", viewOffset,
+                "writer", writer,
+                "year", year,
+                "additionalProperties", additionalProperties);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> art = Optional.empty();
+        private Optional<? extends Player> player = Optional.empty();
 
-        private Optional<String> guid = Optional.empty();
+        private Optional<? extends Session> session = Optional.empty();
 
-        private Optional<String> key = Optional.empty();
+        private Optional<? extends User> user = Optional.empty();
 
-        private Optional<String> ratingKey = Optional.empty();
+        private Optional<? extends Object> title = Optional.empty();
 
-        private Optional<String> studio = Optional.empty();
+        private Optional<? extends Object> type = Optional.empty();
 
-        private Optional<String> tagline = Optional.empty();
+        private Optional<Long> absoluteIndex = Optional.empty();
 
-        private Optional<String> type = Optional.empty();
+        private Optional<Long> addedAt = Optional.empty();
 
-        private Optional<String> thumb = Optional.empty();
-
-        private Optional<Integer> addedAt = Optional.empty();
-
-        private Optional<Integer> duration = Optional.empty();
-
-        private Optional<String> publicPagesURL = Optional.empty();
-
-        private Optional<String> slug = Optional.empty();
-
-        private Optional<Boolean> userState = Optional.empty();
-
-        private Optional<String> title = Optional.empty();
-
-        private Optional<String> contentRating = Optional.empty();
-
-        private Optional<LocalDate> originallyAvailableAt = Optional.empty();
-
-        private Optional<Integer> year = Optional.empty();
-
-        private Optional<? extends List<Image>> image = Optional.empty();
-
-        private Optional<String> banner = Optional.empty();
-
-        private Optional<Double> rating = Optional.empty();
-
-        private Optional<Integer> expiresAt = Optional.empty();
-
-        private Optional<String> originalTitle = Optional.empty();
+        private Optional<? extends Object> art = Optional.empty();
 
         private Optional<Double> audienceRating = Optional.empty();
 
-        private Optional<String> audienceRatingImage = Optional.empty();
+        private Optional<? extends Object> audienceRatingImage = Optional.empty();
 
-        private Optional<String> ratingImage = Optional.empty();
+        private Optional<? extends List<Tag>> autotag = Optional.empty();
 
-        private Optional<Integer> imdbRatingCount = Optional.empty();
+        private Optional<? extends Object> banner = Optional.empty();
 
-        private Optional<String> subtype = Optional.empty();
+        private Optional<? extends Object> chapterSource = Optional.empty();
 
-        private Optional<String> theme = Optional.empty();
+        private Optional<? extends Object> composite = Optional.empty();
 
-        private Optional<Integer> leafCount = Optional.empty();
+        private Optional<? extends Object> contentRating = Optional.empty();
 
-        private Optional<Integer> childCount = Optional.empty();
+        private Optional<? extends List<Tag>> country = Optional.empty();
 
-        private Optional<Boolean> isContinuingSeries = Optional.empty();
+        private Optional<? extends List<Tag>> director = Optional.empty();
+
+        private Optional<Long> duration = Optional.empty();
+
+        private Optional<? extends List<Filter>> filter = Optional.empty();
+
+        private Optional<? extends List<Tag>> genre = Optional.empty();
+
+        private Optional<String> grandparentArt = Optional.empty();
+
+        private Optional<String> grandparentHero = Optional.empty();
+
+        private Optional<String> grandparentKey = Optional.empty();
+
+        private Optional<String> grandparentRatingKey = Optional.empty();
+
+        private Optional<String> grandparentTheme = Optional.empty();
+
+        private Optional<String> grandparentThumb = Optional.empty();
+
+        private Optional<String> grandparentTitle = Optional.empty();
+
+        private Optional<? extends List<Tag>> guid = Optional.empty();
+
+        private Optional<? extends Object> hero = Optional.empty();
+
+        private Optional<? extends List<Image>> image = Optional.empty();
+
+        private Optional<Long> index = Optional.empty();
+
+        private Optional<? extends Object> key = Optional.empty();
+
+        private Optional<Long> lastViewedAt = Optional.empty();
+
+        private Optional<Long> leafCount = Optional.empty();
+
+        private Optional<? extends List<Media>> media = Optional.empty();
+
+        private Optional<? extends Object> originallyAvailableAt = Optional.empty();
+
+        private Optional<? extends Object> originalTitle = Optional.empty();
+
+        private Optional<String> parentHero = Optional.empty();
+
+        private Optional<Long> parentIndex = Optional.empty();
+
+        private Optional<String> parentKey = Optional.empty();
+
+        private Optional<String> parentRatingKey = Optional.empty();
+
+        private Optional<String> parentThumb = Optional.empty();
+
+        private Optional<String> parentTitle = Optional.empty();
+
+        private Optional<? extends Object> primaryExtraKey = Optional.empty();
+
+        private Optional<String> prompt = Optional.empty();
+
+        private Optional<Double> rating = Optional.empty();
+
+        private Optional<? extends List<Tag>> ratingArray = Optional.empty();
+
+        private Optional<Long> ratingCount = Optional.empty();
+
+        private Optional<? extends Object> ratingImage = Optional.empty();
+
+        private Optional<? extends Object> ratingKey = Optional.empty();
+
+        private Optional<? extends List<Tag>> role = Optional.empty();
+
+        private Optional<Boolean> search = Optional.empty();
+
+        private Optional<Boolean> secondary = Optional.empty();
 
         private Optional<Boolean> skipChildren = Optional.empty();
 
-        private Optional<String> availabilityId = Optional.empty();
+        private Optional<Boolean> skipParent = Optional.empty();
 
-        private Optional<String> streamingMediaId = Optional.empty();
+        private Optional<? extends List<Sort>> sort = Optional.empty();
 
-        private Optional<String> playableKey = Optional.empty();
+        private Optional<? extends Object> studio = Optional.empty();
+
+        private Optional<? extends Object> subtype = Optional.empty();
+
+        private Optional<? extends Object> summary = Optional.empty();
+
+        private Optional<? extends Object> tagline = Optional.empty();
+
+        private Optional<? extends Object> theme = Optional.empty();
+
+        private Optional<? extends Object> thumb = Optional.empty();
+
+        private Optional<? extends Object> titleSort = Optional.empty();
+
+        private Optional<Long> updatedAt = Optional.empty();
+
+        private Optional<Double> userRating = Optional.empty();
+
+        private Optional<Long> viewCount = Optional.empty();
+
+        private Optional<Long> viewedLeafCount = Optional.empty();
+
+        private Optional<Long> viewOffset = Optional.empty();
+
+        private Optional<? extends List<Tag>> writer = Optional.empty();
+
+        private Optional<Long> year = Optional.empty();
+
+        private Map<String, Object> additionalProperties = new HashMap<>();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        public Builder art(String art) {
-            Utils.checkNotNull(art, "art");
-            this.art = Optional.ofNullable(art);
+        /**
+         * Information about the player being used for playback
+         */
+        public Builder player(Player player) {
+            Utils.checkNotNull(player, "player");
+            this.player = Optional.ofNullable(player);
             return this;
         }
 
-        public Builder art(Optional<String> art) {
-            Utils.checkNotNull(art, "art");
-            this.art = art;
-            return this;
-        }
-
-
-        public Builder guid(String guid) {
-            Utils.checkNotNull(guid, "guid");
-            this.guid = Optional.ofNullable(guid);
-            return this;
-        }
-
-        public Builder guid(Optional<String> guid) {
-            Utils.checkNotNull(guid, "guid");
-            this.guid = guid;
+        /**
+         * Information about the player being used for playback
+         */
+        public Builder player(Optional<? extends Player> player) {
+            Utils.checkNotNull(player, "player");
+            this.player = player;
             return this;
         }
 
 
-        public Builder key(String key) {
-            Utils.checkNotNull(key, "key");
-            this.key = Optional.ofNullable(key);
+        /**
+         * Information about the playback session
+         */
+        public Builder session(Session session) {
+            Utils.checkNotNull(session, "session");
+            this.session = Optional.ofNullable(session);
             return this;
         }
 
-        public Builder key(Optional<String> key) {
-            Utils.checkNotNull(key, "key");
-            this.key = key;
-            return this;
-        }
-
-
-        public Builder ratingKey(String ratingKey) {
-            Utils.checkNotNull(ratingKey, "ratingKey");
-            this.ratingKey = Optional.ofNullable(ratingKey);
-            return this;
-        }
-
-        public Builder ratingKey(Optional<String> ratingKey) {
-            Utils.checkNotNull(ratingKey, "ratingKey");
-            this.ratingKey = ratingKey;
+        /**
+         * Information about the playback session
+         */
+        public Builder session(Optional<? extends Session> session) {
+            Utils.checkNotNull(session, "session");
+            this.session = session;
             return this;
         }
 
 
-        public Builder studio(String studio) {
-            Utils.checkNotNull(studio, "studio");
-            this.studio = Optional.ofNullable(studio);
+        /**
+         * The user playing the content
+         */
+        public Builder user(User user) {
+            Utils.checkNotNull(user, "user");
+            this.user = Optional.ofNullable(user);
             return this;
         }
 
-        public Builder studio(Optional<String> studio) {
-            Utils.checkNotNull(studio, "studio");
-            this.studio = studio;
-            return this;
-        }
-
-
-        public Builder tagline(String tagline) {
-            Utils.checkNotNull(tagline, "tagline");
-            this.tagline = Optional.ofNullable(tagline);
-            return this;
-        }
-
-        public Builder tagline(Optional<String> tagline) {
-            Utils.checkNotNull(tagline, "tagline");
-            this.tagline = tagline;
+        /**
+         * The user playing the content
+         */
+        public Builder user(Optional<? extends User> user) {
+            Utils.checkNotNull(user, "user");
+            this.user = user;
             return this;
         }
 
 
-        public Builder type(String type) {
-            Utils.checkNotNull(type, "type");
-            this.type = Optional.ofNullable(type);
-            return this;
-        }
-
-        public Builder type(Optional<String> type) {
-            Utils.checkNotNull(type, "type");
-            this.type = type;
-            return this;
-        }
-
-
-        public Builder thumb(String thumb) {
-            Utils.checkNotNull(thumb, "thumb");
-            this.thumb = Optional.ofNullable(thumb);
-            return this;
-        }
-
-        public Builder thumb(Optional<String> thumb) {
-            Utils.checkNotNull(thumb, "thumb");
-            this.thumb = thumb;
-            return this;
-        }
-
-
-        public Builder addedAt(int addedAt) {
-            Utils.checkNotNull(addedAt, "addedAt");
-            this.addedAt = Optional.ofNullable(addedAt);
-            return this;
-        }
-
-        public Builder addedAt(Optional<Integer> addedAt) {
-            Utils.checkNotNull(addedAt, "addedAt");
-            this.addedAt = addedAt;
-            return this;
-        }
-
-
-        public Builder duration(int duration) {
-            Utils.checkNotNull(duration, "duration");
-            this.duration = Optional.ofNullable(duration);
-            return this;
-        }
-
-        public Builder duration(Optional<Integer> duration) {
-            Utils.checkNotNull(duration, "duration");
-            this.duration = duration;
-            return this;
-        }
-
-
-        public Builder publicPagesURL(String publicPagesURL) {
-            Utils.checkNotNull(publicPagesURL, "publicPagesURL");
-            this.publicPagesURL = Optional.ofNullable(publicPagesURL);
-            return this;
-        }
-
-        public Builder publicPagesURL(Optional<String> publicPagesURL) {
-            Utils.checkNotNull(publicPagesURL, "publicPagesURL");
-            this.publicPagesURL = publicPagesURL;
-            return this;
-        }
-
-
-        public Builder slug(String slug) {
-            Utils.checkNotNull(slug, "slug");
-            this.slug = Optional.ofNullable(slug);
-            return this;
-        }
-
-        public Builder slug(Optional<String> slug) {
-            Utils.checkNotNull(slug, "slug");
-            this.slug = slug;
-            return this;
-        }
-
-
-        public Builder userState(boolean userState) {
-            Utils.checkNotNull(userState, "userState");
-            this.userState = Optional.ofNullable(userState);
-            return this;
-        }
-
-        public Builder userState(Optional<Boolean> userState) {
-            Utils.checkNotNull(userState, "userState");
-            this.userState = userState;
-            return this;
-        }
-
-
-        public Builder title(String title) {
+        /**
+         * The title of the item (e.g. “300” or “The Simpsons”)
+         */
+        public Builder title(Object title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
             return this;
         }
 
-        public Builder title(Optional<String> title) {
+        /**
+         * The title of the item (e.g. “300” or “The Simpsons”)
+         */
+        public Builder title(Optional<? extends Object> title) {
             Utils.checkNotNull(title, "title");
             this.title = title;
             return this;
         }
 
 
-        public Builder contentRating(String contentRating) {
+        /**
+         * The type of the video item, such as `movie`, `episode`, or `clip`.
+         */
+        public Builder type(Object type) {
+            Utils.checkNotNull(type, "type");
+            this.type = Optional.ofNullable(type);
+            return this;
+        }
+
+        /**
+         * The type of the video item, such as `movie`, `episode`, or `clip`.
+         */
+        public Builder type(Optional<? extends Object> type) {
+            Utils.checkNotNull(type, "type");
+            this.type = type;
+            return this;
+        }
+
+
+        /**
+         * When present, contains the disc number for a track on multi-disc albums.
+         */
+        public Builder absoluteIndex(long absoluteIndex) {
+            Utils.checkNotNull(absoluteIndex, "absoluteIndex");
+            this.absoluteIndex = Optional.ofNullable(absoluteIndex);
+            return this;
+        }
+
+        /**
+         * When present, contains the disc number for a track on multi-disc albums.
+         */
+        public Builder absoluteIndex(Optional<Long> absoluteIndex) {
+            Utils.checkNotNull(absoluteIndex, "absoluteIndex");
+            this.absoluteIndex = absoluteIndex;
+            return this;
+        }
+
+
+        /**
+         * In units of seconds since the epoch, returns the time at which the item was added to the library.
+         */
+        public Builder addedAt(long addedAt) {
+            Utils.checkNotNull(addedAt, "addedAt");
+            this.addedAt = Optional.ofNullable(addedAt);
+            return this;
+        }
+
+        /**
+         * In units of seconds since the epoch, returns the time at which the item was added to the library.
+         */
+        public Builder addedAt(Optional<Long> addedAt) {
+            Utils.checkNotNull(addedAt, "addedAt");
+            this.addedAt = addedAt;
+            return this;
+        }
+
+
+        /**
+         * When present, the URL for the background artwork for the item.
+         */
+        public Builder art(Object art) {
+            Utils.checkNotNull(art, "art");
+            this.art = Optional.ofNullable(art);
+            return this;
+        }
+
+        /**
+         * When present, the URL for the background artwork for the item.
+         */
+        public Builder art(Optional<? extends Object> art) {
+            Utils.checkNotNull(art, "art");
+            this.art = art;
+            return this;
+        }
+
+
+        /**
+         * Some rating systems separate reviewer ratings from audience ratings
+         */
+        public Builder audienceRating(double audienceRating) {
+            Utils.checkNotNull(audienceRating, "audienceRating");
+            this.audienceRating = Optional.ofNullable(audienceRating);
+            return this;
+        }
+
+        /**
+         * Some rating systems separate reviewer ratings from audience ratings
+         */
+        public Builder audienceRating(Optional<Double> audienceRating) {
+            Utils.checkNotNull(audienceRating, "audienceRating");
+            this.audienceRating = audienceRating;
+            return this;
+        }
+
+
+        /**
+         * A URI representing the image to be shown with the audience rating (e.g. rottentomatoes://image.rating.spilled).
+         */
+        public Builder audienceRatingImage(Object audienceRatingImage) {
+            Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
+            this.audienceRatingImage = Optional.ofNullable(audienceRatingImage);
+            return this;
+        }
+
+        /**
+         * A URI representing the image to be shown with the audience rating (e.g. rottentomatoes://image.rating.spilled).
+         */
+        public Builder audienceRatingImage(Optional<? extends Object> audienceRatingImage) {
+            Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
+            this.audienceRatingImage = audienceRatingImage;
+            return this;
+        }
+
+
+        public Builder autotag(List<Tag> autotag) {
+            Utils.checkNotNull(autotag, "autotag");
+            this.autotag = Optional.ofNullable(autotag);
+            return this;
+        }
+
+        public Builder autotag(Optional<? extends List<Tag>> autotag) {
+            Utils.checkNotNull(autotag, "autotag");
+            this.autotag = autotag;
+            return this;
+        }
+
+
+        /**
+         * When present, the URL for a banner graphic for the item.
+         */
+        public Builder banner(Object banner) {
+            Utils.checkNotNull(banner, "banner");
+            this.banner = Optional.ofNullable(banner);
+            return this;
+        }
+
+        /**
+         * When present, the URL for a banner graphic for the item.
+         */
+        public Builder banner(Optional<? extends Object> banner) {
+            Utils.checkNotNull(banner, "banner");
+            this.banner = banner;
+            return this;
+        }
+
+
+        /**
+         * When present, indicates the source for the chapters in the media file. Can be media (the chapters were embedded in the media itself), agent (a metadata agent computed them), or mixed (a combination of the two).
+         */
+        public Builder chapterSource(Object chapterSource) {
+            Utils.checkNotNull(chapterSource, "chapterSource");
+            this.chapterSource = Optional.ofNullable(chapterSource);
+            return this;
+        }
+
+        /**
+         * When present, indicates the source for the chapters in the media file. Can be media (the chapters were embedded in the media itself), agent (a metadata agent computed them), or mixed (a combination of the two).
+         */
+        public Builder chapterSource(Optional<? extends Object> chapterSource) {
+            Utils.checkNotNull(chapterSource, "chapterSource");
+            this.chapterSource = chapterSource;
+            return this;
+        }
+
+
+        /**
+         * When present, the URL for a composite image for descendent items (e.g. photo albums or playlists).
+         */
+        public Builder composite(Object composite) {
+            Utils.checkNotNull(composite, "composite");
+            this.composite = Optional.ofNullable(composite);
+            return this;
+        }
+
+        /**
+         * When present, the URL for a composite image for descendent items (e.g. photo albums or playlists).
+         */
+        public Builder composite(Optional<? extends Object> composite) {
+            Utils.checkNotNull(composite, "composite");
+            this.composite = composite;
+            return this;
+        }
+
+
+        /**
+         * If known, the content rating (e.g. MPAA) for an item.
+         */
+        public Builder contentRating(Object contentRating) {
             Utils.checkNotNull(contentRating, "contentRating");
             this.contentRating = Optional.ofNullable(contentRating);
             return this;
         }
 
-        public Builder contentRating(Optional<String> contentRating) {
+        /**
+         * If known, the content rating (e.g. MPAA) for an item.
+         */
+        public Builder contentRating(Optional<? extends Object> contentRating) {
             Utils.checkNotNull(contentRating, "contentRating");
             this.contentRating = contentRating;
             return this;
         }
 
 
-        public Builder originallyAvailableAt(LocalDate originallyAvailableAt) {
-            Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
-            this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
+        public Builder country(List<Tag> country) {
+            Utils.checkNotNull(country, "country");
+            this.country = Optional.ofNullable(country);
             return this;
         }
 
-        public Builder originallyAvailableAt(Optional<LocalDate> originallyAvailableAt) {
-            Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
-            this.originallyAvailableAt = originallyAvailableAt;
+        public Builder country(Optional<? extends List<Tag>> country) {
+            Utils.checkNotNull(country, "country");
+            this.country = country;
             return this;
         }
 
 
-        public Builder year(int year) {
-            Utils.checkNotNull(year, "year");
-            this.year = Optional.ofNullable(year);
+        public Builder director(List<Tag> director) {
+            Utils.checkNotNull(director, "director");
+            this.director = Optional.ofNullable(director);
             return this;
         }
 
-        public Builder year(Optional<Integer> year) {
-            Utils.checkNotNull(year, "year");
-            this.year = year;
+        public Builder director(Optional<? extends List<Tag>> director) {
+            Utils.checkNotNull(director, "director");
+            this.director = director;
+            return this;
+        }
+
+
+        /**
+         * When present, the duration for the item, in units of milliseconds.
+         */
+        public Builder duration(long duration) {
+            Utils.checkNotNull(duration, "duration");
+            this.duration = Optional.ofNullable(duration);
+            return this;
+        }
+
+        /**
+         * When present, the duration for the item, in units of milliseconds.
+         */
+        public Builder duration(Optional<Long> duration) {
+            Utils.checkNotNull(duration, "duration");
+            this.duration = duration;
+            return this;
+        }
+
+
+        /**
+         * Typically only seen in metadata at a library's top level
+         */
+        public Builder filter(List<Filter> filter) {
+            Utils.checkNotNull(filter, "filter");
+            this.filter = Optional.ofNullable(filter);
+            return this;
+        }
+
+        /**
+         * Typically only seen in metadata at a library's top level
+         */
+        public Builder filter(Optional<? extends List<Filter>> filter) {
+            Utils.checkNotNull(filter, "filter");
+            this.filter = filter;
+            return this;
+        }
+
+
+        public Builder genre(List<Tag> genre) {
+            Utils.checkNotNull(genre, "genre");
+            this.genre = Optional.ofNullable(genre);
+            return this;
+        }
+
+        public Builder genre(Optional<? extends List<Tag>> genre) {
+            Utils.checkNotNull(genre, "genre");
+            this.genre = genre;
+            return this;
+        }
+
+
+        /**
+         * The `art` of the grandparent
+         */
+        public Builder grandparentArt(String grandparentArt) {
+            Utils.checkNotNull(grandparentArt, "grandparentArt");
+            this.grandparentArt = Optional.ofNullable(grandparentArt);
+            return this;
+        }
+
+        /**
+         * The `art` of the grandparent
+         */
+        public Builder grandparentArt(Optional<String> grandparentArt) {
+            Utils.checkNotNull(grandparentArt, "grandparentArt");
+            this.grandparentArt = grandparentArt;
+            return this;
+        }
+
+
+        /**
+         * The `hero` of the grandparent
+         */
+        public Builder grandparentHero(String grandparentHero) {
+            Utils.checkNotNull(grandparentHero, "grandparentHero");
+            this.grandparentHero = Optional.ofNullable(grandparentHero);
+            return this;
+        }
+
+        /**
+         * The `hero` of the grandparent
+         */
+        public Builder grandparentHero(Optional<String> grandparentHero) {
+            Utils.checkNotNull(grandparentHero, "grandparentHero");
+            this.grandparentHero = grandparentHero;
+            return this;
+        }
+
+
+        /**
+         * The `key` of the grandparent
+         */
+        public Builder grandparentKey(String grandparentKey) {
+            Utils.checkNotNull(grandparentKey, "grandparentKey");
+            this.grandparentKey = Optional.ofNullable(grandparentKey);
+            return this;
+        }
+
+        /**
+         * The `key` of the grandparent
+         */
+        public Builder grandparentKey(Optional<String> grandparentKey) {
+            Utils.checkNotNull(grandparentKey, "grandparentKey");
+            this.grandparentKey = grandparentKey;
+            return this;
+        }
+
+
+        /**
+         * The `ratingKey` of the grandparent
+         */
+        public Builder grandparentRatingKey(String grandparentRatingKey) {
+            Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
+            this.grandparentRatingKey = Optional.ofNullable(grandparentRatingKey);
+            return this;
+        }
+
+        /**
+         * The `ratingKey` of the grandparent
+         */
+        public Builder grandparentRatingKey(Optional<String> grandparentRatingKey) {
+            Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
+            this.grandparentRatingKey = grandparentRatingKey;
+            return this;
+        }
+
+
+        /**
+         * The `theme` of the grandparent
+         */
+        public Builder grandparentTheme(String grandparentTheme) {
+            Utils.checkNotNull(grandparentTheme, "grandparentTheme");
+            this.grandparentTheme = Optional.ofNullable(grandparentTheme);
+            return this;
+        }
+
+        /**
+         * The `theme` of the grandparent
+         */
+        public Builder grandparentTheme(Optional<String> grandparentTheme) {
+            Utils.checkNotNull(grandparentTheme, "grandparentTheme");
+            this.grandparentTheme = grandparentTheme;
+            return this;
+        }
+
+
+        /**
+         * The `thumb` of the grandparent
+         */
+        public Builder grandparentThumb(String grandparentThumb) {
+            Utils.checkNotNull(grandparentThumb, "grandparentThumb");
+            this.grandparentThumb = Optional.ofNullable(grandparentThumb);
+            return this;
+        }
+
+        /**
+         * The `thumb` of the grandparent
+         */
+        public Builder grandparentThumb(Optional<String> grandparentThumb) {
+            Utils.checkNotNull(grandparentThumb, "grandparentThumb");
+            this.grandparentThumb = grandparentThumb;
+            return this;
+        }
+
+
+        /**
+         * The `title` of the grandparent
+         */
+        public Builder grandparentTitle(String grandparentTitle) {
+            Utils.checkNotNull(grandparentTitle, "grandparentTitle");
+            this.grandparentTitle = Optional.ofNullable(grandparentTitle);
+            return this;
+        }
+
+        /**
+         * The `title` of the grandparent
+         */
+        public Builder grandparentTitle(Optional<String> grandparentTitle) {
+            Utils.checkNotNull(grandparentTitle, "grandparentTitle");
+            this.grandparentTitle = grandparentTitle;
+            return this;
+        }
+
+
+        public Builder guid(List<Tag> guid) {
+            Utils.checkNotNull(guid, "guid");
+            this.guid = Optional.ofNullable(guid);
+            return this;
+        }
+
+        public Builder guid(Optional<? extends List<Tag>> guid) {
+            Utils.checkNotNull(guid, "guid");
+            this.guid = guid;
+            return this;
+        }
+
+
+        /**
+         * When present, the URL for a hero image for the item.
+         */
+        public Builder hero(Object hero) {
+            Utils.checkNotNull(hero, "hero");
+            this.hero = Optional.ofNullable(hero);
+            return this;
+        }
+
+        /**
+         * When present, the URL for a hero image for the item.
+         */
+        public Builder hero(Optional<? extends Object> hero) {
+            Utils.checkNotNull(hero, "hero");
+            this.hero = hero;
             return this;
         }
 
@@ -1372,25 +3489,297 @@ public class Metadata {
         }
 
 
-        public Builder banner(String banner) {
-            Utils.checkNotNull(banner, "banner");
-            this.banner = Optional.ofNullable(banner);
+        /**
+         * When present, this represents the episode number for episodes, season number for seasons, or track number for audio tracks.
+         */
+        public Builder index(long index) {
+            Utils.checkNotNull(index, "index");
+            this.index = Optional.ofNullable(index);
             return this;
         }
 
-        public Builder banner(Optional<String> banner) {
-            Utils.checkNotNull(banner, "banner");
-            this.banner = banner;
+        /**
+         * When present, this represents the episode number for episodes, season number for seasons, or track number for audio tracks.
+         */
+        public Builder index(Optional<Long> index) {
+            Utils.checkNotNull(index, "index");
+            this.index = index;
             return this;
         }
 
 
+        /**
+         * The key at which the item's details can be fetched.  In many cases a metadata item may be passed without all the details (such as in a hub) and this key corresponds to the endpoint to fetch additional details.
+         */
+        public Builder key(Object key) {
+            Utils.checkNotNull(key, "key");
+            this.key = Optional.ofNullable(key);
+            return this;
+        }
+
+        /**
+         * The key at which the item's details can be fetched.  In many cases a metadata item may be passed without all the details (such as in a hub) and this key corresponds to the endpoint to fetch additional details.
+         */
+        public Builder key(Optional<? extends Object> key) {
+            Utils.checkNotNull(key, "key");
+            this.key = key;
+            return this;
+        }
+
+
+        /**
+         * When a user has watched or listened to an item, this contains a timestamp (epoch seconds) for that last consumption time.
+         */
+        public Builder lastViewedAt(long lastViewedAt) {
+            Utils.checkNotNull(lastViewedAt, "lastViewedAt");
+            this.lastViewedAt = Optional.ofNullable(lastViewedAt);
+            return this;
+        }
+
+        /**
+         * When a user has watched or listened to an item, this contains a timestamp (epoch seconds) for that last consumption time.
+         */
+        public Builder lastViewedAt(Optional<Long> lastViewedAt) {
+            Utils.checkNotNull(lastViewedAt, "lastViewedAt");
+            this.lastViewedAt = lastViewedAt;
+            return this;
+        }
+
+
+        /**
+         * For shows and seasons, contains the number of total episodes.
+         */
+        public Builder leafCount(long leafCount) {
+            Utils.checkNotNull(leafCount, "leafCount");
+            this.leafCount = Optional.ofNullable(leafCount);
+            return this;
+        }
+
+        /**
+         * For shows and seasons, contains the number of total episodes.
+         */
+        public Builder leafCount(Optional<Long> leafCount) {
+            Utils.checkNotNull(leafCount, "leafCount");
+            this.leafCount = leafCount;
+            return this;
+        }
+
+
+        public Builder media(List<Media> media) {
+            Utils.checkNotNull(media, "media");
+            this.media = Optional.ofNullable(media);
+            return this;
+        }
+
+        public Builder media(Optional<? extends List<Media>> media) {
+            Utils.checkNotNull(media, "media");
+            this.media = media;
+            return this;
+        }
+
+
+        /**
+         * When present, in the format YYYY-MM-DD [HH:MM:SS] (the hours/minutes/seconds part is not always present). The air date, or a higher resolution release date for an item, depending on type. For example, episodes usually have air date like 1979-08-10 (we don't use epoch seconds because media existed prior to 1970). In some cases, recorded over-the-air content has higher resolution air date which includes a time component. Albums and movies may have day-resolution release dates as well.
+         */
+        public Builder originallyAvailableAt(Object originallyAvailableAt) {
+            Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
+            this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
+            return this;
+        }
+
+        /**
+         * When present, in the format YYYY-MM-DD [HH:MM:SS] (the hours/minutes/seconds part is not always present). The air date, or a higher resolution release date for an item, depending on type. For example, episodes usually have air date like 1979-08-10 (we don't use epoch seconds because media existed prior to 1970). In some cases, recorded over-the-air content has higher resolution air date which includes a time component. Albums and movies may have day-resolution release dates as well.
+         */
+        public Builder originallyAvailableAt(Optional<? extends Object> originallyAvailableAt) {
+            Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
+            this.originallyAvailableAt = originallyAvailableAt;
+            return this;
+        }
+
+
+        /**
+         * When present, used to indicate an item's original title, e.g. a movie's foreign title.
+         */
+        public Builder originalTitle(Object originalTitle) {
+            Utils.checkNotNull(originalTitle, "originalTitle");
+            this.originalTitle = Optional.ofNullable(originalTitle);
+            return this;
+        }
+
+        /**
+         * When present, used to indicate an item's original title, e.g. a movie's foreign title.
+         */
+        public Builder originalTitle(Optional<? extends Object> originalTitle) {
+            Utils.checkNotNull(originalTitle, "originalTitle");
+            this.originalTitle = originalTitle;
+            return this;
+        }
+
+
+        /**
+         * The `hero` of the parent
+         */
+        public Builder parentHero(String parentHero) {
+            Utils.checkNotNull(parentHero, "parentHero");
+            this.parentHero = Optional.ofNullable(parentHero);
+            return this;
+        }
+
+        /**
+         * The `hero` of the parent
+         */
+        public Builder parentHero(Optional<String> parentHero) {
+            Utils.checkNotNull(parentHero, "parentHero");
+            this.parentHero = parentHero;
+            return this;
+        }
+
+
+        /**
+         * The `index` of the parent
+         */
+        public Builder parentIndex(long parentIndex) {
+            Utils.checkNotNull(parentIndex, "parentIndex");
+            this.parentIndex = Optional.ofNullable(parentIndex);
+            return this;
+        }
+
+        /**
+         * The `index` of the parent
+         */
+        public Builder parentIndex(Optional<Long> parentIndex) {
+            Utils.checkNotNull(parentIndex, "parentIndex");
+            this.parentIndex = parentIndex;
+            return this;
+        }
+
+
+        /**
+         * The `key` of the parent
+         */
+        public Builder parentKey(String parentKey) {
+            Utils.checkNotNull(parentKey, "parentKey");
+            this.parentKey = Optional.ofNullable(parentKey);
+            return this;
+        }
+
+        /**
+         * The `key` of the parent
+         */
+        public Builder parentKey(Optional<String> parentKey) {
+            Utils.checkNotNull(parentKey, "parentKey");
+            this.parentKey = parentKey;
+            return this;
+        }
+
+
+        /**
+         * The `ratingKey` of the parent
+         */
+        public Builder parentRatingKey(String parentRatingKey) {
+            Utils.checkNotNull(parentRatingKey, "parentRatingKey");
+            this.parentRatingKey = Optional.ofNullable(parentRatingKey);
+            return this;
+        }
+
+        /**
+         * The `ratingKey` of the parent
+         */
+        public Builder parentRatingKey(Optional<String> parentRatingKey) {
+            Utils.checkNotNull(parentRatingKey, "parentRatingKey");
+            this.parentRatingKey = parentRatingKey;
+            return this;
+        }
+
+
+        /**
+         * The `thumb` of the parent
+         */
+        public Builder parentThumb(String parentThumb) {
+            Utils.checkNotNull(parentThumb, "parentThumb");
+            this.parentThumb = Optional.ofNullable(parentThumb);
+            return this;
+        }
+
+        /**
+         * The `thumb` of the parent
+         */
+        public Builder parentThumb(Optional<String> parentThumb) {
+            Utils.checkNotNull(parentThumb, "parentThumb");
+            this.parentThumb = parentThumb;
+            return this;
+        }
+
+
+        /**
+         * The `title` of the parent
+         */
+        public Builder parentTitle(String parentTitle) {
+            Utils.checkNotNull(parentTitle, "parentTitle");
+            this.parentTitle = Optional.ofNullable(parentTitle);
+            return this;
+        }
+
+        /**
+         * The `title` of the parent
+         */
+        public Builder parentTitle(Optional<String> parentTitle) {
+            Utils.checkNotNull(parentTitle, "parentTitle");
+            this.parentTitle = parentTitle;
+            return this;
+        }
+
+
+        /**
+         * Indicates that the item has a primary extra; for a movie, this is a trailer, and for a music track it is a music video. The URL points to the metadata details endpoint for the item.
+         */
+        public Builder primaryExtraKey(Object primaryExtraKey) {
+            Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
+            this.primaryExtraKey = Optional.ofNullable(primaryExtraKey);
+            return this;
+        }
+
+        /**
+         * Indicates that the item has a primary extra; for a movie, this is a trailer, and for a music track it is a music video. The URL points to the metadata details endpoint for the item.
+         */
+        public Builder primaryExtraKey(Optional<? extends Object> primaryExtraKey) {
+            Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
+            this.primaryExtraKey = primaryExtraKey;
+            return this;
+        }
+
+
+        /**
+         * Prompt to give the user for this directory (such as `Search Movies`)
+         */
+        public Builder prompt(String prompt) {
+            Utils.checkNotNull(prompt, "prompt");
+            this.prompt = Optional.ofNullable(prompt);
+            return this;
+        }
+
+        /**
+         * Prompt to give the user for this directory (such as `Search Movies`)
+         */
+        public Builder prompt(Optional<String> prompt) {
+            Utils.checkNotNull(prompt, "prompt");
+            this.prompt = prompt;
+            return this;
+        }
+
+
+        /**
+         * When present, the rating for the item. The exact meaning and representation depends on where the rating was sourced from.
+         */
         public Builder rating(double rating) {
             Utils.checkNotNull(rating, "rating");
             this.rating = Optional.ofNullable(rating);
             return this;
         }
 
+        /**
+         * When present, the rating for the item. The exact meaning and representation depends on where the rating was sourced from.
+         */
         public Builder rating(Optional<Double> rating) {
             Utils.checkNotNull(rating, "rating");
             this.rating = rating;
@@ -1398,155 +3787,139 @@ public class Metadata {
         }
 
 
-        public Builder expiresAt(int expiresAt) {
-            Utils.checkNotNull(expiresAt, "expiresAt");
-            this.expiresAt = Optional.ofNullable(expiresAt);
+        public Builder ratingArray(List<Tag> ratingArray) {
+            Utils.checkNotNull(ratingArray, "ratingArray");
+            this.ratingArray = Optional.ofNullable(ratingArray);
             return this;
         }
 
-        public Builder expiresAt(Optional<Integer> expiresAt) {
-            Utils.checkNotNull(expiresAt, "expiresAt");
-            this.expiresAt = expiresAt;
-            return this;
-        }
-
-
-        public Builder originalTitle(String originalTitle) {
-            Utils.checkNotNull(originalTitle, "originalTitle");
-            this.originalTitle = Optional.ofNullable(originalTitle);
-            return this;
-        }
-
-        public Builder originalTitle(Optional<String> originalTitle) {
-            Utils.checkNotNull(originalTitle, "originalTitle");
-            this.originalTitle = originalTitle;
+        public Builder ratingArray(Optional<? extends List<Tag>> ratingArray) {
+            Utils.checkNotNull(ratingArray, "ratingArray");
+            this.ratingArray = ratingArray;
             return this;
         }
 
 
-        public Builder audienceRating(double audienceRating) {
-            Utils.checkNotNull(audienceRating, "audienceRating");
-            this.audienceRating = Optional.ofNullable(audienceRating);
+        /**
+         * Number of ratings under this metadata
+         */
+        public Builder ratingCount(long ratingCount) {
+            Utils.checkNotNull(ratingCount, "ratingCount");
+            this.ratingCount = Optional.ofNullable(ratingCount);
             return this;
         }
 
-        public Builder audienceRating(Optional<Double> audienceRating) {
-            Utils.checkNotNull(audienceRating, "audienceRating");
-            this.audienceRating = audienceRating;
-            return this;
-        }
-
-
-        public Builder audienceRatingImage(String audienceRatingImage) {
-            Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
-            this.audienceRatingImage = Optional.ofNullable(audienceRatingImage);
-            return this;
-        }
-
-        public Builder audienceRatingImage(Optional<String> audienceRatingImage) {
-            Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
-            this.audienceRatingImage = audienceRatingImage;
+        /**
+         * Number of ratings under this metadata
+         */
+        public Builder ratingCount(Optional<Long> ratingCount) {
+            Utils.checkNotNull(ratingCount, "ratingCount");
+            this.ratingCount = ratingCount;
             return this;
         }
 
 
-        public Builder ratingImage(String ratingImage) {
+        /**
+         * When present, indicates an image to be shown with the rating. This is passed back as a small set of defined URI values, e.g. rottentomatoes://image.rating.rotten.
+         */
+        public Builder ratingImage(Object ratingImage) {
             Utils.checkNotNull(ratingImage, "ratingImage");
             this.ratingImage = Optional.ofNullable(ratingImage);
             return this;
         }
 
-        public Builder ratingImage(Optional<String> ratingImage) {
+        /**
+         * When present, indicates an image to be shown with the rating. This is passed back as a small set of defined URI values, e.g. rottentomatoes://image.rating.rotten.
+         */
+        public Builder ratingImage(Optional<? extends Object> ratingImage) {
             Utils.checkNotNull(ratingImage, "ratingImage");
             this.ratingImage = ratingImage;
             return this;
         }
 
 
-        public Builder imdbRatingCount(int imdbRatingCount) {
-            Utils.checkNotNull(imdbRatingCount, "imdbRatingCount");
-            this.imdbRatingCount = Optional.ofNullable(imdbRatingCount);
+        /**
+         * This is the opaque string to be passed into timeline, scrobble, and rating endpoints to identify them.  While it often appears to be numeric, this is not guaranteed.
+         */
+        public Builder ratingKey(Object ratingKey) {
+            Utils.checkNotNull(ratingKey, "ratingKey");
+            this.ratingKey = Optional.ofNullable(ratingKey);
             return this;
         }
 
-        public Builder imdbRatingCount(Optional<Integer> imdbRatingCount) {
-            Utils.checkNotNull(imdbRatingCount, "imdbRatingCount");
-            this.imdbRatingCount = imdbRatingCount;
-            return this;
-        }
-
-
-        public Builder subtype(String subtype) {
-            Utils.checkNotNull(subtype, "subtype");
-            this.subtype = Optional.ofNullable(subtype);
-            return this;
-        }
-
-        public Builder subtype(Optional<String> subtype) {
-            Utils.checkNotNull(subtype, "subtype");
-            this.subtype = subtype;
+        /**
+         * This is the opaque string to be passed into timeline, scrobble, and rating endpoints to identify them.  While it often appears to be numeric, this is not guaranteed.
+         */
+        public Builder ratingKey(Optional<? extends Object> ratingKey) {
+            Utils.checkNotNull(ratingKey, "ratingKey");
+            this.ratingKey = ratingKey;
             return this;
         }
 
 
-        public Builder theme(String theme) {
-            Utils.checkNotNull(theme, "theme");
-            this.theme = Optional.ofNullable(theme);
+        public Builder role(List<Tag> role) {
+            Utils.checkNotNull(role, "role");
+            this.role = Optional.ofNullable(role);
             return this;
         }
 
-        public Builder theme(Optional<String> theme) {
-            Utils.checkNotNull(theme, "theme");
-            this.theme = theme;
-            return this;
-        }
-
-
-        public Builder leafCount(int leafCount) {
-            Utils.checkNotNull(leafCount, "leafCount");
-            this.leafCount = Optional.ofNullable(leafCount);
-            return this;
-        }
-
-        public Builder leafCount(Optional<Integer> leafCount) {
-            Utils.checkNotNull(leafCount, "leafCount");
-            this.leafCount = leafCount;
+        public Builder role(Optional<? extends List<Tag>> role) {
+            Utils.checkNotNull(role, "role");
+            this.role = role;
             return this;
         }
 
 
-        public Builder childCount(int childCount) {
-            Utils.checkNotNull(childCount, "childCount");
-            this.childCount = Optional.ofNullable(childCount);
+        /**
+         * Indicates this is a search directory
+         */
+        public Builder search(boolean search) {
+            Utils.checkNotNull(search, "search");
+            this.search = Optional.ofNullable(search);
             return this;
         }
 
-        public Builder childCount(Optional<Integer> childCount) {
-            Utils.checkNotNull(childCount, "childCount");
-            this.childCount = childCount;
-            return this;
-        }
-
-
-        public Builder isContinuingSeries(boolean isContinuingSeries) {
-            Utils.checkNotNull(isContinuingSeries, "isContinuingSeries");
-            this.isContinuingSeries = Optional.ofNullable(isContinuingSeries);
-            return this;
-        }
-
-        public Builder isContinuingSeries(Optional<Boolean> isContinuingSeries) {
-            Utils.checkNotNull(isContinuingSeries, "isContinuingSeries");
-            this.isContinuingSeries = isContinuingSeries;
+        /**
+         * Indicates this is a search directory
+         */
+        public Builder search(Optional<Boolean> search) {
+            Utils.checkNotNull(search, "search");
+            this.search = search;
             return this;
         }
 
 
+        /**
+         * Used by old clients to provide nested menus allowing for primative (but structured) navigation.
+         */
+        public Builder secondary(boolean secondary) {
+            Utils.checkNotNull(secondary, "secondary");
+            this.secondary = Optional.ofNullable(secondary);
+            return this;
+        }
+
+        /**
+         * Used by old clients to provide nested menus allowing for primative (but structured) navigation.
+         */
+        public Builder secondary(Optional<Boolean> secondary) {
+            Utils.checkNotNull(secondary, "secondary");
+            this.secondary = secondary;
+            return this;
+        }
+
+
+        /**
+         * When found on a show item, indicates that the children (seasons) should be skipped in favor of the grandchildren (episodes). Useful for mini-series, etc.
+         */
         public Builder skipChildren(boolean skipChildren) {
             Utils.checkNotNull(skipChildren, "skipChildren");
             this.skipChildren = Optional.ofNullable(skipChildren);
             return this;
         }
 
+        /**
+         * When found on a show item, indicates that the children (seasons) should be skipped in favor of the grandchildren (episodes). Useful for mini-series, etc.
+         */
         public Builder skipChildren(Optional<Boolean> skipChildren) {
             Utils.checkNotNull(skipChildren, "skipChildren");
             this.skipChildren = skipChildren;
@@ -1554,59 +3927,347 @@ public class Metadata {
         }
 
 
-        public Builder availabilityId(String availabilityId) {
-            Utils.checkNotNull(availabilityId, "availabilityId");
-            this.availabilityId = Optional.ofNullable(availabilityId);
+        /**
+         * When present on an episode or track item, indicates parent should be skipped in favor of grandparent (show).
+         */
+        public Builder skipParent(boolean skipParent) {
+            Utils.checkNotNull(skipParent, "skipParent");
+            this.skipParent = Optional.ofNullable(skipParent);
             return this;
         }
 
-        public Builder availabilityId(Optional<String> availabilityId) {
-            Utils.checkNotNull(availabilityId, "availabilityId");
-            this.availabilityId = availabilityId;
-            return this;
-        }
-
-
-        public Builder streamingMediaId(String streamingMediaId) {
-            Utils.checkNotNull(streamingMediaId, "streamingMediaId");
-            this.streamingMediaId = Optional.ofNullable(streamingMediaId);
-            return this;
-        }
-
-        public Builder streamingMediaId(Optional<String> streamingMediaId) {
-            Utils.checkNotNull(streamingMediaId, "streamingMediaId");
-            this.streamingMediaId = streamingMediaId;
+        /**
+         * When present on an episode or track item, indicates parent should be skipped in favor of grandparent (show).
+         */
+        public Builder skipParent(Optional<Boolean> skipParent) {
+            Utils.checkNotNull(skipParent, "skipParent");
+            this.skipParent = skipParent;
             return this;
         }
 
 
-        public Builder playableKey(String playableKey) {
-            Utils.checkNotNull(playableKey, "playableKey");
-            this.playableKey = Optional.ofNullable(playableKey);
+        /**
+         * Typically only seen in metadata at a library's top level
+         */
+        public Builder sort(List<Sort> sort) {
+            Utils.checkNotNull(sort, "sort");
+            this.sort = Optional.ofNullable(sort);
             return this;
         }
 
-        public Builder playableKey(Optional<String> playableKey) {
-            Utils.checkNotNull(playableKey, "playableKey");
-            this.playableKey = playableKey;
+        /**
+         * Typically only seen in metadata at a library's top level
+         */
+        public Builder sort(Optional<? extends List<Sort>> sort) {
+            Utils.checkNotNull(sort, "sort");
+            this.sort = sort;
+            return this;
+        }
+
+
+        /**
+         * When present, the studio or label which produced an item (e.g. movie studio for movies, record label for albums).
+         */
+        public Builder studio(Object studio) {
+            Utils.checkNotNull(studio, "studio");
+            this.studio = Optional.ofNullable(studio);
+            return this;
+        }
+
+        /**
+         * When present, the studio or label which produced an item (e.g. movie studio for movies, record label for albums).
+         */
+        public Builder studio(Optional<? extends Object> studio) {
+            Utils.checkNotNull(studio, "studio");
+            this.studio = studio;
+            return this;
+        }
+
+
+        /**
+         * The subtype of the video item, such as `photo` when the video item is in a photo library
+         */
+        public Builder subtype(Object subtype) {
+            Utils.checkNotNull(subtype, "subtype");
+            this.subtype = Optional.ofNullable(subtype);
+            return this;
+        }
+
+        /**
+         * The subtype of the video item, such as `photo` when the video item is in a photo library
+         */
+        public Builder subtype(Optional<? extends Object> subtype) {
+            Utils.checkNotNull(subtype, "subtype");
+            this.subtype = subtype;
+            return this;
+        }
+
+
+        /**
+         * When present, the extended textual information about the item (e.g. movie plot, artist biography, album review).
+         */
+        public Builder summary(Object summary) {
+            Utils.checkNotNull(summary, "summary");
+            this.summary = Optional.ofNullable(summary);
+            return this;
+        }
+
+        /**
+         * When present, the extended textual information about the item (e.g. movie plot, artist biography, album review).
+         */
+        public Builder summary(Optional<? extends Object> summary) {
+            Utils.checkNotNull(summary, "summary");
+            this.summary = summary;
+            return this;
+        }
+
+
+        /**
+         * When present, a pithy one-liner about the item (usually only seen for movies).
+         */
+        public Builder tagline(Object tagline) {
+            Utils.checkNotNull(tagline, "tagline");
+            this.tagline = Optional.ofNullable(tagline);
+            return this;
+        }
+
+        /**
+         * When present, a pithy one-liner about the item (usually only seen for movies).
+         */
+        public Builder tagline(Optional<? extends Object> tagline) {
+            Utils.checkNotNull(tagline, "tagline");
+            this.tagline = tagline;
+            return this;
+        }
+
+
+        /**
+         * When present, the URL for theme music for the item (usually only for TV shows).
+         */
+        public Builder theme(Object theme) {
+            Utils.checkNotNull(theme, "theme");
+            this.theme = Optional.ofNullable(theme);
+            return this;
+        }
+
+        /**
+         * When present, the URL for theme music for the item (usually only for TV shows).
+         */
+        public Builder theme(Optional<? extends Object> theme) {
+            Utils.checkNotNull(theme, "theme");
+            this.theme = theme;
+            return this;
+        }
+
+
+        /**
+         * When present, the URL for the poster or thumbnail for the item. When available for types like movie, it will be the poster graphic, but fall-back to the extracted media thumbnail.
+         */
+        public Builder thumb(Object thumb) {
+            Utils.checkNotNull(thumb, "thumb");
+            this.thumb = Optional.ofNullable(thumb);
+            return this;
+        }
+
+        /**
+         * When present, the URL for the poster or thumbnail for the item. When available for types like movie, it will be the poster graphic, but fall-back to the extracted media thumbnail.
+         */
+        public Builder thumb(Optional<? extends Object> thumb) {
+            Utils.checkNotNull(thumb, "thumb");
+            this.thumb = thumb;
+            return this;
+        }
+
+
+        /**
+         * Whene present, this is the string used for sorting the item. It's usually the title with any leading articles removed (e.g. “Simpsons”).
+         */
+        public Builder titleSort(Object titleSort) {
+            Utils.checkNotNull(titleSort, "titleSort");
+            this.titleSort = Optional.ofNullable(titleSort);
+            return this;
+        }
+
+        /**
+         * Whene present, this is the string used for sorting the item. It's usually the title with any leading articles removed (e.g. “Simpsons”).
+         */
+        public Builder titleSort(Optional<? extends Object> titleSort) {
+            Utils.checkNotNull(titleSort, "titleSort");
+            this.titleSort = titleSort;
+            return this;
+        }
+
+
+        /**
+         * In units of seconds since the epoch, returns the time at which the item was last changed (e.g. had its metadata updated).
+         */
+        public Builder updatedAt(long updatedAt) {
+            Utils.checkNotNull(updatedAt, "updatedAt");
+            this.updatedAt = Optional.ofNullable(updatedAt);
+            return this;
+        }
+
+        /**
+         * In units of seconds since the epoch, returns the time at which the item was last changed (e.g. had its metadata updated).
+         */
+        public Builder updatedAt(Optional<Long> updatedAt) {
+            Utils.checkNotNull(updatedAt, "updatedAt");
+            this.updatedAt = updatedAt;
+            return this;
+        }
+
+
+        /**
+         * When the user has rated an item, this contains the user rating
+         */
+        public Builder userRating(double userRating) {
+            Utils.checkNotNull(userRating, "userRating");
+            this.userRating = Optional.ofNullable(userRating);
+            return this;
+        }
+
+        /**
+         * When the user has rated an item, this contains the user rating
+         */
+        public Builder userRating(Optional<Double> userRating) {
+            Utils.checkNotNull(userRating, "userRating");
+            this.userRating = userRating;
+            return this;
+        }
+
+
+        /**
+         * When a users has completed watched or listened to an item, this attribute contains the number of consumptions.
+         */
+        public Builder viewCount(long viewCount) {
+            Utils.checkNotNull(viewCount, "viewCount");
+            this.viewCount = Optional.ofNullable(viewCount);
+            return this;
+        }
+
+        /**
+         * When a users has completed watched or listened to an item, this attribute contains the number of consumptions.
+         */
+        public Builder viewCount(Optional<Long> viewCount) {
+            Utils.checkNotNull(viewCount, "viewCount");
+            this.viewCount = viewCount;
+            return this;
+        }
+
+
+        /**
+         * For shows and seasons, contains the number of viewed episodes.
+         */
+        public Builder viewedLeafCount(long viewedLeafCount) {
+            Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
+            this.viewedLeafCount = Optional.ofNullable(viewedLeafCount);
+            return this;
+        }
+
+        /**
+         * For shows and seasons, contains the number of viewed episodes.
+         */
+        public Builder viewedLeafCount(Optional<Long> viewedLeafCount) {
+            Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
+            this.viewedLeafCount = viewedLeafCount;
+            return this;
+        }
+
+
+        /**
+         * When a user is in the process of viewing or listening to this item, this attribute contains the current offset, in units of milliseconds.
+         */
+        public Builder viewOffset(long viewOffset) {
+            Utils.checkNotNull(viewOffset, "viewOffset");
+            this.viewOffset = Optional.ofNullable(viewOffset);
+            return this;
+        }
+
+        /**
+         * When a user is in the process of viewing or listening to this item, this attribute contains the current offset, in units of milliseconds.
+         */
+        public Builder viewOffset(Optional<Long> viewOffset) {
+            Utils.checkNotNull(viewOffset, "viewOffset");
+            this.viewOffset = viewOffset;
+            return this;
+        }
+
+
+        public Builder writer(List<Tag> writer) {
+            Utils.checkNotNull(writer, "writer");
+            this.writer = Optional.ofNullable(writer);
+            return this;
+        }
+
+        public Builder writer(Optional<? extends List<Tag>> writer) {
+            Utils.checkNotNull(writer, "writer");
+            this.writer = writer;
+            return this;
+        }
+
+
+        /**
+         * When present, the year associated with the item's release (e.g. release year for a movie).
+         */
+        public Builder year(long year) {
+            Utils.checkNotNull(year, "year");
+            this.year = Optional.ofNullable(year);
+            return this;
+        }
+
+        /**
+         * When present, the year associated with the item's release (e.g. release year for a movie).
+         */
+        public Builder year(Optional<Long> year) {
+            Utils.checkNotNull(year, "year");
+            this.year = year;
+            return this;
+        }
+
+        public Builder additionalProperty(String key, Object value) {
+            Utils.checkNotNull(key, "key");
+            // we could be strict about null values (force the user
+            // to pass `JsonNullable.of(null)`) but likely to be a bit 
+            // annoying for additional properties building so we'll 
+            // relax preconditions.
+            this.additionalProperties.put(key, value);
+            return this;
+        }
+
+        public Builder additionalProperties(Map<String, Object> additionalProperties) {
+            Utils.checkNotNull(additionalProperties, "additionalProperties");
+            this.additionalProperties = additionalProperties;
             return this;
         }
 
         public Metadata build() {
 
             return new Metadata(
-                art, guid, key,
-                ratingKey, studio, tagline,
-                type, thumb, addedAt,
-                duration, publicPagesURL, slug,
-                userState, title, contentRating,
-                originallyAvailableAt, year, image,
-                banner, rating, expiresAt,
-                originalTitle, audienceRating, audienceRatingImage,
-                ratingImage, imdbRatingCount, subtype,
-                theme, leafCount, childCount,
-                isContinuingSeries, skipChildren, availabilityId,
-                streamingMediaId, playableKey);
+                player, session, user,
+                title, type, absoluteIndex,
+                addedAt, art, audienceRating,
+                audienceRatingImage, autotag, banner,
+                chapterSource, composite, contentRating,
+                country, director, duration,
+                filter, genre, grandparentArt,
+                grandparentHero, grandparentKey, grandparentRatingKey,
+                grandparentTheme, grandparentThumb, grandparentTitle,
+                guid, hero, image,
+                index, key, lastViewedAt,
+                leafCount, media, originallyAvailableAt,
+                originalTitle, parentHero, parentIndex,
+                parentKey, parentRatingKey, parentThumb,
+                parentTitle, primaryExtraKey, prompt,
+                rating, ratingArray, ratingCount,
+                ratingImage, ratingKey, role,
+                search, secondary, skipChildren,
+                skipParent, sort, studio,
+                subtype, summary, tagline,
+                theme, thumb, titleSort,
+                updatedAt, userRating, viewCount,
+                viewedLeafCount, viewOffset, writer,
+                year)
+                .withAdditionalProperties(additionalProperties);
         }
 
     }

@@ -9,35 +9,164 @@ Updates to the status can be observed via the Event API.
 
 ### Available Operations
 
-* [getUpdateStatus](#getupdatestatus) - Querying status of updates
-* [checkForUpdates](#checkforupdates) - Checking for updates
-* [applyUpdates](#applyupdates) - Apply Updates
+* [applyUpdates](#applyupdates) - Applying updates
+* [checkUpdates](#checkupdates) - Checking for updates
+* [getUpdatesStatus](#getupdatesstatus) - Querying status of updates
 
-## getUpdateStatus
+## applyUpdates
 
-Querying status of updates
+Apply any downloaded updates.  Note that the two parameters `tonight` and `skip` are effectively mutually exclusive. The `tonight` parameter takes precedence and `skip` will be ignored if `tonight` is also passed.
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="getUpdateStatus" method="get" path="/updater/status" -->
+<!-- UsageSnippet language="java" operationID="applyUpdates" method="put" path="/updater/apply" -->
 ```java
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.GetUpdateStatusBadRequest;
-import dev.plexapi.sdk.models.errors.GetUpdateStatusUnauthorized;
-import dev.plexapi.sdk.models.operations.GetUpdateStatusResponse;
+import dev.plexapi.sdk.models.operations.ApplyUpdatesRequest;
+import dev.plexapi.sdk.models.operations.ApplyUpdatesResponse;
+import dev.plexapi.sdk.models.shared.Accepts;
+import dev.plexapi.sdk.models.shared.BoolInt;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws GetUpdateStatusBadRequest, GetUpdateStatusUnauthorized, Exception {
+    public static void main(String[] args) throws Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
+                .accepts(Accepts.APPLICATION_XML)
+                .clientIdentifier("abc123")
+                .product("Plex for Roku")
+                .version("2.4.1")
+                .platform("Roku")
+                .platformVersion("4.3 build 1057")
+                .device("Roku 3")
+                .model("4200X")
+                .deviceVendor("Roku")
+                .deviceName("Living Room TV")
+                .marketplace("googlePlay")
+                .token(System.getenv().getOrDefault("TOKEN", ""))
             .build();
 
-        GetUpdateStatusResponse res = sdk.updater().getUpdateStatus()
+        ApplyUpdatesRequest req = ApplyUpdatesRequest.builder()
+                .tonight(BoolInt.ONE)
+                .skip(BoolInt.ONE)
+                .build();
+
+        ApplyUpdatesResponse res = sdk.updater().applyUpdates()
+                .request(req)
+                .call();
+
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `request`                                                             | [ApplyUpdatesRequest](../../models/operations/ApplyUpdatesRequest.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
+
+### Response
+
+**[ApplyUpdatesResponse](../../models/operations/ApplyUpdatesResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## checkUpdates
+
+Perform an update check and potentially download
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="checkUpdates" method="put" path="/updater/check" -->
+```java
+package hello.world;
+
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.operations.CheckUpdatesRequest;
+import dev.plexapi.sdk.models.operations.CheckUpdatesResponse;
+import dev.plexapi.sdk.models.shared.Accepts;
+import dev.plexapi.sdk.models.shared.BoolInt;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
+                .accepts(Accepts.APPLICATION_XML)
+                .clientIdentifier("abc123")
+                .product("Plex for Roku")
+                .version("2.4.1")
+                .platform("Roku")
+                .platformVersion("4.3 build 1057")
+                .device("Roku 3")
+                .model("4200X")
+                .deviceVendor("Roku")
+                .deviceName("Living Room TV")
+                .marketplace("googlePlay")
+                .token(System.getenv().getOrDefault("TOKEN", ""))
+            .build();
+
+        CheckUpdatesRequest req = CheckUpdatesRequest.builder()
+                .download(BoolInt.ONE)
+                .build();
+
+        CheckUpdatesResponse res = sdk.updater().checkUpdates()
+                .request(req)
+                .call();
+
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `request`                                                             | [CheckUpdatesRequest](../../models/operations/CheckUpdatesRequest.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
+
+### Response
+
+**[CheckUpdatesResponse](../../models/operations/CheckUpdatesResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## getUpdatesStatus
+
+Get the status of updating the server
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="getUpdatesStatus" method="get" path="/updater/status" -->
+```java
+package hello.world;
+
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.operations.GetUpdatesStatusResponse;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
+                .token(System.getenv().getOrDefault("TOKEN", ""))
+            .build();
+
+        GetUpdatesStatusResponse res = sdk.updater().getUpdatesStatus()
                 .call();
 
         if (res.object().isPresent()) {
@@ -49,118 +178,10 @@ public class Application {
 
 ### Response
 
-**[GetUpdateStatusResponse](../../models/operations/GetUpdateStatusResponse.md)**
+**[GetUpdatesStatusResponse](../../models/operations/GetUpdatesStatusResponse.md)**
 
 ### Errors
 
-| Error Type                                | Status Code                               | Content Type                              |
-| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| models/errors/GetUpdateStatusBadRequest   | 400                                       | application/json                          |
-| models/errors/GetUpdateStatusUnauthorized | 401                                       | application/json                          |
-| models/errors/SDKError                    | 4XX, 5XX                                  | \*/\*                                     |
-
-## checkForUpdates
-
-Checking for updates
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="checkForUpdates" method="put" path="/updater/check" -->
-```java
-package hello.world;
-
-import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.CheckForUpdatesBadRequest;
-import dev.plexapi.sdk.models.errors.CheckForUpdatesUnauthorized;
-import dev.plexapi.sdk.models.operations.CheckForUpdatesResponse;
-import dev.plexapi.sdk.models.operations.Download;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws CheckForUpdatesBadRequest, CheckForUpdatesUnauthorized, Exception {
-
-        PlexAPI sdk = PlexAPI.builder()
-                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
-            .build();
-
-        CheckForUpdatesResponse res = sdk.updater().checkForUpdates()
-                .download(Download.ONE)
-                .call();
-
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 | Example                                                     |
-| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `download`                                                  | [Optional\<Download>](../../models/operations/Download.md)  | :heavy_minus_sign:                                          | Indicate that you want to start download any updates found. | 1                                                           |
-
-### Response
-
-**[CheckForUpdatesResponse](../../models/operations/CheckForUpdatesResponse.md)**
-
-### Errors
-
-| Error Type                                | Status Code                               | Content Type                              |
-| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| models/errors/CheckForUpdatesBadRequest   | 400                                       | application/json                          |
-| models/errors/CheckForUpdatesUnauthorized | 401                                       | application/json                          |
-| models/errors/SDKError                    | 4XX, 5XX                                  | \*/\*                                     |
-
-## applyUpdates
-
-Note that these two parameters are effectively mutually exclusive. The `tonight` parameter takes precedence and `skip` will be ignored if `tonight` is also passed
-
-
-### Example Usage
-
-<!-- UsageSnippet language="java" operationID="applyUpdates" method="put" path="/updater/apply" -->
-```java
-package hello.world;
-
-import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.ApplyUpdatesBadRequest;
-import dev.plexapi.sdk.models.errors.ApplyUpdatesUnauthorized;
-import dev.plexapi.sdk.models.operations.*;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws ApplyUpdatesBadRequest, ApplyUpdatesUnauthorized, Exception {
-
-        PlexAPI sdk = PlexAPI.builder()
-                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
-            .build();
-
-        ApplyUpdatesResponse res = sdk.updater().applyUpdates()
-                .tonight(Tonight.ONE)
-                .skip(Skip.ONE)
-                .call();
-
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                | Type                                                                                                                                                     | Required                                                                                                                                                 | Description                                                                                                                                              | Example                                                                                                                                                  |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tonight`                                                                                                                                                | [Optional\<Tonight>](../../models/operations/Tonight.md)                                                                                                 | :heavy_minus_sign:                                                                                                                                       | Indicate that you want the update to run during the next Butler execution. Omitting this or setting it to false indicates that the update should install | 1                                                                                                                                                        |
-| `skip`                                                                                                                                                   | [Optional\<Skip>](../../models/operations/Skip.md)                                                                                                       | :heavy_minus_sign:                                                                                                                                       | Indicate that the latest version should be marked as skipped. The [Release] entry for this version will have the `state` set to `skipped`.               | 1                                                                                                                                                        |
-
-### Response
-
-**[ApplyUpdatesResponse](../../models/operations/ApplyUpdatesResponse.md)**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| models/errors/ApplyUpdatesBadRequest   | 400                                    | application/json                       |
-| models/errors/ApplyUpdatesUnauthorized | 401                                    | application/json                       |
-| models/errors/SDKError                 | 4XX, 5XX                               | \*/\*                                  |
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |

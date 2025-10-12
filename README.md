@@ -11,41 +11,13 @@
 <!-- Start Summary [summary] -->
 ## Summary
 
-Plex-API: An Open API Spec for interacting with Plex.tv and Plex Media Server
 
-# Plex Media Server OpenAPI Specification
-
-An Open Source OpenAPI Specification for Plex Media Server
-
-Automation and SDKs provided by [Speakeasy](https://speakeasyapi.dev/)
-
-## Documentation
-
-[API Documentation](https://plexapi.dev)
-
-## SDKs
-
-The following SDKs are generated from the OpenAPI Specification. They are automatically generated and may not be fully tested. If you find any issues, please open an issue on the [main specification Repository](https://github.com/LukeHagar/plex-api-spec).
-
-| Language              | Repository                                        | Releases                                                                                         | Other                                                   |
-| --------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------- |
-| Python                | [GitHub](https://github.com/LukeHagar/plexpy)     | [PyPI](https://pypi.org/project/plex-api-client/)                                                | -                                                       |
-| JavaScript/TypeScript | [GitHub](https://github.com/LukeHagar/plexjs)     | [NPM](https://www.npmjs.com/package/@lukehagar/plexjs) \ [JSR](https://jsr.io/@lukehagar/plexjs) | -                                                       |
-| Go                    | [GitHub](https://github.com/LukeHagar/plexgo)     | [Releases](https://github.com/LukeHagar/plexgo/releases)                                         | [GoDoc](https://pkg.go.dev/github.com/LukeHagar/plexgo) |
-| Ruby                  | [GitHub](https://github.com/LukeHagar/plexruby)   | [Releases](https://github.com/LukeHagar/plexruby/releases)                                       | -                                                       |
-| Swift                 | [GitHub](https://github.com/LukeHagar/plexswift)  | [Releases](https://github.com/LukeHagar/plexswift/releases)                                      | -                                                       |
-| PHP                   | [GitHub](https://github.com/LukeHagar/plexphp)    | [Releases](https://github.com/LukeHagar/plexphp/releases)                                        | -                                                       |
-| Java                  | [GitHub](https://github.com/LukeHagar/plexjava)   | [Releases](https://github.com/LukeHagar/plexjava/releases)                                       | -                                                       |
-| C#                    | [GitHub](https://github.com/LukeHagar/plexcsharp) | [Releases](https://github.com/LukeHagar/plexcsharp/releases)                                     | -
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
 * [plexapi](#plexapi)
-* [Plex Media Server OpenAPI Specification](#plex-media-server-openapi-specification)
-  * [Documentation](#documentation)
-  * [SDKs](#sdks)
   * [SDK Installation](#sdk-installation)
   * [SDK Example Usage](#sdk-example-usage)
   * [Available Resources and Operations](#available-resources-and-operations)
@@ -71,7 +43,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'dev.plexapi:plexapi:0.18.0'
+implementation 'dev.plexapi:plexapi:0.19.1'
 ```
 
 Maven:
@@ -79,7 +51,7 @@ Maven:
 <dependency>
     <groupId>dev.plexapi</groupId>
     <artifactId>plexapi</artifactId>
-    <version>0.18.0</version>
+    <version>0.19.1</version>
 </dependency>
 ```
 
@@ -107,23 +79,66 @@ gradlew.bat publishToMavenLocal -Pskip.signing
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest;
-import dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized;
-import dev.plexapi.sdk.models.operations.GetServerCapabilitiesResponse;
+import dev.plexapi.sdk.models.operations.*;
+import dev.plexapi.sdk.models.shared.*;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws GetServerCapabilitiesBadRequest, GetServerCapabilitiesUnauthorized, Exception {
+    public static void main(String[] args) throws Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
+                .accepts(Accepts.APPLICATION_XML)
+                .clientIdentifier("abc123")
+                .product("Plex for Roku")
+                .version("2.4.1")
+                .platform("Roku")
+                .platformVersion("4.3 build 1057")
+                .device("Roku 3")
+                .model("4200X")
+                .deviceVendor("Roku")
+                .deviceName("Living Room TV")
+                .marketplace("googlePlay")
+                .token(System.getenv().getOrDefault("TOKEN", ""))
             .build();
 
-        GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
+        StartTranscodeSessionRequest req = StartTranscodeSessionRequest.builder()
+                .transcodeType(TranscodeType.MUSIC)
+                .extension(Extension.MPD)
+                .advancedSubtitles(AdvancedSubtitles.BURN)
+                .audioBoost(50L)
+                .audioChannelCount(5L)
+                .autoAdjustQuality(BoolInt.ONE)
+                .autoAdjustSubtitle(BoolInt.ONE)
+                .directPlay(BoolInt.ONE)
+                .directStream(BoolInt.ONE)
+                .directStreamAudio(BoolInt.ONE)
+                .disableResolutionRotation(BoolInt.ONE)
+                .hasMDE(BoolInt.ONE)
+                .location(StartTranscodeSessionQueryParamLocation.WAN)
+                .mediaBufferSize(102400L)
+                .mediaIndex(0L)
+                .musicBitrate(5000L)
+                .offset(90.5)
+                .partIndex(0L)
+                .path("/library/metadata/151671")
+                .peakBitrate(12000L)
+                .photoResolution("1080x1080")
+                .protocol(StartTranscodeSessionQueryParamProtocol.DASH)
+                .secondsPerSegment(5L)
+                .subtitleSize(50L)
+                .videoBitrate(12000L)
+                .videoQuality(50L)
+                .videoResolution("1080x1080")
+                .xPlexClientProfileExtra("add-limitation(scope=videoCodec&scopeName=*&type=upperBound&name=video.frameRate&value=60&replace=true)+append-transcode-target-codec(type=videoProfile&context=streaming&videoCodec=h264%2Chevc&audioCodec=aac&protocol=dash)")
+                .xPlexClientProfileName("generic")
+                .build();
+
+        StartTranscodeSessionResponse res = sdk.transcoder().startTranscodeSession()
+                .request(req)
                 .call();
 
-        if (res.object().isPresent()) {
+        if (res.responseStream().isPresent()) {
             // handle response
         }
     }
@@ -136,7 +151,9 @@ package hello.world;
 
 import dev.plexapi.sdk.AsyncPlexAPI;
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.operations.async.GetServerCapabilitiesResponse;
+import dev.plexapi.sdk.models.operations.GetServerInfoRequest;
+import dev.plexapi.sdk.models.operations.async.GetServerInfoResponse;
+import dev.plexapi.sdk.models.shared.Accepts;
 import java.util.concurrent.CompletableFuture;
 
 public class Application {
@@ -144,15 +161,30 @@ public class Application {
     public static void main(String[] args) {
 
         AsyncPlexAPI sdk = PlexAPI.builder()
-                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
+                .accepts(Accepts.APPLICATION_XML)
+                .clientIdentifier("abc123")
+                .product("Plex for Roku")
+                .version("2.4.1")
+                .platform("Roku")
+                .platformVersion("4.3 build 1057")
+                .device("Roku 3")
+                .model("4200X")
+                .deviceVendor("Roku")
+                .deviceName("Living Room TV")
+                .marketplace("googlePlay")
+                .token(System.getenv().getOrDefault("TOKEN", ""))
             .build()
             .async();
 
-        CompletableFuture<GetServerCapabilitiesResponse> resFut = sdk.server().getServerCapabilities()
+        GetServerInfoRequest req = GetServerInfoRequest.builder()
+                .build();
+
+        CompletableFuture<GetServerInfoResponse> resFut = sdk.general().getServerInfo()
+                .request(req)
                 .call();
 
         resFut.thenAccept(res -> {
-            if (res.object().isPresent()) {
+            if (res.mediaContainerWithDirectory().isPresent()) {
             // handle response
             }
         });
@@ -171,139 +203,324 @@ public class Application {
 
 ### [activities()](docs/sdks/activities/README.md)
 
-* [getServerActivities](docs/sdks/activities/README.md#getserveractivities) - Get Server Activities
-* [cancelServerActivities](docs/sdks/activities/README.md#cancelserveractivities) - Cancel Server Activities
-
-### [authentication()](docs/sdks/authentication/README.md)
-
-* [getTransientToken](docs/sdks/authentication/README.md#gettransienttoken) - Get a Transient Token
-* [getSourceConnectionInformation](docs/sdks/authentication/README.md#getsourceconnectioninformation) - Get Source Connection Information
-* [getTokenDetails](docs/sdks/authentication/README.md#gettokendetails) - Get Token Details
-* [postUsersSignInData](docs/sdks/authentication/README.md#postuserssignindata) - Get User Sign In Data
+* [listActivities](docs/sdks/activities/README.md#listactivities) - Get all activities
+* [cancelActivity](docs/sdks/activities/README.md#cancelactivity) - Cancel a running activity
 
 ### [butler()](docs/sdks/butler/README.md)
 
-* [getButlerTasks](docs/sdks/butler/README.md#getbutlertasks) - Get Butler tasks
-* [startAllTasks](docs/sdks/butler/README.md#startalltasks) - Start all Butler tasks
-* [stopAllTasks](docs/sdks/butler/README.md#stopalltasks) - Stop all Butler tasks
-* [startTask](docs/sdks/butler/README.md#starttask) - Start a single Butler task
+* [stopTasks](docs/sdks/butler/README.md#stoptasks) - Stop all Butler tasks
+* [getTasks](docs/sdks/butler/README.md#gettasks) - Get all Butler tasks
+* [startTasks](docs/sdks/butler/README.md#starttasks) - Start all Butler tasks
 * [stopTask](docs/sdks/butler/README.md#stoptask) - Stop a single Butler task
+* [startTask](docs/sdks/butler/README.md#starttask) - Start a single Butler task
+
+### [collections()](docs/sdks/collections/README.md)
+
+* [createCollection](docs/sdks/collections/README.md#createcollection) - Create collection
+
+### [content()](docs/sdks/content/README.md)
+
+* [getCollectionItems](docs/sdks/content/README.md#getcollectionitems) - Get items in a collection
+* [getMetadataItem](docs/sdks/content/README.md#getmetadataitem) - Get a metadata item
+* [getAlbums](docs/sdks/content/README.md#getalbums) - Set section albums
+* [listContent](docs/sdks/content/README.md#listcontent) - Get items in the section
+* [getAllLeaves](docs/sdks/content/README.md#getallleaves) - Set section leaves
+* [getArts](docs/sdks/content/README.md#getarts) - Set section artwork
+* [getCategories](docs/sdks/content/README.md#getcategories) - Set section categories
+* [getCluster](docs/sdks/content/README.md#getcluster) - Set section clusters
+* [getSonicPath](docs/sdks/content/README.md#getsonicpath) - Similar tracks to transition from one to another
+* [getFolders](docs/sdks/content/README.md#getfolders) - Get all folder locations
+* [listMoments](docs/sdks/content/README.md#listmoments) - Set section moments
+* [getSonicallySimilar](docs/sdks/content/README.md#getsonicallysimilar) - The nearest audio tracks
+* [getCollectionImage](docs/sdks/content/README.md#getcollectionimage) - Get a collection's image
+
+### [devices()](docs/sdks/devices/README.md)
+
+* [getAvailableGrabbers](docs/sdks/devices/README.md#getavailablegrabbers) - Get available grabbers
+* [listDevices](docs/sdks/devices/README.md#listdevices) - Get all devices
+* [addDevice](docs/sdks/devices/README.md#adddevice) - Add a device
+* [discoverDevices](docs/sdks/devices/README.md#discoverdevices) - Tell grabbers to discover devices
+* [removeDevice](docs/sdks/devices/README.md#removedevice) - Remove a device
+* [getDeviceDetails](docs/sdks/devices/README.md#getdevicedetails) - Get device details
+* [modifyDevice](docs/sdks/devices/README.md#modifydevice) - Enable or disable a device
+* [setChannelmap](docs/sdks/devices/README.md#setchannelmap) - Set a device's channel mapping
+* [getDevicesChannels](docs/sdks/devices/README.md#getdeviceschannels) - Get a device's channels
+* [setDevicePreferences](docs/sdks/devices/README.md#setdevicepreferences) - Set device preferences
+* [stopScan](docs/sdks/devices/README.md#stopscan) - Tell a device to stop scanning for channels
+* [scan](docs/sdks/devices/README.md#scan) - Tell a device to scan for channels
+* [getThumb](docs/sdks/devices/README.md#getthumb) - Get device thumb
+
+### [downloadQueue()](docs/sdks/downloadqueue/README.md)
+
+* [createDownloadQueue](docs/sdks/downloadqueue/README.md#createdownloadqueue) - Create download queue
+* [getDownloadQueue](docs/sdks/downloadqueue/README.md#getdownloadqueue) - Get a download queue
+* [addDownloadQueueItems](docs/sdks/downloadqueue/README.md#adddownloadqueueitems) - Add to download queue
+* [listDownloadQueueItems](docs/sdks/downloadqueue/README.md#listdownloadqueueitems) - Get download queue items
+* [getItemDecision](docs/sdks/downloadqueue/README.md#getitemdecision) - Grab download queue item decision
+* [getDownloadQueueMedia](docs/sdks/downloadqueue/README.md#getdownloadqueuemedia) - Grab download queue media
+* [removeDownloadQueueItems](docs/sdks/downloadqueue/README.md#removedownloadqueueitems) - Delete download queue items
+* [getDownloadQueueItems](docs/sdks/downloadqueue/README.md#getdownloadqueueitems) - Get download queue items
+* [restartProcessingDownloadQueueItems](docs/sdks/downloadqueue/README.md#restartprocessingdownloadqueueitems) - Restart processing of items from the decision
+
+### [dvRs()](docs/sdks/dvrs/README.md)
+
+* [listDVRs](docs/sdks/dvrs/README.md#listdvrs) - Get DVRs
+* [createDVR](docs/sdks/dvrs/README.md#createdvr) - Create a DVR
+* [deleteDVR](docs/sdks/dvrs/README.md#deletedvr) - Delete a single DVR
+* [getDVR](docs/sdks/dvrs/README.md#getdvr) - Get a single DVR
+* [deleteLineup](docs/sdks/dvrs/README.md#deletelineup) - Delete a DVR Lineup
+* [addLineup](docs/sdks/dvrs/README.md#addlineup) - Add a DVR Lineup
+* [setDVRPreferences](docs/sdks/dvrs/README.md#setdvrpreferences) - Set DVR preferences
+* [stopDVRReload](docs/sdks/dvrs/README.md#stopdvrreload) - Tell a DVR to stop reloading program guide
+* [reloadGuide](docs/sdks/dvrs/README.md#reloadguide) - Tell a DVR to reload program guide
+* [tuneChannel](docs/sdks/dvrs/README.md#tunechannel) - Tune a channel on a DVR
+* [removeDeviceFromDVR](docs/sdks/dvrs/README.md#removedevicefromdvr) - Remove a device from an existing DVR
+* [addDeviceToDVR](docs/sdks/dvrs/README.md#adddevicetodvr) - Add a device to an existing DVR
+
+### [epg()](docs/sdks/epg/README.md)
+
+* [computeChannelMap](docs/sdks/epg/README.md#computechannelmap) - Compute the best channel map
+* [getChannels](docs/sdks/epg/README.md#getchannels) - Get channels for a lineup
+* [getCountries](docs/sdks/epg/README.md#getcountries) - Get all countries
+* [getAllLanguages](docs/sdks/epg/README.md#getalllanguages) - Get all languages
+* [getLineup](docs/sdks/epg/README.md#getlineup) - Compute the best lineup
+* [getLineupChannels](docs/sdks/epg/README.md#getlineupchannels) - Get the channels for mulitple lineups
+* [getCountriesLineups](docs/sdks/epg/README.md#getcountrieslineups) - Get lineups for a country via postal code
+* [getCountryRegions](docs/sdks/epg/README.md#getcountryregions) - Get regions for a country
+* [listLineups](docs/sdks/epg/README.md#listlineups) - Get lineups for a region
+
+### [events()](docs/sdks/events/README.md)
+
+* [getNotifications](docs/sdks/events/README.md#getnotifications) - Connect to Eventsource
+* [connectWebSocket](docs/sdks/events/README.md#connectwebsocket) - Connect to WebSocket
+
+### [general()](docs/sdks/general/README.md)
+
+* [getServerInfo](docs/sdks/general/README.md#getserverinfo) - Get PMS info
+* [getIdentity](docs/sdks/general/README.md#getidentity) - Get PMS identity
+* [getSourceConnectionInformation](docs/sdks/general/README.md#getsourceconnectioninformation) - Get Source Connection Information
+* [getTransientToken](docs/sdks/general/README.md#gettransienttoken) - Get Transient Tokens
 
 ### [hubs()](docs/sdks/hubs/README.md)
 
-* [getGlobalHubs](docs/sdks/hubs/README.md#getglobalhubs) - Get Global Hubs
-* [getRecentlyAdded](docs/sdks/hubs/README.md#getrecentlyadded) - Get Recently Added
-* [getLibraryHubs](docs/sdks/hubs/README.md#getlibraryhubs) - Get library specific hubs
+* [getAllHubs](docs/sdks/hubs/README.md#getallhubs) - Get global hubs
+* [getContinueWatching](docs/sdks/hubs/README.md#getcontinuewatching) - Get the continue watching hub
+* [getHubItems](docs/sdks/hubs/README.md#gethubitems) - Get a hub's items
+* [getPromotedHubs](docs/sdks/hubs/README.md#getpromotedhubs) - Get the hubs which are promoted
+* [getMetadataHubs](docs/sdks/hubs/README.md#getmetadatahubs) - Get hubs for section by metadata item
+* [getPostplayHubs](docs/sdks/hubs/README.md#getpostplayhubs) - Get postplay hubs
+* [getRelatedHubs](docs/sdks/hubs/README.md#getrelatedhubs) - Get related hubs
+* [getSectionHubs](docs/sdks/hubs/README.md#getsectionhubs) - Get section hubs
+* [resetSectionDefaults](docs/sdks/hubs/README.md#resetsectiondefaults) - Reset hubs to defaults
+* [listHubs](docs/sdks/hubs/README.md#listhubs) - Get hubs
+* [createCustomHub](docs/sdks/hubs/README.md#createcustomhub) - Create a custom hub
+* [moveHub](docs/sdks/hubs/README.md#movehub) - Move Hub
+* [deleteCustomHub](docs/sdks/hubs/README.md#deletecustomhub) - Delete a custom hub
+* [updateHubVisibility](docs/sdks/hubs/README.md#updatehubvisibility) - Change hub visibility
 
 ### [library()](docs/sdks/library/README.md)
 
-* [getFileHash](docs/sdks/library/README.md#getfilehash) - Get Hash Value
-* [getRecentlyAddedLibrary](docs/sdks/library/README.md#getrecentlyaddedlibrary) - Get Recently Added
-* [getAllLibraries](docs/sdks/library/README.md#getalllibraries) - Get All Libraries
-* [getLibraryDetails](docs/sdks/library/README.md#getlibrarydetails) - Get Library Details
-* [deleteLibrary](docs/sdks/library/README.md#deletelibrary) - Delete Library Section
-* [getLibraryItems](docs/sdks/library/README.md#getlibraryitems) - Get Library Items
-* [getLibrarySectionsAll](docs/sdks/library/README.md#getlibrarysectionsall) - Get Library section media by tag ALL
-* [getRefreshLibraryMetadata](docs/sdks/library/README.md#getrefreshlibrarymetadata) - Refresh Metadata Of The Library
-* [getSearchLibrary](docs/sdks/library/README.md#getsearchlibrary) - Search Library
-* [getGenresLibrary](docs/sdks/library/README.md#getgenreslibrary) - Get Genres of library media
-* [getCountriesLibrary](docs/sdks/library/README.md#getcountrieslibrary) - Get Countries of library media
-* [getActorsLibrary](docs/sdks/library/README.md#getactorslibrary) - Get Actors of library media
-* [getSearchAllLibraries](docs/sdks/library/README.md#getsearchalllibraries) - Search All Libraries
-* [getMediaMetaData](docs/sdks/library/README.md#getmediametadata) - Get Media Metadata
-* [getMediaArts](docs/sdks/library/README.md#getmediaarts) - Get Media Background Artwork
-* [postMediaArts](docs/sdks/library/README.md#postmediaarts) - Upload Media Background Artwork
-* [getMediaPosters](docs/sdks/library/README.md#getmediaposters) - Get Media Posters
-* [postMediaPoster](docs/sdks/library/README.md#postmediaposter) - Upload Media Poster
-* [getMetadataChildren](docs/sdks/library/README.md#getmetadatachildren) - Get Items Children
-* [getTopWatchedContent](docs/sdks/library/README.md#gettopwatchedcontent) - Get Top Watched Content
+* [getLibraryItems](docs/sdks/library/README.md#getlibraryitems) - Get all items in library
+* [deleteCaches](docs/sdks/library/README.md#deletecaches) - Delete library caches
+* [cleanBundles](docs/sdks/library/README.md#cleanbundles) - Clean bundles
+* [ingestTransientItem](docs/sdks/library/README.md#ingesttransientitem) - Ingest a transient item
+* [getLibraryMatches](docs/sdks/library/README.md#getlibrarymatches) - Get library matches
+* [optimizeDatabase](docs/sdks/library/README.md#optimizedatabase) - Optimize the Database
+* [getRandomArtwork](docs/sdks/library/README.md#getrandomartwork) - Get random artwork
+* [getSections](docs/sdks/library/README.md#getsections) - Get library sections (main Media Provider Only)
+* [addSection](docs/sdks/library/README.md#addsection) - Add a library section
+* [stopAllRefreshes](docs/sdks/library/README.md#stopallrefreshes) - Stop refresh
+* [getSectionsPrefs](docs/sdks/library/README.md#getsectionsprefs) - Get section prefs
+* [refreshSectionsMetadata](docs/sdks/library/README.md#refreshsectionsmetadata) - Refresh all sections
+* [getTags](docs/sdks/library/README.md#gettags) - Get all library tags of a type
+* [deleteMetadataItem](docs/sdks/library/README.md#deletemetadataitem) - Delete a metadata item
+* [editMetadataItem](docs/sdks/library/README.md#editmetadataitem) - Edit a metadata item
+* [detectAds](docs/sdks/library/README.md#detectads) - Ad-detect an item
+* [getAllItemLeaves](docs/sdks/library/README.md#getallitemleaves) - Get the leaves of an item
+* [analyzeMetadata](docs/sdks/library/README.md#analyzemetadata) - Analyze an item
+* [generateThumbs](docs/sdks/library/README.md#generatethumbs) - Generate thumbs of chapters for an item
+* [detectCredits](docs/sdks/library/README.md#detectcredits) - Credit detect a metadata item
+* [getExtras](docs/sdks/library/README.md#getextras) - Get an item's extras
+* [addExtras](docs/sdks/library/README.md#addextras) - Add to an item's extras
+* [getFile](docs/sdks/library/README.md#getfile) - Get a file from a metadata or media bundle
+* [startBifGeneration](docs/sdks/library/README.md#startbifgeneration) - Start BIF generation of an item
+* [detectIntros](docs/sdks/library/README.md#detectintros) - Intro detect an item
+* [createMarker](docs/sdks/library/README.md#createmarker) - Create a marker
+* [matchItem](docs/sdks/library/README.md#matchitem) - Match a metadata item
+* [listMatches](docs/sdks/library/README.md#listmatches) - Get metadata matches for an item
+* [mergeItems](docs/sdks/library/README.md#mergeitems) - Merge a metadata item
+* [listSonicallySimilar](docs/sdks/library/README.md#listsonicallysimilar) - Get nearest tracks to metadata item
+* [setItemPreferences](docs/sdks/library/README.md#setitempreferences) - Set metadata preferences
+* [refreshItemsMetadata](docs/sdks/library/README.md#refreshitemsmetadata) - Refresh a metadata item
+* [getRelatedItems](docs/sdks/library/README.md#getrelateditems) - Get related items
+* [listSimilar](docs/sdks/library/README.md#listsimilar) - Get similar items
+* [splitItem](docs/sdks/library/README.md#splititem) - Split a metadata item
+* [addSubtitles](docs/sdks/library/README.md#addsubtitles) - Add subtitles
+* [getItemTree](docs/sdks/library/README.md#getitemtree) - Get metadata items as a tree
+* [unmatch](docs/sdks/library/README.md#unmatch) - Unmatch a metadata item
+* [listTopUsers](docs/sdks/library/README.md#listtopusers) - Get metadata top users
+* [detectVoiceActivity](docs/sdks/library/README.md#detectvoiceactivity) - Detect voice activity
+* [getAugmentationStatus](docs/sdks/library/README.md#getaugmentationstatus) - Get augmentation status
+* [setStreamSelection](docs/sdks/library/README.md#setstreamselection) - Set stream selection
+* [getPerson](docs/sdks/library/README.md#getperson) - Get person details
+* [listPersonMedia](docs/sdks/library/README.md#listpersonmedia) - Get media for a person
+* [deleteLibrarySection](docs/sdks/library/README.md#deletelibrarysection) - Delete a library section
+* [getLibraryDetails](docs/sdks/library/README.md#getlibrarydetails) - Get a library section by id
+* [editSection](docs/sdks/library/README.md#editsection) - Edit a library section
+* [updateItems](docs/sdks/library/README.md#updateitems) - Set the fields of the filtered items
+* [startAnalysis](docs/sdks/library/README.md#startanalysis) - Analyze a section
+* [autocomplete](docs/sdks/library/README.md#autocomplete) - Get autocompletions for search
+* [getCollections](docs/sdks/library/README.md#getcollections) - Get collections in a section
+* [getCommon](docs/sdks/library/README.md#getcommon) - Get common fields for items
+* [emptyTrash](docs/sdks/library/README.md#emptytrash) - Empty section trash
+* [getSectionFilters](docs/sdks/library/README.md#getsectionfilters) - Get section filters
+* [getFirstCharacters](docs/sdks/library/README.md#getfirstcharacters) - Get list of first characters
+* [deleteIndexes](docs/sdks/library/README.md#deleteindexes) - Delete section indexes
+* [deleteIntros](docs/sdks/library/README.md#deleteintros) - Delete section intro markers
+* [getSectionPreferences](docs/sdks/library/README.md#getsectionpreferences) - Get section prefs
+* [setSectionPreferences](docs/sdks/library/README.md#setsectionpreferences) - Set section prefs
+* [cancelRefresh](docs/sdks/library/README.md#cancelrefresh) - Cancel section refresh
+* [refreshSection](docs/sdks/library/README.md#refreshsection) - Refresh section
+* [getAvailableSorts](docs/sdks/library/README.md#getavailablesorts) - Get a section sorts
+* [getStreamLevels](docs/sdks/library/README.md#getstreamlevels) - Get loudness about a stream in json
+* [getStreamLoudness](docs/sdks/library/README.md#getstreamloudness) - Get loudness about a stream
+* [getChapterImage](docs/sdks/library/README.md#getchapterimage) - Get a chapter image
+* [setItemArtwork](docs/sdks/library/README.md#setitemartwork) - Set an item's artwork, theme, etc
+* [updateItemArtwork](docs/sdks/library/README.md#updateitemartwork) - Set an item's artwork, theme, etc
+* [deleteMarker](docs/sdks/library/README.md#deletemarker) - Delete a marker
+* [editMarker](docs/sdks/library/README.md#editmarker) - Edit a marker
+* [deleteMediaItem](docs/sdks/library/README.md#deletemediaitem) - Delete a media item
+* [getPartIndex](docs/sdks/library/README.md#getpartindex) - Get BIF index for a part
+* [deleteCollection](docs/sdks/library/README.md#deletecollection) - Delete a collection
+* [getSectionImage](docs/sdks/library/README.md#getsectionimage) - Get a section composite image
+* [deleteStream](docs/sdks/library/README.md#deletestream) - Delete a stream
+* [getStream](docs/sdks/library/README.md#getstream) - Get a stream
+* [setStreamOffset](docs/sdks/library/README.md#setstreamoffset) - Set a stream offset
+* [getItemArtwork](docs/sdks/library/README.md#getitemartwork) - Get an item's artwork, theme, etc
+* [getMediaPart](docs/sdks/library/README.md#getmediapart) - Get a media part
+* [getImageFromBif](docs/sdks/library/README.md#getimagefrombif) - Get an image from part BIF
+
+### [libraryCollections()](docs/sdks/librarycollections/README.md)
+
+* [addCollectionItems](docs/sdks/librarycollections/README.md#addcollectionitems) - Add items to a collection
+* [deleteCollectionItem](docs/sdks/librarycollections/README.md#deletecollectionitem) - Delete an item from a collection
+* [moveCollectionItem](docs/sdks/librarycollections/README.md#movecollectionitem) - Reorder an item in the collection
+
+### [libraryPlaylists()](docs/sdks/libraryplaylists/README.md)
+
+* [createPlaylist](docs/sdks/libraryplaylists/README.md#createplaylist) - Create a Playlist
+* [uploadPlaylist](docs/sdks/libraryplaylists/README.md#uploadplaylist) - Upload
+* [deletePlaylist](docs/sdks/libraryplaylists/README.md#deleteplaylist) - Delete a Playlist
+* [updatePlaylist](docs/sdks/libraryplaylists/README.md#updateplaylist) - Editing a Playlist
+* [getPlaylistGenerators](docs/sdks/libraryplaylists/README.md#getplaylistgenerators) - Get a playlist's generators
+* [clearPlaylistItems](docs/sdks/libraryplaylists/README.md#clearplaylistitems) - Clearing a playlist
+* [addPlaylistItems](docs/sdks/libraryplaylists/README.md#addplaylistitems) - Adding to  a Playlist
+* [deletePlaylistItem](docs/sdks/libraryplaylists/README.md#deleteplaylistitem) - Delete a Generator
+* [getPlaylistGenerator](docs/sdks/libraryplaylists/README.md#getplaylistgenerator) - Get a playlist generator
+* [getPlaylistGeneratorItems](docs/sdks/libraryplaylists/README.md#getplaylistgeneratoritems) - Get a playlist generator's items
+* [movePlaylistItem](docs/sdks/libraryplaylists/README.md#moveplaylistitem) - Moving items in a playlist
+* [refreshPlaylist](docs/sdks/libraryplaylists/README.md#refreshplaylist) - Reprocess a generator
+
+### [liveTV()](docs/sdks/livetv/README.md)
+
+* [getSessions](docs/sdks/livetv/README.md#getsessions) - Get all sessions
+* [getLiveTVSession](docs/sdks/livetv/README.md#getlivetvsession) - Get a single session
+* [getSessionPlaylistIndex](docs/sdks/livetv/README.md#getsessionplaylistindex) - Get a session playlist index
+* [getSessionSegment](docs/sdks/livetv/README.md#getsessionsegment) - Get a single session segment
 
 ### [log()](docs/sdks/log/README.md)
 
-* [logLine](docs/sdks/log/README.md#logline) - Logging a single line message.
-* [logMultiLine](docs/sdks/log/README.md#logmultiline) - Logging a multi-line message
-* [enablePaperTrail](docs/sdks/log/README.md#enablepapertrail) - Enabling Papertrail
+* [writeLog](docs/sdks/log/README.md#writelog) - Logging a multi-line message to the Plex Media Server log
+* [writeMessage](docs/sdks/log/README.md#writemessage) - Logging a single-line message to the Plex Media Server log
+* [enablePapertrail](docs/sdks/log/README.md#enablepapertrail) - Enabling Papertrail
 
-### [media()](docs/sdks/media/README.md)
+### [playlist()](docs/sdks/playlist/README.md)
 
-* [markPlayed](docs/sdks/media/README.md#markplayed) - Mark Media Played
-* [markUnplayed](docs/sdks/media/README.md#markunplayed) - Mark Media Unplayed
-* [updatePlayProgress](docs/sdks/media/README.md#updateplayprogress) - Update Media Play Progress
-* [getBannerImage](docs/sdks/media/README.md#getbannerimage) - Get Banner Image
-* [getThumbImage](docs/sdks/media/README.md#getthumbimage) - Get Thumb Image
+* [listPlaylists](docs/sdks/playlist/README.md#listplaylists) - List playlists
+* [getPlaylist](docs/sdks/playlist/README.md#getplaylist) - Retrieve Playlist
+* [getPlaylistItems](docs/sdks/playlist/README.md#getplaylistitems) - Retrieve Playlist Contents
 
-### [playlists()](docs/sdks/playlists/README.md)
+### [playQueue()](docs/sdks/playqueue/README.md)
 
-* [createPlaylist](docs/sdks/playlists/README.md#createplaylist) - Create a Playlist
-* [getPlaylists](docs/sdks/playlists/README.md#getplaylists) - Get All Playlists
-* [getPlaylist](docs/sdks/playlists/README.md#getplaylist) - Retrieve Playlist
-* [deletePlaylist](docs/sdks/playlists/README.md#deleteplaylist) - Deletes a Playlist
-* [updatePlaylist](docs/sdks/playlists/README.md#updateplaylist) - Update a Playlist
-* [getPlaylistContents](docs/sdks/playlists/README.md#getplaylistcontents) - Retrieve Playlist Contents
-* [clearPlaylistContents](docs/sdks/playlists/README.md#clearplaylistcontents) - Delete Playlist Contents
-* [addPlaylistContents](docs/sdks/playlists/README.md#addplaylistcontents) - Adding to a Playlist
-* [uploadPlaylist](docs/sdks/playlists/README.md#uploadplaylist) - Upload Playlist
+* [createPlayQueue](docs/sdks/playqueue/README.md#createplayqueue) - Create a play queue
+* [getPlayQueue](docs/sdks/playqueue/README.md#getplayqueue) - Retrieve a play queue
+* [addToPlayQueue](docs/sdks/playqueue/README.md#addtoplayqueue) - Add a generator or playlist to a play queue
+* [clearPlayQueue](docs/sdks/playqueue/README.md#clearplayqueue) - Clear a play queue
+* [resetPlayQueue](docs/sdks/playqueue/README.md#resetplayqueue) - Reset a play queue
+* [shuffle](docs/sdks/playqueue/README.md#shuffle) - Shuffle a play queue
+* [unshuffle](docs/sdks/playqueue/README.md#unshuffle) - Unshuffle a play queue
+* [deletePlayQueueItem](docs/sdks/playqueue/README.md#deleteplayqueueitem) - Delete an item from a play queue
+* [movePlayQueueItem](docs/sdks/playqueue/README.md#moveplayqueueitem) - Move an item in a play queue
 
-### [plex()](docs/sdks/plex/README.md)
 
-* [getCompanionsData](docs/sdks/plex/README.md#getcompanionsdata) - Get Companions Data
-* [getUserFriends](docs/sdks/plex/README.md#getuserfriends) - Get list of friends of the user logged in
-* [getGeoData](docs/sdks/plex/README.md#getgeodata) - Get Geo Data
-* [getHomeData](docs/sdks/plex/README.md#gethomedata) - Get Plex Home Data
-* [getServerResources](docs/sdks/plex/README.md#getserverresources) - Get Server Resources
-* [getPin](docs/sdks/plex/README.md#getpin) - Get a Pin
-* [getTokenByPinId](docs/sdks/plex/README.md#gettokenbypinid) - Get Access Token by PinId
+### [preferences()](docs/sdks/preferences/README.md)
 
+* [getAllPreferences](docs/sdks/preferences/README.md#getallpreferences) - Get all preferences
+* [setPreferences](docs/sdks/preferences/README.md#setpreferences) - Set preferences
+* [getPreference](docs/sdks/preferences/README.md#getpreference) - Get a preferences
+
+### [provider()](docs/sdks/provider/README.md)
+
+* [listProviders](docs/sdks/provider/README.md#listproviders) - Get the list of available media providers
+* [addProvider](docs/sdks/provider/README.md#addprovider) - Add a media provider
+* [refreshProviders](docs/sdks/provider/README.md#refreshproviders) - Refresh media providers
+* [deleteMediaProvider](docs/sdks/provider/README.md#deletemediaprovider) - Delete a media provider
+
+### [rate()](docs/sdks/rate/README.md)
+
+* [setRating](docs/sdks/rate/README.md#setrating) - Rate an item
 
 ### [search()](docs/sdks/search/README.md)
 
-* [performSearch](docs/sdks/search/README.md#performsearch) - Perform a search
-* [performVoiceSearch](docs/sdks/search/README.md#performvoicesearch) - Perform a voice search
-* [getSearchResults](docs/sdks/search/README.md#getsearchresults) - Get Search Results
+* [searchHubs](docs/sdks/search/README.md#searchhubs) - Search Hub
+* [voiceSearchHubs](docs/sdks/search/README.md#voicesearchhubs) - Voice Search Hub
 
-### [server()](docs/sdks/server/README.md)
+### [status()](docs/sdks/status/README.md)
 
-* [getServerCapabilities](docs/sdks/server/README.md#getservercapabilities) - Get Server Capabilities
-* [getServerPreferences](docs/sdks/server/README.md#getserverpreferences) - Get Server Preferences
-* [getAvailableClients](docs/sdks/server/README.md#getavailableclients) - Get Available Clients
-* [getDevices](docs/sdks/server/README.md#getdevices) - Get Devices
-* [getServerIdentity](docs/sdks/server/README.md#getserveridentity) - Get Server Identity
-* [getMyPlexAccount](docs/sdks/server/README.md#getmyplexaccount) - Get MyPlex Account
-* [getResizedPhoto](docs/sdks/server/README.md#getresizedphoto) - Get a Resized Photo
-* [getMediaProviders](docs/sdks/server/README.md#getmediaproviders) - Get Media Providers
-* [getServerList](docs/sdks/server/README.md#getserverlist) - Get Server List
+* [listSessions](docs/sdks/status/README.md#listsessions) - List Sessions
+* [getBackgroundTasks](docs/sdks/status/README.md#getbackgroundtasks) - Get background tasks
+* [listPlaybackHistory](docs/sdks/status/README.md#listplaybackhistory) - List Playback History
+* [terminateSession](docs/sdks/status/README.md#terminatesession) - Terminate a session
+* [deleteHistory](docs/sdks/status/README.md#deletehistory) - Delete Single History Item
+* [getHistoryItem](docs/sdks/status/README.md#gethistoryitem) - Get Single History Item
 
-### [sessions()](docs/sdks/sessions/README.md)
+### [subscriptions()](docs/sdks/subscriptions/README.md)
 
-* [getSessions](docs/sdks/sessions/README.md#getsessions) - Get Active Sessions
-* [getSessionHistory](docs/sdks/sessions/README.md#getsessionhistory) - Get Session History
-* [getTranscodeSessions](docs/sdks/sessions/README.md#gettranscodesessions) - Get Transcode Sessions
-* [stopTranscodeSession](docs/sdks/sessions/README.md#stoptranscodesession) - Stop a Transcode Session
+* [getAllSubscriptions](docs/sdks/subscriptions/README.md#getallsubscriptions) - Get all subscriptions
+* [createSubscription](docs/sdks/subscriptions/README.md#createsubscription) - Create a subscription
+* [processSubscriptions](docs/sdks/subscriptions/README.md#processsubscriptions) - Process all subscriptions
+* [getScheduledRecordings](docs/sdks/subscriptions/README.md#getscheduledrecordings) - Get all scheduled recordings
+* [getTemplate](docs/sdks/subscriptions/README.md#gettemplate) - Get the subscription template
+* [cancelGrab](docs/sdks/subscriptions/README.md#cancelgrab) - Cancel an existing grab
+* [deleteSubscription](docs/sdks/subscriptions/README.md#deletesubscription) - Delete a subscription
+* [getSubscription](docs/sdks/subscriptions/README.md#getsubscription) - Get a single subscription
+* [editSubscriptionPreferences](docs/sdks/subscriptions/README.md#editsubscriptionpreferences) - Edit a subscription
+* [reorderSubscription](docs/sdks/subscriptions/README.md#reordersubscription) - Re-order a subscription
 
-### [statistics()](docs/sdks/statistics/README.md)
+### [timeline()](docs/sdks/timeline/README.md)
 
-* [getStatistics](docs/sdks/statistics/README.md#getstatistics) - Get Media Statistics
-* [getResourcesStatistics](docs/sdks/statistics/README.md#getresourcesstatistics) - Get Resources Statistics
-* [getBandwidthStatistics](docs/sdks/statistics/README.md#getbandwidthstatistics) - Get Bandwidth Statistics
+* [markPlayed](docs/sdks/timeline/README.md#markplayed) - Mark an item as played
+* [report](docs/sdks/timeline/README.md#report) - Report media timeline
+* [unscrobble](docs/sdks/timeline/README.md#unscrobble) - Mark an item as unplayed
+
+### [transcoder()](docs/sdks/transcoder/README.md)
+
+* [transcodeImage](docs/sdks/transcoder/README.md#transcodeimage) - Transcode an image
+* [makeDecision](docs/sdks/transcoder/README.md#makedecision) - Make a decision on media playback
+* [triggerFallback](docs/sdks/transcoder/README.md#triggerfallback) - Manually trigger a transcoder fallback
+* [transcodeSubtitles](docs/sdks/transcoder/README.md#transcodesubtitles) - Transcode subtitles
+* [startTranscodeSession](docs/sdks/transcoder/README.md#starttranscodesession) - Start A Transcoding Session
+
+### [ultraBlur()](docs/sdks/ultrablur/README.md)
+
+* [getColors](docs/sdks/ultrablur/README.md#getcolors) - Get UltraBlur Colors
+* [getImage](docs/sdks/ultrablur/README.md#getimage) - Get UltraBlur Image
 
 ### [updater()](docs/sdks/updater/README.md)
 
-* [getUpdateStatus](docs/sdks/updater/README.md#getupdatestatus) - Querying status of updates
-* [checkForUpdates](docs/sdks/updater/README.md#checkforupdates) - Checking for updates
-* [applyUpdates](docs/sdks/updater/README.md#applyupdates) - Apply Updates
-
-### [users()](docs/sdks/users/README.md)
-
-* [getUsers](docs/sdks/users/README.md#getusers) - Get list of all connected users
-
-### [video()](docs/sdks/video/README.md)
-
-* [getTimeline](docs/sdks/video/README.md#gettimeline) - Get the timeline for a media item
-* [startUniversalTranscode](docs/sdks/video/README.md#startuniversaltranscode) - Start Universal Transcode
-
-### [watchlist()](docs/sdks/watchlist/README.md)
-
-* [getWatchList](docs/sdks/watchlist/README.md#getwatchlist) - Get User Watchlist
+* [applyUpdates](docs/sdks/updater/README.md#applyupdates) - Applying updates
+* [checkUpdates](docs/sdks/updater/README.md#checkupdates) - Checking for updates
+* [getUpdatesStatus](docs/sdks/updater/README.md#getupdatesstatus) - Querying status of updates
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -313,13 +530,11 @@ public class Application {
 
 Handling errors in this SDK should largely match your expectations. All operations return a response object or raise an exception.
 
-By default, an API error will throw a `models/errors/SDKError` exception. When custom error responses are specified for an operation, the SDK may also throw their associated exception. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `getServerCapabilities` method throws the following exceptions:
+By default, an API error will throw a `models/errors/SDKError` exception. When custom error responses are specified for an operation, the SDK may also throw their associated exception. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `getServerInfo` method throws the following exceptions:
 
-| Error Type                                      | Status Code | Content Type     |
-| ----------------------------------------------- | ----------- | ---------------- |
-| models/errors/GetServerCapabilitiesBadRequest   | 400         | application/json |
-| models/errors/GetServerCapabilitiesUnauthorized | 401         | application/json |
-| models/errors/SDKError                          | 4XX, 5XX    | \*/\*            |
+| Error Type             | Status Code | Content Type |
+| ---------------------- | ----------- | ------------ |
+| models/errors/SDKError | 4XX, 5XX    | \*/\*        |
 
 ### Example
 
@@ -327,23 +542,38 @@ By default, an API error will throw a `models/errors/SDKError` exception. When c
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest;
-import dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized;
-import dev.plexapi.sdk.models.operations.GetServerCapabilitiesResponse;
+import dev.plexapi.sdk.models.operations.GetServerInfoRequest;
+import dev.plexapi.sdk.models.operations.GetServerInfoResponse;
+import dev.plexapi.sdk.models.shared.Accepts;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws GetServerCapabilitiesBadRequest, GetServerCapabilitiesUnauthorized, Exception {
+    public static void main(String[] args) throws Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
+                .accepts(Accepts.APPLICATION_XML)
+                .clientIdentifier("abc123")
+                .product("Plex for Roku")
+                .version("2.4.1")
+                .platform("Roku")
+                .platformVersion("4.3 build 1057")
+                .device("Roku 3")
+                .model("4200X")
+                .deviceVendor("Roku")
+                .deviceName("Living Room TV")
+                .marketplace("googlePlay")
+                .token(System.getenv().getOrDefault("TOKEN", ""))
             .build();
 
-        GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
+        GetServerInfoRequest req = GetServerInfoRequest.builder()
+                .build();
+
+        GetServerInfoResponse res = sdk.general().getServerInfo()
+                .request(req)
                 .call();
 
-        if (res.object().isPresent()) {
+        if (res.mediaContainerWithDirectory().isPresent()) {
             // handle response
         }
     }
@@ -354,15 +584,26 @@ public class Application {
 <!-- Start Server Selection [server] -->
 ## Server Selection
 
-### Server Variables
+### Select Server by Index
 
-The default server `{protocol}://{ip}:{port}` contains variables and is set to `https://10.10.10.47:32400` by default. To override default values, the following builder methods are available when initializing the SDK client instance:
+You can override the default server globally using the `.serverIndex(int serverIdx)` builder method when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
 
-| Variable   | BuilderMethod                       | Supported Values           | Default         | Description                                    |
-| ---------- | ----------------------------------- | -------------------------- | --------------- | ---------------------------------------------- |
-| `protocol` | `protocol(ServerProtocol protocol)` | - `"http"`<br/>- `"https"` | `"https"`       | The protocol to use for the server connection  |
-| `ip`       | `ip(String ip)`                     | java.lang.String           | `"10.10.10.47"` | The IP address or hostname of your Plex Server |
-| `port`     | `port(String port)`                 | java.lang.String           | `"32400"`       | The port of your Plex Server                   |
+| #   | Server                                                     | Variables                                    | Description |
+| --- | ---------------------------------------------------------- | -------------------------------------------- | ----------- |
+| 0   | `https://{IP-description}.{identifier}.plex.direct:{port}` | `identifier`<br/>`IP-description`<br/>`port` |             |
+| 1   | `{protocol}://{host}:{port}`                               | `protocol`<br/>`host`<br/>`port`             |             |
+| 2   | `https://{server_url}`                                     | `server_url`                                 |             |
+
+If the selected server has variables, you may override its default values using the associated builder method(s):
+
+| Variable         | BuilderMethod                         | Default                              | Description                                                                                                                                                                                                                                                                                                                                                                          |
+| ---------------- | ------------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `identifier`     | `identifier(String identifier)`       | `"0123456789abcdef0123456789abcdef"` | The unique identifier of this particular PMS                                                                                                                                                                                                                                                                                                                                         |
+| `IP-description` | `ipDescription(String ipDescription)` | `"1-2-3-4"`                          | A `-` separated string of the IPv4 or IPv6 address components                                                                                                                                                                                                                                                                                                                        |
+| `port`           | `port(String port)`                   | `"32400"`                            | The Port number configured on the PMS. Typically (`32400`). <br/>If using a reverse proxy, this would be the port number configured on the proxy.<br/>                                                                                                                                                                                                                               |
+| `protocol`       | `protocol(String protocol)`           | `"http"`                             | The network protocol to use. Typically (`http` or `https`)                                                                                                                                                                                                                                                                                                                           |
+| `host`           | `host(String host)`                   | `"localhost"`                        | The Host of the PMS.<br/>If using on a local network, this is the internal IP address of the server hosting the PMS.<br/>If using on an external network, this is the external IP address for your network, and requires port forwarding.<br/>If using a reverse proxy, this would be the external DNS domain for your network, and requires the proxy handle port forwarding. <br/> |
+| `server_url`     | `serverUrl(String serverUrl)`         | `"http://localhost:32400"`           | The full manual URL to access the PMS                                                                                                                                                                                                                                                                                                                                                |
 
 #### Example
 
@@ -370,27 +611,42 @@ The default server `{protocol}://{ip}:{port}` contains variables and is set to `
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.SDK.Builder.ServerProtocol;
-import dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest;
-import dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized;
-import dev.plexapi.sdk.models.operations.GetServerCapabilitiesResponse;
+import dev.plexapi.sdk.models.operations.GetServerInfoRequest;
+import dev.plexapi.sdk.models.operations.GetServerInfoResponse;
+import dev.plexapi.sdk.models.shared.Accepts;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws GetServerCapabilitiesBadRequest, GetServerCapabilitiesUnauthorized, Exception {
+    public static void main(String[] args) throws Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .protocol(ServerProtocol.HTTPS)
-                .ip("4982:bc2a:b4f8:efb5:2394:5bc3:ab4f:0e6d")
-                .port("44765")
-                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
+                .serverIndex(1)
+                .protocol("<value>")
+                .host("electric-excess.name")
+                .port("36393")
+                .accepts(Accepts.APPLICATION_XML)
+                .clientIdentifier("abc123")
+                .product("Plex for Roku")
+                .version("2.4.1")
+                .platform("Roku")
+                .platformVersion("4.3 build 1057")
+                .device("Roku 3")
+                .model("4200X")
+                .deviceVendor("Roku")
+                .deviceName("Living Room TV")
+                .marketplace("googlePlay")
+                .token(System.getenv().getOrDefault("TOKEN", ""))
             .build();
 
-        GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
+        GetServerInfoRequest req = GetServerInfoRequest.builder()
+                .build();
+
+        GetServerInfoResponse res = sdk.general().getServerInfo()
+                .request(req)
                 .call();
 
-        if (res.object().isPresent()) {
+        if (res.mediaContainerWithDirectory().isPresent()) {
             // handle response
         }
     }
@@ -399,60 +655,44 @@ public class Application {
 
 ### Override Server URL Per-Client
 
-The default server can be overridden globally using the `.serverURL(String serverUrl)` builder method when initializing the SDK client instance. For example:
+The default server can also be overridden globally using the `.serverURL(String serverUrl)` builder method when initializing the SDK client instance. For example:
 ```java
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest;
-import dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized;
-import dev.plexapi.sdk.models.operations.GetServerCapabilitiesResponse;
+import dev.plexapi.sdk.models.operations.GetServerInfoRequest;
+import dev.plexapi.sdk.models.operations.GetServerInfoResponse;
+import dev.plexapi.sdk.models.shared.Accepts;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws GetServerCapabilitiesBadRequest, GetServerCapabilitiesUnauthorized, Exception {
+    public static void main(String[] args) throws Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .serverURL("https://10.10.10.47:32400")
-                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
+                .serverURL("https://http://localhost:32400")
+                .accepts(Accepts.APPLICATION_XML)
+                .clientIdentifier("abc123")
+                .product("Plex for Roku")
+                .version("2.4.1")
+                .platform("Roku")
+                .platformVersion("4.3 build 1057")
+                .device("Roku 3")
+                .model("4200X")
+                .deviceVendor("Roku")
+                .deviceName("Living Room TV")
+                .marketplace("googlePlay")
+                .token(System.getenv().getOrDefault("TOKEN", ""))
             .build();
 
-        GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
+        GetServerInfoRequest req = GetServerInfoRequest.builder()
+                .build();
+
+        GetServerInfoResponse res = sdk.general().getServerInfo()
+                .request(req)
                 .call();
 
-        if (res.object().isPresent()) {
-            // handle response
-        }
-    }
-}
-```
-
-### Override Server URL Per-Operation
-
-The server URL can also be overridden on a per-operation basis, provided a server list was specified for the operation. For example:
-```java
-package hello.world;
-
-import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.GetCompanionsDataBadRequest;
-import dev.plexapi.sdk.models.errors.GetCompanionsDataUnauthorized;
-import dev.plexapi.sdk.models.operations.GetCompanionsDataResponse;
-import java.lang.Exception;
-
-public class Application {
-
-    public static void main(String[] args) throws GetCompanionsDataBadRequest, GetCompanionsDataUnauthorized, Exception {
-
-        PlexAPI sdk = PlexAPI.builder()
-                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
-            .build();
-
-        GetCompanionsDataResponse res = sdk.plex().getCompanionsData()
-                .serverURL("https://plex.tv/api/v2")
-                .call();
-
-        if (res.responseBodies().isPresent()) {
+        if (res.mediaContainerWithDirectory().isPresent()) {
             // handle response
         }
     }
@@ -533,32 +773,47 @@ Async support is available for:
 
 This SDK supports the following security scheme globally:
 
-| Name          | Type   | Scheme  |
-| ------------- | ------ | ------- |
-| `accessToken` | apiKey | API key |
+| Name    | Type   | Scheme  |
+| ------- | ------ | ------- |
+| `token` | apiKey | API key |
 
-To authenticate with the API the `accessToken` parameter must be set when initializing the SDK client instance. For example:
+To authenticate with the API the `token` parameter must be set when initializing the SDK client instance. For example:
 ```java
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.errors.GetServerCapabilitiesBadRequest;
-import dev.plexapi.sdk.models.errors.GetServerCapabilitiesUnauthorized;
-import dev.plexapi.sdk.models.operations.GetServerCapabilitiesResponse;
+import dev.plexapi.sdk.models.operations.GetServerInfoRequest;
+import dev.plexapi.sdk.models.operations.GetServerInfoResponse;
+import dev.plexapi.sdk.models.shared.Accepts;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws GetServerCapabilitiesBadRequest, GetServerCapabilitiesUnauthorized, Exception {
+    public static void main(String[] args) throws Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .accessToken(System.getenv().getOrDefault("ACCESS_TOKEN", ""))
+                .token(System.getenv().getOrDefault("TOKEN", ""))
+                .accepts(Accepts.APPLICATION_XML)
+                .clientIdentifier("abc123")
+                .product("Plex for Roku")
+                .version("2.4.1")
+                .platform("Roku")
+                .platformVersion("4.3 build 1057")
+                .device("Roku 3")
+                .model("4200X")
+                .deviceVendor("Roku")
+                .deviceName("Living Room TV")
+                .marketplace("googlePlay")
             .build();
 
-        GetServerCapabilitiesResponse res = sdk.server().getServerCapabilities()
+        GetServerInfoRequest req = GetServerInfoRequest.builder()
+                .build();
+
+        GetServerInfoResponse res = sdk.general().getServerInfo()
+                .request(req)
                 .call();
 
-        if (res.object().isPresent()) {
+        if (res.mediaContainerWithDirectory().isPresent()) {
             // handle response
         }
     }

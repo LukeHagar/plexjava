@@ -12,32 +12,23 @@ import java.lang.Exception;
 
 public class StartTaskRequestBuilder {
 
-    private TaskName taskName;
+    private StartTaskRequest request;
     private final SDKConfiguration sdkConfiguration;
 
     public StartTaskRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-    public StartTaskRequestBuilder taskName(TaskName taskName) {
-        Utils.checkNotNull(taskName, "taskName");
-        this.taskName = taskName;
+    public StartTaskRequestBuilder request(StartTaskRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
-    }
-
-
-    private StartTaskRequest buildRequest() {
-
-        StartTaskRequest request = new StartTaskRequest(taskName);
-
-        return request;
     }
 
     public StartTaskResponse call() throws Exception {
         
         RequestOperation<StartTaskRequest, StartTaskResponse> operation
               = new StartTask.Sync(sdkConfiguration);
-        StartTaskRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));
     }

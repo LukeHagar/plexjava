@@ -5,45 +5,248 @@ package dev.plexapi.sdk.models.operations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.type.TypeReference;
+import dev.plexapi.sdk.models.shared.Accepts;
+import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.SpeakeasyMetadata;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
+import java.util.Optional;
 
 
 public class GetTransientTokenRequest {
     /**
-     * `delegation` - This is the only supported `type` parameter.
+     * Indicates the client accepts the indicated media types
      */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")
-    private GetTransientTokenQueryParamType type;
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=accepts")
+    private Optional<? extends Accepts> accepts;
 
     /**
-     * `all` - This is the only supported `scope` parameter.
+     * An opaque identifier unique to the client
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Client-Identifier")
+    private Optional<String> clientIdentifier;
+
+    /**
+     * The name of the client product
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Product")
+    private Optional<String> product;
+
+    /**
+     * The version of the client application
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Version")
+    private Optional<String> version;
+
+    /**
+     * The platform of the client
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Platform")
+    private Optional<String> platform;
+
+    /**
+     * The version of the platform
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Platform-Version")
+    private Optional<String> platformVersion;
+
+    /**
+     * A relatively friendly name for the client device
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Device")
+    private Optional<String> device;
+
+    /**
+     * A potentially less friendly identifier for the device model
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Model")
+    private Optional<String> model;
+
+    /**
+     * The device vendor
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Device-Vendor")
+    private Optional<String> deviceVendor;
+
+    /**
+     * A friendly name for the client
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Device-Name")
+    private Optional<String> deviceName;
+
+    /**
+     * The marketplace on which the client application is distributed
+     */
+    @SpeakeasyMetadata("header:style=simple,explode=false,name=X-Plex-Marketplace")
+    private Optional<String> marketplace;
+
+    /**
+     * The value `delegation` is the only supported `type` parameter.
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")
+    private QueryParamType type;
+
+    /**
+     * The value `all` is the only supported `scope` parameter.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=scope")
     private Scope scope;
 
     @JsonCreator
     public GetTransientTokenRequest(
-            GetTransientTokenQueryParamType type,
+            Optional<? extends Accepts> accepts,
+            Optional<String> clientIdentifier,
+            Optional<String> product,
+            Optional<String> version,
+            Optional<String> platform,
+            Optional<String> platformVersion,
+            Optional<String> device,
+            Optional<String> model,
+            Optional<String> deviceVendor,
+            Optional<String> deviceName,
+            Optional<String> marketplace,
+            QueryParamType type,
             Scope scope) {
+        Utils.checkNotNull(accepts, "accepts");
+        Utils.checkNotNull(clientIdentifier, "clientIdentifier");
+        Utils.checkNotNull(product, "product");
+        Utils.checkNotNull(version, "version");
+        Utils.checkNotNull(platform, "platform");
+        Utils.checkNotNull(platformVersion, "platformVersion");
+        Utils.checkNotNull(device, "device");
+        Utils.checkNotNull(model, "model");
+        Utils.checkNotNull(deviceVendor, "deviceVendor");
+        Utils.checkNotNull(deviceName, "deviceName");
+        Utils.checkNotNull(marketplace, "marketplace");
         Utils.checkNotNull(type, "type");
         Utils.checkNotNull(scope, "scope");
+        this.accepts = accepts;
+        this.clientIdentifier = clientIdentifier;
+        this.product = product;
+        this.version = version;
+        this.platform = platform;
+        this.platformVersion = platformVersion;
+        this.device = device;
+        this.model = model;
+        this.deviceVendor = deviceVendor;
+        this.deviceName = deviceName;
+        this.marketplace = marketplace;
         this.type = type;
         this.scope = scope;
     }
+    
+    public GetTransientTokenRequest(
+            QueryParamType type,
+            Scope scope) {
+        this(Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), type,
+            scope);
+    }
 
     /**
-     * `delegation` - This is the only supported `type` parameter.
+     * Indicates the client accepts the indicated media types
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<Accepts> accepts() {
+        return (Optional<Accepts>) accepts;
+    }
+
+    /**
+     * An opaque identifier unique to the client
      */
     @JsonIgnore
-    public GetTransientTokenQueryParamType type() {
+    public Optional<String> clientIdentifier() {
+        return clientIdentifier;
+    }
+
+    /**
+     * The name of the client product
+     */
+    @JsonIgnore
+    public Optional<String> product() {
+        return product;
+    }
+
+    /**
+     * The version of the client application
+     */
+    @JsonIgnore
+    public Optional<String> version() {
+        return version;
+    }
+
+    /**
+     * The platform of the client
+     */
+    @JsonIgnore
+    public Optional<String> platform() {
+        return platform;
+    }
+
+    /**
+     * The version of the platform
+     */
+    @JsonIgnore
+    public Optional<String> platformVersion() {
+        return platformVersion;
+    }
+
+    /**
+     * A relatively friendly name for the client device
+     */
+    @JsonIgnore
+    public Optional<String> device() {
+        return device;
+    }
+
+    /**
+     * A potentially less friendly identifier for the device model
+     */
+    @JsonIgnore
+    public Optional<String> model() {
+        return model;
+    }
+
+    /**
+     * The device vendor
+     */
+    @JsonIgnore
+    public Optional<String> deviceVendor() {
+        return deviceVendor;
+    }
+
+    /**
+     * A friendly name for the client
+     */
+    @JsonIgnore
+    public Optional<String> deviceName() {
+        return deviceName;
+    }
+
+    /**
+     * The marketplace on which the client application is distributed
+     */
+    @JsonIgnore
+    public Optional<String> marketplace() {
+        return marketplace;
+    }
+
+    /**
+     * The value `delegation` is the only supported `type` parameter.
+     */
+    @JsonIgnore
+    public QueryParamType type() {
         return type;
     }
 
     /**
-     * `all` - This is the only supported `scope` parameter.
+     * The value `all` is the only supported `scope` parameter.
      */
     @JsonIgnore
     public Scope scope() {
@@ -56,16 +259,225 @@ public class GetTransientTokenRequest {
 
 
     /**
-     * `delegation` - This is the only supported `type` parameter.
+     * Indicates the client accepts the indicated media types
      */
-    public GetTransientTokenRequest withType(GetTransientTokenQueryParamType type) {
+    public GetTransientTokenRequest withAccepts(Accepts accepts) {
+        Utils.checkNotNull(accepts, "accepts");
+        this.accepts = Optional.ofNullable(accepts);
+        return this;
+    }
+
+
+    /**
+     * Indicates the client accepts the indicated media types
+     */
+    public GetTransientTokenRequest withAccepts(Optional<? extends Accepts> accepts) {
+        Utils.checkNotNull(accepts, "accepts");
+        this.accepts = accepts;
+        return this;
+    }
+
+    /**
+     * An opaque identifier unique to the client
+     */
+    public GetTransientTokenRequest withClientIdentifier(String clientIdentifier) {
+        Utils.checkNotNull(clientIdentifier, "clientIdentifier");
+        this.clientIdentifier = Optional.ofNullable(clientIdentifier);
+        return this;
+    }
+
+
+    /**
+     * An opaque identifier unique to the client
+     */
+    public GetTransientTokenRequest withClientIdentifier(Optional<String> clientIdentifier) {
+        Utils.checkNotNull(clientIdentifier, "clientIdentifier");
+        this.clientIdentifier = clientIdentifier;
+        return this;
+    }
+
+    /**
+     * The name of the client product
+     */
+    public GetTransientTokenRequest withProduct(String product) {
+        Utils.checkNotNull(product, "product");
+        this.product = Optional.ofNullable(product);
+        return this;
+    }
+
+
+    /**
+     * The name of the client product
+     */
+    public GetTransientTokenRequest withProduct(Optional<String> product) {
+        Utils.checkNotNull(product, "product");
+        this.product = product;
+        return this;
+    }
+
+    /**
+     * The version of the client application
+     */
+    public GetTransientTokenRequest withVersion(String version) {
+        Utils.checkNotNull(version, "version");
+        this.version = Optional.ofNullable(version);
+        return this;
+    }
+
+
+    /**
+     * The version of the client application
+     */
+    public GetTransientTokenRequest withVersion(Optional<String> version) {
+        Utils.checkNotNull(version, "version");
+        this.version = version;
+        return this;
+    }
+
+    /**
+     * The platform of the client
+     */
+    public GetTransientTokenRequest withPlatform(String platform) {
+        Utils.checkNotNull(platform, "platform");
+        this.platform = Optional.ofNullable(platform);
+        return this;
+    }
+
+
+    /**
+     * The platform of the client
+     */
+    public GetTransientTokenRequest withPlatform(Optional<String> platform) {
+        Utils.checkNotNull(platform, "platform");
+        this.platform = platform;
+        return this;
+    }
+
+    /**
+     * The version of the platform
+     */
+    public GetTransientTokenRequest withPlatformVersion(String platformVersion) {
+        Utils.checkNotNull(platformVersion, "platformVersion");
+        this.platformVersion = Optional.ofNullable(platformVersion);
+        return this;
+    }
+
+
+    /**
+     * The version of the platform
+     */
+    public GetTransientTokenRequest withPlatformVersion(Optional<String> platformVersion) {
+        Utils.checkNotNull(platformVersion, "platformVersion");
+        this.platformVersion = platformVersion;
+        return this;
+    }
+
+    /**
+     * A relatively friendly name for the client device
+     */
+    public GetTransientTokenRequest withDevice(String device) {
+        Utils.checkNotNull(device, "device");
+        this.device = Optional.ofNullable(device);
+        return this;
+    }
+
+
+    /**
+     * A relatively friendly name for the client device
+     */
+    public GetTransientTokenRequest withDevice(Optional<String> device) {
+        Utils.checkNotNull(device, "device");
+        this.device = device;
+        return this;
+    }
+
+    /**
+     * A potentially less friendly identifier for the device model
+     */
+    public GetTransientTokenRequest withModel(String model) {
+        Utils.checkNotNull(model, "model");
+        this.model = Optional.ofNullable(model);
+        return this;
+    }
+
+
+    /**
+     * A potentially less friendly identifier for the device model
+     */
+    public GetTransientTokenRequest withModel(Optional<String> model) {
+        Utils.checkNotNull(model, "model");
+        this.model = model;
+        return this;
+    }
+
+    /**
+     * The device vendor
+     */
+    public GetTransientTokenRequest withDeviceVendor(String deviceVendor) {
+        Utils.checkNotNull(deviceVendor, "deviceVendor");
+        this.deviceVendor = Optional.ofNullable(deviceVendor);
+        return this;
+    }
+
+
+    /**
+     * The device vendor
+     */
+    public GetTransientTokenRequest withDeviceVendor(Optional<String> deviceVendor) {
+        Utils.checkNotNull(deviceVendor, "deviceVendor");
+        this.deviceVendor = deviceVendor;
+        return this;
+    }
+
+    /**
+     * A friendly name for the client
+     */
+    public GetTransientTokenRequest withDeviceName(String deviceName) {
+        Utils.checkNotNull(deviceName, "deviceName");
+        this.deviceName = Optional.ofNullable(deviceName);
+        return this;
+    }
+
+
+    /**
+     * A friendly name for the client
+     */
+    public GetTransientTokenRequest withDeviceName(Optional<String> deviceName) {
+        Utils.checkNotNull(deviceName, "deviceName");
+        this.deviceName = deviceName;
+        return this;
+    }
+
+    /**
+     * The marketplace on which the client application is distributed
+     */
+    public GetTransientTokenRequest withMarketplace(String marketplace) {
+        Utils.checkNotNull(marketplace, "marketplace");
+        this.marketplace = Optional.ofNullable(marketplace);
+        return this;
+    }
+
+
+    /**
+     * The marketplace on which the client application is distributed
+     */
+    public GetTransientTokenRequest withMarketplace(Optional<String> marketplace) {
+        Utils.checkNotNull(marketplace, "marketplace");
+        this.marketplace = marketplace;
+        return this;
+    }
+
+    /**
+     * The value `delegation` is the only supported `type` parameter.
+     */
+    public GetTransientTokenRequest withType(QueryParamType type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
     }
 
     /**
-     * `all` - This is the only supported `scope` parameter.
+     * The value `all` is the only supported `scope` parameter.
      */
     public GetTransientTokenRequest withScope(Scope scope) {
         Utils.checkNotNull(scope, "scope");
@@ -83,6 +495,17 @@ public class GetTransientTokenRequest {
         }
         GetTransientTokenRequest other = (GetTransientTokenRequest) o;
         return 
+            Utils.enhancedDeepEquals(this.accepts, other.accepts) &&
+            Utils.enhancedDeepEquals(this.clientIdentifier, other.clientIdentifier) &&
+            Utils.enhancedDeepEquals(this.product, other.product) &&
+            Utils.enhancedDeepEquals(this.version, other.version) &&
+            Utils.enhancedDeepEquals(this.platform, other.platform) &&
+            Utils.enhancedDeepEquals(this.platformVersion, other.platformVersion) &&
+            Utils.enhancedDeepEquals(this.device, other.device) &&
+            Utils.enhancedDeepEquals(this.model, other.model) &&
+            Utils.enhancedDeepEquals(this.deviceVendor, other.deviceVendor) &&
+            Utils.enhancedDeepEquals(this.deviceName, other.deviceName) &&
+            Utils.enhancedDeepEquals(this.marketplace, other.marketplace) &&
             Utils.enhancedDeepEquals(this.type, other.type) &&
             Utils.enhancedDeepEquals(this.scope, other.scope);
     }
@@ -90,12 +513,27 @@ public class GetTransientTokenRequest {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            type, scope);
+            accepts, clientIdentifier, product,
+            version, platform, platformVersion,
+            device, model, deviceVendor,
+            deviceName, marketplace, type,
+            scope);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetTransientTokenRequest.class,
+                "accepts", accepts,
+                "clientIdentifier", clientIdentifier,
+                "product", product,
+                "version", version,
+                "platform", platform,
+                "platformVersion", platformVersion,
+                "device", device,
+                "model", model,
+                "deviceVendor", deviceVendor,
+                "deviceName", deviceName,
+                "marketplace", marketplace,
                 "type", type,
                 "scope", scope);
     }
@@ -103,7 +541,29 @@ public class GetTransientTokenRequest {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private GetTransientTokenQueryParamType type;
+        private Optional<? extends Accepts> accepts;
+
+        private Optional<String> clientIdentifier = Optional.empty();
+
+        private Optional<String> product = Optional.empty();
+
+        private Optional<String> version = Optional.empty();
+
+        private Optional<String> platform = Optional.empty();
+
+        private Optional<String> platformVersion = Optional.empty();
+
+        private Optional<String> device = Optional.empty();
+
+        private Optional<String> model = Optional.empty();
+
+        private Optional<String> deviceVendor = Optional.empty();
+
+        private Optional<String> deviceName = Optional.empty();
+
+        private Optional<String> marketplace = Optional.empty();
+
+        private QueryParamType type;
 
         private Scope scope;
 
@@ -113,9 +573,218 @@ public class GetTransientTokenRequest {
 
 
         /**
-         * `delegation` - This is the only supported `type` parameter.
+         * Indicates the client accepts the indicated media types
          */
-        public Builder type(GetTransientTokenQueryParamType type) {
+        public Builder accepts(Accepts accepts) {
+            Utils.checkNotNull(accepts, "accepts");
+            this.accepts = Optional.ofNullable(accepts);
+            return this;
+        }
+
+        /**
+         * Indicates the client accepts the indicated media types
+         */
+        public Builder accepts(Optional<? extends Accepts> accepts) {
+            Utils.checkNotNull(accepts, "accepts");
+            this.accepts = accepts;
+            return this;
+        }
+
+
+        /**
+         * An opaque identifier unique to the client
+         */
+        public Builder clientIdentifier(String clientIdentifier) {
+            Utils.checkNotNull(clientIdentifier, "clientIdentifier");
+            this.clientIdentifier = Optional.ofNullable(clientIdentifier);
+            return this;
+        }
+
+        /**
+         * An opaque identifier unique to the client
+         */
+        public Builder clientIdentifier(Optional<String> clientIdentifier) {
+            Utils.checkNotNull(clientIdentifier, "clientIdentifier");
+            this.clientIdentifier = clientIdentifier;
+            return this;
+        }
+
+
+        /**
+         * The name of the client product
+         */
+        public Builder product(String product) {
+            Utils.checkNotNull(product, "product");
+            this.product = Optional.ofNullable(product);
+            return this;
+        }
+
+        /**
+         * The name of the client product
+         */
+        public Builder product(Optional<String> product) {
+            Utils.checkNotNull(product, "product");
+            this.product = product;
+            return this;
+        }
+
+
+        /**
+         * The version of the client application
+         */
+        public Builder version(String version) {
+            Utils.checkNotNull(version, "version");
+            this.version = Optional.ofNullable(version);
+            return this;
+        }
+
+        /**
+         * The version of the client application
+         */
+        public Builder version(Optional<String> version) {
+            Utils.checkNotNull(version, "version");
+            this.version = version;
+            return this;
+        }
+
+
+        /**
+         * The platform of the client
+         */
+        public Builder platform(String platform) {
+            Utils.checkNotNull(platform, "platform");
+            this.platform = Optional.ofNullable(platform);
+            return this;
+        }
+
+        /**
+         * The platform of the client
+         */
+        public Builder platform(Optional<String> platform) {
+            Utils.checkNotNull(platform, "platform");
+            this.platform = platform;
+            return this;
+        }
+
+
+        /**
+         * The version of the platform
+         */
+        public Builder platformVersion(String platformVersion) {
+            Utils.checkNotNull(platformVersion, "platformVersion");
+            this.platformVersion = Optional.ofNullable(platformVersion);
+            return this;
+        }
+
+        /**
+         * The version of the platform
+         */
+        public Builder platformVersion(Optional<String> platformVersion) {
+            Utils.checkNotNull(platformVersion, "platformVersion");
+            this.platformVersion = platformVersion;
+            return this;
+        }
+
+
+        /**
+         * A relatively friendly name for the client device
+         */
+        public Builder device(String device) {
+            Utils.checkNotNull(device, "device");
+            this.device = Optional.ofNullable(device);
+            return this;
+        }
+
+        /**
+         * A relatively friendly name for the client device
+         */
+        public Builder device(Optional<String> device) {
+            Utils.checkNotNull(device, "device");
+            this.device = device;
+            return this;
+        }
+
+
+        /**
+         * A potentially less friendly identifier for the device model
+         */
+        public Builder model(String model) {
+            Utils.checkNotNull(model, "model");
+            this.model = Optional.ofNullable(model);
+            return this;
+        }
+
+        /**
+         * A potentially less friendly identifier for the device model
+         */
+        public Builder model(Optional<String> model) {
+            Utils.checkNotNull(model, "model");
+            this.model = model;
+            return this;
+        }
+
+
+        /**
+         * The device vendor
+         */
+        public Builder deviceVendor(String deviceVendor) {
+            Utils.checkNotNull(deviceVendor, "deviceVendor");
+            this.deviceVendor = Optional.ofNullable(deviceVendor);
+            return this;
+        }
+
+        /**
+         * The device vendor
+         */
+        public Builder deviceVendor(Optional<String> deviceVendor) {
+            Utils.checkNotNull(deviceVendor, "deviceVendor");
+            this.deviceVendor = deviceVendor;
+            return this;
+        }
+
+
+        /**
+         * A friendly name for the client
+         */
+        public Builder deviceName(String deviceName) {
+            Utils.checkNotNull(deviceName, "deviceName");
+            this.deviceName = Optional.ofNullable(deviceName);
+            return this;
+        }
+
+        /**
+         * A friendly name for the client
+         */
+        public Builder deviceName(Optional<String> deviceName) {
+            Utils.checkNotNull(deviceName, "deviceName");
+            this.deviceName = deviceName;
+            return this;
+        }
+
+
+        /**
+         * The marketplace on which the client application is distributed
+         */
+        public Builder marketplace(String marketplace) {
+            Utils.checkNotNull(marketplace, "marketplace");
+            this.marketplace = Optional.ofNullable(marketplace);
+            return this;
+        }
+
+        /**
+         * The marketplace on which the client application is distributed
+         */
+        public Builder marketplace(Optional<String> marketplace) {
+            Utils.checkNotNull(marketplace, "marketplace");
+            this.marketplace = marketplace;
+            return this;
+        }
+
+
+        /**
+         * The value `delegation` is the only supported `type` parameter.
+         */
+        public Builder type(QueryParamType type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
@@ -123,7 +792,7 @@ public class GetTransientTokenRequest {
 
 
         /**
-         * `all` - This is the only supported `scope` parameter.
+         * The value `all` is the only supported `scope` parameter.
          */
         public Builder scope(Scope scope) {
             Utils.checkNotNull(scope, "scope");
@@ -132,10 +801,23 @@ public class GetTransientTokenRequest {
         }
 
         public GetTransientTokenRequest build() {
+            if (accepts == null) {
+                accepts = _SINGLETON_VALUE_Accepts.value();
+            }
 
             return new GetTransientTokenRequest(
-                type, scope);
+                accepts, clientIdentifier, product,
+                version, platform, platformVersion,
+                device, model, deviceVendor,
+                deviceName, marketplace, type,
+                scope);
         }
 
+
+        private static final LazySingletonValue<Optional<? extends Accepts>> _SINGLETON_VALUE_Accepts =
+                new LazySingletonValue<>(
+                        "accepts",
+                        "\"application/xml\"",
+                        new TypeReference<Optional<? extends Accepts>>() {});
     }
 }

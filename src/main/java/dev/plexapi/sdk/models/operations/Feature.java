@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import dev.plexapi.sdk.models.shared.Directory;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Override;
 import java.lang.String;
@@ -19,68 +20,40 @@ import java.util.Optional;
 public class Feature {
 
     @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("Directory")
+    private Optional<? extends List<Directory>> directory;
+
+
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
     private Optional<String> key;
 
 
+    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
-    private String type;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("flavor")
-    private Optional<String> flavor;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("scrobbleKey")
-    private Optional<String> scrobbleKey;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("unscrobbleKey")
-    private Optional<String> unscrobbleKey;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("Directory")
-    private Optional<? extends List<GetMediaProvidersDirectory>> directory;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("Action")
-    private Optional<? extends List<Action>> action;
+    private Optional<String> type;
 
     @JsonCreator
     public Feature(
+            @JsonProperty("Directory") Optional<? extends List<Directory>> directory,
             @JsonProperty("key") Optional<String> key,
-            @JsonProperty("type") String type,
-            @JsonProperty("flavor") Optional<String> flavor,
-            @JsonProperty("scrobbleKey") Optional<String> scrobbleKey,
-            @JsonProperty("unscrobbleKey") Optional<String> unscrobbleKey,
-            @JsonProperty("Directory") Optional<? extends List<GetMediaProvidersDirectory>> directory,
-            @JsonProperty("Action") Optional<? extends List<Action>> action) {
+            @JsonProperty("type") Optional<String> type) {
+        Utils.checkNotNull(directory, "directory");
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(type, "type");
-        Utils.checkNotNull(flavor, "flavor");
-        Utils.checkNotNull(scrobbleKey, "scrobbleKey");
-        Utils.checkNotNull(unscrobbleKey, "unscrobbleKey");
-        Utils.checkNotNull(directory, "directory");
-        Utils.checkNotNull(action, "action");
+        this.directory = directory;
         this.key = key;
         this.type = type;
-        this.flavor = flavor;
-        this.scrobbleKey = scrobbleKey;
-        this.unscrobbleKey = unscrobbleKey;
-        this.directory = directory;
-        this.action = action;
     }
     
-    public Feature(
-            String type) {
-        this(Optional.empty(), type, Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+    public Feature() {
+        this(Optional.empty(), Optional.empty(), Optional.empty());
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<List<Directory>> directory() {
+        return (Optional<List<Directory>>) directory;
     }
 
     @JsonIgnore
@@ -89,41 +62,27 @@ public class Feature {
     }
 
     @JsonIgnore
-    public String type() {
+    public Optional<String> type() {
         return type;
-    }
-
-    @JsonIgnore
-    public Optional<String> flavor() {
-        return flavor;
-    }
-
-    @JsonIgnore
-    public Optional<String> scrobbleKey() {
-        return scrobbleKey;
-    }
-
-    @JsonIgnore
-    public Optional<String> unscrobbleKey() {
-        return unscrobbleKey;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<GetMediaProvidersDirectory>> directory() {
-        return (Optional<List<GetMediaProvidersDirectory>>) directory;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<Action>> action() {
-        return (Optional<List<Action>>) action;
     }
 
     public static Builder builder() {
         return new Builder();
     }
 
+
+    public Feature withDirectory(List<Directory> directory) {
+        Utils.checkNotNull(directory, "directory");
+        this.directory = Optional.ofNullable(directory);
+        return this;
+    }
+
+
+    public Feature withDirectory(Optional<? extends List<Directory>> directory) {
+        Utils.checkNotNull(directory, "directory");
+        this.directory = directory;
+        return this;
+    }
 
     public Feature withKey(String key) {
         Utils.checkNotNull(key, "key");
@@ -140,72 +99,14 @@ public class Feature {
 
     public Feature withType(String type) {
         Utils.checkNotNull(type, "type");
+        this.type = Optional.ofNullable(type);
+        return this;
+    }
+
+
+    public Feature withType(Optional<String> type) {
+        Utils.checkNotNull(type, "type");
         this.type = type;
-        return this;
-    }
-
-    public Feature withFlavor(String flavor) {
-        Utils.checkNotNull(flavor, "flavor");
-        this.flavor = Optional.ofNullable(flavor);
-        return this;
-    }
-
-
-    public Feature withFlavor(Optional<String> flavor) {
-        Utils.checkNotNull(flavor, "flavor");
-        this.flavor = flavor;
-        return this;
-    }
-
-    public Feature withScrobbleKey(String scrobbleKey) {
-        Utils.checkNotNull(scrobbleKey, "scrobbleKey");
-        this.scrobbleKey = Optional.ofNullable(scrobbleKey);
-        return this;
-    }
-
-
-    public Feature withScrobbleKey(Optional<String> scrobbleKey) {
-        Utils.checkNotNull(scrobbleKey, "scrobbleKey");
-        this.scrobbleKey = scrobbleKey;
-        return this;
-    }
-
-    public Feature withUnscrobbleKey(String unscrobbleKey) {
-        Utils.checkNotNull(unscrobbleKey, "unscrobbleKey");
-        this.unscrobbleKey = Optional.ofNullable(unscrobbleKey);
-        return this;
-    }
-
-
-    public Feature withUnscrobbleKey(Optional<String> unscrobbleKey) {
-        Utils.checkNotNull(unscrobbleKey, "unscrobbleKey");
-        this.unscrobbleKey = unscrobbleKey;
-        return this;
-    }
-
-    public Feature withDirectory(List<GetMediaProvidersDirectory> directory) {
-        Utils.checkNotNull(directory, "directory");
-        this.directory = Optional.ofNullable(directory);
-        return this;
-    }
-
-
-    public Feature withDirectory(Optional<? extends List<GetMediaProvidersDirectory>> directory) {
-        Utils.checkNotNull(directory, "directory");
-        this.directory = directory;
-        return this;
-    }
-
-    public Feature withAction(List<Action> action) {
-        Utils.checkNotNull(action, "action");
-        this.action = Optional.ofNullable(action);
-        return this;
-    }
-
-
-    public Feature withAction(Optional<? extends List<Action>> action) {
-        Utils.checkNotNull(action, "action");
-        this.action = action;
         return this;
     }
 
@@ -219,54 +120,49 @@ public class Feature {
         }
         Feature other = (Feature) o;
         return 
-            Utils.enhancedDeepEquals(this.key, other.key) &&
-            Utils.enhancedDeepEquals(this.type, other.type) &&
-            Utils.enhancedDeepEquals(this.flavor, other.flavor) &&
-            Utils.enhancedDeepEquals(this.scrobbleKey, other.scrobbleKey) &&
-            Utils.enhancedDeepEquals(this.unscrobbleKey, other.unscrobbleKey) &&
             Utils.enhancedDeepEquals(this.directory, other.directory) &&
-            Utils.enhancedDeepEquals(this.action, other.action);
+            Utils.enhancedDeepEquals(this.key, other.key) &&
+            Utils.enhancedDeepEquals(this.type, other.type);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            key, type, flavor,
-            scrobbleKey, unscrobbleKey, directory,
-            action);
+            directory, key, type);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Feature.class,
-                "key", key,
-                "type", type,
-                "flavor", flavor,
-                "scrobbleKey", scrobbleKey,
-                "unscrobbleKey", unscrobbleKey,
                 "directory", directory,
-                "action", action);
+                "key", key,
+                "type", type);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
+        private Optional<? extends List<Directory>> directory = Optional.empty();
+
         private Optional<String> key = Optional.empty();
 
-        private String type;
-
-        private Optional<String> flavor = Optional.empty();
-
-        private Optional<String> scrobbleKey = Optional.empty();
-
-        private Optional<String> unscrobbleKey = Optional.empty();
-
-        private Optional<? extends List<GetMediaProvidersDirectory>> directory = Optional.empty();
-
-        private Optional<? extends List<Action>> action = Optional.empty();
+        private Optional<String> type = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
+        }
+
+
+        public Builder directory(List<Directory> directory) {
+            Utils.checkNotNull(directory, "directory");
+            this.directory = Optional.ofNullable(directory);
+            return this;
+        }
+
+        public Builder directory(Optional<? extends List<Directory>> directory) {
+            Utils.checkNotNull(directory, "directory");
+            this.directory = directory;
+            return this;
         }
 
 
@@ -285,81 +181,20 @@ public class Feature {
 
         public Builder type(String type) {
             Utils.checkNotNull(type, "type");
+            this.type = Optional.ofNullable(type);
+            return this;
+        }
+
+        public Builder type(Optional<String> type) {
+            Utils.checkNotNull(type, "type");
             this.type = type;
-            return this;
-        }
-
-
-        public Builder flavor(String flavor) {
-            Utils.checkNotNull(flavor, "flavor");
-            this.flavor = Optional.ofNullable(flavor);
-            return this;
-        }
-
-        public Builder flavor(Optional<String> flavor) {
-            Utils.checkNotNull(flavor, "flavor");
-            this.flavor = flavor;
-            return this;
-        }
-
-
-        public Builder scrobbleKey(String scrobbleKey) {
-            Utils.checkNotNull(scrobbleKey, "scrobbleKey");
-            this.scrobbleKey = Optional.ofNullable(scrobbleKey);
-            return this;
-        }
-
-        public Builder scrobbleKey(Optional<String> scrobbleKey) {
-            Utils.checkNotNull(scrobbleKey, "scrobbleKey");
-            this.scrobbleKey = scrobbleKey;
-            return this;
-        }
-
-
-        public Builder unscrobbleKey(String unscrobbleKey) {
-            Utils.checkNotNull(unscrobbleKey, "unscrobbleKey");
-            this.unscrobbleKey = Optional.ofNullable(unscrobbleKey);
-            return this;
-        }
-
-        public Builder unscrobbleKey(Optional<String> unscrobbleKey) {
-            Utils.checkNotNull(unscrobbleKey, "unscrobbleKey");
-            this.unscrobbleKey = unscrobbleKey;
-            return this;
-        }
-
-
-        public Builder directory(List<GetMediaProvidersDirectory> directory) {
-            Utils.checkNotNull(directory, "directory");
-            this.directory = Optional.ofNullable(directory);
-            return this;
-        }
-
-        public Builder directory(Optional<? extends List<GetMediaProvidersDirectory>> directory) {
-            Utils.checkNotNull(directory, "directory");
-            this.directory = directory;
-            return this;
-        }
-
-
-        public Builder action(List<Action> action) {
-            Utils.checkNotNull(action, "action");
-            this.action = Optional.ofNullable(action);
-            return this;
-        }
-
-        public Builder action(Optional<? extends List<Action>> action) {
-            Utils.checkNotNull(action, "action");
-            this.action = action;
             return this;
         }
 
         public Feature build() {
 
             return new Feature(
-                key, type, flavor,
-                scrobbleKey, unscrobbleKey, directory,
-                action);
+                directory, key, type);
         }
 
     }

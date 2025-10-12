@@ -9,12 +9,10 @@ import static dev.plexapi.sdk.operations.Operations.AsyncRequestOperation;
 import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.SDKConfiguration;
 import dev.plexapi.sdk.SecuritySource;
-import dev.plexapi.sdk.models.errors.CreatePlaylistBadRequest;
-import dev.plexapi.sdk.models.errors.CreatePlaylistUnauthorized;
 import dev.plexapi.sdk.models.errors.SDKError;
 import dev.plexapi.sdk.models.operations.CreatePlaylistRequest;
 import dev.plexapi.sdk.models.operations.CreatePlaylistResponse;
-import dev.plexapi.sdk.models.operations.CreatePlaylistResponseBody;
+import dev.plexapi.sdk.models.shared.MediaContainerWithPlaylistMetadata;
 import dev.plexapi.sdk.utils.Blob;
 import dev.plexapi.sdk.utils.Exceptions;
 import dev.plexapi.sdk.utils.HTTPClient;
@@ -92,7 +90,8 @@ public class CreatePlaylist {
             req.addQueryParams(Utils.getQueryParams(
                     klass,
                     request,
-                    null));
+                    this.sdkConfiguration.globals));
+            req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
             Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
 
             return req.build();
@@ -127,7 +126,7 @@ public class CreatePlaylist {
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);
-                if (Utils.statusCodeMatches(httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                if (Utils.statusCodeMatches(httpRes.statusCode(), "400", "4XX", "5XX")) {
                     httpRes = onError(httpRes, null);
                 } else {
                     httpRes = onSuccess(httpRes);
@@ -157,11 +156,11 @@ public class CreatePlaylist {
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    CreatePlaylistResponseBody out = Utils.mapper().readValue(
+                    MediaContainerWithPlaylistMetadata out = Utils.mapper().readValue(
                             response.body(),
                             new TypeReference<>() {
                             });
-                    res.withObject(out);
+                    res.withMediaContainerWithPlaylistMetadata(out);
                     return res;
                 } else {
                     throw new SDKError(
@@ -172,43 +171,7 @@ public class CreatePlaylist {
                 }
             }
             
-            if (Utils.statusCodeMatches(response.statusCode(), "400")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    CreatePlaylistBadRequest out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                        out.withRawResponse(response);
-                    
-                    throw out;
-                } else {
-                    throw new SDKError(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "401")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    CreatePlaylistUnauthorized out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                        out.withRawResponse(response);
-                    
-                    throw out;
-                } else {
-                    throw new SDKError(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "400", "4XX")) {
                 // no content
                 throw new SDKError(
                         response,
@@ -260,7 +223,7 @@ public class CreatePlaylist {
                         if (err != null) {
                             return onError(null, err);
                         }
-                        if (Utils.statusCodeMatches(resp.statusCode(), "400", "401", "4XX", "5XX")) {
+                        if (Utils.statusCodeMatches(resp.statusCode(), "400", "4XX", "5XX")) {
                             return onError(resp, null);
                         }
                         return CompletableFuture.completedFuture(resp);
@@ -289,11 +252,11 @@ public class CreatePlaylist {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
                     return response.body().toByteArray().thenApply(bodyBytes -> {
                         try {
-                            CreatePlaylistResponseBody out = Utils.mapper().readValue(
+                            MediaContainerWithPlaylistMetadata out = Utils.mapper().readValue(
                                     bodyBytes,
                                     new TypeReference<>() {
                                     });
-                            res.withObject(out);
+                            res.withMediaContainerWithPlaylistMetadata(out);
                             return res;
                         } catch (Exception e) {
                             throw new RuntimeException(e);
@@ -304,47 +267,7 @@ public class CreatePlaylist {
                 }
             }
             
-            if (Utils.statusCodeMatches(response.statusCode(), "400")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return response.body().toByteArray().thenApply(bodyBytes -> {
-                        dev.plexapi.sdk.models.errors.async.CreatePlaylistBadRequest out;
-                        try {
-                            out = Utils.mapper().readValue(
-                                    bodyBytes,
-                                    new TypeReference<>() {
-                                    });
-                            out.withRawResponse(response);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                        throw out;
-                    });
-                } else {
-                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "401")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return response.body().toByteArray().thenApply(bodyBytes -> {
-                        dev.plexapi.sdk.models.errors.async.CreatePlaylistUnauthorized out;
-                        try {
-                            out = Utils.mapper().readValue(
-                                    bodyBytes,
-                                    new TypeReference<>() {
-                                    });
-                            out.withRawResponse(response);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                        throw out;
-                    });
-                } else {
-                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "400", "4XX")) {
                 // no content
                 return Utils.createAsyncApiError(response, "API error occurred");
             }

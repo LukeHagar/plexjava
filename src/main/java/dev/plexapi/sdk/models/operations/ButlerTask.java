@@ -10,63 +10,75 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Double;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.util.Optional;
 
 
 public class ButlerTask {
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("name")
-    private Optional<String> name;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("interval")
-    private Optional<Double> interval;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("scheduleRandomized")
-    private Optional<Boolean> scheduleRandomized;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("enabled")
-    private Optional<Boolean> enabled;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("title")
-    private Optional<String> title;
-
-
+    /**
+     * A user-friendly description of the task
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("description")
     private Optional<String> description;
 
+    /**
+     * Whether this task is enabled or not
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("enabled")
+    private Optional<Boolean> enabled;
+
+    /**
+     * The interval (in days) of when this task is run.  A value of 1 is run every day, 7 is every week, etc.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("interval")
+    private Optional<Long> interval;
+
+    /**
+     * The name of the task
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("name")
+    private Optional<String> name;
+
+    /**
+     * Indicates whether the timing of the task is randomized within the butler interval
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("scheduleRandomized")
+    private Optional<Boolean> scheduleRandomized;
+
+    /**
+     * A user-friendly title of the task
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("title")
+    private Optional<String> title;
+
     @JsonCreator
     public ButlerTask(
-            @JsonProperty("name") Optional<String> name,
-            @JsonProperty("interval") Optional<Double> interval,
-            @JsonProperty("scheduleRandomized") Optional<Boolean> scheduleRandomized,
+            @JsonProperty("description") Optional<String> description,
             @JsonProperty("enabled") Optional<Boolean> enabled,
-            @JsonProperty("title") Optional<String> title,
-            @JsonProperty("description") Optional<String> description) {
-        Utils.checkNotNull(name, "name");
-        Utils.checkNotNull(interval, "interval");
-        Utils.checkNotNull(scheduleRandomized, "scheduleRandomized");
-        Utils.checkNotNull(enabled, "enabled");
-        Utils.checkNotNull(title, "title");
+            @JsonProperty("interval") Optional<Long> interval,
+            @JsonProperty("name") Optional<String> name,
+            @JsonProperty("scheduleRandomized") Optional<Boolean> scheduleRandomized,
+            @JsonProperty("title") Optional<String> title) {
         Utils.checkNotNull(description, "description");
-        this.name = name;
-        this.interval = interval;
-        this.scheduleRandomized = scheduleRandomized;
-        this.enabled = enabled;
-        this.title = title;
+        Utils.checkNotNull(enabled, "enabled");
+        Utils.checkNotNull(interval, "interval");
+        Utils.checkNotNull(name, "name");
+        Utils.checkNotNull(scheduleRandomized, "scheduleRandomized");
+        Utils.checkNotNull(title, "title");
         this.description = description;
+        this.enabled = enabled;
+        this.interval = interval;
+        this.name = name;
+        this.scheduleRandomized = scheduleRandomized;
+        this.title = title;
     }
     
     public ButlerTask() {
@@ -74,34 +86,52 @@ public class ButlerTask {
             Optional.empty(), Optional.empty(), Optional.empty());
     }
 
+    /**
+     * A user-friendly description of the task
+     */
     @JsonIgnore
-    public Optional<String> name() {
-        return name;
+    public Optional<String> description() {
+        return description;
     }
 
-    @JsonIgnore
-    public Optional<Double> interval() {
-        return interval;
-    }
-
-    @JsonIgnore
-    public Optional<Boolean> scheduleRandomized() {
-        return scheduleRandomized;
-    }
-
+    /**
+     * Whether this task is enabled or not
+     */
     @JsonIgnore
     public Optional<Boolean> enabled() {
         return enabled;
     }
 
+    /**
+     * The interval (in days) of when this task is run.  A value of 1 is run every day, 7 is every week, etc.
+     */
+    @JsonIgnore
+    public Optional<Long> interval() {
+        return interval;
+    }
+
+    /**
+     * The name of the task
+     */
+    @JsonIgnore
+    public Optional<String> name() {
+        return name;
+    }
+
+    /**
+     * Indicates whether the timing of the task is randomized within the butler interval
+     */
+    @JsonIgnore
+    public Optional<Boolean> scheduleRandomized() {
+        return scheduleRandomized;
+    }
+
+    /**
+     * A user-friendly title of the task
+     */
     @JsonIgnore
     public Optional<String> title() {
         return title;
-    }
-
-    @JsonIgnore
-    public Optional<String> description() {
-        return description;
     }
 
     public static Builder builder() {
@@ -109,71 +139,9 @@ public class ButlerTask {
     }
 
 
-    public ButlerTask withName(String name) {
-        Utils.checkNotNull(name, "name");
-        this.name = Optional.ofNullable(name);
-        return this;
-    }
-
-
-    public ButlerTask withName(Optional<String> name) {
-        Utils.checkNotNull(name, "name");
-        this.name = name;
-        return this;
-    }
-
-    public ButlerTask withInterval(double interval) {
-        Utils.checkNotNull(interval, "interval");
-        this.interval = Optional.ofNullable(interval);
-        return this;
-    }
-
-
-    public ButlerTask withInterval(Optional<Double> interval) {
-        Utils.checkNotNull(interval, "interval");
-        this.interval = interval;
-        return this;
-    }
-
-    public ButlerTask withScheduleRandomized(boolean scheduleRandomized) {
-        Utils.checkNotNull(scheduleRandomized, "scheduleRandomized");
-        this.scheduleRandomized = Optional.ofNullable(scheduleRandomized);
-        return this;
-    }
-
-
-    public ButlerTask withScheduleRandomized(Optional<Boolean> scheduleRandomized) {
-        Utils.checkNotNull(scheduleRandomized, "scheduleRandomized");
-        this.scheduleRandomized = scheduleRandomized;
-        return this;
-    }
-
-    public ButlerTask withEnabled(boolean enabled) {
-        Utils.checkNotNull(enabled, "enabled");
-        this.enabled = Optional.ofNullable(enabled);
-        return this;
-    }
-
-
-    public ButlerTask withEnabled(Optional<Boolean> enabled) {
-        Utils.checkNotNull(enabled, "enabled");
-        this.enabled = enabled;
-        return this;
-    }
-
-    public ButlerTask withTitle(String title) {
-        Utils.checkNotNull(title, "title");
-        this.title = Optional.ofNullable(title);
-        return this;
-    }
-
-
-    public ButlerTask withTitle(Optional<String> title) {
-        Utils.checkNotNull(title, "title");
-        this.title = title;
-        return this;
-    }
-
+    /**
+     * A user-friendly description of the task
+     */
     public ButlerTask withDescription(String description) {
         Utils.checkNotNull(description, "description");
         this.description = Optional.ofNullable(description);
@@ -181,9 +149,107 @@ public class ButlerTask {
     }
 
 
+    /**
+     * A user-friendly description of the task
+     */
     public ButlerTask withDescription(Optional<String> description) {
         Utils.checkNotNull(description, "description");
         this.description = description;
+        return this;
+    }
+
+    /**
+     * Whether this task is enabled or not
+     */
+    public ButlerTask withEnabled(boolean enabled) {
+        Utils.checkNotNull(enabled, "enabled");
+        this.enabled = Optional.ofNullable(enabled);
+        return this;
+    }
+
+
+    /**
+     * Whether this task is enabled or not
+     */
+    public ButlerTask withEnabled(Optional<Boolean> enabled) {
+        Utils.checkNotNull(enabled, "enabled");
+        this.enabled = enabled;
+        return this;
+    }
+
+    /**
+     * The interval (in days) of when this task is run.  A value of 1 is run every day, 7 is every week, etc.
+     */
+    public ButlerTask withInterval(long interval) {
+        Utils.checkNotNull(interval, "interval");
+        this.interval = Optional.ofNullable(interval);
+        return this;
+    }
+
+
+    /**
+     * The interval (in days) of when this task is run.  A value of 1 is run every day, 7 is every week, etc.
+     */
+    public ButlerTask withInterval(Optional<Long> interval) {
+        Utils.checkNotNull(interval, "interval");
+        this.interval = interval;
+        return this;
+    }
+
+    /**
+     * The name of the task
+     */
+    public ButlerTask withName(String name) {
+        Utils.checkNotNull(name, "name");
+        this.name = Optional.ofNullable(name);
+        return this;
+    }
+
+
+    /**
+     * The name of the task
+     */
+    public ButlerTask withName(Optional<String> name) {
+        Utils.checkNotNull(name, "name");
+        this.name = name;
+        return this;
+    }
+
+    /**
+     * Indicates whether the timing of the task is randomized within the butler interval
+     */
+    public ButlerTask withScheduleRandomized(boolean scheduleRandomized) {
+        Utils.checkNotNull(scheduleRandomized, "scheduleRandomized");
+        this.scheduleRandomized = Optional.ofNullable(scheduleRandomized);
+        return this;
+    }
+
+
+    /**
+     * Indicates whether the timing of the task is randomized within the butler interval
+     */
+    public ButlerTask withScheduleRandomized(Optional<Boolean> scheduleRandomized) {
+        Utils.checkNotNull(scheduleRandomized, "scheduleRandomized");
+        this.scheduleRandomized = scheduleRandomized;
+        return this;
+    }
+
+    /**
+     * A user-friendly title of the task
+     */
+    public ButlerTask withTitle(String title) {
+        Utils.checkNotNull(title, "title");
+        this.title = Optional.ofNullable(title);
+        return this;
+    }
+
+
+    /**
+     * A user-friendly title of the task
+     */
+    public ButlerTask withTitle(Optional<String> title) {
+        Utils.checkNotNull(title, "title");
+        this.title = title;
         return this;
     }
 
@@ -197,97 +263,83 @@ public class ButlerTask {
         }
         ButlerTask other = (ButlerTask) o;
         return 
-            Utils.enhancedDeepEquals(this.name, other.name) &&
-            Utils.enhancedDeepEquals(this.interval, other.interval) &&
-            Utils.enhancedDeepEquals(this.scheduleRandomized, other.scheduleRandomized) &&
+            Utils.enhancedDeepEquals(this.description, other.description) &&
             Utils.enhancedDeepEquals(this.enabled, other.enabled) &&
-            Utils.enhancedDeepEquals(this.title, other.title) &&
-            Utils.enhancedDeepEquals(this.description, other.description);
+            Utils.enhancedDeepEquals(this.interval, other.interval) &&
+            Utils.enhancedDeepEquals(this.name, other.name) &&
+            Utils.enhancedDeepEquals(this.scheduleRandomized, other.scheduleRandomized) &&
+            Utils.enhancedDeepEquals(this.title, other.title);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            name, interval, scheduleRandomized,
-            enabled, title, description);
+            description, enabled, interval,
+            name, scheduleRandomized, title);
     }
     
     @Override
     public String toString() {
         return Utils.toString(ButlerTask.class,
-                "name", name,
-                "interval", interval,
-                "scheduleRandomized", scheduleRandomized,
+                "description", description,
                 "enabled", enabled,
-                "title", title,
-                "description", description);
+                "interval", interval,
+                "name", name,
+                "scheduleRandomized", scheduleRandomized,
+                "title", title);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> name = Optional.empty();
-
-        private Optional<Double> interval = Optional.empty();
-
-        private Optional<Boolean> scheduleRandomized = Optional.empty();
+        private Optional<String> description = Optional.empty();
 
         private Optional<Boolean> enabled = Optional.empty();
 
-        private Optional<String> title = Optional.empty();
+        private Optional<Long> interval = Optional.empty();
 
-        private Optional<String> description = Optional.empty();
+        private Optional<String> name = Optional.empty();
+
+        private Optional<Boolean> scheduleRandomized = Optional.empty();
+
+        private Optional<String> title = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        public Builder name(String name) {
-            Utils.checkNotNull(name, "name");
-            this.name = Optional.ofNullable(name);
+        /**
+         * A user-friendly description of the task
+         */
+        public Builder description(String description) {
+            Utils.checkNotNull(description, "description");
+            this.description = Optional.ofNullable(description);
             return this;
         }
 
-        public Builder name(Optional<String> name) {
-            Utils.checkNotNull(name, "name");
-            this.name = name;
-            return this;
-        }
-
-
-        public Builder interval(double interval) {
-            Utils.checkNotNull(interval, "interval");
-            this.interval = Optional.ofNullable(interval);
-            return this;
-        }
-
-        public Builder interval(Optional<Double> interval) {
-            Utils.checkNotNull(interval, "interval");
-            this.interval = interval;
+        /**
+         * A user-friendly description of the task
+         */
+        public Builder description(Optional<String> description) {
+            Utils.checkNotNull(description, "description");
+            this.description = description;
             return this;
         }
 
 
-        public Builder scheduleRandomized(boolean scheduleRandomized) {
-            Utils.checkNotNull(scheduleRandomized, "scheduleRandomized");
-            this.scheduleRandomized = Optional.ofNullable(scheduleRandomized);
-            return this;
-        }
-
-        public Builder scheduleRandomized(Optional<Boolean> scheduleRandomized) {
-            Utils.checkNotNull(scheduleRandomized, "scheduleRandomized");
-            this.scheduleRandomized = scheduleRandomized;
-            return this;
-        }
-
-
+        /**
+         * Whether this task is enabled or not
+         */
         public Builder enabled(boolean enabled) {
             Utils.checkNotNull(enabled, "enabled");
             this.enabled = Optional.ofNullable(enabled);
             return this;
         }
 
+        /**
+         * Whether this task is enabled or not
+         */
         public Builder enabled(Optional<Boolean> enabled) {
             Utils.checkNotNull(enabled, "enabled");
             this.enabled = enabled;
@@ -295,36 +347,86 @@ public class ButlerTask {
         }
 
 
+        /**
+         * The interval (in days) of when this task is run.  A value of 1 is run every day, 7 is every week, etc.
+         */
+        public Builder interval(long interval) {
+            Utils.checkNotNull(interval, "interval");
+            this.interval = Optional.ofNullable(interval);
+            return this;
+        }
+
+        /**
+         * The interval (in days) of when this task is run.  A value of 1 is run every day, 7 is every week, etc.
+         */
+        public Builder interval(Optional<Long> interval) {
+            Utils.checkNotNull(interval, "interval");
+            this.interval = interval;
+            return this;
+        }
+
+
+        /**
+         * The name of the task
+         */
+        public Builder name(String name) {
+            Utils.checkNotNull(name, "name");
+            this.name = Optional.ofNullable(name);
+            return this;
+        }
+
+        /**
+         * The name of the task
+         */
+        public Builder name(Optional<String> name) {
+            Utils.checkNotNull(name, "name");
+            this.name = name;
+            return this;
+        }
+
+
+        /**
+         * Indicates whether the timing of the task is randomized within the butler interval
+         */
+        public Builder scheduleRandomized(boolean scheduleRandomized) {
+            Utils.checkNotNull(scheduleRandomized, "scheduleRandomized");
+            this.scheduleRandomized = Optional.ofNullable(scheduleRandomized);
+            return this;
+        }
+
+        /**
+         * Indicates whether the timing of the task is randomized within the butler interval
+         */
+        public Builder scheduleRandomized(Optional<Boolean> scheduleRandomized) {
+            Utils.checkNotNull(scheduleRandomized, "scheduleRandomized");
+            this.scheduleRandomized = scheduleRandomized;
+            return this;
+        }
+
+
+        /**
+         * A user-friendly title of the task
+         */
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
             return this;
         }
 
+        /**
+         * A user-friendly title of the task
+         */
         public Builder title(Optional<String> title) {
             Utils.checkNotNull(title, "title");
             this.title = title;
             return this;
         }
 
-
-        public Builder description(String description) {
-            Utils.checkNotNull(description, "description");
-            this.description = Optional.ofNullable(description);
-            return this;
-        }
-
-        public Builder description(Optional<String> description) {
-            Utils.checkNotNull(description, "description");
-            this.description = description;
-            return this;
-        }
-
         public ButlerTask build() {
 
             return new ButlerTask(
-                name, interval, scheduleRandomized,
-                enabled, title, description);
+                description, enabled, interval,
+                name, scheduleRandomized, title);
         }
 
     }

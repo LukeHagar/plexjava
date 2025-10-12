@@ -3,7 +3,7 @@
  */
 package dev.plexapi.sdk;
 
-import com.fasterxml.jackson.annotation.JsonValue;
+import dev.plexapi.sdk.models.shared.Accepts;
 import dev.plexapi.sdk.utils.HTTPClient;
 import dev.plexapi.sdk.utils.Hook.SdkInitData;
 import dev.plexapi.sdk.utils.RetryConfig;
@@ -11,38 +11,9 @@ import dev.plexapi.sdk.utils.SpeakeasyHTTPClient;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.String;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-/**
- * Plex-API: An Open API Spec for interacting with Plex.tv and Plex Media Server
- * 
- * <p># Plex Media Server OpenAPI Specification
- * 
- * <p>An Open Source OpenAPI Specification for Plex Media Server
- * 
- * <p>Automation and SDKs provided by [Speakeasy](https://speakeasyapi.dev/)
- * 
- * <p>## Documentation
- * 
- * <p>[API Documentation](https://plexapi.dev)
- * 
- * <p>## SDKs
- * 
- * <p>The following SDKs are generated from the OpenAPI Specification. They are automatically generated and may not be fully tested. If you find any issues, please open an issue on the [main specification Repository](https://github.com/LukeHagar/plex-api-spec).
- * 
- * <p>| Language              | Repository                                        | Releases                                                                                         | Other                                                   |
- * | --------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------- |
- * | Python                | [GitHub](https://github.com/LukeHagar/plexpy)     | [PyPI](https://pypi.org/project/plex-api-client/)                                                | -                                                       |
- * | JavaScript/TypeScript | [GitHub](https://github.com/LukeHagar/plexjs)     | [NPM](https://www.npmjs.com/package/@lukehagar/plexjs) \ [JSR](https://jsr.io/@lukehagar/plexjs) | -                                                       |
- * | Go                    | [GitHub](https://github.com/LukeHagar/plexgo)     | [Releases](https://github.com/LukeHagar/plexgo/releases)                                         | [GoDoc](https://pkg.go.dev/github.com/LukeHagar/plexgo) |
- * | Ruby                  | [GitHub](https://github.com/LukeHagar/plexruby)   | [Releases](https://github.com/LukeHagar/plexruby/releases)                                       | -                                                       |
- * | Swift                 | [GitHub](https://github.com/LukeHagar/plexswift)  | [Releases](https://github.com/LukeHagar/plexswift/releases)                                      | -                                                       |
- * | PHP                   | [GitHub](https://github.com/LukeHagar/plexphp)    | [Releases](https://github.com/LukeHagar/plexphp/releases)                                        | -                                                       |
- * | Java                  | [GitHub](https://github.com/LukeHagar/plexjava)   | [Releases](https://github.com/LukeHagar/plexjava/releases)                                       | -                                                       |
- * | C#                    | [GitHub](https://github.com/LukeHagar/plexcsharp) | [Releases](https://github.com/LukeHagar/plexcsharp/releases)                                     | -
- */
 public class PlexAPI {
 
 
@@ -50,95 +21,182 @@ public class PlexAPI {
      * SERVERS contains the list of server urls available to the SDK.
      */
     public static final String[] SERVERS = {
-        /**
-         * The full address of your Plex Server
-         */
-        "{protocol}://{ip}:{port}",
+
+        "https://{IP-description}.{identifier}.plex.direct:{port}",
+
+        "{protocol}://{host}:{port}",
+
+        "https://{server_url}",
     };
 
     /**
-     * Operations against the Plex Media Server System.
+     * General endpoints for basic PMS operation not specific to any media provider
      */
-    private final Server server;
+    private final General general;
 
     /**
-     * API Calls interacting with Plex Media Server Media
+     * The server can notify clients in real-time of a wide range of events, from library scanning, to preferences being modified, to changes to media, and many other things. This is also the mechanism by which activity progress is reported.
+     * 
+     * <p>Two protocols for receiving the events are available: EventSource (also known as SSE), and WebSocket.
      */
-    private final Media media;
+    private final Events events;
 
     /**
-     * API Calls that perform operations with Plex Media Server Videos
+     * API Operations against the Preferences
      */
-    private final Video video;
+    private final Preferences preferences;
 
     /**
-     * Activities are awesome. They provide a way to monitor and control asynchronous operations on the server. In order to receive real-time updates for activities, a client would normally subscribe via either EventSource or Websocket endpoints.
-     * Activities are associated with HTTP replies via a special `X-Plex-Activity` header which contains the UUID of the activity.
-     * Activities are optional cancellable. If cancellable, they may be cancelled via the `DELETE` endpoint. Other details:
-     * - They can contain a `progress` (from 0 to 100) marking the percent completion of the activity.
-     * - They must contain an `type` which is used by clients to distinguish the specific activity.
-     * - They may contain a `Context` object with attributes which associate the activity with various specific entities (items, libraries, etc.)
-     * - The may contain a `Response` object which attributes which represent the result of the asynchronous operation.
+     * Operations for rating media items (thumbs up/down, star ratings, etc.)
+     */
+    private final Rate rate;
+
+    /**
+     * The actions feature within a media provider
+     */
+    private final Timeline timeline;
+
+    /**
+     * Activities provide a way to monitor and control asynchronous operations on the server. In order to receive real-time updates for activities, a client would normally subscribe via either EventSource or Websocket endpoints.
+     * 
+     * <p>Activities are associated with HTTP replies via a special `X-Plex-Activity` header which contains the UUID of the activity.
+     * 
+     * <p>Activities are optional cancellable. If cancellable, they may be cancelled via the `DELETE` endpoint.
      */
     private final Activities activities;
 
     /**
-     * Butler is the task manager of the Plex Media Server Ecosystem.
+     * The butler is responsible for running periodic tasks.  Some tasks run daily, others every few days, and some weekly.  These includes database maintenance, metadata updating, thumbnail generation, media analysis, and other tasks.
      */
     private final Butler butler;
 
     /**
-     * API Calls that perform operations directly against https://Plex.tv
+     * API Operations against the Download Queue
      */
-    private final Plex plex;
+    private final DownloadQueue downloadQueue;
 
     /**
-     * Hubs are a structured two-dimensional container for media, generally represented by multiple horizontal rows.
+     * The hubs within a media provider
      */
     private final Hubs hubs;
 
     /**
-     * API Calls that perform search operations with Plex Media Server
+     * The search feature within a media provider
      */
     private final Search search;
 
     /**
-     * API Calls interacting with Plex Media Server Libraries
+     * Library endpoints which are outside of the Media Provider API.  Typically this is manipulation of the library (adding/removing sections, modifying preferences, etc).
      */
     private final Library library;
 
     /**
-     * API Calls that perform operations with Plex Media Server Watchlists
+     * API Operations against the Collections
      */
-    private final Watchlist watchlist;
+    private final Collections collections;
 
     /**
-     * Submit logs to the Log Handler for Plex Media Server
+     * The DVR provides means to watch and record live TV.  This section of endpoints describes how to setup the DVR itself
+     */
+    private final DVRs dvRs;
+
+    /**
+     * The EPG (Electronic Program Guide) is responsible for obtaining metadata for what is airing on each channel and when
+     */
+    private final Epg epg;
+
+    /**
+     * LiveTV contains the playback sessions of a channel from a DVR device
+     */
+    private final LiveTV liveTV;
+
+    /**
+     * Logging mechanism to allow clients to log to the server
      */
     private final Log log;
 
     /**
-     * Playlists are ordered collections of media. They can be dumb (just a list of media) or smart (based on a media query, such as "all albums from 2017").
-     * They can be organized in (optionally nesting) folders.
-     * Retrieving a playlist, or its items, will trigger a refresh of its metadata.
-     * This may cause the duration and number of items to change.
+     * Media grabbers provide ways for media to be obtained for a given protocol. The simplest ones are `stream` and `download`. More complex grabbers can have associated devices
+     * 
+     * <p>Network tuners can present themselves on the network using the Simple Service Discovery Protocol and Plex Media Server will discover them. The following XML is an example of the data returned from SSDP. The `deviceType`, `serviceType`, and `serviceId` values must remain as they are in the example in order for PMS to properly discover the device. Other less-obvious fields are described in the parameters section below.
+     * 
+     * <p>Example SSDP output
+     * ```
+     * &lt;root xmlns="urn:schemas-upnp-org:device-1-0"&gt;
+     *     &lt;specVersion&gt;
+     *         &lt;major&gt;1&lt;/major&gt;
+     *         &lt;minor&gt;0&lt;/minor&gt;
+     *     &lt;/specVersion&gt;
+     *     &lt;device&gt;
+     *         &lt;deviceType&gt;urn:plex-tv:device:Media:1&lt;/deviceType&gt;
+     *         &lt;friendlyName&gt;Turing Hopper 3000&lt;/friendlyName&gt;
+     *         &lt;manufacturer&gt;Plex, Inc.&lt;/manufacturer&gt;
+     *         &lt;manufacturerURL&gt;https://plex.tv/&lt;/manufacturerURL&gt;
+     *         &lt;modelDescription&gt;Turing Hopper 3000 Media Grabber&lt;/modelDescription&gt;
+     *         &lt;modelName&gt;Plex Media Grabber&lt;/modelName&gt;
+     *         &lt;modelNumber&gt;1&lt;/modelNumber&gt;
+     *         &lt;modelURL&gt;https://plex.tv&lt;/modelURL&gt;
+     *         &lt;UDN&gt;uuid:42fde8e4-93b6-41e5-8a63-12d848655811&lt;/UDN&gt;
+     *         &lt;serviceList&gt;
+     *             &lt;service&gt;
+     *                 &lt;URLBase&gt;http://10.0.0.5:8088&lt;/URLBase&gt;
+     *                 &lt;serviceType&gt;urn:plex-tv:service:MediaGrabber:1&lt;/serviceType&gt;
+     *                 &lt;serviceId&gt;urn:plex-tv:serviceId:MediaGrabber&lt;/serviceId&gt;
+     *             &lt;/service&gt;
+     *         &lt;/serviceList&gt;
+     *     &lt;/device&gt;
+     * &lt;/root&gt;
+     * ```
+     * 
+     * <p>  - UDN: (string) A UUID for the device. This should be unique across models of a device at minimum.
+     *   - URLBase: (string) The base HTTP URL for the device from which all of the other endpoints are hosted.
      */
-    private final Playlists playlists;
+    private final Devices devices;
 
     /**
-     * API Calls regarding authentication for Plex Media Server
+     * Media providers are the starting points for the entire Plex Media Server media library API.  It defines the paths for the groups of endpoints.  The `/media/providers` should be the only hard-coded path in clients when accessing the media library.  Non-media library endpoints are outside the scope of the media provider.  See the description in See [the section in API Info](#section/API-Info/Media-Providers) for more information on how to use media providers.
      */
-    private final Authentication authentication;
+    private final Provider provider;
 
     /**
-     * API Calls that perform operations with Plex Media Server Statistics
+     * Subscriptions determine which media will be recorded and the criteria for selecting an airing when multiple are available
      */
-    private final Statistics statistics;
+    private final Subscriptions subscriptions;
 
     /**
-     * API Calls that perform search operations with Plex Media Server Sessions
+     * API Operations against the Transcoder
      */
-    private final Sessions sessions;
+    private final Transcoder transcoder;
+
+    /**
+     * Media playlists that can be created and played back
+     */
+    private final Playlist playlist;
+
+    /**
+     * Endpoints for manipulating playlists.
+     */
+    private final LibraryPlaylists libraryPlaylists;
+
+    /**
+     * The playqueue feature within a media provider
+     * A play queue represents the current list of media for playback. Although queues are persisted by the server, they should be regarded by the user as a fairly lightweight, an ephemeral list of items queued up for playback in a session.  There is generally one active queue for each type of media (music, video, photos) that can be added to or destroyed and replaced with a fresh queue.
+     * Play Queues has a region, which we refer to in this doc (partially for historical reasons) as "Up Next". This region is defined by `playQueueLastAddedItemID` existing on the media container. This follows iTunes' terminology. It is a special region after the currently playing item but before the originally-played items. This enables "Party Mode" listening/viewing, where items can be added on-the-fly, and normal queue playback resumed when completed. 
+     * You can visualize the play queue as a sliding window in the complete list of media queued for playback. This model is important when scaling to larger play queues (e.g. shuffling 40,000 audio tracks). The client only needs visibility into small areas of the queue at any given time, and the server can optimize access in this fashion.
+     * All created play queues will have an empty "Up Next" area - unless the item is an album and no `key` is provided. In this case the "Up Next" area will be populated by the contents of the album. This is to allow queueing of multiple albums - since the 'Add to Up Next' will insert after all the tracks. This means that If you're creating a PQ from an album, you can only shuffle it if you set `key`. This is due to the above implicit queueing of albums when no `key` is provided as well as the current limitation that you cannot shuffle a PQ with an "Up Next" area.
+     * The play queue window advances as the server receives timeline requests. The client needs to retrieve the play queue as the “now playing” item changes. There is no play queue API to update the playing item.
+     */
+    private final PlayQueue playQueue;
+
+    /**
+     * Service provided to compute UltraBlur colors and images.
+     */
+    private final UltraBlur ultraBlur;
+
+    /**
+     * The status endpoints give you information about current playbacks, play history, and even terminating sessions.
+     */
+    private final Status status;
 
     /**
      * This describes the API for searching and applying updates to the Plex Media Server.
@@ -146,121 +204,233 @@ public class PlexAPI {
      */
     private final Updater updater;
 
-
-    private final Users users;
+    /**
+     * The actual content of the media provider
+     */
+    private final Content content;
 
     /**
-     * Operations against the Plex Media Server System.
+     * Endpoints for manipulating collections.  In addition to these endpoints, `/library/collections/:collectionId/X` will be rerouted to `/library/metadata/:collectionId/X` and respond to those endpoints as well.
      */
-    public Server server() {
-        return server;
+    private final LibraryCollections libraryCollections;
+
+    /**
+     * General endpoints for basic PMS operation not specific to any media provider
+     */
+    public General general() {
+        return general;
     }
 
     /**
-     * API Calls interacting with Plex Media Server Media
+     * The server can notify clients in real-time of a wide range of events, from library scanning, to preferences being modified, to changes to media, and many other things. This is also the mechanism by which activity progress is reported.
+     * 
+     * <p>Two protocols for receiving the events are available: EventSource (also known as SSE), and WebSocket.
      */
-    public Media media() {
-        return media;
+    public Events events() {
+        return events;
     }
 
     /**
-     * API Calls that perform operations with Plex Media Server Videos
+     * API Operations against the Preferences
      */
-    public Video video() {
-        return video;
+    public Preferences preferences() {
+        return preferences;
     }
 
     /**
-     * Activities are awesome. They provide a way to monitor and control asynchronous operations on the server. In order to receive real-time updates for activities, a client would normally subscribe via either EventSource or Websocket endpoints.
-     * Activities are associated with HTTP replies via a special `X-Plex-Activity` header which contains the UUID of the activity.
-     * Activities are optional cancellable. If cancellable, they may be cancelled via the `DELETE` endpoint. Other details:
-     * - They can contain a `progress` (from 0 to 100) marking the percent completion of the activity.
-     * - They must contain an `type` which is used by clients to distinguish the specific activity.
-     * - They may contain a `Context` object with attributes which associate the activity with various specific entities (items, libraries, etc.)
-     * - The may contain a `Response` object which attributes which represent the result of the asynchronous operation.
+     * Operations for rating media items (thumbs up/down, star ratings, etc.)
+     */
+    public Rate rate() {
+        return rate;
+    }
+
+    /**
+     * The actions feature within a media provider
+     */
+    public Timeline timeline() {
+        return timeline;
+    }
+
+    /**
+     * Activities provide a way to monitor and control asynchronous operations on the server. In order to receive real-time updates for activities, a client would normally subscribe via either EventSource or Websocket endpoints.
+     * 
+     * <p>Activities are associated with HTTP replies via a special `X-Plex-Activity` header which contains the UUID of the activity.
+     * 
+     * <p>Activities are optional cancellable. If cancellable, they may be cancelled via the `DELETE` endpoint.
      */
     public Activities activities() {
         return activities;
     }
 
     /**
-     * Butler is the task manager of the Plex Media Server Ecosystem.
+     * The butler is responsible for running periodic tasks.  Some tasks run daily, others every few days, and some weekly.  These includes database maintenance, metadata updating, thumbnail generation, media analysis, and other tasks.
      */
     public Butler butler() {
         return butler;
     }
 
     /**
-     * API Calls that perform operations directly against https://Plex.tv
+     * API Operations against the Download Queue
      */
-    public Plex plex() {
-        return plex;
+    public DownloadQueue downloadQueue() {
+        return downloadQueue;
     }
 
     /**
-     * Hubs are a structured two-dimensional container for media, generally represented by multiple horizontal rows.
+     * The hubs within a media provider
      */
     public Hubs hubs() {
         return hubs;
     }
 
     /**
-     * API Calls that perform search operations with Plex Media Server
+     * The search feature within a media provider
      */
     public Search search() {
         return search;
     }
 
     /**
-     * API Calls interacting with Plex Media Server Libraries
+     * Library endpoints which are outside of the Media Provider API.  Typically this is manipulation of the library (adding/removing sections, modifying preferences, etc).
      */
     public Library library() {
         return library;
     }
 
     /**
-     * API Calls that perform operations with Plex Media Server Watchlists
+     * API Operations against the Collections
      */
-    public Watchlist watchlist() {
-        return watchlist;
+    public Collections collections() {
+        return collections;
     }
 
     /**
-     * Submit logs to the Log Handler for Plex Media Server
+     * The DVR provides means to watch and record live TV.  This section of endpoints describes how to setup the DVR itself
+     */
+    public DVRs dvRs() {
+        return dvRs;
+    }
+
+    /**
+     * The EPG (Electronic Program Guide) is responsible for obtaining metadata for what is airing on each channel and when
+     */
+    public Epg epg() {
+        return epg;
+    }
+
+    /**
+     * LiveTV contains the playback sessions of a channel from a DVR device
+     */
+    public LiveTV liveTV() {
+        return liveTV;
+    }
+
+    /**
+     * Logging mechanism to allow clients to log to the server
      */
     public Log log() {
         return log;
     }
 
     /**
-     * Playlists are ordered collections of media. They can be dumb (just a list of media) or smart (based on a media query, such as "all albums from 2017").
-     * They can be organized in (optionally nesting) folders.
-     * Retrieving a playlist, or its items, will trigger a refresh of its metadata.
-     * This may cause the duration and number of items to change.
+     * Media grabbers provide ways for media to be obtained for a given protocol. The simplest ones are `stream` and `download`. More complex grabbers can have associated devices
+     * 
+     * <p>Network tuners can present themselves on the network using the Simple Service Discovery Protocol and Plex Media Server will discover them. The following XML is an example of the data returned from SSDP. The `deviceType`, `serviceType`, and `serviceId` values must remain as they are in the example in order for PMS to properly discover the device. Other less-obvious fields are described in the parameters section below.
+     * 
+     * <p>Example SSDP output
+     * ```
+     * &lt;root xmlns="urn:schemas-upnp-org:device-1-0"&gt;
+     *     &lt;specVersion&gt;
+     *         &lt;major&gt;1&lt;/major&gt;
+     *         &lt;minor&gt;0&lt;/minor&gt;
+     *     &lt;/specVersion&gt;
+     *     &lt;device&gt;
+     *         &lt;deviceType&gt;urn:plex-tv:device:Media:1&lt;/deviceType&gt;
+     *         &lt;friendlyName&gt;Turing Hopper 3000&lt;/friendlyName&gt;
+     *         &lt;manufacturer&gt;Plex, Inc.&lt;/manufacturer&gt;
+     *         &lt;manufacturerURL&gt;https://plex.tv/&lt;/manufacturerURL&gt;
+     *         &lt;modelDescription&gt;Turing Hopper 3000 Media Grabber&lt;/modelDescription&gt;
+     *         &lt;modelName&gt;Plex Media Grabber&lt;/modelName&gt;
+     *         &lt;modelNumber&gt;1&lt;/modelNumber&gt;
+     *         &lt;modelURL&gt;https://plex.tv&lt;/modelURL&gt;
+     *         &lt;UDN&gt;uuid:42fde8e4-93b6-41e5-8a63-12d848655811&lt;/UDN&gt;
+     *         &lt;serviceList&gt;
+     *             &lt;service&gt;
+     *                 &lt;URLBase&gt;http://10.0.0.5:8088&lt;/URLBase&gt;
+     *                 &lt;serviceType&gt;urn:plex-tv:service:MediaGrabber:1&lt;/serviceType&gt;
+     *                 &lt;serviceId&gt;urn:plex-tv:serviceId:MediaGrabber&lt;/serviceId&gt;
+     *             &lt;/service&gt;
+     *         &lt;/serviceList&gt;
+     *     &lt;/device&gt;
+     * &lt;/root&gt;
+     * ```
+     * 
+     * <p>  - UDN: (string) A UUID for the device. This should be unique across models of a device at minimum.
+     *   - URLBase: (string) The base HTTP URL for the device from which all of the other endpoints are hosted.
      */
-    public Playlists playlists() {
-        return playlists;
+    public Devices devices() {
+        return devices;
     }
 
     /**
-     * API Calls regarding authentication for Plex Media Server
+     * Media providers are the starting points for the entire Plex Media Server media library API.  It defines the paths for the groups of endpoints.  The `/media/providers` should be the only hard-coded path in clients when accessing the media library.  Non-media library endpoints are outside the scope of the media provider.  See the description in See [the section in API Info](#section/API-Info/Media-Providers) for more information on how to use media providers.
      */
-    public Authentication authentication() {
-        return authentication;
+    public Provider provider() {
+        return provider;
     }
 
     /**
-     * API Calls that perform operations with Plex Media Server Statistics
+     * Subscriptions determine which media will be recorded and the criteria for selecting an airing when multiple are available
      */
-    public Statistics statistics() {
-        return statistics;
+    public Subscriptions subscriptions() {
+        return subscriptions;
     }
 
     /**
-     * API Calls that perform search operations with Plex Media Server Sessions
+     * API Operations against the Transcoder
      */
-    public Sessions sessions() {
-        return sessions;
+    public Transcoder transcoder() {
+        return transcoder;
+    }
+
+    /**
+     * Media playlists that can be created and played back
+     */
+    public Playlist playlist() {
+        return playlist;
+    }
+
+    /**
+     * Endpoints for manipulating playlists.
+     */
+    public LibraryPlaylists libraryPlaylists() {
+        return libraryPlaylists;
+    }
+
+    /**
+     * The playqueue feature within a media provider
+     * A play queue represents the current list of media for playback. Although queues are persisted by the server, they should be regarded by the user as a fairly lightweight, an ephemeral list of items queued up for playback in a session.  There is generally one active queue for each type of media (music, video, photos) that can be added to or destroyed and replaced with a fresh queue.
+     * Play Queues has a region, which we refer to in this doc (partially for historical reasons) as "Up Next". This region is defined by `playQueueLastAddedItemID` existing on the media container. This follows iTunes' terminology. It is a special region after the currently playing item but before the originally-played items. This enables "Party Mode" listening/viewing, where items can be added on-the-fly, and normal queue playback resumed when completed. 
+     * You can visualize the play queue as a sliding window in the complete list of media queued for playback. This model is important when scaling to larger play queues (e.g. shuffling 40,000 audio tracks). The client only needs visibility into small areas of the queue at any given time, and the server can optimize access in this fashion.
+     * All created play queues will have an empty "Up Next" area - unless the item is an album and no `key` is provided. In this case the "Up Next" area will be populated by the contents of the album. This is to allow queueing of multiple albums - since the 'Add to Up Next' will insert after all the tracks. This means that If you're creating a PQ from an album, you can only shuffle it if you set `key`. This is due to the above implicit queueing of albums when no `key` is provided as well as the current limitation that you cannot shuffle a PQ with an "Up Next" area.
+     * The play queue window advances as the server receives timeline requests. The client needs to retrieve the play queue as the “now playing” item changes. There is no play queue API to update the playing item.
+     */
+    public PlayQueue playQueue() {
+        return playQueue;
+    }
+
+    /**
+     * Service provided to compute UltraBlur colors and images.
+     */
+    public UltraBlur ultraBlur() {
+        return ultraBlur;
+    }
+
+    /**
+     * The status endpoints give you information about current playbacks, play history, and even terminating sessions.
+     */
+    public Status status() {
+        return status;
     }
 
     /**
@@ -271,9 +441,18 @@ public class PlexAPI {
         return updater;
     }
 
+    /**
+     * The actual content of the media provider
+     */
+    public Content content() {
+        return content;
+    }
 
-    public Users users() {
-        return users;
+    /**
+     * Endpoints for manipulating collections.  In addition to these endpoints, `/library/collections/:collectionId/X` will be rerouted to `/library/metadata/:collectionId/X` and respond to those endpoints as well.
+     */
+    public LibraryCollections libraryCollections() {
+        return libraryCollections;
     }
 
     private final SDKConfiguration sdkConfiguration;
@@ -305,12 +484,12 @@ public class PlexAPI {
         /**
          * Configures the SDK security to use the provided secret.
          *
-         * @param accessToken The secret to use for all requests.
+         * @param token The secret to use for all requests.
          * @return The builder instance.
          */
-        public Builder accessToken(String accessToken) {
+        public Builder token(String token) {
             this.sdkConfiguration.setSecuritySource(SecuritySource.of(dev.plexapi.sdk.models.shared.Security.builder()
-              .accessToken(accessToken)
+              .token(token)
               .build()));
             return this;
         }
@@ -390,63 +569,34 @@ public class PlexAPI {
         }
 
         /**
-         * ServerProtocol
-         * 
-         * <p>The protocol to use for the server connection
-         */
-        public enum ServerProtocol {
-            HTTP("http"),
-            HTTPS("https");
-
-            @JsonValue    
-            private final String value;
-
-            private ServerProtocol(String value) {
-                this.value = value;
-            }
-
-            public String value() {
-                return value;
-            }
-
-            public static Optional<ServerProtocol> fromValue(String value) {
-                for (ServerProtocol o: ServerProtocol.values()) {
-                    if (Objects.deepEquals(o.value, value)) {
-                        return Optional.of(o);
-                    }
-                }
-                return Optional.empty();
-            }
-        }
-        /**
-         * Sets the protocol variable for url substitution.
+         * Sets the identifier variable for url substitution.
          *
-         * @param protocol The value to set.
+         * @param identifier The value to set.
          * @return The builder instance.
          */
-        public Builder protocol(ServerProtocol protocol) {
+        public Builder identifier(String identifier) {
             for (Map<String, String> server : this.sdkConfiguration.serverVariables()) {
-                if (!server.containsKey("protocol")) {
+                if (!server.containsKey("identifier")) {
                     continue;
                 }
-                server.put("protocol", protocol.toString());
+                server.put("identifier", identifier.toString());
             }
 
             return this;
         }
         
         /**
-         * Sets the ip variable for url substitution.
+         * Sets the IP-description variable for url substitution.
          *
-         * @param ip The value to set.
+         * @param ipDescription The value to set.
          * @return The builder instance.
          */
-        public Builder ip(String ip) {
+        public Builder ipDescription(String ipDescription) {
             for (Map<String, String> server : this.sdkConfiguration.serverVariables()) {
-                if (!server.containsKey("ip")) {
+                if (!server.containsKey("IP-description")) {
                     continue;
                 }
-                server.put("ip", ip.toString());
+                server.put("IP-description", ipDescription.toString());
             }
 
             return this;
@@ -466,6 +616,178 @@ public class PlexAPI {
                 server.put("port", port.toString());
             }
 
+            return this;
+        }
+        
+        /**
+         * Sets the protocol variable for url substitution.
+         *
+         * @param protocol The value to set.
+         * @return The builder instance.
+         */
+        public Builder protocol(String protocol) {
+            for (Map<String, String> server : this.sdkConfiguration.serverVariables()) {
+                if (!server.containsKey("protocol")) {
+                    continue;
+                }
+                server.put("protocol", protocol.toString());
+            }
+
+            return this;
+        }
+        
+        /**
+         * Sets the host variable for url substitution.
+         *
+         * @param host The value to set.
+         * @return The builder instance.
+         */
+        public Builder host(String host) {
+            for (Map<String, String> server : this.sdkConfiguration.serverVariables()) {
+                if (!server.containsKey("host")) {
+                    continue;
+                }
+                server.put("host", host.toString());
+            }
+
+            return this;
+        }
+        
+        /**
+         * Sets the server_url variable for url substitution.
+         *
+         * @param serverUrl The value to set.
+         * @return The builder instance.
+         */
+        public Builder serverUrl(String serverUrl) {
+            for (Map<String, String> server : this.sdkConfiguration.serverVariables()) {
+                if (!server.containsKey("server_url")) {
+                    continue;
+                }
+                server.put("server_url", serverUrl.toString());
+            }
+
+            return this;
+        }
+        
+        /**
+         * Allows setting the accepts parameter for all supported operations.
+         *
+         * @param accepts The value to set.
+         * @return The builder instance.
+         */
+        public Builder accepts(Accepts accepts) {
+            this.sdkConfiguration.globals.putParam("header", "accepts", accepts);
+            return this;
+        }
+        
+        /**
+         * Allows setting the clientIdentifier parameter for all supported operations.
+         *
+         * @param clientIdentifier The value to set.
+         * @return The builder instance.
+         */
+        public Builder clientIdentifier(String clientIdentifier) {
+            this.sdkConfiguration.globals.putParam("header", "clientIdentifier", clientIdentifier);
+            return this;
+        }
+        
+        /**
+         * Allows setting the product parameter for all supported operations.
+         *
+         * @param product The value to set.
+         * @return The builder instance.
+         */
+        public Builder product(String product) {
+            this.sdkConfiguration.globals.putParam("header", "product", product);
+            return this;
+        }
+        
+        /**
+         * Allows setting the version parameter for all supported operations.
+         *
+         * @param version The value to set.
+         * @return The builder instance.
+         */
+        public Builder version(String version) {
+            this.sdkConfiguration.globals.putParam("header", "version", version);
+            return this;
+        }
+        
+        /**
+         * Allows setting the platform parameter for all supported operations.
+         *
+         * @param platform The value to set.
+         * @return The builder instance.
+         */
+        public Builder platform(String platform) {
+            this.sdkConfiguration.globals.putParam("header", "platform", platform);
+            return this;
+        }
+        
+        /**
+         * Allows setting the platformVersion parameter for all supported operations.
+         *
+         * @param platformVersion The value to set.
+         * @return The builder instance.
+         */
+        public Builder platformVersion(String platformVersion) {
+            this.sdkConfiguration.globals.putParam("header", "platformVersion", platformVersion);
+            return this;
+        }
+        
+        /**
+         * Allows setting the device parameter for all supported operations.
+         *
+         * @param device The value to set.
+         * @return The builder instance.
+         */
+        public Builder device(String device) {
+            this.sdkConfiguration.globals.putParam("header", "device", device);
+            return this;
+        }
+        
+        /**
+         * Allows setting the model parameter for all supported operations.
+         *
+         * @param model The value to set.
+         * @return The builder instance.
+         */
+        public Builder model(String model) {
+            this.sdkConfiguration.globals.putParam("header", "model", model);
+            return this;
+        }
+        
+        /**
+         * Allows setting the deviceVendor parameter for all supported operations.
+         *
+         * @param deviceVendor The value to set.
+         * @return The builder instance.
+         */
+        public Builder deviceVendor(String deviceVendor) {
+            this.sdkConfiguration.globals.putParam("header", "deviceVendor", deviceVendor);
+            return this;
+        }
+        
+        /**
+         * Allows setting the deviceName parameter for all supported operations.
+         *
+         * @param deviceName The value to set.
+         * @return The builder instance.
+         */
+        public Builder deviceName(String deviceName) {
+            this.sdkConfiguration.globals.putParam("header", "deviceName", deviceName);
+            return this;
+        }
+        
+        /**
+         * Allows setting the marketplace parameter for all supported operations.
+         *
+         * @param marketplace The value to set.
+         * @return The builder instance.
+         */
+        public Builder marketplace(String marketplace) {
+            this.sdkConfiguration.globals.putParam("header", "marketplace", marketplace);
             return this;
         }
         
@@ -508,23 +830,34 @@ public class PlexAPI {
     private PlexAPI(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
         this.sdkConfiguration.initialize();
-        this.server = new Server(sdkConfiguration);
-        this.media = new Media(sdkConfiguration);
-        this.video = new Video(sdkConfiguration);
+        this.general = new General(sdkConfiguration);
+        this.events = new Events(sdkConfiguration);
+        this.preferences = new Preferences(sdkConfiguration);
+        this.rate = new Rate(sdkConfiguration);
+        this.timeline = new Timeline(sdkConfiguration);
         this.activities = new Activities(sdkConfiguration);
         this.butler = new Butler(sdkConfiguration);
-        this.plex = new Plex(sdkConfiguration);
+        this.downloadQueue = new DownloadQueue(sdkConfiguration);
         this.hubs = new Hubs(sdkConfiguration);
         this.search = new Search(sdkConfiguration);
         this.library = new Library(sdkConfiguration);
-        this.watchlist = new Watchlist(sdkConfiguration);
+        this.collections = new Collections(sdkConfiguration);
+        this.dvRs = new DVRs(sdkConfiguration);
+        this.epg = new Epg(sdkConfiguration);
+        this.liveTV = new LiveTV(sdkConfiguration);
         this.log = new Log(sdkConfiguration);
-        this.playlists = new Playlists(sdkConfiguration);
-        this.authentication = new Authentication(sdkConfiguration);
-        this.statistics = new Statistics(sdkConfiguration);
-        this.sessions = new Sessions(sdkConfiguration);
+        this.devices = new Devices(sdkConfiguration);
+        this.provider = new Provider(sdkConfiguration);
+        this.subscriptions = new Subscriptions(sdkConfiguration);
+        this.transcoder = new Transcoder(sdkConfiguration);
+        this.playlist = new Playlist(sdkConfiguration);
+        this.libraryPlaylists = new LibraryPlaylists(sdkConfiguration);
+        this.playQueue = new PlayQueue(sdkConfiguration);
+        this.ultraBlur = new UltraBlur(sdkConfiguration);
+        this.status = new Status(sdkConfiguration);
         this.updater = new Updater(sdkConfiguration);
-        this.users = new Users(sdkConfiguration);
+        this.content = new Content(sdkConfiguration);
+        this.libraryCollections = new LibraryCollections(sdkConfiguration);
         SdkInitData data = this.sdkConfiguration.hooks().sdkInit(
                 new SdkInitData(
                         this.sdkConfiguration.resolvedServerUrl(), 

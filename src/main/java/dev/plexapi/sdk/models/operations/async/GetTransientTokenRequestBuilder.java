@@ -6,9 +6,7 @@ package dev.plexapi.sdk.models.operations.async;
 import static dev.plexapi.sdk.operations.Operations.AsyncRequestOperation;
 
 import dev.plexapi.sdk.SDKConfiguration;
-import dev.plexapi.sdk.models.operations.GetTransientTokenQueryParamType;
 import dev.plexapi.sdk.models.operations.GetTransientTokenRequest;
-import dev.plexapi.sdk.models.operations.Scope;
 import dev.plexapi.sdk.operations.GetTransientToken;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
@@ -16,40 +14,23 @@ import java.util.concurrent.CompletableFuture;
 
 public class GetTransientTokenRequestBuilder {
 
-    private GetTransientTokenQueryParamType type;
-    private Scope scope;
+    private GetTransientTokenRequest request;
     private final SDKConfiguration sdkConfiguration;
 
     public GetTransientTokenRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-    public GetTransientTokenRequestBuilder type(GetTransientTokenQueryParamType type) {
-        Utils.checkNotNull(type, "type");
-        this.type = type;
+    public GetTransientTokenRequestBuilder request(GetTransientTokenRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
-    }
-
-    public GetTransientTokenRequestBuilder scope(Scope scope) {
-        Utils.checkNotNull(scope, "scope");
-        this.scope = scope;
-        return this;
-    }
-
-
-    private GetTransientTokenRequest buildRequest() {
-
-        GetTransientTokenRequest request = new GetTransientTokenRequest(type,
-            scope);
-
-        return request;
     }
 
     public CompletableFuture<GetTransientTokenResponse> call() throws Exception {
         
         AsyncRequestOperation<GetTransientTokenRequest, GetTransientTokenResponse> operation
               = new GetTransientToken.Async(sdkConfiguration);
-        GetTransientTokenRequest request = buildRequest();
 
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);

@@ -8,9 +8,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import dev.plexapi.sdk.models.shared.Metadata;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Integer;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -19,10 +20,15 @@ import java.util.Optional;
 
 
 public class GetLibraryDetailsMediaContainer {
-
+    /**
+     * The flavors of directory found here:
+     *   - Primary: (e.g. all, On Deck) These are still used in some clients to provide "shortcuts" to subsets of media. However, with the exception of On Deck, all of them can be created by media queries, and the desire is to allow these to be customized by users.
+     *   - Secondary: These are marked with `"secondary": true` and were used by old clients to provide nested menus allowing for primative (but structured) navigation.
+     *   - Special: There is a By Folder entry which allows browsing the media by the underlying filesystem structure, and there's a completely obsolete entry marked `"search": true` which used to be used to allow clients to build search dialogs on the fly.
+     */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("size")
-    private Optional<Integer> size;
+    @JsonProperty("content")
+    private Optional<String> content;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -36,8 +42,8 @@ public class GetLibraryDetailsMediaContainer {
 
 
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("content")
-    private Optional<String> content;
+    @JsonProperty("Directory")
+    private Optional<? extends List<Metadata>> directory;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -47,7 +53,7 @@ public class GetLibraryDetailsMediaContainer {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("librarySectionID")
-    private Optional<Integer> librarySectionID;
+    private Optional<Long> librarySectionID;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -57,7 +63,17 @@ public class GetLibraryDetailsMediaContainer {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("mediaTagVersion")
-    private Optional<Integer> mediaTagVersion;
+    private Optional<Long> mediaTagVersion;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("size")
+    private Optional<Long> size;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("sortAsc")
+    private Optional<Boolean> sortAsc;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -77,70 +93,52 @@ public class GetLibraryDetailsMediaContainer {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("viewMode")
-    private Optional<Integer> viewMode;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("Directory")
-    private Optional<? extends List<GetLibraryDetailsDirectory>> directory;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("Type")
-    private Optional<? extends List<GetLibraryDetailsType>> type;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("FieldType")
-    private Optional<? extends List<GetLibraryDetailsFieldType>> fieldType;
+    private Optional<Long> viewMode;
 
     @JsonCreator
     public GetLibraryDetailsMediaContainer(
-            @JsonProperty("size") Optional<Integer> size,
+            @JsonProperty("content") Optional<String> content,
             @JsonProperty("allowSync") Optional<Boolean> allowSync,
             @JsonProperty("art") Optional<String> art,
-            @JsonProperty("content") Optional<String> content,
+            @JsonProperty("Directory") Optional<? extends List<Metadata>> directory,
             @JsonProperty("identifier") Optional<String> identifier,
-            @JsonProperty("librarySectionID") Optional<Integer> librarySectionID,
+            @JsonProperty("librarySectionID") Optional<Long> librarySectionID,
             @JsonProperty("mediaTagPrefix") Optional<String> mediaTagPrefix,
-            @JsonProperty("mediaTagVersion") Optional<Integer> mediaTagVersion,
+            @JsonProperty("mediaTagVersion") Optional<Long> mediaTagVersion,
+            @JsonProperty("size") Optional<Long> size,
+            @JsonProperty("sortAsc") Optional<Boolean> sortAsc,
             @JsonProperty("thumb") Optional<String> thumb,
             @JsonProperty("title1") Optional<String> title1,
             @JsonProperty("viewGroup") Optional<String> viewGroup,
-            @JsonProperty("viewMode") Optional<Integer> viewMode,
-            @JsonProperty("Directory") Optional<? extends List<GetLibraryDetailsDirectory>> directory,
-            @JsonProperty("Type") Optional<? extends List<GetLibraryDetailsType>> type,
-            @JsonProperty("FieldType") Optional<? extends List<GetLibraryDetailsFieldType>> fieldType) {
-        Utils.checkNotNull(size, "size");
+            @JsonProperty("viewMode") Optional<Long> viewMode) {
+        Utils.checkNotNull(content, "content");
         Utils.checkNotNull(allowSync, "allowSync");
         Utils.checkNotNull(art, "art");
-        Utils.checkNotNull(content, "content");
+        Utils.checkNotNull(directory, "directory");
         Utils.checkNotNull(identifier, "identifier");
         Utils.checkNotNull(librarySectionID, "librarySectionID");
         Utils.checkNotNull(mediaTagPrefix, "mediaTagPrefix");
         Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
+        Utils.checkNotNull(size, "size");
+        Utils.checkNotNull(sortAsc, "sortAsc");
         Utils.checkNotNull(thumb, "thumb");
         Utils.checkNotNull(title1, "title1");
         Utils.checkNotNull(viewGroup, "viewGroup");
         Utils.checkNotNull(viewMode, "viewMode");
-        Utils.checkNotNull(directory, "directory");
-        Utils.checkNotNull(type, "type");
-        Utils.checkNotNull(fieldType, "fieldType");
-        this.size = size;
+        this.content = content;
         this.allowSync = allowSync;
         this.art = art;
-        this.content = content;
+        this.directory = directory;
         this.identifier = identifier;
         this.librarySectionID = librarySectionID;
         this.mediaTagPrefix = mediaTagPrefix;
         this.mediaTagVersion = mediaTagVersion;
+        this.size = size;
+        this.sortAsc = sortAsc;
         this.thumb = thumb;
         this.title1 = title1;
         this.viewGroup = viewGroup;
         this.viewMode = viewMode;
-        this.directory = directory;
-        this.type = type;
-        this.fieldType = fieldType;
     }
     
     public GetLibraryDetailsMediaContainer() {
@@ -148,12 +146,18 @@ public class GetLibraryDetailsMediaContainer {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
+    /**
+     * The flavors of directory found here:
+     *   - Primary: (e.g. all, On Deck) These are still used in some clients to provide "shortcuts" to subsets of media. However, with the exception of On Deck, all of them can be created by media queries, and the desire is to allow these to be customized by users.
+     *   - Secondary: These are marked with `"secondary": true` and were used by old clients to provide nested menus allowing for primative (but structured) navigation.
+     *   - Special: There is a By Folder entry which allows browsing the media by the underlying filesystem structure, and there's a completely obsolete entry marked `"search": true` which used to be used to allow clients to build search dialogs on the fly.
+     */
     @JsonIgnore
-    public Optional<Integer> size() {
-        return size;
+    public Optional<String> content() {
+        return content;
     }
 
     @JsonIgnore
@@ -166,9 +170,10 @@ public class GetLibraryDetailsMediaContainer {
         return art;
     }
 
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> content() {
-        return content;
+    public Optional<List<Metadata>> directory() {
+        return (Optional<List<Metadata>>) directory;
     }
 
     @JsonIgnore
@@ -177,7 +182,7 @@ public class GetLibraryDetailsMediaContainer {
     }
 
     @JsonIgnore
-    public Optional<Integer> librarySectionID() {
+    public Optional<Long> librarySectionID() {
         return librarySectionID;
     }
 
@@ -187,8 +192,18 @@ public class GetLibraryDetailsMediaContainer {
     }
 
     @JsonIgnore
-    public Optional<Integer> mediaTagVersion() {
+    public Optional<Long> mediaTagVersion() {
         return mediaTagVersion;
+    }
+
+    @JsonIgnore
+    public Optional<Long> size() {
+        return size;
+    }
+
+    @JsonIgnore
+    public Optional<Boolean> sortAsc() {
+        return sortAsc;
     }
 
     @JsonIgnore
@@ -207,26 +222,8 @@ public class GetLibraryDetailsMediaContainer {
     }
 
     @JsonIgnore
-    public Optional<Integer> viewMode() {
+    public Optional<Long> viewMode() {
         return viewMode;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<GetLibraryDetailsDirectory>> directory() {
-        return (Optional<List<GetLibraryDetailsDirectory>>) directory;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<GetLibraryDetailsType>> type() {
-        return (Optional<List<GetLibraryDetailsType>>) type;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<GetLibraryDetailsFieldType>> fieldType() {
-        return (Optional<List<GetLibraryDetailsFieldType>>) fieldType;
     }
 
     public static Builder builder() {
@@ -234,16 +231,28 @@ public class GetLibraryDetailsMediaContainer {
     }
 
 
-    public GetLibraryDetailsMediaContainer withSize(int size) {
-        Utils.checkNotNull(size, "size");
-        this.size = Optional.ofNullable(size);
+    /**
+     * The flavors of directory found here:
+     *   - Primary: (e.g. all, On Deck) These are still used in some clients to provide "shortcuts" to subsets of media. However, with the exception of On Deck, all of them can be created by media queries, and the desire is to allow these to be customized by users.
+     *   - Secondary: These are marked with `"secondary": true` and were used by old clients to provide nested menus allowing for primative (but structured) navigation.
+     *   - Special: There is a By Folder entry which allows browsing the media by the underlying filesystem structure, and there's a completely obsolete entry marked `"search": true` which used to be used to allow clients to build search dialogs on the fly.
+     */
+    public GetLibraryDetailsMediaContainer withContent(String content) {
+        Utils.checkNotNull(content, "content");
+        this.content = Optional.ofNullable(content);
         return this;
     }
 
 
-    public GetLibraryDetailsMediaContainer withSize(Optional<Integer> size) {
-        Utils.checkNotNull(size, "size");
-        this.size = size;
+    /**
+     * The flavors of directory found here:
+     *   - Primary: (e.g. all, On Deck) These are still used in some clients to provide "shortcuts" to subsets of media. However, with the exception of On Deck, all of them can be created by media queries, and the desire is to allow these to be customized by users.
+     *   - Secondary: These are marked with `"secondary": true` and were used by old clients to provide nested menus allowing for primative (but structured) navigation.
+     *   - Special: There is a By Folder entry which allows browsing the media by the underlying filesystem structure, and there's a completely obsolete entry marked `"search": true` which used to be used to allow clients to build search dialogs on the fly.
+     */
+    public GetLibraryDetailsMediaContainer withContent(Optional<String> content) {
+        Utils.checkNotNull(content, "content");
+        this.content = content;
         return this;
     }
 
@@ -273,16 +282,16 @@ public class GetLibraryDetailsMediaContainer {
         return this;
     }
 
-    public GetLibraryDetailsMediaContainer withContent(String content) {
-        Utils.checkNotNull(content, "content");
-        this.content = Optional.ofNullable(content);
+    public GetLibraryDetailsMediaContainer withDirectory(List<Metadata> directory) {
+        Utils.checkNotNull(directory, "directory");
+        this.directory = Optional.ofNullable(directory);
         return this;
     }
 
 
-    public GetLibraryDetailsMediaContainer withContent(Optional<String> content) {
-        Utils.checkNotNull(content, "content");
-        this.content = content;
+    public GetLibraryDetailsMediaContainer withDirectory(Optional<? extends List<Metadata>> directory) {
+        Utils.checkNotNull(directory, "directory");
+        this.directory = directory;
         return this;
     }
 
@@ -299,14 +308,14 @@ public class GetLibraryDetailsMediaContainer {
         return this;
     }
 
-    public GetLibraryDetailsMediaContainer withLibrarySectionID(int librarySectionID) {
+    public GetLibraryDetailsMediaContainer withLibrarySectionID(long librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
         this.librarySectionID = Optional.ofNullable(librarySectionID);
         return this;
     }
 
 
-    public GetLibraryDetailsMediaContainer withLibrarySectionID(Optional<Integer> librarySectionID) {
+    public GetLibraryDetailsMediaContainer withLibrarySectionID(Optional<Long> librarySectionID) {
         Utils.checkNotNull(librarySectionID, "librarySectionID");
         this.librarySectionID = librarySectionID;
         return this;
@@ -325,16 +334,42 @@ public class GetLibraryDetailsMediaContainer {
         return this;
     }
 
-    public GetLibraryDetailsMediaContainer withMediaTagVersion(int mediaTagVersion) {
+    public GetLibraryDetailsMediaContainer withMediaTagVersion(long mediaTagVersion) {
         Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
         this.mediaTagVersion = Optional.ofNullable(mediaTagVersion);
         return this;
     }
 
 
-    public GetLibraryDetailsMediaContainer withMediaTagVersion(Optional<Integer> mediaTagVersion) {
+    public GetLibraryDetailsMediaContainer withMediaTagVersion(Optional<Long> mediaTagVersion) {
         Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
         this.mediaTagVersion = mediaTagVersion;
+        return this;
+    }
+
+    public GetLibraryDetailsMediaContainer withSize(long size) {
+        Utils.checkNotNull(size, "size");
+        this.size = Optional.ofNullable(size);
+        return this;
+    }
+
+
+    public GetLibraryDetailsMediaContainer withSize(Optional<Long> size) {
+        Utils.checkNotNull(size, "size");
+        this.size = size;
+        return this;
+    }
+
+    public GetLibraryDetailsMediaContainer withSortAsc(boolean sortAsc) {
+        Utils.checkNotNull(sortAsc, "sortAsc");
+        this.sortAsc = Optional.ofNullable(sortAsc);
+        return this;
+    }
+
+
+    public GetLibraryDetailsMediaContainer withSortAsc(Optional<Boolean> sortAsc) {
+        Utils.checkNotNull(sortAsc, "sortAsc");
+        this.sortAsc = sortAsc;
         return this;
     }
 
@@ -377,55 +412,16 @@ public class GetLibraryDetailsMediaContainer {
         return this;
     }
 
-    public GetLibraryDetailsMediaContainer withViewMode(int viewMode) {
+    public GetLibraryDetailsMediaContainer withViewMode(long viewMode) {
         Utils.checkNotNull(viewMode, "viewMode");
         this.viewMode = Optional.ofNullable(viewMode);
         return this;
     }
 
 
-    public GetLibraryDetailsMediaContainer withViewMode(Optional<Integer> viewMode) {
+    public GetLibraryDetailsMediaContainer withViewMode(Optional<Long> viewMode) {
         Utils.checkNotNull(viewMode, "viewMode");
         this.viewMode = viewMode;
-        return this;
-    }
-
-    public GetLibraryDetailsMediaContainer withDirectory(List<GetLibraryDetailsDirectory> directory) {
-        Utils.checkNotNull(directory, "directory");
-        this.directory = Optional.ofNullable(directory);
-        return this;
-    }
-
-
-    public GetLibraryDetailsMediaContainer withDirectory(Optional<? extends List<GetLibraryDetailsDirectory>> directory) {
-        Utils.checkNotNull(directory, "directory");
-        this.directory = directory;
-        return this;
-    }
-
-    public GetLibraryDetailsMediaContainer withType(List<GetLibraryDetailsType> type) {
-        Utils.checkNotNull(type, "type");
-        this.type = Optional.ofNullable(type);
-        return this;
-    }
-
-
-    public GetLibraryDetailsMediaContainer withType(Optional<? extends List<GetLibraryDetailsType>> type) {
-        Utils.checkNotNull(type, "type");
-        this.type = type;
-        return this;
-    }
-
-    public GetLibraryDetailsMediaContainer withFieldType(List<GetLibraryDetailsFieldType> fieldType) {
-        Utils.checkNotNull(fieldType, "fieldType");
-        this.fieldType = Optional.ofNullable(fieldType);
-        return this;
-    }
-
-
-    public GetLibraryDetailsMediaContainer withFieldType(Optional<? extends List<GetLibraryDetailsFieldType>> fieldType) {
-        Utils.checkNotNull(fieldType, "fieldType");
-        this.fieldType = fieldType;
         return this;
     }
 
@@ -439,71 +435,73 @@ public class GetLibraryDetailsMediaContainer {
         }
         GetLibraryDetailsMediaContainer other = (GetLibraryDetailsMediaContainer) o;
         return 
-            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.content, other.content) &&
             Utils.enhancedDeepEquals(this.allowSync, other.allowSync) &&
             Utils.enhancedDeepEquals(this.art, other.art) &&
-            Utils.enhancedDeepEquals(this.content, other.content) &&
+            Utils.enhancedDeepEquals(this.directory, other.directory) &&
             Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
             Utils.enhancedDeepEquals(this.librarySectionID, other.librarySectionID) &&
             Utils.enhancedDeepEquals(this.mediaTagPrefix, other.mediaTagPrefix) &&
             Utils.enhancedDeepEquals(this.mediaTagVersion, other.mediaTagVersion) &&
+            Utils.enhancedDeepEquals(this.size, other.size) &&
+            Utils.enhancedDeepEquals(this.sortAsc, other.sortAsc) &&
             Utils.enhancedDeepEquals(this.thumb, other.thumb) &&
             Utils.enhancedDeepEquals(this.title1, other.title1) &&
             Utils.enhancedDeepEquals(this.viewGroup, other.viewGroup) &&
-            Utils.enhancedDeepEquals(this.viewMode, other.viewMode) &&
-            Utils.enhancedDeepEquals(this.directory, other.directory) &&
-            Utils.enhancedDeepEquals(this.type, other.type) &&
-            Utils.enhancedDeepEquals(this.fieldType, other.fieldType);
+            Utils.enhancedDeepEquals(this.viewMode, other.viewMode);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            size, allowSync, art,
-            content, identifier, librarySectionID,
-            mediaTagPrefix, mediaTagVersion, thumb,
-            title1, viewGroup, viewMode,
-            directory, type, fieldType);
+            content, allowSync, art,
+            directory, identifier, librarySectionID,
+            mediaTagPrefix, mediaTagVersion, size,
+            sortAsc, thumb, title1,
+            viewGroup, viewMode);
     }
     
     @Override
     public String toString() {
         return Utils.toString(GetLibraryDetailsMediaContainer.class,
-                "size", size,
+                "content", content,
                 "allowSync", allowSync,
                 "art", art,
-                "content", content,
+                "directory", directory,
                 "identifier", identifier,
                 "librarySectionID", librarySectionID,
                 "mediaTagPrefix", mediaTagPrefix,
                 "mediaTagVersion", mediaTagVersion,
+                "size", size,
+                "sortAsc", sortAsc,
                 "thumb", thumb,
                 "title1", title1,
                 "viewGroup", viewGroup,
-                "viewMode", viewMode,
-                "directory", directory,
-                "type", type,
-                "fieldType", fieldType);
+                "viewMode", viewMode);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<Integer> size = Optional.empty();
+        private Optional<String> content = Optional.empty();
 
         private Optional<Boolean> allowSync = Optional.empty();
 
         private Optional<String> art = Optional.empty();
 
-        private Optional<String> content = Optional.empty();
+        private Optional<? extends List<Metadata>> directory = Optional.empty();
 
         private Optional<String> identifier = Optional.empty();
 
-        private Optional<Integer> librarySectionID = Optional.empty();
+        private Optional<Long> librarySectionID = Optional.empty();
 
         private Optional<String> mediaTagPrefix = Optional.empty();
 
-        private Optional<Integer> mediaTagVersion = Optional.empty();
+        private Optional<Long> mediaTagVersion = Optional.empty();
+
+        private Optional<Long> size = Optional.empty();
+
+        private Optional<Boolean> sortAsc = Optional.empty();
 
         private Optional<String> thumb = Optional.empty();
 
@@ -511,28 +509,34 @@ public class GetLibraryDetailsMediaContainer {
 
         private Optional<String> viewGroup = Optional.empty();
 
-        private Optional<Integer> viewMode = Optional.empty();
-
-        private Optional<? extends List<GetLibraryDetailsDirectory>> directory = Optional.empty();
-
-        private Optional<? extends List<GetLibraryDetailsType>> type = Optional.empty();
-
-        private Optional<? extends List<GetLibraryDetailsFieldType>> fieldType = Optional.empty();
+        private Optional<Long> viewMode = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        public Builder size(int size) {
-            Utils.checkNotNull(size, "size");
-            this.size = Optional.ofNullable(size);
+        /**
+         * The flavors of directory found here:
+         *   - Primary: (e.g. all, On Deck) These are still used in some clients to provide "shortcuts" to subsets of media. However, with the exception of On Deck, all of them can be created by media queries, and the desire is to allow these to be customized by users.
+         *   - Secondary: These are marked with `"secondary": true` and were used by old clients to provide nested menus allowing for primative (but structured) navigation.
+         *   - Special: There is a By Folder entry which allows browsing the media by the underlying filesystem structure, and there's a completely obsolete entry marked `"search": true` which used to be used to allow clients to build search dialogs on the fly.
+         */
+        public Builder content(String content) {
+            Utils.checkNotNull(content, "content");
+            this.content = Optional.ofNullable(content);
             return this;
         }
 
-        public Builder size(Optional<Integer> size) {
-            Utils.checkNotNull(size, "size");
-            this.size = size;
+        /**
+         * The flavors of directory found here:
+         *   - Primary: (e.g. all, On Deck) These are still used in some clients to provide "shortcuts" to subsets of media. However, with the exception of On Deck, all of them can be created by media queries, and the desire is to allow these to be customized by users.
+         *   - Secondary: These are marked with `"secondary": true` and were used by old clients to provide nested menus allowing for primative (but structured) navigation.
+         *   - Special: There is a By Folder entry which allows browsing the media by the underlying filesystem structure, and there's a completely obsolete entry marked `"search": true` which used to be used to allow clients to build search dialogs on the fly.
+         */
+        public Builder content(Optional<String> content) {
+            Utils.checkNotNull(content, "content");
+            this.content = content;
             return this;
         }
 
@@ -563,15 +567,15 @@ public class GetLibraryDetailsMediaContainer {
         }
 
 
-        public Builder content(String content) {
-            Utils.checkNotNull(content, "content");
-            this.content = Optional.ofNullable(content);
+        public Builder directory(List<Metadata> directory) {
+            Utils.checkNotNull(directory, "directory");
+            this.directory = Optional.ofNullable(directory);
             return this;
         }
 
-        public Builder content(Optional<String> content) {
-            Utils.checkNotNull(content, "content");
-            this.content = content;
+        public Builder directory(Optional<? extends List<Metadata>> directory) {
+            Utils.checkNotNull(directory, "directory");
+            this.directory = directory;
             return this;
         }
 
@@ -589,13 +593,13 @@ public class GetLibraryDetailsMediaContainer {
         }
 
 
-        public Builder librarySectionID(int librarySectionID) {
+        public Builder librarySectionID(long librarySectionID) {
             Utils.checkNotNull(librarySectionID, "librarySectionID");
             this.librarySectionID = Optional.ofNullable(librarySectionID);
             return this;
         }
 
-        public Builder librarySectionID(Optional<Integer> librarySectionID) {
+        public Builder librarySectionID(Optional<Long> librarySectionID) {
             Utils.checkNotNull(librarySectionID, "librarySectionID");
             this.librarySectionID = librarySectionID;
             return this;
@@ -615,15 +619,41 @@ public class GetLibraryDetailsMediaContainer {
         }
 
 
-        public Builder mediaTagVersion(int mediaTagVersion) {
+        public Builder mediaTagVersion(long mediaTagVersion) {
             Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
             this.mediaTagVersion = Optional.ofNullable(mediaTagVersion);
             return this;
         }
 
-        public Builder mediaTagVersion(Optional<Integer> mediaTagVersion) {
+        public Builder mediaTagVersion(Optional<Long> mediaTagVersion) {
             Utils.checkNotNull(mediaTagVersion, "mediaTagVersion");
             this.mediaTagVersion = mediaTagVersion;
+            return this;
+        }
+
+
+        public Builder size(long size) {
+            Utils.checkNotNull(size, "size");
+            this.size = Optional.ofNullable(size);
+            return this;
+        }
+
+        public Builder size(Optional<Long> size) {
+            Utils.checkNotNull(size, "size");
+            this.size = size;
+            return this;
+        }
+
+
+        public Builder sortAsc(boolean sortAsc) {
+            Utils.checkNotNull(sortAsc, "sortAsc");
+            this.sortAsc = Optional.ofNullable(sortAsc);
+            return this;
+        }
+
+        public Builder sortAsc(Optional<Boolean> sortAsc) {
+            Utils.checkNotNull(sortAsc, "sortAsc");
+            this.sortAsc = sortAsc;
             return this;
         }
 
@@ -667,65 +697,26 @@ public class GetLibraryDetailsMediaContainer {
         }
 
 
-        public Builder viewMode(int viewMode) {
+        public Builder viewMode(long viewMode) {
             Utils.checkNotNull(viewMode, "viewMode");
             this.viewMode = Optional.ofNullable(viewMode);
             return this;
         }
 
-        public Builder viewMode(Optional<Integer> viewMode) {
+        public Builder viewMode(Optional<Long> viewMode) {
             Utils.checkNotNull(viewMode, "viewMode");
             this.viewMode = viewMode;
-            return this;
-        }
-
-
-        public Builder directory(List<GetLibraryDetailsDirectory> directory) {
-            Utils.checkNotNull(directory, "directory");
-            this.directory = Optional.ofNullable(directory);
-            return this;
-        }
-
-        public Builder directory(Optional<? extends List<GetLibraryDetailsDirectory>> directory) {
-            Utils.checkNotNull(directory, "directory");
-            this.directory = directory;
-            return this;
-        }
-
-
-        public Builder type(List<GetLibraryDetailsType> type) {
-            Utils.checkNotNull(type, "type");
-            this.type = Optional.ofNullable(type);
-            return this;
-        }
-
-        public Builder type(Optional<? extends List<GetLibraryDetailsType>> type) {
-            Utils.checkNotNull(type, "type");
-            this.type = type;
-            return this;
-        }
-
-
-        public Builder fieldType(List<GetLibraryDetailsFieldType> fieldType) {
-            Utils.checkNotNull(fieldType, "fieldType");
-            this.fieldType = Optional.ofNullable(fieldType);
-            return this;
-        }
-
-        public Builder fieldType(Optional<? extends List<GetLibraryDetailsFieldType>> fieldType) {
-            Utils.checkNotNull(fieldType, "fieldType");
-            this.fieldType = fieldType;
             return this;
         }
 
         public GetLibraryDetailsMediaContainer build() {
 
             return new GetLibraryDetailsMediaContainer(
-                size, allowSync, art,
-                content, identifier, librarySectionID,
-                mediaTagPrefix, mediaTagVersion, thumb,
-                title1, viewGroup, viewMode,
-                directory, type, fieldType);
+                content, allowSync, art,
+                directory, identifier, librarySectionID,
+                mediaTagPrefix, mediaTagVersion, size,
+                sortAsc, thumb, title1,
+                viewGroup, viewMode);
         }
 
     }

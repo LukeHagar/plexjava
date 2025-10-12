@@ -11,7 +11,7 @@ import java.util.Optional;
 /**
  * Scope
  * 
- * <p>`all` - This is the only supported `scope` parameter.
+ * <p>The value `all` is the only supported `scope` parameter.
  */
 public enum Scope {
     ALL("all");

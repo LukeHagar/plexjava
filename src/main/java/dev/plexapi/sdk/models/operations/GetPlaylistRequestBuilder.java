@@ -8,37 +8,27 @@ import static dev.plexapi.sdk.operations.Operations.RequestOperation;
 import dev.plexapi.sdk.SDKConfiguration;
 import dev.plexapi.sdk.operations.GetPlaylist;
 import dev.plexapi.sdk.utils.Utils;
-import java.lang.Double;
 import java.lang.Exception;
 
 public class GetPlaylistRequestBuilder {
 
-    private Double playlistID;
+    private GetPlaylistRequest request;
     private final SDKConfiguration sdkConfiguration;
 
     public GetPlaylistRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-    public GetPlaylistRequestBuilder playlistID(double playlistID) {
-        Utils.checkNotNull(playlistID, "playlistID");
-        this.playlistID = playlistID;
+    public GetPlaylistRequestBuilder request(GetPlaylistRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
-    }
-
-
-    private GetPlaylistRequest buildRequest() {
-
-        GetPlaylistRequest request = new GetPlaylistRequest(playlistID);
-
-        return request;
     }
 
     public GetPlaylistResponse call() throws Exception {
         
         RequestOperation<GetPlaylistRequest, GetPlaylistResponse> operation
               = new GetPlaylist.Sync(sdkConfiguration);
-        GetPlaylistRequest request = buildRequest();
 
         return operation.handleResponse(operation.doRequest(request));
     }

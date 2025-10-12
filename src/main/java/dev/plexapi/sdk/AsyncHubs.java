@@ -5,26 +5,66 @@ package dev.plexapi.sdk;
 
 import static dev.plexapi.sdk.operations.Operations.AsyncRequestOperation;
 
-import dev.plexapi.sdk.models.operations.GetGlobalHubsRequest;
-import dev.plexapi.sdk.models.operations.GetLibraryHubsRequest;
-import dev.plexapi.sdk.models.operations.GetRecentlyAddedRequest;
-import dev.plexapi.sdk.models.operations.OnlyTransient;
-import dev.plexapi.sdk.models.operations.QueryParamOnlyTransient;
-import dev.plexapi.sdk.models.operations.async.GetGlobalHubsRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.GetGlobalHubsResponse;
-import dev.plexapi.sdk.models.operations.async.GetLibraryHubsRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.GetLibraryHubsResponse;
-import dev.plexapi.sdk.models.operations.async.GetRecentlyAddedRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.GetRecentlyAddedResponse;
-import dev.plexapi.sdk.operations.GetGlobalHubs;
-import dev.plexapi.sdk.operations.GetLibraryHubs;
-import dev.plexapi.sdk.operations.GetRecentlyAdded;
-import java.lang.Double;
-import java.util.Optional;
+import dev.plexapi.sdk.models.operations.CreateCustomHubRequest;
+import dev.plexapi.sdk.models.operations.DeleteCustomHubRequest;
+import dev.plexapi.sdk.models.operations.GetAllHubsRequest;
+import dev.plexapi.sdk.models.operations.GetContinueWatchingRequest;
+import dev.plexapi.sdk.models.operations.GetHubItemsRequest;
+import dev.plexapi.sdk.models.operations.GetMetadataHubsRequest;
+import dev.plexapi.sdk.models.operations.GetPostplayHubsRequest;
+import dev.plexapi.sdk.models.operations.GetPromotedHubsRequest;
+import dev.plexapi.sdk.models.operations.GetRelatedHubsRequest;
+import dev.plexapi.sdk.models.operations.GetSectionHubsRequest;
+import dev.plexapi.sdk.models.operations.ListHubsRequest;
+import dev.plexapi.sdk.models.operations.MoveHubRequest;
+import dev.plexapi.sdk.models.operations.ResetSectionDefaultsRequest;
+import dev.plexapi.sdk.models.operations.UpdateHubVisibilityRequest;
+import dev.plexapi.sdk.models.operations.async.CreateCustomHubRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.CreateCustomHubResponse;
+import dev.plexapi.sdk.models.operations.async.DeleteCustomHubRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.DeleteCustomHubResponse;
+import dev.plexapi.sdk.models.operations.async.GetAllHubsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetAllHubsResponse;
+import dev.plexapi.sdk.models.operations.async.GetContinueWatchingRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetContinueWatchingResponse;
+import dev.plexapi.sdk.models.operations.async.GetHubItemsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetHubItemsResponse;
+import dev.plexapi.sdk.models.operations.async.GetMetadataHubsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetMetadataHubsResponse;
+import dev.plexapi.sdk.models.operations.async.GetPostplayHubsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetPostplayHubsResponse;
+import dev.plexapi.sdk.models.operations.async.GetPromotedHubsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetPromotedHubsResponse;
+import dev.plexapi.sdk.models.operations.async.GetRelatedHubsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetRelatedHubsResponse;
+import dev.plexapi.sdk.models.operations.async.GetSectionHubsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetSectionHubsResponse;
+import dev.plexapi.sdk.models.operations.async.ListHubsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.ListHubsResponse;
+import dev.plexapi.sdk.models.operations.async.MoveHubRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.MoveHubResponse;
+import dev.plexapi.sdk.models.operations.async.ResetSectionDefaultsRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.ResetSectionDefaultsResponse;
+import dev.plexapi.sdk.models.operations.async.UpdateHubVisibilityRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.UpdateHubVisibilityResponse;
+import dev.plexapi.sdk.operations.CreateCustomHub;
+import dev.plexapi.sdk.operations.DeleteCustomHub;
+import dev.plexapi.sdk.operations.GetAllHubs;
+import dev.plexapi.sdk.operations.GetContinueWatching;
+import dev.plexapi.sdk.operations.GetHubItems;
+import dev.plexapi.sdk.operations.GetMetadataHubs;
+import dev.plexapi.sdk.operations.GetPostplayHubs;
+import dev.plexapi.sdk.operations.GetPromotedHubs;
+import dev.plexapi.sdk.operations.GetRelatedHubs;
+import dev.plexapi.sdk.operations.GetSectionHubs;
+import dev.plexapi.sdk.operations.ListHubs;
+import dev.plexapi.sdk.operations.MoveHub;
+import dev.plexapi.sdk.operations.ResetSectionDefaults;
+import dev.plexapi.sdk.operations.UpdateHubVisibility;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * Hubs are a structured two-dimensional container for media, generally represented by multiple horizontal rows.
+ * The hubs within a media provider
  */
 public class AsyncHubs {
     private final SDKConfiguration sdkConfiguration;
@@ -46,122 +86,378 @@ public class AsyncHubs {
 
 
     /**
-     * Get Global Hubs
+     * Get global hubs
      * 
-     * <p>Get Global Hubs filtered by the parameters provided.
-     * 
-     * @return The async call builder
-     */
-    public GetGlobalHubsRequestBuilder getGlobalHubs() {
-        return new GetGlobalHubsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get Global Hubs
-     * 
-     * <p>Get Global Hubs filtered by the parameters provided.
-     * 
-     * @return CompletableFuture&lt;GetGlobalHubsResponse&gt; - The async response
-     */
-    public CompletableFuture<GetGlobalHubsResponse> getGlobalHubsDirect() {
-        return getGlobalHubs(Optional.empty(), Optional.empty());
-    }
-
-    /**
-     * Get Global Hubs
-     * 
-     * <p>Get Global Hubs filtered by the parameters provided.
-     * 
-     * @param count The number of items to return with each hub.
-     * @param onlyTransient Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added).
-     * @return CompletableFuture&lt;GetGlobalHubsResponse&gt; - The async response
-     */
-    public CompletableFuture<GetGlobalHubsResponse> getGlobalHubs(Optional<Double> count, Optional<? extends OnlyTransient> onlyTransient) {
-        GetGlobalHubsRequest request =
-            GetGlobalHubsRequest
-                .builder()
-                .count(count)
-                .onlyTransient(onlyTransient)
-                .build();
-        AsyncRequestOperation<GetGlobalHubsRequest, GetGlobalHubsResponse> operation
-              = new GetGlobalHubs.Async(sdkConfiguration);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Get Recently Added
-     * 
-     * <p>This endpoint will return the recently added content.
+     * <p>Get the global hubs in this PMS
      * 
      * @return The async call builder
      */
-    public GetRecentlyAddedRequestBuilder getRecentlyAdded() {
-        return new GetRecentlyAddedRequestBuilder(sdkConfiguration);
+    public GetAllHubsRequestBuilder getAllHubs() {
+        return new GetAllHubsRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get Recently Added
+     * Get global hubs
      * 
-     * <p>This endpoint will return the recently added content.
+     * <p>Get the global hubs in this PMS
      * 
      * @param request The request object containing all the parameters for the API call.
-     * @return CompletableFuture&lt;GetRecentlyAddedResponse&gt; - The async response
+     * @return CompletableFuture&lt;GetAllHubsResponse&gt; - The async response
      */
-    public CompletableFuture<GetRecentlyAddedResponse> getRecentlyAdded(GetRecentlyAddedRequest request) {
-        AsyncRequestOperation<GetRecentlyAddedRequest, GetRecentlyAddedResponse> operation
-              = new GetRecentlyAdded.Async(sdkConfiguration);
+    public CompletableFuture<GetAllHubsResponse> getAllHubs(GetAllHubsRequest request) {
+        AsyncRequestOperation<GetAllHubsRequest, GetAllHubsResponse> operation
+              = new GetAllHubs.Async(sdkConfiguration);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
 
 
     /**
-     * Get library specific hubs
+     * Get the continue watching hub
      * 
-     * <p>This endpoint will return a list of library specific hubs
+     * <p>Get the global continue watching hub
      * 
      * @return The async call builder
      */
-    public GetLibraryHubsRequestBuilder getLibraryHubs() {
-        return new GetLibraryHubsRequestBuilder(sdkConfiguration);
+    public GetContinueWatchingRequestBuilder getContinueWatching() {
+        return new GetContinueWatchingRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get library specific hubs
+     * Get the continue watching hub
      * 
-     * <p>This endpoint will return a list of library specific hubs
+     * <p>Get the global continue watching hub
      * 
-     * @param sectionId the Id of the library to query
-     * @return CompletableFuture&lt;GetLibraryHubsResponse&gt; - The async response
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetContinueWatchingResponse&gt; - The async response
      */
-    public CompletableFuture<GetLibraryHubsResponse> getLibraryHubs(double sectionId) {
-        return getLibraryHubs(sectionId, Optional.empty(), Optional.empty());
+    public CompletableFuture<GetContinueWatchingResponse> getContinueWatching(GetContinueWatchingRequest request) {
+        AsyncRequestOperation<GetContinueWatchingRequest, GetContinueWatchingResponse> operation
+              = new GetContinueWatching.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get a hub's items
+     * 
+     * <p>Get the items within a single hub specified by identifier
+     * 
+     * @return The async call builder
+     */
+    public GetHubItemsRequestBuilder getHubItems() {
+        return new GetHubItemsRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get library specific hubs
+     * Get a hub's items
      * 
-     * <p>This endpoint will return a list of library specific hubs
+     * <p>Get the items within a single hub specified by identifier
      * 
-     * @param sectionId the Id of the library to query
-     * @param count The number of items to return with each hub.
-     * @param onlyTransient Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added).
-     * @return CompletableFuture&lt;GetLibraryHubsResponse&gt; - The async response
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetHubItemsResponse&gt; - The async response
      */
-    public CompletableFuture<GetLibraryHubsResponse> getLibraryHubs(
-            double sectionId, Optional<Double> count,
-            Optional<? extends QueryParamOnlyTransient> onlyTransient) {
-        GetLibraryHubsRequest request =
-            GetLibraryHubsRequest
-                .builder()
-                .sectionId(sectionId)
-                .count(count)
-                .onlyTransient(onlyTransient)
-                .build();
-        AsyncRequestOperation<GetLibraryHubsRequest, GetLibraryHubsResponse> operation
-              = new GetLibraryHubs.Async(sdkConfiguration);
+    public CompletableFuture<GetHubItemsResponse> getHubItems(GetHubItemsRequest request) {
+        AsyncRequestOperation<GetHubItemsRequest, GetHubItemsResponse> operation
+              = new GetHubItems.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get the hubs which are promoted
+     * 
+     * <p>Get the global hubs which are promoted (should be displayed on the home screen)
+     * 
+     * @return The async call builder
+     */
+    public GetPromotedHubsRequestBuilder getPromotedHubs() {
+        return new GetPromotedHubsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get the hubs which are promoted
+     * 
+     * <p>Get the global hubs which are promoted (should be displayed on the home screen)
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetPromotedHubsResponse&gt; - The async response
+     */
+    public CompletableFuture<GetPromotedHubsResponse> getPromotedHubs(GetPromotedHubsRequest request) {
+        AsyncRequestOperation<GetPromotedHubsRequest, GetPromotedHubsResponse> operation
+              = new GetPromotedHubs.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get hubs for section by metadata item
+     * 
+     * <p>Get the hubs for a section by metadata item.  Currently only for music sections
+     * 
+     * @return The async call builder
+     */
+    public GetMetadataHubsRequestBuilder getMetadataHubs() {
+        return new GetMetadataHubsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get hubs for section by metadata item
+     * 
+     * <p>Get the hubs for a section by metadata item.  Currently only for music sections
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetMetadataHubsResponse&gt; - The async response
+     */
+    public CompletableFuture<GetMetadataHubsResponse> getMetadataHubs(GetMetadataHubsRequest request) {
+        AsyncRequestOperation<GetMetadataHubsRequest, GetMetadataHubsResponse> operation
+              = new GetMetadataHubs.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get postplay hubs
+     * 
+     * <p>Get the hubs for a metadata to be displayed in post play
+     * 
+     * @return The async call builder
+     */
+    public GetPostplayHubsRequestBuilder getPostplayHubs() {
+        return new GetPostplayHubsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get postplay hubs
+     * 
+     * <p>Get the hubs for a metadata to be displayed in post play
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetPostplayHubsResponse&gt; - The async response
+     */
+    public CompletableFuture<GetPostplayHubsResponse> getPostplayHubs(GetPostplayHubsRequest request) {
+        AsyncRequestOperation<GetPostplayHubsRequest, GetPostplayHubsResponse> operation
+              = new GetPostplayHubs.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get related hubs
+     * 
+     * <p>Get the hubs for a metadata related to the provided metadata item
+     * 
+     * @return The async call builder
+     */
+    public GetRelatedHubsRequestBuilder getRelatedHubs() {
+        return new GetRelatedHubsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get related hubs
+     * 
+     * <p>Get the hubs for a metadata related to the provided metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetRelatedHubsResponse&gt; - The async response
+     */
+    public CompletableFuture<GetRelatedHubsResponse> getRelatedHubs(GetRelatedHubsRequest request) {
+        AsyncRequestOperation<GetRelatedHubsRequest, GetRelatedHubsResponse> operation
+              = new GetRelatedHubs.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get section hubs
+     * 
+     * <p>Get the hubs for a single section
+     * 
+     * @return The async call builder
+     */
+    public GetSectionHubsRequestBuilder getSectionHubs() {
+        return new GetSectionHubsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get section hubs
+     * 
+     * <p>Get the hubs for a single section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;GetSectionHubsResponse&gt; - The async response
+     */
+    public CompletableFuture<GetSectionHubsResponse> getSectionHubs(GetSectionHubsRequest request) {
+        AsyncRequestOperation<GetSectionHubsRequest, GetSectionHubsResponse> operation
+              = new GetSectionHubs.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Reset hubs to defaults
+     * 
+     * <p>Reset hubs for this section to defaults and delete custom hubs
+     * 
+     * @return The async call builder
+     */
+    public ResetSectionDefaultsRequestBuilder resetSectionDefaults() {
+        return new ResetSectionDefaultsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Reset hubs to defaults
+     * 
+     * <p>Reset hubs for this section to defaults and delete custom hubs
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;ResetSectionDefaultsResponse&gt; - The async response
+     */
+    public CompletableFuture<ResetSectionDefaultsResponse> resetSectionDefaults(ResetSectionDefaultsRequest request) {
+        AsyncRequestOperation<ResetSectionDefaultsRequest, ResetSectionDefaultsResponse> operation
+              = new ResetSectionDefaults.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Get hubs
+     * 
+     * <p>Get the list of hubs including both built-in and custom
+     * 
+     * @return The async call builder
+     */
+    public ListHubsRequestBuilder listHubs() {
+        return new ListHubsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get hubs
+     * 
+     * <p>Get the list of hubs including both built-in and custom
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;ListHubsResponse&gt; - The async response
+     */
+    public CompletableFuture<ListHubsResponse> listHubs(ListHubsRequest request) {
+        AsyncRequestOperation<ListHubsRequest, ListHubsResponse> operation
+              = new ListHubs.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Create a custom hub
+     * 
+     * <p>Create a custom hub based on a metadata item
+     * 
+     * @return The async call builder
+     */
+    public CreateCustomHubRequestBuilder createCustomHub() {
+        return new CreateCustomHubRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Create a custom hub
+     * 
+     * <p>Create a custom hub based on a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;CreateCustomHubResponse&gt; - The async response
+     */
+    public CompletableFuture<CreateCustomHubResponse> createCustomHub(CreateCustomHubRequest request) {
+        AsyncRequestOperation<CreateCustomHubRequest, CreateCustomHubResponse> operation
+              = new CreateCustomHub.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Move Hub
+     * 
+     * <p>Changed the ordering of a hub among others hubs
+     * 
+     * @return The async call builder
+     */
+    public MoveHubRequestBuilder moveHub() {
+        return new MoveHubRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Move Hub
+     * 
+     * <p>Changed the ordering of a hub among others hubs
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;MoveHubResponse&gt; - The async response
+     */
+    public CompletableFuture<MoveHubResponse> moveHub(MoveHubRequest request) {
+        AsyncRequestOperation<MoveHubRequest, MoveHubResponse> operation
+              = new MoveHub.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Delete a custom hub
+     * 
+     * <p>Delete a custom hub from the server
+     * 
+     * @return The async call builder
+     */
+    public DeleteCustomHubRequestBuilder deleteCustomHub() {
+        return new DeleteCustomHubRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Delete a custom hub
+     * 
+     * <p>Delete a custom hub from the server
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;DeleteCustomHubResponse&gt; - The async response
+     */
+    public CompletableFuture<DeleteCustomHubResponse> deleteCustomHub(DeleteCustomHubRequest request) {
+        AsyncRequestOperation<DeleteCustomHubRequest, DeleteCustomHubResponse> operation
+              = new DeleteCustomHub.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Change hub visibility
+     * 
+     * <p>Changed the visibility of a hub for both the admin and shared users
+     * 
+     * @return The async call builder
+     */
+    public UpdateHubVisibilityRequestBuilder updateHubVisibility() {
+        return new UpdateHubVisibilityRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Change hub visibility
+     * 
+     * <p>Changed the visibility of a hub for both the admin and shared users
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;UpdateHubVisibilityResponse&gt; - The async response
+     */
+    public CompletableFuture<UpdateHubVisibilityResponse> updateHubVisibility(UpdateHubVisibilityRequest request) {
+        AsyncRequestOperation<UpdateHubVisibilityRequest, UpdateHubVisibilityResponse> operation
+              = new UpdateHubVisibility.Async(sdkConfiguration);
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }

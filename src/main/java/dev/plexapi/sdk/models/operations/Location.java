@@ -3,92 +3,39 @@
  */
 package dev.plexapi.sdk.models.operations;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import dev.plexapi.sdk.utils.Utils;
-import java.lang.Override;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.String;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Location
  * 
- * <p>The folder path for the media item.
+ * <p>Network type of the client, can be used to help determine target bitrate.
  */
-public class Location {
+public enum Location {
+    LAN("lan"),
+    WAN("wan"),
+    CELLULAR("cellular");
 
-    @JsonProperty("path")
-    private String path;
+    @JsonValue
+    private final String value;
 
-    @JsonCreator
-    public Location(
-            @JsonProperty("path") String path) {
-        Utils.checkNotNull(path, "path");
-        this.path = path;
-    }
-
-    @JsonIgnore
-    public String path() {
-        return path;
-    }
-
-    public static Builder builder() {
-        return new Builder();
-    }
-
-
-    public Location withPath(String path) {
-        Utils.checkNotNull(path, "path");
-        this.path = path;
-        return this;
-    }
-
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Location other = (Location) o;
-        return 
-            Utils.enhancedDeepEquals(this.path, other.path);
+    Location(String value) {
+        this.value = value;
     }
     
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            path);
+    public String value() {
+        return value;
     }
     
-    @Override
-    public String toString() {
-        return Utils.toString(Location.class,
-                "path", path);
-    }
-
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
-
-        private String path;
-
-        private Builder() {
-          // force use of static builder() method
+    public static Optional<Location> fromValue(String value) {
+        for (Location o: Location.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
         }
-
-
-        public Builder path(String path) {
-            Utils.checkNotNull(path, "path");
-            this.path = path;
-            return this;
-        }
-
-        public Location build() {
-
-            return new Location(
-                path);
-        }
-
+        return Optional.empty();
     }
 }
+

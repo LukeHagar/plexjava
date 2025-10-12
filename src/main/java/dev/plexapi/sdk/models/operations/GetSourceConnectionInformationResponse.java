@@ -11,7 +11,9 @@ import java.io.InputStream;
 import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.net.http.HttpResponse;
+import java.util.Optional;
 
 
 public class GetSourceConnectionInformationResponse implements Response {
@@ -30,17 +32,33 @@ public class GetSourceConnectionInformationResponse implements Response {
      */
     private HttpResponse<InputStream> rawResponse;
 
+    /**
+     * OK
+     */
+    private Optional<? extends GetSourceConnectionInformationResponseBody> object;
+
     @JsonCreator
     public GetSourceConnectionInformationResponse(
             String contentType,
             int statusCode,
-            HttpResponse<InputStream> rawResponse) {
+            HttpResponse<InputStream> rawResponse,
+            Optional<? extends GetSourceConnectionInformationResponseBody> object) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
+        Utils.checkNotNull(object, "object");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
+        this.object = object;
+    }
+    
+    public GetSourceConnectionInformationResponse(
+            String contentType,
+            int statusCode,
+            HttpResponse<InputStream> rawResponse) {
+        this(contentType, statusCode, rawResponse,
+            Optional.empty());
     }
 
     /**
@@ -65,6 +83,15 @@ public class GetSourceConnectionInformationResponse implements Response {
     @JsonIgnore
     public HttpResponse<InputStream> rawResponse() {
         return rawResponse;
+    }
+
+    /**
+     * OK
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<GetSourceConnectionInformationResponseBody> object() {
+        return (Optional<GetSourceConnectionInformationResponseBody>) object;
     }
 
     public static Builder builder() {
@@ -99,6 +126,25 @@ public class GetSourceConnectionInformationResponse implements Response {
         return this;
     }
 
+    /**
+     * OK
+     */
+    public GetSourceConnectionInformationResponse withObject(GetSourceConnectionInformationResponseBody object) {
+        Utils.checkNotNull(object, "object");
+        this.object = Optional.ofNullable(object);
+        return this;
+    }
+
+
+    /**
+     * OK
+     */
+    public GetSourceConnectionInformationResponse withObject(Optional<? extends GetSourceConnectionInformationResponseBody> object) {
+        Utils.checkNotNull(object, "object");
+        this.object = object;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -111,13 +157,15 @@ public class GetSourceConnectionInformationResponse implements Response {
         return 
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
-            Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse);
+            Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
+            Utils.enhancedDeepEquals(this.object, other.object);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            contentType, statusCode, rawResponse);
+            contentType, statusCode, rawResponse,
+            object);
     }
     
     @Override
@@ -125,7 +173,8 @@ public class GetSourceConnectionInformationResponse implements Response {
         return Utils.toString(GetSourceConnectionInformationResponse.class,
                 "contentType", contentType,
                 "statusCode", statusCode,
-                "rawResponse", rawResponse);
+                "rawResponse", rawResponse,
+                "object", object);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -136,6 +185,8 @@ public class GetSourceConnectionInformationResponse implements Response {
         private Integer statusCode;
 
         private HttpResponse<InputStream> rawResponse;
+
+        private Optional<? extends GetSourceConnectionInformationResponseBody> object = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -171,10 +222,30 @@ public class GetSourceConnectionInformationResponse implements Response {
             return this;
         }
 
+
+        /**
+         * OK
+         */
+        public Builder object(GetSourceConnectionInformationResponseBody object) {
+            Utils.checkNotNull(object, "object");
+            this.object = Optional.ofNullable(object);
+            return this;
+        }
+
+        /**
+         * OK
+         */
+        public Builder object(Optional<? extends GetSourceConnectionInformationResponseBody> object) {
+            Utils.checkNotNull(object, "object");
+            this.object = object;
+            return this;
+        }
+
         public GetSourceConnectionInformationResponse build() {
 
             return new GetSourceConnectionInformationResponse(
-                contentType, statusCode, rawResponse);
+                contentType, statusCode, rawResponse,
+                object);
         }
 
     }

@@ -10,168 +10,165 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
-import java.util.List;
 import java.util.Optional;
 
 
 public class Hub {
-
+    /**
+     * Whether this hub is visible on the home screen
+     *   - all: Visible to all users
+     *   - none: Visible to no users
+     *   - admin: Visible to only admin users
+     *   - shared: Visible to shared users
+     */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("hubKey")
-    private Optional<String> hubKey;
+    @JsonProperty("homeVisibility")
+    private Optional<? extends HomeVisibility> homeVisibility;
 
-
+    /**
+     * The identifier for this hub
+     */
     @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("key")
-    private Optional<String> key;
+    @JsonProperty("identifier")
+    private Optional<String> identifier;
 
+    /**
+     * Whether this hub is visible to admin user home
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("promotedToOwnHome")
+    private Optional<Boolean> promotedToOwnHome;
 
+    /**
+     * Whether this hub is promoted to all for recommendations
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("promotedToRecommended")
+    private Optional<Boolean> promotedToRecommended;
+
+    /**
+     * Whether this hub is visible to shared user's home
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("promotedToSharedHome")
+    private Optional<Boolean> promotedToSharedHome;
+
+    /**
+     * The visibility of this hub in recommendations:
+     *   - all: Visible to all users
+     *   - none: Visible to no users
+     *   - admin: Visible to only admin users
+     *   - shared: Visible to shared users
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("recommendationsVisibility")
+    private Optional<? extends RecommendationsVisibility> recommendationsVisibility;
+
+    /**
+     * The title of this hub
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
 
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("type")
-    private Optional<String> type;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("hubIdentifier")
-    private Optional<String> hubIdentifier;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("context")
-    private Optional<String> context;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("size")
-    private Optional<Integer> size;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("more")
-    private Optional<Boolean> more;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("style")
-    private Optional<String> style;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("promoted")
-    private Optional<Boolean> promoted;
-
-
-    @JsonInclude(Include.NON_ABSENT)
-    @JsonProperty("Metadata")
-    private Optional<? extends List<GetGlobalHubsMetadata>> metadata;
-
     @JsonCreator
     public Hub(
-            @JsonProperty("hubKey") Optional<String> hubKey,
-            @JsonProperty("key") Optional<String> key,
-            @JsonProperty("title") Optional<String> title,
-            @JsonProperty("type") Optional<String> type,
-            @JsonProperty("hubIdentifier") Optional<String> hubIdentifier,
-            @JsonProperty("context") Optional<String> context,
-            @JsonProperty("size") Optional<Integer> size,
-            @JsonProperty("more") Optional<Boolean> more,
-            @JsonProperty("style") Optional<String> style,
-            @JsonProperty("promoted") Optional<Boolean> promoted,
-            @JsonProperty("Metadata") Optional<? extends List<GetGlobalHubsMetadata>> metadata) {
-        Utils.checkNotNull(hubKey, "hubKey");
-        Utils.checkNotNull(key, "key");
+            @JsonProperty("homeVisibility") Optional<? extends HomeVisibility> homeVisibility,
+            @JsonProperty("identifier") Optional<String> identifier,
+            @JsonProperty("promotedToOwnHome") Optional<Boolean> promotedToOwnHome,
+            @JsonProperty("promotedToRecommended") Optional<Boolean> promotedToRecommended,
+            @JsonProperty("promotedToSharedHome") Optional<Boolean> promotedToSharedHome,
+            @JsonProperty("recommendationsVisibility") Optional<? extends RecommendationsVisibility> recommendationsVisibility,
+            @JsonProperty("title") Optional<String> title) {
+        Utils.checkNotNull(homeVisibility, "homeVisibility");
+        Utils.checkNotNull(identifier, "identifier");
+        Utils.checkNotNull(promotedToOwnHome, "promotedToOwnHome");
+        Utils.checkNotNull(promotedToRecommended, "promotedToRecommended");
+        Utils.checkNotNull(promotedToSharedHome, "promotedToSharedHome");
+        Utils.checkNotNull(recommendationsVisibility, "recommendationsVisibility");
         Utils.checkNotNull(title, "title");
-        Utils.checkNotNull(type, "type");
-        Utils.checkNotNull(hubIdentifier, "hubIdentifier");
-        Utils.checkNotNull(context, "context");
-        Utils.checkNotNull(size, "size");
-        Utils.checkNotNull(more, "more");
-        Utils.checkNotNull(style, "style");
-        Utils.checkNotNull(promoted, "promoted");
-        Utils.checkNotNull(metadata, "metadata");
-        this.hubKey = hubKey;
-        this.key = key;
+        this.homeVisibility = homeVisibility;
+        this.identifier = identifier;
+        this.promotedToOwnHome = promotedToOwnHome;
+        this.promotedToRecommended = promotedToRecommended;
+        this.promotedToSharedHome = promotedToSharedHome;
+        this.recommendationsVisibility = recommendationsVisibility;
         this.title = title;
-        this.type = type;
-        this.hubIdentifier = hubIdentifier;
-        this.context = context;
-        this.size = size;
-        this.more = more;
-        this.style = style;
-        this.promoted = promoted;
-        this.metadata = metadata;
     }
     
     public Hub() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty());
     }
 
+    /**
+     * Whether this hub is visible on the home screen
+     *   - all: Visible to all users
+     *   - none: Visible to no users
+     *   - admin: Visible to only admin users
+     *   - shared: Visible to shared users
+     */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<String> hubKey() {
-        return hubKey;
+    public Optional<HomeVisibility> homeVisibility() {
+        return (Optional<HomeVisibility>) homeVisibility;
     }
 
+    /**
+     * The identifier for this hub
+     */
     @JsonIgnore
-    public Optional<String> key() {
-        return key;
+    public Optional<String> identifier() {
+        return identifier;
     }
 
+    /**
+     * Whether this hub is visible to admin user home
+     */
+    @JsonIgnore
+    public Optional<Boolean> promotedToOwnHome() {
+        return promotedToOwnHome;
+    }
+
+    /**
+     * Whether this hub is promoted to all for recommendations
+     */
+    @JsonIgnore
+    public Optional<Boolean> promotedToRecommended() {
+        return promotedToRecommended;
+    }
+
+    /**
+     * Whether this hub is visible to shared user's home
+     */
+    @JsonIgnore
+    public Optional<Boolean> promotedToSharedHome() {
+        return promotedToSharedHome;
+    }
+
+    /**
+     * The visibility of this hub in recommendations:
+     *   - all: Visible to all users
+     *   - none: Visible to no users
+     *   - admin: Visible to only admin users
+     *   - shared: Visible to shared users
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<RecommendationsVisibility> recommendationsVisibility() {
+        return (Optional<RecommendationsVisibility>) recommendationsVisibility;
+    }
+
+    /**
+     * The title of this hub
+     */
     @JsonIgnore
     public Optional<String> title() {
         return title;
-    }
-
-    @JsonIgnore
-    public Optional<String> type() {
-        return type;
-    }
-
-    @JsonIgnore
-    public Optional<String> hubIdentifier() {
-        return hubIdentifier;
-    }
-
-    @JsonIgnore
-    public Optional<String> context() {
-        return context;
-    }
-
-    @JsonIgnore
-    public Optional<Integer> size() {
-        return size;
-    }
-
-    @JsonIgnore
-    public Optional<Boolean> more() {
-        return more;
-    }
-
-    @JsonIgnore
-    public Optional<String> style() {
-        return style;
-    }
-
-    @JsonIgnore
-    public Optional<Boolean> promoted() {
-        return promoted;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<List<GetGlobalHubsMetadata>> metadata() {
-        return (Optional<List<GetGlobalHubsMetadata>>) metadata;
     }
 
     public static Builder builder() {
@@ -179,32 +176,139 @@ public class Hub {
     }
 
 
-    public Hub withHubKey(String hubKey) {
-        Utils.checkNotNull(hubKey, "hubKey");
-        this.hubKey = Optional.ofNullable(hubKey);
+    /**
+     * Whether this hub is visible on the home screen
+     *   - all: Visible to all users
+     *   - none: Visible to no users
+     *   - admin: Visible to only admin users
+     *   - shared: Visible to shared users
+     */
+    public Hub withHomeVisibility(HomeVisibility homeVisibility) {
+        Utils.checkNotNull(homeVisibility, "homeVisibility");
+        this.homeVisibility = Optional.ofNullable(homeVisibility);
         return this;
     }
 
 
-    public Hub withHubKey(Optional<String> hubKey) {
-        Utils.checkNotNull(hubKey, "hubKey");
-        this.hubKey = hubKey;
+    /**
+     * Whether this hub is visible on the home screen
+     *   - all: Visible to all users
+     *   - none: Visible to no users
+     *   - admin: Visible to only admin users
+     *   - shared: Visible to shared users
+     */
+    public Hub withHomeVisibility(Optional<? extends HomeVisibility> homeVisibility) {
+        Utils.checkNotNull(homeVisibility, "homeVisibility");
+        this.homeVisibility = homeVisibility;
         return this;
     }
 
-    public Hub withKey(String key) {
-        Utils.checkNotNull(key, "key");
-        this.key = Optional.ofNullable(key);
+    /**
+     * The identifier for this hub
+     */
+    public Hub withIdentifier(String identifier) {
+        Utils.checkNotNull(identifier, "identifier");
+        this.identifier = Optional.ofNullable(identifier);
         return this;
     }
 
 
-    public Hub withKey(Optional<String> key) {
-        Utils.checkNotNull(key, "key");
-        this.key = key;
+    /**
+     * The identifier for this hub
+     */
+    public Hub withIdentifier(Optional<String> identifier) {
+        Utils.checkNotNull(identifier, "identifier");
+        this.identifier = identifier;
         return this;
     }
 
+    /**
+     * Whether this hub is visible to admin user home
+     */
+    public Hub withPromotedToOwnHome(boolean promotedToOwnHome) {
+        Utils.checkNotNull(promotedToOwnHome, "promotedToOwnHome");
+        this.promotedToOwnHome = Optional.ofNullable(promotedToOwnHome);
+        return this;
+    }
+
+
+    /**
+     * Whether this hub is visible to admin user home
+     */
+    public Hub withPromotedToOwnHome(Optional<Boolean> promotedToOwnHome) {
+        Utils.checkNotNull(promotedToOwnHome, "promotedToOwnHome");
+        this.promotedToOwnHome = promotedToOwnHome;
+        return this;
+    }
+
+    /**
+     * Whether this hub is promoted to all for recommendations
+     */
+    public Hub withPromotedToRecommended(boolean promotedToRecommended) {
+        Utils.checkNotNull(promotedToRecommended, "promotedToRecommended");
+        this.promotedToRecommended = Optional.ofNullable(promotedToRecommended);
+        return this;
+    }
+
+
+    /**
+     * Whether this hub is promoted to all for recommendations
+     */
+    public Hub withPromotedToRecommended(Optional<Boolean> promotedToRecommended) {
+        Utils.checkNotNull(promotedToRecommended, "promotedToRecommended");
+        this.promotedToRecommended = promotedToRecommended;
+        return this;
+    }
+
+    /**
+     * Whether this hub is visible to shared user's home
+     */
+    public Hub withPromotedToSharedHome(boolean promotedToSharedHome) {
+        Utils.checkNotNull(promotedToSharedHome, "promotedToSharedHome");
+        this.promotedToSharedHome = Optional.ofNullable(promotedToSharedHome);
+        return this;
+    }
+
+
+    /**
+     * Whether this hub is visible to shared user's home
+     */
+    public Hub withPromotedToSharedHome(Optional<Boolean> promotedToSharedHome) {
+        Utils.checkNotNull(promotedToSharedHome, "promotedToSharedHome");
+        this.promotedToSharedHome = promotedToSharedHome;
+        return this;
+    }
+
+    /**
+     * The visibility of this hub in recommendations:
+     *   - all: Visible to all users
+     *   - none: Visible to no users
+     *   - admin: Visible to only admin users
+     *   - shared: Visible to shared users
+     */
+    public Hub withRecommendationsVisibility(RecommendationsVisibility recommendationsVisibility) {
+        Utils.checkNotNull(recommendationsVisibility, "recommendationsVisibility");
+        this.recommendationsVisibility = Optional.ofNullable(recommendationsVisibility);
+        return this;
+    }
+
+
+    /**
+     * The visibility of this hub in recommendations:
+     *   - all: Visible to all users
+     *   - none: Visible to no users
+     *   - admin: Visible to only admin users
+     *   - shared: Visible to shared users
+     */
+    public Hub withRecommendationsVisibility(Optional<? extends RecommendationsVisibility> recommendationsVisibility) {
+        Utils.checkNotNull(recommendationsVisibility, "recommendationsVisibility");
+        this.recommendationsVisibility = recommendationsVisibility;
+        return this;
+    }
+
+    /**
+     * The title of this hub
+     */
     public Hub withTitle(String title) {
         Utils.checkNotNull(title, "title");
         this.title = Optional.ofNullable(title);
@@ -212,113 +316,12 @@ public class Hub {
     }
 
 
+    /**
+     * The title of this hub
+     */
     public Hub withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
-        return this;
-    }
-
-    public Hub withType(String type) {
-        Utils.checkNotNull(type, "type");
-        this.type = Optional.ofNullable(type);
-        return this;
-    }
-
-
-    public Hub withType(Optional<String> type) {
-        Utils.checkNotNull(type, "type");
-        this.type = type;
-        return this;
-    }
-
-    public Hub withHubIdentifier(String hubIdentifier) {
-        Utils.checkNotNull(hubIdentifier, "hubIdentifier");
-        this.hubIdentifier = Optional.ofNullable(hubIdentifier);
-        return this;
-    }
-
-
-    public Hub withHubIdentifier(Optional<String> hubIdentifier) {
-        Utils.checkNotNull(hubIdentifier, "hubIdentifier");
-        this.hubIdentifier = hubIdentifier;
-        return this;
-    }
-
-    public Hub withContext(String context) {
-        Utils.checkNotNull(context, "context");
-        this.context = Optional.ofNullable(context);
-        return this;
-    }
-
-
-    public Hub withContext(Optional<String> context) {
-        Utils.checkNotNull(context, "context");
-        this.context = context;
-        return this;
-    }
-
-    public Hub withSize(int size) {
-        Utils.checkNotNull(size, "size");
-        this.size = Optional.ofNullable(size);
-        return this;
-    }
-
-
-    public Hub withSize(Optional<Integer> size) {
-        Utils.checkNotNull(size, "size");
-        this.size = size;
-        return this;
-    }
-
-    public Hub withMore(boolean more) {
-        Utils.checkNotNull(more, "more");
-        this.more = Optional.ofNullable(more);
-        return this;
-    }
-
-
-    public Hub withMore(Optional<Boolean> more) {
-        Utils.checkNotNull(more, "more");
-        this.more = more;
-        return this;
-    }
-
-    public Hub withStyle(String style) {
-        Utils.checkNotNull(style, "style");
-        this.style = Optional.ofNullable(style);
-        return this;
-    }
-
-
-    public Hub withStyle(Optional<String> style) {
-        Utils.checkNotNull(style, "style");
-        this.style = style;
-        return this;
-    }
-
-    public Hub withPromoted(boolean promoted) {
-        Utils.checkNotNull(promoted, "promoted");
-        this.promoted = Optional.ofNullable(promoted);
-        return this;
-    }
-
-
-    public Hub withPromoted(Optional<Boolean> promoted) {
-        Utils.checkNotNull(promoted, "promoted");
-        this.promoted = promoted;
-        return this;
-    }
-
-    public Hub withMetadata(List<GetGlobalHubsMetadata> metadata) {
-        Utils.checkNotNull(metadata, "metadata");
-        this.metadata = Optional.ofNullable(metadata);
-        return this;
-    }
-
-
-    public Hub withMetadata(Optional<? extends List<GetGlobalHubsMetadata>> metadata) {
-        Utils.checkNotNull(metadata, "metadata");
-        this.metadata = metadata;
         return this;
     }
 
@@ -332,223 +335,211 @@ public class Hub {
         }
         Hub other = (Hub) o;
         return 
-            Utils.enhancedDeepEquals(this.hubKey, other.hubKey) &&
-            Utils.enhancedDeepEquals(this.key, other.key) &&
-            Utils.enhancedDeepEquals(this.title, other.title) &&
-            Utils.enhancedDeepEquals(this.type, other.type) &&
-            Utils.enhancedDeepEquals(this.hubIdentifier, other.hubIdentifier) &&
-            Utils.enhancedDeepEquals(this.context, other.context) &&
-            Utils.enhancedDeepEquals(this.size, other.size) &&
-            Utils.enhancedDeepEquals(this.more, other.more) &&
-            Utils.enhancedDeepEquals(this.style, other.style) &&
-            Utils.enhancedDeepEquals(this.promoted, other.promoted) &&
-            Utils.enhancedDeepEquals(this.metadata, other.metadata);
+            Utils.enhancedDeepEquals(this.homeVisibility, other.homeVisibility) &&
+            Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
+            Utils.enhancedDeepEquals(this.promotedToOwnHome, other.promotedToOwnHome) &&
+            Utils.enhancedDeepEquals(this.promotedToRecommended, other.promotedToRecommended) &&
+            Utils.enhancedDeepEquals(this.promotedToSharedHome, other.promotedToSharedHome) &&
+            Utils.enhancedDeepEquals(this.recommendationsVisibility, other.recommendationsVisibility) &&
+            Utils.enhancedDeepEquals(this.title, other.title);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            hubKey, key, title,
-            type, hubIdentifier, context,
-            size, more, style,
-            promoted, metadata);
+            homeVisibility, identifier, promotedToOwnHome,
+            promotedToRecommended, promotedToSharedHome, recommendationsVisibility,
+            title);
     }
     
     @Override
     public String toString() {
         return Utils.toString(Hub.class,
-                "hubKey", hubKey,
-                "key", key,
-                "title", title,
-                "type", type,
-                "hubIdentifier", hubIdentifier,
-                "context", context,
-                "size", size,
-                "more", more,
-                "style", style,
-                "promoted", promoted,
-                "metadata", metadata);
+                "homeVisibility", homeVisibility,
+                "identifier", identifier,
+                "promotedToOwnHome", promotedToOwnHome,
+                "promotedToRecommended", promotedToRecommended,
+                "promotedToSharedHome", promotedToSharedHome,
+                "recommendationsVisibility", recommendationsVisibility,
+                "title", title);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<String> hubKey = Optional.empty();
+        private Optional<? extends HomeVisibility> homeVisibility = Optional.empty();
 
-        private Optional<String> key = Optional.empty();
+        private Optional<String> identifier = Optional.empty();
+
+        private Optional<Boolean> promotedToOwnHome = Optional.empty();
+
+        private Optional<Boolean> promotedToRecommended = Optional.empty();
+
+        private Optional<Boolean> promotedToSharedHome = Optional.empty();
+
+        private Optional<? extends RecommendationsVisibility> recommendationsVisibility = Optional.empty();
 
         private Optional<String> title = Optional.empty();
-
-        private Optional<String> type = Optional.empty();
-
-        private Optional<String> hubIdentifier = Optional.empty();
-
-        private Optional<String> context = Optional.empty();
-
-        private Optional<Integer> size = Optional.empty();
-
-        private Optional<Boolean> more = Optional.empty();
-
-        private Optional<String> style = Optional.empty();
-
-        private Optional<Boolean> promoted = Optional.empty();
-
-        private Optional<? extends List<GetGlobalHubsMetadata>> metadata = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        public Builder hubKey(String hubKey) {
-            Utils.checkNotNull(hubKey, "hubKey");
-            this.hubKey = Optional.ofNullable(hubKey);
+        /**
+         * Whether this hub is visible on the home screen
+         *   - all: Visible to all users
+         *   - none: Visible to no users
+         *   - admin: Visible to only admin users
+         *   - shared: Visible to shared users
+         */
+        public Builder homeVisibility(HomeVisibility homeVisibility) {
+            Utils.checkNotNull(homeVisibility, "homeVisibility");
+            this.homeVisibility = Optional.ofNullable(homeVisibility);
             return this;
         }
 
-        public Builder hubKey(Optional<String> hubKey) {
-            Utils.checkNotNull(hubKey, "hubKey");
-            this.hubKey = hubKey;
+        /**
+         * Whether this hub is visible on the home screen
+         *   - all: Visible to all users
+         *   - none: Visible to no users
+         *   - admin: Visible to only admin users
+         *   - shared: Visible to shared users
+         */
+        public Builder homeVisibility(Optional<? extends HomeVisibility> homeVisibility) {
+            Utils.checkNotNull(homeVisibility, "homeVisibility");
+            this.homeVisibility = homeVisibility;
             return this;
         }
 
 
-        public Builder key(String key) {
-            Utils.checkNotNull(key, "key");
-            this.key = Optional.ofNullable(key);
+        /**
+         * The identifier for this hub
+         */
+        public Builder identifier(String identifier) {
+            Utils.checkNotNull(identifier, "identifier");
+            this.identifier = Optional.ofNullable(identifier);
             return this;
         }
 
-        public Builder key(Optional<String> key) {
-            Utils.checkNotNull(key, "key");
-            this.key = key;
+        /**
+         * The identifier for this hub
+         */
+        public Builder identifier(Optional<String> identifier) {
+            Utils.checkNotNull(identifier, "identifier");
+            this.identifier = identifier;
             return this;
         }
 
 
+        /**
+         * Whether this hub is visible to admin user home
+         */
+        public Builder promotedToOwnHome(boolean promotedToOwnHome) {
+            Utils.checkNotNull(promotedToOwnHome, "promotedToOwnHome");
+            this.promotedToOwnHome = Optional.ofNullable(promotedToOwnHome);
+            return this;
+        }
+
+        /**
+         * Whether this hub is visible to admin user home
+         */
+        public Builder promotedToOwnHome(Optional<Boolean> promotedToOwnHome) {
+            Utils.checkNotNull(promotedToOwnHome, "promotedToOwnHome");
+            this.promotedToOwnHome = promotedToOwnHome;
+            return this;
+        }
+
+
+        /**
+         * Whether this hub is promoted to all for recommendations
+         */
+        public Builder promotedToRecommended(boolean promotedToRecommended) {
+            Utils.checkNotNull(promotedToRecommended, "promotedToRecommended");
+            this.promotedToRecommended = Optional.ofNullable(promotedToRecommended);
+            return this;
+        }
+
+        /**
+         * Whether this hub is promoted to all for recommendations
+         */
+        public Builder promotedToRecommended(Optional<Boolean> promotedToRecommended) {
+            Utils.checkNotNull(promotedToRecommended, "promotedToRecommended");
+            this.promotedToRecommended = promotedToRecommended;
+            return this;
+        }
+
+
+        /**
+         * Whether this hub is visible to shared user's home
+         */
+        public Builder promotedToSharedHome(boolean promotedToSharedHome) {
+            Utils.checkNotNull(promotedToSharedHome, "promotedToSharedHome");
+            this.promotedToSharedHome = Optional.ofNullable(promotedToSharedHome);
+            return this;
+        }
+
+        /**
+         * Whether this hub is visible to shared user's home
+         */
+        public Builder promotedToSharedHome(Optional<Boolean> promotedToSharedHome) {
+            Utils.checkNotNull(promotedToSharedHome, "promotedToSharedHome");
+            this.promotedToSharedHome = promotedToSharedHome;
+            return this;
+        }
+
+
+        /**
+         * The visibility of this hub in recommendations:
+         *   - all: Visible to all users
+         *   - none: Visible to no users
+         *   - admin: Visible to only admin users
+         *   - shared: Visible to shared users
+         */
+        public Builder recommendationsVisibility(RecommendationsVisibility recommendationsVisibility) {
+            Utils.checkNotNull(recommendationsVisibility, "recommendationsVisibility");
+            this.recommendationsVisibility = Optional.ofNullable(recommendationsVisibility);
+            return this;
+        }
+
+        /**
+         * The visibility of this hub in recommendations:
+         *   - all: Visible to all users
+         *   - none: Visible to no users
+         *   - admin: Visible to only admin users
+         *   - shared: Visible to shared users
+         */
+        public Builder recommendationsVisibility(Optional<? extends RecommendationsVisibility> recommendationsVisibility) {
+            Utils.checkNotNull(recommendationsVisibility, "recommendationsVisibility");
+            this.recommendationsVisibility = recommendationsVisibility;
+            return this;
+        }
+
+
+        /**
+         * The title of this hub
+         */
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
             return this;
         }
 
+        /**
+         * The title of this hub
+         */
         public Builder title(Optional<String> title) {
             Utils.checkNotNull(title, "title");
             this.title = title;
             return this;
         }
 
-
-        public Builder type(String type) {
-            Utils.checkNotNull(type, "type");
-            this.type = Optional.ofNullable(type);
-            return this;
-        }
-
-        public Builder type(Optional<String> type) {
-            Utils.checkNotNull(type, "type");
-            this.type = type;
-            return this;
-        }
-
-
-        public Builder hubIdentifier(String hubIdentifier) {
-            Utils.checkNotNull(hubIdentifier, "hubIdentifier");
-            this.hubIdentifier = Optional.ofNullable(hubIdentifier);
-            return this;
-        }
-
-        public Builder hubIdentifier(Optional<String> hubIdentifier) {
-            Utils.checkNotNull(hubIdentifier, "hubIdentifier");
-            this.hubIdentifier = hubIdentifier;
-            return this;
-        }
-
-
-        public Builder context(String context) {
-            Utils.checkNotNull(context, "context");
-            this.context = Optional.ofNullable(context);
-            return this;
-        }
-
-        public Builder context(Optional<String> context) {
-            Utils.checkNotNull(context, "context");
-            this.context = context;
-            return this;
-        }
-
-
-        public Builder size(int size) {
-            Utils.checkNotNull(size, "size");
-            this.size = Optional.ofNullable(size);
-            return this;
-        }
-
-        public Builder size(Optional<Integer> size) {
-            Utils.checkNotNull(size, "size");
-            this.size = size;
-            return this;
-        }
-
-
-        public Builder more(boolean more) {
-            Utils.checkNotNull(more, "more");
-            this.more = Optional.ofNullable(more);
-            return this;
-        }
-
-        public Builder more(Optional<Boolean> more) {
-            Utils.checkNotNull(more, "more");
-            this.more = more;
-            return this;
-        }
-
-
-        public Builder style(String style) {
-            Utils.checkNotNull(style, "style");
-            this.style = Optional.ofNullable(style);
-            return this;
-        }
-
-        public Builder style(Optional<String> style) {
-            Utils.checkNotNull(style, "style");
-            this.style = style;
-            return this;
-        }
-
-
-        public Builder promoted(boolean promoted) {
-            Utils.checkNotNull(promoted, "promoted");
-            this.promoted = Optional.ofNullable(promoted);
-            return this;
-        }
-
-        public Builder promoted(Optional<Boolean> promoted) {
-            Utils.checkNotNull(promoted, "promoted");
-            this.promoted = promoted;
-            return this;
-        }
-
-
-        public Builder metadata(List<GetGlobalHubsMetadata> metadata) {
-            Utils.checkNotNull(metadata, "metadata");
-            this.metadata = Optional.ofNullable(metadata);
-            return this;
-        }
-
-        public Builder metadata(Optional<? extends List<GetGlobalHubsMetadata>> metadata) {
-            Utils.checkNotNull(metadata, "metadata");
-            this.metadata = metadata;
-            return this;
-        }
-
         public Hub build() {
 
             return new Hub(
-                hubKey, key, title,
-                type, hubIdentifier, context,
-                size, more, style,
-                promoted, metadata);
+                homeVisibility, identifier, promotedToOwnHome,
+                promotedToRecommended, promotedToSharedHome, recommendationsVisibility,
+                title);
         }
 
     }

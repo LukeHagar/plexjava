@@ -1,9 +1,12 @@
 # Action
 
+The action to perform for this item on this optimizer queue
 
-## Fields
 
-| Field                          | Type                           | Required                       | Description                    | Example                        |
-| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
-| `id`                           | *String*                       | :heavy_check_mark:             | N/A                            | addToContinueWatching          |
-| `key`                          | *String*                       | :heavy_check_mark:             | N/A                            | /actions/addToContinueWatching |
+## Values
+
+| Name        | Value       |
+| ----------- | ----------- |
+| `REPROCESS` | reprocess   |
+| `DISABLE`   | disable     |
+| `ENABLE`    | enable      |

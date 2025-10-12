@@ -6,24 +6,21 @@ package dev.plexapi.sdk;
 import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
 import static dev.plexapi.sdk.operations.Operations.RequestOperation;
 
-import dev.plexapi.sdk.models.operations.CancelServerActivitiesRequest;
-import dev.plexapi.sdk.models.operations.CancelServerActivitiesRequestBuilder;
-import dev.plexapi.sdk.models.operations.CancelServerActivitiesResponse;
-import dev.plexapi.sdk.models.operations.GetServerActivitiesRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetServerActivitiesResponse;
-import dev.plexapi.sdk.operations.CancelServerActivities;
-import dev.plexapi.sdk.operations.GetServerActivities;
+import dev.plexapi.sdk.models.operations.CancelActivityRequest;
+import dev.plexapi.sdk.models.operations.CancelActivityRequestBuilder;
+import dev.plexapi.sdk.models.operations.CancelActivityResponse;
+import dev.plexapi.sdk.models.operations.ListActivitiesRequestBuilder;
+import dev.plexapi.sdk.models.operations.ListActivitiesResponse;
+import dev.plexapi.sdk.operations.CancelActivity;
+import dev.plexapi.sdk.operations.ListActivities;
 import java.lang.Exception;
-import java.lang.String;
 
 /**
- * Activities are awesome. They provide a way to monitor and control asynchronous operations on the server. In order to receive real-time updates for activities, a client would normally subscribe via either EventSource or Websocket endpoints.
- * Activities are associated with HTTP replies via a special `X-Plex-Activity` header which contains the UUID of the activity.
- * Activities are optional cancellable. If cancellable, they may be cancelled via the `DELETE` endpoint. Other details:
- * - They can contain a `progress` (from 0 to 100) marking the percent completion of the activity.
- * - They must contain an `type` which is used by clients to distinguish the specific activity.
- * - They may contain a `Context` object with attributes which associate the activity with various specific entities (items, libraries, etc.)
- * - The may contain a `Response` object which attributes which represent the result of the asynchronous operation.
+ * Activities provide a way to monitor and control asynchronous operations on the server. In order to receive real-time updates for activities, a client would normally subscribe via either EventSource or Websocket endpoints.
+ * 
+ * <p>Activities are associated with HTTP replies via a special `X-Plex-Activity` header which contains the UUID of the activity.
+ * 
+ * <p>Activities are optional cancellable. If cancellable, they may be cancelled via the `DELETE` endpoint.
  */
 public class Activities {
     private final SDKConfiguration sdkConfiguration;
@@ -44,58 +41,53 @@ public class Activities {
     }
 
     /**
-     * Get Server Activities
+     * Get all activities
      * 
-     * <p>Get Server Activities
+     * <p>List all activities on the server.  Admins can see all activities but other users can only see their own
      * 
      * @return The call builder
      */
-    public GetServerActivitiesRequestBuilder getServerActivities() {
-        return new GetServerActivitiesRequestBuilder(sdkConfiguration);
+    public ListActivitiesRequestBuilder listActivities() {
+        return new ListActivitiesRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get Server Activities
+     * Get all activities
      * 
-     * <p>Get Server Activities
+     * <p>List all activities on the server.  Admins can see all activities but other users can only see their own
      * 
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetServerActivitiesResponse getServerActivitiesDirect() throws Exception {
-        RequestlessOperation<GetServerActivitiesResponse> operation
-            = new GetServerActivities.Sync(sdkConfiguration);
+    public ListActivitiesResponse listActivitiesDirect() throws Exception {
+        RequestlessOperation<ListActivitiesResponse> operation
+            = new ListActivities.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest());
     }
 
     /**
-     * Cancel Server Activities
+     * Cancel a running activity
      * 
-     * <p>Cancel Server Activities
+     * <p>Cancel a running activity.  Admins can cancel all activities but other users can only cancel their own
      * 
      * @return The call builder
      */
-    public CancelServerActivitiesRequestBuilder cancelServerActivities() {
-        return new CancelServerActivitiesRequestBuilder(sdkConfiguration);
+    public CancelActivityRequestBuilder cancelActivity() {
+        return new CancelActivityRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Cancel Server Activities
+     * Cancel a running activity
      * 
-     * <p>Cancel Server Activities
+     * <p>Cancel a running activity.  Admins can cancel all activities but other users can only cancel their own
      * 
-     * @param activityUUID The UUID of the activity to cancel.
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public CancelServerActivitiesResponse cancelServerActivities(String activityUUID) throws Exception {
-        CancelServerActivitiesRequest request =
-            CancelServerActivitiesRequest
-                .builder()
-                .activityUUID(activityUUID)
-                .build();
-        RequestOperation<CancelServerActivitiesRequest, CancelServerActivitiesResponse> operation
-              = new CancelServerActivities.Sync(sdkConfiguration);
+    public CancelActivityResponse cancelActivity(CancelActivityRequest request) throws Exception {
+        RequestOperation<CancelActivityRequest, CancelActivityResponse> operation
+              = new CancelActivity.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

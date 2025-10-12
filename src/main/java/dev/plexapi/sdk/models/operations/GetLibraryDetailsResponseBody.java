@@ -17,7 +17,7 @@ import java.util.Optional;
 /**
  * GetLibraryDetailsResponseBody
  * 
- * <p>The details of the library
+ * <p>OK
  */
 public class GetLibraryDetailsResponseBody {
 

@@ -5,26 +5,66 @@ package dev.plexapi.sdk;
 
 import static dev.plexapi.sdk.operations.Operations.RequestOperation;
 
-import dev.plexapi.sdk.models.operations.GetGlobalHubsRequest;
-import dev.plexapi.sdk.models.operations.GetGlobalHubsRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetGlobalHubsResponse;
-import dev.plexapi.sdk.models.operations.GetLibraryHubsRequest;
-import dev.plexapi.sdk.models.operations.GetLibraryHubsRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetLibraryHubsResponse;
-import dev.plexapi.sdk.models.operations.GetRecentlyAddedRequest;
-import dev.plexapi.sdk.models.operations.GetRecentlyAddedRequestBuilder;
-import dev.plexapi.sdk.models.operations.GetRecentlyAddedResponse;
-import dev.plexapi.sdk.models.operations.OnlyTransient;
-import dev.plexapi.sdk.models.operations.QueryParamOnlyTransient;
-import dev.plexapi.sdk.operations.GetGlobalHubs;
-import dev.plexapi.sdk.operations.GetLibraryHubs;
-import dev.plexapi.sdk.operations.GetRecentlyAdded;
-import java.lang.Double;
+import dev.plexapi.sdk.models.operations.CreateCustomHubRequest;
+import dev.plexapi.sdk.models.operations.CreateCustomHubRequestBuilder;
+import dev.plexapi.sdk.models.operations.CreateCustomHubResponse;
+import dev.plexapi.sdk.models.operations.DeleteCustomHubRequest;
+import dev.plexapi.sdk.models.operations.DeleteCustomHubRequestBuilder;
+import dev.plexapi.sdk.models.operations.DeleteCustomHubResponse;
+import dev.plexapi.sdk.models.operations.GetAllHubsRequest;
+import dev.plexapi.sdk.models.operations.GetAllHubsRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetAllHubsResponse;
+import dev.plexapi.sdk.models.operations.GetContinueWatchingRequest;
+import dev.plexapi.sdk.models.operations.GetContinueWatchingRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetContinueWatchingResponse;
+import dev.plexapi.sdk.models.operations.GetHubItemsRequest;
+import dev.plexapi.sdk.models.operations.GetHubItemsRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetHubItemsResponse;
+import dev.plexapi.sdk.models.operations.GetMetadataHubsRequest;
+import dev.plexapi.sdk.models.operations.GetMetadataHubsRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetMetadataHubsResponse;
+import dev.plexapi.sdk.models.operations.GetPostplayHubsRequest;
+import dev.plexapi.sdk.models.operations.GetPostplayHubsRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetPostplayHubsResponse;
+import dev.plexapi.sdk.models.operations.GetPromotedHubsRequest;
+import dev.plexapi.sdk.models.operations.GetPromotedHubsRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetPromotedHubsResponse;
+import dev.plexapi.sdk.models.operations.GetRelatedHubsRequest;
+import dev.plexapi.sdk.models.operations.GetRelatedHubsRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetRelatedHubsResponse;
+import dev.plexapi.sdk.models.operations.GetSectionHubsRequest;
+import dev.plexapi.sdk.models.operations.GetSectionHubsRequestBuilder;
+import dev.plexapi.sdk.models.operations.GetSectionHubsResponse;
+import dev.plexapi.sdk.models.operations.ListHubsRequest;
+import dev.plexapi.sdk.models.operations.ListHubsRequestBuilder;
+import dev.plexapi.sdk.models.operations.ListHubsResponse;
+import dev.plexapi.sdk.models.operations.MoveHubRequest;
+import dev.plexapi.sdk.models.operations.MoveHubRequestBuilder;
+import dev.plexapi.sdk.models.operations.MoveHubResponse;
+import dev.plexapi.sdk.models.operations.ResetSectionDefaultsRequest;
+import dev.plexapi.sdk.models.operations.ResetSectionDefaultsRequestBuilder;
+import dev.plexapi.sdk.models.operations.ResetSectionDefaultsResponse;
+import dev.plexapi.sdk.models.operations.UpdateHubVisibilityRequest;
+import dev.plexapi.sdk.models.operations.UpdateHubVisibilityRequestBuilder;
+import dev.plexapi.sdk.models.operations.UpdateHubVisibilityResponse;
+import dev.plexapi.sdk.operations.CreateCustomHub;
+import dev.plexapi.sdk.operations.DeleteCustomHub;
+import dev.plexapi.sdk.operations.GetAllHubs;
+import dev.plexapi.sdk.operations.GetContinueWatching;
+import dev.plexapi.sdk.operations.GetHubItems;
+import dev.plexapi.sdk.operations.GetMetadataHubs;
+import dev.plexapi.sdk.operations.GetPostplayHubs;
+import dev.plexapi.sdk.operations.GetPromotedHubs;
+import dev.plexapi.sdk.operations.GetRelatedHubs;
+import dev.plexapi.sdk.operations.GetSectionHubs;
+import dev.plexapi.sdk.operations.ListHubs;
+import dev.plexapi.sdk.operations.MoveHub;
+import dev.plexapi.sdk.operations.ResetSectionDefaults;
+import dev.plexapi.sdk.operations.UpdateHubVisibility;
 import java.lang.Exception;
-import java.util.Optional;
 
 /**
- * Hubs are a structured two-dimensional container for media, generally represented by multiple horizontal rows.
+ * The hubs within a media provider
  */
 public class Hubs {
     private final SDKConfiguration sdkConfiguration;
@@ -45,123 +85,366 @@ public class Hubs {
     }
 
     /**
-     * Get Global Hubs
+     * Get global hubs
      * 
-     * <p>Get Global Hubs filtered by the parameters provided.
-     * 
-     * @return The call builder
-     */
-    public GetGlobalHubsRequestBuilder getGlobalHubs() {
-        return new GetGlobalHubsRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Get Global Hubs
-     * 
-     * <p>Get Global Hubs filtered by the parameters provided.
-     * 
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetGlobalHubsResponse getGlobalHubsDirect() throws Exception {
-        return getGlobalHubs(Optional.empty(), Optional.empty());
-    }
-
-    /**
-     * Get Global Hubs
-     * 
-     * <p>Get Global Hubs filtered by the parameters provided.
-     * 
-     * @param count The number of items to return with each hub.
-     * @param onlyTransient Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added).
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public GetGlobalHubsResponse getGlobalHubs(Optional<Double> count, Optional<? extends OnlyTransient> onlyTransient) throws Exception {
-        GetGlobalHubsRequest request =
-            GetGlobalHubsRequest
-                .builder()
-                .count(count)
-                .onlyTransient(onlyTransient)
-                .build();
-        RequestOperation<GetGlobalHubsRequest, GetGlobalHubsResponse> operation
-              = new GetGlobalHubs.Sync(sdkConfiguration);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Get Recently Added
-     * 
-     * <p>This endpoint will return the recently added content.
+     * <p>Get the global hubs in this PMS
      * 
      * @return The call builder
      */
-    public GetRecentlyAddedRequestBuilder getRecentlyAdded() {
-        return new GetRecentlyAddedRequestBuilder(sdkConfiguration);
+    public GetAllHubsRequestBuilder getAllHubs() {
+        return new GetAllHubsRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get Recently Added
+     * Get global hubs
      * 
-     * <p>This endpoint will return the recently added content.
+     * <p>Get the global hubs in this PMS
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetRecentlyAddedResponse getRecentlyAdded(GetRecentlyAddedRequest request) throws Exception {
-        RequestOperation<GetRecentlyAddedRequest, GetRecentlyAddedResponse> operation
-              = new GetRecentlyAdded.Sync(sdkConfiguration);
+    public GetAllHubsResponse getAllHubs(GetAllHubsRequest request) throws Exception {
+        RequestOperation<GetAllHubsRequest, GetAllHubsResponse> operation
+              = new GetAllHubs.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
     /**
-     * Get library specific hubs
+     * Get the continue watching hub
      * 
-     * <p>This endpoint will return a list of library specific hubs
+     * <p>Get the global continue watching hub
      * 
      * @return The call builder
      */
-    public GetLibraryHubsRequestBuilder getLibraryHubs() {
-        return new GetLibraryHubsRequestBuilder(sdkConfiguration);
+    public GetContinueWatchingRequestBuilder getContinueWatching() {
+        return new GetContinueWatchingRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Get library specific hubs
+     * Get the continue watching hub
      * 
-     * <p>This endpoint will return a list of library specific hubs
+     * <p>Get the global continue watching hub
      * 
-     * @param sectionId the Id of the library to query
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetLibraryHubsResponse getLibraryHubs(double sectionId) throws Exception {
-        return getLibraryHubs(sectionId, Optional.empty(), Optional.empty());
+    public GetContinueWatchingResponse getContinueWatching(GetContinueWatchingRequest request) throws Exception {
+        RequestOperation<GetContinueWatchingRequest, GetContinueWatchingResponse> operation
+              = new GetContinueWatching.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
     /**
-     * Get library specific hubs
+     * Get a hub's items
      * 
-     * <p>This endpoint will return a list of library specific hubs
+     * <p>Get the items within a single hub specified by identifier
      * 
-     * @param sectionId the Id of the library to query
-     * @param count The number of items to return with each hub.
-     * @param onlyTransient Only return hubs which are "transient", meaning those which are prone to changing after media playback or addition (e.g. On Deck, or Recently Added).
+     * @return The call builder
+     */
+    public GetHubItemsRequestBuilder getHubItems() {
+        return new GetHubItemsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get a hub's items
+     * 
+     * <p>Get the items within a single hub specified by identifier
+     * 
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public GetLibraryHubsResponse getLibraryHubs(
-            double sectionId, Optional<Double> count,
-            Optional<? extends QueryParamOnlyTransient> onlyTransient) throws Exception {
-        GetLibraryHubsRequest request =
-            GetLibraryHubsRequest
-                .builder()
-                .sectionId(sectionId)
-                .count(count)
-                .onlyTransient(onlyTransient)
-                .build();
-        RequestOperation<GetLibraryHubsRequest, GetLibraryHubsResponse> operation
-              = new GetLibraryHubs.Sync(sdkConfiguration);
+    public GetHubItemsResponse getHubItems(GetHubItemsRequest request) throws Exception {
+        RequestOperation<GetHubItemsRequest, GetHubItemsResponse> operation
+              = new GetHubItems.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get the hubs which are promoted
+     * 
+     * <p>Get the global hubs which are promoted (should be displayed on the home screen)
+     * 
+     * @return The call builder
+     */
+    public GetPromotedHubsRequestBuilder getPromotedHubs() {
+        return new GetPromotedHubsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get the hubs which are promoted
+     * 
+     * <p>Get the global hubs which are promoted (should be displayed on the home screen)
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetPromotedHubsResponse getPromotedHubs(GetPromotedHubsRequest request) throws Exception {
+        RequestOperation<GetPromotedHubsRequest, GetPromotedHubsResponse> operation
+              = new GetPromotedHubs.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get hubs for section by metadata item
+     * 
+     * <p>Get the hubs for a section by metadata item.  Currently only for music sections
+     * 
+     * @return The call builder
+     */
+    public GetMetadataHubsRequestBuilder getMetadataHubs() {
+        return new GetMetadataHubsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get hubs for section by metadata item
+     * 
+     * <p>Get the hubs for a section by metadata item.  Currently only for music sections
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetMetadataHubsResponse getMetadataHubs(GetMetadataHubsRequest request) throws Exception {
+        RequestOperation<GetMetadataHubsRequest, GetMetadataHubsResponse> operation
+              = new GetMetadataHubs.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get postplay hubs
+     * 
+     * <p>Get the hubs for a metadata to be displayed in post play
+     * 
+     * @return The call builder
+     */
+    public GetPostplayHubsRequestBuilder getPostplayHubs() {
+        return new GetPostplayHubsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get postplay hubs
+     * 
+     * <p>Get the hubs for a metadata to be displayed in post play
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetPostplayHubsResponse getPostplayHubs(GetPostplayHubsRequest request) throws Exception {
+        RequestOperation<GetPostplayHubsRequest, GetPostplayHubsResponse> operation
+              = new GetPostplayHubs.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get related hubs
+     * 
+     * <p>Get the hubs for a metadata related to the provided metadata item
+     * 
+     * @return The call builder
+     */
+    public GetRelatedHubsRequestBuilder getRelatedHubs() {
+        return new GetRelatedHubsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get related hubs
+     * 
+     * <p>Get the hubs for a metadata related to the provided metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetRelatedHubsResponse getRelatedHubs(GetRelatedHubsRequest request) throws Exception {
+        RequestOperation<GetRelatedHubsRequest, GetRelatedHubsResponse> operation
+              = new GetRelatedHubs.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get section hubs
+     * 
+     * <p>Get the hubs for a single section
+     * 
+     * @return The call builder
+     */
+    public GetSectionHubsRequestBuilder getSectionHubs() {
+        return new GetSectionHubsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get section hubs
+     * 
+     * <p>Get the hubs for a single section
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public GetSectionHubsResponse getSectionHubs(GetSectionHubsRequest request) throws Exception {
+        RequestOperation<GetSectionHubsRequest, GetSectionHubsResponse> operation
+              = new GetSectionHubs.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Reset hubs to defaults
+     * 
+     * <p>Reset hubs for this section to defaults and delete custom hubs
+     * 
+     * @return The call builder
+     */
+    public ResetSectionDefaultsRequestBuilder resetSectionDefaults() {
+        return new ResetSectionDefaultsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Reset hubs to defaults
+     * 
+     * <p>Reset hubs for this section to defaults and delete custom hubs
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public ResetSectionDefaultsResponse resetSectionDefaults(ResetSectionDefaultsRequest request) throws Exception {
+        RequestOperation<ResetSectionDefaultsRequest, ResetSectionDefaultsResponse> operation
+              = new ResetSectionDefaults.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Get hubs
+     * 
+     * <p>Get the list of hubs including both built-in and custom
+     * 
+     * @return The call builder
+     */
+    public ListHubsRequestBuilder listHubs() {
+        return new ListHubsRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Get hubs
+     * 
+     * <p>Get the list of hubs including both built-in and custom
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public ListHubsResponse listHubs(ListHubsRequest request) throws Exception {
+        RequestOperation<ListHubsRequest, ListHubsResponse> operation
+              = new ListHubs.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Create a custom hub
+     * 
+     * <p>Create a custom hub based on a metadata item
+     * 
+     * @return The call builder
+     */
+    public CreateCustomHubRequestBuilder createCustomHub() {
+        return new CreateCustomHubRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Create a custom hub
+     * 
+     * <p>Create a custom hub based on a metadata item
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public CreateCustomHubResponse createCustomHub(CreateCustomHubRequest request) throws Exception {
+        RequestOperation<CreateCustomHubRequest, CreateCustomHubResponse> operation
+              = new CreateCustomHub.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Move Hub
+     * 
+     * <p>Changed the ordering of a hub among others hubs
+     * 
+     * @return The call builder
+     */
+    public MoveHubRequestBuilder moveHub() {
+        return new MoveHubRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Move Hub
+     * 
+     * <p>Changed the ordering of a hub among others hubs
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public MoveHubResponse moveHub(MoveHubRequest request) throws Exception {
+        RequestOperation<MoveHubRequest, MoveHubResponse> operation
+              = new MoveHub.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Delete a custom hub
+     * 
+     * <p>Delete a custom hub from the server
+     * 
+     * @return The call builder
+     */
+    public DeleteCustomHubRequestBuilder deleteCustomHub() {
+        return new DeleteCustomHubRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Delete a custom hub
+     * 
+     * <p>Delete a custom hub from the server
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public DeleteCustomHubResponse deleteCustomHub(DeleteCustomHubRequest request) throws Exception {
+        RequestOperation<DeleteCustomHubRequest, DeleteCustomHubResponse> operation
+              = new DeleteCustomHub.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Change hub visibility
+     * 
+     * <p>Changed the visibility of a hub for both the admin and shared users
+     * 
+     * @return The call builder
+     */
+    public UpdateHubVisibilityRequestBuilder updateHubVisibility() {
+        return new UpdateHubVisibilityRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Change hub visibility
+     * 
+     * <p>Changed the visibility of a hub for both the admin and shared users
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public UpdateHubVisibilityResponse updateHubVisibility(UpdateHubVisibilityRequest request) throws Exception {
+        RequestOperation<UpdateHubVisibilityRequest, UpdateHubVisibilityResponse> operation
+              = new UpdateHubVisibility.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 

@@ -5,73 +5,34 @@ package dev.plexapi.sdk.models.operations.async;
 
 import static dev.plexapi.sdk.operations.Operations.AsyncRequestOperation;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.SDKConfiguration;
-import dev.plexapi.sdk.models.operations.QueryParamForce;
 import dev.plexapi.sdk.models.operations.UploadPlaylistRequest;
 import dev.plexapi.sdk.operations.UploadPlaylist;
-import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
-import java.lang.Long;
-import java.lang.String;
 import java.util.concurrent.CompletableFuture;
 
 public class UploadPlaylistRequestBuilder {
 
-    private String path;
-    private QueryParamForce force;
-    private Long sectionID;
+    private UploadPlaylistRequest request;
     private final SDKConfiguration sdkConfiguration;
 
     public UploadPlaylistRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
 
-    public UploadPlaylistRequestBuilder path(String path) {
-        Utils.checkNotNull(path, "path");
-        this.path = path;
+    public UploadPlaylistRequestBuilder request(UploadPlaylistRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
-    }
-
-    public UploadPlaylistRequestBuilder force(QueryParamForce force) {
-        Utils.checkNotNull(force, "force");
-        this.force = force;
-        return this;
-    }
-
-    public UploadPlaylistRequestBuilder sectionID(long sectionID) {
-        Utils.checkNotNull(sectionID, "sectionID");
-        this.sectionID = sectionID;
-        return this;
-    }
-
-
-    private UploadPlaylistRequest buildRequest() {
-        if (sectionID == null) {
-            sectionID = _SINGLETON_VALUE_SectionID.value();
-        }
-
-        UploadPlaylistRequest request = new UploadPlaylistRequest(path,
-            force,
-            sectionID);
-
-        return request;
     }
 
     public CompletableFuture<UploadPlaylistResponse> call() throws Exception {
         
         AsyncRequestOperation<UploadPlaylistRequest, UploadPlaylistResponse> operation
               = new UploadPlaylist.Async(sdkConfiguration);
-        UploadPlaylistRequest request = buildRequest();
 
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
-
-    private static final LazySingletonValue<Long> _SINGLETON_VALUE_SectionID =
-            new LazySingletonValue<>(
-                    "sectionID",
-                    "1",
-                    new TypeReference<Long>() {});
 }

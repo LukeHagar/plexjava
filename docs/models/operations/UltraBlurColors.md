@@ -3,9 +3,9 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        | Example            |
-| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `topLeft`          | *String*           | :heavy_check_mark: | N/A                | 11333b             |
-| `topRight`         | *String*           | :heavy_check_mark: | N/A                | 0a232d             |
-| `bottomRight`      | *String*           | :heavy_check_mark: | N/A                | 73958              |
-| `bottomLeft`       | *String*           | :heavy_check_mark: | N/A                | 1f5066             |
+| Field                                          | Type                                           | Required                                       | Description                                    |
+| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
+| `bottomLeft`                                   | *Optional\<String>*                            | :heavy_minus_sign:                             | The color (hex) for the bottom left quadrant.  |
+| `bottomRight`                                  | *Optional\<String>*                            | :heavy_minus_sign:                             | The color (hex) for the bottom right quadrant. |
+| `topLeft`                                      | *Optional\<String>*                            | :heavy_minus_sign:                             | The color (hex) for the top left quadrant.     |
+| `topRight`                                     | *Optional\<String>*                            | :heavy_minus_sign:                             | The color (hex) for the top right quadrant.    |

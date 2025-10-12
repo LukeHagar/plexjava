@@ -5,74 +5,34 @@ package dev.plexapi.sdk.models.operations.async;
 
 import static dev.plexapi.sdk.operations.Operations.AsyncRequestOperation;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.SDKConfiguration;
 import dev.plexapi.sdk.models.operations.GetLibraryDetailsRequest;
-import dev.plexapi.sdk.models.operations.IncludeDetails;
 import dev.plexapi.sdk.operations.GetLibraryDetails;
-import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Exception;
-import java.lang.Integer;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class GetLibraryDetailsRequestBuilder {
 
-    private Optional<? extends IncludeDetails> includeDetails = Utils.readDefaultOrConstValue(
-                            "includeDetails",
-                            "0",
-                            new TypeReference<Optional<? extends IncludeDetails>>() {});
-    private Integer sectionKey;
+    private GetLibraryDetailsRequest request;
     private final SDKConfiguration sdkConfiguration;
 
     public GetLibraryDetailsRequestBuilder(SDKConfiguration sdkConfiguration) {
         this.sdkConfiguration = sdkConfiguration;
     }
-                
-    public GetLibraryDetailsRequestBuilder includeDetails(IncludeDetails includeDetails) {
-        Utils.checkNotNull(includeDetails, "includeDetails");
-        this.includeDetails = Optional.of(includeDetails);
+
+    public GetLibraryDetailsRequestBuilder request(GetLibraryDetailsRequest request) {
+        Utils.checkNotNull(request, "request");
+        this.request = request;
         return this;
-    }
-
-    public GetLibraryDetailsRequestBuilder includeDetails(Optional<? extends IncludeDetails> includeDetails) {
-        Utils.checkNotNull(includeDetails, "includeDetails");
-        this.includeDetails = includeDetails;
-        return this;
-    }
-
-    public GetLibraryDetailsRequestBuilder sectionKey(int sectionKey) {
-        Utils.checkNotNull(sectionKey, "sectionKey");
-        this.sectionKey = sectionKey;
-        return this;
-    }
-
-
-    private GetLibraryDetailsRequest buildRequest() {
-        if (includeDetails == null) {
-            includeDetails = _SINGLETON_VALUE_IncludeDetails.value();
-        }
-
-        GetLibraryDetailsRequest request = new GetLibraryDetailsRequest(includeDetails,
-            sectionKey);
-
-        return request;
     }
 
     public CompletableFuture<GetLibraryDetailsResponse> call() throws Exception {
         
         AsyncRequestOperation<GetLibraryDetailsRequest, GetLibraryDetailsResponse> operation
               = new GetLibraryDetails.Async(sdkConfiguration);
-        GetLibraryDetailsRequest request = buildRequest();
 
         return operation.doRequest(request)
             .thenCompose(operation::handleResponse);
     }
-
-    private static final LazySingletonValue<Optional<? extends IncludeDetails>> _SINGLETON_VALUE_IncludeDetails =
-            new LazySingletonValue<>(
-                    "includeDetails",
-                    "0",
-                    new TypeReference<Optional<? extends IncludeDetails>>() {});
 }

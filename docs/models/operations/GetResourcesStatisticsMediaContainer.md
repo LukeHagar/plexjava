@@ -1,9 +1,0 @@
-# GetResourcesStatisticsMediaContainer
-
-
-## Fields
-
-| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  | Example                                                                      |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `size`                                                                       | *Optional\<Integer>*                                                         | :heavy_minus_sign:                                                           | N/A                                                                          | 5497                                                                         |
-| `statisticsResources`                                                        | List\<[StatisticsResources](../../models/operations/StatisticsResources.md)> | :heavy_minus_sign:                                                           | N/A                                                                          |                                                                              |

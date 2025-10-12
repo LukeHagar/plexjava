@@ -6,12 +6,9 @@ package dev.plexapi.sdk.operations;
 import static dev.plexapi.sdk.operations.Operations.RequestOperation;
 import static dev.plexapi.sdk.operations.Operations.AsyncRequestOperation;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.SDKConfiguration;
 import dev.plexapi.sdk.SecuritySource;
 import dev.plexapi.sdk.models.errors.SDKError;
-import dev.plexapi.sdk.models.errors.UpdatePlaylistBadRequest;
-import dev.plexapi.sdk.models.errors.UpdatePlaylistUnauthorized;
 import dev.plexapi.sdk.models.operations.UpdatePlaylistRequest;
 import dev.plexapi.sdk.models.operations.UpdatePlaylistResponse;
 import dev.plexapi.sdk.utils.Blob;
@@ -24,7 +21,6 @@ import dev.plexapi.sdk.utils.Hook.BeforeRequestContextImpl;
 import dev.plexapi.sdk.utils.Utils;
 import java.io.InputStream;
 import java.lang.Exception;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.Throwable;
 import java.net.http.HttpRequest;
@@ -84,16 +80,12 @@ public class UpdatePlaylist {
             String url = Utils.generateURL(
                     klass,
                     this.baseUrl,
-                    "/playlists/{playlistID}",
-                    request, null);
+                    "/playlists/{playlistId}",
+                    request, this.sdkConfiguration.globals);
             HTTPRequest req = new HTTPRequest(url, "PUT");
-            req.addHeader("Accept", "application/json")
+            req.addHeader("Accept", "*/*")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
-
-            req.addQueryParams(Utils.getQueryParams(
-                    klass,
-                    request,
-                    null));
+            req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
             Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
 
             return req.build();
@@ -128,7 +120,7 @@ public class UpdatePlaylist {
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);
-                if (Utils.statusCodeMatches(httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                if (Utils.statusCodeMatches(httpRes.statusCode(), "404", "4XX", "5XX")) {
                     httpRes = onError(httpRes, null);
                 } else {
                     httpRes = onSuccess(httpRes);
@@ -156,48 +148,12 @@ public class UpdatePlaylist {
 
             UpdatePlaylistResponse res = resBuilder.build();
             
-            if (Utils.statusCodeMatches(response.statusCode(), "200")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "204")) {
                 // no content
                 return res;
             }
             
-            if (Utils.statusCodeMatches(response.statusCode(), "400")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    UpdatePlaylistBadRequest out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                        out.withRawResponse(response);
-                    
-                    throw out;
-                } else {
-                    throw new SDKError(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "401")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    UpdatePlaylistUnauthorized out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                        out.withRawResponse(response);
-                    
-                    throw out;
-                } else {
-                    throw new SDKError(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "404", "4XX")) {
                 // no content
                 throw new SDKError(
                         response,
@@ -249,7 +205,7 @@ public class UpdatePlaylist {
                         if (err != null) {
                             return onError(null, err);
                         }
-                        if (Utils.statusCodeMatches(resp.statusCode(), "400", "401", "4XX", "5XX")) {
+                        if (Utils.statusCodeMatches(resp.statusCode(), "404", "4XX", "5XX")) {
                             return onError(resp, null);
                         }
                         return CompletableFuture.completedFuture(resp);
@@ -274,52 +230,12 @@ public class UpdatePlaylist {
 
             dev.plexapi.sdk.models.operations.async.UpdatePlaylistResponse res = resBuilder.build();
             
-            if (Utils.statusCodeMatches(response.statusCode(), "200")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "204")) {
                 // no content
                 return CompletableFuture.completedFuture(res);
             }
             
-            if (Utils.statusCodeMatches(response.statusCode(), "400")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return response.body().toByteArray().thenApply(bodyBytes -> {
-                        dev.plexapi.sdk.models.errors.async.UpdatePlaylistBadRequest out;
-                        try {
-                            out = Utils.mapper().readValue(
-                                    bodyBytes,
-                                    new TypeReference<>() {
-                                    });
-                            out.withRawResponse(response);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                        throw out;
-                    });
-                } else {
-                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "401")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return response.body().toByteArray().thenApply(bodyBytes -> {
-                        dev.plexapi.sdk.models.errors.async.UpdatePlaylistUnauthorized out;
-                        try {
-                            out = Utils.mapper().readValue(
-                                    bodyBytes,
-                                    new TypeReference<>() {
-                                    });
-                            out.withRawResponse(response);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                        throw out;
-                    });
-                } else {
-                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "404", "4XX")) {
                 // no content
                 return Utils.createAsyncApiError(response, "API error occurred");
             }

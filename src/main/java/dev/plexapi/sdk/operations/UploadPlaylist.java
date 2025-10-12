@@ -6,12 +6,9 @@ package dev.plexapi.sdk.operations;
 import static dev.plexapi.sdk.operations.Operations.RequestOperation;
 import static dev.plexapi.sdk.operations.Operations.AsyncRequestOperation;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.SDKConfiguration;
 import dev.plexapi.sdk.SecuritySource;
 import dev.plexapi.sdk.models.errors.SDKError;
-import dev.plexapi.sdk.models.errors.UploadPlaylistBadRequest;
-import dev.plexapi.sdk.models.errors.UploadPlaylistUnauthorized;
 import dev.plexapi.sdk.models.operations.UploadPlaylistRequest;
 import dev.plexapi.sdk.models.operations.UploadPlaylistResponse;
 import dev.plexapi.sdk.utils.Blob;
@@ -24,7 +21,6 @@ import dev.plexapi.sdk.utils.Hook.BeforeRequestContextImpl;
 import dev.plexapi.sdk.utils.Utils;
 import java.io.InputStream;
 import java.lang.Exception;
-import java.lang.RuntimeException;
 import java.lang.String;
 import java.lang.Throwable;
 import java.net.http.HttpRequest;
@@ -85,13 +81,14 @@ public class UploadPlaylist {
                     this.baseUrl,
                     "/playlists/upload");
             HTTPRequest req = new HTTPRequest(url, "POST");
-            req.addHeader("Accept", "application/json")
+            req.addHeader("Accept", "*/*")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
 
             req.addQueryParams(Utils.getQueryParams(
                     klass,
                     request,
-                    null));
+                    this.sdkConfiguration.globals));
+            req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
             Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
 
             return req.build();
@@ -126,7 +123,7 @@ public class UploadPlaylist {
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);
-                if (Utils.statusCodeMatches(httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                if (Utils.statusCodeMatches(httpRes.statusCode(), "403", "4XX", "500", "5XX")) {
                     httpRes = onError(httpRes, null);
                 } else {
                     httpRes = onSuccess(httpRes);
@@ -159,43 +156,7 @@ public class UploadPlaylist {
                 return res;
             }
             
-            if (Utils.statusCodeMatches(response.statusCode(), "400")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    UploadPlaylistBadRequest out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                        out.withRawResponse(response);
-                    
-                    throw out;
-                } else {
-                    throw new SDKError(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "401")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    UploadPlaylistUnauthorized out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                        out.withRawResponse(response);
-                    
-                    throw out;
-                } else {
-                    throw new SDKError(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "403", "4XX")) {
                 // no content
                 throw new SDKError(
                         response,
@@ -204,7 +165,7 @@ public class UploadPlaylist {
                         Utils.extractByteArrayFromBody(response));
             }
             
-            if (Utils.statusCodeMatches(response.statusCode(), "5XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "500", "5XX")) {
                 // no content
                 throw new SDKError(
                         response,
@@ -247,7 +208,7 @@ public class UploadPlaylist {
                         if (err != null) {
                             return onError(null, err);
                         }
-                        if (Utils.statusCodeMatches(resp.statusCode(), "400", "401", "4XX", "5XX")) {
+                        if (Utils.statusCodeMatches(resp.statusCode(), "403", "4XX", "500", "5XX")) {
                             return onError(resp, null);
                         }
                         return CompletableFuture.completedFuture(resp);
@@ -277,52 +238,12 @@ public class UploadPlaylist {
                 return CompletableFuture.completedFuture(res);
             }
             
-            if (Utils.statusCodeMatches(response.statusCode(), "400")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return response.body().toByteArray().thenApply(bodyBytes -> {
-                        dev.plexapi.sdk.models.errors.async.UploadPlaylistBadRequest out;
-                        try {
-                            out = Utils.mapper().readValue(
-                                    bodyBytes,
-                                    new TypeReference<>() {
-                                    });
-                            out.withRawResponse(response);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                        throw out;
-                    });
-                } else {
-                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "401")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return response.body().toByteArray().thenApply(bodyBytes -> {
-                        dev.plexapi.sdk.models.errors.async.UploadPlaylistUnauthorized out;
-                        try {
-                            out = Utils.mapper().readValue(
-                                    bodyBytes,
-                                    new TypeReference<>() {
-                                    });
-                            out.withRawResponse(response);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                        throw out;
-                    });
-                } else {
-                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "403", "4XX")) {
                 // no content
                 return Utils.createAsyncApiError(response, "API error occurred");
             }
             
-            if (Utils.statusCodeMatches(response.statusCode(), "5XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "500", "5XX")) {
                 // no content
                 return Utils.createAsyncApiError(response, "API error occurred");
             }

@@ -3,24 +3,20 @@
  */
 package dev.plexapi.sdk;
 
-import static dev.plexapi.sdk.operations.Operations.AsyncRequestlessOperation;
 import static dev.plexapi.sdk.operations.Operations.AsyncRequestOperation;
+import static dev.plexapi.sdk.operations.Operations.AsyncRequestlessOperation;
 
 import dev.plexapi.sdk.models.operations.ApplyUpdatesRequest;
-import dev.plexapi.sdk.models.operations.CheckForUpdatesRequest;
-import dev.plexapi.sdk.models.operations.Download;
-import dev.plexapi.sdk.models.operations.Skip;
-import dev.plexapi.sdk.models.operations.Tonight;
+import dev.plexapi.sdk.models.operations.CheckUpdatesRequest;
 import dev.plexapi.sdk.models.operations.async.ApplyUpdatesRequestBuilder;
 import dev.plexapi.sdk.models.operations.async.ApplyUpdatesResponse;
-import dev.plexapi.sdk.models.operations.async.CheckForUpdatesRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.CheckForUpdatesResponse;
-import dev.plexapi.sdk.models.operations.async.GetUpdateStatusRequestBuilder;
-import dev.plexapi.sdk.models.operations.async.GetUpdateStatusResponse;
+import dev.plexapi.sdk.models.operations.async.CheckUpdatesRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.CheckUpdatesResponse;
+import dev.plexapi.sdk.models.operations.async.GetUpdatesStatusRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.GetUpdatesStatusResponse;
 import dev.plexapi.sdk.operations.ApplyUpdates;
-import dev.plexapi.sdk.operations.CheckForUpdates;
-import dev.plexapi.sdk.operations.GetUpdateStatus;
-import java.util.Optional;
+import dev.plexapi.sdk.operations.CheckUpdates;
+import dev.plexapi.sdk.operations.GetUpdatesStatus;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -47,78 +43,9 @@ public class AsyncUpdater {
 
 
     /**
-     * Querying status of updates
+     * Applying updates
      * 
-     * <p>Querying status of updates
-     * 
-     * @return The async call builder
-     */
-    public GetUpdateStatusRequestBuilder getUpdateStatus() {
-        return new GetUpdateStatusRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Querying status of updates
-     * 
-     * <p>Querying status of updates
-     * 
-     * @return CompletableFuture&lt;GetUpdateStatusResponse&gt; - The async response
-     */
-    public CompletableFuture<GetUpdateStatusResponse> getUpdateStatusDirect() {
-        AsyncRequestlessOperation<GetUpdateStatusResponse> operation
-            = new GetUpdateStatus.Async(sdkConfiguration);
-        return operation.doRequest()
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Checking for updates
-     * 
-     * <p>Checking for updates
-     * 
-     * @return The async call builder
-     */
-    public CheckForUpdatesRequestBuilder checkForUpdates() {
-        return new CheckForUpdatesRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Checking for updates
-     * 
-     * <p>Checking for updates
-     * 
-     * @return CompletableFuture&lt;CheckForUpdatesResponse&gt; - The async response
-     */
-    public CompletableFuture<CheckForUpdatesResponse> checkForUpdatesDirect() {
-        return checkForUpdates(Optional.empty());
-    }
-
-    /**
-     * Checking for updates
-     * 
-     * <p>Checking for updates
-     * 
-     * @param download Indicate that you want to start download any updates found.
-     * @return CompletableFuture&lt;CheckForUpdatesResponse&gt; - The async response
-     */
-    public CompletableFuture<CheckForUpdatesResponse> checkForUpdates(Optional<? extends Download> download) {
-        CheckForUpdatesRequest request =
-            CheckForUpdatesRequest
-                .builder()
-                .download(download)
-                .build();
-        AsyncRequestOperation<CheckForUpdatesRequest, CheckForUpdatesResponse> operation
-              = new CheckForUpdates.Async(sdkConfiguration);
-        return operation.doRequest(request)
-            .thenCompose(operation::handleResponse);
-    }
-
-
-    /**
-     * Apply Updates
-     * 
-     * <p>Note that these two parameters are effectively mutually exclusive. The `tonight` parameter takes precedence and `skip` will be ignored if `tonight` is also passed
+     * <p>Apply any downloaded updates.  Note that the two parameters `tonight` and `skip` are effectively mutually exclusive. The `tonight` parameter takes precedence and `skip` will be ignored if `tonight` is also passed.
      * 
      * @return The async call builder
      */
@@ -127,35 +54,70 @@ public class AsyncUpdater {
     }
 
     /**
-     * Apply Updates
+     * Applying updates
      * 
-     * <p>Note that these two parameters are effectively mutually exclusive. The `tonight` parameter takes precedence and `skip` will be ignored if `tonight` is also passed
+     * <p>Apply any downloaded updates.  Note that the two parameters `tonight` and `skip` are effectively mutually exclusive. The `tonight` parameter takes precedence and `skip` will be ignored if `tonight` is also passed.
      * 
+     * @param request The request object containing all the parameters for the API call.
      * @return CompletableFuture&lt;ApplyUpdatesResponse&gt; - The async response
      */
-    public CompletableFuture<ApplyUpdatesResponse> applyUpdatesDirect() {
-        return applyUpdates(Optional.empty(), Optional.empty());
-    }
-
-    /**
-     * Apply Updates
-     * 
-     * <p>Note that these two parameters are effectively mutually exclusive. The `tonight` parameter takes precedence and `skip` will be ignored if `tonight` is also passed
-     * 
-     * @param tonight Indicate that you want the update to run during the next Butler execution. Omitting this or setting it to false indicates that the update should install
-     * @param skip Indicate that the latest version should be marked as skipped. The [Release] entry for this version will have the `state` set to `skipped`.
-     * @return CompletableFuture&lt;ApplyUpdatesResponse&gt; - The async response
-     */
-    public CompletableFuture<ApplyUpdatesResponse> applyUpdates(Optional<? extends Tonight> tonight, Optional<? extends Skip> skip) {
-        ApplyUpdatesRequest request =
-            ApplyUpdatesRequest
-                .builder()
-                .tonight(tonight)
-                .skip(skip)
-                .build();
+    public CompletableFuture<ApplyUpdatesResponse> applyUpdates(ApplyUpdatesRequest request) {
         AsyncRequestOperation<ApplyUpdatesRequest, ApplyUpdatesResponse> operation
               = new ApplyUpdates.Async(sdkConfiguration);
         return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Checking for updates
+     * 
+     * <p>Perform an update check and potentially download
+     * 
+     * @return The async call builder
+     */
+    public CheckUpdatesRequestBuilder checkUpdates() {
+        return new CheckUpdatesRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Checking for updates
+     * 
+     * <p>Perform an update check and potentially download
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return CompletableFuture&lt;CheckUpdatesResponse&gt; - The async response
+     */
+    public CompletableFuture<CheckUpdatesResponse> checkUpdates(CheckUpdatesRequest request) {
+        AsyncRequestOperation<CheckUpdatesRequest, CheckUpdatesResponse> operation
+              = new CheckUpdates.Async(sdkConfiguration);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Querying status of updates
+     * 
+     * <p>Get the status of updating the server
+     * 
+     * @return The async call builder
+     */
+    public GetUpdatesStatusRequestBuilder getUpdatesStatus() {
+        return new GetUpdatesStatusRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Querying status of updates
+     * 
+     * <p>Get the status of updating the server
+     * 
+     * @return CompletableFuture&lt;GetUpdatesStatusResponse&gt; - The async response
+     */
+    public CompletableFuture<GetUpdatesStatusResponse> getUpdatesStatusDirect() {
+        AsyncRequestlessOperation<GetUpdatesStatusResponse> operation
+            = new GetUpdatesStatus.Async(sdkConfiguration);
+        return operation.doRequest()
             .thenCompose(operation::handleResponse);
     }
 

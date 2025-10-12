@@ -9,11 +9,10 @@ import static dev.plexapi.sdk.operations.Operations.AsyncRequestOperation;
 import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.SDKConfiguration;
 import dev.plexapi.sdk.SecuritySource;
-import dev.plexapi.sdk.models.errors.GetSourceConnectionInformationBadRequest;
-import dev.plexapi.sdk.models.errors.GetSourceConnectionInformationUnauthorized;
 import dev.plexapi.sdk.models.errors.SDKError;
 import dev.plexapi.sdk.models.operations.GetSourceConnectionInformationRequest;
 import dev.plexapi.sdk.models.operations.GetSourceConnectionInformationResponse;
+import dev.plexapi.sdk.models.operations.GetSourceConnectionInformationResponseBody;
 import dev.plexapi.sdk.utils.Blob;
 import dev.plexapi.sdk.utils.Exceptions;
 import dev.plexapi.sdk.utils.HTTPClient;
@@ -91,7 +90,8 @@ public class GetSourceConnectionInformation {
             req.addQueryParams(Utils.getQueryParams(
                     klass,
                     request,
-                    null));
+                    this.sdkConfiguration.globals));
+            req.addHeaders(Utils.getHeadersFromMetadata(request, this.sdkConfiguration.globals));
             Utils.configureSecurity(req, this.sdkConfiguration.securitySource().getSecurity());
 
             return req.build();
@@ -126,7 +126,7 @@ public class GetSourceConnectionInformation {
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);
-                if (Utils.statusCodeMatches(httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                if (Utils.statusCodeMatches(httpRes.statusCode(), "400", "403", "4XX", "5XX")) {
                     httpRes = onError(httpRes, null);
                 } else {
                     httpRes = onSuccess(httpRes);
@@ -155,19 +155,13 @@ public class GetSourceConnectionInformation {
             GetSourceConnectionInformationResponse res = resBuilder.build();
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
-                // no content
-                return res;
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "400")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    GetSourceConnectionInformationBadRequest out = Utils.mapper().readValue(
+                    GetSourceConnectionInformationResponseBody out = Utils.mapper().readValue(
                             response.body(),
                             new TypeReference<>() {
                             });
-                        out.withRawResponse(response);
-                    
-                    throw out;
+                    res.withObject(out);
+                    return res;
                 } else {
                     throw new SDKError(
                             response,
@@ -177,25 +171,7 @@ public class GetSourceConnectionInformation {
                 }
             }
             
-            if (Utils.statusCodeMatches(response.statusCode(), "401")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    GetSourceConnectionInformationUnauthorized out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                        out.withRawResponse(response);
-                    
-                    throw out;
-                } else {
-                    throw new SDKError(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "400", "403", "4XX")) {
                 // no content
                 throw new SDKError(
                         response,
@@ -247,7 +223,7 @@ public class GetSourceConnectionInformation {
                         if (err != null) {
                             return onError(null, err);
                         }
-                        if (Utils.statusCodeMatches(resp.statusCode(), "400", "401", "4XX", "5XX")) {
+                        if (Utils.statusCodeMatches(resp.statusCode(), "400", "403", "4XX", "5XX")) {
                             return onError(resp, null);
                         }
                         return CompletableFuture.completedFuture(resp);
@@ -273,51 +249,25 @@ public class GetSourceConnectionInformation {
             dev.plexapi.sdk.models.operations.async.GetSourceConnectionInformationResponse res = resBuilder.build();
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
-                // no content
-                return CompletableFuture.completedFuture(res);
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "400")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
                     return response.body().toByteArray().thenApply(bodyBytes -> {
-                        dev.plexapi.sdk.models.errors.async.GetSourceConnectionInformationBadRequest out;
                         try {
-                            out = Utils.mapper().readValue(
+                            GetSourceConnectionInformationResponseBody out = Utils.mapper().readValue(
                                     bodyBytes,
                                     new TypeReference<>() {
                                     });
-                            out.withRawResponse(response);
+                            res.withObject(out);
+                            return res;
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
-                        throw out;
                     });
                 } else {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
                 }
             }
             
-            if (Utils.statusCodeMatches(response.statusCode(), "401")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return response.body().toByteArray().thenApply(bodyBytes -> {
-                        dev.plexapi.sdk.models.errors.async.GetSourceConnectionInformationUnauthorized out;
-                        try {
-                            out = Utils.mapper().readValue(
-                                    bodyBytes,
-                                    new TypeReference<>() {
-                                    });
-                            out.withRawResponse(response);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                        throw out;
-                    });
-                } else {
-                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "4XX")) {
+            if (Utils.statusCodeMatches(response.statusCode(), "400", "403", "4XX")) {
                 // no content
                 return Utils.createAsyncApiError(response, "API error occurred");
             }

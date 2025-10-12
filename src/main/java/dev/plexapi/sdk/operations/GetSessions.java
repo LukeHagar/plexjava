@@ -9,11 +9,9 @@ import static dev.plexapi.sdk.operations.Operations.AsyncRequestlessOperation;
 import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.SDKConfiguration;
 import dev.plexapi.sdk.SecuritySource;
-import dev.plexapi.sdk.models.errors.GetSessionsBadRequest;
-import dev.plexapi.sdk.models.errors.GetSessionsUnauthorized;
 import dev.plexapi.sdk.models.errors.SDKError;
 import dev.plexapi.sdk.models.operations.GetSessionsResponse;
-import dev.plexapi.sdk.models.operations.GetSessionsResponseBody;
+import dev.plexapi.sdk.models.shared.MediaContainerWithMetadata;
 import dev.plexapi.sdk.utils.Blob;
 import dev.plexapi.sdk.utils.Exceptions;
 import dev.plexapi.sdk.utils.HTTPClient;
@@ -83,7 +81,7 @@ public class GetSessions {
         HttpRequest buildRequest() throws Exception {
             String url = Utils.generateURL(
                     this.baseUrl,
-                    "/status/sessions");
+                    "/livetv/sessions");
             HTTPRequest req = new HTTPRequest(url, "GET");
             req.addHeader("Accept", "application/json")
                     .addHeader("user-agent", SDKConfiguration.USER_AGENT);
@@ -121,7 +119,7 @@ public class GetSessions {
             HttpResponse<InputStream> httpRes;
             try {
                 httpRes = client.send(r);
-                if (Utils.statusCodeMatches(httpRes.statusCode(), "400", "401", "4XX", "5XX")) {
+                if (Utils.statusCodeMatches(httpRes.statusCode(), "4XX", "5XX")) {
                     httpRes = onError(httpRes, null);
                 } else {
                     httpRes = onSuccess(httpRes);
@@ -150,49 +148,14 @@ public class GetSessions {
             GetSessionsResponse res = resBuilder.build();
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
+                res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    GetSessionsResponseBody out = Utils.mapper().readValue(
+                    MediaContainerWithMetadata out = Utils.mapper().readValue(
                             response.body(),
                             new TypeReference<>() {
                             });
-                    res.withObject(out);
+                    res.withMediaContainerWithMetadata(out);
                     return res;
-                } else {
-                    throw new SDKError(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "400")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    GetSessionsBadRequest out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                        out.withRawResponse(response);
-                    
-                    throw out;
-                } else {
-                    throw new SDKError(
-                            response,
-                            response.statusCode(),
-                            "Unexpected content-type received: " + contentType,
-                            Utils.extractByteArrayFromBody(response));
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "401")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    GetSessionsUnauthorized out = Utils.mapper().readValue(
-                            response.body(),
-                            new TypeReference<>() {
-                            });
-                        out.withRawResponse(response);
-                    
-                    throw out;
                 } else {
                     throw new SDKError(
                             response,
@@ -254,7 +217,7 @@ public class GetSessions {
                         if (err != null) {
                             return onError(null, err);
                         }
-                        if (Utils.statusCodeMatches(resp.statusCode(), "400", "401", "4XX", "5XX")) {
+                        if (Utils.statusCodeMatches(resp.statusCode(), "4XX", "5XX")) {
                             return onError(resp, null);
                         }
                         return CompletableFuture.completedFuture(resp);
@@ -280,58 +243,19 @@ public class GetSessions {
             dev.plexapi.sdk.models.operations.async.GetSessionsResponse res = resBuilder.build();
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
+                res.withHeaders(response.headers().map());
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
                     return response.body().toByteArray().thenApply(bodyBytes -> {
                         try {
-                            GetSessionsResponseBody out = Utils.mapper().readValue(
+                            MediaContainerWithMetadata out = Utils.mapper().readValue(
                                     bodyBytes,
                                     new TypeReference<>() {
                                     });
-                            res.withObject(out);
+                            res.withMediaContainerWithMetadata(out);
                             return res;
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
-                    });
-                } else {
-                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "400")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return response.body().toByteArray().thenApply(bodyBytes -> {
-                        dev.plexapi.sdk.models.errors.async.GetSessionsBadRequest out;
-                        try {
-                            out = Utils.mapper().readValue(
-                                    bodyBytes,
-                                    new TypeReference<>() {
-                                    });
-                            out.withRawResponse(response);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                        throw out;
-                    });
-                } else {
-                    return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);
-                }
-            }
-            
-            if (Utils.statusCodeMatches(response.statusCode(), "401")) {
-                if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    return response.body().toByteArray().thenApply(bodyBytes -> {
-                        dev.plexapi.sdk.models.errors.async.GetSessionsUnauthorized out;
-                        try {
-                            out = Utils.mapper().readValue(
-                                    bodyBytes,
-                                    new TypeReference<>() {
-                                    });
-                            out.withRawResponse(response);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                        throw out;
                     });
                 } else {
                     return Utils.createAsyncApiError(response, "Unexpected content-type received: " + contentType);

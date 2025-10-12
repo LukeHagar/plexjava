@@ -4,24 +4,22 @@
 package dev.plexapi.sdk;
 
 import static dev.plexapi.sdk.operations.Operations.RequestOperation;
-import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
 
-import dev.plexapi.sdk.models.operations.EnablePaperTrailRequestBuilder;
-import dev.plexapi.sdk.models.operations.EnablePaperTrailResponse;
-import dev.plexapi.sdk.models.operations.Level;
-import dev.plexapi.sdk.models.operations.LogLineRequest;
-import dev.plexapi.sdk.models.operations.LogLineRequestBuilder;
-import dev.plexapi.sdk.models.operations.LogLineResponse;
-import dev.plexapi.sdk.models.operations.LogMultiLineRequestBuilder;
-import dev.plexapi.sdk.models.operations.LogMultiLineResponse;
-import dev.plexapi.sdk.operations.EnablePaperTrail;
-import dev.plexapi.sdk.operations.LogLine;
-import dev.plexapi.sdk.operations.LogMultiLine;
+import dev.plexapi.sdk.models.operations.EnablePapertrailRequest;
+import dev.plexapi.sdk.models.operations.EnablePapertrailRequestBuilder;
+import dev.plexapi.sdk.models.operations.EnablePapertrailResponse;
+import dev.plexapi.sdk.models.operations.WriteLogRequestBuilder;
+import dev.plexapi.sdk.models.operations.WriteLogResponse;
+import dev.plexapi.sdk.models.operations.WriteMessageRequest;
+import dev.plexapi.sdk.models.operations.WriteMessageRequestBuilder;
+import dev.plexapi.sdk.models.operations.WriteMessageResponse;
+import dev.plexapi.sdk.operations.EnablePapertrail;
+import dev.plexapi.sdk.operations.WriteLog;
+import dev.plexapi.sdk.operations.WriteMessage;
 import java.lang.Exception;
-import java.lang.String;
 
 /**
- * Submit logs to the Log Handler for Plex Media Server
+ * Logging mechanism to allow clients to log to the server
  */
 public class Log {
     private final SDKConfiguration sdkConfiguration;
@@ -42,137 +40,89 @@ public class Log {
     }
 
     /**
-     * Logging a single line message.
+     * Logging a multi-line message to the Plex Media Server log
      * 
-     * <p>This endpoint will write a single-line log message, including a level and source to the main Plex Media Server log.
-     * 
-     * @return The call builder
-     */
-    public LogLineRequestBuilder logLine() {
-        return new LogLineRequestBuilder(sdkConfiguration);
-    }
-
-    /**
-     * Logging a single line message.
-     * 
-     * <p>This endpoint will write a single-line log message, including a level and source to the main Plex Media Server log.
-     * 
-     * @param level An integer log level to write to the PMS log with.
-     *         0: Error
-     *         1: Warning
-     *         2: Info
-     *         3: Debug
-     *         4: Verbose
-     *         
-     * @param message The text of the message to write to the log.
-     * @param source a string indicating the source of the message.
-     * @return The response from the API call
-     * @throws Exception if the API call fails
-     */
-    public LogLineResponse logLine(
-            Level level, String message,
-            String source) throws Exception {
-        LogLineRequest request =
-            LogLineRequest
-                .builder()
-                .level(level)
-                .message(message)
-                .source(source)
-                .build();
-        RequestOperation<LogLineRequest, LogLineResponse> operation
-              = new LogLine.Sync(sdkConfiguration);
-        return operation.handleResponse(operation.doRequest(request));
-    }
-
-    /**
-     * Logging a multi-line message
-     * 
-     * <p>This endpoint allows for the batch addition of log entries to the main Plex Media Server log.
-     * It accepts a text/plain request body, where each line represents a distinct log entry.
-     * Each log entry consists of URL-encoded key-value pairs, specifying log attributes such as 'level', 'message', and 'source'.
-     * 
-     * <p>Log entries are separated by a newline character (`\n`).
-     * Each entry's parameters should be URL-encoded to ensure accurate parsing and handling of special characters.
-     * This method is efficient for logging multiple entries in a single API call, reducing the overhead of multiple individual requests.
-     * 
-     * <p>The 'level' parameter specifies the log entry's severity or importance, with the following integer values:
-     * - `0`: Error - Critical issues that require immediate attention.
-     * - `1`: Warning - Important events that are not critical but may indicate potential issues.
-     * - `2`: Info - General informational messages about system operation.
-     * - `3`: Debug - Detailed information useful for debugging purposes.
-     * - `4`: Verbose - Highly detailed diagnostic information for in-depth analysis.
-     * 
-     * <p>The 'message' parameter contains the log text, and 'source' identifies the log message's origin (e.g., an application name or module).
-     * 
-     * <p>Example of a single log entry format:
-     * `level=4&amp;message=Sample%20log%20entry&amp;source=applicationName`
-     * 
-     * <p>Ensure each parameter is properly URL-encoded to avoid interpretation issues.
+     * <p>This endpoint will write multiple lines to the main Plex Media Server log in a single request. It takes a set of query strings as would normally sent to the above PUT endpoint as a linefeed-separated block of POST data. The parameters for each query string match as above.
      * 
      * @return The call builder
      */
-    public LogMultiLineRequestBuilder logMultiLine() {
-        return new LogMultiLineRequestBuilder(sdkConfiguration);
+    public WriteLogRequestBuilder writeLog() {
+        return new WriteLogRequestBuilder(sdkConfiguration);
     }
 
     /**
-     * Logging a multi-line message
+     * Logging a multi-line message to the Plex Media Server log
      * 
-     * <p>This endpoint allows for the batch addition of log entries to the main Plex Media Server log.
-     * It accepts a text/plain request body, where each line represents a distinct log entry.
-     * Each log entry consists of URL-encoded key-value pairs, specifying log attributes such as 'level', 'message', and 'source'.
-     * 
-     * <p>Log entries are separated by a newline character (`\n`).
-     * Each entry's parameters should be URL-encoded to ensure accurate parsing and handling of special characters.
-     * This method is efficient for logging multiple entries in a single API call, reducing the overhead of multiple individual requests.
-     * 
-     * <p>The 'level' parameter specifies the log entry's severity or importance, with the following integer values:
-     * - `0`: Error - Critical issues that require immediate attention.
-     * - `1`: Warning - Important events that are not critical but may indicate potential issues.
-     * - `2`: Info - General informational messages about system operation.
-     * - `3`: Debug - Detailed information useful for debugging purposes.
-     * - `4`: Verbose - Highly detailed diagnostic information for in-depth analysis.
-     * 
-     * <p>The 'message' parameter contains the log text, and 'source' identifies the log message's origin (e.g., an application name or module).
-     * 
-     * <p>Example of a single log entry format:
-     * `level=4&amp;message=Sample%20log%20entry&amp;source=applicationName`
-     * 
-     * <p>Ensure each parameter is properly URL-encoded to avoid interpretation issues.
+     * <p>This endpoint will write multiple lines to the main Plex Media Server log in a single request. It takes a set of query strings as would normally sent to the above PUT endpoint as a linefeed-separated block of POST data. The parameters for each query string match as above.
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public LogMultiLineResponse logMultiLine(String request) throws Exception {
-        RequestOperation<String, LogMultiLineResponse> operation
-              = new LogMultiLine.Sync(sdkConfiguration);
+    public WriteLogResponse writeLog(byte[] request) throws Exception {
+        RequestOperation<byte[], WriteLogResponse> operation
+              = new WriteLog.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Logging a single-line message to the Plex Media Server log
+     * 
+     * <p>This endpoint will write a single-line log message, including a level and source to the main Plex Media Server log.
+     * 
+     * <p>Note: This endpoint responds to all HTTP verbs **except POST** but PUT is preferred
+     * 
+     * @return The call builder
+     */
+    public WriteMessageRequestBuilder writeMessage() {
+        return new WriteMessageRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Logging a single-line message to the Plex Media Server log
+     * 
+     * <p>This endpoint will write a single-line log message, including a level and source to the main Plex Media Server log.
+     * 
+     * <p>Note: This endpoint responds to all HTTP verbs **except POST** but PUT is preferred
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws Exception if the API call fails
+     */
+    public WriteMessageResponse writeMessage(WriteMessageRequest request) throws Exception {
+        RequestOperation<WriteMessageRequest, WriteMessageResponse> operation
+              = new WriteMessage.Sync(sdkConfiguration);
         return operation.handleResponse(operation.doRequest(request));
     }
 
     /**
      * Enabling Papertrail
      * 
-     * <p>This endpoint will enable all Plex Media Serverlogs to be sent to the Papertrail networked logging site for a period of time.
+     * <p>This endpoint will enable all Plex Media Server logs to be sent to the Papertrail networked logging site for a period of time
+     * 
+     * <p>Note: This endpoint responds to all HTTP verbs but POST is preferred
      * 
      * @return The call builder
      */
-    public EnablePaperTrailRequestBuilder enablePaperTrail() {
-        return new EnablePaperTrailRequestBuilder(sdkConfiguration);
+    public EnablePapertrailRequestBuilder enablePapertrail() {
+        return new EnablePapertrailRequestBuilder(sdkConfiguration);
     }
 
     /**
      * Enabling Papertrail
      * 
-     * <p>This endpoint will enable all Plex Media Serverlogs to be sent to the Papertrail networked logging site for a period of time.
+     * <p>This endpoint will enable all Plex Media Server logs to be sent to the Papertrail networked logging site for a period of time
      * 
+     * <p>Note: This endpoint responds to all HTTP verbs but POST is preferred
+     * 
+     * @param request The request object containing all the parameters for the API call.
      * @return The response from the API call
      * @throws Exception if the API call fails
      */
-    public EnablePaperTrailResponse enablePaperTrailDirect() throws Exception {
-        RequestlessOperation<EnablePaperTrailResponse> operation
-            = new EnablePaperTrail.Sync(sdkConfiguration);
-        return operation.handleResponse(operation.doRequest());
+    public EnablePapertrailResponse enablePapertrail(EnablePapertrailRequest request) throws Exception {
+        RequestOperation<EnablePapertrailRequest, EnablePapertrailResponse> operation
+              = new EnablePapertrail.Sync(sdkConfiguration);
+        return operation.handleResponse(operation.doRequest(request));
     }
 
 }

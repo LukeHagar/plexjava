@@ -5,7 +5,7 @@ package dev.plexapi.sdk.models.operations.async;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import dev.plexapi.sdk.models.operations.GetPlaylistResponseBody;
+import dev.plexapi.sdk.models.shared.MediaContainerWithPlaylistMetadata;
 import dev.plexapi.sdk.utils.AsyncResponse;
 import dev.plexapi.sdk.utils.Blob;
 import dev.plexapi.sdk.utils.Utils;
@@ -34,24 +34,24 @@ public class GetPlaylistResponse implements AsyncResponse {
     private HttpResponse<Blob> rawResponse;
 
     /**
-     * The playlist
+     * OK
      */
-    private Optional<? extends GetPlaylistResponseBody> object;
+    private Optional<? extends MediaContainerWithPlaylistMetadata> mediaContainerWithPlaylistMetadata;
 
     @JsonCreator
     public GetPlaylistResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends GetPlaylistResponseBody> object) {
+            Optional<? extends MediaContainerWithPlaylistMetadata> mediaContainerWithPlaylistMetadata) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(object, "object");
+        Utils.checkNotNull(mediaContainerWithPlaylistMetadata, "mediaContainerWithPlaylistMetadata");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.object = object;
+        this.mediaContainerWithPlaylistMetadata = mediaContainerWithPlaylistMetadata;
     }
     
     public GetPlaylistResponse(
@@ -87,12 +87,12 @@ public class GetPlaylistResponse implements AsyncResponse {
     }
 
     /**
-     * The playlist
+     * OK
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<GetPlaylistResponseBody> object() {
-        return (Optional<GetPlaylistResponseBody>) object;
+    public Optional<MediaContainerWithPlaylistMetadata> mediaContainerWithPlaylistMetadata() {
+        return (Optional<MediaContainerWithPlaylistMetadata>) mediaContainerWithPlaylistMetadata;
     }
 
     public static Builder builder() {
@@ -128,21 +128,21 @@ public class GetPlaylistResponse implements AsyncResponse {
     }
 
     /**
-     * The playlist
+     * OK
      */
-    public GetPlaylistResponse withObject(GetPlaylistResponseBody object) {
-        Utils.checkNotNull(object, "object");
-        this.object = Optional.ofNullable(object);
+    public GetPlaylistResponse withMediaContainerWithPlaylistMetadata(MediaContainerWithPlaylistMetadata mediaContainerWithPlaylistMetadata) {
+        Utils.checkNotNull(mediaContainerWithPlaylistMetadata, "mediaContainerWithPlaylistMetadata");
+        this.mediaContainerWithPlaylistMetadata = Optional.ofNullable(mediaContainerWithPlaylistMetadata);
         return this;
     }
 
 
     /**
-     * The playlist
+     * OK
      */
-    public GetPlaylistResponse withObject(Optional<? extends GetPlaylistResponseBody> object) {
-        Utils.checkNotNull(object, "object");
-        this.object = object;
+    public GetPlaylistResponse withMediaContainerWithPlaylistMetadata(Optional<? extends MediaContainerWithPlaylistMetadata> mediaContainerWithPlaylistMetadata) {
+        Utils.checkNotNull(mediaContainerWithPlaylistMetadata, "mediaContainerWithPlaylistMetadata");
+        this.mediaContainerWithPlaylistMetadata = mediaContainerWithPlaylistMetadata;
         return this;
     }
 
@@ -159,14 +159,14 @@ public class GetPlaylistResponse implements AsyncResponse {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.object, other.object);
+            Utils.enhancedDeepEquals(this.mediaContainerWithPlaylistMetadata, other.mediaContainerWithPlaylistMetadata);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            object);
+            mediaContainerWithPlaylistMetadata);
     }
     
     @Override
@@ -175,7 +175,7 @@ public class GetPlaylistResponse implements AsyncResponse {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "object", object);
+                "mediaContainerWithPlaylistMetadata", mediaContainerWithPlaylistMetadata);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -187,7 +187,7 @@ public class GetPlaylistResponse implements AsyncResponse {
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends GetPlaylistResponseBody> object = Optional.empty();
+        private Optional<? extends MediaContainerWithPlaylistMetadata> mediaContainerWithPlaylistMetadata = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -225,20 +225,20 @@ public class GetPlaylistResponse implements AsyncResponse {
 
 
         /**
-         * The playlist
+         * OK
          */
-        public Builder object(GetPlaylistResponseBody object) {
-            Utils.checkNotNull(object, "object");
-            this.object = Optional.ofNullable(object);
+        public Builder mediaContainerWithPlaylistMetadata(MediaContainerWithPlaylistMetadata mediaContainerWithPlaylistMetadata) {
+            Utils.checkNotNull(mediaContainerWithPlaylistMetadata, "mediaContainerWithPlaylistMetadata");
+            this.mediaContainerWithPlaylistMetadata = Optional.ofNullable(mediaContainerWithPlaylistMetadata);
             return this;
         }
 
         /**
-         * The playlist
+         * OK
          */
-        public Builder object(Optional<? extends GetPlaylistResponseBody> object) {
-            Utils.checkNotNull(object, "object");
-            this.object = object;
+        public Builder mediaContainerWithPlaylistMetadata(Optional<? extends MediaContainerWithPlaylistMetadata> mediaContainerWithPlaylistMetadata) {
+            Utils.checkNotNull(mediaContainerWithPlaylistMetadata, "mediaContainerWithPlaylistMetadata");
+            this.mediaContainerWithPlaylistMetadata = mediaContainerWithPlaylistMetadata;
             return this;
         }
 
@@ -246,7 +246,7 @@ public class GetPlaylistResponse implements AsyncResponse {
 
             return new GetPlaylistResponse(
                 contentType, statusCode, rawResponse,
-                object);
+                mediaContainerWithPlaylistMetadata);
         }
 
     }

@@ -3,117 +3,39 @@
  */
 package dev.plexapi.sdk.models.operations;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import dev.plexapi.sdk.utils.Utils;
-import java.lang.Override;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.lang.String;
+import java.util.Objects;
+import java.util.Optional;
 
+/**
+ * Action
+ * 
+ * <p>The action to perform for this item on this optimizer queue
+ */
+public enum Action {
+    REPROCESS("reprocess"),
+    DISABLE("disable"),
+    ENABLE("enable");
 
-public class Action {
+    @JsonValue
+    private final String value;
 
-    @JsonProperty("id")
-    private String id;
-
-
-    @JsonProperty("key")
-    private String key;
-
-    @JsonCreator
-    public Action(
-            @JsonProperty("id") String id,
-            @JsonProperty("key") String key) {
-        Utils.checkNotNull(id, "id");
-        Utils.checkNotNull(key, "key");
-        this.id = id;
-        this.key = key;
-    }
-
-    @JsonIgnore
-    public String id() {
-        return id;
-    }
-
-    @JsonIgnore
-    public String key() {
-        return key;
-    }
-
-    public static Builder builder() {
-        return new Builder();
-    }
-
-
-    public Action withId(String id) {
-        Utils.checkNotNull(id, "id");
-        this.id = id;
-        return this;
-    }
-
-    public Action withKey(String key) {
-        Utils.checkNotNull(key, "key");
-        this.key = key;
-        return this;
-    }
-
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Action other = (Action) o;
-        return 
-            Utils.enhancedDeepEquals(this.id, other.id) &&
-            Utils.enhancedDeepEquals(this.key, other.key);
+    Action(String value) {
+        this.value = value;
     }
     
-    @Override
-    public int hashCode() {
-        return Utils.enhancedHash(
-            id, key);
+    public String value() {
+        return value;
     }
     
-    @Override
-    public String toString() {
-        return Utils.toString(Action.class,
-                "id", id,
-                "key", key);
-    }
-
-    @SuppressWarnings("UnusedReturnValue")
-    public final static class Builder {
-
-        private String id;
-
-        private String key;
-
-        private Builder() {
-          // force use of static builder() method
+    public static Optional<Action> fromValue(String value) {
+        for (Action o: Action.values()) {
+            if (Objects.deepEquals(o.value, value)) {
+                return Optional.of(o);
+            }
         }
-
-
-        public Builder id(String id) {
-            Utils.checkNotNull(id, "id");
-            this.id = id;
-            return this;
-        }
-
-
-        public Builder key(String key) {
-            Utils.checkNotNull(key, "key");
-            this.key = key;
-            return this;
-        }
-
-        public Action build() {
-
-            return new Action(
-                id, key);
-        }
-
+        return Optional.empty();
     }
 }
+
