@@ -26,7 +26,7 @@ public class PlexAPI {
 
         "{protocol}://{host}:{port}",
 
-        "https://{server_url}",
+        "https://{full_server_url}",
     };
 
     /**

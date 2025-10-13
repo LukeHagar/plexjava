@@ -43,7 +43,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'dev.plexapi:plexapi:0.19.1'
+implementation 'dev.plexapi:plexapi:0.20.1'
 ```
 
 Maven:
@@ -51,7 +51,7 @@ Maven:
 <dependency>
     <groupId>dev.plexapi</groupId>
     <artifactId>plexapi</artifactId>
-    <version>0.19.1</version>
+    <version>0.20.1</version>
 </dependency>
 ```
 
@@ -592,7 +592,7 @@ You can override the default server globally using the `.serverIndex(int serverI
 | --- | ---------------------------------------------------------- | -------------------------------------------- | ----------- |
 | 0   | `https://{IP-description}.{identifier}.plex.direct:{port}` | `identifier`<br/>`IP-description`<br/>`port` |             |
 | 1   | `{protocol}://{host}:{port}`                               | `protocol`<br/>`host`<br/>`port`             |             |
-| 2   | `https://{server_url}`                                     | `server_url`                                 |             |
+| 2   | `https://{full_server_url}`                                | `server_url`                                 |             |
 
 If the selected server has variables, you may override its default values using the associated builder method(s):
 
@@ -670,7 +670,7 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         PlexAPI sdk = PlexAPI.builder()
-                .serverURL("https://http://localhost:32400")
+                .serverURL("https://{full_server_url}")
                 .accepts(Accepts.APPLICATION_XML)
                 .clientIdentifier("abc123")
                 .product("Plex for Roku")

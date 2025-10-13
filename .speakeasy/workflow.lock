@@ -8,20 +8,20 @@ sources:
             - latest
     plexapi:
         sourceNamespace: plexapi
-        sourceRevisionDigest: sha256:bc60551015634fd59475cf17983ca3aedcab591426d526ab1e3634b1feedaec1
-        sourceBlobDigest: sha256:fc8cd5343a94564b646830738f38e065d61e2ea63e4a1383ce07533586889950
+        sourceRevisionDigest: sha256:0e9f7ca03e6a970d7b77654ab41d0a1605f0105871db2630a7afc85d4362b624
+        sourceBlobDigest: sha256:c0a6079f21e9d8cf8b3a205d2da333b78b2cb7e0db9dd895a41c68c2580e2d64
         tags:
             - latest
-            - speakeasy-sdk-regen-1760251795
+            - speakeasy-sdk-regen-1760315484
             - 1.1.1
 targets:
     plexjava:
         source: plexapi
         sourceNamespace: plexapi
-        sourceRevisionDigest: sha256:bc60551015634fd59475cf17983ca3aedcab591426d526ab1e3634b1feedaec1
-        sourceBlobDigest: sha256:fc8cd5343a94564b646830738f38e065d61e2ea63e4a1383ce07533586889950
+        sourceRevisionDigest: sha256:0e9f7ca03e6a970d7b77654ab41d0a1605f0105871db2630a7afc85d4362b624
+        sourceBlobDigest: sha256:c0a6079f21e9d8cf8b3a205d2da333b78b2cb7e0db9dd895a41c68c2580e2d64
         codeSamplesNamespace: code-samples-java-plexjava
-        codeSamplesRevisionDigest: sha256:b2a3306d8dbea9843d858a4e35373df6988c2c0cf53086ae4cd2072c2c8ffb06
+        codeSamplesRevisionDigest: sha256:e076772184b6e43037b79abcef938bd0dd86905117a8634a7ed733736455b55e
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
