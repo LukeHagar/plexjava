@@ -11,7 +11,7 @@ import dev.plexapi.sdk.SDKConfiguration;
 import dev.plexapi.sdk.SecuritySource;
 import dev.plexapi.sdk.models.errors.SDKError;
 import dev.plexapi.sdk.models.operations.StopAllRefreshesResponse;
-import dev.plexapi.sdk.models.shared.RequestHandlerSlashGetResponses200;
+import dev.plexapi.sdk.models.shared.LibrarySections;
 import dev.plexapi.sdk.utils.Blob;
 import dev.plexapi.sdk.utils.Exceptions;
 import dev.plexapi.sdk.utils.HTTPClient;
@@ -149,11 +149,11 @@ public class StopAllRefreshes {
             
             if (Utils.statusCodeMatches(response.statusCode(), "200")) {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
-                    RequestHandlerSlashGetResponses200 out = Utils.mapper().readValue(
+                    LibrarySections out = Utils.mapper().readValue(
                             response.body(),
                             new TypeReference<>() {
                             });
-                    res.withRequestHandlerSlashGetResponses200(out);
+                    res.withLibrarySections(out);
                     return res;
                 } else {
                     throw new SDKError(
@@ -245,11 +245,11 @@ public class StopAllRefreshes {
                 if (Utils.contentTypeMatches(contentType, "application/json")) {
                     return response.body().toByteArray().thenApply(bodyBytes -> {
                         try {
-                            RequestHandlerSlashGetResponses200 out = Utils.mapper().readValue(
+                            LibrarySections out = Utils.mapper().readValue(
                                     bodyBytes,
                                     new TypeReference<>() {
                                     });
-                            res.withRequestHandlerSlashGetResponses200(out);
+                            res.withLibrarySections(out);
                             return res;
                         } catch (Exception e) {
                             throw new RuntimeException(e);

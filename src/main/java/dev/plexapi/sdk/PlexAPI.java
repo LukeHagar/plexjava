@@ -654,17 +654,17 @@ public class PlexAPI {
         }
         
         /**
-         * Sets the server_url variable for url substitution.
+         * Sets the full_server_url variable for url substitution.
          *
-         * @param serverUrl The value to set.
+         * @param fullServerUrl The value to set.
          * @return The builder instance.
          */
-        public Builder serverUrl(String serverUrl) {
+        public Builder fullServerUrl(String fullServerUrl) {
             for (Map<String, String> server : this.sdkConfiguration.serverVariables()) {
-                if (!server.containsKey("server_url")) {
+                if (!server.containsKey("full_server_url")) {
                     continue;
                 }
-                server.put("server_url", serverUrl.toString());
+                server.put("full_server_url", fullServerUrl.toString());
             }
 
             return this;

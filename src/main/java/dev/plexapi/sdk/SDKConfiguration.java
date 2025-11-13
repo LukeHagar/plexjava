@@ -25,7 +25,7 @@ public class SDKConfiguration {
 
     private static final String LANGUAGE = "java";
     public static final String OPENAPI_DOC_VERSION = "1.1.1";
-    public static final String SDK_VERSION = "0.20.1";
+    public static final String SDK_VERSION = "0.21.1";
     public static final String GEN_VERSION = "2.698.4";
     private static final String BASE_PACKAGE = "dev.plexapi.sdk";
     public static final String USER_AGENT = 
@@ -102,7 +102,7 @@ public class SDKConfiguration {
             put("port", "32400");
         } });
         add(new HashMap<>(){ {
-            put("server_url", "http://localhost:32400");
+            put("full_server_url", "http://localhost:32400");
         } });
     } };
     

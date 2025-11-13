@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 1732900d-e173-47c1-a90d-d45182eb35d9
 management:
-  docChecksum: 46ec1ce493542eb1a574ee88fc8b0895
+  docChecksum: e95c0e17d3e268dcd18d26ac8d0bfc98
   docVersion: 1.1.1
   speakeasyVersion: 1.615.2
   generationVersion: 2.698.4
-  releaseVersion: 0.20.1
-  configChecksum: 3ae1fd8825523e7d3c4f0ded44ee4c16
+  releaseVersion: 0.21.1
+  configChecksum: 7af145b778364c038a024a71c312f9e6
   repoURL: https://github.com/LukeHagar/plexjava.git
   published: true
 features:
@@ -750,6 +750,9 @@ generatedFiles:
   - docs/models/shared/Items.md
   - docs/models/shared/LibrarySection.md
   - docs/models/shared/LibrarySectionLocation.md
+  - docs/models/shared/LibrarySections.md
+  - docs/models/shared/LibrarySectionsDirectory.md
+  - docs/models/shared/LibrarySectionsMediaContainer.md
   - docs/models/shared/Lineup.md
   - docs/models/shared/LineupType.md
   - docs/models/shared/Location.md
@@ -801,9 +804,6 @@ generatedFiles:
   - docs/models/shared/PostResponses200Type.md
   - docs/models/shared/Protocol.md
   - docs/models/shared/RecommendationsVisibility.md
-  - docs/models/shared/RequestHandlerSlashGetResponses200.md
-  - docs/models/shared/RequestHandlerSlashGetResponses200Directory.md
-  - docs/models/shared/RequestHandlerSlashGetResponses200MediaContainer.md
   - docs/models/shared/Security.md
   - docs/models/shared/Session.md
   - docs/models/shared/SessionLocation.md
@@ -2348,6 +2348,9 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/shared/Items.java
   - src/main/java/dev/plexapi/sdk/models/shared/LibrarySection.java
   - src/main/java/dev/plexapi/sdk/models/shared/LibrarySectionLocation.java
+  - src/main/java/dev/plexapi/sdk/models/shared/LibrarySections.java
+  - src/main/java/dev/plexapi/sdk/models/shared/LibrarySectionsDirectory.java
+  - src/main/java/dev/plexapi/sdk/models/shared/LibrarySectionsMediaContainer.java
   - src/main/java/dev/plexapi/sdk/models/shared/Lineup.java
   - src/main/java/dev/plexapi/sdk/models/shared/LineupType.java
   - src/main/java/dev/plexapi/sdk/models/shared/Location.java
@@ -2399,9 +2402,6 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/shared/PostResponses200Type.java
   - src/main/java/dev/plexapi/sdk/models/shared/Protocol.java
   - src/main/java/dev/plexapi/sdk/models/shared/RecommendationsVisibility.java
-  - src/main/java/dev/plexapi/sdk/models/shared/RequestHandlerSlashGetResponses200.java
-  - src/main/java/dev/plexapi/sdk/models/shared/RequestHandlerSlashGetResponses200Directory.java
-  - src/main/java/dev/plexapi/sdk/models/shared/RequestHandlerSlashGetResponses200MediaContainer.java
   - src/main/java/dev/plexapi/sdk/models/shared/Security.java
   - src/main/java/dev/plexapi/sdk/models/shared/Session.java
   - src/main/java/dev/plexapi/sdk/models/shared/SessionLocation.java

@@ -5,7 +5,7 @@ package dev.plexapi.sdk.models.operations.async;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import dev.plexapi.sdk.models.shared.RequestHandlerSlashGetResponses200;
+import dev.plexapi.sdk.models.shared.LibrarySections;
 import dev.plexapi.sdk.utils.AsyncResponse;
 import dev.plexapi.sdk.utils.Blob;
 import dev.plexapi.sdk.utils.Utils;
@@ -36,22 +36,22 @@ public class GetSectionsPrefsResponse implements AsyncResponse {
     /**
      * OK
      */
-    private Optional<? extends RequestHandlerSlashGetResponses200> requestHandlerSlashGetResponses200;
+    private Optional<? extends LibrarySections> librarySections;
 
     @JsonCreator
     public GetSectionsPrefsResponse(
             String contentType,
             int statusCode,
             HttpResponse<Blob> rawResponse,
-            Optional<? extends RequestHandlerSlashGetResponses200> requestHandlerSlashGetResponses200) {
+            Optional<? extends LibrarySections> librarySections) {
         Utils.checkNotNull(contentType, "contentType");
         Utils.checkNotNull(statusCode, "statusCode");
         Utils.checkNotNull(rawResponse, "rawResponse");
-        Utils.checkNotNull(requestHandlerSlashGetResponses200, "requestHandlerSlashGetResponses200");
+        Utils.checkNotNull(librarySections, "librarySections");
         this.contentType = contentType;
         this.statusCode = statusCode;
         this.rawResponse = rawResponse;
-        this.requestHandlerSlashGetResponses200 = requestHandlerSlashGetResponses200;
+        this.librarySections = librarySections;
     }
     
     public GetSectionsPrefsResponse(
@@ -91,8 +91,8 @@ public class GetSectionsPrefsResponse implements AsyncResponse {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<RequestHandlerSlashGetResponses200> requestHandlerSlashGetResponses200() {
-        return (Optional<RequestHandlerSlashGetResponses200>) requestHandlerSlashGetResponses200;
+    public Optional<LibrarySections> librarySections() {
+        return (Optional<LibrarySections>) librarySections;
     }
 
     public static Builder builder() {
@@ -130,9 +130,9 @@ public class GetSectionsPrefsResponse implements AsyncResponse {
     /**
      * OK
      */
-    public GetSectionsPrefsResponse withRequestHandlerSlashGetResponses200(RequestHandlerSlashGetResponses200 requestHandlerSlashGetResponses200) {
-        Utils.checkNotNull(requestHandlerSlashGetResponses200, "requestHandlerSlashGetResponses200");
-        this.requestHandlerSlashGetResponses200 = Optional.ofNullable(requestHandlerSlashGetResponses200);
+    public GetSectionsPrefsResponse withLibrarySections(LibrarySections librarySections) {
+        Utils.checkNotNull(librarySections, "librarySections");
+        this.librarySections = Optional.ofNullable(librarySections);
         return this;
     }
 
@@ -140,9 +140,9 @@ public class GetSectionsPrefsResponse implements AsyncResponse {
     /**
      * OK
      */
-    public GetSectionsPrefsResponse withRequestHandlerSlashGetResponses200(Optional<? extends RequestHandlerSlashGetResponses200> requestHandlerSlashGetResponses200) {
-        Utils.checkNotNull(requestHandlerSlashGetResponses200, "requestHandlerSlashGetResponses200");
-        this.requestHandlerSlashGetResponses200 = requestHandlerSlashGetResponses200;
+    public GetSectionsPrefsResponse withLibrarySections(Optional<? extends LibrarySections> librarySections) {
+        Utils.checkNotNull(librarySections, "librarySections");
+        this.librarySections = librarySections;
         return this;
     }
 
@@ -159,14 +159,14 @@ public class GetSectionsPrefsResponse implements AsyncResponse {
             Utils.enhancedDeepEquals(this.contentType, other.contentType) &&
             Utils.enhancedDeepEquals(this.statusCode, other.statusCode) &&
             Utils.enhancedDeepEquals(this.rawResponse, other.rawResponse) &&
-            Utils.enhancedDeepEquals(this.requestHandlerSlashGetResponses200, other.requestHandlerSlashGetResponses200);
+            Utils.enhancedDeepEquals(this.librarySections, other.librarySections);
     }
     
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
             contentType, statusCode, rawResponse,
-            requestHandlerSlashGetResponses200);
+            librarySections);
     }
     
     @Override
@@ -175,7 +175,7 @@ public class GetSectionsPrefsResponse implements AsyncResponse {
                 "contentType", contentType,
                 "statusCode", statusCode,
                 "rawResponse", rawResponse,
-                "requestHandlerSlashGetResponses200", requestHandlerSlashGetResponses200);
+                "librarySections", librarySections);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -187,7 +187,7 @@ public class GetSectionsPrefsResponse implements AsyncResponse {
 
         private HttpResponse<Blob> rawResponse;
 
-        private Optional<? extends RequestHandlerSlashGetResponses200> requestHandlerSlashGetResponses200 = Optional.empty();
+        private Optional<? extends LibrarySections> librarySections = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -227,18 +227,18 @@ public class GetSectionsPrefsResponse implements AsyncResponse {
         /**
          * OK
          */
-        public Builder requestHandlerSlashGetResponses200(RequestHandlerSlashGetResponses200 requestHandlerSlashGetResponses200) {
-            Utils.checkNotNull(requestHandlerSlashGetResponses200, "requestHandlerSlashGetResponses200");
-            this.requestHandlerSlashGetResponses200 = Optional.ofNullable(requestHandlerSlashGetResponses200);
+        public Builder librarySections(LibrarySections librarySections) {
+            Utils.checkNotNull(librarySections, "librarySections");
+            this.librarySections = Optional.ofNullable(librarySections);
             return this;
         }
 
         /**
          * OK
          */
-        public Builder requestHandlerSlashGetResponses200(Optional<? extends RequestHandlerSlashGetResponses200> requestHandlerSlashGetResponses200) {
-            Utils.checkNotNull(requestHandlerSlashGetResponses200, "requestHandlerSlashGetResponses200");
-            this.requestHandlerSlashGetResponses200 = requestHandlerSlashGetResponses200;
+        public Builder librarySections(Optional<? extends LibrarySections> librarySections) {
+            Utils.checkNotNull(librarySections, "librarySections");
+            this.librarySections = librarySections;
             return this;
         }
 
@@ -246,7 +246,7 @@ public class GetSectionsPrefsResponse implements AsyncResponse {
 
             return new GetSectionsPrefsResponse(
                 contentType, statusCode, rawResponse,
-                requestHandlerSlashGetResponses200);
+                librarySections);
         }
 
     }

@@ -15,31 +15,31 @@ import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 /**
- * RequestHandlerSlashGetResponses200
+ * LibrarySections
  * 
  * <p>OK
  */
-public class RequestHandlerSlashGetResponses200 {
+public class LibrarySections {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("MediaContainer")
-    private Optional<? extends RequestHandlerSlashGetResponses200MediaContainer> mediaContainer;
+    private Optional<? extends LibrarySectionsMediaContainer> mediaContainer;
 
     @JsonCreator
-    public RequestHandlerSlashGetResponses200(
-            @JsonProperty("MediaContainer") Optional<? extends RequestHandlerSlashGetResponses200MediaContainer> mediaContainer) {
+    public LibrarySections(
+            @JsonProperty("MediaContainer") Optional<? extends LibrarySectionsMediaContainer> mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
         this.mediaContainer = mediaContainer;
     }
     
-    public RequestHandlerSlashGetResponses200() {
+    public LibrarySections() {
         this(Optional.empty());
     }
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<RequestHandlerSlashGetResponses200MediaContainer> mediaContainer() {
-        return (Optional<RequestHandlerSlashGetResponses200MediaContainer>) mediaContainer;
+    public Optional<LibrarySectionsMediaContainer> mediaContainer() {
+        return (Optional<LibrarySectionsMediaContainer>) mediaContainer;
     }
 
     public static Builder builder() {
@@ -47,14 +47,14 @@ public class RequestHandlerSlashGetResponses200 {
     }
 
 
-    public RequestHandlerSlashGetResponses200 withMediaContainer(RequestHandlerSlashGetResponses200MediaContainer mediaContainer) {
+    public LibrarySections withMediaContainer(LibrarySectionsMediaContainer mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
         this.mediaContainer = Optional.ofNullable(mediaContainer);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200 withMediaContainer(Optional<? extends RequestHandlerSlashGetResponses200MediaContainer> mediaContainer) {
+    public LibrarySections withMediaContainer(Optional<? extends LibrarySectionsMediaContainer> mediaContainer) {
         Utils.checkNotNull(mediaContainer, "mediaContainer");
         this.mediaContainer = mediaContainer;
         return this;
@@ -68,7 +68,7 @@ public class RequestHandlerSlashGetResponses200 {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        RequestHandlerSlashGetResponses200 other = (RequestHandlerSlashGetResponses200) o;
+        LibrarySections other = (LibrarySections) o;
         return 
             Utils.enhancedDeepEquals(this.mediaContainer, other.mediaContainer);
     }
@@ -81,35 +81,35 @@ public class RequestHandlerSlashGetResponses200 {
     
     @Override
     public String toString() {
-        return Utils.toString(RequestHandlerSlashGetResponses200.class,
+        return Utils.toString(LibrarySections.class,
                 "mediaContainer", mediaContainer);
     }
 
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends RequestHandlerSlashGetResponses200MediaContainer> mediaContainer = Optional.empty();
+        private Optional<? extends LibrarySectionsMediaContainer> mediaContainer = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        public Builder mediaContainer(RequestHandlerSlashGetResponses200MediaContainer mediaContainer) {
+        public Builder mediaContainer(LibrarySectionsMediaContainer mediaContainer) {
             Utils.checkNotNull(mediaContainer, "mediaContainer");
             this.mediaContainer = Optional.ofNullable(mediaContainer);
             return this;
         }
 
-        public Builder mediaContainer(Optional<? extends RequestHandlerSlashGetResponses200MediaContainer> mediaContainer) {
+        public Builder mediaContainer(Optional<? extends LibrarySectionsMediaContainer> mediaContainer) {
             Utils.checkNotNull(mediaContainer, "mediaContainer");
             this.mediaContainer = mediaContainer;
             return this;
         }
 
-        public RequestHandlerSlashGetResponses200 build() {
+        public LibrarySections build() {
 
-            return new RequestHandlerSlashGetResponses200(
+            return new LibrarySections(
                 mediaContainer);
         }
 

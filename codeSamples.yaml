@@ -4529,7 +4529,7 @@ actions:
                     StopAllRefreshesResponse res = sdk.library().stopAllRefreshes()
                             .call();
 
-                    if (res.requestHandlerSlashGetResponses200().isPresent()) {
+                    if (res.librarySections().isPresent()) {
                         // handle response
                     }
                 }
@@ -4575,7 +4575,7 @@ actions:
                             .request(req)
                             .call();
 
-                    if (res.requestHandlerSlashGetResponses200().isPresent()) {
+                    if (res.librarySections().isPresent()) {
                         // handle response
                     }
                 }

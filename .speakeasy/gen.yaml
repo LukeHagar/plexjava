@@ -21,8 +21,11 @@ generation:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
+  requestBodyFieldName: ""
+  schemas:
+    allOfMergeStrategy: shallowMerge
 java:
-  version: 0.20.1
+  version: 0.21.1
   additionalDependencies: []
   additionalPlugins: []
   artifactID: plexapi
@@ -35,7 +38,9 @@ java:
   defaultErrorName: SDKError
   enableCustomCodeRegions: false
   enableStreamingUploads: false
+  enhancedUnionMemberResolution: true
   flattenGlobalSecurity: true
+  generateOptionalUnionAccessors: false
   generateSpringBootStarter: true
   githubURL: github.com/LukeHagar/plexjava
   groupID: dev.plexapi
@@ -55,6 +60,7 @@ java:
     url: https://mit-license.org/
   maxMethodParams: 4
   nullFriendlyParameters: false
+  openUnions: true
   outputModelSuffix: output
   packageName: dev.plexapi.sdk
   projectName: plexapi

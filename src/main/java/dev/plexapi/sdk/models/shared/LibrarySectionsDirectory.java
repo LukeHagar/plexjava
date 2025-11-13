@@ -15,7 +15,7 @@ import java.lang.String;
 import java.util.Optional;
 
 
-public class RequestHandlerSlashGetResponses200Directory {
+public class LibrarySectionsDirectory {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("count")
@@ -34,7 +34,7 @@ public class RequestHandlerSlashGetResponses200Directory {
     private Optional<String> title;
 
     @JsonCreator
-    public RequestHandlerSlashGetResponses200Directory(
+    public LibrarySectionsDirectory(
             @JsonProperty("count") Optional<Long> count,
             @JsonProperty("key") Optional<String> key,
             @JsonProperty("title") Optional<String> title) {
@@ -46,7 +46,7 @@ public class RequestHandlerSlashGetResponses200Directory {
         this.title = title;
     }
     
-    public RequestHandlerSlashGetResponses200Directory() {
+    public LibrarySectionsDirectory() {
         this(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
@@ -73,14 +73,14 @@ public class RequestHandlerSlashGetResponses200Directory {
     }
 
 
-    public RequestHandlerSlashGetResponses200Directory withCount(long count) {
+    public LibrarySectionsDirectory withCount(long count) {
         Utils.checkNotNull(count, "count");
         this.count = Optional.ofNullable(count);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200Directory withCount(Optional<Long> count) {
+    public LibrarySectionsDirectory withCount(Optional<Long> count) {
         Utils.checkNotNull(count, "count");
         this.count = count;
         return this;
@@ -89,7 +89,7 @@ public class RequestHandlerSlashGetResponses200Directory {
     /**
      * The key where this directory is found
      */
-    public RequestHandlerSlashGetResponses200Directory withKey(String key) {
+    public LibrarySectionsDirectory withKey(String key) {
         Utils.checkNotNull(key, "key");
         this.key = Optional.ofNullable(key);
         return this;
@@ -99,20 +99,20 @@ public class RequestHandlerSlashGetResponses200Directory {
     /**
      * The key where this directory is found
      */
-    public RequestHandlerSlashGetResponses200Directory withKey(Optional<String> key) {
+    public LibrarySectionsDirectory withKey(Optional<String> key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200Directory withTitle(String title) {
+    public LibrarySectionsDirectory withTitle(String title) {
         Utils.checkNotNull(title, "title");
         this.title = Optional.ofNullable(title);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200Directory withTitle(Optional<String> title) {
+    public LibrarySectionsDirectory withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
         return this;
@@ -126,7 +126,7 @@ public class RequestHandlerSlashGetResponses200Directory {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        RequestHandlerSlashGetResponses200Directory other = (RequestHandlerSlashGetResponses200Directory) o;
+        LibrarySectionsDirectory other = (LibrarySectionsDirectory) o;
         return 
             Utils.enhancedDeepEquals(this.count, other.count) &&
             Utils.enhancedDeepEquals(this.key, other.key) &&
@@ -141,7 +141,7 @@ public class RequestHandlerSlashGetResponses200Directory {
     
     @Override
     public String toString() {
-        return Utils.toString(RequestHandlerSlashGetResponses200Directory.class,
+        return Utils.toString(LibrarySectionsDirectory.class,
                 "count", count,
                 "key", key,
                 "title", title);
@@ -205,9 +205,9 @@ public class RequestHandlerSlashGetResponses200Directory {
             return this;
         }
 
-        public RequestHandlerSlashGetResponses200Directory build() {
+        public LibrarySectionsDirectory build() {
 
-            return new RequestHandlerSlashGetResponses200Directory(
+            return new LibrarySectionsDirectory(
                 count, key, title);
         }
 

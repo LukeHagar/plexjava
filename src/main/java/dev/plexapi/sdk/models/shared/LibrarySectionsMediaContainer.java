@@ -19,13 +19,13 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * RequestHandlerSlashGetResponses200MediaContainer
+ * LibrarySectionsMediaContainer
  * 
  * <p>`MediaContainer` is the root element of most Plex API responses. It serves as a generic container for various types of content (Metadata, Hubs, Directories, etc.) and includes pagination information (offset, size, totalSize) when applicable.
  * Common attributes: - identifier: Unique identifier for this container - size: Number of items in this response page - totalSize: Total number of items available (for pagination) - offset: Starting index of this page (for pagination)
  * The container often "hoists" common attributes from its children. For example, if all tracks in a container share the same album title, the `parentTitle` attribute may appear on the MediaContainer rather than being repeated on each track.
  */
-public class RequestHandlerSlashGetResponses200MediaContainer {
+public class LibrarySectionsMediaContainer {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("identifier")
@@ -299,10 +299,10 @@ public class RequestHandlerSlashGetResponses200MediaContainer {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Directory")
-    private Optional<? extends List<RequestHandlerSlashGetResponses200Directory>> directory;
+    private Optional<? extends List<LibrarySectionsDirectory>> directory;
 
     @JsonCreator
-    public RequestHandlerSlashGetResponses200MediaContainer(
+    public LibrarySectionsMediaContainer(
             @JsonProperty("identifier") Optional<String> identifier,
             @JsonProperty("offset") Optional<Long> offset,
             @JsonProperty("size") Optional<Long> size,
@@ -355,7 +355,7 @@ public class RequestHandlerSlashGetResponses200MediaContainer {
             @JsonProperty("updater") Optional<Boolean> updater,
             @JsonProperty("version") Optional<String> version,
             @JsonProperty("voiceSearch") Optional<Boolean> voiceSearch,
-            @JsonProperty("Directory") Optional<? extends List<RequestHandlerSlashGetResponses200Directory>> directory) {
+            @JsonProperty("Directory") Optional<? extends List<LibrarySectionsDirectory>> directory) {
         Utils.checkNotNull(identifier, "identifier");
         Utils.checkNotNull(offset, "offset");
         Utils.checkNotNull(size, "size");
@@ -464,7 +464,7 @@ public class RequestHandlerSlashGetResponses200MediaContainer {
         this.directory = directory;
     }
     
-    public RequestHandlerSlashGetResponses200MediaContainer() {
+    public LibrarySectionsMediaContainer() {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
@@ -768,8 +768,8 @@ public class RequestHandlerSlashGetResponses200MediaContainer {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<RequestHandlerSlashGetResponses200Directory>> directory() {
-        return (Optional<List<RequestHandlerSlashGetResponses200Directory>>) directory;
+    public Optional<List<LibrarySectionsDirectory>> directory() {
+        return (Optional<List<LibrarySectionsDirectory>>) directory;
     }
 
     public static Builder builder() {
@@ -777,14 +777,14 @@ public class RequestHandlerSlashGetResponses200MediaContainer {
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withIdentifier(String identifier) {
+    public LibrarySectionsMediaContainer withIdentifier(String identifier) {
         Utils.checkNotNull(identifier, "identifier");
         this.identifier = Optional.ofNullable(identifier);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withIdentifier(Optional<String> identifier) {
+    public LibrarySectionsMediaContainer withIdentifier(Optional<String> identifier) {
         Utils.checkNotNull(identifier, "identifier");
         this.identifier = identifier;
         return this;
@@ -793,7 +793,7 @@ public class RequestHandlerSlashGetResponses200MediaContainer {
     /**
      * The offset of where this container page starts among the total objects available. Also provided in the `X-Plex-Container-Start` header.
      */
-    public RequestHandlerSlashGetResponses200MediaContainer withOffset(long offset) {
+    public LibrarySectionsMediaContainer withOffset(long offset) {
         Utils.checkNotNull(offset, "offset");
         this.offset = Optional.ofNullable(offset);
         return this;
@@ -803,20 +803,20 @@ public class RequestHandlerSlashGetResponses200MediaContainer {
     /**
      * The offset of where this container page starts among the total objects available. Also provided in the `X-Plex-Container-Start` header.
      */
-    public RequestHandlerSlashGetResponses200MediaContainer withOffset(Optional<Long> offset) {
+    public LibrarySectionsMediaContainer withOffset(Optional<Long> offset) {
         Utils.checkNotNull(offset, "offset");
         this.offset = offset;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withSize(long size) {
+    public LibrarySectionsMediaContainer withSize(long size) {
         Utils.checkNotNull(size, "size");
         this.size = Optional.ofNullable(size);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withSize(Optional<Long> size) {
+    public LibrarySectionsMediaContainer withSize(Optional<Long> size) {
         Utils.checkNotNull(size, "size");
         this.size = size;
         return this;
@@ -825,7 +825,7 @@ public class RequestHandlerSlashGetResponses200MediaContainer {
     /**
      * The total size of objects available. Also provided in the `X-Plex-Container-Total-Size` header.
      */
-    public RequestHandlerSlashGetResponses200MediaContainer withTotalSize(long totalSize) {
+    public LibrarySectionsMediaContainer withTotalSize(long totalSize) {
         Utils.checkNotNull(totalSize, "totalSize");
         this.totalSize = Optional.ofNullable(totalSize);
         return this;
@@ -835,345 +835,345 @@ public class RequestHandlerSlashGetResponses200MediaContainer {
     /**
      * The total size of objects available. Also provided in the `X-Plex-Container-Total-Size` header.
      */
-    public RequestHandlerSlashGetResponses200MediaContainer withTotalSize(Optional<Long> totalSize) {
+    public LibrarySectionsMediaContainer withTotalSize(Optional<Long> totalSize) {
         Utils.checkNotNull(totalSize, "totalSize");
         this.totalSize = totalSize;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withAllowCameraUpload(boolean allowCameraUpload) {
+    public LibrarySectionsMediaContainer withAllowCameraUpload(boolean allowCameraUpload) {
         Utils.checkNotNull(allowCameraUpload, "allowCameraUpload");
         this.allowCameraUpload = Optional.ofNullable(allowCameraUpload);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withAllowCameraUpload(Optional<Boolean> allowCameraUpload) {
+    public LibrarySectionsMediaContainer withAllowCameraUpload(Optional<Boolean> allowCameraUpload) {
         Utils.checkNotNull(allowCameraUpload, "allowCameraUpload");
         this.allowCameraUpload = allowCameraUpload;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withAllowChannelAccess(boolean allowChannelAccess) {
+    public LibrarySectionsMediaContainer withAllowChannelAccess(boolean allowChannelAccess) {
         Utils.checkNotNull(allowChannelAccess, "allowChannelAccess");
         this.allowChannelAccess = Optional.ofNullable(allowChannelAccess);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withAllowChannelAccess(Optional<Boolean> allowChannelAccess) {
+    public LibrarySectionsMediaContainer withAllowChannelAccess(Optional<Boolean> allowChannelAccess) {
         Utils.checkNotNull(allowChannelAccess, "allowChannelAccess");
         this.allowChannelAccess = allowChannelAccess;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withAllowMediaDeletion(boolean allowMediaDeletion) {
+    public LibrarySectionsMediaContainer withAllowMediaDeletion(boolean allowMediaDeletion) {
         Utils.checkNotNull(allowMediaDeletion, "allowMediaDeletion");
         this.allowMediaDeletion = Optional.ofNullable(allowMediaDeletion);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withAllowMediaDeletion(Optional<Boolean> allowMediaDeletion) {
+    public LibrarySectionsMediaContainer withAllowMediaDeletion(Optional<Boolean> allowMediaDeletion) {
         Utils.checkNotNull(allowMediaDeletion, "allowMediaDeletion");
         this.allowMediaDeletion = allowMediaDeletion;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withAllowSharing(boolean allowSharing) {
+    public LibrarySectionsMediaContainer withAllowSharing(boolean allowSharing) {
         Utils.checkNotNull(allowSharing, "allowSharing");
         this.allowSharing = Optional.ofNullable(allowSharing);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withAllowSharing(Optional<Boolean> allowSharing) {
+    public LibrarySectionsMediaContainer withAllowSharing(Optional<Boolean> allowSharing) {
         Utils.checkNotNull(allowSharing, "allowSharing");
         this.allowSharing = allowSharing;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withAllowSync(boolean allowSync) {
+    public LibrarySectionsMediaContainer withAllowSync(boolean allowSync) {
         Utils.checkNotNull(allowSync, "allowSync");
         this.allowSync = Optional.ofNullable(allowSync);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withAllowSync(Optional<Boolean> allowSync) {
+    public LibrarySectionsMediaContainer withAllowSync(Optional<Boolean> allowSync) {
         Utils.checkNotNull(allowSync, "allowSync");
         this.allowSync = allowSync;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withAllowTuners(boolean allowTuners) {
+    public LibrarySectionsMediaContainer withAllowTuners(boolean allowTuners) {
         Utils.checkNotNull(allowTuners, "allowTuners");
         this.allowTuners = Optional.ofNullable(allowTuners);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withAllowTuners(Optional<Boolean> allowTuners) {
+    public LibrarySectionsMediaContainer withAllowTuners(Optional<Boolean> allowTuners) {
         Utils.checkNotNull(allowTuners, "allowTuners");
         this.allowTuners = allowTuners;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withBackgroundProcessing(boolean backgroundProcessing) {
+    public LibrarySectionsMediaContainer withBackgroundProcessing(boolean backgroundProcessing) {
         Utils.checkNotNull(backgroundProcessing, "backgroundProcessing");
         this.backgroundProcessing = Optional.ofNullable(backgroundProcessing);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withBackgroundProcessing(Optional<Boolean> backgroundProcessing) {
+    public LibrarySectionsMediaContainer withBackgroundProcessing(Optional<Boolean> backgroundProcessing) {
         Utils.checkNotNull(backgroundProcessing, "backgroundProcessing");
         this.backgroundProcessing = backgroundProcessing;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withCertificate(boolean certificate) {
+    public LibrarySectionsMediaContainer withCertificate(boolean certificate) {
         Utils.checkNotNull(certificate, "certificate");
         this.certificate = Optional.ofNullable(certificate);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withCertificate(Optional<Boolean> certificate) {
+    public LibrarySectionsMediaContainer withCertificate(Optional<Boolean> certificate) {
         Utils.checkNotNull(certificate, "certificate");
         this.certificate = certificate;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withCompanionProxy(boolean companionProxy) {
+    public LibrarySectionsMediaContainer withCompanionProxy(boolean companionProxy) {
         Utils.checkNotNull(companionProxy, "companionProxy");
         this.companionProxy = Optional.ofNullable(companionProxy);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withCompanionProxy(Optional<Boolean> companionProxy) {
+    public LibrarySectionsMediaContainer withCompanionProxy(Optional<Boolean> companionProxy) {
         Utils.checkNotNull(companionProxy, "companionProxy");
         this.companionProxy = companionProxy;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withCountryCode(String countryCode) {
+    public LibrarySectionsMediaContainer withCountryCode(String countryCode) {
         Utils.checkNotNull(countryCode, "countryCode");
         this.countryCode = Optional.ofNullable(countryCode);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withCountryCode(Optional<String> countryCode) {
+    public LibrarySectionsMediaContainer withCountryCode(Optional<String> countryCode) {
         Utils.checkNotNull(countryCode, "countryCode");
         this.countryCode = countryCode;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withDiagnostics(String diagnostics) {
+    public LibrarySectionsMediaContainer withDiagnostics(String diagnostics) {
         Utils.checkNotNull(diagnostics, "diagnostics");
         this.diagnostics = Optional.ofNullable(diagnostics);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withDiagnostics(Optional<String> diagnostics) {
+    public LibrarySectionsMediaContainer withDiagnostics(Optional<String> diagnostics) {
         Utils.checkNotNull(diagnostics, "diagnostics");
         this.diagnostics = diagnostics;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withEventStream(boolean eventStream) {
+    public LibrarySectionsMediaContainer withEventStream(boolean eventStream) {
         Utils.checkNotNull(eventStream, "eventStream");
         this.eventStream = Optional.ofNullable(eventStream);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withEventStream(Optional<Boolean> eventStream) {
+    public LibrarySectionsMediaContainer withEventStream(Optional<Boolean> eventStream) {
         Utils.checkNotNull(eventStream, "eventStream");
         this.eventStream = eventStream;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withFriendlyName(String friendlyName) {
+    public LibrarySectionsMediaContainer withFriendlyName(String friendlyName) {
         Utils.checkNotNull(friendlyName, "friendlyName");
         this.friendlyName = Optional.ofNullable(friendlyName);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withFriendlyName(Optional<String> friendlyName) {
+    public LibrarySectionsMediaContainer withFriendlyName(Optional<String> friendlyName) {
         Utils.checkNotNull(friendlyName, "friendlyName");
         this.friendlyName = friendlyName;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withHubSearch(boolean hubSearch) {
+    public LibrarySectionsMediaContainer withHubSearch(boolean hubSearch) {
         Utils.checkNotNull(hubSearch, "hubSearch");
         this.hubSearch = Optional.ofNullable(hubSearch);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withHubSearch(Optional<Boolean> hubSearch) {
+    public LibrarySectionsMediaContainer withHubSearch(Optional<Boolean> hubSearch) {
         Utils.checkNotNull(hubSearch, "hubSearch");
         this.hubSearch = hubSearch;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withItemClusters(boolean itemClusters) {
+    public LibrarySectionsMediaContainer withItemClusters(boolean itemClusters) {
         Utils.checkNotNull(itemClusters, "itemClusters");
         this.itemClusters = Optional.ofNullable(itemClusters);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withItemClusters(Optional<Boolean> itemClusters) {
+    public LibrarySectionsMediaContainer withItemClusters(Optional<Boolean> itemClusters) {
         Utils.checkNotNull(itemClusters, "itemClusters");
         this.itemClusters = itemClusters;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withLivetv(long livetv) {
+    public LibrarySectionsMediaContainer withLivetv(long livetv) {
         Utils.checkNotNull(livetv, "livetv");
         this.livetv = Optional.ofNullable(livetv);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withLivetv(Optional<Long> livetv) {
+    public LibrarySectionsMediaContainer withLivetv(Optional<Long> livetv) {
         Utils.checkNotNull(livetv, "livetv");
         this.livetv = livetv;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withMachineIdentifier(Object machineIdentifier) {
+    public LibrarySectionsMediaContainer withMachineIdentifier(Object machineIdentifier) {
         Utils.checkNotNull(machineIdentifier, "machineIdentifier");
         this.machineIdentifier = Optional.ofNullable(machineIdentifier);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withMachineIdentifier(Optional<? extends Object> machineIdentifier) {
+    public LibrarySectionsMediaContainer withMachineIdentifier(Optional<? extends Object> machineIdentifier) {
         Utils.checkNotNull(machineIdentifier, "machineIdentifier");
         this.machineIdentifier = machineIdentifier;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withMediaProviders(boolean mediaProviders) {
+    public LibrarySectionsMediaContainer withMediaProviders(boolean mediaProviders) {
         Utils.checkNotNull(mediaProviders, "mediaProviders");
         this.mediaProviders = Optional.ofNullable(mediaProviders);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withMediaProviders(Optional<Boolean> mediaProviders) {
+    public LibrarySectionsMediaContainer withMediaProviders(Optional<Boolean> mediaProviders) {
         Utils.checkNotNull(mediaProviders, "mediaProviders");
         this.mediaProviders = mediaProviders;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withMultiuser(boolean multiuser) {
+    public LibrarySectionsMediaContainer withMultiuser(boolean multiuser) {
         Utils.checkNotNull(multiuser, "multiuser");
         this.multiuser = Optional.ofNullable(multiuser);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withMultiuser(Optional<Boolean> multiuser) {
+    public LibrarySectionsMediaContainer withMultiuser(Optional<Boolean> multiuser) {
         Utils.checkNotNull(multiuser, "multiuser");
         this.multiuser = multiuser;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withMusicAnalysis(long musicAnalysis) {
+    public LibrarySectionsMediaContainer withMusicAnalysis(long musicAnalysis) {
         Utils.checkNotNull(musicAnalysis, "musicAnalysis");
         this.musicAnalysis = Optional.ofNullable(musicAnalysis);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withMusicAnalysis(Optional<Long> musicAnalysis) {
+    public LibrarySectionsMediaContainer withMusicAnalysis(Optional<Long> musicAnalysis) {
         Utils.checkNotNull(musicAnalysis, "musicAnalysis");
         this.musicAnalysis = musicAnalysis;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withMyPlex(boolean myPlex) {
+    public LibrarySectionsMediaContainer withMyPlex(boolean myPlex) {
         Utils.checkNotNull(myPlex, "myPlex");
         this.myPlex = Optional.ofNullable(myPlex);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withMyPlex(Optional<Boolean> myPlex) {
+    public LibrarySectionsMediaContainer withMyPlex(Optional<Boolean> myPlex) {
         Utils.checkNotNull(myPlex, "myPlex");
         this.myPlex = myPlex;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withMyPlexMappingState(Object myPlexMappingState) {
+    public LibrarySectionsMediaContainer withMyPlexMappingState(Object myPlexMappingState) {
         Utils.checkNotNull(myPlexMappingState, "myPlexMappingState");
         this.myPlexMappingState = Optional.ofNullable(myPlexMappingState);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withMyPlexMappingState(Optional<? extends Object> myPlexMappingState) {
+    public LibrarySectionsMediaContainer withMyPlexMappingState(Optional<? extends Object> myPlexMappingState) {
         Utils.checkNotNull(myPlexMappingState, "myPlexMappingState");
         this.myPlexMappingState = myPlexMappingState;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withMyPlexSigninState(Object myPlexSigninState) {
+    public LibrarySectionsMediaContainer withMyPlexSigninState(Object myPlexSigninState) {
         Utils.checkNotNull(myPlexSigninState, "myPlexSigninState");
         this.myPlexSigninState = Optional.ofNullable(myPlexSigninState);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withMyPlexSigninState(Optional<? extends Object> myPlexSigninState) {
+    public LibrarySectionsMediaContainer withMyPlexSigninState(Optional<? extends Object> myPlexSigninState) {
         Utils.checkNotNull(myPlexSigninState, "myPlexSigninState");
         this.myPlexSigninState = myPlexSigninState;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withMyPlexSubscription(boolean myPlexSubscription) {
+    public LibrarySectionsMediaContainer withMyPlexSubscription(boolean myPlexSubscription) {
         Utils.checkNotNull(myPlexSubscription, "myPlexSubscription");
         this.myPlexSubscription = Optional.ofNullable(myPlexSubscription);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withMyPlexSubscription(Optional<Boolean> myPlexSubscription) {
+    public LibrarySectionsMediaContainer withMyPlexSubscription(Optional<Boolean> myPlexSubscription) {
         Utils.checkNotNull(myPlexSubscription, "myPlexSubscription");
         this.myPlexSubscription = myPlexSubscription;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withMyPlexUsername(String myPlexUsername) {
+    public LibrarySectionsMediaContainer withMyPlexUsername(String myPlexUsername) {
         Utils.checkNotNull(myPlexUsername, "myPlexUsername");
         this.myPlexUsername = Optional.ofNullable(myPlexUsername);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withMyPlexUsername(Optional<String> myPlexUsername) {
+    public LibrarySectionsMediaContainer withMyPlexUsername(Optional<String> myPlexUsername) {
         Utils.checkNotNull(myPlexUsername, "myPlexUsername");
         this.myPlexUsername = myPlexUsername;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withOfflineTranscode(Object offlineTranscode) {
+    public LibrarySectionsMediaContainer withOfflineTranscode(Object offlineTranscode) {
         Utils.checkNotNull(offlineTranscode, "offlineTranscode");
         this.offlineTranscode = Optional.ofNullable(offlineTranscode);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withOfflineTranscode(Optional<? extends Object> offlineTranscode) {
+    public LibrarySectionsMediaContainer withOfflineTranscode(Optional<? extends Object> offlineTranscode) {
         Utils.checkNotNull(offlineTranscode, "offlineTranscode");
         this.offlineTranscode = offlineTranscode;
         return this;
@@ -1182,7 +1182,7 @@ public class RequestHandlerSlashGetResponses200MediaContainer {
     /**
      * A comma-separated list of features which are enabled for the server owner
      */
-    public RequestHandlerSlashGetResponses200MediaContainer withOwnerFeatures(String ownerFeatures) {
+    public LibrarySectionsMediaContainer withOwnerFeatures(String ownerFeatures) {
         Utils.checkNotNull(ownerFeatures, "ownerFeatures");
         this.ownerFeatures = Optional.ofNullable(ownerFeatures);
         return this;
@@ -1192,189 +1192,189 @@ public class RequestHandlerSlashGetResponses200MediaContainer {
     /**
      * A comma-separated list of features which are enabled for the server owner
      */
-    public RequestHandlerSlashGetResponses200MediaContainer withOwnerFeatures(Optional<String> ownerFeatures) {
+    public LibrarySectionsMediaContainer withOwnerFeatures(Optional<String> ownerFeatures) {
         Utils.checkNotNull(ownerFeatures, "ownerFeatures");
         this.ownerFeatures = ownerFeatures;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withPlatform(String platform) {
+    public LibrarySectionsMediaContainer withPlatform(String platform) {
         Utils.checkNotNull(platform, "platform");
         this.platform = Optional.ofNullable(platform);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withPlatform(Optional<String> platform) {
+    public LibrarySectionsMediaContainer withPlatform(Optional<String> platform) {
         Utils.checkNotNull(platform, "platform");
         this.platform = platform;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withPlatformVersion(String platformVersion) {
+    public LibrarySectionsMediaContainer withPlatformVersion(String platformVersion) {
         Utils.checkNotNull(platformVersion, "platformVersion");
         this.platformVersion = Optional.ofNullable(platformVersion);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withPlatformVersion(Optional<String> platformVersion) {
+    public LibrarySectionsMediaContainer withPlatformVersion(Optional<String> platformVersion) {
         Utils.checkNotNull(platformVersion, "platformVersion");
         this.platformVersion = platformVersion;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withPluginHost(boolean pluginHost) {
+    public LibrarySectionsMediaContainer withPluginHost(boolean pluginHost) {
         Utils.checkNotNull(pluginHost, "pluginHost");
         this.pluginHost = Optional.ofNullable(pluginHost);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withPluginHost(Optional<Boolean> pluginHost) {
+    public LibrarySectionsMediaContainer withPluginHost(Optional<Boolean> pluginHost) {
         Utils.checkNotNull(pluginHost, "pluginHost");
         this.pluginHost = pluginHost;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withPushNotifications(boolean pushNotifications) {
+    public LibrarySectionsMediaContainer withPushNotifications(boolean pushNotifications) {
         Utils.checkNotNull(pushNotifications, "pushNotifications");
         this.pushNotifications = Optional.ofNullable(pushNotifications);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withPushNotifications(Optional<Boolean> pushNotifications) {
+    public LibrarySectionsMediaContainer withPushNotifications(Optional<Boolean> pushNotifications) {
         Utils.checkNotNull(pushNotifications, "pushNotifications");
         this.pushNotifications = pushNotifications;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withReadOnlyLibraries(boolean readOnlyLibraries) {
+    public LibrarySectionsMediaContainer withReadOnlyLibraries(boolean readOnlyLibraries) {
         Utils.checkNotNull(readOnlyLibraries, "readOnlyLibraries");
         this.readOnlyLibraries = Optional.ofNullable(readOnlyLibraries);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withReadOnlyLibraries(Optional<Boolean> readOnlyLibraries) {
+    public LibrarySectionsMediaContainer withReadOnlyLibraries(Optional<Boolean> readOnlyLibraries) {
         Utils.checkNotNull(readOnlyLibraries, "readOnlyLibraries");
         this.readOnlyLibraries = readOnlyLibraries;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withStreamingBrainABRVersion(long streamingBrainABRVersion) {
+    public LibrarySectionsMediaContainer withStreamingBrainABRVersion(long streamingBrainABRVersion) {
         Utils.checkNotNull(streamingBrainABRVersion, "streamingBrainABRVersion");
         this.streamingBrainABRVersion = Optional.ofNullable(streamingBrainABRVersion);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withStreamingBrainABRVersion(Optional<Long> streamingBrainABRVersion) {
+    public LibrarySectionsMediaContainer withStreamingBrainABRVersion(Optional<Long> streamingBrainABRVersion) {
         Utils.checkNotNull(streamingBrainABRVersion, "streamingBrainABRVersion");
         this.streamingBrainABRVersion = streamingBrainABRVersion;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withStreamingBrainVersion(long streamingBrainVersion) {
+    public LibrarySectionsMediaContainer withStreamingBrainVersion(long streamingBrainVersion) {
         Utils.checkNotNull(streamingBrainVersion, "streamingBrainVersion");
         this.streamingBrainVersion = Optional.ofNullable(streamingBrainVersion);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withStreamingBrainVersion(Optional<Long> streamingBrainVersion) {
+    public LibrarySectionsMediaContainer withStreamingBrainVersion(Optional<Long> streamingBrainVersion) {
         Utils.checkNotNull(streamingBrainVersion, "streamingBrainVersion");
         this.streamingBrainVersion = streamingBrainVersion;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withSync(boolean sync) {
+    public LibrarySectionsMediaContainer withSync(boolean sync) {
         Utils.checkNotNull(sync, "sync");
         this.sync = Optional.ofNullable(sync);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withSync(Optional<Boolean> sync) {
+    public LibrarySectionsMediaContainer withSync(Optional<Boolean> sync) {
         Utils.checkNotNull(sync, "sync");
         this.sync = sync;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withTranscoderActiveVideoSessions(long transcoderActiveVideoSessions) {
+    public LibrarySectionsMediaContainer withTranscoderActiveVideoSessions(long transcoderActiveVideoSessions) {
         Utils.checkNotNull(transcoderActiveVideoSessions, "transcoderActiveVideoSessions");
         this.transcoderActiveVideoSessions = Optional.ofNullable(transcoderActiveVideoSessions);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withTranscoderActiveVideoSessions(Optional<Long> transcoderActiveVideoSessions) {
+    public LibrarySectionsMediaContainer withTranscoderActiveVideoSessions(Optional<Long> transcoderActiveVideoSessions) {
         Utils.checkNotNull(transcoderActiveVideoSessions, "transcoderActiveVideoSessions");
         this.transcoderActiveVideoSessions = transcoderActiveVideoSessions;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withTranscoderAudio(boolean transcoderAudio) {
+    public LibrarySectionsMediaContainer withTranscoderAudio(boolean transcoderAudio) {
         Utils.checkNotNull(transcoderAudio, "transcoderAudio");
         this.transcoderAudio = Optional.ofNullable(transcoderAudio);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withTranscoderAudio(Optional<Boolean> transcoderAudio) {
+    public LibrarySectionsMediaContainer withTranscoderAudio(Optional<Boolean> transcoderAudio) {
         Utils.checkNotNull(transcoderAudio, "transcoderAudio");
         this.transcoderAudio = transcoderAudio;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withTranscoderLyrics(boolean transcoderLyrics) {
+    public LibrarySectionsMediaContainer withTranscoderLyrics(boolean transcoderLyrics) {
         Utils.checkNotNull(transcoderLyrics, "transcoderLyrics");
         this.transcoderLyrics = Optional.ofNullable(transcoderLyrics);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withTranscoderLyrics(Optional<Boolean> transcoderLyrics) {
+    public LibrarySectionsMediaContainer withTranscoderLyrics(Optional<Boolean> transcoderLyrics) {
         Utils.checkNotNull(transcoderLyrics, "transcoderLyrics");
         this.transcoderLyrics = transcoderLyrics;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withTranscoderPhoto(boolean transcoderPhoto) {
+    public LibrarySectionsMediaContainer withTranscoderPhoto(boolean transcoderPhoto) {
         Utils.checkNotNull(transcoderPhoto, "transcoderPhoto");
         this.transcoderPhoto = Optional.ofNullable(transcoderPhoto);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withTranscoderPhoto(Optional<Boolean> transcoderPhoto) {
+    public LibrarySectionsMediaContainer withTranscoderPhoto(Optional<Boolean> transcoderPhoto) {
         Utils.checkNotNull(transcoderPhoto, "transcoderPhoto");
         this.transcoderPhoto = transcoderPhoto;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withTranscoderSubtitles(boolean transcoderSubtitles) {
+    public LibrarySectionsMediaContainer withTranscoderSubtitles(boolean transcoderSubtitles) {
         Utils.checkNotNull(transcoderSubtitles, "transcoderSubtitles");
         this.transcoderSubtitles = Optional.ofNullable(transcoderSubtitles);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withTranscoderSubtitles(Optional<Boolean> transcoderSubtitles) {
+    public LibrarySectionsMediaContainer withTranscoderSubtitles(Optional<Boolean> transcoderSubtitles) {
         Utils.checkNotNull(transcoderSubtitles, "transcoderSubtitles");
         this.transcoderSubtitles = transcoderSubtitles;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withTranscoderVideo(boolean transcoderVideo) {
+    public LibrarySectionsMediaContainer withTranscoderVideo(boolean transcoderVideo) {
         Utils.checkNotNull(transcoderVideo, "transcoderVideo");
         this.transcoderVideo = Optional.ofNullable(transcoderVideo);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withTranscoderVideo(Optional<Boolean> transcoderVideo) {
+    public LibrarySectionsMediaContainer withTranscoderVideo(Optional<Boolean> transcoderVideo) {
         Utils.checkNotNull(transcoderVideo, "transcoderVideo");
         this.transcoderVideo = transcoderVideo;
         return this;
@@ -1383,7 +1383,7 @@ public class RequestHandlerSlashGetResponses200MediaContainer {
     /**
      * The suggested video quality bitrates to present to the user
      */
-    public RequestHandlerSlashGetResponses200MediaContainer withTranscoderVideoBitrates(Object transcoderVideoBitrates) {
+    public LibrarySectionsMediaContainer withTranscoderVideoBitrates(Object transcoderVideoBitrates) {
         Utils.checkNotNull(transcoderVideoBitrates, "transcoderVideoBitrates");
         this.transcoderVideoBitrates = Optional.ofNullable(transcoderVideoBitrates);
         return this;
@@ -1393,20 +1393,20 @@ public class RequestHandlerSlashGetResponses200MediaContainer {
     /**
      * The suggested video quality bitrates to present to the user
      */
-    public RequestHandlerSlashGetResponses200MediaContainer withTranscoderVideoBitrates(Optional<? extends Object> transcoderVideoBitrates) {
+    public LibrarySectionsMediaContainer withTranscoderVideoBitrates(Optional<? extends Object> transcoderVideoBitrates) {
         Utils.checkNotNull(transcoderVideoBitrates, "transcoderVideoBitrates");
         this.transcoderVideoBitrates = transcoderVideoBitrates;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withTranscoderVideoQualities(String transcoderVideoQualities) {
+    public LibrarySectionsMediaContainer withTranscoderVideoQualities(String transcoderVideoQualities) {
         Utils.checkNotNull(transcoderVideoQualities, "transcoderVideoQualities");
         this.transcoderVideoQualities = Optional.ofNullable(transcoderVideoQualities);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withTranscoderVideoQualities(Optional<String> transcoderVideoQualities) {
+    public LibrarySectionsMediaContainer withTranscoderVideoQualities(Optional<String> transcoderVideoQualities) {
         Utils.checkNotNull(transcoderVideoQualities, "transcoderVideoQualities");
         this.transcoderVideoQualities = transcoderVideoQualities;
         return this;
@@ -1415,7 +1415,7 @@ public class RequestHandlerSlashGetResponses200MediaContainer {
     /**
      * The suggested video resolutions to the above quality bitrates
      */
-    public RequestHandlerSlashGetResponses200MediaContainer withTranscoderVideoResolutions(Object transcoderVideoResolutions) {
+    public LibrarySectionsMediaContainer withTranscoderVideoResolutions(Object transcoderVideoResolutions) {
         Utils.checkNotNull(transcoderVideoResolutions, "transcoderVideoResolutions");
         this.transcoderVideoResolutions = Optional.ofNullable(transcoderVideoResolutions);
         return this;
@@ -1425,72 +1425,72 @@ public class RequestHandlerSlashGetResponses200MediaContainer {
     /**
      * The suggested video resolutions to the above quality bitrates
      */
-    public RequestHandlerSlashGetResponses200MediaContainer withTranscoderVideoResolutions(Optional<? extends Object> transcoderVideoResolutions) {
+    public LibrarySectionsMediaContainer withTranscoderVideoResolutions(Optional<? extends Object> transcoderVideoResolutions) {
         Utils.checkNotNull(transcoderVideoResolutions, "transcoderVideoResolutions");
         this.transcoderVideoResolutions = transcoderVideoResolutions;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withUpdatedAt(long updatedAt) {
+    public LibrarySectionsMediaContainer withUpdatedAt(long updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
         this.updatedAt = Optional.ofNullable(updatedAt);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withUpdatedAt(Optional<Long> updatedAt) {
+    public LibrarySectionsMediaContainer withUpdatedAt(Optional<Long> updatedAt) {
         Utils.checkNotNull(updatedAt, "updatedAt");
         this.updatedAt = updatedAt;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withUpdater(boolean updater) {
+    public LibrarySectionsMediaContainer withUpdater(boolean updater) {
         Utils.checkNotNull(updater, "updater");
         this.updater = Optional.ofNullable(updater);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withUpdater(Optional<Boolean> updater) {
+    public LibrarySectionsMediaContainer withUpdater(Optional<Boolean> updater) {
         Utils.checkNotNull(updater, "updater");
         this.updater = updater;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withVersion(String version) {
+    public LibrarySectionsMediaContainer withVersion(String version) {
         Utils.checkNotNull(version, "version");
         this.version = Optional.ofNullable(version);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withVersion(Optional<String> version) {
+    public LibrarySectionsMediaContainer withVersion(Optional<String> version) {
         Utils.checkNotNull(version, "version");
         this.version = version;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withVoiceSearch(boolean voiceSearch) {
+    public LibrarySectionsMediaContainer withVoiceSearch(boolean voiceSearch) {
         Utils.checkNotNull(voiceSearch, "voiceSearch");
         this.voiceSearch = Optional.ofNullable(voiceSearch);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withVoiceSearch(Optional<Boolean> voiceSearch) {
+    public LibrarySectionsMediaContainer withVoiceSearch(Optional<Boolean> voiceSearch) {
         Utils.checkNotNull(voiceSearch, "voiceSearch");
         this.voiceSearch = voiceSearch;
         return this;
     }
 
-    public RequestHandlerSlashGetResponses200MediaContainer withDirectory(List<RequestHandlerSlashGetResponses200Directory> directory) {
+    public LibrarySectionsMediaContainer withDirectory(List<LibrarySectionsDirectory> directory) {
         Utils.checkNotNull(directory, "directory");
         this.directory = Optional.ofNullable(directory);
         return this;
     }
 
 
-    public RequestHandlerSlashGetResponses200MediaContainer withDirectory(Optional<? extends List<RequestHandlerSlashGetResponses200Directory>> directory) {
+    public LibrarySectionsMediaContainer withDirectory(Optional<? extends List<LibrarySectionsDirectory>> directory) {
         Utils.checkNotNull(directory, "directory");
         this.directory = directory;
         return this;
@@ -1504,7 +1504,7 @@ public class RequestHandlerSlashGetResponses200MediaContainer {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        RequestHandlerSlashGetResponses200MediaContainer other = (RequestHandlerSlashGetResponses200MediaContainer) o;
+        LibrarySectionsMediaContainer other = (LibrarySectionsMediaContainer) o;
         return 
             Utils.enhancedDeepEquals(this.identifier, other.identifier) &&
             Utils.enhancedDeepEquals(this.offset, other.offset) &&
@@ -1586,7 +1586,7 @@ public class RequestHandlerSlashGetResponses200MediaContainer {
     
     @Override
     public String toString() {
-        return Utils.toString(RequestHandlerSlashGetResponses200MediaContainer.class,
+        return Utils.toString(LibrarySectionsMediaContainer.class,
                 "identifier", identifier,
                 "offset", offset,
                 "size", size,
@@ -1749,7 +1749,7 @@ public class RequestHandlerSlashGetResponses200MediaContainer {
 
         private Optional<Boolean> voiceSearch = Optional.empty();
 
-        private Optional<? extends List<RequestHandlerSlashGetResponses200Directory>> directory = Optional.empty();
+        private Optional<? extends List<LibrarySectionsDirectory>> directory = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -2462,21 +2462,21 @@ public class RequestHandlerSlashGetResponses200MediaContainer {
         }
 
 
-        public Builder directory(List<RequestHandlerSlashGetResponses200Directory> directory) {
+        public Builder directory(List<LibrarySectionsDirectory> directory) {
             Utils.checkNotNull(directory, "directory");
             this.directory = Optional.ofNullable(directory);
             return this;
         }
 
-        public Builder directory(Optional<? extends List<RequestHandlerSlashGetResponses200Directory>> directory) {
+        public Builder directory(Optional<? extends List<LibrarySectionsDirectory>> directory) {
             Utils.checkNotNull(directory, "directory");
             this.directory = directory;
             return this;
         }
 
-        public RequestHandlerSlashGetResponses200MediaContainer build() {
+        public LibrarySectionsMediaContainer build() {
 
-            return new RequestHandlerSlashGetResponses200MediaContainer(
+            return new LibrarySectionsMediaContainer(
                 identifier, offset, size,
                 totalSize, allowCameraUpload, allowChannelAccess,
                 allowMediaDeletion, allowSharing, allowSync,

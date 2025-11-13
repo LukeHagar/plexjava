@@ -1768,8 +1768,8 @@ public class AsyncLibrary {
     /**
      * Get autocompletions for search
      * 
-     * <p>The field to autocomplete on is specified by the {field}.query parameter. For example `genre.query` or `title.query`.
-     * Returns a set of items from the filtered items whose {field} starts with {field}.query.  In the results, a {field}.queryRange will be present to express the range of the match
+     * <p>The field to autocomplete on is specified by the `{field}.query` parameter. For example `genre.query` or `title.query`.
+     * Returns a set of items from the filtered items whose `{field}` starts with `{field}.query`.  In the results, a `{field}.queryRange` will be present to express the range of the match
      * 
      * @return The async call builder
      */
@@ -1780,8 +1780,8 @@ public class AsyncLibrary {
     /**
      * Get autocompletions for search
      * 
-     * <p>The field to autocomplete on is specified by the {field}.query parameter. For example `genre.query` or `title.query`.
-     * Returns a set of items from the filtered items whose {field} starts with {field}.query.  In the results, a {field}.queryRange will be present to express the range of the match
+     * <p>The field to autocomplete on is specified by the `{field}.query` parameter. For example `genre.query` or `title.query`.
+     * Returns a set of items from the filtered items whose `{field}` starts with `{field}.query`.  In the results, a `{field}.queryRange` will be present to express the range of the match
      * 
      * @param request The request object containing all the parameters for the API call.
      * @return CompletableFuture&lt;AutocompleteResponse&gt; - The async response
