@@ -37,13 +37,13 @@ public class DownloadQueue {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("status")
-    private Optional<? extends Status> status;
+    private Optional<? extends CreateDownloadQueueStatus> status;
 
     @JsonCreator
     public DownloadQueue(
             @JsonProperty("id") Optional<Long> id,
             @JsonProperty("itemCount") Optional<Long> itemCount,
-            @JsonProperty("status") Optional<? extends Status> status) {
+            @JsonProperty("status") Optional<? extends CreateDownloadQueueStatus> status) {
         Utils.checkNotNull(id, "id");
         Utils.checkNotNull(itemCount, "itemCount");
         Utils.checkNotNull(status, "status");
@@ -76,8 +76,8 @@ public class DownloadQueue {
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Status> status() {
-        return (Optional<Status>) status;
+    public Optional<CreateDownloadQueueStatus> status() {
+        return (Optional<CreateDownloadQueueStatus>) status;
     }
 
     public static Builder builder() {
@@ -119,7 +119,7 @@ public class DownloadQueue {
      *   - done: All items are available (or potentially expired)
      *   - error: At least one item has encountered an error
      */
-    public DownloadQueue withStatus(Status status) {
+    public DownloadQueue withStatus(CreateDownloadQueueStatus status) {
         Utils.checkNotNull(status, "status");
         this.status = Optional.ofNullable(status);
         return this;
@@ -134,7 +134,7 @@ public class DownloadQueue {
      *   - done: All items are available (or potentially expired)
      *   - error: At least one item has encountered an error
      */
-    public DownloadQueue withStatus(Optional<? extends Status> status) {
+    public DownloadQueue withStatus(Optional<? extends CreateDownloadQueueStatus> status) {
         Utils.checkNotNull(status, "status");
         this.status = status;
         return this;
@@ -176,7 +176,7 @@ public class DownloadQueue {
 
         private Optional<Long> itemCount = Optional.empty();
 
-        private Optional<? extends Status> status = Optional.empty();
+        private Optional<? extends CreateDownloadQueueStatus> status = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -217,7 +217,7 @@ public class DownloadQueue {
          *   - done: All items are available (or potentially expired)
          *   - error: At least one item has encountered an error
          */
-        public Builder status(Status status) {
+        public Builder status(CreateDownloadQueueStatus status) {
             Utils.checkNotNull(status, "status");
             this.status = Optional.ofNullable(status);
             return this;
@@ -231,7 +231,7 @@ public class DownloadQueue {
          *   - done: All items are available (or potentially expired)
          *   - error: At least one item has encountered an error
          */
-        public Builder status(Optional<? extends Status> status) {
+        public Builder status(Optional<? extends CreateDownloadQueueStatus> status) {
             Utils.checkNotNull(status, "status");
             this.status = status;
             return this;

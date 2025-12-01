@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
+import java.lang.Integer;
 import java.lang.Long;
 import java.lang.Object;
 import java.lang.Override;
@@ -28,31 +29,45 @@ import java.util.Optional;
  * <p>`Part` represents a particular file or "part" of a media item. The part is the playable unit of the media hierarchy. Suppose that a movie library contains a movie that is broken up into files, reminiscent of a movie split across two BDs. The metadata item represents information about the movie, the media item represents this instance of the movie at this resolution and quality, and the part items represent the two playable files.  If another media were added which contained the joining of these two parts transcoded down to a lower resolution, then this metadata would contain 2 medias, one with 2 parts and one with 1 part.
  */
 public class Part {
+    /**
+     * Indicates if the part is accessible.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("accessible")
+    private Optional<Boolean> accessible;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioProfile")
-    private Optional<? extends Object> audioProfile;
+    private Optional<String> audioProfile;
 
     /**
      * The container of the media file, such as `mp4` or `mkv`
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("container")
-    private Optional<? extends Object> container;
+    private Optional<String> container;
 
     /**
      * The duration of the media item, in milliseconds
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
-    private Optional<Long> duration;
+    private Optional<Integer> duration;
+
+    /**
+     * Indicates if the part exists.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("exists")
+    private Optional<Boolean> exists;
 
     /**
      * The local file path at which the part is stored on the server
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("file")
-    private Optional<? extends Object> file;
+    private Optional<String> file;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -60,16 +75,19 @@ public class Part {
     private Optional<Boolean> has64bitOffsets;
 
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("id")
-    private Optional<Long> id;
+    private long id;
+
+
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("indexes")
+    private Optional<String> indexes;
 
     /**
      * The key from which the media can be streamed
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
-    private Optional<? extends Object> key;
+    private String key;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -91,7 +109,7 @@ public class Part {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoProfile")
-    private Optional<? extends Object> videoProfile;
+    private Optional<String> videoProfile;
 
 
     @JsonIgnore
@@ -99,34 +117,43 @@ public class Part {
 
     @JsonCreator
     public Part(
-            @JsonProperty("audioProfile") Optional<? extends Object> audioProfile,
-            @JsonProperty("container") Optional<? extends Object> container,
-            @JsonProperty("duration") Optional<Long> duration,
-            @JsonProperty("file") Optional<? extends Object> file,
+            @JsonProperty("accessible") Optional<Boolean> accessible,
+            @JsonProperty("audioProfile") Optional<String> audioProfile,
+            @JsonProperty("container") Optional<String> container,
+            @JsonProperty("duration") Optional<Integer> duration,
+            @JsonProperty("exists") Optional<Boolean> exists,
+            @JsonProperty("file") Optional<String> file,
             @JsonProperty("has64bitOffsets") Optional<Boolean> has64bitOffsets,
-            @JsonProperty("id") Optional<Long> id,
-            @JsonProperty("key") Optional<? extends Object> key,
+            @JsonProperty("id") long id,
+            @JsonProperty("indexes") Optional<String> indexes,
+            @JsonProperty("key") String key,
             @JsonProperty("optimizedForStreaming") Optional<Boolean> optimizedForStreaming,
             @JsonProperty("size") Optional<Long> size,
             @JsonProperty("Stream") Optional<? extends List<Stream>> stream,
-            @JsonProperty("videoProfile") Optional<? extends Object> videoProfile) {
+            @JsonProperty("videoProfile") Optional<String> videoProfile) {
+        Utils.checkNotNull(accessible, "accessible");
         Utils.checkNotNull(audioProfile, "audioProfile");
         Utils.checkNotNull(container, "container");
         Utils.checkNotNull(duration, "duration");
+        Utils.checkNotNull(exists, "exists");
         Utils.checkNotNull(file, "file");
         Utils.checkNotNull(has64bitOffsets, "has64bitOffsets");
         Utils.checkNotNull(id, "id");
+        Utils.checkNotNull(indexes, "indexes");
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(optimizedForStreaming, "optimizedForStreaming");
         Utils.checkNotNull(size, "size");
         Utils.checkNotNull(stream, "stream");
         Utils.checkNotNull(videoProfile, "videoProfile");
+        this.accessible = accessible;
         this.audioProfile = audioProfile;
         this.container = container;
         this.duration = duration;
+        this.exists = exists;
         this.file = file;
         this.has64bitOffsets = has64bitOffsets;
         this.id = id;
+        this.indexes = indexes;
         this.key = key;
         this.optimizedForStreaming = optimizedForStreaming;
         this.size = size;
@@ -135,43 +162,59 @@ public class Part {
         this.additionalProperties = new HashMap<>();
     }
     
-    public Part() {
+    public Part(
+            long id,
+            String key) {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), id, Optional.empty(),
+            key, Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty());
     }
 
-    @SuppressWarnings("unchecked")
+    /**
+     * Indicates if the part is accessible.
+     */
     @JsonIgnore
-    public Optional<Object> audioProfile() {
-        return (Optional<Object>) audioProfile;
+    public Optional<Boolean> accessible() {
+        return accessible;
+    }
+
+    @JsonIgnore
+    public Optional<String> audioProfile() {
+        return audioProfile;
     }
 
     /**
      * The container of the media file, such as `mp4` or `mkv`
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> container() {
-        return (Optional<Object>) container;
+    public Optional<String> container() {
+        return container;
     }
 
     /**
      * The duration of the media item, in milliseconds
      */
     @JsonIgnore
-    public Optional<Long> duration() {
+    public Optional<Integer> duration() {
         return duration;
+    }
+
+    /**
+     * Indicates if the part exists.
+     */
+    @JsonIgnore
+    public Optional<Boolean> exists() {
+        return exists;
     }
 
     /**
      * The local file path at which the part is stored on the server
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> file() {
-        return (Optional<Object>) file;
+    public Optional<String> file() {
+        return file;
     }
 
     @JsonIgnore
@@ -180,17 +223,21 @@ public class Part {
     }
 
     @JsonIgnore
-    public Optional<Long> id() {
+    public long id() {
         return id;
+    }
+
+    @JsonIgnore
+    public Optional<String> indexes() {
+        return indexes;
     }
 
     /**
      * The key from which the media can be streamed
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> key() {
-        return (Optional<Object>) key;
+    public String key() {
+        return key;
     }
 
     @JsonIgnore
@@ -212,10 +259,9 @@ public class Part {
         return (Optional<List<Stream>>) stream;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> videoProfile() {
-        return (Optional<Object>) videoProfile;
+    public Optional<String> videoProfile() {
+        return videoProfile;
     }
 
     @JsonAnyGetter
@@ -228,14 +274,33 @@ public class Part {
     }
 
 
-    public Part withAudioProfile(Object audioProfile) {
+    /**
+     * Indicates if the part is accessible.
+     */
+    public Part withAccessible(boolean accessible) {
+        Utils.checkNotNull(accessible, "accessible");
+        this.accessible = Optional.ofNullable(accessible);
+        return this;
+    }
+
+
+    /**
+     * Indicates if the part is accessible.
+     */
+    public Part withAccessible(Optional<Boolean> accessible) {
+        Utils.checkNotNull(accessible, "accessible");
+        this.accessible = accessible;
+        return this;
+    }
+
+    public Part withAudioProfile(String audioProfile) {
         Utils.checkNotNull(audioProfile, "audioProfile");
         this.audioProfile = Optional.ofNullable(audioProfile);
         return this;
     }
 
 
-    public Part withAudioProfile(Optional<? extends Object> audioProfile) {
+    public Part withAudioProfile(Optional<String> audioProfile) {
         Utils.checkNotNull(audioProfile, "audioProfile");
         this.audioProfile = audioProfile;
         return this;
@@ -244,7 +309,7 @@ public class Part {
     /**
      * The container of the media file, such as `mp4` or `mkv`
      */
-    public Part withContainer(Object container) {
+    public Part withContainer(String container) {
         Utils.checkNotNull(container, "container");
         this.container = Optional.ofNullable(container);
         return this;
@@ -254,7 +319,7 @@ public class Part {
     /**
      * The container of the media file, such as `mp4` or `mkv`
      */
-    public Part withContainer(Optional<? extends Object> container) {
+    public Part withContainer(Optional<String> container) {
         Utils.checkNotNull(container, "container");
         this.container = container;
         return this;
@@ -263,7 +328,7 @@ public class Part {
     /**
      * The duration of the media item, in milliseconds
      */
-    public Part withDuration(long duration) {
+    public Part withDuration(int duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = Optional.ofNullable(duration);
         return this;
@@ -273,16 +338,35 @@ public class Part {
     /**
      * The duration of the media item, in milliseconds
      */
-    public Part withDuration(Optional<Long> duration) {
+    public Part withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = duration;
         return this;
     }
 
     /**
+     * Indicates if the part exists.
+     */
+    public Part withExists(boolean exists) {
+        Utils.checkNotNull(exists, "exists");
+        this.exists = Optional.ofNullable(exists);
+        return this;
+    }
+
+
+    /**
+     * Indicates if the part exists.
+     */
+    public Part withExists(Optional<Boolean> exists) {
+        Utils.checkNotNull(exists, "exists");
+        this.exists = exists;
+        return this;
+    }
+
+    /**
      * The local file path at which the part is stored on the server
      */
-    public Part withFile(Object file) {
+    public Part withFile(String file) {
         Utils.checkNotNull(file, "file");
         this.file = Optional.ofNullable(file);
         return this;
@@ -292,7 +376,7 @@ public class Part {
     /**
      * The local file path at which the part is stored on the server
      */
-    public Part withFile(Optional<? extends Object> file) {
+    public Part withFile(Optional<String> file) {
         Utils.checkNotNull(file, "file");
         this.file = file;
         return this;
@@ -313,31 +397,27 @@ public class Part {
 
     public Part withId(long id) {
         Utils.checkNotNull(id, "id");
-        this.id = Optional.ofNullable(id);
-        return this;
-    }
-
-
-    public Part withId(Optional<Long> id) {
-        Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
     }
 
-    /**
-     * The key from which the media can be streamed
-     */
-    public Part withKey(Object key) {
-        Utils.checkNotNull(key, "key");
-        this.key = Optional.ofNullable(key);
+    public Part withIndexes(String indexes) {
+        Utils.checkNotNull(indexes, "indexes");
+        this.indexes = Optional.ofNullable(indexes);
         return this;
     }
 
 
+    public Part withIndexes(Optional<String> indexes) {
+        Utils.checkNotNull(indexes, "indexes");
+        this.indexes = indexes;
+        return this;
+    }
+
     /**
      * The key from which the media can be streamed
      */
-    public Part withKey(Optional<? extends Object> key) {
+    public Part withKey(String key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
         return this;
@@ -388,14 +468,14 @@ public class Part {
         return this;
     }
 
-    public Part withVideoProfile(Object videoProfile) {
+    public Part withVideoProfile(String videoProfile) {
         Utils.checkNotNull(videoProfile, "videoProfile");
         this.videoProfile = Optional.ofNullable(videoProfile);
         return this;
     }
 
 
-    public Part withVideoProfile(Optional<? extends Object> videoProfile) {
+    public Part withVideoProfile(Optional<String> videoProfile) {
         Utils.checkNotNull(videoProfile, "videoProfile");
         this.videoProfile = videoProfile;
         return this;
@@ -424,12 +504,15 @@ public class Part {
         }
         Part other = (Part) o;
         return 
+            Utils.enhancedDeepEquals(this.accessible, other.accessible) &&
             Utils.enhancedDeepEquals(this.audioProfile, other.audioProfile) &&
             Utils.enhancedDeepEquals(this.container, other.container) &&
             Utils.enhancedDeepEquals(this.duration, other.duration) &&
+            Utils.enhancedDeepEquals(this.exists, other.exists) &&
             Utils.enhancedDeepEquals(this.file, other.file) &&
             Utils.enhancedDeepEquals(this.has64bitOffsets, other.has64bitOffsets) &&
             Utils.enhancedDeepEquals(this.id, other.id) &&
+            Utils.enhancedDeepEquals(this.indexes, other.indexes) &&
             Utils.enhancedDeepEquals(this.key, other.key) &&
             Utils.enhancedDeepEquals(this.optimizedForStreaming, other.optimizedForStreaming) &&
             Utils.enhancedDeepEquals(this.size, other.size) &&
@@ -441,8 +524,9 @@ public class Part {
     @Override
     public int hashCode() {
         return Utils.enhancedHash(
-            audioProfile, container, duration,
-            file, has64bitOffsets, id,
+            accessible, audioProfile, container,
+            duration, exists, file,
+            has64bitOffsets, id, indexes,
             key, optimizedForStreaming, size,
             stream, videoProfile, additionalProperties);
     }
@@ -450,12 +534,15 @@ public class Part {
     @Override
     public String toString() {
         return Utils.toString(Part.class,
+                "accessible", accessible,
                 "audioProfile", audioProfile,
                 "container", container,
                 "duration", duration,
+                "exists", exists,
                 "file", file,
                 "has64bitOffsets", has64bitOffsets,
                 "id", id,
+                "indexes", indexes,
                 "key", key,
                 "optimizedForStreaming", optimizedForStreaming,
                 "size", size,
@@ -467,19 +554,25 @@ public class Part {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends Object> audioProfile = Optional.empty();
+        private Optional<Boolean> accessible = Optional.empty();
 
-        private Optional<? extends Object> container = Optional.empty();
+        private Optional<String> audioProfile = Optional.empty();
 
-        private Optional<Long> duration = Optional.empty();
+        private Optional<String> container = Optional.empty();
 
-        private Optional<? extends Object> file = Optional.empty();
+        private Optional<Integer> duration = Optional.empty();
+
+        private Optional<Boolean> exists = Optional.empty();
+
+        private Optional<String> file = Optional.empty();
 
         private Optional<Boolean> has64bitOffsets = Optional.empty();
 
-        private Optional<Long> id = Optional.empty();
+        private Long id;
 
-        private Optional<? extends Object> key = Optional.empty();
+        private Optional<String> indexes = Optional.empty();
+
+        private String key;
 
         private Optional<Boolean> optimizedForStreaming = Optional.empty();
 
@@ -487,7 +580,7 @@ public class Part {
 
         private Optional<? extends List<Stream>> stream = Optional.empty();
 
-        private Optional<? extends Object> videoProfile = Optional.empty();
+        private Optional<String> videoProfile = Optional.empty();
 
         private Map<String, Object> additionalProperties = new HashMap<>();
 
@@ -496,13 +589,32 @@ public class Part {
         }
 
 
-        public Builder audioProfile(Object audioProfile) {
+        /**
+         * Indicates if the part is accessible.
+         */
+        public Builder accessible(boolean accessible) {
+            Utils.checkNotNull(accessible, "accessible");
+            this.accessible = Optional.ofNullable(accessible);
+            return this;
+        }
+
+        /**
+         * Indicates if the part is accessible.
+         */
+        public Builder accessible(Optional<Boolean> accessible) {
+            Utils.checkNotNull(accessible, "accessible");
+            this.accessible = accessible;
+            return this;
+        }
+
+
+        public Builder audioProfile(String audioProfile) {
             Utils.checkNotNull(audioProfile, "audioProfile");
             this.audioProfile = Optional.ofNullable(audioProfile);
             return this;
         }
 
-        public Builder audioProfile(Optional<? extends Object> audioProfile) {
+        public Builder audioProfile(Optional<String> audioProfile) {
             Utils.checkNotNull(audioProfile, "audioProfile");
             this.audioProfile = audioProfile;
             return this;
@@ -512,7 +624,7 @@ public class Part {
         /**
          * The container of the media file, such as `mp4` or `mkv`
          */
-        public Builder container(Object container) {
+        public Builder container(String container) {
             Utils.checkNotNull(container, "container");
             this.container = Optional.ofNullable(container);
             return this;
@@ -521,7 +633,7 @@ public class Part {
         /**
          * The container of the media file, such as `mp4` or `mkv`
          */
-        public Builder container(Optional<? extends Object> container) {
+        public Builder container(Optional<String> container) {
             Utils.checkNotNull(container, "container");
             this.container = container;
             return this;
@@ -531,7 +643,7 @@ public class Part {
         /**
          * The duration of the media item, in milliseconds
          */
-        public Builder duration(long duration) {
+        public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = Optional.ofNullable(duration);
             return this;
@@ -540,7 +652,7 @@ public class Part {
         /**
          * The duration of the media item, in milliseconds
          */
-        public Builder duration(Optional<Long> duration) {
+        public Builder duration(Optional<Integer> duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = duration;
             return this;
@@ -548,9 +660,28 @@ public class Part {
 
 
         /**
+         * Indicates if the part exists.
+         */
+        public Builder exists(boolean exists) {
+            Utils.checkNotNull(exists, "exists");
+            this.exists = Optional.ofNullable(exists);
+            return this;
+        }
+
+        /**
+         * Indicates if the part exists.
+         */
+        public Builder exists(Optional<Boolean> exists) {
+            Utils.checkNotNull(exists, "exists");
+            this.exists = exists;
+            return this;
+        }
+
+
+        /**
          * The local file path at which the part is stored on the server
          */
-        public Builder file(Object file) {
+        public Builder file(String file) {
             Utils.checkNotNull(file, "file");
             this.file = Optional.ofNullable(file);
             return this;
@@ -559,7 +690,7 @@ public class Part {
         /**
          * The local file path at which the part is stored on the server
          */
-        public Builder file(Optional<? extends Object> file) {
+        public Builder file(Optional<String> file) {
             Utils.checkNotNull(file, "file");
             this.file = file;
             return this;
@@ -581,30 +712,28 @@ public class Part {
 
         public Builder id(long id) {
             Utils.checkNotNull(id, "id");
-            this.id = Optional.ofNullable(id);
-            return this;
-        }
-
-        public Builder id(Optional<Long> id) {
-            Utils.checkNotNull(id, "id");
             this.id = id;
             return this;
         }
 
 
-        /**
-         * The key from which the media can be streamed
-         */
-        public Builder key(Object key) {
-            Utils.checkNotNull(key, "key");
-            this.key = Optional.ofNullable(key);
+        public Builder indexes(String indexes) {
+            Utils.checkNotNull(indexes, "indexes");
+            this.indexes = Optional.ofNullable(indexes);
             return this;
         }
+
+        public Builder indexes(Optional<String> indexes) {
+            Utils.checkNotNull(indexes, "indexes");
+            this.indexes = indexes;
+            return this;
+        }
+
 
         /**
          * The key from which the media can be streamed
          */
-        public Builder key(Optional<? extends Object> key) {
+        public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = key;
             return this;
@@ -656,13 +785,13 @@ public class Part {
         }
 
 
-        public Builder videoProfile(Object videoProfile) {
+        public Builder videoProfile(String videoProfile) {
             Utils.checkNotNull(videoProfile, "videoProfile");
             this.videoProfile = Optional.ofNullable(videoProfile);
             return this;
         }
 
-        public Builder videoProfile(Optional<? extends Object> videoProfile) {
+        public Builder videoProfile(Optional<String> videoProfile) {
             Utils.checkNotNull(videoProfile, "videoProfile");
             this.videoProfile = videoProfile;
             return this;
@@ -687,8 +816,9 @@ public class Part {
         public Part build() {
 
             return new Part(
-                audioProfile, container, duration,
-                file, has64bitOffsets, id,
+                accessible, audioProfile, container,
+                duration, exists, file,
+                has64bitOffsets, id, indexes,
                 key, optimizedForStreaming, size,
                 stream, videoProfile)
                 .withAdditionalProperties(additionalProperties);

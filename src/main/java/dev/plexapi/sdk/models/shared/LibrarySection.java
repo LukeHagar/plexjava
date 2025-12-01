@@ -19,15 +19,18 @@ import java.util.Optional;
 
 
 public class LibrarySection {
-
+    /**
+     * The title of the library
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
     private Optional<String> title;
 
-
-    @JsonInclude(Include.NON_ABSENT)
+    /**
+     * The type of media content in the Plex library. This can represent videos, music, or photos.
+     */
     @JsonProperty("type")
-    private Optional<String> type;
+    private MediaTypeString type;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -87,9 +90,14 @@ public class LibrarySection {
     private Optional<String> key;
 
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("language")
-    private Optional<String> language;
+    private String language;
+
+    /**
+     * The universally unique identifier for the library.
+     */
+    @JsonProperty("uuid")
+    private String uuid;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -126,7 +134,7 @@ public class LibrarySection {
     @JsonCreator
     public LibrarySection(
             @JsonProperty("title") Optional<String> title,
-            @JsonProperty("type") Optional<String> type,
+            @JsonProperty("type") MediaTypeString type,
             @JsonProperty("agent") Optional<String> agent,
             @JsonProperty("allowSync") Optional<Boolean> allowSync,
             @JsonProperty("art") Optional<String> art,
@@ -138,7 +146,8 @@ public class LibrarySection {
             @JsonProperty("filters") Optional<Boolean> filters,
             @JsonProperty("hidden") Optional<Boolean> hidden,
             @JsonProperty("key") Optional<String> key,
-            @JsonProperty("language") Optional<String> language,
+            @JsonProperty("language") String language,
+            @JsonProperty("uuid") String uuid,
             @JsonProperty("Location") Optional<? extends List<LibrarySectionLocation>> location,
             @JsonProperty("refreshing") Optional<Boolean> refreshing,
             @JsonProperty("scannedAt") Optional<Long> scannedAt,
@@ -159,6 +168,7 @@ public class LibrarySection {
         Utils.checkNotNull(hidden, "hidden");
         Utils.checkNotNull(key, "key");
         Utils.checkNotNull(language, "language");
+        Utils.checkNotNull(uuid, "uuid");
         Utils.checkNotNull(location, "location");
         Utils.checkNotNull(refreshing, "refreshing");
         Utils.checkNotNull(scannedAt, "scannedAt");
@@ -179,6 +189,7 @@ public class LibrarySection {
         this.hidden = hidden;
         this.key = key;
         this.language = language;
+        this.uuid = uuid;
         this.location = location;
         this.refreshing = refreshing;
         this.scannedAt = scannedAt;
@@ -187,23 +198,32 @@ public class LibrarySection {
         this.updatedAt = updatedAt;
     }
     
-    public LibrarySection() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
+    public LibrarySection(
+            MediaTypeString type,
+            String language,
+            String uuid) {
+        this(Optional.empty(), type, Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), language, uuid,
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
+    /**
+     * The title of the library
+     */
     @JsonIgnore
     public Optional<String> title() {
         return title;
     }
 
+    /**
+     * The type of media content in the Plex library. This can represent videos, music, or photos.
+     */
     @JsonIgnore
-    public Optional<String> type() {
+    public MediaTypeString type() {
         return type;
     }
 
@@ -266,8 +286,16 @@ public class LibrarySection {
     }
 
     @JsonIgnore
-    public Optional<String> language() {
+    public String language() {
         return language;
+    }
+
+    /**
+     * The universally unique identifier for the library.
+     */
+    @JsonIgnore
+    public String uuid() {
+        return uuid;
     }
 
     @SuppressWarnings("unchecked")
@@ -309,6 +337,9 @@ public class LibrarySection {
     }
 
 
+    /**
+     * The title of the library
+     */
     public LibrarySection withTitle(String title) {
         Utils.checkNotNull(title, "title");
         this.title = Optional.ofNullable(title);
@@ -316,20 +347,19 @@ public class LibrarySection {
     }
 
 
+    /**
+     * The title of the library
+     */
     public LibrarySection withTitle(Optional<String> title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
         return this;
     }
 
-    public LibrarySection withType(String type) {
-        Utils.checkNotNull(type, "type");
-        this.type = Optional.ofNullable(type);
-        return this;
-    }
-
-
-    public LibrarySection withType(Optional<String> type) {
+    /**
+     * The type of media content in the Plex library. This can represent videos, music, or photos.
+     */
+    public LibrarySection withType(MediaTypeString type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -486,14 +516,16 @@ public class LibrarySection {
 
     public LibrarySection withLanguage(String language) {
         Utils.checkNotNull(language, "language");
-        this.language = Optional.ofNullable(language);
+        this.language = language;
         return this;
     }
 
-
-    public LibrarySection withLanguage(Optional<String> language) {
-        Utils.checkNotNull(language, "language");
-        this.language = language;
+    /**
+     * The universally unique identifier for the library.
+     */
+    public LibrarySection withUuid(String uuid) {
+        Utils.checkNotNull(uuid, "uuid");
+        this.uuid = uuid;
         return this;
     }
 
@@ -605,6 +637,7 @@ public class LibrarySection {
             Utils.enhancedDeepEquals(this.hidden, other.hidden) &&
             Utils.enhancedDeepEquals(this.key, other.key) &&
             Utils.enhancedDeepEquals(this.language, other.language) &&
+            Utils.enhancedDeepEquals(this.uuid, other.uuid) &&
             Utils.enhancedDeepEquals(this.location, other.location) &&
             Utils.enhancedDeepEquals(this.refreshing, other.refreshing) &&
             Utils.enhancedDeepEquals(this.scannedAt, other.scannedAt) &&
@@ -620,9 +653,9 @@ public class LibrarySection {
             allowSync, art, composite,
             content, contentChangedAt, createdAt,
             directory, filters, hidden,
-            key, language, location,
-            refreshing, scannedAt, scanner,
-            thumb, updatedAt);
+            key, language, uuid,
+            location, refreshing, scannedAt,
+            scanner, thumb, updatedAt);
     }
     
     @Override
@@ -642,6 +675,7 @@ public class LibrarySection {
                 "hidden", hidden,
                 "key", key,
                 "language", language,
+                "uuid", uuid,
                 "location", location,
                 "refreshing", refreshing,
                 "scannedAt", scannedAt,
@@ -655,7 +689,7 @@ public class LibrarySection {
 
         private Optional<String> title = Optional.empty();
 
-        private Optional<String> type = Optional.empty();
+        private MediaTypeString type;
 
         private Optional<String> agent = Optional.empty();
 
@@ -679,7 +713,9 @@ public class LibrarySection {
 
         private Optional<String> key = Optional.empty();
 
-        private Optional<String> language = Optional.empty();
+        private String language;
+
+        private String uuid;
 
         private Optional<? extends List<LibrarySectionLocation>> location = Optional.empty();
 
@@ -698,12 +734,18 @@ public class LibrarySection {
         }
 
 
+        /**
+         * The title of the library
+         */
         public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = Optional.ofNullable(title);
             return this;
         }
 
+        /**
+         * The title of the library
+         */
         public Builder title(Optional<String> title) {
             Utils.checkNotNull(title, "title");
             this.title = title;
@@ -711,13 +753,10 @@ public class LibrarySection {
         }
 
 
-        public Builder type(String type) {
-            Utils.checkNotNull(type, "type");
-            this.type = Optional.ofNullable(type);
-            return this;
-        }
-
-        public Builder type(Optional<String> type) {
+        /**
+         * The type of media content in the Plex library. This can represent videos, music, or photos.
+         */
+        public Builder type(MediaTypeString type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
@@ -875,13 +914,17 @@ public class LibrarySection {
 
         public Builder language(String language) {
             Utils.checkNotNull(language, "language");
-            this.language = Optional.ofNullable(language);
+            this.language = language;
             return this;
         }
 
-        public Builder language(Optional<String> language) {
-            Utils.checkNotNull(language, "language");
-            this.language = language;
+
+        /**
+         * The universally unique identifier for the library.
+         */
+        public Builder uuid(String uuid) {
+            Utils.checkNotNull(uuid, "uuid");
+            this.uuid = uuid;
             return this;
         }
 
@@ -976,9 +1019,9 @@ public class LibrarySection {
                 allowSync, art, composite,
                 content, contentChangedAt, createdAt,
                 directory, filters, hidden,
-                key, language, location,
-                refreshing, scannedAt, scanner,
-                thumb, updatedAt);
+                key, language, uuid,
+                location, refreshing, scannedAt,
+                scanner, thumb, updatedAt);
         }
 
     }

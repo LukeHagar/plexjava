@@ -788,7 +788,7 @@ public class GetImageRequest {
 
         private Optional<Long> height = Optional.empty();
 
-        private Optional<? extends BoolInt> noise = Optional.empty();
+        private Optional<? extends BoolInt> noise;
 
         private Builder() {
           // force use of static builder() method
@@ -1140,6 +1140,9 @@ public class GetImageRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (noise == null) {
+                noise = _SINGLETON_VALUE_Noise.value();
+            }
 
             return new GetImageRequest(
                 accepts, clientIdentifier, product,
@@ -1156,5 +1159,11 @@ public class GetImageRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Noise =
+                new LazySingletonValue<>(
+                        "noise",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

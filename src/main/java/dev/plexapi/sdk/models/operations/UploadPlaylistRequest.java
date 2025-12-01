@@ -585,7 +585,7 @@ public class UploadPlaylistRequest {
 
         private Optional<String> path = Optional.empty();
 
-        private Optional<? extends BoolInt> force = Optional.empty();
+        private Optional<? extends BoolInt> force;
 
         private Builder() {
           // force use of static builder() method
@@ -842,6 +842,9 @@ public class UploadPlaylistRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (force == null) {
+                force = _SINGLETON_VALUE_Force.value();
+            }
 
             return new UploadPlaylistRequest(
                 accepts, clientIdentifier, product,
@@ -857,5 +860,11 @@ public class UploadPlaylistRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Force =
+                new LazySingletonValue<>(
+                        "force",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

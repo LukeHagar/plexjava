@@ -584,9 +584,9 @@ public class GetAllSubscriptionsRequest {
 
         private Optional<String> marketplace = Optional.empty();
 
-        private Optional<? extends BoolInt> includeGrabs = Optional.empty();
+        private Optional<? extends BoolInt> includeGrabs;
 
-        private Optional<? extends BoolInt> includeStorage = Optional.empty();
+        private Optional<? extends BoolInt> includeStorage;
 
         private Builder() {
           // force use of static builder() method
@@ -843,6 +843,12 @@ public class GetAllSubscriptionsRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (includeGrabs == null) {
+                includeGrabs = _SINGLETON_VALUE_IncludeGrabs.value();
+            }
+            if (includeStorage == null) {
+                includeStorage = _SINGLETON_VALUE_IncludeStorage.value();
+            }
 
             return new GetAllSubscriptionsRequest(
                 accepts, clientIdentifier, product,
@@ -858,5 +864,17 @@ public class GetAllSubscriptionsRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_IncludeGrabs =
+                new LazySingletonValue<>(
+                        "includeGrabs",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_IncludeStorage =
+                new LazySingletonValue<>(
+                        "includeStorage",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

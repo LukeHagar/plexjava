@@ -50,8 +50,8 @@ public class Application {
             .build();
 
         ApplyUpdatesRequest req = ApplyUpdatesRequest.builder()
-                .tonight(BoolInt.ONE)
-                .skip(BoolInt.ONE)
+                .tonight(BoolInt.True)
+                .skip(BoolInt.True)
                 .build();
 
         ApplyUpdatesResponse res = sdk.updater().applyUpdates()
@@ -116,7 +116,7 @@ public class Application {
             .build();
 
         CheckUpdatesRequest req = CheckUpdatesRequest.builder()
-                .download(BoolInt.ONE)
+                .download(BoolInt.True)
                 .build();
 
         CheckUpdatesResponse res = sdk.updater().checkUpdates()

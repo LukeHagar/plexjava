@@ -340,9 +340,9 @@ actions:
                             .playQueueItemID("123")
                             .time(0L)
                             .duration(10000L)
-                            .continuing(BoolInt.ONE)
+                            .continuing(BoolInt.True)
                             .updated(14200000L)
-                            .offline(BoolInt.ONE)
+                            .offline(BoolInt.True)
                             .timeToFirstFrame(1000L)
                             .timeStalled(1000L)
                             .bandwidth(100L)
@@ -600,7 +600,7 @@ actions:
                     // handle response
                 }
             }
-  - target: $["paths"]["/butler/{task}"]["delete"]
+  - target: $["paths"]["/butler/{butlerTask}"]["delete"]
     update:
       x-codeSamples:
         - lang: java
@@ -633,7 +633,7 @@ actions:
                         .build();
 
                     StopTaskRequest req = StopTaskRequest.builder()
-                            .task(Task.CLEAN_OLD_BUNDLES)
+                            .butlerTask(ButlerTask.CLEAN_OLD_BUNDLES)
                             .build();
 
                     StopTaskResponse res = sdk.butler().stopTask()
@@ -643,7 +643,7 @@ actions:
                     // handle response
                 }
             }
-  - target: $["paths"]["/butler/{task}"]["post"]
+  - target: $["paths"]["/butler/{butlerTask}"]["post"]
     update:
       x-codeSamples:
         - lang: java
@@ -676,7 +676,7 @@ actions:
                         .build();
 
                     StartTaskRequest req = StartTaskRequest.builder()
-                            .task(PathParamTask.REFRESH_LOCAL_MEDIA)
+                            .butlerTask(PathParamButlerTask.REFRESH_LOCAL_MEDIA)
                             .build();
 
                     StartTaskResponse res = sdk.butler().startTask()
@@ -802,13 +802,13 @@ actions:
                             .advancedSubtitles(AdvancedSubtitles.BURN)
                             .audioBoost(50L)
                             .audioChannelCount(5L)
-                            .autoAdjustQuality(BoolInt.ONE)
-                            .autoAdjustSubtitle(BoolInt.ONE)
-                            .directPlay(BoolInt.ONE)
-                            .directStream(BoolInt.ONE)
-                            .directStreamAudio(BoolInt.ONE)
-                            .disableResolutionRotation(BoolInt.ONE)
-                            .hasMDE(BoolInt.ONE)
+                            .autoAdjustQuality(BoolInt.True)
+                            .autoAdjustSubtitle(BoolInt.True)
+                            .directPlay(BoolInt.True)
+                            .directStream(BoolInt.True)
+                            .directStreamAudio(BoolInt.True)
+                            .disableResolutionRotation(BoolInt.True)
+                            .hasMDE(BoolInt.True)
                             .location(Location.WAN)
                             .mediaBufferSize(102400L)
                             .mediaIndex(0L)
@@ -1157,7 +1157,7 @@ actions:
                         .build();
 
                     GetAllHubsRequest req = GetAllHubsRequest.builder()
-                            .onlyTransient(BoolInt.ONE)
+                            .onlyTransient(BoolInt.True)
                             .build();
 
                     GetAllHubsResponse res = sdk.hubs().getAllHubs()
@@ -1300,7 +1300,7 @@ actions:
 
                     GetMetadataHubsRequest req = GetMetadataHubsRequest.builder()
                             .metadataId(605482L)
-                            .onlyTransient(BoolInt.ONE)
+                            .onlyTransient(BoolInt.True)
                             .build();
 
                     GetMetadataHubsResponse res = sdk.hubs().getMetadataHubs()
@@ -1348,7 +1348,7 @@ actions:
 
                     GetPostplayHubsRequest req = GetPostplayHubsRequest.builder()
                             .metadataId(441419L)
-                            .onlyTransient(BoolInt.ONE)
+                            .onlyTransient(BoolInt.True)
                             .build();
 
                     GetPostplayHubsResponse res = sdk.hubs().getPostplayHubs()
@@ -1396,7 +1396,7 @@ actions:
 
                     GetRelatedHubsRequest req = GetRelatedHubsRequest.builder()
                             .metadataId(8858L)
-                            .onlyTransient(BoolInt.ONE)
+                            .onlyTransient(BoolInt.True)
                             .build();
 
                     GetRelatedHubsResponse res = sdk.hubs().getRelatedHubs()
@@ -1512,6 +1512,7 @@ actions:
             import dev.plexapi.sdk.models.operations.VoiceSearchHubsRequest;
             import dev.plexapi.sdk.models.operations.VoiceSearchHubsResponse;
             import dev.plexapi.sdk.models.shared.Accepts;
+            import dev.plexapi.sdk.models.shared.MediaType;
             import java.lang.Exception;
 
             public class Application {
@@ -1535,6 +1536,7 @@ actions:
 
                     VoiceSearchHubsRequest req = VoiceSearchHubsRequest.builder()
                             .query("<value>")
+                            .type(MediaType.TvShow)
                             .build();
 
                     VoiceSearchHubsResponse res = sdk.search().voiceSearchHubs()
@@ -1582,7 +1584,7 @@ actions:
 
                     GetSectionHubsRequest req = GetSectionHubsRequest.builder()
                             .sectionId(336924L)
-                            .onlyTransient(BoolInt.ONE)
+                            .onlyTransient(BoolInt.True)
                             .build();
 
                     GetSectionHubsResponse res = sdk.hubs().getSectionHubs()
@@ -1721,9 +1723,9 @@ actions:
                     CreateCustomHubRequest req = CreateCustomHubRequest.builder()
                             .sectionId(869922L)
                             .metadataItemId(703843L)
-                            .promotedToRecommended(BoolInt.ONE)
-                            .promotedToOwnHome(BoolInt.ONE)
-                            .promotedToSharedHome(BoolInt.ONE)
+                            .promotedToRecommended(BoolInt.True)
+                            .promotedToOwnHome(BoolInt.True)
+                            .promotedToSharedHome(BoolInt.True)
                             .build();
 
                     CreateCustomHubResponse res = sdk.hubs().createCustomHub()
@@ -1862,9 +1864,9 @@ actions:
                     UpdateHubVisibilityRequest req = UpdateHubVisibilityRequest.builder()
                             .sectionId(341650L)
                             .identifier("<value>")
-                            .promotedToRecommended(BoolInt.ONE)
-                            .promotedToOwnHome(BoolInt.ONE)
-                            .promotedToSharedHome(BoolInt.ONE)
+                            .promotedToRecommended(BoolInt.True)
+                            .promotedToOwnHome(BoolInt.True)
+                            .promotedToSharedHome(BoolInt.True)
                             .build();
 
                     UpdateHubVisibilityResponse res = sdk.hubs().updateHubVisibility()
@@ -1912,7 +1914,7 @@ actions:
             import dev.plexapi.sdk.PlexAPI;
             import dev.plexapi.sdk.models.operations.GetLibraryItemsRequest;
             import dev.plexapi.sdk.models.operations.GetLibraryItemsResponse;
-            import dev.plexapi.sdk.models.shared.Accepts;
+            import dev.plexapi.sdk.models.shared.*;
             import java.lang.Exception;
 
             public class Application {
@@ -1935,6 +1937,11 @@ actions:
                         .build();
 
                     GetLibraryItemsRequest req = GetLibraryItemsRequest.builder()
+                            .mediaQuery(MediaQuery.builder()
+                                .type(MediaType.Episode)
+                                .sourceType(2L)
+                                .sort("duration:desc,index")
+                                .build())
                             .build();
 
                     GetLibraryItemsResponse res = sdk.library().getLibraryItems()
@@ -2010,6 +2017,7 @@ actions:
             import dev.plexapi.sdk.models.operations.CreateCollectionRequest;
             import dev.plexapi.sdk.models.operations.CreateCollectionResponse;
             import dev.plexapi.sdk.models.shared.Accepts;
+            import dev.plexapi.sdk.models.shared.MediaType;
             import java.lang.Exception;
 
             public class Application {
@@ -2033,6 +2041,7 @@ actions:
 
                     CreateCollectionRequest req = CreateCollectionRequest.builder()
                             .sectionId("<id>")
+                            .type(MediaType.TvShow)
                             .build();
 
                     CreateCollectionResponse res = sdk.collections().createCollection()
@@ -2315,8 +2324,8 @@ actions:
                     IngestTransientItemRequest req = IngestTransientItemRequest.builder()
                             .url("file:///storage%2Femulated%2F0%2FArcher-S01E01.mkv")
                             .virtualFilePath("/Avatar.mkv")
-                            .computeHashes(BoolInt.ONE)
-                            .ingestNonMatches(BoolInt.ONE)
+                            .computeHashes(BoolInt.True)
+                            .ingestNonMatches(BoolInt.True)
                             .build();
 
                     IngestTransientItemResponse res = sdk.library().ingestTransientItem()
@@ -2339,8 +2348,7 @@ actions:
             import dev.plexapi.sdk.PlexAPI;
             import dev.plexapi.sdk.models.operations.GetLibraryMatchesRequest;
             import dev.plexapi.sdk.models.operations.GetLibraryMatchesResponse;
-            import dev.plexapi.sdk.models.shared.Accepts;
-            import dev.plexapi.sdk.models.shared.BoolInt;
+            import dev.plexapi.sdk.models.shared.*;
             import java.lang.Exception;
 
             public class Application {
@@ -2363,9 +2371,10 @@ actions:
                         .build();
 
                     GetLibraryMatchesRequest req = GetLibraryMatchesRequest.builder()
-                            .includeFullMetadata(BoolInt.ONE)
-                            .includeAncestorMetadata(BoolInt.ONE)
-                            .includeAlternateMetadataSources(BoolInt.ONE)
+                            .type(MediaType.TvShow)
+                            .includeFullMetadata(BoolInt.True)
+                            .includeAncestorMetadata(BoolInt.True)
+                            .includeAlternateMetadataSources(BoolInt.True)
                             .build();
 
                     GetLibraryMatchesResponse res = sdk.library().getLibraryMatches()
@@ -2460,7 +2469,7 @@ actions:
 
                     GetAugmentationStatusRequest req = GetAugmentationStatusRequest.builder()
                             .augmentationId("<id>")
-                            .wait_(BoolInt.ONE)
+                            .wait_(BoolInt.True)
                             .build();
 
                     GetAugmentationStatusResponse res = sdk.library().getAugmentationStatus()
@@ -2506,7 +2515,7 @@ actions:
 
                     DeleteMetadataItemRequest req = DeleteMetadataItemRequest.builder()
                             .ids("<value>")
-                            .proxy(BoolInt.ONE)
+                            .proxy(BoolInt.True)
                             .build();
 
                     DeleteMetadataItemResponse res = sdk.library().deleteMetadataItem()
@@ -2553,14 +2562,14 @@ actions:
 
                     GetMetadataItemRequest req = GetMetadataItemRequest.builder()
                             .ids(List.of())
-                            .asyncCheckFiles(BoolInt.ONE)
-                            .asyncRefreshLocalMediaAgent(BoolInt.ONE)
-                            .asyncRefreshAnalysis(BoolInt.ONE)
-                            .checkFiles(BoolInt.ONE)
-                            .skipRefresh(BoolInt.ONE)
-                            .checkFileAvailability(BoolInt.ONE)
-                            .asyncAugmentMetadata(BoolInt.ONE)
-                            .augmentCount(BoolInt.ONE)
+                            .asyncCheckFiles(BoolInt.True)
+                            .asyncRefreshLocalMediaAgent(BoolInt.True)
+                            .asyncRefreshAnalysis(BoolInt.True)
+                            .checkFiles(BoolInt.True)
+                            .skipRefresh(BoolInt.True)
+                            .checkFileAvailability(BoolInt.True)
+                            .asyncAugmentMetadata(BoolInt.True)
+                            .augmentCount(BoolInt.True)
                             .build();
 
                     GetMetadataItemResponse res = sdk.content().getMetadataItem()
@@ -2789,7 +2798,7 @@ actions:
 
                     GenerateThumbsRequest req = GenerateThumbsRequest.builder()
                             .ids("<value>")
-                            .force(BoolInt.ONE)
+                            .force(BoolInt.True)
                             .build();
 
                     GenerateThumbsResponse res = sdk.library().generateThumbs()
@@ -2835,8 +2844,8 @@ actions:
 
                     DetectCreditsRequest req = DetectCreditsRequest.builder()
                             .ids("<value>")
-                            .force(BoolInt.ONE)
-                            .manual(BoolInt.ONE)
+                            .force(BoolInt.True)
+                            .manual(BoolInt.True)
                             .build();
 
                     DetectCreditsResponse res = sdk.library().detectCredits()
@@ -3019,7 +3028,7 @@ actions:
 
                     StartBifGenerationRequest req = StartBifGenerationRequest.builder()
                             .ids("<value>")
-                            .force(BoolInt.ONE)
+                            .force(BoolInt.True)
                             .build();
 
                     StartBifGenerationResponse res = sdk.library().startBifGeneration()
@@ -3065,7 +3074,7 @@ actions:
 
                     DetectIntrosRequest req = DetectIntrosRequest.builder()
                             .ids("<value>")
-                            .force(BoolInt.ONE)
+                            .force(BoolInt.True)
                             .build();
 
                     DetectIntrosResponse res = sdk.library().detectIntros()
@@ -3299,7 +3308,7 @@ actions:
 
                     ListMatchesRequest req = ListMatchesRequest.builder()
                             .ids("<value>")
-                            .manual(BoolInt.ONE)
+                            .manual(BoolInt.True)
                             .build();
 
                     ListMatchesResponse res = sdk.library().listMatches()
@@ -3348,7 +3357,7 @@ actions:
                     DeleteMediaItemRequest req = DeleteMediaItemRequest.builder()
                             .ids("<value>")
                             .mediaItem("<value>")
-                            .proxy(BoolInt.ONE)
+                            .proxy(BoolInt.True)
                             .build();
 
                     DeleteMediaItemResponse res = sdk.library().deleteMediaItem()
@@ -3537,7 +3546,7 @@ actions:
 
                     RefreshItemsMetadataRequest req = RefreshItemsMetadataRequest.builder()
                             .ids("<value>")
-                            .markUpdated(BoolInt.ONE)
+                            .markUpdated(BoolInt.True)
                             .build();
 
                     RefreshItemsMetadataResponse res = sdk.library().refreshItemsMetadata()
@@ -3719,8 +3728,8 @@ actions:
 
                     AddSubtitlesRequest req = AddSubtitlesRequest.builder()
                             .ids("<value>")
-                            .forced(BoolInt.ONE)
-                            .hearingImpaired(BoolInt.ONE)
+                            .forced(BoolInt.True)
+                            .hearingImpaired(BoolInt.True)
                             .build();
 
                     AddSubtitlesResponse res = sdk.library().addSubtitles()
@@ -3902,8 +3911,8 @@ actions:
 
                     DetectVoiceActivityRequest req = DetectVoiceActivityRequest.builder()
                             .ids("<value>")
-                            .force(BoolInt.ONE)
-                            .manual(BoolInt.ONE)
+                            .force(BoolInt.True)
+                            .manual(BoolInt.True)
                             .build();
 
                     DetectVoiceActivityResponse res = sdk.library().detectVoiceActivity()
@@ -4083,7 +4092,7 @@ actions:
                         .build();
 
                     OptimizeDatabaseRequest req = OptimizeDatabaseRequest.builder()
-                            .async(BoolInt.ONE)
+                            .async(BoolInt.True)
                             .build();
 
                     OptimizeDatabaseResponse res = sdk.library().optimizeDatabase()
@@ -4129,7 +4138,7 @@ actions:
 
                     SetStreamSelectionRequest req = SetStreamSelectionRequest.builder()
                             .partId(360489L)
-                            .allParts(BoolInt.ONE)
+                            .allParts(BoolInt.True)
                             .build();
 
                     SetStreamSelectionResponse res = sdk.library().setStreamSelection()
@@ -4270,7 +4279,7 @@ actions:
                             .partId(877105L)
                             .changestamp(970622L)
                             .filename("example.file")
-                            .download(BoolInt.ONE)
+                            .download(BoolInt.True)
                             .build();
 
                     GetMediaPartResponse res = sdk.library().getMediaPart()
@@ -4493,8 +4502,8 @@ actions:
                                 "O:\fatboy\\Media\\My Music"))
                             .prefs(QueryParamPrefs.builder()
                                 .build())
-                            .relative(BoolInt.ONE)
-                            .importFromiTunes(BoolInt.ONE)
+                            .relative(BoolInt.True)
+                            .importFromiTunes(BoolInt.True)
                             .build();
 
                     AddSectionResponse res = sdk.library().addSection()
@@ -4659,7 +4668,7 @@ actions:
 
                     DeleteLibrarySectionRequest req = DeleteLibrarySectionRequest.builder()
                             .sectionId("<id>")
-                            .async(BoolInt.ONE)
+                            .async(BoolInt.True)
                             .build();
 
                     DeleteLibrarySectionResponse res = sdk.library().deleteLibrarySection()
@@ -4705,7 +4714,7 @@ actions:
 
                     GetLibraryDetailsRequest req = GetLibraryDetailsRequest.builder()
                             .sectionId("<id>")
-                            .includeDetails(BoolInt.ONE)
+                            .includeDetails(BoolInt.True)
                             .build();
 
                     GetLibraryDetailsResponse res = sdk.library().getLibraryDetails()
@@ -4824,7 +4833,7 @@ actions:
             import dev.plexapi.sdk.PlexAPI;
             import dev.plexapi.sdk.models.operations.ListContentRequest;
             import dev.plexapi.sdk.models.operations.ListContentResponse;
-            import dev.plexapi.sdk.models.shared.Accepts;
+            import dev.plexapi.sdk.models.shared.*;
             import java.lang.Exception;
 
             public class Application {
@@ -4848,6 +4857,13 @@ actions:
 
                     ListContentRequest req = ListContentRequest.builder()
                             .sectionId("<id>")
+                            .mediaQuery(MediaQuery.builder()
+                                .type(MediaType.Episode)
+                                .sourceType(2L)
+                                .sort("duration:desc,index")
+                                .build())
+                            .includeMeta(BoolInt.True)
+                            .includeGuids(BoolInt.True)
                             .build();
 
                     ListContentResponse res = sdk.content().listContent()
@@ -4895,7 +4911,7 @@ actions:
 
                     UpdateItemsRequest req = UpdateItemsRequest.builder()
                             .sectionId("<id>")
-                            .fieldLocked(BoolInt.ONE)
+                            .fieldLocked(BoolInt.True)
                             .build();
 
                     UpdateItemsResponse res = sdk.library().updateItems()
@@ -5052,7 +5068,7 @@ actions:
             import dev.plexapi.sdk.PlexAPI;
             import dev.plexapi.sdk.models.operations.AutocompleteRequest;
             import dev.plexapi.sdk.models.operations.AutocompleteResponse;
-            import dev.plexapi.sdk.models.shared.Accepts;
+            import dev.plexapi.sdk.models.shared.*;
             import java.lang.Exception;
 
             public class Application {
@@ -5076,6 +5092,11 @@ actions:
 
                     AutocompleteRequest req = AutocompleteRequest.builder()
                             .sectionId(942007L)
+                            .mediaQuery(MediaQuery.builder()
+                                .type(MediaType.Episode)
+                                .sourceType(2L)
+                                .sort("duration:desc,index")
+                                .build())
                             .build();
 
                     AutocompleteResponse res = sdk.library().autocomplete()
@@ -5235,7 +5256,7 @@ actions:
             import dev.plexapi.sdk.PlexAPI;
             import dev.plexapi.sdk.models.operations.GetCollectionsRequest;
             import dev.plexapi.sdk.models.operations.GetCollectionsResponse;
-            import dev.plexapi.sdk.models.shared.Accepts;
+            import dev.plexapi.sdk.models.shared.*;
             import java.lang.Exception;
 
             public class Application {
@@ -5259,6 +5280,11 @@ actions:
 
                     GetCollectionsRequest req = GetCollectionsRequest.builder()
                             .sectionId(348838L)
+                            .mediaQuery(MediaQuery.builder()
+                                .type(MediaType.Episode)
+                                .sourceType(2L)
+                                .sort("duration:desc,index")
+                                .build())
                             .build();
 
                     GetCollectionsResponse res = sdk.library().getCollections()
@@ -5281,7 +5307,7 @@ actions:
             import dev.plexapi.sdk.PlexAPI;
             import dev.plexapi.sdk.models.operations.GetCommonRequest;
             import dev.plexapi.sdk.models.operations.GetCommonResponse;
-            import dev.plexapi.sdk.models.shared.Accepts;
+            import dev.plexapi.sdk.models.shared.*;
             import java.lang.Exception;
 
             public class Application {
@@ -5305,6 +5331,11 @@ actions:
 
                     GetCommonRequest req = GetCommonRequest.builder()
                             .sectionId(298154L)
+                            .mediaQuery(MediaQuery.builder()
+                                .type(MediaType.Episode)
+                                .sourceType(2L)
+                                .sort("duration:desc,index")
+                                .build())
                             .build();
 
                     GetCommonResponse res = sdk.library().getCommon()
@@ -5327,7 +5358,7 @@ actions:
             import dev.plexapi.sdk.PlexAPI;
             import dev.plexapi.sdk.models.operations.GetSectionImageRequest;
             import dev.plexapi.sdk.models.operations.GetSectionImageResponse;
-            import dev.plexapi.sdk.models.shared.Accepts;
+            import dev.plexapi.sdk.models.shared.*;
             import java.lang.Exception;
 
             public class Application {
@@ -5352,6 +5383,11 @@ actions:
                     GetSectionImageRequest req = GetSectionImageRequest.builder()
                             .sectionId(925611L)
                             .updatedAt(117413L)
+                            .mediaQuery(MediaQuery.builder()
+                                .type(MediaType.Episode)
+                                .sourceType(2L)
+                                .sort("duration:desc,index")
+                                .build())
                             .build();
 
                     GetSectionImageResponse res = sdk.library().getSectionImage()
@@ -5510,7 +5546,7 @@ actions:
             import dev.plexapi.sdk.PlexAPI;
             import dev.plexapi.sdk.models.operations.GetFirstCharactersRequest;
             import dev.plexapi.sdk.models.operations.GetFirstCharactersResponse;
-            import dev.plexapi.sdk.models.shared.Accepts;
+            import dev.plexapi.sdk.models.shared.*;
             import java.lang.Exception;
 
             public class Application {
@@ -5534,6 +5570,11 @@ actions:
 
                     GetFirstCharactersRequest req = GetFirstCharactersRequest.builder()
                             .sectionId(3947L)
+                            .mediaQuery(MediaQuery.builder()
+                                .type(MediaType.Episode)
+                                .sourceType(2L)
+                                .sort("duration:desc,index")
+                                .build())
                             .build();
 
                     GetFirstCharactersResponse res = sdk.library().getFirstCharacters()
@@ -5944,7 +5985,7 @@ actions:
 
                     RefreshSectionRequest req = RefreshSectionRequest.builder()
                             .sectionId(450300L)
-                            .force(BoolInt.ONE)
+                            .force(BoolInt.True)
                             .build();
 
                     RefreshSectionResponse res = sdk.library().refreshSection()
@@ -6082,7 +6123,7 @@ actions:
                     GetStreamRequest req = GetStreamRequest.builder()
                             .streamId(314506L)
                             .ext("<value>")
-                            .autoAdjustSubtitle(BoolInt.ONE)
+                            .autoAdjustSubtitle(BoolInt.True)
                             .build();
 
                     GetStreamResponse res = sdk.library().getStream()
@@ -6241,6 +6282,7 @@ actions:
             import dev.plexapi.sdk.models.operations.GetTagsRequest;
             import dev.plexapi.sdk.models.operations.GetTagsResponse;
             import dev.plexapi.sdk.models.shared.Accepts;
+            import dev.plexapi.sdk.models.shared.MediaType;
             import java.lang.Exception;
 
             public class Application {
@@ -6263,6 +6305,7 @@ actions:
                         .build();
 
                     GetTagsRequest req = GetTagsRequest.builder()
+                            .type(MediaType.TvShow)
                             .build();
 
                     GetTagsResponse res = sdk.library().getTags()
@@ -7805,7 +7848,7 @@ actions:
 
                     ModifyDeviceRequest req = ModifyDeviceRequest.builder()
                             .deviceId(879135L)
-                            .enabled(BoolInt.ONE)
+                            .enabled(BoolInt.True)
                             .build();
 
                     ModifyDeviceResponse res = sdk.devices().modifyDevice()
@@ -8331,8 +8374,8 @@ actions:
                         .build();
 
                     GetAllSubscriptionsRequest req = GetAllSubscriptionsRequest.builder()
-                            .includeGrabs(BoolInt.ONE)
-                            .includeStorage(BoolInt.ONE)
+                            .includeGrabs(BoolInt.True)
+                            .includeStorage(BoolInt.True)
                             .build();
 
                     GetAllSubscriptionsResponse res = sdk.subscriptions().getAllSubscriptions()
@@ -8577,8 +8620,8 @@ actions:
 
                     GetSubscriptionRequest req = GetSubscriptionRequest.builder()
                             .subscriptionId(186713L)
-                            .includeGrabs(BoolInt.ONE)
-                            .includeStorage(BoolInt.ONE)
+                            .includeGrabs(BoolInt.True)
+                            .includeStorage(BoolInt.True)
                             .build();
 
                     GetSubscriptionResponse res = sdk.subscriptions().getSubscription()
@@ -8720,9 +8763,9 @@ actions:
                     TranscodeImageRequest req = TranscodeImageRequest.builder()
                             .url("/library/metadata/265/thumb/1715112705")
                             .background("#ff5522")
-                            .upscale(BoolInt.ONE)
-                            .minSize(BoolInt.ONE)
-                            .rotate(BoolInt.ONE)
+                            .upscale(BoolInt.True)
+                            .minSize(BoolInt.True)
+                            .rotate(BoolInt.True)
                             .blendColor("#ff5522")
                             .build();
 
@@ -8770,11 +8813,11 @@ actions:
 
                     CreatePlayQueueRequest req = CreatePlayQueueRequest.builder()
                             .type(Type.AUDIO)
-                            .shuffle(BoolInt.ONE)
-                            .repeat(BoolInt.ONE)
-                            .continuous(BoolInt.ONE)
-                            .recursive(BoolInt.ONE)
-                            .onDeck(BoolInt.ONE)
+                            .shuffle(BoolInt.True)
+                            .repeat(BoolInt.True)
+                            .continuous(BoolInt.True)
+                            .recursive(BoolInt.True)
+                            .onDeck(BoolInt.True)
                             .build();
 
                     CreatePlayQueueResponse res = sdk.playQueue().createPlayQueue()
@@ -8822,9 +8865,9 @@ actions:
 
                     GetPlayQueueRequest req = GetPlayQueueRequest.builder()
                             .playQueueId(210646L)
-                            .own(BoolInt.ONE)
-                            .includeBefore(BoolInt.ONE)
-                            .includeAfter(BoolInt.ONE)
+                            .own(BoolInt.True)
+                            .includeBefore(BoolInt.True)
+                            .includeAfter(BoolInt.True)
                             .build();
 
                     GetPlayQueueResponse res = sdk.playQueue().getPlayQueue()
@@ -8872,7 +8915,7 @@ actions:
 
                     AddToPlayQueueRequest req = AddToPlayQueueRequest.builder()
                             .playQueueId(919248L)
-                            .next(BoolInt.ONE)
+                            .next(BoolInt.True)
                             .build();
 
                     AddToPlayQueueResponse res = sdk.playQueue().addToPlayQueue()
@@ -9288,7 +9331,7 @@ actions:
 
                     UploadPlaylistRequest req = UploadPlaylistRequest.builder()
                             .path("/home/barkley/playlist.m3u")
-                            .force(BoolInt.ONE)
+                            .force(BoolInt.True)
                             .build();
 
                     UploadPlaylistResponse res = sdk.libraryPlaylists().uploadPlaylist()
@@ -9850,6 +9893,45 @@ actions:
                     }
                 }
             }
+  - target: $["paths"]["/resources"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: PlexJava
+          source: |-
+            package hello.world;
+
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetServerResourcesUnauthorized;
+            import dev.plexapi.sdk.models.operations.*;
+            import dev.plexapi.sdk.models.shared.Accepts;
+            import java.lang.Exception;
+
+            public class Application {
+
+                public static void main(String[] args) throws GetServerResourcesUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
+                            .accepts(Accepts.APPLICATION_XML)
+                            .clientIdentifier("abc123")
+                            .token(System.getenv().getOrDefault("TOKEN", ""))
+                        .build();
+
+                    GetServerResourcesRequest req = GetServerResourcesRequest.builder()
+                            .includeHttps(IncludeHttps.True)
+                            .includeRelay(IncludeRelay.True)
+                            .includeIPv6(IncludeIPv6.True)
+                            .build();
+
+                    GetServerResourcesResponse res = sdk.plex().getServerResources()
+                            .request(req)
+                            .call();
+
+                    if (res.plexDevices().isPresent()) {
+                        // handle response
+                    }
+                }
+            }
   - target: $["paths"]["/security/resources"]["get"]
     update:
       x-codeSamples:
@@ -9886,7 +9968,7 @@ actions:
 
                     GetSourceConnectionInformationRequest req = GetSourceConnectionInformationRequest.builder()
                             .source("<value>")
-                            .refresh(BoolInt.ONE)
+                            .refresh(BoolInt.True)
                             .build();
 
                     GetSourceConnectionInformationResponse res = sdk.general().getSourceConnectionInformation()
@@ -10031,7 +10113,7 @@ actions:
                             .bottomLeft("1c425d")
                             .width(1920L)
                             .height(1080L)
-                            .noise(BoolInt.ONE)
+                            .noise(BoolInt.True)
                             .build();
 
                     GetImageResponse res = sdk.ultraBlur().getImage()
@@ -10341,8 +10423,8 @@ actions:
                         .build();
 
                     ApplyUpdatesRequest req = ApplyUpdatesRequest.builder()
-                            .tonight(BoolInt.ONE)
-                            .skip(BoolInt.ONE)
+                            .tonight(BoolInt.True)
+                            .skip(BoolInt.True)
                             .build();
 
                     ApplyUpdatesResponse res = sdk.updater().applyUpdates()
@@ -10387,7 +10469,7 @@ actions:
                         .build();
 
                     CheckUpdatesRequest req = CheckUpdatesRequest.builder()
-                            .download(BoolInt.ONE)
+                            .download(BoolInt.True)
                             .build();
 
                     CheckUpdatesResponse res = sdk.updater().checkUpdates()
@@ -10421,6 +10503,150 @@ actions:
                             .call();
 
                     if (res.object().isPresent()) {
+                        // handle response
+                    }
+                }
+            }
+  - target: $["paths"]["/user"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: PlexJava
+          source: |-
+            package hello.world;
+
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetTokenDetailsBadRequest;
+            import dev.plexapi.sdk.models.errors.GetTokenDetailsUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetTokenDetailsRequest;
+            import dev.plexapi.sdk.models.operations.GetTokenDetailsResponse;
+            import dev.plexapi.sdk.models.shared.Accepts;
+            import java.lang.Exception;
+
+            public class Application {
+
+                public static void main(String[] args) throws GetTokenDetailsBadRequest, GetTokenDetailsUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
+                            .accepts(Accepts.APPLICATION_XML)
+                            .clientIdentifier("abc123")
+                            .product("Plex for Roku")
+                            .version("2.4.1")
+                            .platform("Roku")
+                            .platformVersion("4.3 build 1057")
+                            .device("Roku 3")
+                            .model("4200X")
+                            .deviceVendor("Roku")
+                            .deviceName("Living Room TV")
+                            .marketplace("googlePlay")
+                            .token(System.getenv().getOrDefault("TOKEN", ""))
+                        .build();
+
+                    GetTokenDetailsRequest req = GetTokenDetailsRequest.builder()
+                            .build();
+
+                    GetTokenDetailsResponse res = sdk.authentication().getTokenDetails()
+                            .request(req)
+                            .call();
+
+                    if (res.userPlexAccount().isPresent()) {
+                        // handle response
+                    }
+                }
+            }
+  - target: $["paths"]["/users"]["get"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: PlexJava
+          source: |-
+            package hello.world;
+
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.GetUsersBadRequest;
+            import dev.plexapi.sdk.models.errors.GetUsersUnauthorized;
+            import dev.plexapi.sdk.models.operations.GetUsersRequest;
+            import dev.plexapi.sdk.models.operations.GetUsersResponse;
+            import dev.plexapi.sdk.models.shared.Accepts;
+            import java.lang.Exception;
+
+            public class Application {
+
+                public static void main(String[] args) throws GetUsersBadRequest, GetUsersUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
+                            .accepts(Accepts.APPLICATION_XML)
+                            .clientIdentifier("abc123")
+                            .product("Plex for Roku")
+                            .version("2.4.1")
+                            .platform("Roku")
+                            .platformVersion("4.3 build 1057")
+                            .device("Roku 3")
+                            .model("4200X")
+                            .deviceVendor("Roku")
+                            .deviceName("Living Room TV")
+                            .marketplace("googlePlay")
+                            .token(System.getenv().getOrDefault("TOKEN", ""))
+                        .build();
+
+                    GetUsersRequest req = GetUsersRequest.builder()
+                            .build();
+
+                    GetUsersResponse res = sdk.users().getUsers()
+                            .request(req)
+                            .call();
+
+                    if (res.object().isPresent()) {
+                        // handle response
+                    }
+                }
+            }
+  - target: $["paths"]["/users/signin"]["post"]
+    update:
+      x-codeSamples:
+        - lang: java
+          label: PlexJava
+          source: |-
+            package hello.world;
+
+            import dev.plexapi.sdk.PlexAPI;
+            import dev.plexapi.sdk.models.errors.PostUsersSignInDataBadRequest;
+            import dev.plexapi.sdk.models.errors.PostUsersSignInDataUnauthorized;
+            import dev.plexapi.sdk.models.operations.*;
+            import dev.plexapi.sdk.models.shared.Accepts;
+            import java.lang.Exception;
+
+            public class Application {
+
+                public static void main(String[] args) throws PostUsersSignInDataBadRequest, PostUsersSignInDataUnauthorized, Exception {
+
+                    PlexAPI sdk = PlexAPI.builder()
+                            .accepts(Accepts.APPLICATION_XML)
+                            .clientIdentifier("abc123")
+                            .product("Plex for Roku")
+                            .version("2.4.1")
+                            .platform("Roku")
+                            .platformVersion("4.3 build 1057")
+                            .device("Roku 3")
+                            .model("4200X")
+                            .deviceVendor("Roku")
+                            .deviceName("Living Room TV")
+                            .marketplace("googlePlay")
+                        .build();
+
+                    PostUsersSignInDataRequest req = PostUsersSignInDataRequest.builder()
+                            .requestBody(PostUsersSignInDataRequestBody.builder()
+                                .login("username@email.com")
+                                .password("password123")
+                                .verificationCode("123456")
+                                .build())
+                            .build();
+
+                    PostUsersSignInDataResponse res = sdk.authentication().postUsersSignInData()
+                            .request(req)
+                            .call();
+
+                    if (res.userPlexAccount().isPresent()) {
                         // handle response
                     }
                 }
@@ -10462,13 +10688,13 @@ actions:
                             .advancedSubtitles(AdvancedSubtitles.BURN)
                             .audioBoost(50L)
                             .audioChannelCount(5L)
-                            .autoAdjustQuality(BoolInt.ONE)
-                            .autoAdjustSubtitle(BoolInt.ONE)
-                            .directPlay(BoolInt.ONE)
-                            .directStream(BoolInt.ONE)
-                            .directStreamAudio(BoolInt.ONE)
-                            .disableResolutionRotation(BoolInt.ONE)
-                            .hasMDE(BoolInt.ONE)
+                            .autoAdjustQuality(BoolInt.True)
+                            .autoAdjustSubtitle(BoolInt.True)
+                            .directPlay(BoolInt.True)
+                            .directStream(BoolInt.True)
+                            .directStreamAudio(BoolInt.True)
+                            .disableResolutionRotation(BoolInt.True)
+                            .hasMDE(BoolInt.True)
                             .location(Location.WAN)
                             .mediaBufferSize(102400L)
                             .mediaIndex(0L)
@@ -10580,13 +10806,13 @@ actions:
                             .advancedSubtitles(AdvancedSubtitles.BURN)
                             .audioBoost(50L)
                             .audioChannelCount(5L)
-                            .autoAdjustQuality(BoolInt.ONE)
-                            .autoAdjustSubtitle(BoolInt.ONE)
-                            .directPlay(BoolInt.ONE)
-                            .directStream(BoolInt.ONE)
-                            .directStreamAudio(BoolInt.ONE)
-                            .disableResolutionRotation(BoolInt.ONE)
-                            .hasMDE(BoolInt.ONE)
+                            .autoAdjustQuality(BoolInt.True)
+                            .autoAdjustSubtitle(BoolInt.True)
+                            .directPlay(BoolInt.True)
+                            .directStream(BoolInt.True)
+                            .directStreamAudio(BoolInt.True)
+                            .disableResolutionRotation(BoolInt.True)
+                            .hasMDE(BoolInt.True)
                             .location(StartTranscodeSessionQueryParamLocation.WAN)
                             .mediaBufferSize(102400L)
                             .mediaIndex(0L)
@@ -10652,13 +10878,13 @@ actions:
                             .advancedSubtitles(AdvancedSubtitles.BURN)
                             .audioBoost(50L)
                             .audioChannelCount(5L)
-                            .autoAdjustQuality(BoolInt.ONE)
-                            .autoAdjustSubtitle(BoolInt.ONE)
-                            .directPlay(BoolInt.ONE)
-                            .directStream(BoolInt.ONE)
-                            .directStreamAudio(BoolInt.ONE)
-                            .disableResolutionRotation(BoolInt.ONE)
-                            .hasMDE(BoolInt.ONE)
+                            .autoAdjustQuality(BoolInt.True)
+                            .autoAdjustSubtitle(BoolInt.True)
+                            .directPlay(BoolInt.True)
+                            .directStream(BoolInt.True)
+                            .directStreamAudio(BoolInt.True)
+                            .disableResolutionRotation(BoolInt.True)
+                            .hasMDE(BoolInt.True)
                             .location(QueryParamLocation.WAN)
                             .mediaBufferSize(102400L)
                             .mediaIndex(0L)

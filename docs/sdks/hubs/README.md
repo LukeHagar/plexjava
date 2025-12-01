@@ -59,7 +59,7 @@ public class Application {
             .build();
 
         GetAllHubsRequest req = GetAllHubsRequest.builder()
-                .onlyTransient(BoolInt.ONE)
+                .onlyTransient(BoolInt.True)
                 .build();
 
         GetAllHubsResponse res = sdk.hubs().getAllHubs()
@@ -327,7 +327,7 @@ public class Application {
 
         GetMetadataHubsRequest req = GetMetadataHubsRequest.builder()
                 .metadataId(605482L)
-                .onlyTransient(BoolInt.ONE)
+                .onlyTransient(BoolInt.True)
                 .build();
 
         GetMetadataHubsResponse res = sdk.hubs().getMetadataHubs()
@@ -395,7 +395,7 @@ public class Application {
 
         GetPostplayHubsRequest req = GetPostplayHubsRequest.builder()
                 .metadataId(441419L)
-                .onlyTransient(BoolInt.ONE)
+                .onlyTransient(BoolInt.True)
                 .build();
 
         GetPostplayHubsResponse res = sdk.hubs().getPostplayHubs()
@@ -463,7 +463,7 @@ public class Application {
 
         GetRelatedHubsRequest req = GetRelatedHubsRequest.builder()
                 .metadataId(8858L)
-                .onlyTransient(BoolInt.ONE)
+                .onlyTransient(BoolInt.True)
                 .build();
 
         GetRelatedHubsResponse res = sdk.hubs().getRelatedHubs()
@@ -531,7 +531,7 @@ public class Application {
 
         GetSectionHubsRequest req = GetSectionHubsRequest.builder()
                 .sectionId(336924L)
-                .onlyTransient(BoolInt.ONE)
+                .onlyTransient(BoolInt.True)
                 .build();
 
         GetSectionHubsResponse res = sdk.hubs().getSectionHubs()
@@ -730,9 +730,9 @@ public class Application {
         CreateCustomHubRequest req = CreateCustomHubRequest.builder()
                 .sectionId(869922L)
                 .metadataItemId(703843L)
-                .promotedToRecommended(BoolInt.ONE)
-                .promotedToOwnHome(BoolInt.ONE)
-                .promotedToSharedHome(BoolInt.ONE)
+                .promotedToRecommended(BoolInt.True)
+                .promotedToOwnHome(BoolInt.True)
+                .promotedToSharedHome(BoolInt.True)
                 .build();
 
         CreateCustomHubResponse res = sdk.hubs().createCustomHub()
@@ -931,9 +931,9 @@ public class Application {
         UpdateHubVisibilityRequest req = UpdateHubVisibilityRequest.builder()
                 .sectionId(341650L)
                 .identifier("<value>")
-                .promotedToRecommended(BoolInt.ONE)
-                .promotedToOwnHome(BoolInt.ONE)
-                .promotedToSharedHome(BoolInt.ONE)
+                .promotedToRecommended(BoolInt.True)
+                .promotedToOwnHome(BoolInt.True)
+                .promotedToSharedHome(BoolInt.True)
                 .build();
 
         UpdateHubVisibilityResponse res = sdk.hubs().updateHubVisibility()

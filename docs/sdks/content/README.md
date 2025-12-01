@@ -126,14 +126,14 @@ public class Application {
 
         GetMetadataItemRequest req = GetMetadataItemRequest.builder()
                 .ids(List.of())
-                .asyncCheckFiles(BoolInt.ONE)
-                .asyncRefreshLocalMediaAgent(BoolInt.ONE)
-                .asyncRefreshAnalysis(BoolInt.ONE)
-                .checkFiles(BoolInt.ONE)
-                .skipRefresh(BoolInt.ONE)
-                .checkFileAvailability(BoolInt.ONE)
-                .asyncAugmentMetadata(BoolInt.ONE)
-                .augmentCount(BoolInt.ONE)
+                .asyncCheckFiles(BoolInt.True)
+                .asyncRefreshLocalMediaAgent(BoolInt.True)
+                .asyncRefreshAnalysis(BoolInt.True)
+                .checkFiles(BoolInt.True)
+                .skipRefresh(BoolInt.True)
+                .checkFileAvailability(BoolInt.True)
+                .asyncAugmentMetadata(BoolInt.True)
+                .augmentCount(BoolInt.True)
                 .build();
 
         GetMetadataItemResponse res = sdk.content().getMetadataItem()
@@ -242,7 +242,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.operations.ListContentRequest;
 import dev.plexapi.sdk.models.operations.ListContentResponse;
-import dev.plexapi.sdk.models.shared.Accepts;
+import dev.plexapi.sdk.models.shared.*;
 import java.lang.Exception;
 
 public class Application {
@@ -266,6 +266,13 @@ public class Application {
 
         ListContentRequest req = ListContentRequest.builder()
                 .sectionId("<id>")
+                .mediaQuery(MediaQuery.builder()
+                    .type(MediaType.Episode)
+                    .sourceType(2L)
+                    .sort("duration:desc,index")
+                    .build())
+                .includeMeta(BoolInt.True)
+                .includeGuids(BoolInt.True)
                 .build();
 
         ListContentResponse res = sdk.content().listContent()

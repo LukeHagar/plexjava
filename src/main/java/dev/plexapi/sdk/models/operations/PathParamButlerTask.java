@@ -9,11 +9,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Task
+ * PathParamButlerTask
  * 
  * <p>The task name
  */
-public enum Task {
+public enum PathParamButlerTask {
     AUTOMATIC_UPDATES("AutomaticUpdates"),
     BACKUP_DATABASE("BackupDatabase"),
     BUTLER_TASK_GENERATE_AD_MARKERS("ButlerTaskGenerateAdMarkers"),
@@ -40,7 +40,7 @@ public enum Task {
     @JsonValue
     private final String value;
 
-    Task(String value) {
+    PathParamButlerTask(String value) {
         this.value = value;
     }
     
@@ -48,8 +48,8 @@ public enum Task {
         return value;
     }
     
-    public static Optional<Task> fromValue(String value) {
-        for (Task o: Task.values()) {
+    public static Optional<PathParamButlerTask> fromValue(String value) {
+        for (PathParamButlerTask o: PathParamButlerTask.values()) {
             if (Objects.deepEquals(o.value, value)) {
                 return Optional.of(o);
             }

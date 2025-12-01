@@ -80,7 +80,7 @@ public class StopTask {
             String url = Utils.generateURL(
                     klass,
                     this.baseUrl,
-                    "/butler/{task}",
+                    "/butler/{butlerTask}",
                     request, this.sdkConfiguration.globals);
             HTTPRequest req = new HTTPRequest(url, "DELETE");
             req.addHeader("Accept", "*/*")

@@ -657,7 +657,7 @@ public class AddToPlayQueueRequest {
 
         private Optional<String> playlistID = Optional.empty();
 
-        private Optional<? extends BoolInt> next = Optional.empty();
+        private Optional<? extends BoolInt> next;
 
         private Builder() {
           // force use of static builder() method
@@ -943,6 +943,9 @@ public class AddToPlayQueueRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (next == null) {
+                next = _SINGLETON_VALUE_Next.value();
+            }
 
             return new AddToPlayQueueRequest(
                 accepts, clientIdentifier, product,
@@ -958,5 +961,11 @@ public class AddToPlayQueueRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Next =
+                new LazySingletonValue<>(
+                        "next",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

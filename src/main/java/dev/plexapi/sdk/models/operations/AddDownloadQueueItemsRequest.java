@@ -1596,19 +1596,19 @@ public class AddDownloadQueueItemsRequest {
 
         private Optional<Long> audioChannelCount = Optional.empty();
 
-        private Optional<? extends BoolInt> autoAdjustQuality = Optional.empty();
+        private Optional<? extends BoolInt> autoAdjustQuality;
 
-        private Optional<? extends BoolInt> autoAdjustSubtitle = Optional.empty();
+        private Optional<? extends BoolInt> autoAdjustSubtitle;
 
-        private Optional<? extends BoolInt> directPlay = Optional.empty();
+        private Optional<? extends BoolInt> directPlay;
 
-        private Optional<? extends BoolInt> directStream = Optional.empty();
+        private Optional<? extends BoolInt> directStream;
 
-        private Optional<? extends BoolInt> directStreamAudio = Optional.empty();
+        private Optional<? extends BoolInt> directStreamAudio;
 
-        private Optional<? extends BoolInt> disableResolutionRotation = Optional.empty();
+        private Optional<? extends BoolInt> disableResolutionRotation;
 
-        private Optional<? extends BoolInt> hasMDE = Optional.empty();
+        private Optional<? extends BoolInt> hasMDE;
 
         private Optional<? extends Location> location = Optional.empty();
 
@@ -2373,6 +2373,27 @@ public class AddDownloadQueueItemsRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (autoAdjustQuality == null) {
+                autoAdjustQuality = _SINGLETON_VALUE_AutoAdjustQuality.value();
+            }
+            if (autoAdjustSubtitle == null) {
+                autoAdjustSubtitle = _SINGLETON_VALUE_AutoAdjustSubtitle.value();
+            }
+            if (directPlay == null) {
+                directPlay = _SINGLETON_VALUE_DirectPlay.value();
+            }
+            if (directStream == null) {
+                directStream = _SINGLETON_VALUE_DirectStream.value();
+            }
+            if (directStreamAudio == null) {
+                directStreamAudio = _SINGLETON_VALUE_DirectStreamAudio.value();
+            }
+            if (disableResolutionRotation == null) {
+                disableResolutionRotation = _SINGLETON_VALUE_DisableResolutionRotation.value();
+            }
+            if (hasMDE == null) {
+                hasMDE = _SINGLETON_VALUE_HasMDE.value();
+            }
 
             return new AddDownloadQueueItemsRequest(
                 accepts, clientIdentifier, product,
@@ -2396,5 +2417,47 @@ public class AddDownloadQueueItemsRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_AutoAdjustQuality =
+                new LazySingletonValue<>(
+                        "autoAdjustQuality",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_AutoAdjustSubtitle =
+                new LazySingletonValue<>(
+                        "autoAdjustSubtitle",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_DirectPlay =
+                new LazySingletonValue<>(
+                        "directPlay",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_DirectStream =
+                new LazySingletonValue<>(
+                        "directStream",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_DirectStreamAudio =
+                new LazySingletonValue<>(
+                        "directStreamAudio",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_DisableResolutionRotation =
+                new LazySingletonValue<>(
+                        "disableResolutionRotation",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_HasMDE =
+                new LazySingletonValue<>(
+                        "hasMDE",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

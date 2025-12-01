@@ -846,21 +846,21 @@ public class GetMetadataItemRequest {
 
         private List<String> ids;
 
-        private Optional<? extends BoolInt> asyncCheckFiles = Optional.empty();
+        private Optional<? extends BoolInt> asyncCheckFiles;
 
-        private Optional<? extends BoolInt> asyncRefreshLocalMediaAgent = Optional.empty();
+        private Optional<? extends BoolInt> asyncRefreshLocalMediaAgent;
 
-        private Optional<? extends BoolInt> asyncRefreshAnalysis = Optional.empty();
+        private Optional<? extends BoolInt> asyncRefreshAnalysis;
 
-        private Optional<? extends BoolInt> checkFiles = Optional.empty();
+        private Optional<? extends BoolInt> checkFiles;
 
-        private Optional<? extends BoolInt> skipRefresh = Optional.empty();
+        private Optional<? extends BoolInt> skipRefresh;
 
-        private Optional<? extends BoolInt> checkFileAvailability = Optional.empty();
+        private Optional<? extends BoolInt> checkFileAvailability;
 
-        private Optional<? extends BoolInt> asyncAugmentMetadata = Optional.empty();
+        private Optional<? extends BoolInt> asyncAugmentMetadata;
 
-        private Optional<? extends BoolInt> augmentCount = Optional.empty();
+        private Optional<? extends BoolInt> augmentCount;
 
         private Builder() {
           // force use of static builder() method
@@ -1238,6 +1238,30 @@ public class GetMetadataItemRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (asyncCheckFiles == null) {
+                asyncCheckFiles = _SINGLETON_VALUE_AsyncCheckFiles.value();
+            }
+            if (asyncRefreshLocalMediaAgent == null) {
+                asyncRefreshLocalMediaAgent = _SINGLETON_VALUE_AsyncRefreshLocalMediaAgent.value();
+            }
+            if (asyncRefreshAnalysis == null) {
+                asyncRefreshAnalysis = _SINGLETON_VALUE_AsyncRefreshAnalysis.value();
+            }
+            if (checkFiles == null) {
+                checkFiles = _SINGLETON_VALUE_CheckFiles.value();
+            }
+            if (skipRefresh == null) {
+                skipRefresh = _SINGLETON_VALUE_SkipRefresh.value();
+            }
+            if (checkFileAvailability == null) {
+                checkFileAvailability = _SINGLETON_VALUE_CheckFileAvailability.value();
+            }
+            if (asyncAugmentMetadata == null) {
+                asyncAugmentMetadata = _SINGLETON_VALUE_AsyncAugmentMetadata.value();
+            }
+            if (augmentCount == null) {
+                augmentCount = _SINGLETON_VALUE_AugmentCount.value();
+            }
 
             return new GetMetadataItemRequest(
                 accepts, clientIdentifier, product,
@@ -1255,5 +1279,53 @@ public class GetMetadataItemRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_AsyncCheckFiles =
+                new LazySingletonValue<>(
+                        "asyncCheckFiles",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_AsyncRefreshLocalMediaAgent =
+                new LazySingletonValue<>(
+                        "asyncRefreshLocalMediaAgent",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_AsyncRefreshAnalysis =
+                new LazySingletonValue<>(
+                        "asyncRefreshAnalysis",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_CheckFiles =
+                new LazySingletonValue<>(
+                        "checkFiles",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_SkipRefresh =
+                new LazySingletonValue<>(
+                        "skipRefresh",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_CheckFileAvailability =
+                new LazySingletonValue<>(
+                        "checkFileAvailability",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_AsyncAugmentMetadata =
+                new LazySingletonValue<>(
+                        "asyncAugmentMetadata",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_AugmentCount =
+                new LazySingletonValue<>(
+                        "augmentCount",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

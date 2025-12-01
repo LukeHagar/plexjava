@@ -10,11 +10,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Double;
-import java.lang.Long;
-import java.lang.Object;
+import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
-import java.lang.SuppressWarnings;
 import java.util.Optional;
 
 /**
@@ -40,14 +38,16 @@ public class Tag {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("filter")
-    private Optional<? extends Object> filter;
+    private Optional<String> filter;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("id")
-    private Optional<Long> id;
+    private Optional<Integer> id;
 
-
+    /**
+     * The rating key (Media ID) of this media item. Note: Although this is always an integer, it is represented as a string in the API.
+     */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ratingKey")
     private Optional<String> ratingKey;
@@ -57,44 +57,43 @@ public class Tag {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("role")
-    private Optional<? extends Object> role;
+    private Optional<String> role;
 
     /**
      * The value of the tag (the name)
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tag")
-    private Optional<? extends Object> tag;
+    private String tag;
 
     /**
      * Plex identifier for this tag which can be used to fetch additional information from plex.tv
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tagKey")
-    private Optional<? extends Object> tagKey;
+    private Optional<String> tagKey;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tagType")
-    private Optional<Long> tagType;
+    private Optional<Integer> tagType;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
-    private Optional<? extends Object> thumb;
+    private Optional<String> thumb;
 
     @JsonCreator
     public Tag(
             @JsonProperty("confidence") Optional<Double> confidence,
             @JsonProperty("context") Optional<String> context,
-            @JsonProperty("filter") Optional<? extends Object> filter,
-            @JsonProperty("id") Optional<Long> id,
+            @JsonProperty("filter") Optional<String> filter,
+            @JsonProperty("id") Optional<Integer> id,
             @JsonProperty("ratingKey") Optional<String> ratingKey,
-            @JsonProperty("role") Optional<? extends Object> role,
-            @JsonProperty("tag") Optional<? extends Object> tag,
-            @JsonProperty("tagKey") Optional<? extends Object> tagKey,
-            @JsonProperty("tagType") Optional<Long> tagType,
-            @JsonProperty("thumb") Optional<? extends Object> thumb) {
+            @JsonProperty("role") Optional<String> role,
+            @JsonProperty("tag") String tag,
+            @JsonProperty("tagKey") Optional<String> tagKey,
+            @JsonProperty("tagType") Optional<Integer> tagType,
+            @JsonProperty("thumb") Optional<String> thumb) {
         Utils.checkNotNull(confidence, "confidence");
         Utils.checkNotNull(context, "context");
         Utils.checkNotNull(filter, "filter");
@@ -117,10 +116,11 @@ public class Tag {
         this.thumb = thumb;
     }
     
-    public Tag() {
+    public Tag(
+            String tag) {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
+            tag, Optional.empty(), Optional.empty(),
             Optional.empty());
     }
 
@@ -140,17 +140,19 @@ public class Tag {
     /**
      * A filter parameter that can be used to query for more content that matches this tag value.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> filter() {
-        return (Optional<Object>) filter;
+    public Optional<String> filter() {
+        return filter;
     }
 
     @JsonIgnore
-    public Optional<Long> id() {
+    public Optional<Integer> id() {
         return id;
     }
 
+    /**
+     * The rating key (Media ID) of this media item. Note: Although this is always an integer, it is represented as a string in the API.
+     */
     @JsonIgnore
     public Optional<String> ratingKey() {
         return ratingKey;
@@ -159,39 +161,35 @@ public class Tag {
     /**
      * The role this actor played
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> role() {
-        return (Optional<Object>) role;
+    public Optional<String> role() {
+        return role;
     }
 
     /**
      * The value of the tag (the name)
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> tag() {
-        return (Optional<Object>) tag;
+    public String tag() {
+        return tag;
     }
 
     /**
      * Plex identifier for this tag which can be used to fetch additional information from plex.tv
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> tagKey() {
-        return (Optional<Object>) tagKey;
+    public Optional<String> tagKey() {
+        return tagKey;
     }
 
     @JsonIgnore
-    public Optional<Long> tagType() {
+    public Optional<Integer> tagType() {
         return tagType;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> thumb() {
-        return (Optional<Object>) thumb;
+    public Optional<String> thumb() {
+        return thumb;
     }
 
     public static Builder builder() {
@@ -234,7 +232,7 @@ public class Tag {
     /**
      * A filter parameter that can be used to query for more content that matches this tag value.
      */
-    public Tag withFilter(Object filter) {
+    public Tag withFilter(String filter) {
         Utils.checkNotNull(filter, "filter");
         this.filter = Optional.ofNullable(filter);
         return this;
@@ -244,25 +242,28 @@ public class Tag {
     /**
      * A filter parameter that can be used to query for more content that matches this tag value.
      */
-    public Tag withFilter(Optional<? extends Object> filter) {
+    public Tag withFilter(Optional<String> filter) {
         Utils.checkNotNull(filter, "filter");
         this.filter = filter;
         return this;
     }
 
-    public Tag withId(long id) {
+    public Tag withId(int id) {
         Utils.checkNotNull(id, "id");
         this.id = Optional.ofNullable(id);
         return this;
     }
 
 
-    public Tag withId(Optional<Long> id) {
+    public Tag withId(Optional<Integer> id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
     }
 
+    /**
+     * The rating key (Media ID) of this media item. Note: Although this is always an integer, it is represented as a string in the API.
+     */
     public Tag withRatingKey(String ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         this.ratingKey = Optional.ofNullable(ratingKey);
@@ -270,6 +271,9 @@ public class Tag {
     }
 
 
+    /**
+     * The rating key (Media ID) of this media item. Note: Although this is always an integer, it is represented as a string in the API.
+     */
     public Tag withRatingKey(Optional<String> ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         this.ratingKey = ratingKey;
@@ -279,7 +283,7 @@ public class Tag {
     /**
      * The role this actor played
      */
-    public Tag withRole(Object role) {
+    public Tag withRole(String role) {
         Utils.checkNotNull(role, "role");
         this.role = Optional.ofNullable(role);
         return this;
@@ -289,7 +293,7 @@ public class Tag {
     /**
      * The role this actor played
      */
-    public Tag withRole(Optional<? extends Object> role) {
+    public Tag withRole(Optional<String> role) {
         Utils.checkNotNull(role, "role");
         this.role = role;
         return this;
@@ -298,17 +302,7 @@ public class Tag {
     /**
      * The value of the tag (the name)
      */
-    public Tag withTag(Object tag) {
-        Utils.checkNotNull(tag, "tag");
-        this.tag = Optional.ofNullable(tag);
-        return this;
-    }
-
-
-    /**
-     * The value of the tag (the name)
-     */
-    public Tag withTag(Optional<? extends Object> tag) {
+    public Tag withTag(String tag) {
         Utils.checkNotNull(tag, "tag");
         this.tag = tag;
         return this;
@@ -317,7 +311,7 @@ public class Tag {
     /**
      * Plex identifier for this tag which can be used to fetch additional information from plex.tv
      */
-    public Tag withTagKey(Object tagKey) {
+    public Tag withTagKey(String tagKey) {
         Utils.checkNotNull(tagKey, "tagKey");
         this.tagKey = Optional.ofNullable(tagKey);
         return this;
@@ -327,33 +321,33 @@ public class Tag {
     /**
      * Plex identifier for this tag which can be used to fetch additional information from plex.tv
      */
-    public Tag withTagKey(Optional<? extends Object> tagKey) {
+    public Tag withTagKey(Optional<String> tagKey) {
         Utils.checkNotNull(tagKey, "tagKey");
         this.tagKey = tagKey;
         return this;
     }
 
-    public Tag withTagType(long tagType) {
+    public Tag withTagType(int tagType) {
         Utils.checkNotNull(tagType, "tagType");
         this.tagType = Optional.ofNullable(tagType);
         return this;
     }
 
 
-    public Tag withTagType(Optional<Long> tagType) {
+    public Tag withTagType(Optional<Integer> tagType) {
         Utils.checkNotNull(tagType, "tagType");
         this.tagType = tagType;
         return this;
     }
 
-    public Tag withThumb(Object thumb) {
+    public Tag withThumb(String thumb) {
         Utils.checkNotNull(thumb, "thumb");
         this.thumb = Optional.ofNullable(thumb);
         return this;
     }
 
 
-    public Tag withThumb(Optional<? extends Object> thumb) {
+    public Tag withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
         this.thumb = thumb;
         return this;
@@ -412,21 +406,21 @@ public class Tag {
 
         private Optional<String> context = Optional.empty();
 
-        private Optional<? extends Object> filter = Optional.empty();
+        private Optional<String> filter = Optional.empty();
 
-        private Optional<Long> id = Optional.empty();
+        private Optional<Integer> id = Optional.empty();
 
         private Optional<String> ratingKey = Optional.empty();
 
-        private Optional<? extends Object> role = Optional.empty();
+        private Optional<String> role = Optional.empty();
 
-        private Optional<? extends Object> tag = Optional.empty();
+        private String tag;
 
-        private Optional<? extends Object> tagKey = Optional.empty();
+        private Optional<String> tagKey = Optional.empty();
 
-        private Optional<Long> tagType = Optional.empty();
+        private Optional<Integer> tagType = Optional.empty();
 
-        private Optional<? extends Object> thumb = Optional.empty();
+        private Optional<String> thumb = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -468,7 +462,7 @@ public class Tag {
         /**
          * A filter parameter that can be used to query for more content that matches this tag value.
          */
-        public Builder filter(Object filter) {
+        public Builder filter(String filter) {
             Utils.checkNotNull(filter, "filter");
             this.filter = Optional.ofNullable(filter);
             return this;
@@ -477,32 +471,38 @@ public class Tag {
         /**
          * A filter parameter that can be used to query for more content that matches this tag value.
          */
-        public Builder filter(Optional<? extends Object> filter) {
+        public Builder filter(Optional<String> filter) {
             Utils.checkNotNull(filter, "filter");
             this.filter = filter;
             return this;
         }
 
 
-        public Builder id(long id) {
+        public Builder id(int id) {
             Utils.checkNotNull(id, "id");
             this.id = Optional.ofNullable(id);
             return this;
         }
 
-        public Builder id(Optional<Long> id) {
+        public Builder id(Optional<Integer> id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;
         }
 
 
+        /**
+         * The rating key (Media ID) of this media item. Note: Although this is always an integer, it is represented as a string in the API.
+         */
         public Builder ratingKey(String ratingKey) {
             Utils.checkNotNull(ratingKey, "ratingKey");
             this.ratingKey = Optional.ofNullable(ratingKey);
             return this;
         }
 
+        /**
+         * The rating key (Media ID) of this media item. Note: Although this is always an integer, it is represented as a string in the API.
+         */
         public Builder ratingKey(Optional<String> ratingKey) {
             Utils.checkNotNull(ratingKey, "ratingKey");
             this.ratingKey = ratingKey;
@@ -513,7 +513,7 @@ public class Tag {
         /**
          * The role this actor played
          */
-        public Builder role(Object role) {
+        public Builder role(String role) {
             Utils.checkNotNull(role, "role");
             this.role = Optional.ofNullable(role);
             return this;
@@ -522,7 +522,7 @@ public class Tag {
         /**
          * The role this actor played
          */
-        public Builder role(Optional<? extends Object> role) {
+        public Builder role(Optional<String> role) {
             Utils.checkNotNull(role, "role");
             this.role = role;
             return this;
@@ -532,16 +532,7 @@ public class Tag {
         /**
          * The value of the tag (the name)
          */
-        public Builder tag(Object tag) {
-            Utils.checkNotNull(tag, "tag");
-            this.tag = Optional.ofNullable(tag);
-            return this;
-        }
-
-        /**
-         * The value of the tag (the name)
-         */
-        public Builder tag(Optional<? extends Object> tag) {
+        public Builder tag(String tag) {
             Utils.checkNotNull(tag, "tag");
             this.tag = tag;
             return this;
@@ -551,7 +542,7 @@ public class Tag {
         /**
          * Plex identifier for this tag which can be used to fetch additional information from plex.tv
          */
-        public Builder tagKey(Object tagKey) {
+        public Builder tagKey(String tagKey) {
             Utils.checkNotNull(tagKey, "tagKey");
             this.tagKey = Optional.ofNullable(tagKey);
             return this;
@@ -560,33 +551,33 @@ public class Tag {
         /**
          * Plex identifier for this tag which can be used to fetch additional information from plex.tv
          */
-        public Builder tagKey(Optional<? extends Object> tagKey) {
+        public Builder tagKey(Optional<String> tagKey) {
             Utils.checkNotNull(tagKey, "tagKey");
             this.tagKey = tagKey;
             return this;
         }
 
 
-        public Builder tagType(long tagType) {
+        public Builder tagType(int tagType) {
             Utils.checkNotNull(tagType, "tagType");
             this.tagType = Optional.ofNullable(tagType);
             return this;
         }
 
-        public Builder tagType(Optional<Long> tagType) {
+        public Builder tagType(Optional<Integer> tagType) {
             Utils.checkNotNull(tagType, "tagType");
             this.tagType = tagType;
             return this;
         }
 
 
-        public Builder thumb(Object thumb) {
+        public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
             this.thumb = Optional.ofNullable(thumb);
             return this;
         }
 
-        public Builder thumb(Optional<? extends Object> thumb) {
+        public Builder thumb(Optional<String> thumb) {
             Utils.checkNotNull(thumb, "thumb");
             this.thumb = thumb;
             return this;

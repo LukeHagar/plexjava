@@ -584,9 +584,9 @@ public class ApplyUpdatesRequest {
 
         private Optional<String> marketplace = Optional.empty();
 
-        private Optional<? extends BoolInt> tonight = Optional.empty();
+        private Optional<? extends BoolInt> tonight;
 
-        private Optional<? extends BoolInt> skip = Optional.empty();
+        private Optional<? extends BoolInt> skip;
 
         private Builder() {
           // force use of static builder() method
@@ -843,6 +843,12 @@ public class ApplyUpdatesRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (tonight == null) {
+                tonight = _SINGLETON_VALUE_Tonight.value();
+            }
+            if (skip == null) {
+                skip = _SINGLETON_VALUE_Skip.value();
+            }
 
             return new ApplyUpdatesRequest(
                 accepts, clientIdentifier, product,
@@ -858,5 +864,17 @@ public class ApplyUpdatesRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Tonight =
+                new LazySingletonValue<>(
+                        "tonight",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Skip =
+                new LazySingletonValue<>(
+                        "skip",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

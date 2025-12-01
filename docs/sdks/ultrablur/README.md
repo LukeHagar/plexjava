@@ -119,7 +119,7 @@ public class Application {
                 .bottomLeft("1c425d")
                 .width(1920L)
                 .height(1080L)
-                .noise(BoolInt.ONE)
+                .noise(BoolInt.True)
                 .build();
 
         GetImageResponse res = sdk.ultraBlur().getImage()

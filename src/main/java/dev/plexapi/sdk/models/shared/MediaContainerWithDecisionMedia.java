@@ -12,7 +12,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Double;
+import java.lang.Float;
+import java.lang.Integer;
 import java.lang.Long;
 import java.lang.Object;
 import java.lang.Override;
@@ -32,37 +33,37 @@ public class MediaContainerWithDecisionMedia {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("aspectRatio")
-    private Optional<Double> aspectRatio;
+    private Optional<Float> aspectRatio;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioChannels")
-    private Optional<Long> audioChannels;
+    private Optional<Integer> audioChannels;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioCodec")
-    private Optional<? extends Object> audioCodec;
+    private Optional<String> audioCodec;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audioProfile")
-    private Optional<? extends Object> audioProfile;
+    private Optional<String> audioProfile;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("bitrate")
-    private Optional<Long> bitrate;
+    private Optional<Integer> bitrate;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("container")
-    private Optional<? extends Object> container;
+    private Optional<String> container;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
-    private Optional<Long> duration;
+    private Optional<Integer> duration;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -77,12 +78,11 @@ public class MediaContainerWithDecisionMedia {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("height")
-    private Optional<Long> height;
+    private Optional<Integer> height;
 
 
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("id")
-    private Optional<Long> id;
+    private long id;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -97,27 +97,27 @@ public class MediaContainerWithDecisionMedia {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoCodec")
-    private Optional<? extends Object> videoCodec;
+    private Optional<String> videoCodec;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoFrameRate")
-    private Optional<? extends Object> videoFrameRate;
+    private Optional<String> videoFrameRate;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoProfile")
-    private Optional<? extends Object> videoProfile;
+    private Optional<String> videoProfile;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("videoResolution")
-    private Optional<? extends Object> videoResolution;
+    private Optional<String> videoResolution;
 
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("width")
-    private Optional<Long> width;
+    private Optional<Integer> width;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -140,24 +140,24 @@ public class MediaContainerWithDecisionMedia {
 
     @JsonCreator
     public MediaContainerWithDecisionMedia(
-            @JsonProperty("aspectRatio") Optional<Double> aspectRatio,
-            @JsonProperty("audioChannels") Optional<Long> audioChannels,
-            @JsonProperty("audioCodec") Optional<? extends Object> audioCodec,
-            @JsonProperty("audioProfile") Optional<? extends Object> audioProfile,
-            @JsonProperty("bitrate") Optional<Long> bitrate,
-            @JsonProperty("container") Optional<? extends Object> container,
-            @JsonProperty("duration") Optional<Long> duration,
+            @JsonProperty("aspectRatio") Optional<Float> aspectRatio,
+            @JsonProperty("audioChannels") Optional<Integer> audioChannels,
+            @JsonProperty("audioCodec") Optional<String> audioCodec,
+            @JsonProperty("audioProfile") Optional<String> audioProfile,
+            @JsonProperty("bitrate") Optional<Integer> bitrate,
+            @JsonProperty("container") Optional<String> container,
+            @JsonProperty("duration") Optional<Integer> duration,
             @JsonProperty("has64bitOffsets") Optional<Boolean> has64bitOffsets,
             @JsonProperty("hasVoiceActivity") Optional<Boolean> hasVoiceActivity,
-            @JsonProperty("height") Optional<Long> height,
-            @JsonProperty("id") Optional<Long> id,
+            @JsonProperty("height") Optional<Integer> height,
+            @JsonProperty("id") long id,
             @JsonProperty("optimizedForStreaming") Optional<Boolean> optimizedForStreaming,
             @JsonProperty("Part") Optional<? extends List<MediaContainerWithDecisionPart>> part,
-            @JsonProperty("videoCodec") Optional<? extends Object> videoCodec,
-            @JsonProperty("videoFrameRate") Optional<? extends Object> videoFrameRate,
-            @JsonProperty("videoProfile") Optional<? extends Object> videoProfile,
-            @JsonProperty("videoResolution") Optional<? extends Object> videoResolution,
-            @JsonProperty("width") Optional<Long> width,
+            @JsonProperty("videoCodec") Optional<String> videoCodec,
+            @JsonProperty("videoFrameRate") Optional<String> videoFrameRate,
+            @JsonProperty("videoProfile") Optional<String> videoProfile,
+            @JsonProperty("videoResolution") Optional<String> videoResolution,
+            @JsonProperty("width") Optional<Integer> width,
             @JsonProperty("abr") Optional<Boolean> abr,
             @JsonProperty("resourceSession") Optional<String> resourceSession,
             @JsonProperty("selected") Optional<Boolean> selected) {
@@ -206,51 +206,49 @@ public class MediaContainerWithDecisionMedia {
         this.additionalProperties = new HashMap<>();
     }
     
-    public MediaContainerWithDecisionMedia() {
+    public MediaContainerWithDecisionMedia(
+            long id) {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), id, Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     @JsonIgnore
-    public Optional<Double> aspectRatio() {
+    public Optional<Float> aspectRatio() {
         return aspectRatio;
     }
 
     @JsonIgnore
-    public Optional<Long> audioChannels() {
+    public Optional<Integer> audioChannels() {
         return audioChannels;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> audioCodec() {
-        return (Optional<Object>) audioCodec;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<Object> audioProfile() {
-        return (Optional<Object>) audioProfile;
+    public Optional<String> audioCodec() {
+        return audioCodec;
     }
 
     @JsonIgnore
-    public Optional<Long> bitrate() {
+    public Optional<String> audioProfile() {
+        return audioProfile;
+    }
+
+    @JsonIgnore
+    public Optional<Integer> bitrate() {
         return bitrate;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> container() {
-        return (Optional<Object>) container;
+    public Optional<String> container() {
+        return container;
     }
 
     @JsonIgnore
-    public Optional<Long> duration() {
+    public Optional<Integer> duration() {
         return duration;
     }
 
@@ -265,12 +263,12 @@ public class MediaContainerWithDecisionMedia {
     }
 
     @JsonIgnore
-    public Optional<Long> height() {
+    public Optional<Integer> height() {
         return height;
     }
 
     @JsonIgnore
-    public Optional<Long> id() {
+    public long id() {
         return id;
     }
 
@@ -285,32 +283,28 @@ public class MediaContainerWithDecisionMedia {
         return (Optional<List<MediaContainerWithDecisionPart>>) part;
     }
 
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> videoCodec() {
-        return (Optional<Object>) videoCodec;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<Object> videoFrameRate() {
-        return (Optional<Object>) videoFrameRate;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<Object> videoProfile() {
-        return (Optional<Object>) videoProfile;
-    }
-
-    @SuppressWarnings("unchecked")
-    @JsonIgnore
-    public Optional<Object> videoResolution() {
-        return (Optional<Object>) videoResolution;
+    public Optional<String> videoCodec() {
+        return videoCodec;
     }
 
     @JsonIgnore
-    public Optional<Long> width() {
+    public Optional<String> videoFrameRate() {
+        return videoFrameRate;
+    }
+
+    @JsonIgnore
+    public Optional<String> videoProfile() {
+        return videoProfile;
+    }
+
+    @JsonIgnore
+    public Optional<String> videoResolution() {
+        return videoResolution;
+    }
+
+    @JsonIgnore
+    public Optional<Integer> width() {
         return width;
     }
 
@@ -339,92 +333,92 @@ public class MediaContainerWithDecisionMedia {
     }
 
 
-    public MediaContainerWithDecisionMedia withAspectRatio(double aspectRatio) {
+    public MediaContainerWithDecisionMedia withAspectRatio(float aspectRatio) {
         Utils.checkNotNull(aspectRatio, "aspectRatio");
         this.aspectRatio = Optional.ofNullable(aspectRatio);
         return this;
     }
 
 
-    public MediaContainerWithDecisionMedia withAspectRatio(Optional<Double> aspectRatio) {
+    public MediaContainerWithDecisionMedia withAspectRatio(Optional<Float> aspectRatio) {
         Utils.checkNotNull(aspectRatio, "aspectRatio");
         this.aspectRatio = aspectRatio;
         return this;
     }
 
-    public MediaContainerWithDecisionMedia withAudioChannels(long audioChannels) {
+    public MediaContainerWithDecisionMedia withAudioChannels(int audioChannels) {
         Utils.checkNotNull(audioChannels, "audioChannels");
         this.audioChannels = Optional.ofNullable(audioChannels);
         return this;
     }
 
 
-    public MediaContainerWithDecisionMedia withAudioChannels(Optional<Long> audioChannels) {
+    public MediaContainerWithDecisionMedia withAudioChannels(Optional<Integer> audioChannels) {
         Utils.checkNotNull(audioChannels, "audioChannels");
         this.audioChannels = audioChannels;
         return this;
     }
 
-    public MediaContainerWithDecisionMedia withAudioCodec(Object audioCodec) {
+    public MediaContainerWithDecisionMedia withAudioCodec(String audioCodec) {
         Utils.checkNotNull(audioCodec, "audioCodec");
         this.audioCodec = Optional.ofNullable(audioCodec);
         return this;
     }
 
 
-    public MediaContainerWithDecisionMedia withAudioCodec(Optional<? extends Object> audioCodec) {
+    public MediaContainerWithDecisionMedia withAudioCodec(Optional<String> audioCodec) {
         Utils.checkNotNull(audioCodec, "audioCodec");
         this.audioCodec = audioCodec;
         return this;
     }
 
-    public MediaContainerWithDecisionMedia withAudioProfile(Object audioProfile) {
+    public MediaContainerWithDecisionMedia withAudioProfile(String audioProfile) {
         Utils.checkNotNull(audioProfile, "audioProfile");
         this.audioProfile = Optional.ofNullable(audioProfile);
         return this;
     }
 
 
-    public MediaContainerWithDecisionMedia withAudioProfile(Optional<? extends Object> audioProfile) {
+    public MediaContainerWithDecisionMedia withAudioProfile(Optional<String> audioProfile) {
         Utils.checkNotNull(audioProfile, "audioProfile");
         this.audioProfile = audioProfile;
         return this;
     }
 
-    public MediaContainerWithDecisionMedia withBitrate(long bitrate) {
+    public MediaContainerWithDecisionMedia withBitrate(int bitrate) {
         Utils.checkNotNull(bitrate, "bitrate");
         this.bitrate = Optional.ofNullable(bitrate);
         return this;
     }
 
 
-    public MediaContainerWithDecisionMedia withBitrate(Optional<Long> bitrate) {
+    public MediaContainerWithDecisionMedia withBitrate(Optional<Integer> bitrate) {
         Utils.checkNotNull(bitrate, "bitrate");
         this.bitrate = bitrate;
         return this;
     }
 
-    public MediaContainerWithDecisionMedia withContainer(Object container) {
+    public MediaContainerWithDecisionMedia withContainer(String container) {
         Utils.checkNotNull(container, "container");
         this.container = Optional.ofNullable(container);
         return this;
     }
 
 
-    public MediaContainerWithDecisionMedia withContainer(Optional<? extends Object> container) {
+    public MediaContainerWithDecisionMedia withContainer(Optional<String> container) {
         Utils.checkNotNull(container, "container");
         this.container = container;
         return this;
     }
 
-    public MediaContainerWithDecisionMedia withDuration(long duration) {
+    public MediaContainerWithDecisionMedia withDuration(int duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = Optional.ofNullable(duration);
         return this;
     }
 
 
-    public MediaContainerWithDecisionMedia withDuration(Optional<Long> duration) {
+    public MediaContainerWithDecisionMedia withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = duration;
         return this;
@@ -456,27 +450,20 @@ public class MediaContainerWithDecisionMedia {
         return this;
     }
 
-    public MediaContainerWithDecisionMedia withHeight(long height) {
+    public MediaContainerWithDecisionMedia withHeight(int height) {
         Utils.checkNotNull(height, "height");
         this.height = Optional.ofNullable(height);
         return this;
     }
 
 
-    public MediaContainerWithDecisionMedia withHeight(Optional<Long> height) {
+    public MediaContainerWithDecisionMedia withHeight(Optional<Integer> height) {
         Utils.checkNotNull(height, "height");
         this.height = height;
         return this;
     }
 
     public MediaContainerWithDecisionMedia withId(long id) {
-        Utils.checkNotNull(id, "id");
-        this.id = Optional.ofNullable(id);
-        return this;
-    }
-
-
-    public MediaContainerWithDecisionMedia withId(Optional<Long> id) {
         Utils.checkNotNull(id, "id");
         this.id = id;
         return this;
@@ -508,66 +495,66 @@ public class MediaContainerWithDecisionMedia {
         return this;
     }
 
-    public MediaContainerWithDecisionMedia withVideoCodec(Object videoCodec) {
+    public MediaContainerWithDecisionMedia withVideoCodec(String videoCodec) {
         Utils.checkNotNull(videoCodec, "videoCodec");
         this.videoCodec = Optional.ofNullable(videoCodec);
         return this;
     }
 
 
-    public MediaContainerWithDecisionMedia withVideoCodec(Optional<? extends Object> videoCodec) {
+    public MediaContainerWithDecisionMedia withVideoCodec(Optional<String> videoCodec) {
         Utils.checkNotNull(videoCodec, "videoCodec");
         this.videoCodec = videoCodec;
         return this;
     }
 
-    public MediaContainerWithDecisionMedia withVideoFrameRate(Object videoFrameRate) {
+    public MediaContainerWithDecisionMedia withVideoFrameRate(String videoFrameRate) {
         Utils.checkNotNull(videoFrameRate, "videoFrameRate");
         this.videoFrameRate = Optional.ofNullable(videoFrameRate);
         return this;
     }
 
 
-    public MediaContainerWithDecisionMedia withVideoFrameRate(Optional<? extends Object> videoFrameRate) {
+    public MediaContainerWithDecisionMedia withVideoFrameRate(Optional<String> videoFrameRate) {
         Utils.checkNotNull(videoFrameRate, "videoFrameRate");
         this.videoFrameRate = videoFrameRate;
         return this;
     }
 
-    public MediaContainerWithDecisionMedia withVideoProfile(Object videoProfile) {
+    public MediaContainerWithDecisionMedia withVideoProfile(String videoProfile) {
         Utils.checkNotNull(videoProfile, "videoProfile");
         this.videoProfile = Optional.ofNullable(videoProfile);
         return this;
     }
 
 
-    public MediaContainerWithDecisionMedia withVideoProfile(Optional<? extends Object> videoProfile) {
+    public MediaContainerWithDecisionMedia withVideoProfile(Optional<String> videoProfile) {
         Utils.checkNotNull(videoProfile, "videoProfile");
         this.videoProfile = videoProfile;
         return this;
     }
 
-    public MediaContainerWithDecisionMedia withVideoResolution(Object videoResolution) {
+    public MediaContainerWithDecisionMedia withVideoResolution(String videoResolution) {
         Utils.checkNotNull(videoResolution, "videoResolution");
         this.videoResolution = Optional.ofNullable(videoResolution);
         return this;
     }
 
 
-    public MediaContainerWithDecisionMedia withVideoResolution(Optional<? extends Object> videoResolution) {
+    public MediaContainerWithDecisionMedia withVideoResolution(Optional<String> videoResolution) {
         Utils.checkNotNull(videoResolution, "videoResolution");
         this.videoResolution = videoResolution;
         return this;
     }
 
-    public MediaContainerWithDecisionMedia withWidth(long width) {
+    public MediaContainerWithDecisionMedia withWidth(int width) {
         Utils.checkNotNull(width, "width");
         this.width = Optional.ofNullable(width);
         return this;
     }
 
 
-    public MediaContainerWithDecisionMedia withWidth(Optional<Long> width) {
+    public MediaContainerWithDecisionMedia withWidth(Optional<Integer> width) {
         Utils.checkNotNull(width, "width");
         this.width = width;
         return this;
@@ -702,41 +689,41 @@ public class MediaContainerWithDecisionMedia {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<Double> aspectRatio = Optional.empty();
+        private Optional<Float> aspectRatio = Optional.empty();
 
-        private Optional<Long> audioChannels = Optional.empty();
+        private Optional<Integer> audioChannels = Optional.empty();
 
-        private Optional<? extends Object> audioCodec = Optional.empty();
+        private Optional<String> audioCodec = Optional.empty();
 
-        private Optional<? extends Object> audioProfile = Optional.empty();
+        private Optional<String> audioProfile = Optional.empty();
 
-        private Optional<Long> bitrate = Optional.empty();
+        private Optional<Integer> bitrate = Optional.empty();
 
-        private Optional<? extends Object> container = Optional.empty();
+        private Optional<String> container = Optional.empty();
 
-        private Optional<Long> duration = Optional.empty();
+        private Optional<Integer> duration = Optional.empty();
 
         private Optional<Boolean> has64bitOffsets = Optional.empty();
 
         private Optional<Boolean> hasVoiceActivity = Optional.empty();
 
-        private Optional<Long> height = Optional.empty();
+        private Optional<Integer> height = Optional.empty();
 
-        private Optional<Long> id = Optional.empty();
+        private Long id;
 
         private Optional<Boolean> optimizedForStreaming = Optional.empty();
 
         private Optional<? extends List<MediaContainerWithDecisionPart>> part = Optional.empty();
 
-        private Optional<? extends Object> videoCodec = Optional.empty();
+        private Optional<String> videoCodec = Optional.empty();
 
-        private Optional<? extends Object> videoFrameRate = Optional.empty();
+        private Optional<String> videoFrameRate = Optional.empty();
 
-        private Optional<? extends Object> videoProfile = Optional.empty();
+        private Optional<String> videoProfile = Optional.empty();
 
-        private Optional<? extends Object> videoResolution = Optional.empty();
+        private Optional<String> videoResolution = Optional.empty();
 
-        private Optional<Long> width = Optional.empty();
+        private Optional<Integer> width = Optional.empty();
 
         private Optional<Boolean> abr = Optional.empty();
 
@@ -751,91 +738,91 @@ public class MediaContainerWithDecisionMedia {
         }
 
 
-        public Builder aspectRatio(double aspectRatio) {
+        public Builder aspectRatio(float aspectRatio) {
             Utils.checkNotNull(aspectRatio, "aspectRatio");
             this.aspectRatio = Optional.ofNullable(aspectRatio);
             return this;
         }
 
-        public Builder aspectRatio(Optional<Double> aspectRatio) {
+        public Builder aspectRatio(Optional<Float> aspectRatio) {
             Utils.checkNotNull(aspectRatio, "aspectRatio");
             this.aspectRatio = aspectRatio;
             return this;
         }
 
 
-        public Builder audioChannels(long audioChannels) {
+        public Builder audioChannels(int audioChannels) {
             Utils.checkNotNull(audioChannels, "audioChannels");
             this.audioChannels = Optional.ofNullable(audioChannels);
             return this;
         }
 
-        public Builder audioChannels(Optional<Long> audioChannels) {
+        public Builder audioChannels(Optional<Integer> audioChannels) {
             Utils.checkNotNull(audioChannels, "audioChannels");
             this.audioChannels = audioChannels;
             return this;
         }
 
 
-        public Builder audioCodec(Object audioCodec) {
+        public Builder audioCodec(String audioCodec) {
             Utils.checkNotNull(audioCodec, "audioCodec");
             this.audioCodec = Optional.ofNullable(audioCodec);
             return this;
         }
 
-        public Builder audioCodec(Optional<? extends Object> audioCodec) {
+        public Builder audioCodec(Optional<String> audioCodec) {
             Utils.checkNotNull(audioCodec, "audioCodec");
             this.audioCodec = audioCodec;
             return this;
         }
 
 
-        public Builder audioProfile(Object audioProfile) {
+        public Builder audioProfile(String audioProfile) {
             Utils.checkNotNull(audioProfile, "audioProfile");
             this.audioProfile = Optional.ofNullable(audioProfile);
             return this;
         }
 
-        public Builder audioProfile(Optional<? extends Object> audioProfile) {
+        public Builder audioProfile(Optional<String> audioProfile) {
             Utils.checkNotNull(audioProfile, "audioProfile");
             this.audioProfile = audioProfile;
             return this;
         }
 
 
-        public Builder bitrate(long bitrate) {
+        public Builder bitrate(int bitrate) {
             Utils.checkNotNull(bitrate, "bitrate");
             this.bitrate = Optional.ofNullable(bitrate);
             return this;
         }
 
-        public Builder bitrate(Optional<Long> bitrate) {
+        public Builder bitrate(Optional<Integer> bitrate) {
             Utils.checkNotNull(bitrate, "bitrate");
             this.bitrate = bitrate;
             return this;
         }
 
 
-        public Builder container(Object container) {
+        public Builder container(String container) {
             Utils.checkNotNull(container, "container");
             this.container = Optional.ofNullable(container);
             return this;
         }
 
-        public Builder container(Optional<? extends Object> container) {
+        public Builder container(Optional<String> container) {
             Utils.checkNotNull(container, "container");
             this.container = container;
             return this;
         }
 
 
-        public Builder duration(long duration) {
+        public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = Optional.ofNullable(duration);
             return this;
         }
 
-        public Builder duration(Optional<Long> duration) {
+        public Builder duration(Optional<Integer> duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = duration;
             return this;
@@ -868,13 +855,13 @@ public class MediaContainerWithDecisionMedia {
         }
 
 
-        public Builder height(long height) {
+        public Builder height(int height) {
             Utils.checkNotNull(height, "height");
             this.height = Optional.ofNullable(height);
             return this;
         }
 
-        public Builder height(Optional<Long> height) {
+        public Builder height(Optional<Integer> height) {
             Utils.checkNotNull(height, "height");
             this.height = height;
             return this;
@@ -882,12 +869,6 @@ public class MediaContainerWithDecisionMedia {
 
 
         public Builder id(long id) {
-            Utils.checkNotNull(id, "id");
-            this.id = Optional.ofNullable(id);
-            return this;
-        }
-
-        public Builder id(Optional<Long> id) {
             Utils.checkNotNull(id, "id");
             this.id = id;
             return this;
@@ -920,65 +901,65 @@ public class MediaContainerWithDecisionMedia {
         }
 
 
-        public Builder videoCodec(Object videoCodec) {
+        public Builder videoCodec(String videoCodec) {
             Utils.checkNotNull(videoCodec, "videoCodec");
             this.videoCodec = Optional.ofNullable(videoCodec);
             return this;
         }
 
-        public Builder videoCodec(Optional<? extends Object> videoCodec) {
+        public Builder videoCodec(Optional<String> videoCodec) {
             Utils.checkNotNull(videoCodec, "videoCodec");
             this.videoCodec = videoCodec;
             return this;
         }
 
 
-        public Builder videoFrameRate(Object videoFrameRate) {
+        public Builder videoFrameRate(String videoFrameRate) {
             Utils.checkNotNull(videoFrameRate, "videoFrameRate");
             this.videoFrameRate = Optional.ofNullable(videoFrameRate);
             return this;
         }
 
-        public Builder videoFrameRate(Optional<? extends Object> videoFrameRate) {
+        public Builder videoFrameRate(Optional<String> videoFrameRate) {
             Utils.checkNotNull(videoFrameRate, "videoFrameRate");
             this.videoFrameRate = videoFrameRate;
             return this;
         }
 
 
-        public Builder videoProfile(Object videoProfile) {
+        public Builder videoProfile(String videoProfile) {
             Utils.checkNotNull(videoProfile, "videoProfile");
             this.videoProfile = Optional.ofNullable(videoProfile);
             return this;
         }
 
-        public Builder videoProfile(Optional<? extends Object> videoProfile) {
+        public Builder videoProfile(Optional<String> videoProfile) {
             Utils.checkNotNull(videoProfile, "videoProfile");
             this.videoProfile = videoProfile;
             return this;
         }
 
 
-        public Builder videoResolution(Object videoResolution) {
+        public Builder videoResolution(String videoResolution) {
             Utils.checkNotNull(videoResolution, "videoResolution");
             this.videoResolution = Optional.ofNullable(videoResolution);
             return this;
         }
 
-        public Builder videoResolution(Optional<? extends Object> videoResolution) {
+        public Builder videoResolution(Optional<String> videoResolution) {
             Utils.checkNotNull(videoResolution, "videoResolution");
             this.videoResolution = videoResolution;
             return this;
         }
 
 
-        public Builder width(long width) {
+        public Builder width(int width) {
             Utils.checkNotNull(width, "width");
             this.width = Optional.ofNullable(width);
             return this;
         }
 
-        public Builder width(Optional<Long> width) {
+        public Builder width(Optional<Integer> width) {
             Utils.checkNotNull(width, "width");
             this.width = width;
             return this;

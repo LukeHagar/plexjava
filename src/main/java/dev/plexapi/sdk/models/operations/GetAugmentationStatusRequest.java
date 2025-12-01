@@ -576,7 +576,7 @@ public class GetAugmentationStatusRequest {
 
         private String augmentationId;
 
-        private Optional<? extends BoolInt> wait_ = Optional.empty();
+        private Optional<? extends BoolInt> wait_;
 
         private Builder() {
           // force use of static builder() method
@@ -824,6 +824,9 @@ public class GetAugmentationStatusRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (wait_ == null) {
+                wait_ = _SINGLETON_VALUE_Wait.value();
+            }
 
             return new GetAugmentationStatusRequest(
                 accepts, clientIdentifier, product,
@@ -839,5 +842,11 @@ public class GetAugmentationStatusRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Wait =
+                new LazySingletonValue<>(
+                        "wait",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

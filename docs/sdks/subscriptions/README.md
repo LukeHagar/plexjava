@@ -56,8 +56,8 @@ public class Application {
             .build();
 
         GetAllSubscriptionsRequest req = GetAllSubscriptionsRequest.builder()
-                .includeGrabs(BoolInt.ONE)
-                .includeStorage(BoolInt.ONE)
+                .includeGrabs(BoolInt.True)
+                .includeStorage(BoolInt.True)
                 .build();
 
         GetAllSubscriptionsResponse res = sdk.subscriptions().getAllSubscriptions()
@@ -475,8 +475,8 @@ public class Application {
 
         GetSubscriptionRequest req = GetSubscriptionRequest.builder()
                 .subscriptionId(186713L)
-                .includeGrabs(BoolInt.ONE)
-                .includeStorage(BoolInt.ONE)
+                .includeGrabs(BoolInt.True)
+                .includeStorage(BoolInt.True)
                 .build();
 
         GetSubscriptionResponse res = sdk.subscriptions().getSubscription()

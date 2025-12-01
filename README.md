@@ -44,7 +44,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'dev.plexapi:plexapi:0.21.1'
+implementation 'dev.plexapi:plexapi:0.22.1'
 ```
 
 Maven:
@@ -52,7 +52,7 @@ Maven:
 <dependency>
     <groupId>dev.plexapi</groupId>
     <artifactId>plexapi</artifactId>
-    <version>0.21.1</version>
+    <version>0.22.1</version>
 </dependency>
 ```
 
@@ -109,13 +109,13 @@ public class Application {
                 .advancedSubtitles(AdvancedSubtitles.BURN)
                 .audioBoost(50L)
                 .audioChannelCount(5L)
-                .autoAdjustQuality(BoolInt.ONE)
-                .autoAdjustSubtitle(BoolInt.ONE)
-                .directPlay(BoolInt.ONE)
-                .directStream(BoolInt.ONE)
-                .directStreamAudio(BoolInt.ONE)
-                .disableResolutionRotation(BoolInt.ONE)
-                .hasMDE(BoolInt.ONE)
+                .autoAdjustQuality(BoolInt.True)
+                .autoAdjustSubtitle(BoolInt.True)
+                .directPlay(BoolInt.True)
+                .directStream(BoolInt.True)
+                .directStreamAudio(BoolInt.True)
+                .disableResolutionRotation(BoolInt.True)
+                .hasMDE(BoolInt.True)
                 .location(StartTranscodeSessionQueryParamLocation.WAN)
                 .mediaBufferSize(102400L)
                 .mediaIndex(0L)
@@ -206,6 +206,11 @@ public class Application {
 
 * [listActivities](docs/sdks/activities/README.md#listactivities) - Get all activities
 * [cancelActivity](docs/sdks/activities/README.md#cancelactivity) - Cancel a running activity
+
+### [authentication()](docs/sdks/authentication/README.md)
+
+* [getTokenDetails](docs/sdks/authentication/README.md#gettokendetails) - Get Token Details
+* [postUsersSignInData](docs/sdks/authentication/README.md#postuserssignindata) - Get User Sign In Data
 
 ### [butler()](docs/sdks/butler/README.md)
 
@@ -453,6 +458,10 @@ public class Application {
 * [deletePlayQueueItem](docs/sdks/playqueue/README.md#deleteplayqueueitem) - Delete an item from a play queue
 * [movePlayQueueItem](docs/sdks/playqueue/README.md#moveplayqueueitem) - Move an item in a play queue
 
+### [plex()](docs/sdks/plex/README.md)
+
+* [getServerResources](docs/sdks/plex/README.md#getserverresources) - Get Server Resources
+
 
 ### [preferences()](docs/sdks/preferences/README.md)
 
@@ -523,6 +532,10 @@ public class Application {
 * [checkUpdates](docs/sdks/updater/README.md#checkupdates) - Checking for updates
 * [getUpdatesStatus](docs/sdks/updater/README.md#getupdatesstatus) - Querying status of updates
 
+### [users()](docs/sdks/users/README.md)
+
+* [getUsers](docs/sdks/users/README.md#getusers) - Get list of all connected users
+
 </details>
 <!-- End Available Resources and Operations [operations] -->
 
@@ -531,11 +544,13 @@ public class Application {
 
 Handling errors in this SDK should largely match your expectations. All operations return a response object or raise an exception.
 
-By default, an API error will throw a `models/errors/SDKError` exception. When custom error responses are specified for an operation, the SDK may also throw their associated exception. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `getServerInfo` method throws the following exceptions:
+By default, an API error will throw a `models/errors/SDKError` exception. When custom error responses are specified for an operation, the SDK may also throw their associated exception. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `getTokenDetails` method throws the following exceptions:
 
-| Error Type             | Status Code | Content Type |
-| ---------------------- | ----------- | ------------ |
-| models/errors/SDKError | 4XX, 5XX    | \*/\*        |
+| Error Type                                | Status Code | Content Type     |
+| ----------------------------------------- | ----------- | ---------------- |
+| models/errors/GetTokenDetailsBadRequest   | 400         | application/json |
+| models/errors/GetTokenDetailsUnauthorized | 401         | application/json |
+| models/errors/SDKError                    | 4XX, 5XX    | \*/\*            |
 
 ### Example
 
@@ -543,14 +558,16 @@ By default, an API error will throw a `models/errors/SDKError` exception. When c
 package hello.world;
 
 import dev.plexapi.sdk.PlexAPI;
-import dev.plexapi.sdk.models.operations.GetServerInfoRequest;
-import dev.plexapi.sdk.models.operations.GetServerInfoResponse;
+import dev.plexapi.sdk.models.errors.GetTokenDetailsBadRequest;
+import dev.plexapi.sdk.models.errors.GetTokenDetailsUnauthorized;
+import dev.plexapi.sdk.models.operations.GetTokenDetailsRequest;
+import dev.plexapi.sdk.models.operations.GetTokenDetailsResponse;
 import dev.plexapi.sdk.models.shared.Accepts;
 import java.lang.Exception;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws GetTokenDetailsBadRequest, GetTokenDetailsUnauthorized, Exception {
 
         PlexAPI sdk = PlexAPI.builder()
                 .accepts(Accepts.APPLICATION_XML)
@@ -567,14 +584,14 @@ public class Application {
                 .token(System.getenv().getOrDefault("TOKEN", ""))
             .build();
 
-        GetServerInfoRequest req = GetServerInfoRequest.builder()
+        GetTokenDetailsRequest req = GetTokenDetailsRequest.builder()
                 .build();
 
-        GetServerInfoResponse res = sdk.general().getServerInfo()
+        GetTokenDetailsResponse res = sdk.authentication().getTokenDetails()
                 .request(req)
                 .call();
 
-        if (res.mediaContainerWithDirectory().isPresent()) {
+        if (res.userPlexAccount().isPresent()) {
             // handle response
         }
     }
@@ -694,6 +711,54 @@ public class Application {
                 .call();
 
         if (res.mediaContainerWithDirectory().isPresent()) {
+            // handle response
+        }
+    }
+}
+```
+
+### Override Server URL Per-Operation
+
+The server URL can also be overridden on a per-operation basis, provided a server list was specified for the operation. For example:
+```java
+package hello.world;
+
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.GetTokenDetailsBadRequest;
+import dev.plexapi.sdk.models.errors.GetTokenDetailsUnauthorized;
+import dev.plexapi.sdk.models.operations.GetTokenDetailsRequest;
+import dev.plexapi.sdk.models.operations.GetTokenDetailsResponse;
+import dev.plexapi.sdk.models.shared.Accepts;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws GetTokenDetailsBadRequest, GetTokenDetailsUnauthorized, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
+                .accepts(Accepts.APPLICATION_XML)
+                .clientIdentifier("abc123")
+                .product("Plex for Roku")
+                .version("2.4.1")
+                .platform("Roku")
+                .platformVersion("4.3 build 1057")
+                .device("Roku 3")
+                .model("4200X")
+                .deviceVendor("Roku")
+                .deviceName("Living Room TV")
+                .marketplace("googlePlay")
+                .token(System.getenv().getOrDefault("TOKEN", ""))
+            .build();
+
+        GetTokenDetailsRequest req = GetTokenDetailsRequest.builder()
+                .build();
+
+        GetTokenDetailsResponse res = sdk.authentication().getTokenDetails()
+                .request(req)
+                .serverURL("https://plex.tv/api/v2")
+                .call();
+
+        if (res.userPlexAccount().isPresent()) {
             // handle response
         }
     }

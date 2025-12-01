@@ -1035,7 +1035,7 @@ public class UpdateItemsRequest {
 
         private Optional<String> fieldValue = Optional.empty();
 
-        private Optional<? extends BoolInt> fieldLocked = Optional.empty();
+        private Optional<? extends BoolInt> fieldLocked;
 
         private Optional<String> titleValue = Optional.empty();
 
@@ -1523,6 +1523,9 @@ public class UpdateItemsRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (fieldLocked == null) {
+                fieldLocked = _SINGLETON_VALUE_FieldLocked.value();
+            }
 
             return new UpdateItemsRequest(
                 accepts, clientIdentifier, product,
@@ -1542,5 +1545,11 @@ public class UpdateItemsRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_FieldLocked =
+                new LazySingletonValue<>(
+                        "field.locked",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

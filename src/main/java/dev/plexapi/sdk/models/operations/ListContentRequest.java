@@ -7,10 +7,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.models.shared.Accepts;
+import dev.plexapi.sdk.models.shared.BoolInt;
 import dev.plexapi.sdk.models.shared.MediaQuery;
 import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.SpeakeasyMetadata;
 import dev.plexapi.sdk.utils.Utils;
+import java.lang.Integer;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -85,10 +87,53 @@ public class ListContentRequest {
     private Optional<String> marketplace;
 
     /**
-     * This is a complex query built of several parameters.  See [API Info section](#section/API-Info/Media-Queries) for information on building media queries
+     * The index of the first item to return. If not specified, the first item will be returned.
+     * If the number of items exceeds the limit, the response will be paginated.
+     * By default this is 0
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Container-Start")
+    private Optional<Integer> xPlexContainerStart;
+
+    /**
+     * The number of items to return. If not specified, all items will be returned.
+     * If the number of items exceeds the limit, the response will be paginated.
+     * By default this is 50
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=X-Plex-Container-Size")
+    private Optional<Integer> xPlexContainerSize;
+
+    /**
+     * A querystring-based filtering language used to select subsets of media. Can be provided as an object with typed properties for type safety, or as a string for complex queries with operators and boolean logic.
+     * 
+     * <p>The query supports:
+     * - Fields: integer, boolean, tag, string, date, language
+     * - Operators: =, !=, ==, !==, &lt;=, &gt;=, &gt;&gt;=, &lt;&lt;= (varies by field type)
+     * - Boolean operators: &amp; (AND), , (OR), push/pop (parentheses), or=1 (explicit OR)
+     * - Sorting: sort parameter with :desc, :nullsLast modifiers
+     * - Grouping: group parameter
+     * - Limits: limit parameter
+     * 
+     * <p>Examples:
+     * - Object format: `{type: 4, sourceType: 2, title: "24"}` → `type=4&amp;sourceType=2&amp;title=24`
+     * - String format: `type=4&amp;sourceType=2&amp;title==24` - type = 4 AND sourceType = 2 AND title = "24"
+     * - Complex: `push=1&amp;index=1&amp;or=1&amp;rating=2&amp;pop=1&amp;duration=10` - (index = 1 OR rating = 2) AND duration = 10
+     * 
+     * <p>See [API Info section](#section/API-Info/Media-Queries) for detailed information on building media queries.
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=mediaQuery")
     private Optional<? extends MediaQuery> mediaQuery;
+
+    /**
+     * Adds the Meta object to the response
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeMeta")
+    private Optional<? extends BoolInt> includeMeta;
+
+    /**
+     * Adds the Guid object to the response
+     */
+    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeGuids")
+    private Optional<? extends BoolInt> includeGuids;
 
     /**
      * The id of the section
@@ -109,7 +154,11 @@ public class ListContentRequest {
             Optional<String> deviceVendor,
             Optional<String> deviceName,
             Optional<String> marketplace,
+            Optional<Integer> xPlexContainerStart,
+            Optional<Integer> xPlexContainerSize,
             Optional<? extends MediaQuery> mediaQuery,
+            Optional<? extends BoolInt> includeMeta,
+            Optional<? extends BoolInt> includeGuids,
             String sectionId) {
         Utils.checkNotNull(accepts, "accepts");
         Utils.checkNotNull(clientIdentifier, "clientIdentifier");
@@ -122,7 +171,11 @@ public class ListContentRequest {
         Utils.checkNotNull(deviceVendor, "deviceVendor");
         Utils.checkNotNull(deviceName, "deviceName");
         Utils.checkNotNull(marketplace, "marketplace");
+        Utils.checkNotNull(xPlexContainerStart, "xPlexContainerStart");
+        Utils.checkNotNull(xPlexContainerSize, "xPlexContainerSize");
         Utils.checkNotNull(mediaQuery, "mediaQuery");
+        Utils.checkNotNull(includeMeta, "includeMeta");
+        Utils.checkNotNull(includeGuids, "includeGuids");
         Utils.checkNotNull(sectionId, "sectionId");
         this.accepts = accepts;
         this.clientIdentifier = clientIdentifier;
@@ -135,7 +188,11 @@ public class ListContentRequest {
         this.deviceVendor = deviceVendor;
         this.deviceName = deviceName;
         this.marketplace = marketplace;
+        this.xPlexContainerStart = xPlexContainerStart;
+        this.xPlexContainerSize = xPlexContainerSize;
         this.mediaQuery = mediaQuery;
+        this.includeMeta = includeMeta;
+        this.includeGuids = includeGuids;
         this.sectionId = sectionId;
     }
     
@@ -145,7 +202,8 @@ public class ListContentRequest {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            sectionId);
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), sectionId);
     }
 
     /**
@@ -238,12 +296,65 @@ public class ListContentRequest {
     }
 
     /**
-     * This is a complex query built of several parameters.  See [API Info section](#section/API-Info/Media-Queries) for information on building media queries
+     * The index of the first item to return. If not specified, the first item will be returned.
+     * If the number of items exceeds the limit, the response will be paginated.
+     * By default this is 0
+     */
+    @JsonIgnore
+    public Optional<Integer> xPlexContainerStart() {
+        return xPlexContainerStart;
+    }
+
+    /**
+     * The number of items to return. If not specified, all items will be returned.
+     * If the number of items exceeds the limit, the response will be paginated.
+     * By default this is 50
+     */
+    @JsonIgnore
+    public Optional<Integer> xPlexContainerSize() {
+        return xPlexContainerSize;
+    }
+
+    /**
+     * A querystring-based filtering language used to select subsets of media. Can be provided as an object with typed properties for type safety, or as a string for complex queries with operators and boolean logic.
+     * 
+     * <p>The query supports:
+     * - Fields: integer, boolean, tag, string, date, language
+     * - Operators: =, !=, ==, !==, &lt;=, &gt;=, &gt;&gt;=, &lt;&lt;= (varies by field type)
+     * - Boolean operators: &amp; (AND), , (OR), push/pop (parentheses), or=1 (explicit OR)
+     * - Sorting: sort parameter with :desc, :nullsLast modifiers
+     * - Grouping: group parameter
+     * - Limits: limit parameter
+     * 
+     * <p>Examples:
+     * - Object format: `{type: 4, sourceType: 2, title: "24"}` → `type=4&amp;sourceType=2&amp;title=24`
+     * - String format: `type=4&amp;sourceType=2&amp;title==24` - type = 4 AND sourceType = 2 AND title = "24"
+     * - Complex: `push=1&amp;index=1&amp;or=1&amp;rating=2&amp;pop=1&amp;duration=10` - (index = 1 OR rating = 2) AND duration = 10
+     * 
+     * <p>See [API Info section](#section/API-Info/Media-Queries) for detailed information on building media queries.
      */
     @SuppressWarnings("unchecked")
     @JsonIgnore
     public Optional<MediaQuery> mediaQuery() {
         return (Optional<MediaQuery>) mediaQuery;
+    }
+
+    /**
+     * Adds the Meta object to the response
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<BoolInt> includeMeta() {
+        return (Optional<BoolInt>) includeMeta;
+    }
+
+    /**
+     * Adds the Guid object to the response
+     */
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
+    public Optional<BoolInt> includeGuids() {
+        return (Optional<BoolInt>) includeGuids;
     }
 
     /**
@@ -469,7 +580,68 @@ public class ListContentRequest {
     }
 
     /**
-     * This is a complex query built of several parameters.  See [API Info section](#section/API-Info/Media-Queries) for information on building media queries
+     * The index of the first item to return. If not specified, the first item will be returned.
+     * If the number of items exceeds the limit, the response will be paginated.
+     * By default this is 0
+     */
+    public ListContentRequest withXPlexContainerStart(int xPlexContainerStart) {
+        Utils.checkNotNull(xPlexContainerStart, "xPlexContainerStart");
+        this.xPlexContainerStart = Optional.ofNullable(xPlexContainerStart);
+        return this;
+    }
+
+
+    /**
+     * The index of the first item to return. If not specified, the first item will be returned.
+     * If the number of items exceeds the limit, the response will be paginated.
+     * By default this is 0
+     */
+    public ListContentRequest withXPlexContainerStart(Optional<Integer> xPlexContainerStart) {
+        Utils.checkNotNull(xPlexContainerStart, "xPlexContainerStart");
+        this.xPlexContainerStart = xPlexContainerStart;
+        return this;
+    }
+
+    /**
+     * The number of items to return. If not specified, all items will be returned.
+     * If the number of items exceeds the limit, the response will be paginated.
+     * By default this is 50
+     */
+    public ListContentRequest withXPlexContainerSize(int xPlexContainerSize) {
+        Utils.checkNotNull(xPlexContainerSize, "xPlexContainerSize");
+        this.xPlexContainerSize = Optional.ofNullable(xPlexContainerSize);
+        return this;
+    }
+
+
+    /**
+     * The number of items to return. If not specified, all items will be returned.
+     * If the number of items exceeds the limit, the response will be paginated.
+     * By default this is 50
+     */
+    public ListContentRequest withXPlexContainerSize(Optional<Integer> xPlexContainerSize) {
+        Utils.checkNotNull(xPlexContainerSize, "xPlexContainerSize");
+        this.xPlexContainerSize = xPlexContainerSize;
+        return this;
+    }
+
+    /**
+     * A querystring-based filtering language used to select subsets of media. Can be provided as an object with typed properties for type safety, or as a string for complex queries with operators and boolean logic.
+     * 
+     * <p>The query supports:
+     * - Fields: integer, boolean, tag, string, date, language
+     * - Operators: =, !=, ==, !==, &lt;=, &gt;=, &gt;&gt;=, &lt;&lt;= (varies by field type)
+     * - Boolean operators: &amp; (AND), , (OR), push/pop (parentheses), or=1 (explicit OR)
+     * - Sorting: sort parameter with :desc, :nullsLast modifiers
+     * - Grouping: group parameter
+     * - Limits: limit parameter
+     * 
+     * <p>Examples:
+     * - Object format: `{type: 4, sourceType: 2, title: "24"}` → `type=4&amp;sourceType=2&amp;title=24`
+     * - String format: `type=4&amp;sourceType=2&amp;title==24` - type = 4 AND sourceType = 2 AND title = "24"
+     * - Complex: `push=1&amp;index=1&amp;or=1&amp;rating=2&amp;pop=1&amp;duration=10` - (index = 1 OR rating = 2) AND duration = 10
+     * 
+     * <p>See [API Info section](#section/API-Info/Media-Queries) for detailed information on building media queries.
      */
     public ListContentRequest withMediaQuery(MediaQuery mediaQuery) {
         Utils.checkNotNull(mediaQuery, "mediaQuery");
@@ -479,11 +651,64 @@ public class ListContentRequest {
 
 
     /**
-     * This is a complex query built of several parameters.  See [API Info section](#section/API-Info/Media-Queries) for information on building media queries
+     * A querystring-based filtering language used to select subsets of media. Can be provided as an object with typed properties for type safety, or as a string for complex queries with operators and boolean logic.
+     * 
+     * <p>The query supports:
+     * - Fields: integer, boolean, tag, string, date, language
+     * - Operators: =, !=, ==, !==, &lt;=, &gt;=, &gt;&gt;=, &lt;&lt;= (varies by field type)
+     * - Boolean operators: &amp; (AND), , (OR), push/pop (parentheses), or=1 (explicit OR)
+     * - Sorting: sort parameter with :desc, :nullsLast modifiers
+     * - Grouping: group parameter
+     * - Limits: limit parameter
+     * 
+     * <p>Examples:
+     * - Object format: `{type: 4, sourceType: 2, title: "24"}` → `type=4&amp;sourceType=2&amp;title=24`
+     * - String format: `type=4&amp;sourceType=2&amp;title==24` - type = 4 AND sourceType = 2 AND title = "24"
+     * - Complex: `push=1&amp;index=1&amp;or=1&amp;rating=2&amp;pop=1&amp;duration=10` - (index = 1 OR rating = 2) AND duration = 10
+     * 
+     * <p>See [API Info section](#section/API-Info/Media-Queries) for detailed information on building media queries.
      */
     public ListContentRequest withMediaQuery(Optional<? extends MediaQuery> mediaQuery) {
         Utils.checkNotNull(mediaQuery, "mediaQuery");
         this.mediaQuery = mediaQuery;
+        return this;
+    }
+
+    /**
+     * Adds the Meta object to the response
+     */
+    public ListContentRequest withIncludeMeta(BoolInt includeMeta) {
+        Utils.checkNotNull(includeMeta, "includeMeta");
+        this.includeMeta = Optional.ofNullable(includeMeta);
+        return this;
+    }
+
+
+    /**
+     * Adds the Meta object to the response
+     */
+    public ListContentRequest withIncludeMeta(Optional<? extends BoolInt> includeMeta) {
+        Utils.checkNotNull(includeMeta, "includeMeta");
+        this.includeMeta = includeMeta;
+        return this;
+    }
+
+    /**
+     * Adds the Guid object to the response
+     */
+    public ListContentRequest withIncludeGuids(BoolInt includeGuids) {
+        Utils.checkNotNull(includeGuids, "includeGuids");
+        this.includeGuids = Optional.ofNullable(includeGuids);
+        return this;
+    }
+
+
+    /**
+     * Adds the Guid object to the response
+     */
+    public ListContentRequest withIncludeGuids(Optional<? extends BoolInt> includeGuids) {
+        Utils.checkNotNull(includeGuids, "includeGuids");
+        this.includeGuids = includeGuids;
         return this;
     }
 
@@ -517,7 +742,11 @@ public class ListContentRequest {
             Utils.enhancedDeepEquals(this.deviceVendor, other.deviceVendor) &&
             Utils.enhancedDeepEquals(this.deviceName, other.deviceName) &&
             Utils.enhancedDeepEquals(this.marketplace, other.marketplace) &&
+            Utils.enhancedDeepEquals(this.xPlexContainerStart, other.xPlexContainerStart) &&
+            Utils.enhancedDeepEquals(this.xPlexContainerSize, other.xPlexContainerSize) &&
             Utils.enhancedDeepEquals(this.mediaQuery, other.mediaQuery) &&
+            Utils.enhancedDeepEquals(this.includeMeta, other.includeMeta) &&
+            Utils.enhancedDeepEquals(this.includeGuids, other.includeGuids) &&
             Utils.enhancedDeepEquals(this.sectionId, other.sectionId);
     }
     
@@ -527,8 +756,9 @@ public class ListContentRequest {
             accepts, clientIdentifier, product,
             version, platform, platformVersion,
             device, model, deviceVendor,
-            deviceName, marketplace, mediaQuery,
-            sectionId);
+            deviceName, marketplace, xPlexContainerStart,
+            xPlexContainerSize, mediaQuery, includeMeta,
+            includeGuids, sectionId);
     }
     
     @Override
@@ -545,7 +775,11 @@ public class ListContentRequest {
                 "deviceVendor", deviceVendor,
                 "deviceName", deviceName,
                 "marketplace", marketplace,
+                "xPlexContainerStart", xPlexContainerStart,
+                "xPlexContainerSize", xPlexContainerSize,
                 "mediaQuery", mediaQuery,
+                "includeMeta", includeMeta,
+                "includeGuids", includeGuids,
                 "sectionId", sectionId);
     }
 
@@ -574,7 +808,15 @@ public class ListContentRequest {
 
         private Optional<String> marketplace = Optional.empty();
 
+        private Optional<Integer> xPlexContainerStart;
+
+        private Optional<Integer> xPlexContainerSize;
+
         private Optional<? extends MediaQuery> mediaQuery = Optional.empty();
+
+        private Optional<? extends BoolInt> includeMeta;
+
+        private Optional<? extends BoolInt> includeGuids;
 
         private String sectionId;
 
@@ -793,7 +1035,68 @@ public class ListContentRequest {
 
 
         /**
-         * This is a complex query built of several parameters.  See [API Info section](#section/API-Info/Media-Queries) for information on building media queries
+         * The index of the first item to return. If not specified, the first item will be returned.
+         * If the number of items exceeds the limit, the response will be paginated.
+         * By default this is 0
+         */
+        public Builder xPlexContainerStart(int xPlexContainerStart) {
+            Utils.checkNotNull(xPlexContainerStart, "xPlexContainerStart");
+            this.xPlexContainerStart = Optional.ofNullable(xPlexContainerStart);
+            return this;
+        }
+
+        /**
+         * The index of the first item to return. If not specified, the first item will be returned.
+         * If the number of items exceeds the limit, the response will be paginated.
+         * By default this is 0
+         */
+        public Builder xPlexContainerStart(Optional<Integer> xPlexContainerStart) {
+            Utils.checkNotNull(xPlexContainerStart, "xPlexContainerStart");
+            this.xPlexContainerStart = xPlexContainerStart;
+            return this;
+        }
+
+
+        /**
+         * The number of items to return. If not specified, all items will be returned.
+         * If the number of items exceeds the limit, the response will be paginated.
+         * By default this is 50
+         */
+        public Builder xPlexContainerSize(int xPlexContainerSize) {
+            Utils.checkNotNull(xPlexContainerSize, "xPlexContainerSize");
+            this.xPlexContainerSize = Optional.ofNullable(xPlexContainerSize);
+            return this;
+        }
+
+        /**
+         * The number of items to return. If not specified, all items will be returned.
+         * If the number of items exceeds the limit, the response will be paginated.
+         * By default this is 50
+         */
+        public Builder xPlexContainerSize(Optional<Integer> xPlexContainerSize) {
+            Utils.checkNotNull(xPlexContainerSize, "xPlexContainerSize");
+            this.xPlexContainerSize = xPlexContainerSize;
+            return this;
+        }
+
+
+        /**
+         * A querystring-based filtering language used to select subsets of media. Can be provided as an object with typed properties for type safety, or as a string for complex queries with operators and boolean logic.
+         * 
+         * <p>The query supports:
+         * - Fields: integer, boolean, tag, string, date, language
+         * - Operators: =, !=, ==, !==, &lt;=, &gt;=, &gt;&gt;=, &lt;&lt;= (varies by field type)
+         * - Boolean operators: &amp; (AND), , (OR), push/pop (parentheses), or=1 (explicit OR)
+         * - Sorting: sort parameter with :desc, :nullsLast modifiers
+         * - Grouping: group parameter
+         * - Limits: limit parameter
+         * 
+         * <p>Examples:
+         * - Object format: `{type: 4, sourceType: 2, title: "24"}` → `type=4&amp;sourceType=2&amp;title=24`
+         * - String format: `type=4&amp;sourceType=2&amp;title==24` - type = 4 AND sourceType = 2 AND title = "24"
+         * - Complex: `push=1&amp;index=1&amp;or=1&amp;rating=2&amp;pop=1&amp;duration=10` - (index = 1 OR rating = 2) AND duration = 10
+         * 
+         * <p>See [API Info section](#section/API-Info/Media-Queries) for detailed information on building media queries.
          */
         public Builder mediaQuery(MediaQuery mediaQuery) {
             Utils.checkNotNull(mediaQuery, "mediaQuery");
@@ -802,11 +1105,64 @@ public class ListContentRequest {
         }
 
         /**
-         * This is a complex query built of several parameters.  See [API Info section](#section/API-Info/Media-Queries) for information on building media queries
+         * A querystring-based filtering language used to select subsets of media. Can be provided as an object with typed properties for type safety, or as a string for complex queries with operators and boolean logic.
+         * 
+         * <p>The query supports:
+         * - Fields: integer, boolean, tag, string, date, language
+         * - Operators: =, !=, ==, !==, &lt;=, &gt;=, &gt;&gt;=, &lt;&lt;= (varies by field type)
+         * - Boolean operators: &amp; (AND), , (OR), push/pop (parentheses), or=1 (explicit OR)
+         * - Sorting: sort parameter with :desc, :nullsLast modifiers
+         * - Grouping: group parameter
+         * - Limits: limit parameter
+         * 
+         * <p>Examples:
+         * - Object format: `{type: 4, sourceType: 2, title: "24"}` → `type=4&amp;sourceType=2&amp;title=24`
+         * - String format: `type=4&amp;sourceType=2&amp;title==24` - type = 4 AND sourceType = 2 AND title = "24"
+         * - Complex: `push=1&amp;index=1&amp;or=1&amp;rating=2&amp;pop=1&amp;duration=10` - (index = 1 OR rating = 2) AND duration = 10
+         * 
+         * <p>See [API Info section](#section/API-Info/Media-Queries) for detailed information on building media queries.
          */
         public Builder mediaQuery(Optional<? extends MediaQuery> mediaQuery) {
             Utils.checkNotNull(mediaQuery, "mediaQuery");
             this.mediaQuery = mediaQuery;
+            return this;
+        }
+
+
+        /**
+         * Adds the Meta object to the response
+         */
+        public Builder includeMeta(BoolInt includeMeta) {
+            Utils.checkNotNull(includeMeta, "includeMeta");
+            this.includeMeta = Optional.ofNullable(includeMeta);
+            return this;
+        }
+
+        /**
+         * Adds the Meta object to the response
+         */
+        public Builder includeMeta(Optional<? extends BoolInt> includeMeta) {
+            Utils.checkNotNull(includeMeta, "includeMeta");
+            this.includeMeta = includeMeta;
+            return this;
+        }
+
+
+        /**
+         * Adds the Guid object to the response
+         */
+        public Builder includeGuids(BoolInt includeGuids) {
+            Utils.checkNotNull(includeGuids, "includeGuids");
+            this.includeGuids = Optional.ofNullable(includeGuids);
+            return this;
+        }
+
+        /**
+         * Adds the Guid object to the response
+         */
+        public Builder includeGuids(Optional<? extends BoolInt> includeGuids) {
+            Utils.checkNotNull(includeGuids, "includeGuids");
+            this.includeGuids = includeGuids;
             return this;
         }
 
@@ -824,13 +1180,26 @@ public class ListContentRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (xPlexContainerStart == null) {
+                xPlexContainerStart = _SINGLETON_VALUE_XPlexContainerStart.value();
+            }
+            if (xPlexContainerSize == null) {
+                xPlexContainerSize = _SINGLETON_VALUE_XPlexContainerSize.value();
+            }
+            if (includeMeta == null) {
+                includeMeta = _SINGLETON_VALUE_IncludeMeta.value();
+            }
+            if (includeGuids == null) {
+                includeGuids = _SINGLETON_VALUE_IncludeGuids.value();
+            }
 
             return new ListContentRequest(
                 accepts, clientIdentifier, product,
                 version, platform, platformVersion,
                 device, model, deviceVendor,
-                deviceName, marketplace, mediaQuery,
-                sectionId);
+                deviceName, marketplace, xPlexContainerStart,
+                xPlexContainerSize, mediaQuery, includeMeta,
+                includeGuids, sectionId);
         }
 
 
@@ -839,5 +1208,29 @@ public class ListContentRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<Integer>> _SINGLETON_VALUE_XPlexContainerStart =
+                new LazySingletonValue<>(
+                        "X-Plex-Container-Start",
+                        "0",
+                        new TypeReference<Optional<Integer>>() {});
+
+        private static final LazySingletonValue<Optional<Integer>> _SINGLETON_VALUE_XPlexContainerSize =
+                new LazySingletonValue<>(
+                        "X-Plex-Container-Size",
+                        "50",
+                        new TypeReference<Optional<Integer>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_IncludeMeta =
+                new LazySingletonValue<>(
+                        "includeMeta",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_IncludeGuids =
+                new LazySingletonValue<>(
+                        "includeGuids",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

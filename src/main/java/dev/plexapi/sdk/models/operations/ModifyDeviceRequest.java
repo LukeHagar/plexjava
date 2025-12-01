@@ -577,7 +577,7 @@ public class ModifyDeviceRequest {
 
         private Long deviceId;
 
-        private Optional<? extends BoolInt> enabled = Optional.empty();
+        private Optional<? extends BoolInt> enabled;
 
         private Builder() {
           // force use of static builder() method
@@ -825,6 +825,9 @@ public class ModifyDeviceRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (enabled == null) {
+                enabled = _SINGLETON_VALUE_Enabled.value();
+            }
 
             return new ModifyDeviceRequest(
                 accepts, clientIdentifier, product,
@@ -840,5 +843,11 @@ public class ModifyDeviceRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Enabled =
+                new LazySingletonValue<>(
+                        "enabled",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

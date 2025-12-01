@@ -441,7 +441,7 @@ public class Application {
 
         ModifyDeviceRequest req = ModifyDeviceRequest.builder()
                 .deviceId(879135L)
-                .enabled(BoolInt.ONE)
+                .enabled(BoolInt.True)
                 .build();
 
         ModifyDeviceResponse res = sdk.devices().modifyDevice()

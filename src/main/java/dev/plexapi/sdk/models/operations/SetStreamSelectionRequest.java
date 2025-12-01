@@ -657,7 +657,7 @@ public class SetStreamSelectionRequest {
 
         private Optional<Long> subtitleStreamID = Optional.empty();
 
-        private Optional<? extends BoolInt> allParts = Optional.empty();
+        private Optional<? extends BoolInt> allParts;
 
         private Builder() {
           // force use of static builder() method
@@ -943,6 +943,9 @@ public class SetStreamSelectionRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (allParts == null) {
+                allParts = _SINGLETON_VALUE_AllParts.value();
+            }
 
             return new SetStreamSelectionRequest(
                 accepts, clientIdentifier, product,
@@ -958,5 +961,11 @@ public class SetStreamSelectionRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_AllParts =
+                new LazySingletonValue<>(
+                        "allParts",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

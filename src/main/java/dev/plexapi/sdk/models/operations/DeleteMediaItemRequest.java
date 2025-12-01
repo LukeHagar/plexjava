@@ -591,7 +591,7 @@ public class DeleteMediaItemRequest {
 
         private String mediaItem;
 
-        private Optional<? extends BoolInt> proxy = Optional.empty();
+        private Optional<? extends BoolInt> proxy;
 
         private Builder() {
           // force use of static builder() method
@@ -843,6 +843,9 @@ public class DeleteMediaItemRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (proxy == null) {
+                proxy = _SINGLETON_VALUE_Proxy.value();
+            }
 
             return new DeleteMediaItemRequest(
                 accepts, clientIdentifier, product,
@@ -858,5 +861,11 @@ public class DeleteMediaItemRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Proxy =
+                new LazySingletonValue<>(
+                        "proxy",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

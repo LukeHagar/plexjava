@@ -705,7 +705,7 @@ public class ListMatchesRequest {
 
         private Optional<Long> year = Optional.empty();
 
-        private Optional<? extends BoolInt> manual = Optional.empty();
+        private Optional<? extends BoolInt> manual;
 
         private Builder() {
           // force use of static builder() method
@@ -1009,6 +1009,9 @@ public class ListMatchesRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (manual == null) {
+                manual = _SINGLETON_VALUE_Manual.value();
+            }
 
             return new ListMatchesRequest(
                 accepts, clientIdentifier, product,
@@ -1025,5 +1028,11 @@ public class ListMatchesRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Manual =
+                new LazySingletonValue<>(
+                        "manual",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

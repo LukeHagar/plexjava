@@ -607,7 +607,7 @@ public class DetectIntrosRequest {
 
         private String ids;
 
-        private Optional<? extends BoolInt> force = Optional.empty();
+        private Optional<? extends BoolInt> force;
 
         private Optional<Double> threshold = Optional.empty();
 
@@ -873,6 +873,9 @@ public class DetectIntrosRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (force == null) {
+                force = _SINGLETON_VALUE_Force.value();
+            }
 
             return new DetectIntrosRequest(
                 accepts, clientIdentifier, product,
@@ -888,5 +891,11 @@ public class DetectIntrosRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Force =
+                new LazySingletonValue<>(
+                        "force",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

@@ -1084,11 +1084,11 @@ public class TranscodeImageRequest {
 
         private Optional<String> background = Optional.empty();
 
-        private Optional<? extends BoolInt> upscale = Optional.empty();
+        private Optional<? extends BoolInt> upscale;
 
-        private Optional<? extends BoolInt> minSize = Optional.empty();
+        private Optional<? extends BoolInt> minSize;
 
-        private Optional<? extends BoolInt> rotate = Optional.empty();
+        private Optional<? extends BoolInt> rotate;
 
         private Optional<Long> blur = Optional.empty();
 
@@ -1593,6 +1593,15 @@ public class TranscodeImageRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (upscale == null) {
+                upscale = _SINGLETON_VALUE_Upscale.value();
+            }
+            if (minSize == null) {
+                minSize = _SINGLETON_VALUE_MinSize.value();
+            }
+            if (rotate == null) {
+                rotate = _SINGLETON_VALUE_Rotate.value();
+            }
 
             return new TranscodeImageRequest(
                 accepts, clientIdentifier, product,
@@ -1612,5 +1621,23 @@ public class TranscodeImageRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Upscale =
+                new LazySingletonValue<>(
+                        "upscale",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_MinSize =
+                new LazySingletonValue<>(
+                        "minSize",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Rotate =
+                new LazySingletonValue<>(
+                        "rotate",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

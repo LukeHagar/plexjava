@@ -1100,11 +1100,11 @@ public class ReportRequest {
 
         private Optional<Long> duration = Optional.empty();
 
-        private Optional<? extends BoolInt> continuing = Optional.empty();
+        private Optional<? extends BoolInt> continuing;
 
         private Optional<Long> updated = Optional.empty();
 
-        private Optional<? extends BoolInt> offline = Optional.empty();
+        private Optional<? extends BoolInt> offline;
 
         private Optional<Long> timeToFirstFrame = Optional.empty();
 
@@ -1620,6 +1620,12 @@ public class ReportRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (continuing == null) {
+                continuing = _SINGLETON_VALUE_Continuing.value();
+            }
+            if (offline == null) {
+                offline = _SINGLETON_VALUE_Offline.value();
+            }
 
             return new ReportRequest(
                 accepts, clientIdentifier, product,
@@ -1639,5 +1645,17 @@ public class ReportRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Continuing =
+                new LazySingletonValue<>(
+                        "continuing",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Offline =
+                new LazySingletonValue<>(
+                        "offline",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

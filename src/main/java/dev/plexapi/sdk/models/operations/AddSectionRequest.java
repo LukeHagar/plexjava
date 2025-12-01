@@ -876,9 +876,9 @@ public class AddSectionRequest {
 
         private Optional<? extends QueryParamPrefs> prefs = Optional.empty();
 
-        private Optional<? extends BoolInt> relative = Optional.empty();
+        private Optional<? extends BoolInt> relative;
 
-        private Optional<? extends BoolInt> importFromiTunes = Optional.empty();
+        private Optional<? extends BoolInt> importFromiTunes;
 
         private Builder() {
           // force use of static builder() method
@@ -1251,6 +1251,12 @@ public class AddSectionRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (relative == null) {
+                relative = _SINGLETON_VALUE_Relative.value();
+            }
+            if (importFromiTunes == null) {
+                importFromiTunes = _SINGLETON_VALUE_ImportFromiTunes.value();
+            }
 
             return new AddSectionRequest(
                 accepts, clientIdentifier, product,
@@ -1268,5 +1274,17 @@ public class AddSectionRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Relative =
+                new LazySingletonValue<>(
+                        "relative",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_ImportFromiTunes =
+                new LazySingletonValue<>(
+                        "importFromiTunes",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

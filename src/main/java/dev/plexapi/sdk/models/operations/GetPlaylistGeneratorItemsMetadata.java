@@ -17,12 +17,14 @@ import dev.plexapi.sdk.models.shared.Sort;
 import dev.plexapi.sdk.models.shared.Tag;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Double;
+import java.lang.Float;
+import java.lang.Integer;
 import java.lang.Long;
 import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,51 +43,48 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * The title of the item (e.g. “300” or “The Simpsons”)
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("title")
-    private Optional<? extends Object> title;
+    private String title;
 
     /**
      * The type of the video item, such as `movie`, `episode`, or `clip`.
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("type")
-    private Optional<? extends Object> type;
+    private String type;
 
     /**
      * When present, contains the disc number for a track on multi-disc albums.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("absoluteIndex")
-    private Optional<Long> absoluteIndex;
+    private Optional<Integer> absoluteIndex;
 
     /**
      * In units of seconds since the epoch, returns the time at which the item was added to the library.
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("addedAt")
-    private Optional<Long> addedAt;
+    private long addedAt;
 
     /**
      * When present, the URL for the background artwork for the item.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("art")
-    private Optional<? extends Object> art;
+    private Optional<String> art;
 
     /**
      * Some rating systems separate reviewer ratings from audience ratings
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audienceRating")
-    private Optional<Double> audienceRating;
+    private Optional<Float> audienceRating;
 
     /**
      * A URI representing the image to be shown with the audience rating (e.g. rottentomatoes://image.rating.spilled).
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("audienceRatingImage")
-    private Optional<? extends Object> audienceRatingImage;
+    private Optional<String> audienceRatingImage;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -97,28 +96,35 @@ public class GetPlaylistGeneratorItemsMetadata {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("banner")
-    private Optional<? extends Object> banner;
+    private Optional<String> banner;
 
     /**
      * When present, indicates the source for the chapters in the media file. Can be media (the chapters were embedded in the media itself), agent (a metadata agent computed them), or mixed (a combination of the two).
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("chapterSource")
-    private Optional<? extends Object> chapterSource;
+    private Optional<String> chapterSource;
+
+    /**
+     * The number of child items associated with this media item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("childCount")
+    private Optional<Integer> childCount;
 
     /**
      * When present, the URL for a composite image for descendent items (e.g. photo albums or playlists).
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("composite")
-    private Optional<? extends Object> composite;
+    private Optional<String> composite;
 
     /**
      * If known, the content rating (e.g. MPAA) for an item.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("contentRating")
-    private Optional<? extends Object> contentRating;
+    private Optional<String> contentRating;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -135,7 +141,7 @@ public class GetPlaylistGeneratorItemsMetadata {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("duration")
-    private Optional<Long> duration;
+    private Optional<Integer> duration;
 
     /**
      * Typically only seen in metadata at a library's top level
@@ -155,6 +161,13 @@ public class GetPlaylistGeneratorItemsMetadata {
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("grandparentArt")
     private Optional<String> grandparentArt;
+
+    /**
+     * The GUID of the grandparent media item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("grandparentGuid")
+    private Optional<String> grandparentGuid;
 
     /**
      * The `hero` of the grandparent
@@ -198,17 +211,24 @@ public class GetPlaylistGeneratorItemsMetadata {
     @JsonProperty("grandparentTitle")
     private Optional<String> grandparentTitle;
 
+    /**
+     * The globally unique identifier for the media item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("guid")
+    private Optional<String> guid;
+
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("Guid")
-    private Optional<? extends List<Tag>> guid;
+    private Optional<? extends List<GetPlaylistGeneratorItemsGuids>> guids;
 
     /**
      * When present, the URL for a hero image for the item.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("hero")
-    private Optional<? extends Object> hero;
+    private Optional<String> hero;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -220,18 +240,15 @@ public class GetPlaylistGeneratorItemsMetadata {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("index")
-    private Optional<Long> index;
+    private Optional<Integer> index;
 
     /**
      * The key at which the item's details can be fetched.  In many cases a metadata item may be passed without all the details (such as in a hub) and this key corresponds to the endpoint to fetch additional details.
      */
-    @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("key")
-    private Optional<? extends Object> key;
+    private String key;
 
-    /**
-     * When a user has watched or listened to an item, this contains a timestamp (epoch seconds) for that last consumption time.
-     */
+
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("lastViewedAt")
     private Optional<Long> lastViewedAt;
@@ -241,7 +258,7 @@ public class GetPlaylistGeneratorItemsMetadata {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("leafCount")
-    private Optional<Long> leafCount;
+    private Optional<Integer> leafCount;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -253,14 +270,21 @@ public class GetPlaylistGeneratorItemsMetadata {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("originallyAvailableAt")
-    private Optional<? extends Object> originallyAvailableAt;
+    private Optional<LocalDate> originallyAvailableAt;
 
     /**
      * When present, used to indicate an item's original title, e.g. a movie's foreign title.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("originalTitle")
-    private Optional<? extends Object> originalTitle;
+    private Optional<String> originalTitle;
+
+    /**
+     * The GUID of the parent media item.
+     */
+    @JsonInclude(Include.NON_ABSENT)
+    @JsonProperty("parentGuid")
+    private Optional<String> parentGuid;
 
     /**
      * The `hero` of the parent
@@ -274,7 +298,7 @@ public class GetPlaylistGeneratorItemsMetadata {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("parentIndex")
-    private Optional<Long> parentIndex;
+    private Optional<Integer> parentIndex;
 
     /**
      * The `key` of the parent
@@ -309,7 +333,7 @@ public class GetPlaylistGeneratorItemsMetadata {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("primaryExtraKey")
-    private Optional<? extends Object> primaryExtraKey;
+    private Optional<String> primaryExtraKey;
 
     /**
      * Prompt to give the user for this directory (such as `Search Movies`)
@@ -323,7 +347,7 @@ public class GetPlaylistGeneratorItemsMetadata {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("rating")
-    private Optional<Double> rating;
+    private Optional<Float> rating;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -335,21 +359,21 @@ public class GetPlaylistGeneratorItemsMetadata {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ratingCount")
-    private Optional<Long> ratingCount;
+    private Optional<Integer> ratingCount;
 
     /**
      * When present, indicates an image to be shown with the rating. This is passed back as a small set of defined URI values, e.g. rottentomatoes://image.rating.rotten.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ratingImage")
-    private Optional<? extends Object> ratingImage;
+    private Optional<String> ratingImage;
 
     /**
      * This is the opaque string to be passed into timeline, scrobble, and rating endpoints to identify them.  While it often appears to be numeric, this is not guaranteed.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ratingKey")
-    private Optional<? extends Object> ratingKey;
+    private Optional<String> ratingKey;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -396,49 +420,49 @@ public class GetPlaylistGeneratorItemsMetadata {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("studio")
-    private Optional<? extends Object> studio;
+    private Optional<String> studio;
 
     /**
      * The subtype of the video item, such as `photo` when the video item is in a photo library
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("subtype")
-    private Optional<? extends Object> subtype;
+    private Optional<String> subtype;
 
     /**
      * When present, the extended textual information about the item (e.g. movie plot, artist biography, album review).
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("summary")
-    private Optional<? extends Object> summary;
+    private Optional<String> summary;
 
     /**
      * When present, a pithy one-liner about the item (usually only seen for movies).
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("tagline")
-    private Optional<? extends Object> tagline;
+    private Optional<String> tagline;
 
     /**
      * When present, the URL for theme music for the item (usually only for TV shows).
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("theme")
-    private Optional<? extends Object> theme;
+    private Optional<String> theme;
 
     /**
      * When present, the URL for the poster or thumbnail for the item. When available for types like movie, it will be the poster graphic, but fall-back to the extracted media thumbnail.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("thumb")
-    private Optional<? extends Object> thumb;
+    private Optional<String> thumb;
 
     /**
      * Whene present, this is the string used for sorting the item. It's usually the title with any leading articles removed (e.g. “Simpsons”).
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("titleSort")
-    private Optional<? extends Object> titleSort;
+    private Optional<String> titleSort;
 
     /**
      * In units of seconds since the epoch, returns the time at which the item was last changed (e.g. had its metadata updated).
@@ -452,28 +476,28 @@ public class GetPlaylistGeneratorItemsMetadata {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("userRating")
-    private Optional<Double> userRating;
+    private Optional<Float> userRating;
 
     /**
      * When a users has completed watched or listened to an item, this attribute contains the number of consumptions.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("viewCount")
-    private Optional<Long> viewCount;
+    private Optional<Integer> viewCount;
 
     /**
      * For shows and seasons, contains the number of viewed episodes.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("viewedLeafCount")
-    private Optional<Long> viewedLeafCount;
+    private Optional<Integer> viewedLeafCount;
 
     /**
      * When a user is in the process of viewing or listening to this item, this attribute contains the current offset, in units of milliseconds.
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("viewOffset")
-    private Optional<Long> viewOffset;
+    private Optional<Integer> viewOffset;
 
 
     @JsonInclude(Include.NON_ABSENT)
@@ -485,7 +509,7 @@ public class GetPlaylistGeneratorItemsMetadata {
      */
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("year")
-    private Optional<Long> year;
+    private Optional<Integer> year;
 
     /**
      * The state of processing if this generator is part of an optimizer playlist
@@ -507,73 +531,77 @@ public class GetPlaylistGeneratorItemsMetadata {
 
     @JsonCreator
     public GetPlaylistGeneratorItemsMetadata(
-            @JsonProperty("title") Optional<? extends Object> title,
-            @JsonProperty("type") Optional<? extends Object> type,
-            @JsonProperty("absoluteIndex") Optional<Long> absoluteIndex,
-            @JsonProperty("addedAt") Optional<Long> addedAt,
-            @JsonProperty("art") Optional<? extends Object> art,
-            @JsonProperty("audienceRating") Optional<Double> audienceRating,
-            @JsonProperty("audienceRatingImage") Optional<? extends Object> audienceRatingImage,
+            @JsonProperty("title") String title,
+            @JsonProperty("type") String type,
+            @JsonProperty("absoluteIndex") Optional<Integer> absoluteIndex,
+            @JsonProperty("addedAt") long addedAt,
+            @JsonProperty("art") Optional<String> art,
+            @JsonProperty("audienceRating") Optional<Float> audienceRating,
+            @JsonProperty("audienceRatingImage") Optional<String> audienceRatingImage,
             @JsonProperty("Autotag") Optional<? extends List<Tag>> autotag,
-            @JsonProperty("banner") Optional<? extends Object> banner,
-            @JsonProperty("chapterSource") Optional<? extends Object> chapterSource,
-            @JsonProperty("composite") Optional<? extends Object> composite,
-            @JsonProperty("contentRating") Optional<? extends Object> contentRating,
+            @JsonProperty("banner") Optional<String> banner,
+            @JsonProperty("chapterSource") Optional<String> chapterSource,
+            @JsonProperty("childCount") Optional<Integer> childCount,
+            @JsonProperty("composite") Optional<String> composite,
+            @JsonProperty("contentRating") Optional<String> contentRating,
             @JsonProperty("Country") Optional<? extends List<Tag>> country,
             @JsonProperty("Director") Optional<? extends List<Tag>> director,
-            @JsonProperty("duration") Optional<Long> duration,
+            @JsonProperty("duration") Optional<Integer> duration,
             @JsonProperty("Filter") Optional<? extends List<Filter>> filter,
             @JsonProperty("Genre") Optional<? extends List<Tag>> genre,
             @JsonProperty("grandparentArt") Optional<String> grandparentArt,
+            @JsonProperty("grandparentGuid") Optional<String> grandparentGuid,
             @JsonProperty("grandparentHero") Optional<String> grandparentHero,
             @JsonProperty("grandparentKey") Optional<String> grandparentKey,
             @JsonProperty("grandparentRatingKey") Optional<String> grandparentRatingKey,
             @JsonProperty("grandparentTheme") Optional<String> grandparentTheme,
             @JsonProperty("grandparentThumb") Optional<String> grandparentThumb,
             @JsonProperty("grandparentTitle") Optional<String> grandparentTitle,
-            @JsonProperty("Guid") Optional<? extends List<Tag>> guid,
-            @JsonProperty("hero") Optional<? extends Object> hero,
+            @JsonProperty("guid") Optional<String> guid,
+            @JsonProperty("Guid") Optional<? extends List<GetPlaylistGeneratorItemsGuids>> guids,
+            @JsonProperty("hero") Optional<String> hero,
             @JsonProperty("Image") Optional<? extends List<Image>> image,
-            @JsonProperty("index") Optional<Long> index,
-            @JsonProperty("key") Optional<? extends Object> key,
+            @JsonProperty("index") Optional<Integer> index,
+            @JsonProperty("key") String key,
             @JsonProperty("lastViewedAt") Optional<Long> lastViewedAt,
-            @JsonProperty("leafCount") Optional<Long> leafCount,
+            @JsonProperty("leafCount") Optional<Integer> leafCount,
             @JsonProperty("Media") Optional<? extends List<Media>> media,
-            @JsonProperty("originallyAvailableAt") Optional<? extends Object> originallyAvailableAt,
-            @JsonProperty("originalTitle") Optional<? extends Object> originalTitle,
+            @JsonProperty("originallyAvailableAt") Optional<LocalDate> originallyAvailableAt,
+            @JsonProperty("originalTitle") Optional<String> originalTitle,
+            @JsonProperty("parentGuid") Optional<String> parentGuid,
             @JsonProperty("parentHero") Optional<String> parentHero,
-            @JsonProperty("parentIndex") Optional<Long> parentIndex,
+            @JsonProperty("parentIndex") Optional<Integer> parentIndex,
             @JsonProperty("parentKey") Optional<String> parentKey,
             @JsonProperty("parentRatingKey") Optional<String> parentRatingKey,
             @JsonProperty("parentThumb") Optional<String> parentThumb,
             @JsonProperty("parentTitle") Optional<String> parentTitle,
-            @JsonProperty("primaryExtraKey") Optional<? extends Object> primaryExtraKey,
+            @JsonProperty("primaryExtraKey") Optional<String> primaryExtraKey,
             @JsonProperty("prompt") Optional<String> prompt,
-            @JsonProperty("rating") Optional<Double> rating,
+            @JsonProperty("rating") Optional<Float> rating,
             @JsonProperty("Rating") Optional<? extends List<Tag>> ratingArray,
-            @JsonProperty("ratingCount") Optional<Long> ratingCount,
-            @JsonProperty("ratingImage") Optional<? extends Object> ratingImage,
-            @JsonProperty("ratingKey") Optional<? extends Object> ratingKey,
+            @JsonProperty("ratingCount") Optional<Integer> ratingCount,
+            @JsonProperty("ratingImage") Optional<String> ratingImage,
+            @JsonProperty("ratingKey") Optional<String> ratingKey,
             @JsonProperty("Role") Optional<? extends List<Tag>> role,
             @JsonProperty("search") Optional<Boolean> search,
             @JsonProperty("secondary") Optional<Boolean> secondary,
             @JsonProperty("skipChildren") Optional<Boolean> skipChildren,
             @JsonProperty("skipParent") Optional<Boolean> skipParent,
             @JsonProperty("Sort") Optional<? extends List<Sort>> sort,
-            @JsonProperty("studio") Optional<? extends Object> studio,
-            @JsonProperty("subtype") Optional<? extends Object> subtype,
-            @JsonProperty("summary") Optional<? extends Object> summary,
-            @JsonProperty("tagline") Optional<? extends Object> tagline,
-            @JsonProperty("theme") Optional<? extends Object> theme,
-            @JsonProperty("thumb") Optional<? extends Object> thumb,
-            @JsonProperty("titleSort") Optional<? extends Object> titleSort,
+            @JsonProperty("studio") Optional<String> studio,
+            @JsonProperty("subtype") Optional<String> subtype,
+            @JsonProperty("summary") Optional<String> summary,
+            @JsonProperty("tagline") Optional<String> tagline,
+            @JsonProperty("theme") Optional<String> theme,
+            @JsonProperty("thumb") Optional<String> thumb,
+            @JsonProperty("titleSort") Optional<String> titleSort,
             @JsonProperty("updatedAt") Optional<Long> updatedAt,
-            @JsonProperty("userRating") Optional<Double> userRating,
-            @JsonProperty("viewCount") Optional<Long> viewCount,
-            @JsonProperty("viewedLeafCount") Optional<Long> viewedLeafCount,
-            @JsonProperty("viewOffset") Optional<Long> viewOffset,
+            @JsonProperty("userRating") Optional<Float> userRating,
+            @JsonProperty("viewCount") Optional<Integer> viewCount,
+            @JsonProperty("viewedLeafCount") Optional<Integer> viewedLeafCount,
+            @JsonProperty("viewOffset") Optional<Integer> viewOffset,
             @JsonProperty("Writer") Optional<? extends List<Tag>> writer,
-            @JsonProperty("year") Optional<Long> year,
+            @JsonProperty("year") Optional<Integer> year,
             @JsonProperty("processingState") Optional<? extends ProcessingState> processingState,
             @JsonProperty("processingStateContext") Optional<? extends ProcessingStateContext> processingStateContext) {
         Utils.checkNotNull(title, "title");
@@ -586,6 +614,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         Utils.checkNotNull(autotag, "autotag");
         Utils.checkNotNull(banner, "banner");
         Utils.checkNotNull(chapterSource, "chapterSource");
+        Utils.checkNotNull(childCount, "childCount");
         Utils.checkNotNull(composite, "composite");
         Utils.checkNotNull(contentRating, "contentRating");
         Utils.checkNotNull(country, "country");
@@ -594,6 +623,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         Utils.checkNotNull(filter, "filter");
         Utils.checkNotNull(genre, "genre");
         Utils.checkNotNull(grandparentArt, "grandparentArt");
+        Utils.checkNotNull(grandparentGuid, "grandparentGuid");
         Utils.checkNotNull(grandparentHero, "grandparentHero");
         Utils.checkNotNull(grandparentKey, "grandparentKey");
         Utils.checkNotNull(grandparentRatingKey, "grandparentRatingKey");
@@ -601,6 +631,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         Utils.checkNotNull(grandparentThumb, "grandparentThumb");
         Utils.checkNotNull(grandparentTitle, "grandparentTitle");
         Utils.checkNotNull(guid, "guid");
+        Utils.checkNotNull(guids, "guids");
         Utils.checkNotNull(hero, "hero");
         Utils.checkNotNull(image, "image");
         Utils.checkNotNull(index, "index");
@@ -610,6 +641,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         Utils.checkNotNull(media, "media");
         Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
         Utils.checkNotNull(originalTitle, "originalTitle");
+        Utils.checkNotNull(parentGuid, "parentGuid");
         Utils.checkNotNull(parentHero, "parentHero");
         Utils.checkNotNull(parentIndex, "parentIndex");
         Utils.checkNotNull(parentKey, "parentKey");
@@ -655,6 +687,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         this.autotag = autotag;
         this.banner = banner;
         this.chapterSource = chapterSource;
+        this.childCount = childCount;
         this.composite = composite;
         this.contentRating = contentRating;
         this.country = country;
@@ -663,6 +696,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         this.filter = filter;
         this.genre = genre;
         this.grandparentArt = grandparentArt;
+        this.grandparentGuid = grandparentGuid;
         this.grandparentHero = grandparentHero;
         this.grandparentKey = grandparentKey;
         this.grandparentRatingKey = grandparentRatingKey;
@@ -670,6 +704,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         this.grandparentThumb = grandparentThumb;
         this.grandparentTitle = grandparentTitle;
         this.guid = guid;
+        this.guids = guids;
         this.hero = hero;
         this.image = image;
         this.index = index;
@@ -679,6 +714,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         this.media = media;
         this.originallyAvailableAt = originallyAvailableAt;
         this.originalTitle = originalTitle;
+        this.parentGuid = parentGuid;
         this.parentHero = parentHero;
         this.parentIndex = parentIndex;
         this.parentKey = parentKey;
@@ -717,8 +753,22 @@ public class GetPlaylistGeneratorItemsMetadata {
         this.additionalProperties = new HashMap<>();
     }
     
-    public GetPlaylistGeneratorItemsMetadata() {
-        this(Optional.empty(), Optional.empty(), Optional.empty(),
+    public GetPlaylistGeneratorItemsMetadata(
+            String title,
+            String type,
+            long addedAt,
+            String key) {
+        this(title, type, Optional.empty(),
+            addedAt, Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), Optional.empty(), Optional.empty(),
+            Optional.empty(), key, Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
@@ -732,40 +782,30 @@ public class GetPlaylistGeneratorItemsMetadata {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty());
     }
 
     /**
      * The title of the item (e.g. “300” or “The Simpsons”)
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> title() {
-        return (Optional<Object>) title;
+    public String title() {
+        return title;
     }
 
     /**
      * The type of the video item, such as `movie`, `episode`, or `clip`.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> type() {
-        return (Optional<Object>) type;
+    public String type() {
+        return type;
     }
 
     /**
      * When present, contains the disc number for a track on multi-disc albums.
      */
     @JsonIgnore
-    public Optional<Long> absoluteIndex() {
+    public Optional<Integer> absoluteIndex() {
         return absoluteIndex;
     }
 
@@ -773,34 +813,32 @@ public class GetPlaylistGeneratorItemsMetadata {
      * In units of seconds since the epoch, returns the time at which the item was added to the library.
      */
     @JsonIgnore
-    public Optional<Long> addedAt() {
+    public long addedAt() {
         return addedAt;
     }
 
     /**
      * When present, the URL for the background artwork for the item.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> art() {
-        return (Optional<Object>) art;
+    public Optional<String> art() {
+        return art;
     }
 
     /**
      * Some rating systems separate reviewer ratings from audience ratings
      */
     @JsonIgnore
-    public Optional<Double> audienceRating() {
+    public Optional<Float> audienceRating() {
         return audienceRating;
     }
 
     /**
      * A URI representing the image to be shown with the audience rating (e.g. rottentomatoes://image.rating.spilled).
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> audienceRatingImage() {
-        return (Optional<Object>) audienceRatingImage;
+    public Optional<String> audienceRatingImage() {
+        return audienceRatingImage;
     }
 
     @SuppressWarnings("unchecked")
@@ -812,37 +850,41 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the URL for a banner graphic for the item.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> banner() {
-        return (Optional<Object>) banner;
+    public Optional<String> banner() {
+        return banner;
     }
 
     /**
      * When present, indicates the source for the chapters in the media file. Can be media (the chapters were embedded in the media itself), agent (a metadata agent computed them), or mixed (a combination of the two).
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> chapterSource() {
-        return (Optional<Object>) chapterSource;
+    public Optional<String> chapterSource() {
+        return chapterSource;
+    }
+
+    /**
+     * The number of child items associated with this media item.
+     */
+    @JsonIgnore
+    public Optional<Integer> childCount() {
+        return childCount;
     }
 
     /**
      * When present, the URL for a composite image for descendent items (e.g. photo albums or playlists).
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> composite() {
-        return (Optional<Object>) composite;
+    public Optional<String> composite() {
+        return composite;
     }
 
     /**
      * If known, the content rating (e.g. MPAA) for an item.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> contentRating() {
-        return (Optional<Object>) contentRating;
+    public Optional<String> contentRating() {
+        return contentRating;
     }
 
     @SuppressWarnings("unchecked")
@@ -861,7 +903,7 @@ public class GetPlaylistGeneratorItemsMetadata {
      * When present, the duration for the item, in units of milliseconds.
      */
     @JsonIgnore
-    public Optional<Long> duration() {
+    public Optional<Integer> duration() {
         return duration;
     }
 
@@ -886,6 +928,14 @@ public class GetPlaylistGeneratorItemsMetadata {
     @JsonIgnore
     public Optional<String> grandparentArt() {
         return grandparentArt;
+    }
+
+    /**
+     * The GUID of the grandparent media item.
+     */
+    @JsonIgnore
+    public Optional<String> grandparentGuid() {
+        return grandparentGuid;
     }
 
     /**
@@ -936,19 +986,26 @@ public class GetPlaylistGeneratorItemsMetadata {
         return grandparentTitle;
     }
 
+    /**
+     * The globally unique identifier for the media item.
+     */
+    @JsonIgnore
+    public Optional<String> guid() {
+        return guid;
+    }
+
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<Tag>> guid() {
-        return (Optional<List<Tag>>) guid;
+    public Optional<List<GetPlaylistGeneratorItemsGuids>> guids() {
+        return (Optional<List<GetPlaylistGeneratorItemsGuids>>) guids;
     }
 
     /**
      * When present, the URL for a hero image for the item.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> hero() {
-        return (Optional<Object>) hero;
+    public Optional<String> hero() {
+        return hero;
     }
 
     @SuppressWarnings("unchecked")
@@ -961,22 +1018,18 @@ public class GetPlaylistGeneratorItemsMetadata {
      * When present, this represents the episode number for episodes, season number for seasons, or track number for audio tracks.
      */
     @JsonIgnore
-    public Optional<Long> index() {
+    public Optional<Integer> index() {
         return index;
     }
 
     /**
      * The key at which the item's details can be fetched.  In many cases a metadata item may be passed without all the details (such as in a hub) and this key corresponds to the endpoint to fetch additional details.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> key() {
-        return (Optional<Object>) key;
+    public String key() {
+        return key;
     }
 
-    /**
-     * When a user has watched or listened to an item, this contains a timestamp (epoch seconds) for that last consumption time.
-     */
     @JsonIgnore
     public Optional<Long> lastViewedAt() {
         return lastViewedAt;
@@ -986,7 +1039,7 @@ public class GetPlaylistGeneratorItemsMetadata {
      * For shows and seasons, contains the number of total episodes.
      */
     @JsonIgnore
-    public Optional<Long> leafCount() {
+    public Optional<Integer> leafCount() {
         return leafCount;
     }
 
@@ -999,19 +1052,25 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, in the format YYYY-MM-DD [HH:MM:SS] (the hours/minutes/seconds part is not always present). The air date, or a higher resolution release date for an item, depending on type. For example, episodes usually have air date like 1979-08-10 (we don't use epoch seconds because media existed prior to 1970). In some cases, recorded over-the-air content has higher resolution air date which includes a time component. Albums and movies may have day-resolution release dates as well.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> originallyAvailableAt() {
-        return (Optional<Object>) originallyAvailableAt;
+    public Optional<LocalDate> originallyAvailableAt() {
+        return originallyAvailableAt;
     }
 
     /**
      * When present, used to indicate an item's original title, e.g. a movie's foreign title.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> originalTitle() {
-        return (Optional<Object>) originalTitle;
+    public Optional<String> originalTitle() {
+        return originalTitle;
+    }
+
+    /**
+     * The GUID of the parent media item.
+     */
+    @JsonIgnore
+    public Optional<String> parentGuid() {
+        return parentGuid;
     }
 
     /**
@@ -1026,7 +1085,7 @@ public class GetPlaylistGeneratorItemsMetadata {
      * The `index` of the parent
      */
     @JsonIgnore
-    public Optional<Long> parentIndex() {
+    public Optional<Integer> parentIndex() {
         return parentIndex;
     }
 
@@ -1065,10 +1124,9 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * Indicates that the item has a primary extra; for a movie, this is a trailer, and for a music track it is a music video. The URL points to the metadata details endpoint for the item.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> primaryExtraKey() {
-        return (Optional<Object>) primaryExtraKey;
+    public Optional<String> primaryExtraKey() {
+        return primaryExtraKey;
     }
 
     /**
@@ -1083,7 +1141,7 @@ public class GetPlaylistGeneratorItemsMetadata {
      * When present, the rating for the item. The exact meaning and representation depends on where the rating was sourced from.
      */
     @JsonIgnore
-    public Optional<Double> rating() {
+    public Optional<Float> rating() {
         return rating;
     }
 
@@ -1097,26 +1155,24 @@ public class GetPlaylistGeneratorItemsMetadata {
      * Number of ratings under this metadata
      */
     @JsonIgnore
-    public Optional<Long> ratingCount() {
+    public Optional<Integer> ratingCount() {
         return ratingCount;
     }
 
     /**
      * When present, indicates an image to be shown with the rating. This is passed back as a small set of defined URI values, e.g. rottentomatoes://image.rating.rotten.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> ratingImage() {
-        return (Optional<Object>) ratingImage;
+    public Optional<String> ratingImage() {
+        return ratingImage;
     }
 
     /**
      * This is the opaque string to be passed into timeline, scrobble, and rating endpoints to identify them.  While it often appears to be numeric, this is not guaranteed.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> ratingKey() {
-        return (Optional<Object>) ratingKey;
+    public Optional<String> ratingKey() {
+        return ratingKey;
     }
 
     @SuppressWarnings("unchecked")
@@ -1169,64 +1225,57 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the studio or label which produced an item (e.g. movie studio for movies, record label for albums).
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> studio() {
-        return (Optional<Object>) studio;
+    public Optional<String> studio() {
+        return studio;
     }
 
     /**
      * The subtype of the video item, such as `photo` when the video item is in a photo library
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> subtype() {
-        return (Optional<Object>) subtype;
+    public Optional<String> subtype() {
+        return subtype;
     }
 
     /**
      * When present, the extended textual information about the item (e.g. movie plot, artist biography, album review).
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> summary() {
-        return (Optional<Object>) summary;
+    public Optional<String> summary() {
+        return summary;
     }
 
     /**
      * When present, a pithy one-liner about the item (usually only seen for movies).
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> tagline() {
-        return (Optional<Object>) tagline;
+    public Optional<String> tagline() {
+        return tagline;
     }
 
     /**
      * When present, the URL for theme music for the item (usually only for TV shows).
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> theme() {
-        return (Optional<Object>) theme;
+    public Optional<String> theme() {
+        return theme;
     }
 
     /**
      * When present, the URL for the poster or thumbnail for the item. When available for types like movie, it will be the poster graphic, but fall-back to the extracted media thumbnail.
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> thumb() {
-        return (Optional<Object>) thumb;
+    public Optional<String> thumb() {
+        return thumb;
     }
 
     /**
      * Whene present, this is the string used for sorting the item. It's usually the title with any leading articles removed (e.g. “Simpsons”).
      */
-    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Object> titleSort() {
-        return (Optional<Object>) titleSort;
+    public Optional<String> titleSort() {
+        return titleSort;
     }
 
     /**
@@ -1241,7 +1290,7 @@ public class GetPlaylistGeneratorItemsMetadata {
      * When the user has rated an item, this contains the user rating
      */
     @JsonIgnore
-    public Optional<Double> userRating() {
+    public Optional<Float> userRating() {
         return userRating;
     }
 
@@ -1249,7 +1298,7 @@ public class GetPlaylistGeneratorItemsMetadata {
      * When a users has completed watched or listened to an item, this attribute contains the number of consumptions.
      */
     @JsonIgnore
-    public Optional<Long> viewCount() {
+    public Optional<Integer> viewCount() {
         return viewCount;
     }
 
@@ -1257,7 +1306,7 @@ public class GetPlaylistGeneratorItemsMetadata {
      * For shows and seasons, contains the number of viewed episodes.
      */
     @JsonIgnore
-    public Optional<Long> viewedLeafCount() {
+    public Optional<Integer> viewedLeafCount() {
         return viewedLeafCount;
     }
 
@@ -1265,7 +1314,7 @@ public class GetPlaylistGeneratorItemsMetadata {
      * When a user is in the process of viewing or listening to this item, this attribute contains the current offset, in units of milliseconds.
      */
     @JsonIgnore
-    public Optional<Long> viewOffset() {
+    public Optional<Integer> viewOffset() {
         return viewOffset;
     }
 
@@ -1279,7 +1328,7 @@ public class GetPlaylistGeneratorItemsMetadata {
      * When present, the year associated with the item's release (e.g. release year for a movie).
      */
     @JsonIgnore
-    public Optional<Long> year() {
+    public Optional<Integer> year() {
         return year;
     }
 
@@ -1314,17 +1363,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * The title of the item (e.g. “300” or “The Simpsons”)
      */
-    public GetPlaylistGeneratorItemsMetadata withTitle(Object title) {
-        Utils.checkNotNull(title, "title");
-        this.title = Optional.ofNullable(title);
-        return this;
-    }
-
-
-    /**
-     * The title of the item (e.g. “300” or “The Simpsons”)
-     */
-    public GetPlaylistGeneratorItemsMetadata withTitle(Optional<? extends Object> title) {
+    public GetPlaylistGeneratorItemsMetadata withTitle(String title) {
         Utils.checkNotNull(title, "title");
         this.title = title;
         return this;
@@ -1333,17 +1372,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * The type of the video item, such as `movie`, `episode`, or `clip`.
      */
-    public GetPlaylistGeneratorItemsMetadata withType(Object type) {
-        Utils.checkNotNull(type, "type");
-        this.type = Optional.ofNullable(type);
-        return this;
-    }
-
-
-    /**
-     * The type of the video item, such as `movie`, `episode`, or `clip`.
-     */
-    public GetPlaylistGeneratorItemsMetadata withType(Optional<? extends Object> type) {
+    public GetPlaylistGeneratorItemsMetadata withType(String type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -1352,7 +1381,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, contains the disc number for a track on multi-disc albums.
      */
-    public GetPlaylistGeneratorItemsMetadata withAbsoluteIndex(long absoluteIndex) {
+    public GetPlaylistGeneratorItemsMetadata withAbsoluteIndex(int absoluteIndex) {
         Utils.checkNotNull(absoluteIndex, "absoluteIndex");
         this.absoluteIndex = Optional.ofNullable(absoluteIndex);
         return this;
@@ -1362,7 +1391,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, contains the disc number for a track on multi-disc albums.
      */
-    public GetPlaylistGeneratorItemsMetadata withAbsoluteIndex(Optional<Long> absoluteIndex) {
+    public GetPlaylistGeneratorItemsMetadata withAbsoluteIndex(Optional<Integer> absoluteIndex) {
         Utils.checkNotNull(absoluteIndex, "absoluteIndex");
         this.absoluteIndex = absoluteIndex;
         return this;
@@ -1373,16 +1402,6 @@ public class GetPlaylistGeneratorItemsMetadata {
      */
     public GetPlaylistGeneratorItemsMetadata withAddedAt(long addedAt) {
         Utils.checkNotNull(addedAt, "addedAt");
-        this.addedAt = Optional.ofNullable(addedAt);
-        return this;
-    }
-
-
-    /**
-     * In units of seconds since the epoch, returns the time at which the item was added to the library.
-     */
-    public GetPlaylistGeneratorItemsMetadata withAddedAt(Optional<Long> addedAt) {
-        Utils.checkNotNull(addedAt, "addedAt");
         this.addedAt = addedAt;
         return this;
     }
@@ -1390,7 +1409,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the URL for the background artwork for the item.
      */
-    public GetPlaylistGeneratorItemsMetadata withArt(Object art) {
+    public GetPlaylistGeneratorItemsMetadata withArt(String art) {
         Utils.checkNotNull(art, "art");
         this.art = Optional.ofNullable(art);
         return this;
@@ -1400,7 +1419,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the URL for the background artwork for the item.
      */
-    public GetPlaylistGeneratorItemsMetadata withArt(Optional<? extends Object> art) {
+    public GetPlaylistGeneratorItemsMetadata withArt(Optional<String> art) {
         Utils.checkNotNull(art, "art");
         this.art = art;
         return this;
@@ -1409,7 +1428,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * Some rating systems separate reviewer ratings from audience ratings
      */
-    public GetPlaylistGeneratorItemsMetadata withAudienceRating(double audienceRating) {
+    public GetPlaylistGeneratorItemsMetadata withAudienceRating(float audienceRating) {
         Utils.checkNotNull(audienceRating, "audienceRating");
         this.audienceRating = Optional.ofNullable(audienceRating);
         return this;
@@ -1419,7 +1438,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * Some rating systems separate reviewer ratings from audience ratings
      */
-    public GetPlaylistGeneratorItemsMetadata withAudienceRating(Optional<Double> audienceRating) {
+    public GetPlaylistGeneratorItemsMetadata withAudienceRating(Optional<Float> audienceRating) {
         Utils.checkNotNull(audienceRating, "audienceRating");
         this.audienceRating = audienceRating;
         return this;
@@ -1428,7 +1447,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * A URI representing the image to be shown with the audience rating (e.g. rottentomatoes://image.rating.spilled).
      */
-    public GetPlaylistGeneratorItemsMetadata withAudienceRatingImage(Object audienceRatingImage) {
+    public GetPlaylistGeneratorItemsMetadata withAudienceRatingImage(String audienceRatingImage) {
         Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
         this.audienceRatingImage = Optional.ofNullable(audienceRatingImage);
         return this;
@@ -1438,7 +1457,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * A URI representing the image to be shown with the audience rating (e.g. rottentomatoes://image.rating.spilled).
      */
-    public GetPlaylistGeneratorItemsMetadata withAudienceRatingImage(Optional<? extends Object> audienceRatingImage) {
+    public GetPlaylistGeneratorItemsMetadata withAudienceRatingImage(Optional<String> audienceRatingImage) {
         Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
         this.audienceRatingImage = audienceRatingImage;
         return this;
@@ -1460,7 +1479,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the URL for a banner graphic for the item.
      */
-    public GetPlaylistGeneratorItemsMetadata withBanner(Object banner) {
+    public GetPlaylistGeneratorItemsMetadata withBanner(String banner) {
         Utils.checkNotNull(banner, "banner");
         this.banner = Optional.ofNullable(banner);
         return this;
@@ -1470,7 +1489,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the URL for a banner graphic for the item.
      */
-    public GetPlaylistGeneratorItemsMetadata withBanner(Optional<? extends Object> banner) {
+    public GetPlaylistGeneratorItemsMetadata withBanner(Optional<String> banner) {
         Utils.checkNotNull(banner, "banner");
         this.banner = banner;
         return this;
@@ -1479,7 +1498,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, indicates the source for the chapters in the media file. Can be media (the chapters were embedded in the media itself), agent (a metadata agent computed them), or mixed (a combination of the two).
      */
-    public GetPlaylistGeneratorItemsMetadata withChapterSource(Object chapterSource) {
+    public GetPlaylistGeneratorItemsMetadata withChapterSource(String chapterSource) {
         Utils.checkNotNull(chapterSource, "chapterSource");
         this.chapterSource = Optional.ofNullable(chapterSource);
         return this;
@@ -1489,16 +1508,35 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, indicates the source for the chapters in the media file. Can be media (the chapters were embedded in the media itself), agent (a metadata agent computed them), or mixed (a combination of the two).
      */
-    public GetPlaylistGeneratorItemsMetadata withChapterSource(Optional<? extends Object> chapterSource) {
+    public GetPlaylistGeneratorItemsMetadata withChapterSource(Optional<String> chapterSource) {
         Utils.checkNotNull(chapterSource, "chapterSource");
         this.chapterSource = chapterSource;
         return this;
     }
 
     /**
+     * The number of child items associated with this media item.
+     */
+    public GetPlaylistGeneratorItemsMetadata withChildCount(int childCount) {
+        Utils.checkNotNull(childCount, "childCount");
+        this.childCount = Optional.ofNullable(childCount);
+        return this;
+    }
+
+
+    /**
+     * The number of child items associated with this media item.
+     */
+    public GetPlaylistGeneratorItemsMetadata withChildCount(Optional<Integer> childCount) {
+        Utils.checkNotNull(childCount, "childCount");
+        this.childCount = childCount;
+        return this;
+    }
+
+    /**
      * When present, the URL for a composite image for descendent items (e.g. photo albums or playlists).
      */
-    public GetPlaylistGeneratorItemsMetadata withComposite(Object composite) {
+    public GetPlaylistGeneratorItemsMetadata withComposite(String composite) {
         Utils.checkNotNull(composite, "composite");
         this.composite = Optional.ofNullable(composite);
         return this;
@@ -1508,7 +1546,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the URL for a composite image for descendent items (e.g. photo albums or playlists).
      */
-    public GetPlaylistGeneratorItemsMetadata withComposite(Optional<? extends Object> composite) {
+    public GetPlaylistGeneratorItemsMetadata withComposite(Optional<String> composite) {
         Utils.checkNotNull(composite, "composite");
         this.composite = composite;
         return this;
@@ -1517,7 +1555,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * If known, the content rating (e.g. MPAA) for an item.
      */
-    public GetPlaylistGeneratorItemsMetadata withContentRating(Object contentRating) {
+    public GetPlaylistGeneratorItemsMetadata withContentRating(String contentRating) {
         Utils.checkNotNull(contentRating, "contentRating");
         this.contentRating = Optional.ofNullable(contentRating);
         return this;
@@ -1527,7 +1565,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * If known, the content rating (e.g. MPAA) for an item.
      */
-    public GetPlaylistGeneratorItemsMetadata withContentRating(Optional<? extends Object> contentRating) {
+    public GetPlaylistGeneratorItemsMetadata withContentRating(Optional<String> contentRating) {
         Utils.checkNotNull(contentRating, "contentRating");
         this.contentRating = contentRating;
         return this;
@@ -1562,7 +1600,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the duration for the item, in units of milliseconds.
      */
-    public GetPlaylistGeneratorItemsMetadata withDuration(long duration) {
+    public GetPlaylistGeneratorItemsMetadata withDuration(int duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = Optional.ofNullable(duration);
         return this;
@@ -1572,7 +1610,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the duration for the item, in units of milliseconds.
      */
-    public GetPlaylistGeneratorItemsMetadata withDuration(Optional<Long> duration) {
+    public GetPlaylistGeneratorItemsMetadata withDuration(Optional<Integer> duration) {
         Utils.checkNotNull(duration, "duration");
         this.duration = duration;
         return this;
@@ -1626,6 +1664,25 @@ public class GetPlaylistGeneratorItemsMetadata {
     public GetPlaylistGeneratorItemsMetadata withGrandparentArt(Optional<String> grandparentArt) {
         Utils.checkNotNull(grandparentArt, "grandparentArt");
         this.grandparentArt = grandparentArt;
+        return this;
+    }
+
+    /**
+     * The GUID of the grandparent media item.
+     */
+    public GetPlaylistGeneratorItemsMetadata withGrandparentGuid(String grandparentGuid) {
+        Utils.checkNotNull(grandparentGuid, "grandparentGuid");
+        this.grandparentGuid = Optional.ofNullable(grandparentGuid);
+        return this;
+    }
+
+
+    /**
+     * The GUID of the grandparent media item.
+     */
+    public GetPlaylistGeneratorItemsMetadata withGrandparentGuid(Optional<String> grandparentGuid) {
+        Utils.checkNotNull(grandparentGuid, "grandparentGuid");
+        this.grandparentGuid = grandparentGuid;
         return this;
     }
 
@@ -1743,23 +1800,42 @@ public class GetPlaylistGeneratorItemsMetadata {
         return this;
     }
 
-    public GetPlaylistGeneratorItemsMetadata withGuid(List<Tag> guid) {
+    /**
+     * The globally unique identifier for the media item.
+     */
+    public GetPlaylistGeneratorItemsMetadata withGuid(String guid) {
         Utils.checkNotNull(guid, "guid");
         this.guid = Optional.ofNullable(guid);
         return this;
     }
 
 
-    public GetPlaylistGeneratorItemsMetadata withGuid(Optional<? extends List<Tag>> guid) {
+    /**
+     * The globally unique identifier for the media item.
+     */
+    public GetPlaylistGeneratorItemsMetadata withGuid(Optional<String> guid) {
         Utils.checkNotNull(guid, "guid");
         this.guid = guid;
+        return this;
+    }
+
+    public GetPlaylistGeneratorItemsMetadata withGuids(List<GetPlaylistGeneratorItemsGuids> guids) {
+        Utils.checkNotNull(guids, "guids");
+        this.guids = Optional.ofNullable(guids);
+        return this;
+    }
+
+
+    public GetPlaylistGeneratorItemsMetadata withGuids(Optional<? extends List<GetPlaylistGeneratorItemsGuids>> guids) {
+        Utils.checkNotNull(guids, "guids");
+        this.guids = guids;
         return this;
     }
 
     /**
      * When present, the URL for a hero image for the item.
      */
-    public GetPlaylistGeneratorItemsMetadata withHero(Object hero) {
+    public GetPlaylistGeneratorItemsMetadata withHero(String hero) {
         Utils.checkNotNull(hero, "hero");
         this.hero = Optional.ofNullable(hero);
         return this;
@@ -1769,7 +1845,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the URL for a hero image for the item.
      */
-    public GetPlaylistGeneratorItemsMetadata withHero(Optional<? extends Object> hero) {
+    public GetPlaylistGeneratorItemsMetadata withHero(Optional<String> hero) {
         Utils.checkNotNull(hero, "hero");
         this.hero = hero;
         return this;
@@ -1791,7 +1867,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, this represents the episode number for episodes, season number for seasons, or track number for audio tracks.
      */
-    public GetPlaylistGeneratorItemsMetadata withIndex(long index) {
+    public GetPlaylistGeneratorItemsMetadata withIndex(int index) {
         Utils.checkNotNull(index, "index");
         this.index = Optional.ofNullable(index);
         return this;
@@ -1801,7 +1877,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, this represents the episode number for episodes, season number for seasons, or track number for audio tracks.
      */
-    public GetPlaylistGeneratorItemsMetadata withIndex(Optional<Long> index) {
+    public GetPlaylistGeneratorItemsMetadata withIndex(Optional<Integer> index) {
         Utils.checkNotNull(index, "index");
         this.index = index;
         return this;
@@ -1810,25 +1886,12 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * The key at which the item's details can be fetched.  In many cases a metadata item may be passed without all the details (such as in a hub) and this key corresponds to the endpoint to fetch additional details.
      */
-    public GetPlaylistGeneratorItemsMetadata withKey(Object key) {
-        Utils.checkNotNull(key, "key");
-        this.key = Optional.ofNullable(key);
-        return this;
-    }
-
-
-    /**
-     * The key at which the item's details can be fetched.  In many cases a metadata item may be passed without all the details (such as in a hub) and this key corresponds to the endpoint to fetch additional details.
-     */
-    public GetPlaylistGeneratorItemsMetadata withKey(Optional<? extends Object> key) {
+    public GetPlaylistGeneratorItemsMetadata withKey(String key) {
         Utils.checkNotNull(key, "key");
         this.key = key;
         return this;
     }
 
-    /**
-     * When a user has watched or listened to an item, this contains a timestamp (epoch seconds) for that last consumption time.
-     */
     public GetPlaylistGeneratorItemsMetadata withLastViewedAt(long lastViewedAt) {
         Utils.checkNotNull(lastViewedAt, "lastViewedAt");
         this.lastViewedAt = Optional.ofNullable(lastViewedAt);
@@ -1836,9 +1899,6 @@ public class GetPlaylistGeneratorItemsMetadata {
     }
 
 
-    /**
-     * When a user has watched or listened to an item, this contains a timestamp (epoch seconds) for that last consumption time.
-     */
     public GetPlaylistGeneratorItemsMetadata withLastViewedAt(Optional<Long> lastViewedAt) {
         Utils.checkNotNull(lastViewedAt, "lastViewedAt");
         this.lastViewedAt = lastViewedAt;
@@ -1848,7 +1908,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * For shows and seasons, contains the number of total episodes.
      */
-    public GetPlaylistGeneratorItemsMetadata withLeafCount(long leafCount) {
+    public GetPlaylistGeneratorItemsMetadata withLeafCount(int leafCount) {
         Utils.checkNotNull(leafCount, "leafCount");
         this.leafCount = Optional.ofNullable(leafCount);
         return this;
@@ -1858,7 +1918,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * For shows and seasons, contains the number of total episodes.
      */
-    public GetPlaylistGeneratorItemsMetadata withLeafCount(Optional<Long> leafCount) {
+    public GetPlaylistGeneratorItemsMetadata withLeafCount(Optional<Integer> leafCount) {
         Utils.checkNotNull(leafCount, "leafCount");
         this.leafCount = leafCount;
         return this;
@@ -1880,7 +1940,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, in the format YYYY-MM-DD [HH:MM:SS] (the hours/minutes/seconds part is not always present). The air date, or a higher resolution release date for an item, depending on type. For example, episodes usually have air date like 1979-08-10 (we don't use epoch seconds because media existed prior to 1970). In some cases, recorded over-the-air content has higher resolution air date which includes a time component. Albums and movies may have day-resolution release dates as well.
      */
-    public GetPlaylistGeneratorItemsMetadata withOriginallyAvailableAt(Object originallyAvailableAt) {
+    public GetPlaylistGeneratorItemsMetadata withOriginallyAvailableAt(LocalDate originallyAvailableAt) {
         Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
         this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
         return this;
@@ -1890,7 +1950,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, in the format YYYY-MM-DD [HH:MM:SS] (the hours/minutes/seconds part is not always present). The air date, or a higher resolution release date for an item, depending on type. For example, episodes usually have air date like 1979-08-10 (we don't use epoch seconds because media existed prior to 1970). In some cases, recorded over-the-air content has higher resolution air date which includes a time component. Albums and movies may have day-resolution release dates as well.
      */
-    public GetPlaylistGeneratorItemsMetadata withOriginallyAvailableAt(Optional<? extends Object> originallyAvailableAt) {
+    public GetPlaylistGeneratorItemsMetadata withOriginallyAvailableAt(Optional<LocalDate> originallyAvailableAt) {
         Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
         this.originallyAvailableAt = originallyAvailableAt;
         return this;
@@ -1899,7 +1959,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, used to indicate an item's original title, e.g. a movie's foreign title.
      */
-    public GetPlaylistGeneratorItemsMetadata withOriginalTitle(Object originalTitle) {
+    public GetPlaylistGeneratorItemsMetadata withOriginalTitle(String originalTitle) {
         Utils.checkNotNull(originalTitle, "originalTitle");
         this.originalTitle = Optional.ofNullable(originalTitle);
         return this;
@@ -1909,9 +1969,28 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, used to indicate an item's original title, e.g. a movie's foreign title.
      */
-    public GetPlaylistGeneratorItemsMetadata withOriginalTitle(Optional<? extends Object> originalTitle) {
+    public GetPlaylistGeneratorItemsMetadata withOriginalTitle(Optional<String> originalTitle) {
         Utils.checkNotNull(originalTitle, "originalTitle");
         this.originalTitle = originalTitle;
+        return this;
+    }
+
+    /**
+     * The GUID of the parent media item.
+     */
+    public GetPlaylistGeneratorItemsMetadata withParentGuid(String parentGuid) {
+        Utils.checkNotNull(parentGuid, "parentGuid");
+        this.parentGuid = Optional.ofNullable(parentGuid);
+        return this;
+    }
+
+
+    /**
+     * The GUID of the parent media item.
+     */
+    public GetPlaylistGeneratorItemsMetadata withParentGuid(Optional<String> parentGuid) {
+        Utils.checkNotNull(parentGuid, "parentGuid");
+        this.parentGuid = parentGuid;
         return this;
     }
 
@@ -1937,7 +2016,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * The `index` of the parent
      */
-    public GetPlaylistGeneratorItemsMetadata withParentIndex(long parentIndex) {
+    public GetPlaylistGeneratorItemsMetadata withParentIndex(int parentIndex) {
         Utils.checkNotNull(parentIndex, "parentIndex");
         this.parentIndex = Optional.ofNullable(parentIndex);
         return this;
@@ -1947,7 +2026,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * The `index` of the parent
      */
-    public GetPlaylistGeneratorItemsMetadata withParentIndex(Optional<Long> parentIndex) {
+    public GetPlaylistGeneratorItemsMetadata withParentIndex(Optional<Integer> parentIndex) {
         Utils.checkNotNull(parentIndex, "parentIndex");
         this.parentIndex = parentIndex;
         return this;
@@ -2032,7 +2111,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * Indicates that the item has a primary extra; for a movie, this is a trailer, and for a music track it is a music video. The URL points to the metadata details endpoint for the item.
      */
-    public GetPlaylistGeneratorItemsMetadata withPrimaryExtraKey(Object primaryExtraKey) {
+    public GetPlaylistGeneratorItemsMetadata withPrimaryExtraKey(String primaryExtraKey) {
         Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
         this.primaryExtraKey = Optional.ofNullable(primaryExtraKey);
         return this;
@@ -2042,7 +2121,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * Indicates that the item has a primary extra; for a movie, this is a trailer, and for a music track it is a music video. The URL points to the metadata details endpoint for the item.
      */
-    public GetPlaylistGeneratorItemsMetadata withPrimaryExtraKey(Optional<? extends Object> primaryExtraKey) {
+    public GetPlaylistGeneratorItemsMetadata withPrimaryExtraKey(Optional<String> primaryExtraKey) {
         Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
         this.primaryExtraKey = primaryExtraKey;
         return this;
@@ -2070,7 +2149,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the rating for the item. The exact meaning and representation depends on where the rating was sourced from.
      */
-    public GetPlaylistGeneratorItemsMetadata withRating(double rating) {
+    public GetPlaylistGeneratorItemsMetadata withRating(float rating) {
         Utils.checkNotNull(rating, "rating");
         this.rating = Optional.ofNullable(rating);
         return this;
@@ -2080,7 +2159,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the rating for the item. The exact meaning and representation depends on where the rating was sourced from.
      */
-    public GetPlaylistGeneratorItemsMetadata withRating(Optional<Double> rating) {
+    public GetPlaylistGeneratorItemsMetadata withRating(Optional<Float> rating) {
         Utils.checkNotNull(rating, "rating");
         this.rating = rating;
         return this;
@@ -2102,7 +2181,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * Number of ratings under this metadata
      */
-    public GetPlaylistGeneratorItemsMetadata withRatingCount(long ratingCount) {
+    public GetPlaylistGeneratorItemsMetadata withRatingCount(int ratingCount) {
         Utils.checkNotNull(ratingCount, "ratingCount");
         this.ratingCount = Optional.ofNullable(ratingCount);
         return this;
@@ -2112,7 +2191,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * Number of ratings under this metadata
      */
-    public GetPlaylistGeneratorItemsMetadata withRatingCount(Optional<Long> ratingCount) {
+    public GetPlaylistGeneratorItemsMetadata withRatingCount(Optional<Integer> ratingCount) {
         Utils.checkNotNull(ratingCount, "ratingCount");
         this.ratingCount = ratingCount;
         return this;
@@ -2121,7 +2200,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, indicates an image to be shown with the rating. This is passed back as a small set of defined URI values, e.g. rottentomatoes://image.rating.rotten.
      */
-    public GetPlaylistGeneratorItemsMetadata withRatingImage(Object ratingImage) {
+    public GetPlaylistGeneratorItemsMetadata withRatingImage(String ratingImage) {
         Utils.checkNotNull(ratingImage, "ratingImage");
         this.ratingImage = Optional.ofNullable(ratingImage);
         return this;
@@ -2131,7 +2210,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, indicates an image to be shown with the rating. This is passed back as a small set of defined URI values, e.g. rottentomatoes://image.rating.rotten.
      */
-    public GetPlaylistGeneratorItemsMetadata withRatingImage(Optional<? extends Object> ratingImage) {
+    public GetPlaylistGeneratorItemsMetadata withRatingImage(Optional<String> ratingImage) {
         Utils.checkNotNull(ratingImage, "ratingImage");
         this.ratingImage = ratingImage;
         return this;
@@ -2140,7 +2219,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * This is the opaque string to be passed into timeline, scrobble, and rating endpoints to identify them.  While it often appears to be numeric, this is not guaranteed.
      */
-    public GetPlaylistGeneratorItemsMetadata withRatingKey(Object ratingKey) {
+    public GetPlaylistGeneratorItemsMetadata withRatingKey(String ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         this.ratingKey = Optional.ofNullable(ratingKey);
         return this;
@@ -2150,7 +2229,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * This is the opaque string to be passed into timeline, scrobble, and rating endpoints to identify them.  While it often appears to be numeric, this is not guaranteed.
      */
-    public GetPlaylistGeneratorItemsMetadata withRatingKey(Optional<? extends Object> ratingKey) {
+    public GetPlaylistGeneratorItemsMetadata withRatingKey(Optional<String> ratingKey) {
         Utils.checkNotNull(ratingKey, "ratingKey");
         this.ratingKey = ratingKey;
         return this;
@@ -2267,7 +2346,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the studio or label which produced an item (e.g. movie studio for movies, record label for albums).
      */
-    public GetPlaylistGeneratorItemsMetadata withStudio(Object studio) {
+    public GetPlaylistGeneratorItemsMetadata withStudio(String studio) {
         Utils.checkNotNull(studio, "studio");
         this.studio = Optional.ofNullable(studio);
         return this;
@@ -2277,7 +2356,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the studio or label which produced an item (e.g. movie studio for movies, record label for albums).
      */
-    public GetPlaylistGeneratorItemsMetadata withStudio(Optional<? extends Object> studio) {
+    public GetPlaylistGeneratorItemsMetadata withStudio(Optional<String> studio) {
         Utils.checkNotNull(studio, "studio");
         this.studio = studio;
         return this;
@@ -2286,7 +2365,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * The subtype of the video item, such as `photo` when the video item is in a photo library
      */
-    public GetPlaylistGeneratorItemsMetadata withSubtype(Object subtype) {
+    public GetPlaylistGeneratorItemsMetadata withSubtype(String subtype) {
         Utils.checkNotNull(subtype, "subtype");
         this.subtype = Optional.ofNullable(subtype);
         return this;
@@ -2296,7 +2375,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * The subtype of the video item, such as `photo` when the video item is in a photo library
      */
-    public GetPlaylistGeneratorItemsMetadata withSubtype(Optional<? extends Object> subtype) {
+    public GetPlaylistGeneratorItemsMetadata withSubtype(Optional<String> subtype) {
         Utils.checkNotNull(subtype, "subtype");
         this.subtype = subtype;
         return this;
@@ -2305,7 +2384,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the extended textual information about the item (e.g. movie plot, artist biography, album review).
      */
-    public GetPlaylistGeneratorItemsMetadata withSummary(Object summary) {
+    public GetPlaylistGeneratorItemsMetadata withSummary(String summary) {
         Utils.checkNotNull(summary, "summary");
         this.summary = Optional.ofNullable(summary);
         return this;
@@ -2315,7 +2394,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the extended textual information about the item (e.g. movie plot, artist biography, album review).
      */
-    public GetPlaylistGeneratorItemsMetadata withSummary(Optional<? extends Object> summary) {
+    public GetPlaylistGeneratorItemsMetadata withSummary(Optional<String> summary) {
         Utils.checkNotNull(summary, "summary");
         this.summary = summary;
         return this;
@@ -2324,7 +2403,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, a pithy one-liner about the item (usually only seen for movies).
      */
-    public GetPlaylistGeneratorItemsMetadata withTagline(Object tagline) {
+    public GetPlaylistGeneratorItemsMetadata withTagline(String tagline) {
         Utils.checkNotNull(tagline, "tagline");
         this.tagline = Optional.ofNullable(tagline);
         return this;
@@ -2334,7 +2413,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, a pithy one-liner about the item (usually only seen for movies).
      */
-    public GetPlaylistGeneratorItemsMetadata withTagline(Optional<? extends Object> tagline) {
+    public GetPlaylistGeneratorItemsMetadata withTagline(Optional<String> tagline) {
         Utils.checkNotNull(tagline, "tagline");
         this.tagline = tagline;
         return this;
@@ -2343,7 +2422,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the URL for theme music for the item (usually only for TV shows).
      */
-    public GetPlaylistGeneratorItemsMetadata withTheme(Object theme) {
+    public GetPlaylistGeneratorItemsMetadata withTheme(String theme) {
         Utils.checkNotNull(theme, "theme");
         this.theme = Optional.ofNullable(theme);
         return this;
@@ -2353,7 +2432,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the URL for theme music for the item (usually only for TV shows).
      */
-    public GetPlaylistGeneratorItemsMetadata withTheme(Optional<? extends Object> theme) {
+    public GetPlaylistGeneratorItemsMetadata withTheme(Optional<String> theme) {
         Utils.checkNotNull(theme, "theme");
         this.theme = theme;
         return this;
@@ -2362,7 +2441,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the URL for the poster or thumbnail for the item. When available for types like movie, it will be the poster graphic, but fall-back to the extracted media thumbnail.
      */
-    public GetPlaylistGeneratorItemsMetadata withThumb(Object thumb) {
+    public GetPlaylistGeneratorItemsMetadata withThumb(String thumb) {
         Utils.checkNotNull(thumb, "thumb");
         this.thumb = Optional.ofNullable(thumb);
         return this;
@@ -2372,7 +2451,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the URL for the poster or thumbnail for the item. When available for types like movie, it will be the poster graphic, but fall-back to the extracted media thumbnail.
      */
-    public GetPlaylistGeneratorItemsMetadata withThumb(Optional<? extends Object> thumb) {
+    public GetPlaylistGeneratorItemsMetadata withThumb(Optional<String> thumb) {
         Utils.checkNotNull(thumb, "thumb");
         this.thumb = thumb;
         return this;
@@ -2381,7 +2460,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * Whene present, this is the string used for sorting the item. It's usually the title with any leading articles removed (e.g. “Simpsons”).
      */
-    public GetPlaylistGeneratorItemsMetadata withTitleSort(Object titleSort) {
+    public GetPlaylistGeneratorItemsMetadata withTitleSort(String titleSort) {
         Utils.checkNotNull(titleSort, "titleSort");
         this.titleSort = Optional.ofNullable(titleSort);
         return this;
@@ -2391,7 +2470,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * Whene present, this is the string used for sorting the item. It's usually the title with any leading articles removed (e.g. “Simpsons”).
      */
-    public GetPlaylistGeneratorItemsMetadata withTitleSort(Optional<? extends Object> titleSort) {
+    public GetPlaylistGeneratorItemsMetadata withTitleSort(Optional<String> titleSort) {
         Utils.checkNotNull(titleSort, "titleSort");
         this.titleSort = titleSort;
         return this;
@@ -2419,7 +2498,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When the user has rated an item, this contains the user rating
      */
-    public GetPlaylistGeneratorItemsMetadata withUserRating(double userRating) {
+    public GetPlaylistGeneratorItemsMetadata withUserRating(float userRating) {
         Utils.checkNotNull(userRating, "userRating");
         this.userRating = Optional.ofNullable(userRating);
         return this;
@@ -2429,7 +2508,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When the user has rated an item, this contains the user rating
      */
-    public GetPlaylistGeneratorItemsMetadata withUserRating(Optional<Double> userRating) {
+    public GetPlaylistGeneratorItemsMetadata withUserRating(Optional<Float> userRating) {
         Utils.checkNotNull(userRating, "userRating");
         this.userRating = userRating;
         return this;
@@ -2438,7 +2517,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When a users has completed watched or listened to an item, this attribute contains the number of consumptions.
      */
-    public GetPlaylistGeneratorItemsMetadata withViewCount(long viewCount) {
+    public GetPlaylistGeneratorItemsMetadata withViewCount(int viewCount) {
         Utils.checkNotNull(viewCount, "viewCount");
         this.viewCount = Optional.ofNullable(viewCount);
         return this;
@@ -2448,7 +2527,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When a users has completed watched or listened to an item, this attribute contains the number of consumptions.
      */
-    public GetPlaylistGeneratorItemsMetadata withViewCount(Optional<Long> viewCount) {
+    public GetPlaylistGeneratorItemsMetadata withViewCount(Optional<Integer> viewCount) {
         Utils.checkNotNull(viewCount, "viewCount");
         this.viewCount = viewCount;
         return this;
@@ -2457,7 +2536,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * For shows and seasons, contains the number of viewed episodes.
      */
-    public GetPlaylistGeneratorItemsMetadata withViewedLeafCount(long viewedLeafCount) {
+    public GetPlaylistGeneratorItemsMetadata withViewedLeafCount(int viewedLeafCount) {
         Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
         this.viewedLeafCount = Optional.ofNullable(viewedLeafCount);
         return this;
@@ -2467,7 +2546,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * For shows and seasons, contains the number of viewed episodes.
      */
-    public GetPlaylistGeneratorItemsMetadata withViewedLeafCount(Optional<Long> viewedLeafCount) {
+    public GetPlaylistGeneratorItemsMetadata withViewedLeafCount(Optional<Integer> viewedLeafCount) {
         Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
         this.viewedLeafCount = viewedLeafCount;
         return this;
@@ -2476,7 +2555,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When a user is in the process of viewing or listening to this item, this attribute contains the current offset, in units of milliseconds.
      */
-    public GetPlaylistGeneratorItemsMetadata withViewOffset(long viewOffset) {
+    public GetPlaylistGeneratorItemsMetadata withViewOffset(int viewOffset) {
         Utils.checkNotNull(viewOffset, "viewOffset");
         this.viewOffset = Optional.ofNullable(viewOffset);
         return this;
@@ -2486,7 +2565,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When a user is in the process of viewing or listening to this item, this attribute contains the current offset, in units of milliseconds.
      */
-    public GetPlaylistGeneratorItemsMetadata withViewOffset(Optional<Long> viewOffset) {
+    public GetPlaylistGeneratorItemsMetadata withViewOffset(Optional<Integer> viewOffset) {
         Utils.checkNotNull(viewOffset, "viewOffset");
         this.viewOffset = viewOffset;
         return this;
@@ -2508,7 +2587,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the year associated with the item's release (e.g. release year for a movie).
      */
-    public GetPlaylistGeneratorItemsMetadata withYear(long year) {
+    public GetPlaylistGeneratorItemsMetadata withYear(int year) {
         Utils.checkNotNull(year, "year");
         this.year = Optional.ofNullable(year);
         return this;
@@ -2518,7 +2597,7 @@ public class GetPlaylistGeneratorItemsMetadata {
     /**
      * When present, the year associated with the item's release (e.g. release year for a movie).
      */
-    public GetPlaylistGeneratorItemsMetadata withYear(Optional<Long> year) {
+    public GetPlaylistGeneratorItemsMetadata withYear(Optional<Integer> year) {
         Utils.checkNotNull(year, "year");
         this.year = year;
         return this;
@@ -2595,6 +2674,7 @@ public class GetPlaylistGeneratorItemsMetadata {
             Utils.enhancedDeepEquals(this.autotag, other.autotag) &&
             Utils.enhancedDeepEquals(this.banner, other.banner) &&
             Utils.enhancedDeepEquals(this.chapterSource, other.chapterSource) &&
+            Utils.enhancedDeepEquals(this.childCount, other.childCount) &&
             Utils.enhancedDeepEquals(this.composite, other.composite) &&
             Utils.enhancedDeepEquals(this.contentRating, other.contentRating) &&
             Utils.enhancedDeepEquals(this.country, other.country) &&
@@ -2603,6 +2683,7 @@ public class GetPlaylistGeneratorItemsMetadata {
             Utils.enhancedDeepEquals(this.filter, other.filter) &&
             Utils.enhancedDeepEquals(this.genre, other.genre) &&
             Utils.enhancedDeepEquals(this.grandparentArt, other.grandparentArt) &&
+            Utils.enhancedDeepEquals(this.grandparentGuid, other.grandparentGuid) &&
             Utils.enhancedDeepEquals(this.grandparentHero, other.grandparentHero) &&
             Utils.enhancedDeepEquals(this.grandparentKey, other.grandparentKey) &&
             Utils.enhancedDeepEquals(this.grandparentRatingKey, other.grandparentRatingKey) &&
@@ -2610,6 +2691,7 @@ public class GetPlaylistGeneratorItemsMetadata {
             Utils.enhancedDeepEquals(this.grandparentThumb, other.grandparentThumb) &&
             Utils.enhancedDeepEquals(this.grandparentTitle, other.grandparentTitle) &&
             Utils.enhancedDeepEquals(this.guid, other.guid) &&
+            Utils.enhancedDeepEquals(this.guids, other.guids) &&
             Utils.enhancedDeepEquals(this.hero, other.hero) &&
             Utils.enhancedDeepEquals(this.image, other.image) &&
             Utils.enhancedDeepEquals(this.index, other.index) &&
@@ -2619,6 +2701,7 @@ public class GetPlaylistGeneratorItemsMetadata {
             Utils.enhancedDeepEquals(this.media, other.media) &&
             Utils.enhancedDeepEquals(this.originallyAvailableAt, other.originallyAvailableAt) &&
             Utils.enhancedDeepEquals(this.originalTitle, other.originalTitle) &&
+            Utils.enhancedDeepEquals(this.parentGuid, other.parentGuid) &&
             Utils.enhancedDeepEquals(this.parentHero, other.parentHero) &&
             Utils.enhancedDeepEquals(this.parentIndex, other.parentIndex) &&
             Utils.enhancedDeepEquals(this.parentKey, other.parentKey) &&
@@ -2663,27 +2746,28 @@ public class GetPlaylistGeneratorItemsMetadata {
             title, type, absoluteIndex,
             addedAt, art, audienceRating,
             audienceRatingImage, autotag, banner,
-            chapterSource, composite, contentRating,
-            country, director, duration,
-            filter, genre, grandparentArt,
-            grandparentHero, grandparentKey, grandparentRatingKey,
-            grandparentTheme, grandparentThumb, grandparentTitle,
-            guid, hero, image,
+            chapterSource, childCount, composite,
+            contentRating, country, director,
+            duration, filter, genre,
+            grandparentArt, grandparentGuid, grandparentHero,
+            grandparentKey, grandparentRatingKey, grandparentTheme,
+            grandparentThumb, grandparentTitle, guid,
+            guids, hero, image,
             index, key, lastViewedAt,
             leafCount, media, originallyAvailableAt,
-            originalTitle, parentHero, parentIndex,
-            parentKey, parentRatingKey, parentThumb,
-            parentTitle, primaryExtraKey, prompt,
-            rating, ratingArray, ratingCount,
-            ratingImage, ratingKey, role,
-            search, secondary, skipChildren,
-            skipParent, sort, studio,
-            subtype, summary, tagline,
-            theme, thumb, titleSort,
-            updatedAt, userRating, viewCount,
-            viewedLeafCount, viewOffset, writer,
-            year, processingState, processingStateContext,
-            additionalProperties);
+            originalTitle, parentGuid, parentHero,
+            parentIndex, parentKey, parentRatingKey,
+            parentThumb, parentTitle, primaryExtraKey,
+            prompt, rating, ratingArray,
+            ratingCount, ratingImage, ratingKey,
+            role, search, secondary,
+            skipChildren, skipParent, sort,
+            studio, subtype, summary,
+            tagline, theme, thumb,
+            titleSort, updatedAt, userRating,
+            viewCount, viewedLeafCount, viewOffset,
+            writer, year, processingState,
+            processingStateContext, additionalProperties);
     }
     
     @Override
@@ -2699,6 +2783,7 @@ public class GetPlaylistGeneratorItemsMetadata {
                 "autotag", autotag,
                 "banner", banner,
                 "chapterSource", chapterSource,
+                "childCount", childCount,
                 "composite", composite,
                 "contentRating", contentRating,
                 "country", country,
@@ -2707,6 +2792,7 @@ public class GetPlaylistGeneratorItemsMetadata {
                 "filter", filter,
                 "genre", genre,
                 "grandparentArt", grandparentArt,
+                "grandparentGuid", grandparentGuid,
                 "grandparentHero", grandparentHero,
                 "grandparentKey", grandparentKey,
                 "grandparentRatingKey", grandparentRatingKey,
@@ -2714,6 +2800,7 @@ public class GetPlaylistGeneratorItemsMetadata {
                 "grandparentThumb", grandparentThumb,
                 "grandparentTitle", grandparentTitle,
                 "guid", guid,
+                "guids", guids,
                 "hero", hero,
                 "image", image,
                 "index", index,
@@ -2723,6 +2810,7 @@ public class GetPlaylistGeneratorItemsMetadata {
                 "media", media,
                 "originallyAvailableAt", originallyAvailableAt,
                 "originalTitle", originalTitle,
+                "parentGuid", parentGuid,
                 "parentHero", parentHero,
                 "parentIndex", parentIndex,
                 "parentKey", parentKey,
@@ -2764,41 +2852,45 @@ public class GetPlaylistGeneratorItemsMetadata {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends Object> title = Optional.empty();
+        private String title;
 
-        private Optional<? extends Object> type = Optional.empty();
+        private String type;
 
-        private Optional<Long> absoluteIndex = Optional.empty();
+        private Optional<Integer> absoluteIndex = Optional.empty();
 
-        private Optional<Long> addedAt = Optional.empty();
+        private Long addedAt;
 
-        private Optional<? extends Object> art = Optional.empty();
+        private Optional<String> art = Optional.empty();
 
-        private Optional<Double> audienceRating = Optional.empty();
+        private Optional<Float> audienceRating = Optional.empty();
 
-        private Optional<? extends Object> audienceRatingImage = Optional.empty();
+        private Optional<String> audienceRatingImage = Optional.empty();
 
         private Optional<? extends List<Tag>> autotag = Optional.empty();
 
-        private Optional<? extends Object> banner = Optional.empty();
+        private Optional<String> banner = Optional.empty();
 
-        private Optional<? extends Object> chapterSource = Optional.empty();
+        private Optional<String> chapterSource = Optional.empty();
 
-        private Optional<? extends Object> composite = Optional.empty();
+        private Optional<Integer> childCount = Optional.empty();
 
-        private Optional<? extends Object> contentRating = Optional.empty();
+        private Optional<String> composite = Optional.empty();
+
+        private Optional<String> contentRating = Optional.empty();
 
         private Optional<? extends List<Tag>> country = Optional.empty();
 
         private Optional<? extends List<Tag>> director = Optional.empty();
 
-        private Optional<Long> duration = Optional.empty();
+        private Optional<Integer> duration = Optional.empty();
 
         private Optional<? extends List<Filter>> filter = Optional.empty();
 
         private Optional<? extends List<Tag>> genre = Optional.empty();
 
         private Optional<String> grandparentArt = Optional.empty();
+
+        private Optional<String> grandparentGuid = Optional.empty();
 
         private Optional<String> grandparentHero = Optional.empty();
 
@@ -2812,29 +2904,33 @@ public class GetPlaylistGeneratorItemsMetadata {
 
         private Optional<String> grandparentTitle = Optional.empty();
 
-        private Optional<? extends List<Tag>> guid = Optional.empty();
+        private Optional<String> guid = Optional.empty();
 
-        private Optional<? extends Object> hero = Optional.empty();
+        private Optional<? extends List<GetPlaylistGeneratorItemsGuids>> guids = Optional.empty();
+
+        private Optional<String> hero = Optional.empty();
 
         private Optional<? extends List<Image>> image = Optional.empty();
 
-        private Optional<Long> index = Optional.empty();
+        private Optional<Integer> index = Optional.empty();
 
-        private Optional<? extends Object> key = Optional.empty();
+        private String key;
 
         private Optional<Long> lastViewedAt = Optional.empty();
 
-        private Optional<Long> leafCount = Optional.empty();
+        private Optional<Integer> leafCount = Optional.empty();
 
         private Optional<? extends List<Media>> media = Optional.empty();
 
-        private Optional<? extends Object> originallyAvailableAt = Optional.empty();
+        private Optional<LocalDate> originallyAvailableAt = Optional.empty();
 
-        private Optional<? extends Object> originalTitle = Optional.empty();
+        private Optional<String> originalTitle = Optional.empty();
+
+        private Optional<String> parentGuid = Optional.empty();
 
         private Optional<String> parentHero = Optional.empty();
 
-        private Optional<Long> parentIndex = Optional.empty();
+        private Optional<Integer> parentIndex = Optional.empty();
 
         private Optional<String> parentKey = Optional.empty();
 
@@ -2844,19 +2940,19 @@ public class GetPlaylistGeneratorItemsMetadata {
 
         private Optional<String> parentTitle = Optional.empty();
 
-        private Optional<? extends Object> primaryExtraKey = Optional.empty();
+        private Optional<String> primaryExtraKey = Optional.empty();
 
         private Optional<String> prompt = Optional.empty();
 
-        private Optional<Double> rating = Optional.empty();
+        private Optional<Float> rating = Optional.empty();
 
         private Optional<? extends List<Tag>> ratingArray = Optional.empty();
 
-        private Optional<Long> ratingCount = Optional.empty();
+        private Optional<Integer> ratingCount = Optional.empty();
 
-        private Optional<? extends Object> ratingImage = Optional.empty();
+        private Optional<String> ratingImage = Optional.empty();
 
-        private Optional<? extends Object> ratingKey = Optional.empty();
+        private Optional<String> ratingKey = Optional.empty();
 
         private Optional<? extends List<Tag>> role = Optional.empty();
 
@@ -2870,33 +2966,33 @@ public class GetPlaylistGeneratorItemsMetadata {
 
         private Optional<? extends List<Sort>> sort = Optional.empty();
 
-        private Optional<? extends Object> studio = Optional.empty();
+        private Optional<String> studio = Optional.empty();
 
-        private Optional<? extends Object> subtype = Optional.empty();
+        private Optional<String> subtype = Optional.empty();
 
-        private Optional<? extends Object> summary = Optional.empty();
+        private Optional<String> summary = Optional.empty();
 
-        private Optional<? extends Object> tagline = Optional.empty();
+        private Optional<String> tagline = Optional.empty();
 
-        private Optional<? extends Object> theme = Optional.empty();
+        private Optional<String> theme = Optional.empty();
 
-        private Optional<? extends Object> thumb = Optional.empty();
+        private Optional<String> thumb = Optional.empty();
 
-        private Optional<? extends Object> titleSort = Optional.empty();
+        private Optional<String> titleSort = Optional.empty();
 
         private Optional<Long> updatedAt = Optional.empty();
 
-        private Optional<Double> userRating = Optional.empty();
+        private Optional<Float> userRating = Optional.empty();
 
-        private Optional<Long> viewCount = Optional.empty();
+        private Optional<Integer> viewCount = Optional.empty();
 
-        private Optional<Long> viewedLeafCount = Optional.empty();
+        private Optional<Integer> viewedLeafCount = Optional.empty();
 
-        private Optional<Long> viewOffset = Optional.empty();
+        private Optional<Integer> viewOffset = Optional.empty();
 
         private Optional<? extends List<Tag>> writer = Optional.empty();
 
-        private Optional<Long> year = Optional.empty();
+        private Optional<Integer> year = Optional.empty();
 
         private Optional<? extends ProcessingState> processingState = Optional.empty();
 
@@ -2912,16 +3008,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * The title of the item (e.g. “300” or “The Simpsons”)
          */
-        public Builder title(Object title) {
-            Utils.checkNotNull(title, "title");
-            this.title = Optional.ofNullable(title);
-            return this;
-        }
-
-        /**
-         * The title of the item (e.g. “300” or “The Simpsons”)
-         */
-        public Builder title(Optional<? extends Object> title) {
+        public Builder title(String title) {
             Utils.checkNotNull(title, "title");
             this.title = title;
             return this;
@@ -2931,16 +3018,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * The type of the video item, such as `movie`, `episode`, or `clip`.
          */
-        public Builder type(Object type) {
-            Utils.checkNotNull(type, "type");
-            this.type = Optional.ofNullable(type);
-            return this;
-        }
-
-        /**
-         * The type of the video item, such as `movie`, `episode`, or `clip`.
-         */
-        public Builder type(Optional<? extends Object> type) {
+        public Builder type(String type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;
@@ -2950,7 +3028,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, contains the disc number for a track on multi-disc albums.
          */
-        public Builder absoluteIndex(long absoluteIndex) {
+        public Builder absoluteIndex(int absoluteIndex) {
             Utils.checkNotNull(absoluteIndex, "absoluteIndex");
             this.absoluteIndex = Optional.ofNullable(absoluteIndex);
             return this;
@@ -2959,7 +3037,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, contains the disc number for a track on multi-disc albums.
          */
-        public Builder absoluteIndex(Optional<Long> absoluteIndex) {
+        public Builder absoluteIndex(Optional<Integer> absoluteIndex) {
             Utils.checkNotNull(absoluteIndex, "absoluteIndex");
             this.absoluteIndex = absoluteIndex;
             return this;
@@ -2971,15 +3049,6 @@ public class GetPlaylistGeneratorItemsMetadata {
          */
         public Builder addedAt(long addedAt) {
             Utils.checkNotNull(addedAt, "addedAt");
-            this.addedAt = Optional.ofNullable(addedAt);
-            return this;
-        }
-
-        /**
-         * In units of seconds since the epoch, returns the time at which the item was added to the library.
-         */
-        public Builder addedAt(Optional<Long> addedAt) {
-            Utils.checkNotNull(addedAt, "addedAt");
             this.addedAt = addedAt;
             return this;
         }
@@ -2988,7 +3057,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the URL for the background artwork for the item.
          */
-        public Builder art(Object art) {
+        public Builder art(String art) {
             Utils.checkNotNull(art, "art");
             this.art = Optional.ofNullable(art);
             return this;
@@ -2997,7 +3066,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the URL for the background artwork for the item.
          */
-        public Builder art(Optional<? extends Object> art) {
+        public Builder art(Optional<String> art) {
             Utils.checkNotNull(art, "art");
             this.art = art;
             return this;
@@ -3007,7 +3076,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * Some rating systems separate reviewer ratings from audience ratings
          */
-        public Builder audienceRating(double audienceRating) {
+        public Builder audienceRating(float audienceRating) {
             Utils.checkNotNull(audienceRating, "audienceRating");
             this.audienceRating = Optional.ofNullable(audienceRating);
             return this;
@@ -3016,7 +3085,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * Some rating systems separate reviewer ratings from audience ratings
          */
-        public Builder audienceRating(Optional<Double> audienceRating) {
+        public Builder audienceRating(Optional<Float> audienceRating) {
             Utils.checkNotNull(audienceRating, "audienceRating");
             this.audienceRating = audienceRating;
             return this;
@@ -3026,7 +3095,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * A URI representing the image to be shown with the audience rating (e.g. rottentomatoes://image.rating.spilled).
          */
-        public Builder audienceRatingImage(Object audienceRatingImage) {
+        public Builder audienceRatingImage(String audienceRatingImage) {
             Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
             this.audienceRatingImage = Optional.ofNullable(audienceRatingImage);
             return this;
@@ -3035,7 +3104,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * A URI representing the image to be shown with the audience rating (e.g. rottentomatoes://image.rating.spilled).
          */
-        public Builder audienceRatingImage(Optional<? extends Object> audienceRatingImage) {
+        public Builder audienceRatingImage(Optional<String> audienceRatingImage) {
             Utils.checkNotNull(audienceRatingImage, "audienceRatingImage");
             this.audienceRatingImage = audienceRatingImage;
             return this;
@@ -3058,7 +3127,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the URL for a banner graphic for the item.
          */
-        public Builder banner(Object banner) {
+        public Builder banner(String banner) {
             Utils.checkNotNull(banner, "banner");
             this.banner = Optional.ofNullable(banner);
             return this;
@@ -3067,7 +3136,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the URL for a banner graphic for the item.
          */
-        public Builder banner(Optional<? extends Object> banner) {
+        public Builder banner(Optional<String> banner) {
             Utils.checkNotNull(banner, "banner");
             this.banner = banner;
             return this;
@@ -3077,7 +3146,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, indicates the source for the chapters in the media file. Can be media (the chapters were embedded in the media itself), agent (a metadata agent computed them), or mixed (a combination of the two).
          */
-        public Builder chapterSource(Object chapterSource) {
+        public Builder chapterSource(String chapterSource) {
             Utils.checkNotNull(chapterSource, "chapterSource");
             this.chapterSource = Optional.ofNullable(chapterSource);
             return this;
@@ -3086,7 +3155,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, indicates the source for the chapters in the media file. Can be media (the chapters were embedded in the media itself), agent (a metadata agent computed them), or mixed (a combination of the two).
          */
-        public Builder chapterSource(Optional<? extends Object> chapterSource) {
+        public Builder chapterSource(Optional<String> chapterSource) {
             Utils.checkNotNull(chapterSource, "chapterSource");
             this.chapterSource = chapterSource;
             return this;
@@ -3094,9 +3163,28 @@ public class GetPlaylistGeneratorItemsMetadata {
 
 
         /**
+         * The number of child items associated with this media item.
+         */
+        public Builder childCount(int childCount) {
+            Utils.checkNotNull(childCount, "childCount");
+            this.childCount = Optional.ofNullable(childCount);
+            return this;
+        }
+
+        /**
+         * The number of child items associated with this media item.
+         */
+        public Builder childCount(Optional<Integer> childCount) {
+            Utils.checkNotNull(childCount, "childCount");
+            this.childCount = childCount;
+            return this;
+        }
+
+
+        /**
          * When present, the URL for a composite image for descendent items (e.g. photo albums or playlists).
          */
-        public Builder composite(Object composite) {
+        public Builder composite(String composite) {
             Utils.checkNotNull(composite, "composite");
             this.composite = Optional.ofNullable(composite);
             return this;
@@ -3105,7 +3193,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the URL for a composite image for descendent items (e.g. photo albums or playlists).
          */
-        public Builder composite(Optional<? extends Object> composite) {
+        public Builder composite(Optional<String> composite) {
             Utils.checkNotNull(composite, "composite");
             this.composite = composite;
             return this;
@@ -3115,7 +3203,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * If known, the content rating (e.g. MPAA) for an item.
          */
-        public Builder contentRating(Object contentRating) {
+        public Builder contentRating(String contentRating) {
             Utils.checkNotNull(contentRating, "contentRating");
             this.contentRating = Optional.ofNullable(contentRating);
             return this;
@@ -3124,7 +3212,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * If known, the content rating (e.g. MPAA) for an item.
          */
-        public Builder contentRating(Optional<? extends Object> contentRating) {
+        public Builder contentRating(Optional<String> contentRating) {
             Utils.checkNotNull(contentRating, "contentRating");
             this.contentRating = contentRating;
             return this;
@@ -3160,7 +3248,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the duration for the item, in units of milliseconds.
          */
-        public Builder duration(long duration) {
+        public Builder duration(int duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = Optional.ofNullable(duration);
             return this;
@@ -3169,7 +3257,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the duration for the item, in units of milliseconds.
          */
-        public Builder duration(Optional<Long> duration) {
+        public Builder duration(Optional<Integer> duration) {
             Utils.checkNotNull(duration, "duration");
             this.duration = duration;
             return this;
@@ -3223,6 +3311,25 @@ public class GetPlaylistGeneratorItemsMetadata {
         public Builder grandparentArt(Optional<String> grandparentArt) {
             Utils.checkNotNull(grandparentArt, "grandparentArt");
             this.grandparentArt = grandparentArt;
+            return this;
+        }
+
+
+        /**
+         * The GUID of the grandparent media item.
+         */
+        public Builder grandparentGuid(String grandparentGuid) {
+            Utils.checkNotNull(grandparentGuid, "grandparentGuid");
+            this.grandparentGuid = Optional.ofNullable(grandparentGuid);
+            return this;
+        }
+
+        /**
+         * The GUID of the grandparent media item.
+         */
+        public Builder grandparentGuid(Optional<String> grandparentGuid) {
+            Utils.checkNotNull(grandparentGuid, "grandparentGuid");
+            this.grandparentGuid = grandparentGuid;
             return this;
         }
 
@@ -3341,15 +3448,34 @@ public class GetPlaylistGeneratorItemsMetadata {
         }
 
 
-        public Builder guid(List<Tag> guid) {
+        /**
+         * The globally unique identifier for the media item.
+         */
+        public Builder guid(String guid) {
             Utils.checkNotNull(guid, "guid");
             this.guid = Optional.ofNullable(guid);
             return this;
         }
 
-        public Builder guid(Optional<? extends List<Tag>> guid) {
+        /**
+         * The globally unique identifier for the media item.
+         */
+        public Builder guid(Optional<String> guid) {
             Utils.checkNotNull(guid, "guid");
             this.guid = guid;
+            return this;
+        }
+
+
+        public Builder guids(List<GetPlaylistGeneratorItemsGuids> guids) {
+            Utils.checkNotNull(guids, "guids");
+            this.guids = Optional.ofNullable(guids);
+            return this;
+        }
+
+        public Builder guids(Optional<? extends List<GetPlaylistGeneratorItemsGuids>> guids) {
+            Utils.checkNotNull(guids, "guids");
+            this.guids = guids;
             return this;
         }
 
@@ -3357,7 +3483,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the URL for a hero image for the item.
          */
-        public Builder hero(Object hero) {
+        public Builder hero(String hero) {
             Utils.checkNotNull(hero, "hero");
             this.hero = Optional.ofNullable(hero);
             return this;
@@ -3366,7 +3492,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the URL for a hero image for the item.
          */
-        public Builder hero(Optional<? extends Object> hero) {
+        public Builder hero(Optional<String> hero) {
             Utils.checkNotNull(hero, "hero");
             this.hero = hero;
             return this;
@@ -3389,7 +3515,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, this represents the episode number for episodes, season number for seasons, or track number for audio tracks.
          */
-        public Builder index(long index) {
+        public Builder index(int index) {
             Utils.checkNotNull(index, "index");
             this.index = Optional.ofNullable(index);
             return this;
@@ -3398,7 +3524,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, this represents the episode number for episodes, season number for seasons, or track number for audio tracks.
          */
-        public Builder index(Optional<Long> index) {
+        public Builder index(Optional<Integer> index) {
             Utils.checkNotNull(index, "index");
             this.index = index;
             return this;
@@ -3408,34 +3534,19 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * The key at which the item's details can be fetched.  In many cases a metadata item may be passed without all the details (such as in a hub) and this key corresponds to the endpoint to fetch additional details.
          */
-        public Builder key(Object key) {
-            Utils.checkNotNull(key, "key");
-            this.key = Optional.ofNullable(key);
-            return this;
-        }
-
-        /**
-         * The key at which the item's details can be fetched.  In many cases a metadata item may be passed without all the details (such as in a hub) and this key corresponds to the endpoint to fetch additional details.
-         */
-        public Builder key(Optional<? extends Object> key) {
+        public Builder key(String key) {
             Utils.checkNotNull(key, "key");
             this.key = key;
             return this;
         }
 
 
-        /**
-         * When a user has watched or listened to an item, this contains a timestamp (epoch seconds) for that last consumption time.
-         */
         public Builder lastViewedAt(long lastViewedAt) {
             Utils.checkNotNull(lastViewedAt, "lastViewedAt");
             this.lastViewedAt = Optional.ofNullable(lastViewedAt);
             return this;
         }
 
-        /**
-         * When a user has watched or listened to an item, this contains a timestamp (epoch seconds) for that last consumption time.
-         */
         public Builder lastViewedAt(Optional<Long> lastViewedAt) {
             Utils.checkNotNull(lastViewedAt, "lastViewedAt");
             this.lastViewedAt = lastViewedAt;
@@ -3446,7 +3557,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * For shows and seasons, contains the number of total episodes.
          */
-        public Builder leafCount(long leafCount) {
+        public Builder leafCount(int leafCount) {
             Utils.checkNotNull(leafCount, "leafCount");
             this.leafCount = Optional.ofNullable(leafCount);
             return this;
@@ -3455,7 +3566,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * For shows and seasons, contains the number of total episodes.
          */
-        public Builder leafCount(Optional<Long> leafCount) {
+        public Builder leafCount(Optional<Integer> leafCount) {
             Utils.checkNotNull(leafCount, "leafCount");
             this.leafCount = leafCount;
             return this;
@@ -3478,7 +3589,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, in the format YYYY-MM-DD [HH:MM:SS] (the hours/minutes/seconds part is not always present). The air date, or a higher resolution release date for an item, depending on type. For example, episodes usually have air date like 1979-08-10 (we don't use epoch seconds because media existed prior to 1970). In some cases, recorded over-the-air content has higher resolution air date which includes a time component. Albums and movies may have day-resolution release dates as well.
          */
-        public Builder originallyAvailableAt(Object originallyAvailableAt) {
+        public Builder originallyAvailableAt(LocalDate originallyAvailableAt) {
             Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
             this.originallyAvailableAt = Optional.ofNullable(originallyAvailableAt);
             return this;
@@ -3487,7 +3598,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, in the format YYYY-MM-DD [HH:MM:SS] (the hours/minutes/seconds part is not always present). The air date, or a higher resolution release date for an item, depending on type. For example, episodes usually have air date like 1979-08-10 (we don't use epoch seconds because media existed prior to 1970). In some cases, recorded over-the-air content has higher resolution air date which includes a time component. Albums and movies may have day-resolution release dates as well.
          */
-        public Builder originallyAvailableAt(Optional<? extends Object> originallyAvailableAt) {
+        public Builder originallyAvailableAt(Optional<LocalDate> originallyAvailableAt) {
             Utils.checkNotNull(originallyAvailableAt, "originallyAvailableAt");
             this.originallyAvailableAt = originallyAvailableAt;
             return this;
@@ -3497,7 +3608,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, used to indicate an item's original title, e.g. a movie's foreign title.
          */
-        public Builder originalTitle(Object originalTitle) {
+        public Builder originalTitle(String originalTitle) {
             Utils.checkNotNull(originalTitle, "originalTitle");
             this.originalTitle = Optional.ofNullable(originalTitle);
             return this;
@@ -3506,9 +3617,28 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, used to indicate an item's original title, e.g. a movie's foreign title.
          */
-        public Builder originalTitle(Optional<? extends Object> originalTitle) {
+        public Builder originalTitle(Optional<String> originalTitle) {
             Utils.checkNotNull(originalTitle, "originalTitle");
             this.originalTitle = originalTitle;
+            return this;
+        }
+
+
+        /**
+         * The GUID of the parent media item.
+         */
+        public Builder parentGuid(String parentGuid) {
+            Utils.checkNotNull(parentGuid, "parentGuid");
+            this.parentGuid = Optional.ofNullable(parentGuid);
+            return this;
+        }
+
+        /**
+         * The GUID of the parent media item.
+         */
+        public Builder parentGuid(Optional<String> parentGuid) {
+            Utils.checkNotNull(parentGuid, "parentGuid");
+            this.parentGuid = parentGuid;
             return this;
         }
 
@@ -3535,7 +3665,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * The `index` of the parent
          */
-        public Builder parentIndex(long parentIndex) {
+        public Builder parentIndex(int parentIndex) {
             Utils.checkNotNull(parentIndex, "parentIndex");
             this.parentIndex = Optional.ofNullable(parentIndex);
             return this;
@@ -3544,7 +3674,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * The `index` of the parent
          */
-        public Builder parentIndex(Optional<Long> parentIndex) {
+        public Builder parentIndex(Optional<Integer> parentIndex) {
             Utils.checkNotNull(parentIndex, "parentIndex");
             this.parentIndex = parentIndex;
             return this;
@@ -3630,7 +3760,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * Indicates that the item has a primary extra; for a movie, this is a trailer, and for a music track it is a music video. The URL points to the metadata details endpoint for the item.
          */
-        public Builder primaryExtraKey(Object primaryExtraKey) {
+        public Builder primaryExtraKey(String primaryExtraKey) {
             Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
             this.primaryExtraKey = Optional.ofNullable(primaryExtraKey);
             return this;
@@ -3639,7 +3769,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * Indicates that the item has a primary extra; for a movie, this is a trailer, and for a music track it is a music video. The URL points to the metadata details endpoint for the item.
          */
-        public Builder primaryExtraKey(Optional<? extends Object> primaryExtraKey) {
+        public Builder primaryExtraKey(Optional<String> primaryExtraKey) {
             Utils.checkNotNull(primaryExtraKey, "primaryExtraKey");
             this.primaryExtraKey = primaryExtraKey;
             return this;
@@ -3668,7 +3798,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the rating for the item. The exact meaning and representation depends on where the rating was sourced from.
          */
-        public Builder rating(double rating) {
+        public Builder rating(float rating) {
             Utils.checkNotNull(rating, "rating");
             this.rating = Optional.ofNullable(rating);
             return this;
@@ -3677,7 +3807,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the rating for the item. The exact meaning and representation depends on where the rating was sourced from.
          */
-        public Builder rating(Optional<Double> rating) {
+        public Builder rating(Optional<Float> rating) {
             Utils.checkNotNull(rating, "rating");
             this.rating = rating;
             return this;
@@ -3700,7 +3830,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * Number of ratings under this metadata
          */
-        public Builder ratingCount(long ratingCount) {
+        public Builder ratingCount(int ratingCount) {
             Utils.checkNotNull(ratingCount, "ratingCount");
             this.ratingCount = Optional.ofNullable(ratingCount);
             return this;
@@ -3709,7 +3839,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * Number of ratings under this metadata
          */
-        public Builder ratingCount(Optional<Long> ratingCount) {
+        public Builder ratingCount(Optional<Integer> ratingCount) {
             Utils.checkNotNull(ratingCount, "ratingCount");
             this.ratingCount = ratingCount;
             return this;
@@ -3719,7 +3849,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, indicates an image to be shown with the rating. This is passed back as a small set of defined URI values, e.g. rottentomatoes://image.rating.rotten.
          */
-        public Builder ratingImage(Object ratingImage) {
+        public Builder ratingImage(String ratingImage) {
             Utils.checkNotNull(ratingImage, "ratingImage");
             this.ratingImage = Optional.ofNullable(ratingImage);
             return this;
@@ -3728,7 +3858,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, indicates an image to be shown with the rating. This is passed back as a small set of defined URI values, e.g. rottentomatoes://image.rating.rotten.
          */
-        public Builder ratingImage(Optional<? extends Object> ratingImage) {
+        public Builder ratingImage(Optional<String> ratingImage) {
             Utils.checkNotNull(ratingImage, "ratingImage");
             this.ratingImage = ratingImage;
             return this;
@@ -3738,7 +3868,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * This is the opaque string to be passed into timeline, scrobble, and rating endpoints to identify them.  While it often appears to be numeric, this is not guaranteed.
          */
-        public Builder ratingKey(Object ratingKey) {
+        public Builder ratingKey(String ratingKey) {
             Utils.checkNotNull(ratingKey, "ratingKey");
             this.ratingKey = Optional.ofNullable(ratingKey);
             return this;
@@ -3747,7 +3877,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * This is the opaque string to be passed into timeline, scrobble, and rating endpoints to identify them.  While it often appears to be numeric, this is not guaranteed.
          */
-        public Builder ratingKey(Optional<? extends Object> ratingKey) {
+        public Builder ratingKey(Optional<String> ratingKey) {
             Utils.checkNotNull(ratingKey, "ratingKey");
             this.ratingKey = ratingKey;
             return this;
@@ -3865,7 +3995,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the studio or label which produced an item (e.g. movie studio for movies, record label for albums).
          */
-        public Builder studio(Object studio) {
+        public Builder studio(String studio) {
             Utils.checkNotNull(studio, "studio");
             this.studio = Optional.ofNullable(studio);
             return this;
@@ -3874,7 +4004,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the studio or label which produced an item (e.g. movie studio for movies, record label for albums).
          */
-        public Builder studio(Optional<? extends Object> studio) {
+        public Builder studio(Optional<String> studio) {
             Utils.checkNotNull(studio, "studio");
             this.studio = studio;
             return this;
@@ -3884,7 +4014,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * The subtype of the video item, such as `photo` when the video item is in a photo library
          */
-        public Builder subtype(Object subtype) {
+        public Builder subtype(String subtype) {
             Utils.checkNotNull(subtype, "subtype");
             this.subtype = Optional.ofNullable(subtype);
             return this;
@@ -3893,7 +4023,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * The subtype of the video item, such as `photo` when the video item is in a photo library
          */
-        public Builder subtype(Optional<? extends Object> subtype) {
+        public Builder subtype(Optional<String> subtype) {
             Utils.checkNotNull(subtype, "subtype");
             this.subtype = subtype;
             return this;
@@ -3903,7 +4033,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the extended textual information about the item (e.g. movie plot, artist biography, album review).
          */
-        public Builder summary(Object summary) {
+        public Builder summary(String summary) {
             Utils.checkNotNull(summary, "summary");
             this.summary = Optional.ofNullable(summary);
             return this;
@@ -3912,7 +4042,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the extended textual information about the item (e.g. movie plot, artist biography, album review).
          */
-        public Builder summary(Optional<? extends Object> summary) {
+        public Builder summary(Optional<String> summary) {
             Utils.checkNotNull(summary, "summary");
             this.summary = summary;
             return this;
@@ -3922,7 +4052,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, a pithy one-liner about the item (usually only seen for movies).
          */
-        public Builder tagline(Object tagline) {
+        public Builder tagline(String tagline) {
             Utils.checkNotNull(tagline, "tagline");
             this.tagline = Optional.ofNullable(tagline);
             return this;
@@ -3931,7 +4061,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, a pithy one-liner about the item (usually only seen for movies).
          */
-        public Builder tagline(Optional<? extends Object> tagline) {
+        public Builder tagline(Optional<String> tagline) {
             Utils.checkNotNull(tagline, "tagline");
             this.tagline = tagline;
             return this;
@@ -3941,7 +4071,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the URL for theme music for the item (usually only for TV shows).
          */
-        public Builder theme(Object theme) {
+        public Builder theme(String theme) {
             Utils.checkNotNull(theme, "theme");
             this.theme = Optional.ofNullable(theme);
             return this;
@@ -3950,7 +4080,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the URL for theme music for the item (usually only for TV shows).
          */
-        public Builder theme(Optional<? extends Object> theme) {
+        public Builder theme(Optional<String> theme) {
             Utils.checkNotNull(theme, "theme");
             this.theme = theme;
             return this;
@@ -3960,7 +4090,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the URL for the poster or thumbnail for the item. When available for types like movie, it will be the poster graphic, but fall-back to the extracted media thumbnail.
          */
-        public Builder thumb(Object thumb) {
+        public Builder thumb(String thumb) {
             Utils.checkNotNull(thumb, "thumb");
             this.thumb = Optional.ofNullable(thumb);
             return this;
@@ -3969,7 +4099,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the URL for the poster or thumbnail for the item. When available for types like movie, it will be the poster graphic, but fall-back to the extracted media thumbnail.
          */
-        public Builder thumb(Optional<? extends Object> thumb) {
+        public Builder thumb(Optional<String> thumb) {
             Utils.checkNotNull(thumb, "thumb");
             this.thumb = thumb;
             return this;
@@ -3979,7 +4109,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * Whene present, this is the string used for sorting the item. It's usually the title with any leading articles removed (e.g. “Simpsons”).
          */
-        public Builder titleSort(Object titleSort) {
+        public Builder titleSort(String titleSort) {
             Utils.checkNotNull(titleSort, "titleSort");
             this.titleSort = Optional.ofNullable(titleSort);
             return this;
@@ -3988,7 +4118,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * Whene present, this is the string used for sorting the item. It's usually the title with any leading articles removed (e.g. “Simpsons”).
          */
-        public Builder titleSort(Optional<? extends Object> titleSort) {
+        public Builder titleSort(Optional<String> titleSort) {
             Utils.checkNotNull(titleSort, "titleSort");
             this.titleSort = titleSort;
             return this;
@@ -4017,7 +4147,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When the user has rated an item, this contains the user rating
          */
-        public Builder userRating(double userRating) {
+        public Builder userRating(float userRating) {
             Utils.checkNotNull(userRating, "userRating");
             this.userRating = Optional.ofNullable(userRating);
             return this;
@@ -4026,7 +4156,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When the user has rated an item, this contains the user rating
          */
-        public Builder userRating(Optional<Double> userRating) {
+        public Builder userRating(Optional<Float> userRating) {
             Utils.checkNotNull(userRating, "userRating");
             this.userRating = userRating;
             return this;
@@ -4036,7 +4166,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When a users has completed watched or listened to an item, this attribute contains the number of consumptions.
          */
-        public Builder viewCount(long viewCount) {
+        public Builder viewCount(int viewCount) {
             Utils.checkNotNull(viewCount, "viewCount");
             this.viewCount = Optional.ofNullable(viewCount);
             return this;
@@ -4045,7 +4175,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When a users has completed watched or listened to an item, this attribute contains the number of consumptions.
          */
-        public Builder viewCount(Optional<Long> viewCount) {
+        public Builder viewCount(Optional<Integer> viewCount) {
             Utils.checkNotNull(viewCount, "viewCount");
             this.viewCount = viewCount;
             return this;
@@ -4055,7 +4185,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * For shows and seasons, contains the number of viewed episodes.
          */
-        public Builder viewedLeafCount(long viewedLeafCount) {
+        public Builder viewedLeafCount(int viewedLeafCount) {
             Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
             this.viewedLeafCount = Optional.ofNullable(viewedLeafCount);
             return this;
@@ -4064,7 +4194,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * For shows and seasons, contains the number of viewed episodes.
          */
-        public Builder viewedLeafCount(Optional<Long> viewedLeafCount) {
+        public Builder viewedLeafCount(Optional<Integer> viewedLeafCount) {
             Utils.checkNotNull(viewedLeafCount, "viewedLeafCount");
             this.viewedLeafCount = viewedLeafCount;
             return this;
@@ -4074,7 +4204,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When a user is in the process of viewing or listening to this item, this attribute contains the current offset, in units of milliseconds.
          */
-        public Builder viewOffset(long viewOffset) {
+        public Builder viewOffset(int viewOffset) {
             Utils.checkNotNull(viewOffset, "viewOffset");
             this.viewOffset = Optional.ofNullable(viewOffset);
             return this;
@@ -4083,7 +4213,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When a user is in the process of viewing or listening to this item, this attribute contains the current offset, in units of milliseconds.
          */
-        public Builder viewOffset(Optional<Long> viewOffset) {
+        public Builder viewOffset(Optional<Integer> viewOffset) {
             Utils.checkNotNull(viewOffset, "viewOffset");
             this.viewOffset = viewOffset;
             return this;
@@ -4106,7 +4236,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the year associated with the item's release (e.g. release year for a movie).
          */
-        public Builder year(long year) {
+        public Builder year(int year) {
             Utils.checkNotNull(year, "year");
             this.year = Optional.ofNullable(year);
             return this;
@@ -4115,7 +4245,7 @@ public class GetPlaylistGeneratorItemsMetadata {
         /**
          * When present, the year associated with the item's release (e.g. release year for a movie).
          */
-        public Builder year(Optional<Long> year) {
+        public Builder year(Optional<Integer> year) {
             Utils.checkNotNull(year, "year");
             this.year = year;
             return this;
@@ -4181,26 +4311,28 @@ public class GetPlaylistGeneratorItemsMetadata {
                 title, type, absoluteIndex,
                 addedAt, art, audienceRating,
                 audienceRatingImage, autotag, banner,
-                chapterSource, composite, contentRating,
-                country, director, duration,
-                filter, genre, grandparentArt,
-                grandparentHero, grandparentKey, grandparentRatingKey,
-                grandparentTheme, grandparentThumb, grandparentTitle,
-                guid, hero, image,
+                chapterSource, childCount, composite,
+                contentRating, country, director,
+                duration, filter, genre,
+                grandparentArt, grandparentGuid, grandparentHero,
+                grandparentKey, grandparentRatingKey, grandparentTheme,
+                grandparentThumb, grandparentTitle, guid,
+                guids, hero, image,
                 index, key, lastViewedAt,
                 leafCount, media, originallyAvailableAt,
-                originalTitle, parentHero, parentIndex,
-                parentKey, parentRatingKey, parentThumb,
-                parentTitle, primaryExtraKey, prompt,
-                rating, ratingArray, ratingCount,
-                ratingImage, ratingKey, role,
-                search, secondary, skipChildren,
-                skipParent, sort, studio,
-                subtype, summary, tagline,
-                theme, thumb, titleSort,
-                updatedAt, userRating, viewCount,
-                viewedLeafCount, viewOffset, writer,
-                year, processingState, processingStateContext)
+                originalTitle, parentGuid, parentHero,
+                parentIndex, parentKey, parentRatingKey,
+                parentThumb, parentTitle, primaryExtraKey,
+                prompt, rating, ratingArray,
+                ratingCount, ratingImage, ratingKey,
+                role, search, secondary,
+                skipChildren, skipParent, sort,
+                studio, subtype, summary,
+                tagline, theme, thumb,
+                titleSort, updatedAt, userRating,
+                viewCount, viewedLeafCount, viewOffset,
+                writer, year, processingState,
+                processingStateContext)
                 .withAdditionalProperties(additionalProperties);
         }
 

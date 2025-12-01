@@ -576,7 +576,7 @@ public class GetSourceConnectionInformationRequest {
 
         private String source;
 
-        private Optional<? extends BoolInt> refresh = Optional.empty();
+        private Optional<? extends BoolInt> refresh;
 
         private Builder() {
           // force use of static builder() method
@@ -824,6 +824,9 @@ public class GetSourceConnectionInformationRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (refresh == null) {
+                refresh = _SINGLETON_VALUE_Refresh.value();
+            }
 
             return new GetSourceConnectionInformationRequest(
                 accepts, clientIdentifier, product,
@@ -839,5 +842,11 @@ public class GetSourceConnectionInformationRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Refresh =
+                new LazySingletonValue<>(
+                        "refresh",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

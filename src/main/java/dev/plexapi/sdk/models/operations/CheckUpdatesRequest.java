@@ -543,7 +543,7 @@ public class CheckUpdatesRequest {
 
         private Optional<String> marketplace = Optional.empty();
 
-        private Optional<? extends BoolInt> download = Optional.empty();
+        private Optional<? extends BoolInt> download;
 
         private Builder() {
           // force use of static builder() method
@@ -781,6 +781,9 @@ public class CheckUpdatesRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (download == null) {
+                download = _SINGLETON_VALUE_Download.value();
+            }
 
             return new CheckUpdatesRequest(
                 accepts, clientIdentifier, product,
@@ -795,5 +798,11 @@ public class CheckUpdatesRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Download =
+                new LazySingletonValue<>(
+                        "download",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

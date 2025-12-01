@@ -8,21 +8,21 @@ import java.util.Objects;
 import java.util.Optional;
 
 public enum BoolInt {
-    ZERO(0L),
-    ONE(1L);
+    False(0),
+    True(1);
 
     @JsonValue
-    private final long value;
+    private final int value;
 
-    BoolInt(long value) {
+    BoolInt(int value) {
         this.value = value;
     }
     
-    public long value() {
+    public int value() {
         return value;
     }
     
-    public static Optional<BoolInt> fromValue(long value) {
+    public static Optional<BoolInt> fromValue(int value) {
         for (BoolInt o: BoolInt.values()) {
             if (Objects.deepEquals(o.value, value)) {
                 return Optional.of(o);

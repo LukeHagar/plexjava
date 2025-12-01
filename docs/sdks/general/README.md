@@ -156,7 +156,7 @@ public class Application {
 
         GetSourceConnectionInformationRequest req = GetSourceConnectionInformationRequest.builder()
                 .source("server://client-identifier")
-                .refresh(BoolInt.ONE)
+                .refresh(BoolInt.True)
                 .build();
 
         GetSourceConnectionInformationResponse res = sdk.general().getSourceConnectionInformation()

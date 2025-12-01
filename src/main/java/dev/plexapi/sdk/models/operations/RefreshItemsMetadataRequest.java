@@ -586,7 +586,7 @@ public class RefreshItemsMetadataRequest {
 
         private Optional<String> agent = Optional.empty();
 
-        private Optional<? extends BoolInt> markUpdated = Optional.empty();
+        private Optional<? extends BoolInt> markUpdated;
 
         private Builder() {
           // force use of static builder() method
@@ -838,6 +838,9 @@ public class RefreshItemsMetadataRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (markUpdated == null) {
+                markUpdated = _SINGLETON_VALUE_MarkUpdated.value();
+            }
 
             return new RefreshItemsMetadataRequest(
                 accepts, clientIdentifier, product,
@@ -853,5 +856,11 @@ public class RefreshItemsMetadataRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_MarkUpdated =
+                new LazySingletonValue<>(
+                        "markUpdated",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

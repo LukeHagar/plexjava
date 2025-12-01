@@ -20,11 +20,11 @@ public class ButlerTasks {
 
     @JsonInclude(Include.NON_ABSENT)
     @JsonProperty("ButlerTask")
-    private Optional<? extends List<ButlerTask>> butlerTask;
+    private Optional<? extends List<GetTasksButlerTask>> butlerTask;
 
     @JsonCreator
     public ButlerTasks(
-            @JsonProperty("ButlerTask") Optional<? extends List<ButlerTask>> butlerTask) {
+            @JsonProperty("ButlerTask") Optional<? extends List<GetTasksButlerTask>> butlerTask) {
         Utils.checkNotNull(butlerTask, "butlerTask");
         this.butlerTask = butlerTask;
     }
@@ -35,8 +35,8 @@ public class ButlerTasks {
 
     @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<List<ButlerTask>> butlerTask() {
-        return (Optional<List<ButlerTask>>) butlerTask;
+    public Optional<List<GetTasksButlerTask>> butlerTask() {
+        return (Optional<List<GetTasksButlerTask>>) butlerTask;
     }
 
     public static Builder builder() {
@@ -44,14 +44,14 @@ public class ButlerTasks {
     }
 
 
-    public ButlerTasks withButlerTask(List<ButlerTask> butlerTask) {
+    public ButlerTasks withButlerTask(List<GetTasksButlerTask> butlerTask) {
         Utils.checkNotNull(butlerTask, "butlerTask");
         this.butlerTask = Optional.ofNullable(butlerTask);
         return this;
     }
 
 
-    public ButlerTasks withButlerTask(Optional<? extends List<ButlerTask>> butlerTask) {
+    public ButlerTasks withButlerTask(Optional<? extends List<GetTasksButlerTask>> butlerTask) {
         Utils.checkNotNull(butlerTask, "butlerTask");
         this.butlerTask = butlerTask;
         return this;
@@ -85,20 +85,20 @@ public class ButlerTasks {
     @SuppressWarnings("UnusedReturnValue")
     public final static class Builder {
 
-        private Optional<? extends List<ButlerTask>> butlerTask = Optional.empty();
+        private Optional<? extends List<GetTasksButlerTask>> butlerTask = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
         }
 
 
-        public Builder butlerTask(List<ButlerTask> butlerTask) {
+        public Builder butlerTask(List<GetTasksButlerTask> butlerTask) {
             Utils.checkNotNull(butlerTask, "butlerTask");
             this.butlerTask = Optional.ofNullable(butlerTask);
             return this;
         }
 
-        public Builder butlerTask(Optional<? extends List<ButlerTask>> butlerTask) {
+        public Builder butlerTask(Optional<? extends List<GetTasksButlerTask>> butlerTask) {
             Utils.checkNotNull(butlerTask, "butlerTask");
             this.butlerTask = butlerTask;
             return this;

@@ -86,8 +86,8 @@ public class StartTaskRequest {
     /**
      * The task name
      */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=task")
-    private PathParamTask task;
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=butlerTask")
+    private PathParamButlerTask butlerTask;
 
     @JsonCreator
     public StartTaskRequest(
@@ -102,7 +102,7 @@ public class StartTaskRequest {
             Optional<String> deviceVendor,
             Optional<String> deviceName,
             Optional<String> marketplace,
-            PathParamTask task) {
+            PathParamButlerTask butlerTask) {
         Utils.checkNotNull(accepts, "accepts");
         Utils.checkNotNull(clientIdentifier, "clientIdentifier");
         Utils.checkNotNull(product, "product");
@@ -114,7 +114,7 @@ public class StartTaskRequest {
         Utils.checkNotNull(deviceVendor, "deviceVendor");
         Utils.checkNotNull(deviceName, "deviceName");
         Utils.checkNotNull(marketplace, "marketplace");
-        Utils.checkNotNull(task, "task");
+        Utils.checkNotNull(butlerTask, "butlerTask");
         this.accepts = accepts;
         this.clientIdentifier = clientIdentifier;
         this.product = product;
@@ -126,15 +126,15 @@ public class StartTaskRequest {
         this.deviceVendor = deviceVendor;
         this.deviceName = deviceName;
         this.marketplace = marketplace;
-        this.task = task;
+        this.butlerTask = butlerTask;
     }
     
     public StartTaskRequest(
-            PathParamTask task) {
+            PathParamButlerTask butlerTask) {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), task);
+            Optional.empty(), Optional.empty(), butlerTask);
     }
 
     /**
@@ -230,8 +230,8 @@ public class StartTaskRequest {
      * The task name
      */
     @JsonIgnore
-    public PathParamTask task() {
-        return task;
+    public PathParamButlerTask butlerTask() {
+        return butlerTask;
     }
 
     public static Builder builder() {
@@ -451,9 +451,9 @@ public class StartTaskRequest {
     /**
      * The task name
      */
-    public StartTaskRequest withTask(PathParamTask task) {
-        Utils.checkNotNull(task, "task");
-        this.task = task;
+    public StartTaskRequest withButlerTask(PathParamButlerTask butlerTask) {
+        Utils.checkNotNull(butlerTask, "butlerTask");
+        this.butlerTask = butlerTask;
         return this;
     }
 
@@ -478,7 +478,7 @@ public class StartTaskRequest {
             Utils.enhancedDeepEquals(this.deviceVendor, other.deviceVendor) &&
             Utils.enhancedDeepEquals(this.deviceName, other.deviceName) &&
             Utils.enhancedDeepEquals(this.marketplace, other.marketplace) &&
-            Utils.enhancedDeepEquals(this.task, other.task);
+            Utils.enhancedDeepEquals(this.butlerTask, other.butlerTask);
     }
     
     @Override
@@ -487,7 +487,7 @@ public class StartTaskRequest {
             accepts, clientIdentifier, product,
             version, platform, platformVersion,
             device, model, deviceVendor,
-            deviceName, marketplace, task);
+            deviceName, marketplace, butlerTask);
     }
     
     @Override
@@ -504,7 +504,7 @@ public class StartTaskRequest {
                 "deviceVendor", deviceVendor,
                 "deviceName", deviceName,
                 "marketplace", marketplace,
-                "task", task);
+                "butlerTask", butlerTask);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -532,7 +532,7 @@ public class StartTaskRequest {
 
         private Optional<String> marketplace = Optional.empty();
 
-        private PathParamTask task;
+        private PathParamButlerTask butlerTask;
 
         private Builder() {
           // force use of static builder() method
@@ -751,9 +751,9 @@ public class StartTaskRequest {
         /**
          * The task name
          */
-        public Builder task(PathParamTask task) {
-            Utils.checkNotNull(task, "task");
-            this.task = task;
+        public Builder butlerTask(PathParamButlerTask butlerTask) {
+            Utils.checkNotNull(butlerTask, "butlerTask");
+            this.butlerTask = butlerTask;
             return this;
         }
 
@@ -766,7 +766,7 @@ public class StartTaskRequest {
                 accepts, clientIdentifier, product,
                 version, platform, platformVersion,
                 device, model, deviceVendor,
-                deviceName, marketplace, task);
+                deviceName, marketplace, butlerTask);
         }
 
 

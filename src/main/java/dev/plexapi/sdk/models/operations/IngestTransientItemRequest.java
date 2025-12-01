@@ -664,9 +664,9 @@ public class IngestTransientItemRequest {
 
         private Optional<String> virtualFilePath = Optional.empty();
 
-        private Optional<? extends BoolInt> computeHashes = Optional.empty();
+        private Optional<? extends BoolInt> computeHashes;
 
-        private Optional<? extends BoolInt> ingestNonMatches = Optional.empty();
+        private Optional<? extends BoolInt> ingestNonMatches;
 
         private Builder() {
           // force use of static builder() method
@@ -961,6 +961,12 @@ public class IngestTransientItemRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (computeHashes == null) {
+                computeHashes = _SINGLETON_VALUE_ComputeHashes.value();
+            }
+            if (ingestNonMatches == null) {
+                ingestNonMatches = _SINGLETON_VALUE_IngestNonMatches.value();
+            }
 
             return new IngestTransientItemRequest(
                 accepts, clientIdentifier, product,
@@ -976,5 +982,17 @@ public class IngestTransientItemRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_ComputeHashes =
+                new LazySingletonValue<>(
+                        "computeHashes",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_IngestNonMatches =
+                new LazySingletonValue<>(
+                        "ingestNonMatches",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

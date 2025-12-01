@@ -204,6 +204,15 @@ public class PlexAPI {
      */
     private final Updater updater;
 
+
+    private final Authentication authentication;
+
+
+    private final Users users;
+
+
+    private final Plex plex;
+
     /**
      * The actual content of the media provider
      */
@@ -439,6 +448,21 @@ public class PlexAPI {
      */
     public Updater updater() {
         return updater;
+    }
+
+
+    public Authentication authentication() {
+        return authentication;
+    }
+
+
+    public Users users() {
+        return users;
+    }
+
+
+    public Plex plex() {
+        return plex;
     }
 
     /**
@@ -856,6 +880,9 @@ public class PlexAPI {
         this.ultraBlur = new UltraBlur(sdkConfiguration);
         this.status = new Status(sdkConfiguration);
         this.updater = new Updater(sdkConfiguration);
+        this.authentication = new Authentication(sdkConfiguration);
+        this.users = new Users(sdkConfiguration);
+        this.plex = new Plex(sdkConfiguration);
         this.content = new Content(sdkConfiguration);
         this.libraryCollections = new LibraryCollections(sdkConfiguration);
         SdkInitData data = this.sdkConfiguration.hooks().sdkInit(

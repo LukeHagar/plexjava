@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.models.shared.Accepts;
+import dev.plexapi.sdk.models.shared.MediaType;
 import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.SpeakeasyMetadata;
 import dev.plexapi.sdk.utils.Utils;
@@ -91,10 +92,22 @@ public class VoiceSearchHubsRequest {
     private String query;
 
     /**
-     * The metadata type to filter by
+     * The type of media to retrieve or filter by.
+     * 
+     * <p>1 = movie
+     * 2 = show
+     * 3 = season
+     * 4 = episode
+     * 5 = artist
+     * 6 = album
+     * 7 = track
+     * 8 = photo_album
+     * 9 = photo
+     * 
+     * <p>E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")
-    private Optional<Long> type;
+    private Optional<? extends MediaType> type;
 
     /**
      * The number of items to return per hub.  3 if not specified
@@ -116,7 +129,7 @@ public class VoiceSearchHubsRequest {
             Optional<String> deviceName,
             Optional<String> marketplace,
             String query,
-            Optional<Long> type,
+            Optional<? extends MediaType> type,
             Optional<Long> limit) {
         Utils.checkNotNull(accepts, "accepts");
         Utils.checkNotNull(clientIdentifier, "clientIdentifier");
@@ -255,11 +268,24 @@ public class VoiceSearchHubsRequest {
     }
 
     /**
-     * The metadata type to filter by
+     * The type of media to retrieve or filter by.
+     * 
+     * <p>1 = movie
+     * 2 = show
+     * 3 = season
+     * 4 = episode
+     * 5 = artist
+     * 6 = album
+     * 7 = track
+     * 8 = photo_album
+     * 9 = photo
+     * 
+     * <p>E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Long> type() {
-        return type;
+    public Optional<MediaType> type() {
+        return (Optional<MediaType>) type;
     }
 
     /**
@@ -494,9 +520,21 @@ public class VoiceSearchHubsRequest {
     }
 
     /**
-     * The metadata type to filter by
+     * The type of media to retrieve or filter by.
+     * 
+     * <p>1 = movie
+     * 2 = show
+     * 3 = season
+     * 4 = episode
+     * 5 = artist
+     * 6 = album
+     * 7 = track
+     * 8 = photo_album
+     * 9 = photo
+     * 
+     * <p>E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
      */
-    public VoiceSearchHubsRequest withType(long type) {
+    public VoiceSearchHubsRequest withType(MediaType type) {
         Utils.checkNotNull(type, "type");
         this.type = Optional.ofNullable(type);
         return this;
@@ -504,9 +542,21 @@ public class VoiceSearchHubsRequest {
 
 
     /**
-     * The metadata type to filter by
+     * The type of media to retrieve or filter by.
+     * 
+     * <p>1 = movie
+     * 2 = show
+     * 3 = season
+     * 4 = episode
+     * 5 = artist
+     * 6 = album
+     * 7 = track
+     * 8 = photo_album
+     * 9 = photo
+     * 
+     * <p>E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
      */
-    public VoiceSearchHubsRequest withType(Optional<Long> type) {
+    public VoiceSearchHubsRequest withType(Optional<? extends MediaType> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -613,7 +663,7 @@ public class VoiceSearchHubsRequest {
 
         private String query;
 
-        private Optional<Long> type = Optional.empty();
+        private Optional<? extends MediaType> type = Optional.empty();
 
         private Optional<Long> limit = Optional.empty();
 
@@ -842,18 +892,42 @@ public class VoiceSearchHubsRequest {
 
 
         /**
-         * The metadata type to filter by
+         * The type of media to retrieve or filter by.
+         * 
+         * <p>1 = movie
+         * 2 = show
+         * 3 = season
+         * 4 = episode
+         * 5 = artist
+         * 6 = album
+         * 7 = track
+         * 8 = photo_album
+         * 9 = photo
+         * 
+         * <p>E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
          */
-        public Builder type(long type) {
+        public Builder type(MediaType type) {
             Utils.checkNotNull(type, "type");
             this.type = Optional.ofNullable(type);
             return this;
         }
 
         /**
-         * The metadata type to filter by
+         * The type of media to retrieve or filter by.
+         * 
+         * <p>1 = movie
+         * 2 = show
+         * 3 = season
+         * 4 = episode
+         * 5 = artist
+         * 6 = album
+         * 7 = track
+         * 8 = photo_album
+         * 9 = photo
+         * 
+         * <p>E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
          */
-        public Builder type(Optional<Long> type) {
+        public Builder type(Optional<? extends MediaType> type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;

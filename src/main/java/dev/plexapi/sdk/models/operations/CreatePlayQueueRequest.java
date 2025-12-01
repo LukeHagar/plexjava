@@ -895,17 +895,17 @@ public class CreatePlayQueueRequest {
 
         private Optional<String> key = Optional.empty();
 
-        private Optional<? extends BoolInt> shuffle = Optional.empty();
+        private Optional<? extends BoolInt> shuffle;
 
-        private Optional<? extends BoolInt> repeat = Optional.empty();
+        private Optional<? extends BoolInt> repeat;
 
-        private Optional<? extends BoolInt> continuous = Optional.empty();
+        private Optional<? extends BoolInt> continuous;
 
         private Optional<Long> extrasPrefixCount = Optional.empty();
 
-        private Optional<? extends BoolInt> recursive = Optional.empty();
+        private Optional<? extends BoolInt> recursive;
 
-        private Optional<? extends BoolInt> onDeck = Optional.empty();
+        private Optional<? extends BoolInt> onDeck;
 
         private Builder() {
           // force use of static builder() method
@@ -1305,6 +1305,21 @@ public class CreatePlayQueueRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (shuffle == null) {
+                shuffle = _SINGLETON_VALUE_Shuffle.value();
+            }
+            if (repeat == null) {
+                repeat = _SINGLETON_VALUE_Repeat.value();
+            }
+            if (continuous == null) {
+                continuous = _SINGLETON_VALUE_Continuous.value();
+            }
+            if (recursive == null) {
+                recursive = _SINGLETON_VALUE_Recursive.value();
+            }
+            if (onDeck == null) {
+                onDeck = _SINGLETON_VALUE_OnDeck.value();
+            }
 
             return new CreatePlayQueueRequest(
                 accepts, clientIdentifier, product,
@@ -1322,5 +1337,35 @@ public class CreatePlayQueueRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Shuffle =
+                new LazySingletonValue<>(
+                        "shuffle",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Repeat =
+                new LazySingletonValue<>(
+                        "repeat",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Continuous =
+                new LazySingletonValue<>(
+                        "continuous",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Recursive =
+                new LazySingletonValue<>(
+                        "recursive",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_OnDeck =
+                new LazySingletonValue<>(
+                        "onDeck",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

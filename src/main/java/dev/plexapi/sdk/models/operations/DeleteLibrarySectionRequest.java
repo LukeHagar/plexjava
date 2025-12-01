@@ -576,7 +576,7 @@ public class DeleteLibrarySectionRequest {
 
         private String sectionId;
 
-        private Optional<? extends BoolInt> async = Optional.empty();
+        private Optional<? extends BoolInt> async;
 
         private Builder() {
           // force use of static builder() method
@@ -824,6 +824,9 @@ public class DeleteLibrarySectionRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (async == null) {
+                async = _SINGLETON_VALUE_Async.value();
+            }
 
             return new DeleteLibrarySectionRequest(
                 accepts, clientIdentifier, product,
@@ -839,5 +842,11 @@ public class DeleteLibrarySectionRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Async =
+                new LazySingletonValue<>(
+                        "async",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

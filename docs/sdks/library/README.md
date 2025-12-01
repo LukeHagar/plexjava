@@ -100,7 +100,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.operations.GetLibraryItemsRequest;
 import dev.plexapi.sdk.models.operations.GetLibraryItemsResponse;
-import dev.plexapi.sdk.models.shared.Accepts;
+import dev.plexapi.sdk.models.shared.*;
 import java.lang.Exception;
 
 public class Application {
@@ -123,6 +123,11 @@ public class Application {
             .build();
 
         GetLibraryItemsRequest req = GetLibraryItemsRequest.builder()
+                .mediaQuery(MediaQuery.builder()
+                    .type(MediaType.Episode)
+                    .sourceType(2L)
+                    .sort("duration:desc,index")
+                    .build())
                 .build();
 
         GetLibraryItemsResponse res = sdk.library().getLibraryItems()
@@ -272,8 +277,8 @@ public class Application {
         IngestTransientItemRequest req = IngestTransientItemRequest.builder()
                 .url("file:///storage%2Femulated%2F0%2FArcher-S01E01.mkv")
                 .virtualFilePath("/Avatar.mkv")
-                .computeHashes(BoolInt.ONE)
-                .ingestNonMatches(BoolInt.ONE)
+                .computeHashes(BoolInt.True)
+                .ingestNonMatches(BoolInt.True)
                 .build();
 
         IngestTransientItemResponse res = sdk.library().ingestTransientItem()
@@ -320,8 +325,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.operations.GetLibraryMatchesRequest;
 import dev.plexapi.sdk.models.operations.GetLibraryMatchesResponse;
-import dev.plexapi.sdk.models.shared.Accepts;
-import dev.plexapi.sdk.models.shared.BoolInt;
+import dev.plexapi.sdk.models.shared.*;
 import java.lang.Exception;
 
 public class Application {
@@ -344,9 +348,10 @@ public class Application {
             .build();
 
         GetLibraryMatchesRequest req = GetLibraryMatchesRequest.builder()
-                .includeFullMetadata(BoolInt.ONE)
-                .includeAncestorMetadata(BoolInt.ONE)
-                .includeAlternateMetadataSources(BoolInt.ONE)
+                .type(MediaType.TvShow)
+                .includeFullMetadata(BoolInt.True)
+                .includeAncestorMetadata(BoolInt.True)
+                .includeAlternateMetadataSources(BoolInt.True)
                 .build();
 
         GetLibraryMatchesResponse res = sdk.library().getLibraryMatches()
@@ -413,7 +418,7 @@ public class Application {
             .build();
 
         OptimizeDatabaseRequest req = OptimizeDatabaseRequest.builder()
-                .async(BoolInt.ONE)
+                .async(BoolInt.True)
                 .build();
 
         OptimizeDatabaseResponse res = sdk.library().optimizeDatabase()
@@ -602,8 +607,8 @@ public class Application {
                     "O:\fatboy\\Media\\My Music"))
                 .prefs(QueryParamPrefs.builder()
                     .build())
-                .relative(BoolInt.ONE)
-                .importFromiTunes(BoolInt.ONE)
+                .relative(BoolInt.True)
+                .importFromiTunes(BoolInt.True)
                 .build();
 
         AddSectionResponse res = sdk.library().addSection()
@@ -818,6 +823,7 @@ import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.operations.GetTagsRequest;
 import dev.plexapi.sdk.models.operations.GetTagsResponse;
 import dev.plexapi.sdk.models.shared.Accepts;
+import dev.plexapi.sdk.models.shared.MediaType;
 import java.lang.Exception;
 
 public class Application {
@@ -840,6 +846,7 @@ public class Application {
             .build();
 
         GetTagsRequest req = GetTagsRequest.builder()
+                .type(MediaType.TvShow)
                 .build();
 
         GetTagsResponse res = sdk.library().getTags()
@@ -907,7 +914,7 @@ public class Application {
 
         DeleteMetadataItemRequest req = DeleteMetadataItemRequest.builder()
                 .ids("<value>")
-                .proxy(BoolInt.ONE)
+                .proxy(BoolInt.True)
                 .build();
 
         DeleteMetadataItemResponse res = sdk.library().deleteMetadataItem()
@@ -1234,7 +1241,7 @@ public class Application {
 
         GenerateThumbsRequest req = GenerateThumbsRequest.builder()
                 .ids("<value>")
-                .force(BoolInt.ONE)
+                .force(BoolInt.True)
                 .build();
 
         GenerateThumbsResponse res = sdk.library().generateThumbs()
@@ -1300,8 +1307,8 @@ public class Application {
 
         DetectCreditsRequest req = DetectCreditsRequest.builder()
                 .ids("<value>")
-                .force(BoolInt.ONE)
-                .manual(BoolInt.ONE)
+                .force(BoolInt.True)
+                .manual(BoolInt.True)
                 .build();
 
         DetectCreditsResponse res = sdk.library().detectCredits()
@@ -1564,7 +1571,7 @@ public class Application {
 
         StartBifGenerationRequest req = StartBifGenerationRequest.builder()
                 .ids("<value>")
-                .force(BoolInt.ONE)
+                .force(BoolInt.True)
                 .build();
 
         StartBifGenerationResponse res = sdk.library().startBifGeneration()
@@ -1630,7 +1637,7 @@ public class Application {
 
         DetectIntrosRequest req = DetectIntrosRequest.builder()
                 .ids("<value>")
-                .force(BoolInt.ONE)
+                .force(BoolInt.True)
                 .build();
 
         DetectIntrosResponse res = sdk.library().detectIntros()
@@ -1829,7 +1836,7 @@ public class Application {
 
         ListMatchesRequest req = ListMatchesRequest.builder()
                 .ids("<value>")
-                .manual(BoolInt.ONE)
+                .manual(BoolInt.True)
                 .build();
 
         ListMatchesResponse res = sdk.library().listMatches()
@@ -2100,7 +2107,7 @@ public class Application {
 
         RefreshItemsMetadataRequest req = RefreshItemsMetadataRequest.builder()
                 .ids("<value>")
-                .markUpdated(BoolInt.ONE)
+                .markUpdated(BoolInt.True)
                 .build();
 
         RefreshItemsMetadataResponse res = sdk.library().refreshItemsMetadata()
@@ -2362,8 +2369,8 @@ public class Application {
 
         AddSubtitlesRequest req = AddSubtitlesRequest.builder()
                 .ids("<value>")
-                .forced(BoolInt.ONE)
-                .hearingImpaired(BoolInt.ONE)
+                .forced(BoolInt.True)
+                .hearingImpaired(BoolInt.True)
                 .build();
 
         AddSubtitlesResponse res = sdk.library().addSubtitles()
@@ -2625,8 +2632,8 @@ public class Application {
 
         DetectVoiceActivityRequest req = DetectVoiceActivityRequest.builder()
                 .ids("<value>")
-                .force(BoolInt.ONE)
-                .manual(BoolInt.ONE)
+                .force(BoolInt.True)
+                .manual(BoolInt.True)
                 .build();
 
         DetectVoiceActivityResponse res = sdk.library().detectVoiceActivity()
@@ -2692,7 +2699,7 @@ public class Application {
 
         GetAugmentationStatusRequest req = GetAugmentationStatusRequest.builder()
                 .augmentationId("<id>")
-                .wait_(BoolInt.ONE)
+                .wait_(BoolInt.True)
                 .build();
 
         GetAugmentationStatusResponse res = sdk.library().getAugmentationStatus()
@@ -2758,7 +2765,7 @@ public class Application {
 
         SetStreamSelectionRequest req = SetStreamSelectionRequest.builder()
                 .partId(360489L)
-                .allParts(BoolInt.ONE)
+                .allParts(BoolInt.True)
                 .build();
 
         SetStreamSelectionResponse res = sdk.library().setStreamSelection()
@@ -2956,7 +2963,7 @@ public class Application {
 
         DeleteLibrarySectionRequest req = DeleteLibrarySectionRequest.builder()
                 .sectionId("<id>")
-                .async(BoolInt.ONE)
+                .async(BoolInt.True)
                 .build();
 
         DeleteLibrarySectionResponse res = sdk.library().deleteLibrarySection()
@@ -3022,7 +3029,7 @@ public class Application {
 
         GetLibraryDetailsRequest req = GetLibraryDetailsRequest.builder()
                 .sectionId("<id>")
-                .includeDetails(BoolInt.ONE)
+                .includeDetails(BoolInt.True)
                 .build();
 
         GetLibraryDetailsResponse res = sdk.library().getLibraryDetails()
@@ -3204,7 +3211,7 @@ public class Application {
 
         UpdateItemsRequest req = UpdateItemsRequest.builder()
                 .sectionId("<id>")
-                .fieldLocked(BoolInt.ONE)
+                .fieldLocked(BoolInt.True)
                 .build();
 
         UpdateItemsResponse res = sdk.library().updateItems()
@@ -3310,7 +3317,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.operations.AutocompleteRequest;
 import dev.plexapi.sdk.models.operations.AutocompleteResponse;
-import dev.plexapi.sdk.models.shared.Accepts;
+import dev.plexapi.sdk.models.shared.*;
 import java.lang.Exception;
 
 public class Application {
@@ -3334,6 +3341,11 @@ public class Application {
 
         AutocompleteRequest req = AutocompleteRequest.builder()
                 .sectionId(942007L)
+                .mediaQuery(MediaQuery.builder()
+                    .type(MediaType.Episode)
+                    .sourceType(2L)
+                    .sort("duration:desc,index")
+                    .build())
                 .build();
 
         AutocompleteResponse res = sdk.library().autocomplete()
@@ -3376,7 +3388,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.operations.GetCollectionsRequest;
 import dev.plexapi.sdk.models.operations.GetCollectionsResponse;
-import dev.plexapi.sdk.models.shared.Accepts;
+import dev.plexapi.sdk.models.shared.*;
 import java.lang.Exception;
 
 public class Application {
@@ -3400,6 +3412,11 @@ public class Application {
 
         GetCollectionsRequest req = GetCollectionsRequest.builder()
                 .sectionId(348838L)
+                .mediaQuery(MediaQuery.builder()
+                    .type(MediaType.Episode)
+                    .sourceType(2L)
+                    .sort("duration:desc,index")
+                    .build())
                 .build();
 
         GetCollectionsResponse res = sdk.library().getCollections()
@@ -3443,7 +3460,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.operations.GetCommonRequest;
 import dev.plexapi.sdk.models.operations.GetCommonResponse;
-import dev.plexapi.sdk.models.shared.Accepts;
+import dev.plexapi.sdk.models.shared.*;
 import java.lang.Exception;
 
 public class Application {
@@ -3467,6 +3484,11 @@ public class Application {
 
         GetCommonRequest req = GetCommonRequest.builder()
                 .sectionId(298154L)
+                .mediaQuery(MediaQuery.builder()
+                    .type(MediaType.Episode)
+                    .sourceType(2L)
+                    .sort("duration:desc,index")
+                    .build())
                 .build();
 
         GetCommonResponse res = sdk.library().getCommon()
@@ -3639,7 +3661,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.operations.GetFirstCharactersRequest;
 import dev.plexapi.sdk.models.operations.GetFirstCharactersResponse;
-import dev.plexapi.sdk.models.shared.Accepts;
+import dev.plexapi.sdk.models.shared.*;
 import java.lang.Exception;
 
 public class Application {
@@ -3663,6 +3685,11 @@ public class Application {
 
         GetFirstCharactersRequest req = GetFirstCharactersRequest.builder()
                 .sectionId(3947L)
+                .mediaQuery(MediaQuery.builder()
+                    .type(MediaType.Episode)
+                    .sourceType(2L)
+                    .sort("duration:desc,index")
+                    .build())
                 .build();
 
         GetFirstCharactersResponse res = sdk.library().getFirstCharacters()
@@ -4053,7 +4080,7 @@ public class Application {
 
         RefreshSectionRequest req = RefreshSectionRequest.builder()
                 .sectionId(450300L)
-                .force(BoolInt.ONE)
+                .force(BoolInt.True)
                 .build();
 
         RefreshSectionResponse res = sdk.library().refreshSection()
@@ -4650,7 +4677,7 @@ public class Application {
         DeleteMediaItemRequest req = DeleteMediaItemRequest.builder()
                 .ids("<value>")
                 .mediaItem("<value>")
-                .proxy(BoolInt.ONE)
+                .proxy(BoolInt.True)
                 .build();
 
         DeleteMediaItemResponse res = sdk.library().deleteMediaItem()
@@ -4822,7 +4849,7 @@ package hello.world;
 import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.operations.GetSectionImageRequest;
 import dev.plexapi.sdk.models.operations.GetSectionImageResponse;
-import dev.plexapi.sdk.models.shared.Accepts;
+import dev.plexapi.sdk.models.shared.*;
 import java.lang.Exception;
 
 public class Application {
@@ -4847,6 +4874,11 @@ public class Application {
         GetSectionImageRequest req = GetSectionImageRequest.builder()
                 .sectionId(925611L)
                 .updatedAt(117413L)
+                .mediaQuery(MediaQuery.builder()
+                    .type(MediaType.Episode)
+                    .sourceType(2L)
+                    .sort("duration:desc,index")
+                    .build())
                 .build();
 
         GetSectionImageResponse res = sdk.library().getSectionImage()
@@ -4978,7 +5010,7 @@ public class Application {
         GetStreamRequest req = GetStreamRequest.builder()
                 .streamId(314506L)
                 .ext("<value>")
-                .autoAdjustSubtitle(BoolInt.ONE)
+                .autoAdjustSubtitle(BoolInt.True)
                 .build();
 
         GetStreamResponse res = sdk.library().getStream()
@@ -5181,7 +5213,7 @@ public class Application {
                 .partId(877105L)
                 .changestamp(970622L)
                 .filename("example.file")
-                .download(BoolInt.ONE)
+                .download(BoolInt.True)
                 .build();
 
         GetMediaPartResponse res = sdk.library().getMediaPart()

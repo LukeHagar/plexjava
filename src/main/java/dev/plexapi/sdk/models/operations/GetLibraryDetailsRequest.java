@@ -576,7 +576,7 @@ public class GetLibraryDetailsRequest {
 
         private String sectionId;
 
-        private Optional<? extends BoolInt> includeDetails = Optional.empty();
+        private Optional<? extends BoolInt> includeDetails;
 
         private Builder() {
           // force use of static builder() method
@@ -824,6 +824,9 @@ public class GetLibraryDetailsRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (includeDetails == null) {
+                includeDetails = _SINGLETON_VALUE_IncludeDetails.value();
+            }
 
             return new GetLibraryDetailsRequest(
                 accepts, clientIdentifier, product,
@@ -839,5 +842,11 @@ public class GetLibraryDetailsRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_IncludeDetails =
+                new LazySingletonValue<>(
+                        "includeDetails",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

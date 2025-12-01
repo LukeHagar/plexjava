@@ -746,9 +746,9 @@ public class AddSubtitlesRequest {
 
         private Optional<String> format = Optional.empty();
 
-        private Optional<? extends BoolInt> forced = Optional.empty();
+        private Optional<? extends BoolInt> forced;
 
-        private Optional<? extends BoolInt> hearingImpaired = Optional.empty();
+        private Optional<? extends BoolInt> hearingImpaired;
 
         private Builder() {
           // force use of static builder() method
@@ -1071,6 +1071,12 @@ public class AddSubtitlesRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (forced == null) {
+                forced = _SINGLETON_VALUE_Forced.value();
+            }
+            if (hearingImpaired == null) {
+                hearingImpaired = _SINGLETON_VALUE_HearingImpaired.value();
+            }
 
             return new AddSubtitlesRequest(
                 accepts, clientIdentifier, product,
@@ -1088,5 +1094,17 @@ public class AddSubtitlesRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Forced =
+                new LazySingletonValue<>(
+                        "forced",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_HearingImpaired =
+                new LazySingletonValue<>(
+                        "hearingImpaired",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

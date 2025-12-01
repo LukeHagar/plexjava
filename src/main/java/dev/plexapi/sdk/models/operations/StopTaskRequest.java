@@ -86,8 +86,8 @@ public class StopTaskRequest {
     /**
      * The task name
      */
-    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=task")
-    private Task task;
+    @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=butlerTask")
+    private ButlerTask butlerTask;
 
     @JsonCreator
     public StopTaskRequest(
@@ -102,7 +102,7 @@ public class StopTaskRequest {
             Optional<String> deviceVendor,
             Optional<String> deviceName,
             Optional<String> marketplace,
-            Task task) {
+            ButlerTask butlerTask) {
         Utils.checkNotNull(accepts, "accepts");
         Utils.checkNotNull(clientIdentifier, "clientIdentifier");
         Utils.checkNotNull(product, "product");
@@ -114,7 +114,7 @@ public class StopTaskRequest {
         Utils.checkNotNull(deviceVendor, "deviceVendor");
         Utils.checkNotNull(deviceName, "deviceName");
         Utils.checkNotNull(marketplace, "marketplace");
-        Utils.checkNotNull(task, "task");
+        Utils.checkNotNull(butlerTask, "butlerTask");
         this.accepts = accepts;
         this.clientIdentifier = clientIdentifier;
         this.product = product;
@@ -126,15 +126,15 @@ public class StopTaskRequest {
         this.deviceVendor = deviceVendor;
         this.deviceName = deviceName;
         this.marketplace = marketplace;
-        this.task = task;
+        this.butlerTask = butlerTask;
     }
     
     public StopTaskRequest(
-            Task task) {
+            ButlerTask butlerTask) {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), task);
+            Optional.empty(), Optional.empty(), butlerTask);
     }
 
     /**
@@ -230,8 +230,8 @@ public class StopTaskRequest {
      * The task name
      */
     @JsonIgnore
-    public Task task() {
-        return task;
+    public ButlerTask butlerTask() {
+        return butlerTask;
     }
 
     public static Builder builder() {
@@ -451,9 +451,9 @@ public class StopTaskRequest {
     /**
      * The task name
      */
-    public StopTaskRequest withTask(Task task) {
-        Utils.checkNotNull(task, "task");
-        this.task = task;
+    public StopTaskRequest withButlerTask(ButlerTask butlerTask) {
+        Utils.checkNotNull(butlerTask, "butlerTask");
+        this.butlerTask = butlerTask;
         return this;
     }
 
@@ -478,7 +478,7 @@ public class StopTaskRequest {
             Utils.enhancedDeepEquals(this.deviceVendor, other.deviceVendor) &&
             Utils.enhancedDeepEquals(this.deviceName, other.deviceName) &&
             Utils.enhancedDeepEquals(this.marketplace, other.marketplace) &&
-            Utils.enhancedDeepEquals(this.task, other.task);
+            Utils.enhancedDeepEquals(this.butlerTask, other.butlerTask);
     }
     
     @Override
@@ -487,7 +487,7 @@ public class StopTaskRequest {
             accepts, clientIdentifier, product,
             version, platform, platformVersion,
             device, model, deviceVendor,
-            deviceName, marketplace, task);
+            deviceName, marketplace, butlerTask);
     }
     
     @Override
@@ -504,7 +504,7 @@ public class StopTaskRequest {
                 "deviceVendor", deviceVendor,
                 "deviceName", deviceName,
                 "marketplace", marketplace,
-                "task", task);
+                "butlerTask", butlerTask);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -532,7 +532,7 @@ public class StopTaskRequest {
 
         private Optional<String> marketplace = Optional.empty();
 
-        private Task task;
+        private ButlerTask butlerTask;
 
         private Builder() {
           // force use of static builder() method
@@ -751,9 +751,9 @@ public class StopTaskRequest {
         /**
          * The task name
          */
-        public Builder task(Task task) {
-            Utils.checkNotNull(task, "task");
-            this.task = task;
+        public Builder butlerTask(ButlerTask butlerTask) {
+            Utils.checkNotNull(butlerTask, "butlerTask");
+            this.butlerTask = butlerTask;
             return this;
         }
 
@@ -766,7 +766,7 @@ public class StopTaskRequest {
                 accepts, clientIdentifier, product,
                 version, platform, platformVersion,
                 device, model, deviceVendor,
-                deviceName, marketplace, task);
+                deviceName, marketplace, butlerTask);
         }
 
 

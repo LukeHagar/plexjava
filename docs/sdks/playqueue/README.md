@@ -60,11 +60,11 @@ public class Application {
 
         CreatePlayQueueRequest req = CreatePlayQueueRequest.builder()
                 .type(Type.AUDIO)
-                .shuffle(BoolInt.ONE)
-                .repeat(BoolInt.ONE)
-                .continuous(BoolInt.ONE)
-                .recursive(BoolInt.ONE)
-                .onDeck(BoolInt.ONE)
+                .shuffle(BoolInt.True)
+                .repeat(BoolInt.True)
+                .continuous(BoolInt.True)
+                .recursive(BoolInt.True)
+                .onDeck(BoolInt.True)
                 .build();
 
         CreatePlayQueueResponse res = sdk.playQueue().createPlayQueue()
@@ -132,9 +132,9 @@ public class Application {
 
         GetPlayQueueRequest req = GetPlayQueueRequest.builder()
                 .playQueueId(210646L)
-                .own(BoolInt.ONE)
-                .includeBefore(BoolInt.ONE)
-                .includeAfter(BoolInt.ONE)
+                .own(BoolInt.True)
+                .includeBefore(BoolInt.True)
+                .includeAfter(BoolInt.True)
                 .build();
 
         GetPlayQueueResponse res = sdk.playQueue().getPlayQueue()
@@ -202,7 +202,7 @@ public class Application {
 
         AddToPlayQueueRequest req = AddToPlayQueueRequest.builder()
                 .playQueueId(919248L)
-                .next(BoolInt.ONE)
+                .next(BoolInt.True)
                 .build();
 
         AddToPlayQueueResponse res = sdk.playQueue().addToPlayQueue()

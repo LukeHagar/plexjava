@@ -688,11 +688,11 @@ public class UpdateHubVisibilityRequest {
 
         private String identifier;
 
-        private Optional<? extends BoolInt> promotedToRecommended = Optional.empty();
+        private Optional<? extends BoolInt> promotedToRecommended;
 
-        private Optional<? extends BoolInt> promotedToOwnHome = Optional.empty();
+        private Optional<? extends BoolInt> promotedToOwnHome;
 
-        private Optional<? extends BoolInt> promotedToSharedHome = Optional.empty();
+        private Optional<? extends BoolInt> promotedToSharedHome;
 
         private Builder() {
           // force use of static builder() method
@@ -988,6 +988,15 @@ public class UpdateHubVisibilityRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (promotedToRecommended == null) {
+                promotedToRecommended = _SINGLETON_VALUE_PromotedToRecommended.value();
+            }
+            if (promotedToOwnHome == null) {
+                promotedToOwnHome = _SINGLETON_VALUE_PromotedToOwnHome.value();
+            }
+            if (promotedToSharedHome == null) {
+                promotedToSharedHome = _SINGLETON_VALUE_PromotedToSharedHome.value();
+            }
 
             return new UpdateHubVisibilityRequest(
                 accepts, clientIdentifier, product,
@@ -1004,5 +1013,23 @@ public class UpdateHubVisibilityRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_PromotedToRecommended =
+                new LazySingletonValue<>(
+                        "promotedToRecommended",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_PromotedToOwnHome =
+                new LazySingletonValue<>(
+                        "promotedToOwnHome",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_PromotedToSharedHome =
+                new LazySingletonValue<>(
+                        "promotedToSharedHome",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

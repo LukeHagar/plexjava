@@ -733,15 +733,15 @@ public class GetPlayQueueRequest {
 
         private Long playQueueId;
 
-        private Optional<? extends BoolInt> own = Optional.empty();
+        private Optional<? extends BoolInt> own;
 
         private Optional<String> center = Optional.empty();
 
         private Optional<Long> window = Optional.empty();
 
-        private Optional<? extends BoolInt> includeBefore = Optional.empty();
+        private Optional<? extends BoolInt> includeBefore;
 
-        private Optional<? extends BoolInt> includeAfter = Optional.empty();
+        private Optional<? extends BoolInt> includeAfter;
 
         private Builder() {
           // force use of static builder() method
@@ -1065,6 +1065,15 @@ public class GetPlayQueueRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (own == null) {
+                own = _SINGLETON_VALUE_Own.value();
+            }
+            if (includeBefore == null) {
+                includeBefore = _SINGLETON_VALUE_IncludeBefore.value();
+            }
+            if (includeAfter == null) {
+                includeAfter = _SINGLETON_VALUE_IncludeAfter.value();
+            }
 
             return new GetPlayQueueRequest(
                 accepts, clientIdentifier, product,
@@ -1081,5 +1090,23 @@ public class GetPlayQueueRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_Own =
+                new LazySingletonValue<>(
+                        "own",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_IncludeBefore =
+                new LazySingletonValue<>(
+                        "includeBefore",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_IncludeAfter =
+                new LazySingletonValue<>(
+                        "includeAfter",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

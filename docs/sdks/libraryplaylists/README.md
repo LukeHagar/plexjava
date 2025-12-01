@@ -124,7 +124,7 @@ public class Application {
 
         UploadPlaylistRequest req = UploadPlaylistRequest.builder()
                 .path("/home/barkley/playlist.m3u")
-                .force(BoolInt.ONE)
+                .force(BoolInt.True)
                 .build();
 
         UploadPlaylistResponse res = sdk.libraryPlaylists().uploadPlaylist()

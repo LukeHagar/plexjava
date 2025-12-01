@@ -626,7 +626,7 @@ public class GetAllHubsRequest {
 
         private Optional<Long> count = Optional.empty();
 
-        private Optional<? extends BoolInt> onlyTransient = Optional.empty();
+        private Optional<? extends BoolInt> onlyTransient;
 
         private Optional<? extends List<String>> identifier = Optional.empty();
 
@@ -904,6 +904,9 @@ public class GetAllHubsRequest {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
             }
+            if (onlyTransient == null) {
+                onlyTransient = _SINGLETON_VALUE_OnlyTransient.value();
+            }
 
             return new GetAllHubsRequest(
                 accepts, clientIdentifier, product,
@@ -919,5 +922,11 @@ public class GetAllHubsRequest {
                         "accepts",
                         "\"application/xml\"",
                         new TypeReference<Optional<? extends Accepts>>() {});
+
+        private static final LazySingletonValue<Optional<? extends BoolInt>> _SINGLETON_VALUE_OnlyTransient =
+                new LazySingletonValue<>(
+                        "onlyTransient",
+                        "0",
+                        new TypeReference<Optional<? extends BoolInt>>() {});
     }
 }

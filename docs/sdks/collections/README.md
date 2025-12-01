@@ -23,6 +23,7 @@ import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.operations.CreateCollectionRequest;
 import dev.plexapi.sdk.models.operations.CreateCollectionResponse;
 import dev.plexapi.sdk.models.shared.Accepts;
+import dev.plexapi.sdk.models.shared.MediaType;
 import java.lang.Exception;
 
 public class Application {
@@ -46,6 +47,7 @@ public class Application {
 
         CreateCollectionRequest req = CreateCollectionRequest.builder()
                 .sectionId("<id>")
+                .type(MediaType.TvShow)
                 .build();
 
         CreateCollectionResponse res = sdk.collections().createCollection()

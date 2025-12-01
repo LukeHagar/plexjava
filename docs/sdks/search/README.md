@@ -110,6 +110,7 @@ import dev.plexapi.sdk.PlexAPI;
 import dev.plexapi.sdk.models.operations.VoiceSearchHubsRequest;
 import dev.plexapi.sdk.models.operations.VoiceSearchHubsResponse;
 import dev.plexapi.sdk.models.shared.Accepts;
+import dev.plexapi.sdk.models.shared.MediaType;
 import java.lang.Exception;
 
 public class Application {
@@ -133,6 +134,7 @@ public class Application {
 
         VoiceSearchHubsRequest req = VoiceSearchHubsRequest.builder()
                 .query("<value>")
+                .type(MediaType.TvShow)
                 .build();
 
         VoiceSearchHubsResponse res = sdk.search().voiceSearchHubs()

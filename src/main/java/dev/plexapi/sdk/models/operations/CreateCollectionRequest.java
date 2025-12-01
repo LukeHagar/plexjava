@@ -7,11 +7,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import dev.plexapi.sdk.models.shared.Accepts;
+import dev.plexapi.sdk.models.shared.MediaType;
 import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.SpeakeasyMetadata;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
-import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -110,10 +110,22 @@ public class CreateCollectionRequest {
     private Optional<String> uri;
 
     /**
-     * The metadata type to filter by
+     * The type of media to retrieve or filter by.
+     * 
+     * <p>1 = movie
+     * 2 = show
+     * 3 = season
+     * 4 = episode
+     * 5 = artist
+     * 6 = album
+     * 7 = track
+     * 8 = photo_album
+     * 9 = photo
+     * 
+     * <p>E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")
-    private Optional<Long> type;
+    private Optional<? extends MediaType> type;
 
     @JsonCreator
     public CreateCollectionRequest(
@@ -132,7 +144,7 @@ public class CreateCollectionRequest {
             Optional<String> title,
             Optional<Boolean> smart,
             Optional<String> uri,
-            Optional<Long> type) {
+            Optional<? extends MediaType> type) {
         Utils.checkNotNull(accepts, "accepts");
         Utils.checkNotNull(clientIdentifier, "clientIdentifier");
         Utils.checkNotNull(product, "product");
@@ -299,11 +311,24 @@ public class CreateCollectionRequest {
     }
 
     /**
-     * The metadata type to filter by
+     * The type of media to retrieve or filter by.
+     * 
+     * <p>1 = movie
+     * 2 = show
+     * 3 = season
+     * 4 = episode
+     * 5 = artist
+     * 6 = album
+     * 7 = track
+     * 8 = photo_album
+     * 9 = photo
+     * 
+     * <p>E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
      */
+    @SuppressWarnings("unchecked")
     @JsonIgnore
-    public Optional<Long> type() {
-        return type;
+    public Optional<MediaType> type() {
+        return (Optional<MediaType>) type;
     }
 
     public static Builder builder() {
@@ -587,9 +612,21 @@ public class CreateCollectionRequest {
     }
 
     /**
-     * The metadata type to filter by
+     * The type of media to retrieve or filter by.
+     * 
+     * <p>1 = movie
+     * 2 = show
+     * 3 = season
+     * 4 = episode
+     * 5 = artist
+     * 6 = album
+     * 7 = track
+     * 8 = photo_album
+     * 9 = photo
+     * 
+     * <p>E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
      */
-    public CreateCollectionRequest withType(long type) {
+    public CreateCollectionRequest withType(MediaType type) {
         Utils.checkNotNull(type, "type");
         this.type = Optional.ofNullable(type);
         return this;
@@ -597,9 +634,21 @@ public class CreateCollectionRequest {
 
 
     /**
-     * The metadata type to filter by
+     * The type of media to retrieve or filter by.
+     * 
+     * <p>1 = movie
+     * 2 = show
+     * 3 = season
+     * 4 = episode
+     * 5 = artist
+     * 6 = album
+     * 7 = track
+     * 8 = photo_album
+     * 9 = photo
+     * 
+     * <p>E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
      */
-    public CreateCollectionRequest withType(Optional<Long> type) {
+    public CreateCollectionRequest withType(Optional<? extends MediaType> type) {
         Utils.checkNotNull(type, "type");
         this.type = type;
         return this;
@@ -698,7 +747,7 @@ public class CreateCollectionRequest {
 
         private Optional<String> uri = Optional.empty();
 
-        private Optional<Long> type = Optional.empty();
+        private Optional<? extends MediaType> type = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -982,18 +1031,42 @@ public class CreateCollectionRequest {
 
 
         /**
-         * The metadata type to filter by
+         * The type of media to retrieve or filter by.
+         * 
+         * <p>1 = movie
+         * 2 = show
+         * 3 = season
+         * 4 = episode
+         * 5 = artist
+         * 6 = album
+         * 7 = track
+         * 8 = photo_album
+         * 9 = photo
+         * 
+         * <p>E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
          */
-        public Builder type(long type) {
+        public Builder type(MediaType type) {
             Utils.checkNotNull(type, "type");
             this.type = Optional.ofNullable(type);
             return this;
         }
 
         /**
-         * The metadata type to filter by
+         * The type of media to retrieve or filter by.
+         * 
+         * <p>1 = movie
+         * 2 = show
+         * 3 = season
+         * 4 = episode
+         * 5 = artist
+         * 6 = album
+         * 7 = track
+         * 8 = photo_album
+         * 9 = photo
+         * 
+         * <p>E.g. A movie library will not return anything with type 3 as there are no seasons for movie libraries
          */
-        public Builder type(Optional<Long> type) {
+        public Builder type(Optional<? extends MediaType> type) {
             Utils.checkNotNull(type, "type");
             this.type = type;
             return this;

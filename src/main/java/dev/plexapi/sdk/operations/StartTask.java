@@ -80,7 +80,7 @@ public class StartTask {
             String url = Utils.generateURL(
                     klass,
                     this.baseUrl,
-                    "/butler/{task}",
+                    "/butler/{butlerTask}",
                     request, this.sdkConfiguration.globals);
             HTTPRequest req = new HTTPRequest(url, "POST");
             req.addHeader("Accept", "*/*")

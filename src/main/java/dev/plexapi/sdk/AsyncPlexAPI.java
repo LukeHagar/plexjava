@@ -152,6 +152,12 @@ public class AsyncPlexAPI {
      * Updates to the status can be observed via the Event API.
      */
     private final AsyncUpdater updater;
+
+    private final AsyncAuthentication authentication;
+
+    private final AsyncUsers users;
+
+    private final AsyncPlex plex;
     /**
      * The actual content of the media provider
      */
@@ -361,6 +367,18 @@ public class AsyncPlexAPI {
     public AsyncUpdater updater() {
         return updater;
     }
+
+    public AsyncAuthentication authentication() {
+        return authentication;
+    }
+
+    public AsyncUsers users() {
+        return users;
+    }
+
+    public AsyncPlex plex() {
+        return plex;
+    }
     /**
      * The actual content of the media provider
      */
@@ -406,6 +424,9 @@ public class AsyncPlexAPI {
         this.ultraBlur = new AsyncUltraBlur(syncSDK.ultraBlur(), sdkConfiguration);
         this.status = new AsyncStatus(syncSDK.status(), sdkConfiguration);
         this.updater = new AsyncUpdater(syncSDK.updater(), sdkConfiguration);
+        this.authentication = new AsyncAuthentication(syncSDK.authentication(), sdkConfiguration);
+        this.users = new AsyncUsers(syncSDK.users(), sdkConfiguration);
+        this.plex = new AsyncPlex(syncSDK.plex(), sdkConfiguration);
         this.content = new AsyncContent(syncSDK.content(), sdkConfiguration);
         this.libraryCollections = new AsyncLibraryCollections(syncSDK.libraryCollections(), sdkConfiguration);
     }

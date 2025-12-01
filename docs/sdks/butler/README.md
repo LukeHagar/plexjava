@@ -149,7 +149,7 @@ This endpoint will stop a currently running task by name, or remove it from the 
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="stopTask" method="delete" path="/butler/{task}" -->
+<!-- UsageSnippet language="java" operationID="stopTask" method="delete" path="/butler/{butlerTask}" -->
 ```java
 package hello.world;
 
@@ -178,7 +178,7 @@ public class Application {
             .build();
 
         StopTaskRequest req = StopTaskRequest.builder()
-                .task(Task.CLEAN_OLD_BUNDLES)
+                .butlerTask(ButlerTask.CLEAN_OLD_BUNDLES)
                 .build();
 
         StopTaskResponse res = sdk.butler().stopTask()
@@ -213,7 +213,7 @@ This endpoint will attempt to start a specific Butler task by name.
 
 ### Example Usage
 
-<!-- UsageSnippet language="java" operationID="startTask" method="post" path="/butler/{task}" -->
+<!-- UsageSnippet language="java" operationID="startTask" method="post" path="/butler/{butlerTask}" -->
 ```java
 package hello.world;
 
@@ -242,7 +242,7 @@ public class Application {
             .build();
 
         StartTaskRequest req = StartTaskRequest.builder()
-                .task(PathParamTask.REFRESH_LOCAL_MEDIA)
+                .butlerTask(PathParamButlerTask.REFRESH_LOCAL_MEDIA)
                 .build();
 
         StartTaskResponse res = sdk.butler().startTask()
