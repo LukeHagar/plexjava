@@ -25,7 +25,7 @@ public class SDKConfiguration {
 
     private static final String LANGUAGE = "java";
     public static final String OPENAPI_DOC_VERSION = "1.1.1";
-    public static final String SDK_VERSION = "0.22.1";
+    public static final String SDK_VERSION = "0.22.2";
     public static final String GEN_VERSION = "2.698.4";
     private static final String BASE_PACKAGE = "dev.plexapi.sdk";
     public static final String USER_AGENT = 

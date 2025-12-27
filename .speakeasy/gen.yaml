@@ -21,11 +21,12 @@ generation:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
+  persistentEdits: {}
   requestBodyFieldName: ""
   schemas:
     allOfMergeStrategy: shallowMerge
 java:
-  version: 0.22.1
+  version: 0.22.2
   additionalDependencies: []
   additionalPlugins: []
   artifactID: plexapi
@@ -40,6 +41,7 @@ java:
   enableSlf4jLogging: false
   enableStreamingUploads: false
   flattenGlobalSecurity: true
+  forwardCompatibleEnumsByDefault: false
   generateOptionalUnionAccessors: false
   generateSpringBootStarter: true
   githubURL: github.com/LukeHagar/plexjava

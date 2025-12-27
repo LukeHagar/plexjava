@@ -15,6 +15,7 @@ import java.util.Optional;
  */
 public enum ImageType {
     BACKGROUND("background"),
+    BACKGROUND_SQUARE("backgroundSquare"),
     BANNER("banner"),
     CLEAR_LOGO("clearLogo"),
     COVER_POSTER("coverPoster"),
