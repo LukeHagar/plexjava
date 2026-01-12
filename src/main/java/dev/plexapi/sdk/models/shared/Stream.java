@@ -10,13 +10,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
-import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Float;
 import java.lang.Integer;
-import java.lang.Long;
 import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
@@ -364,14 +361,9 @@ public class Stream {
     @JsonProperty("streamIdentifier")
     private Optional<Integer> streamIdentifier;
 
-    /**
-     * Stream type:
-     *   - VIDEO = 1
-     *   - AUDIO = 2
-     *   - SUBTITLE = 3
-     */
+
     @JsonProperty("streamType")
-    private long streamType;
+    private StreamType streamType;
 
     /**
      * Width of the video stream.
@@ -436,6 +428,7 @@ public class Stream {
             @JsonProperty("dub") Optional<Boolean> dub,
             @JsonProperty("title") Optional<String> title,
             @JsonProperty("streamIdentifier") Optional<Integer> streamIdentifier,
+            @JsonProperty("streamType") StreamType streamType,
             @JsonProperty("width") Optional<Integer> width) {
         Utils.checkNotNull(default_, "default_");
         Utils.checkNotNull(audioChannelLayout, "audioChannelLayout");
@@ -487,6 +480,7 @@ public class Stream {
         Utils.checkNotNull(dub, "dub");
         Utils.checkNotNull(title, "title");
         Utils.checkNotNull(streamIdentifier, "streamIdentifier");
+        Utils.checkNotNull(streamType, "streamType");
         Utils.checkNotNull(width, "width");
         this.default_ = default_;
         this.audioChannelLayout = audioChannelLayout;
@@ -538,7 +532,7 @@ public class Stream {
         this.dub = dub;
         this.title = title;
         this.streamIdentifier = streamIdentifier;
-        this.streamType = Builder._SINGLETON_VALUE_StreamType.value();
+        this.streamType = streamType;
         this.width = width;
         this.additionalProperties = new HashMap<>();
     }
@@ -547,7 +541,8 @@ public class Stream {
             String codec,
             String displayTitle,
             int id,
-            String key) {
+            String key,
+            StreamType streamType) {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
@@ -564,7 +559,8 @@ public class Stream {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), streamType,
+            Optional.empty());
     }
 
     /**
@@ -949,14 +945,8 @@ public class Stream {
         return streamIdentifier;
     }
 
-    /**
-     * Stream type:
-     *   - VIDEO = 1
-     *   - AUDIO = 2
-     *   - SUBTITLE = 3
-     */
     @JsonIgnore
-    public long streamType() {
+    public StreamType streamType() {
         return streamType;
     }
 
@@ -1852,6 +1842,12 @@ public class Stream {
         return this;
     }
 
+    public Stream withStreamType(StreamType streamType) {
+        Utils.checkNotNull(streamType, "streamType");
+        this.streamType = streamType;
+        return this;
+    }
+
     /**
      * Width of the video stream.
      */
@@ -2132,6 +2128,8 @@ public class Stream {
         private Optional<String> title = Optional.empty();
 
         private Optional<Integer> streamIdentifier = Optional.empty();
+
+        private StreamType streamType;
 
         private Optional<Integer> width = Optional.empty();
 
@@ -3020,6 +3018,13 @@ public class Stream {
         }
 
 
+        public Builder streamType(StreamType streamType) {
+            Utils.checkNotNull(streamType, "streamType");
+            this.streamType = streamType;
+            return this;
+        }
+
+
         /**
          * Width of the video stream.
          */
@@ -3073,15 +3078,10 @@ public class Stream {
                 profile, refFrames, samplingRate,
                 scanType, embeddedInVideo, selected,
                 forced, hearingImpaired, dub,
-                title, streamIdentifier, width)
+                title, streamIdentifier, streamType,
+                width)
                 .withAdditionalProperties(additionalProperties);
         }
 
-
-        private static final LazySingletonValue<Long> _SINGLETON_VALUE_StreamType =
-                new LazySingletonValue<>(
-                        "streamType",
-                        "1",
-                        new TypeReference<Long>() {});
     }
 }

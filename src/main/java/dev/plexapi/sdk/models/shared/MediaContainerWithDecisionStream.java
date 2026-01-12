@@ -10,13 +10,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
-import dev.plexapi.sdk.utils.LazySingletonValue;
 import dev.plexapi.sdk.utils.Utils;
 import java.lang.Boolean;
 import java.lang.Float;
 import java.lang.Integer;
-import java.lang.Long;
 import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
@@ -365,14 +362,9 @@ public class MediaContainerWithDecisionStream {
     @JsonProperty("streamIdentifier")
     private Optional<Integer> streamIdentifier;
 
-    /**
-     * Stream type:
-     *   - VIDEO = 1
-     *   - AUDIO = 2
-     *   - SUBTITLE = 3
-     */
+
     @JsonProperty("streamType")
-    private long streamType;
+    private MediaContainerWithDecisionStreamType streamType;
 
     /**
      * Width of the video stream.
@@ -447,6 +439,7 @@ public class MediaContainerWithDecisionStream {
             @JsonProperty("dub") Optional<Boolean> dub,
             @JsonProperty("title") Optional<String> title,
             @JsonProperty("streamIdentifier") Optional<Integer> streamIdentifier,
+            @JsonProperty("streamType") MediaContainerWithDecisionStreamType streamType,
             @JsonProperty("width") Optional<Integer> width,
             @JsonProperty("decision") Optional<? extends MediaContainerWithDecisionDecision> decision,
             @JsonProperty("location") Optional<? extends MediaContainerWithDecisionLocation> location) {
@@ -500,6 +493,7 @@ public class MediaContainerWithDecisionStream {
         Utils.checkNotNull(dub, "dub");
         Utils.checkNotNull(title, "title");
         Utils.checkNotNull(streamIdentifier, "streamIdentifier");
+        Utils.checkNotNull(streamType, "streamType");
         Utils.checkNotNull(width, "width");
         Utils.checkNotNull(decision, "decision");
         Utils.checkNotNull(location, "location");
@@ -553,7 +547,7 @@ public class MediaContainerWithDecisionStream {
         this.dub = dub;
         this.title = title;
         this.streamIdentifier = streamIdentifier;
-        this.streamType = Builder._SINGLETON_VALUE_StreamType.value();
+        this.streamType = streamType;
         this.width = width;
         this.decision = decision;
         this.location = location;
@@ -564,7 +558,8 @@ public class MediaContainerWithDecisionStream {
             String codec,
             String displayTitle,
             int id,
-            String key) {
+            String key,
+            MediaContainerWithDecisionStreamType streamType) {
         this(Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
@@ -581,8 +576,8 @@ public class MediaContainerWithDecisionStream {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty());
+            Optional.empty(), Optional.empty(), streamType,
+            Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     /**
@@ -967,14 +962,8 @@ public class MediaContainerWithDecisionStream {
         return streamIdentifier;
     }
 
-    /**
-     * Stream type:
-     *   - VIDEO = 1
-     *   - AUDIO = 2
-     *   - SUBTITLE = 3
-     */
     @JsonIgnore
-    public long streamType() {
+    public MediaContainerWithDecisionStreamType streamType() {
         return streamType;
     }
 
@@ -1882,6 +1871,12 @@ public class MediaContainerWithDecisionStream {
         return this;
     }
 
+    public MediaContainerWithDecisionStream withStreamType(MediaContainerWithDecisionStreamType streamType) {
+        Utils.checkNotNull(streamType, "streamType");
+        this.streamType = streamType;
+        return this;
+    }
+
     /**
      * Width of the video stream.
      */
@@ -2193,6 +2188,8 @@ public class MediaContainerWithDecisionStream {
         private Optional<String> title = Optional.empty();
 
         private Optional<Integer> streamIdentifier = Optional.empty();
+
+        private MediaContainerWithDecisionStreamType streamType;
 
         private Optional<Integer> width = Optional.empty();
 
@@ -3085,6 +3082,13 @@ public class MediaContainerWithDecisionStream {
         }
 
 
+        public Builder streamType(MediaContainerWithDecisionStreamType streamType) {
+            Utils.checkNotNull(streamType, "streamType");
+            this.streamType = streamType;
+            return this;
+        }
+
+
         /**
          * Width of the video stream.
          */
@@ -3164,16 +3168,10 @@ public class MediaContainerWithDecisionStream {
                 profile, refFrames, samplingRate,
                 scanType, embeddedInVideo, selected,
                 forced, hearingImpaired, dub,
-                title, streamIdentifier, width,
-                decision, location)
+                title, streamIdentifier, streamType,
+                width, decision, location)
                 .withAdditionalProperties(additionalProperties);
         }
 
-
-        private static final LazySingletonValue<Long> _SINGLETON_VALUE_StreamType =
-                new LazySingletonValue<>(
-                        "streamType",
-                        "1",
-                        new TypeReference<Long>() {});
     }
 }

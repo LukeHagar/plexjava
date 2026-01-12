@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 1732900d-e173-47c1-a90d-d45182eb35d9
 management:
-  docChecksum: ee54f123359638b8fc677ddd294a68d7
+  docChecksum: 786f293c6241fa02967102a24f52842c
   docVersion: 1.1.1
   speakeasyVersion: 1.615.2
   generationVersion: 2.698.4
-  releaseVersion: 0.22.2
-  configChecksum: 469092703a81732d7a398fed7cfb1180
+  releaseVersion: 0.22.3
+  configChecksum: bc74bb547fa48c239e7be5fb5a395e87
   repoURL: https://github.com/LukeHagar/plexjava.git
   published: true
 features:
@@ -841,6 +841,7 @@ generatedFiles:
   - docs/models/shared/MediaContainerWithDecisionMetadata.md
   - docs/models/shared/MediaContainerWithDecisionPart.md
   - docs/models/shared/MediaContainerWithDecisionStream.md
+  - docs/models/shared/MediaContainerWithDecisionStreamType.md
   - docs/models/shared/MediaContainerWithDevice.md
   - docs/models/shared/MediaContainerWithDeviceDevice.md
   - docs/models/shared/MediaContainerWithDeviceMediaContainer.md
@@ -894,6 +895,7 @@ generatedFiles:
   - docs/models/shared/SortPivot.md
   - docs/models/shared/Status.md
   - docs/models/shared/Stream.md
+  - docs/models/shared/StreamType.md
   - docs/models/shared/Subscription.md
   - docs/models/shared/Subtitles.md
   - docs/models/shared/Tag.md
@@ -2548,6 +2550,7 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/shared/MediaContainerWithDecisionMetadata.java
   - src/main/java/dev/plexapi/sdk/models/shared/MediaContainerWithDecisionPart.java
   - src/main/java/dev/plexapi/sdk/models/shared/MediaContainerWithDecisionStream.java
+  - src/main/java/dev/plexapi/sdk/models/shared/MediaContainerWithDecisionStreamType.java
   - src/main/java/dev/plexapi/sdk/models/shared/MediaContainerWithDevice.java
   - src/main/java/dev/plexapi/sdk/models/shared/MediaContainerWithDeviceDevice.java
   - src/main/java/dev/plexapi/sdk/models/shared/MediaContainerWithDeviceMediaContainer.java
@@ -2601,6 +2604,7 @@ generatedFiles:
   - src/main/java/dev/plexapi/sdk/models/shared/SortPivot.java
   - src/main/java/dev/plexapi/sdk/models/shared/Status.java
   - src/main/java/dev/plexapi/sdk/models/shared/Stream.java
+  - src/main/java/dev/plexapi/sdk/models/shared/StreamType.java
   - src/main/java/dev/plexapi/sdk/models/shared/Subscription.java
   - src/main/java/dev/plexapi/sdk/models/shared/Subtitles.java
   - src/main/java/dev/plexapi/sdk/models/shared/Tag.java
@@ -8649,6 +8653,74 @@ examples:
           application/json: {"MediaContainer": {"Metadata": [{"title": "<value>", "type": "<value>", "addedAt": 239532, "Autotag": [{"filter": "actor=49", "role": "Secretary", "tag": "Shaun Lawton", "tagKey": "5d3ee12c4cde6a001c3e0b27", "thumb": "http://image.tmdb.org/t/p/original/lcJ8qM51ClAR2UzXU1mkZGfnn3o.jpg"}], "Country": [{"filter": "actor=49", "role": "Secretary", "tag": "Shaun Lawton", "tagKey": "5d3ee12c4cde6a001c3e0b27", "thumb": "http://image.tmdb.org/t/p/original/lcJ8qM51ClAR2UzXU1mkZGfnn3o.jpg"}], "Director": [{"filter": "actor=49", "role": "Secretary", "tag": "Shaun Lawton", "tagKey": "5d3ee12c4cde6a001c3e0b27", "thumb": "http://image.tmdb.org/t/p/original/lcJ8qM51ClAR2UzXU1mkZGfnn3o.jpg"}], "Genre": [{"filter": "actor=49", "role": "Secretary", "tag": "Shaun Lawton", "tagKey": "5d3ee12c4cde6a001c3e0b27", "thumb": "http://image.tmdb.org/t/p/original/lcJ8qM51ClAR2UzXU1mkZGfnn3o.jpg"}], "Guid": [{"id": "{\"imdbExample\":{\"summary\":\"IMDB example\",\"value\":\"imdb://tt13015952\"},\"tmdbExample\":{\"summary\":\"TMDB example\",\"value\":\"tmdb://2434012\"},\"tvdbExample\":{\"summary\":\"TVDB example\",\"value\":\"tvdb://7945991\"}}"}], "key": "<key>", "Media": [{"aspectRatio": 2.35, "audioChannels": 2, "audioCodec": "aac", "audioProfile": "lc", "bitrate": 5612, "container": "mov", "duration": 150192, "has64bitOffsets": false, "hasVoiceActivity": true, "height": 544, "id": 1, "optimizedForStreaming": false, "Part": [{"audioProfile": "lc", "container": "mov", "duration": 150192, "file": "/home/schuyler/Videos/Trailers/Cloud Atlas (2012).mov", "has64bitOffsets": false, "id": 1, "key": "/library/parts/1/1531779263/file.mov", "optimizedForStreaming": false, "size": 105355654, "Stream": [{"default": true, "audioChannelLayout": "stereo", "bitDepth": 8, "bitrate": 5466, "canAutoSync": true, "chromaLocation": "topleft", "chromaSubsampling": "4:2:0", "codec": "h264", "colorPrimaries": "bt709", "colorRange": "tv", "colorSpace": "bt709", "colorTrc": "bt709", "displayTitle": "English (H.264 Main)", "frameRate": 23.976, "hasScalingMatrix": false, "height": 544, "id": 1, "index": 0, "key": "/library/streams/1", "language": "English", "languageCode": "eng", "level": 31, "profile": "main", "refFrames": 2, "samplingRate": 48000, "streamIdentifier": 1, "streamType": 1, "width": 1280}], "videoProfile": "main"}], "videoCodec": "h264", "videoFrameRate": "24p", "videoProfile": "main", "videoResolution": "720", "width": 1280}], "Rating": [{"filter": "actor=49", "role": "Secretary", "tag": "Shaun Lawton", "tagKey": "5d3ee12c4cde6a001c3e0b27", "thumb": "http://image.tmdb.org/t/p/original/lcJ8qM51ClAR2UzXU1mkZGfnn3o.jpg"}], "Role": [{"filter": "actor=49", "role": "Secretary", "tag": "Shaun Lawton", "tagKey": "5d3ee12c4cde6a001c3e0b27", "thumb": "http://image.tmdb.org/t/p/original/lcJ8qM51ClAR2UzXU1mkZGfnn3o.jpg"}], "Writer": [{"filter": "actor=49", "role": "Secretary", "tag": "Shaun Lawton", "tagKey": "5d3ee12c4cde6a001c3e0b27", "thumb": "http://image.tmdb.org/t/p/original/lcJ8qM51ClAR2UzXU1mkZGfnn3o.jpg"}]}]}}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## Java SDK Changes Detected:
+  * `plex-api.downloadQueue.getItemDecision()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.hubs.getAllHubs()`:  `response.mediacontainer.hub.[].metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.hubs.getContinueWatching()`:  `response.mediacontainer.hub.[].metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.hubs.getPromotedHubs()`:  `response.mediacontainer.hub.[].metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.hubs.getMetadataHubs()`:  `response.mediacontainer.hub.[].metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.hubs.getPostplayHubs()`:  `response.mediacontainer.hub.[].metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.hubs.getRelatedHubs()`:  `response.mediacontainer.hub.[].metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.hubs.getSectionHubs()`:  `response.mediacontainer.hub.[].metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.search.searchHubs()`:  `response.mediacontainer.hub.[].metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.search.voiceSearchHubs()`:  `response.mediacontainer.hub.[].metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.library.getLibraryItems()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.library.ingestTransientItem()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.library.getLibraryMatches()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.library.addSection()`:  `response.mediacontainer.directory.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.library.getAllItemLeaves()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.library.getExtras()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.library.listMatches()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.library.listSonicallySimilar()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.library.getRelatedItems()`:  `response.mediacontainer.hub.[].metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.library.listSimilar()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.library.getItemTree()`:  `response.mediacontainer.metadataItem.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.library.listPersonMedia()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.library.getLibraryDetails()`:  `response.mediacontainer.directory.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.library.autocomplete()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.library.getCollections()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.library.getCommon()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.collections.createCollection()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.dvRs.tuneChannel()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.liveTv.getSessions()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.liveTv.getLiveTvSession()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.subscriptions.getAllSubscriptions()`:  `response.mediacontainer.mediaSubscription.[].mediaGrabOperation.[].metadata.media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.subscriptions.createSubscription()`:  `response.mediacontainer.mediaSubscription.[].mediaGrabOperation.[].metadata.media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.subscriptions.getScheduledRecordings()`:  `response.mediacontainer.mediaGrabOperation.[].metadata.media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.subscriptions.getTemplate()`:  `response.mediacontainer.subscriptionTemplate.[].mediaSubscription.[].mediaGrabOperation.[].metadata.media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.subscriptions.getSubscription()`:  `response.mediacontainer.mediaSubscription.[].mediaGrabOperation.[].metadata.media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.subscriptions.editSubscriptionPreferences()`:  `response.mediacontainer.mediaSubscription.[].mediaGrabOperation.[].metadata.media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.subscriptions.reorderSubscription()`:  `response.mediacontainer.mediaSubscription.[].mediaGrabOperation.[].metadata.media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.transcoder.makeDecision()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.playlist.listPlaylists()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.playlist.getPlaylist()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.playlist.getPlaylistItems()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.libraryPlaylists.createPlaylist()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.libraryPlaylists.clearPlaylistItems()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.libraryPlaylists.addPlaylistItems()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.libraryPlaylists.deletePlaylistItem()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.libraryPlaylists.getPlaylistGeneratorItems()`:  `response.mediacontainer.metadata.media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.libraryPlaylists.movePlaylistItem()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.playQueue.getPlayQueue()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.playQueue.addToPlayQueue()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.playQueue.clearPlayQueue()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.playQueue.resetPlayQueue()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.playQueue.shuffle()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.playQueue.unshuffle()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.playQueue.deletePlayQueueItem()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.playQueue.movePlayQueueItem()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.status.listSessions()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.content.getCollectionItems()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.content.getMetadataItem()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.content.getAlbums()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.content.listContent()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.content.getAllLeaves()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.content.getSonicPath()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.content.getSonicallySimilar()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.libraryCollections.addCollectionItems()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.libraryCollections.deleteCollectionItem()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
+  * `plex-api.libraryCollections.moveCollectionItem()`:  `response.mediacontainer.metadata.[].media.[].part.[].stream.[].streamType` **Changed** **Breaking** :warning:
 trackedFiles:
   .gitattributes:
     last_write_checksum: sha1:18563f88a3e50e55f2ae6f2b62440464808f5d6f
@@ -10263,7 +10335,9 @@ trackedFiles:
   docs/models/shared/MediaContainerWithDecisionPart.md:
     last_write_checksum: sha1:5c9b7f330b7e1a537b8abedaea2f62033d81e097
   docs/models/shared/MediaContainerWithDecisionStream.md:
-    last_write_checksum: sha1:06071fcefa656c50e38dc5304a35cb2d090292ed
+    last_write_checksum: sha1:e047cf12e2e95c0d9bb6dc46d8b6d42051d2d457
+  docs/models/shared/MediaContainerWithDecisionStreamType.md:
+    last_write_checksum: sha1:970678095f205341c4dcc8360e5a64c0754577df
   docs/models/shared/MediaContainerWithDevice.md:
     last_write_checksum: sha1:930ea0890e9ef2a135e26e33cb90560100b7f726
   docs/models/shared/MediaContainerWithDeviceDevice.md:
@@ -10369,7 +10443,9 @@ trackedFiles:
   docs/models/shared/Status.md:
     last_write_checksum: sha1:616d09b11bb1fc9103ba8f0f523f3b592983fa7d
   docs/models/shared/Stream.md:
-    last_write_checksum: sha1:8d7b193314f38cdc4cd45f095bbdeb19a82e428e
+    last_write_checksum: sha1:7524a70fb74a4ce2712bc0d97732711026a40649
+  docs/models/shared/StreamType.md:
+    last_write_checksum: sha1:0f22a7ee40a486dd6aee838b27720d50f6a03323
   docs/models/shared/Subscription.md:
     last_write_checksum: sha1:bfb07194802ae1f328930eb6c28baf5f05cf8eaf
   docs/models/shared/Subtitles.md:
@@ -10605,7 +10681,7 @@ trackedFiles:
   src/main/java/dev/plexapi/sdk/Rate.java:
     last_write_checksum: sha1:a319837ed701027f6ca98ab99cf5c95178c7f6fe
   src/main/java/dev/plexapi/sdk/SDKConfiguration.java:
-    last_write_checksum: sha1:996bb5b89907eb3aa1200c7d671b8a83e75316f9
+    last_write_checksum: sha1:3857c5acbdc48bc41cbef103767d41bfd9215c39
   src/main/java/dev/plexapi/sdk/Search.java:
     last_write_checksum: sha1:9b51d3d7f225844414ce2b48127f94e378eba6b1
   src/main/java/dev/plexapi/sdk/SecuritySource.java:
@@ -13679,7 +13755,9 @@ trackedFiles:
   src/main/java/dev/plexapi/sdk/models/shared/MediaContainerWithDecisionPart.java:
     last_write_checksum: sha1:7b99e21bcc4ab985dbc0a336a96ca07e9483d1c7
   src/main/java/dev/plexapi/sdk/models/shared/MediaContainerWithDecisionStream.java:
-    last_write_checksum: sha1:224d6ebc817766f611964616b41041df1abfaf7b
+    last_write_checksum: sha1:967f4445a6f95dbb4bd9075c0a0a5a3e269bab2a
+  src/main/java/dev/plexapi/sdk/models/shared/MediaContainerWithDecisionStreamType.java:
+    last_write_checksum: sha1:eba24bd912e2a8b5df412ac2b9282423a8df3275
   src/main/java/dev/plexapi/sdk/models/shared/MediaContainerWithDevice.java:
     last_write_checksum: sha1:bf83b21c6e6b332b32cc7bec13126c3790ab0ad0
   src/main/java/dev/plexapi/sdk/models/shared/MediaContainerWithDeviceDevice.java:
@@ -13785,7 +13863,9 @@ trackedFiles:
   src/main/java/dev/plexapi/sdk/models/shared/Status.java:
     last_write_checksum: sha1:f5b9f736634e89e41db07e3f2219f7e9255c366c
   src/main/java/dev/plexapi/sdk/models/shared/Stream.java:
-    last_write_checksum: sha1:ee61429b9bea718400c6897c2d9a7850044d4509
+    last_write_checksum: sha1:efb0ddde36b730ca1db17ff28f5ad9f2c563e754
+  src/main/java/dev/plexapi/sdk/models/shared/StreamType.java:
+    last_write_checksum: sha1:dd30c71fb3cb3c08f64b9db15e91865f48913580
   src/main/java/dev/plexapi/sdk/models/shared/Subscription.java:
     last_write_checksum: sha1:036df633fe9116f120992d562965866e24854b5b
   src/main/java/dev/plexapi/sdk/models/shared/Subtitles.java:
