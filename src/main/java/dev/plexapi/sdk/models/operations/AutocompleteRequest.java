@@ -118,12 +118,6 @@ public class AutocompleteRequest {
     private long sectionId;
 
     /**
-     * Item type
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")
-    private Optional<Long> mediaType;
-
-    /**
      * The "field" stands in for any field, the value is a partial string for matching
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=field.query")
@@ -144,7 +138,6 @@ public class AutocompleteRequest {
             Optional<String> marketplace,
             Optional<? extends MediaQuery> mediaQuery,
             long sectionId,
-            Optional<Long> mediaType,
             Optional<String> fieldQuery) {
         Utils.checkNotNull(accepts, "accepts");
         Utils.checkNotNull(clientIdentifier, "clientIdentifier");
@@ -159,7 +152,6 @@ public class AutocompleteRequest {
         Utils.checkNotNull(marketplace, "marketplace");
         Utils.checkNotNull(mediaQuery, "mediaQuery");
         Utils.checkNotNull(sectionId, "sectionId");
-        Utils.checkNotNull(mediaType, "mediaType");
         Utils.checkNotNull(fieldQuery, "fieldQuery");
         this.accepts = accepts;
         this.clientIdentifier = clientIdentifier;
@@ -174,7 +166,6 @@ public class AutocompleteRequest {
         this.marketplace = marketplace;
         this.mediaQuery = mediaQuery;
         this.sectionId = sectionId;
-        this.mediaType = mediaType;
         this.fieldQuery = fieldQuery;
     }
     
@@ -184,7 +175,7 @@ public class AutocompleteRequest {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            sectionId, Optional.empty(), Optional.empty());
+            sectionId, Optional.empty());
     }
 
     /**
@@ -311,14 +302,6 @@ public class AutocompleteRequest {
     @JsonIgnore
     public long sectionId() {
         return sectionId;
-    }
-
-    /**
-     * Item type
-     */
-    @JsonIgnore
-    public Optional<Long> mediaType() {
-        return mediaType;
     }
 
     /**
@@ -612,25 +595,6 @@ public class AutocompleteRequest {
     }
 
     /**
-     * Item type
-     */
-    public AutocompleteRequest withMediaType(long mediaType) {
-        Utils.checkNotNull(mediaType, "mediaType");
-        this.mediaType = Optional.ofNullable(mediaType);
-        return this;
-    }
-
-
-    /**
-     * Item type
-     */
-    public AutocompleteRequest withMediaType(Optional<Long> mediaType) {
-        Utils.checkNotNull(mediaType, "mediaType");
-        this.mediaType = mediaType;
-        return this;
-    }
-
-    /**
      * The "field" stands in for any field, the value is a partial string for matching
      */
     public AutocompleteRequest withFieldQuery(String fieldQuery) {
@@ -672,7 +636,6 @@ public class AutocompleteRequest {
             Utils.enhancedDeepEquals(this.marketplace, other.marketplace) &&
             Utils.enhancedDeepEquals(this.mediaQuery, other.mediaQuery) &&
             Utils.enhancedDeepEquals(this.sectionId, other.sectionId) &&
-            Utils.enhancedDeepEquals(this.mediaType, other.mediaType) &&
             Utils.enhancedDeepEquals(this.fieldQuery, other.fieldQuery);
     }
     
@@ -683,7 +646,7 @@ public class AutocompleteRequest {
             version, platform, platformVersion,
             device, model, deviceVendor,
             deviceName, marketplace, mediaQuery,
-            sectionId, mediaType, fieldQuery);
+            sectionId, fieldQuery);
     }
     
     @Override
@@ -702,7 +665,6 @@ public class AutocompleteRequest {
                 "marketplace", marketplace,
                 "mediaQuery", mediaQuery,
                 "sectionId", sectionId,
-                "mediaType", mediaType,
                 "fieldQuery", fieldQuery);
     }
 
@@ -734,8 +696,6 @@ public class AutocompleteRequest {
         private Optional<? extends MediaQuery> mediaQuery = Optional.empty();
 
         private Long sectionId;
-
-        private Optional<Long> mediaType = Optional.empty();
 
         private Optional<String> fieldQuery = Optional.empty();
 
@@ -1023,25 +983,6 @@ public class AutocompleteRequest {
 
 
         /**
-         * Item type
-         */
-        public Builder mediaType(long mediaType) {
-            Utils.checkNotNull(mediaType, "mediaType");
-            this.mediaType = Optional.ofNullable(mediaType);
-            return this;
-        }
-
-        /**
-         * Item type
-         */
-        public Builder mediaType(Optional<Long> mediaType) {
-            Utils.checkNotNull(mediaType, "mediaType");
-            this.mediaType = mediaType;
-            return this;
-        }
-
-
-        /**
          * The "field" stands in for any field, the value is a partial string for matching
          */
         public Builder fieldQuery(String fieldQuery) {
@@ -1069,7 +1010,7 @@ public class AutocompleteRequest {
                 version, platform, platformVersion,
                 device, model, deviceVendor,
                 deviceName, marketplace, mediaQuery,
-                sectionId, mediaType, fieldQuery);
+                sectionId, fieldQuery);
         }
 
 

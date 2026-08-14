@@ -141,29 +141,8 @@ public class Application {
 
         ListPlaybackHistoryRequest req = ListPlaybackHistoryRequest.builder()
                 .sort(List.of(
-                    "v",
-                    "i",
-                    "e",
-                    "w",
-                    "e",
-                    "d",
-                    "A",
-                    "t",
-                    ":",
-                    "d",
-                    "e",
-                    "s",
-                    "c",
-                    ",",
-                    "a",
-                    "c",
-                    "c",
-                    "o",
-                    "u",
-                    "n",
-                    "t",
-                    "I",
-                    "D"))
+                    "viewedAt:desc",
+                    "accountID"))
                 .build();
 
         ListPlaybackHistoryResponse res = sdk.status().listPlaybackHistory()

@@ -117,18 +117,6 @@ public class GetFirstCharactersRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=sectionId")
     private long sectionId;
 
-    /**
-     * The metadata type to filter on
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")
-    private Optional<Long> mediaType;
-
-    /**
-     * The metadata type to filter on
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")
-    private Optional<Long> sort;
-
     @JsonCreator
     public GetFirstCharactersRequest(
             Optional<? extends Accepts> accepts,
@@ -143,9 +131,7 @@ public class GetFirstCharactersRequest {
             Optional<String> deviceName,
             Optional<String> marketplace,
             Optional<? extends MediaQuery> mediaQuery,
-            long sectionId,
-            Optional<Long> mediaType,
-            Optional<Long> sort) {
+            long sectionId) {
         Utils.checkNotNull(accepts, "accepts");
         Utils.checkNotNull(clientIdentifier, "clientIdentifier");
         Utils.checkNotNull(product, "product");
@@ -159,8 +145,6 @@ public class GetFirstCharactersRequest {
         Utils.checkNotNull(marketplace, "marketplace");
         Utils.checkNotNull(mediaQuery, "mediaQuery");
         Utils.checkNotNull(sectionId, "sectionId");
-        Utils.checkNotNull(mediaType, "mediaType");
-        Utils.checkNotNull(sort, "sort");
         this.accepts = accepts;
         this.clientIdentifier = clientIdentifier;
         this.product = product;
@@ -174,8 +158,6 @@ public class GetFirstCharactersRequest {
         this.marketplace = marketplace;
         this.mediaQuery = mediaQuery;
         this.sectionId = sectionId;
-        this.mediaType = mediaType;
-        this.sort = sort;
     }
     
     public GetFirstCharactersRequest(
@@ -184,7 +166,7 @@ public class GetFirstCharactersRequest {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            sectionId, Optional.empty(), Optional.empty());
+            sectionId);
     }
 
     /**
@@ -311,22 +293,6 @@ public class GetFirstCharactersRequest {
     @JsonIgnore
     public long sectionId() {
         return sectionId;
-    }
-
-    /**
-     * The metadata type to filter on
-     */
-    @JsonIgnore
-    public Optional<Long> mediaType() {
-        return mediaType;
-    }
-
-    /**
-     * The metadata type to filter on
-     */
-    @JsonIgnore
-    public Optional<Long> sort() {
-        return sort;
     }
 
     public static Builder builder() {
@@ -611,44 +577,6 @@ public class GetFirstCharactersRequest {
         return this;
     }
 
-    /**
-     * The metadata type to filter on
-     */
-    public GetFirstCharactersRequest withMediaType(long mediaType) {
-        Utils.checkNotNull(mediaType, "mediaType");
-        this.mediaType = Optional.ofNullable(mediaType);
-        return this;
-    }
-
-
-    /**
-     * The metadata type to filter on
-     */
-    public GetFirstCharactersRequest withMediaType(Optional<Long> mediaType) {
-        Utils.checkNotNull(mediaType, "mediaType");
-        this.mediaType = mediaType;
-        return this;
-    }
-
-    /**
-     * The metadata type to filter on
-     */
-    public GetFirstCharactersRequest withSort(long sort) {
-        Utils.checkNotNull(sort, "sort");
-        this.sort = Optional.ofNullable(sort);
-        return this;
-    }
-
-
-    /**
-     * The metadata type to filter on
-     */
-    public GetFirstCharactersRequest withSort(Optional<Long> sort) {
-        Utils.checkNotNull(sort, "sort");
-        this.sort = sort;
-        return this;
-    }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -671,9 +599,7 @@ public class GetFirstCharactersRequest {
             Utils.enhancedDeepEquals(this.deviceName, other.deviceName) &&
             Utils.enhancedDeepEquals(this.marketplace, other.marketplace) &&
             Utils.enhancedDeepEquals(this.mediaQuery, other.mediaQuery) &&
-            Utils.enhancedDeepEquals(this.sectionId, other.sectionId) &&
-            Utils.enhancedDeepEquals(this.mediaType, other.mediaType) &&
-            Utils.enhancedDeepEquals(this.sort, other.sort);
+            Utils.enhancedDeepEquals(this.sectionId, other.sectionId);
     }
     
     @Override
@@ -683,7 +609,7 @@ public class GetFirstCharactersRequest {
             version, platform, platformVersion,
             device, model, deviceVendor,
             deviceName, marketplace, mediaQuery,
-            sectionId, mediaType, sort);
+            sectionId);
     }
     
     @Override
@@ -701,9 +627,7 @@ public class GetFirstCharactersRequest {
                 "deviceName", deviceName,
                 "marketplace", marketplace,
                 "mediaQuery", mediaQuery,
-                "sectionId", sectionId,
-                "mediaType", mediaType,
-                "sort", sort);
+                "sectionId", sectionId);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -734,10 +658,6 @@ public class GetFirstCharactersRequest {
         private Optional<? extends MediaQuery> mediaQuery = Optional.empty();
 
         private Long sectionId;
-
-        private Optional<Long> mediaType = Optional.empty();
-
-        private Optional<Long> sort = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -1021,44 +941,6 @@ public class GetFirstCharactersRequest {
             return this;
         }
 
-
-        /**
-         * The metadata type to filter on
-         */
-        public Builder mediaType(long mediaType) {
-            Utils.checkNotNull(mediaType, "mediaType");
-            this.mediaType = Optional.ofNullable(mediaType);
-            return this;
-        }
-
-        /**
-         * The metadata type to filter on
-         */
-        public Builder mediaType(Optional<Long> mediaType) {
-            Utils.checkNotNull(mediaType, "mediaType");
-            this.mediaType = mediaType;
-            return this;
-        }
-
-
-        /**
-         * The metadata type to filter on
-         */
-        public Builder sort(long sort) {
-            Utils.checkNotNull(sort, "sort");
-            this.sort = Optional.ofNullable(sort);
-            return this;
-        }
-
-        /**
-         * The metadata type to filter on
-         */
-        public Builder sort(Optional<Long> sort) {
-            Utils.checkNotNull(sort, "sort");
-            this.sort = sort;
-            return this;
-        }
-
         public GetFirstCharactersRequest build() {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
@@ -1069,7 +951,7 @@ public class GetFirstCharactersRequest {
                 version, platform, platformVersion,
                 device, model, deviceVendor,
                 deviceName, marketplace, mediaQuery,
-                sectionId, mediaType, sort);
+                sectionId);
         }
 
 

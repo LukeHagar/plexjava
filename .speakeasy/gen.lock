@@ -1,26 +1,26 @@
 lockVersion: 2.0.0
 id: 1732900d-e173-47c1-a90d-d45182eb35d9
 management:
-  docChecksum: 3709ffe7a6a4b8a56a8eb38cfd80f9bf
+  docChecksum: ea414229037fddd5dd7769a67111aaf7
   docVersion: 1.1.1
-  speakeasyVersion: 1.790.2
-  generationVersion: 2.918.3
-  releaseVersion: 0.23.0
-  configChecksum: 69135fe190e9b2dba2ca90299e99bb38
+  speakeasyVersion: 1.793.1
+  generationVersion: 2.928.0
+  releaseVersion: 0.24.0
+  configChecksum: eebf2715d713958902f84d9ff2daf5f0
   repoURL: https://github.com/LukasParke/plexjava.git
   installationURL: https://github.com/LukasParke/plexjava
   published: true
 persistentEdits:
-  generation_id: d6b0789e-efab-43f8-90ce-aeef8378f18c
-  pristine_commit_hash: e5cd84d5ca22ad420bf1b76897b5b4d9fd7d08db
-  pristine_tree_hash: c2aaa83d43c695f393dad330468404d5c83a5b78
+  generation_id: 4da91ff8-2eaa-4e00-8f54-92ae001c552c
+  pristine_commit_hash: deee80f7e59bb45ea297100ccf7e9191992938b3
+  pristine_tree_hash: ddc2cd5177694c5d2ec2cec105c729c400c4bd17
 features:
   java:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     additionalProperties: 0.0.2
     constsAndDefaults: 0.1.3
-    core: 3.55.31
+    core: 3.56.1
     deprecations: 2.81.2
     downloadStreams: 0.1.1
     enums: 2.82.0
@@ -39,7 +39,7 @@ features:
     openEnums: 0.2.0
     retries: 0.1.3
     sdkHooks: 1.2.0
-    unions: 0.3.6
+    unions: 0.3.7
     uploadStreams: 0.1.0
 trackedFiles:
   .gitattributes:
@@ -260,8 +260,8 @@ trackedFiles:
     pristine_git_object: 8fe36891f94188250f733e92d530ae9f0d36cd57
   docs/models/operations/AutocompleteRequest.md:
     id: 9ccbc7b72fe5
-    last_write_checksum: sha1:36426d7bd710d8ba447312a187759f73ec80319b
-    pristine_git_object: 2ba7fa2a46676373eafa6c60023841e774698b5e
+    last_write_checksum: sha1:f46f98a31200fea8d6b5054254dca89e812c90af
+    pristine_git_object: 1fbbd6274be6501cae1efef711ed8d02b38e51f4
   docs/models/operations/AutocompleteResponse.md:
     id: b5143b5f8ded
     last_write_checksum: sha1:6f3d2adc66c716f3241ba0c515e33853df1730cd
@@ -440,8 +440,8 @@ trackedFiles:
     pristine_git_object: c4f8bd7d116e48070c370d0fd4d64ff166f5685b
   docs/models/operations/CreateDVRRequest.md:
     id: cf32866389b2
-    last_write_checksum: sha1:0a4fd51e40ce72ddd0e0d820cc149197f80589f1
-    pristine_git_object: d11d35cc4671174e3f1055ad0d0e83bf6134c631
+    last_write_checksum: sha1:fdbbbe51d0662035c99a26eb5168d4bdb98f05a3
+    pristine_git_object: 5ced7c999f2c0717a2086dddead555ca25445a4c
   docs/models/operations/CreateDVRResponse.md:
     id: 66bd423d7309
     last_write_checksum: sha1:42567bf483a5f35b72163c4d3984873fd4b52e51
@@ -1196,8 +1196,8 @@ trackedFiles:
     pristine_git_object: 6eee6aff98590cccd624ba9eb29277fe5c321fa8
   docs/models/operations/GetCommonRequest.md:
     id: 2ad399343101
-    last_write_checksum: sha1:dbea8e70486f2b64c67f2534227091b685cb763f
-    pristine_git_object: 6c1926ec98b3c1748ea93ae1b3ce17bd6fee6ba3
+    last_write_checksum: sha1:85ed104c9510fb812e4d7c33034a78f1c2f06c39
+    pristine_git_object: c0acfe614930384ead74f98f5515dcb902e5f5c2
   docs/models/operations/GetCommonResponse.md:
     id: 73cbc45b52bf
     last_write_checksum: sha1:684e310ccaf151b07b396b1b0cc996ab3af1dc79
@@ -1420,8 +1420,8 @@ trackedFiles:
     pristine_git_object: feef1e4d01deb119710bb1014860cc48b845460d
   docs/models/operations/GetFirstCharactersRequest.md:
     id: 1d851e872d3e
-    last_write_checksum: sha1:0c3268ef9817495c0700ed78924fdb9d2ea42aa9
-    pristine_git_object: ee460a023a8972be23ae9902ce8c70d0340c3e6e
+    last_write_checksum: sha1:6714e58945d2243e872a7d67c12456db1b0e0f4d
+    pristine_git_object: 9b4f7d22fa1bf64c888b2ce1ee3c818e317e8bcb
   docs/models/operations/GetFirstCharactersResponse.md:
     id: 61c0174fb088
     last_write_checksum: sha1:17477ec2c8e234d88679a18c68da8cba78c977a9
@@ -2644,8 +2644,8 @@ trackedFiles:
     pristine_git_object: cabf27ac5a39833d62e1d74e375f13bf53cfb574
   docs/models/operations/ListContentRequest.md:
     id: 39200c218055
-    last_write_checksum: sha1:9867b4181cd85f7c63af85cfc9e444e85f3e9f9c
-    pristine_git_object: 22245e36359472c6351d7bdb772bc2315ae283bc
+    last_write_checksum: sha1:9942bd06e361209f14ed7ddb257c7d02ae229b39
+    pristine_git_object: 4387d39786b6af4b2fd775ce43ac7af2e46f65a7
   docs/models/operations/ListContentResponse.md:
     id: 4ef2d98626bd
     last_write_checksum: sha1:dd1c8955d8f14a3d3cf78cd3516280bbf3986f4d
@@ -2732,8 +2732,8 @@ trackedFiles:
     pristine_git_object: c62665afa4ffb1ab9b15d16486faedfa944fcb18
   docs/models/operations/ListPlaybackHistoryRequest.md:
     id: 5d5b882f5602
-    last_write_checksum: sha1:0e904153f2522d963dfd8931b5feac747eb869b8
-    pristine_git_object: 0f103630ca838fadc2273bc22804a599ab3b935f
+    last_write_checksum: sha1:6e1117dbaa1e3e8accf8fe70d6ce6c95a45e523c
+    pristine_git_object: fbcd4c95ad1bc3d288776f8bb5e27ec0c846985a
   docs/models/operations/ListPlaybackHistoryResponse.md:
     id: 32d1e20607af
     last_write_checksum: sha1:ccbbefea032a6e5354207864d8b8ce2f9ef6f5dc
@@ -3536,8 +3536,8 @@ trackedFiles:
     pristine_git_object: cb64b40a67b335570aad1b8f55bf70f162d4aa2a
   docs/models/operations/SetChannelmapRequest.md:
     id: cf86b378f9d0
-    last_write_checksum: sha1:29723bfa0158f4d1d303f3812953375c2aff30dc
-    pristine_git_object: 5bca88a36dd9a5b595daaf94dbebd3dc67346a00
+    last_write_checksum: sha1:32e11d6c91b6411d3c6e7cca134c69d943bebd96
+    pristine_git_object: 7d685b0f3c48959f14caaceb326bd1c884942c69
   docs/models/operations/SetChannelmapResponse.md:
     id: 78d5c0857589
     last_write_checksum: sha1:3f42b151a042dc263bed1784813c324b492520ac
@@ -5060,16 +5060,16 @@ trackedFiles:
     pristine_git_object: 25e296fab05c397666240d0669d913f9752c7bf9
   docs/sdks/devices/README.md:
     id: 205e305f3b19
-    last_write_checksum: sha1:94b2a8686646d1f6ce78c0fdc460fb774d27fb40
-    pristine_git_object: 80347eaade4be4690373446b97c40f4cda85792b
+    last_write_checksum: sha1:0b563943785fcec88a5ae9d0d6f201744e89b1dd
+    pristine_git_object: 9142a2d3103f290a704d0fbdc474807877c0f646
   docs/sdks/downloadqueue/README.md:
     id: 7225c9239fb3
     last_write_checksum: sha1:1faa2866c94224a06a7b9e517130db500fc655f6
     pristine_git_object: 01ad56a1da99f0b0dc6678a7ae68b5b22f5960f2
   docs/sdks/dvrs/README.md:
     id: ba626de30d49
-    last_write_checksum: sha1:3802c2bb587c0202b5bdea079b8b90bc286b6886
-    pristine_git_object: 377b72f51fa9c9214a628c5eddc57c3c6e650b70
+    last_write_checksum: sha1:87b2b6d6531da14d295d1c7a13cf550181efe6ec
+    pristine_git_object: b55269d7bab8ad9507c104b88f10ee394fcfa5de
   docs/sdks/epg/README.md:
     id: 6d2f3f4c92bc
     last_write_checksum: sha1:7fa6e03dca60c917296027a18af9cda0c2739aad
@@ -5144,8 +5144,8 @@ trackedFiles:
     pristine_git_object: 0a1f6268577e386aabcf6c6a1480f7c402b571e2
   docs/sdks/status/README.md:
     id: ad809e9b945c
-    last_write_checksum: sha1:f1aa736d5708609e5f333a367367d2172a712308
-    pristine_git_object: b9bb95609f714fe0e3e61091b2e49262d89c4ea1
+    last_write_checksum: sha1:6fcb7a663804bffd230ff639d746812cefbadb4a
+    pristine_git_object: 3bc3285f8df3eeae8fd9934467aed3ed72320543
   docs/sdks/subscriptions/README.md:
     id: 298b9ab3c3e0
     last_write_checksum: sha1:f8c5e2756aa059375eb2d83c32092c4401e557cc
@@ -5176,8 +5176,8 @@ trackedFiles:
     pristine_git_object: aa620e86016abcfaa026334c072457e4f3d114a3
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:8016bdff50070e690e1653d436d3adc76ef72ea6
-    pristine_git_object: a37415a47877a2a9c78f967db303abb4ff4f03ad
+    last_write_checksum: sha1:9898b39fcf1c4a0541f4a6c4c8f05e835c613338
+    pristine_git_object: e20c16628c62f1ca4cf55f9043eddf3e0e89900b
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -5444,8 +5444,8 @@ trackedFiles:
     pristine_git_object: 13b408b9a3de044e68141a0ba977c48b4fb00bf0
   src/main/java/dev/plexapi/sdk/SDKConfiguration.java:
     id: fc2b069e396f
-    last_write_checksum: sha1:9ce295f0939af371ac680203036386ff7bb4987e
-    pristine_git_object: 71a6635cc0306b4b4a901e3a8f36c90332a8a467
+    last_write_checksum: sha1:af7096030137c29a13a5707e57d30389d40464b8
+    pristine_git_object: d714373472c8c1cd9ee93a559b7e1d7d1ae7e09f
   src/main/java/dev/plexapi/sdk/Search.java:
     id: 5a61f99a5b07
     last_write_checksum: sha1:8eda1e681781db17ea7227cc6de8275db70d7608
@@ -7376,8 +7376,8 @@ trackedFiles:
     pristine_git_object: 29abfd1235cd4114c2244c26cce48f21ef40c1f1
   src/main/java/dev/plexapi/sdk/models/operations/AutocompleteRequest.java:
     id: e631cd5cacaa
-    last_write_checksum: sha1:04ebf93de6b8f18e342f2fdfcaa129801c836a72
-    pristine_git_object: 0e21a465cd2727bcb1f6c63be6e081de8ba879f2
+    last_write_checksum: sha1:624065b153e368808a229546703026ade43344dd
+    pristine_git_object: e7213fe2bb1a54a193290fb6b65d4bcc3334845d
   src/main/java/dev/plexapi/sdk/models/operations/AutocompleteRequestBuilder.java:
     id: 6a1c3873f1eb
     last_write_checksum: sha1:8bb997597aa75c60e189646664a880da7339a45e
@@ -8716,8 +8716,8 @@ trackedFiles:
     pristine_git_object: 536bacfb3033fea374074acbfbb55ad7b12ea5db
   src/main/java/dev/plexapi/sdk/models/operations/GetCommonRequest.java:
     id: df150243863f
-    last_write_checksum: sha1:4a05f7ef20577aefe6c0580a8086499da81430f4
-    pristine_git_object: 31c7540e35555fdc2bf2781835393d6ac3745cba
+    last_write_checksum: sha1:6c6bb83683732f9add832522aada93f3087b3a47
+    pristine_git_object: 6458f8b4ad852694e8a99e89002086cedf36f9cb
   src/main/java/dev/plexapi/sdk/models/operations/GetCommonRequestBuilder.java:
     id: fa4fbaefc515
     last_write_checksum: sha1:34e1ffdd5d4e7e43e0b608a27f8e1a3a67c3234a
@@ -9032,8 +9032,8 @@ trackedFiles:
     pristine_git_object: a4126979c9a41252e23c92a8882c73e9673fcdb8
   src/main/java/dev/plexapi/sdk/models/operations/GetFirstCharactersRequest.java:
     id: d95c56957c3b
-    last_write_checksum: sha1:75b3915674336d4ebfd9c2853c0bb8e3acfeda6a
-    pristine_git_object: 90952638aeab25becfa1c2bb65d337059cf5176f
+    last_write_checksum: sha1:51136d8c78288e721ca91f68d1f3a1ca6c46912d
+    pristine_git_object: 9860823bf89d66146d9a18897b8f045cde5fcd27
   src/main/java/dev/plexapi/sdk/models/operations/GetFirstCharactersRequestBuilder.java:
     id: f617a4333d84
     last_write_checksum: sha1:5c17925dc89031399e1902b2e766221ce024c3a0
@@ -10764,8 +10764,8 @@ trackedFiles:
     pristine_git_object: 02fa948cfb66207fb89a0d4ee2706a0ef286aab4
   src/main/java/dev/plexapi/sdk/models/operations/ListContentRequest.java:
     id: e226de2605d9
-    last_write_checksum: sha1:f0821e9315223876051d8acd50af52645374c2f3
-    pristine_git_object: e57bbcc6047afb14c4cad025bf662bf9862f26ef
+    last_write_checksum: sha1:e16ad31ed9a1f4c7d5feb798110ab854ac67d1eb
+    pristine_git_object: 2d2ebce24a7e2d83ab81808b15f92b0efae97a28
   src/main/java/dev/plexapi/sdk/models/operations/ListContentRequestBuilder.java:
     id: f271039fc972
     last_write_checksum: sha1:a58649853e1c9222b22e70e6101171640a069ef9
@@ -17060,8 +17060,8 @@ trackedFiles:
     pristine_git_object: b5db1b70f9d5fcecd5368f17f26beef3cb98c99d
   src/main/java/dev/plexapi/sdk/utils/Multipart.java:
     id: 7d1a40c7ed9b
-    last_write_checksum: sha1:3157b6ba3418ff6784bbc53e5b494943e42ea322
-    pristine_git_object: dad81c2afdd9158703bdf835e8c29953f47d8576
+    last_write_checksum: sha1:821ef5a8c2c3706bd7baeabfb677f1d34afe313e
+    pristine_git_object: 901eabe32a504f23e1008a2f3647ad45453f06b0
   src/main/java/dev/plexapi/sdk/utils/MultipartFormMetadata.java:
     id: a1dc1c312add
     last_write_checksum: sha1:b60c2dc5f486da60974c040e150e034fb9c142a3
@@ -17160,8 +17160,8 @@ trackedFiles:
     pristine_git_object: 90a9c6e4e9f8afba8a3b0c15c96b7e94fd66ce19
   src/main/java/dev/plexapi/sdk/utils/SpeakeasyHTTPClient.java:
     id: c622a85753b3
-    last_write_checksum: sha1:4103a6112c24174f8b4c78cfa40c53c5bf0f2e52
-    pristine_git_object: a7deec9476a8d6532655d61bde03e302320d84d3
+    last_write_checksum: sha1:0cfc2d01e9bce87be55589467a19a59b9f78a82a
+    pristine_git_object: 0d483aa40bafbf1d2389e8a4420e341e2c533fbe
   src/main/java/dev/plexapi/sdk/utils/SpeakeasyLogger.java:
     id: e8ef3be0c3d7
     last_write_checksum: sha1:b186800caff718c352a0e0c4da1c1d1cb859b740
@@ -22992,7 +22992,7 @@ examples:
     speakeasy-default-list-content:
       parameters:
         path:
-          sectionId: null
+          sectionId: 813218
         query:
           X-Plex-Container-Start: 0
           X-Plex-Container-Size: 50
@@ -26630,6 +26630,7 @@ examples:
           application/json: {"MediaContainer": {"identifier": "com.plexapp.plugins.library", "size": 1, "Metadata": []}}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Java SDK Changes:\n* `plex-api.library.autocomplete()`: \n  *  `request.mediaType` **Removed** (Breaking ⚠️)\n* `plex-api.library.getCommon()`: \n  *  `request.mediaType` **Removed** (Breaking ⚠️)\n* `plex-api.library.getFirstCharacters()`:  `request` **Changed** (Breaking ⚠️)\n* `plex-api.content.listContent()`:  `request` **Changed** (Breaking ⚠️)\n"
 generatedFiles:
   - .gitattributes
   - USAGE.md

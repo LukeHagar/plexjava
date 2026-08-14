@@ -117,12 +117,6 @@ public class GetCommonRequest {
     @SpeakeasyMetadata("pathParam:style=simple,explode=false,name=sectionId")
     private long sectionId;
 
-    /**
-     * Item type
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")
-    private Optional<Long> mediaType;
-
     @JsonCreator
     public GetCommonRequest(
             Optional<? extends Accepts> accepts,
@@ -137,8 +131,7 @@ public class GetCommonRequest {
             Optional<String> deviceName,
             Optional<String> marketplace,
             Optional<? extends MediaQuery> mediaQuery,
-            long sectionId,
-            Optional<Long> mediaType) {
+            long sectionId) {
         Utils.checkNotNull(accepts, "accepts");
         Utils.checkNotNull(clientIdentifier, "clientIdentifier");
         Utils.checkNotNull(product, "product");
@@ -152,7 +145,6 @@ public class GetCommonRequest {
         Utils.checkNotNull(marketplace, "marketplace");
         Utils.checkNotNull(mediaQuery, "mediaQuery");
         Utils.checkNotNull(sectionId, "sectionId");
-        Utils.checkNotNull(mediaType, "mediaType");
         this.accepts = accepts;
         this.clientIdentifier = clientIdentifier;
         this.product = product;
@@ -166,7 +158,6 @@ public class GetCommonRequest {
         this.marketplace = marketplace;
         this.mediaQuery = mediaQuery;
         this.sectionId = sectionId;
-        this.mediaType = mediaType;
     }
     
     public GetCommonRequest(
@@ -175,7 +166,7 @@ public class GetCommonRequest {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            sectionId, Optional.empty());
+            sectionId);
     }
 
     /**
@@ -302,14 +293,6 @@ public class GetCommonRequest {
     @JsonIgnore
     public long sectionId() {
         return sectionId;
-    }
-
-    /**
-     * Item type
-     */
-    @JsonIgnore
-    public Optional<Long> mediaType() {
-        return mediaType;
     }
 
     public static Builder builder() {
@@ -594,25 +577,6 @@ public class GetCommonRequest {
         return this;
     }
 
-    /**
-     * Item type
-     */
-    public GetCommonRequest withMediaType(long mediaType) {
-        Utils.checkNotNull(mediaType, "mediaType");
-        this.mediaType = Optional.ofNullable(mediaType);
-        return this;
-    }
-
-
-    /**
-     * Item type
-     */
-    public GetCommonRequest withMediaType(Optional<Long> mediaType) {
-        Utils.checkNotNull(mediaType, "mediaType");
-        this.mediaType = mediaType;
-        return this;
-    }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -635,8 +599,7 @@ public class GetCommonRequest {
             Utils.enhancedDeepEquals(this.deviceName, other.deviceName) &&
             Utils.enhancedDeepEquals(this.marketplace, other.marketplace) &&
             Utils.enhancedDeepEquals(this.mediaQuery, other.mediaQuery) &&
-            Utils.enhancedDeepEquals(this.sectionId, other.sectionId) &&
-            Utils.enhancedDeepEquals(this.mediaType, other.mediaType);
+            Utils.enhancedDeepEquals(this.sectionId, other.sectionId);
     }
     
     @Override
@@ -646,7 +609,7 @@ public class GetCommonRequest {
             version, platform, platformVersion,
             device, model, deviceVendor,
             deviceName, marketplace, mediaQuery,
-            sectionId, mediaType);
+            sectionId);
     }
     
     @Override
@@ -664,8 +627,7 @@ public class GetCommonRequest {
                 "deviceName", deviceName,
                 "marketplace", marketplace,
                 "mediaQuery", mediaQuery,
-                "sectionId", sectionId,
-                "mediaType", mediaType);
+                "sectionId", sectionId);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -696,8 +658,6 @@ public class GetCommonRequest {
         private Optional<? extends MediaQuery> mediaQuery = Optional.empty();
 
         private Long sectionId;
-
-        private Optional<Long> mediaType = Optional.empty();
 
         private Builder() {
           // force use of static builder() method
@@ -981,25 +941,6 @@ public class GetCommonRequest {
             return this;
         }
 
-
-        /**
-         * Item type
-         */
-        public Builder mediaType(long mediaType) {
-            Utils.checkNotNull(mediaType, "mediaType");
-            this.mediaType = Optional.ofNullable(mediaType);
-            return this;
-        }
-
-        /**
-         * Item type
-         */
-        public Builder mediaType(Optional<Long> mediaType) {
-            Utils.checkNotNull(mediaType, "mediaType");
-            this.mediaType = mediaType;
-            return this;
-        }
-
         public GetCommonRequest build() {
             if (accepts == null) {
                 accepts = _SINGLETON_VALUE_Accepts.value();
@@ -1010,7 +951,7 @@ public class GetCommonRequest {
                 version, platform, platformVersion,
                 device, model, deviceVendor,
                 deviceName, marketplace, mediaQuery,
-                sectionId, mediaType);
+                sectionId);
         }
 
 

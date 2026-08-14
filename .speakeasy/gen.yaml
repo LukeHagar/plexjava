@@ -29,7 +29,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 java:
-  version: 0.23.0
+  version: 0.24.0
   additionalDependencies: []
   additionalPlugins: []
   artifactID: plexapi
@@ -47,12 +47,14 @@ java:
   explicitDocImports: false
   flattenGlobalSecurity: true
   forwardCompatibleEnumsByDefault: false
-  forwardCompatibleUnionsByDefault: "false"
+  forwardCompatibleUnionsByDefault: true
   generateOptionalUnionAccessors: false
   generateSpringBootStarter: true
   generateUnionDocs: false
+  getterStyle: presence-aware
   githubURL: github.com/LukeHagar/plexjava
   groupID: dev.plexapi
+  httpClient: jdk
   imports:
     option: openapi
     paths:

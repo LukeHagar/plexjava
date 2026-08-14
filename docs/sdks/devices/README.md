@@ -527,20 +527,9 @@ public class Application {
                 .channelMappingByKey(ChannelMappingByKey.builder()
                     .build())
                 .channelsEnabled(List.of(
-                    "4",
-                    "6",
-                    ".",
-                    "1",
-                    ",",
-                    "4",
-                    "4",
-                    ".",
-                    "1",
-                    ",",
-                    "4",
-                    "5",
-                    ".",
-                    "1"))
+                    "46.1",
+                    "44.1",
+                    "45.1"))
                 .build();
 
         SetChannelmapResponse res = sdk.devices().setChannelmap()

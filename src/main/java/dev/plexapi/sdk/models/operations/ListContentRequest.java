@@ -136,18 +136,6 @@ public class ListContentRequest {
     private long sectionId;
 
     /**
-     * Filter by metadata type (1=movie, 2=show, 3=season, 4=episode, 8=artist, 9=album, 10=track)
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")
-    private Optional<Long> mediaType;
-
-    /**
-     * Sort key and direction (e.g. addedAt:desc, titleSort)
-     */
-    @SpeakeasyMetadata("queryParam:style=form,explode=true,name=sort")
-    private Optional<String> sort;
-
-    /**
      * Adds the Meta object to the response
      */
     @SpeakeasyMetadata("queryParam:style=form,explode=true,name=includeMeta")
@@ -392,8 +380,6 @@ public class ListContentRequest {
             Optional<Integer> xPlexContainerSize,
             Optional<? extends MediaQuery> mediaQuery,
             long sectionId,
-            Optional<Long> mediaType,
-            Optional<String> sort,
             Optional<? extends BoolInt> includeMeta,
             Optional<? extends BoolInt> includeGuids,
             Optional<? extends BoolInt> includeCollections,
@@ -447,8 +433,6 @@ public class ListContentRequest {
         Utils.checkNotNull(xPlexContainerSize, "xPlexContainerSize");
         Utils.checkNotNull(mediaQuery, "mediaQuery");
         Utils.checkNotNull(sectionId, "sectionId");
-        Utils.checkNotNull(mediaType, "mediaType");
-        Utils.checkNotNull(sort, "sort");
         Utils.checkNotNull(includeMeta, "includeMeta");
         Utils.checkNotNull(includeGuids, "includeGuids");
         Utils.checkNotNull(includeCollections, "includeCollections");
@@ -502,8 +486,6 @@ public class ListContentRequest {
         this.xPlexContainerSize = xPlexContainerSize;
         this.mediaQuery = mediaQuery;
         this.sectionId = sectionId;
-        this.mediaType = mediaType;
-        this.sort = sort;
         this.includeMeta = includeMeta;
         this.includeGuids = includeGuids;
         this.includeCollections = includeCollections;
@@ -563,8 +545,7 @@ public class ListContentRequest {
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
             Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty(), Optional.empty(), Optional.empty(),
-            Optional.empty());
+            Optional.empty(), Optional.empty());
     }
 
     /**
@@ -711,22 +692,6 @@ public class ListContentRequest {
     @JsonIgnore
     public long sectionId() {
         return sectionId;
-    }
-
-    /**
-     * Filter by metadata type (1=movie, 2=show, 3=season, 4=episode, 8=artist, 9=album, 10=track)
-     */
-    @JsonIgnore
-    public Optional<Long> mediaType() {
-        return mediaType;
-    }
-
-    /**
-     * Sort key and direction (e.g. addedAt:desc, titleSort)
-     */
-    @JsonIgnore
-    public Optional<String> sort() {
-        return sort;
     }
 
     /**
@@ -1386,44 +1351,6 @@ public class ListContentRequest {
     public ListContentRequest withSectionId(long sectionId) {
         Utils.checkNotNull(sectionId, "sectionId");
         this.sectionId = sectionId;
-        return this;
-    }
-
-    /**
-     * Filter by metadata type (1=movie, 2=show, 3=season, 4=episode, 8=artist, 9=album, 10=track)
-     */
-    public ListContentRequest withMediaType(long mediaType) {
-        Utils.checkNotNull(mediaType, "mediaType");
-        this.mediaType = Optional.ofNullable(mediaType);
-        return this;
-    }
-
-
-    /**
-     * Filter by metadata type (1=movie, 2=show, 3=season, 4=episode, 8=artist, 9=album, 10=track)
-     */
-    public ListContentRequest withMediaType(Optional<Long> mediaType) {
-        Utils.checkNotNull(mediaType, "mediaType");
-        this.mediaType = mediaType;
-        return this;
-    }
-
-    /**
-     * Sort key and direction (e.g. addedAt:desc, titleSort)
-     */
-    public ListContentRequest withSort(String sort) {
-        Utils.checkNotNull(sort, "sort");
-        this.sort = Optional.ofNullable(sort);
-        return this;
-    }
-
-
-    /**
-     * Sort key and direction (e.g. addedAt:desc, titleSort)
-     */
-    public ListContentRequest withSort(Optional<String> sort) {
-        Utils.checkNotNull(sort, "sort");
-        this.sort = sort;
         return this;
     }
 
@@ -2174,8 +2101,6 @@ public class ListContentRequest {
             Utils.enhancedDeepEquals(this.xPlexContainerSize, other.xPlexContainerSize) &&
             Utils.enhancedDeepEquals(this.mediaQuery, other.mediaQuery) &&
             Utils.enhancedDeepEquals(this.sectionId, other.sectionId) &&
-            Utils.enhancedDeepEquals(this.mediaType, other.mediaType) &&
-            Utils.enhancedDeepEquals(this.sort, other.sort) &&
             Utils.enhancedDeepEquals(this.includeMeta, other.includeMeta) &&
             Utils.enhancedDeepEquals(this.includeGuids, other.includeGuids) &&
             Utils.enhancedDeepEquals(this.includeCollections, other.includeCollections) &&
@@ -2224,20 +2149,19 @@ public class ListContentRequest {
             device, model, deviceVendor,
             deviceName, marketplace, xPlexContainerStart,
             xPlexContainerSize, mediaQuery, sectionId,
-            mediaType, sort, includeMeta,
-            includeGuids, includeCollections, includeExternalMedia,
-            includeAdvanced, checkFiles, includeRelated,
-            includeExtras, includePopularLeaves, includeConcerts,
-            includeOnDeck, includeChapters, includePreferences,
-            includeBandwidths, includeLoudnessRamps, includeStations,
-            includeExternalIds, includeReviews, includeCredits,
-            includeArt, includeThumb, includeBanner,
-            includeTheme, includeFields, excludeFields,
-            asyncAugmentMetadata, asyncRefreshLocalMediaAgent, nocache,
-            skipRefresh, excludeElements, filters,
-            unwatched, genre, studio,
-            contentRating, resolution, year,
-            firstCharacter);
+            includeMeta, includeGuids, includeCollections,
+            includeExternalMedia, includeAdvanced, checkFiles,
+            includeRelated, includeExtras, includePopularLeaves,
+            includeConcerts, includeOnDeck, includeChapters,
+            includePreferences, includeBandwidths, includeLoudnessRamps,
+            includeStations, includeExternalIds, includeReviews,
+            includeCredits, includeArt, includeThumb,
+            includeBanner, includeTheme, includeFields,
+            excludeFields, asyncAugmentMetadata, asyncRefreshLocalMediaAgent,
+            nocache, skipRefresh, excludeElements,
+            filters, unwatched, genre,
+            studio, contentRating, resolution,
+            year, firstCharacter);
     }
     
     @Override
@@ -2258,8 +2182,6 @@ public class ListContentRequest {
                 "xPlexContainerSize", xPlexContainerSize,
                 "mediaQuery", mediaQuery,
                 "sectionId", sectionId,
-                "mediaType", mediaType,
-                "sort", sort,
                 "includeMeta", includeMeta,
                 "includeGuids", includeGuids,
                 "includeCollections", includeCollections,
@@ -2332,10 +2254,6 @@ public class ListContentRequest {
         private Optional<? extends MediaQuery> mediaQuery = Optional.empty();
 
         private Long sectionId;
-
-        private Optional<Long> mediaType = Optional.empty();
-
-        private Optional<String> sort = Optional.empty();
 
         private Optional<? extends BoolInt> includeMeta;
 
@@ -2738,44 +2656,6 @@ public class ListContentRequest {
         public Builder sectionId(long sectionId) {
             Utils.checkNotNull(sectionId, "sectionId");
             this.sectionId = sectionId;
-            return this;
-        }
-
-
-        /**
-         * Filter by metadata type (1=movie, 2=show, 3=season, 4=episode, 8=artist, 9=album, 10=track)
-         */
-        public Builder mediaType(long mediaType) {
-            Utils.checkNotNull(mediaType, "mediaType");
-            this.mediaType = Optional.ofNullable(mediaType);
-            return this;
-        }
-
-        /**
-         * Filter by metadata type (1=movie, 2=show, 3=season, 4=episode, 8=artist, 9=album, 10=track)
-         */
-        public Builder mediaType(Optional<Long> mediaType) {
-            Utils.checkNotNull(mediaType, "mediaType");
-            this.mediaType = mediaType;
-            return this;
-        }
-
-
-        /**
-         * Sort key and direction (e.g. addedAt:desc, titleSort)
-         */
-        public Builder sort(String sort) {
-            Utils.checkNotNull(sort, "sort");
-            this.sort = Optional.ofNullable(sort);
-            return this;
-        }
-
-        /**
-         * Sort key and direction (e.g. addedAt:desc, titleSort)
-         */
-        public Builder sort(Optional<String> sort) {
-            Utils.checkNotNull(sort, "sort");
-            this.sort = sort;
             return this;
         }
 
@@ -3602,20 +3482,19 @@ public class ListContentRequest {
                 device, model, deviceVendor,
                 deviceName, marketplace, xPlexContainerStart,
                 xPlexContainerSize, mediaQuery, sectionId,
-                mediaType, sort, includeMeta,
-                includeGuids, includeCollections, includeExternalMedia,
-                includeAdvanced, checkFiles, includeRelated,
-                includeExtras, includePopularLeaves, includeConcerts,
-                includeOnDeck, includeChapters, includePreferences,
-                includeBandwidths, includeLoudnessRamps, includeStations,
-                includeExternalIds, includeReviews, includeCredits,
-                includeArt, includeThumb, includeBanner,
-                includeTheme, includeFields, excludeFields,
-                asyncAugmentMetadata, asyncRefreshLocalMediaAgent, nocache,
-                skipRefresh, excludeElements, filters,
-                unwatched, genre, studio,
-                contentRating, resolution, year,
-                firstCharacter);
+                includeMeta, includeGuids, includeCollections,
+                includeExternalMedia, includeAdvanced, checkFiles,
+                includeRelated, includeExtras, includePopularLeaves,
+                includeConcerts, includeOnDeck, includeChapters,
+                includePreferences, includeBandwidths, includeLoudnessRamps,
+                includeStations, includeExternalIds, includeReviews,
+                includeCredits, includeArt, includeThumb,
+                includeBanner, includeTheme, includeFields,
+                excludeFields, asyncAugmentMetadata, asyncRefreshLocalMediaAgent,
+                nocache, skipRefresh, excludeElements,
+                filters, unwatched, genre,
+                studio, contentRating, resolution,
+                year, firstCharacter);
         }
 
 
