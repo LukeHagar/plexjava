@@ -6,6 +6,7 @@ package dev.plexapi.sdk;
 import static dev.plexapi.sdk.operations.Operations.AsyncRequestlessOperation;
 import static dev.plexapi.sdk.operations.Operations.AsyncRequestOperation;
 
+import dev.plexapi.sdk.models.operations.AcceptInviteRequest;
 import dev.plexapi.sdk.models.operations.CreateHomeUserRequest;
 import dev.plexapi.sdk.models.operations.DeleteHomeUserRequest;
 import dev.plexapi.sdk.models.operations.GetAccountJSONRequest;
@@ -24,6 +25,8 @@ import dev.plexapi.sdk.models.operations.UpdateHomeUserRequest;
 import dev.plexapi.sdk.models.operations.UpdateRestrictedUserRequest;
 import dev.plexapi.sdk.models.operations.UpdateShareRequest;
 import dev.plexapi.sdk.models.operations.UpdateViewStateSyncRequest;
+import dev.plexapi.sdk.models.operations.async.AcceptInviteRequestBuilder;
+import dev.plexapi.sdk.models.operations.async.AcceptInviteResponse;
 import dev.plexapi.sdk.models.operations.async.CreateHomeUserRequestBuilder;
 import dev.plexapi.sdk.models.operations.async.CreateHomeUserResponse;
 import dev.plexapi.sdk.models.operations.async.DeleteHomeUserRequestBuilder;
@@ -68,6 +71,7 @@ import dev.plexapi.sdk.models.operations.async.UpdateShareRequestBuilder;
 import dev.plexapi.sdk.models.operations.async.UpdateShareResponse;
 import dev.plexapi.sdk.models.operations.async.UpdateViewStateSyncRequestBuilder;
 import dev.plexapi.sdk.models.operations.async.UpdateViewStateSyncResponse;
+import dev.plexapi.sdk.operations.AcceptInvite;
 import dev.plexapi.sdk.operations.CreateHomeUser;
 import dev.plexapi.sdk.operations.DeleteHomeUser;
 import dev.plexapi.sdk.operations.GetAccountJSON;
@@ -734,6 +738,51 @@ public class AsyncUsers {
             Optional<Options> options) {
         AsyncRequestOperation<GetAccountJSONRequest, GetAccountJSONResponse> operation
               = new GetAccountJSON.Async(
+                                    sdkConfiguration, serverURL, options,
+                                    sdkConfiguration.retryScheduler(), _headers);
+        return operation.doRequest(request)
+            .thenCompose(operation::handleResponse);
+    }
+
+
+    /**
+     * Accept an Invite
+     * 
+     * <p>Accept a pending Plex friend, home, or server invitation.
+     * 
+     * @return The async call builder
+     */
+    public AcceptInviteRequestBuilder acceptInvite() {
+        return new AcceptInviteRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Accept an Invite
+     * 
+     * <p>Accept a pending Plex friend, home, or server invitation.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return {@code CompletableFuture<AcceptInviteResponse>} - The async response
+     */
+    public CompletableFuture<AcceptInviteResponse> acceptInvite(AcceptInviteRequest request) {
+        return acceptInvite(request, Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * Accept an Invite
+     * 
+     * <p>Accept a pending Plex friend, home, or server invitation.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param serverURL Overrides the server URL.
+     * @param options additional options
+     * @return {@code CompletableFuture<AcceptInviteResponse>} - The async response
+     */
+    public CompletableFuture<AcceptInviteResponse> acceptInvite(
+            AcceptInviteRequest request, Optional<String> serverURL,
+            Optional<Options> options) {
+        AsyncRequestOperation<AcceptInviteRequest, AcceptInviteResponse> operation
+              = new AcceptInvite.Async(
                                     sdkConfiguration, serverURL, options,
                                     sdkConfiguration.retryScheduler(), _headers);
         return operation.doRequest(request)

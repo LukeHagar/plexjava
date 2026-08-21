@@ -1,26 +1,26 @@
 lockVersion: 2.0.0
 id: 1732900d-e173-47c1-a90d-d45182eb35d9
 management:
-  docChecksum: ea414229037fddd5dd7769a67111aaf7
+  docChecksum: ee3f0cb3f9403deebefa4d0d5f4bac29
   docVersion: 1.1.1
-  speakeasyVersion: 1.793.1
-  generationVersion: 2.928.0
-  releaseVersion: 0.24.0
-  configChecksum: eebf2715d713958902f84d9ff2daf5f0
+  speakeasyVersion: 1.795.1
+  generationVersion: 2.932.9
+  releaseVersion: 0.25.0
+  configChecksum: 3d020fec2d3b85e9978514da13e6b81a
   repoURL: https://github.com/LukasParke/plexjava.git
   installationURL: https://github.com/LukasParke/plexjava
   published: true
 persistentEdits:
-  generation_id: 4da91ff8-2eaa-4e00-8f54-92ae001c552c
-  pristine_commit_hash: deee80f7e59bb45ea297100ccf7e9191992938b3
-  pristine_tree_hash: ddc2cd5177694c5d2ec2cec105c729c400c4bd17
+  generation_id: 0de198bf-3faa-442d-86f5-d3b914f9ad1f
+  pristine_commit_hash: 017908a85862aec32ed352bcf9d549e2b3edc811
+  pristine_tree_hash: 6990b6ffa3b57d7b16274b589ea5e342555fef75
 features:
   java:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     additionalProperties: 0.0.2
     constsAndDefaults: 0.1.3
-    core: 3.56.1
+    core: 3.57.0
     deprecations: 2.81.2
     downloadStreams: 0.1.1
     enums: 2.82.0
@@ -39,7 +39,7 @@ features:
     openEnums: 0.2.0
     retries: 0.1.3
     sdkHooks: 1.2.0
-    unions: 0.3.7
+    unions: 0.3.8
     uploadStreams: 0.1.0
 trackedFiles:
   .gitattributes:
@@ -78,6 +78,14 @@ trackedFiles:
     id: 07f670bf9648
     last_write_checksum: sha1:9edfd6c22712f970396f8b38ea3741930a48ed83
     pristine_git_object: 8c90d6b07da025021ecee1f7a058b89394fc96c3
+  docs/models/operations/AcceptInviteRequest.md:
+    id: 4bfbdba845e2
+    last_write_checksum: sha1:0a4acb6b9e4823230b3c6c9d5658b38e35ff1139
+    pristine_git_object: 79a262bd1ad9284e221e2348789ad80ce2f2b760
+  docs/models/operations/AcceptInviteResponse.md:
+    id: 67dc514ec030
+    last_write_checksum: sha1:263386193fd8b0379ebee1274dbc50c89c0297e7
+    pristine_git_object: 9d11702bc995e362302a4051acc77d55820ad3df
   docs/models/operations/Action.md:
     id: 97ddd48ab54a
     last_write_checksum: sha1:6d1dd9e694e158252c06d81c5032a6e8bc80476a
@@ -5168,16 +5176,16 @@ trackedFiles:
     pristine_git_object: 9da52c311d47ac735dbb6431d55763150c7674ec
   docs/sdks/users/README.md:
     id: 5d80027045fe
-    last_write_checksum: sha1:274a3ce71ee218b45a7eadc86ab49219b08e94f2
-    pristine_git_object: 7ea514af9886f2ea04e409492041a6bedaa00e2b
+    last_write_checksum: sha1:0918eb1d3c4a2c27d2b388cca09818ddf6eff46d
+    pristine_git_object: ac1b196635849ad04dab03f4d93c32e6e38bc04a
   docs/utils/Blob.md:
     id: 3d9a7c4ad67a
     last_write_checksum: sha1:d45e4f5f07d4c5172b6061ed8fbaaeca5d37a393
     pristine_git_object: aa620e86016abcfaa026334c072457e4f3d114a3
   gradle.properties:
     id: 2afbb999f001
-    last_write_checksum: sha1:9898b39fcf1c4a0541f4a6c4c8f05e835c613338
-    pristine_git_object: e20c16628c62f1ca4cf55f9043eddf3e0e89900b
+    last_write_checksum: sha1:ca8e6acdd4e4945c8261fb2b9cf8e20e48a85ee6
+    pristine_git_object: e48bd50af0e6f44058b5b2f4a599badb374fa32c
   gradle/wrapper/gradle-wrapper.jar:
     id: ec27dae6e852
     last_write_checksum: sha1:f725fb1467084142d74fd7cd8eab691ab3442611
@@ -5340,8 +5348,8 @@ trackedFiles:
     pristine_git_object: 3d6aed0048d43d06e82c526df6213f87505d1992
   src/main/java/dev/plexapi/sdk/AsyncUsers.java:
     id: b2940df0f701
-    last_write_checksum: sha1:f94f80c3c242460aec9632b199075adb50abe35d
-    pristine_git_object: 0011d6f53cc056304c28d09345dd03e0f17bb3dc
+    last_write_checksum: sha1:37d924b1b31e085a2a78f02bb8c979c3c81c1d14
+    pristine_git_object: 93d1cd0e86094ae36331eb55e790155b1f3460f3
   src/main/java/dev/plexapi/sdk/Authentication.java:
     id: 2bd354279d86
     last_write_checksum: sha1:2c6e95d969cae74e77318cefb762af896887de4a
@@ -5444,8 +5452,8 @@ trackedFiles:
     pristine_git_object: 13b408b9a3de044e68141a0ba977c48b4fb00bf0
   src/main/java/dev/plexapi/sdk/SDKConfiguration.java:
     id: fc2b069e396f
-    last_write_checksum: sha1:af7096030137c29a13a5707e57d30389d40464b8
-    pristine_git_object: d714373472c8c1cd9ee93a559b7e1d7d1ae7e09f
+    last_write_checksum: sha1:68486cb3bed6cba1bb39d74e649faa18d78b0ce4
+    pristine_git_object: b14687e358c70b94e805b70e1b3b71ffa6dedc9d
   src/main/java/dev/plexapi/sdk/Search.java:
     id: 5a61f99a5b07
     last_write_checksum: sha1:8eda1e681781db17ea7227cc6de8275db70d7608
@@ -5480,8 +5488,8 @@ trackedFiles:
     pristine_git_object: 04959612f4cf1b8e4b9a4fbf351be434284a40f2
   src/main/java/dev/plexapi/sdk/Users.java:
     id: 7e3cbafd1a1d
-    last_write_checksum: sha1:7f1d45d855706c3c9b3e0c5e7f08d30709ec28ea
-    pristine_git_object: 81b8b3d1f8c6965f1395c347d68ce5fcc61d1df3
+    last_write_checksum: sha1:7d1f4280b500177758ecddcd951849f3ced1ddc6
+    pristine_git_object: 6a685fc1732bb6120c4173896404bd4d60ad2f12
   src/main/java/dev/plexapi/sdk/models/errors/AsyncSDKError.java:
     id: e0409fb736ab
     last_write_checksum: sha1:1f871e00df8385eff13a43ff843e0eb005dfa3e1
@@ -5522,6 +5530,10 @@ trackedFiles:
     id: 3f5978da4a55
     last_write_checksum: sha1:021a8e5e382e30592ac3c7e235ed31c04e9cd8c3
     pristine_git_object: d62f285729e6ace975872402d85184e4cf2a9801
+  src/main/java/dev/plexapi/sdk/models/operations//async/AcceptInviteRequestBuilder.java:
+    id: 49c84465b6a1
+    last_write_checksum: sha1:c4a6c711ab57b625fb2337afbd32dd6b7042399e
+    pristine_git_object: 8e6b00128ca9b1a7068f278c1bf331a6184b1429
   src/main/java/dev/plexapi/sdk/models/operations//async/AddCollectionItemsRequestBuilder.java:
     id: 7adceb33acb7
     last_write_checksum: sha1:8ef2c347bf5ee9387cec4ad3ca94599e149549fe
@@ -7134,6 +7146,18 @@ trackedFiles:
     id: 1bf5b9a6258a
     last_write_checksum: sha1:b9741fbe94f4aaab4f92ffedc013ed01ffb58051
     pristine_git_object: 83a736e85aafc58413bd9aa41d105a009edbeea7
+  src/main/java/dev/plexapi/sdk/models/operations/AcceptInviteRequest.java:
+    id: ba0026644fbd
+    last_write_checksum: sha1:25c5d45c1d2ffe4d2f3a34ff43ca8ad0e1a9e50b
+    pristine_git_object: 7151f657a3135b1bb3aa70a19da991fe6b7a0bae
+  src/main/java/dev/plexapi/sdk/models/operations/AcceptInviteRequestBuilder.java:
+    id: 44c4a1fce3b6
+    last_write_checksum: sha1:47f8488ce8fb838bd2730b1f2abe138da32a3d11
+    pristine_git_object: 2d4b97532f774b840fc0e24854b4652b24b7bd03
+  src/main/java/dev/plexapi/sdk/models/operations/AcceptInviteResponse.java:
+    id: b9f037c2e89d
+    last_write_checksum: sha1:14699907bcd30dc19706c92aadc48a0b6b479d50
+    pristine_git_object: c111efcc53eccd7350f86365344600d6cd5c94d3
   src/main/java/dev/plexapi/sdk/models/operations/Action.java:
     id: aac318d91d2a
     last_write_checksum: sha1:b8f873edc1690e5f42a8702750896a7347198d8b
@@ -12694,6 +12718,10 @@ trackedFiles:
     id: 92f36e7236f0
     last_write_checksum: sha1:cfb37150d537742d53a3c8c29348a9a2d7b0645e
     pristine_git_object: 9181b22d566a5a3c8f5d344a523883bf6a00b4f4
+  src/main/java/dev/plexapi/sdk/models/operations/async/AcceptInviteResponse.java:
+    id: 59d1b0928a47
+    last_write_checksum: sha1:f079adafd4e672e347a7c6a9716cecea3f93296d
+    pristine_git_object: 810e5e0120e25298af3cd559ae6071cd4a0d316a
   src/main/java/dev/plexapi/sdk/models/operations/async/AddCollectionItemsResponse.java:
     id: 01550a632572
     last_write_checksum: sha1:771f862fb636f61414b1277d54bc6c2ee97c0d97
@@ -15318,6 +15346,10 @@ trackedFiles:
     id: 4b5f443ddb01
     last_write_checksum: sha1:c1bea1ff7dfbad1da0951a6582ee92e0063aad8a
     pristine_git_object: 5d117294bc15882898026652775f8d626ac6ee46
+  src/main/java/dev/plexapi/sdk/operations/AcceptInvite.java:
+    id: 421e4a316c4b
+    last_write_checksum: sha1:0890b138f08b9ac366f2cbcd41022ccb60c12907
+    pristine_git_object: 3befe4a65f8aec63ab670945ca1f5c948ada202b
   src/main/java/dev/plexapi/sdk/operations/AddCollectionItems.java:
     id: a6857206960f
     last_write_checksum: sha1:5b67c704601493650469b449b70331ed3b5ddcc0
@@ -26628,9 +26660,37 @@ examples:
       responses:
         "200":
           application/json: {"MediaContainer": {"identifier": "com.plexapp.plugins.library", "size": 1, "Metadata": []}}
+  acceptInvite:
+    speakeasy-default-accept-invite:
+      parameters:
+        path:
+          inviteId: 530502
+        query:
+          friend: 1
+          home: 1
+          server: 1
+        header:
+          accepts: "application/xml"
+          X-Plex-Client-Identifier: "abc123"
+          X-Plex-Product: "Plex for Roku"
+          X-Plex-Version: "2.4.1"
+          X-Plex-Platform: "Roku"
+          X-Plex-Platform-Version: "4.3 build 1057"
+          X-Plex-Device: "Roku 3"
+          X-Plex-Model: "4200X"
+          X-Plex-Device-Vendor: "Roku"
+          X-Plex-Device-Name: "Living Room TV"
+          X-Plex-Marketplace: "googlePlay"
+      responses:
+        "200":
+          application/xml: "0xA9fA681439"
+        "401":
+          application/json: {"errors": [{"code": 1, "message": "string value", "status": 1}]}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Java SDK Changes:\n* `plex-api.library.autocomplete()`: \n  *  `request.mediaType` **Removed** (Breaking ⚠️)\n* `plex-api.library.getCommon()`: \n  *  `request.mediaType` **Removed** (Breaking ⚠️)\n* `plex-api.library.getFirstCharacters()`:  `request` **Changed** (Breaking ⚠️)\n* `plex-api.content.listContent()`:  `request` **Changed** (Breaking ⚠️)\n"
+releaseNotes: |
+  ## Java SDK Changes:
+  * `plex-api.users.acceptInvite()`: **Added**
 generatedFiles:
   - .gitattributes
   - USAGE.md

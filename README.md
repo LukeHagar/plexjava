@@ -75,7 +75,7 @@ The samples below show how a published SDK artifact is used:
 
 Gradle:
 ```groovy
-implementation 'dev.plexapi:plexapi:0.24.0'
+implementation 'dev.plexapi:plexapi:0.25.0'
 ```
 
 Maven:
@@ -83,7 +83,7 @@ Maven:
 <dependency>
     <groupId>dev.plexapi</groupId>
     <artifactId>plexapi</artifactId>
-    <version>0.24.0</version>
+    <version>0.25.0</version>
 </dependency>
 ```
 
@@ -737,6 +737,7 @@ For full model-specific examples (including Java 11/16/21 variants), see each un
 * [getUsers](docs/sdks/users/README.md#getusers) - Get list of all connected users
 * [getAccountXML](docs/sdks/users/README.md#getaccountxml) - Get Account (XML)
 * [getAccountJSON](docs/sdks/users/README.md#getaccountjson) - Get Account (JSON)
+* [acceptInvite](docs/sdks/users/README.md#acceptinvite) - Accept an Invite
 * [deleteHomeUser](docs/sdks/users/README.md#deletehomeuser) - Delete Home User
 * [updateHomeUser](docs/sdks/users/README.md#updatehomeuser) - Update Home User
 * [updateRestrictedUser](docs/sdks/users/README.md#updaterestricteduser) - Update Restricted User
@@ -980,9 +981,9 @@ public class Application {
 many more subclasses in the JDK platform).
 
 **Inherit from [`PlexAPIError`](./src/main/java/models/errors/PlexAPIError.java)**:
-* [`dev.plexapi.sdk.models.errors.Error`](./src/main/java/models/errors/dev.plexapi.sdk.models.errors.Error.java): Unauthorized. Status code `401`. Applicable to 276 of 403 methods.*
-* [`dev.plexapi.sdk.models.errors.Unauthorized`](./src/main/java/models/errors/dev.plexapi.sdk.models.errors.Unauthorized.java): Unauthorized - Returned if the X-Plex-Token is missing from the header or query. Status code `401`. Applicable to 4 of 403 methods.*
-* [`dev.plexapi.sdk.models.errors.BadRequest`](./src/main/java/models/errors/dev.plexapi.sdk.models.errors.BadRequest.java): Bad Request - A parameter was not specified, or was specified incorrectly. Status code `400`. Applicable to 3 of 403 methods.*
+* [`dev.plexapi.sdk.models.errors.Error`](./src/main/java/models/errors/dev.plexapi.sdk.models.errors.Error.java): Unauthorized. Status code `401`. Applicable to 277 of 404 methods.*
+* [`dev.plexapi.sdk.models.errors.Unauthorized`](./src/main/java/models/errors/dev.plexapi.sdk.models.errors.Unauthorized.java): Unauthorized - Returned if the X-Plex-Token is missing from the header or query. Status code `401`. Applicable to 4 of 404 methods.*
+* [`dev.plexapi.sdk.models.errors.BadRequest`](./src/main/java/models/errors/dev.plexapi.sdk.models.errors.BadRequest.java): Bad Request - A parameter was not specified, or was specified incorrectly. Status code `400`. Applicable to 3 of 404 methods.*
 
 
 </details>

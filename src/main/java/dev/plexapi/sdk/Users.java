@@ -6,6 +6,9 @@ package dev.plexapi.sdk;
 import static dev.plexapi.sdk.operations.Operations.RequestlessOperation;
 import static dev.plexapi.sdk.operations.Operations.RequestOperation;
 
+import dev.plexapi.sdk.models.operations.AcceptInviteRequest;
+import dev.plexapi.sdk.models.operations.AcceptInviteRequestBuilder;
+import dev.plexapi.sdk.models.operations.AcceptInviteResponse;
 import dev.plexapi.sdk.models.operations.CreateHomeUserRequest;
 import dev.plexapi.sdk.models.operations.CreateHomeUserRequestBuilder;
 import dev.plexapi.sdk.models.operations.CreateHomeUserResponse;
@@ -68,6 +71,7 @@ import dev.plexapi.sdk.models.operations.UpdateShareResponse;
 import dev.plexapi.sdk.models.operations.UpdateViewStateSyncRequest;
 import dev.plexapi.sdk.models.operations.UpdateViewStateSyncRequestBuilder;
 import dev.plexapi.sdk.models.operations.UpdateViewStateSyncResponse;
+import dev.plexapi.sdk.operations.AcceptInvite;
 import dev.plexapi.sdk.operations.CreateHomeUser;
 import dev.plexapi.sdk.operations.DeleteHomeUser;
 import dev.plexapi.sdk.operations.GetAccountJSON;
@@ -732,6 +736,51 @@ public class Users {
             Optional<Options> options) {
         RequestOperation<GetAccountJSONRequest, GetAccountJSONResponse> operation
               = new GetAccountJSON.Sync(
+                                    sdkConfiguration, serverURL, options,
+                                    _headers);
+        return operation.handleResponse(operation.doRequest(request));
+    }
+
+    /**
+     * Accept an Invite
+     * 
+     * <p>Accept a pending Plex friend, home, or server invitation.
+     * 
+     * @return The call builder
+     */
+    public AcceptInviteRequestBuilder acceptInvite() {
+        return new AcceptInviteRequestBuilder(sdkConfiguration);
+    }
+
+    /**
+     * Accept an Invite
+     * 
+     * <p>Accept a pending Plex friend, home, or server invitation.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public AcceptInviteResponse acceptInvite(AcceptInviteRequest request) {
+        return acceptInvite(request, Optional.empty(), Optional.empty());
+    }
+
+    /**
+     * Accept an Invite
+     * 
+     * <p>Accept a pending Plex friend, home, or server invitation.
+     * 
+     * @param request The request object containing all the parameters for the API call.
+     * @param serverURL Overrides the server URL.
+     * @param options additional options
+     * @return The response from the API call
+     * @throws RuntimeException subclass if the API call fails
+     */
+    public AcceptInviteResponse acceptInvite(
+            AcceptInviteRequest request, Optional<String> serverURL,
+            Optional<Options> options) {
+        RequestOperation<AcceptInviteRequest, AcceptInviteResponse> operation
+              = new AcceptInvite.Sync(
                                     sdkConfiguration, serverURL, options,
                                     _headers);
         return operation.handleResponse(operation.doRequest(request));

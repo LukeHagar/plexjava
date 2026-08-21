@@ -20,6 +20,7 @@ Plex Users operations
 * [getUsers](#getusers) - Get list of all connected users
 * [getAccountXML](#getaccountxml) - Get Account (XML)
 * [getAccountJSON](#getaccountjson) - Get Account (JSON)
+* [acceptInvite](#acceptinvite) - Accept an Invite
 * [deleteHomeUser](#deletehomeuser) - Delete Home User
 * [updateHomeUser](#updatehomeuser) - Update Home User
 * [updateRestrictedUser](#updaterestricteduser) - Update Restricted User
@@ -897,6 +898,79 @@ public class Application {
 ### Response
 
 **[GetAccountJSONResponse](../../models/operations/GetAccountJSONResponse.md)**
+
+### Errors
+
+| Error Type             | Status Code            | Content Type           |
+| ---------------------- | ---------------------- | ---------------------- |
+| models/errors/Error    | 401                    | application/json       |
+| models/errors/SDKError | 4XX, 5XX               | \*/\*                  |
+
+## acceptInvite
+
+Accept a pending Plex friend, home, or server invitation.
+
+### Example Usage
+
+<!-- UsageSnippet language="java" operationID="acceptInvite" method="put" path="/api/invites/requests/{inviteId}" -->
+```java
+package hello.world;
+
+import dev.plexapi.sdk.PlexAPI;
+import dev.plexapi.sdk.models.errors.Error;
+import dev.plexapi.sdk.models.operations.AcceptInviteRequest;
+import dev.plexapi.sdk.models.operations.AcceptInviteResponse;
+import dev.plexapi.sdk.models.shared.Accepts;
+import dev.plexapi.sdk.models.shared.BoolInt;
+import java.lang.Exception;
+
+public class Application {
+
+    public static void main(String[] args) throws Error, Exception {
+
+        PlexAPI sdk = PlexAPI.builder()
+                .accepts(Accepts.APPLICATION_XML)
+                .clientIdentifier("abc123")
+                .product("Plex for Roku")
+                .version("2.4.1")
+                .platform("Roku")
+                .platformVersion("4.3 build 1057")
+                .device("Roku 3")
+                .model("4200X")
+                .deviceVendor("Roku")
+                .deviceName("Living Room TV")
+                .marketplace("googlePlay")
+                .token(System.getenv().getOrDefault("TOKEN", ""))
+            .build();
+
+        AcceptInviteRequest req = AcceptInviteRequest.builder()
+                .inviteId(530502L)
+                .friend(BoolInt.True)
+                .home(BoolInt.True)
+                .server(BoolInt.True)
+                .build();
+
+        AcceptInviteResponse res = sdk.users().acceptInvite()
+                .request(req)
+                .call();
+
+        if (res.body().isPresent()) {
+            System.out.println(res.body().get());
+        }
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `request`                                                             | [AcceptInviteRequest](../../models/operations/AcceptInviteRequest.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
+| `serverURL`                                                           | *String*                                                              | :heavy_minus_sign:                                                    | An optional server URL to use.                                        |
+
+### Response
+
+**[AcceptInviteResponse](../../models/operations/AcceptInviteResponse.md)**
 
 ### Errors
 
